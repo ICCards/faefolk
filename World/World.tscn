@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://World/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Images/Mainlev_build copy.png" type="Texture" id=2]
+[ext_resource path="res://World/TreeObject.tscn" type="PackedScene" id=3]
+
+[node name="World" type="Node2D"]
+
+[node name="Ground" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1081 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+scale = Vector2( 4, 4 )
+
+[node name="TreeObject" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 758, 202 )
+
+[node name="TreeObject2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 1388, 289 )
+
+[node name="TreeObject3" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 343, 536 )
+
+[node name="TreeObject4" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 1547, 594 )
+
+[node name="TreeObject7" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 830, 681 )
