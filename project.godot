@@ -11,10 +11,12 @@ config_version=4
 [application]
 
 config/name="faefolk_menu"
+run/main_scene="res://World/World.tscn"
 
 [autoload]
 
 Global="*res://Globals/Global.gd"
+API="*res://api.gdns"
 
 [display]
 

@@ -109,5 +109,7 @@ func _ready():
 	shoesSprite.texture = Global.shoes_sprites['idle_down']
 	toolEquippedSprite.texture = Global.pickaxe_sprites['idle_down']
 
-
-
+func _input(event):
+	if Input.is_key_pressed(KEY_SPACE):
+		var api = API.do_print()
+		print(api)
