@@ -1,0 +1,21 @@
+{
+    
+  "Wood": {
+    "ItemCategory": "Resource",
+    "StackSize": 99,
+    "Description": "Wood harvested from trees"
+  }, 
+
+  "Stone": {
+    "ItemCategory": "Resource",
+    "StackSize" : 99,
+    "Description": "Stone from ore"
+  },
+  
+  "Axe": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Axe for stuff"
+  }
+  
+}

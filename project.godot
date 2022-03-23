@@ -15,6 +15,9 @@ config/name="faefolk_menu"
 [autoload]
 
 Global="*res://Globals/Global.gd"
+Images="*res://Globals/Images.gd"
+JsonData="*res://Data/JSONData.gd"
+PlayerInventory="*res://InventoryLogic/PlayerInventory.gd"
 
 [display]
 
@@ -26,6 +29,7 @@ window/stretch/mode="2d"
 
 display=false
 origin=false
+window=false
 
 [importer_defaults]
 
@@ -86,6 +90,12 @@ mouse_click={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="World"
+2d_physics/layer_3="ItemDrop"
 
 [physics]
 

@@ -1,0 +1,448 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://tree_sets/A/A_leaf_sprites.png" type="Texture" id=1]
+[ext_resource path="res://Globals/Effects/LeavesFallingEffect.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Leaves/Leaf1:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Leaves/Leaf1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Leaves/Leaf1:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Leaves/Leaf1:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -151, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Leaves/Leaf2:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Leaves/Leaf2:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Leaves/Leaf2:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Leaves/Leaf3:position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Leaves/Leaf3:position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Leaves/Leaf3:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Leaves/Leaf4:position:x")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Leaves/Leaf4:position:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Leaves/Leaf4:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Leaves/Leaf5:position:x")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Leaves/Leaf5:position:y")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/15/type = "bezier"
+tracks/15/path = NodePath("Leaves/Leaf5:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/16/type = "bezier"
+tracks/16/path = NodePath("Leaves/Leaf6:position:x")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"points": PoolRealArray( -32.935, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/17/type = "bezier"
+tracks/17/path = NodePath("Leaves/Leaf6:position:y")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"points": PoolRealArray( 10, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/18/type = "bezier"
+tracks/18/path = NodePath("Leaves/Leaf6:rotation_degrees")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "leaves falling effect"
+length = 1.2
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Leaves/Leaf1:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 10, -0.25, 0, 0.56, -30.6325, -8, -0.43, 44.7343, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Leaves/Leaf1:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -170, -0.25, 0, 0.56, 27.7736, -20, -0.27, -93.0615, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Leaves/Leaf1:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0, -1.20528, 40, -0.88, -47.6054, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Leaves/Leaf2:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 24, -0.25, 0, 0.3, 74.4776, 18.5425, -0.21, 31.324, 0.25, 0 ),
+"times": PoolRealArray( 0.1, 1.2 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Leaves/Leaf2:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( -200, -0.25, 0, 0.29, -19.3253, -40, -0.27, -27.1493, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Leaves/Leaf2:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 60, -0.25, 0, 0.17, 405.359, 300, -0.41, -415.249, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Leaves/Leaf3:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -28, -0.25, 0, 0.26, -73.8712, -21.5817, -0.27, 31.7105, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Leaves/Leaf3:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( -180, -0.25, 0, 0.25, 0, -45, -0.4, -134.21, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Leaves/Leaf3:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( -80, -0.25, 0, 0.25, 0, -240, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Leaves/Leaf4:position:x")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 50, -0.25, 0, 0, 0.329735, 58.7484, -0.41, 7.38038, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Leaves/Leaf4:position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( -175, -0.25, 0, 0.25, 51, -31.8712, -0.24, -79.8712, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Leaves/Leaf4:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 75, -0.25, 0, 0.45, 131.328, 75, -0.26, -130.227, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Leaves/Leaf5:position:x")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( -20, -0.25, 0, 0.41, 95.1288, -32.935, -0.3, -25.9362, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Leaves/Leaf5:position:y")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( -140, -0.25, 0, 0, 1.34624, 10, -0.16, -28.2632, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Leaves/Leaf5:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 70, -0.25, 0, 0.34, 11.1288, 76.1463, -0.54, -73.2, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Leaves/Leaf6:frame")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/16/type = "bezier"
+tracks/16/path = NodePath("Leaves/Leaf6:position:x")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"points": PoolRealArray( 45, 0, 0, 0, 0, -10, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/17/type = "bezier"
+tracks/17/path = NodePath("Leaves/Leaf6:position:y")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"points": PoolRealArray( -140, -0.25, 0, 0.29, 132.588, -35.4973, -0.32, -172.609, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/18/type = "bezier"
+tracks/18/path = NodePath("Leaves/Leaf6:rotation_degrees")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"points": PoolRealArray( 76.1463, -0.25, 0, 0.25, 0, -30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+
+[sub_resource type="CanvasItemMaterial" id=4]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/A_leaf_sprites.png-aebcdd939990075f9c03af82fa7d8a2e.stex"
+
+[node name="LeavesFallingEffect" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+"anims/leaves falling effect" = SubResource( 1 )
+
+[node name="Leaves" type="Node2D" parent="."]
+
+[node name="Leaf1" type="Sprite" parent="Leaves"]
+material = SubResource( 4 )
+position = Vector2( 0, -151 )
+scale = Vector2( 4, 4 )
+texture = SubResource( 5 )
+hframes = 20
+
+[node name="Leaf2" type="Sprite" parent="Leaves"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+hframes = 20
+
+[node name="Leaf3" type="Sprite" parent="Leaves"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+hframes = 20
+
+[node name="Leaf4" type="Sprite" parent="Leaves"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+hframes = 20
+
+[node name="Leaf5" type="Sprite" parent="Leaves"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+hframes = 20
+
+[node name="Leaf6" type="Sprite" parent="Leaves"]
+position = Vector2( -32.935, 10 )
+scale = Vector2( 4, 4 )
+hframes = 20
