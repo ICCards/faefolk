@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export(int) var speed = 350.0
+export(int) var speed = 280.0
 
 onready var bodySprite = $CompositeSprites/Body
 onready var armsSprite = $CompositeSprites/Arms
@@ -79,7 +79,7 @@ func movement_state(_delta):
 		velocity.x += 1.0
 		direction = RIGHT
 		setAnimationTexture("walk_right")
-	if Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false:
+	if Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false && Input.is_action_pressed("mouse_click") == false:
 		match direction: 
 			DOWN:
 				setAnimationTexture("idle_down")
@@ -95,6 +95,7 @@ func movement_state(_delta):
 
 
 func setAnimationTexture(var anim):
+	bodySprite.texture = null
 	bodySprite.set_texture(Global.body_sprites[anim])
 	armsSprite.set_texture(Global.arms_sprites[anim])
 	accessorySprite.set_texture(Global.acc_sprites[anim])
@@ -106,5 +107,6 @@ func setAnimationTexture(var anim):
 
 
 func _ready():
-	setAnimationTexture('idle_down')
+	pass
+	#setAnimationTexture('idle_down')
 

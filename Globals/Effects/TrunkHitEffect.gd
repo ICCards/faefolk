@@ -10,22 +10,22 @@ onready var AnimPlayer = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
-var treeType
+var treeObject
 var effectType
 
 func init(treeTypeInput, effectTypeInput):
-	treeType = treeTypeInput
+	treeObject = treeTypeInput
 	effectType = effectTypeInput
 
 
 func _ready():
 	rng.randomize()
 	randomizeDisplayedSprites()
-	setTexture()
-	if (effectType == "tree hit right"): 
+	setTexture(treeObject)
+	if effectType == "tree hit right": 
 		AnimPlayer.play("tree hit right")
-	if (effectType == "tree hit left"):
-		pass
+	if effectType == "tree hit left":
+		AnimPlayer.play("tree hit left")
 	yield(AnimPlayer, "animation_finished")
 	queue_free()
 
@@ -40,29 +40,10 @@ func randomizeDisplayedSprites():
 	treeChip4Sprite.visible = randomArray[3] == 1
 	treeChip5Sprite.visible = randomArray[4] == 1
 	
-func setTexture():
-	if treeType == 'A':
-		treeChip1Sprite.texture = Images.chipA
-		treeChip2Sprite.texture = Images.chipA
-		treeChip3Sprite.texture = Images.chipA
-		treeChip4Sprite.texture = Images.chipA
-		treeChip5Sprite.texture = Images.chipA
-	if treeType == 'B':
-		treeChip1Sprite.texture = Images.chipB
-		treeChip2Sprite.texture = Images.chipB
-		treeChip3Sprite.texture = Images.chipB
-		treeChip4Sprite.texture = Images.chipB
-		treeChip5Sprite.texture = Images.chipB
-	if treeType == 'C':
-		treeChip1Sprite.texture = Images.chipC
-		treeChip2Sprite.texture = Images.chipC
-		treeChip3Sprite.texture = Images.chipC
-		treeChip4Sprite.texture = Images.chipC
-		treeChip5Sprite.texture = Images.chipC
-	if treeType == 'D':
-		treeChip1Sprite.texture = Images.chipD
-		treeChip2Sprite.texture = Images.chipD
-		treeChip3Sprite.texture = Images.chipD
-		treeChip4Sprite.texture = Images.chipD
-		treeChip5Sprite.texture = Images.chipD
+func setTexture(tree):
+	treeChip1Sprite.texture = tree.chip
+	treeChip2Sprite.texture = tree.chip
+	treeChip3Sprite.texture = tree.chip
+	treeChip4Sprite.texture = tree.chip
+	treeChip5Sprite.texture = tree.chip
 	

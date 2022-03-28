@@ -5,28 +5,28 @@ onready var leaf2Sprite = $Leaves/Leaf2
 onready var leaf3Sprite = $Leaves/Leaf3
 onready var leaf4Sprite = $Leaves/Leaf4
 onready var leaf5Sprite = $Leaves/Leaf5
-onready var leaf6Sprite = $Leaves/Leaf5
-
+onready var leaf6Sprite = $Leaves/Leaf6
+onready var leaf7Sprite = $Leaves/Leaf7
+onready var leaf8Sprite = $Leaves/Leaf8
 onready var AnimPlayer = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
-onready var x: int = 0
-var treeType
 
-func initLeavesEffect(treeTypeInput):
-	treeType = treeTypeInput
+var treeObject
+
+func initLeavesEffect(treeType):
+	treeObject = treeType
 	
 func _ready():
-	rng.randomize()
-	randomizeDisplayedSprites()
+	randomizeDisplayedLeaves()
 	setTexture()
 	AnimPlayer.play("leaves falling effect")
 	yield(AnimPlayer, "animation_finished")
 	queue_free()
 	
 	
-var randomArray = [1, 1, 1, 0, 0, 0, 0, 0]
-func randomizeDisplayedSprites():
+var randomArray = [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+func randomizeDisplayedLeaves():
 	rng.randomize()
 	randomArray.shuffle()
 	leaf1Sprite.visible = randomArray[0] == 1
@@ -35,25 +35,32 @@ func randomizeDisplayedSprites():
 	leaf4Sprite.visible = randomArray[3] == 1
 	leaf5Sprite.visible = randomArray[4] == 1
 	leaf6Sprite.visible = randomArray[5] == 1
+	leaf7Sprite.visible = randomArray[6] == 1
+	leaf8Sprite.visible = randomArray[7] == 1
 	
 
 func setTexture():
-	if treeType == 'A':
-		leaf1Sprite.texture = Images.leaf_spritesA
-		leaf1Sprite.set_frame(rng.randi_range(0 , 19))
-		leaf2Sprite.texture = Images.leaf_spritesA
-		leaf2Sprite.set_frame(rng.randi_range(0 , 19))
-		leaf3Sprite.texture = Images.leaf_spritesA
-		leaf3Sprite.set_frame(rng.randi_range(0 , 19))
-		leaf4Sprite.texture = Images.leaf_spritesA
-		leaf4Sprite.set_frame(rng.randi_range(0 , 19))
-		leaf5Sprite.texture = Images.leaf_spritesA
-		leaf5Sprite.set_frame(rng.randi_range(0 , 19))
-		leaf6Sprite.texture = Images.leaf_spritesA
-		leaf6Sprite.set_frame(rng.randi_range(0 , 19))
-	if treeType == 'B':
-		pass
-	if treeType == 'C':
-		pass
-	if treeType == 'D':
-		pass
+	leaf1Sprite.texture = treeObject.leaves
+	leaf2Sprite.texture = treeObject.leaves
+	leaf3Sprite.texture = treeObject.leaves
+	leaf4Sprite.texture = treeObject.leaves
+	leaf5Sprite.texture = treeObject.leaves
+	leaf6Sprite.texture = treeObject.leaves
+	leaf7Sprite.texture = treeObject.leaves
+	leaf8Sprite.texture = treeObject.leaves
+	rng.randomize()
+	leaf1Sprite.set_frame(rng.randi_range(0 , 11))
+	rng.randomize()
+	leaf2Sprite.set_frame(rng.randi_range(0 , 11))
+	rng.randomize()
+	leaf3Sprite.set_frame(rng.randi_range(0 , 11))
+	rng.randomize()
+	leaf4Sprite.set_frame(rng.randi_range(0 , 11))
+	rng.randomize()
+	leaf5Sprite.set_frame(rng.randi_range(0 , 11))
+	rng.randomize()
+	leaf6Sprite.set_frame(rng.randi_range(0 , 11))
+	rng.randomize()
+	leaf7Sprite.set_frame(rng.randi_range(0 , 11))
+	rng.randomize()
+	leaf8Sprite.set_frame(rng.randi_range(0 , 11))

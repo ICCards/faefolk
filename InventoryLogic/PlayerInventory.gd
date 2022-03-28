@@ -2,7 +2,7 @@ extends Node
 
 const NUM_INVENTORY_SLOTS = 12
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
-const ItemClass = preload("res://InventoryLogic/Item.gd")
+const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
 
 var inventory = {
 	0 : ["Axe", 1],
@@ -33,7 +33,7 @@ func add_item(item_name, item_quantity):
 			return
 
 func update_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Inventory/GridContainer/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/YSort/Player/Inventory/GridContainer/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		slot.item.set_item(item_name, new_quantity)
 	else: 

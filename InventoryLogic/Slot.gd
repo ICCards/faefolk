@@ -1,7 +1,6 @@
 extends Panel
 
-
-var ItemClass = preload("res://InventoryLogic/Item.tscn")
+var ItemClass = preload("res://InventoryLogic/InventoryItem.tscn")
 var item = null
 var slot_index
 

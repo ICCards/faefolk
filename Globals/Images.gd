@@ -1,200 +1,313 @@
 extends Node
 
-#var mountain_tree_stumps = {
-#	0 : preload("res://Assets/trees/mountains/stumps/stump1A.png"),
-#	1 : preload("res://Assets/trees/mountains/stumps/stump1B.png"),
-#	2 : preload("res://Assets/trees/mountains/stumps/stump1C.png"),
-#	3 : preload("res://Assets/trees/mountains/stumps/stump2A.png"),
-#	4 : preload("res://Assets/trees/mountains/stumps/stump2B.png"),
-#	5 : preload("res://Assets/trees/mountains/stumps/stump2C.png"),
-#}
-#
-#var mountain_tree_middles = {
-#	0 : preload("res://Assets/trees/mountains/middles/middle1A.png"),
-#	1 : preload("res://Assets/trees/mountains/middles/middle1B.png"),
-#	2 : preload("res://Assets/trees/mountains/middles/middle1C.png"),
-#	3 : preload("res://Assets/trees/mountains/middles/middle2A.png"),
-#	4 : preload("res://Assets/trees/mountains/middles/middle2B.png"),
-#	5 : preload("res://Assets/trees/mountains/middles/middle2C.png"),
-#}
-#
-#var mountain_tree_tops = {
-#	0 : preload("res://Assets/trees/mountains/tops/top1A.png"),
-#	1 : preload("res://Assets/trees/mountains/tops/top1B.png"),
-#	2 : preload("res://Assets/trees/mountains/tops/top1C.png"),
-#	3 : preload("res://Assets/trees/mountains/tops/top2A.png"),
-#	4 : preload("res://Assets/trees/mountains/tops/top2B.png"),
-#	5 : preload("res://Assets/trees/mountains/tops/top2C.png"),
-#}
+# FRUITLESS TREES #
 
+func returnFruitlessTreeObject(treeType):
+	match treeType:
+		"A":
+			return A_tree 
+		"B":
+			return B_tree
+		"C":
+			return C_tree 
+		"D":
+			return D_tree 
+		"E":
+			return E_tree
 
-var stumpA = preload("res://tree_sets/A/stumpA.png")
-var bottomA = preload("res://tree_sets/A/bottomA.png")
-var middleA = preload("res://tree_sets/A/middleA.png")
-var shadowA = preload("res://tree_sets/A/shadow_A.png")
-var stumpNoShadowA = preload("res://tree_sets/A/stump_no_shadow_A.png")
-var bottomNoShadowA = preload("res://tree_sets/A/tree_bottom_no_shadow_A.png")
-var topA = {
-	0 : preload("res://tree_sets/A/tops/dark_green_fruit_tree_A .png"),
-	1 : preload("res://tree_sets/A/tops/green_fruit_A.png"),
-	2 : preload("res://tree_sets/A/tops/green_large_A.png"),
-	3 : preload("res://tree_sets/A/tops/small_green_A.png"),
-	4 : preload("res://tree_sets/A/tops/yellow_fruit_tree_A.png"), 
-}
-var chipA = preload("res://tree_sets/A/tree_chip_A.png")
-var leaf_spritesA = preload("res://tree_sets/A/A_leaf_sprites.png")
-
-
-var stumpB = preload("res://tree_sets/B/stumpB.png")
-var bottomB = preload("res://tree_sets/B/bottomB.png")
-var middleB = preload("res://tree_sets/B/middleB.png")
-var chipB = preload("res://tree_sets/B/tree_chip_B.png")
-var topB = {
-	0 : preload("res://tree_sets/B/tops/blue_fruit_B.png"),
-	1 : preload("res://tree_sets/B/tops/dark_green_tree_B.png"),
-	2 : preload("res://tree_sets/B/tops/green_large_B.png"),
-	3 : preload("res://tree_sets/B/tops/green_medium_B.png"),
-	4 : preload("res://tree_sets/B/tops/green_small_B.png"), 
-	5 : preload("res://tree_sets/B/tops/purple_fruit_tree_B.png"),
+var A_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/A/A_sapling.png"),
+		1 : preload("res://Assets/tree_sets/A/1.png"),
+		2 : preload("res://Assets/tree_sets/A/2.png"),
+		3 : preload("res://Assets/tree_sets/A/3.png"),
+		4 : preload("res://Assets/tree_sets/A/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/A/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/A/bottom.png"),
+	topTree = preload("res://Assets/tree_sets/A/top.png"),
+	chip = preload("res://Assets/tree_sets/A/chip.png"),
+	leaves = preload("res://Assets/tree_sets/A/leaves.png"),
 }
 
-var stumpC = preload("res://tree_sets/C/stumpC.png")
-var bottomC = preload("res://tree_sets/C/bottomC.png")
-var middleC = preload("res://tree_sets/C/middleC.png")
-var chipC = preload("res://tree_sets/C/tree_chip_C.png")
-var topC = {
-	0 : preload("res://tree_sets/C/tops/purple_few_red_fruit_C.png"),
-	1 : preload("res://tree_sets/C/tops/purple_green_fruits.png"),
-	2 : preload("res://tree_sets/C/tops/purple_large_C.png"),
-	3 : preload("res://tree_sets/C/tops/purple_medium_C.png"),
-	4 : preload("res://tree_sets/C/tops/purple_red_fruit.png"), 
+var B_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/B/sapling.png"),
+		1 : preload("res://Assets/tree_sets/B/1.png"),
+		2 : preload("res://Assets/tree_sets/B/2.png"),
+		3 : preload("res://Assets/tree_sets/B/3.png"),
+		4 : preload("res://Assets/tree_sets/B/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/B/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/B/bottom.png"),
+	topTree = preload("res://Assets/tree_sets/B/top.png"),
+	chip = preload("res://Assets/tree_sets/B/chip.png"),
+	leaves = preload("res://Assets/tree_sets/B/leaves.png"),
 }
 
-var stumpD = preload("res://tree_sets/D/stumpD.png")
-var bottomD = preload("res://tree_sets/D/bottomD.png")
-var middleD = preload("res://tree_sets/D/middleD.png")
-var chipD = preload("res://tree_sets/D/tree_chip_D.png")
-var topD = {
-	0 : preload("res://tree_sets/D/tops/dark_green_fruit.png"),
-	1 : preload("res://tree_sets/D/tops/green_fruit_D.png"),
-	2 : preload("res://tree_sets/D/tops/green_large_D.png"),
-	3 : preload("res://tree_sets/D/tops/green_small_D.png"),
-	4 : preload("res://tree_sets/D/tops/red_fruit_D.png"), 
+var C_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/C/sapling.png"),
+		1 : preload("res://Assets/tree_sets/C/1.png"),
+		2 : preload("res://Assets/tree_sets/C/2.png"),
+		3 : preload("res://Assets/tree_sets/C/3.png"),
+		4 : preload("res://Assets/tree_sets/C/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/C/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/C/bottom.png"),
+	topTree = preload("res://Assets/tree_sets/C/top.png"),
+	chip = preload("res://Assets/tree_sets/C/chip.png"),
+	leaves = preload("res://Assets/tree_sets/C/leaves.png"),
 }
 
-
-
-
-var redOreLarge = preload("res://ore_sets/red/red_gemstone_large.png")
-var redOreMediums = {
-	0 : preload("res://ore_sets/red/medium/red_gemstone_1.png"),
-	1 : preload("res://ore_sets/red/medium/red_gemstone_2.png"),
-	2 : preload("res://ore_sets/red/medium/red_gemstone_3.png"),
-	3 : preload("res://ore_sets/red/medium/red_gemstone_4.png"),
-	4 : preload("res://ore_sets/red/medium/red_gemstone_5.png"),
-	5 : preload("res://ore_sets/red/medium/red_gemstone_6.png"),
-}
-var redOreChips = {
-	0 : preload("res://ore_sets/red/chips/red_chip_3.png"),
-	1 : preload("res://ore_sets/red/chips/red_chip_2.png"),
+var D_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/D/sapling.png"),
+		1 : preload("res://Assets/tree_sets/D/1.png"),
+		2 : preload("res://Assets/tree_sets/D/2.png"),
+		3 : preload("res://Assets/tree_sets/D/3.png"),
+		4 : preload("res://Assets/tree_sets/D/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/D/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/D/bottom.png"),
+	topTree = preload("res://Assets/tree_sets/D/top.png"),
+	chip = preload("res://Assets/tree_sets/D/chip.png"),
+	leaves = preload("res://Assets/tree_sets/D/leaves.png"),
 }
 
-var cyanOreLarge = preload("res://ore_sets/cyan/cyan_gemstone_large.png")
-var cyanOreMediums = {
-	0 : preload("res://ore_sets/cyan/medium/cyan_gemstone_1.png"),
-	1 : preload("res://ore_sets/cyan/medium/teal_gemstone_2.png"),
-	2 : preload("res://ore_sets/cyan/medium/teal_gemstone_3.png"),
-	3 : preload("res://ore_sets/cyan/medium/teal_gemstone_4.png"),
-	4 : preload("res://ore_sets/cyan/medium/teal_gemstone_5.png"),
-	5 : preload("res://ore_sets/cyan/medium/teal_gemstone_6.png"),
-}
-var cyanOreChips = {
-	0 : preload("res://ore_sets/cyan/chips/cyan_chip_3.png"),
-	1 : preload("res://ore_sets/cyan/chips/cyan_chip_2.png"),
-}
-
-var greenOreLarge = preload("res://ore_sets/green/green_gemstone_large.png")
-var greenOreMediums = {
-	0 : preload("res://ore_sets/green/medium/green_gemstone_1.png"),
-	1 : preload("res://ore_sets/green/medium/green_gemstone_2.png"),
-	2 : preload("res://ore_sets/green/medium/green_gemstone_3.png"),
-	3 : preload("res://ore_sets/green/medium/green_gemstone_4.png"),
-	4 : preload("res://ore_sets/green/medium/green_gemstone_5.png"),
-	5 : preload("res://ore_sets/green/medium/green_gemstone_6.png"),
-}
-var greenOreChips = {
-	0 : preload("res://ore_sets/green/chips/green_chip_2.png"),
-	1 : preload("res://ore_sets/green/chips/green_chip_3.png"),
+var E_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/E/sapling.png"),
+		1 : preload("res://Assets/tree_sets/E/1.png"),
+		2 : preload("res://Assets/tree_sets/E/2.png"),
+		3 : preload("res://Assets/tree_sets/E/3.png"),
+		4 : preload("res://Assets/tree_sets/E/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/E/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/E/bottom.png"),
+	topTree = preload("res://Assets/tree_sets/E/top.png"),
+	chip = preload("res://Assets/tree_sets/E/chip.png"),
+	leaves = preload("res://Assets/tree_sets/E/leaves.png"),
 }
 
-var darkBlueOreLarge = preload("res://ore_sets/dark_blue/dark_blue_gemstone_large.png")
-var darkBlueOreMediums = {
-	0 : preload("res://ore_sets/dark_blue/medium/dark_blue_gemstone_1.png"),
-	1 : preload("res://ore_sets/dark_blue/medium/dark_blue_gemstone_2.png"),
-	2 : preload("res://ore_sets/dark_blue/medium/dark_blue_gemstone_3.png"),
-	3 : preload("res://ore_sets/dark_blue/medium/dark_blue_gemstone_4.png"),
-	4 : preload("res://ore_sets/dark_blue/medium/dark_blue_gemstone_5.png"),
-	5 : preload("res://ore_sets/dark_blue/medium/dark_blue_gemstone_6.png"),
-}
-var darkBlueOreChips = {
-	0 : preload("res://ore_sets/dark_blue/chips/db_chip_2.png"),
-	1 : preload("res://ore_sets/dark_blue/chips/db_chip_3.png")
-	
-}
-
-
-var ironOreLarge = preload("res://ore_sets/iron/iron_gemstone_large.png")
-var ironOreMediums = {
-	0 : preload("res://ore_sets/iron/medium/iron_gemstone_1.png"),
-	1 : preload("res://ore_sets/iron/medium/iron_gemstone_2.png"),
-	2 : preload("res://ore_sets/iron/medium/iron_gemstone_3.png"),
-	3 : preload("res://ore_sets/iron/medium/iron_gemstone_4.png"),
-	4 : preload("res://ore_sets/iron/medium/iron_gemstone_5.png"),
-	5 : preload("res://ore_sets/iron/medium/iron_gemstone_6.png"),
-}
-var ironOreChips = {
-	0 : preload("res://ore_sets/iron/chips/iron_chip_2.png"),
-	1 : preload("res://ore_sets/iron/chips/iron_chip_3.png"),
-}
-
-var goldOreLarge = preload("res://ore_sets/gold/gold_gemstone_large.png")
-var goldOreMediums = {
-	0 : preload("res://ore_sets/gold/medium/gold_gemstone_1.png"),
-	1 : preload("res://ore_sets/gold/medium/gold_gemstone_2.png"),
-	2 : preload("res://ore_sets/gold/medium/gold_gemstone_3.png"),
-	3 : preload("res://ore_sets/gold/medium/gold_gemstone_4.png"),
-	4 : preload("res://ore_sets/gold/medium/gold_gemstone_5.png"),
-	5 : preload("res://ore_sets/gold/medium/gold_gemstone_6.png"),
-}
-var goldOreChips = {
-	0 : preload("res://ore_sets/gold/chips/gold_chip_2.png"),
-	1 : preload("res://ore_sets/gold/chips/gold_chip_3.png"),
+# FRUIT TREES #
+func returnFruitTree(treeType):
+	match treeType:
+		"plum":
+			return Plum_tree
+		"pear":
+			return Pear_tree
+		"cherry":
+			return Cherry_tree
+		"apple":
+			return Apple_tree
+		
+var Plum_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/plum/growing/sapling.png"),
+		1 : preload("res://Assets/tree_sets/plum/growing/1.png"),
+		2 : preload("res://Assets/tree_sets/plum/growing/2.png"),
+		3 : preload("res://Assets/tree_sets/plum/growing/3.png"),
+		4 : preload("res://Assets/tree_sets/plum/growing/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/plum/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/plum/bottom.png"),
+	middleTree = preload("res://Assets/tree_sets/plum/middle.png"),
+	topTree = {
+		0 : preload("res://Assets/tree_sets/plum/tops/1.png"),
+		1 : preload("res://Assets/tree_sets/plum/tops/2.png"),
+		2 : preload("res://Assets/tree_sets/plum/tops/3.png"),
+		3 : preload("res://Assets/tree_sets/plum/tops/harvested.png"),
+	},
+	chip = preload("res://Assets/tree_sets/plum/chip.png"),
+	leaves = null,
 }
 
-var stoneOreLarge = preload("res://ore_sets/stone/stone_gemstone_large.png")
-var stoneOreMediums = {
-	0 : preload("res://ore_sets/stone/medium/stone_gemstone_1.png"),
-	1 : preload("res://ore_sets/stone/medium/stone_gemstone_2.png"),
-	2 : preload("res://ore_sets/stone/medium/stone_gemstone_3.png"),
-	3 : preload("res://ore_sets/stone/medium/stone_gemstone_4.png"),
-	4 : preload("res://ore_sets/stone/medium/stone_gemstone_5.png"),
-	5 : preload("res://ore_sets/stone/medium/stone_gemstone_6.png"),
-}
-var stoneOreChips = {
-	0 : preload("res://ore_sets/stone/chips/stone_chip_2.png"),
-	1 : preload("res://ore_sets/stone/chips/stone_chip_3.png"),
+var Pear_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/pear/growing/sapling.png"),
+		1 : preload("res://Assets/tree_sets/pear/growing/1.png"),
+		2 : preload("res://Assets/tree_sets/pear/growing/2.png"),
+		3 : preload("res://Assets/tree_sets/pear/growing/3.png"),
+		4 : preload("res://Assets/tree_sets/pear/growing/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/pear/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/pear/bottom.png"),
+	middleTree = preload("res://Assets/tree_sets/pear/middle.png"),
+	topTree = {
+		0 : preload("res://Assets/tree_sets/pear/tops/1.png"),
+		1 : preload("res://Assets/tree_sets/pear/tops/2.png"),
+		2 : preload("res://Assets/tree_sets/pear/tops/3.png"),
+		3 : preload("res://Assets/tree_sets/pear/tops/harvested.png"),
+	},
+	chip = preload("res://Assets/tree_sets/pear/chip.png"),
+	leaves = null,
 }
 
-var cobblestoneOreLarge = preload("res://ore_sets/cobblestone/cobblestone_gemstone_large.png")
-var cobblestoneOreMediums = {
-	0 : preload("res://ore_sets/cobblestone/medium/cobblestone_gemstone_1.png"),
-	1 : preload("res://ore_sets/cobblestone/medium/cobblestone_gemstone_2.png"),
-	2 : preload("res://ore_sets/cobblestone/medium/cobblestone_gemstone_3.png"),
-	3 : preload("res://ore_sets/cobblestone/medium/cobblestone_gemstone_4.png"),
-	4 : preload("res://ore_sets/cobblestone/medium/cobblestone_gemstone_5.png"),
-	5 : preload("res://ore_sets/cobblestone/medium/cobblestone_gemstone_6.png"),
+var Cherry_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/cherry/growing/sapling.png"),
+		1 : preload("res://Assets/tree_sets/cherry/growing/1.png"),
+		2 : preload("res://Assets/tree_sets/cherry/growing/2.png"),
+		3 : preload("res://Assets/tree_sets/cherry/growing/3.png"),
+		4 : preload("res://Assets/tree_sets/cherry/growing/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/cherry/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/cherry/bottom.png"),
+	middleTree = preload("res://Assets/tree_sets/cherry/middle.png"),
+	topTree = {
+		0 : preload("res://Assets/tree_sets/cherry/tops/1.png"),
+		1 : preload("res://Assets/tree_sets/cherry/tops/2.png"),
+		2 : preload("res://Assets/tree_sets/cherry/tops/3.png"),
+		3 : preload("res://Assets/tree_sets/cherry/tops/harvested.png"),
+	},
+	chip = preload("res://Assets/tree_sets/cherry/tree_chip.png"),
+	leaves = null,
 }
-var cobblestoneOreChips = {
-	0 : preload("res://ore_sets/cobblestone/chips/cobble_chip_2.png"),
-	1 : preload("res://ore_sets/cobblestone/chips/cobble_chip_3.png"),
+
+var Apple_tree = {
+	growingStages = {
+		0 : preload("res://Assets/tree_sets/apple/growing/sapling.png"),
+		1 : preload("res://Assets/tree_sets/apple/growing/1.png"),
+		2 : preload("res://Assets/tree_sets/apple/growing/2.png"),
+		3 : preload("res://Assets/tree_sets/apple/growing/3.png"),
+		4 : preload("res://Assets/tree_sets/apple/growing/4.png"),
+	},
+	stump = preload("res://Assets/tree_sets/apple/stump.png"),
+	bottomTree = preload("res://Assets/tree_sets/apple/bottom.png"),
+	middleTree = preload("res://Assets/tree_sets/apple/middle.png"),
+	topTree = {
+		0 : preload("res://Assets/tree_sets/apple/tops/1.png"),
+		1 : preload("res://Assets/tree_sets/apple/tops/2.png"),
+		2 : preload("res://Assets/tree_sets/apple/tops/3.png"),
+		3 : preload("res://Assets/tree_sets/apple/tops/harvested.png"),
+	},
+	chip = preload("res://Assets/tree_sets/apple/chip.png"),
+	leaves = null,
 }
+
+# ORE OBJECTS #
+
+func returnOreObject(oreType):
+	match oreType:
+		"Red gem":
+			return Red_ore
+		"Cyan gem": 
+			return Cyan_ore
+		"Dark blue gem":
+			return Dark_blue_ore
+		"Green gem":
+			return Green_ore
+		"Iron ore":
+			return Iron_ore
+		"Gold ore":
+			return Gold_ore
+		"Stone":
+			return Stone_ore
+		"Cobblestone":
+			return Cobblestone_ore
+
+var Red_ore = {
+	largeOre = preload("res://Assets/ore_sets/red/red_gemstone_large.png"),
+	mediumOres = {
+		0 : preload("res://Assets/ore_sets/red/medium/red_gemstone_1.png"),
+		1 : preload("res://Assets/ore_sets/red/medium/red_gemstone_2.png"),
+		2 : preload("res://Assets/ore_sets/red/medium/red_gemstone_3.png"),
+		3 : preload("res://Assets/ore_sets/red/medium/red_gemstone_4.png"),
+		4 : preload("res://Assets/ore_sets/red/medium/red_gemstone_5.png"),
+		5 : preload("res://Assets/ore_sets/red/medium/red_gemstone_6.png"),
+	},
+	chip = preload("res://Assets/ore_sets/red/red_chip.png")
+}
+
+var Cyan_ore = {
+	largeOre = preload("res://Assets/ore_sets/cyan/cyan_gemstone_large.png"),
+	mediumOres = {
+		0 : preload("res://Assets/ore_sets/cyan/medium/cyan_gemstone_1.png"),
+		1 : preload("res://Assets/ore_sets/cyan/medium/teal_gemstone_2.png"),
+		2 : preload("res://Assets/ore_sets/cyan/medium/teal_gemstone_3.png"),
+		3 : preload("res://Assets/ore_sets/cyan/medium/teal_gemstone_4.png"),
+		4 : preload("res://Assets/ore_sets/cyan/medium/teal_gemstone_5.png"),
+		5 : preload("res://Assets/ore_sets/cyan/medium/teal_gemstone_6.png"),
+	},
+	chip = preload("res://Assets/ore_sets/cyan/cyan_chip.png")
+}
+
+var Green_ore = {
+	largeOre = preload("res://Assets/ore_sets/green/green_gemstone_large.png"),
+	mediumOres = {
+		0 : preload("res://Assets/ore_sets/green/medium/green_gemstone_1.png"),
+		1 : preload("res://Assets/ore_sets/green/medium/green_gemstone_2.png"),
+		2 : preload("res://Assets/ore_sets/green/medium/green_gemstone_3.png"),
+		3 : preload("res://Assets/ore_sets/green/medium/green_gemstone_4.png"),
+		4 : preload("res://Assets/ore_sets/green/medium/green_gemstone_5.png"),
+		5 : preload("res://Assets/ore_sets/green/medium/green_gemstone_6.png"),
+	},
+	chip = preload("res://Assets/ore_sets/cyan/cyan_chip.png")
+}
+
+var Dark_blue_ore = {
+	largeOre =  preload("res://Assets/ore_sets/dark_blue/dark_blue_gemstone_large.png"),
+	mediumOres = {
+	0 : preload("res://Assets/ore_sets/dark_blue/medium/dark_blue_gemstone_1.png"),
+	1 : preload("res://Assets/ore_sets/dark_blue/medium/dark_blue_gemstone_2.png"),
+	2 : preload("res://Assets/ore_sets/dark_blue/medium/dark_blue_gemstone_3.png"),
+	3 : preload("res://Assets/ore_sets/dark_blue/medium/dark_blue_gemstone_4.png"),
+	4 : preload("res://Assets/ore_sets/dark_blue/medium/dark_blue_gemstone_5.png"),
+	5 : preload("res://Assets/ore_sets/dark_blue/medium/dark_blue_gemstone_6.png"),
+	},
+	chip = preload("res://Assets/ore_sets/dark_blue/chip.png")
+}
+
+var Iron_ore = {
+	largeOre = preload("res://Assets/ore_sets/iron/iron_gemstone_large.png"),
+	mediumOres = {
+	0 : preload("res://Assets/ore_sets/iron/medium/iron_gemstone_1.png"),
+	1 : preload("res://Assets/ore_sets/iron/medium/iron_gemstone_2.png"),
+	2 : preload("res://Assets/ore_sets/iron/medium/iron_gemstone_3.png"),
+	3 : preload("res://Assets/ore_sets/iron/medium/iron_gemstone_4.png"),
+	4 : preload("res://Assets/ore_sets/iron/medium/iron_gemstone_5.png"),
+	5 : preload("res://Assets/ore_sets/iron/medium/iron_gemstone_6.png"),
+	},
+	chip = preload("res://Assets/ore_sets/iron/iron_chip.png")
+}
+
+var Gold_ore = {
+	largeOre = preload("res://Assets/ore_sets/gold/gold_gemstone_large.png"), 
+	mediumOres = {
+		0 : preload("res://Assets/ore_sets/gold/medium/gold_gemstone_1.png"),
+		1 : preload("res://Assets/ore_sets/gold/medium/gold_gemstone_2.png"),
+		2 : preload("res://Assets/ore_sets/gold/medium/gold_gemstone_3.png"),
+		3 : preload("res://Assets/ore_sets/gold/medium/gold_gemstone_4.png"),
+		4 : preload("res://Assets/ore_sets/gold/medium/gold_gemstone_5.png"),
+		5 : preload("res://Assets/ore_sets/gold/medium/gold_gemstone_6.png"),
+	},
+	chip = preload("res://Assets/ore_sets/gold/gold_chip.png")
+}
+
+var Stone_ore = {
+	largeOre = preload("res://Assets/ore_sets/stone/stone_gemstone_large.png"),
+	mediumOres = {
+		0 : preload("res://Assets/ore_sets/stone/medium/stone_gemstone_1.png"),
+		1 : preload("res://Assets/ore_sets/stone/medium/stone_gemstone_2.png"),
+		2 : preload("res://Assets/ore_sets/stone/medium/stone_gemstone_3.png"),
+		3 : preload("res://Assets/ore_sets/stone/medium/stone_gemstone_4.png"),
+		4 : preload("res://Assets/ore_sets/stone/medium/stone_gemstone_5.png"),
+		5 : preload("res://Assets/ore_sets/stone/medium/stone_gemstone_6.png"),
+	},
+	chip = preload("res://Assets/ore_sets/stone/beige_stone_chip.png")
+}
+
+var Cobblestone_ore = {
+	largeOre = preload("res://Assets/ore_sets/cobblestone/cobblestone_gemstone_large.png"),
+	mediumOres = {
+		0 : preload("res://Assets/ore_sets/cobblestone/medium/cobblestone_gemstone_1.png"),
+		1 : preload("res://Assets/ore_sets/cobblestone/medium/cobblestone_gemstone_2.png"),
+		2 : preload("res://Assets/ore_sets/cobblestone/medium/cobblestone_gemstone_3.png"),
+		3 : preload("res://Assets/ore_sets/cobblestone/medium/cobblestone_gemstone_4.png"),
+		4 : preload("res://Assets/ore_sets/cobblestone/medium/cobblestone_gemstone_5.png"),
+		5 : preload("res://Assets/ore_sets/cobblestone/medium/cobblestone_gemstone_6.png"),
+	},
+	chip = preload("res://Assets/ore_sets/cobblestone/stone_chip.png")
+}
+

@@ -11,7 +11,36 @@
     "StackSize" : 99,
     "Description": "Stone from ore"
   },
-  
+  "Iron ore": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "Can be smelted into iron ingot"
+  },
+  "Gold ore": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "Can be smelted into gold ingot"
+  },
+  "Red gem": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "[gem description]"
+  },
+  "Green gem": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "[gem description]"
+  },
+  "Cyan gem": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "[gem description]"
+  },
+  "Dark blue gem": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "[gem description]"
+  },
   "Axe": {
       "ItemCategory": "Weapon",
       "StackSize": 1,

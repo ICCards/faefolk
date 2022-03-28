@@ -1,14 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World/Objects/OreObjectLarge.gd" type="Script" id=1]
-[ext_resource path="res://ore_sets/cobblestone/cobblestone_gemstone_large.png" type="Texture" id=2]
-[ext_resource path="res://ore_sets/cobblestone/medium/cobblestone_gemstone_1.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 29.8125, 36.5 )
+extents = Vector2( 23.4062, 36.25 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 21.3857, 15.8711 )
+extents = Vector2( 24.693, 19.1412 )
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -155,7 +153,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.5 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -175,11 +173,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( -2, 0 ), Vector2( 1, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, -12 ), Vector2( 3, -12 ), Vector2( -2, -12 ), Vector2( 1, -12 ), Vector2( -1, -12 ), Vector2( 0, -12 ) ]
 }
 
 [sub_resource type="Animation" id=7]
 resource_name = "small_ore_break"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("SmallHurtBox/smallHurtBox:disabled")
 tracks/0/interp = 1
@@ -228,49 +227,53 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.05, 0.15, 0.25, 0.35, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 3, 0 ), Vector2( -2, 0 ), Vector2( 1, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, -12 ), Vector2( 3, -12 ), Vector2( -2, -12 ), Vector2( 1, -12 ), Vector2( -1, -12 ), Vector2( 0, -12 ) ]
 }
 
 [node name="OreObjectLarge" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="BigMovementCollisionBox" type="StaticBody2D" parent="."]
+position = Vector2( -1, -28 )
 
 [node name="BigMovementBox" type="CollisionShape2D" parent="BigMovementCollisionBox"]
-position = Vector2( 1, 18 )
+position = Vector2( 1, 41 )
 rotation = -1.5708
 shape = SubResource( 1 )
 
 [node name="BigHurtBox" type="Area2D" parent="."]
+position = Vector2( -1, -28 )
 
 [node name="bigHurtBox" type="CollisionShape2D" parent="BigHurtBox"]
-position = Vector2( 1, 18 )
+position = Vector2( 1, 41 )
 rotation = -1.5708
 shape = SubResource( 1 )
 
 [node name="SmallMovementCollisionBox" type="StaticBody2D" parent="."]
+position = Vector2( 0, -28 )
 
 [node name="SmallMovementBox" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
-position = Vector2( 1, 29 )
+position = Vector2( -1, 45 )
 shape = SubResource( 5 )
 disabled = true
 
 [node name="SmallHurtBox" type="Area2D" parent="."]
+position = Vector2( 0, -28 )
 
 [node name="smallHurtBox" type="CollisionShape2D" parent="SmallHurtBox"]
-position = Vector2( 1, 29 )
+position = Vector2( -1, 45 )
 shape = SubResource( 5 )
 disabled = true
 
 [node name="SmallOre" type="Sprite" parent="."]
 visible = false
-texture = ExtResource( 3 )
+position = Vector2( 0, -12 )
 
 [node name="BigOre" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+position = Vector2( 0, -12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )

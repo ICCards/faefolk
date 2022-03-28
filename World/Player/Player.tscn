@@ -1,15 +1,17 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
-[ext_resource path="res://World/Player/Player.gd" type="Script" id=4]
+[ext_resource path="res://Characters/Goblin/male/idle/body/down/body.png" type="Texture" id=3]
+[ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 24.9998 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24.1777, 13.2143 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MeleeSwing/CollisionShape2D:disabled")
@@ -48,7 +50,7 @@ tracks/2/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 resource_name = "movement"
 length = 0.8
 loop = true
@@ -258,7 +260,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 24 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -666,7 +668,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -100 ) ]
+"values": [ Vector2( 0, -80 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -681,89 +683,88 @@ tracks/10/keys = {
 "values": [ 90.0, 90.0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 55.7828
-height = 31.999
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 39.746
+height = 22.2163
 
-[node name="Player" type="Node2D"]
-z_as_relative = false
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 0, -2 )
+collision_mask = 0
+script = ExtResource( 1 )
 
-[node name="Player" type="KinematicBody2D" parent="."]
-collision_mask = 2
-script = ExtResource( 4 )
+[node name="Inventory" parent="." instance=ExtResource( 4 )]
+position = Vector2( -677, 387 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( 0, -24 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.36424e-12, -14 )
 rotation = -1.5708
 scale = Vector2( 1.01491, 1.01303 )
 shape = SubResource( 1 )
 
-[node name="MeleeSwing" type="Area2D" parent="Player"]
+[node name="MeleeSwing" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/MeleeSwing"]
-shape = SubResource( 9 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
+shape = SubResource( 2 )
 disabled = true
 
-[node name="CompositeSprites" type="Node2D" parent="Player"]
+[node name="CompositeSprites" type="Node2D" parent="."]
+position = Vector2( 0, -11 )
 scale = Vector2( 3, 3 )
 
-[node name="Body" type="Sprite" parent="Player/CompositeSprites"]
+[node name="Body" type="Sprite" parent="CompositeSprites"]
+position = Vector2( 0, -16 )
+texture = ExtResource( 3 )
+hframes = 4
+
+[node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-frame = 3
 
-[node name="Arms" type="Sprite" parent="Player/CompositeSprites"]
+[node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-frame = 3
 
-[node name="HeadAtr" type="Sprite" parent="Player/CompositeSprites"]
+[node name="Pants" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-frame = 3
 
-[node name="Pants" type="Sprite" parent="Player/CompositeSprites"]
+[node name="Shirts" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-frame = 3
 
-[node name="Shirts" type="Sprite" parent="Player/CompositeSprites"]
+[node name="Accessory" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-frame = 3
 
-[node name="Accessory" type="Sprite" parent="Player/CompositeSprites"]
+[node name="Shoes" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-frame = 3
 
-[node name="Shoes" type="Sprite" parent="Player/CompositeSprites"]
+[node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-frame = 3
 
-[node name="ToolEquipped" type="Sprite" parent="Player/CompositeSprites"]
-position = Vector2( 0, -16 )
-hframes = 4
-frame = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/CompositeSprites"]
-anims/RESET = SubResource( 2 )
-anims/movement = SubResource( 3 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
+anims/RESET = SubResource( 3 )
+anims/movement = SubResource( 4 )
 anims/swing_down = SubResource( 5 )
 anims/swing_left = SubResource( 6 )
 anims/swing_right = SubResource( 7 )
 anims/swing_up = SubResource( 8 )
 
-[node name="PickupZone" type="Area2D" parent="Player"]
+[node name="PickupZone" type="Area2D" parent="."]
+scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickupZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
 position = Vector2( 0, -44 )
 scale = Vector2( 1.0756, 1.07153 )
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
-[connection signal="body_entered" from="Player/PickupZone" to="Player/PickupZone" method="_on_PickupZone_body_entered"]
-[connection signal="body_exited" from="Player/PickupZone" to="Player/PickupZone" method="_on_PickupZone_body_exited"]
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
+[connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]

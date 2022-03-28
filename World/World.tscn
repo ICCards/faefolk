@@ -1,44 +1,52 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://World/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/Mainlev_build copy.png" type="Texture" id=2]
 [ext_resource path="res://World/Objects/TreeObject.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Objects/OreObjectLarge.tscn" type="PackedScene" id=4]
-[ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node2D"]
 
-[node name="Ground" type="Sprite" parent="."]
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Ground" type="Sprite" parent="YSort"]
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 1920, 1081 )
-
-[node name="Inventory" parent="." instance=ExtResource( 6 )]
-position = Vector2( 249, 901 )
-
-[node name="YSort" type="YSort" parent="."]
+region_rect = Rect2( 3.44238, 4.80255, 4450.07, 3203.14 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 610, 423 )
+position = Vector2( 2449, 1634 )
 
 [node name="TreeObject" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 1261, 499 )
+position = Vector2( 2131, 1147 )
 
 [node name="TreeObject4" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 636, 799 )
+position = Vector2( 3113, 1567 )
 
 [node name="TreeObject3" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 1190, 766 )
+position = Vector2( 1457, 1634 )
 
 [node name="OreObjectLarge4" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 485, 370 )
+position = Vector2( 2001, 2306 )
 
 [node name="TreeObject5" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 901, 423 )
+position = Vector2( 2779, 1819 )
 
 [node name="TreeObject6" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 208, 766 )
+position = Vector2( 1327, 1981 )
 
 [node name="TreeObject2" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 1723, 819 )
+position = Vector2( 2767, 1147 )
+
+[node name="OreObjectLarge" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1873, 1732 )
+
+[node name="OreObjectLarge2" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1537, 1171 )
+
+[node name="OreObjectLarge3" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1915, 1298 )
+
+[node name="OreObjectLarge5" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 3584, 1143 )
