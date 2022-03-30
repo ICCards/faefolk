@@ -4,7 +4,7 @@
 [ext_resource path="res://InventoryLogic/ItemDrop.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 14.0
+radius = 11.3333
 
 [sub_resource type="Animation" id=2]
 resource_name = "Animate 1"

@@ -30,7 +30,6 @@ enum {
 
 func _process(delta):
 	if $PickupZone.items_in_range.size() > 0:
-		print('in zone')
 		var pickup_item = $PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
 		$PickupZone.items_in_range.erase(pickup_item)
@@ -95,7 +94,6 @@ func movement_state(_delta):
 
 
 func setAnimationTexture(var anim):
-	bodySprite.texture = null
 	bodySprite.set_texture(Global.body_sprites[anim])
 	armsSprite.set_texture(Global.arms_sprites[anim])
 	accessorySprite.set_texture(Global.acc_sprites[anim])
@@ -103,10 +101,5 @@ func setAnimationTexture(var anim):
 	pantsSprite.set_texture(Global.pants_sprites[anim])
 	shirtsSprite.set_texture(Global.shirts_sprites[anim])
 	shoesSprite.set_texture(Global.shoes_sprites[anim])
-	toolEquippedSprite.set_texture(Global.pickaxe_sprites[anim])
-
-
-func _ready():
-	pass
-	#setAnimationTexture('idle_down')
+	toolEquippedSprite.set_texture(Global.axe_sprites[anim])
 

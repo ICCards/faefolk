@@ -6,8 +6,6 @@ var item_quantity
 		
 func set_item(nm, qt):
 	item_name = nm
-	if item_name == "Cobblestone":
-		item_name = "Stone"
 	item_quantity = qt
 	$TextureRect.texture = load("res://Assets/inventory_icons/" + item_name + ".png")
 	

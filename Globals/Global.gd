@@ -483,6 +483,21 @@ var pickaxe_sprites = {
 	'swing_right' :  preload("res://Characters/Goblin/male/swing/assets/right/pickaxe/pickaxe_swing_1.png")
 }
 
+var axe_sprites = {
+	'idle_down' : null,
+	'idle_up' : null,
+	'idle_left' : null,
+	'idle_right' : null,
+	'walk_down' : null,
+	'walk_up' : null,
+	'walk_left' : null,
+	'walk_right' : null,
+	'swing_down' : preload("res://Characters/Goblin/male/swing/assets/down/pickaxe/goblin_front_SWING_axe.png"), 
+	'swing_up' : preload("res://Characters/Goblin/male/swing/assets/up/pickaxe/goblin_back_SWING_axe.png"), 
+	'swing_left' : preload("res://Characters/Goblin/male/swing/assets/left/pickaxe/axe_swing_1.png"), 
+	'swing_right' :  preload("res://Characters/Goblin/male/swing/assets/right/pickaxe/axe_swing_1.png")
+}
+
 
 
 

@@ -44,7 +44,23 @@
   "Axe": {
       "ItemCategory": "Weapon",
       "StackSize": 1,
-      "Description": "Axe for stuff"
-  }
+      "Description": "Used for breaking wood"
+  },
+  "Pickaxe": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Used for breaking ore"
+  },
+  "Sword": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Used for melee attacks"
+  },
+  "Hoe": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Used to make fertile soil"
+  },
+  
   
 }

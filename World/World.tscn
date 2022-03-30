@@ -13,10 +13,10 @@
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 3.44238, 4.80255, 4450.07, 3203.14 )
+region_rect = Rect2( -8118.06, -1067.28, 10122.5, 6234.15 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 2449, 1634 )
+position = Vector2( 2211, 1437 )
 
 [node name="TreeObject" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 2131, 1147 )
@@ -28,13 +28,13 @@ position = Vector2( 3113, 1567 )
 position = Vector2( 1457, 1634 )
 
 [node name="OreObjectLarge4" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 2001, 2306 )
+position = Vector2( 2238, 1925 )
 
 [node name="TreeObject5" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 2779, 1819 )
 
 [node name="TreeObject6" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 1327, 1981 )
+position = Vector2( 1317, 1925 )
 
 [node name="TreeObject2" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 2767, 1147 )
