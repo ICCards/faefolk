@@ -530,7 +530,6 @@ script = ExtResource( 4 )
 [node name="TreeSprites" type="Node2D" parent="."]
 
 [node name="TreeStump" type="Sprite" parent="TreeSprites"]
-visible = false
 texture = ExtResource( 3 )
 offset = Vector2( 0, -120 )
 
@@ -553,6 +552,8 @@ shape = SubResource( 1 )
 
 [node name="StumpHurtBox" type="Area2D" parent="."]
 position = Vector2( 0, -20 )
+collision_layer = 8
+collision_mask = 8
 
 [node name="stumpHurtBox" type="CollisionShape2D" parent="StumpHurtBox"]
 position = Vector2( -3.2, 32.8 )
@@ -562,6 +563,8 @@ disabled = true
 
 [node name="TreeHurtbox" type="Area2D" parent="."]
 position = Vector2( 0, -20 )
+collision_layer = 8
+collision_mask = 8
 
 [node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]
 position = Vector2( -3.2, 32.8 )
@@ -584,13 +587,13 @@ anims/stump_hit_right = SubResource( 12 )
 material = SubResource( 15 )
 position = Vector2( -130, -8 )
 emitting = false
-amount = 18
+amount = 20
 lifetime = 1.5
 one_shot = true
 explosiveness = 1.0
 texture = ExtResource( 5 )
 emission_shape = 2
-emission_rect_extents = Vector2( 64, 1 )
+emission_rect_extents = Vector2( 64, 16 )
 direction = Vector2( 0, -1 )
 spread = 15.0
 gravity = Vector2( 0, 60 )

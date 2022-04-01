@@ -10,90 +10,93 @@ onready var pantsSprite = $CompositeSprites/Pants
 onready var shirtsSprite = $CompositeSprites/Shirts
 onready var shoesSprite = $CompositeSprites/Shoes
 onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
-
-onready var animPlayer = $CompositeSprites/AnimationPlayer
+onready var animation_player = $CompositeSprites/AnimationPlayer
 	
-var state = MOVEMENT
+onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
 	SWING
 }
 
-var direction = DOWN
-enum {
-	DOWN,
-	UP,
-	LEFT,
-	RIGHT
-}
-
+onready var direction = "DOWN"
 
 func _process(delta):
-	if $PickupZone.items_in_range.size() > 0:
-		var pickup_item = $PickupZone.items_in_range.values()[0]
-		pickup_item.pick_up_item(self)
-		$PickupZone.items_in_range.erase(pickup_item)
-	match state:
-		MOVEMENT:
-			movement_state(delta)
-		SWING:
-			swing_state(delta)
-
-func swing_state(_delta):
-	match direction: 
-		DOWN:
-			animPlayer.play("swing_down")
-			setAnimationTexture("swing_down")
-		UP: 
-			animPlayer.play("swing_up")
-			setAnimationTexture("swing_up")
-		LEFT: 
-			animPlayer.play("swing_left")
-			setAnimationTexture("swing_left")
-		RIGHT:
-			animPlayer.play("swing_right")	
-			setAnimationTexture("swing_right")
-	yield(animPlayer, "animation_finished" )
-	state = MOVEMENT
+	if PlayerInventory.viewInventoryMode == false:
+		if $PickupZone.items_in_range.size() > 0:
+			var pickup_item = $PickupZone.items_in_range.values()[0]
+			pickup_item.pick_up_item(self)
+			$PickupZone.items_in_range.erase(pickup_item)
+		match state:
+			MOVEMENT:
+				movement_state(delta)
+			SWING:
+				swing_state(delta)
+	else: 
+		idle_state(direction)
 
 
 func movement_state(_delta):
-	if Input.is_action_pressed("mouse_click"):
-		state = SWING
-	animPlayer.play("movement")
-	var velocity = Vector2.ZERO					
+
+	animation_player.play("movement")
+	var velocity = Vector2.ZERO			
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1.0
-		direction = UP
-		setAnimationTexture("walk_up")
+		direction = "UP"
+		walk_state(direction)
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += 1.0
-		direction = DOWN
-		setAnimationTexture("walk_down")
+		direction = "DOWN"
+		walk_state(direction)
 	if Input.is_action_pressed("ui_left"):
 		velocity.x -= 1.0
-		direction = LEFT
-		setAnimationTexture("walk_left")
+		direction = "LEFT"
+		walk_state(direction)
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1.0
-		direction = RIGHT
-		setAnimationTexture("walk_right")
-	if Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false && Input.is_action_pressed("mouse_click") == false:
-		match direction: 
-			DOWN:
-				setAnimationTexture("idle_down")
-			UP: 
-				setAnimationTexture("idle_up")
-			LEFT: 
-				setAnimationTexture("idle_left")
-			RIGHT:
-				setAnimationTexture("idle_right")
-		
+		direction = "RIGHT"
+		walk_state(direction)		
+	if Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false:
+		idle_state(direction)
+		# TO DO: ADD IF CLICK IS ON HOTBAR
+	if Input.is_action_pressed("mouse_click") and PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) == true:
+		state = SWING
+			
 	velocity = velocity.normalized()
-	move_and_slide(velocity * speed)
+	move_and_slide(velocity * speed)	
 
+var swingActive = false
+func swing_state(_delta):
+		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) == true:
+			if !swingActive:
+				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				swingActive = true
+				set_melee_collision_layer(toolName)
+				toolEquippedSprite.set_texture(Global.returnToolSprite(toolName, direction.to_lower()))
+				setPlayerTexture("swing_" + direction.to_lower())
+				animation_player.play("swing_" + direction.to_lower())
+				yield(animation_player, "animation_finished" )
+				toolEquippedSprite.texture = null
+				state = MOVEMENT
+				swingActive = false
+		elif swingActive == true:
+			pass
+		else:
+			state = MOVEMENT
 
-func setAnimationTexture(var anim):
+			
+func idle_state(direction):
+	setPlayerTexture("idle_" + direction.to_lower())
+
+func walk_state(direction):
+	setPlayerTexture("walk_" + direction.to_lower())
+
+func set_melee_collision_layer(toolName):
+	if toolName == "Axe": 
+		$MeleeSwing.set_collision_mask(8)
+	elif toolName == "Pickaxe":
+		$MeleeSwing.set_collision_mask(16)
+		
+func setPlayerTexture(var anim):
 	bodySprite.set_texture(Global.body_sprites[anim])
 	armsSprite.set_texture(Global.arms_sprites[anim])
 	accessorySprite.set_texture(Global.acc_sprites[anim])
@@ -101,5 +104,4 @@ func setAnimationTexture(var anim):
 	pantsSprite.set_texture(Global.pants_sprites[anim])
 	shirtsSprite.set_texture(Global.shirts_sprites[anim])
 	shoesSprite.set_texture(Global.shoes_sprites[anim])
-	toolEquippedSprite.set_texture(Global.axe_sprites[anim])
 

@@ -262,6 +262,38 @@ tracks/24/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/25/type = "bezier"
+tracks/25/path = NodePath("Leaves/Leaf9:position:x")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"points": PoolRealArray( -12, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/26/type = "bezier"
+tracks/26/path = NodePath("Leaves/Leaf9:position:y")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("Leaves/Leaf9:rotation_degrees")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 120.0 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "leaves falling effect"
@@ -434,7 +466,7 @@ tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"points": PoolRealArray( -140, -0.25, 0, 0.29, 132.588, -35.4973, -0.32, -172.609, 0.25, 0 ),
+"points": PoolRealArray( -140, -0.25, 0, 0.39, 111.149, -35.4973, -0.41, -160.595, 0.25, 0 ),
 "times": PoolRealArray( 0, 1.2 )
 }
 tracks/17/type = "bezier"
@@ -511,6 +543,38 @@ tracks/23/keys = {
 "points": PoolRealArray( -140, -0.25, 0, 0.28, -31, 0, -0.25, -56, 0.25, 0 ),
 "times": PoolRealArray( 0, 1.2 )
 }
+tracks/24/type = "bezier"
+tracks/24/path = NodePath("Leaves/Leaf9:position:x")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"points": PoolRealArray( -24, -0.25, 0, 0.25, 0, -40, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/25/type = "bezier"
+tracks/25/path = NodePath("Leaves/Leaf9:position:y")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"points": PoolRealArray( -160, -0.25, 0, 0.25, 0, -16, -0.16, -69.2412, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("Leaves/Leaf9:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 120.0, 240.0 ]
+}
 
 [sub_resource type="CanvasItemMaterial" id=4]
 particles_animation = true
@@ -555,7 +619,15 @@ scale = Vector2( 4, 4 )
 hframes = 12
 
 [node name="Leaf7" type="Sprite" parent="Leaves"]
+scale = Vector2( 4, 4 )
 hframes = 12
 
 [node name="Leaf8" type="Sprite" parent="Leaves"]
+scale = Vector2( 4, 4 )
+hframes = 12
+
+[node name="Leaf9" type="Sprite" parent="Leaves"]
+position = Vector2( -12, 0 )
+rotation = 2.0944
+scale = Vector2( 4, 4 )
 hframes = 12

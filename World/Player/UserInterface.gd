@@ -1,16 +1,13 @@
 extends CanvasLayer
-
 var holding_item = null
 
 func _input(event):
-	if event.is_action_pressed("inventory"):
+	if event.is_action_pressed("inventory") and holding_item == null:
+		PlayerInventory.viewInventoryMode = !PlayerInventory.viewInventoryMode
 		$Inventory.visible = !$Inventory.visible
-		$Inventory.init_inventory()
-		
+		$Inventory.initialize_inventory()
 	if event.is_action_pressed("scroll_up"):
 		PlayerInventory.active_item_scroll_up()
-	if event.is_action_pressed("scroll_down"):
+	elif event.is_action_pressed("scroll_down"):
 		PlayerInventory.active_item_scroll_down()
 
-func _ready():
-	pass

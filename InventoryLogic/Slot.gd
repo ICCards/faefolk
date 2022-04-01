@@ -10,13 +10,14 @@ var selected_style: StyleBoxTexture = null
 
 var ItemClass = preload("res://InventoryLogic/InventoryItem.tscn")
 var item = null
-var slot_index 
-var slotType = null
+var slot_index
 
 enum SlotType {
 	HOTBAR = 0,
 	INVENTORY,
 }
+
+var slotType = null
 
 func _ready():
 	default_style = StyleBoxTexture.new()
@@ -27,15 +28,15 @@ func _ready():
 	selected_style.texture = selected_text
 	
 	refresh_style()
-
+		
 func refresh_style():
-	if SlotType.HOTBAR == slotType and PlayerInventory.active_item_slot == slot_index:
+	if slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot_index:
 		set('custom_styles/panel', selected_style)
 	elif item == null:
 		set('custom_styles/panel', empty_style)
-	else: 
+	else:
 		set('custom_styles/panel', default_style)
-
+		
 func pickFromSlot():
 	remove_child(item)
 	find_parent("UserInterface").add_child(item)

@@ -1,30 +1,23 @@
 extends Node2D
 
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
-onready var hotbar = $HotbarSlots
-onready var slots = hotbar.get_children()
+onready var hotbar_slots = $HotbarSlots
+onready var slots = hotbar_slots.get_children()
 
 func _ready():
-	#PlayerInventory.connect("active_item_updated", self, "update_active_item_label")
 	for i in range(slots.size()):
 		PlayerInventory.connect("active_item_updated", slots[i], "refresh_style")
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
-		
-		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.HOTBAR
+		slots[i].slot_index = i
 	initialize_hotbar()
-	
-#func update_active_item_label():
-#	if slots[PlayerInventory.active_item_slot].item != null:
-#		active_item_label.text = slots[PlayerInventory.active_item_slot].item.item_name
-#	else:
-#		active_item_label.text = ""
+
 
 func initialize_hotbar():
 	for i in range(slots.size()):
 		if PlayerInventory.hotbar.has(i):
 			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1])
-			
+
 func _input(event):
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
@@ -32,7 +25,9 @@ func _input(event):
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
-			if find_parent("UserInterface").holding_item != null:
+			if PlayerInventory.viewInventoryMode == false:
+				PlayerInventory.hotbar_slot_selected(slot)
+			elif find_parent("UserInterface").holding_item != null:
 				if !slot.item:
 					left_click_empty_slot(slot)
 				else:
@@ -42,7 +37,7 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
-			#update_active_item_label()
+
 
 func left_click_empty_slot(slot: SlotClass):
 	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)

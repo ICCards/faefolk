@@ -468,34 +468,42 @@ var shoes_sprites = {
 	'swing_right' : shoes_swing_right[shoes_index]
 	};
 	
-var pickaxe_sprites = {
-	'idle_down' : null,
-	'idle_up' : null,
-	'idle_left' : null,
-	'idle_right' : null,
-	'walk_down' : null,
-	'walk_up' : null,
-	'walk_left' : null,
-	'walk_right' : null,
-	'swing_down' : preload("res://Characters/Goblin/male/swing/assets/down/pickaxe/pickaxe_swing_1.png"), 
-	'swing_up' : preload("res://Characters/Goblin/male/swing/assets/up/pickaxe/pickaxe_swing_1.png"), 
-	'swing_left' : preload("res://Characters/Goblin/male/swing/assets/left/pickaxe/pickaxe_swing_1.png"), 
-	'swing_right' :  preload("res://Characters/Goblin/male/swing/assets/right/pickaxe/pickaxe_swing_1.png")
+func returnToolSprite(toolName, direction):
+	match toolName:
+		"Pickaxe":
+			match direction: 
+				"down":
+					 return pickaxe.down
+				"up":
+					 return pickaxe.up
+				"left":
+					 return pickaxe.left
+				"right":
+					 return pickaxe.right
+		"Axe":
+			match direction: 
+				"down":
+					 return axe.down
+				"up":
+					 return axe.up
+				"left":
+					 return axe.left
+				"right":
+					return axe.right
+	
+	
+var pickaxe = {
+	down = preload("res://Characters/Goblin/male/swing/assets/down/pickaxe/pickaxe_swing_1.png"), 
+	up = preload("res://Characters/Goblin/male/swing/assets/up/pickaxe/pickaxe_swing_1.png"), 
+	left = preload("res://Characters/Goblin/male/swing/assets/left/pickaxe/pickaxe_swing_1.png"), 
+	right = preload("res://Characters/Goblin/male/swing/assets/right/pickaxe/pickaxe_swing_1.png")
 }
 
-var axe_sprites = {
-	'idle_down' : null,
-	'idle_up' : null,
-	'idle_left' : null,
-	'idle_right' : null,
-	'walk_down' : null,
-	'walk_up' : null,
-	'walk_left' : null,
-	'walk_right' : null,
-	'swing_down' : preload("res://Characters/Goblin/male/swing/assets/down/pickaxe/goblin_front_SWING_axe.png"), 
-	'swing_up' : preload("res://Characters/Goblin/male/swing/assets/up/pickaxe/goblin_back_SWING_axe.png"), 
-	'swing_left' : preload("res://Characters/Goblin/male/swing/assets/left/pickaxe/axe_swing_1.png"), 
-	'swing_right' :  preload("res://Characters/Goblin/male/swing/assets/right/pickaxe/axe_swing_1.png")
+var axe = {
+	down = preload("res://Characters/Goblin/male/swing/assets/down/pickaxe/goblin_front_SWING_axe.png"), 
+	up =  preload("res://Characters/Goblin/male/swing/assets/up/pickaxe/goblin_back_SWING_axe.png"), 
+	left = preload("res://Characters/Goblin/male/swing/assets/left/pickaxe/axe_swing_1.png"), 
+	right = preload("res://Characters/Goblin/male/swing/assets/right/pickaxe/axe_swing_1.png")
 }
 
 

@@ -246,6 +246,8 @@ shape = SubResource( 1 )
 
 [node name="BigHurtBox" type="Area2D" parent="."]
 position = Vector2( -1, -28 )
+collision_layer = 16
+collision_mask = 16
 
 [node name="bigHurtBox" type="CollisionShape2D" parent="BigHurtBox"]
 position = Vector2( 1, 41 )
@@ -262,6 +264,8 @@ disabled = true
 
 [node name="SmallHurtBox" type="Area2D" parent="."]
 position = Vector2( 0, -28 )
+collision_layer = 16
+collision_mask = 16
 
 [node name="smallHurtBox" type="CollisionShape2D" parent="SmallHurtBox"]
 position = Vector2( -1, 45 )

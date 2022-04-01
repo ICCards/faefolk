@@ -29,7 +29,7 @@ func adjustPosition(animation):
 	elif animation == 2:
 		adjustedPosition = global_position + Vector2(-48, 0)
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !being_picked_up:
 		velocity = Vector2.ZERO
 	else:
@@ -38,12 +38,15 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION)
 		var distance = adjustedPosition.distance_to(player.global_position)
 		if distance < 6: 
-			PlayerInventory.add_item(item_name, 1)
+			PlayerInventory.add_item_to_hotbar(item_name, 1)
 			queue_free()
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 func pick_up_item(body):
-	player = body
-	being_picked_up = true
+	if PlayerInventory.hotbar.size() == 10 and PlayerInventory.inventory.size() == 16:
+		pass
+	else: 
+		player = body
+		being_picked_up = true
 
 

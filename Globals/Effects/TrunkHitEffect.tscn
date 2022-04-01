@@ -1,6 +1,141 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Globals/Effects/TrunkHitEffect.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TreeChips/TreeChip1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("TreeChips/TreeChip1:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("TreeChips/TreeChip1:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("TreeChips/TreeChip2:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("TreeChips/TreeChip2:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("TreeChips/TreeChip3:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("TreeChips/TreeChip3:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("TreeChips/TreeChip4:position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("TreeChips/TreeChip4:position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("TreeChips/TreeChip5:position:x")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("TreeChips/TreeChip5:position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("TreeChips/TreeChip6:position:x")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("TreeChips/TreeChip6:position:y")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "tree hit left"
@@ -209,6 +344,130 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.5, 0.8 )
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "trunk break"
+length = 0.8
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("TreeChips/TreeChip1:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, 24, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("TreeChips/TreeChip1:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.2, -30.1166, 0, -0.2, -30.1707, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("TreeChips/TreeChip2:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, 16, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("TreeChips/TreeChip2:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.2, -42.7216, -9.8597, -0.2, -43.2824, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("TreeChips/TreeChip3:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, 8, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("TreeChips/TreeChip3:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.2, -39.5812, 0, -0.2, -40.142, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("TreeChips/TreeChip4:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, -16, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("TreeChips/TreeChip4:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.2, -37.8989, -14.6824, -0.2, -28.2635, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("TreeChips/TreeChip5:position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, -24, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("TreeChips/TreeChip5:position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.2, -49.7875, 0, -0.2, -50.2361, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("TreeChips/TreeChip6:position:x")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, -8, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("TreeChips/TreeChip6:position:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.2, -40.2542, -15.6919, -0.2, -29.0486, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+
 [node name="TrunkHitEffect" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -216,25 +475,25 @@ script = ExtResource( 1 )
 scale = Vector2( 3, 3 )
 
 [node name="TreeChip1" type="Sprite" parent="TreeChips"]
-position = Vector2( -28, -8.72536 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip2" type="Sprite" parent="TreeChips"]
-position = Vector2( -24, -5.22607 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip3" type="Sprite" parent="TreeChips"]
-position = Vector2( -21, -11.0253 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip4" type="Sprite" parent="TreeChips"]
-position = Vector2( -18, -3.30731 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip5" type="Sprite" parent="TreeChips"]
-position = Vector2( -24, 3.11313 )
+offset = Vector2( 4, -8 )
+
+[node name="TreeChip6" type="Sprite" parent="TreeChips"]
 offset = Vector2( 4, -8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
 "anims/tree hit left" = SubResource( 2 )
 "anims/tree hit right" = SubResource( 1 )
+"anims/trunk break" = SubResource( 4 )

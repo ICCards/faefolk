@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
-[ext_resource path="res://Characters/Goblin/male/idle/body/down/body.png" type="Texture" id=3]
 [ext_resource path="res://InventoryLogic/Hotbar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
@@ -398,7 +397,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -50, -50 ) ]
+"values": [ Vector2( -50, -24 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -534,7 +533,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 50, -50 ) ]
+"values": [ Vector2( 50, -24 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -670,7 +669,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -80 ) ]
+"values": [ Vector2( 0, -70 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -701,11 +700,11 @@ current = true
 script = ExtResource( 6 )
 
 [node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
-position = Vector2( 453, 934 )
+position = Vector2( 429, 934 )
 
 [node name="Inventory" parent="Camera2D/UserInterface" instance=ExtResource( 5 )]
 visible = false
-position = Vector2( 765, 301 )
+position = Vector2( 743, 301 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.36424e-12, -14 )
@@ -714,6 +713,7 @@ scale = Vector2( 1.01491, 1.01303 )
 shape = SubResource( 1 )
 
 [node name="MeleeSwing" type="Area2D" parent="."]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
 shape = SubResource( 2 )
@@ -725,7 +725,6 @@ scale = Vector2( 3, 3 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 3 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
