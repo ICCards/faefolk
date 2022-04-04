@@ -490,6 +490,17 @@ func returnToolSprite(toolName, direction):
 					 return axe.left
 				"right":
 					return axe.right
+		###NOT CORRECT
+		"Hoe":
+			match direction: 
+				"down":
+					 return pickaxe.down
+				"up":
+					 return pickaxe.up
+				"left":
+					 return pickaxe.left
+				"right":
+					return pickaxe.right
 	
 	
 var pickaxe = {

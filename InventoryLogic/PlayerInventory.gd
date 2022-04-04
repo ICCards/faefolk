@@ -10,14 +10,16 @@ var viewInventoryMode = false
 var active_item_slot = 0
 
 var inventory = {
-	0: ["Hoe", 1], 
 	1: ["Sword", 1], 
 	2: ["Green gem", 98],
+	13: ["Potato seeds", 49]
 }
 
 var hotbar = {
 	0: ["Axe", 1],
 	1: ["Pickaxe", 1],
+	2: ["Hoe", 1], 
+	6: ["Hay seeds", 27],
 }
 
 func add_item_to_hotbar(item_name, item_quantity):

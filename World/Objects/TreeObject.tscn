@@ -227,7 +227,7 @@ tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -130, -8 ) ]
+"values": [ Vector2( -120, -8 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -338,7 +338,7 @@ tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 130, -8 ) ]
+"values": [ Vector2( 120, -8 ) ]
 }
 
 [sub_resource type="Animation" id=17]

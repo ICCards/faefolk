@@ -8,9 +8,11 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 96.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 84, 84 )
 mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true

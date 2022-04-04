@@ -61,6 +61,15 @@
       "StackSize": 1,
       "Description": "Used to make fertile soil"
   },
-  
+  "Hay seeds": {
+      "ItemCategory": "Seeds",
+      "StackSize": 99,
+      "Description": "Takes x days to grow"
+  },
+  "Potato seeds": {
+      "ItemCategory": "Seeds",
+      "StackSize": 99,
+      "Description": "Takes x days to grow"
+  }
   
 }

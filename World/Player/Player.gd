@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export(int) var speed = 280.0
+export(int) var speed = 260.0
 
 onready var bodySprite = $CompositeSprites/Body
 onready var armsSprite = $CompositeSprites/Arms
@@ -12,6 +12,7 @@ onready var shoesSprite = $CompositeSprites/Shoes
 onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 	
+	
 onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
@@ -20,7 +21,7 @@ enum {
 
 onready var direction = "DOWN"
 
-func _process(delta):
+func _process(delta) -> void:
 	if PlayerInventory.viewInventoryMode == false:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
@@ -29,14 +30,22 @@ func _process(delta):
 		match state:
 			MOVEMENT:
 				movement_state(delta)
-			SWING:
-				swing_state(delta)
 	else: 
 		idle_state(direction)
 
 
+func _unhandled_input(event):
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
+		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
+		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon":
+			state = SWING
+			swing_state(event, item_name)
+		elif event.is_action_pressed("mouse_click") and itemCategory == "Seeds":
+			place_seeds_state(event, item_name)
+				
+				
 func movement_state(_delta):
-
 	animation_player.play("movement")
 	var velocity = Vector2.ZERO			
 	if Input.is_action_pressed("ui_up"):
@@ -57,20 +66,19 @@ func movement_state(_delta):
 		walk_state(direction)		
 	if Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false:
 		idle_state(direction)
-		# TO DO: ADD IF CLICK IS ON HOTBAR
-	if Input.is_action_pressed("mouse_click") and PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) == true:
-		state = SWING
 			
 	velocity = velocity.normalized()
 	move_and_slide(velocity * speed)	
 
+
 var swingActive = false
-func swing_state(_delta):
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) == true:
-			if !swingActive:
+func swing_state(_delta, weaponType):
+		if !swingActive:
 				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				swingActive = true
 				set_melee_collision_layer(toolName)
+				if weaponType == "Hoe":
+					set_hoed_grass_tile(get_position(), direction)
 				toolEquippedSprite.set_texture(Global.returnToolSprite(toolName, direction.to_lower()))
 				setPlayerTexture("swing_" + direction.to_lower())
 				animation_player.play("swing_" + direction.to_lower())
@@ -83,7 +91,38 @@ func swing_state(_delta):
 		else:
 			state = MOVEMENT
 
-			
+onready var hoedGrassTilemap = get_node("/root/World/YSort/PlayerHome/HoeAutoTile")
+onready var groundTilemap = get_node("/root/World/YSort/PlayerHome/GroundTiles")
+
+func set_hoed_grass_tile(position, direction):
+	if direction == "UP":
+		position += Vector2(0, -60)
+	elif direction == "DOWN":
+		position += Vector2(0, 40)
+	elif direction == "LEFT":
+		position += Vector2(-50, -20)
+	elif direction == "RIGHT":
+		position += Vector2(50, -20)
+	var pos = hoedGrassTilemap.world_to_map(position)
+	if groundTilemap.get_cellv(pos) != -1:
+		hoedGrassTilemap.set_cellv(pos, 0)
+		hoedGrassTilemap.update_bitmask_region()
+
+onready var SeedsScene = preload("res://InventoryLogic/PlaceSeedsObject.tscn")
+onready var world = get_tree().current_scene
+
+func place_seeds_state(event , seed_name):
+	pass
+#	var pos = hoedGrassTilemap.world_to_map(event.position)
+#	print(event.global_position)
+#	print('-------')
+#	if groundTilemap.get_cellv(pos) != -1:
+#		print('display')
+#		var seedsScene = SeedsScene.instance()
+#		seedsScene.init(seed_name)
+#		world.add_child(seedsScene)
+#		seedsScene.global_position = event.global_position
+
 func idle_state(direction):
 	setPlayerTexture("idle_" + direction.to_lower())
 
@@ -95,6 +134,10 @@ func set_melee_collision_layer(toolName):
 		$MeleeSwing.set_collision_mask(8)
 	elif toolName == "Pickaxe":
 		$MeleeSwing.set_collision_mask(16)
+	elif toolName == "Hoe":
+		$MeleeSwing.set_collision_mask(0)
+	elif toolName == "Sword":
+		$MeleeSwing.set_collision_mask(0)
 		
 func setPlayerTexture(var anim):
 	bodySprite.set_texture(Global.body_sprites[anim])
@@ -104,4 +147,6 @@ func setPlayerTexture(var anim):
 	pantsSprite.set_texture(Global.pants_sprites[anim])
 	shirtsSprite.set_texture(Global.shirts_sprites[anim])
 	shoesSprite.set_texture(Global.shoes_sprites[anim])
+
+
 
