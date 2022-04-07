@@ -9,20 +9,16 @@
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="PlayerHome" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 0, 0 )
-
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 1008, 494 )
+position = Vector2( 934, 594 )
 
 [node name="BottomRight" parent="YSort/Player/Camera2D/Limits" index="0"]
 position = Vector2( 2016, 2912 )
 
 [node name="TopLeft" parent="YSort/Player/Camera2D/Limits" index="1"]
-position = Vector2( -704, 0 )
+position = Vector2( -1632, 0 )
 
-[node name="CollisionShape2D" parent="YSort/Player/PickupZone" index="0"]
-position = Vector2( 0, -36.6292 )
+[node name="PlayerHome" parent="YSort" instance=ExtResource( 5 )]
 
 [node name="OreObjectLarge" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 556, 742 )

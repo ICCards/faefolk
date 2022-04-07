@@ -583,6 +583,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [node name="LeavesFallingEffect" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

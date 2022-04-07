@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/watered_crop_layer.png-69769dff292e552dab4e2909fc009896.stex"
+path="res://.import/4.png-f3b039443505e711376dc82190e5c746.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/watered_crop_layer.png"
-dest_files=[ "res://.import/watered_crop_layer.png-69769dff292e552dab4e2909fc009896.stex" ]
+source_file="res://Assets/crop_sets/hay/4.png"
+dest_files=[ "res://.import/4.png-f3b039443505e711376dc82190e5c746.stex" ]
 
 [params]
 

@@ -64,12 +64,17 @@
   "Hay seeds": {
       "ItemCategory": "Seeds",
       "StackSize": 99,
-      "Description": "Takes x days to grow"
+      "Description": "Takes 5 days to grow",
   },
   "Potato seeds": {
       "ItemCategory": "Seeds",
       "StackSize": 99,
-      "Description": "Takes x days to grow"
+      "Description": "Takes 10 days to grow"
+  },
+  "Bucket" : {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Descrption": "Used to water fertile soil"
   }
   
 }

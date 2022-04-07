@@ -1,18 +1,14 @@
 extends Node2D
 
+onready var PlantCrop = preload("res://PlantCrop.gd")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	setup_cells()
+func _ready():
+	setup_crops()
 
 
-func setup_cells():
-	pass
-#	var cells = $FarmTiles.get_used_cells()
-#	for cell in cells:
-#		print(cell)
+func setup_crops():
+	for i in range(200):
+		if PlayerInventory.plantedCrops.has(i):
+			var plantCrop = PlantCrop.instance()
+			
+	

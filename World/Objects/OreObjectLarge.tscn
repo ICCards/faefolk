@@ -234,6 +234,7 @@ tracks/0/keys = {
 }
 
 [node name="OreObjectLarge" type="Node2D"]
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="BigMovementCollisionBox" type="StaticBody2D" parent="."]

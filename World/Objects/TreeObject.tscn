@@ -525,6 +525,7 @@ particles_anim_loop = false
 
 [node name="TreeObject" type="Node2D"]
 position = Vector2( 4, -12 )
+z_index = 1
 script = ExtResource( 4 )
 
 [node name="TreeSprites" type="Node2D" parent="."]

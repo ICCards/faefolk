@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hay2.png-6074ff5c82cae5f6749ae21841c68cb0.stex"
+path="res://.import/CL_Crops_Mining.png-5cad7a568d0e916d6fb7a4da67dfaea5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/crop_sets/hay seeds/hay2.png"
-dest_files=[ "res://.import/hay2.png-6074ff5c82cae5f6749ae21841c68cb0.stex" ]
+source_file="res://Assets/CL_Crops_Mining.png"
+dest_files=[ "res://.import/CL_Crops_Mining.png-5cad7a568d0e916d6fb7a4da67dfaea5.stex" ]
 
 [params]
 

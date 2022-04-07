@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/potato5.png-9181df02c3c9558fe4a014c7270417ec.stex"
+path="res://.import/5.png-e051cc0aebebc808b235b9c41f50c7e1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/crop_sets/potato/potato5.png"
-dest_files=[ "res://.import/potato5.png-9181df02c3c9558fe4a014c7270417ec.stex" ]
+source_file="res://Assets/crop_sets/hay/5.png"
+dest_files=[ "res://.import/5.png-e051cc0aebebc808b235b9c41f50c7e1.stex" ]
 
 [params]
 

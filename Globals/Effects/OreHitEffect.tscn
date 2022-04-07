@@ -456,6 +456,7 @@ tracks/8/keys = {
 
 [node name="OreHitEffect" type="Node2D"]
 scale = Vector2( 3.25, 3.25 )
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="OreChips" type="Node2D" parent="."]

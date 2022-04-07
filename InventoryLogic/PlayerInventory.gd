@@ -12,14 +12,15 @@ var active_item_slot = 0
 var inventory = {
 	1: ["Sword", 1], 
 	2: ["Green gem", 98],
-	13: ["Potato seeds", 49]
 }
 
 var hotbar = {
 	0: ["Axe", 1],
 	1: ["Pickaxe", 1],
 	2: ["Hoe", 1], 
-	6: ["Hay seeds", 27],
+	6: ["Hay seeds", 50],
+	5: ["Potato seeds", 28],
+	4: ["Bucket", 1]
 }
 
 func add_item_to_hotbar(item_name, item_quantity):
@@ -107,7 +108,7 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int):
 			inventory[slot.slot_index][1] += quantity_to_add
 
 
-
+###
 ### Change active hotbar functions
 func active_item_scroll_up() -> void:
 	active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS
@@ -123,3 +124,37 @@ func active_item_scroll_down() -> void:
 func hotbar_slot_selected(slot) -> void:
 	active_item_slot =  slot.slot_index
 	emit_signal("active_item_updated")
+
+
+###
+### Planting crops ui
+var plantedCrops = {}
+var nextDayFlag = false
+
+func advance_day():
+	nextDayFlag = true
+	for i in range(200):
+		if plantedCrops.has(i) == true:
+			if plantedCrops[i][2] == true and plantedCrops[i][3] != 0:
+				plantedCrops[i][1] = false
+				
+
+func add_planted_crop(crop_name, location, ifWatered, daysUntilHarvest):
+	for i in range(200):
+		if plantedCrops.has(i) == false:
+			plantedCrops[i] = [crop_name, location, ifWatered, daysUntilHarvest]
+			hotbar[active_item_slot][1] = hotbar[active_item_slot][1] - 1 
+			if hotbar[active_item_slot][1] == 0: 
+				hotbar.erase(active_item_slot)
+				return
+			else: 
+				update_hotbar_slot_visual(active_item_slot, hotbar[active_item_slot][0], hotbar[active_item_slot][1])
+				return
+				
+func add_watered_tile(location):
+	for i in range(200):
+		if plantedCrops.has(i) == true:
+			if plantedCrops[i][1] == location:
+				plantedCrops[i][2] = true
+				return
+

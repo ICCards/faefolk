@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/potato1.png-2b34775473f4061a4a55ad3993319d64.stex"
+path="res://.import/hoed_layer.png-30fdb28a9ba98c1605ab493aafe50e04.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/crop_sets/potato/potato1.png"
-dest_files=[ "res://.import/potato1.png-2b34775473f4061a4a55ad3993319d64.stex" ]
+source_file="res://Assets/hoed_layer.png"
+dest_files=[ "res://.import/hoed_layer.png-30fdb28a9ba98c1605ab493aafe50e04.stex" ]
 
 [params]
 

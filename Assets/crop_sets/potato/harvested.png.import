@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hay4.png-333b0ee497c06c246da9feda38e8d4dd.stex"
+path="res://.import/harvested.png-fa034d439ce9eae63633bf9af9b571f7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/crop_sets/hay seeds/hay4.png"
-dest_files=[ "res://.import/hay4.png-333b0ee497c06c246da9feda38e8d4dd.stex" ]
+source_file="res://Assets/crop_sets/potato/harvested.png"
+dest_files=[ "res://.import/harvested.png-fa034d439ce9eae63633bf9af9b571f7.stex" ]
 
 [params]
 
