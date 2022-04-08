@@ -2,7 +2,7 @@ extends Node
 
 # FRUITLESS TREES #
 
-func returnFruitlessTreeObject(treeType):
+func returnTreeObject(treeType):
 	match treeType:
 		"A":
 			return A_tree 
@@ -28,6 +28,7 @@ var A_tree = {
 	topTree = preload("res://Assets/tree_sets/A/top.png"),
 	chip = preload("res://Assets/tree_sets/A/chip.png"),
 	leaves = preload("res://Assets/tree_sets/A/leaves.png"),
+	largeStump = preload("res://Assets/tree_sets/A/large_stumpA.png"),
 }
 
 var B_tree = {
@@ -43,6 +44,7 @@ var B_tree = {
 	topTree = preload("res://Assets/tree_sets/B/top.png"),
 	chip = preload("res://Assets/tree_sets/B/chip.png"),
 	leaves = preload("res://Assets/tree_sets/B/leaves.png"),
+	largeStump = preload("res://Assets/tree_sets/B/large_stumpB.png"),
 }
 
 var C_tree = {
@@ -58,6 +60,7 @@ var C_tree = {
 	topTree = preload("res://Assets/tree_sets/C/top.png"),
 	chip = preload("res://Assets/tree_sets/C/chip.png"),
 	leaves = preload("res://Assets/tree_sets/C/leaves.png"),
+	largeStump = preload("res://Assets/tree_sets/C/large_stumpC.png"),
 }
 
 var D_tree = {
@@ -73,6 +76,7 @@ var D_tree = {
 	topTree = preload("res://Assets/tree_sets/D/top.png"),
 	chip = preload("res://Assets/tree_sets/D/chip.png"),
 	leaves = preload("res://Assets/tree_sets/D/leaves.png"),
+	largeStump = preload("res://Assets/tree_sets/D/large_stumpD.png"),
 }
 
 var E_tree = {
@@ -88,7 +92,26 @@ var E_tree = {
 	topTree = preload("res://Assets/tree_sets/E/top.png"),
 	chip = preload("res://Assets/tree_sets/E/chip.png"),
 	leaves = preload("res://Assets/tree_sets/E/leaves.png"),
+	largeStump = preload("res://Assets/tree_sets/E/large_stumpE.png"),
 }
+
+
+# BRANCH OBJECTS #
+var tree_branch_objects = {
+	0 : preload("res://Assets/tree_sets/branch_objects/branch1.png"),
+	1 : preload("res://Assets/tree_sets/branch_objects/branch2.png"),
+	2 : preload("res://Assets/tree_sets/branch_objects/branch3.png"),
+	3 : preload("res://Assets/tree_sets/branch_objects/branch4.png"),
+	4 : preload("res://Assets/tree_sets/branch_objects/branch5.png"),
+	5 : preload("res://Assets/tree_sets/branch_objects/branch6.png"),
+	6 : preload("res://Assets/tree_sets/branch_objects/branch7.png"),
+	7 : preload("res://Assets/tree_sets/branch_objects/branch8.png"),
+	8 : preload("res://Assets/tree_sets/branch_objects/branch9.png"),
+	9 : preload("res://Assets/tree_sets/branch_objects/branch10.png"),
+	10 : preload("res://Assets/tree_sets/branch_objects/branch11.png"),
+	11 : preload("res://Assets/tree_sets/branch_objects/branch12.png"),
+}
+
 
 # FRUIT TREES #
 func returnFruitTree(treeType):
