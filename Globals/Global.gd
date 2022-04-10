@@ -2987,6 +2987,337 @@ var lesser_spirit = {
 	}	
 }
 
+var succubus = {
+	body_idle_down = {
+		0 : preload("res://Characters/Vampires/Succubus/IDLE/body/down/body.png")
+	},
+	body_idle_up = {
+		0 : preload("res://Characters/Vampires/Succubus/IDLE/body/up/body.png")
+	},
+	body_idle_left = {
+		0 : preload("res://Characters/Vampires/Succubus/IDLE/body/left/body.png")
+	},
+	body_idle_right = {
+		0 : preload("res://Characters/Vampires/Succubus/IDLE/body/right/body.png")
+	},
+
+	body_walk_down = {
+		0 : preload("res://Characters/Vampires/Succubus/WALK/body/down/body.png")
+	},
+	body_walk_up = {
+		0 : preload("res://Characters/Vampires/Succubus/WALK/body/up/body.png")
+	},
+	body_walk_right = {
+		0 : preload("res://Characters/Vampires/Succubus/WALK/body/right/body.png")
+	},
+	body_walk_left = {
+		0 : preload("res://Characters/Vampires/Succubus/WALK/body/left/body.png")
+	},
+
+	body_swing_down = {
+		0 : preload("res://Characters/Vampires/Succubus/SWING/body/down/body.png")
+	},
+	body_swing_up = {
+		0 : preload("res://Characters/Vampires/Succubus/SWING/body/up/body.png")
+	},
+	body_swing_right = {
+		0 : preload("res://Characters/Vampires/Succubus/SWING/body/right/body.png")
+	},
+	body_swing_left = {
+		0 : preload("res://Characters/Vampires/Succubus/SWING/body/left/body.png")
+	},
+
+
+	arms_idle_down = {
+		0 : preload("res://Characters/Vampires/Succubus/IDLE/body/down/arms.png")
+	},
+	arms_idle_up = {
+		0 : preload("res://Characters/Vampires/Succubus/IDLE/body/up/arms.png")
+	},
+	arms_idle_left = {
+		0 : preload("res://Characters/Vampires/Succubus/IDLE/body/left/arms.png")
+	},
+	arms_idle_right = {
+		0 : preload("res://Characters/Vampires/Succubus/IDLE/body/right/arms.png")
+	},
+
+	arms_walk_down = {
+		0 : preload("res://Characters/Vampires/Succubus/WALK/body/down/arms.png")
+	},
+	arms_walk_up = {
+		0 : preload("res://Characters/Vampires/Succubus/WALK/body/up/arms.png")
+	},
+	arms_walk_right = {
+		0 : preload("res://Characters/Vampires/Succubus/WALK/body/right/arms.png")
+	},
+	arms_walk_left = {
+		0 : preload("res://Characters/Vampires/Succubus/WALK/body/left/arms.png")
+	},
+
+	arms_swing_down = {
+		0 : preload("res://Characters/Vampires/Succubus/SWING/body/down/arms.png")
+	},
+	arms_swing_up = {
+		0 : preload("res://Characters/Vampires/Succubus/SWING/body/up/arms.png")
+	},
+	arms_swing_right = {
+		0 : preload("res://Characters/Vampires/Succubus/SWING/body/right/arms.png")
+	},
+	arms_swing_left = {
+		0 : preload("res://Characters/Vampires/Succubus/SWING/body/left/arms.png")
+	},
+
+
+
+	acc_idle_down = {
+		0 : null,
+	},
+	acc_idle_up = {
+		0 : null,
+	},
+	acc_idle_left = {
+		0 : null,
+	},
+	acc_idle_right = {
+		0 : null,
+	},
+
+	acc_walk_down = {
+		0 : null,
+	},
+	acc_walk_up = {
+		0 : null,
+	},
+	acc_walk_right = {
+		0 : null,
+	},
+	acc_walk_left = {
+		0 : null,
+	},
+
+	acc_swing_down = {
+		0 : null,
+	},
+	acc_swing_up = {
+		0 : null,
+	},
+	acc_swing_right = {
+		0 : null,
+	},
+	acc_swing_left = {
+		0 : null,
+	},
+
+
+	head_attribute_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/down/head_attribute/brown_hair.png")
+	},
+	head_attribute_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/up/head_attribute/brown_hair.png"),
+	},
+	head_attribute_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/left/head_attribute/brown_hair.png"),
+	},
+	head_attribute_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/right/head_attribute/brown_hair.png"),
+
+	},
+
+	head_attribute_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/down/head_attribute/brown_hair.png"),
+	},
+	head_attribute_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/up/head_attribute/brown_hair.png"),
+	},
+	head_attribute_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/right/head_attribute/brown_hair.png"),
+	},
+	head_attribute_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/left/head_attribute/brown_hair.png"),
+	},
+
+	head_attribute_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/down/head_attribute/brown_hair.png"),
+	},
+	head_attribute_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/up/head_attribute/brown_hair.png"),
+	},
+	head_attribute_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/right/head_attribute/brown_hair.png"),
+	},
+	head_attribute_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/left/head_attribute/brown_hair.png"),
+	},
+
+
+	pants_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/down/pants/light_skirt.png")
+	},
+
+	pants_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/up/pants/light_skirt.png")
+	},
+	pants_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/right/pants/light_skirt.png")
+	},
+	pants_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/left/pants/light_skirt.png")
+	},
+
+	pants_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/down/pants/light_skirt.png")
+	},
+	pants_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/up/pants/light_skirt.png")
+	},
+	pants_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/right/pants/light_skirt.png")
+	},
+	pants_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/left/pants/light_skirt.png")
+	},
+
+	pants_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/down/pants/light_skirt.png")
+	},
+	pants_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/up/pants/light_skirt.png")
+	},
+	pants_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/right/pants/light_skirt.png")
+	},
+	pants_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/left/pants/light_skirt.png")
+	},
+
+
+	shirts_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/down/shirts/gold_shirt.png")
+	},
+	shirts_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/up/shirts/gold_shirt.png")
+	},
+	shirts_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/right/shirts/gold_shirt.png")
+	},
+	shirts_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/left/shirts/gold_shirt.png")
+	},
+
+	shirts_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/down/shirts/gold_shirt.png")
+	},
+	shirts_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/up/shirts/gold_shirt.png")
+	},
+	shirts_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/right/shirts/gold_shirt.png")
+	},
+	shirts_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/left/shirts/gold_shirt.png")
+	},
+
+	shirts_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/down/shirts/gold_shirt.png")
+	},
+	shirts_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/up/shirts/gold_shirt.png")
+	},
+	shirts_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/right/shirts/gold_shirt.png")
+	},
+	shirts_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/left/shirts/gold_shirt.png")
+	},
+
+	shoes_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/down/shoes/black_heels.png")
+	},
+	shoes_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/up/shoes/black_heels.png")
+	},
+	shoes_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/left/shoes/black_heels.png")
+	},
+	shoes_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/IDLE/assets/right/shoes/black_heels.png")
+	},
+
+	shoes_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/down/shoes/black_heels.png")
+	},
+	shoes_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/up/shoes/black_heels.png")
+	},
+	shoes_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/right/shoes/black_heels.png")
+	},
+	shoes_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/WALK/assets/left/shoes/black_heels.png")
+	},
+
+	shoes_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/down/shoes/black_heels.png")
+	},
+	shoes_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/up/shoes/black_heels.png")
+	},
+	shoes_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/right/shoes/black_heels.png")
+	},
+	shoes_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Vampires/Succubus/SWING/assets/left/shoes/black_heels.png")
+	}	
+}
+
 
 
 # INDEX CHANGES ATTRIBUTE STYLE
@@ -3158,11 +3489,11 @@ func _ready():
 	randomizeAttributes()
 
 var rng = RandomNumberGenerator.new()
-var characters = [goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_male, lesser_demon_female, lesser_spirit]
+var characters = [goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_male, lesser_demon_female, lesser_spirit, succubus]
 func randomizeAttributes():
 	rng.randomize()
-	characters.shuffle()
-	var character = characters[0]
+	#characters.shuffle()
+	var character = characters[9]
 	
 	acc_index = character.acc_idle_down.size() - 1
 	headAtr_index = character.head_attribute_idle_down.size() - 1
