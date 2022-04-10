@@ -38,6 +38,7 @@ func setAnimationTexture(var anim):
 	
 func _ready():
 	animPlayer.play("idle")
+	Global.randomizeAttributes()
 	bodySprite.texture = Global.body_sprites['idle_down']
 	armsSprite.texture = Global.arms_sprites['idle_down']
 	accessorySprite.texture = Global.acc_sprites['idle_down']
