@@ -1,8 +1,8 @@
 extends Node2D
 
+export(bool) var redraw setget redraw
 export(int) var map_width = 20
 export(int) var map_height = 20
-export(bool) var redraw setget redraw
 
 export(String) var world_seed = "Hello Godot!"
 export(int) var noise_octaves = 3
@@ -25,7 +25,7 @@ func _ready() -> void:
 	redraw()
 
 func is_cell_empty(x: int, y: int) -> bool:
-	return ground_map.get_cell(x, y) == TileMap.INVALID_CELL    
+	return ground_map.get_cell(x, y) == TileMap.INVALID_CELL
 	
 func redraw(value = null) -> void:
 	if ground_map == null:
