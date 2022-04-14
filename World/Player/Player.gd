@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export(int) var speed = 260.0
-
+onready var api = Api
 onready var bodySprite = $CompositeSprites/Body
 onready var armsSprite = $CompositeSprites/Arms
 onready var accessorySprite = $CompositeSprites/Accessory
@@ -13,7 +13,8 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var plantSeedsTextureRect = $PlantSeedsUI/PlantSeedText
 onready var plantSeedsColorRect = $PlantSeedsUI/PlantSeedColor
-	
+
+var thread = Thread.new()
 	
 onready var state = MOVEMENT
 enum {
@@ -41,7 +42,17 @@ func _input(event):
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 		if event.is_action_pressed("mouse_click") and itemCategory == "Seeds":
 			place_seed(item_name)
-		
+
+func _whoAmI(_value):
+	print("THREAD FUNC!")
+	var result = api.query()
+	call_deferred("loadDone")
+	return result
+
+func loadDone():
+	var value = thread.wait_to_finish()
+	print(value)	
+			
 func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
@@ -51,6 +62,11 @@ func _unhandled_input(event):
 			plantSeedsTextureRect.visible = false
 		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon":
 			state = SWING
+			if (thread.is_active()):
+				# Already working
+				return
+			print("START THREAD!")
+			thread.start(self,"_whoAmI",null)
 			swing_state(event, item_name)
 	else:
 		plantSeedsColorRect.visible = false
@@ -75,19 +91,19 @@ func place_seed(seed_name):
 func movement_state(delta):
 	animation_player.play("movement")
 	var velocity = Vector2.ZERO			
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
 		velocity.y -= 1.0
 		direction = "UP"
 		walk_state(direction)
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
 		velocity.y += 1.0
 		direction = "DOWN"
 		walk_state(direction)
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
 		velocity.x -= 1.0
 		direction = "LEFT"
 		walk_state(direction)
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
 		velocity.x += 1.0
 		direction = "RIGHT"
 		walk_state(direction)		
