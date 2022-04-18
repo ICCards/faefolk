@@ -1,10 +1,10 @@
-extends Node2D
+extends Node
 
 export(bool) var redraw setget redraw
-export(int) var map_width = 20
-export(int) var map_height = 20
+export(int) var map_width = 280
+export(int) var map_height = 220
 
-export(String) var world_seed = "Hello Godot!"
+export(String) var world_seed = "its a complex cave mapp"
 export(int) var noise_octaves = 3
 export(int) var noise_period = 3
 export(float) var noise_persistence = 0.7
@@ -12,10 +12,10 @@ export(float) var noise_lacunarity = 0.4
 export(float) var tileId = 0
 export(float) var threshold = -0.1
 
-onready var ground_map = $Ground
-onready var dirt_map = $Dirt
-onready var wall_map = $Wall
-onready var ore_map = $Ore
+onready var ground_map = $GrassGround
+onready var dirt_map = $DirtGround
+onready var wall_map = $CaveWalls
+onready var ore_map = $Ores
 
 enum Tiles { GOLD, SILVER, STONE }
 
@@ -60,10 +60,10 @@ func generate() -> void:
 				#_set_autotile(x, y)
 				#_set_autotileWall(x, y)	
 	#addWall()
-	removeWalls()
-	removeWalls()
+	#removeWalls()
+	#removeWalls()
 	addBorders()
-	addOres()
+	#addOres()
 	self.ground_map.update_dirty_quadrants()
 	self.dirt_map.update_dirty_quadrants()
 	self.wall_map.update_dirty_quadrants()
@@ -170,8 +170,9 @@ func addOres():
 			var chance = randi() % 3
 			if chance == 1:
 				if value > 7:
-					ore_map.set_cell(cell.x, cell.y, Tiles.GOLD)
-				if value > 4 && value < 7:
-					ore_map.set_cell(cell.x, cell.y, Tiles.SILVER)
-				if value < 4:
-					ore_map.set_cell(cell.x, cell.y, Tiles.STONE)
+					#ore_map.set_cell(cell.x, cell.y, Tiles.GOLD)
+				#if value > 4 && value < 7:
+					#ore_map.set_cell(cell.x, cell.y, Tiles.SILVER)
+				#f value < 4:
+					#ore_map.set_cell(cell.x, cell.y, Tiles.STONE)
+					pass

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cave_mainLev.png-ede9d13bb180dc00fac0ccd5aa9b6cae.stex"
+path="res://.import/Cave_walls.png-953a95108a8d809754b758e86c858d87.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/cave_mainLev.png"
-dest_files=[ "res://.import/cave_mainLev.png-ede9d13bb180dc00fac0ccd5aa9b6cae.stex" ]
+source_file="res://Assets/Cave_walls.png"
+dest_files=[ "res://.import/Cave_walls.png-953a95108a8d809754b758e86c858d87.stex" ]
 
 [params]
 
@@ -32,4 +32,4 @@ process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
-svg/scale=2.0
+svg/scale=1.0
