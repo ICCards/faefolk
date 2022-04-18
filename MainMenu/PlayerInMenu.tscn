@@ -95,7 +95,6 @@ tracks/6/keys = {
 }
 
 [node name="PlayerInMenu" type="Node2D"]
-scale = Vector2( 7, 7 )
 
 [node name="PlayerMenuState" type="KinematicBody2D" parent="."]
 script = ExtResource( 3 )
@@ -123,7 +122,6 @@ hframes = 4
 frame = 3
 
 [node name="HeadAtr" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
-scale = Vector2( 1, 1 )
 hframes = 4
 frame = 3
 

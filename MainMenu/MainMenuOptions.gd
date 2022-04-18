@@ -1,7 +1,7 @@
 extends Control
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://World/World.tscn")
+	SceneChanger.change_scene("res://World/World.tscn")
 
 func _on_OptionsButton_pressed():
 	Global.randomizeAttributes()

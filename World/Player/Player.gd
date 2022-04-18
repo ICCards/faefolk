@@ -11,8 +11,6 @@ onready var shirtsSprite = $CompositeSprites/Shirts
 onready var shoesSprite = $CompositeSprites/Shoes
 onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
-onready var plantSeedsTextureRect = $PlantSeedsUI/PlantSeedText
-onready var plantSeedsColorRect = $PlantSeedsUI/PlantSeedColor
 	
 	
 onready var state = MOVEMENT
@@ -35,43 +33,20 @@ func _process(delta) -> void:
 	else: 
 		idle_state(direction)
 
-func _input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if event.is_action_pressed("mouse_click") and itemCategory == "Seeds":
-			place_seed(item_name)
+	
 		
 func _unhandled_input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false and get_owner() != get_node("/root/InsidePlayerHome"):
+		print(get_owner())
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if itemCategory != 'Seeds':
-			plantSeedsColorRect.visible = false
-			plantSeedsTextureRect.visible = false
 		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon":
 			state = SWING
 			swing_state(event, item_name)
-	else:
-		plantSeedsColorRect.visible = false
-		plantSeedsTextureRect.visible = false
-		
-onready var PlantCrop = preload("res://InventoryLogic/PlantCrop.tscn")	
-onready var world = get_tree().current_scene
-var t = Timer.new()
 
-func place_seed(seed_name):
-	var mousePos = get_global_mouse_position() + Vector2(-16, -16)
-	mousePos = mousePos.snapped(Vector2(32,32))
-	var location = hoedGrassTilemap.world_to_map(mousePos)
-	seed_name.erase(seed_name.length() - 6, 6)
-	if plantCropFlag:
-		PlayerInventory.add_planted_crop(seed_name, location, false, int(JsonData.crop_data[seed_name]["DaysToGrow"]))
-		var plantCrop = PlantCrop.instance()
-		plantCrop.init(seed_name, location)
-		world.add_child(plantCrop)
-		plantCrop.global_position = mousePos
-	
+
+
+
 func movement_state(delta):
 	animation_player.play("movement")
 	var velocity = Vector2.ZERO			
@@ -96,15 +71,7 @@ func movement_state(delta):
 			
 	velocity = velocity.normalized()
 	move_and_slide(velocity * speed)	
-	
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if itemCategory == "Seeds":
-			place_seeds_state(delta, item_name)
-		else: 
-			plantSeedsColorRect.visible = false
-			plantSeedsTextureRect.visible = false
+
 
 var swingActive = false
 func swing_state(_delta, weaponType):
@@ -112,10 +79,6 @@ func swing_state(_delta, weaponType):
 				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				swingActive = true
 				set_melee_collision_layer(toolName)
-				if weaponType == "Hoe":
-					set_hoed_tile(get_position(), direction)
-				if weaponType == "Bucket":
-					set_watered_tile(get_position(), direction)
 				toolEquippedSprite.set_texture(Global.returnToolSprite(toolName, direction.to_lower()))
 				setPlayerTexture("swing_" + direction.to_lower())
 				animation_player.play("swing_" + direction.to_lower())
@@ -128,70 +91,6 @@ func swing_state(_delta, weaponType):
 		else:
 			state = MOVEMENT
 
-onready var hoedGrassTilemap = get_node("/root/World/YSort/PlayerHome/HoedAutoTiles")
-onready var wateredGrassTilemap = get_node("/root/World/YSort/PlayerHome/WateredAutoTiles")
-onready var groundTilemap = get_node("/root/World/YSort/PlayerHome/GroundTiles")
-
-func set_hoed_tile(position, direction):
-	if direction == "UP":
-		position += Vector2(0, -60)
-	elif direction == "DOWN":
-		position += Vector2(0, 40)
-	elif direction == "LEFT":
-		position += Vector2(-50, -20)
-	elif direction == "RIGHT":
-		position += Vector2(50, -20)
-	var location = hoedGrassTilemap.world_to_map(position)
-	if groundTilemap.get_cellv(location) != -1:
-		hoedGrassTilemap.set_cellv(location, 0)
-		hoedGrassTilemap.update_bitmask_region()
-		
-func set_watered_tile(position, direction):
-	if direction == "UP":
-		position += Vector2(0, -48)
-	elif direction == "DOWN":
-		position += Vector2(0, 16)
-	elif direction == "LEFT":
-		position += Vector2(-32, -16)
-	elif direction == "RIGHT":
-		position += Vector2(32, -16)
-	var location = hoedGrassTilemap.world_to_map(position)
-	if hoedGrassTilemap.get_cellv(location) != -1:
-		wateredGrassTilemap.set_cellv(location, 0)
-		wateredGrassTilemap.update_bitmask_region()
-		PlayerInventory.add_watered_tile(location)
-		
-		
-		
-onready var SeedsScene = preload("res://InventoryLogic/PlaceSeedsObject.tscn")
-
-var isCellFilled
-func is_cell_filled(location):
-	for i in range(200):
-		if PlayerInventory.plantedCrops.has(i):
-			if PlayerInventory.plantedCrops[i][1] == location:
-				isCellFilled = true
-				return
-	isCellFilled = false
-			
-var plantCropFlag
-func place_seeds_state(event , seed_name):
-	plantSeedsColorRect.visible = true
-	plantSeedsTextureRect.visible = true
-	seed_name.erase(seed_name.length() - 6, 6)
-	plantSeedsTextureRect.texture = load("res://Assets/crop_sets/" + seed_name + "/1.png")
-	var mousePos = get_global_mouse_position() + Vector2(-16, -16)
-	mousePos = mousePos.snapped(Vector2(32,32))
-	var location = hoedGrassTilemap.world_to_map(mousePos)
-	plantSeedsColorRect.set_global_position(mousePos)
-	plantSeedsTextureRect.set_global_position(mousePos - Vector2(0, 32))
-	is_cell_filled(location)
-	if hoedGrassTilemap.get_cellv(location) != -1 and !isCellFilled:
-		plantSeedsColorRect.color = Color(0, 1, 0, 0.5)
-		plantCropFlag = true
-	else: 
-		plantSeedsColorRect.color = Color(1, 0, 0, 0.5)
-		plantCropFlag = false
 
 func idle_state(direction):
 	setPlayerTexture("idle_" + direction.to_lower())
@@ -219,9 +118,14 @@ func setPlayerTexture(var anim):
 	pantsSprite.set_texture(Global.pants_sprites[anim])
 	shirtsSprite.set_texture(Global.shirts_sprites[anim])
 	shoesSprite.set_texture(Global.shoes_sprites[anim])
+	
+func _ready():
+	setPlayerTexture('idle_down')
 
 
-func _on_Button_pressed():
-	wateredGrassTilemap.clear()
-	get_tree().call_group("crops", "advance_day")
+var sceneTransitionFlag = false
+func _on_EnterDoors_area_entered(area):
+	sceneTransitionFlag = true
 
+func _on_EnterDoors_area_exited(area):
+	sceneTransitionFlag = false

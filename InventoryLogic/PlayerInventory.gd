@@ -17,10 +17,29 @@ var inventory = {
 var hotbar = {
 	0: ["Axe", 1],
 	1: ["Pickaxe", 1],
-	2: ["Hoe", 1], 
-	6: ["Hay seeds", 50],
-	5: ["Potato seeds", 28],
-	4: ["Bucket", 1]
+#	2: ["Hoe", 1], 
+#	6: ["Hay seeds", 50],
+#	5: ["Potato seeds", 28],
+#	4: ["Bucket", 1]
+}
+
+# Location of bottom left tile
+var player_home = {
+	0 : ["Fireplace", Vector2(2,0)],
+	1 : ["Crafting_table", Vector2(8,0)],
+	2 : ["Shelves", Vector2(16,0)],
+	3 : ["Left_chair", Vector2(2,6)],
+	4 : ["Middle_chair", Vector2(4, 5)],
+	5 : ["Right_chair", Vector2(5, 6)],
+	6 : ["Table", Vector2(3, 7)],
+	7 : ["Rug", Vector2(10, 7)],
+	8 : ["Side_dresser", Vector2(19, 5)],
+	9 : ["Bed", Vector2(18, 9)],
+	10 : ["Small_dresser", Vector2(10,0)],
+	11 : ["Stool", Vector2(4, 8)],
+	12 : ["Window", Vector2(4, -2)],
+	13 : ["Window", Vector2(14, -2)],
+	14 : ["Painting1", Vector2(9, -2)]
 }
 
 func add_item_to_hotbar(item_name, item_quantity):
@@ -125,36 +144,4 @@ func hotbar_slot_selected(slot) -> void:
 	active_item_slot =  slot.slot_index
 	emit_signal("active_item_updated")
 
-
-###
-### Planting crops ui
-var plantedCrops = {}
-var nextDayFlag = false
-
-func advance_day():
-	nextDayFlag = true
-	for i in range(200):
-		if plantedCrops.has(i) == true:
-			if plantedCrops[i][2] == true and plantedCrops[i][3] != 0:
-				plantedCrops[i][1] = false
-				
-
-func add_planted_crop(crop_name, location, ifWatered, daysUntilHarvest):
-	for i in range(200):
-		if plantedCrops.has(i) == false:
-			plantedCrops[i] = [crop_name, location, ifWatered, daysUntilHarvest]
-			hotbar[active_item_slot][1] = hotbar[active_item_slot][1] - 1 
-			if hotbar[active_item_slot][1] == 0: 
-				hotbar.erase(active_item_slot)
-				return
-			else: 
-				update_hotbar_slot_visual(active_item_slot, hotbar[active_item_slot][0], hotbar[active_item_slot][1])
-				return
-				
-func add_watered_tile(location):
-	for i in range(200):
-		if plantedCrops.has(i) == true:
-			if plantedCrops[i][1] == location:
-				plantedCrops[i][2] = true
-				return
 

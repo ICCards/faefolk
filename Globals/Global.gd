@@ -2503,11 +2503,10 @@ var lesser_demon_female = {
 		0 : null,
 		1 : preload("res://Characters/lesser demon/female/IDLE/assets/down/pants/pants.png")
 	},
-		#### MISSSING ####
+	
 	pants_idle_up = {
 		0 : null,
-		1 : null,
-			#preload("res://Characters/lesser demon/female/IDLE/assets/up/pants/pants.png")
+		1 : preload("res://Characters/lesser demon/female/IDLE/assets/up/pants/pants.png")
 	},
 	pants_idle_right = {
 		0 : null,
@@ -3318,7 +3317,1984 @@ var succubus = {
 	}	
 }
 
+var seraphim_male = {
+	body_idle_down = {
+		0 : preload("res://Characters/Angels/seraphim/male/idle/body/down/body.png")
+	},
+	body_idle_up = {
+		0 : preload("res://Characters/Angels/seraphim/male/idle/body/up/body.png")
+	},
+	body_idle_left = {
+		0 : preload("res://Characters/Angels/seraphim/male/idle/body/left/body.png")
+	},
+	body_idle_right = {
+		0 : preload("res://Characters/Angels/seraphim/male/idle/body/right/body.png")
+	},
 
+	body_walk_down = {
+		0 : preload("res://Characters/Angels/seraphim/male/walk/body/down/body.png")
+	},
+	body_walk_up = {
+		0 : preload("res://Characters/Angels/seraphim/male/walk/body/up/body.png")
+	},
+	body_walk_right = {
+		0 : preload("res://Characters/Angels/seraphim/male/walk/body/right/body.png")
+	},
+	body_walk_left = {
+		0 : preload("res://Characters/Angels/seraphim/male/walk/body/left/body.png")
+	},
+
+	body_swing_down = {
+		0 : preload("res://Characters/Angels/seraphim/male/swing/body/down/body.png")
+	},
+	body_swing_up = {
+		0 : preload("res://Characters/Angels/seraphim/male/swing/body/up/body.png")
+	},
+	body_swing_right = {
+		0 : preload("res://Characters/Angels/seraphim/male/swing/body/right/body.png")
+	},
+	body_swing_left = {
+		0 : preload("res://Characters/Angels/seraphim/male/swing/body/left/body.png")
+	},
+
+
+	arms_idle_down = {
+		0 : preload("res://Characters/Angels/seraphim/male/idle/body/down/arms.png")
+	},
+	arms_idle_up = {
+		0 : preload("res://Characters/Angels/seraphim/male/idle/body/up/arms.png")
+	},
+	arms_idle_left = {
+		0 : preload("res://Characters/Angels/seraphim/male/idle/body/left/arms.png")
+	},
+	arms_idle_right = {
+		0 : preload("res://Characters/Angels/seraphim/male/idle/body/right/arms.png")
+	},
+
+	arms_walk_down = {
+		0 : preload("res://Characters/Angels/seraphim/male/walk/body/down/arms.png")
+	},
+	arms_walk_up = {
+		0 : preload("res://Characters/Angels/seraphim/male/walk/body/up/arms.png")
+	},
+	arms_walk_right = {
+		0 : preload("res://Characters/Angels/seraphim/male/walk/body/right/arms.png")
+	},
+	arms_walk_left = {
+		0 : preload("res://Characters/Angels/seraphim/male/walk/body/left/arms.png")
+	},
+
+	arms_swing_down = {
+		0 : preload("res://Characters/Angels/seraphim/male/swing/body/down/arms.png")
+	},
+	arms_swing_up = {
+		0 : preload("res://Characters/Angels/seraphim/male/swing/body/up/arms.png")
+	},
+	arms_swing_right = {
+		0 : preload("res://Characters/Angels/seraphim/male/swing/body/right/arms.png")
+	},
+	arms_swing_left = {
+		0 : preload("res://Characters/Angels/seraphim/male/swing/body/left/arms.png")
+	},
+
+
+
+	acc_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/down/accesory/cloak.png")
+	},
+	acc_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/up/accesory/cloak.png")
+	},
+	acc_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/left/accesory/cloak.png")
+	},
+	acc_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/right/accesory/cloak.png")
+	},
+
+	acc_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/down/accesory/cloak.png")
+	},
+	acc_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/up/accesory/cloak.png")
+	},
+	acc_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/right/accesory/cloak.png")
+	},
+	acc_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/left/accesory/cloak.png")
+	},
+
+	acc_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/down/accesory/cloak.png")
+	},
+	acc_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/up/accesory/cloak.png")
+	},
+	acc_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/right/accesory/cloak.png")
+	},
+	acc_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/left/accesory/cloak.png")
+	},
+
+
+	head_attribute_idle_down = {
+		0 : null,
+	},
+	head_attribute_idle_up = {
+		0 : null,
+	},
+	head_attribute_idle_left = {
+		0 : null,
+	},
+	head_attribute_idle_right = {
+		0 : null,
+	},
+
+	head_attribute_walk_down = {
+		0 : null,
+	},
+	head_attribute_walk_up = {
+		0 : null,
+	},
+	head_attribute_walk_right = {
+		0 : null,
+	},
+	head_attribute_walk_left = {
+		0 : null,
+	},
+
+	head_attribute_swing_down = {
+		0 : null,
+	},
+	head_attribute_swing_up = {
+		0 : null,
+	},
+	head_attribute_swing_right = {
+		0 : null,
+	},
+	head_attribute_swing_left = {
+		0 : null,
+	},
+
+
+	pants_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/down/pants/pants.png")
+	},
+
+	pants_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/up/pants/pants.png")
+	},
+	pants_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/right/pants/pants.png")
+	},
+	pants_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/left/pants/pants.png")
+	},
+
+	pants_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/down/pants/pants.png")
+	},
+	pants_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/up/pants/pants.png")
+	},
+	pants_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/right/pants/pants.png")
+	},
+	pants_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/left/pants/pants.png")
+	},
+
+	pants_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/down/pants/pants.png")
+	},
+	pants_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/up/pants/pants.png")
+	},
+	pants_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/right/pants/pants.png")
+	},
+	pants_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/left/pants/pants.png")
+	},
+
+
+	shirts_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/down/shirts/robe.png")
+	},
+	shirts_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/up/shirts/robe.png")
+	},
+	shirts_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/right/shirts/robe.png")
+	},
+	shirts_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/left/shirts/robe.png")
+	},
+
+	shirts_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/down/shirts/robe.png")
+	},
+	shirts_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/up/shirts/robe.png")
+	},
+	shirts_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/right/shirts/robe.png")
+	},
+	shirts_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/left/shirts/robe.png")
+	},
+
+	shirts_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/down/shirts/robe.png")
+	},
+	shirts_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/up/shirts/robe.png")
+	},
+	shirts_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/right/shirts/robe.png")
+	},
+	shirts_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/left/shirts/robe.png")
+	},
+
+	shoes_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/down/shoes/shoes.png")
+	},
+	shoes_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/up/shoes/shoes.png")
+	},
+	shoes_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/left/shoes/shoes.png")
+	},
+	shoes_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/idle/assets/right/shoes/shoes.png")
+	},
+
+	shoes_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/down/shoes/shoes.png")
+	},
+	shoes_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/up/shoes/shoes.png")
+	},
+	shoes_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/right/shoes/shoes.png")
+	},
+	shoes_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/walk/assets/left/shoes/shoes.png")
+	},
+
+	shoes_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/down/shoes/shoes.png")
+	},
+	shoes_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/up/shoes/shoes.png")
+	},
+	shoes_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/right/shoes/shoes.png")
+	},
+	shoes_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/male/swing/assets/left/shoes/shoes.png")
+	}	
+}
+var seraphim_female = {
+	body_idle_down = {
+		0 : preload("res://Characters/Angels/seraphim/female/idle/body/down/body.png")
+	},
+	body_idle_up = {
+		0 : preload("res://Characters/Angels/seraphim/female/idle/body/up/body.png")
+	},
+	body_idle_left = {
+		0 : preload("res://Characters/Angels/seraphim/female/idle/body/left/body.png")
+	},
+	body_idle_right = {
+		0 : preload("res://Characters/Angels/seraphim/female/idle/body/right/body.png")
+	},
+
+	body_walk_down = {
+		0 : preload("res://Characters/Angels/seraphim/female/walk/body/down/body.png")
+	},
+	body_walk_up = {
+		0 : preload("res://Characters/Angels/seraphim/female/walk/body/up/body.png")
+	},
+	body_walk_right = {
+		0 : preload("res://Characters/Angels/seraphim/female/walk/body/right/body.png")
+	},
+	body_walk_left = {
+		0 : preload("res://Characters/Angels/seraphim/female/walk/body/left/body.png")
+	},
+
+	body_swing_down = {
+		0 : preload("res://Characters/Angels/seraphim/female/swing/body/down/body.png")
+	},
+	body_swing_up = {
+		0 : preload("res://Characters/Angels/seraphim/female/swing/body/up/body.png")
+	},
+	body_swing_right = {
+		0 : preload("res://Characters/Angels/seraphim/female/swing/body/right/body.png")
+	},
+	body_swing_left = {
+		0 : preload("res://Characters/Angels/seraphim/female/swing/body/left/body.png")
+	},
+
+
+	arms_idle_down = {
+		0 : preload("res://Characters/Angels/seraphim/female/idle/body/down/arms.png")
+	},
+	arms_idle_up = {
+		0 : preload("res://Characters/Angels/seraphim/female/idle/body/up/arms.png")
+	},
+	arms_idle_left = {
+		0 : preload("res://Characters/Angels/seraphim/female/idle/body/left/arms.png")
+	},
+	arms_idle_right = {
+		0 : preload("res://Characters/Angels/seraphim/female/idle/body/right/arms.png")
+	},
+
+	arms_walk_down = {
+		0 : preload("res://Characters/Angels/seraphim/female/walk/body/down/arms.png")
+	},
+	arms_walk_up = {
+		0 : preload("res://Characters/Angels/seraphim/female/walk/body/up/arms.png")
+	},
+	arms_walk_right = {
+		0 : preload("res://Characters/Angels/seraphim/female/walk/body/right/arms.png")
+	},
+	arms_walk_left = {
+		0 : preload("res://Characters/Angels/seraphim/female/walk/body/left/arms.png")
+	},
+
+	arms_swing_down = {
+		0 : preload("res://Characters/Angels/seraphim/female/swing/body/down/arms.png")
+	},
+	arms_swing_up = {
+		0 : preload("res://Characters/Angels/seraphim/female/swing/body/up/arms.png")
+	},
+	arms_swing_right = {
+		0 : preload("res://Characters/Angels/seraphim/female/swing/body/right/arms.png")
+	},
+	arms_swing_left = {
+		0 : preload("res://Characters/Angels/seraphim/female/swing/body/left/arms.png")
+	},
+
+
+
+	acc_idle_down = {
+		0 : null,
+	},
+	acc_idle_up = {
+		0 : null,
+	},
+	acc_idle_left = {
+		0 : null,
+	},
+	acc_idle_right = {
+		0 : null,
+	},
+
+	acc_walk_down = {
+		0 : null,
+	},
+	acc_walk_up = {
+		0 : null,
+	},
+	acc_walk_right = {
+		0 : null,
+	},
+	acc_walk_left = {
+		0 : null,
+	},
+
+	acc_swing_down = {
+		0 : null,
+	},
+	acc_swing_up = {
+		0 : null,
+	},
+	acc_swing_right = {
+		0 : null,
+	},
+	acc_swing_left = {
+		0 : null,
+	},
+
+
+	head_attribute_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/left/head_attribute/hair.png")
+	},
+	head_attribute_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/right/head_attribute/hair.png")
+	},
+
+	head_attribute_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/left/head_attribute/hair.png")
+	},
+
+	head_attribute_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/left/head_attribute/hair.png")
+	},
+
+
+	pants_idle_down = {
+		0 : null,
+	},
+	pants_idle_up = {
+		0 : null,
+	},
+	pants_idle_right = {
+		0 : null,
+	},
+	pants_idle_left = {
+		0 : null,
+	},
+
+	pants_walk_down = {
+		0 : null,
+	},
+	pants_walk_up = {
+		0 : null,
+	},
+	pants_walk_right = {
+		0 : null,
+	},
+	pants_walk_left = {
+		0 : null,
+	},
+
+	pants_swing_down = {
+		0 : null,
+	},
+	pants_swing_up = {
+		0 : null,
+	},
+	pants_swing_right = {
+		0 : null,
+	},
+	pants_swing_left = {
+		0 : null,
+	},
+
+
+	shirts_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/down/shirts/breastplate.png")
+	},
+	shirts_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/up/shirts/breastplate.png")
+	},
+	shirts_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/right/shirts/breastplate.png")
+	},
+	shirts_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/left/shirts/breastplate.png")
+	},
+
+	shirts_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/down/shirts/breastplate.png")
+	},
+	shirts_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/up/shirts/breastplate.png")
+	},
+	shirts_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/right/shirts/breastplate.png")
+	},
+	shirts_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/left/shirts/breastplate.png")
+	},
+
+	shirts_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/down/shirts/breastplate.png")
+	},
+	shirts_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/up/shirts/breastplate.png")
+	},
+	shirts_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/right/shirts/breastplate.png")
+	},
+	shirts_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/left/shirts/breastplate.png")
+	},
+
+	shoes_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/down/shoes/shoes.png")
+	},
+	shoes_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/up/shoes/shoes.png")
+	},
+	shoes_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/left/shoes/shoes.png")
+	},
+	shoes_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/idle/assets/right/shoes/shoes.png")
+	},
+
+	shoes_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/down/shoes/shoes.png")
+	},
+	shoes_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/up/shoes/shoes.png")
+	},
+	shoes_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/right/shoes/shoes.png")
+	},
+	shoes_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/walk/assets/left/shoes/shoes.png")
+	},
+
+	shoes_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/down/shoes/shoes.png")
+	},
+	shoes_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/up/shoes/shoes.png")
+	},
+	shoes_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/right/shoes/shoes.png")
+	},
+	shoes_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Angels/seraphim/female/swing/assets/left/shoes/shoes.png")
+	}	
+}
+
+var water_draganoid_male = {
+	body_idle_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/body/down/body.png")
+	},
+	body_idle_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/body/up/body.png")
+	},
+	body_idle_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/body/left/body.png")
+	},
+	body_idle_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/body/right/body.png")
+	},
+
+	body_walk_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/body/down/body.png")
+	},
+	body_walk_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/body/up/body.png")
+	},
+	body_walk_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/body/right/body.png")
+	},
+	body_walk_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/body/left/body.png")
+	},
+
+	body_swing_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/body/down/body.png")
+	},
+	body_swing_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/body/up/body.png")
+	},
+	body_swing_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/body/right/body.png")
+	},
+	body_swing_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/body/left/body.png")
+	},
+
+
+	arms_idle_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/body/down/arms.png")
+	},
+	arms_idle_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/body/up/arms.png")
+	},
+	arms_idle_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/body/left/arms.png")
+	},
+	arms_idle_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/body/right/arms.png")
+	},
+
+	arms_walk_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/body/down/arms.png")
+	},
+	arms_walk_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/body/up/arms.png")
+	},
+	arms_walk_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/body/right/arms.png")
+	},
+	arms_walk_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/body/left/arms.png")
+	},
+
+	arms_swing_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/body/down/arms.png")
+	},
+	arms_swing_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/body/up/arms.png")
+	},
+	arms_swing_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/body/right/arms.png")
+	},
+	arms_swing_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/body/left/arms.png")
+	},
+
+
+
+	acc_idle_down = {
+		0 : null,
+	},
+	acc_idle_up = {
+		0 : null,
+	},
+	acc_idle_left = {
+		0 : null,
+	},
+	acc_idle_right = {
+		0 : null,
+	},
+
+	acc_walk_down = {
+		0 : null,
+	},
+	acc_walk_up = {
+		0 : null,
+	},
+	acc_walk_right = {
+		0 : null,
+	},
+	acc_walk_left = {
+		0 : null,
+	},
+
+	acc_swing_down = {
+		0 : null,
+	},
+	acc_swing_up = {
+		0 : null,
+	},
+	acc_swing_right = {
+		0 : null,
+	},
+	acc_swing_left = {
+		0 : null,
+	},
+
+
+	head_attribute_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/down/head_attribute/spikes.png")
+	},
+	head_attribute_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/up/head_attribute/spikes.png")
+	},
+	head_attribute_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/left/head_attribute/spikes.png")
+	},
+	head_attribute_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/right/head_attribute/spikes.png")
+	},
+
+	head_attribute_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/down/head_attribute/spikes.png")
+	},
+	head_attribute_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/up/head_attribute/spikes.png")
+	},
+	head_attribute_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/right/head_attribute/spikes.png")
+	},
+	head_attribute_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/left/head_attribute/spikes.png")
+	},
+
+	head_attribute_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/down/head_attribute/spikes.png")
+	},
+	head_attribute_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/up/head_attribute/spikes.png")
+	},
+	head_attribute_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/right/head_attribute/spikes.png")
+	},
+	head_attribute_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/left/head_attribute/spikes.png")
+	},
+
+
+	pants_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/down/pants/pants.png")
+	},
+
+	pants_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/up/pants/pants.png")
+	},
+	pants_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/right/pants/pants.png")
+	},
+	pants_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/left/pants/pants.png")
+	},
+
+	pants_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/down/pants/pants.png")
+	},
+	pants_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/up/pants/pants.png")
+	},
+	pants_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/right/pants/pants.png")
+	},
+	pants_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/left/pants/pants.png")
+	},
+
+	pants_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/down/pants/pants.png")
+	},
+	pants_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/up/pants/pants.png")
+	},
+	pants_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/right/pants/pants.png")
+	},
+	pants_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/left/pants/pants.png")
+	},
+
+
+	shirts_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/down/shirts/shirt.png")
+	},
+	shirts_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/up/shirts/shirt.png")
+	},
+	shirts_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/right/shirts/shirt.png")
+	},
+	shirts_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/left/shirts/shirt.png")
+	},
+
+	shirts_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/down/shirts/shirt.png")
+	},
+	shirts_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/up/shirts/shirt.png")
+	},
+	shirts_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/right/shirts/shirt.png")
+	},
+	shirts_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/left/shirts/shirt.png")
+	},
+
+	shirts_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/down/shirts/shirt.png")
+	},
+	shirts_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/up/shirts/shirt.png")
+	},
+	shirts_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/right/shirts/shirt.png")
+	},
+	shirts_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/left/shirts/shirt.png")
+	},
+
+	shoes_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/down/shoes/shoes.png")
+	},
+	shoes_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/up/shoes/shoes.png")
+	},
+	shoes_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/left/shoes/shoes.png")
+	},
+	shoes_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/idle/assets/right/shoes/shoes.png")
+	},
+
+	shoes_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/down/shoes/shoes.png")
+	},
+	shoes_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/up/shoes/shoes.png")
+	},
+	shoes_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/right/shoes/shoes.png")
+	},
+	shoes_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/walk/assets/left/shoes/shoes.png")
+	},
+
+	shoes_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/down/shoes/shoes.png")
+	},
+	shoes_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/up/shoes/shoes.png")
+	},
+	shoes_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/right/shoes/shoes.png")
+	},
+	shoes_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/male/swing/assets/left/shoes/shoes.png")
+	}	
+}
+var water_draganoid_female = {
+	body_idle_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/body/down/body.png")
+	},
+	body_idle_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/body/up/body.png")
+	},
+	body_idle_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/body/left/body.png")
+	},
+	body_idle_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/body/right/body.png")
+	},
+
+	body_walk_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/body/down/body.png")
+	},
+	body_walk_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/body/up/body.png")
+	},
+	body_walk_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/body/right/body.png")
+	},
+	body_walk_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/body/left/body.png")
+	},
+
+	body_swing_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/body/down/body.png")
+	},
+	body_swing_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/body/up/body.png")
+	},
+	body_swing_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/body/right/body.png")
+	},
+	body_swing_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/body/left/body.png")
+	},
+
+
+	arms_idle_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/body/down/arms.png")
+	},
+	arms_idle_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/body/up/arms.png")
+	},
+	arms_idle_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/body/left/arms.png")
+	},
+	arms_idle_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/body/right/arms.png")
+	},
+
+	arms_walk_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/body/down/arms.png")
+	},
+	arms_walk_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/body/up/arms.png")
+	},
+	arms_walk_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/body/right/arms.png")
+	},
+	arms_walk_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/body/left/arms.png")
+	},
+
+	arms_swing_down = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/body/down/arms.png")
+	},
+	arms_swing_up = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/body/up/arms.png")
+	},
+	arms_swing_right = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/body/right/arms.png")
+	},
+	arms_swing_left = {
+		0 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/body/left/arms.png")
+	},
+
+
+
+	acc_idle_down = {
+		0 : null,
+	},
+	acc_idle_up = {
+		0 : null,
+	},
+	acc_idle_left = {
+		0 : null,
+	},
+	acc_idle_right = {
+		0 : null,
+	},
+
+	acc_walk_down = {
+		0 : null,
+	},
+	acc_walk_up = {
+		0 : null,
+	},
+	acc_walk_right = {
+		0 : null,
+	},
+	acc_walk_left = {
+		0 : null,
+	},
+
+	acc_swing_down = {
+		0 : null,
+	},
+	acc_swing_up = {
+		0 : null,
+	},
+	acc_swing_right = {
+		0 : null,
+	},
+	acc_swing_left = {
+		0 : null,
+	},
+
+
+	head_attribute_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/down/head_attribute/spikes.png")
+	},
+	head_attribute_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/up/head_attribute/spikes.png")
+	},
+	head_attribute_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/left/head_attribute/spikes.png")
+	},
+	head_attribute_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/right/head_attribute/spikes.png")
+	},
+
+	head_attribute_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/down/head_attribute/spikes.png")
+	},
+	head_attribute_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/up/head_attribute/spikes.png")
+	},
+	head_attribute_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/right/head_attribute/spikes.png")
+	},
+	head_attribute_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/left/head_attribute/spikes.png")
+	},
+
+	head_attribute_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/down/head_attribute/spikes.png")
+	},
+	head_attribute_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/up/head_attribute/spikes.png")
+	},
+	head_attribute_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/right/head_attribute/spikes.png")
+	},
+	head_attribute_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/left/head_attribute/spikes.png")
+	},
+
+
+	pants_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/down/pants/pants.png")
+	},
+
+	pants_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/up/pants/pants.png")
+	},
+	pants_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/right/pants/pants.png")
+	},
+	pants_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/left/pants/pants.png")
+	},
+
+	pants_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/down/pants/pants.png")
+	},
+	pants_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/up/pants/pants.png")
+	},
+	pants_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/right/pants/pants.png")
+	},
+	pants_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/left/pants/pants.png")
+	},
+
+	pants_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/down/pants/pants.png")
+	},
+	pants_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/up/pants/pants.png")
+	},
+	pants_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/right/pants/pants.png")
+	},
+	pants_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/left/pants/pants.png")
+	},
+
+
+	shirts_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/down/shirts/shirt.png")
+	},
+	shirts_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/up/shirts/shirt.png")
+	},
+	shirts_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/right/shirts/shirt.png")
+	},
+	shirts_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/left/shirts/shirt.png")
+	},
+
+	shirts_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/down/shirts/shirt.png")
+	},
+	shirts_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/up/shirts/shirt.png")
+	},
+	shirts_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/right/shirts/shirt.png")
+	},
+	shirts_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/left/shirts/shirt.png")
+	},
+
+	shirts_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/down/shirts/shirt.png")
+	},
+	shirts_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/up/shirts/shirt.png")
+	},
+	shirts_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/right/shirts/shirt.png")
+	},
+	shirts_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/left/shirts/shirt.png")
+	},
+
+	shoes_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/down/shoes/shoes.png")
+	},
+	shoes_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/up/shoes/shoes.png")
+	},
+	shoes_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/left/shoes/shoes.png")
+	},
+	shoes_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/idle/assets/right/shoes/shoes.png")
+	},
+
+	shoes_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/down/shoes/shoes.png")
+	},
+	shoes_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/up/shoes/shoes.png")
+	},
+	shoes_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/right/shoes/shoes.png")
+	},
+	shoes_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/walk/assets/left/shoes/shoes.png")
+	},
+
+	shoes_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/down/shoes/shoes.png")
+	},
+	shoes_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/up/shoes/shoes.png")
+	},
+	shoes_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/right/shoes/shoes.png")
+	},
+	shoes_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Dragonoid/water dragonoid/female/swing/assets/left/shoes/shoes.png")
+	}	
+}
+
+var ogre_male = {
+	body_idle_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/idle/body/down/body.png")
+	},
+	body_idle_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/idle/body/up/body.png")
+	},
+	body_idle_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/idle/body/left/body.png")
+	},
+	body_idle_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/idle/body/right/body.png")
+	},
+
+	body_walk_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/walk/body/down/body.png")
+	},
+	body_walk_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/walk/body/up/body.png")
+	},
+	body_walk_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/walk/body/right/body.png")
+	},
+	body_walk_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/walk/body/left/body.png")
+	},
+
+	body_swing_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/swing/body/down/body.png")
+	},
+	body_swing_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/swing/body/up/body.png")
+	},
+	body_swing_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/swing/body/right/body.png")
+	},
+	body_swing_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/swing/body/left/body.png")
+	},
+
+
+	arms_idle_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/idle/body/down/arms.png")
+	},
+	arms_idle_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/idle/body/up/arms.png")
+	},
+	arms_idle_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/idle/body/left/arms.png")
+	},
+	arms_idle_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/idle/body/right/arms.png")
+	},
+
+	arms_walk_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/walk/body/down/arms.png")
+	},
+	arms_walk_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/walk/body/up/arms.png")
+	},
+	arms_walk_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/walk/body/right/arms.png")
+	},
+	arms_walk_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/walk/body/left/arms.png")
+	},
+
+	arms_swing_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/swing/body/down/arms.png")
+	},
+	arms_swing_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/swing/body/up/arms.png")
+	},
+	arms_swing_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/swing/body/right/arms.png")
+	},
+	arms_swing_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/male/swing/body/left/arms.png")
+	},
+
+
+
+	acc_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/down/accesory/pads.png")
+	},
+	acc_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/up/accesory/pads.png")
+	},
+	acc_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/left/accesory/pads.png")
+	},
+	acc_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/right/accesory/pads.png")
+	},
+
+	acc_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/down/accesory/pads.png")
+	},
+	acc_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/up/accesory/pads.png")
+	},
+	acc_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/right/accesory/pads.png")
+	},
+	acc_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/left/accesory/pads.png")
+	},
+
+	acc_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/down/accesory/pads.png")
+	},
+	acc_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/up/accesory/pads.png")
+	},
+	acc_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/right/accesory/pads.png")
+	},
+	acc_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/left/accesory/pads.png")
+	},
+
+
+	head_attribute_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/down/accesory/pads.png")
+	},
+	head_attribute_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/up/accesory/pads.png")
+	},
+	head_attribute_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/left/accesory/pads.png")
+	},
+	head_attribute_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/right/accesory/pads.png")
+	},
+
+	head_attribute_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/down/accesory/pads.png")
+	},
+	head_attribute_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/up/accesory/pads.png")
+	},
+	head_attribute_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/right/accesory/pads.png")
+	},
+	head_attribute_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/left/accesory/pads.png")
+	},
+
+	head_attribute_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/down/accesory/pads.png")
+	},
+	head_attribute_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/up/accesory/pads.png")
+	},
+	head_attribute_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/right/accesory/pads.png")
+	},
+	head_attribute_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/left/accesory/pads.png")
+	},
+
+
+	pants_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/down/pants/pants.png")
+	},
+
+	pants_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/up/pants/pants.png")
+	},
+	pants_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/right/pants/pants.png")
+	},
+	pants_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/left/pants/pants.png")
+	},
+
+	pants_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/down/pants/pants.png")
+	},
+	pants_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/up/pants/pants.png")
+	},
+	pants_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/right/pants/pants.png")
+	},
+	pants_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/left/pants/pants.png")
+	},
+
+	pants_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/down/pants/pants.png")
+	},
+	pants_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/up/pants/pants.png")
+	},
+	pants_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/right/pants/pants.png")
+	},
+	pants_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/left/pants/pants.png")
+	},
+
+
+	shirts_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/down/shirts/vest.png")
+	},
+	shirts_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/up/shirts/vest.png")
+	},
+	shirts_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/right/shirts/vest.png")
+	},
+	shirts_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/left/shirts/vest.png")
+	},
+
+	shirts_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/down/shirts/vest.png")
+	},
+	shirts_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/up/shirts/vest.png")
+	},
+	shirts_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/right/shirts/vest.png")
+	},
+	shirts_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/left/shirts/vest.png")
+	},
+
+	shirts_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/down/shirts/vest.png")
+	},
+	shirts_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/up/shirts/vest.png")
+	},
+	shirts_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/right/shirts/vest.png")
+	},
+	shirts_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/left/shirts/vest.png")
+	},
+
+	shoes_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/down/shoes/shoes.png")
+	},
+	shoes_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/up/shoes/shoes.png")
+	},
+	shoes_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/left/shoes/shoes.png")
+	},
+	shoes_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/idle/assets/right/shoes/shoes.png")
+	},
+
+	shoes_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/down/shoes/shoes.png")
+	},
+	shoes_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/up/shoes/shoes.png")
+	},
+	shoes_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/right/shoes/shoes.png")
+	},
+	shoes_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/walk/assets/left/shoes/shoes.png")
+	},
+
+	shoes_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/down/shoes/shoes.png")
+	},
+	shoes_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/up/shoes/shoes.png")
+	},
+	shoes_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/right/shoes/shoes.png")
+	},
+	shoes_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/male/swing/assets/left/shoes/shoes.png")
+	}	
+}
+var ogre_female = {
+	body_idle_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/idle/body/down/body.png")
+	},
+	body_idle_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/idle/body/up/body.png")
+	},
+	body_idle_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/idle/body/left/body.png")
+	},
+	body_idle_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/idle/body/right/body.png")
+	},
+
+	body_walk_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/walk/body/down/body.png")
+	},
+	body_walk_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/walk/body/up/body.png")
+	},
+	body_walk_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/walk/body/right/body.png")
+	},
+	body_walk_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/walk/body/left/body.png")
+	},
+
+	body_swing_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/swing/body/down/body.png")
+	},
+	body_swing_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/swing/body/up/body.png")
+	},
+	body_swing_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/swing/body/right/body.png")
+	},
+	body_swing_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/swing/body/left/body.png")
+	},
+
+
+	arms_idle_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/idle/body/down/arms.png")
+	},
+	arms_idle_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/idle/body/up/arms.png")
+	},
+	arms_idle_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/idle/body/left/arms.png")
+	},
+	arms_idle_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/idle/body/right/arms.png")
+	},
+
+	arms_walk_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/walk/body/down/arms.png")
+	},
+	arms_walk_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/walk/body/up/arms.png")
+	},
+	arms_walk_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/walk/body/right/arms.png")
+	},
+	arms_walk_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/walk/body/left/arms.png")
+	},
+
+	arms_swing_down = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/swing/body/down/arms.png")
+	},
+	arms_swing_up = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/swing/body/up/arms.png")
+	},
+	arms_swing_right = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/swing/body/right/arms.png")
+	},
+	arms_swing_left = {
+		0 : preload("res://Characters/Ogres/Kaijin/female/swing/body/left/arms.png")
+	},
+
+
+
+	acc_idle_down = {
+		0 : null,
+	},
+	acc_idle_up = {
+		0 : null,
+	},
+	acc_idle_left = {
+		0 : null,
+	},
+	acc_idle_right = {
+		0 : null,
+	},
+
+	acc_walk_down = {
+		0 : null,
+	},
+	acc_walk_up = {
+		0 : null,
+	},
+	acc_walk_right = {
+		0 : null,
+	},
+	acc_walk_left = {
+		0 : null,
+	},
+
+	acc_swing_down = {
+		0 : null,
+	},
+	acc_swing_up = {
+		0 : null,
+	},
+	acc_swing_right = {
+		0 : null,
+	},
+	acc_swing_left = {
+		0 : null,
+	},
+
+
+	head_attribute_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/left/head_attribute/hair.png")
+	},
+	head_attribute_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/right/head_attribute/hair.png")
+	},
+
+	head_attribute_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/left/head_attribute/hair.png")
+	},
+
+	head_attribute_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/left/head_attribute/hair.png")
+	},
+
+
+
+	pants_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/down/pants/pants.png")
+	},
+
+	pants_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/up/pants/pants.png")
+	},
+	pants_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/right/pants/pants.png")
+	},
+	pants_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/left/pants/pants.png")
+	},
+
+	pants_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/down/pants/pants.png")
+	},
+	pants_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/up/pants/pants.png")
+	},
+	pants_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/right/pants/pants.png")
+	},
+	pants_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/left/pants/pants.png")
+	},
+
+	pants_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/down/pants/pants.png")
+	},
+	pants_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/up/pants/pants.png")
+	},
+	pants_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/right/pants/pants.png")
+	},
+	pants_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/left/pants/pants.png")
+	},
+
+
+	shirts_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/down/shirts/shirt.png")
+	},
+	shirts_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/up/shirts/shirt.png")
+	},
+	shirts_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/right/shirts/shirt.png")
+	},
+	shirts_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/left/shirts/shirt.png")
+	},
+
+	shirts_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/down/shirts/shirt.png")
+	},
+	shirts_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/up/shirts/shirt.png")
+	},
+	shirts_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/right/shirts/shirt.png")
+	},
+	shirts_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/left/shirts/shirt.png")
+	},
+
+	shirts_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/down/shirts/shirt.png")
+	},
+	shirts_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/up/shirts/shirt.png")
+	},
+	shirts_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/right/shirts/shirt.png")
+	},
+	shirts_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/left/shirts/shirt.png")
+	},
+
+	shoes_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/down/shoes/shoes.png")
+	},
+	shoes_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/up/shoes/shoes.png")
+	},
+	shoes_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/left/shoes/shoes.png")
+	},
+	shoes_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/idle/assets/right/shoes/shoes.png")
+	},
+
+	shoes_walk_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/down/shoes/shoes.png")
+	},
+	shoes_walk_up = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/up/shoes/shoes.png")
+	},
+	shoes_walk_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/right/shoes/shoes.png")
+	},
+	shoes_walk_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/walk/assets/left/shoes/shoes.png")
+	},
+
+	shoes_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/down/shoes/shoes.png")
+	},
+	shoes_swing_up = {
+		0 : null,
+		1 : null
+		#### MISSING ####
+	#	1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/up/shoes/shoes.png")
+	},
+	shoes_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/right/shoes/shoes.png")
+	},
+	shoes_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Ogres/Kaijin/female/swing/assets/left/shoes/shoes.png")
+	}	
+}
 
 # INDEX CHANGES ATTRIBUTE STYLE
 var body_index: int = 0
@@ -3471,17 +5447,17 @@ func returnToolSprite(toolName, direction):
 	
 	
 var pickaxe = {
-	down = preload("res://Characters/Goblin/male/swing/assets/down/pickaxe/pickaxe_swing_1.png"), 
-	up = preload("res://Characters/Goblin/male/swing/assets/up/pickaxe/pickaxe_swing_1.png"), 
-	left = preload("res://Characters/Goblin/male/swing/assets/left/pickaxe/pickaxe_swing_1.png"), 
-	right = preload("res://Characters/Goblin/male/swing/assets/right/pickaxe/pickaxe_swing_1.png")
+	down = preload("res://Characters/Weapon swings/down/pickaxe.png"), 
+	up = preload("res://Characters/Weapon swings/up/pickaxe.png"), 
+	left = preload("res://Characters/Weapon swings/left/pickaxe.png"), 
+	right = preload("res://Characters/Weapon swings/right/pickaxe.png")
 }
 
 var axe = {
-	down = preload("res://Characters/Goblin/male/swing/assets/down/pickaxe/goblin_front_SWING_axe.png"), 
-	up =  preload("res://Characters/Goblin/male/swing/assets/up/pickaxe/goblin_back_SWING_axe.png"), 
-	left = preload("res://Characters/Goblin/male/swing/assets/left/pickaxe/axe_swing_1.png"), 
-	right = preload("res://Characters/Goblin/male/swing/assets/right/pickaxe/axe_swing_1.png")
+	down = preload("res://Characters/Weapon swings/down/axe.png"), 
+	up =  preload("res://Characters/Weapon swings/up/axe.png"), 
+	left = preload("res://Characters/Weapon swings/left/axe.png"), 
+	right = preload("res://Characters/Weapon swings/right/axe.png")
 }
 
 
@@ -3489,17 +5465,17 @@ func _ready():
 	randomizeAttributes()
 
 var rng = RandomNumberGenerator.new()
-var characters = [goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_male, lesser_demon_female, lesser_spirit, succubus]
+var characters = [ogre_female, ogre_male, water_draganoid_female, water_draganoid_male, seraphim_female, seraphim_male, goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_male, lesser_demon_female, lesser_spirit, succubus]
 func randomizeAttributes():
 	rng.randomize()
-	#characters.shuffle()
-	var character = characters[9]
+	characters.shuffle()
+	var character = characters[2]
 	
 	acc_index = character.acc_idle_down.size() - 1
 	headAtr_index = character.head_attribute_idle_down.size() - 1
 	pants_index = character.pants_idle_down.size() - 1
 	shirts_index =  character.shirts_idle_down.size() - 1
-	shoes_index = character.shoes_idle_down.size() - 1
+	shoes_index = character.shoes_idle_down.size() - 2
 	
 	body_sprites = {
 	'idle_down' : character.body_idle_down[body_index], 

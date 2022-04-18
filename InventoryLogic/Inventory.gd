@@ -33,7 +33,7 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
-	
+
 func _input(_event):
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()

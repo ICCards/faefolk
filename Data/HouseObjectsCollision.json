@@ -1,0 +1,86 @@
+{
+"Fireplace": {
+    "X" : 2,
+    "Y" : 1,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Crafting_table": {
+    "X" : 2,
+    "Y" : 1,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Shelves": {
+    "X" : 2,
+    "Y" : 1,
+    "CollisionEnabled": true,
+    "FloorObject": true
+}
+,"Left_chair": {
+    "X" : 1,
+    "Y" : 1,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Middle_chair": {
+    "X" : 1,
+    "Y" : 1,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Right_chair": {
+    "X" : 1,
+    "Y" : 1,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Rug": {
+    "X" : 4,
+    "Y" : 3,
+    "CollisionEnabled": false,
+    "FloorObject": true
+},
+"Bed": {
+    "X" : 2,
+    "Y" : 3,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Side_dresser": {
+    "X" : 1,
+    "Y" : 2,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Table": {
+    "X" : 2,
+    "Y" : 2,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Small_dresser": {
+    "X" : 2,
+    "Y" : 1,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Window": {
+    "X": 1,
+    "Y": 2,
+    "CollisionEnabled": false,
+    "FloorObject": false
+},
+"Stool": {
+    "X": 1,
+    "Y": 1,
+    "CollisionEnabled": true,
+    "FloorObject": true
+},
+"Painting1": {
+    "X": 1,
+    "Y": 2,
+    "CollisionEnabled": false,
+    "FloorObject": false
+}
+}

@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://InventoryLogic/PlaceSeedsObject.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=1]
 
 [node name="PlaceSeedsObject" type="Node2D"]
-script = ExtResource( 1 )
+script = SubResource( 1 )
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0.568627, 0.0509804, 0.0509804, 1 )
