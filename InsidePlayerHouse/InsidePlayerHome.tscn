@@ -519,7 +519,6 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 extents = Vector2( 32, 24.5 )
 
 [node name="InsidePlayerHome" type="YSort"]
-z_index = 1
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]

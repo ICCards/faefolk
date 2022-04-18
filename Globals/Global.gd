@@ -5475,7 +5475,7 @@ func randomizeAttributes():
 	headAtr_index = character.head_attribute_idle_down.size() - 1
 	pants_index = character.pants_idle_down.size() - 1
 	shirts_index =  character.shirts_idle_down.size() - 1
-	shoes_index = character.shoes_idle_down.size() - 2
+	shoes_index = character.shoes_idle_down.size() - 1
 	
 	body_sprites = {
 	'idle_down' : character.body_idle_down[body_index], 

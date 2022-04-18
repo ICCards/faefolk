@@ -4,13 +4,13 @@ extends Node2D
 var image 
 var pos
 
+
 func init(new_image, new_pos):
 	pos = new_pos
 	image = new_image
 
 
 func _ready():
-	is_colliding_other_object = false
 	$HouseImageTextureRect.texture = load("res://Assets/house_objects/" + image +  ".png")
 	$CollisionBox.scale.x = JsonData.house_objects_data[image]["X"]
 	$CollisionBox.scale.y = JsonData.house_objects_data[image]["Y"]
@@ -67,7 +67,6 @@ func _physics_process(delta):
 		var mousePos = get_global_mouse_position() + Vector2(-16, 16)
 		mousePos = mousePos.snapped(Vector2(32,32))
 		position = mousePos 
-		print(is_colliding_other_object)
 		if is_colliding_other_object or validateTileBoundary(position / 32):
 			$ColorIndicator.texture = load("res://Assets/red_square.png" )
 		else:

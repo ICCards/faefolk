@@ -523,7 +523,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[node name="TreeObject" type="Node2D"]
+[node name="TreeObject" type="YSort"]
 z_index = 1
 script = ExtResource( 4 )
 
