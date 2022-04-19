@@ -46,7 +46,7 @@ func makeRoadMap():
 	for x in mapSize.x:
 		for y in mapSize.y:
 			var a = simplex_noise.get_noise_2d(x,y)
-			if x > 3.0 and x < mapSize.x - 3.0 and y > 3.0 and y < mapSize.y - 3.0:
+			if x > 2.0 and x < mapSize.x - 2.0 and y > 2.0 and y < mapSize.y - 2.0:
 				if a < roadCap.x and a > roadCap.y:
 					wall_map.set_cell(x, y, -1)
 					road_map.set_cell(x,y,1)

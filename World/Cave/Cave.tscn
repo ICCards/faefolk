@@ -101,7 +101,10 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
+mapSize = Vector2( 600, 600 )
 noise_period = 16
+noise_persistence = 7.0
+roadCap = Vector2( 0.5, 0.03 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
