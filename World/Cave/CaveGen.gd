@@ -1,19 +1,22 @@
 extends Node
 
-export(bool) var redraw setget redraw
-export(int) var map_width = 280
-export(int) var map_height = 220
-
+#export(bool) var redraw setget redraw
+export(Vector2) var mapSize = Vector2(280,220)
 export(String) var world_seed = "its a complex cave mapp"
-export(int) var noise_octaves = 3
-export(int) var noise_period = 3
-export(float) var noise_persistence = 0.7
-export(float) var noise_lacunarity = 0.4
+export(int) var noise_octaves = 1.0
+export(int) var noise_period = 12
+export(float) var noise_persistence = 0.5
+export(float) var noise_lacunarity = 2.0
 export(float) var tileId = 0
 export(float) var threshold = -0.1
 
-onready var ground_map = $GrassGround
-onready var dirt_map = $DirtGround
+export(float) var wallCap = 1
+#export(Vector2) var grassCap = Vector2(1,0.3)
+export(Vector2) var roadCap = Vector2(0.4,0.05)
+export(Vector3) var decorationCap = Vector3(0.4,0.3,0.04)
+
+onready var grass_map = $GrassGround
+onready var road_map = $DirtGround
 onready var wall_map = $CaveWalls
 onready var ore_map = $Ores
 
@@ -22,27 +25,46 @@ enum Tiles { GOLD, SILVER, STONE }
 var simplex_noise : OpenSimplexNoise = OpenSimplexNoise.new()
 
 func _ready() -> void:
-	redraw()
-
-func is_cell_empty(x: int, y: int) -> bool:
-	return ground_map.get_cell(x, y) == TileMap.INVALID_CELL
-	
-func redraw(value = null) -> void:
-	if ground_map == null:
-		return
-	clear()
-	generate()
-	#generateTracks()
-	
-func clear() -> void:
-	ground_map.clear()
-	
-func generate() -> void:
 	simplex_noise.seed = self.world_seed.hash()
 	simplex_noise.octaves = self.noise_octaves
 	simplex_noise.period = self.noise_period
 	simplex_noise.persistence = self.noise_persistence
 	simplex_noise.lacunarity = self.noise_lacunarity
+	makeWallMap()
+	#makeGrassMap()
+	makeRoadMap()
+
+#func makeGrassMap():
+	#for x in mapSize.x:
+		#for y in mapSize.y:
+			#var a = simplex_noise.get_noise_2d(x,y)
+			#if a < grassCap.x and a > grassCap.y:
+				#wall_map.set_cell(x,y,0)
+	#wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))						
+
+func makeRoadMap():
+	for x in mapSize.x:
+		for y in mapSize.y:
+			var a = simplex_noise.get_noise_2d(x,y)
+			if x > 3.0 and x < mapSize.x - 3.0 and y > 3.0 and y < mapSize.y - 3.0:
+				if a < roadCap.x and a > roadCap.y:
+					wall_map.set_cell(x, y, -1)
+					road_map.set_cell(x,y,1)
+	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))			
+	road_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+
+func makeWallMap():
+	for x in mapSize.x:
+		for y in mapSize.y:
+			#var a = simplex_noise.get_noise_2d(x,y)
+			#if a < wallCap:
+			grass_map.set_cell(x,y,0)
+			wall_map.set_cell(x,y,0)
+	grass_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+	
+func generate() -> void:
+	
 	for x in range(-self.map_width / 2, self.map_width / 2):
 		for y in range(-self.map_height / 2, self.map_height / 2):
 			var value = generate_threshold(simplex_noise.get_noise_2d(x, y))
@@ -62,11 +84,11 @@ func generate() -> void:
 	#addWall()
 	#removeWalls()
 	#removeWalls()
-	addBorders()
+	#addBorders()
 	#addOres()
-	self.ground_map.update_dirty_quadrants()
-	self.dirt_map.update_dirty_quadrants()
-	self.wall_map.update_dirty_quadrants()
+	#self.ground_map.update_dirty_quadrants()
+	#self.dirt_map.update_dirty_quadrants()
+	#self.wall_map.update_dirty_quadrants()
 	
 func _set_autotile(x : int, y : int) -> void:
 	self.ground_map.set_cell(
@@ -99,23 +121,31 @@ func generate_threshold(noise_level: float):
 		return 0
 
 func addWall():
-	var cells = self.ground_map.get_used_cells()
+	var cells = self.wall_map.get_used_cells()
 	for cell in cells:
-		var count = 0
-		var left = self.wall_map.get_cell(cell.x-1, cell.y) == TileMap.INVALID_CELL
-		var right = self.wall_map.get_cell(cell.x+1, cell.y) == TileMap.INVALID_CELL
+
 		var top = self.wall_map.get_cell(cell.x, cell.y-1) == TileMap.INVALID_CELL
 		var bottom = self.wall_map.get_cell(cell.x, cell.y+1) == TileMap.INVALID_CELL
-		if left == false:
-			count = count + 1
-		if right == false:
-			count = count + 1
-		if top == false:
-			count = count + 1
-		if bottom == false:
-			count = count + 1
-		if count >= 2:
-			_set_autotileWall(cell.x,cell.y)
+		var left = self.wall_map.get_cell(cell.x-1, cell.y) == TileMap.INVALID_CELL
+		var right = self.wall_map.get_cell(cell.x+1, cell.y) == TileMap.INVALID_CELL
+		
+		var topLeft = self.wall_map.get_cell(cell.x-1, cell.y+1) == TileMap.INVALID_CELL
+		var bottomLeft = self.wall_map.get_cell(cell.x-1, cell.y-1) == TileMap.INVALID_CELL
+		var topRight = self.wall_map.get_cell(cell.x+1, cell.y+1) == TileMap.INVALID_CELL
+		var bottomRight = self.wall_map.get_cell(cell.x+1, cell.y-1) == TileMap.INVALID_CELL
+
+		if topLeft:
+			if top == true and bottom == true and right == true and left == true:
+				_set_autotileWall(cell.x-1, cell.y+1)
+		if bottomLeft:
+			if top == true and bottom == true and right == true and left == true:
+				_set_autotileWall(cell.x-1, cell.y-1)
+		if topRight:
+			if top == true and bottom == true and right == true and left == true:
+				_set_autotileWall(cell.x+1, cell.y+1)
+		if bottomRight:
+			if top == true and bottom == true and right == true and left == true:
+				_set_autotileWall(cell.x+1, cell.y-1)
 	self.wall_map.update_dirty_quadrants()
 
 func removeWalls():
