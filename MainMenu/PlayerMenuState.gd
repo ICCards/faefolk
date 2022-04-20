@@ -16,15 +16,37 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("ui_left"):
 		setAnimationTexture('walk_left')
 		velocity.x -= 1.0
+		$AudioStreamPlayer.stream = Global.dirt_footsteps
 	if Input.is_action_pressed("ui_right"):
 		setAnimationTexture('walk_right')	
 		velocity.x += 1.0
+		$AudioStreamPlayer.stream = Global.dirt_footsteps
 	if (Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_left") == false):
 		velocity = Vector2.ZERO
 		setAnimationTexture('idle_down')
+		$AudioStreamPlayer.stream = Global.dirt_footsteps
+		
 	velocity = velocity.normalized()
 	move_and_slide(velocity * speed)
+	
+	
+#func _input(event):
+#	if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right"):
+#		playSound = true
+	#_play_sound_effect()
+#	else:
+#		#playSound = false
+#		print("stop")
+#		$AudioStreamPlayer.stop()
 
+
+var playSound = false
+func _play_sound_effect():
+	if playSound:
+		$AudioStreamPlayer.stream = Global.dirt_footsteps
+		$AudioStreamPlayer.play()
+	else:
+		$AudioStreamPlayer.stop()
 
 func setAnimationTexture(var anim):
 	bodySprite.texture = Global.body_sprites[anim]
@@ -38,6 +60,7 @@ func setAnimationTexture(var anim):
 	
 func _ready():
 	animPlayer.play("idle")
+	$AudioStreamPlayer.play()
 	Global.randomizeAttributes()
 	bodySprite.texture = Global.body_sprites['idle_down']
 	armsSprite.texture = Global.arms_sprites['idle_down']

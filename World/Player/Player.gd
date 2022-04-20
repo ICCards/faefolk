@@ -35,16 +35,11 @@ func _process(delta) -> void:
 	else: 
 		idle_state(direction)
 
-func _input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if event.is_action_pressed("mouse_click") and itemCategory == "Seeds":
-			place_seed(item_name)
 
 func _whoAmI(_value):
 	print("THREAD FUNC!")
-	var result = api.query()
+	#var result = api.query()
+	var result = api.mint("wood", "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
 	call_deferred("loadDone")
 	return result
 
@@ -53,43 +48,42 @@ func loadDone():
 	print(value)	
 			
 func _unhandled_input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false and get_owner() != get_node("/root/InsidePlayerHome"):
-		print(get_owner())
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon":
+		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "World":
 			state = SWING
+			swing_state(event, item_name)
 			if (thread.is_active()):
 				# Already working
 				return
 			print("START THREAD!")
 			thread.start(self,"_whoAmI",null)
-			swing_state(event, item_name)
-
 
 
 
 func movement_state(_delta):
 	animation_player.play("movement")
 	var velocity = Vector2.ZERO			
-	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
+	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1.0
 		direction = "UP"
 		walk_state(direction)
-	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
+	if Input.is_action_pressed("ui_down"):
 		velocity.y += 1.0
 		direction = "DOWN"
 		walk_state(direction)
-	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
+	if Input.is_action_pressed("ui_left"):
 		velocity.x -= 1.0
 		direction = "LEFT"
 		walk_state(direction)
-	if Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
+	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1.0
 		direction = "RIGHT"
 		walk_state(direction)		
-	if Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false:
+	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
 		idle_state(direction)
+		$SoundEffects.stream_paused = true
 			
 	velocity = velocity.normalized()
 	move_and_slide(velocity * speed)	
@@ -97,6 +91,7 @@ func movement_state(_delta):
 
 var swingActive = false
 func swing_state(_delta, weaponType):
+		$SoundEffects.stream_paused = true
 		if !swingActive:
 				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				swingActive = true
@@ -115,9 +110,11 @@ func swing_state(_delta, weaponType):
 
 
 func idle_state(direction):
+	$SoundEffects.stream_paused = true
 	setPlayerTexture("idle_" + direction.to_lower())
 
 func walk_state(direction):
+	$SoundEffects.stream_paused = false
 	setPlayerTexture("walk_" + direction.to_lower())
 
 func set_melee_collision_layer(toolName):
@@ -141,8 +138,29 @@ func setPlayerTexture(var anim):
 	shirtsSprite.set_texture(Global.shirts_sprites[anim])
 	shoesSprite.set_texture(Global.shoes_sprites[anim])
 	
+var rng = RandomNumberGenerator.new()
+var randomNum
+func _play_background_music():
+	rng.randomize()
+	$BackgroundMusic.stream = Global.background_music[rng.randi_range(0, Global.background_music.size() - 1)]
+	$BackgroundMusic.play()
+	yield($BackgroundMusic, "finished")
+	_play_background_music()
+	
 func _ready():
+	setPlayerState(get_owner())
 	setPlayerTexture('idle_down')
+	$SoundEffects.play()
+	_play_background_music()
+
+var playerState
+func setPlayerState(ownerNode):
+	if str(ownerNode).substr(0, 5) == "World":
+		playerState = "World"
+		$SoundEffects.stream = Global.dirt_footsteps
+	else:
+		playerState = "Home"
+		$SoundEffects.stream = Global.wood_footsteps
 
 
 var sceneTransitionFlag = false

@@ -143,4 +143,7 @@ anims/RESET = SubResource( 3 )
 anims/small_ore_break = SubResource( 4 )
 anims/small_ore_hit_right = SubResource( 5 )
 
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+volume_db = -12.0
+
 [connection signal="area_entered" from="SmallHurtBox" to="." method="_on_SmallHurtBox_area_entered"]

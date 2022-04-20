@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/For Queen and Country.mp3-59c4c6e192c7272249c6dfa5e3a1a2b8.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/For Queen and Country.mp3"
+dest_files=[ "res://.import/For Queen and Country.mp3-59c4c6e192c7272249c6dfa5e3a1a2b8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/A World of Possibilities.mp3-31d1c059c2eb8ef13069407865e8dddf.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/A World of Possibilities.mp3"
+dest_files=[ "res://.import/A World of Possibilities.mp3-31d1c059c2eb8ef13069407865e8dddf.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

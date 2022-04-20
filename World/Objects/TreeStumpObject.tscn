@@ -137,7 +137,6 @@ tracks/0/keys = {
 }
 
 [node name="TreeStumpObject" type="Node2D"]
-z_index = 1
 script = ExtResource( 2 )
 
 [node name="TreeSprites" type="Node2D" parent="."]
@@ -170,5 +169,8 @@ shape = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 anims/stump_destroyed = SubResource( 3 )
 anims/stump_hit_right = SubResource( 4 )
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+volume_db = -12.0
 
 [connection signal="area_entered" from="StumpHurtBox" to="." method="_on_StumpHurtBox_area_entered"]

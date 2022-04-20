@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Between the Willows.mp3-ac02617f6ebdda3083e11aa2cb198b1f.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/Between the Willows.mp3"
+dest_files=[ "res://.import/Between the Willows.mp3-ac02617f6ebdda3083e11aa2cb198b1f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

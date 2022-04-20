@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/A Fool's Errand.mp3-db2b73cc7cd0a695981eab705f298b0e.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/A Fool's Errand.mp3"
+dest_files=[ "res://.import/A Fool's Errand.mp3-db2b73cc7cd0a695981eab705f298b0e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

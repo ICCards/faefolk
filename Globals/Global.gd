@@ -1,6 +1,54 @@
 extends Node
 
+### Sound effects ##
+var wood_footsteps = preload("res://Assets/Sound effects/wood footsteps.mp3")
+var dirt_footsteps = preload("res://Assets/Sound effects/dirt footsteps.mp3")
 
+var button_hover = preload("res://Assets/Sound effects/UI/button hover.mp3")
+var button_select = preload("res://Assets/Sound effects/UI/button select.mp3")
+
+var door_open = preload("res://Assets/Sound effects/door open.mp3")
+var door_close = preload("res://Assets/Sound effects/door close.mp3")
+
+var ore_hit = [
+	preload("res://Assets/Sound effects/Ore/Ore hit 1.mp3"),
+	preload("res://Assets/Sound effects/Ore/Ore hit 2.mp3"),
+	preload("res://Assets/Sound effects/Ore/Ore hit 3.mp3"),
+	]
+
+var ore_break = [
+	preload("res://Assets/Sound effects/Ore/Ore break 1.mp3"),
+	preload("res://Assets/Sound effects/Ore/Ore break 2.mp3"),
+	preload("res://Assets/Sound effects/Ore/Ore break 3.mp3")
+	]
+
+var tree_hit = [
+	preload("res://Assets/Sound effects/Tree/Tree hit 1.mp3"),
+	preload("res://Assets/Sound effects/Tree/Tree hit 2.mp3"),
+	preload("res://Assets/Sound effects/Tree/Tree hit 3.mp3")
+]
+
+var tree_break = preload("res://Assets/Sound effects/Tree/Falling tree.mp3")
+var stump_break = preload("res://Assets/Sound effects/Tree/Stump break.mp3")
+
+### Music ###
+var title_music = preload("res://Assets/music/TitleMusic.mp3")
+var background_music = [
+	preload("res://Assets/music/A Fool\'s Errand.mp3"),
+	preload("res://Assets/music/Highway in the Sun.mp3"),
+	preload("res://Assets/music/The Norman Kings.mp3"),
+	preload("res://Assets/music/The Way to the Sky.mp3"),
+	preload("res://Assets/music/A Celtic Blessing.mp3"),
+	preload("res://Assets/music/A World of Possibilities.mp3"),
+	preload("res://Assets/music/Between the Willows.mp3"),
+	preload("res://Assets/music/Bombay Nights.mp3"),
+	preload("res://Assets/music/Eyes of Yours.mp3"),
+	preload("res://Assets/music/I Give Ye My Spirit.mp3"),
+	preload("res://Assets/music/Rise of an Empire.mp3"),
+	preload("res://Assets/music/You Seen My Coat.mp3")
+]
+
+### Characters ###
 var goblin_male = {
 	body_idle_down = {
 		0 : preload("res://Characters/Goblin/male/idle/body/down/body.png")
@@ -2236,53 +2284,53 @@ var lesser_demon_male = {
 
 	shirts_idle_down = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/IDLE/assets/down/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/IDLE/assets/down/shirts/breastplate.png")
 	},
 	shirts_idle_up = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/IDLE/assets/up/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/IDLE/assets/up/shirts/breastplate.png")
 	},
 	shirts_idle_right = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/IDLE/assets/right/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/IDLE/assets/right/shirts/breastplate.png")
 	},
 	shirts_idle_left = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/IDLE/assets/left/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/IDLE/assets/left/shirts/breastplate.png")
 	},
 
 	shirts_walk_down = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/WALK/assets/down/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/WALK/assets/down/shirts/breastplate.png")
 	},
 	shirts_walk_up = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/WALK/assets/up/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/WALK/assets/up/shirts/breastplate.png")
 	},
 	shirts_walk_right = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/WALK/assets/right/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/WALK/assets/right/shirts/breastplate.png")
 	},
 	shirts_walk_left = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/WALK/assets/left/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/WALK/assets/left/shirts/breastplate.png")
 	},
 
 	shirts_swing_down = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/SWING/assets/down/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/SWING/assets/down/shirts/breastplate.png")
 	},
 	shirts_swing_up = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/SWING/assets/up/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/SWING/assets/up/shirts/breastplate.png")
 	},
 	shirts_swing_right = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/SWING/assets/right/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/SWING/assets/right/shirts/breastplate.png")
 	},
 	shirts_swing_left = {
 		0 : null,
-		1 : preload("res://Characters/lesser demon/male/SWING/assets/left/shirts/breastplate.png")
+		#1 : preload("res://Characters/lesser demon/male/SWING/assets/left/shirts/breastplate.png")
 	},
 
 	shoes_idle_down = {
@@ -5465,11 +5513,11 @@ func _ready():
 	randomizeAttributes()
 
 var rng = RandomNumberGenerator.new()
-var characters = [ogre_female, ogre_male, water_draganoid_female, water_draganoid_male, seraphim_female, seraphim_male, goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_male, lesser_demon_female, lesser_spirit, succubus]
+var characters = [lesser_demon_male, ogre_female, ogre_male, water_draganoid_female, water_draganoid_male, seraphim_female, seraphim_male, goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_female, lesser_spirit, succubus]
 func randomizeAttributes():
 	rng.randomize()
 	characters.shuffle()
-	var character = characters[2]
+	var character = characters[0]
 	
 	acc_index = character.acc_idle_down.size() - 1
 	headAtr_index = character.head_attribute_idle_down.size() - 1

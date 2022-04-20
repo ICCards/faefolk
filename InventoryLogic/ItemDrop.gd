@@ -40,6 +40,7 @@ func _physics_process(_delta):
 		if distance < 6: 
 			PlayerInventory.add_item_to_hotbar(item_name, 1)
 			queue_free()
+	velocity.normalized()
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 func pick_up_item(body):

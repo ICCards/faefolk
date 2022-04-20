@@ -26,10 +26,16 @@ var smallOreHits: int = 2
 func _on_SmallHurtBox_area_entered(_area):
 	rng.randomize()
 	if smallOreHits == 0:
+		$SoundEffects.stream = Global.ore_break[rng.randi_range(0, 2)]
+		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", rng.randi_range(-10, 10), 50)
 		intitiateItemDrop(oreTypes[0], 0, 40)
 		animation_player.play("small_ore_break")
+		yield($SoundEffects, "finished")
+		queue_free()
 	if smallOreHits != 0:
+		$SoundEffects.stream = Global.ore_hit[rng.randi_range(0, 2)]
+		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", rng.randi_range(-10, 10), 40)
 		animation_player.play("small_ore_hit_right")
 		smallOreHits = smallOreHits - 1

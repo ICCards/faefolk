@@ -29,12 +29,16 @@ func setTreeBranchType(num):
 		treeObject = Images.returnTreeObject('D')
 
 func _on_BranchHurtBox_area_entered(area):
-	initiateTreeHitEffect(treeObject, "trunk break", 0, 64)
-	intitiateItemDrop("Wood", 0, 24)
+	$SoundEffects.stream = Global.stump_break
+	$SoundEffects.play()
+	$AnimationPlayer.play("break")
+	initiateTreeHitEffect(treeObject, "trunk break", 0, 50)
+	intitiateItemDrop("Wood", 0, 0)
+	yield($SoundEffects, "finished")
 	queue_free()
 
-### Effect functions		
 
+### Effect functions		
 		
 func initiateTreeHitEffect(tree, effect, positionX, positionY):
 	var trunkHitEffect = TrunkHitEffect.instance()

@@ -28,11 +28,17 @@ func setTexture(tree):
 var stumpHealth: int = 2
 func _on_StumpHurtBox_area_entered(area):
 	if stumpHealth == 0: 
+		$SoundEffects.stream = Global.stump_break
+		$SoundEffects.play()
 		stump_animation_player.play("stump_destroyed")
-		initiateTreeHitEffect(treeObject, "trunk break", 0, 64)
-		intitiateItemDrop("Wood", 0, 24)
+		initiateTreeHitEffect(treeObject, "trunk break", 0, 48)
+		intitiateItemDrop("Wood", 0, 0)
+		yield($SoundEffects, "finished")
+		queue_free()
 	
 	elif stumpHealth != 0 :
+		$SoundEffects.stream = Global.tree_hit[rng.randi_range(0,2)]
+		$SoundEffects.play()
 		if Player.get_position().x <= get_position().x:
 			stump_animation_player.play("stump_hit_right")
 			initiateTreeHitEffect(treeObject, "tree hit right", 15, 20)
@@ -44,12 +50,7 @@ func _on_StumpHurtBox_area_entered(area):
 			
 
 ### Effect functions		
-func initiateLeavesFallingEffect(tree, positionX, positionY):
-	var leavesEffect = LeavesFallEffect.instance()
-	leavesEffect.initLeavesEffect(tree)
-	world.add_child(leavesEffect)
-	leavesEffect.global_position = global_position + Vector2(positionX, positionY)
-		
+
 func initiateTreeHitEffect(tree, effect, positionX, positionY):
 	var trunkHitEffect = TrunkHitEffect.instance()
 	trunkHitEffect.init(tree, effect)

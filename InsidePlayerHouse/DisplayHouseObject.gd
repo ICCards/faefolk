@@ -28,6 +28,9 @@ func _ready():
 	$MovementCollision/CollisionShape2D.scale.x = JsonData.house_objects_data[image]["X"]
 	$MovementCollision/CollisionShape2D.scale.y = JsonData.house_objects_data[image]["Y"]
 	$MovementCollision/CollisionShape2D.disabled = !JsonData.house_objects_data[image]["CollisionEnabled"]
+	# rug disable ysort
+	if !JsonData.house_objects_data[image]["CollisionEnabled"]:
+		z_index -= 1
 
 
 
@@ -35,6 +38,7 @@ func _on_MouseInputBox_input_event(viewport, event, shape_idx):
 	var mousePos = get_global_mouse_position() + Vector2(-16, 16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	if event.is_action_pressed("mouse_click"):
+		$SoundEffects.play()
 		if moveItemFlag:
 			for i in range(PlayerInventory.player_home.size()):
 				if PlayerInventory.player_home[i][0] == image and !is_colliding_other_object and !validateTileBoundary(position / 32):
@@ -55,7 +59,7 @@ func validateTileBoundary(pos):
 		else: 
 			return false
 	else:
-		if pos.x < 0 or pos.x + JsonData.house_objects_data[image]["X"] - 1 > 19 or pos.y - (JsonData.house_objects_data[image]["Y"] - 1) < 2 or pos.y > 3:
+		if pos.x < 0 or pos.x + JsonData.house_objects_data[image]["X"] - 1 > 19 or pos.y - (JsonData.house_objects_data[image]["Y"] - 1) < 1 or pos.y > 3:
 			return true
 		else:
 			return false
@@ -75,12 +79,11 @@ func _physics_process(delta):
 
 var is_colliding_other_object = false
 
+func _on_CollisionBox_area_exited(area):
+	if $CollisionBox.get_overlapping_areas().size() <= 0:
+		is_colliding_other_object = false
+
 func _on_CollisionBox_area_entered(area):
 	is_colliding_other_object = true
-
-
-func _on_CollisionBox_area_exited(area):
-	is_colliding_other_object = false
-
 
 

@@ -135,3 +135,5 @@ frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerMenuState/CompositeSprites"]
 anims/idle = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerMenuState"]

@@ -2,16 +2,16 @@
 
 [ext_resource path="res://World/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/PlayerHome.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/World.gd" type="Script" id=8]
 [ext_resource path="res://World/Objects/PlayerHouseObject.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/YSort.gd" type="Script" id=10]
 
 [node name="World" type="Node2D"]
-script = ExtResource( 8 )
 
 [node name="YSort" type="YSort" parent="."]
+script = ExtResource( 10 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 969, 850 )
+position = Vector2( 930, 507 )
 
 [node name="BottomRight" parent="YSort/Player/Camera2D/Limits" index="0"]
 position = Vector2( 2016, 2912 )
@@ -19,9 +19,13 @@ position = Vector2( 2016, 2912 )
 [node name="TopLeft" parent="YSort/Player/Camera2D/Limits" index="1"]
 position = Vector2( -1632, 0 )
 
+[node name="SoundEffects" parent="YSort/Player" index="7"]
+volume_db = -8.0
+
 [node name="PlayerHouseObject" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 890, 419 )
 
 [node name="PlayerHome" parent="YSort" instance=ExtResource( 5 )]
+z_index = 0
 
 [editable path="YSort/Player"]

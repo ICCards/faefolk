@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/A Celtic Blessing.mp3-2bfd47244459767568dd47e1f619ab48.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/A Celtic Blessing.mp3"
+dest_files=[ "res://.import/A Celtic Blessing.mp3-2bfd47244459767568dd47e1f619ab48.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

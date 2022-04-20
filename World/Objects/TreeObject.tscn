@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/tree_sets/A/top.png" type="Texture" id=1]
 [ext_resource path="res://Assets/tree_sets/A/bottom.png" type="Texture" id=2]
 [ext_resource path="res://Assets/tree_sets/A/stump.png" type="Texture" id=3]
 [ext_resource path="res://World/Objects/TreeObject.gd" type="Script" id=4]
 [ext_resource path="res://Assets/tree_sets/A/leaves.png" type="Texture" id=5]
+[ext_resource path="res://Assets/tree_sets/A/chip.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.3008, 29.2031 )
@@ -119,6 +120,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [ Vector2( -130, -8 ) ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("TreeBreak2:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TreeBreak2:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 120, -8 ) ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "tree fall left"
@@ -229,6 +254,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [ Vector2( -120, -8 ) ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("TreeBreak2:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 1.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TreeBreak2:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -120, -8 ), Vector2( -120, -8 ) ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "tree fall right"
@@ -314,7 +363,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.7, 1.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 24, 4 ), Vector2( 32, 4 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 24, 4 ), Vector2( 32, -4 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("TreeSprites/TreeBottom:modulate")
@@ -323,7 +372,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 1.01 ),
+"times": PoolRealArray( 0, 0.74 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -339,6 +388,30 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 120, -8 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TreeBreak2:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 1.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TreeBreak2:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 120, -8 ), Vector2( 120, -8 ) ]
 }
 
 [sub_resource type="Animation" id=17]
@@ -523,8 +596,13 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[node name="TreeObject" type="YSort"]
-z_index = 1
+[sub_resource type="CanvasItemMaterial" id=18]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="TreeObject" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="TreeSprites" type="Node2D" parent="."]
@@ -587,13 +665,13 @@ anims/stump_hit_right = SubResource( 12 )
 material = SubResource( 15 )
 position = Vector2( -130, -8 )
 emitting = false
-amount = 20
+amount = 12
 lifetime = 1.5
 one_shot = true
 explosiveness = 1.0
 texture = ExtResource( 5 )
 emission_shape = 2
-emission_rect_extents = Vector2( 64, 16 )
+emission_rect_extents = Vector2( 64, 20 )
 direction = Vector2( 0, -1 )
 spread = 15.0
 gravity = Vector2( 0, 60 )
@@ -607,6 +685,34 @@ angle_random = 1.0
 scale_amount = 5.0
 anim_offset = 1.0
 anim_offset_random = 1.0
+
+[node name="TreeBreak2" type="CPUParticles2D" parent="."]
+material = SubResource( 18 )
+position = Vector2( 120, -8 )
+emitting = false
+amount = 10
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 6 )
+emission_shape = 2
+emission_rect_extents = Vector2( 64, 12 )
+direction = Vector2( 0, -1 )
+spread = 15.0
+gravity = Vector2( 0, 80 )
+initial_velocity = 45.0
+initial_velocity_random = 0.45
+orbit_velocity_random = 1.0
+angle_random = 1.0
+scale_amount = 3.0
+anim_offset = 1.0
+anim_offset_random = 1.0
+
+[node name="SoundEffectsTree" type="AudioStreamPlayer2D" parent="."]
+volume_db = -12.0
+
+[node name="SoundEffectsStump" type="AudioStreamPlayer2D" parent="."]
+volume_db = -12.0
 
 [connection signal="area_entered" from="StumpHurtBox" to="." method="_on_stumpHurtBox_area_entered"]
 [connection signal="area_entered" from="TreeHurtbox" to="." method="_on_Hurtbox_area_entered"]

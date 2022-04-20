@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/I Give Ye My Spirit.mp3-5acbd977ee8827061ab9c050afe9fe2d.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/I Give Ye My Spirit.mp3"
+dest_files=[ "res://.import/I Give Ye My Spirit.mp3-5acbd977ee8827061ab9c050afe9fe2d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

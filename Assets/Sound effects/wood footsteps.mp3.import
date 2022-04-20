@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wood footsteps.mp3-39091c5c4cb775647e792b154f203b82.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound effects/wood footsteps.mp3"
+dest_files=[ "res://.import/wood footsteps.mp3-39091c5c4cb775647e792b154f203b82.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
