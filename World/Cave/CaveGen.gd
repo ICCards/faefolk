@@ -13,12 +13,14 @@ export(float) var threshold = -0.1
 export(float) var wallCap = 1
 #export(Vector2) var grassCap = Vector2(1,0.3)
 export(Vector2) var roadCap = Vector2(0.4,0.05)
-export(Vector3) var decorationCap = Vector3(0.4,0.3,0.04)
+export(Vector2) var decorationCap = Vector2(0.4,0.05)
 
 onready var grass_map = $GrassGround
 onready var road_map = $DirtGround
 onready var wall_map = $CaveWalls
 onready var ore_map = $Ores
+onready var stones_decoration = $stones_decoration
+onready var lanterns = $lanterns
 
 enum Tiles { GOLD, SILVER, STONE }
 
@@ -33,14 +35,18 @@ func _ready() -> void:
 	makeWallMap()
 	#makeGrassMap()
 	makeRoadMap()
+	addDecorations()
 
-#func makeGrassMap():
-	#for x in mapSize.x:
-		#for y in mapSize.y:
-			#var a = simplex_noise.get_noise_2d(x,y)
-			#if a < grassCap.x and a > grassCap.y:
-				#wall_map.set_cell(x,y,0)
-	#wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))						
+	
+func makeWallMap():
+	for x in mapSize.x:
+		for y in mapSize.y:
+			grass_map.set_cell(x,y,0)
+			wall_map.set_cell(x,y,0)
+	grass_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+	
+
 
 func makeRoadMap():
 	for x in mapSize.x:
@@ -49,22 +55,30 @@ func makeRoadMap():
 			if x > 2.0 and x < mapSize.x - 2.0 and y > 2.0 and y < mapSize.y - 2.0:
 				if a < roadCap.x and a > roadCap.y:
 					wall_map.set_cell(x, y, -1)
-					road_map.set_cell(x,y,1)
-	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))			
+					road_map.set_cell(x, y, 1)
+	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 	road_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+	
+	
 
-func makeWallMap():
+
+func addDecorations():
 	for x in mapSize.x:
 		for y in mapSize.y:
-			#var a = simplex_noise.get_noise_2d(x,y)
-			#if a < wallCap:
-			grass_map.set_cell(x,y,0)
-			wall_map.set_cell(x,y,0)
-	grass_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
-	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+			var a = simplex_noise.get_noise_2d(x,y)
+			if x > 2.0 and x < mapSize.x - 2.0 and y > 2.0 and y < mapSize.y - 2.0:
+				if a < decorationCap.x and a > decorationCap.y:
+					var chance = randi() % 100
+					if chance < 7 and chance > 3:
+						var randTile = randi() % 90
+						stones_decoration.set_cell(x, y, randTile)
+					if chance < 2:
+						var randLantern = randi() % 3
+						lanterns.set_cell(x, y, randLantern)
+	stones_decoration.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+
 	
 func generate() -> void:
-	
 	for x in range(-self.map_width / 2, self.map_width / 2):
 		for y in range(-self.map_height / 2, self.map_height / 2):
 			var value = generate_threshold(simplex_noise.get_noise_2d(x, y))
@@ -189,20 +203,3 @@ func addBorders():
 			_set_autotileWall(cell.x,cell.y)
 			_set_autotileWall(cell.x,cell.y+1)
 	self.wall_map.update_dirty_quadrants()
-		
-func addOres():
-	var cells = self.ground_map.get_used_cells()
-	for cell in cells:
-		var wall = self.wall_map.get_cell(cell.x, cell.y) == TileMap.INVALID_CELL
-		var ground = self.ground_map.get_cell(cell.x, cell.y) != TileMap.INVALID_CELL
-		if wall && ground:
-			var value = randi() % 10
-			var chance = randi() % 3
-			if chance == 1:
-				if value > 7:
-					#ore_map.set_cell(cell.x, cell.y, Tiles.GOLD)
-				#if value > 4 && value < 7:
-					#ore_map.set_cell(cell.x, cell.y, Tiles.SILVER)
-				#f value < 4:
-					#ore_map.set_cell(cell.x, cell.y, Tiles.STONE)
-					pass

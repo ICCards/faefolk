@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light1A.png-bf56f078128f24899c5a139ea0e5d3cc.stex"
+path="res://.import/Decorative.png-4da7e02555807bd2a29939b15f863248.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/cave/lights/light1A.png"
-dest_files=[ "res://.import/light1A.png-bf56f078128f24899c5a139ea0e5d3cc.stex" ]
+source_file="res://Assets/cave/Decorative.png"
+dest_files=[ "res://.import/Decorative.png-4da7e02555807bd2a29939b15f863248.stex" ]
 
 [params]
 

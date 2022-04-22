@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light1B.png-df1ceea8627dd6faedc415f53fbf2495.stex"
+path="res://.import/greelLantern1.png-e89e96f87bc6dbadbeb64d3c9308a33d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/cave/lights/light1B.png"
-dest_files=[ "res://.import/light1B.png-df1ceea8627dd6faedc415f53fbf2495.stex" ]
+source_file="res://Assets/cave/lights/greenLantern/greelLantern1.png"
+dest_files=[ "res://.import/greelLantern1.png-e89e96f87bc6dbadbeb64d3c9308a33d.stex" ]
 
 [params]
 
