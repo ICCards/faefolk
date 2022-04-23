@@ -6,20 +6,28 @@ const ACCELERATION = 460
 onready var itemSprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 
+onready var api = Api
+var thread = Thread.new()
+
 var player = null
 var being_picked_up = false
 var item_name
 var randomInt
 var rng = RandomNumberGenerator.new()
 
+
 func initItemDropType(item_name_input):
 	item_name = item_name_input
+	if item_name == "Cobblestone":
+		item_name = "Stone"
+		
 
 func _ready():
 	itemSprite.texture = load("res://Assets/dropped_item_icon/" + item_name + ".png")
 	rng.randomize()
-	randomInt = rng.randi_range(1, 2)
+	randomInt = rng.randi_range(1, 4)
 	animationPlayer.play("Animate " + String(randomInt))
+	
 
 	
 var adjustedPosition
@@ -28,6 +36,10 @@ func adjustPosition(animation):
 		adjustedPosition = global_position + Vector2(48, 0)
 	elif animation == 2:
 		adjustedPosition = global_position + Vector2(-48, 0)
+	elif animation == 3:
+		adjustedPosition = global_position + Vector2(24, 0)
+	elif animation == 4:
+		adjustedPosition = global_position + Vector2(-24, 0)
 	
 func _physics_process(_delta):
 	if !being_picked_up:
@@ -37,7 +49,7 @@ func _physics_process(_delta):
 		var direction = adjustedPosition.direction_to(player.global_position)
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION)
 		var distance = adjustedPosition.distance_to(player.global_position)
-		if distance < 6: 
+		if distance < 4: 
 			PlayerInventory.add_item_to_hotbar(item_name, 1)
 			queue_free()
 	velocity.normalized()

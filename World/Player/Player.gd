@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-export(int) var speed = 260.0
-onready var api = Api
 onready var bodySprite = $CompositeSprites/Body
 onready var armsSprite = $CompositeSprites/Arms
 onready var accessorySprite = $CompositeSprites/Accessory
@@ -13,13 +11,29 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 
 
-var thread = Thread.new()
 	
 onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
 	SWING
 }
+
+#func _whoAmI(_value):
+#	print("THREAD FUNC!")
+#	#var result = api.query()
+#	var result = api.mint(item_name, "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
+#	call_deferred("loadDone")
+#	return result
+#
+#func loadDone():
+#	var value = thread.wait_to_finish()
+#	print(value)	
+#
+#	if (thread.is_active()):
+#		# Already working
+#		return
+#	print("START THREAD!")
+#	thread.start(self,"_whoAmI",null)
 
 onready var direction = "DOWN"
 
@@ -28,6 +42,7 @@ func _process(delta) -> void:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
+			#print(pickup_item)
 			$PickupZone.items_in_range.erase(pickup_item)
 		match state:
 			MOVEMENT:
@@ -35,18 +50,6 @@ func _process(delta) -> void:
 	else: 
 		idle_state(direction)
 
-
-func _whoAmI(_value):
-	print("THREAD FUNC!")
-	#var result = api.query()
-	var result = api.mint("wood", "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
-	call_deferred("loadDone")
-	return result
-
-func loadDone():
-	var value = thread.wait_to_finish()
-	print(value)	
-			
 func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
@@ -54,39 +57,46 @@ func _unhandled_input(event):
 		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "World":
 			state = SWING
 			swing_state(event, item_name)
-			if (thread.is_active()):
-				# Already working
-				return
-			print("START THREAD!")
-			thread.start(self,"_whoAmI",null)
+			
 
 
+var MAX_SPEED := 15.0
+var ACCELERATION := 6
+var FRICTION := 100
+var velocity := Vector2.ZERO
 
-func movement_state(_delta):
+func movement_state(delta):
 	animation_player.play("movement")
-	var velocity = Vector2.ZERO			
+	var input_vector = Vector2.ZERO			
 	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1.0
+		input_vector.y -= 1.0
 		direction = "UP"
 		walk_state(direction)
 	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1.0
+		input_vector.y += 1.0
 		direction = "DOWN"
 		walk_state(direction)
 	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1.0
+		input_vector.x -= 1.0
 		direction = "LEFT"
 		walk_state(direction)
 	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1.0
+		input_vector.x += 1.0
 		direction = "RIGHT"
 		walk_state(direction)		
 	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
 		idle_state(direction)
 		$SoundEffects.stream_paused = true
 			
-	velocity = velocity.normalized()
-	move_and_slide(velocity * speed)	
+	input_vector = input_vector.normalized()
+	
+	if input_vector != Vector2.ZERO:
+		velocity += input_vector * ACCELERATION * delta
+		velocity = velocity.clamped(MAX_SPEED * delta)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		
+	move_and_collide(velocity * MAX_SPEED)	
 
 
 var swingActive = false
@@ -139,7 +149,6 @@ func setPlayerTexture(var anim):
 	shoesSprite.set_texture(Global.shoes_sprites[anim])
 	
 var rng = RandomNumberGenerator.new()
-var randomNum
 func _play_background_music():
 	rng.randomize()
 	$BackgroundMusic.stream = Global.background_music[rng.randi_range(0, Global.background_music.size() - 1)]
@@ -151,7 +160,7 @@ func _ready():
 	setPlayerState(get_owner())
 	setPlayerTexture('idle_down')
 	$SoundEffects.play()
-	_play_background_music()
+	#_play_background_music()
 
 var playerState
 func setPlayerState(ownerNode):

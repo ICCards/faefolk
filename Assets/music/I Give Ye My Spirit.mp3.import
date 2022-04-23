@@ -11,5 +11,5 @@ dest_files=[ "res://.import/I Give Ye My Spirit.mp3-5acbd977ee8827061ab9c050afe9
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

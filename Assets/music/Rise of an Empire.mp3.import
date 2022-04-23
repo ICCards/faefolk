@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Rise of an Empire.mp3-cc4a47e18ad022bc7dce8b24faf580
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

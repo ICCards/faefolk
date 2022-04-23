@@ -11,5 +11,5 @@ dest_files=[ "res://.import/A Fool's Errand.mp3-db2b73cc7cd0a695981eab705f298b0e
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

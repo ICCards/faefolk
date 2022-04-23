@@ -11,5 +11,5 @@ dest_files=[ "res://.import/The Way to the Sky.mp3-3d739c7b7d26b616daaa137993962
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

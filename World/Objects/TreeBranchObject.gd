@@ -24,30 +24,30 @@ func setTreeBranchType(num):
 	elif num <= 5:
 		treeObject = Images.returnTreeObject('B')
 	elif num <= 8:
-		treeObject = Images.returnTreeObject('C')
-	else:
 		treeObject = Images.returnTreeObject('D')
+	else:
+		treeObject = Images.returnTreeObject('C')
 
 func _on_BranchHurtBox_area_entered(area):
 	$SoundEffects.stream = Global.stump_break
 	$SoundEffects.play()
 	$AnimationPlayer.play("break")
-	initiateTreeHitEffect(treeObject, "trunk break", 0, 50)
-	intitiateItemDrop("Wood", 0, 0)
+	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 50))
+	intitiateItemDrop("Wood", Vector2(0, 0))
 	yield($SoundEffects, "finished")
 	queue_free()
 
 
 ### Effect functions		
 		
-func initiateTreeHitEffect(tree, effect, positionX, positionY):
+func initiateTreeHitEffect(tree, effect, pos):
 	var trunkHitEffect = TrunkHitEffect.instance()
 	trunkHitEffect.init(tree, effect)
 	world.add_child(trunkHitEffect)
-	trunkHitEffect.global_position = global_position + Vector2(positionX, positionY)
+	trunkHitEffect.global_position = global_position + pos
 	
-func intitiateItemDrop(item, positionX, positionY):
+func intitiateItemDrop(item, pos):
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType(item)
 	world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + Vector2(positionX, positionY)
+	itemDrop.global_position = global_position + pos

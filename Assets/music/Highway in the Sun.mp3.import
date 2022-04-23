@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Highway in the Sun.mp3-29f527be0e3f3ea8628971d0739ca
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

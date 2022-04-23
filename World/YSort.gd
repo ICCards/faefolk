@@ -4,9 +4,8 @@ onready var TreeObject = preload("res://World/Objects/TreeObject.tscn")
 onready var BranchObject = preload("res://World/Objects/TreeBranchObject.tscn")
 onready var StumpObject = preload("res://World/Objects/TreeStumpObject.tscn")
 onready var OreObject = preload("res://World/Objects/OreObjectLarge.tscn")
-onready var SmallOreObject = preload("res://World/Objects/SmallOreObject.tscn")
+onready var SmallOreObject = preload("res://World/Objects/OreObjectSmall.tscn")
 
-onready var world = get_tree().current_scene
 var rng = RandomNumberGenerator.new()
 
 func _ready():

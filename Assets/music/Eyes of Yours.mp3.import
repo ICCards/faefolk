@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Eyes of Yours.mp3-d4cf0b418dac20f1437cf49d0fcc32c9.m
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/A Celtic Blessing.mp3-2bfd47244459767568dd47e1f619ab
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

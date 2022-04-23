@@ -19,7 +19,7 @@ Global="*res://Globals/Global.gd"
 Images="*res://Globals/Images.gd"
 JsonData="*res://Data/JSONData.gd"
 PlayerInventory="*res://InventoryLogic/PlayerInventory.gd"
-SceneChanger="*res://Globals/SceneChanger.tscn"
+SceneChanger="*res://Globals/Effects/SceneChanger.tscn"
 Api="*res://api.gdns"
 
 [display]

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Bombay Nights.mp3-b787fd6229b729dc436b87d7184041a6.m
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

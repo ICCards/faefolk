@@ -136,10 +136,81 @@ tracks/12/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/13/type = "value"
+tracks/13/path = NodePath("TreeChips/TreeChip1:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TreeChips/TreeChip2:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TreeChips/TreeChip3:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TreeChips/TreeChip4:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TreeChips/TreeChip5:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TreeChips/TreeChip6:modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "tree hit left"
-length = 0.8
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("TreeChips/TreeChip1:position:x")
 tracks/0/interp = 1
@@ -147,8 +218,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, -20, 0, 0, 0, 0, -28, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"points": PoolRealArray( 0, 0, 0, 0, 0, -32, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("TreeChips/TreeChip1:position:y")
@@ -157,8 +228,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0.12, -14.7291, 0, -0.14, -22.3711, 0, -0.919254, -8.72536, -0.12, -5.11435, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"points": PoolRealArray( 0, 0, 0, 0.2, -20.3687, 0, -0.2, -20.5245, 0, -0.919254, -8.72536, -0.3, -4.2441, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("TreeChips/TreeChip2:position:x")
@@ -168,7 +239,7 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "points": PoolRealArray( 0, 0, 0, 0, 0, -17, 0, 0, 0, 0, -24, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("TreeChips/TreeChip2:position:y")
@@ -177,8 +248,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.13, -12.9737, 7.99076, -0.1, -24.3907, 0.000545355, 0.060706, -5.22607, -0.16, 0.62516, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"points": PoolRealArray( 0, -0.25, 0, 0.13, -12.9737, -0.780205, -0.1, -10.0474, 0.000545355, 0.060706, -5.22607, -0.3, -3.65434, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("TreeChips/TreeChip3:position:x")
@@ -188,7 +259,7 @@ tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
 "points": PoolRealArray( 0, 0, 0, 0, 0, -14, 0, 0, 0, 0, -21, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/5/type = "bezier"
 tracks/5/path = NodePath("TreeChips/TreeChip3:position:y")
@@ -198,7 +269,7 @@ tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.08, -27.2529, 5.45944, -0.1, -30, 0, 0.19982, -11.0253, -0.21, -4.22679, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/6/type = "bezier"
 tracks/6/path = NodePath("TreeChips/TreeChip5:position:x")
@@ -208,7 +279,7 @@ tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
 "points": PoolRealArray( 0, 0, 0, 0, 0, -16, 0, 0, 0, 0, -24, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/7/type = "bezier"
 tracks/7/path = NodePath("TreeChips/TreeChip5:position:y")
@@ -218,7 +289,7 @@ tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.09, -16.8332, 0, -0.11, -19.4128, 0.2, -14.6476, 3.11313, 0, 0.214571, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/8/type = "bezier"
 tracks/8/path = NodePath("TreeChips/TreeChip4:position:x")
@@ -228,7 +299,7 @@ tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
 "points": PoolRealArray( 0, 0, 0, 0, 0, -12, 0, 0, 0, 0, -18, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/9/type = "bezier"
 tracks/9/path = NodePath("TreeChips/TreeChip4:position:y")
@@ -238,7 +309,67 @@ tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.1, -13.4326, 0, -0.12, -11.797, 0, -0.269738, -3.30731, -0.21, -8.48964, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TreeChips/TreeChip1:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TreeChips/TreeChip2:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TreeChips/TreeChip3:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TreeChips/TreeChip4:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TreeChips/TreeChip5:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -250,8 +381,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 28, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"points": PoolRealArray( 0, 0, 0, 0, 0, 32.6721, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("TreeChips/TreeChip1:position:y")
@@ -260,8 +391,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0.12, -14.7291, 0, -0.14, -22.3711, 0, -0.919254, -8.72536, -0.12, -5.11435, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"points": PoolRealArray( 0, 0, 0, 0.2, -20.3687, 0, -0.2, -20.5245, 0, -0.919254, -8.72536, -0.3, -4.2441, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("TreeChips/TreeChip2:position:x")
@@ -271,7 +402,7 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "points": PoolRealArray( 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 24, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("TreeChips/TreeChip2:position:y")
@@ -280,8 +411,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.13, -12.9737, 7.99076, -0.1, -24.3907, 0.000545355, 0.060706, -5.22607, -0.16, 0.62516, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"points": PoolRealArray( 0, -0.25, 0, 0.13, -12.9737, -0.780205, -0.1, -10.0474, 0.000545355, 0.060706, -5.22607, -0.3, -3.65434, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("TreeChips/TreeChip3:position:x")
@@ -291,7 +422,7 @@ tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
 "points": PoolRealArray( 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 21, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/5/type = "bezier"
 tracks/5/path = NodePath("TreeChips/TreeChip3:position:y")
@@ -301,7 +432,7 @@ tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.08, -27.2529, 5.45944, -0.1, -30, 0, 0.19982, -11.0253, -0.21, -4.22679, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/6/type = "bezier"
 tracks/6/path = NodePath("TreeChips/TreeChip5:position:x")
@@ -311,7 +442,7 @@ tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
 "points": PoolRealArray( 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 24, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/7/type = "bezier"
 tracks/7/path = NodePath("TreeChips/TreeChip5:position:y")
@@ -321,7 +452,7 @@ tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.09, -16.8332, 0, -0.11, -19.4128, 0.2, -14.6476, 3.11313, 0, 0.214571, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/8/type = "bezier"
 tracks/8/path = NodePath("TreeChips/TreeChip4:position:x")
@@ -331,7 +462,7 @@ tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
 "points": PoolRealArray( 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 18, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
 }
 tracks/9/type = "bezier"
 tracks/9/path = NodePath("TreeChips/TreeChip4:position:y")
@@ -341,7 +472,67 @@ tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.1, -13.4326, 0, -0.12, -11.797, 0, -0.269738, -3.30731, -0.21, -8.48964, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8 )
+"times": PoolRealArray( 0, 0.6, 1 )
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TreeChips/TreeChip1:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TreeChips/TreeChip2:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TreeChips/TreeChip3:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TreeChips/TreeChip4:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TreeChips/TreeChip5:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -465,6 +656,78 @@ tracks/11/enabled = true
 tracks/11/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.2, -40.2542, -15.6919, -0.2, -29.0486, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TreeChips/TreeChip1:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TreeChips/TreeChip2:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("TreeChips/TreeChip3:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TreeChips/TreeChip4:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TreeChips/TreeChip5:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TreeChips/TreeChip6:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="TrunkHitEffect" type="Node2D"]

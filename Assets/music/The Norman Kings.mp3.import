@@ -11,5 +11,5 @@ dest_files=[ "res://.import/The Norman Kings.mp3-4d5ca99c2055177df3947e0ea2bfab6
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

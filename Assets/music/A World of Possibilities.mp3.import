@@ -11,5 +11,5 @@ dest_files=[ "res://.import/A World of Possibilities.mp3-31d1c059c2eb8ef13069407
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

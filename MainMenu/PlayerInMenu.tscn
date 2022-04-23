@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://Assets/Sound effects/dirt footsteps.mp3" type="AudioStream" id=1]
 [ext_resource path="res://MainMenu/PlayerMenuState.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -136,4 +137,6 @@ frame = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerMenuState/CompositeSprites"]
 anims/idle = SubResource( 1 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerMenuState"]
+[node name="SoundEffects" type="AudioStreamPlayer" parent="PlayerMenuState"]
+stream = ExtResource( 1 )
+volume_db = -14.0

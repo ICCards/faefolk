@@ -9,7 +9,7 @@ onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
 var rng = RandomNumberGenerator.new()
 
-onready var oreTypes = ['Red gem', 'Green gem', 'Dark blue gem', 'Cyan gem', 'Gold ore', 'Iron ore', 'Stone']
+onready var oreTypes = ['Red gem', 'Green gem', 'Dark blue gem', 'Cyan gem', 'Gold ore', 'Iron ore', 'Stone', 'Cobblestone']
 var oreObject
 onready var world = get_tree().current_scene
 
@@ -31,15 +31,15 @@ func _on_BigHurtBox_area_entered(_area):
 	if bigOreHits == 0:
 		$SoundEffects.stream = Global.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore break", rng.randi_range(-10, 10), 40)
-		intitiateItemDrop(oreTypes[0], 0, 10)
+		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 40))
+		intitiateItemDrop(oreTypes[0], Vector2(0, 10))
 		animation_player.play("big_ore_break")
 
 		
 	if bigOreHits != 0:
 		$SoundEffects.stream = Global.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore hit", rng.randi_range(-25, 25), rng.randi_range(0, 40))
+		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-25, 25), rng.randi_range(0, 40)))
 		animation_player.play("big_ore_hit_right")
 		bigOreHits = bigOreHits - 1
 
@@ -49,31 +49,31 @@ func _on_SmallHurtBox_area_entered(_area):
 	if smallOreHits == 0:
 		$SoundEffects.stream = Global.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore break", rng.randi_range(-10, 10), 50)
-		intitiateItemDrop(oreTypes[0], 0, 40)
+		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 50))
+		intitiateItemDrop(oreTypes[0], Vector2(0, 40))
 		animation_player.play("small_ore_break")
 		yield($SoundEffects, "finished")
 		queue_free()
 	if smallOreHits != 0:
 		$SoundEffects.stream = Global.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore hit", rng.randi_range(-10, 10), 40)
+		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 40))
 		animation_player.play("small_ore_hit_right")
 		smallOreHits = smallOreHits - 1
 
 
 
 ## Effect functions
-func intitiateItemDrop(item, positionX, positionY):
+func intitiateItemDrop(item, pos):
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType(item)
 	world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + Vector2(positionX, positionY)
+	itemDrop.global_position = global_position + pos
 
-func initiateOreHitEffect(ore, effect, positionX, positionY):
+func initiateOreHitEffect(ore, effect, pos):
 	var oreHitEffect = OreHitEffect.instance()
 	oreHitEffect.init(ore, effect)
 	world.add_child(oreHitEffect)
-	oreHitEffect.global_position = global_position + Vector2(positionX, positionY)
+	oreHitEffect.global_position = global_position + pos
 	
 	

@@ -59,7 +59,7 @@ func validateTileBoundary(pos):
 		else: 
 			return false
 	else:
-		if pos.x < 0 or pos.x + JsonData.house_objects_data[image]["X"] - 1 > 19 or pos.y - (JsonData.house_objects_data[image]["Y"] - 1) < 1 or pos.y > 3:
+		if pos.x < 0 or pos.x + JsonData.house_objects_data[image]["X"] - 1 > 19 or pos.y - (JsonData.house_objects_data[image]["Y"] - 1) < 2 or pos.y > 4:
 			return true
 		else:
 			return false

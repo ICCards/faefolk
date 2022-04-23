@@ -11,5 +11,5 @@ dest_files=[ "res://.import/You Seen My Coat.mp3-e8bc80faabce9ead65fcc4cdf9d9077
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

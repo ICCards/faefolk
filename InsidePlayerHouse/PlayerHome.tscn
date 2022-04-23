@@ -1,10 +1,11 @@
-[gd_scene load_steps=132 format=2]
+[gd_scene load_steps=131 format=2]
 
 [ext_resource path="res://Assets/CL_MainLev.png" type="Texture" id=1]
 [ext_resource path="res://Assets/CL_Buildings.png" type="Texture" id=2]
 [ext_resource path="res://Assets/CLM_MainLev.png" type="Texture" id=3]
-[ext_resource path="res://Assets/CL_Crafting.png" type="Texture" id=4]
-[ext_resource path="res://World/Player/PlayerHome.gd" type="Script" id=6]
+[ext_resource path="res://World/Objects/BridgeRail.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/Objects/PlayerHouseObject.tscn" type="PackedScene" id=5]
+[ext_resource path="res://InsidePlayerHouse/PlayerHome.gd" type="Script" id=6]
 [ext_resource path="res://Assets/hoed_layer.png" type="Texture" id=8]
 
 [sub_resource type="TileSet" id=14]
@@ -3833,34 +3834,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 64, 0, 64 )
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=70]
-points = PoolVector2Array( 11.0134, 38.1649, 84.1328, 37.8858, 84.4118, 50.4445, 11.5715, 49.6073 )
-
-[sub_resource type="TileSet" id=69]
-0/name = "CL_Crafting.png 0"
-0/texture = ExtResource( 4 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 672, 224, 96, 64 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 70 )
-0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 70 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-0/z_index = 0
-
-[node name="PlayerHome" type="Node2D"]
-z_index = -1
+[node name="PlayerHome" type="YSort"]
 script = ExtResource( 6 )
 
 [node name="HiddenGroundLayer" type="TileMap" parent="."]
@@ -3938,8 +3912,19 @@ tile_set = SubResource( 67 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="FenceAutoTile" type="TileMap" parent="."]
-tile_set = SubResource( 69 )
-cell_size = Vector2( 32, 32 )
-format = 1
-tile_data = PoolIntArray( 1507333, 0, 0, 1507335, 0, 0, 1507337, 0, 0, 1507339, 0, 0, 1703941, 0, 0, 1703943, 0, 0, 1703945, 0, 0, 1703947, 0, 0, 3538933, 0, 0, 3538935, 0, 0, 3538937, 0, 0, 3538939, 0, 0, 3735541, 0, 0, 3735543, 0, 0, 3735545, 0, 0, 3735547, 0, 0 )
+[node name="Bridge" type="YSort" parent="."]
+
+[node name="BridgeRail" parent="Bridge" instance=ExtResource( 4 )]
+position = Vector2( 303, 785 )
+
+[node name="BridgeRail2" parent="Bridge" instance=ExtResource( 4 )]
+position = Vector2( 303, 892 )
+
+[node name="BridgeRail3" parent="Bridge" instance=ExtResource( 4 )]
+position = Vector2( -205, 1744 )
+
+[node name="BridgeRail4" parent="Bridge" instance=ExtResource( 4 )]
+position = Vector2( -207, 1852 )
+
+[node name="PlayerHouseObject" parent="." instance=ExtResource( 5 )]
+position = Vector2( 907, 463 )

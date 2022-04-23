@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://World/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World/Player/PlayerHome.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/Objects/PlayerHouseObject.tscn" type="PackedScene" id=9]
+[ext_resource path="res://InsidePlayerHouse/PlayerHome.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/YSort.gd" type="Script" id=10]
 
 [node name="World" type="Node2D"]
@@ -22,10 +21,6 @@ position = Vector2( -1632, 0 )
 [node name="SoundEffects" parent="YSort/Player" index="7"]
 volume_db = -8.0
 
-[node name="PlayerHouseObject" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 890, 419 )
-
 [node name="PlayerHome" parent="YSort" instance=ExtResource( 5 )]
-z_index = 0
 
 [editable path="YSort/Player"]

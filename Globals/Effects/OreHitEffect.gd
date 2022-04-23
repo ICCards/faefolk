@@ -15,9 +15,10 @@ func init(oreTypeInput, effectTypeInput):
 	effectType = effectTypeInput
 	
 func _ready():
+	rng.randomize()
 	setTexture(oreObject)
 	if effectType == "ore hit":
-		animationPlayer.play("ore hit")
+		animationPlayer.play("ore hit " + str(rng.randi_range(1, 3)))
 	if effectType == "ore break":
 		animationPlayer.play("ore break")
 		

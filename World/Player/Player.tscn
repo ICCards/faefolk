@@ -738,7 +738,6 @@ disabled = true
 light_mask = 32
 position = Vector2( 0, -10.9999 )
 rotation = -1.5708
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
@@ -762,13 +761,13 @@ hframes = 4
 position = Vector2( 0, -16 )
 hframes = 4
 
-[node name="Accessory" type="Sprite" parent="CompositeSprites"]
-position = Vector2( 0, -16 )
-hframes = 4
-
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 scale = Vector2( 1, 1 )
+hframes = 4
+
+[node name="Accessory" type="Sprite" parent="CompositeSprites"]
+position = Vector2( 0, -16 )
 hframes = 4
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
@@ -778,7 +777,6 @@ hframes = 4
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 anims/RESET = SubResource( 3 )

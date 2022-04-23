@@ -1,48 +1,5 @@
 extends Node
 
-### Inventory Icons ###
-
-var pickaxe = preload("res://Assets/inventory_icons/pickaxe.png")
-var axe = preload("res://Assets/inventory_icons/axe.png")
-var sword = preload("res://Assets/inventory_icons/sword.png")
-
-var wood = preload("res://Assets/inventory_icons/wood.png")
-var stone = preload("res://Assets/inventory_icons/stone.png")
-
-var green_gem = preload("res://Assets/inventory_icons/green gem.png")
-var dark_blue_gem = preload("res://Assets/inventory_icons/dark blue gem.png")
-var cyan_gem = preload("res://Assets/inventory_icons/cyan gem.png")
-var red_gem = preload("res://Assets/inventory_icons/red gem.png")
-
-var gold_ore = preload("res://Assets/inventory_icons/gold ore.png")
-var iron_ore = preload("res://Assets/inventory_icons/iron ore.png")
-
-func returnInventoryIcon(icon):
-	match icon:
-		"Wood":
-			return wood
-		"Pickaxe":
-			return pickaxe
-		"Axe":
-			return axe
-		"Green gem":
-			return green_gem
-		"Sword":
-			return sword
-		"Dark blue gem":
-			return dark_blue_gem
-		"Red gem":
-			return red_gem
-		"Cyan gem":
-			return cyan_gem
-		"Iron ore":
-			return iron_ore
-		"Gold ore":
-			return gold_ore
-		"Stone":
-			return stone
-	
-
 # FRUITLESS TREES #
 
 func returnTreeObject(treeType):

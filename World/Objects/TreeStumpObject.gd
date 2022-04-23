@@ -31,8 +31,8 @@ func _on_StumpHurtBox_area_entered(area):
 		$SoundEffects.stream = Global.stump_break
 		$SoundEffects.play()
 		stump_animation_player.play("stump_destroyed")
-		initiateTreeHitEffect(treeObject, "trunk break", 0, 48)
-		intitiateItemDrop("Wood", 0, 0)
+		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
+		intitiateItemDrop("Wood", Vector2(0, 0))
 		yield($SoundEffects, "finished")
 		queue_free()
 	
@@ -41,26 +41,26 @@ func _on_StumpHurtBox_area_entered(area):
 		$SoundEffects.play()
 		if Player.get_position().x <= get_position().x:
 			stump_animation_player.play("stump_hit_right")
-			initiateTreeHitEffect(treeObject, "tree hit right", 15, 20)
+			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(8, 12))
 			stumpHealth = stumpHealth - 1
 		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", -15, 20)
+			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-40, 12))
 			stump_animation_player.play("stump_hit_right")
 			stumpHealth = stumpHealth - 1
 			
 
 ### Effect functions		
 
-func initiateTreeHitEffect(tree, effect, positionX, positionY):
+func initiateTreeHitEffect(tree, effect, pos):
 	var trunkHitEffect = TrunkHitEffect.instance()
 	trunkHitEffect.init(tree, effect)
 	world.add_child(trunkHitEffect)
-	trunkHitEffect.global_position = global_position + Vector2(positionX, positionY)
+	trunkHitEffect.global_position = global_position + pos
 	
-func intitiateItemDrop(item, positionX, positionY):
+func intitiateItemDrop(item, pos):
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType(item)
 	world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + Vector2(positionX, positionY)
+	itemDrop.global_position = global_position + pos
 
 
