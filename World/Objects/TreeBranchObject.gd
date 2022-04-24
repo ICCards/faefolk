@@ -4,29 +4,31 @@ onready var branch = $Branch
 
 onready var TrunkHitEffect = preload("res://Globals/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var Player = get_node("/root/World/YSort/Player")
 var rng = RandomNumberGenerator.new()
 
 onready var world = get_tree().current_scene
 
 var randomNum
 var treeObject
+var location
+
+func initialize(variety, inputPos):
+	randomNum = variety
+	location = inputPos
 
 func _ready():
-	rng.randomize()
-	randomNum = rng.randi_range(0, 11)
-	branch.texture = Images.tree_branch_objects[randomNum]
 	setTreeBranchType(randomNum)
 
 func setTreeBranchType(num):
 	if num <= 2:
-		treeObject = Images.returnTreeObject('A')
+		treeObject = Images.returnTreeObject('D')
 	elif num <= 5:
 		treeObject = Images.returnTreeObject('B')
 	elif num <= 8:
-		treeObject = Images.returnTreeObject('D')
+		treeObject = Images.returnTreeObject('B')
 	else:
 		treeObject = Images.returnTreeObject('C')
+	$Branch.texture = Images.tree_branch_objects[num]
 
 func _on_BranchHurtBox_area_entered(area):
 	$SoundEffects.stream = Global.stump_break
@@ -34,6 +36,7 @@ func _on_BranchHurtBox_area_entered(area):
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 50))
 	intitiateItemDrop("Wood", Vector2(0, 0))
+	PlayerInventory.remove_farm_object(location)
 	yield($SoundEffects, "finished")
 	queue_free()
 

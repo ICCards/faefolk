@@ -637,7 +637,7 @@ shape = SubResource( 1 )
 [node name="StumpHurtBox" type="Area2D" parent="."]
 position = Vector2( 0, -20 )
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 
 [node name="stumpHurtBox" type="CollisionShape2D" parent="StumpHurtBox"]
 position = Vector2( -3.2, 32.8 )
@@ -648,7 +648,7 @@ disabled = true
 [node name="TreeHurtbox" type="Area2D" parent="."]
 position = Vector2( 0, -20 )
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 
 [node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]
 position = Vector2( -3.2, 32.8 )

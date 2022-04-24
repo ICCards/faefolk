@@ -21,7 +21,7 @@ func _physics_process(_delta):
 		setAnimationTexture('walk_right')	
 		velocity.x += 1.0
 		$SoundEffects.stream_paused = false
-	if (Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_left") == false):
+	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left"):
 		velocity = Vector2.ZERO
 		setAnimationTexture('idle_down')
 		$SoundEffects.stream_paused = true

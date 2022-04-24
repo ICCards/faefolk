@@ -2284,53 +2284,53 @@ var lesser_demon_male = {
 
 	shirts_idle_down = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/IDLE/assets/down/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/IDLE/assets/down/shirts/breastplate.png")
 	},
 	shirts_idle_up = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/IDLE/assets/up/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/IDLE/assets/up/shirts/breastplate.png")
 	},
 	shirts_idle_right = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/IDLE/assets/right/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/IDLE/assets/right/shirts/breastplate.png")
 	},
 	shirts_idle_left = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/IDLE/assets/left/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/IDLE/assets/left/shirts/breastplate.png")
 	},
 
 	shirts_walk_down = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/WALK/assets/down/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/WALK/assets/down/shirts/breastplate.png")
 	},
 	shirts_walk_up = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/WALK/assets/up/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/WALK/assets/up/shirts/breastplate.png")
 	},
 	shirts_walk_right = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/WALK/assets/right/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/WALK/assets/right/shirts/breastplate.png")
 	},
 	shirts_walk_left = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/WALK/assets/left/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/WALK/assets/left/shirts/breastplate.png")
 	},
 
 	shirts_swing_down = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/SWING/assets/down/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/SWING/assets/down/shirts/breastplate.png")
 	},
 	shirts_swing_up = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/SWING/assets/up/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/SWING/assets/up/shirts/breastplate.png")
 	},
 	shirts_swing_right = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/SWING/assets/right/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/SWING/assets/right/shirts/breastplate.png")
 	},
 	shirts_swing_left = {
 		0 : null,
-		#1 : preload("res://Characters/lesser demon/male/SWING/assets/left/shirts/breastplate.png")
+		1 : preload("res://Characters/lesser demon/male/SWING/assets/left/shirts/breastplate.png")
 	},
 
 	shoes_idle_down = {

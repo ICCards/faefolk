@@ -4,7 +4,7 @@
 [ext_resource path="res://World/Objects/TreeStumpObject.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 21.3008, 29.2031 )
+extents = Vector2( 17.0751, 24.5752 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -151,17 +151,17 @@ offset = Vector2( 0, -120 )
 position = Vector2( 0, -34 )
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox2"]
-position = Vector2( -3.2, 32.8 )
+position = Vector2( -3, 31 )
 rotation = -1.5708
 shape = SubResource( 1 )
 
 [node name="StumpHurtBox" type="Area2D" parent="."]
 position = Vector2( 0, -34 )
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 
 [node name="stumpHurtBox" type="CollisionShape2D" parent="StumpHurtBox"]
-position = Vector2( -3, 33 )
+position = Vector2( -3, 31 )
 rotation = -1.5708
 shape = SubResource( 1 )
 

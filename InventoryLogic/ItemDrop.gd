@@ -6,8 +6,6 @@ const ACCELERATION = 460
 onready var itemSprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 
-onready var api = Api
-var thread = Thread.new()
 
 var player = null
 var being_picked_up = false
@@ -15,6 +13,18 @@ var item_name
 var randomInt
 var rng = RandomNumberGenerator.new()
 
+onready var api = Api
+var thread = Thread.new()
+func _whoAmI(_value):
+	print("THREAD FUNC!")
+	var result = api.mint(item_name, "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
+	call_deferred("loadDone")
+	return result
+
+func loadDone():
+	var value = thread.wait_to_finish()
+	print(value)	
+	queue_free()
 
 func initItemDropType(item_name_input):
 	item_name = item_name_input
@@ -50,8 +60,14 @@ func _physics_process(_delta):
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION)
 		var distance = adjustedPosition.distance_to(player.global_position)
 		if distance < 4: 
+			if (thread.is_active()):
+				# Already working
+				return
+			print("START THREAD!")
+			thread.start(self,"_whoAmI",null)
+			$Sprite.visible = false
 			PlayerInventory.add_item_to_hotbar(item_name, 1)
-			queue_free()
+
 	velocity.normalized()
 	velocity = move_and_slide(velocity, Vector2.UP)
 	

@@ -6,17 +6,19 @@ onready var treeStumpSprite = $TreeSprites/TreeStump
 onready var LeavesFallEffect = preload("res://Globals/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://Globals/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var Player = get_node("/root/World/YSort/Player")
+onready var Player = get_node("/root/World/Farm/Player")
 var rng = RandomNumberGenerator.new()
 
 onready var world = get_tree().current_scene
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
 var treeObject
+var pos 
+
+func initialize(variety, inputPos):
+	pos = inputPos
+	treeObject = Images.returnTreeObject(variety)
 
 func _ready():
-	rng.randomize()
-	treeTypes.shuffle()
-	treeObject = Images.returnTreeObject(treeTypes[0])
 	setTexture(treeObject)
 
 func setTexture(tree):
@@ -33,6 +35,7 @@ func _on_StumpHurtBox_area_entered(area):
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 		intitiateItemDrop("Wood", Vector2(0, 0))
+		PlayerInventory.remove_farm_object(pos)
 		yield($SoundEffects, "finished")
 		queue_free()
 	

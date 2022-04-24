@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Objects/OreObjectLarge.gd" type="Script" id=1]
+[ext_resource path="res://Assets/ore_sets/cobblestone/cobblestone_gemstone_large.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.4062, 36.25 )
+extents = Vector2( 23.2031, 34.5 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 24.693, 19.1412 )
@@ -240,17 +241,17 @@ script = ExtResource( 1 )
 position = Vector2( -1, -28 )
 
 [node name="BigMovementBox" type="CollisionShape2D" parent="BigMovementCollisionBox"]
-position = Vector2( 1, 41 )
+position = Vector2( 2.625, 41 )
 rotation = -1.5708
 shape = SubResource( 1 )
 
 [node name="BigHurtBox" type="Area2D" parent="."]
 position = Vector2( -1, -28 )
 collision_layer = 16
-collision_mask = 16
+collision_mask = 0
 
 [node name="bigHurtBox" type="CollisionShape2D" parent="BigHurtBox"]
-position = Vector2( 1, 41 )
+position = Vector2( 2.5, 40.7969 )
 rotation = -1.5708
 shape = SubResource( 1 )
 
@@ -265,7 +266,7 @@ disabled = true
 [node name="SmallHurtBox" type="Area2D" parent="."]
 position = Vector2( 0, -28 )
 collision_layer = 16
-collision_mask = 16
+collision_mask = 0
 
 [node name="smallHurtBox" type="CollisionShape2D" parent="SmallHurtBox"]
 position = Vector2( -1, 45 )
@@ -278,6 +279,7 @@ position = Vector2( 0, -12 )
 
 [node name="BigOre" type="Sprite" parent="."]
 position = Vector2( 0, -12 )
+texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )

@@ -11,16 +11,17 @@ var active_item_slot = 0
 
 var inventory = {
 	1: ["Sword", 1], 
-	2: ["Green gem", 98],
+	13: ["Green gem", 5],
+	4: ["Hoe", 1], 
+	7: ["Hay seeds", 50],
+	11: ["Potato seeds", 28],
+	16: ["Bucket", 1]
 }
 
 var hotbar = {
 	0: ["Axe", 1],
 	1: ["Pickaxe", 1],
-#	2: ["Hoe", 1], 
-#	6: ["Hay seeds", 50],
-#	5: ["Potato seeds", 28],
-#	4: ["Bucket", 1]
+	2: ["Hoe", 1], 
 }
 
 # Location of bottom left tile
@@ -37,11 +38,26 @@ var player_home = {
 	9 : ["Bed", Vector2(18, 9)],
 	10 : ["Small_dresser", Vector2(10,0)],
 	11 : ["Stool", Vector2(4, 8)],
-	12 : ["Window", Vector2(4, -2)],
-	13 : ["Window", Vector2(14, -2)],
+	12 : ["Window 1", Vector2(4, -2)],
+	13 : ["Window 2", Vector2(14, -2)],
 	14 : ["Painting1", Vector2(9, -2)]
 }
 
+# Name // Variety // Position // If grown tree or large ore
+var player_farm_objects = {}
+
+func remove_farm_object(pos):
+	for i in range(player_farm_objects.size()):
+		if player_farm_objects.has(i):
+			if player_farm_objects[i][2] == pos:
+				player_farm_objects.erase(i)
+	
+func set_farm_object_break(pos):
+	for i in range(player_farm_objects.size()):
+		if player_farm_objects.has(i):
+			if player_farm_objects[i][2] == pos:
+				player_farm_objects[i][3] = false
+	
 func add_item_to_hotbar(item_name, item_quantity):
 	var slot_indices: Array = hotbar.keys()
 	slot_indices.sort()
@@ -92,14 +108,14 @@ func add_item_to_inventory(item_name, item_quantity):
 			return
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/YSort/Player/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Farm/Player/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		slot.item.set_item(item_name, new_quantity)
 	else:
 		slot.initialize_item(item_name, new_quantity)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/YSort/Player/Camera2D/UserInterface/Inventory/GridContainer/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Farm/Player/Camera2D/UserInterface/Inventory/GridContainer/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		slot.item.set_item(item_name, new_quantity)
 	else:

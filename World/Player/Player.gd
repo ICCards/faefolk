@@ -11,38 +11,40 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 
 
-	
+
 onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
 	SWING
 }
 
-#func _whoAmI(_value):
-#	print("THREAD FUNC!")
-#	#var result = api.query()
-#	var result = api.mint(item_name, "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
-#	call_deferred("loadDone")
-#	return result
-#
-#func loadDone():
-#	var value = thread.wait_to_finish()
-#	print(value)	
-#
-#	if (thread.is_active()):
-#		# Already working
-#		return
-#	print("START THREAD!")
-#	thread.start(self,"_whoAmI",null)
-
 onready var direction = "DOWN"
+
+onready var api = Api
+var thread = Thread.new()
+func _whoAmI(_value):
+	print("THREAD FUNC!")
+	#var result = api.query()
+	var result = api.mint("wood", "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
+	call_deferred("loadDone")
+	return result
+
+func loadDone():
+	var value = thread.wait_to_finish()
+	print(value)	
+
+
 
 func _process(delta) -> void:
 	if PlayerInventory.viewInventoryMode == false:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
-			#print(pickup_item)
+#			if (thread.is_active()):
+#				# Already working
+#				return
+#			print("START THREAD!")
+#			thread.start(self,"_whoAmI",null)
 			$PickupZone.items_in_range.erase(pickup_item)
 		match state:
 			MOVEMENT:
@@ -60,7 +62,7 @@ func _unhandled_input(event):
 			
 
 
-var MAX_SPEED := 15.0
+var MAX_SPEED := 14.0
 var ACCELERATION := 6
 var FRICTION := 100
 var velocity := Vector2.ZERO

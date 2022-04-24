@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var Player = get_node("/root/World/YSort/Player")
+
 onready var OreHitEffect = preload("res://Globals/Effects/OreHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 
@@ -8,14 +8,17 @@ onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
 var rng = RandomNumberGenerator.new()
 
-onready var oreTypes = ['Red gem', 'Green gem', 'Dark blue gem', 'Cyan gem', 'Gold ore', 'Iron ore', 'Stone', 'Cobblestone']
 var oreObject
+var pos
 onready var world = get_tree().current_scene
+var variety
 
+func initialize(varietyInput, inputPos):
+	variety = varietyInput
+	oreObject = Images.returnOreObject(varietyInput)
+	pos = inputPos
+	
 func _ready():
-	rng.randomize()
-	oreTypes.shuffle()
-	oreObject = Images.returnOreObject(oreTypes[0])
 	setTexture(oreObject)
 
 func setTexture(ore):
@@ -29,8 +32,9 @@ func _on_SmallHurtBox_area_entered(_area):
 		$SoundEffects.stream = Global.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 50))
-		intitiateItemDrop(oreTypes[0], Vector2(0, 40))
+		intitiateItemDrop(variety, Vector2(0, 40))
 		animation_player.play("small_ore_break")
+		PlayerInventory.remove_farm_object(pos)
 		yield($SoundEffects, "finished")
 		queue_free()
 	if smallOreHits != 0:

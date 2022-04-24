@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/CLM_MainLev.png" type="Texture" id=3]
 [ext_resource path="res://World/Objects/BridgeRail.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Objects/PlayerHouseObject.tscn" type="PackedScene" id=5]
-[ext_resource path="res://InsidePlayerHouse/PlayerHome.gd" type="Script" id=6]
+[ext_resource path="res://InsidePlayerHouse/PlayerHomeFarm.gd" type="Script" id=6]
 [ext_resource path="res://Assets/hoed_layer.png" type="Texture" id=8]
 
 [sub_resource type="TileSet" id=14]
@@ -3834,7 +3834,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 64, 0, 64 )
 0/shapes = [  ]
 0/z_index = 0
 
-[node name="PlayerHome" type="YSort"]
+[node name="PlayerHomeFarm" type="YSort"]
 script = ExtResource( 6 )
 
 [node name="HiddenGroundLayer" type="TileMap" parent="."]
@@ -3927,4 +3927,4 @@ position = Vector2( -205, 1744 )
 position = Vector2( -207, 1852 )
 
 [node name="PlayerHouseObject" parent="." instance=ExtResource( 5 )]
-position = Vector2( 907, 463 )
+position = Vector2( 911, 428 )

@@ -10,6 +10,7 @@ func init(new_image, new_pos):
 	image = new_image
 
 
+
 func _ready():
 	$HouseImageTextureRect.texture = load("res://Assets/house_objects/" + image +  ".png")
 	$CollisionBox.scale.x = JsonData.house_objects_data[image]["X"]
@@ -38,7 +39,6 @@ func _on_MouseInputBox_input_event(viewport, event, shape_idx):
 	var mousePos = get_global_mouse_position() + Vector2(-16, 16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	if event.is_action_pressed("mouse_click"):
-		$SoundEffects.play()
 		if moveItemFlag:
 			for i in range(PlayerInventory.player_home.size()):
 				if PlayerInventory.player_home[i][0] == image and !is_colliding_other_object and !validateTileBoundary(position / 32):
@@ -46,9 +46,11 @@ func _on_MouseInputBox_input_event(viewport, event, shape_idx):
 					$ColorIndicator.visible = false
 					moveItemFlag = false
 					find_parent("InsidePlayerHome").is_moving_object = null
+					$SoundEffects.play()
 		elif !moveItemFlag and find_parent("InsidePlayerHome").is_moving_object == null:
 			moveItemFlag = true
 			find_parent("InsidePlayerHome").is_moving_object = true
+			$SoundEffects.play()
 
 var moveItemFlag = false
 

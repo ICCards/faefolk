@@ -65,7 +65,13 @@
     "CollisionEnabled": true,
     "FloorObject": true
 },
-"Window": {
+"Window 1": {
+    "X": 1,
+    "Y": 2,
+    "CollisionEnabled": false,
+    "FloorObject": false
+},
+"Window 2": {
     "X": 1,
     "Y": 2,
     "CollisionEnabled": false,

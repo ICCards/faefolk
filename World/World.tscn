@@ -1,26 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://World/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://InsidePlayerHouse/PlayerHome.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/YSort.gd" type="Script" id=10]
+[ext_resource path="res://InsidePlayerHouse/PlayerHomeFarm.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
 
-[node name="YSort" type="YSort" parent="."]
-script = ExtResource( 10 )
+[node name="Farm" type="YSort" parent="."]
 
-[node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 930, 507 )
+[node name="Player" parent="Farm" instance=ExtResource( 1 )]
+position = Vector2( 827, 502 )
 
-[node name="BottomRight" parent="YSort/Player/Camera2D/Limits" index="0"]
+[node name="BottomRight" parent="Farm/Player/Camera2D/Limits" index="0"]
 position = Vector2( 2016, 2912 )
 
-[node name="TopLeft" parent="YSort/Player/Camera2D/Limits" index="1"]
+[node name="TopLeft" parent="Farm/Player/Camera2D/Limits" index="1"]
 position = Vector2( -1632, 0 )
 
-[node name="SoundEffects" parent="YSort/Player" index="7"]
+[node name="SoundEffects" parent="Farm/Player" index="7"]
 volume_db = -8.0
 
-[node name="PlayerHome" parent="YSort" instance=ExtResource( 5 )]
+[node name="PlayerHomeFarm" parent="Farm" instance=ExtResource( 5 )]
 
-[editable path="YSort/Player"]
+[editable path="Farm/Player"]
