@@ -26,6 +26,7 @@ func _ready():
 	setTexture(oreObject)
 
 func setTexture(ore):
+	rng.randomize()
 	bigOreSprite.texture = ore.largeOre
 	smallOreSprite.texture = ore.mediumOres[rng.randi_range(0, 5)]
 	if !showLargeOre:

@@ -20,31 +20,12 @@ enum {
 
 onready var direction = "DOWN"
 
-onready var api = Api
-var thread = Thread.new()
-func _whoAmI(_value):
-	print("THREAD FUNC!")
-	#var result = api.query()
-	var result = api.mint("wood", "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
-	call_deferred("loadDone")
-	return result
-
-func loadDone():
-	var value = thread.wait_to_finish()
-	print(value)	
-
-
 
 func _process(delta) -> void:
 	if PlayerInventory.viewInventoryMode == false:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
-#			if (thread.is_active()):
-#				# Already working
-#				return
-#			print("START THREAD!")
-#			thread.start(self,"_whoAmI",null)
 			$PickupZone.items_in_range.erase(pickup_item)
 		match state:
 			MOVEMENT:

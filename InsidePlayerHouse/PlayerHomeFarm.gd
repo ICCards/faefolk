@@ -40,7 +40,8 @@ func generate_farm():
 		
 	
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
-onready var oreTypes = ['Red gem', 'Green gem', 'Dark blue gem', 'Cyan gem', 'Gold ore', 'Iron ore', 'Stone', 'Cobblestone']
+#onready var oreTypes = ['Red gem', 'Green gem', 'Dark blue gem', 'Cyan gem', 'Gold ore', 'Iron ore', 'Stone', 'Cobblestone']
+onready var oreTypes = ["Stone", "Cobblestone"]
 
 func set_object_variety(name):
 	rng.randomize()

@@ -22,6 +22,7 @@ func _ready():
 	setTexture(oreObject)
 
 func setTexture(ore):
+	rng.randomize()
 	smallOreSprite.texture = ore.mediumOres[rng.randi_range(0, 5)]
 
 

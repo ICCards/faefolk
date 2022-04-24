@@ -12,12 +12,13 @@ var being_picked_up = false
 var item_name
 var randomInt
 var rng = RandomNumberGenerator.new()
+var api_call_name
 
 onready var api = Api
 var thread = Thread.new()
 func _whoAmI(_value):
 	print("THREAD FUNC!")
-	var result = api.mint(item_name, "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
+	var result = api.mint(api_call_name.to_lower(), "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
 	call_deferred("loadDone")
 	return result
 
@@ -30,7 +31,9 @@ func initItemDropType(item_name_input):
 	item_name = item_name_input
 	if item_name == "Cobblestone":
 		item_name = "Stone"
-		
+	api_call_name = item_name
+	if item_name == "Stone":
+		api_call_name = "stone ore"
 
 func _ready():
 	itemSprite.texture = load("res://Assets/dropped_item_icon/" + item_name + ".png")
@@ -60,12 +63,13 @@ func _physics_process(_delta):
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION)
 		var distance = adjustedPosition.distance_to(player.global_position)
 		if distance < 4: 
+			$Sprite.visible = false
+			$CollisionShape2D.disabled = true
 			if (thread.is_active()):
 				# Already working
 				return
 			print("START THREAD!")
 			thread.start(self,"_whoAmI",null)
-			$Sprite.visible = false
 			PlayerInventory.add_item_to_hotbar(item_name, 1)
 
 	velocity.normalized()
