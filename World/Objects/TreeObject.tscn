@@ -11,10 +11,10 @@
 extents = Vector2( 12.4305, 24.4444 )
 
 [sub_resource type="RectangleShape2D" id=20]
-extents = Vector2( 19.8611, 28.1439 )
+extents = Vector2( 22.7083, 28.1439 )
 
 [sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 20, 28.3507 )
+extents = Vector2( 22.7778, 28.3507 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -635,6 +635,7 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -120 )
 
 [node name="MovementCollisionBox2" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 0, -31 )
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox2"]
@@ -648,7 +649,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="stumpHurtBox" type="CollisionShape2D" parent="StumpHurtBox"]
-position = Vector2( 0, 35.4444 )
+position = Vector2( -1.0307e-05, 32.5972 )
 rotation = -1.5708
 shape = SubResource( 20 )
 disabled = true
@@ -659,7 +660,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]
-position = Vector2( 0, 35.4444 )
+position = Vector2( -1.00555e-05, 32.6667 )
 rotation = -1.5708
 shape = SubResource( 21 )
 
