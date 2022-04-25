@@ -5,7 +5,6 @@ onready var branch = $Branch
 onready var TrunkHitEffect = preload("res://Globals/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
-
 onready var world = get_tree().current_scene
 
 var randomNum
@@ -46,7 +45,7 @@ func _on_BranchHurtBox_area_entered(area):
 func initiateTreeHitEffect(tree, effect, pos):
 	var trunkHitEffect = TrunkHitEffect.instance()
 	trunkHitEffect.init(tree, effect)
-	world.add_child(trunkHitEffect)
+	add_child(trunkHitEffect)
 	trunkHitEffect.global_position = global_position + pos
 	
 func intitiateItemDrop(item, pos):

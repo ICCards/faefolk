@@ -16,7 +16,7 @@ position = Vector2( 2016, 2912 )
 [node name="TopLeft" parent="Farm/Player/Camera2D/Limits" index="1"]
 position = Vector2( -1632, 0 )
 
-[node name="SoundEffects" parent="Farm/Player" index="7"]
+[node name="SoundEffects" parent="Farm/Player" index="8"]
 volume_db = -8.0
 
 [node name="PlayerHomeFarm" parent="Farm" instance=ExtResource( 5 )]

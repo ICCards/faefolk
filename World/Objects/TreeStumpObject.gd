@@ -57,13 +57,14 @@ func _on_StumpHurtBox_area_entered(area):
 func initiateTreeHitEffect(tree, effect, pos):
 	var trunkHitEffect = TrunkHitEffect.instance()
 	trunkHitEffect.init(tree, effect)
-	world.add_child(trunkHitEffect)
+	add_child(trunkHitEffect)
 	trunkHitEffect.global_position = global_position + pos
 	
 func intitiateItemDrop(item, pos):
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType(item)
 	world.call_deferred("add_child", itemDrop)
+	#world.add_child(itemDrop)
 	itemDrop.global_position = global_position + pos
 
 

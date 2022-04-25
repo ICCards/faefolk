@@ -7,8 +7,8 @@ onready var bigOreSprite = $BigOre
 onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
 var rng = RandomNumberGenerator.new()
-onready var world = get_tree().current_scene
 
+onready var world = get_tree().current_scene
 
 var oreObject
 var pos
@@ -88,7 +88,7 @@ func intitiateItemDrop(item, pos):
 func initiateOreHitEffect(ore, effect, pos):
 	var oreHitEffect = OreHitEffect.instance()
 	oreHitEffect.init(ore, effect)
-	world.add_child(oreHitEffect)
+	add_child(oreHitEffect)
 	oreHitEffect.global_position = global_position + pos
 	
 	

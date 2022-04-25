@@ -779,14 +779,13 @@ anims/swing_right = SubResource( 7 )
 anims/swing_up = SubResource( 8 )
 
 [node name="PickupZone" type="Area2D" parent="."]
-visible = false
 scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
-position = Vector2( 13.5002, -30.9313 )
+position = Vector2( 0, -31.6016 )
 scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
@@ -796,6 +795,14 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoors"]
 position = Vector2( 0, -11 )
+shape = SubResource( 10 )
+
+[node name="EnterTreeTop" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTreeTop"]
+position = Vector2( 0, -38.8235 )
 shape = SubResource( 10 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
@@ -810,3 +817,5 @@ autoplay = true
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
 [connection signal="area_entered" from="EnterDoors" to="." method="_on_EnterDoors_area_entered"]
 [connection signal="area_exited" from="EnterDoors" to="." method="_on_EnterDoors_area_exited"]
+[connection signal="area_entered" from="EnterTreeTop" to="." method="_on_EnterDoors_area_entered"]
+[connection signal="area_exited" from="EnterTreeTop" to="." method="_on_EnterDoors_area_exited"]

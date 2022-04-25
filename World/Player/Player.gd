@@ -44,8 +44,8 @@ func _unhandled_input(event):
 
 
 var MAX_SPEED := 14.0
-var ACCELERATION := 6
-var FRICTION := 100
+var ACCELERATION := 10
+var FRICTION := 200
 var velocity := Vector2.ZERO
 
 func movement_state(delta):

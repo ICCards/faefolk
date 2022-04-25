@@ -71,6 +71,9 @@ func _physics_process(_delta):
 			print("START THREAD!")
 			thread.start(self,"_whoAmI",null)
 			PlayerInventory.add_item_to_hotbar(item_name, 1)
+			$SoundEffects.play()
+			yield($SoundEffects, "finished")
+			$SoundEffects.stop()
 
 	velocity.normalized()
 	velocity = move_and_slide(velocity, Vector2.UP)

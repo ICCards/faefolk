@@ -7,10 +7,9 @@ onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
 var rng = RandomNumberGenerator.new()
-
+onready var world = get_tree().current_scene
 var oreObject
 var pos
-onready var world = get_tree().current_scene
 var variety
 
 func initialize(varietyInput, inputPos):
@@ -50,12 +49,12 @@ func intitiateItemDrop(item, pos):
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType(item)
 	world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + pos
+	itemDrop.global_position = global_position + pos + Vector2(0, -36)
 
 func initiateOreHitEffect(ore, effect, pos):
 	var oreHitEffect = OreHitEffect.instance()
 	oreHitEffect.init(ore, effect)
-	world.add_child(oreHitEffect)
-	oreHitEffect.global_position = global_position + pos
+	add_child(oreHitEffect)
+	oreHitEffect.global_position = global_position + pos + Vector2(0, -36)
 	
 	

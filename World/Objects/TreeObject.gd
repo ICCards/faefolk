@@ -30,20 +30,47 @@ func _ready():
 	setTexture(treeObject)
 
 func setTexture(tree):
+	set_tree_collision_shape()
 	treeStumpSprite.texture = tree.stump
 	treeTopSprite.texture = tree.topTree
 	treeBottomSprite.texture = tree.bottomTree
 	$TreeChipParticles.texture = tree.chip 
 	$TreeLeavesParticles.texture = tree.leaves
 	if !showFullTree:
+		disable_tree_top_collision_box()
 		$TreeHurtbox/treeHurtBox.disabled = true
 		$TreeSprites/TreeTop.visible = false
 		$StumpHurtBox/stumpHurtBox.disabled = false
 		
+func set_tree_collision_shape():
+	if variety == "A":
+		$TreeTopArea/A.disabled = false
+	elif variety == "B":
+		$TreeTopArea/B.disabled = false
+	elif variety == "C":
+		$TreeTopArea/C.disabled = false
+	elif variety == "D":
+		$TreeTopArea/D.disabled = false
+	elif variety == "E":
+		$TreeTopArea/E.disabled = false
+		
+func disable_tree_top_collision_box():
+	set_tree_visible()
+	if variety == "A":
+		$TreeTopArea/A.call_deferred("set", "disabled", true)
+	elif variety == "B":
+		$TreeTopArea/B.call_deferred("set", "disabled", true)
+	elif variety == "C":
+		$TreeTopArea/C.call_deferred("set", "disabled", true)
+	elif variety == "D":
+		$TreeTopArea/D.call_deferred("set", "disabled", true)
+	elif variety == "E":
+		$TreeTopArea/E.call_deferred("set", "disabled", true)
 
 var treeHealth: int = 4
 func _on_Hurtbox_area_entered(_area):
 	if treeHealth == 0:
+		disable_tree_top_collision_box()
 		PlayerInventory.set_farm_object_break(pos)
 		$SoundEffectsStump.stream = Global.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsStump.play()
@@ -103,13 +130,6 @@ func _on_stumpHurtBox_area_entered(_area):
 			
 		
 ### Effect functions		
-func initiateTreeExplosionEffect(tree, pos):
-	for i in range(12):
-		rng.randomize()
-		var treeExplosionEffect = TreeExplosionEffect.instance()
-		treeExplosionEffect.init(tree)
-		world.call_deferred("add_child", treeExplosionEffect) 
-		treeExplosionEffect.global_position = global_position + pos + Vector2(rng.randi_range(-80, 80), rng.randi_range(-8, 8))
 
 func initiateLeavesFallingEffect(tree, pos):
 	var leavesEffect = LeavesFallEffect.instance()
@@ -128,4 +148,45 @@ func intitiateItemDrop(item, pos):
 	itemDrop.initItemDropType(item)
 	world.call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position + pos
+
+
+onready var tween = $Tween
+func set_tree_transparent():
+	tween.interpolate_property($TreeSprites/TreeTop, "modulate",
+		$TreeSprites/TreeTop.get_modulate(), Color(1, 1, 1, 0.5), 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	
+	tween.interpolate_property($TreeSprites/TreeStump, "modulate",
+		$TreeSprites/TreeStump.get_modulate(), Color(1, 1, 1, 0.5), 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	
+	tween.interpolate_property($TreeSprites/TreeBottom, "modulate",
+		$TreeSprites/TreeBottom.get_modulate(), Color(1, 1, 1, 0.5), 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	
+	
+func set_tree_visible():
+	tween.interpolate_property($TreeSprites/TreeTop, "modulate",
+		$TreeSprites/TreeTop.get_modulate(), Color(1, 1, 1, 1), 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	
+	tween.interpolate_property($TreeSprites/TreeStump, "modulate",
+		$TreeSprites/TreeStump.get_modulate(), Color(1, 1, 1, 1), 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	
+	tween.interpolate_property($TreeSprites/TreeBottom, "modulate",
+		$TreeSprites/TreeBottom.get_modulate(), Color(1, 1, 1, 1), 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+
+func _on_TreeTopArea_area_entered(area):
+	set_tree_transparent()
+
+func _on_TreeTopArea_area_exited(area):
+	set_tree_visible()
 
