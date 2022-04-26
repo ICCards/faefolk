@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ES_Back to Business - William Benckert.mp3-6f63f0f5bf233d43fc3a82e0bbe77556.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/ES_Back to Business - William Benckert.mp3"
+dest_files=[ "res://.import/ES_Back to Business - William Benckert.mp3-6f63f0f5bf233d43fc3a82e0bbe77556.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

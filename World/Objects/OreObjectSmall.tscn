@@ -140,7 +140,6 @@ position = Vector2( 1.49254, -55.2239 )
 
 [node name="SmallMovementBox" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
 position = Vector2( -1.49254, 49.4091 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -33,7 +33,7 @@ func _on_BranchHurtBox_area_entered(area):
 	$SoundEffects.stream = Global.stump_break
 	$SoundEffects.play()
 	$AnimationPlayer.play("break")
-	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 50))
+	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 	intitiateItemDrop("Wood", Vector2(0, 0))
 	PlayerInventory.remove_farm_object(location)
 	yield($SoundEffects, "finished")
@@ -46,7 +46,7 @@ func initiateTreeHitEffect(tree, effect, pos):
 	var trunkHitEffect = TrunkHitEffect.instance()
 	trunkHitEffect.init(tree, effect)
 	add_child(trunkHitEffect)
-	trunkHitEffect.global_position = global_position + pos
+	trunkHitEffect.global_position = global_position + pos 
 	
 func intitiateItemDrop(item, pos):
 	var itemDrop = ItemDrop.instance()

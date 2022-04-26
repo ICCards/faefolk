@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/crackle.mp3-8c9b9927488c9677a19984eac45584db.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound effects/Fire/crackle.mp3"
+dest_files=[ "res://.import/crackle.mp3-8c9b9927488c9677a19984eac45584db.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

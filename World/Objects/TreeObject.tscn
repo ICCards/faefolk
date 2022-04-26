@@ -745,7 +745,7 @@ disabled = true
 
 [node name="D" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-polygon = PoolVector2Array( 26, 11, 46, 11, 54, -32, 0, -165, -55, -31, -30, 11 )
+polygon = PoolVector2Array( 2.22222, 9.88889, 6.66667, -65.6667, 38.8889, -66.7778, 2.22222, -161.222, -34.4444, -75.6667, -8.88889, -70.1111, -7.77778, -9 )
 disabled = true
 
 [node name="E" type="CollisionPolygon2D" parent="TreeTopArea"]

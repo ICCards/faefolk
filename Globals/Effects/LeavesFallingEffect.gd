@@ -9,6 +9,7 @@ onready var leaf6Sprite = $Leaves/Leaf6
 onready var leaf7Sprite = $Leaves/Leaf7
 onready var leaf8Sprite = $Leaves/Leaf8
 onready var leaf9Sprite = $Leaves/Leaf9
+onready var leaf10Sprite = $Leaves/Leaf10
 onready var AnimPlayer = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
@@ -26,7 +27,7 @@ func _ready():
 	queue_free()
 	
 	
-var randomArray = [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+var randomArray = [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 func randomizeDisplayedLeaves():
 	rng.randomize()
 	randomArray.shuffle()
@@ -39,6 +40,7 @@ func randomizeDisplayedLeaves():
 	leaf7Sprite.visible = randomArray[6] == 1
 	leaf8Sprite.visible = randomArray[7] == 1
 	leaf9Sprite.visible = randomArray[8] == 1
+	leaf10Sprite.visible = randomArray[9] == 1
 	
 
 func setRandomTexture():
@@ -51,25 +53,7 @@ func setRandomTexture():
 	leaf7Sprite.texture = treeObject.leaves
 	leaf8Sprite.texture = treeObject.leaves
 	leaf9Sprite.texture = treeObject.leaves
-	
-	rng.randomize()
-	leaf1Sprite.rotation = rng.randi_range(0 , 360)
-	rng.randomize()
-	leaf2Sprite.rotation = rng.randi_range(0 , 360)
-	rng.randomize()
-	leaf3Sprite.rotation = rng.randi_range(0 , 360)
-	rng.randomize()
-	leaf4Sprite.rotation = rng.randi_range(0 , 360)
-	rng.randomize()
-	leaf5Sprite.rotation = rng.randi_range(0 , 360)
-	rng.randomize()
-	leaf6Sprite.rotation = rng.randi_range(0 , 360)
-	rng.randomize()
-	leaf7Sprite.rotation = rng.randi_range(0 , 360)
-	rng.randomize()
-	leaf8Sprite.rotation = rng.randi_range(0 , 360)
-	rng.randomize()
-	leaf9Sprite.rotation = rng.randi_range(0 , 360)
+	leaf10Sprite.texture = treeObject.leaves
 	
 	rng.randomize()
 	leaf1Sprite.set_frame(rng.randi_range(0 , 11))

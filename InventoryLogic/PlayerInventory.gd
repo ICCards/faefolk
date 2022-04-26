@@ -38,10 +38,11 @@ var player_home = {
 	9 : ["Bed", Vector2(18, 9)],
 	10 : ["Small_dresser", Vector2(10,0)],
 	11 : ["Stool", Vector2(4, 8)],
-	12 : ["Window 1", Vector2(4, -2)],
+	12 : ["Window 1", Vector2(5, -2)],
 	13 : ["Window 2", Vector2(14, -2)],
 	14 : ["Painting1", Vector2(9, -2)]
 }
+var isFireplaceLit = false
 
 # Name // Variety // Position // If grown tree or large ore
 var player_farm_objects = {}

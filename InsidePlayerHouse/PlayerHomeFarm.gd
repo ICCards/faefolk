@@ -7,6 +7,7 @@ onready var OreObject = preload("res://World/Objects/OreObjectLarge.tscn")
 onready var SmallOreObject = preload("res://World/Objects/OreObjectSmall.tscn")
 onready var TallGrassObject = preload("res://World/Objects/TallGrassObject.tscn")
 onready var groundTilemap = $GroundTiles
+onready var waterTilemap = $WaterTiles/WaterTilemap
 onready var hiddenGroundTileMap = $HiddenGroundLayer
 
 var rng = RandomNumberGenerator.new()
@@ -17,6 +18,7 @@ func _ready():
 	else:
 		load_farm()
 	initiate_grass_tiles()
+	
 
 onready var object_types = ["tree", "tree stump", "tree branch", "ore large", "ore small"]
 
@@ -25,7 +27,8 @@ var pos
 var object_variety
 
 func initiate_grass_tiles():
-	for i in range(2000):
+	for i in range(1500):
+		rng.randomize()
 		pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
 		var location = groundTilemap.world_to_map(pos)
 		if verify_tile("tall grass", location):
@@ -40,18 +43,17 @@ func load_farm():
 
 
 func generate_farm():
-	for i in range(650):
+	for i in range(500):
 		rng.randomize()
 		object_types.shuffle()
 		object_name = object_types[0]
 		object_variety = set_object_variety(object_name)
 		pos = Vector2( rng.randi_range(-1600, 1850), rng.randi_range(250, 2650))
 		var location = groundTilemap.world_to_map(pos)
-		check_and_place_object(object_name, object_variety, i)
+		check_location_and_place_object(object_name, object_variety, i)
 		
 	
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
-#onready var oreTypes = ['Red gem', 'Green gem', 'Dark blue gem', 'Cyan gem', 'Gold ore', 'Iron ore', 'Stone', 'Cobblestone']
 onready var oreTypes = ["Stone", "Cobblestone"]
 
 func set_object_variety(name):
@@ -65,16 +67,15 @@ func set_object_variety(name):
 		oreTypes.shuffle()
 		return oreTypes[0]
 		
-func check_and_place_object(name, variety, i):
+func check_location_and_place_object(name, variety, i):
 	rng.randomize()
 	pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
 	var location = groundTilemap.world_to_map(pos)
 	if verify_tile(name, location):
-		change_tiles(name, location)
 		place_object(name, variety, groundTilemap.map_to_world(location), true)
 		PlayerInventory.player_farm_objects[i] = [name, variety, groundTilemap.map_to_world(location), true] 
 	else:
-		check_and_place_object(name, variety, i)
+		check_location_and_place_object(name, variety, i)
 
 func verify_tile(name, loc):
 	if name == "tree branch" or name == "ore small" or name == "tall grass":
@@ -88,7 +89,7 @@ func verify_tile(name, loc):
 		else:
 			return false
 
-func change_tiles(name, loc):
+func replace_tiles(name, loc):
 	if name == "tree":
 		groundTilemap.set_cellv(loc, -1)
 		groundTilemap.set_cellv(loc + Vector2(0, 1), -1)
@@ -122,8 +123,10 @@ func change_tiles(name, loc):
 	elif name == "ore small":
 		groundTilemap.set_cellv(loc, -1)
 		hiddenGroundTileMap.set_cellv(loc, 2)
+
 			
 func place_object(name, variety, pos, isFullGrowth):
+	replace_tiles(name, groundTilemap.world_to_map(pos))
 	if name == "tree":
 		var treeObject = TreeObject.instance()
 		treeObject.initialize(variety, pos, isFullGrowth)
@@ -149,3 +152,4 @@ func place_object(name, variety, pos, isFullGrowth):
 		smallOreObject.initialize(variety, pos)
 		call_deferred("add_child", smallOreObject)
 		smallOreObject.position = pos + Vector2(16, 24)
+

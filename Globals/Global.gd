@@ -31,21 +31,17 @@ var tree_hit = [
 var tree_break = preload("res://Assets/Sound effects/Tree/Falling tree.mp3")
 var stump_break = preload("res://Assets/Sound effects/Tree/Stump break.mp3")
 
+var fire_start = preload("res://Assets/Sound effects/Fire/start.mp3")
+var fire_crackle = preload("res://Assets/Sound effects/Fire/crackle.mp3")
+
 ### Music ###
-var title_music = preload("res://Assets/music/TitleMusic.mp3")
+var title_music = null
 var background_music = [
-	preload("res://Assets/music/A Fool\'s Errand.mp3"),
-	preload("res://Assets/music/Highway in the Sun.mp3"),
-	preload("res://Assets/music/The Norman Kings.mp3"),
-	preload("res://Assets/music/The Way to the Sky.mp3"),
-	preload("res://Assets/music/A Celtic Blessing.mp3"),
-	preload("res://Assets/music/A World of Possibilities.mp3"),
-	preload("res://Assets/music/Between the Willows.mp3"),
-	preload("res://Assets/music/Bombay Nights.mp3"),
-	preload("res://Assets/music/Eyes of Yours.mp3"),
-	preload("res://Assets/music/I Give Ye My Spirit.mp3"),
-	preload("res://Assets/music/Rise of an Empire.mp3"),
-	preload("res://Assets/music/You Seen My Coat.mp3")
+	preload("res://Assets/music/ES_Back to Business - William Benckert.mp3"),
+	preload("res://Assets/music/ES_Dance of the Pixel Birds - William Benckert.mp3"),
+	preload("res://Assets/music/ES_Fair N Square - William Benckert.mp3"),
+	preload("res://Assets/music/ES_Reality - AGST.mp3"),
+	preload("res://Assets/music/ES_Seal the Deal - Eight Bits.mp3"),
 ]
 
 ### Characters ###
@@ -5516,8 +5512,8 @@ var rng = RandomNumberGenerator.new()
 var characters = [lesser_demon_male, ogre_female, ogre_male, water_draganoid_female, water_draganoid_male, seraphim_female, seraphim_male, goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_female, lesser_spirit, succubus]
 func randomizeAttributes():
 	rng.randomize()
-	characters.shuffle()
-	var character = characters[0]
+	#characters.shuffle()
+	var character = characters[4]
 	
 	acc_index = character.acc_idle_down.size() - 1
 	headAtr_index = character.head_attribute_idle_down.size() - 1

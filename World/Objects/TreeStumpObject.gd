@@ -44,10 +44,10 @@ func _on_StumpHurtBox_area_entered(area):
 		$SoundEffects.play()
 		if Player.get_position().x <= get_position().x:
 			stump_animation_player.play("stump_hit_right")
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(8, 12))
+			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			stumpHealth = stumpHealth - 1
 		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-40, 12))
+			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump_hit_right")
 			stumpHealth = stumpHealth - 1
 			

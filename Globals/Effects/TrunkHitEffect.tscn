@@ -731,7 +731,6 @@ tracks/17/keys = {
 }
 
 [node name="TrunkHitEffect" type="Node2D"]
-z_index = 1
 script = ExtResource( 1 )
 
 [node name="TreeChips" type="Node2D" parent="."]

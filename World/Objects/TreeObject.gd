@@ -8,7 +8,6 @@ onready var treeTopSprite = $TreeSprites/TreeTop
 
 onready var LeavesFallEffect = preload("res://Globals/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://Globals/Effects/TrunkHitEffect.tscn")
-onready var TreeExplosionEffect = preload("res://Globals/Effects/TreeExplosionEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var Player = get_node("/root/World/Farm/Player")
 var rng = RandomNumberGenerator.new()
@@ -28,6 +27,7 @@ func initialize(inputVar, inputPos, ifFullTree):
 
 func _ready():
 	setTexture(treeObject)
+	set_random_leaves_falling()
 
 func setTexture(tree):
 	set_tree_collision_shape()
@@ -40,7 +40,20 @@ func setTexture(tree):
 		disable_tree_top_collision_box()
 		$TreeHurtbox/treeHurtBox.disabled = true
 		$TreeSprites/TreeTop.visible = false
+		$TreeSprites/TreeBottom.visible = false
 		$StumpHurtBox/stumpHurtBox.disabled = false
+		
+func set_random_leaves_falling():
+	rng.randomize()
+	var randomDelay = rng.randi_range(1, 100)
+	yield(get_tree().create_timer(randomDelay), "timeout")
+	if variety == 'D' || variety == 'E':
+		initiateLeavesFallingEffect(treeObject, Vector2(0, 50))
+	elif variety == 'B':
+		initiateLeavesFallingEffect(treeObject, Vector2(0, 25))
+	else: 
+		initiateLeavesFallingEffect(treeObject, Vector2(0, 0))
+	set_random_leaves_falling()
 		
 func set_tree_collision_shape():
 	if variety == "A":
@@ -111,7 +124,7 @@ func _on_stumpHurtBox_area_entered(_area):
 		$SoundEffectsStump.play()
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
-		intitiateItemDrop("Wood", Vector2(0, 24))
+		intitiateItemDrop("Wood", Vector2(0, 12))
 		PlayerInventory.remove_farm_object(pos)
 		yield($SoundEffectsStump, "finished")
 		queue_free()

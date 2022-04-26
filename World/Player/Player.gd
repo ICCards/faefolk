@@ -43,9 +43,9 @@ func _unhandled_input(event):
 			
 
 
-var MAX_SPEED := 14.0
-var ACCELERATION := 10
-var FRICTION := 200
+var MAX_SPEED := 12.5
+var ACCELERATION := 4
+var FRICTION := 10
 var velocity := Vector2.ZERO
 
 func movement_state(delta):
@@ -143,7 +143,7 @@ func _ready():
 	setPlayerState(get_owner())
 	setPlayerTexture('idle_down')
 	$SoundEffects.play()
-	#_play_background_music()
+	_play_background_music()
 
 var playerState
 func setPlayerState(ownerNode):

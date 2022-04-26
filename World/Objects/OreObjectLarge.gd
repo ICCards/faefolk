@@ -45,15 +45,15 @@ func _on_BigHurtBox_area_entered(_area):
 		PlayerInventory.set_farm_object_break(pos)
 		$SoundEffects.stream = Global.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 40))
-		intitiateItemDrop(variety, Vector2(0, 10))
+		initiateOreHitEffect(oreObject, "ore break", Vector2(0, 24))
+		intitiateItemDrop(variety, Vector2(0, 4))
 		animation_player.play("big_ore_break")
 
 		
 	if bigOreHits != 0:
 		$SoundEffects.stream = Global.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-25, 25), rng.randi_range(0, 40)))
+		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-25, 25), rng.randi_range(-8, 32)))
 		animation_player.play("big_ore_hit_right")
 		bigOreHits = bigOreHits - 1
 
@@ -63,8 +63,8 @@ func _on_SmallHurtBox_area_entered(_area):
 	if smallOreHits == 0:
 		$SoundEffects.stream = Global.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 50))
-		intitiateItemDrop(variety, Vector2(0, 40))
+		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 32))
+		intitiateItemDrop(variety, Vector2(0, 28))
 		animation_player.play("small_ore_break")
 		yield($SoundEffects, "finished")
 		PlayerInventory.remove_farm_object(pos)
@@ -72,7 +72,7 @@ func _on_SmallHurtBox_area_entered(_area):
 	if smallOreHits != 0:
 		$SoundEffects.stream = Global.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 40))
+		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 24))
 		animation_player.play("small_ore_hit_right")
 		smallOreHits = smallOreHits - 1
 

@@ -32,6 +32,17 @@ func _ready():
 	# rug disable ysort
 	if !JsonData.house_objects_data[image]["CollisionEnabled"]:
 		z_index -= 1
+	if image == "Fireplace":
+		$LightFireplaceUI/LightFireplaceBox/CollisionShape2D.disabled = false
+		$LightFireplaceUI/FireStone.visible = true
+		if PlayerInventory.isFireplaceLit:
+			$LightFireplaceUI/Fire.visible = true
+			$LightFireplaceUI/Fire.playing = true
+			$LightFireplaceUI/FireplaceLight.visible = true
+			$LightFireplaceUI/FireCrackleSoundEffects.play()
+	if image == "Window 1" or image == "Window 2":
+		$WindowLightingUI/LargeLight.visible = true
+		$WindowLightingUI/SmallLight.visible = true
 
 
 
@@ -67,7 +78,7 @@ func validateTileBoundary(pos):
 			return false
 		
 
-func _physics_process(delta):
+func _physics_process(evemt):
 	if moveItemFlag:
 		$ColorIndicator.visible = true
 		var mousePos = get_global_mouse_position() + Vector2(-16, 16)
@@ -77,7 +88,9 @@ func _physics_process(delta):
 			$ColorIndicator.texture = load("res://Assets/red_square.png" )
 		else:
 			$ColorIndicator.texture = load("res://Assets/green_square.png")
-
+	elif insideLightFireplaceArea:
+		if Input.is_action_just_pressed("action"):
+			light_fire()
 
 var is_colliding_other_object = false
 
@@ -88,4 +101,29 @@ func _on_CollisionBox_area_exited(area):
 func _on_CollisionBox_area_entered(area):
 	is_colliding_other_object = true
 
+
+
+func light_fire():
+	PlayerInventory.isFireplaceLit = !PlayerInventory.isFireplaceLit
+	if PlayerInventory.isFireplaceLit:
+		$LightFireplaceUI/Fire.visible = true
+		$LightFireplaceUI/FireplaceLight.visible = true
+		$LightFireplaceUI/Fire.playing = true
+		$LightFireplaceUI/FireStartSoundEffects.play()
+		yield(get_tree().create_timer(0.75), "timeout")
+		$LightFireplaceUI/FireCrackleSoundEffects.play()
+	else:
+		$LightFireplaceUI/FireCrackleSoundEffects.stop()
+		$LightFireplaceUI/Fire.visible = false
+		$LightFireplaceUI/FireplaceLight.visible = false
+		$LightFireplaceUI/Fire.playing = false
+		
+var insideLightFireplaceArea = false
+
+func _on_LightFireplaceBox_area_entered(area):
+	insideLightFireplaceArea = true
+
+
+func _on_LightFireplaceBox_area_exited(area):
+	insideLightFireplaceArea = false
 
