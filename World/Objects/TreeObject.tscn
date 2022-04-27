@@ -635,7 +635,6 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -120 )
 
 [node name="MovementCollisionBox2" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2( 0, -31 )
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox2"]
@@ -743,14 +742,15 @@ visible = false
 polygon = PoolVector2Array( 9, -4, 9, -57, 61, -109, 60, -185, 40, -215, 1, -235, -41, -212, -54, -178, -52, -148, -71, -121, -45, -80, -13, -79, -13, -2 )
 disabled = true
 
-[node name="D" type="CollisionPolygon2D" parent="TreeTopArea"]
-visible = false
-polygon = PoolVector2Array( 2.22222, 9.88889, 6.66667, -65.6667, 38.8889, -66.7778, 2.22222, -161.222, -34.4444, -75.6667, -8.88889, -70.1111, -7.77778, -9 )
-disabled = true
-
 [node name="E" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
 polygon = PoolVector2Array( 10, -4, 9, -43, 30, -37, 39, -58, 21, -141, 0, -163, -20, -139, -33, -61, -31, -35, -9, -40, -14, -4 )
+disabled = true
+
+[node name="D" type="CollisionPolygon2D" parent="TreeTopArea"]
+visible = false
+position = Vector2( 2.22222, -0.111112 )
+polygon = PoolVector2Array( -5.55554, -6.77777, 5.55556, -6.77778, 37.7778, -28.8889, 50, -81.1111, 0, -151.222, -48.8889, -77.8889, -45.5556, -34.4444 )
 disabled = true
 
 [node name="Tween" type="Tween" parent="."]

@@ -54,11 +54,13 @@ func _on_MouseInputBox_input_event(viewport, event, shape_idx):
 			for i in range(PlayerInventory.player_home.size()):
 				if PlayerInventory.player_home[i][0] == image and !is_colliding_other_object and !validateTileBoundary(position / 32):
 					PlayerInventory.player_home[i][1] = (mousePos / 32 - Vector2(0, 5))
+					$MovementCollision/CollisionShape2D.disabled = !JsonData.house_objects_data[image]["CollisionEnabled"]
 					$ColorIndicator.visible = false
 					moveItemFlag = false
 					find_parent("InsidePlayerHome").is_moving_object = null
 					$SoundEffects.play()
 		elif !moveItemFlag and find_parent("InsidePlayerHome").is_moving_object == null:
+			$MovementCollision/CollisionShape2D.disabled = true
 			moveItemFlag = true
 			find_parent("InsidePlayerHome").is_moving_object = true
 			$SoundEffects.play()

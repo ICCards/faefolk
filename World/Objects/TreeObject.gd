@@ -109,11 +109,11 @@ func _on_Hurtbox_area_entered(_area):
 			initiateLeavesFallingEffect(treeObject, Vector2(0, 0))
 
 		if Player.get_position().x <= get_position().x:	
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 25))
+			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			tree_animation_player.play("tree hit right")
 			treeHealth = treeHealth - 1
 		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 25))
+			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			tree_animation_player.play("tree hit left")
 			treeHealth = treeHealth - 1
 
@@ -134,10 +134,10 @@ func _on_stumpHurtBox_area_entered(_area):
 		$SoundEffectsStump.play()
 		if Player.get_position().x <= get_position().x:
 			stump_animation_player.play("stump_hit_right")
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 25))
+			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			stumpHealth = stumpHealth - 1
 		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 25))
+			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump_hit_right")
 			stumpHealth = stumpHealth - 1
 			
