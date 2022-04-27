@@ -5512,7 +5512,7 @@ var rng = RandomNumberGenerator.new()
 var characters = [lesser_demon_male, ogre_female, ogre_male, water_draganoid_female, water_draganoid_male, seraphim_female, seraphim_male, goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_female, lesser_spirit, succubus]
 func randomizeAttributes():
 	rng.randomize()
-	#characters.shuffle()
+	characters.shuffle()
 	var character = characters[4]
 	
 	acc_index = character.acc_idle_down.size() - 1

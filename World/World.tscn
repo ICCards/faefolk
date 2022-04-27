@@ -8,7 +8,7 @@
 [node name="Farm" type="YSort" parent="."]
 
 [node name="Player" parent="Farm" instance=ExtResource( 1 )]
-position = Vector2( 827, 502 )
+position = Vector2( 917, 513 )
 
 [node name="BottomRight" parent="Farm/Player/Camera2D/Limits" index="0"]
 position = Vector2( 2016, 2912 )

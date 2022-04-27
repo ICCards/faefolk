@@ -7,6 +7,7 @@ onready var OreObject = preload("res://World/Objects/OreObjectLarge.tscn")
 onready var SmallOreObject = preload("res://World/Objects/OreObjectSmall.tscn")
 onready var TallGrassObject = preload("res://World/Objects/TallGrassObject.tscn")
 onready var groundTilemap = $GroundTiles
+onready var validTiles = $ValidTiles
 onready var waterTilemap = $WaterTiles/WaterTilemap
 onready var hiddenGroundTileMap = $HiddenGroundLayer
 
@@ -17,28 +18,60 @@ func _ready():
 		generate_farm()
 	else:
 		load_farm()
-	initiate_grass_tiles()
+	generate_grass_bunches()
+	generate_grass_tiles()
 	
 
 onready var object_types = ["tree", "tree stump", "tree branch", "ore large", "ore small"]
+onready var tall_grass_types = ["dark green", "green", "red", "yellow"]
 
 var object_name
 var pos
 var object_variety
 
-func initiate_grass_tiles():
-	for i in range(1500):
+func generate_grass_bunches():
+	for i in range(100):
+		pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
+		var location = groundTilemap.world_to_map(pos)
+		if verify_tile("tall grass", location):
+			validTiles.set_cellv(location, -1)
+			var tallGrassObject = TallGrassObject.instance()
+			tall_grass_types.shuffle()
+			tallGrassObject.initialize(tall_grass_types[0])
+			call_deferred("add_child", tallGrassObject)
+			tallGrassObject.position = global_position + pos + Vector2(16,24)
+			create_grass_bunch(location, tall_grass_types[0])
+
+onready var randomBorderTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
+func create_grass_bunch(loc, variety):
+	rng.randomize()
+	var randomNum = rng.randi_range(1, 20)
+	for i in range(randomNum):
+		randomBorderTiles.shuffle()
+		loc += randomBorderTiles[0]
+		if verify_tile("tall grass", loc):
+			var tallGrassObject = TallGrassObject.instance()
+			tallGrassObject.initialize(variety)
+			call_deferred("add_child", tallGrassObject)
+			tallGrassObject.position = global_position + validTiles.map_to_world(loc) + Vector2(16,24)
+		
+
+func generate_grass_tiles():
+	for i in range(500):
 		rng.randomize()
 		pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
 		var location = groundTilemap.world_to_map(pos)
 		if verify_tile("tall grass", location):
 			var tallGrassObject = TallGrassObject.instance()
+			tall_grass_types.shuffle()
+			tallGrassObject.initialize(tall_grass_types[0])
 			call_deferred("add_child", tallGrassObject)
 			tallGrassObject.position = global_position + pos + Vector2(16,24)
 
 func load_farm():
 	for i in range(PlayerInventory.player_farm_objects.size()):
 		if PlayerInventory.player_farm_objects.has(i):
+			replace_tiles(PlayerInventory.player_farm_objects[i][0], PlayerInventory.player_farm_objects[i][2])
 			place_object(PlayerInventory.player_farm_objects[i][0], PlayerInventory.player_farm_objects[i][1], PlayerInventory.player_farm_objects[i][2], PlayerInventory.player_farm_objects[i][3])
 
 
@@ -79,54 +112,45 @@ func check_location_and_place_object(name, variety, i):
 
 func verify_tile(name, loc):
 	if name == "tree branch" or name == "ore small" or name == "tall grass":
-		if groundTilemap.get_cellv(loc) != -1:
+		if validTiles.get_cellv(loc) != -1:
+			validTiles.set_cellv(loc, -1)
 			return true
 		else:
 			return false
 	else:
-		if groundTilemap.get_cellv(loc) != -1 and groundTilemap.get_cellv(loc + Vector2(0,1)) != -1 and groundTilemap.get_cellv(loc + Vector2(-1,1)) != -1 and groundTilemap.get_cellv(loc + Vector2(-1,0)) != -1:
+		if validTiles.get_cellv(loc) != -1 and validTiles.get_cellv(loc + Vector2(0,1)) != -1 and validTiles.get_cellv(loc + Vector2(-1,1)) != -1 and validTiles.get_cellv(loc + Vector2(-1,0)) != -1:
+			validTiles.set_cellv(loc, -1)
+			validTiles.set_cellv(loc + Vector2(0, 1), -1)
+			validTiles.set_cellv(loc + Vector2(-1, 1), -1)
+			validTiles.set_cellv(loc + Vector2(-1, 0), -1)
 			return true
 		else:
 			return false
 
 func replace_tiles(name, loc):
+	loc = groundTilemap.world_to_map(loc)
 	if name == "tree":
-		groundTilemap.set_cellv(loc, -1)
-		groundTilemap.set_cellv(loc + Vector2(0, 1), -1)
-		groundTilemap.set_cellv(loc + Vector2(-1, 1), -1)
-		groundTilemap.set_cellv(loc + Vector2(-1, 0), -1)
-		hiddenGroundTileMap.set_cellv(loc, 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(0, 1), 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(-1, 1), 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(-1, 0), 2)
+		validTiles.set_cellv(loc, -1)
+		validTiles.set_cellv(loc + Vector2(0, 1), -1)
+		validTiles.set_cellv(loc + Vector2(-1, 1), -1)
+		validTiles.set_cellv(loc + Vector2(-1, 0), -1)
 	elif name == "tree stump":
-		groundTilemap.set_cellv(loc, -1)
-		groundTilemap.set_cellv(loc + Vector2(0, 1), -1)
-		groundTilemap.set_cellv(loc + Vector2(-1, 1), -1)
-		groundTilemap.set_cellv(loc + Vector2(-1, 0), -1)
-		hiddenGroundTileMap.set_cellv(loc, 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(0, 1), 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(-1, 1), 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(-1, 0), 2)
+		validTiles.set_cellv(loc, -1)
+		validTiles.set_cellv(loc + Vector2(0, 1), -1)
+		validTiles.set_cellv(loc + Vector2(-1, 1), -1)
+		validTiles.set_cellv(loc + Vector2(-1, 0), -1)
 	elif name == "tree branch":
-		groundTilemap.set_cellv(loc, -1)
-		hiddenGroundTileMap.set_cellv(loc, 2)
+		validTiles.set_cellv(loc, -1)
 	elif name == "ore large":
-		groundTilemap.set_cellv(loc, -1)
-		groundTilemap.set_cellv(loc + Vector2(0, 1), -1)
-		groundTilemap.set_cellv(loc + Vector2(-1, 1), -1)
-		groundTilemap.set_cellv(loc + Vector2(-1, 0), -1)
-		hiddenGroundTileMap.set_cellv(loc, 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(0, 1), 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(-1, 1), 2)
-		hiddenGroundTileMap.set_cellv(loc + Vector2(-1, 0), 2)
+		validTiles.set_cellv(loc, -1)
+		validTiles.set_cellv(loc + Vector2(0, 1), -1)
+		validTiles.set_cellv(loc + Vector2(-1, 1), -1)
+		validTiles.set_cellv(loc + Vector2(-1, 0), -1)
 	elif name == "ore small":
-		groundTilemap.set_cellv(loc, -1)
-		hiddenGroundTileMap.set_cellv(loc, 2)
+		validTiles.set_cellv(loc, -1)
 
 			
 func place_object(name, variety, pos, isFullGrowth):
-	replace_tiles(name, groundTilemap.world_to_map(pos))
 	if name == "tree":
 		var treeObject = TreeObject.instance()
 		treeObject.initialize(variety, pos, isFullGrowth)

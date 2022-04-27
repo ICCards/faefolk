@@ -24,7 +24,7 @@ func setTreeBranchType(num):
 	elif num <= 5:
 		treeObject = Images.returnTreeObject('B')
 	elif num <= 8:
-		treeObject = Images.returnTreeObject('B')
+		treeObject = Images.returnTreeObject('A')
 	else:
 		treeObject = Images.returnTreeObject('C')
 	$Branch.texture = Images.tree_branch_objects[num]
@@ -41,7 +41,6 @@ func _on_BranchHurtBox_area_entered(area):
 
 
 ### Effect functions		
-		
 func initiateTreeHitEffect(tree, effect, pos):
 	var trunkHitEffect = TrunkHitEffect.instance()
 	trunkHitEffect.init(tree, effect)
