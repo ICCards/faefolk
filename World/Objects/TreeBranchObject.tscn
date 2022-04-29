@@ -3,7 +3,7 @@
 [ext_resource path="res://World/Objects/TreeBranchObject.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 19.0396, 20.9444 )
+extents = Vector2( 17.7778, 17.7778 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 19.5199, 23.1666 )
@@ -96,11 +96,12 @@ script = ExtResource( 2 )
 position = Vector2( 2, -18 )
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox2"]
-position = Vector2( -2, 23.5556 )
+position = Vector2( -2.00001, 22.4444 )
 rotation = -1.5708
 shape = SubResource( 4 )
 
 [node name="BranchHurtBox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -20 )
 collision_layer = 8
 collision_mask = 0

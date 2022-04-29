@@ -12,6 +12,7 @@ onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var Player = get_node("/root/World/Farm/Player")
 var rng = RandomNumberGenerator.new()
 
+
 onready var world = get_tree().current_scene
 
 var treeObject
@@ -28,25 +29,30 @@ func initialize(inputVar, inputPos, ifFullTree):
 func _ready():
 	setTexture(treeObject)
 	set_random_leaves_falling()
-
-func setTexture(tree):
-	set_tree_collision_shape()
-	treeStumpSprite.texture = tree.stump
-	treeTopSprite.texture = tree.topTree
-	treeBottomSprite.texture = tree.bottomTree
-	$TreeChipParticles.texture = tree.chip 
-	$TreeLeavesParticles.texture = tree.leaves
 	if !showFullTree:
+		timer.stop()
 		disable_tree_top_collision_box()
 		$TreeHurtbox/treeHurtBox.disabled = true
 		$TreeSprites/TreeTop.visible = false
 		$TreeSprites/TreeBottom.visible = false
 		$StumpHurtBox/stumpHurtBox.disabled = false
-		
+
+func setTexture(tree):
+	set_tree_top_collision_shape()
+	treeStumpSprite.texture = tree.stump
+	treeTopSprite.texture = tree.topTree
+	treeBottomSprite.texture = tree.bottomTree
+	$TreeChipParticles.texture = tree.chip 
+	$TreeLeavesParticles.texture = tree.leaves
+	
+onready var timer = $Timer
 func set_random_leaves_falling():
 	rng.randomize()
-	var randomDelay = rng.randi_range(1, 100)
-	yield(get_tree().create_timer(randomDelay), "timeout")
+	var randomDelay = rng.randi_range(1, 80)
+	timer.wait_time = randomDelay
+	timer.start()
+	yield(timer, "timeout")
+	timer.start()
 	if variety == 'D' || variety == 'E':
 		initiateLeavesFallingEffect(treeObject, Vector2(0, 50))
 	elif variety == 'B':
@@ -54,35 +60,13 @@ func set_random_leaves_falling():
 	else: 
 		initiateLeavesFallingEffect(treeObject, Vector2(0, 0))
 	set_random_leaves_falling()
-		
-func set_tree_collision_shape():
-	if variety == "A":
-		$TreeTopArea/A.disabled = false
-	elif variety == "B":
-		$TreeTopArea/B.disabled = false
-	elif variety == "C":
-		$TreeTopArea/C.disabled = false
-	elif variety == "D":
-		$TreeTopArea/D.disabled = false
-	elif variety == "E":
-		$TreeTopArea/E.disabled = false
-		
-func disable_tree_top_collision_box():
-	set_tree_visible()
-	if variety == "A":
-		$TreeTopArea/A.call_deferred("set", "disabled", true)
-	elif variety == "B":
-		$TreeTopArea/B.call_deferred("set", "disabled", true)
-	elif variety == "C":
-		$TreeTopArea/C.call_deferred("set", "disabled", true)
-	elif variety == "D":
-		$TreeTopArea/D.call_deferred("set", "disabled", true)
-	elif variety == "E":
-		$TreeTopArea/E.call_deferred("set", "disabled", true)
 
+
+### Tree hurtbox
 var treeHealth: int = 4
 func _on_Hurtbox_area_entered(_area):
 	if treeHealth == 0:
+		timer.stop()
 		disable_tree_top_collision_box()
 		PlayerInventory.set_farm_object_break(pos)
 		$SoundEffectsStump.stream = Global.tree_hit[rng.randi_range(0,2)]
@@ -117,6 +101,7 @@ func _on_Hurtbox_area_entered(_area):
 			tree_animation_player.play("tree hit left")
 			treeHealth = treeHealth - 1
 
+### Stump hurtbox
 var stumpHealth: int = 2
 func _on_stumpHurtBox_area_entered(_area):
 	if stumpHealth == 0: 
@@ -140,10 +125,9 @@ func _on_stumpHurtBox_area_entered(_area):
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump_hit_right")
 			stumpHealth = stumpHealth - 1
-			
-		
-### Effect functions		
 
+
+### Effect functions		
 func initiateLeavesFallingEffect(tree, pos):
 	var leavesEffect = LeavesFallEffect.instance()
 	leavesEffect.initLeavesEffect(tree)
@@ -162,6 +146,32 @@ func intitiateItemDrop(item, pos):
 	world.call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position + pos
 
+
+### Tree modulate functions
+func set_tree_top_collision_shape():
+	if variety == "A":
+		$TreeTopArea/A.disabled = false
+	elif variety == "B":
+		$TreeTopArea/B.disabled = false
+	elif variety == "C":
+		$TreeTopArea/C.disabled = false
+	elif variety == "D":
+		$TreeTopArea/D.disabled = false
+	elif variety == "E":
+		$TreeTopArea/E.disabled = false
+
+func disable_tree_top_collision_box():
+	set_tree_visible()
+	if variety == "A":
+		$TreeTopArea/A.call_deferred("set", "disabled", true)
+	elif variety == "B":
+		$TreeTopArea/B.call_deferred("set", "disabled", true)
+	elif variety == "C":
+		$TreeTopArea/C.call_deferred("set", "disabled", true)
+	elif variety == "D":
+		$TreeTopArea/D.call_deferred("set", "disabled", true)
+	elif variety == "E":
+		$TreeTopArea/E.call_deferred("set", "disabled", true)
 
 onready var tween = $Tween
 func set_tree_transparent():

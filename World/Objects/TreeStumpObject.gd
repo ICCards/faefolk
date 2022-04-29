@@ -25,8 +25,6 @@ func setTexture(tree):
 	treeStumpSprite.texture = tree.largeStump
 
 
-
-
 var stumpHealth: int = 2
 func _on_StumpHurtBox_area_entered(area):
 	if stumpHealth == 0: 

@@ -755,6 +755,8 @@ disabled = true
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="StumpHurtBox" to="." method="_on_stumpHurtBox_area_entered"]
 [connection signal="area_entered" from="TreeHurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="TreeTopArea" to="." method="_on_TreeTopArea_area_entered"]

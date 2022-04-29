@@ -7,7 +7,7 @@
 extents = Vector2( 24.3465, 18.0706 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24.3465, 13.0088 )
+extents = Vector2( 19.4118, 13.0088 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -127,6 +127,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -28 )
 
 [node name="SmallHurtBox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 1.49254, -55.2239 )
 collision_layer = 16
 collision_mask = 0
@@ -139,7 +140,8 @@ shape = SubResource( 1 )
 position = Vector2( 1.49254, -55.2239 )
 
 [node name="SmallMovementBox" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
-position = Vector2( -1.49254, 49.4091 )
+position = Vector2( -3.25725, 49.4091 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

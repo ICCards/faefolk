@@ -13,7 +13,7 @@
 extents = Vector2( 0.647213, 0.651788 )
 
 [sub_resource type="CapsuleShape2D" id=11]
-height = 5.88236
+height = 12.9412
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -400,7 +400,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -50, -20 ) ]
+"values": [ Vector2( -40, -20 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -536,7 +536,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 50, -20 ) ]
+"values": [ Vector2( 40, -20 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")

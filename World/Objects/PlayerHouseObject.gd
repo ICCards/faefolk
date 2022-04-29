@@ -6,13 +6,6 @@ func _on_Doorway_area_entered(area):
 
 
 
-#func _on_BehindHouseArea_body_entered(body):
-#	set_house_transparent()
-#
-#
-#func _on_BehindHouseArea_body_exited(body):
-#	set_house_visible()
-
 onready var tween = $Tween
 func set_house_transparent():
 	tween.interpolate_property($HouseSprite, "modulate",

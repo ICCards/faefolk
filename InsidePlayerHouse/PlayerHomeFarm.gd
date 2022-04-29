@@ -6,6 +6,7 @@ onready var StumpObject = preload("res://World/Objects/TreeStumpObject.tscn")
 onready var OreObject = preload("res://World/Objects/OreObjectLarge.tscn")
 onready var SmallOreObject = preload("res://World/Objects/OreObjectSmall.tscn")
 onready var TallGrassObject = preload("res://World/Objects/TallGrassObject.tscn")
+onready var FlowerObject = preload("res://World/Objects/FlowerObject.tscn")
 onready var groundTilemap = $GroundTiles
 onready var validTiles = $ValidTiles
 onready var waterTilemap = $WaterTiles/WaterTilemap
@@ -47,8 +48,8 @@ func play_water_animation():
 	tiles.shuffle()
 	for i in range(10):
 		waterAnimationTiles.set_cellv(tiles[i], rng.randi_range(0, 7))
-	#var randomDelay = rng.randi_range(1, 1.5)
-	yield(get_tree().create_timer(0.5), "timeout")
+	var randomDelay = rng.randi_range(0.5, 1)
+	yield(get_tree().create_timer(randomDelay), "timeout")
 	waterAnimationTiles.clear()
 	play_water_animation()
 
@@ -85,7 +86,9 @@ func generate_flower_tiles():
 		pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
 		var location = groundTilemap.world_to_map(pos)
 		if validate_and_remove_tiles("flower", location):
-			flowerTiles.set_cellv(location, rng.randi_range(0, 19))
+			var flowerObject = FlowerObject.instance()
+			call_deferred("add_child", flowerObject)
+			flowerObject.position = global_position + pos + Vector2(16,32)
 
 
 func generate_grass_bunches():
