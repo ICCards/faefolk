@@ -10,6 +10,8 @@ onready var groundTilemap = $GroundTiles
 onready var validTiles = $ValidTiles
 onready var waterTilemap = $WaterTiles/WaterTilemap
 onready var flowerTiles = $DecorationTiles/Flowers
+onready var validWaterTiles = $WaterValidTiles
+onready var waterAnimationTiles = $WaterTiles/WaterAnimated
 
 var rng = RandomNumberGenerator.new()
 
@@ -38,7 +40,17 @@ func _ready():
 	generate_grass_bunches()
 	generate_grass_tiles()
 	generate_flower_tiles()
-
+	play_water_animation()
+	
+func play_water_animation():
+	var tiles = validWaterTiles.get_used_cells()
+	tiles.shuffle()
+	for i in range(10):
+		waterAnimationTiles.set_cellv(tiles[i], rng.randi_range(0, 7))
+	#var randomDelay = rng.randi_range(1, 1.5)
+	yield(get_tree().create_timer(0.5), "timeout")
+	waterAnimationTiles.clear()
+	play_water_animation()
 
 func load_farm():
 	for i in range(PlayerInventory.player_farm_objects.size()):
@@ -99,7 +111,9 @@ func create_grass_bunch(loc, variety):
 			var tallGrassObject = TallGrassObject.instance()
 			tallGrassObject.initialize(variety)
 			call_deferred("add_child", tallGrassObject)
-			tallGrassObject.position = global_position + validTiles.map_to_world(loc) + Vector2(16,24)
+			tallGrassObject.position = global_position + validTiles.map_to_world(loc) + Vector2(16,32)
+		else:
+			loc -= randomBorderTiles[0]
 
 func generate_grass_tiles():
 	for i in range(NUM_GRASS_TILES):
@@ -111,7 +125,7 @@ func generate_grass_tiles():
 			tall_grass_types.shuffle()
 			tallGrassObject.initialize(tall_grass_types[0])
 			call_deferred("add_child", tallGrassObject)
-			tallGrassObject.position = global_position + pos + Vector2(16,24)
+			tallGrassObject.position = global_position + pos + Vector2(16,32)
 
 
 func set_object_variety(name):

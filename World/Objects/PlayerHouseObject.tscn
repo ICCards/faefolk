@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Images/player_house.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/PlayerHouseObject.gd" type="Script" id=2]
@@ -6,13 +6,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 27, 22.7188 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 173.151, 66.5137 )
-
 [node name="PlayerHouseObject" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="TextureRect" type="Sprite" parent="."]
+[node name="HouseSprite" type="Sprite" parent="."]
 position = Vector2( 0, -170 )
 scale = Vector2( 1.00399, 0.982278 )
 texture = ExtResource( 1 )
@@ -31,8 +28,20 @@ scale = Vector2( 1.00201, 0.973707 )
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-position = Vector2( -0.499001, -64.4597 )
-shape = SubResource( 2 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+polygon = PoolVector2Array( 4.98997, 0, 186.625, -2.05401, 188.621, 124.267, 232.533, 124.267, 226.545, -164.32, -226.545, -162.266, -229.539, 123.24, -191.615, 123.24, -191.615, 0 )
+
+[node name="BehindHouseArea" type="Area2D" parent="."]
+collision_layer = 4096
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BehindHouseArea"]
+polygon = PoolVector2Array( -156, -175, -101, -202, -104, -217, 40, -357, 182, -221, 182, -174 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="area_entered" from="Doorway" to="." method="_on_Doorway_area_entered"]
+[connection signal="area_entered" from="BehindHouseArea" to="." method="_on_BehindHouseArea_area_entered"]
+[connection signal="area_exited" from="BehindHouseArea" to="." method="_on_BehindHouseArea_area_exited"]
+[connection signal="body_entered" from="BehindHouseArea" to="." method="_on_BehindHouseArea_body_entered"]
+[connection signal="body_exited" from="BehindHouseArea" to="." method="_on_BehindHouseArea_body_exited"]

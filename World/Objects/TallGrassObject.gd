@@ -8,8 +8,6 @@ func initialize(varietyInput):
 	variety = varietyInput
 
 func _ready():
-	rng.randomize()
-	var randomNum = rng.randi_range(1, 2)
 	$Sprite.texture = load("res://Assets/tall grass sets/" + variety + ".png")
 
 
@@ -18,6 +16,7 @@ func _ready():
 func play_sound_effect():
 	if !bodyEnteredFlag:
 		$SoundEffects.play()
+		$AnimationPlayer.play("animate")
 
 var bodyEnteredFlag = false
 
