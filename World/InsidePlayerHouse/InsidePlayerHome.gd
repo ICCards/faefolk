@@ -1,18 +1,21 @@
-extends YSort
+extends Node2D
 
 
 var is_moving_object
+
+
+func _on_Doorway_area_entered(area):
+	SceneChanger.change_scene("res://World/Farm/PlayerHomeFarm.tscn", "door")
+
 
 func _ready():
 	initialize_house_objects()
 
 
-func _on_Doorway_area_entered(area):
-	SceneChanger.change_scene("res://World/World.tscn")
 
 
-onready var DisplaceHouseObject = preload("res://InsidePlayerHouse/DisplayHouseObject.tscn")
-onready var world = get_tree().current_scene
+
+onready var DisplaceHouseObject = preload("res://World/InsidePlayerHouse/DisplayHouseObject.tscn")
 
 func initialize_house_objects():
 	for i in range(PlayerInventory.player_home.size()):

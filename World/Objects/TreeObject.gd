@@ -9,7 +9,7 @@ onready var treeTopSprite = $TreeSprites/TreeTop
 onready var LeavesFallEffect = preload("res://Globals/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://Globals/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var Player = get_node("/root/World/Farm/Player")
+onready var Player = get_node("/root/PlayerHomeFarm/Player")
 var rng = RandomNumberGenerator.new()
 
 
@@ -52,7 +52,6 @@ func set_random_leaves_falling():
 	timer.wait_time = randomDelay
 	timer.start()
 	yield(timer, "timeout")
-	timer.start()
 	if variety == 'D' || variety == 'E':
 		initiateLeavesFallingEffect(treeObject, Vector2(0, 50))
 	elif variety == 'B':
@@ -63,7 +62,7 @@ func set_random_leaves_falling():
 
 
 ### Tree hurtbox
-var treeHealth: int = 4
+var treeHealth: int = 1
 func _on_Hurtbox_area_entered(_area):
 	if treeHealth == 0:
 		timer.stop()
@@ -76,11 +75,11 @@ func _on_Hurtbox_area_entered(_area):
 		if Player.get_position().x <= get_position().x:
 			tree_animation_player.play("tree fall right")
 			yield(tree_animation_player, "animation_finished" )
-			intitiateItemDrop("Wood", Vector2(130, -8))
+			intitiateItemDrop("Wood", Vector2(130, -8), 7)
 		else:
 			tree_animation_player.play("tree fall left")
 			yield(tree_animation_player, "animation_finished" )
-			intitiateItemDrop("Wood", Vector2(-130, -8))
+			intitiateItemDrop("Wood", Vector2(-130, -8), 7)
 
 	elif treeHealth != 0:
 		$SoundEffectsTree.stream = Global.tree_hit[rng.randi_range(0,2)]
@@ -109,7 +108,7 @@ func _on_stumpHurtBox_area_entered(_area):
 		$SoundEffectsStump.play()
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
-		intitiateItemDrop("Wood", Vector2(0, 12))
+		intitiateItemDrop("Wood", Vector2(0, 12), 3)
 		PlayerInventory.remove_farm_object(pos)
 		yield($SoundEffectsStump, "finished")
 		queue_free()
@@ -140,11 +139,14 @@ func initiateTreeHitEffect(tree, effect, pos):
 	add_child(trunkHitEffect)
 	trunkHitEffect.global_position = global_position + pos
 	
-func intitiateItemDrop(item, pos):
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item)
-	world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + pos
+func intitiateItemDrop(item, pos, amt):
+	for i in range(amt):
+		rng.randomize()
+		var itemDrop = ItemDrop.instance()
+		itemDrop.initItemDropType(item)
+		world.call_deferred("add_child", itemDrop)
+		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
+	
 
 
 ### Tree modulate functions

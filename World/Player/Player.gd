@@ -37,15 +37,15 @@ func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "World":
+		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
 			state = SWING
 			swing_state(event, item_name)
 			
 
 
 var MAX_SPEED := 12.5
-var ACCELERATION := 4
-var FRICTION := 10
+var ACCELERATION := 6
+var FRICTION := 8
 var velocity := Vector2.ZERO
 
 func movement_state(delta):
@@ -140,16 +140,16 @@ func _play_background_music():
 	_play_background_music()
 	
 func _ready():
-	setPlayerState(get_owner())
+
+	setPlayerState(get_parent())
 	setPlayerTexture('idle_down')
 	$SoundEffects.play()
 	_play_background_music()
 
 var playerState
 func setPlayerState(ownerNode):
-	if str(ownerNode).substr(0, 5) == "World":
-		playerState = "World"
-		$SoundEffects.stream = Global.dirt_footsteps
+	if str(ownerNode).substr(0, 14) == "PlayerHomeFarm":
+		playerState = "Farm"
 	else:
 		playerState = "Home"
 		$SoundEffects.stream = Global.wood_footsteps
@@ -161,3 +161,13 @@ func _on_EnterDoors_area_entered(area):
 
 func _on_EnterDoors_area_exited(area):
 	sceneTransitionFlag = false
+
+
+func _on_WoodAreas_area_entered(area):
+	$SoundEffects.stream = Global.wood_footsteps
+	$SoundEffects.play()
+
+
+func _on_WoodAreas_area_exited(area):
+	$SoundEffects.stream = Global.dirt_footsteps
+	$SoundEffects.play()

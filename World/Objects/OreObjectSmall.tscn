@@ -1,7 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Objects/OreObjectSmall.gd" type="Script" id=1]
 [ext_resource path="res://Assets/ore_sets/cobblestone/medium/cobblestone_gemstone_1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/smoke/12.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/smoke/1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/smoke/2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/smoke/6.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/smoke/10.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/smoke/7.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/smoke/5.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/smoke/11.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/smoke/4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/smoke/3.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Images/smoke/8.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Images/smoke/9.png" type="Texture" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24.3465, 18.0706 )
@@ -59,10 +71,45 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, -12 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("SmokeEffect:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SmokeEffect:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SmokeEffect:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "small_ore_break"
-length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("SmallHurtBox/smallHurtBox:disabled")
 tracks/0/interp = 1
@@ -99,6 +146,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SmokeEffect:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SmokeEffect:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SmokeEffect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "small_ore_hit_right"
@@ -116,6 +199,14 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, -12 ), Vector2( 3, -12 ), Vector2( -2, -12 ), Vector2( 1, -12 ), Vector2( -1, -12 ), Vector2( 0, -12 ) ]
 }
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "default",
+"speed": 12.0
+} ]
 
 [node name="SmallOreObject" type="Node2D"]
 scale = Vector2( 0.85, 0.85 )
@@ -141,7 +232,6 @@ position = Vector2( 1.49254, -55.2239 )
 
 [node name="SmallMovementBox" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
 position = Vector2( -3.25725, 49.4091 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -151,5 +241,12 @@ anims/small_ore_hit_right = SubResource( 5 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 volume_db = -12.0
+
+[node name="SmokeEffect" type="AnimatedSprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.27451 )
+position = Vector2( 3.52941, -24.7059 )
+scale = Vector2( 0.75, 0.75 )
+frames = SubResource( 6 )
 
 [connection signal="area_entered" from="SmallHurtBox" to="." method="_on_SmallHurtBox_area_entered"]

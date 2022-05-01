@@ -21,6 +21,7 @@ JsonData="*res://Data/JSONData.gd"
 PlayerInventory="*res://InventoryLogic/PlayerInventory.gd"
 SceneChanger="*res://Globals/Effects/SceneChanger.tscn"
 Api="*res://api.gdns"
+PlayerData="*res://Globals/PlayerData.gd"
 
 [display]
 

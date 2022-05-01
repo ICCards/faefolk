@@ -3,7 +3,7 @@ extends Control
 func _on_PlayButton_pressed():
 	$SoundEffects.stream = Global.button_select
 	$SoundEffects.play()
-	SceneChanger.change_scene("res://World/World.tscn")
+	SceneChanger.change_scene("res://World/Farm/PlayerHomeFarm.tscn")
 
 func _on_OptionsButton_pressed():
 	$SoundEffects.stream = Global.button_select

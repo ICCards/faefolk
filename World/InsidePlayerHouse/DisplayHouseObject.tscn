@@ -1,19 +1,19 @@
 [gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://InsidePlayerHouse/DisplayHouseObject.gd" type="Script" id=1]
+[ext_resource path="res://World/InsidePlayerHouse/DisplayHouseObject.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sound effects/UI/button select.mp3" type="AudioStream" id=2]
-[ext_resource path="res://Assets/Images/bonfire/8.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/bonfire/1.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/bonfire/stone.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/bonfire/4.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/bonfire/7.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/bonfire/2.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/bonfire/3.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/bonfire/6.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/bonfire/5.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/light.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Sound effects/Fire/crackle.mp3" type="AudioStream" id=13]
-[ext_resource path="res://Assets/Sound effects/Fire/start.mp3" type="AudioStream" id=14]
+[ext_resource path="res://Assets/Sound effects/Fire/start.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sound effects/Fire/crackle.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Images/bonfire/4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/bonfire/7.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/bonfire/2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/bonfire/3.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/bonfire/8.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/bonfire/1.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/bonfire/stone.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/bonfire/6.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Images/bonfire/5.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Images/light.png" type="Texture" id=14]
 [ext_resource path="res://Assets/house_objects/fireplace.png" type="Texture" id=15]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -30,7 +30,7 @@ radius = 32.0624
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 13 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "active fire",
 "speed": 10.0
@@ -105,21 +105,21 @@ animation = "active fire"
 visible = false
 position = Vector2( 32, -40 )
 scale = Vector2( 0.075, 0.075 )
-texture = ExtResource( 5 )
+texture = ExtResource( 11 )
 
 [node name="FireplaceLight" type="Light2D" parent="LightFireplaceUI"]
 visible = false
 position = Vector2( 32, 33 )
-texture = ExtResource( 12 )
+texture = ExtResource( 14 )
 color = Color( 1, 0.368627, 0.0901961, 1 )
 energy = 0.5
 
 [node name="FireStartSoundEffects" type="AudioStreamPlayer2D" parent="LightFireplaceUI"]
-stream = ExtResource( 14 )
+stream = ExtResource( 3 )
 volume_db = -4.0
 
 [node name="FireCrackleSoundEffects" type="AudioStreamPlayer2D" parent="LightFireplaceUI"]
-stream = ExtResource( 13 )
+stream = ExtResource( 4 )
 volume_db = -6.0
 
 [node name="WindowLightingUI" type="Node2D" parent="."]
@@ -128,7 +128,7 @@ volume_db = -6.0
 visible = false
 position = Vector2( 16, 137 )
 scale = Vector2( 1.25, 1.11563 )
-texture = ExtResource( 12 )
+texture = ExtResource( 14 )
 energy = 0.45
 shadow_enabled = true
 
@@ -136,7 +136,7 @@ shadow_enabled = true
 visible = false
 position = Vector2( 16, -38 )
 scale = Vector2( 0.1375, 0.19375 )
-texture = ExtResource( 12 )
+texture = ExtResource( 14 )
 energy = 0.8
 
 [connection signal="area_entered" from="CollisionBox" to="." method="_on_CollisionBox_area_entered"]

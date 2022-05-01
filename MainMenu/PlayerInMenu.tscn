@@ -68,7 +68,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shirts:frame")
@@ -80,7 +80,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Shoes:frame")
@@ -108,31 +108,24 @@ shape = SubResource( 2 )
 
 [node name="Body" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
 hframes = 4
-frame = 3
 
 [node name="Arms" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
 hframes = 4
-frame = 3
 
 [node name="Pants" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
 hframes = 4
-frame = 3
 
 [node name="Shirts" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
 hframes = 4
-frame = 3
 
 [node name="HeadAtr" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
 hframes = 4
-frame = 3
 
 [node name="Accessory" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
 hframes = 4
-frame = 3
 
 [node name="Shoes" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
 hframes = 4
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerMenuState/CompositeSprites"]
 anims/idle = SubResource( 1 )

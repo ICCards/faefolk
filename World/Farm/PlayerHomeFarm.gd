@@ -7,12 +7,13 @@ onready var OreObject = preload("res://World/Objects/OreObjectLarge.tscn")
 onready var SmallOreObject = preload("res://World/Objects/OreObjectSmall.tscn")
 onready var TallGrassObject = preload("res://World/Objects/TallGrassObject.tscn")
 onready var FlowerObject = preload("res://World/Objects/FlowerObject.tscn")
-onready var groundTilemap = $GroundTiles
-onready var validTiles = $ValidTiles
+onready var groundTilemap = $GroundTiles/GroundTiles
+onready var validTiles = $GroundTiles/ValidTiles
 onready var waterTilemap = $WaterTiles/WaterTilemap
 onready var flowerTiles = $DecorationTiles/Flowers
-onready var validWaterTiles = $WaterValidTiles
+onready var validWaterTiles = $GroundTiles/WaterValidTiles
 onready var waterAnimationTiles = $WaterTiles/WaterAnimated
+onready var timer = $Timer
 
 var rng = RandomNumberGenerator.new()
 
@@ -33,6 +34,7 @@ var NUM_GRASS_TILES = 100
 var NUM_FLOWER_TILES = 250
 var MAX_GRASS_BUNCH_SIZE = 24
 
+
 func _ready():
 	if PlayerInventory.player_farm_objects.size() == 0:
 		generate_farm()
@@ -48,8 +50,10 @@ func play_water_animation():
 	tiles.shuffle()
 	for i in range(10):
 		waterAnimationTiles.set_cellv(tiles[i], rng.randi_range(0, 7))
-	var randomDelay = rng.randi_range(0.5, 1)
-	yield(get_tree().create_timer(randomDelay), "timeout")
+	var randomDelay = rng.randi_range(1,2)
+	timer.wait_time = randomDelay
+	timer.start()
+	yield(timer, "timeout")
 	waterAnimationTiles.clear()
 	play_water_animation()
 
@@ -101,7 +105,7 @@ func generate_grass_bunches():
 			tall_grass_types.shuffle()
 			tallGrassObject.initialize(tall_grass_types[0])
 			call_deferred("add_child", tallGrassObject)
-			tallGrassObject.position = global_position + pos + Vector2(16,24)
+			tallGrassObject.position = global_position + pos + Vector2(16,32)
 			create_grass_bunch(location, tall_grass_types[0])
 
 func create_grass_bunch(loc, variety):
@@ -187,4 +191,3 @@ func place_object(name, variety, pos, isFullGrowth):
 		smallOreObject.initialize(variety, pos)
 		call_deferred("add_child", smallOreObject)
 		smallOreObject.position = pos + Vector2(16, 24)
-

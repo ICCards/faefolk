@@ -9,7 +9,7 @@ onready var shirtsSprite = $CompositeSprites/Shirts
 onready var shoesSprite = $CompositeSprites/Shoes
 onready var animPlayer = $CompositeSprites/AnimationPlayer
 
-export var speed := 400.0
+export var speed := 300.0
 
 func _physics_process(_delta):
 	var velocity = Vector2.ZERO

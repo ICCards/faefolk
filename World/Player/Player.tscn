@@ -806,7 +806,8 @@ position = Vector2( 0, -38.8235 )
 shape = SubResource( 10 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
-volume_db = -30.0
+visible = false
+volume_db = -32.0
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )

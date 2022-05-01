@@ -38,7 +38,7 @@ text = "QUIT"
 align = 0
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-volume_db = -24.0
+volume_db = -28.0
 
 [connection signal="mouse_entered" from="PlayButton" to="." method="_on_PlayButton_mouse_entered"]
 [connection signal="mouse_exited" from="PlayButton" to="." method="_on_PlayButton_mouse_exited"]
