@@ -62,7 +62,7 @@ func set_random_leaves_falling():
 
 
 ### Tree hurtbox
-var treeHealth: int = 1
+var treeHealth: int = 4
 func _on_Hurtbox_area_entered(_area):
 	if treeHealth == 0:
 		timer.stop()
