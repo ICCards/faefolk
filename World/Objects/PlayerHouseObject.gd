@@ -1,6 +1,6 @@
 extends Node2D
 
-func _on_Doorway_area_entered(area):
+func _on_Doorway_area_entered(_area):
 	SceneChanger.change_scene("res://World/InsidePlayerHouse/InsidePlayerHome.tscn", "door")
 
 
@@ -24,9 +24,9 @@ func set_house_visible():
 
 
 
-func _on_BehindHouseArea_area_entered(area):
+func _on_BehindHouseArea_area_entered(_area):
 	set_house_transparent()
 
 
-func _on_BehindHouseArea_area_exited(area):
+func _on_BehindHouseArea_area_exited(_area):
 	set_house_visible()

@@ -9,11 +9,11 @@ onready var world = get_tree().current_scene
 
 var randomNum
 var treeObject
-var location
+var position_of_object
 
 func initialize(variety, inputPos):
 	randomNum = variety
-	location = inputPos
+	position_of_object = inputPos
 
 func _ready():
 	setTreeBranchType(randomNum)
@@ -29,13 +29,13 @@ func setTreeBranchType(num):
 		treeObject = Images.returnTreeObject('C')
 	$Branch.texture = Images.tree_branch_objects[num]
 
-func _on_BranchHurtBox_area_entered(area):
+func _on_BranchHurtBox_area_entered(_area):
 	$SoundEffects.stream = Global.stump_break
 	$SoundEffects.play()
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 	intitiateItemDrop("Wood", Vector2(0, 0))
-	PlayerInventory.remove_farm_object(location)
+	PlayerInventory.remove_farm_object(position_of_object)
 	yield($SoundEffects, "finished")
 	queue_free()
 

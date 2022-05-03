@@ -12,10 +12,10 @@ var rng = RandomNumberGenerator.new()
 onready var world = get_tree().current_scene
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
 var treeObject
-var pos 
+var position_of_object 
 
 func initialize(variety, inputPos):
-	pos = inputPos
+	position_of_object = inputPos
 	treeObject = Images.returnTreeObject(variety)
 
 func _ready():
@@ -26,14 +26,14 @@ func setTexture(tree):
 
 
 var stumpHealth: int = 2
-func _on_StumpHurtBox_area_entered(area):
+func _on_StumpHurtBox_area_entered(_area):
 	if stumpHealth == 0: 
 		$SoundEffects.stream = Global.stump_break
 		$SoundEffects.play()
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 		intitiateItemDrop("Wood", Vector2(0, 0), 3)
-		PlayerInventory.remove_farm_object(pos)
+		PlayerInventory.remove_farm_object(position_of_object)
 		yield($SoundEffects, "finished")
 		queue_free()
 	
@@ -59,7 +59,7 @@ func initiateTreeHitEffect(tree, effect, pos):
 	trunkHitEffect.global_position = global_position + pos
 	
 func intitiateItemDrop(item, pos, amt):
-	for i in range(amt):
+	for _i in range(amt):
 		rng.randomize()
 		var itemDrop = ItemDrop.instance()
 		itemDrop.initItemDropType(item)

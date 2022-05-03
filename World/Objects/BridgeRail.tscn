@@ -13,6 +13,7 @@ margin_left = -134.0
 margin_top = -53.0
 margin_right = 134.0
 margin_bottom = -1.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 
 [node name="Area2D" type="StaticBody2D" parent="."]

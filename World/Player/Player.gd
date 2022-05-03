@@ -39,7 +39,7 @@ func _unhandled_input(event):
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
 			state = SWING
-			swing_state(event, item_name)
+			swing_state(event)
 			
 
 
@@ -83,7 +83,7 @@ func movement_state(delta):
 
 
 var swingActive = false
-func swing_state(_delta, weaponType):
+func swing_state(_delta):
 		$SoundEffects.stream_paused = true
 		if !swingActive:
 				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
@@ -102,13 +102,13 @@ func swing_state(_delta, weaponType):
 			state = MOVEMENT
 
 
-func idle_state(direction):
+func idle_state(dir):
 	$SoundEffects.stream_paused = true
-	setPlayerTexture("idle_" + direction.to_lower())
+	setPlayerTexture("idle_" + dir.to_lower())
 
-func walk_state(direction):
+func walk_state(dir):
 	$SoundEffects.stream_paused = false
-	setPlayerTexture("walk_" + direction.to_lower())
+	setPlayerTexture("walk_" + dir.to_lower())
 
 func set_melee_collision_layer(toolName):
 	if toolName == "Axe": 
@@ -140,11 +140,11 @@ func _play_background_music():
 	_play_background_music()
 	
 func _ready():
-
 	setPlayerState(get_parent())
 	setPlayerTexture('idle_down')
 	$SoundEffects.play()
 	_play_background_music()
+	$Camera2D/UserInterface/Hotbar.visible = true
 
 var playerState
 func setPlayerState(ownerNode):
@@ -156,18 +156,18 @@ func setPlayerState(ownerNode):
 
 
 var sceneTransitionFlag = false
-func _on_EnterDoors_area_entered(area):
+func _on_EnterDoors_area_entered(_area):
 	sceneTransitionFlag = true
 
-func _on_EnterDoors_area_exited(area):
+func _on_EnterDoors_area_exited(_area):
 	sceneTransitionFlag = false
 
 
-func _on_WoodAreas_area_entered(area):
+func _on_WoodAreas_area_entered(_area):
 	$SoundEffects.stream = Global.wood_footsteps
 	$SoundEffects.play()
 
 
-func _on_WoodAreas_area_exited(area):
+func _on_WoodAreas_area_exited(_area):
 	$SoundEffects.stream = Global.dirt_footsteps
 	$SoundEffects.play()

@@ -7,14 +7,15 @@
 [ext_resource path="res://Assets/tree_sets/A/leaves.png" type="Texture" id=5]
 [ext_resource path="res://Assets/tree_sets/A/chip.png" type="Texture" id=6]
 
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 12.4305, 24.4444 )
-
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 22.7083, 28.1439 )
 
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 22.7778, 28.3507 )
+
+[sub_resource type="CapsuleShape2D" id=22]
+radius = 15.7639
+height = 15.1389
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -161,6 +162,18 @@ tracks/11/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 165, -4 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -493,7 +506,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=14]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("MovementCollisionBox2/movementCollisionBox:disabled")
+tracks/0/path = NodePath("StumpHurtBox/stumpHurtBox:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -502,10 +515,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("StumpHurtBox/stumpHurtBox:disabled")
+tracks/1/path = NodePath("TreeSprites/TreeStump:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -514,10 +527,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("TreeSprites/TreeStump:modulate")
+tracks/2/path = NodePath("TreeSprites/TreeStump:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -526,10 +539,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("TreeSprites/TreeStump:visible")
+tracks/3/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -538,7 +551,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -556,7 +569,7 @@ tracks/0/keys = {
 "values": [  ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MovementCollisionBox2/movementCollisionBox:disabled")
+tracks/1/path = NodePath("StumpHurtBox/stumpHurtBox:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -568,7 +581,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("StumpHurtBox/stumpHurtBox:disabled")
+tracks/2/path = NodePath("TreeSprites/TreeStump:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -577,10 +590,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("TreeSprites/TreeStump:visible")
+tracks/3/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -589,7 +602,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -634,34 +647,36 @@ region_rect = Rect2( 160, 320, 0, 0 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -120 )
 
-[node name="MovementCollisionBox2" type="StaticBody2D" parent="."]
-position = Vector2( 0, -31 )
-
-[node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox2"]
-position = Vector2( -1.11111, 38.9861 )
-rotation = -1.5708
-shape = SubResource( 19 )
-
 [node name="StumpHurtBox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -31 )
 collision_layer = 8
 collision_mask = 0
 
 [node name="stumpHurtBox" type="CollisionShape2D" parent="StumpHurtBox"]
-position = Vector2( -1.0307e-05, 32.5972 )
+position = Vector2( 0, 35.4444 )
 rotation = -1.5708
 shape = SubResource( 20 )
 disabled = true
 
 [node name="TreeHurtbox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -31 )
 collision_layer = 8
 collision_mask = 0
 
 [node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]
-position = Vector2( -1.00555e-05, 32.6667 )
+position = Vector2( 0, 35.4444 )
 rotation = -1.5708
 shape = SubResource( 21 )
+
+[node name="MovementCollisionBox" type="StaticBody2D" parent="."]
+position = Vector2( 0, -31 )
+
+[node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
+position = Vector2( -1.11111, 39.8889 )
+rotation = -1.5708
+shape = SubResource( 22 )
 
 [node name="TreeAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )

@@ -11,7 +11,7 @@ var rng = RandomNumberGenerator.new()
 onready var world = get_tree().current_scene
 
 var oreObject
-var pos
+var position_of_object
 var variety
 var showLargeOre
 
@@ -19,7 +19,7 @@ var showLargeOre
 func initialize(varietyInput, posInput, isFullGrowth):
 	variety = varietyInput
 	oreObject = Images.returnOreObject(varietyInput)
-	pos = posInput
+	position_of_object = posInput
 	showLargeOre = isFullGrowth
 
 func _ready():
@@ -42,7 +42,7 @@ var bigOreHits: int = 4
 func _on_BigHurtBox_area_entered(_area):
 	rng.randomize()
 	if bigOreHits == 0:
-		PlayerInventory.set_farm_object_break(pos)
+		PlayerInventory.set_farm_object_break(position_of_object)
 		$SoundEffects.stream = Global.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(0, 24))
@@ -67,7 +67,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		intitiateItemDrop(variety, Vector2(0, 28))
 		animation_player.play("small_ore_break")
 		yield($SoundEffects, "finished")
-		PlayerInventory.remove_farm_object(pos)
+		PlayerInventory.remove_farm_object(position_of_object)
 		queue_free()
 	if smallOreHits != 0:
 		$SoundEffects.stream = Global.ore_hit[rng.randi_range(0, 2)]

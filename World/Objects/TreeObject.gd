@@ -16,14 +16,14 @@ var rng = RandomNumberGenerator.new()
 onready var world = get_tree().current_scene
 
 var treeObject
-var pos
+var position_of_object
 var variety
 var showFullTree
 
 func initialize(inputVar, inputPos, ifFullTree):
 	variety = inputVar
 	treeObject = Images.returnTreeObject(inputVar)
-	pos = inputPos
+	position_of_object = inputPos
 	showFullTree = ifFullTree
 
 func _ready():
@@ -67,7 +67,7 @@ func _on_Hurtbox_area_entered(_area):
 	if treeHealth == 0:
 		timer.stop()
 		disable_tree_top_collision_box()
-		PlayerInventory.set_farm_object_break(pos)
+		PlayerInventory.set_farm_object_break(position_of_object)
 		$SoundEffectsStump.stream = Global.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsStump.play()
 		$SoundEffectsTree.stream = Global.tree_break
@@ -109,7 +109,7 @@ func _on_stumpHurtBox_area_entered(_area):
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		intitiateItemDrop("Wood", Vector2(0, 12), 3)
-		PlayerInventory.remove_farm_object(pos)
+		PlayerInventory.remove_farm_object(position_of_object)
 		yield($SoundEffectsStump, "finished")
 		queue_free()
 	
@@ -140,7 +140,7 @@ func initiateTreeHitEffect(tree, effect, pos):
 	trunkHitEffect.global_position = global_position + pos
 	
 func intitiateItemDrop(item, pos, amt):
-	for i in range(amt):
+	for _i in range(amt):
 		rng.randomize()
 		var itemDrop = ItemDrop.instance()
 		itemDrop.initItemDropType(item)
@@ -209,9 +209,9 @@ func set_tree_visible():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 
-func _on_TreeTopArea_area_entered(area):
+func _on_TreeTopArea_area_entered(_area):
 	set_tree_transparent()
 
-func _on_TreeTopArea_area_exited(area):
+func _on_TreeTopArea_area_exited(_area):
 	set_tree_visible()
 

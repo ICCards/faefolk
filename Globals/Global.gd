@@ -7,6 +7,9 @@ var dirt_footsteps = preload("res://Assets/Sound effects/dirt footsteps.mp3")
 var button_hover = preload("res://Assets/Sound effects/UI/button hover.mp3")
 var button_select = preload("res://Assets/Sound effects/UI/button select.mp3")
 
+var pick_up_house_object = preload("res://Assets/Sound effects/UI/pick up house object.mp3")
+var put_down_house_object = preload("res://Assets/Sound effects/UI/put down house object.mp3")
+
 var door_open = preload("res://Assets/Sound effects/door open.mp3")
 var door_close = preload("res://Assets/Sound effects/door close.mp3")
 

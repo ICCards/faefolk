@@ -709,6 +709,9 @@ position = Vector2( 2028, 1114 )
 [node name="TopLeft" type="Position2D" parent="Camera2D/Limits"]
 position = Vector2( -142, 95 )
 
+[node name="CanvasModulate" type="CanvasModulate" parent="Camera2D"]
+scale = Vector2( 1.17647, 1.17647 )
+
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 6 )
 
@@ -718,6 +721,7 @@ position = Vector2( 512, 180 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 512, 534 )
 
 [node name="MeleeSwing" type="Area2D" parent="."]
@@ -813,8 +817,6 @@ volume_db = -32.0
 stream = ExtResource( 8 )
 volume_db = -10.0
 autoplay = true
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]

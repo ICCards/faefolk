@@ -1,7 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://World/InsidePlayerHouse/DisplayHouseObject.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sound effects/UI/button select.mp3" type="AudioStream" id=2]
 [ext_resource path="res://Assets/Sound effects/Fire/start.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Assets/Sound effects/Fire/crackle.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Assets/Images/bonfire/4.png" type="Texture" id=5]
@@ -59,6 +58,7 @@ light_mask = 0
 shape = SubResource( 3 )
 
 [node name="MovementCollision" type="StaticBody2D" parent="."]
+input_pickable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
 position = Vector2( 16, -16 )
@@ -78,7 +78,6 @@ z_index = 1
 offset = Vector2( -16, -16 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 2 )
 volume_db = -20.0
 
 [node name="LightFireplaceUI" type="Node2D" parent="."]
@@ -143,5 +142,7 @@ energy = 0.8
 [connection signal="area_exited" from="CollisionBox" to="." method="_on_CollisionBox_area_exited"]
 [connection signal="body_entered" from="CollisionBox" to="." method="_on_CollisionBox_body_entered"]
 [connection signal="input_event" from="MouseInputBox" to="." method="_on_MouseInputBox_input_event"]
+[connection signal="mouse_entered" from="MouseInputBox" to="." method="_on_MouseInputBox_mouse_entered"]
+[connection signal="mouse_exited" from="MouseInputBox" to="." method="_on_MouseInputBox_mouse_exited"]
 [connection signal="area_entered" from="LightFireplaceUI/LightFireplaceBox" to="." method="_on_LightFireplaceBox_area_entered"]
 [connection signal="area_exited" from="LightFireplaceUI/LightFireplaceBox" to="." method="_on_LightFireplaceBox_area_exited"]

@@ -58,11 +58,13 @@ func _on_MouseInputBox_input_event(viewport, event, shape_idx):
 					$ColorIndicator.visible = false
 					moveItemFlag = false
 					find_parent("InsidePlayerHome").is_moving_object = null
+					$SoundEffects.stream = Global.put_down_house_object
 					$SoundEffects.play()
 		elif !moveItemFlag and find_parent("InsidePlayerHome").is_moving_object == null:
 			$MovementCollision/CollisionShape2D.disabled = true
 			moveItemFlag = true
 			find_parent("InsidePlayerHome").is_moving_object = true
+			$SoundEffects.stream = Global.pick_up_house_object
 			$SoundEffects.play()
 
 var moveItemFlag = false
@@ -129,3 +131,13 @@ func _on_LightFireplaceBox_area_entered(area):
 func _on_LightFireplaceBox_area_exited(area):
 	insideLightFireplaceArea = false
 
+
+
+
+
+func _on_MouseInputBox_mouse_entered():
+	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Text Select.png"))
+
+
+func _on_MouseInputBox_mouse_exited():
+	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))

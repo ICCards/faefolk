@@ -25,7 +25,7 @@ onready var oreTypes = ["Stone", "Cobblestone"]
 onready var randomBorderTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
 var object_name
-var pos
+var position_of_object
 var object_variety
 
 var NUM_FARM_OBJECTS = 550
@@ -39,6 +39,7 @@ func _ready():
 	if PlayerInventory.player_farm_objects.size() == 0:
 		generate_farm()
 	else:
+		pass
 		load_farm()
 	generate_grass_bunches()
 	generate_grass_tiles()
@@ -70,48 +71,46 @@ func generate_farm():
 		object_types.shuffle()
 		object_name = object_types[0]
 		object_variety = set_object_variety(object_name)
-		pos = Vector2( rng.randi_range(-1600, 1850), rng.randi_range(250, 2650))
-		var location = groundTilemap.world_to_map(pos)
-		check_location_and_place_object(object_name, object_variety, i)
+		find_valid_location_and_place_object(object_name, object_variety, i)
 
-func check_location_and_place_object(name, variety, i):
+func find_valid_location_and_place_object(name, variety, i):
 	rng.randomize()
-	pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
-	var location = groundTilemap.world_to_map(pos)
+	position_of_object = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
+	var location = groundTilemap.world_to_map(position_of_object)
 	if validate_and_remove_tiles(name, location):
 		place_object(name, variety, groundTilemap.map_to_world(location), true)
 		PlayerInventory.player_farm_objects[i] = [name, variety, groundTilemap.map_to_world(location), true] 
 	else:
-		check_location_and_place_object(name, variety, i)
+		find_valid_location_and_place_object(name, variety, i)
 
 func generate_flower_tiles():
-	for i in range(NUM_FLOWER_TILES):
+	for _i in range(NUM_FLOWER_TILES):
 		rng.randomize()
-		pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
-		var location = groundTilemap.world_to_map(pos)
+		position_of_object = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
+		var location = groundTilemap.world_to_map(position_of_object)
 		if validate_and_remove_tiles("flower", location):
 			var flowerObject = FlowerObject.instance()
 			call_deferred("add_child", flowerObject)
-			flowerObject.position = global_position + pos + Vector2(16,32)
+			flowerObject.position = global_position + position_of_object + Vector2(16, 32)
 
 
 func generate_grass_bunches():
-	for i in range(NUM_GRASS_BUNCHES):
-		pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
-		var location = groundTilemap.world_to_map(pos)
+	for _i in range(NUM_GRASS_BUNCHES):
+		position_of_object = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
+		var location = groundTilemap.world_to_map(position_of_object)
 		if validate_and_remove_tiles("tall grass", location):
 			validTiles.set_cellv(location, -1)
 			var tallGrassObject = TallGrassObject.instance()
 			tall_grass_types.shuffle()
 			tallGrassObject.initialize(tall_grass_types[0])
 			call_deferred("add_child", tallGrassObject)
-			tallGrassObject.position = global_position + pos + Vector2(16,32)
+			tallGrassObject.position = global_position + position_of_object + Vector2(16,32)
 			create_grass_bunch(location, tall_grass_types[0])
 
 func create_grass_bunch(loc, variety):
 	rng.randomize()
 	var randomNum = rng.randi_range(1, MAX_GRASS_BUNCH_SIZE)
-	for i in range(randomNum):
+	for _i in range(randomNum):
 		randomBorderTiles.shuffle()
 		loc += randomBorderTiles[0]
 		if validate_and_remove_tiles("tall grass", loc):
@@ -123,16 +122,16 @@ func create_grass_bunch(loc, variety):
 			loc -= randomBorderTiles[0]
 
 func generate_grass_tiles():
-	for i in range(NUM_GRASS_TILES):
+	for _i in range(NUM_GRASS_TILES):
 		rng.randomize()
-		pos = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
-		var location = groundTilemap.world_to_map(pos)
+		position_of_object = Vector2( 32 * rng.randi_range(-50, 60), 32 * rng.randi_range(8, 82))
+		var location = groundTilemap.world_to_map(position_of_object)
 		if validate_and_remove_tiles("tall grass", location):
 			var tallGrassObject = TallGrassObject.instance()
 			tall_grass_types.shuffle()
 			tallGrassObject.initialize(tall_grass_types[0])
 			call_deferred("add_child", tallGrassObject)
-			tallGrassObject.position = global_position + pos + Vector2(16,32)
+			tallGrassObject.position = global_position + position_of_object + Vector2(16,32)
 
 
 func set_object_variety(name):

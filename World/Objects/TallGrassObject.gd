@@ -21,10 +21,10 @@ func play_sound_effect():
 var bodyEnteredFlag = false
 
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	play_sound_effect()
 	bodyEnteredFlag = true
 
 
-func _on_Area2D_body_exited(body):
+func _on_Area2D_body_exited(_body):
 	bodyEnteredFlag = false

@@ -18,7 +18,7 @@ func initialize_hotbar():
 		if PlayerInventory.hotbar.has(i):
 			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1])
 
-func _input(event):
+func _input(_event):
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 
