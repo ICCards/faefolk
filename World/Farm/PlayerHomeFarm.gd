@@ -7,6 +7,7 @@ onready var OreObject = preload("res://World/Objects/OreObjectLarge.tscn")
 onready var SmallOreObject = preload("res://World/Objects/OreObjectSmall.tscn")
 onready var TallGrassObject = preload("res://World/Objects/TallGrassObject.tscn")
 onready var FlowerObject = preload("res://World/Objects/FlowerObject.tscn")
+onready var TorchObject = preload("res://World/Objects/TorchObject.tscn")
 onready var groundTilemap = $GroundTiles/GroundTiles
 onready var validTiles = $GroundTiles/ValidTiles
 onready var waterTilemap = $WaterTiles/WaterTilemap
@@ -28,11 +29,11 @@ var object_name
 var position_of_object
 var object_variety
 
-var NUM_FARM_OBJECTS = 550
-var NUM_GRASS_BUNCHES = 150
-var NUM_GRASS_TILES = 100
-var NUM_FLOWER_TILES = 250
-var MAX_GRASS_BUNCH_SIZE = 24
+const NUM_FARM_OBJECTS = 550
+const NUM_GRASS_BUNCHES = 150
+const NUM_GRASS_TILES = 100
+const NUM_FLOWER_TILES = 250
+const MAX_GRASS_BUNCH_SIZE = 24
 
 
 func _ready():
@@ -58,11 +59,14 @@ func play_water_animation():
 	waterAnimationTiles.clear()
 	play_water_animation()
 
+var amount_of_farm_objects = PlayerInventory.player_farm_objects.size()
 func load_farm():
-	for i in range(PlayerInventory.player_farm_objects.size()):
+	for i in range(amount_of_farm_objects):
 		if PlayerInventory.player_farm_objects.has(i):
 			validate_and_remove_tiles(PlayerInventory.player_farm_objects[i][0], groundTilemap.world_to_map(PlayerInventory.player_farm_objects[i][2]))
 			place_object(PlayerInventory.player_farm_objects[i][0], PlayerInventory.player_farm_objects[i][1], PlayerInventory.player_farm_objects[i][2], PlayerInventory.player_farm_objects[i][3])
+		else:
+			amount_of_farm_objects += 1
 
 
 func generate_farm():
@@ -147,7 +151,7 @@ func set_object_variety(name):
 
 
 func validate_and_remove_tiles(name, loc):
-	if name == "tree branch" or name == "ore small" or name == "tall grass" or name == "flower":
+	if name == "tree branch" or name == "ore small" or name == "tall grass" or name == "flower" or name == "Torch":
 		if validTiles.get_cellv(loc) != -1:
 			validTiles.set_cellv(loc, -1)
 			return true
@@ -190,3 +194,7 @@ func place_object(name, variety, pos, isFullGrowth):
 		smallOreObject.initialize(variety, pos)
 		call_deferred("add_child", smallOreObject)
 		smallOreObject.position = pos + Vector2(16, 24)
+	elif name == "Torch":
+		var torchObject = TorchObject.instance()
+		call_deferred("add_child", torchObject)
+		torchObject.global_position = pos

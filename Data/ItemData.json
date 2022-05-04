@@ -75,6 +75,11 @@
       "ItemCategory": "Weapon",
       "StackSize": 1,
       "Descrption": "Used to water fertile soil"
+  },
+  "Torch" : {
+      "ItemCategory": "Placable",
+      "StackSize": 99,
+      "Description": "Used to generate light"
   }
   
 }

@@ -2,11 +2,11 @@ extends Node2D
 
 
 var image 
-var pos
+var position_of_object
 
 
 func init(new_image, new_pos):
-	pos = new_pos
+	position_of_object = new_pos
 	image = new_image
 
 
@@ -41,12 +41,25 @@ func _ready():
 			$LightFireplaceUI/FireplaceLight.visible = true
 			$LightFireplaceUI/FireCrackleSoundEffects.play()
 	if image == "Window 1" or image == "Window 2":
+		set_window_lighting()
+
+func set_window_lighting():
+	if DayNightTimer.is_daytime:
 		$WindowLightingUI/LargeLight.visible = true
 		$WindowLightingUI/SmallLight.visible = true
+	else: 
+		$WindowLightingUI/LargeLight.color = Color("#00ffffff")
+		$WindowLightingUI/SmallLight.color = Color("#00ffffff")
+	DayNightTimer.day_timer.connect("timeout", self, "set_night")
+	DayNightTimer.night_timer.connect("timeout", self, "set_day")
 
+func set_night():
+	$WindowLightingUI/AnimationPlayer.play("set night")
+	
+func set_day():
+	$WindowLightingUI/AnimationPlayer.play_backwards("set night")
 
-
-func _on_MouseInputBox_input_event(viewport, event, shape_idx):
+func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 	var mousePos = get_global_mouse_position() + Vector2(-16, 16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	if event.is_action_pressed("mouse_click"):
@@ -82,7 +95,7 @@ func validateTileBoundary(pos):
 			return false
 		
 
-func _physics_process(evemt):
+func _physics_process(_event):
 	if moveItemFlag:
 		$ColorIndicator.visible = true
 		var mousePos = get_global_mouse_position() + Vector2(-16, 16)
@@ -98,11 +111,11 @@ func _physics_process(evemt):
 
 var is_colliding_other_object = false
 
-func _on_CollisionBox_area_exited(area):
+func _on_CollisionBox_area_exited(_area):
 	if $CollisionBox.get_overlapping_areas().size() <= 0:
 		is_colliding_other_object = false
 
-func _on_CollisionBox_area_entered(area):
+func _on_CollisionBox_area_entered(_area):
 	is_colliding_other_object = true
 
 
@@ -124,20 +137,16 @@ func light_fire():
 		
 var insideLightFireplaceArea = false
 
-func _on_LightFireplaceBox_area_entered(area):
+func _on_LightFireplaceBox_area_entered(_area):
 	insideLightFireplaceArea = true
 
 
-func _on_LightFireplaceBox_area_exited(area):
+func _on_LightFireplaceBox_area_exited(_area):
 	insideLightFireplaceArea = false
-
-
-
 
 
 func _on_MouseInputBox_mouse_entered():
 	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Text Select.png"))
-
 
 func _on_MouseInputBox_mouse_exited():
 	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))

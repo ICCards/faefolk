@@ -3,6 +3,7 @@ extends Control
 func _on_PlayButton_pressed():
 	$SoundEffects.stream = Global.button_select
 	$SoundEffects.play()
+	DayNightTimer.start_day_timer()
 	SceneChanger.change_scene("res://World/Farm/PlayerHomeFarm.tscn")
 
 func _on_OptionsButton_pressed():

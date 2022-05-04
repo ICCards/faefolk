@@ -21,7 +21,7 @@ var inventory = {
 var hotbar = {
 	0: ["Axe", 1],
 	1: ["Pickaxe", 1],
-	2: ["Hoe", 1], 
+	2: ["Torch", 24], 
 }
 
 # Location of bottom left tile
@@ -47,12 +47,25 @@ var isFireplaceLit = false
 # Name // Variety // Position // If grown tree or large ore
 var player_farm_objects = {}
 
+#func update_hotbar():
+#	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(active_item_slot + 1))
+#	hotbar[active_item_slot][1] = hotbar[active_item_slot][1] - 1 
+#	if hotbar[active_item_slot][1] == 0: 
+#		print('none left')
+#		hotbar.erase(active_item_slot)
+#		return
+#	#update_hotbar_slot_visual(active_item_slot, )
+
+
+
 func remove_farm_object(pos):
 	for i in range(player_farm_objects.size()):
 		if player_farm_objects.has(i):
 			if player_farm_objects[i][2] == pos:
 				player_farm_objects.erase(i)
+				player_farm_objects.resize()
 	
+# For large ore or trees
 func set_farm_object_break(pos):
 	for i in range(player_farm_objects.size()):
 		if player_farm_objects.has(i):

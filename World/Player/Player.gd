@@ -9,7 +9,10 @@ onready var shirtsSprite = $CompositeSprites/Shirts
 onready var shoesSprite = $CompositeSprites/Shoes
 onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
+onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
 
+var valid_farm_tiles
+var TorchObject = preload("res://World/Objects/TorchObject.tscn")
 
 
 onready var state = MOVEMENT
@@ -33,6 +36,7 @@ func _process(delta) -> void:
 	else: 
 		idle_state(direction)
 
+onready var world = get_tree().current_scene
 func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
@@ -40,7 +44,17 @@ func _unhandled_input(event):
 		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
 			state = SWING
 			swing_state(event)
-			
+		if event.is_action_pressed("mouse_click") and item_name == "Torch" and playerState == "Farm":
+			var mousePos = get_global_mouse_position() + Vector2(-16, -16)
+			mousePos = mousePos.snapped(Vector2(32,32))
+			var location = valid_farm_tiles.world_to_map(mousePos)
+			if valid_farm_tiles.get_cellv(location) != -1:
+				valid_farm_tiles.set_cellv(location, -1)
+				var torchObject = TorchObject.instance()
+				world.call_deferred("add_child", torchObject)
+				torchObject.position = mousePos
+				PlayerInventory.player_farm_objects[PlayerInventory.player_farm_objects.size()] = [item_name, null, valid_farm_tiles.map_to_world(location), true]
+				PlayerInventory.add_item_to_hotbar(item_name, -1)
 
 
 var MAX_SPEED := 12.5
@@ -145,11 +159,32 @@ func _ready():
 	$SoundEffects.play()
 	_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
+	init_day_night_cycle()
+	DayNightTimer.day_timer.connect("timeout", self, "set_night")
+	DayNightTimer.night_timer.connect("timeout", self, "set_day")
+
+
+
+func init_day_night_cycle():
+	if playerState == "Farm":
+		if DayNightTimer.is_daytime:
+			$Camera2D/DayNight.color = Color("#ffffff")
+		else:
+			$Camera2D/DayNight.color = Color("#1c579e")
+	else:
+		$Camera2D/DayNight.visible = false
+
+func set_night():
+	day_night_animation_player.play("set night")
+func set_day():
+	day_night_animation_player.play_backwards("set night")
+
 
 var playerState
 func setPlayerState(ownerNode):
 	if str(ownerNode).substr(0, 14) == "PlayerHomeFarm":
 		playerState = "Farm"
+		valid_farm_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTiles")
 	else:
 		playerState = "Home"
 		$SoundEffects.stream = Global.wood_footsteps

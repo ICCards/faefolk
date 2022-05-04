@@ -4,15 +4,12 @@ extends Node2D
 var is_moving_object
 
 
-func _on_Doorway_area_entered(area):
+func _on_Doorway_area_entered(_area):
 	SceneChanger.change_scene("res://World/Farm/PlayerHomeFarm.tscn", "door")
 
 
-func _ready():
+func _ready(): 
 	initialize_house_objects()
-
-
-
 
 
 onready var DisplaceHouseObject = preload("res://World/InsidePlayerHouse/DisplayHouseObject.tscn")
