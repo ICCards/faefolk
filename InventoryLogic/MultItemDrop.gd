@@ -6,19 +6,19 @@ var velocity = Vector2.ZERO
 const MAX_SPEED = 425
 const ACCELERATION = 460
 
-#onready var api = Api
-#var thread = Thread.new()
-#
-#func _whoAmI(_value):
-#	print("THREAD FUNC!")
-#	var result = api.mint("wood", "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
-#	call_deferred("loadDone")
-#	return result
-#
-#func loadDone():
-#	var value = thread.wait_to_finish()
-#	print(value)	
-#	queue_free()
+onready var api = Api
+var thread = Thread.new()
+
+func _whoAmI(_value):
+	print("THREAD FUNC!")
+	var result = api.mint("wood", "j26ec-ix7zw-kiwcx-ixw6w-72irq-zsbyr-4t7fk-alils-u33an-kh6rk-7qe")
+	call_deferred("loadDone")
+	return result
+
+func loadDone():
+	var value = thread.wait_to_finish()
+	print(value)	
+	queue_free()
 
 func _physics_process(_delta):
 	if !being_picked_up:
@@ -30,11 +30,11 @@ func _physics_process(_delta):
 		if distance < 6: 
 			$Sprite.visible = false
 			$CollisionShape2D.disabled = true
-#			if (thread.is_active()):
-#				# Already working
-#				return
-#			print("START THREAD!")
-#			thread.start(self,"_whoAmI",null)
+			if (thread.is_active()):
+				# Already working
+				return
+			print("START THREAD!")
+			thread.start(self,"_whoAmI",null)
 			PlayerInventory.add_item_to_hotbar("Wood", 1)
 			$SoundEffects.play()
 			queue_free()

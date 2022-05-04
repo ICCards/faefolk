@@ -14,18 +14,20 @@ var randomInt
 var rng = RandomNumberGenerator.new()
 var api_call_name
 
-#onready var api = Api
-#var thread = Thread.new()
-#func _whoAmI(_value):
-#	print("THREAD FUNC!")
-#	var result = api.mint(api_call_name.to_lower(), "jkfup-u5fms-2eumr-7z7ub-5ssv2-dpuxn-pmnrx-vwr4h-cqghb-xhki5-aae")
-#	call_deferred("loadDone")
-#	return result
-#
-#func loadDone():
-#	var value = thread.wait_to_finish()
-#	print(value)	
-#	queue_free()
+var thread = Global.thread;
+
+onready var api = Api
+
+func _whoAmI(_value):
+	print("THREAD FUNC!")
+	var result = api.mint(api_call_name.to_lower(), "j26ec-ix7zw-kiwcx-ixw6w-72irq-zsbyr-4t7fk-alils-u33an-kh6rk-7qe")
+	call_deferred("loadDone")
+	return result
+
+func loadDone():
+	var value = thread.wait_to_finish()
+	print(value)	
+	queue_free()
 
 func initItemDropType(item_name_input):
 	item_name = item_name_input
@@ -70,13 +72,13 @@ func _physics_process(_delta):
 			else: 
 				$Sprite.visible = false
 				$CollisionShape2D.disabled = true
-	#			if (thread.is_active()):
-	#				# Already working
-	#				return
-	#			print("START THREAD!")
-	#			thread.start(self,"_whoAmI",null)
+				if (thread.is_active()):
+					# Already working
+					return
+				print("START THREAD!")
+				thread.start(self,"_whoAmI",null)
 				PlayerInventory.add_item_to_hotbar(item_name, 1)
-				queue_free()
+				#queue_free()
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")
 				$SoundEffects.stop()

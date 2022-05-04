@@ -1,5 +1,8 @@
 extends Node
 
+### THeads ###
+var thread = Thread.new();
+
 ### Sound effects ##
 var wood_footsteps = preload("res://Assets/Sound effects/wood footsteps.mp3")
 var dirt_footsteps = preload("res://Assets/Sound effects/dirt footsteps.mp3")
