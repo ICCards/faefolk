@@ -70,11 +70,11 @@ func _physics_process(_delta):
 			else: 
 				$Sprite.visible = false
 				$CollisionShape2D.disabled = true
-	#			if (thread.is_active()):
-	#				# Already working
-	#				return
-	#			print("START THREAD!")
-	#			thread.start(self,"_whoAmI",null)
+#				if (thread.is_active()):
+#					# Already working
+#					return
+#				print("START THREAD!")
+#				thread.start(self,"_whoAmI",null)
 				PlayerInventory.add_item_to_hotbar(item_name, 1)
 				queue_free()
 				$SoundEffects.play()

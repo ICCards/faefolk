@@ -19,12 +19,12 @@ animations = [ {
 [node name="TorchObject" type="Node2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 16, 8 )
+position = Vector2( 0, -14 )
 frames = SubResource( 1 )
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 16, 16 )
+position = Vector2( 0, -6 )
 texture = ExtResource( 7 )
-texture_scale = 1.25
-energy = 0.5
+energy = 1.05
+mode = 2

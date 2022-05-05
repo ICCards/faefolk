@@ -852,6 +852,12 @@ stream = ExtResource( 8 )
 volume_db = -10.0
 autoplay = true
 
+[node name="PlaceItemsUI" type="Node2D" parent="."]
+
+[node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
+
+[node name="ItemToPlace" type="Sprite" parent="PlaceItemsUI"]
+
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
 [connection signal="area_entered" from="EnterDoors" to="." method="_on_EnterDoors_area_entered"]

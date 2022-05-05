@@ -63,7 +63,6 @@ func remove_farm_object(pos):
 		if player_farm_objects.has(i):
 			if player_farm_objects[i][2] == pos:
 				player_farm_objects.erase(i)
-				player_farm_objects.resize()
 	
 # For large ore or trees
 func set_farm_object_break(pos):

@@ -51,7 +51,8 @@ func _unhandled_input(event):
 			if valid_farm_tiles.get_cellv(location) != -1:
 				valid_farm_tiles.set_cellv(location, -1)
 				var torchObject = TorchObject.instance()
-				world.call_deferred("add_child", torchObject)
+				#world.call_deferred("add_child", torchObject)
+				get_parent().add_child(torchObject)
 				torchObject.position = mousePos
 				PlayerInventory.player_farm_objects[PlayerInventory.player_farm_objects.size()] = [item_name, null, valid_farm_tiles.map_to_world(location), true]
 				PlayerInventory.add_item_to_hotbar(item_name, -1)
