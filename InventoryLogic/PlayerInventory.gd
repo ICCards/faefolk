@@ -10,18 +10,18 @@ var viewInventoryMode = false
 var active_item_slot = 0
 
 var inventory = {
-	1: ["Sword", 1], 
-	13: ["Green gem", 5],
-	4: ["Hoe", 1], 
-	7: ["Hay seeds", 50],
-	11: ["Potato seeds", 28],
-	16: ["Bucket", 1]
+	1: ["sword", 1], 
+	13: ["green gem", 5],
+	4: ["hoe", 1], 
+	7: ["hay seeds", 50],
+	11: ["potato seeds", 28],
+	16: ["bucket", 1]
 }
 
 var hotbar = {
-	0: ["Axe", 1],
-	1: ["Pickaxe", 1],
-	2: ["Torch", 24], 
+	0: ["axe", 1],
+	1: ["pickaxe", 1],
+	2: ["torch", 24], 
 }
 
 # Location of bottom left tile
@@ -45,31 +45,21 @@ var player_home = {
 var isFireplaceLit = false
 
 # Name // Variety // Position // If grown tree or large ore
-var player_farm_objects = {}
-
-#func update_hotbar():
-#	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(active_item_slot + 1))
-#	hotbar[active_item_slot][1] = hotbar[active_item_slot][1] - 1 
-#	if hotbar[active_item_slot][1] == 0: 
-#		print('none left')
-#		hotbar.erase(active_item_slot)
-#		return
-#	#update_hotbar_slot_visual(active_item_slot, )
+var player_farm_objects = []
 
 
 
 func remove_farm_object(pos):
 	for i in range(player_farm_objects.size()):
-		if player_farm_objects.has(i):
-			if player_farm_objects[i][2] == pos:
-				player_farm_objects.erase(i)
+		if player_farm_objects[i][2] == pos:
+			player_farm_objects.remove(i)
+			return
 	
 # For large ore or trees
 func set_farm_object_break(pos):
-	for i in range(player_farm_objects.size()):
-		if player_farm_objects.has(i):
-			if player_farm_objects[i][2] == pos:
-				player_farm_objects[i][3] = false
+	for i in range(player_farm_objects.size() - 1):
+		if player_farm_objects[i][2] == pos:
+			player_farm_objects[i][3] = false
 	
 func add_item_to_hotbar(item_name, item_quantity):
 	var slot_indices: Array = hotbar.keys()
@@ -123,7 +113,11 @@ func add_item_to_inventory(item_name, item_quantity):
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
-		slot.item.set_item(item_name, new_quantity)
+		if new_quantity == 0:
+			hotbar.erase(slot.slot_index)
+			slot.removeFromSlot()
+		else:
+			slot.item.set_item(item_name, new_quantity)
 	else:
 		slot.initialize_item(item_name, new_quantity)
 

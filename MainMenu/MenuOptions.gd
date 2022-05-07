@@ -1,18 +1,18 @@
 extends Control
 
 func _on_PlayButton_pressed():
-	$SoundEffects.stream = Global.button_select
+	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.play()
 	DayNightTimer.start_day_timer()
-	SceneChanger.change_scene("res://World/Farm/PlayerHomeFarm.tscn")
+	SceneChanger.change_scene("res://World/PlayerFarm/PlayerFarm.tscn")
 
 func _on_OptionsButton_pressed():
-	$SoundEffects.stream = Global.button_select
+	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.play()
-	Global.randomizeAttributes()
+	Characters.randomizeAttributes()
 
 func _on_QuitButton_pressed():
-	$SoundEffects.stream = Global.button_select
+	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.play()
 	get_tree().quit()
 
@@ -20,7 +20,7 @@ var hovered_button = ""
 var soundActiveFlag = false
 func _play_hover_effect(name):
 	if hovered_button != name:
-		$SoundEffects.stream = Global.button_hover
+		$SoundEffects.stream = Sounds.button_hover
 		$SoundEffects.play()
 		soundActiveFlag = true
 		hovered_button = name

@@ -15,13 +15,15 @@ run/main_scene="res://MainMenu/MainMenu.tscn"
 
 [autoload]
 
-Global="*res://Globals/Global.gd"
-Images="*res://Globals/Images.gd"
-JsonData="*res://Data/JSONData.gd"
+Images="*res://Global/Data/Images.gd"
+JsonData="*res://JSONData/JSONData.gd"
 PlayerInventory="*res://InventoryLogic/PlayerInventory.gd"
-SceneChanger="*res://Globals/Effects/SceneChanger.tscn"
+SceneChanger="*res://Global/Functions/SceneChanger.tscn"
 Api="*res://api.gdns"
-DayNightTimer="*res://DayNightTimer.gd"
+DayNightTimer="*res://Global/Functions/DayNightTimer.gd"
+RustCalls="*res://Global/Functions/RustCalls.tscn"
+Characters="*res://Global/Data/Characters.gd"
+Sounds="*res://Global/Data/Sounds.gd"
 
 [display]
 
@@ -127,6 +129,7 @@ action={
 2d_physics/layer_3="ItemDrop"
 2d_physics/layer_4="AxeBreakLayer"
 2d_physics/layer_5="PickaxeBreakLayer"
+2d_physics/layer_7="PlayerHomeCollision"
 2d_physics/layer_13="InsideTreeTopLayer"
 
 [physics]

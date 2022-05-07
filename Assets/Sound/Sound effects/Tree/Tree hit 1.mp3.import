@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Tree hit 1.mp3-41e1f601a1b198440dc24ce6cd0a2c1e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Tree/Tree hit 1.mp3"
+dest_files=[ "res://.import/Tree hit 1.mp3-41e1f601a1b198440dc24ce6cd0a2c1e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

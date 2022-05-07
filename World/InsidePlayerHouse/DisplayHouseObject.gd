@@ -12,7 +12,7 @@ func init(new_image, new_pos):
 
 
 func _ready():
-	$HouseImageTextureRect.texture = load("res://Assets/house_objects/" + image +  ".png")
+	$HouseImageTextureRect.texture = load("res://Assets/Images/house_objects/" + image +  ".png")
 	$CollisionBox.scale.x = JsonData.house_objects_data[image]["X"]
 	$CollisionBox.scale.y = JsonData.house_objects_data[image]["Y"]
 	$CollisionBox.position.x += (JsonData.house_objects_data[image]["X"] - 1) * 16
@@ -41,23 +41,10 @@ func _ready():
 			$LightFireplaceUI/FireplaceLight.visible = true
 			$LightFireplaceUI/FireCrackleSoundEffects.play()
 	if image == "Window 1" or image == "Window 2":
-		set_window_lighting()
-
-func set_window_lighting():
-	if DayNightTimer.is_daytime:
 		$WindowLightingUI/LargeLight.visible = true
 		$WindowLightingUI/SmallLight.visible = true
-	else: 
-		$WindowLightingUI/LargeLight.color = Color("#00ffffff")
-		$WindowLightingUI/SmallLight.color = Color("#00ffffff")
-	DayNightTimer.day_timer.connect("timeout", self, "set_night")
-	DayNightTimer.night_timer.connect("timeout", self, "set_day")
 
-func set_night():
-	$WindowLightingUI/AnimationPlayer.play("set night")
-	
-func set_day():
-	$WindowLightingUI/AnimationPlayer.play_backwards("set night")
+
 
 func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 	var mousePos = get_global_mouse_position() + Vector2(-16, 16)
@@ -71,13 +58,13 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 					$ColorIndicator.visible = false
 					moveItemFlag = false
 					find_parent("InsidePlayerHome").is_moving_object = null
-					$SoundEffects.stream = Global.put_down_house_object
+					$SoundEffects.stream = Sounds.put_down_house_object
 					$SoundEffects.play()
 		elif !moveItemFlag and find_parent("InsidePlayerHome").is_moving_object == null:
 			$MovementCollision/CollisionShape2D.disabled = true
 			moveItemFlag = true
 			find_parent("InsidePlayerHome").is_moving_object = true
-			$SoundEffects.stream = Global.pick_up_house_object
+			$SoundEffects.stream = Sounds.pick_up_house_object
 			$SoundEffects.play()
 
 var moveItemFlag = false
@@ -99,12 +86,12 @@ func _physics_process(_event):
 	if moveItemFlag:
 		$ColorIndicator.visible = true
 		var mousePos = get_global_mouse_position() + Vector2(-16, 16)
-		mousePos = mousePos.snapped(Vector2(32,32))
-		position = mousePos 
+		position = mousePos.snapped(Vector2(32,32))
+		 
 		if is_colliding_other_object or validateTileBoundary(position / 32):
-			$ColorIndicator.texture = load("res://Assets/red_square.png" )
+			$ColorIndicator.texture = load("res://Assets/Images/Misc/red_square.png" )
 		else:
-			$ColorIndicator.texture = load("res://Assets/green_square.png")
+			$ColorIndicator.texture = load("res://Assets/Images/Misc/green_square.png")
 	elif insideLightFireplaceArea:
 		if Input.is_action_just_pressed("action"):
 			light_fire()

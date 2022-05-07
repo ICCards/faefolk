@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Sound effects/dirt footsteps.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=1]
 [ext_resource path="res://MainMenu/PlayerMenuState.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=2]

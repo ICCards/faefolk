@@ -11,8 +11,10 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
 
-var valid_farm_tiles
-var TorchObject = preload("res://World/Objects/TorchObject.tscn")
+var valid_farm_tiles = null
+var valid_object_tiles
+
+onready var TorchObject = preload("res://World/Objects/Placables/TorchObject.tscn")
 
 
 onready var state = MOVEMENT
@@ -22,6 +24,16 @@ enum {
 }
 
 onready var direction = "DOWN"
+
+func _ready():
+	setPlayerState(get_parent())
+	setPlayerTexture('idle_down')
+	$SoundEffects.play()
+	_play_background_music()
+	$Camera2D/UserInterface/Hotbar.visible = true
+	init_day_night_cycle()
+	DayNightTimer.day_timer.connect("timeout", self, "set_night")
+	DayNightTimer.night_timer.connect("timeout", self, "set_day")
 
 
 func _process(delta) -> void:
@@ -36,7 +48,7 @@ func _process(delta) -> void:
 	else: 
 		idle_state(direction)
 
-onready var world = get_tree().current_scene
+
 func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
@@ -44,18 +56,47 @@ func _unhandled_input(event):
 		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
 			state = SWING
 			swing_state(event)
-		if event.is_action_pressed("mouse_click") and item_name == "Torch" and playerState == "Farm":
-			var mousePos = get_global_mouse_position() + Vector2(-16, -16)
-			mousePos = mousePos.snapped(Vector2(32,32))
-			var location = valid_farm_tiles.world_to_map(mousePos)
-			if valid_farm_tiles.get_cellv(location) != -1:
-				valid_farm_tiles.set_cellv(location, -1)
-				var torchObject = TorchObject.instance()
-				#world.call_deferred("add_child", torchObject)
-				get_parent().add_child(torchObject)
-				torchObject.position = mousePos
-				PlayerInventory.player_farm_objects[PlayerInventory.player_farm_objects.size()] = [item_name, null, valid_farm_tiles.map_to_world(location), true]
-				PlayerInventory.add_item_to_hotbar(item_name, -1)
+		if itemCategory == "Placable" and playerState == "Farm":
+			place_item_state(event, item_name)
+		else: 
+			$PlaceItemsUI/ColorIndicator.visible = false
+			$PlaceItemsUI/ItemToPlace.visible = false
+	else: 
+		$PlaceItemsUI/ColorIndicator.visible = false
+		$PlaceItemsUI/ItemToPlace.visible = false
+
+
+var is_colliding_other_object = false
+
+
+
+func _on_PlaceItemBox_area_entered(area):
+	is_colliding_other_object = true
+
+
+func _on_PlaceItemBox_area_exited(area):
+	if $PlaceItemsUI/PlaceItemBox.get_overlapping_areas().size() <= 0:
+		is_colliding_other_object = false
+	
+func place_item_state(event, name):
+	$PlaceItemsUI/ColorIndicator.visible = true
+	$PlaceItemsUI/ItemToPlace.visible = true
+	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/dropped_item_icon/" + name + ".png")
+	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
+	mousePos = mousePos.snapped(Vector2(32,32))
+	$PlaceItemsUI.set_global_position(mousePos)
+	var location = valid_farm_tiles.world_to_map(mousePos)
+	if is_colliding_other_object or valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 150:
+		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	else:
+		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
+		if event.is_action_pressed("mouse_click"):
+			var torchObject = TorchObject.instance()
+			torchObject.initialize(valid_farm_tiles.map_to_world(location))
+			get_parent().add_child(torchObject)
+			torchObject.position = mousePos + Vector2(16, 22)
+			PlayerInventory.player_farm_objects.append(["torch", null, valid_farm_tiles.map_to_world(location), true])
+			PlayerInventory.add_item_to_hotbar("torch", -1)
 
 
 var MAX_SPEED := 12.5
@@ -104,7 +145,7 @@ func swing_state(_delta):
 				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				swingActive = true
 				set_melee_collision_layer(toolName)
-				toolEquippedSprite.set_texture(Global.returnToolSprite(toolName, direction.to_lower()))
+				toolEquippedSprite.set_texture(Characters.returnToolSprite(toolName, direction.to_lower()))
 				setPlayerTexture("swing_" + direction.to_lower())
 				animation_player.play("swing_" + direction.to_lower())
 				yield(animation_player, "animation_finished" )
@@ -126,44 +167,29 @@ func walk_state(dir):
 	setPlayerTexture("walk_" + dir.to_lower())
 
 func set_melee_collision_layer(toolName):
-	if toolName == "Axe": 
+	if toolName == "axe": 
 		$MeleeSwing.set_collision_mask(8)
-	elif toolName == "Pickaxe":
+	elif toolName == "pickaxe":
 		$MeleeSwing.set_collision_mask(16)
-	elif toolName == "Hoe":
-		$MeleeSwing.set_collision_mask(0)
-	elif toolName == "Bucket":
-		$MeleeSwing.set_collision_mask(0)
-	elif toolName == "Sword":
-		$MeleeSwing.set_collision_mask(0)
-		
+
+
 func setPlayerTexture(var anim):
-	bodySprite.set_texture(Global.body_sprites[anim])
-	armsSprite.set_texture(Global.arms_sprites[anim])
-	accessorySprite.set_texture(Global.acc_sprites[anim])
-	headAttributeSprite.set_texture(Global.headAtr_sprites[anim])
-	pantsSprite.set_texture(Global.pants_sprites[anim])
-	shirtsSprite.set_texture(Global.shirts_sprites[anim])
-	shoesSprite.set_texture(Global.shoes_sprites[anim])
+	bodySprite.set_texture(Characters.body_sprites[anim])
+	armsSprite.set_texture(Characters.arms_sprites[anim])
+	accessorySprite.set_texture(Characters.acc_sprites[anim])
+	headAttributeSprite.set_texture(Characters.headAtr_sprites[anim])
+	pantsSprite.set_texture(Characters.pants_sprites[anim])
+	shirtsSprite.set_texture(Characters.shirts_sprites[anim])
+	shoesSprite.set_texture(Characters.shoes_sprites[anim])
 	
 var rng = RandomNumberGenerator.new()
 func _play_background_music():
 	rng.randomize()
-	$BackgroundMusic.stream = Global.background_music[rng.randi_range(0, Global.background_music.size() - 1)]
+	$BackgroundMusic.stream = Sounds.background_music[rng.randi_range(0, Sounds.background_music.size() - 1)]
 	$BackgroundMusic.play()
 	yield($BackgroundMusic, "finished")
 	_play_background_music()
 	
-func _ready():
-	setPlayerState(get_parent())
-	setPlayerTexture('idle_down')
-	$SoundEffects.play()
-	_play_background_music()
-	$Camera2D/UserInterface/Hotbar.visible = true
-	init_day_night_cycle()
-	DayNightTimer.day_timer.connect("timeout", self, "set_night")
-	DayNightTimer.night_timer.connect("timeout", self, "set_day")
-
 
 
 func init_day_night_cycle():
@@ -185,10 +211,12 @@ var playerState
 func setPlayerState(ownerNode):
 	if str(ownerNode).substr(0, 14) == "PlayerHomeFarm":
 		playerState = "Farm"
-		valid_farm_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTiles")
+		valid_farm_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesNature")
+		valid_object_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
 	else:
 		playerState = "Home"
-		$SoundEffects.stream = Global.wood_footsteps
+		$SoundEffects.stream = Sounds.wood_footsteps
+
 
 
 var sceneTransitionFlag = false
@@ -200,10 +228,11 @@ func _on_EnterDoors_area_exited(_area):
 
 
 func _on_WoodAreas_area_entered(_area):
-	$SoundEffects.stream = Global.wood_footsteps
+	$SoundEffects.stream = Sounds.wood_footsteps
 	$SoundEffects.play()
 
 
 func _on_WoodAreas_area_exited(_area):
-	$SoundEffects.stream = Global.dirt_footsteps
+	$SoundEffects.stream = Sounds.dirt_footsteps
 	$SoundEffects.play()
+

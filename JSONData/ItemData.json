@@ -1,0 +1,85 @@
+{
+    
+  "wood": {
+    "ItemCategory": "Resource",
+    "StackSize": 99,
+    "Description": "Wood harvested from trees"
+  }, 
+
+  "stone ore": {
+    "ItemCategory": "Resource",
+    "StackSize" : 99,
+    "Description": "Stone from ore"
+  },
+  "iron ore": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "Can be smelted into iron ingot"
+  },
+  "gold ore": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "Can be smelted into gold ingot"
+  },
+  "red gem": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "[gem description]"
+  },
+  "green gem": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "[gem description]"
+  },
+  "cyan gem": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "[gem description]"
+  },
+  "dark blue gem": {
+      "ItemCategory": "Resource",
+      "StackSize" : 99,
+      "Description": "[gem description]"
+  },
+  "axe": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Used for breaking wood"
+  },
+  "pickaxe": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Used for breaking ore"
+  },
+  "sword": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Used for melee attacks"
+  },
+  "hoe": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Used to make fertile soil"
+  },
+  "hay seeds": {
+      "ItemCategory": "Seeds",
+      "StackSize": 99,
+      "Description": "Takes 5 days to grow",
+  },
+  "potato seeds": {
+      "ItemCategory": "Seeds",
+      "StackSize": 99,
+      "Description": "Takes 10 days to grow"
+  },
+  "bucket" : {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Descrption": "Used to water fertile soil"
+  },
+  "torch" : {
+      "ItemCategory": "Placable",
+      "StackSize": 99,
+      "Description": "Used to generate light"
+  }
+  
+}

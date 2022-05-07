@@ -32,25 +32,25 @@ func _physics_process(_delta):
 
 
 func setAnimationTexture(var anim):
-	bodySprite.texture = Global.body_sprites[anim]
-	armsSprite.texture = Global.arms_sprites[anim]
-	accessorySprite.texture = Global.acc_sprites[anim]
-	headAttributeSprite.texture = Global.headAtr_sprites[anim]
-	pantsSprite.texture = Global.pants_sprites[anim]
-	shirtsSprite.texture = Global.shirts_sprites[anim]
-	shoesSprite.texture = Global.shoes_sprites[anim]
+	bodySprite.texture = Characters.body_sprites[anim]
+	armsSprite.texture = Characters.arms_sprites[anim]
+	accessorySprite.texture = Characters.acc_sprites[anim]
+	headAttributeSprite.texture = Characters.headAtr_sprites[anim]
+	pantsSprite.texture = Characters.pants_sprites[anim]
+	shirtsSprite.texture = Characters.shirts_sprites[anim]
+	shoesSprite.texture = Characters.shoes_sprites[anim]
 	
 	
 func _ready():
 	animPlayer.play("idle")
 	$SoundEffects.play()
-	Global.randomizeAttributes()
-	bodySprite.texture = Global.body_sprites['idle_down']
-	armsSprite.texture = Global.arms_sprites['idle_down']
-	accessorySprite.texture = Global.acc_sprites['idle_down']
-	headAttributeSprite.texture = Global.headAtr_sprites['idle_down']
-	pantsSprite.texture = Global.pants_sprites['idle_down']
-	shirtsSprite.texture = Global.shirts_sprites['idle_down']
-	shoesSprite.texture = Global.shoes_sprites['idle_down']
+	Characters.randomizeAttributes()
+	bodySprite.texture = Characters.body_sprites['idle_down']
+	armsSprite.texture = Characters.arms_sprites['idle_down']
+	accessorySprite.texture = Characters.acc_sprites['idle_down']
+	headAttributeSprite.texture = Characters.headAtr_sprites['idle_down']
+	pantsSprite.texture = Characters.pants_sprites['idle_down']
+	shirtsSprite.texture = Characters.shirts_sprites['idle_down']
+	shoesSprite.texture = Characters.shoes_sprites['idle_down']
 
 	

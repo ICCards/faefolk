@@ -7,7 +7,6 @@
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
 [ext_resource path="res://World/Player/Camera2D.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Sound effects/dirt footsteps.mp3" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -37,14 +36,15 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.109804, 0.341176, 0.619608, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.129412, 0.388235, 0.607843, 1 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 0.647213, 0.651788 )
 
 [sub_resource type="CapsuleShape2D" id=11]
-height = 12.9412
+radius = 8.00011
+height = 7.99978
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -295,7 +295,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 16 ) ]
+"values": [ Vector2( 0, 8 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -431,7 +431,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -40, -20 ) ]
+"values": [ Vector2( -28, -20 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -567,7 +567,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 40, -20 ) ]
+"values": [ Vector2( 28, -20 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -703,7 +703,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -56 ) ]
+"values": [ Vector2( 0, -42 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -724,8 +724,10 @@ height = 22.2163
 
 [sub_resource type="CircleShape2D" id=10]
 
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 16, 16 )
+
 [node name="Player" type="KinematicBody2D"]
-scale = Vector2( 0.85, 0.85 )
 script = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -735,10 +737,10 @@ script = ExtResource( 7 )
 [node name="Limits" type="Node" parent="Camera2D"]
 
 [node name="BottomRight" type="Position2D" parent="Camera2D/Limits"]
-position = Vector2( 2028, 1114 )
+position = Vector2( 514, 302 )
 
 [node name="TopLeft" type="Position2D" parent="Camera2D/Limits"]
-position = Vector2( -142, 95 )
+position = Vector2( -514, -302 )
 
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 6 )
@@ -759,6 +761,7 @@ anims/RESET = SubResource( 12 )
 "anims/set night" = SubResource( 13 )
 
 [node name="MeleeSwing" type="Area2D" parent="."]
+position = Vector2( 0, 11 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
@@ -767,46 +770,53 @@ disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 32
-position = Vector2( 0, -10.9999 )
+position = Vector2( 0, 0.000100136 )
 rotation = -1.5708
 shape = SubResource( 11 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
-position = Vector2( 0, -11 )
-scale = Vector2( 2.5, 2.5 )
+scale = Vector2( 2, 2 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 texture = ExtResource( 3 )
 hframes = 4
+frame = 3
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 anims/RESET = SubResource( 3 )
@@ -817,6 +827,7 @@ anims/swing_right = SubResource( 7 )
 anims/swing_up = SubResource( 8 )
 
 [node name="PickupZone" type="Area2D" parent="."]
+visible = false
 scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4
@@ -828,14 +839,14 @@ scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
 [node name="EnterDoors" type="Area2D" parent="."]
-collision_layer = 32
+collision_layer = 33
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoors"]
-position = Vector2( 0, -11 )
 shape = SubResource( 10 )
 
 [node name="EnterTreeTop" type="Area2D" parent="."]
+position = Vector2( 0, 11 )
 collision_layer = 0
 collision_mask = 4096
 
@@ -848,15 +859,26 @@ visible = false
 volume_db = -32.0
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 8 )
+position = Vector2( 0, 11 )
 volume_db = -10.0
 autoplay = true
 
 [node name="PlaceItemsUI" type="Node2D" parent="."]
+position = Vector2( 0, 11 )
 
 [node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
+position = Vector2( 16, 16 )
 
 [node name="ItemToPlace" type="Sprite" parent="PlaceItemsUI"]
+position = Vector2( 16, 16 )
+
+[node name="PlaceItemBox" type="Area2D" parent="PlaceItemsUI"]
+collision_layer = 89
+collision_mask = 65
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaceItemsUI/PlaceItemBox"]
+position = Vector2( 16, 16 )
+shape = SubResource( 14 )
 
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
@@ -864,3 +886,5 @@ autoplay = true
 [connection signal="area_exited" from="EnterDoors" to="." method="_on_EnterDoors_area_exited"]
 [connection signal="area_entered" from="EnterTreeTop" to="." method="_on_EnterDoors_area_entered"]
 [connection signal="area_exited" from="EnterTreeTop" to="." method="_on_EnterDoors_area_exited"]
+[connection signal="area_entered" from="PlaceItemsUI/PlaceItemBox" to="." method="_on_PlaceItemBox_area_entered"]
+[connection signal="area_exited" from="PlaceItemsUI/PlaceItemBox" to="." method="_on_PlaceItemBox_area_exited"]

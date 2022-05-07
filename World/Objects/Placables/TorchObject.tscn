@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Images/Animations/torch/6.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Animations/torch/1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Animations/torch/3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Animations/torch/5.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Animations/torch/4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Animations/torch/2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=7]
+[ext_resource path="res://World/Objects/Placables/TorchObject.gd" type="Script" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 14.4688, 13.5938 )
+
+[node name="TorchObject" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -14 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 1, -5 )
+texture = ExtResource( 7 )
+energy = 1.05
+mode = 2
+
+[node name="BreakObjectBox" type="Area2D" parent="."]
+collision_layer = 24
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakObjectBox"]
+position = Vector2( 0, -6 )
+shape = SubResource( 2 )
+
+[node name="CollisionBox" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
+position = Vector2( 0, -6 )
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="BreakObjectBox" to="." method="_on_BreakObjectBox_area_entered"]

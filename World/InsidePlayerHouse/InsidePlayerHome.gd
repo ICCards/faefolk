@@ -5,7 +5,7 @@ var is_moving_object
 
 
 func _on_Doorway_area_entered(_area):
-	SceneChanger.change_scene("res://World/Farm/PlayerHomeFarm.tscn", "door")
+	SceneChanger.change_scene("res://World/PlayerFarm/PlayerFarm.tscn", "door")
 
 
 func _ready(): 
@@ -13,6 +13,7 @@ func _ready():
 
 
 onready var DisplaceHouseObject = preload("res://World/InsidePlayerHouse/DisplayHouseObject.tscn")
+
 
 func initialize_house_objects():
 	for i in range(PlayerInventory.player_home.size()):

@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Images/background.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Misc/background.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu/MenuOptions.tscn" type="PackedScene" id=2]
 [ext_resource path="res://MainMenu/PlayerInMenu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/music/ES_Reality - AGST.mp3" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50.5, 114 )
@@ -11,7 +10,6 @@ extents = Vector2( 50.5, 114 )
 [node name="MainMenu" type="Node2D"]
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
 volume_db = -32.0
 autoplay = true
 

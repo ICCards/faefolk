@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Assets/CL_Buildings.png" type="Texture" id=1]
+[ext_resource path="res://Assets/tilesets/CL_Buildings.png" type="Texture" id=1]
 [ext_resource path="res://World/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/InsidePlayerHouse/InsidePlayerHome.gd" type="Script" id=3]
 
