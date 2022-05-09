@@ -10,6 +10,8 @@ export(float) var noise_lacunarity = 2.0
 export(float) var tileId = 0
 export(float) var threshold = -0.1
 
+var playerSpawned = false
+
 export(float) var wallCap = 1
 #export(Vector2) var grassCap = Vector2(1,0.3)
 export(Vector2) var roadCap = Vector2(0.4,0.05)
@@ -21,6 +23,9 @@ onready var wall_map = $CaveWalls
 onready var ore_map = $Ores
 onready var stones_decoration = $stones_decoration
 onready var lanterns = $lanterns
+
+onready var player = $Player
+onready var playerColloision = $Player/CollisionShape2D
 
 enum Tiles { GOLD, SILVER, STONE }
 
@@ -36,6 +41,7 @@ func _ready() -> void:
 	#makeGrassMap()
 	makeRoadMap()
 	addDecorations()
+	spawnPlayer(600, 500)
 
 	
 func makeWallMap():
@@ -45,6 +51,28 @@ func makeWallMap():
 			wall_map.set_cell(x,y,0)
 	grass_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
+	
+func spawnPlayer(x,y):
+	if(!playerSpawned):
+		playerColloision.disabled = true
+		player.move_and_slide_with_snap(Vector2(x,y), Vector2(0, 0))
+		playerColloision.disabled = false 
+		print("spawned", x, y)
+		playerSpawned = true
+	
+	
+func spawnPlayerX():
+	if(!playerSpawned):
+		var cells = self.road_map.get_used_cells()
+		for cell in cells:
+			var isWall = self.wall_map.get_cell(cell.x, cell.y)
+			print("there is wall here")
+			print(cell.x,cell.y)
+			if(!isWall):
+				player.move_and_slide(Vector2(cell.x,cell.y), Vector2(cell.x,cell.y))
+				print("spawned")
+				playerSpawned = true
+				pass
 	
 
 
