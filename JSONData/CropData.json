@@ -1,9 +1,32 @@
 {
-"Hay": {
-    "DaysToGrow" : 4
+"hay": {
+    "DaysToGrow" : 4,
+    "Perennial": false,
 },
 
-"Potato": {
-    "DaysToGrow" : 8
-}
+"potato": {
+    "DaysToGrow" : 8,
+    "Perennial": false,
+},
+"yellow onion": {
+    "DaysToGrow" : 4,
+    "Perennial": false,
+},
+"white onion": {
+    "DaysToGrow": 4,
+    "Perennial": false,
+},
+"beet": {
+    "DaysToGrow": 4,
+    "Perennial": false,
+},
+"carrot": {
+    "DaysToGrow": 4,
+    "Perennial": false,
+},
+"cabbage": {
+    "DaysToGrow": 4,
+    "Perennial": false,
+},
+
 }

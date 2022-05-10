@@ -10,7 +10,7 @@ func initialize(pos):
 
 
 func _on_BreakObjectBox_area_entered(area):
-	PlayerInventory.remove_farm_object(position_of_object)
+	PlayerFarmApi.remove_farm_object(position_of_object)
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType("torch")
 	get_parent().call_deferred("add_child", itemDrop)

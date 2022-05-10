@@ -67,7 +67,7 @@ func _on_Hurtbox_area_entered(_area):
 	if treeHealth == 0:
 		timer.stop()
 		disable_tree_top_collision_box()
-		PlayerInventory.set_farm_object_break(position_of_object)
+		PlayerFarmApi.set_farm_object_break(position_of_object)
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsStump.play()
 		$SoundEffectsTree.stream = Sounds.tree_break
@@ -109,8 +109,7 @@ func _on_stumpHurtBox_area_entered(_area):
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		intitiateItemDrop("wood", Vector2(0, 12), 3)
-		PlayerInventory.remove_farm_object(position_of_object)
-#		var location = groundTilemap.world_to_map(position_of_object)
+		PlayerFarmApi.remove_farm_object(position_of_object)
 		yield($SoundEffectsStump, "finished")
 		queue_free()
 	
@@ -168,15 +167,15 @@ func disable_tree_top_collision_box():
 	if variety == "A":
 		$TreeTopArea/A.set_deferred("disabled", true)
 	elif variety == "B":
-		$TreeTopArea/B.call_deferred("set", "disabled", true)
+		$TreeTopArea/B.set_deferred("disabled", true)
 	elif variety == "C":
-		$TreeTopArea/C.call_deferred("set", "disabled", true)
+		$TreeTopArea/C.set_deferred("disabled", true)
 	elif variety == "D":
-		$TreeTopArea/D.call_deferred("set", "disabled", true)
+		$TreeTopArea/D.set_deferred("disabled", true)
 	elif variety == "E":
-		$TreeTopArea/E.call_deferred("set", "disabled", true)
+		$TreeTopArea/E.set_deferred("disabled", true)
 
-onready var tween = $Tween
+onready var tween = $TreeSprites/Tween
 func set_tree_transparent():
 	tween.interpolate_property($TreeSprites/TreeTop, "modulate",
 		$TreeSprites/TreeTop.get_modulate(), Color(1, 1, 1, 0.5), 0.5,

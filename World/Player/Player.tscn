@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
 [ext_resource path="res://World/Player/Camera2D.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Images/crop_sets/hay/1.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -839,7 +840,7 @@ scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
 [node name="EnterDoors" type="Area2D" parent="."]
-collision_layer = 33
+collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoors"]
@@ -870,7 +871,8 @@ position = Vector2( 0, 11 )
 position = Vector2( 16, 16 )
 
 [node name="ItemToPlace" type="Sprite" parent="PlaceItemsUI"]
-position = Vector2( 16, 16 )
+position = Vector2( 16, 0 )
+texture = ExtResource( 8 )
 
 [node name="PlaceItemBox" type="Area2D" parent="PlaceItemsUI"]
 collision_layer = 89

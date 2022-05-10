@@ -24,6 +24,7 @@ DayNightTimer="*res://Global/Functions/DayNightTimer.gd"
 RustCalls="*res://Global/Functions/RustCalls.tscn"
 Characters="*res://Global/Data/Characters.gd"
 Sounds="*res://Global/Data/Sounds.gd"
+PlayerFarmApi="*res://Global/Data/PlayerFarmAPI.gd"
 
 [display]
 

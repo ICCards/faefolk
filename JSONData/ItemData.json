@@ -61,13 +61,23 @@
       "StackSize": 1,
       "Description": "Used to make fertile soil"
   },
+  "hay": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy"
+  },
+  "potato": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy"
+  },
   "hay seeds": {
-      "ItemCategory": "Seeds",
+      "ItemCategory": "Seed",
       "StackSize": 99,
       "Description": "Takes 5 days to grow",
   },
   "potato seeds": {
-      "ItemCategory": "Seeds",
+      "ItemCategory": "Seed",
       "StackSize": 99,
       "Description": "Takes 10 days to grow"
   },

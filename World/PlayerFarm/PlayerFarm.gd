@@ -8,7 +8,10 @@ onready var SmallOreObject = preload("res://World/Objects/Nature/Ores/OreObjectS
 onready var TallGrassObject = preload("res://World/Objects/Nature/Grasses/TallGrassObject.tscn")
 onready var FlowerObject = preload("res://World/Objects/Nature/Grasses/FlowerObject.tscn")
 onready var TorchObject = preload("res://World/Objects/Placables/TorchObject.tscn")
+onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var groundTilemap = $GroundTiles/GroundTiles
+onready var hoedAutoTiles = $GroundTiles/HoedAutoTiles
+onready var wateredHoeTiles = $GroundTiles/WateredAutoTiles
 onready var validTilesNature = $GroundTiles/ValidTilesNature
 onready var validTilesObjectPlacement = $GroundTiles/ValidTilesForObjectPlacement
 onready var waterTilemap = $WaterTiles/WaterTilemap
@@ -38,33 +41,38 @@ const MAX_GRASS_BUNCH_SIZE = 24
 
 
 func _ready():
-	if PlayerInventory.player_farm_objects.size() == 0:
+	if PlayerFarmApi.player_farm_objects.size() == 0:
 		generate_farm()
 	else:
 		load_farm()
+	load_player_crops()
 	generate_grass_bunches()
 	generate_grass_tiles()
 	generate_flower_tiles()
-	play_water_animation()
-	
-func play_water_animation():
-	var tiles = validWaterTiles.get_used_cells()
-	tiles.shuffle()
-	for i in range(10):
-		waterAnimationTiles.set_cellv(tiles[i], rng.randi_range(0, 7))
-	var randomDelay = rng.randi_range(1,2)
-	timer.wait_time = randomDelay
-	timer.start()
-	yield(timer, "timeout")
-	waterAnimationTiles.clear()
-	play_water_animation()
+	DayNightTimer.night_timer.connect("timeout", self, "advance_crop_day")
+
+
 
 
 func load_farm():
-	for i in range( PlayerInventory.player_farm_objects.size()):
-		validate_and_remove_tiles(PlayerInventory.player_farm_objects[i][0], groundTilemap.world_to_map(PlayerInventory.player_farm_objects[i][2]))
-		place_object(PlayerInventory.player_farm_objects[i][0], PlayerInventory.player_farm_objects[i][1], PlayerInventory.player_farm_objects[i][2], PlayerInventory.player_farm_objects[i][3])
-
+	for i in range( PlayerFarmApi.player_farm_objects.size()):
+		validate_and_remove_tiles(PlayerFarmApi.player_farm_objects[i][0], groundTilemap.world_to_map(PlayerFarmApi.player_farm_objects[i][2]))
+		place_object(PlayerFarmApi.player_farm_objects[i][0], PlayerFarmApi.player_farm_objects[i][1], PlayerFarmApi.player_farm_objects[i][2], PlayerFarmApi.player_farm_objects[i][3])
+		
+		
+func load_player_crops():
+	for i in range(PlayerFarmApi.planted_crops.size()):
+		hoedAutoTiles.set_cellv(PlayerFarmApi.planted_crops[i][1], 0)
+		validTilesNature.set_cellv(PlayerFarmApi.planted_crops[i][1], -1)
+		var pos = groundTilemap.map_to_world(PlayerFarmApi.planted_crops[i][1])
+		var plantedCrop = PlantedCrop.instance()
+		plantedCrop.initialize(PlayerFarmApi.planted_crops[i][0], PlayerFarmApi.planted_crops[i][1], PlayerFarmApi.planted_crops[i][3])
+		add_child(plantedCrop)
+		plantedCrop.global_position = pos + Vector2(0, 16)
+		if PlayerFarmApi.planted_crops[i][2]:
+			wateredHoeTiles.set_cellv(PlayerFarmApi.planted_crops[i][1], 0)
+	hoedAutoTiles.update_bitmask_region()
+	wateredHoeTiles.update_bitmask_region()
 
 func generate_farm():
 	for i in range(NUM_FARM_OBJECTS):
@@ -81,7 +89,7 @@ func find_valid_location_and_place_object(name, variety, i):
 	var location = groundTilemap.world_to_map(position_of_object)
 	if validate_and_remove_tiles(name, location):
 		place_object(name, variety, groundTilemap.map_to_world(location), true)
-		PlayerInventory.player_farm_objects.append([name, variety, groundTilemap.map_to_world(location), true])
+		PlayerFarmApi.player_farm_objects.append([name, variety, groundTilemap.map_to_world(location), true])
 	else:
 		find_valid_location_and_place_object(name, variety, i)
 
@@ -197,3 +205,10 @@ func place_object(name, variety, pos, isFullGrowth):
 		torchObject.initialize(pos)
 		call_deferred("add_child", torchObject)
 		torchObject.global_position = pos + Vector2(16, 22)
+
+
+func advance_crop_day():
+	PlayerFarmApi.advance_day()
+	get_tree().call_group("active_crops", "delete_crop")
+	wateredHoeTiles.clear()
+	load_player_crops()

@@ -4,7 +4,8 @@ var day_timer:Timer
 var night_timer:Timer
 var is_daytime = true
 
-const LENGTH_OF_NIGHT_DAY = 3
+
+const LENGTH_OF_NIGHT_DAY = 10
 const LENGTH_OF_TRANSITION = 8
 
 func _ready():

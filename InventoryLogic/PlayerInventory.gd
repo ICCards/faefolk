@@ -22,6 +22,8 @@ var hotbar = {
 	0: ["axe", 1],
 	1: ["pickaxe", 1],
 	2: ["torch", 24], 
+	4: ["hoe", 1], 
+	3: ["bucket", 1]
 }
 
 # Location of bottom left tile
@@ -44,22 +46,10 @@ var player_home = {
 }
 var isFireplaceLit = false
 
-# Name // Variety // Position // If grown tree or large ore
-var player_farm_objects = []
+func place_object():
+	hotbar[active_item_slot][1] -= 1
+	update_hotbar_slot_visual(active_item_slot, hotbar[active_item_slot][0], hotbar[active_item_slot][1])
 
-
-
-func remove_farm_object(pos):
-	for i in range(player_farm_objects.size()):
-		if player_farm_objects[i][2] == pos:
-			player_farm_objects.remove(i)
-			return
-	
-# For large ore or trees
-func set_farm_object_break(pos):
-	for i in range(player_farm_objects.size() - 1):
-		if player_farm_objects[i][2] == pos:
-			player_farm_objects[i][3] = false
 	
 func add_item_to_hotbar(item_name, item_quantity):
 	var slot_indices: Array = hotbar.keys()

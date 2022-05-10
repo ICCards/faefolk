@@ -11,10 +11,14 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
 
-var valid_farm_tiles = null
+var valid_farm_tiles 
 var valid_object_tiles
+var hoed_tiles
+var watered_tiles
+var green_grass_tiles
 
 onready var TorchObject = preload("res://World/Objects/Placables/TorchObject.tscn")
+onready var PlantedCrop = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 
 
 onready var state = MOVEMENT
@@ -58,6 +62,8 @@ func _unhandled_input(event):
 			swing_state(event)
 		if itemCategory == "Placable" and playerState == "Farm":
 			place_item_state(event, item_name)
+		elif itemCategory == "Seed" and playerState == "Farm":
+			place_seed_state(event, item_name)
 		else: 
 			$PlaceItemsUI/ColorIndicator.visible = false
 			$PlaceItemsUI/ItemToPlace.visible = false
@@ -67,7 +73,6 @@ func _unhandled_input(event):
 
 
 var is_colliding_other_object = false
-
 
 
 func _on_PlaceItemBox_area_entered(area):
@@ -95,9 +100,32 @@ func place_item_state(event, name):
 			torchObject.initialize(valid_farm_tiles.map_to_world(location))
 			get_parent().add_child(torchObject)
 			torchObject.position = mousePos + Vector2(16, 22)
-			PlayerInventory.player_farm_objects.append(["torch", null, valid_farm_tiles.map_to_world(location), true])
-			PlayerInventory.add_item_to_hotbar("torch", -1)
+			PlayerFarmApi.player_farm_objects.append(["torch", null, valid_farm_tiles.map_to_world(location), true])
+			PlayerInventory.place_object()
+			#PlayerInventory.add_item_to_hotbar("torch", -1)
 
+
+func place_seed_state(event, name):
+	name.erase(name.length() - 6, 6)
+	$PlaceItemsUI/ColorIndicator.visible = true
+	$PlaceItemsUI/ItemToPlace.visible = true
+	$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + name + "/1.png")
+	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
+	mousePos = mousePos.snapped(Vector2(32,32))
+	$PlaceItemsUI.set_global_position(mousePos)
+	var location = hoed_tiles.world_to_map(mousePos)
+	if is_colliding_other_object or hoed_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 150:
+		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	else:
+		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
+		if event.is_action_pressed("mouse_click"):
+			PlayerInventory.place_object()
+			PlayerFarmApi.planted_crops.append([name, location, !watered_tiles.get_cellv(location), JsonData.crop_data[name]["DaysToGrow"]])
+			var plantedCrop = PlantedCrop.instance()
+			plantedCrop.initialize(name, location, JsonData.crop_data[name]["DaysToGrow"])
+			get_parent().add_child(plantedCrop)
+			plantedCrop.global_position = mousePos + Vector2(0, 16)
 
 var MAX_SPEED := 12.5
 var ACCELERATION := 6
@@ -171,6 +199,43 @@ func set_melee_collision_layer(toolName):
 		$MeleeSwing.set_collision_mask(8)
 	elif toolName == "pickaxe":
 		$MeleeSwing.set_collision_mask(16)
+	elif toolName == "hoe":
+		$MeleeSwing.set_collision_mask(0)
+		set_hoed_tile()
+	elif toolName == "bucket":
+		$MeleeSwing.set_collision_mask(0)
+		set_watered_tile()
+
+func set_watered_tile():
+	var pos = get_position()
+	if direction == "UP":
+		pos += Vector2(0, -28)
+	elif direction == "DOWN":
+		pos += Vector2(0, 28)
+	elif direction == "LEFT":
+		pos += Vector2(-20, 8)
+	elif direction == "RIGHT":
+		pos += Vector2(20, 8)
+	var location = hoed_tiles.world_to_map(pos)
+	if hoed_tiles.get_cellv(location) != -1:
+		PlayerFarmApi.add_watered_tile(location)
+		watered_tiles.set_cellv(location, 0)
+		watered_tiles.update_bitmask_region()
+
+func set_hoed_tile():
+	var pos = get_position()
+	if direction == "UP":
+		pos += Vector2(0, -28)
+	elif direction == "DOWN":
+		pos += Vector2(0, 28)
+	elif direction == "LEFT":
+		pos += Vector2(-20, 8)
+	elif direction == "RIGHT":
+		pos += Vector2(20, 8)
+	var location = hoed_tiles.world_to_map(pos)
+	if hoed_tiles.get_cellv(location) == -1 and valid_farm_tiles.get_cellv(location) != -1 and green_grass_tiles.get_cellv(location) == -1:
+		hoed_tiles.set_cellv(location, 0)
+		hoed_tiles.update_bitmask_region()	
 
 
 func setPlayerTexture(var anim):
@@ -213,6 +278,9 @@ func setPlayerState(ownerNode):
 		playerState = "Farm"
 		valid_farm_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesNature")
 		valid_object_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
+		hoed_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/HoedAutoTiles")
+		watered_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/WateredAutoTiles")
+		green_grass_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/GreenGrassTiles")
 	else:
 		playerState = "Home"
 		$SoundEffects.stream = Sounds.wood_footsteps

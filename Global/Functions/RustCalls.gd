@@ -8,7 +8,7 @@ var mint_objects_queue = []
 
 func _whoAmI(_value):
 	print("THREAD FUNC!")
-	var result = api.mint(mint_objects_queue[0].to_lower(), "j26ec-ix7zw-kiwcx-ixw6w-72irq-zsbyr-4t7fk-alils-u33an-kh6rk-7qe")
+	var result = api.mint(mint_objects_queue[0], "j26ec-ix7zw-kiwcx-ixw6w-72irq-zsbyr-4t7fk-alils-u33an-kh6rk-7qe")
 	call_deferred("loadDone")
 	return result
 

@@ -32,7 +32,7 @@ func _on_StumpHurtBox_area_entered(_area):
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 		intitiateItemDrop("wood", Vector2(0, 0), 3)
-		PlayerInventory.remove_farm_object(position_of_object)
+		PlayerFarmApi.remove_farm_object(position_of_object)
 		yield($SoundEffects, "finished")
 		queue_free()
 	

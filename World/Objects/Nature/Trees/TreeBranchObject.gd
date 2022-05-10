@@ -35,7 +35,7 @@ func _on_BranchHurtBox_area_entered(_area):
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 	intitiateItemDrop("wood", Vector2(0, 0))
-	PlayerInventory.remove_farm_object(position_of_object)
+	PlayerFarmApi.remove_farm_object(position_of_object)
 	yield($SoundEffects, "finished")
 	queue_free()
 
