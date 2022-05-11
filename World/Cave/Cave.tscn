@@ -2269,9 +2269,15 @@ cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 
+[node name="Light2D" type="Light2D" parent="lanterns"]
+texture = ExtResource( 7 )
+
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 0 )
 scale = Vector2( 0.5, 0.5 )
+
+[node name="Camera2D" parent="Player" index="0"]
+zoom = Vector2( 0.5, 0.5 )
 
 [node name="BottomRight" parent="Player/Camera2D/Limits" index="0"]
 position = Vector2( 4504, 3088 )

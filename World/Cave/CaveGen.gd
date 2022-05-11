@@ -2,15 +2,13 @@ extends Node
 
 #export(bool) var redraw setget redraw
 export(Vector2) var mapSize = Vector2(280,220)
-export(String) var world_seed = "its a complex cave mapp"
+export(String) var world_seed = "sd"
 export(int) var noise_octaves = 1.0
 export(int) var noise_period = 12
 export(float) var noise_persistence = 0.5
 export(float) var noise_lacunarity = 2.0
 export(float) var tileId = 0
 export(float) var threshold = -0.1
-
-var playerSpawned = false
 
 export(float) var wallCap = 1
 #export(Vector2) var grassCap = Vector2(1,0.3)
@@ -25,7 +23,7 @@ onready var stones_decoration = $stones_decoration
 onready var lanterns = $lanterns
 
 onready var player = $Player
-onready var playerColloision = $Player/CollisionShape2D
+onready var playerColloision = $Player/CollisionShape2D 
 
 enum Tiles { GOLD, SILVER, STONE }
 
@@ -38,10 +36,9 @@ func _ready() -> void:
 	simplex_noise.persistence = self.noise_persistence
 	simplex_noise.lacunarity = self.noise_lacunarity
 	makeWallMap()
-	#makeGrassMap()
 	makeRoadMap()
 	addDecorations()
-	spawnPlayer(600, 500)
+	spawnPlayer()
 
 	
 func makeWallMap():
@@ -52,29 +49,12 @@ func makeWallMap():
 	grass_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 	
-func spawnPlayer(x,y):
-	if(!playerSpawned):
-		playerColloision.disabled = true
-		player.move_and_slide_with_snap(Vector2(x,y), Vector2(0, 0))
-		playerColloision.disabled = false 
-		print("spawned", x, y)
-		playerSpawned = true
-	
-	
-func spawnPlayerX():
-	if(!playerSpawned):
-		var cells = self.road_map.get_used_cells()
-		for cell in cells:
-			var isWall = self.wall_map.get_cell(cell.x, cell.y)
-			print("there is wall here")
-			print(cell.x,cell.y)
-			if(!isWall):
-				player.move_and_slide(Vector2(cell.x,cell.y), Vector2(cell.x,cell.y))
-				print("spawned")
-				playerSpawned = true
-				pass
-	
-
+func spawnPlayer():
+	var cell = self.road_map.get_used_cells()[1]
+	playerColloision.disabled = true
+	player.move_and_slide(Vector2(cell.x * 55, cell.y * 55), Vector2(16, 16))
+	playerColloision.disabled = false
+	print("spawned to cell", cell.x, cell.y)
 
 func makeRoadMap():
 	for x in mapSize.x:
@@ -86,9 +66,6 @@ func makeRoadMap():
 					road_map.set_cell(x, y, 1)
 	wall_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 	road_map.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
-	
-	
-
 
 func addDecorations():
 	for x in mapSize.x:
