@@ -2,7 +2,7 @@ extends Node
 
 #export(bool) var redraw setget redraw
 export(Vector2) var mapSize = Vector2(280,220)
-export(String) var world_seed = "sd"
+export(String) var world_seed = "seed that makes the map noise"
 export(int) var noise_octaves = 1.0
 export(int) var noise_period = 12
 export(float) var noise_persistence = 0.5
@@ -24,12 +24,18 @@ onready var lanterns = $lanterns
 
 onready var player = $Player
 onready var playerColloision = $Player/CollisionShape2D 
+onready var lanternLight = $LightNode
+
+onready var RedLantern = preload("res://World/Cave/objects/red_lantern.tscn")
+onready var GreenLantern = preload("res://World/Cave/objects/green_lantern.tscn")
+onready var BlueLantern = preload("res://World/Cave/objects/blue_lantern.tscn")
 
 enum Tiles { GOLD, SILVER, STONE }
 
 var simplex_noise : OpenSimplexNoise = OpenSimplexNoise.new()
 
 func _ready() -> void:
+	
 	simplex_noise.seed = self.world_seed.hash()
 	simplex_noise.octaves = self.noise_octaves
 	simplex_noise.period = self.noise_period
@@ -52,7 +58,7 @@ func makeWallMap():
 func spawnPlayer():
 	var cell = self.road_map.get_used_cells()[1]
 	playerColloision.disabled = true
-	player.move_and_slide(Vector2(cell.x * 55, cell.y * 55), Vector2(16, 16))
+	player.move_and_slide(Vector2(cell.x * 52, cell.y * 52), Vector2(16, 16))
 	playerColloision.disabled = false
 	print("spawned to cell", cell.x, cell.y)
 
@@ -79,7 +85,22 @@ func addDecorations():
 						stones_decoration.set_cell(x, y, randTile)
 					if chance < 2:
 						var randLantern = randi() % 3
-						lanterns.set_cell(x, y, randLantern)
+						if(randLantern == 0):
+							var redLantern = RedLantern.instance()
+							redLantern.initialize(Vector2(x* 32,y* 32))
+							redLantern.position = Vector2(x* 32,y* 32)
+							add_child(redLantern)
+						if(randLantern ==1):
+							var greenLantern = GreenLantern.instance()
+							greenLantern.initialize(Vector2(x* 32,y* 32))
+							greenLantern.position = Vector2(x* 32,y* 32)
+							add_child(greenLantern)
+						if(randLantern ==2):
+							var blueLantern = BlueLantern.instance()
+							blueLantern.initialize(Vector2(x* 32,y* 32))
+							blueLantern.position = Vector2(x* 32,y* 32)
+							add_child(blueLantern)
+						
 	stones_decoration.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 
 	

@@ -2245,7 +2245,7 @@ format = 1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
-cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 cell_tile_origin = 1
 format = 1
 
@@ -2264,13 +2264,11 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 
 [node name="lanterns" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource( 9 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-
-[node name="Light2D" type="Light2D" parent="lanterns"]
-texture = ExtResource( 7 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 0 )
@@ -2300,6 +2298,5 @@ visible = false
 color = Color( 0.160784, 0.12549, 0.12549, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2( 0.1, 0.1 )
 
 [editable path="Player"]
