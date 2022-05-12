@@ -58,7 +58,7 @@ func makeWallMap():
 func spawnPlayer():
 	var cell = self.road_map.get_used_cells()[1]
 	playerColloision.disabled = true
-	player.move_and_slide(Vector2(cell.x * 52, cell.y * 52), Vector2(16, 16))
+	player.move_and_slide(Vector2(cell.x * 52, cell.y * 52), Vector2(0, 0))
 	playerColloision.disabled = false
 	print("spawned to cell", cell.x, cell.y)
 
