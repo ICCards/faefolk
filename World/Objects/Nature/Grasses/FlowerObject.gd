@@ -1,6 +1,5 @@
 extends Node2D
 
-
 onready var rng = RandomNumberGenerator.new()
 var variety
 

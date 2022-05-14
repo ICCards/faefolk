@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
 [ext_resource path="res://World/Player/Camera2D.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Images/crop_sets/hay/1.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -725,9 +724,6 @@ height = 22.2163
 
 [sub_resource type="CircleShape2D" id=10]
 
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 16, 16 )
-
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -746,14 +742,13 @@ position = Vector2( -514, -302 )
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 6 )
 
+[node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
+position = Vector2( 512, 534 )
+
 [node name="Inventory" parent="Camera2D/UserInterface" instance=ExtResource( 5 )]
 visible = false
 position = Vector2( 512, 180 )
 scale = Vector2( 0.5, 0.5 )
-
-[node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 512, 534 )
 
 [node name="DayNight" type="CanvasModulate" parent="Camera2D"]
 
@@ -771,7 +766,7 @@ disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 32
-position = Vector2( 0, 0.000100136 )
+position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
 shape = SubResource( 11 )
 
@@ -852,7 +847,7 @@ collision_layer = 0
 collision_mask = 4096
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTreeTop"]
-position = Vector2( 0, -38.8235 )
+position = Vector2( 0, -43 )
 shape = SubResource( 10 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
@@ -865,22 +860,14 @@ volume_db = -10.0
 autoplay = true
 
 [node name="PlaceItemsUI" type="Node2D" parent="."]
-position = Vector2( 0, 11 )
+position = Vector2( 0, 3 )
 
 [node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
 position = Vector2( 16, 16 )
 
 [node name="ItemToPlace" type="Sprite" parent="PlaceItemsUI"]
+modulate = Color( 1, 1, 1, 0.686275 )
 position = Vector2( 16, 0 )
-texture = ExtResource( 8 )
-
-[node name="PlaceItemBox" type="Area2D" parent="PlaceItemsUI"]
-collision_layer = 89
-collision_mask = 65
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaceItemsUI/PlaceItemBox"]
-position = Vector2( 16, 16 )
-shape = SubResource( 14 )
 
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
@@ -888,5 +875,3 @@ shape = SubResource( 14 )
 [connection signal="area_exited" from="EnterDoors" to="." method="_on_EnterDoors_area_exited"]
 [connection signal="area_entered" from="EnterTreeTop" to="." method="_on_EnterDoors_area_entered"]
 [connection signal="area_exited" from="EnterTreeTop" to="." method="_on_EnterDoors_area_exited"]
-[connection signal="area_entered" from="PlaceItemsUI/PlaceItemBox" to="." method="_on_PlaceItemBox_area_entered"]
-[connection signal="area_exited" from="PlaceItemsUI/PlaceItemBox" to="." method="_on_PlaceItemBox_area_exited"]

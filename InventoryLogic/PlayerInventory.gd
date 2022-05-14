@@ -13,6 +13,8 @@ var inventory = {
 	1: ["sword", 1], 
 	13: ["green gem", 5],
 	4: ["hoe", 1], 
+	5: ["yellow onion seeds", 30],
+	6: ["white onion seeds", 50],
 	7: ["hay seeds", 50],
 	11: ["potato seeds", 28],
 	16: ["bucket", 1]
@@ -23,7 +25,14 @@ var hotbar = {
 	1: ["pickaxe", 1],
 	2: ["torch", 24], 
 	4: ["hoe", 1], 
-	3: ["bucket", 1]
+	3: ["bucket", 1],
+	5: ["wood box", 52],
+	6: ["wood barrel", 70],
+#	5: ["beet seeds", 30],
+#	6: ["carrot seeds", 50],
+	7: ["cabbage seeds", 30],
+	8: ["lettuce seeds", 50],
+	9: ["wood fence", 32]
 }
 
 # Location of bottom left tile
@@ -46,7 +55,7 @@ var player_home = {
 }
 var isFireplaceLit = false
 
-func place_object():
+func remove_single_object_from_hotbar():
 	hotbar[active_item_slot][1] -= 1
 	update_hotbar_slot_visual(active_item_slot, hotbar[active_item_slot][0], hotbar[active_item_slot][1])
 

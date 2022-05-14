@@ -5,6 +5,8 @@ var daysUntilHarvest
 var location
 var phase
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
+
 
 func initialize(cropNameInput, locationInput, daysUntilHarvestInput):
 	cropName = cropNameInput
@@ -19,7 +21,7 @@ func _ready():
 
 func delete_crop():
 	queue_free() 
-	
+
 
 func return_phase(daysUntilHarvest):
 	if daysUntilHarvest != 0: 
@@ -56,6 +58,7 @@ func harvest():
 		intitiateItemDrop(cropName, Vector2(), 1)
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 		PlayerFarmApi.remove_crop(location)
+		invisible_planted_crop_cells.set_cellv(location, -1)
 		queue_free()
 		
 		

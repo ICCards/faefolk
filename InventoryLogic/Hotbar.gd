@@ -38,7 +38,6 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 			elif slot.item:
 				left_click_not_holding(slot)
 
-
 func left_click_empty_slot(slot: SlotClass):
 	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
 	slot.putIntoSlot(find_parent("UserInterface").holding_item)
@@ -71,3 +70,11 @@ func left_click_not_holding(slot: SlotClass):
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+
+
+func _on_Area2D_mouse_entered():
+	print('entered')
+
+
+func _on_Area2D_mouse_exited():
+	print('exited')

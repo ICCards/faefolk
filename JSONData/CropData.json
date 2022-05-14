@@ -1,32 +1,115 @@
 {
 "hay": {
     "DaysToGrow" : 4,
+    "GrowthImages" : 5,
     "Perennial": false,
 },
-
 "potato": {
-    "DaysToGrow" : 8,
+    "DaysToGrow" : 5,
+    "GrowthImages" : 5,
     "Perennial": false,
 },
 "yellow onion": {
-    "DaysToGrow" : 4,
+    "DaysToGrow" : 8,
+    "GrowthImages" : 5,
     "Perennial": false,
 },
 "white onion": {
-    "DaysToGrow": 4,
+    "DaysToGrow": 8,
+    "GrowthImages" : 5,
     "Perennial": false,
 },
 "beet": {
-    "DaysToGrow": 4,
+    "DaysToGrow": 6,
+    "GrowthImages" : 5,
     "Perennial": false,
 },
 "carrot": {
     "DaysToGrow": 4,
+    "GrowthImages" : 5,
     "Perennial": false,
 },
 "cabbage": {
     "DaysToGrow": 4,
+    "GrowthImages" : 5,
     "Perennial": false,
 },
+"lettuce": {
+    "DaysToGrow": 4,
+    "GrowthImages" : 5,
+    "Perennial": false,
+},
+"corn": {
+    "DaysToGrow": 5,
+    "GrowthImages" : 6,
+    "Perennial": true,
+},
+"tomato": {
+    "DaysToGrow": 5,
+    "GrowthImages" : 6,
+    "Perennial": true,
+},
+"red pepper": {
+    "DaysToGrow": 5,
+    "GrowthImages" : 6,
+    "Perennial": true,
+},
+"yellow pepper": {
+    "DaysToGrow": 5,
+    "GrowthImages" : 6,
+    "Perennial": true,
+},
+"green pepper": {
+    "DaysToGrow": 5,
+    "GrowthImages" : 6,
+    "Perennial": true,
+},
+"zuchinni": {
+    "DaysToGrow": 5,
+    "GrowthImages" : 6,
+    "Perennial": true,
+},
+"asparagus": {
+    "DaysToGrow": 5,
+    "GrowthImages" : 6,
+    "Perennial": false,
+},
+"strawberry": {
+    "DaysToGrow": 5,
+    "GrowthImages" : 6,
+    "Perennial": true,
+},
+"grape": {
+    "DaysToGrow": 5,
+    "GrowthImages": 6,
+    "Perennial": true
+},
+"string beans": {
+    "DaysToGrow": 5,
+    "GrowthImages": 6,
+    "Perennial": true,
+},
+"beans": {
+    "DaysToGrow": 5,
+    "GrowthImages": 6,
+    "Perennial": true,
+},
+"green melon": {
+    "DaysToGrow": 5,
+    "GrowthImages": 6,
+    "Perennial": true,
+},
+"blueberry": {
+    "DaysToGrow": 5,
+    "GrowthImages": 6,
+    "Perennial": true,
+},
+"misc root": {
+    "DaysToGrow": 6,
+    "GrowthImages": 7,
+    "Perennial": false
+}
+
+
 
 }

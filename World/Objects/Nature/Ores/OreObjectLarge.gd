@@ -62,13 +62,13 @@ var smallOreHits: int = 2
 func _on_SmallHurtBox_area_entered(_area):
 	rng.randomize()
 	if smallOreHits == 0:
+		PlayerFarmApi.remove_farm_object(position_of_object)
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 32))
 		intitiateItemDrop(variety, Vector2(0, 28))
 		animation_player.play("small_ore_break")
 		yield($SoundEffects, "finished")
-		PlayerFarmApi.remove_farm_object(position_of_object)
 		queue_free()
 		
 	if smallOreHits != 0:

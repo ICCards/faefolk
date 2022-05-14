@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Images/Farm/house.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Farm/player_house.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/Farm/PlayerHouseObject.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -32,8 +32,8 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
-position = Vector2( 0, -22.5941 )
-polygon = PoolVector2Array( -10.9779, 15.4051, 3.99198, 15.4051, 4.25329, 0.559139, 75.8475, 0.559139, 75.8475, 15.4051, 87.8235, 15.4051, 87.8235, 46.2152, 184.597, 46.0493, 184.479, -4.57546, 169.216, -4.57546, 169.333, -101.356, -171.159, -101.356, -169.985, 13.4269, -59.8796, 16.4321, -52.8937, 37.9991, -35.9278, 45.1882, -16.9659, 37.9991 )
+position = Vector2( -1.03022, -21.1283 )
+polygon = PoolVector2Array( 4.69644, 20.5401, 4.25329, 0.559139, 75.8475, 0.559139, 76.3172, 21.7483, 171.42, 21.7483, 171.42, -97.8673, -146.764, -97.8673, -146.764, -25.373, -170.595, -25.244, -170.246, 21.7483 )
 
 [node name="BehindHouseArea" type="Area2D" parent="."]
 position = Vector2( -1.32066, 17.0434 )
@@ -42,7 +42,7 @@ collision_mask = 0
 input_pickable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BehindHouseArea"]
-position = Vector2( 0, -7 )
+position = Vector2( 6.02654, -9.98458 )
 polygon = PoolVector2Array( -184.444, -110.161, -184.444, -164.279, -101, -202, -104, -217, 40, -357, 182, -221, 183.791, -105.456 )
 
 [node name="Tween" type="Tween" parent="."]

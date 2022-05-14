@@ -11,17 +11,22 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
 
-var valid_farm_tiles 
+
 var valid_object_tiles
 var hoed_tiles
 var watered_tiles
 var green_grass_tiles
+var invisible_planted_crop_cells
+var fence_tiles
+var object_tiles
+
 
 onready var TorchObject = preload("res://World/Objects/Placables/TorchObject.tscn")
 onready var PlantedCrop = preload("res://World/Objects/Farm/PlantedCrop.tscn")
-
+onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
 
 onready var state = MOVEMENT
+
 enum {
 	MOVEMENT, 
 	SWING
@@ -57,7 +62,7 @@ func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if event.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
+		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
 			state = SWING
 			swing_state(event)
 		if itemCategory == "Placable" and playerState == "Farm":
@@ -86,41 +91,64 @@ func _on_PlaceItemBox_area_exited(area):
 func place_item_state(event, name):
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
-	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/dropped_item_icon/" + name + ".png")
+	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + name + ".png")
 	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
-	var location = valid_farm_tiles.world_to_map(mousePos)
-	if is_colliding_other_object or valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 150:
+	var location = valid_object_tiles.world_to_map(mousePos)
+	if valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 150:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
-			var torchObject = TorchObject.instance()
-			torchObject.initialize(valid_farm_tiles.map_to_world(location))
-			get_parent().add_child(torchObject)
-			torchObject.position = mousePos + Vector2(16, 22)
-			PlayerFarmApi.player_farm_objects.append(["torch", null, valid_farm_tiles.map_to_world(location), true])
-			PlayerInventory.place_object()
-			#PlayerInventory.add_item_to_hotbar("torch", -1)
+			place_object(name, location)
 
+
+func place_object(name, location):
+	PlayerFarmApi.player_placable_objects.append([name, location])
+	PlayerInventory.remove_single_object_from_hotbar()
+	valid_object_tiles.set_cellv(location, -1)
+	if name == "torch":
+		var torchObject = TorchObject.instance()
+		torchObject.initialize(location)
+		get_parent().add_child(torchObject)
+		torchObject.position = valid_object_tiles.map_to_world(location) + Vector2(16, 22)
+	elif name == "wood fence":
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(name, location)
+		get_parent().call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
+		fence_tiles.set_cellv(location, 0)
+		fence_tiles.update_bitmask_region()
+	elif name == "wood barrel":
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(name, location)
+		get_parent().call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
+		object_tiles.set_cellv(location, 0)
+	elif name == "wood box":
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(name, location)
+		get_parent().call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
+		object_tiles.set_cellv(location, 1)
 
 func place_seed_state(event, name):
 	name.erase(name.length() - 6, 6)
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
-	$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + name + "/1.png")
 	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
-	var location = hoed_tiles.world_to_map(mousePos)
-	if is_colliding_other_object or hoed_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 150:
+	var location = valid_object_tiles.world_to_map(mousePos)
+	if hoed_tiles.get_cellv(location) == -1 or invisible_planted_crop_cells.get_cellv(location) != -1 or position.distance_to(mousePos) > 150:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
-			PlayerInventory.place_object()
+			invisible_planted_crop_cells.set_cellv(location, 0)
+			PlayerInventory.remove_single_object_from_hotbar()
 			PlayerFarmApi.planted_crops.append([name, location, !watered_tiles.get_cellv(location), JsonData.crop_data[name]["DaysToGrow"]])
 			var plantedCrop = PlantedCrop.instance()
 			plantedCrop.initialize(name, location, JsonData.crop_data[name]["DaysToGrow"])
@@ -167,7 +195,7 @@ func movement_state(delta):
 
 
 var swingActive = false
-func swing_state(_delta):
+func swing_state(event):
 		$SoundEffects.stream_paused = true
 		if !swingActive:
 				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
@@ -178,8 +206,13 @@ func swing_state(_delta):
 				animation_player.play("swing_" + direction.to_lower())
 				yield(animation_player, "animation_finished" )
 				toolEquippedSprite.texture = null
-				state = MOVEMENT
 				swingActive = false
+				var newToolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				var newItemCategory = JsonData.item_data[newToolName]["ItemCategory"]
+				if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
+					swing_state(event)
+				else:
+					state = MOVEMENT
 		elif swingActive == true:
 			pass
 		else:
@@ -233,8 +266,9 @@ func set_hoed_tile():
 	elif direction == "RIGHT":
 		pos += Vector2(20, 8)
 	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) == -1 and valid_farm_tiles.get_cellv(location) != -1 and green_grass_tiles.get_cellv(location) == -1:
+	if hoed_tiles.get_cellv(location) == -1 and valid_object_tiles.get_cellv(location) != -1 and green_grass_tiles.get_cellv(location) == -1:
 		hoed_tiles.set_cellv(location, 0)
+		valid_object_tiles.set_cellv(location, -1)
 		hoed_tiles.update_bitmask_region()	
 
 
@@ -276,11 +310,13 @@ var playerState
 func setPlayerState(ownerNode):
 	if str(ownerNode).substr(0, 14) == "PlayerHomeFarm":
 		playerState = "Farm"
-		valid_farm_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesNature")
 		valid_object_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
 		hoed_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/HoedAutoTiles")
 		watered_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/WateredAutoTiles")
 		green_grass_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/GreenGrassTiles")
+		fence_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/FenceAutoTile")
+		object_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacableObjectTiles")
+		invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
 	else:
 		playerState = "Home"
 		$SoundEffects.stream = Sounds.wood_footsteps
@@ -304,3 +340,11 @@ func _on_WoodAreas_area_exited(_area):
 	$SoundEffects.stream = Sounds.dirt_footsteps
 	$SoundEffects.play()
 
+
+
+func _on_HotbarUI_mouse_entered():
+	print('entered hotbar')
+
+
+func _on_HotbarUI_mouse_exited():
+	print('exited hotbar')

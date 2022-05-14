@@ -16,14 +16,14 @@ var rng = RandomNumberGenerator.new()
 onready var world = get_tree().current_scene
 
 var treeObject
-var position_of_object
+var location_of_object
 var variety
 var showFullTree
 
-func initialize(inputVar, inputPos, ifFullTree):
+func initialize(inputVar, loc, ifFullTree):
 	variety = inputVar
 	treeObject = Images.returnTreeObject(inputVar)
-	position_of_object = inputPos
+	location_of_object = loc
 	showFullTree = ifFullTree
 
 func _ready():
@@ -67,7 +67,7 @@ func _on_Hurtbox_area_entered(_area):
 	if treeHealth == 0:
 		timer.stop()
 		disable_tree_top_collision_box()
-		PlayerFarmApi.set_farm_object_break(position_of_object)
+		PlayerFarmApi.set_farm_object_break(location_of_object)
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsStump.play()
 		$SoundEffectsTree.stream = Sounds.tree_break
@@ -109,7 +109,7 @@ func _on_stumpHurtBox_area_entered(_area):
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		intitiateItemDrop("wood", Vector2(0, 12), 3)
-		PlayerFarmApi.remove_farm_object(position_of_object)
+		PlayerFarmApi.remove_farm_object(location_of_object)
 		yield($SoundEffectsStump, "finished")
 		queue_free()
 	

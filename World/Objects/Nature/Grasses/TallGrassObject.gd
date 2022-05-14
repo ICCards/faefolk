@@ -11,8 +11,6 @@ func _ready():
 	$Sprite.texture = load("res://Assets/Images/tall grass sets/" + variety + ".png")
 
 
-
-
 func play_sound_effect():
 	if !bodyEnteredFlag:
 		$SoundEffects.play()
