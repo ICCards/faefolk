@@ -68,7 +68,7 @@ func load_player_crops():
 		hoed_grass_tiles.set_cellv(PlayerFarmApi.planted_crops[i][1], 0)
 		valid_tiles_for_object_placement.set_cellv(PlayerFarmApi.planted_crops[i][1], -1)
 		var plantedCrop = PlantedCrop.instance()
-		plantedCrop.initialize(PlayerFarmApi.planted_crops[i][0], PlayerFarmApi.planted_crops[i][1], PlayerFarmApi.planted_crops[i][3])
+		plantedCrop.initialize(PlayerFarmApi.planted_crops[i][0], PlayerFarmApi.planted_crops[i][1], PlayerFarmApi.planted_crops[i][3], PlayerFarmApi.planted_crops[i][4])
 		add_child(plantedCrop)
 		plantedCrop.global_position = valid_tiles_for_object_placement.map_to_world(PlayerFarmApi.planted_crops[i][1]) + Vector2(0, 16)
 		if PlayerFarmApi.planted_crops[i][2]:

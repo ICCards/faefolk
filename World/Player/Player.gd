@@ -96,7 +96,7 @@ func place_item_state(event, name):
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
 	var location = valid_object_tiles.world_to_map(mousePos)
-	if valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 150:
+	if valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 120:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
@@ -137,21 +137,21 @@ func place_seed_state(event, name):
 	name.erase(name.length() - 6, 6)
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
-	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + name + "/1.png")
+	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + name + "/seeds.png")
 	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
 	var location = valid_object_tiles.world_to_map(mousePos)
-	if hoed_tiles.get_cellv(location) == -1 or invisible_planted_crop_cells.get_cellv(location) != -1 or position.distance_to(mousePos) > 150:
+	if hoed_tiles.get_cellv(location) == -1 or invisible_planted_crop_cells.get_cellv(location) != -1 or position.distance_to(mousePos) > 120:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			invisible_planted_crop_cells.set_cellv(location, 0)
 			PlayerInventory.remove_single_object_from_hotbar()
-			PlayerFarmApi.planted_crops.append([name, location, !watered_tiles.get_cellv(location), JsonData.crop_data[name]["DaysToGrow"]])
+			PlayerFarmApi.planted_crops.append([name, location, !watered_tiles.get_cellv(location), JsonData.crop_data[name]["DaysToGrow"], false])
 			var plantedCrop = PlantedCrop.instance()
-			plantedCrop.initialize(name, location, JsonData.crop_data[name]["DaysToGrow"])
+			plantedCrop.initialize(name, location, JsonData.crop_data[name]["DaysToGrow"], false)
 			get_parent().add_child(plantedCrop)
 			plantedCrop.global_position = mousePos + Vector2(0, 16)
 
@@ -209,10 +209,10 @@ func swing_state(event):
 				swingActive = false
 				var newToolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				var newItemCategory = JsonData.item_data[newToolName]["ItemCategory"]
-				if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
-					swing_state(event)
-				else:
-					state = MOVEMENT
+#				if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
+#					swing_state(event)
+#				else:
+				state = MOVEMENT
 		elif swingActive == true:
 			pass
 		else:

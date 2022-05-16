@@ -61,7 +61,10 @@
       "StackSize": 1,
       "Description": "Used to make fertile soil"
   },
-  "hay": {
+  
+  
+  
+  "wheat": {
       "ItemCategory": "Food",
       "StackSize": 99,
       "Description": "Generates some energy"
@@ -76,12 +79,12 @@
       "StackSize": 99,
       "Description": "Generates some energy"
   },
-  "white onion": {
+  "garlic": {
       "ItemCategory": "Food",
       "StackSize": 99,
       "Description": "Generates some energy"
   },
-  "beet": {
+  "radish": {
       "ItemCategory": "Food",
       "StackSize": 99,
       "Description": "Generates some energy"
@@ -91,56 +94,176 @@
       "StackSize": 99,
       "Description": "Generates some energy"
   },
+  "cauliflower": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy"
+  },
   "cabbage": {
       "ItemCategory": "Food",
       "StackSize": 99,
       "Description": "Generates some energy"
   },
-  "lettuce": {
+  "yellow pepper": {
       "ItemCategory": "Food",
       "StackSize": 99,
       "Description": "Generates some energy"
   },
-  "hay seeds": {
+  "red pepper": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy"
+  },
+  "green pepper": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "strawberry": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "blueberry": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "grape": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "green bean": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "zucchinni": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "green melon": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "corn": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "blueberry": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  "jalapeno": {
+      "ItemCategory": "Food",
+      "StackSize": 99,
+      "Description": "Generates some energy",
+  },
+  
+  "wheat seeds": {
       "ItemCategory": "Seed",
       "StackSize": 99,
-      "Description": "Takes 5 days to grow",
+      "Description": "Plant these in the Summer or Fall. Takes 4 days to mature.",
   },
   "potato seeds": {
       "ItemCategory": "Seed",
       "StackSize": 99,
-      "Description": "Takes 10 days to grow"
+      "Description": "Plant these in the Spring. Takes 6 days to mature and produces one or two potatos on harvest. "
   },
   "yellow onion seeds": {
       "ItemCategory": "Seed",
       "StackSize": 99,
-      "Description": "Takes 5 days to grow",
+      "Description": "Plant these in the Fall. Takes 8 days to mature.",
   },
-  "white onion seeds": {
+  "garlic seeds": {
       "ItemCategory": "Seed",
       "StackSize": 99,
-      "Description": "Takes 10 days to grow"
+      "Description": "Plant these in the Spring. Takes 8 days to mature."
   },
-  "beet seeds": {
+  "radish seeds": {
       "ItemCategory": "Seed",
       "StackSize": 99,
-      "Description": "Takes 5 days to grow",
+      "Description": "Plant these in the Summer. Takes 6 days to mature.",
   },
   "carrot seeds": {
       "ItemCategory": "Seed",
       "StackSize": 99,
-      "Description": "Takes 10 days to grow"
+      "Description": "Plant these in the Spring. Takes 4 days to mature."
+  },
+  "cauliflower seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Spring. Takes 12 days to mature.",
   },
   "cabbage seeds": {
       "ItemCategory": "Seed",
       "StackSize": 99,
-      "Description": "Takes 5 days to grow",
+      "Description": "Plant these in the Fall. Takes 12 days to mature."
   },
-  "lettuce seeds": {
+  "yellow pepper seeds": {
       "ItemCategory": "Seed",
       "StackSize": 99,
-      "Description": "Takes 10 days to grow"
+      "Description": "Plant these in the Spring. Takes 6 days to mature and has a chance of producing multiple at harvest."
   },
+  "red pepper seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Summer. Takes 6 days to mature and has a chance of producing multiple at harvest."
+  },
+  "green pepper seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Fall. Takes 6 days to mature and has a chance of producing multiple at harvest."
+  },
+  "strawberry seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Spring. Takes 8 days to mature and continues to grow after harvest. Yields 2 strawberries.",
+  },
+  "blueberry seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Summer. Takes 13 days to mature and continues to grow after harvest. Yields 2 to 4 blueberries.",
+  },
+  "grape seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Fall. Takes 10 days to mature and continues to grow after harvest.",
+  },
+  "green bean seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Spring. Takes 10 days to mature and continues to grow after harvest. Yields 1 to 3 green beans.",
+  },
+  "zucchinni seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Spring. Takes 12 days to mature and continues to grow after harvest.",
+  },
+  "green melon seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Summer. Takes 10 days to mature and continues to grow after harvest.",
+  },
+  "corn seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Summer or Fall. Takes 14 days to mature and continues to grow after harvest.",
+  },
+  "jalapeno seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Fall. Takes 8 days to mature and continues to grow after harvest. Has a chance to yield multiple jalapenos at harvest.",
+  },
+  
+  
+  
+  
   "bucket" : {
       "ItemCategory": "Weapon",
       "StackSize": 1,

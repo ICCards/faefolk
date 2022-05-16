@@ -13,10 +13,10 @@ var inventory = {
 	1: ["sword", 1], 
 	13: ["green gem", 5],
 	4: ["hoe", 1], 
-	5: ["yellow onion seeds", 30],
-	6: ["white onion seeds", 50],
-	7: ["hay seeds", 50],
-	11: ["potato seeds", 28],
+#	5: ["yellow onion seeds", 30],
+#	6: ["white onion seeds", 50],
+#	7: ["hay seeds", 50],
+#	11: ["potato seeds", 28],
 	16: ["bucket", 1]
 }
 
@@ -28,10 +28,11 @@ var hotbar = {
 	3: ["bucket", 1],
 	5: ["wood box", 52],
 	6: ["wood barrel", 70],
-#	5: ["beet seeds", 30],
+	8: ["green pepper seeds", 30],
 #	6: ["carrot seeds", 50],
-	7: ["cabbage seeds", 30],
-	8: ["lettuce seeds", 50],
+#	7: ["cabbage seeds", 30],
+#	8: ["lettuce seeds", 50],
+	7: ["wheat seeds", 50],
 	9: ["wood fence", 32]
 }
 

@@ -863,11 +863,16 @@ autoplay = true
 position = Vector2( 0, 3 )
 
 [node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
+modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( 16, 16 )
 
-[node name="ItemToPlace" type="Sprite" parent="PlaceItemsUI"]
-modulate = Color( 1, 1, 1, 0.686275 )
-position = Vector2( 16, 0 )
+[node name="ItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
+modulate = Color( 1, 1, 1, 0.509804 )
+margin_right = 32.0
+margin_bottom = 32.0
+grow_vertical = 0
+rect_pivot_offset = Vector2( 16, 64 )
+mouse_filter = 2
 
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]

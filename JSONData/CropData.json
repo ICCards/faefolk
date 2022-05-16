@@ -1,115 +1,177 @@
 {
-"hay": {
-    "DaysToGrow" : 4,
-    "GrowthImages" : 5,
-    "Perennial": false,
-},
-"potato": {
-    "DaysToGrow" : 5,
-    "GrowthImages" : 5,
-    "Perennial": false,
-},
-"yellow onion": {
-    "DaysToGrow" : 8,
-    "GrowthImages" : 5,
-    "Perennial": false,
-},
-"white onion": {
-    "DaysToGrow": 8,
-    "GrowthImages" : 5,
-    "Perennial": false,
-},
-"beet": {
-    "DaysToGrow": 6,
-    "GrowthImages" : 5,
-    "Perennial": false,
-},
 "carrot": {
     "DaysToGrow": 4,
-    "GrowthImages" : 5,
+    "GrowthImages" : 3,
     "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Spring"],
+    "yield": [1],
 },
-"cabbage": {
-    "DaysToGrow": 4,
-    "GrowthImages" : 5,
+"potato": {
+    "DaysToGrow" : 6,
+    "GrowthImages" : 3,
     "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Spring"],
+    "yield": [1, 2],
 },
-"lettuce": {
-    "DaysToGrow": 4,
-    "GrowthImages" : 5,
+"garlic": {
+    "DaysToGrow": 8,
+    "GrowthImages" : 3,
     "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Spring"],
+    "yield": [1],
 },
-"corn": {
-    "DaysToGrow": 5,
-    "GrowthImages" : 6,
-    "Perennial": true,
-},
-"tomato": {
-    "DaysToGrow": 5,
-    "GrowthImages" : 6,
-    "Perennial": true,
-},
-"red pepper": {
-    "DaysToGrow": 5,
-    "GrowthImages" : 6,
-    "Perennial": true,
+"cauliflower": {
+    "DaysToGrow": 12,
+    "GrowthImages" : 3,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Spring"],
+    "yield": [1],
 },
 "yellow pepper": {
-    "DaysToGrow": 5,
-    "GrowthImages" : 6,
+    "DaysToGrow": 6,
+    "GrowthImages" : 4,
     "Perennial": true,
-},
-"green pepper": {
-    "DaysToGrow": 5,
-    "GrowthImages" : 6,
-    "Perennial": true,
-},
-"zuchinni": {
-    "DaysToGrow": 5,
-    "GrowthImages" : 6,
-    "Perennial": true,
-},
-"asparagus": {
-    "DaysToGrow": 5,
-    "GrowthImages" : 6,
-    "Perennial": false,
+    "Regrowth": 3,
+    "Seasons": ["Spring"],
+    "yield": [1, 1, 1, 2],
 },
 "strawberry": {
-    "DaysToGrow": 5,
-    "GrowthImages" : 6,
+    "DaysToGrow": 8,
+    "GrowthImages" : 4,
     "Perennial": true,
+    "Regrowth": 4,
+    "Seasons": ["Spring"],
+    "yield": [2],
 },
-"grape": {
-    "DaysToGrow": 5,
-    "GrowthImages": 6,
-    "Perennial": true
-},
-"string beans": {
-    "DaysToGrow": 5,
-    "GrowthImages": 6,
+"green bean": {
+    "DaysToGrow": 10,
+    "GrowthImages": 4,
     "Perennial": true,
+    "Regrowth": 3,
+    "Seasons": ["Spring"],
+    "yield": [1, 2, 3]
 },
-"beans": {
-    "DaysToGrow": 5,
-    "GrowthImages": 6,
+"zuchinni": {
+    "DaysToGrow": 12,
+    "GrowthImages" : 4,
     "Perennial": true,
+    "Regrowth": 4,
+    "Seasons": ["Spring"],
+    "yield": [1]
 },
-"green melon": {
-    "DaysToGrow": 5,
-    "GrowthImages": 6,
+
+
+
+"radish": {
+    "DaysToGrow": 6,
+    "GrowthImages" : 3,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Summer"],
+    "yield": [1],
+},
+"tomato": {
+    "DaysToGrow": 11,
+    "GrowthImages" : 4,
     "Perennial": true,
+    "Regrowth": 4,
+    "Seasons": ["Summer"],
+    "yield": [1, 2],
+},
+"red pepper": {
+    "DaysToGrow": 6,
+    "GrowthImages" : 4,
+    "Perennial": true,
+    "Regrowth": 3,
+    "Seasons": ["Summer"],
+    "yield": [1, 1, 1, 2],
 },
 "blueberry": {
-    "DaysToGrow": 5,
-    "GrowthImages": 6,
+    "DaysToGrow": 13,
+    "GrowthImages": 4,
     "Perennial": true,
+    "Regrowth": 4,
+    "Seasons": ["Summer"],
+    "yield": [2, 3, 4],
 },
-"misc root": {
-    "DaysToGrow": 6,
-    "GrowthImages": 7,
-    "Perennial": false
-}
+"green melon": {
+    "DaysToGrow": 10,
+    "GrowthImages": 3,
+    "Perennial": true,
+    "Regrowth": 5,
+    "Seasons": ["Summer"],
+    "yield": [3],
+},
 
+
+
+
+"wheat": {
+    "DaysToGrow" : 4,
+    "GrowthImages" : 3,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Summer", "Fall"],
+    "yield": [1],
+},
+"corn": {
+    "DaysToGrow": 14,
+    "GrowthImages" : 4,
+    "Perennial": true,
+    "Regrowth": 4,
+    "Seasons": ["Summer", "Fall"],
+    "yield": [1],
+},
+
+
+
+
+"green pepper": {
+    "DaysToGrow": 6,
+    "GrowthImages" : 4,
+    "Perennial": true,
+    "Regrowth": 3,
+    "Seasons": ["Fall"],
+    "yield": [1, 1, 1, 2],
+},
+    
+"yellow onion": {
+    "DaysToGrow" : 8,
+    "GrowthImages" : 3,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Fall"],
+    "yield": [1],
+},
+"grape": {
+    "DaysToGrow": 10,
+    "GrowthImages": 4,
+    "Perennial": true,
+    "Regrowth": 3,
+    "Seasons": ["Fall"],
+    "yield": [1]
+},
+
+"cabbage": {
+    "DaysToGrow": 12,
+    "GrowthImages" : 3,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Fall"],
+    "yield": [1],
+},
+"jalapeno": {
+    "DaysToGrow": 8,
+    "GrowthImages": 4,
+    "Perennial": true,
+    "Regrowth": 4,
+    "Seasons": ["Fall"],
+    "yield": [1, 1, 1, 2],
+},
 
 
 }

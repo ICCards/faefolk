@@ -72,9 +72,10 @@ func left_click_not_holding(slot: SlotClass):
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 
 
-func _on_Area2D_mouse_entered():
+
+func _on_HotbarSlots_mouse_entered():
 	print('entered')
 
 
-func _on_Area2D_mouse_exited():
+func _on_HotbarSlots_mouse_exited():
 	print('exited')

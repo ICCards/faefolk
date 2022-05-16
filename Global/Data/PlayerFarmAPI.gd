@@ -31,7 +31,7 @@ func set_farm_object_break(pos):
 			player_farm_objects[i][3] = false
 
 ### Planted crops
-# Name // Location // IsWatered // DaysUntilHarvest
+# Name // Location // IsWatered // DaysUntilHarvest // IsInRegrowthPhase
 var planted_crops = []
 func advance_day():
 	for i in range(planted_crops.size()):
@@ -52,6 +52,12 @@ func remove_crop(location):
 			planted_crops.remove(i)
 			return
 
+func set_crop_regrowth_phase(name, location):
+	for i in range(planted_crops.size()):
+		if planted_crops[i][1] == location:
+			planted_crops[i][3] = JsonData.crop_data[name]["Regrowth"]
+			planted_crops[i][4] = true
+			return
 
 ### Placable objects	
 # Name // Location 
