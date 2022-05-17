@@ -83,6 +83,3 @@ margin_right = 1068.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 1 )
-
-[connection signal="mouse_entered" from="HotbarSlots" to="." method="_on_HotbarSlots_mouse_entered"]
-[connection signal="mouse_exited" from="HotbarSlots" to="." method="_on_HotbarSlots_mouse_exited"]

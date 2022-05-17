@@ -149,9 +149,9 @@ func place_seed_state(event, name):
 		if event.is_action_pressed("mouse_click"):
 			invisible_planted_crop_cells.set_cellv(location, 0)
 			PlayerInventory.remove_single_object_from_hotbar()
-			PlayerFarmApi.planted_crops.append([name, location, !watered_tiles.get_cellv(location), JsonData.crop_data[name]["DaysToGrow"], false])
+			PlayerFarmApi.planted_crops.append([name, location, !watered_tiles.get_cellv(location), JsonData.crop_data[name]["DaysToGrow"], false, false])
 			var plantedCrop = PlantedCrop.instance()
-			plantedCrop.initialize(name, location, JsonData.crop_data[name]["DaysToGrow"], false)
+			plantedCrop.initialize(name, location, JsonData.crop_data[name]["DaysToGrow"], false, false)
 			get_parent().add_child(plantedCrop)
 			plantedCrop.global_position = mousePos + Vector2(0, 16)
 
@@ -198,6 +198,7 @@ var swingActive = false
 func swing_state(event):
 		$SoundEffects.stream_paused = true
 		if !swingActive:
+				PlayerStats.decrease_energy()
 				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				swingActive = true
 				set_melee_collision_layer(toolName)

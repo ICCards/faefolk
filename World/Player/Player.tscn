@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
 [ext_resource path="res://World/Player/Camera2D.gd" type="Script" id=7]
+[ext_resource path="res://World/Player/PlayerStatsUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://World/Player/CurrentTimeUI.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -741,6 +743,12 @@ position = Vector2( -514, -302 )
 
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 6 )
+
+[node name="CurrentTimeUI" parent="Camera2D/UserInterface" instance=ExtResource( 9 )]
+position = Vector2( 831, 19 )
+
+[node name="PlayerStatsUI" parent="Camera2D/UserInterface" instance=ExtResource( 8 )]
+position = Vector2( 907, 461 )
 
 [node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
 position = Vector2( 512, 534 )

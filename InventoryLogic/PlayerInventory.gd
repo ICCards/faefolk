@@ -14,9 +14,9 @@ var inventory = {
 	13: ["green gem", 5],
 	4: ["hoe", 1], 
 #	5: ["yellow onion seeds", 30],
-#	6: ["white onion seeds", 50],
+	6: ["garlic seeds", 50],
 #	7: ["hay seeds", 50],
-#	11: ["potato seeds", 28],
+	11: ["potato seeds", 28],
 	16: ["bucket", 1]
 }
 

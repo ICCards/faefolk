@@ -25,6 +25,7 @@ RustCalls="*res://Global/Functions/RustCalls.tscn"
 Characters="*res://Global/Data/Characters.gd"
 Sounds="*res://Global/Data/Sounds.gd"
 PlayerFarmApi="*res://Global/Data/PlayerFarmAPI.gd"
+PlayerStats="*res://Global/Data/PlayerStats.gd"
 
 [display]
 

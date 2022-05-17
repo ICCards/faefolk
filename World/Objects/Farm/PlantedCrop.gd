@@ -5,15 +5,17 @@ var days_until_harvest
 var location
 var phase
 var is_in_regrowth_phase
+var crop_is_dead 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
 
 
-func initialize(cropNameInput, locationInput, daysUntilHarvestInput, isInRegrowthPhaseInput):
+func initialize(cropNameInput, locationInput, daysUntilHarvestInput, isInRegrowthPhaseInput, ifCropIsAlreadyDead):
 	crop_name = cropNameInput
 	location = locationInput
 	days_until_harvest = daysUntilHarvestInput
 	is_in_regrowth_phase = isInRegrowthPhaseInput
+	crop_is_dead = return_if_crop_is_dead(ifCropIsAlreadyDead)
 	phase = return_phase(days_until_harvest)
 
 func _ready():
@@ -24,9 +26,17 @@ func _ready():
 func delete_crop():
 	queue_free() 
 
+func return_if_crop_is_dead(if_crop_is_already_dead):
+	if if_crop_is_already_dead or !JsonData.crop_data[crop_name]["Seasons"].has(DayNightTimer.season):
+		PlayerFarmApi.set_crop_dead(location)
+		return true
+	else:
+		return false
 
 func return_phase(daysUntilHarvest):
-	if daysUntilHarvest != 0: 
+	if crop_is_dead:
+		return "dead"
+	elif daysUntilHarvest != 0: 
 		if is_in_regrowth_phase:
 			return "empty"
 		else:
