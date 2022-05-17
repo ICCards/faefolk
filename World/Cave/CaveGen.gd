@@ -35,7 +35,6 @@ enum Tiles { GOLD, SILVER, STONE }
 var simplex_noise : OpenSimplexNoise = OpenSimplexNoise.new()
 
 func _ready() -> void:
-	
 	simplex_noise.seed = self.world_seed.hash()
 	simplex_noise.octaves = self.noise_octaves
 	simplex_noise.period = self.noise_period
