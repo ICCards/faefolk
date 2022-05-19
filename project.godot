@@ -10,18 +10,24 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Ninja",
+"language": "GDScript",
+"path": "res://World/Cave/mobs/ninja.gd"
+}, {
+"base": "Node",
 "class": "Task",
 "language": "GDScript",
-"path": "res://World/Cave/demons/demon_base.gd"
+"path": "res://World/Cave/mobs/demon_base.gd"
 } ]
 _global_script_class_icons={
+"Ninja": "",
 "Task": ""
 }
 
 [application]
 
 config/name="faefolk_menu"
-run/main_scene="res://World/Cave/Cave.tscn"
+run/main_scene="res://World/World.tscn"
 
 [autoload]
 

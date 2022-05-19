@@ -14,6 +14,7 @@ onready var animation_player = $CompositeSprites/AnimationPlayer
 	
 	
 onready var state = MOVEMENT
+
 enum {
 	MOVEMENT, 
 	SWING
@@ -147,6 +148,3 @@ func setPlayerTexture(var anim):
 	pantsSprite.set_texture(Global.pants_sprites[anim])
 	shirtsSprite.set_texture(Global.shirts_sprites[anim])
 	shoesSprite.set_texture(Global.shoes_sprites[anim])
-
-
-

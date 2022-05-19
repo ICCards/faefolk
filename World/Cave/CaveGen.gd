@@ -15,20 +15,22 @@ export(float) var wallCap = 1
 export(Vector2) var roadCap = Vector2(0.4,0.05)
 export(Vector2) var decorationCap = Vector2(0.4,0.05)
 
-onready var grass_map = $GrassGround
-onready var road_map = $DirtGround
-onready var wall_map = $CaveWalls
-onready var ore_map = $Ores
-onready var stones_decoration = $stones_decoration
-onready var lanterns = $lanterns
+onready var grass_map = $CaveNavigation/GrassGround
+onready var road_map = $CaveNavigation/DirtGround
+onready var wall_map = $CaveNavigation/CaveWalls
+onready var ore_map = $CaveNavigation/Ores
+onready var stones_decoration = $CaveNavigation/stones_decoration
+onready var lanterns = $CaveNavigation/lanterns
 
 onready var player = $Player
 onready var playerColloision = $Player/CollisionShape2D 
-onready var lanternLight = $LightNode
+onready var lanternLight = $CaveNavigation/LightNode
 
 onready var RedLantern = preload("res://World/Cave/objects/red_lantern.tscn")
 onready var GreenLantern = preload("res://World/Cave/objects/green_lantern.tscn")
 onready var BlueLantern = preload("res://World/Cave/objects/blue_lantern.tscn")
+
+onready var ninjaMob = preload("res://World/Cave/mobs/ninja.tscn")
 
 enum Tiles { GOLD, SILVER, STONE }
 
@@ -59,7 +61,7 @@ func spawnPlayer():
 	playerColloision.disabled = true
 	player.move_and_slide(Vector2(cell.x * 52, cell.y * 52), Vector2(0, 0))
 	playerColloision.disabled = false
-	print("spawned to cell", cell.x, cell.y)
+	print("spawned to cell: ", cell.x, " ",cell.y)
 
 func makeRoadMap():
 	for x in mapSize.x:
@@ -99,7 +101,11 @@ func addDecorations():
 							blueLantern.initialize(Vector2(x* 32,y* 32))
 							blueLantern.position = Vector2(x* 32,y* 32)
 							add_child(blueLantern)
-						
+					if chance < 13 and chance > 10:
+						var ninja = ninjaMob.instance()
+						ninja.initialize(Vector2(x* 32,y* 32))
+						ninja.position = Vector2(x* 32,y* 32)
+						add_child(ninja)
 	stones_decoration.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 
 	
@@ -162,7 +168,6 @@ func generate_threshold(noise_level: float):
 func addWall():
 	var cells = self.wall_map.get_used_cells()
 	for cell in cells:
-
 		var top = self.wall_map.get_cell(cell.x, cell.y-1) == TileMap.INVALID_CELL
 		var bottom = self.wall_map.get_cell(cell.x, cell.y+1) == TileMap.INVALID_CELL
 		var left = self.wall_map.get_cell(cell.x-1, cell.y) == TileMap.INVALID_CELL

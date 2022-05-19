@@ -1,11 +1,10 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://Assets/cave_mainLev.png" type="Texture" id=1]
 [ext_resource path="res://World/Cave/Cave.tres" type="TileSet" id=2]
 [ext_resource path="res://Assets/cave/lights/blueLantern/blue_lentern.tres" type="Texture" id=3]
 [ext_resource path="res://World/Cave/CaveGen.gd" type="Script" id=4]
 [ext_resource path="res://World/Player/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/Objects/OreObjectLarge.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Images/light.png" type="Texture" id=7]
 [ext_resource path="res://Assets/cave/Decorative.png" type="Texture" id=8]
 [ext_resource path="res://Assets/cave/lights/greenLantern/green_lantern.tres" type="Texture" id=9]
@@ -2225,7 +2224,9 @@ noise_persistence = 10.0
 roadCap = Vector2( 0.5, 0.03 )
 decorationCap = Vector2( 0.32, 0.04 )
 
-[node name="GrassGround" type="TileMap" parent="."]
+[node name="CaveNavigation" type="Navigation2D" parent="."]
+
+[node name="GrassGround" type="TileMap" parent="CaveNavigation"]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
@@ -2233,7 +2234,7 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 cell_tile_origin = 1
 format = 1
 
-[node name="DirtGround" type="TileMap" parent="."]
+[node name="DirtGround" type="TileMap" parent="CaveNavigation"]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
@@ -2241,7 +2242,7 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 cell_tile_origin = 1
 format = 1
 
-[node name="CaveWalls" type="TileMap" parent="."]
+[node name="CaveWalls" type="TileMap" parent="CaveNavigation"]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
@@ -2249,21 +2250,21 @@ cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 cell_tile_origin = 1
 format = 1
 
-[node name="CaveWallsGround" type="TileMap" parent="."]
+[node name="CaveWallsGround" type="TileMap" parent="CaveNavigation"]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 
-[node name="stones_decoration" type="TileMap" parent="."]
+[node name="stones_decoration" type="TileMap" parent="CaveNavigation"]
 tile_set = SubResource( 7 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 
-[node name="lanterns" type="TileMap" parent="."]
+[node name="lanterns" type="TileMap" parent="CaveNavigation"]
 visible = false
 tile_set = SubResource( 9 )
 cell_size = Vector2( 32, 32 )
@@ -2291,12 +2292,11 @@ scale = Vector2( 1.97969, 1.81094 )
 z_index = -1
 texture = ExtResource( 7 )
 
-[node name="OreObjectLarge" parent="." instance=ExtResource( 6 )]
-visible = false
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.160784, 0.12549, 0.12549, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
 
 [editable path="Player"]
