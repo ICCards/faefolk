@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hoe.mp3-2644f30cd81a341d89ae69d4d60ce79a.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Farming/hoe.mp3"
+dest_files=[ "res://.import/hoe.mp3-2644f30cd81a341d89ae69d4d60ce79a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -10,6 +10,9 @@ func reset_cells(name, location):
 		valid_object_tiles.set_cellv(location + Vector2(0, 1), 0)
 		valid_object_tiles.set_cellv(location + Vector2(-1, 1), 0)
 		valid_object_tiles.set_cellv(location + Vector2(-1, 0), 0)
+	elif name == "large wood chest":
+		valid_object_tiles.set_cellv(location, 0)
+		valid_object_tiles.set_cellv(location + Vector2(1, 0), 0)
 	else: 
 		valid_object_tiles.set_cellv(location, 0)
 

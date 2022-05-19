@@ -37,7 +37,7 @@ onready var direction = "DOWN"
 func _ready():
 	setPlayerState(get_parent())
 	setPlayerTexture('idle_down')
-	$SoundEffects.play()
+	$FootstepsSound.play()
 	_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
 	init_day_night_cycle()
@@ -98,6 +98,9 @@ func place_item_state(event, name):
 	var location = valid_object_tiles.world_to_map(mousePos)
 	if valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 120:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif name == "large wood chest" and valid_object_tiles.get_cellv(location + Vector2(1,0)) == -1:
+		$PlaceItemsUI/ColorIndicator.scale.x = 2.0
+		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
@@ -132,6 +135,13 @@ func place_object(name, location):
 		get_parent().call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
 		object_tiles.set_cellv(location, 1)
+	elif name == "large wood chest":
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(name, location)
+		get_parent().call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
+		object_tiles.set_cellv(location, 2)
+		valid_object_tiles.set_cellv(location + Vector2(1, 0), -1)
 
 func place_seed_state(event, name):
 	name.erase(name.length() - 6, 6)
@@ -144,9 +154,11 @@ func place_seed_state(event, name):
 	var location = valid_object_tiles.world_to_map(mousePos)
 	if hoed_tiles.get_cellv(location) == -1 or invisible_planted_crop_cells.get_cellv(location) != -1 or position.distance_to(mousePos) > 120:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
-	else:
+	else:	
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
+			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
+			$SoundEffects.play()
 			invisible_planted_crop_cells.set_cellv(location, 0)
 			PlayerInventory.remove_single_object_from_hotbar()
 			PlayerFarmApi.planted_crops.append([name, location, !watered_tiles.get_cellv(location), JsonData.crop_data[name]["DaysToGrow"], false, false])
@@ -181,7 +193,7 @@ func movement_state(delta):
 		walk_state(direction)		
 	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
 		idle_state(direction)
-		$SoundEffects.stream_paused = true
+		$FootstepsSound.stream_paused = true
 			
 	input_vector = input_vector.normalized()
 	
@@ -196,7 +208,7 @@ func movement_state(delta):
 
 var swingActive = false
 func swing_state(event):
-		$SoundEffects.stream_paused = true
+		$FootstepsSound.stream_paused = true
 		if !swingActive:
 				PlayerStats.decrease_energy()
 				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
@@ -221,11 +233,11 @@ func swing_state(event):
 
 
 func idle_state(dir):
-	$SoundEffects.stream_paused = true
+	$FootstepsSound.stream_paused = true
 	setPlayerTexture("idle_" + dir.to_lower())
 
 func walk_state(dir):
-	$SoundEffects.stream_paused = false
+	$FootstepsSound.stream_paused = false
 	setPlayerTexture("walk_" + dir.to_lower())
 
 func set_melee_collision_layer(toolName):
@@ -241,6 +253,8 @@ func set_melee_collision_layer(toolName):
 		set_watered_tile()
 
 func set_watered_tile():
+	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
+	$SoundEffects.play()
 	var pos = get_position()
 	if direction == "UP":
 		pos += Vector2(0, -28)
@@ -268,6 +282,9 @@ func set_hoed_tile():
 		pos += Vector2(20, 8)
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) == -1 and valid_object_tiles.get_cellv(location) != -1 and green_grass_tiles.get_cellv(location) == -1:
+		yield(get_tree().create_timer(0.6), "timeout")
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
+		$SoundEffects.play()
 		hoed_tiles.set_cellv(location, 0)
 		valid_object_tiles.set_cellv(location, -1)
 		hoed_tiles.update_bitmask_region()	
@@ -320,7 +337,7 @@ func setPlayerState(ownerNode):
 		invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
 	else:
 		playerState = "Home"
-		$SoundEffects.stream = Sounds.wood_footsteps
+		$FootstepsSound.stream = Sounds.wood_footsteps
 
 
 
@@ -333,19 +350,12 @@ func _on_EnterDoors_area_exited(_area):
 
 
 func _on_WoodAreas_area_entered(_area):
-	$SoundEffects.stream = Sounds.wood_footsteps
-	$SoundEffects.play()
+	$FootstepsSound.stream = Sounds.wood_footsteps
+	$FootstepsSound.play()
 
 
 func _on_WoodAreas_area_exited(_area):
-	$SoundEffects.stream = Sounds.dirt_footsteps
-	$SoundEffects.play()
+	$FootstepsSound.stream = Sounds.dirt_footsteps
+	$FootstepsSound.play()
 
 
-
-func _on_HotbarUI_mouse_entered():
-	print('entered hotbar')
-
-
-func _on_HotbarUI_mouse_exited():
-	print('exited hotbar')

@@ -13,6 +13,7 @@ collision_layer = 24
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+light_mask = 0
 shape = SubResource( 1 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

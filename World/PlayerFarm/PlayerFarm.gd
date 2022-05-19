@@ -19,6 +19,8 @@ onready var invisible_planted_crop_cells = $GroundTiles/InvisiblePlantedCropCell
 onready var fence_tiles = $DecorationTiles/FenceAutoTile
 onready var placable_object_tiles = $DecorationTiles/PlacableObjectTiles
 
+onready var Player = $Player
+
 var rng = RandomNumberGenerator.new()
 
 
@@ -51,17 +53,24 @@ func _ready():
 	generate_flower_tiles()
 	DayNightTimer.connect("advance_day", self, "advance_crop_day")
 
+		
+		
+var distance_to_waterfall_interval = 0
+func _process(delta) -> void:
+	$WaterTiles/WaterfallSound.volume_db = -8 * distance_to_waterfall_interval
+	distance_to_waterfall_interval = (Player.get_position().distance_to($WaterTiles/SmokeEffect.get_position()) / 200)
 
 func load_player_placables():
 	for i in range(PlayerFarmApi.player_placable_objects.size()):
 		place_object(PlayerFarmApi.player_placable_objects[i][0], null, PlayerFarmApi.player_placable_objects[i][1], null)
 
+
 func load_farm():
 	for i in range( PlayerFarmApi.player_farm_objects.size()):
 		validate_location_and_remove_tiles(PlayerFarmApi.player_farm_objects[i][0], PlayerFarmApi.player_farm_objects[i][2])
 		place_object(PlayerFarmApi.player_farm_objects[i][0], PlayerFarmApi.player_farm_objects[i][1], PlayerFarmApi.player_farm_objects[i][2], PlayerFarmApi.player_farm_objects[i][3])
-		
-		
+
+
 func load_player_crops():
 	for i in range(PlayerFarmApi.planted_crops.size()):
 		invisible_planted_crop_cells.set_cellv(PlayerFarmApi.planted_crops[i][1], 0)
@@ -155,7 +164,7 @@ func set_object_variety(name):
 
 
 func validate_location_and_remove_tiles(name, loc):
-	if name == "tree branch" or name == "ore small" or name == "tall grass" or name == "flower" or name == "Torch":
+	if name == "tree branch" or name == "ore small" or name == "tall grass" or name == "flower":
 		if valid_tiles_for_object_placement.get_cellv(loc) != -1 and invalid_tiles_for_nature_placement.get_cellv(loc) != 0:
 			valid_tiles_for_object_placement.set_cellv(loc, -1)
 			return true
@@ -227,6 +236,13 @@ func place_object(name, variety, loc, isFullGrowth):
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
 	elif name == "wood box":
 		placable_object_tiles.set_cellv(loc, 1)
+		valid_tiles_for_object_placement.set_cellv(loc, -1)
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(name, loc)
+		call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
+	elif name == "large wood chest":
+		placable_object_tiles.set_cellv(loc, 2)
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
 		tileObjectHurtBox.initialize(name, loc)

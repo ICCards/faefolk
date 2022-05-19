@@ -289,5 +289,10 @@
       "StackSize": 99,
       "Description": "Wood fence for decoration"
   },
+  "large wood chest": {
+      "ItemCategory": "Placable",
+      "StackSize": 99,
+      "Description": "Large wood chest for storage"
+  },
   
 }

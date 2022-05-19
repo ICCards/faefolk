@@ -52,7 +52,7 @@ func start_night_timer() -> void:
 	yield(night_timer, "timeout")
 	is_daytime = true
 	day += 1
-	if day == 3:
+	if day == 10:
 		day = 1
 		season = next_season(season)
 		emit_signal("advance_season")

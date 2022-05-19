@@ -93,15 +93,19 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 var isBeingHarvested = false	
 func harvest_and_remove():
 	if !isBeingHarvested:
+		$HarvestSound.play()
+		$CropText.visible = false
 		isBeingHarvested = true
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 		PlayerFarmApi.remove_crop(location)
 		invisible_planted_crop_cells.set_cellv(location, -1)
+		yield($HarvestSound, "finished")
 		queue_free()
 	
 func harvest_and_keep_planted():
 	if !isBeingHarvested:
+		$HarvestSound.play()
 		isBeingHarvested = true
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
@@ -124,7 +128,7 @@ var bodyEnteredFlag = false
 
 func play_effect():
 	if !bodyEnteredFlag and phase == "3" or phase == "4" or phase == "5" or phase == "harvest" or phase == "empty":
-		#$SoundEffects.play()
+		$RustleSound.play()
 		$AnimationPlayer.play("animate")
 		
 func _on_PlayAnimBox_body_entered(body):
