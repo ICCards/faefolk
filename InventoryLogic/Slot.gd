@@ -1,8 +1,8 @@
 extends Panel
 
-var default_text = preload("res://Assets/Images/item_slot_default_background.png")
-var empty_text = preload("res://Assets/Images/item_slot_empty_background.png")
-var selected_text = preload("res://Assets/Images/item_slot_selected_background.png")
+var default_text = preload("res://Assets/Images/Inventory UI/item_slot_default_background.png")
+var empty_text = preload("res://Assets/Images/Inventory UI/item_slot_empty_background.png")
+var selected_text = preload("res://Assets/Images/Inventory UI/item_slot_selected_background.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null
@@ -43,6 +43,7 @@ func pickFromSlot():
 	item = null
 	refresh_style()
 	
+	
 func putIntoSlot(new_item):
 	item = new_item
 	item.position = Vector2(0, 0)
@@ -57,4 +58,9 @@ func initialize_item(item_name, item_quantity):
 		item.set_item(item_name, item_quantity)
 	else:
 		item.set_item(item_name, item_quantity)
+	refresh_style()
+
+func removeFromSlot():
+	remove_child(item)
+	item = null
 	refresh_style()

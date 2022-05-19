@@ -4,10 +4,12 @@
 [ext_resource path="res://InventoryLogic/Hotbar.gd" type="Script" id=2]
 
 [node name="Hotbar" type="Node2D"]
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 2 )
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
-margin_right = 1068.0
+margin_left = -534.0
+margin_right = 534.0
 margin_bottom = 96.0
 custom_constants/hseparation = 12
 columns = 10

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/button_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=1]
 [ext_resource path="res://MainMenu/MenuOptions.gd" type="Script" id=2]
 
 [node name="MenuOptions" type="Control"]
@@ -37,6 +37,15 @@ enabled_focus_mode = 0
 text = "QUIT"
 align = 0
 
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+volume_db = -28.0
+
+[connection signal="mouse_entered" from="PlayButton" to="." method="_on_PlayButton_mouse_entered"]
+[connection signal="mouse_exited" from="PlayButton" to="." method="_on_PlayButton_mouse_exited"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="mouse_entered" from="OptionsButton" to="." method="_on_OptionsButton_mouse_entered"]
+[connection signal="mouse_exited" from="OptionsButton" to="." method="_on_OptionsButton_mouse_exited"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="mouse_entered" from="QuitButton" to="." method="_on_QuitButton_mouse_entered"]
+[connection signal="mouse_exited" from="QuitButton" to="." method="_on_QuitButton_mouse_exited"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]

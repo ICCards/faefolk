@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -8,11 +8,43 @@
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
 [ext_resource path="res://World/Player/Camera2D.gd" type="Script" id=7]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.5, 24.9998 )
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "set night"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.129412, 0.388235, 0.607843, 1 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24.1777, 13.2143 )
+extents = Vector2( 0.647213, 0.651788 )
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 8.00011
+height = 7.99978
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -115,7 +147,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shirts:frame")
@@ -127,7 +159,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Shoes:frame")
@@ -203,7 +235,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shirts:frame")
@@ -215,7 +247,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Shoes:frame")
@@ -263,7 +295,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 24 ) ]
+"values": [ Vector2( 0, 8 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -339,7 +371,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shirts:frame")
@@ -351,7 +383,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Shoes:frame")
@@ -399,7 +431,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -50, -20 ) ]
+"values": [ Vector2( -28, -20 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -475,7 +507,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shirts:frame")
@@ -487,7 +519,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Shoes:frame")
@@ -535,7 +567,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 50, -20 ) ]
+"values": [ Vector2( 28, -20 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -611,7 +643,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shirts:frame")
@@ -623,7 +655,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 0, 3 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Shoes:frame")
@@ -671,7 +703,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -70 ) ]
+"values": [ Vector2( 0, -42 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -690,51 +722,60 @@ tracks/10/keys = {
 radius = 39.746
 height = 22.2163
 
+[sub_resource type="CircleShape2D" id=10]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 16, 16 )
+
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 963, 533 )
-collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 6, -8 )
 current = true
-zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 7 )
 
 [node name="Limits" type="Node" parent="Camera2D"]
 
 [node name="BottomRight" type="Position2D" parent="Camera2D/Limits"]
-position = Vector2( 2092, 1160 )
+position = Vector2( 514, 302 )
 
 [node name="TopLeft" type="Position2D" parent="Camera2D/Limits"]
-position = Vector2( -82, -86 )
+position = Vector2( -514, -302 )
 
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 6 )
 
-[node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
-position = Vector2( 429, 934 )
-
 [node name="Inventory" parent="Camera2D/UserInterface" instance=ExtResource( 5 )]
 visible = false
-position = Vector2( 743, 301 )
+position = Vector2( 512, 180 )
+scale = Vector2( 0.5, 0.5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.36424e-12, -14 )
-rotation = -1.5708
-scale = Vector2( 1.01491, 1.01303 )
-shape = SubResource( 1 )
+[node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 512, 534 )
+
+[node name="DayNight" type="CanvasModulate" parent="Camera2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/DayNight"]
+anims/RESET = SubResource( 12 )
+"anims/set night" = SubResource( 13 )
 
 [node name="MeleeSwing" type="Area2D" parent="."]
+position = Vector2( 0, 11 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
 shape = SubResource( 2 )
 disabled = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 32
+position = Vector2( 0, 0.000100136 )
+rotation = -1.5708
+shape = SubResource( 11 )
+
 [node name="CompositeSprites" type="Node2D" parent="."]
-position = Vector2( 0, -11 )
-scale = Vector2( 2.5, 2.5 )
+scale = Vector2( 2, 2 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
@@ -747,12 +788,12 @@ position = Vector2( 0, -16 )
 hframes = 4
 frame = 3
 
-[node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
+[node name="Pants" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
 frame = 3
 
-[node name="Pants" type="Sprite" parent="CompositeSprites"]
+[node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
 frame = 3
@@ -786,15 +827,64 @@ anims/swing_right = SubResource( 7 )
 anims/swing_up = SubResource( 8 )
 
 [node name="PickupZone" type="Area2D" parent="."]
+visible = false
 scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
-position = Vector2( 0, -35.0012 )
+position = Vector2( 0, -31.6016 )
 scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
+[node name="EnterDoors" type="Area2D" parent="."]
+collision_layer = 33
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoors"]
+shape = SubResource( 10 )
+
+[node name="EnterTreeTop" type="Area2D" parent="."]
+position = Vector2( 0, 11 )
+collision_layer = 0
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTreeTop"]
+position = Vector2( 0, -38.8235 )
+shape = SubResource( 10 )
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+visible = false
+volume_db = -32.0
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, 11 )
+volume_db = -10.0
+autoplay = true
+
+[node name="PlaceItemsUI" type="Node2D" parent="."]
+position = Vector2( 0, 11 )
+
+[node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
+position = Vector2( 16, 16 )
+
+[node name="ItemToPlace" type="Sprite" parent="PlaceItemsUI"]
+position = Vector2( 16, 16 )
+
+[node name="PlaceItemBox" type="Area2D" parent="PlaceItemsUI"]
+collision_layer = 89
+collision_mask = 65
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaceItemsUI/PlaceItemBox"]
+position = Vector2( 16, 16 )
+shape = SubResource( 14 )
+
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
+[connection signal="area_entered" from="EnterDoors" to="." method="_on_EnterDoors_area_entered"]
+[connection signal="area_exited" from="EnterDoors" to="." method="_on_EnterDoors_area_exited"]
+[connection signal="area_entered" from="EnterTreeTop" to="." method="_on_EnterDoors_area_entered"]
+[connection signal="area_exited" from="EnterTreeTop" to="." method="_on_EnterDoors_area_exited"]
+[connection signal="area_entered" from="PlaceItemsUI/PlaceItemBox" to="." method="_on_PlaceItemBox_area_entered"]
+[connection signal="area_exited" from="PlaceItemsUI/PlaceItemBox" to="." method="_on_PlaceItemBox_area_exited"]
