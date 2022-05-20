@@ -106,7 +106,6 @@ func addDecorations():
 						ninja.initialize(Vector2(x* 32,y* 32))
 						ninja.position = Vector2(x* 32,y* 32)
 						add_child(ninja)
-						print(player.get_path())
 	stones_decoration.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 
 	
