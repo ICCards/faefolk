@@ -18,6 +18,7 @@ onready var valid_tiles_for_object_placement = $GroundTiles/ValidTilesForObjectP
 onready var invisible_planted_crop_cells = $GroundTiles/InvisiblePlantedCropCells
 onready var fence_tiles = $DecorationTiles/FenceAutoTile
 onready var placable_object_tiles = $DecorationTiles/PlacableObjectTiles
+onready var path_tiles = $DecorationTiles/PlacablePathTiles
 
 onready var Player = $Player
 
@@ -63,7 +64,8 @@ func _process(delta) -> void:
 func load_player_placables():
 	for i in range(PlayerFarmApi.player_placable_objects.size()):
 		place_object(PlayerFarmApi.player_placable_objects[i][0], null, PlayerFarmApi.player_placable_objects[i][1], null)
-
+	for i in range(PlayerFarmApi.player_placable_paths.size()):
+		place_object(PlayerFarmApi.player_placable_paths[i][0], PlayerFarmApi.player_placable_paths[i][1], PlayerFarmApi.player_placable_paths[i][2], null )
 
 func load_farm():
 	for i in range( PlayerFarmApi.player_farm_objects.size()):
@@ -163,8 +165,8 @@ func set_object_variety(name):
 		return oreTypes[0]
 
 
-func validate_location_and_remove_tiles(name, loc):
-	if name == "tree branch" or name == "ore small" or name == "tall grass" or name == "flower":
+func validate_location_and_remove_tiles(item_name, loc):
+	if item_name == "tree branch" or item_name == "ore small" or item_name == "tall grass" or item_name == "flower":
 		if valid_tiles_for_object_placement.get_cellv(loc) != -1 and invalid_tiles_for_nature_placement.get_cellv(loc) != 0:
 			valid_tiles_for_object_placement.set_cellv(loc, -1)
 			return true
@@ -188,66 +190,72 @@ func validate_location_and_remove_tiles(name, loc):
 			return false
 
 
-func place_object(name, variety, loc, isFullGrowth):
-	if name == "tree":
+func place_object(item_name, variety, loc, isFullGrowth):
+	if item_name == "tree":
 		var treeObject = TreeObject.instance()
 		treeObject.initialize(variety, loc, isFullGrowth)
 		call_deferred("add_child", treeObject)
 		treeObject.position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(0, 24)
-	elif name == "tree stump":
+	elif item_name == "tree stump":
 		var stumpObject = StumpObject.instance()
 		stumpObject.initialize(variety, loc)
 		call_deferred("add_child", stumpObject)
 		stumpObject.position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(4, 36)
-	elif name == "tree branch":
+	elif item_name == "tree branch":
 		var branchObject = BranchObject.instance()
 		branchObject.initialize(variety, loc)
 		call_deferred("add_child", branchObject)
 		branchObject.position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(17, 16)
-	elif name == "ore large":
+	elif item_name == "ore large":
 		var oreObject = OreObject.instance()
 		oreObject.initialize(variety, loc, isFullGrowth)
 		call_deferred("add_child", oreObject)
 		oreObject.position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(0, 28)
-	elif name == "ore small":
+	elif item_name == "ore small":
 		var smallOreObject = SmallOreObject.instance()
 		smallOreObject.initialize(variety, loc)
 		call_deferred("add_child", smallOreObject)
 		smallOreObject.position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 24)
-	elif name == "torch":
+	elif item_name == "torch":
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var torchObject = TorchObject.instance()
 		torchObject.initialize(loc)
 		call_deferred("add_child", torchObject)
 		torchObject.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 22)
-	elif name == "wood fence":
+	elif item_name == "wood fence":
 		fence_tiles.set_cellv(loc, 0)
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
-		tileObjectHurtBox.initialize(name, loc)
+		tileObjectHurtBox.initialize(item_name, loc)
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
-	elif name == "wood barrel":
+	elif item_name == "wood barrel":
 		placable_object_tiles.set_cellv(loc, 0)
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
-		tileObjectHurtBox.initialize(name, loc)
+		tileObjectHurtBox.initialize(item_name, loc)
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
-	elif name == "wood box":
+	elif item_name == "wood box":
 		placable_object_tiles.set_cellv(loc, 1)
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
-		tileObjectHurtBox.initialize(name, loc)
+		tileObjectHurtBox.initialize(item_name, loc)
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
-	elif name == "large wood chest":
+	elif item_name == "large wood chest":
 		placable_object_tiles.set_cellv(loc, 2)
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
-		tileObjectHurtBox.initialize(name, loc)
+		tileObjectHurtBox.initialize(item_name, loc)
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
+	elif item_name == "wood path":
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(item_name, loc)
+		call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
+		path_tiles.set_cellv(loc, variety - 1)
 	fence_tiles.update_bitmask_region()
 
 func advance_crop_day():

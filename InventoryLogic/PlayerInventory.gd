@@ -29,7 +29,7 @@ var hotbar = {
 	5: ["wood box", 52],
 	6: ["wood barrel", 70],
 #	6: ["carrot seeds", 50],
-#	7: ["cabbage seeds", 30],
+	7: ["wood path", 78],
 #	8: ["lettuce seeds", 50],
 	8: ["large wood chest", 7],
 	9: ["wood fence", 32]

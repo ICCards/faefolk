@@ -270,29 +270,39 @@
       "Descrption": "Used to water fertile soil"
   },
   "torch" : {
-      "ItemCategory": "Placable",
+      "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "Used to generate light"
   },
   "wood fence": {
-      "ItemCategory": "Placable",
+      "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "Wood fence for decoration"
   },
   "wood barrel": {
-      "ItemCategory": "Placable",
+      "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "Wood fence for decoration"
   },
   "wood box": {
-      "ItemCategory": "Placable",
+      "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "Wood fence for decoration"
   },
   "large wood chest": {
-      "ItemCategory": "Placable",
+      "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "Large wood chest for storage"
   },
+  "wood path": {
+      "ItemCategory": "Placable path",
+      "StackSize": 99,
+      "Description": "wood path description"
+  },
+  "stone path": {
+      "ItemCategory": "Placable path",
+      "StackSize": 99,
+      "Description": "stone path description"
+  }
   
 }

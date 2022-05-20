@@ -13,12 +13,14 @@ onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
 
 
 var valid_object_tiles
+var valid_path_tiles
 var hoed_tiles
 var watered_tiles
 var green_grass_tiles
 var invisible_planted_crop_cells
 var fence_tiles
 var object_tiles
+var path_tiles
 
 
 onready var TorchObject = preload("res://World/Objects/Placables/TorchObject.tscn")
@@ -65,8 +67,10 @@ func _unhandled_input(event):
 		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
 			state = SWING
 			swing_state(event)
-		if itemCategory == "Placable" and playerState == "Farm":
+		if itemCategory == "Placable object" and playerState == "Farm":
 			place_item_state(event, item_name)
+		elif itemCategory == "Placable path" and playerState == "Farm":
+			place_path_state(event, item_name)
 		elif itemCategory == "Seed" and playerState == "Farm":
 			place_seed_state(event, item_name)
 		else: 
@@ -77,37 +81,80 @@ func _unhandled_input(event):
 		$PlaceItemsUI/ItemToPlace.visible = false
 
 
-var is_colliding_other_object = false
-
-
-func _on_PlaceItemBox_area_entered(area):
-	is_colliding_other_object = true
-
-
-func _on_PlaceItemBox_area_exited(area):
-	if $PlaceItemsUI/PlaceItemBox.get_overlapping_areas().size() <= 0:
-		is_colliding_other_object = false
+#var is_colliding_other_object = false
+#
+#
+#func _on_PlaceItemBox_area_entered(area):
+#	is_colliding_other_object = true
+#
+#func _on_PlaceItemBox_area_exited(area):
+#	if $PlaceItemsUI/PlaceItemBox.get_overlapping_areas().size() <= 0:
+#		is_colliding_other_object = false
 	
-func place_item_state(event, name):
+var placable_object_variety = 1
+
+func get_object_variety(item_name):
+	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + str(placable_object_variety) + ".png")
+	if Input.is_action_pressed("1 key"):
+		placable_object_variety = 1
+	elif Input.is_action_pressed("2 key"):
+		placable_object_variety = 2
+
+
+func place_path_state(event, item_name):
+	get_object_variety(item_name)
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
-	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + name + ".png")
+	$PlaceItemsUI/ColorIndicator.scale.x = 1.0
+	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
+	mousePos = mousePos.snapped(Vector2(32,32))
+	$PlaceItemsUI.set_global_position(mousePos)
+	var location = valid_object_tiles.world_to_map(mousePos)
+	if valid_path_tiles.get_cellv(location) == -1 or valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 120:
+		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	else:
+		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
+		if event.is_action_pressed("mouse_click"):
+			place_path_object(item_name, placable_object_variety, location)
+			
+
+func place_path_object(item_name, variety, location):
+	PlayerFarmApi.player_placable_paths.append([item_name, variety, location])
+	PlayerInventory.remove_single_object_from_hotbar()
+	valid_path_tiles.set_cellv(location, -1)
+	var tileObjectHurtBox = TileObjectHurtBox.instance()
+	tileObjectHurtBox.initialize(item_name, location)
+	get_parent().call_deferred("add_child", tileObjectHurtBox)
+	tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
+	if item_name == "wood path":
+		if variety == 1:
+			path_tiles.set_cellv(location, 0)
+		elif variety == 2:
+			path_tiles.set_cellv(location, 1)
+			
+func place_item_state(event, item_name):
+	$PlaceItemsUI/ColorIndicator.visible = true
+	$PlaceItemsUI/ItemToPlace.visible = true
+	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
+	if item_name == "large wood chest":
+		$PlaceItemsUI/ColorIndicator.scale.x = 2.0
+	else: 
+		$PlaceItemsUI/ColorIndicator.scale.x = 1.0
 	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
 	var location = valid_object_tiles.world_to_map(mousePos)
 	if valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 120:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
-	elif name == "large wood chest" and valid_object_tiles.get_cellv(location + Vector2(1,0)) == -1:
-		$PlaceItemsUI/ColorIndicator.scale.x = 2.0
+	elif item_name == "large wood chest" and valid_object_tiles.get_cellv(location + Vector2(1,0)) == -1:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
-			place_object(name, location)
+			place_placable_object(item_name, placable_object_variety, location)
 
 
-func place_object(name, location):
+func place_placable_object(name, variety, location):
 	PlayerFarmApi.player_placable_objects.append([name, location])
 	PlayerInventory.remove_single_object_from_hotbar()
 	valid_object_tiles.set_cellv(location, -1)
@@ -143,11 +190,13 @@ func place_object(name, location):
 		object_tiles.set_cellv(location, 2)
 		valid_object_tiles.set_cellv(location + Vector2(1, 0), -1)
 
+
 func place_seed_state(event, name):
 	name.erase(name.length() - 6, 6)
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
 	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + name + "/seeds.png")
+	$PlaceItemsUI/ColorIndicator.scale.x = 1.0
 	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
@@ -335,6 +384,8 @@ func setPlayerState(ownerNode):
 		fence_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/FenceAutoTile")
 		object_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacableObjectTiles")
 		invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
+		path_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacablePathTiles")
+		valid_path_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForPathPlacement")
 	else:
 		playerState = "Home"
 		$FootstepsSound.stream = Sounds.wood_footsteps

@@ -1,10 +1,11 @@
 extends Node
 
 onready var valid_object_tiles 
-
+onready var valid_path_tiles
 
 func reset_cells(name, location): 
 	valid_object_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
+	valid_path_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForPathPlacement")
 	if name == "tree" or name == "tree stump" or name == "ore large":
 		valid_object_tiles.set_cellv(location, 0)
 		valid_object_tiles.set_cellv(location + Vector2(0, 1), 0)
@@ -13,6 +14,9 @@ func reset_cells(name, location):
 	elif name == "large wood chest":
 		valid_object_tiles.set_cellv(location, 0)
 		valid_object_tiles.set_cellv(location + Vector2(1, 0), 0)
+	elif name == "wood path":
+		valid_object_tiles.set_cellv(location, 0)
+		valid_path_tiles.set_cellv(location, 0)
 	else: 
 		valid_object_tiles.set_cellv(location, 0)
 
@@ -67,6 +71,19 @@ func set_crop_dead(location):
 		if planted_crops[i][1] == location:
 			planted_crops[i][5] = true
 			return
+
+
+### Placable paths
+# Name // Variety // Location
+var player_placable_paths = []
+
+func remove_path_object(pos):
+	for i in range(player_placable_paths.size()):
+		if player_placable_paths[i][2] == pos:
+			reset_cells(player_placable_paths[i][0], player_placable_paths[i][2])
+			player_placable_paths.remove(i)
+			return
+
 ### Placable objects	
 # Name // Location 
 var player_placable_objects = [

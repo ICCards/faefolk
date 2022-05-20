@@ -747,12 +747,15 @@ position = Vector2( -514, -302 )
 script = ExtResource( 6 )
 
 [node name="CurrentTimeUI" parent="Camera2D/UserInterface" instance=ExtResource( 9 )]
+visible = false
 position = Vector2( 831, 19 )
 
 [node name="PlayerStatsUI" parent="Camera2D/UserInterface" instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 907, 461 )
 
 [node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 512, 534 )
 
 [node name="Inventory" parent="Camera2D/UserInterface" instance=ExtResource( 5 )]

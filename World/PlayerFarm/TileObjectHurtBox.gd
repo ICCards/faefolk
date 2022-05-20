@@ -5,7 +5,7 @@ onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var fence_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/FenceAutoTile")
 onready var placable_object_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacableObjectTiles")
 onready var valid_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
-
+onready var path_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacablePathTiles")
 
 var location
 var item_name
@@ -25,13 +25,15 @@ func set_dimensions():
 		position = position +  Vector2(16, 0)
 
 func _on_HurtBox_area_entered(area):
-	PlayerFarmApi.remove_placable_object(location)
 	if item_name == "wood fence":
+		PlayerFarmApi.remove_placable_object(location)
 		fence_tiles.set_cellv(location, -1)
 		fence_tiles.update_bitmask_region()
-	elif item_name == "large wood chest":
-		placable_object_tiles.set_cellv(location, -1)
+	elif item_name == "wood path":
+		PlayerFarmApi.remove_path_object(location)
+		path_tiles.set_cellv(location, -1)
 	else:
+		PlayerFarmApi.remove_placable_object(location)
 		placable_object_tiles.set_cellv(location, -1)
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType(item_name)
@@ -39,3 +41,17 @@ func _on_HurtBox_area_entered(area):
 	itemDrop.global_position = global_position 
 	queue_free()	
 
+
+
+func _on_DetectObjectOverPathBox_area_entered(area):
+	if item_name == "wood path":
+		print('entered')
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+
+
+
+func _on_DetectObjectOverPathBox_area_exited(area):
+	if item_name == "wood path":
+		print('exited')
+		yield(get_tree().create_timer(0.5), "timeout")
+		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
