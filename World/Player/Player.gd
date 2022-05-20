@@ -175,15 +175,6 @@ func set_melee_collision_layer(toolName):
 
 
 func setPlayerTexture(var anim):
-<<<<<<< HEAD
-	bodySprite.set_texture(Global.body_sprites[anim])
-	armsSprite.set_texture(Global.arms_sprites[anim])
-	accessorySprite.set_texture(Global.acc_sprites[anim])
-	headAttributeSprite.set_texture(Global.headAtr_sprites[anim])
-	pantsSprite.set_texture(Global.pants_sprites[anim])
-	shirtsSprite.set_texture(Global.shirts_sprites[anim])
-	shoesSprite.set_texture(Global.shoes_sprites[anim])
-=======
 	bodySprite.set_texture(Characters.body_sprites[anim])
 	armsSprite.set_texture(Characters.arms_sprites[anim])
 	accessorySprite.set_texture(Characters.acc_sprites[anim])
@@ -246,4 +237,3 @@ func _on_WoodAreas_area_exited(_area):
 	$SoundEffects.stream = Sounds.dirt_footsteps
 	$SoundEffects.play()
 
->>>>>>> maxs_branch

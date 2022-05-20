@@ -1,0 +1,13 @@
+Godot Engine v3.4.4.stable.official.419e713a2 - https://godotengine.org
+OpenGL ES 3.0 Renderer: Apple M1 Pro
+OpenGL ES Batching: ON
+ 
+Registered camera FaceTime HD Camera with id 1 position 0 at index 0
+ERROR: Cannot open file 'res://World/World.tscn'.
+   at: load_interactive (scene/resources/resource_format_text.cpp:1183) - Condition "err != OK" is true. Returned: Ref<ResourceInteractiveLoader>()
+ERROR: Failed loading resource: res://World/World.tscn. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:271) - Condition "found" is true. Returned: RES()
+ERROR: Failed loading scene: res://World/World.tscn
+   at: start (main/main.cpp:2011) - Condition "!scene" is true. Returned: false
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object.cpp:2064) - ObjectDB instances leaked at exit (run with --verbose for details).

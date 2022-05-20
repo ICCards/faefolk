@@ -1,8 +1,8 @@
-extends Node
+extends Node2D
 
 #export(bool) var redraw setget redraw
 export(Vector2) var mapSize = Vector2(280,220)
-export(String) var world_seed = "seed that makes the map noise"
+export(String) var world_seed = "seed x"
 export(int) var noise_octaves = 1.0
 export(int) var noise_period = 12
 export(float) var noise_persistence = 0.5
@@ -18,19 +18,18 @@ export(Vector2) var decorationCap = Vector2(0.4,0.05)
 onready var grass_map = $CaveNavigation/GrassGround
 onready var road_map = $CaveNavigation/DirtGround
 onready var wall_map = $CaveNavigation/CaveWalls
-onready var ore_map = $CaveNavigation/Ores
 onready var stones_decoration = $CaveNavigation/stones_decoration
 onready var lanterns = $CaveNavigation/lanterns
 
 onready var player = $Player
 onready var playerColloision = $Player/CollisionShape2D 
-onready var lanternLight = $CaveNavigation/LightNode
+
 
 onready var RedLantern = preload("res://World/Cave/objects/red_lantern.tscn")
 onready var GreenLantern = preload("res://World/Cave/objects/green_lantern.tscn")
 onready var BlueLantern = preload("res://World/Cave/objects/blue_lantern.tscn")
-
 onready var ninjaMob = preload("res://World/Cave/mobs/ninja.tscn")
+
 
 enum Tiles { GOLD, SILVER, STONE }
 
@@ -62,6 +61,7 @@ func spawnPlayer():
 	player.move_and_slide(Vector2(cell.x * 52, cell.y * 52), Vector2(0, 0))
 	playerColloision.disabled = false
 	print("spawned to cell: ", cell.x, " ",cell.y)
+	
 
 func makeRoadMap():
 	for x in mapSize.x:
@@ -106,6 +106,7 @@ func addDecorations():
 						ninja.initialize(Vector2(x* 32,y* 32))
 						ninja.position = Vector2(x* 32,y* 32)
 						add_child(ninja)
+						print(player.get_path())
 	stones_decoration.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 
 	
