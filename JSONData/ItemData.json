@@ -61,6 +61,11 @@
       "StackSize": 1,
       "Description": "Used to make fertile soil"
   },
+  "scythe": {
+      "ItemCategory": "Weapon",
+      "StackSize": 1,
+      "Description": "Used to cut grass and flowers"
+  },
   
   
   
@@ -303,6 +308,6 @@
       "ItemCategory": "Placable path",
       "StackSize": 99,
       "Description": "stone path description"
-  }
+  },
   
 }

@@ -12,7 +12,7 @@ var active_item_slot = 0
 var inventory = {
 	1: ["sword", 1], 
 	13: ["green gem", 5],
-	4: ["hoe", 1], 
+	4: ["scythe", 1], 
 #	5: ["yellow onion seeds", 30],
 	6: ["garlic seeds", 50],
 #	7: ["hay seeds", 50],
@@ -23,11 +23,11 @@ var inventory = {
 var hotbar = {
 	0: ["axe", 1],
 	1: ["pickaxe", 1],
-	2: ["torch", 24], 
+	2: ["potato seeds", 28],
 	4: ["hoe", 1], 
 	3: ["bucket", 1],
 	5: ["wood box", 52],
-	6: ["wood barrel", 70],
+	6: ["stone path", 70],
 #	6: ["carrot seeds", 50],
 	7: ["wood path", 78],
 #	8: ["lettuce seeds", 50],

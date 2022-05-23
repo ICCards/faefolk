@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shovel.png-0e2b89f4d7ad9cc62b0d8f13d66d4449.stex"
+path="res://.import/stone path4.png-37e2e193b61fb4a6dd5c0292bd1644d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/shovel.png"
-dest_files=[ "res://.import/shovel.png-0e2b89f4d7ad9cc62b0d8f13d66d4449.stex" ]
+source_file="res://Assets/Images/placable_object_preview/stone path4.png"
+dest_files=[ "res://.import/stone path4.png-37e2e193b61fb4a6dd5c0292bd1644d7.stex" ]
 
 [params]
 

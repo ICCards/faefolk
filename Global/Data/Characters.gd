@@ -5443,6 +5443,7 @@ func returnToolSprite(toolName, direction):
 					 return pickaxe.left
 				"right":
 					 return pickaxe.right
+					
 
 
 var pickaxe = {

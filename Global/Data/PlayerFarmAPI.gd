@@ -14,7 +14,7 @@ func reset_cells(name, location):
 	elif name == "large wood chest":
 		valid_object_tiles.set_cellv(location, 0)
 		valid_object_tiles.set_cellv(location + Vector2(1, 0), 0)
-	elif name == "wood path":
+	elif name == "wood path" or name == "stone path":
 		valid_object_tiles.set_cellv(location, 0)
 		valid_path_tiles.set_cellv(location, 0)
 	else: 
@@ -56,6 +56,7 @@ func add_watered_tile(location):
 func remove_crop(location):
 	for i in range(planted_crops.size()):
 		if planted_crops[i][1] == location:
+			print('remove')
 			planted_crops.remove(i)
 			return
 

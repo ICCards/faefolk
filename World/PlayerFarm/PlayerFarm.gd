@@ -45,20 +45,20 @@ const MAX_GRASS_BUNCH_SIZE = 24
 func _ready():
 	if PlayerFarmApi.player_farm_objects.size() == 0:
 		generate_farm()
+		generate_grass_bunches()
+		generate_grass_tiles()
+		generate_flower_tiles()
 	else:
 		load_farm()
 	load_player_crops()
 	load_player_placables()
-	generate_grass_bunches()
-	generate_grass_tiles()
-	generate_flower_tiles()
 	DayNightTimer.connect("advance_day", self, "advance_crop_day")
 
-		
-		
+
+
 var distance_to_waterfall_interval = 0
 func _process(delta) -> void:
-	$WaterTiles/WaterfallSound.volume_db = -8 * distance_to_waterfall_interval
+	$WaterTiles/WaterfallSound.volume_db = -6 * distance_to_waterfall_interval
 	distance_to_waterfall_interval = (Player.get_position().distance_to($WaterTiles/SmokeEffect.get_position()) / 200)
 
 func load_player_placables():
@@ -113,6 +113,7 @@ func generate_flower_tiles():
 			var flowerObject = FlowerObject.instance()
 			call_deferred("add_child", flowerObject)
 			flowerObject.position = valid_tiles_for_object_placement.map_to_world(location) + Vector2(16, 32)
+			PlayerFarmApi.player_farm_objects.append(["flower", null, location, null])
 
 
 func generate_grass_bunches():
@@ -124,6 +125,7 @@ func generate_grass_bunches():
 			tallGrassObject.initialize(tall_grass_types[0])
 			call_deferred("add_child", tallGrassObject)
 			tallGrassObject.position = valid_tiles_for_object_placement.map_to_world(location) + Vector2(16,32)
+			PlayerFarmApi.player_farm_objects.append(["tall grass", tall_grass_types[0], location, null])
 			create_grass_bunch(location, tall_grass_types[0])
 
 func create_grass_bunch(loc, variety):
@@ -137,6 +139,7 @@ func create_grass_bunch(loc, variety):
 			tallGrassObject.initialize(variety)
 			call_deferred("add_child", tallGrassObject)
 			tallGrassObject.position =  valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16,32)
+			PlayerFarmApi.player_farm_objects.append(["tall grass", tall_grass_types[0], loc, null])
 		else:
 			loc -= randomBorderTiles[0]
 
@@ -151,7 +154,7 @@ func generate_grass_tiles():
 			tallGrassObject.initialize(tall_grass_types[0])
 			call_deferred("add_child", tallGrassObject)
 			tallGrassObject.position =  valid_tiles_for_object_placement.map_to_world(location) + Vector2(16,32)
-
+			PlayerFarmApi.player_farm_objects.append(["tall grass", tall_grass_types[0], location, null])
 
 func set_object_variety(name):
 	rng.randomize()
@@ -216,6 +219,15 @@ func place_object(item_name, variety, loc, isFullGrowth):
 		smallOreObject.initialize(variety, loc)
 		call_deferred("add_child", smallOreObject)
 		smallOreObject.position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 24)
+	elif item_name == "tall grass":
+		var tallGrassObject = TallGrassObject.instance()
+		tallGrassObject.initialize(variety)
+		call_deferred("add_child", tallGrassObject)
+		tallGrassObject.position =  valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16,32)
+	elif item_name == "flower":
+		var flowerObject = FlowerObject.instance()
+		call_deferred("add_child", flowerObject)
+		flowerObject.position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 32)
 	elif item_name == "torch":
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var torchObject = TorchObject.instance()
@@ -256,6 +268,12 @@ func place_object(item_name, variety, loc, isFullGrowth):
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
 		path_tiles.set_cellv(loc, variety - 1)
+	elif item_name == "stone path":
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(item_name, loc)
+		call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
+		path_tiles.set_cellv(loc, variety + 1)
 	fence_tiles.update_bitmask_region()
 
 func advance_crop_day():

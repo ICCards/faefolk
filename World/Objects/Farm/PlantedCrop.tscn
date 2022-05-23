@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://World/Objects/Farm/PlantedCrop.gd" type="Script" id=2]
@@ -25,6 +25,9 @@ tracks/0/keys = {
 "values": [ 0.0, 6.0, -4.0, 2.0, -2.0, 0.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 15, 15 )
+
 [node name="PlantedCrop" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -47,7 +50,7 @@ shape = SubResource( 2 )
 position = Vector2( -1, -13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HarvestBox"]
-position = Vector2( 17, 13 )
+position = Vector2( 16, 13 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -61,8 +64,17 @@ volume_db = -24.0
 stream = ExtResource( 3 )
 volume_db = -16.0
 
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 15, 0 )
+shape = SubResource( 4 )
+
 [connection signal="body_entered" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_entered"]
 [connection signal="body_exited" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_exited"]
 [connection signal="input_event" from="HarvestBox" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="HarvestBox" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="HarvestBox" to="." method="_on_Area2D_mouse_exited"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

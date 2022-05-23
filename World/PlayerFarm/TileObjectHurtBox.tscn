@@ -25,6 +25,9 @@ collision_mask = 0
 light_mask = 0
 shape = SubResource( 1 )
 
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+volume_db = -16.0
+
 [connection signal="area_entered" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_entered"]
 [connection signal="area_exited" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

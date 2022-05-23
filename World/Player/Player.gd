@@ -40,14 +40,21 @@ func _ready():
 	setPlayerState(get_parent())
 	setPlayerTexture('idle_down')
 	$FootstepsSound.play()
-	_play_background_music()
+#	_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
 	init_day_night_cycle()
 	DayNightTimer.day_timer.connect("timeout", self, "set_night")
 	DayNightTimer.night_timer.connect("timeout", self, "set_day")
 
 
+
+var is_mouse_over_hotbar = false
+
 func _process(delta) -> void:
+	if get_local_mouse_position().x > -240 and get_local_mouse_position().x < 240 and get_local_mouse_position().y > 210 and get_local_mouse_position().y < 250:
+		is_mouse_over_hotbar = true
+	else:
+		is_mouse_over_hotbar = false
 	if PlayerInventory.viewInventoryMode == false:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
@@ -60,8 +67,8 @@ func _process(delta) -> void:
 		idle_state(direction)
 
 
-func _unhandled_input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false:
+func _input(event):
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false and !is_mouse_over_hotbar:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
@@ -80,25 +87,25 @@ func _unhandled_input(event):
 		$PlaceItemsUI/ColorIndicator.visible = false
 		$PlaceItemsUI/ItemToPlace.visible = false
 
-
-#var is_colliding_other_object = false
-#
-#
-#func _on_PlaceItemBox_area_entered(area):
-#	is_colliding_other_object = true
-#
-#func _on_PlaceItemBox_area_exited(area):
-#	if $PlaceItemsUI/PlaceItemBox.get_overlapping_areas().size() <= 0:
-#		is_colliding_other_object = false
 	
 var placable_object_variety = 1
 
 func get_object_variety(item_name):
 	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + str(placable_object_variety) + ".png")
-	if Input.is_action_pressed("1 key"):
-		placable_object_variety = 1
-	elif Input.is_action_pressed("2 key"):
-		placable_object_variety = 2
+	if item_name == "wood path":
+		if Input.is_action_pressed("1 key"):
+			placable_object_variety = 1
+		elif Input.is_action_pressed("2 key"):
+			placable_object_variety = 2
+	elif item_name == "stone path":
+		if Input.is_action_pressed("1 key"):
+			placable_object_variety = 1
+		elif Input.is_action_pressed("2 key"):
+			placable_object_variety = 2
+		elif Input.is_action_pressed("3 key"):
+			placable_object_variety = 3
+		elif Input.is_action_pressed("4 key"):
+			placable_object_variety = 4
 
 
 func place_path_state(event, item_name):
@@ -127,18 +134,18 @@ func place_path_object(item_name, variety, location):
 	get_parent().call_deferred("add_child", tileObjectHurtBox)
 	tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
 	if item_name == "wood path":
-		if variety == 1:
-			path_tiles.set_cellv(location, 0)
-		elif variety == 2:
-			path_tiles.set_cellv(location, 1)
-			
+		path_tiles.set_cellv(location, variety - 1)
+	elif item_name == "stone path":
+		path_tiles.set_cellva(location, variety + 1)
+
+
 func place_item_state(event, item_name):
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
 	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 	if item_name == "large wood chest":
 		$PlaceItemsUI/ColorIndicator.scale.x = 2.0
-	else: 
+	else:
 		$PlaceItemsUI/ColorIndicator.scale.x = 1.0
 	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
@@ -271,10 +278,10 @@ func swing_state(event):
 				swingActive = false
 				var newToolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				var newItemCategory = JsonData.item_data[newToolName]["ItemCategory"]
-#				if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
-#					swing_state(event)
-#				else:
-				state = MOVEMENT
+				if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
+					swing_state(event)
+				else:
+					state = MOVEMENT
 		elif swingActive == true:
 			pass
 		else:
@@ -294,6 +301,7 @@ func set_melee_collision_layer(toolName):
 		$MeleeSwing.set_collision_mask(8)
 	elif toolName == "pickaxe":
 		$MeleeSwing.set_collision_mask(16)
+		remove_hoed_tile()
 	elif toolName == "hoe":
 		$MeleeSwing.set_collision_mask(0)
 		set_hoed_tile()
@@ -304,15 +312,7 @@ func set_melee_collision_layer(toolName):
 func set_watered_tile():
 	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
 	$SoundEffects.play()
-	var pos = get_position()
-	if direction == "UP":
-		pos += Vector2(0, -28)
-	elif direction == "DOWN":
-		pos += Vector2(0, 28)
-	elif direction == "LEFT":
-		pos += Vector2(-20, 8)
-	elif direction == "RIGHT":
-		pos += Vector2(20, 8)
+	var pos = adjust_position_from_direction(get_position())
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
 		PlayerFarmApi.add_watered_tile(location)
@@ -320,17 +320,9 @@ func set_watered_tile():
 		watered_tiles.update_bitmask_region()
 
 func set_hoed_tile():
-	var pos = get_position()
-	if direction == "UP":
-		pos += Vector2(0, -28)
-	elif direction == "DOWN":
-		pos += Vector2(0, 28)
-	elif direction == "LEFT":
-		pos += Vector2(-20, 8)
-	elif direction == "RIGHT":
-		pos += Vector2(20, 8)
+	var pos = adjust_position_from_direction(get_position())
 	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) == -1 and valid_object_tiles.get_cellv(location) != -1 and green_grass_tiles.get_cellv(location) == -1:
+	if hoed_tiles.get_cellv(location) == -1 and valid_object_tiles.get_cellv(location) != -1 and green_grass_tiles.get_cellv(location) == -1 and valid_path_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		$SoundEffects.play()
@@ -338,7 +330,32 @@ func set_hoed_tile():
 		valid_object_tiles.set_cellv(location, -1)
 		hoed_tiles.update_bitmask_region()	
 
+func remove_hoed_tile():
+	var pos = adjust_position_from_direction(get_position())
+	var location = hoed_tiles.world_to_map(pos)
+	if hoed_tiles.get_cellv(location) != -1:
+		yield(get_tree().create_timer(0.6), "timeout")
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
+		$SoundEffects.play()
+		PlayerFarmApi.remove_crop(location)
+		invisible_planted_crop_cells.set_cellv(location, -1)
+		watered_tiles.set_cellv(location, -1)
+		hoed_tiles.set_cellv(location, -1)
+		valid_object_tiles.set_cellv(location, 0)
+		hoed_tiles.update_bitmask_region()	
 
+
+func adjust_position_from_direction(pos):
+	if direction == "UP":
+		pos += Vector2(0, -36)
+	elif direction == "DOWN":
+		pos += Vector2(0, 20)
+	elif direction == "LEFT":
+		pos += Vector2(-32, -8)
+	elif direction == "RIGHT":
+		pos += Vector2(32, -8)
+	return pos
+	
 func setPlayerTexture(var anim):
 	bodySprite.set_texture(Characters.body_sprites[anim])
 	armsSprite.set_texture(Characters.arms_sprites[anim])
@@ -408,5 +425,6 @@ func _on_WoodAreas_area_entered(_area):
 func _on_WoodAreas_area_exited(_area):
 	$FootstepsSound.stream = Sounds.dirt_footsteps
 	$FootstepsSound.play()
+
 
 

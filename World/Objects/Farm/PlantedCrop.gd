@@ -138,3 +138,7 @@ func _on_PlayAnimBox_body_entered(body):
 
 func _on_PlayAnimBox_body_exited(body):
 	bodyEnteredFlag = false
+
+
+func _on_HurtBox_area_entered(area):
+	queue_free()

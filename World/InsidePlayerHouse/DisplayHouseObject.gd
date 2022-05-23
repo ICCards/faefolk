@@ -51,6 +51,7 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 	mousePos = mousePos.snapped(Vector2(32,32))
 	if event.is_action_pressed("mouse_click"):
 		if moveItemFlag:
+			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 			for i in range(PlayerInventory.player_home.size()):
 				if PlayerInventory.player_home[i][0] == image and !is_colliding_other_object and !validateTileBoundary(position / 32):
 					PlayerInventory.player_home[i][1] = (mousePos / 32 - Vector2(0, 5))
@@ -61,6 +62,7 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 					$SoundEffects.stream = Sounds.put_down_house_object
 					$SoundEffects.play()
 		elif !moveItemFlag and find_parent("InsidePlayerHome").is_moving_object == null:
+			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Text Select.png"))
 			$MovementCollision/CollisionShape2D.disabled = true
 			moveItemFlag = true
 			find_parent("InsidePlayerHome").is_moving_object = true
@@ -130,10 +132,3 @@ func _on_LightFireplaceBox_area_entered(_area):
 
 func _on_LightFireplaceBox_area_exited(_area):
 	insideLightFireplaceArea = false
-
-
-func _on_MouseInputBox_mouse_entered():
-	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Text Select.png"))
-
-func _on_MouseInputBox_mouse_exited():
-	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))

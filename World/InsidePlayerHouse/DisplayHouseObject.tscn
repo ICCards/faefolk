@@ -46,6 +46,7 @@ grow_vertical = 0
 mouse_filter = 2
 
 [node name="CollisionBox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 16, -16 )
 collision_layer = 64
 collision_mask = 64
@@ -56,6 +57,7 @@ light_mask = 0
 shape = SubResource( 3 )
 
 [node name="MovementCollision" type="StaticBody2D" parent="."]
+visible = false
 input_pickable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
@@ -140,7 +142,5 @@ energy = 0.8
 [connection signal="area_exited" from="CollisionBox" to="." method="_on_CollisionBox_area_exited"]
 [connection signal="body_entered" from="CollisionBox" to="." method="_on_CollisionBox_body_entered"]
 [connection signal="input_event" from="MouseInputBox" to="." method="_on_MouseInputBox_input_event"]
-[connection signal="mouse_entered" from="MouseInputBox" to="." method="_on_MouseInputBox_mouse_entered"]
-[connection signal="mouse_exited" from="MouseInputBox" to="." method="_on_MouseInputBox_mouse_exited"]
 [connection signal="area_entered" from="LightFireplaceUI/LightFireplaceBox" to="." method="_on_LightFireplaceBox_area_entered"]
 [connection signal="area_exited" from="LightFireplaceUI/LightFireplaceBox" to="." method="_on_LightFireplaceBox_area_exited"]

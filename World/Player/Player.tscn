@@ -43,7 +43,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 0.647213, 0.651788 )
+extents = Vector2( 0.455902, 0.456474 )
 
 [sub_resource type="CapsuleShape2D" id=11]
 radius = 8.00011
@@ -298,7 +298,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 20 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -434,7 +434,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -28, -20 ) ]
+"values": [ Vector2( -32, -8 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -570,7 +570,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 28, -20 ) ]
+"values": [ Vector2( 32, -8 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -706,7 +706,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -42 ) ]
+"values": [ Vector2( 0, -36 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -747,15 +747,12 @@ position = Vector2( -514, -302 )
 script = ExtResource( 6 )
 
 [node name="CurrentTimeUI" parent="Camera2D/UserInterface" instance=ExtResource( 9 )]
-visible = false
 position = Vector2( 831, 19 )
 
 [node name="PlayerStatsUI" parent="Camera2D/UserInterface" instance=ExtResource( 8 )]
-visible = false
 position = Vector2( 907, 461 )
 
 [node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
-visible = false
 position = Vector2( 512, 534 )
 
 [node name="Inventory" parent="Camera2D/UserInterface" instance=ExtResource( 5 )]
@@ -770,7 +767,6 @@ anims/RESET = SubResource( 12 )
 "anims/set night" = SubResource( 13 )
 
 [node name="MeleeSwing" type="Area2D" parent="."]
-position = Vector2( 0, 11 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
@@ -778,6 +774,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 32
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
@@ -848,6 +845,7 @@ scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
 [node name="EnterDoors" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 0
 
@@ -855,6 +853,7 @@ collision_mask = 0
 shape = SubResource( 10 )
 
 [node name="EnterTreeTop" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 11 )
 collision_layer = 0
 collision_mask = 4096
@@ -879,12 +878,11 @@ autoplay = true
 [node name="PlaceItemsUI" type="Node2D" parent="."]
 
 [node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
-modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( 0, 16 )
 offset = Vector2( 16, 0 )
 
 [node name="ItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
-modulate = Color( 1, 1, 1, 0.509804 )
+modulate = Color( 1, 1, 1, 0.627451 )
 margin_right = 32.0
 margin_bottom = 32.0
 grow_vertical = 0
