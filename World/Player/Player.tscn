@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://World/Player/PlayerStatsUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Player/CurrentTimeUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -888,6 +889,15 @@ margin_bottom = 32.0
 grow_vertical = 0
 rect_pivot_offset = Vector2( 16, 64 )
 mouse_filter = 2
+
+[node name="RotateIcon" type="TextureRect" parent="PlaceItemsUI"]
+visible = false
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 48.0
+margin_bottom = 48.0
+rect_scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 11 )
 
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]

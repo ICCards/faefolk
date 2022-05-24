@@ -84,9 +84,11 @@ func _input(event):
 		else: 
 			$PlaceItemsUI/ColorIndicator.visible = false
 			$PlaceItemsUI/ItemToPlace.visible = false
+			$PlaceItemsUI/RotateIcon.visible = false
 	else: 
 		$PlaceItemsUI/ColorIndicator.visible = false
 		$PlaceItemsUI/ItemToPlace.visible = false
+		$PlaceItemsUI/RotateIcon.visible = false
 
 	
 var placable_object_variety = 1
@@ -113,6 +115,7 @@ func place_path_state(event, item_name):
 	get_object_variety(item_name)
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
+	$PlaceItemsUI/RotateIcon.visible = true
 	$PlaceItemsUI/ColorIndicator.scale.x = 1.0
 	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
@@ -137,7 +140,7 @@ func place_path_object(item_name, variety, location):
 	if item_name == "wood path":
 		path_tiles.set_cellv(location, variety - 1)
 	elif item_name == "stone path":
-		path_tiles.set_cellva(location, variety + 1)
+		path_tiles.set_cellv(location, variety + 1)
 
 
 func place_item_state(event, item_name):
