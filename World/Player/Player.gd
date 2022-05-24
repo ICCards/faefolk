@@ -51,7 +51,8 @@ func _ready():
 var is_mouse_over_hotbar = false
 
 func _process(delta) -> void:
-	if get_local_mouse_position().x > -240 and get_local_mouse_position().x < 240 and get_local_mouse_position().y > 210 and get_local_mouse_position().y < 250:
+	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
+	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:
 		is_mouse_over_hotbar = true
 	else:
 		is_mouse_over_hotbar = false
@@ -425,6 +426,4 @@ func _on_WoodAreas_area_entered(_area):
 func _on_WoodAreas_area_exited(_area):
 	$FootstepsSound.stream = Sounds.dirt_footsteps
 	$FootstepsSound.play()
-
-
 

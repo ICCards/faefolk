@@ -17,7 +17,8 @@ var inventory = {
 	6: ["garlic seeds", 50],
 #	7: ["hay seeds", 50],
 	11: ["potato seeds", 28],
-	16: ["bucket", 1]
+#	16: ["bucket", 1],
+	10: ["stone path", 70],
 }
 
 var hotbar = {
@@ -25,9 +26,9 @@ var hotbar = {
 	1: ["pickaxe", 1],
 	2: ["potato seeds", 28],
 	4: ["hoe", 1], 
-	3: ["bucket", 1],
+#	3: ["bucket", 1],
 	5: ["wood box", 52],
-	6: ["stone path", 70],
+	6: ["bucket", 70],
 #	6: ["carrot seeds", 50],
 	7: ["wood path", 78],
 #	8: ["lettuce seeds", 50],

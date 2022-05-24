@@ -8,4 +8,3 @@ func _ready():
 	limit_left = topLeft.position.x
 	limit_bottom = botttomRight.position.y
 	limit_right = botttomRight.position.x
-

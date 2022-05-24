@@ -90,8 +90,8 @@ func load_player_crops():
 func generate_farm():
 	for i in range(NUM_FARM_OBJECTS):
 		rng.randomize()
-		object_types.shuffle()
-		object_name = object_types[0]
+		#object_types.shuffle()
+		object_name = object_types[1]
 		object_variety = set_object_variety(object_name)
 		find_random_location_and_place_object(object_name, object_variety, i)
 
