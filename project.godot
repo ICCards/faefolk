@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "GraphNode",
+"class": "BehaviorTreeNode",
+"language": "GDScript",
+"path": "res://addons/btree/Editor/base/behavior_tree_node.gd"
+}, {
 "base": "Node2D",
 "class": "Ninja",
 "language": "GDScript",
 "path": "res://World/Cave/mobs/ninja.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://World/Player/Player.gd"
 }, {
 "base": "Node",
 "class": "Task",
@@ -20,7 +30,9 @@ _global_script_classes=[ {
 "path": "res://World/Cave/mobs/demon_base.gd"
 } ]
 _global_script_class_icons={
+"BehaviorTreeNode": "",
 "Ninja": "",
+"Player": "",
 "Task": ""
 }
 

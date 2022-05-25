@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 onready var bodySprite = $CompositeSprites/Body
 onready var armsSprite = $CompositeSprites/Arms
