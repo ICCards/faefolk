@@ -42,7 +42,7 @@ collision_mask = 0
 input_pickable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BehindHouseArea"]
-position = Vector2( 6.02654, -9.98458 )
+position = Vector2( -1.03228, -7.63163 )
 polygon = PoolVector2Array( -184.444, -110.161, -184.444, -164.279, -101, -202, -104, -217, 40, -357, 182, -221, 183.791, -105.456 )
 
 [node name="Tween" type="Tween" parent="."]

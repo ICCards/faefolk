@@ -18,6 +18,10 @@ func initialize(name, loc):
 	
 func _ready():
 	set_dimensions()
+	if item_name == "wood path":
+		$TypeOfTileArea.set_collision_mask(512)
+	elif item_name == "stone path":
+		$TypeOfTileArea.set_collision_mask(1024)
 
 func set_dimensions():
 	if item_name == "large wood chest":
@@ -47,14 +51,13 @@ func _on_HurtBox_area_entered(area):
 	get_parent().call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position 
 	yield($SoundEffects, "finished")
-	queue_free()	
+	queue_free()
 
 
 
 func _on_DetectObjectOverPathBox_area_entered(area):
 	if item_name == "wood path" or item_name == "stone path":
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-
 
 
 func _on_DetectObjectOverPathBox_area_exited(area):

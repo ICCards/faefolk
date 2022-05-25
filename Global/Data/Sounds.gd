@@ -1,8 +1,13 @@
 extends Node
 
+
+var current_footsteps_sound = wood_footsteps
+
+
 ### Sound effects ##
 var wood_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/wood footsteps.mp3")
 var dirt_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3")
+var stone_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3")
 
 var button_hover = preload("res://Assets/Sound/Sound effects/UI/button hover.mp3")
 var button_select = preload("res://Assets/Sound/Sound effects/UI/button select.mp3")

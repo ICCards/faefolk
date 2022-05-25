@@ -6,8 +6,8 @@
 [ext_resource path="res://Assets/Images/Animations/torch/5.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Animations/torch/4.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Images/Animations/torch/2.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=7]
-[ext_resource path="res://World/Objects/Placables/TorchObject.gd" type="Script" id=8]
+[ext_resource path="res://World/Objects/AnimatedObjects/TorchObject.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -21,7 +21,7 @@ animations = [ {
 extents = Vector2( 14.4688, 13.5938 )
 
 [node name="TorchObject" type="Node2D"]
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -14 )
@@ -31,7 +31,7 @@ playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 1, -5 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 energy = 1.05
 mode = 2
 
@@ -43,10 +43,11 @@ collision_mask = 0
 position = Vector2( 0, -6 )
 shape = SubResource( 2 )
 
-[node name="CollisionBox" type="Area2D" parent="."]
+[node name="DetectIfOverPath" type="Area2D" parent="."]
+collision_layer = 8192
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectIfOverPath"]
 position = Vector2( 0, -6 )
 shape = SubResource( 2 )
 

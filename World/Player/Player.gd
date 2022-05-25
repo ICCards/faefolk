@@ -23,7 +23,7 @@ var object_tiles
 var path_tiles
 
 
-onready var TorchObject = preload("res://World/Objects/Placables/TorchObject.tscn")
+onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObject.tscn")
 onready var PlantedCrop = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
 
@@ -39,13 +39,14 @@ onready var direction = "DOWN"
 func _ready():
 	setPlayerState(get_parent())
 	setPlayerTexture('idle_down')
-	$FootstepsSound.play()
-#	_play_background_music()
+	$FootstepsSound.stream = Sounds.current_footsteps_sound
+	_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
+	$Camera2D/UserInterface/PlayerStatsUI.visible = true
+	$Camera2D/UserInterface/CurrentTimeUI.visible = true
 	init_day_night_cycle()
 	DayNightTimer.day_timer.connect("timeout", self, "set_night")
 	DayNightTimer.night_timer.connect("timeout", self, "set_day")
-
 
 
 var is_mouse_over_hotbar = false
@@ -91,24 +92,23 @@ func _input(event):
 		$PlaceItemsUI/RotateIcon.visible = false
 
 	
-var placable_object_variety = 1
+var path_index
+var selected_path
 
 func get_object_variety(item_name):
-	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + str(placable_object_variety) + ".png")
+	if path_index == null:
+		path_index = 1
+	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + str(path_index) + ".png")
 	if item_name == "wood path":
-		if Input.is_action_pressed("1 key"):
-			placable_object_variety = 1
-		elif Input.is_action_pressed("2 key"):
-			placable_object_variety = 2
+		if Input.is_action_pressed("rotate"):
+			path_index += 1
+			if path_index == 3:
+				path_index = 1
 	elif item_name == "stone path":
-		if Input.is_action_pressed("1 key"):
-			placable_object_variety = 1
-		elif Input.is_action_pressed("2 key"):
-			placable_object_variety = 2
-		elif Input.is_action_pressed("3 key"):
-			placable_object_variety = 3
-		elif Input.is_action_pressed("4 key"):
-			placable_object_variety = 4
+		if Input.is_action_pressed("rotate"):
+			path_index += 1
+			if path_index == 5:
+				path_index = 1
 
 
 func place_path_state(event, item_name):
@@ -126,8 +126,8 @@ func place_path_state(event, item_name):
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
-			place_path_object(item_name, placable_object_variety, location)
-			
+			place_path_object(item_name, path_index, location)
+
 
 func place_path_object(item_name, variety, location):
 	PlayerFarmApi.player_placable_paths.append([item_name, variety, location])
@@ -162,10 +162,10 @@ func place_item_state(event, item_name):
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
-			place_placable_object(item_name, placable_object_variety, location)
+			place_placable_object(item_name, location)
 
 
-func place_placable_object(name, variety, location):
+func place_placable_object(name, location):
 	PlayerFarmApi.player_placable_objects.append([name, location])
 	PlayerInventory.remove_single_object_from_hotbar()
 	valid_object_tiles.set_cellv(location, -1)
@@ -410,6 +410,8 @@ func setPlayerState(ownerNode):
 	else:
 		playerState = "Home"
 		$FootstepsSound.stream = Sounds.wood_footsteps
+		$FootstepsSound.volume_db = -10
+		$FootstepsSound.play()
 
 
 
@@ -421,12 +423,48 @@ func _on_EnterDoors_area_exited(_area):
 	sceneTransitionFlag = false
 
 
-func _on_WoodAreas_area_entered(_area):
-	$FootstepsSound.stream = Sounds.wood_footsteps
-	$FootstepsSound.play()
+
+func _on_SetWoodAreas_area_entered(area):
+	if Sounds.current_footsteps_sound != Sounds.wood_footsteps and $DetectPathUI/DetectWoodPath.get_overlapping_areas().size() <= 0 and $DetectPathUI/DetectStonePath.get_overlapping_areas().size() <= 0:
+		Sounds.current_footsteps_sound = Sounds.wood_footsteps
+		$FootstepsSound.stream = Sounds.current_footsteps_sound
+		$FootstepsSound.play()
+
+func _on_SetWoodAreas_area_exited(area):
+	if $DetectPathUI/DetectWoodPath.get_overlapping_areas().size() <= 0 and $DetectPathUI/DetectStonePath.get_overlapping_areas().size() <= 0:
+		Sounds.current_footsteps_sound = Sounds.dirt_footsteps
+		$FootstepsSound.stream = Sounds.current_footsteps_sound
+		$FootstepsSound.play()
 
 
-func _on_WoodAreas_area_exited(_area):
-	$FootstepsSound.stream = Sounds.dirt_footsteps
-	$FootstepsSound.play()
+func _on_DetectWoodArea_area_entered(area):
+	if Sounds.current_footsteps_sound != Sounds.wood_footsteps:
+		Sounds.current_footsteps_sound = Sounds.wood_footsteps
+		$FootstepsSound.stream = Sounds.current_footsteps_sound
+		$FootstepsSound.volume_db = -10
+		$FootstepsSound.play()
 
+
+func _on_DetectWoodArea_area_exited(area):
+	if $DetectPathUI/DetectWoodPath.get_overlapping_areas().size() <= 0 and $DetectPathUI/DetectStonePath.get_overlapping_areas().size() <= 0:
+		Sounds.current_footsteps_sound = Sounds.dirt_footsteps
+		$FootstepsSound.stream = Sounds.current_footsteps_sound
+		$FootstepsSound.volume_db = -10
+		$FootstepsSound.play()
+
+
+func _on_DetectStonePath_area_entered(area):
+	if Sounds.current_footsteps_sound != Sounds.stone_footsteps:
+		Sounds.current_footsteps_sound = Sounds.stone_footsteps
+		$FootstepsSound.stream = Sounds.current_footsteps_sound
+		$FootstepsSound.volume_db = 0
+		$FootstepsSound.play()
+
+
+
+func _on_DetectStonePath_area_exited(area):
+	if $DetectPathUI/DetectStonePath.get_overlapping_areas().size() <= 0 and $DetectPathUI/DetectWoodPath.get_overlapping_areas().size() <= 0:
+		Sounds.current_footsteps_sound = Sounds.dirt_footsteps
+		$FootstepsSound.stream = Sounds.current_footsteps_sound
+		$FootstepsSound.volume_db = -10
+		$FootstepsSound.play()

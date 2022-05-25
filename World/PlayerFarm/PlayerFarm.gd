@@ -7,7 +7,7 @@ onready var OreObject = preload("res://World/Objects/Nature/Ores/OreObjectLarge.
 onready var SmallOreObject = preload("res://World/Objects/Nature/Ores/OreObjectSmall.tscn")
 onready var TallGrassObject = preload("res://World/Objects/Nature/Grasses/TallGrassObject.tscn")
 onready var FlowerObject = preload("res://World/Objects/Nature/Grasses/FlowerObject.tscn")
-onready var TorchObject = preload("res://World/Objects/Placables/TorchObject.tscn")
+onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObject.tscn")
 onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
 
