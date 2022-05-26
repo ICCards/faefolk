@@ -1,4 +1,4 @@
-extends Node2D
+extends YSort
 
 #export(bool) var redraw setget redraw
 export(Vector2) var mapSize = Vector2(280,220)
@@ -107,9 +107,9 @@ func addDecorations():
 						#ninja.initialize(Vector2(x* 32,y* 32))
 						#ninja.position = Vector2(x* 32,y* 32)
 						#add_child(ninja)
-#						var _genius = genius.instance()
-#						_genius.position = Vector2(x* 32,y* 32)
-#						add_child(_genius)
+						var _genius = genius.instance()
+						_genius.position = Vector2(x* 32,y* 32)
+						add_child(_genius)
 						pass
 	stones_decoration.update_bitmask_region(Vector2(0.0, 0.0), Vector2(mapSize.x, mapSize.y))
 
