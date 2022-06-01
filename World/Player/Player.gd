@@ -27,6 +27,15 @@ enum {
 
 onready var direction = "DOWN"
 
+onready var top_left = $Camera2D/Limits/TopLeft
+onready var bottom_right = $Camera2D/Limits/BottomRight
+
+func initialize_camera_limits(top_left, bottom_right):
+	$Camera2D.limit_top = top_left.y
+	$Camera2D.limit_left = top_left.x
+	$Camera2D.limit_bottom = bottom_right.y
+	$Camera2D.limit_right = bottom_right.x
+
 func _ready():
 	setPlayerState(get_parent())
 	setPlayerTexture('idle_down')
@@ -101,7 +110,7 @@ func place_item_state(event, name):
 			PlayerInventory.add_item_to_hotbar("torch", -1)
 
 
-var MAX_SPEED := 12.5
+var MAX_SPEED := 30 #12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO

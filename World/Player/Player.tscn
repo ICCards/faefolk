@@ -773,6 +773,7 @@ light_mask = 32
 position = Vector2( 0, 0.000100136 )
 rotation = -1.5708
 shape = SubResource( 11 )
+disabled = true
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )

@@ -28,18 +28,24 @@ _global_script_classes=[ {
 "class": "Task",
 "language": "GDScript",
 "path": "res://World/Cave/mobs/demon_base.gd"
+}, {
+"base": "Node",
+"class": "Walker",
+"language": "GDScript",
+"path": "res://Walker.gd"
 } ]
 _global_script_class_icons={
 "BehaviorTreeNode": "",
 "Ninja": "",
 "Player": "",
-"Task": ""
+"Task": "",
+"Walker": ""
 }
 
 [application]
 
 config/name="faefolk"
-run/main_scene="res://World/Cave/Cave.tscn"
+run/main_scene="res://MainMenu/MainMenu.tscn"
 
 [autoload]
 
@@ -52,6 +58,7 @@ DayNightTimer="*res://Global/Functions/DayNightTimer.gd"
 RustCalls="*res://Global/Functions/RustCalls.tscn"
 Characters="*res://Global/Data/Characters.gd"
 Sounds="*res://Global/Data/Sounds.gd"
+Util="*res://Util.gd"
 
 [display]
 
@@ -95,7 +102,7 @@ ui_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_right={
@@ -109,14 +116,14 @@ ui_up={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
 mouse_click={
@@ -136,7 +143,7 @@ scroll_down={
 }
 inventory={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 }
 open_door={
@@ -149,6 +156,11 @@ action={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":88,"unicode":0,"echo":false,"script":null)
  ]
 }
+rotate={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -157,12 +169,17 @@ action={
 2d_physics/layer_3="ItemDrop"
 2d_physics/layer_4="AxeBreakLayer"
 2d_physics/layer_5="PickaxeBreakLayer"
+2d_physics/layer_6="EnterDoors"
 2d_physics/layer_7="PlayerHomeCollision"
+2d_physics/layer_10="WoodFootsteps"
+2d_physics/layer_11="StoneFootsteps"
 2d_physics/layer_13="InsideTreeTopLayer"
+2d_physics/layer_14="DetectOverlappingObject"
 
 [physics]
 
 common/enable_pause_aware_picking=true
+2d/default_gravity=0
 
 [rendering]
 
