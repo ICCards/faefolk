@@ -92,11 +92,11 @@ func _input(event):
 		$PlaceItemsUI/RotateIcon.visible = false
 
 	
-var path_index
+var path_index = 1
 var selected_path
 
 func get_object_variety(item_name):
-	if path_index == null:
+	if item_name == "wood path" and path_index > 2:
 		path_index = 1
 	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + str(path_index) + ".png")
 	if item_name == "wood path":
