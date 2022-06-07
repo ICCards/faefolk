@@ -36,6 +36,15 @@ enum {
 
 onready var direction = "DOWN"
 
+
+func initialize_camera_limits(top_left, bottom_right):
+	$Camera2D.limit_top = top_left.y
+	$Camera2D.limit_left = top_left.x
+	$Camera2D.limit_bottom = bottom_right.y
+	$Camera2D.limit_right = bottom_right.x
+
+
+
 func _ready():
 	setPlayerState(get_parent())
 	setPlayerTexture('idle_down')

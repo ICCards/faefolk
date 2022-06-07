@@ -154,6 +154,18 @@ tracks/11/keys = {
 "update": 0,
 "values": [ Vector2( 165, -4 ) ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "tree fall left"
@@ -287,6 +299,18 @@ tracks/10/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -135, -16 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -422,6 +446,18 @@ tracks/10/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 135, -16 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=17]

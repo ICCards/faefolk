@@ -281,3 +281,7 @@ func advance_crop_day():
 	get_tree().call_group("active_crops", "delete_crop")
 	watered_grass_tiles.clear()
 	load_player_crops()
+
+
+func _on_EnterCaveArea_area_entered(area):
+	SceneChanger.change_scene("res://World/Cave/Cave.tscn")

@@ -1378,6 +1378,7 @@ var human_male = {
 	body_walk_left = {
 		0 : preload("res://Characters/Human/male/WALK/body/left/body.png")
 	},
+	
 
 	body_swing_down = {
 		0 : preload("res://Characters/Human/male/SWING/body/down/body.png")
@@ -1390,6 +1391,18 @@ var human_male = {
 	},
 	body_swing_left = {
 		0 : preload("res://Characters/Human/male/SWING/body/left/body.png")
+	},
+	body_holding_down = {
+		0 : preload("res://Characters/Human/male/HOLDING/body/down/body.png")
+	},
+	body_holding_up = {
+		0 : preload("res://Characters/Human/male/HOLDING/body/up/body.png")
+	},
+	body_holding_right = {
+		0 : preload("res://Characters/Human/male/HOLDING/body/right/body.png")
+	},
+	body_holding_left = {
+		0 : preload("res://Characters/Human/male/HOLDING/body/left/body.png")
 	},
 
 
@@ -1431,6 +1444,19 @@ var human_male = {
 	arms_swing_left = {
 		0 : preload("res://Characters/Human/male/SWING/body/left/arms.png")
 	},
+	
+	arms_holding_down = {
+		0 : preload("res://Characters/Human/male/HOLDING/body/down/arms.png")
+	},
+	arms_holding_up = {
+		0 : preload("res://Characters/Human/male/HOLDING/body/up/arms.png")
+	},
+	arms_holding_right = {
+		0 : preload("res://Characters/Human/male/HOLDING/body/right/arms.png")
+	},
+	arms_holding_left = {
+		0 : preload("res://Characters/Human/male/HOLDING/body/left/arms.png")
+	},
 
 
 
@@ -1470,6 +1496,19 @@ var human_male = {
 		0 : null,
 	},
 	acc_swing_left = {
+		0 : null,
+	},
+	
+	acc_holding_down = {
+		0 : null,
+	},
+	acc_holding_up = {
+		0 : null,
+	},
+	acc_holding_right = {
+		0 : null,
+	},
+	acc_holding_left = {
 		0 : null,
 	},
 
@@ -1524,6 +1563,23 @@ var human_male = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/SWING/assets/left/head_attribute/hair.png"),
 	},
+	
+	head_attribute_holding_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/down/hair.png"),
+	},
+	head_attribute_holding_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/up/hair.png"),
+	},
+	head_attribute_holding_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/right/hair.png"),
+	},
+	head_attribute_holding_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/left/hair.png"),
+	},
 
 
 	pants_idle_down = {
@@ -1575,6 +1631,23 @@ var human_male = {
 	pants_swing_left = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/SWING/assets/left/pants/pants.png")
+	},
+	
+	pants_holding_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/down/pants.png")
+	},
+	pants_holding_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/up/pants.png")
+	},
+	pants_holding_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/right/pants.png")
+	},
+	pants_holding_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/left/pants.png")
 	},
 
 
@@ -1629,6 +1702,24 @@ var human_male = {
 		1 : preload("res://Characters/Human/male/SWING/assets/left/shirts/shirt.png")
 	},
 
+	shirts_holding_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/down/shirt.png")
+	},
+	shirts_holding_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/up/shirt.png")
+	},
+	shirts_holding_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/right/shirt.png")
+	},
+	shirts_holding_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/left/shirt.png")
+	},
+	
+	
 	shoes_idle_down = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png")
@@ -1678,7 +1769,24 @@ var human_male = {
 	shoes_swing_left = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/SWING/assets/left/shoes/shoes.png")
-	}
+	},
+	
+	shoes_holding_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/down/shoes.png")
+	},
+	shoes_holding_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/up/shoes.png")
+	},
+	shoes_holding_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/right/shoes.png")
+	},
+	shoes_holding_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING/assets/left/shoes.png")
+	},
 }
 var human_female = {
 	body_idle_down = {
@@ -5319,6 +5427,10 @@ var body_sprites = {
 	'swing_up' : null, 
 	'swing_left' : null,
 	'swing_right' : null,
+	'holding_down': null,
+	'holding_up': null,
+	'holding_left': null,
+	'holding_right': null,
 	}
 
 var arms_sprites = {
@@ -5334,6 +5446,10 @@ var arms_sprites = {
 	'swing_up' : null,
 	'swing_left' : null,
 	'swing_right' : null,
+	'holding_down': null,
+	'holding_up': null,
+	'holding_left': null,
+	'holding_right': null,
 	};
 
 var acc_sprites = {
@@ -5349,6 +5465,10 @@ var acc_sprites = {
 	'swing_up' : null,
 	'swing_left' : null,
 	'swing_right' : null,
+	'holding_down': null,
+	'holding_up': null,
+	'holding_left': null,
+	'holding_right': null,
 	};
 
 var headAtr_sprites = {
@@ -5364,6 +5484,10 @@ var headAtr_sprites = {
 	'swing_up' : null, 
 	'swing_left' : null, 
 	'swing_right' : null,
+	'holding_down': null,
+	'holding_up': null,
+	'holding_left': null,
+	'holding_right': null,
 	};
 
 var pants_sprites = {
@@ -5379,6 +5503,10 @@ var pants_sprites = {
 	'swing_up' : null, 
 	'swing_left' : null, 
 	'swing_right' : null, 
+	'holding_down': null,
+	'holding_up': null,
+	'holding_left': null,
+	'holding_right': null,
 	};
 
 var shirts_sprites = {
@@ -5394,6 +5522,10 @@ var shirts_sprites = {
 	'swing_up' : null, 
 	'swing_left' : null, 
 	'swing_right' : null,
+	'holding_down': null,
+	'holding_up': null,
+	'holding_left': null,
+	'holding_right': null,
 	};
 
 var shoes_sprites = {
@@ -5408,7 +5540,11 @@ var shoes_sprites = {
 	'swing_down' : null,
 	'swing_up' : null,
 	'swing_left' : null, 
-	'swing_right' : null, 
+	'swing_right' : null,
+	'holding_down': null,
+	'holding_up': null,
+	'holding_left': null,
+	'holding_right': null, 
 	};
 
 func returnToolSprite(toolName, direction):
@@ -5465,11 +5601,11 @@ func _ready():
 	randomizeAttributes()
 
 var rng = RandomNumberGenerator.new()
-var characters = [lesser_demon_male, ogre_female, ogre_male, water_draganoid_female, water_draganoid_male, seraphim_female, seraphim_male, goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_male, human_female, lesser_demon_female, lesser_spirit, succubus]
+var characters = [human_male, lesser_demon_male, ogre_female, ogre_male, water_draganoid_female, water_draganoid_male, seraphim_female, seraphim_male, goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_female, lesser_demon_female, lesser_spirit, succubus]
 func randomizeAttributes():
 	rng.randomize()
 	characters.shuffle()
-	var character = characters[4]
+	var character = characters[0]
 	
 	acc_index = character.acc_idle_down.size() - 1
 	headAtr_index = character.head_attribute_idle_down.size() - 1
@@ -5489,7 +5625,11 @@ func randomizeAttributes():
 	'swing_down' : character.body_swing_down[body_index], 
 	'swing_up' : character.body_swing_up[body_index], 
 	'swing_left' : character.body_swing_left[body_index], 
-	'swing_right' : character.body_swing_right[body_index]
+	'swing_right' : character.body_swing_right[body_index],
+#	'holding_down' : character.body_holding_down[body_index], 
+#	'holding_up' : character.body_holding_up[body_index], 
+#	'holding_left' : character.body_holding_left[body_index], 
+#	'holding_right' : character.body_holding_right[body_index]
 	};
 	arms_sprites = {
 	'idle_down' : character.arms_idle_down[arms_index], 
@@ -5503,7 +5643,11 @@ func randomizeAttributes():
 	'swing_down' : character.arms_swing_down[arms_index], 
 	'swing_up' : character.arms_swing_up[arms_index], 
 	'swing_left' : character.arms_swing_left[arms_index], 
-	'swing_right' : character.arms_swing_right[arms_index]
+	'swing_right' : character.arms_swing_right[arms_index],
+#	'holding_down' : character.arms_holding_down[body_index], 
+#	'holding_up' : character.arms_holding_up[body_index], 
+#	'holding_left' : character.arms_holding_left[body_index], 
+#	'holding_right' : character.arms_holding_right[body_index]
 	};
 	acc_sprites = {
 	'idle_down' : character.acc_idle_down[acc_index], 
@@ -5517,7 +5661,11 @@ func randomizeAttributes():
 	'swing_down' : character.acc_swing_down[acc_index], 
 	'swing_up' : character.acc_swing_up[acc_index], 
 	'swing_left' : character.acc_swing_left[acc_index], 
-	'swing_right' : character.acc_swing_right[acc_index]
+	'swing_right' : character.acc_swing_right[acc_index],
+#	'holding_down' : character.acc_holding_down[body_index], 
+#	'holding_up' : character.acc_holding_up[body_index], 
+#	'holding_left' : character.acc_holding_left[body_index], 
+#	'holding_right' : character.acc_holding_right[body_index]
 	};
 	headAtr_sprites = {
 	'idle_down' : character.head_attribute_idle_down[headAtr_index], 
@@ -5531,7 +5679,11 @@ func randomizeAttributes():
 	'swing_down' : character.head_attribute_swing_down[headAtr_index], 
 	'swing_up' : character.head_attribute_swing_up[headAtr_index], 
 	'swing_left' : character.head_attribute_swing_left[headAtr_index], 
-	'swing_right' : character.head_attribute_swing_right[headAtr_index]
+	'swing_right' : character.head_attribute_swing_right[headAtr_index],
+#	'holding_down' : character.head_attribute_holding_down[body_index], 
+#	'holding_up' : character.head_attribute_holding_up[body_index], 
+#	'holding_left' : character.head_attribute_holding_left[body_index], 
+#	'holding_right' : character.head_attribute_holding_right[body_index],
 	}
 	pants_sprites = {
 	'idle_down' : character.pants_idle_down[pants_index], 
@@ -5545,7 +5697,11 @@ func randomizeAttributes():
 	'swing_down' : character.pants_swing_down[pants_index], 
 	'swing_up' : character.pants_swing_up[pants_index], 
 	'swing_left' : character.pants_swing_left[pants_index], 
-	'swing_right' : character.pants_swing_right[pants_index]
+	'swing_right' : character.pants_swing_right[pants_index],
+#	'holding_down' : character.pants_holding_down[body_index], 
+#	'holding_up' : character.pants_holding_up[body_index], 
+#	'holding_left' : character.pants_holding_left[body_index], 
+#	'holding_right' : character.pants_holding_right[body_index]
 	};
 	shirts_sprites = {
 	'idle_down' : character.shirts_idle_down[shirts_index], 
@@ -5559,7 +5715,11 @@ func randomizeAttributes():
 	'swing_down' : character.shirts_swing_down[shirts_index], 
 	'swing_up' : character.shirts_swing_up[shirts_index], 
 	'swing_left' : character.shirts_swing_left[shirts_index], 
-	'swing_right' : character.shirts_swing_right[shirts_index]
+	'swing_right' : character.shirts_swing_right[shirts_index],
+#	'holding_down' : character.shirts_holding_down[body_index], 
+#	'holding_up' : character.shirts_holding_up[body_index], 
+#	'holding_left' : character.shirts_holding_left[body_index], 
+#	'holding_right' : character.shirts_holding_right[body_index]
 	};
 	shoes_sprites = {
 	'idle_down' : character.shoes_idle_down[shoes_index], 
@@ -5573,6 +5733,10 @@ func randomizeAttributes():
 	'swing_down' : character.shoes_swing_down[shoes_index], 
 	'swing_up' : character.shoes_swing_up[shoes_index],
 	'swing_left' : character.shoes_swing_left[shoes_index], 
-	'swing_right' : character.shoes_swing_right[shoes_index]
+	'swing_right' : character.shoes_swing_right[shoes_index],
+#	'holding_down' : character.shoes_holding_down[body_index], 
+#	'holding_up' : character.shoes_holding_up[body_index], 
+#	'holding_left' : character.shoes_holding_left[body_index], 
+#	'holding_right' : character.shoes_holding_right[body_index]
 	};
 	

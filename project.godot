@@ -26,6 +26,7 @@ Characters="*res://Global/Data/Characters.gd"
 Sounds="*res://Global/Data/Sounds.gd"
 PlayerFarmApi="*res://Global/Data/PlayerFarmAPI.gd"
 PlayerStats="*res://Global/Data/PlayerStats.gd"
+Util="*res://Util.gd"
 
 [display]
 
@@ -146,6 +147,7 @@ rotate={
 [physics]
 
 common/enable_pause_aware_picking=true
+2d/default_gravity=0
 
 [rendering]
 
