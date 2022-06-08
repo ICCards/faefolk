@@ -4218,7 +4218,7 @@ format = 1
 modulate = Color( 1, 1, 1, 0.360784 )
 position = Vector2( 28, 260 )
 frames = SubResource( 176 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="WaterfallSound" type="AudioStreamPlayer2D" parent="WaterTiles"]
@@ -4228,13 +4228,13 @@ autoplay = true
 [node name="Waterfall1" type="AnimatedSprite" parent="WaterTiles"]
 position = Vector2( 16, 246 )
 frames = SubResource( 177 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="Waterfall2" type="AnimatedSprite" parent="WaterTiles"]
 position = Vector2( 48, 246 )
 frames = SubResource( 177 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="WaterTilemap" type="TileMap" parent="WaterTiles"]
