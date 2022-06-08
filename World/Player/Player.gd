@@ -110,7 +110,7 @@ func place_item_state(event, name):
 			PlayerInventory.add_item_to_hotbar("torch", -1)
 
 
-var MAX_SPEED := 30 #12.5
+var MAX_SPEED := 12.5 #30 
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO

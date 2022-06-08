@@ -2,7 +2,7 @@ extends YSort
 
 #export(bool) var redraw setget redraw
 export(Vector2) var mapSize = Vector2(280,220)
-export(String) var world_seed = "seed x"
+export(String) var world_seed = "seed"
 export(int) var noise_octaves = 1.0
 export(int) var noise_period = 12
 export(float) var noise_persistence = 0.5

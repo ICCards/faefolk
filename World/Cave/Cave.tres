@@ -46,46 +46,46 @@ points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31, 96, 0, 96 )
 points = PoolVector2Array( 0, 96, 0, 24, 31, 0, 31, 96, 0, 96, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=19]
-points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31, 96, 0, 96, 0, 0 )
+points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 32.2685, 65.0081, 1.01846, 63.8507, 0, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=20]
-points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31, 96, 0, 96 )
+points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 32.0972, 64.4294, 0.847198, 65.5868 )
 
 [sub_resource type="ConvexPolygonShape2D" id=21]
-points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31, 96, 0, 96, 0, 0 )
+points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31.9259, 63.272, 0.0971985, 64.4294, 0, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=22]
 points = PoolVector2Array( 0, 0, 7, 0, 31, 32, 31, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=23]
-points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31, 96, 0, 96 )
+points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31.7546, 62.9815, 0.504608, 63.5602 )
 
 [sub_resource type="ConvexPolygonShape2D" id=24]
-points = PoolVector2Array( 0, 0, 31, 0, 31, 96, 0, 96, 0, 64 )
+points = PoolVector2Array( -0.481537, 0.481445, 31.3472, 1.06015, 31.9259, 63.5602, 16.3009, 65.2963, 0.0971985, 62.9815 )
 
 [sub_resource type="ConvexPolygonShape2D" id=25]
-points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31, 96, 0, 96, 0, 0 )
+points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31.5185, 63.5602, 0.268463, 64.1389, 0, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=26]
-points = PoolVector2Array( 0, 0, 31, 0, 31, 96, 0, 96, 0, 64 )
+points = PoolVector2Array( 0, 0, 32.2685, 1.06015, 32.2685, 62.9815, 15.4861, 64.7176, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=27]
-points = PoolVector2Array( 0, 0, 31, 0, 31, 96, 0, 96, 0, 64 )
+points = PoolVector2Array( 0, 0, 31, 0, 31.2824, 62.4027, 16.2361, 63.5602, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=28]
-points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31, 96, 0, 96, 0, 0 )
+points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31.8611, 65.0349, 0.0323792, 65.0349, 0, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=29]
-points = PoolVector2Array( 0, 0, 31, 0, 31, 96, 0, 96, 0, 64 )
+points = PoolVector2Array( 0, 0, 31, 0, 31.6898, 64.4562, 17.2222, 64.4562, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=30]
-points = PoolVector2Array( 0, 0, 31, 0, 31, 96, 0, 96, 0, 64 )
+points = PoolVector2Array( 0, 0, 31, 0, 30.9398, 66.1923, 15.8935, 64.4562, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=31]
-points = PoolVector2Array( 0, 0, 7, 0, 31, 0, 31, 96, 0, 96, 0, 64 )
+points = PoolVector2Array( 0, 0, 7, 0, 31, 0, 32.5046, 65.0349, 14.5648, 65.6136, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=32]
-points = PoolVector2Array( 0, 0, 31, 0, 31, 96, 0, 96, 0, 64 )
+points = PoolVector2Array( 0, 0, 31, 0, 31.7546, 65.0349, 17.8657, 65.6136, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=33]
 points = PoolVector2Array( 0, 0, 0, 0, 31, 0, 31, 88, 23, 88, 0, 72 )
@@ -198,7 +198,7 @@ load_path = "res://.import/Cave_walls.png-953a95108a8d809754b758e86c858d87.stex"
 [resource]
 0/name = "cave walls"
 0/texture = SubResource( 68 )
-0/tex_offset = Vector2( 0, -64 )
+0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 960, 512 )
 0/tile_mode = 1
