@@ -22,6 +22,8 @@ var fence_tiles
 var object_tiles
 var path_tiles
 
+const _character = preload("res://Global/Data/Characters.gd")
+onready var character = _character.new()
 
 onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObject.tscn")
 onready var PlantedCrop = preload("res://World/Objects/Farm/PlantedCrop.tscn")
@@ -294,7 +296,7 @@ func swing_state(event):
 				Server.SendPlayerSwing(position , direction.to_lower() , tool_name)
 				swingActive = true
 				set_melee_collision_layer(tool_name)
-				toolEquippedSprite.set_texture(Characters.returnToolSprite(tool_name, direction.to_lower()))
+				#toolEquippedSprite.set_texture(Characters.returnToolSprite(tool_name, direction.to_lower()))
 				animation = "swing_" + direction.to_lower()
 				setPlayerTexture(animation)
 				animation_player.play(animation)
@@ -384,13 +386,13 @@ func adjust_position_from_direction(pos):
 	return pos
 	
 func setPlayerTexture(var anim):
-	bodySprite.set_texture(Characters.body_sprites[anim])
-	armsSprite.set_texture(Characters.arms_sprites[anim])
-	accessorySprite.set_texture(Characters.acc_sprites[anim])
-	headAttributeSprite.set_texture(Characters.headAtr_sprites[anim])
-	pantsSprite.set_texture(Characters.pants_sprites[anim])
-	shirtsSprite.set_texture(Characters.shirts_sprites[anim])
-	shoesSprite.set_texture(Characters.shoes_sprites[anim])
+	bodySprite.set_texture(character.body_sprites[anim])
+	armsSprite.set_texture(character.arms_sprites[anim])
+	accessorySprite.set_texture(character.acc_sprites[anim])
+	headAttributeSprite.set_texture(character.headAtr_sprites[anim])
+	pantsSprite.set_texture(character.pants_sprites[anim])
+	shirtsSprite.set_texture(character.shirts_sprites[anim])
+	shoesSprite.set_texture(character.shoes_sprites[anim])
 	
 var rng = RandomNumberGenerator.new()
 func _play_background_music():

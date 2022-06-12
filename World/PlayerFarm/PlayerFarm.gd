@@ -59,12 +59,20 @@ func DespawnPlayer(player_id):
 	get_node("OtherPlayers/" + str(player_id)).queue_free()
 
 
+const PlayerScene = preload("res://World/Player/Player.tscn")
+
+func spawn_player():
+	var player = Player.instance()
+	player.initialize_camera_limits(Vector2(0, -64), Vector2(10000, 10000))
+	add_child(player)
+	player.position = Vector2(100, 100)
+
+
 var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
 
 func UpdateWorldState(world_state):
-	print('update world statae')
 	if world_state["T"] > last_world_state:
 		last_world_state = world_state["T"]
 		world_state_buffer.append(world_state)
@@ -85,7 +93,7 @@ func _physics_process(delta):
 					continue
 				if get_node("OtherPlayers").has_node(str(player)):
 					var new_position = lerp(world_state_buffer[1][player]["P"], world_state_buffer[2][player]["P"], interpolation_factor)
-					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1][player]["A"])
+					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1][player]["D"])
 				else:
 					print("spawning player")
 					SpawnNewPlayer(player, world_state_buffer[2][player]["P"])
@@ -102,12 +110,12 @@ func _physics_process(delta):
 				if get_node("OtherPlayers").has_node(str(player)):
 					var position_delta = (world_state_buffer[1][player]["P"] - world_state_buffer[0][player]["P"])
 					var new_position = world_state_buffer[1][player]["P"] + (position_delta * extrapolation_factor)
-					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1][player]["A"])
+					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1][player]["D"])
 
 
 func _ready():
 
-	Server._connect_to_server()
+	pass
 	
 #	if PlayerFarmApi.player_farm_objects.size() == 0:
 #		generate_farm()

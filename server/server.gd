@@ -18,7 +18,7 @@ sync var players = {}
 sync var player_data = {}
 
 func _ready():
-	pass
+	_connect_to_server()
 	
 func _connect_to_server():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -57,13 +57,13 @@ remote func SpawnPlayer(player_id, spawn_position):
 	get_node("/root/PlayerHomeFarm").SpawnNewPlayer(player_id, spawn_position)
 
 remote func DespawnPlayer(player_id):
+	print('despawn player')
 	get_node("/root/PlayerHomeFarm").DespawnPlayer(player_id)
 	
 func message_send(message):
 	rpc_unreliable_id(1, "message_send", message)
 
 remote func updateState(state):
-	print('receievd state')
 	get_node("/root/PlayerHomeFarm").UpdateWorldState(state)
 
 
@@ -102,7 +102,14 @@ remote func ReturnLatency(client_time):
 
 remote func ReceiveCharacter(player):
 	print("Fetched  "+player.character)
-	get_node("/root/Characters").LoadPlayerCharacter(player)
+	if player.id == get_tree().get_network_unique_id():
+		get_node("/root/PlayerHomeFarm/Player").character.LoadPlayerCharacter(player.character) 
+	else:
+		get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player.id)).character.LoadPlayerCharacter(player.character) 
+
+func _getCharacterById(player_id):
+	rpc_id(1, "GetCharacterById", player_id)
+	
 
 func _getCharacter():
 	rpc_id(1,"GetCharacter")
@@ -112,6 +119,7 @@ func SendPlayerSwing(position, direction, tool_name):
 	rpc_id(1, "SendPlayerSwing", position, direction, tool_name, client_clock)
 	
 remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, player_id):
+	print('receive playher swing')
 	if player_id == get_tree().get_network_unique_id():
 		pass
 	else:

@@ -5613,7 +5613,7 @@ func _ready():
 	pass
 
 func LoadPlayerCharacter(character_info):
-	match character_info.character:
+	match character_info:
 		"human_male":
 			set_char = human_male
 		"human_female":
