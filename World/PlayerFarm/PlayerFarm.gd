@@ -50,6 +50,7 @@ func SpawnNewPlayer(player_id, spawn_position):
 	else:
 		if not get_node("OtherPlayers").has_node(str(player_id)):
 			var new_player = Player_template.instance()
+			new_player.getCharacterById(player_id)
 			new_player.position = spawn_position
 			new_player.name = str(player_id)
 			get_node("OtherPlayers").add_child(new_player)

@@ -16,8 +16,8 @@ onready var character = _character.new()
 var swing_dict = {}
 var swingActive = false
 
-func _ready():
-	Server._getCharacter()
+func getCharacterById(player_id):
+	Server._getCharacterById(player_id)
 
 func _physics_process(delta):
 	if not swing_dict == {}:
