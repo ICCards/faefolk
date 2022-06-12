@@ -104,8 +104,11 @@ func _physics_process(delta):
 					var new_position = world_state_buffer[1][player]["P"] + (position_delta * extrapolation_factor)
 					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1][player]["A"])
 
+
 func _ready():
-	pass
+
+	Server._connect_to_server()
+	
 #	if PlayerFarmApi.player_farm_objects.size() == 0:
 #		generate_farm()
 #		generate_grass_bunches()

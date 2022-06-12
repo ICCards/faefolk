@@ -18,7 +18,7 @@ sync var players = {}
 sync var player_data = {}
 
 func _ready():
-	_connect_to_server()
+	pass
 	
 func _connect_to_server():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
