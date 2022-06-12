@@ -53,12 +53,11 @@ func _connected_fail():
 func _server_disconnected():
 	print("Server disconnected")
 	
-remote func SpawnNewPlayer(player_id, spawn_position):
+remote func SpawnPlayer(player_id, spawn_position):
 	get_node("/root/PlayerHomeFarm").SpawnNewPlayer(player_id, spawn_position)
 
 remote func DespawnPlayer(player_id):
-	pass
-#	get_node("/root/PlayerHomeFarm").DespawnPlayer(player_id)
+	get_node("/root/PlayerHomeFarm").DespawnPlayer(player_id)
 	
 func message_send(message):
 	rpc_unreliable_id(1, "message_send", message)
