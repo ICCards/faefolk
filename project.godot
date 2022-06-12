@@ -27,6 +27,7 @@ Sounds="*res://Global/Data/Sounds.gd"
 PlayerFarmApi="*res://Global/Data/PlayerFarmAPI.gd"
 PlayerStats="*res://Global/Data/PlayerStats.gd"
 Util="*res://Util.gd"
+Server="*res://server/server.gd"
 
 [display]
 
@@ -39,6 +40,7 @@ display=false
 origin=false
 window=false
 rendering=false
+physics=false
 
 [importer_defaults]
 

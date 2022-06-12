@@ -1,8 +1,8 @@
 extends Panel
 
-var default_text = preload("res://Assets/Images/Inventory UI/item_slot_default_background.png")
-var empty_text = preload("res://Assets/Images/Inventory UI/item_slot_empty_background.png")
-var selected_text = preload("res://Assets/Images/Inventory UI/item_slot_selected_background.png")
+var default_text = null #preload("res://Assets/Images/Inventory UI/item_slot_default_background.png")
+var empty_text = null #preload("res://Assets/Images/Inventory UI/item_slot_empty_background.png")
+var selected_text = null #preload("res://Assets/Images/Inventory UI/item_slot_selected_background.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null

@@ -25,10 +25,10 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		setAnimationTexture('idle_down')
 		$SoundEffects.stream_paused = true
-		
+
 	velocity = velocity.normalized()
 	move_and_slide(velocity * speed)
-	
+
 
 
 func setAnimationTexture(var anim):
@@ -44,7 +44,6 @@ func setAnimationTexture(var anim):
 func _ready():
 	animPlayer.play("idle")
 	$SoundEffects.play()
-	Characters.randomizeAttributes()
 	bodySprite.texture = Characters.body_sprites['idle_down']
 	armsSprite.texture = Characters.arms_sprites['idle_down']
 	accessorySprite.texture = Characters.acc_sprites['idle_down']

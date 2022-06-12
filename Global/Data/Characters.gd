@@ -5405,13 +5405,11 @@ var ogre_female = {
 }
 
 # INDEX CHANGES ATTRIBUTE STYLE
-var body_index: int = 0
-var arms_index: int = 0
-var acc_index: int = 1
-var headAtr_index: int = 1
-var pants_index: int = 1
-var shirts_index: int = 1
-var shoes_index: int = 1
+var acc_index
+var headAtr_index
+var pants_index
+var shirts_index
+var shoes_index
 
 # CREATE OBJECT OF EACH ATTRIBUTE
 var body_sprites = {
@@ -5597,53 +5595,107 @@ var axe = {
 }
 
 
-func _ready():
-	randomizeAttributes()
 
-var rng = RandomNumberGenerator.new()
-var characters = [human_male, lesser_demon_male, ogre_female, ogre_male, water_draganoid_female, water_draganoid_male, seraphim_female, seraphim_male, goblin_male, goblin_female, demi_wolf_male, demi_wolf_female, human_female, lesser_demon_female, lesser_spirit, succubus]
-func randomizeAttributes():
-	rng.randomize()
-	characters.shuffle()
-	var character = characters[0]
+var set_char
+
+var character_example = {
+	"character" : "human_male",
+#	"acc_index" : 0,
+#	"headAtr_index" : 1,
+#	"pants_index" : 1,
+#	"shirts_index" :  1,
+#	"shoes_index" : 1,
+}
+
+func _ready():
+	### Pass server call here
+	#LoadPlayerCharacter(character_example)
+	pass
+
+func LoadPlayerCharacter(character_info):
+	match character_info.character:
+		"human_male":
+			set_char = human_male
+		"human_female":
+			set_char = human_female
+		"goblin_male":
+			set_char = goblin_male
+		"goblin_female":
+			set_char = goblin_female
+		"ogre_male":
+			set_char = ogre_male
+		"ogre_female":
+			set_char = ogre_female
+		"lesser_demon_male":
+			set_char = lesser_demon_male
+		"lesser_demon_female":
+			set_char = lesser_demon_female
+		"water_draganoid_male":
+			set_char = water_draganoid_male
+		"water_draganoid_female":
+			set_char = water_draganoid_female
+		"seraphim_male":
+			set_char = seraphim_male
+		"seraphim_female":
+			set_char = seraphim_female
+		"demi_wolf_male":
+			set_char = demi_wolf_male
+		"demi_wolf_female":
+			set_char = demi_wolf_female
+		"lesser_spirit":
+			set_char = lesser_spirit
+		"succubus":
+			set_char = succubus
+		
+	acc_index = set_char.acc_idle_down.size() - 1
+	headAtr_index = set_char.head_attribute_idle_down.size() - 1
+	pants_index = set_char.pants_idle_down.size() - 1
+	shirts_index = set_char.shirts_idle_down.size() - 1
+	shoes_index = set_char.shoes_idle_down.size() - 1
 	
-	acc_index = character.acc_idle_down.size() - 1
-	headAtr_index = character.head_attribute_idle_down.size() - 1
-	pants_index = character.pants_idle_down.size() - 1
-	shirts_index =  character.shirts_idle_down.size() - 1
-	shoes_index = character.shoes_idle_down.size() - 1
 	
+#	acc_index = character_info.acc_index
+#	headAtr_index = character_info.headAtr_index
+#	pants_index = character_info.pants_index
+#	shirts_index =  character_info.shirts_index
+#	shoes_index = character_info.shoes_index
+	
+	set_attributes(set_char)
+
+
+func set_attributes(set_char):
+	var character = set_char
 	body_sprites = {
-	'idle_down' : character.body_idle_down[body_index], 
-	'idle_up' : character.body_idle_up[body_index], 
-	'idle_left' : character.body_idle_left[body_index], 
-	'idle_right' : character.body_idle_right[body_index], 
-	'walk_down' : character.body_walk_down[body_index], 
-	'walk_up' : character.body_walk_up[body_index], 
-	'walk_left' : character.body_walk_left[body_index], 
-	'walk_right' : character.body_walk_right[body_index], 
-	'swing_down' : character.body_swing_down[body_index], 
-	'swing_up' : character.body_swing_up[body_index], 
-	'swing_left' : character.body_swing_left[body_index], 
-	'swing_right' : character.body_swing_right[body_index],
+	'idle_down' : character.body_idle_down[0], 
+	'idle_up' : character.body_idle_up[0], 
+	'idle_left' : character.body_idle_left[0], 
+	'idle_right' : character.body_idle_right[0], 
+	'walk_down' : character.body_walk_down[0], 
+	'walk_up' : character.body_walk_up[0], 
+	'walk_left' : character.body_walk_left[0], 
+	'walk_right' : character.body_walk_right[0], 
+	'swing_down' : character.body_swing_down[0], 
+	'swing_up' : character.body_swing_up[0], 
+	'swing_left' : character.body_swing_left[0], 
+	'swing_right' : character.body_swing_right[0],
 #	'holding_down' : character.body_holding_down[body_index], 
 #	'holding_up' : character.body_holding_up[body_index], 
 #	'holding_left' : character.body_holding_left[body_index], 
 #	'holding_right' : character.body_holding_right[body_index]
 	};
 	arms_sprites = {
-	'idle_down' : character.arms_idle_down[arms_index], 
-	'idle_up' : character.arms_idle_up[arms_index], 
-	'idle_left' : character.arms_idle_left[arms_index], 
-	'idle_right' : character.arms_idle_right[arms_index], 
-	'walk_down' : character.arms_walk_down[arms_index], 
-	'walk_up' : character.arms_walk_up[arms_index], 
-	'walk_left' : character.arms_walk_left[arms_index], 
-	'walk_right' : character.arms_walk_right[arms_index], 
-	'swing_down' : character.arms_swing_down[arms_index], 
-	'swing_up' : character.arms_swing_up[arms_index], 
-	'swing_left' : character.arms_swing_left[arms_index], 
-	'swing_right' : character.arms_swing_right[arms_index],
+	'idle_down' : character.arms_idle_down[0], 
+	'idle_up' : character.arms_idle_up[0], 
+	'idle_left' : character.arms_idle_left[0], 
+	'idle_right' : character.arms_idle_right[0], 
+	'walk_down' : character.arms_walk_down[0], 
+	'walk_up' : character.arms_walk_up[0], 
+	'walk_left' : character.arms_walk_left[0], 
+	'walk_right' : character.arms_walk_right[0], 
+	'swing_down' : character.arms_swing_down[0], 
+	'swing_up' : character.arms_swing_up[0], 
+	'swing_left' : character.arms_swing_left[0], 
+	'swing_right' : character.arms_swing_right[0],
 #	'holding_down' : character.arms_holding_down[body_index], 
 #	'holding_up' : character.arms_holding_up[body_index], 
 #	'holding_left' : character.arms_holding_left[body_index], 

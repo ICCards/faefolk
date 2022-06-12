@@ -17,7 +17,7 @@ var inventory = {
 	6: ["garlic seeds", 50],
 #	7: ["hay seeds", 50],
 	11: ["potato seeds", 28],
-	15: ["torch", 76],
+	14: ["torch", 76],
 	10: ["stone path", 70],
 }
 

@@ -43,19 +43,22 @@ func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_bottom = bottom_right.y
 	$Camera2D.limit_right = bottom_right.x
 
-
+var player_state
+var animation = "idle_down"
 
 func _ready():
 	setPlayerState(get_parent())
-	setPlayerTexture('idle_down')
+	setPlayerTexture(animation)
 	$FootstepsSound.stream = Sounds.current_footsteps_sound
-	_play_background_music()
+	#_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
 	$Camera2D/UserInterface/PlayerStatsUI.visible = true
 	$Camera2D/UserInterface/CurrentTimeUI.visible = true
 	init_day_night_cycle()
 	DayNightTimer.day_timer.connect("timeout", self, "set_night")
 	DayNightTimer.night_timer.connect("timeout", self, "set_day")
+
+
 
 
 var is_mouse_over_hotbar = false
@@ -78,7 +81,14 @@ func _process(delta) -> void:
 		idle_state(direction)
 
 
-func _input(event):
+func _physics_process(delta):
+	DefinePlayerState()
+
+func DefinePlayerState():
+	player_state = {"T": Server.client_clock, "P": get_global_position(), "D": direction.to_lower()}
+	Server.message_send(player_state)
+
+func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false and !is_mouse_over_hotbar:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
@@ -280,12 +290,14 @@ func swing_state(event):
 		$FootstepsSound.stream_paused = true
 		if !swingActive:
 				PlayerStats.decrease_energy()
-				var toolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				Server.SendPlayerSwing(position , direction.to_lower() , tool_name)
 				swingActive = true
-				set_melee_collision_layer(toolName)
-				toolEquippedSprite.set_texture(Characters.returnToolSprite(toolName, direction.to_lower()))
-				setPlayerTexture("swing_" + direction.to_lower())
-				animation_player.play("swing_" + direction.to_lower())
+				set_melee_collision_layer(tool_name)
+				toolEquippedSprite.set_texture(Characters.returnToolSprite(tool_name, direction.to_lower()))
+				animation = "swing_" + direction.to_lower()
+				setPlayerTexture(animation)
+				animation_player.play(animation)
 				yield(animation_player, "animation_finished" )
 				toolEquippedSprite.texture = null
 				swingActive = false
@@ -303,11 +315,13 @@ func swing_state(event):
 
 func idle_state(dir):
 	$FootstepsSound.stream_paused = true
-	setPlayerTexture("idle_" + dir.to_lower())
+	animation = "idle_" + dir.to_lower()
+	setPlayerTexture(animation)
 
 func walk_state(dir):
 	$FootstepsSound.stream_paused = false
-	setPlayerTexture("walk_" + dir.to_lower())
+	animation = "walk_" + dir.to_lower()
+	setPlayerTexture(animation)
 
 func set_melee_collision_layer(toolName):
 	if toolName == "axe": 

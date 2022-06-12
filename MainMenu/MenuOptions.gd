@@ -1,5 +1,6 @@
 extends Control
 
+
 func _on_PlayButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.play()
@@ -9,7 +10,6 @@ func _on_PlayButton_pressed():
 func _on_OptionsButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.play()
-	Characters.randomizeAttributes()
 
 func _on_QuitButton_pressed():
 	$SoundEffects.stream = Sounds.button_select

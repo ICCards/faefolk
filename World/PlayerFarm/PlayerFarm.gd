@@ -41,25 +41,88 @@ const NUM_GRASS_TILES = 75
 const NUM_FLOWER_TILES = 250
 const MAX_GRASS_BUNCH_SIZE = 24
 
+var Player_template = preload("res://World/Player/PlayerTemplate.tscn")
+
+func SpawnNewPlayer(player_id, spawn_position):
+	print('SPAWN PLAYER')
+	if get_tree().get_network_unique_id() == player_id:
+		pass
+	else:
+		if not get_node("OtherPlayers").has_node(str(player_id)):
+			var new_player = Player_template.instance()
+			new_player.position = spawn_position
+			new_player.name = str(player_id)
+			get_node("OtherPlayers").add_child(new_player)
+		
+func DespawnPlayer(player_id):
+	yield(get_tree().create_timer(0.2), "timeout")
+	get_node("OtherPlayers/" + str(player_id)).queue_free()
+
+
+var last_world_state = 0
+var world_state_buffer = []
+const interpolation_offset = 100
+
+func UpdateWorldState(world_state):
+	print('update world statae')
+	if world_state["T"] > last_world_state:
+		last_world_state = world_state["T"]
+		world_state_buffer.append(world_state)
+
+func _physics_process(delta):
+	var render_time = Server.client_clock - interpolation_offset
+	if world_state_buffer.size() > 1:
+		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
+			world_state_buffer.remove(0)
+		if world_state_buffer.size() > 2:
+			var interpolation_factor = float(render_time - world_state_buffer[1]["T"]) / float(world_state_buffer[2]["T"] - world_state_buffer[1]["T"])
+			for player in world_state_buffer[2].keys():
+				if str(player) == "T":
+					continue
+				if player == get_tree().get_network_unique_id():
+					continue
+				if not world_state_buffer[1].has(player):
+					continue
+				if get_node("OtherPlayers").has_node(str(player)):
+					var new_position = lerp(world_state_buffer[1][player]["P"], world_state_buffer[2][player]["P"], interpolation_factor)
+					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1][player]["A"])
+				else:
+					print("spawning player")
+					SpawnNewPlayer(player, world_state_buffer[2][player]["P"])
+					
+		elif render_time > world_state_buffer[1].T:
+			var extrapolation_factor = float(render_time - world_state_buffer[0]["T"]) / float(world_state_buffer[1]["T"] - world_state_buffer[0]["T"]) - 1.00
+			for player in world_state_buffer[1].keys():
+				if str(player) == "T":
+					continue
+				if player == get_tree().get_network_unique_id():
+					continue
+				if not world_state_buffer[0].has(player):
+					continue
+				if get_node("OtherPlayers").has_node(str(player)):
+					var position_delta = (world_state_buffer[1][player]["P"] - world_state_buffer[0][player]["P"])
+					var new_position = world_state_buffer[1][player]["P"] + (position_delta * extrapolation_factor)
+					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1][player]["A"])
 
 func _ready():
-	if PlayerFarmApi.player_farm_objects.size() == 0:
-		generate_farm()
-		generate_grass_bunches()
-		generate_grass_tiles()
-		generate_flower_tiles()
-	else:
-		load_farm()
-	load_player_crops()
-	load_player_placables()
-	DayNightTimer.connect("advance_day", self, "advance_crop_day")
+	pass
+#	if PlayerFarmApi.player_farm_objects.size() == 0:
+#		generate_farm()
+#		generate_grass_bunches()
+#		generate_grass_tiles()
+#		generate_flower_tiles()
+#	else:
+#		load_farm()
+#	load_player_crops()
+#	load_player_placables()
+#	DayNightTimer.connect("advance_day", self, "advance_crop_day")
 
 
 
 var distance_to_waterfall_interval = 0
 func _process(delta) -> void:
 	$WaterTiles/WaterfallSound.volume_db = -6 * distance_to_waterfall_interval
-	distance_to_waterfall_interval = (Player.get_position().distance_to($WaterTiles/SmokeEffect.get_position()) / 200)
+	distance_to_waterfall_interval = 0 #(Player.get_position().distance_to($WaterTiles/SmokeEffect.get_position()) / 200)
 
 func load_player_placables():
 	for i in range(PlayerFarmApi.player_placable_objects.size()):

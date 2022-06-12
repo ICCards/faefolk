@@ -1,135 +1,243 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://InventoryLogic/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Inventory UI/inventory1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=4]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/placable_object_preview/large wood chest.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/placable_object_preview/torch.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood fence.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=11]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="GridContainer" type="GridContainer" parent="."]
-margin_left = -219.0
-margin_right = 219.0
-margin_bottom = 411.0
-custom_constants/vseparation = 9
-custom_constants/hseparation = 18
-columns = 4
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 120.0
+margin_bottom = 137.0
+grow_vertical = 0
+rect_scale = Vector2( 6, 6 )
+mouse_filter = 2
+texture = ExtResource( 3 )
 
-[node name="Slot1" type="Panel" parent="GridContainer"]
+[node name="InventorySlots" type="GridContainer" parent="."]
+margin_left = 54.0
+margin_top = 246.0
+margin_right = 606.0
+margin_bottom = 657.0
+custom_constants/vseparation = 6
+custom_constants/hseparation = 6
+columns = 5
+
+[node name="Slot1" type="Panel" parent="InventorySlots"]
 margin_right = 96.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot2" type="Panel" parent="GridContainer"]
-margin_left = 114.0
-margin_right = 210.0
+[node name="Slot2" type="Panel" parent="InventorySlots"]
+margin_left = 102.0
+margin_right = 198.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot3" type="Panel" parent="GridContainer"]
-margin_left = 228.0
-margin_right = 324.0
+[node name="Slot3" type="Panel" parent="InventorySlots"]
+margin_left = 204.0
+margin_right = 300.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot4" type="Panel" parent="GridContainer"]
-margin_left = 342.0
-margin_right = 438.0
+[node name="Slot4" type="Panel" parent="InventorySlots"]
+margin_left = 306.0
+margin_right = 402.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot5" type="Panel" parent="GridContainer"]
-margin_top = 105.0
+[node name="Slot5" type="Panel" parent="InventorySlots"]
+margin_left = 408.0
+margin_right = 504.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot6" type="Panel" parent="InventorySlots"]
+margin_top = 102.0
 margin_right = 96.0
-margin_bottom = 201.0
+margin_bottom = 198.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot6" type="Panel" parent="GridContainer"]
-margin_left = 114.0
-margin_top = 105.0
-margin_right = 210.0
-margin_bottom = 201.0
+[node name="Slot7" type="Panel" parent="InventorySlots"]
+margin_left = 102.0
+margin_top = 102.0
+margin_right = 198.0
+margin_bottom = 198.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot7" type="Panel" parent="GridContainer"]
-margin_left = 228.0
-margin_top = 105.0
-margin_right = 324.0
-margin_bottom = 201.0
+[node name="Slot8" type="Panel" parent="InventorySlots"]
+margin_left = 204.0
+margin_top = 102.0
+margin_right = 300.0
+margin_bottom = 198.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot8" type="Panel" parent="GridContainer"]
-margin_left = 342.0
-margin_top = 105.0
-margin_right = 438.0
-margin_bottom = 201.0
+[node name="Slot9" type="Panel" parent="InventorySlots"]
+margin_left = 306.0
+margin_top = 102.0
+margin_right = 402.0
+margin_bottom = 198.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot9" type="Panel" parent="GridContainer"]
-margin_top = 210.0
+[node name="Slot10" type="Panel" parent="InventorySlots"]
+margin_left = 408.0
+margin_top = 102.0
+margin_right = 504.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot11" type="Panel" parent="InventorySlots"]
+margin_top = 204.0
 margin_right = 96.0
-margin_bottom = 306.0
+margin_bottom = 300.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot10" type="Panel" parent="GridContainer"]
-margin_left = 114.0
-margin_top = 210.0
-margin_right = 210.0
-margin_bottom = 306.0
+[node name="Slot12" type="Panel" parent="InventorySlots"]
+margin_left = 102.0
+margin_top = 204.0
+margin_right = 198.0
+margin_bottom = 300.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot11" type="Panel" parent="GridContainer"]
-margin_left = 228.0
-margin_top = 210.0
-margin_right = 324.0
-margin_bottom = 306.0
+[node name="Slot13" type="Panel" parent="InventorySlots"]
+margin_left = 204.0
+margin_top = 204.0
+margin_right = 300.0
+margin_bottom = 300.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot12" type="Panel" parent="GridContainer"]
-margin_left = 342.0
-margin_top = 210.0
-margin_right = 438.0
-margin_bottom = 306.0
+[node name="Slot14" type="Panel" parent="InventorySlots"]
+margin_left = 306.0
+margin_top = 204.0
+margin_right = 402.0
+margin_bottom = 300.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot13" type="Panel" parent="GridContainer"]
-margin_top = 315.0
-margin_right = 96.0
-margin_bottom = 411.0
+[node name="Slot15" type="Panel" parent="InventorySlots"]
+margin_left = 408.0
+margin_top = 204.0
+margin_right = 504.0
+margin_bottom = 300.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot14" type="Panel" parent="GridContainer"]
-margin_left = 114.0
-margin_top = 315.0
-margin_right = 210.0
-margin_bottom = 411.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
+[node name="CraftingMenu" type="Control" parent="."]
+margin_left = -276.0
+margin_top = 304.0
+margin_right = -76.0
+margin_bottom = 368.0
 
-[node name="Slot15" type="Panel" parent="GridContainer"]
-margin_left = 228.0
-margin_top = 315.0
-margin_right = 324.0
-margin_bottom = 411.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
+[node name="Sprite" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 410, 14 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
 
-[node name="Slot16" type="Panel" parent="GridContainer"]
-margin_left = 342.0
-margin_top = 315.0
-margin_right = 438.0
-margin_bottom = 411.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
+[node name="Sprite2" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 541, 32 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 11 )
+
+[node name="Sprite3" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 674, 12 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 10 )
+
+[node name="Sprite4" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 789, -18 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 9 )
+
+[node name="Sprite5" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 415, 183 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+
+[node name="Sprite6" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 555, 181 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="Sprite7" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 734, 147 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+
+[node name="Buttons" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 841.111
+margin_top = 243.556
+margin_right = 931.111
+margin_bottom = 379.556
+
+[node name="Inventory" type="Button" parent="Buttons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -228.0
+margin_top = -13.0
+margin_right = -130.0
+margin_bottom = 85.0
+
+[node name="Crafting" type="Button" parent="Buttons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -228.0
+margin_top = 96.0
+margin_right = -130.0
+margin_bottom = 194.0
+
+[node name="Options" type="Button" parent="Buttons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -228.0
+margin_top = 205.0
+margin_right = -130.0
+margin_bottom = 303.0
+
+[node name="Quit" type="Button" parent="Buttons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -228.0
+margin_top = 314.0
+margin_right = -130.0
+margin_bottom = 412.0
+
+[node name="ExitButton" type="Area2D" parent="Buttons"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buttons/ExitButton"]
+position = Vector2( 3.05176e-05, -4.76837e-07 )
+polygon = PoolVector2Array( -265.556, -100, -235.556, -82.2222, -198.889, -82.2222, -181.111, -82.2222, -181.111, -87.7778, -151.111, -117.778, -145.556, -135.556, -145.556, -171.111, -151.111, -190, -181.111, -218.889, -193.333, -225.556, -234.444, -225.556, -253.333, -218.889, -264.444, -206.667 )
+
+[node name="Title" type="Label" parent="."]
+margin_left = 71.0
+margin_top = 60.0
+margin_right = 543.0
+margin_bottom = 133.0
+theme = ExtResource( 4 )
+text = "INVENTORY"
+align = 1
+
+[connection signal="pressed" from="Buttons/Inventory" to="." method="_on_Inventory_pressed"]
+[connection signal="pressed" from="Buttons/Crafting" to="." method="_on_Crafting_pressed"]
+[connection signal="pressed" from="Buttons/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="input_event" from="Buttons/ExitButton" to="." method="_on_ExitButton_input_event"]

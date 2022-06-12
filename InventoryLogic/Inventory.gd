@@ -1,7 +1,8 @@
 extends Node2D
 
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
-onready var inventory_slots = $GridContainer
+onready var inventory_slots = $InventorySlots
+onready var background = $Background
 
 
 func _ready():
@@ -12,13 +13,12 @@ func _ready():
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
 	initialize_inventory()
 
-
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
 		if PlayerInventory.inventory.has(i):
 			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
-
+	set_inventory_state()
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
@@ -33,7 +33,6 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
-
 
 func _input(_event):
 	if find_parent("UserInterface").holding_item:
@@ -71,4 +70,44 @@ func left_click_not_holding(slot: SlotClass):
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+
+
+func _on_Inventory_pressed():
+	set_inventory_state()
+
+func _on_Crafting_pressed():
+	set_crafting_state()
+
+func _on_Options_pressed():
+	set_options_state()
+
+func _on_Quit_pressed():
+	set_quit_state()
 	
+func set_inventory_state():
+	$InventorySlots.visible = true
+	$CraftingMenu.visible = false
+	background.texture = preload("res://Assets/Images/Inventory UI/inventory1.png")
+	$Title.text = "INVENTORY"
+	
+func set_crafting_state():
+	$InventorySlots.visible = false
+	$CraftingMenu.visible = true
+	background.texture = preload("res://Assets/Images/Inventory UI/inventory2.png")
+	$Title.text = "CRAFTING"
+	
+func set_options_state():
+	$InventorySlots.visible = false
+	$CraftingMenu.visible = false
+	background.texture = preload("res://Assets/Images/Inventory UI/inventory3.png")
+	$Title.text = "OPTIONS"	
+
+func set_quit_state():
+	$InventorySlots.visible = false
+	$CraftingMenu.visible = false
+	background.texture = preload("res://Assets/Images/Inventory UI/inventory4.png")
+	$Title.text = "QUIT"
+
+func _on_ExitButton_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("mouse_click"):
+		get_parent().toggle_inventory()
