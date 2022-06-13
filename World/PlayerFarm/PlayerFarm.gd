@@ -56,8 +56,9 @@ func SpawnNewPlayer(player_id, spawn_position):
 			get_node("OtherPlayers").add_child(new_player)
 		
 func DespawnPlayer(player_id):
-	yield(get_tree().create_timer(0.2), "timeout")
-	get_node("OtherPlayers/" + str(player_id)).queue_free()
+	if get_node_or_null(player_id):
+		#yield(get_tree().create_timer(0.2), "timeout")
+		get_node("OtherPlayers/" + str(player_id)).queue_free()
 
 
 const PlayerScene = preload("res://World/Player/Player.tscn")
@@ -88,41 +89,14 @@ var new_decoration_state = {}
 #            local_world_state[decoration_key] = new_world_state.decorations[decoration_key]
 
 func UpdateWorldState(world_state):
-	if local_decoration_state.empty():
-		local_decoration_state = world_state.decoration_state
-		for decoration in local_decoration_state.keys():
-			print("Checking for node "+decoration.n)
-			var hasNode = has_node(decoration.n)
-			print("has node: "+hasNode)
-			if has_node(decoration.n):
-				pass
-			else:
-				var treeObject = TreeObject.instance()
-				treeObject.name = decoration.n
-				treeObject.initialize(local_decoration_state[decoration]["v"], local_decoration_state[decoration]["p"], local_decoration_state[decoration]["g"])
-				add_child(treeObject)
-				treeObject.position = local_decoration_state[decoration]["p"]
-	else:
-		if world_state.decoration_state.hash() == local_decoration_state.decoration_state.hash():
-			pass
-		else:
-			local_decoration_state = world_state.decoration_state
-		for decoration in local_decoration_state.keys():
-			if has_node(decoration.n):
-				pass
-			else:
-				var treeObject = TreeObject.instance()
-				treeObject.name = decoration.n
-				treeObject.initialize(local_decoration_state[decoration]["v"], local_decoration_state[decoration]["p"], local_decoration_state[decoration]["g"])
-				add_child(treeObject)
-				treeObject.position = local_decoration_state[decoration]["p"]
-			
-	#print(world_state.decoration_state.keys())
-	#print(world_state.decoration_state["00d460f4-0430-4bda-87d1-34dde4721213"])
-#		var treeObject = TreeObject.instance()
-#		treeObject.initialize(world_state.decoration_state[i]["v"], world_state.decoration_state[i]["p"], world_state.decoration_state[i]["g"])
-#		call_deferred("add_child", treeObject)
-#		treeObject.position = world_state.decoration_state[i]["p"]
+	for decoration in world_state.decoration_state.keys():
+		if(get_node_or_null(decoration)):
+			get_node(decoration).queue_free()	
+		var treeObject = TreeObject.instance()
+		treeObject.name = decoration
+		treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
+		add_child(treeObject)
+		treeObject.position = world_state.decoration_state[decoration]["p"]
 	if world_state["T"] > last_world_state:
 		last_world_state = world_state["T"]
 		world_state_buffer.append(world_state)
