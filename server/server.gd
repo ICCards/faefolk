@@ -115,8 +115,15 @@ func _getCharacter():
 	rpc_id(1,"GetCharacter")
 
 var player_swings = {}
-func SendPlayerSwing(position, direction, tool_name):
-	rpc_id(1, "SendPlayerSwing", position, direction, tool_name, client_clock)
+func ReceiveAction(spawn_time, player_id, input):
+	if player_id == get_tree().get_network_unique_id():
+		pass
+	else:
+		if input == "mouse_click":
+			get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player.id)).swing()
+	
+remote func action(input):
+	rpc_id(1, "action", input, client_clock)
 	
 remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, player_id):
 	print('receive playher swing')

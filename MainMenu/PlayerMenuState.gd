@@ -11,6 +11,9 @@ onready var animPlayer = $CompositeSprites/AnimationPlayer
 
 export var speed := 300.0
 
+const _character = preload("res://Global/Data/Characters.gd")
+onready var character = _character.new()
+
 func _physics_process(_delta):
 	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("ui_left"):
@@ -32,24 +35,25 @@ func _physics_process(_delta):
 
 
 func setAnimationTexture(var anim):
-	bodySprite.texture = Characters.body_sprites[anim]
-	armsSprite.texture = Characters.arms_sprites[anim]
-	accessorySprite.texture = Characters.acc_sprites[anim]
-	headAttributeSprite.texture = Characters.headAtr_sprites[anim]
-	pantsSprite.texture = Characters.pants_sprites[anim]
-	shirtsSprite.texture = Characters.shirts_sprites[anim]
-	shoesSprite.texture = Characters.shoes_sprites[anim]
+	bodySprite.texture = character.body_sprites[anim]
+	armsSprite.texture = character.arms_sprites[anim]
+	accessorySprite.texture = character.acc_sprites[anim]
+	headAttributeSprite.texture = character.headAtr_sprites[anim]
+	pantsSprite.texture = character.pants_sprites[anim]
+	shirtsSprite.texture = character.shirts_sprites[anim]
+	shoesSprite.texture = character.shoes_sprites[anim]
 	
 	
 func _ready():
 	animPlayer.play("idle")
 	$SoundEffects.play()
-	bodySprite.texture = Characters.body_sprites['idle_down']
-	armsSprite.texture = Characters.arms_sprites['idle_down']
-	accessorySprite.texture = Characters.acc_sprites['idle_down']
-	headAttributeSprite.texture = Characters.headAtr_sprites['idle_down']
-	pantsSprite.texture = Characters.pants_sprites['idle_down']
-	shirtsSprite.texture = Characters.shirts_sprites['idle_down']
-	shoesSprite.texture = Characters.shoes_sprites['idle_down']
+	setAnimationTexture("idle_down")
+#	bodySprite.texture = Characters.body_sprites['idle_down']
+#	armsSprite.texture = Characters.arms_sprites['idle_down']
+#	accessorySprite.texture = Characters.acc_sprites['idle_down']
+#	headAttributeSprite.texture = Characters.headAtr_sprites['idle_down']
+#	pantsSprite.texture = Characters.pants_sprites['idle_down']
+#	shirtsSprite.texture = Characters.shirts_sprites['idle_down']
+#	shoesSprite.texture = Characters.shoes_sprites['idle_down']
 
 	
