@@ -56,7 +56,7 @@ func SpawnNewPlayer(player_id, spawn_position):
 			get_node("OtherPlayers").add_child(new_player)
 		
 func DespawnPlayer(player_id):
-	if get_node_or_null(player_id):
+	if get_node_or_null(str(player_id)):
 		#yield(get_tree().create_timer(0.2), "timeout")
 		get_node("OtherPlayers/" + str(player_id)).queue_free()
 
@@ -90,7 +90,7 @@ var new_decoration_state = {}
 
 func UpdateWorldState(world_state):
 	for decoration in world_state.decoration_state.keys():
-		if(get_node_or_null(decoration)):
+		if(get_node_or_null(str(decoration))):
 			get_node(decoration).queue_free()	
 		var treeObject = TreeObject.instance()
 		treeObject.name = decoration

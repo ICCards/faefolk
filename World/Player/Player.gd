@@ -95,7 +95,7 @@ func _unhandled_input(event):
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
-#			Server.action("mouse_click", Server.client_clock)
+			Server.action("mouse_click")
 			state = SWING
 			swing_state(event)
 		if itemCategory == "Placable object" and playerState == "Farm":
