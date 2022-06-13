@@ -120,10 +120,6 @@ func _getCharacterById(player_id):
 
 func _getCharacter():
 	rpc_id(1,"GetCharacter")
-
-var player_swings = {}
-func SendPlayerSwing(position, direction, tool_name):
-	rpc_id(1, "SendPlayerSwing", position, direction, tool_name, client_clock)
 	
 remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, player_id):
 	print('receive playher swing')
@@ -134,3 +130,6 @@ remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, playe
 	
 func action(type,input):
 	rpc_id(1, "action", type, input)
+	
+remote func receiveAction(player_id,type,position,direction):
+	get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id))
