@@ -94,7 +94,10 @@ func UpdateWorldState(world_state):
 				decorations.append(decoration)
 	if world_state["T"] > last_world_state:
 		last_world_state = world_state["T"]
-		world_state_buffer.append(world_state)
+		var tempState = {}
+		tempState["player_state"] = world_state["player_state"]
+		tempState["T"] = world_state["T"]
+		world_state_buffer.append(tempState)
 
 func _physics_process(delta):
 	var render_time = Server.client_clock - interpolation_offset

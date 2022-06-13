@@ -70,7 +70,6 @@ func message_send(message):
 	rpc_unreliable_id(1, "message_send", message)
 
 remote func updateState(state):
-	print(state.player_state)
 	get_node("/root/PlayerHomeFarm").UpdateWorldState(state)
 
 
