@@ -72,30 +72,26 @@ func spawn_player():
 var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
-var decoration_positions = []
-
-var local_decoration_state = {}
-#
-#    # state that was just recived from server
-var new_decoration_state = {}
-#
-#    for decoration_key in new_world_state.decorations.keys():
-#        if local_world_state[decoration_key].empty():
-#            local_world_state[decoration_key] = new_world_state.decorations[decoration_key]
-#        elif local_world_state[decoration_key] == new_world_state.decorations[decoration_key]:
-#            pass
-#        else:
-#            local_world_state[decoration_key] = new_world_state.decorations[decoration_key]
+var decorations = []
 
 func UpdateWorldState(world_state):
-	#for decoration in world_state.decoration_state.keys():
-		#if(get_node_or_null(str(decoration))):
-			#get_node(decoration).queue_free()	
-		#var treeObject = TreeObject.instance()
-		#treeObject.name = decoration
-		#treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
-		#add_child(treeObject)
-		#treeObject.position = world_state.decoration_state[decoration]["p"]
+	if decorations.empty():
+		for decoration in world_state.decoration_state.keys():
+			var treeObject = TreeObject.instance()
+			treeObject.name = decoration
+			treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
+			add_child(treeObject)
+			treeObject.position = world_state.decoration_state[decoration]["p"]
+			decorations.append(decoration)
+	else:
+		for decoration in world_state.decoration_state.keys():
+			if not decorations.has(decoration):
+				var treeObject = TreeObject.instance()
+				treeObject.name = decoration
+				treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
+				add_child(treeObject)
+				treeObject.position = world_state.decoration_state[decoration]["p"]
+				decorations.append(decoration)
 	if world_state["T"] > last_world_state:
 		last_world_state = world_state["T"]
 		world_state_buffer.append(world_state)
@@ -110,7 +106,7 @@ func _physics_process(delta):
 			for player in world_state_buffer[2]["player_state"].keys():
 				if str(player) == "T":
 					continue
-				if player == str(get_tree().get_network_unique_id()):
+				if str(player) == str(get_tree().get_network_unique_id()):
 					continue
 				if not world_state_buffer[1]["player_state"].has(player):
 					continue
@@ -126,7 +122,7 @@ func _physics_process(delta):
 			for player in world_state_buffer[1]["player_state"].keys():
 				if str(player) == "T":
 					continue
-				if player == str(get_tree().get_network_unique_id()):
+				if player == get_tree().get_network_unique_id():
 					continue
 				if not world_state_buffer[0]["player_state"].has(player):
 					continue

@@ -3,6 +3,9 @@ extends Node
 const DEFAULT_IP = "198.211.104.56"
 const DEFAULT_PORT = 45124
 
+#const DEFAULT_IP = "127.0.0.1"
+#const DEFAULT_PORT = 45124
+
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
 var selected_port
@@ -54,7 +57,10 @@ func _server_disconnected():
 	print("Server disconnected")
 	
 remote func SpawnPlayer(player_id, spawn_position):
-	get_node("/root/PlayerHomeFarm").SpawnNewPlayer(player_id, spawn_position)
+	print("new player")
+	print(player_id)
+	print(spawn_position)
+	#get_node("/root/PlayerHomeFarm").SpawnNewPlayer(player_id, spawn_position)
 
 remote func DespawnPlayer(player_id):
 	print('despawn player')
@@ -64,6 +70,7 @@ func message_send(message):
 	rpc_unreliable_id(1, "message_send", message)
 
 remote func updateState(state):
+	print(state.player_state)
 	get_node("/root/PlayerHomeFarm").UpdateWorldState(state)
 
 
@@ -94,18 +101,19 @@ remote func ReturnLatency(client_time):
 			else:
 				total_latency += latency_array[i]
 		delta_latency = (total_latency / latency_array.size())
-		#print("New Latency ", latency)
+		print("New Latency ", latency)
 		latency_array.clear()
 		
 		
 
 
-remote func ReceiveCharacter(player):
+remote func ReceiveCharacter(player, player_id):
 	print("Fetched  "+player.character)
-	if player.id == get_tree().get_network_unique_id():
+	print("player id  "+str(player_id))
+	if player_id == get_tree().get_network_unique_id():
 		get_node("/root/PlayerHomeFarm/Player").character.LoadPlayerCharacter(player.character) 
 	else:
-		get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player.id)).character.LoadPlayerCharacter(player.character) 
+		get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id)).character.LoadPlayerCharacter(player.character) 
 
 func _getCharacterById(player_id):
 	rpc_id(1, "GetCharacterById", player_id)
@@ -115,15 +123,8 @@ func _getCharacter():
 	rpc_id(1,"GetCharacter")
 
 var player_swings = {}
-func ReceiveAction(spawn_time, player_id, input):
-	if player_id == get_tree().get_network_unique_id():
-		pass
-	else:
-		if input == "mouse_click":
-			get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id)).swing()
-	
-remote func action(input):
-	rpc_id(1, "action", input, client_clock)
+func SendPlayerSwing(position, direction, tool_name):
+	rpc_id(1, "SendPlayerSwing", position, direction, tool_name, client_clock)
 	
 remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, player_id):
 	print('receive playher swing')
@@ -132,4 +133,5 @@ remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, playe
 	else:
 		get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id)).swing_dict[spawn_time] = {"Position": position, "Direction": direction, "ToolName": tool_name}
 	
-	
+func action(input):
+	rpc_id(1, "action", input, client_clock)
