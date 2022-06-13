@@ -72,11 +72,43 @@ func spawn_player():
 var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
+var decoration_positions = []
+
+var local_world_state = {}
+#
+#    # state that was just recived from server
+var new_world_state = {}
+#
+#    for decoration_key in new_world_state.decorations.keys():
+#        if local_world_state[decoration_key].empty():
+#            local_world_state[decoration_key] = new_world_state.decorations[decoration_key]
+#        elif local_world_state[decoration_key] == new_world_state.decorations[decoration_key]:
+#            pass
+#        else:
+#            local_world_state[decoration_key] = new_world_state.decorations[decoration_key]
 
 func UpdateWorldState(world_state):
-	if world_state["T"] > last_world_state:
-		last_world_state = world_state["T"]
-		world_state_buffer.append(world_state)
+	for decoration in world_state.decoration_state.keys():
+#		if local_world_state[decoration].empty():
+#			local_world_state[decoration] = new_world_state.decorations[decoration_key]
+		if !decoration_positions.has(world_state.decoration_state[decoration]["p"]):
+			decoration_positions.append(world_state.decoration_state[decoration]["p"])
+			var treeObject = TreeObject.instance()
+			treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
+			call_deferred("add_child", treeObject)
+			treeObject.position = world_state.decoration_state[decoration]["p"]
+			
+			
+			
+	#print(world_state.decoration_state.keys())
+	#print(world_state.decoration_state["00d460f4-0430-4bda-87d1-34dde4721213"])
+#		var treeObject = TreeObject.instance()
+#		treeObject.initialize(world_state.decoration_state[i]["v"], world_state.decoration_state[i]["p"], world_state.decoration_state[i]["g"])
+#		call_deferred("add_child", treeObject)
+#		treeObject.position = world_state.decoration_state[i]["p"]
+#	if world_state["T"] > last_world_state:
+#		last_world_state = world_state["T"]
+#		world_state_buffer.append(world_state)
 
 func _physics_process(delta):
 	var render_time = Server.client_clock - interpolation_offset
@@ -88,7 +120,7 @@ func _physics_process(delta):
 			for player in world_state_buffer[2].keys():
 				if str(player) == "T":
 					continue
-				if player == get_tree().get_network_unique_id():
+				if player == str(get_tree().get_network_unique_id()):
 					continue
 				if not world_state_buffer[1].has(player):
 					continue
@@ -104,7 +136,7 @@ func _physics_process(delta):
 			for player in world_state_buffer[1].keys():
 				if str(player) == "T":
 					continue
-				if player == get_tree().get_network_unique_id():
+				if player == str(get_tree().get_network_unique_id()):
 					continue
 				if not world_state_buffer[0].has(player):
 					continue

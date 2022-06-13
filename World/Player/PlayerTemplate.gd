@@ -49,7 +49,7 @@ func Swing():
 			swingActive = true
 			set_position(swing_dict[swing]["Position"])
 			setPlayerTexture("swing_" + swing_dict[swing]["Direction"])
-			#toolEquippedSprite.set_texture(haracters.returnToolSprite(swing_dict[swing]["ToolName"], swing_dict[swing]["Direction"]))
+			toolEquippedSprite.set_texture(Images.returnToolSprite(swing_dict[swing]["ToolName"], swing_dict[swing]["Direction"]))
 			animation_player.play("swing")
 			yield(animation_player, "animation_finished")
 			swing_dict.erase(swing)

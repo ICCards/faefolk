@@ -1,5 +1,57 @@
 extends Node
 
+# WEAPONS #
+
+func returnToolSprite(toolName, direction):
+	match toolName:
+		"pickaxe":
+			match direction: 
+				"down":
+					 return pickaxe.down
+				"up":
+					 return pickaxe.up
+				"left":
+					 return pickaxe.left
+				"right":
+					 return pickaxe.right
+		"axe":
+			match direction: 
+				"down":
+					 return axe.down
+				"up":
+					 return axe.up
+				"left":
+					 return axe.left
+				"right":
+					return axe.right
+		"hoe":
+			match direction: 
+				"down":
+					 return pickaxe.down
+				"up":
+					 return pickaxe.up
+				"left":
+					 return pickaxe.left
+				"right":
+					 return pickaxe.right
+					
+
+
+var pickaxe = {
+	down = preload("res://Characters/Weapon swings/down/pickaxe.png"), 
+	up = preload("res://Characters/Weapon swings/up/pickaxe.png"), 
+	left = preload("res://Characters/Weapon swings/left/pickaxe.png"), 
+	right = preload("res://Characters/Weapon swings/right/pickaxe.png")
+}
+
+var axe = {
+	down = preload("res://Characters/Weapon swings/down/axe.png"), 
+	up =  preload("res://Characters/Weapon swings/up/axe.png"), 
+	left = preload("res://Characters/Weapon swings/left/axe.png"), 
+	right = preload("res://Characters/Weapon swings/right/axe.png")
+}
+
+
 # FRUITLESS TREES #
 
 func returnTreeObject(treeType):

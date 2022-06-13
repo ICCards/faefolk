@@ -95,6 +95,7 @@ func _unhandled_input(event):
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
+#			Server.action("mouse_click", Server.client_clock)
 			state = SWING
 			swing_state(event)
 		if itemCategory == "Placable object" and playerState == "Farm":
@@ -293,10 +294,9 @@ func swing_state(event):
 		if !swingActive:
 				PlayerStats.decrease_energy()
 				var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-				Server.SendPlayerSwing(position , direction.to_lower() , tool_name)
 				swingActive = true
 				set_melee_collision_layer(tool_name)
-				#toolEquippedSprite.set_texture(Characters.returnToolSprite(tool_name, direction.to_lower()))
+				toolEquippedSprite.set_texture(Images.returnToolSprite(tool_name, direction.to_lower()))
 				animation = "swing_" + direction.to_lower()
 				setPlayerTexture(animation)
 				animation_player.play(animation)

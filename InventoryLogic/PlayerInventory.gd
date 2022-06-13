@@ -123,7 +123,7 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/Inventory/GridContainer/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/Inventory/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		slot.item.set_item(item_name, new_quantity)
 	else:
