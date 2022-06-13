@@ -74,10 +74,10 @@ var world_state_buffer = []
 const interpolation_offset = 100
 var decoration_positions = []
 
-var local_world_state = {}
+var local_decoration_state = {}
 #
 #    # state that was just recived from server
-var new_world_state = {}
+var new_decoration_state = {}
 #
 #    for decoration_key in new_world_state.decorations.keys():
 #        if local_world_state[decoration_key].empty():
@@ -88,17 +88,34 @@ var new_world_state = {}
 #            local_world_state[decoration_key] = new_world_state.decorations[decoration_key]
 
 func UpdateWorldState(world_state):
-	for decoration in world_state.decoration_state.keys():
-#		if local_world_state[decoration].empty():
-#			local_world_state[decoration] = new_world_state.decorations[decoration_key]
-		if !decoration_positions.has(world_state.decoration_state[decoration]["p"]):
-			decoration_positions.append(world_state.decoration_state[decoration]["p"])
-			var treeObject = TreeObject.instance()
-			treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
-			call_deferred("add_child", treeObject)
-			treeObject.position = world_state.decoration_state[decoration]["p"]
-			
-			
+	if local_decoration_state.empty():
+		local_decoration_state = world_state.decoration_state
+		for decoration in local_decoration_state.keys():
+			print("Checking for node "+decoration.n)
+			var hasNode = has_node(decoration.n)
+			print("has node: "+hasNode)
+			if has_node(decoration.n):
+				pass
+			else:
+				var treeObject = TreeObject.instance()
+				treeObject.name = decoration.n
+				treeObject.initialize(local_decoration_state[decoration]["v"], local_decoration_state[decoration]["p"], local_decoration_state[decoration]["g"])
+				add_child(treeObject)
+				treeObject.position = local_decoration_state[decoration]["p"]
+	else:
+		if world_state.decoration_state.hash() == local_decoration_state.decoration_state.hash():
+			pass
+		else:
+			local_decoration_state = world_state.decoration_state
+		for decoration in local_decoration_state.keys():
+			if has_node(decoration.n):
+				pass
+			else:
+				var treeObject = TreeObject.instance()
+				treeObject.name = decoration.n
+				treeObject.initialize(local_decoration_state[decoration]["v"], local_decoration_state[decoration]["p"], local_decoration_state[decoration]["g"])
+				add_child(treeObject)
+				treeObject.position = local_decoration_state[decoration]["p"]
 			
 	#print(world_state.decoration_state.keys())
 	#print(world_state.decoration_state["00d460f4-0430-4bda-87d1-34dde4721213"])
