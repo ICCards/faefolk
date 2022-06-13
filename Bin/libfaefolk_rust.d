@@ -1,0 +1,1 @@
+/Users/jonathangreen/Documents/FaeFolk/faefolk_rust/target/debug/libfaefolk_rust.dylib: /Users/jonathangreen/Documents/FaeFolk/faefolk_rust/src/api.rs /Users/jonathangreen/Documents/FaeFolk/faefolk_rust/src/identity.rs /Users/jonathangreen/Documents/FaeFolk/faefolk_rust/src/lib.rs
