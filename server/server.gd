@@ -60,7 +60,7 @@ remote func SpawnPlayer(player_id, spawn_position):
 	print("new player")
 	print(player_id)
 	print(spawn_position)
-	#get_node("/root/PlayerHomeFarm").SpawnNewPlayer(player_id, spawn_position)
+	get_node("/root/PlayerHomeFarm").SpawnNewPlayer(player_id, spawn_position)
 
 remote func DespawnPlayer(player_id):
 	print('despawn player')
