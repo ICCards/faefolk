@@ -131,5 +131,5 @@ remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, playe
 func action(type,input):
 	rpc_id(1, "action", type, input)
 	
-remote func receiveAction(player_id,type,position,direction):
+remote func receiveAction(player_id,type,position,direction,time):
 	get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id))
