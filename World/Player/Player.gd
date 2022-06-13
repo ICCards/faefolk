@@ -83,19 +83,32 @@ func _process(delta) -> void:
 		idle_state(direction)
 
 
-func _physics_process(delta):
-	DefinePlayerState()
+#func _physics_process(delta):
+	#DefinePlayerState()
 
-func DefinePlayerState():
-	player_state = {"T": Server.client_clock, "P": get_global_position(), "D": direction.to_lower()}
-	Server.message_send(player_state)
+#func DefinePlayerState():
+	#player_state = {"T": Server.client_clock, "K": get_global_position(), "D": direction.to_lower()}
+	#Server.message_send(player_state)
 
 func _unhandled_input(event):
+	if Input.is_action_pressed("ui_up"):
+		direction = "UP"
+		sendAction(MOVEMENT,direction)
+	if Input.is_action_pressed("ui_down"):
+		direction = "DOWN"
+		sendAction(MOVEMENT,direction)
+	if Input.is_action_pressed("ui_left"):
+		direction = "LEFT"
+		sendAction(MOVEMENT,direction)
+	if Input.is_action_pressed("ui_right"):
+		direction = "RIGHT"
+		sendAction(MOVEMENT,direction)
+	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
+		idle_state(direction)
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false and !is_mouse_over_hotbar:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
-			Server.action("mouse_click")
 			state = SWING
 			swing_state(event)
 		if itemCategory == "Placable object" and playerState == "Farm":
@@ -113,6 +126,13 @@ func _unhandled_input(event):
 		$PlaceItemsUI/ItemToPlace.visible = false
 		$PlaceItemsUI/RotateIcon.visible = false
 
+func sendAction(action,value): 
+	match action:
+		(MOVEMENT):
+			var message = {"T": Server.client_clock, "I": value}
+			Server.action("MOVEMENT",message)
+		(SWING):
+			pass
 	
 var path_index = 1
 var selected_path
@@ -286,7 +306,6 @@ func movement_state(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		
 	move_and_collide(velocity * MAX_SPEED)	
-
 
 var swingActive = false
 func swing_state(event):

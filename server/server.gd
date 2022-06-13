@@ -1,10 +1,10 @@
 extends Node
 
-const DEFAULT_IP = "198.211.104.56"
-const DEFAULT_PORT = 45124
-
-#const DEFAULT_IP = "127.0.0.1"
+#const DEFAULT_IP = "198.211.104.56"
 #const DEFAULT_PORT = 45124
+
+const DEFAULT_IP = "127.0.0.1"
+const DEFAULT_PORT = 65124
 
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
@@ -132,5 +132,5 @@ remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, playe
 	else:
 		get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id)).swing_dict[spawn_time] = {"Position": position, "Direction": direction, "ToolName": tool_name}
 	
-func action(input):
-	rpc_id(1, "action", input, client_clock)
+func action(type,input):
+	rpc_id(1, "action", type, input)
