@@ -120,7 +120,7 @@ func ReceiveAction(spawn_time, player_id, input):
 		pass
 	else:
 		if input == "mouse_click":
-			get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player.id)).swing()
+			get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id)).swing()
 	
 remote func action(input):
 	rpc_id(1, "action", input, client_clock)
