@@ -4218,7 +4218,7 @@ format = 1
 modulate = Color( 1, 1, 1, 0.360784 )
 position = Vector2( 28, 260 )
 frames = SubResource( 176 )
-frame = 9
+frame = 6
 playing = true
 
 [node name="WaterfallSound" type="AudioStreamPlayer2D" parent="WaterTiles"]

@@ -58,6 +58,7 @@ func SpawnNewPlayer(player_id, spawn_position):
 func DespawnPlayer(player_id):
 	if has_node(str(player_id)):
 		#yield(get_tree().create_timer(0.2), "timeout")
+		players.erase(player_id)
 		get_node(str(player_id)).queue_free()
 
 const PlayerScene = preload("res://World/Player/Player.tscn")
@@ -73,66 +74,100 @@ var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
 var decorations = []
+var players = []
+var world_state = {}
 
-func UpdateWorldState(world_state):
-	if decorations.empty():
-		for decoration in world_state.decoration_state.keys():
-			var treeObject = TreeObject.instance()
-			treeObject.name = decoration
-			treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
-			add_child(treeObject)
-			treeObject.position = world_state.decoration_state[decoration]["p"]
-			decorations.append(decoration)
-	else:
-		for decoration in world_state.decoration_state.keys():
-			if not decorations.has(decoration):
-				var treeObject = TreeObject.instance()
-				treeObject.name = decoration
-				treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
-				add_child(treeObject)
-				treeObject.position = world_state.decoration_state[decoration]["p"]
-				decorations.append(decoration)
-	if world_state["T"] > last_world_state:
-		last_world_state = world_state["T"]
-		var tempState = {}
-		tempState["player_state"] = world_state["player_state"]
-		tempState["T"] = world_state["T"]
-		world_state_buffer.append(tempState)
+func UpdateWorldState(_world_state):
+	world_state = _world_state
+#	if decorations.empty():
+#		for decoration in world_state.decoration_state.keys():
+#			var treeObject = TreeObject.instance()
+#			treeObject.name = decoration
+#			treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
+#			add_child(treeObject)
+#			treeObject.position = world_state.decoration_state[decoration]["p"]
+#			decorations.append(decoration)
+#	else:
+#		for decoration in world_state.decoration_state.keys():
+#			if not decorations.has(decoration):
+#				var treeObject = TreeObject.instance()
+#				treeObject.name = decoration
+#				treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
+#				add_child(treeObject)
+#				treeObject.position = world_state.decoration_state[decoration]["p"]
+#				decorations.append(decoration)
+#	if world_state["T"] > last_world_state:
+#		last_world_state = world_state["T"]
+#		var tempState = {}
+#		tempState["players"] = world_state["players"]
+#		tempState["T"] = world_state["T"]
+#		world_state_buffer.append(tempState)
 
 func _physics_process(delta):
-	var render_time = Server.client_clock - interpolation_offset
-	if world_state_buffer.size() > 1:
-		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
-			world_state_buffer.remove(0)
-		if world_state_buffer.size() > 2:
-			var interpolation_factor = float(render_time - world_state_buffer[1]["T"]) / float(world_state_buffer[2]["T"] - world_state_buffer[1]["T"])
-			for player in world_state_buffer[2]["player_state"].keys():
-				if str(player) == "T":
-					continue
-				if str(player) == str(get_tree().get_network_unique_id()):
-					continue
-				if not world_state_buffer[1]["player_state"].has(player):
-					continue
-				if has_node(str(player)):
-					var new_position = lerp(world_state_buffer[1]["player_state"][player]["P"], world_state_buffer[2]["player_state"][player]["P"], interpolation_factor)
-					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
-				else:
+	if not world_state.empty():
+		if players.empty():
+			for player_id in world_state["players"]:
+				print("spawning player")
+				SpawnNewPlayer(player_id, Vector2(920,496))
+				players.append(player_id)
+		else:
+			for player_id in world_state["players"]:
+				if not players.has(player_id):
 					print("spawning player")
-					SpawnNewPlayer(player, world_state_buffer[2]["player_state"][player]["P"])
-					
-		elif render_time > world_state_buffer[1].T:
-			var extrapolation_factor = float(render_time - world_state_buffer[0]["T"]) / float(world_state_buffer[1]["T"] - world_state_buffer[0]["T"]) - 1.00
-			for player in world_state_buffer[1]["player_state"].keys():
-				if str(player) == "T":
-					continue
-				if player == get_tree().get_network_unique_id():
-					continue
-				if not world_state_buffer[0]["player_state"].has(player):
-					continue
-				if has_node(str(player)):
-					var position_delta = (world_state_buffer[1]["player_state"][player]["P"] - world_state_buffer[0]["player_state"][player]["P"])
-					var new_position = world_state_buffer[1]["player_state"][player]["P"] + (position_delta * extrapolation_factor)
-					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
+					SpawnNewPlayer(player_id, Vector2(920,496))
+					players.append(player_id)
+#	var render_time = Server.client_clock - interpolation_offset
+#	if world_state_buffer.size() > 1:
+#		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
+#			world_state_buffer.remove(0)
+#		if world_state_buffer.size() > 2:
+#			for player in world_state_buffer[2]["player_state"].keys():
+#				if str(player) == "T":
+#					continue
+#				if str(player) == str(get_tree().get_network_unique_id()):
+#					continue
+#				if not world_state_buffer[1]["player_state"].has(player):
+#					continue
+#				if has_node(str(player)):
+#					pass
+#				else:
+#					print("spawning player")
+#					SpawnNewPlayer(player, world_state_buffer[2]["player_state"][player]["P"])
+
+#func _physics_process(delta):
+#	var render_time = Server.client_clock - interpolation_offset
+#	if world_state_buffer.size() > 1:
+#		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
+#			world_state_buffer.remove(0)
+#		if world_state_buffer.size() > 2:
+#			var interpolation_factor = float(render_time - world_state_buffer[1]["T"]) / float(world_state_buffer[2]["T"] - world_state_buffer[1]["T"])
+#			for player in world_state_buffer[2]["player_state"].keys():
+#				if str(player) == "T":
+#					continue
+#				if str(player) == str(get_tree().get_network_unique_id()):
+#					continue
+#				if not world_state_buffer[1]["player_state"].has(player):
+#					continue
+#				if has_node(str(player)):
+#					var new_position = lerp(world_state_buffer[1]["player_state"][player]["P"], world_state_buffer[2]["player_state"][player]["P"], interpolation_factor)
+#					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
+#				else:
+#					print("spawning player")
+#					SpawnNewPlayer(player, world_state_buffer[2]["player_state"][player]["P"])
+#
+#		elif render_time > world_state_buffer[1].T:
+#			var extrapolation_factor = float(render_time - world_state_buffer[0]["T"]) / float(world_state_buffer[1]["T"] - world_state_buffer[0]["T"]) - 1.00
+#			for player in world_state_buffer[1]["player_state"].keys():
+#				if str(player) == "T":
+#					continue
+#				if player == get_tree().get_network_unique_id():
+#					continue
+#				if not world_state_buffer[0]["player_state"].has(player):
+#					continue
+#				if has_node(str(player)):
+#					var position_delta = (world_state_buffer[1]["player_state"][player]["P"] - world_state_buffer[0]["player_state"][player]["P"])
+#					var new_position = world_state_buffer[1]["player_state"][player]["P"] + (position_delta * extrapolation_factor)
+#					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
 
 
 func _ready():
