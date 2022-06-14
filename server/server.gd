@@ -1,10 +1,10 @@
 extends Node
 
-#const DEFAULT_IP = "198.211.104.56"
-#const DEFAULT_PORT = 45124
+const DEFAULT_IP = "198.211.104.56"
+const DEFAULT_PORT = 45124
 
-const DEFAULT_IP = "127.0.0.1"
-const DEFAULT_PORT = 65124
+#const DEFAULT_IP = "127.0.0.1"
+#const DEFAULT_PORT = 65124
 
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
@@ -33,8 +33,7 @@ func _connect_to_server():
 	get_tree().set_network_peer(network)
 	
 func _player_connected(id):
-	print("Player " + str(id) + " Connected")
-	_getCharacter()
+	print("New Player " + str(id) + " Connected")
 	
 func _player_disconnected(id):
 	print("Player " + str(id) + " Disonnected")
@@ -48,6 +47,7 @@ func _connected_ok():
 	timer.autostart = true
 	timer.connect("timeout", self, "DetermineLatency")
 	self.add_child(timer)
+	_getCharacter()
 	
 func _connected_fail():
 	print("Failed to connect")
@@ -112,7 +112,7 @@ remote func ReceiveCharacter(player, player_id):
 	if player_id == get_tree().get_network_unique_id():
 		get_node("/root/PlayerHomeFarm/Player").character.LoadPlayerCharacter(player.character) 
 	else:
-		get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id)).character.LoadPlayerCharacter(player.character) 
+		get_node("/root/PlayerHomeFarm/" + str(player_id)).character.LoadPlayerCharacter(player.character) 
 
 func _getCharacterById(player_id):
 	rpc_id(1, "GetCharacterById", player_id)
@@ -126,10 +126,10 @@ remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, playe
 	if player_id == get_tree().get_network_unique_id():
 		pass
 	else:
-		get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id)).swing_dict[spawn_time] = {"Position": position, "Direction": direction, "ToolName": tool_name}
+		get_node("/root/PlayerHomeFarm/" + str(player_id)).swing_dict[spawn_time] = {"Position": position, "Direction": direction, "ToolName": tool_name}
 	
 func action(type,input):
 	rpc_id(1, "action", type, input)
 	
 remote func receiveAction(player_id,type,position,direction,time):
-	get_node("/root/PlayerHomeFarm/OtherPlayers/" + str(player_id))
+	get_node("/root/PlayerHomeFarm/" + str(player_id))

@@ -48,17 +48,17 @@ func SpawnNewPlayer(player_id, spawn_position):
 	if get_tree().get_network_unique_id() == player_id:
 		pass
 	else:
-		if not get_node("OtherPlayers").has_node(str(player_id)):
+		if not has_node(str(player_id)):
 			var new_player = Player_template.instance()
 			new_player.getCharacterById(player_id)
 			new_player.position = spawn_position
 			new_player.name = str(player_id)
-			get_node("OtherPlayers").add_child(new_player)
+			add_child(new_player)
 		
 func DespawnPlayer(player_id):
 	if has_node(str(player_id)):
 		#yield(get_tree().create_timer(0.2), "timeout")
-		get_node("OtherPlayers/" + str(player_id)).queue_free()
+		get_node(str(player_id)).queue_free()
 
 const PlayerScene = preload("res://World/Player/Player.tscn")
 
@@ -113,9 +113,9 @@ func _physics_process(delta):
 					continue
 				if not world_state_buffer[1]["player_state"].has(player):
 					continue
-				if get_node("OtherPlayers").has_node(str(player)):
+				if has_node(str(player)):
 					var new_position = lerp(world_state_buffer[1]["player_state"][player]["P"], world_state_buffer[2]["player_state"][player]["P"], interpolation_factor)
-					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
+					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
 				else:
 					print("spawning player")
 					SpawnNewPlayer(player, world_state_buffer[2]["player_state"][player]["P"])
@@ -129,10 +129,10 @@ func _physics_process(delta):
 					continue
 				if not world_state_buffer[0]["player_state"].has(player):
 					continue
-				if get_node("OtherPlayers").has_node(str(player)):
+				if has_node(str(player)):
 					var position_delta = (world_state_buffer[1]["player_state"][player]["P"] - world_state_buffer[0]["player_state"][player]["P"])
 					var new_position = world_state_buffer[1]["player_state"][player]["P"] + (position_delta * extrapolation_factor)
-					get_node("OtherPlayers/" + str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
+					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
 
 
 func _ready():

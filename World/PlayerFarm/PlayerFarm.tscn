@@ -4153,8 +4153,6 @@ position = Vector2( 2016, 2912 )
 [node name="TopLeft" parent="Player/Camera2D/Limits" index="1"]
 position = Vector2( -1632, 0 )
 
-[node name="OtherPlayers" type="YSort" parent="."]
-
 [node name="GroundTiles" type="YSort" parent="."]
 
 [node name="SandTiles" type="TileMap" parent="GroundTiles"]
@@ -4220,7 +4218,7 @@ format = 1
 modulate = Color( 1, 1, 1, 0.360784 )
 position = Vector2( 28, 260 )
 frames = SubResource( 176 )
-frame = 8
+frame = 9
 playing = true
 
 [node name="WaterfallSound" type="AudioStreamPlayer2D" parent="WaterTiles"]
