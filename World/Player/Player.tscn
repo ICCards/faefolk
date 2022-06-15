@@ -877,8 +877,7 @@ stream = ExtResource( 10 )
 volume_db = -16.0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
-visible = false
-volume_db = -32.0
+autoplay = true
 
 [node name="FootstepsSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0, 11 )

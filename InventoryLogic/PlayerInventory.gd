@@ -14,11 +14,11 @@ var inventory = {
 	13: ["green gem", 5],
 	4: ["scythe", 1], 
 #	5: ["yellow onion seeds", 30],
-	6: ["garlic seeds", 50],
-#	7: ["hay seeds", 50],
+	6: ["stone ore", 7],
+	7: ["wood", 10],
 	11: ["potato seeds", 28],
 	14: ["torch", 76],
-	10: ["stone path", 70],
+	10: ["stone ore", 7],
 }
 
 var hotbar = {
@@ -26,9 +26,9 @@ var hotbar = {
 	1: ["pickaxe", 1],
 	2: ["potato seeds", 28],
 	4: ["hoe", 1], 
-	3: ["stone path", 70],
+	3: ["stone ore", 70],
 #	3: ["bucket", 1],
-	5: ["wood box", 52],
+	5: ["wood", 52],
 	6: ["bucket", 70],
 #	6: ["carrot seeds", 50],
 	7: ["wood path", 78],
@@ -36,6 +36,24 @@ var hotbar = {
 	8: ["large wood chest", 7],
 	9: ["wood fence", 32]
 }
+
+func return_player_wood_and_stone():
+	var total_wood = 0
+	var total_stone = 0
+	for slot in hotbar:
+		if hotbar[slot][0] == "wood":
+			total_wood = total_wood +  hotbar[slot][1]
+		elif hotbar[slot][0] == "stone ore":
+			total_stone = total_stone+  hotbar[slot][1]
+	for slot in inventory:
+		if inventory[slot][0] == "wood":
+			total_wood = total_wood + inventory[slot][1]
+		elif inventory[slot][0] == "stone ore":
+			total_stone = total_stone +  inventory[slot][1]
+	print("wood: " +  str(total_wood) + " stone ore: " + str(total_stone))
+	return [total_wood, total_stone]
+		
+			
 
 # Location of bottom left tile
 var player_home = {

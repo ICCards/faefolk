@@ -50,3 +50,26 @@ func _on_QuitButton_mouse_exited():
 	hovered_button = ""
 
 
+
+func _on_Area2D_mouse_entered():
+	print("entered play button")
+	#$Sprite.scale = Vector2(1.2, 1.2)
+	$Tween.interpolate_property($Sprite, "scale",
+		$Sprite.get_scale(), Vector2(1.05, 1.05), 0.25,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	
+	
+
+#	tween.interpolate_property($TreeSprites/TreeBottom, "modulate",
+#		$TreeSprites/TreeBottom.get_modulate(), Color(1, 1, 1, 0.5), 0.5,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	tween.start()
+
+
+
+func _on_Area2D_mouse_exited():
+	$Tween.interpolate_property($Sprite, "scale",
+		$Sprite.get_scale(), Vector2(1, 1), 0.25,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()

@@ -49,19 +49,32 @@ var player_state
 var animation = "idle_down"
 
 func _ready():
+	character.LoadPlayerCharacter("human_male")
 	setPlayerState(get_parent())
 	setPlayerTexture(animation)
-	$FootstepsSound.stream = Sounds.current_footsteps_sound
-	#_play_background_music()
+	#$FootstepsSound.stream = Sounds.current_footsteps_sound
+	_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
 	$Camera2D/UserInterface/PlayerStatsUI.visible = true
 	$Camera2D/UserInterface/CurrentTimeUI.visible = true
 	init_day_night_cycle()
 	DayNightTimer.day_timer.connect("timeout", self, "set_night")
 	DayNightTimer.night_timer.connect("timeout", self, "set_day")
+	Sounds.connect("music_volume_changed", self, "set_new_music_volume")
+
+func set_new_music_volume():
+	$BackgroundMusic.volume_db = -32 - ( Sounds.music_volume - 50 )
 
 
-
+var rng = RandomNumberGenerator.new()
+func _play_background_music():
+	rng.randomize()
+	$BackgroundMusic.stream = Sounds.background_music[rng.randi_range(0, Sounds.background_music.size() - 1)]
+	$BackgroundMusic.play()
+	$BackgroundMusic.volume_db = -32 + ( Sounds.music_volume - 50 )
+	yield($BackgroundMusic, "finished")
+	_play_background_music()
+	
 
 var is_mouse_over_hotbar = false
 
@@ -126,13 +139,14 @@ func _unhandled_input(event):
 		$PlaceItemsUI/ItemToPlace.visible = false
 		$PlaceItemsUI/RotateIcon.visible = false
 
-func sendAction(action,value): 
-	match action:
-		(MOVEMENT):
-			var message = {"T": Server.client_clock, "I": value}
-			Server.action("MOVEMENT",message)
-		(SWING):
-			pass
+func sendAction(action,value):
+	pass 
+#	match action:
+#		(MOVEMENT):
+#			var message = {"T": Server.client_clock, "I": value}
+#			Server.action("MOVEMENT",message)
+#		(SWING):
+#			pass
 	
 var path_index = 1
 var selected_path
@@ -412,14 +426,6 @@ func setPlayerTexture(var anim):
 	pantsSprite.set_texture(character.pants_sprites[anim])
 	shirtsSprite.set_texture(character.shirts_sprites[anim])
 	shoesSprite.set_texture(character.shoes_sprites[anim])
-	
-var rng = RandomNumberGenerator.new()
-func _play_background_music():
-	rng.randomize()
-	$BackgroundMusic.stream = Sounds.background_music[rng.randi_range(0, Sounds.background_music.size() - 1)]
-	$BackgroundMusic.play()
-	yield($BackgroundMusic, "finished")
-	_play_background_music()
 	
 
 

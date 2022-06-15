@@ -43,23 +43,23 @@ const MAX_GRASS_BUNCH_SIZE = 24
 
 var Player_template = preload("res://World/Player/PlayerTemplate.tscn")
 
-func SpawnNewPlayer(player_id, spawn_position):
-	print('SPAWN PLAYER')
-	if get_tree().get_network_unique_id() == player_id:
-		pass
-	else:
-		if not has_node(str(player_id)):
-			var new_player = Player_template.instance()
-			new_player.getCharacterById(player_id)
-			new_player.position = spawn_position
-			new_player.name = str(player_id)
-			add_child(new_player)
-		
-func DespawnPlayer(player_id):
-	if has_node(str(player_id)):
-		#yield(get_tree().create_timer(0.2), "timeout")
-		players.erase(player_id)
-		get_node(str(player_id)).queue_free()
+#func SpawnNewPlayer(player_id, spawn_position):
+#	print('SPAWN PLAYER')
+#	if get_tree().get_network_unique_id() == player_id:
+#		pass
+#	else:
+#		if not has_node(str(player_id)):
+#			var new_player = Player_template.instance()
+#			new_player.getCharacterById(player_id)
+#			new_player.position = spawn_position
+#			new_player.name = str(player_id)
+#			add_child(new_player)
+#
+#func DespawnPlayer(player_id):
+#	if has_node(str(player_id)):
+#		#yield(get_tree().create_timer(0.2), "timeout")
+#		players.erase(player_id)
+#		get_node(str(player_id)).queue_free()
 
 const PlayerScene = preload("res://World/Player/Player.tscn")
 
@@ -104,18 +104,19 @@ func UpdateWorldState(_world_state):
 #		world_state_buffer.append(tempState)
 
 func _physics_process(delta):
-	if not world_state.empty():
-		if players.empty():
-			for player_id in world_state["players"]:
-				print("spawning player")
-				SpawnNewPlayer(player_id, Vector2(920,496))
-				players.append(player_id)
-		else:
-			for player_id in world_state["players"]:
-				if not players.has(player_id):
-					print("spawning player")
-					SpawnNewPlayer(player_id, Vector2(920,496))
-					players.append(player_id)
+	pass
+#	if not world_state.empty():
+#		if players.empty():
+#			for player_id in world_state["players"]:
+#				print("spawning player")
+#				SpawnNewPlayer(player_id, Vector2(920,496))
+#				players.append(player_id)
+#		else:
+#			for player_id in world_state["players"]:
+#				if not players.has(player_id):
+#					print("spawning player")
+#					SpawnNewPlayer(player_id, Vector2(920,496))
+#					players.append(player_id)
 #	var render_time = Server.client_clock - interpolation_offset
 #	if world_state_buffer.size() > 1:
 #		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:

@@ -4227,13 +4227,11 @@ stream = ExtResource( 28 )
 [node name="Waterfall1" type="AnimatedSprite" parent="WaterTiles"]
 position = Vector2( 16, 246 )
 frames = SubResource( 177 )
-frame = 5
 playing = true
 
 [node name="Waterfall2" type="AnimatedSprite" parent="WaterTiles"]
 position = Vector2( 48, 246 )
 frames = SubResource( 177 )
-frame = 5
 playing = true
 
 [node name="WaterTilemap" type="TileMap" parent="WaterTiles"]
@@ -4359,7 +4357,6 @@ position = Vector2( -205, 1795 )
 shape = SubResource( 178 )
 
 [node name="AmbienceSound" type="AudioStreamPlayer2D" parent="."]
-visible = false
 stream = ExtResource( 24 )
 volume_db = -12.0
 

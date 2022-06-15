@@ -17,6 +17,7 @@ volume_db = -32.0
 [node name="BackgroundImage" type="TextureRect" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": true

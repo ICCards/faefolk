@@ -1,6 +1,35 @@
 extends Node
 
 
+
+var music_volume = 50
+var sound_volume = 50
+var ambient_volume = 50
+var footstep_volume = 50
+
+signal music_volume_changed
+signal sound_volume_changed
+signal ambient_volume_changed
+signal footstep_volume_changed
+
+func set_music_volume(val):
+	music_volume = val
+	emit_signal("music_volume_changed")
+
+func set_sound_volume(val):
+	sound_volume = val
+	emit_signal("sound_volume_changed")
+	
+func set_ambient_volume(val):
+	ambient_volume = val
+	emit_signal("ambient_volume_changed")
+
+func set_footstep_volume(val):
+	footstep_volume = val
+	emit_signal("footstep_volume_changed")
+
+### Handles switching footsteps sound
+
 var current_footsteps_sound = wood_footsteps
 
 

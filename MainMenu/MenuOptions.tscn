@@ -9,12 +9,15 @@
 [node name="MenuOptions" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 2 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 616.0
-margin_bottom = 178.0
-texture = ExtResource( 3 )
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_left = 191.0
+margin_top = 326.0
+margin_right = 807.0
+margin_bottom = 504.0
+texture = ExtResource( 5 )
 stretch_mode = 5
 
 [node name="TextureRect2" type="TextureRect" parent="."]
@@ -25,41 +28,21 @@ margin_bottom = 341.0
 texture = ExtResource( 4 )
 stretch_mode = 5
 
-[node name="TextureRect3" type="TextureRect" parent="."]
-margin_left = 191.0
-margin_top = 326.0
-margin_right = 807.0
-margin_bottom = 504.0
-texture = ExtResource( 5 )
-stretch_mode = 5
-
-[node name="PlayButton" type="Button" parent="."]
-margin_left = 211.0
-margin_top = 49.0
-margin_right = 451.0
-margin_bottom = 139.0
-rect_min_size = Vector2( 240, 90 )
-focus_mode = 0
-theme = ExtResource( 1 )
-enabled_focus_mode = 0
-text = "PLAY"
-align = 0
-
 [node name="OptionsButton" type="Button" parent="."]
-margin_left = 149.0
-margin_top = 221.0
-margin_right = 703.0
-margin_bottom = 294.0
+margin_left = 147.0
+margin_top = 202.0
+margin_right = 701.0
+margin_bottom = 303.0
 focus_mode = 0
 theme = ExtResource( 1 )
 enabled_focus_mode = 0
 text = "OPTIONS"
 
 [node name="QuitButton" type="Button" parent="."]
-margin_left = 414.0
-margin_top = 381.0
-margin_right = 808.0
-margin_bottom = 454.0
+margin_left = 438.0
+margin_top = 362.0
+margin_right = 832.0
+margin_bottom = 463.0
 focus_mode = 0
 theme = ExtResource( 1 )
 enabled_focus_mode = 0
@@ -69,12 +52,65 @@ align = 0
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 volume_db = -28.0
 
-[connection signal="mouse_entered" from="PlayButton" to="." method="_on_PlayButton_mouse_entered"]
-[connection signal="mouse_exited" from="PlayButton" to="." method="_on_PlayButton_mouse_exited"]
-[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 376, -163 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 4 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 376, -163 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+visible = false
+position = Vector2( 376, -163 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 263.0
+margin_top = -212.0
+margin_right = 613.0
+margin_bottom = -17.0
+theme = ExtResource( 1 )
+text = "OPTIONS
+"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 263.0
+margin_top = -212.0
+margin_right = 613.0
+margin_bottom = -17.0
+theme = ExtResource( 1 )
+text = "PLAY
+"
+align = 1
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 263.0
+margin_top = -212.0
+margin_right = 613.0
+margin_bottom = -17.0
+theme = ExtResource( 1 )
+text = "QUIT
+"
+align = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( 146, 22, 496, 24, 534, 67, 534, 110, 496, 156, 146, 155, 111, 177, 66, 178, 11, 139, 1, 111, 1, 68, 12, 39, 67, 1, 111, 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="mouse_entered" from="OptionsButton" to="." method="_on_OptionsButton_mouse_entered"]
 [connection signal="mouse_exited" from="OptionsButton" to="." method="_on_OptionsButton_mouse_exited"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="mouse_entered" from="QuitButton" to="." method="_on_QuitButton_mouse_entered"]
 [connection signal="mouse_exited" from="QuitButton" to="." method="_on_QuitButton_mouse_exited"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
