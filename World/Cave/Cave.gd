@@ -28,7 +28,6 @@ onready var playerColloision = $Player/CollisionShape2D
 onready var RedLantern = preload("res://World/Cave/objects/red_lantern.tscn")
 onready var GreenLantern = preload("res://World/Cave/objects/green_lantern.tscn")
 onready var BlueLantern = preload("res://World/Cave/objects/blue_lantern.tscn")
-onready var ninjaMob = preload("res://World/Cave/mobs/ninja.tscn")
 onready var genius = preload("res://World/Cave/mobs/genius.tscn")
 
 
