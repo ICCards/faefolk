@@ -1,10 +1,10 @@
 extends Node
 
-#const DEFAULT_IP = "198.211.104.56"
-#const DEFAULT_PORT = 45124
+const DEFAULT_IP = "198.211.104.56"
+const DEFAULT_PORT = 45124
 
-const DEFAULT_IP = "127.0.0.1"
-const DEFAULT_PORT = 65124
+#const DEFAULT_IP = "127.0.0.1"
+#const DEFAULT_PORT = 65124
 
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
@@ -31,6 +31,8 @@ func _connect_to_server():
 	
 func _player_connected(id):
 	print("New Player " + str(id) + " Connected")
+	if get_node("/root/PlayerHomeFarm").mark_for_despawn.has(id):
+		get_node("/root/PlayerHomeFarm").mark_for_despawn.erase(id)
 	
 func _player_disconnected(player_id):
 	print("Player " + str(player_id) + " Disonnected")

@@ -46,7 +46,7 @@ var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
 var decorations = []
-
+var mark_for_despawn = []
 func spawnPlayer(value):
 	#print("My Character")
 	#print(value["c"])
@@ -69,10 +69,11 @@ func spawnNewPlayer(player):
 		add_child(new_player)
 		
 func DespawnPlayer(player_id):
+	mark_for_despawn.append(player_id)
 	if has_node(str(player_id)):
-		yield(get_tree().create_timer(0.2), "timeout")
-		for buffer in world_state_buffer:
-			buffer.erase(player_id)
+		#yield(get_tree().create_timer(0.5), "timeout")
+#		for buffer in world_state_buffer:
+#			buffer.erase(player_id)
 		var player = get_node(str(player_id))
 		remove_child(player)
 		player.queue_free()
@@ -118,7 +119,8 @@ func _physics_process(delta):
 					var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
 					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
-					spawnNewPlayer(world_state_buffer[2]["players"][player])
+					if not mark_for_despawn.has(player):
+						spawnNewPlayer(world_state_buffer[2]["players"][player])
 
 		elif render_time > world_state_buffer[1].t:
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
