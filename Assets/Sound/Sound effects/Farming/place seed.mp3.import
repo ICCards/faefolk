@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/place seed.mp3-944f8511f57c7b1549994239f0987e32.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Farming/place seed.mp3"
+dest_files=[ "res://.import/place seed.mp3-944f8511f57c7b1549994239f0987e32.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
