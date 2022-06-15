@@ -21,9 +21,8 @@ var invisible_planted_crop_cells
 var fence_tiles
 var object_tiles
 var path_tiles
-
-const _character = preload("res://Global/Data/Characters.gd")
-onready var character = _character.new()
+var delta
+var character
 
 onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObject.tscn")
 onready var PlantedCrop = preload("res://World/Objects/Farm/PlantedCrop.tscn")
@@ -49,6 +48,7 @@ var player_state
 var animation = "idle_down"
 
 func _ready():
+	set_physics_process(false)
 	setPlayerState(get_parent())
 	setPlayerTexture(animation)
 	$FootstepsSound.stream = Sounds.current_footsteps_sound
@@ -65,7 +65,8 @@ func _ready():
 
 var is_mouse_over_hotbar = false
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
+	delta = _delta
 	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
 	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:
 		is_mouse_over_hotbar = true
@@ -93,16 +94,12 @@ func _process(delta) -> void:
 func _unhandled_input(event):
 	if Input.is_action_pressed("ui_up"):
 		direction = "UP"
-		sendAction(MOVEMENT,direction)
 	if Input.is_action_pressed("ui_down"):
 		direction = "DOWN"
-		sendAction(MOVEMENT,direction)
 	if Input.is_action_pressed("ui_left"):
 		direction = "LEFT"
-		sendAction(MOVEMENT,direction)
 	if Input.is_action_pressed("ui_right"):
 		direction = "RIGHT"
-		sendAction(MOVEMENT,direction)
 	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
 		idle_state(direction)
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false and !is_mouse_over_hotbar:
@@ -126,11 +123,10 @@ func _unhandled_input(event):
 		$PlaceItemsUI/ItemToPlace.visible = false
 		$PlaceItemsUI/RotateIcon.visible = false
 
-func sendAction(action,value): 
+func sendAction(action,data): 
 	match action:
 		(MOVEMENT):
-			var message = {"T": Server.client_clock, "I": value}
-			Server.action("MOVEMENT",message)
+			Server.action("MOVEMENT",data)
 		(SWING):
 			pass
 	
@@ -281,20 +277,30 @@ func movement_state(delta):
 		input_vector.y -= 1.0
 		direction = "UP"
 		walk_state(direction)
+		var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
+		sendAction(MOVEMENT,data)
 	if Input.is_action_pressed("ui_down"):
 		input_vector.y += 1.0
 		direction = "DOWN"
 		walk_state(direction)
+		var data = {"p":position,"d":direction,"t":Server.client_clock}
+		sendAction(MOVEMENT,data)
 	if Input.is_action_pressed("ui_left"):
 		input_vector.x -= 1.0
 		direction = "LEFT"
 		walk_state(direction)
+		var data = {"p":position,"d":direction,"t":Server.client_clock}
+		sendAction(MOVEMENT,data)
 	if Input.is_action_pressed("ui_right"):
 		input_vector.x += 1.0
 		direction = "RIGHT"
-		walk_state(direction)		
+		walk_state(direction)
+		var data = {"p":position,"d":direction,"t":Server.client_clock}
+		sendAction(MOVEMENT,data)		
 	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
 		idle_state(direction)
+		var data = {"p":position,"d":direction,"t":Server.client_clock}
+		sendAction(MOVEMENT,data)
 		$FootstepsSound.stream_paused = true
 			
 	input_vector = input_vector.normalized()

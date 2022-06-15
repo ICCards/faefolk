@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://InventoryLogic/Hotbar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
-[ext_resource path="res://World/Player/Camera2D.gd" type="Script" id=7]
 [ext_resource path="res://World/Player/PlayerStatsUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Player/CurrentTimeUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=10]
@@ -739,15 +738,6 @@ script = ExtResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.9, 0.9 )
-script = ExtResource( 7 )
-
-[node name="Limits" type="Node" parent="Camera2D"]
-
-[node name="BottomRight" type="Position2D" parent="Camera2D/Limits"]
-position = Vector2( 1004, 586 )
-
-[node name="TopLeft" type="Position2D" parent="Camera2D/Limits"]
-position = Vector2( -453, -260 )
 
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 6 )

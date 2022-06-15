@@ -1,10 +1,10 @@
 extends Node
 
-const DEFAULT_IP = "198.211.104.56"
-const DEFAULT_PORT = 45124
+#const DEFAULT_IP = "198.211.104.56"
+#const DEFAULT_PORT = 45124
 
-#const DEFAULT_IP = "127.0.0.1"
-#const DEFAULT_PORT = 65124
+const DEFAULT_IP = "127.0.0.1"
+const DEFAULT_PORT = 65124
 
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
@@ -15,11 +15,8 @@ var client_clock = 0
 var delta_latency = 0
 var decimal_collector : float = 0
 var latency_array = []
-
+var isSpawned = false
 var local_player_id = 0
-sync var players = {}
-sync var player_data = {}
-
 func _ready():
 	_connect_to_server()
 	
@@ -35,8 +32,8 @@ func _connect_to_server():
 func _player_connected(id):
 	print("New Player " + str(id) + " Connected")
 	
-func _player_disconnected(id):
-	print("Player " + str(id) + " Disonnected")
+func _player_disconnected(player_id):
+	print("Player " + str(player_id) + " Disonnected")
 	
 
 func _connected_ok():
@@ -47,7 +44,9 @@ func _connected_ok():
 	timer.autostart = true
 	timer.connect("timeout", self, "DetermineLatency")
 	self.add_child(timer)
-	_getCharacter()
+	var player_id = get_tree().get_network_unique_id()
+	print(player_id)
+	#_getCharacter()
 	
 func _connected_fail():
 	print("Failed to connect")
@@ -56,18 +55,16 @@ func _connected_fail():
 func _server_disconnected():
 	print("Server disconnected")
 	
-remote func SpawnPlayer(player_id, spawn_position):
-	print("new player")
-	print(player_id)
-	print(spawn_position)
-	print("spawning player")
+#remote func SpawnPlayer(player):
+#	get_node("/root/PlayerHomeFarm").spawnPlayer(player)
+		
 
 remote func DespawnPlayer(player_id):
 	print('despawn player')
 	get_node("/root/PlayerHomeFarm").DespawnPlayer(player_id)
 	
-func message_send(message):
-	rpc_unreliable_id(1, "message_send", message)
+#func message_send(message):
+#	rpc_unreliable_id(1, "message_send", message)
 
 remote func updateState(state):
 	get_node("/root/PlayerHomeFarm").UpdateWorldState(state)
@@ -100,36 +97,38 @@ remote func ReturnLatency(client_time):
 			else:
 				total_latency += latency_array[i]
 		delta_latency = (total_latency / latency_array.size())
-		print("New Latency ", latency)
+		#print("New Latency ", latency)
 		latency_array.clear()
 		
 		
 
 
-remote func ReceiveCharacter(player, player_id):
-	print("Fetched  "+player.character)
-	print("player id  "+str(player_id))
-	if player_id == get_tree().get_network_unique_id():
-		get_node("/root/PlayerHomeFarm/Player").character.LoadPlayerCharacter(player.character) 
-	else:
-		get_node("/root/PlayerHomeFarm/" + str(player_id)).character.LoadPlayerCharacter(player.character) 
+#remote func ReceiveCharacter(player, player_id):
+#	print("Fetched  "+player.character)
+#	print("player id  "+str(player_id))
+#	if player_id == get_tree().get_network_unique_id():
+#		get_node("/root/PlayerHomeFarm/Player").character.LoadPlayerCharacter(player.character) 
 
-func _getCharacterById(player_id):
-	rpc_id(1, "GetCharacterById", player_id)
+#func _getCharacterById(player_id):
+	#rpc_id(1, "GetCharacterById", player_id)
 	
 
-func _getCharacter():
-	rpc_id(1,"GetCharacter")
+#func _getCharacter():
+	#rpc_id(1,"GetCharacter")
 	
-remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, player_id):
-	print('receive playher swing')
-	if player_id == get_tree().get_network_unique_id():
-		pass
-	else:
-		get_node("/root/PlayerHomeFarm/" + str(player_id)).swing_dict[spawn_time] = {"Position": position, "Direction": direction, "ToolName": tool_name}
+#remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, player_id):
+	#print('receive playher swing')
+	#if player_id == get_tree().get_network_unique_id():
+		#pass
+	#else:
+		#get_node("/root/PlayerHomeFarm/" + str(player_id)).swing_dict[spawn_time] = {"Position": position, "Direction": direction, "ToolName": tool_name}
 	
-func action(type,input):
-	rpc_id(1, "action", type, input)
+func action(type,data):
+	rpc_unreliable_id(1, "action", type, data)
 	
 remote func receiveAction(player_id,type,position,direction,time):
-	get_node("/root/PlayerHomeFarm/" + str(player_id))
+	if not player_id == get_tree().get_network_unique_id():
+		print(str(player_id) + "Moved to")
+		print(str(position))
+		print(direction)
+		get_node("/root/PlayerHomeFarm/" + str(player_id)).MovePlayer(position, direction)

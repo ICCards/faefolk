@@ -20,7 +20,7 @@ onready var fence_tiles = $DecorationTiles/FenceAutoTile
 onready var placable_object_tiles = $DecorationTiles/PlacableObjectTiles
 onready var path_tiles = $DecorationTiles/PlacablePathTiles
 
-onready var Player = $Player
+onready var Player = preload("res://World/Player/Player.tscn")
 
 var rng = RandomNumberGenerator.new()
 
@@ -40,45 +40,44 @@ const NUM_GRASS_BUNCHES = 150
 const NUM_GRASS_TILES = 75
 const NUM_FLOWER_TILES = 250
 const MAX_GRASS_BUNCH_SIZE = 24
-
+const _character = preload("res://Global/Data/Characters.gd")
 var Player_template = preload("res://World/Player/PlayerTemplate.tscn")
-
-func SpawnNewPlayer(player_id, spawn_position):
-	print('SPAWN PLAYER')
-	if get_tree().get_network_unique_id() == player_id:
-		pass
-	else:
-		if not has_node(str(player_id)):
-			var new_player = Player_template.instance()
-			new_player.getCharacterById(player_id)
-			new_player.position = spawn_position
-			new_player.name = str(player_id)
-			add_child(new_player)
-		
-func DespawnPlayer(player_id):
-	if has_node(str(player_id)):
-		#yield(get_tree().create_timer(0.2), "timeout")
-		players.erase(player_id)
-		get_node(str(player_id)).queue_free()
-
-const PlayerScene = preload("res://World/Player/Player.tscn")
-
-func spawn_player():
-	var player = Player.instance()
-	player.initialize_camera_limits(Vector2(0, -64), Vector2(10000, 10000))
-	add_child(player)
-	player.position = Vector2(100, 100)
-
-
 var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
 var decorations = []
-var players = []
-var world_state = {}
 
-func UpdateWorldState(_world_state):
-	world_state = _world_state
+func spawnPlayer(value):
+	#print("My Character")
+	#print(value["c"])
+	var player = Player.instance()
+	player.initialize_camera_limits(Vector2(-1632, 0), Vector2(2016, 2912))
+	player.position = value["p"]
+	player.name = str(value["id"])
+	player.character = _character.new()
+	player.character.LoadPlayerCharacter(value["c"]) 
+	add_child(player)
+
+func spawnNewPlayer(player):
+	if not has_node(str(player["id"])):
+		print("spawning")
+		var new_player = Player_template.instance()
+		new_player.position = player["p"]
+		new_player.name = str(player["id"])
+		new_player.character = _character.new()
+		new_player.character.LoadPlayerCharacter(player["c"]) 
+		add_child(new_player)
+		
+func DespawnPlayer(player_id):
+	if has_node(str(player_id)):
+		yield(get_tree().create_timer(0.2), "timeout")
+		for buffer in world_state_buffer:
+			buffer.erase(player_id)
+		var player = get_node(str(player_id))
+		remove_child(player)
+		player.queue_free()
+
+func UpdateWorldState(world_state):					
 #	if decorations.empty():
 #		for decoration in world_state.decoration_state.keys():
 #			var treeObject = TreeObject.instance()
@@ -96,78 +95,44 @@ func UpdateWorldState(_world_state):
 #				add_child(treeObject)
 #				treeObject.position = world_state.decoration_state[decoration]["p"]
 #				decorations.append(decoration)
-#	if world_state["T"] > last_world_state:
-#		last_world_state = world_state["T"]
-#		var tempState = {}
-#		tempState["players"] = world_state["players"]
-#		tempState["T"] = world_state["T"]
-#		world_state_buffer.append(tempState)
+	if world_state["t"] > last_world_state:
+		last_world_state = world_state["t"]
+		world_state_buffer.append(world_state)
 
 func _physics_process(delta):
-	if not world_state.empty():
-		if players.empty():
-			for player_id in world_state["players"]:
-				print("spawning player")
-				SpawnNewPlayer(player_id, Vector2(920,496))
-				players.append(player_id)
-		else:
-			for player_id in world_state["players"]:
-				if not players.has(player_id):
-					print("spawning player")
-					SpawnNewPlayer(player_id, Vector2(920,496))
-					players.append(player_id)
-#	var render_time = Server.client_clock - interpolation_offset
-#	if world_state_buffer.size() > 1:
-#		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
-#			world_state_buffer.remove(0)
-#		if world_state_buffer.size() > 2:
-#			for player in world_state_buffer[2]["player_state"].keys():
-#				if str(player) == "T":
-#					continue
-#				if str(player) == str(get_tree().get_network_unique_id()):
-#					continue
-#				if not world_state_buffer[1]["player_state"].has(player):
-#					continue
-#				if has_node(str(player)):
-#					pass
-#				else:
-#					print("spawning player")
-#					SpawnNewPlayer(player, world_state_buffer[2]["player_state"][player]["P"])
+	var render_time = Server.client_clock - interpolation_offset
+	if world_state_buffer.size() > 1:
+		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].t:
+			world_state_buffer.remove(0)
+		if world_state_buffer.size() > 2:
+			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
+			for player in world_state_buffer[2]["players"].keys():
+				if str(player) == "t":
+					continue
+				if player == get_tree().get_network_unique_id():
+					if not has_node(str(player)):
+						spawnPlayer(world_state_buffer[2]["players"][player])
+				if not world_state_buffer[1]["players"].keys().has(player):
+					continue
+				if has_node(str(player)) and not player == get_tree().get_network_unique_id():
+					var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
+					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+				else:
+					spawnNewPlayer(world_state_buffer[2]["players"][player])
 
-#func _physics_process(delta):
-#	var render_time = Server.client_clock - interpolation_offset
-#	if world_state_buffer.size() > 1:
-#		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
-#			world_state_buffer.remove(0)
-#		if world_state_buffer.size() > 2:
-#			var interpolation_factor = float(render_time - world_state_buffer[1]["T"]) / float(world_state_buffer[2]["T"] - world_state_buffer[1]["T"])
-#			for player in world_state_buffer[2]["player_state"].keys():
-#				if str(player) == "T":
-#					continue
-#				if str(player) == str(get_tree().get_network_unique_id()):
-#					continue
-#				if not world_state_buffer[1]["player_state"].has(player):
-#					continue
-#				if has_node(str(player)):
-#					var new_position = lerp(world_state_buffer[1]["player_state"][player]["P"], world_state_buffer[2]["player_state"][player]["P"], interpolation_factor)
-#					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
-#				else:
-#					print("spawning player")
-#					SpawnNewPlayer(player, world_state_buffer[2]["player_state"][player]["P"])
-#
-#		elif render_time > world_state_buffer[1].T:
-#			var extrapolation_factor = float(render_time - world_state_buffer[0]["T"]) / float(world_state_buffer[1]["T"] - world_state_buffer[0]["T"]) - 1.00
-#			for player in world_state_buffer[1]["player_state"].keys():
-#				if str(player) == "T":
-#					continue
-#				if player == get_tree().get_network_unique_id():
-#					continue
-#				if not world_state_buffer[0]["player_state"].has(player):
-#					continue
-#				if has_node(str(player)):
-#					var position_delta = (world_state_buffer[1]["player_state"][player]["P"] - world_state_buffer[0]["player_state"][player]["P"])
-#					var new_position = world_state_buffer[1]["player_state"][player]["P"] + (position_delta * extrapolation_factor)
-#					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["player_state"][player]["D"])
+		elif render_time > world_state_buffer[1].t:
+			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
+			for player in world_state_buffer[1]["players"].keys():
+				if str(player) == "t":
+					continue
+				if player == get_tree().get_network_unique_id():
+					continue
+				if not world_state_buffer[0]["players"].keys().has(player):
+					continue
+				if has_node(str(player)) and not player == get_tree().get_network_unique_id():
+					var position_delta = (world_state_buffer[1]["players"][player]["p"] - world_state_buffer[0]["players"][player]["p"])
+					var new_position = world_state_buffer[1]["players"][player]["p"] + (position_delta * extrapolation_factor)
+					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 
 
 func _ready():

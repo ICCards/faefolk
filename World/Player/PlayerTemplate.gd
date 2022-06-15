@@ -10,19 +10,24 @@ onready var shoesSprite = $CompositeSprites/Shoes
 onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
-const _character = preload("res://Global/Data/Characters.gd")
-onready var character = _character.new()
+var character
 
 var swing_dict = {}
 var swingActive = false
 var direction = "down"
 
+func _ready():
+	setPlayerTexture("idle_" + direction)
+
 func getCharacterById(player_id):
 	Server._getCharacterById(player_id)
 
 
-func MovePlayer(new_position, direction):
-	direction = direction
+func MovePlayer(new_position, _direction):
+	#print("new_position")
+	if not new_position == position:
+		print(new_position)
+	direction = _direction.to_lower()
 	if !swingActive:
 		animation_player.play("movement")
 		if new_position == position:
