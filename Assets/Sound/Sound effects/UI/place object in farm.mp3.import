@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/place object in farm.mp3-41421142955b8877a659c6e30d405e67.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/UI/place object in farm.mp3"
+dest_files=[ "res://.import/place object in farm.mp3-41421142955b8877a659c6e30d405e67.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/water.mp3-a63ed3d9f4ac3a62084a005f0d33d2d8.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Farming/water.mp3"
+dest_files=[ "res://.import/water.mp3-a63ed3d9f4ac3a62084a005f0d33d2d8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

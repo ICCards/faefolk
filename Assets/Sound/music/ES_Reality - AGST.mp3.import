@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ES_Reality - AGST.mp3-19a8c9de0e1026474c62c470e6fa1231.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/music/ES_Reality - AGST.mp3"
+dest_files=[ "res://.import/ES_Reality - AGST.mp3-19a8c9de0e1026474c62c470e6fa1231.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

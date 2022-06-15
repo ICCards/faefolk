@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ES_Forest 7 - SFX Producer.mp3-b396e5ddbdf24ce2534f805983a4063b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Ambience/ES_Forest 7 - SFX Producer.mp3"
+dest_files=[ "res://.import/ES_Forest 7 - SFX Producer.mp3-b396e5ddbdf24ce2534f805983a4063b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
