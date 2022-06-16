@@ -1,14 +1,15 @@
 extends Node
 
-const DEFAULT_IP = "198.211.104.56"
-const DEFAULT_PORT = 45124
+#const DEFAULT_IP = "198.211.104.56"
+#const DEFAULT_PORT = 45124
 
-#const DEFAULT_IP = "127.0.0.1"
-#const DEFAULT_PORT = 65124
+const DEFAULT_IP = "127.0.0.1"
+const DEFAULT_PORT = 65124
 
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
 var selected_port
+
 
 var latency = 0
 var client_clock = 0
@@ -17,6 +18,9 @@ var decimal_collector : float = 0
 var latency_array = []
 var isSpawned = false
 var local_player_id = 0
+
+var thread = Thread.new()
+
 func _ready():
 	_connect_to_server()
 	
@@ -31,8 +35,8 @@ func _connect_to_server():
 	
 func _player_connected(id):
 	print("New Player " + str(id) + " Connected")
-	if get_node("/root/PlayerHomeFarm").mark_for_despawn.has(id):
-		get_node("/root/PlayerHomeFarm").mark_for_despawn.erase(id)
+	if get_node("/root/World").mark_for_despawn.has(id):
+		get_node("/root/World").mark_for_despawn.erase(id)
 	
 func _player_disconnected(player_id):
 	print("Player " + str(player_id) + " Disonnected")
@@ -48,7 +52,17 @@ func _connected_ok():
 	self.add_child(timer)
 	var player_id = get_tree().get_network_unique_id()
 	print(player_id)
+	print('getting map')
+	rpc_unreliable_id(1, "getMap")
 	#_getCharacter()
+	
+remote func loadMap(map):
+	print("got map")
+	get_node("/root/World").buildMap(map)
+	
+	
+	
+
 	
 func _connected_fail():
 	print("Failed to connect")
@@ -63,13 +77,13 @@ func _server_disconnected():
 
 remote func DespawnPlayer(player_id):
 	print('despawn player')
-	get_node("/root/PlayerHomeFarm").DespawnPlayer(player_id)
+	get_node("/root/World").DespawnPlayer(player_id)
 	
 #func message_send(message):
 #	rpc_unreliable_id(1, "message_send", message)
 
 remote func updateState(state):
-	get_node("/root/PlayerHomeFarm").UpdateWorldState(state)
+	get_node("/root/World").UpdateWorldState(state)
 
 
 func _physics_process(delta):

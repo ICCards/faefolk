@@ -19,6 +19,7 @@ Images="*res://Global/Data/Images.gd"
 JsonData="*res://JSONData/JSONData.gd"
 PlayerInventory="*res://InventoryLogic/PlayerInventory.gd"
 SceneChanger="*res://Global/Functions/SceneChanger.tscn"
+Api="*res://api.gdns"
 DayNightTimer="*res://Global/Functions/DayNightTimer.gd"
 RustCalls="*res://Global/Functions/RustCalls.tscn"
 Sounds="*res://Global/Data/Sounds.gd"
@@ -31,6 +32,7 @@ Server="*res://server/server.gd"
 
 mouse_cursor/custom_image="res://Assets/mouse cursors/Normal Selects.png"
 window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [global]
 
