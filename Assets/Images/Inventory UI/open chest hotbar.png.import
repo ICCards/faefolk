@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small_wood_chest.png-e225b4363e92fab8e66953f7748e6bb7.stex"
+path="res://.import/open chest hotbar.png-ffe232c82517fc7eee5b57faa312c02c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/small_wood_chest.png"
-dest_files=[ "res://.import/small_wood_chest.png-e225b4363e92fab8e66953f7748e6bb7.stex" ]
+source_file="res://Assets/Images/Inventory UI/open chest hotbar.png"
+dest_files=[ "res://.import/open chest hotbar.png-ffe232c82517fc7eee5b57faa312c02c.stex" ]
 
 [params]
 

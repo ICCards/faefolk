@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/large_stone_chest.png-16d1e0d0b803884d8765920ffefa768c.stex"
+path="res://.import/wood chest.png-7804a62b1cdb436e9d12ff5447f092dd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/large_stone_chest.png"
-dest_files=[ "res://.import/large_stone_chest.png-16d1e0d0b803884d8765920ffefa768c.stex" ]
+source_file="res://Assets/Images/inventory_icons/wood chest.png"
+dest_files=[ "res://.import/wood chest.png-7804a62b1cdb436e9d12ff5447f092dd.stex" ]
 
 [params]
 

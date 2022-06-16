@@ -45,6 +45,7 @@ func _on_BigHurtBox_area_entered(_area):
 	if bigOreHits == 0:
 		PlayerFarmApi.set_farm_object_break(position_of_object)
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(0, 24))
 		intitiateItemDrop(variety, Vector2(0, 4))
@@ -53,6 +54,7 @@ func _on_BigHurtBox_area_entered(_area):
 
 	if bigOreHits != 0:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-25, 25), rng.randi_range(-8, 32)))
 		animation_player.play("big_ore_hit_right")
@@ -64,6 +66,7 @@ func _on_SmallHurtBox_area_entered(_area):
 	if smallOreHits == 0:
 		PlayerFarmApi.remove_farm_object(position_of_object)
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 32))
 		intitiateItemDrop(variety, Vector2(0, 28))
@@ -73,6 +76,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		
 	if smallOreHits != 0:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 24))
 		animation_player.play("small_ore_hit_right")

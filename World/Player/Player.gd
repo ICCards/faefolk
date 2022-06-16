@@ -51,9 +51,9 @@ var animation = "idle_down"
 
 func _ready():
 	character.LoadPlayerCharacter("human_male")
-	setPlayerState(get_parent())
 	setPlayerTexture(animation)
-	#$FootstepsSound.stream = Sounds.current_footsteps_sound
+	$FootstepsSound.stream = Sounds.current_footsteps_sound
+	setPlayerState(get_parent())
 	_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
 	$Camera2D/UserInterface/PlayerStatsUI.visible = true
@@ -61,10 +61,15 @@ func _ready():
 	init_day_night_cycle()
 	DayNightTimer.day_timer.connect("timeout", self, "set_night")
 	DayNightTimer.night_timer.connect("timeout", self, "set_day")
-	Sounds.connect("music_volume_changed", self, "set_new_music_volume")
+	PlayerInventory.emit_signal("active_item_updated")
+	Sounds.connect("volume_change", self, "set_new_music_volume")
+	set_new_music_volume()
+
 
 func set_new_music_volume():
 	$BackgroundMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
+	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+	
 
 
 var rng = RandomNumberGenerator.new()
@@ -173,6 +178,8 @@ func place_path_state(event, item_name):
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
 	$PlaceItemsUI/RotateIcon.visible = true
+	$PlaceItemsUI/ItemToPlace.rect_position = Vector2(0,0)
+	$PlaceItemsUI/ItemToPlace.rect_scale = Vector2(1, 1)
 	$PlaceItemsUI/ColorIndicator.scale  = Vector2(1.0 , 1.0)
 	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
@@ -204,12 +211,10 @@ func place_item_state(event, item_name):
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
 	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
-	if item_name == "large wood chest":
-		$PlaceItemsUI/ColorIndicator.scale = Vector2(2, 0)
-
+	if item_name == "wood chest" or item_name == "stone chest":
+		$PlaceItemsUI/ColorIndicator.scale = Vector2(2, 1)
 	elif item_name == "house":
-		$PlaceItemsUI/ColorIndicator.scale = Vector2(11, 4)
-
+		$PlaceItemsUI/ColorIndicator.scale = Vector2(8, 4)
 	else:
 		$PlaceItemsUI/ColorIndicator.scale = Vector2(1, 1)
 
@@ -217,14 +222,35 @@ func place_item_state(event, item_name):
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
 	var location = valid_object_tiles.world_to_map(mousePos)
+	if item_name == "house":
+		$PlaceItemsUI/ItemToPlace.rect_position = Vector2(-3, -301)
+		$PlaceItemsUI/ItemToPlace.rect_scale = Vector2(0.9, 0.9)
+	else:
+		$PlaceItemsUI/ItemToPlace.rect_position = Vector2(0,-32)
+		$PlaceItemsUI/ItemToPlace.rect_scale = Vector2(1, 1)
+		
 	if valid_object_tiles.get_cellv(location) == -1 or position.distance_to(mousePos) > 120:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
-	elif item_name == "large wood chest" and valid_object_tiles.get_cellv(location + Vector2(1,0)) == -1:
+	elif (item_name == "wood chest" or item_name == "stone chest") and valid_object_tiles.get_cellv(location + Vector2(1,0)) == -1:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+#	elif item_name == "house":
+#		if not check_valid_house_tiles(location):
+#			$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			place_placable_object(item_name, location)
+
+func check_valid_house_tiles(location):
+	var invalidFlag = false
+	for x in range(9):
+		for y in range(4):
+			if valid_object_tiles.get_cellv( Vector2(x, y) + location) != -1:
+				invalidFlag = false
+				
+			else: 
+				invalidFlag = true
+	return invalidFlag
 
 
 func place_placable_object(name, location):
@@ -255,21 +281,28 @@ func place_placable_object(name, location):
 		get_parent().call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
 		object_tiles.set_cellv(location, 1)
-	elif name == "large wood chest":
+	elif name == "wood chest":
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
 		tileObjectHurtBox.initialize(name, location)
 		get_parent().call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
 		object_tiles.set_cellv(location, 2)
 		valid_object_tiles.set_cellv(location + Vector2(1, 0), -1)
+	elif name == "stone chest":
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(name, location)
+		get_parent().call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = fence_tiles.map_to_world(location) + Vector2(16, 16)
+		object_tiles.set_cellv(location, 5)
+		valid_object_tiles.set_cellv(location + Vector2(1, 0), -1)
 	elif name == "house":
 		var playerHouseObject = PlayerHouseObject.instance()
 		get_parent().call_deferred("add_child", playerHouseObject)
-		playerHouseObject.global_position = fence_tiles.map_to_world(location)
+		playerHouseObject.global_position = fence_tiles.map_to_world(location) + Vector2(6,6)
 		set_player_house_invalid_tiles(location)
 		
 func set_player_house_invalid_tiles(location):
-	for x in range(11):
+	for x in range(8):
 		for y in range(4):
 			valid_object_tiles.set_cellv(location + Vector2(x, -y), -1)
 
@@ -467,6 +500,9 @@ func set_day():
 var playerState
 func setPlayerState(ownerNode):
 	if str(ownerNode).substr(0, 14) == "PlayerHomeFarm":
+		$FootstepsSound.stream = Sounds.dirt_footsteps
+		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+		$FootstepsSound.play()
 		playerState = "Farm"
 		valid_object_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
 		hoed_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/HoedAutoTiles")
@@ -493,18 +529,6 @@ func _on_EnterDoors_area_exited(_area):
 	sceneTransitionFlag = false
 
 
-
-func _on_SetWoodAreas_area_entered(area):
-	if Sounds.current_footsteps_sound != Sounds.wood_footsteps and $DetectPathUI/DetectWoodPath.get_overlapping_areas().size() <= 0 and $DetectPathUI/DetectStonePath.get_overlapping_areas().size() <= 0:
-		Sounds.current_footsteps_sound = Sounds.wood_footsteps
-		$FootstepsSound.stream = Sounds.current_footsteps_sound
-		$FootstepsSound.play()
-
-func _on_SetWoodAreas_area_exited(area):
-	if $DetectPathUI/DetectWoodPath.get_overlapping_areas().size() <= 0 and $DetectPathUI/DetectStonePath.get_overlapping_areas().size() <= 0:
-		Sounds.current_footsteps_sound = Sounds.dirt_footsteps
-		$FootstepsSound.stream = Sounds.current_footsteps_sound
-		$FootstepsSound.play()
 
 
 func _on_DetectWoodArea_area_entered(area):

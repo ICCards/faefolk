@@ -28,6 +28,7 @@ var stumpHealth: int = 2
 func _on_StumpHurtBox_area_entered(_area):
 	if stumpHealth == 0: 
 		$SoundEffects.stream = Sounds.stump_break
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
@@ -38,6 +39,7 @@ func _on_StumpHurtBox_area_entered(_area):
 	
 	elif stumpHealth != 0 :
 		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		if Player.get_position().x <= get_position().x:
 			stump_animation_player.play("stump_hit_right")

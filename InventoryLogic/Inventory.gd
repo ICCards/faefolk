@@ -12,6 +12,10 @@ func _ready():
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
 	initialize_inventory()
+	$OptionsMenu/Slider1/MusicSlider.value = Sounds.music_volume
+	$OptionsMenu/Slider2/SoundSlider.value = Sounds.sound_volume
+	$OptionsMenu/Slider3/AmbientSlider.value = Sounds.ambient_volume
+	$OptionsMenu/Slider4/FootstepsSlider.value = Sounds.footstep_volume
 
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
@@ -92,23 +96,20 @@ func set_inventory_state():
 	$Title.text = "INVENTORY"
 	
 func set_crafting_state():
+	#set_player_crafting_state(PlayerInventory.return_player_wood_and_stone()[0], PlayerInventory.return_player_wood_and_stone()[1])
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = true
 	$OptionsMenu.visible = false
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory2.png")
 	$Title.text = "CRAFTING"
 	
-
+	
 func set_options_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
 	$OptionsMenu.visible = true
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory3.png")
 	$Title.text = "OPTIONS"	
-	$OptionsMenu/Slider1/MusicSlider.value = Sounds.music_volume
-	$OptionsMenu/Slider2/SoundSlider.value = Sounds.sound_volume
-	$OptionsMenu/Slider3/AmbientSlider.value = Sounds.ambient_volume
-	$OptionsMenu/Slider4/FootstepsSlider.value = Sounds.footstep_volume
 
 func set_quit_state():
 	$InventorySlots.visible = false

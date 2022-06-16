@@ -37,20 +37,18 @@ func refresh_style():
 	else:
 		set('custom_styles/panel', default_style)
 		
+
 func pickFromSlot():
 	remove_child(item)
 	find_parent("UserInterface").add_child(item)
 	item = null
 
-	
-	
 func putIntoSlot(new_item):
 	item = new_item
 	item.position = Vector2(0, 0)
 	find_parent("UserInterface").remove_child(item)
 	add_child(item)
 
-	
 func initialize_item(item_name, item_quantity):
 	if item == null:
 		item = ItemClass.instance()
@@ -59,7 +57,6 @@ func initialize_item(item_name, item_quantity):
 	else:
 		item.set_item(item_name, item_quantity)
 	refresh_style()
-
 
 func removeFromSlot():
 	remove_child(item)

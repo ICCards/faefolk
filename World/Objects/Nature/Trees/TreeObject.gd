@@ -69,8 +69,10 @@ func _on_Hurtbox_area_entered(_area):
 		disable_tree_top_collision_box()
 		PlayerFarmApi.set_farm_object_break(location_of_object)
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
 		$SoundEffectsTree.stream = Sounds.tree_break
+		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
 		if Player.get_position().x <= get_position().x:
 			tree_animation_player.play("tree fall right")
@@ -83,6 +85,7 @@ func _on_Hurtbox_area_entered(_area):
 
 	elif treeHealth != 0:
 		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
 		if variety == 'D' || variety == 'E':
 			initiateLeavesFallingEffect(treeObject, Vector2(0, 50))
@@ -105,6 +108,7 @@ var stumpHealth: int = 2
 func _on_stumpHurtBox_area_entered(_area):
 	if stumpHealth == 0: 
 		$SoundEffectsStump.stream = Sounds.stump_break
+		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
 		stump_animation_player.play("stump_destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
@@ -115,6 +119,7 @@ func _on_stumpHurtBox_area_entered(_area):
 	
 	elif stumpHealth != 0 :
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
 		if Player.get_position().x <= get_position().x:
 			stump_animation_player.play("stump_hit_right")

@@ -31,6 +31,7 @@ func setTreeBranchType(num):
 
 func _on_BranchHurtBox_area_entered(_area):
 	$SoundEffects.stream = Sounds.stump_break
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 	$SoundEffects.play()
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))

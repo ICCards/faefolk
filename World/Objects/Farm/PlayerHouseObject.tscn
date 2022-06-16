@@ -7,15 +7,16 @@
 extents = Vector2( 27, 22.7188 )
 
 [node name="PlayerHouseObject" type="Node2D"]
+scale = Vector2( 0.9, 0.9 )
 script = ExtResource( 2 )
 
 [node name="HouseSprite" type="Sprite" parent="."]
-position = Vector2( 275, -82 )
+position = Vector2( 192, -85 )
 texture = ExtResource( 1 )
 offset = Vector2( -58, -65 )
 
 [node name="Doorway" type="Area2D" parent="."]
-position = Vector2( 176.262, 33.5438 )
+position = Vector2( 93.262, 30.5438 )
 collision_layer = 32
 collision_mask = 32
 input_pickable = false
@@ -25,7 +26,7 @@ position = Vector2( 40, -38 )
 shape = SubResource( 1 )
 
 [node name="Area2D2" type="StaticBody2D" parent="."]
-position = Vector2( 176, 29.9994 )
+position = Vector2( 93, 26.9994 )
 scale = Vector2( 1.00201, 0.973707 )
 collision_layer = 3
 collision_mask = 3
@@ -35,7 +36,7 @@ position = Vector2( -0.997993, -21.5664 )
 polygon = PoolVector2Array( 5.98798, 19.513, 5.98798, 1.02696, 77.8435, 1.02696, 77.8435, 19.513, 173.651, 19.513, 173.651, -97.5653, -89.8195, -97.5653, -89.8195, 19.513 )
 
 [node name="BehindHouseArea" type="Area2D" parent="."]
-position = Vector2( 176, 29.9994 )
+position = Vector2( 93, 26.9994 )
 collision_layer = 4096
 collision_mask = 0
 input_pickable = false

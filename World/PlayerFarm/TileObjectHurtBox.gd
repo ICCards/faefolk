@@ -24,7 +24,7 @@ func _ready():
 		$TypeOfTileArea.set_collision_mask(1024)
 
 func set_dimensions():
-	if item_name == "large wood chest":
+	if item_name == "wood chest" or item_name == "stone chest":
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
 

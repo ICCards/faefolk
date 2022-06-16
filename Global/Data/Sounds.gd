@@ -5,11 +5,7 @@ var sound_volume = 50
 var ambient_volume = 50
 var footstep_volume = 50
 
-signal music_volume_changed
-signal sound_volume_changed
-signal ambient_volume_changed
-signal footstep_volume_changed
-
+signal volume_change
 
 func _ready():
 	set_music_volume(music_volume)
@@ -19,20 +15,19 @@ func _ready():
 
 func set_music_volume(val):
 	music_volume = val
-	emit_signal("music_volume_changed")
+	emit_signal("volume_change")
 
 func set_sound_volume(val):
 	sound_volume = val
-	emit_signal("sound_volume_changed")
+	emit_signal("volume_change")
 	
 func set_ambient_volume(val):
 	ambient_volume = val
-	emit_signal("ambient_volume_changed")
+	emit_signal("volume_change")
 
 func set_footstep_volume(val):
 	footstep_volume = val
-	emit_signal("footstep_volume_changed")
-	
+	emit_signal("volume_change")
 	
 func return_adjusted_sound_db(category, init_sound):
 	if category == "music":
@@ -49,7 +44,7 @@ func return_adjusted_sound_db(category, init_sound):
 		if progress == 0.5:
 			return init_sound
 		elif progress < 0.5:
-			var dis_to_mute =  -(80 + init_sound)
+			var dis_to_mute =  -(60 + init_sound)
 			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
 		elif progress > 0.5:
 			return init_sound + ((progress - 0.5) / 5) * 150

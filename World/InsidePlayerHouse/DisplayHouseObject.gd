@@ -39,11 +39,16 @@ func _ready():
 			$LightFireplaceUI/Fire.visible = true
 			$LightFireplaceUI/Fire.playing = true
 			$LightFireplaceUI/FireplaceLight.visible = true
+			$LightFireplaceUI/FireCrackleSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -6)
 			$LightFireplaceUI/FireCrackleSoundEffects.play()
+			
 	if image == "Window 1" or image == "Window 2":
 		$WindowLightingUI/LargeLight.visible = true
 		$WindowLightingUI/SmallLight.visible = true
-
+	Sounds.connect("volume_change", self, "change_volume")
+	
+func change_volume():
+	$LightFireplaceUI/FireCrackleSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -6)
 
 
 func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
@@ -60,6 +65,7 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 					moveItemFlag = false
 					find_parent("InsidePlayerHome").is_moving_object = null
 					$SoundEffects.stream = Sounds.put_down_house_object
+					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
 		elif !moveItemFlag and find_parent("InsidePlayerHome").is_moving_object == null:
 			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Text Select.png"))
@@ -67,6 +73,7 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 			moveItemFlag = true
 			find_parent("InsidePlayerHome").is_moving_object = true
 			$SoundEffects.stream = Sounds.pick_up_house_object
+			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 
 var moveItemFlag = false
@@ -115,9 +122,12 @@ func light_fire():
 		$LightFireplaceUI/Fire.visible = true
 		$LightFireplaceUI/FireplaceLight.visible = true
 		$LightFireplaceUI/Fire.playing = true
+		$LightFireplaceUI/FireStartSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -4)
 		$LightFireplaceUI/FireStartSoundEffects.play()
 		yield(get_tree().create_timer(0.75), "timeout")
+		$LightFireplaceUI/FireCrackleSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -6)
 		$LightFireplaceUI/FireCrackleSoundEffects.play()
+		
 	else:
 		$LightFireplaceUI/FireCrackleSoundEffects.stop()
 		$LightFireplaceUI/Fire.visible = false

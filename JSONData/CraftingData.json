@@ -23,10 +23,14 @@
          "wood": 1,
          "stone": 1,
      },
-     "large wood chest": {
+     "wood chest": {
         "wood": 10,
-        "stone": 0,
+        "stone": 2,
     },
+     "stone chest": {
+         "wood": 2,
+         "stone": 10
+     },
      "house": {
          "wood": 100,
          "stone": 100

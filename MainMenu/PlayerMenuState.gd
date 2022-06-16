@@ -48,6 +48,7 @@ func _ready():
 	animPlayer.play("idle")
 	$SoundEffects.play()
 	setAnimationTexture("idle_down")
+	character.LoadPlayerCharacter("human_male")
 #	bodySprite.texture = Characters.body_sprites['idle_down']
 #	armsSprite.texture = Characters.arms_sprites['idle_down']
 #	accessorySprite.texture = Characters.acc_sprites['idle_down']

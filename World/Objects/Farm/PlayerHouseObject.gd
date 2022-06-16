@@ -11,8 +11,6 @@ func set_house_transparent():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	
-	
-	
 func set_house_visible():
 	tween.interpolate_property($HouseSprite, "modulate",
 		$HouseSprite.get_modulate(), Color(1, 1, 1, 1), 0.5,

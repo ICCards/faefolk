@@ -30,7 +30,6 @@ func _ready():
 	randomInt = rng.randi_range(1, 5)
 	animationPlayer.play("Animate " + String(randomInt))
 	$SoundEffects.stream = Sounds.pick_up_item
-	
 
 
 var adjustedPosition
@@ -71,13 +70,7 @@ func _physics_process(_delta):
 	velocity.normalized()
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	
-	
-func add_to_inventory():
-	pass
-	
-	
-	
+
 func pick_up_item(body):
 	if PlayerInventory.hotbar.size() == 10 and PlayerInventory.inventory.size() == 16:
 		pass

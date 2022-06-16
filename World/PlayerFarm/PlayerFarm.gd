@@ -175,22 +175,26 @@ func _ready():
 
 	pass
 	
-#	if PlayerFarmApi.player_farm_objects.size() == 0:
-#		generate_farm()
-#		generate_grass_bunches()
-#		generate_grass_tiles()
-#		generate_flower_tiles()
-#	else:
-#		load_farm()
+	if PlayerFarmApi.player_farm_objects.size() == 0:
+		generate_farm()
+		generate_grass_bunches()
+		generate_grass_tiles()
+		generate_flower_tiles()
+	else:
+		load_farm()
 #	load_player_crops()
 #	load_player_placables()
 #	DayNightTimer.connect("advance_day", self, "advance_crop_day")
-
+	Sounds.connect("volume_change", self, "change_ambient_volume")
+	
+func change_ambient_volume():
+	$WaterTiles/WaterfallSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -6 * distance_to_waterfall_interval)
+	$AmbienceSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 
 
 var distance_to_waterfall_interval = 0
 func _process(delta) -> void:
-	$WaterTiles/WaterfallSound.volume_db = -6 * distance_to_waterfall_interval
+	$WaterTiles/WaterfallSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -6 * distance_to_waterfall_interval)
 	distance_to_waterfall_interval = 0 #(Player.get_position().distance_to($WaterTiles/SmokeEffect.get_position()) / 200)
 
 func load_player_placables():
@@ -237,6 +241,7 @@ func find_random_location_and_place_object(name, variety, i):
 	else:
 		find_random_location_and_place_object(name, variety, i)
 
+
 func generate_flower_tiles():
 	for _i in range(NUM_FLOWER_TILES):
 		rng.randomize()
@@ -259,6 +264,7 @@ func generate_grass_bunches():
 			tallGrassObject.position = valid_tiles_for_object_placement.map_to_world(location) + Vector2(16,32)
 			PlayerFarmApi.player_farm_objects.append(["tall grass", tall_grass_types[0], location, null])
 			create_grass_bunch(location, tall_grass_types[0])
+
 
 func create_grass_bunch(loc, variety):
 	rng.randomize()

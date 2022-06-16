@@ -296,10 +296,10 @@ shape = SubResource( 3 )
 position = Vector2( 190, 476 )
 
 [node name="BottomRight" parent="Player/Camera2D/Limits" index="0"]
-position = Vector2( 785, 528 )
+position = Vector2( 786, 544 )
 
 [node name="TopLeft" parent="Player/Camera2D/Limits" index="1"]
-position = Vector2( -161, -19 )
+position = Vector2( -171, -30 )
 
 [connection signal="area_entered" from="Doorway" to="." method="_on_Doorway_area_entered"]
 
