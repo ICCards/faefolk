@@ -13,7 +13,7 @@ var inventory = {
 	1: ["sword", 1], 
 	13: ["green gem", 5],
 	4: ["scythe", 1], 
-#	5: ["yellow onion seeds", 30],
+	5: ["house", 1],
 	6: ["stone ore", 7],
 	7: ["wood", 10],
 	11: ["potato seeds", 28],
@@ -26,7 +26,7 @@ var hotbar = {
 	1: ["pickaxe", 1],
 	2: ["potato seeds", 28],
 	4: ["hoe", 1], 
-	3: ["stone ore", 70],
+	3: ["house", 1],
 #	3: ["bucket", 1],
 	5: ["wood", 52],
 	6: ["bucket", 70],
@@ -183,7 +183,7 @@ func active_item_scroll_down() -> void:
 	emit_signal("active_item_updated")
 
 func hotbar_slot_selected(slot) -> void:
-	active_item_slot =  slot.slot_index
+	active_item_slot = slot.slot_index
 	emit_signal("active_item_updated")
 
 

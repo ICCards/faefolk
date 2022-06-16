@@ -1,16 +1,11 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://InventoryLogic/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory3.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=4]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/placable_object_preview/large wood chest.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/placable_object_preview/torch.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/placable_object_preview/wood fence.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=11]
+[ext_resource path="res://InventoryLogic/CraftingMenu.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Images/Inventory UI/grabber.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Images/Inventory UI/slider no boudaries.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=14]
@@ -172,54 +167,17 @@ margin_bottom = 300.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="CraftingMenu" type="Control" parent="."]
+[node name="CraftingMenu" type="Node2D" parent="."]
 visible = false
-margin_left = -276.0
-margin_top = 304.0
-margin_right = -76.0
-margin_bottom = 368.0
+script = ExtResource( 6 )
 
-[node name="WoodBarrel" type="Sprite" parent="CraftingMenu"]
-modulate = Color( 1, 1, 1, 0.470588 )
-position = Vector2( 410, 14 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 5 )
-
-[node name="WoodBox" type="Sprite" parent="CraftingMenu"]
-modulate = Color( 1, 1, 1, 0.470588 )
-position = Vector2( 541, 32 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 11 )
-
-[node name="WoodFence" type="Sprite" parent="CraftingMenu"]
-modulate = Color( 1, 1, 1, 0.470588 )
-position = Vector2( 674, 12 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 10 )
-
-[node name="Torch" type="Sprite" parent="CraftingMenu"]
-modulate = Color( 1, 1, 1, 0.470588 )
-position = Vector2( 789, -18 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 9 )
-
-[node name="WoodPath" type="Sprite" parent="CraftingMenu"]
-modulate = Color( 1, 1, 1, 0.470588 )
-position = Vector2( 415, 183 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 8 )
-
-[node name="StonePath" type="Sprite" parent="CraftingMenu"]
-modulate = Color( 1, 1, 1, 0.470588 )
-position = Vector2( 555, 181 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
-
-[node name="WoodChest" type="Sprite" parent="CraftingMenu"]
-modulate = Color( 1, 1, 1, 0.470588 )
-position = Vector2( 734, 147 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+[node name="wood_box" type="TextureButton" parent="CraftingMenu"]
+margin_left = 86.0
+margin_top = 244.0
+margin_right = 118.0
+margin_bottom = 308.0
+rect_scale = Vector2( 3, 3 )
+texture_normal = ExtResource( 5 )
 
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
@@ -264,6 +222,7 @@ position = Vector2( 3.05176e-05, -4.76837e-07 )
 polygon = PoolVector2Array( -265.556, -100, -235.556, -82.2222, -198.889, -82.2222, -181.111, -82.2222, -181.111, -87.7778, -151.111, -117.778, -145.556, -135.556, -145.556, -171.111, -151.111, -190, -181.111, -218.889, -193.333, -225.556, -234.444, -225.556, -253.333, -218.889, -264.444, -206.667 )
 
 [node name="OptionsMenu" type="Control" parent="."]
+visible = false
 margin_left = 71.0
 margin_top = 60.0
 margin_right = 111.0
@@ -442,6 +401,7 @@ theme = SubResource( 6 )
 text = "INVENTORY"
 align = 1
 
+[connection signal="gui_input" from="CraftingMenu/wood_box" to="CraftingMenu" method="_on_wood_box_gui_input"]
 [connection signal="pressed" from="Buttons/Inventory" to="." method="_on_Inventory_pressed"]
 [connection signal="pressed" from="Buttons/Crafting" to="." method="_on_Crafting_pressed"]
 [connection signal="pressed" from="Buttons/Options" to="." method="_on_Options_pressed"]

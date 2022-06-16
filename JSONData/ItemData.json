@@ -309,5 +309,10 @@
       "StackSize": 99,
       "Description": "stone path description"
   },
+  "house": {
+      "ItemCategory": "Placable object",
+      "StackSize": 1,
+      "Description": "placable house"
+  }
   
 }

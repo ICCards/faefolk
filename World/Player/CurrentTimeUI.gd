@@ -8,5 +8,4 @@ func _ready():
 	DayNightTimer.connect("advance_season", self, "set_labels")
 
 func set_labels():
-	$DayLabel.text = str(DayNightTimer.day)
-	$SeasonLabel.text = DayNightTimer.season
+	$SeasonLabel.text = DayNightTimer.season + ", " + str(DayNightTimer.day)

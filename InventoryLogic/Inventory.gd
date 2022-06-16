@@ -129,16 +129,13 @@ func _on_ExitButton_input_event(viewport, event, shape_idx):
 
 
 func _on_MusicSlider_value_changed(value):
-	print(value)
 	Sounds.set_music_volume(value)
 
 func _on_SoundSlider_value_changed(value):
 	Sounds.set_sound_volume(value)
 
-
 func _on_AmbientSlider_value_changed(value):
 	Sounds.set_ambient_volume(value)
-
 
 func _on_FootstepsSlider_value_changed(value):
 	Sounds.set_footstep_volume(value)
