@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://InventoryLogic/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -6,9 +6,19 @@
 [ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=4]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=5]
 [ext_resource path="res://InventoryLogic/CraftingMenu.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/placable_object_preview/torch.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood fence.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/Inventory UI/grabber.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Images/Inventory UI/slider no boudaries.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=14]
+[ext_resource path="res://Assets/Images/placable_object_preview/house.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Images/placable_object_preview/large wood chest.png" type="Texture" id=16]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 66.375, 104 )
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 13 )
@@ -168,16 +178,74 @@ rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
 [node name="CraftingMenu" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 6 )
 
-[node name="wood_box" type="TextureButton" parent="CraftingMenu"]
-margin_left = 86.0
-margin_top = 244.0
-margin_right = 118.0
-margin_bottom = 308.0
-rect_scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 5 )
+[node name="WoodBoxArea" type="Area2D" parent="CraftingMenu"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodBoxArea"]
+position = Vector2( 102.625, 332 )
+shape = SubResource( 7 )
+
+[node name="WoodBarrelArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( -20, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodBarrelArea"]
+position = Vector2( 259.75, 332 )
+shape = SubResource( 7 )
+
+[node name="WoodFenceArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 118, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodFenceArea"]
+position = Vector2( 259.75, 332 )
+shape = SubResource( 7 )
+
+[node name="TorchArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 256, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/TorchArea"]
+position = Vector2( 259.75, 332 )
+shape = SubResource( 7 )
+
+[node name="wood box" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 103, 327 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+
+[node name="wood barrel" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 240, 345 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="wood fence" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 378, 335 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 9 )
+
+[node name="torch" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 516, 336 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+
+[node name="wood path" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 116, 533 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 11 )
+
+[node name="stone path" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 265, 537 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 10 )
+
+[node name="large wood chest" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 462, 496 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 16 )
+
+[node name="house" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 174, 689 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 15 )
 
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
@@ -401,7 +469,6 @@ theme = SubResource( 6 )
 text = "INVENTORY"
 align = 1
 
-[connection signal="gui_input" from="CraftingMenu/wood_box" to="CraftingMenu" method="_on_wood_box_gui_input"]
 [connection signal="pressed" from="Buttons/Inventory" to="." method="_on_Inventory_pressed"]
 [connection signal="pressed" from="Buttons/Crafting" to="." method="_on_Crafting_pressed"]
 [connection signal="pressed" from="Buttons/Options" to="." method="_on_Options_pressed"]

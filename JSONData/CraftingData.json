@@ -28,7 +28,7 @@
         "stone": 0,
     },
      "house": {
-         "wood": 10,
-         "stone": 10
+         "wood": 100,
+         "stone": 100
      }
 }

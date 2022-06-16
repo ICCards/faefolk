@@ -92,18 +92,13 @@ func set_inventory_state():
 	$Title.text = "INVENTORY"
 	
 func set_crafting_state():
-	set_player_crafting_state(PlayerInventory.return_player_wood_and_stone()[0], PlayerInventory.return_player_wood_and_stone()[1])
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = true
 	$OptionsMenu.visible = false
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory2.png")
 	$Title.text = "CRAFTING"
 	
-	
-func set_player_crafting_state(wood, stone):
-	print(str(wood) + "-" + str(stone))
-	
-	
+
 func set_options_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
