@@ -48,35 +48,38 @@ const interpolation_offset = 100
 var decorations = []
 var mark_for_despawn = []
 func spawnPlayer(value):
-	#print("My Character")
-	#print(value["c"])
-	var player = Player.instance()
-	player.initialize_camera_limits(Vector2(-1632, 0), Vector2(2016, 2912))
-	player.position = value["p"]
-	player.name = str(value["id"])
-	player.character = _character.new()
-	player.character.LoadPlayerCharacter(value["c"]) 
-	add_child(player)
+	pass
+#	#print("My Character")
+#	#print(value["c"])
+#	var player = Player.instance()
+#	player.initialize_camera_limits(Vector2(-1632, 0), Vector2(2016, 2912))
+#	player.position = value["p"]
+#	player.name = str(value["id"])
+#	player.character = _character.new()
+#	player.character.LoadPlayerCharacter(value["c"]) 
+#	add_child(player)
 
 func spawnNewPlayer(player):
-	if not has_node(str(player["id"])):
-		print("spawning")
-		var new_player = Player_template.instance()
-		new_player.position = player["p"]
-		new_player.name = str(player["id"])
-		new_player.character = _character.new()
-		new_player.character.LoadPlayerCharacter(player["c"]) 
-		add_child(new_player)
+	pass
+#	if not has_node(str(player["id"])):
+#		print("spawning")
+#		var new_player = Player_template.instance()
+#		new_player.position = player["p"]
+#		new_player.name = str(player["id"])
+#		new_player.character = _character.new()
+#		new_player.character.LoadPlayerCharacter(player["c"]) 
+#		add_child(new_player)
 		
 func DespawnPlayer(player_id):
-	mark_for_despawn.append(player_id)
-	if has_node(str(player_id)):
-		#yield(get_tree().create_timer(0.5), "timeout")
-#		for buffer in world_state_buffer:
-#			buffer.erase(player_id)
-		var player = get_node(str(player_id))
-		remove_child(player)
-		player.queue_free()
+	pass
+#	mark_for_despawn.append(player_id)
+#	if has_node(str(player_id)):
+#		#yield(get_tree().create_timer(0.5), "timeout")
+##		for buffer in world_state_buffer:
+##			buffer.erase(player_id)
+#		var player = get_node(str(player_id))
+#		remove_child(player)
+#		player.queue_free()
 
 func UpdateWorldState(world_state):					
 #	if decorations.empty():
