@@ -1,16 +1,57 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://InventoryLogic/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Inventory UI/inventory1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Inventory UI/inventory3.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=4]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/placable_object_preview/large wood chest.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/placable_object_preview/torch.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/placable_object_preview/wood fence.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=11]
+[ext_resource path="res://InventoryLogic/CraftingMenu.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/placable_object_preview/torch.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood fence.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/Inventory UI/grabber.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Images/Inventory UI/slider no boudaries.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=14]
+[ext_resource path="res://Assets/Images/placable_object_preview/house.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
+[ext_resource path="res://InventoryLogic/OptionsMenu.gd" type="Script" id=19]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 48, 78 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 84, 65 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 48, 48 )
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 48, 8 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 48, 8 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 48, 8 )
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 100
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 4 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )
@@ -24,6 +65,7 @@ mouse_filter = 2
 texture = ExtResource( 3 )
 
 [node name="InventorySlots" type="GridContainer" parent="."]
+visible = false
 margin_left = 54.0
 margin_top = 246.0
 margin_right = 606.0
@@ -105,85 +147,143 @@ margin_bottom = 198.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="Slot11" type="Panel" parent="InventorySlots"]
-margin_top = 204.0
-margin_right = 96.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
+[node name="CraftingMenu" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 6 )
 
-[node name="Slot12" type="Panel" parent="InventorySlots"]
-margin_left = 102.0
-margin_top = 204.0
-margin_right = 198.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
+[node name="WoodBoxArea" type="Area2D" parent="CraftingMenu"]
 
-[node name="Slot13" type="Panel" parent="InventorySlots"]
-margin_left = 204.0
-margin_top = 204.0
-margin_right = 300.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodBoxArea"]
+position = Vector2( 103, 333 )
+shape = SubResource( 7 )
 
-[node name="Slot14" type="Panel" parent="InventorySlots"]
-margin_left = 306.0
-margin_top = 204.0
-margin_right = 402.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
+[node name="WoodBarrelArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( -19, 0 )
 
-[node name="Slot15" type="Panel" parent="InventorySlots"]
-margin_left = 408.0
-margin_top = 204.0
-margin_right = 504.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodBarrelArea"]
+position = Vector2( 259.75, 332 )
+shape = SubResource( 7 )
 
-[node name="CraftingMenu" type="Control" parent="."]
-margin_left = -276.0
-margin_top = 304.0
-margin_right = -76.0
-margin_bottom = 368.0
+[node name="WoodFenceArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 118, 0 )
 
-[node name="Sprite" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 410, 14 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodFenceArea"]
+position = Vector2( 259.75, 332 )
+shape = SubResource( 7 )
+
+[node name="TorchArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 255, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/TorchArea"]
+position = Vector2( 259.75, 332 )
+shape = SubResource( 7 )
+
+[node name="WoodChestArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 255, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodChestArea"]
+position = Vector2( -99, 514 )
+shape = SubResource( 8 )
+
+[node name="StoneChestArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 255, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/StoneChestArea"]
+position = Vector2( -55, 680 )
+shape = SubResource( 8 )
+
+[node name="WoodPathArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 255, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodPathArea"]
+position = Vector2( 92, 505 )
+shape = SubResource( 9 )
+
+[node name="StonePathArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 255, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/StonePathArea"]
+position = Vector2( 239, 505 )
+shape = SubResource( 9 )
+
+[node name="HouseArea" type="Area2D" parent="CraftingMenu"]
+position = Vector2( 255, 0 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/HouseArea"]
+polygon = PoolVector2Array( 117, 760, 246, 760, 246, 645, 181, 580, 114, 649 )
+
+[node name="wood box" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 103, 327 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 
-[node name="Sprite2" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 541, 32 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 11 )
-
-[node name="Sprite3" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 674, 12 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 10 )
-
-[node name="Sprite4" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 789, -18 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 9 )
-
-[node name="Sprite5" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 415, 183 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 8 )
-
-[node name="Sprite6" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 555, 181 )
+[node name="wood barrel" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 240, 345 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 7 )
 
-[node name="Sprite7" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 734, 147 )
+[node name="wood fence" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 378, 335 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
+
+[node name="torch" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 516, 336 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+
+[node name="wood path" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 347, 505 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 11 )
+
+[node name="stone path" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 494, 505 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 10 )
+
+[node name="wood chest" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 156, 490 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 16 )
+
+[node name="stone chest" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 200, 657 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+
+[node name="house" type="Sprite" parent="CraftingMenu"]
+position = Vector2( 436, 673 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 15 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="CraftingMenu"]
+
+[node name="Tween" type="Tween" parent="CraftingMenu"]
+
+[node name="CraftableItemDescription" type="Node2D" parent="CraftingMenu"]
+scale = Vector2( 2.5, 2.5 )
+
+[node name="Background" type="Sprite" parent="CraftingMenu/CraftableItemDescription"]
+texture = ExtResource( 17 )
+
+[node name="Title" type="Label" parent="CraftingMenu/CraftableItemDescription"]
+margin_left = -41.0
+margin_top = -15.0
+margin_right = 414.0
+margin_bottom = 79.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 4 )
+text = "House"
+
+[node name="Materials" type="Label" parent="CraftingMenu/CraftableItemDescription"]
+margin_left = -41.0
+margin_top = 3.0
+margin_right = 481.0
+margin_bottom = 97.0
+rect_scale = Vector2( 0.1, 0.1 )
+theme = ExtResource( 4 )
+text = "4 wood - 10 stone"
 
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
@@ -227,17 +327,219 @@ margin_bottom = 412.0
 position = Vector2( 3.05176e-05, -4.76837e-07 )
 polygon = PoolVector2Array( -265.556, -100, -235.556, -82.2222, -198.889, -82.2222, -181.111, -82.2222, -181.111, -87.7778, -151.111, -117.778, -145.556, -135.556, -145.556, -171.111, -151.111, -190, -181.111, -218.889, -193.333, -225.556, -234.444, -225.556, -253.333, -218.889, -264.444, -206.667 )
 
+[node name="OptionsMenu" type="Control" parent="."]
+margin_left = 71.0
+margin_top = 63.0
+margin_right = 111.0
+margin_bottom = 103.0
+script = ExtResource( 19 )
+
+[node name="MusicLabel" type="Label" parent="OptionsMenu"]
+margin_left = 248.0
+margin_top = 285.0
+margin_right = 457.0
+margin_bottom = 346.0
+theme = ExtResource( 14 )
+text = "Music vol."
+
+[node name="SoundLabel" type="Label" parent="OptionsMenu"]
+margin_left = 248.0
+margin_top = 365.0
+margin_right = 498.0
+margin_bottom = 430.0
+theme = ExtResource( 14 )
+text = "Sound vol."
+
+[node name="AmbientLabel" type="Label" parent="OptionsMenu"]
+margin_left = 248.0
+margin_top = 445.0
+margin_right = 502.0
+margin_bottom = 506.0
+theme = ExtResource( 14 )
+text = "Ambient vol."
+
+[node name="FootstepLabel" type="Label" parent="OptionsMenu"]
+margin_left = 248.0
+margin_top = 525.0
+margin_right = 510.0
+margin_bottom = 586.0
+theme = ExtResource( 14 )
+text = "Footstep vol."
+
+[node name="Slider1" type="Control" parent="OptionsMenu"]
+margin_left = -11.0
+margin_top = 270.0
+margin_right = -11.0
+margin_bottom = 270.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="MusicSlider" type="HSlider" parent="OptionsMenu/Slider1"]
+margin_right = 59.0
+margin_bottom = 16.0
+custom_icons/grabber_disabled = ExtResource( 12 )
+custom_icons/grabber_highlight = ExtResource( 12 )
+custom_icons/grabber = ExtResource( 12 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+
+[node name="LeftBoundary" type="TextureRect" parent="OptionsMenu/Slider1"]
+margin_left = -4.25
+margin_top = 3.75
+margin_right = -0.25
+margin_bottom = 11.75
+texture = ExtResource( 12 )
+
+[node name="RightBoundary" type="TextureRect" parent="OptionsMenu/Slider1"]
+margin_left = 59.0
+margin_top = 3.75
+margin_right = 63.0
+margin_bottom = 11.75
+texture = ExtResource( 12 )
+
+[node name="Slider2" type="Control" parent="OptionsMenu"]
+margin_left = -11.0
+margin_top = 350.0
+margin_right = -11.0
+margin_bottom = 350.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="SoundSlider" type="HSlider" parent="OptionsMenu/Slider2"]
+margin_right = 59.0
+margin_bottom = 16.0
+custom_icons/grabber_disabled = ExtResource( 12 )
+custom_icons/grabber_highlight = ExtResource( 12 )
+custom_icons/grabber = ExtResource( 12 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+
+[node name="LeftBoundary" type="TextureRect" parent="OptionsMenu/Slider2"]
+margin_left = -4.25
+margin_top = 3.75
+margin_right = -0.25
+margin_bottom = 11.75
+texture = ExtResource( 12 )
+
+[node name="RightBoundary" type="TextureRect" parent="OptionsMenu/Slider2"]
+margin_left = 59.0
+margin_top = 3.75
+margin_right = 63.0
+margin_bottom = 11.75
+texture = ExtResource( 12 )
+
+[node name="Slider3" type="Control" parent="OptionsMenu"]
+margin_left = -11.0
+margin_top = 430.0
+margin_right = -11.0
+margin_bottom = 430.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="AmbientSlider" type="HSlider" parent="OptionsMenu/Slider3"]
+margin_right = 59.0
+margin_bottom = 16.0
+custom_icons/grabber_disabled = ExtResource( 12 )
+custom_icons/grabber_highlight = ExtResource( 12 )
+custom_icons/grabber = ExtResource( 12 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+
+[node name="LeftBoundary" type="TextureRect" parent="OptionsMenu/Slider3"]
+margin_left = -4.25
+margin_top = 3.75
+margin_right = -0.25
+margin_bottom = 11.75
+texture = ExtResource( 12 )
+
+[node name="RightBoundary" type="TextureRect" parent="OptionsMenu/Slider3"]
+margin_left = 59.0
+margin_top = 3.75
+margin_right = 63.0
+margin_bottom = 11.75
+texture = ExtResource( 12 )
+
+[node name="Slider4" type="Control" parent="OptionsMenu"]
+margin_left = -11.0
+margin_top = 510.0
+margin_right = -11.0
+margin_bottom = 510.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="FootstepsSlider" type="HSlider" parent="OptionsMenu/Slider4"]
+margin_right = 59.0
+margin_bottom = 16.0
+custom_icons/grabber_disabled = ExtResource( 12 )
+custom_icons/grabber_highlight = ExtResource( 12 )
+custom_icons/grabber = ExtResource( 12 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+
+[node name="LeftBoundary" type="TextureRect" parent="OptionsMenu/Slider4"]
+margin_left = -4.25
+margin_top = 3.75
+margin_right = -0.25
+margin_bottom = 11.75
+texture = ExtResource( 12 )
+
+[node name="RightBoundary" type="TextureRect" parent="OptionsMenu/Slider4"]
+margin_left = 59.0
+margin_top = 3.75
+margin_right = 63.0
+margin_bottom = 11.75
+texture = ExtResource( 12 )
+
+[node name="SoundTitle" type="Label" parent="OptionsMenu"]
+margin_left = -17.0
+margin_top = 171.0
+margin_right = 256.0
+margin_bottom = 267.0
+theme = ExtResource( 4 )
+text = "SOUND:"
+
 [node name="Title" type="Label" parent="."]
 margin_left = 71.0
-margin_top = 60.0
+margin_top = 38.0
 margin_right = 543.0
-margin_bottom = 133.0
-theme = ExtResource( 4 )
+margin_bottom = 151.0
+theme = SubResource( 6 )
 text = "INVENTORY"
 align = 1
 
+[connection signal="input_event" from="CraftingMenu/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/TorchArea" to="CraftingMenu" method="_on_TorchArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/TorchArea" to="CraftingMenu" method="_on_TorchArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/TorchArea" to="CraftingMenu" method="_on_TorchArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/HouseArea" to="CraftingMenu" method="_on_HouseArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_exited"]
 [connection signal="pressed" from="Buttons/Inventory" to="." method="_on_Inventory_pressed"]
 [connection signal="pressed" from="Buttons/Crafting" to="." method="_on_Crafting_pressed"]
 [connection signal="pressed" from="Buttons/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="input_event" from="Buttons/ExitButton" to="." method="_on_ExitButton_input_event"]
+[connection signal="value_changed" from="OptionsMenu/Slider1/MusicSlider" to="OptionsMenu" method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/Slider2/SoundSlider" to="OptionsMenu" method="_on_SoundSlider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/Slider3/AmbientSlider" to="OptionsMenu" method="_on_AmbientSlider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/Slider4/FootstepsSlider" to="OptionsMenu" method="_on_FootstepsSlider_value_changed"]

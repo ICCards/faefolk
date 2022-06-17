@@ -11,6 +11,7 @@ func _ready():
 
 func play_sound_effect():
 	if !bodyEnteredFlag:
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("animate")
 

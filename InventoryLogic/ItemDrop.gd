@@ -3,7 +3,8 @@ extends KinematicBody2D
 var velocity = Vector2.ZERO
 const MAX_SPEED = 425
 const ACCELERATION = 460
-onready var itemSprite = $Sprite
+onready var itemSprite = $Sprite/TextureRect
+onready var itemQuantity = $Sprite/Label
 onready var animationPlayer = $AnimationPlayer
 
 
@@ -13,11 +14,12 @@ var being_added_to_inventory = false
 var item_name
 var randomInt
 var rng = RandomNumberGenerator.new()
+var quantity
 
 
-
-func initItemDropType(item_name_input):
-	item_name = item_name_input
+func initItemDropType(_item_name, var _quantity = 1):
+	item_name = _item_name
+	quantity = _quantity
 #	if item_name == "Cobblestone":
 #		item_name = "Stone"
 #	api_call_name = item_name
@@ -26,11 +28,14 @@ func initItemDropType(item_name_input):
 
 func _ready():
 	itemSprite.texture = load("res://Assets/Images/dropped_item_icon/" + item_name + ".png")
+	if quantity == 1:
+		itemQuantity.visible = false
+	else:
+		itemQuantity.text = str(quantity)
 	rng.randomize()
 	randomInt = rng.randi_range(1, 5)
 	animationPlayer.play("Animate " + String(randomInt))
 	$SoundEffects.stream = Sounds.pick_up_item
-	
 
 
 var adjustedPosition
@@ -63,7 +68,7 @@ func _physics_process(_delta):
 				$CollisionShape2D.disabled = true
 				if item_name == "wood" or item_name == "stone ore": 
 					RustCalls.mint_object(item_name)
-				PlayerInventory.add_item_to_hotbar(item_name, 1)
+				PlayerInventory.add_item_to_hotbar(item_name, quantity)
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")
 				queue_free()
@@ -71,13 +76,7 @@ func _physics_process(_delta):
 	velocity.normalized()
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	
-	
-func add_to_inventory():
-	pass
-	
-	
-	
+
 func pick_up_item(body):
 	if PlayerInventory.hotbar.size() == 10 and PlayerInventory.inventory.size() == 16:
 		pass

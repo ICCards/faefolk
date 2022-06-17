@@ -7,16 +7,16 @@
 extents = Vector2( 27, 22.7188 )
 
 [node name="PlayerHouseObject" type="Node2D"]
-scale = Vector2( 0.85, 0.85 )
+scale = Vector2( 0.9, 0.9 )
 script = ExtResource( 2 )
 
 [node name="HouseSprite" type="Sprite" parent="."]
-position = Vector2( -1.32065, -152.956 )
-scale = Vector2( 1.00399, 0.982278 )
+position = Vector2( 192, -85 )
 texture = ExtResource( 1 )
+offset = Vector2( -58, -65 )
 
 [node name="Doorway" type="Area2D" parent="."]
-position = Vector2( -1.05882, 20.5878 )
+position = Vector2( 93.262, 30.5438 )
 collision_layer = 32
 collision_mask = 32
 input_pickable = false
@@ -26,24 +26,24 @@ position = Vector2( 40, -38 )
 shape = SubResource( 1 )
 
 [node name="Area2D2" type="StaticBody2D" parent="."]
-position = Vector2( -1.32065, 17.0434 )
+position = Vector2( 93, 26.9994 )
 scale = Vector2( 1.00201, 0.973707 )
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
-position = Vector2( -1.03022, -21.1283 )
-polygon = PoolVector2Array( 4.69644, 20.5401, 4.25329, 0.559139, 75.8475, 0.559139, 76.3172, 21.7483, 171.42, 21.7483, 171.42, -97.8673, -146.764, -97.8673, -146.764, -25.373, -170.595, -25.244, -170.246, 21.7483 )
+position = Vector2( -0.997993, -21.5664 )
+polygon = PoolVector2Array( 5.98798, 19.513, 5.98798, 1.02696, 77.8435, 1.02696, 77.8435, 19.513, 173.651, 19.513, 173.651, -97.5653, -89.8195, -97.5653, -89.8195, 19.513 )
 
 [node name="BehindHouseArea" type="Area2D" parent="."]
-position = Vector2( -1.32066, 17.0434 )
+position = Vector2( 93, 26.9994 )
 collision_layer = 4096
 collision_mask = 0
 input_pickable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BehindHouseArea"]
 position = Vector2( -1.03228, -7.63163 )
-polygon = PoolVector2Array( -184.444, -110.161, -184.444, -164.279, -101, -202, -104, -217, 40, -357, 182, -221, 183.791, -105.456 )
+polygon = PoolVector2Array( -101.968, -108.368, -101.968, -218.368, 40, -357, 182, -221, 183.791, -105.456 )
 
 [node name="Tween" type="Tween" parent="."]
 

@@ -11,6 +11,7 @@ onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObje
 onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
 
+
 onready var hoed_grass_tiles = $GroundTiles/HoedAutoTiles
 onready var watered_grass_tiles = $GroundTiles/WateredAutoTiles
 onready var invalid_tiles_for_nature_placement = $GroundTiles/InvalidTileForNaturePlacement
@@ -144,22 +145,26 @@ func _ready():
 
 	pass
 	
-#	if PlayerFarmApi.player_farm_objects.size() == 0:
-#		generate_farm()
-#		generate_grass_bunches()
-#		generate_grass_tiles()
-#		generate_flower_tiles()
-#	else:
-#		load_farm()
+	if PlayerFarmApi.player_farm_objects.size() == 0:
+		generate_farm()
+		generate_grass_bunches()
+		generate_grass_tiles()
+		generate_flower_tiles()
+	else:
+		load_farm()
 #	load_player_crops()
 #	load_player_placables()
 #	DayNightTimer.connect("advance_day", self, "advance_crop_day")
-
+	Sounds.connect("volume_change", self, "change_ambient_volume")
+	
+func change_ambient_volume():
+	$WaterTiles/WaterfallSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -6 * distance_to_waterfall_interval)
+	$AmbienceSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 
 
 var distance_to_waterfall_interval = 0
 func _process(delta) -> void:
-	$WaterTiles/WaterfallSound.volume_db = -6 * distance_to_waterfall_interval
+	$WaterTiles/WaterfallSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -6 * distance_to_waterfall_interval)
 	distance_to_waterfall_interval = 0 #(Player.get_position().distance_to($WaterTiles/SmokeEffect.get_position()) / 200)
 
 func load_player_placables():
@@ -206,6 +211,7 @@ func find_random_location_and_place_object(name, variety, i):
 	else:
 		find_random_location_and_place_object(name, variety, i)
 
+
 func generate_flower_tiles():
 	for _i in range(NUM_FLOWER_TILES):
 		rng.randomize()
@@ -228,6 +234,7 @@ func generate_grass_bunches():
 			tallGrassObject.position = valid_tiles_for_object_placement.map_to_world(location) + Vector2(16,32)
 			PlayerFarmApi.player_farm_objects.append(["tall grass", tall_grass_types[0], location, null])
 			create_grass_bunch(location, tall_grass_types[0])
+
 
 func create_grass_bunch(loc, variety):
 	rng.randomize()
@@ -356,13 +363,21 @@ func place_object(item_name, variety, loc, isFullGrowth):
 		tileObjectHurtBox.initialize(item_name, loc)
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
-	elif item_name == "large wood chest":
+	elif item_name == "wood chest":
 		placable_object_tiles.set_cellv(loc, 2)
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
 		tileObjectHurtBox.initialize(item_name, loc)
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
+	elif item_name == "stone chest":
+		placable_object_tiles.set_cellv(loc, 2)
+		valid_tiles_for_object_placement.set_cellv(loc, -1)
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(item_name, loc)
+		call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
+
 	elif item_name == "wood path":
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
 		tileObjectHurtBox.initialize(item_name, loc)
