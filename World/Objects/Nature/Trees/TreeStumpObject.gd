@@ -5,7 +5,7 @@ onready var treeStumpSprite = $TreeSprites/TreeStump
 
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var Player = get_node("/root/PlayerHomeFarm/Player")
+onready var Player = get_node("/root/World/Player")
 var rng = RandomNumberGenerator.new()
 
 onready var world = get_tree().current_scene

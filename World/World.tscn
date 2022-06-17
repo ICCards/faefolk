@@ -99,7 +99,7 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[node name="World" type="Node2D"]
+[node name="World" type="YSort"]
 script = ExtResource( 1 )
 
 [node name="SandTiles" type="TileMap" parent="."]
