@@ -87,27 +87,36 @@ func _on_Quit_pressed():
 func set_inventory_state():
 	$InventorySlots.visible = true
 	$CraftingMenu.visible = false
+	$OptionsMenu.visible = false
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory1.png")
 	$Title.text = "INVENTORY"
 	
 func set_crafting_state():
+	#set_player_crafting_state(PlayerInventory.return_player_wood_and_stone()[0], PlayerInventory.return_player_wood_and_stone()[1])
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = true
+	$OptionsMenu.visible = false
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory2.png")
 	$Title.text = "CRAFTING"
+	
 	
 func set_options_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
+	$OptionsMenu.visible = true
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory3.png")
 	$Title.text = "OPTIONS"	
 
 func set_quit_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
+	$OptionsMenu.visible = false
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory4.png")
 	$Title.text = "QUIT"
+
 
 func _on_ExitButton_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		get_parent().toggle_inventory()
+
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -15,6 +15,10 @@
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/pants/pants.png" type="Texture" id=14]
 [ext_resource path="res://Characters/Human/male/HOLDING/assets/down/shirt.png" type="Texture" id=15]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=19]
+[ext_resource path="res://World/Player/OpenChest.tscn" type="PackedScene" id=20]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -742,17 +746,21 @@ zoom = Vector2( 0.9, 0.9 )
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 6 )
 
-[node name="CurrentTimeUI" parent="Camera2D/UserInterface" instance=ExtResource( 9 )]
+[node name="OpenChest" parent="Camera2D/UserInterface" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 831, 19 )
+position = Vector2( 240, 513 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="CurrentTimeUI" parent="Camera2D/UserInterface" instance=ExtResource( 9 )]
+position = Vector2( 804, 24 )
+scale = Vector2( 0.4, 0.4 )
 
 [node name="PlayerStatsUI" parent="Camera2D/UserInterface" instance=ExtResource( 8 )]
-visible = false
-position = Vector2( 907, 461 )
+position = Vector2( 36, 24 )
+scale = Vector2( 2.3, 2.3 )
 
 [node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 240, 512 )
+position = Vector2( 240, 513 )
 
 [node name="Inventory" parent="Camera2D/UserInterface" instance=ExtResource( 5 )]
 visible = false
@@ -867,27 +875,30 @@ stream = ExtResource( 10 )
 volume_db = -16.0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
-visible = false
-volume_db = -32.0
+autoplay = true
 
 [node name="FootstepsSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0, 11 )
+stream = ExtResource( 19 )
 volume_db = -10.0
 autoplay = true
 
 [node name="PlaceItemsUI" type="Node2D" parent="."]
 
 [node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
-position = Vector2( 0, 16 )
-offset = Vector2( 16, 0 )
+visible = false
+position = Vector2( 0, 32 )
+texture = ExtResource( 17 )
+offset = Vector2( 16, -16 )
 
 [node name="ItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
+visible = false
 modulate = Color( 1, 1, 1, 0.627451 )
 margin_right = 32.0
 margin_bottom = 32.0
 grow_vertical = 0
-rect_pivot_offset = Vector2( 16, 64 )
 mouse_filter = 2
+texture = ExtResource( 18 )
 
 [node name="RotateIcon" type="TextureRect" parent="PlaceItemsUI"]
 visible = false
