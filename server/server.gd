@@ -10,7 +10,6 @@ var network = NetworkedMultiplayerENet.new()
 var selected_IP
 var selected_port
 
-
 var latency = 0
 var client_clock = 0
 var delta_latency = 0
@@ -18,8 +17,22 @@ var decimal_collector : float = 0
 var latency_array = []
 var isSpawned = false
 var local_player_id = 0
-
-var thread = Thread.new()
+var isLoaded = false
+var player_id
+var mapPartsLoaded = 0
+var map = {
+	"dirt":[],
+	"grass":[],
+	"dark_grass":[],
+	"tall_grass":[],
+	"water":[],
+	"tree":[],
+	"ore_large":[],
+	"ore":[],
+	"log":[],
+	"stump":[],
+	"flower":[],
+}
 
 func _ready():
 	_connect_to_server()
@@ -50,19 +63,20 @@ func _connected_ok():
 	timer.autostart = true
 	timer.connect("timeout", self, "DetermineLatency")
 	self.add_child(timer)
-	var player_id = get_tree().get_network_unique_id()
+	player_id = get_tree().get_network_unique_id()
 	print(player_id)
-	print('getting map')
-	rpc_unreliable_id(1, "getMap")
-	#_getCharacter()
+	rpc_unreliable_id(1, "getMap",Server.map.keys()[mapPartsLoaded])
 	
-remote func loadMap(map):
-	print("got map")
-	get_node("/root/World").buildMap(map)
-	
-	
-	
-
+remote func loadMap(value):
+	var key = map.keys()[mapPartsLoaded]
+	print("Loaded " + key)
+	map[key] = value
+	mapPartsLoaded = mapPartsLoaded + 1
+	if not mapPartsLoaded >= map.keys().size():
+		rpc_unreliable_id(1, "getMap",map.keys()[mapPartsLoaded])
+	else:
+		mapPartsLoaded = 0
+		get_node("/root/World").buildMap(map)
 	
 func _connected_fail():
 	print("Failed to connect")
@@ -71,8 +85,8 @@ func _connected_fail():
 func _server_disconnected():
 	print("Server disconnected")
 	
-#remote func SpawnPlayer(player):
-#	get_node("/root/PlayerHomeFarm").spawnPlayer(player)
+remote func SpawnPlayer(player):
+	get_node("/root/World").spawnPlayer(player)
 		
 
 remote func DespawnPlayer(player_id):
@@ -82,8 +96,11 @@ remote func DespawnPlayer(player_id):
 #func message_send(message):
 #	rpc_unreliable_id(1, "message_send", message)
 
+
 remote func updateState(state):
-	get_node("/root/World").UpdateWorldState(state)
+	if isLoaded:
+		get_node("/root/World").UpdateWorldState(state)
+		
 
 
 func _physics_process(delta):

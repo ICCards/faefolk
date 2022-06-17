@@ -3,6 +3,7 @@
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/tilesets/CL_MainLev.png" type="Texture" id=2]
 [ext_resource path="res://Assets/tilesets/grass_tilesets.png" type="Texture" id=3]
+[ext_resource path="res://water.tres" type="TileSet" id=4]
 
 [sub_resource type="TileSet" id=1]
 0/name = "CL_MainLev.png 0"
@@ -98,22 +99,6 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=4]
-0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 480, 1696, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -134,7 +119,9 @@ tile_set = SubResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="WaterTileMap" type="TileMap" parent="."]
-tile_set = SubResource( 4 )
+[node name="Water" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 format = 1
+
+[node name="Players" type="YSort" parent="."]

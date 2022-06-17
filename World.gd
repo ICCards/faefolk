@@ -4,9 +4,7 @@ extends Node2D
 onready var sand = $SandTiles
 onready var grass = $GreenGrassTiles
 onready var darkGrass = $DarkGreenGrassTiles
-onready var water = $WaterTileMap
-
-
+onready var water = $Water
 
 onready var Player = preload("res://World/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate.tscn")
@@ -27,11 +25,11 @@ onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBo
 var rng = RandomNumberGenerator.new()
 
 
-onready var object_types = ["tree", "tree stump", "tree branch", "ore large", "ore small"]
-onready var tall_grass_types = ["dark green", "green", "red", "yellow"]
-onready var treeTypes = ['A','B', 'C', 'D', 'E']
-onready var oreTypes = ["Stone", "Cobblestone"]
-onready var randomBorderTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
+var object_types = ["tree", "tree stump", "tree branch", "ore large", "ore small"]
+var tall_grass_types = ["dark green", "green", "red", "yellow"]
+var treeTypes = ['A','B', 'C', 'D', 'E']
+var oreTypes = ["Stone", "Cobblestone"]
+var randomBorderTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
 var object_name
 var position_of_object
@@ -49,7 +47,7 @@ var world_state_buffer = []
 const interpolation_offset = 100
 var decorations = []
 var mark_for_despawn = []
-	
+
 func spawnPlayer(value):
 	print('gettiing player')
 	if not value.empty():
@@ -57,12 +55,13 @@ func spawnPlayer(value):
 		print(value["c"])
 		var player = Player.instance()
 		#player.initialize_camera_limits(Vector2(0, 0), Vector2(1920, 1080))
-		player.position = value["p"]
 		print(str(value["p"]))
 		player.name = str(value["id"])
 		player.character = _character.new()
 		player.character.LoadPlayerCharacter(value["c"]) 
-		add_child(player)
+		$Players.add_child(player)
+		player.position = sand.map_to_world(value["p"])
+		print('getting map')
 		
 		
 func spawnNewPlayer(player):
@@ -70,11 +69,11 @@ func spawnNewPlayer(player):
 		if not has_node(str(player["id"])):
 			print("spawning")
 			var new_player = Player_template.instance()
-			new_player.position = player["p"]
+			new_player.position = sand.map_to_world(player["p"])
 			new_player.name = str(player["id"])
 			new_player.character = _character.new()
 			new_player.character.LoadPlayerCharacter(player["c"]) 
-			add_child(new_player)
+			$Players.add_child(new_player)
 	
 	
 func DespawnPlayer(player_id):
@@ -95,9 +94,9 @@ func buildMap(map):
 #			grass.set_cell(x, y, 0)
 	
 	for position in map["dirt"]:
-		set_cell(sand, position.x, position.y, 0)
+		_set_cell(sand, position.x, position.y, 0)
 	for position in map["dark_grass"]:
-		set_cell(sand, position.x, position.y, 0)
+		_set_cell(sand, position.x, position.y, 0)
 		grass.set_cellv(position, 0)
 	for position in map["grass"]:
 		grass.set_cellv(position, 0)
@@ -105,12 +104,58 @@ func buildMap(map):
 	for position in map["water"]:
 		darkGrass.set_cellv(position, 0)
 		water.set_cellv(position, 0)
-	
+	for position in map["tall_grass"]:
+		tall_grass_types.shuffle()
+		var variety = tall_grass_types.front()
+		var object = TallGrassObject.instance()
+		object.initialize(variety)
+		object.position = sand.map_to_world(position)
+		add_child_below_node($Players,object)
+	for position in map["flower"]:
+		var object = FlowerObject.instance()
+		object.position = sand.map_to_world(position)
+		add_child_below_node($Players,object)
+	for position in map["tree"]:
+		treeTypes.shuffle()
+		var variety = treeTypes.front()
+		var object = TreeObject.instance()
+		object.initialize(variety, position, true)
+		object.position = sand.map_to_world(position)
+		add_child_below_node($Players,object)
+	for position in map["log"]:
+		treeTypes.shuffle()
+		var variety = treeTypes.front()
+		var object = StumpObject.instance()
+		object.initialize(variety,position)
+		object.position = sand.map_to_world(position)
+		add_child_below_node($Players,object)
+	for position in map["stump"]:
+		treeTypes.shuffle()
+		var variety = treeTypes.front()
+		var object = StumpObject.instance()
+		object.initialize(variety,position)
+		object.position = sand.map_to_world(position)
+		add_child_below_node($Players,object)
+	for position in map["ore_large"]:
+		print(position)
+		oreTypes.shuffle()
+		var variety = oreTypes.front()
+		var object = OreObject.instance()
+		object.initialize(variety,position,true)
+		object.position = sand.map_to_world(position)
+		add_child_below_node($Players,object)
+	for position in map["ore"]:
+		oreTypes.shuffle()
+		var variety = oreTypes.front()
+		var object = SmallOreObject.instance()
+		object.initialize(variety,position)
+		object.position = sand.map_to_world(position)
+		add_child_below_node($Players,object)
 	grass.update_bitmask_region()
 	darkGrass.update_bitmask_region()
 	water.update_bitmask_region()
-		
-func set_cell(tilemap, x, y, id):
+	Server.isLoaded = true
+func _set_cell(tilemap, x, y, id):
 	tilemap.set_cell(x, y, id, false, false, false, get_subtile_with_priority(id,tilemap))
 	
 	
@@ -161,12 +206,11 @@ func _physics_process(delta):
 			for player in world_state_buffer[2]["players"].keys():
 				if str(player) == "t":
 					continue
-				if player == get_tree().get_network_unique_id():
-					if not has_node(str(player)):
-						spawnPlayer(world_state_buffer[2]["players"][player])
-				if not world_state_buffer[1]["players"].keys().has(player):
+				if player == Server.player_id:
 					continue
-				if has_node(str(player)) and not player == get_tree().get_network_unique_id():
+				if has_node(str(player)) and not player == Server.player_id:
+					#print(player)
+					#print(Server.player_id)
 					var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
 					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
@@ -176,13 +220,9 @@ func _physics_process(delta):
 		elif render_time > world_state_buffer[1].t:
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
 			for player in world_state_buffer[1]["players"].keys():
-				if str(player) == "t":
-					continue
-				if player == get_tree().get_network_unique_id():
-					continue
-				if not world_state_buffer[0]["players"].keys().has(player):
-					continue
-				if has_node(str(player)) and not player == get_tree().get_network_unique_id():
+				if has_node(str(player)) and not player == Server.player_id:
+					print("player is me" + player == Server.player_id)
+					print(Server.player_id)
 					var position_delta = (world_state_buffer[1]["players"][player]["p"] - world_state_buffer[0]["players"][player]["p"])
 					var new_position = world_state_buffer[1]["players"][player]["p"] + (position_delta * extrapolation_factor)
 					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
