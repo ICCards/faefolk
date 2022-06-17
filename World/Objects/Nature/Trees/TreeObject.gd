@@ -9,7 +9,7 @@ onready var treeTopSprite = $TreeSprites/TreeTop
 onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-#onready var Player = get_node("/root/PlayerHomeFarm/Player")
+onready var Player = get_node("/root/World/Player")
 var rng = RandomNumberGenerator.new()
 
 

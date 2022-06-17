@@ -1,5 +1,4 @@
-extends Node2D
-
+extends YSort
 
 onready var sand = $SandTiles
 onready var grass = $GreenGrassTiles
@@ -104,13 +103,6 @@ func buildMap(map):
 	for position in map["water"]:
 		darkGrass.set_cellv(position, 0)
 		water.set_cellv(position, 0)
-	for position in map["tall_grass"]:
-		tall_grass_types.shuffle()
-		var variety = tall_grass_types.front()
-		var object = TallGrassObject.instance()
-		object.initialize(variety)
-		object.position = sand.map_to_world(position)
-		add_child_below_node($Players,object)
 	for position in map["flower"]:
 		var object = FlowerObject.instance()
 		object.position = sand.map_to_world(position)
@@ -137,7 +129,6 @@ func buildMap(map):
 		object.position = sand.map_to_world(position)
 		add_child_below_node($Players,object)
 	for position in map["ore_large"]:
-		print(position)
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = OreObject.instance()
@@ -151,10 +142,19 @@ func buildMap(map):
 		object.initialize(variety,position)
 		object.position = sand.map_to_world(position)
 		add_child_below_node($Players,object)
+	for position in map["tall_grass"]:
+		tall_grass_types.shuffle()
+		var variety = tall_grass_types.front()
+		var object = TallGrassObject.instance()
+		object.initialize(variety)
+		object.position = sand.map_to_world(position)
+		add_child_below_node($Players,object)
 	grass.update_bitmask_region()
 	darkGrass.update_bitmask_region()
 	water.update_bitmask_region()
 	Server.isLoaded = true
+	
+	
 func _set_cell(tilemap, x, y, id):
 	tilemap.set_cell(x, y, id, false, false, false, get_subtile_with_priority(id,tilemap))
 	
