@@ -12,10 +12,6 @@ func _ready():
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
 	initialize_inventory()
-	$OptionsMenu/Slider1/MusicSlider.value = Sounds.music_volume
-	$OptionsMenu/Slider2/SoundSlider.value = Sounds.sound_volume
-	$OptionsMenu/Slider3/AmbientSlider.value = Sounds.ambient_volume
-	$OptionsMenu/Slider4/FootstepsSlider.value = Sounds.footstep_volume
 
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
@@ -124,14 +120,3 @@ func _on_ExitButton_input_event(viewport, event, shape_idx):
 		get_parent().toggle_inventory()
 
 
-func _on_MusicSlider_value_changed(value):
-	Sounds.set_music_volume(value)
-
-func _on_SoundSlider_value_changed(value):
-	Sounds.set_sound_volume(value)
-
-func _on_AmbientSlider_value_changed(value):
-	Sounds.set_ambient_volume(value)
-
-func _on_FootstepsSlider_value_changed(value):
-	Sounds.set_footstep_volume(value)

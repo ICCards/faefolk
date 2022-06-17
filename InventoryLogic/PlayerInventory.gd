@@ -1,6 +1,7 @@
 extends Node
 
 signal active_item_updated
+signal clear_chest
 
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
@@ -8,6 +9,7 @@ const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 var viewInventoryMode = false
 var openChestMode = false
+var is_inside_chest_area = false
 var active_item_slot = 0
 
 var inventory = {
@@ -43,6 +45,9 @@ var hotbar = {
 var chest = {
 	2 : ["stone ore", 49]
 }
+
+func clear_chest_data():
+	emit_signal("clear_chest")
 
 func return_player_wood_and_stone():
 	var total_wood = 0
@@ -214,6 +219,18 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 			slot.item.set_item(item_name, new_quantity)
 	else:
 		slot.initialize_item(item_name, new_quantity)
+		
+
+func update_chest_slot_visual(slot_index, item_name, new_quantity):
+	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
+	if slot.item != null:
+		if new_quantity == 0:
+			inventory.erase(slot.slot_index)
+			slot.removeFromSlot()
+		else:
+			slot.item.set_item(item_name, new_quantity)
+	else:
+		slot.initialize_item(item_name, new_quantity)
 
 func remove_item(slot: SlotClass):
 	match slot.slotType:
@@ -230,6 +247,8 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass):
 			hotbar[slot.slot_index] = [item.item_name, item.item_quantity]
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index] = [item.item_name, item.item_quantity]
+		SlotClass.SlotType.CHEST:
+			chest[slot.slot_index] = [item.item_name, item.item_quantity]
 
 
 func add_item_quantity(slot: SlotClass, quantity_to_add: int):

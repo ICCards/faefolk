@@ -4,7 +4,7 @@ var holding_item = null
 func _input(event):
 	if event.is_action_pressed("inventory") and holding_item == null and not PlayerInventory.openChestMode:
 		toggle_inventory()
-	elif event.is_action_pressed("open_door") and holding_item == null and not PlayerInventory.viewInventoryMode:
+	elif event.is_action_pressed("open_door") and holding_item == null and not PlayerInventory.viewInventoryMode and PlayerInventory.is_inside_chest_area:
 		open_chest()
 	if event.is_action_pressed("scroll_up"):
 		PlayerInventory.active_item_scroll_up()

@@ -11,6 +11,7 @@ onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObje
 onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
 
+
 onready var hoed_grass_tiles = $GroundTiles/HoedAutoTiles
 onready var watered_grass_tiles = $GroundTiles/WateredAutoTiles
 onready var invalid_tiles_for_nature_placement = $GroundTiles/InvalidTileForNaturePlacement
@@ -393,13 +394,21 @@ func place_object(item_name, variety, loc, isFullGrowth):
 		tileObjectHurtBox.initialize(item_name, loc)
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
-	elif item_name == "large wood chest":
+	elif item_name == "wood chest":
 		placable_object_tiles.set_cellv(loc, 2)
 		valid_tiles_for_object_placement.set_cellv(loc, -1)
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
 		tileObjectHurtBox.initialize(item_name, loc)
 		call_deferred("add_child", tileObjectHurtBox)
 		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
+	elif item_name == "stone chest":
+		placable_object_tiles.set_cellv(loc, 2)
+		valid_tiles_for_object_placement.set_cellv(loc, -1)
+		var tileObjectHurtBox = TileObjectHurtBox.instance()
+		tileObjectHurtBox.initialize(item_name, loc)
+		call_deferred("add_child", tileObjectHurtBox)
+		tileObjectHurtBox.global_position = valid_tiles_for_object_placement.map_to_world(loc) + Vector2(16, 16)
+
 	elif item_name == "wood path":
 		var tileObjectHurtBox = TileObjectHurtBox.instance()
 		tileObjectHurtBox.initialize(item_name, loc)

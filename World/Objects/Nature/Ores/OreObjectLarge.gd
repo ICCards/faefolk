@@ -89,7 +89,7 @@ func intitiateItemDrop(item, pos):
 	if item == "Stone" or item == "Cobblestone":
 		item = "stone ore"
 	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item)
+	itemDrop.initItemDropType(item, 1)
 	get_parent().call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position + pos
 

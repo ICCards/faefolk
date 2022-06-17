@@ -63,7 +63,7 @@ func intitiateItemDrop(item, pos, amt):
 	for _i in range(amt):
 		rng.randomize()
 		var itemDrop = ItemDrop.instance()
-		itemDrop.initItemDropType(item)
+		itemDrop.initItemDropType(item, 1)
 		get_parent().call_deferred("add_child", itemDrop)
 		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
 

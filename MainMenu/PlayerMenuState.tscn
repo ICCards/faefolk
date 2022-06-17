@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=1]
-[ext_resource path="res://MainMenu/PlayerMenuState.gd" type="Script" id=3]
+[ext_resource path="res://MainMenu/PlayerMenuState.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.93452, 14.6845 )
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=2]
 resource_name = "idle"
 length = 0.8
 loop = true
@@ -95,41 +95,39 @@ tracks/6/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="PlayerInMenu" type="Node2D"]
+[node name="PlayerMenuState" type="KinematicBody2D"]
+script = ExtResource( 2 )
 
-[node name="PlayerMenuState" type="KinematicBody2D" parent="."]
-script = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMenuState"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.142857, 2.14286 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
-[node name="CompositeSprites" type="Node2D" parent="PlayerMenuState"]
+[node name="CompositeSprites" type="Node2D" parent="."]
 
-[node name="Body" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
+[node name="Body" type="Sprite" parent="CompositeSprites"]
 hframes = 4
 
-[node name="Arms" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
+[node name="Arms" type="Sprite" parent="CompositeSprites"]
 hframes = 4
 
-[node name="Pants" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
+[node name="Pants" type="Sprite" parent="CompositeSprites"]
 hframes = 4
 
-[node name="Shirts" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
+[node name="Shirts" type="Sprite" parent="CompositeSprites"]
 hframes = 4
 
-[node name="HeadAtr" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
+[node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 hframes = 4
 
-[node name="Accessory" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
+[node name="Accessory" type="Sprite" parent="CompositeSprites"]
 hframes = 4
 
-[node name="Shoes" type="Sprite" parent="PlayerMenuState/CompositeSprites"]
+[node name="Shoes" type="Sprite" parent="CompositeSprites"]
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerMenuState/CompositeSprites"]
-anims/idle = SubResource( 1 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
+anims/idle = SubResource( 2 )
 
-[node name="SoundEffects" type="AudioStreamPlayer" parent="PlayerMenuState"]
+[node name="FootstepsSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -14.0

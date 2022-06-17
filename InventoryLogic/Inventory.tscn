@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://InventoryLogic/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
+[ext_resource path="res://InventoryLogic/OptionsMenu.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -64,6 +65,7 @@ mouse_filter = 2
 texture = ExtResource( 3 )
 
 [node name="InventorySlots" type="GridContainer" parent="."]
+visible = false
 margin_left = 54.0
 margin_top = 246.0
 margin_right = 606.0
@@ -326,11 +328,11 @@ position = Vector2( 3.05176e-05, -4.76837e-07 )
 polygon = PoolVector2Array( -265.556, -100, -235.556, -82.2222, -198.889, -82.2222, -181.111, -82.2222, -181.111, -87.7778, -151.111, -117.778, -145.556, -135.556, -145.556, -171.111, -151.111, -190, -181.111, -218.889, -193.333, -225.556, -234.444, -225.556, -253.333, -218.889, -264.444, -206.667 )
 
 [node name="OptionsMenu" type="Control" parent="."]
-visible = false
 margin_left = 71.0
-margin_top = 60.0
+margin_top = 63.0
 margin_right = 111.0
-margin_bottom = 100.0
+margin_bottom = 103.0
+script = ExtResource( 19 )
 
 [node name="MusicLabel" type="Label" parent="OptionsMenu"]
 margin_left = 248.0
@@ -537,7 +539,7 @@ align = 1
 [connection signal="pressed" from="Buttons/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="input_event" from="Buttons/ExitButton" to="." method="_on_ExitButton_input_event"]
-[connection signal="value_changed" from="OptionsMenu/Slider1/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
-[connection signal="value_changed" from="OptionsMenu/Slider2/SoundSlider" to="." method="_on_SoundSlider_value_changed"]
-[connection signal="value_changed" from="OptionsMenu/Slider3/AmbientSlider" to="." method="_on_AmbientSlider_value_changed"]
-[connection signal="value_changed" from="OptionsMenu/Slider4/FootstepsSlider" to="." method="_on_FootstepsSlider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/Slider1/MusicSlider" to="OptionsMenu" method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/Slider2/SoundSlider" to="OptionsMenu" method="_on_SoundSlider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/Slider3/AmbientSlider" to="OptionsMenu" method="_on_AmbientSlider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/Slider4/FootstepsSlider" to="OptionsMenu" method="_on_FootstepsSlider_value_changed"]

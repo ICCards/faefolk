@@ -19,7 +19,16 @@ func _ready():
 	for i in range(slots_in_chest.size()):
 		slots_in_chest[i].connect("gui_input", self, "slot_gui_input", [slots_in_chest[i]])
 		slots_in_chest[i].slot_index = i
-		slots_in_chest[i].slotType = SlotClass.SlotType.INVENTORY
+		slots_in_chest[i].slotType = SlotClass.SlotType.CHEST
+	PlayerInventory.connect("clear_chest", self, "clear_chest_data")
+	
+	
+func clear_chest_data():
+	var slots_in_chest = chest_slots.get_children()
+	for i in range(slots_in_chest.size()):
+		if PlayerInventory.chest.has(i):
+			PlayerInventory.remove_item(slots_in_chest[i])
+			slots_in_chest[i].removeFromSlot()
 	
 func initialize_chest_data():
 	var slots_in_chest = chest_slots.get_children()
