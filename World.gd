@@ -337,9 +337,11 @@ func _physics_process(delta):
 				if $Players.has_node(str(player)) and not player == Server.player_id:
 					#print(player)
 					#print(Server.player_id)
-					var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
-					print(new_position)
-					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+					
+					if world_state_buffer[1]["players"].has(player):
+						var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
+						print(new_position)
+						$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
 					if not mark_for_despawn.has(player):
 						spawnNewPlayer(world_state_buffer[2]["players"][player])
