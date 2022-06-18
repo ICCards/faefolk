@@ -141,7 +141,8 @@ func buildMap(map):
 			var object = TreeObject.instance()
 			object.initialize(variety, map["tree"][id], true)
 			object.position = sand.map_to_world(map["tree"][id]["l"]) + Vector2(0, -8)
-			add_child_below_node($Players,object)
+			object.name = id
+			add_child_below_node($Players,object,true)
 	print("LOADED TREES")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["log"]:
@@ -340,7 +341,6 @@ func _physics_process(delta):
 					
 					if world_state_buffer[1]["players"].has(player):
 						var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
-						print(new_position)
 						$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
 					if not mark_for_despawn.has(player):
@@ -354,6 +354,5 @@ func _physics_process(delta):
 					print(Server.player_id)
 					var position_delta = (world_state_buffer[1]["players"][player]["p"] - world_state_buffer[0]["players"][player]["p"])
 					var new_position = world_state_buffer[1]["players"][player]["p"] + (position_delta * extrapolation_factor)
-					print(new_position)
 					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 
