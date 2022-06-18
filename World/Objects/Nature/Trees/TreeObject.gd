@@ -64,7 +64,8 @@ func set_random_leaves_falling():
 var treeHealth: int = 4
 func _on_Hurtbox_area_entered(_area):
 	var data = {"id": name, "n": "tree"}
-	Server.action("SWING", data)
+	_area.get_parent().object_data = data
+	#Server.action("SWING", data)
 	if treeHealth == 0:
 		timer.stop()
 		disable_tree_top_collision_box()
