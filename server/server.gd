@@ -242,7 +242,7 @@ remote func ReturnLatency(client_time):
 func action(type,data):
 	rpc_unreliable_id(1, "action", type, data)
 	
-remote func receiveAction(time,player_id,type,data):
+remote func ReceivedAction(time,player_id,type,data):
 	if not player_id == get_tree().get_network_unique_id():
 		match type:
 			"MOVEMENT":
