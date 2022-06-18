@@ -63,6 +63,8 @@ func set_random_leaves_falling():
 ### Tree hurtbox
 var treeHealth: int = 4
 func _on_Hurtbox_area_entered(_area):
+	var data = {"id": name, "n": "tree"}
+	Server.action("SWING", data)
 	if treeHealth == 0:
 		timer.stop()
 		disable_tree_top_collision_box()
@@ -73,7 +75,7 @@ func _on_Hurtbox_area_entered(_area):
 		$SoundEffectsTree.stream = Sounds.tree_break
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
-		if get_node("/root/World/Players/Player").get_position().x <= get_position().x:
+		if get_node("/root/World/Players/" + Server.player_id).get_position().x <= get_position().x:
 			tree_animation_player.play("tree fall right")
 			yield(tree_animation_player, "animation_finished" )
 			intitiateItemDrop("wood", Vector2(130, -8), 7)
@@ -93,7 +95,7 @@ func _on_Hurtbox_area_entered(_area):
 		else: 
 			initiateLeavesFallingEffect(treeObject, Vector2(0, 0))
 
-		if get_node("/root/World/Players/Player").get_position().x <= get_position().x:	
+		if get_node("/root/World/Players/" + Server.player_id).get_position().x <= get_position().x:	
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			tree_animation_player.play("tree hit right")
 			treeHealth = treeHealth - 1
@@ -120,7 +122,7 @@ func _on_stumpHurtBox_area_entered(_area):
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
-		if get_node("/root/World/Players/Player").get_position().x <= get_position().x:
+		if get_node("/root/World/Players/" +  Server.player_id).get_position().x <= get_position().x:
 			stump_animation_player.play("stump_hit_right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			stumpHealth = stumpHealth - 1
