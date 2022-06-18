@@ -187,7 +187,8 @@ remote func updateState(state):
 
 func _physics_process(delta):
 	client_clock += int(delta*1000) + delta_latency
-	delta_latency = 0
+	delta_latency -=  delta_latency
+	delta_latency += (delta * 1000) - int(delta * 1000)
 	if decimal_collector >= 1.00:
 		client_clock += 1
 		decimal_collector -= 1.00
