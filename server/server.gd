@@ -18,8 +18,10 @@ var latency_array = []
 var isSpawned = false
 var local_player_id = 0
 var isLoaded = false
+var player
 var player_id
 var mapPartsLoaded = 0
+
 var map = {
 	"dirt":[],
 	"grass":[],
@@ -33,10 +35,11 @@ var map = {
 	"stump":[],
 	"flower":[],
 }
+var generated_map = {}
+var chuck1 = {}
 
 func _ready():
-	pass
-	#_connect_to_server()
+	_connect_to_server()
 	
 func _connect_to_server():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -49,8 +52,8 @@ func _connect_to_server():
 	
 func _player_connected(id):
 	print("New Player " + str(id) + " Connected")
-	if get_node("/root/World").mark_for_despawn.has(id):
-		get_node("/root/World").mark_for_despawn.erase(id)
+#	if get_node("/root/World").mark_for_despawn.has(id):
+#		get_node("/root/World").mark_for_despawn.erase(id)
 	
 func _player_disconnected(player_id):
 	print("Player " + str(player_id) + " Disonnected")
@@ -68,6 +71,13 @@ func _connected_ok():
 	print(player_id)
 	rpc_unreliable_id(1, "getMap",Server.map.keys()[mapPartsLoaded])
 	
+	
+	
+	
+func generate_map():
+	rpc_unreliable_id(1, "getMap",Server.map.keys()[mapPartsLoaded])
+	
+	
 remote func loadMap(value):
 	var key = map.keys()[mapPartsLoaded]
 	print("Loaded " + key)
@@ -77,8 +87,78 @@ remote func loadMap(value):
 		rpc_unreliable_id(1, "getMap",map.keys()[mapPartsLoaded])
 	else:
 		mapPartsLoaded = 0
-		get_node("/root/World").buildMap(map)
+		generated_map = map
+		#set_chunk(generated_map)
+		#get_node("/root/World").buildMap(map)
 	
+#func set_chunk(_map):
+#	for position in map["dirt"]:
+#		if positon.x < 75 and position.y < 75:
+#			chuck1.append
+#	for position in map["dark_grass"]:
+#		_set_cell(sand, position.x, position.y, 0)
+#		grass.set_cellv(position, 0)
+#	for position in map["grass"]:
+#		grass.set_cellv(position, 0)
+#		darkGrass.set_cellv(position, 0)
+#	for position in map["water"]:
+#		darkGrass.set_cellv(position, 0)
+#		water.set_cellv(position, 0)
+#	for position in map["flower"]:
+#		if is_valid_position(position):
+#			var object = FlowerObject.instance()
+#			object.position = sand.map_to_world(position)
+#			add_child_below_node($Players,object)
+#	for position in map["tree"]:
+#		if is_valid_position(position):
+#			treeTypes.shuffle()
+#			var variety = treeTypes.front()
+#			var object = TreeObject.instance()
+#			object.initialize(variety, position, true)
+#			object.position = sand.map_to_world(position)
+#			add_child_below_node($Players,object)
+#	for position in map["log"]:
+#		if is_valid_position(position):
+#			treeTypes.shuffle()
+#			var variety = treeTypes.front()
+#			var object = StumpObject.instance()
+#			object.initialize(variety,position)
+#			object.position = sand.map_to_world(position)
+#			add_child_below_node($Players,object)
+#	for position in map["stump"]:
+#		if is_valid_position(position):
+#			treeTypes.shuffle()
+#			var variety = treeTypes.front()
+#			var object = StumpObject.instance()
+#			object.initialize(variety,position)
+#			object.position = sand.map_to_world(position)
+#			add_child_below_node($Players,object)
+#	for position in map["ore_large"]:
+#		if is_valid_position(position):
+#			oreTypes.shuffle()
+#			var variety = oreTypes.front()
+#			var object = OreObject.instance()
+#			object.initialize(variety,position,true)
+#			object.position = sand.map_to_world(position)
+#			add_child_below_node($Players,object)
+#	for position in map["ore"]:
+#		if is_valid_position(position):
+#			oreTypes.shuffle()
+#			var variety = oreTypes.front()
+#			var object = SmallOreObject.instance()
+#			object.initialize(variety,position)
+#			object.position = sand.map_to_world(position)
+#			add_child_below_node($Players,object)
+#	for position in map["tall_grass"]:
+#		if is_valid_position(position):
+#			tall_grass_types.shuffle()
+#			var variety = tall_grass_types.front()
+#			var object = TallGrassObject.instance()
+#			object.initialize(variety)
+#			object.position = sand.map_to_world(position)
+#			add_child_below_node($Players,object)
+
+
 func _connected_fail():
 	print("Failed to connect")
 	
@@ -86,13 +166,14 @@ func _connected_fail():
 func _server_disconnected():
 	print("Server disconnected")
 	
-remote func SpawnPlayer(player):
-	get_node("/root/World").spawnPlayer(player)
-		
+remote func SpawnPlayer(_player):
+	#get_node("/root/World").spawnPlayer(player)
+	player = _player
+	get_node("/root/MainMenu").spawn_player_in_menu(player)
 
 remote func DespawnPlayer(player_id):
 	print('despawn player')
-	get_node("/root/World").DespawnPlayer(player_id)
+	#get_node("/root/World").DespawnPlayer(player_id)
 	
 #func message_send(message):
 #	rpc_unreliable_id(1, "message_send", message)

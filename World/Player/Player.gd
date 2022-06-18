@@ -66,6 +66,9 @@ func _ready():
 	set_new_music_volume()
 
 
+
+
+
 func set_new_music_volume():
 	$BackgroundMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
 	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
@@ -127,11 +130,11 @@ func _unhandled_input(event):
 		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
 			state = SWING
 			swing_state(event)
-		if itemCategory == "Placable object" and playerState == "Farm":
+		if itemCategory == "Placable object":
 			place_item_state(event, item_name)
-		elif itemCategory == "Placable path" and playerState == "Farm":
+		elif itemCategory == "Placable path":
 			place_path_state(event, item_name)
-		elif itemCategory == "Seed" and playerState == "Farm":
+		elif itemCategory == "Seed":
 			place_seed_state(event, item_name)
 		else: 
 			$PlaceItemsUI/ColorIndicator.visible = false
@@ -176,7 +179,7 @@ func place_path_state(event, item_name):
 	$PlaceItemsUI/ItemToPlace.rect_position = Vector2(0,0)
 	$PlaceItemsUI/ItemToPlace.rect_scale = Vector2(1, 1)
 	$PlaceItemsUI/ColorIndicator.scale  = Vector2(1.0 , 1.0)
-	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
+	var mousePos = get_parent().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
 	var location = valid_object_tiles.world_to_map(mousePos)
@@ -213,7 +216,7 @@ func place_item_state(event, item_name):
 	else:
 		$PlaceItemsUI/ColorIndicator.scale = Vector2(1, 1)
 
-	var mousePos = get_owner().get_global_mouse_position() + Vector2(-16, -16)
+	var mousePos = get_parent().get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
 	var location = valid_object_tiles.world_to_map(mousePos)
@@ -328,7 +331,7 @@ func place_seed_state(event, name):
 			get_parent().add_child(plantedCrop)
 			plantedCrop.global_position = mousePos + Vector2(0, 16)
 
-var MAX_SPEED := 12.5
+var MAX_SPEED := 28 #12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -504,25 +507,29 @@ func set_day():
 
 var playerState
 func setPlayerState(ownerNode):
-	if str(ownerNode).substr(0, 14) == "PlayerHomeFarm":
-		$FootstepsSound.stream = Sounds.dirt_footsteps
-		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
-		$FootstepsSound.play()
-		playerState = "Farm"
-		valid_object_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
-		hoed_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/HoedAutoTiles")
-		watered_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/WateredAutoTiles")
-		green_grass_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/GreenGrassTiles")
-		fence_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/FenceAutoTile")
-		object_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacableObjectTiles")
-		invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
-		path_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacablePathTiles")
-		valid_path_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForPathPlacement")
-	else:
-		playerState = "Home"
-		$FootstepsSound.stream = Sounds.wood_footsteps
-		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
-		$FootstepsSound.play()
+	valid_object_tiles = get_node("/root/World/ValidTiles")
+	$FootstepsSound.stream = Sounds.dirt_footsteps
+	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+	$FootstepsSound.play()
+#	if str(ownerNode).substr(0, 14) == "PlayerHomeFarm":
+#		$FootstepsSound.stream = Sounds.dirt_footsteps
+#		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+#		$FootstepsSound.play()
+#		playerState = "Farm"
+#		valid_object_tiles = get_node("/root/World/ValidTiles")
+##		hoed_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/HoedAutoTiles")
+##		watered_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/WateredAutoTiles")
+##		green_grass_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/GreenGrassTiles")
+##		fence_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/FenceAutoTile")
+##		object_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacableObjectTiles")
+##		invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
+##		path_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacablePathTiles")
+##		valid_path_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForPathPlacement")
+#	else:
+#		playerState = "Home"
+#		$FootstepsSound.stream = Sounds.wood_footsteps
+#		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+#		$FootstepsSound.play()
 
 
 

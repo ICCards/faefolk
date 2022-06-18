@@ -8,14 +8,17 @@ func initialize(varietyInput):
 	variety = varietyInput
 
 func _ready():
-	$Sprite.texture = load("res://Assets/Images/tall grass sets/" + variety + ".png")
-	if not $Area2D.get_overlapping_areas().empty():
-		queue_free()
+	rng.randomize()
+	$Sprite.texture = Images.tall_grass[rng.randi_range(0, 3)]
+#	$Area2D.get_overlapping_bodies()
+#	if $Area2D.get_overlapping_areas().size() > 0:
+#		print('renove tall grass')
+#		queue_free()
 
 
 func play_sound_effect():
 	if !bodyEnteredFlag:
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.volume_db = -80 #Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("animate")
 

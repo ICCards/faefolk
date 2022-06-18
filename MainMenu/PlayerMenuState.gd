@@ -13,13 +13,18 @@ export var speed := 300.0
 
 const _character = preload("res://Global/Data/Characters.gd")
 onready var character = _character.new()
+var player
+
+func initialize(_player):
+	player = _player
+
 
 func _ready():
 	animPlayer.play("idle")
 	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -16)
 	$FootstepsSound.play()
 	setAnimationTexture("idle_down")
-	character.LoadPlayerCharacter("human_male")
+	character.LoadPlayerCharacter(player["c"])
 	Sounds.connect("volume_change", self, "change_footsteps_volume")
 
 

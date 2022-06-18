@@ -8,7 +8,6 @@ onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
 var rng = RandomNumberGenerator.new()
 
-onready var world = get_tree().current_scene
 
 var oreObject
 var position_of_object
