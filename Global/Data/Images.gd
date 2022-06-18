@@ -52,6 +52,12 @@ var axe = {
 }
 
 
+var tall_grass = [
+	preload("res://Assets/Images/tall grass sets/dark green.png"),
+	preload("res://Assets/Images/tall grass sets/green.png"),
+	preload("res://Assets/Images/tall grass sets/red.png"),
+	preload("res://Assets/Images/tall grass sets/yellow.png")
+	]
 # FRUITLESS TREES #
 
 func returnTreeObject(treeType):

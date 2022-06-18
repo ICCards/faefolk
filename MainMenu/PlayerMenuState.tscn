@@ -96,6 +96,7 @@ tracks/6/keys = {
 }
 
 [node name="PlayerMenuState" type="KinematicBody2D"]
+scale = Vector2( 4, 4 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

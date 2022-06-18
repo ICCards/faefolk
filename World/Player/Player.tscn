@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -781,11 +781,11 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
 shape = SubResource( 11 )
+disabled = true
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )

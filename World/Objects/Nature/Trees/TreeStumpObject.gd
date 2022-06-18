@@ -5,7 +5,6 @@ onready var treeStumpSprite = $TreeSprites/TreeStump
 
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var Player = get_node("/root/World/Player")
 var rng = RandomNumberGenerator.new()
 
 onready var world = get_tree().current_scene
@@ -41,7 +40,7 @@ func _on_StumpHurtBox_area_entered(_area):
 		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
-		if Player.get_position().x <= get_position().x:
+		if get_node("/root/World/Players/Player").get_position().x <= get_position().x:
 			stump_animation_player.play("stump_hit_right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			stumpHealth = stumpHealth - 1

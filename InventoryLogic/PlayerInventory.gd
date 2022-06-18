@@ -199,7 +199,7 @@ func add_item_to_inventory(item_name, item_quantity):
 			return
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/Player/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			hotbar.erase(slot.slot_index)
@@ -210,7 +210,7 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/Inventory/InventorySlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/Player/Camera2D/UserInterface/Inventory/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			inventory.erase(slot.slot_index)
@@ -222,7 +222,7 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 		
 
 func update_chest_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/PlayerHomeFarm/Player/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/Player/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			inventory.erase(slot.slot_index)
