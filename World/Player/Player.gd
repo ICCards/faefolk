@@ -150,9 +150,10 @@ func _unhandled_input(event):
 func sendAction(action,data): 
 	match action:
 		(MOVEMENT):
-			Server.action("MOVEMENT",data)
-		(SWING):
 			pass
+			#Server.action("MOVEMENT",data)
+		(SWING):
+			Server.action("SWING", data)
 	
 var path_index = 1
 var selected_path
