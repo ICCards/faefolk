@@ -1,0 +1,39 @@
+﻿[Arrow]
+Path=Normal Selects.cur
+
+[AppStarting]
+Path=Working In Background.cur
+
+[Wait]
+Path=Busy.cur
+
+[Crosshair]
+Path=Precision Select.cur
+
+[IBeam]
+Path=Text Select.cur
+
+[No]
+Path=Unavailable.cur
+
+[SizeAll]
+Path=Move.cur
+
+[UpArrow]
+Path=Alt Select.cur
+
+[Help]
+Path=Help Select.cur
+
+[SizeNS]
+Path=Vertical.cur
+
+[SizeWE]
+Path=Horizontal .cur
+
+[SizeNWSE]
+Path=Diagonal 1.cur
+
+[SizeNESW]
+Path=Diagonal 2.cur
+
