@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Ore hit 3.mp3-a91f0f8072e570f1bbaa996f1209429f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Ore/Ore hit 3.mp3"
+dest_files=[ "res://.import/Ore hit 3.mp3-a91f0f8072e570f1bbaa996f1209429f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
