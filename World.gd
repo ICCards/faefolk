@@ -72,7 +72,7 @@ func spawnPlayer(value):
 		#player.initialize_camera_limits(Vector2(0, 0), Vector2(1920, 1080))
 		print(str(value["p"]))
 		player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
-		player.name = "Player" #str(value["id"])
+		player.name = str(value["id"])
 		player.character = _character.new()
 		player.character.LoadPlayerCharacter(value["c"]) 
 		$Players.add_child(player)
@@ -83,7 +83,8 @@ func spawnPlayer(value):
 func spawnNewPlayer(player):
 	if not player.empty():
 		if not has_node(str(player["id"])):
-			print("spawning")
+			print("spawning new player")
+			print(player["p"])
 			var new_player = Player_template.instance()
 			new_player.position = sand.map_to_world(player["p"])
 			new_player.name = str(player["id"])
@@ -350,11 +351,12 @@ func _physics_process(delta):
 					continue
 				if player == Server.player_id:
 					continue
-				if has_node(str(player)) and not player == Server.player_id:
+				if $Players.has_node(str(player)) and not player == Server.player_id:
 					#print(player)
 					#print(Server.player_id)
 					var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
-					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+					print(new_position)
+					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
 					if not mark_for_despawn.has(player):
 						spawnNewPlayer(world_state_buffer[2]["players"][player])
@@ -362,10 +364,11 @@ func _physics_process(delta):
 		elif render_time > world_state_buffer[1].t:
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
 			for player in world_state_buffer[1]["players"].keys():
-				if has_node(str(player)) and not player == Server.player_id:
+				if $Players.has_node(str(player)) and not player == Server.player_id:
 					print("player is me" + player == Server.player_id)
 					print(Server.player_id)
 					var position_delta = (world_state_buffer[1]["players"][player]["p"] - world_state_buffer[0]["players"][player]["p"])
 					var new_position = world_state_buffer[1]["players"][player]["p"] + (position_delta * extrapolation_factor)
-					get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+					print(new_position)
+					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 

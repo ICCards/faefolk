@@ -1,10 +1,10 @@
 extends Node
 
-#const DEFAULT_IP = "198.211.104.56"
-#const DEFAULT_PORT = 45124
+const DEFAULT_IP = "198.211.104.56"
+const DEFAULT_PORT = 45124
 
-const DEFAULT_IP = "127.0.0.1"
-const DEFAULT_PORT = 65124
+#const DEFAULT_IP = "127.0.0.1"
+#const DEFAULT_PORT = 65124
 
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
@@ -167,9 +167,9 @@ func _server_disconnected():
 	print("Server disconnected")
 	
 remote func SpawnPlayer(_player):
-	#get_node("/root/World").spawnPlayer(player)
 	player = _player
-	get_node("/root/MainMenu").spawn_player_in_menu(player)
+	#get_node("/root/World").spawnPlayer(player)
+	#get_node("/root/MainMenu").spawn_player_in_menu(player)
 
 remote func DespawnPlayer(player_id):
 	print('despawn player')

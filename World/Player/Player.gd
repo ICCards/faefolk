@@ -107,11 +107,11 @@ func _process(_delta) -> void:
 
 
 #func _physics_process(delta):
-	#DefinePlayerState()
-
+#	DefinePlayerState()
+#
 #func DefinePlayerState():
-	#player_state = {"T": Server.client_clock, "K": get_global_position(), "D": direction.to_lower()}
-	#Server.message_send(player_state)
+#	player_state = {"T": Server.client_clock, "K": get_global_position(), "D": direction.to_lower()}
+#	Server.message_send(player_state)
 
 func _unhandled_input(event):
 	if Input.is_action_pressed("ui_up"):
