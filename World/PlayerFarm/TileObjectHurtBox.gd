@@ -2,10 +2,10 @@ extends Node2D
 
 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var fence_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/FenceAutoTile")
-onready var placable_object_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacableObjectTiles")
-onready var valid_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
-onready var path_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacablePathTiles")
+onready var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
+onready var placable_object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
+onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+onready var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 
 var location
 var item_name

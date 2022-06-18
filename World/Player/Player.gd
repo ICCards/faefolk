@@ -50,10 +50,9 @@ var animation = "idle_down"
 
 func _ready():
 	set_physics_process(false)
-	setPlayerState(get_parent())
+	set_player_setting(get_parent().get_parent())
 	setPlayerTexture(animation)
 	$FootstepsSound.stream = Sounds.current_footsteps_sound
-	setPlayerState(get_parent())
 	_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
 	$Camera2D/UserInterface/PlayerStatsUI.visible = true
@@ -127,7 +126,7 @@ func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false and !is_mouse_over_hotbar:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and playerState == "Farm":
+		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and setting == "World":
 			state = SWING
 			swing_state(event)
 		if itemCategory == "Placable object":
@@ -331,7 +330,7 @@ func place_seed_state(event, name):
 			get_parent().add_child(plantedCrop)
 			plantedCrop.global_position = mousePos + Vector2(0, 16)
 
-var MAX_SPEED := 28 #12.5
+var MAX_SPEED := 12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -421,13 +420,13 @@ func set_melee_collision_layer(toolName):
 		$MeleeSwing.set_collision_mask(8)
 	elif toolName == "pickaxe":
 		$MeleeSwing.set_collision_mask(16)
-		remove_hoed_tile()
+		#remove_hoed_tile()
 	elif toolName == "hoe":
 		$MeleeSwing.set_collision_mask(0)
-		set_hoed_tile()
+		#set_hoed_tile()
 	elif toolName == "bucket":
 		$MeleeSwing.set_collision_mask(0)
-		set_watered_tile()
+		#set_watered_tile()
 
 func set_watered_tile():
 	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
@@ -440,32 +439,32 @@ func set_watered_tile():
 		watered_tiles.set_cellv(location, 0)
 		watered_tiles.update_bitmask_region()
 
-func set_hoed_tile():
-	var pos = adjust_position_from_direction(get_position())
-	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) == -1 and valid_object_tiles.get_cellv(location) != -1 and green_grass_tiles.get_cellv(location) == -1 and valid_path_tiles.get_cellv(location) != -1:
-		yield(get_tree().create_timer(0.6), "timeout")
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$SoundEffects.play()
-		hoed_tiles.set_cellv(location, 0)
-		valid_object_tiles.set_cellv(location, -1)
-		hoed_tiles.update_bitmask_region()	
-
-func remove_hoed_tile():
-	var pos = adjust_position_from_direction(get_position())
-	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) != -1:
-		yield(get_tree().create_timer(0.6), "timeout")
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$SoundEffects.play()
-		PlayerFarmApi.remove_crop(location)
-		invisible_planted_crop_cells.set_cellv(location, -1)
-		watered_tiles.set_cellv(location, -1)
-		hoed_tiles.set_cellv(location, -1)
-		valid_object_tiles.set_cellv(location, 0)
-		hoed_tiles.update_bitmask_region()	
+#func set_hoed_tile():
+#	var pos = adjust_position_from_direction(get_position())
+#	var location = hoed_tiles.world_to_map(pos)
+#	if hoed_tiles.get_cellv(location) == -1 and valid_object_tiles.get_cellv(location) != -1 and green_grass_tiles.get_cellv(location) == -1 and valid_path_tiles.get_cellv(location) != -1:
+#		yield(get_tree().create_timer(0.6), "timeout")
+#		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
+#		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+#		$SoundEffects.play()
+#		hoed_tiles.set_cellv(location, 0)
+#		valid_object_tiles.set_cellv(location, -1)
+#		hoed_tiles.update_bitmask_region()	
+#
+#func remove_hoed_tile():
+#	var pos = adjust_position_from_direction(get_position())
+#	var location = hoed_tiles.world_to_map(pos)
+#	if hoed_tiles.get_cellv(location) != -1:
+#		yield(get_tree().create_timer(0.6), "timeout")
+#		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
+#		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+#		$SoundEffects.play()
+#		PlayerFarmApi.remove_crop(location)
+#		invisible_planted_crop_cells.set_cellv(location, -1)
+#		watered_tiles.set_cellv(location, -1)
+#		hoed_tiles.set_cellv(location, -1)
+#		valid_object_tiles.set_cellv(location, 0)
+#		hoed_tiles.update_bitmask_region()	
 
 
 func adjust_position_from_direction(pos):
@@ -491,7 +490,7 @@ func setPlayerTexture(var anim):
 
 
 func init_day_night_cycle():
-	if playerState == "Farm":
+	if setting == "World":
 		if DayNightTimer.is_daytime:
 			$Camera2D/DayNight.color = Color("#ffffff")
 		else:
@@ -505,31 +504,30 @@ func set_day():
 	day_night_animation_player.play_backwards("set night")
 
 
-var playerState
-func setPlayerState(ownerNode):
-	valid_object_tiles = get_node("/root/World/ValidTiles")
-	$FootstepsSound.stream = Sounds.dirt_footsteps
-	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
-	$FootstepsSound.play()
-#	if str(ownerNode).substr(0, 14) == "PlayerHomeFarm":
-#		$FootstepsSound.stream = Sounds.dirt_footsteps
-#		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
-#		$FootstepsSound.play()
-#		playerState = "Farm"
-#		valid_object_tiles = get_node("/root/World/ValidTiles")
+var setting
+
+func set_player_setting(ownerNode):
+	print(str(ownerNode).substr(0, 5))
+	if str(ownerNode).substr(0, 5) == "World":
+		setting = "World"
+		$FootstepsSound.stream = Sounds.dirt_footsteps
+		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+		$FootstepsSound.play()
+		valid_object_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+		path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
+		object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
+		fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
+
 ##		hoed_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/HoedAutoTiles")
 ##		watered_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/WateredAutoTiles")
 ##		green_grass_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/GreenGrassTiles")
-##		fence_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/FenceAutoTile")
-##		object_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacableObjectTiles")
 ##		invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
-##		path_tiles = get_node("/root/PlayerHomeFarm/DecorationTiles/PlacablePathTiles")
 ##		valid_path_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForPathPlacement")
-#	else:
-#		playerState = "Home"
-#		$FootstepsSound.stream = Sounds.wood_footsteps
-#		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
-#		$FootstepsSound.play()
+	else:
+		setting = "InsidePlayerHome"
+		$FootstepsSound.stream = Sounds.wood_footsteps
+		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+		$FootstepsSound.play()
 
 
 
