@@ -340,7 +340,7 @@ func UpdateWorldState(world_state):
 		world_state_buffer.append(world_state)
 
 func _physics_process(delta):
-	var render_time = Server.client_clock - interpolation_offset
+	var render_time = OS.get_system_time_msecs() - interpolation_offset
 	if world_state_buffer.size() > 1:
 		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].t:
 			world_state_buffer.remove(0)
@@ -365,7 +365,7 @@ func _physics_process(delta):
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
 			for player in world_state_buffer[1]["players"].keys():
 				if $Players.has_node(str(player)) and not player == Server.player_id:
-					print("player is me" + player == Server.player_id)
+					#print("player is me" + player == Server.player_id)
 					print(Server.player_id)
 					var position_delta = (world_state_buffer[1]["players"][player]["p"] - world_state_buffer[0]["players"][player]["p"])
 					var new_position = world_state_buffer[1]["players"][player]["p"] + (position_delta * extrapolation_factor)
