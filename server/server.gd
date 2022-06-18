@@ -249,6 +249,12 @@ remote func ReceivedAction(time,player_id,type,data):
 				pass
 			#	get_node("/root/PlayerHomeFarm/" + str(player_id)).MovePlayer(position, direction)
 			"SWING":
+				print("SWING")
+				print(player_id)
+				print(type)
+				print(data)
+			"ON_HIT":
+				print("ON HIT")
 				print(player_id)
 				print(type)
 				print(data)
