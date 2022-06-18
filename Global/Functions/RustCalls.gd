@@ -2,15 +2,15 @@ extends Node
 
 
 var thread = Thread.new()
-#onready var api = Api
+onready var api = Api
 
 var mint_objects_queue = []
 
 func _whoAmI(_value):
 	print("THREAD FUNC!")
-	#var result = api.mint(mint_objects_queue[0], "j26ec-ix7zw-kiwcx-ixw6w-72irq-zsbyr-4t7fk-alils-u33an-kh6rk-7qe")
-	#call_deferred("loadDone")
-	#return result
+	var result = api.mint(mint_objects_queue[0], "43emf-jxwxr-zvbvb-vojch-3a6um-mhe2d-if2bh-wefw3-3g52d-gjfos-vqe")
+	call_deferred("loadDone")
+	return result
 
 var wood_minted = 0
 var stone_minted = 0
