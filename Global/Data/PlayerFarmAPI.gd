@@ -4,7 +4,7 @@ onready var valid_object_tiles
 onready var valid_path_tiles
 
 func reset_cells(name, location): 
-	valid_object_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForObjectPlacement")
+	valid_object_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 	valid_path_tiles = get_node("/root/PlayerHomeFarm/GroundTiles/ValidTilesForPathPlacement")
 	if name == "tree" or name == "tree stump" or name == "ore large":
 		valid_object_tiles.set_cellv(location, 0)
