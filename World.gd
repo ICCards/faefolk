@@ -1,11 +1,11 @@
 extends YSort
 
-onready var sand = $SandTiles
-onready var grass = $GreenGrassTiles
-onready var darkGrass = $DarkGreenGrassTiles
-onready var water = $Water
-onready var border = $BorderTiles
-onready var validTiles = $ValidTiles
+onready var sand = $GeneratedTiles/SandTiles
+onready var grass = $GeneratedTiles/GreenGrassTiles
+onready var darkGrass = $GeneratedTiles/DarkGreenGrassTiles
+onready var water = $GeneratedTiles/Water
+onready var border = $GeneratedTiles/BorderTiles
+onready var validTiles = $GeneratedTiles/ValidTiles
 
 onready var Player = preload("res://World/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate.tscn")
@@ -318,23 +318,6 @@ func get_subtile_with_priority(id, tilemap: TileMap):
 
 
 func UpdateWorldState(world_state):					
-#	if decorations.empty():
-#		for decoration in world_state.decoration_state.keys():
-#			var treeObject = TreeObject.instance()
-#			treeObject.name = decoration
-#			treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
-#			add_child(treeObject)
-#			treeObject.position = world_state.decoration_state[decoration]["p"]
-#			decorations.append(decoration)
-#	else:
-#		for decoration in world_state.decoration_state.keys():
-#			if not decorations.has(decoration):
-#				var treeObject = TreeObject.instance()
-#				treeObject.name = decoration
-#				treeObject.initialize(world_state.decoration_state[decoration]["v"], world_state.decoration_state[decoration]["p"], world_state.decoration_state[decoration]["g"])
-#				add_child(treeObject)
-#				treeObject.position = world_state.decoration_state[decoration]["p"]
-#				decorations.append(decoration)
 	if world_state["t"] > last_world_state:
 		last_world_state = world_state["t"]
 		world_state_buffer.append(world_state)
