@@ -26,7 +26,7 @@ func getCharacterById(player_id):
 func MovePlayer(new_position, _direction):
 	#print("new_position")
 	if not new_position == position:
-		print(new_position)
+		pass
 	direction = _direction.to_lower()
 	if !swingActive:
 		animation_player.play("movement")
