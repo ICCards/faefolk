@@ -24,6 +24,8 @@ var path_tiles
 var delta
 var character
 
+var object_data = {}
+
 onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObject.tscn")
 onready var PlantedCrop = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
@@ -129,6 +131,7 @@ func _unhandled_input(event):
 		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and setting == "World":
 			state = SWING
 			swing_state(event)
+			sendAction(SWING, object_data)
 		if itemCategory == "Placable object":
 			place_item_state(event, item_name)
 		elif itemCategory == "Placable path":
