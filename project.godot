@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/beehave/nodes/decorators/limiter.gd"
 }, {
+"base": "Node",
+"class": "Pathfinding",
+"language": "GDScript",
+"path": "res://World/Cave/mobs/utils/pathfinding.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -117,6 +122,7 @@ _global_script_class_icons={
 "InverterDecorator": "res://addons/beehave/icons/inverter.svg",
 "Leaf": "res://addons/beehave/icons/action.svg",
 "LimiterDecorator": "res://addons/beehave/icons/limiter.svg",
+"Pathfinding": "",
 "Player": "",
 "SelectorComposite": "res://addons/beehave/icons/selector.svg",
 "SelectorStarComposite": "res://addons/beehave/icons/selector.svg",

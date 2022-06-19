@@ -56,3 +56,4 @@ func enable():
 
 func disable():
 	self.enabled = false
+

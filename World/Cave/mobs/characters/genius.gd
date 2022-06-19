@@ -4,14 +4,22 @@ onready var genius = $AnimatedSprite
 onready var player : Player
 onready var _nav2d : Navigation2D
 onready var _line2D : Line2D
-onready var targetArea = $GeniusTerritory
-onready var petrolTimer = $BeehaveRoot/Timer
+onready var path2D : Path2D = $Path2D
+onready var targetArea : Area2D = $GeniusTerritory
+onready var petrolTimer: Timer = $BeehaveRoot/PetrolTimer
+
+var next_petrol_location :Vector2
+var next_petrol_reached: bool = false
 
 const speed = 50
 const petrol_range = 50
 
 #petrol state
 export var spawn_location = Vector2.ZERO
+export (bool) var should_draw_path_line := false
+
+
+var pathfinding: Pathfinding
 
 
 func _ready():
@@ -22,13 +30,6 @@ func _ready():
 	pass
 
 
-# func _physics_process(delta):
-# 	var player_distance = get_dist_to_player()
-# 	if(player_distance > 100):
-# 		genius.play("walk")
-# 	if(player_distance < 100):
-# 		move_along_path(SPEED * delta)
-# 	pass
 
 func move_along_path(dist : float)->void:
 	genius.play("run")
@@ -60,6 +61,8 @@ func petrol_to_path(dist : float, point: Vector2)->void:
 			dist -= dist_to_next_node;
 			position = _nav_path[0];
 			_nav_path.remove(0);
+	next_petrol_reached = true
+	
 			
 func rotate_towards_player():
 	print(genius.rotation)
@@ -71,8 +74,24 @@ func move_towards_position(target_position: Vector2, delta: float):
 	rotate_towards_player()
 	self.position += self.position.direction_to(target_position) * delta * speed
 	
+func _on_PetrolTimer_timeout():
+	var rand_x = rand_range(-petrol_range, petrol_range)
+	var rand_y = rand_range(-petrol_range, petrol_range)
+	next_petrol_location = Vector2(rand_x, rand_y) + spawn_location
+	next_petrol_reached = false
+	
+	
 # func get_dist_to_player():
 # 	var geniusCord = self.get_global_position()
 # 	var playerCord = _player.get_global_position()
 # 	var distance = geniusCord.distance_to(playerCord)
 # 	return distance;
+
+
+# func _physics_process(delta):
+# 	var player_distance = get_dist_to_player()
+# 	if(player_distance > 100):
+# 		genius.play("walk")
+# 	if(player_distance < 100):
+# 		move_along_path(SPEED * delta)
+# 	pass

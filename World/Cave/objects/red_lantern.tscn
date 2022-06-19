@@ -19,6 +19,7 @@ position = Vector2( 0, -25 )
 texture = ExtResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 position = Vector2( 0, -13 )
 texture = ExtResource( 2 )
 color = Color( 0.788235, 0.521569, 0.521569, 1 )
