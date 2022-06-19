@@ -15,3 +15,5 @@ func choose(choices):
 
 	var rand_index = randi() % choices.size()
 	return choices[rand_index]
+	
+	

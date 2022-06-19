@@ -54,7 +54,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "stump_destroyed"
+resource_name = "stump destroyed"
 tracks/0/type = "value"
 tracks/0/path = NodePath("TreeSprites/TreeStump:frame")
 tracks/0/interp = 1
@@ -93,7 +93,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "stump_hit_right"
+resource_name = "stump hit right"
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("TreeSprites/TreeStump:position")
@@ -128,8 +128,8 @@ offset = Vector2( 0, -120 )
 
 [node name="StumpAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
-anims/stump_destroyed = SubResource( 3 )
-anims/stump_hit_right = SubResource( 4 )
+"anims/stump destroyed" = SubResource( 3 )
+"anims/stump hit right" = SubResource( 4 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 volume_db = -12.0
