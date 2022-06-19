@@ -118,37 +118,37 @@ func _process(_delta) -> void:
 #	Server.message_send(player_state)
 
 func _unhandled_input(event):
-	if Input.is_action_pressed("ui_up"):
-		direction = "UP"
-	if Input.is_action_pressed("ui_down"):
-		direction = "DOWN"
-	if Input.is_action_pressed("ui_left"):
-		direction = "LEFT"
-	if Input.is_action_pressed("ui_right"):
-		direction = "RIGHT"
-	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
-		idle_state(direction)
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false: #and !is_mouse_over_hotbar:
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-		var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-		if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and setting == "World":
-			state = SWING
-			swing_state(item_name)
-			sendAction(SWING, {"tool": item_name, "direction": direction})
-		if itemCategory == "Placable object":
-			place_item_state(event, item_name)
-		elif itemCategory == "Placable path":
-			place_path_state(event, item_name)
-		elif itemCategory == "Seed":
-			place_seed_state(event, item_name)
+	if !swingActive:
+		if Input.is_action_pressed("ui_up"):
+			direction = "UP"
+		if Input.is_action_pressed("ui_down"):
+			direction = "DOWN"
+		if Input.is_action_pressed("ui_left"):
+			direction = "LEFT"
+		if Input.is_action_pressed("ui_right"):
+			direction = "RIGHT"
+		if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
+			idle_state(direction)
+		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false: #and !is_mouse_over_hotbar:
+			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
+			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and setting == "World":
+				state = SWING
+				swing_state(item_name)
+			if itemCategory == "Placable object":
+				place_item_state(event, item_name)
+			elif itemCategory == "Placable path":
+				place_path_state(event, item_name)
+			elif itemCategory == "Seed":
+				place_seed_state(event, item_name)
+			else: 
+				$PlaceItemsUI/ColorIndicator.visible = false
+				$PlaceItemsUI/ItemToPlace.visible = false
+				$PlaceItemsUI/RotateIcon.visible = false
 		else: 
 			$PlaceItemsUI/ColorIndicator.visible = false
 			$PlaceItemsUI/ItemToPlace.visible = false
 			$PlaceItemsUI/RotateIcon.visible = false
-	else: 
-		$PlaceItemsUI/ColorIndicator.visible = false
-		$PlaceItemsUI/ItemToPlace.visible = false
-		$PlaceItemsUI/RotateIcon.visible = false
 
 func sendAction(action,data): 
 	match action:
@@ -405,67 +405,71 @@ var FRICTION := 8
 var velocity := Vector2.ZERO
 
 func movement_state(delta):
-	animation_player.play("movement")
-	var input_vector = Vector2.ZERO			
-	if Input.is_action_pressed("ui_up"):
-		input_vector.y -= 1.0
-		direction = "UP"
-		walk_state(direction)
-		var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
-		sendAction(MOVEMENT,data)
-	if Input.is_action_pressed("ui_down"):
-		input_vector.y += 1.0
-		direction = "DOWN"
-		walk_state(direction)
-		var data = {"p":position,"d":direction,"t":Server.client_clock}
-		sendAction(MOVEMENT,data)
-	if Input.is_action_pressed("ui_left"):
-		input_vector.x -= 1.0
-		direction = "LEFT"
-		walk_state(direction)
-		var data = {"p":position,"d":direction,"t":Server.client_clock}
-		sendAction(MOVEMENT,data)
-	if Input.is_action_pressed("ui_right"):
-		input_vector.x += 1.0
-		direction = "RIGHT"
-		walk_state(direction)
-		var data = {"p":position,"d":direction,"t":Server.client_clock}
-		sendAction(MOVEMENT,data)		
-	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
-		idle_state(direction)
-		var data = {"p":position,"d":direction,"t":Server.client_clock}
-		sendAction(MOVEMENT,data)
-		$FootstepsSound.stream_paused = true
-			
-	input_vector = input_vector.normalized()
-	
-	if input_vector != Vector2.ZERO:
-		velocity += input_vector * ACCELERATION * delta
-		velocity = velocity.clamped(MAX_SPEED * delta)
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	if !swingActive:
+		animation_player.play("movement")
+		var input_vector = Vector2.ZERO			
+		if Input.is_action_pressed("ui_up"):
+			input_vector.y -= 1.0
+			direction = "UP"
+			walk_state(direction)
+			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)
+		if Input.is_action_pressed("ui_down"):
+			input_vector.y += 1.0
+			direction = "DOWN"
+			walk_state(direction)
+			var data = {"p":position,"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)
+		if Input.is_action_pressed("ui_left"):
+			input_vector.x -= 1.0
+			direction = "LEFT"
+			walk_state(direction)
+			var data = {"p":position,"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)
+		if Input.is_action_pressed("ui_right"):
+			input_vector.x += 1.0
+			direction = "RIGHT"
+			walk_state(direction)
+			var data = {"p":position,"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)		
+		if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
+			idle_state(direction)
+			var data = {"p":position,"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)
+			$FootstepsSound.stream_paused = true
+				
+		input_vector = input_vector.normalized()
 		
-	move_and_collide(velocity * MAX_SPEED)	
+		if input_vector != Vector2.ZERO:
+			velocity += input_vector * ACCELERATION * delta
+			velocity = velocity.clamped(MAX_SPEED * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			
+		move_and_collide(velocity * MAX_SPEED)	
 
 var swingActive = false
-func swing_state(event):
+func swing_state(item_name):
 		$FootstepsSound.stream_paused = true
 		if !swingActive:
-				var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				sendAction(SWING, {"tool": item_name, "direction": direction})
 				swingActive = true
-				set_melee_collision_layer(tool_name)
-				toolEquippedSprite.set_texture(Images.returnToolSprite(tool_name, direction.to_lower()))
+				set_melee_collision_layer(item_name)
+				toolEquippedSprite.set_texture(Images.returnToolSprite(item_name, direction.to_lower()))
 				animation = "swing_" + direction.to_lower()
 				setPlayerTexture(animation)
 				animation_player.play(animation)
 				yield(animation_player, "animation_finished" )
 				toolEquippedSprite.texture = null
 				swingActive = false
-				var newToolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-				var newItemCategory = JsonData.item_data[newToolName]["ItemCategory"]
-				if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
-					swing_state(event)
-				else:
+				if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+					var newToolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+					var newItemCategory = JsonData.item_data[newToolName]["ItemCategory"]
+					if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
+						swing_state(newToolName)
+					else:
+						state = MOVEMENT
+				else: 
 					state = MOVEMENT
 		elif swingActive == true:
 			pass
