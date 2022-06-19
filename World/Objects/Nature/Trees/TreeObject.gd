@@ -11,30 +11,27 @@ onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHi
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
 
-
-onready var world = get_tree().current_scene
-
 var treeObject
 var location_of_object
 var variety
-var showFullTree
+var hit_dir
+var health
 
-func initialize(inputVar, loc, ifFullTree):
+func initialize(inputVar, loc):
 	variety = inputVar
 	treeObject = Images.returnTreeObject(inputVar)
 	location_of_object = loc
-	showFullTree = ifFullTree
+
 
 func _ready():
 	setTexture(treeObject)
 	set_random_leaves_falling()
-	if !showFullTree:
+	if health <= 3:
 		timer.stop()
 		disable_tree_top_collision_box()
-		$TreeHurtbox/treeHurtBox.disabled = true
 		$TreeSprites/TreeTop.visible = false
 		$TreeSprites/TreeBottom.visible = false
-		$StumpHurtBox/stumpHurtBox.disabled = false
+		$TreeS/stumpHurtBox.disabled = false
 
 func setTexture(tree):
 	set_tree_top_collision_shape()
@@ -60,12 +57,62 @@ func set_random_leaves_falling():
 	set_random_leaves_falling()
 
 
+func PlayEffect(player_id):
+	health -= 1
+	if get_node("/root/World/Players/" + str(player_id)).get_position().x < get_position().x:
+		hit_dir = "right"
+	else:
+		hit_dir = "left"
+	if health >= 5:
+		if hit_dir == "right":
+			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
+			tree_animation_player.play("tree hit right")
+		else: 
+			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
+			tree_animation_player.play("tree hit left")
+	elif health == 3:
+		if hit_dir == "right":
+			tree_animation_player.play("tree fall right")
+		else:
+			tree_animation_player.play("tree fall left")
+	elif health >= 1:
+		if hit_dir == "right":
+			stump_animation_player.play("stump hit right")
+			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
+		else:
+			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
+			stump_animation_player.play("stump hit right")
+	else:
+		stump_animation_player.play("stump destroyed")
+		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
+		yield(stump_animation_player, "animation_finished")
+		queue_free()
+			
+
+
 ### Tree hurtbox
-var treeHealth: int = 4
 func _on_Hurtbox_area_entered(_area):
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
-	if treeHealth == 0:
+	health -= 1
+	if health >= 4:
+		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffectsTree.play()
+		if variety == 'D' || variety == 'E':
+			initiateLeavesFallingEffect(treeObject, Vector2(0, 50))
+		elif variety == 'B':
+			initiateLeavesFallingEffect(treeObject, Vector2(0, 25))
+		else: 
+			initiateLeavesFallingEffect(treeObject, Vector2(0, 0))
+
+		if get_node("/root/World/Players/" + str(Server.player_id)).get_position().x <= get_position().x:	
+			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
+			tree_animation_player.play("tree hit right")
+		else: 
+			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
+			tree_animation_player.play("tree hit left")
+	elif health == 3:
 		timer.stop()
 		disable_tree_top_collision_box()
 		PlayerFarmApi.set_farm_object_break(location_of_object)
@@ -84,52 +131,29 @@ func _on_Hurtbox_area_entered(_area):
 			yield(tree_animation_player, "animation_finished" )
 			intitiateItemDrop("wood", Vector2(-130, -8), 7)
 
-	elif treeHealth != 0:
-		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsTree.play()
-		if variety == 'D' || variety == 'E':
-			initiateLeavesFallingEffect(treeObject, Vector2(0, 50))
-		elif variety == 'B':
-			initiateLeavesFallingEffect(treeObject, Vector2(0, 25))
-		else: 
-			initiateLeavesFallingEffect(treeObject, Vector2(0, 0))
 
-		if get_node("/root/World/Players/" + str(Server.player_id)).get_position().x <= get_position().x:	
+	elif health >= 1 :
+		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffectsStump.play()
+		if get_node("/root/World/Players/" +  str(Server.player_id)).get_position().x <= get_position().x:
+			stump_animation_player.play("stump hit right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
-			tree_animation_player.play("tree hit right")
-			treeHealth = treeHealth - 1
 		else: 
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			tree_animation_player.play("tree hit left")
-			treeHealth = treeHealth - 1
-
-### Stump hurtbox
-var stumpHealth: int = 2
-func _on_stumpHurtBox_area_entered(_area):
-	if stumpHealth == 0: 
+			stump_animation_player.play("stump hit right")
+	elif health == 0: 
 		$SoundEffectsStump.stream = Sounds.stump_break
 		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
-		stump_animation_player.play("stump_destroyed")
+		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		intitiateItemDrop("wood", Vector2(0, 12), 3)
 		PlayerFarmApi.remove_farm_object(location_of_object)
 		yield($SoundEffectsStump, "finished")
 		queue_free()
 	
-	elif stumpHealth != 0 :
-		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsStump.play()
-		if get_node("/root/World/Players/" +  str(Server.player_id)).get_position().x <= get_position().x:
-			stump_animation_player.play("stump_hit_right")
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
-			stumpHealth = stumpHealth - 1
-		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			stump_animation_player.play("stump_hit_right")
-			stumpHealth = stumpHealth - 1
+
 
 
 ### Effect functions		

@@ -12,23 +12,39 @@ var rng = RandomNumberGenerator.new()
 var oreObject
 var position_of_object
 var variety
-var showLargeOre
+var health
 
 
-func initialize(varietyInput, posInput, isFullGrowth):
+func initialize(varietyInput, posInput):
 	variety = varietyInput
 	oreObject = Images.returnOreObject(varietyInput)
 	position_of_object = posInput
-	showLargeOre = isFullGrowth
+
 
 func _ready():
 	setTexture(oreObject)
+	
+func PlayEffect(player_id):
+	health -= 1
+	if health >= 4:
+		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-25, 25), rng.randi_range(-8, 32)))
+		animation_player.play("big_ore_hit_right")
+	elif health == 3:
+		initiateOreHitEffect(oreObject, "ore break", Vector2(0, 24))
+		animation_player.play("big_ore_break")
+	elif health >= 1:
+		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 24))
+		animation_player.play("small_ore_hit_right")
+	elif health == 0:
+		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 32))
+		animation_player.play("small_ore_break")
+
 
 func setTexture(ore):
 	rng.randomize()
 	bigOreSprite.texture = ore.largeOre
 	smallOreSprite.texture = ore.mediumOres[rng.randi_range(0, 5)]
-	if !showLargeOre:
+	if health <= 3:
 		$BigHurtBox/bigHurtBox.disabled = true
 		$BigMovementCollisionBox/BigMovementBox.disabled = true
 		$SmallHurtBox/smallHurtBox.disabled = false
@@ -38,10 +54,13 @@ func setTexture(ore):
 		smallOreSprite.visible = true
 
 
-var bigOreHits: int = 4
+
 func _on_BigHurtBox_area_entered(_area):
 	rng.randomize()
-	if bigOreHits == 0:
+	var data = {"id": name, "n": "large_ore"}
+	Server.action("ON_HIT", data)
+	health -= 1
+	if health == 0:
 		PlayerFarmApi.set_farm_object_break(position_of_object)
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -51,18 +70,20 @@ func _on_BigHurtBox_area_entered(_area):
 		animation_player.play("big_ore_break")
 		$LargeOreOccupiedTiles/CollisionShape2D.set_deferred("disabled", true)
 
-	if bigOreHits != 0:
+	if health != 0:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-25, 25), rng.randi_range(-8, 32)))
 		animation_player.play("big_ore_hit_right")
-		bigOreHits = bigOreHits - 1
 
-var smallOreHits: int = 2	
+
 func _on_SmallHurtBox_area_entered(_area):
 	rng.randomize()
-	if smallOreHits == 0:
+	var data = {"id": name, "n": "large_ore"}
+	Server.action("ON_HIT", data)
+	health -= 1
+	if health <= 0:
 		PlayerFarmApi.remove_farm_object(position_of_object)
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -73,13 +94,13 @@ func _on_SmallHurtBox_area_entered(_area):
 		yield($SoundEffects, "finished")
 		queue_free()
 		
-	if smallOreHits != 0:
+	if health != 0:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 24))
 		animation_player.play("small_ore_hit_right")
-		smallOreHits = smallOreHits - 1
+
 
 
 

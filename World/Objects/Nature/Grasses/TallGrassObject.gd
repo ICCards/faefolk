@@ -3,29 +3,30 @@ extends Node2D
 
 onready var rng = RandomNumberGenerator.new()
 var variety
+var bodyEnteredFlag = false
 
 func initialize(varietyInput):
 	variety = varietyInput
 
+
 func _ready():
 	rng.randomize()
 	$Sprite.texture = Images.tall_grass[rng.randi_range(0, 3)]
-#	$Area2D.get_overlapping_bodies()
-#	if $Area2D.get_overlapping_areas().size() > 0:
-#		print('renove tall grass')
-#		queue_free()
 
+
+func PlayEffect(player_id):
+	play_sound_effect()
 
 func play_sound_effect():
 	if !bodyEnteredFlag:
-		$SoundEffects.volume_db = -80 #Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("animate")
 
-var bodyEnteredFlag = false
-
 
 func _on_Area2D_body_entered(_body):
+	var data = {"id": name, "n": "tall_grass"}
+	Server.action("ON_HIT", data)
 	play_sound_effect()
 	bodyEnteredFlag = true
 

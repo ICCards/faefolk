@@ -12,7 +12,7 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 var character
 
-var swing_dict = {}
+var swing_queue = []
 var swingActive = false
 var direction = "down"
 
@@ -24,9 +24,8 @@ func getCharacterById(player_id):
 
 
 func MovePlayer(new_position, _direction):
-	#print("new_position")
-	if not new_position == position:
-		pass
+#	if not new_position == position:
+#		pass
 	direction = _direction.to_lower()
 	if !swingActive:
 		animation_player.play("movement")
@@ -35,6 +34,18 @@ func MovePlayer(new_position, _direction):
 		else: 
 			setPlayerTexture("walk_" + direction)
 			set_position(new_position)
+
+func Swing(tool_name, direction):
+	print(tool_name)
+	print(direction)
+	swingActive = true
+	toolEquippedSprite.set_texture(Images.returnToolSprite(tool_name, direction.to_lower()))
+	setPlayerTexture("swing_" + direction.to_lower())
+	animation_player.play("swing")
+	yield(animation_player, "animation_finished")
+	toolEquippedSprite.texture = null
+	swingActive = false
+	MovePlayer(position, direction.to_lower())
 
 
 func setPlayerTexture(var anim):
@@ -46,13 +57,6 @@ func setPlayerTexture(var anim):
 	shirtsSprite.set_texture(character.shirts_sprites[anim])
 	shoesSprite.set_texture(character.shoes_sprites[anim])
 	
-func swing():
-	toolEquippedSprite.set_texture(Images.returnToolSprite('axe', direction.to_lower()))
-	setPlayerTexture("swing_" + direction)
-	animation_player.play("swing")
-	yield(animation_player, "animation_finished" )
-	toolEquippedSprite.texture = null
-	animation_player.play("movement")
 	
 	
 #	match direction:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://Assets/tilesets/CL_Crops_Mining.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/Farm/BridgeRail.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Images/Animations/waterfall/waterfall/waterfall1.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/Animations/waterfall/Smoke/smoke6.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Images/Animations/waterfall/waterfall/waterfall2.png" type="Texture" id=9]
-[ext_resource path="res://World/PlayerFarm/PlayerFarm.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Images/Animations/waterfall/Smoke/smoke9.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/Animations/waterfall/waterfall/waterfall6.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Images/Animations/waterfall/waterfall/waterfall5.png" type="Texture" id=13]
@@ -3816,7 +3815,6 @@ extents = Vector2( 35.75, 15.75 )
 extents = Vector2( 142, 65.5 )
 
 [node name="PlayerHomeFarm" type="YSort"]
-script = ExtResource( 10 )
 
 [node name="Player" parent="." instance=ExtResource( 30 )]
 position = Vector2( 920, 496 )
@@ -3885,7 +3883,7 @@ format = 1
 modulate = Color( 1, 1, 1, 0.360784 )
 position = Vector2( 28, 260 )
 frames = SubResource( 176 )
-frame = 1
+frame = 8
 playing = true
 
 [node name="WaterfallSound" type="AudioStreamPlayer2D" parent="WaterTiles"]
