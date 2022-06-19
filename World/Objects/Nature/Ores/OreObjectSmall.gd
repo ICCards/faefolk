@@ -11,6 +11,7 @@ onready var world = get_tree().current_scene
 var oreObject
 var position_of_object
 var variety
+var health
 
 func initialize(varietyInput, inputPos):
 	variety = varietyInput
@@ -23,12 +24,23 @@ func _ready():
 func setTexture(ore):
 	rng.randomize()
 	smallOreSprite.texture = ore.mediumOres[rng.randi_range(0, 5)]
+	
+func PlayEffect(player_id):
+	health -= 1
+	if health >= 1:
+		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 32))
+		animation_player.play("small_ore_hit_right")
+	else:
+		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 42))
+		animation_player.play("small_ore_break")
 
 
-var smallOreHits: int = 2	
 func _on_SmallHurtBox_area_entered(_area):
 	rng.randomize()
-	if smallOreHits == 0:
+	var data = {"id": name, "n": "ore"}
+	Server.action("ON_HIT", data)
+	health -= 1
+	if health == 0:
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
@@ -38,13 +50,13 @@ func _on_SmallHurtBox_area_entered(_area):
 		PlayerFarmApi.remove_farm_object(position_of_object)
 		yield($SoundEffects, "finished")
 		queue_free()
-	if smallOreHits != 0:
+	if health != 0:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 32))
 		animation_player.play("small_ore_hit_right")
-		smallOreHits = smallOreHits - 1
+		
 		
 ## Effect functions
 func intitiateItemDrop(item, pos):

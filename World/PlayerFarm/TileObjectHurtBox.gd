@@ -12,16 +12,34 @@ var item_name
 var occupied_tiles
 
 
-func initialize(name, loc):
-	item_name = name
+func initialize(_name, loc):
+	item_name = _name
 	location = loc
 	
 func _ready():
 	set_dimensions()
+	if item_name == "wood path1" or item_name == "wood path2":
+		item_name = "wood path"
+	elif item_name == "stone path1" or item_name == "stone path2" or  item_name == "stone path3" or item_name == "stone path4": 
+		item_name = "stone path"
 	if item_name == "wood path":
 		$TypeOfTileArea.set_collision_mask(512)
 	elif item_name == "stone path":
 		$TypeOfTileArea.set_collision_mask(1024)
+		
+func PlayEffect(player_id):
+	valid_tiles.set_cellv(location, 0)
+	if item_name == "wood chest" or item_name == "stone chest":
+		placable_object_tiles.set_cellv(location, -1)
+		valid_tiles.set_cellv(Vector2(location + Vector2(1,0), 0))
+	if item_name == "wood fence":
+		fence_tiles.set_cellv(location, -1)
+		fence_tiles.update_bitmask_region()
+	elif item_name == "wood path" or item_name == "stone path":
+		path_tiles.set_cellv(location, -1)
+	else:
+		placable_object_tiles.set_cellv(location, -1)
+	queue_free()
 
 func set_dimensions():
 	if item_name == "wood chest" or item_name == "stone chest":
@@ -30,26 +48,26 @@ func set_dimensions():
 		position = position +  Vector2(16, 0)
 
 func _on_HurtBox_area_entered(area):
+	var data = {"id": name, "n": "object"}
+	Server.action("ON_HIT", data)
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
+	valid_tiles.set_cellv(Vector2(location), 0)
 	if item_name == "stone path":
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.play()
-	print(item_name)
+
 	if item_name == "wood chest" or item_name == "stone chest":
-		
+		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
 		drop_items_in_chest()
 	if item_name == "wood fence":
-		PlayerFarmApi.remove_placable_object(location)
 		fence_tiles.set_cellv(location, -1)
 		fence_tiles.update_bitmask_region()
 	elif item_name == "wood path" or item_name == "stone path":
-		PlayerFarmApi.remove_path_object(location)
 		path_tiles.set_cellv(location, -1)
 	else:
-		PlayerFarmApi.remove_placable_object(location)
 		placable_object_tiles.set_cellv(location, -1)
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType(item_name)

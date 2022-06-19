@@ -88,9 +88,8 @@ remote func loadMap(value):
 	else:
 		mapPartsLoaded = 0
 		generated_map = map
-		#set_chunk(generated_map)
-		#get_node("/root/World").buildMap(map)
-	
+
+
 #func set_chunk(_map):
 #	for position in map["dirt"]:
 #		if positon.x < 75 and position.y < 75:
@@ -242,19 +241,27 @@ remote func ReturnLatency(client_time):
 func action(type,data):
 	rpc_unreliable_id(1, "action", type, data)
 	
+	
 remote func ReceivedAction(time,player_id,type,data):
+#	print(str(generated_map[data["n"]][data["id"]]["h"]))
+	#get_node("/root/World/" + str(data["id"])).PlayEffect(generated_map[data["n"]][data["id"]]["h"], player_id)
 	if not player_id == get_tree().get_network_unique_id():
 		match type:
 			"MOVEMENT":
 				pass
 			#	get_node("/root/PlayerHomeFarm/" + str(player_id)).MovePlayer(position, direction)
 			"SWING":
-				print("SWING")
-				print(player_id)
-				print(type)
-				print(data)
+				get_node("/root/World/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
 			"ON_HIT":
-				print("ON HIT")
-				print(player_id)
-				print(type)
-				print(data)
+				if isLoaded:
+					get_node("/root/World/" + str(data["id"])).PlayEffect(player_id)
+			"PLACE_ITEM":
+				if isLoaded:
+					get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
+			"PLACE_SEED":
+				if isLoaded:
+					get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
+			"CHANGE_TILE":
+				if isLoaded:
+					get_node("/root/World").ChangeTile(data["n"], data["l"])
+				

@@ -6,10 +6,14 @@ onready var darkGrass = $GeneratedTiles/DarkGreenGrassTiles
 onready var water = $GeneratedTiles/Water
 onready var border = $GeneratedTiles/BorderTiles
 onready var validTiles = $GeneratedTiles/ValidTiles
+onready var fence = $PlacableTiles/FenceTiles
+onready var objects = $PlacableTiles/ObjectTiles
+onready var path = $PlacableTiles/PathTiles
+onready var hoed = $FarmingTiles/HoedAutoTiles
+onready var watered = $FarmingTiles/WateredAutoTiles
 
 onready var Player = preload("res://World/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate.tscn")
-
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var BranchObject = preload("res://World/Objects/Nature/Trees/TreeBranchObject.tscn")
@@ -22,7 +26,7 @@ onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObje
 onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
 onready var LoadingScreen = preload("res://MainMenu/LoadingScreen.tscn")
-
+onready var PlayerHouse = preload("res://World/Objects/Farm/PlayerHouseObject.tscn")
 var rng = RandomNumberGenerator.new()
 
 
@@ -62,6 +66,7 @@ func generate():
 	else:
 		yield(get_tree().create_timer(1), "timeout")
 		generate()
+	
 
 func spawnPlayer(value):
 	print('gettiing player')
@@ -139,10 +144,11 @@ func buildMap(map):
 			treeTypes.shuffle()
 			var variety = treeTypes.front()
 			var object = TreeObject.instance()
-			object.initialize(variety, map["tree"][id], true)
+			object.health = map["tree"][id]["h"]
+			object.initialize(variety, map["tree"][id])
 			object.position = sand.map_to_world(map["tree"][id]["l"]) + Vector2(0, -8)
 			object.name = id
-			add_child_below_node($Players,object,true)
+			add_child(object,true)
 	print("LOADED TREES")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["log"]:
@@ -151,9 +157,11 @@ func buildMap(map):
 			rng.randomize()
 			var variety = rng.randi_range(0, 11)
 			var object = BranchObject.instance()
+			object.name = id
+			object.health = map["log"][id]["h"]
 			object.initialize(variety, map["log"][id]["l"])
 			object.position = sand.map_to_world(map["log"][id]["l"]) + Vector2(16, 16)
-			add_child_below_node($Players,object)
+			add_child(object,true)
 	print("LOADED LOGS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["stump"]:
@@ -165,9 +173,11 @@ func buildMap(map):
 			treeTypes.shuffle()
 			var variety = treeTypes.front()
 			var object = StumpObject.instance()
+			object.health = map["stump"][id]["h"]
+			object.name = id
 			object.initialize(variety,map["stump"][id]["l"])
 			object.position = sand.map_to_world(map["stump"][id]["l"]) + Vector2(4,0)
-			add_child_below_node($Players,object)
+			add_child(object,true)
 	print("LOADED STUMPS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
@@ -177,9 +187,11 @@ func buildMap(map):
 			oreTypes.shuffle()
 			var variety = oreTypes.front()
 			var object = OreObject.instance()
+			object.health = map["ore_large"][id]["h"]
+			object.name = id
 			object.initialize(variety,map["ore_large"][id]["l"],true)
 			object.position = sand.map_to_world(map["ore_large"][id]["l"]) 
-			add_child_below_node($Players,object)
+			add_child(object,true)
 	print("LOADED LARGE OrE")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore"]:
@@ -188,9 +200,11 @@ func buildMap(map):
 			oreTypes.shuffle()
 			var variety = oreTypes.front()
 			var object = SmallOreObject.instance()
+			object.health = map["ore"][id]["h"]
+			object.name = id
 			object.initialize(variety,map["ore"][id]["l"])
 			object.position = sand.map_to_world(map["ore"][id]["l"]) + Vector2(16, 24)
-			add_child_below_node($Players,object)
+			add_child(object,true)
 	print("LOADED OrE")
 	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
@@ -201,9 +215,10 @@ func buildMap(map):
 			tall_grass_types.shuffle()
 			var variety = tall_grass_types.front()
 			var object = TallGrassObject.instance()
+			object.name = id
 			object.initialize(variety)
 			object.position = sand.map_to_world(map["tall_grass"][id]["l"]) + Vector2(16, 32)
-			add_child_below_node($Players,object)
+			add_child(object,true)
 		if count == 130:
 			yield(get_tree().create_timer(0.2), "timeout")
 			count = 0
@@ -214,7 +229,7 @@ func buildMap(map):
 			validTiles.set_cellv(map["flower"][id]["l"], -1)
 			var object = FlowerObject.instance()
 			object.position = sand.map_to_world(map["flower"][id]["l"]) + Vector2(16, 32)
-			add_child_below_node($Players,object)
+			add_child(object,true)
 	print("LOADED FLOWERS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	check_and_remove_invalid_autotiles(map)
@@ -316,6 +331,129 @@ func get_subtile_with_priority(id, tilemap: TileMap):
 				tile_array.append(Vector2(x,y))
 
 	return tile_array[randi() % tile_array.size()]
+
+
+func ChangeTile(type, location):
+	match type:
+		"hoe":
+			hoed.set_cellv(location, 0)
+		"water":
+			watered.set_cellv(location, 0)
+		"remove":
+			hoed.set_cellv(location, -1)
+			watered.set_cellv(location, -1)
+			validTiles.set_cellv(location, 0)
+	hoed.update_bitmask_region()
+	watered.update_bitmask_region()
+	
+func PlaceSeedInWorld(id, item_name, location):
+	var plantedCrop = PlantedCrop.instance()
+	plantedCrop.name = str(id)
+	plantedCrop.initialize(item_name, location, JsonData.crop_data[item_name]["DaysToGrow"], false, false)
+	add_child(plantedCrop, true)
+	plantedCrop.global_position = fence.map_to_world(location) + Vector2(0, 16)
+			
+
+func PlaceItemInWorld(id, item_name, location):
+	match item_name:
+		"torch":
+			var torchObject = TorchObject.instance()
+			torchObject.name = str(id)
+			torchObject.initialize(location)
+			add_child(torchObject,true)
+			torchObject.position = validTiles.map_to_world(location) + Vector2(16, 22)
+		"wood fence":
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox,true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+			fence.set_cellv(location, 0)
+			fence.update_bitmask_region()
+		"wood barrel":
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+			objects.set_cellv(location, 0)
+		"wood box":
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+			objects.set_cellv(location, 1)
+		"wood chest":
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+			objects.set_cellv(location, 2)
+			validTiles.set_cellv(location + Vector2(1, 0), -1)
+		"stone chest":
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+			objects.set_cellv(location, 5)
+			validTiles.set_cellv(location + Vector2(1, 0), -1)
+		"house":
+			var playerHouseObject = PlayerHouse.instance()
+			playerHouseObject.name = str(id)
+			call_deferred("add_child", playerHouseObject, true)
+			playerHouseObject.global_position = fence.map_to_world(location) + Vector2(6,6)
+			set_player_house_invalid_tiles(location)
+		"wood path1":
+			path.set_cellv(location, 0)
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+		"wood path2":
+			path.set_cellv(location, 1)
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+		"stone path1":
+			path.set_cellv(location, 2)
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+		"stone path2":
+			path.set_cellv(location, 3)
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+		"stone path3":
+			path.set_cellv(location, 4)
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+		"stone path4":
+			path.set_cellv(location, 5)
+			var tileObjectHurtBox = TileObjectHurtBox.instance()
+			tileObjectHurtBox.name = str(id)
+			tileObjectHurtBox.initialize(item_name, location)
+			call_deferred("add_child", tileObjectHurtBox, true)
+			tileObjectHurtBox.global_position = fence.map_to_world(location) + Vector2(16, 16)
+	
+
+func set_player_house_invalid_tiles(location):
+	for x in range(8):
+		for y in range(4):
+			validTiles.set_cellv(location + Vector2(x, -y), -1)
 
 
 func UpdateWorldState(world_state):					

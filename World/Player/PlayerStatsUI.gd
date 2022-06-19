@@ -7,11 +7,8 @@ func _ready():
 	set_stat_bars()
 	
 func set_stat_bars():
-	print(PlayerStats.energy)
 	$EnergyUI/EnergyPgBar.max_value = PlayerStats.energy_maximum
 	$EnergyUI/EnergyPgBar.value = PlayerStats.energy
-
-
 
 func _on_ManaArea_mouse_entered():
 	$ManaUI/ManaLabel.visible = true

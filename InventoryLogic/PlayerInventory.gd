@@ -17,21 +17,23 @@ var inventory = {
 	3: ["wood", 37],
 	4: ["scythe", 1], 
 	6: ["stone ore", 35],
-	7: ["wood", 10],
-#	11: ["potato seeds", 28],
+	7: ["bucket", 1],
+	10: ["potato seeds", 28],
 #	#14: ["torch", 76],
 #	10: ["stone ore", 7],
 }
 
 var hotbar = {
-	1: ["wood", 10], 
+	1: ["house", 1], 
 	4: ["wood", 89], 
-	6: ["wood", 13],
+	#6: ["wood", 13],
 	2: ["stone ore", 75],
 #	2: ["potato seeds", 28],
 	7: ["hoe", 1], 
 	8: ["axe", 1],
-	9:["pickaxe", 1]
+	9:["pickaxe", 1],
+	6: ["bucket", 1],
+	0: ["potato seeds", 28],
 ##	3: ["bucket", 1],
 #	#5: ["wood", 52],
 #	6: ["bucket", 70],
@@ -43,7 +45,7 @@ var hotbar = {
 }
 
 var chest = {
-	2 : ["stone ore", 49]
+	#2 : ["stone ore", 49]
 }
 
 func clear_chest_data():

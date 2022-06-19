@@ -20,6 +20,10 @@ var quantity
 func initItemDropType(_item_name, var _quantity = 1):
 	item_name = _item_name
 	quantity = _quantity
+	if item_name == "wood path1" or item_name == "wood path2":
+		item_name = "wood path"
+	elif item_name == "stone path1" or item_name == "stone path2" or  item_name == "stone path3" or item_name == "stone path4": 
+		item_name = "stone path"
 #	if item_name == "Cobblestone":
 #		item_name = "Stone"
 #	api_call_name = item_name
