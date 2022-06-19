@@ -253,11 +253,15 @@ remote func ReceivedAction(time,player_id,type,data):
 			"SWING":
 				get_node("/root/World/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
 			"ON_HIT":
-				get_node("/root/World/" + str(data["id"])).PlayEffect(player_id)
+				if isLoaded:
+					get_node("/root/World/" + str(data["id"])).PlayEffect(player_id)
 			"PLACE_ITEM":
-				get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
+				if isLoaded:
+					get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
 			"PLACE_SEED":
-				get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
+				if isLoaded:
+					get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
 			"CHANGE_TILE":
-				get_node("/root/World").ChangeTile(data["n"], data["l"])
+				if isLoaded:
+					get_node("/root/World").ChangeTile(data["n"], data["l"])
 				
