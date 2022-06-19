@@ -3,11 +3,18 @@ extends Node2D
 onready var rng = RandomNumberGenerator.new()
 var variety
 
+
+var bodyEnteredFlag = false
+
+
 func _ready():
 	rng.randomize()
 	variety = rng.randi_range(1, 20)
 	$Sprite.texture = load("res://Assets/Images/flowers/" + str(variety) + ".png")
 
+
+func PlayEffect(player_id):
+	play_sound_effect()
 
 func play_sound_effect():
 	if !bodyEnteredFlag:
@@ -15,10 +22,10 @@ func play_sound_effect():
 		$SoundEffects.play()
 		$AnimationPlayer.play("animate")
 
-var bodyEnteredFlag = false
-
 
 func _on_Area2D_body_entered(_body):
+	var data = {"id": name, "n": "flower"}
+	Server.action("ON_HIT", data)
 	play_sound_effect()
 	bodyEnteredFlag = true
 

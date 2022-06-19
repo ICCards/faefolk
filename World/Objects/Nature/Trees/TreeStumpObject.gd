@@ -11,6 +11,8 @@ onready var world = get_tree().current_scene
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
 var treeObject
 var position_of_object 
+var hit_dir
+var health
 
 func initialize(variety, inputPos):
 	position_of_object = inputPos
@@ -19,35 +21,53 @@ func initialize(variety, inputPos):
 func _ready():
 	setTexture(treeObject)
 
+
+func PlayEffect(player_id):
+	health -= 1
+	if get_node("/root/World/Players/" + str(player_id)).get_position().x < get_position().x:
+		hit_dir = "right"
+	else:
+		hit_dir = "left"
+	if health >= 1:
+		if hit_dir == "right":
+			stump_animation_player.play("stump hit right")
+			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
+		else: 
+			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
+			stump_animation_player.play("stump hit right")
+	else:
+		stump_animation_player.play("stump destroyed")
+		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
+		
 func setTexture(tree):
 	treeStumpSprite.texture = tree.largeStump
 
 
 var stumpHealth: int = 2
 func _on_StumpHurtBox_area_entered(_area):
-	if stumpHealth == 0: 
+	var data = {"id": name, "n": "stump"}
+	Server.action("ON_HIT", data)
+	health -= 1
+	if health <= 0: 
 		$SoundEffects.stream = Sounds.stump_break
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
-		stump_animation_player.play("stump_destroyed")
+		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 		intitiateItemDrop("wood", Vector2(0, 0), 3)
-		PlayerFarmApi.remove_farm_object(position_of_object)
 		yield($SoundEffects, "finished")
 		queue_free()
-	
-	elif stumpHealth != 0 :
+	else:
 		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
-		if get_node("/root/World/Players/Player").get_position().x <= get_position().x:
-			stump_animation_player.play("stump_hit_right")
+		if get_node("/root/World/Players/" + str(Server.player_id)).get_position().x <= get_position().x:
+			stump_animation_player.play("stump hit right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
-			stumpHealth = stumpHealth - 1
 		else: 
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			stump_animation_player.play("stump_hit_right")
-			stumpHealth = stumpHealth - 1
+			stump_animation_player.play("stump hit right")
+
 			
 
 ### Effect functions		

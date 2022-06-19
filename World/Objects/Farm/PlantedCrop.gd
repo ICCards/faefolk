@@ -7,8 +7,10 @@ var phase
 var is_in_regrowth_phase
 var crop_is_dead 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var invisible_planted_crop_cells = get_node("/root/PlayerHomeFarm/GroundTiles/InvisiblePlantedCropCells")
 
+
+func PlayEffect(player_id):
+	queue_free()
 
 func initialize(cropNameInput, locationInput, daysUntilHarvestInput, isInRegrowthPhaseInput, ifCropIsAlreadyDead):
 	crop_name = cropNameInput
@@ -98,8 +100,7 @@ func harvest_and_remove():
 		isBeingHarvested = true
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
-		PlayerFarmApi.remove_crop(location)
-		invisible_planted_crop_cells.set_cellv(location, -1)
+		#valid_tiles.set_cellv(location, -1)
 		yield($HarvestSound, "finished")
 		queue_free()
 	
@@ -141,4 +142,6 @@ func _on_PlayAnimBox_body_exited(body):
 
 
 func _on_HurtBox_area_entered(area):
+	var data = {"id": name, "n": "object"}
+	Server.action("ON_HIT", data)
 	queue_free()
