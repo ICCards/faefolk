@@ -14,7 +14,7 @@ func PlayEffect(player_id):
 	queue_free()
 
 func _on_BreakObjectBox_area_entered(area):
-	var data = {"id": name}
+	var data = {"id": name, "n": "decoration"}
 	Server.action("ON_HIT", data)
 	valid_tiles.set_cellv(position_of_object, 0)
 	var itemDrop = ItemDrop.instance()

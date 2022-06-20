@@ -1033,6 +1033,7 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="ValidTiles" type="TileMap" parent="GeneratedTiles"]
+visible = false
 tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1

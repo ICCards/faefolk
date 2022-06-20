@@ -26,7 +26,8 @@ onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObje
 onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
 onready var LoadingScreen = preload("res://MainMenu/LoadingScreen.tscn")
-onready var PlayerHouse = preload("res://World/Objects/Farm/PlayerHouseObject.tscn")
+onready var PlayerHouse = preload("res://World/Objects/Farm/PlayerHouse.tscn")
+onready var PlayerHouseTemplate = preload("res://World/Objects/Farm/PlayerHouseTemplate.tscn")
 var rng = RandomNumberGenerator.new()
 
 
@@ -58,15 +59,17 @@ func _ready():
 	loadingScreen.name = "loadingScreen"
 	add_child(loadingScreen)
 	yield(get_tree().create_timer(1), "timeout")
-	generate()
+	Server.generated_map.clear()
+	Server.generate_map()
+	wait_for_map()
 		
-func generate():
+func wait_for_map():
 	if not Server.generated_map.empty():
 		buildMap(Server.generated_map)
 	else:
-		yield(get_tree().create_timer(1), "timeout")
-		generate()
-	
+		yield(get_tree().create_timer(0.5), "timeout")
+		wait_for_map()
+
 
 func spawnPlayer(value):
 	print('gettiing player')
@@ -81,7 +84,10 @@ func spawnPlayer(value):
 		player.character = _character.new()
 		player.character.LoadPlayerCharacter(value["c"]) 
 		$Players.add_child(player)
-		player.position = sand.map_to_world(value["p"])
+		if Server.player_house_position == null:
+			player.position = sand.map_to_world(value["p"]) + Vector2(1000, 800)
+		else: 
+			player.position = sand.map_to_world(Server.player_house_position)
 		print('getting map')
 		
 		
@@ -231,6 +237,15 @@ func buildMap(map):
 			object.position = sand.map_to_world(map["flower"][id]["l"]) + Vector2(16, 32)
 			add_child(object,true)
 	print("LOADED FLOWERS")
+	for id in map["decorations"]:
+		match map["decorations"][id]["n"]:
+			"seed":
+				PlaceSeedInWorld(id, map["decorations"]["seed"][id]["n"], map["decorations"]["seed"][id]["l"])
+			"placable": 
+				PlaceItemInWorld(id, map["decorations"]["placable"][id]["n"], map["decorations"]["placable"][id]["l"])
+	for id in map["tile"]:
+		ChangeTile(map["tile"][id]["n"], map["tile"][id]["l"])
+	print("LOADED OBJECTS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	check_and_remove_invalid_autotiles(map)
 	generate_border_tiles()
@@ -242,6 +257,7 @@ func buildMap(map):
 	darkGrass.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
 	water.update_bitmask_region()
+	Server.player_state = "WORLD"
 	Server.isLoaded = true
 	print("Map loaded")
 	get_node("loadingScreen").queue_free()
@@ -355,6 +371,7 @@ func PlaceSeedInWorld(id, item_name, location):
 			
 
 func PlaceItemInWorld(id, item_name, location):
+	print("PLACE ITEM IN WORLD " + item_name + str(location))
 	match item_name:
 		"torch":
 			var torchObject = TorchObject.instance()
@@ -401,11 +418,18 @@ func PlaceItemInWorld(id, item_name, location):
 			objects.set_cellv(location, 5)
 			validTiles.set_cellv(location + Vector2(1, 0), -1)
 		"house":
-			var playerHouseObject = PlayerHouse.instance()
-			playerHouseObject.name = str(id)
-			call_deferred("add_child", playerHouseObject, true)
-			playerHouseObject.global_position = fence.map_to_world(location) + Vector2(6,6)
-			set_player_house_invalid_tiles(location)
+			if location == Server.player_house_position:
+				var playerHouse = PlayerHouse.instance()
+				playerHouse.name = str(id)
+				call_deferred("add_child", playerHouse, true)
+				playerHouse.global_position = fence.map_to_world(location) + Vector2(6,6)
+				set_player_house_invalid_tiles(location)
+			else:
+				var playerHouseTemplate = PlayerHouseTemplate.instance()
+				playerHouseTemplate.name = str(id)
+				call_deferred("add_child", playerHouseTemplate, true)
+				playerHouseTemplate.global_position = fence.map_to_world(location) + Vector2(6,6)
+				set_player_house_invalid_tiles(location)
 		"wood path1":
 			path.set_cellv(location, 0)
 			var tileObjectHurtBox = TileObjectHurtBox.instance()
