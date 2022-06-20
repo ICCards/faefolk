@@ -237,12 +237,14 @@ func buildMap(map):
 			object.position = sand.map_to_world(map["flower"][id]["l"]) + Vector2(16, 32)
 			add_child(object,true)
 	print("LOADED FLOWERS")
-	for id in map["decorations"]:
-		match map["decorations"][id]["n"]:
+	for key in map["decorations"].keys():
+		match key:
 			"seed":
-				PlaceSeedInWorld(id, map["decorations"]["seed"][id]["n"], map["decorations"]["seed"][id]["l"])
+				for id in map["decorations"][key].keys():
+					PlaceSeedInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"])
 			"placable": 
-				PlaceItemInWorld(id, map["decorations"]["placable"][id]["n"], map["decorations"]["placable"][id]["l"])
+				for id in map["decorations"][key].keys():
+					PlaceItemInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"])
 	for id in map["tile"]:
 		ChangeTile(map["tile"][id]["n"], map["tile"][id]["l"])
 	print("LOADED OBJECTS")

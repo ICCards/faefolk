@@ -1,6 +1,5 @@
 extends Node2D
 
-
 onready var PlayerMenuState = preload("res://MainMenu/PlayerMenuState.tscn")
 
 var is_menu_open = false
