@@ -610,3 +610,11 @@ func _on_DetectStonePath_area_exited(area):
 		$FootstepsSound.stream = Sounds.current_footsteps_sound
 		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
 		$FootstepsSound.play()
+
+
+
+func _on_EnterDoors_area_exited(area:Area2D):
+	pass # Replace with function body.
+
+func _on_EnterDoors_area_entered(area:Area2D):
+	pass # Replace with function body.
