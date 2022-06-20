@@ -23,20 +23,7 @@ var player_id
 var mapPartsLoaded = 0
 var player_house_position
 
-var map = {
-	"dirt":[],
-	"grass":[],
-	"dark_grass":[],
-	"tall_grass":[],
-	"water":[],
-	"tree":[],
-	"ore_large":[],
-	"ore":[],
-	"log":[],
-	"stump":[],
-	"flower":[],
-	"house_objects": []
-}
+var map = {}
 var generated_map = {}
 var player_state = "WORLD"
 
@@ -71,13 +58,28 @@ func _connected_ok():
 	self.add_child(timer)
 	player_id = get_tree().get_network_unique_id()
 	print(player_id)
-	rpc_unreliable_id(1, "getMap",Server.map.keys()[mapPartsLoaded])
+	#rpc_unreliable_id(1, "getMap",Server.map.keys()[mapPartsLoaded])
 	
 	
 	
 	
 func generate_map():
-	rpc_unreliable_id(1, "getMap",Server.map.keys()[mapPartsLoaded])
+	map = {
+	"dirt":[],
+	"grass":[],
+	"dark_grass":[],
+	"tall_grass":[],
+	"water":[],
+	"tree":[],
+	"ore_large":[],
+	"ore":[],
+	"log":[],
+	"stump":[],
+	"flower":[],
+	"decorations": [],
+	"tile": []
+	}
+	rpc_unreliable_id(1, "getMap",map.keys()[mapPartsLoaded])
 	
 	
 remote func loadMap(value):

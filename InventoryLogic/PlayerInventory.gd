@@ -33,7 +33,7 @@ var hotbar = {
 	8: ["axe", 1],
 	9:["pickaxe", 1],
 	6: ["bucket", 1],
-	0: ["potato seeds", 28],
+	
 ##	3: ["bucket", 1],
 #	#5: ["wood", 52],
 #	6: ["bucket", 70],
@@ -45,7 +45,13 @@ var hotbar = {
 }
 
 var chest = {
-	#2 : ["stone ore", 49]
+	0: ["potato seeds", 30],
+	1: ["carrot seeds", 30],
+	2: ["garlic seeds", 30],
+	3: ["cauliflower seeds", 30],
+	4: ["yellow pepper seeds", 30],
+	5: ["strawberry seeds", 30],
+	6: ["green bean seeds", 30]
 }
 
 func clear_chest_data():
