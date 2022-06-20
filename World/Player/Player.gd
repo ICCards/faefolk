@@ -44,7 +44,7 @@ var rng = RandomNumberGenerator.new()
 var player_state
 var animation = "idle_down"
 
-var MAX_SPEED := 12.5
+var MAX_SPEED := 30 #12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -114,7 +114,7 @@ func _unhandled_input(event):
 			direction = "RIGHT"
 		if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
 			idle_state(direction)
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode: 
+		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode and Server.player_state == "WORLD": 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and setting == "World":
@@ -144,8 +144,6 @@ func sendAction(action,data):
 			Server.action("SWING", data)
 		(PLACE_ITEM):
 			Server.action("PLACE_ITEM", data)
-		(PLACE_SEED):
-			Server.action("PLACE_SEED", data)
 		(CHANGE_TILE):
 			Server.action("CHANGE_TILE", data)
 
@@ -239,8 +237,8 @@ func validate_house_tiles(_location):
 
 func place_placable_object(item_name, location):
 	rng.randomize()
-	var id = rng.randi_range(1,10000)
-	var data = {"id": id, "n": str(item_name), "l": location}
+	var id = Uuid.v4()
+	var data = {"id": id, "n": item_name, "l": location, "t": "placable"}
 	sendAction(PLACE_ITEM, data)
 	PlayerInventory.remove_single_object_from_hotbar()
 	match item_name:
@@ -369,9 +367,9 @@ func place_seed_state(event, item_name):
 	else:	
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
-			var id = rng.randi_range(1,10000)
-			var data = {"id": id, "n": str(item_name), "l": location}
-			sendAction(PLACE_SEED, data)
+			var id = Uuid.v4()
+			var data = {"id": id, "n": item_name, "l": location, "t": "seed"}
+			sendAction(PLACE_ITEM, data)
 			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()

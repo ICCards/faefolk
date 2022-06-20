@@ -142,6 +142,6 @@ func _on_PlayAnimBox_body_exited(body):
 
 
 func _on_HurtBox_area_entered(area):
-	var data = {"id": name, "n": "object"}
+	var data = {"id": name, "n": "decoration"}
 	Server.action("ON_HIT", data)
 	queue_free()
