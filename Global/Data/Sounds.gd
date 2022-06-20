@@ -89,6 +89,8 @@ var put_down_house_object = preload("res://Assets/Sound/Sound effects/UI/put dow
 var door_open = preload("res://Assets/Sound/Sound effects/Door/door open.mp3")
 var door_close = preload("res://Assets/Sound/Sound effects/Door/door close.mp3")
 
+var chest_open = preload("res://Assets/Sound/Sound effects/chest/open.mp3")
+
 var ore_hit = [
 	preload("res://Assets/Sound/Sound effects/Ore/Ore hit 1.mp3"),
 	preload("res://Assets/Sound/Sound effects/Ore/Ore hit 2.mp3"),
