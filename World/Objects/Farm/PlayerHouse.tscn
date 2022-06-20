@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Images/Farm/player_house.png" type="Texture" id=1]
-[ext_resource path="res://World/Objects/Farm/PlayerHouseObject.gd" type="Script" id=2]
+[ext_resource path="res://World/Objects/Farm/PlayerHouse.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 27, 22.7188 )
@@ -50,5 +50,3 @@ polygon = PoolVector2Array( -101.968, -108.368, -101.968, -218.368, 40, -357, 18
 [connection signal="area_entered" from="Doorway" to="." method="_on_Doorway_area_entered"]
 [connection signal="area_entered" from="BehindHouseArea" to="." method="_on_BehindHouseArea_area_entered"]
 [connection signal="area_exited" from="BehindHouseArea" to="." method="_on_BehindHouseArea_area_exited"]
-[connection signal="body_entered" from="BehindHouseArea" to="." method="_on_BehindHouseArea_body_entered"]
-[connection signal="body_exited" from="BehindHouseArea" to="." method="_on_BehindHouseArea_body_exited"]

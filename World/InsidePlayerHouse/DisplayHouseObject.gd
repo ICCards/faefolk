@@ -8,7 +8,11 @@ var position_of_object
 func init(new_image, new_pos):
 	position_of_object = new_pos
 	image = new_image
+	
+func PickUpItem():
+	queue_free()
 
+var rng = RandomNumberGenerator.new()
 
 
 func _ready():
@@ -55,11 +59,12 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 	var mousePos = get_global_mouse_position() + Vector2(-16, 16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	if event.is_action_pressed("mouse_click"):
+		var location = (mousePos / 32 - Vector2(0, 5))
 		if moveItemFlag:
 			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 			for i in range(PlayerInventory.player_home.size()):
 				if PlayerInventory.player_home[i][0] == image and !is_colliding_other_object and !validateTileBoundary(position / 32):
-					PlayerInventory.player_home[i][1] = (mousePos / 32 - Vector2(0, 5))
+					PlayerInventory.player_home[i][1] = location
 					$MovementCollision/CollisionShape2D.disabled = !JsonData.house_objects_data[image]["CollisionEnabled"]
 					$ColorIndicator.visible = false
 					moveItemFlag = false
@@ -102,7 +107,7 @@ func _physics_process(_event):
 		else:
 			$ColorIndicator.texture = load("res://Assets/Images/Misc/green_square.png")
 	elif insideLightFireplaceArea:
-		if Input.is_action_just_pressed("action"):
+		if Input.is_action_just_pressed("open_door"):
 			light_fire()
 
 var is_colliding_other_object = false

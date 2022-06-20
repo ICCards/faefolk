@@ -11,6 +11,10 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
 
+onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObject.tscn")
+onready var PlantedCrop = preload("res://World/Objects/Farm/PlantedCrop.tscn")
+onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
+onready var PlayerHouseObject = preload("res://World/Objects/Farm/PlayerHouse.tscn")
 
 var valid_object_tiles
 var hoed_tiles
@@ -22,12 +26,7 @@ var path_tiles
 var delta
 var character
 var path_index = 1
-
-
-onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObject.tscn")
-onready var PlantedCrop = preload("res://World/Objects/Farm/PlantedCrop.tscn")
-onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
-onready var PlayerHouseObject = preload("res://World/Objects/Farm/PlayerHouseObject.tscn")
+var setting
 
 onready var state = MOVEMENT
 
@@ -40,9 +39,15 @@ enum {
 }
 
 onready var direction = "DOWN"
+var rng = RandomNumberGenerator.new()
 
 var player_state
 var animation = "idle_down"
+
+var MAX_SPEED := 12.5
+var ACCELERATION := 6
+var FRICTION := 8
+var velocity := Vector2.ZERO
 
 
 func initialize_camera_limits(top_left, bottom_right):
@@ -50,9 +55,6 @@ func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_left = top_left.x
 	$Camera2D.limit_bottom = bottom_right.y
 	$Camera2D.limit_right = bottom_right.x
-
-func initialize_character(_character):
-	character = _character
 
 func _ready():
 	set_physics_process(false)
@@ -77,8 +79,6 @@ func set_new_music_volume():
 	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
 	
 
-
-var rng = RandomNumberGenerator.new()
 func _play_background_music():
 	rng.randomize()
 	$BackgroundMusic.stream = Sounds.background_music[rng.randi_range(0, Sounds.background_music.size() - 1)]
@@ -88,16 +88,9 @@ func _play_background_music():
 	_play_background_music()
 	
 
-var is_mouse_over_hotbar = false
-
 func _process(_delta) -> void:
 	delta = _delta
-	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
-	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:
-		is_mouse_over_hotbar = true
-	else:
-		is_mouse_over_hotbar = false
-	if PlayerInventory.viewInventoryMode == false:
+	if not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
@@ -108,14 +101,6 @@ func _process(_delta) -> void:
 	else: 
 		idle_state(direction)
 
-
-#func _physics_process(delta):
-#	DefinePlayerState()
-#
-#func DefinePlayerState():
-#	player_state = {"T": Server.client_clock, "K": get_global_position(), "D": direction.to_lower()}
-#	print(player_state)
-#	Server.message_send(player_state)
 
 func _unhandled_input(event):
 	if !swingActive:
@@ -129,7 +114,7 @@ func _unhandled_input(event):
 			direction = "RIGHT"
 		if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
 			idle_state(direction)
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and PlayerInventory.viewInventoryMode == false: #and !is_mouse_over_hotbar:
+		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and setting == "World":
@@ -165,17 +150,16 @@ func sendAction(action,data):
 			Server.action("CHANGE_TILE", data)
 
 
-
-func get_object_variety(item_name):
-	if item_name == "wood path" and path_index > 2:
+func get_path_rotation(path_name):
+	if path_name == "wood path" and path_index > 2:
 		path_index = 1
-	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + str(path_index) + ".png")
-	if item_name == "wood path":
+	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + path_name + str(path_index) + ".png")
+	if path_name == "wood path":
 		if Input.is_action_pressed("rotate"):
 			path_index += 1
 			if path_index == 3:
 				path_index = 1
-	elif item_name == "stone path":
+	elif path_name == "stone path":
 		if Input.is_action_pressed("rotate"):
 			path_index += 1
 			if path_index == 5:
@@ -183,7 +167,7 @@ func get_object_variety(item_name):
 
 
 func place_path_state(event, item_name):
-	get_object_variety(item_name)
+	get_path_rotation(item_name)
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
 	$PlaceItemsUI/RotateIcon.visible = true
@@ -206,7 +190,6 @@ func place_item_state(event, item_name):
 	$PlaceItemsUI/ColorIndicator.visible = true
 	$PlaceItemsUI/ItemToPlace.visible = true
 	$PlaceItemsUI/ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
-
 	var mousePos = get_global_mouse_position() + Vector2(-16, -16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	$PlaceItemsUI.set_global_position(mousePos)
@@ -244,11 +227,11 @@ func place_item_state(event, item_name):
 func validate_house_tiles(_location):
 	var loc = _location
 	var active = false
-	if loc == _location and not active:
+	if not active:
 		active = true
 		for x in range(8):
 			for y in range(4):
-				if valid_object_tiles.get_cellv( Vector2(x, -y) + loc) == -1: #or loc != _location:
+				if valid_object_tiles.get_cellv( Vector2(x, -y) + loc) == -1: 
 					return false
 					break
 		return true
@@ -314,6 +297,7 @@ func place_placable_object(item_name, location):
 		"house":
 			var playerHouseObject = PlayerHouseObject.instance()
 			playerHouseObject.name = str(id)
+			Server.player_house_position = location
 			get_parent().get_parent().call_deferred("add_child", playerHouseObject, true)
 			playerHouseObject.global_position = fence_tiles.map_to_world(location) + Vector2(6,6)
 			set_player_house_invalid_tiles(location)
@@ -398,11 +382,6 @@ func place_seed_state(event, item_name):
 			plantedCrop.initialize(item_name, location, JsonData.crop_data[item_name]["DaysToGrow"], false, false)
 			get_parent().add_child(plantedCrop, true)
 			plantedCrop.global_position = mousePos + Vector2(0, 16)
-
-var MAX_SPEED := 24 #12.5
-var ACCELERATION := 6
-var FRICTION := 8
-var velocity := Vector2.ZERO
 
 func movement_state(delta):
 	if !swingActive:
@@ -580,10 +559,7 @@ func set_day():
 	day_night_animation_player.play_backwards("set night")
 
 
-var setting
-
 func set_player_setting(ownerNode):
-	print(str(ownerNode).substr(0, 5))
 	if str(ownerNode).substr(0, 5) == "World":
 		setting = "World"
 		$FootstepsSound.stream = Sounds.dirt_footsteps
@@ -601,15 +577,6 @@ func set_player_setting(ownerNode):
 		$FootstepsSound.stream = Sounds.wood_footsteps
 		$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
 		$FootstepsSound.play()
-
-
-
-var sceneTransitionFlag = false
-func _on_EnterDoors_area_entered(_area):
-	sceneTransitionFlag = true
-
-func _on_EnterDoors_area_exited(_area):
-	sceneTransitionFlag = false
 
 
 

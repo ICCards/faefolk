@@ -1,10 +1,10 @@
 extends Node
 
-const DEFAULT_IP = "198.211.104.56"
-const DEFAULT_PORT = 45124
+#const DEFAULT_IP = "198.211.104.56"
+#const DEFAULT_PORT = 45124
 
-#const DEFAULT_IP = "127.0.0.1"
-#const DEFAULT_PORT = 65124
+const DEFAULT_IP = "127.0.0.1"
+const DEFAULT_PORT = 65124
 
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
@@ -21,6 +21,7 @@ var isLoaded = false
 var player
 var player_id
 var mapPartsLoaded = 0
+var player_house_position
 
 var map = {
 	"dirt":[],
@@ -34,9 +35,10 @@ var map = {
 	"log":[],
 	"stump":[],
 	"flower":[],
+	"house_objects": []
 }
 var generated_map = {}
-var chuck1 = {}
+var player_state = "WORLD"
 
 func _ready():
 	_connect_to_server()
@@ -90,74 +92,6 @@ remote func loadMap(value):
 		generated_map = map
 
 
-#func set_chunk(_map):
-#	for position in map["dirt"]:
-#		if positon.x < 75 and position.y < 75:
-#			chuck1.append
-#	for position in map["dark_grass"]:
-#		_set_cell(sand, position.x, position.y, 0)
-#		grass.set_cellv(position, 0)
-#	for position in map["grass"]:
-#		grass.set_cellv(position, 0)
-#		darkGrass.set_cellv(position, 0)
-#	for position in map["water"]:
-#		darkGrass.set_cellv(position, 0)
-#		water.set_cellv(position, 0)
-#	for position in map["flower"]:
-#		if is_valid_position(position):
-#			var object = FlowerObject.instance()
-#			object.position = sand.map_to_world(position)
-#			add_child_below_node($Players,object)
-#	for position in map["tree"]:
-#		if is_valid_position(position):
-#			treeTypes.shuffle()
-#			var variety = treeTypes.front()
-#			var object = TreeObject.instance()
-#			object.initialize(variety, position, true)
-#			object.position = sand.map_to_world(position)
-#			add_child_below_node($Players,object)
-#	for position in map["log"]:
-#		if is_valid_position(position):
-#			treeTypes.shuffle()
-#			var variety = treeTypes.front()
-#			var object = StumpObject.instance()
-#			object.initialize(variety,position)
-#			object.position = sand.map_to_world(position)
-#			add_child_below_node($Players,object)
-#	for position in map["stump"]:
-#		if is_valid_position(position):
-#			treeTypes.shuffle()
-#			var variety = treeTypes.front()
-#			var object = StumpObject.instance()
-#			object.initialize(variety,position)
-#			object.position = sand.map_to_world(position)
-#			add_child_below_node($Players,object)
-#	for position in map["ore_large"]:
-#		if is_valid_position(position):
-#			oreTypes.shuffle()
-#			var variety = oreTypes.front()
-#			var object = OreObject.instance()
-#			object.initialize(variety,position,true)
-#			object.position = sand.map_to_world(position)
-#			add_child_below_node($Players,object)
-#	for position in map["ore"]:
-#		if is_valid_position(position):
-#			oreTypes.shuffle()
-#			var variety = oreTypes.front()
-#			var object = SmallOreObject.instance()
-#			object.initialize(variety,position)
-#			object.position = sand.map_to_world(position)
-#			add_child_below_node($Players,object)
-#	for position in map["tall_grass"]:
-#		if is_valid_position(position):
-#			tall_grass_types.shuffle()
-#			var variety = tall_grass_types.front()
-#			var object = TallGrassObject.instance()
-#			object.initialize(variety)
-#			object.position = sand.map_to_world(position)
-#			add_child_below_node($Players,object)
-
-
 func _connected_fail():
 	print("Failed to connect")
 	
@@ -167,6 +101,7 @@ func _server_disconnected():
 	
 remote func SpawnPlayer(_player):
 	player = _player
+	print("PLAYER " + str(player))
 	#get_node("/root/World").spawnPlayer(player)
 	#get_node("/root/MainMenu").spawn_player_in_menu(player)
 
@@ -180,8 +115,11 @@ remote func DespawnPlayer(player_id):
 
 remote func updateState(state):
 	if isLoaded:
-		get_node("/root/World").UpdateWorldState(state)
-		
+		if player_state == "WORLD":
+			get_node("/root/World").UpdateWorldState(state)
+#		elif player_state == "HOME":
+#			get_node("/root/InsidePlayerHome").UpdateWorldState(state)
+#
 
 
 func _physics_process(delta):
@@ -251,13 +189,23 @@ remote func ReceivedAction(time,player_id,type,data):
 				pass
 			#	get_node("/root/PlayerHomeFarm/" + str(player_id)).MovePlayer(position, direction)
 			"SWING":
-				get_node("/root/World/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
+				if isLoaded:
+					if player_state == "WORLD":
+						get_node("/root/World/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
+					else:
+						get_node("/root/InsidePlayerHome/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
 			"ON_HIT":
 				if isLoaded:
-					get_node("/root/World/" + str(data["id"])).PlayEffect(player_id)
+					if player_state == "WORLD":
+						get_node("/root/World/" + str(data["id"])).PlayEffect(player_id)
+#					else:
+#						get_node("/root/InsidePlayerHome/" + str(data["id"])).PickUpItem()
 			"PLACE_ITEM":
 				if isLoaded:
-					get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
+					if player_state == "WORLD":
+						get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
+#					else:
+#						get_node("/root/InsidePlayerHome").PlaceItemInHouse(data["id"], data["n"], data["l"])
 			"PLACE_SEED":
 				if isLoaded:
 					get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
