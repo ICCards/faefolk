@@ -26,7 +26,8 @@ onready var TorchObject = preload("res://World/Objects/AnimatedObjects/TorchObje
 onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/PlayerFarm/TileObjectHurtBox.tscn")
 onready var LoadingScreen = preload("res://MainMenu/LoadingScreen.tscn")
-onready var PlayerHouse = preload("res://World/Objects/Farm/PlayerHouseObject.tscn")
+onready var PlayerHouse = preload("res://World/Objects/Farm/PlayerHouse.tscn")
+onready var PlayerHouseTemplate = preload("res://World/Objects/Farm/PlayerHouseTemplate.tscn")
 var rng = RandomNumberGenerator.new()
 
 
@@ -66,6 +67,7 @@ func generate():
 	else:
 		yield(get_tree().create_timer(1), "timeout")
 		generate()
+
 	
 
 func spawnPlayer(value):
@@ -81,7 +83,10 @@ func spawnPlayer(value):
 		player.character = _character.new()
 		player.character.LoadPlayerCharacter(value["c"]) 
 		$Players.add_child(player)
-		player.position = sand.map_to_world(value["p"])
+		if Server.player_house_position == null:
+			player.position = sand.map_to_world(value["p"])
+		else: 
+			player.position = sand.map_to_world(Server.player_house_position)
 		print('getting map')
 		
 		
@@ -242,6 +247,7 @@ func buildMap(map):
 	darkGrass.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
 	water.update_bitmask_region()
+	Server.player_state = "WORLD"
 	Server.isLoaded = true
 	print("Map loaded")
 	get_node("loadingScreen").queue_free()
@@ -401,10 +407,10 @@ func PlaceItemInWorld(id, item_name, location):
 			objects.set_cellv(location, 5)
 			validTiles.set_cellv(location + Vector2(1, 0), -1)
 		"house":
-			var playerHouseObject = PlayerHouse.instance()
-			playerHouseObject.name = str(id)
-			call_deferred("add_child", playerHouseObject, true)
-			playerHouseObject.global_position = fence.map_to_world(location) + Vector2(6,6)
+			var playerHouseTemplate = PlayerHouseTemplate.instance()
+			playerHouseTemplate.name = str(id)
+			call_deferred("add_child", playerHouseTemplate, true)
+			playerHouseTemplate.global_position = fence.map_to_world(location) + Vector2(6,6)
 			set_player_house_invalid_tiles(location)
 		"wood path1":
 			path.set_cellv(location, 0)
