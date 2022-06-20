@@ -767,6 +767,8 @@ visible = false
 position = Vector2( 372, 56 )
 scale = Vector2( 0.5, 0.5 )
 
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="Camera2D/UserInterface"]
+
 [node name="DayNight" type="CanvasModulate" parent="Camera2D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/DayNight"]
@@ -853,7 +855,6 @@ scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
 [node name="EnterDoors" type="Area2D" parent="."]
-visible = false
 collision_layer = 32
 collision_mask = 0
 
@@ -928,8 +929,6 @@ autoplay = true
 
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
-[connection signal="area_entered" from="EnterTreeTop" to="." method="_on_EnterDoors_area_entered"]
-[connection signal="area_exited" from="EnterTreeTop" to="." method="_on_EnterDoors_area_exited"]
 [connection signal="area_entered" from="DetectPathUI/DetectWoodPath" to="." method="_on_DetectWoodArea_area_entered"]
 [connection signal="area_exited" from="DetectPathUI/DetectWoodPath" to="." method="_on_DetectWoodArea_area_exited"]
 [connection signal="area_entered" from="DetectPathUI/DetectStonePath" to="." method="_on_DetectStonePath_area_entered"]

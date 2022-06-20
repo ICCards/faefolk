@@ -237,14 +237,14 @@ func buildMap(map):
 			object.position = sand.map_to_world(map["flower"][id]["l"]) + Vector2(16, 32)
 			add_child(object,true)
 	print("LOADED FLOWERS")
-	for id in map["decorations"]:
-		match map["decorations"][id]["n"]:
-			"seed":
-				PlaceSeedInWorld(id, map["decorations"]["seed"][id]["n"], map["decorations"]["seed"][id]["l"])
-			"placable": 
-				PlaceItemInWorld(id, map["decorations"]["placable"][id]["n"], map["decorations"]["placable"][id]["l"])
-	for id in map["tile"]:
-		ChangeTile(map["tile"][id]["n"], map["tile"][id]["l"])
+#	for id in map["decorations"]:
+#		match map["decorations"][id]["n"]:
+#			"seed":
+#				PlaceSeedInWorld(id, map["decorations"]["seed"][id]["n"], map["decorations"]["seed"][id]["l"])
+#			"placable": 
+#				PlaceItemInWorld(id, map["decorations"]["placable"][id]["n"], map["decorations"]["placable"][id]["l"])
+#	for id in map["tile"]:
+#		ChangeTile(map["tile"][id]["n"], map["tile"][id]["l"])
 	print("LOADED OBJECTS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	check_and_remove_invalid_autotiles(map)

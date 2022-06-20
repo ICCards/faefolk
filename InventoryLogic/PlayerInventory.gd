@@ -18,7 +18,7 @@ var inventory = {
 	4: ["scythe", 1], 
 	6: ["stone ore", 35],
 	7: ["bucket", 1],
-	10: ["potato seeds", 28],
+	9: ["potato seeds", 28],
 #	#14: ["torch", 76],
 #	10: ["stone ore", 7],
 }
@@ -48,10 +48,6 @@ var chest = {
 	0: ["potato seeds", 30],
 	1: ["carrot seeds", 30],
 	2: ["garlic seeds", 30],
-	3: ["cauliflower seeds", 30],
-	4: ["yellow pepper seeds", 30],
-	5: ["strawberry seeds", 30],
-	6: ["green bean seeds", 30]
 }
 
 func clear_chest_data():
@@ -205,11 +201,14 @@ func add_item_to_inventory(item_name, item_quantity):
 			inventory[i] = [item_name, item_quantity]
 			update_inventory_slot_visual(i, inventory[i][0], inventory[i][1])
 			return
+	if hotbar.size() == NUM_HOTBAR_SLOTS:
+		pass
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
+			remove_item(slot)
 			hotbar.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
@@ -221,6 +220,7 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/Inventory/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
+			remove_item(slot)
 			inventory.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
@@ -233,7 +233,8 @@ func update_chest_slot_visual(slot_index, item_name, new_quantity):
 	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
-			inventory.erase(slot.slot_index)
+			remove_item(slot)
+			chest.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
 			slot.item.set_item(item_name, new_quantity)
