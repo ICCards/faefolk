@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Images/Farm/player_house.png" type="Texture" id=1]
+[ext_resource path="res://World/Objects/Farm/PlayerHouseTemplate.gd" type="Script" id=2]
+
+[node name="PlayerHouseTemplate" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="HouseSprite" type="Sprite" parent="."]
+position = Vector2( 192, -85 )
+texture = ExtResource( 1 )
+offset = Vector2( -58, -65 )
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+position = Vector2( 93, 26.9994 )
+scale = Vector2( 1.00201, 0.973707 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+position = Vector2( -0.997993, -21.5664 )
+polygon = PoolVector2Array( 5.98798, 19.513, 5.98798, 1.02696, 77.8435, 1.02696, 77.8435, 19.513, 173.651, 19.513, 173.651, -97.5653, -89.8195, -97.5653, -89.8195, 19.513 )
+
+[node name="BehindHouseArea" type="Area2D" parent="."]
+position = Vector2( 93, 26.9994 )
+collision_layer = 4096
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BehindHouseArea"]
+position = Vector2( -1.03228, -7.63163 )
+polygon = PoolVector2Array( -101.968, -108.368, -101.968, -218.368, 40, -357, 182, -221, 183.791, -105.456 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="area_entered" from="BehindHouseArea" to="." method="_on_BehindHouseArea_area_entered"]
+[connection signal="area_exited" from="BehindHouseArea" to="." method="_on_BehindHouseArea_area_exited"]

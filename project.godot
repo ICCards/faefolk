@@ -27,6 +27,7 @@ PlayerFarmApi="*res://Global/Data/PlayerFarmAPI.gd"
 PlayerStats="*res://Global/Data/PlayerStats.gd"
 Util="*res://Util.gd"
 Server="*res://server/server.gd"
+Uuid="*res://helpers/uuid.gd"
 
 [display]
 

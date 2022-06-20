@@ -1,8 +1,8 @@
 extends Node2D
 
 func _on_Doorway_area_entered(_area):
+	Server.isLoaded = false
 	SceneChanger.change_scene("res://World/InsidePlayerHouse/InsidePlayerHome.tscn", "door")
-
 
 onready var tween = $Tween
 func set_house_transparent():
