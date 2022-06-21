@@ -2,9 +2,9 @@ extends Node2D
 
 
 func _ready():
-	check_inventory_resources()
+	initialize_crafting()
 
-func check_inventory_resources():
+func initialize_crafting():
 	var wood = PlayerInventory.return_player_wood_and_stone()[0]
 	var stone = PlayerInventory.return_player_wood_and_stone()[1]
 	for item in JsonData.crafting_data:
@@ -96,37 +96,37 @@ func _on_HouseArea_mouse_exited():
 func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("wood box")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_WoodBarrelArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("wood barrel")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_WoodFenceArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("wood fence")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_TorchArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("torch")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_WoodChestArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("wood chest")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_StoneChestArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("stone chest")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_WoodPathArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("wood path")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_StonePathArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("stone path")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_HouseArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		PlayerInventory.craft_item("house")
-		check_inventory_resources()
+		initialize_crafting()
 

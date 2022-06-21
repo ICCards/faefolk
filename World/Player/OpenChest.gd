@@ -32,7 +32,6 @@ func clear_chest_data():
 	
 func initialize_chest_data():
 	var slots_in_chest = chest_slots.get_children()
-	print(PlayerInventory.chest)
 	for i in range(slots_in_chest.size()):
 		if PlayerInventory.chest.has(i):
 			slots_in_chest[i].initialize_item(PlayerInventory.chest[i][0], PlayerInventory.chest[i][1])

@@ -238,6 +238,7 @@ func buildMap(map):
 			add_child(object,true)
 	print("LOADED FLOWERS")
 	for key in map["decorations"].keys():
+		print(map["decorations"][key])
 		match key:
 			"seed":
 				for id in map["decorations"][key].keys():
