@@ -292,6 +292,5 @@ position = Vector2( 190, 638 )
 shape = SubResource( 3 )
 
 [node name="Players" type="YSort" parent="."]
-position = Vector2( 0, 128 )
 
 [connection signal="area_entered" from="Doorway" to="." method="_on_Doorway_area_entered"]

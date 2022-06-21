@@ -44,7 +44,7 @@ var rng = RandomNumberGenerator.new()
 var player_state
 var animation = "idle_down"
 
-var MAX_SPEED := 30 #12.5
+var MAX_SPEED := 12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
