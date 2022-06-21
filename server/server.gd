@@ -6,9 +6,11 @@ extends Node
 const DEFAULT_IP = "127.0.0.1"
 const DEFAULT_PORT = 65124
 
-var network = NetworkedMultiplayerENet.new()
-var selected_IP
-var selected_port
+# The URL we will connect to
+var websocket_url = "ws://"+DEFAULT_IP+":"+str(DEFAULT_PORT)
+
+# Our WebSocketClient instance
+var _client = WebSocketClient.new()
 
 var latency = 0
 var client_clock = 0
@@ -28,207 +30,156 @@ var generated_map = {}
 var player_state = "WORLD"
 
 func _ready():
-	_connect_to_server()
-	
-func _connect_to_server():
-	get_tree().connect("network_peer_connected", self, "_player_connected")
-	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
-	get_tree().connect("connection_failed", self, "_connected_fail")
-	get_tree().connect("server_disconnected", self, "_server_disconnected")
-	get_tree().connect("connected_to_server", self, "_connected_ok")
-	network.create_client(DEFAULT_IP, DEFAULT_PORT)
-	get_tree().set_network_peer(network)
-	
-func _player_connected(id):
-	print("New Player " + str(id) + " Connected")
-#	if get_node("/root/World").mark_for_despawn.has(id):
-#		get_node("/root/World").mark_for_despawn.erase(id)
-	
-func _player_disconnected(player_id):
-	print("Player " + str(player_id) + " Disonnected")
-	
+	# Connect base signals to get notified of connection open, close, and errors.
+	_client.connect("connection_closed", self, "_closed")
+	_client.connect("connection_error", self, "_closed")
+	_client.connect("connection_established", self, "_connected")
+	# This signal is emitted when not using the Multiplayer API every time
+	# a full packet is received.
+	# Alternatively, you could check get_peer(1).get_available_packets() in a loop.
+	_client.connect("data_received", self, "_on_data")
 
-func _connected_ok():
+	# Initiate connection to the given URL.
+	var err = _client.connect_to_url(websocket_url)
+	if err != OK:
+		print("Unable to connect")
+		set_process(false)
+
+func _closed(was_clean = false):
+	# was_clean will tell you if the disconnection was correctly notified
+	# by the remote peer before closing the socket.
+	print("Closed, clean: ", was_clean)
+	set_process(false)
+
+func _connected(proto = ""):
+	# This is called on connection, "proto" will be the selected WebSocket
+	# sub-protocol (which is optional)
+	print("Connected with protocol: ", proto)
+	# You MUST always use get_peer(1).put_packet to send data to server,
+	# and not put_packet directly when not using the MultiplayerAPI.
+	#_client.get_peer(1).put_packet("Test packet".to_utf8())
 	print("Successfully connected to server")
-	rpc_id(1, "FetchServerTime", OS.get_system_time_msecs())
+	var data = {"d":OS.get_system_time_msecs()}
+	var message = Util.toMessage("FetchServerTime",data)
+	_client.get_peer(1).put_packet(message)
 	var timer = Timer.new()
 	timer.wait_time = 0.5
 	timer.autostart = true
 	timer.connect("timeout", self, "DetermineLatency")
 	self.add_child(timer)
-	player_id = get_tree().get_network_unique_id()
-	print(player_id)
-	#rpc_unreliable_id(1, "getMap",Server.map.keys()[mapPartsLoaded])
 	
-	
-	
-	
-func generate_map():
-	map = {
-	"dirt":[],
-	"grass":[],
-	"dark_grass":[],
-	"tall_grass":[],
-	"water":[],
-	"tree":[],
-	"ore_large":[],
-	"ore":[],
-	"log":[],
-	"stump":[],
-	"flower":[],
-	"tile": []
-	}
-	rpc_unreliable_id(1, "getMap",map.keys()[mapPartsLoaded])
-	
-	
-remote func loadMap(value):
-	var key = map.keys()[mapPartsLoaded]
-	print("Loaded " + key)
-	map[key] = value
-	mapPartsLoaded = mapPartsLoaded + 1
-	if not mapPartsLoaded >= map.keys().size():
-		rpc_unreliable_id(1, "getMap",map.keys()[mapPartsLoaded])
-	else:
-		mapPartsLoaded = 0
-		generated_map = map
-
-
-func _connected_fail():
-	print("Failed to connect")
-	
-
-func _server_disconnected():
-	print("Server disconnected")
-	
-remote func SpawnPlayer(_player):
-	player = _player
-	print("PLAYER " + str(player))
-	#get_node("/root/World").spawnPlayer(player)
-	#get_node("/root/MainMenu").spawn_player_in_menu(player)
-
-remote func DespawnPlayer(player_id):
-	print('despawn player')
-	#get_node("/root/World").DespawnPlayer(player_id)
-	
-#func message_send(message):
-#	rpc_unreliable_id(1, "message_send", message)
-
-
-remote func updateState(state):
-	if isLoaded:
-		if player_state == "WORLD":
-			get_node("/root/World").UpdateWorldState(state)
-#		elif player_state == "HOME":
-#			get_node("/root/InsidePlayerHome").UpdateWorldState(state)
-#
-
-
-func _physics_process(delta):
-	client_clock += int(delta*1000) + delta_latency
-	delta_latency -=  delta_latency
-	delta_latency += (delta * 1000) - int(delta * 1000)
-	if decimal_collector >= 1.00:
-		client_clock += 1
-		decimal_collector -= 1.00
-
-
-remote func ReturnServerTime(server_time,client_time):
-	latency = (OS.get_system_time_msecs() - client_time) / 2
-	client_clock = server_time + latency
-
 func DetermineLatency():
-	rpc_id(1,"DetermineLatency", OS.get_system_time_msecs())
-
-remote func ReturnLatency(client_time):
-	latency_array.append((OS.get_system_time_msecs() - client_time)/2)
-	if latency_array.size() == 9:
-		var total_latency = 0
-		latency_array.sort()
-		var mid_point = latency_array[4]
-		for i in range(latency_array.size()-1,-1,-1):
-			if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
-				latency_array.remove(i)
-			else:
-				total_latency += latency_array[i]
-		delta_latency = (total_latency / latency_array.size())
-		#print("New Latency ", latency)
-		latency_array.clear()
-		
-		
-#remote func setDay():
-#	print(isLoaded)
-#	if isLoaded:
-#		print(player_state)
-#		if player_state == "WORLD":
-#			get_node("/root/World/Players/" + str(player_id)).set_day()
-#		else: 
-#			get_node("/root/InsidePlayerHome/Players/" + str(player_id)).set_day()
-#
-#remote func setNight():
-#	print(isLoaded)
-#	if isLoaded:
-#		print(player_state)
-#		if player_state == "WORLD":
-#			get_node("/root/World/Players/" + str(player_id)).set_night()
-#		else: 
-#			get_node("/root/InsidePlayerHome/Players/" + str(player_id)).set_night()
-
-#remote func ReceiveCharacter(player, player_id):
-#	print("Fetched  "+player.character)
-#	print("player id  "+str(player_id))
-#	if player_id == get_tree().get_network_unique_id():
-#		get_node("/root/PlayerHomeFarm/Player").character.LoadPlayerCharacter(player.character) 
-
-#func _getCharacterById(player_id):
-	#rpc_id(1, "GetCharacterById", player_id)
-	
-
-#func _getCharacter():
-	#rpc_id(1,"GetCharacter")
-	
-#remote func ReceivePlayerSwing(position, direction, tool_name, spawn_time, player_id):
-	#print('receive playher swing')
-	#if player_id == get_tree().get_network_unique_id():
-		#pass
-	#else:
-		#get_node("/root/PlayerHomeFarm/" + str(player_id)).swing_dict[spawn_time] = {"Position": position, "Direction": direction, "ToolName": tool_name}
+	var data = {"d":OS.get_system_time_msecs()}
+	var message = Util.toMessage("DetermineLatency",data)
+	_client.get_peer(1).put_packet(message)
 	
 func action(type,data):
-	rpc_unreliable_id(1, "action", type, data)
-	
-	
-remote func ReceivedAction(time,player_id,type,data):
-#	print(str(generated_map[data["n"]][data["id"]]["h"]))
-	#get_node("/root/World/" + str(data["id"])).PlayEffect(generated_map[data["n"]][data["id"]]["h"], player_id)
-	if not player_id == get_tree().get_network_unique_id():
-		match type:
-			"MOVEMENT":
-				pass
-			#	get_node("/root/PlayerHomeFarm/" + str(player_id)).MovePlayer(position, direction)
-			"SWING":
-				if isLoaded:
-					if player_state == "WORLD":
-						get_node("/root/World/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
-					else:
-						get_node("/root/InsidePlayerHome/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
-			"ON_HIT":
-				if isLoaded:
-					if player_state == "WORLD":
-						get_node("/root/World/" + str(data["id"])).PlayEffect(player_id)
-#					else:
-#						get_node("/root/InsidePlayerHome/" + str(data["id"])).PickUpItem()
-			"PLACE_ITEM":
-				pass
-#				if isLoaded:
-#					if player_state == "WORLD":
-#						get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
-#					else:
-#						get_node("/root/InsidePlayerHome").PlaceItemInHouse(data["id"], data["n"], data["l"])
-			"PLACE_SEED":
-				if isLoaded:
-					get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
+	var request = {"n":"action","d":{"t":type,"d":data}}
+	var message = Util.toMessage("action",request)
+	_client.get_peer(1).put_packet(message)
 
-				
+func generate_map():
+	map = {
+	"dirt":{},
+	"grass":{},
+	"dark_grass":{},
+	"tall_grass":{},
+	"water":{},
+	"tree":{},
+	"ore_large":{},
+	"ore":{},
+	"log":{},
+	"stump":{},
+	"flower":{},
+	"tile": {}
+	}
+	var message = Util.toMessage("getMap",mapPartsLoaded)
+	_client.get_peer(1).put_packet(message)
+
+func _on_data():
+	var pkt = _client.get_peer(1).get_packet()
+	# Print the received packet, you MUST always use get_peer(1).get_packet
+	# to receive data from server, and not get_packet directly when not
+	# using the MultiplayerAPI.
+	var result = Util.jsonParse(pkt)
+	match result["n"]:
+		("ID"):
+			player_id = result["d"]
+			print("My Id " + str(player_id))
+		("ReturnServerTime"):
+			var client_time = result["d"]["c"]["d"]
+			var server_time = result["d"]["s"]
+			latency = (OS.get_system_time_msecs() - client_time) / 2
+			client_clock = server_time + latency
+		("ReturnLatency"):
+			var client_time = result["d"]["d"]
+			latency_array.append((OS.get_system_time_msecs() - client_time)/2)
+			if latency_array.size() == 9:
+				var total_latency = 0
+				latency_array.sort()
+				var mid_point = latency_array[4]
+				for i in range(latency_array.size()-1,-1,-1):
+					if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
+						latency_array.remove(i)
+					else:
+						total_latency += latency_array[i]
+				delta_latency = (total_latency / latency_array.size())
+				#print("New Latency ", latency)
+				latency_array.clear()
+		("loadMap"):
+			var tileType = result["d"]["t"]
+			var data = result["d"]["d"]
+			var id = result["d"]["id"]
+			print("Loaded " + tileType)
+			#print(tile)
+			#print(id)
+			map[tileType][id] = data
+			mapPartsLoaded = mapPartsLoaded + 1
+			#var message = Util.toMessage("getMap",mapPartsLoaded)
+			#_client.get_peer(1).put_packet(message)
+		("MapLoaded"):
+			mapPartsLoaded = 0
+			generated_map = map
+		("CHANGE_TILE"):
+			if isLoaded:
+				var data = result["d"]
+				get_node("/root/World").ChangeTile(data)
+		("ReceivedAction"):
+			if not player_id == result["id"]:
+				var data = result["d"]
+				match result["m"]["t"]:
+					"MOVEMENT":
+						pass
+					#	get_node("/root/PlayerHomeFarm/" + str(player_id)).MovePlayer(position, direction)
+					"SWING":
+						if isLoaded:
+							if player_state == "WORLD":
+								get_node("/root/World/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
+							else:
+								if get_node("/root/InsidePlayerHome/Players/").has_node(str(player_id)):
+									get_node("/root/InsidePlayerHome/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
+					"ON_HIT":
+						if isLoaded:
+							if player_state == "WORLD":
+								get_node("/root/World/" + str(data["id"])).PlayEffect(player_id)
+		#					else:
+		#						get_node("/root/InsidePlayerHome/" + str(data["id"])).PickUpItem()
+					"PLACE_ITEM":
+						pass
+		#				if isLoaded:
+		#					if player_state == "WORLD":
+		#						get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
+		#					else:
+		#						get_node("/root/InsidePlayerHome").PlaceItemInHouse(data["id"], data["n"], data["l"])
+					"PLACE_SEED":
+						if isLoaded:
+							get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
+
 remote func ChangeTile(data):
 	if isLoaded:
 		get_node("/root/World").ChangeTile(data)
+
+func _process(delta):
+	# Call this in _process or _physics_process. Data transfer, and signals
+	# emission will only happen when calling this function.
+	_client.poll()
