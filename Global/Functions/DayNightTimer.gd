@@ -9,9 +9,9 @@ var day = 1
 var hour = 6
 var minute = 00
 
+var is_timer_started
 
-
-const LENGTH_OF_CYCLE = 24
+const LENGTH_OF_CYCLE = 48
 const LENGTH_OF_TRANSITION = 8
 
 

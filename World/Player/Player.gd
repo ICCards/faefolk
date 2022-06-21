@@ -38,7 +38,7 @@ enum {
 	CHANGE_TILE
 }
 
-onready var direction = "DOWN"
+var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 
 var player_state
@@ -66,8 +66,6 @@ func _ready():
 	$Camera2D/UserInterface/PlayerStatsUI.visible = true
 	$Camera2D/UserInterface/CurrentTimeUI.visible = true
 	init_day_night_cycle()
-	DayNightTimer.day_timer.connect("timeout", self, "set_night")
-	DayNightTimer.night_timer.connect("timeout", self, "set_day")
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	set_new_music_volume()
@@ -368,7 +366,7 @@ func place_seed_state(event, item_name):
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			var id = Uuid.v4()
-			var data = {"id": id, "n": item_name, "l": location, "t": "seed"}
+			var data = {"id": id, "n": item_name, "l": location, "t": "seed", "d": JsonData.crop_data[item_name]["DaysToGrow"], "w": false, "r": false, "dead": false}
 			sendAction(PLACE_ITEM, data)
 			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -484,9 +482,9 @@ func set_watered_tile():
 	var pos = adjust_position_from_direction(get_position())
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
-		var id = rng.randi_range(1,10000)
-		var data = {"id": id, "n": "water", "l": location}
-		sendAction(CHANGE_TILE, data)
+		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+		var data = {"id": id, "l": location}
+		Server.action("WATER", data)
 		watered_tiles.set_cellv(location, 0)
 		watered_tiles.update_bitmask_region()
 
@@ -494,9 +492,10 @@ func set_hoed_tile():
 	var pos = adjust_position_from_direction(get_position())
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) == -1 and valid_object_tiles.get_cellv(location) != -1 and grass_tiles.get_cellv(location) == -1 and path_tiles.get_cellv(location) == -1:
-		var id = rng.randi_range(1,10000)
-		var data = {"id": id, "n": "hoe", "l": location}
-		sendAction(CHANGE_TILE, data)
+		
+		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+		var data = {"id": id, "l": location}
+		Server.action("HOE", data)
 		yield(get_tree().create_timer(0.6), "timeout")
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -508,9 +507,9 @@ func remove_hoed_tile():
 	var pos = adjust_position_from_direction(get_position())
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
-		var id = rng.randi_range(1,10000)
-		var data = {"id": id, "n": "remove", "l": location}
-		sendAction(CHANGE_TILE, data)
+		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+		var data = {"id": id, "l": location}
+		Server.action("PICKAXE", data)
 		yield(get_tree().create_timer(0.6), "timeout")
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -541,11 +540,11 @@ func setPlayerTexture(var anim):
 	shirtsSprite.set_texture(character.shirts_sprites[anim])
 	shoesSprite.set_texture(character.shoes_sprites[anim])
 
-
+#
 func init_day_night_cycle():
 	if setting == "World":
-		if DayNightTimer.is_daytime:
-			$Camera2D/DayNight.color = Color("#ffffff")
+		if get_node("/root/World").day:
+			$Camera2D/DayNight.color =  Color("#1c579e")#Color("#ffffff")
 		else:
 			$Camera2D/DayNight.color = Color("#1c579e")
 	else:
@@ -553,8 +552,11 @@ func init_day_night_cycle():
 
 func set_night():
 	day_night_animation_player.play("set night")
+	init_day_night_cycle()
 func set_day():
 	day_night_animation_player.play_backwards("set night")
+	init_day_night_cycle()
+	PlayerInventory.emit_signal("update_time")
 
 
 func set_player_setting(ownerNode):

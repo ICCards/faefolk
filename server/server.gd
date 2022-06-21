@@ -156,7 +156,23 @@ remote func ReturnLatency(client_time):
 		latency_array.clear()
 		
 		
-
+#remote func setDay():
+#	print(isLoaded)
+#	if isLoaded:
+#		print(player_state)
+#		if player_state == "WORLD":
+#			get_node("/root/World/Players/" + str(player_id)).set_day()
+#		else: 
+#			get_node("/root/InsidePlayerHome/Players/" + str(player_id)).set_day()
+#
+#remote func setNight():
+#	print(isLoaded)
+#	if isLoaded:
+#		print(player_state)
+#		if player_state == "WORLD":
+#			get_node("/root/World/Players/" + str(player_id)).set_night()
+#		else: 
+#			get_node("/root/InsidePlayerHome/Players/" + str(player_id)).set_night()
 
 #remote func ReceiveCharacter(player, player_id):
 #	print("Fetched  "+player.character)
@@ -211,7 +227,8 @@ remote func ReceivedAction(time,player_id,type,data):
 			"PLACE_SEED":
 				if isLoaded:
 					get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
-			"CHANGE_TILE":
-				if isLoaded:
-					get_node("/root/World").ChangeTile(data["n"], data["l"])
+
 				
+remote func ChangeTile(data):
+	if isLoaded:
+		get_node("/root/World").ChangeTile(data)

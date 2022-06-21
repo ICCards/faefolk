@@ -20,6 +20,7 @@ func initialize(cropNameInput, locationInput, daysUntilHarvestInput, isInRegrowt
 	crop_is_dead = return_if_crop_is_dead(ifCropIsAlreadyDead)
 	phase = return_phase(days_until_harvest)
 
+
 func _ready():
 	add_to_group("active_crops")
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
@@ -29,7 +30,7 @@ func delete_crop():
 	queue_free() 
 
 func return_if_crop_is_dead(if_crop_is_already_dead):
-	if if_crop_is_already_dead or !JsonData.crop_data[crop_name]["Seasons"].has(DayNightTimer.season):
+	if if_crop_is_already_dead: #or !JsonData.crop_data[crop_name]["Seasons"].has(DayNightTimer.season):
 		PlayerFarmApi.set_crop_dead(location)
 		return true
 	else:

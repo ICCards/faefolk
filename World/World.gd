@@ -40,6 +40,9 @@ var randomBorderTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0
 var object_name
 var position_of_object
 var object_variety
+var day = true
+var day_num = 1
+var season = "spring"
 
 const NUM_FARM_OBJECTS = 550
 const NUM_GRASS_BUNCHES = 150
@@ -53,6 +56,7 @@ var world_state_buffer = []
 const interpolation_offset = 100
 var decorations = []
 var mark_for_despawn = []
+var tile_ids = {}
 
 func _ready():
 	var loadingScreen = LoadingScreen.instance()
@@ -87,7 +91,7 @@ func spawnPlayer(value):
 		if Server.player_house_position == null:
 			player.position = sand.map_to_world(value["p"]) + Vector2(1000, 800)
 		else: 
-			player.position = sand.map_to_world(Server.player_house_position)
+			player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		print('getting map')
 		
 		
@@ -119,10 +123,20 @@ func buildMap(map):
 	build_valid_tiles()
 	print("BUILDING MAP")
 	for id in map["dirt"]:
+		var x = map["dirt"][id]["l"].x
+		var y = map["dirt"][id]["l"].y
+		tile_ids["" + str(x) + "" + str(y)] = id
+		if map["dirt"][id]["isWatered"]:
+			watered.set_cellv(map["dirt"][id]["l"], 0)
+			hoed.set_cellv(map["dirt"][id]["l"], 0)
+		if map["dirt"][id]["isHoed"]:
+			hoed.set_cellv(map["dirt"][id]["l"], 0)
 		if Util.chance(5):
-			_set_cell( sand, map["dirt"][id].x, map["dirt"][id].y, 1 )
+			_set_cell( sand, x, y, 1 )
 		else:
-			_set_cell( sand, map["dirt"][id].x, map["dirt"][id].y, 0 )
+			_set_cell( sand, x, y, 0 )
+	hoed.update_bitmask_region()
+	watered.update_bitmask_region()
 	print("LOADED DIRT")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["dark_grass"]:
@@ -238,16 +252,13 @@ func buildMap(map):
 			add_child(object,true)
 	print("LOADED FLOWERS")
 	for key in map["decorations"].keys():
-		print(map["decorations"][key])
 		match key:
 			"seed":
 				for id in map["decorations"][key].keys():
-					PlaceSeedInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"])
+					PlaceSeedInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"], map["decorations"][key][id]["d"])
 			"placable": 
 				for id in map["decorations"][key].keys():
 					PlaceItemInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"])
-	for id in map["tile"]:
-		ChangeTile(map["tile"][id]["n"], map["tile"][id]["l"])
 	print("LOADED OBJECTS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	check_and_remove_invalid_autotiles(map)
@@ -262,6 +273,9 @@ func buildMap(map):
 	water.update_bitmask_region()
 	Server.player_state = "WORLD"
 	Server.isLoaded = true
+#	if !DayNightTimer.is_timer_started:
+#		DayNightTimer.is_timer_started = true
+#		DayNightTimer.start_day_timer()
 	print("Map loaded")
 	get_node("loadingScreen").queue_free()
 	spawnPlayer(Server.player)
@@ -352,23 +366,23 @@ func get_subtile_with_priority(id, tilemap: TileMap):
 	return tile_array[randi() % tile_array.size()]
 
 
-func ChangeTile(type, location):
-	match type:
-		"hoe":
-			hoed.set_cellv(location, 0)
-		"water":
-			watered.set_cellv(location, 0)
-		"remove":
-			hoed.set_cellv(location, -1)
-			watered.set_cellv(location, -1)
-			validTiles.set_cellv(location, 0)
+func ChangeTile(data):
+	if data["isWatered"]:
+		watered.set_cellv(data["l"], 0)
+		hoed.set_cellv(data["l"], 0)
+	elif data["isHoed"] and not data["isWatered"]:
+		hoed.set_cellv(data["l"], 0)
+	else: 
+		hoed.set_cellv(data["l"], -1)
+		watered.set_cellv(data["l"], -1)
+		validTiles.set_cellv(data["l"], 0)
 	hoed.update_bitmask_region()
 	watered.update_bitmask_region()
 	
-func PlaceSeedInWorld(id, item_name, location):
+func PlaceSeedInWorld(id, item_name, location, days_to_grow):
 	var plantedCrop = PlantedCrop.instance()
 	plantedCrop.name = str(id)
-	plantedCrop.initialize(item_name, location, JsonData.crop_data[item_name]["DaysToGrow"], false, false)
+	plantedCrop.initialize(item_name, location, days_to_grow, false, false)
 	add_child(plantedCrop, true)
 	plantedCrop.global_position = fence.map_to_world(location) + Vector2(0, 16)
 			
@@ -485,6 +499,16 @@ func set_player_house_invalid_tiles(location):
 
 func UpdateWorldState(world_state):					
 	if world_state["t"] > last_world_state:
+		var new_day = bool(world_state["day"])
+		if day != new_day and Server.isLoaded:
+			day = new_day
+			PlayerInventory.day_num = int(world_state["day_num"])
+			PlayerInventory.season = str(world_state["season"])
+			if new_day == false:
+				get_node("/root/World/Players/" + str(Server.player_id)).set_night()
+			else: 
+				get_node("/root/World/Players/" + str(Server.player_id)).set_day()
+			
 		last_world_state = world_state["t"]
 		world_state_buffer.append(world_state)
 
