@@ -366,7 +366,8 @@ func place_seed_state(event, item_name):
 		$PlaceItemsUI/ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			var id = Uuid.v4()
-			var data = {"id": id, "n": item_name, "l": location, "t": "seed", "d": JsonData.crop_data[item_name]["DaysToGrow"], "w": false, "r": false, "dead": false}
+			var tile_id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+			var data = {"id": id, "n": item_name, "l": location, "t": "seed", "d": JsonData.crop_data[item_name]["DaysToGrow"], "g": tile_id}
 			sendAction(PLACE_ITEM, data)
 			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
