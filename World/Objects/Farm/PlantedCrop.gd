@@ -1,7 +1,7 @@
 extends Node2D
 
 var crop_name
-var days_until_harvest
+var daysUntilHarvest
 var location
 var phase
 var is_in_regrowth_phase
@@ -15,16 +15,19 @@ func PlayEffect(player_id):
 func initialize(cropNameInput, locationInput, daysUntilHarvestInput, isInRegrowthPhaseInput, ifCropIsAlreadyDead):
 	crop_name = cropNameInput
 	location = locationInput
-	days_until_harvest = daysUntilHarvestInput
+	daysUntilHarvest = daysUntilHarvestInput
 	is_in_regrowth_phase = isInRegrowthPhaseInput
 	crop_is_dead = return_if_crop_is_dead(ifCropIsAlreadyDead)
-	phase = return_phase(days_until_harvest)
+	phase = return_phase()
 
 
 func _ready():
 	add_to_group("active_crops")
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 
+func refresh_image():
+	phase = return_phase()
+	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 
 func delete_crop():
 	queue_free() 
@@ -36,7 +39,7 @@ func return_if_crop_is_dead(if_crop_is_already_dead):
 	else:
 		return false
 
-func return_phase(daysUntilHarvest):
+func return_phase():
 	if crop_is_dead:
 		return "dead"
 	elif daysUntilHarvest != 0: 
@@ -78,7 +81,7 @@ func return_phase(daysUntilHarvest):
 
 
 func _on_Area2D_mouse_entered():
-	if days_until_harvest == 0:
+	if daysUntilHarvest == 0:
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Help Select.png"))
 
 

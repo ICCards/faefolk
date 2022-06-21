@@ -251,14 +251,14 @@ func buildMap(map):
 			object.position = sand.map_to_world(map["flower"][id]["l"]) + Vector2(16, 32)
 			add_child(object,true)
 	print("LOADED FLOWERS")
-	for key in map["decorations"].keys():
-		match key:
-			"seed":
-				for id in map["decorations"][key].keys():
-					PlaceSeedInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"], map["decorations"][key][id]["d"])
-			"placable": 
-				for id in map["decorations"][key].keys():
-					PlaceItemInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"])
+#	for key in map["decorations"].keys():
+#		match key:
+#			"seed":
+#				for id in map["decorations"][key].keys():
+#					PlaceSeedInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"], map["decorations"][key][id]["d"])
+#			"placable": 
+#				for id in map["decorations"][key].keys():
+#					PlaceItemInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"])
 	print("LOADED OBJECTS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	check_and_remove_invalid_autotiles(map)
@@ -513,11 +513,27 @@ func UpdateWorldState(world_state):
 		world_state_buffer.append(world_state)
 
 func _physics_process(delta):
+	#get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
 	var render_time = OS.get_system_time_msecs() - interpolation_offset
 	if world_state_buffer.size() > 1:
 		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].t:
 			world_state_buffer.remove(0)
 		if world_state_buffer.size() > 2:
+			for decoration in world_state_buffer[2]["decorations"].keys():
+				match decoration:
+					"seed":
+						for item in world_state_buffer[2]["decorations"][decoration].keys():
+							var data = world_state_buffer[2]["decorations"][decoration][item]
+							if has_node(str(item)):
+								get_node(str(item)).daysUntilHarvest = data["d"]
+								get_node(str(item)).refresh_image()
+							else:
+								PlaceSeedInWorld(item, data["n"], data["l"], data["d"])
+					"placable":
+						for item in world_state_buffer[2]["decorations"][decoration].keys():
+							if not has_node(str(item)):
+								var data = world_state_buffer[2]["decorations"][decoration][item]
+								PlaceItemInWorld(item, data["n"], data["l"])
 			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
 			for player in world_state_buffer[2]["players"].keys():
 				if str(player) == "t":

@@ -76,7 +76,6 @@ func generate_map():
 	"log":[],
 	"stump":[],
 	"flower":[],
-	"decorations": [],
 	"tile": []
 	}
 	rpc_unreliable_id(1, "getMap",map.keys()[mapPartsLoaded])
@@ -219,9 +218,10 @@ remote func ReceivedAction(time,player_id,type,data):
 #					else:
 #						get_node("/root/InsidePlayerHome/" + str(data["id"])).PickUpItem()
 			"PLACE_ITEM":
-				if isLoaded:
-					if player_state == "WORLD":
-						get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
+				pass
+#				if isLoaded:
+#					if player_state == "WORLD":
+#						get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
 #					else:
 #						get_node("/root/InsidePlayerHome").PlaceItemInHouse(data["id"], data["n"], data["l"])
 			"PLACE_SEED":
