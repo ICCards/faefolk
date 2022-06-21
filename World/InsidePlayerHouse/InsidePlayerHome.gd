@@ -33,13 +33,14 @@ func spawnPlayer():
 	var player = Player.instance()
 	#player.initialize_camera_limits(Vector2(0, 0), Vector2(1920, 1080))
 	print(str(value["p"]))
-	player.initialize_camera_limits(Vector2(-100,-50), Vector2(730, 530))
+	player.initialize_camera_limits(Vector2(-100,-30), Vector2(730, 550))
 	#player.initialize_character(value["c"])
+	player.direction = "UP"
 	player.name = str(value["id"])
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter(value["c"]) 
 	$Players.add_child(player)
-	player.position = Vector2(200, 280)
+	player.position = Vector2(190, 430)
 		
 
 

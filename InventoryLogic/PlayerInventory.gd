@@ -2,6 +2,9 @@ extends Node
 
 signal active_item_updated
 signal clear_chest
+signal update_time
+var season = "Spring"
+var day_num = 1
 
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")

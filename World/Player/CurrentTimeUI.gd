@@ -4,8 +4,7 @@ extends Node2D
 
 func _ready():
 	set_labels()
-	DayNightTimer.connect("advance_day", self, "set_labels")
-	DayNightTimer.connect("advance_season", self, "set_labels")
+	PlayerInventory.connect("update_time", self, "set_labels")
 
 func set_labels():
-	$SeasonLabel.text = DayNightTimer.season + ", " + str(DayNightTimer.day)
+	$SeasonLabel.text = PlayerInventory.season + ", " + str(PlayerInventory.day_num)
