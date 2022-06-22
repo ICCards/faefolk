@@ -16,6 +16,7 @@ var rng = RandomNumberGenerator.new()
 
 
 func _ready():
+	Sounds.connect("volume_change", self, "change_volume")
 	$HouseImageTextureRect.texture = load("res://Assets/Images/house_objects/" + image +  ".png")
 	$CollisionBox.scale.x = JsonData.house_objects_data[image]["X"]
 	$CollisionBox.scale.y = JsonData.house_objects_data[image]["Y"]
@@ -49,7 +50,6 @@ func _ready():
 	if image == "Window 1" or image == "Window 2":
 		$WindowLightingUI/LargeLight.visible = true
 		$WindowLightingUI/SmallLight.visible = true
-	Sounds.connect("volume_change", self, "change_volume")
 	
 func change_volume():
 	$LightFireplaceUI/FireCrackleSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -6)

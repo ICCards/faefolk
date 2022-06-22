@@ -12,10 +12,19 @@ func _input(event):
 		PlayerInventory.active_item_scroll_down()
 
 func toggle_inventory():
+	$Inventory/CraftingMenu.initialize_crafting()
+	$Inventory.initialize_inventory()
+	$Hotbar.initialize_hotbar()
 	PlayerInventory.viewInventoryMode = !PlayerInventory.viewInventoryMode
 	$Inventory.visible = !$Inventory.visible
-	$Inventory.initialize_inventory()
+	
 	
 func open_chest():
+	$OpenChest.initialize_inventory()
+	$OpenChest.initialize_chest_data()
+	$Hotbar.initialize_hotbar()
 	PlayerInventory.openChestMode = !PlayerInventory.openChestMode
 	$OpenChest.visible = !$OpenChest.visible
+	if PlayerInventory.openChestMode == true:
+		$SoundEffects.stream = Sounds.chest_open
+		$SoundEffects.play()

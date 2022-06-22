@@ -65,7 +65,6 @@ mouse_filter = 2
 texture = ExtResource( 3 )
 
 [node name="CraftingMenu" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 6 )
 
 [node name="WoodBoxArea" type="Area2D" parent="CraftingMenu"]
@@ -245,7 +244,6 @@ position = Vector2( 3.05176e-05, -4.76837e-07 )
 polygon = PoolVector2Array( -265.556, -100, -235.556, -82.2222, -198.889, -82.2222, -181.111, -82.2222, -181.111, -87.7778, -151.111, -117.778, -145.556, -135.556, -145.556, -171.111, -151.111, -190, -181.111, -218.889, -193.333, -225.556, -234.444, -225.556, -253.333, -218.889, -264.444, -206.667 )
 
 [node name="InventorySlots" type="GridContainer" parent="."]
-visible = false
 margin_left = 54.0
 margin_top = 246.0
 margin_right = 606.0

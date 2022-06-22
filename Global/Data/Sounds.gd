@@ -83,11 +83,15 @@ var button_select = preload("res://Assets/Sound/Sound effects/UI/button select.m
 
 var pick_up_item = preload("res://Assets/Sound/Sound effects/UI/pick up item.mp3")
 
+var place_object = preload("res://Assets/Sound/Sound effects/Building/place object.mp3")
+
 var pick_up_house_object = preload("res://Assets/Sound/Sound effects/UI/pick up house object.mp3")
 var put_down_house_object = preload("res://Assets/Sound/Sound effects/UI/put down house object.mp3")
 
 var door_open = preload("res://Assets/Sound/Sound effects/Door/door open.mp3")
 var door_close = preload("res://Assets/Sound/Sound effects/Door/door close.mp3")
+
+var chest_open = preload("res://Assets/Sound/Sound effects/chest/open.mp3")
 
 var ore_hit = [
 	preload("res://Assets/Sound/Sound effects/Ore/Ore hit 1.mp3"),

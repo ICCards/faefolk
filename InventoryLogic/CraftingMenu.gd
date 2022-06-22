@@ -2,9 +2,9 @@ extends Node2D
 
 
 func _ready():
-	check_inventory_resources()
+	initialize_crafting()
 
-func check_inventory_resources():
+func initialize_crafting():
 	var wood = PlayerInventory.return_player_wood_and_stone()[0]
 	var stone = PlayerInventory.return_player_wood_and_stone()[1]
 	for item in JsonData.crafting_data:
@@ -25,6 +25,9 @@ func _physics_process(delta):
 		$CraftableItemDescription.visible = false
 
 func entered_crafting_area(_item):
+	$SoundEffects.stream = Sounds.button_hover
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.play()
 	item = _item
 	if item == "house":
 		$Tween.interpolate_property(get_node(item), "scale",
@@ -91,42 +94,55 @@ func _on_HouseArea_mouse_exited():
 	exited_crafting_area("house")
 
 
-
+func play_craft_sound():
+	$SoundEffects.stream = Sounds.button_select
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.play()
+	
 
 func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("wood box")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_WoodBarrelArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("wood barrel")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_WoodFenceArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("wood fence")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_TorchArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("torch")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_WoodChestArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("wood chest")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_StoneChestArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("stone chest")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_WoodPathArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("wood path")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_StonePathArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("stone path")
-		check_inventory_resources()
+		initialize_crafting()
 func _on_HouseArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
 		PlayerInventory.craft_item("house")
-		check_inventory_resources()
+		initialize_crafting()
 

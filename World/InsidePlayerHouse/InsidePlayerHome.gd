@@ -33,13 +33,14 @@ func spawnPlayer():
 	var player = Player.instance()
 	#player.initialize_camera_limits(Vector2(0, 0), Vector2(1920, 1080))
 	print(str(value["p"]))
-	player.initialize_camera_limits(Vector2(-120,-190), Vector2(760, 420))
+	player.initialize_camera_limits(Vector2(-100,-30), Vector2(730, 550))
 	#player.initialize_character(value["c"])
+	player.direction = "UP"
 	player.name = str(value["id"])
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter(value["c"]) 
 	$Players.add_child(player)
-	player.position = Vector2(200, 280)
+	player.position = Vector2(190, 430)
 		
 
 
@@ -65,40 +66,19 @@ func spawnNewPlayer(player):
 
 func UpdateWorldState(world_state):					
 	if world_state["t"] > last_world_state:
+		var new_day = bool(world_state["day"])
+		if Server.day != new_day and Server.isLoaded:
+			Server.day = new_day
+			PlayerInventory.day_num = int(world_state["day_num"])
+			PlayerInventory.season = str(world_state["season"])
+			if new_day == false:
+				pass
+				#get_node("/root/World/Players/" + str(Server.player_id)).set_night()
+			else:
+				pass
+			#	get_node("/root/World/Players/" + str(Server.player_id)).set_day()
+			
 		last_world_state = world_state["t"]
 		world_state_buffer.append(world_state)
-
-func _physics_process(delta):
-	var render_time = OS.get_system_time_msecs() - interpolation_offset
-	if world_state_buffer.size() > 1:
-		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].t:
-			world_state_buffer.remove(0)
-		if world_state_buffer.size() > 2:
-			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
-			for player in world_state_buffer[2]["players"].keys():
-				if str(player) == "t":
-					continue
-				if player == Server.player_id:
-					continue
-				if $Players.has_node(str(player)) and not player == Server.player_id:
-					#print(player)
-					#print(Server.player_id)
-					
-					if world_state_buffer[1]["players"].has(player):
-						var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
-						$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
-				else:
-					if not mark_for_despawn.has(player):
-						spawnNewPlayer(world_state_buffer[2]["players"][player])
-
-		elif render_time > world_state_buffer[1].t:
-			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
-			for player in world_state_buffer[1]["players"].keys():
-				if $Players.has_node(str(player)) and not player == Server.player_id:
-					#print("player is me" + player == Server.player_id)
-					print(Server.player_id)
-					var position_delta = (world_state_buffer[1]["players"][player]["p"] - world_state_buffer[0]["players"][player]["p"])
-					var new_position = world_state_buffer[1]["players"][player]["p"] + (position_delta * extrapolation_factor)
-					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 
 

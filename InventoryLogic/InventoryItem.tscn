@@ -20,7 +20,6 @@ margin_top = 6.0
 margin_right = 90.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 84, 84 )
-mouse_filter = 2
 expand = true
 
 [node name="Label" type="Label" parent="."]
@@ -28,6 +27,7 @@ margin_left = 65.0
 margin_top = 75.0
 margin_right = 91.0
 margin_bottom = 116.0
+mouse_filter = 1
 custom_fonts/font = SubResource( 2 )
 text = "99
 "

@@ -40,6 +40,8 @@ func initialize_chest_data():
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
+		if slots[i].item != null:
+			slots[i].removeFromSlot()
 		if PlayerInventory.inventory.has(i):
 			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
 

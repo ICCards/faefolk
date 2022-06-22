@@ -1,7 +1,7 @@
 extends Node2D
 
 var crop_name
-var days_until_harvest
+var daysUntilHarvest
 var location
 var phase
 var is_in_regrowth_phase
@@ -15,27 +15,31 @@ func PlayEffect(player_id):
 func initialize(cropNameInput, locationInput, daysUntilHarvestInput, isInRegrowthPhaseInput, ifCropIsAlreadyDead):
 	crop_name = cropNameInput
 	location = locationInput
-	days_until_harvest = daysUntilHarvestInput
+	daysUntilHarvest = daysUntilHarvestInput
 	is_in_regrowth_phase = isInRegrowthPhaseInput
 	crop_is_dead = return_if_crop_is_dead(ifCropIsAlreadyDead)
-	phase = return_phase(days_until_harvest)
+	phase = return_phase()
+
 
 func _ready():
 	add_to_group("active_crops")
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 
+func refresh_image():
+	phase = return_phase()
+	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 
 func delete_crop():
 	queue_free() 
 
 func return_if_crop_is_dead(if_crop_is_already_dead):
-	if if_crop_is_already_dead or !JsonData.crop_data[crop_name]["Seasons"].has(DayNightTimer.season):
+	if if_crop_is_already_dead: #or !JsonData.crop_data[crop_name]["Seasons"].has(DayNightTimer.season):
 		PlayerFarmApi.set_crop_dead(location)
 		return true
 	else:
 		return false
 
-func return_phase(daysUntilHarvest):
+func return_phase():
 	if crop_is_dead:
 		return "dead"
 	elif daysUntilHarvest != 0: 
@@ -77,7 +81,7 @@ func return_phase(daysUntilHarvest):
 
 
 func _on_Area2D_mouse_entered():
-	if days_until_harvest == 0:
+	if daysUntilHarvest == 0:
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Help Select.png"))
 
 
@@ -95,6 +99,8 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 var isBeingHarvested = false	
 func harvest_and_remove():
 	if !isBeingHarvested:
+		var data = {"id": name, "n": "decorations","t":"seed"}
+		Server.action("ON_HIT", data)
 		$HarvestSound.play()
 		$CropText.visible = false
 		isBeingHarvested = true
@@ -106,6 +112,7 @@ func harvest_and_remove():
 	
 func harvest_and_keep_planted():
 	if !isBeingHarvested:
+		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$HarvestSound.play()
 		isBeingHarvested = true
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
@@ -129,6 +136,7 @@ var bodyEnteredFlag = false
 
 func play_effect():
 	if !bodyEnteredFlag and phase == "3" or phase == "4" or phase == "5" or phase == "harvest" or phase == "empty":
+		$RustleSound.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$RustleSound.play()
 		$AnimationPlayer.play("animate")
 		
@@ -142,6 +150,6 @@ func _on_PlayAnimBox_body_exited(body):
 
 
 func _on_HurtBox_area_entered(area):
-	var data = {"id": name, "n": "decoration"}
+	var data = {"id": name, "n": "decorations","t":"seed"}
 	Server.action("ON_HIT", data)
 	queue_free()

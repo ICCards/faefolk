@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bucket full.png-c559a14218c95918bc9f768ed634bdb1.stex"
+path="res://.import/cabbage seeds.png-244de1c4b17f4569611b8e0b8a71ace5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/bucket full.png"
-dest_files=[ "res://.import/bucket full.png-c559a14218c95918bc9f768ed634bdb1.stex" ]
+source_file="res://Assets/Images/dropped_item_icon/cabbage seeds.png"
+dest_files=[ "res://.import/cabbage seeds.png-244de1c4b17f4569611b8e0b8a71ace5.stex" ]
 
 [params]
 
