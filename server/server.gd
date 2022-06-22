@@ -109,6 +109,8 @@ func _on_data():
 	# using the MultiplayerAPI.
 	var result = Util.jsonParse(pkt)
 	match result["n"]:
+		("ReceiveMessage"):
+			Chat.ReceiveMessage(result["id"], result["d"])
 		("updateState"):
 			if world != null:
 				world.UpdateWorldState(result["d"])
