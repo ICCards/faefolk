@@ -76,8 +76,8 @@ func DetermineLatency():
 	
 func action(type,data):
 	var value = {"d": data}
-	value["n"] = type
-	var message = Util.toMessage("action",data)
+	value["t"] = type
+	var message = Util.toMessage("action",value)
 	_client.get_peer(1).put_packet(message)
 
 func generate_map():
@@ -155,7 +155,7 @@ func _on_data():
 		("CHANGE_TILE"):
 			if isLoaded:
 				var data = result["d"]
-				get_node("/root/World").ChangeTile(data)
+				world.ChangeTile(data)
 		("ReceivedAction"):
 			if not player_id == str(result["id"]):
 				var message = result["m"]

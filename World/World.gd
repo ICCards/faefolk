@@ -514,24 +514,23 @@ func set_player_house_invalid_tiles(location):
 
 
 func UpdateWorldState(world_state):
-#	if Server.day == null:
-#		Server.day = bool(world_state["day"])	
-#		if has_node("Players/" + Server.player_id):
-#			get_node("Players/" + Server.player_id).init_day_night_cycle()
+	if Server.day == null:
+		Server.day = bool(world_state["day"])	
+		if has_node("Players/" + Server.player_id):
+			get_node("Players/" + Server.player_id).init_day_night_cycle()
 	if world_state["t"] > last_world_state:
-#		var new_day = bool(world_state["day"])
-#		if has_node("Players/" + Server.player_id):
-#			pass
-##			get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
-#		if Server.day != new_day and Server.isLoaded:
-#			Server.day = new_day
-#			if new_day == false:
-#				if has_node("Players/" + Server.player_id):
-#					get_node("/root/World/Players/" + Server.player_id).set_night()
-#			else:
-#				if has_node("Players/" + Server.player_id):
-#					watered.clear()
-#					get_node("/root/World/Players/" + Server.player_id).set_day()
+		var new_day = bool(world_state["day"])
+		if has_node("Players/" + Server.player_id):
+			get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
+		if Server.day != new_day and Server.isLoaded:
+			Server.day = new_day
+			if new_day == false:
+				if has_node("Players/" + Server.player_id):
+					get_node("/root/World/Players/" + Server.player_id).set_night()
+			else:
+				if has_node("Players/" + Server.player_id):
+					watered.clear()
+					get_node("/root/World/Players/" + Server.player_id).set_day()
 		last_world_state = world_state["t"]
 		world_state_buffer.append(world_state)
 
