@@ -83,6 +83,8 @@ var button_select = preload("res://Assets/Sound/Sound effects/UI/button select.m
 
 var pick_up_item = preload("res://Assets/Sound/Sound effects/UI/pick up item.mp3")
 
+var place_object = preload("res://Assets/Sound/Sound effects/Building/place object.mp3")
+
 var pick_up_house_object = preload("res://Assets/Sound/Sound effects/UI/pick up house object.mp3")
 var put_down_house_object = preload("res://Assets/Sound/Sound effects/UI/put down house object.mp3")
 

@@ -20,6 +20,9 @@ func _ready():
 	setTreeBranchType(randomNum)
 	
 func PlayEffect(player_id):
+	$SoundEffects.stream = Sounds.stump_break
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+	$SoundEffects.play()
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 	yield($AnimationPlayer, "animation_finished")

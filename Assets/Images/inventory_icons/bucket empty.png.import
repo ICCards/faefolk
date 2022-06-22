@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bucket full.png-c559a14218c95918bc9f768ed634bdb1.stex"
+path="res://.import/bucket empty.png-ef17950b297331623dd47f6f4b08f926.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/bucket full.png"
-dest_files=[ "res://.import/bucket full.png-c559a14218c95918bc9f768ed634bdb1.stex" ]
+source_file="res://Assets/Images/inventory_icons/bucket empty.png"
+dest_files=[ "res://.import/bucket empty.png-ef17950b297331623dd47f6f4b08f926.stex" ]
 
 [params]
 

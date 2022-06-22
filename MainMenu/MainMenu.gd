@@ -8,7 +8,7 @@ func _ready():
 	$TitleMusic.play()
 	Sounds.connect("volume_change", self, "change_title_volume")
 	
-
+	
 func spawn_player_in_menu(player):
 	if not player.empty():
 		var playerMenuState = PlayerMenuState.instance()

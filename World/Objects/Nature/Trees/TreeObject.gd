@@ -64,6 +64,9 @@ func PlayEffect(player_id):
 	else:
 		hit_dir = "left"
 	if health >= 5:
+		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffectsTree.play()
 		if hit_dir == "right":
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			tree_animation_player.play("tree hit right")
@@ -71,11 +74,20 @@ func PlayEffect(player_id):
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			tree_animation_player.play("tree hit left")
 	elif health == 3:
+		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffectsStump.play()
+		$SoundEffectsTree.stream = Sounds.tree_break
+		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffectsTree.play()
 		if hit_dir == "right":
 			tree_animation_player.play("tree fall right")
 		else:
 			tree_animation_player.play("tree fall left")
 	elif health >= 1:
+		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffectsTree.play()
 		if hit_dir == "right":
 			stump_animation_player.play("stump hit right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
@@ -83,6 +95,9 @@ func PlayEffect(player_id):
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump hit right")
 	else:
+		$SoundEffectsStump.stream = Sounds.stump_break
+		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffectsStump.play()
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		yield(stump_animation_player, "animation_finished")

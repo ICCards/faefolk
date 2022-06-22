@@ -75,6 +75,7 @@ func _on_QuitArea_mouse_exited():
 func _on_PlayArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		$SoundEffects.stream = Sounds.button_select
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
 		SceneChanger.change_scene("res://World/World.tscn")
 
@@ -83,11 +84,13 @@ func _on_OptionsArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		get_parent().toggle_menu_open()
 		$SoundEffects.stream = Sounds.button_select
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
 
 
 func _on_QuitArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		$SoundEffects.stream = Sounds.button_select
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
 		get_tree().quit()
