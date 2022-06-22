@@ -104,7 +104,7 @@ func _process(_delta) -> void:
 
 
 func _unhandled_input(event):
-	if !swingActive:
+	if !swingActive and not PlayerInventory.chatMode:
 		if Input.is_action_pressed("ui_up"):
 			direction = "UP"
 		if Input.is_action_pressed("ui_down"):

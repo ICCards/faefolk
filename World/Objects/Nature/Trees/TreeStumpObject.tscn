@@ -131,7 +131,7 @@ anims/RESET = SubResource( 2 )
 "anims/stump destroyed" = SubResource( 3 )
 "anims/stump hit right" = SubResource( 4 )
 
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 volume_db = -12.0
 
 [node name="MovementCollisionBox" type="StaticBody2D" parent="."]

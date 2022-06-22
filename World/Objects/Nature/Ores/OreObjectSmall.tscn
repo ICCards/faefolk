@@ -233,7 +233,7 @@ anims/RESET = SubResource( 3 )
 anims/small_ore_break = SubResource( 4 )
 anims/small_ore_hit_right = SubResource( 5 )
 
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 volume_db = -12.0
 
 [node name="SmokeEffect" type="AnimatedSprite" parent="."]
