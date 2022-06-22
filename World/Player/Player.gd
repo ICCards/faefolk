@@ -27,6 +27,7 @@ var delta
 var character
 var path_index = 1
 var setting
+var is_mouse_over_hotbar
 
 onready var state = MOVEMENT
 
@@ -64,13 +65,10 @@ func _ready():
 	_play_background_music()
 	$Camera2D/UserInterface/Hotbar.visible = true
 	$Camera2D/UserInterface/PlayerStatsUI.visible = true
-	$Camera2D/UserInterface/CurrentTimeUI.visible = true
-	init_day_night_cycle()
+	$Camera2D/UserInterface/CurrentTime.visible = true
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	set_new_music_volume()
-
-
 
 func set_new_music_volume():
 	$BackgroundMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
@@ -87,6 +85,11 @@ func _play_background_music():
 	
 
 func _process(_delta) -> void:
+	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
+	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:
+		is_mouse_over_hotbar = true
+	else:
+		is_mouse_over_hotbar = false
 	delta = _delta
 	if not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode:
 		if $PickupZone.items_in_range.size() > 0:
@@ -112,7 +115,7 @@ func _unhandled_input(event):
 			direction = "RIGHT"
 		if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
 			idle_state(direction)
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode and Server.player_state == "WORLD": 
+		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode and  Server.player_state == "WORLD"and not PlayerInventory.chatMode and not is_mouse_over_hotbar: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and setting == "World":
@@ -239,6 +242,9 @@ func place_placable_object(item_name, location):
 	var data = {"id": id, "n": item_name, "l": location, "t": "placable"}
 	sendAction(PLACE_ITEM, data)
 	PlayerInventory.remove_single_object_from_hotbar()
+	$SoundEffects.stream = Sounds.place_object
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+	$SoundEffects.play()
 	match item_name:
 		"torch":
 			var torchObject = TorchObject.instance()
@@ -377,11 +383,11 @@ func place_seed_state(event, item_name):
 			var plantedCrop = PlantedCrop.instance()
 			plantedCrop.name = str(id)
 			plantedCrop.initialize(item_name, location, JsonData.crop_data[item_name]["DaysToGrow"], false, false)
-			get_parent().add_child(plantedCrop, true)
+			get_parent().get_parent().add_child(plantedCrop, true)
 			plantedCrop.global_position = mousePos + Vector2(0, 16)
 
 func movement_state(delta):
-	if !swingActive:
+	if !swingActive and not PlayerInventory.chatMode:
 		animation_player.play("movement")
 		var input_vector = Vector2.ZERO			
 		if Input.is_action_pressed("ui_up"):
@@ -428,25 +434,26 @@ var swingActive = false
 func swing_state(item_name):
 		$FootstepsSound.stream_paused = true
 		if !swingActive:
-				sendAction(SWING, {"tool": item_name, "direction": direction})
-				swingActive = true
-				set_melee_collision_layer(item_name)
-				toolEquippedSprite.set_texture(Images.returnToolSprite(item_name, direction.to_lower()))
-				animation = "swing_" + direction.to_lower()
-				setPlayerTexture(animation)
-				animation_player.play(animation)
-				yield(animation_player, "animation_finished" )
-				toolEquippedSprite.texture = null
-				swingActive = false
-				if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-					var newToolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-					var newItemCategory = JsonData.item_data[newToolName]["ItemCategory"]
-					if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
-						swing_state(newToolName)
-					else:
-						state = MOVEMENT
-				else: 
+			PlayerStats.decrease_energy()
+			sendAction(SWING, {"tool": item_name, "direction": direction})
+			swingActive = true
+			set_melee_collision_layer(item_name)
+			toolEquippedSprite.set_texture(Images.returnToolSprite(item_name, direction.to_lower()))
+			animation = "swing_" + direction.to_lower()
+			setPlayerTexture(animation)
+			animation_player.play(animation)
+			yield(animation_player, "animation_finished" )
+			toolEquippedSprite.texture = null
+			swingActive = false
+			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+				var newToolName = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				var newItemCategory = JsonData.item_data[newToolName]["ItemCategory"]
+				if Input.is_action_pressed("mouse_click") and newItemCategory == "Weapon":
+					swing_state(newToolName)
+				else:
 					state = MOVEMENT
+			else: 
+				state = MOVEMENT
 		elif swingActive == true:
 			pass
 		else:
@@ -483,6 +490,7 @@ func set_watered_tile():
 	var pos = adjust_position_from_direction(get_position())
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
+		yield(get_tree().create_timer(0.6), "timeout")
 		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 		var data = {"id": id, "l": location}
 		Server.action("WATER", data)
@@ -493,11 +501,10 @@ func set_hoed_tile():
 	var pos = adjust_position_from_direction(get_position())
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) == -1 and valid_object_tiles.get_cellv(location) != -1 and grass_tiles.get_cellv(location) == -1 and path_tiles.get_cellv(location) == -1:
-		
+		yield(get_tree().create_timer(0.6), "timeout")
 		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 		var data = {"id": id, "l": location}
 		Server.action("HOE", data)
-		yield(get_tree().create_timer(0.6), "timeout")
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
@@ -508,10 +515,10 @@ func remove_hoed_tile():
 	var pos = adjust_position_from_direction(get_position())
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
+		yield(get_tree().create_timer(0.6), "timeout")
 		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 		var data = {"id": id, "l": location}
 		Server.action("PICKAXE", data)
-		yield(get_tree().create_timer(0.6), "timeout")
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
@@ -544,7 +551,7 @@ func setPlayerTexture(var anim):
 #
 func init_day_night_cycle():
 	if setting == "World":
-		if get_node("/root/World").day:
+		if Server.day:
 			$Camera2D/DayNight.color =  Color("#1c579e")#Color("#ffffff")
 		else:
 			$Camera2D/DayNight.color = Color("#1c579e")
@@ -557,7 +564,6 @@ func set_night():
 func set_day():
 	day_night_animation_player.play_backwards("set night")
 	init_day_night_cycle()
-	PlayerInventory.emit_signal("update_time")
 
 
 func set_player_setting(ownerNode):

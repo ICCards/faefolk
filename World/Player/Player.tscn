@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://InventoryLogic/Hotbar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
+[ext_resource path="res://ChatBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/PlayerStatsUI.tscn" type="PackedScene" id=8]
-[ext_resource path="res://World/Player/CurrentTimeUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Player/CurrentTime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
 [ext_resource path="res://Characters/Human/male/HOLDING/body/down/arms.png" type="Texture" id=12]
@@ -746,12 +747,16 @@ zoom = Vector2( 0.9, 0.9 )
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 6 )
 
+[node name="ChatBox" parent="Camera2D/UserInterface" instance=ExtResource( 7 )]
+margin_top = 246.0
+margin_bottom = -210.0
+
 [node name="OpenChest" parent="Camera2D/UserInterface" instance=ExtResource( 20 )]
 visible = false
 position = Vector2( 240, 513 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="CurrentTimeUI" parent="Camera2D/UserInterface" instance=ExtResource( 9 )]
+[node name="CurrentTime" parent="Camera2D/UserInterface" instance=ExtResource( 9 )]
 position = Vector2( 804, 24 )
 scale = Vector2( 0.4, 0.4 )
 

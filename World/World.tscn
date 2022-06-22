@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/tilesets/CL_MainLev.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/tilesets/CL_Crafting.png" type="Texture" id=5]
 [ext_resource path="res://Assets/tilesets/fence tiles.png" type="Texture" id=6]
 [ext_resource path="res://Assets/tilesets/hoed_layer.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Forest 7 - SFX Producer.mp3" type="AudioStream" id=8]
 
 [sub_resource type="TileSet" id=1]
 0/name = "CL_MainLev.png 0"
@@ -1078,3 +1079,7 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="Players" type="YSort" parent="."]
+
+[node name="AmbientSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -12.0

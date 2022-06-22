@@ -26,6 +26,7 @@ var player_house_position
 var map = {}
 var generated_map = {}
 var player_state = "WORLD"
+var day = true
 
 func _ready():
 	_connect_to_server()
@@ -58,6 +59,7 @@ func _connected_ok():
 	self.add_child(timer)
 	player_id = get_tree().get_network_unique_id()
 	print(player_id)
+	
 	#rpc_unreliable_id(1, "getMap",Server.map.keys()[mapPartsLoaded])
 	
 	
@@ -103,8 +105,9 @@ func _server_disconnected():
 remote func SpawnPlayer(_player):
 	player = _player
 	print("PLAYER " + str(player))
+	get_node("/root/MainMenu").spawn_player_in_menu(player)
 	#get_node("/root/World").spawnPlayer(player)
-	#get_node("/root/MainMenu").spawn_player_in_menu(player)
+	
 
 remote func DespawnPlayer(player_id):
 	print('despawn player')
@@ -209,8 +212,6 @@ remote func ReceivedAction(time,player_id,type,data):
 				if isLoaded:
 					if player_state == "WORLD":
 						get_node("/root/World/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
-					else:
-						get_node("/root/InsidePlayerHome/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
 			"ON_HIT":
 				if isLoaded:
 					if player_state == "WORLD":
@@ -227,7 +228,13 @@ remote func ReceivedAction(time,player_id,type,data):
 			"PLACE_SEED":
 				if isLoaded:
 					get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
-
+			"SEND_MESSAGE":
+				if isLoaded:
+					if player_state == "WORLD":
+	
+						get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/ChatBox").ReceiveMessage(player_id, data["m"])
+					else:
+						get_node("/root/InsidePlayerHome/Players/" + str(Server.player_id)+ "/Camera2D/UserInterface/ChatBox").ReceiveMessage(player_id, data["m"])
 				
 remote func ChangeTile(data):
 	if isLoaded:

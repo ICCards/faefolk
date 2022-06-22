@@ -99,6 +99,8 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 var isBeingHarvested = false	
 func harvest_and_remove():
 	if !isBeingHarvested:
+		var data = {"id": name, "n": "decorations","t":"seed"}
+		Server.action("ON_HIT", data)
 		$HarvestSound.play()
 		$CropText.visible = false
 		isBeingHarvested = true
@@ -110,6 +112,7 @@ func harvest_and_remove():
 	
 func harvest_and_keep_planted():
 	if !isBeingHarvested:
+		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$HarvestSound.play()
 		isBeingHarvested = true
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
@@ -133,6 +136,7 @@ var bodyEnteredFlag = false
 
 func play_effect():
 	if !bodyEnteredFlag and phase == "3" or phase == "4" or phase == "5" or phase == "harvest" or phase == "empty":
+		$RustleSound.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$RustleSound.play()
 		$AnimationPlayer.play("animate")
 		
@@ -146,6 +150,6 @@ func _on_PlayAnimBox_body_exited(body):
 
 
 func _on_HurtBox_area_entered(area):
-	var data = {"id": name, "n": "decoration"}
+	var data = {"id": name, "n": "decorations","t":"seed"}
 	Server.action("ON_HIT", data)
 	queue_free()

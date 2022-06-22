@@ -2,9 +2,9 @@ extends Node
 
 signal active_item_updated
 signal clear_chest
-signal update_time
 var season = "Spring"
 var day_num = 1
+var time
 
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
@@ -12,43 +12,27 @@ const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 var viewInventoryMode = false
 var openChestMode = false
+var chatMode = false
 var is_inside_chest_area = false
 var active_item_slot = 0
 
 var inventory = {
-	1: ["wood", 1], 
-	3: ["wood", 37],
-	4: ["scythe", 1], 
+	3: ["wood", 99],
+	4: ["stone ore", 99],
 	6: ["stone ore", 35],
-	7: ["bucket", 1],
 	9: ["potato seeds", 28],
-#	#14: ["torch", 76],
-#	10: ["stone ore", 7],
+
 }
 
 var hotbar = {
-	1: ["house", 1], 
-	4: ["wood", 89], 
-	#6: ["wood", 13],
-	2: ["stone ore", 75],
-#	2: ["potato seeds", 28],
+	6: ["bucket", 1],
 	7: ["hoe", 1], 
 	8: ["axe", 1],
 	9:["pickaxe", 1],
-	6: ["bucket", 1],
-	
-##	3: ["bucket", 1],
-#	#5: ["wood", 52],
-#	6: ["bucket", 70],
-##	6: ["carrot seeds", 50],
-#	7: ["wood path", 78],
-##	8: ["lettuce seeds", 50],
-#	8: ["wood chest", 7],
-#	9: ["wood fence", 32]
 }
 
 var chest = {
-	0: ["potato seeds", 30],
+	0: ["yellow pepper seeds", 30],
 	1: ["carrot seeds", 30],
 	2: ["garlic seeds", 30],
 }
@@ -80,9 +64,9 @@ func craft_item(item):
 		add_item_to_hotbar(item, 1)
 	else: 
 		print("INVALID MATERIAL")
-			
 
-	
+
+
 func remove_materials(_wood, _stone):
 	var wood_to_remove = _wood
 	var stone_to_remove = _stone

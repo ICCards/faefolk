@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/place object.mp3-e3e215407919d47bfb94fd7c245ff522.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Building/place object.mp3"
+dest_files=[ "res://.import/place object.mp3-e3e215407919d47bfb94fd7c245ff522.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

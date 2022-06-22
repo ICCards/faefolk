@@ -12,6 +12,7 @@ script = ExtResource( 2 )
 margin_right = 182.0
 margin_bottom = 29.0
 rect_scale = Vector2( 6, 6 )
+mouse_filter = 0
 texture = ExtResource( 3 )
 
 [node name="HotbarSlots" type="GridContainer" parent="."]

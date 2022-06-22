@@ -40,7 +40,6 @@ var randomBorderTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0
 var object_name
 var position_of_object
 var object_variety
-var day = true
 var day_num = 1
 var season = "spring"
 
@@ -89,7 +88,7 @@ func spawnPlayer(value):
 		player.character.LoadPlayerCharacter(value["c"]) 
 		$Players.add_child(player)
 		if Server.player_house_position == null:
-			player.position = sand.map_to_world(value["p"]) + Vector2(1000, 800)
+			player.position = sand.map_to_world(value["p"]) 
 		else: 
 			player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		print('getting map')
@@ -277,7 +276,9 @@ func buildMap(map):
 #		DayNightTimer.is_timer_started = true
 #		DayNightTimer.start_day_timer()
 	print("Map loaded")
-	get_node("loadingScreen").queue_free()
+	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", 12)
+	$AmbientSound.play()
+	get_node("loadingScreen").animate_away()
 	spawnPlayer(Server.player)
 	
 	
@@ -497,16 +498,19 @@ func set_player_house_invalid_tiles(location):
 			validTiles.set_cellv(location + Vector2(x, -y), -1)
 
 
-func UpdateWorldState(world_state):					
+func UpdateWorldState(world_state):
+	if Server.day == null:
+		Server.day = bool(world_state["day"])	
+		get_node("/root/World/Players/" + str(Server.player_id)).init_day_night_cycle()
 	if world_state["t"] > last_world_state:
 		var new_day = bool(world_state["day"])
-		if day != new_day and Server.isLoaded:
-			day = new_day
-			PlayerInventory.day_num = int(world_state["day_num"])
-			PlayerInventory.season = str(world_state["season"])
+		get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
+		if Server.day != new_day and Server.isLoaded:
+			Server.day = new_day
 			if new_day == false:
 				get_node("/root/World/Players/" + str(Server.player_id)).set_night()
-			else: 
+			else:
+				watered.clear()
 				get_node("/root/World/Players/" + str(Server.player_id)).set_day()
 			
 		last_world_state = world_state["t"]
@@ -541,9 +545,6 @@ func _physics_process(delta):
 				if player == Server.player_id:
 					continue
 				if $Players.has_node(str(player)) and not player == Server.player_id:
-					#print(player)
-					#print(Server.player_id)
-					
 					if world_state_buffer[1]["players"].has(player):
 						var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
 						$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
@@ -555,8 +556,6 @@ func _physics_process(delta):
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
 			for player in world_state_buffer[1]["players"].keys():
 				if $Players.has_node(str(player)) and not player == Server.player_id:
-					#print("player is me" + player == Server.player_id)
-					print(Server.player_id)
 					var position_delta = (world_state_buffer[1]["players"][player]["p"] - world_state_buffer[0]["players"][player]["p"])
 					var new_position = world_state_buffer[1]["players"][player]["p"] + (position_delta * extrapolation_factor)
 					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
