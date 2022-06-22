@@ -30,10 +30,10 @@ func _input(event):
 
 func text_entered(text):
 	if text != "":
-		var data = {"id": Server.player_id, "m": text}
-		Server.action("SEND_MESSAGE", data)
+		var data = {"d": text}
+		var message = Util.toMessage("SEND_MESSAGE",data)
+		Server._client.get_peer(1).put_packet(message)
 		inputField.text = ''
-		add_message(Server.player_id, text, '#1c71a4')
 	
 func add_message(username, text, color):
 	chatLog.bbcode_text += '\n' 

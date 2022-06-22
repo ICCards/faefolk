@@ -23,7 +23,6 @@ func jsonParse(body):
   return jsonParseResult.result
 
 func toMessage(name, data):
-	print("Name: " + str(name) + " data: " + str(data))
 	data["n"] = name
 	return JSON.print(data).to_utf8()
 	
