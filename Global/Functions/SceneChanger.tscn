@@ -36,4 +36,3 @@ color = Color( 0, 0, 0, 1 )
 anims/fade = SubResource( 1 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-volume_db = -16.0

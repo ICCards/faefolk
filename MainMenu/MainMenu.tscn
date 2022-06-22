@@ -35,11 +35,10 @@ margin_bottom = 350.0
 rect_scale = Vector2( 0.4, 0.4 )
 
 [node name="Boundaries" type="YSort" parent="."]
-visible = false
 position = Vector2( 80, 604 )
 
 [node name="Left" type="StaticBody2D" parent="Boundaries"]
-position = Vector2( -196, -422 )
+position = Vector2( -74, -427 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left"]
 position = Vector2( 279, 259 )

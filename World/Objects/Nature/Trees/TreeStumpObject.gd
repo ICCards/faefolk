@@ -29,6 +29,9 @@ func PlayEffect(player_id):
 	else:
 		hit_dir = "left"
 	if health >= 1:
+		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffects.play()
 		if hit_dir == "right":
 			stump_animation_player.play("stump hit right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
@@ -36,6 +39,9 @@ func PlayEffect(player_id):
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump hit right")
 	else:
+		$SoundEffects.stream = Sounds.stump_break
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffects.play()
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 		

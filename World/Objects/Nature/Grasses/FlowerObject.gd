@@ -24,7 +24,7 @@ func play_sound_effect():
 
 
 func _on_Area2D_body_entered(_body):
-	var data = {"id": name, "n": "flower"}
+	var data = {"id": name, "n": "flower", "d": "DDDDDD"}
 	Server.action("ON_HIT", data)
 	play_sound_effect()
 	bodyEnteredFlag = true
