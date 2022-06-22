@@ -24,8 +24,8 @@ var player
 var player_id
 var mapPartsLoaded = 0
 var player_house_position
-
-var map = {}
+var world
+var map
 var generated_map = {}
 var player_state = "WORLD"
 
@@ -74,27 +74,31 @@ func DetermineLatency():
 	_client.get_peer(1).put_packet(message)
 	
 func action(type,data):
-	var request = {"n":"action","d":{"t":type,"d":data}}
+	var request = {"t":type,"d":data}
 	var message = Util.toMessage("action",request)
 	_client.get_peer(1).put_packet(message)
 
 func generate_map():
 	map = {
-	"dirt":{},
-	"grass":{},
-	"dark_grass":{},
-	"tall_grass":{},
-	"water":{},
-	"tree":{},
-	"ore_large":{},
-	"ore":{},
-	"log":{},
-	"stump":{},
-	"flower":{},
-	"tile": {}
+	"dirt":[],
+	"grass":[],
+	"dark_grass":[],
+	"tall_grass":[],
+	"water":[],
+	"tree":[],
+	"ore_large":[],
+	"ore":[],
+	"log":[],
+	"stump":[],
+	"flower":[],
+	"tile": []
 	}
-	var message = Util.toMessage("getMap",mapPartsLoaded)
-	_client.get_peer(1).put_packet(message)
+	var key = map.keys()[mapPartsLoaded]
+	var data = {"d":key}
+	var value = Util.toMessage("getMap",data)
+	print("getting map")
+	print(value)
+	_client.get_peer(1).put_packet(value)
 
 func _on_data():
 	var pkt = _client.get_peer(1).get_packet()
@@ -103,16 +107,22 @@ func _on_data():
 	# using the MultiplayerAPI.
 	var result = Util.jsonParse(pkt)
 	match result["n"]:
+		("updateState"):
+			if world != null:
+				world.UpdateWorldState(result["d"])
 		("ID"):
-			player_id = result["d"]
-			print("My Id " + str(player_id))
+			print("got ID")
+			player_id = str(result["d"])
+			print(player_id)
+		("SpawnPlayer"):
+			player = result["d"]
 		("ReturnServerTime"):
-			var client_time = result["d"]["c"]["d"]
+			var client_time = result["d"]["c"]
 			var server_time = result["d"]["s"]
 			latency = (OS.get_system_time_msecs() - client_time) / 2
 			client_clock = server_time + latency
 		("ReturnLatency"):
-			var client_time = result["d"]["d"]
+			var client_time = result["d"]
 			latency_array.append((OS.get_system_time_msecs() - client_time)/2)
 			if latency_array.size() == 9:
 				var total_latency = 0
@@ -127,41 +137,41 @@ func _on_data():
 				#print("New Latency ", latency)
 				latency_array.clear()
 		("loadMap"):
-			var tileType = result["d"]["t"]
-			var data = result["d"]["d"]
-			var id = result["d"]["id"]
-			print("Loaded " + tileType)
-			#print(tile)
-			#print(id)
-			map[tileType][id] = data
+			print("loading map")
+			var key = map.keys()[mapPartsLoaded]
+			print("Loaded " + key)
+			map[key] = result["d"]
 			mapPartsLoaded = mapPartsLoaded + 1
-			#var message = Util.toMessage("getMap",mapPartsLoaded)
-			#_client.get_peer(1).put_packet(message)
-		("MapLoaded"):
-			mapPartsLoaded = 0
-			generated_map = map
+			if not mapPartsLoaded >= map.keys().size():
+				key = map.keys()[mapPartsLoaded]
+				var data = {"d":key}
+				var message = Util.toMessage("getMap",data)
+				_client.get_peer(1).put_packet(message)
+			else:
+				mapPartsLoaded = 0
+				generated_map = map
 		("CHANGE_TILE"):
 			if isLoaded:
 				var data = result["d"]
 				get_node("/root/World").ChangeTile(data)
 		("ReceivedAction"):
-			if not player_id == result["id"]:
-				var data = result["d"]
-				match result["m"]["t"]:
+			if not player_id == str(result["id"]):
+				var message = result["m"]
+				match message["t"]:
 					"MOVEMENT":
 						pass
 					#	get_node("/root/PlayerHomeFarm/" + str(player_id)).MovePlayer(position, direction)
 					"SWING":
 						if isLoaded:
 							if player_state == "WORLD":
-								get_node("/root/World/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
+								get_node("/root/World/Players/" + str(player_id)).Swing(message["tool"], message["d"])
 							else:
 								if get_node("/root/InsidePlayerHome/Players/").has_node(str(player_id)):
-									get_node("/root/InsidePlayerHome/Players/" + str(player_id)).Swing(data["tool"], data["direction"])
+									get_node("/root/InsidePlayerHome/Players/" + str(player_id)).Swing(message["tool"], message["d"])
 					"ON_HIT":
 						if isLoaded:
 							if player_state == "WORLD":
-								get_node("/root/World/" + str(data["id"])).PlayEffect(player_id)
+								get_node("/root/World/" + str(result["id"])).PlayEffect(player_id)
 		#					else:
 		#						get_node("/root/InsidePlayerHome/" + str(data["id"])).PickUpItem()
 					"PLACE_ITEM":
@@ -173,13 +183,13 @@ func _on_data():
 		#						get_node("/root/InsidePlayerHome").PlaceItemInHouse(data["id"], data["n"], data["l"])
 					"PLACE_SEED":
 						if isLoaded:
-							get_node("/root/World").PlaceSeedInWorld(data["id"], data["n"], data["l"])
+							get_node("/root/World").PlaceSeedInWorld(result["id"], result["n"], result["l"])
 
 remote func ChangeTile(data):
 	if isLoaded:
 		get_node("/root/World").ChangeTile(data)
 
-func _process(delta):
+func _process(_delta):
 	# Call this in _process or _physics_process. Data transfer, and signals
 	# emission will only happen when calling this function.
 	_client.poll()

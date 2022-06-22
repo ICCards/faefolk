@@ -140,6 +140,17 @@ rotate={
 2d_physics/layer_13="InsideTreeTopLayer"
 2d_physics/layer_14="DetectOverlappingObject"
 
+[network]
+
+limits/websocket_client/max_in_buffer_kb=64000
+limits/websocket_client/max_in_packets=1024000
+limits/websocket_client/max_out_buffer_kb=6400
+limits/websocket_client/max_out_packets=1024000
+limits/websocket_server/max_in_buffer_kb=640
+limits/websocket_server/max_in_packets=10240
+limits/websocket_server/max_out_buffer_kb=640
+limits/websocket_server/max_out_packets=10240
+
 [physics]
 
 common/enable_pause_aware_picking=true

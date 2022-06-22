@@ -136,7 +136,6 @@ func _unhandled_input(event):
 func sendAction(action,data): 
 	match action:
 		(MOVEMENT):
-			pass
 			Server.action("MOVEMENT",data)
 		(SWING):
 			Server.action("SWING", data)

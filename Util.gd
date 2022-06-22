@@ -22,8 +22,8 @@ func jsonParse(body):
   return jsonParseResult.result
 
 func toMessage(name, data):
-	var response = {"n":name,"d":data}
-	return JSON.print(response).to_utf8()
+	data["n"] = name
+	return JSON.print(data).to_utf8()
 	
 func string_to_vector2(string := "") -> Vector2:
 	if string:
