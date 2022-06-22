@@ -65,7 +65,6 @@ func _ready():
 	Server.generated_map.clear()
 	Server.generate_map()
 	wait_for_map()
-	Server.world = self
 		
 func wait_for_map():
 	if not Server.generated_map.empty():
@@ -291,6 +290,7 @@ func buildMap(map):
 	$AmbientSound.play()
 	get_node("loadingScreen").animate_away()
 	spawnPlayer(Server.player)
+	Server.world = self
 	
 	
 func build_valid_tiles():
@@ -395,6 +395,7 @@ func ChangeTile(data):
 	watered.update_bitmask_region()
 	
 func PlaceSeedInWorld(id, item_name, location, days_to_grow):
+	print("PLACE SEED IN WORLD")
 	var plantedCrop = PlantedCrop.instance()
 	plantedCrop.name = str(id)
 	plantedCrop.initialize(item_name, location, days_to_grow, false, false)
@@ -513,26 +514,24 @@ func set_player_house_invalid_tiles(location):
 
 
 func UpdateWorldState(world_state):
-	print("updating world state")
-	if Server.day == null:
-		Server.day = bool(world_state["day"])	
-		if has_node("Players/" + Server.player_id):
-			get_node("Players/" + Server.player_id).init_day_night_cycle()
+#	if Server.day == null:
+#		Server.day = bool(world_state["day"])	
+#		if has_node("Players/" + Server.player_id):
+#			get_node("Players/" + Server.player_id).init_day_night_cycle()
 	if world_state["t"] > last_world_state:
-		var new_day = bool(world_state["day"])
-		print(str(int(world_state["time_elapsed"])))
-		if has_node("Players/" + Server.player_id):
-			get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
-		if Server.day != new_day and Server.isLoaded:
-			Server.day = new_day
-			if new_day == false:
-				if has_node("Players/" + Server.player_id):
-					get_node("/root/World/Players/" + Server.player_id).set_night()
-			else:
-				if has_node("Players/" + Server.player_id):
-					watered.clear()
-					get_node("/root/World/Players/" + Server.player_id).set_day()
-			
+#		var new_day = bool(world_state["day"])
+#		if has_node("Players/" + Server.player_id):
+#			pass
+##			get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
+#		if Server.day != new_day and Server.isLoaded:
+#			Server.day = new_day
+#			if new_day == false:
+#				if has_node("Players/" + Server.player_id):
+#					get_node("/root/World/Players/" + Server.player_id).set_night()
+#			else:
+#				if has_node("Players/" + Server.player_id):
+#					watered.clear()
+#					get_node("/root/World/Players/" + Server.player_id).set_day()
 		last_world_state = world_state["t"]
 		world_state_buffer.append(world_state)
 
@@ -547,7 +546,9 @@ func _physics_process(delta):
 				match decoration:
 					"seed":
 						for item in world_state_buffer[2]["decorations"][decoration].keys():
+							
 							var data = world_state_buffer[2]["decorations"][decoration][item]
+							print(data)
 							if has_node(str(item)):
 								get_node(str(item)).daysUntilHarvest = data["d"]
 								get_node(str(item)).refresh_image()
@@ -556,7 +557,9 @@ func _physics_process(delta):
 					"placable":
 						for item in world_state_buffer[2]["decorations"][decoration].keys():
 							if not has_node(str(item)):
+								print('place item')
 								var data = world_state_buffer[2]["decorations"][decoration][item]
+							
 								PlaceItemInWorld(item, data["n"], Util.string_to_vector2(data["l"]))
 			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
 			for player in world_state_buffer[2]["players"].keys():
