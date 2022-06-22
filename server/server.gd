@@ -1,7 +1,7 @@
 extends Node
 
 #const DEFAULT_IP = "198.211.104.56"
-#const DEFAULT_PORT = 65124
+#const DEFAULT_PORT = 443
 
 const DEFAULT_IP = "127.0.0.1"
 const DEFAULT_PORT = 65124
@@ -28,7 +28,6 @@ var world
 var map
 var generated_map = {}
 var player_state = "WORLD"
-var time_elapsed = 0
 var day
 
 func _ready():
@@ -76,8 +75,9 @@ func DetermineLatency():
 	_client.get_peer(1).put_packet(message)
 	
 func action(type,data):
-	var request = {"t":type,"d":data}
-	var message = Util.toMessage("action",request)
+	var value = {"d": data}
+	value["n"] = type
+	var message = Util.toMessage("action",data)
 	_client.get_peer(1).put_packet(message)
 
 func generate_map():

@@ -144,9 +144,8 @@ func sendAction(action,data):
 		(SWING):
 			Server.action("SWING", data)
 		(PLACE_ITEM):
+			print(data)
 			Server.action("PLACE_ITEM", data)
-		(CHANGE_TILE):
-			Server.action("CHANGE_TILE", data)
 
 
 func get_path_rotation(path_name):

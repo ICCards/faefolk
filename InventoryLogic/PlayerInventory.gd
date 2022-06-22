@@ -18,6 +18,7 @@ var active_item_slot = 0
 
 var inventory = {
 	3: ["wood", 99],
+	5: ["wood", 89],
 	4: ["stone ore", 99],
 	6: ["stone ore", 35],
 	9: ["potato seeds", 28],
