@@ -1,10 +1,10 @@
 extends Node
 
-#const DEFAULT_IP = "198.211.104.56"
-#const DEFAULT_PORT = 443
+const DEFAULT_IP = "198.211.104.56"
+const DEFAULT_PORT = 443
 
-const DEFAULT_IP = "127.0.0.1"
-const DEFAULT_PORT = 65124
+#const DEFAULT_IP = "127.0.0.1"
+#const DEFAULT_PORT = 65124
 
 # The URL we will connect to
 var websocket_url = "ws://"+DEFAULT_IP+":"+str(DEFAULT_PORT)
@@ -158,34 +158,17 @@ func _on_data():
 				world.ChangeTile(data)
 		("ReceivedAction"):
 			if not player_id == str(result["id"]):
-				var message = result["m"]
-				match message["t"]:
-					"MOVEMENT":
-						pass
-					#	get_node("/root/PlayerHomeFarm/" + str(player_id)).MovePlayer(position, direction)
+				match result["t"]:
 					"SWING":
 						if isLoaded:
 							if player_state == "WORLD":
-								get_node("/root/World/Players/" + str(player_id)).Swing(message["tool"], message["d"])
-							else:
-								if get_node("/root/InsidePlayerHome/Players/").has_node(str(player_id)):
-									get_node("/root/InsidePlayerHome/Players/" + str(player_id)).Swing(message["tool"], message["d"])
+								get_node("/root/World/Players/" + str(result["id"])).Swing(result["d"]["tool"], result["d"]["direction"])
+							
 					"ON_HIT":
 						if isLoaded:
 							if player_state == "WORLD":
-								get_node("/root/World/" + str(result["id"])).PlayEffect(player_id)
-		#					else:
-		#						get_node("/root/InsidePlayerHome/" + str(data["id"])).PickUpItem()
-					"PLACE_ITEM":
-						pass
-		#				if isLoaded:
-		#					if player_state == "WORLD":
-		#						get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
-		#					else:
-		#						get_node("/root/InsidePlayerHome").PlaceItemInHouse(data["id"], data["n"], data["l"])
-					"PLACE_SEED":
-						if isLoaded:
-							get_node("/root/World").PlaceSeedInWorld(result["id"], result["n"], result["l"])
+								if has_node("/root/World/" + str(result["d"]["id"])):
+									get_node("/root/World/" + str(result["d"]["id"])).PlayEffect(player_id)
 
 remote func ChangeTile(data):
 	if isLoaded:
