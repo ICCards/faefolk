@@ -27,6 +27,7 @@ PlayerStats="*res://Global/Data/PlayerStats.gd"
 Util="*res://Util.gd"
 Uuid="*res://helpers/uuid.gd"
 Server="*res://server/server.gd"
+Plug="*res://helpers/plug.gd"
 
 [display]
 
