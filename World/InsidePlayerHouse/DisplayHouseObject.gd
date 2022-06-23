@@ -17,7 +17,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	Sounds.connect("volume_change", self, "change_volume")
-	$HouseImageTextureRect.texture = load("res://Assets/Images/house_objects/" + image +  ".png")
+	$HouseImageTextureRect.texture = Images.return_house_object(image)
 	$CollisionBox.scale.x = JsonData.house_objects_data[image]["X"]
 	$CollisionBox.scale.y = JsonData.house_objects_data[image]["Y"]
 	$CollisionBox.position.x += (JsonData.house_objects_data[image]["X"] - 1) * 16
