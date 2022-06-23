@@ -28,7 +28,7 @@ func initialize_chat_history():
 	
 func ReceiveMessage(player_id, message):
 	if str(player_id) == Server.player_id:
-		add_message(player_id, message, '#cc1717')
+		add_message(player_id, message, '#0717f2')
 	else:
 		add_message(player_id, message, '#ffffff')
 
@@ -47,6 +47,7 @@ func text_entered(text):
 		var message = Util.toMessage("SEND_MESSAGE",data)
 		Server._client.get_peer(1).put_packet(message)
 		inputField.text = ''
+		inputField.release_focus()
 	
 func add_message(username, text, color):
 	chatLog.bbcode_text += '\n' 
@@ -62,3 +63,12 @@ func _on_LineEdit_focus_entered():
 
 func _on_LineEdit_focus_exited():
 	PlayerInventory.chatMode = false
+
+
+func _on_TextureButton_pressed():
+	$ColorRect.visible = !$ColorRect.visible
+	$VBoxContainer.visible = !$VBoxContainer.visible
+	if $ColorRect.visible == false:
+		$TextureButton.texture_normal = preload("res://Assets/Images/Misc/right arrow.png")
+	else:
+		$TextureButton.texture_normal = preload("res://Assets/Images/Misc/left arrow.png")

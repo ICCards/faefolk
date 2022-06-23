@@ -30,7 +30,6 @@ onready var PlayerHouse = preload("res://World/Objects/Farm/PlayerHouse.tscn")
 onready var PlayerHouseTemplate = preload("res://World/Objects/Farm/PlayerHouseTemplate.tscn")
 var rng = RandomNumberGenerator.new()
 
-
 var object_types = ["tree", "tree stump", "tree branch", "ore large", "ore small"]
 var tall_grass_types = ["dark green", "green", "red", "yellow"]
 var treeTypes = ['A','B', 'C', 'D', 'E']
@@ -252,15 +251,6 @@ func buildMap(map):
 			object.position = sand.map_to_world(loc) + Vector2(16, 32)
 			add_child(object,true)
 	print("LOADED FLOWERS")
-#	for key in map["decorations"].keys():
-#		match key:
-#			"seed":
-#				for id in map["decorations"][key].keys():
-#					PlaceSeedInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"], map["decorations"][key][id]["d"])
-#			"placable": 
-#				for id in map["decorations"][key].keys():
-#					PlaceItemInWorld(id, map["decorations"][key][id]["n"], map["decorations"][key][id]["l"])
-	print("LOADED OBJECTS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	check_and_remove_invalid_autotiles(map)
 	generate_border_tiles()
@@ -277,7 +267,7 @@ func buildMap(map):
 	print("Map loaded")
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 	$AmbientSound.play()
-	get_node("loadingScreen").animate_away()
+	get_node("loadingScreen").queue_free()
 	spawnPlayer(Server.player)
 	Server.world = self
 	
@@ -371,7 +361,6 @@ func get_subtile_with_priority(id, tilemap: TileMap):
 			var priority = tiles.autotile_get_subtile_priority(id, Vector2(x ,y))
 			for p in priority:
 				tile_array.append(Vector2(x,y))
-
 	return tile_array[randi() % tile_array.size()]
 
 
@@ -389,16 +378,14 @@ func ChangeTile(data):
 	watered.update_bitmask_region()
 	
 func PlaceSeedInWorld(id, item_name, location, days_to_grow):
-	print("PLACE SEED IN WORLD")
 	var plantedCrop = PlantedCrop.instance()
 	plantedCrop.name = str(id)
 	plantedCrop.initialize(item_name, location, days_to_grow, false, false)
 	add_child(plantedCrop, true)
 	plantedCrop.global_position = fence.map_to_world(location) + Vector2(0, 16)
-			
+	
 
 func PlaceItemInWorld(id, item_name, location):
-	print("PLACE ITEM IN WORLD " + item_name + str(location))
 	match item_name:
 		"torch":
 			var torchObject = TorchObject.instance()
@@ -506,7 +493,6 @@ func set_player_house_invalid_tiles(location):
 		for y in range(4):
 			validTiles.set_cellv(location + Vector2(x, -y), -1)
 
-
 func UpdateWorldState(world_state):
 	if Server.day == null:
 		get_node("Players/" + Server.player_id).init_day_night_cycle(int(world_state["time_elapsed"]))
@@ -527,7 +513,6 @@ func UpdateWorldState(world_state):
 		world_state_buffer.append(world_state)
 
 func _physics_process(delta):
-	#get_node("/root/World").PlaceItemInWorld(data["id"], data["n"], data["l"])
 	var render_time = OS.get_system_time_msecs() - interpolation_offset
 	if world_state_buffer.size() > 1:
 		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].t:
@@ -537,9 +522,7 @@ func _physics_process(delta):
 				match decoration:
 					"seed":
 						for item in world_state_buffer[2]["decorations"][decoration].keys():
-							
 							var data = world_state_buffer[2]["decorations"][decoration][item]
-							print(data)
 							if has_node(str(item)):
 								get_node(str(item)).days_until_harvest = data["d"]
 								get_node(str(item)).refresh_image()
@@ -548,7 +531,6 @@ func _physics_process(delta):
 					"placable":
 						for item in world_state_buffer[2]["decorations"][decoration].keys():
 							if not has_node(str(item)):
-								print('place item')
 								var data = world_state_buffer[2]["decorations"][decoration][item]
 								PlaceItemInWorld(item, data["n"], Util.string_to_vector2(data["l"]))
 			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
