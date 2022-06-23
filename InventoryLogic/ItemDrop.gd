@@ -70,8 +70,9 @@ func _physics_process(_delta):
 				being_added_to_inventory = true
 				$Sprite.visible = false
 				$CollisionShape2D.disabled = true
-				if item_name == "wood" or item_name == "stone ore": 
-					RustCalls.mint_object(item_name)
+				if item_name == "wood" or item_name == "stone ore":
+					pass
+					#RustCalls.mint_object(item_name)
 				PlayerInventory.add_item_to_hotbar(item_name, quantity)
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")
