@@ -90,14 +90,23 @@ func set_inventory_state():
 	$InventorySlots.visible = true
 	$CraftingMenu.visible = false
 	$OptionsMenu.visible = false
+	$QuitMenu.visible = false
+	$Buttons/InventoryIcon.rect_position = Vector2(-202, 8) 
+	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
+	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory1.png")
 	$Title.text = "INVENTORY"
 	
 func set_crafting_state():
-	#set_player_crafting_state(PlayerInventory.return_player_wood_and_stone()[0], PlayerInventory.return_player_wood_and_stone()[1])
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = true
 	$OptionsMenu.visible = false
+	$QuitMenu.visible = false
+	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8) 
+	$Buttons/CraftingIcon.rect_position = Vector2(-202, 116) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
+	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory2.png")
 	$Title.text = "CRAFTING"
 	
@@ -106,6 +115,11 @@ func set_options_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
 	$OptionsMenu.visible = true
+	$QuitMenu.visible = false
+	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8)
+	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-202, 224) 
+	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory3.png")
 	$Title.text = "OPTIONS"	
 
@@ -113,6 +127,11 @@ func set_quit_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
 	$OptionsMenu.visible = false
+	$QuitMenu.visible = true
+	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8)
+	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
+	$Buttons/ExitIcon.rect_position = Vector2(-202, 332) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory4.png")
 	$Title.text = "QUIT"
 
@@ -122,3 +141,10 @@ func _on_ExitButton_input_event(viewport, event, shape_idx):
 		get_parent().toggle_inventory()
 
 
+func _on_ExitToTitleButton_pressed():
+	PlayerInventory.viewInventoryMode = false
+	Server.world = null
+	SceneChanger.change_scene("res://MainMenu/MainMenu.tscn")
+
+func _on_QuitButton_pressed():
+	get_tree().quit()
