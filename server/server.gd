@@ -1,13 +1,13 @@
 extends Node
 
-const DEFAULT_IP = "198.211.104.56"
-const DEFAULT_PORT = 443
+const DEFAULT_IP = "wss.faefolk.app/ws"
+const DEFAULT_PORT = 65124
 
 #const DEFAULT_IP = "127.0.0.1"
 #const DEFAULT_PORT = 65124
 
 # The URL we will connect to
-var websocket_url = "ws://"+DEFAULT_IP+":"+str(DEFAULT_PORT)
+var websocket_url = "wss://"+DEFAULT_IP+":"+str(DEFAULT_PORT)
 
 # Our WebSocketClient instance
 var _client = WebSocketClient.new()
