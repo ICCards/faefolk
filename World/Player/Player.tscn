@@ -748,10 +748,10 @@ zoom = Vector2( 0.9, 0.9 )
 script = ExtResource( 6 )
 
 [node name="ChatBox" parent="Camera2D/UserInterface" instance=ExtResource( 7 )]
-margin_left = 6.0
-margin_top = 434.0
-margin_right = -790.0
-margin_bottom = -7.0
+margin_left = 16.0
+margin_top = 375.0
+margin_right = -702.0
+margin_bottom = -13.0
 
 [node name="OpenChest" parent="Camera2D/UserInterface" instance=ExtResource( 20 )]
 visible = false
@@ -767,7 +767,8 @@ position = Vector2( 36, 24 )
 scale = Vector2( 2.3, 2.3 )
 
 [node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
-position = Vector2( 240, 513 )
+visible = false
+position = Vector2( 355, 505 )
 
 [node name="Inventory" parent="Camera2D/UserInterface" instance=ExtResource( 5 )]
 visible = false

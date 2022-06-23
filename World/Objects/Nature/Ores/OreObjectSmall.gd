@@ -3,7 +3,7 @@ extends Node2D
 
 onready var OreHitEffect = preload("res://World/Objects/Nature/Effects/OreHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-
+onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
 var rng = RandomNumberGenerator.new()
@@ -28,11 +28,19 @@ func setTexture(ore):
 func PlayEffect(player_id):
 	health -= 1
 	if health >= 1:
+		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 32))
 		animation_player.play("small_ore_hit_right")
 	else:
+		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 42))
-		animation_player.play("small_ore_break")
+		valid_tiles.set_cellv(position_of_object, 0)
+		yield($SoundEffects, "finished")
+		queue_free()
 
 
 func _on_SmallHurtBox_area_entered(_area):
@@ -47,7 +55,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 42))
 		intitiateItemDrop(variety, Vector2(0, 40))
 		animation_player.play("small_ore_break")
-		PlayerFarmApi.remove_farm_object(position_of_object)
+		valid_tiles.set_cellv(position_of_object, 0)
 		yield($SoundEffects, "finished")
 		queue_free()
 	if health != 0:

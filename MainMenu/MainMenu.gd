@@ -40,3 +40,5 @@ func _on_CloseMenuArea_input_event(viewport, event, shape_idx):
 		if is_menu_open:
 			close_options_menu()
 
+
+
