@@ -76,9 +76,9 @@ texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="ConnectToPlug"]
 margin_left = 178.333
-margin_top = 221.667
+margin_top = 228.334
 margin_right = 667.333
-margin_bottom = 416.667
+margin_bottom = 423.334
 rect_scale = Vector2( 0.9, 0.9 )
 theme = ExtResource( 8 )
 text = "Connect to Plug"

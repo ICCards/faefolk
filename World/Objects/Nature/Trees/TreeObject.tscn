@@ -629,15 +629,14 @@ visible = false
 polygon = PoolVector2Array( 9, -4, 9, -57, 61, -109, 60, -185, 40, -215, 1, -235, -41, -212, -54, -178, -52, -148, -71, -121, -45, -80, -13, -79, -13, -2 )
 disabled = true
 
-[node name="E" type="CollisionPolygon2D" parent="TreeTopArea"]
-visible = false
-polygon = PoolVector2Array( 10, -4, 9, -43, 30, -37, 39, -58, 21, -141, 0, -163, -20, -139, -33, -61, -31, -35, -9, -40, -14, -4 )
+[node name="D" type="CollisionPolygon2D" parent="TreeTopArea"]
+position = Vector2( 2.22222, -0.111112 )
+polygon = PoolVector2Array( -5.55554, -6.77777, 5.55556, -6.77778, 32.2222, -34.4444, 50, -81.1111, 0, -151.222, -48.8889, -77.8889, -34.4444, -35.5556 )
 disabled = true
 
-[node name="D" type="CollisionPolygon2D" parent="TreeTopArea"]
+[node name="E" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-position = Vector2( 2.22222, -0.111112 )
-polygon = PoolVector2Array( -5.55554, -6.77777, 5.55556, -6.77778, 37.7778, -28.8889, 50, -81.1111, 0, -151.222, -48.8889, -77.8889, -45.5556, -34.4444 )
+polygon = PoolVector2Array( 8.88889, -10.1111, 9, -43, 30, -37, 39, -58, 21, -141, 0, -163, -20, -139, -33, -61, -31, -35, -9, -40, -13.3333, -10.1111 )
 disabled = true
 
 [node name="Timer" type="Timer" parent="."]
