@@ -1,10 +1,10 @@
 extends Node
 
-const DEFAULT_IP = "198.211.104.56"
-const DEFAULT_PORT = 443
+#const DEFAULT_IP = "198.211.104.56"
+#const DEFAULT_PORT = 443
 
-#const DEFAULT_IP = "127.0.0.1"
-#const DEFAULT_PORT = 65124
+const DEFAULT_IP = "127.0.0.1"
+const DEFAULT_PORT = 65124
 
 # The URL we will connect to
 var websocket_url = "ws://"+DEFAULT_IP+":"+str(DEFAULT_PORT)
@@ -29,6 +29,7 @@ var map
 var generated_map = {}
 var player_state = "WORLD"
 var day
+var num_day = 1
 
 func _ready():
 	# Connect base signals to get notified of connection open, close, and errors.
@@ -109,9 +110,11 @@ func _on_data():
 	# using the MultiplayerAPI.
 	var result = Util.jsonParse(pkt)
 	match result["n"]:
-		("ReceiveMessage"):			
-				print(result["d"])
+		("ReceiveMessage"):	
+			if world != null:		
 				Chat.ReceiveMessage(result["id"], result["d"])
+			else:
+				Chat.message_history.append([result["id"], result["d"]])
 		("updateState"):
 			if world != null:
 				world.UpdateWorldState(result["d"])
