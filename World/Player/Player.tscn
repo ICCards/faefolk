@@ -6,7 +6,7 @@
 [ext_resource path="res://InventoryLogic/Hotbar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
-[ext_resource path="res://ChatBox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Player/ChatBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/PlayerStatsUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Player/CurrentTime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=10]
@@ -748,8 +748,10 @@ zoom = Vector2( 0.9, 0.9 )
 script = ExtResource( 6 )
 
 [node name="ChatBox" parent="Camera2D/UserInterface" instance=ExtResource( 7 )]
-margin_top = 246.0
-margin_bottom = -210.0
+margin_left = 6.0
+margin_top = 434.0
+margin_right = -790.0
+margin_bottom = -7.0
 
 [node name="OpenChest" parent="Camera2D/UserInterface" instance=ExtResource( 20 )]
 visible = false
@@ -772,7 +774,7 @@ visible = false
 position = Vector2( 372, 56 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="Camera2D/UserInterface"]
+[node name="SoundEffects" type="AudioStreamPlayer" parent="Camera2D/UserInterface"]
 
 [node name="DayNight" type="CanvasModulate" parent="Camera2D"]
 
@@ -922,7 +924,7 @@ shape = SubResource( 10 )
 stream = ExtResource( 10 )
 volume_db = -16.0
 
-[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
 [node name="FootstepsSound" type="AudioStreamPlayer2D" parent="."]
