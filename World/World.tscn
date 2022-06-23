@@ -1034,7 +1034,6 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="ValidTiles" type="TileMap" parent="GeneratedTiles"]
-visible = false
 tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -1080,6 +1079,6 @@ format = 1
 
 [node name="Players" type="YSort" parent="."]
 
-[node name="AmbientSound" type="AudioStreamPlayer2D" parent="."]
+[node name="AmbientSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -12.0

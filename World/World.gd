@@ -65,6 +65,10 @@ func _ready():
 	Server.generated_map.clear()
 	Server.generate_map()
 	wait_for_map()
+	Sounds.connect("volume_change", self, "change_ambient_volume")
+	
+func change_ambient_volume():
+	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 		
 func wait_for_map():
 	if not Server.generated_map.empty():
@@ -286,7 +290,7 @@ func buildMap(map):
 #		DayNightTimer.is_timer_started = true
 #		DayNightTimer.start_day_timer()
 	print("Map loaded")
-	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", 12)
+	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 	$AmbientSound.play()
 	get_node("loadingScreen").animate_away()
 	spawnPlayer(Server.player)

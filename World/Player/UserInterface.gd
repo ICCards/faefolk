@@ -2,9 +2,9 @@ extends CanvasLayer
 var holding_item = null
 
 func _input(event):
-	if event.is_action_pressed("inventory") and holding_item == null and not PlayerInventory.openChestMode:
+	if event.is_action_pressed("inventory") and holding_item == null and not PlayerInventory.openChestMode and not PlayerInventory.chatMode:
 		toggle_inventory()
-	elif event.is_action_pressed("open_door") and holding_item == null and not PlayerInventory.viewInventoryMode and PlayerInventory.is_inside_chest_area:
+	elif event.is_action_pressed("open_door") and holding_item == null and not PlayerInventory.viewInventoryMode and PlayerInventory.is_inside_chest_area and not PlayerInventory.chatMode:
 		open_chest()
 	if event.is_action_pressed("scroll_up"):
 		PlayerInventory.active_item_scroll_up()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://InventoryLogic/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
 [ext_resource path="res://InventoryLogic/OptionsMenu.gd" type="Script" id=19]
+[ext_resource path="res://Assets/Images/Inventory UI/inventory icon.png" type="Texture" id=20]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -505,6 +506,19 @@ margin_bottom = 151.0
 theme = SubResource( 6 )
 text = "INVENTORY"
 align = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 626.0
+margin_top = 269.0
+margin_right = 677.0
+margin_bottom = 309.0
+texture = ExtResource( 20 )
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = 627.0
+margin_top = 380.0
+margin_right = 678.0
+margin_bottom = 420.0
 
 [connection signal="input_event" from="CraftingMenu/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_input_event"]
 [connection signal="mouse_entered" from="CraftingMenu/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_entered"]
