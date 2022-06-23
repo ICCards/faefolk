@@ -392,3 +392,51 @@ var Cobblestone_ore = {
 	chip = preload("res://Assets/Images/ore_sets/cobblestone/stone_chip.png")
 }
 
+func return_house_object(item_name):
+	print(item_name)
+	match item_name:
+		"Bed":
+			return bed
+		"Crafting_table": 
+			return crafting_table
+		"Fireplace":
+			return fireplace
+		"Left_chair":
+			return left_chair
+		"Middle_chair":
+			return middle_chair
+		"Painting1":
+			return painting1
+		"Right_chair":
+			return right_chair
+		"Rug":
+			return rug
+		"Shelves":
+			return shelves
+		"Side_dresser":
+			return side_dresser
+		"Stool":
+			return stool
+		"Table":
+			return table
+		"Window 1":
+			return window1
+		"Window 2":
+			return window2
+
+var bed = preload("res://Assets/Images/house_objects/bed.png")
+var crafting_table = preload("res://Assets/Images/house_objects/crafting_table.png")
+var fireplace = preload("res://Assets/Images/house_objects/fireplace.png")
+var left_chair = preload("res://Assets/Images/house_objects/left_chair.png")
+var middle_chair = preload("res://Assets/Images/house_objects/middle_chair.png")
+var painting1 = preload("res://Assets/Images/house_objects/painting1.png")
+var right_chair = preload("res://Assets/Images/house_objects/right_chair.png")
+var rug = preload("res://Assets/Images/house_objects/rug.png")
+var shelves = preload("res://Assets/Images/house_objects/shelves.png")
+var side_dresser = preload("res://Assets/Images/house_objects/side_dresser.png")
+var small_dresser = preload("res://Assets/Images/house_objects/small_dresser.png")
+var stool = preload("res://Assets/Images/house_objects/stool.png")
+var table = preload("res://Assets/Images/house_objects/table.png")
+var window1 = preload("res://Assets/Images/house_objects/window 1.png")
+var window2 = preload("res://Assets/Images/house_objects/window 2.png")
+
