@@ -22,7 +22,7 @@ func _ready():
 func initialize_chat_history():
 	for i in range(Chat.message_history.size()):
 		if str(Chat.message_history[i][0]) == str(Server.player_id):
-			add_message(Chat.message_history[i][0], Chat.message_history[i][1], '#cc1717')
+			add_message(Chat.message_history[i][0], Chat.message_history[i][1], '#0717f2')
 		else:
 			add_message(Chat.message_history[i][0], Chat.message_history[i][1], '#ffffff')
 	
