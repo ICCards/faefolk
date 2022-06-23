@@ -45,7 +45,7 @@ var rng = RandomNumberGenerator.new()
 var player_state
 var animation = "idle_down"
 
-var MAX_SPEED := 12.5
+var MAX_SPEED := 28 #12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -548,10 +548,10 @@ func setPlayerTexture(var anim):
 	shoesSprite.set_texture(character.shoes_sprites[anim])
 
 #
-func init_day_night_cycle():
+func init_day_night_cycle(time_elapsed):
 	if setting == "World":
-		if Server.day:
-			$Camera2D/DayNight.color =  Color("#1c579e")#Color("#ffffff")
+		if time_elapsed <= 24:
+			$Camera2D/DayNight.color =  Color("#ffffff")
 		else:
 			$Camera2D/DayNight.color = Color("#1c579e")
 	else:
@@ -559,10 +559,10 @@ func init_day_night_cycle():
 
 func set_night():
 	day_night_animation_player.play("set night")
-	init_day_night_cycle()
+#	init_day_night_cycle()
 func set_day():
 	day_night_animation_player.play_backwards("set night")
-	init_day_night_cycle()
+#	init_day_night_cycle()
 
 
 func set_player_setting(ownerNode):

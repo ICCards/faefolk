@@ -3,7 +3,6 @@ extends Node2D
 signal update_time
 
 var day
-var num_day = 1
 var season = "Spring"
 var time_elapsed = 1
 
@@ -16,9 +15,9 @@ func update_time(_time_elapsed):
 		$TimeLabel.text = adjusted_time(time_elapsed)
 
 func update_date():
-	if num_day == 31:
-		num_day = 1
-	$SeasonLabel.text = str(season + ", " + str(num_day))
+	if Server.num_day == 31:
+		Server.num_day = 1
+	$SeasonLabel.text = str(season + ", " + str(Server.num_day))
 	
 func adjusted_time(time_elapsed):
 		var hour = (time_elapsed / 2) + 6
@@ -30,7 +29,7 @@ func adjusted_time(time_elapsed):
 		if hour >= 24:
 			day = "a.m."
 		if time_elapsed == 36:
-			num_day += 1
+			Server.num_day += 1
 			update_date()
 		if hour >= 13 and hour < 25:
 			hour -= 12

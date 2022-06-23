@@ -165,16 +165,12 @@ func buildMap(map):
 	for id in map["tree"]:
 		var loc = Util.string_to_vector2(map["tree"][id]["l"])
 		if is_valid_position(loc, "tree"):
-			validTiles.set_cellv(loc, -1)
-			validTiles.set_cellv(loc + Vector2(-1, 0), -1)
-			validTiles.set_cellv(loc + Vector2(-1, -1), -1)
-			validTiles.set_cellv(loc + Vector2(0, -1), -1)
 			treeTypes.shuffle()
 			var variety = treeTypes.front()
 			var object = TreeObject.instance()
 			object.health = map["tree"][id]["h"]
-			object.initialize(variety, map["tree"][id])
-			object.position = sand.map_to_world(loc + Vector2(0, -8))
+			object.initialize(variety, loc)
+			object.position = sand.map_to_world(loc) + Vector2(0, -8)
 			object.name = id
 			add_child(object,true)
 	print("LOADED TREES")
@@ -196,24 +192,19 @@ func buildMap(map):
 	for id in map["stump"]:
 		var loc = Util.string_to_vector2(map["stump"][id]["l"])
 		if is_valid_position(loc, "stump"):
-			validTiles.set_cellv(loc, -1)
-			validTiles.set_cellv(loc + Vector2(-1, 0), -1)
-			validTiles.set_cellv(loc + Vector2(-1, -1), -1)
-			validTiles.set_cellv(loc + Vector2(0, -1), -1)
 			treeTypes.shuffle()
 			var variety = treeTypes.front()
 			var object = StumpObject.instance()
 			object.health = map["stump"][id]["h"]
 			object.name = id
 			object.initialize(variety,loc)
-			object.position = sand.map_to_world(loc + Vector2(4,0))
+			object.position = sand.map_to_world(loc) + Vector2(4,0)
 			add_child(object,true)
 	print("LOADED STUMPS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
 		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
 		if is_valid_position(loc, "ore_large"):
-			validTiles.set_cellv(loc, -1)
 			oreTypes.shuffle()
 			var variety = oreTypes.front()
 			var object = OreObject.instance()
@@ -227,7 +218,6 @@ func buildMap(map):
 	for id in map["ore"]:
 		var loc = Util.string_to_vector2(map["ore"][id]["l"])
 		if is_valid_position(loc, "ore"):
-			validTiles.set_cellv(loc, -1)
 			oreTypes.shuffle()
 			var variety = oreTypes.front()
 			var object = SmallOreObject.instance()
@@ -242,14 +232,13 @@ func buildMap(map):
 	for id in map["tall_grass"]:
 		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
 		if is_valid_position(loc, "tall_grass"):
-			validTiles.set_cellv(loc, -1)
 			count += 1
 			tall_grass_types.shuffle()
 			var variety = tall_grass_types.front()
 			var object = TallGrassObject.instance()
 			object.name = id
 			object.initialize(variety)
-			object.position = sand.map_to_world(loc + Vector2(16, 32))
+			object.position = sand.map_to_world(loc) + Vector2(16, 32)
 			add_child(object,true)
 		if count == 130:
 			yield(get_tree().create_timer(0.2), "timeout")
@@ -259,9 +248,8 @@ func buildMap(map):
 	for id in map["flower"]:
 		var loc = Util.string_to_vector2(map["flower"][id]["l"])
 		if is_valid_position(loc, "flower"):
-			validTiles.set_cellv(loc, -1)
 			var object = FlowerObject.instance()
-			object.position = sand.map_to_world(loc + Vector2(16, 32))
+			object.position = sand.map_to_world(loc) + Vector2(16, 32)
 			add_child(object,true)
 	print("LOADED FLOWERS")
 #	for key in map["decorations"].keys():
@@ -286,9 +274,6 @@ func buildMap(map):
 	water.update_bitmask_region()
 	Server.player_state = "WORLD"
 	Server.isLoaded = true
-#	if !DayNightTimer.is_timer_started:
-#		DayNightTimer.is_timer_started = true
-#		DayNightTimer.start_day_timer()
 	print("Map loaded")
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 	$AmbientSound.play()
@@ -304,14 +289,19 @@ func build_valid_tiles():
 	
 func is_valid_position(_pos, _name):
 	if _pos.x > 1 and _pos.x < 299 and _pos.y > 1 and _pos.y < 299:
-		if validTiles.get_cellv(_pos) != -1:
-			if (_name == "tree" or _name == "stump") and \
-				validTiles.get_cellv(_pos + Vector2(-1, -1)) == -1 or \
-				validTiles.get_cellv(_pos + Vector2(-1, 0)) == -1 or \
-				validTiles.get_cellv(_pos + Vector2(0, -1)) == -1:
-				return false
-			else:
-				return true
+		if validTiles.get_cellv(_pos) != -1 and _name != "tree" and _name != "stump":
+			validTiles.set_cellv(_pos, -1)
+			return true
+		elif (_name == "tree" or _name == "stump" or name == "ore_large") and \
+				validTiles.get_cellv(_pos) != -1 and \
+				validTiles.get_cellv(_pos + Vector2(-1, -1)) != -1 and \
+				validTiles.get_cellv(_pos + Vector2(-1, 0)) != -1 and \
+				validTiles.get_cellv(_pos + Vector2(0, -1)) != -1:
+					validTiles.set_cellv(_pos, -1)
+					validTiles.set_cellv(_pos + Vector2(-1, -1), -1 )
+					validTiles.set_cellv(_pos + Vector2(-1, 0), -1 )
+					validTiles.set_cellv(_pos + Vector2(0, -1), -1)
+					return true
 		else: 
 			return false
 	else: 
@@ -519,9 +509,7 @@ func set_player_house_invalid_tiles(location):
 
 func UpdateWorldState(world_state):
 	if Server.day == null:
-		Server.day = bool(world_state["day"])	
-		if has_node("Players/" + Server.player_id):
-			get_node("Players/" + Server.player_id).init_day_night_cycle()
+		get_node("Players/" + Server.player_id).init_day_night_cycle(int(world_state["time_elapsed"]))
 	if world_state["t"] > last_world_state:
 		var new_day = bool(world_state["day"])
 		if has_node("Players/" + Server.player_id):
@@ -553,7 +541,7 @@ func _physics_process(delta):
 							var data = world_state_buffer[2]["decorations"][decoration][item]
 							print(data)
 							if has_node(str(item)):
-								get_node(str(item)).daysUntilHarvest = data["d"]
+								get_node(str(item)).days_until_harvest = data["d"]
 								get_node(str(item)).refresh_image()
 							else:
 								PlaceSeedInWorld(item, data["n"], Util.string_to_vector2(data["l"]), data["d"])
@@ -562,7 +550,6 @@ func _physics_process(delta):
 							if not has_node(str(item)):
 								print('place item')
 								var data = world_state_buffer[2]["decorations"][decoration][item]
-							
 								PlaceItemInWorld(item, data["n"], Util.string_to_vector2(data["l"]))
 			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
 			for player in world_state_buffer[2]["players"].keys():

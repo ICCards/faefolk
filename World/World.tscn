@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/tilesets/CL_MainLev.png" type="Texture" id=2]
@@ -408,6 +408,162 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
+
+[sub_resource type="TileSet" id=236]
+0/name = "CL_MainLev.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 416, 1280, 160, 224 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "CL_MainLev.png 1"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 64, 1248, 64, 192 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "CL_MainLev.png 2"
+2/texture = ExtResource( 2 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 1248, 64, 192 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "CL_MainLev.png 3"
+3/texture = ExtResource( 2 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 640, 1280, 224, 256 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "CL_MainLev.png 4"
+4/texture = ExtResource( 2 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 864, 1312, 160, 224 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "CL_MainLev.png 5"
+5/texture = ExtResource( 2 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 576, 1312, 64, 64 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+6/name = "CL_MainLev.png 6"
+6/texture = ExtResource( 2 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 576, 1376, 64, 64 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
+7/name = "CL_MainLev.png 7"
+7/texture = ExtResource( 2 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 256, 1152, 128, 128 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "CL_MainLev.png 8"
+8/texture = ExtResource( 2 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 384, 1152, 128, 128 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+9/name = "CL_MainLev.png 9"
+9/texture = ExtResource( 2 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 512, 1152, 128, 128 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+10/name = "CL_MainLev.png 10"
+10/texture = ExtResource( 2 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 640, 1152, 128, 128 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
+10/shapes = [  ]
+10/z_index = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=182]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -1034,14 +1190,22 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="ValidTiles" type="TileMap" parent="GeneratedTiles"]
+visible = false
 tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="BorderTiles" type="TileMap" parent="GeneratedTiles"]
+modulate = Color( 0.6083, 0.6083, 0.77, 1 )
 tile_set = SubResource( 4 )
 cell_size = Vector2( 32, 32 )
 format = 1
+
+[node name="DecorationTiles" type="TileMap" parent="GeneratedTiles"]
+tile_set = SubResource( 236 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -720789, 3, 0, -720753, 3, 0, -720720, 3, 0, -720683, 3, 0, -720642, 3, 0, -655359, 0, 0, -655340, 0, 0, -655327, 0, 0, -655316, 0, 0, -655301, 0, 0, -655294, 0, 0, -655285, 0, 0, -655271, 0, 0, -655258, 0, 0, -655246, 0, 0, -655238, 4, 0, -655231, 4, 0, -655225, 0, 0, -655205, 0, 0, -655191, 0, 0, -655173, 0, 0, -655158, 0, 0, -655136, 0, 0, -655124, 0, 0, -655113, 0, 0, -655097, 0, 0, -655086, 0, 0, -655082, 0, 0, -655078, 0, 0, -655070, 0, 0, -589815, 0, 0, -458758, 3, 0, -523989, 3, 0, -458725, 7, 0, -458700, 7, 0, -458670, 7, 0, -393199, 5, 0, -393176, 5, 0, -393159, 6, 0, -393097, 6, 0, -393089, 6, 0, -393055, 5, 0, -393049, 5, 0, -327674, 5, 0, -327631, 6, 0, -327608, 6, 0, -327582, 5, 0, -327540, 6, 0, -327529, 6, 0, -327496, 6, 0, 65531, 0, 0, 65835, 4, 0, 459051, 3, 0, 589822, 5, 0, 786430, 6, 0, 917499, 0, 0, 983340, 5, 0, 1048878, 5, 0, 1179947, 4, 0, 1441790, 5, 0, 1572861, 6, 0, 1703934, 6, 0, 1704236, 9, 0, 1835004, 5, 0, 2031918, 6, 0, 2162988, 5, 0, 2293758, 6, 0, 2424827, 5, 0, 2425133, 5, 0, 2556204, 9, 0, 2752510, 6, 0, 2883580, 8, 0, 2883884, 6, 0, 3080492, 8, 0, 3211261, 5, 0, 3473402, 0, 0, 3408170, 3, 0, 3997997, 6, 0, 4128765, 5, 0, 4260141, 6, 0, 4456446, 5, 0, 4522284, 6, 0, 4653356, 7, 0, 4784124, 9, 0, 5046573, 6, 0, 5177341, 5, 0, 5439486, 5, 0, 5374252, 5, 0, 5570554, 0, 0, 5570860, 6, 0, 5767467, 3, 0, 6029310, 6, 0, 6356989, 6, 0, 6357293, 5, 0, 6619436, 5, 0, 6881276, 7, 0, 6816044, 6, 0, 7078188, 5, 0, 7340027, 5, 0, 7274795, 4, 0, 7733548, 9, 0, 8191995, 5, 0, 8126764, 8, 0, 8585212, 9, 0, 8651052, 7, 0, 9043966, 5, 0, 9306110, 6, 0, 9240875, 4, 0, 9437181, 6, 0, 9568254, 5, 0, 9830396, 8, 0, 9961772, 6, 0, 10223614, 6, 0, 10420219, 4, 0, 10354988, 7, 0, 10682669, 6, 0, 10944510, 5, 0, 10944811, 4, 0, 11141116, 7, 0, 11403259, 4, 0, 11469099, 0, 0, 11927547, 0, 0, 11993388, 5, 0, 12189995, 4, 0, 12517372, 8, 0, 12714283, 3, 0, 13041661, 5, 0, 13303803, 0, 0, 13369644, 5, 0, 13566252, 5, 0, 13762861, 5, 0, 13893931, 3, 0, 14024700, 7, 0, 14483453, 5, 0, 14483756, 9, 0, 14745595, 0, 0, 14811436, 8, 0, 15073580, 5, 0, 15204652, 10, 0, 15335420, 7, 0, 15532332, 5, 0, 15728633, 3, 0, 15663405, 6, 0, 15860012, 5, 0, 16056621, 6, 0, 16187389, 5, 0, 16122156, 5, 0, 16318462, 6, 0, 16253228, 6, 0, 16449534, 6, 0, 16515067, 4, 0, 16515372, 7, 0, 16843051, 3, 0, 16973821, 6, 0, 17104894, 5, 0, 17301502, 6, 0, 17367035, 4, 0, 17367340, 0, 0, 17891322, 3, 0, 17826092, 0, 0, 18284845, 6, 0, 18481453, 5, 0, 18612221, 5, 0, 18678060, 5, 0, 18743595, 3, 0, 19070974, 5, 0, 19267884, 7, 0, 19464491, 4, 0, 19595261, 5, 0, 19660795, 4, 0, 19595267, 5, 0, 19595272, 6, 0, 19595277, 5, 0, 19595284, 4, 0, 19595292, 7, 0, 19595302, 0, 0, 19595313, 5, 0, 19595317, 6, 0, 19595332, 6, 0, 19595339, 5, 0, 19595345, 5, 0, 19595350, 6, 0, 19595363, 10, 0, 19595371, 0, 0, 19595375, 0, 0, 19595415, 6, 0, 19595421, 3, 0, 19595459, 5, 0, 19595467, 7, 0, 19595474, 5, 0, 19595480, 10, 0, 19595489, 5, 0, 19595495, 9, 0, 19595502, 5, 0, 19595512, 10, 0, 19595517, 5, 0, 19595523, 5, 0, 19595525, 10, 0, 19595537, 8, 0, 19595546, 8, 0, 19595551, 6, 0, 19595556, 8, 0, 19595560, 5, 0, 19660800, 5, 0, 19660816, 6, 0, 19660858, 5, 0, 19660864, 6, 0, 19660877, 6, 0, 19660891, 7, 0, 19660920, 3, 0, 19660939, 5, 0, 19660946, 5, 0, 19660969, 4, 0, 19660977, 5, 0, 19660982, 5, 0, 19660987, 6, 0, 19660991, 8, 0, 19660997, 6, 0, 19661000, 5, 0, 19661021, 5, 0, 19661041, 9, 0, 19661056, 6, 0, 19661069, 5, 0, 19661079, 5, 0, 19661090, 6, 0, 19726340, 6, 0, 19726348, 5, 0, 19726468, 7, 0, 19726478, 6, 0, 19726489, 6, 0, 19726516, 6, 0, 19726634, 5, 0, 20119550, 5, 0 )
 
 [node name="PlacableTiles" type="YSort" parent="."]
 
