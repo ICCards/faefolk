@@ -5,16 +5,16 @@ onready var branch = $Branch
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
-onready var world = get_tree().current_scene
+onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 
 var randomNum
 var treeObject
-var position_of_object
+var loc
 var health
 
-func initialize(variety, inputPos):
+func initialize(variety, _loc):
 	randomNum = variety
-	position_of_object = inputPos
+	loc = _loc
 
 func _ready():
 	setTreeBranchType(randomNum)
@@ -25,6 +25,7 @@ func PlayEffect(player_id):
 	$SoundEffects.play()
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
+	reset_cells()
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 
@@ -48,8 +49,12 @@ func _on_BranchHurtBox_area_entered(_area):
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 	intitiateItemDrop("wood", Vector2(0, 0))
+	reset_cells()
 	yield($SoundEffects, "finished")
 	queue_free()
+
+func reset_cells():
+	valid_tiles.set_cellv(loc, 0)
 
 
 ### Effect functions		

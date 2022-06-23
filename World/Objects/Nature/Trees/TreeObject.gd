@@ -9,18 +9,19 @@ onready var treeTopSprite = $TreeSprites/TreeTop
 onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 var rng = RandomNumberGenerator.new()
 
 var treeObject
-var location_of_object
+var loc
 var variety
 var hit_dir
 var health
 
-func initialize(inputVar, loc):
+func initialize(inputVar, _loc):
 	variety = inputVar
 	treeObject = Images.returnTreeObject(inputVar)
-	location_of_object = loc
+	loc = _loc
 
 
 func _ready():
@@ -101,8 +102,14 @@ func PlayEffect(player_id):
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		yield(stump_animation_player, "animation_finished")
+		reset_cells()
 		queue_free()
 			
+func reset_cells():
+	valid_tiles.set_cellv(loc, 0)
+	valid_tiles.set_cellv(loc + Vector2(-1,0), 0)
+	valid_tiles.set_cellv(loc + Vector2(-1,-1), 0)
+	valid_tiles.set_cellv(loc + Vector2(0,-1), 0)
 
 
 ### Tree hurtbox
@@ -130,7 +137,6 @@ func _on_Hurtbox_area_entered(_area):
 	elif health == 3:
 		timer.stop()
 		disable_tree_top_collision_box()
-		PlayerFarmApi.set_farm_object_break(location_of_object)
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
@@ -164,7 +170,7 @@ func _on_Hurtbox_area_entered(_area):
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		intitiateItemDrop("wood", Vector2(0, 12), 3)
-		PlayerFarmApi.remove_farm_object(location_of_object)
+		reset_cells()
 		yield($SoundEffectsStump, "finished")
 		queue_free()
 	

@@ -2,32 +2,32 @@ extends Node2D
 
 onready var stump_animation_player = $StumpAnimationPlayer 
 onready var treeStumpSprite = $TreeSprites/TreeStump
-
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-var rng = RandomNumberGenerator.new()
-
-onready var world = get_tree().current_scene
+onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
+var rng = RandomNumberGenerator.new()
 var treeObject
-var position_of_object 
-var hit_dir
+var loc 
 var health
 
-func initialize(variety, inputPos):
-	position_of_object = inputPos
+func initialize(variety, _loc):
+	loc = _loc
 	treeObject = Images.returnTreeObject(variety)
 
 func _ready():
 	setTexture(treeObject)
-
+	
+func setTexture(tree):
+	treeStumpSprite.texture = tree.largeStump
 
 func PlayEffect(player_id):
 	health -= 1
+	var hit_dir
 	if get_node("/root/World/Players/" + str(player_id)).get_position().x < get_position().x:
-		hit_dir = "right"
-	else:
 		hit_dir = "left"
+	else:
+		hit_dir = "right"
 	if health >= 1:
 		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -44,12 +44,11 @@ func PlayEffect(player_id):
 		$SoundEffects.play()
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
+		reset_cells()
+		yield($SoundEffects, "finished")
+		queue_free()
 		
-func setTexture(tree):
-	treeStumpSprite.texture = tree.largeStump
 
-
-var stumpHealth: int = 2
 func _on_StumpHurtBox_area_entered(_area):
 	var data = {"id": name, "n": "stump"}
 	Server.action("ON_HIT", data)
@@ -61,6 +60,7 @@ func _on_StumpHurtBox_area_entered(_area):
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 		intitiateItemDrop("wood", Vector2(0, 0), 3)
+		reset_cells()
 		yield($SoundEffects, "finished")
 		queue_free()
 	else:
@@ -74,10 +74,13 @@ func _on_StumpHurtBox_area_entered(_area):
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump hit right")
 
-			
+func reset_cells():
+	valid_tiles.set_cellv(loc, 0)
+	valid_tiles.set_cellv(loc + Vector2(-1,0), 0)
+	valid_tiles.set_cellv(loc + Vector2(-1,-1), 0)
+	valid_tiles.set_cellv(loc + Vector2(0,-1), 0)
 
 ### Effect functions		
-
 func initiateTreeHitEffect(tree, effect, pos):
 	var trunkHitEffect = TrunkHitEffect.instance()
 	trunkHitEffect.init(tree, effect)
