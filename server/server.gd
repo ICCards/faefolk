@@ -20,7 +20,7 @@ var latency_array = []
 var isSpawned = false
 var local_player_id = 0
 var isLoaded = false
-var player
+var player = {}
 var player_id
 var mapPartsLoaded = 0
 var player_house_position
@@ -123,6 +123,8 @@ func _on_data():
 			player_id = str(result["d"])
 			print(player_id)
 		("SpawnPlayer"):
+			print("spawn player called from srever")
+			print(result["d"])
 			player = result["d"]
 		("ReturnServerTime"):
 			var client_time = result["d"]["c"]
