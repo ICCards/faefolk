@@ -83,9 +83,9 @@ func spawnPlayer(value):
 		print("My Character")
 		print(value["c"])
 		var player = Player.instance()
-		#player.initialize_camera_limits(Vector2(0, 0), Vector2(1920, 1080))
 		print(str(value["p"]))
 		player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
+		player.username = null
 		player.name = str(value["id"])
 		player.character = _character.new()
 		player.character.LoadPlayerCharacter(value["c"]) 
@@ -103,6 +103,7 @@ func spawnNewPlayer(player):
 			print("spawning new player")
 			print(player["p"])
 			var new_player = Player_template.instance()
+			new_player.username = null
 			new_player.position = sand.map_to_world(Util.string_to_vector2(player["p"]))
 			new_player.name = str(player["id"])
 			new_player.character = _character.new()

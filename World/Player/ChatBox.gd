@@ -8,7 +8,6 @@ onready var inputField = $VBoxContainer/HBoxContainer/LineEdit
 var groups = [
 	{'name': 'Self', 'color': '#1c71a4'},
 	{'name': 'Other', 'color': '#f1c234'},
-	
 ]
 
 var group_index = 0
@@ -22,13 +21,13 @@ func _ready():
 func initialize_chat_history():
 	for i in range(Chat.message_history.size()):
 		if str(Chat.message_history[i][0]) == str(Server.player_id):
-			add_message(Chat.message_history[i][0], Chat.message_history[i][1], '#0717f2')
+			add_message(Chat.message_history[i][0], Chat.message_history[i][1], '#0300ff')
 		else:
 			add_message(Chat.message_history[i][0], Chat.message_history[i][1], '#ffffff')
 	
 func ReceiveMessage(player_id, message):
 	if str(player_id) == Server.player_id:
-		add_message(player_id, message, '#0717f2')
+		add_message(player_id, message, '#0300ff')
 	else:
 		add_message(player_id, message, '#ffffff')
 

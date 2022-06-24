@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://World/Player/PlayerTemplate.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=2]
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=3]
 [ext_resource path="res://Characters/Human/male/HOLDING/body/down/arms.png" type="Texture" id=12]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" type="Texture" id=13]
@@ -259,3 +260,13 @@ hframes = 4
 anims/RESET = SubResource( 3 )
 anims/movement = SubResource( 4 )
 anims/swing = SubResource( 7 )
+
+[node name="Username" type="Label" parent="."]
+margin_left = -15.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 28.0
+grow_horizontal = 2
+theme = ExtResource( 2 )
+align = 1
+valign = 1

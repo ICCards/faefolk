@@ -81,6 +81,8 @@ func PlayEffect(player_id):
 		$SoundEffectsTree.stream = Sounds.tree_break
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
+		timer.stop()
+		disable_tree_top_collision_box()
 		if hit_dir == "right":
 			tree_animation_player.play("tree fall right")
 		else:

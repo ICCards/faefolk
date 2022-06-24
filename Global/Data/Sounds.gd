@@ -69,7 +69,6 @@ func return_adjusted_sound_db(category, init_sound):
 
 
 ### Handles switching footsteps sound
-
 var current_footsteps_sound = wood_footsteps
 
 
