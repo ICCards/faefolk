@@ -16,6 +16,8 @@ func _ready():
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
+		if slots[i].item != null:
+			slots[i].removeFromSlot()
 		if PlayerInventory.inventory.has(i):
 			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
 	set_inventory_state()
@@ -87,27 +89,62 @@ func _on_Quit_pressed():
 func set_inventory_state():
 	$InventorySlots.visible = true
 	$CraftingMenu.visible = false
+	$OptionsMenu.visible = false
+	$QuitMenu.visible = false
+	$Buttons/InventoryIcon.rect_position = Vector2(-202, 8) 
+	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
+	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory1.png")
 	$Title.text = "INVENTORY"
 	
 func set_crafting_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = true
+	$OptionsMenu.visible = false
+	$QuitMenu.visible = false
+	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8) 
+	$Buttons/CraftingIcon.rect_position = Vector2(-202, 116) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
+	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory2.png")
 	$Title.text = "CRAFTING"
+	
 	
 func set_options_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
+	$OptionsMenu.visible = true
+	$QuitMenu.visible = false
+	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8)
+	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-202, 224) 
+	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory3.png")
 	$Title.text = "OPTIONS"	
 
 func set_quit_state():
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
+	$OptionsMenu.visible = false
+	$QuitMenu.visible = true
+	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8)
+	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
+	$Buttons/ExitIcon.rect_position = Vector2(-202, 332) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory4.png")
 	$Title.text = "QUIT"
+
 
 func _on_ExitButton_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		get_parent().toggle_inventory()
+
+
+func _on_ExitToTitleButton_pressed():
+	PlayerInventory.viewInventoryMode = false
+	Server.world = null
+	SceneChanger.change_scene("res://MainMenu/MainMenu.tscn")
+
+func _on_QuitButton_pressed():
+	get_tree().quit()

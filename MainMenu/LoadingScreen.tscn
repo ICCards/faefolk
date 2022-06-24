@@ -1,0 +1,194 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Images/Misc/logo.png" type="Texture" id=2]
+[ext_resource path="res://MainMenu/LoadingScreen.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Dot2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Dot3:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Dot1:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Dot2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Dot3:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../BuildingWorld:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../Dot1:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "animate"
+length = 1.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Dot1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Dot2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Dot3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="LoadingScreen" type="Node2D"]
+z_index = 1
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="BuildingWorld" type="Label" parent="."]
+margin_left = 697.0
+margin_top = 532.0
+margin_right = 1234.0
+margin_bottom = 626.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 1 )
+text = "Building world"
+
+[node name="Dot1" type="Label" parent="."]
+margin_left = 930.0
+margin_top = 532.0
+margin_right = 946.0
+margin_bottom = 626.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 1 )
+text = "."
+
+[node name="Dot2" type="Label" parent="."]
+margin_left = 940.0
+margin_top = 532.0
+margin_right = 956.0
+margin_bottom = 626.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 1 )
+text = "."
+
+[node name="Dot3" type="Label" parent="."]
+margin_left = 950.0
+margin_top = 532.0
+margin_right = 966.0
+margin_bottom = 626.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 1 )
+text = "."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Logo")
+anims/RESET = SubResource( 1 )
+anims/animate = SubResource( 2 )
+
+[node name="Logo" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 853.0
+margin_bottom = 500.0
+rect_scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 2 )
+stretch_mode = 4
