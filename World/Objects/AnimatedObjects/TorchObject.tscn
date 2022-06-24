@@ -26,7 +26,7 @@ script = ExtResource( 7 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -14 )
 frames = SubResource( 1 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -40,14 +40,6 @@ collision_layer = 24
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BreakObjectBox"]
-position = Vector2( 0, -6 )
-shape = SubResource( 2 )
-
-[node name="DetectIfOverPath" type="Area2D" parent="."]
-collision_layer = 8192
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectIfOverPath"]
 position = Vector2( 0, -6 )
 shape = SubResource( 2 )
 

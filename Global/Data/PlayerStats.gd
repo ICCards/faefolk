@@ -12,6 +12,7 @@ var mana_maximum
 
 
 func decrease_energy():
-	energy -= 1.0
-	emit_signal("energy_changed")
+	if energy >= 1:
+		energy -= 1.0
+		emit_signal("energy_changed")
 

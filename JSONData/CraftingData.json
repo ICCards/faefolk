@@ -1,0 +1,38 @@
+{
+    "wood box": {
+        "wood" : 4,
+        "stone": 0
+    },
+     "wood barrel": {
+        "wood": 4,
+        "stone": 0
+    },
+     "wood fence": {
+         "wood": 2,
+         "stone": 0,
+     },
+     "wood path": {
+         "wood": 1,
+         "stone": 0,
+     },
+     "stone path": {
+         "wood": 0,
+         "stone": 1,
+     },
+     "torch": {
+         "wood": 1,
+         "stone": 1,
+     },
+     "wood chest": {
+        "wood": 10,
+        "stone": 2,
+    },
+     "stone chest": {
+         "wood": 2,
+         "stone": 10
+     },
+     "house": {
+         "wood": 100,
+         "stone": 100
+     }
+}

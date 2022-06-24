@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/tilesets/CL_Buildings.png" type="Texture" id=1]
-[ext_resource path="res://World/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/InsidePlayerHouse/InsidePlayerHome.gd" type="Script" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=16]
@@ -138,7 +137,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/region = Rect2( 608, 448, 192, 160 )
 0/tile_mode = 1
 0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 1 ), 176, Vector2( 1, 1 ), 56, Vector2( 1, 2 ), 26, Vector2( 2, 1 ), 56, Vector2( 2, 2 ), 50, Vector2( 3, 1 ), 152, Vector2( 3, 2 ), 146, Vector2( 3, 3 ), 146 ]
+0/autotile/bitmask_flags = [ Vector2( 0, 1 ), 176, Vector2( 1, 1 ), 56, Vector2( 1, 3 ), 152, Vector2( 2, 1 ), 56, Vector2( 2, 3 ), 176, Vector2( 3, 1 ), 152, Vector2( 3, 2 ), 146, Vector2( 3, 3 ), 154 ]
 0/autotile/icon_coordinate = Vector2( 0, 0 )
 0/autotile/tile_size = Vector2( 32, 32 )
 0/autotile/spacing = 0
@@ -276,7 +275,7 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 65535, 1610612736, 65536, 0, 1610612736, 65537, 1, 1610612736, 65537, 2, 1610612736, 65537, 3, 1610612736, 65537, 4, 1610612736, 65537, 5, 1610612736, 65538, 6, 1610612736, 65537, 7, 1610612736, 65538, 8, 1610612736, 65537, 9, 1610612736, 65538, 10, 1610612736, 65537, 11, 1610612736, 65537, 12, 1610612736, 65537, 13, 1610612736, 65537, 14, 1610612736, 65538, 15, 1610612736, 65538, 16, 1610612736, 65538, 17, 1610612736, 65537, 18, 1610612736, 65537, 19, 1610612736, 65538, 20, 0, 65539, 131071, 0, 196611, 65556, 1610612736, 131075, 196607, 0, 131075, 131092, 1610612736, 131075, 262143, 0, 131075, 196628, 1610612736, 196611, 327679, 0, 131075, 262164, 1610612736, 131075, 393215, 0, 131075, 327700, 1610612736, 196611, 458751, 0, 196611, 393236, 1610612736, 131075, 524287, 0, 131075, 458772, 1610612736, 131075, 589823, 0, 196611, 524308, 1610612736, 196611, 655359, 0, 196611, 589844, 1610612736, 196611, 720895, 0, 196611, 655380, 1610612736, 196611, 786431, 0, 196611, 720916, 1610612736, 196611, 851967, 0, 131075, 786452, 1610612736, 196611, 917503, 0, 131075, 851988, 1610612736, 196611, 983039, 0, 131074, 917504, 0, 65537, 917505, 0, 65537, 917506, 0, 65537, 917507, 0, 65537, 917508, 0, 65539, 917511, 0, 65536, 917512, 0, 65538, 917513, 0, 65538, 917514, 0, 65538, 917515, 0, 65538, 917516, 0, 65538, 917517, 0, 65537, 917518, 0, 65538, 917519, 0, 65537, 917520, 0, 65537, 917521, 0, 65537, 917522, 0, 65537, 917523, 0, 65537, 917524, 0, 131073, 983044, 0, 131075, 983047, 1610612736, 131075, 1048580, 0, 131074, 1048581, 0, 65538, 1048582, 0, 65538, 1048583, 0, 131073 )
 
-[node name="TileMap3" type="TileMap" parent="."]
+[node name="Border" type="TileMap" parent="."]
 z_index = -1
 tile_set = SubResource( 5 )
 cell_size = Vector2( 32, 32 )
@@ -292,15 +291,6 @@ collision_mask = 32
 position = Vector2( 190, 638 )
 shape = SubResource( 3 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 190, 476 )
-
-[node name="BottomRight" parent="Player/Camera2D/Limits" index="0"]
-position = Vector2( 785, 528 )
-
-[node name="TopLeft" parent="Player/Camera2D/Limits" index="1"]
-position = Vector2( -161, -19 )
+[node name="Players" type="YSort" parent="."]
 
 [connection signal="area_entered" from="Doorway" to="." method="_on_Doorway_area_entered"]
-
-[editable path="Player"]

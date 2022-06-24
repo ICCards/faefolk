@@ -8,11 +8,16 @@ var position_of_object
 func init(new_image, new_pos):
 	position_of_object = new_pos
 	image = new_image
+	
+func PickUpItem():
+	queue_free()
 
+var rng = RandomNumberGenerator.new()
 
 
 func _ready():
-	$HouseImageTextureRect.texture = load("res://Assets/Images/house_objects/" + image +  ".png")
+	Sounds.connect("volume_change", self, "change_volume")
+	$HouseImageTextureRect.texture = Images.return_house_object(image)
 	$CollisionBox.scale.x = JsonData.house_objects_data[image]["X"]
 	$CollisionBox.scale.y = JsonData.house_objects_data[image]["Y"]
 	$CollisionBox.position.x += (JsonData.house_objects_data[image]["X"] - 1) * 16
@@ -39,27 +44,33 @@ func _ready():
 			$LightFireplaceUI/Fire.visible = true
 			$LightFireplaceUI/Fire.playing = true
 			$LightFireplaceUI/FireplaceLight.visible = true
+			$LightFireplaceUI/FireCrackleSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -6)
 			$LightFireplaceUI/FireCrackleSoundEffects.play()
+			
 	if image == "Window 1" or image == "Window 2":
 		$WindowLightingUI/LargeLight.visible = true
 		$WindowLightingUI/SmallLight.visible = true
-
+	
+func change_volume():
+	$LightFireplaceUI/FireCrackleSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -6)
 
 
 func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 	var mousePos = get_global_mouse_position() + Vector2(-16, 16)
 	mousePos = mousePos.snapped(Vector2(32,32))
 	if event.is_action_pressed("mouse_click"):
+		var location = (mousePos / 32 - Vector2(0, 5))
 		if moveItemFlag:
 			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 			for i in range(PlayerInventory.player_home.size()):
 				if PlayerInventory.player_home[i][0] == image and !is_colliding_other_object and !validateTileBoundary(position / 32):
-					PlayerInventory.player_home[i][1] = (mousePos / 32 - Vector2(0, 5))
+					PlayerInventory.player_home[i][1] = location
 					$MovementCollision/CollisionShape2D.disabled = !JsonData.house_objects_data[image]["CollisionEnabled"]
 					$ColorIndicator.visible = false
 					moveItemFlag = false
 					find_parent("InsidePlayerHome").is_moving_object = null
 					$SoundEffects.stream = Sounds.put_down_house_object
+					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
 		elif !moveItemFlag and find_parent("InsidePlayerHome").is_moving_object == null:
 			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Text Select.png"))
@@ -67,6 +78,7 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 			moveItemFlag = true
 			find_parent("InsidePlayerHome").is_moving_object = true
 			$SoundEffects.stream = Sounds.pick_up_house_object
+			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 
 var moveItemFlag = false
@@ -95,7 +107,7 @@ func _physics_process(_event):
 		else:
 			$ColorIndicator.texture = load("res://Assets/Images/Misc/green_square.png")
 	elif insideLightFireplaceArea:
-		if Input.is_action_just_pressed("action"):
+		if Input.is_action_just_pressed("open_door"):
 			light_fire()
 
 var is_colliding_other_object = false
@@ -115,9 +127,12 @@ func light_fire():
 		$LightFireplaceUI/Fire.visible = true
 		$LightFireplaceUI/FireplaceLight.visible = true
 		$LightFireplaceUI/Fire.playing = true
+		$LightFireplaceUI/FireStartSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -4)
 		$LightFireplaceUI/FireStartSoundEffects.play()
 		yield(get_tree().create_timer(0.75), "timeout")
+		$LightFireplaceUI/FireCrackleSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -6)
 		$LightFireplaceUI/FireCrackleSoundEffects.play()
+		
 	else:
 		$LightFireplaceUI/FireCrackleSoundEffects.stop()
 		$LightFireplaceUI/Fire.visible = false
