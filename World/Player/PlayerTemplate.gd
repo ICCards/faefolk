@@ -11,16 +11,23 @@ onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
 var character
-
+var username
 var swing_queue = []
 var swingActive = false
 var direction = "down"
 
 func _ready():
+	set_username()
 	setPlayerTexture("idle_" + direction)
 
 func getCharacterById(player_id):
 	Server._getCharacterById(player_id)
+	
+func set_username():
+	if username == null:
+		$Username.text = str(name)
+	else: 
+		$Username.text = str(username)
 
 
 func MovePlayer(new_position, _direction):

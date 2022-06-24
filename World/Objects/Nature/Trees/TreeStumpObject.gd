@@ -25,9 +25,9 @@ func PlayEffect(player_id):
 	health -= 1
 	var hit_dir
 	if get_node("/root/World/Players/" + str(player_id)).get_position().x < get_position().x:
-		hit_dir = "left"
-	else:
 		hit_dir = "right"
+	else:
+		hit_dir = "left"
 	if health >= 1:
 		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)

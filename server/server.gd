@@ -174,7 +174,7 @@ func _on_data():
 						if isLoaded:
 							if player_state == "WORLD":
 								if has_node("/root/World/" + str(result["d"]["id"])):
-									get_node("/root/World/" + str(result["d"]["id"])).PlayEffect(player_id)
+									get_node("/root/World/" + str(result["d"]["id"])).PlayEffect(result["id"])
 
 remote func ChangeTile(data):
 	if isLoaded:
