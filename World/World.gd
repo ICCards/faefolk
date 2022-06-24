@@ -65,6 +65,7 @@ func _ready():
 	Server.generate_map()
 	wait_for_map()
 	Sounds.connect("volume_change", self, "change_ambient_volume")
+	Server.world = self
 	
 func change_ambient_volume():
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
@@ -269,7 +270,6 @@ func buildMap(map):
 	$AmbientSound.play()
 	get_node("loadingScreen").queue_free()
 	spawnPlayer(Server.player)
-	Server.world = self
 	
 	
 func build_valid_tiles():
@@ -538,6 +538,8 @@ func _physics_process(delta):
 				if str(player) == "t":
 					continue
 				if player == Server.player_id:
+					print("principal")
+					print(world_state_buffer[2]["players"][player]["principal"])
 					continue
 				if $Players.has_node(str(player)) and not player == Server.player_id:
 					if world_state_buffer[1]["players"].has(player):
