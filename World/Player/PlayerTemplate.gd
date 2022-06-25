@@ -15,12 +15,20 @@ var character
 var swing_queue = []
 var swingActive = false
 var direction = "down"
-var username
+var principal
+var username_callback = JavaScript.create_callback(self, "_username_callback")
 
 func _ready():
-	set_username()
+	set_username("")
+	IC.getUsername(principal,username_callback)
 	setPlayerTexture("idle_" + direction)
-	
+
+func _username_callback(args):
+	# Get the first argument (the DOM event in our case).
+	var js_event = args[0]
+	#	var player_id = json["id"]
+	#	var principal = json["principal"]
+	set_username(js_event)	
 	
 func DisplayMessageBubble(message):
 	$MessageBubble.visible = true
@@ -45,11 +53,8 @@ func adjust_bubble_position(lines):
 
 
 	
-func set_username():
-	if username == null:
-		$Username.text = str(name)
-	else: 
-		$Username.text = str(username)
+func set_username(username):
+	$Username.text = str(username)
 
 func getCharacterById(player_id):
 	Server._getCharacterById(player_id)
