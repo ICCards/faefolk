@@ -11,10 +11,11 @@ var grass_tiles
 var fence_tiles
 var object_tiles
 var path_tiles
-
+var principal
 var character
 var setting
 var is_mouse_over_hotbar
+var username_callback = JavaScript.create_callback(self, "_username_callback")
 
 onready var state = MOVEMENT
 
@@ -34,12 +35,46 @@ var FRICTION := 8
 var velocity := Vector2.ZERO
 
 func _ready():
+	set_username("")
+	IC.getUsername(principal,username_callback)
 	set_player_setting(get_parent().get_parent())
 	_play_background_music()
 	$Camera2D/UserInterface.initialize_user_interface()
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	
+func _username_callback(args):
+	# Get the first argument (the DOM event in our case).
+	var js_event = args[0]
+	#	var player_id = json["id"]
+	#	var principal = json["principal"]
+	set_username(js_event)	
+	
+func DisplayMessageBubble(message):
+	$MessageBubble.visible = true
+	if $Timer.time_left > 0:
+		$MessageBubble.text = ""
+		$MessageBubble.text = message
+		#adjust_bubble_position($MessageBubble.get_line_count())
+		$Timer.stop()
+		$Timer.start()
+		yield($Timer, "timeout")
+		$MessageBubble.visible = false
+	else:
+		$MessageBubble.text = ""
+		$MessageBubble.text = message
+		$Timer.start()
+		#adjust_bubble_position($MessageBubble.get_line_count())
+		yield($Timer, "timeout")
+		$MessageBubble.visible = false
+
+func adjust_bubble_position(lines):
+	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
+
+
+	
+func set_username(username):
+	$Username.text = str(username)	
 	
 func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_top = top_left.y
