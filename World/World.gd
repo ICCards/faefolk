@@ -65,6 +65,7 @@ func _ready():
 	Server.generate_map()
 	wait_for_map()
 	Sounds.connect("volume_change", self, "change_ambient_volume")
+	Server.world = self
 	
 func change_ambient_volume():
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
@@ -74,11 +75,11 @@ func wait_for_map():
 		buildMap(Server.generated_map)
 	else:
 		yield(get_tree().create_timer(0.5), "timeout")
-		wait_for_map()
-
-
+		wait_for_map()#			
+	
 func spawnPlayer(value):
 	print('gettiing player')
+	print(value)
 	if not value.empty():
 		print("My Character")
 		print(value["c"])
@@ -87,8 +88,9 @@ func spawnPlayer(value):
 		print(str(value["p"]))
 		player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
 		player.name = str(value["id"])
+		player.principal = value["principal"]
 		player.character = _character.new()
-		player.character.LoadPlayerCharacter(value["c"]) 
+		player.character.LoadPlayerCharacter(value["c"])
 		$Players.add_child(player)
 		if Server.player_house_position == null:
 			player.position = sand.map_to_world(Util.string_to_vector2(value["p"])) 
@@ -105,10 +107,10 @@ func spawnNewPlayer(player):
 			var new_player = Player_template.instance()
 			new_player.position = sand.map_to_world(Util.string_to_vector2(player["p"]))
 			new_player.name = str(player["id"])
+			new_player.principal = player["principal"]
 			new_player.character = _character.new()
-			new_player.character.LoadPlayerCharacter(player["c"]) 
+			new_player.character.LoadPlayerCharacter(player["c"])
 			$Players.add_child(new_player)
-	
 	
 func DespawnPlayer(player_id):
 	mark_for_despawn.append(player_id)
@@ -269,8 +271,6 @@ func buildMap(map):
 	$AmbientSound.play()
 	get_node("loadingScreen").queue_free()
 	spawnPlayer(Server.player)
-	Server.world = self
-	
 	
 func build_valid_tiles():
 	for x in range(298):
@@ -494,8 +494,9 @@ func set_player_house_invalid_tiles(location):
 			validTiles.set_cellv(location + Vector2(x, -y), -1)
 
 func UpdateWorldState(world_state):
-	if Server.day == null:
-		get_node("Players/" + Server.player_id).init_day_night_cycle(int(world_state["time_elapsed"]))
+#	if Server.day == null:
+#		if get_node("Players").has_node(Server.player_id):
+#			get_node("Players/" + Server.player_id).init_day_night_cycle(int(world_state["time_elapsed"]))
 	if world_state["t"] > last_world_state:
 		var new_day = bool(world_state["day"])
 		if has_node("Players/" + Server.player_id):
@@ -538,19 +539,26 @@ func _physics_process(delta):
 				if str(player) == "t":
 					continue
 				if player == Server.player_id:
+					print("my position")
+					print(world_state_buffer[1]["players"][player]["p"])
 					continue
-				if $Players.has_node(str(player)) and not player == Server.player_id:
+				if $Players.has_node(str(player)):
 					if world_state_buffer[1]["players"].has(player):
 						var new_position = lerp(Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]), Util.string_to_vector2(world_state_buffer[2]["players"][player]["p"]), interpolation_factor)
 						$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
 					if not mark_for_despawn.has(player):
+						print("will spawn player")
 						spawnNewPlayer(world_state_buffer[2]["players"][player])
 
 		elif render_time > world_state_buffer[1].t:
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
 			for player in world_state_buffer[1]["players"].keys():
-				if $Players.has_node(str(player)) and not player == Server.player_id:
+				if str(player) == "t":
+					continue
+				if player == Server.player_id:
+					continue
+				if $Players.has_node(str(player)):
 					var position_delta = (Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) - Util.string_to_vector2(world_state_buffer[0]["players"][player]["p"]))
 					var new_position = Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) + (position_delta * extrapolation_factor)
 					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
