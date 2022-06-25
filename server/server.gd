@@ -123,6 +123,7 @@ func _on_data():
 			player_id = str(result["d"])
 			print(player_id)
 		("SpawnPlayer"):
+			print("set player data")
 			player = result["d"]
 		("ReturnServerTime"):
 			var client_time = result["d"]["c"]
