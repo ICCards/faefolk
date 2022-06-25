@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://World/Player/CurrentTime.gd" type="Script" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/CurrentTime.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=3]
 
