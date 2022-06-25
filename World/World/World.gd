@@ -99,18 +99,6 @@ func spawnNewPlayer(player):
 			new_player.character.LoadPlayerCharacter(player["c"]) 
 			$Players.add_child(new_player)
 			
-func spawnPlayerExample():
-	var player = Player.instance()
-	player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
-	player.name = Server.player_id
-	player.character = _character.new()
-	player.character.LoadPlayerCharacter("human_male") 
-	$Players.add_child(player)
-	if Server.player_house_position == null:
-		player.position = sand.map_to_world(Vector2(4,4)) 
-	else: 
-		player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
-	print('getting map')
 	
 func return_valid_spawn_position():
 	var _pos = Vector2(rng.randi_range(0, 4), rng.randi_range(0, 4))
@@ -277,8 +265,7 @@ func buildMap(map):
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -14)
 	$AmbientSound.play()
 	get_node("loadingScreen").queue_free()
-	#spawnPlayer(Server.player)
-	spawnPlayerExample()
+	spawnPlayer(Server.player)
 	Server.world = self
 	
 func check_and_remove_invalid_autotiles(map):

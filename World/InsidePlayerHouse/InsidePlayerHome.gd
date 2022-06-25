@@ -3,8 +3,8 @@ extends Node2D
 
 var is_moving_object
 
-onready var Player = preload( "res://World/Player/Player.tscn" )
-onready var Player_template = preload( "res://World/Player/PlayerTemplate.tscn" )
+onready var Player = preload("res://World/Player/Player/Player.tscn")
+onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
 const _character = preload("res://Global/Data/Characters.gd")
 onready var DisplaceHouseObject = preload("res://World/InsidePlayerHouse/DisplayHouseObject.tscn")
 
@@ -36,9 +36,7 @@ func spawnPlayer():
 	player.direction = "UP"
 	player.name = Server.player_id #str(value["id"])
 	player.character = _character.new()
-	#player.character.LoadPlayerCharacter(value["c"]) 
-	#### UNCOMMENT THIS
-	player.character.LoadPlayerCharacter("human_male") 
+	player.character.LoadPlayerCharacter(value["c"]) 
 	$Players.add_child(player)
 	player.position = Vector2(190, 430)
 
