@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=19]
 [ext_resource path="res://World/Player/OpenChest.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=21]
+[ext_resource path="res://Assets/Images/Misc/chat bubble.png" type="Texture" id=22]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -737,6 +739,13 @@ height = 22.2163
 
 [sub_resource type="CircleShape2D" id=10]
 
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 22 )
+region_rect = Rect2( 0, 0, 46, 14 )
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -932,6 +941,37 @@ position = Vector2( 0, 11 )
 stream = ExtResource( 19 )
 volume_db = -10.0
 autoplay = true
+
+[node name="Username" type="Label" parent="."]
+margin_bottom = 26.0
+grow_horizontal = 2
+rect_scale = Vector2( 1, 0.9 )
+theme = ExtResource( 21 )
+text = "chhuse"
+align = 1
+
+[node name="MessageBubble" type="Label" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -70.0
+margin_top = -89.0
+margin_right = 70.0
+margin_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 0
+rect_scale = Vector2( 0.7, 0.7 )
+rect_pivot_offset = Vector2( 70, 0 )
+theme = ExtResource( 21 )
+custom_styles/normal = SubResource( 14 )
+text = "hello"
+align = 1
+autowrap = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
