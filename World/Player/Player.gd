@@ -25,6 +25,7 @@ var object_tiles
 var path_tiles
 var delta
 var character
+var username
 var path_index = 1
 var setting
 var is_mouse_over_hotbar
@@ -58,6 +59,7 @@ func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_right = bottom_right.x
 
 func _ready():
+	set_username()
 	set_physics_process(false)
 	set_player_setting(get_parent().get_parent())
 	setPlayerTexture(animation)
@@ -69,6 +71,35 @@ func _ready():
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	set_new_music_volume()
+	
+	
+func DisplayMessageBubble(message):
+	$MessageBubble.visible = true
+	if $Timer.time_left > 0:
+		$MessageBubble.text = ""
+		$MessageBubble.text = message
+		#adjust_bubble_position($MessageBubble.get_line_count())
+		$Timer.stop()
+		$Timer.start()
+		yield($Timer, "timeout")
+		$MessageBubble.visible = false
+	else:
+		$MessageBubble.text = ""
+		$MessageBubble.text = message
+		$Timer.start()
+		#adjust_bubble_position($MessageBubble.get_line_count())
+		yield($Timer, "timeout")
+		$MessageBubble.visible = false
+
+func adjust_bubble_position(lines):
+	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
+
+	
+func set_username():
+	if username == null:
+		$Username.text = str(name)
+	else: 
+		$Username.text = str(username)
 
 func set_new_music_volume():
 	$BackgroundMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
