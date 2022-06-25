@@ -539,6 +539,8 @@ func _physics_process(delta):
 				if str(player) == "t":
 					continue
 				if player == Server.player_id:
+					print("my position")
+					print(world_state_buffer[1]["players"][player]["p"])
 					continue
 				if $Players.has_node(str(player)):
 					if world_state_buffer[1]["players"].has(player):

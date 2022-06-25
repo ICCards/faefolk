@@ -419,7 +419,6 @@ func place_seed_state(event, item_name):
 
 func movement_state(delta):
 	if !swingActive and not PlayerInventory.chatMode:
-		print("I am moving")
 		animation_player.play("movement")
 		var input_vector = Vector2.ZERO			
 		if Input.is_action_pressed("ui_up"):
