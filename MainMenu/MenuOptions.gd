@@ -1,7 +1,20 @@
 extends Control
 
-
 var hovered_button = ""
+var connect_callback = JavaScript.create_callback(self, "_connect_plug")
+var login_callback = JavaScript.create_callback(self, "_login")
+
+func _connect_plug(args):
+	IC.login(login_callback)
+	
+func _login(args):
+	var value = Util.toMessage("LOGIN",{"d":{}})
+	print("logging in")
+	Server._client.get_peer(1).put_packet(value)
+	visible = true
+	get_parent().get_node("ConnectToPlug").visible = false
+	get_parent().get_node("ConnectArea").visible = false
+	
 func _play_hover_effect(button_name):
 	if hovered_button != button_name:
 		$SoundEffects.stream = Sounds.button_hover
@@ -87,7 +100,6 @@ func _on_OptionsArea_input_event(viewport, event, shape_idx):
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
 
-
 func _on_QuitArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		$SoundEffects.stream = Sounds.button_select
@@ -102,12 +114,8 @@ func _on_ConnectArea_input_event(viewport, event, shape_idx):
 		$SoundEffects.stream = Sounds.button_select
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
-		###CONNECT TO PLUG HERE
-		visible = true
-		get_parent().get_node("ConnectToPlug").visible = false
-		get_parent().get_node("ConnectArea").visible = false
-
-
+		IC.connect_plug(connect_callback)
+		
 func _on_ConnectArea_mouse_entered():
 	_play_hover_effect("quit")
 

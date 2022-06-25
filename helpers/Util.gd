@@ -15,7 +15,10 @@ func choose(choices):
 
 	var rand_index = randi() % choices.size()
 	return choices[rand_index]
-	
+
+func tojson(body):
+  var jsonParseResult: JSONParseResult = JSON.parse(body)
+  return jsonParseResult.result	
 	
 func jsonParse(body):
   var stringResult: String = body.get_string_from_utf8()
