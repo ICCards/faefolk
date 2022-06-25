@@ -27,6 +27,8 @@ Util="*res://helpers/Util.gd"
 Uuid="*res://helpers/uuid.gd"
 Server="*res://server/server.gd"
 Chat="*res://Global/Data/Chat.gd"
+PlaceObject="*res://Global/Functions/PlaceObject.gd"
+Tiles="*res://helpers/Tiles.gd"
 
 [display]
 

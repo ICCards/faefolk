@@ -13,8 +13,6 @@ func initialize_crafting():
 		else:
 			get_node(item).modulate = Color(1, 1, 1, 0.4)
 
-
-
 func _physics_process(delta):
 	if item != null:
 		$CraftableItemDescription.visible = true

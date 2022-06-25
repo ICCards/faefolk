@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://World/Player/PlayerStatsUI.gd" type="Script" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/PlayerStatsUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/PlayerStatsUI/green progress.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Images/PlayerStatsUI/blue progress.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/PlayerStatsUI/stats bar no progress.png" type="Texture" id=4]

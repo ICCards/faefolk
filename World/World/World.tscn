@@ -1,17 +1,17 @@
 [gd_scene load_steps=71 format=2]
 
-[ext_resource path="res://World/World.gd" type="Script" id=1]
-[ext_resource path="res://Assets/tilesets/CL_MainLev.png" type="Texture" id=2]
-[ext_resource path="res://Assets/tilesets/grass_tilesets.png" type="Texture" id=3]
-[ext_resource path="res://water.tres" type="TileSet" id=4]
-[ext_resource path="res://Assets/tilesets/CL_Crafting.png" type="Texture" id=5]
-[ext_resource path="res://Assets/tilesets/fence tiles.png" type="Texture" id=6]
-[ext_resource path="res://Assets/tilesets/hoed_layer.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Forest 7 - SFX Producer.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Assets/tilesets/fence tiles.png" type="Texture" id=1]
+[ext_resource path="res://water.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Forest 7 - SFX Producer.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Assets/tilesets/grass_tilesets.png" type="Texture" id=4]
+[ext_resource path="res://Assets/tilesets/hoed_layer.png" type="Texture" id=5]
+[ext_resource path="res://Assets/tilesets/CL_MainLev.png" type="Texture" id=6]
+[ext_resource path="res://World/World/World.gd" type="Script" id=7]
+[ext_resource path="res://Assets/tilesets/CL_Crafting.png" type="Texture" id=8]
 
 [sub_resource type="TileSet" id=1]
 0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 1536, 896, 256, 256 )
@@ -32,7 +32,7 @@
 0/shapes = [  ]
 0/z_index = 0
 1/name = "CL_MainLev.png 1"
-1/texture = ExtResource( 2 )
+1/texture = ExtResource( 6 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 1280, 0, 128, 64 )
@@ -55,7 +55,7 @@
 
 [sub_resource type="TileSet" id=2]
 0/name = "grass_tilesets.png 0"
-0/texture = ExtResource( 3 )
+0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 640, 352 )
@@ -80,7 +80,7 @@
 
 [sub_resource type="TileSet" id=3]
 0/name = "grass_tilesets.png 0"
-0/texture = ExtResource( 3 )
+0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 256, 640, 256 )
@@ -105,7 +105,7 @@
 
 [sub_resource type="TileSet" id=24]
 0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 1312, 800, 32, 32 )
@@ -178,7 +178,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=4]
 0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 288, 160, 224, 128 )
@@ -238,7 +238,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 } ]
 0/z_index = 0
 1/name = "CL_MainLev.png 1"
-1/texture = ExtResource( 2 )
+1/texture = ExtResource( 6 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 416, 32, 32, 128 )
@@ -292,7 +292,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 } ]
 1/z_index = 0
 2/name = "CL_MainLev.png 2"
-2/texture = ExtResource( 2 )
+2/texture = ExtResource( 6 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 256, 32, 32, 128 )
@@ -340,7 +340,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 } ]
 2/z_index = 0
 3/name = "CL_MainLev.png 3"
-3/texture = ExtResource( 2 )
+3/texture = ExtResource( 6 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 288, 0, 128, 352 )
@@ -388,7 +388,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 } ]
 3/z_index = 0
 4/name = "CL_MainLev.png 4"
-4/texture = ExtResource( 2 )
+4/texture = ExtResource( 6 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 1216, 1152, 320, 256 )
@@ -411,7 +411,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=236]
 0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 416, 1280, 160, 224 )
@@ -425,7 +425,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 1/name = "CL_MainLev.png 1"
-1/texture = ExtResource( 2 )
+1/texture = ExtResource( 6 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 64, 1248, 64, 192 )
@@ -439,7 +439,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 1/shapes = [  ]
 1/z_index = 0
 2/name = "CL_MainLev.png 2"
-2/texture = ExtResource( 2 )
+2/texture = ExtResource( 6 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 1248, 64, 192 )
@@ -453,7 +453,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "CL_MainLev.png 3"
-3/texture = ExtResource( 2 )
+3/texture = ExtResource( 6 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 640, 1280, 224, 256 )
@@ -467,7 +467,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 3/shapes = [  ]
 3/z_index = 0
 4/name = "CL_MainLev.png 4"
-4/texture = ExtResource( 2 )
+4/texture = ExtResource( 6 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 864, 1312, 160, 224 )
@@ -481,7 +481,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "CL_MainLev.png 5"
-5/texture = ExtResource( 2 )
+5/texture = ExtResource( 6 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 576, 1312, 64, 64 )
@@ -495,7 +495,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 5/shapes = [  ]
 5/z_index = 0
 6/name = "CL_MainLev.png 6"
-6/texture = ExtResource( 2 )
+6/texture = ExtResource( 6 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 576, 1376, 64, 64 )
@@ -509,7 +509,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 6/shapes = [  ]
 6/z_index = 0
 7/name = "CL_MainLev.png 7"
-7/texture = ExtResource( 2 )
+7/texture = ExtResource( 6 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 256, 1152, 128, 128 )
@@ -523,7 +523,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 7/shapes = [  ]
 7/z_index = 0
 8/name = "CL_MainLev.png 8"
-8/texture = ExtResource( 2 )
+8/texture = ExtResource( 6 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 384, 1152, 128, 128 )
@@ -537,7 +537,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 8/shapes = [  ]
 8/z_index = 0
 9/name = "CL_MainLev.png 9"
-9/texture = ExtResource( 2 )
+9/texture = ExtResource( 6 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 512, 1152, 128, 128 )
@@ -551,7 +551,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 9/shapes = [  ]
 9/z_index = 0
 10/name = "CL_MainLev.png 10"
-10/texture = ExtResource( 2 )
+10/texture = ExtResource( 6 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
 10/region = Rect2( 640, 1152, 128, 128 )
@@ -651,7 +651,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=231]
 0/name = "fence tiles.png 0"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, -32 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 416, 384 )
@@ -857,7 +857,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=232]
 0/name = "CL_Crafting.png 0"
-0/texture = ExtResource( 5 )
+0/texture = ExtResource( 8 )
 0/tex_offset = Vector2( 0, -32 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 736, 64, 32, 64 )
@@ -878,7 +878,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 } ]
 0/z_index = 0
 1/name = "CL_Crafting.png 1"
-1/texture = ExtResource( 5 )
+1/texture = ExtResource( 8 )
 1/tex_offset = Vector2( 0, -32 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 704, 0, 32, 64 )
@@ -899,7 +899,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 } ]
 1/z_index = 0
 2/name = "CL_Crafting.png 2"
-2/texture = ExtResource( 5 )
+2/texture = ExtResource( 8 )
 2/tex_offset = Vector2( 0, -32 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 384, 64, 64, 64 )
@@ -920,7 +920,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 } ]
 2/z_index = 0
 3/name = "CL_Crafting.png 3"
-3/texture = ExtResource( 5 )
+3/texture = ExtResource( 8 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 256, 64, 32, 32 )
@@ -934,7 +934,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 3/shapes = [  ]
 3/z_index = 0
 4/name = "CL_Crafting.png 4"
-4/texture = ExtResource( 5 )
+4/texture = ExtResource( 8 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 288, 64, 32, 32 )
@@ -948,7 +948,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "CL_Crafting.png 5"
-5/texture = ExtResource( 5 )
+5/texture = ExtResource( 8 )
 5/tex_offset = Vector2( 0, -32 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 544, 64, 64, 64 )
@@ -971,7 +971,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=233]
 0/name = "CL_Crafting.png 0"
-0/texture = ExtResource( 5 )
+0/texture = ExtResource( 8 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 256, 64, 32, 32 )
@@ -985,7 +985,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 1/name = "CL_Crafting.png 1"
-1/texture = ExtResource( 5 )
+1/texture = ExtResource( 8 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 288, 64, 32, 32 )
@@ -999,7 +999,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 1/shapes = [  ]
 1/z_index = 0
 2/name = "CL_Crafting.png 2"
-2/texture = ExtResource( 5 )
+2/texture = ExtResource( 8 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 128, 128, 32, 32 )
@@ -1013,7 +1013,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "CL_Crafting.png 3"
-3/texture = ExtResource( 5 )
+3/texture = ExtResource( 8 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 160, 128, 32, 32 )
@@ -1027,7 +1027,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 3/shapes = [  ]
 3/z_index = 0
 4/name = "CL_Crafting.png 4"
-4/texture = ExtResource( 5 )
+4/texture = ExtResource( 8 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 128, 160, 32, 32 )
@@ -1041,7 +1041,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "CL_Crafting.png 5"
-5/texture = ExtResource( 5 )
+5/texture = ExtResource( 8 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 160, 160, 32, 32 )
@@ -1055,7 +1055,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 5/shapes = [  ]
 5/z_index = 0
 6/name = "CL_Crafting.png 6"
-6/texture = ExtResource( 5 )
+6/texture = ExtResource( 8 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 224, 128, 32, 32 )
@@ -1069,7 +1069,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 6/shapes = [  ]
 6/z_index = 0
 7/name = "CL_Crafting.png 7"
-7/texture = ExtResource( 5 )
+7/texture = ExtResource( 8 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 256, 128, 32, 32 )
@@ -1083,7 +1083,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 7/shapes = [  ]
 7/z_index = 0
 8/name = "CL_Crafting.png 8"
-8/texture = ExtResource( 5 )
+8/texture = ExtResource( 8 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 224, 160, 32, 32 )
@@ -1097,7 +1097,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 8/shapes = [  ]
 8/z_index = 0
 9/name = "CL_Crafting.png 9"
-9/texture = ExtResource( 5 )
+9/texture = ExtResource( 8 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 256, 160, 32, 32 )
@@ -1113,7 +1113,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=234]
 0/name = "hoed_layer.png 0"
-0/texture = ExtResource( 7 )
+0/texture = ExtResource( 5 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 192, 384, 192 )
@@ -1138,7 +1138,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=235]
 0/name = "hoed_layer.png 0"
-0/texture = ExtResource( 7 )
+0/texture = ExtResource( 5 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 384, 192 )
@@ -1162,7 +1162,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 0/z_index = 0
 
 [node name="World" type="YSort"]
-script = ExtResource( 1 )
+script = ExtResource( 7 )
 
 [node name="GeneratedTiles" type="YSort" parent="."]
 
@@ -1185,7 +1185,7 @@ format = 1
 tile_data = PoolIntArray( 1, 0, 458759, 2, 0, 458759, 65537, 0, 458759 )
 
 [node name="Water" type="TileMap" parent="GeneratedTiles"]
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
@@ -1244,5 +1244,5 @@ format = 1
 [node name="Players" type="YSort" parent="."]
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 3 )
 volume_db = -12.0

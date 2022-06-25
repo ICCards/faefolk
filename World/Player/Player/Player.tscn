@@ -1,25 +1,28 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://World/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://World/Player/PickupZone.gd" type="Script" id=2]
-[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=3]
-[ext_resource path="res://InventoryLogic/Hotbar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/ChatBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/OpenChest.tscn" type="PackedScene" id=2]
+[ext_resource path="res://InventoryLogic/Hotbar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/PlayerStatsUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/Player/UserInterface.gd" type="Script" id=6]
-[ext_resource path="res://World/Player/ChatBox.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/Player/PlayerStatsUI.tscn" type="PackedScene" id=8]
-[ext_resource path="res://World/Player/CurrentTime.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
+[ext_resource path="res://World/Player/Player/UserInterface/CurrentTime.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
+[ext_resource path="res://Characters/Human/male/HOLDING/body/down/arms.png" type="Texture" id=9]
+[ext_resource path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
-[ext_resource path="res://Characters/Human/male/HOLDING/body/down/arms.png" type="Texture" id=12]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" type="Texture" id=13]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/pants/pants.png" type="Texture" id=14]
-[ext_resource path="res://Characters/Human/male/HOLDING/assets/down/shirt.png" type="Texture" id=15]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=19]
-[ext_resource path="res://World/Player/OpenChest.tscn" type="PackedScene" id=20]
+[ext_resource path="res://World/Player/Player/Scripts/PickupZone.gd" type="Script" id=12]
+[ext_resource path="res://Characters/Human/male/IDLE/assets/down/pants/pants.png" type="Texture" id=13]
+[ext_resource path="res://Characters/Human/male/HOLDING/assets/down/shirt.png" type="Texture" id=14]
+[ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
+[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=17]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=19]
+[ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=20]
+[ext_resource path="res://World/Player/Player/Scripts/PlaceItemsUI.gd" type="Script" id=21]
+[ext_resource path="res://World/Player/Player/Scripts/CompositeSprites.gd" type="Script" id=22]
+[ext_resource path="res://World/Player/Player/Scripts/DetectPathType.gd" type="Script" id=23]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -51,9 +54,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.129412, 0.388235, 0.607843, 1 ) ]
 }
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1, 1 )
 
 [sub_resource type="CapsuleShape2D" id=11]
 radius = 8.00011
@@ -731,6 +731,9 @@ tracks/10/keys = {
 "values": [ 90.0, 90.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1, 1 )
+
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 39.746
 height = 22.2163
@@ -738,35 +741,35 @@ height = 22.2163
 [sub_resource type="CircleShape2D" id=10]
 
 [node name="Player" type="KinematicBody2D"]
-script = ExtResource( 1 )
+script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.9, 0.9 )
 
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
-script = ExtResource( 6 )
+script = ExtResource( 20 )
 
-[node name="ChatBox" parent="Camera2D/UserInterface" instance=ExtResource( 7 )]
+[node name="ChatBox" parent="Camera2D/UserInterface" instance=ExtResource( 1 )]
 margin_left = 10.0
 margin_top = 299.0
 margin_right = -708.0
 margin_bottom = -89.0
 
-[node name="OpenChest" parent="Camera2D/UserInterface" instance=ExtResource( 20 )]
+[node name="OpenChest" parent="Camera2D/UserInterface" instance=ExtResource( 2 )]
 visible = false
 position = Vector2( 240, 513 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="CurrentTime" parent="Camera2D/UserInterface" instance=ExtResource( 9 )]
+[node name="CurrentTime" parent="Camera2D/UserInterface" instance=ExtResource( 7 )]
 position = Vector2( 804, 24 )
 scale = Vector2( 0.4, 0.4 )
 
-[node name="PlayerStatsUI" parent="Camera2D/UserInterface" instance=ExtResource( 8 )]
+[node name="PlayerStatsUI" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
 position = Vector2( 36, 24 )
 scale = Vector2( 2.3, 2.3 )
 
-[node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
+[node name="Hotbar" parent="Camera2D/UserInterface" instance=ExtResource( 3 )]
 position = Vector2( 240, 513 )
 
 [node name="Inventory" parent="Camera2D/UserInterface" instance=ExtResource( 5 )]
@@ -782,13 +785,6 @@ scale = Vector2( 0.5, 0.5 )
 anims/RESET = SubResource( 12 )
 "anims/set night" = SubResource( 13 )
 
-[node name="MeleeSwing" type="Area2D" parent="."]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
-shape = SubResource( 2 )
-disabled = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
@@ -797,30 +793,31 @@ shape = SubResource( 11 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
+script = ExtResource( 22 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 3 )
+texture = ExtResource( 18 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 12 )
+texture = ExtResource( 9 )
 hframes = 4
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 14 )
+texture = ExtResource( 13 )
 hframes = 4
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 13 )
+texture = ExtResource( 10 )
 hframes = 4
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 15 )
+texture = ExtResource( 14 )
 hframes = 4
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
@@ -829,16 +826,12 @@ hframes = 4
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 16 )
+texture = ExtResource( 15 )
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
-
-[node name="HeldItem" type="Sprite" parent="CompositeSprites"]
-position = Vector2( 0, -36 )
-scale = Vector2( 0.5, 0.5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 anims/RESET = SubResource( 3 )
@@ -848,12 +841,19 @@ anims/swing_left = SubResource( 6 )
 anims/swing_right = SubResource( 7 )
 anims/swing_up = SubResource( 8 )
 
+[node name="MeleeSwing" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
+shape = SubResource( 2 )
+disabled = true
+
 [node name="PickupZone" type="Area2D" parent="."]
 visible = false
 scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4
-script = ExtResource( 2 )
+script = ExtResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
 position = Vector2( 0, -31.6016 )
@@ -878,11 +878,12 @@ position = Vector2( 0, -43 )
 shape = SubResource( 10 )
 
 [node name="PlaceItemsUI" type="Node2D" parent="."]
+script = ExtResource( 21 )
 
 [node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
 visible = false
 position = Vector2( 0, 32 )
-texture = ExtResource( 17 )
+texture = ExtResource( 19 )
 offset = Vector2( 16, -16 )
 
 [node name="ItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
@@ -892,7 +893,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource( 18 )
+texture = ExtResource( 17 )
 
 [node name="RotateIcon" type="TextureRect" parent="PlaceItemsUI"]
 visible = false
@@ -903,39 +904,42 @@ margin_bottom = 48.0
 rect_scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 11 )
 
-[node name="DetectPathUI" type="Node2D" parent="."]
-visible = false
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="PlaceItemsUI"]
 
-[node name="DetectWoodPath" type="Area2D" parent="DetectPathUI"]
+[node name="DetectPathType" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 23 )
+
+[node name="DetectWoodPath" type="Area2D" parent="DetectPathType"]
 collision_layer = 512
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathUI/DetectWoodPath"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathType/DetectWoodPath"]
 shape = SubResource( 10 )
 
-[node name="DetectStonePath" type="Area2D" parent="DetectPathUI"]
+[node name="DetectStonePath" type="Area2D" parent="DetectPathType"]
 collision_layer = 1024
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathUI/DetectStonePath"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathType/DetectStonePath"]
 shape = SubResource( 10 )
 
+[node name="FootstepsSound" type="AudioStreamPlayer2D" parent="DetectPathType"]
+position = Vector2( 0, 11 )
+stream = ExtResource( 6 )
+volume_db = -10.0
+autoplay = true
+
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 10 )
+stream = ExtResource( 16 )
 volume_db = -16.0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
-[node name="FootstepsSound" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 0, 11 )
-stream = ExtResource( 19 )
-volume_db = -10.0
-autoplay = true
-
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
-[connection signal="area_entered" from="DetectPathUI/DetectWoodPath" to="." method="_on_DetectWoodArea_area_entered"]
-[connection signal="area_exited" from="DetectPathUI/DetectWoodPath" to="." method="_on_DetectWoodArea_area_exited"]
-[connection signal="area_entered" from="DetectPathUI/DetectStonePath" to="." method="_on_DetectStonePath_area_entered"]
-[connection signal="area_exited" from="DetectPathUI/DetectStonePath" to="." method="_on_DetectStonePath_area_exited"]
+[connection signal="area_entered" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_entered"]
+[connection signal="area_exited" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_exited"]
+[connection signal="area_entered" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_entered"]
+[connection signal="area_exited" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_exited"]
