@@ -15,9 +15,41 @@ var character
 var swing_queue = []
 var swingActive = false
 var direction = "down"
+var username
 
 func _ready():
+	set_username()
 	setPlayerTexture("idle_" + direction)
+	
+	
+func DisplayMessageBubble(message):
+	$MessageBubble.visible = true
+	if $Timer.time_left > 0:
+		$MessageBubble.text = ""
+		$MessageBubble.text = message
+		#adjust_bubble_position($MessageBubble.get_line_count())
+		$Timer.stop()
+		$Timer.start()
+		yield($Timer, "timeout")
+		$MessageBubble.visible = false
+	else:
+		$MessageBubble.text = ""
+		$MessageBubble.text = message
+		$Timer.start()
+		#adjust_bubble_position($MessageBubble.get_line_count())
+		yield($Timer, "timeout")
+		$MessageBubble.visible = false
+
+func adjust_bubble_position(lines):
+	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
+
+
+	
+func set_username():
+	if username == null:
+		$Username.text = str(name)
+	else: 
+		$Username.text = str(username)
 
 func getCharacterById(player_id):
 	Server._getCharacterById(player_id)
