@@ -82,9 +82,18 @@ func wait_for_map():
 func _username_callback(args):
 	# Get the first argument (the DOM event in our case).
 	var js_event = args[0]
-	print(js_event)
-
-func spawnPlayer(value):
+	var json = Util.jsonParse(js_event)
+	var username = json["name"]
+	if json["principal"] == Server.player["principal"]:
+		spawnPlayer(Server.player,name)
+	else:
+		for player_id in world_state_buffer[2]["players"].key():
+			var principal = world_state_buffer[2]["players"][player_id]["principal"]
+			var player = world_state_buffer[2]["players"][player_id]
+			if json["principal"] == principal :
+				spawnNewPlayer(player,username)	
+	
+func spawnPlayer(value,username):
 	print('gettiing player')
 	print(value)
 	if not value.empty():
@@ -95,9 +104,9 @@ func spawnPlayer(value):
 		print(str(value["p"]))
 		player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
 		player.name = str(value["id"])
+		player.username = username
 		player.character = _character.new()
 		player.character.LoadPlayerCharacter(value["c"])
-		IC.getUsername(value["principal"],username_callback)
 		$Players.add_child(player)
 		if Server.player_house_position == null:
 			player.position = sand.map_to_world(Util.string_to_vector2(value["p"])) 
@@ -106,7 +115,7 @@ func spawnPlayer(value):
 		print('getting map')
 		
 		
-func spawnNewPlayer(player):
+func spawnNewPlayer(player,username):
 	if not player.empty():
 		if not has_node(str(player["id"])):
 			print("spawning new player")
@@ -114,6 +123,7 @@ func spawnNewPlayer(player):
 			var new_player = Player_template.instance()
 			new_player.position = sand.map_to_world(Util.string_to_vector2(player["p"]))
 			new_player.name = str(player["id"])
+			new_player.username = username
 			new_player.character = _character.new()
 			new_player.character.LoadPlayerCharacter(player["c"])
 			#IC.getUsername(player["principal"],username_callback)
@@ -278,8 +288,7 @@ func buildMap(map):
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 	$AmbientSound.play()
 	get_node("loadingScreen").queue_free()
-	spawnPlayer(Server.player)
-	
+	IC.getUsername(Server.player["principal"],username_callback)
 	
 func build_valid_tiles():
 	for x in range(298):
@@ -554,7 +563,8 @@ func _physics_process(delta):
 						$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
 					if not mark_for_despawn.has(player):
-						spawnNewPlayer(world_state_buffer[2]["players"][player])
+						var principal = world_state_buffer[2]["players"][player]
+						IC.getUsername(principal,username_callback)
 
 		elif render_time > world_state_buffer[1].t:
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
