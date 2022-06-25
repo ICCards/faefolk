@@ -28,9 +28,8 @@ func login(callback):
 func connect_plug(callback):
 	window.connect_mainnet().then(callback)
 
-func fetchUsernames(caller,callback):
-	$HTTPRequest.connect("request_completed", caller, callback)
-	$HTTPRequest.request("https://nheqc-cqaaa-aaaan-qam6a-cai.raw.ic0.app/fetchPlayers")
+func getUsername(principal,callback):
+	window.getICNSName(principal).then(callback)
 
 #func _on_request_completed(result, response_code, headers, body):
 #	var json = JSON.parse(body.get_string_from_utf8())
