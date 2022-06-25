@@ -740,6 +740,13 @@ height = 22.2163
 
 [sub_resource type="CircleShape2D" id=10]
 
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 22 )
+region_rect = Rect2( 0, 0, 46, 14 )
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 8 )
 

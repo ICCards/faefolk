@@ -19,8 +19,6 @@ Images="*res://Global/Data/Images.gd"
 JsonData="*res://JSONData/JSONData.gd"
 PlayerInventory="*res://InventoryLogic/PlayerInventory.gd"
 SceneChanger="*res://Global/Functions/SceneChanger.tscn"
-Api="*res://api.gdns"
-RustCalls="*res://Global/Functions/RustCalls.tscn"
 Sounds="*res://Global/Data/Sounds.gd"
 PlayerStats="*res://Global/Data/PlayerStats.gd"
 Util="*res://helpers/Util.gd"
@@ -29,6 +27,7 @@ Server="*res://server/server.gd"
 Chat="*res://Global/Data/Chat.gd"
 PlaceObject="*res://Global/Functions/PlaceObject.gd"
 Tiles="*res://helpers/Tiles.gd"
+IC="*res://helpers/IC.gd"
 
 [display]
 
