@@ -56,6 +56,8 @@ var decorations = []
 var mark_for_despawn = []
 var tile_ids = {}
 
+var username_callback = JavaScript.create_callback(self, "_username_callback")
+
 func _ready():
 	var loadingScreen = LoadingScreen.instance()
 	loadingScreen.name = "loadingScreen"
@@ -77,9 +79,14 @@ func wait_for_map():
 		yield(get_tree().create_timer(0.5), "timeout")
 		wait_for_map()
 
+func _username_callback(args):
+	# Get the first argument (the DOM event in our case).
+	var js_event = args[0]
+	print(js_event)
 
 func spawnPlayer(value):
 	print('gettiing player')
+	print(value)
 	if not value.empty():
 		print("My Character")
 		print(value["c"])
@@ -89,7 +96,8 @@ func spawnPlayer(value):
 		player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
 		player.name = str(value["id"])
 		player.character = _character.new()
-		player.character.LoadPlayerCharacter(value["c"]) 
+		player.character.LoadPlayerCharacter(value["c"])
+		IC.getUsername(value["principal"],username_callback)
 		$Players.add_child(player)
 		if Server.player_house_position == null:
 			player.position = sand.map_to_world(Util.string_to_vector2(value["p"])) 
@@ -107,7 +115,8 @@ func spawnNewPlayer(player):
 			new_player.position = sand.map_to_world(Util.string_to_vector2(player["p"]))
 			new_player.name = str(player["id"])
 			new_player.character = _character.new()
-			new_player.character.LoadPlayerCharacter(player["c"]) 
+			new_player.character.LoadPlayerCharacter(player["c"])
+			#IC.getUsername(player["principal"],username_callback)
 			$Players.add_child(new_player)
 	
 	
@@ -538,8 +547,6 @@ func _physics_process(delta):
 				if str(player) == "t":
 					continue
 				if player == Server.player_id:
-					print("principal")
-					print(world_state_buffer[2]["players"][player]["principal"])
 					continue
 				if $Players.has_node(str(player)) and not player == Server.player_id:
 					if world_state_buffer[1]["players"].has(player):
