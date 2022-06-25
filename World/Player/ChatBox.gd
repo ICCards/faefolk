@@ -52,11 +52,11 @@ func text_entered(text):
 		inputField.release_focus()
 	
 func add_message(username, text, color):
-	#chatLog.bbcode_text += '\n' 
-#	chatLog.bbcode_text += '[color=' + color + ']'
-#	chatLog.bbcode_text += '[' + str(username).substr(0,4) + ']: '
+	chatLog.bbcode_text += '\n' 
+	chatLog.bbcode_text += '[color=' + color + ']'
+	chatLog.bbcode_text += '[' + str(username).substr(0,4) + ']: '
 	chatLog.bbcode_text += text
-#	chatLog.bbcode_text += '[/color]'
+	chatLog.bbcode_text += '[/color]'
 
 
 func _on_LineEdit_focus_entered():

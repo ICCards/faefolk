@@ -288,6 +288,16 @@ text = "hello"
 align = 1
 autowrap = true
 
+[node name="Username" type="Label" parent="."]
+margin_left = -31.0
+margin_right = 31.0
+margin_bottom = 28.0
+grow_horizontal = 2
+rect_scale = Vector2( 1, 0.9 )
+theme = ExtResource( 2 )
+text = "chhuse"
+align = 1
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true

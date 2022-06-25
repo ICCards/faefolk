@@ -25,11 +25,10 @@ var object_tiles
 var path_tiles
 var delta
 var character
-var username
 var path_index = 1
 var setting
 var is_mouse_over_hotbar
-
+var principal
 onready var state = MOVEMENT
 
 enum {
@@ -50,7 +49,7 @@ var MAX_SPEED := 12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
-
+var username_callback = JavaScript.create_callback(self, "_username_callback")
 
 func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_top = top_left.y
@@ -59,7 +58,8 @@ func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_right = bottom_right.x
 
 func _ready():
-	set_username()
+	set_username("")
+	IC.getUsername(principal,username_callback)
 	set_physics_process(false)
 	set_player_setting(get_parent().get_parent())
 	setPlayerTexture(animation)
@@ -72,6 +72,12 @@ func _ready():
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	set_new_music_volume()
 	
+func _username_callback(args):
+	# Get the first argument (the DOM event in our case).
+	var js_event = args[0]
+	#	var player_id = json["id"]
+	#	var principal = json["principal"]
+	set_username(js_event)
 	
 func DisplayMessageBubble(message):
 	$MessageBubble.visible = true
@@ -95,11 +101,8 @@ func adjust_bubble_position(lines):
 	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
 
 	
-func set_username():
-	if username == null:
-		$Username.text = str(name)
-	else: 
-		$Username.text = str(username)
+func set_username(username):
+	$Username.text = str(username)
 
 func set_new_music_volume():
 	$BackgroundMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
@@ -170,7 +173,6 @@ func _unhandled_input(event):
 func sendAction(action,data): 
 	match action:
 		(MOVEMENT):
-			pass
 			Server.action("MOVEMENT",data)
 		(SWING):
 			Server.action("SWING", data)
@@ -417,6 +419,7 @@ func place_seed_state(event, item_name):
 
 func movement_state(delta):
 	if !swingActive and not PlayerInventory.chatMode:
+		print("I am moving")
 		animation_player.play("movement")
 		var input_vector = Vector2.ZERO			
 		if Input.is_action_pressed("ui_up"):
