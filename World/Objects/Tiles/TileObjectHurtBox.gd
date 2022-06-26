@@ -48,7 +48,8 @@ func set_dimensions():
 		position = position +  Vector2(16, 0)
 
 func _on_HurtBox_area_entered(area):
-	var data = {"id": name, "n": "decorations","t":"placable"}
+	var data = {"id": name, "n": "decorations","t":"ON_HIT","item":item_name}
+	print("sending ON_HIT")
 	Server.action("ON_HIT", data)
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)

@@ -5,7 +5,7 @@ onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 
 var loc
-
+var item_name = "torch"
 func initialize(_loc):
 	loc = _loc
 
@@ -14,7 +14,8 @@ func PlayEffect(player_id):
 	queue_free()
 
 func _on_BreakObjectBox_area_entered(area):
-	var data = {"id": name, "n": "decoration", "t":"placable"}
+	var data = {"id": name, "n": "decoration", "t":"ON_HIT","item":item_name}
+	print("sending ON_HIT")
 	Server.action("ON_HIT", data)
 	valid_tiles.set_cellv(loc, 0)
 	var itemDrop = ItemDrop.instance()
