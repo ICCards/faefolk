@@ -78,6 +78,8 @@ func DetermineLatency():
 func action(type,data):
 	var value = {"d": data}
 	value["t"] = type
+	if value["t"] == "ON_HIT":
+		print(data)
 	var message = Util.toMessage("action",value)
 	_client.get_peer(1).put_packet(message)
 
@@ -160,10 +162,23 @@ func _on_data():
 			else:
 				mapPartsLoaded = 0
 				generated_map = map
-		("CHANGE_TILE"):
+		("ChangeTile"):
 			if isLoaded:
 				var data = result["d"]
 				world.ChangeTile(data)
+		("PLACE_ITEM"):
+			var item = result["d"]["item"]
+			var id = result["d"]["id"]
+			var player = result["id"]
+			var loc = Util.string_to_vector2(result["d"]["l"])
+			if player_id != str(player):
+				match item:
+					"seed":
+						PlaceObject.place_seed_in_world(id, result["d"]["name"], loc, result["d"]["d"])
+					"placable":
+						PlaceObject.place_object_in_world(id, result["d"]["name"], loc)
+							
+										
 		("ReceivedAction"):
 			if not player_id == str(result["id"]):
 				match result["t"]:
@@ -175,12 +190,12 @@ func _on_data():
 					"ON_HIT":
 						if isLoaded:
 							if player_state == "WORLD":
-								if has_node("/root/World/" + str(result["d"]["id"])):
-									get_node("/root/World/" + str(result["d"]["id"])).PlayEffect(player_id)
-
-remote func ChangeTile(data):
-	if isLoaded:
-		get_node("/root/World").ChangeTile(data)
+								var id = str(result["d"]["id"])
+								print("onhit")
+								print(result["d"])
+								if player_id != str(player):
+									if world.has_node(id):
+										world.get_node(id).PlayEffect(player_id)
 
 func _process(_delta):
 	# Call this in _process or _physics_process. Data transfer, and signals

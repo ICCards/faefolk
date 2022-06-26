@@ -1,6 +1,12 @@
 extends CanvasLayer
 var holding_item = null
 
+
+func initialize_user_interface():
+	$Hotbar.visible = true
+	$PlayerStatsUI.visible = true
+	$CurrentTime.visible = true
+
 func _input(event):
 	if event.is_action_pressed("inventory") and holding_item == null and not PlayerInventory.openChestMode and not PlayerInventory.chatMode:
 		toggle_inventory()

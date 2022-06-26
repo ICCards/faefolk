@@ -7,9 +7,11 @@ var phase
 var is_in_regrowth_phase
 var crop_is_dead 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-
+var valid_tiles
 
 func PlayEffect(player_id):
+	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+	valid_tiles.set_cellv(loc, 0)
 	queue_free()
 
 func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _is_crop_dead):
@@ -99,7 +101,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 var isBeingHarvested = false	
 func harvest_and_remove():
 	if !isBeingHarvested:
-		var data = {"id": name, "n": "decorations","t":"seed"}
+		var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 		Server.action("ON_HIT", data)
 		$HarvestSound.play()
 		$CropText.visible = false
@@ -150,6 +152,8 @@ func _on_PlayAnimBox_body_exited(body):
 
 
 func _on_HurtBox_area_entered(area):
-	var data = {"id": name, "n": "decorations", "t":"seed"}
+	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+	valid_tiles.set_cellv(loc, 0)
+	var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 	Server.action("ON_HIT", data)
 	queue_free()
