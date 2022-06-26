@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chat box left.png-0f0f056197c78fa0347dfd2144e12121.stex"
+path="res://.import/3.png-f2da3d197b1ed2fd837976eb3d6f0897.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/ChatBubble/chat box left.png"
-dest_files=[ "res://.import/chat box left.png-0f0f056197c78fa0347dfd2144e12121.stex" ]
+source_file="res://Assets/Images/Animations/water/3.png"
+dest_files=[ "res://.import/3.png-f2da3d197b1ed2fd837976eb3d6f0897.stex" ]
 
 [params]
 
