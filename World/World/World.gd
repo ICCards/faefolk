@@ -285,8 +285,8 @@ func buildMap(map):
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -14)
 	$AmbientSound.play()
 	get_node("loadingScreen").queue_free()
-	spawnPlayerExample()
-	#spawnPlayer(Server.player)
+	#spawnPlayerExample()
+	spawnPlayer(Server.player)
 	Server.world = self
 	
 func check_and_remove_invalid_autotiles(map):

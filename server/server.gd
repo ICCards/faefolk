@@ -78,6 +78,8 @@ func DetermineLatency():
 func action(type,data):
 	var value = {"d": data}
 	value["t"] = type
+	if value["t"] == "ON_HIT":
+		print(data)
 	var message = Util.toMessage("action",value)
 	_client.get_peer(1).put_packet(message)
 

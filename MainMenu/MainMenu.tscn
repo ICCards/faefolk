@@ -33,6 +33,7 @@ __meta__ = {
 }
 
 [node name="MainMenuOptions" parent="." instance=ExtResource( 2 )]
+visible = false
 margin_left = 18.0
 margin_top = 350.0
 margin_right = 18.0
