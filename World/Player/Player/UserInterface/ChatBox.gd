@@ -14,9 +14,11 @@ var groups = [
 var group_index = 0
 
 
+
 func _ready():
 	initialize_chat_history()
 	inputField.connect("text_entered", self, "text_entered")
+	
 	
 	
 func initialize_chat_history():

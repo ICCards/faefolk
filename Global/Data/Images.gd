@@ -6,33 +6,33 @@ func returnToolSprite(toolName, direction):
 	match toolName:
 		"pickaxe":
 			match direction: 
-				"down":
+				"swing_down":
 					 return pickaxe.down
-				"up":
+				"swing_up":
 					 return pickaxe.up
-				"left":
+				"swing_left":
 					 return pickaxe.left
-				"right":
+				"swing_right":
 					 return pickaxe.right
 		"axe":
 			match direction: 
-				"down":
+				"swing_down":
 					 return axe.down
-				"up":
+				"swing_up":
 					 return axe.up
-				"left":
+				"swing_left":
 					 return axe.left
-				"right":
+				"swing_right":
 					return axe.right
 		"hoe":
 			match direction: 
-				"down":
+				"swing_down":
 					 return pickaxe.down
-				"up":
+				"swing_up":
 					 return pickaxe.up
-				"left":
+				"swing_left":
 					 return pickaxe.left
-				"right":
+				"swing_right":
 					 return pickaxe.right
 					
 
