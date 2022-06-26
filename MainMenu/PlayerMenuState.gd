@@ -24,7 +24,8 @@ func _ready():
 	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -16)
 	$FootstepsSound.play()
 	setAnimationTexture("idle_down")
-	character.LoadPlayerCharacter(player["c"])
+	character.LoadPlayerCharacter("human_male")
+	#character.LoadPlayerCharacter(player["c"])
 	Sounds.connect("volume_change", self, "change_footsteps_volume")
 
 
