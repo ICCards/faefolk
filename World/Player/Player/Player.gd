@@ -268,7 +268,7 @@ func remove_hoed_tile():
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
-		var id = get_node("/rootwa/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 		var data = {"id": id, "l": location}
 		Server.action("PICKAXE", data)
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
