@@ -51,6 +51,7 @@ func _ready():
 	var loadingScreen = LoadingScreen.instance()
 	loadingScreen.name = "loadingScreen"
 	add_child(loadingScreen)
+	get_node("loadingScreen").set_phase("Getting map")
 	yield(get_tree().create_timer(1), "timeout")
 	Server.generated_map.clear()
 	Server.generate_map()
@@ -89,6 +90,19 @@ func spawnPlayer(value):
 			player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		print('getting map')
 		
+func spawnPlayerExample():
+	var player = Player.instance()
+	player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
+	player.name = Server.player_id
+	player.character = _character.new()
+	player.character.LoadPlayerCharacter("human_male") 
+	$Players.add_child(player)
+	if Server.player_house_position == null:
+		player.position = sand.map_to_world(Vector2(4,4)) 
+	else: 
+		player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
+	print('getting map')
+		
 		
 func spawnNewPlayer(player):
 	if not player.empty():
@@ -118,6 +132,7 @@ func DespawnPlayer(player_id):
 func buildMap(map):
 	build_valid_tiles()
 	print("BUILDING MAP")
+	get_node("loadingScreen").set_phase("Building dirt")
 	for id in map["dirt"]:
 		var loc = Util.string_to_vector2(map["dirt"][id]["l"])
 		var x = loc.x
@@ -141,12 +156,14 @@ func buildMap(map):
 		_set_cell(sand, loc.x, loc.y, 0)
 		grass.set_cellv(loc, 0)
 	print("LOADED GRASS")
+	get_node("loadingScreen").set_phase("Building grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["grass"]:
 		var loc = Util.string_to_vector2(map["grass"][id])
 		grass.set_cellv(loc, 0)
 		darkGrass.set_cellv(loc, 0)
 	print("LOADED DG")
+	get_node("loadingScreen").set_phase("Building water")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["water"]:
 		var loc = Util.string_to_vector2(map["water"][id])
@@ -154,6 +171,7 @@ func buildMap(map):
 		darkGrass.set_cellv(loc, 0)
 		water.set_cellv(loc, 0)
 	print("LOADED WATER")
+	get_node("loadingScreen").set_phase("Building trees")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["tree"]:
 		var loc = Util.string_to_vector2(map["tree"][id]["l"])
@@ -194,6 +212,7 @@ func buildMap(map):
 			object.position = sand.map_to_world(loc) + Vector2(4,0)
 			add_child(object,true)
 	print("LOADED STUMPS")
+	get_node("loadingScreen").set_phase("Building ore")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
 		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
@@ -220,6 +239,7 @@ func buildMap(map):
 			object.position = sand.map_to_world(loc) + Vector2(16, 24)
 			add_child(object,true)
 	print("LOADED OrE")
+	get_node("loadingScreen").set_phase("Building tall grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
 	for id in map["tall_grass"]:
@@ -237,6 +257,7 @@ func buildMap(map):
 			yield(get_tree().create_timer(0.2), "timeout")
 			count = 0
 	print("LOADED TALL GRASS")
+	get_node("loadingScreen").set_phase("Building flowers")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
 		var loc = Util.string_to_vector2(map["flower"][id]["l"])
@@ -246,11 +267,13 @@ func buildMap(map):
 			add_child(object,true)
 	print("LOADED FLOWERS")
 	yield(get_tree().create_timer(0.5), "timeout")
+	get_node("loadingScreen").set_phase("Generating world")
 	check_and_remove_invalid_autotiles(map)
 	generate_border_tiles()
 	yield(get_tree().create_timer(0.5), "timeout")
 	border.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
+	get_node("loadingScreen").set_phase("Spawning in")
 	grass.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
 	darkGrass.update_bitmask_region()
@@ -262,7 +285,8 @@ func buildMap(map):
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -14)
 	$AmbientSound.play()
 	get_node("loadingScreen").queue_free()
-	spawnPlayer(Server.player)
+	spawnPlayerExample()
+	#spawnPlayer(Server.player)
 	Server.world = self
 	
 func check_and_remove_invalid_autotiles(map):

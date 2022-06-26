@@ -7,7 +7,7 @@
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Dot2:visible")
+tracks/0/path = NodePath("../Control/Dot2:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Dot3:visible")
+tracks/1/path = NodePath("../Control/Dot3:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -31,7 +31,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Dot1:modulate")
+tracks/2/path = NodePath("../Control/Dot1:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -43,7 +43,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Dot2:modulate")
+tracks/3/path = NodePath("../Control/Dot2:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -55,7 +55,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("../Dot3:modulate")
+tracks/4/path = NodePath("../Control/Dot3:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -67,7 +67,7 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("../BuildingWorld:modulate")
+tracks/5/path = NodePath("../Control/BuildingWorld:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -79,7 +79,7 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("../Dot1:visible")
+tracks/6/path = NodePath("../Control/Dot1:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -96,7 +96,7 @@ resource_name = "animate"
 length = 1.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Dot1:visible")
+tracks/0/path = NodePath("../Control/Dot1:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -108,7 +108,7 @@ tracks/0/keys = {
 "values": [ false, true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Dot2:visible")
+tracks/1/path = NodePath("../Control/Dot2:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -120,7 +120,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Dot3:visible")
+tracks/2/path = NodePath("../Control/Dot3:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -141,42 +141,6 @@ margin_right = 1024.0
 margin_bottom = 600.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="BuildingWorld" type="Label" parent="."]
-margin_left = 697.0
-margin_top = 532.0
-margin_right = 1234.0
-margin_bottom = 626.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 1 )
-text = "Building world"
-
-[node name="Dot1" type="Label" parent="."]
-margin_left = 930.0
-margin_top = 532.0
-margin_right = 946.0
-margin_bottom = 626.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 1 )
-text = "."
-
-[node name="Dot2" type="Label" parent="."]
-margin_left = 940.0
-margin_top = 532.0
-margin_right = 956.0
-margin_bottom = 626.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 1 )
-text = "."
-
-[node name="Dot3" type="Label" parent="."]
-margin_left = 950.0
-margin_top = 532.0
-margin_right = 966.0
-margin_bottom = 626.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 1 )
-text = "."
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Logo")
 anims/RESET = SubResource( 1 )
@@ -192,3 +156,43 @@ margin_bottom = 500.0
 rect_scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 2 )
 stretch_mode = 4
+
+[node name="Control" type="Control" parent="."]
+margin_left = 517.0
+margin_top = 298.0
+margin_right = 557.0
+margin_bottom = 338.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="BuildingWorld" type="Label" parent="Control"]
+margin_left = 716.0
+margin_top = 500.0
+margin_right = 933.0
+margin_bottom = 594.0
+grow_horizontal = 0
+theme = ExtResource( 1 )
+text = "Buildin"
+
+[node name="Dot1" type="Label" parent="Control"]
+margin_left = 940.0
+margin_top = 500.0
+margin_right = 956.0
+margin_bottom = 594.0
+theme = ExtResource( 1 )
+text = "."
+
+[node name="Dot2" type="Label" parent="Control"]
+margin_left = 958.0
+margin_top = 500.0
+margin_right = 974.0
+margin_bottom = 594.0
+theme = ExtResource( 1 )
+text = "."
+
+[node name="Dot3" type="Label" parent="Control"]
+margin_left = 976.0
+margin_top = 500.0
+margin_right = 992.0
+margin_bottom = 594.0
+theme = ExtResource( 1 )
+text = "."
