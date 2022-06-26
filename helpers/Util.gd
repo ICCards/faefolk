@@ -39,3 +39,26 @@ func string_to_vector2(string := "") -> Vector2:
 		return Vector2(array[0], array[1])
 
 	return Vector2.ZERO
+	
+func validate_house_tiles(_location, _valid_object_tiles):
+	var active = false
+	if not active:
+		active = true
+		for x in range(8):
+			for y in range(4):
+				if _valid_object_tiles.get_cellv( Vector2(x, -y) + _location) == -1: 
+					return false
+					break
+		return true
+		
+func set_swing_position(_pos, _direction):
+	if _direction == "UP":
+		_pos += Vector2(0, -36)
+	elif _direction == "DOWN":
+		_pos += Vector2(0, 20)
+	elif _direction == "LEFT":
+		_pos += Vector2(-32, -8)
+	elif _direction == "RIGHT":
+		_pos += Vector2(32, -8)
+	return _pos
+	

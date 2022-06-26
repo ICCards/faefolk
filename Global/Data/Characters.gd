@@ -1,5 +1,6 @@
 extends Node
 
+
 ### Characters ###
 var goblin_male = {
 	body_idle_down = {
