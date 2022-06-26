@@ -60,23 +60,8 @@ func spawnNewPlayer(player):
 			new_player.character.LoadPlayerCharacter(player["c"]) 
 			$Players.add_child(new_player)
 
-
 func UpdateWorldState(world_state):					
 	if world_state["t"] > last_world_state:
-#		var new_day = bool(world_state["day"])
-#		if Server.day != new_day and Server.isLoaded:
-#			Server.day = new_day
-#			PlayerInventory.day_num = int(world_state["day_num"])
-#			PlayerInventory.season = str(world_state["season"])
-#			if new_day == false:
-#				pass
-#				#get_node("/root/World/Players/" + str(Server.player_id)).set_night()
-#			else:
-#				pass
-#			#	get_node("/root/World/Players/" + str(Server.player_id)).set_day()
-			
 		get_node("Players/" + Server.player_id + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
-#		last_world_state = world_state["t"]
-#		world_state_buffer.append(world_state)
 
 

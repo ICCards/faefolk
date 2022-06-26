@@ -22,9 +22,11 @@ var window = JavaScript.get_interface("window")
 #	# Call preventDefault and set the `returnValue` property of the DOM event.
 #	#js_event.preventDefault()
 #	#js_event.returnValue = ''
+
+
 func login(callback):
 	window.login(Server.player_id).then(callback)
-	
+
 func connect_plug(callback):
 	window.connect_mainnet().then(callback)
 

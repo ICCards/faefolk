@@ -4,8 +4,7 @@
 font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
 
 [sub_resource type="DynamicFont" id=3]
-size = 22
-extra_spacing_top = 2
+size = 20
 font_data = SubResource( 2 )
 
 [resource]
