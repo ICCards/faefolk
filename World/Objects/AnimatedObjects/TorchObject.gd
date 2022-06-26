@@ -14,7 +14,7 @@ func PlayEffect(player_id):
 	queue_free()
 
 func _on_BreakObjectBox_area_entered(area):
-	var data = {"id": name, "n": "decoration", "t":"ON_HIT","item":item_name}
+	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
 	print("sending ON_HIT")
 	Server.action("ON_HIT", data)
 	valid_tiles.set_cellv(loc, 0)

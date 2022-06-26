@@ -27,11 +27,11 @@ func _ready():
 	elif item_name == "stone path":
 		$TypeOfTileArea.set_collision_mask(1024)
 		
-func PlayEffect(player_id):
+func PlayEffect(_player_id):
 	valid_tiles.set_cellv(location, 0)
 	if item_name == "wood chest" or item_name == "stone chest":
 		placable_object_tiles.set_cellv(location, -1)
-		valid_tiles.set_cellv(Vector2(location + Vector2(1,0), 0))
+		valid_tiles.set_cellv(location + Vector2(1,0),0)
 	if item_name == "wood fence":
 		fence_tiles.set_cellv(location, -1)
 		fence_tiles.update_bitmask_region()
@@ -48,7 +48,7 @@ func set_dimensions():
 		position = position +  Vector2(16, 0)
 
 func _on_HurtBox_area_entered(area):
-	var data = {"id": name, "n": "decorations","t":"ON_HIT","item":item_name}
+	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
 	print("sending ON_HIT")
 	Server.action("ON_HIT", data)
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)

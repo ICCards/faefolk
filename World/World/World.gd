@@ -43,7 +43,6 @@ const _character = preload("res://Global/Data/Characters.gd")
 var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
-var decorations = []
 var mark_for_despawn = []
 var tile_ids = {}
 
@@ -222,7 +221,7 @@ func buildMap(map):
 			var object = OreObject.instance()
 			object.health = map["ore_large"][id]["h"]
 			object.name = id
-			object.initialize(variety,loc,true)
+			object.initialize(variety,loc)
 			object.position = sand.map_to_world(loc) 
 			add_child(object,true)
 	print("LOADED LARGE OrE")
@@ -353,15 +352,16 @@ func _set_cell(tilemap, x, y, id):
 	tilemap.set_cell(x, y, id, false, false, false, Tiles.get_subtile_with_priority(id,tilemap))
 	
 func ChangeTile(data):
+	var loc = Util.string_to_vector2(data["l"])
 	if data["isWatered"]:
-		watered.set_cellv(data["l"], 0)
-		hoed.set_cellv(data["l"], 0)
+		watered.set_cellv(loc, 0)
+		hoed.set_cellv(loc, 0)
 	elif data["isHoed"] and not data["isWatered"]:
-		hoed.set_cellv(data["l"], 0)
+		hoed.set_cellv(loc, 0)
 	else: 
-		hoed.set_cellv(data["l"], -1)
-		watered.set_cellv(data["l"], -1)
-		validTiles.set_cellv(data["l"], 0)
+		hoed.set_cellv(loc, -1)
+		watered.set_cellv(loc, -1)
+		validTiles.set_cellv(loc, 0)
 	hoed.update_bitmask_region()
 	watered.update_bitmask_region()
 
@@ -400,15 +400,6 @@ func _physics_process(delta):
 							if has_node(str(item)):
 								get_node(str(item)).days_until_harvest = data["d"]
 								get_node(str(item)).refresh_image()
-							else:
-								PlaceObject.place_seed_in_world(item, data["n"], Util.string_to_vector2(data["l"]), data["d"])
-								
-					"placable":
-						for item in world_state_buffer[2]["decorations"][decoration].keys():
-							if not has_node(str(item)):
-								var data = world_state_buffer[2]["decorations"][decoration][item]
-								PlaceObject.place_object_in_world(item, data["n"], Util.string_to_vector2(data["l"]))
-								
 			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
 			for player in world_state_buffer[2]["players"].keys():
 				if str(player) == "t":
