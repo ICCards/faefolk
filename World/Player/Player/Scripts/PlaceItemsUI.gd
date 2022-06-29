@@ -109,7 +109,7 @@ func place_object(item_name, location, type):
 	PlayerInventory.remove_single_object_from_hotbar()
 	var id = Uuid.v4()
 	if type == "placable":
-		var data = {"id": id, "n": item_name, "l": location, "t": type}
+		var data = {"id": id, "name": item_name, "l": location, "item": type}
 		sendAction(PLACE_ITEM, data)
 		$SoundEffects.stream = Sounds.place_object
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -117,7 +117,7 @@ func place_object(item_name, location, type):
 		PlaceObject.place_object_in_world(id, item_name, location)
 	elif type == "seed":
 		var tile_id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-		var data = {"id": id, "n": item_name, "l": location, "t": type, "d": JsonData.crop_data[item_name]["DaysToGrow"], "g": tile_id}
+		var data = {"id": id, "name": item_name, "l": location, "item": type, "d": JsonData.crop_data[item_name]["DaysToGrow"], "g": tile_id}
 		sendAction(PLACE_ITEM, data)
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

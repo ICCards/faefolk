@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=1]
 [ext_resource path="res://MainMenu/MenuOptions.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Misc/play.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/Misc/options.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Misc/quit.png" type="Texture" id=5]
+[ext_resource path="res://InventoryLogic/MenuTitle.tres" type="Theme" id=6]
 
 [node name="MenuOptions" type="Control"]
 anchor_right = 1.0
@@ -42,13 +42,16 @@ scale = Vector2( 6, 6 )
 texture = ExtResource( 3 )
 
 [node name="PlayLabel" type="Label" parent="Play"]
-margin_left = 173.0
-margin_top = 50.0
-margin_right = 523.0
-margin_bottom = 245.0
-theme = ExtResource( 1 )
-text = "PLAY
-"
+margin_left = 175.0
+margin_top = 43.0
+margin_right = 561.0
+margin_bottom = 156.0
+rect_scale = Vector2( 0.9, 0.9 )
+theme = ExtResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "PLAY"
 align = 1
 
 [node name="Options" type="Sprite" parent="."]
@@ -59,13 +62,16 @@ scale = Vector2( 6, 6 )
 texture = ExtResource( 4 )
 
 [node name="OptionsLabel" type="Label" parent="Options"]
-margin_left = 282.0
-margin_top = 224.0
-margin_right = 632.0
-margin_bottom = 419.0
-theme = ExtResource( 1 )
-text = "OPTIONS
-"
+margin_left = 283.0
+margin_top = 218.0
+margin_right = 670.0
+margin_bottom = 331.0
+rect_scale = Vector2( 0.9, 0.9 )
+theme = ExtResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "OPTIONS"
 align = 1
 
 [node name="Quit" type="Sprite" parent="."]
@@ -77,12 +83,15 @@ texture = ExtResource( 5 )
 
 [node name="QuitLabel" type="Label" parent="Quit"]
 margin_left = 390.0
-margin_top = 395.0
-margin_right = 740.0
-margin_bottom = 590.0
-theme = ExtResource( 1 )
-text = "QUIT
-"
+margin_top = 390.0
+margin_right = 778.0
+margin_bottom = 503.0
+rect_scale = Vector2( 0.9, 0.9 )
+theme = ExtResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "QUIT"
 align = 1
 
 [node name="Tween" type="Tween" parent="."]

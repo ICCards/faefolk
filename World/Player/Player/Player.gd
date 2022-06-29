@@ -74,6 +74,7 @@ func adjust_bubble_position(lines):
 
 	
 func set_username(username):
+	Server.username = username
 	$Username.text = str(username)	
 	
 func initialize_camera_limits(top_left, bottom_right):
@@ -268,7 +269,7 @@ func remove_hoed_tile():
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
-		var id = get_node("/rootwa/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 		var data = {"id": id, "l": location}
 		Server.action("PICKAXE", data)
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
@@ -296,7 +297,7 @@ func set_player_setting(ownerNode):
 	if str(ownerNode).substr(0, 5) == "World":
 		setting = "World"
 		$DetectPathType/FootstepsSound.stream = Sounds.dirt_footsteps
-		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
 		$DetectPathType/FootstepsSound.play()
 		valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 		path_tiles = get_node("/root/World/PlacableTiles/PathTiles")

@@ -7,8 +7,8 @@ func _ready():
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
 	$TitleMusic.play()
 	Sounds.connect("volume_change", self, "change_title_volume")
-	$AnimatedSprite.playing = true
-	$AnimatedSprite2.playing = true
+	$Water1.playing = true
+	$Water2.playing = true
 	
 
 func spawn_player_in_menu(player):
@@ -41,6 +41,4 @@ func _on_CloseMenuArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if is_menu_open:
 			close_options_menu()
-
-
 

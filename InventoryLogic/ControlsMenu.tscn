@@ -1,0 +1,197 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://InventoryLogic/KeyBindingBtn.tscn" type="PackedScene" id=1]
+[ext_resource path="res://InventoryLogic/ControlsMenu.gd" type="Script" id=2]
+[ext_resource path="res://InventoryLogic/MenuTitle.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=4]
+
+[sub_resource type="StreamTexture" id=10]
+load_path = "res://.import/up arrow.png-aacac5dc46995855e65ffd85747ee008.stex"
+
+[sub_resource type="ButtonGroup" id=11]
+resource_name = "button_keys"
+
+[sub_resource type="ButtonGroup" id=20]
+
+[sub_resource type="ButtonGroup" id=13]
+resource_name = "button_keys"
+
+[sub_resource type="ButtonGroup" id=14]
+resource_name = "button_keys"
+
+[sub_resource type="ButtonGroup" id=15]
+resource_name = "button_keys"
+
+[sub_resource type="ButtonGroup" id=16]
+resource_name = "button_keys"
+
+[sub_resource type="ButtonGroup" id=17]
+resource_name = "button_keys"
+
+[node name="ControlsMenu" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 2 )
+
+[node name="ControlsTitle" type="Label" parent="."]
+margin_left = -8.0
+margin_top = 154.0
+margin_right = 328.0
+margin_bottom = 267.0
+theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "Controls:"
+
+[node name="UpButton" type="TextureButton" parent="."]
+margin_left = 448.0
+margin_top = 181.0
+margin_right = 508.0
+margin_bottom = 241.0
+texture_normal = SubResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = -21.0
+margin_top = 256.0
+margin_right = 504.0
+margin_bottom = 772.0
+grow_horizontal = 2
+mouse_filter = 2
+custom_constants/vseparation = 5
+custom_constants/hseparation = 100
+columns = 2
+
+[node name="MoveLeftLabel" type="Label" parent="GridContainer"]
+margin_right = 289.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Move left:"
+
+[node name="KeyBindingBtn" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 389.0
+margin_right = 505.0
+margin_bottom = 61.0
+group = SubResource( 11 )
+text = "A"
+action_name = "move_left"
+
+[node name="MoveRightLabel" type="Label" parent="GridContainer"]
+margin_top = 66.0
+margin_right = 289.0
+margin_bottom = 127.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Move right:"
+
+[node name="KeyBindingBtn2" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 389.0
+margin_top = 66.0
+margin_right = 505.0
+margin_bottom = 127.0
+group = SubResource( 20 )
+text = "D"
+action_name = "move_right"
+
+[node name="MoveUpLabel" type="Label" parent="GridContainer"]
+margin_top = 132.0
+margin_right = 289.0
+margin_bottom = 193.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Move up:"
+
+[node name="KeyBindingBtn3" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 389.0
+margin_top = 132.0
+margin_right = 505.0
+margin_bottom = 193.0
+group = SubResource( 13 )
+text = "w"
+action_name = "move_up"
+
+[node name="MoveDownLabel" type="Label" parent="GridContainer"]
+margin_top = 198.0
+margin_right = 289.0
+margin_bottom = 259.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Move down:"
+
+[node name="KeyBindingBtn4" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 389.0
+margin_top = 198.0
+margin_right = 505.0
+margin_bottom = 259.0
+group = SubResource( 14 )
+text = "S"
+action_name = "move_down"
+
+[node name="OpenMenuLabel" type="Label" parent="GridContainer"]
+margin_top = 264.0
+margin_right = 289.0
+margin_bottom = 325.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Open menu:"
+
+[node name="KeyBindingBtn6" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 389.0
+margin_top = 264.0
+margin_right = 505.0
+margin_bottom = 325.0
+group = SubResource( 15 )
+text = "E"
+action_name = "open_menu"
+
+[node name="ActionLabel" type="Label" parent="GridContainer"]
+margin_top = 330.0
+margin_right = 289.0
+margin_bottom = 391.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Action:"
+
+[node name="KeyBindingBtn7" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 389.0
+margin_top = 330.0
+margin_right = 505.0
+margin_bottom = 391.0
+group = SubResource( 16 )
+text = "X"
+action_name = "action"
+
+[node name="RotateObjectLabel" type="Label" parent="GridContainer"]
+margin_top = 396.0
+margin_right = 289.0
+margin_bottom = 457.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Rotate object:"
+
+[node name="KeyBindingBtn8" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 389.0
+margin_top = 396.0
+margin_right = 505.0
+margin_bottom = 457.0
+group = SubResource( 17 )
+text = "R"
+action_name = "rotate"

@@ -45,7 +45,7 @@ func _input(event):
 
 func text_entered(text):
 	if text != "":
-		var data = {"d": text}
+		var data =  {"u": Server.username, "d": text}
 		var message = Util.toMessage("SEND_MESSAGE",data)
 		Server._client.get_peer(1).put_packet(message)
 		inputField.text = ''

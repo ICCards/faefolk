@@ -21,7 +21,7 @@ func initialize(_player):
 
 func _ready():
 	animPlayer.play("idle")
-	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -16)
+	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
 	$FootstepsSound.play()
 	setAnimationTexture("idle_down")
 	character.LoadPlayerCharacter("human_male")
@@ -31,15 +31,15 @@ func _ready():
 
 func _physics_process(_delta):
 	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("ui_left") and not get_parent().is_menu_open:
+	if Input.is_action_pressed("move_left") and not get_parent().is_menu_open:
 		setAnimationTexture('walk_left')
 		velocity.x -= 1.0
 		$FootstepsSound.stream_paused = false
-	if Input.is_action_pressed("ui_right") and not get_parent().is_menu_open:
+	if Input.is_action_pressed("move_right") and not get_parent().is_menu_open:
 		setAnimationTexture('walk_right')	
 		velocity.x += 1.0
 		$FootstepsSound.stream_paused = false
-	if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left"):
+	if !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
 		velocity = Vector2.ZERO
 		setAnimationTexture('idle_down')
 		$FootstepsSound.stream_paused = true
