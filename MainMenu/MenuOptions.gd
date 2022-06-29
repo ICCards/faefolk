@@ -109,15 +109,17 @@ func _on_QuitArea_input_event(viewport, event, shape_idx):
 
 
 
-func _on_ConnectArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-		$SoundEffects.play()
-		IC.connect_plug(connect_callback)
-		
-func _on_ConnectArea_mouse_entered():
-	_play_hover_effect("quit")
+func _on_ConnectToPlugButton_pressed():
+	$SoundEffects.stream = Sounds.button_select
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.play()
+	IC.connect_plug(connect_callback)
 
-func _on_ConnectArea_mouse_exited():
+
+
+func _on_ConnectToPlugButton_mouse_entered():
+	_play_hover_effect("connect to plug")
+
+
+func _on_ConnectToPlugButton_mouse_exited():
 	hovered_button = ""

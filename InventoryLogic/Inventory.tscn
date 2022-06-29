@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://InventoryLogic/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Assets/Images/Inventory UI/inventory4.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Images/Inventory UI/exit icon.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory button.png" type="Texture" id=24]
+[ext_resource path="res://InventoryLogic/MenuTitle.tres" type="Theme" id=25]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -45,18 +46,6 @@ region_rect = Rect2( 0, 0, 48, 8 )
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 13 )
 region_rect = Rect2( 0, 0, 48, 8 )
-
-[sub_resource type="DynamicFontData" id=4]
-font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
-
-[sub_resource type="DynamicFont" id=5]
-size = 100
-outline_size = 3
-outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 4 )
-
-[sub_resource type="Theme" id=6]
-default_font = SubResource( 5 )
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )
@@ -545,7 +534,10 @@ margin_left = 71.0
 margin_top = 38.0
 margin_right = 543.0
 margin_bottom = 151.0
-theme = SubResource( 6 )
+theme = ExtResource( 25 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
 text = "INVENTORY"
 align = 1
 

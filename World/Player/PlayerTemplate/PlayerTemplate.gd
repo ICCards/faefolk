@@ -76,7 +76,7 @@ func Swing(tool_name, direction):
 	print(tool_name)
 	print(direction)
 	swingActive = true
-	toolEquippedSprite.set_texture(Images.returnToolSprite(tool_name, direction.to_lower()))
+	toolEquippedSprite.set_texture(Images.returnToolSprite(tool_name, "swing_" + direction.to_lower()))
 	setPlayerTexture("swing_" + direction.to_lower())
 	animation_player.play("swing")
 	yield(animation_player, "animation_finished")

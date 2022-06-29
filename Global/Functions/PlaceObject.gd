@@ -12,6 +12,7 @@ onready var path_tiles
 var rng = RandomNumberGenerator.new()
 
 func place_seed_in_world(id, item_name, location, days):
+	print("planted seed")
 	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 	valid_tiles.set_cellv(location, -1)
 	var plantedCrop = PlantedCrop.instance()

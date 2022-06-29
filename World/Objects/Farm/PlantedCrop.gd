@@ -101,7 +101,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 var isBeingHarvested = false	
 func harvest_and_remove():
 	if !isBeingHarvested:
-		var data = {"id": name, "n": "decorations","t":"seed"}
+		var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 		Server.action("ON_HIT", data)
 		$HarvestSound.play()
 		$CropText.visible = false
@@ -154,6 +154,6 @@ func _on_PlayAnimBox_body_exited(body):
 func _on_HurtBox_area_entered(area):
 	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 	valid_tiles.set_cellv(loc, 0)
-	var data = {"id": name, "n": "decorations", "t":"seed"}
+	var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 	Server.action("ON_HIT", data)
 	queue_free()
