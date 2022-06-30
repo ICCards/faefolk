@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://InventoryLogic/OptionsMenu.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/MenuTitle.tres" type="Theme" id=2]
@@ -19,6 +19,16 @@ region_rect = Rect2( 0, 0, 48, 8 )
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 48, 8 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
+
+[sub_resource type="DynamicFont" id=14]
+size = 52
+font_data = SubResource( 11 )
+
+[sub_resource type="Theme" id=13]
+default_font = SubResource( 14 )
 
 [sub_resource type="ButtonGroup" id=4]
 resource_name = "button_keys"
@@ -57,8 +67,8 @@ margin_right = 457.0
 margin_bottom = 350.0
 theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Music vol."
 
 [node name="SoundLabel" type="Label" parent="SoundMenu"]
@@ -68,8 +78,8 @@ margin_right = 498.0
 margin_bottom = 438.0
 theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Sound vol."
 
 [node name="AmbientLabel" type="Label" parent="SoundMenu"]
@@ -79,8 +89,8 @@ margin_right = 502.0
 margin_bottom = 518.0
 theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Ambient vol."
 
 [node name="FootstepLabel" type="Label" parent="SoundMenu"]
@@ -90,8 +100,8 @@ margin_right = 510.0
 margin_bottom = 602.0
 theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Footstep vol."
 
 [node name="Slider1" type="Control" parent="SoundMenu"]
@@ -241,6 +251,7 @@ stretch_mode = 5
 
 [node name="ControlsMenu" parent="." instance=ExtResource( 7 )]
 visible = false
+theme = SubResource( 13 )
 
 [node name="KeyBindingBtn" parent="ControlsMenu/GridContainer" index="1"]
 group = SubResource( 4 )

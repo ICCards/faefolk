@@ -112,6 +112,7 @@ func set_crafting_state():
 	
 	
 func set_options_state():
+	$OptionsMenu.initialize()
 	$InventorySlots.visible = false
 	$CraftingMenu.visible = false
 	$OptionsMenu.visible = true

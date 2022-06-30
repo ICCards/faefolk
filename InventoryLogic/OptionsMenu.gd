@@ -1,6 +1,10 @@
 extends Control
 
 
+func initialize():
+	$SoundMenu.visible = true
+	$ControlsMenu.visible = false
+
 func _ready():
 	$SoundMenu/Slider1/MusicSlider.value = Sounds.music_volume
 	$SoundMenu/Slider2/SoundSlider.value = Sounds.sound_volume
@@ -22,6 +26,7 @@ func _on_FootstepsSlider_value_changed(value):
 
 
 func _on_DownButton_pressed():
+	print("down button pressed")
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()

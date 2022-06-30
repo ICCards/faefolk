@@ -149,31 +149,31 @@ func movement_state(delta):
 	if !swingActive and not PlayerInventory.chatMode:
 		animation_player.play("movement")
 		var input_vector = Vector2.ZERO			
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0
 			direction = "UP"
 			walk_state(direction)
 			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("move_down"):
 			input_vector.y += 1.0
 			direction = "DOWN"
 			walk_state(direction)
 			var data = {"p":position,"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("ui_left"):
+		if Input.is_action_pressed("move_left"):
 			input_vector.x -= 1.0
 			direction = "LEFT"
 			walk_state(direction)
 			var data = {"p":position,"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("move_right"):
 			input_vector.x += 1.0
 			direction = "RIGHT"
 			walk_state(direction)
 			var data = {"p":position,"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)		
-		if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
+		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
 			idle_state(direction)
 			var data = {"p":position,"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)

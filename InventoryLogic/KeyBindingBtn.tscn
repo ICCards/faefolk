@@ -1,19 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://InventoryLogic/KeyBindingBtn.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=2]
-
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
-
-[sub_resource type="DynamicFont" id=2]
-size = 50
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 1 )
-
-[sub_resource type="Theme" id=3]
-default_font = SubResource( 2 )
 
 [sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 2 )
@@ -42,7 +30,6 @@ margin_right = 49.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 116, 57 )
 focus_mode = 0
-theme = SubResource( 3 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/focus = SubResource( 7 )
