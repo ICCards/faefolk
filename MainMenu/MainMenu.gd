@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 onready var PlayerMenuState = preload("res://MainMenu/PlayerMenuState.tscn")
 
@@ -7,16 +7,15 @@ func _ready():
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
 	$TitleMusic.play()
 	Sounds.connect("volume_change", self, "change_title_volume")
-	$Water1.playing = true
-	$Water2.playing = true
+	$Background/Water1.playing = true
+	$Background/Water2.playing = true
 	
 
-func spawn_player_in_menu(player):
-	if not player.empty():
-		var playerMenuState = PlayerMenuState.instance()
-		playerMenuState.initialize(player)
-		add_child(playerMenuState)
-		playerMenuState.global_position = Vector2(600, 472 )
+func spawn_player_in_menu(var player = ""):
+	var playerMenuState = PlayerMenuState.instance()
+	#playerMenuState.initialize(player)
+	add_child(playerMenuState)
+	playerMenuState.global_position = Vector2(600, 472 )
 
 func change_title_volume():
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
@@ -28,17 +27,21 @@ func toggle_menu_open():
 		open_options_menu()
 
 func open_options_menu():
-	$Menu.visible = true
+	$OptionsMenu/OptionsMenu.initialize()
+	$OptionsMenu.visible = true
 	is_menu_open = true
-	$CloseMenuArea/CollisionPolygon2D.disabled = false
+	$UserInterface/CloseMenuArea/CollisionPolygon2D.disabled = false
 	
 func close_options_menu():
-	$Menu.visible = false
+	$OptionsMenu.visible = false
 	is_menu_open = false
-	$CloseMenuArea/CollisionPolygon2D.disabled = true
+	$UserInterface/CloseMenuArea/CollisionPolygon2D.disabled = true
 
 func _on_CloseMenuArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if is_menu_open:
 			close_options_menu()
 
+
+func _on_OptionsIconButton_pressed():
+	toggle_menu_open()

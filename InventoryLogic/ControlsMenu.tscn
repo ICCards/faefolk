@@ -70,8 +70,8 @@ margin_right = 289.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Move left:"
 
 [node name="KeyBindingBtn" parent="GridContainer" instance=ExtResource( 1 )]
@@ -88,8 +88,8 @@ margin_right = 289.0
 margin_bottom = 127.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Move right:"
 
 [node name="KeyBindingBtn2" parent="GridContainer" instance=ExtResource( 1 )]
@@ -107,8 +107,8 @@ margin_right = 289.0
 margin_bottom = 193.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Move up:"
 
 [node name="KeyBindingBtn3" parent="GridContainer" instance=ExtResource( 1 )]
@@ -126,8 +126,8 @@ margin_right = 289.0
 margin_bottom = 259.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Move down:"
 
 [node name="KeyBindingBtn4" parent="GridContainer" instance=ExtResource( 1 )]
@@ -145,8 +145,8 @@ margin_right = 289.0
 margin_bottom = 325.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Open menu:"
 
 [node name="KeyBindingBtn6" parent="GridContainer" instance=ExtResource( 1 )]
@@ -164,8 +164,8 @@ margin_right = 289.0
 margin_bottom = 391.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Action:"
 
 [node name="KeyBindingBtn7" parent="GridContainer" instance=ExtResource( 1 )]
@@ -183,8 +183,8 @@ margin_right = 289.0
 margin_bottom = 457.0
 theme = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "Rotate object:"
 
 [node name="KeyBindingBtn8" parent="GridContainer" instance=ExtResource( 1 )]
