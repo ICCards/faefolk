@@ -21,6 +21,7 @@ margin_right = 90.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 84, 84 )
 expand = true
+stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
 margin_left = 65.0

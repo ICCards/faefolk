@@ -104,7 +104,6 @@ func _on_QuitArea_input_event(viewport, event, shape_idx):
 
 func _on_ShopArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		get_parent().get_parent().toggle_menu_open()
 		$SoundEffects.stream = Sounds.button_select
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
@@ -117,10 +116,10 @@ func _on_ConnectToPlugButton_pressed():
 	#IC.connect_plug(connect_callback)
 	$ConnectToPlug.visible = false
 	$LoadingIndicator.visible = true
-	yield(get_tree().create_timer(5), "timeout")
+	yield(get_tree().create_timer(2.5), "timeout")
 	$LoadingIndicator.visible = false
 	$PlayShopQuit.visible = true
-	get_parent().get_parent().spawn_player_in_menu()
+	get_parent().spawn_player_in_menu()
 
 
 

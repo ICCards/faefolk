@@ -1217,7 +1217,6 @@ cell_y_sort = true
 format = 1
 
 [node name="ObjectTiles" type="TileMap" parent="PlacableTiles"]
-position = Vector2( -1, 1 )
 tile_set = SubResource( 232 )
 cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2

@@ -26,4 +26,5 @@ func get_subtile_with_priority(id, tilemap: TileMap):
 				tile_array.append(Vector2(x,y))
 	return tile_array[randi() % tile_array.size()]
 	
-
+func _set_cell(tilemap, x, y, id):
+	tilemap.set_cell(x, y, id, false, false, false, Tiles.get_subtile_with_priority(id,tilemap))

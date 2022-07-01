@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Images/Misc/play.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/Misc/options.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Misc/quit.png" type="Texture" id=5]
-[ext_resource path="res://InventoryLogic/MenuTitle.tres" type="Theme" id=6]
+[ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=6]
 [ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=7]
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_7.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_5.png" type="Texture" id=10]
@@ -167,7 +167,7 @@ visible = false
 position = Vector2( 1349, -52 )
 scale = Vector2( 18, 18 )
 frames = SubResource( 6 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="Tween" type="Tween" parent="."]

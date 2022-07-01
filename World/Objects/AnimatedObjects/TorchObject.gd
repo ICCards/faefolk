@@ -19,7 +19,7 @@ func _on_BreakObjectBox_area_entered(area):
 	Server.action("ON_HIT", data)
 	valid_tiles.set_cellv(loc, 0)
 	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType("torch")
+	itemDrop.initItemDropType(item_name)
 	get_parent().call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position 
 	queue_free()

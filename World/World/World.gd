@@ -143,16 +143,16 @@ func buildMap(map):
 		if map["dirt"][id]["isHoed"]:
 			hoed.set_cellv(loc, 0)
 		if Util.chance(5):
-			_set_cell( sand, loc.x, loc.y, 1 )
+			Tiles._set_cell( sand, loc.x, loc.y, 1 )
 		else:
-			_set_cell( sand, loc.x, loc.y, 0 )
+			Tiles._set_cell( sand, loc.x, loc.y, 0 )
 	hoed.update_bitmask_region()
 	watered.update_bitmask_region()
 	print("LOADED DIRT")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["dark_grass"]:
 		var loc = Util.string_to_vector2(map["dark_grass"][id])
-		_set_cell(sand, loc.x, loc.y, 0)
+		Tiles._set_cell(sand, loc.x, loc.y, 0)
 		grass.set_cellv(loc, 0)
 	print("LOADED GRASS")
 	get_node("loadingScreen").set_phase("Building grass")
@@ -271,39 +271,42 @@ func buildMap(map):
 	generate_border_tiles()
 	yield(get_tree().create_timer(0.5), "timeout")
 	border.update_bitmask_region()
-	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Spawning in")
-	grass.update_bitmask_region()
-	yield(get_tree().create_timer(0.5), "timeout")
-	darkGrass.update_bitmask_region()
-	yield(get_tree().create_timer(0.5), "timeout")
-	water.update_bitmask_region()
+	yield(get_tree().create_timer(1.0), "timeout")
 	Server.player_state = "WORLD"
 	Server.isLoaded = true
 	print("Map loaded")
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -14)
 	$AmbientSound.play()
+	yield(get_tree().create_timer(1.0), "timeout")
 	get_node("loadingScreen").queue_free()
 	spawnPlayerExample()
 	#spawnPlayer(Server.player)
 	Server.world = self
 	
 func check_and_remove_invalid_autotiles(map):
-	for i in range(2):
+	for i in range(6):
 		for id in map["grass"]: 
 			var loc = Util.string_to_vector2(map["grass"][id])
 			if Tiles.return_neighboring_cells(loc, darkGrass) <= 1:
 				darkGrass.set_cellv(loc, -1)
+		darkGrass.update_bitmask_region()
+		yield(get_tree().create_timer(0.25), "timeout")
 		for id in map["dark_grass"]: 
 			var loc = Util.string_to_vector2(map["dark_grass"][id])
 			if Tiles.return_neighboring_cells(loc, grass) <= 1:
 				grass.set_cellv(loc, -1)
+		grass.update_bitmask_region()
+		yield(get_tree().create_timer(0.25), "timeout")
 		for id in map["water"]:
 			var loc = Util.string_to_vector2(map["water"][id])
 			if Tiles.return_neighboring_cells(loc, water) <= 1:
 				water.set_cellv(loc, -1)
-		yield(get_tree().create_timer(0.5), "timeout")
-	
+		water.update_bitmask_region()
+		yield(get_tree().create_timer(0.25), "timeout")
+
+
+
 func build_valid_tiles():
 	for x in range(298):
 		for y in range(298):
@@ -339,17 +342,15 @@ func generate_border_tiles():
 	border.set_cellv(Vector2(0, 299), 3)
 	
 	for i in range(306):
-		_set_cell(border, i-2, -4, 4)
-		_set_cell(border, i-2, -5, 4)
-		_set_cell(border, i-2, 300, 4)
-		_set_cell(border, i-2, 301, 4)
-		_set_cell(border, -1, i-3, 4)
-		_set_cell(border, -2, i-3, 4)
-		_set_cell(border, 300, i-3, 4)
-		_set_cell(border, 301, i-3, 4)
-
-func _set_cell(tilemap, x, y, id):
-	tilemap.set_cell(x, y, id, false, false, false, Tiles.get_subtile_with_priority(id,tilemap))
+		Tiles._set_cell(border, i-2, -4, 4)
+		Tiles._set_cell(border, i-2, -5, 4)
+		Tiles._set_cell(border, i-2, 300, 4)
+		Tiles._set_cell(border, i-2, 301, 4)
+		Tiles._set_cell(border, -1, i-3, 4)
+		Tiles._set_cell(border, -2, i-3, 4)
+		Tiles._set_cell(border, 300, i-3, 4)
+		Tiles._set_cell(border, 301, i-3, 4)
+		
 	
 func ChangeTile(data):
 	var loc = Util.string_to_vector2(data["l"])

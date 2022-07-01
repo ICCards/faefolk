@@ -36,6 +36,7 @@ var velocity := Vector2.ZERO
 
 func _ready():
 	set_username("")
+	$Camera2D/DayNight.color = Color("#1c579e")
 	#IC.getUsername(principal,username_callback)
 	set_player_setting(get_parent().get_parent())
 	_play_background_music()
