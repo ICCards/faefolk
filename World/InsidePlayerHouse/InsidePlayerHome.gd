@@ -25,7 +25,7 @@ func _ready():
 func _on_Doorway_area_entered(_area):
 	Server.isLoaded = false
 	Server.world = null
-	SceneChanger.change_scene("res://World/World.tscn", "door")
+	SceneChanger.change_scene("res://World/World/World.tscn", "door")
 
 	
 func spawnPlayer():
@@ -36,7 +36,8 @@ func spawnPlayer():
 	player.direction = "UP"
 	player.name = Server.player_id #str(value["id"])
 	player.character = _character.new()
-	player.character.LoadPlayerCharacter(value["c"]) 
+	#player.character.LoadPlayerCharacter(value["c"]) 
+	player.character.LoadPlayerCharacter("human_male") 
 	$Players.add_child(player)
 	player.position = Vector2(190, 430)
 

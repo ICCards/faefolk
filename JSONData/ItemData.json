@@ -279,6 +279,16 @@
       "StackSize": 99,
       "Description": "Used to generate light"
   },
+  "campfire" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 99,
+      "Description": "Used to generate light"
+  },
+  "fire pedestal" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 99,
+      "Description": "Used to generate light"
+  },
   "wood fence": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
