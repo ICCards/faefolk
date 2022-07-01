@@ -12,7 +12,7 @@ var fence_tiles
 var object_tiles
 var path_tiles
 var principal
-var character
+var character 
 var setting
 var is_mouse_over_hotbar
 var username_callback = JavaScript.create_callback(self, "_username_callback")
@@ -34,9 +34,12 @@ var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
 
+const _character = preload("res://Global/Data/Characters.gd")
+
 func _ready():
+	character = _character.new()
+	character.LoadPlayerCharacter("human_male") 
 	set_username("")
-	$Camera2D/DayNight.color = Color("#1c579e")
 	#IC.getUsername(principal,username_callback)
 	set_player_setting(get_parent().get_parent())
 	_play_background_music()

@@ -11,6 +11,7 @@ onready var watered = $FarmingTiles/WateredAutoTiles
 
 onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
+onready var Player_pet = preload("res://World/Player/Pet/PlayerPet.tscn")
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var BranchObject = preload("res://World/Objects/Nature/Trees/TreeBranchObject.tscn")
@@ -100,6 +101,10 @@ func spawnPlayerExample():
 		player.position = sand.map_to_world(Vector2(4,4)) 
 	else: 
 		player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
+	var player_pet = Player_pet.instance()
+	add_child(player_pet)
+	player_pet.position = sand.map_to_world(Vector2(8,8)) 
+	
 	print('getting map')
 		
 		
