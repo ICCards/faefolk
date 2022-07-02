@@ -289,6 +289,11 @@
       "StackSize": 99,
       "Description": "Used to generate light"
   },
+  "fire pedestal tall" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 99,
+      "Description": "Used to generate light"
+  },
   "wood fence": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
@@ -327,6 +332,21 @@
   "house": {
       "ItemCategory": "Placable object",
       "StackSize": 1,
+      "Description": "placable house"
+  },
+  "crafting table": {
+      "ItemCategory": "Placable object",
+      "StackSize": 99,
+      "Description": "placable house"
+  },
+  "machine": {
+      "ItemCategory": "Placable object",
+      "StackSize": 99,
+      "Description": "placable house"
+  },
+  "kitchen": {
+      "ItemCategory": "Placable object",
+      "StackSize": 99,
       "Description": "placable house"
   }
   

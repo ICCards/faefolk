@@ -1,17 +1,61 @@
 extends Node2D
 
 
+var page1 = [
+	"wood box",
+	"wood barrel",
+	"wood fence",
+	"torch",
+	"wood path",
+	"stone path",
+	"wood chest",
+	"stone chest",
+	"campfire",
+	"fire pedestal"
+]
+
+var page2 = [
+	"crafting table",
+	"kitchen",
+	"machine",
+	"fire pedestal tall",
+	"house"
+]
+
+var page
+
+func _on_DownButton_pressed():
+	play_craft_sound()
+	page = 2
+	$Page1.visible = false
+	$Page2.visible = true
+
+func _on_UpButton_pressed():
+	play_craft_sound()
+	page = 1
+	$Page1.visible = true
+	$Page2.visible = false
+
+
 func _ready():
+	page = 1
 	initialize_crafting()
 
 func initialize_crafting():
 	var wood = PlayerInventory.return_player_wood_and_stone()[0]
 	var stone = PlayerInventory.return_player_wood_and_stone()[1]
-	for item in JsonData.crafting_data:
-		if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
-			get_node(item).modulate = Color(1, 1, 1, 1)
-		else:
-			get_node(item).modulate = Color(1, 1, 1, 0.4)
+	if page == 1:
+		for item in page1:
+			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+				$Page1.get_node(item).modulate = Color(1, 1, 1, 1)
+			else:
+				$Page1.get_node(item).modulate = Color(1, 1, 1, 0.4)
+	elif page == 2:
+		for item in page2:
+			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+				$Page2.get_node(item).modulate = Color(1, 1, 1, 1)
+			else:
+				$Page2.get_node(item).modulate = Color(1, 1, 1, 0.4)
 
 func _physics_process(delta):
 	if item != null:
@@ -28,12 +72,12 @@ func entered_crafting_area(_item):
 	$SoundEffects.play()
 	item = _item
 	if item == "house":
-		$Tween.interpolate_property(get_node(item), "scale",
-			get_node(item).scale, Vector2(0.545, 0.545), 0.15,
+		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + item), "scale",
+			get_node("Page" + str(page) + "/" + item).scale, Vector2(0.75, 0.75), 0.15,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	else:
-		$Tween.interpolate_property(get_node(item), "scale",
-			get_node(item).scale, Vector2(3.35, 3.35), 0.15,
+		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + item), "scale",
+			get_node("Page" + str(page) + "/" + item).scale, Vector2(3.35, 3.35), 0.15,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
 	$Tween.start()
@@ -41,14 +85,17 @@ func entered_crafting_area(_item):
 func exited_crafting_area(_item):
 	item = null
 	if _item == "house":
-		$Tween.interpolate_property(get_node(_item), "scale",
-		get_node(_item).scale, Vector2(0.5, 0.5), 0.15,
+		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
+		get_node("Page" + str(page) + "/" + _item).scale, Vector2(0.7, 0.7), 0.15,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	else:
-		$Tween.interpolate_property(get_node(_item), "scale",
-			get_node(_item).scale, Vector2(3, 3), 0.15,
+		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
+			get_node("Page" + str(page) + "/" + _item).scale, Vector2(3, 3), 0.15,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
+	
+
+
 
 var item = null
 func _on_WoodBoxArea_mouse_entered():
@@ -69,7 +116,18 @@ func _on_StonePathArea_mouse_entered():
 	entered_crafting_area("stone path")
 func _on_HouseArea_mouse_entered():
 	entered_crafting_area("house")
-
+func _on_CampfireArea_mouse_entered():
+	entered_crafting_area("campfire")
+func _on_FirePedestalArea_mouse_entered():
+	entered_crafting_area("fire pedestal")
+func _on_TallPedestalArea_mouse_entered():
+	entered_crafting_area("fire pedestal tall")
+func _on_MachineArea_mouse_entered():
+	entered_crafting_area("machine")
+func _on_CraftingTable_mouse_entered():
+	entered_crafting_area("crafting table")
+func _on_KitchenArea_mouse_entered():
+	entered_crafting_area("kitchen")
 
 
 func _on_WoodBoxArea_mouse_exited():
@@ -90,6 +148,18 @@ func _on_StonePathArea_mouse_exited():
 	exited_crafting_area("stone path")
 func _on_HouseArea_mouse_exited():
 	exited_crafting_area("house")
+func _on_CampfireArea_mouse_exited():
+	exited_crafting_area("campfire")
+func _on_FirePedestalArea_mouse_exited():
+	exited_crafting_area("fire pedestal")
+func _on_TallPedestalArea_mouse_exited():
+	exited_crafting_area("fire pedestal tall")
+func _on_MachineArea_mouse_exited():
+	exited_crafting_area("machine")
+func _on_CraftingTable_mouse_exited():
+	exited_crafting_area("crafting table")
+func _on_KitchenArea_mouse_exited():
+	exited_crafting_area("kitchen")
 
 
 func play_craft_sound():
@@ -142,5 +212,35 @@ func _on_HouseArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		play_craft_sound()
 		PlayerInventory.craft_item("house")
+		initialize_crafting()
+func _on_CampfireArea_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
+		PlayerInventory.craft_item("campfire")
+		initialize_crafting()
+func _on_FirePedestalArea_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
+		PlayerInventory.craft_item("fire pedestal")
+		initialize_crafting()
+func _on_TallPedestalArea_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
+		PlayerInventory.craft_item("fire pedestal tall")
+		initialize_crafting()
+func _on_MachineArea_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
+		PlayerInventory.craft_item("machine")
+		initialize_crafting()
+func _on_CraftingTable_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
+		PlayerInventory.craft_item("crafting table")
+		initialize_crafting()
+func _on_KitchenArea_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
+		PlayerInventory.craft_item("kitchen")
 		initialize_crafting()
 

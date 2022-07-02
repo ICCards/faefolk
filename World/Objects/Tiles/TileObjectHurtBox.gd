@@ -26,6 +26,13 @@ func _ready():
 		$TypeOfTileArea.set_collision_mask(512)
 	elif item_name == "stone path":
 		$TypeOfTileArea.set_collision_mask(1024)
+	elif item_name == "torch" or \
+	item_name == "campfire" or \
+	item_name == "fire pedestal" or \
+	item_name == "fire pedestal tall":
+		$Light2D.enabled = true
+	elif item_name == "house":
+		queue_free()
 		
 func PlayEffect(_player_id):
 	valid_tiles.set_cellv(location, 0)
@@ -39,6 +46,13 @@ func PlayEffect(_player_id):
 		path_tiles.set_cellv(location, -1)
 	else:
 		placable_object_tiles.set_cellv(location, -1)
+	if item_name == "stone path":
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+	else: 
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+	$SoundEffects.play()
+	yield($SoundEffects, "finished")
 	queue_free()
 
 func set_dimensions():
@@ -58,6 +72,7 @@ func _on_HurtBox_area_entered(area):
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
 
 	if item_name == "wood chest" or item_name == "stone chest":
