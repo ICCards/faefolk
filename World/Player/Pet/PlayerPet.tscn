@@ -43,8 +43,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 6, 5 )
+[sub_resource type="CapsuleShape2D" id=22]
+radius = 4.66667
+height = 6.66667
 
 [node name="PlayerPet" type="KinematicBody2D"]
 position = Vector2( 0, -5.96046e-08 )
@@ -54,10 +55,10 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -19.3333 )
 frames = SubResource( 9 )
-frame = 7
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -2.33334 )
-scale = Vector2( 1, 1 )
+position = Vector2( 0, -2.66667 )
+rotation = 1.5708
 shape = SubResource( 22 )

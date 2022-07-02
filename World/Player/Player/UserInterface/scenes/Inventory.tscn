@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -22,6 +22,13 @@
 [ext_resource path="res://Assets/Images/inventory_icons/wood chest.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Images/Inventory UI/exit icon.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory button.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Images/placable_object_preview/campfire.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Images/placable_object_preview/machine.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Images/placable_object_preview/crafting table.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Images/placable_object_preview/fire pedestal tall.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Images/placable_object_preview/kitchen.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Images/placable_object_preview/fire pedestal.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Images/Misc/up arrow.png" type="Texture" id=29]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -31,6 +38,24 @@ extents = Vector2( 84, 65 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 48, 48 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 48, 86.5 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 47, 132 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 86, 114.75 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 90.125, 69.1875 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 96.0625, 81.0938 )
+
+[sub_resource type="StreamTexture" id=11]
+load_path = "res://.import/up arrow.png-aacac5dc46995855e65ffd85747ee008.stex"
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,114 +69,208 @@ mouse_filter = 2
 texture = ExtResource( 5 )
 
 [node name="CraftingMenu" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 7 )
 
-[node name="WoodBoxArea" type="Area2D" parent="CraftingMenu"]
+[node name="Page1" type="Node2D" parent="CraftingMenu"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodBoxArea"]
+[node name="WoodBoxArea" type="Area2D" parent="CraftingMenu/Page1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/WoodBoxArea"]
 position = Vector2( 103, 333 )
 shape = SubResource( 7 )
 
-[node name="WoodBarrelArea" type="Area2D" parent="CraftingMenu"]
+[node name="WoodBarrelArea" type="Area2D" parent="CraftingMenu/Page1"]
 position = Vector2( -19, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodBarrelArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/WoodBarrelArea"]
 position = Vector2( 259.75, 332 )
 shape = SubResource( 7 )
 
-[node name="WoodFenceArea" type="Area2D" parent="CraftingMenu"]
+[node name="WoodFenceArea" type="Area2D" parent="CraftingMenu/Page1"]
 position = Vector2( 118, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodFenceArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/WoodFenceArea"]
 position = Vector2( 259.75, 332 )
 shape = SubResource( 7 )
 
-[node name="TorchArea" type="Area2D" parent="CraftingMenu"]
+[node name="TorchArea" type="Area2D" parent="CraftingMenu/Page1"]
 position = Vector2( 255, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/TorchArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/TorchArea"]
 position = Vector2( 259.75, 332 )
 shape = SubResource( 7 )
 
-[node name="WoodChestArea" type="Area2D" parent="CraftingMenu"]
+[node name="WoodChestArea" type="Area2D" parent="CraftingMenu/Page1"]
 position = Vector2( 255, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodChestArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/WoodChestArea"]
 position = Vector2( -99, 514 )
 shape = SubResource( 8 )
 
-[node name="StoneChestArea" type="Area2D" parent="CraftingMenu"]
-position = Vector2( 255, 0 )
+[node name="StoneChestArea" type="Area2D" parent="CraftingMenu/Page1"]
+position = Vector2( 211, 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/StoneChestArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/StoneChestArea"]
 position = Vector2( -55, 680 )
 shape = SubResource( 8 )
 
-[node name="WoodPathArea" type="Area2D" parent="CraftingMenu"]
+[node name="WoodPathArea" type="Area2D" parent="CraftingMenu/Page1"]
 position = Vector2( 255, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/WoodPathArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/WoodPathArea"]
 position = Vector2( 92, 505 )
 shape = SubResource( 9 )
 
-[node name="StonePathArea" type="Area2D" parent="CraftingMenu"]
+[node name="StonePathArea" type="Area2D" parent="CraftingMenu/Page1"]
 position = Vector2( 255, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/StonePathArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/StonePathArea"]
 position = Vector2( 239, 505 )
 shape = SubResource( 9 )
 
-[node name="HouseArea" type="Area2D" parent="CraftingMenu"]
-position = Vector2( 255, 0 )
+[node name="CampfireArea" type="Area2D" parent="CraftingMenu/Page1"]
+position = Vector2( 65, 341 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/HouseArea"]
-polygon = PoolVector2Array( 117, 760, 246, 760, 246, 645, 181, 580, 114, 649 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/CampfireArea"]
+position = Vector2( 259.75, 332 )
+shape = SubResource( 7 )
 
-[node name="wood box" type="Sprite" parent="CraftingMenu"]
+[node name="FirePedestalArea" type="Area2D" parent="CraftingMenu/Page1"]
+position = Vector2( 196, 338 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/FirePedestalArea"]
+position = Vector2( 259.75, 323.5 )
+shape = SubResource( 10 )
+
+[node name="wood box" type="Sprite" parent="CraftingMenu/Page1"]
 position = Vector2( 103, 327 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 6 )
 
-[node name="wood barrel" type="Sprite" parent="CraftingMenu"]
+[node name="wood barrel" type="Sprite" parent="CraftingMenu/Page1"]
 position = Vector2( 240, 345 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 8 )
 
-[node name="wood fence" type="Sprite" parent="CraftingMenu"]
+[node name="wood fence" type="Sprite" parent="CraftingMenu/Page1"]
 position = Vector2( 378, 335 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 10 )
 
-[node name="torch" type="Sprite" parent="CraftingMenu"]
+[node name="torch" type="Sprite" parent="CraftingMenu/Page1"]
 position = Vector2( 516, 336 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 9 )
 
-[node name="wood path" type="Sprite" parent="CraftingMenu"]
+[node name="wood path" type="Sprite" parent="CraftingMenu/Page1"]
 position = Vector2( 347, 505 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 12 )
 
-[node name="stone path" type="Sprite" parent="CraftingMenu"]
+[node name="stone path" type="Sprite" parent="CraftingMenu/Page1"]
 position = Vector2( 494, 505 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 11 )
 
-[node name="wood chest" type="Sprite" parent="CraftingMenu"]
+[node name="wood chest" type="Sprite" parent="CraftingMenu/Page1"]
 position = Vector2( 156, 490 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 16 )
 
-[node name="stone chest" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 200, 657 )
+[node name="stone chest" type="Sprite" parent="CraftingMenu/Page1"]
+position = Vector2( 156, 660 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 
-[node name="house" type="Sprite" parent="CraftingMenu"]
-position = Vector2( 436, 673 )
-scale = Vector2( 0.5, 0.5 )
+[node name="campfire" type="Sprite" parent="CraftingMenu/Page1"]
+position = Vector2( 325, 660 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 23 )
+
+[node name="fire pedestal" type="Sprite" parent="CraftingMenu/Page1"]
+position = Vector2( 457, 661 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 28 )
+
+[node name="DownButton" type="TextureButton" parent="CraftingMenu/Page1"]
+margin_left = 574.0
+margin_top = 782.0
+margin_right = 634.0
+margin_bottom = 842.0
+rect_rotation = 180.0
+texture_normal = ExtResource( 29 )
+expand = true
+stretch_mode = 5
+
+[node name="Page2" type="Node2D" parent="CraftingMenu"]
+visible = false
+
+[node name="house" type="Sprite" parent="CraftingMenu/Page2"]
+position = Vector2( 441, 632 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 13 )
+
+[node name="crafting table" type="Sprite" parent="CraftingMenu/Page2"]
+position = Vector2( 478, 356 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 25 )
+
+[node name="kitchen" type="Sprite" parent="CraftingMenu/Page2"]
+position = Vector2( 187, 611 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 27 )
+
+[node name="machine" type="Sprite" parent="CraftingMenu/Page2"]
+position = Vector2( 296, 356 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 24 )
+
+[node name="fire pedestal tall" type="Sprite" parent="CraftingMenu/Page2"]
+position = Vector2( 127, 370 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 26 )
+
+[node name="HouseArea" type="Area2D" parent="CraftingMenu/Page2"]
+position = Vector2( 255, 0 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/Page2/HouseArea"]
+polygon = PoolVector2Array( 93, 754, 278, 754, 287, 597, 186, 498, 85, 597 )
+
+[node name="TallPedestalArea" type="Area2D" parent="CraftingMenu/Page2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page2/TallPedestalArea"]
+position = Vector2( 124, 373 )
+shape = SubResource( 12 )
+
+[node name="MachineArea" type="Area2D" parent="CraftingMenu/Page2"]
+position = Vector2( 131, -2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page2/MachineArea"]
+position = Vector2( 148, 388.75 )
+shape = SubResource( 13 )
+
+[node name="CraftingTable" type="Area2D" parent="CraftingMenu/Page2"]
+position = Vector2( 131, -2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page2/CraftingTable"]
+position = Vector2( 347.125, 433 )
+shape = SubResource( 14 )
+
+[node name="KitchenArea" type="Area2D" parent="CraftingMenu/Page2"]
+position = Vector2( -180, 252 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page2/KitchenArea"]
+position = Vector2( 366.938, 422.094 )
+shape = SubResource( 15 )
+
+[node name="UpButton" type="TextureButton" parent="CraftingMenu/Page2"]
+margin_left = 514.0
+margin_top = 245.0
+margin_right = 574.0
+margin_bottom = 305.0
+texture_normal = SubResource( 11 )
+expand = true
+stretch_mode = 5
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="CraftingMenu"]
 
@@ -406,33 +525,53 @@ margin_top = 64.0
 margin_right = 66.0
 margin_bottom = 64.0
 
-[connection signal="input_event" from="CraftingMenu/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_exited"]
-[connection signal="input_event" from="CraftingMenu/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_mouse_exited"]
-[connection signal="input_event" from="CraftingMenu/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_mouse_exited"]
-[connection signal="input_event" from="CraftingMenu/TorchArea" to="CraftingMenu" method="_on_TorchArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/TorchArea" to="CraftingMenu" method="_on_TorchArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/TorchArea" to="CraftingMenu" method="_on_TorchArea_mouse_exited"]
-[connection signal="input_event" from="CraftingMenu/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_mouse_exited"]
-[connection signal="input_event" from="CraftingMenu/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_mouse_exited"]
-[connection signal="input_event" from="CraftingMenu/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_mouse_exited"]
-[connection signal="input_event" from="CraftingMenu/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_mouse_exited"]
-[connection signal="input_event" from="CraftingMenu/HouseArea" to="CraftingMenu" method="_on_HouseArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/WoodBarrelArea" to="CraftingMenu" method="_on_WoodBarrelArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/WoodFenceArea" to="CraftingMenu" method="_on_WoodFenceArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/TorchArea" to="CraftingMenu" method="_on_TorchArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/TorchArea" to="CraftingMenu" method="_on_TorchArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/TorchArea" to="CraftingMenu" method="_on_TorchArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/WoodChestArea" to="CraftingMenu" method="_on_WoodChestArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/StoneChestArea" to="CraftingMenu" method="_on_StoneChestArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/WoodPathArea" to="CraftingMenu" method="_on_WoodPathArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/StonePathArea" to="CraftingMenu" method="_on_StonePathArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/CampfireArea" to="CraftingMenu" method="_on_CampfireArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/CampfireArea" to="CraftingMenu" method="_on_CampfireArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/CampfireArea" to="CraftingMenu" method="_on_CampfireArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_mouse_exited"]
+[connection signal="pressed" from="CraftingMenu/Page1/DownButton" to="CraftingMenu" method="_on_DownButton_pressed"]
+[connection signal="input_event" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page2/MachineArea" to="CraftingMenu" method="_on_MachineArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page2/MachineArea" to="CraftingMenu" method="_on_MachineArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page2/MachineArea" to="CraftingMenu" method="_on_MachineArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page2/CraftingTable" to="CraftingMenu" method="_on_CraftingTable_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page2/CraftingTable" to="CraftingMenu" method="_on_CraftingTable_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page2/CraftingTable" to="CraftingMenu" method="_on_CraftingTable_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page2/KitchenArea" to="CraftingMenu" method="_on_KitchenArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page2/KitchenArea" to="CraftingMenu" method="_on_KitchenArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page2/KitchenArea" to="CraftingMenu" method="_on_KitchenArea_mouse_exited"]
+[connection signal="pressed" from="CraftingMenu/Page2/UpButton" to="CraftingMenu" method="_on_UpButton_pressed"]
 [connection signal="pressed" from="Buttons/Inventory" to="." method="_on_Inventory_pressed"]
 [connection signal="pressed" from="Buttons/Crafting" to="." method="_on_Crafting_pressed"]
 [connection signal="pressed" from="Buttons/Options" to="." method="_on_Options_pressed"]

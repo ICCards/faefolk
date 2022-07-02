@@ -37,6 +37,7 @@ var velocity := Vector2.ZERO
 const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
+	$Camera2D/DayNight.color = Color("#1c579e")
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male") 
 	set_username("")

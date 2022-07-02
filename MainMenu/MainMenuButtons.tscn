@@ -48,6 +48,7 @@ mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="PlayShopQuit" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -164,7 +165,6 @@ visible = false
 position = Vector2( 1349, -52 )
 scale = Vector2( 18, 18 )
 frames = SubResource( 6 )
-frame = 2
 playing = true
 
 [node name="Tween" type="Tween" parent="."]

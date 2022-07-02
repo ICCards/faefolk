@@ -1,5 +1,22 @@
 extends Node
 
+
+signal frame_change
+var frame = 0
+
+func _ready():
+	return_frame()
+
+func return_frame():
+	yield(get_tree().create_timer(0.75), "timeout")
+	frame += 1
+	if frame == 6:
+		frame = 0
+	emit_signal("frame_change")
+	return_frame()
+	
+
+
 # WEAPONS #
 
 func returnToolSprite(toolName, direction):
