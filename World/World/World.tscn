@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://water.tres" type="TileSet" id=2]
@@ -1111,46 +1111,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 9/shapes = [  ]
 9/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=240]
-points = PoolVector2Array( 5.81408, 43.723, 25.4415, 43.6109, 26.8995, 56.2845, 5.14114, 56.7332 )
-
-[sub_resource type="TileSet" id=237]
-0/name = "campfire.tres 0"
-0/texture = ExtResource( 10 )
-0/tex_offset = Vector2( 0, -32 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 32, 64 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 240 )
-0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 240 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-0/z_index = 0
-1/name = "fire_pedestal_tall.tres 1"
-1/texture = ExtResource( 11 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 32, 96 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-
 [sub_resource type="TileSet" id=234]
 0/name = "hoed_layer.png 0"
 0/texture = ExtResource( 5 )
@@ -1266,12 +1226,6 @@ format = 1
 [node name="PathTiles" type="TileMap" parent="PlacableTiles"]
 tile_set = SubResource( 233 )
 cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="AnimatedTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 237 )
-cell_size = Vector2( 32, 32 )
-cell_tile_origin = 2
 format = 1
 
 [node name="FarmingTiles" type="YSort" parent="."]

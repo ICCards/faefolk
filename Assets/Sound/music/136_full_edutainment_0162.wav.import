@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/136_full_edutainment_0162.wav-fd9ed0bb6a73494958eec1e86c371258.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/music/136_full_edutainment_0162.wav"
+dest_files=[ "res://.import/136_full_edutainment_0162.wav-fd9ed0bb6a73494958eec1e86c371258.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

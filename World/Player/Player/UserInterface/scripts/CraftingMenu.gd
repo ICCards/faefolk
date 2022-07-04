@@ -15,10 +15,10 @@ var page1 = [
 ]
 
 var page2 = [
-	"crafting table",
-	"kitchen",
-	"machine",
-	"fire pedestal tall",
+	"workbench",
+	"stove",
+	"grain mill",
+	"tall fire pedestal",
 	"house"
 ]
 
@@ -35,11 +35,14 @@ func _on_UpButton_pressed():
 	page = 1
 	$Page1.visible = true
 	$Page2.visible = false
-
-
-func _ready():
+	
+	
+func reset():
 	page = 1
+	$Page1.visible = true
+	$Page2.visible = false
 	initialize_crafting()
+
 
 func initialize_crafting():
 	var wood = PlayerInventory.return_player_wood_and_stone()[0]
@@ -60,7 +63,7 @@ func initialize_crafting():
 func _physics_process(delta):
 	if item != null:
 		$CraftableItemDescription.visible = true
-		$CraftableItemDescription/Title.text = item
+		$CraftableItemDescription/Title.text = item[0].to_upper() + item.substr(1,-1)
 		$CraftableItemDescription/Materials.text = "Wood: " + str(JsonData.crafting_data[item]["wood"]) + " - Stone: " + str(JsonData.crafting_data[item]["stone"])
 		$CraftableItemDescription.position = get_local_mouse_position() + Vector2(140, 100)
 	else:
@@ -121,13 +124,13 @@ func _on_CampfireArea_mouse_entered():
 func _on_FirePedestalArea_mouse_entered():
 	entered_crafting_area("fire pedestal")
 func _on_TallPedestalArea_mouse_entered():
-	entered_crafting_area("fire pedestal tall")
+	entered_crafting_area("tall fire pedestal")
 func _on_MachineArea_mouse_entered():
-	entered_crafting_area("machine")
+	entered_crafting_area("grain mill")
 func _on_CraftingTable_mouse_entered():
-	entered_crafting_area("crafting table")
+	entered_crafting_area("workbench")
 func _on_KitchenArea_mouse_entered():
-	entered_crafting_area("kitchen")
+	entered_crafting_area("stove")
 
 
 func _on_WoodBoxArea_mouse_exited():
@@ -153,13 +156,13 @@ func _on_CampfireArea_mouse_exited():
 func _on_FirePedestalArea_mouse_exited():
 	exited_crafting_area("fire pedestal")
 func _on_TallPedestalArea_mouse_exited():
-	exited_crafting_area("fire pedestal tall")
+	exited_crafting_area("tall fire pedestal")
 func _on_MachineArea_mouse_exited():
-	exited_crafting_area("machine")
+	exited_crafting_area("grain mill")
 func _on_CraftingTable_mouse_exited():
-	exited_crafting_area("crafting table")
+	exited_crafting_area("workbench")
 func _on_KitchenArea_mouse_exited():
-	exited_crafting_area("kitchen")
+	exited_crafting_area("stove")
 
 
 func play_craft_sound():
@@ -226,21 +229,21 @@ func _on_FirePedestalArea_input_event(viewport, event, shape_idx):
 func _on_TallPedestalArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		play_craft_sound()
-		PlayerInventory.craft_item("fire pedestal tall")
+		PlayerInventory.craft_item("tall fire pedestal")
 		initialize_crafting()
 func _on_MachineArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		play_craft_sound()
-		PlayerInventory.craft_item("machine")
+		PlayerInventory.craft_item("grain mill")
 		initialize_crafting()
 func _on_CraftingTable_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		play_craft_sound()
-		PlayerInventory.craft_item("crafting table")
+		PlayerInventory.craft_item("workbench")
 		initialize_crafting()
 func _on_KitchenArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		play_craft_sound()
-		PlayerInventory.craft_item("kitchen")
+		PlayerInventory.craft_item("stove")
 		initialize_crafting()
 

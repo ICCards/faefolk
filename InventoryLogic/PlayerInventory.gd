@@ -26,9 +26,6 @@ var inventory = {
 }
 
 var hotbar = {
-	0: ["campfire", 10],
-	1: ["fire pedestal", 18],
-	2: ["fire pedestal tall", 48],
 	6: ["bucket", 1],
 	7: ["hoe", 1], 
 	8: ["axe", 1],
@@ -208,7 +205,7 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/Inventory/InventorySlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/Inventory/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
