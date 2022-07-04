@@ -32,7 +32,7 @@ mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 margin_right = 222.0
-margin_bottom = 116.0
+margin_bottom = 117.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -41,7 +41,7 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 120.0
+margin_top = 121.0
 margin_right = 222.0
 margin_bottom = 153.0
 mouse_filter = 2
@@ -56,7 +56,7 @@ text = "[WORLD]"
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 margin_right = 222.0
-margin_bottom = 33.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 theme = ExtResource( 3 )
 placeholder_text = "Press ESC to exit chat mode"

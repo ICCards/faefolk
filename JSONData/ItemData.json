@@ -272,7 +272,7 @@
   "bucket" : {
       "ItemCategory": "Weapon",
       "StackSize": 1,
-      "Descrption": "Used to water fertile soil"
+      "Description": "Used to water fertile soil"
   },
   "torch" : {
       "ItemCategory": "Placable object",
@@ -289,7 +289,7 @@
       "StackSize": 99,
       "Description": "Used to generate light"
   },
-  "fire pedestal tall" : {
+  "tall fire pedestal" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "Used to generate light"
@@ -334,17 +334,17 @@
       "StackSize": 1,
       "Description": "placable house"
   },
-  "crafting table": {
+  "workbench": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "placable house"
   },
-  "machine": {
+  "grain mill": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "placable house"
   },
-  "kitchen": {
+  "stove": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "placable house"

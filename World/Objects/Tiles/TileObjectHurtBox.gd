@@ -35,6 +35,7 @@ func _ready():
 		queue_free()
 		
 func PlayEffect(_player_id):
+	$Light2D.enabled = false
 	valid_tiles.set_cellv(location, 0)
 	if item_name == "wood chest" or item_name == "stone chest":
 		placable_object_tiles.set_cellv(location, -1)
@@ -60,8 +61,12 @@ func set_dimensions():
 		$OpenChestArea/CollisionShape2D.disabled = false
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
+	elif item_name == "crafting table" or item_name == "kitchen" or item_name == "machine":
+		scale.x = 2.0
+		position = position +  Vector2(16, 0)
 
 func _on_HurtBox_area_entered(area):
+	$Light2D.enabled = false
 	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
 	print("sending ON_HIT")
 	Server.action("ON_HIT", data)
@@ -76,9 +81,13 @@ func _on_HurtBox_area_entered(area):
 	$SoundEffects.play()
 
 	if item_name == "wood chest" or item_name == "stone chest":
+		placable_object_tiles.set_cellv(location, -1)
 		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
 		drop_items_in_chest()
-	if item_name == "wood fence":
+	elif item_name == "crafting table" or item_name == "machine" or item_name == "kitchen":
+		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
+		placable_object_tiles.set_cellv(location, -1)
+	elif item_name == "wood fence":
 		fence_tiles.set_cellv(location, -1)
 		fence_tiles.update_bitmask_region()
 	elif item_name == "wood path" or item_name == "stone path":

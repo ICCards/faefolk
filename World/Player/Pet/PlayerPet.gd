@@ -17,3 +17,13 @@ func _physics_process(delta):
 		set_position(player.position + Vector2(rng.randi_range(-80, 80), rng.randi_range(-80, 80)))
 
 
+
+
+func _on_VisibilityNotifier2D_viewport_entered(viewport):
+	print('entered')
+	$AnimatedSprite.playing = true
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+	print('exited')
+	$AnimatedSprite.playing = false

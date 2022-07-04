@@ -38,11 +38,11 @@ func place_item_state(event, item_name, valid_tiles):
 		$ColorIndicator.scale = Vector2(2, 1)
 		$ItemToPlace.rect_position = Vector2(0,-32)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
-	elif item_name == "crafting table" or item_name == "machine" or item_name == "kitchen":
+	elif item_name == "workbench" or item_name == "grain mill" or item_name == "stove":
 		$ColorIndicator.scale = Vector2(2, 1)
 		$ItemToPlace.rect_position = Vector2(0,-64)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
-	elif item_name == "fire pedestal tall":
+	elif item_name == "tall fire pedestal":
 		$ColorIndicator.scale = Vector2(1, 1)
 		$ItemToPlace.rect_position = Vector2(0,-64)
 		$ItemToPlace.rect_scale = Vector2(1, 1)

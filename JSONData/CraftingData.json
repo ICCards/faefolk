@@ -43,19 +43,19 @@
          "wood": 2,
          "stone": 5,
      },
-     "fire pedestal tall": {
+     "tall fire pedestal": {
          "wood": 2,
          "stone": 10
      },
-     "crafting table": {
+     "workbench": {
          "wood": 10,
          "stone": 10
      },
-     "machine": {
+     "grain mill": {
          "wood": 20,
          "stone": 20
      },
-     "kitchen": {
+     "stove": {
          "wood": 30,
          "stone": 30
      }

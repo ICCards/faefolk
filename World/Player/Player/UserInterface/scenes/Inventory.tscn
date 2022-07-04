@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -16,19 +16,19 @@
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=14]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/OptionsMenu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/inventory_icons/nails.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Images/inventory_icons/wood chest.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Images/Inventory UI/exit icon.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory button.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Images/placable_object_preview/campfire.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Images/placable_object_preview/machine.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Images/placable_object_preview/crafting table.png" type="Texture" id=25]
-[ext_resource path="res://Assets/Images/placable_object_preview/fire pedestal tall.png" type="Texture" id=26]
-[ext_resource path="res://Assets/Images/placable_object_preview/kitchen.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Images/placable_object_preview/tall fire pedestal.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Images/placable_object_preview/fire pedestal.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Images/Misc/up arrow.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=30]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -56,6 +56,16 @@ extents = Vector2( 96.0625, 81.0938 )
 
 [sub_resource type="StreamTexture" id=11]
 load_path = "res://.import/up arrow.png-aacac5dc46995855e65ffd85747ee008.stex"
+
+[sub_resource type="StyleBoxTexture" id=16]
+content_margin_left = 72.0
+content_margin_right = 72.0
+texture = ExtResource( 30 )
+region_rect = Rect2( 0, 0, 102, 39 )
+expand_margin_left = 24.0
+expand_margin_right = 24.0
+expand_margin_top = 250.0
+expand_margin_bottom = 90.0
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )
@@ -210,22 +220,22 @@ position = Vector2( 441, 632 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 13 )
 
-[node name="crafting table" type="Sprite" parent="CraftingMenu/Page2"]
+[node name="workbench" type="Sprite" parent="CraftingMenu/Page2"]
 position = Vector2( 478, 356 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 25 )
-
-[node name="kitchen" type="Sprite" parent="CraftingMenu/Page2"]
-position = Vector2( 187, 611 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 27 )
-
-[node name="machine" type="Sprite" parent="CraftingMenu/Page2"]
-position = Vector2( 296, 356 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 24 )
 
-[node name="fire pedestal tall" type="Sprite" parent="CraftingMenu/Page2"]
+[node name="stove" type="Sprite" parent="CraftingMenu/Page2"]
+position = Vector2( 187, 611 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 25 )
+
+[node name="grain mill" type="Sprite" parent="CraftingMenu/Page2"]
+position = Vector2( 296, 356 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 27 )
+
+[node name="tall fire pedestal" type="Sprite" parent="CraftingMenu/Page2"]
 position = Vector2( 127, 370 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 26 )
@@ -277,28 +287,38 @@ stretch_mode = 5
 [node name="Tween" type="Tween" parent="CraftingMenu"]
 
 [node name="CraftableItemDescription" type="Node2D" parent="CraftingMenu"]
+visible = false
 scale = Vector2( 2.5, 2.5 )
+z_index = 1
 
 [node name="Background" type="Sprite" parent="CraftingMenu/CraftableItemDescription"]
-texture = ExtResource( 17 )
+position = Vector2( 15.7, 4.03077 )
+scale = Vector2( 1.33137, 1.26154 )
+texture = ExtResource( 30 )
 
 [node name="Title" type="Label" parent="CraftingMenu/CraftableItemDescription"]
-margin_left = -41.0
-margin_top = -15.0
-margin_right = 414.0
-margin_bottom = 79.0
-rect_scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 4 )
-text = "House"
+margin_left = -42.0
+margin_top = -15.2
+margin_right = 596.0
+margin_bottom = 97.8
+rect_scale = Vector2( 0.18, 0.18 )
+theme = ExtResource( 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "Tall fire pedestal"
 
 [node name="Materials" type="Label" parent="CraftingMenu/CraftableItemDescription"]
-margin_left = -41.0
-margin_top = 3.0
-margin_right = 481.0
-margin_bottom = 97.0
+margin_left = -39.2
+margin_top = 6.4
+margin_right = 239.8
+margin_bottom = 119.4
 rect_scale = Vector2( 0.1, 0.1 )
-theme = ExtResource( 4 )
-text = "4 wood - 10 stone"
+theme = ExtResource( 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "4 wood"
 
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
@@ -378,94 +398,11 @@ mouse_filter = 2
 texture = ExtResource( 21 )
 expand = true
 
-[node name="InventorySlots" type="GridContainer" parent="."]
-visible = false
-margin_left = 54.0
-margin_top = 246.0
-margin_right = 606.0
-margin_bottom = 657.0
-custom_constants/vseparation = 6
-custom_constants/hseparation = 6
-columns = 5
-
-[node name="Slot1" type="Panel" parent="InventorySlots"]
-margin_right = 96.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot2" type="Panel" parent="InventorySlots"]
-margin_left = 102.0
-margin_right = 198.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot3" type="Panel" parent="InventorySlots"]
-margin_left = 204.0
-margin_right = 300.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot4" type="Panel" parent="InventorySlots"]
-margin_left = 306.0
-margin_right = 402.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot5" type="Panel" parent="InventorySlots"]
-margin_left = 408.0
-margin_right = 504.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot6" type="Panel" parent="InventorySlots"]
-margin_top = 102.0
-margin_right = 96.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot7" type="Panel" parent="InventorySlots"]
-margin_left = 102.0
-margin_top = 102.0
-margin_right = 198.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot8" type="Panel" parent="InventorySlots"]
-margin_left = 204.0
-margin_top = 102.0
-margin_right = 300.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot9" type="Panel" parent="InventorySlots"]
-margin_left = 306.0
-margin_top = 102.0
-margin_right = 402.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
-[node name="Slot10" type="Panel" parent="InventorySlots"]
-margin_left = 408.0
-margin_top = 102.0
-margin_right = 504.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
-script = ExtResource( 2 )
-
 [node name="Title" type="Label" parent="."]
-margin_left = 71.0
-margin_top = 38.0
-margin_right = 543.0
-margin_bottom = 151.0
+margin_left = 86.0
+margin_top = 36.0
+margin_right = 558.0
+margin_bottom = 149.0
 theme = ExtResource( 14 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
@@ -524,6 +461,124 @@ margin_left = 66.0
 margin_top = 64.0
 margin_right = 66.0
 margin_bottom = 64.0
+
+[node name="InventoryMenu" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="InventorySlots" type="GridContainer" parent="InventoryMenu"]
+margin_left = 54.0
+margin_top = 246.0
+margin_right = 606.0
+margin_bottom = 657.0
+custom_constants/vseparation = 6
+custom_constants/hseparation = 6
+columns = 5
+
+[node name="Slot1" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot2" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_left = 102.0
+margin_right = 198.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot3" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_left = 204.0
+margin_right = 300.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot4" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_left = 306.0
+margin_right = 402.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot5" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_left = 408.0
+margin_right = 504.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot6" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_top = 102.0
+margin_right = 96.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot7" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_left = 102.0
+margin_top = 102.0
+margin_right = 198.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot8" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_left = 204.0
+margin_top = 102.0
+margin_right = 300.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot9" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_left = 306.0
+margin_top = 102.0
+margin_right = 402.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="Slot10" type="Panel" parent="InventoryMenu/InventorySlots"]
+margin_left = 408.0
+margin_top = 102.0
+margin_right = 504.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="InventoryItemDescription" type="Node2D" parent="InventoryMenu"]
+visible = false
+position = Vector2( -22, -84 )
+scale = Vector2( 2, 2 )
+z_index = 1
+
+[node name="Description" type="Label" parent="InventoryMenu/InventoryItemDescription"]
+margin_left = -50.0
+margin_top = 3.0
+margin_right = 1290.0
+margin_bottom = 116.0
+rect_scale = Vector2( 0.1, 0.1 )
+theme = ExtResource( 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+custom_styles/normal = SubResource( 16 )
+text = "jhg hg jgh ghjgh jgh gjhj g "
+autowrap = true
+
+[node name="Title" type="Label" parent="InventoryMenu/InventoryItemDescription"]
+margin_left = -42.0
+margin_top = -16.0
+margin_right = 596.0
+margin_bottom = 97.0
+rect_scale = Vector2( 0.18, 0.18 )
+theme = ExtResource( 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "Tall fire pedestal"
 
 [connection signal="input_event" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_input_event"]
 [connection signal="mouse_entered" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_entered"]

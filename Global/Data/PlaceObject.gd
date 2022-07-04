@@ -8,7 +8,6 @@ onready var valid_tiles
 onready var fence_tiles 
 onready var object_tiles
 onready var path_tiles 
-onready var animated_tiles
 var rng = RandomNumberGenerator.new()
 
 enum Placables { 
@@ -16,9 +15,9 @@ enum Placables {
 	BOX, 
 	WOOD_CHEST, 
 	STONE_CHEST, 
-	CRAFTING_TABLE1, CRAFTING_TABLE2, CRAFTING_TABLE3,
-	MACHINE1, MACHINE2, MACHINE3,
-	KICTHEN1, KITCHEN2, KITCHEN3,
+	WORKBENCH1, WORKBENCH2, WORKBENCH3,
+	GRAIN_MILL1, GRAIN_MILL2, GRAIN_MILL3,
+	STOVE1, STOVE2, STOVE3,
 	TORCH,
 	CAMPFIRE,
 	FIRE_PEDESTAL_TALL,
@@ -35,7 +34,6 @@ enum Paths {
 }
 
 func place_seed_in_world(id, item_name, location, days):
-	print("planted seed")
 	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 	valid_tiles.set_cellv(location, -1)
 	var plantedCrop = PlantedCrop.instance()
@@ -49,7 +47,6 @@ func place_object_in_world(id, item_name, location):
 	fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 	object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
 	path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
-	animated_tiles = get_node("/root/World/PlacableTiles/AnimatedTiles")
 	
 	var tileObjectHurtBox = TileObjectHurtBox.instance()
 	tileObjectHurtBox.name = str(id)
@@ -66,7 +63,7 @@ func place_object_in_world(id, item_name, location):
 		"fire pedestal":
 			valid_tiles.set_cellv(location, -1)
 			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL)
-		"fire pedestal tall":
+		"tall fire pedestal":
 			valid_tiles.set_cellv(location, -1)
 			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL_TALL)
 		"wood fence":
@@ -94,16 +91,16 @@ func place_object_in_world(id, item_name, location):
 			Server.world.call_deferred("add_child", playerHouseObject, true)
 			playerHouseObject.global_position = fence_tiles.map_to_world(location) + Vector2(6,6)
 			set_player_house_invalid_tiles(location)
-		"crafting table":
-			object_tiles.set_cellv(location, Placables.CRAFTING_TABLE1)
+		"workbench":
+			object_tiles.set_cellv(location, Placables.WORKBENCH1)
 			valid_tiles.set_cellv(location, -1)
 			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
-		"machine":
-			object_tiles.set_cellv(location, Placables.MACHINE1)
+		"grain mill":
+			object_tiles.set_cellv(location, Placables.GRAIN_MILL1)
 			valid_tiles.set_cellv(location, -1)
 			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
-		"kitchen":
-			object_tiles.set_cellv(location, Placables.KICTHEN1)
+		"stove":
+			object_tiles.set_cellv(location, Placables.STOVE1)
 			valid_tiles.set_cellv(location, -1)
 			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
 		"wood path1":

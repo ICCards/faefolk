@@ -101,9 +101,9 @@ func spawnPlayerExample():
 		player.position = sand.map_to_world(Vector2(4,4)) 
 	else: 
 		player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
-	var player_pet = Player_pet.instance()
-	add_child(player_pet)
-	player_pet.position = sand.map_to_world(Vector2(8,8)) 
+#	var player_pet = Player_pet.instance()
+#	add_child(player_pet)
+#	player_pet.position = sand.map_to_world(Vector2(8,8)) 
 	
 	print('getting map')
 		
@@ -283,11 +283,11 @@ func buildMap(map):
 	print("Map loaded")
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -14)
 	$AmbientSound.play()
-	yield(get_tree().create_timer(1.0), "timeout")
-	get_node("loadingScreen").queue_free()
-	spawnPlayerExample()
 	#spawnPlayer(Server.player)
 	Server.world = self
+	yield(get_tree().create_timer(5.0), "timeout")
+	get_node("loadingScreen").queue_free()
+	spawnPlayerExample()
 	
 func check_and_remove_invalid_autotiles(map):
 	for i in range(6):
@@ -295,20 +295,20 @@ func check_and_remove_invalid_autotiles(map):
 			var loc = Util.string_to_vector2(map["grass"][id])
 			if Tiles.return_neighboring_cells(loc, darkGrass) <= 1:
 				darkGrass.set_cellv(loc, -1)
-		darkGrass.update_bitmask_region()
 		yield(get_tree().create_timer(0.25), "timeout")
 		for id in map["dark_grass"]: 
 			var loc = Util.string_to_vector2(map["dark_grass"][id])
 			if Tiles.return_neighboring_cells(loc, grass) <= 1:
 				grass.set_cellv(loc, -1)
-		grass.update_bitmask_region()
 		yield(get_tree().create_timer(0.25), "timeout")
 		for id in map["water"]:
 			var loc = Util.string_to_vector2(map["water"][id])
 			if Tiles.return_neighboring_cells(loc, water) <= 1:
 				water.set_cellv(loc, -1)
-		water.update_bitmask_region()
 		yield(get_tree().create_timer(0.25), "timeout")
+	water.update_bitmask_region()
+	grass.update_bitmask_region()
+	darkGrass.update_bitmask_region()
 
 
 
