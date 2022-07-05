@@ -15,7 +15,7 @@ func _ready():
 
 func spawn_player_in_menu(var player = ""):
 	var playerMenuState = PlayerMenuState.instance()
-	#playerMenuState.initialize(player)
+	playerMenuState.initialize(Server.player)
 	add_child(playerMenuState)
 	playerMenuState.global_position = Vector2(600, 472 )
 
