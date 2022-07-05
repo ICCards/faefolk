@@ -11,9 +11,9 @@ func _login(args):
 	var value = Util.toMessage("LOGIN",{"d":{}})
 	print("logging in")
 	Server._client.get_peer(1).put_packet(value)
-	visible = true
-#	get_parent().get_node("ConnectToPlug").visible = false
-#	get_parent().get_node("ConnectArea").visible = false
+	$LoadingIndicator.visible = false
+	$PlayShopQuit.visible = true
+	get_parent().spawn_player_in_menu()
 	
 func _play_hover_effect(button_name):
 	if hovered_button != button_name:
@@ -108,20 +108,13 @@ func _on_ShopArea_input_event(viewport, event, shape_idx):
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
 
-
 func _on_ConnectToPlugButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
-	#IC.connect_plug(connect_callback)
+	IC.connect_plug(connect_callback)
 	$ConnectToPlug.visible = false
-	$LoadingIndicator.visible = true
-	yield(get_tree().create_timer(2.5), "timeout")
-	$LoadingIndicator.visible = false
-	$PlayShopQuit.visible = true
-	get_parent().spawn_player_in_menu()
-
-
+	$LoadingIndicator.visible = true	
 
 func _on_ConnectToPlugButton_mouse_entered():
 	_play_hover_effect("connect to plug")

@@ -18,14 +18,12 @@ var player
 func initialize(_player):
 	player = _player
 
-
 func _ready():
 	animPlayer.play("idle")
 	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
 	$FootstepsSound.play()
 	setAnimationTexture("idle_down")
-	character.LoadPlayerCharacter("human_male")
-	#character.LoadPlayerCharacter(player["c"])
+	character.LoadPlayerCharacter(player["c"])
 	Sounds.connect("volume_change", self, "change_footsteps_volume")
 
 

@@ -1,6 +1,7 @@
 extends Node2D
 
 func _on_Doorway_area_entered(_area):
+	Server.player_node = Server.world.get_node("Players/"+Server.player_id)
 	Server.world = null
 	Server.isLoaded = false
 	SceneChanger.change_scene("res://World/InsidePlayerHouse/InsidePlayerHome.tscn", "door")
