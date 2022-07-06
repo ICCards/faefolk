@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/scripts/Hotbar.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Inventory UI/hotbar.png" type="Texture" id=3]
+
+[node name="Hotbar" type="Node2D"]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 182.0
+margin_bottom = 29.0
+rect_scale = Vector2( 6, 6 )
+mouse_filter = 0
+texture = ExtResource( 3 )
+
+[node name="HotbarSlots" type="GridContainer" parent="."]
+margin_left = 41.9999
+margin_top = 42.0
+margin_right = 1002.0
+margin_bottom = 138.0
+custom_constants/hseparation = 6
+columns = 10
+
+[node name="Slot1" type="Panel" parent="HotbarSlots"]
+show_behind_parent = true
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot2" type="Panel" parent="HotbarSlots"]
+margin_left = 102.0
+margin_right = 198.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot3" type="Panel" parent="HotbarSlots"]
+margin_left = 204.0
+margin_right = 300.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot4" type="Panel" parent="HotbarSlots"]
+margin_left = 306.0
+margin_right = 402.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot5" type="Panel" parent="HotbarSlots"]
+margin_left = 408.0
+margin_right = 504.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot6" type="Panel" parent="HotbarSlots"]
+margin_left = 510.0
+margin_right = 606.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot7" type="Panel" parent="HotbarSlots"]
+margin_left = 612.0
+margin_right = 708.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot8" type="Panel" parent="HotbarSlots"]
+margin_left = 714.0
+margin_right = 810.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot9" type="Panel" parent="HotbarSlots"]
+margin_left = 816.0
+margin_right = 912.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )
+
+[node name="Slot10" type="Panel" parent="HotbarSlots"]
+margin_left = 918.0
+margin_right = 1014.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 1 )

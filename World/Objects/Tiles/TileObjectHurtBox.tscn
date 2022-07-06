@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World/Objects/Tiles/TileObjectHurtBox.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=2]
 
@@ -11,7 +12,7 @@ extents = Vector2( 15, 14 )
 extents = Vector2( 15, 14 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 15, 14 )
+extents = Vector2( 14, 14 )
 
 [node name="TileObjectHurtBox" type="Node2D"]
 script = ExtResource( 1 )
@@ -38,11 +39,11 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TypeOfTileArea"]
 shape = SubResource( 3 )
 
-[node name="OpenChestArea" type="Area2D" parent="."]
+[node name="InteractiveArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 32
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenChestArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea"]
 position = Vector2( 0, 14 )
 shape = SubResource( 4 )
 disabled = true
@@ -50,8 +51,13 @@ disabled = true
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 volume_db = -16.0
 
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 1, -5 )
+enabled = false
+texture = ExtResource( 2 )
+energy = 1.05
+mode = 2
+
 [connection signal="area_entered" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_entered"]
 [connection signal="area_exited" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="area_entered" from="OpenChestArea" to="." method="_on_OpenChestArea_area_entered"]
-[connection signal="area_exited" from="OpenChestArea" to="." method="_on_OpenChestArea_area_exited"]

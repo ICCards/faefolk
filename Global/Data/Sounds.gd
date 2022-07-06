@@ -36,7 +36,7 @@ func return_adjusted_sound_db(category, init_sound):
 			return init_sound
 		elif progress < 0.5:
 			var dis_to_mute =  -(80 + init_sound)
-			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
+			return (init_sound + ((1 - (progress * 2)) * dis_to_mute))
 		elif progress > 0.5:
 			return init_sound + ((progress - 0.5) / 5) * 150
 	elif category == "sound":
@@ -62,7 +62,7 @@ func return_adjusted_sound_db(category, init_sound):
 		if progress == 0.5:
 			return init_sound
 		elif progress < 0.5:
-			var dis_to_mute =  -(80 + init_sound)
+			var dis_to_mute =  -(60 + init_sound)
 			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
 		elif progress > 0.5:
 			return init_sound + ((progress - 0.5) / 5) * 150
@@ -118,11 +118,13 @@ var fire_start = preload("res://Assets/Sound/Sound effects/Fire/start.mp3")
 var fire_crackle = preload("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
 
 ### Music ###
-var title_music = null
+var title_music = preload("res://Assets/Sound/music/563_full_wobble-dance_0157.wav")
 var background_music = [
-	preload("res://Assets/Sound/music/ES_Back to Business - William Benckert.mp3"),
-	preload("res://Assets/Sound/music/ES_Dance of the Pixel Birds - William Benckert.mp3"),
-	preload("res://Assets/Sound/music/ES_Fair N Square - William Benckert.mp3"),
-	preload("res://Assets/Sound/music/ES_Reality - AGST.mp3"),
-	preload("res://Assets/Sound/music/ES_Seal the Deal - Eight Bits.mp3"),
+#	preload("res://Assets/Sound/music/ES_Back to Business - William Benckert.mp3"),
+#	preload("res://Assets/Sound/music/ES_Dance of the Pixel Birds - William Benckert.mp3"),
+#	preload("res://Assets/Sound/music/ES_Fair N Square - William Benckert.mp3"),
+#	preload("res://Assets/Sound/music/ES_Reality - AGST.mp3"),
+#	preload("res://Assets/Sound/music/ES_Seal the Deal - Eight Bits.mp3"),
+	preload("res://Assets/Sound/music/125_full_make-it-easy_0159.wav"),
+	preload("res://Assets/Sound/music/136_full_edutainment_0162.wav")
 ]

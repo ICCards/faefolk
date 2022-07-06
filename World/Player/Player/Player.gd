@@ -12,7 +12,7 @@ var fence_tiles
 var object_tiles
 var path_tiles
 var principal
-var character
+var character 
 var setting
 var is_mouse_over_hotbar
 var username_callback = JavaScript.create_callback(self, "_username_callback")
@@ -34,9 +34,11 @@ var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
 
+const _character = preload("res://Global/Data/Characters.gd")
+
 func _ready():
 	set_username("")
-	IC.getUsername(principal,username_callback)
+#	IC.getUsername(principal,username_callback)
 	set_player_setting(get_parent().get_parent())
 	_play_background_music()
 	$Camera2D/UserInterface.initialize_user_interface()
@@ -74,6 +76,7 @@ func adjust_bubble_position(lines):
 
 	
 func set_username(username):
+	Server.username = username
 	$Username.text = str(username)	
 	
 func initialize_camera_limits(top_left, bottom_right):
@@ -112,7 +115,7 @@ func _process(_delta) -> void:
 		is_mouse_over_hotbar = true
 	else:
 		is_mouse_over_hotbar = false
-	if not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode:
+	if not PlayerInventory.viewInventoryMode and not PlayerInventory.interactive_screen_mode:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
@@ -126,7 +129,7 @@ func _process(_delta) -> void:
 func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and \
 		not PlayerInventory.viewInventoryMode and \
-		not PlayerInventory.openChestMode and \
+		not PlayerInventory.interactive_screen_mode and \
 		Server.player_state == "WORLD" and \
 		not PlayerInventory.chatMode and \
 		not is_mouse_over_hotbar and \
@@ -148,31 +151,31 @@ func movement_state(delta):
 	if !swingActive and not PlayerInventory.chatMode:
 		animation_player.play("movement")
 		var input_vector = Vector2.ZERO			
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0
 			direction = "UP"
 			walk_state(direction)
 			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("move_down"):
 			input_vector.y += 1.0
 			direction = "DOWN"
 			walk_state(direction)
 			var data = {"p":position,"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("ui_left"):
+		if Input.is_action_pressed("move_left"):
 			input_vector.x -= 1.0
 			direction = "LEFT"
 			walk_state(direction)
 			var data = {"p":position,"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("move_right"):
 			input_vector.x += 1.0
 			direction = "RIGHT"
 			walk_state(direction)
 			var data = {"p":position,"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)		
-		if !Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left")  && !Input.is_action_pressed("ui_up")  && !Input.is_action_pressed("ui_down"):
+		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
 			idle_state(direction)
 			var data = {"p":position,"d":direction,"t":Server.client_clock}
 			sendAction(MOVEMENT,data)
@@ -296,7 +299,7 @@ func set_player_setting(ownerNode):
 	if str(ownerNode).substr(0, 5) == "World":
 		setting = "World"
 		$DetectPathType/FootstepsSound.stream = Sounds.dirt_footsteps
-		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
+		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
 		$DetectPathType/FootstepsSound.play()
 		valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
 		path_tiles = get_node("/root/World/PlacableTiles/PathTiles")

@@ -325,6 +325,7 @@ rect_min_size = Vector2( 84, 84 )
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 2
 expand = true
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="Sprite"]
 margin_left = 6.08696

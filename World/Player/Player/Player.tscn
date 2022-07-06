@@ -1,30 +1,35 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=45 format=2]
 
-[ext_resource path="res://World/Player/Player/UserInterface/ChatBox.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World/Player/Player/UserInterface/OpenChest.tscn" type="PackedScene" id=2]
-[ext_resource path="res://InventoryLogic/Hotbar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://World/Player/Player/UserInterface/PlayerStatsUI.tscn" type="PackedScene" id=4]
-[ext_resource path="res://InventoryLogic/Inventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/ChatBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/interactive/OpenChest.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/Hotbar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/PlayerStatsUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
-[ext_resource path="res://World/Player/Player/UserInterface/CurrentTime.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/CurrentTime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://Characters/Human/male/HOLDING/body/down/arms.png" type="Texture" id=9]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" type="Texture" id=10]
+[ext_resource path="res://Characters/WATERING PLANT/assets/down/head_attribute/hair.png" type="Texture" id=9]
+[ext_resource path="res://Characters/WATERING PLANT/assets/right/shoes/shoes.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
-[ext_resource path="res://World/Player/Player/Scripts/PickupZone.gd" type="Script" id=12]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/pants/pants.png" type="Texture" id=13]
-[ext_resource path="res://Characters/Human/male/HOLDING/assets/down/shirt.png" type="Texture" id=14]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=15]
+[ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
+[ext_resource path="res://Characters/WATERING PLANT/assets/right/shirts/shirt.png" type="Texture" id=13]
+[ext_resource path="res://Characters/WATERING PLANT/body/right/body.png" type="Texture" id=14]
+[ext_resource path="res://Characters/WATERING PLANT/assets/right/pants/pants.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=17]
-[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=18]
+[ext_resource path="res://Characters/WATERING PLANT/body/right/arms.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=19]
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=20]
-[ext_resource path="res://World/Player/Player/Scripts/PlaceItemsUI.gd" type="Script" id=21]
-[ext_resource path="res://World/Player/Player/Scripts/CompositeSprites.gd" type="Script" id=22]
-[ext_resource path="res://World/Player/Player/Scripts/DetectPathType.gd" type="Script" id=23]
+[ext_resource path="res://World/Player/Player/AttachedScripts/PlaceItemsUI.gd" type="Script" id=21]
+[ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
+[ext_resource path="res://World/Player/Player/AttachedScripts/DetectPathType.gd" type="Script" id=23]
 [ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=24]
 [ext_resource path="res://Assets/Images/Misc/chat bubble.png" type="Texture" id=25]
+[ext_resource path="res://World/Player/Player/AttachedScripts/EnterInteractiveZones.gd" type="Script" id=26]
+[ext_resource path="res://World/Player/Player/UserInterface/interactive/Workbench.tscn" type="PackedScene" id=27]
+[ext_resource path="res://World/Player/Player/UserInterface/interactive/Stove.tscn" type="PackedScene" id=28]
+[ext_resource path="res://World/Player/Player/UserInterface/interactive/GrainMill.tscn" type="PackedScene" id=29]
+[ext_resource path="res://World/Player/Player/UserInterface/interactive/PopUpDialogue.tscn" type="PackedScene" id=30]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -718,7 +723,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -36 ) ]
+"values": [ Vector2( 0, -32 ) ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("../MeleeSwing/CollisionShape2D:rotation_degrees")
@@ -742,6 +747,9 @@ height = 22.2163
 
 [sub_resource type="CircleShape2D" id=10]
 
+[sub_resource type="CircleShape2D" id=15]
+radius = 1.0
+
 [sub_resource type="StyleBoxTexture" id=14]
 texture = ExtResource( 25 )
 region_rect = Rect2( 0, 0, 46, 14 )
@@ -764,6 +772,36 @@ margin_left = 10.0
 margin_top = 299.0
 margin_right = -708.0
 margin_bottom = -89.0
+
+[node name="Stove" parent="Camera2D/UserInterface" instance=ExtResource( 28 )]
+visible = false
+margin_left = 240.0
+margin_top = 513.0
+margin_right = -784.0
+margin_bottom = -87.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="GrainMill" parent="Camera2D/UserInterface" instance=ExtResource( 29 )]
+visible = false
+margin_left = 240.0
+margin_top = 513.0
+margin_right = 240.0
+margin_bottom = 513.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="Workbench" parent="Camera2D/UserInterface" instance=ExtResource( 27 )]
+visible = false
+margin_left = -272.0
+margin_top = 213.0
+margin_right = 752.0
+margin_bottom = 813.0
+
+[node name="PopUpDialogue" parent="Camera2D/UserInterface" instance=ExtResource( 30 )]
+visible = false
+margin_left = 364.0
+margin_top = 234.0
+margin_right = 364.0
+margin_bottom = 234.0
 
 [node name="OpenChest" parent="Camera2D/UserInterface" instance=ExtResource( 2 )]
 visible = false
@@ -795,6 +833,7 @@ anims/RESET = SubResource( 12 )
 "anims/set night" = SubResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
@@ -806,37 +845,44 @@ script = ExtResource( 22 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 18 )
+texture = ExtResource( 14 )
 hframes = 4
+frame = 3
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 9 )
+texture = ExtResource( 18 )
 hframes = 4
+frame = 3
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 hframes = 4
+frame = 3
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 10 )
+texture = ExtResource( 9 )
 hframes = 4
+frame = 3
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 14 )
+texture = ExtResource( 13 )
 hframes = 4
+frame = 3
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 15 )
+texture = ExtResource( 10 )
 hframes = 4
+frame = 3
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
@@ -870,6 +916,7 @@ scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
 [node name="EnterDoors" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 0
 
@@ -914,6 +961,39 @@ rect_scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 11 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="PlaceItemsUI"]
+visible = false
+
+[node name="EnterInteractiveZones" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 26 )
+
+[node name="ChestArea" type="Area2D" parent="EnterInteractiveZones"]
+collision_layer = 65536
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/ChestArea"]
+shape = SubResource( 15 )
+
+[node name="WorkbenchArea" type="Area2D" parent="EnterInteractiveZones"]
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/WorkbenchArea"]
+shape = SubResource( 15 )
+
+[node name="StoveArea" type="Area2D" parent="EnterInteractiveZones"]
+collision_layer = 262144
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/StoveArea"]
+shape = SubResource( 15 )
+
+[node name="GrainMillArea" type="Area2D" parent="EnterInteractiveZones"]
+collision_layer = 524288
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/GrainMillArea"]
+shape = SubResource( 15 )
 
 [node name="DetectPathType" type="Node2D" parent="."]
 visible = false
@@ -963,6 +1043,7 @@ theme = ExtResource( 24 )
 custom_styles/normal = SubResource( 14 )
 text = "hello"
 align = 1
+valign = 1
 autowrap = true
 
 [node name="Username" type="Label" parent="."]
@@ -972,7 +1053,6 @@ margin_bottom = 28.0
 grow_horizontal = 2
 rect_scale = Vector2( 1, 0.9 )
 theme = ExtResource( 24 )
-text = "chhuse"
 align = 1
 
 [node name="Timer" type="Timer" parent="."]
@@ -981,6 +1061,14 @@ one_shot = true
 
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
+[connection signal="area_entered" from="EnterInteractiveZones/ChestArea" to="EnterInteractiveZones" method="_on_ChestArea_area_entered"]
+[connection signal="area_exited" from="EnterInteractiveZones/ChestArea" to="EnterInteractiveZones" method="_on_ChestArea_area_exited"]
+[connection signal="area_entered" from="EnterInteractiveZones/WorkbenchArea" to="EnterInteractiveZones" method="_on_WorkbenchArea_area_entered"]
+[connection signal="area_exited" from="EnterInteractiveZones/WorkbenchArea" to="EnterInteractiveZones" method="_on_WorkbenchArea_area_exited"]
+[connection signal="area_entered" from="EnterInteractiveZones/StoveArea" to="EnterInteractiveZones" method="_on_StoveArea_area_entered"]
+[connection signal="area_exited" from="EnterInteractiveZones/StoveArea" to="EnterInteractiveZones" method="_on_StoveArea_area_exited"]
+[connection signal="area_entered" from="EnterInteractiveZones/GrainMillArea" to="EnterInteractiveZones" method="_on_GrainMillArea_area_entered"]
+[connection signal="area_exited" from="EnterInteractiveZones/GrainMillArea" to="EnterInteractiveZones" method="_on_GrainMillArea_area_exited"]
 [connection signal="area_entered" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_entered"]
 [connection signal="area_exited" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_exited"]
 [connection signal="area_entered" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_entered"]

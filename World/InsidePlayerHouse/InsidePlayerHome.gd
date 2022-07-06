@@ -25,20 +25,24 @@ func _ready():
 func _on_Doorway_area_entered(_area):
 	Server.isLoaded = false
 	Server.world = null
-	SceneChanger.change_scene("res://World/World.tscn", "door")
+	SceneChanger.change_scene("res://World/World/World.tscn", "door")
 
 	
 func spawnPlayer():
 	print('gettiing player')
-	var value = Server.player
-	var player = Player.instance()
+	var player = Server.player_node
+	Server.world.remove_child(player)
+	$Players.add_child(player)
 	player.initialize_camera_limits(Vector2(-50,-30), Vector2(780, 550))
 	player.direction = "UP"
-	player.name = Server.player_id #str(value["id"])
-	player.character = _character.new()
-	player.character.LoadPlayerCharacter(value["c"]) 
-	$Players.add_child(player)
 	player.position = Vector2(190, 430)
+#	player.initialize_camera_limits(Vector2(-50,-30), Vector2(780, 550))
+#	player.direction = "UP"
+#	player.name = Server.player_id #str(value["id"])
+#	player.character = _character.new()
+#	player.character.LoadPlayerCharacter(value["c"]) 
+#	$Players.add_child(player)
+#	player.position = Vector2(190, 430)
 
 
 func initialize_house_objects():
@@ -48,17 +52,17 @@ func initialize_house_objects():
 		add_child(displayHouseObject)
 		displayHouseObject.global_position = PlayerInventory.player_home[i][1] * 32 + Vector2(0,160)
 
-func spawnNewPlayer(player):
-	if not player.empty():
-		if not has_node(str(player["id"])):
-			print("spawning new player")
-			print(player["p"])
-			var new_player = Player_template.instance()
-			new_player.position = (player["p"]) * 32
-			new_player.name = str(player["id"])
-			new_player.character = _character.new()
-			new_player.character.LoadPlayerCharacter(player["c"]) 
-			$Players.add_child(new_player)
+#func spawnNewPlayer(player):
+#	if not player.empty():
+#		if not has_node(str(player["id"])):
+#			print("spawning new player")
+#			print(player["p"])
+#			var new_player = Player_template.instance()
+#			new_player.position = (player["p"]) * 32
+#			new_player.name = str(player["id"])
+#			new_player.character = _character.new()
+#			new_player.character.LoadPlayerCharacter(player["c"]) 
+#			$Players.add_child(new_player)
 
 func UpdateWorldState(world_state):					
 	if world_state["t"] > last_world_state:

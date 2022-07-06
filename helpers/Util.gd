@@ -53,7 +53,7 @@ func validate_house_tiles(_location, _valid_object_tiles):
 		
 func set_swing_position(_pos, _direction):
 	if _direction == "UP":
-		_pos += Vector2(0, -36)
+		_pos += Vector2(0, -32)
 	elif _direction == "DOWN":
 		_pos += Vector2(0, 20)
 	elif _direction == "LEFT":

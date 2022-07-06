@@ -26,8 +26,16 @@ func _ready():
 		$TypeOfTileArea.set_collision_mask(512)
 	elif item_name == "stone path":
 		$TypeOfTileArea.set_collision_mask(1024)
+	elif item_name == "torch" or \
+	item_name == "campfire" or \
+	item_name == "fire pedestal" or \
+	item_name == "tall fire pedestal":
+		$Light2D.enabled = true
+	elif item_name == "house":
+		queue_free()
 		
 func PlayEffect(_player_id):
+	$Light2D.enabled = false
 	valid_tiles.set_cellv(location, 0)
 	if item_name == "wood chest" or item_name == "stone chest":
 		placable_object_tiles.set_cellv(location, -1)
@@ -39,15 +47,39 @@ func PlayEffect(_player_id):
 		path_tiles.set_cellv(location, -1)
 	else:
 		placable_object_tiles.set_cellv(location, -1)
+	if item_name == "stone path":
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+	else: 
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+	$SoundEffects.play()
+	yield($SoundEffects, "finished")
 	queue_free()
 
 func set_dimensions():
 	if item_name == "wood chest" or item_name == "stone chest":
-		$OpenChestArea/CollisionShape2D.disabled = false
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 65536
+		scale.x = 2.0
+		position = position +  Vector2(16, 0)
+	elif item_name == "workbench":
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 131072
+		scale.x = 2.0
+		position = position +  Vector2(16, 0)
+	elif item_name == "stove":
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 262144
+		scale.x = 2.0
+		position = position +  Vector2(16, 0)
+	elif item_name == "grain mill":
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 524288
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
 
 func _on_HurtBox_area_entered(area):
+	$Light2D.enabled = false
 	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
 	print("sending ON_HIT")
 	Server.action("ON_HIT", data)
@@ -58,12 +90,17 @@ func _on_HurtBox_area_entered(area):
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
 
 	if item_name == "wood chest" or item_name == "stone chest":
+		placable_object_tiles.set_cellv(location, -1)
 		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
 		drop_items_in_chest()
-	if item_name == "wood fence":
+	elif item_name == "workbench" or item_name == "grain mill" or item_name == "stove":
+		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
+		placable_object_tiles.set_cellv(location, -1)
+	elif item_name == "wood fence":
 		fence_tiles.set_cellv(location, -1)
 		fence_tiles.update_bitmask_region()
 	elif item_name == "wood path" or item_name == "stone path":
@@ -103,7 +140,10 @@ func _on_DetectObjectOverPathBox_area_exited(area):
 
 
 func _on_OpenChestArea_area_entered(area):
-	PlayerInventory.is_inside_chest_area = true
+	pass
+#	PlayerInventory.is_inside_chest_area = true
 
 func _on_OpenChestArea_area_exited(area):
-	PlayerInventory.is_inside_chest_area = false
+	pass
+#	if $OpenChestArea.get_overlapping_areas().size() <= 0:
+#		PlayerInventory.is_inside_chest_area = false

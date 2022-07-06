@@ -21,6 +21,7 @@ var isSpawned = false
 var local_player_id = 0
 var isLoaded = false
 var player = {}
+var player_node
 var player_id
 var mapPartsLoaded = 0
 var player_house_position
@@ -30,6 +31,7 @@ var generated_map = {}
 var player_state = "WORLD"
 var day
 var num_day = 1
+var username
 
 func _ready():
 	# Connect base signals to get notified of connection open, close, and errors.
