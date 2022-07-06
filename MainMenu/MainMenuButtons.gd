@@ -4,6 +4,12 @@ var hovered_button = ""
 var connect_callback = JavaScript.create_callback(self, "_connect_plug")
 var login_callback = JavaScript.create_callback(self, "_login")
 
+func _ready():
+	if not Server.player.empty():
+		$ConnectToPlug.visible = false
+		$PlayShopQuit.visible = true
+		get_parent().spawn_player_in_menu()
+
 func _connect_plug(args):
 	IC.login(login_callback)
 	
@@ -88,6 +94,7 @@ func _on_QuitArea_mouse_exited():
 
 func _on_PlayArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
+		get_parent().get_node("TitleMusic").stop()
 		$SoundEffects.stream = Sounds.button_select
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
@@ -99,7 +106,7 @@ func _on_QuitArea_input_event(viewport, event, shape_idx):
 		$SoundEffects.stream = Sounds.button_select
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
-		get_tree().quit()
+		#get_tree().quit()
 
 
 func _on_ShopArea_input_event(viewport, event, shape_idx):

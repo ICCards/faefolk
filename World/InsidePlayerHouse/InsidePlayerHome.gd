@@ -30,12 +30,18 @@ func _on_Doorway_area_entered(_area):
 	
 func spawnPlayer():
 	print('gettiing player')
-	var player = Server.player_node
-	Server.world.remove_child(player)
-	$Players.add_child(player)
+	#var player = Server.player_node
+	#Server.world.remove_child(player)
+	var value = Server.player
+	var player = Player.instance()
 	player.initialize_camera_limits(Vector2(-50,-30), Vector2(780, 550))
+	player.name = str(value["id"])
+	player.principal = value["principal"]
 	player.direction = "UP"
 	player.position = Vector2(190, 430)
+	player.character = _character.new()
+	player.character.LoadPlayerCharacter(value["c"]) 
+	$Players.add_child(player)
 #	player.initialize_camera_limits(Vector2(-50,-30), Vector2(780, 550))
 #	player.direction = "UP"
 #	player.name = Server.player_id #str(value["id"])

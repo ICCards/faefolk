@@ -38,7 +38,7 @@ const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
 	set_username("")
-#	IC.getUsername(principal,username_callback)
+	IC.getUsername(principal,username_callback)
 	set_player_setting(get_parent().get_parent())
 	_play_background_music()
 	$Camera2D/UserInterface.initialize_user_interface()
