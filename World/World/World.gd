@@ -286,8 +286,8 @@ func buildMap(map):
 	Server.world = self
 	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
-	#spawnPlayer(Server.player)
-	spawnPlayerExample()
+	spawnPlayer(Server.player)
+	#spawnPlayerExample()
 	
 func check_and_remove_invalid_autotiles(map):
 	for i in range(6):
