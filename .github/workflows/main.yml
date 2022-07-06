@@ -5,7 +5,7 @@ on:
       - development
 env:
   GODOT_VERSION: 3.4.4
-  EXPORT_NAME: faefolk
+  EXPORT_NAME: Bin
 
 jobs:
   # job id, can be anything
