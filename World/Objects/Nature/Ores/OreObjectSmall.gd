@@ -34,6 +34,8 @@ func PlayEffect(player_id):
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 32))
 		animation_player.play("small_ore_hit_right")
 	else:
+		visible = false
+		$SmallMovementCollisionBox/CollisionShape2D.disabled = true
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()

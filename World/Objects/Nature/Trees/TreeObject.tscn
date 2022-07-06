@@ -626,10 +626,11 @@ disabled = true
 
 [node name="C" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-polygon = PoolVector2Array( 9, -4, 9, -57, 61, -109, 60, -185, 40, -215, 1, -235, -41, -212, -54, -178, -52, -148, -71, -121, -45, -80, -13, -79, -13, -2 )
+polygon = PoolVector2Array( 10, -15.6667, 9, -57, 61, -109, 60, -185, 40, -215, 1, -235, -41, -212, -54, -178, -52, -148, -71, -121, -45, -80, -13, -79, -13.3333, -14.5556 )
 disabled = true
 
 [node name="D" type="CollisionPolygon2D" parent="TreeTopArea"]
+visible = false
 position = Vector2( 2.22222, -0.111112 )
 polygon = PoolVector2Array( -5.55554, -6.77777, 5.55556, -6.77778, 32.2222, -34.4444, 50, -81.1111, 0, -151.222, -48.8889, -77.8889, -34.4444, -35.5556 )
 disabled = true

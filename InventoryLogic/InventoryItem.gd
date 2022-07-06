@@ -3,7 +3,7 @@ extends Node2D
 var item_name
 var item_quantity
 
-		
+
 func set_item(nm, qt):
 	item_name = nm
 	item_quantity = qt

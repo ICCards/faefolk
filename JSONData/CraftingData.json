@@ -34,5 +34,29 @@
      "house": {
          "wood": 100,
          "stone": 100
+     },
+     "campfire": {
+         "wood": 2,
+         "stone": 2
+     },
+     "fire pedestal": {
+         "wood": 2,
+         "stone": 5,
+     },
+     "tall fire pedestal": {
+         "wood": 2,
+         "stone": 10
+     },
+     "workbench": {
+         "wood": 10,
+         "stone": 10
+     },
+     "grain mill": {
+         "wood": 20,
+         "stone": 20
+     },
+     "stove": {
+         "wood": 30,
+         "stone": 30
      }
 }
