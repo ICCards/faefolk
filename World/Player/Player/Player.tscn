@@ -8,16 +8,16 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/CurrentTime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://Characters/Human/male/WALK/body/down/arms.png" type="Texture" id=9]
-[ext_resource path="res://Characters/Human/male/WALK/assets/down/pants/pants.png" type="Texture" id=10]
+[ext_resource path="res://Characters/WATERING PLANT/assets/down/head_attribute/hair.png" type="Texture" id=9]
+[ext_resource path="res://Characters/WATERING PLANT/assets/right/shoes/shoes.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
-[ext_resource path="res://Characters/Human/male/WALK/body/down/body.png" type="Texture" id=13]
-[ext_resource path="res://Characters/Human/male/WALK/assets/down/shirts/shirt.png" type="Texture" id=14]
-[ext_resource path="res://Characters/Human/male/WALK/assets/down/shoes/shoes.png" type="Texture" id=15]
+[ext_resource path="res://Characters/WATERING PLANT/assets/right/shirts/shirt.png" type="Texture" id=13]
+[ext_resource path="res://Characters/WATERING PLANT/body/right/body.png" type="Texture" id=14]
+[ext_resource path="res://Characters/WATERING PLANT/assets/right/pants/pants.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=17]
-[ext_resource path="res://Characters/Human/male/WALK/assets/down/head_attribute/hair.png" type="Texture" id=18]
+[ext_resource path="res://Characters/WATERING PLANT/body/right/arms.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=19]
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=20]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PlaceItemsUI.gd" type="Script" id=21]
@@ -845,37 +845,44 @@ script = ExtResource( 22 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 hframes = 4
+frame = 3
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 9 )
+texture = ExtResource( 18 )
 hframes = 4
+frame = 3
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 10 )
+texture = ExtResource( 15 )
 hframes = 4
+frame = 3
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 18 )
+texture = ExtResource( 9 )
 hframes = 4
+frame = 3
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 14 )
+texture = ExtResource( 13 )
 hframes = 4
+frame = 3
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 15 )
+texture = ExtResource( 10 )
 hframes = 4
+frame = 3
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
