@@ -3,9 +3,9 @@ extends Node2D
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 onready var inventory_slots = $InventoryMenu/InventorySlots
 onready var background = $Background
-onready var hotbar_slots = get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
-
+var hotbar_slots
 var item
+
 func _ready():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
@@ -14,6 +14,10 @@ func _ready():
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
+	if Server.player_state == "WORLD":
+		hotbar_slots = get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
+	else: 
+		hotbar_slots = get_node("/root/InsidePlayerHome/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
 	var h_slots = hotbar_slots.get_children()
 	for i in range(h_slots.size()):
 		h_slots[i].connect("mouse_entered", self, "hovered_slot", [h_slots[i]])
@@ -38,21 +42,16 @@ func initialize_inventory():
 			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
 	set_inventory_state()
 	
+
 func hovered_slot(slot: SlotClass):
 	if slot.item != null:
 		item = slot.item.item_name
-
 
 func exited_slot(slot: SlotClass):
 	item = null
 
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
-#	if event is InputEventMouse:
-#		#print(slot.item)
-#		find_parent("UserInterface").hovered_item = slot.item
-#	if not event is InputEventMouse:
-#		find_parent("UserInterface").hovered_item = null
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if find_parent("UserInterface").holding_item != null:
