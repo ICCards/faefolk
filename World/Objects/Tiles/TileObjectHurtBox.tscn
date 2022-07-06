@@ -12,7 +12,7 @@ extents = Vector2( 15, 14 )
 extents = Vector2( 15, 14 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 15, 14 )
+extents = Vector2( 14, 14 )
 
 [node name="TileObjectHurtBox" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,11 +39,11 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TypeOfTileArea"]
 shape = SubResource( 3 )
 
-[node name="OpenChestArea" type="Area2D" parent="."]
+[node name="InteractiveArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 32
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenChestArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea"]
 position = Vector2( 0, 14 )
 shape = SubResource( 4 )
 disabled = true
@@ -61,5 +61,3 @@ mode = 2
 [connection signal="area_entered" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_entered"]
 [connection signal="area_exited" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="area_entered" from="OpenChestArea" to="." method="_on_OpenChestArea_area_entered"]
-[connection signal="area_exited" from="OpenChestArea" to="." method="_on_OpenChestArea_area_exited"]

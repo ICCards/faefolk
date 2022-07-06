@@ -14,7 +14,6 @@ func _ready():
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
-	print(hotbar_slots)
 	var h_slots = hotbar_slots.get_children()
 	for i in range(h_slots.size()):
 		h_slots[i].connect("mouse_entered", self, "hovered_slot", [h_slots[i]])
@@ -23,7 +22,6 @@ func _ready():
 	
 func _physics_process(delta):
 	if item != null and find_parent("UserInterface").holding_item == null:
-		print(get_local_mouse_position() + Vector2(140, 100))
 		$InventoryMenu/InventoryItemDescription.visible = true
 		$InventoryMenu/InventoryItemDescription/Title.text = item[0].to_upper() + item.substr(1,-1)
 		$InventoryMenu/InventoryItemDescription/Description.text = JsonData.item_data[item]["Description"]

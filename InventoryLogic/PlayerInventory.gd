@@ -11,9 +11,12 @@ const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 var viewInventoryMode = false
-var openChestMode = false
+var interactive_screen_mode = false
 var chatMode = false
 var is_inside_chest_area = false
+var is_inside_workbench_area = false
+var is_inside_stove_area = false
+var is_inside_grain_mill_area = false
 var active_item_slot = 0
 
 var inventory = {
