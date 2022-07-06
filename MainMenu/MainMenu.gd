@@ -1,9 +1,10 @@
 extends Control
 
 onready var PlayerMenuState = preload("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
-
-
+const _character = preload("res://Global/Data/Characters.gd")
+var playerMenuState
 var is_menu_open = false
+
 func _ready():
 	$TitleMusic.stream = Sounds.title_music
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
@@ -13,11 +14,17 @@ func _ready():
 	$Background/Water2.playing = true
 
 
-func spawn_player_in_menu(var player = ""):
-	var playerMenuState = PlayerMenuState.instance()
-	playerMenuState.initialize(Server.player)
-	add_child(playerMenuState)
-	playerMenuState.global_position = Vector2(600, 472 )
+func spawn_player_in_menu():
+	var value = Server.player
+	if not value.empty():
+		playerMenuState = PlayerMenuState.instance()
+		playerMenuState.character = _character.new()
+		playerMenuState.character.LoadPlayerCharacter(value["c"])
+		add_child(playerMenuState)
+		playerMenuState.global_position = Vector2(600, 472 )
+	else:
+		yield(get_tree().create_timer(0.5), "timeout")
+		spawn_player_in_menu()
 
 
 func change_title_volume():
