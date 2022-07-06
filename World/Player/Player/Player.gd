@@ -38,7 +38,7 @@ const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
 	set_username("")
-	IC.getUsername(principal,username_callback)
+#	IC.getUsername(principal,username_callback)
 	set_player_setting(get_parent().get_parent())
 	_play_background_music()
 	$Camera2D/UserInterface.initialize_user_interface()
@@ -115,7 +115,7 @@ func _process(_delta) -> void:
 		is_mouse_over_hotbar = true
 	else:
 		is_mouse_over_hotbar = false
-	if not PlayerInventory.viewInventoryMode and not PlayerInventory.openChestMode:
+	if not PlayerInventory.viewInventoryMode and not PlayerInventory.interactive_screen_mode:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
@@ -129,7 +129,7 @@ func _process(_delta) -> void:
 func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and \
 		not PlayerInventory.viewInventoryMode and \
-		not PlayerInventory.openChestMode and \
+		not PlayerInventory.interactive_screen_mode and \
 		Server.player_state == "WORLD" and \
 		not PlayerInventory.chatMode and \
 		not is_mouse_over_hotbar and \

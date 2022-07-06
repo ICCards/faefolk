@@ -60,7 +60,7 @@ func _ready():
 	Server.world = self
 	
 func change_ambient_volume():
-	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -14)
+	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
 
 func wait_for_map():
 	if not Server.generated_map.empty():
@@ -281,7 +281,7 @@ func buildMap(map):
 	Server.player_state = "WORLD"
 	Server.isLoaded = true
 	print("Map loaded")
-	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -14)
+	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
 	$AmbientSound.play()
 	Server.world = self
 	yield(get_tree().create_timer(8.5), "timeout")

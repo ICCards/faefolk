@@ -29,7 +29,7 @@ func _ready():
 	elif item_name == "torch" or \
 	item_name == "campfire" or \
 	item_name == "fire pedestal" or \
-	item_name == "fire pedestal tall":
+	item_name == "tall fire pedestal":
 		$Light2D.enabled = true
 	elif item_name == "house":
 		queue_free()
@@ -58,10 +58,23 @@ func PlayEffect(_player_id):
 
 func set_dimensions():
 	if item_name == "wood chest" or item_name == "stone chest":
-		$OpenChestArea/CollisionShape2D.disabled = false
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 65536
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
-	elif item_name == "crafting table" or item_name == "kitchen" or item_name == "machine":
+	elif item_name == "workbench":
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 131072
+		scale.x = 2.0
+		position = position +  Vector2(16, 0)
+	elif item_name == "stove":
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 262144
+		scale.x = 2.0
+		position = position +  Vector2(16, 0)
+	elif item_name == "grain mill":
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 524288
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
 
@@ -84,7 +97,7 @@ func _on_HurtBox_area_entered(area):
 		placable_object_tiles.set_cellv(location, -1)
 		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
 		drop_items_in_chest()
-	elif item_name == "crafting table" or item_name == "machine" or item_name == "kitchen":
+	elif item_name == "workbench" or item_name == "grain mill" or item_name == "stove":
 		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
 		placable_object_tiles.set_cellv(location, -1)
 	elif item_name == "wood fence":
@@ -127,7 +140,10 @@ func _on_DetectObjectOverPathBox_area_exited(area):
 
 
 func _on_OpenChestArea_area_entered(area):
-	PlayerInventory.is_inside_chest_area = true
+	pass
+#	PlayerInventory.is_inside_chest_area = true
 
 func _on_OpenChestArea_area_exited(area):
-	PlayerInventory.is_inside_chest_area = false
+	pass
+#	if $OpenChestArea.get_overlapping_areas().size() <= 0:
+#		PlayerInventory.is_inside_chest_area = false

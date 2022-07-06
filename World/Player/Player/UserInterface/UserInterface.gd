@@ -14,12 +14,17 @@ func initialize_user_interface():
 
 func _input(event):
 	if event.is_action_pressed("open_menu") and holding_item == null and \
-	not PlayerInventory.openChestMode and not PlayerInventory.chatMode:
+	not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode:
 		toggle_inventory()
-	elif event.is_action_pressed("action") and holding_item == null and \
-	not PlayerInventory.viewInventoryMode and PlayerInventory.is_inside_chest_area and \
-	not PlayerInventory.chatMode:
-		open_chest()
+	elif event.is_action_pressed("action") and holding_item == null and not PlayerInventory.viewInventoryMode and not PlayerInventory.chatMode:
+		if PlayerInventory.is_inside_chest_area:
+			open_chest()
+		elif PlayerInventory.is_inside_workbench_area:
+			open_workbench()
+		elif PlayerInventory.is_inside_stove_area:
+			open_stove()
+		elif PlayerInventory.is_inside_grain_mill_area:
+			open_grain_mill()
 	if event.is_action_pressed("scroll_up"):
 		PlayerInventory.active_item_scroll_up()
 	elif event.is_action_pressed("scroll_down"):
@@ -32,13 +37,36 @@ func toggle_inventory():
 	PlayerInventory.viewInventoryMode = !PlayerInventory.viewInventoryMode
 	$Inventory.visible = !$Inventory.visible
 	
-	
 func open_chest():
 	$OpenChest.initialize_inventory()
 	$OpenChest.initialize_chest_data()
 	$Hotbar.initialize_hotbar()
-	PlayerInventory.openChestMode = !PlayerInventory.openChestMode
+	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
+	toggle_stats_and_time()
 	$OpenChest.visible = !$OpenChest.visible
-	if PlayerInventory.openChestMode == true:
+	if PlayerInventory.interactive_screen_mode == true:
 		$SoundEffects.stream = Sounds.chest_open
 		$SoundEffects.play()
+
+
+func open_grain_mill():
+	$GrainMill.initialize()
+	$GrainMill.visible = !$GrainMill.visible
+	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
+	toggle_stats_and_time()
+
+func open_workbench():
+	$Workbench.initialize()
+	$Workbench.visible = !$Workbench.visible
+	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
+	toggle_stats_and_time()
+	
+func open_stove():
+	$Stove.initialize()
+	$Stove.visible = !$Stove.visible
+	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
+	toggle_stats_and_time()
+	
+func toggle_stats_and_time():
+	$CurrentTime.visible = !$CurrentTime.visible
+	$PlayerStatsUI.visible = !$PlayerStatsUI.visible

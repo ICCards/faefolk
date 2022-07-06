@@ -88,14 +88,17 @@ func entered_crafting_area(_item):
 func exited_crafting_area(_item):
 	item = null
 	if _item == "house":
-		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
-		get_node("Page" + str(page) + "/" + _item).scale, Vector2(0.7, 0.7), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	else:
-		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
-			get_node("Page" + str(page) + "/" + _item).scale, Vector2(3, 3), 0.15,
+		if has_node("Page" + str(page) + "/" + _item):
+			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
+			get_node("Page" + str(page) + "/" + _item).scale, Vector2(0.7, 0.7), 0.15,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+			$Tween.start()
+	else:
+		if has_node("Page" + str(page) + "/" + _item):
+			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
+				get_node("Page" + str(page) + "/" + _item).scale, Vector2(3, 3), 0.15,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
 	
 
 

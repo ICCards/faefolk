@@ -57,7 +57,7 @@ func place_item_state(event, item_name, valid_tiles):
 		
 	if valid_tiles.get_cellv(location) == -1 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
-	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "crafting table" or item_name == "machine" or item_name == "kitchen") and valid_tiles.get_cellv(location + Vector2(1,0)) == -1:
+	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and valid_tiles.get_cellv(location + Vector2(1,0)) == -1:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	elif item_name == "house" and not Util.validate_house_tiles(location, valid_tiles):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")

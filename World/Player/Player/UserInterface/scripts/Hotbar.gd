@@ -25,7 +25,7 @@ func _input(_event):
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
-			if PlayerInventory.viewInventoryMode == false and PlayerInventory.openChestMode == false:
+			if PlayerInventory.viewInventoryMode == false and PlayerInventory.interactive_screen_mode == false:
 				PlayerInventory.hotbar_slot_selected(slot)
 			elif find_parent("UserInterface").holding_item != null:
 				if !slot.item:
