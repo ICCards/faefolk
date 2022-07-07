@@ -42,5 +42,5 @@ jobs:
         with:
           artifacts: "build/web/web.zip"
           bodyFile: "CHANGELOG.md"
-          tag: latest/dev
+          tag: v0.0.8
           token: ${{ secrets.GITHUB_TOKEN }}
