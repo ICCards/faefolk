@@ -4,28 +4,57 @@ on:
     branches:
       - development
 jobs:
-  # job id, can be anything
-  export_game:
-    # Always use ubuntu-latest for this action
+  env:
+  GODOT_VERSION: 3.4
+
+jobs:
+  buildX11:
+    name: Build project (linux)
     runs-on: ubuntu-latest
-    # Job name, can be anything
-    name: Export Game Job
     steps:
-      # Always include the checkout step so that 
-      # your project is available for Godot to export
-    - name: checkout
-      uses: actions/checkout@v2.3.1
-      # Ensure that you get the entire project history
+    - uses: actions/checkout@v2
       with:
-        fetch-depth: 0
-    - name: export game
-      # Use latest version (see releases for all versions)
-      uses: firebelley/godot-export@v3.0.0
+        token: ${{ secrets.MY_TOKEN || github.token }}
+    - name: Build release
+      id: exportGodot
+      uses: kuhnchris/gh-export-godot-project@a80b27afe149922521bf81c4c5dce55433700c95
       with:
-        # Defining all the required inputs
-        # I used the mono version of Godot in this example
-        godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_linux_headless.64.zip
-        godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_export_templates.tpz
-        relative_project_path: ./
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        project-directory: "./"
+        export-debug: false
+        export-pack: false
+        export-platform: true
+        platform: "HTML5"
+        executable-name: "example-project"
+    - name: Temporarily save data
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-linux
+        path: ./export-artifacts/
+        retention-days: 1         
+
+  createRelease:
+    needs: [buildX11]
+    name: Create automatic release on GitHub
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+    - name: Retrieve saved data (all)
+      uses: actions/download-artifact@v2
+      continue-on-error: true
+      with:
+        path: ./export-artifacts/
+    - name: Free up artifact space
+      uses: kolpav/purge-artifacts-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        expire-in: 1s
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      #if: startsWith(github.ref, 'refs/tags/')
+      if: ${{ always() }}
+      with:
+        body: |
+          This is an automated build for GitHub SHA ${{ github.sha }}
+        tag_name: latest-dev-release
+        files: |
+          ./export-artifacts/*
