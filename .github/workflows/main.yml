@@ -1,60 +1,65 @@
 # Whenever a push is made to the master branch then run the job
 on: 
+  #workflow_dispatch:
+    #inputs:
+      #tag: latest
   push:
     branches:
       - development
-
 env:
-  GODOT_VERSION: 3.4
-
+  GODOT_VERSION: 3.4.4
+  EXPORT_NAME: Bin
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
-  buildX11:
-    name: Build project (HTML5)
-    runs-on: ubuntu-latest
+  build-web:
+    name: Web Export
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    container:
+      image: barichello/godot-ci:3.4.4
     steps:
-    - uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.MY_TOKEN || github.token }}
-    - name: Build release
-      id: exportGodot
-      uses: kuhnchris/gh-export-godot-project@a80b27afe149922521bf81c4c5dce55433700c95
-      with:
-        project-directory: "./"
-        export-debug: false
-        export-pack: false
-        export-platform: true
-        platform: "HTML5"
-        executable-name: "faefolk"
-    - name: Temporarily save data
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-html5
-        path: ./build/web
-        retention-days: 1         
-
-  createRelease:
-    needs: [buildX11]
-    name: Create automatic release on GitHub
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    steps:
-    - name: Retrieve saved data (all)
-      uses: actions/download-artifact@v2
-      continue-on-error: true
-      with:
-        path: ./export-artifacts/
-    - name: Free up artifact space
-      uses: kolpav/purge-artifacts-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        expire-in: 1s
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      #if: startsWith(github.ref, 'refs/tags/')
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          godot -v --export "HTML5" build/web/index.html
+          ls build/web
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: web
+          path: ./build/web
+    createRelease:
+      needs: [build-web]
+      name: Create automatic release on GitHub
+      runs-on: ubuntu-latest
       if: ${{ always() }}
-      with:
-        body: |
-          This is an automated build for GitHub SHA ${{ github.sha }}
-        tag_name: latest-dev-release
-        files: |
-          ./export-artifacts/*
+      steps:
+      - name: Retrieve saved data (all)
+        uses: actions/download-artifact@v2
+        continue-on-error: true
+        with:
+          path: ./export-artifacts/
+      - name: Free up artifact space
+        uses: kolpav/purge-artifacts-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          expire-in: 1s
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        #if: startsWith(github.ref, 'refs/tags/')
+        if: ${{ always() }}
+        with:
+          body: |
+            This is an automated build for GitHub SHA ${{ github.sha }}
+          tag_name: latest-dev-release
+          files: |
+            ./export-artifacts/*
