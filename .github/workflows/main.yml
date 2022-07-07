@@ -7,7 +7,7 @@ on:
     branches:
       - development
 env:
-  GODOT_VERSION: 3.2
+  GODOT_VERSION: 3.4.2
   EXPORT_NAME: Bin
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: write
     container:
-      image: barichello/godot-ci:3.4.4
+      image: barichello/godot-ci:3.4.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
