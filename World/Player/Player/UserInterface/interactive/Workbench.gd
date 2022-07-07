@@ -9,14 +9,17 @@ func initialize():
 		var player_pos = get_node("/root/World/Players/" +  str(Server.player_id)).get_position()
 		if object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(0, -32))) == PlaceObject.Placables.WORKBENCH1 or \
 		object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(-32, -32))) == PlaceObject.Placables.WORKBENCH1:
+			$UpgradeButton.visible = true
 			level = 1
 		elif object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(0, -32))) == PlaceObject.Placables.WORKBENCH2 or \
 		object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(-32, -32))) == PlaceObject.Placables.WORKBENCH2:
+			$UpgradeButton.visible = true
 			level = 2
 		elif object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(0, -32))) == PlaceObject.Placables.WORKBENCH3 or \
 		object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(-32, -32))) == PlaceObject.Placables.WORKBENCH3:
 			level = 3
 			$UpgradeButton.visible = false
+
 
 
 func _on_UpgradeButton_pressed():

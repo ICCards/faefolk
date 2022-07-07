@@ -33,6 +33,7 @@ var position_of_object
 var object_variety
 var day_num = 1
 var season = "spring"
+var valid_spawn_position
 
 const NUM_FARM_OBJECTS = 550
 const NUM_GRASS_BUNCHES = 150
@@ -85,29 +86,22 @@ func spawnPlayer(value):
 		player.character.LoadPlayerCharacter(value["c"])
 		$Players.add_child(player)
 		if Server.player_house_position == null:
-			player.position = sand.map_to_world(Util.string_to_vector2(value["p"])) 
+			get_valid_player_spawn_position()
+			player.position = valid_spawn_position
 		else: 
 			player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
-		print('getting map')
-		
-func spawnPlayerExample():
-	var player = Player.instance()
-	player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
-	player.name = Server.player_id
-	player.character = _character.new()
-	player.character.LoadPlayerCharacter("human_male") 
-	$Players.add_child(player)
-	if Server.player_house_position == null:
-		player.position = sand.map_to_world(Vector2(4,4)) 
-	else: 
-		player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
-#	var player_pet = Player_pet.instance()
-#	add_child(player_pet)
-#	player_pet.position = sand.map_to_world(Vector2(8,8)) 
-	
-	print('getting map')
 		
 		
+func get_valid_player_spawn_position():
+	rng.randomize()
+	var randomLoc = Vector2(rng.randi_range(0, 300), rng.randi_range(0, 300))
+	if validTiles.get_cellv(randomLoc) != -1:
+		valid_spawn_position = sand.map_to_world(randomLoc)
+	else:
+		print('invalid loc so try again')
+		get_valid_player_spawn_position()
+		
+
 func spawnNewPlayer(player):
 	if not player.empty():
 		if not has_node(str(player["id"])):
