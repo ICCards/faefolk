@@ -4,57 +4,57 @@ on:
     branches:
       - development
 
-  env:
-    GODOT_VERSION: 3.4
+env:
+  GODOT_VERSION: 3.4
 
-  jobs:
-    buildX11:
-      name: Build project (linux)
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.MY_TOKEN || github.token }}
-      - name: Build release
-        id: exportGodot
-        uses: kuhnchris/gh-export-godot-project@a80b27afe149922521bf81c4c5dce55433700c95
-        with:
-          project-directory: "./"
-          export-debug: false
-          export-pack: false
-          export-platform: true
-          platform: "HTML5"
-          executable-name: "example-project"
-      - name: Temporarily save data
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-linux
-          path: ./export-artifacts/
-          retention-days: 1         
+jobs:
+  buildX11:
+    name: Build project (linux)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.MY_TOKEN || github.token }}
+    - name: Build release
+      id: exportGodot
+      uses: kuhnchris/gh-export-godot-project@a80b27afe149922521bf81c4c5dce55433700c95
+      with:
+        project-directory: "./"
+        export-debug: false
+        export-pack: false
+        export-platform: true
+        platform: "HTML5"
+        executable-name: "example-project"
+    - name: Temporarily save data
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-linux
+        path: ./export-artifacts/
+        retention-days: 1         
 
-    createRelease:
-      needs: [buildX11]
-      name: Create automatic release on GitHub
-      runs-on: ubuntu-latest
+  createRelease:
+    needs: [buildX11]
+    name: Create automatic release on GitHub
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+    - name: Retrieve saved data (all)
+      uses: actions/download-artifact@v2
+      continue-on-error: true
+      with:
+        path: ./export-artifacts/
+    - name: Free up artifact space
+      uses: kolpav/purge-artifacts-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        expire-in: 1s
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      #if: startsWith(github.ref, 'refs/tags/')
       if: ${{ always() }}
-      steps:
-      - name: Retrieve saved data (all)
-        uses: actions/download-artifact@v2
-        continue-on-error: true
-        with:
-          path: ./export-artifacts/
-      - name: Free up artifact space
-        uses: kolpav/purge-artifacts-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          expire-in: 1s
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        #if: startsWith(github.ref, 'refs/tags/')
-        if: ${{ always() }}
-        with:
-          body: |
-            This is an automated build for GitHub SHA ${{ github.sha }}
-          tag_name: latest-dev-release
-          files: |
-            ./export-artifacts/*
+      with:
+        body: |
+          This is an automated build for GitHub SHA ${{ github.sha }}
+        tag_name: latest-dev-release
+        files: |
+          ./export-artifacts/*
