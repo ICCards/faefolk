@@ -47,7 +47,7 @@ jobs:
       uses: actions/download-artifact@v2
       continue-on-error: true
       with:
-        path: ./export-artifacts/
+        path: ./build/web/
     - name: Free up artifact space
       uses: kolpav/purge-artifacts-action@v1
       with:
