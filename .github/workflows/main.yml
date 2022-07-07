@@ -7,9 +7,10 @@ env:
   GODOT_VERSION: 3.4.4
   EXPORT_NAME: Bin
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-inputs:
-      name:
-        tag: latest
+  workflow_dispatch:
+    inputs:
+          name:
+            tag: latest
 jobs:
   # job id, can be anything
   export-web:
