@@ -34,6 +34,11 @@ jobs:
         with:
           name: web
           path: build/web
+      - name: Creating tag    
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "latest"
+          message: "Latest release"
       - name: release
         uses: actions/create-release@v1
         id: create_release
@@ -43,11 +48,6 @@ jobs:
           release_name: dev
           tag_name: ${{ github.ref }}
           body_path: CHANGELOG.md
-      - name: Creating tag    
-        uses: rickstaa/action-create-tag@v1
-        with:
-          tag: "latest"
-          message: "Latest release"
       - name: Uploading release
         uses: ncipollo/release-action@v1
         with:
