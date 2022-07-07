@@ -7,6 +7,9 @@ env:
   GODOT_VERSION: 3.4.4
   EXPORT_NAME: Bin
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+inputs:
+      name:
+        tag: latest
 jobs:
   # job id, can be anything
   export-web:
@@ -23,7 +26,6 @@ jobs:
           lfs: true
       - name: Setup
         run: |
-          git lfs install
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Web Build
@@ -35,20 +37,6 @@ jobs:
         with:
           name: web
           path: build/web
-      - name: Creating tag    
-        uses: rickstaa/action-create-tag@v1
-        with:
-          tag: "latest"
-          message: "Latest release"
-      - name: release
-        uses: actions/create-release@v1
-        id: create_release
-        with:
-          draft: false
-          prerelease: false
-          release_name: dev
-          tag_name: ${{ github.ref }}
-          body_path: CHANGELOG.md
       - name: Uploading release
         uses: ncipollo/release-action@v1
         with:
