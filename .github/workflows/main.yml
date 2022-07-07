@@ -32,7 +32,7 @@ jobs:
           mkdir -v -p build/web
           godot -v --export "HTML5" build/web/index.html
           cd build/web
-          zip -r web.zip .
+          zip -r web.zip ./*
           cd ..
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
