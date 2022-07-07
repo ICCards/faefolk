@@ -1,9 +1,8 @@
 # Whenever a push is made to the master branch then run the job
 on: 
-  workflow_dispatch:
-    inputs:
-      name:
-        tag: latest
+  #workflow_dispatch:
+    #inputs:
+      #tag: latest
   push:
     branches:
       - development
@@ -38,9 +37,10 @@ jobs:
         with:
           name: web
           path: build/web
-      - name: Uploading release
+      - name: Creating release
         uses: ncipollo/release-action@v1
         with:
           artifacts: "web.zip"
           bodyFile: "CHANGELOG.md"
+          tag: latest
           token: ${{ secrets.GITHUB_TOKEN }}
