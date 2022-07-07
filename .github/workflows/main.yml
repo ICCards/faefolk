@@ -40,7 +40,7 @@ jobs:
       - name: Creating release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "web.zip"
+          artifacts: "build/web/web.zip"
           bodyFile: "CHANGELOG.md"
           tag: latest
           token: ${{ secrets.GITHUB_TOKEN }}
