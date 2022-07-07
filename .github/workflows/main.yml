@@ -45,5 +45,5 @@ jobs:
           body: |
             This is an automated build for GitHub SHA ${{ github.sha }}
           tag_name: latest-dev-release
-          files: web.zip
+          files: ./build/web
     
