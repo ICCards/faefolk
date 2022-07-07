@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: web
-          path: web.zip
+          path: build/web/web.zip
   release:
     needs: [build-web]
     runs-on: ubuntu-latest
