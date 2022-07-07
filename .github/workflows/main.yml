@@ -38,12 +38,12 @@ jobs:
           name: web
           path: ./build/web
       - name: Release
-          uses: softprops/action-gh-release@v1
-          #if: startsWith(github.ref, 'refs/tags/')
-          if: ${{ always() }}
-          with:
-            body: |
-              This is an automated build for GitHub SHA ${{ github.sha }}
-            tag_name: latest-dev-release
-            files: web.zip
+        uses: softprops/action-gh-release@v1
+        #if: startsWith(github.ref, 'refs/tags/')
+        if: ${{ always() }}
+        with:
+          body: |
+            This is an automated build for GitHub SHA ${{ github.sha }}
+          tag_name: latest-dev-release
+          files: web.zip
     
