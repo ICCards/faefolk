@@ -6,7 +6,7 @@ on:
 env:
   GODOT_VERSION: 3.4.4
   EXPORT_NAME: Bin
-
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   # job id, can be anything
   export-web:
@@ -32,3 +32,20 @@ jobs:
         with:
           name: web
           path: build/web
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: dev
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+      - name: upload web artifact
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/web/web.zip
+          asset_name: web.zip
+          asset_content_type: application/zip
