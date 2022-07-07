@@ -41,8 +41,6 @@ jobs:
     needs: [build-web]
     runs-on: ubuntu-latest
     steps:
-      - name: Get the version
-        id: get_version
       - uses: actions/download-artifact@v2
         with:
           name: web
