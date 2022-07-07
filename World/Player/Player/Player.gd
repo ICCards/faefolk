@@ -73,7 +73,6 @@ func DisplayMessageBubble(message):
 func adjust_bubble_position(lines):
 	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
 
-
 	
 func set_username(username):
 	Server.username = username
