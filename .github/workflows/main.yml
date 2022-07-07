@@ -49,5 +49,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: latest-dev-release
-          files: web
+          files: /home/runner/work/faefolk/faefolk/web
     
