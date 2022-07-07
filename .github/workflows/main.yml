@@ -31,12 +31,13 @@ jobs:
         run: |
           mkdir -v -p build/web
           godot -v --export "HTML5" build/web/index.html
+          zip web.zip build/web/*
           ls build/web
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: web
-          path: ./build/web
+          path: ./build/web/web.zip
   release:
     needs: [build-web]
     runs-on: ubuntu-latest
