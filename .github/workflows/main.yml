@@ -31,7 +31,9 @@ jobs:
         run: |
           mkdir -v -p build/web
           godot -v --export "HTML5" build/web/index.html
-          zip -r web.zip build/web/*
+          cd build/web
+          zip -r web.zip .
+          cd ..
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
