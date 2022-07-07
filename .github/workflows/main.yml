@@ -9,7 +9,7 @@ env:
 
 jobs:
   buildX11:
-    name: Build project (linux)
+    name: Build project (HTML5)
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -24,12 +24,12 @@ jobs:
         export-pack: false
         export-platform: true
         platform: "HTML5"
-        executable-name: "example-project"
+        executable-name: "faefolk"
     - name: Temporarily save data
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: build-linux
-        path: ./export-artifacts/
+        name: build-html5
+        path: ./export-artifacts/index.**
         retention-days: 1         
 
   createRelease:
