@@ -37,29 +37,13 @@ jobs:
         with:
           name: web
           path: ./build/web
-  createRelease:
-    needs: [build-web]
-    name: Create automatic release on GitHub
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    steps:
-    - name: Retrieve saved data (all)
-      uses: actions/download-artifact@v2
-      continue-on-error: true
-      with:
-        path: ./build/web/
-    - name: Free up artifact space
-      uses: kolpav/purge-artifacts-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        expire-in: 1s
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      #if: startsWith(github.ref, 'refs/tags/')
-      if: ${{ always() }}
-      with:
-        body: |
-          This is an automated build for GitHub SHA ${{ github.sha }}
-        tag_name: latest-dev-release
-        files: |
-          ./export-artifacts/*
+      - name: Release
+          uses: softprops/action-gh-release@v1
+          #if: startsWith(github.ref, 'refs/tags/')
+          if: ${{ always() }}
+          with:
+            body: |
+              This is an automated build for GitHub SHA ${{ github.sha }}
+            tag_name: latest-dev-release
+            files: web.zip
+    
