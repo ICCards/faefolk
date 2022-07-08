@@ -172,9 +172,11 @@ func _on_ExitButton_input_event(viewport, event, shape_idx):
 
 
 func _on_ExitToTitleButton_pressed():
-	PlayerInventory.viewInventoryMode = false
-	Server.world = null
-	SceneChanger.change_scene("res://MainMenu/MainMenu.tscn")
+	pass
+#	PlayerInventory.viewInventoryMode = false
+#	Server.world = null
+#	SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
 
 func _on_QuitButton_pressed():
-	get_tree().quit()
+	pass
+	#get_tree().quit()
