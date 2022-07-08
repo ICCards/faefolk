@@ -224,7 +224,7 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Building ore")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
-		print("LArGE ORE SPAWN" + str(id))
+		print("LArGE ORE SPAWN " + str(id))
 		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
 		if is_valid_position(loc, "ore_large"):
 			oreTypes.shuffle()
