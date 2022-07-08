@@ -53,6 +53,8 @@ jobs:
       - name: Build Changelog
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          outputFile: 'CHANGELOG.md'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
       - name: Triggering IC Deployment
@@ -60,7 +62,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source_file: ${{steps.github_release.outputs.changelog}}
+          source_file: 'CHANGELOG.md'
           destination_repo: 'ICCards/faefolk_web'
           destination_branch: development
           destination_folder: './'
