@@ -25,7 +25,7 @@ func _ready():
 func _on_Doorway_area_entered(_area):
 	Server.isLoaded = false
 	Server.world = null
-	SceneChanger.change_scene("res://World/World/World.tscn", "door")
+	SceneChanger.goto_scene("res://World/World/World.tscn")
 
 	
 func spawnPlayer():
