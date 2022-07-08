@@ -1221,6 +1221,7 @@ tile_set = SubResource( 255 )
 cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2
 cell_y_sort = true
+collision_layer = 0
 format = 1
 
 [node name="PathTiles" type="TileMap" parent="PlacableTiles"]

@@ -29,3 +29,10 @@ func _on_Area2D_body_entered(_body):
 
 func _on_Area2D_body_exited(_body):
 	bodyEnteredFlag = false
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+	
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false

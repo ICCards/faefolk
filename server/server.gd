@@ -22,7 +22,7 @@ var local_player_id = 0
 var isLoaded = false
 var player = {}
 var player_node
-var player_id
+var player_id = "testID"
 var mapPartsLoaded = 0
 var player_house_position
 var world

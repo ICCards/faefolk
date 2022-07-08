@@ -59,7 +59,7 @@ margin_right = 222.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 theme = ExtResource( 3 )
-placeholder_text = "Press ENT to enter / ESC to exits"
+placeholder_text = "Press ENT to enter / ESC to exit"
 
 [node name="TextureButton" type="TextureButton" parent="."]
 margin_top = -33.0

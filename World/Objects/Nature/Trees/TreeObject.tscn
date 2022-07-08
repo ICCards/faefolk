@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Trees/TreeObject.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/tree_sets/A/top.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 22.7778, 28.3507 )
@@ -538,6 +539,7 @@ offset = Vector2( 0, -120 )
 region_rect = Rect2( 160, 320, 0, 0 )
 
 [node name="TreeTop" type="Sprite" parent="TreeSprites"]
+texture = ExtResource( 2 )
 offset = Vector2( 0, -120 )
 
 [node name="Tween" type="Tween" parent="TreeSprites"]
@@ -650,6 +652,12 @@ position = Vector2( -3.33333, 29.8889 )
 rotation = -1.5708
 shape = SubResource( 22 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -2.86102e-06, -93.3333 )
+scale = Vector2( 7.11111, 12.2222 )
+
 [connection signal="area_entered" from="TreeHurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="TreeTopArea" to="." method="_on_TreeTopArea_area_entered"]
 [connection signal="area_exited" from="TreeTopArea" to="." method="_on_TreeTopArea_area_exited"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
