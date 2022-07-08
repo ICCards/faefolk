@@ -1,8 +1,8 @@
 # Whenever a push is made to the master branch then run the job
 on: 
   push:
-    branches:
-      - development
+    tags:
+      - '*'
 env:
   GODOT_VERSION: 3.4.4
   EXPORT_NAME: Bin
