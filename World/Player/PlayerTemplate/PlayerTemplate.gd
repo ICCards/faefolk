@@ -94,21 +94,9 @@ func setPlayerTexture(var anim):
 	shirtsSprite.set_texture(character.shirts_sprites[anim])
 	shoesSprite.set_texture(character.shoes_sprites[anim])
 	
-	
-	
-#	match direction:
-#		"up":
-#			toolEquippedSprite.set_texture(Images.returnToolSprite(tool_name, direction.to_lower()))
 
-#func Swing():
-#	for swing in swing_dict.keys():
-#		if swing <= Server.client_clock:
-#			swingActive = true
-#			set_position(swing_dict[swing]["Position"])
-#			setPlayerTexture("swing_" + swing_dict[swing]["Direction"])
-#			toolEquippedSprite.set_texture(Images.returnToolSprite(swing_dict[swing]["ToolName"], swing_dict[swing]["Direction"]))
-#			animation_player.play("swing")
-#			yield(animation_player, "animation_finished")
-#			swing_dict.erase(swing)
-#			swingActive = false
-#
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false

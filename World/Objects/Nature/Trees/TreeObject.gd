@@ -266,3 +266,12 @@ func _on_TreeTopArea_area_entered(_area):
 func _on_TreeTopArea_area_exited(_area):
 	set_tree_visible()
 
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false
+	print('tree exited screen')

@@ -91,14 +91,25 @@ func spawnPlayer(value):
 		else: 
 			player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		
+func spawnPlayerExample():
+	var player = Player.instance()
+	player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
+	player.name = Server.player_id
+	player.character = _character.new()
+	player.character.LoadPlayerCharacter("goblin_female")
+	$Players.add_child(player)
+	if Server.player_house_position == null:
+		get_valid_player_spawn_position()
+		player.position = valid_spawn_position
+	else: 
+		player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		
 func get_valid_player_spawn_position():
 	rng.randomize()
-	var randomLoc = Vector2(rng.randi_range(0, 300), rng.randi_range(0, 300))
+	var randomLoc = Vector2(rng.randi_range(0, 100), rng.randi_range(0, 100))
 	if validTiles.get_cellv(randomLoc) != -1:
 		valid_spawn_position = sand.map_to_world(randomLoc)
 	else:
-		print('invalid loc so try again')
 		get_valid_player_spawn_position()
 		
 
@@ -213,6 +224,7 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Building ore")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
+		print("LArGE ORE SPAWN" + str(id))
 		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
 		if is_valid_position(loc, "ore_large"):
 			oreTypes.shuffle()
@@ -281,7 +293,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
 	spawnPlayer(Server.player)
-	#spawnPlayerExample()
+	spawnPlayerExample()
 	
 func check_and_remove_invalid_autotiles(map):
 	for i in range(6):

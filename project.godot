@@ -29,6 +29,7 @@ PlaceObject="*res://Global/Data/PlaceObject.gd"
 Tiles="*res://helpers/Tiles.gd"
 IC="*res://helpers/IC.gd"
 Settings="*res://Global/Data/Settings.gd"
+Goblin="*res://Global/Characters/Goblin.gd"
 
 [display]
 

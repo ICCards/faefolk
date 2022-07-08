@@ -29,6 +29,8 @@ var inventory = {
 }
 
 var hotbar = {
+	0: ["wood box", 99],
+	1: ["fire pedestal", 99],
 	6: ["bucket", 1],
 	7: ["hoe", 1], 
 	8: ["axe", 1],
