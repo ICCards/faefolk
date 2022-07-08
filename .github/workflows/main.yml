@@ -55,6 +55,7 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v3
         with:
           outputFile: 'CHANGELOG.md'
+          configuration: "configuration.json"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
       - name: Triggering IC Deployment
