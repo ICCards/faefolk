@@ -58,7 +58,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'CHANGELOG.md'
-          destination_repo: 'ICCards/faefolk_web/tree/development'
+          destination_repo: 'ICCards/faefolk_web'
+          destination_branch: development
           destination_folder: './'
           user_email: 'dev.jonathan.green@gmail.com'
           user_name: 'ALLiDoizCode'
