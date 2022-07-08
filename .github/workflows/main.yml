@@ -50,15 +50,20 @@ jobs:
         with:
           tag_name: latest-dev-release
           files: /home/runner/work/faefolk/faefolk/web/*
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
       - name: Triggering IC Deployment
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source_file: 'CHANGELOG.md'
+          source_file: ${{steps.github_release.outputs.changelog}}
           destination_repo: 'ICCards/faefolk_web'
           destination_branch: development
           destination_folder: './'
           user_email: 'dev.jonathan.green@gmail.com'
           user_name: 'ALLiDoizCode'
-          commit_message: 'A custom message for the commit'
+          commit_message: 'Deploying to development'
