@@ -52,4 +52,14 @@ jobs:
         with:
           tag_name: latest-dev-release
           files: /home/runner/work/faefolk/faefolk/web/*
-    
+      - name: Triggering IC Deployment
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'CHANGELOG.md'
+        destination_repo: 'ICCards/faefolk_web/tree/development'
+        destination_folder: './'
+        user_email: 'dev.jonathan.green@gmail.com'
+        user_name: 'ALLiDoizCode'
+        commit_message: 'A custom message for the commit'
