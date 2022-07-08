@@ -1,8 +1,5 @@
 # Whenever a push is made to the master branch then run the job
 on: 
-  #workflow_dispatch:
-    #inputs:
-      #tag: latest
   push:
     branches:
       - development
