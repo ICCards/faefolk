@@ -1,32 +1,55 @@
 # Whenever a push is made to the master branch then run the job
 on: 
+  #workflow_dispatch:
+    #inputs:
+      #tag: latest
   push:
     branches:
       - development
-
+env:
+  GODOT_VERSION: 3.4.4
+  EXPORT_NAME: Bin
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
-  # job id, can be anything
-  export_game:
-    # Always use ubuntu-latest for this action
-    runs-on: ubuntu-latest
-    # Job name, can be anything
-    name: Export Game Job
+  build-web:
+    name: Web Export
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    container:
+      image: barichello/godot-ci:3.4.4
     steps:
-      # Always include the checkout step so that 
-      # your project is available for Godot to export
-    - name: checkout
-      uses: actions/checkout@v2.3.1
-      # Ensure that you get the entire project history
-      with:
-        fetch-depth: 0
-    - name: export game
-      # Use latest version (see releases for all versions)
-      uses: firebelley/godot-export@v3.0.0
-      with:
-        # Defining all the required inputs
-        # I used the mono version of Godot in this example
-        godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.5/rc5/Godot_v3.5-rc5_linux_headless.64.zip
-        godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.5/rc5/Godot_v3.5-rc5_export_templates.tpz
-        relative_project_path: ./
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          godot -v --export-debug "HTML5" build/web/index.html
+          cd build/web
+          zip -r $GITHUB_WORKSPACE/build/web/web.zip ./*
+          cd ..
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: web
+          path: build/web/web.zip
+  release:
+    needs: [build-web]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: web
+          path: web
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: latest-dev-release
+          files: /home/runner/work/faefolk/faefolk/web/*
+    
