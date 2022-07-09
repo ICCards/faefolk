@@ -184,97 +184,90 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["tree"]:
 		var loc = Util.string_to_vector2(map["tree"][id]["l"])
-		if is_valid_position(loc, "tree"):
-			treeTypes.shuffle()
-			var variety = treeTypes.front()
-			var object = TreeObject.instance()
-			object.health = map["tree"][id]["h"]
-			object.initialize(variety, loc)
-			object.position = sand.map_to_world(loc) + Vector2(0, -8)
-			object.name = id
-			add_child(object,true)
+		treeTypes.shuffle()
+		var variety = treeTypes.front()
+		var object = TreeObject.instance()
+		object.health = map["tree"][id]["h"]
+		object.initialize(variety, loc)
+		object.position = sand.map_to_world(loc) + Vector2(0, -8)
+		object.name = id
+		add_child(object,true)
 	print("LOADED TREES")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["log"]:
 		var loc = Util.string_to_vector2(map["log"][id]["l"])
-		if is_valid_position(loc, "log"):
-			validTiles.set_cellv(loc, -1)
-			rng.randomize()
-			var variety = rng.randi_range(0, 11)
-			var object = BranchObject.instance()
-			object.name = id
-			object.health = map["log"][id]["h"]
-			object.initialize(variety,loc)
-			object.position = sand.map_to_world(loc) + Vector2(16, 16)
-			add_child(object,true)
+		validTiles.set_cellv(loc, -1)
+		rng.randomize()
+		var variety = rng.randi_range(0, 11)
+		var object = BranchObject.instance()
+		object.name = id
+		object.health = map["log"][id]["h"]
+		object.initialize(variety,loc)
+		object.position = sand.map_to_world(loc) + Vector2(16, 16)
+		add_child(object,true)
 	print("LOADED LOGS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["stump"]:
 		var loc = Util.string_to_vector2(map["stump"][id]["l"])
-		if is_valid_position(loc, "stump"):
-			treeTypes.shuffle()
-			var variety = treeTypes.front()
-			var object = StumpObject.instance()
-			object.health = map["stump"][id]["h"]
-			object.name = id
-			object.initialize(variety,loc)
-			object.position = sand.map_to_world(loc) + Vector2(4,0)
-			add_child(object,true)
+		treeTypes.shuffle()
+		var variety = treeTypes.front()
+		var object = StumpObject.instance()
+		object.health = map["stump"][id]["h"]
+		object.name = id
+		object.initialize(variety,loc)
+		object.position = sand.map_to_world(loc) + Vector2(4,0)
+		add_child(object,true)
 	print("LOADED STUMPS")
 	get_node("loadingScreen").set_phase("Building ore")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
 		print("LArGE ORE SPAWN " + str(id))
 		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
-		if is_valid_position(loc, "ore_large"):
-			oreTypes.shuffle()
-			var variety = oreTypes.front()
-			var object = OreObject.instance()
-			object.health = map["ore_large"][id]["h"]
-			object.name = id
-			object.initialize(variety,loc)
-			object.position = sand.map_to_world(loc) 
-			add_child(object,true)
+		oreTypes.shuffle()
+		var variety = oreTypes.front()
+		var object = OreObject.instance()
+		object.health = map["ore_large"][id]["h"]
+		object.name = id
+		object.initialize(variety,loc)
+		object.position = sand.map_to_world(loc) 
+		add_child(object,true)
 	print("LOADED LARGE OrE")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore"]:
 		var loc = Util.string_to_vector2(map["ore"][id]["l"])
-		if is_valid_position(loc, "ore"):
-			oreTypes.shuffle()
-			var variety = oreTypes.front()
-			var object = SmallOreObject.instance()
-			object.health = map["ore"][id]["h"]
-			object.name = id
-			object.initialize(variety,loc)
-			object.position = sand.map_to_world(loc) + Vector2(16, 24)
-			add_child(object,true)
+		oreTypes.shuffle()
+		var variety = oreTypes.front()
+		var object = SmallOreObject.instance()
+		object.health = map["ore"][id]["h"]
+		object.name = id
+		object.initialize(variety,loc)
+		object.position = sand.map_to_world(loc) + Vector2(16, 24)
+		add_child(object,true)
 	print("LOADED OrE")
 	get_node("loadingScreen").set_phase("Building tall grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
 	for id in map["tall_grass"]:
 		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
-		if is_valid_position(loc, "tall_grass"):
-			count += 1
-			tall_grass_types.shuffle()
-			var variety = tall_grass_types.front()
-			var object = TallGrassObject.instance()
-			object.name = id
-			object.initialize(variety)
-			object.position = sand.map_to_world(loc) + Vector2(16, 32)
-			add_child(object,true)
+		count += 1
+		tall_grass_types.shuffle()
+		var variety = tall_grass_types.front()
+		var object = TallGrassObject.instance()
+		object.name = id
+		object.initialize(variety)
+		object.position = sand.map_to_world(loc) + Vector2(16, 32)
+		add_child(object,true)
 		if count == 130:
-			yield(get_tree().create_timer(0.2), "timeout")
+			yield(get_tree().create_timer(0.25), "timeout")
 			count = 0
 	print("LOADED TALL GRASS")
 	get_node("loadingScreen").set_phase("Building flowers")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
 		var loc = Util.string_to_vector2(map["flower"][id]["l"])
-		if is_valid_position(loc, "flower"):
-			var object = FlowerObject.instance()
-			object.position = sand.map_to_world(loc) + Vector2(16, 32)
-			add_child(object,true)
+		var object = FlowerObject.instance()
+		object.position = sand.map_to_world(loc) + Vector2(16, 32)
+		add_child(object,true)
 	print("LOADED FLOWERS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
@@ -323,25 +316,25 @@ func build_valid_tiles():
 		for y in range(298):
 			validTiles.set_cellv(Vector2(x+1, y+1), 0)
 	
-func is_valid_position(_pos, _name):
-	if _pos.x > 1 and _pos.x < 299 and _pos.y > 1 and _pos.y < 299:
-		if validTiles.get_cellv(_pos) != -1 and _name != "tree" and _name != "stump":
-			validTiles.set_cellv(_pos, -1)
-			return true
-		elif (_name == "tree" or _name == "stump" or name == "ore_large") and \
-				validTiles.get_cellv(_pos) != -1 and \
-				validTiles.get_cellv(_pos + Vector2(-1, -1)) != -1 and \
-				validTiles.get_cellv(_pos + Vector2(-1, 0)) != -1 and \
-				validTiles.get_cellv(_pos + Vector2(0, -1)) != -1:
-					validTiles.set_cellv(_pos, -1)
-					validTiles.set_cellv(_pos + Vector2(-1, -1), -1 )
-					validTiles.set_cellv(_pos + Vector2(-1, 0), -1 )
-					validTiles.set_cellv(_pos + Vector2(0, -1), -1)
-					return true
-		else: 
-			return false
-	else: 
-		return false
+#func is_valid_position(_pos, _name):
+#	if _pos.x > 1 and _pos.x < 299 and _pos.y > 1 and _pos.y < 299:
+#		if validTiles.get_cellv(_pos) != -1 and _name != "tree" and _name != "stump":
+#			validTiles.set_cellv(_pos, -1)
+#			return true
+#		elif (_name == "tree" or _name == "stump" or _name == "ore_large") and \
+#				validTiles.get_cellv(_pos) != -1 and \
+#				validTiles.get_cellv(_pos + Vector2(-1, -1)) != -1 and \
+#				validTiles.get_cellv(_pos + Vector2(-1, 0)) != -1 and \
+#				validTiles.get_cellv(_pos + Vector2(0, -1)) != -1:
+#					validTiles.set_cellv(_pos, -1)
+#					validTiles.set_cellv(_pos + Vector2(-1, -1), -1 )
+#					validTiles.set_cellv(_pos + Vector2(-1, 0), -1 )
+#					validTiles.set_cellv(_pos + Vector2(0, -1), -1)
+#					return true
+#		else: 
+#			return false
+#	else: 
+#		return false
 	
 		
 func generate_border_tiles():

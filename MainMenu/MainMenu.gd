@@ -50,15 +50,14 @@ func close_options_menu():
 	$Options.visible = false
 	is_menu_open = false
 
-
 func _on_OptionsIconButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
 	toggle_menu_open()
 
-
 func _on_ExitOptionsArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if is_menu_open:
 			close_options_menu()
+	

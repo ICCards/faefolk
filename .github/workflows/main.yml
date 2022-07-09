@@ -1,11 +1,8 @@
 # Whenever a push is made to the master branch then run the job
 on: 
-  #workflow_dispatch:
-    #inputs:
-      #tag: latest
   push:
-    branches:
-      - development
+    tags:
+      - '*'
 env:
   GODOT_VERSION: 3.4.4
   EXPORT_NAME: Bin
@@ -30,7 +27,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
-          godot -v --export-debug "HTML5" build/web/index.html
+          godot -v --export "HTML5" build/web/index.html
           cd build/web
           zip -r $GITHUB_WORKSPACE/build/web/web.zip ./*
           cd ..
@@ -43,6 +40,7 @@ jobs:
     needs: [build-web]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v2
         with:
           name: web
@@ -52,4 +50,23 @@ jobs:
         with:
           tag_name: latest-dev-release
           files: /home/runner/work/faefolk/faefolk/web/*
-    
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          outputFile: 'CHANGELOG.md'
+          configuration: "configuration.json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+      - name: Triggering IC Deployment
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'CHANGELOG.md'
+          destination_repo: 'ICCards/faefolk_web'
+          destination_branch: development
+          destination_folder: './'
+          user_email: 'dev.jonathan.green@gmail.com'
+          user_name: 'ALLiDoizCode'
+          commit_message: 'Deploying to development'
