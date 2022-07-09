@@ -1,5 +1,6 @@
 extends Control
 
+var changing_scene_active = false
 var hovered_button = ""
 var connect_callback = JavaScript.create_callback(self, "_connect_plug")
 var login_callback = JavaScript.create_callback(self, "_login")
@@ -18,7 +19,7 @@ func _login(args):
 	get_parent().spawn_player_in_menu()
 	
 func _play_hover_effect(button_name):
-	if hovered_button != button_name:
+	if hovered_button != button_name and not changing_scene_active:
 		$SoundEffects.stream = Sounds.button_hover
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
@@ -89,17 +90,18 @@ func _on_QuitArea_mouse_exited():
 
 
 func _on_PlayArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
+	
+	if event.is_action_pressed("mouse_click") and not changing_scene_active:
+		changing_scene_active = true
 		get_parent().get_node("TitleMusic").stop()
 		$SoundEffects.stream = Sounds.button_select
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
-		get_parent().queue_free()
-		SceneChanger.change_scene("res://World/World/World.tscn")
+		SceneChanger.goto_scene("res://World/World/World.tscn")
 
 
 func _on_QuitArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
+	if event.is_action_pressed("mouse_click") and not changing_scene_active:
 		$SoundEffects.stream = Sounds.button_select
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
@@ -107,7 +109,7 @@ func _on_QuitArea_input_event(viewport, event, shape_idx):
 
 
 func _on_ShopArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
+	if event.is_action_pressed("mouse_click") and not changing_scene_active:
 		$SoundEffects.stream = Sounds.button_select
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()

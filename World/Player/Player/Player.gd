@@ -216,12 +216,12 @@ func swing_state(item_name):
 
 func idle_state(_direction):
 	$DetectPathType/FootstepsSound.stream_paused = true
-	animation = "holding_idle_" + _direction.to_lower()
+	animation = "idle_" + _direction.to_lower()
 	$CompositeSprites.set_player_animation(character, animation, null)
 
 func walk_state(_direction):
 	$DetectPathType/FootstepsSound.stream_paused = false
-	animation = "holding_walk_" + _direction.to_lower()
+	animation = "walk_" + _direction.to_lower()
 	$CompositeSprites.set_player_animation(character, animation, null)
 
 func set_melee_collision_layer(_tool):
