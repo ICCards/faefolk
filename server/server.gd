@@ -1,16 +1,16 @@
 extends Node
 
-const PROD_DEFAULT_IP = "wss.faefolk.app/ws"
+const PROD_DEFAULT_IP = "wss://wss.faefolk.app/ws"
 const PROD_DEFAULT_PORT = 65124
 
-const DEV_DEFAULT_IP = "dev.faefolk.app/ws"
+const DEV_DEFAULT_IP = "wss://dev.faefolk.app/ws"
 const DEV_DEFAULT_PORT = 65124
 
-const LOCAL_DEFAULT_IP = "127.0.0.1"
+const LOCAL_DEFAULT_IP = "ws://127.0.0.1"
 const LCOAL_DEFAULT_PORT = 65124
 
 # The URL we will connect to
-var websocket_url = "wss://"+DEV_DEFAULT_IP+":"+str(DEV_DEFAULT_PORT)
+var websocket_url = LOCAL_DEFAULT_IP+":"+str(LCOAL_DEFAULT_PORT)
 
 # Our WebSocketClient instance
 var _client = WebSocketClient.new()
@@ -157,6 +157,7 @@ func _on_data():
 			print("loading map")
 			var key = map.keys()[mapPartsLoaded]
 			print("Loaded " + key)
+		
 			print(result["d"].size())
 			map[key] = result["d"]
 			mapPartsLoaded = mapPartsLoaded + 1

@@ -30,8 +30,7 @@ func _ready():
 	item_name == "campfire" or \
 	item_name == "fire pedestal" or \
 	item_name == "tall fire pedestal":
-		pass
-		#$Light2D.enabled = true
+		$Light2D.enabled = true
 	elif item_name == "house":
 		queue_free()
 		
@@ -141,8 +140,8 @@ func _on_DetectObjectOverPathBox_area_exited(area):
 
 
 func _on_VisibilityNotifier2D_screen_entered():
-	pass # Replace with function body.
+	visible = true
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	pass # Replace with function body.
+	visible = false
