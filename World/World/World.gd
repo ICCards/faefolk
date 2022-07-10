@@ -96,13 +96,19 @@ func spawnPlayerExample():
 	player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
 	player.name = Server.player_id
 	player.character = _character.new()
-	player.character.LoadPlayerCharacter("goblin_female")
+	player.character.LoadPlayerCharacter("human_male")
 	$Players.add_child(player)
 	if Server.player_house_position == null:
 		get_valid_player_spawn_position()
 		player.position = valid_spawn_position
 	else: 
 		player.position = sand.map_to_world(Server.player_house_position) + Vector2(135, 60)
+	spawn_IC_kitty()
+	
+func spawn_IC_kitty():
+	var kitty = Player_pet.instance()
+	kitty.name = "kittyNode"
+	$Players.add_child(kitty, true)
 		
 func get_valid_player_spawn_position():
 	rng.randomize()
@@ -221,7 +227,6 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Building ore")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
-		print("LArGE ORE SPAWN " + str(id))
 		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
@@ -243,7 +248,6 @@ func buildMap(map):
 		object.initialize(variety,loc)
 		object.position = sand.map_to_world(loc) + Vector2(16, 24)
 		add_child(object,true)
-	print("LOADED OrE")
 	get_node("loadingScreen").set_phase("Building tall grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
@@ -260,7 +264,6 @@ func buildMap(map):
 		if count == 130:
 			yield(get_tree().create_timer(0.25), "timeout")
 			count = 0
-	print("LOADED TALL GRASS")
 	get_node("loadingScreen").set_phase("Building flowers")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
@@ -268,7 +271,6 @@ func buildMap(map):
 		var object = FlowerObject.instance()
 		object.position = sand.map_to_world(loc) + Vector2(16, 32)
 		add_child(object,true)
-	print("LOADED FLOWERS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	check_and_remove_invalid_autotiles(map)
@@ -285,7 +287,7 @@ func buildMap(map):
 	Server.world = self
 	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
-	spawnPlayer(Server.player)
+	#spawnPlayer(Server.player)
 	spawnPlayerExample()
 	
 func check_and_remove_invalid_autotiles(map):
@@ -310,33 +312,12 @@ func check_and_remove_invalid_autotiles(map):
 	darkGrass.update_bitmask_region()
 
 
-
 func build_valid_tiles():
 	for x in range(298):
 		for y in range(298):
 			validTiles.set_cellv(Vector2(x+1, y+1), 0)
-	
-#func is_valid_position(_pos, _name):
-#	if _pos.x > 1 and _pos.x < 299 and _pos.y > 1 and _pos.y < 299:
-#		if validTiles.get_cellv(_pos) != -1 and _name != "tree" and _name != "stump":
-#			validTiles.set_cellv(_pos, -1)
-#			return true
-#		elif (_name == "tree" or _name == "stump" or _name == "ore_large") and \
-#				validTiles.get_cellv(_pos) != -1 and \
-#				validTiles.get_cellv(_pos + Vector2(-1, -1)) != -1 and \
-#				validTiles.get_cellv(_pos + Vector2(-1, 0)) != -1 and \
-#				validTiles.get_cellv(_pos + Vector2(0, -1)) != -1:
-#					validTiles.set_cellv(_pos, -1)
-#					validTiles.set_cellv(_pos + Vector2(-1, -1), -1 )
-#					validTiles.set_cellv(_pos + Vector2(-1, 0), -1 )
-#					validTiles.set_cellv(_pos + Vector2(0, -1), -1)
-#					return true
-#		else: 
-#			return false
-#	else: 
-#		return false
-	
-		
+
+
 func generate_border_tiles():
 	for i in range(300):
 		border.set_cellv(Vector2(i, -3), 0)

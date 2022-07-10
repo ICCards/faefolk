@@ -1,21 +1,22 @@
 extends Node
 
 
-signal frame_change
-var frame = 0
-
+# IC Kitties #
+var randomKitty
 func _ready():
-	return_frame()
+	randomize()
+	KittyVariations.shuffle()
+	randomKitty = KittyVariations[0]
 
-func return_frame():
-	yield(get_tree().create_timer(0.75), "timeout")
-	frame += 1
-	if frame == 6:
-		frame = 0
-	emit_signal("frame_change")
-	return_frame()
-	
-
+var KittyVariations = [
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Green.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Orange.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Pink.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Purple.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Red.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/White.tres")
+]
 
 # WEAPONS #
 
