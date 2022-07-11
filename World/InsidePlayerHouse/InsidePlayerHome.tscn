@@ -247,6 +247,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 extents = Vector2( 32, 24.5 )
 
 [node name="InsidePlayerHome" type="YSort"]
+z_index = 1
 script = ExtResource( 3 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -260,10 +261,10 @@ tile_data = PoolIntArray( 65535, 1610612737, 0, 65536, 0, 0, 65537, 0, 0, 65538,
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -312.0
-margin_top = -130.0
-margin_right = 918.0
-margin_bottom = 644.0
+margin_left = -930.0
+margin_top = -547.0
+margin_right = 1579.0
+margin_bottom = 1102.0
 grow_vertical = 2
 mouse_filter = 2
 color = Color( 0.0313726, 0.054902, 0.0862745, 1 )
@@ -288,7 +289,7 @@ collision_layer = 32
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Doorway"]
-position = Vector2( 190, 638 )
+position = Vector2( 192, 598 )
 shape = SubResource( 3 )
 
 [node name="Players" type="YSort" parent="."]

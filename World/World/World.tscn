@@ -1241,6 +1241,8 @@ tile_set = SubResource( 235 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
+[node name="NatureObjects" type="YSort" parent="."]
+
 [node name="Players" type="YSort" parent="."]
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]

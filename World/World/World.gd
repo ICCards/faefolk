@@ -48,6 +48,21 @@ const interpolation_offset = 100
 var mark_for_despawn = []
 var tile_ids = {}
 
+
+func set_world_invisible():
+	$GeneratedTiles.visible = false
+	$PlacableTiles.visible = false
+	$FarmingTiles.visible = false
+	$NatureObjects.visible = false
+	get_node("PlacableTiles/" + Server.player_house_id).set_player_inside_house()
+	
+func set_world_visible():
+	$GeneratedTiles.visible = true
+	$PlacableTiles.visible = true
+	$FarmingTiles.visible = true
+	$NatureObjects.visible = true
+	get_node("PlacableTiles/" + Server.player_house_id).set_player_outside_house()
+
 func _ready():
 	var loadingScreen = LoadingScreen.instance()
 	loadingScreen.name = "loadingScreen"
@@ -112,7 +127,7 @@ func spawn_IC_kitty():
 		
 func get_valid_player_spawn_position():
 	rng.randomize()
-	var randomLoc = Vector2(rng.randi_range(0, 100), rng.randi_range(0, 100))
+	var randomLoc = Vector2(rng.randi_range(1, 299), rng.randi_range(1, 299))
 	if validTiles.get_cellv(randomLoc) != -1:
 		valid_spawn_position = sand.map_to_world(randomLoc)
 	else:
@@ -197,7 +212,7 @@ func buildMap(map):
 		object.initialize(variety, loc)
 		object.position = sand.map_to_world(loc) + Vector2(0, -8)
 		object.name = id
-		add_child(object,true)
+		$NatureObjects.add_child(object,true)
 	print("LOADED TREES")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["log"]:
@@ -210,7 +225,7 @@ func buildMap(map):
 		object.health = map["log"][id]["h"]
 		object.initialize(variety,loc)
 		object.position = sand.map_to_world(loc) + Vector2(16, 16)
-		add_child(object,true)
+		$NatureObjects.add_child(object,true)
 	print("LOADED LOGS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["stump"]:
@@ -222,7 +237,7 @@ func buildMap(map):
 		object.name = id
 		object.initialize(variety,loc)
 		object.position = sand.map_to_world(loc) + Vector2(4,0)
-		add_child(object,true)
+		$NatureObjects.add_child(object,true)
 	print("LOADED STUMPS")
 	get_node("loadingScreen").set_phase("Building ore")
 	yield(get_tree().create_timer(0.5), "timeout")
@@ -235,7 +250,7 @@ func buildMap(map):
 		object.name = id
 		object.initialize(variety,loc)
 		object.position = sand.map_to_world(loc) 
-		add_child(object,true)
+		$NatureObjects.add_child(object,true)
 	print("LOADED LARGE OrE")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore"]:
@@ -247,7 +262,7 @@ func buildMap(map):
 		object.name = id
 		object.initialize(variety,loc)
 		object.position = sand.map_to_world(loc) + Vector2(16, 24)
-		add_child(object,true)
+		$NatureObjects.add_child(object,true)
 	get_node("loadingScreen").set_phase("Building tall grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
@@ -260,7 +275,7 @@ func buildMap(map):
 		object.name = id
 		object.initialize(variety)
 		object.position = sand.map_to_world(loc) + Vector2(16, 32)
-		add_child(object,true)
+		$NatureObjects.add_child(object,true)
 		if count == 130:
 			yield(get_tree().create_timer(0.25), "timeout")
 			count = 0
@@ -270,7 +285,7 @@ func buildMap(map):
 		var loc = Util.string_to_vector2(map["flower"][id]["l"])
 		var object = FlowerObject.instance()
 		object.position = sand.map_to_world(loc) + Vector2(16, 32)
-		add_child(object,true)
+		$NatureObjects.add_child(object,true)
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	check_and_remove_invalid_autotiles(map)

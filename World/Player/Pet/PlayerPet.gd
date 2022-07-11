@@ -11,7 +11,6 @@ func _physics_process(delta):
 	if position.distance_to(player.position) > 75 and position.distance_to(player.position) < 600:
 		$CollisionShape2D.disabled = false
 		var velocity = player.global_position - global_position
-		print(velocity)
 		if abs(velocity.y) > abs(velocity.x):
 			$AnimatedSprite.offset = Vector2(0, 0)
 			if velocity.y > 0:

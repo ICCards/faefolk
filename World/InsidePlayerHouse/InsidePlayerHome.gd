@@ -16,16 +16,20 @@ var mark_for_despawn = []
 
 
 func _ready(): 
-	Server.player_state = "HOME"
-	initialize_house_objects()
-	Server.isLoaded = true
-	Server.world = self
-	spawnPlayer()
+	pass
+#	Server.player_state = "HOME"
+	#initialize_house_objects()
+#	Server.isLoaded = true
+#	Server.world = self
+	#spawnPlayer()
+	
 	
 func _on_Doorway_area_entered(_area):
-	Server.isLoaded = false
-	Server.world = null
-	SceneChanger.goto_scene("res://World/World/World.tscn")
+	get_node("/root/World").set_world_visible()
+	get_node("/root/World/InsidePlayerHome").queue_free()
+#	Server.isLoaded = false
+#	Server.world = null
+#	SceneChanger.goto_scene("res://World/World/World.tscn")
 
 	
 func spawnPlayer():
