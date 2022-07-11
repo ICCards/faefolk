@@ -88,11 +88,11 @@ func place_object_in_world(id, item_name, location):
 			var playerHouseObject = PlayerHouseObject.instance()
 			playerHouseObject.name = str(id)
 			Server.player_house_position = location
-			Server.world.call_deferred("add_child", playerHouseObject, true)
+			Server.player_house_id = str(id)
+			Server.world.get_node("PlacableTiles").call_deferred("add_child", playerHouseObject, true)
 			playerHouseObject.global_position = fence_tiles.map_to_world(location) + Vector2(6,6)
 			set_player_house_invalid_tiles(location)
 		"workbench":
-			print(location)
 			object_tiles.set_cellv(location, Placables.WORKBENCH1)
 			valid_tiles.set_cellv(location, -1)
 			valid_tiles.set_cellv(location + Vector2(1, 0), -1)

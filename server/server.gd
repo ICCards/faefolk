@@ -28,6 +28,7 @@ var player_node
 var player_id = "testID"
 var mapPartsLoaded = 0
 var player_house_position
+var player_house_id
 var world
 var map
 var generated_map = {}
