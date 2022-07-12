@@ -69,13 +69,43 @@ var axe = {
 	right = preload("res://Characters/Weapon swings/right/axe.png")
 }
 
-
-var tall_grass = [
+# TALL GRASS #
+var dark_green_grass = [
 	preload("res://Assets/Images/tall grass sets/dark green.png"),
+	preload("res://Assets/Images/tall grass sets/dark green back.png"),
+]
+var green_grass = [
 	preload("res://Assets/Images/tall grass sets/green.png"),
+	preload("res://Assets/Images/tall grass sets/green back.png")
+]
+var red_grass = [
 	preload("res://Assets/Images/tall grass sets/red.png"),
-	preload("res://Assets/Images/tall grass sets/yellow.png")
-	]
+	preload("res://Assets/Images/tall grass sets/red back.png")
+]
+var yellow_grass = [
+	preload("res://Assets/Images/tall grass sets/yellow.png"),
+	preload("res://Assets/Images/tall grass sets/yellow back.png")
+]
+
+
+var dark_green_grass_winter = [
+	preload("res://Assets/Images/tall grass sets/winter/dark green.png"),
+	preload("res://Assets/Images/tall grass sets/winter/dark green back.png")
+]
+var green_grass_winter = [
+	preload("res://Assets/Images/tall grass sets/winter/green.png"),
+	preload("res://Assets/Images/tall grass sets/winter/green back.png")
+]
+var red_grass_winter = [
+	preload("res://Assets/Images/tall grass sets/winter/red.png"),
+	preload("res://Assets/Images/tall grass sets/winter/red back.png")
+]
+var yellow_grass_winter = [
+	preload("res://Assets/Images/tall grass sets/winter/yellow.png"),
+	preload("res://Assets/Images/tall grass sets/winter/yellow back.png")
+]
+
+
 # FRUITLESS TREES #
 
 func returnTreeObject(treeType):

@@ -14,8 +14,11 @@ func initialize_user_interface():
 
 func _input(event):
 	if event.is_action_pressed("open_menu") and holding_item == null and \
-	not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode:
+	not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
 		toggle_inventory()
+	elif event.is_action_pressed("open_map") and holding_item == null and \
+	not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode:
+		toggle_map()
 	elif event.is_action_pressed("action") and holding_item == null and not PlayerInventory.viewInventoryMode and not PlayerInventory.chatMode:
 		if PlayerInventory.is_inside_chest_area:
 			open_chest()
@@ -29,6 +32,17 @@ func _input(event):
 		PlayerInventory.active_item_scroll_up()
 	elif event.is_action_pressed("scroll_down"):
 		PlayerInventory.active_item_scroll_down()
+		
+func toggle_map():
+	PlayerInventory.viewMapMode = !PlayerInventory.viewMapMode
+	$MiniMap.visible = !$MiniMap.visible
+	if $MiniMap.visible:
+		get_parent().current = false
+		$MiniMap.initialize()
+	else:
+		get_parent().current = true 
+		$MiniMap.set_inactive()
+
 
 func toggle_inventory():
 	$Inventory/CraftingMenu.reset()

@@ -42,10 +42,8 @@ func _physics_process(delta):
 
 
 func _on_VisibilityNotifier2D_viewport_entered(viewport):
-	print('entered')
 	$AnimatedSprite.playing = true
 
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	print('exited')
 	$AnimatedSprite.playing = false

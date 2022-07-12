@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Camera2D",
+"class": "ZoomingCamera2D",
+"language": "GDScript",
+"path": "res://World/Player/Player/UserInterface/scenes/MiniCam.gd"
+} ]
+_global_script_class_icons={
+"ZoomingCamera2D": ""
+}
+
 [application]
 
 config/name="faefolk"
@@ -164,6 +174,10 @@ move_down={
 "events": [  ]
 }
 use_tool={
+"deadzone": 0.5,
+"events": [  ]
+}
+open_map={
 "deadzone": 0.5,
 "events": [  ]
 }

@@ -48,7 +48,6 @@ const interpolation_offset = 100
 var mark_for_despawn = []
 var tile_ids = {}
 
-
 func set_world_invisible():
 	$GeneratedTiles.visible = false
 	$PlacableTiles.visible = false
@@ -127,7 +126,7 @@ func spawn_IC_kitty():
 		
 func get_valid_player_spawn_position():
 	rng.randomize()
-	var randomLoc = Vector2(rng.randi_range(1, 299), rng.randi_range(1, 299))
+	var randomLoc = Vector2(rng.randi_range(2, 298), rng.randi_range(2, 298))
 	if validTiles.get_cellv(randomLoc) != -1:
 		valid_spawn_position = sand.map_to_world(randomLoc)
 	else:
@@ -214,57 +213,57 @@ func buildMap(map):
 		object.name = id
 		$NatureObjects.add_child(object,true)
 	print("LOADED TREES")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["log"]:
-		var loc = Util.string_to_vector2(map["log"][id]["l"])
-		validTiles.set_cellv(loc, -1)
-		rng.randomize()
-		var variety = rng.randi_range(0, 11)
-		var object = BranchObject.instance()
-		object.name = id
-		object.health = map["log"][id]["h"]
-		object.initialize(variety,loc)
-		object.position = sand.map_to_world(loc) + Vector2(16, 16)
-		$NatureObjects.add_child(object,true)
-	print("LOADED LOGS")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["stump"]:
-		var loc = Util.string_to_vector2(map["stump"][id]["l"])
-		treeTypes.shuffle()
-		var variety = treeTypes.front()
-		var object = StumpObject.instance()
-		object.health = map["stump"][id]["h"]
-		object.name = id
-		object.initialize(variety,loc)
-		object.position = sand.map_to_world(loc) + Vector2(4,0)
-		$NatureObjects.add_child(object,true)
-	print("LOADED STUMPS")
-	get_node("loadingScreen").set_phase("Building ore")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["ore_large"]:
-		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
-		oreTypes.shuffle()
-		var variety = oreTypes.front()
-		var object = OreObject.instance()
-		object.health = map["ore_large"][id]["h"]
-		object.name = id
-		object.initialize(variety,loc)
-		object.position = sand.map_to_world(loc) 
-		$NatureObjects.add_child(object,true)
-	print("LOADED LARGE OrE")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["ore"]:
-		var loc = Util.string_to_vector2(map["ore"][id]["l"])
-		oreTypes.shuffle()
-		var variety = oreTypes.front()
-		var object = SmallOreObject.instance()
-		object.health = map["ore"][id]["h"]
-		object.name = id
-		object.initialize(variety,loc)
-		object.position = sand.map_to_world(loc) + Vector2(16, 24)
-		$NatureObjects.add_child(object,true)
-	get_node("loadingScreen").set_phase("Building tall grass")
-	yield(get_tree().create_timer(0.5), "timeout")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["log"]:
+#		var loc = Util.string_to_vector2(map["log"][id]["l"])
+#		validTiles.set_cellv(loc, -1)
+#		rng.randomize()
+#		var variety = rng.randi_range(0, 11)
+#		var object = BranchObject.instance()
+#		object.name = id
+#		object.health = map["log"][id]["h"]
+#		object.initialize(variety,loc)
+#		object.position = sand.map_to_world(loc) + Vector2(16, 16)
+#		$NatureObjects.add_child(object,true)
+#	print("LOADED LOGS")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["stump"]:
+#		var loc = Util.string_to_vector2(map["stump"][id]["l"])
+#		treeTypes.shuffle()
+#		var variety = treeTypes.front()
+#		var object = StumpObject.instance()
+#		object.health = map["stump"][id]["h"]
+#		object.name = id
+#		object.initialize(variety,loc)
+#		object.position = sand.map_to_world(loc) + Vector2(4,0)
+#		$NatureObjects.add_child(object,true)
+#	print("LOADED STUMPS")
+#	get_node("loadingScreen").set_phase("Building ore")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["ore_large"]:
+#		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
+#		oreTypes.shuffle()
+#		var variety = oreTypes.front()
+#		var object = OreObject.instance()
+#		object.health = map["ore_large"][id]["h"]
+#		object.name = id
+#		object.initialize(variety,loc)
+#		object.position = sand.map_to_world(loc) 
+#		$NatureObjects.add_child(object,true)
+#	print("LOADED LARGE OrE")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["ore"]:
+#		var loc = Util.string_to_vector2(map["ore"][id]["l"])
+#		oreTypes.shuffle()
+#		var variety = oreTypes.front()
+#		var object = SmallOreObject.instance()
+#		object.health = map["ore"][id]["h"]
+#		object.name = id
+#		object.initialize(variety,loc)
+#		object.position = sand.map_to_world(loc) + Vector2(16, 24)
+#		$NatureObjects.add_child(object,true)
+#	get_node("loadingScreen").set_phase("Building tall grass")
+#	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
 	for id in map["tall_grass"]:
 		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
@@ -279,28 +278,28 @@ func buildMap(map):
 		if count == 130:
 			yield(get_tree().create_timer(0.25), "timeout")
 			count = 0
-	get_node("loadingScreen").set_phase("Building flowers")
-	yield(get_tree().create_timer(0.5), "timeout")
+#	get_node("loadingScreen").set_phase("Building flowers")
+#	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
 		var loc = Util.string_to_vector2(map["flower"][id]["l"])
 		var object = FlowerObject.instance()
 		object.position = sand.map_to_world(loc) + Vector2(16, 32)
 		$NatureObjects.add_child(object,true)
 	yield(get_tree().create_timer(0.5), "timeout")
-	get_node("loadingScreen").set_phase("Generating world")
+#	get_node("loadingScreen").set_phase("Generating world")
 	check_and_remove_invalid_autotiles(map)
-	generate_border_tiles()
-	yield(get_tree().create_timer(0.5), "timeout")
-	border.update_bitmask_region()
-	get_node("loadingScreen").set_phase("Spawning in")
-	yield(get_tree().create_timer(1.0), "timeout")
+#	generate_border_tiles()
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	border.update_bitmask_region()
+#	get_node("loadingScreen").set_phase("Spawning in")
+#	yield(get_tree().create_timer(1.0), "timeout")
 	Server.player_state = "WORLD"
 	Server.isLoaded = true
 	print("Map loaded")
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
 	$AmbientSound.play()
 	Server.world = self
-	yield(get_tree().create_timer(8.5), "timeout")
+	#yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
 	#spawnPlayer(Server.player)
 	spawnPlayerExample()

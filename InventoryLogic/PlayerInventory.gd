@@ -11,6 +11,7 @@ const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 var viewInventoryMode = false
+var viewMapMode = false
 var interactive_screen_mode = false
 var chatMode = false
 var is_inside_chest_area = false
