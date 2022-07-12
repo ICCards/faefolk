@@ -17,12 +17,12 @@ var loc
 var variety
 var hit_dir
 var health
+var adjusted_leaves_falling_pos 
 
 func initialize(inputVar, _loc):
 	variety = inputVar
 	treeObject = Images.returnTreeObject(inputVar)
 	loc = _loc
-
 
 func _ready():
 	setTexture(treeObject)
@@ -49,12 +49,7 @@ func set_random_leaves_falling():
 	timer.wait_time = randomDelay
 	timer.start()
 	yield(timer, "timeout")
-	if variety == 'D' || variety == 'E':
-		initiateLeavesFallingEffect(treeObject, Vector2(0, 50))
-	elif variety == 'B':
-		initiateLeavesFallingEffect(treeObject, Vector2(0, 25))
-	else: 
-		initiateLeavesFallingEffect(treeObject, Vector2(0, 0))
+	initiateLeavesFallingEffect(treeObject)
 	set_random_leaves_falling()
 
 
@@ -65,6 +60,7 @@ func PlayEffect(player_id):
 	else:
 		hit_dir = "left"
 	if health >= 5:
+		initiateLeavesFallingEffect(treeObject)
 		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
@@ -118,16 +114,11 @@ func _on_Hurtbox_area_entered(_area):
 	Server.action("ON_HIT", data)
 	health -= 1
 	if health >= 4:
+		initiateLeavesFallingEffect(treeObject)
 		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
-		if variety == 'D' || variety == 'E':
-			initiateLeavesFallingEffect(treeObject, Vector2(0, 50))
-		elif variety == 'B':
-			initiateLeavesFallingEffect(treeObject, Vector2(0, 25))
-		else: 
-			initiateLeavesFallingEffect(treeObject, Vector2(0, 0))
-
+		
 		if get_node("/root/World/Players/" + str(Server.player_id)).get_position().x <= get_position().x:	
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			tree_animation_player.play("tree hit right")
@@ -178,11 +169,17 @@ func _on_Hurtbox_area_entered(_area):
 
 
 ### Effect functions		
-func initiateLeavesFallingEffect(tree, pos):
+func initiateLeavesFallingEffect(tree):
+	if tree == Images.D_tree:
+		adjusted_leaves_falling_pos = Vector2(0, 50)
+	elif tree == Images.B_tree:
+		adjusted_leaves_falling_pos = Vector2(0, 25)
+	else: 
+		adjusted_leaves_falling_pos = Vector2(0, 0)
 	var leavesEffect = LeavesFallEffect.instance()
 	leavesEffect.initLeavesEffect(tree)
 	add_child(leavesEffect)
-	leavesEffect.global_position = global_position + pos
+	leavesEffect.global_position = global_position + adjusted_leaves_falling_pos
 		
 func initiateTreeHitEffect(tree, effect, pos):
 	var trunkHitEffect = TrunkHitEffect.instance()
@@ -265,8 +262,6 @@ func _on_TreeTopArea_area_entered(_area):
 
 func _on_TreeTopArea_area_exited(_area):
 	set_tree_visible()
-
-
 
 func _on_VisibilityNotifier2D_screen_entered():
 	visible = true
