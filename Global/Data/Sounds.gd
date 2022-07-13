@@ -40,14 +40,15 @@ func return_adjusted_sound_db(category, init_sound):
 		elif progress > 0.5:
 			return init_sound + ((progress - 0.5) / 5) * 150
 	elif category == "sound":
-		var progress = sound_volume / 100
-		if progress == 0.5:
-			return init_sound
-		elif progress < 0.5:
-			var dis_to_mute =  -(80 + init_sound)
-			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
-		elif progress > 0.5:
-			return init_sound + ((progress - 0.5) / 5) * 150
+		return -80
+#		var progress = sound_volume / 100
+#		if progress == 0.5:
+#			return init_sound
+#		elif progress < 0.5:
+#			var dis_to_mute =  -(80 + init_sound)
+#			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
+#		elif progress > 0.5:
+#			return init_sound + ((progress - 0.5) / 5) * 150
 	elif category == "ambient":
 		var progress = ambient_volume / 100
 		if progress == 0.5:
