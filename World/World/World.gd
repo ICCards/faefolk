@@ -4,12 +4,11 @@ onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles
 onready var forest = $GeneratedTiles/DarkGreenGrassTiles
 onready var water = $GeneratedTiles/Water
-onready var border = $GeneratedTiles/BorderTiles
 onready var validTiles = $GeneratedTiles/ValidTiles
 onready var hoed = $FarmingTiles/HoedAutoTiles
 onready var watered = $FarmingTiles/WateredAutoTiles
 onready var snow = $GeneratedTiles/SnowTiles
-onready var beachBorderTiles = $GeneratedTiles/BeachBorder
+onready var beachBorderTiles = $GeneratedTiles/AnimatedBeachBorder
 onready var sandBeachBorderTiles = $GeneratedTiles/SandBeachBorder
 onready var desert = $GeneratedTiles/DesertTiles
 
@@ -331,7 +330,7 @@ func set_water_tiles():
 	for x in range(1000):
 		for y in range(1000):
 			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and sandBeachBorderTiles.get_cell(x,y) == -1:
-				beachBorderTiles.set_cell(x, y, 1)
+				beachBorderTiles.set_cell(x, y, 0)
 				sandBeachBorderTiles.set_cell(x, y, 0)
 	for i in range(2):
 		for loc in sandBeachBorderTiles.get_used_cells():
@@ -345,6 +344,11 @@ func set_water_tiles():
 				if Tiles.return_neighboring_cells(cell, beachBorderTiles) <= 1:
 					beachBorderTiles.set_cellv(cell, -1)
 					sandBeachBorderTiles.set_cellv(cell, 0)
+	for cell in beachBorderTiles.get_used_cells():
+		if Tiles.isCenterBitmaskTile(cell, beachBorderTiles):
+			if Util.chance(50):
+				rng.randomize()
+				$GeneratedTiles/WaveTiles.set_cellv(cell, rng.randi_range(0, 4))
 	beachBorderTiles.update_bitmask_region()
 	sandBeachBorderTiles.update_bitmask_region()
 	
