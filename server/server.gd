@@ -90,19 +90,36 @@ func action(type,data):
 	_client.get_peer(1).put_packet(message)
 
 func generate_map():
+#	map = {
+#	"dirt":[],
+#	"grass":[],
+#	"dark_grass":[],
+#	"tall_grass":[],
+#	"water":[],
+#	"tree":[],
+#	"ore_large":[],
+#	"ore":[],
+#	"log":[],
+#	"stump":[],
+#	"flower":[],
+#	"tile": []
+#	}
 	map = {
 	"dirt":[],
-	"grass":[],
-	"dark_grass":[],
-	"tall_grass":[],
-	"water":[],
+	#"ocean":[],
+	"beach":[],
+	"plains":[],
+	"forest":[],
+	"desert":[],
+	"snow":[],
 	"tree":[],
+	"tall_grass":[],
 	"ore_large":[],
 	"ore":[],
 	"log":[],
 	"stump":[],
 	"flower":[],
-	"tile": []
+#	"tile": [],
 	}
 	var key = map.keys()[mapPartsLoaded]
 	var data = {"d":key}

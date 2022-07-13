@@ -42,25 +42,25 @@ func set_direction(direction):
 
 func _ready():
 	pass
-	buildMap(Server.generated_map)
+	#buildMap(Server.generated_map)
 
-func buildMap(map):
-	for id in map["dirt"]:
-		var loc = Util.string_to_vector2(map["dirt"][id]["l"])
-		miniMap.set_cellv(loc, Tiles.DIRT)
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["dark_grass"]:
-		var loc = Util.string_to_vector2(map["dark_grass"][id])
-		miniMap.set_cellv(loc , Tiles.GRASS)
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["grass"]:
-		var loc = Util.string_to_vector2(map["grass"][id])
-		miniMap.set_cellv(loc , Tiles.DARK_GRASS)
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["water"]:
-		var loc = Util.string_to_vector2(map["water"][id])
-		miniMap.set_cellv(loc , Tiles.WATER)
-	yield(get_tree().create_timer(0.5), "timeout")
+#func buildMap(map):
+#	for id in map["dirt"]:
+#		var loc = Util.string_to_vector2(map["dirt"][id]["l"])
+#		miniMap.set_cellv(loc, Tiles.DIRT)
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["dark_grass"]:
+#		var loc = Util.string_to_vector2(map["dark_grass"][id])
+#		miniMap.set_cellv(loc , Tiles.GRASS)
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["grass"]:
+#		var loc = Util.string_to_vector2(map["grass"][id])
+#		miniMap.set_cellv(loc , Tiles.DARK_GRASS)
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["water"]:
+#		var loc = Util.string_to_vector2(map["water"][id])
+#		miniMap.set_cellv(loc , Tiles.WATER)
+#	yield(get_tree().create_timer(0.5), "timeout")
 #	for id in map["tree"]:
 #		var loc = Util.string_to_vector2(map["tree"][id]["l"])
 #		treeTypes.shuffle()
