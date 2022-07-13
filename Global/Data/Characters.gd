@@ -5259,11 +5259,11 @@ func LoadPlayerCharacter(character_info):
 		"succubus":
 			set_char = succubus
 		
-	acc_index = set_char.acc_idle_down.size() - 1
-	headAtr_index = set_char.head_attribute_idle_down.size() - 1
-	pants_index = set_char.pants_idle_down.size() - 1
-	shirts_index = set_char.shirts_idle_down.size() - 1
-	shoes_index = set_char.shoes_idle_down.size() - 1
+	acc_index = 0 #set_char.acc_idle_down.size() - 1
+	headAtr_index = 0 #set_char.head_attribute_idle_down.size() - 1
+	pants_index = 0 #set_char.pants_idle_down.size() - 1
+	shirts_index = 0 #set_char.shirts_idle_down.size() - 1
+	shoes_index = 0 #set_char.shoes_idle_down.size() - 1
 	
 	
 #	acc_index = character_info.acc_index

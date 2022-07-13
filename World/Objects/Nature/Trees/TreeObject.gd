@@ -18,6 +18,7 @@ var variety
 var hit_dir
 var health
 var adjusted_leaves_falling_pos 
+var biome
 
 func initialize(inputVar, _loc):
 	variety = inputVar
@@ -37,10 +38,14 @@ func _ready():
 func setTexture(tree):
 	set_tree_top_collision_shape()
 	treeStumpSprite.texture = tree.stump
-	treeTopSprite.texture = tree.topTree
 	treeBottomSprite.texture = tree.bottomTree
 	$TreeChipParticles.texture = tree.chip 
 	$TreeLeavesParticles.texture = tree.leaves
+	match biome:
+		"forest":
+			treeTopSprite.texture = tree.topTree
+		"snow":
+			treeTopSprite.texture = tree.topTreeWinter
 	
 onready var timer = $Timer
 func set_random_leaves_falling():

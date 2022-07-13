@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/green back.png-86947d4b9ba6d522c34f7cda0a5e1682.stex"
+path="res://.import/6.png-c00b8c4dc91f6642251c9f464a408616.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://green back.png"
-dest_files=[ "res://.import/green back.png-86947d4b9ba6d522c34f7cda0a5e1682.stex" ]
+source_file="res://Assets/Images/Animations/ocean/6.png"
+dest_files=[ "res://.import/6.png-c00b8c4dc91f6642251c9f464a408616.stex" ]
 
 [params]
 
