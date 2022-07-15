@@ -10,12 +10,12 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Camera2D",
-"class": "ZoomingCamera2D",
+"class": "PanningCamera2D",
 "language": "GDScript",
-"path": "res://World/Player/Player/UserInterface/scenes/MiniCam.gd"
+"path": "res://World/Map/Camera2D.gd"
 } ]
 _global_script_class_icons={
-"ZoomingCamera2D": ""
+"PanningCamera2D": ""
 }
 
 [application]

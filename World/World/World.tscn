@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://water.tres" type="TileSet" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/d/waveD.tres" type="Texture" id=17]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/b/waveB.tres" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/c/waveC.tres" type="Texture" id=19]
+[ext_resource path="res://World/Map/WorldMap.tscn" type="PackedScene" id=20]
 
 [sub_resource type="TileSet" id=260]
 0/name = "CL_MainLev.png 0"
@@ -1117,6 +1118,9 @@ format = 1
 [node name="NatureObjects" type="YSort" parent="."]
 
 [node name="Players" type="YSort" parent="."]
+
+[node name="WorldMap" parent="." instance=ExtResource( 20 )]
+visible = false
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

@@ -66,6 +66,21 @@ func set_world_visible():
 	$NatureObjects.visible = true
 	get_node("PlacableTiles/" + Server.player_house_id).set_player_outside_house()
 
+
+func _input(event):
+	if event.is_action_pressed("open_map") and not PlayerInventory.interactive_screen_mode and \
+	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode:
+		toggle_map()
+
+func toggle_map():
+	PlayerInventory.viewMapMode = !PlayerInventory.viewMapMode
+	$WorldMap.visible = !$WorldMap.visible
+	if $WorldMap.visible:
+		$WorldMap.initialize()
+	else:
+		$WorldMap.set_inactive()
+
+
 func _ready():
 	var loadingScreen = LoadingScreen.instance()
 	loadingScreen.name = "loadingScreen"
@@ -88,24 +103,24 @@ func wait_for_map():
 		yield(get_tree().create_timer(0.5), "timeout")
 		wait_for_map()
 
-func spawnPlayer(value):
+func spawnPlayer():
 	print('gettiing player')
-	print(value)
-	if not value.empty():
+	print(Server.player)
+	if not Server.player.empty():
 		print("My Character")
-		print(value["c"])
+		print(Server.player["c"])
 		var player = Player.instance()
 		#player.initialize_camera_limits(Vector2(0, 0), Vector2(1920, 1080))
-		print(str(value["p"]))
+		print(str(Server.player["p"]))
 		player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
-		player.name = str(value["id"])
-		player.principal = value["principal"]
+		player.name = Server.player_id
+		player.principal = Server.player["principal"]
 		player.character = _character.new()
-		player.character.LoadPlayerCharacter(value["c"])
+		player.character.LoadPlayerCharacter(Server.player["c"])
 		$Players.add_child(player)
 		if Server.player_house_position == null:
-			get_valid_player_spawn_position()
-			player.position = value["p"]
+			print("setting position")
+			player.position = dirt.map_to_world(Util.string_to_vector2(Server.player["p"]))
 		else: 
 			player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		
@@ -117,7 +132,6 @@ func spawnPlayerExample(pos):
 	player.character.LoadPlayerCharacter("human_male")
 	$Players.add_child(player)
 	if Server.player_house_position == null:
-		#get_valid_player_spawn_position()
 		var loc = Util.string_to_vector2(pos)
 		player.position = loc * 32
 	else: 
@@ -186,7 +200,7 @@ func buildMap(map):
 	for id in map["plains"]:
 		var loc = Util.string_to_vector2(map["plains"][id])
 		plains.set_cellv(loc, 0)
-	print("LOADED GRASS")
+	print("LOADED PLAINS")
 	get_node("loadingScreen").set_phase("Building grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["forest"]:
@@ -291,7 +305,7 @@ func buildMap(map):
 		var object = TallGrassObject.instance()
 		object.biome = map["tall_grass"][id]["b"]
 		object.name = id
-		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
+		object.position = dirt.map_to_world(loc)
 		$NatureObjects.add_child(object,true)
 		if count == 130:
 			yield(get_tree().create_timer(0.25), "timeout")
@@ -299,31 +313,33 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Building flowers")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
+		count += 1
 		var loc = Util.string_to_vector2(map["flower"][id]["l"])
 		var object = FlowerObject.instance()
 		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
 		$NatureObjects.add_child(object,true)
+		if count == 130:
+			yield(get_tree().create_timer(0.25), "timeout")
+			count = 0
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
-	
 	fill_biome_gaps(map)
+	yield(get_tree().create_timer(1.0), "timeout")
 	check_and_remove_invalid_autotiles(map)
+	yield(get_tree().create_timer(1.0), "timeout")
 	set_water_tiles()
-	
-
 	get_node("loadingScreen").set_phase("Spawning in")
 	yield(get_tree().create_timer(1.0), "timeout")
 	Server.player_state = "WORLD"
-	Server.isLoaded = true
 	print("Map loaded")
 	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
 	$AmbientSound.play()
 	Server.world = self
-	#yield(get_tree().create_timer(8.5), "timeout")
+	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
-	#spawnPlayer(Server.player)
+	#spawnPlayer()
 	spawnPlayerExample(map["beach"][map["beach"].keys()[rng.randi_range(0, map["beach"].size() - 1)]])
-	
+	Server.isLoaded = true
 	
 	
 func set_water_tiles():
@@ -354,6 +370,12 @@ func set_water_tiles():
 	
 func fill_biome_gaps(map):
 	for i in range(2):
+		for loc in dirt.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, dirt) != 4:
+				dirt.set_cellv(loc + Vector2(1, 0), 0)
+				dirt.set_cellv(loc + Vector2(-1, 0), 0)
+				dirt.set_cellv(loc + Vector2(0, 1), 0)
+				dirt.set_cellv(loc + Vector2(0, -1), 0)
 		for loc in snow.get_used_cells():
 			if Tiles.return_neighboring_cells(loc, snow) != 4:
 				snow.set_cellv(loc + Vector2(1, 0), 0)
@@ -384,12 +406,8 @@ func fill_biome_gaps(map):
 				desert.set_cellv(loc + Vector2(-1, 0), 0)
 				desert.set_cellv(loc + Vector2(0, 1), 0)
 				desert.set_cellv(loc + Vector2(0, -1), 0)
-		for loc in dirt.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, dirt) != 4:
-				dirt.set_cellv(loc + Vector2(1, 0), 0)
-				dirt.set_cellv(loc + Vector2(-1, 0), 0)
-				dirt.set_cellv(loc + Vector2(0, 1), 0)
-				dirt.set_cellv(loc + Vector2(0, -1), 0)
+		yield(get_tree().create_timer(1.0), "timeout")
+	
 
 
 func check_and_remove_invalid_autotiles(map):

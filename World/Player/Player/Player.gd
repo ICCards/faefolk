@@ -29,7 +29,7 @@ var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 
 var animation = "idle_down"
-var MAX_SPEED := 30 #12.5
+var MAX_SPEED := 12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -44,6 +44,7 @@ func _ready():
 	$Camera2D/UserInterface.initialize_user_interface()
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
+	
 	
 func _username_callback(args):
 	# Get the first argument (the DOM event in our case).
@@ -131,6 +132,7 @@ func _unhandled_input(event):
 		not PlayerInventory.interactive_screen_mode and \
 		Server.player_state == "WORLD" and \
 		not PlayerInventory.chatMode and \
+		not PlayerInventory.viewMapMode and \
 		not is_mouse_over_hotbar and \
 		not swingActive: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
