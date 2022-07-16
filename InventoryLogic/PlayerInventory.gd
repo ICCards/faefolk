@@ -30,12 +30,19 @@ var inventory = {
 }
 
 var hotbar = {
-	0: ["wood box", 99],
+	#0: ["wood box", 99],
 	1: ["fire pedestal", 99],
 	6: ["bucket", 1],
 	7: ["hoe", 1], 
 	8: ["axe", 1],
 	9:["pickaxe", 1],
+}
+
+var equips = {
+	0: ["hair", 1],
+	1: ["shirt", 1],
+	2: ["pants", 1],
+	3: ["shoes", 1],
 }
 
 var chest = {
@@ -203,7 +210,6 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
-			hotbar.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
 			slot.item.set_item(item_name, new_quantity)
@@ -215,7 +221,6 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
-			inventory.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
 			slot.item.set_item(item_name, new_quantity)
@@ -228,7 +233,6 @@ func update_chest_slot_visual(slot_index, item_name, new_quantity):
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
-			chest.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
 			slot.item.set_item(item_name, new_quantity)
@@ -243,6 +247,8 @@ func remove_item(slot: SlotClass):
 			inventory.erase(slot.slot_index)
 		SlotClass.SlotType.CHEST:
 			chest.erase(slot.slot_index)
+		_:
+			equips.erase(slot.slot_index)
 
 func add_item_to_empty_slot(item: ItemClass, slot: SlotClass):
 	match slot.slotType:
@@ -252,6 +258,9 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass):
 			inventory[slot.slot_index] = [item.item_name, item.item_quantity]
 		SlotClass.SlotType.CHEST:
 			chest[slot.slot_index] = [item.item_name, item.item_quantity]
+		_:
+			equips[slot.slot_index] = [item.item_name, item.item_quantity]
+			
 
 
 func add_item_quantity(slot: SlotClass, quantity_to_add: int):
@@ -262,7 +271,8 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int):
 			inventory[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.CHEST:
 			chest[slot.slot_index][1] += quantity_to_add
-
+		_:
+			equips[slot.slot_index][1] += quantity_to_add
 
 ###
 ### Change active hotbar functions

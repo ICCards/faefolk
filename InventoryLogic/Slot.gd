@@ -15,7 +15,12 @@ var slot_index
 enum SlotType {
 	HOTBAR = 0,
 	INVENTORY,
-	CHEST
+	CHEST,
+	HEAD_ATTRIBUTE,
+	SHIRT,
+	PANTS,
+	SHOES,
+	ACCESSORY
 }
 
 var slotType = null

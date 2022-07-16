@@ -35,6 +35,7 @@ func _input(event):
 func toggle_inventory():
 	$Inventory/CraftingMenu.reset()
 	$Inventory.initialize_inventory()
+	$Inventory.initialize_equips()
 	$Hotbar.initialize_hotbar()
 	PlayerInventory.viewInventoryMode = !PlayerInventory.viewInventoryMode
 	$Inventory.visible = !$Inventory.visible

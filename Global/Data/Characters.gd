@@ -5258,14 +5258,28 @@ func LoadPlayerCharacter(character_info):
 			set_char = lesser_spirit
 		"succubus":
 			set_char = succubus
+	
+	if PlayerInventory.equips.has(0):
+		headAtr_index = 1
+	else:
+		headAtr_index = 0
+	if PlayerInventory.equips.has(1):
+		shirts_index = 1
+	else:
+		shirts_index = 0
+	if PlayerInventory.equips.has(2):
+		pants_index = 1
+	else:
+		pants_index = 0
+	if PlayerInventory.equips.has(3):
+		shoes_index = 1
+	else:
+		shoes_index = 0
+	if PlayerInventory.equips.has(4):
+		acc_index = 1
+	else:
+		acc_index = 0
 		
-	acc_index = 0 #set_char.acc_idle_down.size() - 1
-	headAtr_index = 0 #set_char.head_attribute_idle_down.size() - 1
-	pants_index = 0 #set_char.pants_idle_down.size() - 1
-	shirts_index = 0 #set_char.shirts_idle_down.size() - 1
-	shoes_index = 0 #set_char.shoes_idle_down.size() - 1
-	
-	
 #	acc_index = character_info.acc_index
 #	headAtr_index = character_info.headAtr_index
 #	pants_index = character_info.pants_index

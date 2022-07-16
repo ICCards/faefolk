@@ -44,7 +44,7 @@ const NUM_GRASS_BUNCHES = 150
 const NUM_GRASS_TILES = 75
 const NUM_FLOWER_TILES = 250
 const MAX_GRASS_BUNCH_SIZE = 24
-const _character = preload("res://Global/Data/Characters.gd")
+var _character = load("res://Global/Data/Characters.gd")
 
 var last_world_state = 0
 var world_state_buffer = []
@@ -227,100 +227,100 @@ func buildMap(map):
 		var loc = Util.string_to_vector2(map["beach"][id])
 		#beachBorderTiles.set_cellv(loc, 0)
 		sandBeachBorderTiles.set_cellv(loc, 0)
-	for id in map["tree"]:
-		var loc = Util.string_to_vector2(map["tree"][id]["l"])
-		var biome = map["tree"][id]["b"]
-		if biome == "desert":
-			var object = DesertTreeObject.instance()
-			object.health = map["tree"][id]["h"]
-			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
-			object.name = id
-			$NatureObjects.add_child(object,true)
-		else:
-			treeTypes.shuffle()
-			var variety = treeTypes.front()
-			var object = TreeObject.instance()
-			object.biome = biome
-			object.health = map["tree"][id]["h"]
-			object.initialize(variety, loc)
-			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
-			object.name = id
-			$NatureObjects.add_child(object,true)
-	print("LOADED TREES")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["log"]:
-		var loc = Util.string_to_vector2(map["log"][id]["l"])
-		validTiles.set_cellv(loc, -1)
-		rng.randomize()
-		var variety = rng.randi_range(0, 11)
-		var object = BranchObject.instance()
-		object.name = id
-		object.health = map["log"][id]["h"]
-		object.initialize(variety,loc)
-		object.position = dirt.map_to_world(loc) + Vector2(16, 16)
-		$NatureObjects.add_child(object,true)
-	print("LOADED LOGS")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["stump"]:
-		var loc = Util.string_to_vector2(map["stump"][id]["l"])
-		treeTypes.shuffle()
-		var variety = treeTypes.front()
-		var object = StumpObject.instance()
-		object.health = map["stump"][id]["h"]
-		object.name = id
-		object.initialize(variety,loc)
-		object.position = dirt.map_to_world(loc) + Vector2(4,0)
-		$NatureObjects.add_child(object,true)
-	print("LOADED STUMPS")
-	get_node("loadingScreen").set_phase("Building ore")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["ore_large"]:
-		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
-		oreTypes.shuffle()
-		var variety = oreTypes.front()
-		var object = OreObject.instance()
-		object.health = map["ore_large"][id]["h"]
-		object.name = id
-		object.initialize(variety,loc)
-		object.position = dirt.map_to_world(loc) 
-		$NatureObjects.add_child(object,true)
-	print("LOADED LARGE OrE")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["ore"]:
-		var loc = Util.string_to_vector2(map["ore"][id]["l"])
-		oreTypes.shuffle()
-		var variety = oreTypes.front()
-		var object = SmallOreObject.instance()
-		object.health = map["ore"][id]["h"]
-		object.name = id
-		object.initialize(variety,loc)
-		object.position = dirt.map_to_world(loc) + Vector2(16, 24)
-		$NatureObjects.add_child(object,true)
-	get_node("loadingScreen").set_phase("Building tall grass")
-	yield(get_tree().create_timer(0.5), "timeout")
-	var count = 0
-	for id in map["tall_grass"]:
-		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
-		count += 1
-		var object = TallGrassObject.instance()
-		object.biome = map["tall_grass"][id]["b"]
-		object.name = id
-		object.position = dirt.map_to_world(loc)
-		$NatureObjects.add_child(object,true)
-		if count == 130:
-			yield(get_tree().create_timer(0.25), "timeout")
-			count = 0
-	get_node("loadingScreen").set_phase("Building flowers")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["flower"]:
-		count += 1
-		var loc = Util.string_to_vector2(map["flower"][id]["l"])
-		var object = FlowerObject.instance()
-		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
-		$NatureObjects.add_child(object,true)
-		if count == 130:
-			yield(get_tree().create_timer(0.25), "timeout")
-			count = 0
+#	for id in map["tree"]:
+#		var loc = Util.string_to_vector2(map["tree"][id]["l"])
+#		var biome = map["tree"][id]["b"]
+#		if biome == "desert":
+#			var object = DesertTreeObject.instance()
+#			object.health = map["tree"][id]["h"]
+#			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
+#			object.name = id
+#			$NatureObjects.add_child(object,true)
+#		else:
+#			treeTypes.shuffle()
+#			var variety = treeTypes.front()
+#			var object = TreeObject.instance()
+#			object.biome = biome
+#			object.health = map["tree"][id]["h"]
+#			object.initialize(variety, loc)
+#			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
+#			object.name = id
+#			$NatureObjects.add_child(object,true)
+#	print("LOADED TREES")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["log"]:
+#		var loc = Util.string_to_vector2(map["log"][id]["l"])
+#		validTiles.set_cellv(loc, -1)
+#		rng.randomize()
+#		var variety = rng.randi_range(0, 11)
+#		var object = BranchObject.instance()
+#		object.name = id
+#		object.health = map["log"][id]["h"]
+#		object.initialize(variety,loc)
+#		object.position = dirt.map_to_world(loc) + Vector2(16, 16)
+#		$NatureObjects.add_child(object,true)
+#	print("LOADED LOGS")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["stump"]:
+#		var loc = Util.string_to_vector2(map["stump"][id]["l"])
+#		treeTypes.shuffle()
+#		var variety = treeTypes.front()
+#		var object = StumpObject.instance()
+#		object.health = map["stump"][id]["h"]
+#		object.name = id
+#		object.initialize(variety,loc)
+#		object.position = dirt.map_to_world(loc) + Vector2(4,0)
+#		$NatureObjects.add_child(object,true)
+#	print("LOADED STUMPS")
+#	get_node("loadingScreen").set_phase("Building ore")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["ore_large"]:
+#		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
+#		oreTypes.shuffle()
+#		var variety = oreTypes.front()
+#		var object = OreObject.instance()
+#		object.health = map["ore_large"][id]["h"]
+#		object.name = id
+#		object.initialize(variety,loc)
+#		object.position = dirt.map_to_world(loc) 
+#		$NatureObjects.add_child(object,true)
+#	print("LOADED LARGE OrE")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["ore"]:
+#		var loc = Util.string_to_vector2(map["ore"][id]["l"])
+#		oreTypes.shuffle()
+#		var variety = oreTypes.front()
+#		var object = SmallOreObject.instance()
+#		object.health = map["ore"][id]["h"]
+#		object.name = id
+#		object.initialize(variety,loc)
+#		object.position = dirt.map_to_world(loc) + Vector2(16, 24)
+#		$NatureObjects.add_child(object,true)
+#	get_node("loadingScreen").set_phase("Building tall grass")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	var count = 0
+#	for id in map["tall_grass"]:
+#		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
+#		count += 1
+#		var object = TallGrassObject.instance()
+#		object.biome = map["tall_grass"][id]["b"]
+#		object.name = id
+#		object.position = dirt.map_to_world(loc)
+#		$NatureObjects.add_child(object,true)
+#		if count == 130:
+#			yield(get_tree().create_timer(0.25), "timeout")
+#			count = 0
+#	get_node("loadingScreen").set_phase("Building flowers")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["flower"]:
+#		count += 1
+#		var loc = Util.string_to_vector2(map["flower"][id]["l"])
+#		var object = FlowerObject.instance()
+#		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
+#		$NatureObjects.add_child(object,true)
+#		if count == 130:
+#			yield(get_tree().create_timer(0.25), "timeout")
+#			count = 0
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	fill_biome_gaps(map)
@@ -355,7 +355,7 @@ func set_water_tiles():
 				sandBeachBorderTiles.set_cellv(loc + Vector2(-1, 0), 0)
 				sandBeachBorderTiles.set_cellv(loc + Vector2(0, 1), 0)
 				sandBeachBorderTiles.set_cellv(loc + Vector2(0, -1), 0)
-	for i in range(2):
+	for i in range(3):
 		for cell in beachBorderTiles.get_used_cells():
 				if Tiles.return_neighboring_cells(cell, beachBorderTiles) <= 1:
 					beachBorderTiles.set_cellv(cell, -1)
