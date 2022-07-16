@@ -13,6 +13,15 @@ func return_neighboring_cells(_pos, _map):
 		count += 1
 	return count
 	
+func isCenterBitmaskTile(_pos, _map):
+	if _map.get_cellv(_pos + Vector2(0,1)) != -1 and _map.get_cellv(_pos + Vector2(0,-1)) != -1 and \
+	_map.get_cellv(_pos + Vector2(1,0)) != -1 and _map.get_cellv(_pos + Vector2(-1,0)) != -1 and \
+	_map.get_cellv(_pos + Vector2(1,1)) != -1 and _map.get_cellv(_pos + Vector2(-1,1)) != -1 and \
+	_map.get_cellv(_pos + Vector2(-1,-1)) != -1 and _map.get_cellv(_pos + Vector2(1,-1)) != -1:
+		return true
+	else:
+		return false
+	
 func get_subtile_with_priority(id, tilemap: TileMap):
 	var tiles = tilemap.tile_set
 	var rect = tilemap.tile_set.tile_get_region(id)

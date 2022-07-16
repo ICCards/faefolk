@@ -132,3 +132,11 @@ func initiateOreHitEffect(ore, effect, pos):
 	oreHitEffect.global_position = global_position + pos
 	
 	
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false

@@ -1,10 +1,29 @@
 extends Node2D
 
+onready var InsidePlayerHome = preload("res://World/InsidePlayerHouse/InsidePlayerHome.tscn")
+
+
+func set_player_inside_house():
+	$MovementCollisionBox/CollisionPolygon2D.set_deferred("disabled", true)
+	$Doorway/CollisionShape2D.set_deferred("disabled", true)
+
+func set_player_outside_house():
+	$MovementCollisionBox/CollisionPolygon2D.set_deferred("disabled", false)
+	$Doorway/CollisionShape2D.set_deferred("disabled", false)
+	
+	
+
 func _on_Doorway_area_entered(_area):
-	Server.player_node = Server.world.get_node("Players/"+Server.player_id)
-	Server.world = null
-	Server.isLoaded = false
-	SceneChanger.goto_scene("res://World/InsidePlayerHouse/InsidePlayerHome.tscn")
+#	Server.player_node = Server.world.get_node("Players/"+Server.player_id)
+#	Server.world = null
+#	Server.isLoaded = false
+#	SceneChanger.goto_scene("res://World/InsidePlayerHouse/InsidePlayerHome.tscn")
+	get_node("/root/World").set_world_invisible()
+	var insidePlayerHome = InsidePlayerHome.instance()
+	insidePlayerHome.name = "InsidePlayerHome"
+	insidePlayerHome.position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(-200, -450)
+	get_node("/root/World").call_deferred("add_child", insidePlayerHome)
+	insidePlayerHome.initialize_house_objects()
 
 onready var tween = $Tween
 func set_house_transparent():

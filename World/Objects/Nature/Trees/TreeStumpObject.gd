@@ -96,3 +96,8 @@ func intitiateItemDrop(item, pos, amt):
 		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
 
 
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false

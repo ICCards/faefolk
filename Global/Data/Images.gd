@@ -1,21 +1,22 @@
 extends Node
 
 
-signal frame_change
-var frame = 0
-
+# IC Kitties #
+var randomKitty
 func _ready():
-	return_frame()
+	randomize()
+	KittyVariations.shuffle()
+	randomKitty = KittyVariations[0]
 
-func return_frame():
-	yield(get_tree().create_timer(0.75), "timeout")
-	frame += 1
-	if frame == 6:
-		frame = 0
-	emit_signal("frame_change")
-	return_frame()
-	
-
+var KittyVariations = [
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Green.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Orange.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Pink.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Purple.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/Red.tres"),
+	preload("res://Assets/Images/IC Kitties/SpriteFrames/White.tres")
+]
 
 # WEAPONS #
 
@@ -68,13 +69,69 @@ var axe = {
 	right = preload("res://Characters/Weapon swings/right/axe.png")
 }
 
+# TALL GRASS #
 
-var tall_grass = [
+func returnTallGrassObject(biome, variety):
+	match variety:
+		"1":
+			return dark_green_grass 
+		"2":
+			return green_grass
+		"3":
+			return red_grass 
+		"4":
+			return yellow_grass 
+			
+var dark_green_grass = [
 	preload("res://Assets/Images/tall grass sets/dark green.png"),
+	preload("res://Assets/Images/tall grass sets/dark green back.png"),
+]
+var green_grass = [
 	preload("res://Assets/Images/tall grass sets/green.png"),
+	preload("res://Assets/Images/tall grass sets/green back.png")
+]
+var red_grass = [
 	preload("res://Assets/Images/tall grass sets/red.png"),
-	preload("res://Assets/Images/tall grass sets/yellow.png")
-	]
+	preload("res://Assets/Images/tall grass sets/red back.png")
+]
+var yellow_grass = [
+	preload("res://Assets/Images/tall grass sets/yellow.png"),
+	preload("res://Assets/Images/tall grass sets/yellow back.png")
+]
+
+
+var dark_green_grass_winter = [
+	preload("res://Assets/Images/tall grass sets/winter/dark green.png"),
+	preload("res://Assets/Images/tall grass sets/winter/dark green back.png")
+]
+var green_grass_winter = [
+	preload("res://Assets/Images/tall grass sets/winter/green.png"),
+	preload("res://Assets/Images/tall grass sets/winter/green back.png")
+]
+var red_grass_winter = [
+	preload("res://Assets/Images/tall grass sets/winter/red.png"),
+	preload("res://Assets/Images/tall grass sets/winter/red back.png")
+]
+var yellow_grass_winter = [
+	preload("res://Assets/Images/tall grass sets/winter/yellow.png"),
+	preload("res://Assets/Images/tall grass sets/winter/yellow back.png")
+]
+
+
+# DESERT TREES #
+
+var desert_trees = [
+	preload("res://Assets/Images/tree_sets/desert/1a.tres"),
+	preload("res://Assets/Images/tree_sets/desert/1b.tres"),
+	preload("res://Assets/Images/tree_sets/desert/2a.tres"),
+	preload("res://Assets/Images/tree_sets/desert/2b.tres")
+]
+
+func returnRandomDesertTree():
+	randomize()
+	desert_trees.shuffle()
+	return desert_trees[0]
+
 # FRUITLESS TREES #
 
 func returnTreeObject(treeType):
@@ -104,6 +161,7 @@ var A_tree = {
 	chip = preload("res://Assets/Images/tree_sets/A/chip.png"),
 	leaves = preload("res://Assets/Images/tree_sets/A/leaves.png"),
 	largeStump = preload("res://Assets/Images/tree_sets/A/large_stumpA.png"),
+	topTreeWinter = preload("res://Assets/Images/tree_sets/A/A winter.png")
 }
 
 var B_tree = {
@@ -120,6 +178,7 @@ var B_tree = {
 	chip = preload("res://Assets/Images/tree_sets/B/chip.png"),
 	leaves = preload("res://Assets/Images/tree_sets/B/leaves.png"),
 	largeStump = preload("res://Assets/Images/tree_sets/B/large_stumpB.png"),
+	topTreeWinter = preload("res://Assets/Images/tree_sets/B/B winter.png")
 }
 
 var C_tree = {
@@ -136,6 +195,7 @@ var C_tree = {
 	chip = preload("res://Assets/Images/tree_sets/C/chip.png"),
 	leaves = preload("res://Assets/Images/tree_sets/C/leaves.png"),
 	largeStump = preload("res://Assets/Images/tree_sets/C/large_stumpC.png"),
+	topTreeWinter = preload("res://Assets/Images/tree_sets/C/C winter.png")
 }
 
 var D_tree = {
@@ -152,6 +212,7 @@ var D_tree = {
 	chip = preload("res://Assets/Images/tree_sets/D/chip.png"),
 	leaves = preload("res://Assets/Images/tree_sets/D/leaves.png"),
 	largeStump = preload("res://Assets/Images/tree_sets/D/large_stumpD.png"),
+	topTreeWinter = preload("res://Assets/Images/tree_sets/D/D winter.png")
 }
 
 var E_tree = {
@@ -168,6 +229,7 @@ var E_tree = {
 	chip = preload("res://Assets/Images/tree_sets/E/chip.png"),
 	leaves = preload("res://Assets/Images/tree_sets/E/leaves.png"),
 	largeStump = preload("res://Assets/Images/tree_sets/E/large_stumpE.png"),
+	topTreeWinter = preload("res://Assets/Images/tree_sets/E/E winter.png")
 }
 
 

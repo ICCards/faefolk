@@ -4,14 +4,16 @@ extends Node
 
 var file_name = "res://keybinding.json"
 
-var key_dict = {"move_right":68,
-				"move_left":65,
-				"move_up": 87,
-				"move_down": 83,
-				"open_menu": 69,
-				"action": 88,
-				"rotate": 82
-				}
+var key_dict = {
+	"move_right":68,
+	"move_left":65,
+	"move_up": 87,
+	"move_down": 83,
+	"open_menu": 69,
+	"action": 88,
+	"rotate": 82,
+	"open_map": 71
+}
 
 func save_keys():
 	var file = File.new()

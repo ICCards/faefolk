@@ -1,10 +1,10 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/gear icon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=4]
-[ext_resource path="res://Assets/Images/Inventory UI/inventory4.png" type="Texture" id=5]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/PetUI.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/CraftingMenu.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=8]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=14]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/OptionsMenu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/inventory_icons/nails.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Images/inventory_icons/wood chest.png" type="Texture" id=20]
@@ -29,6 +30,10 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/fire pedestal.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Images/Misc/up arrow.png" type="Texture" id=29]
 [ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Images/Inventory UI/inventory1.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=33]
+[ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=34]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -67,6 +72,22 @@ expand_margin_right = 24.0
 expand_margin_top = 250.0
 expand_margin_bottom = 90.0
 
+[sub_resource type="StyleBoxTexture" id=17]
+texture = ExtResource( 32 )
+region_rect = Rect2( 0, 0, 30, 14 )
+
+[sub_resource type="StyleBoxTexture" id=18]
+texture = ExtResource( 34 )
+region_rect = Rect2( 0, 0, 46, 14 )
+
+[sub_resource type="StyleBoxTexture" id=20]
+texture = ExtResource( 32 )
+region_rect = Rect2( 0, 0, 30, 14 )
+
+[sub_resource type="StyleBoxTexture" id=19]
+texture = ExtResource( 32 )
+region_rect = Rect2( 0, 0, 30, 14 )
+
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -76,9 +97,10 @@ margin_bottom = 137.0
 grow_vertical = 0
 rect_scale = Vector2( 6, 6 )
 mouse_filter = 2
-texture = ExtResource( 5 )
+texture = ExtResource( 31 )
 
 [node name="CraftingMenu" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 7 )
 
 [node name="Page1" type="Node2D" parent="CraftingMenu"]
@@ -399,7 +421,7 @@ texture = ExtResource( 21 )
 expand = true
 
 [node name="Title" type="Label" parent="."]
-margin_left = 86.0
+margin_left = 37.0
 margin_top = 36.0
 margin_right = 558.0
 margin_bottom = 149.0
@@ -580,6 +602,44 @@ custom_constants/shadow_offset_x = 6
 custom_constants/shadow_offset_y = 6
 text = "Tall fire pedestal"
 
+[node name="PetUI" type="Control" parent="InventoryMenu"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
+
+[node name="PetLabel" type="Label" parent="InventoryMenu/PetUI"]
+margin_left = 49.0
+margin_top = 672.0
+margin_right = 141.0
+margin_bottom = 763.0
+rect_scale = Vector2( 1.25, 1.25 )
+theme = ExtResource( 17 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Pet:"
+valign = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="InventoryMenu/PetUI"]
+position = Vector2( 257, 684 )
+scale = Vector2( 4, 4 )
+frames = ExtResource( 33 )
+animation = "idle right"
+frame = 30
+playing = true
+
+[node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]
+margin_left = 393.0
+margin_top = 688.0
+margin_right = 554.0
+margin_bottom = 767.0
+theme = ExtResource( 17 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 20 )
+custom_styles/normal = SubResource( 19 )
+text = "Hide"
+
 [connection signal="input_event" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_input_event"]
 [connection signal="mouse_entered" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_exited"]
@@ -634,3 +694,4 @@ text = "Tall fire pedestal"
 [connection signal="input_event" from="Buttons/ExitButton" to="." method="_on_ExitButton_input_event"]
 [connection signal="pressed" from="QuitMenu/ExitToTitleButton" to="." method="_on_ExitToTitleButton_pressed"]
 [connection signal="pressed" from="QuitMenu/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="InventoryMenu/PetUI/HideShowButton" to="InventoryMenu/PetUI" method="_on_HideShowButton_pressed"]

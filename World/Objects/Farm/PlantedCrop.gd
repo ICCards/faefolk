@@ -157,3 +157,10 @@ func _on_HurtBox_area_entered(area):
 	var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 	Server.action("ON_HIT", data)
 	queue_free()
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false

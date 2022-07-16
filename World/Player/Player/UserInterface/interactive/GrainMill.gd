@@ -10,9 +10,11 @@ func initialize():
 		if object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(0, -32))) == PlaceObject.Placables.GRAIN_MILL1 or \
 		object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(-32, -32))) == PlaceObject.Placables.GRAIN_MILL1:
 			level = 1
+			$UpgradeButton.visible = true
 		elif object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(0, -32))) == PlaceObject.Placables.GRAIN_MILL2 or \
 		object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(-32, -32))) == PlaceObject.Placables.GRAIN_MILL2:
 			level = 2
+			$UpgradeButton.visible = true
 		elif object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(0, -32))) == PlaceObject.Placables.GRAIN_MILL3 or \
 		object_tiles.get_cellv(object_tiles.world_to_map(player_pos + Vector2(-32, -32))) == PlaceObject.Placables.GRAIN_MILL3:
 			level = 3

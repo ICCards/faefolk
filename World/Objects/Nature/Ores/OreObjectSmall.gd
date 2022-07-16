@@ -82,5 +82,10 @@ func initiateOreHitEffect(ore, effect, pos):
 	oreHitEffect.init(ore, effect)
 	add_child(oreHitEffect)
 	oreHitEffect.global_position = global_position + pos + Vector2(0, -36)
-	
-	
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false

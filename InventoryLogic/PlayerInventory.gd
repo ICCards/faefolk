@@ -11,6 +11,7 @@ const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 var viewInventoryMode = false
+var viewMapMode = false
 var interactive_screen_mode = false
 var chatMode = false
 var is_inside_chest_area = false
@@ -29,6 +30,8 @@ var inventory = {
 }
 
 var hotbar = {
+	0: ["wood box", 99],
+	1: ["fire pedestal", 99],
 	6: ["bucket", 1],
 	7: ["hoe", 1], 
 	8: ["axe", 1],

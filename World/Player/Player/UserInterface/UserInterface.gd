@@ -14,7 +14,7 @@ func initialize_user_interface():
 
 func _input(event):
 	if event.is_action_pressed("open_menu") and holding_item == null and \
-	not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode:
+	not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
 		toggle_inventory()
 	elif event.is_action_pressed("action") and holding_item == null and not PlayerInventory.viewInventoryMode and not PlayerInventory.chatMode:
 		if PlayerInventory.is_inside_chest_area:
@@ -25,10 +25,12 @@ func _input(event):
 			open_stove()
 		elif PlayerInventory.is_inside_grain_mill_area:
 			open_grain_mill()
-	if event.is_action_pressed("scroll_up"):
+	if event.is_action_pressed("scroll_up") and not PlayerInventory.viewMapMode:
 		PlayerInventory.active_item_scroll_up()
-	elif event.is_action_pressed("scroll_down"):
+	elif event.is_action_pressed("scroll_down") and not PlayerInventory.viewMapMode:
 		PlayerInventory.active_item_scroll_down()
+
+
 
 func toggle_inventory():
 	$Inventory/CraftingMenu.reset()
