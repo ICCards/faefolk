@@ -110,9 +110,8 @@ func spawnPlayer():
 		print("My Character")
 		print(Server.player["c"])
 		var player = Player.instance()
-		#player.initialize_camera_limits(Vector2(0, 0), Vector2(1920, 1080))
 		print(str(Server.player["p"]))
-		player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
+		#player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
 		player.name = Server.player_id
 		player.principal = Server.player["principal"]
 		player.character = _character.new()
