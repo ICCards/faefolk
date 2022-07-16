@@ -62,6 +62,7 @@ func _ready():
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	
+	
 func _username_callback(args):
 	# Get the first argument (the DOM event in our case).
 	var js_event = args[0]
@@ -89,7 +90,6 @@ func DisplayMessageBubble(message):
 
 func adjust_bubble_position(lines):
 	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
-
 
 	
 func set_username(username):
@@ -150,6 +150,7 @@ func _unhandled_input(event):
 		not PlayerInventory.interactive_screen_mode and \
 		Server.player_state == "WORLD" and \
 		not PlayerInventory.chatMode and \
+		not PlayerInventory.viewMapMode and \
 		not is_mouse_over_hotbar and \
 		not swingActive: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]

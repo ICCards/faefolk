@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://World/Objects/Nature/Grasses/FlowerObject.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/flowers/6.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -27,6 +28,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 16 )
+texture = ExtResource( 3 )
 offset = Vector2( 0, -32 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -45,5 +47,11 @@ volume_db = -24.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/animate = SubResource( 2 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.5, -15.5 )
+scale = Vector2( 1.85, 1.65 )
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

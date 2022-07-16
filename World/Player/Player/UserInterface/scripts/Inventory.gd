@@ -14,15 +14,15 @@ func _ready():
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
-	if Server.player_state == "WORLD":
-		hotbar_slots = get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
-	else: 
-		hotbar_slots = get_node("/root/InsidePlayerHome/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
-	var h_slots = hotbar_slots.get_children()
-	for i in range(h_slots.size()):
-		h_slots[i].connect("mouse_entered", self, "hovered_slot", [h_slots[i]])
-		h_slots[i].connect("mouse_exited", self, "exited_slot", [h_slots[i]])
-	initialize_inventory()
+#	if Server.player_state == "WORLD":
+#		hotbar_slots = get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
+#	else: 
+#		hotbar_slots = get_node("/root/InsidePlayerHome/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
+#	var h_slots = hotbar_slots.get_children()
+#	for i in range(h_slots.size()):
+#		h_slots[i].connect("mouse_entered", self, "hovered_slot", [h_slots[i]])
+#		h_slots[i].connect("mouse_exited", self, "exited_slot", [h_slots[i]])
+#	initialize_inventory()
 	
 func _physics_process(delta):
 	if item != null and find_parent("UserInterface").holding_item == null:

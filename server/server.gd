@@ -1,16 +1,16 @@
 extends Node
 
-const PROD_DEFAULT_IP = "wss.faefolk.app/ws"
+const PROD_DEFAULT_IP = "wss://wss.faefolk.app/ws"
 const PROD_DEFAULT_PORT = 65124
 
-const DEV_DEFAULT_IP = "dev.faefolk.app/ws"
+const DEV_DEFAULT_IP = "wss://dev.faefolk.app/ws"
 const DEV_DEFAULT_PORT = 65124
 
-const LOCAL_DEFAULT_IP = "127.0.0.1"
+const LOCAL_DEFAULT_IP = "ws://127.0.0.1"
 const LCOAL_DEFAULT_PORT = 65124
 
 # The URL we will connect to
-var websocket_url = "ws://"+LOCAL_DEFAULT_IP+":"+str(LCOAL_DEFAULT_PORT)
+var websocket_url = LOCAL_DEFAULT_IP+":"+str(LCOAL_DEFAULT_PORT)
 
 # Our WebSocketClient instance
 var _client = WebSocketClient.new()
@@ -25,9 +25,10 @@ var local_player_id = 0
 var isLoaded = false
 var player = {}
 var player_node
-var player_id
+var player_id = "testID"
 var mapPartsLoaded = 0
 var player_house_position
+var player_house_id
 var world
 var map
 var generated_map = {}

@@ -139,11 +139,9 @@ func _on_DetectObjectOverPathBox_area_exited(area):
 		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 
 
-func _on_OpenChestArea_area_entered(area):
-	pass
-#	PlayerInventory.is_inside_chest_area = true
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
 
-func _on_OpenChestArea_area_exited(area):
-	pass
-#	if $OpenChestArea.get_overlapping_areas().size() <= 0:
-#		PlayerInventory.is_inside_chest_area = false
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false
