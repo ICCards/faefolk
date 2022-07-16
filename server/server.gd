@@ -1,16 +1,16 @@
 extends Node
 
-const PROD_DEFAULT_IP = "wss.faefolk.app/ws"
+const PROD_DEFAULT_IP = "wss://wss.faefolk.app/ws"
 const PROD_DEFAULT_PORT = 65124
 
-const DEV_DEFAULT_IP = "dev.faefolk.app/ws"
+const DEV_DEFAULT_IP = "wss://dev.faefolk.app/ws"
 const DEV_DEFAULT_PORT = 65124
 
-const LOCAL_DEFAULT_IP = "127.0.0.1"
+const LOCAL_DEFAULT_IP = "ws://127.0.0.1"
 const LCOAL_DEFAULT_PORT = 65124
 
 # The URL we will connect to
-var websocket_url = "wss://"+DEV_DEFAULT_IP+":"+str(DEV_DEFAULT_PORT)
+var websocket_url = LOCAL_DEFAULT_IP+":"+str(LCOAL_DEFAULT_PORT)
 
 # Our WebSocketClient instance
 var _client = WebSocketClient.new()
@@ -25,9 +25,10 @@ var local_player_id = 0
 var isLoaded = false
 var player = {}
 var player_node
-var player_id
+var player_id = "testID"
 var mapPartsLoaded = 0
 var player_house_position
+var player_house_id
 var world
 var map
 var generated_map = {}
@@ -89,19 +90,36 @@ func action(type,data):
 	_client.get_peer(1).put_packet(message)
 
 func generate_map():
+#	map = {
+#	"dirt":[],
+#	"grass":[],
+#	"dark_grass":[],
+#	"tall_grass":[],
+#	"water":[],
+#	"tree":[],
+#	"ore_large":[],
+#	"ore":[],
+#	"log":[],
+#	"stump":[],
+#	"flower":[],
+#	"tile": []
+#	}
 	map = {
 	"dirt":[],
-	"grass":[],
-	"dark_grass":[],
-	"tall_grass":[],
-	"water":[],
+	#"ocean":[],
+	"beach":[],
+	"plains":[],
+	"forest":[],
+	"desert":[],
+	"snow":[],
 	"tree":[],
+	"tall_grass":[],
 	"ore_large":[],
 	"ore":[],
 	"log":[],
 	"stump":[],
 	"flower":[],
-	"tile": []
+#	"tile": [],
 	}
 	var key = map.keys()[mapPartsLoaded]
 	var data = {"d":key}
@@ -157,6 +175,8 @@ func _on_data():
 			print("loading map")
 			var key = map.keys()[mapPartsLoaded]
 			print("Loaded " + key)
+		
+			print(result["d"].size())
 			map[key] = result["d"]
 			mapPartsLoaded = mapPartsLoaded + 1
 			if not mapPartsLoaded >= map.keys().size():

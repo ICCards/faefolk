@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Trees/TreeStumpObject.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/tree_sets/A/large_stumpA.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -124,6 +125,7 @@ position = Vector2( 0, -20 )
 
 [node name="TreeStump" type="Sprite" parent="TreeSprites"]
 position = Vector2( -4, 106 )
+texture = ExtResource( 2 )
 offset = Vector2( 0, -120 )
 
 [node name="StumpAnimationPlayer" type="AnimationPlayer" parent="."]
@@ -163,4 +165,10 @@ position = Vector2( -3.33333, 28.7778 )
 rotation = -1.5708
 shape = SubResource( 6 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -9.53674e-07, -22.2222 )
+scale = Vector2( 4.11111, 3.88889 )
+
 [connection signal="area_entered" from="StumpHurtBox" to="." method="_on_StumpHurtBox_area_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

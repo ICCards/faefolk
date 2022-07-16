@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Camera2D",
+"class": "PanningCamera2D",
+"language": "GDScript",
+"path": "res://World/Map/Camera2D.gd"
+} ]
+_global_script_class_icons={
+"PanningCamera2D": ""
+}
+
 [application]
 
 config/name="faefolk"
@@ -29,6 +39,7 @@ PlaceObject="*res://Global/Data/PlaceObject.gd"
 Tiles="*res://helpers/Tiles.gd"
 IC="*res://helpers/IC.gd"
 Settings="*res://Global/Data/Settings.gd"
+Goblin="*res://Global/Characters/Goblin.gd"
 
 [display]
 
@@ -163,6 +174,10 @@ move_down={
 "events": [  ]
 }
 use_tool={
+"deadzone": 0.5,
+"events": [  ]
+}
+open_map={
 "deadzone": 0.5,
 "events": [  ]
 }

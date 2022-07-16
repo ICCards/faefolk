@@ -402,5 +402,11 @@ collision_mask = 0
 position = Vector2( 3.9269e-06, 16.7647 )
 shape = SubResource( 14 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.588236, 2.35294 )
+scale = Vector2( 4.29412, 3.64706 )
+
 [connection signal="area_entered" from="BigHurtBox" to="." method="_on_BigHurtBox_area_entered"]
 [connection signal="area_entered" from="SmallHurtBox" to="." method="_on_SmallHurtBox_area_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
