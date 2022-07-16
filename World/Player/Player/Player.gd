@@ -3,7 +3,6 @@ extends KinematicBody2D
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
 
-
 var valid_tiles
 var hoed_tiles
 var watered_tiles
@@ -35,6 +34,24 @@ var FRICTION := 8
 var velocity := Vector2.ZERO
 
 const _character = preload("res://Global/Data/Characters.gd")
+
+func _get_local_input():
+	var input_vector = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+	var input := {}
+	if input_vector != Vector2.ZERO:
+		input["input_vector"] = input_vector
+	return input
+
+func _network_process(input):
+	position += input.get("input_vector",Vector2.ZERO) * 8
+
+func _save_state():
+	return {
+		position = position
+	}
+
+func _load_state(state):
+	position = state["position"]
 
 func _ready():
 	set_username("")
@@ -122,7 +139,8 @@ func _process(_delta) -> void:
 			$PickupZone.items_in_range.erase(pickup_item)
 		match state:
 			MOVEMENT:
-				movement_state(_delta)
+				pass
+				#movement_state(_delta)
 	else: 
 		idle_state(direction)
 
