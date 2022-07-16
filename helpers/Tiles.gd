@@ -21,6 +21,20 @@ func isCenterBitmaskTile(_pos, _map):
 		return true
 	else:
 		return false
+		
+func isCenter16Tiles(_pos, _map):
+	if _map.get_cellv(_pos + Vector2(2,0)) != -1 and _map.get_cellv(_pos + Vector2(2,-1)) != -1 and \
+	_map.get_cellv(_pos + Vector2(2,1)) != -1 and _map.get_cellv(_pos + Vector2(2,2)) != -1 and \
+	_map.get_cellv(_pos + Vector2(2,-2)) != -1 and _map.get_cellv(_pos + Vector2(1,2)) != -1 and \
+	_map.get_cellv(_pos + Vector2(1,-2)) != -1 and _map.get_cellv(_pos + Vector2(0,2)) != -1 and \
+	_map.get_cellv(_pos + Vector2(0,-2)) != -1 and _map.get_cellv(_pos + Vector2(-1,2)) != -1 and \
+	_map.get_cellv(_pos + Vector2(-1,-2)) != -1 and _map.get_cellv(_pos + Vector2(-2,2)) != -1 and \
+	_map.get_cellv(_pos + Vector2(-2,1)) != -1 and _map.get_cellv(_pos + Vector2(-2,0)) != -1 and \
+	_map.get_cellv(_pos + Vector2(-2,-1)) != -1 and _map.get_cellv(_pos + Vector2(-2,-1)) != -1:
+		return true
+	else:
+		return false
+	
 	
 func get_subtile_with_priority(id, tilemap: TileMap):
 	var tiles = tilemap.tile_set

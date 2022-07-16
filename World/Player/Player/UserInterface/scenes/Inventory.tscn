@@ -603,6 +603,7 @@ custom_constants/shadow_offset_y = 6
 text = "Tall fire pedestal"
 
 [node name="PetUI" type="Control" parent="InventoryMenu"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 5 )
@@ -625,7 +626,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 30
+frame = 16
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]
@@ -639,6 +640,48 @@ custom_styles/pressed = SubResource( 18 )
 custom_styles/focus = SubResource( 20 )
 custom_styles/normal = SubResource( 19 )
 text = "Hide"
+
+[node name="EquipSlots" type="GridContainer" parent="InventoryMenu"]
+margin_left = 54.0
+margin_top = 679.0
+margin_right = 558.0
+margin_bottom = 775.0
+custom_constants/hseparation = 6
+columns = 5
+
+[node name="HeadAtrSlot" type="Panel" parent="InventoryMenu/EquipSlots"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="ShirtSlot" type="Panel" parent="InventoryMenu/EquipSlots"]
+margin_left = 102.0
+margin_right = 198.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="PantsSlot" type="Panel" parent="InventoryMenu/EquipSlots"]
+margin_left = 204.0
+margin_right = 300.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="ShoesSlot" type="Panel" parent="InventoryMenu/EquipSlots"]
+margin_left = 306.0
+margin_right = 402.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
+
+[node name="AccessorySlot" type="Panel" parent="InventoryMenu/EquipSlots"]
+margin_left = 408.0
+margin_right = 504.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+script = ExtResource( 2 )
 
 [connection signal="input_event" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_input_event"]
 [connection signal="mouse_entered" from="CraftingMenu/Page1/WoodBoxArea" to="CraftingMenu" method="_on_WoodBoxArea_mouse_entered"]

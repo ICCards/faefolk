@@ -348,6 +348,31 @@
       "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "placable house"
-  }
+  },
+  "shirt": {
+      "ItemCategory": "Shirt",
+      "StackSize": 1,
+      "Description": "a shirt"
+  },
+  "pants": {
+      "ItemCategory": "Pants",
+      "StackSize": 1,
+      "Description": "some pants"
+  },
+  "hair": {
+      "ItemCategory": "Head attribute",
+      "StackSize": 1,
+      "Description": "a shirt"
+  },
+  "shoes": {
+      "ItemCategory": "Shoes",
+      "StackSize": 1,
+      "Description": "some shoes"
+  },
+  "accessory": {
+      "ItemCategory": "Accessory",
+      "StackSize": 1,
+      "Description": "accessory desc"
+  },
   
 }

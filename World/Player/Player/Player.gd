@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
-
+onready var tween = $Tween
 
 var valid_tiles
 var hoed_tiles
@@ -34,7 +34,7 @@ var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
 
-const _character = preload("res://Global/Data/Characters.gd")
+#const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
 	set_username("")
@@ -44,6 +44,33 @@ func _ready():
 	$Camera2D/UserInterface.initialize_user_interface()
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
+	
+	
+func _physics_process(delta):
+	var ocean = get_node("/root/World/GeneratedTiles/AnimatedBeachBorder")
+	if ocean.get_cellv(ocean.world_to_map(position)) != -1:
+		MAX_SPEED = 11.5
+		tween.interpolate_property($HidePlayerMask, "position",
+		$HidePlayerMask.position, Vector2(0,8), 0.05,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.start()
+		if Tiles.isCenterBitmaskTile(ocean.world_to_map(position), ocean) and Tiles.isCenter16Tiles(ocean.world_to_map(position), ocean):
+			MAX_SPEED = 9.5
+			tween.interpolate_property($HidePlayerMask, "position",
+			$HidePlayerMask.position, Vector2(0,-14), 0.05,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			tween.start()
+		elif Tiles.isCenterBitmaskTile(ocean.world_to_map(position), ocean):
+			tween.interpolate_property($HidePlayerMask, "position",
+			$HidePlayerMask.position, Vector2(0,-2), 0.05,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			tween.start()
+	else: 
+		MAX_SPEED = 12.5
+		tween.interpolate_property($HidePlayerMask, "position",
+		$HidePlayerMask.position, Vector2(0,20), 0.05,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.start()
 	
 	
 func _username_callback(args):
