@@ -180,7 +180,7 @@ func DespawnPlayer(player_id):
 func buildMap(map):
 	#build_valid_tiles()
 	print("BUILDING MAP")
-	get_node("loadingScreen").set_phase("Building dirt")
+	get_node("loadingScreen").set_phase("Building terrain")
 	for id in map["dirt"]:
 		var loc = Util.string_to_vector2(map["dirt"][id])
 		var x = loc.x
@@ -200,13 +200,11 @@ func buildMap(map):
 		var loc = Util.string_to_vector2(map["plains"][id])
 		plains.set_cellv(loc, 0)
 	print("LOADED PLAINS")
-	get_node("loadingScreen").set_phase("Building grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["forest"]:
 		var loc = Util.string_to_vector2(map["forest"][id])
 		forest.set_cellv(loc, 0)
 	print("LOADED DG")
-	get_node("loadingScreen").set_phase("Building water")
 	yield(get_tree().create_timer(0.5), "timeout")
 #	for id in map["ocean"]:
 #		var loc = Util.string_to_vector2(map["ocean"][id])
@@ -295,7 +293,7 @@ func buildMap(map):
 		object.initialize(variety,loc)
 		object.position = dirt.map_to_world(loc) + Vector2(16, 24)
 		$NatureObjects.add_child(object,true)
-	get_node("loadingScreen").set_phase("Building tall grass")
+	get_node("loadingScreen").set_phase("Building grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
 	for id in map["tall_grass"]:

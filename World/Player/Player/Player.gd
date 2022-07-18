@@ -38,12 +38,22 @@ const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
 	set_username("")
-	IC.getUsername(principal,username_callback)
+	#IC.getUsername(principal,username_callback)
 	set_player_setting(get_parent().get_parent())
 	_play_background_music()
 	$Camera2D/UserInterface.initialize_user_interface()
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
+	play_lightning_effect()
+	$Camera2D/DayNight.color = Color("#00070e")
+
+
+func play_lightning_effect():
+	rng.randomize()
+	var randomDelay = rng.randi_range(5, 10)
+	yield(get_tree().create_timer(randomDelay), "timeout")
+	$Camera2D/LightningStrike/AnimationPlayer.play("lightning")
+	play_lightning_effect()
 	
 	
 func _username_callback(args):
@@ -287,7 +297,7 @@ func init_day_night_cycle(_time_elapsed):
 		if _time_elapsed <= 24:
 			$Camera2D/DayNight.color =  Color("#ffffff")
 		else:
-			$Camera2D/DayNight.color = Color("#1c579e")
+			$Camera2D/DayNight.color = Color("#00070e")
 	else:
 		$Camera2D/DayNight.visible = false
 
