@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/ChatBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/OpenChest.tscn" type="PackedScene" id=2]
@@ -12,8 +12,12 @@
 [ext_resource path="res://Characters/Goblin/female/holding/idle/body/down/arms.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
+[ext_resource path="res://World/Objects/Nature/Particles/Rain.tscn" type="PackedScene" id=13]
+[ext_resource path="res://World/Objects/Nature/Particles/RainOnFloor.tscn" type="PackedScene" id=14]
+[ext_resource path="res://World/Objects/Nature/Particles/Snow.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=17]
+[ext_resource path="res://World/Objects/Nature/Particles/FallingLeaf.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=19]
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=20]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PlaceItemsUI.gd" type="Script" id=21]
@@ -26,11 +30,13 @@
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/Stove.tscn" type="PackedScene" id=28]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/GrainMill.tscn" type="PackedScene" id=29]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/PopUpDialogue.tscn" type="PackedScene" id=30]
+[ext_resource path="res://World/Objects/Nature/Particles/Clouds.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=32]
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=18]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:color")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -39,12 +45,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ false ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "set night"
-length = 8.0
+[sub_resource type="Animation" id=17]
+resource_name = "lightning"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
 tracks/0/interp = 1
@@ -52,10 +58,37 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 8 ),
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "set night"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.129412, 0.388235, 0.607843, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0.027451, 0.054902, 1 ) ]
 }
 
 [sub_resource type="CapsuleShape2D" id=11]
@@ -756,6 +789,12 @@ expand_margin_bottom = 4.0
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 8 )
 
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 32 )
+texture_scale = 1.25
+energy = 0.25
+mode = 2
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
@@ -821,11 +860,52 @@ scale = Vector2( 0.5, 0.5 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="Camera2D/UserInterface"]
 
+[node name="Clouds" parent="Camera2D/UserInterface" instance=ExtResource( 31 )]
+visible = false
+position = Vector2( 534, 270 )
+
+[node name="FallingLeaf" parent="Camera2D/UserInterface" instance=ExtResource( 18 )]
+visible = false
+position = Vector2( 595, 305 )
+amount = 10
+lifetime = 4.0
+initial_velocity = 60.0
+initial_velocity_random = 0.25
+
+[node name="Snow" parent="Camera2D/UserInterface" instance=ExtResource( 15 )]
+visible = false
+position = Vector2( 539, 131 )
+amount = 150
+scale_amount = 2.0
+scale_amount_random = 0.5
+
+[node name="RainOnFloor" parent="Camera2D/UserInterface" instance=ExtResource( 14 )]
+position = Vector2( 522, 264 )
+color = Color( 0.0666667, 0.517647, 1, 1 )
+
+[node name="Rain" parent="Camera2D/UserInterface" instance=ExtResource( 13 )]
+position = Vector2( 663, 24 )
+amount = 120
+initial_velocity = 120.0
+initial_velocity_random = 0.2
+
+[node name="LightningStrike" type="ColorRect" parent="Camera2D"]
+visible = false
+margin_left = -565.0
+margin_top = -332.0
+margin_right = 577.0
+margin_bottom = 364.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/LightningStrike"]
+anims/RESET = SubResource( 18 )
+anims/lightning = SubResource( 17 )
+
 [node name="DayNight" type="CanvasModulate" parent="Camera2D"]
+visible = false
+color = Color( 0, 0.027451, 0.054902, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/DayNight"]
-anims/RESET = SubResource( 12 )
-"anims/set night" = SubResource( 13 )
+"anims/set night" = SubResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
