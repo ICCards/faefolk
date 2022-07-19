@@ -1,16 +1,15 @@
 extends KinematicBody2D
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
-onready var day_night_animation_player = $Camera2D/DayNight/AnimationPlayer
 
+onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+onready var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
+onready var object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
+onready var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
+onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
+onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
+onready var grass_tiles = get_node("/root/World/GeneratedTiles/GreenGrassTiles")
 
-var valid_tiles
-var hoed_tiles
-var watered_tiles
-var grass_tiles
-var fence_tiles
-var object_tiles
-var path_tiles
 var principal
 var character 
 var setting
@@ -38,24 +37,9 @@ const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
 	set_username("")
-	#IC.getUsername(principal,username_callback)
-	set_player_setting(get_parent().get_parent())
-	_play_background_music()
-	$Camera2D/UserInterface.initialize_user_interface()
-	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
-	play_lightning_effect()
-	$Camera2D/DayNight.color = Color("#00070e")
+	#IC.getUsername(principal,username_callback)
 
-
-func play_lightning_effect():
-	rng.randomize()
-	var randomDelay = rng.randi_range(5, 10)
-	yield(get_tree().create_timer(randomDelay), "timeout")
-	$Camera2D/LightningStrike/AnimationPlayer.play("lightning")
-	play_lightning_effect()
-	
-	
 func _username_callback(args):
 	# Get the first argument (the DOM event in our case).
 	var js_event = args[0]
@@ -68,7 +52,6 @@ func DisplayMessageBubble(message):
 	if $Timer.time_left > 0:
 		$MessageBubble.text = ""
 		$MessageBubble.text = message
-		#adjust_bubble_position($MessageBubble.get_line_count())
 		$Timer.stop()
 		$Timer.start()
 		yield($Timer, "timeout")
@@ -77,14 +60,9 @@ func DisplayMessageBubble(message):
 		$MessageBubble.text = ""
 		$MessageBubble.text = message
 		$Timer.start()
-		#adjust_bubble_position($MessageBubble.get_line_count())
 		yield($Timer, "timeout")
 		$MessageBubble.visible = false
 
-func adjust_bubble_position(lines):
-	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
-
-	
 func set_username(username):
 	Server.username = username
 	$Username.text = str(username)	
@@ -103,22 +81,12 @@ func sendAction(action,data):
 			Server.action("SWING", data)
 
 func set_new_music_volume():
-	$BackgroundMusic.volume_db = Sounds.return_adjusted_sound_db("music", -36)
 	if Sounds.current_footsteps_sound == Sounds.stone_footsteps:
 		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", 0)
 	else: 
 		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
-	
-	
-func _play_background_music():
-	rng.randomize()
-	$BackgroundMusic.stream = Sounds.background_music[rng.randi_range(0, Sounds.background_music.size() - 1)]
-	$BackgroundMusic.play()
-	$BackgroundMusic.volume_db =  Sounds.return_adjusted_sound_db("music", -32)
-	yield($BackgroundMusic, "finished")
-	_play_background_music()
-	
-	
+
+
 func _process(_delta) -> void:
 	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
 	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:
@@ -147,7 +115,7 @@ func _unhandled_input(event):
 		not swingActive: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon" and setting == "World":
+			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon":
 				swing_state(item_name)
 			if itemCategory == "Placable object":
 				$PlaceItemsUI.place_item_state(event, item_name, valid_tiles)
@@ -292,36 +260,17 @@ func remove_hoed_tile():
 		hoed_tiles.set_cellv(location, -1)
 		hoed_tiles.update_bitmask_region()	
 
-func init_day_night_cycle(_time_elapsed):
-	if setting == "World":
-		if _time_elapsed <= 24:
-			$Camera2D/DayNight.color =  Color("#ffffff")
-		else:
-			$Camera2D/DayNight.color = Color("#00070e")
-	else:
-		$Camera2D/DayNight.visible = false
 
-func set_night():
-	day_night_animation_player.play("set night")
-func set_day():
-	day_night_animation_player.play_backwards("set night")
-
-func set_player_setting(ownerNode):
-	if str(ownerNode).substr(0, 5) == "World":
-		setting = "World"
-		$DetectPathType/FootstepsSound.stream = Sounds.dirt_footsteps
-		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
-		$DetectPathType/FootstepsSound.play()
-		valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
-		path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
-		object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
-		fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
-		hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
-		watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-		grass_tiles = get_node("/root/World/GeneratedTiles/GreenGrassTiles")
-	else:
-		setting = "InsidePlayerHome"
-		$DetectPathType/FootstepsSound.stream = Sounds.wood_footsteps
-		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
-		$DetectPathType/FootstepsSound.play()
-
+#func init_day_night_cycle(_time_elapsed):
+#	if setting == "World":
+#		if _time_elapsed <= 24:
+#			$Camera2D/DayNight.color =  Color("#ffffff")
+#		else:
+#			$Camera2D/DayNight.color = Color("#00070e")
+#	else:
+#		$Camera2D/DayNight.visible = false
+#
+#func set_night():
+#	day_night_animation_player.play("set night")
+#func set_day():
+#	day_night_animation_player.play_backwards("set night")
