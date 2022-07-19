@@ -4,7 +4,7 @@
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/gear icon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/scenes/PetUI.gd" type="Script" id=5]
+[ext_resource path="res://World/Player/Player/UserInterface/scripts/PetUI.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/CraftingMenu.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=8]

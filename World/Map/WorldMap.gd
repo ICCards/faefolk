@@ -4,8 +4,12 @@ extends Node2D
 
 onready var GridSquareLabel = preload("res://World/Map/GridSquareLabel.tscn")
 onready var playerIcon = $Map/PlayerIcon
+onready var rainStormIcon = $Map/RainStormIcon
+onready var snowStormIcon = $Map/SnowStormIcon
 onready var miniMap = $Map
 var player 
+var rainStorm
+var snowStorm
 var direction
 const NUM_COLUMNS = 8
 const NUM_ROWS = 8
@@ -28,12 +32,17 @@ func initialize():
 	$Camera2D.position = Vector2(800, 800)
 	$Camera2D.zoom = Vector2(1.5, 1.5)
 	get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar").visible = false
+	get_node("/root/World/RainStorm").visible = false
+	get_node("/root/World/SnowStorm").visible = false
+	get_node("/root/World/FullMapParticles").visible = false
 	
 func set_inactive():
 	$Camera2D.current = false
 	get_node("/root/World/Players/" + Server.player_id + "/Camera2D").current = true
 	get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar").visible = true
-
+	get_node("/root/World/RainStorm").visible = true
+	get_node("/root/World/SnowStorm").visible = true
+	get_node("/root/World/FullMapParticles").visible = true
 
 func _ready():
 	wait_for_map()
@@ -64,8 +73,10 @@ func _process(delta):
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 		set_direction(player.direction)
 		change_label_size()
-#		var grid_labels = get_tree().get_nodes_in_group("grid labels")
-#		grid_labels.rect_scale = adjustedGridCoordinatesScale($Camera2D.zoom)
+		rainStorm = get_node("/root/World/RainStorm")
+		rainStormIcon.position = rainStorm.position
+		snowStorm = get_node("/root/World/SnowStorm")
+		snowStormIcon.position = snowStorm.position
 		
 	
 	

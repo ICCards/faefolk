@@ -11,6 +11,8 @@ onready var snow = $GeneratedTiles/SnowTiles
 onready var beachBorderTiles = $GeneratedTiles/AnimatedBeachBorder
 onready var sandBeachBorderTiles = $GeneratedTiles/SandBeachBorder
 onready var desert = $GeneratedTiles/DesertTiles
+onready var rainStorm = $RainStorm
+onready var snowStorm = $SnowStorm
 
 onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
@@ -38,6 +40,8 @@ var object_variety
 var day_num = 1
 var season = "spring"
 var valid_spawn_position
+var random_rain_storm_position
+var random_snow_storm_position
 
 const NUM_FARM_OBJECTS = 550
 const NUM_GRASS_BUNCHES = 150
@@ -90,11 +94,8 @@ func _ready():
 	Server.generated_map.clear()
 	Server.generate_map()
 	wait_for_map()
-	Sounds.connect("volume_change", self, "change_ambient_volume")
 	Server.world = self
-	
-func change_ambient_volume():
-	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
+
 
 func wait_for_map():
 	if not Server.generated_map.empty():
@@ -222,7 +223,6 @@ func buildMap(map):
 		desert.set_cellv(loc, 0)
 	for id in map["beach"]:
 		var loc = Util.string_to_vector2(map["beach"][id])
-		#beachBorderTiles.set_cellv(loc, 0)
 		sandBeachBorderTiles.set_cellv(loc, 0)
 	for id in map["tree"]:
 		var loc = Util.string_to_vector2(map["tree"][id]["l"])
@@ -329,8 +329,6 @@ func buildMap(map):
 	yield(get_tree().create_timer(1.0), "timeout")
 	Server.player_state = "WORLD"
 	print("Map loaded")
-	$AmbientSound.volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
-	$AmbientSound.play()
 	Server.world = self
 	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
@@ -406,7 +404,6 @@ func fill_biome_gaps(map):
 		yield(get_tree().create_timer(1.0), "timeout")
 	
 
-
 func check_and_remove_invalid_autotiles(map):
 	for i in range(4):
 		for cell in plains.get_used_cells(): 
@@ -435,12 +432,10 @@ func check_and_remove_invalid_autotiles(map):
 	forest.update_bitmask_region()
 	desert.update_bitmask_region()
 
-
 func build_valid_tiles():
 	for x in range(298):
 		for y in range(298):
 			validTiles.set_cellv(Vector2(x+1, y+1), 0)
-
 
 func ChangeTile(data):
 	var loc = Util.string_to_vector2(data["l"])
@@ -508,7 +503,6 @@ func _physics_process(delta):
 						spawnNewPlayer(world_state_buffer[2]["players"][player])
 		elif render_time > world_state_buffer[1].t:
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
-			
 			for player in world_state_buffer[1]["players"].keys():
 				if str(player) == "t":
 					continue

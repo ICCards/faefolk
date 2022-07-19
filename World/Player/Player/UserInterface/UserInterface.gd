@@ -1,11 +1,9 @@
 extends CanvasLayer
+
 var holding_item = null
-var hovered_item = null
 
-func _process(delta):
-	if hovered_item != null:
-		print(hovered_item.item_name)
-
+func _ready():
+	initialize_user_interface()
 
 func initialize_user_interface():
 	$Hotbar.visible = true
@@ -29,7 +27,6 @@ func _input(event):
 		PlayerInventory.active_item_scroll_up()
 	elif event.is_action_pressed("scroll_down") and not PlayerInventory.viewMapMode:
 		PlayerInventory.active_item_scroll_down()
-
 
 
 func toggle_inventory():
