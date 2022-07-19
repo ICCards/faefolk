@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://World/Map/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/MiniMap.tres" type="TileSet" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Images/mini map/black.png" type="Texture" id=4]
 [ext_resource path="res://World/Map/WorldMap.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/Particles/Clouds.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/PngItem_688194.png" type="Texture" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "black.png 0"
@@ -34,13 +33,9 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 65471463, 4, 0, 65471464, 4, 0, 65471465, 4, 0, 65536999, 4, 0, 65537000, 4, 0, 65537001, 4, 0, 65602535, 4, 0, 65602536, 4, 0, 65602537, 4, 0 )
 
-[node name="RainStormIcon" type="Sprite" parent="Map"]
+[node name="StormIcon" type="Sprite" parent="Map"]
 scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
-
-[node name="SnowStormIcon" type="Sprite" parent="Map"]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
 
 [node name="PlayerIcon" type="Sprite" parent="Map"]
 scale = Vector2( 40, 40 )

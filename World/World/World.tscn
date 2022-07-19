@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -14,16 +14,13 @@
 [ext_resource path="res://Assets/Images/Animations/fire pedestal/fire_pedestal.tres" type="Texture" id=12]
 [ext_resource path="res://Assets/tilesets/CL_MainLev_winter.png" type="Texture" id=13]
 [ext_resource path="res://Assets/tilesets/MainLev2.0.png" type="Texture" id=14]
-[ext_resource path="res://World/Objects/Nature/Particles/RainStorm.gd" type="Script" id=15]
+[ext_resource path="res://World/Objects/Nature/Particles/RoamingStorm.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/a/wave1.tres" type="Texture" id=16]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/d/waveD.tres" type="Texture" id=17]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/b/waveB.tres" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/c/waveC.tres" type="Texture" id=19]
 [ext_resource path="res://World/Map/WorldMap.tscn" type="PackedScene" id=20]
-[ext_resource path="res://World/Objects/Nature/Particles/RainStorm.tscn" type="PackedScene" id=21]
-[ext_resource path="res://World/Objects/Nature/Particles/SnowStorm.tscn" type="PackedScene" id=22]
 [ext_resource path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" type="PackedScene" id=23]
-[ext_resource path="res://World/Objects/Nature/Particles/SnowStorm.gd" type="Script" id=24]
 
 [sub_resource type="TileSet" id=260]
 0/name = "CL_MainLev.png 0"
@@ -1100,13 +1097,8 @@ format = 1
 
 [node name="Players" type="YSort" parent="."]
 
-[node name="SnowStorm" parent="." instance=ExtResource( 22 )]
+[node name="RoamingStorm" parent="." instance=ExtResource( 15 )]
 visible = false
-script = ExtResource( 24 )
-
-[node name="RainStorm" parent="." instance=ExtResource( 21 )]
-visible = false
-script = ExtResource( 15 )
 
 [node name="FullMapParticles" parent="." instance=ExtResource( 23 )]
 visible = false

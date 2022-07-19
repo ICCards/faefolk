@@ -14,7 +14,7 @@ func set_new_music_volume():
 
 func _process(delta):
 	if Server.isLoaded:
-		if get_parent().position.distance_to(get_node("/root/World/RainStorm").position) <= 2000:
+		if get_parent().position.distance_to(get_node("/root/World/RoamingStorm").position) <= 2000:
 			inside_storm()
 		else:
 			outside_storm()
