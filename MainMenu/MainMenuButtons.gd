@@ -6,8 +6,9 @@ var connect_callback = JavaScript.create_callback(self, "_connect_plug")
 var login_callback = JavaScript.create_callback(self, "_login")
 
 func _ready():
-	if not Server.player.empty():
-		get_parent().spawn_player_in_menu()
+	pass
+#	if not Server.player.empty():
+#		get_parent().spawn_player_in_menu()
 
 func _connect_plug(args):
 	IC.login(login_callback)
@@ -15,7 +16,7 @@ func _connect_plug(args):
 func _login(args):
 	var value = Util.toMessage("LOGIN",{"d":{}})
 	print("logging in")
-	Server._client.get_peer(1).put_packet(value)
+	Server.rpc_id(1, "login")
 	get_parent().spawn_player_in_menu()
 	
 func _play_hover_effect(button_name):

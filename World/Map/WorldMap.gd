@@ -102,25 +102,25 @@ func wait_for_map():
 		
 func buildMap(map):
 	for id in map["dirt"]:
-		var loc = Util.string_to_vector2(map["dirt"][id])
+		var loc = map["dirt"][id]
 		miniMap.set_cellv(loc, Tiles.DIRT)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["forest"]:
-		var loc = Util.string_to_vector2(map["forest"][id])
+		var loc = map["forest"][id]
 		miniMap.set_cellv(loc , Tiles.FOREST)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["plains"]:
-		var loc = Util.string_to_vector2(map["plains"][id])
+		var loc = map["plains"][id]
 		miniMap.set_cellv(loc , Tiles.PLAINS)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["beach"]:
-		var loc = Util.string_to_vector2(map["beach"][id])
+		var loc = map["beach"][id]
 		miniMap.set_cellv(loc , Tiles.BEACH)
 	for id in map["desert"]:
-		var loc = Util.string_to_vector2(map["desert"][id])
+		var loc = map["desert"][id]
 		miniMap.set_cellv(loc , Tiles.DESERT)
 	for id in map["snow"]:
-		var loc = Util.string_to_vector2(map["snow"][id])
+		var loc = map["snow"][id]
 		miniMap.set_cellv(loc , Tiles.SNOW)
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):

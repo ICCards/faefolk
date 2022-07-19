@@ -25,26 +25,45 @@ var local_player_id = 0
 var isLoaded = false
 var player = {}
 var player_node
-var player_id = "testID"
+var player_id
 var mapPartsLoaded = 0
 var player_house_position
 var player_house_id
-var world
+var world = null
 var map
 var generated_map = {}
 var player_state = "WORLD"
 var day
 var num_day = 1
 var username
+
+func generate_map():
+	map = {
+	"dirt":[],
+	#"ocean":[],
+	"beach":[],
+	"plains":[],
+	"forest":[],
+	"desert":[],
+	"snow":[],
+	"tree":[],
+	"tall_grass":[],
+	"ore_large":[],
+	"ore":[],
+	"log":[],
+	"stump":[],
+	"flower":[],
+#	"tile": [],
+	}
+	var key = map.keys()[mapPartsLoaded]
+	print("getting map")
+	rpc_id(1, "get_map",key)
+
 func _ready():
 	get_tree().connect("network_peer_connected",self,"_on_network_peer_connected")
 	get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
 	get_tree().connect("server_disconnected", self, "_on_server_disconnected")
-	SyncManager.connect("sync_started",self,"_on_SyncManager_sync_started")
-	SyncManager.connect("sync_stopped",self,"_on_SyncManager_sync_stopped")
-	SyncManager.connect("sync_lost",self,"_on_SyncManager_sync_lost")
-	SyncManager.connect("sync_regained",self,"_on_SyncManager_sync_regained")
-	SyncManager.connect("sync_error",self,"_on_SyncManager_sync_error")
+	
 	# Initiate connection to the given URL.
 	var err = _client.connect_to_url(websocket_url,PoolStringArray(), true)
 	if err != OK:
@@ -52,33 +71,39 @@ func _ready():
 		set_process(false)
 	get_tree().network_peer = _client
 	
-func _on_network_peer_connected(player_id):
-	print(str(player_id)+" Connected")
-	SyncManager.add_peer(player_id)
-	player_id = get_tree().get_network_unique_id()
-	print("my Id: "+ str(player_id))
+func _on_network_peer_connected(id):
+	pass
 
 func _on_network_peer_disconnected(player_id):
 	print(str(player_id)+" Disconnected")
-	SyncManager.remove_peer(player_id)
 	
 func _on_server_disconnected():
 	_on_network_peer_disconnected(1)
 
-func _on_SyncManager_sync_started():
-	print("started")		
-	
-func _on_SyncManager_sync_stopped():
-	pass	
+func _process(_delta):
+	_client.poll()
 
-func _on_SyncManager_sync_lost():
-	print("sync lost")	
-	
-func _on_SyncManager_sync_regained():
-	print("sync regained")
+remote func input(data):
+	if world:
+		world.Players.thr_network_inputs(data)
 
-func _on_SyncManager_sync_error(msg):
-	print("Fatal sync error: "+msg)		
+remote func spawn_player(data):
+	print("spawn player called from srever")
+	print(data)
+	player = data
+
+remote func load_map(value):
+	print("loading map")
+	var key = map.keys()[mapPartsLoaded]
+	print("Loaded " + key)
+	map[key] = value
+	mapPartsLoaded = mapPartsLoaded + 1
+	if not mapPartsLoaded >= map.keys().size():
+		key = map.keys()[mapPartsLoaded]
+		rpc_id(1, "get_map",key)
+	else:
+		mapPartsLoaded = 0
+		generated_map = map
 
 #func _closed(was_clean = false):
 #	# was_clean will tell you if the disconnection was correctly notified
@@ -108,7 +133,8 @@ func _on_SyncManager_sync_error(msg):
 #	var message = Util.toMessage("DetermineLatency",data)
 #	_client.get_peer(1).put_packet(message)
 #
-#func action(type,data):
+func action(type,data):
+	pass
 #	var value = {"d": data}
 #	value["t"] = type
 #	if value["t"] == "ON_HIT":
@@ -116,27 +142,6 @@ func _on_SyncManager_sync_error(msg):
 #	var message = Util.toMessage("action",value)
 #	_client.get_peer(1).put_packet(message)
 #
-#func generate_map():
-#	map = {
-#	"dirt":[],
-#	"grass":[],
-#	"dark_grass":[],
-#	"tall_grass":[],
-#	"water":[],
-#	"tree":[],
-#	"ore_large":[],
-#	"ore":[],
-#	"log":[],
-#	"stump":[],
-#	"flower":[],
-#	"tile": []
-#	}
-#	var key = map.keys()[mapPartsLoaded]
-#	var data = {"d":key}
-#	var value = Util.toMessage("getMap",data)
-#	print("getting map")
-#	print(value)
-#	_client.get_peer(1).put_packet(value)
 #
 #func _on_data():
 #	var pkt = _client.get_peer(1).get_packet()
@@ -229,8 +234,3 @@ func _on_SyncManager_sync_error(msg):
 #								if player_id != str(player):
 #									if world.has_node(id):
 #										world.get_node(id).PlayEffect(player_id)
-
-func _process(_delta):
-	# Call this in _process or _physics_process. Data transfer, and signals
-	# emission will only happen when calling this function.
-	_client.poll()

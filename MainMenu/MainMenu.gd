@@ -16,17 +16,13 @@ func _ready():
 
 func spawn_player_in_menu():
 	var value = Server.player
-	if not value.empty():
-		$MainMenuButtons/LoadingIndicator.visible = false
-		$MainMenuButtons/PlayShopQuit.visible = true
-		playerMenuState = PlayerMenuState.instance()
-		playerMenuState.character = _character.new()
-		playerMenuState.character.LoadPlayerCharacter(value["c"])
-		add_child(playerMenuState)
-		playerMenuState.global_position = Vector2(600, 472 )
-	else:
-		yield(get_tree().create_timer(0.25), "timeout")
-		spawn_player_in_menu()
+	$MainMenuButtons/LoadingIndicator.visible = false
+	$MainMenuButtons/PlayShopQuit.visible = true
+#	playerMenuState = PlayerMenuState.instance()
+#	playerMenuState.character = _character.new()
+#	playerMenuState.character.LoadPlayerCharacter(value["c"])
+#	add_child(playerMenuState)
+#	playerMenuState.global_position = Vector2(600, 472 )
 
 
 func change_title_volume():

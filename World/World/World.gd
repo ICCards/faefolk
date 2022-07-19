@@ -11,6 +11,7 @@ onready var snow = $GeneratedTiles/SnowTiles
 onready var beachBorderTiles = $GeneratedTiles/AnimatedBeachBorder
 onready var sandBeachBorderTiles = $GeneratedTiles/SandBeachBorder
 onready var desert = $GeneratedTiles/DesertTiles
+onready var Players = $Players
 
 onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
@@ -116,10 +117,11 @@ func spawnPlayer():
 		player.principal = Server.player["principal"]
 		player.character = _character.new()
 		player.character.LoadPlayerCharacter(Server.player["c"])
+		player.set_network_master(get_tree().get_network_unique_id())
 		$Players.add_child(player)
 		if Server.player_house_position == null:
 			print("setting position")
-			player.position = dirt.map_to_world(Util.string_to_vector2(Server.player["p"]))
+			#player.position = Server.player["p"]
 		else: 
 			player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		
@@ -131,7 +133,7 @@ func spawnPlayerExample(pos):
 	player.character.LoadPlayerCharacter("human_male")
 	$Players.add_child(player)
 	if Server.player_house_position == null:
-		var loc = Util.string_to_vector2(pos)
+		var loc = pos
 		player.position = loc * 32
 	else: 
 		player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
@@ -158,7 +160,7 @@ func spawnNewPlayer(player):
 			print("spawning new player")
 			print(player["p"])
 			var new_player = Player_template.instance()
-			new_player.position = dirt.map_to_world(Util.string_to_vector2(player["p"]))
+			new_player.position = dirt.map_to_world(player["p"])
 			new_player.name = str(player["id"])
 			new_player.principal = player["principal"]
 			new_player.character = _character.new()
@@ -182,7 +184,7 @@ func buildMap(map):
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building dirt")
 	for id in map["dirt"]:
-		var loc = Util.string_to_vector2(map["dirt"][id])
+		var loc = map["dirt"][id]
 		var x = loc.x
 		var y = loc.y
 		tile_ids["" + str(x) + "" + str(y)] = id
@@ -197,13 +199,13 @@ func buildMap(map):
 	print("LOADED DIRT")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["plains"]:
-		var loc = Util.string_to_vector2(map["plains"][id])
+		var loc = map["plains"][id]
 		plains.set_cellv(loc, 0)
 	print("LOADED PLAINS")
 	get_node("loadingScreen").set_phase("Building grass")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["forest"]:
-		var loc = Util.string_to_vector2(map["forest"][id])
+		var loc = map["forest"][id]
 		forest.set_cellv(loc, 0)
 	print("LOADED DG")
 	get_node("loadingScreen").set_phase("Building water")
@@ -217,17 +219,17 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Building trees")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["snow"]:
-		var loc = Util.string_to_vector2(map["snow"][id])
+		var loc = map["snow"][id]
 		snow.set_cellv(loc, 0)
 	for id in map["desert"]:
-		var loc = Util.string_to_vector2(map["desert"][id])
+		var loc = map["desert"][id]
 		desert.set_cellv(loc, 0)
 	for id in map["beach"]:
-		var loc = Util.string_to_vector2(map["beach"][id])
+		var loc = map["beach"][id]
 		#beachBorderTiles.set_cellv(loc, 0)
 		sandBeachBorderTiles.set_cellv(loc, 0)
 	for id in map["tree"]:
-		var loc = Util.string_to_vector2(map["tree"][id]["l"])
+		var loc = map["tree"][id]["l"]
 		var biome = map["tree"][id]["b"]
 		if biome == "desert":
 			var object = DesertTreeObject.instance()
@@ -248,7 +250,7 @@ func buildMap(map):
 	print("LOADED TREES")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["log"]:
-		var loc = Util.string_to_vector2(map["log"][id]["l"])
+		var loc = map["log"][id]["l"]
 		validTiles.set_cellv(loc, -1)
 		rng.randomize()
 		var variety = rng.randi_range(0, 11)
@@ -261,7 +263,7 @@ func buildMap(map):
 	print("LOADED LOGS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["stump"]:
-		var loc = Util.string_to_vector2(map["stump"][id]["l"])
+		var loc = map["stump"][id]["l"]
 		treeTypes.shuffle()
 		var variety = treeTypes.front()
 		var object = StumpObject.instance()
@@ -274,7 +276,7 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Building ore")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
-		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
+		var loc = map["ore_large"][id]["l"]
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = OreObject.instance()
@@ -286,7 +288,7 @@ func buildMap(map):
 	print("LOADED LARGE OrE")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore"]:
-		var loc = Util.string_to_vector2(map["ore"][id]["l"])
+		var loc = map["ore"][id]["l"]
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = SmallOreObject.instance()
@@ -299,7 +301,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
 	for id in map["tall_grass"]:
-		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
+		var loc = map["tall_grass"][id]["l"]
 		count += 1
 		var object = TallGrassObject.instance()
 		object.biome = map["tall_grass"][id]["b"]
@@ -313,7 +315,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
 		count += 1
-		var loc = Util.string_to_vector2(map["flower"][id]["l"])
+		var loc = map["flower"][id]["l"]
 		var object = FlowerObject.instance()
 		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
 		$NatureObjects.add_child(object,true)
@@ -336,8 +338,8 @@ func buildMap(map):
 	Server.world = self
 	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
-	#spawnPlayer()
-	spawnPlayerExample(map["beach"][map["beach"].keys()[rng.randi_range(0, map["beach"].size() - 1)]])
+	spawnPlayer()
+	#spawnPlayerExample(map["beach"][map["beach"].keys()[rng.randi_range(0, map["beach"].size() - 1)]])
 	Server.isLoaded = true
 	
 	
@@ -445,7 +447,7 @@ func build_valid_tiles():
 
 
 func ChangeTile(data):
-	var loc = Util.string_to_vector2(data["l"])
+	var loc = data["l"]
 	if data["isWatered"]:
 		watered.set_cellv(loc, 0)
 		hoed.set_cellv(loc, 0)
@@ -502,8 +504,9 @@ func _physics_process(delta):
 					continue
 				if $Players.has_node(str(player)):
 					if world_state_buffer[1]["players"].has(player):
-						var new_position = lerp(Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]), Util.string_to_vector2(world_state_buffer[2]["players"][player]["p"]), interpolation_factor)
-						$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+						pass
+						#var new_position = lerp(Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]), Util.string_to_vector2(world_state_buffer[2]["players"][player]["p"]), interpolation_factor)
+						#$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
 					if not mark_for_despawn.has(player):
 						print("will spawn player")
@@ -517,7 +520,8 @@ func _physics_process(delta):
 				if player == Server.player_id:
 					continue
 				if $Players.has_node(str(player)):
-					var position_delta = (Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) - Util.string_to_vector2(world_state_buffer[0]["players"][player]["p"]))
-					var new_position = Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) + (position_delta * extrapolation_factor)
-					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+					pass
+					#var position_delta = (Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) - Util.string_to_vector2(world_state_buffer[0]["players"][player]["p"]))
+					#var new_position = Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) + (position_delta * extrapolation_factor)
+					#$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 

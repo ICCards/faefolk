@@ -96,6 +96,7 @@ tracks/6/keys = {
 }
 
 [node name="PlayerMenuState" type="KinematicBody2D"]
+visible = false
 scale = Vector2( 4, 4 )
 script = ExtResource( 2 )
 

@@ -15,7 +15,10 @@ var character
 var setting
 var is_mouse_over_hotbar
 var username_callback = JavaScript.create_callback(self, "_username_callback")
-
+var counter = -1 #testing value
+var rectExtents = null
+var collisionMask = null
+var label = null
 onready var state = MOVEMENT
 
 enum {
@@ -35,23 +38,6 @@ var velocity := Vector2.ZERO
 
 const _character = preload("res://Global/Data/Characters.gd")
 
-func _get_local_input():
-	var input_vector = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
-	var input := {}
-	if input_vector != Vector2.ZERO:
-		input["input_vector"] = input_vector
-	return input
-
-func _network_process(input):
-	position += input.get("input_vector",Vector2.ZERO) * 8
-
-func _save_state():
-	return {
-		position = position
-	}
-
-func _load_state(state):
-	position = state["position"]
 
 func _ready():
 	set_username("")
@@ -61,15 +47,80 @@ func _ready():
 	$Camera2D/UserInterface.initialize_user_interface()
 	PlayerInventory.emit_signal("active_item_updated")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
+	#label = get_node("Label")
+	#rectExtents = get_node("CollisionShape2D").shape.get_extents() #assuming constant rectanglular CollisionShape2D
+	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
+
+
+#reset object state to that in a given game_state, executed once per rollback 
+func reset_state(game_state : Dictionary):
+	#check if this object exists within the checked game_state
+	if game_state.has(name):
+		position.x = game_state[name]['x']
+		position.y = game_state[name]['y']
+		counter = game_state[name]['counter']
+		collisionMask = game_state[name]['collisionMask']
+	else:
+		free()
+
+
+func frame_start():
+	pass
+	#code to run at beginning of frame
+	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
+
+
+func input_update(input, game_state : Dictionary):
+	#calculate state of object for the given input
+	var vect = Vector2(0, 0)
 	
+	#Collision detection for InputControl children that can pass through each other
+#	for object in game_state:
+#		if object != name:
+#			if collisionMask.intersects(game_state[object]['collisionMask']):
+#				counter += 1
 	
+	if input.local_input[0]: #W
+		vect.y -= 7
+		
+	if input.local_input[1]: #A
+		vect.x -= 7
+		
+	if input.local_input[2]: #S
+		vect.y += 7
+		
+	if input.local_input[3]: #D
+		vect.x += 7
+		
+	if input.local_input[4]: #SPACE
+		counter = counter/2
+
+	#move_and_collide for "solid" stationary objects
+	var collision = move_and_collide(vect)
+	if collision:
+		vect = vect.slide(collision.normal)
+		move_and_collide(vect)
+	
+	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
+
+
+func frame_end():
+	pass
+	#code to run at end of frame (after all input_update calls)
+	#label.text = str(counter)
+
+
+func get_state():
+	#return dict of state variables to be stored in Frame_States
+	return {'x': position.x, 'y': position.y, 'counter': counter, 'collisionMask': collisionMask}
+
 func _username_callback(args):
 	# Get the first argument (the DOM event in our case).
 	var js_event = args[0]
 	#	var player_id = json["id"]
 	#	var principal = json["principal"]
 	set_username(js_event)	
-	
+
 func DisplayMessageBubble(message):
 	$MessageBubble.visible = true
 	if $Timer.time_left > 0:
@@ -91,17 +142,17 @@ func DisplayMessageBubble(message):
 func adjust_bubble_position(lines):
 	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
 
-	
+
 func set_username(username):
 	Server.username = username
 	$Username.text = str(username)	
-	
+
 func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_top = top_left.y
 	$Camera2D.limit_left = top_left.x
 	$Camera2D.limit_bottom = bottom_right.y
 	$Camera2D.limit_right = bottom_right.x
-	
+
 func sendAction(action,data): 
 	match action:
 		(MOVEMENT):
@@ -115,8 +166,8 @@ func set_new_music_volume():
 		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", 0)
 	else: 
 		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
-	
-	
+
+
 func _play_background_music():
 	rng.randomize()
 	$BackgroundMusic.stream = Sounds.background_music[rng.randi_range(0, Sounds.background_music.size() - 1)]
@@ -124,8 +175,8 @@ func _play_background_music():
 	$BackgroundMusic.volume_db =  Sounds.return_adjusted_sound_db("music", -32)
 	yield($BackgroundMusic, "finished")
 	_play_background_music()
-	
-	
+
+
 func _process(_delta) -> void:
 	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
 	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:

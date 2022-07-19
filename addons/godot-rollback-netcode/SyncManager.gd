@@ -512,6 +512,7 @@ func _handle_fatal_error(msg: String):
 	return null
 
 func _call_get_local_input() -> Dictionary:
+	print("calling local input")
 	var input := {}
 	var nodes: Array = get_tree().get_nodes_in_group('network_sync')
 	for node in nodes:
@@ -539,6 +540,7 @@ func _call_predict_remote_input(previous_input: Dictionary, ticks_since_real_inp
 	return input
 
 func _call_network_process(input_frame: InputBufferFrame) -> void:
+	print("calling network process")
 	var nodes: Array = get_tree().get_nodes_in_group('network_sync')
 	var process_nodes := []
 	var postprocess_nodes := []

@@ -23,15 +23,16 @@ _global_script_classes=[ {
 "class": "NetworkTimer",
 "language": "GDScript",
 "path": "res://addons/godot-rollback-netcode/NetworkTimer.gd"
-} ]
-_global_script_class_icons={
-"NetworkAnimationPlayer": "",
-"NetworkRandomNumberGenerator": "",
-"NetworkTimer": ""
+}, {
 "base": "Camera2D",
 "class": "PanningCamera2D",
 "language": "GDScript",
 "path": "res://World/Map/Camera2D.gd"
+} ]
+_global_script_class_icons={
+"NetworkAnimationPlayer": "",
+"NetworkRandomNumberGenerator": "",
+"NetworkTimer": "",
 "PanningCamera2D": ""
 }
 
@@ -56,18 +57,12 @@ PlaceObject="*res://Global/Data/PlaceObject.gd"
 Tiles="*res://helpers/Tiles.gd"
 IC="*res://helpers/IC.gd"
 Settings="*res://Global/Data/Settings.gd"
-SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
-SyncDebugger="*res://addons/godot-rollback-netcode/SyncDebugger.gd"
 Goblin="*res://Global/Characters/Goblin.gd"
 
 [display]
 
 mouse_cursor/custom_image="res://Assets/mouse cursors/Normal Selects.png"
 window/stretch/mode="2d"
-
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/godot-rollback-netcode/plugin.cfg" )
 
 [global]
 
@@ -204,6 +199,7 @@ sync_debug={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777254,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
+}
 open_map={
 "deadzone": 0.5,
 "events": [  ]
@@ -231,12 +227,10 @@ open_map={
 
 limits/websocket_client/max_in_buffer_kb=64000
 limits/websocket_client/max_in_packets=1024000
-limits/websocket_client/max_out_buffer_kb=6400
+limits/websocket_client/max_out_buffer_kb=64000
 limits/websocket_client/max_out_packets=1024000
-limits/websocket_server/max_in_buffer_kb=640
-limits/websocket_server/max_in_packets=10240
-limits/websocket_server/max_out_buffer_kb=640
-limits/websocket_server/max_out_packets=10240
+rollback/interpolation=true
+rollback/spawn_manager/reuse_despawned_nodes=true
 
 [physics]
 

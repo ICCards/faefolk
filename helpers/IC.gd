@@ -25,6 +25,9 @@ var window = JavaScript.get_interface("window")
 
 
 func login(callback):
+	Server.player_id = str(get_tree().get_network_unique_id())
+	print(get_tree().get_network_unique_id())
+	print(Server.player_id)
 	window.login(Server.player_id).then(callback)
 
 func connect_plug(callback):
