@@ -13,4 +13,4 @@ func _on_HideShowButton_pressed():
 		get_node("/root/World").spawn_IC_kitty()
 	else: 
 		$HideShowButton.text = "Show"
-w		get_node("/root/World/Players/kittyNode").queue_free()
+		get_node("/root/World/Players/kittyNode").queue_free()

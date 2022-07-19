@@ -11,8 +11,6 @@ onready var snow = $GeneratedTiles/SnowTiles
 onready var beachBorderTiles = $GeneratedTiles/AnimatedBeachBorder
 onready var sandBeachBorderTiles = $GeneratedTiles/SandBeachBorder
 onready var desert = $GeneratedTiles/DesertTiles
-onready var rainStorm = $RainStorm
-onready var snowStorm = $SnowStorm
 
 onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
