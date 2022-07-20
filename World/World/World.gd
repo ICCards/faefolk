@@ -69,19 +69,6 @@ func set_world_visible():
 	get_node("PlacableTiles/" + Server.player_house_id).set_player_outside_house()
 
 
-func _input(event):
-	if event.is_action_pressed("open_map") and not PlayerInventory.interactive_screen_mode and \
-	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode:
-		toggle_map()
-
-func toggle_map():
-	PlayerInventory.viewMapMode = !PlayerInventory.viewMapMode
-	$WorldMap.visible = !$WorldMap.visible
-	if $WorldMap.visible:
-		$WorldMap.initialize()
-	else:
-		$WorldMap.set_inactive()
-
 
 func _ready():
 	var loadingScreen = LoadingScreen.instance()

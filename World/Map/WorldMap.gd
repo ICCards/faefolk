@@ -10,6 +10,7 @@ var player
 var rainStorm
 var snowStorm
 var direction
+var is_first_time_opened = false
 const NUM_COLUMNS = 8
 const NUM_ROWS = 8
 const MAP_WIDTH = 1000
@@ -26,20 +27,39 @@ enum Tiles {
 	SNOW
 }
 
+
+func _input(event):
+	if event.is_action_pressed("open_map") and not PlayerInventory.interactive_screen_mode and \
+	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode:
+		show()
+		initialize()
+	if event.is_action_released("open_map"):
+		hide()
+		set_inactive()
+
+func toggle_map():
+	PlayerInventory.viewMapMode = !PlayerInventory.viewMapMode
+	$WorldMap.visible = !$WorldMap.visible
+	if $WorldMap.visible:
+		$WorldMap.initialize()
+	else:
+		$WorldMap.set_inactive()
+
+
 func initialize():
+	PlayerInventory.viewMapMode = true
 	$Camera2D.current = true
-	$Camera2D.position = Vector2(800, 800)
-	$Camera2D.zoom = Vector2(1.5, 1.5)
 	get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar").visible = false
-	get_node("/root/World/RoamingStorm").visible = false
-	get_node("/root/World/FullMapParticles").visible = false
+	if not is_first_time_opened:
+		is_first_time_opened = true
+		$Camera2D.position = Vector2(800, 800)
+		$Camera2D.zoom = Vector2(1.5, 1.5)
 	
 func set_inactive():
+	PlayerInventory.viewMapMode = false
 	$Camera2D.current = false
 	get_node("/root/World/Players/" + Server.player_id + "/Camera2D").current = true
 	get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar").visible = true
-	get_node("/root/World/RoamingStorm").visible = true
-	get_node("/root/World/FullMapParticles").visible = true
 
 func _ready():
 	wait_for_map()

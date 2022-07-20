@@ -1097,11 +1097,11 @@ format = 1
 
 [node name="Players" type="YSort" parent="."]
 
+[node name="WorldMap" parent="." instance=ExtResource( 20 )]
+visible = false
+
 [node name="RoamingStorm" parent="." instance=ExtResource( 15 )]
 visible = false
 
 [node name="FullMapParticles" parent="." instance=ExtResource( 23 )]
-visible = false
-
-[node name="WorldMap" parent="." instance=ExtResource( 20 )]
 visible = false
