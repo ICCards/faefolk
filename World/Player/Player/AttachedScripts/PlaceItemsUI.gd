@@ -54,7 +54,7 @@ func place_item_state(event, item_name, valid_tiles):
 		$ColorIndicator.scale = Vector2(1, 1)
 		$ItemToPlace.rect_position = Vector2(0,-32)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
-		
+
 	if valid_tiles.get_cellv(location) == -1 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and valid_tiles.get_cellv(location + Vector2(1,0)) == -1:
@@ -65,7 +65,7 @@ func place_item_state(event, item_name, valid_tiles):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			place_object(item_name, location, "placable")
-			
+
 func place_path_state(event, item_name, valid_object_tiles, path_tiles):
 	get_path_rotation(item_name)
 	$ColorIndicator.visible = true
@@ -83,7 +83,7 @@ func place_path_state(event, item_name, valid_object_tiles, path_tiles):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			place_object(item_name + str(path_index), location, "placable")
-			
+
 func get_path_rotation(path_name):
 	if path_name == "wood path" and path_index > 2:
 		path_index = 1
@@ -98,7 +98,7 @@ func get_path_rotation(path_name):
 			path_index += 1
 			if path_index == 5:
 				path_index = 1
-			
+
 func place_seed_state(event, item_name, valid_object_tiles, hoed_tiles):
 	item_name.erase(item_name.length() - 6, 6)
 	$ColorIndicator.visible = true
@@ -116,7 +116,7 @@ func place_seed_state(event, item_name, valid_object_tiles, hoed_tiles):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			place_object(item_name, location, "seed")	
-			
+
 func place_object(item_name, location, type):
 	PlayerInventory.remove_single_object_from_hotbar()
 	var id = Uuid.v4()
@@ -135,6 +135,6 @@ func place_object(item_name, location, type):
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
 		PlaceObject.place_seed_in_world(id, item_name, location, JsonData.crop_data[item_name]["DaysToGrow"])
-
-
-
+#
+#
+#

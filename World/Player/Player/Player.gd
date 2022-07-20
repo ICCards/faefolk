@@ -24,6 +24,8 @@ enum {
 	CHANGE_TILE
 }
 
+var buildings = ["wall", "doorway", "floor", "stairs", "nothing", "noting2"]
+
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 
@@ -46,6 +48,9 @@ func _username_callback(args):
 	#	var player_id = json["id"]
 	#	var principal = json["principal"]
 	set_username(js_event)	
+	
+func switch_building_state(index):
+	print(buildings[index])
 	
 func DisplayMessageBubble(message):
 	$MessageBubble.visible = true
