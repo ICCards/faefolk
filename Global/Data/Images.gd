@@ -127,10 +127,16 @@ var desert_trees = [
 	preload("res://Assets/Images/tree_sets/desert/2b.tres")
 ]
 
-func returnRandomDesertTree():
-	randomize()
-	desert_trees.shuffle()
-	return desert_trees[0]
+func returnDesertTree(type):
+	match type:
+		"1a":
+			return desert_trees[0]
+		"1b":
+			return desert_trees[1]
+		"2a":
+			return desert_trees[2]
+		"2b":
+			return desert_trees[3]
 
 # FRUITLESS TREES #
 

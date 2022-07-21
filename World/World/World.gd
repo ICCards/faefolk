@@ -164,7 +164,7 @@ func DespawnPlayer(player_id):
 	
 	
 func buildMap(map):
-	#build_valid_tiles()
+	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
 	for id in map["dirt"]:
@@ -191,13 +191,6 @@ func buildMap(map):
 		var loc = Util.string_to_vector2(map["forest"][id])
 		forest.set_cellv(loc, 0)
 	print("LOADED DG")
-	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["ocean"]:
-#		var loc = Util.string_to_vector2(map["ocean"][id])
-#		validTiles.set_cellv(loc, -1)
-#		darkGrass.set_cellv(loc, 0)
-#		water.set_cellv(loc, 0)
-#	print("LOADED WATER")
 	get_node("loadingScreen").set_phase("Building trees")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["snow"]:
@@ -211,6 +204,7 @@ func buildMap(map):
 		sandBeachBorderTiles.set_cellv(loc, 0)
 	for id in map["tree"]:
 		var loc = Util.string_to_vector2(map["tree"][id]["l"])
+		set_valid_tiles(loc, "tree")
 		var biome = map["tree"][id]["b"]
 		if biome == "desert":
 			var object = DesertTreeObject.instance()
@@ -232,7 +226,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["log"]:
 		var loc = Util.string_to_vector2(map["log"][id]["l"])
-		validTiles.set_cellv(loc, -1)
+		set_valid_tiles(loc)
 		rng.randomize()
 		var variety = rng.randi_range(0, 11)
 		var object = BranchObject.instance()
@@ -245,6 +239,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["stump"]:
 		var loc = Util.string_to_vector2(map["stump"][id]["l"])
+		set_valid_tiles(loc, "stump")
 		treeTypes.shuffle()
 		var variety = treeTypes.front()
 		var object = StumpObject.instance()
@@ -258,6 +253,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
 		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
+		set_valid_tiles(loc, "large ore")
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = OreObject.instance()
@@ -270,6 +266,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore"]:
 		var loc = Util.string_to_vector2(map["ore"][id]["l"])
+		set_valid_tiles(loc)
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = SmallOreObject.instance()
@@ -283,11 +280,12 @@ func buildMap(map):
 	var count = 0
 	for id in map["tall_grass"]:
 		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
+		set_valid_tiles(loc)
 		count += 1
 		var object = TallGrassObject.instance()
 		object.biome = map["tall_grass"][id]["b"]
 		object.name = id
-		object.position = dirt.map_to_world(loc)
+		object.position = dirt.map_to_world(loc) + Vector2(8, 32)
 		$NatureObjects.add_child(object,true)
 		if count == 130:
 			yield(get_tree().create_timer(0.25), "timeout")
@@ -297,6 +295,7 @@ func buildMap(map):
 	for id in map["flower"]:
 		count += 1
 		var loc = Util.string_to_vector2(map["flower"][id]["l"])
+		set_valid_tiles(loc)
 		var object = FlowerObject.instance()
 		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
 		$NatureObjects.add_child(object,true)
@@ -322,12 +321,23 @@ func buildMap(map):
 	Server.isLoaded = true
 	
 	
+func set_valid_tiles(_pos, _name = ""):
+	if _name == "tree" or _name == "stump" or _name == "large ore":
+		validTiles.set_cellv(_pos, -1)
+		validTiles.set_cellv(_pos + Vector2(-1, -1), -1 )
+		validTiles.set_cellv(_pos + Vector2(-1, 0), -1 )
+		validTiles.set_cellv(_pos + Vector2(0, -1), -1)
+	else:
+		validTiles.set_cellv(_pos, -1)
+		
+	
 func set_water_tiles():
 	for x in range(1000):
 		for y in range(1000):
 			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and sandBeachBorderTiles.get_cell(x,y) == -1:
 				beachBorderTiles.set_cell(x, y, 0)
 				sandBeachBorderTiles.set_cell(x, y, 0)
+				validTiles.set_cell(x, y, -1)
 	for i in range(2):
 		for loc in sandBeachBorderTiles.get_used_cells():
 			if Tiles.return_neighboring_cells(loc, beachBorderTiles) != 4:
@@ -418,8 +428,8 @@ func check_and_remove_invalid_autotiles(map):
 	desert.update_bitmask_region()
 
 func build_valid_tiles():
-	for x in range(298):
-		for y in range(298):
+	for x in range(1000):
+		for y in range(1000):
 			validTiles.set_cellv(Vector2(x+1, y+1), 0)
 
 func ChangeTile(data):

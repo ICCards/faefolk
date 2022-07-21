@@ -1,8 +1,7 @@
 extends Control
 
 
-#onready var cam = get_node("/root/World/Players/" + Server.player_id + "/Camera2D")
-onready var cam = get_node("/root/" + Server.player_id + "/Camera2D")
+onready var cam = get_node("/root/World/Players/" + Server.player_id + "/Camera2D")
 
 
 var current_item = -1

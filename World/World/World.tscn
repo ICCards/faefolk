@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -88,22 +88,6 @@
 0/autotile/navpoly_map = [  ]
 0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
-[sub_resource type="TileSet" id=24]
-0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 6 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 1312, 800, 32, 32 )
-0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
@@ -401,6 +385,27 @@
 3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
+
+[sub_resource type="NavigationPolygon" id=266]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="TileSet" id=24]
+0/name = "CL_MainLev.png 0"
+0/texture = ExtResource( 6 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 1312, 800, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/navigation = SubResource( 266 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=241]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -1021,12 +1026,6 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="ValidTiles" type="TileMap" parent="GeneratedTiles"]
-visible = false
-tile_set = SubResource( 24 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
 [node name="SnowTiles" type="TileMap" parent="GeneratedTiles"]
 tile_set = SubResource( 261 )
 cell_size = Vector2( 32, 32 )
@@ -1056,6 +1055,12 @@ format = 1
 
 [node name="WaveTiles" type="TileMap" parent="GeneratedTiles"]
 tile_set = SubResource( 265 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="ValidTiles" type="TileMap" parent="GeneratedTiles"]
+visible = false
+tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
