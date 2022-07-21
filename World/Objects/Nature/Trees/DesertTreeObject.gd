@@ -13,10 +13,18 @@ onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/Leave
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 
-func _ready():
-	treeObject = Images.returnRandomDesertTree()
-	$AnimatedSprite.frames = Images.returnRandomDesertTree()
+var desertTrees = ["1a", "1b", "2a", "2b"]
 
+func _ready():
+	randomize()
+	desertTrees.shuffle()
+	treeObject = Images.returnDesertTree(desertTrees[0])
+	$AnimatedSprite.frames = Images.returnDesertTree(desertTrees[0])
+	if desertTrees[0] == "2a" or desertTrees[0] == "2b":
+		$AnimatedSprite.position = Vector2(0, 20)
+	else:
+		$AnimatedSprite.position = Vector2(0, 12)
+		
 func _on_TreeHurtbox_area_entered(area):
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
