@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
 
-onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 onready var object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
 onready var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")

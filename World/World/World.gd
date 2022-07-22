@@ -4,7 +4,7 @@ onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles
 onready var forest = $GeneratedTiles/DarkGreenGrassTiles
 onready var water = $GeneratedTiles/Water
-onready var validTiles = $GeneratedTiles/ValidTiles
+onready var validTiles = $WorldNavigation/ValidTiles
 onready var hoed = $FarmingTiles/HoedAutoTiles
 onready var watered = $FarmingTiles/WateredAutoTiles
 onready var snow = $GeneratedTiles/SnowTiles
@@ -15,6 +15,7 @@ onready var desert = $GeneratedTiles/DesertTiles
 onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
 onready var Player_pet = preload("res://World/Player/Pet/PlayerPet.tscn")
+onready var Bear = preload("res://World/Animals/Bear.tscn")
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTreeObject = preload("res://World/Objects/Nature/Trees/DesertTreeObject.tscn")
@@ -119,9 +120,17 @@ func spawnPlayerExample(pos):
 	if Server.player_house_position == null:
 		var loc = Util.string_to_vector2(pos)
 		player.position = loc * 32
+		spawnRandomBear(loc)
 	else: 
 		player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
 	spawn_IC_kitty()
+
+	
+func spawnRandomBear(loc):
+	var bear = Bear.instance()
+	$Players.add_child(bear)
+	bear.global_position = loc * 32 + Vector2(100, 100)
+	
 	
 func spawn_IC_kitty():
 	pass
@@ -319,6 +328,7 @@ func buildMap(map):
 	#spawnPlayer()
 	spawnPlayerExample(map["beach"][map["beach"].keys()[rng.randi_range(0, map["beach"].size() - 1)]])
 	Server.isLoaded = true
+
 	
 	
 func set_valid_tiles(_pos, _name = ""):

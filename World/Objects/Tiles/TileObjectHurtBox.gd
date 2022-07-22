@@ -4,7 +4,7 @@ extends Node2D
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 onready var placable_object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
-onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 
 var location
@@ -30,6 +30,7 @@ func _ready():
 	item_name == "campfire" or \
 	item_name == "fire pedestal" or \
 	item_name == "tall fire pedestal":
+		#$WorldEnvironment.
 		$Light2D.enabled = true
 	elif item_name == "house":
 		queue_free()

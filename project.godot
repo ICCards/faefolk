@@ -199,6 +199,7 @@ radial_menu={
 2d_physics/layer_5="PickaxeBreakLayer"
 2d_physics/layer_6="EnterDoors"
 2d_physics/layer_7="PlayerHomeCollision"
+2d_physics/layer_8="PlayerEnemyHurtbox"
 2d_physics/layer_10="WoodFootsteps"
 2d_physics/layer_11="StoneFootsteps"
 2d_physics/layer_13="InsideTreeTopLayer"

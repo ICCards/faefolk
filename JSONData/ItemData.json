@@ -348,6 +348,11 @@
       "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "placable house"
+  },
+  "tent": {
+      "ItemCategory": "Placable object",
+      "StackSize": 99,
+      "Description": "placable house"
   }
   
 }

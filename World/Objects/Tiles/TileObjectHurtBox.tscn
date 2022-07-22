@@ -53,10 +53,8 @@ shape = SubResource( 2 )
 volume_db = -16.0
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 1, -5 )
 enabled = false
 texture = ExtResource( 2 )
-energy = 1.05
 mode = 2
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

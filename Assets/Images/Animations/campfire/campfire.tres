@@ -9,7 +9,6 @@
 
 [resource]
 frames = 6
-fps = 3.0
 frame_0/texture = ExtResource( 1 )
 frame_1/texture = ExtResource( 4 )
 frame_1/delay_sec = 0.0
