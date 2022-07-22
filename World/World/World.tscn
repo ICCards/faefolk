@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -20,7 +20,729 @@
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/b/waveB.tres" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/c/waveC.tres" type="Texture" id=19]
 [ext_resource path="res://World/Map/WorldMap.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/tilesets/Camp_Graves.png" type="Texture" id=21]
 [ext_resource path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" type="PackedScene" id=23]
+
+[sub_resource type="NavigationPolygon" id=266]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="TileSet" id=24]
+0/name = "CL_MainLev.png 0"
+0/texture = ExtResource( 6 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 1312, 800, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/navigation = SubResource( 266 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=234]
+0/name = "hoed_layer.png 0"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 192, 384, 192 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 56, Vector2( 0, 1 ), 48, Vector2( 0, 2 ), 16, Vector2( 0, 3 ), 432, Vector2( 0, 4 ), 438, Vector2( 0, 5 ), 54, Vector2( 1, 0 ), 144, Vector2( 1, 1 ), 186, Vector2( 1, 2 ), 18, Vector2( 1, 3 ), 504, Vector2( 1, 4 ), 511, Vector2( 1, 5 ), 63, Vector2( 2, 0 ), 146, Vector2( 2, 1 ), 24, Vector2( 2, 3 ), 216, Vector2( 2, 4 ), 219, Vector2( 2, 5 ), 27, Vector2( 3, 3 ), 176, Vector2( 3, 4 ), 178, Vector2( 3, 5 ), 50, Vector2( 4, 3 ), 184, Vector2( 4, 5 ), 58, Vector2( 5, 3 ), 152, Vector2( 5, 4 ), 154, Vector2( 5, 5 ), 26, Vector2( 6, 4 ), 182, Vector2( 7, 3 ), 440, Vector2( 7, 5 ), 59, Vector2( 8, 4 ), 155, Vector2( 9, 4 ), 434, Vector2( 10, 3 ), 248, Vector2( 10, 5 ), 62, Vector2( 11, 4 ), 218 ]
+0/autotile/icon_coordinate = Vector2( 1, 1 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=235]
+0/name = "hoed_layer.png 0"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 384, 192 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 56, Vector2( 0, 1 ), 48, Vector2( 0, 2 ), 16, Vector2( 0, 3 ), 432, Vector2( 0, 4 ), 438, Vector2( 0, 5 ), 54, Vector2( 1, 0 ), 144, Vector2( 1, 1 ), 186, Vector2( 1, 2 ), 18, Vector2( 1, 3 ), 504, Vector2( 1, 4 ), 511, Vector2( 1, 5 ), 63, Vector2( 2, 0 ), 146, Vector2( 2, 1 ), 24, Vector2( 2, 3 ), 216, Vector2( 2, 4 ), 219, Vector2( 2, 5 ), 27, Vector2( 3, 3 ), 176, Vector2( 3, 4 ), 178, Vector2( 3, 5 ), 50, Vector2( 4, 3 ), 184, Vector2( 4, 5 ), 58, Vector2( 5, 3 ), 152, Vector2( 5, 4 ), 154, Vector2( 5, 5 ), 26, Vector2( 6, 4 ), 182, Vector2( 7, 3 ), 440, Vector2( 7, 5 ), 59, Vector2( 8, 4 ), 155, Vector2( 9, 4 ), 434, Vector2( 10, 3 ), 248, Vector2( 10, 5 ), 62, Vector2( 11, 4 ), 218 ]
+0/autotile/icon_coordinate = Vector2( 1, 1 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="ConvexPolygonShape2D" id=276]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=277]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=278]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=279]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=280]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=281]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="StreamTexture" id=267]
+load_path = "res://.import/1.png-928147cc442d365e2e82ff4cf2b029cf.stex"
+
+[sub_resource type="StreamTexture" id=268]
+load_path = "res://.import/2.png-c77f361e561629cc418a38d1a6741a11.stex"
+
+[sub_resource type="StreamTexture" id=269]
+load_path = "res://.import/3.png-7b129090d2168bdd1f97f78d0f57ca12.stex"
+
+[sub_resource type="StreamTexture" id=270]
+load_path = "res://.import/4.png-075e4939c626be87ee7ba2bcc05409ea.stex"
+
+[sub_resource type="StreamTexture" id=271]
+load_path = "res://.import/5.png-098470cb2f2d8ffd6ff5b82671e644a4.stex"
+
+[sub_resource type="StreamTexture" id=272]
+load_path = "res://.import/6.png-6e79c03a9d9d0c60a5a37e6a54433953.stex"
+
+[sub_resource type="AnimatedTexture" id=282]
+frames = 6
+fps = 3.0
+frame_0/texture = SubResource( 267 )
+frame_1/texture = SubResource( 268 )
+frame_1/delay_sec = 0.0
+frame_2/texture = SubResource( 269 )
+frame_2/delay_sec = 0.0
+frame_3/texture = SubResource( 270 )
+frame_3/delay_sec = 0.0
+frame_4/texture = SubResource( 271 )
+frame_4/delay_sec = 0.0
+frame_5/texture = SubResource( 272 )
+frame_5/delay_sec = 0.0
+
+[sub_resource type="ConvexPolygonShape2D" id=283]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=284]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=285]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=286]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=287]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=288]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=289]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=290]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=291]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=292]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=255]
+0/name = "CL_Crafting.png 0"
+0/texture = ExtResource( 8 )
+0/tex_offset = Vector2( 0, -32 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 736, 64, 32, 64 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 276 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 276 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "CL_Crafting.png 1"
+1/texture = ExtResource( 8 )
+1/tex_offset = Vector2( 0, -32 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 704, 0, 32, 64 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 277 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 277 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "CL_Crafting.png 2"
+2/texture = ExtResource( 8 )
+2/tex_offset = Vector2( 0, -32 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 384, 64, 64, 64 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 285 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 285 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+3/name = "CL_Crafting.png 3"
+3/texture = ExtResource( 8 )
+3/tex_offset = Vector2( 0, -32 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 544, 64, 64, 64 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 286 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 286 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+4/name = "CL_Crafting.png 4"
+4/texture = ExtResource( 8 )
+4/tex_offset = Vector2( 0, -64 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 64, 96 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape = SubResource( 287 )
+4/shape_one_way = false
+4/shape_one_way_margin = 1.0
+4/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 287 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+4/z_index = 0
+5/name = "CL_Crafting.png 5"
+5/texture = ExtResource( 8 )
+5/tex_offset = Vector2( 0, -64 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 64, 0, 64, 96 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape = SubResource( 288 )
+5/shape_one_way = false
+5/shape_one_way_margin = 1.0
+5/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 288 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+5/z_index = 0
+6/name = "CL_Crafting.png 6"
+6/texture = ExtResource( 8 )
+6/tex_offset = Vector2( 0, -64 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 128, 0, 64, 96 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape = SubResource( 289 )
+6/shape_one_way = false
+6/shape_one_way_margin = 1.0
+6/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 289 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+6/z_index = 0
+7/name = "CL_Crafting.png 7"
+7/texture = ExtResource( 8 )
+7/tex_offset = Vector2( 0, -64 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 256, 64, 96 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape = SubResource( 290 )
+7/shape_one_way = false
+7/shape_one_way_margin = 1.0
+7/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 290 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+7/z_index = 0
+8/name = "CL_Crafting.png 8"
+8/texture = ExtResource( 8 )
+8/tex_offset = Vector2( 0, -64 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 64, 256, 64, 96 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape = SubResource( 291 )
+8/shape_one_way = false
+8/shape_one_way_margin = 1.0
+8/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 291 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+8/z_index = 0
+9/name = "CL_Crafting.png 9"
+9/texture = ExtResource( 8 )
+9/tex_offset = Vector2( 0, -64 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 128, 256, 64, 96 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape = SubResource( 292 )
+9/shape_one_way = false
+9/shape_one_way_margin = 1.0
+9/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 292 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+9/z_index = 0
+10/name = "CL_Crafting.png 10"
+10/texture = ExtResource( 8 )
+10/tex_offset = Vector2( 0, -64 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 0, 384, 64, 96 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape = SubResource( 278 )
+10/shape_one_way = false
+10/shape_one_way_margin = 1.0
+10/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 278 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+10/z_index = 0
+11/name = "CL_Crafting.png 11"
+11/texture = ExtResource( 8 )
+11/tex_offset = Vector2( 0, -64 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 64, 384, 64, 96 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape = SubResource( 279 )
+11/shape_one_way = false
+11/shape_one_way_margin = 1.0
+11/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 279 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+11/z_index = 0
+12/name = "CL_Crafting.png 12"
+12/texture = ExtResource( 8 )
+12/tex_offset = Vector2( 0, -64 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 128, 384, 64, 96 )
+12/tile_mode = 0
+12/occluder_offset = Vector2( 0, 0 )
+12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape = SubResource( 280 )
+12/shape_one_way = false
+12/shape_one_way_margin = 1.0
+12/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 280 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+12/z_index = 0
+13/name = "torch.tres 13"
+13/texture = ExtResource( 9 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 0, 0, 32, 32 )
+13/tile_mode = 0
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
+13/shapes = [  ]
+13/z_index = 0
+14/name = "campfire.tres 14"
+14/texture = SubResource( 282 )
+14/tex_offset = Vector2( 0, -32 )
+14/modulate = Color( 1, 1, 1, 1 )
+14/region = Rect2( 0, 0, 32, 64 )
+14/tile_mode = 0
+14/occluder_offset = Vector2( 0, 0 )
+14/navigation_offset = Vector2( 0, 0 )
+14/shape_offset = Vector2( 0, 0 )
+14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+14/shape = SubResource( 281 )
+14/shape_one_way = false
+14/shape_one_way_margin = 1.0
+14/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 281 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+14/z_index = 0
+15/name = "fire_pedestal_tall.tres 15"
+15/texture = ExtResource( 11 )
+15/tex_offset = Vector2( 0, -64 )
+15/modulate = Color( 1, 1, 1, 1 )
+15/region = Rect2( 0, 0, 32, 96 )
+15/tile_mode = 0
+15/occluder_offset = Vector2( 0, 0 )
+15/navigation_offset = Vector2( 0, 0 )
+15/shape_offset = Vector2( 0, 0 )
+15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+15/shape = SubResource( 283 )
+15/shape_one_way = false
+15/shape_one_way_margin = 1.0
+15/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 283 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+15/z_index = 0
+16/name = "fire_pedestal.tres 16"
+16/texture = ExtResource( 12 )
+16/tex_offset = Vector2( 0, -32 )
+16/modulate = Color( 1, 1, 1, 1 )
+16/region = Rect2( 0, 0, 32, 64 )
+16/tile_mode = 0
+16/occluder_offset = Vector2( 0, 0 )
+16/navigation_offset = Vector2( 0, 0 )
+16/shape_offset = Vector2( 0, 0 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+16/shape = SubResource( 284 )
+16/shape_one_way = false
+16/shape_one_way_margin = 1.0
+16/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 284 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+16/z_index = 0
+17/name = "campfire.tres 17"
+17/texture = ExtResource( 10 )
+17/tex_offset = Vector2( 0, 0 )
+17/modulate = Color( 1, 1, 1, 1 )
+17/region = Rect2( 0, 0, 32, 32 )
+17/tile_mode = 0
+17/occluder_offset = Vector2( 0, 0 )
+17/navigation_offset = Vector2( 0, 0 )
+17/shape_offset = Vector2( 0, 0 )
+17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+17/shape_one_way = false
+17/shape_one_way_margin = 0.0
+17/shapes = [  ]
+17/z_index = 0
+18/name = "Camp_Graves.png 18"
+18/texture = ExtResource( 21 )
+18/tex_offset = Vector2( 0, 0 )
+18/modulate = Color( 1, 1, 1, 1 )
+18/region = Rect2( 128, 128, 64, 96 )
+18/tile_mode = 0
+18/occluder_offset = Vector2( 0, 0 )
+18/navigation_offset = Vector2( 0, 0 )
+18/shape_offset = Vector2( 0, 0 )
+18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+18/shape_one_way = false
+18/shape_one_way_margin = 0.0
+18/shapes = [  ]
+18/z_index = 0
+19/name = "Camp_Graves.png 19"
+19/texture = ExtResource( 21 )
+19/tex_offset = Vector2( 0, 0 )
+19/modulate = Color( 1, 1, 1, 1 )
+19/region = Rect2( 256, 160, 96, 64 )
+19/tile_mode = 0
+19/occluder_offset = Vector2( 0, 0 )
+19/navigation_offset = Vector2( 0, 0 )
+19/shape_offset = Vector2( 0, 0 )
+19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+19/shape_one_way = false
+19/shape_one_way_margin = 0.0
+19/shapes = [  ]
+19/z_index = 0
+
+[sub_resource type="ConvexPolygonShape2D" id=293]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=274]
+0/name = "campfire.tres 0"
+0/texture = ExtResource( 10 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 293 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 293 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=233]
+0/name = "CL_Crafting.png 0"
+0/texture = ExtResource( 8 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 256, 64, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "CL_Crafting.png 1"
+1/texture = ExtResource( 8 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 288, 64, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "CL_Crafting.png 2"
+2/texture = ExtResource( 8 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 128, 128, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "CL_Crafting.png 3"
+3/texture = ExtResource( 8 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 160, 128, 32, 32 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "CL_Crafting.png 4"
+4/texture = ExtResource( 8 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 128, 160, 32, 32 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "CL_Crafting.png 5"
+5/texture = ExtResource( 8 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 160, 160, 32, 32 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+6/name = "CL_Crafting.png 6"
+6/texture = ExtResource( 8 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 224, 128, 32, 32 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
+7/name = "CL_Crafting.png 7"
+7/texture = ExtResource( 8 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 256, 128, 32, 32 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "CL_Crafting.png 8"
+8/texture = ExtResource( 8 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 224, 160, 32, 32 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+9/name = "CL_Crafting.png 9"
+9/texture = ExtResource( 8 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 256, 160, 32, 32 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+
+[sub_resource type="Environment" id=275]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 0.8
+glow_blend_mode = 1
 
 [sub_resource type="TileSet" id=260]
 0/name = "CL_MainLev.png 0"
@@ -386,621 +1108,59 @@
 3/shapes = [  ]
 3/z_index = 0
 
-[sub_resource type="NavigationPolygon" id=266]
-vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-
-[sub_resource type="TileSet" id=24]
-0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 6 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 1312, 800, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/navigation = SubResource( 266 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
-[sub_resource type="ConvexPolygonShape2D" id=241]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=242]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=243]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=244]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=245]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=246]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=256]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=257]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=247]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=248]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=249]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=250]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=251]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=252]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=253]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=254]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
-
-[sub_resource type="TileSet" id=255]
-0/name = "CL_Crafting.png 0"
-0/texture = ExtResource( 8 )
-0/tex_offset = Vector2( 0, -32 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 736, 64, 32, 64 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 241 )
-0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 241 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-0/z_index = 0
-1/name = "CL_Crafting.png 1"
-1/texture = ExtResource( 8 )
-1/tex_offset = Vector2( 0, -32 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 704, 0, 32, 64 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 242 )
-1/shape_one_way = false
-1/shape_one_way_margin = 1.0
-1/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 242 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-1/z_index = 0
-2/name = "CL_Crafting.png 2"
-2/texture = ExtResource( 8 )
-2/tex_offset = Vector2( 0, -32 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 384, 64, 64, 64 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape = SubResource( 247 )
-2/shape_one_way = false
-2/shape_one_way_margin = 1.0
-2/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 247 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-2/z_index = 0
-3/name = "CL_Crafting.png 3"
-3/texture = ExtResource( 8 )
-3/tex_offset = Vector2( 0, -32 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 544, 64, 64, 64 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape = SubResource( 248 )
-3/shape_one_way = false
-3/shape_one_way_margin = 1.0
-3/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 248 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-3/z_index = 0
-4/name = "CL_Crafting.png 4"
-4/texture = ExtResource( 8 )
-4/tex_offset = Vector2( 0, -64 )
-4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 0, 0, 64, 96 )
-4/tile_mode = 0
-4/occluder_offset = Vector2( 0, 0 )
-4/navigation_offset = Vector2( 0, 0 )
-4/shape_offset = Vector2( 0, 0 )
-4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape = SubResource( 249 )
-4/shape_one_way = false
-4/shape_one_way_margin = 1.0
-4/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 249 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-4/z_index = 0
-5/name = "CL_Crafting.png 5"
-5/texture = ExtResource( 8 )
-5/tex_offset = Vector2( 0, -64 )
-5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 64, 0, 64, 96 )
-5/tile_mode = 0
-5/occluder_offset = Vector2( 0, 0 )
-5/navigation_offset = Vector2( 0, 0 )
-5/shape_offset = Vector2( 0, 0 )
-5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape = SubResource( 250 )
-5/shape_one_way = false
-5/shape_one_way_margin = 1.0
-5/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 250 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-5/z_index = 0
-6/name = "CL_Crafting.png 6"
-6/texture = ExtResource( 8 )
-6/tex_offset = Vector2( 0, -64 )
-6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 128, 0, 64, 96 )
-6/tile_mode = 0
-6/occluder_offset = Vector2( 0, 0 )
-6/navigation_offset = Vector2( 0, 0 )
-6/shape_offset = Vector2( 0, 0 )
-6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape = SubResource( 251 )
-6/shape_one_way = false
-6/shape_one_way_margin = 1.0
-6/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 251 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-6/z_index = 0
-7/name = "CL_Crafting.png 7"
-7/texture = ExtResource( 8 )
-7/tex_offset = Vector2( 0, -64 )
-7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 0, 256, 64, 96 )
-7/tile_mode = 0
-7/occluder_offset = Vector2( 0, 0 )
-7/navigation_offset = Vector2( 0, 0 )
-7/shape_offset = Vector2( 0, 0 )
-7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape = SubResource( 252 )
-7/shape_one_way = false
-7/shape_one_way_margin = 1.0
-7/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 252 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-7/z_index = 0
-8/name = "CL_Crafting.png 8"
-8/texture = ExtResource( 8 )
-8/tex_offset = Vector2( 0, -64 )
-8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 64, 256, 64, 96 )
-8/tile_mode = 0
-8/occluder_offset = Vector2( 0, 0 )
-8/navigation_offset = Vector2( 0, 0 )
-8/shape_offset = Vector2( 0, 0 )
-8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-8/shape = SubResource( 253 )
-8/shape_one_way = false
-8/shape_one_way_margin = 1.0
-8/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 253 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-8/z_index = 0
-9/name = "CL_Crafting.png 9"
-9/texture = ExtResource( 8 )
-9/tex_offset = Vector2( 0, -64 )
-9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 128, 256, 64, 96 )
-9/tile_mode = 0
-9/occluder_offset = Vector2( 0, 0 )
-9/navigation_offset = Vector2( 0, 0 )
-9/shape_offset = Vector2( 0, 0 )
-9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape = SubResource( 254 )
-9/shape_one_way = false
-9/shape_one_way_margin = 1.0
-9/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 254 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-9/z_index = 0
-10/name = "CL_Crafting.png 10"
-10/texture = ExtResource( 8 )
-10/tex_offset = Vector2( 0, -64 )
-10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 0, 384, 64, 96 )
-10/tile_mode = 0
-10/occluder_offset = Vector2( 0, 0 )
-10/navigation_offset = Vector2( 0, 0 )
-10/shape_offset = Vector2( 0, 0 )
-10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-10/shape = SubResource( 243 )
-10/shape_one_way = false
-10/shape_one_way_margin = 1.0
-10/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 243 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-10/z_index = 0
-11/name = "CL_Crafting.png 11"
-11/texture = ExtResource( 8 )
-11/tex_offset = Vector2( 0, -64 )
-11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 64, 384, 64, 96 )
-11/tile_mode = 0
-11/occluder_offset = Vector2( 0, 0 )
-11/navigation_offset = Vector2( 0, 0 )
-11/shape_offset = Vector2( 0, 0 )
-11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-11/shape = SubResource( 244 )
-11/shape_one_way = false
-11/shape_one_way_margin = 1.0
-11/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 244 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-11/z_index = 0
-12/name = "CL_Crafting.png 12"
-12/texture = ExtResource( 8 )
-12/tex_offset = Vector2( 0, -64 )
-12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 128, 384, 64, 96 )
-12/tile_mode = 0
-12/occluder_offset = Vector2( 0, 0 )
-12/navigation_offset = Vector2( 0, 0 )
-12/shape_offset = Vector2( 0, 0 )
-12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-12/shape = SubResource( 245 )
-12/shape_one_way = false
-12/shape_one_way_margin = 1.0
-12/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 245 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-12/z_index = 0
-13/name = "torch.tres 13"
-13/texture = ExtResource( 9 )
-13/tex_offset = Vector2( 0, 0 )
-13/modulate = Color( 1, 1, 1, 1 )
-13/region = Rect2( 0, 0, 32, 32 )
-13/tile_mode = 0
-13/occluder_offset = Vector2( 0, 0 )
-13/navigation_offset = Vector2( 0, 0 )
-13/shape_offset = Vector2( 0, 0 )
-13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-13/shape_one_way = false
-13/shape_one_way_margin = 0.0
-13/shapes = [  ]
-13/z_index = 0
-14/name = "campfire.tres 14"
-14/texture = ExtResource( 10 )
-14/tex_offset = Vector2( 0, -32 )
-14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 0, 0, 32, 64 )
-14/tile_mode = 0
-14/occluder_offset = Vector2( 0, 0 )
-14/navigation_offset = Vector2( 0, 0 )
-14/shape_offset = Vector2( 0, 0 )
-14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-14/shape = SubResource( 246 )
-14/shape_one_way = false
-14/shape_one_way_margin = 1.0
-14/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 246 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-14/z_index = 0
-15/name = "fire_pedestal_tall.tres 15"
-15/texture = ExtResource( 11 )
-15/tex_offset = Vector2( 0, -64 )
-15/modulate = Color( 1, 1, 1, 1 )
-15/region = Rect2( 0, 0, 32, 96 )
-15/tile_mode = 0
-15/occluder_offset = Vector2( 0, 0 )
-15/navigation_offset = Vector2( 0, 0 )
-15/shape_offset = Vector2( 0, 0 )
-15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-15/shape = SubResource( 256 )
-15/shape_one_way = false
-15/shape_one_way_margin = 1.0
-15/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 256 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-15/z_index = 0
-16/name = "fire_pedestal.tres 16"
-16/texture = ExtResource( 12 )
-16/tex_offset = Vector2( 0, -32 )
-16/modulate = Color( 1, 1, 1, 1 )
-16/region = Rect2( 0, 0, 32, 64 )
-16/tile_mode = 0
-16/occluder_offset = Vector2( 0, 0 )
-16/navigation_offset = Vector2( 0, 0 )
-16/shape_offset = Vector2( 0, 0 )
-16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-16/shape = SubResource( 257 )
-16/shape_one_way = false
-16/shape_one_way_margin = 1.0
-16/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 257 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-16/z_index = 0
-
-[sub_resource type="TileSet" id=233]
-0/name = "CL_Crafting.png 0"
-0/texture = ExtResource( 8 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 256, 64, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-1/name = "CL_Crafting.png 1"
-1/texture = ExtResource( 8 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 288, 64, 32, 32 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-2/name = "CL_Crafting.png 2"
-2/texture = ExtResource( 8 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 128, 128, 32, 32 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
-2/shapes = [  ]
-2/z_index = 0
-3/name = "CL_Crafting.png 3"
-3/texture = ExtResource( 8 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 160, 128, 32, 32 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
-3/z_index = 0
-4/name = "CL_Crafting.png 4"
-4/texture = ExtResource( 8 )
-4/tex_offset = Vector2( 0, 0 )
-4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 128, 160, 32, 32 )
-4/tile_mode = 0
-4/occluder_offset = Vector2( 0, 0 )
-4/navigation_offset = Vector2( 0, 0 )
-4/shape_offset = Vector2( 0, 0 )
-4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape_one_way = false
-4/shape_one_way_margin = 0.0
-4/shapes = [  ]
-4/z_index = 0
-5/name = "CL_Crafting.png 5"
-5/texture = ExtResource( 8 )
-5/tex_offset = Vector2( 0, 0 )
-5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 160, 160, 32, 32 )
-5/tile_mode = 0
-5/occluder_offset = Vector2( 0, 0 )
-5/navigation_offset = Vector2( 0, 0 )
-5/shape_offset = Vector2( 0, 0 )
-5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape_one_way = false
-5/shape_one_way_margin = 0.0
-5/shapes = [  ]
-5/z_index = 0
-6/name = "CL_Crafting.png 6"
-6/texture = ExtResource( 8 )
-6/tex_offset = Vector2( 0, 0 )
-6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 224, 128, 32, 32 )
-6/tile_mode = 0
-6/occluder_offset = Vector2( 0, 0 )
-6/navigation_offset = Vector2( 0, 0 )
-6/shape_offset = Vector2( 0, 0 )
-6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape_one_way = false
-6/shape_one_way_margin = 0.0
-6/shapes = [  ]
-6/z_index = 0
-7/name = "CL_Crafting.png 7"
-7/texture = ExtResource( 8 )
-7/tex_offset = Vector2( 0, 0 )
-7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 256, 128, 32, 32 )
-7/tile_mode = 0
-7/occluder_offset = Vector2( 0, 0 )
-7/navigation_offset = Vector2( 0, 0 )
-7/shape_offset = Vector2( 0, 0 )
-7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape_one_way = false
-7/shape_one_way_margin = 0.0
-7/shapes = [  ]
-7/z_index = 0
-8/name = "CL_Crafting.png 8"
-8/texture = ExtResource( 8 )
-8/tex_offset = Vector2( 0, 0 )
-8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 224, 160, 32, 32 )
-8/tile_mode = 0
-8/occluder_offset = Vector2( 0, 0 )
-8/navigation_offset = Vector2( 0, 0 )
-8/shape_offset = Vector2( 0, 0 )
-8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-8/shape_one_way = false
-8/shape_one_way_margin = 0.0
-8/shapes = [  ]
-8/z_index = 0
-9/name = "CL_Crafting.png 9"
-9/texture = ExtResource( 8 )
-9/tex_offset = Vector2( 0, 0 )
-9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 256, 160, 32, 32 )
-9/tile_mode = 0
-9/occluder_offset = Vector2( 0, 0 )
-9/navigation_offset = Vector2( 0, 0 )
-9/shape_offset = Vector2( 0, 0 )
-9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape_one_way = false
-9/shape_one_way_margin = 0.0
-9/shapes = [  ]
-9/z_index = 0
-
-[sub_resource type="TileSet" id=234]
-0/name = "hoed_layer.png 0"
-0/texture = ExtResource( 5 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 192, 384, 192 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 56, Vector2( 0, 1 ), 48, Vector2( 0, 2 ), 16, Vector2( 0, 3 ), 432, Vector2( 0, 4 ), 438, Vector2( 0, 5 ), 54, Vector2( 1, 0 ), 144, Vector2( 1, 1 ), 186, Vector2( 1, 2 ), 18, Vector2( 1, 3 ), 504, Vector2( 1, 4 ), 511, Vector2( 1, 5 ), 63, Vector2( 2, 0 ), 146, Vector2( 2, 1 ), 24, Vector2( 2, 3 ), 216, Vector2( 2, 4 ), 219, Vector2( 2, 5 ), 27, Vector2( 3, 3 ), 176, Vector2( 3, 4 ), 178, Vector2( 3, 5 ), 50, Vector2( 4, 3 ), 184, Vector2( 4, 5 ), 58, Vector2( 5, 3 ), 152, Vector2( 5, 4 ), 154, Vector2( 5, 5 ), 26, Vector2( 6, 4 ), 182, Vector2( 7, 3 ), 440, Vector2( 7, 5 ), 59, Vector2( 8, 4 ), 155, Vector2( 9, 4 ), 434, Vector2( 10, 3 ), 248, Vector2( 10, 5 ), 62, Vector2( 11, 4 ), 218 ]
-0/autotile/icon_coordinate = Vector2( 1, 1 )
-0/autotile/tile_size = Vector2( 32, 32 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
-[sub_resource type="TileSet" id=235]
-0/name = "hoed_layer.png 0"
-0/texture = ExtResource( 5 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 384, 192 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 56, Vector2( 0, 1 ), 48, Vector2( 0, 2 ), 16, Vector2( 0, 3 ), 432, Vector2( 0, 4 ), 438, Vector2( 0, 5 ), 54, Vector2( 1, 0 ), 144, Vector2( 1, 1 ), 186, Vector2( 1, 2 ), 18, Vector2( 1, 3 ), 504, Vector2( 1, 4 ), 511, Vector2( 1, 5 ), 63, Vector2( 2, 0 ), 146, Vector2( 2, 1 ), 24, Vector2( 2, 3 ), 216, Vector2( 2, 4 ), 219, Vector2( 2, 5 ), 27, Vector2( 3, 3 ), 176, Vector2( 3, 4 ), 178, Vector2( 3, 5 ), 50, Vector2( 4, 3 ), 184, Vector2( 4, 5 ), 58, Vector2( 5, 3 ), 152, Vector2( 5, 4 ), 154, Vector2( 5, 5 ), 26, Vector2( 6, 4 ), 182, Vector2( 7, 3 ), 440, Vector2( 7, 5 ), 59, Vector2( 8, 4 ), 155, Vector2( 9, 4 ), 434, Vector2( 10, 3 ), 248, Vector2( 10, 5 ), 62, Vector2( 11, 4 ), 218 ]
-0/autotile/icon_coordinate = Vector2( 1, 1 )
-0/autotile/tile_size = Vector2( 32, 32 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
 [node name="World" type="YSort"]
 script = ExtResource( 7 )
+
+[node name="WorldNavigation" type="Navigation2D" parent="."]
+
+[node name="ValidTiles" type="TileMap" parent="WorldNavigation"]
+visible = false
+tile_set = SubResource( 24 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="FarmingTiles" type="YSort" parent="."]
+
+[node name="HoedAutoTiles" type="TileMap" parent="FarmingTiles"]
+tile_set = SubResource( 234 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="WateredAutoTiles" type="TileMap" parent="FarmingTiles"]
+tile_set = SubResource( 235 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="PlacableTiles" type="YSort" parent="."]
+
+[node name="FenceTiles" type="TileMap" parent="PlacableTiles"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
+
+[node name="ObjectTiles" type="TileMap" parent="PlacableTiles"]
+tile_set = SubResource( 255 )
+cell_size = Vector2( 32, 32 )
+cell_tile_origin = 2
+cell_y_sort = true
+collision_layer = 0
+format = 1
+
+[node name="LightTiles" type="TileMap" parent="PlacableTiles"]
+modulate = Color( 2, 2, 2, 1 )
+tile_set = SubResource( 274 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="PathTiles" type="TileMap" parent="PlacableTiles"]
+tile_set = SubResource( 233 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="PlacableTiles"]
+environment = SubResource( 275 )
 
 [node name="GeneratedTiles" type="YSort" parent="."]
 
@@ -1058,49 +1218,9 @@ tile_set = SubResource( 265 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="ValidTiles" type="TileMap" parent="GeneratedTiles"]
-visible = false
-tile_set = SubResource( 24 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="PlacableTiles" type="YSort" parent="."]
-
-[node name="FenceTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 32, 32 )
-cell_tile_origin = 2
-cell_y_sort = true
-format = 1
-
-[node name="ObjectTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 255 )
-cell_size = Vector2( 32, 32 )
-cell_tile_origin = 2
-cell_y_sort = true
-collision_layer = 0
-format = 1
-
-[node name="PathTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 233 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="FarmingTiles" type="YSort" parent="."]
-
-[node name="HoedAutoTiles" type="TileMap" parent="FarmingTiles"]
-tile_set = SubResource( 234 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="WateredAutoTiles" type="TileMap" parent="FarmingTiles"]
-tile_set = SubResource( 235 )
-cell_size = Vector2( 32, 32 )
-format = 1
+[node name="Players" type="YSort" parent="."]
 
 [node name="NatureObjects" type="YSort" parent="."]
-
-[node name="Players" type="YSort" parent="."]
 
 [node name="WorldMap" parent="." instance=ExtResource( 20 )]
 visible = false

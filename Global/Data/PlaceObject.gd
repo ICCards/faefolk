@@ -7,6 +7,7 @@ onready var PlayerHouseObject = preload("res://World/Objects/Farm/PlayerHouse.ts
 onready var valid_tiles
 onready var fence_tiles 
 onready var object_tiles
+onready var light_tiles
 onready var path_tiles 
 var rng = RandomNumberGenerator.new()
 
@@ -19,9 +20,12 @@ enum Placables {
 	GRAIN_MILL1, GRAIN_MILL2, GRAIN_MILL3,
 	STOVE1, STOVE2, STOVE3,
 	TORCH,
-	CAMPFIRE,
+	null,
 	FIRE_PEDESTAL_TALL,
-	FIRE_PEDESTAL
+	FIRE_PEDESTAL,
+	CAMPFIRE,
+	TENT_VERTICAL,
+	TENT_HORIZONTAL
 }
 
 enum Paths {
@@ -34,7 +38,7 @@ enum Paths {
 }
 
 func place_seed_in_world(id, item_name, location, days):
-	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 	valid_tiles.set_cellv(location, -1)
 	var plantedCrop = PlantedCrop.instance()
 	plantedCrop.name = str(id)
@@ -43,10 +47,11 @@ func place_seed_in_world(id, item_name, location, days):
 	plantedCrop.global_position = valid_tiles.map_to_world(location) + Vector2(0, 16)
 
 func place_object_in_world(id, item_name, location):
-	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 	fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 	object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
 	path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
+	light_tiles = get_node("/root/World/PlacableTiles/LightTiles")
 	
 	var tileObjectHurtBox = TileObjectHurtBox.instance()
 	tileObjectHurtBox.name = str(id)
@@ -59,7 +64,8 @@ func place_object_in_world(id, item_name, location):
 			object_tiles.set_cellv(location, Placables.TORCH)
 		"campfire":
 			valid_tiles.set_cellv(location, -1)
-			object_tiles.set_cellv(location, Placables.CAMPFIRE)
+			light_tiles.set_cellv(location, 0)
+			light_tiles.set_cellv(location, 1)
 		"fire pedestal":
 			valid_tiles.set_cellv(location, -1)
 			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL)
@@ -112,6 +118,11 @@ func place_object_in_world(id, item_name, location):
 			object_tiles.set_cellv(location, Placables.STOVE1)
 			valid_tiles.set_cellv(location, -1)
 			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
+		### FIX ###
+		"tent horizontal":
+			object_tiles.set_cellv(location, Placables.TENT_HORIZONTAL)	
+		"tent":
+			object_tiles.set_cellv(location, Placables.TENT_VERTICAL)		
 		"wood path1":
 			path_tiles.set_cellv(location, Paths.WOOD_PATH1)
 		"wood path2":

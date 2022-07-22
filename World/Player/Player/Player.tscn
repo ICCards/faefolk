@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/ChatBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/OpenChest.tscn" type="PackedScene" id=2]
@@ -8,8 +8,8 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/CurrentTime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://Characters/Goblin/female/holding/idle/body/down/body.png" type="Texture" id=9]
-[ext_resource path="res://Characters/Goblin/female/holding/idle/body/down/arms.png" type="Texture" id=10]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=9]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Thunder Crack - SFX Producer.mp3" type="AudioStream" id=13]
@@ -31,6 +31,7 @@
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/GrainMill.tscn" type="PackedScene" id=29]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/PopUpDialogue.tscn" type="PackedScene" id=30]
 [ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=31]
+[ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 
 [sub_resource type="Animation" id=18]
 length = 0.001
@@ -816,11 +817,61 @@ expand_margin_left = 8.0
 expand_margin_right = 8.0
 expand_margin_bottom = 4.0
 
+[sub_resource type="CapsuleShape2D" id=21]
+radius = 20.0
+height = 7.5
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "hit"
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../CompositeSprites:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.4, 0.5, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true, false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.9, 0.9 )
 script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.9, 0.9 )
 
 [node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 20 )
@@ -831,6 +882,7 @@ margin_left = -49.0
 margin_top = -39.0
 margin_right = 1093.0
 margin_bottom = 657.0
+color = Color( 0, 0.027451, 0.054902, 0.92549 )
 script = ExtResource( 31 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/UserInterface/WeatherEffects"]
@@ -843,6 +895,7 @@ anims/RESET = SubResource( 18 )
 stream = ExtResource( 13 )
 
 [node name="RadialMenu" parent="Camera2D/UserInterface" instance=ExtResource( 15 )]
+visible = false
 
 [node name="ChatBox" parent="Camera2D/UserInterface" instance=ExtResource( 1 )]
 margin_left = 10.0
@@ -911,6 +964,7 @@ rotation = -1.5708
 shape = SubResource( 11 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
+visible = false
 scale = Vector2( 2, 2 )
 script = ExtResource( 22 )
 
@@ -958,6 +1012,7 @@ anims/swing_right = SubResource( 7 )
 anims/swing_up = SubResource( 8 )
 
 [node name="MeleeSwing" type="Area2D" parent="."]
+visible = false
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
@@ -1057,6 +1112,7 @@ collision_mask = 0
 shape = SubResource( 15 )
 
 [node name="DetectPathType" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 23 )
 
 [node name="DetectWoodPath" type="Area2D" parent="DetectPathType"]
@@ -1123,6 +1179,19 @@ align = 1
 wait_time = 3.0
 one_shot = true
 
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 0, -20 )
+shape = SubResource( 21 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+anims/RESET = SubResource( 23 )
+anims/hit = SubResource( 22 )
+
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
 [connection signal="area_entered" from="EnterInteractiveZones/ChestArea" to="EnterInteractiveZones" method="_on_ChestArea_area_entered"]
@@ -1137,3 +1206,4 @@ one_shot = true
 [connection signal="area_exited" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_exited"]
 [connection signal="area_entered" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_entered"]
 [connection signal="area_exited" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_exited"]
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]

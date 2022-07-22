@@ -9,7 +9,7 @@ onready var treeTopSprite = $TreeSprites/TreeTop
 onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 var rng = RandomNumberGenerator.new()
 
 var treeObject
