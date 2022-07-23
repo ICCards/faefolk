@@ -279,3 +279,4 @@ func remove_hoed_tile():
 #	day_night_animation_player.play("set night")
 #func set_day():
 #	day_night_animation_player.play_backwards("set night")
+

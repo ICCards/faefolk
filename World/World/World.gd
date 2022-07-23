@@ -16,6 +16,7 @@ onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
 onready var Player_pet = preload("res://World/Player/Pet/PlayerPet.tscn")
 onready var Bear = preload("res://World/Animals/Bear.tscn")
+onready var Snake = preload("res://World/Animals/Snake.tscn")
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTreeObject = preload("res://World/Objects/Nature/Trees/DesertTreeObject.tscn")
@@ -120,7 +121,7 @@ func spawnPlayerExample(pos):
 	if Server.player_house_position == null:
 		var loc = Util.string_to_vector2(pos)
 		player.position = loc * 32
-		spawnRandomBear(loc)
+		#spawnRandomBear(loc)
 	else: 
 		player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
 	spawn_IC_kitty()
@@ -289,7 +290,7 @@ func buildMap(map):
 	var count = 0
 	for id in map["tall_grass"]:
 		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
-		set_valid_tiles(loc)
+		#set_valid_tiles(loc)
 		count += 1
 		var object = TallGrassObject.instance()
 		object.biome = map["tall_grass"][id]["b"]
@@ -304,7 +305,7 @@ func buildMap(map):
 	for id in map["flower"]:
 		count += 1
 		var loc = Util.string_to_vector2(map["flower"][id]["l"])
-		set_valid_tiles(loc)
+		#set_valid_tiles(loc)
 		var object = FlowerObject.instance()
 		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
 		$NatureObjects.add_child(object,true)
@@ -323,11 +324,17 @@ func buildMap(map):
 	Server.player_state = "WORLD"
 	print("Map loaded")
 	Server.world = self
-	yield(get_tree().create_timer(8.5), "timeout")
+	#yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
 	#spawnPlayer()
 	spawnPlayerExample(map["beach"][map["beach"].keys()[rng.randi_range(0, map["beach"].size() - 1)]])
 	Server.isLoaded = true
+	spawnRandomSnake()
+	spawnRandomSnake()
+	spawnRandomSnake()
+	spawnRandomSnake()
+#	spawnRandomSnake()
+#	spawnRandomSnake()
 
 	
 	
@@ -518,3 +525,15 @@ func _physics_process(delta):
 					var new_position = Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) + (position_delta * extrapolation_factor)
 					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 
+
+func spawnRandomSnake():
+	var snake = Snake.instance()
+	snake.global_position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(rng.randi_range(-500, 500), rng.randi_range(-500, 500))
+	add_child(snake)
+
+func _on_SpawnEnemyTimer_timeout():
+	if has_node("/root/World/Players/" + Server.player_id):
+		print("spawn snake")
+		var snake = Snake.instance()
+		snake.global_position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(rng.randi_range(-500, 500), rng.randi_range(-500, 500))
+		add_child(snake)

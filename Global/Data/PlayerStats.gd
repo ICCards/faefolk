@@ -12,10 +12,9 @@ var health_maximum = 100.0
 var mana_maximum 
 
 
-func decrease_health():
-	if health >= 10:
-		health -= 10.0
-		emit_signal("health_changed")
+func decrease_health(amount):
+	health -= amount
+	emit_signal("health_changed")
 
 func decrease_energy():
 	if energy >= 1:
