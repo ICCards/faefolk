@@ -18,6 +18,19 @@ var KittyVariations = [
 	preload("res://Assets/Images/IC Kitties/SpriteFrames/White.tres")
 ]
 
+
+func returnRandomSnake():
+	SnakeVariations.shuffle()
+	return SnakeVariations[0]
+
+# SNAKES #
+var SnakeVariations = [
+	preload("res://Assets/Images/Animals/Snake/brown.tres"),
+	preload("res://Assets/Images/Animals/Snake/brownBlack.tres"),
+	preload("res://Assets/Images/Animals/Snake/green.tres"),
+	preload("res://Assets/Images/Animals/Snake/greenYellow.tres")
+]
+
 # WEAPONS #
 
 func returnToolSprite(toolName, direction):

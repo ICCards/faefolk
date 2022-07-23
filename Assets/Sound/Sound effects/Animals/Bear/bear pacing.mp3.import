@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bear pacing.mp3-ca2cfd60e01b71e89f12162d42c20417.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3"
+dest_files=[ "res://.import/bear pacing.mp3-ca2cfd60e01b71e89f12162d42c20417.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

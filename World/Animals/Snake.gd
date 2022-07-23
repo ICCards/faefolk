@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const SPEED: int = 120
+const SPEED: int = 130
 var velocity: Vector2 = Vector2.ZERO
 
 var path: Array = []
@@ -14,8 +14,9 @@ onready var los = $LineOfSight
 
 var rng = RandomNumberGenerator.new()
 
-
 func _ready():
+	rng.randomize()
+	$AnimatedSprite.frames = Images.returnRandomSnake()
 	wait_for_map()
 
 func wait_for_map():
@@ -43,9 +44,10 @@ func _physics_process(delta):
 			idle()
 	
 	
-func play_groan_sound_effect():
+func play_swing_sound_effect():
+	pass
 	rng.randomize()
-	$AudioStreamPlayer2D.stream = Sounds.bear_grown[rng.randi_range(0, 2)]
+	$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Snake/ES_Snake Hiss 2 - SFX Producer.mp3")
 	$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 	$AudioStreamPlayer2D.play()
 	yield($AudioStreamPlayer2D, "finished")
@@ -56,8 +58,8 @@ func play_groan_sound_effect():
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3")
-		$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Snake/ES_Snake Slither - SFX Producer.mp3")
+		$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$AudioStreamPlayer2D.play()
 		
 func stop_sound_effects():
@@ -107,22 +109,21 @@ func generate_path():
 	if worldNavigation != null and player != null:
 		path = worldNavigation.get_simple_path(global_position, player.global_position, false)
 
-
 func idle():
 	if direction == "left":
-		$AnimatedSprite.play("idle side")
+		$AnimatedSprite.play("walk side")
 		$AnimatedSprite.flip_h = true
 	elif direction == "right":
-		$AnimatedSprite.play("idle side")
+		$AnimatedSprite.play("walk side")
 		$AnimatedSprite.flip_h = false
 	else: 
-		$AnimatedSprite.play("idle " + direction)
+		$AnimatedSprite.play("walk " + direction)
 
 func move():
 	if not swinging:
 		if worldNavigation != null and player != null:
 			velocity = move_and_slide(velocity)
-			if position.distance_to(player.position) > 50:
+			if position.distance_to(player.position) > 30:
 				if direction == "left":
 					$AnimatedSprite.play("walk side")
 					$AnimatedSprite.flip_h = true
@@ -134,12 +135,11 @@ func move():
 					$AnimatedSprite.flip_h = false
 			else:
 				swing(direction)
-	
-	
 
 func swing(direction):
 	if not swinging:
-		play_groan_sound_effect()
+		velocity = move_and_slide(velocity)
+		play_swing_sound_effect()
 		swinging = true
 		if direction == "left":
 			$AnimationPlayer.play("swing left")
@@ -156,8 +156,7 @@ func swing(direction):
 		swinging = false
 
 
-
 func _on_Timer_timeout():
-	if player:
+	if player and player_spotted:
 		generate_path()
 		navigate()
