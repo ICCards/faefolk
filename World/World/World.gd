@@ -121,7 +121,7 @@ func spawnPlayer():
 		$Players.add_child(player)
 		if Server.player_house_position == null:
 			print("setting position")
-			#player.position = Server.player["p"]
+			player.position = Server.player["p"]
 		else: 
 			player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		

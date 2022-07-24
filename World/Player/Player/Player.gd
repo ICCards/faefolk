@@ -79,30 +79,68 @@ func input_update(input, game_state : Dictionary):
 #		if object != name:
 #			if collisionMask.intersects(game_state[object]['collisionMask']):
 #				counter += 1
-	
-	if input.local_input[0]: #W
-		vect.y -= 7
-		
-	if input.local_input[1]: #A
-		vect.x -= 7
-		
-	if input.local_input[2]: #S
-		vect.y += 7
-		
-	if input.local_input[3]: #D
-		vect.x += 7
-		
-	if input.local_input[4]: #SPACE
-		counter = counter/2
+	if !swingActive and not PlayerInventory.chatMode:
+		animation_player.play("movement")
+		if input.local_input[0]: #W
+			vect.y -= 7
+			direction = "UP"
+			walk_state(direction)
+		if input.local_input[1]: #A
+			vect.x -= 7
+			direction = "LEFT"
+			walk_state(direction)
+		if input.local_input[2]: #S
+			vect.y += 7
+			direction = "DOWN"
+			walk_state(direction)
+		if input.local_input[3]: #D
+			vect.x += 7
+			direction = "RIGHT"
+			walk_state(direction)
+		if input.local_input[5]:
+			idle_state(direction)
 
 	#move_and_collide for "solid" stationary objects
 	var collision = move_and_collide(vect)
 	if collision:
 		vect = vect.slide(collision.normal)
 		move_and_collide(vect)
-	
+	print(position)
 	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
 
+func move_local():
+	#calculate state of object for the given input
+	var vect = Vector2(0, 0)
+	if !swingActive and not PlayerInventory.chatMode:
+		animation_player.play("movement")
+		if Input.is_action_pressed("move_up"): #W
+			print("local_move_up")
+			vect.y -= 7
+			direction = "UP"
+			walk_state(direction)
+		if Input.is_action_pressed("move_left"): #A
+			print("local_move_left")
+			vect.x -= 7
+			direction = "LEFT"
+			walk_state(direction)
+		if Input.is_action_pressed("move_down"): #S
+			print("local_move_down")
+			vect.y += 7
+			direction = "DOWN"
+			walk_state(direction)
+		if Input.is_action_pressed("move_right"): #D
+			print("local_move_right")
+			vect.x += 7
+			direction = "RIGHT"
+			walk_state(direction)
+		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
+			idle_state(direction)
+
+	#move_and_collide for "solid" stationary objects
+	var collision = move_and_collide(vect)
+	if collision:
+		vect = vect.slide(collision.normal)
+		move_and_collide(vect)
 
 func frame_end():
 	pass
@@ -177,7 +215,7 @@ func _play_background_music():
 	_play_background_music()
 
 
-func _process(_delta) -> void:
+func _physics_process(_delta) -> void:
 	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
 	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:
 		is_mouse_over_hotbar = true
@@ -191,6 +229,7 @@ func _process(_delta) -> void:
 		match state:
 			MOVEMENT:
 				pass
+				#move_local()
 				#movement_state(_delta)
 	else: 
 		idle_state(direction)
@@ -218,44 +257,45 @@ func _unhandled_input(event):
 		$PlaceItemsUI.set_invisible()
 
 func movement_state(delta):
-	if !swingActive and not PlayerInventory.chatMode:
-		animation_player.play("movement")
-		var input_vector = Vector2.ZERO			
-		if Input.is_action_pressed("move_up"):
-			input_vector.y -= 1.0
-			direction = "UP"
-			walk_state(direction)
-			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("move_down"):
-			input_vector.y += 1.0
-			direction = "DOWN"
-			walk_state(direction)
-			var data = {"p":position,"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("move_left"):
-			input_vector.x -= 1.0
-			direction = "LEFT"
-			walk_state(direction)
-			var data = {"p":position,"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)
-		if Input.is_action_pressed("move_right"):
-			input_vector.x += 1.0
-			direction = "RIGHT"
-			walk_state(direction)
-			var data = {"p":position,"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)		
-		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
-			idle_state(direction)
-			var data = {"p":position,"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)
-		input_vector = input_vector.normalized()
-		if input_vector != Vector2.ZERO:
-			velocity += input_vector * ACCELERATION * delta
-			velocity = velocity.clamped(MAX_SPEED * delta)
-		else:
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-		move_and_collide(velocity * MAX_SPEED)	
+	pass
+#	if !swingActive and not PlayerInventory.chatMode:
+#		animation_player.play("movement")
+#		var input_vector = Vector2.ZERO			
+#		if Input.is_action_pressed("move_up"):
+#			input_vector.y -= 1.0
+#			direction = "UP"
+#			walk_state(direction)
+#			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
+#		if Input.is_action_pressed("move_down"):
+#			input_vector.y += 1.0
+#			direction = "DOWN"
+#			walk_state(direction)
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
+#		if Input.is_action_pressed("move_left"):
+#			input_vector.x -= 1.0
+#			direction = "LEFT"
+#			walk_state(direction)
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
+#		if Input.is_action_pressed("move_right"):
+#			input_vector.x += 1.0
+#			direction = "RIGHT"
+#			walk_state(direction)
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)		
+#		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
+#			idle_state(direction)
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
+#		input_vector = input_vector.normalized()
+#		if input_vector != Vector2.ZERO:
+#			velocity += input_vector * ACCELERATION * delta
+#			velocity = velocity.clamped(MAX_SPEED * delta)
+#		else:
+#			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+#		move_and_collide(velocity * MAX_SPEED)	
 
 var swingActive = false
 func swing_state(item_name):
