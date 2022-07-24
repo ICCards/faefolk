@@ -108,40 +108,6 @@ func input_update(input, game_state : Dictionary):
 	print(position)
 	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
 
-func move_local():
-	#calculate state of object for the given input
-	var vect = Vector2(0, 0)
-	if !swingActive and not PlayerInventory.chatMode:
-		animation_player.play("movement")
-		if Input.is_action_pressed("move_up"): #W
-			print("local_move_up")
-			vect.y -= 7
-			direction = "UP"
-			walk_state(direction)
-		if Input.is_action_pressed("move_left"): #A
-			print("local_move_left")
-			vect.x -= 7
-			direction = "LEFT"
-			walk_state(direction)
-		if Input.is_action_pressed("move_down"): #S
-			print("local_move_down")
-			vect.y += 7
-			direction = "DOWN"
-			walk_state(direction)
-		if Input.is_action_pressed("move_right"): #D
-			print("local_move_right")
-			vect.x += 7
-			direction = "RIGHT"
-			walk_state(direction)
-		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
-			idle_state(direction)
-
-	#move_and_collide for "solid" stationary objects
-	var collision = move_and_collide(vect)
-	if collision:
-		vect = vect.slide(collision.normal)
-		move_and_collide(vect)
-
 func frame_end():
 	pass
 	#code to run at end of frame (after all input_update calls)

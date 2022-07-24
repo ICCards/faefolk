@@ -33,9 +33,9 @@ var prev_frame_arrival_array = [] #boolean array to compare input arrivals betwe
 class Inputs:
 	#Indexing [0]: W, [1]: A, [2]: S, [3]: D, [4]: SPACE
 	#inputs by local player for a single frame
-	var local_input = [false, false, false, false, false] 
+	var local_input = [false, false, false, false, false, false] 
 	#inputs by a player over network for a single frame
-	var net_input = [false, false, false, false, false]
+	var net_input = [false, false, false, false, false, false]
 	var encoded_local_input = 0
 	
 	func duplicate():
