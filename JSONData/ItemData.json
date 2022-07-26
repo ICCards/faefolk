@@ -269,7 +269,7 @@
   
   
   
-  "bucket" : {
+  "watering can" : {
       "ItemCategory": "Weapon",
       "StackSize": 1,
       "Description": "Used to water fertile soil"

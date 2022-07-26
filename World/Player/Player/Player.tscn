@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/ChatBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/OpenChest.tscn" type="PackedScene" id=2]
@@ -8,8 +8,8 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/CurrentTime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=9]
-[ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=10]
+[ext_resource path="res://Characters/Human/male/WATERING CAN/body/right/arms.png" type="Texture" id=9]
+[ext_resource path="res://Characters/Human/male/WATERING CAN/body/right/body.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Thunder Crack - SFX Producer.mp3" type="AudioStream" id=13]
@@ -33,6 +33,7 @@
 [ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=31]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 [ext_resource path="res://World/Player/Player/PlayerHitEffect.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Characters/Weapon swings/down/can.png" type="Texture" id=34]
 
 [sub_resource type="Animation" id=18]
 length = 0.001
@@ -164,6 +165,130 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WateringCanParticles:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 13, -12 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "death"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("../Camera2D/UserInterface/DeathEffect:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0.0117647, 0.0117647, 0.517647 ), Color( 0.611765, 0.0117647, 0.0117647, 0.517647 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../Camera2D/UserInterface/DeathEffect:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -1040,7 +1165,7 @@ margin_left = -49.0
 margin_top = -39.0
 margin_right = 1093.0
 margin_bottom = 657.0
-color = Color( 0, 0.027451, 0.054902, 0.92549 )
+color = Color( 0, 0, 0, 0 )
 script = ExtResource( 31 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/UserInterface/WeatherEffects"]
@@ -1112,6 +1237,14 @@ visible = false
 position = Vector2( 372, 56 )
 scale = Vector2( 0.5, 0.5 )
 
+[node name="DeathEffect" type="ColorRect" parent="Camera2D/UserInterface"]
+visible = false
+margin_left = -58.0
+margin_top = -70.0
+margin_right = 1093.0
+margin_bottom = 680.0
+color = Color( 1, 0, 0, 0 )
+
 [node name="SoundEffects" type="AudioStreamPlayer" parent="Camera2D/UserInterface"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1127,46 +1260,79 @@ script = ExtResource( 22 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 hframes = 4
+frame = 3
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 10 )
+texture = ExtResource( 9 )
 hframes = 4
+frame = 3
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
-position = Vector2( 0, -16 )
+position = Vector2( -0.555556, -16 )
+texture = ExtResource( 34 )
 hframes = 4
 frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 anims/RESET = SubResource( 3 )
+anims/death = SubResource( 27 )
 anims/movement = SubResource( 4 )
 anims/swing_down = SubResource( 5 )
 anims/swing_left = SubResource( 6 )
 anims/swing_right = SubResource( 7 )
 anims/swing_up = SubResource( 8 )
+
+[node name="WateringCanParticles" type="CPUParticles2D" parent="CompositeSprites"]
+modulate = Color( 0.196078, 0.435294, 0.937255, 1 )
+position = Vector2( 13, -12 )
+emitting = false
+amount = 10
+lifetime = 0.6
+emission_shape = 2
+emission_rect_extents = Vector2( 2, 1 )
+gravity = Vector2( 0, 70 )
+scale_amount = 1.5
+scale_amount_random = 1.0
+
+[node name="WateringCanParticles2" type="CPUParticles2D" parent="CompositeSprites"]
+modulate = Color( 0, 0.690196, 0.901961, 1 )
+position = Vector2( 13, -12 )
+emitting = false
+amount = 10
+lifetime = 0.6
+emission_shape = 2
+emission_rect_extents = Vector2( 2, 1 )
+gravity = Vector2( 0, 70 )
+scale_amount = 1.5
+scale_amount_random = 1.0
 
 [node name="MeleeSwing" type="Area2D" parent="."]
 visible = false
@@ -1347,7 +1513,6 @@ scale = Vector2( 0.5, 0.5 )
 
 [node name="Label" parent="HurtBox/PlayerHitEffect" index="0"]
 visible = true
-margin_right = 99.9951
 text = ""
 
 [node name="AnimationPlayer" parent="HurtBox/PlayerHitEffect" index="1"]

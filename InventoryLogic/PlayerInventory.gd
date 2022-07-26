@@ -33,7 +33,7 @@ var hotbar = {
 	
 	1: ["wood box", 99],
 	2: ["tent", 2],
-	6: ["bucket", 1],
+	6: ["watering can", 1],
 	7: ["hoe", 1], 
 	8: ["axe", 1],
 	9:["pickaxe", 1],

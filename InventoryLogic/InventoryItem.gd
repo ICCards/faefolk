@@ -4,6 +4,13 @@ var item_name
 var item_quantity
 
 
+func _ready():
+	PlayerStats.connect("watering_can_changed", self, "update_watering_can_amount")
+	
+func update_watering_can_amount():
+	$WateringCanProgressIndicator/WateringCanProgress.value = PlayerStats.watering_can
+	$WateringCanProgressIndicator/WateringCanProgress.max_value = PlayerStats.watering_can_maximum
+
 func set_item(nm, qt):
 	item_name = nm
 	item_quantity = qt
@@ -22,6 +29,9 @@ func set_item(nm, qt):
 	else:
 		$Label.visible = true
 		$Label.text = String(item_quantity)
+	if item_name == "watering can":
+		$WateringCanProgressIndicator.visible = true
+		update_watering_can_amount()
 	
 func add_item_quantity(amount_to_add):
 	item_quantity += amount_to_add

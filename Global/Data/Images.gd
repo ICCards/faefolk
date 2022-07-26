@@ -45,16 +45,6 @@ func returnToolSprite(toolName, direction):
 					 return pickaxe.left
 				"swing_right":
 					 return pickaxe.right
-		"axe":
-			match direction: 
-				"swing_down":
-					 return axe.down
-				"swing_up":
-					 return axe.up
-				"swing_left":
-					 return axe.left
-				"swing_right":
-					return axe.right
 		"hoe":
 			match direction: 
 				"swing_down":
@@ -65,6 +55,26 @@ func returnToolSprite(toolName, direction):
 					 return pickaxe.left
 				"swing_right":
 					 return pickaxe.right
+		"axe":
+			match direction: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
+		"watering can":
+			match direction: 
+				"watering_down":
+					 return can.down
+				"watering_up":
+					 return null
+				"watering_left":
+					 return can.left
+				"watering_right":
+					 return can.right
 					
 
 
@@ -80,6 +90,12 @@ var axe = {
 	up =  preload("res://Characters/Weapon swings/up/axe.png"), 
 	left = preload("res://Characters/Weapon swings/left/axe.png"), 
 	right = preload("res://Characters/Weapon swings/right/axe.png")
+}
+
+var can = {
+	down = preload("res://Characters/Weapon swings/down/can.png"),
+	left = preload("res://Characters/Weapon swings/left/can.png"),
+	right = preload("res://Characters/Weapon swings/right/can.png")
 }
 
 # TALL GRASS #
