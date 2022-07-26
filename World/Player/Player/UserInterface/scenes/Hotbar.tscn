@@ -18,7 +18,7 @@ texture = ExtResource( 3 )
 [node name="HotbarSlots" type="GridContainer" parent="."]
 margin_left = 41.9999
 margin_top = 42.0
-margin_right = 1002.0
+margin_right = 1056.0
 margin_bottom = 138.0
 custom_constants/hseparation = 6
 columns = 10

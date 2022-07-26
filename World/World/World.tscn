@@ -63,56 +63,6 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="TileSet" id=234]
-0/name = "hoed_layer.png 0"
-0/texture = ExtResource( 5 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 192, 384, 192 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 56, Vector2( 0, 1 ), 48, Vector2( 0, 2 ), 16, Vector2( 0, 3 ), 432, Vector2( 0, 4 ), 438, Vector2( 0, 5 ), 54, Vector2( 1, 0 ), 144, Vector2( 1, 1 ), 186, Vector2( 1, 2 ), 18, Vector2( 1, 3 ), 504, Vector2( 1, 4 ), 511, Vector2( 1, 5 ), 63, Vector2( 2, 0 ), 146, Vector2( 2, 1 ), 24, Vector2( 2, 3 ), 216, Vector2( 2, 4 ), 219, Vector2( 2, 5 ), 27, Vector2( 3, 3 ), 176, Vector2( 3, 4 ), 178, Vector2( 3, 5 ), 50, Vector2( 4, 3 ), 184, Vector2( 4, 5 ), 58, Vector2( 5, 3 ), 152, Vector2( 5, 4 ), 154, Vector2( 5, 5 ), 26, Vector2( 6, 4 ), 182, Vector2( 7, 3 ), 440, Vector2( 7, 5 ), 59, Vector2( 8, 4 ), 155, Vector2( 9, 4 ), 434, Vector2( 10, 3 ), 248, Vector2( 10, 5 ), 62, Vector2( 11, 4 ), 218 ]
-0/autotile/icon_coordinate = Vector2( 1, 1 )
-0/autotile/tile_size = Vector2( 32, 32 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
-[sub_resource type="TileSet" id=235]
-0/name = "hoed_layer.png 0"
-0/texture = ExtResource( 5 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 384, 192 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 56, Vector2( 0, 1 ), 48, Vector2( 0, 2 ), 16, Vector2( 0, 3 ), 432, Vector2( 0, 4 ), 438, Vector2( 0, 5 ), 54, Vector2( 1, 0 ), 144, Vector2( 1, 1 ), 186, Vector2( 1, 2 ), 18, Vector2( 1, 3 ), 504, Vector2( 1, 4 ), 511, Vector2( 1, 5 ), 63, Vector2( 2, 0 ), 146, Vector2( 2, 1 ), 24, Vector2( 2, 3 ), 216, Vector2( 2, 4 ), 219, Vector2( 2, 5 ), 27, Vector2( 3, 3 ), 176, Vector2( 3, 4 ), 178, Vector2( 3, 5 ), 50, Vector2( 4, 3 ), 184, Vector2( 4, 5 ), 58, Vector2( 5, 3 ), 152, Vector2( 5, 4 ), 154, Vector2( 5, 5 ), 26, Vector2( 6, 4 ), 182, Vector2( 7, 3 ), 440, Vector2( 7, 5 ), 59, Vector2( 8, 4 ), 155, Vector2( 9, 4 ), 434, Vector2( 10, 3 ), 248, Vector2( 10, 5 ), 62, Vector2( 11, 4 ), 218 ]
-0/autotile/icon_coordinate = Vector2( 1, 1 )
-0/autotile/tile_size = Vector2( 32, 32 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
 [sub_resource type="ConvexPolygonShape2D" id=276]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
@@ -1127,6 +1077,56 @@ glow_blend_mode = 1
 3/shapes = [  ]
 3/z_index = 0
 
+[sub_resource type="TileSet" id=234]
+0/name = "hoed_layer.png 0"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 192, 384, 192 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 56, Vector2( 0, 1 ), 48, Vector2( 0, 2 ), 16, Vector2( 0, 3 ), 432, Vector2( 0, 4 ), 438, Vector2( 0, 5 ), 54, Vector2( 1, 0 ), 144, Vector2( 1, 1 ), 186, Vector2( 1, 2 ), 18, Vector2( 1, 3 ), 504, Vector2( 1, 4 ), 511, Vector2( 1, 5 ), 63, Vector2( 2, 0 ), 146, Vector2( 2, 1 ), 24, Vector2( 2, 3 ), 216, Vector2( 2, 4 ), 219, Vector2( 2, 5 ), 27, Vector2( 3, 3 ), 176, Vector2( 3, 4 ), 178, Vector2( 3, 5 ), 50, Vector2( 4, 3 ), 184, Vector2( 4, 5 ), 58, Vector2( 5, 3 ), 152, Vector2( 5, 4 ), 154, Vector2( 5, 5 ), 26, Vector2( 6, 4 ), 182, Vector2( 7, 3 ), 440, Vector2( 7, 5 ), 59, Vector2( 8, 4 ), 155, Vector2( 9, 4 ), 434, Vector2( 10, 3 ), 248, Vector2( 10, 5 ), 62, Vector2( 11, 4 ), 218 ]
+0/autotile/icon_coordinate = Vector2( 1, 1 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=235]
+0/name = "hoed_layer.png 0"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 384, 192 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 56, Vector2( 0, 1 ), 48, Vector2( 0, 2 ), 16, Vector2( 0, 3 ), 432, Vector2( 0, 4 ), 438, Vector2( 0, 5 ), 54, Vector2( 1, 0 ), 144, Vector2( 1, 1 ), 186, Vector2( 1, 2 ), 18, Vector2( 1, 3 ), 504, Vector2( 1, 4 ), 511, Vector2( 1, 5 ), 63, Vector2( 2, 0 ), 146, Vector2( 2, 1 ), 24, Vector2( 2, 3 ), 216, Vector2( 2, 4 ), 219, Vector2( 2, 5 ), 27, Vector2( 3, 3 ), 176, Vector2( 3, 4 ), 178, Vector2( 3, 5 ), 50, Vector2( 4, 3 ), 184, Vector2( 4, 5 ), 58, Vector2( 5, 3 ), 152, Vector2( 5, 4 ), 154, Vector2( 5, 5 ), 26, Vector2( 6, 4 ), 182, Vector2( 7, 3 ), 440, Vector2( 7, 5 ), 59, Vector2( 8, 4 ), 155, Vector2( 9, 4 ), 434, Vector2( 10, 3 ), 248, Vector2( 10, 5 ), 62, Vector2( 11, 4 ), 218 ]
+0/autotile/icon_coordinate = Vector2( 1, 1 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
 [node name="World" type="YSort"]
 script = ExtResource( 7 )
 
@@ -1135,18 +1135,6 @@ position = Vector2( 1, 0 )
 
 [node name="ValidTiles" type="TileMap" parent="WorldNavigation"]
 tile_set = SubResource( 24 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="FarmingTiles" type="YSort" parent="."]
-
-[node name="HoedAutoTiles" type="TileMap" parent="FarmingTiles"]
-tile_set = SubResource( 234 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="WateredAutoTiles" type="TileMap" parent="FarmingTiles"]
-tile_set = SubResource( 235 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
@@ -1234,6 +1222,18 @@ format = 1
 
 [node name="WaveTiles" type="TileMap" parent="GeneratedTiles"]
 tile_set = SubResource( 265 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="FarmingTiles" type="YSort" parent="."]
+
+[node name="HoedAutoTiles" type="TileMap" parent="FarmingTiles"]
+tile_set = SubResource( 234 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="WateredAutoTiles" type="TileMap" parent="FarmingTiles"]
+tile_set = SubResource( 235 )
 cell_size = Vector2( 32, 32 )
 format = 1
 

@@ -9,11 +9,14 @@ onready var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
 onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
 onready var grass_tiles = get_node("/root/World/GeneratedTiles/GreenGrassTiles")
+onready var ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedBeachBorder")
 
 var principal
 var character 
 var setting
 var is_mouse_over_hotbar
+var is_player_dead = false
+var swingActive = false
 var username_callback = JavaScript.create_callback(self, "_username_callback")
 
 onready var state = MOVEMENT
@@ -40,7 +43,20 @@ const _character = preload("res://Global/Data/Characters.gd")
 func _ready():
 	set_username("")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
+	PlayerStats.connect("health_depleted", self, "player_death")
+	PlayerInventory.emit_signal("active_item_updated")
 	#IC.getUsername(principal,username_callback)
+	
+func player_death():
+	if not is_player_dead:
+		is_player_dead = true
+		print('player death')
+		$CompositeSprites.set_player_animation(character, "death_" + direction.to_lower(), null)
+		animation_player.play("death")
+		yield(animation_player, "animation_finished")
+		animation_player.stop()
+		is_player_dead = false
+		$Camera2D/UserInterface/DeathEffect.visible = false
 
 func _username_callback(args):
 	# Get the first argument (the DOM event in our case).
@@ -117,7 +133,8 @@ func _unhandled_input(event):
 		not PlayerInventory.chatMode and \
 		not PlayerInventory.viewMapMode and \
 		not is_mouse_over_hotbar and \
-		not swingActive: 
+		not swingActive and \
+		not is_player_dead: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon":
@@ -132,7 +149,7 @@ func _unhandled_input(event):
 		$PlaceItemsUI.set_invisible()
 
 func movement_state(delta):
-	if !swingActive and not PlayerInventory.chatMode:
+	if !swingActive and not PlayerInventory.chatMode and not is_player_dead:
 		animation_player.play("movement")
 		var input_vector = Vector2.ZERO			
 		if Input.is_action_pressed("move_up"):
@@ -171,18 +188,21 @@ func movement_state(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		move_and_collide(velocity * MAX_SPEED)	
 
-var swingActive = false
+
 func swing_state(item_name):
 		$DetectPathType/FootstepsSound.stream_paused = true
 		if !swingActive:
+			if item_name == "watering can":
+				animation = "watering_" + direction.to_lower()
+			else:
+				animation = "swing_" + direction.to_lower()
 			state = SWING
 			PlayerStats.decrease_energy()
 			sendAction(SWING, {"tool": item_name, "direction": direction})
 			swingActive = true
 			set_melee_collision_layer(item_name)
-			animation = "swing_" + direction.to_lower()
 			$CompositeSprites.set_player_animation(character, animation, item_name)
-			animation_player.play(animation)
+			animation_player.play("swing_" + direction.to_lower())
 			yield(animation_player, "animation_finished" )
 			swingActive = false
 			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
@@ -198,6 +218,7 @@ func swing_state(item_name):
 			pass
 		else:
 			state = MOVEMENT
+
 
 func idle_state(_direction):
 	$DetectPathType/FootstepsSound.stream_paused = true
@@ -218,32 +239,63 @@ func set_melee_collision_layer(_tool):
 	elif _tool == "hoe":
 		$MeleeSwing.set_collision_mask(0)
 		set_hoed_tile()
-	elif _tool == "bucket":
+	elif _tool == "watering can":
 		$MeleeSwing.set_collision_mask(0)
 		set_watered_tile()
 
 func set_watered_tile():
-	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-	$SoundEffects.play()
 	var pos = Util.set_swing_position(get_position(), direction)
 	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) != -1:
-		yield(get_tree().create_timer(0.2), "timeout")
-		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-		var data = {"id": id, "l": location}
-		Server.action("WATER", data)
-		watered_tiles.set_cellv(location, 0)
-		watered_tiles.update_bitmask_region()
+	if ocean_tiles.get_cellv(location) != -1:
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+		$SoundEffects.play()
+		PlayerStats.refill_watering_can()
+	elif PlayerStats.watering_can >= 1:
+		PlayerStats.decrease_watering_can()
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+		$SoundEffects.play()
+		if direction != "UP":
+			$CompositeSprites/WateringCanParticles.position = returnAdjustedWateringCanPariclePos(direction)
+			$CompositeSprites/WateringCanParticles.emitting = true
+			$CompositeSprites/WateringCanParticles2.position = returnAdjustedWateringCanPariclePos(direction)
+			$CompositeSprites/WateringCanParticles2.emitting = true
+		yield(get_tree().create_timer(0.4), "timeout")
+		$CompositeSprites/WateringCanParticles.emitting = false
+		$CompositeSprites/WateringCanParticles2.emitting = false
+		if hoed_tiles.get_cellv(location) != -1:
+	#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+	#		var data = {"id": id, "l": location}
+	#		Server.action("WATER", data)
+			watered_tiles.set_cellv(location, 0)
+			watered_tiles.update_bitmask_region()
+	else: 
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+		$SoundEffects.play()
+		yield(get_tree().create_timer(0.6), "timeout")
+		$SoundEffects.stop()
+		print('watering can empty')
+		
+		
+func returnAdjustedWateringCanPariclePos(direction):
+	match direction:
+		"RIGHT":
+			return Vector2(13, -12)
+		"LEFT":
+			return Vector2(-13, -12)
+		"DOWN":
+			return Vector2(0, -10)
 
 func set_hoed_tile():
 	var pos = Util.set_swing_position(get_position(), direction)
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) == -1 and valid_tiles.get_cellv(location) != -1 and grass_tiles.get_cellv(location) == -1 and path_tiles.get_cellv(location) == -1:
 		yield(get_tree().create_timer(0.6), "timeout")
-		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-		var data = {"id": id, "l": location}
-		Server.action("HOE", data)
+#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+#		var data = {"id": id, "l": location}
+#		Server.action("HOE", data)
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
@@ -255,9 +307,9 @@ func remove_hoed_tile():
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
-		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-		var data = {"id": id, "l": location}
-		Server.action("PICKAXE", data)
+#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
+#		var data = {"id": id, "l": location}
+#		Server.action("PICKAXE", data)
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()

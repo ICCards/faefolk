@@ -10,6 +10,7 @@ var direction = "down"
 var player_spotted: bool = false
 var playing_sound_effect: bool = false
 var swinging = false
+var random_idle_pos = null
 onready var los = $LineOfSight
 
 var rng = RandomNumberGenerator.new()
@@ -17,26 +18,33 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 	$AnimatedSprite.frames = Images.returnRandomSnake()
+	idle()
 	wait_for_map()
+	PlayerStats.connect("health_depleted", self, "player_death")
+	
+	
+func player_death():
+	random_idle_pos = null
+	player_spotted = false
 
 func wait_for_map():
 	if Server.isLoaded:
 		if Server.world.has_node("WorldNavigation"):
-			print('set world nav')
 			worldNavigation = get_node("/root/World/WorldNavigation")
 		if Server.world.has_node("Players/" + Server.player_id):
-			print('set player')
 			player = get_node("/root/World/Players/" + Server.player_id)
 	else:
 		yield(get_tree().create_timer(2.5), "timeout")
 		wait_for_map()
 		
 func _physics_process(delta):
+	$Line2D.global_position = Vector2.ZERO
 	set_direction()
 	if player:
 		los.look_at(player.global_position)
 		check_player_in_detection()
 		if player_spotted:
+			random_idle_pos = null
 			start_sound_effects()
 			move()
 		else:
@@ -45,7 +53,6 @@ func _physics_process(delta):
 	
 	
 func play_swing_sound_effect():
-	pass
 	rng.randomize()
 	$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Snake/ES_Snake Hiss 2 - SFX Producer.mp3")
 	$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -91,16 +98,18 @@ func set_direction():
 			direction = "down"
 
 func check_player_in_detection() -> bool:
-	var collider = los.get_collider()
-	if global_position.distance_to(player.global_position) >= 500:
-		player_spotted = false
-	if collider and collider == player:
-		player_spotted = true
-		return true
+	if not player.is_player_dead:
+		var collider = los.get_collider()
+		if global_position.distance_to(player.global_position) >= 500:
+			player_spotted = false
+		if collider and collider == player:
+			player_spotted = true
+			return true
+		return false
 	return false
 
 func navigate():
-	if path.size() > 1:
+	if path.size() > 0:
 		velocity = global_position.direction_to(path[1]) * SPEED
 		if global_position == path[0]:
 			path.pop_front()
@@ -108,8 +117,18 @@ func navigate():
 func generate_path():
 	if worldNavigation != null and player != null:
 		path = worldNavigation.get_simple_path(global_position, player.global_position, false)
+		$Line2D.points = path
 
 func idle():
+#	if global_position == random_idle_pos:
+#		print('set new idle pos')
+#		rng.randomize()
+#		random_idle_pos = global_position + Vector2(rng.randi_range(-100, 100), rng.randi_range(-100, 100))
+	if random_idle_pos == null:
+		rng.randomize()
+		random_idle_pos = global_position + Vector2(rng.randi_range(-100, 100), rng.randi_range(-100, 100))
+		velocity = global_position.direction_to(random_idle_pos) * SPEED
+	velocity = move_and_slide(velocity)
 	if direction == "left":
 		$AnimatedSprite.play("walk side")
 		$AnimatedSprite.flip_h = true
@@ -160,3 +179,6 @@ func _on_Timer_timeout():
 	if player and player_spotted:
 		generate_path()
 		navigate()
+	else:
+		random_idle_pos = global_position + Vector2(rng.randi_range(-100, 100), rng.randi_range(-100, 100))
+		velocity = global_position.direction_to(random_idle_pos) * SPEED
