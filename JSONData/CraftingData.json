@@ -35,6 +35,10 @@
          "wood": 100,
          "stone": 100
      },
+     "tent": {
+         "wood": 20,
+         "stone": 10
+     },
      "campfire": {
          "wood": 2,
          "stone": 2

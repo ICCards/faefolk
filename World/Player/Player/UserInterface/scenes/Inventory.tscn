@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -12,7 +12,7 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/wood fence.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/placable_object_preview/house.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Images/placable_object_preview/tent.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=14]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/OptionsMenu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
@@ -43,6 +43,9 @@ extents = Vector2( 84, 65 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 48, 48 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 48, 44 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 48, 86.5 )
@@ -99,8 +102,19 @@ rect_scale = Vector2( 6, 6 )
 mouse_filter = 2
 texture = ExtResource( 31 )
 
+[node name="Title" type="Label" parent="."]
+margin_left = 37.0
+margin_top = 36.0
+margin_right = 558.0
+margin_bottom = 149.0
+theme = ExtResource( 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "INVENTORY"
+align = 1
+
 [node name="CraftingMenu" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 7 )
 
 [node name="Page1" type="Node2D" parent="CraftingMenu"]
@@ -164,8 +178,8 @@ shape = SubResource( 9 )
 position = Vector2( 65, 341 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/CampfireArea"]
-position = Vector2( 259.75, 332 )
-shape = SubResource( 7 )
+position = Vector2( 260, 366 )
+shape = SubResource( 21 )
 
 [node name="FirePedestalArea" type="Area2D" parent="CraftingMenu/Page1"]
 position = Vector2( 196, 338 )
@@ -215,7 +229,7 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 
 [node name="campfire" type="Sprite" parent="CraftingMenu/Page1"]
-position = Vector2( 325, 660 )
+position = Vector2( 325, 703 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 23 )
 
@@ -237,9 +251,9 @@ stretch_mode = 5
 [node name="Page2" type="Node2D" parent="CraftingMenu"]
 visible = false
 
-[node name="house" type="Sprite" parent="CraftingMenu/Page2"]
+[node name="tent" type="Sprite" parent="CraftingMenu/Page2"]
 position = Vector2( 441, 632 )
-scale = Vector2( 0.7, 0.7 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 13 )
 
 [node name="workbench" type="Sprite" parent="CraftingMenu/Page2"]
@@ -262,11 +276,12 @@ position = Vector2( 127, 370 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 26 )
 
-[node name="HouseArea" type="Area2D" parent="CraftingMenu/Page2"]
+[node name="TentArea" type="Area2D" parent="CraftingMenu/Page2"]
 position = Vector2( 255, 0 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/Page2/HouseArea"]
-polygon = PoolVector2Array( 93, 754, 278, 754, 287, 597, 186, 498, 85, 597 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/Page2/TentArea"]
+position = Vector2( 0, 13 )
+polygon = PoolVector2Array( 105, 757, 264, 755, 262, 571, 186, 482, 113, 566 )
 
 [node name="TallPedestalArea" type="Area2D" parent="CraftingMenu/Page2"]
 
@@ -420,18 +435,6 @@ mouse_filter = 2
 texture = ExtResource( 21 )
 expand = true
 
-[node name="Title" type="Label" parent="."]
-margin_left = 37.0
-margin_top = 36.0
-margin_right = 558.0
-margin_bottom = 149.0
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "INVENTORY"
-align = 1
-
 [node name="QuitMenu" type="Control" parent="."]
 visible = false
 margin_left = 71.0
@@ -485,6 +488,7 @@ margin_right = 66.0
 margin_bottom = 64.0
 
 [node name="InventoryMenu" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -603,6 +607,7 @@ custom_constants/shadow_offset_y = 6
 text = "Tall fire pedestal"
 
 [node name="PetUI" type="Control" parent="InventoryMenu"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 5 )
@@ -625,7 +630,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 30
+frame = 27
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]
@@ -671,9 +676,9 @@ text = "Hide"
 [connection signal="mouse_entered" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_mouse_exited"]
 [connection signal="pressed" from="CraftingMenu/Page1/DownButton" to="CraftingMenu" method="_on_DownButton_pressed"]
-[connection signal="input_event" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_HouseArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_HouseArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_HouseArea_mouse_exited"]
 [connection signal="input_event" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_input_event"]
 [connection signal="mouse_entered" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_mouse_exited"]

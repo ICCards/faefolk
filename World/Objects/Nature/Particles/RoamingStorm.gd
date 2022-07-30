@@ -2,6 +2,7 @@ extends Node2D
 
 
 var random_storm_position
+var is_snow_storm = false
 
 func _ready():
 	randomize()
@@ -20,10 +21,12 @@ func _process(delta):
 		position = position.move_toward(random_storm_position, delta * 10)
 		var snow = get_node("/root/World/GeneratedTiles/SnowTiles")
 		if snow.get_cellv(snow.world_to_map(position)) == -1:
+			is_snow_storm = false
 			$Snow.emitting = false
 			$RainStorm/Rain.emitting = true
 			$RainStorm/RainOnFloor.emitting = true
 		else:
+			is_snow_storm = true
 			$Snow.emitting = true
 			$RainStorm/Rain.emitting = false
 			$RainStorm/RainOnFloor.emitting = false

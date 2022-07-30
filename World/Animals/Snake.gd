@@ -120,10 +120,6 @@ func generate_path():
 		$Line2D.points = path
 
 func idle():
-#	if global_position == random_idle_pos:
-#		print('set new idle pos')
-#		rng.randomize()
-#		random_idle_pos = global_position + Vector2(rng.randi_range(-100, 100), rng.randi_range(-100, 100))
 	if random_idle_pos == null:
 		rng.randomize()
 		random_idle_pos = global_position + Vector2(rng.randi_range(-100, 100), rng.randi_range(-100, 100))

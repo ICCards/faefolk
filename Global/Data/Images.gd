@@ -31,8 +31,386 @@ var SnakeVariations = [
 	preload("res://Assets/Images/Animals/Snake/greenYellow.tres")
 ]
 
-# WEAPONS #
+# BUNNIES #
+var BunnyVariations = [
+	preload("res://Assets/Images/Animals/Bunny/brownBunny.tres"),
+	preload("res://Assets/Images/Animals/Bunny/whiteBunny.tres"),
+	preload("res://Assets/Images/Animals/Bunny/yellowBunny.tres")
+]
 
+# DUCKS #
+var DuckVariations = [
+	preload("res://Assets/Images/Animals/Duck/duck1.tres"),
+	preload("res://Assets/Images/Animals/Duck/duck2.tres")
+]
+
+# BIRDS #
+var BirdVariations = [
+	preload("res://Assets/Images/Animals/Bird/bird1.tres"),
+	preload("res://Assets/Images/Animals/Bird/bird2.tres")
+]
+
+
+# IC GHOSTS #
+
+func returnICGhostBackground(bg):
+	match bg:
+		"black":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/black.png")
+		"blue-linear-gradient":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/blue-linear-gradient.png")
+		"Flesh-color":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/Flesh-color.png")
+		"gray":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/gray.png")
+		"Green-gradient":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/Green-gradient.png")
+		"green": 
+			return preload("res://Assets/Images/IC Ghost Elements/Background/green.png")
+		"Jigsaw-puzzle":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/Jigsaw-puzzle.png")
+		"light-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/light-blue.png")
+		"Light-grey":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/Light-grey.png")
+		"light-pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/light-pink.png")
+		"Light-yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/Light-yellow.png")
+		"orange-gradient":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/orange-gradient.png")
+		"orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/orange.png")
+		"pink-linear-gradient":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/pink-linear-gradient.png")
+		"purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/purple.png")
+		"Sky-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Background/Sky-blue.png")
+			
+func returnICGhostBody(body):
+	match body:
+		"blue-pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/blue-pink.png")
+		"blue-pink2":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/blue-pink2.png")
+		"blue-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/blue-purple.png")
+		"blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/blue.png")
+		"coffee":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/coffee.png")
+		"dark-pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/dark-pink.png")
+		"Dfinity":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/Dfinity.png")
+		"Dfinity2":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/Dfinity2.png")
+		"Dfinity3":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/Dfinity3.png")
+		"Dfinity4":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/Dfinity4.png")
+		"Green-gradient":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/Green-gradient.png")
+		"green":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/green.png")
+		"green2":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/green2.png")
+		"light-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/light-blue.png")
+		"light-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/light-green.png")
+		"light-pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/light-pink.png")
+		"light-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/light-purple.png")
+		"orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/orange.png")
+		"pink-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/pink-blue.png")
+		"pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/pink.png")
+		"purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/purple.png")
+		"purple2":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/purple2.png")
+		"yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/yellow.png")
+		"yellow2":
+			return preload("res://Assets/Images/IC Ghost Elements/Body/yellow2.png")
+
+func returnICGhostEars(ear):
+	match ear:
+		"blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/blue.png")
+		"dark-gray":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/dark-gray.png")
+		"dark-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/dark-red.png")
+		"green":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/green.png")
+		"purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/purple.png")
+		"red":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/red.png")
+		"vertical-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-blue.png")
+		"vertical-dark-gray":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-dark-gray.png")
+		"vertical-dark-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-dark-red.png")
+		"vertical-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-green.png")
+		"vertical-light-yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-light-yellow.png")
+		"vertical-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-purple.png")
+		"vertical-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-red.png")
+		"vertical-white":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-white.png")
+		"vertical-yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/vertical-yellow.png")
+		"white":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/white.png")
+		"yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Ears/yellow.png")
+
+func returnICGhostEyes(eye):
+	match eye:
+		"black":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/black.png")
+		"blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/blue.png")
+		"cry-light-gray":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/cry-light-gray.png")
+		"cry-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/cry-red.png")
+		"cry-white":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/cry-white.png")
+		"dark-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/dark-red.png")
+		"Eyes-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Eyes-blue.png")
+		"Eyes-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Eyes-green.png")
+		"Eyes-orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Eyes-orange.png")
+		"Eyes-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Eyes-purple.png")
+		"Eyes-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Eyes-red.png")
+		"glasses":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/glasses.png")
+		"green":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/green.png")
+		"orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/orange.png")
+		"pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/pink.png")
+		"purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/purple.png")
+		"right-black":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-black.png")
+		"right-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-blue2.png")
+		"right-blue2":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-blue.png")
+		"right-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-green.png")
+		"right-green2":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-green2.png")
+		"right-pink2":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-pink2.png")
+		"right-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-purple.png")
+		"right-purple2":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-purple2.png")
+		"right-white":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-white.png")
+		"right-white2":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/right-white2.png")
+		"Sunglasses-back":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Sunglasses-back.png")
+		"Sunglasses-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Sunglasses-blue.png")
+		"Sunglasses-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Sunglasses-green.png")
+		"Sunglasses-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Sunglasses-purple.png")
+		"Sunglasses-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Sunglasses-red.png")
+		"Sunglasses-yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Sunglasses-yellow.png")
+		"Sunglasses":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/Sunglasses.png")
+		"white":
+			return preload("res://Assets/Images/IC Ghost Elements/Eyes/white.png")
+
+func returnICGhostFace(face):
+	match face:
+		"face-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Face/face-blue.png")
+		"face-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Face/face-green.png")
+		"face-orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Face/face-orange.png")
+		"face-pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Face/face-pink.png")
+		"face-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Face/face-red.png")
+		"light-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Face/light-blue.png")
+		"yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Face/yellow.png")
+
+func returnICGhostHat(hat):
+	match hat:
+		"an-crown-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/an-crown-blue.png")
+		"an-crown-pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/an-crown-pink.png")
+		"an-crown-yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/an-crown-yellow.png")
+		"hat-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/hat-blue.png")
+		"hat-orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/hat-orange.png")
+		"hat-yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/hat-yellow.png")
+		"Scarf-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/Scarf-blue.png")
+		"Scarf-orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/Scarf-orange.png")
+		"Scarf-red": 
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/Scarf-red.png")
+		"Stetson-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/Stetson-blue.png")
+		"Stetson-yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/Stetson-yellow.png")
+		"Stetson":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/Stetson.png")
+		"witch-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/witch-blue.png")
+		"witch-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/witch-purple.png")
+		"witch-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Hat/witch-red.png")
+
+func returnICGhostMouth(mouth):
+	match mouth:
+		"blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/blue.png")
+		"close-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/close-blue.png")
+		"close-orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/close-orange.png")
+		"close-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/close-purple.png")
+		"close-red":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/close-red.png")
+		"close-white":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/close-white.png")
+		"cry-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/cry-blue.png")
+		"cry-pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/cry-pink.png")
+		"cry-yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/cry-yellow.png")
+		"green":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/green.png")
+		"light-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/light-blue.png")
+		"light-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/light-green.png")
+		"pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/pink.png")
+		"purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/purple.png")
+		"red":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/red.png")
+		"white":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/white.png")
+		"yellow":
+			return preload("res://Assets/Images/IC Ghost Elements/Mouth/yellow.png")
+			
+func returnICGhostProp(prop):
+	match prop:
+		"blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/blue.png")
+		"green":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/green.png")
+		"orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/orange.png")
+		"pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/pink.png")
+		"purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/purple.png")
+		"run-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/run-blue.png")
+		"run-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/run-green.png")
+		"run-light-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/run-light-green.png")
+		"run-orange":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/run-orange.png")
+		"run-purple":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/run-purple.png")
+		"run-white":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/run-white.png")
+		"ship-blue":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/ship-blue.png")
+		"ship-green":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/ship-green .png")
+		"ship-light green":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/ship-light green.png")
+		"ship-pink":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/ship-pink.png")
+		"skate":
+			return preload("res://Assets/Images/IC Ghost Elements/Prop/skate.png")
+	
+func returnICGhostUnique(unique):
+	match unique:
+		"Unique1":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique1.png")
+		"Unique2":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique2.png")
+		"Unique3":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique3.png")
+		"Unique4":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique4.png")
+		"Unique5":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique5.png")
+		"Unique6":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique6.png")
+		"Unique7":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique7.png")
+		"Unique8":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique8.png")
+		"Unique9":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique9.png")
+		"Unique10":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique10.png")
+		"Unique11":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique11.png")
+		"Unique12":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique12.png")
+		"Unique13":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique13.png")
+		"Unique14":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique14.png")
+		"Unique15":
+			return preload("res://Assets/Images/IC Ghost Elements/Uniques/Unique15.png")
+
+
+
+
+
+
+
+
+
+# WEAPONS #
 func returnToolSprite(toolName, direction):
 	match toolName:
 		"pickaxe":
@@ -66,15 +444,27 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					return axe.right
 		"watering can":
-			match direction: 
-				"watering_down":
-					 return can.down
-				"watering_up":
-					 return null
-				"watering_left":
-					 return can.left
-				"watering_right":
-					 return can.right
+			match Server.character:
+				"human_male":
+					match direction: 
+						"watering_down":
+							 return human_male_can.down
+						"watering_up":
+							 return null
+						"watering_left":
+							 return human_male_can.left
+						"watering_right":
+							 return human_male_can.right
+				"human_female":
+					match direction: 
+						"watering_down":
+							 return human_female_can.down
+						"watering_up":
+							 return null
+						"watering_left":
+							 return human_female_can.left
+						"watering_right":
+							 return human_female_can.right
 					
 
 
@@ -92,10 +482,16 @@ var axe = {
 	right = preload("res://Characters/Weapon swings/right/axe.png")
 }
 
-var can = {
-	down = preload("res://Characters/Weapon swings/down/can.png"),
-	left = preload("res://Characters/Weapon swings/left/can.png"),
-	right = preload("res://Characters/Weapon swings/right/can.png")
+var human_male_can = {
+	down = preload("res://Characters/Weapon swings/watering cans/human male/down.png"),
+	left = preload("res://Characters/Weapon swings/watering cans/human male/left.png"),
+	right = preload("res://Characters/Weapon swings/watering cans/human male/right.png")
+}
+
+var human_female_can = {
+	down = preload("res://Characters/Weapon swings/watering cans/human female/down.png"),
+	left = preload("res://Characters/Weapon swings/watering cans/human female/left.png"),
+	right = preload("res://Characters/Weapon swings/watering cans/human female/right.png")
 }
 
 # TALL GRASS #

@@ -75,6 +75,7 @@ func _physics_process(_delta):
 					#RustCalls.mint_object(item_name)
 				PlayerInventory.add_item_to_hotbar(item_name, quantity)
 				$SoundEffects.play()
+				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 				yield($SoundEffects, "finished")
 				queue_free()
 

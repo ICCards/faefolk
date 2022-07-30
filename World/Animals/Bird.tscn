@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://World/Animals/bird2.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Images/Animals/Bird/bird2.tres" type="SpriteFrames" id=1]
 
 [node name="Bird" type="KinematicBody2D"]
 
