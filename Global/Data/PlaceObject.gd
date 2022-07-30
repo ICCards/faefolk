@@ -64,8 +64,9 @@ func place_object_in_world(id, item_name, location):
 			object_tiles.set_cellv(location, Placables.TORCH)
 		"campfire":
 			valid_tiles.set_cellv(location, -1)
-			light_tiles.set_cellv(location, 0)
-			light_tiles.set_cellv(location, 1)
+			object_tiles.set_cellv(location, Placables.CAMPFIRE)
+#			light_tiles.set_cellv(location, 0)
+#			light_tiles.set_cellv(location, 1)
 		"fire pedestal":
 			valid_tiles.set_cellv(location, -1)
 			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL)
@@ -122,7 +123,8 @@ func place_object_in_world(id, item_name, location):
 		"tent horizontal":
 			object_tiles.set_cellv(location, Placables.TENT_HORIZONTAL)	
 		"tent":
-			object_tiles.set_cellv(location, Placables.TENT_VERTICAL)		
+			set_player_tent_invalid_tiles(location)
+			object_tiles.set_cellv(location + Vector2(0, -1), Placables.TENT_VERTICAL)		
 		"wood path1":
 			path_tiles.set_cellv(location, Paths.WOOD_PATH1)
 		"wood path2":
@@ -169,5 +171,10 @@ func upgrade_grain_mill(player_pos):
 func set_player_house_invalid_tiles(location):
 	for x in range(8):
 		for y in range(4):
+			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
+
+func set_player_tent_invalid_tiles(location):
+	for x in range(2):
+		for y in range(3):
 			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 

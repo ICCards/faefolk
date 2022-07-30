@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Animals/Bear.gd" type="Script" id=1]
-[ext_resource path="res://World/Animals/bear.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Animals/bear.tres" type="SpriteFrames" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.33333

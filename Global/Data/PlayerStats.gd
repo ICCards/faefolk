@@ -6,7 +6,7 @@ signal health_depleted
 signal watering_can_changed
 
 var energy = 100.0
-var health = 10.0
+var health = 100.0
 var mana
 
 var energy_maximum = 100.0
@@ -14,7 +14,7 @@ var health_maximum = 100.0
 var mana_maximum 
 
 var watering_can_maximum = 25.0
-var watering_can = 12.0
+var watering_can = 18.0
 
 
 func refill_watering_can():

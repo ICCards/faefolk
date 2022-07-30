@@ -34,6 +34,10 @@ func place_item_state(event, item_name, valid_tiles):
 		$ColorIndicator.scale = Vector2(8, 4)
 		$ItemToPlace.rect_position = Vector2(-3, -301)
 		$ItemToPlace.rect_scale = Vector2(0.9, 0.9)
+	elif item_name == "tent":
+		$ColorIndicator.scale = Vector2(2, 3)
+		$ItemToPlace.rect_position = Vector2(2,-64)
+		$ItemToPlace.rect_scale = Vector2(1, 1)
 	elif item_name == "wood chest" or item_name == "stone chest":
 		$ColorIndicator.scale = Vector2(2, 1)
 		$ItemToPlace.rect_position = Vector2(0,-32)
@@ -46,7 +50,7 @@ func place_item_state(event, item_name, valid_tiles):
 		$ColorIndicator.scale = Vector2(1, 1)
 		$ItemToPlace.rect_position = Vector2(0,-64)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
-	elif item_name == "torch":
+	elif item_name == "torch" or item_name == "campfire":
 		$ColorIndicator.scale = Vector2(1, 1)
 		$ItemToPlace.rect_position = Vector2(0,0)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
@@ -60,6 +64,8 @@ func place_item_state(event, item_name, valid_tiles):
 	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and valid_tiles.get_cellv(location + Vector2(1,0)) == -1:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	elif item_name == "house" and not Util.validate_house_tiles(location, valid_tiles):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif item_name == "tent" and not Util.validate_tent_tiles(location, valid_tiles):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")

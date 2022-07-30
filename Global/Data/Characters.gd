@@ -3,40 +3,116 @@ extends Node
 
 
 
-#	body_death_down = {},
-#	body_death_up = {},
-#	body_death_right = {},
-#	body_death_left = {},
+#	body_death_down = {
+#		0 : preload()
+#	},
+#	body_death_up = {
+#		0 : preload()
+#	},
+#	body_death_right = {
+#		0 : preload()
+#	},
+#	body_death_left = {
+#		0 : preload()
+#	},
 #
-#	arms_death_down = {},
-#	arms_death_up = {},
-#	arms_death_right = {},
-#	arms_death_left = {},
+#	arms_death_down = {
+#		0 : preload()
+#	},
+#	arms_death_up = {
+#		0 : preload()
+#	},
+#	arms_death_right = {
+#		0 : preload()
+#	},
+#	arms_death_left = {
+#		0 : preload()
+#	},
 #
-#	acc_death_down = {},
-#	acc_death_up = {},
-#	acc_death_right = {},
-#	acc_death_left = {},
+#	acc_death_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_death_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_death_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_death_left = {
+#		0 : null,
+#		1 : preload()
+#	},
 #
-#	head_attribute_death_down = {},
-#	head_attribute_death_up = {},
-#	head_attribute_death_right = {},
-#	head_attribute_death_left = {},
+#	head_attribute_death_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_death_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_death_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_death_left = {
+#		0 : null,
+#		1 : preload()
+#	},
 #
-#	shirt_death_down = {},
-#	shirt_death_up = {},
-#	shirt_death_right = {},
-#	shirt_death_left = {},
+#	shirt_death_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirt_death_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirt_death_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirt_death_left = {
+#		0 : null,
+#		1 : preload()
+#	},
 #
-#	pants_death_down = {},
-#	pants_death_up = {},
-#	pants_death_right = {},
-#	pants_death_left = {},
+#	pants_death_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_death_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_death_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_death_left = {
+#		0 : null,
+#		1 : preload()
+#	},
 #
-#	shoes_death_down = {},
-#	shoes_death_up = {},
-#	shoes_death_right = {},
-#	shoes_death_left = {},
+#	shoes_death_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_death_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_death_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_death_left = {
+#		0 : null,
+#		1 : preload()
+#	},
 
 #	body_watering_down = {
 #		0 : preload()
@@ -1163,333 +1239,7 @@ var demi_wolf_female = {
 	}
 }
 
-var human_female = {
-	body_idle_down = {
-		0 : preload("res://Characters/Human/female/IDLE/body/down/body.png")
-	},
-	body_idle_up = {
-		0 : preload("res://Characters/Human/female/IDLE/body/up/body.png")
-	},
-	body_idle_left = {
-		0 : preload("res://Characters/Human/female/IDLE/body/left/body.png")
-	},
-	body_idle_right = {
-		0 : preload("res://Characters/Human/female/IDLE/body/right/body.png")
-	},
 
-	body_walk_down = {
-		0 : preload("res://Characters/Human/female/WALK/body/down/body.png")
-	},
-	body_walk_up = {
-		0 : preload("res://Characters/Human/female/WALK/body/up/body.png")
-	},
-	body_walk_right = {
-		0 : preload("res://Characters/Human/female/WALK/body/right/body.png")
-	},
-	body_walk_left = {
-		0 : preload("res://Characters/Human/female/WALK/body/left/body.png")
-	},
-
-	body_swing_down = {
-		0 : preload("res://Characters/Human/female/SWING/body/down/body.png")
-	},
-	body_swing_up = {
-		0 : preload("res://Characters/Human/female/SWING/body/up/body.png")
-	},
-	body_swing_right = {
-		0 : preload("res://Characters/Human/female/SWING/body/right/body.png")
-	},
-	body_swing_left = {
-		0 : preload("res://Characters/Human/female/SWING/body/left/body.png")
-	},
-
-
-	arms_idle_down = {
-		0 : preload("res://Characters/Human/female/IDLE/body/down/arms.png")
-	},
-	arms_idle_up = {
-		0 : preload("res://Characters/Human/female/IDLE/body/up/arms.png")
-	},
-	arms_idle_left = {
-		0 : preload("res://Characters/Human/female/IDLE/body/left/arms.png")
-	},
-	arms_idle_right = {
-		0 : preload("res://Characters/Human/female/IDLE/body/right/arms.png")
-	},
-
-	arms_walk_down = {
-		0 : preload("res://Characters/Human/female/WALK/body/down/arms.png")
-	},
-	arms_walk_up = {
-		0 : preload("res://Characters/Human/female/WALK/body/up/arms.png")
-	},
-	arms_walk_right = {
-		0 : preload("res://Characters/Human/female/WALK/body/right/arms.png")
-	},
-	arms_walk_left = {
-		0 : preload("res://Characters/Human/female/WALK/body/left/arms.png")
-	},
-
-	arms_swing_down = {
-		0 : preload("res://Characters/Human/female/SWING/body/down/arms.png")
-	},
-	arms_swing_up = {
-		0 : preload("res://Characters/Human/female/SWING/body/up/arms.png")
-	},
-	arms_swing_right = {
-		0 : preload("res://Characters/Human/female/SWING/body/right/arms.png")
-	},
-	arms_swing_left = {
-		0 : preload("res://Characters/Human/female/SWING/body/left/arms.png")
-	},
-
-
-	acc_idle_down = {
-		0 : null,
-	},
-	acc_idle_up = {
-		0 : null,
-	},
-	acc_idle_left = {
-		0 : null,
-	},
-	acc_idle_right = {
-		0 : null,
-	},
-
-	acc_walk_down = {
-		0 : null,
-	},
-	acc_walk_up = {
-		0 : null,
-	},
-	acc_walk_right = {
-		0 : null,
-	},
-	acc_walk_left = {
-		0 : null,
-	},
-
-	acc_swing_down = {
-		0 : null,
-	},
-	acc_swing_up = {
-		0 : null,
-	},
-	acc_swing_right = {
-		0 : null,
-	},
-	acc_swing_left = {
-		0 : null,
-	},
-
-
-	head_attribute_idle_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/down/head_attribute/hair.png"),
-	},
-	head_attribute_idle_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/up/head_attribute/hair.png"),
-	},
-	head_attribute_idle_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/left/head_attribute/hair.png"),
-	},
-	head_attribute_idle_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/right/head_attribute/hair.png"),
-	},
-
-	head_attribute_walk_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/down/head_attribute/hair.png"),
-	},
-	head_attribute_walk_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/up/head_attribute/hair.png"),
-	},
-	head_attribute_walk_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/right/head_attribute/hair.png"),
-	},
-	head_attribute_walk_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/left/head_attribute/hair.png"),
-	},
-
-	head_attribute_swing_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/down/head_attribute/hair.png"),
-	},
-	head_attribute_swing_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/up/head_attribute/hair.png"),
-	},
-	head_attribute_swing_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/right/head_attribute/hair.png"),
-	},
-	head_attribute_swing_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/left/head_attribute/hair.png"),
-	},
-
-
-	pants_idle_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/down/pants/skirt.png")
-	},
-	pants_idle_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/up/pants/skirt.png")
-	},
-	pants_idle_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/right/pants/skirt.png")
-	},
-	pants_idle_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/left/pants/skirt.png")
-	},
-
-	pants_walk_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/down/pants/skirt.png")
-	},
-	pants_walk_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/up/pants/skirt.png")
-	},
-	pants_walk_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/right/pants/skirt.png")
-	},
-	pants_walk_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/left/pants/skirt.png")
-	},
-
-	pants_swing_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/down/pants/skirt.png")
-	},
-	pants_swing_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/up/pants/skirt.png")
-	},
-	pants_swing_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/right/pants/skirt.png")
-	},
-	pants_swing_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/left/pants/skirt.png")
-	},
-
-
-	shirts_idle_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/down/shirts/shirt.png")
-	},
-	shirts_idle_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/up/shirts/shirt.png")
-	},
-	shirts_idle_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/right/shirts/shirt.png")
-	},
-	shirts_idle_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/left/shirts/shirt.png")
-	},
-
-	shirts_walk_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/down/shirts/shirt.png")
-	},
-	shirts_walk_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/up/shirts/shirt.png")
-	},
-	shirts_walk_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/right/shirts/shirt.png")
-	},
-	shirts_walk_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/left/shirts/shirt.png")
-	},
-
-	shirts_swing_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/down/shirts/shirt.png")
-	},
-	shirts_swing_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/up/shirts/shirt.png")
-	},
-	shirts_swing_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/right/shirts/shirt.png")
-	},
-	shirts_swing_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/left/shirts/shirt.png")
-	},
-
-	shoes_idle_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/down/shoes/shoes.png")
-	},
-	shoes_idle_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/up/shoes/shoes.png")
-	},
-	shoes_idle_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/left/shoes/shoes.png")
-	},
-	shoes_idle_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/IDLE/assets/right/shoes/shoes.png")
-	},
-
-	shoes_walk_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/down/shoes/shoes.png")
-	},
-	shoes_walk_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/up/shoes/shoes.png")
-	},
-	shoes_walk_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/right/shoes/shoes.png")
-	},
-	shoes_walk_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/WALK/assets/left/shoes/shoes.png")
-	},
-
-	shoes_swing_down = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/down/shoes/shoes.png")
-	},
-	shoes_swing_up = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/up/shoes/shoes.png")
-	},
-	shoes_swing_right = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/right/shoes/shoes.png")
-	},
-	shoes_swing_left = {
-		0 : null,
-		1 : preload("res://Characters/Human/female/SWING/assets/left/shoes/shoes.png")		
-	}
-}
 
 var lesser_demon_male = {
 	body_idle_down = {
@@ -4971,7 +4721,7 @@ func LoadPlayerCharacter(character_info):
 		"human_male":
 			set_char = Human.male
 		"human_female":
-			set_char = human_female
+			set_char = Human.female
 		"goblin_male":
 			set_char = goblin_male
 		"goblin_female":
@@ -5001,11 +4751,11 @@ func LoadPlayerCharacter(character_info):
 		"succubus":
 			set_char = succubus
 		
-	acc_index = set_char.acc_idle_down.size() - 1
-	headAtr_index = set_char.head_attribute_idle_down.size() - 1
-	pants_index = set_char.pants_idle_down.size() - 1
-	shirts_index = set_char.shirts_idle_down.size() - 1
-	shoes_index = set_char.shoes_idle_down.size() - 1
+	acc_index = 0 # set_char.acc_idle_down.size() - 1
+	headAtr_index = 0 #set_char.head_attribute_idle_down.size() - 1
+	pants_index = 0 #set_char.pants_idle_down.size() - 1
+	shirts_index = 0 #set_char.shirts_idle_down.size() - 1
+	shoes_index = 0 #set_char.shoes_idle_down.size() - 1
 	
 	
 #	acc_index = character_info.acc_index

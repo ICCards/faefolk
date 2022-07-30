@@ -1,6 +1,9 @@
 extends AudioStreamPlayer
 
 var is_inside_storm = false
+onready var storm1 = get_node("/root/World/RoamingStorm")
+onready var storm2 = get_node("/root/World/RoamingStorm2")
+
 
 func _ready():
 	stream = Sounds.nature
@@ -14,15 +17,20 @@ func set_new_music_volume():
 
 func _process(delta):
 	if Server.isLoaded:
-		if get_parent().position.distance_to(get_node("/root/World/RoamingStorm").position) <= 2000:
-			inside_storm()
+		if get_parent().position.distance_to(storm1.position) <= 2000:
+			inside_storm(storm1)
+		elif get_parent().position.distance_to(storm2.position) <= 2000:
+			inside_storm(storm2)
 		else:
 			outside_storm()
 
-func inside_storm():
+func inside_storm(storm):
 	if not is_inside_storm:
+		if storm.is_snow_storm:
+			stream = Sounds.blizzard
+		else:
+			stream = Sounds.rain
 		is_inside_storm = true
-		stream = Sounds.rain
 		play()
 
 func outside_storm():

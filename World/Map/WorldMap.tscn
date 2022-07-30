@@ -37,6 +37,10 @@ tile_data = PoolIntArray( 65471463, 4, 0, 65471464, 4, 0, 65471465, 4, 0, 655369
 scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
 
+[node name="StormIcon2" type="Sprite" parent="Map"]
+scale = Vector2( 30, 30 )
+texture = ExtResource( 6 )
+
 [node name="PlayerIcon" type="Sprite" parent="Map"]
 scale = Vector2( 40, 40 )
 texture = ExtResource( 3 )

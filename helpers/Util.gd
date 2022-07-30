@@ -51,6 +51,17 @@ func validate_house_tiles(_location, _valid_object_tiles):
 					break
 		return true
 		
+func validate_tent_tiles(_location, _valid_object_tiles):
+	var active = false
+	if not active:
+		active = true
+		for x in range(2):
+			for y in range(3):
+				if _valid_object_tiles.get_cellv( Vector2(x, -y) + _location) == -1: 
+					return false
+					break
+		return true
+		
 func set_swing_position(_pos, _direction):
 	if _direction == "UP":
 		_pos += Vector2(0, -32)
@@ -62,3 +73,11 @@ func set_swing_position(_pos, _direction):
 		_pos += Vector2(32, -8)
 	return _pos
 	
+func returnAdjustedWateringCanPariclePos(direction):
+	match direction:
+		"RIGHT":
+			return Vector2(15, -12)
+		"LEFT":
+			return Vector2(-15, -12)
+		"DOWN":
+			return Vector2(0, -10)

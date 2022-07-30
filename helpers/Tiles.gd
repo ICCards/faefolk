@@ -1,6 +1,29 @@
 extends Node
 
 
+func isValidAutoTile(_pos, _map):
+	var count = 0
+	if _map.get_cellv(_pos + Vector2(0,1)) != -1:
+		count += 1
+	if _map.get_cellv(_pos + Vector2(0,-1)) != -1:
+		count += 1
+	if _map.get_cellv(_pos + Vector2(1,0)) != -1:
+		count += 1
+	if _map.get_cellv(_pos + Vector2(-1,0)) != -1:
+		count += 1
+	if count <= 1:
+		return false
+	elif count == 2:
+		if _map.get_cellv(_pos + Vector2(0,1)) != -1 and _map.get_cellv(_pos + Vector2(0,-1)) != -1:
+			return false
+		elif _map.get_cellv(_pos + Vector2(1,0)) != -1 and _map.get_cellv(_pos + Vector2(-1,0)) != -1:
+			return false
+		else:
+			return true
+	else:
+		return true
+			
+	
 func return_neighboring_cells(_pos, _map):
 	var count = 0
 	if _map.get_cellv(_pos + Vector2(0,1)) != -1:
@@ -12,6 +35,7 @@ func return_neighboring_cells(_pos, _map):
 	if _map.get_cellv(_pos + Vector2(-1,0)) != -1:
 		count += 1
 	return count
+	
 	
 func isCenterBitmaskTile(_pos, _map):
 	if _map.get_cellv(_pos + Vector2(0,1)) != -1 and _map.get_cellv(_pos + Vector2(0,-1)) != -1 and \
@@ -37,3 +61,5 @@ func get_subtile_with_priority(id, tilemap: TileMap):
 	
 func _set_cell(tilemap, x, y, id):
 	tilemap.set_cell(x, y, id, false, false, false, Tiles.get_subtile_with_priority(id,tilemap))
+
+

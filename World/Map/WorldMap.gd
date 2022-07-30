@@ -5,10 +5,11 @@ extends Node2D
 onready var GridSquareLabel = preload("res://World/Map/GridSquareLabel.tscn")
 onready var playerIcon = $Map/PlayerIcon
 onready var stormIcon = $Map/StormIcon
+onready var stormIcon2 = $Map/StormIcon2
 onready var miniMap = $Map
 var player 
-var rainStorm
-var snowStorm
+var roamingStorm
+var roamingStorm2
 var direction
 var is_first_time_opened = false
 const NUM_COLUMNS = 8
@@ -90,8 +91,10 @@ func _process(delta):
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 		set_direction(player.direction)
 		change_label_size()
-		rainStorm = get_node("/root/World/RoamingStorm")
-		stormIcon.position = rainStorm.position
+		roamingStorm = get_node("/root/World/RoamingStorm")
+		roamingStorm2 = get_node("/root/World/RoamingStorm2")
+		stormIcon.position = roamingStorm.position
+		stormIcon2.position = roamingStorm2.position
 		
 	
 	

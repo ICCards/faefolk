@@ -19,7 +19,7 @@ var page2 = [
 	"stove",
 	"grain mill",
 	"tall fire pedestal",
-	"house"
+	"tent"
 ]
 
 var page
@@ -27,6 +27,7 @@ var page
 func _on_DownButton_pressed():
 	play_craft_sound()
 	page = 2
+	initialize_crafting()
 	$Page1.visible = false
 	$Page2.visible = true
 
@@ -39,6 +40,7 @@ func _on_UpButton_pressed():
 	
 func reset():
 	page = 1
+	initialize_crafting()
 	$Page1.visible = true
 	$Page2.visible = false
 	initialize_crafting()
@@ -74,31 +76,19 @@ func entered_crafting_area(_item):
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
 	item = _item
-	if item == "house":
-		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + item), "scale",
-			get_node("Page" + str(page) + "/" + item).scale, Vector2(0.75, 0.75), 0.15,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	else:
-		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + item), "scale",
-			get_node("Page" + str(page) + "/" + item).scale, Vector2(3.35, 3.35), 0.15,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(get_node("Page" + str(page) + "/" + item), "scale",
+		get_node("Page" + str(page) + "/" + item).scale, Vector2(3.35, 3.35), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
 	$Tween.start()
 	
 func exited_crafting_area(_item):
 	item = null
-	if _item == "house":
-		if has_node("Page" + str(page) + "/" + _item):
-			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
-			get_node("Page" + str(page) + "/" + _item).scale, Vector2(0.7, 0.7), 0.15,
+	if has_node("Page" + str(page) + "/" + _item):
+		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
+			get_node("Page" + str(page) + "/" + _item).scale, Vector2(3, 3), 0.15,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
-	else:
-		if has_node("Page" + str(page) + "/" + _item):
-			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
-				get_node("Page" + str(page) + "/" + _item).scale, Vector2(3, 3), 0.15,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
+		$Tween.start()
 	
 
 
@@ -121,7 +111,7 @@ func _on_WoodPathArea_mouse_entered():
 func _on_StonePathArea_mouse_entered():
 	entered_crafting_area("stone path")
 func _on_HouseArea_mouse_entered():
-	entered_crafting_area("house")
+	entered_crafting_area("tent")
 func _on_CampfireArea_mouse_entered():
 	entered_crafting_area("campfire")
 func _on_FirePedestalArea_mouse_entered():
@@ -153,7 +143,7 @@ func _on_WoodPathArea_mouse_exited():
 func _on_StonePathArea_mouse_exited():
 	exited_crafting_area("stone path")
 func _on_HouseArea_mouse_exited():
-	exited_crafting_area("house")
+	exited_crafting_area("tent")
 func _on_CampfireArea_mouse_exited():
 	exited_crafting_area("campfire")
 func _on_FirePedestalArea_mouse_exited():
@@ -217,7 +207,7 @@ func _on_StonePathArea_input_event(viewport, event, shape_idx):
 func _on_HouseArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		play_craft_sound()
-		PlayerInventory.craft_item("house")
+		PlayerInventory.craft_item("tent")
 		initialize_crafting()
 func _on_CampfireArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):

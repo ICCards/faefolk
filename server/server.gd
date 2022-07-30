@@ -36,6 +36,7 @@ var player_state = "WORLD"
 var day
 var num_day = 1
 var username
+var character = "human_female"
 
 func _ready():
 	# Connect base signals to get notified of connection open, close, and errors.

@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
+onready var sword_swing = $SwordSwing
 
 onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
@@ -8,8 +9,8 @@ onready var object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
 onready var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
 onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-onready var grass_tiles = get_node("/root/World/GeneratedTiles/GreenGrassTiles")
 onready var ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedBeachBorder")
+onready var dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
 
 var principal
 var character 
@@ -27,16 +28,15 @@ enum {
 	CHANGE_TILE
 }
 
-var buildings = ["wall", "doorway", "floor", "stairs", "nothing", "noting2"]
-
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 
 var animation = "idle_down"
-var MAX_SPEED := 12.5
+var MAX_SPEED := 40 #12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
+var input_vector
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -45,6 +45,7 @@ func _ready():
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
+	sword_swing.knockback_vector = input_vector
 	#IC.getUsername(principal,username_callback)
 	
 func player_death():
@@ -65,8 +66,6 @@ func _username_callback(args):
 	#	var principal = json["principal"]
 	set_username(js_event)	
 	
-func switch_building_state(index):
-	print(buildings[index])
 	
 func DisplayMessageBubble(message):
 	$MessageBubble.visible = true
@@ -151,7 +150,7 @@ func _unhandled_input(event):
 func movement_state(delta):
 	if !swingActive and not PlayerInventory.chatMode and not is_player_dead:
 		animation_player.play("movement")
-		var input_vector = Vector2.ZERO			
+		input_vector = Vector2.ZERO	
 		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0
 			direction = "UP"
@@ -184,6 +183,7 @@ func movement_state(delta):
 		if input_vector != Vector2.ZERO:
 			velocity += input_vector * ACCELERATION * delta
 			velocity = velocity.clamped(MAX_SPEED * delta)
+			sword_swing.knockback_vector = input_vector
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		move_and_collide(velocity * MAX_SPEED)	
@@ -192,17 +192,17 @@ func movement_state(delta):
 func swing_state(item_name):
 		$DetectPathType/FootstepsSound.stream_paused = true
 		if !swingActive:
+			state = SWING
 			if item_name == "watering can":
 				animation = "watering_" + direction.to_lower()
 			else:
 				animation = "swing_" + direction.to_lower()
-			state = SWING
 			PlayerStats.decrease_energy()
 			sendAction(SWING, {"tool": item_name, "direction": direction})
 			swingActive = true
 			set_melee_collision_layer(item_name)
 			$CompositeSprites.set_player_animation(character, animation, item_name)
-			animation_player.play("swing_" + direction.to_lower())
+			animation_player.play("sword_swing_" + direction.to_lower())
 			yield(animation_player, "animation_finished" )
 			swingActive = false
 			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
@@ -257,9 +257,9 @@ func set_watered_tile():
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
 		if direction != "UP":
-			$CompositeSprites/WateringCanParticles.position = returnAdjustedWateringCanPariclePos(direction)
+			$CompositeSprites/WateringCanParticles.position = Util.returnAdjustedWateringCanPariclePos(direction)
 			$CompositeSprites/WateringCanParticles.emitting = true
-			$CompositeSprites/WateringCanParticles2.position = returnAdjustedWateringCanPariclePos(direction)
+			$CompositeSprites/WateringCanParticles2.position = Util.returnAdjustedWateringCanPariclePos(direction)
 			$CompositeSprites/WateringCanParticles2.emitting = true
 		yield(get_tree().create_timer(0.4), "timeout")
 		$CompositeSprites/WateringCanParticles.emitting = false
@@ -274,24 +274,14 @@ func set_watered_tile():
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
-		yield(get_tree().create_timer(0.6), "timeout")
-		$SoundEffects.stop()
-		print('watering can empty')
-		
-		
-func returnAdjustedWateringCanPariclePos(direction):
-	match direction:
-		"RIGHT":
-			return Vector2(13, -12)
-		"LEFT":
-			return Vector2(-13, -12)
-		"DOWN":
-			return Vector2(0, -10)
+
 
 func set_hoed_tile():
 	var pos = Util.set_swing_position(get_position(), direction)
 	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) == -1 and valid_tiles.get_cellv(location) != -1 and grass_tiles.get_cellv(location) == -1 and path_tiles.get_cellv(location) == -1:
+	if hoed_tiles.get_cellv(location) == -1 and \
+	Tiles.isCenterBitmaskTile(location, dirt_tiles) and \
+	valid_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
 #		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 #		var data = {"id": id, "l": location}

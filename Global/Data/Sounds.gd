@@ -124,7 +124,8 @@ var bear_grown = [
 ### Ambient ###
 var rain = preload("res://Assets/Sound/Sound effects/Ambience/ES_Rain Downpour 2 - SFX Producer.mp3")
 var nature = preload("res://Assets/Sound/Sound effects/Ambience/ES_Forest 7 - SFX Producer.mp3")
- 
+var blizzard = preload("res://Assets/Sound/Sound effects/Ambience/ES_Blizzard Forest 5 - SFX Producer.mp3") 
+
 var fire_start = preload("res://Assets/Sound/Sound effects/Fire/start.mp3")
 var fire_crackle = preload("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
 
