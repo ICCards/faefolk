@@ -23,3 +23,9 @@ func _on_GrainMillArea_area_entered(area):
 
 func _on_GrainMillArea_area_exited(area):
 	PlayerInventory.is_inside_grain_mill_area = false
+
+func _on_SleepingBag_area_entered(area):
+	PlayerInventory.is_inside_sleeping_bag_area = true
+
+func _on_SleepingBag_area_exited(area):
+	PlayerInventory.is_inside_sleeping_bag_area = false

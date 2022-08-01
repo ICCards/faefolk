@@ -18,6 +18,8 @@ var is_inside_chest_area = false
 var is_inside_workbench_area = false
 var is_inside_stove_area = false
 var is_inside_grain_mill_area = false
+var is_inside_sleeping_bag_area = false
+var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
@@ -30,9 +32,10 @@ var inventory = {
 }
 
 var hotbar = {
-	
+	0: ["sleeping bag", 60],
 	1: ["wood box", 99],
-	2: ["tent", 2],
+	2: ["tent", 30],
+	3: ["house", 2],
 	5: ["sword", 1],
 	6: ["watering can", 1],
 	7: ["hoe", 1], 

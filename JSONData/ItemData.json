@@ -353,6 +353,11 @@
       "ItemCategory": "Placable object",
       "StackSize": 99,
       "Description": "placable house"
-  }
+  },
+    "sleeping bag": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "Used to set respawn point"
+    }
   
 }

@@ -85,7 +85,7 @@ func draw_grid_labels():
 			add_child(gridSquareLabel)
 	
 func _process(delta):
-	if Server.isLoaded:
+	if has_node("/root/World/Players/" + Server.player_id):
 		player = get_node("/root/World/Players/" + Server.player_id)
 		playerIcon.position =  player.position
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)

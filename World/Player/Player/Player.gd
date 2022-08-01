@@ -3,20 +3,21 @@ extends KinematicBody2D
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var sword_swing = $SwordSwing
 
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
-onready var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
-onready var object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
-onready var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
-onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
-onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-onready var ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedBeachBorder")
-onready var dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
+var valid_tiles
+var path_tiles 
+var object_tiles 
+var fence_tiles
+var hoed_tiles 
+var watered_tiles 
+var ocean_tiles 
+var dirt_tiles 
 
 var principal
 var character 
 var setting
 var is_mouse_over_hotbar
 var is_player_dead = false
+var is_player_sleeping = false
 var swingActive = false
 var username_callback = JavaScript.create_callback(self, "_username_callback")
 
@@ -32,7 +33,7 @@ var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 
 var animation = "idle_down"
-var MAX_SPEED := 40 #12.5
+var MAX_SPEED := 12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -45,8 +46,27 @@ func _ready():
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
-	sword_swing.knockback_vector = input_vector
+	if has_node("/root/World"):
+		set_tile_nodes()
 	#IC.getUsername(principal,username_callback)
+	
+func set_tile_nodes():
+	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
+	path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
+	object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
+	fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
+	hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
+	watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
+	ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedBeachBorder")
+	dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
+	
+func sleep(direction_of_sleeping_bag):
+	print("sleep")
+	if not is_player_sleeping:
+		position += Vector2(0, 6)
+		is_player_sleeping = true
+		$CompositeSprites/AnimationPlayer.play("sleep")
+		$CompositeSprites.set_player_animation(character, "sleep_" + direction_of_sleeping_bag.to_lower())
 	
 func player_death():
 	if not is_player_dead:
@@ -111,6 +131,7 @@ func _process(_delta) -> void:
 	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
 	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:
 		is_mouse_over_hotbar = true
+		$PlaceItemsUI.set_invisible()
 	else:
 		is_mouse_over_hotbar = false
 	if not PlayerInventory.viewInventoryMode and not PlayerInventory.interactive_screen_mode:
@@ -133,12 +154,17 @@ func _unhandled_input(event):
 		not PlayerInventory.viewMapMode and \
 		not is_mouse_over_hotbar and \
 		not swingActive and \
-		not is_player_dead: 
+		not is_player_dead and \
+		not is_player_sleeping: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon":
 				swing_state(item_name)
-			if itemCategory == "Placable object":
+			if itemCategory == "Placable object" and item_name == "tent":
+				$PlaceItemsUI.place_tent_state(valid_tiles)
+			elif itemCategory == "Placable object" and item_name == "sleeping bag":
+				$PlaceItemsUI.place_sleeping_bag_state(valid_tiles)
+			elif itemCategory == "Placable object":
 				$PlaceItemsUI.place_item_state(event, item_name, valid_tiles)
 			elif itemCategory == "Placable path":
 				$PlaceItemsUI.place_path_state(event, item_name, valid_tiles, path_tiles)
@@ -148,7 +174,7 @@ func _unhandled_input(event):
 		$PlaceItemsUI.set_invisible()
 
 func movement_state(delta):
-	if !swingActive and not PlayerInventory.chatMode and not is_player_dead:
+	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping:
 		animation_player.play("movement")
 		input_vector = Vector2.ZERO	
 		if Input.is_action_pressed("move_up"):
@@ -190,34 +216,38 @@ func movement_state(delta):
 
 
 func swing_state(item_name):
-		$DetectPathType/FootstepsSound.stream_paused = true
-		if !swingActive:
-			state = SWING
-			if item_name == "watering can":
-				animation = "watering_" + direction.to_lower()
-			else:
-				animation = "swing_" + direction.to_lower()
-			PlayerStats.decrease_energy()
-			sendAction(SWING, {"tool": item_name, "direction": direction})
-			swingActive = true
-			set_melee_collision_layer(item_name)
-			$CompositeSprites.set_player_animation(character, animation, item_name)
-			animation_player.play("sword_swing_" + direction.to_lower())
-			yield(animation_player, "animation_finished" )
-			swingActive = false
-			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-				var new_tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-				var new_item_category = JsonData.item_data[new_tool_name]["ItemCategory"]
-				if Input.is_action_pressed("mouse_click") and new_item_category == "Weapon":
-					swing_state(new_tool_name)
-				else:
-					state = MOVEMENT
-			else: 
-				state = MOVEMENT
-		elif swingActive == true:
-			pass
+	$DetectPathType/FootstepsSound.stream_paused = true
+	if !swingActive:
+		state = SWING
+		if item_name == "watering can":
+			animation = "watering_" + direction.to_lower()
 		else:
+			animation = "swing_" + direction.to_lower()
+		PlayerStats.decrease_energy()
+		sendAction(SWING, {"tool": item_name, "direction": direction})
+		swingActive = true
+		set_melee_collision_layer(item_name)
+		$CompositeSprites.set_player_animation(character, animation, item_name)
+		if item_name == "sword":
+			animation = "sword_swing_" + direction.to_lower()
+		else:
+			animation = "swing_" + direction.to_lower()
+		animation_player.play(animation)
+		yield(animation_player, "animation_finished" )
+		swingActive = false
+		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+			var new_tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+			var new_item_category = JsonData.item_data[new_tool_name]["ItemCategory"]
+			if Input.is_action_pressed("mouse_click") and new_item_category == "Weapon":
+				swing_state(new_tool_name)
+			else:
+				state = MOVEMENT
+		else: 
 			state = MOVEMENT
+	elif swingActive == true:
+		pass
+	else:
+		state = MOVEMENT
 
 
 func idle_state(_direction):

@@ -23,6 +23,8 @@ func _input(event):
 			open_stove()
 		elif PlayerInventory.is_inside_grain_mill_area:
 			open_grain_mill()
+		elif PlayerInventory.is_inside_sleeping_bag_area:
+			sleep()
 	if event.is_action_pressed("scroll_up") and not PlayerInventory.viewMapMode:
 		PlayerInventory.active_item_scroll_up()
 	elif event.is_action_pressed("scroll_down") and not PlayerInventory.viewMapMode:
@@ -69,3 +71,6 @@ func open_stove():
 func toggle_stats_and_time():
 	$CurrentTime.visible = !$CurrentTime.visible
 	$PlayerStatsUI.visible = !$PlayerStatsUI.visible
+
+func sleep():
+	get_parent().get_parent().sleep("left")

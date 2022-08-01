@@ -14,8 +14,10 @@ const SPEED: int = 100
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	rng.randomize()
 	Images.DuckVariations.shuffle()
 	$AnimatedSprite.frames = Images.DuckVariations[0]
+	los.cast_to = Vector2(rng.randi_range(150, 300), 0)
 	if Util.chance(50):
 		$AnimatedSprite.flip_h = true
 
@@ -63,8 +65,9 @@ func idle_state():
 		in_idle_state = true
 		randomize()
 		yield(get_tree().create_timer(rand_range(0, 0.5)), "timeout")
-		$AnimatedSprite.play("eat")
-		yield($AnimatedSprite, "animation_finished")
+		if Util.chance(50):
+			$AnimatedSprite.play("eat")
+			yield($AnimatedSprite, "animation_finished")
 		random_idle_pos = null	
 
 

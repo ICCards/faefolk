@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/ChatBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/OpenChest.tscn" type="PackedScene" id=2]
@@ -8,8 +8,6 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/CurrentTime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://Characters/Human/male/WATERING CAN/body/right/arms.png" type="Texture" id=9]
-[ext_resource path="res://Characters/Human/male/WATERING CAN/body/right/body.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Thunder Crack - SFX Producer.mp3" type="AudioStream" id=13]
@@ -377,6 +375,94 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "sleep"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -1802,12 +1888,10 @@ script = ExtResource( 22 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 10 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 9 )
 hframes = 4
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
@@ -1838,6 +1922,7 @@ hframes = 4
 anims/RESET = SubResource( 3 )
 anims/death = SubResource( 27 )
 anims/movement = SubResource( 4 )
+anims/sleep = SubResource( 33 )
 anims/swing_down = SubResource( 5 )
 anims/swing_left = SubResource( 6 )
 anims/swing_right = SubResource( 7 )
@@ -1936,6 +2021,7 @@ margin_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
 texture = ExtResource( 17 )
+stretch_mode = 1
 
 [node name="RotateIcon" type="TextureRect" parent="PlaceItemsUI"]
 visible = false
@@ -1979,6 +2065,13 @@ collision_layer = 524288
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/GrainMillArea"]
+shape = SubResource( 15 )
+
+[node name="SleepingBag" type="Area2D" parent="EnterInteractiveZones"]
+collision_layer = 32768
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/SleepingBag"]
 shape = SubResource( 15 )
 
 [node name="DetectPathType" type="Node2D" parent="."]
@@ -2082,6 +2175,8 @@ anims/hit = SubResource( 22 )
 [connection signal="area_exited" from="EnterInteractiveZones/StoveArea" to="EnterInteractiveZones" method="_on_StoveArea_area_exited"]
 [connection signal="area_entered" from="EnterInteractiveZones/GrainMillArea" to="EnterInteractiveZones" method="_on_GrainMillArea_area_entered"]
 [connection signal="area_exited" from="EnterInteractiveZones/GrainMillArea" to="EnterInteractiveZones" method="_on_GrainMillArea_area_exited"]
+[connection signal="area_entered" from="EnterInteractiveZones/SleepingBag" to="EnterInteractiveZones" method="_on_SleepingBag_area_entered"]
+[connection signal="area_exited" from="EnterInteractiveZones/SleepingBag" to="EnterInteractiveZones" method="_on_SleepingBag_area_exited"]
 [connection signal="area_entered" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_entered"]
 [connection signal="area_exited" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_exited"]
 [connection signal="area_entered" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_entered"]

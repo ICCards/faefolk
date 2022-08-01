@@ -1,5 +1,7 @@
 extends Node2D
 
+var directions = ["down", "left", "up", "right"]
+var direction_index
 var path_index = 1
 enum {
 	MOVEMENT, 
@@ -21,6 +23,61 @@ func sendAction(action,data):
 			Server.action("SWING", data)
 		(PLACE_ITEM):
 			Server.action("PLACE_ITEM", data)
+			
+			
+func place_sleeping_bag_state(valid_tiles):
+	get_rotation_index()
+	var direction = directions[direction_index]
+	$RotateIcon.visible = true
+	$ColorIndicator.visible = true
+	$ColorIndicator.scale = Vector2(2, 1)
+	$ItemToPlace.visible = true
+	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
+	$ItemToPlace.rect_scale = Vector2(0.5, 0.5)
+	$ItemToPlace.rect_size = Vector2(128, 64)
+	$ItemToPlace.rect_position = Vector2(0,0)
+	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+	set_global_position(mousePos)
+	var location = valid_tiles.world_to_map(mousePos)
+	
+			
+func place_tent_state(valid_tiles):
+	if $ItemToPlace.rect_size == Vector2(128, 64):
+		$ItemToPlace.rect_size = Vector2(0, 0)
+	get_rotation_index()
+	var direction = directions[direction_index]
+	$RotateIcon.visible = true
+	$ColorIndicator.visible = true
+	$ItemToPlace.visible = true
+	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/tent " + direction + ".png")
+	$ItemToPlace.rect_scale = Vector2(1, 1)
+	if direction == "up" or direction == "down":
+		$ColorIndicator.scale = Vector2(4, 4)
+		$ItemToPlace.rect_position = Vector2(0,-160)
+	else:
+		$ColorIndicator.scale = Vector2(6, 3)
+		$ItemToPlace.rect_position = Vector2(0,-64)
+	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+	set_global_position(mousePos)
+	var location = valid_tiles.world_to_map(mousePos)
+	if get_parent().position.distance_to(mousePos) > 120:
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, Vector2(4,4)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(6,3)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	else:
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
+		if Input.is_action_pressed("mouse_click"):
+			place_object("tent " + direction, location, "placable")
+	
+func get_rotation_index():
+	if direction_index == null:
+		direction_index = 0
+	if Input.is_action_pressed("rotate"):
+		direction_index += 1
+		if direction_index == 4:
+			direction_index = 0
 
 
 func place_item_state(event, item_name, valid_tiles):
@@ -54,23 +111,25 @@ func place_item_state(event, item_name, valid_tiles):
 		$ColorIndicator.scale = Vector2(1, 1)
 		$ItemToPlace.rect_position = Vector2(0,0)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
+	elif item_name == "sleeping bag":
+		$ColorIndicator.scale = Vector2(3, 1)
+		$ItemToPlace.rect_position = Vector2(10,-4)
+		$ItemToPlace.rect_scale = Vector2(1, 1)
 	else:
 		$ColorIndicator.scale = Vector2(1, 1)
 		$ItemToPlace.rect_position = Vector2(0,-32)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
-
 	if valid_tiles.get_cellv(location) == -1 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and valid_tiles.get_cellv(location + Vector2(1,0)) == -1:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
-	elif item_name == "house" and not Util.validate_house_tiles(location, valid_tiles):
-		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
-	elif item_name == "tent" and not Util.validate_tent_tiles(location, valid_tiles):
+	elif item_name == "house" and not Tiles.validate_tiles(location, Vector2(8,4)):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			place_object(item_name, location, "placable")
+
 
 func place_path_state(event, item_name, valid_object_tiles, path_tiles):
 	get_path_rotation(item_name)
@@ -90,6 +149,7 @@ func place_path_state(event, item_name, valid_object_tiles, path_tiles):
 		if event.is_action_pressed("mouse_click"):
 			place_object(item_name + str(path_index), location, "placable")
 
+
 func get_path_rotation(path_name):
 	if path_name == "wood path" and path_index > 2:
 		path_index = 1
@@ -104,6 +164,7 @@ func get_path_rotation(path_name):
 			path_index += 1
 			if path_index == 5:
 				path_index = 1
+
 
 func place_seed_state(event, item_name, valid_object_tiles, hoed_tiles):
 	item_name.erase(item_name.length() - 6, 6)
@@ -122,6 +183,7 @@ func place_seed_state(event, item_name, valid_object_tiles, hoed_tiles):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if event.is_action_pressed("mouse_click"):
 			place_object(item_name, location, "seed")	
+
 
 func place_object(item_name, location, type):
 	PlayerInventory.remove_single_object_from_hotbar()

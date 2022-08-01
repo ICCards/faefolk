@@ -1,13 +1,38 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Images/Animals/Bird/bird2.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://World/Animals/Bird.gd" type="Script" id=2]
 
-[node name="Bird" type="KinematicBody2D"]
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.0
+height = 4.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Bird" type="StaticBody2D"]
+script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -6 )
+scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
-animation = "fly up"
+animation = "walk down"
 frame = 3
 playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+position = Vector2( -2.38419e-07, -9.53674e-07 )
+rotation = -0.485202
+scale = Vector2( 1, 1 )
+enabled = true
+cast_to = Vector2( 200, 0 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, -5 )
+scale = Vector2( 2.275, 2.275 )
+
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -46,7 +46,7 @@ Human="*res://Global/Characters/Human.gd"
 
 mouse_cursor/custom_image="res://Assets/mouse cursors/Normal Selects.png"
 window/stretch/mode="2d"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [global]
 
@@ -205,6 +205,7 @@ radial_menu={
 2d_physics/layer_11="StoneFootsteps"
 2d_physics/layer_13="InsideTreeTopLayer"
 2d_physics/layer_14="DetectOverlappingObject"
+2d_physics/layer_16="EnterSleepingBag"
 2d_physics/layer_17="OpenChest"
 2d_physics/layer_18="OpenWorkbench"
 2d_physics/layer_19="OpenStove"
