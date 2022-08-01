@@ -22,27 +22,50 @@ var page2 = [
 	"tent"
 ]
 
+var page3 = [
+	"sleeping bag"
+]
+
 var page
 
 func _on_DownButton_pressed():
 	play_craft_sound()
 	page = 2
-	initialize_crafting()
 	$Page1.visible = false
 	$Page2.visible = true
+	initialize_crafting()
 
 func _on_UpButton_pressed():
 	play_craft_sound()
 	page = 1
 	$Page1.visible = true
 	$Page2.visible = false
+	$Page3.visible = false
+	initialize_crafting()
+	
+func _on_Pg2DownButton_pressed():
+	play_craft_sound()
+	page = 3
+	$Page1.visible = false
+	$Page2.visible = false
+	$Page3.visible = true
+	initialize_crafting()
+
+func _on_Pg3UpButton_pressed():
+	play_craft_sound()
+	page = 2
+	$Page1.visible = false
+	$Page2.visible = true
+	$Page3.visible = false
+	initialize_crafting()
+
 	
 	
 func reset():
 	page = 1
-	initialize_crafting()
 	$Page1.visible = true
 	$Page2.visible = false
+	$Page3.visible = false
 	initialize_crafting()
 
 
@@ -61,6 +84,12 @@ func initialize_crafting():
 				$Page2.get_node(item).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page2.get_node(item).modulate = Color(1, 1, 1, 0.4)
+	elif page == 3:
+		for item in page3:
+			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+				$Page3.get_node(item).modulate = Color(1, 1, 1, 1)
+			else:
+				$Page3.get_node(item).modulate = Color(1, 1, 1, 0.4)
 
 func _physics_process(delta):
 	if item != null:
@@ -79,7 +108,6 @@ func entered_crafting_area(_item):
 	$Tween.interpolate_property(get_node("Page" + str(page) + "/" + item), "scale",
 		get_node("Page" + str(page) + "/" + item).scale, Vector2(3.35, 3.35), 0.15,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	
 	$Tween.start()
 	
 func exited_crafting_area(_item):
@@ -89,8 +117,6 @@ func exited_crafting_area(_item):
 			get_node("Page" + str(page) + "/" + _item).scale, Vector2(3, 3), 0.15,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
-	
-
 
 
 var item = null
@@ -110,7 +136,7 @@ func _on_WoodPathArea_mouse_entered():
 	entered_crafting_area("wood path")
 func _on_StonePathArea_mouse_entered():
 	entered_crafting_area("stone path")
-func _on_HouseArea_mouse_entered():
+func _on_TentArea_mouse_entered():
 	entered_crafting_area("tent")
 func _on_CampfireArea_mouse_entered():
 	entered_crafting_area("campfire")
@@ -124,6 +150,8 @@ func _on_CraftingTable_mouse_entered():
 	entered_crafting_area("workbench")
 func _on_KitchenArea_mouse_entered():
 	entered_crafting_area("stove")
+func _on_SleepingBagArea_mouse_entered():
+	entered_crafting_area("sleeping bag")
 
 
 func _on_WoodBoxArea_mouse_exited():
@@ -142,7 +170,7 @@ func _on_WoodPathArea_mouse_exited():
 	exited_crafting_area("wood path")
 func _on_StonePathArea_mouse_exited():
 	exited_crafting_area("stone path")
-func _on_HouseArea_mouse_exited():
+func _on_TentArea_mouse_exited():
 	exited_crafting_area("tent")
 func _on_CampfireArea_mouse_exited():
 	exited_crafting_area("campfire")
@@ -156,13 +184,13 @@ func _on_CraftingTable_mouse_exited():
 	exited_crafting_area("workbench")
 func _on_KitchenArea_mouse_exited():
 	exited_crafting_area("stove")
-
+func _on_SleepingBagArea_mouse_exited():
+	exited_crafting_area("sleeping bag")
 
 func play_craft_sound():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
-	
 
 func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
@@ -204,7 +232,7 @@ func _on_StonePathArea_input_event(viewport, event, shape_idx):
 		play_craft_sound()
 		PlayerInventory.craft_item("stone path")
 		initialize_crafting()
-func _on_HouseArea_input_event(viewport, event, shape_idx):
+func _on_TentArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		play_craft_sound()
 		PlayerInventory.craft_item("tent")
@@ -238,5 +266,10 @@ func _on_KitchenArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		play_craft_sound()
 		PlayerInventory.craft_item("stove")
+		initialize_crafting()
+func _on_SleepingBagArea_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("mouse_click"):
+		play_craft_sound()
+		PlayerInventory.craft_item("sleeping bag")
 		initialize_crafting()
 

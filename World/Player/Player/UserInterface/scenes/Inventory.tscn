@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=33]
 [ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Images/placable_object_preview/sleeping bag.png" type="Texture" id=35]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -64,6 +65,9 @@ extents = Vector2( 96.0625, 81.0938 )
 
 [sub_resource type="StreamTexture" id=11]
 load_path = "res://.import/up arrow.png-aacac5dc46995855e65ffd85747ee008.stex"
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 114.5, 59.75 )
 
 [sub_resource type="StyleBoxTexture" id=16]
 content_margin_left = 72.0
@@ -118,6 +122,7 @@ align = 1
 script = ExtResource( 7 )
 
 [node name="Page1" type="Node2D" parent="CraftingMenu"]
+visible = false
 
 [node name="WoodBoxArea" type="Area2D" parent="CraftingMenu/Page1"]
 
@@ -249,10 +254,9 @@ expand = true
 stretch_mode = 5
 
 [node name="Page2" type="Node2D" parent="CraftingMenu"]
-visible = false
 
 [node name="tent" type="Sprite" parent="CraftingMenu/Page2"]
-position = Vector2( 441, 632 )
+position = Vector2( 425, 632 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 13 )
 
@@ -277,7 +281,7 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 26 )
 
 [node name="TentArea" type="Area2D" parent="CraftingMenu/Page2"]
-position = Vector2( 255, 0 )
+position = Vector2( 238, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/Page2/TentArea"]
 position = Vector2( 0, 13 )
@@ -318,6 +322,39 @@ margin_bottom = 305.0
 texture_normal = SubResource( 11 )
 expand = true
 stretch_mode = 5
+
+[node name="Pg2DownButton" type="TextureButton" parent="CraftingMenu/Page2"]
+margin_left = 574.0
+margin_top = 782.0
+margin_right = 634.0
+margin_bottom = 842.0
+rect_rotation = 180.0
+texture_normal = ExtResource( 29 )
+expand = true
+stretch_mode = 5
+
+[node name="Page3" type="Node2D" parent="CraftingMenu"]
+visible = false
+
+[node name="Pg3UpButton" type="TextureButton" parent="CraftingMenu/Page3"]
+margin_left = 514.0
+margin_top = 245.0
+margin_right = 574.0
+margin_bottom = 305.0
+texture_normal = SubResource( 11 )
+expand = true
+stretch_mode = 5
+
+[node name="sleeping bag" type="Sprite" parent="CraftingMenu/Page3"]
+position = Vector2( 182, 331 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+
+[node name="SleepingBagArea" type="Area2D" parent="CraftingMenu/Page3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page3/SleepingBagArea"]
+position = Vector2( 182.5, 331.75 )
+shape = SubResource( 22 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="CraftingMenu"]
 
@@ -630,7 +667,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 27
+frame = 12
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]
@@ -676,9 +713,9 @@ text = "Hide"
 [connection signal="mouse_entered" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_mouse_exited"]
 [connection signal="pressed" from="CraftingMenu/Page1/DownButton" to="CraftingMenu" method="_on_DownButton_pressed"]
-[connection signal="input_event" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_HouseArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_HouseArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_HouseArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_TentArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_TentArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_TentArea_mouse_exited"]
 [connection signal="input_event" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_input_event"]
 [connection signal="mouse_entered" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_mouse_exited"]
@@ -692,6 +729,11 @@ text = "Hide"
 [connection signal="mouse_entered" from="CraftingMenu/Page2/KitchenArea" to="CraftingMenu" method="_on_KitchenArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page2/KitchenArea" to="CraftingMenu" method="_on_KitchenArea_mouse_exited"]
 [connection signal="pressed" from="CraftingMenu/Page2/UpButton" to="CraftingMenu" method="_on_UpButton_pressed"]
+[connection signal="pressed" from="CraftingMenu/Page2/Pg2DownButton" to="CraftingMenu" method="_on_Pg2DownButton_pressed"]
+[connection signal="pressed" from="CraftingMenu/Page3/Pg3UpButton" to="CraftingMenu" method="_on_Pg3UpButton_pressed"]
+[connection signal="input_event" from="CraftingMenu/Page3/SleepingBagArea" to="CraftingMenu" method="_on_SleepingBagArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page3/SleepingBagArea" to="CraftingMenu" method="_on_SleepingBagArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page3/SleepingBagArea" to="CraftingMenu" method="_on_SleepingBagArea_mouse_exited"]
 [connection signal="pressed" from="Buttons/Inventory" to="." method="_on_Inventory_pressed"]
 [connection signal="pressed" from="Buttons/Crafting" to="." method="_on_Crafting_pressed"]
 [connection signal="pressed" from="Buttons/Options" to="." method="_on_Options_pressed"]

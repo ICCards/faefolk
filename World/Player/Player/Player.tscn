@@ -2021,6 +2021,15 @@ margin_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
 texture = ExtResource( 17 )
+
+[node name="ScaledItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
+visible = false
+modulate = Color( 1, 1, 1, 0.627451 )
+margin_right = 32.0
+margin_bottom = 32.0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource( 17 )
 stretch_mode = 1
 
 [node name="RotateIcon" type="TextureRect" parent="PlaceItemsUI"]

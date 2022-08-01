@@ -10,14 +10,14 @@ var is_dead: bool = false
 var is_in_sight: bool = false
 var path: Array = []
 var player
-const SPEED: int = 100
+const SPEED: int = 110
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize()
 	Images.DuckVariations.shuffle()
 	$AnimatedSprite.frames = Images.DuckVariations[0]
-	los.cast_to = Vector2(rng.randi_range(150, 300), 0)
+	los.cast_to = Vector2(rng.randi_range(100, 300), 0)
 	if Util.chance(50):
 		$AnimatedSprite.flip_h = true
 
@@ -41,18 +41,22 @@ func move_randomly(delta):
 			$AnimatedSprite.play("walk")
 			in_idle_state = false
 			rng.randomize()
-			random_idle_pos = Vector2(rng.randi_range(-200, 200), rng.randi_range(-200, 200))
+			random_idle_pos = Vector2(rng.randi_range(-300, 300), rng.randi_range(-300, 300))
 			path = worldNavigation.get_simple_path(position, position + random_idle_pos, true)
-			if random_idle_pos.x < 0:
-				$AnimatedSprite.flip_h = true
-			else:
-				$AnimatedSprite.flip_h = false
 		else:
 			navigate(delta)
+
+func set_direction(new_pos):
+	var tempPos = position - new_pos
+	if tempPos.x > 0:
+		$AnimatedSprite.flip_h = true
+	else:
+		$AnimatedSprite.flip_h = false
 
 
 func navigate(delta):
 	if path.size() > 0:
+		set_direction(path[0])
 		position = position.move_toward(path[0], delta * SPEED)
 		if position == path[0]:
 			path.pop_front()
@@ -65,7 +69,7 @@ func idle_state():
 		in_idle_state = true
 		randomize()
 		yield(get_tree().create_timer(rand_range(0, 0.5)), "timeout")
-		if Util.chance(50):
+		if Util.chance(33):
 			$AnimatedSprite.play("eat")
 			yield($AnimatedSprite, "animation_finished")
 		random_idle_pos = null	
