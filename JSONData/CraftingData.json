@@ -39,6 +39,10 @@
          "wood": 20,
          "stone": 10
      },
+     "sleeping bag": {
+         "wood": 10,
+         "stone": 2
+     },
      "campfire": {
          "wood": 2,
          "stone": 2

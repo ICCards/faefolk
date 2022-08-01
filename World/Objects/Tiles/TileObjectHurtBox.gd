@@ -31,7 +31,7 @@ func _ready():
 	item_name == "fire pedestal" or \
 	item_name == "tall fire pedestal":
 		$Light2D.enabled = true
-	elif item_name == "house" or item_name == "sleeping bag" or item_name.substr(0, 4) == "tent":
+	elif item_name == "house" or item_name.substr(0, 12) == "sleeping bag" or item_name.substr(0, 4) == "tent":
 		queue_free()
 		
 func PlayEffect(_player_id):

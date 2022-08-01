@@ -150,8 +150,24 @@ func place_object_in_world(id, item_name, location):
 			tent.global_position = fence_tiles.map_to_world(location)
 			Server.world.call_deferred("add_child", tent, true)
 			Tiles.remove_invalid_tiles(location, Vector2(6,3))
-		"sleeping bag":
+		"sleeping bag down":
 			var sleepingBag = SleepingBag.instance()
+			sleepingBag.direction = "down"
+			Server.world.add_child(sleepingBag, true)
+			sleepingBag.global_position = valid_tiles.map_to_world(location) 
+		"sleeping bag up":
+			var sleepingBag = SleepingBag.instance()
+			sleepingBag.direction = "up"
+			Server.world.add_child(sleepingBag, true)
+			sleepingBag.global_position = valid_tiles.map_to_world(location) 
+		"sleeping bag right":
+			var sleepingBag = SleepingBag.instance()
+			sleepingBag.direction = "right"
+			Server.world.add_child(sleepingBag, true)
+			sleepingBag.global_position = valid_tiles.map_to_world(location) 
+		"sleeping bag left":
+			var sleepingBag = SleepingBag.instance()
+			sleepingBag.direction = "left"
 			Server.world.add_child(sleepingBag, true)
 			sleepingBag.global_position = valid_tiles.map_to_world(location) 
 		"wood path1":

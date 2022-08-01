@@ -3,6 +3,7 @@ extends Node2D
 var directions = ["down", "left", "up", "right"]
 var direction_index
 var path_index = 1
+var active: bool = false
 enum {
 	MOVEMENT, 
 	SWING,
@@ -14,6 +15,7 @@ func set_invisible():
 	$ColorIndicator.visible = false
 	$ItemToPlace.visible = false
 	$RotateIcon.visible = false
+	$ScaledItemToPlace.visible = false
 	
 func sendAction(action,data): 
 	match action:
@@ -31,24 +33,53 @@ func place_sleeping_bag_state(valid_tiles):
 	$RotateIcon.visible = true
 	$ColorIndicator.visible = true
 	$ColorIndicator.scale = Vector2(2, 1)
-	$ItemToPlace.visible = true
-	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
-	$ItemToPlace.rect_scale = Vector2(0.5, 0.5)
-	$ItemToPlace.rect_size = Vector2(128, 64)
-	$ItemToPlace.rect_position = Vector2(0,0)
+	$ScaledItemToPlace.visible = true
+	$ScaledItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
+	$ScaledItemToPlace.rect_scale = Vector2(0.5, 0.5)
+	$ScaledItemToPlace.rect_size = Vector2(128, 64)
+	$ScaledItemToPlace.rect_position = Vector2(0,0)
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
 	var location = valid_tiles.world_to_map(mousePos)
-	
-			
+	if direction == "up":
+		$ColorIndicator.scale = Vector2(1, 2)
+		$ScaledItemToPlace.rect_position = Vector2(32,-32)
+		$ScaledItemToPlace.rect_rotation = 90
+		$ScaledItemToPlace.flip_v = false
+	elif direction == "down":
+		$ColorIndicator.scale = Vector2(1, 2)
+		$ScaledItemToPlace.rect_position = Vector2(0,32)
+		$ScaledItemToPlace.rect_rotation = 270
+		$ScaledItemToPlace.flip_v = false
+	elif direction == "left":
+		$ColorIndicator.scale = Vector2(2, 1)
+		$ScaledItemToPlace.rect_position = Vector2(64,32)
+		$ScaledItemToPlace.rect_rotation = 180
+		$ScaledItemToPlace.flip_v = true
+	elif direction == "right":
+		$ColorIndicator.scale = Vector2(2, 1)
+		$ScaledItemToPlace.rect_position = Vector2(0,0)
+		$ScaledItemToPlace.rect_rotation = 0
+		$ScaledItemToPlace.flip_v = false
+	if get_parent().position.distance_to(mousePos) > 120:
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, Vector2(1,2)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(2,1)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	else:
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
+		if Input.is_action_pressed("mouse_click"):
+			place_object("sleeping bag " + direction, location, "placable")
+
+
 func place_tent_state(valid_tiles):
-	if $ItemToPlace.rect_size == Vector2(128, 64):
-		$ItemToPlace.rect_size = Vector2(0, 0)
 	get_rotation_index()
 	var direction = directions[direction_index]
 	$RotateIcon.visible = true
 	$ColorIndicator.visible = true
 	$ItemToPlace.visible = true
+	$ItemToPlace.rect_scale = Vector2(1, 1)
 	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/tent " + direction + ".png")
 	$ItemToPlace.rect_scale = Vector2(1, 1)
 	if direction == "up" or direction == "down":
@@ -74,10 +105,13 @@ func place_tent_state(valid_tiles):
 func get_rotation_index():
 	if direction_index == null:
 		direction_index = 0
-	if Input.is_action_pressed("rotate"):
+	if Input.is_action_pressed("rotate") and not active:
+		active = true
 		direction_index += 1
 		if direction_index == 4:
 			direction_index = 0
+		yield(get_tree().create_timer(0.2), "timeout")
+		active = false
 
 
 func place_item_state(event, item_name, valid_tiles):
