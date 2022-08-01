@@ -34,7 +34,7 @@ position = Vector2( 0, -30 )
 scale = Vector2( 0.75, 0.75 )
 frames = ExtResource( 1 )
 animation = "eat"
-frame = 9
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -45,7 +45,6 @@ shape = SubResource( 24 )
 [node name="LineOfSight" type="RayCast2D" parent="."]
 position = Vector2( 0, -2.99999 )
 rotation = -0.485202
-scale = Vector2( 1, 1 )
 enabled = true
 cast_to = Vector2( 320, 0 )
 

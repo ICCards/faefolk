@@ -11,7 +11,7 @@ onready var shoesSprite = $Shoes
 onready var toolEquippedSprite = $ToolEquipped
 
 
-func set_player_animation(_character, _anim, _tool):
+func set_player_animation(_character, _anim, var _tool = ""):
 	bodySprite.set_texture(_character.body_sprites[_anim])
 	armsSprite.set_texture(_character.arms_sprites[_anim])
 	accessorySprite.set_texture(_character.acc_sprites[_anim])

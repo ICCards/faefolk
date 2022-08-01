@@ -3,6 +3,11 @@ extends Node
 onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
 onready var PlayerHouseObject = preload("res://World/Objects/Farm/PlayerHouse.tscn")
+onready var SleepingBag = preload("res://World/Objects/Tiles/SleepingBag.tscn")
+onready var TentDown = preload("res://World/Objects/Farm/TentDown.tscn")
+onready var TentUp = preload("res://World/Objects/Farm/TentUp.tscn")
+onready var TentRight = preload("res://World/Objects/Farm/TentRight.tscn")
+onready var TentLeft = preload("res://World/Objects/Farm/TentLeft.tscn")
 
 onready var valid_tiles
 onready var fence_tiles 
@@ -25,7 +30,8 @@ enum Placables {
 	FIRE_PEDESTAL,
 	CAMPFIRE,
 	TENT_VERTICAL,
-	TENT_HORIZONTAL
+	TENT_HORIZONTAL,
+	TENT_ENLARGED,
 }
 
 enum Paths {
@@ -98,7 +104,7 @@ func place_object_in_world(id, item_name, location):
 			Server.player_house_id = str(id)
 			Server.world.get_node("PlacableTiles").call_deferred("add_child", playerHouseObject, true)
 			playerHouseObject.global_position = fence_tiles.map_to_world(location) + Vector2(6,6)
-			set_player_house_invalid_tiles(location)
+			Tiles.remove_invalid_tiles(location, Vector2(8,4))
 		"workbench":
 			object_tiles.set_cellv(location, Placables.WORKBENCH1)
 			valid_tiles.set_cellv(location, -1)
@@ -120,11 +126,34 @@ func place_object_in_world(id, item_name, location):
 			valid_tiles.set_cellv(location, -1)
 			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
 		### FIX ###
-		"tent horizontal":
-			object_tiles.set_cellv(location, Placables.TENT_HORIZONTAL)	
-		"tent":
-			set_player_tent_invalid_tiles(location)
-			object_tiles.set_cellv(location + Vector2(0, -1), Placables.TENT_VERTICAL)		
+		"tent down":
+			var tent = TentDown.instance()
+			tent.name = str(id)
+			tent.global_position = fence_tiles.map_to_world(location)
+			Server.world.call_deferred("add_child", tent, true)
+			Tiles.remove_invalid_tiles(location, Vector2(4,4))
+		"tent up":
+			var tent = TentUp.instance()
+			tent.name = str(id)
+			tent.global_position = fence_tiles.map_to_world(location)
+			Server.world.call_deferred("add_child", tent, true)
+			Tiles.remove_invalid_tiles(location, Vector2(4,4))
+		"tent right":
+			var tent = TentRight.instance()
+			tent.name = str(id)
+			tent.global_position = fence_tiles.map_to_world(location)
+			Server.world.call_deferred("add_child", tent, true)
+			Tiles.remove_invalid_tiles(location, Vector2(6,3))
+		"tent left":
+			var tent = TentLeft.instance()
+			tent.name = str(id)
+			tent.global_position = fence_tiles.map_to_world(location)
+			Server.world.call_deferred("add_child", tent, true)
+			Tiles.remove_invalid_tiles(location, Vector2(6,3))
+		"sleeping bag":
+			var sleepingBag = SleepingBag.instance()
+			Server.world.add_child(sleepingBag, true)
+			sleepingBag.global_position = valid_tiles.map_to_world(location) 
 		"wood path1":
 			path_tiles.set_cellv(location, Paths.WOOD_PATH1)
 		"wood path2":
@@ -168,13 +197,13 @@ func upgrade_grain_mill(player_pos):
 	elif object_tiles.get_cellv(valid_tiles.world_to_map(player_pos + Vector2(-32, -32))) == Placables.GRAIN_MILL2:
 		object_tiles.set_cellv(valid_tiles.world_to_map(player_pos + Vector2(-32, -32)), Placables.GRAIN_MILL3)
 
-func set_player_house_invalid_tiles(location):
-	for x in range(8):
-		for y in range(4):
-			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
-
-func set_player_tent_invalid_tiles(location):
-	for x in range(2):
-		for y in range(3):
-			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
+#func set_player_house_invalid_tiles(location):
+#	for x in range(8):
+#		for y in range(4):
+#			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
+#
+#func set_player_tent_invalid_tiles(location):
+#	for x in range(2):
+#		for y in range(3):
+#			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 

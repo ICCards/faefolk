@@ -1,6 +1,116 @@
 extends Node
 
 
+#	body_sleep_down = {
+#		0 : preload()
+#	},
+#	body_sleep_up = {
+#		0 : preload()
+#	},
+#	body_sleep_right = {
+#		0 : preload()
+#	},
+#	body_sleep_left = {
+#		0 : preload()
+#	},
+#
+#	arms_sleep_down = {
+#		0 : preload()
+#	},
+#	arms_sleep_up = {
+#		0 : preload()
+#	},
+#	arms_sleep_right = {
+#		0 : preload()
+#	},
+#	arms_sleep_left = {
+#		0 : preload()
+#	},
+#
+#	acc_sleep_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_sleep_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_sleep_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_sleep_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_sleep_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_sleep_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_sleep_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_sleep_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_sleep_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_sleep_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_sleep_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_sleep_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_sleep_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_sleep_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_sleep_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_sleep_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_sleep_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_sleep_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_sleep_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_sleep_left = {
+#		0 : null,
+#		1 : preload()
+#	},
 
 
 #	body_death_down = {
@@ -63,19 +173,19 @@ extends Node
 #		1 : preload()
 #	},
 #
-#	shirt_death_down = {
+#	shirts_death_down = {
 #		0 : null,
 #		1 : preload()
 #	},
-#	shirt_death_up = {
+#	shirts_death_up = {
 #		0 : null,
 #		1 : preload()
 #	},
-#	shirt_death_right = {
+#	shirts_death_right = {
 #		0 : null,
 #		1 : preload()
 #	},
-#	shirt_death_left = {
+#	shirts_death_left = {
 #		0 : null,
 #		1 : preload()
 #	},
@@ -4558,6 +4668,10 @@ var body_sprites = {
 	'death_down': null,
 	'death_left': null,
 	'death_right': null,
+	'sleep_up': null,
+	'sleep_down': null,
+	'sleep_left': null,
+	'sleep_right': null,
 	}
 
 var arms_sprites = {
@@ -4581,6 +4695,10 @@ var arms_sprites = {
 	'death_down': null,
 	'death_left': null,
 	'death_right': null,
+	'sleep_up': null,
+	'sleep_down': null,
+	'sleep_left': null,
+	'sleep_right': null,
 	};
 
 var acc_sprites = {
@@ -4604,6 +4722,10 @@ var acc_sprites = {
 	'death_down': null,
 	'death_left': null,
 	'death_right': null,
+	'sleep_up': null,
+	'sleep_down': null,
+	'sleep_left': null,
+	'sleep_right': null,
 	};
 
 var headAtr_sprites = {
@@ -4627,6 +4749,10 @@ var headAtr_sprites = {
 	'death_down': null,
 	'death_left': null,
 	'death_right': null,
+	'sleep_up': null,
+	'sleep_down': null,
+	'sleep_left': null,
+	'sleep_right': null,
 	};
 
 var pants_sprites = {
@@ -4650,6 +4776,10 @@ var pants_sprites = {
 	'death_down': null,
 	'death_left': null,
 	'death_right': null,
+	'sleep_up': null,
+	'sleep_down': null,
+	'sleep_left': null,
+	'sleep_right': null,
 	};
 
 var shirts_sprites = {
@@ -4673,6 +4803,10 @@ var shirts_sprites = {
 	'death_down': null,
 	'death_left': null,
 	'death_right': null,
+	'sleep_up': null,
+	'sleep_down': null,
+	'sleep_left': null,
+	'sleep_right': null,
 	};
 
 var shoes_sprites = {
@@ -4696,6 +4830,10 @@ var shoes_sprites = {
 	'death_down': null,
 	'death_left': null,
 	'death_right': null,
+	'sleep_up': null,
+	'sleep_down': null,
+	'sleep_left': null,
+	'sleep_right': null,
 	};
 
 
@@ -4790,6 +4928,10 @@ func set_attributes(set_char):
 	'watering_up' : character.body_watering_up[0],
 	'watering_right' : character.body_watering_right[0],
 	'watering_left' : character.body_watering_left[0],
+	'sleep_up': character.body_sleep_up[0],
+	'sleep_down': character.body_sleep_down[0],
+	'sleep_left': character.body_sleep_left[0],
+	'sleep_right': character.body_sleep_right[0],
 #	'holding_walk_down' : character.body_holding_walk_down[0], 
 #	'holding_walk_up' : character.body_holding_walk_up[0], 
 #	'holding_walk_left' : character.body_holding_walk_left[0], 
@@ -4820,6 +4962,10 @@ func set_attributes(set_char):
 	'watering_up' : character.arms_watering_up[0],
 	'watering_right' : character.arms_watering_right[0],
 	'watering_left' : character.arms_watering_left[0],
+	'sleep_up': character.arms_sleep_up[0],
+	'sleep_down': character.arms_sleep_down[0],
+	'sleep_left': character.arms_sleep_left[0],
+	'sleep_right': character.arms_sleep_right[0],
 #	'holding_walk_down' : character.arms_holding_walk_down[0], 
 #	'holding_walk_up' : character.arms_holding_walk_up[0], 
 #	'holding_walk_left' : character.arms_holding_walk_left[0], 
@@ -4850,6 +4996,10 @@ func set_attributes(set_char):
 	'watering_up' : character.acc_watering_up[acc_index],
 	'watering_right' : character.acc_watering_right[acc_index],
 	'watering_left' : character.acc_watering_left[acc_index],
+	'sleep_up': character.acc_sleep_up[acc_index],
+	'sleep_down': character.acc_sleep_down[acc_index],
+	'sleep_left': character.acc_sleep_left[acc_index],
+	'sleep_right': character.acc_sleep_right[acc_index],
 #	'holding_walk_down' : character.acc_holding_walk_down[acc_index], 
 #	'holding_walk_up' : character.acc_holding_walk_up[acc_index], 
 #	'holding_walk_left' : character.acc_holding_walk_left[acc_index], 
@@ -4880,6 +5030,10 @@ func set_attributes(set_char):
 	'watering_up' : character.head_attribute_watering_up[headAtr_index],
 	'watering_right' : character.head_attribute_watering_right[headAtr_index],
 	'watering_left' : character.head_attribute_watering_left[headAtr_index],
+	'sleep_up': character.head_attribute_sleep_up[headAtr_index],
+	'sleep_down': character.head_attribute_sleep_down[headAtr_index],
+	'sleep_left': character.head_attribute_sleep_left[headAtr_index],
+	'sleep_right': character.head_attribute_sleep_right[headAtr_index],
 #	'holding_walk_down' : character.head_attribute_holding_walk_down[headAtr_index], 
 #	'holding_walk_up' : character.head_attribute_holding_walk_up[headAtr_index], 
 #	'holding_walk_left' : character.head_attribute_holding_walk_left[headAtr_index], 
@@ -4910,6 +5064,10 @@ func set_attributes(set_char):
 	'watering_up' : character.pants_watering_up[pants_index],
 	'watering_right' : character.pants_watering_right[pants_index],
 	'watering_left' : character.pants_watering_left[pants_index],
+	'sleep_up': character.pants_sleep_up[pants_index],
+	'sleep_down': character.pants_sleep_down[pants_index],
+	'sleep_left': character.pants_sleep_left[pants_index],
+	'sleep_right': character.pants_sleep_right[pants_index],
 #	'holding_walk_down' : character.pants_holding_walk_down[pants_index], 
 #	'holding_walk_up' : character.pants_holding_walk_up[pants_index], 
 #	'holding_walk_left' : character.pants_holding_walk_left[pants_index], 
@@ -4940,7 +5098,10 @@ func set_attributes(set_char):
 	'watering_up' : character.shirts_watering_up[shirts_index],
 	'watering_right' : character.shirts_watering_right[shirts_index],
 	'watering_left' : character.shirts_watering_left[shirts_index],
-	
+	'sleep_up': character.shirts_sleep_up[shirts_index],
+	'sleep_down': character.shirts_sleep_down[shirts_index],
+	'sleep_left': character.shirts_sleep_left[shirts_index],
+	'sleep_right': character.shirts_sleep_right[shirts_index],
 #	'holding_walk_down' : character.shirts_holding_walk_down[shirts_index], 
 #	'holding_walk_up' : character.shirts_holding_walk_up[shirts_index], 
 #	'holding_walk_left' : character.shirts_holding_walk_left[shirts_index], 
@@ -4971,7 +5132,10 @@ func set_attributes(set_char):
 	'watering_up' : character.shoes_watering_up[shoes_index],
 	'watering_right' : character.shoes_watering_right[shoes_index],
 	'watering_left' : character.shoes_watering_left[shoes_index],
-	
+	'sleep_up': character.shoes_sleep_up[shoes_index],
+	'sleep_down': character.shoes_sleep_down[shoes_index],
+	'sleep_left': character.shoes_sleep_left[shoes_index],
+	'sleep_right': character.shoes_sleep_right[shoes_index],
 #	'holding_walk_down' : character.shoes_holding_walk_down[shoes_index], 
 #	'holding_walk_up' : character.shoes_holding_walk_up[shoes_index], 
 #	'holding_walk_left' : character.shoes_holding_walk_left[shoes_index], 

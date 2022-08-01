@@ -15,8 +15,10 @@ const SPEED: int = 100
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	rng.randomize()
 	Images.BunnyVariations.shuffle()
 	$AnimatedSprite.frames = Images.BunnyVariations[0]
+	los.cast_to = Vector2(rng.randi_range(150, 300), 0)
 	if Util.chance(50):
 		$AnimatedSprite.flip_h = true
 

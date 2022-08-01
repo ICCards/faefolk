@@ -1,5 +1,23 @@
 extends Node
 
+func validate_tiles(location, dimensions):
+	var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
+	var active = false
+	if not active:
+		active = true
+		for x in range(dimensions.x):
+			for y in range(dimensions.y):
+				if valid_tiles.get_cellv( Vector2(x, -y) + location) == -1: 
+					return false
+					break
+		return true
+
+
+func remove_invalid_tiles(location, dimensions):
+	var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
+	for x in range(dimensions.x):
+		for y in range(dimensions.y):
+			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 
 func isValidAutoTile(_pos, _map):
 	var count = 0
