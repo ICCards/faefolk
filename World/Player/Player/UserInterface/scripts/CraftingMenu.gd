@@ -92,13 +92,14 @@ func initialize_crafting():
 				$Page3.get_node(item).modulate = Color(1, 1, 1, 0.4)
 
 func _physics_process(delta):
-	if item != null:
-		$CraftableItemDescription.visible = true
-		$CraftableItemDescription/Title.text = item[0].to_upper() + item.substr(1,-1)
-		$CraftableItemDescription/Materials.text = "Wood: " + str(JsonData.crafting_data[item]["wood"]) + " - Stone: " + str(JsonData.crafting_data[item]["stone"])
-		$CraftableItemDescription.position = get_local_mouse_position() + Vector2(140, 100)
-	else:
-		$CraftableItemDescription.visible = false
+	pass
+#	if item != null:
+#		$CraftableItemDescription.visible = true
+#		$CraftableItemDescription/Title.text = item[0].to_upper() + item.substr(1,-1)
+#		$CraftableItemDescription/Materials.text = "Wood: " + str(JsonData.crafting_data[item]["wood"]) + " - Stone: " + str(JsonData.crafting_data[item]["stone"])
+#		$CraftableItemDescription.position = get_local_mouse_position() + Vector2(140, 100)
+#	else:
+#		$CraftableItemDescription.visible = false
 
 func entered_crafting_area(_item):
 	$SoundEffects.stream = Sounds.button_hover
