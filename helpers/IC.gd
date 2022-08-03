@@ -6,22 +6,22 @@ var window = JavaScript.get_interface("window")
 #func _ready():
 #	pass
 
-#func _login(args):
-#	# Get the first argument (the DOM event in our case).
-#	var js_event = args[0]
-#	print("login message")
-#	print(js_event)
-#	# Call preventDefault and set the `returnValue` property of the DOM event.
-#	#js_event.preventDefault()
-#	#js_event.returnValue = ''
-#func _connect(args):
-#	# Get the first argument (the DOM event in our case).
-#	var js_event = args[0]
-#	print("login message")
-#	print(js_event)
-#	# Call preventDefault and set the `returnValue` property of the DOM event.
-#	#js_event.preventDefault()
-#	#js_event.returnValue = ''
+func _login(args):
+	# Get the first argument (the DOM event in our case).
+	var js_event = args[0]
+	print("login message")
+	print(js_event)
+	# Call preventDefault and set the `returnValue` property of the DOM event.
+	#js_event.preventDefault()
+	#js_event.returnValue = ''
+func _connect(args):
+	# Get the first argument (the DOM event in our case).
+	var js_event = args[0]
+	print("login message")
+	print(js_event)
+	# Call preventDefault and set the `returnValue` property of the DOM event.
+	#js_event.preventDefault()
+	#js_event.returnValue = ''
 
 
 func login(callback):

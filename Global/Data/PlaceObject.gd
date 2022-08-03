@@ -66,106 +66,100 @@ func place_object_in_world(id, item_name, location):
 	tileObjectHurtBox.global_position = valid_tiles.map_to_world(location) + Vector2(16, 16)
 	match item_name:
 		"torch":
-			valid_tiles.set_cellv(location, -1)
+			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.TORCH)
 		"campfire":
-			valid_tiles.set_cellv(location, -1)
+			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.CAMPFIRE)
-#			light_tiles.set_cellv(location, 0)
-#			light_tiles.set_cellv(location, 1)
 		"fire pedestal":
-			valid_tiles.set_cellv(location, -1)
+			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL)
 		"tall fire pedestal":
-			valid_tiles.set_cellv(location, -1)
+			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL_TALL)
 		"wood fence":
+			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			fence_tiles.set_cellv(location, 0)
 			fence_tiles.update_bitmask_region()
-			valid_tiles.set_cellv(location, -1)
 		"wood barrel":
+			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.BARREL)
-			valid_tiles.set_cellv(location, -1)
 		"wood box":
+			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.BOX)
-			valid_tiles.set_cellv(location, -1)
 		"wood chest":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.WOOD_CHEST)
-			valid_tiles.set_cellv(location, -1)
-			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
 		"stone chest":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.STONE_CHEST)
-			valid_tiles.set_cellv(location, -1)
-			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
 		"house":
+			Tiles.remove_invalid_tiles(location, Vector2(8,4))
 			var playerHouseObject = PlayerHouseObject.instance()
 			playerHouseObject.name = str(id)
 			Server.player_house_position = location
 			Server.player_house_id = str(id)
 			Server.world.get_node("PlacableTiles").call_deferred("add_child", playerHouseObject, true)
 			playerHouseObject.global_position = fence_tiles.map_to_world(location) + Vector2(6,6)
-			Tiles.remove_invalid_tiles(location, Vector2(8,4))
 		"workbench":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.WORKBENCH1)
-			valid_tiles.set_cellv(location, -1)
-			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
 		"workbench2":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.WORKBENCH2)
-			valid_tiles.set_cellv(location, -1)
-			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
 		"workbench3":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.WORKBENCH3)
-			valid_tiles.set_cellv(location, -1)
-			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
 		"grain mill":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.GRAIN_MILL1)
-			valid_tiles.set_cellv(location, -1)
-			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
 		"stove":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.STOVE1)
-			valid_tiles.set_cellv(location, -1)
-			valid_tiles.set_cellv(location + Vector2(1, 0), -1)
-		### FIX ###
 		"tent down":
+			Tiles.remove_invalid_tiles(location, Vector2(4,4))
 			var tent = TentDown.instance()
 			tent.name = str(id)
 			tent.global_position = fence_tiles.map_to_world(location)
 			Server.world.call_deferred("add_child", tent, true)
-			Tiles.remove_invalid_tiles(location, Vector2(4,4))
 		"tent up":
+			Tiles.remove_invalid_tiles(location, Vector2(4,4))
 			var tent = TentUp.instance()
 			tent.name = str(id)
 			tent.global_position = fence_tiles.map_to_world(location)
 			Server.world.call_deferred("add_child", tent, true)
-			Tiles.remove_invalid_tiles(location, Vector2(4,4))
 		"tent right":
+			Tiles.remove_invalid_tiles(location, Vector2(6,3))
 			var tent = TentRight.instance()
 			tent.name = str(id)
 			tent.global_position = fence_tiles.map_to_world(location)
 			Server.world.call_deferred("add_child", tent, true)
-			Tiles.remove_invalid_tiles(location, Vector2(6,3))
 		"tent left":
+			Tiles.remove_invalid_tiles(location, Vector2(6,3))
 			var tent = TentLeft.instance()
 			tent.name = str(id)
 			tent.global_position = fence_tiles.map_to_world(location)
 			Server.world.call_deferred("add_child", tent, true)
-			Tiles.remove_invalid_tiles(location, Vector2(6,3))
 		"sleeping bag down":
+			Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			var sleepingBag = SleepingBag.instance()
 			sleepingBag.direction = "down"
 			Server.world.add_child(sleepingBag, true)
 			sleepingBag.global_position = valid_tiles.map_to_world(location) 
 		"sleeping bag up":
+			Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			var sleepingBag = SleepingBag.instance()
 			sleepingBag.direction = "up"
 			Server.world.add_child(sleepingBag, true)
 			sleepingBag.global_position = valid_tiles.map_to_world(location) 
 		"sleeping bag right":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			var sleepingBag = SleepingBag.instance()
 			sleepingBag.direction = "right"
 			Server.world.add_child(sleepingBag, true)
 			sleepingBag.global_position = valid_tiles.map_to_world(location) 
 		"sleeping bag left":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			var sleepingBag = SleepingBag.instance()
 			sleepingBag.direction = "left"
 			Server.world.add_child(sleepingBag, true)
@@ -212,14 +206,4 @@ func upgrade_grain_mill(player_pos):
 		object_tiles.set_cellv(valid_tiles.world_to_map(player_pos + Vector2(0, -32)), Placables.GRAIN_MILL3)
 	elif object_tiles.get_cellv(valid_tiles.world_to_map(player_pos + Vector2(-32, -32))) == Placables.GRAIN_MILL2:
 		object_tiles.set_cellv(valid_tiles.world_to_map(player_pos + Vector2(-32, -32)), Placables.GRAIN_MILL3)
-
-#func set_player_house_invalid_tiles(location):
-#	for x in range(8):
-#		for y in range(4):
-#			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
-#
-#func set_player_tent_invalid_tiles(location):
-#	for x in range(2):
-#		for y in range(3):
-#			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 

@@ -118,9 +118,16 @@ func _on_ConnectToPlugButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
-	IC.connect_plug(connect_callback)
+	_login_test()
+	#IC.connect_plug(connect_callback)
 	$ConnectToPlug.visible = false
 	$LoadingIndicator.visible = true	
+
+func _login_test():
+	print("logging in")
+	Server.rpc_id(1, "login_test")
+	get_parent().spawn_player_in_menu()
+
 
 func _on_ConnectToPlugButton_mouse_entered():
 	_play_hover_effect("connect to plug")

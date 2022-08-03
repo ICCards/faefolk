@@ -10,7 +10,7 @@ var is_in_sight: bool = false
 var is_dead: bool = false
 var path: Array = []
 var player
-const SPEED: int = 170
+const SPEED: int = 190
 
 var rng = RandomNumberGenerator.new()
 
@@ -25,7 +25,7 @@ func _ready():
 
 func _physics_process(delta):
 	if is_in_sight:
-		player = get_node("/root/World/Players/" + Server.player_id)
+		player = get_node("/root/World/Players/" + Server.player_id).get_children()[0]
 		if player:
 			los.look_at(player.global_position)
 			check_player_in_detection()

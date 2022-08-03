@@ -11,7 +11,10 @@ onready var snow = $GeneratedTiles/SnowTiles
 onready var beachBorderTiles = $GeneratedTiles/AnimatedBeachBorder
 onready var sandBeachBorderTiles = $GeneratedTiles/SandBeachBorder
 onready var desert = $GeneratedTiles/DesertTiles
+onready var Players = $Players
 
+onready var Input_controller_template = preload("res://World/Player/PlayerTemplate/InputControllerTemplate.tscn")
+onready var Input_controller = preload("res://World/Player/Player/InputController.tscn")
 onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
 onready var Player_pet = preload("res://World/Player/Pet/PlayerPet.tscn")
@@ -47,11 +50,9 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_FARM_OBJECTS = 550
-const NUM_GRASS_BUNCHES = 150
-const NUM_GRASS_TILES = 75
-const NUM_FLOWER_TILES = 250
-const MAX_GRASS_BUNCH_SIZE = 24
+const NUM_DUCKS = 1500
+const NUM_BUNNIES = 1500
+
 const _character = preload("res://Global/Data/Characters.gd")
 
 var last_world_state = 0
@@ -84,7 +85,6 @@ func _ready():
 	Server.generated_map.clear()
 	Server.generate_map()
 	wait_for_map()
-	Server.world = self
 
 
 func wait_for_map():
@@ -94,41 +94,56 @@ func wait_for_map():
 		yield(get_tree().create_timer(0.5), "timeout")
 		wait_for_map()
 
-func spawnPlayer():
-	print('gettiing player')
-	print(Server.player)
-	if not Server.player.empty():
-		print("My Character")
-		print(Server.player["c"])
-		var player = Player.instance()
-		print(str(Server.player["p"]))
-		#player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
-		player.name = Server.player_id
-		player.principal = Server.player["principal"]
-		player.character = _character.new()
-		player.character.LoadPlayerCharacter(Server.player["c"])
-		$Players.add_child(player)
-		if Server.player_house_position == null:
-			print("setting position")
-			player.position = dirt.map_to_world(Util.string_to_vector2(Server.player["p"]))
-		else: 
-			player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
+#func spawnPlayer():
+#	print('gettiing player')
+#	print(Server.player)
+#	if not Server.player.empty():
+#		print("My Character")
+#		print(Server.player["c"])
+#		var player = Player.instance()
+#		print(str(Server.player["p"]))
+#		#player.initialize_camera_limits(Vector2(-64,-160), Vector2(9664, 9664))
+#		player.name = Server.player_id
+#		player.principal = Server.player["principal"]
+#		player.character = _character.new()
+#		player.character.LoadPlayerCharacter(Server.player["c"])
+#		$Players.add_child(player)
+#		if Server.player_house_position == null:
+#			print("setting position")
+#			player.position = dirt.map_to_world(Util.string_to_vector2(Server.player["p"]))
+#		else: 
+#			player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
 		
-func spawnPlayerExample(pos):
-	var player = Player.instance()
+#func spawnPlayerExample(pos):
+#	var player = Player.instance()
+#	#player.initialize_camera_limits(Vector2(-64,-160), Vector2(96640, 96640))
+#	player.name = Server.player_id
+#	player.character = _character.new()
+#	player.character.LoadPlayerCharacter(Server.character)
+#	$Players.add_child(player)
+#	if Server.player_house_position == null:
+#		var loc = Util.string_to_vector2(pos)
+#		player.position = loc * 32
+#		#spawn_IC_Ghost(loc)
+#		#spawnRandomBear(loc)
+#	else: 
+#		player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
+#	#spawn_IC_kitty()
+	
+func spawnPlayerExample():
+	var controller = Input_controller.instance()
+	var player = controller.get_children()[0]
 	#player.initialize_camera_limits(Vector2(-64,-160), Vector2(96640, 96640))
-	player.name = Server.player_id
+	controller.name = str(get_tree().get_network_unique_id())
+	player.name = str(get_tree().get_network_unique_id())
 	player.character = _character.new()
-	player.character.LoadPlayerCharacter(Server.character)
-	$Players.add_child(player)
+	player.character.LoadPlayerCharacter(Server.player["c"])
+	$Players.add_child(controller)
 	if Server.player_house_position == null:
-		var loc = Util.string_to_vector2(pos)
-		player.position = loc * 32
-		#spawn_IC_Ghost(loc)
-		#spawnRandomBear(loc)
+		player.position = Server.player["p"]
 	else: 
 		player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
-	#spawn_IC_kitty()
+	spawn_IC_kitty()
 
 	
 func spawn_IC_Ghost(loc):
@@ -156,19 +171,26 @@ func get_valid_player_spawn_position():
 	else:
 		get_valid_player_spawn_position()
 		
+		
+#func spawnOtherPlayers():
+#	for player in Server.active_players:
+#		spawnNewPlayer(player)
 
 func spawnNewPlayer(player):
+	print("spawn player template")
 	if not player.empty():
 		if not has_node(str(player["id"])):
-			print("spawning new player")
+			print("spawning new player " + player["c"])
 			print(player["p"])
-			var new_player = Player_template.instance()
-			new_player.position = dirt.map_to_world(Util.string_to_vector2(player["p"]))
+			var controller = Input_controller_template.instance()
+			var new_player = controller.get_children()[0]
+			controller.name = str(player["id"])
+			new_player.position = player["p"]
 			new_player.name = str(player["id"])
-			new_player.principal = player["principal"]
+			#new_player.principal = player["principal"]
 			new_player.character = _character.new()
 			new_player.character.LoadPlayerCharacter(player["c"])
-			$Players.add_child(new_player)
+			$Players.add_child(controller)
 			
 	
 func DespawnPlayer(player_id):
@@ -187,43 +209,43 @@ func buildMap(map):
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
 	for id in map["dirt"]:
-		var loc = Util.string_to_vector2(map["dirt"][id])
-		var x = loc.x
-		var y = loc.y
-		tile_ids["" + str(x) + "" + str(y)] = id
+#		var loc = Util.string_to_vector2(map["dirt"][id])
+#		var x = loc.x
+#		var y = loc.y
+#		tile_ids["" + str(x) + "" + str(y)] = id
 #		if map["dirt"][id]["isWatered"]:
 #			watered.set_cellv(loc, 0)
 #			hoed.set_cellv(loc, 0)
 #		if map["dirt"][id]["isHoed"]:
 #			hoed.set_cellv(loc, 0)
-		dirt.set_cellv(loc, 0)
+		dirt.set_cellv(map["dirt"][id], 0)
 	hoed.update_bitmask_region()
 	watered.update_bitmask_region()
 	print("LOADED DIRT")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["plains"]:
-		var loc = Util.string_to_vector2(map["plains"][id])
+		var loc = map["plains"][id]
 		plains.set_cellv(loc, 0)
 	print("LOADED PLAINS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["forest"]:
-		var loc = Util.string_to_vector2(map["forest"][id])
+		var loc = map["forest"][id]
 		forest.set_cellv(loc, 0)
 	print("LOADED DG")
 	get_node("loadingScreen").set_phase("Building trees")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["snow"]:
-		var loc = Util.string_to_vector2(map["snow"][id])
+		var loc = map["snow"][id]
 		snow.set_cellv(loc, 0)
 	for id in map["desert"]:
-		var loc = Util.string_to_vector2(map["desert"][id])
+		var loc = map["desert"][id]
 		desert.set_cellv(loc, 0)
 	for id in map["beach"]:
-		var loc = Util.string_to_vector2(map["beach"][id])
+		var loc = map["beach"][id]
 		sandBeachBorderTiles.set_cellv(loc, 0)
 	for id in map["tree"]:
-		var loc = Util.string_to_vector2(map["tree"][id]["l"])
-		set_valid_tiles(loc, "tree")
+		var loc = map["tree"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "tree")
 		var biome = map["tree"][id]["b"]
 		if biome == "desert":
 			var object = DesertTreeObject.instance()
@@ -244,8 +266,8 @@ func buildMap(map):
 	print("LOADED TREES")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["log"]:
-		var loc = Util.string_to_vector2(map["log"][id]["l"])
-		set_valid_tiles(loc)
+		var loc = map["log"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "log")
 		rng.randomize()
 		var variety = rng.randi_range(0, 11)
 		var object = BranchObject.instance()
@@ -257,8 +279,8 @@ func buildMap(map):
 	print("LOADED LOGS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["stump"]:
-		var loc = Util.string_to_vector2(map["stump"][id]["l"])
-		set_valid_tiles(loc, "stump")
+		var loc = map["stump"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "stump")
 		treeTypes.shuffle()
 		var variety = treeTypes.front()
 		var object = StumpObject.instance()
@@ -271,8 +293,8 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Building ore")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
-		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
-		set_valid_tiles(loc, "large ore")
+		var loc = map["ore_large"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "large ore")
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = OreObject.instance()
@@ -284,8 +306,8 @@ func buildMap(map):
 	print("LOADED LARGE OrE")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore"]:
-		var loc = Util.string_to_vector2(map["ore"][id]["l"])
-		set_valid_tiles(loc)
+		var loc = map["ore"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "ore")
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = SmallOreObject.instance()
@@ -298,8 +320,8 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	var count = 0
 	for id in map["tall_grass"]:
-		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
-		#set_valid_tiles(loc)
+		var loc = map["tall_grass"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "tall grass")
 		count += 1
 		var object = TallGrassObject.instance()
 		object.biome = map["tall_grass"][id]["b"]
@@ -313,8 +335,8 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
 		count += 1
-		var loc = Util.string_to_vector2(map["flower"][id]["l"])
-		#set_valid_tiles(loc)
+		var loc = map["flower"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "flower")
 		var object = FlowerObject.instance()
 		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
 		$NatureObjects.add_child(object,true)
@@ -332,13 +354,13 @@ func buildMap(map):
 	yield(get_tree().create_timer(1.0), "timeout")
 	Server.player_state = "WORLD"
 	print("Map loaded")
-	Server.world = self
 	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
 	#spawnPlayer()
-	spawnPlayerExample(map["beach"][map["beach"].keys()[rng.randi_range(0, map["beach"].size() - 1)]])
+	spawnPlayerExample()
 	Server.isLoaded = true
-	spawn_animals()
+	Server.world = self
+#	spawn_animals()
 	
 #	spawnRandomSnake()
 #	yield(get_tree().create_timer(rand_range(0.1, 1.0)), "timeout")
@@ -352,21 +374,10 @@ func buildMap(map):
 
 
 func spawn_animals():
-	for i in range(1500):
+	for i in range(NUM_BUNNIES):
 		spawnRandomBunny()
-	for i in range(1500):
+	for i in range(NUM_DUCKS):
 		spawnRandomDuck()
-	
-
-func set_valid_tiles(_pos, _name = ""):
-	if _name == "tree" or _name == "stump" or _name == "large ore":
-		validTiles.set_cellv(_pos, -1)
-		validTiles.set_cellv(_pos + Vector2(-1, -1), -1 )
-		validTiles.set_cellv(_pos + Vector2(-1, 0), -1 )
-		validTiles.set_cellv(_pos + Vector2(0, -1), -1)
-	else:
-		validTiles.set_cellv(_pos, -1)
-		
 	
 func set_water_tiles():
 	for x in range(1000):
