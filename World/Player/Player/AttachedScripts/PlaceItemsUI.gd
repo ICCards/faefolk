@@ -153,9 +153,9 @@ func place_item_state(event, item_name, valid_tiles):
 		$ColorIndicator.scale = Vector2(1, 1)
 		$ItemToPlace.rect_position = Vector2(0,-32)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
-	if valid_tiles.get_cellv(location) == -1 or get_parent().position.distance_to(mousePos) > 120:
+	if valid_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
-	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and valid_tiles.get_cellv(location + Vector2(1,0)) == -1:
+	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and valid_tiles.get_cellv(location + Vector2(1,0)) != 0:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	elif item_name == "house" and not Tiles.validate_tiles(location, Vector2(8,4)):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
@@ -176,7 +176,7 @@ func place_path_state(event, item_name, valid_object_tiles, path_tiles):
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
 	var location = valid_object_tiles.world_to_map(mousePos)
-	if path_tiles.get_cellv(location) != -1 or valid_object_tiles.get_cellv(location) == -1 or get_parent().position.distance_to(mousePos) > 120:
+	if path_tiles.get_cellv(location) != -1 or valid_object_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
@@ -211,7 +211,7 @@ func place_seed_state(event, item_name, valid_object_tiles, hoed_tiles):
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
 	var location = valid_object_tiles.world_to_map(mousePos)
-	if hoed_tiles.get_cellv(location) == -1 or valid_object_tiles.get_cellv(location) == -1 or get_parent().position.distance_to(mousePos) > 120:
+	if hoed_tiles.get_cellv(location) == -1 or valid_object_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:	
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")

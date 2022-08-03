@@ -10,21 +10,21 @@ var is_dead: bool = false
 var is_in_sight: bool = false
 var path: Array = []
 var player
-const SPEED: int = 110
+const SPEED: int = 140
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize()
 	Images.DuckVariations.shuffle()
 	$AnimatedSprite.frames = Images.DuckVariations[0]
-	los.cast_to = Vector2(rng.randi_range(100, 300), 0)
+	los.cast_to = Vector2(rng.randi_range(100, 400), 0)
 	if Util.chance(50):
 		$AnimatedSprite.flip_h = true
 
 
 func _physics_process(delta):
 	if is_in_sight:
-		player = get_node("/root/World/Players/" + Server.player_id)
+		player = get_node("/root/World/Players/" + Server.player_id).get_children()[0]
 		if player:
 			los.look_at(player.global_position)
 			check_player_in_detection()

@@ -40,17 +40,17 @@ var male = {
 	body_swing_left = {
 		0 : preload("res://Characters/Human/male/SWING/body/left/body.png")
 	},
-	body_holding_down = {
-		0 : preload("res://Characters/Human/male/HOLDING/body/down/body.png")
+	body_holding_walk_down = {
+		0 : preload("res://Characters/Human/male/HOLDING WALK/body/down/body.png")
 	},
-	body_holding_up = {
-		0 : preload("res://Characters/Human/male/HOLDING/body/up/body.png")
+	body_holding_walk_up = {
+		0 : preload("res://Characters/Human/male/HOLDING WALK/body/up/body.png")
 	},
-	body_holding_right = {
-		0 : preload("res://Characters/Human/male/HOLDING/body/right/body.png")
+	body_holding_walk_right = {
+		0 : preload("res://Characters/Human/male/HOLDING WALK/body/right/body.png")
 	},
-	body_holding_left = {
-		0 : preload("res://Characters/Human/male/HOLDING/body/left/body.png")
+	body_holding_walk_left = {
+		0 : preload("res://Characters/Human/male/HOLDING WALK/body/left/body.png")
 	},
 
 
@@ -93,17 +93,17 @@ var male = {
 		0 : preload("res://Characters/Human/male/SWING/body/left/arms.png")
 	},
 	
-	arms_holding_down = {
-		0 : preload("res://Characters/Human/male/HOLDING/body/down/arms.png")
+	arms_holding_walk_down = {
+		0 : preload("res://Characters/Human/male/HOLDING WALK/body/down/arms.png")
 	},
-	arms_holding_up = {
-		0 : preload("res://Characters/Human/male/HOLDING/body/up/arms.png")
+	arms_holding_walk_up = {
+		0 : preload("res://Characters/Human/male/HOLDING WALK/body/up/arms.png")
 	},
-	arms_holding_right = {
-		0 : preload("res://Characters/Human/male/HOLDING/body/right/arms.png")
+	arms_holding_walk_right = {
+		0 : preload("res://Characters/Human/male/HOLDING WALK/body/right/arms.png")
 	},
-	arms_holding_left = {
-		0 : preload("res://Characters/Human/male/HOLDING/body/left/arms.png")
+	arms_holding_walk_left = {
+		0 : preload("res://Characters/Human/male/HOLDING WALK/body/left/arms.png")
 	},
 
 
@@ -147,16 +147,16 @@ var male = {
 		0 : null,
 	},
 	
-	acc_holding_down = {
+	acc_holding_walk_down = {
 		0 : null,
 	},
-	acc_holding_up = {
+	acc_holding_walk_up = {
 		0 : null,
 	},
-	acc_holding_right = {
+	acc_holding_walk_right = {
 		0 : null,
 	},
-	acc_holding_left = {
+	acc_holding_walk_left = {
 		0 : null,
 	},
 
@@ -212,21 +212,21 @@ var male = {
 		1 : preload("res://Characters/Human/male/SWING/assets/left/head_attribute/hair.png"),
 	},
 	
-	head_attribute_holding_down = {
+	head_attribute_holding_walk_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/down/hair.png"),
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/down/hair.png"),
 	},
-	head_attribute_holding_up = {
+	head_attribute_holding_walk_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/up/hair.png"),
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/up/hair.png"),
 	},
-	head_attribute_holding_right = {
+	head_attribute_holding_walk_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/right/hair.png"),
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/right/hair.png"),
 	},
-	head_attribute_holding_left = {
+	head_attribute_holding_walk_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/left/hair.png"),
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/left/hair.png"),
 	},
 
 
@@ -281,21 +281,21 @@ var male = {
 		1 : preload("res://Characters/Human/male/SWING/assets/left/pants/pants.png")
 	},
 	
-	pants_holding_down = {
+	pants_holding_walk_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/down/pants.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/down/pants.png")
 	},
-	pants_holding_up = {
+	pants_holding_walk_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/up/pants.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/up/pants.png")
 	},
-	pants_holding_right = {
+	pants_holding_walk_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/right/pants.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/right/pants.png")
 	},
-	pants_holding_left = {
+	pants_holding_walk_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/left/pants.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/left/pants.png")
 	},
 
 
@@ -350,21 +350,21 @@ var male = {
 		1 : preload("res://Characters/Human/male/SWING/assets/left/shirts/shirt.png")
 	},
 
-	shirts_holding_down = {
+	shirts_holding_walk_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/down/shirt.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/down/shirt.png")
 	},
-	shirts_holding_up = {
+	shirts_holding_walk_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/up/shirt.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/up/shirt.png")
 	},
-	shirts_holding_right = {
+	shirts_holding_walk_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/right/shirt.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/right/shirt.png")
 	},
-	shirts_holding_left = {
+	shirts_holding_walk_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/left/shirt.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/left/shirt.png")
 	},
 	
 	
@@ -419,21 +419,21 @@ var male = {
 		1 : preload("res://Characters/Human/male/SWING/assets/left/shoes/shoes.png")
 	},
 	
-	shoes_holding_down = {
+	shoes_holding_walk_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/down/shoes.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/down/shoes.png")
 	},
-	shoes_holding_up = {
+	shoes_holding_walk_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/up/shoes.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/up/shoes.png")
 	},
-	shoes_holding_right = {
+	shoes_holding_walk_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/right/shoes.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/right/shoes.png")
 	},
-	shoes_holding_left = {
+	shoes_holding_walk_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/HOLDING/assets/left/shoes.png")
+		1 : preload("res://Characters/Human/male/HOLDING WALK/assets/left/shoes.png")
 	},
 	
 	body_death_down = {
