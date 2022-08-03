@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://World/Player/PlayerTemplate/InputControllerTemplate.gd" type="Script" id=1]
+[ext_resource path="res://World/Player/Player/InputController.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/PlayerTemplate/PlayerTemplate.tscn" type="PackedScene" id=2]
 
 [node name="InputControllerTemplate" type="YSort"]
