@@ -127,7 +127,7 @@ func set_tile_nodes():
 	fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 	hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
 	watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-	ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedBeachBorder")
+	ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
 	dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
 	
 func sleep(direction_of_sleeping_bag):

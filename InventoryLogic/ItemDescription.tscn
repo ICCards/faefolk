@@ -1,0 +1,148 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top left.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top middle.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top right.png" type="Texture" id=4]
+[ext_resource path="res://InventoryLogic/ItemDescription.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle right.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle left.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle middle.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom middle.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom left.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom right.png" type="Texture" id=11]
+
+[node name="ItemDescription" type="Node2D"]
+scale = Vector2( 5.4, 5.4 )
+z_index = 1
+script = ExtResource( 5 )
+
+[node name="VBoxContainer" type="GridContainer" parent="."]
+margin_right = 25.0
+margin_bottom = 50.0
+size_flags_vertical = 3
+custom_constants/vseparation = 0
+
+[node name="TopRow" type="GridContainer" parent="VBoxContainer"]
+margin_right = 25.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 0
+custom_constants/hseparation = -7
+columns = 3
+
+[node name="TopLeft" type="TextureRect" parent="VBoxContainer/TopRow"]
+margin_right = 11.0
+margin_bottom = 18.0
+texture = ExtResource( 2 )
+
+[node name="TopMiddle" type="TextureRect" parent="VBoxContainer/TopRow"]
+margin_left = 4.0
+margin_right = 19.0
+margin_bottom = 18.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+texture = ExtResource( 3 )
+stretch_mode = 1
+
+[node name="TopRight" type="TextureRect" parent="VBoxContainer/TopRow"]
+margin_left = 12.0
+margin_right = 25.0
+margin_bottom = 18.0
+texture = ExtResource( 4 )
+stretch_mode = 1
+
+[node name="MiddleRow" type="GridContainer" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 25.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 0
+custom_constants/hseparation = -1
+columns = 3
+
+[node name="MiddleLeft" type="TextureRect" parent="VBoxContainer/MiddleRow"]
+margin_right = 11.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+stretch_mode = 2
+
+[node name="MiddleLeft2" type="TextureRect" parent="VBoxContainer/MiddleRow"]
+margin_left = 10.0
+margin_right = 13.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+
+[node name="TopRight2" type="TextureRect" parent="VBoxContainer/MiddleRow"]
+margin_left = 12.0
+margin_right = 25.0
+margin_bottom = 16.0
+size_flags_vertical = 3
+texture = ExtResource( 6 )
+stretch_mode = 1
+
+[node name="BottomRow" type="GridContainer" parent="VBoxContainer"]
+margin_top = 34.0
+margin_right = 25.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 0
+custom_constants/hseparation = -1
+columns = 3
+
+[node name="BottomLeft" type="TextureRect" parent="VBoxContainer/BottomRow"]
+margin_right = 11.0
+margin_bottom = 16.0
+texture = ExtResource( 10 )
+
+[node name="BottomMiddle" type="TextureRect" parent="VBoxContainer/BottomRow"]
+margin_left = 10.0
+margin_right = 13.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+texture = ExtResource( 9 )
+expand = true
+
+[node name="BottomRight" type="TextureRect" parent="VBoxContainer/BottomRow"]
+margin_left = 12.0
+margin_right = 25.0
+margin_bottom = 16.0
+texture = ExtResource( 11 )
+stretch_mode = 1
+
+[node name="ItemName" type="Label" parent="."]
+margin_left = 5.14286
+margin_top = 3.61905
+margin_right = 220.143
+margin_bottom = 64.619
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 5
+text = "Wood path"
+
+[node name="ItemCategory" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 17.963
+margin_right = 321.0
+margin_bottom = 78.963
+rect_scale = Vector2( 0.15, 0.15 )
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.764706, 1 )
+text = "Placable object"
+
+[node name="ItemDescription" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 27.963
+margin_right = 376.0
+margin_bottom = 281.963
+rect_scale = Vector2( 0.12, 0.12 )
+theme = ExtResource( 1 )
+text = "Some random description that is just here for some filler code"
+autowrap = true
