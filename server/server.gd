@@ -272,14 +272,19 @@ func _process(_delta):
 
 remote func updateState(data):
 	pass
-#    if world != null:
-#        world.UpdateWorldState(data)
+#	if world:
+#		world.UpdateWorldState(data)
 
+remote func move(id,position,direction):
+	if id != str(get_tree().get_network_unique_id()):
+		if world:
+			if world.Players.has_node(id):
+				world.Players.get_node(id).move(position,direction)
 
-remote func input(data,id):
+remote func input(data):
 	if world:
-		if world.Players.has_node(id):
-			world.Players.get_node(id).thr_network_inputs(data)
+		if world.Players.has_node(player_id):
+			world.Players.get_node(player_id).thr_network_inputs(data)
 			
 #remote func input(data,id):
 #	if world:
@@ -292,9 +297,8 @@ remote func input(data,id):
 remote func spawn_player(data):
 	player_id = str(get_tree().get_network_unique_id())
 	print("spawn player called from srever")
-	if data.id == get_tree().get_network_unique_id():
+	if str(data.id) == player_id:
 		player = data
-		player_id = str(data.id)
 	else:
 		if world:
 			world.spawnNewPlayer(data)

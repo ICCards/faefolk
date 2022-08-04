@@ -183,15 +183,13 @@ func spawnNewPlayer(player):
 		if not has_node(str(player["id"])):
 			print("spawning new player " + player["c"])
 			print(player["p"])
-			var controller = Input_controller_template.instance()
-			var new_player = controller.get_children()[0]
-			controller.name = str(player["id"])
+			var new_player = Player_template.instance()
 			new_player.position = player["p"]
 			new_player.name = str(player["id"])
 			#new_player.principal = player["principal"]
 			new_player.character = _character.new()
 			new_player.character.LoadPlayerCharacter(player["c"])
-			$Players.add_child(controller)
+			$Players.add_child(new_player)
 			
 	
 func DespawnPlayer(player_id):

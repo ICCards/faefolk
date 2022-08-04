@@ -65,7 +65,6 @@ class Frame_State:
 func thr_network_inputs(result): #thread function to process data from network
 	var packet_idx = 1
 	var new_input = false
-
 	if (game == Game.END): #stop thread function if game has ended
 		return
 	if result:
@@ -89,18 +88,17 @@ func thr_network_inputs(result): #thread function to process data from network
 						game = Game.PLAYING
 				new_input = false
 			
-			1: #request for input received
-				var frame = result[1]
-				var packet_arr = [0]
-				while (frame != result[2]): #send inputs for requested frame and newer past frames
-					if input_viable_request_array[frame] == false: 
-						break #do not send invalid inputs from future frames
-					packet_arr.append(frame)
-					packet_arr.append(input_array[frame].encoded_local_input)
-					frame = (frame + 1)%256
-				for _x in range(packet_amount):
-					Server.rpc_id(1,"input",packet_arr)
-
+#			1: #request for input received
+#				var frame = result[1]
+#				var packet_arr = [0]
+#				while (frame != result[2]): #send inputs for requested frame and newer past frames
+#					if input_viable_request_array[frame] == false: 
+#						break #do not send invalid inputs from future frames
+#					packet_arr.append(frame)
+#					packet_arr.append(input_array[frame].encoded_local_input)
+#					frame = (frame + 1)%256
+#				for _x in range(packet_amount):
+#					Server.rpc_id(0,"input",packet_arr,name)
 
 func _ready():
 	#initialize arrays
@@ -124,14 +122,19 @@ func _ready():
 	input_received = true
 	
 func _physics_process(_delta):
+#	if Input.is_key_pressed(KEY_ESCAPE):
+#		game = Game.END
+#		for _x in range(packet_amount):
+#			Server.rpc_id(0,"input",[3],name) #send game end signal to networked game
+	
 	if (input_received):
 		#if the oldest Frame_State in the queue uses a guess input, and the actual input for the oldest Frame_State has not arrived,
 		#then DELAY the game
 		if state_queue[0].actual_input == false:
 			if input_arrival_array[state_queue[0].frame] == false:
 				input_received = false #wait until needed net input arrives
-				for _x in range(packet_amount):
-					Server.rpc_id(1,"input",[1, state_queue[0].frame, (frame_num + input_delay)%256]) #send request for needed input
+#				for _x in range(packet_amount):
+#					Server.rpc_id(0,"input",[1, state_queue[0].frame, (frame_num + input_delay)%256],name) #send request for needed input
 				status = "DELAY: Waiting for net input. Current frame_num: " + str(frame_num)
 			else:
 				status = "" 
@@ -140,10 +143,9 @@ func _physics_process(_delta):
 			status = "" 
 			handle_input()
 	elif (game == Game.PLAYING):#send request for needed inputs for past frames
-		for _x in range(packet_amount):
-			Server.rpc_id(1,"input",[1, state_queue[0].frame, (frame_num + input_delay)%256]) #send request for needed input
-	
-
+		pass
+#		for _x in range(packet_amount):
+#			Server.rpc_id(0,"input",[1, state_queue[0].frame, (frame_num + input_delay)%256],name) #send request for needed input
 
 func handle_input(): #get input, call child functions and run rollback if necessary
 	var pre_game_state = null
@@ -153,27 +155,28 @@ func handle_input(): #get input, call child functions and run rollback if necess
 	var encoded_local_input = 0
 	#record local inputs
 	if Input.is_key_pressed(KEY_W):
-		print("move_up template")
 		local_input[0] = true
 		encoded_local_input += 1
+		print("Move Up")
 	if Input.is_key_pressed(KEY_A):
-		print("move_left template ")
 		local_input[1] = true
 		encoded_local_input += 2
+		print("Move Left")
 	if Input.is_key_pressed(KEY_S):
-		print("move_down tamplate ")
 		local_input[2] = true
 		encoded_local_input +=4
+		print("Move Down")
 	if Input.is_key_pressed(KEY_D):
-		print("move_right template")
 		local_input[3] = true
 		encoded_local_input += 8
+		print("Move Right")
 	if Input.is_key_pressed(KEY_SPACE):
 		local_input[4] = true
 		encoded_local_input += 16
 	if !Input.is_key_pressed(KEY_W) && !Input.is_key_pressed(KEY_A)  && !Input.is_key_pressed(KEY_S)  && !Input.is_key_pressed(KEY_D):
 		local_input[5] = true
 		encoded_local_input += 32
+
 	input_array[(frame_num + input_delay) % 256].local_input = local_input
 	input_array[(frame_num + input_delay) % 256].encoded_local_input = encoded_local_input
 	
@@ -183,8 +186,7 @@ func handle_input(): #get input, call child functions and run rollback if necess
 		packet_arr.append((frame_num + input_delay - i) % 256)
 		packet_arr.append(input_array[(frame_num + input_delay - i) % 256].encoded_local_input)
 #	for _x in packet_amount:
-#		pass
-		#Server.rpc_id(1,"input",packet_arr)
+#		Server.rpc_id(0,"input",packet_arr,name)
 	var current_input = input_array[frame_num].duplicate() #use duplicate so that networking thread safely can work on input_array
 	
 	#if the net input for the current frame has not arrived, use a guess instead
@@ -259,27 +261,27 @@ func handle_input(): #get input, call child functions and run rollback if necess
 
 
 func frame_start_all():
-	var child = get_children()[0]
-	child.frame_start()
+	for child in get_children():
+		child.frame_start()
 
 
 func reset_state_all(game_state : Dictionary):
-	var child = get_children()[0]
-	child.reset_state(game_state)
+	for child in get_children():
+		child.reset_state(game_state)
 
 
 func input_update_all(input : Inputs, game_state : Dictionary):
-	var child = get_children()[0]
-	child.input_update(input, game_state)
+	for child in get_children():
+		child.input_update(input, game_state)
 
 
 func frame_end_all():
-	var child = get_children()[0]
-	child.frame_end()
+	for child in get_children():
+		child.frame_end()
 
 
 func get_game_state():
 	var state = {}
-	var child = get_children()[0]
-	state[child.name] = child.get_state()
+	for child in get_children():
+		state[child.name] = child.get_state()
 	return state.duplicate(true) #deep duplicate to copy all nested dictionaries by value instead of by reference
