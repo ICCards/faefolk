@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stone ore.png-6f3f2e0795da78fb90a4b9b08a0b21e1.stex"
+path="res://.import/stone.png-69b64e79c2840d5abae8dcb56c2828b8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/dropped_item_icon/stone ore.png"
-dest_files=[ "res://.import/stone ore.png-6f3f2e0795da78fb90a4b9b08a0b21e1.stex" ]
+source_file="res://Assets/Images/dropped_item_icon/stone.png"
+dest_files=[ "res://.import/stone.png-69b64e79c2840d5abae8dcb56c2828b8.stex" ]
 
 [params]
 

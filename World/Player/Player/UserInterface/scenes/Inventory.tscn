@@ -281,7 +281,7 @@ position = Vector2( 238, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/Page2/TentArea"]
 position = Vector2( 0, 13 )
-polygon = PoolVector2Array( 105, 757, 264, 755, 262, 571, 186, 482, 113, 566 )
+polygon = PoolVector2Array( 105, 757, 264, 755, 265, 581, 186, 501, 112, 577 )
 
 [node name="TallPedestalArea" type="Area2D" parent="CraftingMenu/Page2"]
 
@@ -353,6 +353,7 @@ position = Vector2( 182.5, 331.75 )
 shape = SubResource( 22 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="CraftingMenu"]
+bus = "Bus1"
 
 [node name="Tween" type="Tween" parent="CraftingMenu"]
 
@@ -597,7 +598,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 28
+frame = 21
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]

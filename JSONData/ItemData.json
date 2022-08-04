@@ -6,7 +6,7 @@
     "Description": "Wood harvested from trees"
   }, 
 
-  "stone ore": {
+  "stone": {
     "ItemCategory": "Resource",
     "StackSize" : 99,
     "Description": "Stone from ore"
@@ -276,87 +276,87 @@
   "torch" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to generate light"
+      "Description": "Used to generate modest light."
   },
   "campfire" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to generate light"
+      "Description": "Used to generate moderate light."
   },
   "fire pedestal" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to generate light"
+      "Description": "Used to generate moderate light."
   },
   "tall fire pedestal" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to generate light"
+      "Description": "Used to generate moderate light."
   },
   "wood fence": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood fence for decoration"
+      "Description": "Wood fence for decoration."
   },
   "wood barrel": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood barrel for decoration"
+      "Description": "Wood barrel for decoration."
   },
   "wood box": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood box for decoration"
+      "Description": "Wood box for decoration."
   },
   "wood chest": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood chest for storage"
+      "Description": "Wood chest for storage."
   },
   "stone chest": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Stone chest for storage"
+      "Description": "Stone chest for storage."
   },
   "wood path": {
       "ItemCategory": "Placable path",
       "StackSize": 99,
-      "Description": "wood path description"
+      "Description": "Place to create paths or decorate your floors."
   },
   "stone path": {
       "ItemCategory": "Placable path",
       "StackSize": 99,
-      "Description": "stone path description"
+      "Description": "Place to create paths or decorate your floors."
   },
   "house": {
       "ItemCategory": "Placable object",
       "StackSize": 1,
-      "Description": "placable house"
+      "Description": "Large placable shelter with high durability."
   },
   "workbench": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to upgrade tools."
+      "Description": "Place to upgrade or repair tools."
   },
   "grain mill": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to process grains for cooking."
+      "Description": "Place to process grains for cooking."
   },
   "stove": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Large placable shelter."
+      "Description": "Place to cook food recipes."
   },
   "tent": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Small placable shelter."
+      "Description": "Small placable shelter with low durability."
   },
     "sleeping bag": {
     "ItemCategory": "Placable object",
     "StackSize": 99,
-    "Description": "Used to set respawn point"
+    "Description": "Can be placed and used to set respawn point in the world."
     },
     "twig": {
     "ItemCategory": "Placable object",

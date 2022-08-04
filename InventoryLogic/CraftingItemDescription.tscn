@@ -15,6 +15,7 @@
 
 [node name="CraftingItemDescription" type="Node2D"]
 scale = Vector2( 5.4, 5.4 )
+z_index = 1
 script = ExtResource( 11 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -115,34 +116,42 @@ margin_bottom = 16.0
 texture = ExtResource( 10 )
 stretch_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Divider1" type="ColorRect" parent="."]
 margin_left = 6.0
-margin_top = 26.0
+margin_top = 27.1111
 margin_right = 49.0
-margin_bottom = 27.0
+margin_bottom = 28.1111
+color = Color( 0.266667, 0.141176, 0.203922, 1 )
+
+[node name="Divider2" type="ColorRect" parent="."]
+margin_left = 6.0
+margin_top = 52.0
+margin_right = 49.0
+margin_bottom = 53.0
 color = Color( 0.266667, 0.141176, 0.203922, 1 )
 
 [node name="Ingredients" type="Label" parent="."]
-margin_left = 5.0
+margin_left = 6.0
 margin_top = 18.0
-margin_right = 305.0
-margin_bottom = 79.0
+margin_right = 306.0
+margin_bottom = 93.0
 rect_scale = Vector2( 0.12, 0.12 )
 theme = ExtResource( 1 )
 text = "Ingredients:"
+valign = 1
 autowrap = true
 
-[node name="Ingredient" parent="." instance=ExtResource( 12 )]
-margin_left = 8.0
-margin_top = 28.0
-margin_right = 8.0
-margin_bottom = 60.0
+[node name="Ingredient1" parent="." instance=ExtResource( 12 )]
+margin_left = 6.0
+margin_top = 26.5555
+margin_right = 6.0
+margin_bottom = 58.5555
 
 [node name="Ingredient2" parent="." instance=ExtResource( 12 )]
-margin_left = 8.0
-margin_top = 34.0
-margin_right = 8.0
-margin_bottom = 66.0
+margin_left = 6.0
+margin_top = 36.0
+margin_right = 6.0
+margin_bottom = 68.0
 
 [node name="ItemName" type="Label" parent="."]
 margin_left = 5.14286
@@ -157,10 +166,10 @@ custom_constants/shadow_offset_y = 5
 text = "Wood path"
 
 [node name="ItemDescription" type="Label" parent="."]
-margin_left = 5.0
-margin_top = 44.0
-margin_right = 376.0
-margin_bottom = 298.0
+margin_left = 6.0
+margin_top = 54.0
+margin_right = 377.0
+margin_bottom = 308.0
 rect_scale = Vector2( 0.12, 0.12 )
 theme = ExtResource( 1 )
 text = "Some random description that is just here for some filler code"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
-[ext_resource path="res://Assets/Images/dropped_item_icon/wood.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/inventory_icons/Food/apple.png" type="Texture" id=3]
 
 [node name="Ingredient" type="Control"]
 anchor_right = 1.0
@@ -9,20 +9,35 @@ anchor_bottom = 1.0
 margin_right = -788.0
 margin_bottom = -539.0
 rect_min_size = Vector2( 0, 32 )
-rect_scale = Vector2( 0.1, 0.1 )
-
-[node name="Icon" type="TextureRect" parent="."]
-margin_right = 72.0
-margin_bottom = 72.0
-texture = ExtResource( 2 )
-stretch_mode = 1
+rect_scale = Vector2( 0.12, 0.12 )
 
 [node name="Name" type="Label" parent="."]
-margin_left = 72.0
-margin_right = 272.0
-margin_bottom = 72.0
+margin_left = 98.3337
+margin_top = 20.0
+margin_right = 298.334
+margin_bottom = 104.0
 rect_min_size = Vector2( 200, 0 )
 theme = ExtResource( 1 )
 text = "Wood"
 valign = 1
 autowrap = true
+
+[node name="Icon" type="TextureRect" parent="."]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 84, 84 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="."]
+margin_left = 64.0
+margin_top = 69.0
+margin_right = 116.0
+margin_bottom = 194.0
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+theme = ExtResource( 1 )
+text = "99"
