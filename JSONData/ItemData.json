@@ -22,49 +22,54 @@
       "Description": "Can be smelted into gold ingot"
   },
   "red gem": {
-      "ItemCategory": "Resource",
+      "ItemCategory": "Mineral",
       "StackSize" : 99,
       "Description": "[gem description]"
   },
   "green gem": {
-      "ItemCategory": "Resource",
+      "ItemCategory": "Mineral",
       "StackSize" : 99,
       "Description": "[gem description]"
   },
   "cyan gem": {
-      "ItemCategory": "Resource",
+      "ItemCategory": "Mineral",
       "StackSize" : 99,
       "Description": "[gem description]"
   },
   "dark blue gem": {
-      "ItemCategory": "Resource",
+      "ItemCategory": "Mineral",
       "StackSize" : 99,
       "Description": "[gem description]"
   },
-  "axe": {
-      "ItemCategory": "Weapon",
+  "wood axe": {
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used for breaking wood"
   },
-  "pickaxe": {
-      "ItemCategory": "Weapon",
+  "wood pickaxe": {
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used for breaking ore"
   },
-  "sword": {
-      "ItemCategory": "Weapon",
+  "wood sword": {
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used for melee attacks"
   },
-  "hoe": {
-      "ItemCategory": "Weapon",
+  "wood hoe": {
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to make fertile soil"
   },
   "scythe": {
-      "ItemCategory": "Weapon",
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to cut grass and flowers"
+  },
+  "stone watering can" : {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Used to water fertile soil"
   },
   
   
@@ -268,12 +273,6 @@
   
   
   
-  
-  "watering can" : {
-      "ItemCategory": "Weapon",
-      "StackSize": 1,
-      "Description": "Used to water fertile soil"
-  },
   "torch" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
@@ -302,22 +301,22 @@
   "wood barrel": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood fence for decoration"
+      "Description": "Wood barrel for decoration"
   },
   "wood box": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood fence for decoration"
+      "Description": "Wood box for decoration"
   },
   "wood chest": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Large wood chest for storage"
+      "Description": "Wood chest for storage"
   },
   "stone chest": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Large wood chest for storage"
+      "Description": "Stone chest for storage"
   },
   "wood path": {
       "ItemCategory": "Placable path",
@@ -337,27 +336,42 @@
   "workbench": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "placable house"
+      "Description": "Used to upgrade tools."
   },
   "grain mill": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "placable house"
+      "Description": "Used to process grains for cooking."
   },
   "stove": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "placable house"
+      "Description": "Large placable shelter."
   },
   "tent": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "placable house"
+      "Description": "Small placable shelter."
   },
     "sleeping bag": {
     "ItemCategory": "Placable object",
     "StackSize": 99,
     "Description": "Used to set respawn point"
+    },
+    "twig": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "first tier base building"
+    },
+    "wood wall": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "first tier base building"
+    },
+    "stone wall": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "first tier base building"
     }
   
 }

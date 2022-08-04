@@ -298,11 +298,11 @@ func swing_state(item_name):
 		sendAction(SWING, {"tool": item_name, "direction": direction})
 		swingActive = true
 		set_melee_collision_layer(item_name)
-		$CompositeSprites.set_player_animation(character, animation, item_name)
 		if item_name == "sword":
 			animation = "sword_swing_" + direction.to_lower()
 		else:
 			animation = "swing_" + direction.to_lower()
+		$CompositeSprites.set_player_animation(character, animation, item_name)
 		animation_player.play(animation)
 		yield(animation_player, "animation_finished" )
 		swingActive = false

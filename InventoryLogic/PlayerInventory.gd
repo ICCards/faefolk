@@ -32,14 +32,17 @@ var inventory = {
 }
 
 var hotbar = {
-	1: ["wood box", 99],
-	2: ["tent", 30],
+#	0 : ["twig", 99],
+#	1 : ["wood wall", 99],
+#	2 : ["stone wall", 99],
+#	1: ["wood box", 99],
+#	2: ["tent", 30],
 	3: ["house", 2],
-	5: ["sword", 1],
-	6: ["watering can", 1],
-	7: ["hoe", 1], 
-	8: ["axe", 1],
-	9:["pickaxe", 1],
+	5: ["wood sword", 1],
+	6: ["stone watering can", 1],
+	7: ["wood hoe", 1], 
+	8: ["wood axe", 1],
+	9:["wood pickaxe", 1],
 }
 
 var chest = {
