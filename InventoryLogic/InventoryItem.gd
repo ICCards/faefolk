@@ -15,9 +15,7 @@ func set_item(nm, qt):
 	item_name = nm
 	item_quantity = qt
 	
-	if item_name == "Cobblestone":
-		item_name = "Stone"
-	elif item_name == "wood path1" or item_name == "wood path2":
+	if item_name == "wood path1" or item_name == "wood path2":
 		item_name = "wood path"
 	elif item_name == "stone path1" or item_name == "stone path2" or  item_name == "stone path3" or item_name == "stone path4": 
 		item_name = "stone path"
