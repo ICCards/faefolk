@@ -37,6 +37,8 @@ var hotbar = {
 #	2 : ["stone wall", 99],
 #	1: ["wood box", 99],
 #	2: ["tent", 30],
+	1: ["blueberry seeds", 30],
+	2: ["strawberry seeds", 30],
 	3: ["house", 2],
 	5: ["wood sword", 1],
 	6: ["stone watering can", 1],

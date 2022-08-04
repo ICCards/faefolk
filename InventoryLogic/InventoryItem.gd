@@ -29,7 +29,7 @@ func set_item(nm, qt):
 	else:
 		$Label.visible = true
 		$Label.text = String(item_quantity)
-	if item_name == "watering can":
+	if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 		$WateringCanProgressIndicator.visible = true
 		update_watering_can_amount()
 	

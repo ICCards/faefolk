@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/grain mill.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Images/placable_object_preview/fire pedestal.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Images/Misc/up arrow.png" type="Texture" id=29]
+[ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory1.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=33]
@@ -109,9 +110,12 @@ text = "INVENTORY"
 align = 1
 
 [node name="ItemDescription" parent="." instance=ExtResource( 36 )]
+visible = false
 
 [node name="CraftingMenu" type="Node2D" parent="."]
 script = ExtResource( 7 )
+
+[node name="CraftingItemDescription" parent="CraftingMenu" instance=ExtResource( 30 )]
 
 [node name="Page1" type="Node2D" parent="CraftingMenu"]
 visible = false
@@ -352,11 +356,6 @@ shape = SubResource( 22 )
 
 [node name="Tween" type="Tween" parent="CraftingMenu"]
 
-[node name="CraftableItemDescription" type="Node2D" parent="CraftingMenu"]
-visible = false
-scale = Vector2( 2.5, 2.5 )
-z_index = 1
-
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -574,9 +573,6 @@ margin_bottom = 198.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="ItemDescription" parent="InventoryMenu" instance=ExtResource( 36 )]
-visible = false
-
 [node name="PetUI" type="Control" parent="InventoryMenu"]
 visible = false
 margin_right = 40.0
@@ -601,7 +597,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 25
+frame = 28
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]

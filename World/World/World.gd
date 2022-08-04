@@ -138,7 +138,8 @@ func spawnPlayerExample():
 	controller.name = str(get_tree().get_network_unique_id())
 	player.name = str(get_tree().get_network_unique_id())
 	player.character = _character.new()
-	player.character.LoadPlayerCharacter(Server.player["c"])
+	#player.character.LoadPlayerCharacter(Server.player["c"])
+	player.character.LoadPlayerCharacter("human_male")
 	$Players.add_child(controller)
 	if Server.player_house_position == null:
 		player.position = Server.player["p"]
@@ -343,24 +344,24 @@ func buildMap(map):
 #		if count == 130:
 #			yield(get_tree().create_timer(0.25), "timeout")
 #			count = 0
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	get_node("loadingScreen").set_phase("Generating world")
-#	fill_biome_gaps(map)
-#	yield(get_tree().create_timer(1.0), "timeout")
-#	check_and_remove_invalid_autotiles(map)
-#	yield(get_tree().create_timer(1.0), "timeout")
-#	set_water_tiles()
-#	get_node("loadingScreen").set_phase("Spawning in")
-#	yield(get_tree().create_timer(1.0), "timeout")
-#	Server.player_state = "WORLD"
-#	print("Map loaded")
+	yield(get_tree().create_timer(0.5), "timeout")
+	get_node("loadingScreen").set_phase("Generating world")
+	fill_biome_gaps(map)
+	yield(get_tree().create_timer(1.0), "timeout")
+	check_and_remove_invalid_autotiles(map)
+	yield(get_tree().create_timer(1.0), "timeout")
+	set_water_tiles()
+	get_node("loadingScreen").set_phase("Spawning in")
+	yield(get_tree().create_timer(1.0), "timeout")
+	Server.player_state = "WORLD"
+	print("Map loaded")
 #	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
 	#spawnPlayer()
 	spawnPlayerExample()
 	Server.isLoaded = true
 	Server.world = self
-#	spawn_animals()
+	spawn_animals()
 	
 #	spawnRandomSnake()
 #	yield(get_tree().create_timer(rand_range(0.1, 1.0)), "timeout")
@@ -397,11 +398,11 @@ func set_water_tiles():
 				sand.set_cellv(loc + Vector2(-1, 0), 0)
 				sand.set_cellv(loc + Vector2(0, 1), 0)
 				sand.set_cellv(loc + Vector2(0, -1), 0)
-	for i in range(2):
-		for cell in ocean.get_used_cells():
-				if Tiles.return_neighboring_cells(cell, ocean) <= 1:
-					ocean.set_cellv(cell, -1)
-					wetSand.set_cellv(cell, 0)
+#	for i in range(2):
+#		for cell in ocean.get_used_cells():
+#				if Tiles.return_neighboring_cells(cell, ocean) <= 1:
+#					ocean.set_cellv(cell, -1)
+#					wetSand.set_cellv(cell, 0)
 #	for cell in ocean.get_used_cells():
 #		if Tiles.return_neighboring_cells(cell, ocean) == 3:
 #			wetSand.set_cellv(cell, 0)

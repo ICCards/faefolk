@@ -1,7 +1,8 @@
 {
     "wood box": {
-        "wood" : 4,
-        "stone": 0
+        "ingredients" : {
+            "wood" : 4
+        },
     },
      "wood barrel": {
         "wood": 4,
@@ -20,8 +21,10 @@
          "stone": 1,
      },
      "torch": {
-         "wood": 1,
-         "stone": 1,
+         "ingredients" : {
+             "wood": 1,
+             "stone": 1,
+         }
      },
      "wood chest": {
         "wood": 10,
