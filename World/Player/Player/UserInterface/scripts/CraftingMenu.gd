@@ -70,26 +70,27 @@ func reset():
 
 
 func initialize_crafting():
-	var wood = PlayerInventory.return_player_wood_and_stone()[0]
-	var stone = PlayerInventory.return_player_wood_and_stone()[1]
-	if page == 1:
-		for item in page1:
-			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
-				$Page1.get_node(item).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page1.get_node(item).modulate = Color(1, 1, 1, 0.4)
-	elif page == 2:
-		for item in page2:
-			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
-				$Page2.get_node(item).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page2.get_node(item).modulate = Color(1, 1, 1, 0.4)
-	elif page == 3:
-		for item in page3:
-			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
-				$Page3.get_node(item).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page3.get_node(item).modulate = Color(1, 1, 1, 0.4)
+	pass
+#	var wood = PlayerInventory.return_player_wood_and_stone()[0]
+#	var stone = PlayerInventory.return_player_wood_and_stone()[1]
+#	if page == 1:
+#		for item in page1:
+#			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+#				$Page1.get_node(item).modulate = Color(1, 1, 1, 1)
+#			else:
+#				$Page1.get_node(item).modulate = Color(1, 1, 1, 0.4)
+#	elif page == 2:
+#		for item in page2:
+#			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+#				$Page2.get_node(item).modulate = Color(1, 1, 1, 1)
+#			else:
+#				$Page2.get_node(item).modulate = Color(1, 1, 1, 0.4)
+#	elif page == 3:
+#		for item in page3:
+#			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+#				$Page3.get_node(item).modulate = Color(1, 1, 1, 1)
+#			else:
+#				$Page3.get_node(item).modulate = Color(1, 1, 1, 0.4)
 
 func _physics_process(delta):
 	pass
