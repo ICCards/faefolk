@@ -755,6 +755,113 @@ var male = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/SLEEP/assets/left/shoes/shoes.png")
 	},
+	
+	body_sword_swing_down = {
+		0 : preload("res://Characters/Human/male/SWORD SWING/body/down/body.png")
+	},
+	body_sword_swing_up = {
+		0 : preload("res://Characters/Human/male/SWORD SWING/body/up/body.png")
+	},
+	body_sword_swing_right = {
+		0 : preload("res://Characters/Human/male/SWORD SWING/body/right/body.png")
+	},
+	body_sword_swing_left = {
+		0 : preload("res://Characters/Human/male/SWORD SWING/body/left/body.png")
+	},
+
+	arms_sword_swing_down = {
+		0 : preload("res://Characters/Human/male/SWORD SWING/body/down/arms.png")
+	},
+	arms_sword_swing_up = {
+		0 : preload("res://Characters/Human/male/SWORD SWING/body/up/arms.png")
+	},
+	arms_sword_swing_right = {
+		0 : preload("res://Characters/Human/male/SWORD SWING/body/right/arms.png")
+	},
+	arms_sword_swing_left = {
+		0 : preload("res://Characters/Human/male/SWORD SWING/body/left/arms.png")
+	},
+
+	acc_sword_swing_down = {
+		0 : null,
+	},
+	acc_sword_swing_up = {
+		0 : null,
+	},
+	acc_sword_swing_right = {
+		0 : null,
+	},
+	acc_sword_swing_left = {
+		0 : null,
+	},
+
+	head_attribute_sword_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_sword_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_sword_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_sword_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_sword_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/down/shirts/shirt.png")
+	},
+	shirts_sword_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/up/shirts/shirt.png")
+	},
+	shirts_sword_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/right/shirts/shirt.png")
+	},
+	shirts_sword_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/left/shirts/shirt.png")
+	},
+
+	pants_sword_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/down/pants/pants.png")
+	},
+	pants_sword_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/up/pants/pants.png")
+	},
+	pants_sword_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/right/pants/pants.png")
+	},
+	pants_sword_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/left/pants/pants.png")
+	},
+
+	shoes_sword_swing_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/down/shoes/shoe.png")
+	},
+	shoes_sword_swing_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/up/shoes/shoes.png")
+	},
+	shoes_sword_swing_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/right/shoes/shoes.png")
+	},
+	shoes_sword_swing_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/left/shoes/shoes.png")
+	},
 }
 var female = {
 	body_idle_down = {

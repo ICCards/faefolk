@@ -21,7 +21,7 @@ func set_item(nm, qt):
 		item_name = "wood path"
 	elif item_name == "stone path1" or item_name == "stone path2" or  item_name == "stone path3" or item_name == "stone path4": 
 		item_name = "stone path"
-	$TextureRect.texture = load("res://Assets/Images/inventory_icons/" + item_name + ".png")
+	$TextureRect.texture = load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png")
 	
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	if stack_size == 1:

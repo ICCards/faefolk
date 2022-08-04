@@ -443,6 +443,16 @@ func returnToolSprite(toolName, direction):
 					 return axe.left
 				"swing_right":
 					return axe.right
+		"sword":
+			match direction: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
 		"watering can":
 			match Server.character:
 				"human_male":
@@ -480,6 +490,13 @@ var axe = {
 	up =  preload("res://Characters/Weapon swings/up/axe.png"), 
 	left = preload("res://Characters/Weapon swings/left/axe.png"), 
 	right = preload("res://Characters/Weapon swings/right/axe.png")
+}
+
+var sword = {
+	down = preload("res://Characters/Weapon swings/sword/down.png"), 
+	up =  preload("res://Characters/Weapon swings/sword/up.png"), 
+	left = preload("res://Characters/Weapon swings/sword/left.png"), 
+	right = preload("res://Characters/Weapon swings/sword/right.png")
 }
 
 var human_male_can = {

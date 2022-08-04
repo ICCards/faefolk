@@ -18,8 +18,8 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Images/inventory_icons/nails.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Images/inventory_icons/wood chest.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Images/inventory_icons/Resource/nails.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Images/inventory_icons/Placable object/stone chest.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Images/Inventory UI/exit icon.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory button.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Images/placable_object_preview/campfire.png" type="Texture" id=23]
@@ -601,7 +601,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 24
+frame = 25
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]

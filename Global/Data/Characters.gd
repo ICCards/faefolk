@@ -113,6 +113,118 @@ extends Node
 #	},
 
 
+#	body_sword_swing_down = {
+#		0 : preload()
+#	},
+#	body_sword_swing_up = {
+#		0 : preload()
+#	},
+#	body_sword_swing_right = {
+#		0 : preload()
+#	},
+#	body_sword_swing_left = {
+#		0 : preload()
+#	},
+#
+#	arms_sword_swing_down = {
+#		0 : preload()
+#	},
+#	arms_sword_swing_up = {
+#		0 : preload()
+#	},
+#	arms_sword_swing_right = {
+#		0 : preload()
+#	},
+#	arms_sword_swing_left = {
+#		0 : preload()
+#	},
+#
+#	acc_sword_swing_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_sword_swing_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_sword_swing_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_sword_swing_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_sword_swing_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_sword_swing_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_sword_swing_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_sword_swing_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_sword_swing_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_sword_swing_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_sword_swing_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_sword_swing_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_sword_swing_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_sword_swing_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_sword_swing_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_sword_swing_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_sword_swing_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_sword_swing_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_sword_swing_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_sword_swing_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+
 #	body_death_down = {
 #		0 : preload()
 #	},
@@ -4889,7 +5001,7 @@ func LoadPlayerCharacter(character_info):
 		"succubus":
 			set_char = succubus
 		
-	acc_index =  set_char.acc_idle_down.size() - 1
+	acc_index = set_char.acc_idle_down.size() - 1
 	headAtr_index = set_char.head_attribute_idle_down.size() - 1
 	pants_index = set_char.pants_idle_down.size() - 1
 	shirts_index = set_char.shirts_idle_down.size() - 1
@@ -4920,6 +5032,10 @@ func set_attributes(set_char):
 	'swing_up' : character.body_swing_up[0], 
 	'swing_left' : character.body_swing_left[0], 
 	'swing_right' : character.body_swing_right[0],
+	'sword_swing_down' : character.body_sword_swing_down[0], 
+	'sword_swing_up' : character.body_sword_swing_up[0], 
+	'sword_swing_left' : character.body_sword_swing_left[0], 
+	'sword_swing_right' : character.body_sword_swing_right[0],
 #	'death_down' : character.body_death_down[0],
 #	'death_up' : character.body_death_up[0],
 #	'death_right' : character.body_death_right[0],
@@ -4954,6 +5070,10 @@ func set_attributes(set_char):
 	'swing_up' : character.arms_swing_up[0], 
 	'swing_left' : character.arms_swing_left[0], 
 	'swing_right' : character.arms_swing_right[0],
+	'sword_swing_down' : character.arms_sword_swing_down[0], 
+	'sword_swing_up' : character.arms_sword_swing_up[0], 
+	'sword_swing_left' : character.arms_sword_swing_left[0], 
+	'sword_swing_right' : character.arms_sword_swing_right[0],
 #	'death_down' : character.arms_death_down[0],
 #	'death_up' : character.arms_death_up[0],
 #	'death_right' : character.arms_death_right[0],
@@ -4988,6 +5108,10 @@ func set_attributes(set_char):
 	'swing_up' : character.acc_swing_up[acc_index], 
 	'swing_left' : character.acc_swing_left[acc_index], 
 	'swing_right' : character.acc_swing_right[acc_index],
+	'sword_swing_down' : character.acc_sword_swing_down[acc_index], 
+	'sword_swing_up' : character.acc_sword_swing_up[acc_index], 
+	'sword_swing_left' : character.acc_sword_swing_left[acc_index], 
+	'sword_swing_right' : character.acc_sword_swing_right[acc_index],
 #	'death_down' : character.acc_death_down[acc_index],
 #	'death_up' : character.acc_death_up[acc_index],
 #	'death_right' : character.acc_death_right[acc_index],
@@ -5022,6 +5146,10 @@ func set_attributes(set_char):
 	'swing_up' : character.head_attribute_swing_up[headAtr_index], 
 	'swing_left' : character.head_attribute_swing_left[headAtr_index], 
 	'swing_right' : character.head_attribute_swing_right[headAtr_index],
+	'sword_swing_down' : character.head_attribute_sword_swing_down[headAtr_index], 
+	'sword_swing_up' : character.head_attribute_sword_swing_up[headAtr_index], 
+	'sword_swing_left' : character.head_attribute_sword_swing_left[headAtr_index], 
+	'sword_swing_right' : character.head_attribute_sword_swing_right[headAtr_index],
 #	'death_down' : character.head_attribute_death_down[headAtr_index],
 #	'death_up' : character.head_attribute_death_up[headAtr_index],
 #	'death_right' : character.head_attribute_death_right[headAtr_index],
@@ -5056,6 +5184,10 @@ func set_attributes(set_char):
 	'swing_up' : character.pants_swing_up[pants_index], 
 	'swing_left' : character.pants_swing_left[pants_index], 
 	'swing_right' : character.pants_swing_right[pants_index],
+	'sword_swing_down' : character.pants_sword_swing_down[pants_index], 
+	'sword_swing_up' : character.pants_sword_swing_up[pants_index], 
+	'sword_swing_left' : character.pants_sword_swing_left[pants_index], 
+	'sword_swing_right' : character.pants_sword_swing_right[pants_index],
 #	'death_down' : character.pants_death_down[pants_index],
 #	'death_up' : character.pants_death_up[pants_index],
 #	'death_right' : character.pants_death_right[pants_index],
@@ -5090,6 +5222,10 @@ func set_attributes(set_char):
 	'swing_up' : character.shirts_swing_up[shirts_index], 
 	'swing_left' : character.shirts_swing_left[shirts_index], 
 	'swing_right' : character.shirts_swing_right[shirts_index],
+	'sword_swing_down' : character.shirts_sword_swing_down[shirts_index], 
+	'sword_swing_up' : character.shirts_sword_swing_up[shirts_index], 
+	'sword_swing_left' : character.shirts_sword_swing_left[shirts_index], 
+	'sword_swing_right' : character.shirts_sword_swing_right[shirts_index],
 #	'death_down' : character.shirts_death_down[shirts_index],
 #	'death_up' : character.shirts_death_up[shirts_index],
 #	'death_right' : character.shirts_death_right[shirts_index],
@@ -5124,6 +5260,10 @@ func set_attributes(set_char):
 	'swing_up' : character.shoes_swing_up[shoes_index],
 	'swing_left' : character.shoes_swing_left[shoes_index], 
 	'swing_right' : character.shoes_swing_right[shoes_index],
+	'sword_swing_down' : character.shoes_sword_swing_down[shoes_index], 
+	'sword_swing_up' : character.shoes_sword_swing_up[shoes_index],
+	'sword_swing_left' : character.shoes_sword_swing_left[shoes_index], 
+	'sword_swing_right' : character.shoes_sword_swing_right[shoes_index],
 #	'death_down' : character.shoes_death_down[shoes_index],
 #	'death_up' : character.shoes_death_up[shoes_index],
 #	'death_right' : character.shoes_death_right[shoes_index],

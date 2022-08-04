@@ -46,7 +46,7 @@ func set_size_of_description(x):
 	var lines = $ItemDescription.get_line_count()
 	print(lines)
 	if lines > 2:
-		height = (50 + (lines - 2) * 12)
+		height = (50 + (lines - 2) * 14)
 	else:
 		height = 50
 	print("height " + str(height))
