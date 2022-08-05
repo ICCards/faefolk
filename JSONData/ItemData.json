@@ -6,7 +6,7 @@
     "Description": "Wood harvested from trees"
   }, 
 
-  "stone ore": {
+  "stone": {
     "ItemCategory": "Resource",
     "StackSize" : 99,
     "Description": "Stone from ore"
@@ -22,49 +22,54 @@
       "Description": "Can be smelted into gold ingot"
   },
   "red gem": {
-      "ItemCategory": "Resource",
+      "ItemCategory": "Mineral",
       "StackSize" : 99,
       "Description": "[gem description]"
   },
   "green gem": {
-      "ItemCategory": "Resource",
+      "ItemCategory": "Mineral",
       "StackSize" : 99,
       "Description": "[gem description]"
   },
   "cyan gem": {
-      "ItemCategory": "Resource",
+      "ItemCategory": "Mineral",
       "StackSize" : 99,
       "Description": "[gem description]"
   },
   "dark blue gem": {
-      "ItemCategory": "Resource",
+      "ItemCategory": "Mineral",
       "StackSize" : 99,
       "Description": "[gem description]"
   },
-  "axe": {
-      "ItemCategory": "Weapon",
+  "wood axe": {
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used for breaking wood"
   },
-  "pickaxe": {
-      "ItemCategory": "Weapon",
+  "wood pickaxe": {
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used for breaking ore"
   },
-  "sword": {
-      "ItemCategory": "Weapon",
+  "wood sword": {
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used for melee attacks"
   },
-  "hoe": {
-      "ItemCategory": "Weapon",
+  "wood hoe": {
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to make fertile soil"
   },
   "scythe": {
-      "ItemCategory": "Weapon",
+      "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to cut grass and flowers"
+  },
+  "stone watering can" : {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Used to water fertile soil"
   },
   
   
@@ -268,96 +273,105 @@
   
   
   
-  
-  "watering can" : {
-      "ItemCategory": "Weapon",
-      "StackSize": 1,
-      "Description": "Used to water fertile soil"
-  },
   "torch" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to generate light"
+      "Description": "Used to generate modest light."
   },
   "campfire" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to generate light"
+      "Description": "Used to generate moderate light."
   },
   "fire pedestal" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to generate light"
+      "Description": "Used to generate moderate light."
   },
   "tall fire pedestal" : {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Used to generate light"
+      "Description": "Used to generate moderate light."
   },
   "wood fence": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood fence for decoration"
+      "Description": "Wood fence for decoration."
   },
   "wood barrel": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood fence for decoration"
+      "Description": "Wood barrel for decoration."
   },
   "wood box": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Wood fence for decoration"
+      "Description": "Wood box for decoration."
   },
   "wood chest": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Large wood chest for storage"
+      "Description": "Wood chest for storage."
   },
   "stone chest": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "Large wood chest for storage"
+      "Description": "Stone chest for storage."
   },
   "wood path": {
       "ItemCategory": "Placable path",
       "StackSize": 99,
-      "Description": "wood path description"
+      "Description": "Place to create paths or decorate your floors."
   },
   "stone path": {
       "ItemCategory": "Placable path",
       "StackSize": 99,
-      "Description": "stone path description"
+      "Description": "Place to create paths or decorate your floors."
   },
   "house": {
       "ItemCategory": "Placable object",
       "StackSize": 1,
-      "Description": "placable house"
+      "Description": "Large placable shelter with high durability."
   },
   "workbench": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "placable house"
+      "Description": "Place to upgrade or repair tools."
   },
   "grain mill": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "placable house"
+      "Description": "Place to process grains for cooking."
   },
   "stove": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "placable house"
+      "Description": "Place to cook food recipes."
   },
   "tent": {
       "ItemCategory": "Placable object",
       "StackSize": 99,
-      "Description": "placable house"
+      "Description": "Small placable shelter with low durability."
   },
     "sleeping bag": {
     "ItemCategory": "Placable object",
     "StackSize": 99,
-    "Description": "Used to set respawn point"
+    "Description": "Can be placed and used to set respawn point in the world."
+    },
+    "twig": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "first tier base building"
+    },
+    "wood wall": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "first tier base building"
+    },
+    "stone wall": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "first tier base building"
     }
   
 }

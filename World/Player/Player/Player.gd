@@ -127,7 +127,7 @@ func set_tile_nodes():
 	fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 	hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
 	watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-	ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedBeachBorder")
+	ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
 	dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
 	
 func sleep(direction_of_sleeping_bag):
@@ -229,7 +229,7 @@ func _unhandled_input(event):
 		not is_player_sleeping: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-			if Input.is_action_pressed("mouse_click") and itemCategory == "Weapon":
+			if Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
 				swing_state(item_name)
 			if itemCategory == "Placable object" and item_name == "tent":
 				$PlaceItemsUI.place_tent_state(valid_tiles)
@@ -290,19 +290,17 @@ func swing_state(item_name):
 	$DetectPathType/FootstepsSound.stream_paused = true
 	if !swingActive:
 		state = SWING
-		if item_name == "watering can":
+		if item_name == "stone watering can":
 			animation = "watering_" + direction.to_lower()
+		elif item_name == "wood sword":
+			animation = "sword_swing_" + direction.to_lower()
 		else:
+			set_melee_collision_layer(item_name)
 			animation = "swing_" + direction.to_lower()
 		PlayerStats.decrease_energy()
 		sendAction(SWING, {"tool": item_name, "direction": direction})
 		swingActive = true
-		set_melee_collision_layer(item_name)
 		$CompositeSprites.set_player_animation(character, animation, item_name)
-		if item_name == "sword":
-			animation = "sword_swing_" + direction.to_lower()
-		else:
-			animation = "swing_" + direction.to_lower()
 		animation_player.play(animation)
 		yield(animation_player, "animation_finished" )
 		swingActive = false
@@ -332,17 +330,14 @@ func walk_state(_direction):
 	$CompositeSprites.set_player_animation(character, animation, null)
 
 func set_melee_collision_layer(_tool):
-	if _tool == "axe": 
+	if _tool == "wood axe": 
 		$MeleeSwing.set_collision_mask(8)
-	elif _tool == "pickaxe":
+	elif _tool == "wood pickaxe":
 		$MeleeSwing.set_collision_mask(16)
 		remove_hoed_tile()
-	elif _tool == "hoe":
+	elif _tool == "wood hoe":
 		$MeleeSwing.set_collision_mask(0)
 		set_hoed_tile()
-	elif _tool == "watering can":
-		$MeleeSwing.set_collision_mask(0)
-		set_watered_tile()
 
 func set_watered_tile():
 	var pos = Util.set_swing_position(get_position(), direction)

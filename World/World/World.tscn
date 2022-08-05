@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Assets/tilesets/tiles_32x32(1).png" type="Texture" id=21]
 [ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=22]
 [ext_resource path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/tilesets/build-export.png" type="Texture" id=24]
 
 [sub_resource type="NavigationPolygon" id=266]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -220,56 +221,6 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 10/shapes = [  ]
 10/z_index = 0
 
-[sub_resource type="TileSet" id=260]
-0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 6 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 1728, 704, 320, 192 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 255, Vector2( 0, 1 ), 507, Vector2( 1, 0 ), 447, Vector2( 1, 1 ), 510, Vector2( 2, 0 ), 510, Vector2( 2, 1 ), 447, Vector2( 3, 0 ), 507, Vector2( 3, 1 ), 255, Vector2( 4, 2 ), 432, Vector2( 4, 3 ), 438, Vector2( 4, 4 ), 438, Vector2( 4, 5 ), 54, Vector2( 5, 2 ), 504, Vector2( 5, 3 ), 511, Vector2( 5, 4 ), 511, Vector2( 5, 5 ), 63, Vector2( 6, 2 ), 504, Vector2( 6, 3 ), 511, Vector2( 6, 4 ), 511, Vector2( 6, 5 ), 63, Vector2( 7, 2 ), 216, Vector2( 7, 3 ), 219, Vector2( 7, 4 ), 219, Vector2( 7, 5 ), 27 ]
-0/autotile/icon_coordinate = Vector2( 0, 0 )
-0/autotile/tile_size = Vector2( 32, 32 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
-[sub_resource type="TileSet" id=3]
-0/name = "grass_tilesets.png 0"
-0/texture = ExtResource( 4 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 256, 640, 256 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 2, 0 ), 510, Vector2( 2, 1 ), 447, Vector2( 3, 0 ), 507, Vector2( 3, 1 ), 255, Vector2( 5, 2 ), 432, Vector2( 5, 3 ), 438, Vector2( 5, 4 ), 438, Vector2( 5, 5 ), 438, Vector2( 5, 6 ), 54, Vector2( 6, 2 ), 504, Vector2( 6, 3 ), 511, Vector2( 6, 4 ), 511, Vector2( 6, 5 ), 511, Vector2( 6, 6 ), 63, Vector2( 7, 2 ), 504, Vector2( 7, 3 ), 511, Vector2( 7, 4 ), 511, Vector2( 7, 5 ), 511, Vector2( 7, 6 ), 63, Vector2( 8, 2 ), 504, Vector2( 8, 3 ), 511, Vector2( 8, 4 ), 511, Vector2( 8, 5 ), 511, Vector2( 8, 6 ), 63, Vector2( 9, 2 ), 216, Vector2( 9, 3 ), 219, Vector2( 9, 4 ), 219, Vector2( 9, 5 ), 219, Vector2( 9, 6 ), 27, Vector2( 10, 0 ), 511, Vector2( 10, 1 ), 511, Vector2( 10, 2 ), 511, Vector2( 10, 3 ), 511, Vector2( 10, 4 ), 511, Vector2( 10, 5 ), 511, Vector2( 10, 6 ), 511, Vector2( 10, 7 ), 511, Vector2( 11, 0 ), 511, Vector2( 11, 1 ), 511, Vector2( 11, 2 ), 511, Vector2( 11, 3 ), 511, Vector2( 11, 4 ), 511, Vector2( 11, 5 ), 511, Vector2( 11, 6 ), 511, Vector2( 11, 7 ), 511, Vector2( 12, 0 ), 511, Vector2( 12, 1 ), 511, Vector2( 12, 2 ), 511, Vector2( 12, 3 ), 511, Vector2( 12, 4 ), 511, Vector2( 12, 5 ), 511, Vector2( 12, 6 ), 511, Vector2( 12, 7 ), 511, Vector2( 13, 0 ), 511, Vector2( 13, 1 ), 511, Vector2( 13, 2 ), 511, Vector2( 13, 3 ), 511, Vector2( 13, 4 ), 511, Vector2( 13, 5 ), 511, Vector2( 13, 6 ), 511, Vector2( 13, 7 ), 511, Vector2( 14, 0 ), 511, Vector2( 14, 1 ), 511, Vector2( 14, 2 ), 511, Vector2( 14, 3 ), 511, Vector2( 14, 4 ), 511, Vector2( 14, 5 ), 511, Vector2( 14, 6 ), 511, Vector2( 14, 7 ), 511, Vector2( 15, 0 ), 511, Vector2( 15, 1 ), 511, Vector2( 15, 2 ), 511, Vector2( 15, 3 ), 511, Vector2( 15, 4 ), 511, Vector2( 15, 5 ), 511, Vector2( 15, 6 ), 511, Vector2( 15, 7 ), 511, Vector2( 16, 0 ), 511, Vector2( 16, 1 ), 511, Vector2( 16, 2 ), 511, Vector2( 16, 3 ), 511, Vector2( 16, 4 ), 511, Vector2( 16, 5 ), 511, Vector2( 16, 6 ), 511, Vector2( 16, 7 ), 511, Vector2( 17, 0 ), 511, Vector2( 17, 1 ), 511, Vector2( 17, 2 ), 511, Vector2( 17, 3 ), 511, Vector2( 17, 4 ), 511, Vector2( 17, 5 ), 511, Vector2( 17, 6 ), 511, Vector2( 17, 7 ), 511, Vector2( 18, 0 ), 511, Vector2( 18, 1 ), 511, Vector2( 18, 2 ), 511, Vector2( 18, 3 ), 511, Vector2( 18, 4 ), 511, Vector2( 18, 5 ), 511, Vector2( 18, 6 ), 511, Vector2( 18, 7 ), 511, Vector2( 19, 0 ), 511, Vector2( 19, 1 ), 511, Vector2( 19, 2 ), 511, Vector2( 19, 3 ), 511, Vector2( 19, 4 ), 511, Vector2( 19, 5 ), 511, Vector2( 19, 6 ), 511, Vector2( 19, 7 ), 511 ]
-0/autotile/icon_coordinate = Vector2( 7, 4 )
-0/autotile/tile_size = Vector2( 32, 32 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
 [sub_resource type="TileSet" id=2]
 0/name = "grass_tilesets.png 0"
 0/texture = ExtResource( 4 )
@@ -320,6 +271,31 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="TileSet" id=3]
+0/name = "grass_tilesets.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 256, 640, 256 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 2, 0 ), 510, Vector2( 2, 1 ), 447, Vector2( 3, 0 ), 507, Vector2( 3, 1 ), 255, Vector2( 5, 2 ), 432, Vector2( 5, 3 ), 438, Vector2( 5, 4 ), 438, Vector2( 5, 5 ), 438, Vector2( 5, 6 ), 54, Vector2( 6, 2 ), 504, Vector2( 6, 3 ), 511, Vector2( 6, 4 ), 511, Vector2( 6, 5 ), 511, Vector2( 6, 6 ), 63, Vector2( 7, 2 ), 504, Vector2( 7, 3 ), 511, Vector2( 7, 4 ), 511, Vector2( 7, 5 ), 511, Vector2( 7, 6 ), 63, Vector2( 8, 2 ), 504, Vector2( 8, 3 ), 511, Vector2( 8, 4 ), 511, Vector2( 8, 5 ), 511, Vector2( 8, 6 ), 63, Vector2( 9, 2 ), 216, Vector2( 9, 3 ), 219, Vector2( 9, 4 ), 219, Vector2( 9, 5 ), 219, Vector2( 9, 6 ), 27, Vector2( 10, 0 ), 511, Vector2( 10, 1 ), 511, Vector2( 10, 2 ), 511, Vector2( 10, 3 ), 511, Vector2( 10, 4 ), 511, Vector2( 10, 5 ), 511, Vector2( 10, 6 ), 511, Vector2( 10, 7 ), 511, Vector2( 11, 0 ), 511, Vector2( 11, 1 ), 511, Vector2( 11, 2 ), 511, Vector2( 11, 3 ), 511, Vector2( 11, 4 ), 511, Vector2( 11, 5 ), 511, Vector2( 11, 6 ), 511, Vector2( 11, 7 ), 511, Vector2( 12, 0 ), 511, Vector2( 12, 1 ), 511, Vector2( 12, 2 ), 511, Vector2( 12, 3 ), 511, Vector2( 12, 4 ), 511, Vector2( 12, 5 ), 511, Vector2( 12, 6 ), 511, Vector2( 12, 7 ), 511, Vector2( 13, 0 ), 511, Vector2( 13, 1 ), 511, Vector2( 13, 2 ), 511, Vector2( 13, 3 ), 511, Vector2( 13, 4 ), 511, Vector2( 13, 5 ), 511, Vector2( 13, 6 ), 511, Vector2( 13, 7 ), 511, Vector2( 14, 0 ), 511, Vector2( 14, 1 ), 511, Vector2( 14, 2 ), 511, Vector2( 14, 3 ), 511, Vector2( 14, 4 ), 511, Vector2( 14, 5 ), 511, Vector2( 14, 6 ), 511, Vector2( 14, 7 ), 511, Vector2( 15, 0 ), 511, Vector2( 15, 1 ), 511, Vector2( 15, 2 ), 511, Vector2( 15, 3 ), 511, Vector2( 15, 4 ), 511, Vector2( 15, 5 ), 511, Vector2( 15, 6 ), 511, Vector2( 15, 7 ), 511, Vector2( 16, 0 ), 511, Vector2( 16, 1 ), 511, Vector2( 16, 2 ), 511, Vector2( 16, 3 ), 511, Vector2( 16, 4 ), 511, Vector2( 16, 5 ), 511, Vector2( 16, 6 ), 511, Vector2( 16, 7 ), 511, Vector2( 17, 0 ), 511, Vector2( 17, 1 ), 511, Vector2( 17, 2 ), 511, Vector2( 17, 3 ), 511, Vector2( 17, 4 ), 511, Vector2( 17, 5 ), 511, Vector2( 17, 6 ), 511, Vector2( 17, 7 ), 511, Vector2( 18, 0 ), 511, Vector2( 18, 1 ), 511, Vector2( 18, 2 ), 511, Vector2( 18, 3 ), 511, Vector2( 18, 4 ), 511, Vector2( 18, 5 ), 511, Vector2( 18, 6 ), 511, Vector2( 18, 7 ), 511, Vector2( 19, 0 ), 511, Vector2( 19, 1 ), 511, Vector2( 19, 2 ), 511, Vector2( 19, 3 ), 511, Vector2( 19, 4 ), 511, Vector2( 19, 5 ), 511, Vector2( 19, 6 ), 511, Vector2( 19, 7 ), 511 ]
+0/autotile/icon_coordinate = Vector2( 7, 4 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
 [sub_resource type="TileSet" id=261]
 0/name = "CL_MainLev_winter.png 0"
 0/texture = ExtResource( 13 )
@@ -354,6 +330,31 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/tile_mode = 1
 0/autotile/bitmask_mode = 1
 0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 255, Vector2( 0, 1 ), 507, Vector2( 1, 0 ), 447, Vector2( 1, 1 ), 510, Vector2( 4, 0 ), 432, Vector2( 4, 1 ), 54, Vector2( 5, 0 ), 216, Vector2( 5, 1 ), 27, Vector2( 5, 2 ), 432, Vector2( 5, 3 ), 438, Vector2( 5, 4 ), 438, Vector2( 5, 5 ), 438, Vector2( 5, 6 ), 54, Vector2( 6, 2 ), 504, Vector2( 6, 3 ), 511, Vector2( 6, 4 ), 511, Vector2( 6, 5 ), 511, Vector2( 6, 6 ), 63, Vector2( 7, 2 ), 504, Vector2( 7, 3 ), 511, Vector2( 7, 4 ), 511, Vector2( 7, 5 ), 511, Vector2( 7, 6 ), 63, Vector2( 8, 2 ), 504, Vector2( 8, 3 ), 511, Vector2( 8, 4 ), 511, Vector2( 8, 5 ), 511, Vector2( 8, 6 ), 63, Vector2( 9, 2 ), 216, Vector2( 9, 3 ), 219, Vector2( 9, 4 ), 219, Vector2( 9, 5 ), 219, Vector2( 9, 6 ), 27, Vector2( 14, 14 ), 511, Vector2( 14, 15 ), 511, Vector2( 14, 16 ), 511, Vector2( 14, 17 ), 511, Vector2( 14, 18 ), 511, Vector2( 14, 19 ), 511, Vector2( 14, 20 ), 511, Vector2( 14, 21 ), 511, Vector2( 15, 14 ), 511, Vector2( 15, 15 ), 511, Vector2( 15, 16 ), 511, Vector2( 15, 17 ), 511, Vector2( 15, 18 ), 511, Vector2( 15, 19 ), 511, Vector2( 15, 20 ), 511, Vector2( 15, 21 ), 511, Vector2( 16, 14 ), 511, Vector2( 16, 15 ), 511, Vector2( 16, 16 ), 511, Vector2( 16, 17 ), 511, Vector2( 16, 18 ), 511, Vector2( 16, 19 ), 511, Vector2( 16, 20 ), 511, Vector2( 16, 21 ), 511, Vector2( 17, 14 ), 511, Vector2( 17, 15 ), 511, Vector2( 17, 16 ), 511, Vector2( 17, 17 ), 511, Vector2( 17, 18 ), 511, Vector2( 17, 19 ), 511, Vector2( 17, 20 ), 511, Vector2( 17, 21 ), 511, Vector2( 18, 14 ), 511, Vector2( 18, 15 ), 511, Vector2( 18, 16 ), 511, Vector2( 18, 17 ), 511, Vector2( 18, 18 ), 511, Vector2( 18, 19 ), 511, Vector2( 18, 20 ), 511, Vector2( 18, 21 ), 511, Vector2( 19, 14 ), 511, Vector2( 19, 15 ), 511, Vector2( 19, 16 ), 511, Vector2( 19, 17 ), 511, Vector2( 19, 18 ), 511, Vector2( 19, 19 ), 511, Vector2( 19, 20 ), 511, Vector2( 19, 21 ), 511, Vector2( 20, 14 ), 511, Vector2( 20, 15 ), 511, Vector2( 20, 16 ), 511, Vector2( 20, 17 ), 511, Vector2( 20, 18 ), 511, Vector2( 20, 19 ), 511, Vector2( 20, 20 ), 511, Vector2( 20, 21 ), 511, Vector2( 21, 14 ), 511, Vector2( 21, 15 ), 511, Vector2( 21, 16 ), 511, Vector2( 21, 17 ), 511, Vector2( 21, 18 ), 511, Vector2( 21, 19 ), 511, Vector2( 21, 20 ), 511, Vector2( 21, 21 ), 511 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=260]
+0/name = "CL_MainLev.png 0"
+0/texture = ExtResource( 6 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 1728, 704, 320, 192 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 255, Vector2( 0, 1 ), 507, Vector2( 1, 0 ), 447, Vector2( 1, 1 ), 510, Vector2( 2, 0 ), 510, Vector2( 2, 1 ), 447, Vector2( 3, 0 ), 507, Vector2( 3, 1 ), 255, Vector2( 4, 2 ), 432, Vector2( 4, 3 ), 438, Vector2( 4, 4 ), 438, Vector2( 4, 5 ), 54, Vector2( 5, 2 ), 504, Vector2( 5, 3 ), 511, Vector2( 5, 4 ), 511, Vector2( 5, 5 ), 63, Vector2( 6, 2 ), 504, Vector2( 6, 3 ), 511, Vector2( 6, 4 ), 511, Vector2( 6, 5 ), 63, Vector2( 7, 2 ), 216, Vector2( 7, 3 ), 219, Vector2( 7, 4 ), 219, Vector2( 7, 5 ), 27 ]
 0/autotile/icon_coordinate = Vector2( 0, 0 )
 0/autotile/tile_size = Vector2( 32, 32 )
 0/autotile/spacing = 0
@@ -427,6 +428,100 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
+
+[sub_resource type="TileSet" id=319]
+0/name = "CL_MainLev.png 0"
+0/texture = ExtResource( 6 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 1536, 1152, 128, 256 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=320]
+0/name = "build-export.png 0"
+0/texture = ExtResource( 24 )
+0/tex_offset = Vector2( 0, -32 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 192, 0, 192, 192 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 3, 0 ), 504, Vector2( 3, 1 ), 511, Vector2( 3, 2 ), 63, Vector2( 4, 0 ), 504, Vector2( 4, 1 ), 511, Vector2( 4, 2 ), 63, Vector2( 5, 0 ), 216, Vector2( 5, 1 ), 219, Vector2( 5, 2 ), 27 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 64 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "build-export.png 1"
+1/texture = ExtResource( 24 )
+1/tex_offset = Vector2( 0, -32 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 384, 0, 192, 192 )
+1/tile_mode = 1
+1/autotile/bitmask_mode = 1
+1/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 3, 0 ), 504, Vector2( 3, 1 ), 511, Vector2( 3, 2 ), 63, Vector2( 4, 0 ), 504, Vector2( 4, 1 ), 511, Vector2( 4, 2 ), 63, Vector2( 5, 0 ), 216, Vector2( 5, 1 ), 219, Vector2( 5, 2 ), 27 ]
+1/autotile/icon_coordinate = Vector2( 3, 2 )
+1/autotile/tile_size = Vector2( 32, 64 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "build-export.png 2"
+2/texture = ExtResource( 24 )
+2/tex_offset = Vector2( 0, -32 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 192, 192 )
+2/tile_mode = 1
+2/autotile/bitmask_mode = 1
+2/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 3, 0 ), 504, Vector2( 3, 1 ), 511, Vector2( 3, 2 ), 63, Vector2( 4, 0 ), 504, Vector2( 4, 1 ), 511, Vector2( 4, 2 ), 63, Vector2( 5, 0 ), 216, Vector2( 5, 1 ), 219, Vector2( 5, 2 ), 27 ]
+2/autotile/icon_coordinate = Vector2( 3, 2 )
+2/autotile/tile_size = Vector2( 32, 64 )
+2/autotile/spacing = 0
+2/autotile/occluder_map = [  ]
+2/autotile/navpoly_map = [  ]
+2/autotile/priority_map = [  ]
+2/autotile/z_index_map = [  ]
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
 
 [sub_resource type="TileSet" id=233]
 0/name = "CL_Crafting.png 0"
@@ -1227,8 +1322,19 @@ __meta__ = {
 tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="GeneratedTiles" type="YSort" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DecorationTiles" type="TileMap" parent="GeneratedTiles"]
+tile_set = SubResource( 236 )
+cell_size = Vector2( 32, 32 )
+format = 1
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1237,38 +1343,43 @@ __meta__ = {
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-
-[node name="DecorationTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = SubResource( 236 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="SandBeachBorder" type="TileMap" parent="GeneratedTiles"]
-tile_set = SubResource( 260 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="DarkGreenGrassTiles" type="TileMap" parent="GeneratedTiles"]
-modulate = Color( 0.423667, 0.62, 0, 1 )
-tile_set = SubResource( 3 )
-cell_size = Vector2( 32, 32 )
-format = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="GreenGrassTiles" type="TileMap" parent="GeneratedTiles"]
 modulate = Color( 0.486275, 1, 0, 1 )
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DesertTiles" type="TileMap" parent="GeneratedTiles"]
 tile_set = SubResource( 262 )
 cell_size = Vector2( 32, 32 )
 format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DarkGreenGrassTiles" type="TileMap" parent="GeneratedTiles"]
+modulate = Color( 0.423667, 0.62, 0, 1 )
+tile_set = SubResource( 3 )
+cell_size = Vector2( 32, 32 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SnowTiles" type="TileMap" parent="GeneratedTiles"]
 tile_set = SubResource( 261 )
 cell_size = Vector2( 32, 32 )
 format = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DirtTiles" type="TileMap" parent="GeneratedTiles"]
 modulate = Color( 0.92, 0.92, 0.92, 1 )
@@ -1276,14 +1387,36 @@ tile_set = SubResource( 263 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 12323429, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="AnimatedBeachBorder" type="TileMap" parent="GeneratedTiles"]
+[node name="AnimatedOceanTiles" type="TileMap" parent="GeneratedTiles"]
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WetSandBeachBorder" type="TileMap" parent="GeneratedTiles"]
+tile_set = SubResource( 260 )
+cell_size = Vector2( 32, 32 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="WaveTiles" type="TileMap" parent="GeneratedTiles"]
 tile_set = SubResource( 265 )
+cell_size = Vector2( 32, 32 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DrySandTiles" type="TileMap" parent="GeneratedTiles"]
+tile_set = SubResource( 319 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
@@ -1291,6 +1424,13 @@ format = 1
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="TwigBuilding" type="TileMap" parent="PlacableTiles"]
+tile_set = SubResource( 320 )
+cell_size = Vector2( 32, 32 )
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
 
 [node name="FenceTiles" type="TileMap" parent="PlacableTiles"]
 tile_set = ExtResource( 1 )

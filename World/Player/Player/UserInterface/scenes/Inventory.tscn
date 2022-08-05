@@ -18,8 +18,8 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Images/inventory_icons/nails.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Images/inventory_icons/wood chest.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Images/inventory_icons/Resource/nails.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Images/inventory_icons/Placable object/stone chest.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Images/Inventory UI/exit icon.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory button.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Images/placable_object_preview/campfire.png" type="Texture" id=23]
@@ -29,12 +29,13 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/grain mill.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Images/placable_object_preview/fire pedestal.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Images/Misc/up arrow.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=30]
+[ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory1.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=33]
 [ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=34]
 [ext_resource path="res://Assets/Images/placable_object_preview/sleeping bag.png" type="Texture" id=35]
+[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=36]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -68,16 +69,6 @@ load_path = "res://.import/up arrow.png-aacac5dc46995855e65ffd85747ee008.stex"
 
 [sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 114.5, 59.75 )
-
-[sub_resource type="StyleBoxTexture" id=16]
-content_margin_left = 72.0
-content_margin_right = 72.0
-texture = ExtResource( 30 )
-region_rect = Rect2( 0, 0, 102, 39 )
-expand_margin_left = 24.0
-expand_margin_right = 24.0
-expand_margin_top = 250.0
-expand_margin_bottom = 90.0
 
 [sub_resource type="StyleBoxTexture" id=17]
 texture = ExtResource( 32 )
@@ -118,8 +109,13 @@ custom_constants/shadow_offset_y = 6
 text = "INVENTORY"
 align = 1
 
+[node name="ItemDescription" parent="." instance=ExtResource( 36 )]
+visible = false
+
 [node name="CraftingMenu" type="Node2D" parent="."]
 script = ExtResource( 7 )
+
+[node name="CraftingItemDescription" parent="CraftingMenu" instance=ExtResource( 30 )]
 
 [node name="Page1" type="Node2D" parent="CraftingMenu"]
 visible = false
@@ -285,7 +281,7 @@ position = Vector2( 238, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/Page2/TentArea"]
 position = Vector2( 0, 13 )
-polygon = PoolVector2Array( 105, 757, 264, 755, 262, 571, 186, 482, 113, 566 )
+polygon = PoolVector2Array( 105, 757, 264, 755, 265, 581, 186, 501, 112, 577 )
 
 [node name="TallPedestalArea" type="Area2D" parent="CraftingMenu/Page2"]
 
@@ -357,42 +353,9 @@ position = Vector2( 182.5, 331.75 )
 shape = SubResource( 22 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="CraftingMenu"]
+bus = "Bus1"
 
 [node name="Tween" type="Tween" parent="CraftingMenu"]
-
-[node name="CraftableItemDescription" type="Node2D" parent="CraftingMenu"]
-visible = false
-scale = Vector2( 2.5, 2.5 )
-z_index = 1
-
-[node name="Background" type="Sprite" parent="CraftingMenu/CraftableItemDescription"]
-position = Vector2( 15.7, 4.03077 )
-scale = Vector2( 1.33137, 1.26154 )
-texture = ExtResource( 30 )
-
-[node name="Title" type="Label" parent="CraftingMenu/CraftableItemDescription"]
-margin_left = -42.0
-margin_top = -15.2
-margin_right = 596.0
-margin_bottom = 97.8
-rect_scale = Vector2( 0.18, 0.18 )
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "Tall fire pedestal"
-
-[node name="Materials" type="Label" parent="CraftingMenu/CraftableItemDescription"]
-margin_left = -39.2
-margin_top = 6.4
-margin_right = 239.8
-margin_bottom = 119.4
-rect_scale = Vector2( 0.1, 0.1 )
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "4 wood"
 
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
@@ -611,38 +574,6 @@ margin_bottom = 198.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="InventoryItemDescription" type="Node2D" parent="InventoryMenu"]
-visible = false
-position = Vector2( -22, -84 )
-scale = Vector2( 2, 2 )
-z_index = 1
-
-[node name="Description" type="Label" parent="InventoryMenu/InventoryItemDescription"]
-margin_left = -50.0
-margin_top = 3.0
-margin_right = 1290.0
-margin_bottom = 116.0
-rect_scale = Vector2( 0.1, 0.1 )
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-custom_styles/normal = SubResource( 16 )
-text = "jhg hg jgh ghjgh jgh gjhj g "
-autowrap = true
-
-[node name="Title" type="Label" parent="InventoryMenu/InventoryItemDescription"]
-margin_left = -42.0
-margin_top = -16.0
-margin_right = 596.0
-margin_bottom = 97.0
-rect_scale = Vector2( 0.18, 0.18 )
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "Tall fire pedestal"
-
 [node name="PetUI" type="Control" parent="InventoryMenu"]
 visible = false
 margin_right = 40.0
@@ -667,6 +598,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
+frame = 21
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]

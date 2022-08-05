@@ -406,14 +406,10 @@ func returnICGhostUnique(unique):
 
 
 
-
-
-
-
 # WEAPONS #
 func returnToolSprite(toolName, direction):
 	match toolName:
-		"pickaxe":
+		"wood pickaxe":
 			match direction: 
 				"swing_down":
 					 return pickaxe.down
@@ -423,7 +419,7 @@ func returnToolSprite(toolName, direction):
 					 return pickaxe.left
 				"swing_right":
 					 return pickaxe.right
-		"hoe":
+		"wood hoe":
 			match direction: 
 				"swing_down":
 					 return pickaxe.down
@@ -433,7 +429,7 @@ func returnToolSprite(toolName, direction):
 					 return pickaxe.left
 				"swing_right":
 					 return pickaxe.right
-		"axe":
+		"wood axe":
 			match direction: 
 				"swing_down":
 					 return axe.down
@@ -443,29 +439,48 @@ func returnToolSprite(toolName, direction):
 					 return axe.left
 				"swing_right":
 					return axe.right
-		"watering can":
-			match Server.character:
-				"human_male":
-					match direction: 
-						"watering_down":
-							 return human_male_can.down
-						"watering_up":
-							 return null
-						"watering_left":
-							 return human_male_can.left
-						"watering_right":
-							 return human_male_can.right
-				"human_female":
-					match direction: 
-						"watering_down":
-							 return human_female_can.down
-						"watering_up":
-							 return null
-						"watering_left":
-							 return human_female_can.left
-						"watering_right":
-							 return human_female_can.right
-					
+#		"wood sword":
+#			match direction: 
+#				"sword_swing_down":
+#					 return sword.down
+#				"sword_swing_up":
+#					 return sword.up
+#				"sword_swing_left":
+#					 return sword.left
+#				"sword_swing_right":
+#					return sword.right
+		"stone watering can":
+			match direction:
+				"watering_down":
+					 return human_male_can.down
+				"watering_up":
+					 return null
+				"watering_left":
+					 return human_male_can.left
+				"watering_right":
+					 return human_male_can.right
+#			match Server.character:
+#				"human_male":
+#					match direction: 
+#						"watering_down":
+#							 return human_male_can.down
+#						"watering_up":
+#							 return null
+#						"watering_left":
+#							 return human_male_can.left
+#						"watering_right":
+#							 return human_male_can.right
+#				"human_female":
+#					match direction: 
+#						"watering_down":
+#							 return human_female_can.down
+#						"watering_up":
+#							 return null
+#						"watering_left":
+#							 return human_female_can.left
+#						"watering_right":
+#							 return human_female_can.right
+			
 
 
 var pickaxe = {
@@ -480,6 +495,13 @@ var axe = {
 	up =  preload("res://Characters/Weapon swings/up/axe.png"), 
 	left = preload("res://Characters/Weapon swings/left/axe.png"), 
 	right = preload("res://Characters/Weapon swings/right/axe.png")
+}
+
+var sword = {
+	down = preload("res://Characters/Weapon swings/sword/down.png"), 
+	up =  preload("res://Characters/Weapon swings/sword/up.png"), 
+	left = preload("res://Characters/Weapon swings/sword/left.png"), 
+	right = preload("res://Characters/Weapon swings/sword/right.png")
 }
 
 var human_male_can = {

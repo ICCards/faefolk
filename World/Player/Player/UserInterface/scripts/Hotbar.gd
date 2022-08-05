@@ -3,14 +3,47 @@ extends Node2D
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 onready var hotbar_slots = $HotbarSlots
 onready var slots = hotbar_slots.get_children()
+var item = null
+var adjusted_pos
 
 func _ready():
 	for i in range(slots.size()):
 		PlayerInventory.connect("active_item_updated", slots[i], "refresh_style")
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
+		slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
+		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
 		slots[i].slotType = SlotClass.SlotType.HOTBAR
 		slots[i].slot_index = i
 	initialize_hotbar()
+
+func hovered_slot(slot: SlotClass):
+	if slot.item != null:
+		item = slot.item.item_name
+
+func exited_slot(slot: SlotClass):
+	item = null
+
+func _physics_process(delta):
+	adjusted_description_position()
+	if item != null and find_parent("UserInterface").holding_item == null:
+		$ItemDescription.visible = true
+		$ItemDescription.item_name = item
+		$ItemDescription.position = adjusted_pos
+		$ItemDescription.initialize()
+	else:
+		$ItemDescription.visible = false
+
+func adjusted_description_position():
+	yield(get_tree(), "idle_frame")
+	var lines = $ItemDescription/ItemDescription.get_line_count()
+	if lines >= 5:
+		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94 - (lines * 22))
+	elif lines == 4:
+		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94 - (lines * 20))
+	elif lines > 2:
+		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94 - (lines * 14))
+	else:
+		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94)
 
 
 func initialize_hotbar():
