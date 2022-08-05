@@ -41,6 +41,8 @@ var tall_grass_types = ["dark green", "green", "red", "yellow"]
 var treeTypes = ['A','B', 'C', 'D', 'E']
 var oreTypes = ["Stone", "Cobblestone"]
 
+var active_player = "Players/" + Server.player_id + "/" + Server.player_id
+
 var object_name
 var position_of_object
 var object_variety
@@ -494,17 +496,19 @@ func UpdateWorldState(world_state):
 #			get_node("Players/" + Server.player_id).init_day_night_cycle(int(world_state["time_elapsed"]))
 	if world_state["t"] > last_world_state:
 		var new_day = bool(world_state["day"])
-		if has_node("Players/" + Server.player_id):
-			get_node("Players/" + Server.player_id + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
+		if has_node(active_player):
+			get_node(active_player + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
 		if Server.day != new_day and Server.isLoaded:
 			Server.day = new_day
 			if new_day == false:
-				if has_node("Players/" + Server.player_id):
-					get_node("Players/" + Server.player_id).set_night()
+				if has_node(active_player):
+					pass
+					#get_node(active_player).set_night()
 			else:
-				if has_node("Players/" + Server.player_id):
-					watered.clear()
-					get_node("Players/" + Server.player_id).set_day()
+				if has_node(active_player):
+					pass
+					#watered.clear()
+					#get_node(active_player).set_day()
 		last_world_state = world_state["t"]
 		world_state_buffer.append(world_state)
 
@@ -527,27 +531,27 @@ func _physics_process(delta):
 			for player in world_state_buffer[2]["players"].keys():
 				if str(player) == "t":
 					continue
-				if player == Server.player_id:
+				if str(player) == Server.player_id:
 					continue
-				if $Players.has_node(str(player)):
+				if Players.has_node(str(player)):
+					var player_node = Players.get_node(str(player))
 					if world_state_buffer[1]["players"].has(player):
-						var new_position = lerp(Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]), Util.string_to_vector2(world_state_buffer[2]["players"][player]["p"]), interpolation_factor)
-						$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+						var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
+						player_node.move(new_position, world_state_buffer[1]["players"][player]["d"])
 				else:
-					if not mark_for_despawn.has(player):
-						print("will spawn player")
-						spawnNewPlayer(world_state_buffer[2]["players"][player])
+					spawnNewPlayer(world_state_buffer[2]["players"][player])
 		elif render_time > world_state_buffer[1].t:
-			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
+			#var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
 			for player in world_state_buffer[1]["players"].keys():
 				if str(player) == "t":
 					continue
-				if player == Server.player_id:
+				if str(player) == Server.player_id:
 					continue
-				if $Players.has_node(str(player)):
-					var position_delta = (Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) - Util.string_to_vector2(world_state_buffer[0]["players"][player]["p"]))
-					var new_position = Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) + (position_delta * extrapolation_factor)
-					$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+				if Players.has_node(str(player)):
+					pass
+					#var position_delta = (Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) - Util.string_to_vector2(world_state_buffer[0]["players"][player]["p"]))
+					#var new_position = Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) + (position_delta * extrapolation_factor)
+					#$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 
 
 func returnValidSpawnLocation():

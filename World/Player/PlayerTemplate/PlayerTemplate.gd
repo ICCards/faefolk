@@ -73,8 +73,8 @@ func move(new_position, _direction):
 				setPlayerTexture("idle_" + direction)
 			else: 
 				setPlayerTexture("walk_" + direction)
-				move_and_collide(new_position)
-
+				set_position(new_position)
+				#move_and_collide(new_position)
 func Swing(tool_name, direction):
 	print(tool_name)
 	print(direction)
