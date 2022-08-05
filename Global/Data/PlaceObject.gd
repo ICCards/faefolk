@@ -14,6 +14,7 @@ onready var fence_tiles
 onready var object_tiles
 onready var light_tiles
 onready var path_tiles 
+var twig
 var rng = RandomNumberGenerator.new()
 
 enum Placables { 
@@ -58,6 +59,7 @@ func place_object_in_world(id, item_name, location):
 	object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
 	path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 	light_tiles = get_node("/root/World/PlacableTiles/LightTiles")
+	twig = get_node("/root/World/PlacableTiles/TwigBuilding")
 	
 	var tileObjectHurtBox = TileObjectHurtBox.instance()
 	tileObjectHurtBox.name = str(id)
@@ -65,6 +67,15 @@ func place_object_in_world(id, item_name, location):
 	Server.world.call_deferred("add_child", tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = valid_tiles.map_to_world(location) + Vector2(16, 16)
 	match item_name:
+		"twig":
+			twig.set_cellv(location, 0)
+			twig.update_bitmask_region()
+		"stone wall":
+			twig.set_cellv(location, 2)
+			twig.update_bitmask_region()
+		"wood wall":
+			twig.set_cellv(location, 1)
+			twig.update_bitmask_region()
 		"torch":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.TORCH)

@@ -26,12 +26,12 @@ func _ready():
 	
 func _physics_process(delta):
 	if item != null and find_parent("UserInterface").holding_item == null:
-		$InventoryMenu/InventoryItemDescription.visible = true
-		$InventoryMenu/InventoryItemDescription/Title.text = item[0].to_upper() + item.substr(1,-1)
-		$InventoryMenu/InventoryItemDescription/Description.text = JsonData.item_data[item]["Description"]
-		$InventoryMenu/InventoryItemDescription.position = get_local_mouse_position() + Vector2(140, 100)
+		$ItemDescription.visible = true
+		$ItemDescription.item_name = item
+		$ItemDescription.position = get_local_mouse_position() + Vector2(40	, 50)
+		$ItemDescription.initialize()
 	else:
-		$InventoryMenu/InventoryItemDescription.visible = false
+		$ItemDescription.visible = false
 
 func initialize_inventory():
 	var slots = inventory_slots.get_children()

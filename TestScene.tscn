@@ -19,7 +19,7 @@
 [ext_resource path="res://Assets/tilesets/tiles_32x32(1).png" type="Texture" id=17]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=18]
 [ext_resource path="res://World/Player/Player/Player.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Assets/tilesets/new.png" type="Texture" id=20]
+[ext_resource path="res://Assets/tilesets/build-export(5).png" type="Texture" id=20]
 [ext_resource path="res://Assets/tilesets/tiles2032x32.png" type="Texture" id=21]
 
 [sub_resource type="TileSet" id=298]
@@ -1171,16 +1171,16 @@ glow_blend_mode = 1
 
 [sub_resource type="TileSet" id=319]
 
-[sub_resource type="TileSet" id=320]
-0/name = "new.png 0"
+[sub_resource type="TileSet" id=322]
+0/name = "build-export(5).png 0"
 0/texture = ExtResource( 20 )
 0/tex_offset = Vector2( 0, -32 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 96, 192 )
+0/region = Rect2( 192, 0, 192, 192 )
 0/tile_mode = 1
 0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 2, 0 ), 216, Vector2( 2, 1 ), 219, Vector2( 2, 2 ), 27 ]
-0/autotile/icon_coordinate = Vector2( 1, 2 )
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 3, 0 ), 504, Vector2( 3, 1 ), 511, Vector2( 3, 2 ), 63, Vector2( 4, 0 ), 504, Vector2( 4, 1 ), 511, Vector2( 4, 2 ), 63, Vector2( 5, 0 ), 216, Vector2( 5, 1 ), 219, Vector2( 5, 2 ), 27 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
 0/autotile/tile_size = Vector2( 32, 64 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
@@ -1338,11 +1338,10 @@ tile_set = SubResource( 319 )
 cell_size = Vector2( 128, 128 )
 format = 1
 
-[node name="New" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 320 )
+[node name="TwigBuilding" type="TileMap" parent="PlacableTiles"]
+tile_set = SubResource( 322 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 458781, 0, 0, 458782, 0, 1, 458783, 0, 1, 458784, 0, 1, 458785, 0, 1, 458786, 0, 1, 458787, 0, 1, 458788, 0, 2, 524316, 0, 0, 524317, 0, 131073, 524318, 0, 65537, 524319, 0, 65537, 524320, 0, 65537, 524321, 0, 65537, 524322, 0, 65537, 524323, 0, 65537, 524324, 0, 65538, 589852, 0, 65536, 589853, 0, 65537, 589854, 0, 65537, 589855, 0, 65537, 589856, 0, 65537, 589857, 0, 65537, 589858, 0, 65537, 589859, 0, 65537, 589860, 0, 65538, 655388, 0, 65536, 655389, 0, 65537, 655390, 0, 65537, 655391, 0, 65537, 655392, 0, 65537, 655393, 0, 65537, 655394, 0, 65537, 655395, 0, 65537, 655396, 0, 65538, 720924, 0, 65536, 720925, 0, 65537, 720926, 0, 65537, 720927, 0, 65537, 720928, 0, 65537, 720929, 0, 65537, 720930, 0, 65537, 720931, 0, 65537, 720932, 0, 65538, 786460, 0, 65536, 786461, 0, 65537, 786462, 0, 65537, 786463, 0, 65537, 786464, 0, 65537, 786465, 0, 131073, 786466, 0, 131073, 786467, 0, 131073, 786468, 0, 131074, 851996, 0, 65536, 851997, 0, 65537, 851998, 0, 65537, 851999, 0, 65537, 852000, 0, 65537, 852001, 0, 65538, 917532, 0, 65536, 917533, 0, 65537, 917534, 0, 65537, 917535, 0, 65537, 917536, 0, 65537, 917537, 0, 65538, 983068, 0, 131072, 983069, 0, 131073, 983070, 0, 131073, 983071, 0, 131073, 983072, 0, 131073, 983073, 0, 131074, 1179682, 0, 0, 1179683, 0, 1, 1179684, 0, 1, 1179685, 0, 2, 1245218, 0, 65536, 1245219, 0, 65537, 1245220, 0, 131073, 1245221, 0, 131074, 1310754, 0, 131072, 1310755, 0, 131073, 1310756, 0, 131074 )
 
 [node name="TileMap3" type="TileMap" parent="PlacableTiles"]
 tile_set = SubResource( 321 )

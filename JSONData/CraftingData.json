@@ -1,70 +1,99 @@
 {
     "wood box": {
-        "wood" : 4,
-        "stone": 0
+        "ingredients" : [
+            ["wood", 4]
+        ],
     },
      "wood barrel": {
-        "wood": 4,
-        "stone": 0
+         "ingredients" : [
+             ["wood", 4 ],
+        ]
     },
      "wood fence": {
-         "wood": 2,
-         "stone": 0,
+         "ingredients" : [
+             ["wood", 2,]
+         ]
      },
      "wood path": {
-         "wood": 1,
-         "stone": 0,
+         "ingredients" : [
+             ["wood", 1],
+         ]
      },
      "stone path": {
-         "wood": 0,
-         "stone": 1,
+         "ingredients" : [
+             ["stone", 1]
+         ]
      },
      "torch": {
-         "wood": 1,
-         "stone": 1,
+         "ingredients" : [
+             ["wood", 1],
+             ["stone", 1],
+         ]
      },
      "wood chest": {
-        "wood": 10,
-        "stone": 2,
+        "ingredients" : [
+            ["wood", 10],
+            ["stone", 2],
+        ]
     },
      "stone chest": {
-         "wood": 2,
-         "stone": 10
+         "ingredients" : [
+             ["wood", 2],
+             ["stone", 10]
+         ]
      },
      "house": {
-         "wood": 100,
-         "stone": 100
+         "ingredients" : [
+             ["wood", 100],
+             ["stone", 100]
+         ]
      },
      "tent": {
-         "wood": 20,
-         "stone": 10
+         "ingredients" : [
+             ["wood", 20],
+             ["stone", 10]
+         ]
      },
      "sleeping bag": {
-         "wood": 10,
-         "stone": 2
+         "ingredients" : [
+            ["wood", 10],
+            ["stone", 2]
+         ]
      },
      "campfire": {
-         "wood": 2,
-         "stone": 2
+         "ingredients" : [
+             ["wood", 2],
+             ["stone", 2]
+        ]
      },
      "fire pedestal": {
-         "wood": 2,
-         "stone": 5,
+         "ingredients" : [
+             ["wood", 2],
+             ["stone", 5],
+        ]
      },
      "tall fire pedestal": {
-         "wood": 2,
-         "stone": 10
+         "ingredients" : [
+            ["wood", 2],
+            ["stone", 10]
+         ]
      },
      "workbench": {
-         "wood": 10,
-         "stone": 10
+         "ingredients" : [
+             ["wood", 10],
+             ["stone", 10]
+         ]
      },
      "grain mill": {
-         "wood": 20,
-         "stone": 20
+         "ingredients" : [
+             ["wood", 20],
+             ["stone", 20]
+         ]
      },
      "stove": {
-         "wood": 30,
-         "stone": 30
+         "ingredients" : [
+             ["wood", 30],
+             ["stone", 30]
+        ]
      }
 }

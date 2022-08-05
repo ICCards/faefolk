@@ -15,13 +15,11 @@ func set_item(nm, qt):
 	item_name = nm
 	item_quantity = qt
 	
-	if item_name == "Cobblestone":
-		item_name = "Stone"
-	elif item_name == "wood path1" or item_name == "wood path2":
+	if item_name == "wood path1" or item_name == "wood path2":
 		item_name = "wood path"
 	elif item_name == "stone path1" or item_name == "stone path2" or  item_name == "stone path3" or item_name == "stone path4": 
 		item_name = "stone path"
-	$TextureRect.texture = load("res://Assets/Images/inventory_icons/" + item_name + ".png")
+	$TextureRect.texture = load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png")
 	
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	if stack_size == 1:
@@ -29,7 +27,7 @@ func set_item(nm, qt):
 	else:
 		$Label.visible = true
 		$Label.text = String(item_quantity)
-	if item_name == "watering can":
+	if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 		$WateringCanProgressIndicator.visible = true
 		update_watering_can_amount()
 	

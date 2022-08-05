@@ -70,35 +70,43 @@ func reset():
 
 
 func initialize_crafting():
-	var wood = PlayerInventory.return_player_wood_and_stone()[0]
-	var stone = PlayerInventory.return_player_wood_and_stone()[1]
 	if page == 1:
 		for item in page1:
-			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+			if sufficientMaterialToCraft(item):
 				$Page1.get_node(item).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page1.get_node(item).modulate = Color(1, 1, 1, 0.4)
 	elif page == 2:
 		for item in page2:
-			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+			if sufficientMaterialToCraft(item):
 				$Page2.get_node(item).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page2.get_node(item).modulate = Color(1, 1, 1, 0.4)
 	elif page == 3:
 		for item in page3:
-			if wood >= JsonData.crafting_data[item]["wood"] and stone >= JsonData.crafting_data[item]["stone"]:
+			if sufficientMaterialToCraft(item):
 				$Page3.get_node(item).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page3.get_node(item).modulate = Color(1, 1, 1, 0.4)
 
+
+func sufficientMaterialToCraft(item):
+	var ingredients = JsonData.crafting_data[item]["ingredients"]
+	for i in range(ingredients.size()):
+		if PlayerInventory.returnSufficentCraftingMaterial(ingredients[i][0], ingredients[i][1]):
+			continue
+		else:
+			return false
+	return true
+
 func _physics_process(delta):
 	if item != null:
-		$CraftableItemDescription.visible = true
-		$CraftableItemDescription/Title.text = item[0].to_upper() + item.substr(1,-1)
-		$CraftableItemDescription/Materials.text = "Wood: " + str(JsonData.crafting_data[item]["wood"]) + " - Stone: " + str(JsonData.crafting_data[item]["stone"])
-		$CraftableItemDescription.position = get_local_mouse_position() + Vector2(140, 100)
+		$CraftingItemDescription.visible = true
+		$CraftingItemDescription.item_name = item
+		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(40	, 50)
+		$CraftingItemDescription.initialize()
 	else:
-		$CraftableItemDescription.visible = false
+		$CraftingItemDescription.visible = false
 
 func entered_crafting_area(_item):
 	$SoundEffects.stream = Sounds.button_hover
@@ -191,85 +199,139 @@ func play_craft_sound():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
+	
+func play_error_sound():
+	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.play()
+	
 
 func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("wood box")
-		initialize_crafting()
+		if sufficientMaterialToCraft(item):
+			play_craft_sound()
+			PlayerInventory.craft_item("wood box")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_WoodBarrelArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("wood barrel")
-		initialize_crafting()
+		if sufficientMaterialToCraft("wood barrel"):
+			play_craft_sound()
+			PlayerInventory.craft_item("wood barrel")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_WoodFenceArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("wood fence")
-		initialize_crafting()
+		if sufficientMaterialToCraft("wood fence"):
+			play_craft_sound()
+			PlayerInventory.craft_item("wood fence")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_TorchArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("torch")
-		initialize_crafting()
+		if sufficientMaterialToCraft("torch"):
+			play_craft_sound()
+			PlayerInventory.craft_item("torch")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_WoodChestArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("wood chest")
-		initialize_crafting()
+		if sufficientMaterialToCraft("wood chest"):
+			play_craft_sound()
+			PlayerInventory.craft_item("wood chest")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_StoneChestArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("stone chest")
-		initialize_crafting()
+		if sufficientMaterialToCraft("stone chest"):
+			play_craft_sound()
+			PlayerInventory.craft_item("stone chest")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_WoodPathArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("wood path")
-		initialize_crafting()
+		if sufficientMaterialToCraft("wood path"):
+			play_craft_sound()
+			PlayerInventory.craft_item("wood path")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_StonePathArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("stone path")
-		initialize_crafting()
+		if sufficientMaterialToCraft("stone path"):
+			play_craft_sound()
+			PlayerInventory.craft_item("stone path")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_TentArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("tent")
-		initialize_crafting()
+		if sufficientMaterialToCraft("tent"):
+			play_craft_sound()
+			PlayerInventory.craft_item("tent")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_CampfireArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("campfire")
-		initialize_crafting()
+		if sufficientMaterialToCraft("campfire"):
+			play_craft_sound()
+			PlayerInventory.craft_item("campfire")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_FirePedestalArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("fire pedestal")
-		initialize_crafting()
+		if sufficientMaterialToCraft("fire pedestal"):
+			play_craft_sound()
+			PlayerInventory.craft_item("fire pedestal")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_TallPedestalArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("tall fire pedestal")
-		initialize_crafting()
+		if sufficientMaterialToCraft("tall fire pedestal"):
+			play_craft_sound()
+			PlayerInventory.craft_item("tall fire pedestal")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_MachineArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("grain mill")
-		initialize_crafting()
+		if sufficientMaterialToCraft("grain mill"):
+			play_craft_sound()
+			PlayerInventory.craft_item("grain mill")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_CraftingTable_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("workbench")
-		initialize_crafting()
+		if sufficientMaterialToCraft("workbench"):
+			play_craft_sound()
+			PlayerInventory.craft_item("workbench")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_KitchenArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("stove")
-		initialize_crafting()
+		if sufficientMaterialToCraft("stove"):
+			play_craft_sound()
+			PlayerInventory.craft_item("stove")
+			initialize_crafting()
+		else:
+			play_error_sound()
 func _on_SleepingBagArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
-		play_craft_sound()
-		PlayerInventory.craft_item("sleeping bag")
-		initialize_crafting()
+		if sufficientMaterialToCraft("sleeping bag"):
+			play_craft_sound()
+			PlayerInventory.craft_item("sleeping bag")
+			initialize_crafting()
+		else:
+			play_error_sound()
 

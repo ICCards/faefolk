@@ -21,7 +21,8 @@ func spawn_player_in_menu():
 		$MainMenuButtons/PlayShopQuit.visible = true
 		playerMenuState = PlayerMenuState.instance()
 		playerMenuState.character = _character.new()
-		playerMenuState.character.LoadPlayerCharacter(value["c"])
+		#playerMenuState.character.LoadPlayerCharacter(value["c"])
+		playerMenuState.character.LoadPlayerCharacter("human_male")
 		add_child(playerMenuState)
 		playerMenuState.global_position = Vector2(600, 472 )
 	else:
