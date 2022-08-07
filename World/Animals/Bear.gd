@@ -1,6 +1,6 @@
-extends KinematicBody2D
+extends StaticBody2D
 
-const SPEED: int = 120
+const SPEED: int = 160
 var velocity: Vector2 = Vector2.ZERO
 
 var path: Array = []
@@ -25,7 +25,7 @@ func wait_for_map():
 			worldNavigation = get_node("/root/World/WorldNavigation")
 		if Server.world.has_node("Players/" + Server.player_id):
 			print('set player')
-			player = get_node("/root/World/Players/" + Server.player_id)
+			player = get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id)
 	else:
 		yield(get_tree().create_timer(2.5), "timeout")
 		wait_for_map()
@@ -37,7 +37,7 @@ func _physics_process(delta):
 		check_player_in_detection()
 		if player_spotted:
 			start_sound_effects()
-			move()
+			navigate(delta)
 		else:
 			stop_sound_effects()
 			idle()
@@ -93,15 +93,28 @@ func check_player_in_detection() -> bool:
 	if global_position.distance_to(player.global_position) >= 500:
 		player_spotted = false
 	if collider and collider == player:
+		$AnimationPlayer.play("loop")
 		player_spotted = true
 		return true
 	return false
 
-func navigate():
-	if path.size() > 1:
-		velocity = global_position.direction_to(path[1]) * SPEED
+func navigate(delta):
+	if path.size() > 0:
+		set_direction()	
+		$Bear.texture = load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png")
+		$Fangs.texture = load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png")
+		position = position.move_toward(path[0], delta * SPEED)
 		if global_position == path[0]:
 			path.pop_front()
+	
+	
+#func set_direction(new_pos):
+#	pass
+#	var tempPos = position - new_pos
+#	if tempPos.x > 0:
+#		$AnimatedSprite.flip_h = true
+#	else:
+#		$AnimatedSprite.flip_h = false
 	
 func generate_path():
 	if worldNavigation != null and player != null:
@@ -109,55 +122,45 @@ func generate_path():
 
 
 func idle():
-	if direction == "left":
-		$AnimatedSprite.play("idle side")
-		$AnimatedSprite.flip_h = true
-	elif direction == "right":
-		$AnimatedSprite.play("idle side")
-		$AnimatedSprite.flip_h = false
-	else: 
-		$AnimatedSprite.play("idle " + direction)
+	$Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
+	$Fangs.texture = load("res://Assets/Images/Animals/Bear/idle/fangs/" + direction  + ".png")
 
-func move():
-	if not swinging:
-		if worldNavigation != null and player != null:
-			velocity = move_and_slide(velocity)
-			if position.distance_to(player.position) > 50:
-				if direction == "left":
-					$AnimatedSprite.play("walk side")
-					$AnimatedSprite.flip_h = true
-				elif direction == "right":
-					$AnimatedSprite.play("walk side")
-					$AnimatedSprite.flip_h = false
-				else:
-					$AnimatedSprite.play("walk " + direction)
-					$AnimatedSprite.flip_h = false
-			else:
-				swing(direction)
+#func move():
+#	if not swinging:
+#		if worldNavigation != null and player != null:
+#			velocity = move_and_slide(velocity)
+#			if position.distance_to(player.position) > 50:
+#				$Bear.texture = load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png")
+#				$Fangs.texture = load("res://Assets/Images/Animals/Bear/walk/fangs/" + direction  + ".png")
+#			else:
+#				swing(direction)
 	
+
 	
 
 func swing(direction):
-	if not swinging:
-		play_groan_sound_effect()
-		swinging = true
-		if direction == "left":
-			$AnimationPlayer.play("swing left")
-			$AnimatedSprite.flip_h = true
-			$AnimatedSprite.play("swing side")
-		elif direction == "right":	
-			$AnimationPlayer.play("swing right")
-			$AnimatedSprite.flip_h = false
-			$AnimatedSprite.play("swing side")
-		else:
-			$AnimationPlayer.play("swing "+ direction)
-			$AnimatedSprite.play("swing " + direction)
-		yield($AnimatedSprite, "animation_finished")
-		swinging = false
+	print("swing")
+	pass
+#	if not swinging:
+#		play_groan_sound_effect()
+#		swinging = true
+#		if direction == "left":
+#			$AnimationPlayer.play("swing left")
+#			$AnimatedSprite.flip_h = true
+#			$AnimatedSprite.play("swing side")
+#		elif direction == "right":	
+#			$AnimationPlayer.play("swing right")
+#			$AnimatedSprite.flip_h = false
+#			$AnimatedSprite.play("swing side")
+#		else:
+#			$AnimationPlayer.play("swing "+ direction)
+#			$AnimatedSprite.play("swing " + direction)
+#		yield($AnimatedSprite, "animation_finished")
+#		swinging = false
 
 
 
 func _on_Timer_timeout():
 	if player:
 		generate_path()
-		navigate()
+		#navigate()

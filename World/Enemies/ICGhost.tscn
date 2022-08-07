@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Images/IC Ghost Elements/Uniques/Unique3.png" type="Texture" id=1]
 [ext_resource path="res://World/Enemies/ICGhost.gd" type="Script" id=2]
@@ -6,8 +6,27 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 18.0278
 
+[sub_resource type="Animation" id=3]
+resource_name = "hit"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("../CompositeSprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.262745, 0.262745, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16.5, 17 )
+extents = Vector2( 7.625, 7.5 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 5.0
 
 [node name="ICGhost" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -40,11 +59,23 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 disabled = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+root_node = NodePath("../../HitBox")
+anims/hit = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource( 2 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 4 )
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_Area2D_area_entered"]

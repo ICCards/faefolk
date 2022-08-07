@@ -270,6 +270,11 @@
       "StackSize": 99,
       "Description": "Plant these in the Fall. Takes 8 days to mature and continues to grow after harvest. Has a chance to yield multiple jalapenos at harvest.",
   },
+  "tomato seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 99,
+      "Description": "Plant these in the Summer. Takes 11 days to mature and continues to grow after harvest. Has a chance to yield 1 or 2 tomatoes at harvest.",
+  },
   
   
   
@@ -371,7 +376,17 @@
     "stone wall": {
     "ItemCategory": "Placable object",
     "StackSize": 99,
-    "Description": "first tier base building"
+    "Description": "Third tier base building."
+    },
+    "stone double door": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "Third tier door."
+    },
+    "stone foundation": {
+    "ItemCategory": "Placable object",
+    "StackSize": 99,
+    "Description": "Third tier foundation."
     }
   
 }

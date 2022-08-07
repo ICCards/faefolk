@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 onready var background = $CompositeSprites/background
 onready var body = $CompositeSprites/body
 onready var ears = $CompositeSprites/ears
@@ -50,9 +49,13 @@ var test_ghost = [
 		  }
 ]
 
-onready var player = get_node("/root/World/Players/" + Server.player_id)
+onready var player = get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id)
+var velocity = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var knockback = Vector2.ZERO
+export var MAX_SPEED = 250
+export var ACCELERATION = 350
+export var FRICTION = 200
 
 func _ready():
 	background.texture = Images.returnICGhostBackground(test_ghost[0]["v"])
@@ -67,9 +70,11 @@ func _ready():
 	
 
 func _physics_process(delta):
+	rng.randomize()
 	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
 	knockback = move_and_slide(knockback)
-	var velocity = player.global_position - global_position
+	var direction = (player.global_position - global_position).normalized()
+	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 	velocity = move_and_slide(velocity)
 	if velocity.x > 0:
 		flip_horizontal_false()
@@ -102,5 +107,6 @@ func flip_horizontal_false():
 
 
 func _on_Area2D_area_entered(area):
+	$HurtBox/AnimationPlayer.play("hit")
 	if area.knockback_vector != null:
 		knockback = area.knockback_vector * 275

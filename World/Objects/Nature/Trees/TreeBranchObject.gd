@@ -20,12 +20,12 @@ func _ready():
 	setTreeBranchType(randomNum)
 	
 func PlayEffect(player_id):
+	Tiles.reset_valid_tiles(loc)
 	$SoundEffects.stream = Sounds.stump_break
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 	$SoundEffects.play()
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
-	reset_cells()
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 
@@ -41,6 +41,7 @@ func setTreeBranchType(num):
 	$Branch.texture = Images.tree_branch_objects[num]
 
 func _on_BranchHurtBox_area_entered(_area):
+	Tiles.reset_valid_tiles(loc, "stump")
 	var data = {"id": name, "n": "log"}
 	Server.action("ON_HIT", data)
 	$SoundEffects.stream = Sounds.stump_break
@@ -49,12 +50,8 @@ func _on_BranchHurtBox_area_entered(_area):
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 	intitiateItemDrop("wood", Vector2(0, 0))
-	reset_cells()
 	yield($SoundEffects, "finished")
 	queue_free()
-
-func reset_cells():
-	valid_tiles.set_cellv(loc, 0)
 
 
 ### Effect functions		
