@@ -23,22 +23,28 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	5: ["wood", 9],
-#	4: ["stone", 99],
-	6: ["stone", 3],
-	9: ["potato seeds", 28],
+	5: ["tomato seeds", 30],
+	2: ["blueberry seeds", 60],
+	6: ["corn seeds", 60],
+	9: ["potato seeds", 30],
+	3: ["radish seeds", 30],
+	4: ["wood", 99],
+	1: ["wood", 99],
+	7: ["stone", 99],
+	8: ["stone", 99],
 
 }
 
 var hotbar = {
-#	0 : ["twig", 99],
+#	0 : ["stone foundation", 99],
+#	1 : ["stone foundation", 99],
 #	1 : ["wood wall", 99],
-#	2 : ["stone wall", 99],
+	4 : ["stone wall", 99],
+	3 : ["stone wall", 99],
 #	1: ["wood box", 99],
 #	2: ["tent", 30],
-	1: ["blueberry seeds", 30],
-	2: ["strawberry seeds", 30],
-	3: ["house", 2],
+	2: ["stone double door", 30],
+#	3: ["house", 2],
 	5: ["wood sword", 1],
 	6: ["stone watering can", 1],
 	7: ["wood hoe", 1], 

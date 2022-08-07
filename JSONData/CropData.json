@@ -55,7 +55,7 @@
     "Seasons": ["Spring"],
     "yield": [1, 2, 3]
 },
-"zuchinni": {
+"zucchinni": {
     "DaysToGrow": 12,
     "GrowthImages" : 4,
     "Perennial": true,

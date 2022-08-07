@@ -2,7 +2,6 @@ extends Node2D
 
 onready var OreHitEffect = preload("res://World/Objects/Nature/Effects/OreHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var bigOreSprite = $BigOre
 onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
@@ -97,6 +96,7 @@ func _on_SmallHurtBox_area_entered(_area):
 	Server.action("ON_HIT", data)
 	health -= 1
 	if health <= 0:
+		Tiles.reset_valid_tiles(loc, "large ore")
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()

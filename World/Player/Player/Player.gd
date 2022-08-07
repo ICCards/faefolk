@@ -72,42 +72,43 @@ func frame_start():
 
 
 func input_update(input, game_state : Dictionary):
-	#calculate state of object for the given input
-	var vect = Vector2(0, 0)
-	
-	#Collision detection for InputControl children that can pass through each other
-#    for object in game_state:
-#        if object != name:
-#            if collisionMask.intersects(game_state[object]['collisionMask']):
-#                counter += 1
-	if !swingActive and not PlayerInventory.chatMode:
-		animation_player.play("movement")
-		if input.local_input[0]: #W
-			vect.y -= 7
-			direction = "UP"
-			walk_state(direction)
-		if input.local_input[2]: #S
-			vect.y += 7
-			direction = "DOWN"
-			walk_state(direction)
-		if input.local_input[1]: #A
-			vect.x -= 7
-			direction = "LEFT"
-			walk_state(direction)
-		if input.local_input[3]: #D
-			vect.x += 7
-			direction = "RIGHT"
-			walk_state(direction)
-		if input.local_input[5]:
-			idle_state(direction)
-
-	#move_and_collide for "solid" stationary objects
-	var collision = move_and_collide(vect)
-	if collision:
-		vect = vect.slide(collision.normal)
-		move_and_collide(vect)
-	#print(position)
-	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
+	pass
+#	#calculate state of object for the given input
+#	var vect = Vector2(0, 0)
+#
+#	#Collision detection for InputControl children that can pass through each other
+##    for object in game_state:
+##        if object != name:
+##            if collisionMask.intersects(game_state[object]['collisionMask']):
+##                counter += 1
+#	if !swingActive and not PlayerInventory.chatMode:
+#		animation_player.play("movement")
+#		if input.local_input[0]: #W
+#			vect.y -= 7
+#			direction = "UP"
+#			walk_state(direction)
+#		if input.local_input[2]: #S
+#			vect.y += 7
+#			direction = "DOWN"
+#			walk_state(direction)
+#		if input.local_input[1]: #A
+#			vect.x -= 7
+#			direction = "LEFT"
+#			walk_state(direction)
+#		if input.local_input[3]: #D
+#			vect.x += 7
+#			direction = "RIGHT"
+#			walk_state(direction)
+#		if input.local_input[5]:
+#			idle_state(direction)
+#
+#	#move_and_collide for "solid" stationary objects
+#	var collision = move_and_collide(vect)
+#	if collision:
+#		vect = vect.slide(collision.normal)
+#		move_and_collide(vect)
+#	#print(position)
+#	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
 
 func frame_end():
 	pass
@@ -212,7 +213,7 @@ func _process(_delta) -> void:
 		match state:
 			MOVEMENT:
 				pass
-				#movement_state(_delta)
+				movement_state(_delta)
 	else: 
 		idle_state(direction)
 
@@ -232,58 +233,60 @@ func _unhandled_input(event):
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
 				swing_state(item_name)
 			if itemCategory == "Placable object" and item_name == "tent":
-				$PlaceItemsUI.place_tent_state(valid_tiles)
+				$PlaceItemsUI.place_tent_state()
 			elif itemCategory == "Placable object" and item_name == "sleeping bag":
-				$PlaceItemsUI.place_sleeping_bag_state(valid_tiles)
+				$PlaceItemsUI.place_sleeping_bag_state()
+			elif itemCategory == "Placable object" and item_name == "stone double door":
+				$PlaceItemsUI.place_door_state()
 			elif itemCategory == "Placable object":
-				$PlaceItemsUI.place_item_state(event, item_name, valid_tiles)
+				$PlaceItemsUI.place_item_state(item_name)
 			elif itemCategory == "Placable path":
-				$PlaceItemsUI.place_path_state(event, item_name, valid_tiles, path_tiles)
+				$PlaceItemsUI.place_path_state(item_name, path_tiles)
 			elif itemCategory == "Seed":
-				$PlaceItemsUI.place_seed_state(event, item_name, valid_tiles, hoed_tiles)
+				$PlaceItemsUI.place_seed_state(item_name, hoed_tiles)
 	else: 
 		$PlaceItemsUI.set_invisible()
 
-#func movement_state(delta):
-#	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping:
-#		animation_player.play("movement")
-#		input_vector = Vector2.ZERO	
-#		if Input.is_action_pressed("move_up"):
-#			input_vector.y -= 1.0
-#			direction = "UP"
-#			walk_state(direction)
-#			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
-#		if Input.is_action_pressed("move_down"):
-#			input_vector.y += 1.0
-#			direction = "DOWN"
-#			walk_state(direction)
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
-#		if Input.is_action_pressed("move_left"):
-#			input_vector.x -= 1.0
-#			direction = "LEFT"
-#			walk_state(direction)
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
-#		if Input.is_action_pressed("move_right"):
-#			input_vector.x += 1.0
-#			direction = "RIGHT"
-#			walk_state(direction)
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)		
-#		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
-#			idle_state(direction)
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
-#		input_vector = input_vector.normalized()
-#		if input_vector != Vector2.ZERO:
-#			velocity += input_vector * ACCELERATION * delta
-#			velocity = velocity.clamped(MAX_SPEED * delta)
-#			sword_swing.knockback_vector = input_vector
-#		else:
-#			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-#		move_and_collide(velocity * MAX_SPEED)	
+func movement_state(delta):
+	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping:
+		animation_player.play("movement")
+		input_vector = Vector2.ZERO	
+		if Input.is_action_pressed("move_up"):
+			input_vector.y -= 1.0
+			direction = "UP"
+			walk_state(direction)
+			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)
+		if Input.is_action_pressed("move_down"):
+			input_vector.y += 1.0
+			direction = "DOWN"
+			walk_state(direction)
+			var data = {"p":position,"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)
+		if Input.is_action_pressed("move_left"):
+			input_vector.x -= 1.0
+			direction = "LEFT"
+			walk_state(direction)
+			var data = {"p":position,"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)
+		if Input.is_action_pressed("move_right"):
+			input_vector.x += 1.0
+			direction = "RIGHT"
+			walk_state(direction)
+			var data = {"p":position,"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)		
+		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
+			idle_state(direction)
+			var data = {"p":position,"d":direction,"t":Server.client_clock}
+			sendAction(MOVEMENT,data)
+		input_vector = input_vector.normalized()
+		if input_vector != Vector2.ZERO:
+			velocity += input_vector * ACCELERATION * delta
+			velocity = velocity.clamped(MAX_SPEED * delta)
+			sword_swing.knockback_vector = input_vector
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		move_and_collide(velocity * MAX_SPEED)	
 
 
 func swing_state(item_name):

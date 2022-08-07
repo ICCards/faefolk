@@ -1,6 +1,7 @@
 extends Node2D
 
 var directions = ["down", "left", "up", "right"]
+var vertical = true
 var direction_index
 var path_index = 1
 var active: bool = false
@@ -27,7 +28,40 @@ func sendAction(action,data):
 			Server.action("PLACE_ITEM", data)
 			
 			
-func place_sleeping_bag_state(valid_tiles):
+			
+func place_door_state():
+	$RotateIcon.visible = true
+	$ColorIndicator.visible = true
+	$ItemToPlace.visible = true
+	$ItemToPlace.rect_position = Vector2(0,-32)
+	$ItemToPlace.rect_scale = Vector2(1, 1)
+	get_rotation_index()
+	var direction = directions[direction_index]
+	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+	set_global_position(mousePos)
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	if direction == "up" or direction == "down":
+		$ColorIndicator.scale = Vector2(2, 1)
+		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/stone double door.png")
+	else:
+		$ColorIndicator.scale = Vector2(1, 2)
+		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/stone double door side.png")
+	if (direction == "up" or direction == "down")  and not Tiles.validate_tiles(location, Vector2(2,1)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(1,2)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	else:
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
+		if Input.is_action_pressed("mouse_click"):
+			if direction == "up" or direction == "down":
+				place_object("stone double door", location, "placable")
+			else:
+				place_object("stone double door side", location, "placable")
+
+
+
+
+func place_sleeping_bag_state():
 	get_rotation_index()
 	var direction = directions[direction_index]
 	$RotateIcon.visible = true
@@ -40,7 +74,7 @@ func place_sleeping_bag_state(valid_tiles):
 	$ScaledItemToPlace.rect_position = Vector2(0,0)
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
-	var location = valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	if direction == "up":
 		$ColorIndicator.scale = Vector2(1, 2)
 		$ScaledItemToPlace.rect_position = Vector2(32,-32)
@@ -73,7 +107,7 @@ func place_sleeping_bag_state(valid_tiles):
 			place_object("sleeping bag " + direction, location, "placable")
 
 
-func place_tent_state(valid_tiles):
+func place_tent_state():
 	get_rotation_index()
 	var direction = directions[direction_index]
 	$RotateIcon.visible = true
@@ -81,7 +115,6 @@ func place_tent_state(valid_tiles):
 	$ItemToPlace.visible = true
 	$ItemToPlace.rect_scale = Vector2(1, 1)
 	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/tent " + direction + ".png")
-	$ItemToPlace.rect_scale = Vector2(1, 1)
 	if direction == "up" or direction == "down":
 		$ColorIndicator.scale = Vector2(4, 4)
 		$ItemToPlace.rect_position = Vector2(0,-160)
@@ -90,7 +123,7 @@ func place_tent_state(valid_tiles):
 		$ItemToPlace.rect_position = Vector2(0,-64)
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
-	var location = valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	if get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, Vector2(4,4)):
@@ -114,13 +147,13 @@ func get_rotation_index():
 		active = false
 
 
-func place_item_state(event, item_name, valid_tiles):
+func place_item_state(item_name):
 	$ColorIndicator.visible = true
 	$ItemToPlace.visible = true
 	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
-	var location = valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	if item_name == "house":
 		$ColorIndicator.scale = Vector2(8, 4)
 		$ItemToPlace.rect_position = Vector2(-3, -301)
@@ -153,19 +186,21 @@ func place_item_state(event, item_name, valid_tiles):
 		$ColorIndicator.scale = Vector2(1, 1)
 		$ItemToPlace.rect_position = Vector2(0,-32)
 		$ItemToPlace.rect_scale = Vector2(1, 1)
-	if valid_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
+	if Tiles.valid_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
-	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and valid_tiles.get_cellv(location + Vector2(1,0)) != 0:
+	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and Tiles.valid_tiles.get_cellv(location + Vector2(1,0)) != 0:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	elif item_name == "house" and not Tiles.validate_tiles(location, Vector2(8,4)):
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif item_name == "stone wall" and not Tiles.return_if_valid_wall_cell(location, get_node("/root/World/PlacableTiles/BuildingTiles")):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
-		if event.is_action_pressed("mouse_click"):
+		if Input.is_action_pressed("mouse_click"):
 			place_object(item_name, location, "placable")
 
 
-func place_path_state(event, item_name, valid_object_tiles, path_tiles):
+func place_path_state(item_name, path_tiles):
 	get_path_rotation(item_name)
 	$ColorIndicator.visible = true
 	$ItemToPlace.visible = true
@@ -175,12 +210,12 @@ func place_path_state(event, item_name, valid_object_tiles, path_tiles):
 	$ColorIndicator.scale  = Vector2(1.0 , 1.0)
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
-	var location = valid_object_tiles.world_to_map(mousePos)
-	if path_tiles.get_cellv(location) != -1 or valid_object_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	if path_tiles.get_cellv(location) != -1 or Tiles.valid_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
-		if event.is_action_pressed("mouse_click"):
+		if Input.is_action_pressed("mouse_click"):
 			place_object(item_name + str(path_index), location, "placable")
 
 
@@ -200,7 +235,7 @@ func get_path_rotation(path_name):
 				path_index = 1
 
 
-func place_seed_state(event, item_name, valid_object_tiles, hoed_tiles):
+func place_seed_state(item_name, hoed_tiles):
 	item_name.erase(item_name.length() - 6, 6)
 	$ColorIndicator.visible = true
 	$ItemToPlace.visible = true
@@ -210,12 +245,12 @@ func place_seed_state(event, item_name, valid_object_tiles, hoed_tiles):
 	$ItemToPlace.rect_scale = Vector2(1, 1)
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
-	var location = valid_object_tiles.world_to_map(mousePos)
-	if hoed_tiles.get_cellv(location) == -1 or valid_object_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	if hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or get_parent().position.distance_to(mousePos) > 120:
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
 	else:	
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
-		if event.is_action_pressed("mouse_click"):
+		if Input.is_action_pressed("mouse_click"):
 			place_object(item_name, location, "seed")	
 
 

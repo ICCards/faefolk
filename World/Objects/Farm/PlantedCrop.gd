@@ -100,16 +100,17 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 	
 var isBeingHarvested = false	
 func harvest_and_remove():
-	if !isBeingHarvested:
-		var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
-		Server.action("ON_HIT", data)
-		$HarvestSound.play()
-		$CropText.visible = false
-		isBeingHarvested = true
-		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
-		yield($HarvestSound, "finished")
-		queue_free()
+	pass
+#	if !isBeingHarvested:
+#		var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
+#		Server.action("ON_HIT", data)
+#		$HarvestSound.play()
+#		$CropText.visible = false
+#		isBeingHarvested = true
+#		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
+#		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+#		yield($HarvestSound, "finished")
+#		queue_free()
 	
 func harvest_and_keep_planted():
 	pass

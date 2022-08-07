@@ -18,11 +18,11 @@ func set_new_music_volume():
 func _process(delta):
 	if Server.isLoaded and has_node("/root/World"):
 		storm1 = get_node("/root/World/RoamingStorm")
-		storm2 = get_node("/root/World/RoamingStorm2")
+		#storm2 = get_node("/root/World/RoamingStorm2")
 		if get_parent().position.distance_to(storm1.position) <= 2000:
 			inside_storm(storm1)
-		elif get_parent().position.distance_to(storm2.position) <= 2000:
-			inside_storm(storm2)
+#		elif get_parent().position.distance_to(storm2.position) <= 2000:
+#			inside_storm(storm2)
 		else:
 			outside_storm()
 

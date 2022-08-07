@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://World/Animals/Bear.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Animals/bear.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Animals/Bear/idle/body/down.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Animals/Bear/idle/fangs/down.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.33333
@@ -48,6 +49,59 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 12, 4 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Fangs:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Bear:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "loop"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fangs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bear:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -206,16 +260,8 @@ tracks/2/keys = {
 "values": [ true, false, true ]
 }
 
-[node name="Bear" type="KinematicBody2D"]
-scale = Vector2( 4, 4 )
+[node name="Bear" type="StaticBody2D"]
 script = ExtResource( 1 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -5 )
-frames = ExtResource( 2 )
-animation = "swing down"
-frame = 1
-playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -226,7 +272,19 @@ shape = SubResource( 1 )
 position = Vector2( 0, -5 )
 rotation = -0.485202
 enabled = true
-cast_to = Vector2( 120, 0 )
+cast_to = Vector2( 360, 0 )
+
+[node name="Bear" type="Sprite" parent="."]
+position = Vector2( 2, -40 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="Fangs" type="Sprite" parent="."]
+position = Vector2( 2, -40 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+hframes = 4
 
 [node name="MeleeSwing" type="Area2D" parent="."]
 position = Vector2( 0, -5 )
@@ -240,13 +298,13 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
+anims/loop = SubResource( 8 )
 "anims/swing down" = SubResource( 4 )
 "anims/swing left" = SubResource( 5 )
 "anims/swing right" = SubResource( 6 )
 "anims/swing up" = SubResource( 7 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.25
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
