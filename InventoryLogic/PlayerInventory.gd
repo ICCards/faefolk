@@ -18,24 +18,32 @@ var is_inside_chest_area = false
 var is_inside_workbench_area = false
 var is_inside_stove_area = false
 var is_inside_grain_mill_area = false
+var is_inside_sleeping_bag_area = false
+var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	3: ["wood", 99],
-	5: ["wood", 89],
-	4: ["stone ore", 99],
-	6: ["stone ore", 35],
+	5: ["wood", 9],
+#	4: ["stone", 99],
+	6: ["stone", 3],
 	9: ["potato seeds", 28],
 
 }
 
 var hotbar = {
-	0: ["wood box", 99],
-	1: ["fire pedestal", 99],
-	6: ["bucket", 1],
-	7: ["hoe", 1], 
-	8: ["axe", 1],
-	9:["pickaxe", 1],
+#	0 : ["twig", 99],
+#	1 : ["wood wall", 99],
+#	2 : ["stone wall", 99],
+#	1: ["wood box", 99],
+#	2: ["tent", 30],
+	1: ["blueberry seeds", 30],
+	2: ["strawberry seeds", 30],
+	3: ["house", 2],
+	5: ["wood sword", 1],
+	6: ["stone watering can", 1],
+	7: ["wood hoe", 1], 
+	8: ["wood axe", 1],
+	9:["wood pickaxe", 1],
 }
 
 var chest = {
@@ -46,6 +54,20 @@ var chest = {
 
 func clear_chest_data():
 	emit_signal("clear_chest")
+	
+	
+func returnSufficentCraftingMaterial(ingredient, amount_needed):
+	var total = 0
+	for slot in hotbar:
+		if hotbar[slot][0] == ingredient:
+			total +=  hotbar[slot][1]
+	for slot in inventory:
+		if inventory[slot][0] == ingredient:
+			total += inventory[slot][1]
+	if total >= amount_needed:
+		return true
+	else:
+		return false
 
 func return_player_wood_and_stone():
 	var total_wood = 0
@@ -53,74 +75,94 @@ func return_player_wood_and_stone():
 	for slot in hotbar:
 		if hotbar[slot][0] == "wood":
 			total_wood = total_wood +  hotbar[slot][1]
-		elif hotbar[slot][0] == "stone ore":
+		elif hotbar[slot][0] == "stone":
 			total_stone = total_stone +  hotbar[slot][1]
 	for slot in inventory:
 		if inventory[slot][0] == "wood":
 			total_wood = total_wood + inventory[slot][1]
-		elif inventory[slot][0] == "stone ore":
+		elif inventory[slot][0] == "stone":
 			total_stone = total_stone +  inventory[slot][1]
 	return [total_wood, total_stone]
-		
-		
+
 func craft_item(item):
-	var wood = return_player_wood_and_stone()[0]
-	var stone = return_player_wood_and_stone()[1]
-	if  wood >= JsonData.crafting_data[item]["wood"] and stone  >= JsonData.crafting_data[item]["stone"]:
-		remove_materials( JsonData.crafting_data[item]["wood"] , JsonData.crafting_data[item]["stone"] )
-		add_item_to_hotbar(item, 1)
-	else: 
-		print("INVALID MATERIAL")
+	var ingredients = JsonData.crafting_data[item]["ingredients"]
+	for i in range(ingredients.size()):
+		remove_material(ingredients[i][0], ingredients[i][1])
+	add_item_to_hotbar(item, 1)
 
 
-
-func remove_materials(_wood, _stone):
-	var wood_to_remove = _wood
-	var stone_to_remove = _stone
-	if wood_to_remove != 0:
-		for slot in hotbar.keys():
-			if hotbar[slot][0] == "wood" and wood_to_remove != 0:
-				if hotbar[slot][1] >= wood_to_remove:
-					hotbar[slot][1] = hotbar[slot][1] - wood_to_remove
-					wood_to_remove = 0
-					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
+func remove_material(item, amount):
+	var amount_to_remove = amount
+	for slot in hotbar.keys():
+		if hotbar[slot][0] == item and amount_to_remove != 0:
+			if hotbar[slot][1] >= amount_to_remove:
+				hotbar[slot][1] = hotbar[slot][1] - amount_to_remove
+				amount_to_remove = 0
+				update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
+			else:
+				amount_to_remove = amount_to_remove - hotbar[slot][1]
+				hotbar[slot][1] = 0 
+				update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
+	if amount_to_remove != 0:
+		for slot in inventory.keys():
+			if inventory[slot][0] == item and amount_to_remove != 0:
+				if inventory[slot][1] >= amount_to_remove:
+					inventory[slot][1] = inventory[slot][1] - amount_to_remove
+					amount_to_remove = 0
+					update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
 				else:
-					wood_to_remove = wood_to_remove - hotbar[slot][1]
-					hotbar[slot][1] = 0 
-					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
-		if wood_to_remove != 0:
-			for slot in inventory.keys():
-				if inventory[slot][0] == "wood" and wood_to_remove != 0:
-					if inventory[slot][1] >= wood_to_remove:
-						inventory[slot][1] = inventory[slot][1] - wood_to_remove
-						wood_to_remove = 0
-						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
-					else:
-						wood_to_remove = wood_to_remove - inventory[slot][1]
-						inventory[slot][1] = 0 
-						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
-	if stone_to_remove != 0:
-		for slot in hotbar.keys():
-			if hotbar[slot][0] == "stone ore" and stone_to_remove != 0:
-				if hotbar[slot][1] >= stone_to_remove:
-					hotbar[slot][1] = hotbar[slot][1] - stone_to_remove
-					stone_to_remove = 0
-					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
-				else:
-					stone_to_remove = stone_to_remove - hotbar[slot][1]
-					hotbar[slot][1] = 0 
-					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
-		if stone_to_remove != 0:
-			for slot in inventory.keys():
-				if inventory[slot][0] == "stone ore" and stone_to_remove != 0:
-					if inventory[slot][1] >= stone_to_remove:
-						inventory[slot][1] = inventory[slot][1] - stone_to_remove
-						stone_to_remove = 0
-						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
-					else:
-						stone_to_remove = stone_to_remove - inventory[slot][1]
-						inventory[slot][1] = 0 
-						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
+					amount_to_remove = amount_to_remove - inventory[slot][1]
+					inventory[slot][1] = 0 
+					update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
+
+
+#func remove_materials(_wood, _stone):
+#	var wood_to_remove = _wood
+#	var stone_to_remove = _stone
+#	if wood_to_remove != 0:
+#		for slot in hotbar.keys():
+#			if hotbar[slot][0] == "wood" and wood_to_remove != 0:
+#				if hotbar[slot][1] >= wood_to_remove:
+#					hotbar[slot][1] = hotbar[slot][1] - wood_to_remove
+#					wood_to_remove = 0
+#					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
+#				else:
+#					wood_to_remove = wood_to_remove - hotbar[slot][1]
+#					hotbar[slot][1] = 0 
+#					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
+#		if wood_to_remove != 0:
+#			for slot in inventory.keys():
+#				if inventory[slot][0] == "wood" and wood_to_remove != 0:
+#					if inventory[slot][1] >= wood_to_remove:
+#						inventory[slot][1] = inventory[slot][1] - wood_to_remove
+#						wood_to_remove = 0
+#						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
+#					else:
+#						wood_to_remove = wood_to_remove - inventory[slot][1]
+#						inventory[slot][1] = 0 
+#						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
+#	if stone_to_remove != 0:
+#		for slot in hotbar.keys():
+#			if hotbar[slot][0] == "stone ore" and stone_to_remove != 0:
+#				if hotbar[slot][1] >= stone_to_remove:
+#					hotbar[slot][1] = hotbar[slot][1] - stone_to_remove
+#					stone_to_remove = 0
+#					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
+#				else:
+#					stone_to_remove = stone_to_remove - hotbar[slot][1]
+#					hotbar[slot][1] = 0 
+#					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
+#		if stone_to_remove != 0:
+#			for slot in inventory.keys():
+#				if inventory[slot][0] == "stone ore" and stone_to_remove != 0:
+#					if inventory[slot][1] >= stone_to_remove:
+#						inventory[slot][1] = inventory[slot][1] - stone_to_remove
+#						stone_to_remove = 0
+#						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
+#					else:
+#						stone_to_remove = stone_to_remove - inventory[slot][1]
+#						inventory[slot][1] = 0 
+#						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
 
 # Location of bottom left tile
 var player_home = {
@@ -199,7 +241,7 @@ func add_item_to_inventory(item_name, item_quantity):
 		pass
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
@@ -211,7 +253,7 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/Inventory/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Inventory/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
@@ -224,7 +266,7 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 		
 
 func update_chest_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)

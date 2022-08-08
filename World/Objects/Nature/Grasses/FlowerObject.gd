@@ -14,7 +14,7 @@ func PlayEffect(player_id):
 	play_sound_effect()
 
 func play_sound_effect():
-	if !bodyEnteredFlag:
+	if !bodyEnteredFlag and Server.isLoaded:
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("animate")

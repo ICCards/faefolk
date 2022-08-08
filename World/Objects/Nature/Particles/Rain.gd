@@ -1,0 +1,2 @@
+extends CPUParticles2D
+

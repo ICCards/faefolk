@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ES_Snake Slither - SFX Producer.mp3-c474c831a7de61e2e8654108a989dd96.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Animals/Snake/ES_Snake Slither - SFX Producer.mp3"
+dest_files=[ "res://.import/ES_Snake Slither - SFX Producer.mp3-c474c831a7de61e2e8654108a989dd96.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

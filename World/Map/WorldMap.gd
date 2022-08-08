@@ -4,9 +4,14 @@ extends Node2D
 
 onready var GridSquareLabel = preload("res://World/Map/GridSquareLabel.tscn")
 onready var playerIcon = $Map/PlayerIcon
+onready var stormIcon = $Map/StormIcon
+onready var stormIcon2 = $Map/StormIcon2
 onready var miniMap = $Map
 var player 
+var roamingStorm
+var roamingStorm2
 var direction
+var is_first_time_opened = false
 const NUM_COLUMNS = 8
 const NUM_ROWS = 8
 const MAP_WIDTH = 1000
@@ -23,17 +28,39 @@ enum Tiles {
 	SNOW
 }
 
+
+func _input(event):
+	if event.is_action_pressed("open_map") and not PlayerInventory.interactive_screen_mode and \
+	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode:
+		show()
+		initialize()
+	if event.is_action_released("open_map"):
+		hide()
+		set_inactive()
+
+func toggle_map():
+	PlayerInventory.viewMapMode = !PlayerInventory.viewMapMode
+	$WorldMap.visible = !$WorldMap.visible
+	if $WorldMap.visible:
+		$WorldMap.initialize()
+	else:
+		$WorldMap.set_inactive()
+
+
 func initialize():
+	PlayerInventory.viewMapMode = true
 	$Camera2D.current = true
-	$Camera2D.position = Vector2(800, 800)
-	$Camera2D.zoom = Vector2(1.5, 1.5)
-	get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar").visible = false
+	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar").visible = false
+	if not is_first_time_opened:
+		is_first_time_opened = true
+		$Camera2D.position = Vector2(800, 800)
+		$Camera2D.zoom = Vector2(1.5, 1.5)
 	
 func set_inactive():
+	PlayerInventory.viewMapMode = false
 	$Camera2D.current = false
-	get_node("/root/World/Players/" + Server.player_id + "/Camera2D").current = true
-	get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar").visible = true
-
+	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D").current = true
+	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar").visible = true
 
 func _ready():
 	wait_for_map()
@@ -58,14 +85,17 @@ func draw_grid_labels():
 			add_child(gridSquareLabel)
 	
 func _process(delta):
-	if Server.isLoaded:
-		player = get_node("/root/World/Players/" + Server.player_id)
-		playerIcon.position =  player.position
-		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
-		set_direction(player.direction)
-		change_label_size()
-#		var grid_labels = get_tree().get_nodes_in_group("grid labels")
-#		grid_labels.rect_scale = adjustedGridCoordinatesScale($Camera2D.zoom)
+	pass
+#	if has_node("/root/World/Players/" + Server.player_id):
+#		player = get_node("/root/World/Players/" + Server.player_id).get_children()[0]
+#		playerIcon.position =  player.position
+#		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
+#		set_direction(player.direction)
+#		change_label_size()
+#		roamingStorm = get_node("/root/World/RoamingStorm")
+#		roamingStorm2 = get_node("/root/World/RoamingStorm2")
+#		stormIcon.position = roamingStorm.position
+#		stormIcon2.position = roamingStorm2.position
 		
 	
 	
@@ -102,25 +132,25 @@ func wait_for_map():
 		
 func buildMap(map):
 	for id in map["dirt"]:
-		var loc = Util.string_to_vector2(map["dirt"][id])
+		var loc = map["dirt"][id]
 		miniMap.set_cellv(loc, Tiles.DIRT)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["forest"]:
-		var loc = Util.string_to_vector2(map["forest"][id])
+		var loc = map["forest"][id]
 		miniMap.set_cellv(loc , Tiles.FOREST)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["plains"]:
-		var loc = Util.string_to_vector2(map["plains"][id])
+		var loc = map["plains"][id]
 		miniMap.set_cellv(loc , Tiles.PLAINS)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["beach"]:
-		var loc = Util.string_to_vector2(map["beach"][id])
+		var loc = map["beach"][id]
 		miniMap.set_cellv(loc , Tiles.BEACH)
 	for id in map["desert"]:
-		var loc = Util.string_to_vector2(map["desert"][id])
+		var loc = map["desert"][id]
 		miniMap.set_cellv(loc , Tiles.DESERT)
 	for id in map["snow"]:
-		var loc = Util.string_to_vector2(map["snow"][id])
+		var loc = map["snow"][id]
 		miniMap.set_cellv(loc , Tiles.SNOW)
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):

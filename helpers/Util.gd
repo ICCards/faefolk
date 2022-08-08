@@ -39,17 +39,7 @@ func string_to_vector2(string := "") -> Vector2:
 		return Vector2(array[0], array[1])
 
 	return Vector2.ZERO
-	
-func validate_house_tiles(_location, _valid_object_tiles):
-	var active = false
-	if not active:
-		active = true
-		for x in range(8):
-			for y in range(4):
-				if _valid_object_tiles.get_cellv( Vector2(x, -y) + _location) == -1: 
-					return false
-					break
-		return true
+
 		
 func set_swing_position(_pos, _direction):
 	if _direction == "UP":
@@ -62,3 +52,11 @@ func set_swing_position(_pos, _direction):
 		_pos += Vector2(32, -8)
 	return _pos
 	
+func returnAdjustedWateringCanPariclePos(direction):
+	match direction:
+		"RIGHT":
+			return Vector2(15, -12)
+		"LEFT":
+			return Vector2(-15, -12)
+		"DOWN":
+			return Vector2(0, -10)

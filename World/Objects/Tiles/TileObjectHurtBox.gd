@@ -2,15 +2,9 @@ extends Node2D
 
 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
-onready var placable_object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
-onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
-onready var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 
 var location
 var item_name
-var occupied_tiles
-
 
 func initialize(_name, loc):
 	item_name = _name
@@ -31,23 +25,15 @@ func _ready():
 	item_name == "fire pedestal" or \
 	item_name == "tall fire pedestal":
 		$Light2D.enabled = true
-	elif item_name == "house":
+	elif item_name == "house" or item_name.substr(0, 12) == "sleeping bag" or item_name.substr(0, 4) == "tent":
 		queue_free()
 		
 func PlayEffect(_player_id):
 	$Light2D.enabled = false
-	valid_tiles.set_cellv(location, 0)
-	if item_name == "wood chest" or item_name == "stone chest":
-		placable_object_tiles.set_cellv(location, -1)
-		valid_tiles.set_cellv(location + Vector2(1,0),0)
-	if item_name == "wood fence":
-		fence_tiles.set_cellv(location, -1)
-		fence_tiles.update_bitmask_region()
-	elif item_name == "wood path" or item_name == "stone path":
-		path_tiles.set_cellv(location, -1)
-	else:
-		placable_object_tiles.set_cellv(location, -1)
-	if item_name == "stone path":
+	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
+	Tiles.reset_valid_tiles(location, item_name)
+	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
@@ -80,40 +66,23 @@ func set_dimensions():
 
 func _on_HurtBox_area_entered(area):
 	$Light2D.enabled = false
-	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
-	print("sending ON_HIT")
-	Server.action("ON_HIT", data)
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
-	valid_tiles.set_cellv(Vector2(location), 0)
-	if item_name == "stone path":
+	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
+	Server.action("ON_HIT", data)
+	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+	elif item_name == "wood chest" or item_name == "stone chest":
+		drop_items_in_chest()
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	else: 
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
-
-	if item_name == "wood chest" or item_name == "stone chest":
-		placable_object_tiles.set_cellv(location, -1)
-		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
-		drop_items_in_chest()
-	elif item_name == "workbench" or item_name == "grain mill" or item_name == "stove":
-		valid_tiles.set_cellv(Vector2(location + Vector2(1,0)), 0)
-		placable_object_tiles.set_cellv(location, -1)
-	elif item_name == "wood fence":
-		fence_tiles.set_cellv(location, -1)
-		fence_tiles.update_bitmask_region()
-	elif item_name == "wood path" or item_name == "stone path":
-		path_tiles.set_cellv(location, -1)
-	else:
-		placable_object_tiles.set_cellv(location, -1)
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item_name)
-	get_parent().call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position 
+	Tiles.reset_valid_tiles(location, item_name)
+	drop_item(item_name, 1)
 	yield($SoundEffects, "finished")
 	queue_free()
-
 
 
 func drop_items_in_chest():
@@ -138,10 +107,8 @@ func _on_DetectObjectOverPathBox_area_exited(area):
 		yield(get_tree().create_timer(0.25), "timeout")
 		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 
-
 func _on_VisibilityNotifier2D_screen_entered():
 	visible = true
-
 
 func _on_VisibilityNotifier2D_screen_exited():
 	visible = false

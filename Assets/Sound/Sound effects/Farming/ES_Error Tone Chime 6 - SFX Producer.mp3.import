@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ES_Error Tone Chime 6 - SFX Producer.mp3-99665cd5540bcbcffa0dc1f1612e3d1f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3"
+dest_files=[ "res://.import/ES_Error Tone Chime 6 - SFX Producer.mp3-99665cd5540bcbcffa0dc1f1612e3d1f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

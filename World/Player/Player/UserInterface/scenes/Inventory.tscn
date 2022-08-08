@@ -1,10 +1,10 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/gear icon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/scenes/PetUI.gd" type="Script" id=5]
+[ext_resource path="res://World/Player/Player/UserInterface/scripts/PetUI.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/CraftingMenu.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=8]
@@ -12,14 +12,14 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/wood fence.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/placable_object_preview/house.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Images/placable_object_preview/tent.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=14]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/OptionsMenu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Images/inventory_icons/nails.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Images/inventory_icons/wood chest.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Images/inventory_icons/Resource/nails.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Images/inventory_icons/Placable object/stone chest.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Images/Inventory UI/exit icon.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory button.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Images/placable_object_preview/campfire.png" type="Texture" id=23]
@@ -29,11 +29,13 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/grain mill.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Images/placable_object_preview/fire pedestal.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Images/Misc/up arrow.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=30]
+[ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Assets/Images/Inventory UI/inventory1.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=33]
 [ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Images/placable_object_preview/sleeping bag.png" type="Texture" id=35]
+[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=36]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48, 78 )
@@ -43,6 +45,9 @@ extents = Vector2( 84, 65 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 48, 48 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 48, 44 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 48, 86.5 )
@@ -62,15 +67,8 @@ extents = Vector2( 96.0625, 81.0938 )
 [sub_resource type="StreamTexture" id=11]
 load_path = "res://.import/up arrow.png-aacac5dc46995855e65ffd85747ee008.stex"
 
-[sub_resource type="StyleBoxTexture" id=16]
-content_margin_left = 72.0
-content_margin_right = 72.0
-texture = ExtResource( 30 )
-region_rect = Rect2( 0, 0, 102, 39 )
-expand_margin_left = 24.0
-expand_margin_right = 24.0
-expand_margin_top = 250.0
-expand_margin_bottom = 90.0
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 114.5, 59.75 )
 
 [sub_resource type="StyleBoxTexture" id=17]
 texture = ExtResource( 32 )
@@ -99,11 +97,28 @@ rect_scale = Vector2( 6, 6 )
 mouse_filter = 2
 texture = ExtResource( 31 )
 
-[node name="CraftingMenu" type="Node2D" parent="."]
+[node name="Title" type="Label" parent="."]
+margin_left = 37.0
+margin_top = 36.0
+margin_right = 558.0
+margin_bottom = 149.0
+theme = ExtResource( 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "INVENTORY"
+align = 1
+
+[node name="ItemDescription" parent="." instance=ExtResource( 36 )]
 visible = false
+
+[node name="CraftingMenu" type="Node2D" parent="."]
 script = ExtResource( 7 )
 
+[node name="CraftingItemDescription" parent="CraftingMenu" instance=ExtResource( 30 )]
+
 [node name="Page1" type="Node2D" parent="CraftingMenu"]
+visible = false
 
 [node name="WoodBoxArea" type="Area2D" parent="CraftingMenu/Page1"]
 
@@ -164,8 +179,8 @@ shape = SubResource( 9 )
 position = Vector2( 65, 341 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page1/CampfireArea"]
-position = Vector2( 259.75, 332 )
-shape = SubResource( 7 )
+position = Vector2( 260, 366 )
+shape = SubResource( 21 )
 
 [node name="FirePedestalArea" type="Area2D" parent="CraftingMenu/Page1"]
 position = Vector2( 196, 338 )
@@ -215,7 +230,7 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 
 [node name="campfire" type="Sprite" parent="CraftingMenu/Page1"]
-position = Vector2( 325, 660 )
+position = Vector2( 325, 703 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 23 )
 
@@ -235,11 +250,10 @@ expand = true
 stretch_mode = 5
 
 [node name="Page2" type="Node2D" parent="CraftingMenu"]
-visible = false
 
-[node name="house" type="Sprite" parent="CraftingMenu/Page2"]
-position = Vector2( 441, 632 )
-scale = Vector2( 0.7, 0.7 )
+[node name="tent" type="Sprite" parent="CraftingMenu/Page2"]
+position = Vector2( 425, 632 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 13 )
 
 [node name="workbench" type="Sprite" parent="CraftingMenu/Page2"]
@@ -262,11 +276,12 @@ position = Vector2( 127, 370 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 26 )
 
-[node name="HouseArea" type="Area2D" parent="CraftingMenu/Page2"]
-position = Vector2( 255, 0 )
+[node name="TentArea" type="Area2D" parent="CraftingMenu/Page2"]
+position = Vector2( 238, 0 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/Page2/HouseArea"]
-polygon = PoolVector2Array( 93, 754, 278, 754, 287, 597, 186, 498, 85, 597 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CraftingMenu/Page2/TentArea"]
+position = Vector2( 0, 13 )
+polygon = PoolVector2Array( 105, 757, 264, 755, 265, 581, 186, 501, 112, 577 )
 
 [node name="TallPedestalArea" type="Area2D" parent="CraftingMenu/Page2"]
 
@@ -304,43 +319,43 @@ texture_normal = SubResource( 11 )
 expand = true
 stretch_mode = 5
 
+[node name="Pg2DownButton" type="TextureButton" parent="CraftingMenu/Page2"]
+margin_left = 574.0
+margin_top = 782.0
+margin_right = 634.0
+margin_bottom = 842.0
+rect_rotation = 180.0
+texture_normal = ExtResource( 29 )
+expand = true
+stretch_mode = 5
+
+[node name="Page3" type="Node2D" parent="CraftingMenu"]
+visible = false
+
+[node name="Pg3UpButton" type="TextureButton" parent="CraftingMenu/Page3"]
+margin_left = 514.0
+margin_top = 245.0
+margin_right = 574.0
+margin_bottom = 305.0
+texture_normal = SubResource( 11 )
+expand = true
+stretch_mode = 5
+
+[node name="sleeping bag" type="Sprite" parent="CraftingMenu/Page3"]
+position = Vector2( 182, 331 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+
+[node name="SleepingBagArea" type="Area2D" parent="CraftingMenu/Page3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingMenu/Page3/SleepingBagArea"]
+position = Vector2( 182.5, 331.75 )
+shape = SubResource( 22 )
+
 [node name="SoundEffects" type="AudioStreamPlayer" parent="CraftingMenu"]
+bus = "Bus1"
 
 [node name="Tween" type="Tween" parent="CraftingMenu"]
-
-[node name="CraftableItemDescription" type="Node2D" parent="CraftingMenu"]
-visible = false
-scale = Vector2( 2.5, 2.5 )
-z_index = 1
-
-[node name="Background" type="Sprite" parent="CraftingMenu/CraftableItemDescription"]
-position = Vector2( 15.7, 4.03077 )
-scale = Vector2( 1.33137, 1.26154 )
-texture = ExtResource( 30 )
-
-[node name="Title" type="Label" parent="CraftingMenu/CraftableItemDescription"]
-margin_left = -42.0
-margin_top = -15.2
-margin_right = 596.0
-margin_bottom = 97.8
-rect_scale = Vector2( 0.18, 0.18 )
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "Tall fire pedestal"
-
-[node name="Materials" type="Label" parent="CraftingMenu/CraftableItemDescription"]
-margin_left = -39.2
-margin_top = 6.4
-margin_right = 239.8
-margin_bottom = 119.4
-rect_scale = Vector2( 0.1, 0.1 )
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "4 wood"
 
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
@@ -420,18 +435,6 @@ mouse_filter = 2
 texture = ExtResource( 21 )
 expand = true
 
-[node name="Title" type="Label" parent="."]
-margin_left = 37.0
-margin_top = 36.0
-margin_right = 558.0
-margin_bottom = 149.0
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "INVENTORY"
-align = 1
-
 [node name="QuitMenu" type="Control" parent="."]
 visible = false
 margin_left = 71.0
@@ -485,6 +488,7 @@ margin_right = 66.0
 margin_bottom = 64.0
 
 [node name="InventoryMenu" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -570,39 +574,8 @@ margin_bottom = 198.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 2 )
 
-[node name="InventoryItemDescription" type="Node2D" parent="InventoryMenu"]
-visible = false
-position = Vector2( -22, -84 )
-scale = Vector2( 2, 2 )
-z_index = 1
-
-[node name="Description" type="Label" parent="InventoryMenu/InventoryItemDescription"]
-margin_left = -50.0
-margin_top = 3.0
-margin_right = 1290.0
-margin_bottom = 116.0
-rect_scale = Vector2( 0.1, 0.1 )
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-custom_styles/normal = SubResource( 16 )
-text = "jhg hg jgh ghjgh jgh gjhj g "
-autowrap = true
-
-[node name="Title" type="Label" parent="InventoryMenu/InventoryItemDescription"]
-margin_left = -42.0
-margin_top = -16.0
-margin_right = 596.0
-margin_bottom = 97.0
-rect_scale = Vector2( 0.18, 0.18 )
-theme = ExtResource( 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "Tall fire pedestal"
-
 [node name="PetUI" type="Control" parent="InventoryMenu"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 5 )
@@ -625,7 +598,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 30
+frame = 21
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]
@@ -671,9 +644,9 @@ text = "Hide"
 [connection signal="mouse_entered" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page1/FirePedestalArea" to="CraftingMenu" method="_on_FirePedestalArea_mouse_exited"]
 [connection signal="pressed" from="CraftingMenu/Page1/DownButton" to="CraftingMenu" method="_on_DownButton_pressed"]
-[connection signal="input_event" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_input_event"]
-[connection signal="mouse_entered" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_entered"]
-[connection signal="mouse_exited" from="CraftingMenu/Page2/HouseArea" to="CraftingMenu" method="_on_HouseArea_mouse_exited"]
+[connection signal="input_event" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_TentArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_TentArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page2/TentArea" to="CraftingMenu" method="_on_TentArea_mouse_exited"]
 [connection signal="input_event" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_input_event"]
 [connection signal="mouse_entered" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page2/TallPedestalArea" to="CraftingMenu" method="_on_TallPedestalArea_mouse_exited"]
@@ -687,6 +660,11 @@ text = "Hide"
 [connection signal="mouse_entered" from="CraftingMenu/Page2/KitchenArea" to="CraftingMenu" method="_on_KitchenArea_mouse_entered"]
 [connection signal="mouse_exited" from="CraftingMenu/Page2/KitchenArea" to="CraftingMenu" method="_on_KitchenArea_mouse_exited"]
 [connection signal="pressed" from="CraftingMenu/Page2/UpButton" to="CraftingMenu" method="_on_UpButton_pressed"]
+[connection signal="pressed" from="CraftingMenu/Page2/Pg2DownButton" to="CraftingMenu" method="_on_Pg2DownButton_pressed"]
+[connection signal="pressed" from="CraftingMenu/Page3/Pg3UpButton" to="CraftingMenu" method="_on_Pg3UpButton_pressed"]
+[connection signal="input_event" from="CraftingMenu/Page3/SleepingBagArea" to="CraftingMenu" method="_on_SleepingBagArea_input_event"]
+[connection signal="mouse_entered" from="CraftingMenu/Page3/SleepingBagArea" to="CraftingMenu" method="_on_SleepingBagArea_mouse_entered"]
+[connection signal="mouse_exited" from="CraftingMenu/Page3/SleepingBagArea" to="CraftingMenu" method="_on_SleepingBagArea_mouse_exited"]
 [connection signal="pressed" from="Buttons/Inventory" to="." method="_on_Inventory_pressed"]
 [connection signal="pressed" from="Buttons/Crafting" to="." method="_on_Crafting_pressed"]
 [connection signal="pressed" from="Buttons/Options" to="." method="_on_Options_pressed"]
