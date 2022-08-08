@@ -8,8 +8,8 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/CurrentTime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://Characters/Human/male/SWORD SWING/body/down/arms.png" type="Texture" id=9]
-[ext_resource path="res://Characters/Human/male/SWORD SWING/body/down/body.png" type="Texture" id=10]
+[ext_resource path="res://Characters/Human/male/SWORD SWING/body/up/body.png" type="Texture" id=9]
+[ext_resource path="res://Characters/Human/male/SWORD SWING/body/up/arms.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Thunder Crack - SFX Producer.mp3" type="AudioStream" id=13]
@@ -29,7 +29,7 @@
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/Workbench.tscn" type="PackedScene" id=27]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/Stove.tscn" type="PackedScene" id=28]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/GrainMill.tscn" type="PackedScene" id=29]
-[ext_resource path="res://World/Player/Player/UserInterface/interactive/PopUpDialogue.tscn" type="PackedScene" id=30]
+[ext_resource path="res://RadialMenu.tscn" type="PackedScene" id=30]
 [ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=31]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 [ext_resource path="res://World/Player/Player/PlayerHitEffect.tscn" type="PackedScene" id=33]
@@ -140,7 +140,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../MeleeSwing/CollisionShape2D:position")
@@ -213,6 +213,18 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sword:flip_h")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -321,6 +333,18 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../HurtBox/CollisionShape2D:disabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -1244,6 +1268,18 @@ tracks/15/keys = {
 "update": 1,
 "values": [ Vector2( 0, 8 ), Vector2( 0, 0 ) ]
 }
+tracks/16/type = "value"
+tracks/16/path = NodePath("Sword:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=30]
 resource_name = "sword_swing_left"
@@ -1382,7 +1418,7 @@ tracks/10/keys = {
 "values": [ true, false, true ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Sword:visible")
+tracks/11/path = NodePath(".:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -1391,22 +1427,22 @@ tracks/11/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ Vector2( 0, 8 ), Vector2( 0, 0 ) ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("Sword:rotation_degrees")
+tracks/12/path = NodePath("Sword:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ -90.0, -100.0, 180.0, 135.0 ]
+"values": [ true, false ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("Sword:position")
+tracks/13/path = NodePath("Sword:rotation_degrees")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -1415,19 +1451,43 @@ tracks/13/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -9, -24 ), Vector2( -11.5, -19.5 ), Vector2( -5, -2 ), Vector2( 4, 0.5 ) ]
+"values": [ 0.0, -30.0, -70.0, -90.0 ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("Sword:show_behind_parent")
+tracks/14/path = NodePath("Sword:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -10, -28 ), Vector2( -13.5, -20.5 ), Vector2( -8.5, -6 ), Vector2( -4, -4 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sword:show_behind_parent")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Sword:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=29]
@@ -1626,6 +1686,18 @@ tracks/15/keys = {
 "update": 1,
 "values": [ Vector2( 0, 8 ), Vector2( 0, 0 ) ]
 }
+tracks/16/type = "value"
+tracks/16/path = NodePath("Sword:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=32]
 resource_name = "sword_swing_up"
@@ -1822,6 +1894,18 @@ tracks/15/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 8 ), Vector2( 0, 0 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Sword:flip_h")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=34]
@@ -2565,13 +2649,6 @@ margin_top = 213.0
 margin_right = 752.0
 margin_bottom = 813.0
 
-[node name="PopUpDialogue" parent="Camera2D/UserInterface" instance=ExtResource( 30 )]
-visible = false
-margin_left = 364.0
-margin_top = 234.0
-margin_right = 364.0
-margin_bottom = 234.0
-
 [node name="OpenChest" parent="Camera2D/UserInterface" instance=ExtResource( 2 )]
 visible = false
 position = Vector2( 240, 513 )
@@ -2580,6 +2657,9 @@ scale = Vector2( 0.5, 0.5 )
 [node name="CurrentTime" parent="Camera2D/UserInterface" instance=ExtResource( 7 )]
 position = Vector2( 804, 24 )
 scale = Vector2( 0.4, 0.4 )
+
+[node name="RadialMenu" parent="Camera2D/UserInterface" instance=ExtResource( 30 )]
+visible = false
 
 [node name="PlayerStatsUI" parent="Camera2D/UserInterface" instance=ExtResource( 4 )]
 position = Vector2( 36, 24 )
@@ -2594,11 +2674,11 @@ position = Vector2( 372, 56 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="DeathEffect" type="ColorRect" parent="Camera2D/UserInterface"]
-visible = false
 margin_left = -58.0
 margin_top = -70.0
 margin_right = 1093.0
 margin_bottom = 680.0
+mouse_filter = 2
 color = Color( 1, 0, 0, 0 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="Camera2D/UserInterface"]
@@ -2611,47 +2691,55 @@ rotation = -1.5708
 shape = SubResource( 11 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
-position = Vector2( 0, 8 )
-scale = Vector2( 2, 1.8 )
+scale = Vector2( 1.8, 1.8 )
 script = ExtResource( 22 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 10 )
+texture = ExtResource( 9 )
 hframes = 4
+frame = 3
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 hframes = 4
+frame = 3
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
 hframes = 4
+frame = 3
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 position = Vector2( -0.555556, -16 )
 hframes = 4
+frame = 3
 
 [node name="Sword" type="Sprite" parent="CompositeSprites"]
 visible = false
 texture = ExtResource( 15 )
+flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 anims/RESET = SubResource( 3 )
@@ -2702,8 +2790,7 @@ collision_mask = 0
 script = ExtResource( 34 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing"]
-position = Vector2( 0, 12 )
-rotation = 1.5708
+position = Vector2( -24, -24 )
 shape = SubResource( 28 )
 disabled = true
 
@@ -2712,7 +2799,6 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
 shape = SubResource( 2 )
-disabled = true
 
 [node name="PickupZone" type="Area2D" parent="."]
 visible = false

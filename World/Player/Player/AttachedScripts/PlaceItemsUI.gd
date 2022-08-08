@@ -59,7 +59,12 @@ func place_door_state():
 				place_object("stone double door side", location, "placable")
 
 
-
+func place_buildings_state(item):
+	$ColorIndicator.visible = true
+	$ColorIndicator.scale = Vector2(1, 1)
+	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+	set_global_position(mousePos)
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
 
 func place_sleeping_bag_state():
 	get_rotation_index()
