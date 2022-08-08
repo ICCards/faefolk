@@ -77,11 +77,6 @@ func _connected(proto = ""):
 	timer.connect("timeout", self, "DetermineLatency")
 	self.add_child(timer)
 	
-func DetermineLatency():
-	var data = {"d":OS.get_system_time_msecs()}
-	var message = Util.toMessage("DetermineLatency",data)
-	_client.get_peer(1).put_packet(message)
-	
 func action(type,data):
 	var value = {"d": data}
 	value["t"] = type
@@ -271,9 +266,30 @@ func _process(_delta):
 	_client.poll()
 
 remote func updateState(data):
-	pass
-#	if world:
-#		world.UpdateWorldState(data)
+	if world:
+		world.UpdateWorldState(data)
+
+remote func ReturnServerTime(server_time,client_time):
+	latency = (OS.get_system_time_msecs() - client_time) / 2
+	client_clock = server_time + latency
+
+func DetermineLatency():
+	rpc_id(1,"DetermineLatency", OS.get_system_time_msecs())
+
+remote func ReturnLatency(client_time):
+	latency_array.append((OS.get_system_time_msecs() - client_time)/2)
+	if latency_array.size() == 9:
+		var total_latency = 0
+		latency_array.sort()
+		var mid_point = latency_array[4]
+		for i in range(latency_array.size()-1,-1,-1):
+			if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
+				latency_array.remove(i)
+			else:
+				total_latency += latency_array[i]
+		delta_latency = (total_latency / latency_array.size())
+		#print("New Latency ", latency)
+		latency_array.clear()
 
 remote func move(id,position,direction):
 	if id != str(get_tree().get_network_unique_id()):
@@ -299,9 +315,6 @@ remote func spawn_player(data):
 	print("spawn player called from srever")
 	if str(data.id) == player_id:
 		player = data
-	else:
-		if world:
-			world.spawnNewPlayer(data)
 		
 remote func load_map(value):
 	print("loading map")
