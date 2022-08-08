@@ -1,6 +1,5 @@
 extends StaticBody2D
 
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var worldNavigation = get_node("/root/World/WorldNavigation")
 onready var los = $LineOfSight
 var player_spotted: bool = false
@@ -57,12 +56,14 @@ func navigate(delta):
 	else:
 		idle_state()
 
+
 func set_direction(new_pos):
 	var tempPos = position - new_pos
 	if tempPos.x > 0:
 		$AnimatedSprite.flip_h = true
 	else:
 		$AnimatedSprite.flip_h = false
+
 
 func idle_state():
 	if not in_idle_state and not is_dead:
