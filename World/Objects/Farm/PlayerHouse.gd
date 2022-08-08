@@ -23,7 +23,6 @@ func _on_Doorway_area_entered(_area):
 	insidePlayerHome.name = "InsidePlayerHome"
 	insidePlayerHome.position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(-200, -450)
 	get_node("/root/World").call_deferred("add_child", insidePlayerHome)
-	insidePlayerHome.initialize_house_objects()
 
 onready var tween = $Tween
 func set_house_transparent():

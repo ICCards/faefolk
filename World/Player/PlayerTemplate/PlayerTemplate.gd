@@ -17,11 +17,15 @@ var swingActive = false
 var direction = "down"
 var principal
 var username_callback = JavaScript.create_callback(self, "_username_callback")
+var counter = -1
+var collisionMask = null
 
 func _ready():
+	print("player template added")
 	set_username("")
-	IC.getUsername(principal,username_callback)
+	#IC.getUsername(principal,username_callback)
 	setPlayerTexture("idle_" + direction)
+	animation_player.play("movement")
 
 func _username_callback(args):
 	# Get the first argument (the DOM event in our case).
@@ -60,18 +64,17 @@ func getCharacterById(player_id):
 	Server._getCharacterById(player_id)
 
 
-func MovePlayer(new_position, _direction):
-#	if not new_position == position:
-#		pass
-	direction = _direction.to_lower()
-	if !swingActive:
-		animation_player.play("movement")
-		if new_position == position:
-			setPlayerTexture("idle_" + direction)
-		else: 
-			setPlayerTexture("walk_" + direction)
-			set_position(new_position)
-
+func move(new_position, _direction):
+	if _direction != null:
+		direction = _direction.to_lower()
+		if !swingActive:
+			animation_player.play("movement")
+			if new_position == position:
+				setPlayerTexture("idle_" + direction)
+			else: 
+				setPlayerTexture("walk_" + direction)
+				set_position(new_position)
+				#move_and_collide(new_position)
 func Swing(tool_name, direction):
 	print(tool_name)
 	print(direction)
@@ -82,7 +85,7 @@ func Swing(tool_name, direction):
 	yield(animation_player, "animation_finished")
 	toolEquippedSprite.texture = null
 	swingActive = false
-	MovePlayer(position, direction.to_lower())
+	#MovePlayer(position, direction.to_lower())
 
 
 func setPlayerTexture(var anim):

@@ -2,7 +2,7 @@ extends Node2D
 
 onready var OreHitEffect = preload("res://World/Objects/Nature/Effects/OreHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var bigOreSprite = $BigOre
 onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
@@ -118,10 +118,8 @@ func _on_SmallHurtBox_area_entered(_area):
 
 ## Effect functions
 func intitiateItemDrop(item, pos):
-	if item == "Stone" or item == "Cobblestone":
-		item = "stone ore"
 	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item, 1)
+	itemDrop.initItemDropType("stone", 1)
 	get_parent().call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position + pos
 

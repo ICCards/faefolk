@@ -11,6 +11,7 @@
 [resource]
 frames = 7
 frame_0/texture = ExtResource( 7 )
+frame_0/delay_sec = 1.0
 frame_1/texture = ExtResource( 1 )
 frame_1/delay_sec = 0.0
 frame_2/texture = ExtResource( 2 )
@@ -18,7 +19,7 @@ frame_2/delay_sec = 0.0
 frame_3/texture = ExtResource( 4 )
 frame_3/delay_sec = 0.0
 frame_4/texture = ExtResource( 5 )
-frame_4/delay_sec = 0.0
+frame_4/delay_sec = 1.0
 frame_5/texture = ExtResource( 3 )
 frame_5/delay_sec = 0.0
 frame_6/texture = ExtResource( 6 )

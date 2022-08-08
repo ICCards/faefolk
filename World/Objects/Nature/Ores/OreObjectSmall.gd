@@ -3,7 +3,7 @@ extends Node2D
 
 onready var OreHitEffect = preload("res://World/Objects/Nature/Effects/OreHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
 var rng = RandomNumberGenerator.new()

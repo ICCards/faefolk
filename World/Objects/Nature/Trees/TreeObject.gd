@@ -6,10 +6,11 @@ onready var treeStumpSprite = $TreeSprites/TreeStump
 onready var treeBottomSprite = $TreeSprites/TreeBottom
 onready var treeTopSprite = $TreeSprites/TreeTop
 
+onready var Bird = preload("res://World/Animals/BirdFlyingFromTree.tscn")
 onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
+onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 var rng = RandomNumberGenerator.new()
 
 var treeObject
@@ -118,6 +119,8 @@ func _on_Hurtbox_area_entered(_area):
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
 	health -= 1
+	if health == 7:
+		initiateBirdEffect()
 	if health >= 4:
 		initiateLeavesFallingEffect(treeObject)
 		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
@@ -200,6 +203,13 @@ func intitiateItemDrop(item, pos, amt):
 		get_parent().call_deferred("add_child", itemDrop)
 		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
 	
+func initiateBirdEffect():
+	if Util.chance(33):
+		rng.randomize()
+		var bird = Bird.instance()
+		bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
+		get_parent().call_deferred("add_child", bird)
+		bird.global_position = global_position + Vector2(0, -120)
 
 
 ### Tree modulate functions
