@@ -20,4 +20,5 @@ texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 1 )
 
+[connection signal="button_up" from="button" to="." method="_on_button_button_up"]
 [connection signal="pressed" from="button" to="." method="_on_button_pressed"]

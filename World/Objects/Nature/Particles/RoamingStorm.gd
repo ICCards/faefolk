@@ -6,7 +6,7 @@ var is_snow_storm = false
 
 func _ready():
 	randomize()
-	position = Vector2( 4000, 4000) #Vector2(rand_range(0, 4000), rand_range(0, 4000))
+	position = Vector2(rand_range(0, 32000), rand_range(0, 32000)) #Vector2( 4000, 4000) #Vector2(rand_range(0, 4000), rand_range(0, 4000))
 	initiate_storm()
 
 func initiate_storm():

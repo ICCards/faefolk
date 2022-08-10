@@ -128,7 +128,7 @@ custom_constants/shadow_offset_y = 5
 text = "Wood path"
 
 [node name="ItemCategory" type="Label" parent="."]
-modulate = Color( 1, 0.145098, 0.145098, 1 )
+modulate = Color( 1, 0.145098, 0.945098, 1 )
 margin_left = 5.0
 margin_top = 17.963
 margin_right = 321.0

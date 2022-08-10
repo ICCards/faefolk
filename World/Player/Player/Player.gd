@@ -220,50 +220,44 @@ func _process(_delta) -> void:
 		idle_state(direction)
 
 func _unhandled_input(event):
-	if current_building_item == null:
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and \
-			not PlayerInventory.viewInventoryMode and \
-			not PlayerInventory.interactive_screen_mode and \
-			Server.player_state == "WORLD" and \
-			not PlayerInventory.chatMode and \
-			not PlayerInventory.viewMapMode and \
-			not is_mouse_over_hotbar and \
-			not swingActive and \
-			not is_player_dead and \
-			not is_player_sleeping: 
-				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-				var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-				if Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
-					swing_state(item_name)
-				elif itemCategory == "Placable object" and item_name == "tent":
-					$PlaceItemsUI.place_tent_state()
-				elif itemCategory == "Placable object" and item_name == "sleeping bag":
-					$PlaceItemsUI.place_sleeping_bag_state()
-				elif itemCategory == "Placable object" and item_name == "stone double door":
-					$PlaceItemsUI.place_door_state()
-				elif itemCategory == "Placable object":
-					$PlaceItemsUI.place_item_state(item_name)
-				elif itemCategory == "Placable path":
-					$PlaceItemsUI.place_path_state(item_name, path_tiles)
-				elif itemCategory == "Seed":
-					$PlaceItemsUI.place_seed_state(item_name, hoed_tiles)
-		else: 
-			$PlaceItemsUI.set_invisible()
-		
-		
-		
-func switch_building_state(item):
-	print(current_building_item)
-	current_building_item = item
-	if current_building_item != null:
-		$PlaceItemsUI.place_buildings_state(item)
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and \
+		not PlayerInventory.viewInventoryMode and \
+		not PlayerInventory.interactive_screen_mode and \
+		Server.player_state == "WORLD" and \
+		not PlayerInventory.chatMode and \
+		not PlayerInventory.viewMapMode and \
+		not is_mouse_over_hotbar and \
+		not swingActive and \
+		not is_player_dead and \
+		not is_player_sleeping: 
+			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
+			if item_name == "blueprint" and current_building_item == "wall":
+				$PlaceItemsUI.place_buildings_state(current_building_item)
+			elif item_name == "blueprint" and current_building_item == "double door":
+				$PlaceItemsUI.place_double_door_state()
+			else: 
+				current_building_item = null
+			if Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
+				swing_state(item_name)
+			elif itemCategory == "Placable object" and item_name == "tent":
+				$PlaceItemsUI.place_tent_state()
+			elif itemCategory == "Placable object" and item_name == "sleeping bag":
+				$PlaceItemsUI.place_sleeping_bag_state()
+			elif itemCategory == "Placable object":
+				$PlaceItemsUI.place_item_state(item_name)
+			elif itemCategory == "Placable path":
+				$PlaceItemsUI.place_path_state(item_name, path_tiles)
+			elif itemCategory == "Seed":
+				$PlaceItemsUI.place_seed_state(item_name, hoed_tiles)
 	else: 
 		$PlaceItemsUI.set_invisible()
+		
+
 
 
 func movement_state(delta):
 	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping:
-		animation_player.play("movement")
 		input_vector = Vector2.ZERO	
 		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0
@@ -337,13 +331,37 @@ func swing_state(item_name):
 
 
 func idle_state(_direction):
+	animation_player.play("idle")
 	$DetectPathType/FootstepsSound.stream_paused = true
-	animation = "idle_" + _direction.to_lower()
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		var item_category = JsonData.item_data[item_name]["ItemCategory"]
+		if item_category == "Resource" or item_category == "Placable object":
+			$HoldingItem.visible = true
+			animation = "holding_idle_" + _direction.to_lower()
+		else:
+			$HoldingItem.visible = false
+			animation = "idle_" + _direction.to_lower()
+	else:
+		$HoldingItem.visible = false
+		animation = "idle_" + _direction.to_lower()
 	$CompositeSprites.set_player_animation(character, animation, null)
 
 func walk_state(_direction):
+	animation_player.play("movement")
 	$DetectPathType/FootstepsSound.stream_paused = false
-	animation = "walk_" + _direction.to_lower()
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		var item_category = JsonData.item_data[item_name]["ItemCategory"]
+		if item_category == "Resource" or item_category == "Placable object":
+			$HoldingItem.visible = true
+			animation = "holding_walk_" + _direction.to_lower()
+		else:
+			$HoldingItem.visible = false
+			animation = "walk_" + _direction.to_lower()
+	else:
+		$HoldingItem.visible = false
+		animation = "walk_" + _direction.to_lower()
 	$CompositeSprites.set_player_animation(character, animation, null)
 
 func set_melee_collision_layer(_tool):

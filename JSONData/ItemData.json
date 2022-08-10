@@ -72,12 +72,12 @@
       "Description": "Used to water fertile soil"
   },
   "blueprint": {
-      "ItemCategory": "Tool",
+      "ItemCategory": "Construction",
       "StackSize": 1,
       "Description": "Used to create building structures"
   },
   "hammer": {
-      "ItemCategory": "Tool",
+      "ItemCategory": "Construction",
       "StackSize": 1,
       "Description": "Used to create building structures"
   },

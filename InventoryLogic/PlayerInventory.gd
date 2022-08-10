@@ -39,11 +39,11 @@ var hotbar = {
 #	0 : ["stone foundation", 99],
 #	1 : ["stone foundation", 99],
 #	1 : ["wood wall", 99],
-	4 : ["stone wall", 99],
-	3 : ["stone wall", 99],
+
 #	1: ["wood box", 99],
 #	2: ["tent", 30],
-	2: ["stone double door", 30],
+	2: ["hammer", 1],
+	3: ["blueprint", 1],
 #	3: ["house", 2],
 	5: ["wood sword", 1],
 	6: ["stone watering can", 1],
@@ -75,20 +75,6 @@ func returnSufficentCraftingMaterial(ingredient, amount_needed):
 	else:
 		return false
 
-func return_player_wood_and_stone():
-	var total_wood = 0
-	var total_stone = 0
-	for slot in hotbar:
-		if hotbar[slot][0] == "wood":
-			total_wood = total_wood +  hotbar[slot][1]
-		elif hotbar[slot][0] == "stone":
-			total_stone = total_stone +  hotbar[slot][1]
-	for slot in inventory:
-		if inventory[slot][0] == "wood":
-			total_wood = total_wood + inventory[slot][1]
-		elif inventory[slot][0] == "stone":
-			total_stone = total_stone +  inventory[slot][1]
-	return [total_wood, total_stone]
 
 func craft_item(item):
 	var ingredients = JsonData.crafting_data[item]["ingredients"]

@@ -71,6 +71,7 @@ func set_world_invisible():
 	$NatureObjects.visible = false
 	get_node("PlacableTiles/" + Server.player_house_id).set_player_inside_house()
 	
+	
 func set_world_visible():
 	$GeneratedTiles.visible = true
 	$PlacableTiles.visible = true
@@ -177,24 +178,22 @@ func get_valid_player_spawn_position():
 	else:
 		get_valid_player_spawn_position()
 		
-		
-#func spawnOtherPlayers():
-#	for player in Server.active_players:
-#		spawnNewPlayer(player)
+
 
 func spawnNewPlayer(player):
-	print("spawn player template")
-	if not player.empty():
-		if not has_node(str(player["id"])):
-			print("spawning new player " + player["c"])
-			print(player["p"])
-			var new_player = Player_template.instance()
-			new_player.position = player["p"]
-			new_player.name = str(player["id"])
-			#new_player.principal = player["principal"]
-			new_player.character = _character.new()
-			new_player.character.LoadPlayerCharacter(player["c"])
-			$Players.add_child(new_player)
+	pass
+#	print("spawn player template")
+#	if not player.empty():
+#		if not has_node(str(player["id"])):
+#			print("spawning new player " + player["c"])
+#			print(player["p"])
+#			var new_player = Player_template.instance()
+#			new_player.position = player["p"]
+#			new_player.name = str(player["id"])
+#			#new_player.principal = player["principal"]
+#			new_player.character = _character.new()
+#			new_player.character.LoadPlayerCharacter(player["c"])
+#			$Players.add_child(new_player)
 			
 	
 func DespawnPlayer(player_id):
