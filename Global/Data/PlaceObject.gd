@@ -2,6 +2,7 @@ extends Node
 
 onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = preload("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
+onready var BuildingTileObjectHurtBox = preload("res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn")
 onready var PlayerHouseObject = preload("res://World/Objects/Farm/PlayerHouse.tscn")
 onready var SleepingBag = preload("res://World/Objects/Tiles/SleepingBag.tscn")
 onready var TentDown = preload("res://World/Objects/Farm/TentDown.tscn")
@@ -17,7 +18,8 @@ onready var object_tiles
 onready var light_tiles
 onready var path_tiles 
 onready var foundation_tiles
-var building_tiles
+onready var wall_tiles
+onready var building_tiles
 var rng = RandomNumberGenerator.new()
 
 enum Placables { 
@@ -55,6 +57,33 @@ func place_seed_in_world(id, item_name, location, days):
 	plantedCrop.initialize(item_name, location, 0, false, false)
 	Server.world.add_child(plantedCrop, true)
 	plantedCrop.global_position = valid_tiles.map_to_world(location) + Vector2(0, 16)
+	
+	
+func place_building_object_in_world(id, item_name, location):
+	wall_tiles = get_node("/root/World/PlacableTiles/WallTiles")
+	match item_name:
+		"wall":
+			var object = BuildingTileObjectHurtBox.instance()
+			object.name = str(id)
+			object.location = location
+			object.item_name = item_name
+			object.tier = "twig"
+			Server.world.call_deferred("add_child", object, true)
+			object.global_position = wall_tiles.map_to_world(location) + Vector2(16, 16)
+			Tiles.remove_invalid_tiles(location, Vector2(1,1))
+			wall_tiles.set_cellv(location, 0)
+		"double door":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
+			var object = StoneDoubleDoor.instance()
+			object.global_position = fence_tiles.map_to_world(location) + Vector2(0,32)
+			Server.world.call_deferred("add_child", object, true)
+		"double door side":
+			Tiles.remove_invalid_tiles(location, Vector2(1,2))
+			var object = StoneDoubleDoorSide.instance()
+			object.global_position = fence_tiles.map_to_world(location) + Vector2(0,32)
+
+	
+	
 
 func place_object_in_world(id, item_name, location):
 	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
@@ -63,6 +92,7 @@ func place_object_in_world(id, item_name, location):
 	path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 	light_tiles = get_node("/root/World/PlacableTiles/LightTiles")
 	building_tiles = get_node("/root/World/PlacableTiles/BuildingTiles")
+	wall_tiles = get_node("/root/World/PlacableTiles/WallTiles")
 	foundation_tiles = get_node("/root/World/PlacableTiles/FoundationTiles")
 	
 	var tileObjectHurtBox = TileObjectHurtBox.instance()
@@ -71,18 +101,12 @@ func place_object_in_world(id, item_name, location):
 	Server.world.call_deferred("add_child", tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = valid_tiles.map_to_world(location) + Vector2(16, 16)
 	match item_name:
-		"stone wall":
-			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			building_tiles.set_cellv(location, 0)
-			building_tiles.update_bitmask_region()
-		"stone foundation":
-			foundation_tiles.set_cellv(location, 0)
-		"stone double door":
+		"double door":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			var object = StoneDoubleDoor.instance()
 			object.global_position = fence_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
-		"stone double door side":
+		"double door side":
 			Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			var object = StoneDoubleDoorSide.instance()
 			object.global_position = fence_tiles.map_to_world(location) + Vector2(0,32)

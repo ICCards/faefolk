@@ -94,6 +94,26 @@
          "ingredients" : [
              ["wood", 30],
              ["stone", 30]
-        ]
-     }
+        ],
+     },
+     "wood wall": {
+         "ingredients" : [
+             ["wood", 200],
+        ],
+     },
+     "stone wall": {
+         "ingredients" : [
+             ["wood", 300],
+        ],
+     },
+     "metal wall": {
+         "ingredients" : [
+             ["metal", 200],
+        ],
+     },
+     "armored wall": {
+         "ingredients" : [
+             ["high quality metal", 25],
+        ],
+     },
 }

@@ -28,8 +28,38 @@ func sendAction(action,data):
 			Server.action("PLACE_ITEM", data)
 			
 			
-			
 func place_door_state():
+	$RotateIcon.visible = true
+	$ColorIndicator.visible = true
+	$ColorIndicator.scale = Vector2(1, 1)
+	$ItemToPlace.visible = true
+	$ItemToPlace.rect_scale = Vector2(1, 1)
+	get_rotation_index()
+	var direction = directions[direction_index]
+	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+	set_global_position(mousePos)
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	if direction == "up" or direction == "down":
+		$ItemToPlace.rect_position = Vector2(0,-32)
+		$ItemToPlace.texture = load("res://Assets/Images/Animations/door/door/front/wood/1.png")
+	else:
+		$ItemToPlace.rect_position = Vector2(0,0)
+		$ItemToPlace.texture = load("res://Assets/Images/Animations/door/door/side/stone/1.png")
+	if (direction == "up" or direction == "down")  and not Tiles.validate_tiles(location, Vector2(1,1)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(1,1)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	else:
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
+		if Input.is_action_pressed("mouse_click"):
+			if direction == "up" or direction == "down":
+				place_object("door", location, "placable")
+			else:
+				place_object("door side", location, "placable")
+	
+	
+			
+func place_double_door_state():
 	$RotateIcon.visible = true
 	$ColorIndicator.visible = true
 	$ItemToPlace.visible = true
@@ -54,17 +84,24 @@ func place_door_state():
 		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
 		if Input.is_action_pressed("mouse_click"):
 			if direction == "up" or direction == "down":
-				place_object("stone double door", location, "placable")
+				place_object("double door", location, "placable")
 			else:
-				place_object("stone double door side", location, "placable")
+				place_object("double door side", location, "placable")
 
 
 func place_buildings_state(item):
+	print(item)
 	$ColorIndicator.visible = true
 	$ColorIndicator.scale = Vector2(1, 1)
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	if not Tiles.validate_tiles(location, Vector2(1,1)):
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/red_square.png")
+	else:
+		$ColorIndicator.texture = preload("res://Assets/Images/Misc/green_square.png")
+		if Input.is_action_pressed("mouse_click"):
+			place_object(item, location, "placable")
 
 func place_sleeping_bag_state():
 	get_rotation_index()
@@ -260,7 +297,8 @@ func place_seed_state(item_name, hoed_tiles):
 
 
 func place_object(item_name, location, type):
-	PlayerInventory.remove_single_object_from_hotbar()
+#	if item_name != "wall" or item_name != "double door" or item_name != "door":
+#		PlayerInventory.remove_single_object_from_hotbar()
 	var id = Uuid.v4()
 	if type == "placable":
 		var data = {"id": id, "name": item_name, "l": location, "item": type}
@@ -268,7 +306,10 @@ func place_object(item_name, location, type):
 		$SoundEffects.stream = Sounds.place_object
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
-		PlaceObject.place_object_in_world(id, item_name, location)
+		if item_name == "wall":
+			PlaceObject.place_building_object_in_world(id, item_name, location)
+		else:
+			PlaceObject.place_object_in_world(id, item_name, location)
 	elif type == "seed":
 #		var tile_id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 #		var data = {"id": id, "name": item_name, "l": location, "item": type, "d": JsonData.crop_data[item_name]["DaysToGrow"], "g": tile_id}

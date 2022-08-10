@@ -448,6 +448,117 @@ extends Node
 #	},
 
 
+#	body_holding_idle_down = {
+#		0 : preload()
+#	},
+#	body_holding_idle_up = {
+#		0 : preload()
+#	},
+#	body_holding_idle_right = {
+#		0 : preload()
+#	},
+#	body_holding_idle_left = {
+#		0 : preload()
+#	},
+#
+#	arms_holding_idle_down = {
+#		0 : preload()
+#	},
+#	arms_holding_idle_up = {
+#		0 : preload()
+#	},
+#	arms_holding_idle_right = {
+#		0 : preload()
+#	},
+#	arms_holding_idle_left = {
+#		0 : preload()
+#	},
+#
+#	acc_holding_idle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_holding_idle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_holding_idle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_holding_idle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_holding_idle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_holding_idle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_holding_idle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_holding_idle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_holding_idle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_holding_idle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_holding_idle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_holding_idle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_holding_idle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_holding_idle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_holding_idle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_holding_idle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_holding_idle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_holding_idle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_holding_idle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_holding_idle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
 
 ### Characters ###
 var goblin_male = {
@@ -4772,10 +4883,14 @@ var body_sprites = {
 	'swing_up' : null, 
 	'swing_left' : null,
 	'swing_right' : null,
-	'holding_down': null,
-	'holding_up': null,
-	'holding_left': null,
-	'holding_right': null,
+	'holding_idle_down': null,
+	'holding_idle_up': null,
+	'holding_idle_left': null,
+	'holding_idle_right': null,
+	'holding_walk_down': null,
+	'holding_walk_up': null,
+	'holding_walk_left': null,
+	'holding_walk_right': null,
 	'death_up': null,
 	'death_down': null,
 	'death_left': null,
@@ -4784,6 +4899,10 @@ var body_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'sword_swing_down': null,
+	'sword_swing_up': null,
+	'sword_swing_left': null,
+	'sword_swing_right': null,
 	}
 
 var arms_sprites = {
@@ -4799,10 +4918,14 @@ var arms_sprites = {
 	'swing_up' : null,
 	'swing_left' : null,
 	'swing_right' : null,
-	'holding_down': null,
-	'holding_up': null,
-	'holding_left': null,
-	'holding_right': null,
+	'holding_idle_down': null,
+	'holding_idle_up': null,
+	'holding_idle_left': null,
+	'holding_idle_right': null,
+	'holding_walk_down': null,
+	'holding_walk_up': null,
+	'holding_walk_left': null,
+	'holding_walk_right': null,
 	'death_up': null,
 	'death_down': null,
 	'death_left': null,
@@ -4811,6 +4934,10 @@ var arms_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'sword_swing_down': null,
+	'sword_swing_up': null,
+	'sword_swing_left': null,
+	'sword_swing_right': null,
 	};
 
 var acc_sprites = {
@@ -4826,10 +4953,14 @@ var acc_sprites = {
 	'swing_up' : null,
 	'swing_left' : null,
 	'swing_right' : null,
-	'holding_down': null,
-	'holding_up': null,
-	'holding_left': null,
-	'holding_right': null,
+	'holding_idle_down': null,
+	'holding_idle_up': null,
+	'holding_idle_left': null,
+	'holding_idle_right': null,
+	'holding_walk_down': null,
+	'holding_walk_up': null,
+	'holding_walk_left': null,
+	'holding_walk_right': null,
 	'death_up': null,
 	'death_down': null,
 	'death_left': null,
@@ -4838,6 +4969,10 @@ var acc_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'sword_swing_down': null,
+	'sword_swing_up': null,
+	'sword_swing_left': null,
+	'sword_swing_right': null,
 	};
 
 var headAtr_sprites = {
@@ -4853,10 +4988,14 @@ var headAtr_sprites = {
 	'swing_up' : null, 
 	'swing_left' : null, 
 	'swing_right' : null,
-	'holding_down': null,
-	'holding_up': null,
-	'holding_left': null,
-	'holding_right': null,
+	'holding_idle_down': null,
+	'holding_idle_up': null,
+	'holding_idle_left': null,
+	'holding_idle_right': null,
+	'holding_walk_down': null,
+	'holding_walk_up': null,
+	'holding_walk_left': null,
+	'holding_walk_right': null,
 	'death_up': null,
 	'death_down': null,
 	'death_left': null,
@@ -4865,6 +5004,10 @@ var headAtr_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'sword_swing_down': null,
+	'sword_swing_up': null,
+	'sword_swing_left': null,
+	'sword_swing_right': null,
 	};
 
 var pants_sprites = {
@@ -4880,10 +5023,14 @@ var pants_sprites = {
 	'swing_up' : null, 
 	'swing_left' : null, 
 	'swing_right' : null, 
-	'holding_down': null,
-	'holding_up': null,
-	'holding_left': null,
-	'holding_right': null,
+	'holding_idle_down': null,
+	'holding_idle_up': null,
+	'holding_idle_left': null,
+	'holding_idle_right': null,
+	'holding_walk_down': null,
+	'holding_walk_up': null,
+	'holding_walk_left': null,
+	'holding_walk_right': null,
 	'death_up': null,
 	'death_down': null,
 	'death_left': null,
@@ -4892,6 +5039,10 @@ var pants_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'sword_swing_down': null,
+	'sword_swing_up': null,
+	'sword_swing_left': null,
+	'sword_swing_right': null,
 	};
 
 var shirts_sprites = {
@@ -4907,10 +5058,14 @@ var shirts_sprites = {
 	'swing_up' : null, 
 	'swing_left' : null, 
 	'swing_right' : null,
-	'holding_down': null,
-	'holding_up': null,
-	'holding_left': null,
-	'holding_right': null,
+	'holding_idle_down': null,
+	'holding_idle_up': null,
+	'holding_idle_left': null,
+	'holding_idle_right': null,
+	'holding_walk_down': null,
+	'holding_walk_up': null,
+	'holding_walk_left': null,
+	'holding_walk_right': null,
 	'death_up': null,
 	'death_down': null,
 	'death_left': null,
@@ -4919,6 +5074,10 @@ var shirts_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'sword_swing_down': null,
+	'sword_swing_up': null,
+	'sword_swing_left': null,
+	'sword_swing_right': null,
 	};
 
 var shoes_sprites = {
@@ -4934,10 +5093,14 @@ var shoes_sprites = {
 	'swing_up' : null,
 	'swing_left' : null, 
 	'swing_right' : null,
-	'holding_down': null,
-	'holding_up': null,
-	'holding_left': null,
-	'holding_right': null, 
+	'holding_idle_down': null,
+	'holding_idle_up': null,
+	'holding_idle_left': null,
+	'holding_idle_right': null,
+	'holding_walk_down': null,
+	'holding_walk_up': null,
+	'holding_walk_left': null,
+	'holding_walk_right': null,
 	'death_up': null,
 	'death_down': null,
 	'death_left': null,
@@ -4946,6 +5109,10 @@ var shoes_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'sword_swing_down': null,
+	'sword_swing_up': null,
+	'sword_swing_left': null,
+	'sword_swing_right': null,
 	};
 
 
@@ -5001,11 +5168,11 @@ func LoadPlayerCharacter(character_info):
 		"succubus":
 			set_char = succubus
 		
-	acc_index = 0 #set_char.acc_idle_down.size() - 1
-	headAtr_index =  0 #set_char.head_attribute_idle_down.size() - 1
-	pants_index = 0 #set_char.pants_idle_down.size() - 1
-	shirts_index = 0 #set_char.shirts_idle_down.size() - 1
-	shoes_index = 0 #set_char.shoes_idle_down.size() - 1
+	acc_index = set_char.acc_idle_down.size() - 1
+	headAtr_index =  set_char.head_attribute_idle_down.size() - 1
+	pants_index = set_char.pants_idle_down.size() - 1
+	shirts_index = set_char.shirts_idle_down.size() - 1
+	shoes_index = set_char.shoes_idle_down.size() - 1
 	
 	
 #	acc_index = character_info.acc_index
@@ -5048,14 +5215,14 @@ func set_attributes(set_char):
 #	'sleep_down': character.body_sleep_down[0],
 #	'sleep_left': character.body_sleep_left[0],
 #	'sleep_right': character.body_sleep_right[0],
-#	'holding_walk_down' : character.body_holding_walk_down[0], 
-#	'holding_walk_up' : character.body_holding_walk_up[0], 
-#	'holding_walk_left' : character.body_holding_walk_left[0], 
-#	'holding_walk_right' : character.body_holding_walk_right[0],
-#	'holding_idle_down' : character.body_holding_idle_down[0], 
-#	'holding_idle_up' : character.body_holding_idle_up[0], 
-#	'holding_idle_left' : character.body_holding_idle_left[0], 
-#	'holding_idle_right' : character.body_holding_idle_right[0]
+	'holding_walk_down' : character.body_holding_walk_down[0], 
+	'holding_walk_up' : character.body_holding_walk_up[0], 
+	'holding_walk_left' : character.body_holding_walk_left[0], 
+	'holding_walk_right' : character.body_holding_walk_right[0],
+	'holding_idle_down' : character.body_holding_idle_down[0], 
+	'holding_idle_up' : character.body_holding_idle_up[0], 
+	'holding_idle_left' : character.body_holding_idle_left[0], 
+	'holding_idle_right' : character.body_holding_idle_right[0]
 	};
 	arms_sprites = {
 	'idle_down' : character.arms_idle_down[0], 
@@ -5086,14 +5253,14 @@ func set_attributes(set_char):
 #	'sleep_down': character.arms_sleep_down[0],
 #	'sleep_left': character.arms_sleep_left[0],
 #	'sleep_right': character.arms_sleep_right[0],
-#	'holding_walk_down' : character.arms_holding_walk_down[0], 
-#	'holding_walk_up' : character.arms_holding_walk_up[0], 
-#	'holding_walk_left' : character.arms_holding_walk_left[0], 
-#	'holding_walk_right' : character.arms_holding_walk_right[0],
-#	'holding_idle_down' : character.arms_holding_idle_down[0], 
-#	'holding_idle_up' : character.arms_holding_idle_up[0], 
-#	'holding_idle_left' : character.arms_holding_idle_left[0], 
-#	'holding_idle_right' : character.arms_holding_idle_right[0]
+	'holding_walk_down' : character.arms_holding_walk_down[0], 
+	'holding_walk_up' : character.arms_holding_walk_up[0], 
+	'holding_walk_left' : character.arms_holding_walk_left[0], 
+	'holding_walk_right' : character.arms_holding_walk_right[0],
+	'holding_idle_down' : character.arms_holding_idle_down[0], 
+	'holding_idle_up' : character.arms_holding_idle_up[0], 
+	'holding_idle_left' : character.arms_holding_idle_left[0], 
+	'holding_idle_right' : character.arms_holding_idle_right[0]
 	};
 	acc_sprites = {
 	'idle_down' : character.acc_idle_down[acc_index], 
@@ -5124,14 +5291,14 @@ func set_attributes(set_char):
 #	'sleep_down': character.acc_sleep_down[acc_index],
 #	'sleep_left': character.acc_sleep_left[acc_index],
 #	'sleep_right': character.acc_sleep_right[acc_index],
-#	'holding_walk_down' : character.acc_holding_walk_down[acc_index], 
-#	'holding_walk_up' : character.acc_holding_walk_up[acc_index], 
-#	'holding_walk_left' : character.acc_holding_walk_left[acc_index], 
-#	'holding_walk_right' : character.acc_holding_walk_right[acc_index],
-#	'holding_idle_down' : null, #character.acc_holding_idle_down[acc_index], 
-#	'holding_idle_up' : character.acc_holding_idle_up[acc_index], 
-#	'holding_idle_left' : character.acc_holding_idle_left[acc_index], 
-#	'holding_idle_right' : character.acc_holding_idle_right[acc_index]
+	'holding_walk_down' : character.acc_holding_walk_down[acc_index], 
+	'holding_walk_up' : character.acc_holding_walk_up[acc_index], 
+	'holding_walk_left' : character.acc_holding_walk_left[acc_index], 
+	'holding_walk_right' : character.acc_holding_walk_right[acc_index],
+	'holding_idle_down' : character.acc_holding_idle_down[acc_index], 
+	'holding_idle_up' : character.acc_holding_idle_up[acc_index], 
+	'holding_idle_left' : character.acc_holding_idle_left[acc_index], 
+	'holding_idle_right' : character.acc_holding_idle_right[acc_index]
 	};
 	headAtr_sprites = {
 	'idle_down' : character.head_attribute_idle_down[headAtr_index], 
@@ -5162,14 +5329,14 @@ func set_attributes(set_char):
 #	'sleep_down': character.head_attribute_sleep_down[headAtr_index],
 #	'sleep_left': character.head_attribute_sleep_left[headAtr_index],
 #	'sleep_right': character.head_attribute_sleep_right[headAtr_index],
-#	'holding_walk_down' : character.head_attribute_holding_walk_down[headAtr_index], 
-#	'holding_walk_up' : character.head_attribute_holding_walk_up[headAtr_index], 
-#	'holding_walk_left' : character.head_attribute_holding_walk_left[headAtr_index], 
-#	'holding_walk_right' : character.head_attribute_holding_walk_right[headAtr_index],
-#	'holding_idle_down' : character.head_attribute_holding_idle_down[headAtr_index], 
-#	'holding_idle_up' : character.head_attribute_holding_idle_up[headAtr_index], 
-#	'holding_idle_left' : character.head_attribute_holding_idle_left[headAtr_index], 
-#	'holding_idle_right' : character.head_attribute_holding_idle_right[headAtr_index]
+	'holding_walk_down' : character.head_attribute_holding_walk_down[headAtr_index], 
+	'holding_walk_up' : character.head_attribute_holding_walk_up[headAtr_index], 
+	'holding_walk_left' : character.head_attribute_holding_walk_left[headAtr_index], 
+	'holding_walk_right' : character.head_attribute_holding_walk_right[headAtr_index],
+	'holding_idle_down' : character.head_attribute_holding_idle_down[headAtr_index], 
+	'holding_idle_up' : character.head_attribute_holding_idle_up[headAtr_index], 
+	'holding_idle_left' : character.head_attribute_holding_idle_left[headAtr_index], 
+	'holding_idle_right' : character.head_attribute_holding_idle_right[headAtr_index]
 	}
 	pants_sprites = {
 	'idle_down' : character.pants_idle_down[pants_index], 
@@ -5200,14 +5367,14 @@ func set_attributes(set_char):
 #	'sleep_down': character.pants_sleep_down[pants_index],
 #	'sleep_left': character.pants_sleep_left[pants_index],
 #	'sleep_right': character.pants_sleep_right[pants_index],
-#	'holding_walk_down' : character.pants_holding_walk_down[pants_index], 
-#	'holding_walk_up' : character.pants_holding_walk_up[pants_index], 
-#	'holding_walk_left' : character.pants_holding_walk_left[pants_index], 
-#	'holding_walk_right' : character.pants_holding_walk_right[pants_index],
-#	'holding_idle_down' : character.head_attribute_holding_idle_down[pants_index], 
-#	'holding_idle_up' : character.head_attribute_holding_idle_up[pants_index], 
-#	'holding_idle_left' : character.head_attribute_holding_idle_left[pants_index], 
-#	'holding_idle_right' : character.head_attribute_holding_idle_right[pants_index]
+	'holding_walk_down' : character.pants_holding_walk_down[pants_index], 
+	'holding_walk_up' : character.pants_holding_walk_up[pants_index], 
+	'holding_walk_left' : character.pants_holding_walk_left[pants_index], 
+	'holding_walk_right' : character.pants_holding_walk_right[pants_index],
+	'holding_idle_down' : character.pants_holding_idle_down[pants_index], 
+	'holding_idle_up' : character.pants_holding_idle_up[pants_index], 
+	'holding_idle_left' : character.pants_holding_idle_left[pants_index], 
+	'holding_idle_right' : character.pants_holding_idle_right[pants_index]
 	};
 	shirts_sprites = {
 	'idle_down' : character.shirts_idle_down[shirts_index], 
@@ -5238,14 +5405,14 @@ func set_attributes(set_char):
 #	'sleep_down': character.shirts_sleep_down[shirts_index],
 #	'sleep_left': character.shirts_sleep_left[shirts_index],
 #	'sleep_right': character.shirts_sleep_right[shirts_index],
-#	'holding_walk_down' : character.shirts_holding_walk_down[shirts_index], 
-#	'holding_walk_up' : character.shirts_holding_walk_up[shirts_index], 
-#	'holding_walk_left' : character.shirts_holding_walk_left[shirts_index], 
-#	'holding_walk_right' : character.shirts_holding_walk_right[shirts_index],
-#	'holding_idle_down' : character.shirts_holding_idle_down[shirts_index], 
-#	'holding_idle_up' : character.shirts_holding_idle_up[shirts_index], 
-#	'holding_idle_left' : character.shirts_holding_idle_left[shirts_index], 
-#	'holding_idle_right' : character.shirts_holding_idle_right[shirts_index]
+	'holding_walk_down' : character.shirts_holding_walk_down[shirts_index], 
+	'holding_walk_up' : character.shirts_holding_walk_up[shirts_index], 
+	'holding_walk_left' : character.shirts_holding_walk_left[shirts_index], 
+	'holding_walk_right' : character.shirts_holding_walk_right[shirts_index],
+	'holding_idle_down' : character.shirts_holding_idle_down[shirts_index], 
+	'holding_idle_up' : character.shirts_holding_idle_up[shirts_index], 
+	'holding_idle_left' : character.shirts_holding_idle_left[shirts_index], 
+	'holding_idle_right' : character.shirts_holding_idle_right[shirts_index]
 	};
 	shoes_sprites = {
 	'idle_down' : character.shoes_idle_down[shoes_index], 
@@ -5276,13 +5443,13 @@ func set_attributes(set_char):
 #	'sleep_down': character.shoes_sleep_down[shoes_index],
 #	'sleep_left': character.shoes_sleep_left[shoes_index],
 #	'sleep_right': character.shoes_sleep_right[shoes_index],
-#	'holding_walk_down' : character.shoes_holding_walk_down[shoes_index], 
-#	'holding_walk_up' : character.shoes_holding_walk_up[shoes_index], 
-#	'holding_walk_left' : character.shoes_holding_walk_left[shoes_index], 
-#	'holding_walk_right' : character.shoes_holding_walk_right[shoes_index],
-#	'holding_idle_down' : character.shoes_holding_idle_down[shoes_index], 
-#	'holding_idle_up' : character.shoes_holding_idle_up[shoes_index], 
-#	'holding_idle_left' : character.shoes_holding_idle_left[shoes_index], 
-#	'holding_idle_right' : character.shoes_holding_idle_right[shoes_index]
+	'holding_walk_down' : character.shoes_holding_walk_down[shoes_index], 
+	'holding_walk_up' : character.shoes_holding_walk_up[shoes_index], 
+	'holding_walk_left' : character.shoes_holding_walk_left[shoes_index], 
+	'holding_walk_right' : character.shoes_holding_walk_right[shoes_index],
+	'holding_idle_down' : character.shoes_holding_idle_down[shoes_index], 
+	'holding_idle_up' : character.shoes_holding_idle_up[shoes_index], 
+	'holding_idle_left' : character.shoes_holding_idle_left[shoes_index], 
+	'holding_idle_right' : character.shoes_holding_idle_right[shoes_index]
 	};
 	

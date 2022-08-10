@@ -862,6 +862,113 @@ var male = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/SWORD SWING/assets/left/shoes/shoes.png")
 	},
+	
+	body_holding_idle_down = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/down/body.png")
+	},
+	body_holding_idle_up = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/up/body.png")
+	},
+	body_holding_idle_right = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/right/body.png")
+	},
+	body_holding_idle_left = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/left/body.png")
+	},
+
+	arms_holding_idle_down = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/down/arms.png")
+	},
+	arms_holding_idle_up = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/up/arms.png")
+	},
+	arms_holding_idle_right = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/right/arms.png")
+	},
+	arms_holding_idle_left = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/left/arms.png")
+	},
+
+	acc_holding_idle_down = {
+		0 : null,
+	},
+	acc_holding_idle_up = {
+		0 : null,
+	},
+	acc_holding_idle_right = {
+		0 : null,
+	},
+	acc_holding_idle_left = {
+		0 : null,
+	},
+
+	head_attribute_holding_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_holding_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_holding_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_holding_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_holding_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/down/shirts/shirt.png")
+	},
+	shirts_holding_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/up/shirts/shirt.png")
+	},
+	shirts_holding_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/right/shirts/shirt.png")
+	},
+	shirts_holding_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/shirts/shirt.png")
+	},
+
+	pants_holding_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/down/pants/pants.png")
+	},
+	pants_holding_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/up/pants/pants.png")
+	},
+	pants_holding_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/right/pants/pants.png")
+	},
+	pants_holding_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/pants/pants.png")
+	},
+
+	shoes_holding_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/down/shoes/shoes.png")
+	},
+	shoes_holding_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/up/shoes/shoes.png")
+	},
+	shoes_holding_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/right/shoes/shoes.png")
+	},
+	shoes_holding_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/shoes/shoes.png")
+	},
 }
 var female = {
 	body_idle_down = {

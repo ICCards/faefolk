@@ -54,6 +54,8 @@ func returnCategoryColor(category):
 			return Color("eb00ff")
 		"Placable path":
 			return Color("3c1aff")
+		"Construction":
+			return Color("ff25f1")
 
 func set_size_of_description(x):
 	if x <= 210:

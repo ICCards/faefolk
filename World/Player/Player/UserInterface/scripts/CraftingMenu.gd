@@ -214,6 +214,7 @@ func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
 			initialize_crafting()
 		else:
 			play_error_sound()
+			
 func _on_WoodBarrelArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if sufficientMaterialToCraft("wood barrel"):
@@ -222,6 +223,7 @@ func _on_WoodBarrelArea_input_event(viewport, event, shape_idx):
 			initialize_crafting()
 		else:
 			play_error_sound()
+			
 func _on_WoodFenceArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if sufficientMaterialToCraft("wood fence"):
@@ -230,6 +232,7 @@ func _on_WoodFenceArea_input_event(viewport, event, shape_idx):
 			initialize_crafting()
 		else:
 			play_error_sound()
+			
 func _on_TorchArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if sufficientMaterialToCraft("torch"):
@@ -238,6 +241,7 @@ func _on_TorchArea_input_event(viewport, event, shape_idx):
 			initialize_crafting()
 		else:
 			play_error_sound()
+			
 func _on_WoodChestArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if sufficientMaterialToCraft("wood chest"):
