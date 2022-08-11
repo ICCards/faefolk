@@ -43,7 +43,6 @@ func open_chest():
 	$OpenChest.initialize_chest_data()
 	$Hotbar.initialize_hotbar()
 	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
-	toggle_stats_and_time()
 	$OpenChest.visible = !$OpenChest.visible
 	if PlayerInventory.interactive_screen_mode == true:
 		$SoundEffects.stream = Sounds.chest_open
@@ -70,7 +69,6 @@ func open_stove():
 	toggle_stats_and_time()
 	
 func toggle_stats_and_time():
-	pass
-#	$CurrentTime.visible = !$CurrentTime.visible
-#	$PlayerStatsUI.visible = !$PlayerStatsUI.visible
+	$CurrentTime.visible = !$CurrentTime.visible
+	$PlayerStatsUI.visible = !$PlayerStatsUI.visible
 

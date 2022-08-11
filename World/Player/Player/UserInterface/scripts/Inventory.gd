@@ -56,6 +56,25 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
+		elif event.button_index == BUTTON_RIGHT && event.pressed:
+			if find_parent("UserInterface").holding_item == null and slot.item:
+				pick_half_from_slot(slot)
+			
+
+func pick_half_from_slot(slot: SlotClass):
+	pass
+#	var half = slot.item.item_quantity / 2
+#	print(half)
+#	var temp_item = slot.item
+#	if half >= 1:
+#		find_parent("UserInterface").holding_item = temp_item
+#		find_parent("UserInterface").holding_item.decrease_item_quantity(half)
+#		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+#		PlayerInventory.decrease_item_quantity(slot, half)
+#		slot.item.decrease_item_quantity(half)
+#		slot.pickFromSlot()e
+#		slot.putIntoSlot(slot.item)
+		#slot.it.decrease_item_quantity(half)
 
 func _input(_event):
 	if find_parent("UserInterface").holding_item:

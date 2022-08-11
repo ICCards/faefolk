@@ -76,10 +76,12 @@ position = Vector2( 303.333, -136.667 )
 texture = ExtResource( 7 )
 
 [node name="ScreenShot2022-07-19At52623Pm" type="Sprite" parent="Circle/icons"]
+visible = false
 position = Vector2( 300, 180 )
 texture = ExtResource( 5 )
 
 [node name="ScreenShot2022-07-19At52706Pm" type="Sprite" parent="Circle/icons"]
+visible = false
 position = Vector2( 0, 343.333 )
 texture = ExtResource( 4 )
 

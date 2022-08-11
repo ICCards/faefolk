@@ -249,10 +249,11 @@ custom_constants/shadow_offset_y = 5
 text = "Upgrade:"
 
 [node name="Wood" parent="UpgradeWallLabel" instance=ExtResource( 15 )]
-margin_left = 4.0
-margin_top = 16.0
-margin_right = 4.0
-margin_bottom = 48.0
+margin_left = 3.5
+margin_top = 14.5
+margin_right = 3.5
+margin_bottom = 46.5
+rect_scale = Vector2( 0.14, 0.14 )
 mouse_filter = 2
 
 [node name="Name" parent="UpgradeWallLabel/Wood" index="0"]
@@ -269,9 +270,10 @@ text = "200"
 
 [node name="Stone" parent="UpgradeWallLabel" instance=ExtResource( 15 )]
 margin_left = 4.0
-margin_top = 28.0
+margin_top = 26.5
 margin_right = 4.0
-margin_bottom = 60.0
+margin_bottom = 58.5
+rect_scale = Vector2( 0.14, 0.14 )
 mouse_filter = 2
 
 [node name="Name" parent="UpgradeWallLabel/Stone" index="0"]
@@ -292,10 +294,11 @@ texture = ExtResource( 16 )
 text = "300"
 
 [node name="Metal" parent="UpgradeWallLabel" instance=ExtResource( 15 )]
-margin_left = 4.0
-margin_top = 40.0
-margin_right = 4.0
-margin_bottom = 72.0
+margin_left = 3.5
+margin_top = 38.5
+margin_right = 3.5
+margin_bottom = 70.5
+rect_scale = Vector2( 0.14, 0.14 )
 mouse_filter = 2
 
 [node name="Name" parent="UpgradeWallLabel/Metal" index="0"]
@@ -316,10 +319,11 @@ texture = ExtResource( 18 )
 text = "300"
 
 [node name="Armored" parent="UpgradeWallLabel" instance=ExtResource( 15 )]
-margin_left = 4.0
-margin_top = 52.0
-margin_right = 4.0
-margin_bottom = 84.0
+margin_left = 3.5
+margin_top = 51.0
+margin_right = 3.5
+margin_bottom = 83.0
+rect_scale = Vector2( 0.14, 0.14 )
 mouse_filter = 2
 
 [node name="Name" parent="UpgradeWallLabel/Armored" index="0"]

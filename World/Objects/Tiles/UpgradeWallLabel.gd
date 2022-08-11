@@ -15,17 +15,14 @@ func returnIfValidMaterial(item, amount):
 		return Color("ff0000")
 
 func entered_ingredient_area(item): 
-	$SoundEffects.stream = Sounds.button_hover
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-	$SoundEffects.play()
 	$Tween.interpolate_property(get_node(item), "rect_scale",
-		get_node(item).rect_scale, Vector2(0.13, 0.13), 0.15,
+		get_node(item).rect_scale, Vector2(0.15, 0.15), 0.15,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 	
 func exited_ingredient_area(item):
 	$Tween.interpolate_property(get_node(item), "rect_scale",
-		get_node(item).rect_scale, Vector2(0.12, 0.12), 0.15,
+		get_node(item).rect_scale, Vector2(0.14, 0.14), 0.15,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 	

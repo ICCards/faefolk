@@ -296,9 +296,8 @@ func place_seed_state(item_name, hoed_tiles):
 
 
 func place_object(item_name, location, type):
-	print(item_name)
-	if item_name != "wall":
-		PlayerInventory.remove_single_object_from_hotbar()
+#	if item_name != "wall" or item_name != "double door side" or item_name != "double door":
+#		PlayerInventory.remove_single_object_from_hotbar()
 	var id = Uuid.v4()
 	if type == "placable":
 		var data = {"id": id, "name": item_name, "l": location, "item": type}
