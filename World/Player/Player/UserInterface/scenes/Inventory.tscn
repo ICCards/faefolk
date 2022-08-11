@@ -116,6 +116,7 @@ visible = false
 script = ExtResource( 7 )
 
 [node name="CraftingItemDescription" parent="CraftingMenu" instance=ExtResource( 30 )]
+visible = false
 
 [node name="Page1" type="Node2D" parent="CraftingMenu"]
 visible = false
@@ -598,7 +599,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 16
+frame = 31
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]

@@ -38,6 +38,7 @@ var inventory = {
 var hotbar = {
 	2: ["hammer", 1, null],
 	3: ["blueprint", 1, null],
+	4: ["blueprint", 1, null],
 	5: ["wood sword", 1, 12],
 	6: ["stone watering can", 1, 25],
 	7: ["wood hoe", 1, 7], 
@@ -242,6 +243,15 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int):
 			inventory[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.CHEST:
 			chest[slot.slot_index][1] += quantity_to_add
+			
+func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int):
+	match slot.slotType:
+		SlotClass.SlotType.HOTBAR:
+			hotbar[slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.INVENTORY:
+			inventory[slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.CHEST:
+			chest[slot.slot_index][1] -= quantity_to_subtract
 
 
 ###

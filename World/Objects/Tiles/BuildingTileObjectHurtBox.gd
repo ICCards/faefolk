@@ -15,6 +15,7 @@ func _ready():
 	set_type()
 	
 func set_type():
+	wall_tiles = get_node("/root/World/PlacableTiles/BuildingTiles")
 	match tier:
 		"twig":
 			health = Stats.MAX_TWIG_WALL
@@ -22,15 +23,18 @@ func set_type():
 		"wood":
 			health = Stats.MAX_WOOD_WALL
 			max_health = Stats.MAX_WOOD_WALL
+			wall_tiles.set_cellv(location, 2)
 		"stone":
 			health = Stats.MAX_STONE_WALL
 			max_health = Stats.MAX_STONE_WALL
+			wall_tiles.set_cellv(location, 0)
 		"metal":
 			health = Stats.MAX_METAL_WALL
 			max_health = Stats.MAX_METAL_WALL
 		"armored":
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
+	wall_tiles.update_bitmask_region()
 	update_health_bar()
 
 

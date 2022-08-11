@@ -98,6 +98,7 @@ func sufficientMaterialToCraft(item):
 		else:
 			return false
 	return true
+	
 
 func _physics_process(delta):
 	if item != null:
@@ -109,9 +110,7 @@ func _physics_process(delta):
 		$CraftingItemDescription.visible = false
 
 func entered_crafting_area(_item):
-	$SoundEffects.stream = Sounds.button_hover
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-	$SoundEffects.play()
+	yield(get_tree(), "idle_frame")
 	item = _item
 	$Tween.interpolate_property(get_node("Page" + str(page) + "/" + item), "scale",
 		get_node("Page" + str(page) + "/" + item).scale, Vector2(3.35, 3.35), 0.15,
