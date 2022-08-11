@@ -15,6 +15,8 @@ func _ready():
 		slots[i].slotType = SlotClass.SlotType.HOTBAR
 		slots[i].slot_index = i
 	initialize_hotbar()
+	Stats.connect("tool_health_change", self, "update_tool_health")
+	
 
 func hovered_slot(slot: SlotClass):
 	if slot.item != null:
@@ -45,11 +47,22 @@ func adjusted_description_position():
 	else:
 		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94)
 
+func update_tool_health():
+	if PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] == 0 and PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] != "stone watering can":
+		slots[PlayerInventory.active_item_slot].removeFromSlot()
+		PlayerInventory.remove_item(slots[PlayerInventory.active_item_slot])
+		yield(get_tree().create_timer(0.1), "timeout")
+		$SoundEffects.stream = Sounds.tool_break
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -18)
+		$SoundEffects.play()
+	else:
+		slots[PlayerInventory.active_item_slot].initialize_item(PlayerInventory.hotbar[PlayerInventory.active_item_slot][0], PlayerInventory.hotbar[PlayerInventory.active_item_slot][1], PlayerInventory.hotbar[PlayerInventory.active_item_slot][2])
+	
 
 func initialize_hotbar():
 	for i in range(slots.size()):
 		if PlayerInventory.hotbar.has(i):
-			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1])
+			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1], PlayerInventory.hotbar[i][2])
 
 func _input(_event):
 	if find_parent("UserInterface").holding_item:

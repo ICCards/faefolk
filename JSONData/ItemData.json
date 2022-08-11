@@ -2,43 +2,43 @@
     
   "wood": {
     "ItemCategory": "Resource",
-    "StackSize": 99,
+    "StackSize": 999,
     "Description": "Wood harvested from trees"
   }, 
 
   "stone": {
     "ItemCategory": "Resource",
-    "StackSize" : 99,
+    "StackSize" : 999,
     "Description": "Stone from ore"
   },
   "iron ore": {
       "ItemCategory": "Resource",
-      "StackSize" : 99,
+      "StackSize" : 999,
       "Description": "Can be smelted into iron ingot"
   },
   "gold ore": {
       "ItemCategory": "Resource",
-      "StackSize" : 99,
+      "StackSize" : 999,
       "Description": "Can be smelted into gold ingot"
   },
   "red gem": {
       "ItemCategory": "Mineral",
-      "StackSize" : 99,
+      "StackSize" : 999,
       "Description": "[gem description]"
   },
   "green gem": {
       "ItemCategory": "Mineral",
-      "StackSize" : 99,
+      "StackSize" : 999,
       "Description": "[gem description]"
   },
   "cyan gem": {
       "ItemCategory": "Mineral",
-      "StackSize" : 99,
+      "StackSize" : 999,
       "Description": "[gem description]"
   },
   "dark blue gem": {
       "ItemCategory": "Mineral",
-      "StackSize" : 99,
+      "StackSize" : 999,
       "Description": "[gem description]"
   },
   "wood axe": {
@@ -86,203 +86,203 @@
   
   "wheat": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "potato": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "yellow onion": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "garlic": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "radish": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "carrot": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "cauliflower": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "cabbage": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "yellow pepper": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "red pepper": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy"
   },
   "green pepper": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "strawberry": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "blueberry": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "grape": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "green bean": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "zucchinni": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "green melon": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "corn": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "blueberry": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   "jalapeno": {
       "ItemCategory": "Food",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Generates some energy",
   },
   
   "wheat seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Summer or Fall. Takes 4 days to mature.",
   },
   "potato seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Spring. Takes 6 days to mature and produces one or two potatos on harvest. "
   },
   "yellow onion seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Fall. Takes 8 days to mature.",
   },
   "garlic seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Spring. Takes 8 days to mature."
   },
   "radish seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Summer. Takes 6 days to mature.",
   },
   "carrot seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Spring. Takes 4 days to mature."
   },
   "cauliflower seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Spring. Takes 12 days to mature.",
   },
   "cabbage seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Fall. Takes 12 days to mature."
   },
   "yellow pepper seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Spring. Takes 6 days to mature and has a chance of producing multiple at harvest."
   },
   "red pepper seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Summer. Takes 6 days to mature and has a chance of producing multiple at harvest."
   },
   "green pepper seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Fall. Takes 6 days to mature and has a chance of producing multiple at harvest."
   },
   "strawberry seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Spring. Takes 8 days to mature and continues to grow after harvest. Yields 2 strawberries.",
   },
   "blueberry seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Summer. Takes 13 days to mature and continues to grow after harvest. Yields 2 to 4 blueberries.",
   },
   "grape seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Fall. Takes 10 days to mature and continues to grow after harvest.",
   },
   "green bean seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Spring. Takes 10 days to mature and continues to grow after harvest. Yields 1 to 3 green beans.",
   },
   "zucchinni seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Spring. Takes 12 days to mature and continues to grow after harvest.",
   },
   "green melon seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Summer. Takes 10 days to mature and continues to grow after harvest.",
   },
   "corn seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Summer or Fall. Takes 14 days to mature and continues to grow after harvest.",
   },
   "jalapeno seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Fall. Takes 8 days to mature and continues to grow after harvest. Has a chance to yield multiple jalapenos at harvest.",
   },
   "tomato seeds": {
       "ItemCategory": "Seed",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Plant these in the Summer. Takes 11 days to mature and continues to grow after harvest. Has a chance to yield 1 or 2 tomatoes at harvest.",
   },
   
@@ -290,57 +290,57 @@
   
   "torch" : {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Used to generate modest light."
   },
   "campfire" : {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Used to generate moderate light."
   },
   "fire pedestal" : {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Used to generate moderate light."
   },
   "tall fire pedestal" : {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Used to generate moderate light."
   },
   "wood fence": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Wood fence for decoration."
   },
   "wood barrel": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Wood barrel for decoration."
   },
   "wood box": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Wood box for decoration."
   },
   "wood chest": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Wood chest for storage."
   },
   "stone chest": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Stone chest for storage."
   },
   "wood path": {
       "ItemCategory": "Placable path",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Place to create paths or decorate your floors."
   },
   "stone path": {
       "ItemCategory": "Placable path",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Place to create paths or decorate your floors."
   },
   "house": {
@@ -350,53 +350,28 @@
   },
   "workbench": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Place to upgrade or repair tools."
   },
   "grain mill": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Place to process grains for cooking."
   },
   "stove": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Place to cook food recipes."
   },
   "tent": {
       "ItemCategory": "Placable object",
-      "StackSize": 99,
+      "StackSize": 999,
       "Description": "Small placable shelter with low durability."
   },
     "sleeping bag": {
     "ItemCategory": "Placable object",
-    "StackSize": 99,
+    "StackSize": 999,
     "Description": "Can be placed and used to set respawn point in the world."
     },
-    "twig": {
-    "ItemCategory": "Placable object",
-    "StackSize": 99,
-    "Description": "first tier base building"
-    },
-    "wood wall": {
-    "ItemCategory": "Placable object",
-    "StackSize": 99,
-    "Description": "first tier base building"
-    },
-    "stone wall": {
-    "ItemCategory": "Placable object",
-    "StackSize": 99,
-    "Description": "Third tier base building."
-    },
-    "stone double door": {
-    "ItemCategory": "Placable object",
-    "StackSize": 99,
-    "Description": "Third tier door."
-    },
-    "stone foundation": {
-    "ItemCategory": "Placable object",
-    "StackSize": 99,
-    "Description": "Third tier foundation."
-    }
   
 }

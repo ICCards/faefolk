@@ -41,6 +41,7 @@ func setTreeBranchType(num):
 	$Branch.texture = Images.tree_branch_objects[num]
 
 func _on_BranchHurtBox_area_entered(_area):
+	Stats.decrease_tool_health()
 	Tiles.reset_valid_tiles(loc, "stump")
 	var data = {"id": name, "n": "log"}
 	Server.action("ON_HIT", data)

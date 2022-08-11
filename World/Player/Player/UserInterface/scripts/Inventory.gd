@@ -14,16 +14,7 @@ func _ready():
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
-#	if Server.player_state == "WORLD":
-#		hotbar_slots = get_node("/root/World/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
-#	else: 
-#		hotbar_slots = get_node("/root/InsidePlayerHome/Players/" + Server.player_id + "/Camera2D/UserInterface/Hotbar/HotbarSlots")
-#	var h_slots = hotbar_slots.get_children()
-#	for i in range(h_slots.size()):
-#		h_slots[i].connect("mouse_entered", self, "hovered_slot", [h_slots[i]])
-#		h_slots[i].connect("mouse_exited", self, "exited_slot", [h_slots[i]])
-#	initialize_inventory()
-	
+
 func _physics_process(delta):
 	if item != null and find_parent("UserInterface").holding_item == null:
 		$ItemDescription.visible = true
@@ -34,12 +25,13 @@ func _physics_process(delta):
 		$ItemDescription.visible = false
 
 func initialize_inventory():
+	item = null
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
 		if slots[i].item != null:
 			slots[i].removeFromSlot()
 		if PlayerInventory.inventory.has(i):
-			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
+			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1], PlayerInventory.inventory[i][2])
 	set_inventory_state()
 	
 

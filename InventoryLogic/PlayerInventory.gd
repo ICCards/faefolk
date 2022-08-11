@@ -23,45 +23,39 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	5: ["tomato seeds", 30],
-	2: ["blueberry seeds", 60],
-	6: ["corn seeds", 60],
-	9: ["potato seeds", 30],
-	3: ["radish seeds", 30],
-	4: ["wood", 99],
-	1: ["wood", 99],
-	7: ["stone", 99],
-	8: ["stone", 99],
+	5: ["tomato seeds", 30, null],
+	2: ["blueberry seeds", 60, null],
+	6: ["corn seeds", 60, null],
+	9: ["potato seeds", 30, null],
+	3: ["radish seeds", 30, null],
+	4: ["wood", 299, null],
+	1: ["wood", 499, null],
+	7: ["stone", 699, null],
+	8: ["stone", 799, null],
 
 }
 
 var hotbar = {
-#	0 : ["stone foundation", 99],
-#	1 : ["stone foundation", 99],
-#	1 : ["wood wall", 99],
-
-#	1: ["wood box", 99],
-#	2: ["tent", 30],
-	2: ["hammer", 1],
-	3: ["blueprint", 1],
-#	3: ["house", 2],
-	5: ["wood sword", 1],
-	6: ["stone watering can", 1],
-	7: ["wood hoe", 1], 
-	8: ["wood axe", 1],
-	9:["wood pickaxe", 1],
+	2: ["hammer", 1, null],
+	3: ["blueprint", 1, null],
+	5: ["wood sword", 1, 12],
+	6: ["stone watering can", 1, 25],
+	7: ["wood hoe", 1, 7], 
+	8: ["wood axe", 1, 3],
+	1: ["wood axe", 1, 3],
+	9:["wood pickaxe", 1, 5],
 }
 
 var chest = {
-	0: ["yellow pepper seeds", 30],
-	1: ["carrot seeds", 30],
-	2: ["garlic seeds", 30],
+	0: ["yellow pepper seeds", 30, null],
+	1: ["carrot seeds", 30, null],
+	2: ["garlic seeds", 30, null],
 }
 
 func clear_chest_data():
 	emit_signal("clear_chest")
-	
-	
+
+
 func returnSufficentCraftingMaterial(ingredient, amount_needed):
 	var total = 0
 	for slot in hotbar:
@@ -80,7 +74,7 @@ func craft_item(item):
 	var ingredients = JsonData.crafting_data[item]["ingredients"]
 	for i in range(ingredients.size()):
 		remove_material(ingredients[i][0], ingredients[i][1])
-	add_item_to_hotbar(item, 1)
+	add_item_to_hotbar(item, 1, null)
 
 
 func remove_material(item, amount):
@@ -108,54 +102,6 @@ func remove_material(item, amount):
 					update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
 
 
-#func remove_materials(_wood, _stone):
-#	var wood_to_remove = _wood
-#	var stone_to_remove = _stone
-#	if wood_to_remove != 0:
-#		for slot in hotbar.keys():
-#			if hotbar[slot][0] == "wood" and wood_to_remove != 0:
-#				if hotbar[slot][1] >= wood_to_remove:
-#					hotbar[slot][1] = hotbar[slot][1] - wood_to_remove
-#					wood_to_remove = 0
-#					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
-#				else:
-#					wood_to_remove = wood_to_remove - hotbar[slot][1]
-#					hotbar[slot][1] = 0 
-#					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
-#		if wood_to_remove != 0:
-#			for slot in inventory.keys():
-#				if inventory[slot][0] == "wood" and wood_to_remove != 0:
-#					if inventory[slot][1] >= wood_to_remove:
-#						inventory[slot][1] = inventory[slot][1] - wood_to_remove
-#						wood_to_remove = 0
-#						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
-#					else:
-#						wood_to_remove = wood_to_remove - inventory[slot][1]
-#						inventory[slot][1] = 0 
-#						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
-#	if stone_to_remove != 0:
-#		for slot in hotbar.keys():
-#			if hotbar[slot][0] == "stone ore" and stone_to_remove != 0:
-#				if hotbar[slot][1] >= stone_to_remove:
-#					hotbar[slot][1] = hotbar[slot][1] - stone_to_remove
-#					stone_to_remove = 0
-#					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
-#				else:
-#					stone_to_remove = stone_to_remove - hotbar[slot][1]
-#					hotbar[slot][1] = 0 
-#					update_hotbar_slot_visual(slot, hotbar[slot][0], hotbar[slot][1])
-#		if stone_to_remove != 0:
-#			for slot in inventory.keys():
-#				if inventory[slot][0] == "stone ore" and stone_to_remove != 0:
-#					if inventory[slot][1] >= stone_to_remove:
-#						inventory[slot][1] = inventory[slot][1] - stone_to_remove
-#						stone_to_remove = 0
-#						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
-#					else:
-#						stone_to_remove = stone_to_remove - inventory[slot][1]
-#						inventory[slot][1] = 0 
-#						update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
-
 # Location of bottom left tile
 var player_home = {
 	0 : ["Fireplace", Vector2(2,0)],
@@ -181,7 +127,7 @@ func remove_single_object_from_hotbar():
 	update_hotbar_slot_visual(active_item_slot, hotbar[active_item_slot][0], hotbar[active_item_slot][1])
 
 	
-func add_item_to_hotbar(item_name, item_quantity):
+func add_item_to_hotbar(item_name, item_quantity, item_health):
 	var slot_indices: Array = hotbar.keys()
 	slot_indices.sort()
 	for item in slot_indices:
@@ -200,14 +146,14 @@ func add_item_to_hotbar(item_name, item_quantity):
 	# item doesn't exist in hotbar yet, so add it to an empty slot
 	for i in range(NUM_HOTBAR_SLOTS):
 		if hotbar.has(i) == false:
-			hotbar[i] = [item_name, item_quantity]
+			hotbar[i] = [item_name, item_quantity, item_health]
 			update_hotbar_slot_visual(i, hotbar[i][0], hotbar[i][1])
 			return
 	# if hotbar full, add to inventory
 	if hotbar.size() == NUM_HOTBAR_SLOTS:
-		add_item_to_inventory(item_name, item_quantity)
+		add_item_to_inventory(item_name, item_quantity, item_health)
 
-func add_item_to_inventory(item_name, item_quantity):
+func add_item_to_inventory(item_name, item_quantity, item_health):
 	var slot_indices: Array = inventory.keys()
 	slot_indices.sort()
 	for item in slot_indices:
@@ -226,7 +172,7 @@ func add_item_to_inventory(item_name, item_quantity):
 	# item doesn't exist in inventory yet, so add it to an empty slot
 	for i in range(NUM_INVENTORY_SLOTS):
 		if inventory.has(i) == false:
-			inventory[i] = [item_name, item_quantity]
+			inventory[i] = [item_name, item_quantity, item_health]
 			update_inventory_slot_visual(i, inventory[i][0], inventory[i][1])
 			return
 	if hotbar.size() == NUM_HOTBAR_SLOTS:
@@ -240,9 +186,9 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 			hotbar.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
-			slot.item.set_item(item_name, new_quantity)
+			slot.item.set_item(item_name, new_quantity, null)
 	else:
-		slot.initialize_item(item_name, new_quantity)
+		slot.initialize_item(item_name, new_quantity, null)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Inventory/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
@@ -252,9 +198,9 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 			inventory.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
-			slot.item.set_item(item_name, new_quantity)
+			slot.item.set_item(item_name, new_quantity, null)
 	else:
-		slot.initialize_item(item_name, new_quantity)
+		slot.initialize_item(item_name, new_quantity, null)
 		
 
 func update_chest_slot_visual(slot_index, item_name, new_quantity):
@@ -281,11 +227,11 @@ func remove_item(slot: SlotClass):
 func add_item_to_empty_slot(item: ItemClass, slot: SlotClass):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
-			hotbar[slot.slot_index] = [item.item_name, item.item_quantity]
+			hotbar[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.INVENTORY:
-			inventory[slot.slot_index] = [item.item_name, item.item_quantity]
+			inventory[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.CHEST:
-			chest[slot.slot_index] = [item.item_name, item.item_quantity]
+			chest[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 
 
 func add_item_quantity(slot: SlotClass, quantity_to_add: int):

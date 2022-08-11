@@ -381,9 +381,9 @@ func set_watered_tile():
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
-		PlayerStats.refill_watering_can()
-	elif PlayerStats.watering_can >= 1:
-		PlayerStats.decrease_watering_can()
+		Stats.refill_watering_can(PlayerInventory.hotbar[PlayerInventory.active_item_slot][0])
+	elif PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] >= 1:
+		Stats.decrease_tool_health()
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
@@ -417,6 +417,7 @@ func set_hoed_tile():
 #		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 #		var data = {"id": id, "l": location}
 #		Server.action("HOE", data)
+		Stats.decrease_tool_health()
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
@@ -428,6 +429,7 @@ func remove_hoed_tile():
 	var location = hoed_tiles.world_to_map(pos)
 	if hoed_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
+		Stats.decrease_tool_health()
 #		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 #		var data = {"id": id, "l": location}
 #		Server.action("PICKAXE", data)

@@ -2,18 +2,13 @@ extends Node2D
 
 var item_name
 var item_quantity
+var item_health
 
 
-func _ready():
-	PlayerStats.connect("watering_can_changed", self, "update_watering_can_amount")
-	
-func update_watering_can_amount():
-	$WateringCanProgressIndicator/WateringCanProgress.value = PlayerStats.watering_can
-	$WateringCanProgressIndicator/WateringCanProgress.max_value = PlayerStats.watering_can_maximum
-
-func set_item(nm, qt):
+func set_item(nm, qt, health):
 	item_name = nm
 	item_quantity = qt
+	item_health = health
 	
 	if item_name == "wood path1" or item_name == "wood path2":
 		item_name = "wood path"
@@ -27,10 +22,54 @@ func set_item(nm, qt):
 	else:
 		$Label.visible = true
 		$Label.text = String(item_quantity)
-	if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
-		$WateringCanProgressIndicator.visible = true
-		update_watering_can_amount()
-	
+	if item_health != null:
+		$HealthIndicator.visible = true
+		set_health_bar(item_health)
+
+func set_health_bar(health):
+	$HealthIndicator/ProgressBar.value = health
+	match item_name:
+		"wood axe":
+			$HealthIndicator/ProgressBar.max_value = Stats.WOOD_TOOL_HEALTH
+		"wood pickaxe":
+			$HealthIndicator/ProgressBar.max_value = Stats.WOOD_TOOL_HEALTH
+		"wood sword":
+			$HealthIndicator/ProgressBar.max_value = Stats.WOOD_TOOL_HEALTH
+		"wood hoe":
+			$HealthIndicator/ProgressBar.max_value = Stats.WOOD_TOOL_HEALTH
+		"stone axe":
+			$HealthIndicator/ProgressBar.max_value = Stats.STONE_TOOL_HEALTH
+		"stone pickaxe":
+			$HealthIndicator/ProgressBar.max_value = Stats.STONE_TOOL_HEALTH
+		"stone sword":
+			$HealthIndicator/ProgressBar.max_value = Stats.STONE_TOOL_HEALTH
+		"stone hoe":
+			$HealthIndicator/ProgressBar.max_value = Stats.STONE_TOOL_HEALTH
+		"bronze axe":
+			$HealthIndicator/ProgressBar.max_value = Stats.BRONZE_TOOL_HEALTH
+		"bronze pickaxe":
+			$HealthIndicator/ProgressBar.max_value = Stats.BRONZE_TOOL_HEALTH
+		"bronze sword":
+			$HealthIndicator/ProgressBar.max_value = Stats.BRONZE_TOOL_HEALTH
+		"bronze hoe":
+			$HealthIndicator/ProgressBar.max_value = Stats.BRONZE_TOOL_HEALTH
+		"gold axe":
+			$HealthIndicator/ProgressBar.max_value = Stats.GOLD_TOOL_HEALTH
+		"gold pickaxe":
+			$HealthIndicator/ProgressBar.max_value = Stats.GOLD_TOOL_HEALTH
+		"gold sword":
+			$HealthIndicator/ProgressBar.max_value = Stats.GOLD_TOOL_HEALTH
+		"gold hoe":
+			$HealthIndicator/ProgressBar.max_value = Stats.GOLD_TOOL_HEALTH
+		"stone watering can":
+			$HealthIndicator/ProgressBar.max_value = Stats.MAX_STONE_WATERING_CAN
+		"bronze watering can":
+			$HealthIndicator/ProgressBar.max_value = Stats.MAX_BRONZE_WATERING_CAN
+		"gold watering can":
+			$HealthIndicator/ProgressBar.max_value = Stats.MAX_GOLD_WATERING_CAN
+
+
+
 func add_item_quantity(amount_to_add):
 	item_quantity += amount_to_add
 	$Label.text = String(item_quantity)

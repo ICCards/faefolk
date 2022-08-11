@@ -113,6 +113,7 @@ var tree_hit = [
 
 var tree_break = preload("res://Assets/Sound/Sound effects/Tree/Falling tree.mp3")
 var stump_break = preload("res://Assets/Sound/Sound effects/Tree/Stump break.mp3")
+var tool_break = preload("res://Assets/Sound/Sound effects/objects/tool break.mp3")
 
 var bear_grown = [
 	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/ES_Monster Bear Groan 1 - SFX Producer.mp3"),

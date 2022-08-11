@@ -90,7 +90,6 @@ func place_double_door_state():
 
 
 func place_buildings_state(item):
-	print(item)
 	$ColorIndicator.visible = true
 	$ColorIndicator.scale = Vector2(1, 1)
 	var mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
@@ -297,8 +296,9 @@ func place_seed_state(item_name, hoed_tiles):
 
 
 func place_object(item_name, location, type):
-#	if item_name != "wall" or item_name != "double door" or item_name != "door":
-#		PlayerInventory.remove_single_object_from_hotbar()
+	print(item_name)
+	if item_name != "wall":
+		PlayerInventory.remove_single_object_from_hotbar()
 	var id = Uuid.v4()
 	if type == "placable":
 		var data = {"id": id, "name": item_name, "l": location, "item": type}

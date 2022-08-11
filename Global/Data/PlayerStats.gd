@@ -13,20 +13,6 @@ var energy_maximum = 100.0
 var health_maximum = 100.0
 var mana_maximum 
 
-var watering_can_maximum = 25.0
-var watering_can = 18.0
-
-
-func refill_watering_can():
-	watering_can = watering_can_maximum
-	emit_signal("watering_can_changed")
-
-func decrease_watering_can():
-	watering_can -= 1
-	if watering_can <= 0:
-		watering_can = 0
-	emit_signal("watering_can_changed")
-
 
 func decrease_health(amount):
 	health -= amount

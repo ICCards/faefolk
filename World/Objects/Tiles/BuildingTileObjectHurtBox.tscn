@@ -120,6 +120,7 @@ texture_progress = ExtResource( 2 )
 nine_patch_stretch = true
 
 [node name="UpgradeWallLabel" type="Node2D" parent="."]
+visible = false
 position = Vector2( 17, 23 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 19 )

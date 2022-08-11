@@ -1,7 +1,5 @@
 extends Node2D
 
-
-
 func _ready():
 	PlayerStats.connect("energy_changed", self, "set_energy_bar")
 	PlayerStats.connect("health_changed", self, "set_health_bar")

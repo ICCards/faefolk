@@ -439,16 +439,16 @@ func returnToolSprite(toolName, direction):
 					 return axe.left
 				"swing_right":
 					return axe.right
-#		"wood sword":
-#			match direction: 
-#				"sword_swing_down":
-#					 return sword.down
-#				"sword_swing_up":
-#					 return sword.up
-#				"sword_swing_left":
-#					 return sword.left
-#				"sword_swing_right":
-#					return sword.right
+		"wood sword":
+			match direction: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
 		"stone watering can":
 			match direction:
 				"watering_down":

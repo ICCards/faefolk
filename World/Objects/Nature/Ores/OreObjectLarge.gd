@@ -69,6 +69,7 @@ func setTexture(ore):
 
 
 func _on_BigHurtBox_area_entered(_area):
+	Stats.decrease_tool_health()
 	rng.randomize()
 	var data = {"id": name, "n": "large_ore"}
 	Server.action("ON_HIT", data)
@@ -91,6 +92,7 @@ func _on_BigHurtBox_area_entered(_area):
 
 
 func _on_SmallHurtBox_area_entered(_area):
+	Stats.decrease_tool_health()
 	rng.randomize()
 	var data = {"id": name, "n": "large_ore"}
 	Server.action("ON_HIT", data)

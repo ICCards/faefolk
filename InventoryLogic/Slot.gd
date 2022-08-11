@@ -50,13 +50,13 @@ func putIntoSlot(new_item):
 	find_parent("UserInterface").remove_child(item)
 	add_child(item)
 
-func initialize_item(item_name, item_quantity):
+func initialize_item(item_name, item_quantity, item_health):
 	if item == null:
 		item = ItemClass.instance()
 		add_child(item)
-		item.set_item(item_name, item_quantity)
+		item.set_item(item_name, item_quantity, item_health)
 	else:
-		item.set_item(item_name, item_quantity)
+		item.set_item(item_name, item_quantity, item_health)
 	refresh_style()
 
 func removeFromSlot():

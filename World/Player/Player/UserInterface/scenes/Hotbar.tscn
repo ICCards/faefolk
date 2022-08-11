@@ -96,3 +96,5 @@ margin_right = 1014.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
 script = ExtResource( 1 )
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]

@@ -34,7 +34,7 @@ func initialize_chest_data():
 	var slots_in_chest = chest_slots.get_children()
 	for i in range(slots_in_chest.size()):
 		if PlayerInventory.chest.has(i):
-			slots_in_chest[i].initialize_item(PlayerInventory.chest[i][0], PlayerInventory.chest[i][1])
+			slots_in_chest[i].initialize_item(PlayerInventory.chest[i][0], PlayerInventory.chest[i][1], PlayerInventory.chest[i][2])
 
 
 func initialize_inventory():
@@ -43,7 +43,7 @@ func initialize_inventory():
 		if slots[i].item != null:
 			slots[i].removeFromSlot()
 		if PlayerInventory.inventory.has(i):
-			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
+			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1], PlayerInventory.inventory[i][2])
 
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
