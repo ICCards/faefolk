@@ -89,6 +89,7 @@ func check_player_in_detection() -> bool:
 
 
 func _on_HurtBox_area_entered(area):
+	Stats.decrease_tool_health()
 	is_dead = true
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)

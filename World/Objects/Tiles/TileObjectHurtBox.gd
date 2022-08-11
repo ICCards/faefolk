@@ -65,6 +65,7 @@ func set_dimensions():
 		position = position +  Vector2(16, 0)
 
 func _on_HurtBox_area_entered(area):
+	Stats.decrease_tool_health()
 	$Light2D.enabled = false
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)

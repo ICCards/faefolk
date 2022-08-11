@@ -41,6 +41,7 @@ IC="*res://helpers/IC.gd"
 Settings="*res://Global/Data/Settings.gd"
 Goblin="*res://Global/Characters/Goblin.gd"
 Human="*res://Global/Characters/Human.gd"
+Stats="*res://Global/Data/Stats.gd"
 
 [display]
 

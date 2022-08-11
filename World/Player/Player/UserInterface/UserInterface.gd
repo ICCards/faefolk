@@ -47,6 +47,7 @@ func open_chest():
 	$OpenChest.visible = !$OpenChest.visible
 	if PlayerInventory.interactive_screen_mode == true:
 		$SoundEffects.stream = Sounds.chest_open
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 
 
@@ -69,6 +70,7 @@ func open_stove():
 	toggle_stats_and_time()
 	
 func toggle_stats_and_time():
-	$CurrentTime.visible = !$CurrentTime.visible
-	$PlayerStatsUI.visible = !$PlayerStatsUI.visible
+	pass
+#	$CurrentTime.visible = !$CurrentTime.visible
+#	$PlayerStatsUI.visible = !$PlayerStatsUI.visible
 

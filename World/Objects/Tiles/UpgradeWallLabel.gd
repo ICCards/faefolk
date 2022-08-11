@@ -2,7 +2,7 @@ extends Node2D
 
 
 func initialize():
-	$Wood/Name.modulate = returnIfValidMaterial("wood", 20)
+	$Wood/Name.modulate = returnIfValidMaterial("wood", 200)
 	$Stone/Name.modulate = returnIfValidMaterial("stone", 300)
 	$Metal/Name.modulate = returnIfValidMaterial("metal", 300)
 	$Armored/Name.modulate = returnIfValidMaterial("armored", 25)
@@ -69,14 +69,22 @@ func _on_ArmoredArea_mouse_exited():
 func _on_WoodArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if PlayerInventory.returnSufficentCraftingMaterial("wood", 200):
+			PlayerInventory.remove_material("wood", 200)
+			get_parent().tier = "wood"
+			get_parent().set_type()
 			play_craft_sound()
+			hide()
 		else:
 			play_error_sound()
 
 func _on_StoneArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if PlayerInventory.returnSufficentCraftingMaterial("stone", 300):
+			PlayerInventory.remove_material("stone", 300)
+			get_parent().tier = "stone"
+			get_parent().set_type()
 			play_craft_sound()
+			hide()
 		else:
 			play_error_sound()
 
@@ -84,14 +92,22 @@ func _on_StoneArea_input_event(viewport, event, shape_idx):
 func _on_MetalArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if PlayerInventory.returnSufficentCraftingMaterial("metal", 300):
+			PlayerInventory.remove_material("metal", 300)
+			get_parent().tier = "metal"
+			get_parent().set_type()
 			play_craft_sound()
+			hide()
 		else:
 			play_error_sound()
 
 func _on_ArmoredArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if PlayerInventory.returnSufficentCraftingMaterial("armor", 25):
+			PlayerInventory.remove_material("armor", 25)
+			get_parent().tier = "armor"
+			get_parent().set_type()
 			play_craft_sound()
+			hide()
 		else:
 			play_error_sound()
 
