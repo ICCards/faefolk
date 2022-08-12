@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/item_slot_empty_background.png-1a2b3919125f8f0e9f06f7d3d9c0fb0f.stex"
+path="res://.import/active item slot.png-642edd095630df68c314e1f21381d7a0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Inventory UI/item_slot_empty_background.png"
-dest_files=[ "res://.import/item_slot_empty_background.png-1a2b3919125f8f0e9f06f7d3d9c0fb0f.stex" ]
+source_file="res://Assets/Images/Inventory UI/active item slot.png"
+dest_files=[ "res://.import/active item slot.png-642edd095630df68c314e1f21381d7a0.stex" ]
 
 [params]
 

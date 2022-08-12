@@ -36,15 +36,19 @@ var inventory = {
 }
 
 var hotbar = {
-	2: ["hammer", 1, null],
-	3: ["blueprint", 1, null],
-	4: ["blueprint", 1, null],
-	5: ["wood sword", 1, 12],
-	6: ["stone watering can", 1, 25],
-	7: ["wood hoe", 1, 7], 
-	8: ["wood axe", 1, 3],
-	1: ["wood axe", 1, 3],
-	9:["wood pickaxe", 1, 5],
+	0: ["potato", 30, null],
+	1: ["tomato", 30, null],
+	2: ["yellow onion", 30, null],
+	3: ["carrot", 30, null],
+	4: ["grape", 30, null],
+#	2: ["hammer", 1, null],
+#	3: ["blueprint", 1, null],
+#	5: ["wood sword", 1, 12],
+#	6: ["stone watering can", 1, 25],
+#	7: ["wood hoe", 1, 7], 
+#	8: ["wood axe", 1, 3],
+#	1: ["wood axe", 1, 3],
+#	9:["wood pickaxe", 1, 5],
 }
 
 var chest = {
@@ -127,7 +131,7 @@ func remove_single_object_from_hotbar():
 	hotbar[active_item_slot][1] -= 1
 	update_hotbar_slot_visual(active_item_slot, hotbar[active_item_slot][0], hotbar[active_item_slot][1])
 
-	
+
 func add_item_to_hotbar(item_name, item_quantity, item_health):
 	var slot_indices: Array = hotbar.keys()
 	slot_indices.sort()
@@ -184,7 +188,6 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
-			hotbar.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
 			slot.item.set_item(item_name, new_quantity, null)
@@ -196,7 +199,6 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
-			inventory.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
 			slot.item.set_item(item_name, new_quantity, null)
@@ -209,7 +211,6 @@ func update_chest_slot_visual(slot_index, item_name, new_quantity):
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
-			chest.erase(slot.slot_index)
 			slot.removeFromSlot()
 		else:
 			slot.item.set_item(item_name, new_quantity)
@@ -254,6 +255,14 @@ func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int):
 			chest[slot.slot_index][1] -= quantity_to_subtract
 
 
+func find_open_slot(slot: SlotClass):
+	match slot.slotType:
+		SlotClass.SlotType.HOTBAR:
+			pass
+		SlotClass.SlotType.INVENTORY:
+			pass
+		SlotClass.SlotType.CHEST:
+			pass
 ###
 ### Change active hotbar functions
 func active_item_scroll_up() -> void:

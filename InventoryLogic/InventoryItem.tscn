@@ -4,38 +4,40 @@
 [ext_resource path="res://InventoryLogic/InventoryItem.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=3]
 [ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/apple.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/inventory_icons/Placable object/tall fire pedestal.png" type="Texture" id=5]
 
 [node name="Item" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 6.0
-margin_top = 6.0
-margin_right = 90.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 84, 84 )
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 45.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 42, 42 )
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
-margin_left = 64.0
-margin_top = 69.0
-margin_right = 116.0
-margin_bottom = 194.0
-rect_scale = Vector2( 0.6, 0.6 )
+margin_left = 47.0
+margin_top = 34.0
+margin_right = 73.0
+margin_bottom = 95.0
+grow_horizontal = 2
+rect_scale = Vector2( 0.3, 0.3 )
 mouse_filter = 1
 theme = ExtResource( 3 )
-text = "99"
+text = "9"
 
 [node name="HealthIndicator" type="Control" parent="."]
 visible = false
-margin_left = -18.0
-margin_top = -449.0
-margin_right = -18.0
-margin_bottom = -449.0
-rect_scale = Vector2( 5, 6.5 )
+margin_left = -15.0
+margin_top = -201.0
+margin_right = -15.0
+margin_bottom = -201.0
+rect_scale = Vector2( 3, 3 )
 
 [node name="TextureRect" type="TextureRect" parent="HealthIndicator"]
 margin_left = 5.0

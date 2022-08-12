@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/item_slot_selected_background.png-021f53e07be2a7e615ab21db7af8eadd.stex"
+path="res://.import/pants.png-64cb36a055cc755c020ed81e50e1daf6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Inventory UI/item_slot_selected_background.png"
-dest_files=[ "res://.import/item_slot_selected_background.png-021f53e07be2a7e615ab21db7af8eadd.stex" ]
+source_file="res://Characters/Human/male/EATING/assets/down/pants/pants.png"
+dest_files=[ "res://.import/pants.png-64cb36a055cc755c020ed81e50e1daf6.stex" ]
 
 [params]
 

@@ -39,9 +39,11 @@ func toggle_inventory():
 	$Inventory.visible = !$Inventory.visible
 	
 func open_chest():
+	$OpenChest.initialize_hotbar()
 	$OpenChest.initialize_inventory()
 	$OpenChest.initialize_chest_data()
 	$Hotbar.initialize_hotbar()
+	$Hotbar.visible  =!$Hotbar.visible
 	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
 	$OpenChest.visible = !$OpenChest.visible
 	if PlayerInventory.interactive_screen_mode == true:

@@ -156,7 +156,6 @@ margin_bottom = 813.0
 [node name="OpenChest" parent="." instance=ExtResource( 14 )]
 visible = false
 position = Vector2( 240, 513 )
-scale = Vector2( 0.5, 0.5 )
 
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
 position = Vector2( 804, 24 )
@@ -170,12 +169,11 @@ position = Vector2( 36, 24 )
 scale = Vector2( 2.3, 2.3 )
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
-position = Vector2( 240, 513 )
+position = Vector2( 281, 516 )
 
 [node name="Inventory" parent="." instance=ExtResource( 15 )]
 visible = false
 position = Vector2( 372, 56 )
-scale = Vector2( 0.5, 0.5 )
 
 [node name="DeathEffect" type="ColorRect" parent="."]
 margin_left = -58.0

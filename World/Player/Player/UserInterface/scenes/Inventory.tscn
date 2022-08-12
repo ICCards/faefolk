@@ -93,15 +93,16 @@ script = ExtResource( 1 )
 margin_right = 120.0
 margin_bottom = 137.0
 grow_vertical = 0
-rect_scale = Vector2( 6, 6 )
+rect_scale = Vector2( 3, 3 )
 mouse_filter = 2
 texture = ExtResource( 31 )
 
 [node name="Title" type="Label" parent="."]
-margin_left = 37.0
-margin_top = 36.0
-margin_right = 558.0
-margin_bottom = 149.0
+margin_left = 18.0
+margin_top = 18.0
+margin_right = 539.0
+margin_bottom = 131.0
+rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 14 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
@@ -110,9 +111,11 @@ text = "INVENTORY"
 align = 1
 
 [node name="ItemDescription" parent="." instance=ExtResource( 36 )]
-visible = false
+z_index = 2
 
 [node name="CraftingMenu" type="Node2D" parent="."]
+visible = false
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="CraftingItemDescription" parent="CraftingMenu" instance=ExtResource( 30 )]
@@ -361,77 +364,78 @@ bus = "Bus1"
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 841.111
-margin_top = 243.556
-margin_right = 931.111
-margin_bottom = 379.556
+margin_left = 422.0
+margin_top = 120.0
+margin_right = 422.0
+margin_bottom = 120.0
 
 [node name="Inventory" type="Button" parent="Buttons"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = -228.0
-margin_top = -13.0
-margin_right = -130.0
-margin_bottom = 85.0
+margin_left = -115.0
+margin_top = -6.0
+margin_right = -67.0
+margin_bottom = 42.0
 
 [node name="Crafting" type="Button" parent="Buttons"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = -228.0
-margin_top = 96.0
-margin_right = -130.0
-margin_bottom = 194.0
+margin_left = -113.0
+margin_top = 48.0
+margin_right = -65.0
+margin_bottom = 96.0
 
 [node name="Options" type="Button" parent="Buttons"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = -228.0
-margin_top = 205.0
-margin_right = -130.0
-margin_bottom = 303.0
+margin_left = -113.0
+margin_top = 102.0
+margin_right = -65.0
+margin_bottom = 150.0
 
 [node name="Quit" type="Button" parent="Buttons"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = -228.0
-margin_top = 314.0
-margin_right = -130.0
-margin_bottom = 412.0
+margin_left = -113.0
+margin_top = 157.0
+margin_right = -65.0
+margin_bottom = 205.0
 
 [node name="ExitButton" type="Area2D" parent="Buttons"]
+position = Vector2( 130, 73 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buttons/ExitButton"]
 position = Vector2( 3.05176e-05, -4.76837e-07 )
-polygon = PoolVector2Array( -265.556, -100, -235.556, -82.2222, -198.889, -82.2222, -181.111, -82.2222, -181.111, -87.7778, -151.111, -117.778, -145.556, -135.556, -145.556, -171.111, -151.111, -190, -181.111, -218.889, -193.333, -225.556, -234.444, -225.556, -253.333, -218.889, -264.444, -206.667 )
+polygon = PoolVector2Array( -263, -124, -248, -114, -230, -114, -214, -123, -204, -140, -204, -159, -212, -174, -227, -184, -247, -184, -264, -175 )
 
 [node name="InventoryIcon" type="TextureRect" parent="Buttons"]
-margin_left = -218.0
-margin_top = 8.0
-margin_right = -162.0
-margin_bottom = 64.0
+margin_left = -106.0
+margin_top = 4.0
+margin_right = -78.0
+margin_bottom = 32.0
 mouse_filter = 2
 texture = ExtResource( 20 )
 expand = true
 
 [node name="CraftingIcon" type="TextureRect" parent="Buttons"]
-margin_left = -218.0
-margin_top = 116.0
-margin_right = -162.0
-margin_bottom = 172.0
+margin_left = -107.0
+margin_top = 60.0
+margin_right = -79.0
+margin_bottom = 88.0
 mouse_filter = 2
 texture = ExtResource( 19 )
 expand = true
 
 [node name="OptionsIcon" type="TextureRect" parent="Buttons"]
-margin_left = -218.0
-margin_top = 224.0
-margin_right = -162.0
-margin_bottom = 280.0
+margin_left = -107.0
+margin_top = 113.0
+margin_right = -79.0
+margin_bottom = 141.0
 mouse_filter = 2
 texture = ExtResource( 3 )
 expand = true
 
 [node name="ExitIcon" type="TextureRect" parent="Buttons"]
-margin_left = -218.0
-margin_top = 332.0
-margin_right = -162.0
-margin_bottom = 388.0
+margin_left = -110.0
+margin_top = 167.0
+margin_right = -82.0
+margin_bottom = 195.0
 mouse_filter = 2
 texture = ExtResource( 21 )
 expand = true
@@ -482,11 +486,11 @@ text = "Quit"
 align = 1
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 15 )]
-visible = false
-margin_left = 66.0
-margin_top = 64.0
-margin_right = 66.0
-margin_bottom = 64.0
+margin_left = 33.0
+margin_top = 32.0
+margin_right = 33.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="InventoryMenu" type="Control" parent="."]
 visible = false
@@ -494,85 +498,85 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="InventorySlots" type="GridContainer" parent="InventoryMenu"]
-margin_left = 54.0
-margin_top = 246.0
-margin_right = 606.0
-margin_bottom = 657.0
-custom_constants/vseparation = 6
-custom_constants/hseparation = 6
+margin_left = 27.0
+margin_top = 124.0
+margin_right = 279.0
+margin_bottom = 223.0
+custom_constants/vseparation = 3
+custom_constants/hseparation = 3
 columns = 5
 
 [node name="Slot1" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_right = 96.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
+margin_right = 48.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot2" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_left = 102.0
-margin_right = 198.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 51.0
+margin_right = 99.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot3" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_left = 204.0
-margin_right = 300.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 102.0
+margin_right = 150.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot4" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_left = 306.0
-margin_right = 402.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 153.0
+margin_right = 201.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot5" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_left = 408.0
-margin_right = 504.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 204.0
+margin_right = 252.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot6" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_top = 102.0
-margin_right = 96.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
+margin_top = 51.0
+margin_right = 48.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot7" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_left = 102.0
-margin_top = 102.0
-margin_right = 198.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 51.0
+margin_top = 51.0
+margin_right = 99.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot8" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_left = 204.0
-margin_top = 102.0
-margin_right = 300.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 102.0
+margin_top = 51.0
+margin_right = 150.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot9" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_left = 306.0
-margin_top = 102.0
-margin_right = 402.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 153.0
+margin_top = 51.0
+margin_right = 201.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot10" type="Panel" parent="InventoryMenu/InventorySlots"]
-margin_left = 408.0
-margin_top = 102.0
-margin_right = 504.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 96, 96 )
+margin_left = 204.0
+margin_top = 51.0
+margin_right = 252.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="PetUI" type="Control" parent="InventoryMenu"]
@@ -599,7 +603,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 31
+frame = 24
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]

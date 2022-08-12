@@ -32,10 +32,12 @@ func set_description_text(item):
 	if item:
 		var category = JsonData.item_data[item]["ItemCategory"]
 		var description = JsonData.item_data[item]["Description"]
+		$ItemCategory.modulate = returnCategoryColor(category)
 		$ItemName.set_text(item[0].to_upper() + item.substr(1,-1))
 		$ItemCategory.set_text(category[0].to_upper() + category.substr(1,-1))
-		$ItemDescription.set_text(description)
-		$ItemCategory.modulate = returnCategoryColor(category)
+		#$ItemDescription.set_text(description)
+		$ItemDescription.set_text("descriptionodsjfk jdf jslkj sdlfkjdd  dasdas  asd sa a sads sa a spjsa ;lzm aslknm lksadfnlkn fsdlkn sdnflsn dns dlkns dnn")
+		
 
 
 

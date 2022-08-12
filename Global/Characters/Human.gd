@@ -969,6 +969,34 @@ var male = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/shoes/shoes.png")
 	},
+	
+	body_eat = {
+		0 : preload("res://Characters/Human/male/EATING/body/down/body.png")
+	},
+	arms_eat = {
+		0 : preload("res://Characters/Human/male/EATING/body/down/arms.png")
+	},
+	acc_eat = {
+		0 : null,
+	},
+	head_attribute_eat = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/EATING/assets/down/head_attribute/hair.png")
+	},
+	shirts_eat = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/EATING/assets/down/shirts/shirt.png")
+	},
+	pants_eat = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/EATING/assets/down/pants/pants.png")
+	},
+	shoes_eat = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/EATING/assets/down/shoes/shoes.png")
+	},
+	
+	
 }
 var female = {
 	body_idle_down = {
