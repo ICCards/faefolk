@@ -104,7 +104,7 @@ func _physics_process(delta):
 	if item != null:
 		$CraftingItemDescription.visible = true
 		$CraftingItemDescription.item_name = item
-		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(40	, 50)
+		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(15 , 20)
 		$CraftingItemDescription.initialize()
 	else:
 		$CraftingItemDescription.visible = false

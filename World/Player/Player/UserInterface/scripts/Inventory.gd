@@ -19,7 +19,7 @@ func _physics_process(delta):
 	if item != null and find_parent("UserInterface").holding_item == null:
 		$ItemDescription.visible = true
 		$ItemDescription.item_name = item
-		$ItemDescription.position = get_local_mouse_position() + Vector2(40	, 50)
+		$ItemDescription.position = get_local_mouse_position() + Vector2(10, 15)
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.visible = false
@@ -58,23 +58,26 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 				left_click_not_holding(slot)
 		elif event.button_index == BUTTON_RIGHT && event.pressed:
 			if find_parent("UserInterface").holding_item == null and slot.item:
-				pick_half_from_slot(slot)
+				pick_half_from_slot(event, slot)
 			
 
-func pick_half_from_slot(slot: SlotClass):
-	pass
-#	var half = slot.item.item_quantity / 2
-#	print(half)
-#	var temp_item = slot.item
-#	if half >= 1:
+func pick_half_from_slot(event: InputEvent, slot: SlotClass):
+	var half = slot.item.item_quantity / 2
+	print(half)
+	var temp_item = slot.item
+	if half >= 1:
+		pass
 #		find_parent("UserInterface").holding_item = temp_item
 #		find_parent("UserInterface").holding_item.decrease_item_quantity(half)
 #		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+#		slot.pickFromSlot()
+#		temp_item.global_position = event.global_position
+#		PlayerInventory.remove_item(slot)
+#		PlayerInventory.add_item_to_empty_slot(temp_item, slot)
 #		PlayerInventory.decrease_item_quantity(slot, half)
 #		slot.item.decrease_item_quantity(half)
-#		slot.pickFromSlot()e
-#		slot.putIntoSlot(slot.item)
-		#slot.it.decrease_item_quantity(half)
+#		item = ItemClass.instance()
+#		find_parent("UserInterface").holding_item = temp_item
 
 func _input(_event):
 	if find_parent("UserInterface").holding_item:
@@ -131,10 +134,10 @@ func set_inventory_state():
 	$CraftingMenu.visible = false
 	$OptionsMenu.visible = false
 	$QuitMenu.visible = false
-	$Buttons/InventoryIcon.rect_position = Vector2(-202, 8) 
-	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
-	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
-	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
+	$Buttons/InventoryIcon.rect_position = Vector2(-102, 4) 
+	$Buttons/CraftingIcon.rect_position = Vector2(-108, 60) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-108, 116) 
+	$Buttons/ExitIcon.rect_position = Vector2(-108, 172) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory1.png")
 	$Title.text = "INVENTORY"
 	
@@ -143,10 +146,10 @@ func set_crafting_state():
 	$CraftingMenu.visible = true
 	$OptionsMenu.visible = false
 	$QuitMenu.visible = false
-	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8) 
-	$Buttons/CraftingIcon.rect_position = Vector2(-202, 116) 
-	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
-	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
+	$Buttons/InventoryIcon.rect_position = Vector2(-108, 4) 
+	$Buttons/CraftingIcon.rect_position = Vector2(-102, 60) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-108, 116) 
+	$Buttons/ExitIcon.rect_position = Vector2(-108, 172) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory2.png")
 	$Title.text = "CRAFTING"
 	
@@ -157,10 +160,10 @@ func set_options_state():
 	$CraftingMenu.visible = false
 	$OptionsMenu.visible = true
 	$QuitMenu.visible = false
-	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8)
-	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
-	$Buttons/OptionsIcon.rect_position = Vector2(-202, 224) 
-	$Buttons/ExitIcon.rect_position = Vector2(-218, 332) 
+	$Buttons/InventoryIcon.rect_position = Vector2(-108, 4)
+	$Buttons/CraftingIcon.rect_position = Vector2(-108, 60) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-102, 116) 
+	$Buttons/ExitIcon.rect_position = Vector2(-108, 172) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory3.png")
 	$Title.text = "OPTIONS"	
 
@@ -169,10 +172,10 @@ func set_quit_state():
 	$CraftingMenu.visible = false
 	$OptionsMenu.visible = false
 	$QuitMenu.visible = true
-	$Buttons/InventoryIcon.rect_position = Vector2(-218, 8)
-	$Buttons/CraftingIcon.rect_position = Vector2(-218, 116) 
-	$Buttons/OptionsIcon.rect_position = Vector2(-218, 224) 
-	$Buttons/ExitIcon.rect_position = Vector2(-202, 332) 
+	$Buttons/InventoryIcon.rect_position = Vector2(-108, 4)
+	$Buttons/CraftingIcon.rect_position = Vector2(-108, 60) 
+	$Buttons/OptionsIcon.rect_position = Vector2(-108, 116) 
+	$Buttons/ExitIcon.rect_position = Vector2(-102, 172) 
 	background.texture = preload("res://Assets/Images/Inventory UI/inventory4.png")
 	$Title.text = "QUIT"
 

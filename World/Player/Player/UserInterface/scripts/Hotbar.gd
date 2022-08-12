@@ -35,17 +35,23 @@ func _physics_process(delta):
 	else:
 		$ItemDescription.visible = false
 
+
 func adjusted_description_position():
 	yield(get_tree(), "idle_frame")
 	var lines = $ItemDescription/ItemDescription.get_line_count()
-	if lines >= 5:
-		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94 - (lines * 22))
+	if lines == 7:
+		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -145)
+	elif lines == 6:
+		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -126)
+	elif lines == 5:
+		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -107)
 	elif lines == 4:
-		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94 - (lines * 20))
-	elif lines > 2:
-		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94 - (lines * 14))
+		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -87)
+	elif lines == 3:
+		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -68)
 	else:
-		adjusted_pos =  Vector2(get_local_mouse_position().x + 40, -94)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -51)
+
 
 func update_tool_health():
 	if PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] == 0 and PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] != "stone watering can":
@@ -61,8 +67,11 @@ func update_tool_health():
 
 func initialize_hotbar():
 	for i in range(slots.size()):
+		if slots[i].item != null:
+			slots[i].removeFromSlot()
 		if PlayerInventory.hotbar.has(i):
 			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1], PlayerInventory.hotbar[i][2])
+
 
 func _input(_event):
 	if find_parent("UserInterface").holding_item:

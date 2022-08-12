@@ -27,6 +27,7 @@ onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
 	SWING,
+	EAT,
 	CHANGE_TILE
 }
 
@@ -41,6 +42,15 @@ var velocity := Vector2.ZERO
 var input_vector
 var counter = -1
 var collisionMask = null
+
+var color1
+var color2
+var color3
+var color4
+var color5
+var color6
+var color7
+var color8
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -240,6 +250,8 @@ func _unhandled_input(event):
 				current_building_item = null
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
 				swing_state(item_name)
+			elif Input.is_action_pressed("mouse_click") and itemCategory == "Food":
+				eat(item_name)
 			elif itemCategory == "Placable object" and item_name == "tent":
 				$PlaceItemsUI.place_tent_state()
 			elif itemCategory == "Placable object" and item_name == "sleeping bag":
@@ -255,6 +267,75 @@ func _unhandled_input(event):
 		
 
 
+func eat(item_name):
+	state = EAT
+	play_eating_particles(item_name)
+	$CompositeSprites.set_player_animation(character, "eat", item_name)
+	animation_player.play("eat")
+	$EatingParticles/EatingParticles1.emitting = false
+	$EatingParticles/EatingParticles2.emitting = false
+	$EatingParticles/EatingParticles3.emitting = false
+	$EatingParticles/EatingParticles4.emitting = false
+	$EatingParticles/EatingParticles5.emitting = false
+	$EatingParticles/EatingParticles6.emitting = false
+	$EatingParticles/EatingParticles7.emitting = false
+	$EatingParticles/EatingParticles8.emitting = false
+	yield(animation_player, "animation_finished")
+	state = MOVEMENT
+	
+func play_eating_particles(item_name):
+	var itemImage = Image.new()
+	itemImage.load("res://Assets/Images/inventory_icons/Food/" + item_name + ".png")
+	itemImage.lock()
+	color1 = return_pixel_color(itemImage)
+	color2 = return_pixel_color(itemImage)
+	color3 = return_pixel_color(itemImage)
+	color4 = return_pixel_color(itemImage)
+	color5 = return_pixel_color(itemImage)
+	color6 = return_pixel_color(itemImage)
+	color7 = return_pixel_color(itemImage)
+	color8 = return_pixel_color(itemImage)
+	#set_pixel_colors(itemImage)
+	yield(get_tree().create_timer(0.1), "timeout")
+	$EatingParticles/EatingParticles1.color = color1
+	$EatingParticles/EatingParticles2.color = color2
+	$EatingParticles/EatingParticles3.color = color3
+	$EatingParticles/EatingParticles4.color = color4
+	$EatingParticles/EatingParticles5.color = color5
+	$EatingParticles/EatingParticles6.color = color6
+	$EatingParticles/EatingParticles7.color = color7
+	$EatingParticles/EatingParticles8.color = color8
+	$EatingParticles/EatingParticles1.emitting = true
+	$EatingParticles/EatingParticles2.emitting = true
+	$EatingParticles/EatingParticles3.emitting = true
+	$EatingParticles/EatingParticles4.emitting = true
+	$EatingParticles/EatingParticles5.emitting = true
+	$EatingParticles/EatingParticles6.emitting = true
+	$EatingParticles/EatingParticles7.emitting = true
+	$EatingParticles/EatingParticles8.emitting = true
+	
+func set_pixel_colors(itemImage):
+	color1 = return_pixel_color(itemImage)
+	color2 = return_pixel_color(itemImage)
+	color3 = return_pixel_color(itemImage)
+	color4 = return_pixel_color(itemImage)
+	color5 = return_pixel_color(itemImage)
+	color6 = return_pixel_color(itemImage)
+	color7 = return_pixel_color(itemImage)
+	color8 = return_pixel_color(itemImage)
+	
+func return_pixel_color(image):
+	rng.randomize()
+	var tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
+	if tempColor != Color(0,0,0,0):
+		return tempColor
+	else:
+		tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
+		if tempColor != Color(0,0,0,0):
+			return tempColor
+		else:
+			return Color(0,0,0,0)
+			
 
 func movement_state(delta):
 	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping:
@@ -336,8 +417,9 @@ func idle_state(_direction):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Resource" or item_category == "Placable object":
+		if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
 			$HoldingItem.visible = true
+			$HoldingItem.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 			animation = "holding_idle_" + _direction.to_lower()
 		else:
 			$HoldingItem.visible = false
@@ -353,7 +435,8 @@ func walk_state(_direction):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Resource" or item_category == "Placable object":
+		if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
+			$HoldingItem.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 			$HoldingItem.visible = true
 			animation = "holding_walk_" + _direction.to_lower()
 		else:

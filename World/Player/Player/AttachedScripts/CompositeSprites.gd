@@ -21,3 +21,5 @@ func set_player_animation(_character, _anim, var _tool = ""):
 	shoesSprite.set_texture(_character.shoes_sprites[_anim])
 	toolEquippedSprite.set_texture(Images.returnToolSprite(_tool, _anim))
 
+
+

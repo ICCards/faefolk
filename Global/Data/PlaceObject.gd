@@ -93,7 +93,7 @@ func place_object_in_world(id, item_name, location):
 	path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 	light_tiles = get_node("/root/World/PlacableTiles/LightTiles")
 	building_tiles = get_node("/root/World/PlacableTiles/BuildingTiles")
-	wall_tiles = get_node("/root/World/PlacableTiles/WallTiles")
+	#wall_tiles = get_node("/root/World/PlacableTiles/WallTiles")
 	foundation_tiles = get_node("/root/World/PlacableTiles/FoundationTiles")
 	
 	var tileObjectHurtBox = TileObjectHurtBox.instance()

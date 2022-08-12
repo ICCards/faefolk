@@ -1,8 +1,8 @@
 extends Panel
 
-var default_text = null #preload("res://Assets/Images/Inventory UI/item_slot_default_background.png")
-var empty_text = null #preload("res://Assets/Images/Inventory UI/item_slot_empty_background.png")
-var selected_text = preload("res://Assets/Images/Inventory UI/selected_hotbar.png")
+var default_text = preload("res://Assets/Images/Inventory UI/slot.png")
+var empty_text = preload("res://Assets/Images/Inventory UI/slot.png")
+var selected_text = preload("res://Assets/Images/Inventory UI/active item slot.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null
@@ -38,6 +38,7 @@ func refresh_style():
 	else:
 		set('custom_styles/panel', default_style)
 		
+
 
 func pickFromSlot():
 	remove_child(item)

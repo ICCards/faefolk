@@ -184,6 +184,12 @@
       "StackSize": 999,
       "Description": "Generates some energy",
   },
+  "tomato": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "Generates some energy",
+  },
+  
   
   "wheat seeds": {
       "ItemCategory": "Seed",
