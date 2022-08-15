@@ -28,6 +28,7 @@ enum {
 	MOVEMENT, 
 	SWING,
 	EAT,
+	FISHING,
 	CHANGE_TILE
 }
 
@@ -248,7 +249,9 @@ func _unhandled_input(event):
 				$PlaceItemsUI.place_double_door_state()
 			else: 
 				current_building_item = null
-			if Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
+			if Input.is_action_pressed("mouse_click") and itemCategory == "Tool" and item_name == "fishing rod":
+				fishing_state()
+			elif Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
 				swing_state(item_name)
 			elif Input.is_action_pressed("mouse_click") and itemCategory == "Food":
 				eat(item_name)
@@ -272,14 +275,14 @@ func eat(item_name):
 	play_eating_particles(item_name)
 	$CompositeSprites.set_player_animation(character, "eat", item_name)
 	animation_player.play("eat")
-	$EatingParticles/EatingParticles1.emitting = false
-	$EatingParticles/EatingParticles2.emitting = false
-	$EatingParticles/EatingParticles3.emitting = false
-	$EatingParticles/EatingParticles4.emitting = false
-	$EatingParticles/EatingParticles5.emitting = false
-	$EatingParticles/EatingParticles6.emitting = false
-	$EatingParticles/EatingParticles7.emitting = false
-	$EatingParticles/EatingParticles8.emitting = false
+#	$EatingParticles/EatingParticles1.emitting = false
+#	$EatingParticles/EatingParticles2.emitting = false
+#	$EatingParticles/EatingParticles3.emitting = false
+#	$EatingParticles/EatingParticles4.emitting = false
+#	$EatingParticles/EatingParticles5.emitting = false
+#	$EatingParticles/EatingParticles6.emitting = false
+#	$EatingParticles/EatingParticles7.emitting = false
+#	$EatingParticles/EatingParticles8.emitting = false
 	yield(animation_player, "animation_finished")
 	state = MOVEMENT
 	
@@ -386,6 +389,8 @@ func swing_state(item_name):
 			animation = "watering_" + direction.to_lower()
 		elif item_name == "wood sword":
 			animation = "sword_swing_" + direction.to_lower()
+		elif item_name == "fishing rod":
+			animation = "cast_" + direction.to_lower()
 		else:
 			set_melee_collision_layer(item_name)
 			animation = "swing_" + direction.to_lower()
@@ -456,6 +461,22 @@ func set_melee_collision_layer(_tool):
 	elif _tool == "wood hoe":
 		$MeleeSwing.set_collision_mask(0)
 		set_hoed_tile()
+		
+func fishing_state():
+	if !swingActive:
+		swingActive = true
+		animation = "cast_" + direction.to_lower()
+		$CompositeSprites.set_player_animation(character, animation, "fishing rod cast")
+		animation_player.play(animation)
+		yield(animation_player, "animation_finished" )
+		var pos = Util.set_swing_position(get_position(), direction)
+		var location = hoed_tiles.world_to_map(pos)
+		if ocean_tiles.get_cellv(location) != -1:
+			animation = "retract_" + direction.to_lower()
+			$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
+			animation_player.play("retract")
+		else:
+			swingActive = false
 
 func set_watered_tile():
 	var pos = Util.set_swing_position(get_position(), direction)

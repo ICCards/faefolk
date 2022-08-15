@@ -155,7 +155,7 @@ margin_bottom = 813.0
 
 [node name="OpenChest" parent="." instance=ExtResource( 14 )]
 visible = false
-position = Vector2( 240, 513 )
+position = Vector2( 281, 522 )
 
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
 position = Vector2( 804, 24 )

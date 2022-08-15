@@ -459,6 +459,26 @@ func returnToolSprite(toolName, direction):
 					 return human_male_can.left
 				"watering_right":
 					 return human_male_can.right
+		"fishing rod cast":
+			match direction:
+				"cast_down":
+					return fishing_rod_cast.down
+				"cast_up":
+					return fishing_rod_cast.up
+				"cast_left":
+					return fishing_rod_cast.left
+				"cast_right":
+					return fishing_rod_cast.right
+		"fishing rod retract":
+			match direction:
+				"retract_down":
+					return fishing_rod_retract.down
+				"retract_up":
+					return fishing_rod_retract.up
+				"retract_left":
+					return fishing_rod_retract.left
+				"retract_right":
+					return fishing_rod_retract.right
 #			match Server.character:
 #				"human_male":
 #					match direction: 
@@ -514,6 +534,21 @@ var human_female_can = {
 	down = preload("res://Characters/Weapon swings/watering cans/human female/down.png"),
 	left = preload("res://Characters/Weapon swings/watering cans/human female/left.png"),
 	right = preload("res://Characters/Weapon swings/watering cans/human female/right.png")
+}
+
+
+var fishing_rod_cast = {
+	down = preload("res://Characters/Weapon swings/fishing rod cast/down.png"),
+	left = preload("res://Characters/Weapon swings/fishing rod cast/left.png"),
+	right = preload("res://Characters/Weapon swings/fishing rod cast/right.png"),
+	up = preload("res://Characters/Weapon swings/fishing rod cast/up.png")
+}
+
+var fishing_rod_retract = {
+	down = preload("res://Characters/Weapon swings/fishing rod retract/down.png"),
+	left = preload("res://Characters/Weapon swings/fishing rod retract/left.png"),
+	right = preload("res://Characters/Weapon swings/fishing rod retract/right.png"),
+	up = preload("res://Characters/Weapon swings/fishing rod retract/up.png")
 }
 
 # TALL GRASS #

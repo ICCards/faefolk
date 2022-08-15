@@ -49,37 +49,42 @@
   "wood pickaxe": {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used for breaking ore"
+      "Description": "Used for breaking ore."
   },
   "wood sword": {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used for melee attacks"
+      "Description": "Used for melee attacks."
   },
   "wood hoe": {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used to make fertile soil"
+      "Description": "Used to make fertile soil."
   },
   "scythe": {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used to cut grass and flowers"
+      "Description": "Used to cut grass and flowers."
   },
   "stone watering can" : {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used to water fertile soil"
+      "Description": "Used to water fertile soil."
+  },
+  "fishing rod":{
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Used to catch fish."
   },
   "blueprint": {
       "ItemCategory": "Construction",
       "StackSize": 1,
-      "Description": "Used to create building structures"
+      "Description": "Used to create building structures."
   },
   "hammer": {
       "ItemCategory": "Construction",
       "StackSize": 1,
-      "Description": "Used to create building structures"
+      "Description": "Used to upgrade building structures."
   },
   
   
