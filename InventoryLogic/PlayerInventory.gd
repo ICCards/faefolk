@@ -36,11 +36,13 @@ var inventory = {
 }
 
 var hotbar = {
-	0: ["potato", 30, null],
-	1: ["tomato", 30, null],
-	2: ["yellow onion", 30, null],
+#	0: ["potato", 30, null],
+#	1: ["tomato", 30, null],
+#	2: ["yellow onion", 30, null],
 	3: ["carrot", 30, null],
 	4: ["grape", 30, null],
+	0: ["fishing rod", 1, null]
+	
 #	2: ["hammer", 1, null],
 #	3: ["blueprint", 1, null],
 #	5: ["wood sword", 1, 12],

@@ -27,6 +27,342 @@ extends Node
 #		1 : preload()
 #	},
 
+#	body_cast_down = {
+#		0 : preload()
+#	},
+#	body_cast_up = {
+#		0 : preload()
+#	},
+#	body_cast_right = {
+#		0 : preload()
+#	},
+#	body_cast_left = {
+#		0 : preload()
+#	},
+#
+#	arms_cast_down = {
+#		0 : preload()
+#	},
+#	arms_cast_up = {
+#		0 : preload()
+#	},
+#	arms_cast_right = {
+#		0 : preload()
+#	},
+#	arms_cast_left = {
+#		0 : preload()
+#	},
+#
+#	acc_cast_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_cast_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_cast_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_cast_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_cast_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_cast_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_cast_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_cast_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_cast_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_cast_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_cast_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_cast_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_cast_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_cast_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_cast_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_cast_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_cast_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_swim_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_cast_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_cast_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+
+#	body_retract_down = {
+#		0 : preload()
+#	},
+#	body_retract_up = {
+#		0 : preload()
+#	},
+#	body_retract_right = {
+#		0 : preload()
+#	},
+#	body_retract_left = {
+#		0 : preload()
+#	},
+#
+#	arms_retract_down = {
+#		0 : preload()
+#	},
+#	arms_retract_up = {
+#		0 : preload()
+#	},
+#	arms_retract_right = {
+#		0 : preload()
+#	},
+#	arms_retract_left = {
+#		0 : preload()
+#	},
+#
+#	acc_retract_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_retract_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_retract_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_retract_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_retract_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_retract_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_retract_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_retract_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_retract_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_retract_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_retract_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_retract_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_retract_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_retract_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_retract_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_retract_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_retract_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_retract_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_retract_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_retract_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+
+#	body_swim_down = {
+#		0 : preload()
+#	},
+#	body_swim_up = {
+#		0 : preload()
+#	},
+#	body_swim_right = {
+#		0 : preload()
+#	},
+#	body_swim_left = {
+#		0 : preload()
+#	},
+#
+#	arms_swim_down = {
+#		0 : preload()
+#	},
+#	arms_swim_up = {
+#		0 : preload()
+#	},
+#	arms_swim_right = {
+#		0 : preload()
+#	},
+#	arms_swim_left = {
+#		0 : preload()
+#	},
+#
+#	acc_swim_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_swim_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_swim_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_swim_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_swim_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_swim_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_swim_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_swim_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_swim_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_swim_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_swim_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_swim_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_swim_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_swim_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_swim_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_swim_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_swim_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_swim_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_swim_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_swim_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+
 
 #	body_sleep_down = {
 #		0 : preload()
@@ -4926,6 +5262,14 @@ var body_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'cast_up': null,
+	'cast_down': null,
+	'cast_left': null,
+	'cast_right': null,
+	'retract_up': null,
+	'retract_down': null,
+	'retract_left': null,
+	'retract_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -4962,6 +5306,14 @@ var arms_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'cast_up': null,
+	'cast_down': null,
+	'cast_left': null,
+	'cast_right': null,
+	'retract_up': null,
+	'retract_down': null,
+	'retract_left': null,
+	'retract_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -4998,6 +5350,18 @@ var acc_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'swim_up': null,
+	'swim_down': null,
+	'swim_left': null,
+	'swim_right': null,
+	'cast_up': null,
+	'cast_down': null,
+	'cast_left': null,
+	'cast_right': null,
+	'retract_up': null,
+	'retract_down': null,
+	'retract_left': null,
+	'retract_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5034,6 +5398,18 @@ var headAtr_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'swim_up': null,
+	'swim_down': null,
+	'swim_left': null,
+	'swim_right': null,
+	'cast_up': null,
+	'cast_down': null,
+	'cast_left': null,
+	'cast_right': null,
+	'retract_up': null,
+	'retract_down': null,
+	'retract_left': null,
+	'retract_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5070,6 +5446,18 @@ var pants_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'swim_up': null,
+	'swim_down': null,
+	'swim_left': null,
+	'swim_right': null,
+	'cast_up': null,
+	'cast_down': null,
+	'cast_left': null,
+	'cast_right': null,
+	'retract_up': null,
+	'retract_down': null,
+	'retract_left': null,
+	'retract_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5106,6 +5494,18 @@ var shirts_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'swim_up': null,
+	'swim_down': null,
+	'swim_left': null,
+	'swim_right': null,
+	'cast_up': null,
+	'cast_down': null,
+	'cast_left': null,
+	'cast_right': null,
+	'retract_up': null,
+	'retract_down': null,
+	'retract_left': null,
+	'retract_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5142,6 +5542,18 @@ var shoes_sprites = {
 	'sleep_down': null,
 	'sleep_left': null,
 	'sleep_right': null,
+	'swim_up': null,
+	'swim_down': null,
+	'swim_left': null,
+	'swim_right': null,
+	'cast_up': null,
+	'cast_down': null,
+	'cast_left': null,
+	'cast_right': null,
+	'retract_up': null,
+	'retract_down': null,
+	'retract_left': null,
+	'retract_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5161,11 +5573,6 @@ var character_example = {
 #	"shirts_index" :  1,
 #	"shoes_index" : 1,
 }
-
-func _ready():
-	### Pass server call here
-	#LoadPlayerCharacter(character_example)
-	pass
 
 func LoadPlayerCharacter(character_info):
 	match character_info:
@@ -5249,6 +5656,18 @@ func set_attributes(set_char):
 #	'sleep_down': character.body_sleep_down[0],
 #	'sleep_left': character.body_sleep_left[0],
 #	'sleep_right': character.body_sleep_right[0],
+	'swim_up': character.body_swim_up[0],
+	'swim_down': character.body_swim_down[0],
+	'swim_left': character.body_swim_left[0],
+	'swim_right': character.body_swim_right[0],
+	'cast_up': character.body_cast_up[0],
+	'cast_down': character.body_cast_down[0],
+	'cast_left': character.body_cast_left[0],
+	'cast_right': character.body_cast_right[0],
+	'retract_up': character.body_retract_up[0],
+	'retract_down': character.body_retract_down[0],
+	'retract_left': character.body_retract_left[0],
+	'retract_right': character.body_retract_right[0],
 	'holding_walk_down' : character.body_holding_walk_down[0], 
 	'holding_walk_up' : character.body_holding_walk_up[0], 
 	'holding_walk_left' : character.body_holding_walk_left[0], 
@@ -5288,6 +5707,18 @@ func set_attributes(set_char):
 #	'sleep_down': character.arms_sleep_down[0],
 #	'sleep_left': character.arms_sleep_left[0],
 #	'sleep_right': character.arms_sleep_right[0],
+	'swim_up': character.arms_swim_up[0],
+	'swim_down': character.arms_swim_down[0],
+	'swim_left': character.arms_swim_left[0],
+	'swim_right': character.arms_swim_right[0],
+	'cast_up': character.arms_cast_up[0],
+	'cast_down': character.arms_cast_down[0],
+	'cast_left': character.arms_cast_left[0],
+	'cast_right': character.arms_cast_right[0],
+	'retract_up': character.arms_retract_up[0],
+	'retract_down': character.arms_retract_down[0],
+	'retract_left': character.arms_retract_left[0],
+	'retract_right': character.arms_retract_right[0],
 	'holding_walk_down' : character.arms_holding_walk_down[0], 
 	'holding_walk_up' : character.arms_holding_walk_up[0], 
 	'holding_walk_left' : character.arms_holding_walk_left[0], 
@@ -5327,6 +5758,18 @@ func set_attributes(set_char):
 #	'sleep_down': character.acc_sleep_down[acc_index],
 #	'sleep_left': character.acc_sleep_left[acc_index],
 #	'sleep_right': character.acc_sleep_right[acc_index],
+	'swim_up': character.acc_swim_up[acc_index],
+	'swim_down': character.acc_swim_down[acc_index],
+	'swim_left': character.acc_swim_left[acc_index],
+	'swim_right': character.acc_swim_right[acc_index],
+	'cast_up': character.acc_cast_up[acc_index],
+	'cast_down': character.acc_cast_down[acc_index],
+	'cast_left': character.acc_cast_left[acc_index],
+	'cast_right': character.acc_cast_right[acc_index],
+	'retract_up': character.acc_retract_up[acc_index],
+	'retract_down': character.acc_retract_down[acc_index],
+	'retract_left': character.acc_retract_left[acc_index],
+	'retract_right': character.acc_retract_right[acc_index],
 	'holding_walk_down' : character.acc_holding_walk_down[acc_index], 
 	'holding_walk_up' : character.acc_holding_walk_up[acc_index], 
 	'holding_walk_left' : character.acc_holding_walk_left[acc_index], 
@@ -5366,6 +5809,18 @@ func set_attributes(set_char):
 #	'sleep_down': character.head_attribute_sleep_down[headAtr_index],
 #	'sleep_left': character.head_attribute_sleep_left[headAtr_index],
 #	'sleep_right': character.head_attribute_sleep_right[headAtr_index],
+	'swim_up': character.head_attribute_swim_up[headAtr_index],
+	'swim_down': character.head_attribute_swim_down[headAtr_index],
+	'swim_left': character.head_attribute_swim_left[headAtr_index],
+	'swim_right': character.head_attribute_swim_right[headAtr_index],
+	'cast_up': character.head_attribute_cast_up[headAtr_index],
+	'cast_down': character.head_attribute_cast_down[headAtr_index],
+	'cast_left': character.head_attribute_cast_left[headAtr_index],
+	'cast_right': character.head_attribute_cast_right[headAtr_index],
+	'retract_up': character.head_attribute_retract_up[headAtr_index],
+	'retract_down': character.head_attribute_retract_down[headAtr_index],
+	'retract_left': character.head_attribute_retract_left[headAtr_index],
+	'retract_right': character.head_attribute_retract_right[headAtr_index],
 	'holding_walk_down' : character.head_attribute_holding_walk_down[headAtr_index], 
 	'holding_walk_up' : character.head_attribute_holding_walk_up[headAtr_index], 
 	'holding_walk_left' : character.head_attribute_holding_walk_left[headAtr_index], 
@@ -5405,6 +5860,18 @@ func set_attributes(set_char):
 #	'sleep_down': character.pants_sleep_down[pants_index],
 #	'sleep_left': character.pants_sleep_left[pants_index],
 #	'sleep_right': character.pants_sleep_right[pants_index],
+	'swim_up': character.pants_swim_up[pants_index],
+	'swim_down': character.pants_swim_down[pants_index],
+	'swim_left': character.pants_swim_left[pants_index],
+	'swim_right': character.pants_swim_right[pants_index],
+	'cast_up': character.pants_cast_up[pants_index],
+	'cast_down': character.pants_cast_down[pants_index],
+	'cast_left': character.pants_cast_left[pants_index],
+	'cast_right': character.pants_cast_right[pants_index],
+	'retract_up': character.pants_retract_up[pants_index],
+	'retract_down': character.pants_retract_down[pants_index],
+	'retract_left': character.pants_retract_left[pants_index],
+	'retract_right': character.pants_retract_right[pants_index],
 	'holding_walk_down' : character.pants_holding_walk_down[pants_index], 
 	'holding_walk_up' : character.pants_holding_walk_up[pants_index], 
 	'holding_walk_left' : character.pants_holding_walk_left[pants_index], 
@@ -5444,6 +5911,18 @@ func set_attributes(set_char):
 #	'sleep_down': character.shirts_sleep_down[shirts_index],
 #	'sleep_left': character.shirts_sleep_left[shirts_index],
 #	'sleep_right': character.shirts_sleep_right[shirts_index],
+	'swim_up': character.shirts_swim_up[shirts_index],
+	'swim_down': character.shirts_swim_down[shirts_index],
+	'swim_left': character.shirts_swim_left[shirts_index],
+	'swim_right': character.shirts_swim_right[shirts_index],
+	'cast_up': character.shirts_cast_up[shirts_index],
+	'cast_down': character.shirts_cast_down[shirts_index],
+	'cast_left': character.shirts_cast_left[shirts_index],
+	'cast_right': character.shirts_cast_right[shirts_index],
+	'retract_up': character.shirts_retract_up[shirts_index],
+	'retract_down': character.shirts_retract_down[shirts_index],
+	'retract_left': character.shirts_retract_left[shirts_index],
+	'retract_right': character.shirts_retract_right[shirts_index],
 	'holding_walk_down' : character.shirts_holding_walk_down[shirts_index], 
 	'holding_walk_up' : character.shirts_holding_walk_up[shirts_index], 
 	'holding_walk_left' : character.shirts_holding_walk_left[shirts_index], 
@@ -5483,6 +5962,18 @@ func set_attributes(set_char):
 #	'sleep_down': character.shoes_sleep_down[shoes_index],
 #	'sleep_left': character.shoes_sleep_left[shoes_index],
 #	'sleep_right': character.shoes_sleep_right[shoes_index],
+	'swim_up': character.shoes_swim_up[shoes_index],
+	'swim_down': character.shoes_swim_down[shoes_index],
+	'swim_left': character.shoes_swim_left[shoes_index],
+	'swim_right': character.shoes_swim_right[shoes_index],
+	'cast_up': character.shoes_cast_up[shoes_index],
+	'cast_down': character.shoes_cast_down[shoes_index],
+	'cast_left': character.shoes_cast_left[shoes_index],
+	'cast_right': character.shoes_cast_right[shoes_index],
+	'retract_up': character.shoes_retract_up[shoes_index],
+	'retract_down': character.shoes_retract_down[shoes_index],
+	'retract_left': character.shoes_retract_left[shoes_index],
+	'retract_right': character.shoes_retract_right[shoes_index],
 	'holding_walk_down' : character.shoes_holding_walk_down[shoes_index], 
 	'holding_walk_up' : character.shoes_holding_walk_up[shoes_index], 
 	'holding_walk_left' : character.shoes_holding_walk_left[shoes_index], 
