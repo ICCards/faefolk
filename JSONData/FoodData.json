@@ -1,0 +1,83 @@
+{
+    "carrot": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "potato": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "garlic": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "cauliflower": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "yellow pepper": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "strawberry": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "green bean": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "radish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "tomato": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "red pepper": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "blueberry": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "green melon": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "wheat": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "corn": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "green pepper": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "zucchinni": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "yellow onion": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "grape": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "cabbage": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "jalapeno": {
+        "Energy": 10,
+        "Health": 10
+    }
+    
+}

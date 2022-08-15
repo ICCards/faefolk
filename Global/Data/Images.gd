@@ -462,9 +462,9 @@ func returnToolSprite(toolName, direction):
 		"fishing rod cast":
 			match direction:
 				"cast_down":
-					return fishing_rod_cast.down
-				"cast_up":
 					return fishing_rod_cast.up
+				"cast_up":
+					return fishing_rod_cast.down
 				"cast_left":
 					return fishing_rod_cast.left
 				"cast_right":

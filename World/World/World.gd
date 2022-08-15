@@ -391,17 +391,17 @@ func set_water_tiles():
 				ocean.set_cell(x, y, 0)
 				wetSand.set_cell(x, y, 0)
 				validTiles.set_cell(x, y, -1)
-	for i in range(2):
-		for loc in wetSand.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, wetSand) != 4:
-				wetSand.set_cellv(loc + Vector2(1, 0), 0)
-				wetSand.set_cellv(loc + Vector2(-1, 0), 0)
-				wetSand.set_cellv(loc + Vector2(0, 1), 0)
-				wetSand.set_cellv(loc + Vector2(0, -1), 0)
-				sand.set_cellv(loc + Vector2(1, 0), 0)
-				sand.set_cellv(loc + Vector2(-1, 0), 0)
-				sand.set_cellv(loc + Vector2(0, 1), 0)
-				sand.set_cellv(loc + Vector2(0, -1), 0)
+#	for i in range(2):
+#		for loc in wetSand.get_used_cells():
+#			if Tiles.return_neighboring_cells(loc, wetSand) != 4:
+#				wetSand.set_cellv(loc + Vector2(1, 0), 0)
+#				wetSand.set_cellv(loc + Vector2(-1, 0), 0)
+#				wetSand.set_cellv(loc + Vector2(0, 1), 0)
+#				wetSand.set_cellv(loc + Vector2(0, -1), 0)
+#				sand.set_cellv(loc + Vector2(1, 0), 0)
+#				sand.set_cellv(loc + Vector2(-1, 0), 0)
+#				sand.set_cellv(loc + Vector2(0, 1), 0)
+#				sand.set_cellv(loc + Vector2(0, -1), 0)
 #	for i in range(2):
 #		for cell in ocean.get_used_cells():
 #				if Tiles.return_neighboring_cells(cell, ocean) <= 1:
