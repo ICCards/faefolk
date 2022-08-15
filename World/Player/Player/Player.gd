@@ -18,7 +18,11 @@ var setting
 var is_mouse_over_hotbar
 var is_player_dead = false
 var is_player_sleeping = false
+var isWaitingForFish = false
+var isReelingInFish = false
+var isFishOnHook = false
 var swingActive = false
+var eatingActive = false
 var current_building_item = null
 var username_callback = JavaScript.create_callback(self, "_username_callback")
 
@@ -250,7 +254,7 @@ func _unhandled_input(event):
 			else: 
 				current_building_item = null
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Tool" and item_name == "fishing rod":
-				fishing_state()
+				fish()
 			elif Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
 				swing_state(item_name)
 			elif Input.is_action_pressed("mouse_click") and itemCategory == "Food":
@@ -271,34 +275,30 @@ func _unhandled_input(event):
 
 
 func eat(item_name):
-	state = EAT
-	play_eating_particles(item_name)
-	$CompositeSprites.set_player_animation(character, "eat", item_name)
-	animation_player.play("eat")
-#	$EatingParticles/EatingParticles1.emitting = false
-#	$EatingParticles/EatingParticles2.emitting = false
-#	$EatingParticles/EatingParticles3.emitting = false
-#	$EatingParticles/EatingParticles4.emitting = false
-#	$EatingParticles/EatingParticles5.emitting = false
-#	$EatingParticles/EatingParticles6.emitting = false
-#	$EatingParticles/EatingParticles7.emitting = false
-#	$EatingParticles/EatingParticles8.emitting = false
-	yield(animation_player, "animation_finished")
-	state = MOVEMENT
+	if not eatingActive:
+		eatingActive = true
+		PlayerStats.eat(item_name)
+		state = EAT
+		play_eating_particles(item_name)
+		$CompositeSprites.set_player_animation(character, "eat", item_name)
+		animation_player.play("eat")
+		yield(animation_player, "animation_finished")
+		$EatingParticles/EatingParticles1.emitting = false
+		$EatingParticles/EatingParticles2.emitting = false
+		$EatingParticles/EatingParticles3.emitting = false
+		$EatingParticles/EatingParticles4.emitting = false
+		$EatingParticles/EatingParticles5.emitting = false
+		$EatingParticles/EatingParticles6.emitting = false
+		$EatingParticles/EatingParticles7.emitting = false
+		$EatingParticles/EatingParticles8.emitting = false
+		eatingActive = false
+		state = MOVEMENT
 	
 func play_eating_particles(item_name):
 	var itemImage = Image.new()
 	itemImage.load("res://Assets/Images/inventory_icons/Food/" + item_name + ".png")
 	itemImage.lock()
-	color1 = return_pixel_color(itemImage)
-	color2 = return_pixel_color(itemImage)
-	color3 = return_pixel_color(itemImage)
-	color4 = return_pixel_color(itemImage)
-	color5 = return_pixel_color(itemImage)
-	color6 = return_pixel_color(itemImage)
-	color7 = return_pixel_color(itemImage)
-	color8 = return_pixel_color(itemImage)
-	#set_pixel_colors(itemImage)
+	set_pixel_colors(itemImage)
 	yield(get_tree().create_timer(0.1), "timeout")
 	$EatingParticles/EatingParticles1.color = color1
 	$EatingParticles/EatingParticles2.color = color2
@@ -338,10 +338,9 @@ func return_pixel_color(image):
 			return tempColor
 		else:
 			return Color(0,0,0,0)
-			
 
 func movement_state(delta):
-	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping:
+	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping and state == MOVEMENT:
 		input_vector = Vector2.ZERO	
 		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0
@@ -417,22 +416,23 @@ func swing_state(item_name):
 
 
 func idle_state(_direction):
-	animation_player.play("idle")
-	$DetectPathType/FootstepsSound.stream_paused = true
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
-			$HoldingItem.visible = true
-			$HoldingItem.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-			animation = "holding_idle_" + _direction.to_lower()
+	if state == MOVEMENT:
+		animation_player.play("idle")
+		$DetectPathType/FootstepsSound.stream_paused = true
+		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+			var item_category = JsonData.item_data[item_name]["ItemCategory"]
+			if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
+				$HoldingItem.visible = true
+				$HoldingItem.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+				animation = "holding_idle_" + _direction.to_lower()
+			else:
+				$HoldingItem.visible = false
+				animation = "idle_" + _direction.to_lower()
 		else:
 			$HoldingItem.visible = false
 			animation = "idle_" + _direction.to_lower()
-	else:
-		$HoldingItem.visible = false
-		animation = "idle_" + _direction.to_lower()
-	$CompositeSprites.set_player_animation(character, animation, null)
+		$CompositeSprites.set_player_animation(character, animation, null)
 
 func walk_state(_direction):
 	animation_player.play("movement")
@@ -462,21 +462,69 @@ func set_melee_collision_layer(_tool):
 		$MeleeSwing.set_collision_mask(0)
 		set_hoed_tile()
 		
-func fishing_state():
-	if !swingActive:
-		swingActive = true
+func fish():
+	if state != FISHING:
+		$DetectPathType/FootstepsSound.stream_paused = true
+		state = FISHING
 		animation = "cast_" + direction.to_lower()
 		$CompositeSprites.set_player_animation(character, animation, "fishing rod cast")
 		animation_player.play(animation)
-		yield(animation_player, "animation_finished" )
+		yield(animation_player, "animation_finished")
 		var pos = Util.set_swing_position(get_position(), direction)
 		var location = hoed_tiles.world_to_map(pos)
 		if ocean_tiles.get_cellv(location) != -1:
+			wait_for_fish_state()
+		else:
 			animation = "retract_" + direction.to_lower()
 			$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
 			animation_player.play("retract")
-		else:
+			yield(animation_player, "animation_finished")
+			print("INVALID CAST")
+			state = MOVEMENT
+	elif Input.is_action_pressed("mouse_click") and isFishOnHook:
+		start_fishing_mini_game()
+
+
+func wait_for_fish_state():
+	if not isWaitingForFish and state == FISHING:
+		isWaitingForFish = true
+		var randomWait = rng.randi_range(2, 4)
+		yield(get_tree().create_timer(randomWait), "timeout")
+		$Fishing/AnimationPlayer.play("bite")
+		isFishOnHook = true
+		yield($Fishing/AnimationPlayer, "animation_finished")
+		isFishOnHook = false
+		isWaitingForFish = false
+		wait_for_fish_state()
+	else:
+		if Input.is_action_pressed("mouse_click"):
+			state = MOVEMENT
 			swingActive = false
+	#	animation = "retract_" + direction.to_lower()
+	#	$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
+	#	animation_player.play("retract")
+	#	yield(animation_player, "animation_finished" )
+	#	state = MOVEMENT
+	#	swingActive = false
+
+
+func start_fishing_mini_game():
+	if not isReelingInFish:
+		isReelingInFish = true
+		print("START FISHING GAME")
+		animation = "retract_" + direction.to_lower()
+		$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
+		animation_player.play("retract")
+		yield(animation_player, "animation_finished")
+		animation_player.play("retract")
+		yield(animation_player, "animation_finished")
+		animation_player.play("retract")
+		yield(animation_player, "animation_finished")
+		state = MOVEMENT
+		isWaitingForFish = false
+		isReelingInFish = false
+	
+	
 
 func set_watered_tile():
 	var pos = Util.set_swing_position(get_position(), direction)
