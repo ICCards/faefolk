@@ -18,6 +18,7 @@ var setting
 var is_mouse_over_hotbar
 var is_player_dead = false
 var is_player_sleeping = false
+var isCastingForFish = false
 var isWaitingForFish = false
 var isReelingInFish = false
 var isFishOnHook = false
@@ -271,7 +272,7 @@ func _unhandled_input(event):
 				$PlaceItemsUI.place_seed_state(item_name, hoed_tiles)
 	else: 
 		$PlaceItemsUI.set_invisible()
-		
+	
 
 
 func eat(item_name):
@@ -464,6 +465,16 @@ func set_melee_collision_layer(_tool):
 		
 func fish():
 	if state != FISHING:
+		cast()
+	elif Input.is_action_pressed("mouse_click") and isFishOnHook:
+		start_fishing_mini_game()
+	elif Input.is_action_pressed("mouse_click") and not isCastingForFish:
+		stop_fishing_mini_game()
+		
+func cast():
+	if not isCastingForFish:
+		print("cast")
+		isCastingForFish = true
 		$DetectPathType/FootstepsSound.stream_paused = true
 		state = FISHING
 		animation = "cast_" + direction.to_lower()
@@ -475,37 +486,32 @@ func fish():
 		if ocean_tiles.get_cellv(location) != -1:
 			wait_for_fish_state()
 		else:
-			animation = "retract_" + direction.to_lower()
-			$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
-			animation_player.play("retract")
-			yield(animation_player, "animation_finished")
-			print("INVALID CAST")
-			state = MOVEMENT
-	elif Input.is_action_pressed("mouse_click") and isFishOnHook:
-		start_fishing_mini_game()
+			stop_fishing_mini_game()
 
-
+func stop_fishing_mini_game():
+	
+	animation = "retract_" + direction.to_lower()
+	$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
+	animation_player.play("retract")
+	yield(animation_player, "animation_finished")
+	isFishOnHook = false
+	isWaitingForFish = false
+	isCastingForFish = false
+	state = MOVEMENT
+		
 func wait_for_fish_state():
 	if not isWaitingForFish and state == FISHING:
 		isWaitingForFish = true
+		isCastingForFish = false
 		var randomWait = rng.randi_range(2, 4)
 		yield(get_tree().create_timer(randomWait), "timeout")
-		$Fishing/AnimationPlayer.play("bite")
-		isFishOnHook = true
-		yield($Fishing/AnimationPlayer, "animation_finished")
-		isFishOnHook = false
-		isWaitingForFish = false
-		wait_for_fish_state()
-	else:
-		if Input.is_action_pressed("mouse_click"):
-			state = MOVEMENT
-			swingActive = false
-	#	animation = "retract_" + direction.to_lower()
-	#	$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
-	#	animation_player.play("retract")
-	#	yield(animation_player, "animation_finished" )
-	#	state = MOVEMENT
-	#	swingActive = false
+		if isWaitingForFish:
+			$Fishing/AnimationPlayer.play("bite")
+			isFishOnHook = true
+			yield($Fishing/AnimationPlayer, "animation_finished")
+			isFishOnHook = false
+			isWaitingForFish = false
+			wait_for_fish_state()
 
 
 func start_fishing_mini_game():
@@ -516,15 +522,13 @@ func start_fishing_mini_game():
 		$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
 		animation_player.play("retract")
 		yield(animation_player, "animation_finished")
-		animation_player.play("retract")
-		yield(animation_player, "animation_finished")
-		animation_player.play("retract")
-		yield(animation_player, "animation_finished")
 		state = MOVEMENT
-		isWaitingForFish = false
 		isReelingInFish = false
-	
-	
+		isFishOnHook = false
+		isWaitingForFish = false
+		isCastingForFish = false
+
+
 
 func set_watered_tile():
 	var pos = Util.set_swing_position(get_position(), direction)
