@@ -473,7 +473,6 @@ func fish():
 		
 func cast():
 	if not isCastingForFish:
-		print("cast")
 		isCastingForFish = true
 		$DetectPathType/FootstepsSound.stream_paused = true
 		state = FISHING
@@ -486,10 +485,10 @@ func cast():
 		if ocean_tiles.get_cellv(location) != -1:
 			wait_for_fish_state()
 		else:
-			stop_fishing_mini_game()
+			isCastingForFish = false
+			state = MOVEMENT
 
 func stop_fishing_mini_game():
-	
 	animation = "retract_" + direction.to_lower()
 	$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
 	animation_player.play("retract")
@@ -497,12 +496,12 @@ func stop_fishing_mini_game():
 	isFishOnHook = false
 	isWaitingForFish = false
 	isCastingForFish = false
+	isReelingInFish = false
 	state = MOVEMENT
 		
 func wait_for_fish_state():
 	if not isWaitingForFish and state == FISHING:
 		isWaitingForFish = true
-		isCastingForFish = false
 		var randomWait = rng.randi_range(2, 4)
 		yield(get_tree().create_timer(randomWait), "timeout")
 		if isWaitingForFish:
@@ -518,15 +517,7 @@ func start_fishing_mini_game():
 	if not isReelingInFish:
 		isReelingInFish = true
 		print("START FISHING GAME")
-		animation = "retract_" + direction.to_lower()
-		$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
-		animation_player.play("retract")
-		yield(animation_player, "animation_finished")
-		state = MOVEMENT
-		isReelingInFish = false
-		isFishOnHook = false
-		isWaitingForFish = false
-		isCastingForFish = false
+		stop_fishing_mini_game()
 
 
 
