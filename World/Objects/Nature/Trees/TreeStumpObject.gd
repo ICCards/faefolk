@@ -24,7 +24,7 @@ func setTexture(tree):
 func PlayEffect(player_id):
 	health -= 1
 	var hit_dir
-	if get_node("/root/World/Players/" + str(player_id) + "/" +  str(player_id)).get_position().x < get_position().x:
+	if PlayerInventory.player.get_position().x < get_position().x:
 		hit_dir = "left"
 	else:
 		hit_dir = "right"
@@ -68,7 +68,7 @@ func _on_StumpHurtBox_area_entered(_area):
 		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
-		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
+		if PlayerInventory.player.get_position().x <= get_position().x:
 			stump_animation_player.play("stump hit right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 		else: 

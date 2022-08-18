@@ -41,7 +41,7 @@ var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 
 var animation = "idle_down"
-var MAX_SPEED := 12.5
+var MAX_SPEED := 40 #12.5
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -61,6 +61,7 @@ var color8
 const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
+	PlayerInventory.player = self
 	set_username("")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	PlayerStats.connect("health_depleted", self, "player_death")

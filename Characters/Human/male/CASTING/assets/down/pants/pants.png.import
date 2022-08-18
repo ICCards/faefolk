@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pants.png-ad90220115887628426685d6e6ccec48.stex"
+path="res://.import/pants.png-f9f0fbcc3d5dd542e1a8b427cd8623a9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Human/male/CASTING/assets/up/pants/pants.png"
-dest_files=[ "res://.import/pants.png-ad90220115887628426685d6e6ccec48.stex" ]
+source_file="res://Characters/Human/male/CASTING/assets/down/pants/pants.png"
+dest_files=[ "res://.import/pants.png-f9f0fbcc3d5dd542e1a8b427cd8623a9.stex" ]
 
 [params]
 

@@ -208,6 +208,7 @@ func DespawnPlayer(player_id):
 	
 	
 func buildMap(map):
+	PlayerInventory.current = true
 	Tiles.valid_tiles = $WorldNavigation/ValidTiles
 	build_valid_tiles()
 	print("BUILDING MAP")

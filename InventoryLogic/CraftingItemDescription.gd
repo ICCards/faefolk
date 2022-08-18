@@ -64,4 +64,3 @@ func set_size_of_description(x):
 		width = 58 + ((x - 210) / 5)
 	var lines = $ItemDescription.get_line_count()
 	height = (40 + (lines * 14) + (amount_ingredients * 12))
-	print(height)

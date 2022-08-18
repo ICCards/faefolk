@@ -74,7 +74,10 @@ func _physics_process(_delta):
 				if item_name == "wood" or item_name == "stone ore":
 					pass
 					#RustCalls.mint_object(item_name)
-				PlayerInventory.add_item_to_hotbar(item_name, quantity, health)
+				if PlayerInventory.current:
+					PlayerInventory.add_item_to_hotbar(item_name, quantity, health)
+				else:
+					PlayerInventoryNftScene.add_item_to_hotbar(item_name, quantity, health)
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")

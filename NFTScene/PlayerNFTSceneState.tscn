@@ -1,34 +1,33 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=63 format=2]
 
-[ext_resource path="res://UserInterface.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/potato.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Human/male/CASTING/body/right/body.png" type="Texture" id=3]
-[ext_resource path="res://Characters/Human/male/CASTING/body/right/arms.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Misc/exclamation icon.png" type="Texture" id=5]
+[ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=1]
+[ext_resource path="res://World/Player/Player/AttachedScripts/PlaceItemsUI.gd" type="Script" id=2]
+[ext_resource path="res://World/Player/Player/AttachedScripts/SwordSwing.gd" type="Script" id=3]
+[ext_resource path="res://Characters/Weapon swings/sword/left.png" type="Texture" id=4]
+[ext_resource path="res://Characters/Weapon swings/sword/right.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
-[ext_resource path="res://Characters/Human/male/RETRACTING/assets/right/head_attribute/hair.png" type="Texture" id=7]
-[ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://Characters/Weapon swings/sword/left.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=10]
-[ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
-[ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
-[ext_resource path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" type="Script" id=14]
-[ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
-[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=17]
-[ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=18]
-[ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=19]
-[ext_resource path="res://World/Player/Player/AttachedScripts/PlaceItemsUI.gd" type="Script" id=21]
-[ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
-[ext_resource path="res://World/Player/Player/AttachedScripts/DetectPathType.gd" type="Script" id=23]
-[ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=24]
+[ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=7]
+[ext_resource path="res://Characters/Human/male/CASTING/body/right/body.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/inventory_icons/Food/potato.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=10]
+[ext_resource path="res://World/Player/Player/PlayerHitEffect.tscn" type="PackedScene" id=11]
+[ext_resource path="res://NFTScene/HotbarNftScene.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Characters/Human/male/CASTING/body/right/arms.png" type="Texture" id=14]
+[ext_resource path="res://Characters/Human/male/RETRACTING/assets/right/head_attribute/hair.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=17]
+[ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=18]
+[ext_resource path="res://NFTScene/InventoryNftScene.tscn" type="PackedScene" id=19]
+[ext_resource path="res://World/Player/Player/AttachedScripts/DetectPathType.gd" type="Script" id=20]
+[ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=21]
+[ext_resource path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" type="Script" id=22]
+[ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=23]
+[ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=24]
 [ext_resource path="res://Assets/Images/Misc/chat bubble.png" type="Texture" id=25]
-[ext_resource path="res://World/Player/Player/AttachedScripts/EnterInteractiveZones.gd" type="Script" id=26]
-[ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
-[ext_resource path="res://World/Player/Player/PlayerHitEffect.tscn" type="PackedScene" id=33]
-[ext_resource path="res://World/Player/Player/AttachedScripts/SwordSwing.gd" type="Script" id=34]
-[ext_resource path="res://Characters/Weapon swings/sword/right.png" type="Texture" id=36]
+[ext_resource path="res://NFTScene/PlayerNFTSceneState.gd" type="Script" id=26]
+[ext_resource path="res://NFTScene/UserInterface.gd" type="Script" id=27]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MeleeSwing/CollisionShape2D:disabled")
@@ -112,7 +111,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 36 ) ]
+"values": [ ExtResource( 5 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("ToolEquipped:show_behind_parent")
@@ -307,7 +306,7 @@ tracks/22/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=2]
 resource_name = "cast_down"
 length = 0.8
 tracks/0/type = "value"
@@ -407,7 +406,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=3]
 resource_name = "cast_left"
 length = 0.8
 tracks/0/type = "value"
@@ -507,7 +506,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=4]
 resource_name = "cast_right"
 length = 0.8
 tracks/0/type = "value"
@@ -607,7 +606,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=5]
 resource_name = "cast_up"
 length = 0.8
 tracks/0/type = "value"
@@ -707,7 +706,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=6]
 resource_name = "death"
 length = 5.0
 tracks/0/type = "value"
@@ -795,43 +794,19 @@ tracks/6/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("../Camera2D/UserInterface/DeathEffect:color")
+tracks/7/path = NodePath("../HurtBox/CollisionShape2D:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 1.5, 5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0.0117647, 0.0117647, 0.517647 ), Color( 0.611765, 0.0117647, 0.0117647, 0.517647 ) ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("../Camera2D/UserInterface/DeathEffect:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("../HurtBox/CollisionShape2D:disabled")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=7]
 resource_name = "eat"
 length = 1.35
 step = 0.05
@@ -1028,7 +1003,7 @@ tracks/15/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=8]
 resource_name = "idle"
 length = 0.8
 loop = true
@@ -1129,7 +1104,7 @@ tracks/7/keys = {
 "values": [ Vector2( -16, -75 ), Vector2( -16, -73 ), Vector2( -16, -73 ), Vector2( -16, -75 ) ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=9]
 resource_name = "movement"
 length = 0.8
 loop = true
@@ -1230,7 +1205,7 @@ tracks/7/keys = {
 "values": [ Vector2( -16, -74 ), Vector2( -16, -72 ), Vector2( -16, -74 ), Vector2( -16, -72 ) ]
 }
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=10]
 resource_name = "retract"
 length = 0.8
 tracks/0/type = "value"
@@ -1330,7 +1305,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=11]
 resource_name = "sleep"
 length = 0.8
 tracks/0/type = "value"
@@ -1418,7 +1393,7 @@ tracks/6/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=12]
 resource_name = "swing_down"
 length = 0.8
 tracks/0/type = "value"
@@ -1578,7 +1553,7 @@ tracks/12/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=13]
 resource_name = "swing_left"
 length = 0.8
 tracks/0/type = "value"
@@ -1738,7 +1713,7 @@ tracks/12/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=14]
 resource_name = "swing"
 length = 0.8
 tracks/0/type = "value"
@@ -1898,7 +1873,7 @@ tracks/12/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=15]
 resource_name = "swing_up"
 length = 0.8
 tracks/0/type = "value"
@@ -2058,7 +2033,7 @@ tracks/12/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=16]
 resource_name = "sword_swing_down"
 length = 0.6
 step = 0.05
@@ -2231,7 +2206,7 @@ tracks/13/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=17]
 resource_name = "sword_swing_left"
 length = 0.6
 step = 0.05
@@ -2401,7 +2376,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 9 ) ]
+"values": [ ExtResource( 4 ) ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("ToolEquipped:show_behind_parent")
@@ -2416,7 +2391,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=18]
 resource_name = "sword_swing_right"
 length = 0.6
 step = 0.05
@@ -2586,7 +2561,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 36 ) ]
+"values": [ ExtResource( 5 ) ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("ToolEquipped:show_behind_parent")
@@ -2601,7 +2576,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id=19]
 resource_name = "sword_swing_up"
 length = 0.6
 step = 0.05
@@ -2774,7 +2749,7 @@ tracks/13/keys = {
 "values": [ Vector2( -6, -10 ), Vector2( 3, -12 ), Vector2( 1, -13 ), Vector2( 3, -17 ) ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=20]
 resource_name = "watering_down"
 length = 0.8
 tracks/0/type = "value"
@@ -2912,7 +2887,7 @@ tracks/10/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=21]
 resource_name = "watering_left"
 length = 0.8
 tracks/0/type = "value"
@@ -3050,7 +3025,7 @@ tracks/10/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=22]
 resource_name = "watering_right"
 length = 0.8
 tracks/0/type = "value"
@@ -3188,7 +3163,7 @@ tracks/10/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=23]
 resource_name = "watering_up"
 length = 0.8
 tracks/0/type = "value"
@@ -3314,188 +3289,11 @@ tracks/9/keys = {
 "values": [ Vector2( 0, -16 ) ]
 }
 
-[sub_resource type="Animation" id=45]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("ExclamationPoint:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 17, -67 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ExclamationPoint:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("BiteLabel:rect_scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0.4, 0.4 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("BiteLabel:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BiteLabel:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("ExclamationPoint:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=46]
-resource_name = "bite"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("ExclamationPoint:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 5.27803 ),
-"update": 0,
-"values": [ Vector2( 0, -61 ), Vector2( 0, -70 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ExclamationPoint:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("ExclamationPoint:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=47]
-resource_name = "hit"
-tracks/0/type = "value"
-tracks/0/path = NodePath("BiteLabel:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.4, 0.4 ), Vector2( 0.5, 0.5 ), Vector2( 0.1, 0.1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("BiteLabel:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("BiteLabel:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.7, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="CapsuleShape2D" id=11]
+[sub_resource type="CapsuleShape2D" id=24]
 radius = 8.00011
 height = 7.99978
 
-[sub_resource type="CapsuleShape2D" id=28]
-radius = 23.7778
-height = 13.3333
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1, 1 )
-
-[sub_resource type="CapsuleShape2D" id=9]
-radius = 39.746
-height = 22.2163
-
-[sub_resource type="CircleShape2D" id=10]
-
-[sub_resource type="CircleShape2D" id=15]
-radius = 1.0
-
-[sub_resource type="StyleBoxTexture" id=14]
-texture = ExtResource( 25 )
-region_rect = Rect2( 0, 0, 46, 14 )
-expand_margin_left = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 4.0
-
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=31]
 resource_name = "Animate1"
 length = 1.2
 step = 0.01
@@ -3544,7 +3342,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=32]
 resource_name = "Animate2"
 length = 1.2
 step = 0.01
@@ -3593,7 +3391,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=33]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Label:rect_position:x")
@@ -3640,11 +3438,11 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=21]
+[sub_resource type="CapsuleShape2D" id=34]
 radius = 20.0
 height = 7.5
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=35]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D:disabled")
@@ -3671,7 +3469,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=36]
 resource_name = "hit"
 length = 0.9
 step = 0.05
@@ -3700,33 +3498,48 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[node name="Player" type="KinematicBody2D"]
-script = ExtResource( 8 )
+[sub_resource type="CapsuleShape2D" id=25]
+radius = 23.7778
+height = 13.3333
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.9, 0.9 )
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 1, 1 )
 
-[node name="UserInterface" parent="Camera2D" instance=ExtResource( 1 )]
+[sub_resource type="CapsuleShape2D" id=27]
+radius = 39.746
+height = 22.2163
+
+[sub_resource type="CircleShape2D" id=28]
+
+[sub_resource type="StyleBoxTexture" id=30]
+texture = ExtResource( 25 )
+region_rect = Rect2( 0, 0, 46, 14 )
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="CircleShape2D" id=37]
+
+[node name="PlayerNFTSceneState" type="KinematicBody2D"]
+script = ExtResource( 26 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 scale = Vector2( 1.8, 1.8 )
-script = ExtResource( 22 )
+script = ExtResource( 1 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 3 )
+texture = ExtResource( 8 )
 hframes = 4
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
-visible = false
 position = Vector2( 0, -16 )
-texture = ExtResource( 7 )
+texture = ExtResource( 15 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 4 )
+texture = ExtResource( 14 )
 hframes = 4
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
@@ -3748,33 +3561,33 @@ hframes = 4
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 show_behind_parent = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 36 )
+texture = ExtResource( 5 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
-anims/RESET = SubResource( 3 )
-anims/cast_down = SubResource( 40 )
-anims/cast_left = SubResource( 41 )
-anims/cast_right = SubResource( 42 )
-anims/cast_up = SubResource( 43 )
-anims/death = SubResource( 27 )
-anims/eat = SubResource( 39 )
-anims/idle = SubResource( 4 )
-anims/movement = SubResource( 38 )
-anims/retract = SubResource( 44 )
-anims/sleep = SubResource( 33 )
-anims/swing_down = SubResource( 5 )
-anims/swing_left = SubResource( 6 )
-anims/swing_right = SubResource( 7 )
-anims/swing_up = SubResource( 8 )
-anims/sword_swing_down = SubResource( 31 )
-anims/sword_swing_left = SubResource( 30 )
-anims/sword_swing_right = SubResource( 29 )
-anims/sword_swing_up = SubResource( 32 )
-anims/watering_down = SubResource( 34 )
-anims/watering_left = SubResource( 35 )
-anims/watering_right = SubResource( 36 )
-anims/watering_up = SubResource( 37 )
+anims/RESET = SubResource( 1 )
+anims/cast_down = SubResource( 2 )
+anims/cast_left = SubResource( 3 )
+anims/cast_right = SubResource( 4 )
+anims/cast_up = SubResource( 5 )
+anims/death = SubResource( 6 )
+anims/eat = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/movement = SubResource( 9 )
+anims/retract = SubResource( 10 )
+anims/sleep = SubResource( 11 )
+anims/swing_down = SubResource( 12 )
+anims/swing_left = SubResource( 13 )
+anims/swing_right = SubResource( 14 )
+anims/swing_up = SubResource( 15 )
+anims/sword_swing_down = SubResource( 16 )
+anims/sword_swing_left = SubResource( 17 )
+anims/sword_swing_right = SubResource( 18 )
+anims/sword_swing_up = SubResource( 19 )
+anims/watering_down = SubResource( 20 )
+anims/watering_left = SubResource( 21 )
+anims/watering_right = SubResource( 22 )
+anims/watering_up = SubResource( 23 )
 
 [node name="WateringCanParticles" type="CPUParticles2D" parent="CompositeSprites"]
 modulate = Color( 0.196078, 0.435294, 0.937255, 1 )
@@ -3902,39 +3715,26 @@ initial_velocity_random = 0.5
 scale_amount = 3.0
 scale_amount_random = 0.5
 
-[node name="Fishing" type="Node2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
 
-[node name="ExclamationPoint" type="Sprite" parent="Fishing"]
+[node name="UserInterface" type="CanvasLayer" parent="Camera2D"]
+script = ExtResource( 27 )
+
+[node name="HotbarNftScene" parent="Camera2D/UserInterface" instance=ExtResource( 12 )]
+position = Vector2( 281, 516 )
+
+[node name="InventoryNftScene" parent="Camera2D/UserInterface" instance=ExtResource( 19 )]
 visible = false
-position = Vector2( 17, -67 )
-texture = ExtResource( 5 )
+position = Vector2( 381, 72 )
 
-[node name="BiteLabel" type="Label" parent="Fishing"]
-visible = false
-margin_left = -33.0
-margin_right = 133.0
-margin_bottom = 94.0
-rect_scale = Vector2( 0.4, 0.4 )
-theme = ExtResource( 10 )
-text = "BITE!"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Fishing"]
-anims/RESET = SubResource( 45 )
-anims/bite = SubResource( 46 )
-anims/hit = SubResource( 47 )
-
-[node name="CastingProgress" type="ProgressBar" parent="Fishing"]
-visible = false
-margin_left = -36.0
-margin_top = -69.0
-margin_right = 44.0
-margin_bottom = -55.0
+[node name="SoundEffects" type="AudioStreamPlayer" parent="Camera2D/UserInterface"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
-shape = SubResource( 11 )
+shape = SubResource( 24 )
 
 [node name="HoldingItem" type="TextureRect" parent="."]
 visible = false
@@ -3944,37 +3744,64 @@ margin_right = 16.0
 margin_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource( 2 )
+texture = ExtResource( 9 )
+
+[node name="HurtBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 18 )
+
+[node name="PlayerHitEffect" parent="HurtBox" instance=ExtResource( 11 )]
+position = Vector2( -11.1111, -24.4444 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Label" parent="HurtBox/PlayerHitEffect" index="0"]
+visible = true
+text = ""
+
+[node name="AnimationPlayer" parent="HurtBox/PlayerHitEffect" index="1"]
+anims/Animate1 = SubResource( 31 )
+anims/Animate2 = SubResource( 32 )
+anims/RESET = SubResource( 33 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 0, -20 )
+shape = SubResource( 34 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+anims/RESET = SubResource( 35 )
+anims/hit = SubResource( 36 )
 
 [node name="SwordSwing" type="Area2D" parent="."]
 visible = false
 collision_layer = 256
 collision_mask = 0
-script = ExtResource( 34 )
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing"]
 position = Vector2( 0, 12 )
 rotation = 1.5708
-shape = SubResource( 28 )
+shape = SubResource( 25 )
 disabled = true
 
 [node name="MeleeSwing" type="Area2D" parent="."]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeSwing"]
-shape = SubResource( 2 )
+shape = SubResource( 26 )
 
 [node name="PickupZone" type="Area2D" parent="."]
 visible = false
 scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4
-script = ExtResource( 12 )
+script = ExtResource( 24 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
 position = Vector2( 0, -31.6016 )
 scale = Vector2( 1.0756, 1.07153 )
-shape = SubResource( 9 )
+shape = SubResource( 27 )
 
 [node name="EnterDoors" type="Area2D" parent="."]
 visible = false
@@ -3982,7 +3809,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoors"]
-shape = SubResource( 10 )
+shape = SubResource( 28 )
 
 [node name="EnterTreeTop" type="Area2D" parent="."]
 visible = false
@@ -3992,16 +3819,16 @@ collision_mask = 4096
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTreeTop"]
 position = Vector2( 0, -43 )
-shape = SubResource( 10 )
+shape = SubResource( 28 )
 
 [node name="PlaceItemsUI" type="Node2D" parent="."]
-script = ExtResource( 21 )
+script = ExtResource( 2 )
 
 [node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
 visible = false
 position = Vector2( 0, 32 )
 z_index = 1
-texture = ExtResource( 19 )
+texture = ExtResource( 23 )
 offset = Vector2( 16, -16 )
 
 [node name="ItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
@@ -4011,7 +3838,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource( 17 )
+texture = ExtResource( 10 )
 
 [node name="ScaledItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
 visible = false
@@ -4020,7 +3847,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource( 17 )
+texture = ExtResource( 10 )
 stretch_mode = 1
 
 [node name="RotateIcon" type="TextureRect" parent="PlaceItemsUI"]
@@ -4030,84 +3857,124 @@ margin_top = 32.0
 margin_right = 48.0
 margin_bottom = 48.0
 rect_scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 11 )
+texture = ExtResource( 16 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="PlaceItemsUI"]
 visible = false
 
-[node name="EnterInteractiveZones" type="Node2D" parent="."]
-visible = false
-script = ExtResource( 26 )
+[node name="EatingParticles" type="Node2D" parent="PlaceItemsUI"]
 
-[node name="ChestArea" type="Area2D" parent="EnterInteractiveZones"]
-collision_layer = 65536
-collision_mask = 0
+[node name="EatingParticles1" type="CPUParticles2D" parent="PlaceItemsUI/EatingParticles"]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.3
+explosiveness = 1.0
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/ChestArea"]
-shape = SubResource( 15 )
+[node name="EatingParticles2" type="CPUParticles2D" parent="PlaceItemsUI/EatingParticles"]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.3
+explosiveness = 1.0
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
 
-[node name="WorkbenchArea" type="Area2D" parent="EnterInteractiveZones"]
-collision_layer = 131072
-collision_mask = 0
+[node name="EatingParticles3" type="CPUParticles2D" parent="PlaceItemsUI/EatingParticles"]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.3
+explosiveness = 1.0
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/WorkbenchArea"]
-shape = SubResource( 15 )
+[node name="EatingParticles4" type="CPUParticles2D" parent="PlaceItemsUI/EatingParticles"]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.3
+explosiveness = 1.0
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
 
-[node name="StoveArea" type="Area2D" parent="EnterInteractiveZones"]
-collision_layer = 262144
-collision_mask = 0
+[node name="EatingParticles5" type="CPUParticles2D" parent="PlaceItemsUI/EatingParticles"]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.3
+explosiveness = 1.0
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/StoveArea"]
-shape = SubResource( 15 )
+[node name="EatingParticles6" type="CPUParticles2D" parent="PlaceItemsUI/EatingParticles"]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.3
+explosiveness = 1.0
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
 
-[node name="GrainMillArea" type="Area2D" parent="EnterInteractiveZones"]
-collision_layer = 524288
-collision_mask = 0
+[node name="EatingParticles7" type="CPUParticles2D" parent="PlaceItemsUI/EatingParticles"]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.3
+explosiveness = 1.0
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/GrainMillArea"]
-shape = SubResource( 15 )
-
-[node name="SleepingBag" type="Area2D" parent="EnterInteractiveZones"]
-collision_layer = 32768
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/SleepingBag"]
-shape = SubResource( 15 )
-
-[node name="DetectPathType" type="Node2D" parent="."]
-visible = false
-script = ExtResource( 23 )
-
-[node name="DetectWoodPath" type="Area2D" parent="DetectPathType"]
-collision_layer = 512
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathType/DetectWoodPath"]
-shape = SubResource( 10 )
-
-[node name="DetectStonePath" type="Area2D" parent="DetectPathType"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathType/DetectStonePath"]
-shape = SubResource( 10 )
-
-[node name="FootstepsSound" type="AudioStreamPlayer2D" parent="DetectPathType"]
-position = Vector2( 0, 11 )
-stream = ExtResource( 6 )
-autoplay = true
+[node name="EatingParticles8" type="CPUParticles2D" parent="PlaceItemsUI/EatingParticles"]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.3
+explosiveness = 1.0
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 16 )
+stream = ExtResource( 17 )
 volume_db = -16.0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 autoplay = true
-script = ExtResource( 18 )
+script = ExtResource( 21 )
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
 autoplay = true
-script = ExtResource( 14 )
+script = ExtResource( 22 )
 
 [node name="MessageBubble" type="Label" parent="."]
 visible = false
@@ -4122,8 +3989,8 @@ grow_horizontal = 2
 grow_vertical = 0
 rect_scale = Vector2( 0.7, 0.7 )
 rect_pivot_offset = Vector2( 70, 0 )
-theme = ExtResource( 24 )
-custom_styles/normal = SubResource( 14 )
+theme = ExtResource( 7 )
+custom_styles/normal = SubResource( 30 )
 text = "hello"
 align = 1
 valign = 1
@@ -4135,52 +4002,38 @@ margin_right = 31.0
 margin_bottom = 28.0
 grow_horizontal = 2
 rect_scale = Vector2( 1, 0.9 )
-theme = ExtResource( 24 )
+theme = ExtResource( 7 )
 align = 1
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="DetectPathType" type="Node2D" parent="."]
 visible = false
-collision_layer = 0
-collision_mask = 128
-script = ExtResource( 32 )
+script = ExtResource( 20 )
 
-[node name="PlayerHitEffect" parent="HurtBox" instance=ExtResource( 33 )]
-position = Vector2( -11.1111, -24.4444 )
-scale = Vector2( 0.5, 0.5 )
+[node name="DetectWoodPath" type="Area2D" parent="DetectPathType"]
+collision_layer = 512
+collision_mask = 0
 
-[node name="Label" parent="HurtBox/PlayerHitEffect" index="0"]
-visible = true
-text = ""
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathType/DetectWoodPath"]
+shape = SubResource( 37 )
 
-[node name="AnimationPlayer" parent="HurtBox/PlayerHitEffect" index="1"]
-anims/Animate1 = SubResource( 24 )
-anims/Animate2 = SubResource( 25 )
-anims/RESET = SubResource( 26 )
+[node name="DetectStonePath" type="Area2D" parent="DetectPathType"]
+collision_layer = 1024
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2( 0, -20 )
-shape = SubResource( 21 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathType/DetectStonePath"]
+shape = SubResource( 37 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
-anims/RESET = SubResource( 23 )
-anims/hit = SubResource( 22 )
+[node name="FootstepsSound" type="AudioStreamPlayer2D" parent="DetectPathType"]
+position = Vector2( 0, 11 )
+stream = ExtResource( 6 )
+autoplay = true
 
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/ChestArea" to="EnterInteractiveZones" method="_on_ChestArea_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/ChestArea" to="EnterInteractiveZones" method="_on_ChestArea_area_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/WorkbenchArea" to="EnterInteractiveZones" method="_on_WorkbenchArea_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/WorkbenchArea" to="EnterInteractiveZones" method="_on_WorkbenchArea_area_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/StoveArea" to="EnterInteractiveZones" method="_on_StoveArea_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/StoveArea" to="EnterInteractiveZones" method="_on_StoveArea_area_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/GrainMillArea" to="EnterInteractiveZones" method="_on_GrainMillArea_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/GrainMillArea" to="EnterInteractiveZones" method="_on_GrainMillArea_area_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/SleepingBag" to="EnterInteractiveZones" method="_on_SleepingBag_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/SleepingBag" to="EnterInteractiveZones" method="_on_SleepingBag_area_exited"]
 [connection signal="area_entered" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_entered"]
 [connection signal="area_exited" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_exited"]
 [connection signal="area_entered" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_entered"]
 [connection signal="area_exited" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_exited"]
-[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
 
 [editable path="HurtBox/PlayerHitEffect"]

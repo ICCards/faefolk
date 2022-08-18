@@ -42,10 +42,10 @@ func setTexture(tree):
 	$TreeChipParticles.texture = tree.chip 
 	$TreeLeavesParticles.texture = tree.leaves
 	match biome:
-		"forest":
-			treeTopSprite.texture = tree.topTree
 		"snow":
 			treeTopSprite.texture = tree.topTreeWinter
+		_:
+			treeTopSprite.texture = tree.topTree
 	
 onready var timer = $Timer
 func set_random_leaves_falling():
@@ -121,7 +121,7 @@ func _on_Hurtbox_area_entered(_area):
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
 		
-		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:	
+		if PlayerInventory.player.get_position().x <= get_position().x:	
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			tree_animation_player.play("tree hit right")
 		else: 
@@ -136,7 +136,7 @@ func _on_Hurtbox_area_entered(_area):
 		$SoundEffectsTree.stream = Sounds.tree_break
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
-		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
+		if PlayerInventory.player.get_position().x <= get_position().x:
 			tree_animation_player.play("tree fall right")
 			yield(tree_animation_player, "animation_finished" )
 			intitiateItemDrop("wood", Vector2(130, -8), 7)
@@ -150,7 +150,7 @@ func _on_Hurtbox_area_entered(_area):
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
-		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
+		if PlayerInventory.player.get_position().x <= get_position().x:
 			stump_animation_player.play("stump hit right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 		else: 

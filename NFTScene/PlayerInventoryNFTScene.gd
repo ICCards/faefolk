@@ -21,38 +21,20 @@ var is_inside_grain_mill_area = false
 var is_inside_sleeping_bag_area = false
 var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
-var current
-var player
 
 var inventory = {
-	5: ["tomato seeds", 30, null],
-	2: ["blueberry seeds", 60, null],
-	6: ["corn seeds", 60, null],
-	9: ["potato seeds", 30, null],
 	3: ["radish seeds", 30, null],
-	4: ["wood", 299, null],
-	1: ["wood", 499, null],
-	7: ["stone", 699, null],
-	8: ["stone", 799, null],
+	4: ["wood", 10, null],
+	5: ["stone", 10, null]
 
 }
 
 var hotbar = {
-#	0: ["potato", 30, null],
-#	1: ["tomato", 30, null],
-#	2: ["yellow onion", 30, null],
-	3: ["carrot", 30, null],
-	4: ["grape", 30, null],
-	0: ["fishing rod", 1, null],
-	
-#	2: ["hammer", 1, null],
-#	3: ["blueprint", 1, null],
-	5: ["wood sword", 1, 20],
-#	6: ["stone watering can", 1, 25],
-#	7: ["wood hoe", 1, 7], 
-#	8: ["wood axe", 1, 3],
-#	1: ["wood axe", 1, 3],
-#	9:["wood pickaxe", 1, 5],
+	5: ["wood sword", 1, 25],
+	6: ["stone watering can", 1, 25],
+	7: ["wood hoe", 1, 25], 
+	8: ["wood axe", 1, 25],
+	9:["wood pickaxe", 1, 25],
 }
 
 var chest = {
@@ -111,25 +93,6 @@ func remove_material(item, amount):
 					update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1])
 
 
-# Location of bottom left tile
-var player_home = {
-	0 : ["Fireplace", Vector2(2,0)],
-	1 : ["Crafting_table", Vector2(8,0)],
-	2 : ["Shelves", Vector2(16,0)],
-	3 : ["Left_chair", Vector2(2,6)],
-	4 : ["Middle_chair", Vector2(4, 5)],
-	5 : ["Right_chair", Vector2(5, 6)],
-	6 : ["Table", Vector2(3, 7)],
-	7 : ["Rug", Vector2(10, 7)],
-	8 : ["Side_dresser", Vector2(19, 5)],
-	9 : ["Bed", Vector2(18, 9)],
-	10 : ["Small_dresser", Vector2(10,0)],
-	11 : ["Stool", Vector2(4, 8)],
-	12 : ["Window 1", Vector2(5, -2)],
-	13 : ["Window 2", Vector2(14, -2)],
-	14 : ["Painting1", Vector2(9, -2)]
-}
-var isFireplaceLit = false
 
 func remove_single_object_from_hotbar():
 	hotbar[active_item_slot][1] -= 1
@@ -188,7 +151,7 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 		pass
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/HotbarNftScene/HotbarSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
@@ -199,7 +162,7 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity, null)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Inventory/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/InventoryNftScene/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
@@ -210,16 +173,6 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity, null)
 		
 
-func update_chest_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
-	if slot.item != null:
-		if new_quantity == 0:
-			remove_item(slot)
-			slot.removeFromSlot()
-		else:
-			slot.item.set_item(item_name, new_quantity)
-	else:
-		slot.initialize_item(item_name, new_quantity)
 
 func remove_item(slot: SlotClass):
 	match slot.slotType:

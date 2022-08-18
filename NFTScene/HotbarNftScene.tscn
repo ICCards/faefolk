@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
-[ext_resource path="res://World/Player/Player/UserInterface/scripts/Hotbar.gd" type="Script" id=2]
+[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/hotbar new.png" type="Texture" id=3]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=4]
+[ext_resource path="res://NFTScene/HotbarNftScene.gd" type="Script" id=4]
 
-[node name="Hotbar" type="Node2D"]
-script = ExtResource( 2 )
+[node name="HotbarNftScene" type="Node2D"]
+script = ExtResource( 4 )
 
-[node name="ItemDescription" parent="." instance=ExtResource( 4 )]
+[node name="ItemDescription" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1080, -94 )
 z_index = 2
 
