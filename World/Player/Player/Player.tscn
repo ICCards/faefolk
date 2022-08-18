@@ -3719,6 +3719,7 @@ texture = ExtResource( 3 )
 hframes = 4
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
+visible = false
 position = Vector2( 0, -16 )
 texture = ExtResource( 7 )
 hframes = 4
@@ -3745,11 +3746,11 @@ position = Vector2( 0, -16 )
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
+visible = false
 show_behind_parent = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 36 )
 hframes = 4
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 anims/RESET = SubResource( 3 )
@@ -3922,6 +3923,12 @@ text = "BITE!"
 anims/RESET = SubResource( 45 )
 anims/bite = SubResource( 46 )
 anims/hit = SubResource( 47 )
+
+[node name="CastingProgress" type="ProgressBar" parent="Fishing"]
+margin_left = -36.0
+margin_top = -69.0
+margin_right = 44.0
+margin_bottom = -55.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
