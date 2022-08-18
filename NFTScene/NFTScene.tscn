@@ -1,47 +1,44 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=66 format=2]
 
-[ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
-[ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
-[ext_resource path="res://Assets/Themes/waves.tres" type="TileSet" id=3]
-[ext_resource path="res://Assets/tilesets/grass_tilesets.png" type="Texture" id=4]
-[ext_resource path="res://Assets/tilesets/hoed_layer.png" type="Texture" id=5]
-[ext_resource path="res://Assets/tilesets/CL_MainLev.png" type="Texture" id=6]
-[ext_resource path="res://World/World/World.gd" type="Script" id=7]
-[ext_resource path="res://Assets/tilesets/CL_Crafting.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/Animations/torch/torch.tres" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/Animations/campfire/campfire.tres" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/Animations/fire pedestal tall/fire_pedestal_tall.tres" type="Texture" id=11]
+[ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=1]
+[ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=2]
+[ext_resource path="res://Assets/tilesets/CL_MainLev_winter.png" type="Texture" id=3]
+[ext_resource path="res://NFTScene/NFTScene.gd" type="Script" id=4]
+[ext_resource path="res://Assets/tilesets/MainLev2.0.png" type="Texture" id=5]
+[ext_resource path="res://Assets/tilesets/hoed_layer.png" type="Texture" id=6]
+[ext_resource path="res://Assets/tilesets/cropped tileset.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Themes/waves.tres" type="TileSet" id=8]
+[ext_resource path="res://Assets/tilesets/grass_tilesets.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/Animations/fire pedestal tall/fire_pedestal_tall.tres" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/Animations/ocean/waves/a/wave1.tres" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/Animations/fire pedestal/fire_pedestal.tres" type="Texture" id=12]
-[ext_resource path="res://Assets/tilesets/CL_MainLev_winter.png" type="Texture" id=13]
-[ext_resource path="res://Assets/tilesets/MainLev2.0.png" type="Texture" id=14]
-[ext_resource path="res://World/Objects/Nature/Particles/RoamingStorm.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/Images/Animations/ocean/waves/a/wave1.tres" type="Texture" id=16]
-[ext_resource path="res://Assets/Images/Animations/ocean/waves/d/waveD.tres" type="Texture" id=17]
-[ext_resource path="res://Assets/Images/Animations/ocean/waves/b/waveB.tres" type="Texture" id=18]
-[ext_resource path="res://Assets/Images/Animations/ocean/waves/c/waveC.tres" type="Texture" id=19]
-[ext_resource path="res://World/Map/WorldMap.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=22]
-[ext_resource path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Assets/tilesets/cropped tileset.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Images/Animations/torch/torch.tres" type="Texture" id=13]
+[ext_resource path="res://Assets/Images/Animations/campfire/campfire.tres" type="Texture" id=14]
+[ext_resource path="res://Assets/Images/Animations/ocean/waves/d/waveD.tres" type="Texture" id=15]
+[ext_resource path="res://Assets/Images/Animations/ocean/waves/b/waveB.tres" type="Texture" id=16]
+[ext_resource path="res://Assets/Images/Animations/ocean/waves/c/waveC.tres" type="Texture" id=17]
+[ext_resource path="res://Assets/tilesets/CL_MainLev.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=19]
+[ext_resource path="res://Assets/tilesets/CL_Crafting.png" type="Texture" id=20]
 
-[sub_resource type="NavigationPolygon" id=338]
+[sub_resource type="NavigationPolygon" id=266]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
-[sub_resource type="NavigationPolygon" id=339]
+[sub_resource type="NavigationPolygon" id=294]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
-[sub_resource type="TileSet" id=24]
+[sub_resource type="TileSet" id=319]
 0/name = "unoccupied"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 18 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 1312, 800, 32, 32 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
-0/navigation = SubResource( 338 )
+0/navigation = SubResource( 266 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 0/shape_one_way = false
@@ -49,14 +46,14 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 1/name = "grass "
-1/texture = ExtResource( 6 )
+1/texture = ExtResource( 18 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 1632, 352, 32, 32 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
-1/navigation = SubResource( 339 )
+1/navigation = SubResource( 294 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 1/shape_one_way = false
@@ -64,9 +61,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="TileSet" id=236]
+[sub_resource type="TileSet" id=320]
 0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 18 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 416, 1280, 160, 224 )
@@ -80,7 +77,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 1/name = "CL_MainLev.png 1"
-1/texture = ExtResource( 6 )
+1/texture = ExtResource( 18 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 64, 1248, 64, 192 )
@@ -94,7 +91,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/shapes = [  ]
 1/z_index = 0
 2/name = "CL_MainLev.png 2"
-2/texture = ExtResource( 6 )
+2/texture = ExtResource( 18 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 1248, 64, 192 )
@@ -108,7 +105,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 2/shapes = [  ]
 2/z_index = 0
 3/name = "CL_MainLev.png 3"
-3/texture = ExtResource( 6 )
+3/texture = ExtResource( 18 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 640, 1280, 224, 256 )
@@ -122,7 +119,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 3/shapes = [  ]
 3/z_index = 0
 4/name = "CL_MainLev.png 4"
-4/texture = ExtResource( 6 )
+4/texture = ExtResource( 18 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 864, 1312, 160, 224 )
@@ -136,7 +133,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 4/shapes = [  ]
 4/z_index = 0
 5/name = "CL_MainLev.png 5"
-5/texture = ExtResource( 6 )
+5/texture = ExtResource( 18 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 576, 1312, 64, 64 )
@@ -150,7 +147,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 5/shapes = [  ]
 5/z_index = 0
 6/name = "CL_MainLev.png 6"
-6/texture = ExtResource( 6 )
+6/texture = ExtResource( 18 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 576, 1376, 64, 64 )
@@ -164,7 +161,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 6/shapes = [  ]
 6/z_index = 0
 7/name = "CL_MainLev.png 7"
-7/texture = ExtResource( 6 )
+7/texture = ExtResource( 18 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 256, 1152, 128, 128 )
@@ -178,7 +175,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 7/shapes = [  ]
 7/z_index = 0
 8/name = "CL_MainLev.png 8"
-8/texture = ExtResource( 6 )
+8/texture = ExtResource( 18 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 384, 1152, 128, 128 )
@@ -192,7 +189,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 8/shapes = [  ]
 8/z_index = 0
 9/name = "CL_MainLev.png 9"
-9/texture = ExtResource( 6 )
+9/texture = ExtResource( 18 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 512, 1152, 128, 128 )
@@ -206,7 +203,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 9/shapes = [  ]
 9/z_index = 0
 10/name = "CL_MainLev.png 10"
-10/texture = ExtResource( 6 )
+10/texture = ExtResource( 18 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
 10/region = Rect2( 640, 1152, 128, 128 )
@@ -220,9 +217,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 10/shapes = [  ]
 10/z_index = 0
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=321]
 0/name = "grass_tilesets.png 0"
-0/texture = ExtResource( 4 )
+0/texture = ExtResource( 9 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 640, 352 )
@@ -245,9 +242,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=3]
+[sub_resource type="TileSet" id=322]
 0/name = "grass_tilesets.png 0"
-0/texture = ExtResource( 4 )
+0/texture = ExtResource( 9 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 256, 640, 256 )
@@ -270,9 +267,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=262]
+[sub_resource type="TileSet" id=323]
 0/name = "MainLev2.0.png 0"
-0/texture = ExtResource( 14 )
+0/texture = ExtResource( 5 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 320, 992, 928, 192 )
@@ -295,9 +292,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=263]
+[sub_resource type="TileSet" id=324]
 0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 18 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 1088, 448, 704, 704 )
@@ -320,9 +317,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=261]
+[sub_resource type="TileSet" id=325]
 0/name = "CL_MainLev_winter.png 0"
-0/texture = ExtResource( 13 )
+0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 1088, 448, 704, 704 )
@@ -345,9 +342,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=260]
+[sub_resource type="TileSet" id=326]
 0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 18 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 1728, 704, 320, 192 )
@@ -370,9 +367,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=319]
+[sub_resource type="TileSet" id=327]
 0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 18 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 1536, 1152, 128, 256 )
@@ -393,9 +390,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=265]
+[sub_resource type="TileSet" id=328]
 0/name = "wave1.tres 0"
-0/texture = ExtResource( 16 )
+0/texture = ExtResource( 11 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 32, 32 )
@@ -409,7 +406,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 1/name = "waveB.tres 1"
-1/texture = ExtResource( 18 )
+1/texture = ExtResource( 16 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 32, 32 )
@@ -423,7 +420,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/shapes = [  ]
 1/z_index = 0
 2/name = "waveC.tres 2"
-2/texture = ExtResource( 19 )
+2/texture = ExtResource( 17 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 32, 32 )
@@ -437,7 +434,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 2/shapes = [  ]
 2/z_index = 0
 3/name = "waveD.tres 3"
-3/texture = ExtResource( 17 )
+3/texture = ExtResource( 15 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 0, 32, 32 )
@@ -451,9 +448,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 3/shapes = [  ]
 3/z_index = 0
 
-[sub_resource type="TileSet" id=233]
+[sub_resource type="TileSet" id=329]
 0/name = "CL_Crafting.png 0"
-0/texture = ExtResource( 8 )
+0/texture = ExtResource( 20 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 256, 64, 32, 32 )
@@ -467,7 +464,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 1/name = "CL_Crafting.png 1"
-1/texture = ExtResource( 8 )
+1/texture = ExtResource( 20 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 288, 64, 32, 32 )
@@ -481,7 +478,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/shapes = [  ]
 1/z_index = 0
 2/name = "CL_Crafting.png 2"
-2/texture = ExtResource( 8 )
+2/texture = ExtResource( 20 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 128, 128, 32, 32 )
@@ -495,7 +492,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 2/shapes = [  ]
 2/z_index = 0
 3/name = "CL_Crafting.png 3"
-3/texture = ExtResource( 8 )
+3/texture = ExtResource( 20 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 160, 128, 32, 32 )
@@ -509,7 +506,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 3/shapes = [  ]
 3/z_index = 0
 4/name = "CL_Crafting.png 4"
-4/texture = ExtResource( 8 )
+4/texture = ExtResource( 20 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 128, 160, 32, 32 )
@@ -523,7 +520,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 4/shapes = [  ]
 4/z_index = 0
 5/name = "CL_Crafting.png 5"
-5/texture = ExtResource( 8 )
+5/texture = ExtResource( 20 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 160, 160, 32, 32 )
@@ -537,7 +534,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 5/shapes = [  ]
 5/z_index = 0
 6/name = "CL_Crafting.png 6"
-6/texture = ExtResource( 8 )
+6/texture = ExtResource( 20 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 224, 128, 32, 32 )
@@ -551,7 +548,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 6/shapes = [  ]
 6/z_index = 0
 7/name = "CL_Crafting.png 7"
-7/texture = ExtResource( 8 )
+7/texture = ExtResource( 20 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 256, 128, 32, 32 )
@@ -565,7 +562,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 7/shapes = [  ]
 7/z_index = 0
 8/name = "CL_Crafting.png 8"
-8/texture = ExtResource( 8 )
+8/texture = ExtResource( 20 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 224, 160, 32, 32 )
@@ -579,7 +576,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 8/shapes = [  ]
 8/z_index = 0
 9/name = "CL_Crafting.png 9"
-9/texture = ExtResource( 8 )
+9/texture = ExtResource( 20 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 256, 160, 32, 32 )
@@ -593,96 +590,96 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 9/shapes = [  ]
 9/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=340]
+[sub_resource type="ConvexPolygonShape2D" id=299]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=341]
+[sub_resource type="ConvexPolygonShape2D" id=300]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=342]
+[sub_resource type="ConvexPolygonShape2D" id=301]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=343]
+[sub_resource type="ConvexPolygonShape2D" id=302]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=344]
+[sub_resource type="ConvexPolygonShape2D" id=303]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=345]
+[sub_resource type="ConvexPolygonShape2D" id=304]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="StreamTexture" id=267]
+[sub_resource type="StreamTexture" id=330]
 load_path = "res://.import/1.png-928147cc442d365e2e82ff4cf2b029cf.stex"
 
-[sub_resource type="StreamTexture" id=268]
+[sub_resource type="StreamTexture" id=331]
 load_path = "res://.import/2.png-c77f361e561629cc418a38d1a6741a11.stex"
 
-[sub_resource type="StreamTexture" id=269]
+[sub_resource type="StreamTexture" id=332]
 load_path = "res://.import/3.png-7b129090d2168bdd1f97f78d0f57ca12.stex"
 
-[sub_resource type="StreamTexture" id=270]
+[sub_resource type="StreamTexture" id=333]
 load_path = "res://.import/4.png-075e4939c626be87ee7ba2bcc05409ea.stex"
 
-[sub_resource type="StreamTexture" id=271]
+[sub_resource type="StreamTexture" id=334]
 load_path = "res://.import/5.png-098470cb2f2d8ffd6ff5b82671e644a4.stex"
 
-[sub_resource type="StreamTexture" id=272]
+[sub_resource type="StreamTexture" id=335]
 load_path = "res://.import/6.png-6e79c03a9d9d0c60a5a37e6a54433953.stex"
 
-[sub_resource type="AnimatedTexture" id=346]
+[sub_resource type="AnimatedTexture" id=305]
 frames = 6
 fps = 3.0
-frame_0/texture = SubResource( 267 )
-frame_1/texture = SubResource( 268 )
+frame_0/texture = SubResource( 330 )
+frame_1/texture = SubResource( 331 )
 frame_1/delay_sec = 0.0
-frame_2/texture = SubResource( 269 )
+frame_2/texture = SubResource( 332 )
 frame_2/delay_sec = 0.0
-frame_3/texture = SubResource( 270 )
+frame_3/texture = SubResource( 333 )
 frame_3/delay_sec = 0.0
-frame_4/texture = SubResource( 271 )
+frame_4/texture = SubResource( 334 )
 frame_4/delay_sec = 0.0
-frame_5/texture = SubResource( 272 )
+frame_5/texture = SubResource( 335 )
 frame_5/delay_sec = 0.0
 
-[sub_resource type="ConvexPolygonShape2D" id=347]
+[sub_resource type="ConvexPolygonShape2D" id=306]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=348]
+[sub_resource type="ConvexPolygonShape2D" id=307]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=349]
+[sub_resource type="ConvexPolygonShape2D" id=308]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=350]
+[sub_resource type="ConvexPolygonShape2D" id=309]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=351]
+[sub_resource type="ConvexPolygonShape2D" id=310]
 points = PoolVector2Array( 0, 64, 128, 64, 128, 192, 0, 192 )
 
-[sub_resource type="ConvexPolygonShape2D" id=352]
+[sub_resource type="ConvexPolygonShape2D" id=311]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=353]
+[sub_resource type="ConvexPolygonShape2D" id=312]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=354]
+[sub_resource type="ConvexPolygonShape2D" id=313]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=355]
+[sub_resource type="ConvexPolygonShape2D" id=314]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=356]
+[sub_resource type="ConvexPolygonShape2D" id=315]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=357]
+[sub_resource type="ConvexPolygonShape2D" id=316]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=358]
+[sub_resource type="ConvexPolygonShape2D" id=317]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="TileSet" id=255]
+[sub_resource type="TileSet" id=336]
 0/name = "CL_Crafting.png 0"
-0/texture = ExtResource( 8 )
+0/texture = ExtResource( 20 )
 0/tex_offset = Vector2( 0, -32 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 736, 64, 32, 64 )
@@ -691,19 +688,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 340 )
+0/shape = SubResource( 299 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 340 ),
+"shape": SubResource( 299 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
 1/name = "CL_Crafting.png 1"
-1/texture = ExtResource( 8 )
+1/texture = ExtResource( 20 )
 1/tex_offset = Vector2( 0, -32 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 704, 0, 32, 64 )
@@ -712,19 +709,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 341 )
+1/shape = SubResource( 300 )
 1/shape_one_way = false
 1/shape_one_way_margin = 1.0
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 341 ),
+"shape": SubResource( 300 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
 2/name = "CL_Crafting.png 2"
-2/texture = ExtResource( 8 )
+2/texture = ExtResource( 20 )
 2/tex_offset = Vector2( 0, -32 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 384, 64, 64, 64 )
@@ -733,19 +730,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 2/navigation_offset = Vector2( 0, 0 )
 2/shape_offset = Vector2( 0, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape = SubResource( 350 )
+2/shape = SubResource( 309 )
 2/shape_one_way = false
 2/shape_one_way_margin = 1.0
 2/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 350 ),
+"shape": SubResource( 309 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 2/z_index = 0
 3/name = "CL_Crafting.png 3"
-3/texture = ExtResource( 8 )
+3/texture = ExtResource( 20 )
 3/tex_offset = Vector2( 0, -32 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 544, 64, 64, 64 )
@@ -754,19 +751,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 3/navigation_offset = Vector2( 0, 0 )
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape = SubResource( 352 )
+3/shape = SubResource( 311 )
 3/shape_one_way = false
 3/shape_one_way_margin = 1.0
 3/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 352 ),
+"shape": SubResource( 311 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
 4/name = "CL_Crafting.png 4"
-4/texture = ExtResource( 8 )
+4/texture = ExtResource( 20 )
 4/tex_offset = Vector2( 0, -64 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 0, 64, 96 )
@@ -775,19 +772,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 4/navigation_offset = Vector2( 0, 0 )
 4/shape_offset = Vector2( 0, 0 )
 4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape = SubResource( 353 )
+4/shape = SubResource( 312 )
 4/shape_one_way = false
 4/shape_one_way_margin = 1.0
 4/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 353 ),
+"shape": SubResource( 312 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 4/z_index = 0
 5/name = "CL_Crafting.png 5"
-5/texture = ExtResource( 8 )
+5/texture = ExtResource( 20 )
 5/tex_offset = Vector2( 0, -64 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 64, 0, 64, 96 )
@@ -796,19 +793,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 5/navigation_offset = Vector2( 0, 0 )
 5/shape_offset = Vector2( 0, 0 )
 5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape = SubResource( 354 )
+5/shape = SubResource( 313 )
 5/shape_one_way = false
 5/shape_one_way_margin = 1.0
 5/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 354 ),
+"shape": SubResource( 313 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 5/z_index = 0
 6/name = "CL_Crafting.png 6"
-6/texture = ExtResource( 8 )
+6/texture = ExtResource( 20 )
 6/tex_offset = Vector2( 0, -64 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 128, 0, 64, 96 )
@@ -817,19 +814,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 6/navigation_offset = Vector2( 0, 0 )
 6/shape_offset = Vector2( 0, 0 )
 6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape = SubResource( 355 )
+6/shape = SubResource( 314 )
 6/shape_one_way = false
 6/shape_one_way_margin = 1.0
 6/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 355 ),
+"shape": SubResource( 314 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 6/z_index = 0
 7/name = "CL_Crafting.png 7"
-7/texture = ExtResource( 8 )
+7/texture = ExtResource( 20 )
 7/tex_offset = Vector2( 0, -64 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 0, 256, 64, 96 )
@@ -838,19 +835,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 7/navigation_offset = Vector2( 0, 0 )
 7/shape_offset = Vector2( 0, 0 )
 7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape = SubResource( 356 )
+7/shape = SubResource( 315 )
 7/shape_one_way = false
 7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 356 ),
+"shape": SubResource( 315 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 7/z_index = 0
 8/name = "CL_Crafting.png 8"
-8/texture = ExtResource( 8 )
+8/texture = ExtResource( 20 )
 8/tex_offset = Vector2( 0, -64 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 64, 256, 64, 96 )
@@ -859,19 +856,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 8/navigation_offset = Vector2( 0, 0 )
 8/shape_offset = Vector2( 0, 0 )
 8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-8/shape = SubResource( 357 )
+8/shape = SubResource( 316 )
 8/shape_one_way = false
 8/shape_one_way_margin = 1.0
 8/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 357 ),
+"shape": SubResource( 316 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 8/z_index = 0
 9/name = "CL_Crafting.png 9"
-9/texture = ExtResource( 8 )
+9/texture = ExtResource( 20 )
 9/tex_offset = Vector2( 0, -64 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 128, 256, 64, 96 )
@@ -880,19 +877,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 9/navigation_offset = Vector2( 0, 0 )
 9/shape_offset = Vector2( 0, 0 )
 9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape = SubResource( 358 )
+9/shape = SubResource( 317 )
 9/shape_one_way = false
 9/shape_one_way_margin = 1.0
 9/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 358 ),
+"shape": SubResource( 317 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 9/z_index = 0
 10/name = "CL_Crafting.png 10"
-10/texture = ExtResource( 8 )
+10/texture = ExtResource( 20 )
 10/tex_offset = Vector2( 0, -64 )
 10/modulate = Color( 1, 1, 1, 1 )
 10/region = Rect2( 0, 384, 64, 96 )
@@ -901,19 +898,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 10/navigation_offset = Vector2( 0, 0 )
 10/shape_offset = Vector2( 0, 0 )
 10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-10/shape = SubResource( 342 )
+10/shape = SubResource( 301 )
 10/shape_one_way = false
 10/shape_one_way_margin = 1.0
 10/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 342 ),
+"shape": SubResource( 301 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 10/z_index = 0
 11/name = "CL_Crafting.png 11"
-11/texture = ExtResource( 8 )
+11/texture = ExtResource( 20 )
 11/tex_offset = Vector2( 0, -64 )
 11/modulate = Color( 1, 1, 1, 1 )
 11/region = Rect2( 64, 384, 64, 96 )
@@ -922,19 +919,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 11/navigation_offset = Vector2( 0, 0 )
 11/shape_offset = Vector2( 0, 0 )
 11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-11/shape = SubResource( 343 )
+11/shape = SubResource( 302 )
 11/shape_one_way = false
 11/shape_one_way_margin = 1.0
 11/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 343 ),
+"shape": SubResource( 302 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 11/z_index = 0
 12/name = "CL_Crafting.png 12"
-12/texture = ExtResource( 8 )
+12/texture = ExtResource( 20 )
 12/tex_offset = Vector2( 0, -64 )
 12/modulate = Color( 1, 1, 1, 1 )
 12/region = Rect2( 128, 384, 64, 96 )
@@ -943,19 +940,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 12/navigation_offset = Vector2( 0, 0 )
 12/shape_offset = Vector2( 0, 0 )
 12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-12/shape = SubResource( 344 )
+12/shape = SubResource( 303 )
 12/shape_one_way = false
 12/shape_one_way_margin = 1.0
 12/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 344 ),
+"shape": SubResource( 303 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 12/z_index = 0
 13/name = "torch.tres 13"
-13/texture = ExtResource( 9 )
+13/texture = ExtResource( 13 )
 13/tex_offset = Vector2( 0, 0 )
 13/modulate = Color( 1, 1, 1, 1 )
 13/region = Rect2( 0, 0, 32, 32 )
@@ -969,7 +966,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 13/shapes = [  ]
 13/z_index = 0
 14/name = "campfire.tres 14"
-14/texture = SubResource( 346 )
+14/texture = SubResource( 305 )
 14/tex_offset = Vector2( 0, -32 )
 14/modulate = Color( 1, 1, 1, 1 )
 14/region = Rect2( 0, 0, 32, 64 )
@@ -978,19 +975,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 14/navigation_offset = Vector2( 0, 0 )
 14/shape_offset = Vector2( 0, 0 )
 14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-14/shape = SubResource( 345 )
+14/shape = SubResource( 304 )
 14/shape_one_way = false
 14/shape_one_way_margin = 1.0
 14/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 345 ),
+"shape": SubResource( 304 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 14/z_index = 0
 15/name = "fire_pedestal_tall.tres 15"
-15/texture = ExtResource( 11 )
+15/texture = ExtResource( 10 )
 15/tex_offset = Vector2( 0, -64 )
 15/modulate = Color( 1, 1, 1, 1 )
 15/region = Rect2( 0, 0, 32, 96 )
@@ -999,14 +996,14 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 15/navigation_offset = Vector2( 0, 0 )
 15/shape_offset = Vector2( 0, 0 )
 15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-15/shape = SubResource( 347 )
+15/shape = SubResource( 306 )
 15/shape_one_way = false
 15/shape_one_way_margin = 1.0
 15/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 347 ),
+"shape": SubResource( 306 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 15/z_index = 0
@@ -1020,19 +1017,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 16/navigation_offset = Vector2( 0, 0 )
 16/shape_offset = Vector2( 0, 0 )
 16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-16/shape = SubResource( 348 )
+16/shape = SubResource( 307 )
 16/shape_one_way = false
 16/shape_one_way_margin = 1.0
 16/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 348 ),
+"shape": SubResource( 307 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 16/z_index = 0
 17/name = "campfire.tres 17"
-17/texture = ExtResource( 10 )
+17/texture = ExtResource( 14 )
 17/tex_offset = Vector2( 0, 0 )
 17/modulate = Color( 1, 1, 1, 1 )
 17/region = Rect2( 0, 0, 32, 32 )
@@ -1041,19 +1038,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 17/navigation_offset = Vector2( 0, 0 )
 17/shape_offset = Vector2( 0, 0 )
 17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-17/shape = SubResource( 349 )
+17/shape = SubResource( 308 )
 17/shape_one_way = false
 17/shape_one_way_margin = 1.0
 17/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 349 ),
+"shape": SubResource( 308 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 17/z_index = 0
 20/name = "Scaled_Camp_Graves.png 20"
-20/texture = ExtResource( 22 )
+20/texture = ExtResource( 2 )
 20/tex_offset = Vector2( 0, 0 )
 20/modulate = Color( 1, 1, 1, 1 )
 20/region = Rect2( 256, 0, 128, 192 )
@@ -1062,19 +1059,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 20/navigation_offset = Vector2( 0, 0 )
 20/shape_offset = Vector2( 0, 0 )
 20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-20/shape = SubResource( 351 )
+20/shape = SubResource( 310 )
 20/shape_one_way = false
 20/shape_one_way_margin = 1.0
 20/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 351 ),
+"shape": SubResource( 310 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 20/z_index = 0
 21/name = "Scaled_Camp_Graves.png 21"
-21/texture = ExtResource( 22 )
+21/texture = ExtResource( 2 )
 21/tex_offset = Vector2( 0, 0 )
 21/modulate = Color( 1, 1, 1, 1 )
 21/region = Rect2( 960, 576, 128, 64 )
@@ -1088,7 +1085,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 21/shapes = [  ]
 21/z_index = 0
 22/name = "Scaled_Camp_Graves.png 22"
-22/texture = ExtResource( 22 )
+22/texture = ExtResource( 2 )
 22/tex_offset = Vector2( 0, 0 )
 22/modulate = Color( 1, 1, 1, 1 )
 22/region = Rect2( 384, 0, 128, 192 )
@@ -1102,7 +1099,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 22/shapes = [  ]
 22/z_index = 0
 23/name = "Scaled_Camp_Graves.png 23"
-23/texture = ExtResource( 22 )
+23/texture = ExtResource( 2 )
 23/tex_offset = Vector2( 0, 0 )
 23/modulate = Color( 1, 1, 1, 1 )
 23/region = Rect2( 512, 64, 192, 96 )
@@ -1116,7 +1113,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 23/shapes = [  ]
 23/z_index = 0
 24/name = "Scaled_Camp_Graves.png 24"
-24/texture = ExtResource( 22 )
+24/texture = ExtResource( 2 )
 24/tex_offset = Vector2( 0, 0 )
 24/modulate = Color( 1, 1, 1, 1 )
 24/region = Rect2( 320, 576, 32, 32 )
@@ -1130,12 +1127,12 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 24/shapes = [  ]
 24/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=359]
+[sub_resource type="ConvexPolygonShape2D" id=318]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="TileSet" id=274]
+[sub_resource type="TileSet" id=337]
 0/name = "campfire.tres 0"
-0/texture = ExtResource( 10 )
+0/texture = ExtResource( 14 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 32, 32 )
@@ -1144,23 +1141,23 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 359 )
+0/shape = SubResource( 318 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 359 ),
+"shape": SubResource( 318 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=335]
+[sub_resource type="TileSet" id=338]
 
-[sub_resource type="TileSet" id=337]
+[sub_resource type="TileSet" id=339]
 0/name = "cropped tileset.png 0"
-0/texture = ExtResource( 24 )
+0/texture = ExtResource( 7 )
 0/tex_offset = Vector2( 0, -32 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 352, 192 )
@@ -1183,7 +1180,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 1/name = "cropped tileset.png 1"
-1/texture = ExtResource( 24 )
+1/texture = ExtResource( 7 )
 1/tex_offset = Vector2( 0, -32 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 192, 352, 192 )
@@ -1206,7 +1203,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 1/shapes = [  ]
 1/z_index = 0
 2/name = "cropped tileset.png 2"
-2/texture = ExtResource( 24 )
+2/texture = ExtResource( 7 )
 2/tex_offset = Vector2( 0, -32 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 416, 352, 128 )
@@ -1229,9 +1226,9 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 2/shapes = [  ]
 2/z_index = 0
 
-[sub_resource type="TileSet" id=234]
+[sub_resource type="TileSet" id=340]
 0/name = "hoed_layer.png 0"
-0/texture = ExtResource( 5 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 192, 384, 192 )
@@ -1254,9 +1251,9 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=235]
+[sub_resource type="TileSet" id=341]
 0/name = "hoed_layer.png 0"
-0/texture = ExtResource( 5 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 384, 192 )
@@ -1279,8 +1276,8 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 
-[node name="World" type="YSort"]
-script = ExtResource( 7 )
+[node name="NFTScene" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="WorldNavigation" type="Navigation2D" parent="."]
 __meta__ = {
@@ -1288,8 +1285,7 @@ __meta__ = {
 }
 
 [node name="ValidTiles" type="TileMap" parent="WorldNavigation"]
-visible = false
-tile_set = SubResource( 24 )
+tile_set = SubResource( 319 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
@@ -1299,7 +1295,7 @@ __meta__ = {
 }
 
 [node name="DecorationTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = SubResource( 236 )
+tile_set = SubResource( 320 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1307,7 +1303,7 @@ __meta__ = {
 }
 
 [node name="Water" type="TileMap" parent="GeneratedTiles"]
-tile_set = ExtResource( 2 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1316,7 +1312,7 @@ __meta__ = {
 
 [node name="GreenGrassTiles" type="TileMap" parent="GeneratedTiles"]
 modulate = Color( 0.486275, 1, 0, 1 )
-tile_set = SubResource( 2 )
+tile_set = SubResource( 321 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1325,7 +1321,7 @@ __meta__ = {
 
 [node name="DarkGreenGrassTiles" type="TileMap" parent="GeneratedTiles"]
 modulate = Color( 0.423667, 0.62, 0, 1 )
-tile_set = SubResource( 3 )
+tile_set = SubResource( 322 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1333,7 +1329,7 @@ __meta__ = {
 }
 
 [node name="DesertTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = SubResource( 262 )
+tile_set = SubResource( 323 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1342,7 +1338,7 @@ __meta__ = {
 
 [node name="DirtTiles" type="TileMap" parent="GeneratedTiles"]
 modulate = Color( 0.92, 0.92, 0.92, 1 )
-tile_set = SubResource( 263 )
+tile_set = SubResource( 324 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 12323429, 0, 0 )
@@ -1351,7 +1347,7 @@ __meta__ = {
 }
 
 [node name="AnimatedOceanTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 8 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1359,7 +1355,7 @@ __meta__ = {
 }
 
 [node name="SnowTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = SubResource( 261 )
+tile_set = SubResource( 325 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1368,7 +1364,7 @@ __meta__ = {
 
 [node name="WetSandBeachBorder" type="TileMap" parent="GeneratedTiles"]
 visible = false
-tile_set = SubResource( 260 )
+tile_set = SubResource( 326 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1376,12 +1372,12 @@ __meta__ = {
 }
 
 [node name="DrySandTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = SubResource( 319 )
+tile_set = SubResource( 327 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="WaveTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = SubResource( 265 )
+tile_set = SubResource( 328 )
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {
@@ -1394,19 +1390,19 @@ __meta__ = {
 }
 
 [node name="FenceTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 19 )
 cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2
 cell_y_sort = true
 format = 1
 
 [node name="PathTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 233 )
+tile_set = SubResource( 329 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="ObjectTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 255 )
+tile_set = SubResource( 336 )
 cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2
 cell_y_sort = true
@@ -1415,17 +1411,17 @@ format = 1
 
 [node name="LightTiles" type="TileMap" parent="PlacableTiles"]
 modulate = Color( 2, 2, 2, 1 )
-tile_set = SubResource( 274 )
+tile_set = SubResource( 337 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="FoundationTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 335 )
+tile_set = SubResource( 338 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="BuildingTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 337 )
+tile_set = SubResource( 339 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
@@ -1435,37 +1431,11 @@ __meta__ = {
 }
 
 [node name="HoedAutoTiles" type="TileMap" parent="FarmingTiles"]
-tile_set = SubResource( 234 )
+tile_set = SubResource( 340 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="WateredAutoTiles" type="TileMap" parent="FarmingTiles"]
-tile_set = SubResource( 235 )
+tile_set = SubResource( 341 )
 cell_size = Vector2( 32, 32 )
 format = 1
-
-[node name="Players" type="YSort" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Animals" type="YSort" parent="."]
-
-[node name="NatureObjects" type="YSort" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="WorldMap" parent="." instance=ExtResource( 20 )]
-visible = false
-
-[node name="RoamingStorm" parent="." instance=ExtResource( 15 )]
-visible = false
-
-[node name="FullMapParticles" parent="." instance=ExtResource( 23 )]
-visible = false
-
-[node name="SpawnEnemyTimer" type="Timer" parent="."]
-wait_time = 3.0
-
-[connection signal="timeout" from="SpawnEnemyTimer" to="." method="_on_SpawnEnemyTimer_timeout"]
