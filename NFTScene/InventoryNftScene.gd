@@ -72,7 +72,7 @@ func left_click_same_item(slot: SlotClass):
 	var able_to_add = stack_size - slot.item.item_quantity
 	if able_to_add >= find_parent("UserInterfaceNftScene").holding_item.item_quantity:
 		PlayerInventoryNftScene.add_item_quantity(slot, find_parent("UserInterfaceNftScene").holding_item.item_quantity)
-		slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
+		slot.item.add_item_quantity(find_parent("UserInterfaceNftScene").holding_item.item_quantity)
 		find_parent("UserInterfaceNftScene").holding_item.queue_free()
 		find_parent("UserInterfaceNftScene").holding_item = null
 	else:

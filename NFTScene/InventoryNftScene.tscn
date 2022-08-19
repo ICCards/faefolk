@@ -173,11 +173,11 @@ texture = ExtResource( 13 )
 expand = true
 
 [node name="QuitMenu" type="Control" parent="."]
-visible = false
-margin_left = 71.0
-margin_top = 63.0
-margin_right = 111.0
-margin_bottom = 103.0
+margin_left = 36.0
+margin_top = 14.0
+margin_right = 76.0
+margin_bottom = 54.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="ExitToTitleButton" type="TextureButton" parent="QuitMenu"]
 margin_left = 83.0
@@ -335,7 +335,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 8 )
 animation = "idle right"
-frame = 13
+frame = 9
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]
