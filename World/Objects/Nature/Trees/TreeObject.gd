@@ -206,12 +206,27 @@ func initiateBirdEffect():
 			get_parent().call_deferred("add_child", bird)
 			bird.global_position = global_position + Vector2(0, -120)
 		else:
-			for i in range(2):
-				rng.randomize()
-				var bird = Bird.instance()
-				bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
-				get_parent().call_deferred("add_child", bird)
-				bird.global_position = global_position + Vector2(0, -120)
+			if Util.chance(2):
+				for i in range(4):
+					rng.randomize()
+					var bird = Bird.instance()
+					bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
+					get_parent().call_deferred("add_child", bird)
+					bird.global_position = global_position + Vector2(0, -120)
+			elif Util.chance(50):
+				for i in range(3):
+					rng.randomize()
+					var bird = Bird.instance()
+					bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
+					get_parent().call_deferred("add_child", bird)
+					bird.global_position = global_position + Vector2(0, -120)
+			else:
+				for i in range(2):
+					rng.randomize()
+					var bird = Bird.instance()
+					bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
+					get_parent().call_deferred("add_child", bird)
+					bird.global_position = global_position + Vector2(0, -120)
 			
 ### Tree modulate functions
 func set_tree_top_collision_shape():

@@ -58,8 +58,7 @@ texture = ExtResource( 2 )
 mode = 2
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -1.90735e-06, -1.07288e-06 )
-scale = Vector2( 1.8, 1.7 )
+scale = Vector2( 18.35, 17 )
 
 [connection signal="area_entered" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_entered"]
 [connection signal="area_exited" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_exited"]

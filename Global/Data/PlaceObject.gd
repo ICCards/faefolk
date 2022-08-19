@@ -117,7 +117,7 @@ func place_object_in_world(id, item_name, location):
 			object_tiles.set_cellv(location, Placables.TORCH)
 		"campfire":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			object_tiles.set_cellv(location, Placables.CAMPFIRE)
+			light_tiles.set_cellv(location, 0)
 		"fire pedestal":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL)

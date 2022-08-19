@@ -6,7 +6,7 @@ var season = "Spring"
 var day_num = 1
 var time
 
-const SlotClass = preload("res://InventoryLogic/Slot.gd")
+const SlotClass = preload("res://NFTScene/SlotNftScene.gd")
 const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
@@ -23,18 +23,13 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	3: ["radish seeds", 30, null],
 	4: ["wood", 10, null],
 	5: ["stone", 10, null]
-
 }
 
 var hotbar = {
-	5: ["wood sword", 1, 25],
-	6: ["stone watering can", 1, 25],
-	7: ["wood hoe", 1, 25], 
-	8: ["wood axe", 1, 25],
-	9:["wood pickaxe", 1, 25],
+	0: ["wood axe", 1, null],
+	1:["wood pickaxe", 1, null],
 }
 
 var chest = {
@@ -151,7 +146,7 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 		pass
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/HotbarNftScene/HotbarSlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterfaceNftScene/HotbarNftScene/HotbarSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
@@ -162,7 +157,7 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity, null)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterface/InventoryNftScene/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterfaceNftScene/InventoryNftScene/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
@@ -211,15 +206,6 @@ func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int):
 		SlotClass.SlotType.CHEST:
 			chest[slot.slot_index][1] -= quantity_to_subtract
 
-
-func find_open_slot(slot: SlotClass):
-	match slot.slotType:
-		SlotClass.SlotType.HOTBAR:
-			pass
-		SlotClass.SlotType.INVENTORY:
-			pass
-		SlotClass.SlotType.CHEST:
-			pass
 ###
 ### Change active hotbar functions
 func active_item_scroll_up() -> void:

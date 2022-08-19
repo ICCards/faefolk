@@ -2,6 +2,15 @@ extends Node2D
 
 var item = null
 
+func _physics_process(delta):
+	if item != null:
+		$CraftingItemDescription.visible = true
+		$CraftingItemDescription.item_name = item
+		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(15 , 20)
+		$CraftingItemDescription.initialize()
+	else:
+		$CraftingItemDescription.visible = false
+
 
 func _on_CampfireArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):

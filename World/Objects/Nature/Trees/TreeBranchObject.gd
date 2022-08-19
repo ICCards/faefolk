@@ -5,7 +5,6 @@ onready var branch = $Branch
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 
 var randomNum
 var treeObject

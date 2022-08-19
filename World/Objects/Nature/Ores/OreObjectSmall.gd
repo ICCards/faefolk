@@ -56,7 +56,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 42))
-		intitiateItemDrop(variety, Vector2(0, 40))
+		intitiateItemDrop(variety, Vector2(0, 40), 3)
 		animation_player.play("small_ore_break")
 		yield($SoundEffects, "finished")
 		queue_free()
@@ -69,11 +69,12 @@ func _on_SmallHurtBox_area_entered(_area):
 		
 		
 ## Effect functions
-func intitiateItemDrop(item, pos):
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType("stone", 1)
-	get_parent().call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + pos + Vector2(0, -36)
+func intitiateItemDrop(item, pos, amount):
+	for i in range(amount):
+		var itemDrop = ItemDrop.instance()
+		itemDrop.initItemDropType("stone", 1)
+		get_parent().call_deferred("add_child", itemDrop)
+		itemDrop.global_position = global_position + pos + Vector2(0, -36)
 
 func initiateOreHitEffect(ore, effect, pos):
 	var oreHitEffect = OreHitEffect.instance()

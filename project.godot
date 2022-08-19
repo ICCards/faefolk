@@ -42,12 +42,14 @@ Settings="*res://Global/Data/Settings.gd"
 Goblin="*res://Global/Characters/Goblin.gd"
 Human="*res://Global/Characters/Human.gd"
 Stats="*res://Global/Data/Stats.gd"
-PlayerInventoryNftScene="*res://NFTScene/PlayerInventoryNFTScene.gd"
+PlayerInventoryNftScene="*res://NFTScene/PlayerInventoryNftScene.gd"
 
 [display]
 
+window/size/width=600
 mouse_cursor/custom_image="res://Assets/mouse cursors/Normal Selects.png"
 window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [global]
 

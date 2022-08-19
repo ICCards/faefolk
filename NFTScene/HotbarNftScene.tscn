@@ -1,12 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
+[ext_resource path="res://NFTScene/HotbarNftScene.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/hotbar new.png" type="Texture" id=3]
-[ext_resource path="res://NFTScene/HotbarNftScene.gd" type="Script" id=4]
+[ext_resource path="res://NFTScene/SlotNftScene.gd" type="Script" id=4]
 
 [node name="HotbarNftScene" type="Node2D"]
-script = ExtResource( 4 )
+z_index = 1
+script = ExtResource( 1 )
 
 [node name="ItemDescription" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1080, -94 )
@@ -31,63 +32,63 @@ columns = 10
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot2" type="Panel" parent="HotbarSlots"]
 margin_left = 51.0
 margin_right = 99.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot3" type="Panel" parent="HotbarSlots"]
 margin_left = 102.0
 margin_right = 150.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot4" type="Panel" parent="HotbarSlots"]
 margin_left = 153.0
 margin_right = 201.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot5" type="Panel" parent="HotbarSlots"]
 margin_left = 204.0
 margin_right = 252.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot6" type="Panel" parent="HotbarSlots"]
 margin_left = 255.0
 margin_right = 303.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot7" type="Panel" parent="HotbarSlots"]
 margin_left = 306.0
 margin_right = 354.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot8" type="Panel" parent="HotbarSlots"]
 margin_left = 357.0
 margin_right = 405.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot9" type="Panel" parent="HotbarSlots"]
 margin_left = 408.0
 margin_right = 456.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Slot10" type="Panel" parent="HotbarSlots"]
 show_behind_parent = true
@@ -95,6 +96,6 @@ margin_left = 459.0
 margin_right = 507.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]

@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/Images/Inventory UI/inventory1.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Inventory UI/gear icon.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/PetUI.gd" type="Script" id=6]
-[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=7]
+[ext_resource path="res://NFTScene/InventoryNftScene.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=9]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=10]
@@ -19,7 +19,7 @@
 [ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=17]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=18]
 [ext_resource path="res://NFTScene/CraftingMenuNftScene.gd" type="Script" id=19]
-[ext_resource path="res://NFTScene/InventoryNftScene.gd" type="Script" id=20]
+[ext_resource path="res://NFTScene/SlotNftScene.gd" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 44 )
@@ -41,7 +41,8 @@ texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 30, 14 )
 
 [node name="InventoryNftScene" type="Node2D"]
-script = ExtResource( 20 )
+z_index = 1
+script = ExtResource( 7 )
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 120.0
@@ -73,6 +74,7 @@ scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 19 )
 
 [node name="CraftingItemDescription" parent="CraftingMenuNftScene" instance=ExtResource( 16 )]
+visible = false
 
 [node name="CampfireArea" type="Area2D" parent="CraftingMenuNftScene"]
 position = Vector2( -132, -54 )
@@ -240,42 +242,42 @@ columns = 5
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot2" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_left = 51.0
 margin_right = 99.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot3" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_left = 102.0
 margin_right = 150.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot4" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_left = 153.0
 margin_right = 201.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot5" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_left = 204.0
 margin_right = 252.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot6" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_top = 51.0
 margin_right = 48.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot7" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_left = 51.0
@@ -283,7 +285,7 @@ margin_top = 51.0
 margin_right = 99.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot8" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_left = 102.0
@@ -291,7 +293,7 @@ margin_top = 51.0
 margin_right = 150.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot9" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_left = 153.0
@@ -299,7 +301,7 @@ margin_top = 51.0
 margin_right = 201.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="Slot10" type="Panel" parent="InventoryMenu/InventorySlots"]
 margin_left = 204.0
@@ -307,7 +309,7 @@ margin_top = 51.0
 margin_right = 252.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 48, 48 )
-script = ExtResource( 7 )
+script = ExtResource( 20 )
 
 [node name="PetUI" type="Control" parent="InventoryMenu"]
 visible = false
@@ -333,7 +335,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 8 )
 animation = "idle right"
-frame = 14
+frame = 19
 playing = true
 
 [node name="HideShowButton" type="Button" parent="InventoryMenu/PetUI"]

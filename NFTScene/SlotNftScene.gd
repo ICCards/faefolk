@@ -41,13 +41,13 @@ func refresh_style():
 
 func pickFromSlot():
 	remove_child(item)
-	find_parent("UserInterface").add_child(item)
+	find_parent("UserInterfaceNftScene").add_child(item)
 	item = null
 
 func putIntoSlot(new_item):
 	item = new_item
 	item.position = Vector2(0, 0)
-	find_parent("UserInterface").remove_child(item)
+	find_parent("UserInterfaceNftScene").remove_child(item)
 	add_child(item)
 
 func initialize_item(item_name, item_quantity, item_health):
@@ -62,4 +62,3 @@ func initialize_item(item_name, item_quantity, item_health):
 func removeFromSlot():
 	remove_child(item)
 	item = null
-

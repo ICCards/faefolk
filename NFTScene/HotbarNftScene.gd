@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const SlotClass = preload("res://InventoryLogic/Slot.gd")
+const SlotClass = preload("res://NFTScene/SlotNftScene.gd")
 onready var hotbar_slots = $HotbarSlots
 onready var slots = hotbar_slots.get_children()
 var item = null
@@ -21,19 +21,23 @@ func _ready():
 
 func hovered_slot(slot: SlotClass):
 	if slot.item != null:
+		slot.item.hover_item()
 		item = slot.item.item_name
 
 func exited_slot(slot: SlotClass):
-	item = null
+	if slot.item != null:
+		slot.item.exit_item()
+		item = null
 
 func _physics_process(delta):
 	adjusted_description_position()
-	if item != null and find_parent("UserInterface").holding_item == null:
+	if item != null and find_parent("UserInterfaceNftScene").holding_item == null:
 		$ItemDescription.visible = true
 		$ItemDescription.item_name = item
 		$ItemDescription.position = adjusted_pos
 		$ItemDescription.initialize()
 	else:
+		item = null
 		$ItemDescription.visible = false
 
 
@@ -54,17 +58,6 @@ func adjusted_description_position():
 		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -51)
 
 
-func update_tool_health():
-	if PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][2] == 0 and PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][0] != "stone watering can":
-		slots[PlayerInventoryNftScene.active_item_slot].removeFromSlot()
-		PlayerInventoryNftScene.remove_item(slots[PlayerInventoryNftScene.active_item_slot])
-		yield(get_tree().create_timer(0.1), "timeout")
-		$SoundEffects.stream = Sounds.tool_break
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -18)
-		$SoundEffects.play()
-	else:
-		slots[PlayerInventoryNftScene.active_item_slot].initialize_item(PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][0], PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][1], PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][2])
-	
 
 func initialize_hotbar():
 	for i in range(slots.size()):
@@ -75,20 +68,19 @@ func initialize_hotbar():
 
 
 func _input(_event):
-	if find_parent("UserInterface").holding_item:
-		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+	if find_parent("UserInterfaceNftScene").holding_item:
+		find_parent("UserInterfaceNftScene").holding_item.global_position = get_global_mouse_position()
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if PlayerInventoryNftScene.viewInventoryMode == false:
-				print(slot.slot_index)
 				PlayerInventoryNftScene.hotbar_slot_selected(slot)
-			elif find_parent("UserInterface").holding_item != null:
+			elif find_parent("UserInterfaceNftScene").holding_item != null:
 				if !slot.item:
 					left_click_empty_slot(slot)
 				else:
-					if find_parent("UserInterface").holding_item.item_name != slot.item.item_name:
+					if find_parent("UserInterfaceNftScene").holding_item.item_name != slot.item.item_name:
 						left_click_different_item(event, slot)
 					else:
 						left_click_same_item(slot)
@@ -96,36 +88,36 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 				left_click_not_holding(slot)
 
 func left_click_empty_slot(slot: SlotClass):
-	PlayerInventoryNftScene.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
-	slot.putIntoSlot(find_parent("UserInterface").holding_item)
-	find_parent("UserInterface").holding_item = null
+	PlayerInventoryNftScene.add_item_to_empty_slot(find_parent("UserInterfaceNftScene").holding_item, slot)
+	slot.putIntoSlot(find_parent("UserInterfaceNftScene").holding_item)
+	find_parent("UserInterfaceNftScene").holding_item = null
 	
 func left_click_different_item(event: InputEvent, slot: SlotClass):
 	PlayerInventoryNftScene.remove_item(slot)
-	PlayerInventoryNftScene.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+	PlayerInventoryNftScene.add_item_to_empty_slot(find_parent("UserInterfaceNftScene").holding_item, slot)
 	var temp_item = slot.item
 	slot.pickFromSlot()
 	temp_item.global_position = event.global_position
-	slot.putIntoSlot(find_parent("UserInterface").holding_item)
-	find_parent("UserInterface").holding_item = temp_item
+	slot.putIntoSlot(find_parent("UserInterfaceNftScene").holding_item)
+	find_parent("UserInterfaceNftScene").holding_item = temp_item
 
 func left_click_same_item(slot: SlotClass):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 	var able_to_add = stack_size - slot.item.item_quantity
-	if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-		PlayerInventoryNftScene.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
-		slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
+	if able_to_add >= find_parent("UserInterfaceNftScene").holding_item.item_quantity:
+		PlayerInventoryNftScene.add_item_quantity(slot, find_parent("UserInterfaceNftScene").holding_item.item_quantity)
+		slot.item.add_item_quantity(find_parent("UserInterfaceNftScene").holding_item.item_quantity)
+		find_parent("UserInterfaceNftScene").holding_item.queue_free()
+		find_parent("UserInterfaceNftScene").holding_item = null
 	else:
 		PlayerInventoryNftScene.add_item_quantity(slot, able_to_add)
 		slot.item.add_item_quantity(able_to_add)
-		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
+		find_parent("UserInterfaceNftScene").holding_item.decrease_item_quantity(able_to_add)
 		
 func left_click_not_holding(slot: SlotClass):
 	PlayerInventoryNftScene.remove_item(slot)
-	find_parent("UserInterface").holding_item = slot.item
+	find_parent("UserInterfaceNftScene").holding_item = slot.item
 	slot.pickFromSlot()
-	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+	find_parent("UserInterfaceNftScene").holding_item.global_position = get_global_mouse_position()
 
 

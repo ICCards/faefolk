@@ -8,12 +8,14 @@ onready var OreObject = preload("res://World/Objects/Nature/Ores/OreObjectLarge.
 onready var SmallOreObject = preload("res://World/Objects/Nature/Ores/OreObjectSmall.tscn")
 onready var TallGrassObject = preload("res://World/Objects/Nature/Grasses/TallGrassObject.tscn")
 onready var FlowerObject = preload("res://World/Objects/Nature/Grasses/FlowerObject.tscn")
+onready var Bunny = preload("res://World/Animals/Bunny.tscn")
+onready var Duck = preload("res://World/Animals/Duck.tscn")
 
 onready var valid_tiles = $WorldNavigation/ValidTiles
 onready var dirt_tiles = $GeneratedTiles/DirtTiles
 onready var forest_tiles = $GeneratedTiles/DarkGreenGrassTiles
 onready var snow_tiles = $GeneratedTiles/SnowTiles
-onready var Player = preload("res://NFTScene/PlayerNFTSceneState.tscn")
+onready var Player = preload("res://NFTScene/PlayerNftScene.tscn")
 const _character = preload("res://Global/Data/Characters.gd")
 
 var rng = RandomNumberGenerator.new()
@@ -24,6 +26,8 @@ onready var tall_grass_types = ["dark green", "green", "red", "yellow"]
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
 onready var oreTypes = ["Stone", "Cobblestone"]
 
+const NUM_BUNNIES = 40
+const NUM_DUCKS = 40
 const MAP_SIZE = 100
 const NUM_FARM_OBJECTS = 550
 const NUM_GRASS_BUNCHES = 150
@@ -34,14 +38,30 @@ const MAX_GRASS_BUNCH_SIZE = 24
 var biome 
 
 func _ready():
+	Server.world = self
 	PlayerInventory.current = false
 	build_valid_tiles()
 	generate_random_biome()
+	spawn_bunnies()
+	spawn_ducks()
 	spawn_player()
+	play_random_weather()
+	
+	
+func play_random_weather():
+	rng.randomize()
+	var randomNum = rng.randi_range(0, 100)
+	if randomNum < 25:
+		$Weather/Snow.visible = true
+	elif randomNum < 50:
+		$Weather/FallingLeaf.visible = true
+	elif randomNum < 75:
+		$Weather/Rain.visible = true
+		
+	
 	
 func spawn_player():
 	var player = Player.instance()
-	player.initialize_camera_limits(Vector2(-96,-192), Vector2(103*32, 103*32))
 	player.name = Server.player_id
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
@@ -56,6 +76,7 @@ func build_valid_tiles():
 			valid_tiles.set_cellv(Vector2(x, y), 0)
 
 func generate_random_biome():
+	rng.randomize()
 	biomes.shuffle()
 	biome = biomes[0]
 	match biome:
@@ -129,7 +150,7 @@ func place_object(item_name, loc):
 	elif item_name == "ore large":
 		oreTypes.shuffle()
 		var oreObject = OreObject.instance()
-		oreObject.health = 7
+		oreObject.health = 5
 		oreObject.initialize(oreTypes[0], loc)
 		$NatureObjects.call_deferred("add_child", oreObject)
 		oreObject.position = valid_tiles.map_to_world(loc) + Vector2(0, 28)
@@ -156,6 +177,7 @@ func generate_biome(map):
 			map.set_cellv(Vector2(x-1, y-1), 0)
 	map.update_bitmask_region()
 	
+
 func is_valid_position(_pos, _name):
 	if _pos.x > 1 and _pos.x < 99 and _pos.y > 1 and _pos.y < 99:
 		if valid_tiles.get_cellv(_pos) != -1 and _name != "tree" and _name != "stump":
@@ -175,3 +197,35 @@ func is_valid_position(_pos, _name):
 			return false
 	else: 
 		return false
+		
+		
+func returnValidSpawnLocation():
+	rng.randomize()
+	var tempLoc = Vector2(rng.randi_range(0, 3200), rng.randi_range(0, 3200))
+	if valid_tiles.get_cellv(valid_tiles.world_to_map(tempLoc)) != -1:
+		return tempLoc
+	else:
+		return null
+
+func spawn_bunnies():
+	for i in range(NUM_BUNNIES):
+		spawnRandomBunny()
+		
+func spawn_ducks():
+	for i in range(NUM_DUCKS):
+		spawnRandomDuck()
+
+
+func spawnRandomBunny():
+	var loc = returnValidSpawnLocation()
+	if loc != null:
+		var bunny = Bunny.instance()
+		bunny.global_position = loc
+		$Animals.add_child(bunny)
+
+func spawnRandomDuck():
+	var loc = returnValidSpawnLocation()
+	if loc != null:
+		var duck = Duck.instance()
+		duck.global_position = loc
+		$Animals.add_child(duck)

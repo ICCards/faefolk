@@ -266,7 +266,7 @@ func _process(_delta):
 	_client.poll()
 
 remote func updateState(data):
-	if world:
+	if world and PlayerInventory.current:
 		world.UpdateWorldState(data)
 
 remote func ReturnServerTime(server_time,client_time):

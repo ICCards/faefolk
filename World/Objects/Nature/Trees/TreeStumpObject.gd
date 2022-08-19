@@ -4,7 +4,6 @@ onready var stump_animation_player = $StumpAnimationPlayer
 onready var treeStumpSprite = $TreeSprites/TreeStump
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
 var rng = RandomNumberGenerator.new()
 var treeObject
