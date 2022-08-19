@@ -16,7 +16,7 @@ func set_new_music_volume():
 	volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
 
 func _process(delta):
-	if Server.isLoaded and has_node("/root/World"):
+	if Server.isLoaded and PlayerInventory.current:
 		storm1 = get_node("/root/World/RoamingStorm")
 		#storm2 = get_node("/root/World/RoamingStorm2")
 		if get_parent().position.distance_to(storm1.position) <= 2000:

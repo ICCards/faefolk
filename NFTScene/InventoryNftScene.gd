@@ -26,6 +26,7 @@ func _physics_process(delta):
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.visible = false
+		item = null
 
 func initialize_inventory():
 	item = null

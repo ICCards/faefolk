@@ -25,6 +25,7 @@ onready var object_types = ["tree", "tree stump", "tree branch", "ore large", "o
 onready var tall_grass_types = ["dark green", "green", "red", "yellow"]
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
 onready var oreTypes = ["Stone", "Cobblestone"]
+onready var randomBorderTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
 const NUM_BUNNIES = 40
 const NUM_DUCKS = 40
@@ -34,7 +35,6 @@ const NUM_GRASS_BUNCHES = 150
 const NUM_GRASS_TILES = 75
 const NUM_FLOWER_TILES = 250
 const MAX_GRASS_BUNCH_SIZE = 24
-
 var biome 
 
 func _ready():
@@ -46,8 +46,11 @@ func _ready():
 	spawn_ducks()
 	spawn_player()
 	play_random_weather()
+	generate_grass_bunches()
+	generate_flower_tiles()
+	Server.isLoaded = true
 	
-	
+
 func play_random_weather():
 	rng.randomize()
 	var randomNum = rng.randi_range(0, 100)
@@ -57,9 +60,8 @@ func play_random_weather():
 		$Weather/FallingLeaf.visible = true
 	elif randomNum < 75:
 		$Weather/Rain.visible = true
-		
-	
-	
+
+
 func spawn_player():
 	var player = Player.instance()
 	player.name = Server.player_id
@@ -101,9 +103,7 @@ func find_random_location_and_place_object(object_name):
 	rng.randomize()
 	var location = Vector2(rng.randi_range(0, 100), rng.randi_range(0, 100))
 	if validate_location_and_remove_tiles(object_name, location):
-		place_object(object_name, location)
-#	else:
-#		find_random_location_and_place_object(object_name)
+		place_object(object_name, null, location)
 
 func validate_location_and_remove_tiles(item_name, loc):
 	if item_name == "tree branch" or item_name == "ore small" or item_name == "tall grass" or item_name == "flower":
@@ -126,7 +126,43 @@ func validate_location_and_remove_tiles(item_name, loc):
 			return false
 			
 			
-func place_object(item_name, loc):
+func generate_flower_tiles():
+	for _i in range(NUM_FLOWER_TILES):
+		var location = Vector2(rng.randi_range(0, 100), rng.randi_range(0, 100))
+		if validate_location_and_remove_tiles("tall grass", location):
+			var flowerObject = FlowerObject.instance()
+			$NatureObjects.call_deferred("add_child", flowerObject)
+			flowerObject.position = valid_tiles.map_to_world(location) + Vector2(16, 32)
+
+
+func generate_grass_bunches():
+	for _i in range(NUM_GRASS_BUNCHES):
+		var location = Vector2(rng.randi_range(0, 100), rng.randi_range(0, 100))
+		if validate_location_and_remove_tiles("tall grass", location):
+			var tallGrassObject = TallGrassObject.instance()
+			tall_grass_types.shuffle()
+			tallGrassObject.biome = biome
+			tallGrassObject.variety = tall_grass_types[0]
+			$NatureObjects.call_deferred("add_child", tallGrassObject)
+			tallGrassObject.position = valid_tiles.map_to_world(location) + Vector2(8, 32)
+			create_grass_bunch(location, tall_grass_types[0])
+
+func create_grass_bunch(loc, variety):
+	rng.randomize()
+	var randomNum = rng.randi_range(1, MAX_GRASS_BUNCH_SIZE)
+	for _i in range(randomNum):
+		randomBorderTiles.shuffle()
+		loc += randomBorderTiles[0]
+		if validate_location_and_remove_tiles("tall grass", loc):
+			var tallGrassObject = TallGrassObject.instance()
+			tallGrassObject.biome = biome
+			tallGrassObject.variety = variety
+			$NatureObjects.call_deferred("add_child", tallGrassObject)
+			tallGrassObject.position =  valid_tiles.map_to_world(loc) + Vector2(8, 32)
+		else:
+			loc -= randomBorderTiles[0]
+
+func place_object(item_name, variety, loc):
 	if item_name == "tree":
 		treeTypes.shuffle()
 		var treeObject = TreeObject.instance()
@@ -161,15 +197,7 @@ func place_object(item_name, loc):
 		smallOreObject.initialize(oreTypes[0], loc)
 		$NatureObjects.call_deferred("add_child", smallOreObject)
 		smallOreObject.position = valid_tiles.map_to_world(loc) + Vector2(16, 24)
-#	elif item_name == "tall grass":
-#		var tallGrassObject = TallGrassObject.instance()
-#		tallGrassObject.initialize(variety)
-#		call_deferred("add_child", tallGrassObject)
-#		tallGrassObject.position =  valid_tiles.map_to_world(loc) + Vector2(16,32)
-#	elif item_name == "flower":
-#		var flowerObject = FlowerObject.instance()
-#		call_deferred("add_child", flowerObject)
-#		flowerObject.position = valid_tiles.map_to_world(loc) + Vector2(16, 32)
+
 
 func generate_biome(map):
 	for x in range(MAP_SIZE+2):

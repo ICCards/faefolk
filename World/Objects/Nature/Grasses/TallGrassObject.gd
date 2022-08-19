@@ -9,10 +9,10 @@ var biome
 var grass_list
 
 func _ready():
-	if biome == "snow":
-		grass = Images.green_grass_winter
-	else:
-		grass = Images.green_grass
+	set_type()
+
+func set_type():
+	grass = Images.returnTallGrassObject(biome, variety)
 	$Front.texture = grass[0]
 	$Back.texture = grass[1]
 
@@ -31,8 +31,9 @@ func play_back_effect():
 		$AnimationPlayer2.play("animate back")
 
 func _on_Area2D_body_entered(_body):
-	var data = {"id": name, "n": "tall_grass", "d": "" }
-	Server.action("ON_HIT", data)
+	if PlayerInventory.current:
+		var data = {"id": name, "n": "tall_grass", "d": "" }
+		Server.action("ON_HIT", data)
 	play_sound_effect()
 	bodyEnteredFlag = true
 

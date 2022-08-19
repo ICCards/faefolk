@@ -554,15 +554,27 @@ var fishing_rod_retract = {
 # TALL GRASS #
 
 func returnTallGrassObject(biome, variety):
-	match variety:
-		"1":
-			return dark_green_grass 
-		"2":
-			return green_grass
-		"3":
-			return red_grass 
-		"4":
-			return yellow_grass 
+	match biome:
+		"snow":
+			match variety:
+				"dark green":
+					return dark_green_grass_winter
+				"green":
+					return green_grass_winter
+				"red":
+					return red_grass_winter
+				"yellow":
+					return yellow_grass_winter
+		_:
+			match variety:
+				"dark green":
+					return dark_green_grass 
+				"green":
+					return green_grass
+				"red":
+					return red_grass 
+				"yellow":
+					return yellow_grass
 			
 var dark_green_grass = [
 	preload("res://Assets/Images/tall grass sets/dark green.png"),
