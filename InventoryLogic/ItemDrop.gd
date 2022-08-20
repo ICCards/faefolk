@@ -77,7 +77,7 @@ func _physics_process(_delta):
 				if PlayerInventory.current:
 					PlayerInventory.add_item_to_hotbar(item_name, quantity, health)
 				else:
-					PlayerInventoryNftScene.add_item_to_hotbar(item_name, quantity, health)
+					Constants.PlayerInventoryNftScene.add_item_to_hotbar(item_name, quantity, health)
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")

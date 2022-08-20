@@ -16,6 +16,6 @@ func _input(event):
 func toggle_inventory():
 	$InventoryNftScene.initialize_inventory()
 	$HotbarNftScene.initialize_hotbar()
-	PlayerInventoryNftScene.viewInventoryMode = !PlayerInventoryNftScene.viewInventoryMode
+	Constants.PlayerInventoryNftScene.viewInventoryMode = !Constants.PlayerInventoryNftScene.viewInventoryMode
 	$InventoryNftScene.visible = !$InventoryNftScene.visible
 

@@ -17,6 +17,7 @@ onready var forest_tiles = $GeneratedTiles/DarkGreenGrassTiles
 onready var snow_tiles = $GeneratedTiles/SnowTiles
 onready var Player = preload("res://NFTScene/PlayerNftScene.tscn")
 const _character = preload("res://Global/Data/Characters.gd")
+onready var PlayerInventoryNftScene = preload("res://NFTScene/PlayerInventoryNftScene.tscn")
 
 var rng = RandomNumberGenerator.new()
 
@@ -38,6 +39,7 @@ const MAX_GRASS_BUNCH_SIZE = 24
 var biome 
 
 func _ready():
+	Constants.PlayerInventoryNftScene = PlayerInventoryNftScene.instance()
 	Server.world = self
 	PlayerInventory.current = false
 	build_valid_tiles()

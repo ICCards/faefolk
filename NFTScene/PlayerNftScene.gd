@@ -55,9 +55,10 @@ const LENGTH_OF_DAY = 300
 const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
+	Constants.Player = self
 	PlayerInventory.player = self
 	Sounds.connect("volume_change", self, "set_new_music_volume")
-	PlayerInventoryNftScene.emit_signal("active_item_updated")
+	Constants.PlayerInventoryNftScene.emit_signal("active_item_updated")
 	start_day_night_cycle()
 
 
@@ -74,7 +75,7 @@ func _process(_delta) -> void:
 		$PlaceItemsUI.set_invisible()
 	else:
 		is_mouse_over_hotbar = false
-	if not PlayerInventoryNftScene.viewInventoryMode and not PlayerInventoryNftScene.interactive_screen_mode:
+	if not Constants.PlayerInventoryNftScene.viewInventoryMode and not Constants.PlayerInventoryNftScene.interactive_screen_mode:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
@@ -86,9 +87,9 @@ func _process(_delta) -> void:
 		idle_state(direction)
 
 func _unhandled_input(event):
-	if PlayerInventoryNftScene.hotbar.has(PlayerInventoryNftScene.active_item_slot) and \
-		not PlayerInventoryNftScene.viewInventoryMode: 
-			var item_name = PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][0]
+	if Constants.PlayerInventoryNftScene.hotbar.has(Constants.PlayerInventoryNftScene.active_item_slot) and \
+		not Constants.PlayerInventoryNftScene.viewInventoryMode: 
+			var item_name = Constants.PlayerInventoryNftScene.hotbar[Constants.PlayerInventoryNftScene.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 			if Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
 				swing_state(item_name)
@@ -138,8 +139,8 @@ func swing_state(item_name):
 		$CompositeSprites.set_player_animation(character, animation, item_name)
 		animation_player.play(animation)
 		yield(animation_player, "animation_finished" )
-		if PlayerInventoryNftScene.hotbar.has(PlayerInventoryNftScene.active_item_slot):
-			var new_tool_name = PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][0]
+		if Constants.PlayerInventoryNftScene.hotbar.has(Constants.PlayerInventoryNftScene.active_item_slot):
+			var new_tool_name = Constants.PlayerInventoryNftScene.hotbar[Constants.PlayerInventoryNftScene.active_item_slot][0]
 			var new_item_category = JsonData.item_data[new_tool_name]["ItemCategory"]
 			if Input.is_mouse_button_pressed( 1 ) and new_item_category == "Weapon":
 				swingActive = false
@@ -160,8 +161,8 @@ func idle_state(_direction):
 	if state == MOVEMENT:
 		animation_player.play("idle")
 		$DetectPathType/FootstepsSound.stream_paused = true
-		if PlayerInventoryNftScene.hotbar.has(PlayerInventoryNftScene.active_item_slot):
-			var item_name = PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][0]
+		if Constants.PlayerInventoryNftScene.hotbar.has(Constants.PlayerInventoryNftScene.active_item_slot):
+			var item_name = Constants.PlayerInventoryNftScene.hotbar[Constants.PlayerInventoryNftScene.active_item_slot][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
 				$HoldingItem.visible = true
@@ -178,8 +179,8 @@ func idle_state(_direction):
 func walk_state(_direction):
 	animation_player.play("movement")
 	$DetectPathType/FootstepsSound.stream_paused = false
-	if PlayerInventoryNftScene.hotbar.has(PlayerInventoryNftScene.active_item_slot):
-		var item_name = PlayerInventoryNftScene.hotbar[PlayerInventoryNftScene.active_item_slot][0]
+	if Constants.PlayerInventoryNftScene.hotbar.has(Constants.PlayerInventoryNftScene.active_item_slot):
+		var item_name = Constants.PlayerInventoryNftScene.hotbar[Constants.PlayerInventoryNftScene.active_item_slot][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
 		if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
 			$HoldingItem.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")

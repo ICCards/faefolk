@@ -31,7 +31,7 @@ func _ready():
 	refresh_style()
 
 func refresh_style():
-	if slotType == SlotType.HOTBAR and PlayerInventoryNftScene.active_item_slot == slot_index:
+	if slotType == SlotType.HOTBAR and Constants.PlayerInventoryNftScene.active_item_slot == slot_index:
 		set('custom_styles/panel', selected_style)
 	elif item == null:
 		set('custom_styles/panel', empty_style)

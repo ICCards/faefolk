@@ -146,7 +146,7 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 		pass
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterfaceNftScene/HotbarNftScene/HotbarSlots/Slot" + str(slot_index + 1))
+	var slot = Constants.Player.get_node("Camera2D/UserInterfaceNftScene/HotbarNftScene/HotbarSlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
@@ -157,7 +157,7 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity, null)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/Camera2D/UserInterfaceNftScene/InventoryNftScene/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
+	var slot = Constants.Player.get_node("Camera2D/UserInterfaceNftScene/InventoryNftScene/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)

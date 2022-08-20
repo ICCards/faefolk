@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="faefolk"
-run/main_scene="res://MainMenu/MainMenu.tscn"
+run/main_scene="res://NFTScene/NFTScene.tscn"
 
 [autoload]
 
@@ -42,7 +42,7 @@ Settings="*res://Global/Data/Settings.gd"
 Goblin="*res://Global/Characters/Goblin.gd"
 Human="*res://Global/Characters/Human.gd"
 Stats="*res://Global/Data/Stats.gd"
-PlayerInventoryNftScene="*res://NFTScene/PlayerInventoryNftScene.gd"
+Constants="*res://NFTScene/Constants.gd"
 
 [display]
 

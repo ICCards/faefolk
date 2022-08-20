@@ -300,7 +300,7 @@ func place_object(item_name, location, type):
 		if PlayerInventory.current:
 			PlayerInventory.remove_single_object_from_hotbar()
 		else:
-			PlayerInventoryNftScene.remove_single_object_from_hotbar()
+			Constants.PlayerInventoryNftScene.remove_single_object_from_hotbar()
 	var id = Uuid.v4()
 	if type == "placable":
 #		var data = {"id": id, "name": item_name, "l": location, "item": type}

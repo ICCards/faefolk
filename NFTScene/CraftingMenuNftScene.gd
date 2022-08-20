@@ -16,7 +16,7 @@ func _on_CampfireArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if sufficientMaterialToCraft("campfire"):
 			play_craft_sound()
-			PlayerInventoryNftScene.craft_item("campfire")
+			Constants.PlayerInventoryNftScene.craft_item("campfire")
 			initialize_crafting()
 		else:
 			play_error_sound()
@@ -59,7 +59,7 @@ func play_error_sound():
 func sufficientMaterialToCraft(item):
 	var ingredients = JsonData.crafting_data[item]["ingredients"]
 	for i in range(ingredients.size()):
-		if PlayerInventoryNftScene.returnSufficentCraftingMaterial(ingredients[i][0], ingredients[i][1]):
+		if Constants.PlayerInventoryNftScene.returnSufficentCraftingMaterial(ingredients[i][0], ingredients[i][1]):
 			continue
 		else:
 			return false

@@ -9,7 +9,7 @@ var adjusted_pos
 
 func _ready():
 	for i in range(slots.size()):
-		PlayerInventoryNftScene.connect("active_item_updated", slots[i], "refresh_style")
+		Constants.PlayerInventoryNftScene.connect("active_item_updated", slots[i], "refresh_style")
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
 		slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
@@ -63,8 +63,8 @@ func initialize_hotbar():
 	for i in range(slots.size()):
 		if slots[i].item != null:
 			slots[i].removeFromSlot()
-		if PlayerInventoryNftScene.hotbar.has(i):
-			slots[i].initialize_item(PlayerInventoryNftScene.hotbar[i][0], PlayerInventoryNftScene.hotbar[i][1], PlayerInventoryNftScene.hotbar[i][2])
+		if Constants.PlayerInventoryNftScene.hotbar.has(i):
+			slots[i].initialize_item(Constants.PlayerInventoryNftScene.hotbar[i][0], Constants.PlayerInventoryNftScene.hotbar[i][1], Constants.PlayerInventoryNftScene.hotbar[i][2])
 
 
 func _input(_event):
@@ -74,8 +74,8 @@ func _input(_event):
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
-			if PlayerInventoryNftScene.viewInventoryMode == false:
-				PlayerInventoryNftScene.hotbar_slot_selected(slot)
+			if Constants.PlayerInventoryNftScene.viewInventoryMode == false:
+				Constants.PlayerInventoryNftScene.hotbar_slot_selected(slot)
 			elif find_parent("UserInterfaceNftScene").holding_item != null:
 				if !slot.item:
 					left_click_empty_slot(slot)
@@ -88,13 +88,13 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 				left_click_not_holding(slot)
 
 func left_click_empty_slot(slot: SlotClass):
-	PlayerInventoryNftScene.add_item_to_empty_slot(find_parent("UserInterfaceNftScene").holding_item, slot)
+	Constants.PlayerInventoryNftScene.add_item_to_empty_slot(find_parent("UserInterfaceNftScene").holding_item, slot)
 	slot.putIntoSlot(find_parent("UserInterfaceNftScene").holding_item)
 	find_parent("UserInterfaceNftScene").holding_item = null
 	
 func left_click_different_item(event: InputEvent, slot: SlotClass):
-	PlayerInventoryNftScene.remove_item(slot)
-	PlayerInventoryNftScene.add_item_to_empty_slot(find_parent("UserInterfaceNftScene").holding_item, slot)
+	Constants.PlayerInventoryNftScene.remove_item(slot)
+	Constants.PlayerInventoryNftScene.add_item_to_empty_slot(find_parent("UserInterfaceNftScene").holding_item, slot)
 	var temp_item = slot.item
 	slot.pickFromSlot()
 	temp_item.global_position = event.global_position
@@ -105,17 +105,17 @@ func left_click_same_item(slot: SlotClass):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 	var able_to_add = stack_size - slot.item.item_quantity
 	if able_to_add >= find_parent("UserInterfaceNftScene").holding_item.item_quantity:
-		PlayerInventoryNftScene.add_item_quantity(slot, find_parent("UserInterfaceNftScene").holding_item.item_quantity)
+		Constants.PlayerInventoryNftScene.add_item_quantity(slot, find_parent("UserInterfaceNftScene").holding_item.item_quantity)
 		slot.item.add_item_quantity(find_parent("UserInterfaceNftScene").holding_item.item_quantity)
 		find_parent("UserInterfaceNftScene").holding_item.queue_free()
 		find_parent("UserInterfaceNftScene").holding_item = null
 	else:
-		PlayerInventoryNftScene.add_item_quantity(slot, able_to_add)
+		Constants.PlayerInventoryNftScene.add_item_quantity(slot, able_to_add)
 		slot.item.add_item_quantity(able_to_add)
 		find_parent("UserInterfaceNftScene").holding_item.decrease_item_quantity(able_to_add)
 		
 func left_click_not_holding(slot: SlotClass):
-	PlayerInventoryNftScene.remove_item(slot)
+	Constants.PlayerInventoryNftScene.remove_item(slot)
 	find_parent("UserInterfaceNftScene").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterfaceNftScene").holding_item.global_position = get_global_mouse_position()
