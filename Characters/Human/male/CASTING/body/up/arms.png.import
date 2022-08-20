@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arms.png-19654fe26d041a358a562874f927c9f8.stex"
+path="res://.import/arms.png-b306582d31d01af26a64cce58a2fe567.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Human/male/CASTING/body/down/arms.png"
-dest_files=[ "res://.import/arms.png-19654fe26d041a358a562874f927c9f8.stex" ]
+source_file="res://Characters/Human/male/CASTING/body/up/arms.png"
+dest_files=[ "res://.import/arms.png-b306582d31d01af26a64cce58a2fe567.stex" ]
 
 [params]
 

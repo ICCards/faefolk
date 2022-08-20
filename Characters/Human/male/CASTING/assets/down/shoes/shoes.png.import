@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shoes.png-d0530792516fda72b79ef54aae7c561f.stex"
+path="res://.import/shoes.png-d4ba8e9e6870f43c89a75280ece9b8ba.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Human/male/CASTING/assets/up/shoes/shoes.png"
-dest_files=[ "res://.import/shoes.png-d0530792516fda72b79ef54aae7c561f.stex" ]
+source_file="res://Characters/Human/male/CASTING/assets/down/shoes/shoes.png"
+dest_files=[ "res://.import/shoes.png-d4ba8e9e6870f43c89a75280ece9b8ba.stex" ]
 
 [params]
 

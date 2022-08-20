@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hair.png-a69f84fa1134358112c77d4f347792b9.stex"
+path="res://.import/hair.png-cd8859e241f8b35decceb99f2798186b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Human/male/CASTING/assets/up/head_attribute/hair.png"
-dest_files=[ "res://.import/hair.png-a69f84fa1134358112c77d4f347792b9.stex" ]
+source_file="res://Characters/Human/male/CASTING/assets/down/head_attribute/hair.png"
+dest_files=[ "res://.import/hair.png-cd8859e241f8b35decceb99f2798186b.stex" ]
 
 [params]
 
