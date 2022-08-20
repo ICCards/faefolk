@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://cast.gd" type="Script" id=1]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[node name="cast" type="Node2D"]
+script = ExtResource( 1 )
+end_point = Vector2( 200, 20 )
+midPt1 = Vector2( 15, 15 )
+midPt2 = Vector2( 10, 10 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = 37.0
+margin_top = 84.0
+margin_right = 186.0
+margin_bottom = 149.0
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+
+[node name="Path2D" type="Path2D" parent="."]
+visible = false
+position = Vector2( -145.288, -176.512 )
+scale = Vector2( 0.984922, 1.04915 )
+curve = SubResource( 1 )
