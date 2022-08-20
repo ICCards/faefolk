@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://NFTScene/UserInterfaceNftScene.gd" type="Script" id=1]
 [ext_resource path="res://NFTScene/PlayerNftScene.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=23]
 [ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=24]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=25]
+[ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=26]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -3302,39 +3303,63 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
-
-[sub_resource type="Animation" id=39]
-resource_name = "lightning day"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
-}
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
+tracks/1/path = NodePath("../LightningDay:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../LightningDay:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "lightning day"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../LightningDay:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../LightningDay:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=40]
 resource_name = "lightning night"
-length = 0.6
+length = 0.8
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -3343,7 +3368,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.6 ),
+"times": PoolRealArray( 0, 0.4, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.0509804, 0.054902, 0.0627451, 1 ) ]
@@ -3355,7 +3380,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, true ]
@@ -3701,15 +3726,22 @@ limit_top = -192
 limit_right = 3296
 limit_bottom = 3296
 
-[node name="WeatherEffects" type="CanvasModulate" parent="Camera2D"]
+[node name="LightningDay" type="Sprite" parent="Camera2D"]
+visible = false
+position = Vector2( 305, 279 )
+scale = Vector2( 88.1562, 74.0469 )
+z_index = 1
+texture = ExtResource( 26 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/WeatherEffects"]
+[node name="DayNightCycle" type="CanvasModulate" parent="Camera2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/DayNightCycle"]
 anims/RESET = SubResource( 38 )
 "anims/lightning day" = SubResource( 39 )
 "anims/lightning night" = SubResource( 40 )
 "anims/set night" = SubResource( 41 )
 
-[node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="Camera2D/WeatherEffects"]
+[node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="Camera2D/DayNightCycle"]
 stream = ExtResource( 16 )
 
 [node name="UserInterfaceNftScene" type="CanvasLayer" parent="Camera2D"]

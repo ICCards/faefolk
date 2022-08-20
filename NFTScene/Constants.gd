@@ -1,18 +1,17 @@
 extends Node
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var PlayerInventoryNftScene;
 var Player;
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var character = "human_male"
+var Biome = "snow"
+var Raining = true
+var Snowing = true
+var Cloudy = true
+var Lightning = true
+var Leaves_falling = true
+ 
+var Spawn_bunnies = true
+var Spawn_ducks = true
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

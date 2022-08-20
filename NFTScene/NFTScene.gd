@@ -36,39 +36,46 @@ const NUM_GRASS_BUNCHES = 150
 const NUM_GRASS_TILES = 75
 const NUM_FLOWER_TILES = 250
 const MAX_GRASS_BUNCH_SIZE = 24
-var biome 
 
 func _ready():
 	Constants.PlayerInventoryNftScene = PlayerInventoryNftScene.instance()
 	Server.world = self
-	PlayerInventory.current = false
-	build_valid_tiles()
-	generate_random_biome()
-	spawn_bunnies()
-	spawn_ducks()
-	spawn_player()
-	play_random_weather()
-	generate_grass_bunches()
-	generate_flower_tiles()
 	Server.isLoaded = true
+	PlayerInventory.current = false
+	build_world()
+	spawn_animals()
+	spawn_weather()
+	spawn_player()
 	
+	
+func spawn_animals():
+	if Constants.Spawn_bunnies:
+		spawn_bunnies()
+	if Constants.Spawn_ducks:
+		spawn_ducks()
+		
 
-func play_random_weather():
-	rng.randomize()
-	var randomNum = rng.randi_range(0, 100)
-	if randomNum < 25:
+func spawn_weather():
+	if Constants.Snowing:
 		$Weather/Snow.visible = true
-	elif randomNum < 50:
+	if Constants.Leaves_falling:
 		$Weather/FallingLeaf.visible = true
-	elif randomNum < 75:
+	if Constants.Raining:
 		$Weather/Rain.visible = true
+	if Constants.Cloudy:
+		$Weather/Clouds.visible = true
+	if Constants.Lightning:
+		start_lightning_effect()
 
+
+func start_lightning_effect():
+	pass
 
 func spawn_player():
 	var player = Player.instance()
 	player.name = Server.player_id
 	player.character = _character.new()
-	player.character.LoadPlayerCharacter("human_male")
+	player.character.LoadPlayerCharacter(Constants.character)
 	$Players.add_child(player)
 	player.position = Vector2(50*32,50*32)
 
@@ -79,20 +86,20 @@ func build_valid_tiles():
 		for y in range(MAP_SIZE):
 			valid_tiles.set_cellv(Vector2(x, y), 0)
 
-func generate_random_biome():
-	rng.randomize()
-	biomes.shuffle()
-	biome = biomes[0]
-	match biome:
+func build_world():
+	match Constants.Biome:
 		"dirt":
 			generate_biome(dirt_tiles)
 		"forest":
 			generate_biome(forest_tiles)
 		"snow":
 			generate_biome(snow_tiles)
+	build_valid_tiles()
 	build_random_nature_objects()
-	
-	
+	generate_grass_bunches()
+	generate_flower_tiles()
+
+
 func build_random_nature_objects():
 	for i in range(NUM_FARM_OBJECTS):
 		rng.randomize()
@@ -143,7 +150,7 @@ func generate_grass_bunches():
 		if validate_location_and_remove_tiles("tall grass", location):
 			var tallGrassObject = TallGrassObject.instance()
 			tall_grass_types.shuffle()
-			tallGrassObject.biome = biome
+			tallGrassObject.biome = Constants.Biome
 			tallGrassObject.variety = tall_grass_types[0]
 			$NatureObjects.call_deferred("add_child", tallGrassObject)
 			tallGrassObject.position = valid_tiles.map_to_world(location) + Vector2(8, 32)
@@ -157,7 +164,7 @@ func create_grass_bunch(loc, variety):
 		loc += randomBorderTiles[0]
 		if validate_location_and_remove_tiles("tall grass", loc):
 			var tallGrassObject = TallGrassObject.instance()
-			tallGrassObject.biome = biome
+			tallGrassObject.biome = Constants.Biome
 			tallGrassObject.variety = variety
 			$NatureObjects.call_deferred("add_child", tallGrassObject)
 			tallGrassObject.position =  valid_tiles.map_to_world(loc) + Vector2(8, 32)
@@ -169,7 +176,7 @@ func place_object(item_name, variety, loc):
 		treeTypes.shuffle()
 		var treeObject = TreeObject.instance()
 		treeObject.health = 8
-		treeObject.biome = biome
+		treeObject.biome = Constants.Biome
 		treeObject.initialize(treeTypes[0], loc)
 		$NatureObjects.call_deferred("add_child", treeObject)
 		treeObject.position = valid_tiles.map_to_world(loc) + Vector2(0, 24)

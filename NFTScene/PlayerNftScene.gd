@@ -27,6 +27,7 @@ var swingActive = false
 var eatingActive = false
 var current_building_item = null
 var username_callback = JavaScript.create_callback(self, "_username_callback")
+var day_night_changing = false
 
 onready var state = MOVEMENT
 
@@ -59,8 +60,22 @@ func _ready():
 	PlayerInventory.player = self
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	Constants.PlayerInventoryNftScene.emit_signal("active_item_updated")
+	if Constants.Lightning:
+		start_lightning_effect()
 	start_day_night_cycle()
 
+func start_lightning_effect():
+	rng.randomize()
+	var randomWait = 5 #rng.randi_range(15, 18)
+	yield(get_tree().create_timer(randomWait), "timeout")
+	if not day_night_changing:
+		if is_daytime:
+			$Camera2D/DayNightCycle/AnimationPlayer.play("lightning day")
+		else: 
+			$Camera2D/DayNightCycle/AnimationPlayer.play("lightning night")
+		$Camera2D/DayNightCycle/ThunderSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
+		$Camera2D/DayNightCycle/ThunderSoundEffects.play()
+	start_lightning_effect()
 
 func set_new_music_volume():
 	if Sounds.current_footsteps_sound == Sounds.stone_footsteps:
@@ -204,10 +219,12 @@ func set_melee_collision_layer(_tool):
 func start_day_night_cycle():
 	yield(get_tree().create_timer(LENGTH_OF_DAY), "timeout")
 	if is_daytime:
-		$Camera2D/WeatherEffects/AnimationPlayer.play("set night")
+		$Camera2D/DayNightCycle/AnimationPlayer.play("set night")
 	else:
-		$Camera2D/WeatherEffects/AnimationPlayer.play_backwards("set night")
-	yield($Camera2D/WeatherEffects/AnimationPlayer, "animation_finished")
+		$Camera2D/DayNightCycle/AnimationPlayer.play_backwards("set night")
+	day_night_changing = true
+	yield($Camera2D/DayNightCycle/AnimationPlayer, "animation_finished")
+	day_night_changing = false
 	is_daytime = not is_daytime
 	start_day_night_cycle()
 

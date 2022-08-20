@@ -124,7 +124,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("Body:hframes")
@@ -3746,7 +3746,6 @@ position = Vector2( 0, -16 )
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
-show_behind_parent = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 36 )
 hframes = 4
@@ -3918,17 +3917,17 @@ rect_scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 10 )
 text = "BITE!"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Fishing"]
-anims/RESET = SubResource( 45 )
-anims/bite = SubResource( 46 )
-anims/hit = SubResource( 47 )
-
 [node name="CastingProgress" type="ProgressBar" parent="Fishing"]
 visible = false
 margin_left = -36.0
 margin_top = -69.0
 margin_right = 44.0
 margin_bottom = -55.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fishing"]
+anims/RESET = SubResource( 45 )
+anims/bite = SubResource( 46 )
+anims/hit = SubResource( 47 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0

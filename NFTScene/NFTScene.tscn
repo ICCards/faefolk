@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Assets/tilesets/CL_MainLev.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=19]
 [ext_resource path="res://Assets/tilesets/CL_Crafting.png" type="Texture" id=20]
+[ext_resource path="res://World/Objects/Nature/Particles/Clouds.tscn" type="PackedScene" id=21]
 [ext_resource path="res://World/Objects/Nature/Particles/RainStorm.tscn" type="PackedScene" id=22]
 [ext_resource path="res://World/Objects/Nature/Particles/Snow.tscn" type="PackedScene" id=23]
 [ext_resource path="res://World/Objects/Nature/Particles/FallingLeaf.tscn" type="PackedScene" id=24]
@@ -1696,6 +1697,9 @@ __meta__ = {
 }
 
 [node name="Weather" type="Node2D" parent="."]
+
+[node name="Clouds" parent="Weather" instance=ExtResource( 21 )]
+visible = false
 
 [node name="Snow" parent="Weather" instance=ExtResource( 23 )]
 visible = false
