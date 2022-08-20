@@ -241,17 +241,17 @@ func generate_map():
 	print("getting map")
 	rpc_id(1, "get_map",key)
 
-func _ready():
-	get_tree().connect("network_peer_connected",self,"_on_network_peer_connected")
-	get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
-	get_tree().connect("server_disconnected", self, "_on_server_disconnected")
-	
-	# Initiate connection to the given URL.
-	var err = _client.connect_to_url(websocket_url,PoolStringArray(), true)
-	if err != OK:
-		print("Unable to connect")
-		set_process(false)
-	get_tree().network_peer = _client
+#func _ready():
+#	get_tree().connect("network_peer_connected",self,"_on_network_peer_connected")
+#	get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
+#	get_tree().connect("server_disconnected", self, "_on_server_disconnected")
+#
+#	# Initiate connection to the given URL.
+#	var err = _client.connect_to_url(websocket_url,PoolStringArray(), true)
+#	if err != OK:
+#		print("Unable to connect")
+#		set_process(false)
+#	get_tree().network_peer = _client
 	
 func _on_network_peer_connected(id):
 	pass

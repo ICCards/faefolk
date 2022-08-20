@@ -47,8 +47,9 @@ func PlayEffect(player_id):
 func _on_SmallHurtBox_area_entered(_area):
 	Stats.decrease_tool_health()
 	rng.randomize()
-	var data = {"id": name, "n": "ore"}
-	Server.action("ON_HIT", data)
+	if PlayerInventory.current:
+		var data = {"id": name, "n": "ore"}
+		Server.action("ON_HIT", data)
 	health -= 1
 	if health == 0:
 		Tiles.reset_valid_tiles(position_of_object)

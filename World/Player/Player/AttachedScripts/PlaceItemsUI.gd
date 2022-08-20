@@ -303,8 +303,8 @@ func place_object(item_name, location, type):
 			PlayerInventoryNftScene.remove_single_object_from_hotbar()
 	var id = Uuid.v4()
 	if type == "placable":
-		var data = {"id": id, "name": item_name, "l": location, "item": type}
-		sendAction(PLACE_ITEM, data)
+#		var data = {"id": id, "name": item_name, "l": location, "item": type}
+#		sendAction(PLACE_ITEM, data)
 		$SoundEffects.stream = Sounds.place_object
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()

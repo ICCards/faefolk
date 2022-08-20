@@ -42,8 +42,9 @@ func setTreeBranchType(num):
 func _on_BranchHurtBox_area_entered(_area):
 	Stats.decrease_tool_health()
 	Tiles.reset_valid_tiles(loc, "stump")
-	var data = {"id": name, "n": "log"}
-	Server.action("ON_HIT", data)
+	if PlayerInventory.current:
+		var data = {"id": name, "n": "log"}
+		Server.action("ON_HIT", data)
 	$SoundEffects.stream = Sounds.stump_break
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 	$SoundEffects.play()

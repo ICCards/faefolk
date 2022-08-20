@@ -71,8 +71,9 @@ func setTexture(ore):
 func _on_BigHurtBox_area_entered(_area):
 	Stats.decrease_tool_health()
 	rng.randomize()
-	var data = {"id": name, "n": "large_ore"}
-	Server.action("ON_HIT", data)
+	if PlayerInventory.current:
+		var data = {"id": name, "n": "large_ore"}
+		Server.action("ON_HIT", data)
 	health -= 1
 	if health == 0:
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
@@ -93,8 +94,9 @@ func _on_BigHurtBox_area_entered(_area):
 func _on_SmallHurtBox_area_entered(_area):
 	Stats.decrease_tool_health()
 	rng.randomize()
-	var data = {"id": name, "n": "large_ore"}
-	Server.action("ON_HIT", data)
+	if PlayerInventory.current:
+		var data = {"id": name, "n": "large_ore"}
+		Server.action("ON_HIT", data)
 	health -= 1
 	if health <= 0:
 		Tiles.reset_valid_tiles(loc, "large ore")
