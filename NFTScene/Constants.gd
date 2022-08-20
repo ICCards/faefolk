@@ -4,7 +4,7 @@ extends Node
 var PlayerInventoryNftScene;
 var Player;
 
-var character = "human_male"
+var Character = "human_male"
 var Biome = "snow"
 var Raining = true
 var Snowing = true

@@ -75,7 +75,7 @@ func spawn_player():
 	var player = Player.instance()
 	player.name = Server.player_id
 	player.character = _character.new()
-	player.character.LoadPlayerCharacter(Constants.character)
+	player.character.LoadPlayerCharacter(Constants.Character)
 	$Players.add_child(player)
 	player.position = Vector2(50*32,50*32)
 
