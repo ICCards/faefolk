@@ -1317,6 +1317,113 @@ var male = {
 		1 : preload("res://Characters/Human/male/RETRACTING/assets/left/shoes/shoes.png")
 	},
 	
+	body_harvest_down = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/down/body.png")
+	},
+	body_harvest_up = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/up/body.png")
+	},
+	body_harvest_right = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/right/body.png")
+	},
+	body_harvest_left = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/left/body.png")
+	},
+
+	arms_harvest_down = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/down/arms.png")
+	},
+	arms_harvest_up = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/up/arms.png")
+	},
+	arms_harvest_right = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/right/arms.png")
+	},
+	arms_harvest_left = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/left/arms.png")
+	},
+
+	acc_harvest_down = {
+		0 : null,
+	},
+	acc_harvest_up = {
+		0 : null,
+	},
+	acc_harvest_right = {
+		0 : null,
+	},
+	acc_harvest_left = {
+		0 : null,
+	},
+
+	head_attribute_harvest_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_harvest_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_harvest_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_harvest_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_harvest_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/down/shirts/shirt.png")
+	},
+	shirts_harvest_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/up/shirts/shirt.png")
+	},
+	shirts_harvest_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/right/shirts/shirt.png")
+	},
+	shirts_harvest_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/shirts/shirt.png")
+	},
+
+	pants_harvest_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/down/pants/pants.png")
+	},
+	pants_harvest_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/up/pants/pants.png")
+	},
+	pants_harvest_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/right/pants/pants.png")
+	},
+	pants_harvest_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/pants/pants.png")
+	},
+
+	shoes_harvest_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/down/shoes/shoes.png")
+	},
+	shoes_harvest_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/up/shoes/shoes.png")
+	},
+	shoes_harvest_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/right/shoes/shoes.png")
+	},
+	shoes_harvest_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/shoes/shoes.png")
+	},
+	
 }
 var female = {
 	body_idle_down = {
