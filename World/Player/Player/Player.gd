@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
-onready var sword_swing = $SwordSwing
+onready var sword_swing = $Swinging/SwordSwing
 
 var valid_tiles
 var path_tiles 
@@ -245,7 +245,8 @@ func _unhandled_input(event):
 				$DetectPathType/FootstepsSound.stream_paused = true
 				$Fishing.initialize()
 			elif event.is_action_pressed("mouse_click") and itemCategory == "Tool":
-				swing_state(item_name)
+				$DetectPathType/FootstepsSound.stream_paused = true
+				$Swinging.initialize(item_name, direction)
 			elif event.is_action_pressed("mouse_click") and itemCategory == "Food":
 				$EatingParticles.eat(item_name)
 			elif itemCategory == "Placable object" and item_name == "tent":
@@ -304,53 +305,6 @@ func movement_state(delta):
 
 
 
-#func fishing_state():
-#	if not fishingActive:
-#		fishingActive = true
-#		$DetectPathType/FootstepsSound.stream_paused = true
-#		state = FISHING
-#		animation = "cast_" + direction.to_lower()
-#		$CompositeSprites.set_player_animation(character, animation, "fishing rod cast")
-#		$Fishing.direction = direction
-#		$Fishing.start()
-#	elif $Fishing.is_casted:
-#		$Fishing.stop()
-
-func swing_state(item_name):
-	if not swingActive:
-		state = SWING
-		if item_name == "stone watering can":
-			animation = "watering_" + direction.to_lower()
-		elif item_name == "wood sword":
-			animation = "sword_swing_" + direction.to_lower()
-		elif item_name == "fishing rod":
-			animation = "cast_" + direction.to_lower()
-		else:
-			set_melee_collision_layer(item_name)
-			animation = "swing_" + direction.to_lower()
-		$DetectPathType/FootstepsSound.stream_paused = true
-		PlayerStats.decrease_energy()
-		sendAction(SWING, {"tool": item_name, "direction": direction})
-		swingActive = true
-		$CompositeSprites.set_player_animation(character, animation, item_name)
-		animation_player.play(animation)
-		yield(animation_player, "animation_finished" )
-		swingActive = false
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-			var new_tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-			var new_item_category = JsonData.item_data[new_tool_name]["ItemCategory"]
-			if Input.is_action_pressed("mouse_click") and new_item_category == "Weapon":
-				swing_state(new_tool_name)
-			else:
-				state = MOVEMENT
-		else: 
-			state = MOVEMENT
-	elif swingActive == true:
-		pass
-	else:
-		state = MOVEMENT
-
-
 func idle_state(_direction):
 	if state == MOVEMENT:
 		animation_player.play("idle")
@@ -388,15 +342,6 @@ func walk_state(_direction):
 		animation = "walk_" + _direction.to_lower()
 	$CompositeSprites.set_player_animation(character, animation, null)
 
-func set_melee_collision_layer(_tool):
-	if _tool == "wood axe": 
-		$MeleeSwing.set_collision_mask(8)
-	elif _tool == "wood pickaxe":
-		$MeleeSwing.set_collision_mask(16)
-		remove_hoed_tile()
-	elif _tool == "wood hoe":
-		$MeleeSwing.set_collision_mask(0)
-		set_hoed_tile()
 		
 
 
@@ -432,39 +377,6 @@ func set_watered_tile():
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$SoundEffects.play()
 
-
-func set_hoed_tile():
-	var pos = Util.set_swing_position(get_position(), direction)
-	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) == -1 and \
-	Tiles.isCenterBitmaskTile(location, dirt_tiles) and \
-	valid_tiles.get_cellv(location) != -1:
-		yield(get_tree().create_timer(0.6), "timeout")
-#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-#		var data = {"id": id, "l": location}
-#		Server.action("HOE", data)
-		Stats.decrease_tool_health()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$SoundEffects.play()
-		hoed_tiles.set_cellv(location, 0)
-		hoed_tiles.update_bitmask_region()	
-
-func remove_hoed_tile():
-	var pos = Util.set_swing_position(get_position(), direction)
-	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) != -1:
-		yield(get_tree().create_timer(0.6), "timeout")
-		Stats.decrease_tool_health()
-#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-#		var data = {"id": id, "l": location}
-#		Server.action("PICKAXE", data)
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$SoundEffects.play()
-		watered_tiles.set_cellv(location, -1)
-		hoed_tiles.set_cellv(location, -1)
-		hoed_tiles.update_bitmask_region()	
 
 
 #func init_day_night_cycle(_time_elapsed):

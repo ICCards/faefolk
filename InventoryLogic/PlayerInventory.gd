@@ -42,7 +42,7 @@ var hotbar = {
 	3: ["carrot", 30, null],
 	4: ["grape", 30, null],
 	0: ["fishing rod", 1, null],
-	
+	2: ["wood axe", 1, 25],
 #	2: ["hammer", 1, null],
 #	3: ["blueprint", 1, null],
 	5: ["wood sword", 1, 20],
