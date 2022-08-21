@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://World/Fishing/FishingMiniGame.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Progress-Bar.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Progress-Empty.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Fishing-Column.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Misc/Fishing/spr_fish_64_x.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 19 )
@@ -43,9 +44,13 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Clicker" type="TextureButton" parent="."]
-margin_left = -92.0
-margin_top = -18.0
-margin_right = 523.0
-margin_bottom = 355.0
+margin_left = -349.0
+margin_top = -161.0
+margin_right = 745.0
+margin_bottom = 507.0
+
+[node name="TempFishIcon" type="Sprite" parent="."]
+position = Vector2( 10.5, 280 )
+texture = ExtResource( 6 )
 
 [connection signal="button_down" from="Clicker" to="." method="_on_Clicker_button_down"]

@@ -2,168 +2,118 @@ extends Node2D
 
 
 var hookVelocity = 0.0;
-export var hookAcceleration = 0.1;
-export var hookDeceleration = 0.2
-export var maxVelocity = 6.0;
+export var hookAcceleration = 0.125;
+export var hookDeceleration = 0.225
+export var maxVelocity = 7.0;
 export var bounce = 0.6
 
 
 var fishable = true;
 var fish = preload("res://World/Fishing/Fish.tscn")
 
-#func update_labels():
-#	$Settings/SpeedValue.text = str(maxVelocity)
-#	$Settings/BounceValue.text = str(bounce)
-#	$Settings/AccelerationValue.text = str(hookAcceleration)
-#	$Settings/DecelerationValue.text = str(hookDeceleration)
-#
-func _ready():
-	pass
-	spawn_random_fish()
+
+func set_active():
+	visible = true
+	$Hook.position = Vector2(10.5, 280)
+	$TempFishIcon.show()
+
 	
 func spawn_random_fish():
-	spawn_hard()
+	$TempFishIcon.hide()
+	$Hook.position.y = 280
+	if Util.chance(25):
+		spawn_level1()
+	elif Util.chance(25):
+		spawn_level2()
+	elif Util.chance(25):
+		spawn_level3()
+	else:
+		spawn_level4()
 
-func _process(delta):
-	if ($Clicker.pressed == true):
-		if hookVelocity > -maxVelocity:
-			hookVelocity -= hookAcceleration
-	else:
-		if hookVelocity < maxVelocity:
-			hookVelocity += hookDeceleration
-			
-	if (Input.is_action_just_pressed("ui_accept")):
-		hookVelocity -= .5
-		
-	var target = $Hook.position.y + hookVelocity
-	if (target >= 280):
-		hookVelocity *= -bounce
-	elif (target <= 38):
-		hookVelocity = 0
-		$Hook.position.y = 38
-	else:
-		$Hook.position.y = target
-		
-	# Adjust Value
-	if (fishable == false):
-		if (len($Hook/Area2D.get_overlapping_areas()) > 0):
-			$Progress.value += 125 * delta
-			if ($Progress.value >= 999):
-				caught_fish()
+	
+func _physics_process(delta):
+	if get_parent().isReelingInFish:
+		if ($Clicker.pressed == true):
+			if hookVelocity > -maxVelocity:
+				hookVelocity -= hookAcceleration
 		else:
-			$Progress.value -= 100 * delta
-			if ($Progress.value <= 0):
-				lost_fish()
+			if hookVelocity < maxVelocity:
+				hookVelocity += hookDeceleration
+				
+		if (Input.is_action_just_pressed("ui_accept")):
+			hookVelocity -= .5
+			
+		var target = $Hook.position.y + hookVelocity
+		if (target >= 280):
+			hookVelocity *= -bounce
+		elif (target <= 38):
+			hookVelocity = 0
+			$Hook.position.y = 38
+		else:
+			$Hook.position.y = target
+			
+		# Adjust Value
+		if (fishable == false):
+			if (len($Hook/Area2D.get_overlapping_areas()) > 0):
+				$Progress.value += 165 * delta
+				if ($Progress.value >= 999):
+					caught_fish()
+			else:
+				$Progress.value -= 155 * delta
+				if ($Progress.value <= 0):
+					lost_fish()
 		
 func caught_fish():
 	print("CAUGHT")
 	get_node("Fish").destroy()
-#	$Message.text = "Caught one!"
-#	$MessageTimer.set_wait_time(3);
-#	$MessageTimer.start()
 	$Progress.value = 0
 	fishable = true
+	get_parent().caught_fish()
 	
 func lost_fish():
 	print("LOST")
 	get_node("Fish").destroy()
-#	$Message.text = "Next time!"
-#	$MessageTimer.set_wait_time(3);
-#	$MessageTimer.start()
 	$Progress.value = 0
 	fishable = true
+	get_parent().lost_fish()
 	
 func add_fish(min_d, max_d, move_speed, move_time):
 	var f = fish.instance()
 	f.position = Vector2($Hook.position.x, $Hook.position.y)
-	
 	f.min_distance = min_d
 	f.max_distance = max_d
 	f.movement_speed = move_speed
 	f.movement_time = move_time
-	
 	add_child(f)
 	$Progress.value = 200
 	fishable = false
 
-#func _on_IncreaseSpeed_pressed():
-#	maxVelocity += .5
-#	update_labels()
-#
-#func _on_DecreaseSpeed_pressed():
-#	maxVelocity -= .5
-#	update_labels()
-#
-#func _on_IncreaseAcceleration_pressed():
-#	hookAcceleration += .05
-#	update_labels()
-#
-#
-#func _on_DecreaseAcceleration_pressed():
-#	hookAcceleration -= .05
-#	update_labels()
-#
-#func _on_IncreaseDeceleration_pressed():
-#	hookDeceleration += .05
-#	update_labels()
-#
-#func _on_DecreaseDeceleration_pressed():
-#	hookDeceleration -= .05
-#	update_labels()
-#
-#func _on_IncreaseBounce_pressed():
-#	bounce += .05
-#	update_labels()
-#
-#func _on_DecreaseBounce_pressed():
-#	bounce -= .05
-#	update_labels()
 
-#func reset_settings():
-#	hookAcceleration = .1;
-#	hookDeceleration = .2
-#	maxVelocity = 6.0;
-#	bounce = .6
-#
-#	update_labels()
-
-func spawn_easy():
+func spawn_level1():
+	print("LEVEL 1")
 	if (fishable):
-		add_fish(10, 40, 8, 3)
+		add_fish(60, 120, 3, 1.75)
 		fishable = false
 
-
-func spawn_medium():
+func spawn_level2():
+	print("LEVEL 2")
 	if (fishable):
-		add_fish(30, 80, 4, 2)
+		add_fish(70, 140, 2.5, 1.5)
 		fishable = false
 
-
-func spawn_hard():
+func spawn_level3():
+	print("LEVEL 3")
 	if (fishable):
-		add_fish(40, 100, 4, 1.5)
+		add_fish(80, 160, 2, 1)
 		fishable = false
 
-
-func spawn_impossible():
+func spawn_level4():
+	print("LEVEL 4")
 	if (fishable):
-		add_fish(60, 140, 3, 1)
+		add_fish(90, 160, 1.75, 0.75)
 		fishable = false
-
-
-func spawn_seriously():
-	if (fishable):
-		add_fish(85, 160, 2, 1)
-		fishable = false
-
-
-
-func _on_MessageTimer_timeout():
-	$Message.text = ""
 
 
 func _on_Clicker_button_down():
 	hookVelocity -= .5
 
-func _on_Clicker_pressed():
-	pass # Replace with function body.

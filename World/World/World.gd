@@ -389,38 +389,27 @@ func set_water_tiles():
 		for y in range(1000):
 			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and wetSand.get_cell(x,y) == -1:
 				ocean.set_cell(x, y, 0)
-				wetSand.set_cell(x, y, 0)
+				sand.set_cell(x, y, 0)
 				validTiles.set_cell(x, y, -1)
-#	for i in range(2):
-#		for loc in wetSand.get_used_cells():
-#			if Tiles.return_neighboring_cells(loc, wetSand) != 4:
-#				wetSand.set_cellv(loc + Vector2(1, 0), 0)
-#				wetSand.set_cellv(loc + Vector2(-1, 0), 0)
-#				wetSand.set_cellv(loc + Vector2(0, 1), 0)
-#				wetSand.set_cellv(loc + Vector2(0, -1), 0)
-#				sand.set_cellv(loc + Vector2(1, 0), 0)
-#				sand.set_cellv(loc + Vector2(-1, 0), 0)
-#				sand.set_cellv(loc + Vector2(0, 1), 0)
-#				sand.set_cellv(loc + Vector2(0, -1), 0)
-#	for i in range(2):
-#		for cell in ocean.get_used_cells():
-#				if Tiles.return_neighboring_cells(cell, ocean) <= 1:
-#					ocean.set_cellv(cell, -1)
-#					wetSand.set_cellv(cell, 0)
-#	for cell in ocean.get_used_cells():
-#		if Tiles.return_neighboring_cells(cell, ocean) == 3:
-#			wetSand.set_cellv(cell, 0)
-#			ocean.set_cellv(cell, -1)
-#	for cell in wetSand.get_used_cells():
-#		if Tiles.return_neighboring_cells(cell, wetSand) == 3:
-#			wetSand.set_cellv(cell, 0)
+	for i in range(2):
+		for loc in sand.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, sand) != 4:
+				sand.set_cellv(loc + Vector2(1, 0), 0)
+				sand.set_cellv(loc + Vector2(-1, 0), 0)
+				sand.set_cellv(loc + Vector2(0, 1), 0)
+				sand.set_cellv(loc + Vector2(0, -1), 0)
+	for i in range(2):
+		for cell in ocean.get_used_cells():
+				if Tiles.return_neighboring_cells(cell, ocean) <= 1:
+					ocean.set_cellv(cell, -1)
+					sand.set_cellv(cell, 0)
 	for cell in ocean.get_used_cells():
 		if Tiles.isCenterBitmaskTile(cell, ocean):
 			if Util.chance(50):
 				rng.randomize()
 				$GeneratedTiles/WaveTiles.set_cellv(cell, rng.randi_range(0, 4))
 	ocean.update_bitmask_region()
-	wetSand.update_bitmask_region()
+	sand.update_bitmask_region()
 	
 func fill_biome_gaps(map):
 	for i in range(2):

@@ -2,22 +2,71 @@ extends Node2D
 
 onready var progress = $CastingProgress
 onready var line = $Line2D
+onready var hook = $CastedFishHook
+
+onready var ocean = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
+onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
+onready var composite_sprites = get_node("../CompositeSprites")
 
 var isCastingForFish: bool = false
 var is_casted: bool = false
 var isReelingInFish: bool = false
 var isFishOnHook: bool = false
+var isWaitingForFish: bool = false
 var is_progress_going_upwards: bool = true
 
-var start_point = Vector2(0,0)
-var end_point = Vector2(100,25)
-
+var start_point
+var end_point
+var mid_point
 var direction
 
-onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
+var rng = RandomNumberGenerator.new()
 
-func start():
+const MIN_FISH_BITE_TIME = 5
+const MAX_FISH_BITE_TIME = 10
+
+enum {
+	MOVEMENT, 
+	SWING,
+	EAT,
+	FISHING,
+	CHANGE_TILE
+}
+
+
+func initialize():
+	if get_parent().state != FISHING:
+		start_fishing_state()
+	else:
+		if not isReelingInFish:
+			if isFishOnHook:
+				start_fishing_mini_game()
+			elif is_casted:
+				retract()
+				stop_fishing_state()
+
+
+func retract():
+	composite_sprites.set_player_animation(get_parent().character, "retract_" + direction.to_lower(), "fishing rod retract")
+	player_animation_player.play("retract")
+	yield(player_animation_player, "animation_finished")
+	
+	
+func start_fishing_mini_game():
+	isWaitingForFish = false
+	$AnimationPlayer.play("hit")
+	$FishingMiniGame.set_active()
+	yield($AnimationPlayer, "animation_finished")
+	yield(get_tree().create_timer(0.25), "timeout")
+	isReelingInFish = true
+	$FishingMiniGame.spawn_random_fish()
+
+
+func start_fishing_state():
 	print("START")
+	direction = get_parent().direction
+	get_parent().state = FISHING
+	composite_sprites.set_player_animation(get_parent().character, "cast_" + direction.to_lower(), "fishing rod cast")
 	player_animation_player.play("set cast first frame")
 	yield(player_animation_player, "animation_finished")
 	player_animation_player.stop()
@@ -26,16 +75,30 @@ func start():
 	progress.visible = true
 	isCastingForFish = true
 	
-func stop():
+func stop_fishing_state():
 	print("STOP")
+	hook.visible = false
+	line.visible = false
 	progress.visible = false
 	isCastingForFish = false
+	isWaitingForFish = false
 	is_casted = false
 	isReelingInFish = false
 	isFishOnHook = false
 	is_progress_going_upwards = true
 	progress.value = 0
+	$FishingMiniGame.hide()
+	get_parent().fishingActive = false
+	get_parent().state = MOVEMENT
 
+
+func caught_fish():
+	# SHOW FISH HERE
+	retract()
+	stop_fishing_state()
+	
+func lost_fish():
+	stop_fishing_state()
 
 func _physics_process(delta):
 	if not is_casted:
@@ -50,84 +113,62 @@ func _physics_process(delta):
 					if progress.value == progress.min_value:
 						is_progress_going_upwards = true
 			elif Input.is_action_just_released("mouse_click"):
-	#			end_point = Vector2(progress.value*5, 25)
-	#			setLinePointsToBezierCurve(cast_point, Vector2(0, 25), Vector2(0, 25), end_point)
-				is_casted = true
 				isCastingForFish = false
 				cast()
+
+func cast():
+	progress.hide()
+	player_animation_player.play("cast")
+	yield(player_animation_player, "animation_finished")
+	draw_cast_line()
+
+
+func draw_cast_line():
+	var percent = progress.value/progress.max_value
+	match direction:
+		"RIGHT":
+			start_point = Vector2(24,-26)
+			end_point = Vector2( 100*percent + 36, 0 )
+			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
+		"LEFT":
+			start_point = Vector2(-24,-26)
+			end_point = Vector2( -100*percent - 36, 0 )
+			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
+		"DOWN":
+			start_point = Vector2(1,-2)
+			end_point = Vector2( 1, 100*percent + 8)
+			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
+		"UP":
+			start_point = Vector2(-1,-56)
+			end_point = Vector2( -1, -100*percent - 60)
+			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
+	line.show()
+	hook.show()
+	hook.rect_position = end_point - Vector2(3,3)
+	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
+	var location = ocean.world_to_map(hook.rect_position + get_parent().position)
+	if Tiles.isCenterBitmaskTile(location, ocean): # valid cast
+		is_casted = true
+		isWaitingForFish = true
+		wait_for_fish_state()
+	else:
+		yield(get_tree().create_timer(0.2),"timeout")
+		stop_fishing_state()
+
+
+func wait_for_fish_state():
+	rng.randomize()
+	var randomWait = rng.randi_range(MIN_FISH_BITE_TIME, MAX_FISH_BITE_TIME)
+	yield(get_tree().create_timer(randomWait), "timeout")
+	if isWaitingForFish:
+		$AnimationPlayer.play("bite")
+		isFishOnHook = true
+		yield($AnimationPlayer, "animation_finished")
+		isFishOnHook = false
+		wait_for_fish_state()
 
 func setLinePointsToBezierCurve(a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	var curve := Curve2D.new()
 	curve.add_point(a, Vector2.ZERO, postA)
 	curve.add_point(b, preB, Vector2.ZERO)
 	line.points = curve.get_baked_points()
-
-
-#func fish():
-#	if state != FISHING:
-#		cast()
-#	elif Input.is_action_pressed("mouse_click") and isFishOnHook:
-#		start_fishing_mini_game()
-#	elif Input.is_action_pressed("mouse_click") and not isCastingForFish:
-#		stop_fishing_mini_game()
-		
-func cast():
-	player_animation_player.play("cast")
-	yield(player_animation_player, "animation_finished")
-	draw_cast_line()
-	
-	
-func draw_cast_line():
-	match direction:
-		"RIGHT":
-			start_point = Vector2(24,-24)
-	
-	end_point = Vector2( 100*(progress.value/progress.max_value), 0 )
-	setLinePointsToBezierCurve(start_point, Vector2(30, 0), Vector2(30, 0), end_point )
-	
-#	if not isCastingForFish:
-#		isCastingForFish = true
-#		$DetectPathType/FootstepsSound.stream_paused = true
-#		#state = FISHING
-#		animation = "cast_" + direction.to_lower()
-#		$CompositeSprites.set_player_animation(character, animation, "fishing rod cast")
-#		animation_player.play(animation)
-#		yield(animation_player, "animation_finished")
-#		var pos = Util.set_swing_position(get_position(), direction)
-#		var location = hoed_tiles.world_to_map(pos)
-#		if ocean_tiles.get_cellv(location) != -1:
-#			wait_for_fish_state()
-#		else:
-#			isCastingForFish = false
-#			state = MOVEMENT
-
-#func stop_fishing_mini_game():
-#	animation = "retract_" + direction.to_lower()
-#	$CompositeSprites.set_player_animation(character, animation, "fishing rod retract")
-#	animation_player.play("retract")
-#	yield(animation_player, "animation_finished")
-#	isFishOnHook = false
-#	isWaitingForFish = false
-#	isCastingForFish = false
-#	isReelingInFish = false
-#	#state = MOVEMENT
-		
-#func wait_for_fish_state():
-#	if not isWaitingForFish and state == FISHING:
-#		isWaitingForFish = true
-#		var randomWait = rng.randi_range(2, 4)
-#		yield(get_tree().create_timer(randomWait), "timeout")
-#		if isWaitingForFish:
-#			$Fishing/AnimationPlayer.play("bite")
-#			isFishOnHook = true
-#			yield($Fishing/AnimationPlayer, "animation_finished")
-#			isFishOnHook = false
-#			isWaitingForFish = false
-#			wait_for_fish_state()
-
-
-#func start_fishing_mini_game():
-#	if not isReelingInFish:
-#		isReelingInFish = true
-#		print("START FISHING GAME")
-#		stop_fishing_mini_game()
