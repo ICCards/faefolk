@@ -220,7 +220,7 @@ func _process(_delta) -> void:
 		$PlaceItemsUI.set_invisible()
 	else:
 		is_mouse_over_hotbar = false
-	if not PlayerInventory.viewInventoryMode and not PlayerInventory.interactive_screen_mode:
+	if not PlayerInventory.viewInventoryMode and not PlayerInventory.interactive_screen_mode and state == MOVEMENT:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
@@ -251,7 +251,8 @@ func _unhandled_input(event):
 			else: 
 				current_building_item = null
 			if Input.is_action_pressed("mouse_click") and item_name == "fishing rod":
-				fishing_state()
+				$DetectPathType/FootstepsSound.stream_paused = true
+				$Fishing.initialize()
 			elif Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
 				swing_state(item_name)
 			elif Input.is_action_pressed("mouse_click") and itemCategory == "Food":
@@ -379,19 +380,17 @@ func movement_state(delta):
 
 
 
-func fishing_state():
-	if not fishingActive:
-		fishingActive = true
-		$DetectPathType/FootstepsSound.stream_paused = true
-		state = FISHING
-		animation = "cast_" + direction.to_lower()
-		$CompositeSprites.set_player_animation(character, animation, "fishing rod cast")
-		$Fishing.direction = direction
-		$Fishing.start()
-	elif $Fishing.is_casted:
-		$Fishing.stop()
-		fishingActive = false
-		state = MOVEMENT
+#func fishing_state():
+#	if not fishingActive:
+#		fishingActive = true
+#		$DetectPathType/FootstepsSound.stream_paused = true
+#		state = FISHING
+#		animation = "cast_" + direction.to_lower()
+#		$CompositeSprites.set_player_animation(character, animation, "fishing rod cast")
+#		$Fishing.direction = direction
+#		$Fishing.start()
+#	elif $Fishing.is_casted:
+#		$Fishing.stop()
 
 func swing_state(item_name):
 	if not swingActive:
