@@ -19,7 +19,6 @@ var is_mouse_over_hotbar
 var is_player_dead = false
 var is_player_sleeping = false
 var swingActive = false
-var fishingActive = false
 var eatingActive = false
 var current_building_item = null
 var username_callback = JavaScript.create_callback(self, "_username_callback")
@@ -46,14 +45,6 @@ var input_vector
 var counter = -1
 var collisionMask = null
 
-var color1
-var color2
-var color3
-var color4
-var color5
-var color6
-var color7
-var color8
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -250,13 +241,13 @@ func _unhandled_input(event):
 				$PlaceItemsUI.place_double_door_state()
 			else: 
 				current_building_item = null
-			if Input.is_action_pressed("mouse_click") and item_name == "fishing rod":
+			if event.is_action_pressed("mouse_click") and item_name == "fishing rod":
 				$DetectPathType/FootstepsSound.stream_paused = true
 				$Fishing.initialize()
-			elif Input.is_action_pressed("mouse_click") and itemCategory == "Tool":
+			elif event.is_action_pressed("mouse_click") and itemCategory == "Tool":
 				swing_state(item_name)
-			elif Input.is_action_pressed("mouse_click") and itemCategory == "Food":
-				eat(item_name)
+			elif event.is_action_pressed("mouse_click") and itemCategory == "Food":
+				$EatingParticles.eat(item_name)
 			elif itemCategory == "Placable object" and item_name == "tent":
 				$PlaceItemsUI.place_tent_state()
 			elif itemCategory == "Placable object" and item_name == "sleeping bag":
@@ -269,74 +260,7 @@ func _unhandled_input(event):
 				$PlaceItemsUI.place_seed_state(item_name, hoed_tiles)
 	else: 
 		$PlaceItemsUI.set_invisible()
-	
 
-
-
-func eat(item_name):
-	if not eatingActive:
-		eatingActive = true
-		PlayerStats.eat(item_name)
-		state = EAT
-		play_eating_particles(item_name)
-		$CompositeSprites.set_player_animation(character, "eat", item_name)
-		animation_player.play("eat")
-		yield(animation_player, "animation_finished")
-		$EatingParticles/EatingParticles1.emitting = false
-		$EatingParticles/EatingParticles2.emitting = false
-		$EatingParticles/EatingParticles3.emitting = false
-		$EatingParticles/EatingParticles4.emitting = false
-		$EatingParticles/EatingParticles5.emitting = false
-		$EatingParticles/EatingParticles6.emitting = false
-		$EatingParticles/EatingParticles7.emitting = false
-		$EatingParticles/EatingParticles8.emitting = false
-		eatingActive = false
-		state = MOVEMENT
-	
-func play_eating_particles(item_name):
-	var itemImage = Image.new()
-	itemImage.load("res://Assets/Images/inventory_icons/Food/" + item_name + ".png")
-	itemImage.lock()
-	set_pixel_colors(itemImage)
-	yield(get_tree().create_timer(0.1), "timeout")
-	$EatingParticles/EatingParticles1.color = color1
-	$EatingParticles/EatingParticles2.color = color2
-	$EatingParticles/EatingParticles3.color = color3
-	$EatingParticles/EatingParticles4.color = color4
-	$EatingParticles/EatingParticles5.color = color5
-	$EatingParticles/EatingParticles6.color = color6
-	$EatingParticles/EatingParticles7.color = color7
-	$EatingParticles/EatingParticles8.color = color8
-	$EatingParticles/EatingParticles1.emitting = true
-	$EatingParticles/EatingParticles2.emitting = true
-	$EatingParticles/EatingParticles3.emitting = true
-	$EatingParticles/EatingParticles4.emitting = true
-	$EatingParticles/EatingParticles5.emitting = true
-	$EatingParticles/EatingParticles6.emitting = true
-	$EatingParticles/EatingParticles7.emitting = true
-	$EatingParticles/EatingParticles8.emitting = true
-	
-func set_pixel_colors(itemImage):
-	color1 = return_pixel_color(itemImage)
-	color2 = return_pixel_color(itemImage)
-	color3 = return_pixel_color(itemImage)
-	color4 = return_pixel_color(itemImage)
-	color5 = return_pixel_color(itemImage)
-	color6 = return_pixel_color(itemImage)
-	color7 = return_pixel_color(itemImage)
-	color8 = return_pixel_color(itemImage)
-	
-func return_pixel_color(image):
-	rng.randomize()
-	var tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
-	if tempColor != Color(0,0,0,0):
-		return tempColor
-	else:
-		tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
-		if tempColor != Color(0,0,0,0):
-			return tempColor
-		else:
-			return Color(0,0,0,0)
 
 func movement_state(delta):
 	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping and state == MOVEMENT:

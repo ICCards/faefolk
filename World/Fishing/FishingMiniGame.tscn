@@ -12,7 +12,6 @@ extents = Vector2( 7, 19 )
 
 [node name="FishingMiniGame" type="Node2D"]
 script = ExtResource( 1 )
-maxVelocity = 8.0
 
 [node name="Progress" type="TextureProgress" parent="."]
 margin_left = 25.0
