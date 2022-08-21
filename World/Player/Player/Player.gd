@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var sword_swing = $Swinging/SwordSwing
+onready var composite_sprites = $CompositeSprites
 
 var valid_tiles
 var path_tiles 
@@ -30,7 +31,8 @@ enum {
 	SWING,
 	EAT,
 	FISHING,
-	CHANGE_TILE
+	CHANGE_TILE,
+	HARVESTING
 }
 
 var direction = "DOWN"
@@ -55,6 +57,7 @@ func _ready():
 	PlayerInventory.emit_signal("active_item_updated")
 	if has_node("/root/World"):
 		set_tile_nodes()
+	Server.player_node = self
 	#IC.getUsername(principal,username_callback)
 	
 	
@@ -342,40 +345,6 @@ func walk_state(_direction):
 		animation = "walk_" + _direction.to_lower()
 	$CompositeSprites.set_player_animation(character, animation, null)
 
-		
-
-
-func set_watered_tile():
-	var pos = Util.set_swing_position(get_position(), direction)
-	var location = hoed_tiles.world_to_map(pos)
-	if ocean_tiles.get_cellv(location) != -1:
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$SoundEffects.play()
-		Stats.refill_watering_can(PlayerInventory.hotbar[PlayerInventory.active_item_slot][0])
-	elif PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] >= 1:
-		Stats.decrease_tool_health()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$SoundEffects.play()
-		if direction != "UP":
-			$CompositeSprites/WateringCanParticles.position = Util.returnAdjustedWateringCanPariclePos(direction)
-			$CompositeSprites/WateringCanParticles.emitting = true
-			$CompositeSprites/WateringCanParticles2.position = Util.returnAdjustedWateringCanPariclePos(direction)
-			$CompositeSprites/WateringCanParticles2.emitting = true
-		yield(get_tree().create_timer(0.4), "timeout")
-		$CompositeSprites/WateringCanParticles.emitting = false
-		$CompositeSprites/WateringCanParticles2.emitting = false
-		if hoed_tiles.get_cellv(location) != -1:
-	#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-	#		var data = {"id": id, "l": location}
-	#		Server.action("WATER", data)
-			watered_tiles.set_cellv(location, 0)
-			watered_tiles.update_bitmask_region()
-	else: 
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$SoundEffects.play()
 
 
 

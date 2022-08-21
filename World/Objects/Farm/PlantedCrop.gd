@@ -8,6 +8,19 @@ var is_in_regrowth_phase
 var crop_is_dead 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var valid_tiles
+var isBeingHarvested = false	
+
+
+enum {
+	MOVEMENT, 
+	SWING,
+	EAT,
+	FISHING,
+	CHANGE_TILE,
+	HARVESTING
+}
+
+
 
 func PlayEffect(player_id):
 	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
@@ -92,25 +105,25 @@ func _on_Area2D_mouse_exited():
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
-	if Input.is_action_pressed("mouse_click") and phase == "harvest":
-		if JsonData.crop_data[crop_name]["Perennial"]:
-			harvest_and_keep_planted()
-		else:
-			harvest_and_remove()
-	
-var isBeingHarvested = false	
-func harvest_and_remove():
 	pass
-#	if !isBeingHarvested:
+#	if Input.is_action_pressed("mouse_click") and phase == "harvest":
+#		if JsonData.crop_data[crop_name]["Perennial"]:
+#			harvest_and_keep_planted()
+#		else:
+#			harvest_and_remove()
+	
+func harvest_and_remove():
+	if !isBeingHarvested:
 #		var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 #		Server.action("ON_HIT", data)
-#		$HarvestSound.play()
-#		$CropText.visible = false
-#		isBeingHarvested = true
-#		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
-#		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
-#		yield($HarvestSound, "finished")
-#		queue_free()
+		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+		$HarvestSound.play()
+		$CropText.visible = false
+		isBeingHarvested = true
+		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
+		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+		yield($HarvestSound, "finished")
+		queue_free()
 	
 func harvest_and_keep_planted():
 	pass
@@ -165,3 +178,14 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	visible = false
+
+
+func _on_Harvest_pressed():
+	print(Server.player_node.direction.to_lower())
+	Server.player_node.state = HARVESTING
+	Server.player_node.composite_sprites.set_player_animation(Server.player_node.character, "harvest_" + Server.player_node.direction.to_lower())
+	Server.player_node.animation_player.play("harvest")
+	yield(Server.player_node.animation_player, "animation_finished")
+	Server.player_node.state = MOVEMENT
+	
+	harvest_and_remove()

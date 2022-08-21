@@ -1,5 +1,116 @@
 extends Node
 
+#	body_harvest_down = {
+#		0 : preload()
+#	},
+#	body_harvest_up = {
+#		0 : preload()
+#	},
+#	body_harvest_right = {
+#		0 : preload()
+#	},
+#	body_harvest_left = {
+#		0 : preload()
+#	},
+#
+#	arms_harvest_down = {
+#		0 : preload()
+#	},
+#	arms_harvest_up = {
+#		0 : preload()
+#	},
+#	arms_harvest_right = {
+#		0 : preload()
+#	},
+#	arms_harvest_left = {
+#		0 : preload()
+#	},
+#
+#	acc_harvest_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_harvest_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_harvest_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_harvest_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_harvest_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_harvest_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_harvest_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_harvest_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_harvest_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_harvest_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_harvest_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_harvest_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_harvest_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_harvest_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_harvest_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_harvest_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_harvest_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_harvest_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_harvest_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_harvest_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
 #	body_eat = {
 #		0 : preload()
 #	},
@@ -5274,6 +5385,10 @@ var body_sprites = {
 	'sword_swing_up': null,
 	'sword_swing_left': null,
 	'sword_swing_right': null,
+	'harvest_up': null,
+	'harvest_down': null,
+	'harvest_left': null,
+	'harvest_right': null,
 	'eat': null,
 	}
 
@@ -5318,6 +5433,10 @@ var arms_sprites = {
 	'sword_swing_up': null,
 	'sword_swing_left': null,
 	'sword_swing_right': null,
+	'harvest_up': null,
+	'harvest_down': null,
+	'harvest_left': null,
+	'harvest_right': null,
 	'eat': null,
 	};
 
@@ -5366,6 +5485,10 @@ var acc_sprites = {
 	'sword_swing_up': null,
 	'sword_swing_left': null,
 	'sword_swing_right': null,
+	'harvest_up': null,
+	'harvest_down': null,
+	'harvest_left': null,
+	'harvest_right': null,
 	'eat': null,
 	};
 
@@ -5414,6 +5537,10 @@ var headAtr_sprites = {
 	'sword_swing_up': null,
 	'sword_swing_left': null,
 	'sword_swing_right': null,
+	'harvest_up': null,
+	'harvest_down': null,
+	'harvest_left': null,
+	'harvest_right': null,
 	'eat': null,
 	};
 
@@ -5462,6 +5589,10 @@ var pants_sprites = {
 	'sword_swing_up': null,
 	'sword_swing_left': null,
 	'sword_swing_right': null,
+	'harvest_up': null,
+	'harvest_down': null,
+	'harvest_left': null,
+	'harvest_right': null,
 	'eat': null,
 	};
 
@@ -5510,6 +5641,10 @@ var shirts_sprites = {
 	'sword_swing_up': null,
 	'sword_swing_left': null,
 	'sword_swing_right': null,
+	'harvest_up': null,
+	'harvest_down': null,
+	'harvest_left': null,
+	'harvest_right': null,
 	'eat': null,
 	};
 
@@ -5558,6 +5693,10 @@ var shoes_sprites = {
 	'sword_swing_up': null,
 	'sword_swing_left': null,
 	'sword_swing_right': null,
+	'harvest_up': null,
+	'harvest_down': null,
+	'harvest_left': null,
+	'harvest_right': null,
 	'eat': null,
 	};
 
@@ -5676,6 +5815,10 @@ func set_attributes(set_char):
 	'holding_idle_up' : character.body_holding_idle_up[0], 
 	'holding_idle_left' : character.body_holding_idle_left[0], 
 	'holding_idle_right' : character.body_holding_idle_right[0],
+	'harvest_up': character.body_harvest_up[0],
+	'harvest_down': character.body_harvest_down[0],
+	'harvest_left': character.body_harvest_left[0],
+	'harvest_right': character.body_harvest_right[0],
 	'eat': character.body_eat[0]
 	};
 	arms_sprites = {
@@ -5727,6 +5870,10 @@ func set_attributes(set_char):
 	'holding_idle_up' : character.arms_holding_idle_up[0], 
 	'holding_idle_left' : character.arms_holding_idle_left[0], 
 	'holding_idle_right' : character.arms_holding_idle_right[0],
+	'harvest_up': character.arms_harvest_up[0],
+	'harvest_down': character.arms_harvest_down[0],
+	'harvest_left': character.arms_harvest_left[0],
+	'harvest_right': character.arms_harvest_right[0],
 	'eat': character.arms_eat[0]
 	};
 	acc_sprites = {
@@ -5778,6 +5925,10 @@ func set_attributes(set_char):
 	'holding_idle_up' : character.acc_holding_idle_up[acc_index], 
 	'holding_idle_left' : character.acc_holding_idle_left[acc_index], 
 	'holding_idle_right' : character.acc_holding_idle_right[acc_index],
+	'harvest_up': character.acc_harvest_up[acc_index],
+	'harvest_down': character.acc_harvest_down[acc_index],
+	'harvest_left': character.acc_harvest_left[acc_index],
+	'harvest_right': character.acc_harvest_right[acc_index],
 	'eat': character.acc_eat[acc_index]
 	};
 	headAtr_sprites = {
@@ -5829,6 +5980,10 @@ func set_attributes(set_char):
 	'holding_idle_up' : character.head_attribute_holding_idle_up[headAtr_index], 
 	'holding_idle_left' : character.head_attribute_holding_idle_left[headAtr_index], 
 	'holding_idle_right' : character.head_attribute_holding_idle_right[headAtr_index],
+	'harvest_up': character.head_attribute_harvest_up[headAtr_index],
+	'harvest_down': character.head_attribute_harvest_down[headAtr_index],
+	'harvest_left': character.head_attribute_harvest_left[headAtr_index],
+	'harvest_right': character.head_attribute_harvest_right[headAtr_index],
 	'eat': character.head_attribute_eat[headAtr_index]
 	}
 	pants_sprites = {
@@ -5880,6 +6035,10 @@ func set_attributes(set_char):
 	'holding_idle_up' : character.pants_holding_idle_up[pants_index], 
 	'holding_idle_left' : character.pants_holding_idle_left[pants_index], 
 	'holding_idle_right' : character.pants_holding_idle_right[pants_index],
+	'harvest_up': character.pants_harvest_up[pants_index],
+	'harvest_down': character.pants_harvest_down[pants_index],
+	'harvest_left': character.pants_harvest_left[pants_index],
+	'harvest_right': character.pants_harvest_right[pants_index],
 	'eat': character.pants_eat[pants_index]
 	};
 	shirts_sprites = {
@@ -5931,6 +6090,10 @@ func set_attributes(set_char):
 	'holding_idle_up' : character.shirts_holding_idle_up[shirts_index], 
 	'holding_idle_left' : character.shirts_holding_idle_left[shirts_index], 
 	'holding_idle_right' : character.shirts_holding_idle_right[shirts_index],
+	'harvest_up': character.shirts_harvest_up[shirts_index],
+	'harvest_down': character.shirts_harvest_down[shirts_index],
+	'harvest_left': character.shirts_harvest_left[shirts_index],
+	'harvest_right': character.shirts_harvest_right[shirts_index],
 	'eat': character.shirts_eat[shirts_index]
 	};
 	shoes_sprites = {
@@ -5982,6 +6145,10 @@ func set_attributes(set_char):
 	'holding_idle_up' : character.shoes_holding_idle_up[shoes_index], 
 	'holding_idle_left' : character.shoes_holding_idle_left[shoes_index], 
 	'holding_idle_right' : character.shoes_holding_idle_right[shoes_index],
+	'harvest_up': character.shoes_harvest_up[shoes_index],
+	'harvest_down': character.shoes_harvest_down[shoes_index],
+	'harvest_left': character.shoes_harvest_left[shoes_index],
+	'harvest_right': character.shoes_harvest_right[shoes_index],
 	'eat': character.shoes_eat[shoes_index]
 	};
 	

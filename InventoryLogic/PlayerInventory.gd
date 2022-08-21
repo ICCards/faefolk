@@ -46,11 +46,11 @@ var hotbar = {
 #	2: ["hammer", 1, null],
 #	3: ["blueprint", 1, null],
 	5: ["wood sword", 1, 20],
-#	6: ["stone watering can", 1, 25],
-#	7: ["wood hoe", 1, 7], 
+	6: ["stone watering can", 1, 25],
+	7: ["wood hoe", 1, 25], 
 #	8: ["wood axe", 1, 3],
 #	1: ["wood axe", 1, 3],
-#	9:["wood pickaxe", 1, 5],
+	9:["wood pickaxe", 1, 25],
 }
 
 var chest = {

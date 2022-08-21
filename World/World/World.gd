@@ -355,6 +355,8 @@ func buildMap(map):
 	check_and_remove_invalid_autotiles(map)
 	yield(get_tree().create_timer(1.0), "timeout")
 	set_water_tiles()
+	yield(get_tree().create_timer(1.0), "timeout")
+	update_tile_bitmask_regions()
 	get_node("loadingScreen").set_phase("Spawning in")
 	yield(get_tree().create_timer(1.0), "timeout")
 	Server.player_state = "WORLD"
@@ -376,6 +378,21 @@ func buildMap(map):
 #	spawnRandomSnake()
 #	spawnRandomSnake()
 #	spawnRandomSnake()
+
+func update_tile_bitmask_regions():
+	dirt.update_bitmask_region()
+	yield(get_tree().create_timer(0.25), "timeout")
+	snow.update_bitmask_region()
+	yield(get_tree().create_timer(0.25), "timeout")
+	ocean.update_bitmask_region()
+	yield(get_tree().create_timer(0.25), "timeout")
+	sand.update_bitmask_region()
+	yield(get_tree().create_timer(0.25), "timeout")
+	plains.update_bitmask_region()
+	yield(get_tree().create_timer(0.25), "timeout")
+	forest.update_bitmask_region()
+	yield(get_tree().create_timer(0.25), "timeout")
+	desert.update_bitmask_region()
 
 
 func spawn_animals():
@@ -408,8 +425,6 @@ func set_water_tiles():
 			if Util.chance(50):
 				rng.randomize()
 				$GeneratedTiles/WaveTiles.set_cellv(cell, rng.randi_range(0, 4))
-	ocean.update_bitmask_region()
-	sand.update_bitmask_region()
 	
 func fill_biome_gaps(map):
 	for i in range(2):
@@ -467,13 +482,6 @@ func check_and_remove_invalid_autotiles(map):
 			if not Tiles.isValidAutoTile(cell, dirt):
 				dirt.set_cellv(cell, -1)
 		yield(get_tree().create_timer(1.0), "timeout")
-	dirt.update_bitmask_region()
-	snow.update_bitmask_region()
-	ocean.update_bitmask_region()
-	sand.update_bitmask_region()
-	plains.update_bitmask_region()
-	forest.update_bitmask_region()
-	desert.update_bitmask_region()
 
 func build_valid_tiles():
 	for x in range(1000):

@@ -21,7 +21,7 @@ var direction
 
 var rng = RandomNumberGenerator.new()
 
-const MIN_FISH_BITE_TIME = 5
+const MIN_FISH_BITE_TIME = 2
 const MAX_FISH_BITE_TIME = 10
 
 enum {
@@ -43,6 +43,7 @@ func initialize():
 				retract_and_stop()
 
 func retract_and_stop():
+	waiting_for_fish_bite = false
 	composite_sprites.set_player_animation(get_parent().character, "retract_" + direction.to_lower(), "fishing rod retract")
 	player_animation_player.play("retract")
 	yield(player_animation_player, "animation_finished")
@@ -84,6 +85,7 @@ func stop_fishing_state():
 
 func caught_fish():
 	#SHOW FISH HERE
+	$FishingMiniGame.hide()
 	retract_and_stop()
 	
 func lost_fish():

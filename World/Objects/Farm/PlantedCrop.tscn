@@ -76,6 +76,11 @@ shape = SubResource( 4 )
 position = Vector2( 15, 0 )
 scale = Vector2( 1.6, 1.6 )
 
+[node name="Harvest" type="TextureButton" parent="."]
+margin_top = -15.0
+margin_right = 30.0
+margin_bottom = 15.0
+
 [connection signal="body_entered" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_entered"]
 [connection signal="body_exited" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_exited"]
 [connection signal="input_event" from="HarvestBox" to="." method="_on_Area2D_input_event"]
@@ -84,3 +89,4 @@ scale = Vector2( 1.6, 1.6 )
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="pressed" from="Harvest" to="." method="_on_Harvest_pressed"]
