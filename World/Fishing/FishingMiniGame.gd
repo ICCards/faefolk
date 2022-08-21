@@ -1,12 +1,10 @@
 extends Node2D
 
-
 var hookVelocity = 0.0;
-export var hookAcceleration = 0.125;
-export var hookDeceleration = 0.225
-export var maxVelocity = 7.0;
-export var bounce = 0.6
-
+var hookAcceleration = 0.125;
+var hookDeceleration = 0.225
+var maxVelocity = 7.0;
+var bounce = 0.6
 
 var fishable = true;
 var fish = preload("res://World/Fishing/Fish.tscn")
@@ -17,7 +15,6 @@ func set_active():
 	$Hook.position = Vector2(10.5, 280)
 	$TempFishIcon.show()
 
-	
 func spawn_random_fish():
 	$TempFishIcon.hide()
 	$Hook.position.y = 280
@@ -30,9 +27,8 @@ func spawn_random_fish():
 	else:
 		spawn_level4()
 
-	
 func _physics_process(delta):
-	if get_parent().isReelingInFish:
+	if get_parent().mini_game_active:
 		if ($Clicker.pressed == true):
 			if hookVelocity > -maxVelocity:
 				hookVelocity -= hookAcceleration
@@ -88,7 +84,6 @@ func add_fish(min_d, max_d, move_speed, move_time):
 	$Progress.value = 200
 	fishable = false
 
-
 func spawn_level1():
 	print("LEVEL 1")
 	if (fishable):
@@ -112,7 +107,6 @@ func spawn_level4():
 	if (fishable):
 		add_fish(90, 160, 1.75, 0.75)
 		fishable = false
-
 
 func _on_Clicker_button_down():
 	hookVelocity -= .5
