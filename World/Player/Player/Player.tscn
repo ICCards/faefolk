@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Food/potato.png" type="Texture" id=2]
@@ -30,9 +30,11 @@
 [ext_resource path="res://World/Player/Player/EatingParticles.gd" type="Script" id=28]
 [ext_resource path="res://World/Player/Player/AttachedScripts/Swinging.gd" type="Script" id=29]
 [ext_resource path="res://Characters/Human/male/SWING/body/right/body.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Images/Misc/Fishing/progress bar fill.png" type="Texture" id=31]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 [ext_resource path="res://World/Player/Player/PlayerHitEffect.tscn" type="PackedScene" id=33]
 [ext_resource path="res://World/Player/Player/AttachedScripts/SwordSwing.gd" type="Script" id=34]
+[ext_resource path="res://Assets/Images/Misc/Fishing/progress bar.png" type="Texture" id=35]
 [ext_resource path="res://Characters/Weapon swings/sword/right.png" type="Texture" id=36]
 
 [sub_resource type="Animation" id=3]
@@ -3522,14 +3524,6 @@ rect_scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 10 )
 text = "BITE!"
 
-[node name="CastingProgress" type="ProgressBar" parent="Fishing"]
-visible = false
-margin_left = -36.0
-margin_top = -69.0
-margin_right = 44.0
-margin_bottom = -55.0
-max_value = 40.0
-
 [node name="Line2D" type="Line2D" parent="Fishing"]
 width = 2.0
 default_color = Color( 0.156863, 0.156863, 0.156863, 1 )
@@ -3549,6 +3543,23 @@ position = Vector2( -91, -170 )
 anims/RESET = SubResource( 45 )
 anims/bite = SubResource( 46 )
 anims/hit = SubResource( 47 )
+
+[node name="ProgressBackground" type="TextureRect" parent="Fishing"]
+visible = false
+margin_left = -52.0
+margin_top = -90.0
+margin_bottom = -76.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 35 )
+
+[node name="CastingProgress" type="TextureProgress" parent="Fishing"]
+visible = false
+margin_left = -32.0
+margin_top = -84.0
+margin_bottom = -76.0
+rect_scale = Vector2( 2, 2 )
+value = 50.0
+texture_progress = ExtResource( 31 )
 
 [node name="Swinging" type="Node2D" parent="."]
 script = ExtResource( 29 )

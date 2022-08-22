@@ -11,6 +11,7 @@
 extents = Vector2( 7, 19 )
 
 [node name="FishingMiniGame" type="Node2D"]
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="Progress" type="TextureProgress" parent="."]
@@ -19,7 +20,7 @@ margin_top = 16.0
 margin_right = 35.0
 margin_bottom = 301.0
 max_value = 1000.0
-value = 500.0
+value = 200.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 3 )
 fill_mode = 3

@@ -28,7 +28,6 @@ func eat(food):
 		get_parent().state = EATING
 		PlayerStats.eat(food)
 		set_particle_colors(food)
-		#yield(get_tree().create_timer(0.1), "timeout")
 		composite_sprites.set_player_animation(get_parent().character, "eat", null)
 		player_animation_player.play("eat")
 		yield(player_animation_player, "animation_finished")

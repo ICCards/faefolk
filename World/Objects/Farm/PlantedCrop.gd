@@ -181,7 +181,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_Harvest_pressed():
-	print(Server.player_node.direction.to_lower())
 	Server.player_node.state = HARVESTING
 	Server.player_node.composite_sprites.set_player_animation(Server.player_node.character, "harvest_" + Server.player_node.direction.to_lower())
 	Server.player_node.animation_player.play("harvest")

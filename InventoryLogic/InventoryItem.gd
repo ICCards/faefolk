@@ -14,7 +14,7 @@ func set_item(nm, qt, health):
 		item_name = "wood path"
 	elif item_name == "stone path1" or item_name == "stone path2" or  item_name == "stone path3" or item_name == "stone path4": 
 		item_name = "stone path"
-	$TextureRect.texture = load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png")
+	$Image.texture = load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png")
 	
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	if stack_size == 1:
@@ -25,6 +25,19 @@ func set_item(nm, qt, health):
 	if item_health != null:
 		$HealthIndicator.visible = true
 		set_health_bar(item_health)
+
+func hover_item():
+	$Tween.interpolate_property($Image, "rect_scale",
+		$Image.rect_scale, Vector2(1.05, 1.05), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	 
+func exit_item():
+	$Tween.interpolate_property($Image, "rect_scale",
+		$Image.rect_scale, Vector2(1.0, 1.0), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
 
 func set_health_bar(health):
 	$HealthIndicator/ProgressBar.value = health

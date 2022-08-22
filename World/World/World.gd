@@ -247,7 +247,6 @@ func buildMap(map):
 	for id in map["beach"]:
 		var loc = map["beach"][id]
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
-		sand.set_cellv(loc, 0)
 	for id in map["tree"]:
 		var loc = map["tree"][id]["l"]
 		Tiles.remove_nature_invalid_tiles(loc, "tree")
@@ -368,16 +367,7 @@ func buildMap(map):
 	Server.isLoaded = true
 	Server.world = self
 	spawn_animals()
-	
-#	spawnRandomSnake()
-#	yield(get_tree().create_timer(rand_range(0.1, 1.0)), "timeout")
-#	spawnRandomSnake()
-#	yield(get_tree().create_timer(rand_range(0.1, 1.0)), "timeout")
-#	spawnRandomSnake()
-#	yield(get_tree().create_timer(rand_range(0.1, 1.0)), "timeout")
-#	spawnRandomSnake()
-#	spawnRandomSnake()
-#	spawnRandomSnake()
+
 
 func update_tile_bitmask_regions():
 	dirt.update_bitmask_region()

@@ -11,6 +11,8 @@ func initialize():
 	set_ingredients(item_name)
 	yield(get_tree(), "idle_frame")
 	set_size_of_description($ItemName.rect_size.x)
+	$Divider1.rect_size.x = width - 12
+	$Divider2.rect_size.x = width - 12
 	$GridContainer.rect_size = Vector2( width , height )
 	$GridContainer/TopRow.rect_size.x = width
 	$GridContainer/MiddleRow.rect_size.x = width
@@ -64,4 +66,3 @@ func set_size_of_description(x):
 		width = 58 + ((x - 210) / 5)
 	var lines = $ItemDescription.get_line_count()
 	height = (40 + (lines * 14) + (amount_ingredients * 12))
-	print(height)
