@@ -6,6 +6,12 @@ onready var background = $Background
 var hotbar_slots
 var item
 
+enum SlotType {
+	HOTBAR = 0,
+	INVENTORY,
+	CHEST
+}
+
 func _ready():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
@@ -37,10 +43,13 @@ func initialize_inventory():
 
 func hovered_slot(slot: SlotClass):
 	if slot.item != null:
+		slot.item.hover_item()
 		item = slot.item.item_name
 
 func exited_slot(slot: SlotClass):
 	item = null
+	if slot.item != null:
+		slot.item.exit_item()
 
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):

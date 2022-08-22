@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var progress = $CastingProgress
+onready var progress_background = $ProgressBackground
 onready var line = $Line2D
 onready var hook = $CastedFishHook
 
@@ -68,13 +69,14 @@ func start():
 	player_animation_player.stop()
 	is_progress_going_upwards = true
 	progress.value = 0
-	progress.visible = true
+	progress_background.show()
+	progress.show()
 	in_casting_state = true
 	
 func stop_fishing_state():
-	hook.visible = false
-	line.visible = false
-	progress.visible = false
+	hook.hide()
+	line.hide()
+	progress.hide()
 	in_casting_state = false
 	waiting_for_fish_bite = false
 	mini_game_active = false
@@ -96,19 +98,23 @@ func _physics_process(delta):
 	if in_casting_state:
 		if Input.is_action_pressed("mouse_click"):
 			if is_progress_going_upwards:
-				progress.value += 1
+				progress.value += 2
 				if progress.value == progress.max_value:
 					is_progress_going_upwards = false
 			else:
-				progress.value -= 1
+				progress.value -= 2
 				if progress.value == progress.min_value:
 					is_progress_going_upwards = true
 		elif Input.is_action_just_released("mouse_click"):
 			cast()
+		var r = range_lerp(progress.value, 10, 100, 1, 0)
+		var g = range_lerp(progress.value, 10, 50, 0, 1)
+		progress.modulate = Color(r, g, 0)
 
 func cast():
 	in_casting_state = false
 	progress.hide()
+	progress_background.hide()
 	player_animation_player.play("cast")
 	yield(player_animation_player, "animation_finished")
 	draw_cast_line()

@@ -33,9 +33,12 @@ func _ready():
 func refresh_style():
 	if slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot_index:
 		set('custom_styles/panel', selected_style)
+		if item != null:
+			item.hover_item()
 	elif item == null:
 		set('custom_styles/panel', empty_style)
 	else:
+		item.exit_item()
 		set('custom_styles/panel', default_style)
 		
 

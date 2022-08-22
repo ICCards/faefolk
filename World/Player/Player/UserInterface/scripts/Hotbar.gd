@@ -6,6 +6,12 @@ onready var slots = hotbar_slots.get_children()
 var item = null
 var adjusted_pos
 
+enum SlotType {
+	HOTBAR = 0,
+	INVENTORY,
+	CHEST
+}
+
 func _ready():
 	for i in range(slots.size()):
 		PlayerInventory.connect("active_item_updated", slots[i], "refresh_style")
@@ -20,10 +26,14 @@ func _ready():
 
 func hovered_slot(slot: SlotClass):
 	if slot.item != null:
+		slot.item.hover_item()
 		item = slot.item.item_name
 
 func exited_slot(slot: SlotClass):
 	item = null
+	if slot.item != null and not (slot.slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot.slot_index):
+		slot.item.exit_item()
+		
 
 func _physics_process(delta):
 	adjusted_description_position()

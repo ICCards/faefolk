@@ -14,6 +14,7 @@ func set_active():
 	visible = true
 	$Hook.position = Vector2(10.5, 280)
 	$TempFishIcon.show()
+	$Progress.value = 200
 
 func spawn_random_fish():
 	$TempFishIcon.hide()

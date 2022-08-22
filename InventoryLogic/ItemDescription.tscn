@@ -135,7 +135,7 @@ margin_right = 321.0
 margin_bottom = 78.963
 rect_scale = Vector2( 0.15, 0.15 )
 theme = ExtResource( 1 )
-text = "Tool"
+text = "Food"
 
 [node name="ItemDescription" type="Label" parent="."]
 margin_left = 5.0

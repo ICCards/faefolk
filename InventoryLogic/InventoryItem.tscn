@@ -10,7 +10,7 @@
 z_index = 1
 script = ExtResource( 2 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Image" type="TextureRect" parent="."]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 45.0
@@ -21,15 +21,16 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
-margin_left = 47.0
-margin_top = 34.0
-margin_right = 73.0
-margin_bottom = 95.0
+margin_left = 14.0
+margin_top = 35.0
+margin_right = 134.0
+margin_bottom = 96.0
 grow_horizontal = 2
 rect_scale = Vector2( 0.3, 0.3 )
 mouse_filter = 1
 theme = ExtResource( 3 )
-text = "9"
+text = "1"
+align = 2
 
 [node name="HealthIndicator" type="Control" parent="."]
 visible = false
@@ -56,3 +57,5 @@ max_value = 50.0
 value = 44.0
 texture_progress = ExtResource( 4 )
 nine_patch_stretch = true
+
+[node name="Tween" type="Tween" parent="."]
