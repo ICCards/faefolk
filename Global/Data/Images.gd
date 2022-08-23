@@ -479,6 +479,16 @@ func returnToolSprite(toolName, direction):
 					return fishing_rod_retract.left
 				"retract_right":
 					return fishing_rod_retract.right
+		"fishing rod struggle":
+			match direction:
+				"struggle_down":
+					return fishing_rod_struggle.down
+				"struggle_up":
+					return fishing_rod_struggle.up
+				"struggle_left":
+					return fishing_rod_struggle.left
+				"struggle_right":
+					return fishing_rod_struggle.right
 #			match Server.character:
 #				"human_male":
 #					match direction: 
@@ -549,6 +559,13 @@ var fishing_rod_retract = {
 	left = preload("res://Characters/Weapon swings/fishing rod retract/left.png"),
 	right = preload("res://Characters/Weapon swings/fishing rod retract/right.png"),
 	up = preload("res://Characters/Weapon swings/fishing rod retract/up.png")
+}
+
+var fishing_rod_struggle = {
+	down = preload("res://Characters/Weapon swings/fishing rod struggle/down.png"),
+	left = preload("res://Characters/Weapon swings/fishing rod struggle/left.png"),
+	right = preload("res://Characters/Weapon swings/fishing rod struggle/right.png"),
+	up = preload("res://Characters/Weapon swings/fishing rod struggle/up.png")
 }
 
 # TALL GRASS #
