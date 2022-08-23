@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -20,9 +20,11 @@
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/b/waveB.tres" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/c/waveC.tres" type="Texture" id=19]
 [ext_resource path="res://World/Map/WorldMap.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/new new.png" type="Texture" id=21]
 [ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=22]
 [ext_resource path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/tilesets/cropped tileset.png" type="Texture" id=24]
+[ext_resource path="res://Assets/fix .png" type="Texture" id=25]
 
 [sub_resource type="NavigationPolygon" id=266]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -1279,6 +1281,54 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="TileSet" id=338]
+0/name = "new new.png 0"
+0/texture = ExtResource( 21 )
+0/tex_offset = Vector2( 0, -32 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 224, 192 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 16, Vector2( 0, 1 ), 176, Vector2( 0, 2 ), 50, Vector2( 1, 0 ), 144, Vector2( 1, 2 ), 56, Vector2( 2, 0 ), 48, Vector2( 2, 1 ), 152, Vector2( 2, 2 ), 26, Vector2( 3, 0 ), 18, Vector2( 3, 1 ), 146, Vector2( 4, 0 ), 24 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 64 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "fix .png 1"
+1/texture = ExtResource( 25 )
+1/tex_offset = Vector2( 0, -32 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 224, 192 )
+1/tile_mode = 1
+1/autotile/bitmask_mode = 1
+1/autotile/bitmask_flags = [ Vector2( 0, 0 ), 16, Vector2( 0, 1 ), 176, Vector2( 0, 2 ), 50, Vector2( 1, 0 ), 144, Vector2( 1, 2 ), 56, Vector2( 2, 0 ), 48, Vector2( 2, 1 ), 152, Vector2( 2, 2 ), 26, Vector2( 3, 0 ), 18, Vector2( 3, 1 ), 146, Vector2( 4, 0 ), 24 ]
+1/autotile/icon_coordinate = Vector2( 0, 0 )
+1/autotile/tile_size = Vector2( 32, 64 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
 [node name="World" type="YSort"]
 script = ExtResource( 7 )
 
@@ -1450,6 +1500,9 @@ __meta__ = {
 }
 
 [node name="Animals" type="YSort" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="NatureObjects" type="YSort" parent="."]
 __meta__ = {
@@ -1467,5 +1520,10 @@ visible = false
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="TempTiles" type="TileMap" parent="."]
+tile_set = SubResource( 338 )
+cell_size = Vector2( 32, 32 )
+format = 1
 
 [connection signal="timeout" from="SpawnEnemyTimer" to="." method="_on_SpawnEnemyTimer_timeout"]

@@ -1317,6 +1317,113 @@ var male = {
 		1 : preload("res://Characters/Human/male/RETRACTING/assets/left/shoes/shoes.png")
 	},
 	
+	body_struggle_down = {
+		0 : preload("res://Characters/Human/male/STRUGGLE/body/down/body.png")
+	},
+	body_struggle_up = {
+		0 : preload("res://Characters/Human/male/STRUGGLE/body/up/body.png")
+	},
+	body_struggle_right = {
+		0 : preload("res://Characters/Human/male/STRUGGLE/body/right/body.png")
+	},
+	body_struggle_left = {
+		0 : preload("res://Characters/Human/male/STRUGGLE/body/left/body.png")
+	},
+
+	arms_struggle_down = {
+		0 : preload("res://Characters/Human/male/STRUGGLE/body/down/arms.png")
+	},
+	arms_struggle_up = {
+		0 : preload("res://Characters/Human/male/STRUGGLE/body/up/arms.png")
+	},
+	arms_struggle_right = {
+		0 : preload("res://Characters/Human/male/STRUGGLE/body/right/arms.png")
+	},
+	arms_struggle_left = {
+		0 : preload("res://Characters/Human/male/STRUGGLE/body/left/arms.png")
+	},
+
+	acc_struggle_down = {
+		0 : null,
+	},
+	acc_struggle_up = {
+		0 : null,
+	},
+	acc_struggle_right = {
+		0 : null,
+	},
+	acc_struggle_left = {
+		0 : null,
+	},
+
+	head_attribute_struggle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_struggle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_struggle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_struggle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_struggle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/down/shirts/shirt.png")
+	},
+	shirts_struggle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/up/shirts/shirt.png")
+	},
+	shirts_struggle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/right/shirts/shirt.png")
+	},
+	shirts_struggle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/left/shirts/shirt.png")
+	},
+
+	pants_struggle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/down/pants/pants.png")
+	},
+	pants_struggle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/up/pants/pants.png")
+	},
+	pants_struggle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/right/pants/pants.png")
+	},
+	pants_struggle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/left/pants/pants.png")
+	},
+
+	shoes_struggle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/down/shoes/shoes.png")
+	},
+	shoes_struggle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/up/shoes/shoes.png")
+	},
+	shoes_struggle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/right/shoes/shoes.png")
+	},
+	shoes_struggle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE/assets/left/shoes/shoes.png")
+	},
+	
 	body_harvest_down = {
 		0 : preload("res://Characters/Human/male/HARVESTING/body/down/body.png")
 	},

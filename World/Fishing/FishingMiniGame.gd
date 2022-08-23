@@ -19,14 +19,15 @@ func set_active():
 func spawn_random_fish():
 	$TempFishIcon.hide()
 	$Hook.position.y = 280
-	if Util.chance(25):
-		spawn_level1()
-	elif Util.chance(25):
-		spawn_level2()
-	elif Util.chance(25):
-		spawn_level3()
-	else:
-		spawn_level4()
+	spawn_level1()
+#	if Util.chance(25):
+#		spawn_level1()
+#	elif Util.chance(25):
+#		spawn_level2()
+#	elif Util.chance(25):
+#		spawn_level3()
+#	else:
+#		spawn_level4()
 
 func _physics_process(delta):
 	if get_parent().mini_game_active:
@@ -59,6 +60,8 @@ func _physics_process(delta):
 				$Progress.value -= 155 * delta
 				if ($Progress.value <= 0):
 					lost_fish()
+		get_parent().set_active_fish_line_position($Progress.value)
+					
 		
 func caught_fish():
 	print("CAUGHT")

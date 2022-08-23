@@ -51,6 +51,8 @@ var collisionMask = null
 const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
+	character = _character.new()
+	character.LoadPlayerCharacter("human_male")
 	set_username("")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
 	PlayerStats.connect("health_depleted", self, "player_death")
@@ -361,4 +363,5 @@ func walk_state(_direction):
 #	day_night_animation_player.play("set night")
 #func set_day():
 #	day_night_animation_player.play_backwards("set night")
+
 

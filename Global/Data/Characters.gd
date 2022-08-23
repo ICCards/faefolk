@@ -1,5 +1,144 @@
 extends Node
 
+#	body_struggle_down = {
+#		0 : preload()
+#	},
+#	body_struggle_up = {
+#		0 : preload()
+#	},
+#	body_struggle_right = {
+#		0 : preload()
+#	},
+#	body_struggle_left = {
+#		0 : preload()
+#	},
+#
+#	arms_struggle_down = {
+#		0 : preload()
+#	},
+#	arms_struggle_up = {
+#		0 : preload()
+#	},
+#	arms_struggle_right = {
+#		0 : preload()
+#	},
+#	arms_struggle_left = {
+#		0 : preload()
+#	},
+#
+#	acc_struggle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_struggle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_struggle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_struggle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_struggle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_struggle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_struggle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_struggle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_struggle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_struggle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_struggle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_struggle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_struggle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_struggle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_struggle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_struggle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_struggle_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_struggle_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_struggle_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_struggle_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+#	body_eat = {
+#		0 : preload()
+#	},
+#	arms_eat = {
+#		0 : preload()
+#	},
+#	acc_eat = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_eat = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_eat = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_eat = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_eat = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+
 #	body_harvest_down = {
 #		0 : preload()
 #	},
@@ -5381,6 +5520,10 @@ var body_sprites = {
 	'retract_down': null,
 	'retract_left': null,
 	'retract_right': null,
+	'struggle_up': null,
+	'struggle_down': null,
+	'struggle_left': null,
+	'struggle_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5429,6 +5572,10 @@ var arms_sprites = {
 	'retract_down': null,
 	'retract_left': null,
 	'retract_right': null,
+	'struggle_up': null,
+	'struggle_down': null,
+	'struggle_left': null,
+	'struggle_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5481,6 +5628,10 @@ var acc_sprites = {
 	'retract_down': null,
 	'retract_left': null,
 	'retract_right': null,
+	'struggle_up': null,
+	'struggle_down': null,
+	'struggle_left': null,
+	'struggle_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5533,6 +5684,10 @@ var headAtr_sprites = {
 	'retract_down': null,
 	'retract_left': null,
 	'retract_right': null,
+	'struggle_up': null,
+	'struggle_down': null,
+	'struggle_left': null,
+	'struggle_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5585,6 +5740,10 @@ var pants_sprites = {
 	'retract_down': null,
 	'retract_left': null,
 	'retract_right': null,
+	'struggle_up': null,
+	'struggle_down': null,
+	'struggle_left': null,
+	'struggle_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5637,6 +5796,10 @@ var shirts_sprites = {
 	'retract_down': null,
 	'retract_left': null,
 	'retract_right': null,
+	'struggle_up': null,
+	'struggle_down': null,
+	'struggle_left': null,
+	'struggle_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5689,6 +5852,10 @@ var shoes_sprites = {
 	'retract_down': null,
 	'retract_left': null,
 	'retract_right': null,
+	'struggle_up': null,
+	'struggle_down': null,
+	'struggle_left': null,
+	'struggle_right': null,
 	'sword_swing_down': null,
 	'sword_swing_up': null,
 	'sword_swing_left': null,
@@ -5807,6 +5974,10 @@ func set_attributes(set_char):
 	'retract_down': character.body_retract_down[0],
 	'retract_left': character.body_retract_left[0],
 	'retract_right': character.body_retract_right[0],
+	'struggle_up': character.body_struggle_up[0],
+	'struggle_down': character.body_struggle_down[0],
+	'struggle_left': character.body_struggle_left[0],
+	'struggle_right': character.body_struggle_right[0],
 	'holding_walk_down' : character.body_holding_walk_down[0], 
 	'holding_walk_up' : character.body_holding_walk_up[0], 
 	'holding_walk_left' : character.body_holding_walk_left[0], 
@@ -5862,6 +6033,10 @@ func set_attributes(set_char):
 	'retract_down': character.arms_retract_down[0],
 	'retract_left': character.arms_retract_left[0],
 	'retract_right': character.arms_retract_right[0],
+	'struggle_up': character.arms_struggle_up[0],
+	'struggle_down': character.arms_struggle_down[0],
+	'struggle_left': character.arms_struggle_left[0],
+	'struggle_right': character.arms_struggle_right[0],
 	'holding_walk_down' : character.arms_holding_walk_down[0], 
 	'holding_walk_up' : character.arms_holding_walk_up[0], 
 	'holding_walk_left' : character.arms_holding_walk_left[0], 
@@ -5917,6 +6092,10 @@ func set_attributes(set_char):
 	'retract_down': character.acc_retract_down[acc_index],
 	'retract_left': character.acc_retract_left[acc_index],
 	'retract_right': character.acc_retract_right[acc_index],
+	'struggle_up': character.acc_struggle_up[acc_index],
+	'struggle_down': character.acc_struggle_down[acc_index],
+	'struggle_left': character.acc_struggle_left[acc_index],
+	'struggle_right': character.acc_struggle_right[acc_index],
 	'holding_walk_down' : character.acc_holding_walk_down[acc_index], 
 	'holding_walk_up' : character.acc_holding_walk_up[acc_index], 
 	'holding_walk_left' : character.acc_holding_walk_left[acc_index], 
@@ -5972,6 +6151,10 @@ func set_attributes(set_char):
 	'retract_down': character.head_attribute_retract_down[headAtr_index],
 	'retract_left': character.head_attribute_retract_left[headAtr_index],
 	'retract_right': character.head_attribute_retract_right[headAtr_index],
+	'struggle_up': character.head_attribute_struggle_up[headAtr_index],
+	'struggle_down': character.head_attribute_struggle_down[headAtr_index],
+	'struggle_left': character.head_attribute_struggle_left[headAtr_index],
+	'struggle_right': character.head_attribute_struggle_right[headAtr_index],
 	'holding_walk_down' : character.head_attribute_holding_walk_down[headAtr_index], 
 	'holding_walk_up' : character.head_attribute_holding_walk_up[headAtr_index], 
 	'holding_walk_left' : character.head_attribute_holding_walk_left[headAtr_index], 
@@ -6027,6 +6210,10 @@ func set_attributes(set_char):
 	'retract_down': character.pants_retract_down[pants_index],
 	'retract_left': character.pants_retract_left[pants_index],
 	'retract_right': character.pants_retract_right[pants_index],
+	'struggle_up': character.pants_struggle_up[pants_index],
+	'struggle_down': character.pants_struggle_down[pants_index],
+	'struggle_left': character.pants_struggle_left[pants_index],
+	'struggle_right': character.pants_struggle_right[pants_index],
 	'holding_walk_down' : character.pants_holding_walk_down[pants_index], 
 	'holding_walk_up' : character.pants_holding_walk_up[pants_index], 
 	'holding_walk_left' : character.pants_holding_walk_left[pants_index], 
@@ -6082,6 +6269,10 @@ func set_attributes(set_char):
 	'retract_down': character.shirts_retract_down[shirts_index],
 	'retract_left': character.shirts_retract_left[shirts_index],
 	'retract_right': character.shirts_retract_right[shirts_index],
+	'struggle_up': character.shirts_struggle_up[shirts_index],
+	'struggle_down': character.shirts_struggle_down[shirts_index],
+	'struggle_left': character.shirts_struggle_left[shirts_index],
+	'struggle_right': character.shirts_struggle_right[shirts_index],
 	'holding_walk_down' : character.shirts_holding_walk_down[shirts_index], 
 	'holding_walk_up' : character.shirts_holding_walk_up[shirts_index], 
 	'holding_walk_left' : character.shirts_holding_walk_left[shirts_index], 
@@ -6137,6 +6328,10 @@ func set_attributes(set_char):
 	'retract_down': character.shoes_retract_down[shoes_index],
 	'retract_left': character.shoes_retract_left[shoes_index],
 	'retract_right': character.shoes_retract_right[shoes_index],
+	'struggle_up': character.shoes_struggle_up[shoes_index],
+	'struggle_down': character.shoes_struggle_down[shoes_index],
+	'struggle_left': character.shoes_struggle_left[shoes_index],
+	'struggle_right': character.shoes_struggle_right[shoes_index],
 	'holding_walk_down' : character.shoes_holding_walk_down[shoes_index], 
 	'holding_walk_up' : character.shoes_holding_walk_up[shoes_index], 
 	'holding_walk_left' : character.shoes_holding_walk_left[shoes_index], 
