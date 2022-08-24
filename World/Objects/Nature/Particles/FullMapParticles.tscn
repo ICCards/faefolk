@@ -9,6 +9,9 @@ position = Vector2( 16000, 16000 )
 script = ExtResource( 3 )
 
 [node name="Clouds" parent="." instance=ExtResource( 2 )]
-scale_amount = 2.5
+amount = 2500
+initial_velocity_random = 0.62
+damping_random = 0.75
+scale_amount = 3.0
 
 [node name="FallingLeaf" parent="." instance=ExtResource( 1 )]

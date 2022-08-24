@@ -37,10 +37,10 @@ func _physics_process(delta):
 		else:
 			if hookVelocity < maxVelocity:
 				hookVelocity += hookDeceleration
-				
+
 		if (Input.is_action_just_pressed("ui_accept")):
 			hookVelocity -= .5
-			
+
 		var target = $Hook.position.y + hookVelocity
 		if (target >= 280):
 			hookVelocity *= -bounce
@@ -49,7 +49,7 @@ func _physics_process(delta):
 			$Hook.position.y = 38
 		else:
 			$Hook.position.y = target
-			
+
 		# Adjust Value
 		if (fishable == false):
 			if (len($Hook/Area2D.get_overlapping_areas()) > 0):

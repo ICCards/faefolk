@@ -3,6 +3,9 @@ extends KinematicBody2D
 onready var animation_player = $CompositeSprites/AnimationPlayer
 onready var sword_swing = $Swinging/SwordSwing
 onready var composite_sprites = $CompositeSprites
+onready var holding_item = $HoldingItem
+
+onready var Eating_particles = preload("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
 
 var valid_tiles
 var path_tiles 
@@ -29,7 +32,7 @@ onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
 	SWING,
-	EAT,
+	EATING,
 	FISHING,
 	CHANGE_TILE,
 	HARVESTING
@@ -216,13 +219,12 @@ func _process(_delta) -> void:
 		$PlaceItemsUI.set_invisible()
 	else:
 		is_mouse_over_hotbar = false
-	if not PlayerInventory.viewInventoryMode and not PlayerInventory.interactive_screen_mode and state == MOVEMENT:
+	if not PlayerInventory.viewInventoryMode and not PlayerInventory.interactive_screen_mode:
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
 			$PickupZone.items_in_range.erase(pickup_item)
-		match state:
-			MOVEMENT:
+		if state == MOVEMENT:
 				movement_state(_delta)
 	else: 
 		idle_state(direction)
@@ -237,7 +239,8 @@ func _unhandled_input(event):
 		not is_mouse_over_hotbar and \
 		not swingActive and \
 		not is_player_dead and \
-		not is_player_sleeping: 
+		not is_player_sleeping and \
+		state != SWING: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
 			if item_name == "blueprint" and current_building_item == "wall":
@@ -253,7 +256,8 @@ func _unhandled_input(event):
 				$DetectPathType/FootstepsSound.stream_paused = true
 				$Swinging.initialize(item_name, direction)
 			elif event.is_action_pressed("mouse_click") and itemCategory == "Food":
-				$EatingParticles.eat(item_name)
+#				$DetectPathType/FootstepsSound.stream_paused = true
+				eat(item_name)
 			elif itemCategory == "Placable object" and item_name == "tent":
 				$PlaceItemsUI.place_tent_state()
 			elif itemCategory == "Placable object" and item_name == "sleeping bag":
@@ -264,8 +268,20 @@ func _unhandled_input(event):
 				$PlaceItemsUI.place_path_state(item_name, path_tiles)
 			elif itemCategory == "Seed":
 				$PlaceItemsUI.place_seed_state(item_name, hoed_tiles)
+			
 	else: 
 		$PlaceItemsUI.set_invisible()
+
+func eat(item_name):
+	state = EATING
+	var eating_paricles = Eating_particles.instance()
+	eating_paricles.item_name = item_name
+	add_child(eating_paricles)
+	composite_sprites.set_player_animation(character, "eat", null)
+	animation_player.play("eat")
+	yield(animation_player, "animation_finished")
+	state = MOVEMENT
+
 
 
 func movement_state(delta):

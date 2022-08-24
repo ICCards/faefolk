@@ -1,0 +1,109 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://World/Player/Player/EatingParticles.gd" type="Script" id=1]
+
+[node name="EatingParticles" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EatingParticles1" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles2" type="CPUParticles2D" parent="."]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles3" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles4" type="CPUParticles2D" parent="."]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles5" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles6" type="CPUParticles2D" parent="."]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles7" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles8" type="CPUParticles2D" parent="."]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.5

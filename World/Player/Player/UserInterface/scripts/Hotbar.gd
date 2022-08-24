@@ -25,19 +25,20 @@ func _ready():
 	
 
 func hovered_slot(slot: SlotClass):
-	if slot.item != null:
+	if slot.item:
 		slot.item.hover_item()
 		item = slot.item.item_name
 
 func exited_slot(slot: SlotClass):
 	item = null
-	if slot.item != null and not (slot.slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot.slot_index):
+	if slot.item and not (slot.slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot.slot_index):
 		slot.item.exit_item()
 		
 
 func _physics_process(delta):
 	adjusted_description_position()
-	if item != null and find_parent("UserInterface").holding_item == null:
+	if item and find_parent("UserInterface").holding_item == null:
+		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.visible = true
 		$ItemDescription.item_name = item
 		$ItemDescription.position = adjusted_pos
@@ -61,6 +62,9 @@ func adjusted_description_position():
 		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -68)
 	else:
 		adjusted_pos = Vector2(get_local_mouse_position().x + 40, -51)
+	if item:
+		if JsonData.item_data[item]["ItemCategory"] == "Food":
+			adjusted_pos += Vector2(0,-49)
 
 
 func update_tool_health():

@@ -1,6 +1,10 @@
 extends Node2D
 
 
+var mouse_being_held_down = false
+var crafting_item_being_held_down = null
+var is_auto_crafting_active = false
+
 var page1 = [
 	"wood box",
 	"wood barrel",
@@ -195,14 +199,16 @@ func _on_SleepingBagArea_mouse_exited():
 	exited_crafting_area("sleeping bag")
 
 func play_craft_sound():
-	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-	$SoundEffects.play()
+	pass
+#	$SoundEffects.stream = Sounds.button_select
+#	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+#	$SoundEffects.play()
 	
 func play_error_sound():
-	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-	$SoundEffects.play()
+	pass
+#	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+#	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+#	$SoundEffects.play()
 	
 
 func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
@@ -214,14 +220,36 @@ func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
 		else:
 			play_error_sound()
 			
+#func _process(delta):
+#	if mouse_being_held_down:
+#		if not is_auto_crafting_active:
+#			is_auto_crafting_active = true
+#			yield(get_tree().create_timer(0.4), "timeout")
+#			if crafting_item_being_held_down:
+#				if sufficientMaterialToCraft(crafting_item_being_held_down):
+#					play_craft_sound()
+#					PlayerInventory.craft_item("wood barrel")
+#					initialize_crafting()
+#					is_auto_crafting_active = false
+#				else:
+#					play_error_sound()
+#					is_auto_crafting_active = false
+#			else:
+#				is_auto_crafting_active = false
+			
 func _on_WoodBarrelArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		if sufficientMaterialToCraft("wood barrel"):
 			play_craft_sound()
 			PlayerInventory.craft_item("wood barrel")
 			initialize_crafting()
+#			crafting_item_being_held_down = "wood barrel"
+#			mouse_being_held_down = true
 		else:
 			play_error_sound()
+#	elif not event.is_action_pressed("mouse_click"):
+#		mouse_being_held_down = false
+#		crafting_item_being_held_down = null
 			
 func _on_WoodFenceArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
