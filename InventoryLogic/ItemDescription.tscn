@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
 [ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top left.png" type="Texture" id=2]
@@ -11,6 +11,37 @@
 [ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom middle.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom left.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom right.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Themes/EnergyIcon.tres" type="Theme" id=12]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 72
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 1 )
+
+[sub_resource type="Theme" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+size = 72
+outline_size = 8
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 53
+font_data = SubResource( 5 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 6 )
+
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 6 )
 
 [node name="ItemDescription" type="Node2D"]
 scale = Vector2( 2.7, 2.7 )
@@ -140,9 +171,59 @@ text = "Food"
 [node name="ItemDescription" type="Label" parent="."]
 margin_left = 5.0
 margin_top = 27.963
-margin_right = 376.0
-margin_bottom = 281.963
+margin_right = 379.0
+margin_bottom = 152.963
 rect_scale = Vector2( 0.12, 0.12 )
 theme = ExtResource( 1 )
-text = "Some random description that is just here for some filler code"
+text = "Some random description that"
+autowrap = true
+
+[node name="FoodEnergyLabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="FoodHealthLabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="EnergyIcon" type="Label" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = 5.0
+margin_top = 36.0
+margin_right = 34.0
+margin_bottom = 118.0
+rect_scale = Vector2( 0.25, 0.25 )
+theme = ExtResource( 12 )
+custom_fonts/font = SubResource( 2 )
+text = "+"
+
+[node name="HealthIcon" type="Label" parent="."]
+modulate = Color( 1, 0.0235294, 0.0235294, 1 )
+margin_left = 6.0
+margin_top = 52.0
+margin_right = 46.0
+margin_bottom = 134.0
+rect_scale = Vector2( 0.15, 0.15 )
+theme = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+text = "H"
+
+[node name="EnergyAmount" type="Label" parent="."]
+margin_left = 14.4444
+margin_top = 44.8148
+margin_right = 388.444
+margin_bottom = 105.815
+rect_scale = Vector2( 0.12, 0.12 )
+theme = SubResource( 7 )
+text = "+10 Energy"
+autowrap = true
+
+[node name="HealthAmount" type="Label" parent="."]
+margin_left = 14.4444
+margin_top = 54.8148
+margin_right = 388.444
+margin_bottom = 115.815
+rect_scale = Vector2( 0.12, 0.12 )
+theme = SubResource( 8 )
+text = "+10 Health"
 autowrap = true

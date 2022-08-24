@@ -13,6 +13,8 @@ var color6
 var color7
 var color8
 
+var item_name
+
 enum {
 	MOVEMENT, 
 	SWING,
@@ -22,16 +24,24 @@ enum {
 }
 var rng = RandomNumberGenerator.new()
 
+func _ready():
+	print(position)
+	eat()
 
-func eat(food):
-	if get_parent().state != EATING:
-		get_parent().state = EATING
-		PlayerStats.eat(food)
-		set_particle_colors(food)
-		composite_sprites.set_player_animation(get_parent().character, "eat", null)
-		player_animation_player.play("eat")
-		yield(player_animation_player, "animation_finished")
-		get_parent().state = MOVEMENT
+func eat():
+	PlayerStats.eat(item_name)
+	set_particle_colors(item_name)
+	$EatingParticles1.emitting = true
+	$EatingParticles2.emitting = true
+	$EatingParticles3.emitting = true
+	$EatingParticles4.emitting = true
+	$EatingParticles5.emitting = true
+	$EatingParticles6.emitting = true
+	$EatingParticles7.emitting = true
+	$EatingParticles8.emitting = true
+	yield(get_tree().create_timer(1.5), "timeout")
+	queue_free()
+	
 	
 func set_particle_colors(item_name):
 	var itemImage = Image.new()

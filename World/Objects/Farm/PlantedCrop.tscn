@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://World/Objects/Farm/PlantedCrop.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/harvest.mp3" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15, 15 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "animate"
@@ -46,13 +43,6 @@ position = Vector2( -1, -13 )
 position = Vector2( 17, 14 )
 shape = SubResource( 2 )
 
-[node name="HarvestBox" type="Area2D" parent="."]
-position = Vector2( -1, -13 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HarvestBox"]
-position = Vector2( 16, 13 )
-shape = SubResource( 1 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/animate = SubResource( 3 )
 
@@ -77,16 +67,15 @@ position = Vector2( 15, 0 )
 scale = Vector2( 1.6, 1.6 )
 
 [node name="Harvest" type="TextureButton" parent="."]
-margin_top = -15.0
-margin_right = 30.0
-margin_bottom = 15.0
+margin_top = -16.0
+margin_right = 32.0
+margin_bottom = 16.0
 
 [connection signal="body_entered" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_entered"]
 [connection signal="body_exited" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_exited"]
-[connection signal="input_event" from="HarvestBox" to="." method="_on_Area2D_input_event"]
-[connection signal="mouse_entered" from="HarvestBox" to="." method="_on_Area2D_mouse_entered"]
-[connection signal="mouse_exited" from="HarvestBox" to="." method="_on_Area2D_mouse_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="mouse_entered" from="Harvest" to="." method="_on_Harvest_mouse_entered"]
+[connection signal="mouse_exited" from="Harvest" to="." method="_on_Harvest_mouse_exited"]
 [connection signal="pressed" from="Harvest" to="." method="_on_Harvest_pressed"]

@@ -16,7 +16,7 @@ colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 [node name="Clouds" type="CPUParticles2D"]
 modulate = Color( 0.101961, 0.203922, 0.231373, 0.745098 )
 material = SubResource( 1 )
-amount = 4000
+amount = 3000
 speed_scale = 0.1
 texture = ExtResource( 1 )
 emission_shape = 2

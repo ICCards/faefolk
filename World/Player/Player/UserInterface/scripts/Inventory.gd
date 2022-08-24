@@ -22,8 +22,9 @@ func _ready():
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
 
 func _physics_process(delta):
-	if item != null and find_parent("UserInterface").holding_item == null:
+	if item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.visible = true
+		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.item_name = item
 		$ItemDescription.position = get_local_mouse_position() + Vector2(10, 15)
 		$ItemDescription.initialize()
@@ -42,13 +43,13 @@ func initialize_inventory():
 	
 
 func hovered_slot(slot: SlotClass):
-	if slot.item != null:
+	if slot.item:
 		slot.item.hover_item()
 		item = slot.item.item_name
 
 func exited_slot(slot: SlotClass):
 	item = null
-	if slot.item != null:
+	if slot.item:
 		slot.item.exit_item()
 
 

@@ -63,15 +63,15 @@ func start_fishing_mini_game():
 	player_animation_player.play("struggle")
 	mini_game_active = true
 	change_start_point_pos()
-	start_point += Vector2(0,-20)
+	line.points = [start_point, end_point]
 	$FishingMiniGame.spawn_random_fish()
 
 func change_start_point_pos():
 	match direction:
 		"UP":
-			start_point = Vector2(13,-35)
+			start_point = Vector2(13,-55)
 		"DOWN":
-			start_point = Vector2(-12,-42)
+			start_point = Vector2(-12,-62)
 		_:
 			start_point += Vector2(0,-20)
 
@@ -224,7 +224,10 @@ func set_active_fish_line_position(progress_of_game):
 func return_adjusted_end_point(progress_of_game):
 	match direction:
 		"RIGHT":
-			return end_point - Vector2(((progress_of_game-200)/800)*cast_distance, 0)
+#			if progress_of_game <= 200:	
+			return end_point + Vector2(32*(1-(progress_of_game/200)), 0)
+#			else:
+#				return end_point + Vector2(32*(1-(progress_of_game/800)), 0)
 		"LEFT":
 			return end_point + Vector2(((progress_of_game-200)/800)*cast_distance, 0)
 		"UP":

@@ -1,7 +1,7 @@
 {
     "carrot": {
-        "Energy": 10,
-        "Health": 10
+        "Energy": 8,
+        "Health": 4
     },
     "potato": {
         "Energy": 10,
@@ -68,8 +68,8 @@
         "Health": 10
     },
     "grape": {
-        "Energy": 10,
-        "Health": 10
+        "Energy": 20,
+        "Health": 18
     },
     "cabbage": {
         "Energy": 10,

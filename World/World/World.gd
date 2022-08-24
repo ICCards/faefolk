@@ -81,14 +81,18 @@ func set_world_visible():
 
 
 func _ready():
-	var loadingScreen = LoadingScreen.instance()
-	loadingScreen.name = "loadingScreen"
-	add_child(loadingScreen)
-	get_node("loadingScreen").set_phase("Getting map")
-	yield(get_tree().create_timer(1), "timeout")
-	Server.generated_map.clear()
-	Server.generate_map()
-	wait_for_map()
+	spawnPlayerExample()
+	Server.isLoaded = true
+	Server.world = self
+#	rng.randomize()
+#	var loadingScreen = LoadingScreen.instance()
+#	loadingScreen.name = "loadingScreen"
+#	add_child(loadingScreen)
+#	get_node("loadingScreen").set_phase("Getting map")
+#	yield(get_tree().create_timer(1), "timeout")
+#	Server.generated_map.clear()
+#	Server.generate_map()
+#	wait_for_map()
 
 
 func wait_for_map():
@@ -170,14 +174,7 @@ func spawn_IC_kitty():
 	kitty.name = "kittyNode"
 	$Players.add_child(kitty, true)
 		
-func get_valid_player_spawn_position():
-	rng.randomize()
-	var randomLoc = Vector2(rng.randi_range(2, 298), rng.randi_range(2, 298))
-	if validTiles.get_cellv(randomLoc) != -1:
-		valid_spawn_position = dirt.map_to_world(randomLoc)
-	else:
-		get_valid_player_spawn_position()
-		
+
 
 
 func spawnNewPlayer(player):
@@ -272,7 +269,6 @@ func buildMap(map):
 	for id in map["log"]:
 		var loc = map["log"][id]["l"]
 		Tiles.remove_nature_invalid_tiles(loc, "log")
-		rng.randomize()
 		var variety = rng.randi_range(0, 11)
 		var object = BranchObject.instance()
 		object.name = id
@@ -350,14 +346,10 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	fill_biome_gaps(map)
-	yield(get_tree().create_timer(1.0), "timeout")
-	check_and_remove_invalid_autotiles(map)
-	yield(get_tree().create_timer(1.0), "timeout")
 	set_water_tiles()
-	yield(get_tree().create_timer(1.0), "timeout")
+	check_and_remove_invalid_autotiles(map)
 	update_tile_bitmask_regions()
 	get_node("loadingScreen").set_phase("Spawning in")
-	yield(get_tree().create_timer(1.0), "timeout")
 	Server.player_state = "WORLD"
 	print("Map loaded")
 #	yield(get_tree().create_timer(8.5), "timeout")
@@ -371,18 +363,20 @@ func buildMap(map):
 
 func update_tile_bitmask_regions():
 	dirt.update_bitmask_region()
-	yield(get_tree().create_timer(0.25), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	snow.update_bitmask_region()
-	yield(get_tree().create_timer(0.25), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	ocean.update_bitmask_region()
-	yield(get_tree().create_timer(0.25), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	sand.update_bitmask_region()
-	yield(get_tree().create_timer(0.25), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	plains.update_bitmask_region()
-	yield(get_tree().create_timer(0.25), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	forest.update_bitmask_region()
-	yield(get_tree().create_timer(0.25), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	desert.update_bitmask_region()
+	yield(get_tree().create_timer(0.5), "timeout")
+	wetSand.update_bitmask_region()
 
 
 func spawn_animals():
@@ -392,63 +386,62 @@ func spawn_animals():
 		spawnRandomDuck()
 	
 func set_water_tiles():
-	for x in range(1000):
+	for x in range(1000): # fill ocean
 		for y in range(1000):
-			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and wetSand.get_cell(x,y) == -1:
+			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
+				wetSand.set_cell(x, y, 0)
 				ocean.set_cell(x, y, 0)
-				sand.set_cell(x, y, 0)
 				validTiles.set_cell(x, y, -1)
-	for i in range(2):
-		for loc in sand.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, sand) != 4:
-				sand.set_cellv(loc + Vector2(1, 0), 0)
-				sand.set_cellv(loc + Vector2(-1, 0), 0)
-				sand.set_cellv(loc + Vector2(0, 1), 0)
-				sand.set_cellv(loc + Vector2(0, -1), 0)
-	for i in range(2):
-		for cell in ocean.get_used_cells():
-				if Tiles.return_neighboring_cells(cell, ocean) <= 1:
-					ocean.set_cellv(cell, -1)
-					sand.set_cellv(cell, 0)
-	for cell in ocean.get_used_cells():
+	for loc in ocean.get_used_cells(): # remove outer layer to show wet sand
+		if sand.get_cellv(loc+Vector2(1,0)) != -1 or sand.get_cellv(loc+Vector2(-1,0)) != -1 or sand.get_cellv(loc+Vector2(0,1)) != -1 or sand.get_cellv(loc+Vector2(0,-1)) != -1:
+			ocean.set_cellv(loc, -1)
+	for x in range(1000): # fill empty tiles
+		for y in range(1000):
+			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
+				Tiles._set_cell(sand, x, y, 0)
+	for cell in ocean.get_used_cells(): # ocean movement effect
 		if Tiles.isCenterBitmaskTile(cell, ocean):
 			if Util.chance(50):
-				rng.randomize()
 				$GeneratedTiles/WaveTiles.set_cellv(cell, rng.randi_range(0, 4))
 	
 func fill_biome_gaps(map):
-	for i in range(2):
-		for loc in dirt.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, dirt) != 4:
-				dirt.set_cellv(loc + Vector2(1, 0), 0)
-				dirt.set_cellv(loc + Vector2(-1, 0), 0)
-				dirt.set_cellv(loc + Vector2(0, 1), 0)
-				dirt.set_cellv(loc + Vector2(0, -1), 0)
-		for loc in snow.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, snow) != 4:
-				snow.set_cellv(loc + Vector2(1, 0), 0)
-				snow.set_cellv(loc + Vector2(-1, 0), 0)
-				snow.set_cellv(loc + Vector2(0, 1), 0)
-				snow.set_cellv(loc + Vector2(0, -1), 0)
-		for loc in plains.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, dirt) != 4:
-				plains.set_cellv(loc + Vector2(1, 0), 0)
-				plains.set_cellv(loc + Vector2(-1, 0), 0)
-				plains.set_cellv(loc + Vector2(0, 1), 0)
-				plains.set_cellv(loc + Vector2(0, -1), 0)
-		for loc in forest.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, forest) != 4:
-				forest.set_cellv(loc + Vector2(1, 0), 0)
-				forest.set_cellv(loc + Vector2(-1, 0), 0)
-				forest.set_cellv(loc + Vector2(0, 1), 0)
-				forest.set_cellv(loc + Vector2(0, -1), 0)
-		for loc in desert.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, desert) != 4:
-				desert.set_cellv(loc + Vector2(1, 0), 0)
-				desert.set_cellv(loc + Vector2(-1, 0), 0)
-				desert.set_cellv(loc + Vector2(0, 1), 0)
-				desert.set_cellv(loc + Vector2(0, -1), 0)
-		#yield(get_tree().create_timer(1.0), "timeout")
+	for loc in sand.get_used_cells():
+		if Tiles.return_neighboring_cells(loc, desert) != 4:
+			Tiles._set_cell(sand, loc.x+1, loc.y, 0)
+			Tiles._set_cell(sand, loc.x-1, loc.y, 0)
+			Tiles._set_cell(sand, loc.x, loc.y+1, 0)
+			Tiles._set_cell(sand, loc.x, loc.y-1, 0)
+	for loc in dirt.get_used_cells():
+		if Tiles.return_neighboring_cells(loc, dirt) != 4:
+			dirt.set_cellv(loc + Vector2(1, 0), 0)
+			dirt.set_cellv(loc + Vector2(-1, 0), 0)
+			dirt.set_cellv(loc + Vector2(0, 1), 0)
+			dirt.set_cellv(loc + Vector2(0, -1), 0)
+	for loc in snow.get_used_cells():
+		if Tiles.return_neighboring_cells(loc, snow) != 4:
+			snow.set_cellv(loc + Vector2(1, 0), 0)
+			snow.set_cellv(loc + Vector2(-1, 0), 0)
+			snow.set_cellv(loc + Vector2(0, 1), 0)
+			snow.set_cellv(loc + Vector2(0, -1), 0)
+	for loc in plains.get_used_cells():
+		if Tiles.return_neighboring_cells(loc, dirt) != 4:
+			plains.set_cellv(loc + Vector2(1, 0), 0)
+			plains.set_cellv(loc + Vector2(-1, 0), 0)
+			plains.set_cellv(loc + Vector2(0, 1), 0)
+			plains.set_cellv(loc + Vector2(0, -1), 0)
+	for loc in forest.get_used_cells():
+		if Tiles.return_neighboring_cells(loc, forest) != 4:
+			forest.set_cellv(loc + Vector2(1, 0), 0)
+			forest.set_cellv(loc + Vector2(-1, 0), 0)
+			forest.set_cellv(loc + Vector2(0, 1), 0)
+			forest.set_cellv(loc + Vector2(0, -1), 0)
+	for loc in desert.get_used_cells():
+		if Tiles.return_neighboring_cells(loc, desert) != 4:
+			desert.set_cellv(loc + Vector2(1, 0), 0)
+			desert.set_cellv(loc + Vector2(-1, 0), 0)
+			desert.set_cellv(loc + Vector2(0, 1), 0)
+			desert.set_cellv(loc + Vector2(0, -1), 0)
+	yield(get_tree().create_timer(0.25), "timeout")
 	
 
 func check_and_remove_invalid_autotiles(map):
@@ -471,6 +464,13 @@ func check_and_remove_invalid_autotiles(map):
 		for cell in dirt.get_used_cells():
 			if not Tiles.isValidAutoTile(cell, dirt):
 				dirt.set_cellv(cell, -1)
+		for cell in sand.get_used_cells():
+			if not Tiles.isValidAutoTile(cell, sand):
+				sand.set_cellv(cell, -1)
+		for cell in wetSand.get_used_cells():
+			if not Tiles.isValidAutoTile(cell, wetSand):
+				wetSand.set_cellv(cell, -1)
+				Tiles._set_cell(sand, cell.x, cell.y, 0)
 		yield(get_tree().create_timer(1.0), "timeout")
 
 func build_valid_tiles():
@@ -558,7 +558,6 @@ func _physics_process(delta):
 
 
 func returnValidSpawnLocation():
-	rng.randomize()
 	var tempLoc = Vector2(rng.randi_range(0, 32000), rng.randi_range(0, 32000))
 	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
 		return tempLoc
