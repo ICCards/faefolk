@@ -2,6 +2,16 @@ extends CanvasLayer
 
 var holding_item = null
 
+enum {
+	MOVEMENT, 
+	SWINGING,
+	EATING,
+	FISHING,
+	HARVESTING,
+	DYING,
+	SLEEPING
+}
+
 func _ready():
 	initialize_user_interface()
 
@@ -11,24 +21,25 @@ func initialize_user_interface():
 	$CurrentTime.visible = true
 
 func _input(event):
-	if event.is_action_pressed("open_menu") and holding_item == null and \
-	not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
-		toggle_inventory()
-	elif event.is_action_pressed("action") and holding_item == null and not PlayerInventory.viewInventoryMode and not PlayerInventory.chatMode:
-		if PlayerInventory.is_inside_chest_area:
-			open_chest()
-		elif PlayerInventory.is_inside_workbench_area:
-			open_workbench()
-		elif PlayerInventory.is_inside_stove_area:
-			open_stove()
-		elif PlayerInventory.is_inside_grain_mill_area:
-			open_grain_mill()
-#		elif PlayerInventory.is_inside_sleeping_bag_area:
-#			sleep()
-#	if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
-#		PlayerInventory.active_item_scroll_up()
-#	elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
-#		PlayerInventory.active_item_scroll_down()
+	if Server.player_node.state == MOVEMENT:
+		if event.is_action_pressed("open_menu") and holding_item == null and \
+		not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
+			toggle_inventory()
+		elif event.is_action_pressed("action") and holding_item == null and not PlayerInventory.viewInventoryMode and not PlayerInventory.chatMode:
+			if PlayerInventory.is_inside_chest_area:
+				open_chest()
+			elif PlayerInventory.is_inside_workbench_area:
+				open_workbench()
+			elif PlayerInventory.is_inside_stove_area:
+				open_stove()
+			elif PlayerInventory.is_inside_grain_mill_area:
+				open_grain_mill()
+	#		elif PlayerInventory.is_inside_sleeping_bag_area:
+	#			sleep()
+	#	if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
+	#		PlayerInventory.active_item_scroll_up()
+	#	elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
+	#		PlayerInventory.active_item_scroll_down()
 	
 
 

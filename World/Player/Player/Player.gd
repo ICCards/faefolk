@@ -7,14 +7,13 @@ onready var holding_item = $HoldingItem
 
 onready var Eating_particles = preload("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
 onready var Fishing = preload("res://World/Player/Player/Fishing/Fishing.tscn")
-onready var PlaceObjectScene = preload("res://World/Player/Player/AttachedScenes/PlaceObject.tscn") 
+onready var PlaceObjectScene = preload("res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
 
 
 var principal
 var character 
 var setting
 var current_building_item = null
-var username_callback = JavaScript.create_callback(self, "_username_callback")
 
 onready var state = MOVEMENT
 enum {
@@ -29,7 +28,6 @@ enum {
 
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
-
 var animation = "idle_down"
 var MAX_SPEED_DIRT := 12.5
 var MAX_SPEED_PATH := 14.5
@@ -132,10 +130,18 @@ func player_death():
 		state = DYING
 		composite_sprites.set_player_animation(character, "death_" + direction.to_lower(), null)
 		animation_player.play("death")
+		$Camera2D/UserInterface/Hotbar.hide()
+		$Camera2D/UserInterface/ChatBox.hide()
+		$Camera2D/UserInterface/CurrentTime.hide()
+		$Camera2D/UserInterface/PlayerStatsUI.hide()
 		yield(animation_player, "animation_finished")
 		PlayerStats.health = PlayerStats.health_maximum
 		PlayerStats.emit_signal("health_changed")
 		animation_player.stop()
+		$Camera2D/UserInterface/Hotbar.show()
+		$Camera2D/UserInterface/ChatBox.show()
+		$Camera2D/UserInterface/CurrentTime.show()
+		$Camera2D/UserInterface/PlayerStatsUI.show()
 		$Camera2D/UserInterface/DeathEffect.visible = false
 		state = MOVEMENT
 	
@@ -181,14 +187,14 @@ func _unhandled_input(event):
 			elif event.is_action_pressed("mouse_click") and item_category == "Food":
 				eat(item_name)
 			elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
-				init_placable_object(item_name, item_category)
+				show_placable_object(item_name, item_category)
 			else:
 				destroy_placable_object()
 	else: 
 		destroy_placable_object()
 
 
-func init_placable_object(item_name, item_category):
+func show_placable_object(item_name, item_category):
 	if item_category == "Seed":
 		item_name.erase(item_name.length() - 6, 6)
 	if not has_node("PlaceObject"): # does not exist yet, add to scene tree

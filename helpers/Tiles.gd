@@ -37,6 +37,7 @@ func reset_valid_tiles(location, var item_name = ""):
 	var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 	var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 	var building_tiles = get_node("/root/World/PlacableTiles/BuildingTiles")
+	var light_tiles = get_node("/root/World/PlacableTiles/LightTiles")
 	valid_tiles.set_cellv(Vector2(location), 0)
 	if item_name == "wood chest" or \
 	item_name == "stone chest" or \
@@ -58,6 +59,11 @@ func reset_valid_tiles(location, var item_name = ""):
 	elif item_name == "stone wall":
 		building_tiles.set_cellv(location, -1)
 		building_tiles.update_bitmask_region()
+	elif item_name == "torch" or \
+	item_name == "campfire" or \
+	item_name == "fire pedestal" or \
+	item_name == "tall fire pedestal":
+		light_tiles.set_cellv(location, -1)
 	else:
 		object_tiles.set_cellv(location, -1)
 

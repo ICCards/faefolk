@@ -204,10 +204,8 @@ func _on_RandomPathTimer_timeout():
 		path = worldNavigation.get_simple_path(position, position + random_idle_pos, true)
 		state = WALK
 
-
 func _on_HurtBox_area_entered(area):
 	$HurtBox/AnimationPlayer.play("hit")
-
 
 
 func _on_CheckPositionTimer_timeout():
