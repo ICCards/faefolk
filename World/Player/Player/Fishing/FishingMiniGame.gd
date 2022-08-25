@@ -7,7 +7,8 @@ var maxVelocity = 7.0;
 var bounce = 0.6
 
 var fishable = true;
-var fish = preload("res://World/Fishing/Fish.tscn")
+var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
+
 
 
 func set_active():
@@ -15,19 +16,19 @@ func set_active():
 	$Hook.position = Vector2(10.5, 280)
 	$TempFishIcon.show()
 	$Progress.value = 200
+	$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
 
 func spawn_random_fish():
 	$TempFishIcon.hide()
 	$Hook.position.y = 280
-	spawn_level1()
-#	if Util.chance(25):
-#		spawn_level1()
-#	elif Util.chance(25):
-#		spawn_level2()
-#	elif Util.chance(25):
-#		spawn_level3()
-#	else:
-#		spawn_level4()
+	if Util.chance(25):
+		spawn_level1()
+	elif Util.chance(25):
+		spawn_level2()
+	elif Util.chance(25):
+		spawn_level3()
+	else:
+		spawn_level4()
 
 func _physics_process(delta):
 	if get_parent().mini_game_active:
@@ -53,13 +54,16 @@ func _physics_process(delta):
 		# Adjust Value
 		if (fishable == false):
 			if (len($Hook/Area2D.get_overlapping_areas()) > 0):
-				$Progress.value += 165 * delta
+				$Progress.value += 175 * delta
 				if ($Progress.value >= 999):
 					caught_fish()
 			else:
-				$Progress.value -= 155 * delta
+				$Progress.value -= 165 * delta
 				if ($Progress.value <= 0):
 					lost_fish()
+		var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
+		var g = range_lerp($Progress.value/10, 10, 50, 0, 1)
+		$Progress.modulate = Color(r, g, 0)
 		get_parent().set_active_fish_line_position($Progress.value)
 					
 		

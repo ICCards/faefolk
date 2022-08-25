@@ -6,6 +6,7 @@ var ambient_volume = 50
 var footstep_volume = 50
 
 signal volume_change
+signal footsteps_sound_change
 
 func _ready():
 	set_music_volume(music_volume)
@@ -72,6 +73,8 @@ func return_adjusted_sound_db(category, init_sound):
 ### Handles switching footsteps sound
 
 var current_footsteps_sound = wood_footsteps
+
+
 
 
 ### Sound effects ##

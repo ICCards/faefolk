@@ -53,8 +53,8 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 1500
-const NUM_BUNNIES = 1500
+const NUM_DUCKS = 30
+const NUM_BUNNIES = 30
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -80,19 +80,25 @@ func set_world_visible():
 	get_node("PlacableTiles/" + Server.player_house_id).set_player_outside_house()
 
 
+#func _ready():
+#	spawnPlayerExample()
+#	Server.isLoaded = true
+#	Server.world = self
+#	build_valid_tiles()
+#	Tiles.valid_tiles = $WorldNavigation/ValidTiles
+#	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
+#	Tiles.path_tiles = $PlacableTiles/PathTiles
+
 func _ready():
-	spawnPlayerExample()
-	Server.isLoaded = true
-	Server.world = self
-#	rng.randomize()
-#	var loadingScreen = LoadingScreen.instance()
-#	loadingScreen.name = "loadingScreen"
-#	add_child(loadingScreen)
-#	get_node("loadingScreen").set_phase("Getting map")
-#	yield(get_tree().create_timer(1), "timeout")
-#	Server.generated_map.clear()
-#	Server.generate_map()
-#	wait_for_map()
+	rng.randomize()
+	var loadingScreen = LoadingScreen.instance()
+	loadingScreen.name = "loadingScreen"
+	add_child(loadingScreen)
+	get_node("loadingScreen").set_phase("Getting map")
+	yield(get_tree().create_timer(1), "timeout")
+	Server.generated_map.clear()
+	Server.generate_map()
+	wait_for_map()
 
 
 func wait_for_map():
@@ -206,6 +212,8 @@ func DespawnPlayer(player_id):
 	
 func buildMap(map):
 	Tiles.valid_tiles = $WorldNavigation/ValidTiles
+	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
+	Tiles.path_tiles = $PlacableTiles/PathTiles
 	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
@@ -386,8 +394,8 @@ func spawn_animals():
 		spawnRandomDuck()
 	
 func set_water_tiles():
-	for x in range(1000): # fill ocean
-		for y in range(1000):
+	for x in range(300): # fill ocean
+		for y in range(300):
 			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
 				wetSand.set_cell(x, y, 0)
 				ocean.set_cell(x, y, 0)
@@ -395,8 +403,8 @@ func set_water_tiles():
 	for loc in ocean.get_used_cells(): # remove outer layer to show wet sand
 		if sand.get_cellv(loc+Vector2(1,0)) != -1 or sand.get_cellv(loc+Vector2(-1,0)) != -1 or sand.get_cellv(loc+Vector2(0,1)) != -1 or sand.get_cellv(loc+Vector2(0,-1)) != -1:
 			ocean.set_cellv(loc, -1)
-	for x in range(1000): # fill empty tiles
-		for y in range(1000):
+	for x in range(300): # fill empty tiles
+		for y in range(300):
 			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
 				Tiles._set_cell(sand, x, y, 0)
 	for cell in ocean.get_used_cells(): # ocean movement effect

@@ -11,6 +11,16 @@ var path: Array = []
 var player
 const SPEED: int = 190
 
+enum {
+	MOVEMENT, 
+	SWINGING,
+	EATING,
+	FISHING,
+	HARVESTING,
+	DYING,
+	SLEEPING
+}
+
 var rng = RandomNumberGenerator.new()
 
 func _ready():
@@ -75,7 +85,7 @@ func idle_state():
 
 
 func check_player_in_detection() -> bool:
-	if not player.is_player_dead:
+	if not player.state == DYING:
 		var collider = los.get_collider()
 		if global_position.distance_to(player.global_position) >= 600:
 			player_spotted = false

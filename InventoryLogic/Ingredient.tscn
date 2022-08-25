@@ -9,7 +9,7 @@ anchor_bottom = 1.0
 margin_right = -788.0
 margin_bottom = -539.0
 rect_min_size = Vector2( 0, 32 )
-rect_scale = Vector2( 0.12, 0.12 )
+rect_scale = Vector2( 0.14, 0.14 )
 
 [node name="Name" type="Label" parent="."]
 margin_left = 98.3337

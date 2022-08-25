@@ -25,10 +25,11 @@ func _input(event):
 			open_grain_mill()
 #		elif PlayerInventory.is_inside_sleeping_bag_area:
 #			sleep()
-	if event.is_action_pressed("scroll_up") and not PlayerInventory.viewMapMode:
-		PlayerInventory.active_item_scroll_up()
-	elif event.is_action_pressed("scroll_down") and not PlayerInventory.viewMapMode:
-		PlayerInventory.active_item_scroll_down()
+#	if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
+#		PlayerInventory.active_item_scroll_up()
+#	elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
+#		PlayerInventory.active_item_scroll_down()
+	
 
 
 func toggle_inventory():

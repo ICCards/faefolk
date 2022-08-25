@@ -1,23 +1,20 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Food/potato.png" type="Texture" id=2]
 [ext_resource path="res://Characters/Human/male/HARVESTING/body/up/body.png" type="Texture" id=3]
 [ext_resource path="res://Characters/Human/male/HARVESTING/body/up/arms.png" type="Texture" id=4]
-[ext_resource path="res://World/Fishing/Fishing.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Characters/Weapon swings/scythe/scythe down.png" type="Texture" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
 [ext_resource path="res://Characters/Weapon swings/sword/left.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=11]
+[ext_resource path="res://World/Player/Player/AttachedScripts/AttachedText.gd" type="Script" id=10]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" type="Script" id=14]
 [ext_resource path="res://Characters/Weapon swings/scythe/scythe right.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
-[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=17]
 [ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=18]
-[ext_resource path="res://Assets/Images/Misc/green_square.png" type="Texture" id=19]
-[ext_resource path="res://World/Player/Player/AttachedScripts/PlaceItemsUI.gd" type="Script" id=21]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
 [ext_resource path="res://World/Player/Player/AttachedScripts/DetectPathType.gd" type="Script" id=23]
 [ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=24]
@@ -33,7 +30,7 @@
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Swinging/AxePickaxeSwing/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../Swing/AxePickaxeSwing/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -45,7 +42,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Swinging/AxePickaxeSwing/CollisionShape2D:position")
+tracks/1/path = NodePath("../Swing/AxePickaxeSwing/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -57,7 +54,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Swinging/AxePickaxeSwing/CollisionShape2D:rotation_degrees")
+tracks/2/path = NodePath("../Swing/AxePickaxeSwing/CollisionShape2D:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -445,7 +442,7 @@ tracks/9/keys = {
 "values": [ false ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("../Swinging/AxePickaxeSwing/CollisionShape2D:disabled")
+tracks/10/path = NodePath("../Swing/AxePickaxeSwing/CollisionShape2D:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -885,7 +882,7 @@ tracks/8/keys = {
 "values": [ true, false ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("../HurtBox/CollisionShape2D:disabled")
+tracks/9/path = NodePath("../Area2Ds/HurtBox/CollisionShape2D:disabled")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -2701,7 +2698,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:position")
+tracks/8/path = NodePath("../Swing/SwordSwing/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -2713,7 +2710,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 12 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:rotation_degrees")
+tracks/9/path = NodePath("../Swing/SwordSwing/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -2725,7 +2722,7 @@ tracks/9/keys = {
 "values": [ 90.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:disabled")
+tracks/10/path = NodePath("../Swing/SwordSwing/CollisionShape2D:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -2889,7 +2886,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:position")
+tracks/8/path = NodePath("../Swing/SwordSwing/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -2901,7 +2898,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 12 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:rotation_degrees")
+tracks/9/path = NodePath("../Swing/SwordSwing/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -2913,7 +2910,7 @@ tracks/9/keys = {
 "values": [ 90.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:disabled")
+tracks/10/path = NodePath("../Swing/SwordSwing/CollisionShape2D:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -3583,7 +3580,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:position")
+tracks/8/path = NodePath("../Swing/SwordSwing/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -3595,7 +3592,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 12 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:rotation_degrees")
+tracks/9/path = NodePath("../Swing/SwordSwing/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -3607,7 +3604,7 @@ tracks/9/keys = {
 "values": [ 90.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:disabled")
+tracks/10/path = NodePath("../Swing/SwordSwing/CollisionShape2D:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -3852,7 +3849,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:position")
+tracks/8/path = NodePath("../Swing/SwordSwing/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -3864,7 +3861,7 @@ tracks/8/keys = {
 "values": [ Vector2( -24, -24 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:rotation_degrees")
+tracks/9/path = NodePath("../Swing/SwordSwing/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -3876,7 +3873,7 @@ tracks/9/keys = {
 "values": [ 0.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:disabled")
+tracks/10/path = NodePath("../Swing/SwordSwing/CollisionShape2D:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -4133,7 +4130,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:position")
+tracks/8/path = NodePath("../Swing/SwordSwing/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -4145,7 +4142,7 @@ tracks/8/keys = {
 "values": [ Vector2( 24, -24 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:rotation_degrees")
+tracks/9/path = NodePath("../Swing/SwordSwing/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -4157,7 +4154,7 @@ tracks/9/keys = {
 "values": [ 0.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:disabled")
+tracks/10/path = NodePath("../Swing/SwordSwing/CollisionShape2D:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -4414,7 +4411,7 @@ tracks/7/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:position")
+tracks/8/path = NodePath("../Swing/SwordSwing/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -4426,7 +4423,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -55 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:rotation_degrees")
+tracks/9/path = NodePath("../Swing/SwordSwing/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -4438,7 +4435,7 @@ tracks/9/keys = {
 "values": [ 90.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("../Swinging/SwordSwing/CollisionShape2D:disabled")
+tracks/10/path = NodePath("../Swing/SwordSwing/CollisionShape2D:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -5115,33 +5112,31 @@ anims/sword_swing_right = SubResource( 29 )
 anims/sword_swing_up = SubResource( 32 )
 anims/watering = SubResource( 56 )
 
-[node name="Fishing" parent="." instance=ExtResource( 5 )]
-
-[node name="Swinging" type="Node2D" parent="."]
+[node name="Swing" type="Node2D" parent="."]
 script = ExtResource( 29 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AxePickaxeSwing" type="Area2D" parent="Swinging"]
+[node name="AxePickaxeSwing" type="Area2D" parent="Swing"]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Swinging/AxePickaxeSwing"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/AxePickaxeSwing"]
 shape = SubResource( 2 )
 
-[node name="SwordSwing" type="Area2D" parent="Swinging"]
+[node name="SwordSwing" type="Area2D" parent="Swing"]
 visible = false
 collision_layer = 256
 collision_mask = 0
 script = ExtResource( 34 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Swinging/SwordSwing"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/SwordSwing"]
 position = Vector2( 0, 12 )
 rotation = 1.5708
 shape = SubResource( 28 )
 disabled = true
 
-[node name="WateringCanParticles1" type="CPUParticles2D" parent="Swinging"]
+[node name="WateringCanParticles1" type="CPUParticles2D" parent="Swing"]
 modulate = Color( 0.196078, 0.435294, 0.937255, 1 )
 position = Vector2( 13, -12 )
 scale = Vector2( 2, 2 )
@@ -5154,7 +5149,7 @@ gravity = Vector2( 0, 70 )
 scale_amount = 1.5
 scale_amount_random = 1.0
 
-[node name="WateringCanParticles2" type="CPUParticles2D" parent="Swinging"]
+[node name="WateringCanParticles2" type="CPUParticles2D" parent="Swing"]
 modulate = Color( 0, 0.690196, 0.901961, 1 )
 position = Vector2( 13, -12 )
 scale = Vector2( 2, 2 )
@@ -5167,188 +5162,141 @@ gravity = Vector2( 0, 70 )
 scale_amount = 1.5
 scale_amount_random = 1.0
 
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="Swinging"]
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="Swing"]
 
-[node name="PickupZone" type="Area2D" parent="."]
+[node name="Area2Ds" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PickupZone" type="Area2D" parent="Area2Ds"]
 visible = false
 scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 12 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/PickupZone"]
 position = Vector2( 0, -31.6016 )
 scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
-[node name="EnterDoors" type="Area2D" parent="."]
+[node name="EnterDoors" type="Area2D" parent="Area2Ds"]
 visible = false
 collision_layer = 32
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoors"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterDoors"]
 shape = SubResource( 10 )
 
-[node name="EnterTreeTop" type="Area2D" parent="."]
+[node name="EnterTreeTop" type="Area2D" parent="Area2Ds"]
 visible = false
 position = Vector2( 0, 11 )
 collision_layer = 0
 collision_mask = 4096
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTreeTop"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterTreeTop"]
 position = Vector2( 0, -43 )
 shape = SubResource( 10 )
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="Area2Ds"]
 visible = false
 collision_layer = 0
 collision_mask = 128
 script = ExtResource( 32 )
 
-[node name="PlayerHitEffect" parent="HurtBox" instance=ExtResource( 33 )]
+[node name="PlayerHitEffect" parent="Area2Ds/HurtBox" instance=ExtResource( 33 )]
 position = Vector2( -11.1111, -24.4444 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="Label" parent="HurtBox/PlayerHitEffect" index="0"]
+[node name="Label" parent="Area2Ds/HurtBox/PlayerHitEffect" index="0"]
 visible = true
 text = ""
 
-[node name="AnimationPlayer" parent="HurtBox/PlayerHitEffect" index="1"]
+[node name="AnimationPlayer" parent="Area2Ds/HurtBox/PlayerHitEffect" index="1"]
 anims/Animate1 = SubResource( 24 )
 anims/Animate2 = SubResource( 25 )
 anims/RESET = SubResource( 26 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/HurtBox"]
 position = Vector2( 0, -20 )
 shape = SubResource( 21 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2Ds/HurtBox"]
 anims/RESET = SubResource( 23 )
 anims/hit = SubResource( 22 )
 
-[node name="PlaceItemsUI" type="Node2D" parent="."]
-script = ExtResource( 21 )
-
-[node name="ColorIndicator" type="Sprite" parent="PlaceItemsUI"]
-visible = false
-position = Vector2( 0, 32 )
-z_index = 1
-texture = ExtResource( 19 )
-offset = Vector2( 16, -16 )
-
-[node name="ItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
-visible = false
-modulate = Color( 1, 1, 1, 0.627451 )
-margin_right = 32.0
-margin_bottom = 32.0
-grow_vertical = 0
-mouse_filter = 2
-texture = ExtResource( 17 )
-
-[node name="ScaledItemToPlace" type="TextureRect" parent="PlaceItemsUI"]
-visible = false
-modulate = Color( 1, 1, 1, 0.627451 )
-margin_right = 32.0
-margin_bottom = 32.0
-grow_vertical = 0
-mouse_filter = 2
-texture = ExtResource( 17 )
-stretch_mode = 1
-
-[node name="RotateIcon" type="TextureRect" parent="PlaceItemsUI"]
-visible = false
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 48.0
-margin_bottom = 48.0
-rect_scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 11 )
-
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="PlaceItemsUI"]
-visible = false
-
-[node name="EnterInteractiveZones" type="Node2D" parent="."]
+[node name="EnterInteractiveZones" type="Node2D" parent="Area2Ds"]
 visible = false
 script = ExtResource( 26 )
 
-[node name="ChestArea" type="Area2D" parent="EnterInteractiveZones"]
+[node name="ChestArea" type="Area2D" parent="Area2Ds/EnterInteractiveZones"]
 collision_layer = 65536
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/ChestArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterInteractiveZones/ChestArea"]
 shape = SubResource( 15 )
 
-[node name="WorkbenchArea" type="Area2D" parent="EnterInteractiveZones"]
+[node name="WorkbenchArea" type="Area2D" parent="Area2Ds/EnterInteractiveZones"]
 collision_layer = 131072
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/WorkbenchArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterInteractiveZones/WorkbenchArea"]
 shape = SubResource( 15 )
 
-[node name="StoveArea" type="Area2D" parent="EnterInteractiveZones"]
+[node name="StoveArea" type="Area2D" parent="Area2Ds/EnterInteractiveZones"]
 collision_layer = 262144
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/StoveArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterInteractiveZones/StoveArea"]
 shape = SubResource( 15 )
 
-[node name="GrainMillArea" type="Area2D" parent="EnterInteractiveZones"]
+[node name="GrainMillArea" type="Area2D" parent="Area2Ds/EnterInteractiveZones"]
 collision_layer = 524288
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/GrainMillArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterInteractiveZones/GrainMillArea"]
 shape = SubResource( 15 )
 
-[node name="SleepingBag" type="Area2D" parent="EnterInteractiveZones"]
+[node name="SleepingBag" type="Area2D" parent="Area2Ds/EnterInteractiveZones"]
 collision_layer = 32768
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterInteractiveZones/SleepingBag"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterInteractiveZones/SleepingBag"]
 shape = SubResource( 15 )
 
-[node name="DetectPathType" type="Node2D" parent="."]
+[node name="DetectPathType" type="Node2D" parent="Area2Ds"]
 visible = false
 script = ExtResource( 23 )
 
-[node name="DetectWoodPath" type="Area2D" parent="DetectPathType"]
+[node name="DetectWoodPath" type="Area2D" parent="Area2Ds/DetectPathType"]
 collision_layer = 512
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathType/DetectWoodPath"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/DetectPathType/DetectWoodPath"]
 shape = SubResource( 10 )
 
-[node name="DetectStonePath" type="Area2D" parent="DetectPathType"]
+[node name="DetectStonePath" type="Area2D" parent="Area2Ds/DetectPathType"]
 collision_layer = 1024
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPathType/DetectStonePath"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/DetectPathType/DetectStonePath"]
 shape = SubResource( 10 )
 
-[node name="FootstepsSound" type="AudioStreamPlayer2D" parent="DetectPathType"]
-position = Vector2( 0, 11 )
-stream = ExtResource( 6 )
-autoplay = true
+[node name="Texts" type="Node2D" parent="."]
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 16 )
-volume_db = -16.0
-
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-autoplay = true
-script = ExtResource( 18 )
-
-[node name="AmbientSound" type="AudioStreamPlayer" parent="."]
-autoplay = true
-script = ExtResource( 14 )
-
-[node name="MessageBubble" type="Label" parent="."]
+[node name="MessageBubble" type="Label" parent="Texts"]
 visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -70.0
+margin_left = -49.0
 margin_top = -89.0
-margin_right = 70.0
+margin_right = 91.0
 margin_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -5361,7 +5309,7 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="Username" type="Label" parent="."]
+[node name="Username" type="Label" parent="Texts"]
 margin_left = -31.0
 margin_right = 31.0
 margin_bottom = 28.0
@@ -5370,12 +5318,28 @@ rect_scale = Vector2( 1, 0.9 )
 theme = ExtResource( 24 )
 align = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-light_mask = 0
-position = Vector2( 0, 9.91821e-05 )
-rotation = -1.5708
-shape = SubResource( 11 )
+[node name="Sounds" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 16 )
+volume_db = -16.0
+
+[node name="FootstepsSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 6 )
+autoplay = true
+stream_paused = true
+script = ExtResource( 5 )
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
+autoplay = true
+script = ExtResource( 18 )
+
+[node name="AmbientSound" type="AudioStreamPlayer" parent="Sounds"]
+autoplay = true
+script = ExtResource( 14 )
 
 [node name="HoldingItem" type="TextureRect" parent="."]
 visible = false
@@ -5387,22 +5351,28 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource( 2 )
 
-[connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
-[connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
-[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
-[connection signal="area_entered" from="EnterInteractiveZones/ChestArea" to="EnterInteractiveZones" method="_on_ChestArea_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/ChestArea" to="EnterInteractiveZones" method="_on_ChestArea_area_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/WorkbenchArea" to="EnterInteractiveZones" method="_on_WorkbenchArea_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/WorkbenchArea" to="EnterInteractiveZones" method="_on_WorkbenchArea_area_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/StoveArea" to="EnterInteractiveZones" method="_on_StoveArea_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/StoveArea" to="EnterInteractiveZones" method="_on_StoveArea_area_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/GrainMillArea" to="EnterInteractiveZones" method="_on_GrainMillArea_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/GrainMillArea" to="EnterInteractiveZones" method="_on_GrainMillArea_area_exited"]
-[connection signal="area_entered" from="EnterInteractiveZones/SleepingBag" to="EnterInteractiveZones" method="_on_SleepingBag_area_entered"]
-[connection signal="area_exited" from="EnterInteractiveZones/SleepingBag" to="EnterInteractiveZones" method="_on_SleepingBag_area_exited"]
-[connection signal="area_entered" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_entered"]
-[connection signal="area_exited" from="DetectPathType/DetectWoodPath" to="DetectPathType" method="_on_DetectWoodPath_area_exited"]
-[connection signal="area_entered" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_entered"]
-[connection signal="area_exited" from="DetectPathType/DetectStonePath" to="DetectPathType" method="_on_DetectStonePath_area_exited"]
+[node name="MovementCollision" type="CollisionShape2D" parent="."]
+light_mask = 0
+position = Vector2( 0, 9.91821e-05 )
+rotation = -1.5708
+shape = SubResource( 11 )
 
-[editable path="HurtBox/PlayerHitEffect"]
+[connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]
+[connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_exited"]
+[connection signal="area_entered" from="Area2Ds/HurtBox" to="Area2Ds/HurtBox" method="_on_HurtBox_area_entered"]
+[connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/ChestArea" to="Area2Ds/EnterInteractiveZones" method="_on_ChestArea_area_entered"]
+[connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/ChestArea" to="Area2Ds/EnterInteractiveZones" method="_on_ChestArea_area_exited"]
+[connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/WorkbenchArea" to="Area2Ds/EnterInteractiveZones" method="_on_WorkbenchArea_area_entered"]
+[connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/WorkbenchArea" to="Area2Ds/EnterInteractiveZones" method="_on_WorkbenchArea_area_exited"]
+[connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/StoveArea" to="Area2Ds/EnterInteractiveZones" method="_on_StoveArea_area_entered"]
+[connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/StoveArea" to="Area2Ds/EnterInteractiveZones" method="_on_StoveArea_area_exited"]
+[connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/GrainMillArea" to="Area2Ds/EnterInteractiveZones" method="_on_GrainMillArea_area_entered"]
+[connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/GrainMillArea" to="Area2Ds/EnterInteractiveZones" method="_on_GrainMillArea_area_exited"]
+[connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/SleepingBag" to="Area2Ds/EnterInteractiveZones" method="_on_SleepingBag_area_entered"]
+[connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/SleepingBag" to="Area2Ds/EnterInteractiveZones" method="_on_SleepingBag_area_exited"]
+[connection signal="area_entered" from="Area2Ds/DetectPathType/DetectWoodPath" to="Area2Ds/DetectPathType" method="_on_DetectWoodPath_area_entered"]
+[connection signal="area_exited" from="Area2Ds/DetectPathType/DetectWoodPath" to="Area2Ds/DetectPathType" method="_on_DetectWoodPath_area_exited"]
+[connection signal="area_entered" from="Area2Ds/DetectPathType/DetectStonePath" to="Area2Ds/DetectPathType" method="_on_DetectStonePath_area_entered"]
+[connection signal="area_exited" from="Area2Ds/DetectPathType/DetectStonePath" to="Area2Ds/DetectPathType" method="_on_DetectStonePath_area_exited"]
+
+[editable path="Area2Ds/HurtBox/PlayerHitEffect"]

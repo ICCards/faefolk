@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://World/Fishing/FishingMiniGame.gd" type="Script" id=1]
+[ext_resource path="res://World/Player/Player/Fishing/FishingMiniGame.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Progress-Bar.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Progress-Empty.png" type="Texture" id=4]
@@ -11,10 +11,12 @@
 extents = Vector2( 7, 19 )
 
 [node name="FishingMiniGame" type="Node2D"]
+position = Vector2( 0, -147 )
 z_index = 1
 script = ExtResource( 1 )
 
 [node name="Progress" type="TextureProgress" parent="."]
+modulate = Color( 0.313726, 1, 0, 1 )
 margin_left = 25.0
 margin_top = 16.0
 margin_right = 35.0
