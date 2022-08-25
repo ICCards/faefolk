@@ -1,48 +1,39 @@
 extends KinematicBody2D
 
 onready var animation_player = $CompositeSprites/AnimationPlayer
-onready var sword_swing = $Swinging/SwordSwing
+onready var sword_swing = $Swing/SwordSwing
 onready var composite_sprites = $CompositeSprites
 onready var holding_item = $HoldingItem
 
 onready var Eating_particles = preload("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
+onready var Fishing = preload("res://World/Player/Player/Fishing/Fishing.tscn")
+onready var PlaceObjectScene = preload("res://World/Player/Player/AttachedScenes/PlaceObject.tscn") 
 
-var valid_tiles
-var path_tiles 
-var object_tiles 
-var fence_tiles
-var hoed_tiles 
-var watered_tiles 
-var ocean_tiles 
-var dirt_tiles 
 
 var principal
 var character 
 var setting
-var is_mouse_over_hotbar
-var is_player_dead = false
-var is_player_sleeping = false
-var swingActive = false
-var eatingActive = false
 var current_building_item = null
 var username_callback = JavaScript.create_callback(self, "_username_callback")
 
 onready var state = MOVEMENT
-
 enum {
 	MOVEMENT, 
-	SWING,
+	SWINGING,
 	EATING,
 	FISHING,
-	CHANGE_TILE,
-	HARVESTING
+	HARVESTING,
+	DYING,
+	SLEEPING
 }
 
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 
 var animation = "idle_down"
-var MAX_SPEED := 12.5
+var MAX_SPEED_DIRT := 12.5
+var MAX_SPEED_PATH := 14.5
+var is_walking_on_dirt: bool = true
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -56,14 +47,9 @@ const _character = preload("res://Global/Data/Characters.gd")
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	set_username("")
-	Sounds.connect("volume_change", self, "set_new_music_volume")
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
-	if has_node("/root/World"):
-		set_tile_nodes()
 	Server.player_node = self
-	#IC.getUsername(principal,username_callback)
 	
 	
 #reset object state to that in a given game_state, executed once per rollback 
@@ -134,63 +120,25 @@ func get_state():
 	return {'x': position.x, 'y': position.y, 'counter': counter, 'collisionMask': collisionMask}
 	
 	
-func set_tile_nodes():
-	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
-	path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
-	object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
-	fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
-	hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
-	watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-	ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
-	dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
-	
 func sleep(direction_of_sleeping_bag):
-	print("sleep")
-	if not is_player_sleeping:
+	if state != SLEEPING:
+		state = SLEEPING
 		position += Vector2(0, 6)
-		is_player_sleeping = true
-		$CompositeSprites/AnimationPlayer.play("sleep")
-		$CompositeSprites.set_player_animation(character, "sleep_" + direction_of_sleeping_bag.to_lower())
+		animation_player.play("sleep")
+		composite_sprites.set_player_animation(character, "sleep_" + direction_of_sleeping_bag.to_lower())
 	
 func player_death():
-	if not is_player_dead:
-		is_player_dead = true
-		$CompositeSprites.set_player_animation(character, "death_" + direction.to_lower(), null)
+	if state != DYING:
+		state = DYING
+		composite_sprites.set_player_animation(character, "death_" + direction.to_lower(), null)
 		animation_player.play("death")
 		yield(animation_player, "animation_finished")
 		PlayerStats.health = PlayerStats.health_maximum
 		PlayerStats.emit_signal("health_changed")
 		animation_player.stop()
-		is_player_dead = false
 		$Camera2D/UserInterface/DeathEffect.visible = false
-
-func _username_callback(args):
-	# Get the first argument (the DOM event in our case).
-	var js_event = args[0]
-	#	var player_id = json["id"]
-	#	var principal = json["principal"]
-	set_username(js_event)	
+		state = MOVEMENT
 	
-	
-func DisplayMessageBubble(message):
-	$MessageBubble.visible = true
-	if $Timer.time_left > 0:
-		$MessageBubble.text = ""
-		$MessageBubble.text = message
-		$Timer.stop()
-		$Timer.start()
-		yield($Timer, "timeout")
-		$MessageBubble.visible = false
-	else:
-		$MessageBubble.text = ""
-		$MessageBubble.text = message
-		$Timer.start()
-		yield($Timer, "timeout")
-		$MessageBubble.visible = false
-
-func set_username(username):
-	Server.username = username
-	$Username.text = str(username)	
 	
 func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_top = top_left.y
@@ -202,90 +150,94 @@ func sendAction(action,data):
 	match action:
 		(MOVEMENT):
 			Server.action("MOVEMENT",data)
-		(SWING):
+		(SWINGING):
 			Server.action("SWING", data)
-
-func set_new_music_volume():
-	if Sounds.current_footsteps_sound == Sounds.stone_footsteps:
-		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", 0)
-	else: 
-		$DetectPathType/FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
 
 
 func _process(_delta) -> void:
-	var adjusted_position = get_global_mouse_position() - $Camera2D.get_camera_screen_center() 
-	if adjusted_position.x > -240 and adjusted_position.x < 240 and adjusted_position.y > 210 and adjusted_position.y < 254:
-		is_mouse_over_hotbar = true
-		$PlaceItemsUI.set_invisible()
+	if $Area2Ds/PickupZone.items_in_range.size() > 0:
+		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
+		pickup_item.pick_up_item(self)
+		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
+	if state == MOVEMENT:
+		movement_state(_delta)
 	else:
-		is_mouse_over_hotbar = false
-	if not PlayerInventory.viewInventoryMode and not PlayerInventory.interactive_screen_mode:
-		if $PickupZone.items_in_range.size() > 0:
-			var pickup_item = $PickupZone.items_in_range.values()[0]
-			pickup_item.pick_up_item(self)
-			$PickupZone.items_in_range.erase(pickup_item)
-		if state == MOVEMENT:
-				movement_state(_delta)
-	else: 
-		idle_state(direction)
+		$Sounds/FootstepsSound.stream_paused = true
+
 
 func _unhandled_input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and \
 		not PlayerInventory.viewInventoryMode and \
 		not PlayerInventory.interactive_screen_mode and \
-		Server.player_state == "WORLD" and \
 		not PlayerInventory.chatMode and \
 		not PlayerInventory.viewMapMode and \
-		not is_mouse_over_hotbar and \
-		not swingActive and \
-		not is_player_dead and \
-		not is_player_sleeping and \
-		state != SWING: 
+		state == MOVEMENT: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-			var itemCategory = JsonData.item_data[item_name]["ItemCategory"]
-			if item_name == "blueprint" and current_building_item == "wall":
-				$PlaceItemsUI.place_buildings_state(current_building_item)
-			elif item_name == "blueprint" and current_building_item == "double door":
-				$PlaceItemsUI.place_double_door_state()
-			else: 
-				current_building_item = null
+			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if event.is_action_pressed("mouse_click") and item_name == "fishing rod":
-				$DetectPathType/FootstepsSound.stream_paused = true
-				$Fishing.initialize()
-			elif event.is_action_pressed("mouse_click") and itemCategory == "Tool":
-				$DetectPathType/FootstepsSound.stream_paused = true
-				$Swinging.initialize(item_name, direction)
-			elif event.is_action_pressed("mouse_click") and itemCategory == "Food":
-#				$DetectPathType/FootstepsSound.stream_paused = true
+				fish()
+			elif event.is_action_pressed("mouse_click") and item_category == "Tool":
+				swing(item_name)
+			elif event.is_action_pressed("mouse_click") and item_category == "Food":
 				eat(item_name)
-			elif itemCategory == "Placable object" and item_name == "tent":
-				$PlaceItemsUI.place_tent_state()
-			elif itemCategory == "Placable object" and item_name == "sleeping bag":
-				$PlaceItemsUI.place_sleeping_bag_state()
-			elif itemCategory == "Placable object":
-				$PlaceItemsUI.place_item_state(item_name)
-			elif itemCategory == "Placable path":
-				$PlaceItemsUI.place_path_state(item_name, path_tiles)
-			elif itemCategory == "Seed":
-				$PlaceItemsUI.place_seed_state(item_name, hoed_tiles)
-			
+			elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
+				init_placable_object(item_name, item_category)
+			else:
+				destroy_placable_object()
 	else: 
-		$PlaceItemsUI.set_invisible()
+		destroy_placable_object()
+
+
+func init_placable_object(item_name, item_category):
+	if item_category == "Seed":
+		item_name.erase(item_name.length() - 6, 6)
+	if not has_node("PlaceObject"): # does not exist yet, add to scene tree
+		var placeObject = PlaceObjectScene.instance()
+		placeObject.name = "PlaceObject"
+		placeObject.item_name = item_name
+		placeObject.item_category = item_category
+		add_child(placeObject)
+	else:
+		if get_node("PlaceObject").item_name != item_name: # exists but item changed
+			get_node("PlaceObject").item_name = item_name
+			get_node("PlaceObject").item_category = item_category
+			get_node("PlaceObject").initialize()
+			
+func destroy_placable_object():
+	if has_node("PlaceObject"):
+		get_node("PlaceObject").queue_free()
+
+func swing(item_name):
+	destroy_placable_object()
+	$Swing.swing(item_name, direction)
 
 func eat(item_name):
-	state = EATING
-	var eating_paricles = Eating_particles.instance()
-	eating_paricles.item_name = item_name
-	add_child(eating_paricles)
-	composite_sprites.set_player_animation(character, "eat", null)
-	animation_player.play("eat")
-	yield(animation_player, "animation_finished")
-	state = MOVEMENT
+	destroy_placable_object()
+	if state != EATING:
+		state = EATING
+		PlayerInventory.remove_single_object_from_hotbar()
+		var eating_paricles = Eating_particles.instance()
+		eating_paricles.item_name = item_name
+		add_child(eating_paricles)
+		composite_sprites.set_player_animation(character, "eat", null)
+		animation_player.play("eat")
+		yield(animation_player, "animation_finished")
+		state = MOVEMENT
 
+func fish():
+	destroy_placable_object()
+	if state != FISHING:
+		PlayerStats.decrease_energy()
+		state = FISHING
+		var fishing = Fishing.instance()
+		add_child(fishing)
 
 
 func movement_state(delta):
-	if !swingActive and not PlayerInventory.chatMode and not is_player_dead and not is_player_sleeping and state == MOVEMENT:
+	if state == MOVEMENT and \
+	not PlayerInventory.chatMode and \
+	not PlayerInventory.viewInventoryMode and \
+	not PlayerInventory.interactive_screen_mode:
 		input_vector = Vector2.ZERO	
 		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0
@@ -318,50 +270,57 @@ func movement_state(delta):
 		input_vector = input_vector.normalized()
 		if input_vector != Vector2.ZERO:
 			velocity += input_vector * ACCELERATION * delta
-			velocity = velocity.clamped(MAX_SPEED * delta)
+			if is_walking_on_dirt:
+				velocity = velocity.clamped(MAX_SPEED_DIRT * delta)
+			else:
+				velocity = velocity.clamped(MAX_SPEED_PATH * delta)
 			sword_swing.knockback_vector = input_vector
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-		move_and_collide(velocity * MAX_SPEED)	
-
+		if is_walking_on_dirt:
+			move_and_collide(velocity * MAX_SPEED_DIRT)
+		else:
+			move_and_collide(velocity * MAX_SPEED_PATH)
+	else:
+		idle_state(direction)
 
 
 func idle_state(_direction):
+	$Sounds/FootstepsSound.stream_paused = true
 	if state == MOVEMENT:
 		animation_player.play("idle")
-		$DetectPathType/FootstepsSound.stream_paused = true
 		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
-				$HoldingItem.visible = true
-				$HoldingItem.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+				holding_item.show()
+				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 				animation = "holding_idle_" + _direction.to_lower()
 			else:
-				$HoldingItem.visible = false
+				holding_item.hide()
 				animation = "idle_" + _direction.to_lower()
 		else:
-			$HoldingItem.visible = false
+			holding_item.hide()
 			animation = "idle_" + _direction.to_lower()
-		$CompositeSprites.set_player_animation(character, animation, null)
+		composite_sprites.set_player_animation(character, animation, null)
 
 func walk_state(_direction):
 	animation_player.play("movement")
-	$DetectPathType/FootstepsSound.stream_paused = false
+	$Sounds/FootstepsSound.stream_paused = false
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
 		if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
-			$HoldingItem.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-			$HoldingItem.visible = true
+			holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+			holding_item.show()
 			animation = "holding_walk_" + _direction.to_lower()
 		else:
-			$HoldingItem.visible = false
+			holding_item.hide()
 			animation = "walk_" + _direction.to_lower()
 	else:
-		$HoldingItem.visible = false
+		holding_item.hide()
 		animation = "walk_" + _direction.to_lower()
-	$CompositeSprites.set_player_animation(character, animation, null)
+	composite_sprites.set_player_animation(character, animation, null)
 
 
 

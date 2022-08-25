@@ -142,16 +142,16 @@ valign = 1
 autowrap = true
 
 [node name="Ingredient1" parent="." instance=ExtResource( 12 )]
-margin_left = 6.0
-margin_top = 26.5555
-margin_right = 6.0
-margin_bottom = 58.5555
+margin_left = 5.92593
+margin_top = 25.7407
+margin_right = 5.92593
+margin_bottom = 57.7407
 
 [node name="Ingredient2" parent="." instance=ExtResource( 12 )]
-margin_left = 6.0
-margin_top = 36.0
-margin_right = 6.0
-margin_bottom = 68.0
+margin_left = 5.92593
+margin_top = 35.3705
+margin_right = 5.92593
+margin_bottom = 67.3705
 
 [node name="ItemName" type="Label" parent="."]
 margin_left = 5.14286

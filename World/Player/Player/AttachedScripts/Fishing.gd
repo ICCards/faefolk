@@ -6,8 +6,8 @@ onready var line = $Line2D
 onready var hook = $CastedFishHook
 
 onready var ocean = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
-onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
-onready var composite_sprites = get_node("../CompositeSprites")
+onready var player_animation_player = Server.player_node.animation_player
+onready var composite_sprites = Server.player_node.composite_sprites
 
 var in_casting_state: bool = false
 var mini_game_active: bool = false
@@ -36,10 +36,21 @@ enum {
 	CHANGE_TILE
 }
 
-func initialize():
-	if get_parent().state != FISHING:
-		start()
-	else:
+func _ready():
+	start()
+
+#func initialize():
+##	if Server.player.state != FISHING:
+##		start()
+##	else:
+#		if not mini_game_active:
+#			if click_to_start_mini_game:
+#				start_fishing_mini_game()
+#			elif waiting_for_fish_bite:
+#				retract_and_stop()
+
+func _unhandled_input(event):
+	if event.is_action_pressed("mouse_click"):
 		if not mini_game_active:
 			if click_to_start_mini_game:
 				start_fishing_mini_game()
@@ -48,7 +59,7 @@ func initialize():
 
 func retract_and_stop():
 	waiting_for_fish_bite = false
-	composite_sprites.set_player_animation(get_parent().character, "retract_" + direction.to_lower(), "fishing rod retract")
+	Server.player_node.composite_sprites.set_player_animation(Server.player_node.character, "retract_" + direction.to_lower(), "fishing rod retract")
 	player_animation_player.play("retract")
 	yield(player_animation_player, "animation_finished")
 	stop_fishing_state()
@@ -77,9 +88,8 @@ func change_start_point_pos():
 
 func start():
 	rng.randomize()
-	direction = get_parent().direction
-	get_parent().state = FISHING
-	composite_sprites.set_player_animation(get_parent().character, "cast_" + direction.to_lower(), "fishing rod cast")
+	direction = Server.player_node.direction
+	composite_sprites.set_player_animation(Server.player_node.character, "cast_" + direction.to_lower(), "fishing rod cast")
 	player_animation_player.play("set cast first frame")
 	yield(player_animation_player, "animation_finished")
 	player_animation_player.stop()
@@ -90,15 +100,9 @@ func start():
 	in_casting_state = true
 	
 func stop_fishing_state():
-	hook.hide()
-	line.hide()
-	progress.hide()
-	in_casting_state = false
-	waiting_for_fish_bite = false
-	mini_game_active = false
-	click_to_start_mini_game = false
-	$FishingMiniGame.hide()
-	get_parent().state = MOVEMENT
+	print("STOP FISHING STATE")
+	Server.player_node.state = MOVEMENT
+	queue_free()
 
 
 func caught_fish():

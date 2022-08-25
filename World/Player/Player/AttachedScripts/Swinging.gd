@@ -18,15 +18,15 @@ var direction
 
 enum {
 	MOVEMENT, 
-	SWING,
+	SWINGING,
 	EAT,
 	FISHING,
 	CHANGE_TILE
 }
 
-func initialize(item_name, direction):
-	if get_parent().state != SWING:
-		get_parent().state = SWING
+func swing(item_name, direction):
+	if get_parent().state != SWINGING:
+		get_parent().state = SWINGING
 		if item_name == "stone watering can":
 			set_watered_tile()
 			animation = "watering_" + direction.to_lower()
@@ -44,7 +44,6 @@ func initialize(item_name, direction):
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
 
-
 func set_swing_collision_layer_and_position(tool_name, direction):
 	axe_pickaxe_swing.position = Util.set_swing_position(Vector2(0,0), direction)
 	match tool_name:
@@ -56,7 +55,6 @@ func set_swing_collision_layer_and_position(tool_name, direction):
 		"wood hoe":
 			axe_pickaxe_swing.set_collision_mask(0)
 			set_hoed_tile(direction)
-
 
 func set_hoed_tile(direction):
 	var pos = Util.set_swing_position(global_position, direction)

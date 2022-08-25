@@ -13,6 +13,16 @@ var player
 const SPEED: int = 140
 var rng = RandomNumberGenerator.new()
 
+enum {
+	MOVEMENT, 
+	SWINGING,
+	EATING,
+	FISHING,
+	HARVESTING,
+	DYING,
+	SLEEPING
+}
+
 func _ready():
 	rng.randomize()
 	Images.DuckVariations.shuffle()
@@ -77,7 +87,7 @@ func idle_state():
 
 
 func check_player_in_detection() -> bool:
-	if not player.is_player_dead:
+	if not player.state == DYING:
 		var collider = los.get_collider()
 		if global_position.distance_to(player.global_position) >= 600:
 			player_spotted = false

@@ -4,6 +4,7 @@ extends Node2D
 var mouse_being_held_down = false
 var crafting_item_being_held_down = null
 var is_auto_crafting_active = false
+var item = null
 
 var page1 = [
 	"wood box",
@@ -130,7 +131,6 @@ func exited_crafting_area(_item):
 		$Tween.start()
 
 
-var item = null
 func _on_WoodBoxArea_mouse_entered():
 	entered_crafting_area("wood box")
 func _on_WoodBarrelArea_mouse_entered():
@@ -199,16 +199,14 @@ func _on_SleepingBagArea_mouse_exited():
 	exited_crafting_area("sleeping bag")
 
 func play_craft_sound():
-	pass
-#	$SoundEffects.stream = Sounds.button_select
-#	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-#	$SoundEffects.play()
+	$SoundEffects.stream = Sounds.button_select
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.play()
 	
 func play_error_sound():
-	pass
-#	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
-#	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-#	$SoundEffects.play()
+	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.play()
 	
 
 func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
@@ -243,13 +241,8 @@ func _on_WoodBarrelArea_input_event(viewport, event, shape_idx):
 			play_craft_sound()
 			PlayerInventory.craft_item("wood barrel")
 			initialize_crafting()
-#			crafting_item_being_held_down = "wood barrel"
-#			mouse_being_held_down = true
 		else:
 			play_error_sound()
-#	elif not event.is_action_pressed("mouse_click"):
-#		mouse_being_held_down = false
-#		crafting_item_being_held_down = null
 			
 func _on_WoodFenceArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click"):
