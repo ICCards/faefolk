@@ -105,6 +105,7 @@ func set_watered_tile():
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
+		yield(get_tree().create_timer(0.2), "timeout")
 		if direction != "UP":
 			watering_can_particles1.position = Util.returnAdjustedWateringCanPariclePos(direction)
 			watering_can_particles1.emitting = true

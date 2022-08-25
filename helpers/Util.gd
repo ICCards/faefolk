@@ -56,8 +56,8 @@ func set_swing_position(_pos, _direction):
 func returnAdjustedWateringCanPariclePos(direction):
 	match direction:
 		"RIGHT":
-			return Vector2(24, -20)
+			return Vector2(28, -20)
 		"LEFT":
-			return Vector2(-24, -20)
+			return Vector2(-28, -20)
 		"DOWN":
 			return Vector2(0, -15)

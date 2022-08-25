@@ -847,7 +847,6 @@ shape = SubResource( 1 )
 [node name="LineOfSight" type="RayCast2D" parent="."]
 position = Vector2( -8.52651e-14, -5 )
 rotation = -0.485202
-scale = Vector2( 1, 1 )
 enabled = true
 cast_to = Vector2( 350, 0 )
 

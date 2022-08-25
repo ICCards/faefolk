@@ -40,6 +40,13 @@ enum Placables {
 	TENT_ENLARGED,
 }
 
+enum Lights {
+	CAMPFIRE,
+	FIRE_PEDESTAL,
+	TALL_FIRE_PEDESTAL,
+	TORCH
+}
+
 enum Paths {
 	WOOD_PATH1,
 	WOOD_PATH2,
@@ -94,7 +101,6 @@ func place_object_in_world(id, item_name, location):
 	light_tiles = get_node("/root/World/PlacableTiles/LightTiles")
 	building_tiles = get_node("/root/World/PlacableTiles/BuildingTiles")
 	#wall_tiles = get_node("/root/World/PlacableTiles/WallTiles")
-	foundation_tiles = get_node("/root/World/PlacableTiles/FoundationTiles")
 	
 	var tileObjectHurtBox = TileObjectHurtBox.instance()
 	tileObjectHurtBox.name = str(id)
@@ -114,16 +120,16 @@ func place_object_in_world(id, item_name, location):
 			Server.world.call_deferred("add_child", object, true)
 		"torch":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			object_tiles.set_cellv(location, Placables.TORCH)
+			light_tiles.set_cellv(location, Lights.TORCH)
 		"campfire":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			object_tiles.set_cellv(location, Placables.CAMPFIRE)
+			light_tiles.set_cellv(location, Lights.CAMPFIRE)
 		"fire pedestal":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL)
+			light_tiles.set_cellv(location, Lights.FIRE_PEDESTAL)
 		"tall fire pedestal":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			object_tiles.set_cellv(location, Placables.FIRE_PEDESTAL_TALL)
+			light_tiles.set_cellv(location, Lights.TALL_FIRE_PEDESTAL)
 		"wood fence":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			fence_tiles.set_cellv(location, 0)

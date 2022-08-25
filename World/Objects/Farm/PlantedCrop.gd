@@ -170,7 +170,9 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_Harvest_pressed():
-	if phase == "harvest" and position.distance_to(Server.player_node.position) < 800:
+	if phase == "harvest" and \
+	position.distance_to(Server.player_node.position) < 800 and \
+	Server.player_node.state == MOVEMENT:
 		if JsonData.crop_data[crop_name]["Perennial"]:
 			harvest_and_keep_planted()
 		else:
