@@ -24,7 +24,7 @@ func get_fish():
 	rng.randomize()
 	var temp_fish = JsonData.fish_data.keys()[rng.randi_range(0, JsonData.fish_data.keys().size() - 1)]
 	print(JsonData.fish_data.keys()[rng.randi_range(0, JsonData.fish_data.keys().size() - 1)])
-
+	JsonData.fish_data[temp_fish]["Location"]
 
 func plan_move():
 	var target = rand_range(min_position, max_position)

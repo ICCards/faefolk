@@ -50,6 +50,7 @@ var hotbar = {
 	7: ["wood hoe", 1, 25], 
 #	8: ["wood axe", 1, 3],
 #	1: ["wood axe", 1, 3],
+	8:["wood pickaxe", 1, 25],
 	9:["wood pickaxe", 1, 25],
 }
 

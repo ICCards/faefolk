@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=1]
 [ext_resource path="res://Assets/tilesets/MainLev2.0.png" type="Texture" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://Assets/3_Tiles_Test_2.png" type="Texture" id=30]
 [ext_resource path="res://Assets/Wall_Square_Top_Test.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Wall_Square_Top_Test2.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Wall_Spriteset.png" type="Texture" id=33]
 
 [sub_resource type="TileSet" id=298]
 0/name = "CL_MainLev.png 0"
@@ -1209,6 +1210,21 @@ glow_blend_mode = 1
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="ConvexPolygonShape2D" id=330]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=331]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=332]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=333]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=334]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
 [sub_resource type="TileSet" id=329]
 0/name = "new new.png 0"
 0/texture = ExtResource( 27 )
@@ -1371,6 +1387,60 @@ glow_blend_mode = 1
 6/shape_one_way_margin = 0.0
 6/shapes = [  ]
 6/z_index = 0
+7/name = "Wall_Spriteset.png 7"
+7/texture = ExtResource( 33 )
+7/tex_offset = Vector2( 0, -64 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 0, 160, 96 )
+7/tile_mode = 1
+7/autotile/bitmask_mode = 1
+7/autotile/bitmask_flags = [ Vector2( 0, 0 ), 50, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 58, Vector2( 4, 0 ), 144 ]
+7/autotile/icon_coordinate = Vector2( 4, 0 )
+7/autotile/tile_size = Vector2( 32, 96 )
+7/autotile/spacing = 0
+7/autotile/occluder_map = [  ]
+7/autotile/navpoly_map = [  ]
+7/autotile/priority_map = [  ]
+7/autotile/z_index_map = [  ]
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape = SubResource( 330 )
+7/shape_one_way = false
+7/shape_one_way_margin = 1.0
+7/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 330 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 331 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 332 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 3, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 333 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 4, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 334 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+7/z_index = 0
 
 [node name="TestScene" type="YSort"]
 
@@ -1516,3 +1586,4 @@ cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2
 cell_y_sort = true
 format = 1
+tile_data = PoolIntArray( 589853, 7, 4, 589862, 7, 4, 655389, 7, 4, 655398, 7, 4, 720925, 7, 4, 720934, 7, 4, 786461, 7, 4, 786470, 7, 4, 851997, 7, 4, 852006, 7, 4, 917533, 7, 0, 917534, 7, 2, 917535, 7, 2, 917536, 7, 2, 917537, 7, 1, 917538, 7, 2, 917539, 7, 1, 917540, 7, 1, 917541, 7, 2, 917542, 7, 0 )

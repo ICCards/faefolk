@@ -25,6 +25,8 @@ onready var IC_Ghost = preload("res://World/Enemies/ICGhost.tscn")
 onready var Bunny = preload("res://World/Animals/Bunny.tscn")
 onready var Duck = preload("res://World/Animals/Duck.tscn")
 onready var Bird = preload("res://World/Animals/Bird.tscn")
+onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
+onready var DustTrailEffect 
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTreeObject = preload("res://World/Objects/Nature/Trees/DesertTreeObject.tscn")
@@ -301,30 +303,30 @@ func buildMap(map):
 #	print("LOADED STUMPS")
 #	get_node("loadingScreen").set_phase("Building ore")
 #	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["ore_large"]:
-#		var loc = map["ore_large"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "large ore")
-#		oreTypes.shuffle()
-#		var variety = oreTypes.front()
-#		var object = OreObject.instance()
-#		object.health = map["ore_large"][id]["h"]
-#		object.name = id
-#		object.initialize(variety,loc)
-#		object.position = dirt.map_to_world(loc) 
-#		$NatureObjects.add_child(object,true)
-#	print("LOADED LARGE OrE")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["ore"]:
-#		var loc = map["ore"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "ore")
-#		oreTypes.shuffle()
-#		var variety = oreTypes.front()
-#		var object = SmallOreObject.instance()
-#		object.health = map["ore"][id]["h"]
-#		object.name = id
-#		object.initialize(variety,loc)
-#		object.position = dirt.map_to_world(loc) + Vector2(16, 24)
-#		$NatureObjects.add_child(object,true)
+	for id in map["ore_large"]:
+		var loc = map["ore_large"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "large ore")
+		oreTypes.shuffle()
+		var variety = oreTypes.front()
+		var object = OreObject.instance()
+		object.health = map["ore_large"][id]["h"]
+		object.name = id
+		object.initialize(variety,loc)
+		object.position = dirt.map_to_world(loc) 
+		$NatureObjects.add_child(object,true)
+	print("LOADED LARGE OrE")
+	yield(get_tree().create_timer(0.5), "timeout")
+	for id in map["ore"]:
+		var loc = map["ore"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "ore")
+		oreTypes.shuffle()
+		var variety = oreTypes.front()
+		var object = SmallOreObject.instance()
+		object.health = map["ore"][id]["h"]
+		object.name = id
+		object.initialize(variety,loc)
+		object.position = dirt.map_to_world(loc) + Vector2(16, 24)
+		$NatureObjects.add_child(object,true)
 #	get_node("loadingScreen").set_phase("Building grass")
 #	yield(get_tree().create_timer(0.5), "timeout")
 #	var count = 0
@@ -606,3 +608,8 @@ func _on_SpawnEnemyTimer_timeout():
 #		var snake = Snake.instance()
 #		snake.global_position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(rng.randi_range(-500, 500), rng.randi_range(-500, 500))
 #		add_child(snake)
+
+func play_watering_can_effect(loc):
+	var wateringCanEffect = WateringCanEffect.instance()
+	wateringCanEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
+	add_child(wateringCanEffect)

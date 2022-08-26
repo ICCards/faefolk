@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/12.png-f2cf3a115495f1b25544a54b05c20c6e.stex"
+path="res://.import/watering can.png-9b80de61384dd5ec3972a81781ec08ec.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Animations/ore break smoke/12.png"
-dest_files=[ "res://.import/12.png-f2cf3a115495f1b25544a54b05c20c6e.stex" ]
+source_file="res://Assets/Images/Animations/watering can/watering can.png"
+dest_files=[ "res://.import/watering can.png-9b80de61384dd5ec3972a81781ec08ec.stex" ]
 
 [params]
 

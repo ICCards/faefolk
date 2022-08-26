@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/7.png-f6870144ed00e74d4c3cd46f71e4806e.stex"
+path="res://.import/parts.png-a2d54e3ca008b8eabca38129577f6493.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Animations/ore break smoke/7.png"
-dest_files=[ "res://.import/7.png-f6870144ed00e74d4c3cd46f71e4806e.stex" ]
+source_file="res://Assets/Images/Animations/ore/parts.png"
+dest_files=[ "res://.import/parts.png-a2d54e3ca008b8eabca38129577f6493.stex" ]
 
 [params]
 
