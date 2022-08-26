@@ -1,0 +1,87 @@
+{
+    "red snapper": {
+        "Location" : "Seawater",
+        "Season":  [ "Spring", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Easy",
+        "Weather": "Rain"
+    },
+    "lobster": {
+        "Location" : "Seawater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Medium",
+        "Weather": "Any"
+    },
+    "dorado": {
+        "Location" : "Seawater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Hard",
+        "Weather": "Any"
+    },
+    "blue ribbon eel": {
+        "Location" : "Seawater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Medium",
+        "Weather": "Any"
+    },
+    "blue ringed octopus": {
+        "Location" : "Seawater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Hard",
+        "Weather": "Any"
+    },
+    "royal red shrimp": {
+        "Location" : "Seawater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Hard",
+        "Weather": "Any"
+    },
+    "blue crab": {
+        "Location" : "Seawater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Easy",
+        "Weather": "Any"
+    },
+    "royal starfish": {
+        "Location" : "Seawater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Easy",
+        "Weather": "Any"
+    },
+    
+    
+    
+    "red devil cichlid": {
+        "Location" : "Freshwater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Medium",
+        "Weather": "Any"
+    },
+    "fire eel": {
+        "Location" : "Freshwater",
+        "Season":  [ "Spring", "Fall", "Winter", "Summer" ],
+        "Description": "Describe the fish here",
+        "Time": "Any",
+        "Difficulty": "Medium",
+        "Weather": "Any"
+    },
+    
+    
+}

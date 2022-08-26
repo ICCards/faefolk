@@ -29,9 +29,11 @@ enum {
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
-var MAX_SPEED_DIRT := 12.5
+var MAX_SPEED_DIRT := 13
 var MAX_SPEED_PATH := 14.5
+var MAX_SPEED_SWIMMING := 12
 var is_walking_on_dirt: bool = true
+var is_swimming: bool = false
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -177,7 +179,8 @@ func _unhandled_input(event):
 		not PlayerInventory.interactive_screen_mode and \
 		not PlayerInventory.chatMode and \
 		not PlayerInventory.viewMapMode and \
-		state == MOVEMENT: 
+		state == MOVEMENT and \
+		Sounds.current_footsteps_sound != Sounds.swimming: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if event.is_action_pressed("mouse_click") and item_name == "fishing rod":
@@ -293,41 +296,48 @@ func movement_state(delta):
 
 func idle_state(_direction):
 	$Sounds/FootstepsSound.stream_paused = true
-	if state == MOVEMENT:
-		animation_player.play("idle")
+	if Sounds.current_footsteps_sound != Sounds.swimming:
+		if state == MOVEMENT:
+			animation_player.play("idle")
+			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				var item_category = JsonData.item_data[item_name]["ItemCategory"]
+				if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
+					holding_item.show()
+					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+					animation = "holding_idle_" + _direction.to_lower()
+				else:
+					holding_item.hide()
+					animation = "idle_" + _direction.to_lower()
+			else:
+				holding_item.hide()
+				animation = "idle_" + _direction.to_lower()
+			composite_sprites.set_player_animation(character, animation, null)
+	else:
+		animation_player.play("swim")
+		composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
+
+func walk_state(_direction):
+	$Sounds/FootstepsSound.stream_paused = false
+	if Sounds.current_footsteps_sound != Sounds.swimming:
+		animation_player.play("movement")
 		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
-				holding_item.show()
 				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-				animation = "holding_idle_" + _direction.to_lower()
+				holding_item.show()
+				animation = "holding_walk_" + _direction.to_lower()
 			else:
 				holding_item.hide()
-				animation = "idle_" + _direction.to_lower()
-		else:
-			holding_item.hide()
-			animation = "idle_" + _direction.to_lower()
-		composite_sprites.set_player_animation(character, animation, null)
-
-func walk_state(_direction):
-	animation_player.play("movement")
-	$Sounds/FootstepsSound.stream_paused = false
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
-			holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-			holding_item.show()
-			animation = "holding_walk_" + _direction.to_lower()
+				animation = "walk_" + _direction.to_lower()
 		else:
 			holding_item.hide()
 			animation = "walk_" + _direction.to_lower()
+		composite_sprites.set_player_animation(character, animation, null)
 	else:
-		holding_item.hide()
-		animation = "walk_" + _direction.to_lower()
-	composite_sprites.set_player_animation(character, animation, null)
-
+		animation_player.play("swim")
+		composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
 
 

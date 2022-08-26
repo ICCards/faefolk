@@ -10,7 +10,6 @@ var fishable = true;
 var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
 
 
-
 func set_active():
 	visible = true
 	$Hook.position = Vector2(10.5, 280)
@@ -21,14 +20,15 @@ func set_active():
 func spawn_random_fish():
 	$TempFishIcon.hide()
 	$Hook.position.y = 280
-	if Util.chance(25):
-		spawn_level1()
-	elif Util.chance(25):
-		spawn_level2()
-	elif Util.chance(25):
-		spawn_level3()
-	else:
-		spawn_level4()
+	spawn_level1()
+#	if Util.chance(25):
+#		spawn_level1()
+#	elif Util.chance(25):
+#		spawn_level2()
+#	elif Util.chance(25):
+#		spawn_level3()
+#	else:
+#		spawn_level4()
 
 func _physics_process(delta):
 	if get_parent().mini_game_active:
@@ -83,11 +83,14 @@ func lost_fish():
 	
 func add_fish(min_d, max_d, move_speed, move_time):
 	var f = fish.instance()
+	f.season = "Spring"
+	f.setting = "Sea"
+	f.time = "Day"
 	f.position = Vector2($Hook.position.x, $Hook.position.y)
-	f.min_distance = min_d
-	f.max_distance = max_d
-	f.movement_speed = move_speed
-	f.movement_time = move_time
+#	f.min_distance = min_d
+#	f.max_distance = max_d
+#	f.movement_speed = move_speed
+#	f.movement_time = move_time
 	add_child(f)
 	$Progress.value = 200
 	fishable = false

@@ -1,18 +1,31 @@
 extends Node2D
 
+var season
+var setting
+var time
 
-var movement_speed = 4
-var movement_time = 1
+var movement_speed 
+var movement_time
 
-var min_distance = 100
-var max_distance = 200
+var min_distance
+var max_distance
 
 var min_position = 20
 var max_position = 290
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
+	get_fish()
 	plan_move()
-	
+
+
+func get_fish():
+	rng.randomize()
+	var temp_fish = JsonData.fish_data.keys()[rng.randi_range(0, JsonData.fish_data.keys().size() - 1)]
+	print(JsonData.fish_data.keys()[rng.randi_range(0, JsonData.fish_data.keys().size() - 1)])
+
+
 func plan_move():
 	var target = rand_range(min_position, max_position)
 	

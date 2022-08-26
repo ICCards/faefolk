@@ -3,6 +3,7 @@ extends Node
 var valid_tiles = null
 var path_tiles = null
 var hoed_tiles = null
+var ocean_tiles = null
 
 func validate_tiles(location, dimensions):
 	var active = false
