@@ -1071,36 +1071,36 @@ var male = {
 
 	pants_swim_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWIMMING/assets/down/pants/pants.png")
+		1 : null
 	},
 	pants_swim_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWIMMING/assets/up/pants/pants.png")
+		1 : null
 	},
 	pants_swim_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWIMMING/assets/right/pants/pants.png")
+		1 : null
 	},
 	pants_swim_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWIMMING/assets/left/pants/pants.png")
+		1 : null
 	},
 
 	shoes_swim_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWIMMING/assets/down/shoes/shoes.png")
+		1 : null
 	},
 	shoes_swim_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWIMMING/assets/up/shoes/shoes.png")
+		1 : null
 	},
 	shoes_swim_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWIMMING/assets/right/shoes/shoes.png")
+		1 : null
 	},
 	shoes_swim_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWIMMING/assets/left/shoes/shoes.png")
+		1 : null
 	},
 	
 	body_cast_down = {
