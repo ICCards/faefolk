@@ -13,6 +13,7 @@ onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
 onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
 onready var ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
 
+
 var animation
 var direction
 
@@ -89,6 +90,7 @@ func remove_hoed_tile(direction):
 		watered_tiles.set_cellv(location, -1)
 		hoed_tiles.set_cellv(location, -1)
 		hoed_tiles.update_bitmask_region()
+		watered_tiles.update_bitmask_region()
 		
 		
 func set_watered_tile():
@@ -106,6 +108,7 @@ func set_watered_tile():
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
 		yield(get_tree().create_timer(0.2), "timeout")
+		Server.world.play_watering_can_effect(location)
 		if direction != "UP":
 			watering_can_particles1.position = Util.returnAdjustedWateringCanPariclePos(direction)
 			watering_can_particles1.emitting = true
@@ -124,5 +127,4 @@ func set_watered_tile():
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
-
 

@@ -1,6 +1,6 @@
 extends Node2D
 
-
+onready var OreBreak = preload("res://World/Objects/Nature/Effects/OreBreak.tscn")
 onready var OreHitEffect = preload("res://World/Objects/Nature/Effects/OreHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var smallOreSprite = $SmallOre
@@ -55,10 +55,12 @@ func _on_SmallHurtBox_area_entered(_area):
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
+		oreBreakEffect()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 42))
 		intitiateItemDrop(variety, Vector2(0, 40), 3)
 		animation_player.play("small_ore_break")
 		yield($SoundEffects, "finished")
+		yield(get_tree().create_timer(0.6), "timeout")
 		queue_free()
 	if health != 0:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
@@ -82,6 +84,12 @@ func initiateOreHitEffect(ore, effect, pos):
 	oreHitEffect.init(ore, effect)
 	add_child(oreHitEffect)
 	oreHitEffect.global_position = global_position + pos + Vector2(0, -36)
+
+func oreBreakEffect():
+	var oreBreak = OreBreak.instance()
+	oreBreak.variety = variety
+	add_child(oreBreak)
+	oreBreak.global_position = global_position + Vector2(0,-12)
 
 
 func _on_VisibilityNotifier2D_screen_entered():
