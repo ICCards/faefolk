@@ -82,7 +82,7 @@ func craft_item(item):
 	var ingredients = JsonData.crafting_data[item]["ingredients"]
 	for i in range(ingredients.size()):
 		remove_material(ingredients[i][0], ingredients[i][1])
-	add_item_to_hotbar(item, 1, null)
+	#add_item_to_hotbar(item, 1, null)
 
 
 func remove_material(item, amount):
@@ -198,7 +198,7 @@ func update_hotbar_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity, null)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Inventory/InventoryMenu/InventorySlots/Slot" + str(slot_index + 1))
+	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Menu/Inventory/InventorySlots/Slot" + str(slot_index + 1))
 	if slot.item != null:
 		if new_quantity == 0:
 			remove_item(slot)
@@ -224,6 +224,8 @@ func remove_item(slot: SlotClass):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar.erase(slot.slot_index)
+		SlotClass.SlotType.HOTBAR_INVENTORY:
+			hotbar.erase(slot.slot_index)
 		SlotClass.SlotType.INVENTORY:
 			inventory.erase(slot.slot_index)
 		SlotClass.SlotType.CHEST:
@@ -232,6 +234,8 @@ func remove_item(slot: SlotClass):
 func add_item_to_empty_slot(item: ItemClass, slot: SlotClass):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
+			hotbar[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.HOTBAR_INVENTORY:
 			hotbar[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
@@ -243,6 +247,8 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.HOTBAR_INVENTORY:
+			hotbar[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.CHEST:
@@ -252,20 +258,14 @@ func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.HOTBAR_INVENTORY:
+			hotbar[slot.slot_index][1] -= quantity_to_subtract
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index][1] -= quantity_to_subtract
 		SlotClass.SlotType.CHEST:
 			chest[slot.slot_index][1] -= quantity_to_subtract
 
 
-func find_open_slot(slot: SlotClass):
-	match slot.slotType:
-		SlotClass.SlotType.HOTBAR:
-			pass
-		SlotClass.SlotType.INVENTORY:
-			pass
-		SlotClass.SlotType.CHEST:
-			pass
 ###
 ### Change active hotbar functions
 func active_item_scroll_up() -> void:

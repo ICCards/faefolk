@@ -80,6 +80,7 @@ func update_tool_health():
 	
 
 func initialize_hotbar():
+	item = null
 	for i in range(slots.size()):
 		if slots[i].item != null:
 			slots[i].removeFromSlot()

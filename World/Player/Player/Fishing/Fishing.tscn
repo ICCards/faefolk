@@ -188,6 +188,10 @@ tracks/3/keys = {
 [node name="Fishing" type="Node2D"]
 script = ExtResource( 4 )
 
+[node name="FishingMiniGame" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( -109, -124 )
+
 [node name="ExclamationPoint" type="Sprite" parent="."]
 visible = false
 position = Vector2( 17, -67 )
@@ -215,17 +219,12 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="FishingMiniGame" parent="." instance=ExtResource( 1 )]
-visible = false
-position = Vector2( -91, -170 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 45 )
 anims/bite = SubResource( 46 )
 anims/hit = SubResource( 47 )
 
 [node name="ProgressBackground" type="TextureRect" parent="."]
-visible = false
 margin_left = -52.0
 margin_top = -90.0
 margin_bottom = -76.0
@@ -233,7 +232,6 @@ rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 7 )
 
 [node name="CastingProgress" type="TextureProgress" parent="."]
-visible = false
 margin_left = -32.0
 margin_top = -84.0
 margin_bottom = -76.0

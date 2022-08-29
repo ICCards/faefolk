@@ -1,11 +1,9 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Assets/Images/Misc/background.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu/MainMenuButtons.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Images/Misc/settings icon.png" type="Texture" id=3]
 [ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Images/Misc/menu options.png" type="Texture" id=6]
-[ext_resource path="res://World/Player/Player/UserInterface/scenes/OptionsMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Images/Misc/logo.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/Animations/water/2.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/Animations/water/4.png" type="Texture" id=12]
@@ -52,9 +50,6 @@ region_rect = Rect2( 0, 0, 273, 273 )
 [sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 273, 273 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 512, 300 )
 
 [node name="MainMenu" type="Control"]
 script = ExtResource( 5 )
@@ -123,39 +118,9 @@ custom_styles/pressed = SubResource( 7 )
 custom_styles/focus = SubResource( 8 )
 custom_styles/normal = SubResource( 5 )
 
-[node name="Options" type="Control" parent="."]
-visible = false
-margin_left = 404.0
-margin_top = 149.0
-margin_right = 404.0
-margin_bottom = 149.0
-rect_scale = Vector2( 0.5, 0.5 )
-
-[node name="ExitOptionsArea" type="Area2D" parent="Options"]
-position = Vector2( 1128, 790 )
-scale = Vector2( 2, 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Options/ExitOptionsArea"]
-position = Vector2( -456, -244 )
-shape = SubResource( 9 )
-
-[node name="Background" type="TextureRect" parent="Options"]
-margin_right = 102.0
-margin_bottom = 104.0
-rect_scale = Vector2( 6, 6 )
-mouse_filter = 0
-texture = ExtResource( 6 )
-
-[node name="OptionsMenu" parent="Options" instance=ExtResource( 7 )]
-margin_left = 70.0
-margin_top = -134.0
-margin_right = 70.0
-margin_bottom = -134.0
-
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="OptionsIconButton" to="." method="_on_OptionsIconButton_pressed"]
-[connection signal="input_event" from="Options/ExitOptionsArea" to="." method="_on_ExitOptionsArea_input_event"]

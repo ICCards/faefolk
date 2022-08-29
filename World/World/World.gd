@@ -82,25 +82,25 @@ func set_world_visible():
 	get_node("PlacableTiles/" + Server.player_house_id).set_player_outside_house()
 
 
-#func _ready():
-#	spawnPlayerExample()
-#	Server.isLoaded = true
-#	Server.world = self
-#	build_valid_tiles()
-#	Tiles.valid_tiles = $WorldNavigation/ValidTiles
-#	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
-#	Tiles.path_tiles = $PlacableTiles/PathTiles
-
 func _ready():
-	rng.randomize()
-	var loadingScreen = LoadingScreen.instance()
-	loadingScreen.name = "loadingScreen"
-	add_child(loadingScreen)
-	get_node("loadingScreen").set_phase("Getting map")
-	yield(get_tree().create_timer(1), "timeout")
-	Server.generated_map.clear()
-	Server.generate_map()
-	wait_for_map()
+	spawnPlayerExample()
+	Server.isLoaded = true
+	Server.world = self
+	build_valid_tiles()
+	Tiles.valid_tiles = $WorldNavigation/ValidTiles
+	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
+	Tiles.path_tiles = $PlacableTiles/PathTiles
+
+#func _ready():
+#	rng.randomize()
+#	var loadingScreen = LoadingScreen.instance()
+#	loadingScreen.name = "loadingScreen"
+#	add_child(loadingScreen)
+#	get_node("loadingScreen").set_phase("Getting map")
+#	yield(get_tree().create_timer(1), "timeout")
+#	Server.generated_map.clear()
+#	Server.generate_map()
+#	wait_for_map()
 
 
 func wait_for_map():

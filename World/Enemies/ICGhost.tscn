@@ -1,12 +1,9 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Images/IC Ghost Elements/Uniques/Unique3.png" type="Texture" id=1]
 [ext_resource path="res://World/Enemies/ICGhost.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=3]
-[ext_resource path="res://Assets/Images/Animations/GHOST/back.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Animations/GHOST/font.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/Animations/GHOST/right.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Animations/GHOST/left.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/2/font.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 18.0278
@@ -49,154 +46,43 @@ extents = Vector2( 7.625, 7.5 )
 [sub_resource type="CircleShape2D" id=4]
 radius = 5.0
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 4 )
-region = Rect2( 510, 0, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 499, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 4 )
-region = Rect2( 510, 499, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 998, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 4 )
-region = Rect2( 510, 998, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 1497, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 4 )
-region = Rect2( 510, 1497, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 7 )
-region = Rect2( 500, 0, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 7 )
-region = Rect2( 1000, 0, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 7 )
-region = Rect2( 1500, 0, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 511, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 7 )
-region = Rect2( 500, 511, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 7 )
-region = Rect2( 1000, 511, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 7 )
-region = Rect2( 1500, 511, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 500, 511 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 6 )
-region = Rect2( 500, 0, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 6 )
-region = Rect2( 1000, 0, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 6 )
-region = Rect2( 1500, 0, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 511, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 6 )
-region = Rect2( 500, 511, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 6 )
-region = Rect2( 1000, 511, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 6 )
-region = Rect2( 1500, 511, 500, 511 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 510, 499 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 510, 0, 510, 499 )
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
 region = Rect2( 0, 499, 510, 499 )
 
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
 region = Rect2( 510, 499, 510, 499 )
 
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
 region = Rect2( 0, 998, 510, 499 )
 
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
 region = Rect2( 510, 998, 510, 499 )
 
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
 region = Rect2( 0, 1497, 510, 499 )
 
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
 region = Rect2( 510, 1497, 510, 499 )
 
-[sub_resource type="SpriteFrames" id=38]
+[sub_resource type="SpriteFrames" id=14]
 animations = [ {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "up",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": true,
-"name": "left",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
-"name": "right",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
-"loop": true,
-"name": "down",
+"name": "default",
 "speed": 5.0
 } ]
 
@@ -265,9 +151,6 @@ shape = SubResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 3 )
 scale = Vector2( 0.1, 0.1 )
-frames = SubResource( 38 )
-animation = "down"
-frame = 7
-playing = true
+frames = SubResource( 14 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_Area2D_area_entered"]

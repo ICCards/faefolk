@@ -144,6 +144,7 @@ anims/small_ore_break = SubResource( 4 )
 anims/small_ore_hit_right = SubResource( 5 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, 8.2353 )
 volume_db = -12.0
 
 [node name="SmallMovementCollisionBox" type="StaticBody2D" parent="."]
