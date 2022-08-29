@@ -1,25 +1,28 @@
 extends Node2D
 
 var hookVelocity = 0.0;
-var hookAcceleration = 0.125;
-var hookDeceleration = 0.225
-var maxVelocity = 7.0;
-var bounce = 0.6
+var hookAcceleration = 0.05;
+var hookDeceleration = 0.06;
+var maxVelocity = 3;
+var bounce = 0.4
 
 var fishable = true;
 var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
 
 
+#func _ready():
+#	spawn_level1()
+	
 func set_active():
 	visible = true
-	$Hook.position = Vector2(10.5, 280)
 	$TempFishIcon.show()
 	$Progress.value = 200
 	$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
 
 func spawn_random_fish():
+	print("SPAWN RANDOM FISH")
 	$TempFishIcon.hide()
-	$Hook.position.y = 280
+	$Hook.position.y = 83
 	spawn_level1()
 #	if Util.chance(25):
 #		spawn_level1()
@@ -43,28 +46,30 @@ func _physics_process(delta):
 			hookVelocity -= .5
 
 		var target = $Hook.position.y + hookVelocity
-		if (target >= 280):
+		if (target >= 83):
 			hookVelocity *= -bounce
-		elif (target <= 38):
+		elif (target <= -21):
 			hookVelocity = 0
-			$Hook.position.y = 38
+			$Hook.position.y = -21
 		else:
 			$Hook.position.y = target
 
 		# Adjust Value
 		if (fishable == false):
 			if (len($Hook/Area2D.get_overlapping_areas()) > 0):
+				$Hook.modulate = Color("ffffff")
 				$Progress.value += 175 * delta
 				if ($Progress.value >= 999):
 					caught_fish()
 			else:
+				$Hook.modulate = Color("7dffffff")
 				$Progress.value -= 165 * delta
 				if ($Progress.value <= 0):
 					lost_fish()
 		var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
 		var g = range_lerp($Progress.value/10, 10, 50, 0, 1)
 		$Progress.modulate = Color(r, g, 0)
-		get_parent().set_active_fish_line_position($Progress.value)
+		#get_parent().set_active_fish_line_position($Progress.value)
 					
 		
 func caught_fish():
@@ -72,14 +77,14 @@ func caught_fish():
 	get_node("Fish").destroy()
 	$Progress.value = 0
 	fishable = true
-	get_parent().caught_fish()
+	#get_parent().caught_fish()
 	
 func lost_fish():
 	print("LOST")
 	get_node("Fish").destroy()
 	$Progress.value = 0
 	fishable = true
-	get_parent().lost_fish()
+	#get_parent().lost_fish()
 	
 func add_fish(min_d, max_d, move_speed, move_time):
 	var f = fish.instance()
@@ -87,10 +92,10 @@ func add_fish(min_d, max_d, move_speed, move_time):
 	f.setting = "Sea"
 	f.time = "Day"
 	f.position = Vector2($Hook.position.x, $Hook.position.y)
-#	f.min_distance = min_d
-#	f.max_distance = max_d
-#	f.movement_speed = move_speed
-#	f.movement_time = move_time
+	f.min_distance = min_d
+	f.max_distance = max_d
+	f.movement_speed = move_speed
+	f.movement_time = move_time
 	add_child(f)
 	$Progress.value = 200
 	fishable = false

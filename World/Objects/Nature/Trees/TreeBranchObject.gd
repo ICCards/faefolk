@@ -2,6 +2,7 @@ extends Node2D
 
 onready var branch = $Branch
 
+onready var WoodBreak = preload("res://World/Objects/Nature/Effects/WoodBreak.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
@@ -49,9 +50,10 @@ func _on_BranchHurtBox_area_entered(_area):
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 	$SoundEffects.play()
 	$AnimationPlayer.play("break")
+	woodBreakEffect()
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
 	intitiateItemDrop("wood", Vector2(0, 0))
-	yield($SoundEffects, "finished")
+	yield(get_tree().create_timer(1.2), "timeout")
 	queue_free()
 
 
@@ -67,6 +69,10 @@ func intitiateItemDrop(item, pos):
 	itemDrop.initItemDropType(item, 1)
 	get_parent().call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position + pos
+	
+func woodBreakEffect():
+	var woodBreak = WoodBreak.instance()
+	add_child(woodBreak)
 
 
 func _on_VisibilityNotifier2D_screen_entered():

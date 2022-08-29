@@ -1,14 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/CurrentTime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/ChatBox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/interactive/Stove.tscn" type="PackedScene" id=8]
-[ext_resource path="res://World/Player/Player/UserInterface/interactive/GrainMill.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/PlayerStatsUI.tscn" type="PackedScene" id=12]
-[ext_resource path="res://RadialMenu.tscn" type="PackedScene" id=13]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/OpenChest.tscn" type="PackedScene" id=14]
-[ext_resource path="res://World/Player/Player/UserInterface/scenes/Inventory.tscn" type="PackedScene" id=15]
-[ext_resource path="res://World/Player/Player/UserInterface/interactive/Workbench.tscn" type="PackedScene" id=16]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/Menu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/Hotbar.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Thunder Crack - SFX Producer.mp3" type="AudioStream" id=18]
 [ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=19]
@@ -130,50 +126,26 @@ margin_top = 299.0
 margin_right = -708.0
 margin_bottom = -89.0
 
-[node name="Stove" parent="." instance=ExtResource( 8 )]
-visible = false
-margin_left = 240.0
-margin_top = 513.0
-margin_right = -784.0
-margin_bottom = -87.0
-rect_scale = Vector2( 0.5, 0.5 )
-
-[node name="GrainMill" parent="." instance=ExtResource( 10 )]
-visible = false
-margin_left = 240.0
-margin_top = 513.0
-margin_right = 240.0
-margin_bottom = 513.0
-rect_scale = Vector2( 0.5, 0.5 )
-
-[node name="Workbench" parent="." instance=ExtResource( 16 )]
-visible = false
-margin_left = -272.0
-margin_top = 213.0
-margin_right = 752.0
-margin_bottom = 813.0
-
 [node name="OpenChest" parent="." instance=ExtResource( 14 )]
 visible = false
 position = Vector2( 281, 522 )
 
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
+visible = false
 position = Vector2( 804, 24 )
 scale = Vector2( 0.4, 0.4 )
 
-[node name="RadialMenu" parent="." instance=ExtResource( 13 )]
-visible = false
-
 [node name="PlayerStatsUI" parent="." instance=ExtResource( 12 )]
+visible = false
 position = Vector2( 36, 24 )
 scale = Vector2( 2.3, 2.3 )
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
-position = Vector2( 281, 516 )
+position = Vector2( 512, 498 )
 
-[node name="Inventory" parent="." instance=ExtResource( 15 )]
+[node name="Menu" parent="." instance=ExtResource( 15 )]
 visible = false
-position = Vector2( 372, 56 )
+position = Vector2( 512, 39 )
 
 [node name="DeathEffect" type="ColorRect" parent="."]
 margin_left = -58.0

@@ -45,6 +45,7 @@ var collisionMask = null
 const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
+	Settings.load_keys()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
 	PlayerStats.connect("health_depleted", self, "player_death")
@@ -247,7 +248,7 @@ func movement_state(delta):
 	not PlayerInventory.chatMode and \
 	not PlayerInventory.viewInventoryMode and \
 	not PlayerInventory.interactive_screen_mode:
-		input_vector = Vector2.ZERO	
+		input_vector = Vector2.ZERO
 		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0
 			direction = "UP"

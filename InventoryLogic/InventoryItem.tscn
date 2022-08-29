@@ -15,7 +15,7 @@ margin_left = 3.0
 margin_top = 3.0
 margin_right = 45.0
 margin_bottom = 45.0
-rect_min_size = Vector2( 42, 42 )
+rect_min_size = Vector2( 48, 48 )
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
@@ -34,10 +34,10 @@ align = 2
 
 [node name="HealthIndicator" type="Control" parent="."]
 visible = false
-margin_left = -15.0
-margin_top = -201.0
-margin_right = -15.0
-margin_bottom = -201.0
+margin_left = -12.0
+margin_top = -193.0
+margin_right = -12.0
+margin_bottom = -193.0
 rect_scale = Vector2( 3, 3 )
 
 [node name="TextureRect" type="TextureRect" parent="HealthIndicator"]

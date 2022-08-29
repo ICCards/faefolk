@@ -1,8 +1,8 @@
 extends Panel
 
-var default_text = preload("res://Assets/Images/Inventory UI/slot.png")
-var empty_text = preload("res://Assets/Images/Inventory UI/slot.png")
-var selected_text = preload("res://Assets/Images/Inventory UI/active item slot.png")
+var default_text = null # preload("res://Assets/Images/Inventory UI/slot.png")
+var empty_text = null #preload("res://Assets/Images/Inventory UI/slot.png")
+var selected_text = preload("res://Assets/Images/Inventory UI/slot selected.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null
@@ -14,6 +14,7 @@ var slot_index
 
 enum SlotType {
 	HOTBAR = 0,
+	HOTBAR_INVENTORY,
 	INVENTORY,
 	CHEST
 }

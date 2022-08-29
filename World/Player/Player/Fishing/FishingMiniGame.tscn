@@ -2,37 +2,25 @@
 
 [ext_resource path="res://World/Player/Player/Fishing/FishingMiniGame.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/Misc/Fishing/Progress-Bar.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/Misc/Fishing/Progress-Empty.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Misc/Fishing/Fishing-Column.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Misc/Fishing/progress.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Misc/Fishing/fishing.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Misc/Fishing/spr_fish_64_x.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Misc/Fishing/fishing rod decoration.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 19 )
+extents = Vector2( 5, 10 )
 
 [node name="FishingMiniGame" type="Node2D"]
-position = Vector2( 0, -147 )
+scale = Vector2( 2.5, 2.5 )
 z_index = 1
 script = ExtResource( 1 )
 
-[node name="Progress" type="TextureProgress" parent="."]
-modulate = Color( 0.313726, 1, 0, 1 )
-margin_left = 25.0
-margin_top = 16.0
-margin_right = 35.0
-margin_bottom = 301.0
-max_value = 1000.0
-value = 200.0
-texture_under = ExtResource( 4 )
-texture_progress = ExtResource( 3 )
-fill_mode = 3
-
 [node name="FishingColumn" type="Sprite" parent="."]
-position = Vector2( 11, 158.5 )
-texture = ExtResource( 5 )
+position = Vector2( 12, 31 )
+texture = ExtResource( 4 )
 
 [node name="Hook" type="Node2D" parent="."]
-position = Vector2( 10.5, 280 )
+position = Vector2( 15, 83 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -46,13 +34,33 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Clicker" type="TextureButton" parent="."]
-margin_left = -349.0
-margin_top = -161.0
-margin_right = 745.0
-margin_bottom = 507.0
+margin_left = -320.0
+margin_top = -77.3333
+margin_right = 774.0
+margin_bottom = 590.667
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 11.0
+margin_top = -59.0
+margin_right = 51.0
+margin_bottom = -17.0
+texture = ExtResource( 7 )
+
+[node name="Progress" type="TextureProgress" parent="."]
+modulate = Color( 0.313726, 1, 0, 1 )
+margin_left = 2.0
+margin_top = -33.0
+margin_right = 5.0
+margin_bottom = 95.0
+max_value = 1000.0
+value = 200.0
+texture_progress = ExtResource( 3 )
+fill_mode = 3
 
 [node name="TempFishIcon" type="Sprite" parent="."]
-position = Vector2( 10.5, 280 )
+visible = false
+position = Vector2( 15, 83 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [connection signal="button_down" from="Clicker" to="." method="_on_Clicker_button_down"]

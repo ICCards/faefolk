@@ -82,7 +82,7 @@ func _physics_process(delta):
 			flip_horizontal_false()
 		else:
 			flip_horizontal_true()
-	set_direction()
+	#set_direction()
 
 
 

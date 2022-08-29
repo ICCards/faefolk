@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Inventory UI/open chest hotbar.png" type="Texture" id=2]
 [ext_resource path="res://World/Player/Player/UserInterface/interactive/OpenChest.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/Inventory UI/chest slots.png" type="Texture" id=4]
 
 [node name="OpenChest" type="Node2D"]
 script = ExtResource( 3 )
@@ -14,7 +12,6 @@ margin_right = 182.0
 margin_bottom = -73.0
 rect_scale = Vector2( 3, 3 )
 mouse_filter = 2
-texture = ExtResource( 2 )
 
 [node name="ChestSlotsImg" type="TextureRect" parent="."]
 margin_top = -394.0
@@ -22,7 +19,6 @@ margin_right = 182.0
 margin_bottom = -331.0
 rect_scale = Vector2( 3, 3 )
 mouse_filter = 2
-texture = ExtResource( 4 )
 
 [node name="InventorySlots" type="GridContainer" parent="."]
 margin_left = 21.0
