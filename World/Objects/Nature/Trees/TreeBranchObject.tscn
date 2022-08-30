@@ -2,7 +2,7 @@
 
 [ext_resource path="res://World/Objects/Nature/Trees/TreeBranchObject.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/tree_sets/branch_objects/branch2.png" type="Texture" id=2]
-[ext_resource path="res://World/Objects/Nature/Effects/WoodBreak.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Objects/Nature/Effects/HoedDirt.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 18.8889, 21.1112 )

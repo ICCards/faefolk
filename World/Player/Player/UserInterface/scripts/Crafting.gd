@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 onready var inventory_slots = $InventorySlots
 onready var hotbar_slots = $HotbarSlots
@@ -59,7 +59,7 @@ func _on_DownButton_pressed():
 	$Page1.hide()
 	$Page2.show()
 	initialize_crafting()
-	get_node("../Background/Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting2.png")
+	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting2.png")
 
 func _on_UpButton_pressed():
 	play_craft_sound()
@@ -67,7 +67,7 @@ func _on_UpButton_pressed():
 	$Page1.show()
 	$Page2.hide()
 	initialize_crafting()
-	get_node("../Background/Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting1.png")
+	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting1.png")
 
 func intialize_slots():
 	var i_slots = inventory_slots.get_children()
@@ -143,73 +143,6 @@ func exited_crafting_area(_item):
 		$Tween.start()
 
 
-func _on_WoodBoxArea_mouse_entered():
-	entered_crafting_area("wood box")
-func _on_WoodBarrelArea_mouse_entered():
-	entered_crafting_area("wood barrel")
-func _on_WoodFenceArea_mouse_entered():
-	entered_crafting_area("wood fence")
-func _on_TorchArea_mouse_entered():
-	entered_crafting_area("torch")
-func _on_WoodChestArea_mouse_entered():
-	entered_crafting_area("wood chest")
-func _on_StoneChestArea_mouse_entered():
-	entered_crafting_area("stone chest")
-func _on_WoodPathArea_mouse_entered():
-	entered_crafting_area("wood path")
-func _on_StonePathArea_mouse_entered():
-	entered_crafting_area("stone path")
-func _on_TentArea_mouse_entered():
-	entered_crafting_area("tent")
-func _on_CampfireArea_mouse_entered():
-	entered_crafting_area("campfire")
-func _on_FirePedestalArea_mouse_entered():
-	entered_crafting_area("fire pedestal")
-func _on_TallPedestalArea_mouse_entered():
-	entered_crafting_area("tall fire pedestal")
-func _on_MachineArea_mouse_entered():
-	entered_crafting_area("grain mill")
-func _on_CraftingTable_mouse_entered():
-	entered_crafting_area("workbench")
-func _on_KitchenArea_mouse_entered():
-	entered_crafting_area("stove")
-func _on_SleepingBagArea_mouse_entered():
-	entered_crafting_area("sleeping bag")
-
-
-func _on_WoodBoxArea_mouse_exited():
-	exited_crafting_area("wood box")
-func _on_WoodBarrelArea_mouse_exited():
-	exited_crafting_area("wood barrel")
-func _on_WoodFenceArea_mouse_exited():
-	exited_crafting_area("wood fence")
-func _on_TorchArea_mouse_exited():
-	exited_crafting_area("torch")
-func _on_WoodChestArea_mouse_exited():
-	exited_crafting_area("wood chest")
-func _on_StoneChestArea_mouse_exited():
-	exited_crafting_area("stone chest")
-func _on_WoodPathArea_mouse_exited():
-	exited_crafting_area("wood path")
-func _on_StonePathArea_mouse_exited():
-	exited_crafting_area("stone path")
-func _on_TentArea_mouse_exited():
-	exited_crafting_area("tent")
-func _on_CampfireArea_mouse_exited():
-	exited_crafting_area("campfire")
-func _on_FirePedestalArea_mouse_exited():
-	exited_crafting_area("fire pedestal")
-func _on_TallPedestalArea_mouse_exited():
-	exited_crafting_area("tall fire pedestal")
-func _on_MachineArea_mouse_exited():
-	exited_crafting_area("grain mill")
-func _on_CraftingTable_mouse_exited():
-	exited_crafting_area("workbench")
-func _on_KitchenArea_mouse_exited():
-	exited_crafting_area("stove")
-func _on_SleepingBagArea_mouse_exited():
-	exited_crafting_area("sleeping bag")
-
 func play_craft_sound():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
@@ -244,55 +177,6 @@ func craft(item_name):
 	find_parent("UserInterface").holding_item = return_crafted_item(item_name)
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 
-func _on_WoodBoxArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_WoodBarrelArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_WoodFenceArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_TorchArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_WoodChestArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_StoneChestArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_WoodPathArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_StonePathArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_TentArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_CampfireArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_FirePedestalArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_TallPedestalArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_MachineArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_CraftingTable_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_KitchenArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-func _on_SleepingBagArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
-		craftable_item_pressed()
-		
 
 func hovered_slot(slot: SlotClass):
 	if slot.item and not find_parent("UserInterface").holding_item:
@@ -352,3 +236,121 @@ func left_click_not_holding(slot: SlotClass):
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+
+
+func _on_WoodBoxButton_mouse_entered():
+	entered_crafting_area("wood box")
+func _on_WoodBoxButton_mouse_exited():
+	exited_crafting_area("wood box")
+func _on_WoodBoxButton_pressed():
+	craftable_item_pressed()
+
+func _on_WoodBarrelButton_mouse_entered():
+	entered_crafting_area("wood barrel")
+func _on_WoodBarrelButton_mouse_exited():
+	exited_crafting_area("wood barrel")
+func _on_WoodBarrelButton_pressed():
+	craftable_item_pressed()
+
+func _on_WoodFenceButton_mouse_entered():
+	entered_crafting_area("wood fence")
+func _on_WoodFenceButton_mouse_exited():
+	exited_crafting_area("wood barrel")
+func _on_WoodFenceButton_pressed():
+	craftable_item_pressed()
+
+func _on_TorchButton_mouse_entered():
+	entered_crafting_area("torch")
+func _on_TorchButton_mouse_exited():
+	exited_crafting_area("torch")
+func _on_TorchButton_pressed():
+	craftable_item_pressed()
+
+func _on_WoodPathButton_mouse_exited():
+	exited_crafting_area("wood path")
+func _on_WoodPathButton_mouse_entered():
+	entered_crafting_area("wood path")
+func _on_WoodPathButton_pressed():
+	craftable_item_pressed()
+
+func _on_StonePathButton_mouse_entered():
+	entered_crafting_area("stone path")
+func _on_StonePathButton_mouse_exited():
+	exited_crafting_area("stone path")
+func _on_StonePathButton_pressed():
+	craftable_item_pressed()
+
+func _on_CampfireButton_mouse_entered():
+	entered_crafting_area("campfire")
+func _on_CampfireButton_mouse_exited():
+	exited_crafting_area("campfire")
+func _on_CampfireButton_pressed():
+	craftable_item_pressed()
+	
+func _on_WoodChestButton_mouse_entered():
+	entered_crafting_area("wood chest")
+func _on_WoodChestButton_mouse_exited():
+	exited_crafting_area("wood chest")
+func _on_WoodChestButton_pressed():
+	craftable_item_pressed()
+
+func _on_StoneChestButton_mouse_entered():
+	entered_crafting_area("stone chest")
+func _on_StoneChestButton_mouse_exited():
+	exited_crafting_area("stone chest")
+func _on_StoneChestButton_pressed():
+	craftable_item_pressed()
+
+func _on_FirePedestalButton_mouse_entered():
+	entered_crafting_area("fire pedestal")
+func _on_FirePedestalButton_mouse_exited():
+	exited_crafting_area("fire pedestal")
+func _on_FirePedestalButton_pressed():
+	craftable_item_pressed()
+
+func _on_SleepingBagButton_mouse_entered():
+	entered_crafting_area("sleeping bag")
+func _on_SleepingBagButton_mouse_exited():
+	exited_crafting_area("sleeping bag")
+func _on_SleepingBagButton_pressed():
+	craftable_item_pressed()
+
+func _on_TallFirePedestalButton_mouse_entered():
+	entered_crafting_area("tall fire pedestal")
+func _on_TallFirePedestalButton_mouse_exited():
+	exited_crafting_area("tall fire pedestal")
+func _on_TallFirePedestalButton_pressed():
+	craftable_item_pressed()
+	
+	
+func _on_TentButton_mouse_entered():
+	entered_crafting_area("tent")
+func _on_TentButton_mouse_exited():
+	exited_crafting_area("tent")
+func _on_TentButton_pressed():
+	craftable_item_pressed()
+	
+func _on_GrainMillButton_mouse_entered():
+	entered_crafting_area("grain mill")
+func _on_GrainMillButton_mouse_exited():
+	exited_crafting_area("grain mill")
+func _on_GrainMillButton_pressed():
+	craftable_item_pressed()
+	
+func _on_KitchenButton_mouse_entered():
+	entered_crafting_area("stove")
+func _on_KitchenButton_mouse_exited():
+	exited_crafting_area("stove")
+func _on_KitchenButton_pressed():
+	craftable_item_pressed()
+	
+func _on_WorkbenchButton_mouse_entered():
+	entered_crafting_area("workbench")
+func _on_WorkbenchButton_mouse_exited():
+	exited_crafting_area("workbench")
+func _on_WorkbenchButton_pressed():
+	craftable_item_pressed()
+
+
+
+

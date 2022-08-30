@@ -63,6 +63,14 @@
     "Seasons": ["Spring"],
     "yield": [1]
 },
+"asparagus": {
+    "DaysToGrow": 7,
+    "GrowthImages": 4,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Fall"],
+    "yield": [1],
+},
 
 
 
@@ -172,6 +180,13 @@
     "Seasons": ["Fall"],
     "yield": [1, 1, 1, 2],
 },
-
+"sugar cane": {
+    "DaysToGrow": 7,
+    "GrowthImages": 5,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Spring", "Summer", "Fall"],
+    "yield": [1, 2, 3],
+},
 
 }

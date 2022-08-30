@@ -24,7 +24,9 @@ func _ready():
 
 
 func initialize():
-	#$CompositeSprites.set_player_animation("idle_down")
+	$Trash/Top.rotation_degrees = 0
+	$CompositeSprites.set_player_animation(Server.player_node.character, "idle_down")
+	$CompositeSprites/AnimationPlayer.play("loop")
 	item = null
 	var i_slots = inventory_slots.get_children()
 	for i in range(i_slots.size()):
@@ -138,12 +140,6 @@ func left_click_not_holding(slot: SlotClass):
 
 
 
-
-func _on_TrashArea_mouse_entered():
-	open_trash_can()
-func _on_TrashArea_mouse_exited():
-	close_trash_can()
-	
 func open_trash_can():
 	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
 		$Trash/Top.rotation_degrees, 90, 0.35,
@@ -159,7 +155,19 @@ func close_trash_can():
 
 func _on_TrashArea_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("mouse_click") and find_parent("UserInterface").holding_item:
-		#find_parent("UserInterface").remove_child(self)
-		#find_parent("UserInterface").holding_item.queue_free()
+		find_parent("UserInterface").holding_item.queue_free()
+		find_parent("UserInterface").holding_item = null
+
+
+func _on_TrashButton_mouse_entered():
+	open_trash_can()
+
+
+func _on_TrashButton_mouse_exited():
+	close_trash_can()
+
+
+func _on_TrashButton_pressed():
+	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null

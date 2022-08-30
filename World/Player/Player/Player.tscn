@@ -1,9 +1,9 @@
 [gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://UserInterface.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/potato.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Human/male/HARVESTING/body/up/body.png" type="Texture" id=3]
-[ext_resource path="res://Characters/Human/male/HARVESTING/body/up/arms.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/inventory_icons/Seed/blueberry seeds.png" type="Texture" id=2]
+[ext_resource path="res://Characters/Human/male/HOLDING IDLE/body/down/body.png" type="Texture" id=3]
+[ext_resource path="res://Characters/Human/male/HOLDING IDLE/body/down/arms.png" type="Texture" id=4]
 [ext_resource path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Characters/Weapon swings/scythe/scythe down.png" type="Texture" id=7]
@@ -2105,7 +2105,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -16, -75 ), Vector2( -16, -73 ), Vector2( -16, -73 ), Vector2( -16, -75 ) ]
+"values": [ Vector2( -16, -83 ), Vector2( -16, -81 ), Vector2( -16, -81 ), Vector2( -16, -83 ) ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("Body:hframes")
@@ -2314,7 +2314,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -16, -74 ), Vector2( -16, -72 ), Vector2( -16, -74 ), Vector2( -16, -72 ) ]
+"values": [ Vector2( -16, -82 ), Vector2( -16, -80 ), Vector2( -16, -82 ), Vector2( -16, -80 ) ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("Body:hframes")
@@ -5251,7 +5251,6 @@ __meta__ = {
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 material = ExtResource( 11 )
-position = Vector2( 0, 8 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 22 )
 __meta__ = {
@@ -5569,7 +5568,6 @@ grow_vertical = 0
 texture = ExtResource( 2 )
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708

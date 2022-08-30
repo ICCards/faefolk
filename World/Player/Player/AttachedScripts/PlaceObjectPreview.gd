@@ -249,7 +249,7 @@ func get_rotation_index():
 		direction_index += 1
 		if direction_index == 4:
 			direction_index = 0
-		yield(get_tree().create_timer(0.2), "timeout")
+		yield(get_tree().create_timer(0.25), "timeout")
 		rotation_delay = false
 
 

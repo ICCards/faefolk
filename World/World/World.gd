@@ -26,7 +26,7 @@ onready var Bunny = preload("res://World/Animals/Bunny.tscn")
 onready var Duck = preload("res://World/Animals/Duck.tscn")
 onready var Bird = preload("res://World/Animals/Bird.tscn")
 onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
-onready var DustTrailEffect 
+onready var HoedDirtEffect = preload("res://World/Objects/Nature/Effects/HoedDirt.tscn") 
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTreeObject = preload("res://World/Objects/Nature/Trees/DesertTreeObject.tscn")
@@ -82,25 +82,25 @@ func set_world_visible():
 	get_node("PlacableTiles/" + Server.player_house_id).set_player_outside_house()
 
 
-func _ready():
-	spawnPlayerExample()
-	Server.isLoaded = true
-	Server.world = self
-	build_valid_tiles()
-	Tiles.valid_tiles = $WorldNavigation/ValidTiles
-	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
-	Tiles.path_tiles = $PlacableTiles/PathTiles
-
 #func _ready():
-#	rng.randomize()
-#	var loadingScreen = LoadingScreen.instance()
-#	loadingScreen.name = "loadingScreen"
-#	add_child(loadingScreen)
-#	get_node("loadingScreen").set_phase("Getting map")
-#	yield(get_tree().create_timer(1), "timeout")
-#	Server.generated_map.clear()
-#	Server.generate_map()
-#	wait_for_map()
+#	spawnPlayerExample()
+#	Server.isLoaded = true
+#	Server.world = self
+#	build_valid_tiles()
+#	Tiles.valid_tiles = $WorldNavigation/ValidTiles
+#	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
+#	Tiles.path_tiles = $PlacableTiles/PathTiles
+
+func _ready():
+	rng.randomize()
+	var loadingScreen = LoadingScreen.instance()
+	loadingScreen.name = "loadingScreen"
+	add_child(loadingScreen)
+	get_node("loadingScreen").set_phase("Getting map")
+	yield(get_tree().create_timer(1), "timeout")
+	Server.generated_map.clear()
+	Server.generate_map()
+	wait_for_map()
 
 
 func wait_for_map():
@@ -255,54 +255,54 @@ func buildMap(map):
 	for id in map["beach"]:
 		var loc = map["beach"][id]
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
-#	for id in map["tree"]:
-#		var loc = map["tree"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "tree")
-#		var biome = map["tree"][id]["b"]
-#		if biome == "desert":
-#			var object = DesertTreeObject.instance()
-#			object.health = map["tree"][id]["h"]
-#			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
-#			object.name = id
-#			$NatureObjects.add_child(object,true)
-#		else:
-#			treeTypes.shuffle()
-#			var variety = treeTypes.front()
-#			var object = TreeObject.instance()
-#			object.biome = biome
-#			object.health = map["tree"][id]["h"]
-#			object.initialize(variety, loc)
-#			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
-#			object.name = id
-#			$NatureObjects.add_child(object,true)
-#	print("LOADED TREES")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["log"]:
-#		var loc = map["log"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "log")
-#		var variety = rng.randi_range(0, 11)
-#		var object = BranchObject.instance()
-#		object.name = id
-#		object.health = map["log"][id]["h"]
-#		object.initialize(variety,loc)
-#		object.position = dirt.map_to_world(loc) + Vector2(16, 16)
-#		$NatureObjects.add_child(object,true)
-#	print("LOADED LOGS")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["stump"]:
-#		var loc = map["stump"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "stump")
-#		treeTypes.shuffle()
-#		var variety = treeTypes.front()
-#		var object = StumpObject.instance()
-#		object.health = map["stump"][id]["h"]
-#		object.name = id
-#		object.initialize(variety,loc)
-#		object.position = dirt.map_to_world(loc) + Vector2(4,0)
-#		$NatureObjects.add_child(object,true)
-#	print("LOADED STUMPS")
-#	get_node("loadingScreen").set_phase("Building ore")
-#	yield(get_tree().create_timer(0.5), "timeout")
+	for id in map["tree"]:
+		var loc = map["tree"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "tree")
+		var biome = map["tree"][id]["b"]
+		if biome == "desert":
+			var object = DesertTreeObject.instance()
+			object.health = map["tree"][id]["h"]
+			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
+			object.name = id
+			$NatureObjects.add_child(object,true)
+		else:
+			treeTypes.shuffle()
+			var variety = treeTypes.front()
+			var object = TreeObject.instance()
+			object.biome = biome
+			object.health = map["tree"][id]["h"]
+			object.initialize(variety, loc)
+			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
+			object.name = id
+			$NatureObjects.add_child(object,true)
+	print("LOADED TREES")
+	yield(get_tree().create_timer(0.5), "timeout")
+	for id in map["log"]:
+		var loc = map["log"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "log")
+		var variety = rng.randi_range(0, 11)
+		var object = BranchObject.instance()
+		object.name = id
+		object.health = map["log"][id]["h"]
+		object.initialize(variety,loc)
+		object.position = dirt.map_to_world(loc) + Vector2(16, 16)
+		$NatureObjects.add_child(object,true)
+	print("LOADED LOGS")
+	yield(get_tree().create_timer(0.5), "timeout")
+	for id in map["stump"]:
+		var loc = map["stump"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "stump")
+		treeTypes.shuffle()
+		var variety = treeTypes.front()
+		var object = StumpObject.instance()
+		object.health = map["stump"][id]["h"]
+		object.name = id
+		object.initialize(variety,loc)
+		object.position = dirt.map_to_world(loc) + Vector2(4,0)
+		$NatureObjects.add_child(object,true)
+	print("LOADED STUMPS")
+	get_node("loadingScreen").set_phase("Building ore")
+	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["ore_large"]:
 		var loc = map["ore_large"][id]["l"]
 		Tiles.remove_nature_invalid_tiles(loc, "large ore")
@@ -613,3 +613,8 @@ func play_watering_can_effect(loc):
 	var wateringCanEffect = WateringCanEffect.instance()
 	wateringCanEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
 	add_child(wateringCanEffect)
+	
+func play_hoed_dirt_effect(loc):
+	var hoedDirtEffect = HoedDirtEffect.instance()
+	hoedDirtEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,20)
+	add_child(hoedDirtEffect)
