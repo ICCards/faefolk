@@ -1,8 +1,8 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Inventory UI/menus/crafting1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Inventory UI/menus/inventory.png" type="Texture" id=3]
 [ext_resource path="res://World/Player/Player/AttachedScripts/Inventory.gd" type="Script" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/PetUI.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=6]
@@ -13,7 +13,7 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Images/placable_object_preview/tent.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Images/Inventory UI/tabs/inventory.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Images/Inventory UI/tabs/collections.png" type="Texture" id=14]
 [ext_resource path="res://Characters/Weapon swings/sword/left.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=17]
@@ -36,39 +36,8 @@
 [ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=34]
 [ext_resource path="res://Assets/Images/placable_object_preview/sleeping bag.png" type="Texture" id=35]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=36]
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 48, 77.5 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 84, 65 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 48, 47.5 )
-
-[sub_resource type="RectangleShape2D" id=23]
-extents = Vector2( 47.5, 47.75 )
-
-[sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 48, 44 )
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 48, 86.5 )
-
-[sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 114.5, 59.75 )
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 47, 132 )
-
-[sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 86, 114.75 )
-
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 90.125, 69.1875 )
-
-[sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 96.0625, 81.0938 )
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/Collections.tscn" type="PackedScene" id=37]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/OptionsMenu.tscn" type="PackedScene" id=38]
 
 [sub_resource type="StyleBoxTexture" id=17]
 texture = ExtResource( 32 )
@@ -86,40 +55,270 @@ region_rect = Rect2( 0, 0, 30, 14 )
 texture = ExtResource( 32 )
 region_rect = Rect2( 0, 0, 30, 14 )
 
-[sub_resource type="RectangleShape2D" id=24]
-extents = Vector2( 34.5, 48.5 )
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeadAtr:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Arms:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shirts:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Accessory:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
-[node name="Menu" type="Node2D"]
-position = Vector2( 431, 38 )
+[sub_resource type="Animation" id=22]
+resource_name = "loop"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeadAtr:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Arms:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shirts:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Accessory:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Menu" type="Control"]
 script = ExtResource( 1 )
 
-[node name="Background" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -375.0
-margin_right = 375.0
-margin_bottom = 627.0
-mouse_filter = 2
-custom_constants/separation = 0
+[node name="BackgroundButton" type="Button" parent="."]
+margin_left = -520.0
+margin_top = -78.0
+margin_right = 596.0
+margin_bottom = 657.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="Tab" type="TextureRect" parent="Background"]
+[node name="Tab" type="TextureRect" parent="."]
 margin_right = 750.0
 margin_bottom = 84.0
 grow_vertical = 0
-mouse_filter = 2
 texture = ExtResource( 14 )
 
-[node name="Background" type="TextureRect" parent="Background"]
+[node name="Background" type="TextureRect" parent="."]
+margin_left = 57.0
 margin_top = 84.0
-margin_right = 750.0
-margin_bottom = 621.0
+margin_right = 807.0
+margin_bottom = 630.0
 grow_vertical = 0
-mouse_filter = 2
 texture = ExtResource( 3 )
 
-[node name="Crafting" type="Node2D" parent="."]
+[node name="TabButtons" type="HBoxContainer" parent="."]
+margin_left = 88.0
+margin_right = 505.0
+margin_bottom = 64.0
+custom_constants/separation = 5
+
+[node name="Inventory" type="Button" parent="TabButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Skills" type="Button" parent="TabButtons"]
+margin_left = 69.0
+margin_right = 133.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Crafting" type="Button" parent="TabButtons"]
+margin_left = 138.0
+margin_right = 202.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Collections" type="Button" parent="TabButtons"]
+margin_left = 207.0
+margin_right = 271.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Options" type="Button" parent="TabButtons"]
+margin_left = 276.0
+margin_right = 340.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Exit" type="Button" parent="TabButtons"]
+margin_left = 345.0
+margin_right = 409.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Crafting" type="Control" parent="."]
 visible = false
-scale = Vector2( 0.5, 0.5 )
+rect_scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="CraftingItemDescription" parent="Crafting" instance=ExtResource( 30 )]
@@ -127,84 +326,106 @@ visible = false
 z_index = 2
 
 [node name="Page1" type="Node2D" parent="Crafting"]
-visible = false
+position = Vector2( 750, 0 )
 
-[node name="WoodBoxArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( -612, -62 )
+[node name="WoodBoxButton" type="Button" parent="Crafting/Page1"]
+margin_left = -558.0
+margin_top = 194.0
+margin_right = -462.0
+margin_bottom = 348.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/WoodBoxArea"]
-position = Vector2( 102, 332.5 )
-shape = SubResource( 7 )
+[node name="WoodBarrelButton" type="Button" parent="Crafting/Page1"]
+margin_left = -394.0
+margin_top = 194.0
+margin_right = -298.0
+margin_bottom = 348.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="WoodBarrelArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( -606, -62 )
+[node name="WoodFenceButton" type="Button" parent="Crafting/Page1"]
+margin_left = -222.0
+margin_top = 192.0
+margin_right = -126.0
+margin_bottom = 346.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/WoodBarrelArea"]
-position = Vector2( 259.75, 332 )
-shape = SubResource( 7 )
+[node name="TorchButton" type="Button" parent="Crafting/Page1"]
+margin_left = -58.0
+margin_top = 254.0
+margin_right = 38.0
+margin_bottom = 346.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="WoodFenceArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( -438, -62 )
+[node name="WoodPathButton" type="Button" parent="Crafting/Page1"]
+margin_left = 98.0
+margin_top = 252.0
+margin_right = 194.0
+margin_bottom = 346.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/WoodFenceArea"]
-position = Vector2( 259.75, 332 )
-shape = SubResource( 7 )
+[node name="StonePathButton" type="Button" parent="Crafting/Page1"]
+margin_left = 272.0
+margin_top = 254.0
+margin_right = 368.0
+margin_bottom = 348.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="TorchArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( -270, -62 )
+[node name="CampfireButton" type="Button" parent="Crafting/Page1"]
+margin_left = 418.0
+margin_top = 254.0
+margin_right = 514.0
+margin_bottom = 348.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/TorchArea"]
-position = Vector2( 259.75, 332 )
-shape = SubResource( 7 )
+[node name="WoodChestButton" type="Button" parent="Crafting/Page1"]
+margin_left = -532.0
+margin_top = 400.0
+margin_right = -348.0
+margin_bottom = 540.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="WoodChestArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( -342, -40 )
+[node name="StoneChestButton" type="Button" parent="Crafting/Page1"]
+margin_left = -280.0
+margin_top = 400.0
+margin_right = -96.0
+margin_bottom = 540.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/WoodChestArea"]
-position = Vector2( -99, 514 )
-shape = SubResource( 8 )
+[node name="FirePedestalButton" type="Button" parent="Crafting/Page1"]
+margin_left = -32.0
+margin_top = 366.0
+margin_right = 88.0
+margin_bottom = 546.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
-[node name="StoneChestArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( -138, -204 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/StoneChestArea"]
-position = Vector2( -55, 680 )
-shape = SubResource( 8 )
-
-[node name="WoodPathArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( 58, -204 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/WoodPathArea"]
-position = Vector2( 92, 504.5 )
-shape = SubResource( 9 )
-
-[node name="StonePathArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( 80, -204 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/StonePathArea"]
-position = Vector2( 240, 506 )
-shape = SubResource( 23 )
-
-[node name="CampfireArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( 206, -62 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/CampfireArea"]
-position = Vector2( 260, 366 )
-shape = SubResource( 21 )
-
-[node name="FirePedestalArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( -228, 138 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/FirePedestalArea"]
-position = Vector2( 259.75, 323.5 )
-shape = SubResource( 10 )
-
-[node name="SleepingBagArea" type="Area2D" parent="Crafting/Page1"]
-position = Vector2( 124, 152 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page1/SleepingBagArea"]
-position = Vector2( 182.5, 331.75 )
-shape = SubResource( 22 )
+[node name="SleepingBagButton" type="Button" parent="Crafting/Page1"]
+margin_left = 190.0
+margin_top = 422.0
+margin_right = 418.0
+margin_bottom = 552.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
 [node name="wood box" type="Sprite" parent="Crafting/Page1"]
 position = Vector2( -510, 264 )
@@ -271,6 +492,52 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="Page2" type="Node2D" parent="Crafting"]
+position = Vector2( 750, 0 )
+
+[node name="TallFirePedestalButton" type="Button" parent="Crafting/Page2"]
+margin_left = -536.0
+margin_top = 238.0
+margin_right = -436.0
+margin_bottom = 514.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TentButton" type="Button" parent="Crafting/Page2"]
+margin_left = -362.0
+margin_top = 236.0
+margin_right = -196.0
+margin_bottom = 512.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="GrainMillButton" type="Button" parent="Crafting/Page2"]
+margin_left = -120.0
+margin_top = 292.0
+margin_right = 46.0
+margin_bottom = 520.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="KitchenButton" type="Button" parent="Crafting/Page2"]
+margin_left = 102.0
+margin_top = 360.0
+margin_right = 298.0
+margin_bottom = 524.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="WorkbenchButton" type="Button" parent="Crafting/Page2"]
+margin_left = 350.0
+margin_top = 366.0
+margin_right = 546.0
+margin_bottom = 530.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
 
 [node name="tent" type="Sprite" parent="Crafting/Page2"]
 position = Vector2( -278, 372 )
@@ -297,41 +564,6 @@ position = Vector2( -484, 376 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 26 )
 
-[node name="TentArea" type="Area2D" parent="Crafting/Page2"]
-position = Vector2( -462, -256 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Crafting/Page2/TentArea"]
-position = Vector2( 0, 8 )
-polygon = PoolVector2Array( 98, 762, 266, 764, 262, 566, 182, 478, 104, 564 )
-
-[node name="TallPedestalArea" type="Area2D" parent="Crafting/Page2"]
-position = Vector2( -620, -10 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page2/TallPedestalArea"]
-position = Vector2( 134, 390 )
-shape = SubResource( 12 )
-
-[node name="GrainMillArea" type="Area2D" parent="Crafting/Page2"]
-position = Vector2( -280, 30 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page2/GrainMillArea"]
-position = Vector2( 242, 376 )
-shape = SubResource( 13 )
-
-[node name="CraftingTable" type="Area2D" parent="Crafting/Page2"]
-position = Vector2( 98, 22 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page2/CraftingTable"]
-position = Vector2( 347.125, 433 )
-shape = SubResource( 14 )
-
-[node name="StoveArea" type="Area2D" parent="Crafting/Page2"]
-position = Vector2( -154, 20 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crafting/Page2/StoveArea"]
-position = Vector2( 354.938, 422.094 )
-shape = SubResource( 15 )
-
 [node name="UpButton" type="Button" parent="Crafting/Page2"]
 margin_left = 516.0
 margin_top = 234.0
@@ -347,9 +579,9 @@ bus = "Bus1"
 [node name="Tween" type="Tween" parent="Crafting"]
 
 [node name="InventorySlots" type="GridContainer" parent="Crafting"]
-margin_left = -570.0
+margin_left = 180.0
 margin_top = 755.0
-margin_right = -3.0
+margin_right = 747.0
 margin_bottom = 809.0
 rect_scale = Vector2( 2, 2 )
 custom_constants/vseparation = 3
@@ -426,9 +658,9 @@ rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 2 )
 
 [node name="HotbarSlots" type="GridContainer" parent="Crafting"]
-margin_left = -570.0
+margin_left = 180.0
 margin_top = 636.0
-margin_right = -3.0
+margin_right = 747.0
 margin_bottom = 690.0
 rect_min_size = Vector2( 54, 54 )
 rect_scale = Vector2( 2, 2 )
@@ -520,9 +752,9 @@ visible = false
 z_index = 2
 
 [node name="InventorySlots" type="GridContainer" parent="Inventory"]
-margin_left = -285.0
+margin_left = 90.0
 margin_top = 171.0
-margin_right = 282.0
+margin_right = 657.0
 margin_bottom = 225.0
 custom_constants/vseparation = 3
 custom_constants/hseparation = 3
@@ -598,9 +830,9 @@ rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 2 )
 
 [node name="HotbarSlots" type="GridContainer" parent="Inventory"]
-margin_left = -285.0
+margin_left = 90.0
 margin_top = 102.0
-margin_right = 282.0
+margin_right = 657.0
 margin_bottom = 156.0
 rect_min_size = Vector2( 54, 54 )
 custom_constants/vseparation = 3
@@ -700,7 +932,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 22
+frame = 9
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -717,8 +949,8 @@ text = "Hide"
 
 [node name="CompositeSprites" type="Node2D" parent="Inventory"]
 material = ExtResource( 21 )
-position = Vector2( -157, 469 )
-scale = Vector2( 3, 3 )
+position = Vector2( 200, 473 )
+scale = Vector2( 3.5, 3.5 )
 script = ExtResource( 22 )
 
 [node name="Body" type="Sprite" parent="Inventory/CompositeSprites"]
@@ -734,7 +966,7 @@ hframes = 4
 
 [node name="Arms" type="Sprite" parent="Inventory/CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -15.25 )
+position = Vector2( 0, -16 )
 texture = ExtResource( 20 )
 hframes = 4
 
@@ -761,19 +993,16 @@ hframes = 4
 [node name="ToolEquipped" type="Sprite" parent="Inventory/CompositeSprites"]
 visible = false
 position = Vector2( 0, -16 )
+scale = Vector2( 1, 1 )
 texture = ExtResource( 15 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Inventory/CompositeSprites"]
+anims/RESET = SubResource( 21 )
+anims/loop = SubResource( 22 )
 
 [node name="Trash" type="Node2D" parent="Inventory"]
-position = Vector2( -15, -10 )
-
-[node name="TrashArea" type="Area2D" parent="Inventory/Trash"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/Trash/TrashArea"]
-position = Vector2( 380.5, 397.5 )
-shape = SubResource( 24 )
+position = Vector2( 360, -11 )
 
 [node name="Bottom" type="Sprite" parent="Inventory/Trash"]
 position = Vector2( 381, 398 )
@@ -784,125 +1013,163 @@ position = Vector2( 413, 386 )
 texture = ExtResource( 29 )
 offset = Vector2( -32, -21 )
 
+[node name="TrashButton" type="Button" parent="Inventory/Trash"]
+margin_left = 340.0
+margin_top = 344.0
+margin_right = 421.0
+margin_bottom = 446.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
 [node name="Tween" type="Tween" parent="Inventory"]
 
-[node name="Buttons" type="HBoxContainer" parent="."]
-margin_left = -287.0
-margin_top = 1.0
-margin_right = 130.0
-margin_bottom = 65.0
-custom_constants/separation = 5
+[node name="HotbarLabels" type="HBoxContainer" parent="Inventory"]
+margin_left = 114.0
+margin_top = 85.0
+margin_right = 1854.0
+margin_bottom = 146.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_constants/separation = 165
 
-[node name="Inventory" type="Button" parent="Buttons"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
+[node name="1" type="Label" parent="Inventory/HotbarLabels"]
+margin_right = 19.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "1"
 
-[node name="Skills" type="Button" parent="Buttons"]
-margin_left = 69.0
-margin_right = 133.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
+[node name="2" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 184.0
+margin_right = 211.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "2"
 
-[node name="Crafting" type="Button" parent="Buttons"]
-margin_left = 138.0
-margin_right = 202.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
+[node name="3" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 376.0
+margin_right = 403.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "3"
 
-[node name="Collections" type="Button" parent="Buttons"]
-margin_left = 207.0
-margin_right = 271.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
+[node name="4" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 568.0
+margin_right = 591.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "4"
 
-[node name="Settings" type="Button" parent="Buttons"]
-margin_left = 276.0
-margin_right = 340.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
+[node name="5" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 756.0
+margin_right = 783.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "5"
 
-[node name="Exit" type="Button" parent="Buttons"]
-margin_left = 345.0
-margin_right = 409.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
+[node name="6" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 948.0
+margin_right = 975.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "6"
 
-[connection signal="input_event" from="Crafting/Page1/WoodBoxArea" to="Crafting" method="_on_WoodBoxArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/WoodBoxArea" to="Crafting" method="_on_WoodBoxArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/WoodBoxArea" to="Crafting" method="_on_WoodBoxArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/WoodBarrelArea" to="Crafting" method="_on_WoodBarrelArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/WoodBarrelArea" to="Crafting" method="_on_WoodBarrelArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/WoodBarrelArea" to="Crafting" method="_on_WoodBarrelArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/WoodFenceArea" to="Crafting" method="_on_WoodFenceArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/WoodFenceArea" to="Crafting" method="_on_WoodFenceArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/WoodFenceArea" to="Crafting" method="_on_WoodFenceArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/TorchArea" to="Crafting" method="_on_TorchArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/TorchArea" to="Crafting" method="_on_TorchArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/TorchArea" to="Crafting" method="_on_TorchArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/WoodChestArea" to="Crafting" method="_on_WoodChestArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/WoodChestArea" to="Crafting" method="_on_WoodChestArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/WoodChestArea" to="Crafting" method="_on_WoodChestArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/StoneChestArea" to="Crafting" method="_on_StoneChestArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/StoneChestArea" to="Crafting" method="_on_StoneChestArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/StoneChestArea" to="Crafting" method="_on_StoneChestArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/WoodPathArea" to="Crafting" method="_on_WoodPathArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/WoodPathArea" to="Crafting" method="_on_WoodPathArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/WoodPathArea" to="Crafting" method="_on_WoodPathArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/StonePathArea" to="Crafting" method="_on_StonePathArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/StonePathArea" to="Crafting" method="_on_StonePathArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/StonePathArea" to="Crafting" method="_on_StonePathArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/CampfireArea" to="Crafting" method="_on_CampfireArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/CampfireArea" to="Crafting" method="_on_CampfireArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/CampfireArea" to="Crafting" method="_on_CampfireArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/FirePedestalArea" to="Crafting" method="_on_FirePedestalArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/FirePedestalArea" to="Crafting" method="_on_FirePedestalArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/FirePedestalArea" to="Crafting" method="_on_FirePedestalArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page1/SleepingBagArea" to="Crafting" method="_on_SleepingBagArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page1/SleepingBagArea" to="Crafting" method="_on_SleepingBagArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/SleepingBagArea" to="Crafting" method="_on_SleepingBagArea_mouse_exited"]
+[node name="7" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 1140.0
+margin_right = 1165.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "7"
+
+[node name="8" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 1330.0
+margin_right = 1357.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "8"
+
+[node name="9" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 1522.0
+margin_right = 1548.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "9"
+
+[node name="0" type="Label" parent="Inventory/HotbarLabels"]
+margin_left = 1713.0
+margin_right = 1740.0
+margin_bottom = 61.0
+theme = ExtResource( 17 )
+text = "0"
+
+[node name="OptionsMenu" parent="." instance=ExtResource( 38 )]
+visible = false
+margin_left = 123.0
+margin_top = -38.0
+margin_right = 123.0
+margin_bottom = -38.0
+rect_scale = Vector2( 0.75, 0.75 )
+
+[node name="Collections" parent="." instance=ExtResource( 37 )]
+visible = false
+
+[connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
+[connection signal="pressed" from="TabButtons/Inventory" to="." method="_on_Inventory_pressed"]
+[connection signal="pressed" from="TabButtons/Skills" to="." method="_on_Skills_pressed"]
+[connection signal="pressed" from="TabButtons/Crafting" to="." method="_on_Crafting_pressed"]
+[connection signal="pressed" from="TabButtons/Collections" to="." method="_on_Collections_pressed"]
+[connection signal="pressed" from="TabButtons/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="TabButtons/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/WoodBoxButton" to="Crafting" method="_on_WoodBoxButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/WoodBoxButton" to="Crafting" method="_on_WoodBoxButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/WoodBoxButton" to="Crafting" method="_on_WoodBoxButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/WoodBarrelButton" to="Crafting" method="_on_WoodBarrelButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/WoodBarrelButton" to="Crafting" method="_on_WoodBarrelButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/WoodBarrelButton" to="Crafting" method="_on_WoodBarrelButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/WoodFenceButton" to="Crafting" method="_on_WoodFenceButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/WoodFenceButton" to="Crafting" method="_on_WoodFenceButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/WoodFenceButton" to="Crafting" method="_on_WoodFenceButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/TorchButton" to="Crafting" method="_on_TorchButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/TorchButton" to="Crafting" method="_on_TorchButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/TorchButton" to="Crafting" method="_on_TorchButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/WoodPathButton" to="Crafting" method="_on_WoodPathButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/WoodPathButton" to="Crafting" method="_on_WoodPathButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/WoodPathButton" to="Crafting" method="_on_WoodPathButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/StonePathButton" to="Crafting" method="_on_StonePathButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/StonePathButton" to="Crafting" method="_on_StonePathButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/StonePathButton" to="Crafting" method="_on_StonePathButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/CampfireButton" to="Crafting" method="_on_CampfireButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/CampfireButton" to="Crafting" method="_on_CampfireButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/CampfireButton" to="Crafting" method="_on_CampfireButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/WoodChestButton" to="Crafting" method="_on_WoodChestButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/WoodChestButton" to="Crafting" method="_on_WoodChestButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/WoodChestButton" to="Crafting" method="_on_WoodChestButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/StoneChestButton" to="Crafting" method="_on_StoneChestButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/StoneChestButton" to="Crafting" method="_on_StoneChestButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/StoneChestButton" to="Crafting" method="_on_StoneChestButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/FirePedestalButton" to="Crafting" method="_on_FirePedestalButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/FirePedestalButton" to="Crafting" method="_on_FirePedestalButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/FirePedestalButton" to="Crafting" method="_on_FirePedestalButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/SleepingBagButton" to="Crafting" method="_on_SleepingBagButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/SleepingBagButton" to="Crafting" method="_on_SleepingBagButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/SleepingBagButton" to="Crafting" method="_on_SleepingBagButton_pressed"]
 [connection signal="pressed" from="Crafting/Page1/DownButton" to="Crafting" method="_on_DownButton_pressed"]
-[connection signal="input_event" from="Crafting/Page2/TentArea" to="Crafting" method="_on_TentArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page2/TentArea" to="Crafting" method="_on_TentArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page2/TentArea" to="Crafting" method="_on_TentArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page2/TallPedestalArea" to="Crafting" method="_on_TallPedestalArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page2/TallPedestalArea" to="Crafting" method="_on_TallPedestalArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page2/TallPedestalArea" to="Crafting" method="_on_TallPedestalArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page2/GrainMillArea" to="Crafting" method="_on_MachineArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page2/GrainMillArea" to="Crafting" method="_on_MachineArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page2/GrainMillArea" to="Crafting" method="_on_MachineArea_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page2/CraftingTable" to="Crafting" method="_on_CraftingTable_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page2/CraftingTable" to="Crafting" method="_on_CraftingTable_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page2/CraftingTable" to="Crafting" method="_on_CraftingTable_mouse_exited"]
-[connection signal="input_event" from="Crafting/Page2/StoveArea" to="Crafting" method="_on_KitchenArea_input_event"]
-[connection signal="mouse_entered" from="Crafting/Page2/StoveArea" to="Crafting" method="_on_KitchenArea_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page2/StoveArea" to="Crafting" method="_on_KitchenArea_mouse_exited"]
+[connection signal="mouse_entered" from="Crafting/Page2/TallFirePedestalButton" to="Crafting" method="_on_TallFirePedestalButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page2/TallFirePedestalButton" to="Crafting" method="_on_TallFirePedestalButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page2/TallFirePedestalButton" to="Crafting" method="_on_TallFirePedestalButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page2/TentButton" to="Crafting" method="_on_TentButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page2/TentButton" to="Crafting" method="_on_TentButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page2/TentButton" to="Crafting" method="_on_TentButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page2/GrainMillButton" to="Crafting" method="_on_GrainMillButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page2/GrainMillButton" to="Crafting" method="_on_GrainMillButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page2/GrainMillButton" to="Crafting" method="_on_GrainMillButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page2/KitchenButton" to="Crafting" method="_on_KitchenButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page2/KitchenButton" to="Crafting" method="_on_KitchenButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page2/KitchenButton" to="Crafting" method="_on_KitchenButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page2/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page2/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page2/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_pressed"]
 [connection signal="pressed" from="Crafting/Page2/UpButton" to="Crafting" method="_on_UpButton_pressed"]
 [connection signal="pressed" from="Inventory/PetUI/HideShowButton" to="Inventory/PetUI" method="_on_HideShowButton_pressed"]
-[connection signal="input_event" from="Inventory/Trash/TrashArea" to="Inventory" method="_on_TrashArea_input_event"]
-[connection signal="mouse_entered" from="Inventory/Trash/TrashArea" to="Inventory" method="_on_TrashArea_mouse_entered"]
-[connection signal="mouse_exited" from="Inventory/Trash/TrashArea" to="Inventory" method="_on_TrashArea_mouse_exited"]
-[connection signal="pressed" from="Buttons/Inventory" to="." method="_on_Inventory_pressed"]
-[connection signal="pressed" from="Buttons/Skills" to="." method="_on_Skills_pressed"]
-[connection signal="pressed" from="Buttons/Crafting" to="." method="_on_Crafting_pressed"]
-[connection signal="pressed" from="Buttons/Collections" to="." method="_on_Collections_pressed"]
-[connection signal="pressed" from="Buttons/Settings" to="." method="_on_Settings_pressed"]
-[connection signal="pressed" from="Buttons/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="mouse_entered" from="Inventory/Trash/TrashButton" to="Inventory" method="_on_TrashButton_mouse_entered"]
+[connection signal="mouse_exited" from="Inventory/Trash/TrashButton" to="Inventory" method="_on_TrashButton_mouse_exited"]
+[connection signal="pressed" from="Inventory/Trash/TrashButton" to="Inventory" method="_on_TrashButton_pressed"]

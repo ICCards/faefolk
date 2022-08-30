@@ -41,7 +41,6 @@ enum {
 func _ready():
 	start()
 
-
 func _unhandled_input(event):
 	if event.is_action_pressed("mouse_click"):
 		if not mini_game_active:
@@ -177,15 +176,15 @@ func draw_cast_line():
 	hook.position = end_point - Vector2(4.5, 4.5)
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
 	var location = ocean.world_to_map(hook.position + get_parent().position)
-	#if Tiles.isCenterBitmaskTile(location, ocean): # valid cast
-	waiting_for_fish_bite = true
-	if direction == "RIGHT" or direction == "LEFT":
-		player_animation_player.play("waiting for fish side")
+	if Tiles.isCenterBitmaskTile(location, ocean): # valid cast
+		waiting_for_fish_bite = true
+		if direction == "RIGHT" or direction == "LEFT":
+			player_animation_player.play("waiting for fish side")
+		else:
+			player_animation_player.play("waiting for fish upwards")
 	else:
-		player_animation_player.play("waiting for fish upwards")
-#	else:
-#		yield(get_tree().create_timer(0.2),"timeout")
-#		stop_fishing_state()
+		yield(get_tree().create_timer(0.2),"timeout")
+		stop_fishing_state()
 
 
 func setLinePointsToBezierCurve(a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):

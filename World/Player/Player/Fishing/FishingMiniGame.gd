@@ -10,36 +10,35 @@ var fishable = true;
 var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
 
 
-#func _ready():
-#	spawn_level1()
-	
 func set_active():
 	visible = true
 	$TempFishIcon.show()
+	$Hook.position.y = 83
+	$TempFishIcon.position.y = 83
 	$Progress.value = 200
 	$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
 
 func spawn_random_fish():
 	print("SPAWN RANDOM FISH")
 	$TempFishIcon.hide()
-	$Hook.position.y = 83
-	spawn_level1()
-#	if Util.chance(25):
-#		spawn_level1()
-#	elif Util.chance(25):
-#		spawn_level2()
-#	elif Util.chance(25):
-#		spawn_level3()
-#	else:
-#		spawn_level4()
+	if Util.chance(25):
+		spawn_level1()
+	elif Util.chance(25):
+		spawn_level2()
+	elif Util.chance(25):
+		spawn_level3()
+	else:
+		spawn_level4()
 
 func _physics_process(delta):
 	if get_parent().mini_game_active:
 		if ($Clicker.pressed == true):
 			if hookVelocity > -maxVelocity:
+				$AnimatedReel.rotation_degrees += 18
 				hookVelocity -= hookAcceleration
 		else:
 			if hookVelocity < maxVelocity:
+				$AnimatedReel.rotation_degrees -= 4
 				hookVelocity += hookDeceleration
 
 		if (Input.is_action_just_pressed("ui_accept")):
@@ -69,22 +68,24 @@ func _physics_process(delta):
 		var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
 		var g = range_lerp($Progress.value/10, 10, 50, 0, 1)
 		$Progress.modulate = Color(r, g, 0)
-		#get_parent().set_active_fish_line_position($Progress.value)
+		get_parent().set_active_fish_line_position($Progress.value)
 					
 		
 func caught_fish():
 	print("CAUGHT")
+	get_parent().mini_game_active = false
 	get_node("Fish").destroy()
 	$Progress.value = 0
 	fishable = true
-	#get_parent().caught_fish()
+	get_parent().caught_fish()
 	
 func lost_fish():
 	print("LOST")
+	get_parent().mini_game_active = false
 	get_node("Fish").destroy()
 	$Progress.value = 0
 	fishable = true
-	#get_parent().lost_fish()
+	get_parent().lost_fish()
 	
 func add_fish(min_d, max_d, move_speed, move_time):
 	var f = fish.instance()
@@ -103,25 +104,25 @@ func add_fish(min_d, max_d, move_speed, move_time):
 func spawn_level1():
 	print("LEVEL 1")
 	if (fishable):
-		add_fish(60, 120, 3, 1.75)
+		add_fish(40, 120, 3, 1.75)
 		fishable = false
 
 func spawn_level2():
 	print("LEVEL 2")
 	if (fishable):
-		add_fish(70, 140, 2.5, 1.5)
+		add_fish(45, 140, 2.5, 1.5)
 		fishable = false
 
 func spawn_level3():
 	print("LEVEL 3")
 	if (fishable):
-		add_fish(80, 160, 2, 1)
+		add_fish(50, 160, 2, 1)
 		fishable = false
 
 func spawn_level4():
 	print("LEVEL 4")
 	if (fishable):
-		add_fish(90, 160, 1.75, 0.75)
+		add_fish(60, 160, 1.75, 0.75)
 		fishable = false
 
 func _on_Clicker_button_down():

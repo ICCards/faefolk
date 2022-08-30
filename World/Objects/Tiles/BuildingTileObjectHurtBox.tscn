@@ -253,7 +253,6 @@ margin_left = 3.5
 margin_top = 14.5
 margin_right = 3.5
 margin_bottom = 46.5
-rect_scale = Vector2( 0.14, 0.14 )
 mouse_filter = 2
 
 [node name="Name" parent="UpgradeWallLabel/Wood" index="0"]
@@ -273,7 +272,6 @@ margin_left = 4.0
 margin_top = 26.5
 margin_right = 4.0
 margin_bottom = 58.5
-rect_scale = Vector2( 0.14, 0.14 )
 mouse_filter = 2
 
 [node name="Name" parent="UpgradeWallLabel/Stone" index="0"]
@@ -298,7 +296,6 @@ margin_left = 3.5
 margin_top = 38.5
 margin_right = 3.5
 margin_bottom = 70.5
-rect_scale = Vector2( 0.14, 0.14 )
 mouse_filter = 2
 
 [node name="Name" parent="UpgradeWallLabel/Metal" index="0"]
@@ -323,7 +320,6 @@ margin_left = 3.5
 margin_top = 51.0
 margin_right = 3.5
 margin_bottom = 83.0
-rect_scale = Vector2( 0.14, 0.14 )
 mouse_filter = 2
 
 [node name="Name" parent="UpgradeWallLabel/Armored" index="0"]

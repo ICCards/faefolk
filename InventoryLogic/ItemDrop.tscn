@@ -1,14 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
 [ext_resource path="res://InventoryLogic/ItemDrop.gd" type="Script" id=2]
-
-[sub_resource type="DynamicFontData" id=10]
-font_path = "res://Assets/Fonts/slkscrb.ttf"
-
-[sub_resource type="DynamicFont" id=8]
-outline_color = Color( 0, 0, 0, 1 )
-extra_spacing_char = -1
-font_data = SubResource( 10 )
 
 [sub_resource type="CircleShape2D" id=9]
 radius = 11.3333
@@ -332,8 +325,8 @@ margin_left = 6.08696
 margin_top = 10.4348
 margin_right = 32.087
 margin_bottom = 51.4348
-rect_scale = Vector2( 0.4, 0.4 )
-custom_fonts/font = SubResource( 8 )
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 1 )
 text = "99
 "
 

@@ -141,11 +141,14 @@ position = Vector2( 36, 24 )
 scale = Vector2( 2.3, 2.3 )
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
-position = Vector2( 512, 498 )
+position = Vector2( 512, 507 )
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
 visible = false
-position = Vector2( 512, 39 )
+margin_left = 139.0
+margin_top = 34.0
+margin_right = 139.0
+margin_bottom = 34.0
 
 [node name="DeathEffect" type="ColorRect" parent="."]
 margin_left = -58.0

@@ -67,6 +67,7 @@ func set_hoed_tile(direction):
 #		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 #		var data = {"id": id, "l": location}
 #		Server.action("HOE", data)
+		Server.world.play_hoed_dirt_effect(location)
 		Stats.decrease_tool_health()
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
