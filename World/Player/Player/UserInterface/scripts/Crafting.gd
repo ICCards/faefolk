@@ -47,12 +47,13 @@ func _ready():
 		h_slots[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
 
 func initialize():
+	crafting_item = null
+	item = null
 	show()
 	page = 1
 	$Page1.show()
 	$Page2.hide()
 	initialize_crafting()
-	intialize_slots()
 
 func _on_DownButton_pressed():
 	play_craft_sound()
@@ -86,6 +87,7 @@ func intialize_slots():
 
 
 func initialize_crafting():
+	intialize_slots()
 	if page == 1:
 		for item in page1:
 			if sufficientMaterialToCraft(item):
@@ -129,6 +131,7 @@ func _physics_process(delta):
 
 func entered_crafting_area(_item):
 	yield(get_tree(), "idle_frame")
+	item = null
 	crafting_item = _item
 	$Tween.interpolate_property(get_node("Page" + str(page) + "/" + crafting_item), "scale",
 		get_node("Page" + str(page) + "/" + crafting_item).scale, Vector2(3.35, 3.35), 0.15,
@@ -145,9 +148,10 @@ func exited_crafting_area(_item):
 
 
 func play_craft_sound():
-	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-	$SoundEffects.play()
+	pass
+#	$SoundEffects.stream = Sounds.button_select
+#	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+#	$SoundEffects.play()
 	
 func play_error_sound():
 	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
@@ -166,21 +170,24 @@ func craftable_item_pressed():
 	if sufficientMaterialToCraft(crafting_item) and not find_parent("UserInterface").holding_item:
 		craft(crafting_item)
 	elif find_parent("UserInterface").holding_item:
-		if find_parent("UserInterface").holding_item.item_name == crafting_item:
+		if find_parent("UserInterface").holding_item.item_name == crafting_item and sufficientMaterialToCraft(crafting_item):
+			PlayerInventory.craft_item(crafting_item)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
+			initialize_crafting()
 	else:
 		play_error_sound()
 	
 func craft(item_name):
 	play_craft_sound()
-	#PlayerInventory.craft_item(item_name)
-	initialize_crafting()
 	find_parent("UserInterface").holding_item = return_crafted_item(item_name)
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+	PlayerInventory.craft_item(item_name)
+	initialize_crafting()
 
 
 func hovered_slot(slot: SlotClass):
 	if slot.item and not find_parent("UserInterface").holding_item:
+		crafting_item = null
 		slot.item.hover_item()
 		item = slot.item.item_name
 
