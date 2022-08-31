@@ -82,7 +82,6 @@ func craft_item(item):
 	var ingredients = JsonData.crafting_data[item]["ingredients"]
 	for i in range(ingredients.size()):
 		remove_material(ingredients[i][0], ingredients[i][1])
-	#add_item_to_hotbar(item, 1, null)
 
 
 func remove_material(item, amount):
@@ -188,25 +187,48 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity, item_health):
 	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar/HotbarSlots/Slot" + str(slot_index + 1))
-	if slot.item != null:
-		if new_quantity == 0:
-			remove_item(slot)
-			slot.removeFromSlot()
+	if slot:
+		if slot.item != null:
+			if new_quantity == 0:
+				remove_item(slot)
+				slot.removeFromSlot()
+			else:
+				slot.item.set_item(item_name, new_quantity, item_health)
 		else:
-			slot.item.set_item(item_name, new_quantity, item_health)
+			slot.initialize_item(item_name, new_quantity, item_health)
 	else:
-		slot.initialize_item(item_name, new_quantity, item_health)
-
+		slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Menu/Crafting/HotbarSlots/Slot" + str(slot_index + 1))
+		if slot.item != null:
+			if new_quantity == 0:
+				remove_item(slot)
+				slot.removeFromSlot()
+			else:
+				slot.item.set_item(item_name, new_quantity, item_health)
+		else:
+			slot.initialize_item(item_name, new_quantity, item_health)
+		
+		
 func update_inventory_slot_visual(slot_index, item_name, new_quantity, item_health):
 	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Menu/Inventory/InventorySlots/Slot" + str(slot_index + 1))
-	if slot.item != null:
-		if new_quantity == 0:
-			remove_item(slot)
-			slot.removeFromSlot()
+	if slot:
+		if slot.item != null:
+			if new_quantity == 0:
+				remove_item(slot)
+				slot.removeFromSlot()
+			else:
+				slot.item.set_item(item_name, new_quantity, item_health)
 		else:
-			slot.item.set_item(item_name, new_quantity, item_health)
+			slot.initialize_item(item_name, new_quantity, item_health)
 	else:
-		slot.initialize_item(item_name, new_quantity, item_health)
+		slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Menu/Crafting/InventorySlots/Slot" + str(slot_index + 1))
+		if slot.item != null:
+			if new_quantity == 0:
+				remove_item(slot)
+				slot.removeFromSlot()
+			else:
+				slot.item.set_item(item_name, new_quantity, item_health)
+		else:
+			slot.initialize_item(item_name, new_quantity, item_health)
 		
 
 func update_chest_slot_visual(slot_index, item_name, new_quantity):
