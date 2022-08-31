@@ -92,12 +92,12 @@
   "wheat": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "One of the most widely cultivated grains. Makes a great flour for breads and cakes."
   },
   "potato": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "A widely cultivated tuber."
   },
   "yellow onion": {
       "ItemCategory": "Food",
@@ -107,27 +107,27 @@
   "garlic": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "Adds a wonderful zestiness to dishes. High quality garlic can be pretty spicy."
   },
   "radish": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "A crisp and refreshing root vegetable with hints of pepper when eaten raw."
   },
   "carrot": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "A spring tuber with an earthy taste and is full of nutrients."
   },
   "cauliflower": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "Valuable, but slow-growing. Despite its pale color, the florets are packed with nutrients."
   },
   "cabbage": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "Often used in salads and coleslaws."
   },
   "yellow pepper": {
       "ItemCategory": "Food",
@@ -147,22 +147,22 @@
   "strawberry": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "A sweet, juicy favorite with an appealing red color.",
   },
   "blueberry": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "A popular berry reported to have many health benefits. The blue skin has the highest nutrient concentration.",
   },
   "grape": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "A sweet cluster of fruit.",
   },
   "green bean": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "A juicy little bean with a cool, crisp snap.",
   },
   "zucchinni": {
       "ItemCategory": "Food",
@@ -172,27 +172,32 @@
   "green melon": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "A cool, sweet summer treat.",
   },
   "corn": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
-  },
-  "blueberry": {
-      "ItemCategory": "Food",
-      "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "One of the most popular grains. The sweet, fresh cobs are a summer favorite.",
   },
   "jalapeno": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "Fiery hot with a hint of sweetness.",
   },
   "tomato": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "Rich and slightly tangy, the Tomato has a wide variety of culinary uses.",
+  },
+  "sugar cane": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "When processed into sugar, it adds a sweetness to baked goods.",
+  },
+  "asparagus": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A small and skinny vegetable that is packed with nutrients.",
   },
   
   
@@ -296,6 +301,16 @@
       "StackSize": 999,
       "Description": "Plant these in the Summer. Takes 11 days to mature and continues to grow after harvest. Has a chance to yield 1 or 2 tomatoes at harvest.",
   },
+  "sugar cane seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "need to add",
+  },
+  "asparagus seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "need to add",
+  },
   
   
   
@@ -380,13 +395,94 @@
       "Description": "Small placable shelter with low durability."
   },
     "sleeping bag": {
-    "ItemCategory": "Placable object",
-    "StackSize": 999,
-    "Description": "Can be placed and used to set respawn point in the world."
+        "ItemCategory": "Placable object",
+        "StackSize": 999,
+        "Description": "Can be placed and used to set respawn point in the world."
+    },
+    "blue crab":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A marine crustacean with two powerful pincers."
+    },
+    "lobster":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A marine crustacean with a powerful tail and dangerous claws."
+    },
+    "royal red shrimp":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A small, ocean-dwelling scavenger with tasty meat."
+    },
+    "common sardine":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A common and oily marine fish."
+    },
+    "garden flounder":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A common fish that lives on the ocean floor."
+    },
+    "red snapper":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A common fish that lives in the ocean with a nice red color."
+    },
+    "blue ribbon eel":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A long and slippery ocean-dwelling fish. Despite it's beauty, it can pack a mean bite."
+    },
+    "blue ribbon eel":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A long and slippery ocean-dwelling fish. Despite it's beauty, it can pack a mean bite."
+    },
+    "mahi mahi":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A large marine fish that tastes great on tacos."
+    },
+    "yellowtail amberjack":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A large marine fish that becomes active at night."
+    },
+    "albino cichilid":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A marine fish that must stay away from the sun."
+    },
+    "man o' war jelly":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A beautiful yet deadly marine fish with tentacles that grow upwards of 100 feet."
+    },
+    "baby clownfish":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A small and pretty marine fish that many put in aquariums."
+    },
+    "blue ringed octopus":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A rare and intelligent marine creature with a venomous bite."
+    },
+    "box turtle":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A slow moving ocean-dweller with a long life span."
+    },
+    "golden seahorse":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A rare, small, and majestic ocean creature."
+    },
+    "royal starfish":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A rare ocean creature that only feeds at night."
     },
     
-    
-    
-    
-  
 }

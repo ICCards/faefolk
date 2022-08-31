@@ -24,9 +24,10 @@ func _ready():
 
 
 func initialize():
+	show()
 	$Trash/Top.rotation_degrees = 0
-	$CompositeSprites.set_player_animation(Server.player_node.character, "idle_down")
-	$CompositeSprites/AnimationPlayer.play("loop")
+#	$CompositeSprites.set_player_animation(Server.player_node.character, "idle_down")
+#	$CompositeSprites/AnimationPlayer.play("loop")
 	item = null
 	var i_slots = inventory_slots.get_children()
 	for i in range(i_slots.size()):
@@ -50,11 +51,11 @@ enum SlotType {
 
 
 func _physics_process(delta):
-	if item: #and not find_parent("UserInterface").holding_item:
+	if item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.visible = true
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.item_name = item
-		$ItemDescription.position = get_local_mouse_position() + Vector2(10, 15)
+		$ItemDescription.position = get_local_mouse_position() + Vector2(28 , 40)
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.visible = false

@@ -65,6 +65,8 @@ func returnCategoryColor(category):
 			return Color("3c1aff")
 		"Construction":
 			return Color("ff25f1")
+		"Fish":
+			return Color("ffffff")
 
 func set_size_of_description(x):
 	if x <= 210:

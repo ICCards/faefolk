@@ -1,34 +1,226 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=49 format=2]
 
-[ext_resource path="res://Assets/Images/inventory_icons/Food/green melon.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/blueberry.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/sugar cane.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/yellow onion.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/red pepper.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/potato.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/carrot.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/cauliflower.png" type="Texture" id=8]
+[ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Collections.gd" type="Script" id=9]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/yellow pepper.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/tomato.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/strawberry.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/radish.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/green pepper.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/wheat.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/zucchinni.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/grape.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/cabbage.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/corn.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/jalapeno.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/green bean.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/garlic.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/asparagus.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Themes/HideCollection.tres" type="Material" id=24]
+[ext_resource path="res://World/Player/Player/AttachedScripts/CropCollection.gd" type="Script" id=25]
+
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=20]
+load_path = "res://.import/garlic.png-35feb1f2a88d1fdf0134cd2d54e0db2d.stex"
+
+[sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=18]
+load_path = "res://.import/corn.png-02627346a6a1f68f420e715610ef1d68.stex"
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=22]
+load_path = "res://.import/blueberry.png-d22ca14ecfdaf5a4fee9843c38af140b.stex"
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=24]
+load_path = "res://.import/asparagus.png-d205c6cc57c9f016998e1ed4bc3140e3.stex"
+
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=26]
+load_path = "res://.import/cabbage.png-3d439fee711bdd5580f3c811c12e3405.stex"
+
+[sub_resource type="ShaderMaterial" id=27]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=28]
+load_path = "res://.import/carrot.png-3432d3d22777dae77ef9c89c4a48961a.stex"
+
+[sub_resource type="ShaderMaterial" id=29]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=30]
+load_path = "res://.import/cauliflower.png-bce5ccec518a370bfc7005e5dfbbc8c2.stex"
+
+[sub_resource type="ShaderMaterial" id=31]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=32]
+load_path = "res://.import/grape.png-16c4562ca4bb83dda221cbe4231eee1d.stex"
+
+[sub_resource type="ShaderMaterial" id=33]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=34]
+load_path = "res://.import/green bean.png-5f733ea1f842150128e7f373d0d6cda8.stex"
+
+[sub_resource type="ShaderMaterial" id=35]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=36]
+load_path = "res://.import/green melon.png-95415523229b797655b64a6300c15d02.stex"
+
+[sub_resource type="ShaderMaterial" id=37]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=38]
+load_path = "res://.import/green pepper.png-ac63db552be065b312fd67f99fb0dd01.stex"
+
+[sub_resource type="ShaderMaterial" id=39]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=40]
+load_path = "res://.import/jalapeno.png-f62682740f72cf93cb2149208fd80b47.stex"
+
+[sub_resource type="ShaderMaterial" id=41]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=42]
+load_path = "res://.import/potato.png-1523a25a473847bf015aba9672eebb0b.stex"
+
+[sub_resource type="ShaderMaterial" id=43]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=44]
+load_path = "res://.import/radish.png-72930f1187c2163ac63b0c34f26aea54.stex"
+
+[sub_resource type="ShaderMaterial" id=45]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=46]
+load_path = "res://.import/red pepper.png-59efc7920657508c2f600f53b7590a35.stex"
+
+[sub_resource type="ShaderMaterial" id=47]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=48]
+load_path = "res://.import/strawberry.png-7ed752a60024deedda64011f68cd4d35.stex"
+
+[sub_resource type="ShaderMaterial" id=49]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=50]
+load_path = "res://.import/sugar cane.png-f14256320eda1b382118f44cb47490cc.stex"
+
+[sub_resource type="ShaderMaterial" id=51]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=52]
+load_path = "res://.import/tomato.png-c44894750b54b5a2b6f127768ee7554f.stex"
+
+[sub_resource type="ShaderMaterial" id=53]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=54]
+load_path = "res://.import/wheat.png-de4705b00aedfc01e984f4ea4fb0584f.stex"
+
+[sub_resource type="ShaderMaterial" id=55]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=56]
+load_path = "res://.import/yellow onion.png-ec63c3cb98187eb7ad12b5599cc601b9.stex"
+
+[sub_resource type="ShaderMaterial" id=57]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=58]
+load_path = "res://.import/yellow pepper.png-d9d6395760f4a9d0b7db8496eed38b01.stex"
+
+[sub_resource type="ShaderMaterial" id=59]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=60]
+load_path = "res://.import/zucchinni.png-064c1ae0051a126fb738c133619dbbfd.stex"
 
 [node name="Collections" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 9 )
+
+[node name="CollectionItemDescription" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [node name="SideTabButtons" type="VBoxContainer" parent="."]
 margin_top = 118.0
@@ -80,8 +272,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="Crops" type="GridContainer" parent="."]
-modulate = Color( 1, 1, 1, 0.313726 )
+[node name="CropCollection" type="GridContainer" parent="."]
 margin_left = 102.0
 margin_top = 101.0
 margin_right = 206.0
@@ -90,172 +281,175 @@ rect_scale = Vector2( 2, 2 )
 custom_constants/vseparation = 15
 custom_constants/hseparation = 16
 columns = 6
+script = ExtResource( 25 )
 
-[node name="garlic" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="garlic" type="TextureRect" parent="CropCollection"]
+material = SubResource( 19 )
 margin_right = 32.0
 margin_bottom = 32.0
-texture = ExtResource( 22 )
+texture = SubResource( 20 )
 
-[node name="corn" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="corn" type="TextureRect" parent="CropCollection"]
+material = SubResource( 17 )
 margin_left = 48.0
 margin_right = 80.0
 margin_bottom = 32.0
-texture = ExtResource( 19 )
+texture = SubResource( 18 )
 
-[node name="blueberry" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="blueberry" type="TextureRect" parent="CropCollection"]
+material = SubResource( 21 )
 margin_left = 96.0
 margin_right = 128.0
 margin_bottom = 32.0
-texture = ExtResource( 2 )
+texture = SubResource( 22 )
 
-[node name="asparagus" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="asparagus" type="TextureRect" parent="CropCollection"]
+material = SubResource( 23 )
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 32.0
-texture = ExtResource( 23 )
+texture = SubResource( 24 )
 
-[node name="cabbage" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="cabbage" type="TextureRect" parent="CropCollection"]
+material = SubResource( 25 )
 margin_left = 192.0
 margin_right = 224.0
 margin_bottom = 32.0
-texture = ExtResource( 18 )
+texture = SubResource( 26 )
 
-[node name="carrot" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="carrot" type="TextureRect" parent="CropCollection"]
+material = SubResource( 27 )
 margin_left = 240.0
 margin_right = 272.0
 margin_bottom = 32.0
-texture = ExtResource( 7 )
+texture = SubResource( 28 )
 
-[node name="cauliflower" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="cauliflower" type="TextureRect" parent="CropCollection"]
+material = SubResource( 29 )
 margin_top = 47.0
 margin_right = 32.0
 margin_bottom = 79.0
-texture = ExtResource( 8 )
+texture = SubResource( 30 )
 
-[node name="grape" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="grape" type="TextureRect" parent="CropCollection"]
+material = SubResource( 31 )
 margin_left = 48.0
 margin_top = 47.0
 margin_right = 80.0
 margin_bottom = 79.0
-texture = ExtResource( 17 )
+texture = SubResource( 32 )
 
-[node name="green bean" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="green bean" type="TextureRect" parent="CropCollection"]
+material = SubResource( 33 )
 margin_left = 96.0
 margin_top = 47.0
 margin_right = 128.0
 margin_bottom = 79.0
-texture = ExtResource( 21 )
+texture = SubResource( 34 )
 
-[node name="green melon" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="green melon" type="TextureRect" parent="CropCollection"]
+material = SubResource( 35 )
 margin_left = 144.0
 margin_top = 47.0
 margin_right = 176.0
 margin_bottom = 79.0
-texture = ExtResource( 1 )
+texture = SubResource( 36 )
 
-[node name="green pepper" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="green pepper" type="TextureRect" parent="CropCollection"]
+material = SubResource( 37 )
 margin_left = 192.0
 margin_top = 47.0
 margin_right = 224.0
 margin_bottom = 79.0
-texture = ExtResource( 14 )
+texture = SubResource( 38 )
 
-[node name="jalapeno" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="jalapeno" type="TextureRect" parent="CropCollection"]
+material = SubResource( 39 )
 margin_left = 240.0
 margin_top = 47.0
 margin_right = 272.0
 margin_bottom = 79.0
-texture = ExtResource( 20 )
+texture = SubResource( 40 )
 
-[node name="potato" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="potato" type="TextureRect" parent="CropCollection"]
+material = SubResource( 41 )
 margin_top = 94.0
 margin_right = 32.0
 margin_bottom = 126.0
-texture = ExtResource( 6 )
+texture = SubResource( 42 )
 
-[node name="radish" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="radish" type="TextureRect" parent="CropCollection"]
+material = SubResource( 43 )
 margin_left = 48.0
 margin_top = 94.0
 margin_right = 80.0
 margin_bottom = 126.0
-texture = ExtResource( 13 )
+texture = SubResource( 44 )
 
-[node name="red pepper" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="red pepper" type="TextureRect" parent="CropCollection"]
+material = SubResource( 45 )
 margin_left = 96.0
 margin_top = 94.0
 margin_right = 128.0
 margin_bottom = 126.0
-texture = ExtResource( 5 )
+texture = SubResource( 46 )
 
-[node name="strawberry" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="strawberry" type="TextureRect" parent="CropCollection"]
+material = SubResource( 47 )
 margin_left = 144.0
 margin_top = 94.0
 margin_right = 176.0
 margin_bottom = 126.0
-texture = ExtResource( 12 )
+texture = SubResource( 48 )
 
-[node name="sugar cane" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="sugar cane" type="TextureRect" parent="CropCollection"]
+material = SubResource( 49 )
 margin_left = 192.0
 margin_top = 94.0
 margin_right = 224.0
 margin_bottom = 126.0
-texture = ExtResource( 3 )
+texture = SubResource( 50 )
 
-[node name="tomato" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="tomato" type="TextureRect" parent="CropCollection"]
+material = SubResource( 51 )
 margin_left = 240.0
 margin_top = 94.0
 margin_right = 272.0
 margin_bottom = 126.0
-texture = ExtResource( 11 )
+texture = SubResource( 52 )
 
-[node name="wheat" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="wheat" type="TextureRect" parent="CropCollection"]
+material = SubResource( 53 )
 margin_top = 141.0
 margin_right = 32.0
 margin_bottom = 173.0
-texture = ExtResource( 15 )
+texture = SubResource( 54 )
 
-[node name="yellow onion" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="yellow onion" type="TextureRect" parent="CropCollection"]
+material = SubResource( 55 )
 margin_left = 48.0
 margin_top = 141.0
 margin_right = 80.0
 margin_bottom = 173.0
-texture = ExtResource( 4 )
+texture = SubResource( 56 )
 
-[node name="yellow pepper" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="yellow pepper" type="TextureRect" parent="CropCollection"]
+material = SubResource( 57 )
 margin_left = 96.0
 margin_top = 141.0
 margin_right = 128.0
 margin_bottom = 173.0
-texture = ExtResource( 10 )
+texture = SubResource( 58 )
 
-[node name="zucchinni" type="TextureRect" parent="Crops"]
-material = ExtResource( 24 )
+[node name="zucchinni" type="TextureRect" parent="CropCollection"]
+material = SubResource( 59 )
 margin_left = 144.0
 margin_top = 141.0
 margin_right = 176.0
 margin_bottom = 173.0
-texture = ExtResource( 16 )
+texture = SubResource( 60 )
+
+[node name="Tween" type="Tween" parent="CropCollection"]
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -264,47 +458,46 @@ texture = ExtResource( 16 )
 [connection signal="pressed" from="SideTabButtons/Forage" to="." method="_on_Forage_pressed"]
 [connection signal="pressed" from="SideTabButtons/Minerals" to="." method="_on_Minerals_pressed"]
 [connection signal="pressed" from="SideTabButtons/Foods" to="." method="_on_Foods_pressed"]
-[connection signal="mouse_entered" from="Crops/garlic" to="." method="_on_garlic_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/garlic" to="." method="_on_garlic_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/corn" to="." method="_on_corn_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/corn" to="." method="_on_corn_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/blueberry" to="." method="_on_blueberry_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/blueberry" to="." method="_on_blueberry_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/asparagus" to="." method="_on_asparagus_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/asparagus" to="." method="_on_asparagus_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/cabbage" to="." method="_on_cabbage_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/cabbage" to="." method="_on_cabbage_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/carrot" to="." method="_on_carrot_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/carrot" to="." method="_on_carrot_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/cauliflower" to="." method="_on_cauliflower_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/cauliflower" to="." method="_on_cauliflower_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/grape" to="." method="_on_grape_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/grape" to="." method="_on_grape_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/green bean" to="." method="_on_green_bean_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/green bean" to="." method="_on_green_bean_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/green melon" to="." method="_on_green_melon_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/green melon" to="." method="_on_green_melon_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/green pepper" to="." method="_on_green_pepper_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/green pepper" to="." method="_on_green_pepper_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/jalapeno" to="." method="_on_jalapeno_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/jalapeno" to="." method="_on_jalapeno_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/potato" to="." method="_on_potato_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/potato" to="." method="_on_potato_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/radish" to="." method="_on_radish_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/radish" to="." method="_on_radish_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/red pepper" to="." method="_on_red_pepper_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/red pepper" to="." method="_on_red_pepper_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/strawberry" to="." method="_on_strawberry_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/strawberry" to="." method="_on_strawberry_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/sugar cane" to="." method="_on_sugar_cane_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/sugar cane" to="." method="_on_sugar_cane_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/tomato" to="." method="_on_tomato_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/tomato" to="." method="_on_tomato_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/wheat" to="." method="_on_wheat_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/wheat" to="." method="_on_wheat_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/yellow onion" to="." method="_on_yellow_onion_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/yellow onion" to="." method="_on_yellow_onion_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/yellow pepper" to="." method="_on_yellow_pepper_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/yellow pepper" to="." method="_on_yellow_pepper_mouse_exited"]
-[connection signal="mouse_entered" from="Crops/zucchinni" to="." method="_on_zucchinni_mouse_entered"]
-[connection signal="mouse_exited" from="Crops/zucchinni" to="." method="_on_zucchinni_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection" method="_on_garlic_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection" method="_on_garlic_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/corn" to="CropCollection" method="_on_corn_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/corn" to="CropCollection" method="_on_corn_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/blueberry" to="CropCollection" method="_on_blueberry_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/blueberry" to="CropCollection" method="_on_blueberry_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/asparagus" to="CropCollection" method="_on_asparagus_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/asparagus" to="CropCollection" method="_on_asparagus_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/cabbage" to="CropCollection" method="_on_cabbage_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/cabbage" to="CropCollection" method="_on_cabbage_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/carrot" to="CropCollection" method="_on_carrot_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/carrot" to="CropCollection" method="_on_carrot_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/cauliflower" to="CropCollection" method="_on_cauliflower_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/cauliflower" to="CropCollection" method="_on_cauliflower_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/grape" to="CropCollection" method="_on_grape_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/grape" to="CropCollection" method="_on_grape_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/green bean" to="CropCollection" method="_on_green_bean_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/green bean" to="CropCollection" method="_on_green_bean_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/green melon" to="CropCollection" method="_on_green_melon_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/green melon" to="CropCollection" method="_on_green_melon_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/green pepper" to="CropCollection" method="_on_green_pepper_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/green pepper" to="CropCollection" method="_on_green_pepper_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/jalapeno" to="CropCollection" method="_on_jalapeno_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/jalapeno" to="CropCollection" method="_on_jalapeno_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/potato" to="CropCollection" method="_on_potato_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/potato" to="CropCollection" method="_on_potato_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/radish" to="CropCollection" method="_on_radish_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/radish" to="CropCollection" method="_on_radish_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/red pepper" to="CropCollection" method="_on_red_pepper_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/red pepper" to="CropCollection" method="_on_red_pepper_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/strawberry" to="CropCollection" method="_on_strawberry_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/strawberry" to="CropCollection" method="_on_strawberry_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/sugar cane" to="CropCollection" method="_on_sugar_cane_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/sugar cane" to="CropCollection" method="_on_sugar_cane_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/tomato" to="CropCollection" method="_on_tomato_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/tomato" to="CropCollection" method="_on_tomato_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/wheat" to="CropCollection" method="_on_wheat_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/wheat" to="CropCollection" method="_on_wheat_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/yellow onion" to="CropCollection" method="_on_yellow_onion_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/yellow onion" to="CropCollection" method="_on_yellow_onion_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/yellow pepper" to="CropCollection" method="_on_yellow_pepper_mouse_entered"]
+[connection signal="mouse_entered" from="CropCollection/zucchinni" to="CropCollection" method="_on_zucchinni_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/zucchinni" to="CropCollection" method="_on_zucchinni_mouse_exited"]

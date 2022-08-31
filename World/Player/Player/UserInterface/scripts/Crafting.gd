@@ -47,6 +47,7 @@ func _ready():
 		h_slots[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
 
 func initialize():
+	show()
 	page = 1
 	$Page1.show()
 	$Page2.hide()
@@ -114,14 +115,14 @@ func _physics_process(delta):
 		$ItemDescription.visible = true
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.item_name = item
-		$ItemDescription.position = get_local_mouse_position() + Vector2(10, 15)
+		$ItemDescription.position = get_local_mouse_position() + Vector2(55 , 75)
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.visible = false
 	if crafting_item and not find_parent("UserInterface").holding_item:
 		$CraftingItemDescription.visible = true
 		$CraftingItemDescription.item_name = crafting_item
-		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(15 , 20)
+		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(55 , 75)
 		$CraftingItemDescription.initialize()
 	else:
 		$CraftingItemDescription.visible = false
