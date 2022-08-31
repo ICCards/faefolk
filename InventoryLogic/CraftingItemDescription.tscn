@@ -121,14 +121,14 @@ margin_left = 6.0
 margin_top = 27.1111
 margin_right = 49.0
 margin_bottom = 28.1111
-color = Color( 0.266667, 0.141176, 0.203922, 1 )
+color = Color( 0.121569, 0.105882, 0.184314, 1 )
 
 [node name="Divider2" type="ColorRect" parent="."]
 margin_left = 6.0
 margin_top = 52.0
 margin_right = 49.0
 margin_bottom = 53.0
-color = Color( 0.266667, 0.141176, 0.203922, 1 )
+color = Color( 0.121569, 0.105882, 0.184314, 1 )
 
 [node name="Ingredients" type="Label" parent="."]
 margin_left = 6.0

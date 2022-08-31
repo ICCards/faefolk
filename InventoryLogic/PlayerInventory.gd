@@ -23,15 +23,15 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	5: ["tomato seeds", 30, null],
-	2: ["blueberry seeds", 60, null],
+	#5: ["tomato seeds", 30, null],
+	#2: ["blueberry seeds", 60, null],
 	6: ["corn seeds", 60, null],
 	9: ["potato seeds", 30, null],
 	3: ["radish seeds", 30, null],
-	4: ["wood", 299, null],
+	#4: ["wood", 299, null],
 	1: ["wood", 499, null],
 	7: ["stone", 699, null],
-	8: ["stone", 799, null],
+	#8: ["stone", 799, null],
 
 }
 
@@ -40,7 +40,7 @@ var hotbar = {
 	1: ["wood path", 30, null],
 #	2: ["yellow onion", 30, null],
 	3: ["carrot", 30, null],
-	4: ["grape", 30, null],
+	#4: ["grape", 30, null],
 	0: ["fishing rod", 1, null],
 	2: ["wood axe", 1, 25],
 #	2: ["hammer", 1, null],
@@ -51,7 +51,7 @@ var hotbar = {
 #	8: ["wood axe", 1, 3],
 #	1: ["wood axe", 1, 3],
 	8:["wood pickaxe", 1, 25],
-	9:["wood pickaxe", 1, 25],
+	#9:["wood pickaxe", 1, 25],
 }
 
 var chest = {

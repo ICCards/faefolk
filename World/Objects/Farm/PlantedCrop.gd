@@ -107,6 +107,8 @@ func harvest_and_remove():
 	if !isBeingHarvested:
 #		var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 #		Server.action("ON_HIT", data)
+		$LeafEffect.show()
+		$LeafEffect.playing = true
 		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$HarvestSound.play()
 		$CropText.visible = false
@@ -115,7 +117,7 @@ func harvest_and_remove():
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 		yield(get_tree().create_timer(0.6), "timeout")
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
-		yield($HarvestSound, "finished")
+		yield(get_tree().create_timer(1.0), "timeout")
 		queue_free()
 	
 func harvest_and_keep_planted():
@@ -172,7 +174,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_Harvest_pressed():
 	if phase == "harvest" and \
 	position.distance_to(Server.player_node.position) < 600 and \
-	Server.player_node.state == MOVEMENT:
+	Server.player_node.state == MOVEMENT and \
+	not isBeingHarvested:
 		if JsonData.crop_data[crop_name]["Perennial"]:
 			harvest_and_keep_planted()
 		else:

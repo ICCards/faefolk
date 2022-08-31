@@ -9,6 +9,8 @@ onready var ocean = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
 onready var player_animation_player = Server.player_node.animation_player
 onready var composite_sprites = Server.player_node.composite_sprites
 
+onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+
 var in_casting_state: bool = false
 var mini_game_active: bool = false
 var click_to_start_mini_game: bool = false
@@ -68,7 +70,7 @@ func start_fishing_mini_game():
 	mini_game_active = true
 	change_start_point_pos()
 	line.points = [start_point, end_point]
-	$FishingMiniGame.spawn_random_fish()
+	$FishingMiniGame.start()
 
 func change_start_point_pos():
 	match direction:
@@ -96,7 +98,11 @@ func stop_fishing_state():
 	Server.player_node.state = MOVEMENT
 	queue_free()
 
-func caught_fish():
+func caught_fish(fish_name):
+	var itemDrop = ItemDrop.instance()
+	itemDrop.initItemDropType(fish_name)
+	Server.world.add_child(itemDrop)
+	itemDrop.global_position = Server.player_node.global_position
 	$FishingMiniGame.hide()
 	retract_and_stop()
 	

@@ -42,6 +42,8 @@ Settings="*res://Global/Data/Settings.gd"
 Goblin="*res://Global/Characters/Goblin.gd"
 Human="*res://Global/Characters/Human.gd"
 Stats="*res://Global/Data/Stats.gd"
+FishData="*res://Global/Data/FishData.gd"
+CollectionsData="*res://Global/Data/CollectionsData.gd"
 
 [display]
 
