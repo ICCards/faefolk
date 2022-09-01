@@ -1,12 +1,14 @@
 extends Panel
 
-var default_text = null # preload("res://Assets/Images/Inventory UI/slot.png")
-var empty_text = null #preload("res://Assets/Images/Inventory UI/slot.png")
+var default_text = preload("res://Assets/Images/Inventory UI/slot.png")
+var empty_text = preload("res://Assets/Images/Inventory UI/slot.png")
 var selected_text = preload("res://Assets/Images/Inventory UI/slot selected.png")
+var locked_text = preload("res://Assets/Images/Inventory UI/slot locked.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null
 var selected_style: StyleBoxTexture = null
+var locked_style: StyleBoxTexture = null
 
 var ItemClass = preload("res://InventoryLogic/InventoryItem.tscn")
 var item = null
@@ -16,7 +18,8 @@ enum SlotType {
 	HOTBAR = 0,
 	HOTBAR_INVENTORY,
 	INVENTORY,
-	CHEST
+	CHEST,
+	LOCKED
 }
 
 var slotType = null
@@ -25,10 +28,11 @@ func _ready():
 	default_style = StyleBoxTexture.new()
 	empty_style = StyleBoxTexture.new()
 	selected_style = StyleBoxTexture.new()
+	locked_style = StyleBoxTexture.new()
 	default_style.texture = default_text
 	empty_style.texture = empty_text
 	selected_style.texture = selected_text
-	
+	locked_style.texture = locked_text
 	refresh_style()
 
 func refresh_style():
@@ -36,12 +40,13 @@ func refresh_style():
 		set('custom_styles/panel', selected_style)
 		if item != null:
 			item.hover_item()
-	elif item == null:
+	elif item == null and slotType != SlotType.LOCKED:
 		set('custom_styles/panel', empty_style)
-	else:
+	elif slotType != SlotType.LOCKED:
 		item.exit_item()
 		set('custom_styles/panel', default_style)
-		
+	else:
+		set('custom_styles/panel', locked_style)
 
 
 func pickFromSlot():

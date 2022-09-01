@@ -49,22 +49,22 @@ func _physics_process(delta):
 
 func adjusted_description_position():
 	yield(get_tree(), "idle_frame")
-	var lines = $ItemDescription/ItemDescription.get_line_count()
+	var lines = $ItemDescription/Body/ItemDescription.get_line_count()
 	if lines == 7:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -145)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -176)
 	elif lines == 6:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -126)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -146)
 	elif lines == 5:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -107)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -120)
 	elif lines == 4:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -87)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -93)
 	elif lines == 3:
 		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -68)
 	else:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -51)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -42)
 	if item:
 		if JsonData.item_data[item]["ItemCategory"] == "Food":
-			adjusted_pos += Vector2(0,-49)
+			adjusted_pos += Vector2(0,-63)
 
 
 func update_tool_health():
@@ -80,6 +80,7 @@ func update_tool_health():
 	
 
 func initialize_hotbar():
+	PlayerInventory.HotbarSlots = $HotbarSlots
 	item = null
 	for i in range(slots.size()):
 		if slots[i].item != null:

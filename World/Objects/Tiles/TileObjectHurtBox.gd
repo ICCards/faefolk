@@ -3,8 +3,10 @@ extends Node2D
 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 
+var rng = RandomNumberGenerator.new()
 var location
 var item_name
+var id
 
 func initialize(_name, loc):
 	item_name = _name
@@ -43,9 +45,13 @@ func PlayEffect(_player_id):
 	queue_free()
 
 func set_dimensions():
+	rng.randomize()
 	if item_name == "wood chest" or item_name == "stone chest":
+		id = str(rng.randi_range(0, 100000))
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 65536
+		$InteractiveArea.name = id
+		PlayerInventory.chests[id] = {}
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
 	elif item_name == "workbench":
@@ -81,19 +87,19 @@ func _on_HurtBox_area_entered(area):
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
 	Tiles.reset_valid_tiles(location, item_name)
-	drop_item(item_name, 1)
+	drop_item(item_name, 1, null)
 	yield($SoundEffects, "finished")
 	queue_free()
 
 
 func drop_items_in_chest():
-	for item in PlayerInventory.chest.keys():
-		drop_item(PlayerInventory.chest[item][0], PlayerInventory.chest[item][1])
-	PlayerInventory.clear_chest_data()
+	for item in PlayerInventory.chests[id].keys():
+		drop_item(PlayerInventory.chests[id][item][0], PlayerInventory.chests[id][item][1], PlayerInventory.chests[id][item][2])
+	PlayerInventory.clear_chest_data(id)
 
-func drop_item(item_name, quantity):
+func drop_item(item_name, quantity, health):
 	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item_name, quantity)
+	itemDrop.initItemDropType(item_name, quantity, health)
 	get_parent().call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position 
 
