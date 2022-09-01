@@ -87,6 +87,8 @@ func intialize_slots():
 
 
 func initialize_crafting():
+	PlayerInventory.HotbarSlots = $HotbarSlots
+	PlayerInventory.InventorySlots = $InventorySlots
 	intialize_slots()
 	if page == 1:
 		for item in page1:

@@ -176,6 +176,7 @@ func _on_Harvest_pressed():
 	position.distance_to(Server.player_node.position) < 600 and \
 	Server.player_node.state == MOVEMENT and \
 	not isBeingHarvested:
+		CollectionsData.crops[crop_name] += 1
 		if JsonData.crop_data[crop_name]["Perennial"]:
 			harvest_and_keep_planted()
 		else:

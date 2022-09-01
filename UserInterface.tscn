@@ -126,22 +126,24 @@ margin_top = 299.0
 margin_right = -708.0
 margin_bottom = -89.0
 
-[node name="OpenChest" parent="." instance=ExtResource( 14 )]
-visible = false
-position = Vector2( 281, 522 )
-
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
 visible = false
 position = Vector2( 804, 24 )
 scale = Vector2( 0.4, 0.4 )
 
 [node name="PlayerStatsUI" parent="." instance=ExtResource( 12 )]
-visible = false
-position = Vector2( 36, 24 )
+position = Vector2( 884, 421 )
 scale = Vector2( 2.3, 2.3 )
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
 position = Vector2( 512, 507 )
+
+[node name="OpenChest" parent="." instance=ExtResource( 14 )]
+visible = false
+margin_left = 484.0
+margin_top = 59.0
+margin_right = 484.0
+margin_bottom = 59.0
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
 visible = false

@@ -1,6 +1,7 @@
 extends Node2D
 
 func _on_ChestArea_area_entered(area):
+	PlayerInventory.chest_id = area.name
 	PlayerInventory.is_inside_chest_area = true
 
 func _on_ChestArea_area_exited(area):
