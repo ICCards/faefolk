@@ -53,7 +53,7 @@ func set_difficulty(difficulty):
 		"easy":
 			movement_speed = 3
 			min_movement_time = 0.5
-			max_movement_time = 2.5
+			max_movement_time = 2.25
 			min_distance = 30
 			max_distance = 120
 		"medium":

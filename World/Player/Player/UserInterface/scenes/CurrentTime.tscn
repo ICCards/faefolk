@@ -1,34 +1,35 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Assets/Images/Misc/date ui background.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Inventory UI/DateTime/hand.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Inventory UI/DateTime/clock w dropdown.png" type="Texture" id=2]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/CurrentTime.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=4]
 
 [node name="CurrentTime" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -1.52588e-05
-margin_top = 7.62939e-06
-margin_right = 102.0
-margin_bottom = 40.0
-rect_scale = Vector2( 4.5, 5.5 )
+[node name="TextureRect2" type="TextureRect" parent="."]
+rect_scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 
-[node name="SeasonLabel" type="Label" parent="."]
-margin_left = 28.0
-margin_top = 22.0
-margin_right = 436.0
-margin_bottom = 116.0
-theme = ExtResource( 1 )
-text = "Summer, 27"
+[node name="ClockHand" type="Sprite" parent="."]
+position = Vector2( 100, 101 )
+texture = ExtResource( 1 )
+offset = Vector2( 1, -24 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="SeasonDay" type="Label" parent="."]
+modulate = Color( 0.12549, 0.0901961, 0.0627451, 1 )
+margin_left = 6.0
+margin_top = 213.0
+margin_right = 276.0
+margin_bottom = 274.0
+rect_scale = Vector2( 0.7, 0.7 )
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Summer, 29"
 align = 1
 
-[node name="TimeLabel" type="Label" parent="."]
-margin_left = 28.0
-margin_top = 99.0
-margin_right = 436.0
-margin_bottom = 193.0
-theme = ExtResource( 1 )
-text = "12:00 a.m."
-align = 1
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

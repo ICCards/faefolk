@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=1]
 [ext_resource path="res://Assets/tilesets/MainLev2.0.png" type="Texture" id=2]
@@ -20,10 +20,12 @@
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=18]
 [ext_resource path="res://World/Player/Player/Player.tscn" type="PackedScene" id=19]
 [ext_resource path="res://World/Objects/Tiles/DoubleDoorSide.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/tiles final.png" type="Texture" id=21]
 [ext_resource path="res://World/Objects/Farm/DoorSide.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Assets/tilesets/hoed_layer.png" type="Texture" id=23]
 [ext_resource path="res://World/Objects/Tiles/SleepingBag.tscn" type="PackedScene" id=24]
 [ext_resource path="res://World/Objects/Tiles/DoorFront.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Assets/stone wall final.png" type="Texture" id=26]
 
 [sub_resource type="TileSet" id=298]
 0/name = "CL_MainLev.png 0"
@@ -1153,6 +1155,54 @@ glow_blend_mode = 1
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="TileSet" id=328]
+0/name = "tiles final.png 0"
+0/texture = ExtResource( 21 )
+0/tex_offset = Vector2( 0, -64 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 320, 96 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 96 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "stone wall final.png 1"
+1/texture = ExtResource( 26 )
+1/tex_offset = Vector2( 0, -64 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 320, 96 )
+1/tile_mode = 1
+1/autotile/bitmask_mode = 1
+1/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186 ]
+1/autotile/icon_coordinate = Vector2( 0, 0 )
+1/autotile/tile_size = Vector2( 32, 96 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
 [node name="TestScene" type="YSort"]
 
 [node name="GeneratedTiles" type="YSort" parent="."]
@@ -1281,4 +1331,10 @@ cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( 524279, 0, 0, 524280, 0, 4, 524281, 0, 2, 524282, 0, 6, 589819, 0, 0, 655355, 0, 0, 720891, 0, 0, 786427, 0, 0, 851954, 0, 0, 851955, 0, 2, 851956, 0, 4, 851957, 0, 2, 851958, 0, 4, 851959, 0, 2, 851960, 0, 2, 851961, 0, 2, 851962, 0, 2, 851963, 0, 0 )
+tile_data = PoolIntArray( 196603, 0, 0, 262139, 0, 0, 262140, 0, 4, 262141, 0, 2, 262142, 0, 4, 262143, 0, 2, 196608, 0, 2, 196609, 0, 0, 327675, 0, 0, 262145, 0, 0, 393211, 0, 0, 393212, 0, 2, 393213, 0, 4, 393214, 0, 2, 393215, 0, 2, 327680, 0, 4, 327681, 0, 0, 458747, 0, 0, 524275, 0, 0, 524276, 0, 4, 524277, 0, 2, 524278, 0, 4, 524279, 0, 2, 524280, 0, 0, 524281, 0, 4, 524282, 0, 2, 524283, 0, 0, 589816, 0, 0, 589819, 0, 0, 655352, 0, 0, 655355, 0, 0, 720888, 0, 0, 720891, 0, 0, 786424, 0, 0, 786427, 0, 0, 851954, 0, 4, 851955, 0, 0, 851956, 0, 4, 851957, 0, 2, 851958, 0, 4, 851959, 0, 4, 851960, 0, 0, 851961, 0, 0, 851962, 0, 2, 851963, 0, 0, 917491, 0, 0, 917497, 0, 0, 983027, 0, 0, 983033, 0, 0, 1048562, 0, 0, 1048563, 0, 0, 1048569, 0, 0, 1114098, 0, 0, 1114104, 0, 0, 1114105, 0, 0, 1179634, 0, 0, 1179635, 0, 4, 1179636, 0, 4, 1179637, 0, 4, 1179638, 0, 4, 1179639, 0, 4, 1179640, 0, 0 )
+
+[node name="TempTiles" type="TileMap" parent="."]
+tile_set = SubResource( 328 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 720894, 1, 0, 720895, 1, 1, 655360, 1, 2, 655361, 1, 2, 655362, 1, 2, 655363, 1, 0, 786430, 1, 4, 720899, 1, 4, 851966, 1, 4, 786435, 1, 4, 917502, 1, 4, 851971, 1, 4, 983038, 1, 4, 917507, 1, 4, 1048574, 1, 4, 983043, 1, 4, 1114110, 1, 4, 1048579, 1, 4, 1179634, 1, 0, 1179635, 1, 2, 1179636, 1, 2, 1179637, 1, 1, 1179638, 1, 2, 1179639, 1, 2, 1179640, 1, 3, 1179646, 1, 5, 1179647, 1, 1, 1114112, 1, 1, 1114113, 1, 8, 1114114, 1, 1, 1114115, 1, 7, 1114116, 1, 8, 1114117, 1, 2, 1114118, 1, 1, 1114119, 1, 0, 1245182, 1, 4, 1179649, 1, 4, 1179652, 1, 4, 1179655, 1, 4, 1310718, 1, 0, 1245185, 1, 4, 1245188, 1, 4, 1245191, 1, 4, 1310721, 1, 4, 1310724, 1, 4, 1310727, 1, 4, 1376257, 1, 0, 1376258, 1, 2, 1376259, 1, 8, 1376260, 1, 7, 1376261, 1, 2, 1376262, 1, 2, 1376263, 1, 0, 1441795, 1, 4, 1572863, 1, 0, 1507331, 1, 4, 1638394, 1, 0, 1638395, 1, 1, 1638396, 1, 1, 1638397, 1, 2, 1638398, 1, 2, 1638399, 1, 7, 1572864, 1, 2, 1572865, 1, 2, 1572866, 1, 2, 1572867, 1, 0 )

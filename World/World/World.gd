@@ -27,6 +27,7 @@ onready var Duck = preload("res://World/Animals/Duck.tscn")
 onready var Bird = preload("res://World/Animals/Bird.tscn")
 onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
 onready var HoedDirtEffect = preload("res://World/Objects/Nature/Effects/HoedDirt.tscn") 
+onready var DirtTrailEffect = preload("res://World/Objects/Nature/Effects/DustTrailEffect.tscn")
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTreeObject = preload("res://World/Objects/Nature/Trees/DesertTreeObject.tscn")
@@ -217,6 +218,7 @@ func buildMap(map):
 	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
 	Tiles.path_tiles = $PlacableTiles/PathTiles
 	Tiles.ocean_tiles = $GeneratedTiles/AnimatedOceanTiles
+	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
 	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
@@ -618,3 +620,10 @@ func play_hoed_dirt_effect(loc):
 	var hoedDirtEffect = HoedDirtEffect.instance()
 	hoedDirtEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,20)
 	add_child(hoedDirtEffect)
+
+func play_dirt_trail_effect(velocity):
+	var dirtTrailEffect = DirtTrailEffect.instance()
+	if velocity.x < 0:
+		dirtTrailEffect.flip_h  = true
+	dirtTrailEffect.global_position = Server.player_node.global_position
+	add_child(dirtTrailEffect)

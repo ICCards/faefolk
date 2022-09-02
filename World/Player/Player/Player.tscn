@@ -5428,6 +5428,7 @@ scale = Vector2( 0.5, 0.5 )
 
 [node name="Label" parent="Area2Ds/HurtBox/PlayerHitEffect" index="0"]
 visible = true
+margin_bottom = 141.0
 text = ""
 
 [node name="AnimationPlayer" parent="Area2Ds/HurtBox/PlayerHitEffect" index="1"]

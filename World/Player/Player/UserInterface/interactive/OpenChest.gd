@@ -10,7 +10,6 @@ var chest_id
 
 func initialize():
 	chest_id = PlayerInventory.chest_id
-	print(PlayerInventory.chests)
 	initialize_chest_data()
 	initialize_inventory()
 	initialize_hotbar()
@@ -33,9 +32,6 @@ func _ready():
 		slots_in_hotbar[i].connect("gui_input", self, "slot_gui_input", [slots_in_hotbar[i]])
 		slots_in_hotbar[i].slot_index = i
 		slots_in_hotbar[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
-	for i in range(slots_locked.size()):
-		slots_locked[i].slot_index = i
-		slots_locked[i].slotType = SlotClass.SlotType.LOCKED
 	PlayerInventory.connect("clear_chest", self, "clear_chest_data")
 	
 func initialize_hotbar():
@@ -147,3 +143,27 @@ func left_click_not_holding(slot: SlotClass):
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+
+
+func open_trash_can():
+	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
+		$Trash/Top.rotation_degrees, 90, 0.35,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	
+func close_trash_can():
+	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
+		$Trash/Top.rotation_degrees, 0, 0.35,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+func _on_TrashButton_mouse_entered():
+	open_trash_can()
+
+func _on_TrashButton_mouse_exited():
+	close_trash_can()
+
+func _on_TrashButton_pressed():
+	if find_parent("UserInterface").holding_item:
+		find_parent("UserInterface").holding_item.queue_free()
+		find_parent("UserInterface").holding_item = null

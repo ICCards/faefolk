@@ -6,13 +6,14 @@ var day
 var season = "Spring"
 var time_elapsed = 1
 
-func _ready():
-	update_date()
+#func _ready():
+#	update_date()
 
 func update_time(_time_elapsed):
-	if time_elapsed != _time_elapsed:
-		time_elapsed = _time_elapsed 
-		$TimeLabel.text = adjusted_time(time_elapsed)
+	pass
+#	if time_elapsed != _time_elapsed:
+#		time_elapsed = _time_elapsed 
+#		$TimeLabel.text = adjusted_time(time_elapsed)
 
 func update_date():
 	if Server.num_day == 31:
@@ -38,3 +39,7 @@ func adjusted_time(time_elapsed):
 		return str(hour) + ":" + str(minute) + "0" + str(day)
 
 
+
+
+func _on_Timer_timeout():
+	$ClockHand.rotation_degrees += 6

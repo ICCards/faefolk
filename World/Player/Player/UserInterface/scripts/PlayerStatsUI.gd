@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 func _ready():
 	PlayerStats.connect("energy_changed", self, "set_energy_bar")
