@@ -30,7 +30,7 @@ func _input(event):
 		toggle_menu()
 	elif event.is_action_pressed("action") and holding_item == null and not PlayerInventory.viewInventoryMode and not PlayerInventory.chatMode:
 		if PlayerInventory.is_inside_chest_area:
-			open_chest()
+			toggle_chest()
 #			elif PlayerInventory.is_inside_workbench_area:
 #				open_workbench()
 #			elif PlayerInventory.is_inside_stove_area:
@@ -77,12 +77,14 @@ func _input(event):
 func toggle_menu():
 	if not $Menu.visible:
 		get_node("../../Area2Ds/PickupZone/CollisionShape2D").disabled = true
+		$PlayerStatsUI.hide()
 		$Menu.show()
 		$Hotbar.hide()
 		$Menu.initialize()
 		PlayerInventory.viewInventoryMode = true
 	else:
 		get_node("../../Area2Ds/PickupZone/CollisionShape2D").disabled = false
+		$PlayerStatsUI.show()
 		$Menu.hide()
 		$Hotbar.show()
 		$Hotbar.initialize_hotbar()
@@ -103,14 +105,16 @@ func drop_item(item_name, quantity, health):
 	Server.world.call_deferred("add_child", itemDrop)
 	itemDrop.global_position = Server.player_node.global_position + Vector2(rng.randi_range(-12, 12), rng.randi_range(-12, 12))
 
-func open_chest():
+func toggle_chest():
 	if not $OpenChest.visible:
 		$OpenChest.show()
 		$OpenChest.initialize()
+		$PlayerStatsUI.hide()
 		$SoundEffects.stream = Sounds.chest_open
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 	else:
+		$PlayerStatsUI.hide()
 		$OpenChest.hide()
 		$Hotbar.initialize_hotbar()
 	$Hotbar.visible  =!$Hotbar.visible

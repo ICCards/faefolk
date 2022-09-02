@@ -1,6 +1,7 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=1]
+[ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Collections.gd" type="Script" id=9]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CropCollection.gd" type="Script" id=25]
 
@@ -220,6 +221,9 @@ margin_bottom = 40.0
 script = ExtResource( 9 )
 
 [node name="CollectionItemDescription" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="ItemNameBox" parent="." instance=ExtResource( 2 )]
 visible = false
 
 [node name="SideTabButtons" type="VBoxContainer" parent="."]
@@ -453,10 +457,20 @@ texture = SubResource( 60 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[connection signal="mouse_entered" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Crops" to="." method="_on_Crops_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Fish" to="." method="_on_Fish_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Fish" to="." method="_on_Fish_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Fish" to="." method="_on_Fish_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Forage" to="." method="_on_Forage_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Forage" to="." method="_on_Forage_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Forage" to="." method="_on_Forage_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Minerals" to="." method="_on_Minerals_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Minerals" to="." method="_on_Minerals_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Minerals" to="." method="_on_Minerals_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Foods" to="." method="_on_Foods_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Foods" to="." method="_on_Foods_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Foods" to="." method="_on_Foods_pressed"]
 [connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection" method="_on_garlic_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection" method="_on_garlic_mouse_exited"]

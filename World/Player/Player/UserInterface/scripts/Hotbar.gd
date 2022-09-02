@@ -50,7 +50,9 @@ func _physics_process(delta):
 func adjusted_description_position():
 	yield(get_tree(), "idle_frame")
 	var lines = $ItemDescription/Body/ItemDescription.get_line_count()
-	if lines == 7:
+	if lines == 8:
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -200)
+	elif lines == 7:
 		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -176)
 	elif lines == 6:
 		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -146)

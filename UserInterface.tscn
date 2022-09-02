@@ -127,13 +127,15 @@ margin_right = -708.0
 margin_bottom = -89.0
 
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
-visible = false
-position = Vector2( 804, 24 )
-scale = Vector2( 0.4, 0.4 )
+position = Vector2( 866, 7 )
+scale = Vector2( 0.75, 0.75 )
 
 [node name="PlayerStatsUI" parent="." instance=ExtResource( 12 )]
-position = Vector2( 884, 421 )
-scale = Vector2( 2.3, 2.3 )
+margin_left = 892.0
+margin_top = 435.0
+margin_right = 892.0
+margin_bottom = 435.0
+rect_scale = Vector2( 2, 2 )
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
 position = Vector2( 512, 507 )
@@ -153,6 +155,7 @@ margin_right = 139.0
 margin_bottom = 34.0
 
 [node name="DeathEffect" type="ColorRect" parent="."]
+visible = false
 margin_left = -58.0
 margin_top = -70.0
 margin_right = 1093.0

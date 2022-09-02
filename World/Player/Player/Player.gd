@@ -357,3 +357,8 @@ func walk_state(_direction):
 #	day_night_animation_player.play_backwards("set night")
 
 
+
+func _on_DustCloudTimer_timeout():
+	var location = Tiles.ocean_tiles.world_to_map(position)
+	if Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles):
+		Server.world.play_dirt_trail_effect(velocity)

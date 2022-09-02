@@ -53,6 +53,7 @@ func initialize():
 	page = 1
 	$Page1.show()
 	$Page2.hide()
+	reset_hover_effect()
 	initialize_crafting()
 
 func _on_DownButton_pressed():
@@ -85,6 +86,12 @@ func intialize_slots():
 		if PlayerInventory.hotbar.has(i):
 			h_slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1], PlayerInventory.hotbar[i][2])
 
+
+func reset_hover_effect():
+	for item in page1:
+		$Page1.get_node(item).scale = Vector2(3,3)
+	for item in page2:
+		$Page2.get_node(item).scale = Vector2(3,3)
 
 func initialize_crafting():
 	PlayerInventory.HotbarSlots = $HotbarSlots
@@ -265,7 +272,7 @@ func _on_WoodBarrelButton_pressed():
 func _on_WoodFenceButton_mouse_entered():
 	entered_crafting_area("wood fence")
 func _on_WoodFenceButton_mouse_exited():
-	exited_crafting_area("wood barrel")
+	exited_crafting_area("wood fence")
 func _on_WoodFenceButton_pressed():
 	craftable_item_pressed()
 
