@@ -78,6 +78,102 @@
     "jalapeno": {
         "Energy": 10,
         "Health": 10
-    }
+    },
+    "eel": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "clownfish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "nelma": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "halibut": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "anchovy": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "cisco": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "goldfish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "betta": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "siberian whitefish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "red salmon": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "catfish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "koi": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "purple salmon": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "lingcod": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "tilapia": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "albacore": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "purple carp": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "dorado": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "blowfish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "angler": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "seaweed": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "octopus": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "shrimp": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "crab": {
+        "Energy": 10,
+        "Health": 10
+    },
     
 }

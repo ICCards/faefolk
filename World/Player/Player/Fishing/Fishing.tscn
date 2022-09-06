@@ -191,7 +191,7 @@ script = ExtResource( 4 )
 
 [node name="FishingMiniGame" parent="." instance=ExtResource( 1 )]
 visible = false
-position = Vector2( -101, -101 )
+position = Vector2( -132, -100 )
 
 [node name="ExclamationPoint" type="Sprite" parent="."]
 visible = false

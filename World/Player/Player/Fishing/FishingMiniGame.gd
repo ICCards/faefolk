@@ -8,11 +8,12 @@ var bounce = 0.4
 
 var fishable = true
 var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
-
+var game_timer = 20.0
 
 func set_active():
 	visible = true
 	spawn_fish()
+	modulate = Color(1,1,1,1)
 	$Hook.position.y = 83
 	$TempFishIcon.position.y = 83
 	$Progress.value = 250
@@ -25,7 +26,17 @@ func spawn_fish():
 	fishable = false
 
 func start():
+	start_game_timer()
 	get_node("Fish").start()
+	
+func start_game_timer():
+	$Tween.interpolate_property($TimerProgress, "rect_size",
+		Vector2(3,128), Vector2(3,0), game_timer,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($TimerProgress, "color",
+		Color("00ff00"), Color("ff0000"), game_timer,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
 
 func _physics_process(delta):
 	if get_parent().mini_game_active:
@@ -54,37 +65,40 @@ func _physics_process(delta):
 		if (fishable == false):
 			if (len($Hook/Area2D.get_overlapping_areas()) > 0):
 				$Hook.modulate = Color("ffffff")
-				$Progress.value += 185 * delta
+				$Progress.value += 195 * delta
 				if ($Progress.value >= 999):
 					caught_fish()
 			else:
 				$Hook.modulate = Color("7dffffff")
-				$Progress.value -= 170 * delta
+				$Progress.value -= 195 * delta
 				if ($Progress.value <= 0):
 					lost_fish()
 		var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
 		var g = range_lerp($Progress.value/10, 10, 50, 0, 1)
 		$Progress.modulate = Color(r, g, 0)
-		get_parent().set_active_fish_line_position($Progress.value)
+		get_parent().set_moving_fish_line_position($Progress.value)
 					
 		
 func caught_fish():
-	print("CAUGHT")
+	$Tween.stop_all()
+	hide()
+	#$AnimationPlayer.play("fade")
 	get_parent().caught_fish(get_node("Fish").fish_data[0])
 	get_parent().mini_game_active = false
-	get_node("Fish").destroy()
-	$Progress.value = 0
-	fishable = true
+	get_node("Fish").stop_fish_movement()
 	
 func lost_fish():
-	print("LOST")
+	$Tween.stop_all()
 	get_parent().mini_game_active = false
-	get_node("Fish").destroy()
-	$Progress.value = 0
-	fishable = true
+	$AnimationPlayer.play("fade")
+	get_node("Fish").stop_fish_movement()
 	get_parent().lost_fish()
 
 
 func _on_Clicker_button_down():
 	hookVelocity -= .5
 
+
+
+func _on_GameTimer_timeout():
+	pass # Replace with function body.

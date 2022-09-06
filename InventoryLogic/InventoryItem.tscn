@@ -53,8 +53,8 @@ margin_left = 6.0
 margin_top = 81.0
 margin_right = 20.0
 margin_bottom = 82.0
-max_value = 50.0
-value = 44.0
+max_value = 400.0
+value = 400.0
 texture_progress = ExtResource( 4 )
 nine_patch_stretch = true
 

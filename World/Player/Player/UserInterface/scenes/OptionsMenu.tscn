@@ -5,8 +5,8 @@
 [ext_resource path="res://Assets/Images/Inventory UI/grabber.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/Inventory UI/slider no boudaries.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=5]
-[ext_resource path="res://Assets/Images/Misc/up button.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Misc/down button.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=7]
 
 [sub_resource type="GDScript" id=15]
 script/source = "extends Control

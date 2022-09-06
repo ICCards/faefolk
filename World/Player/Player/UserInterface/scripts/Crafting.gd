@@ -99,27 +99,17 @@ func initialize_crafting():
 	intialize_slots()
 	if page == 1:
 		for item in page1:
-			if sufficientMaterialToCraft(item):
+			if PlayerInventory.isSufficientMaterialToCraft(item):
 				$Page1.get_node(item).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page1.get_node(item).modulate = Color(1, 1, 1, 0.4)
 	elif page == 2:
 		for item in page2:
-			if sufficientMaterialToCraft(item):
+			if PlayerInventory.isSufficientMaterialToCraft(item):
 				$Page2.get_node(item).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page2.get_node(item).modulate = Color(1, 1, 1, 0.4)
-
-
-func sufficientMaterialToCraft(item):
-	var ingredients = JsonData.crafting_data[item]["ingredients"]
-	for i in range(ingredients.size()):
-		if PlayerInventory.returnSufficentCraftingMaterial(ingredients[i][0], ingredients[i][1]):
-			continue
-		else:
-			return false
-	return true
-	
+ 
 
 func _physics_process(delta):
 	if item and not find_parent("UserInterface").holding_item:
@@ -176,10 +166,10 @@ func return_crafted_item(item_name):
 	
 	
 func craftable_item_pressed():
-	if sufficientMaterialToCraft(crafting_item) and not find_parent("UserInterface").holding_item:
+	if PlayerInventory.isSufficientMaterialToCraft(crafting_item) and not find_parent("UserInterface").holding_item:
 		craft(crafting_item)
 	elif find_parent("UserInterface").holding_item:
-		if find_parent("UserInterface").holding_item.item_name == crafting_item and sufficientMaterialToCraft(crafting_item):
+		if find_parent("UserInterface").holding_item.item_name == crafting_item and PlayerInventory.isSufficientMaterialToCraft(crafting_item):
 			PlayerInventory.craft_item(crafting_item)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
 			initialize_crafting()

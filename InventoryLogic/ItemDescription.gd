@@ -16,12 +16,12 @@ func initialize():
 #	$GridContainer/TopRow.rect_size.x = width
 #	$GridContainer/MiddleRow.rect_size.x = width
 #	$GridContainer/BottomRow.rect_size.x = width
-	$Body.rect_size.x = (width *5.7) 
+	$Body.rect_size.x = (width*5.7) 
 	$Body/ItemDescription.rect_size.x = (width*5.7) 
 	$ItemName.rect_size.x = width
 
 func set_health_and_energy():
-	if item_category == "Food":
+	if item_category == "Food" or item_category == "Fish":
 		show_health_and_energy()
 	else:
 		hide_health_and_energy()
@@ -40,30 +40,11 @@ func set_description_text(item):
 	if item:
 		var category = JsonData.item_data[item]["ItemCategory"]
 		var description = JsonData.item_data[item]["Description"]
-		$Body/ItemCategory.modulate = returnCategoryColor(category)
+		$Body/ItemCategory.modulate = Util.returnCategoryColor(category)
 		$ItemName.set_text(item[0].to_upper() + item.substr(1,-1))
 		$Body/ItemCategory.set_text(category[0].to_upper() + category.substr(1,-1))
 		$Body/ItemDescription.set_text(description)
 
-
-func returnCategoryColor(category):
-	match category:
-		"Tool":
-			return Color("ff2525")
-		"Resource":
-			return Color("00ffc3")
-		"Placable object":
-			return Color("fffb00")
-		"Seed":
-			return Color("26ff00")
-		"Food":
-			return Color("eb00ff")
-		"Placable path":
-			return Color("3c1aff")
-		"Construction":
-			return Color("ff25f1")
-		"Fish":
-			return Color("ffffff")
 
 func set_size_of_description(x):
 	if x <= 210:
@@ -75,7 +56,7 @@ func set_size_of_description(x):
 		height = (50 + (lines - 2) * 20)
 	else:
 		height = 50
-	if item_category == "Food":
+	if item_category == "Food" or item_category == "Fish":
 		height += 46
 		
 		 

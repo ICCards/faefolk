@@ -9,6 +9,7 @@ const SlotClass = preload("res://InventoryLogic/Slot.gd")
 var chest_id
 
 func initialize():
+	show()
 	chest_id = PlayerInventory.chest_id
 	initialize_chest_data()
 	initialize_inventory()
@@ -19,7 +20,6 @@ func _ready():
 	var slots_in_inventory = inventory_slots.get_children()
 	var slots_in_chest = chest_slots.get_children()
 	var slots_in_hotbar = hotbar_slots.get_children()
-	var slots_locked = locked_slots.get_children()
 	for i in range(slots_in_inventory.size()):
 		slots_in_inventory[i].connect("gui_input", self, "slot_gui_input", [slots_in_inventory[i]])
 		slots_in_inventory[i].slot_index = i
@@ -112,9 +112,7 @@ func left_click_not_holding(slot: SlotClass):
 	if slot.slotType == slot.SlotType.INVENTORY or slot.slotType == slot.SlotType.HOTBAR_INVENTORY:
 		for i in range(slots_in_chest.size()):
 			if not PlayerInventory.chests[chest_id].has(i):
-				print("ADD TO CHEST "  + str(i))
 				PlayerInventory.remove_item(slot)
-				#PlayerInventory.chests[chest_id][i] = [slot.item.item_name, slot.item.item_quantity, slot.item.item_health]
 				PlayerInventory.add_item_to_empty_slot(slot.item, chest_slots.get_children()[i], chest_id)
 				slot.removeFromSlot()
 				initialize_chest_data()

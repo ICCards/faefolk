@@ -3,23 +3,42 @@
   "wood": {
     "ItemCategory": "Resource",
     "StackSize": 999,
-    "Description": "Wood harvested from trees"
-  }, 
-
+    "Description": "Wood harvested from trees."
+  },
   "stone": {
     "ItemCategory": "Resource",
     "StackSize" : 999,
-    "Description": "Stone from ore"
+    "Description": "Stone harvested from ore."
+  },
+  "rope": {
+    "ItemCategory": "Resource",
+    "StackSize" : 999,
+    "Description": "Rope for things."
   },
   "iron ore": {
       "ItemCategory": "Resource",
       "StackSize" : 999,
-      "Description": "Can be smelted into iron ingot"
+      "Description": "Can be smelted into iron ingot."
   },
   "gold ore": {
       "ItemCategory": "Resource",
       "StackSize" : 999,
-      "Description": "Can be smelted into gold ingot"
+      "Description": "Can be smelted into gold ingot."
+  },
+  "bronze ingot": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "A bar of pure broze."
+  },
+  "iron ingot": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "A bar of pure iron."
+  },
+  "gold ingot": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "A bar of pure gold."
   },
   "red gem": {
       "ItemCategory": "Mineral",
@@ -44,38 +63,131 @@
   "wood axe": {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used for breaking wood"
+      "Description": "Level 1 axe for harvesting wood."
   },
   "wood pickaxe": {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used for breaking ore."
+      "Description": "Level 1 pickaxe for harvesting stone."
   },
   "wood sword": {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used for melee attacks."
+      "Description": "Level 1 sword for melee attacks."
   },
   "wood hoe": {
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used to make fertile soil."
+      "Description": "Level 1 hoe for tilling soil."
+  },
+  "stone axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 axe for harvesting wood."
+  },
+  "stone pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 pickaxe for harvesting stone."
+  },
+  "stone sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 sword for melee attacks."
+  },
+  "stone hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 hoe for tilling soil."
+  },
+  "bronze axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 axe for harvesting wood."
+  },
+  "bronze pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 pickaxe for harvesting stone."
+  },
+  "bronze sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 sword for melee attacks."
+  },
+  "bronze hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 hoe for tilling soil."
+  },
+  "iron axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 4 axe for harvesting wood."
+  },
+  "iron pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 4 pickaxe for harvesting stone."
+  },
+  "iron sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 4 sword for melee attacks."
+  },
+  "iron hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 4 hoe for tilling soil."
+  },
+  "gold axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 5 axe for harvesting wood."
+  },
+  "gold pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 5 pickaxe for harvesting stone."
+  },
+  "gold sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 5 sword for melee attacks."
+  },
+  "gold hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 5 hoe for tilling soil."
+  },
+  
+  "stone watering can" : {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 1 watering can for watering tilled soil."
+  },
+  "bronze watering can" : {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 watering can for watering tilled soil."
+  },
+  "gold watering can" : {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 watering can for watering tilled soil."
   },
   "scythe": {
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to cut grass and flowers."
   },
-  "stone watering can" : {
-      "ItemCategory": "Tool",
-      "StackSize": 1,
-      "Description": "Used to water fertile soil."
-  },
   "fishing rod":{
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to catch fish."
   },
+  
+  
   "blueprint": {
       "ItemCategory": "Construction",
       "StackSize": 1,
@@ -102,7 +214,7 @@
   "yellow onion": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "Has a distinctive strong and complex flavor."
   },
   "garlic": {
       "ItemCategory": "Food",
@@ -132,17 +244,17 @@
   "yellow pepper": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "Mildly sweet and spicy."
   },
   "red pepper": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy"
+      "Description": "Very sweet with a spicy aftertaste."
   },
   "green pepper": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "A sweet vegetable with a little kick.",
   },
   "strawberry": {
       "ItemCategory": "Food",
@@ -152,7 +264,7 @@
   "blueberry": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "A popular berry reported to have many health benefits. The blue skin has the highest nutrient concentration.",
+      "Description": "A popular and tasty berry reported to have many health benefits.",
   },
   "grape": {
       "ItemCategory": "Food",
@@ -167,9 +279,9 @@
   "zucchinni": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Generates some energy",
+      "Description": "A summer squash packed with nutrients.",
   },
-  "green melon": {
+  "honeydew melon": {
       "ItemCategory": "Food",
       "StackSize": 999,
       "Description": "A cool, sweet summer treat.",
@@ -177,7 +289,7 @@
   "corn": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "One of the most popular grains. The sweet, fresh cobs are a summer favorite.",
+      "Description": "One of the most popular grains with many culinary uses.",
   },
   "jalapeno": {
       "ItemCategory": "Food",
@@ -187,7 +299,7 @@
   "tomato": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "Rich and slightly tangy, the Tomato has a wide variety of culinary uses.",
+      "Description": "Rich, red and juicy, the Tomato has a wide variety of culinary uses.",
   },
   "sugar cane": {
       "ItemCategory": "Food",
@@ -197,24 +309,24 @@
   "asparagus": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "A small and skinny vegetable that is packed with nutrients.",
+      "Description": "A small and skinny vegetable packed with nutrients.",
   },
   
   
   "wheat seeds": {
       "ItemCategory": "Seed",
       "StackSize": 999,
-      "Description": "Plant these in the Summer or Fall. Takes 4 days to mature.",
+      "Description": "Plant these in the Spring, Summer or Fall. Takes 4 days to mature.",
   },
   "potato seeds": {
       "ItemCategory": "Seed",
       "StackSize": 999,
-      "Description": "Plant these in the Spring. Takes 6 days to mature and produces one or two potatos on harvest. "
+      "Description": "Plant these in the Spring, Summer or Fall. Takes 6 days to mature and produces one or two potatos on harvest."
   },
   "yellow onion seeds": {
       "ItemCategory": "Seed",
       "StackSize": 999,
-      "Description": "Plant these in the Fall. Takes 8 days to mature.",
+      "Description": "Plant these in the Fall. Takes 4 days to mature.",
   },
   "garlic seeds": {
       "ItemCategory": "Seed",
@@ -399,90 +511,125 @@
         "StackSize": 999,
         "Description": "Can be placed and used to set respawn point in the world."
     },
-    "blue crab":{
+    "eel":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A marine crustacean with two powerful pincers."
+        "Description": "A marine, snakelike fish."
     },
-    "lobster":{
+    "clownfish":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A marine crustacean with a powerful tail and dangerous claws."
+        "Description": "An ocean fish with a bright orange color."
     },
-    "royal red shrimp":{
+    "halibut":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A small, ocean-dwelling scavenger with tasty meat."
+        "Description": "A large, flat fish with delicious meat."
     },
-    "common sardine":{
+    "anchovy":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A common and oily marine fish."
+        "Description": "A common fish at the bottom of the food chain."
     },
-    "garden flounder":{
+    "cisco":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A common fish that lives on the ocean floor."
+        "Description": "A medium sized fish found in the lakes."
     },
-    "red snapper":{
+    "goldfish":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A common fish that lives in the ocean with a nice red color."
+        "Description": "A rare, cave fish covered in gold."
     },
-    "blue ribbon eel":{
+    "betta":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A long and slippery ocean-dwelling fish. Despite it's beauty, it can pack a mean bite."
+        "Description": "Despite its beauty and small size, these freshwater fish are known as the Siamese fighting fish."
     },
-    "blue ribbon eel":{
+    "siberian whitefish":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A long and slippery ocean-dwelling fish. Despite it's beauty, it can pack a mean bite."
+        "Description": "A freshwater fish that hunts during the night."
     },
-    "mahi mahi":{
+    "red salmon":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A large marine fish that tastes great on tacos."
+        "Description": "A freshwater fish with a bright, red body and black head."
     },
-    "yellowtail amberjack":{
+    "catfish":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A large marine fish that becomes active at night."
+        "Description": "A freshwater fish with whiskers."
     },
-    "albino cichilid":{
+    "koi":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A marine fish that must stay away from the sun."
+        "Description": "A unique, freshwater fish that is kept for decoration purposes."
     },
-    "man o' war jelly":{
+    "purple salmon":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A beautiful yet deadly marine fish with tentacles that grow upwards of 100 feet."
+        "Description": "A popular cave fish with a maroon color."
     },
-    "baby clownfish":{
+    "lingcod":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A small and pretty marine fish that many put in aquariums."
+        "Description": "An ugly, cave fish with a dark brown color and blue meat."
     },
-    "blue ringed octopus":{
+    "tilapia":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A rare and intelligent marine creature with a venomous bite."
+        "Description": "A common, freshwater fish with a mild flavor."
     },
-    "box turtle":{
+    "albacore":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A slow moving ocean-dweller with a long life span."
+        "Description": "A large, seawater fish similar to tuna."
     },
-    "golden seahorse":{
+    "purple carp":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A rare, small, and majestic ocean creature."
+        "Description": "A cave fish with a dark, purple color and strong fins."
     },
-    "royal starfish":{
+    "dorado":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "A rare ocean creature that only feeds at night."
+        "Description": "A freshwater, gamefish with blue and gold colors."
+    },
+    "blowfish":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A small fish that inflates in size when challenged."
+    },
+    "angler":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A rare fish that uses a bioluminescent dangler to attack its prey."
+    },
+    "seaweed":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A salty snack used in cooking."
+    },
+    "octopus":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "An extraordinary, aquatic creature with a very large brain."
+    },
+    "shrimp":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A small, scavenger widely prized for its meat."
+    },
+    "crab":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A crustacean with dangerous pincers and delicious meat."
+    },
+    "nelma":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A large, freshwater fish that is considered a delicacy in some cultures."
     },
     
 }

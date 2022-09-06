@@ -78,18 +78,18 @@ func place_building_object_in_world(id, item_name, location):
 			Server.world.call_deferred("add_child", object, true)
 			object.global_position = wall_tiles.map_to_world(location) + Vector2(16, 16)
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			wall_tiles.set_cellv(location, 1)
+			wall_tiles.set_cellv(location, 0)
 			wall_tiles.update_bitmask_region()
-		"double door":
+		"door front":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			var object = StoneDoubleDoor.instance()
-			object.global_position = fence_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = wall_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
-		"double door side":
+		"door side":
 			Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			var object = StoneDoubleDoorSide.instance()
-			object.global_position = fence_tiles.map_to_world(location) + Vector2(0,32)
-
+			object.global_position = wall_tiles.map_to_world(location) + Vector2(0,32)
+			Server.world.call_deferred("add_child", object, true)
 	
 	
 

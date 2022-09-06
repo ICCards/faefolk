@@ -1,24 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Hotbar.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/hotbar.png" type="Texture" id=3]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=5]
 
-[node name="Hotbar" type="Node2D"]
+[node name="Hotbar" type="Control"]
 script = ExtResource( 2 )
 
 [node name="ItemDescription" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1080, -94 )
-z_index = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Bg" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -303.0
 margin_right = 303.0
 margin_bottom = 93.0
-mouse_filter = 0
+mouse_filter = 2
 texture = ExtResource( 3 )
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
@@ -100,3 +100,81 @@ rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 1 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="HotbarLabels" type="HBoxContainer" parent="."]
+margin_left = -282.0
+margin_top = 19.0
+margin_right = 2313.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.2, 0.2 )
+mouse_filter = 2
+custom_constants/separation = 260
+
+[node name="1" type="Label" parent="HotbarLabels"]
+margin_right = 19.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "1"
+
+[node name="2" type="Label" parent="HotbarLabels"]
+margin_left = 279.0
+margin_right = 306.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "2"
+
+[node name="3" type="Label" parent="HotbarLabels"]
+margin_left = 566.0
+margin_right = 593.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "3"
+
+[node name="4" type="Label" parent="HotbarLabels"]
+margin_left = 853.0
+margin_right = 876.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "4"
+
+[node name="5" type="Label" parent="HotbarLabels"]
+margin_left = 1136.0
+margin_right = 1163.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "5"
+
+[node name="6" type="Label" parent="HotbarLabels"]
+margin_left = 1423.0
+margin_right = 1450.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "6"
+
+[node name="7" type="Label" parent="HotbarLabels"]
+margin_left = 1710.0
+margin_right = 1735.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "7"
+
+[node name="8" type="Label" parent="HotbarLabels"]
+margin_left = 1995.0
+margin_right = 2022.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "8"
+
+[node name="9" type="Label" parent="HotbarLabels"]
+margin_left = 2282.0
+margin_right = 2308.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "9"
+
+[node name="0" type="Label" parent="HotbarLabels"]
+margin_left = 2568.0
+margin_right = 2595.0
+margin_bottom = 61.0
+theme = ExtResource( 5 )
+text = "0"

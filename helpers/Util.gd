@@ -61,3 +61,22 @@ func returnAdjustedWateringCanPariclePos(direction):
 			return Vector2(-28, -20)
 		"DOWN":
 			return Vector2(0, -15)
+			
+func returnCategoryColor(category):
+	match category:
+		"Tool":
+			return Color("ff2525")
+		"Resource":
+			return Color("00ffc3")
+		"Placable object":
+			return Color("fffb00")
+		"Seed":
+			return Color("26ff00")
+		"Food":
+			return Color("eb00ff")
+		"Placable path":
+			return Color("3c1aff")
+		"Construction":
+			return Color("ff25f1")
+		"Fish":
+			return Color("ff6d00")

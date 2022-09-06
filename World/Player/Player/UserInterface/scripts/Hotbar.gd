@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 onready var hotbar_slots = $HotbarSlots
@@ -65,7 +65,7 @@ func adjusted_description_position():
 	else:
 		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -42)
 	if item:
-		if JsonData.item_data[item]["ItemCategory"] == "Food":
+		if JsonData.item_data[item]["ItemCategory"] == "Food" or JsonData.item_data[item]["ItemCategory"] == "Fish":
 			adjusted_pos += Vector2(0,-63)
 
 
@@ -143,5 +143,4 @@ func left_click_not_holding(slot: SlotClass):
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-
 

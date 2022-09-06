@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -42,6 +42,7 @@
 [ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=40]
 [ext_resource path="res://Assets/Images/Inventory UI/frame with background.png" type="Texture" id=41]
 [ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Assets/Images/Misc/Buttons/exit button.png" type="Texture" id=43]
 
 [sub_resource type="StyleBoxTexture" id=17]
 texture = ExtResource( 32 )
@@ -330,7 +331,6 @@ script = ExtResource( 7 )
 
 [node name="CraftingItemDescription" parent="Crafting" instance=ExtResource( 30 )]
 visible = false
-z_index = 2
 
 [node name="Page1" type="Node2D" parent="Crafting"]
 position = Vector2( 750, 0 )
@@ -747,7 +747,6 @@ script = ExtResource( 2 )
 [node name="ItemDescription" parent="Crafting" instance=ExtResource( 36 )]
 visible = false
 scale = Vector2( 5.4, 5.4 )
-z_index = 2
 
 [node name="Inventory" type="Control" parent="."]
 margin_right = 40.0
@@ -1126,7 +1125,6 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 31
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -1143,7 +1141,6 @@ text = "Hide"
 
 [node name="ItemDescription" parent="Inventory" instance=ExtResource( 36 )]
 visible = false
-z_index = 2
 
 [node name="PlayerFrame" type="TextureRect" parent="Inventory"]
 margin_left = 152.0
@@ -1248,6 +1245,14 @@ margin_bottom = 32.0
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="ExitButton" type="TextureButton" parent="."]
+margin_left = 647.0
+margin_top = -6.0
+margin_right = 719.0
+margin_bottom = 66.0
+rect_scale = Vector2( 0.6, 0.6 )
+texture_normal = ExtResource( 43 )
+
 [connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
 [connection signal="mouse_entered" from="TabButtons/Inventory" to="." method="_on_Inventory_mouse_entered"]
 [connection signal="mouse_exited" from="TabButtons/Inventory" to="." method="_on_Inventory_mouse_exited"]
@@ -1321,3 +1326,4 @@ margin_bottom = 32.0
 [connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
 [connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
 [connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

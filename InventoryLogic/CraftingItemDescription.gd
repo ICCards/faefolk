@@ -33,8 +33,8 @@ func set_ingredients(item_name):
 		$ItemDescription.rect_position = Vector2(6, 44)
 		$Ingredient2.visible = false
 	elif amount_ingredients == 2:
-		$Divider2.rect_position = Vector2(6, 50)
-		$ItemDescription.rect_position = Vector2(6, 52)
+		$Divider2.rect_position = Vector2(6, 52)
+		$ItemDescription.rect_position = Vector2(6, 54)
 		$Ingredient2.visible = true
 		var ingredient2 = str(JsonData.crafting_data[item_name]["ingredients"][1][0])
 		var amount2 = JsonData.crafting_data[item_name]["ingredients"][1][1]
@@ -65,4 +65,7 @@ func set_size_of_description(x):
 	else:
 		width = 58 + ((x - 210) / 5)
 	var lines = $ItemDescription.get_line_count()
-	height = (40 + (lines * 14) + (amount_ingredients * 12))
+	if amount_ingredients == 1:
+		height = (40 + (lines * 14) + (amount_ingredients * 10))
+	else:
+		height = (40 + (lines * 14) + (amount_ingredients * 14))
