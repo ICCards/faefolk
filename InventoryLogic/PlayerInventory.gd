@@ -35,27 +35,20 @@ var inventory = {
 	4: ["wood", 299, null],
 	1: ["wood", 499, null],
 	7: ["stone", 699, null],
-	8: ["stone", 799, null],
+	8: ["gold ingot", 40, null],
+	0: ["iron ingot", 40, null]
 
 }
 
 var hotbar = {
-#	0: ["potato", 30, null],
+	2: ["red salmon", 30, null],
 	1: ["wood path", 30, null],
 #	2: ["yellow onion", 30, null],
 	3: ["carrot", 30, null],
-	#4: ["grape", 30, null],
+	4: ["blueprint", 1, null],
 	0: ["fishing rod", 1, null],
-	2: ["wood axe", 1, 25],
 #	2: ["hammer", 1, null],
 #	3: ["blueprint", 1, null],
-	5: ["wood sword", 1, 20],
-	6: ["stone watering can", 1, 25],
-	7: ["wood hoe", 1, 25], 
-#	8: ["wood axe", 1, 3],
-#	1: ["wood axe", 1, 3],
-	8:["wood pickaxe", 1, 25],
-	9:["wood pickaxe", 1, 25],
 }
 
 var chests = {
@@ -63,10 +56,15 @@ var chests = {
 
 func clear_chest_data(chest_id):
 	PlayerInventory.chests.erase(chest_id)
-#	if PlayerInventory.chests[chest_id].has(i):
-#		PlayerInventory.remove_item(slots_in_chest[i], chest_id)
-#		slots_in_chest[i].removeFromSlot()
-	#emit_signal("clear_chest")
+
+func isSufficientMaterialToCraft(item):
+	var ingredients = JsonData.crafting_data[item]["ingredients"]
+	for i in range(ingredients.size()):
+		if returnSufficentCraftingMaterial(ingredients[i][0], ingredients[i][1]):
+			continue
+		else:
+			return false
+	return true
 
 
 func returnSufficentCraftingMaterial(ingredient, amount_needed):

@@ -12,6 +12,7 @@ func _physics_process(delta):
 		$ItemNameBox.hide()
 
 func initialize():
+	hovered_button = null
 	$Trash/Top.rotation_degrees = 0
 	$Trash.show()
 	$Inventory.initialize()
@@ -91,7 +92,6 @@ func _on_Exit_pressed():
 func _on_BackgroundButton_pressed():
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").items_to_drop.append([find_parent("UserInterface").holding_item.item_name, find_parent("UserInterface").holding_item.item_quantity, find_parent("UserInterface").holding_item.item_health])
-		#holding_item.item_name, find_parent("UserInterface").holding_item.item_quantity, find_parent("UserInterface").holding_item.item_health)
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
 
@@ -154,3 +154,7 @@ func _on_Exit_mouse_entered():
 	hovered_button = "Exit"
 func _on_Exit_mouse_exited():
 	hovered_button = null
+
+
+func _on_ExitButton_pressed():
+	get_parent().toggle_menu()

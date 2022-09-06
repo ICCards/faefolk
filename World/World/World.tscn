@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -20,7 +20,7 @@
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/b/waveB.tres" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/c/waveC.tres" type="Texture" id=19]
 [ext_resource path="res://World/Map/WorldMap.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Assets/tiles final.png" type="Texture" id=21]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/stone autotile.tres" type="TileSet" id=21]
 [ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=22]
 [ext_resource path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/stone wall final.png" type="Texture" id=25]
@@ -1224,6 +1224,122 @@ background_mode = 4
 glow_intensity = 2.43
 glow_strength = 0.84
 
+[sub_resource type="ConvexPolygonShape2D" id=345]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=346]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=347]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=348]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=349]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=350]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=351]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=352]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=353]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=354]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=344]
+0/name = "stone wall final.png 0"
+0/texture = ExtResource( 25 )
+0/tex_offset = Vector2( 0, -64 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 384, 96 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 96 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 345 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 345 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 346 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 347 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 3, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 348 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 4, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 349 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 350 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 6, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 351 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 7, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 352 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 8, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 353 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 9, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 354 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
 [sub_resource type="TileSet" id=234]
 0/name = "hoed_layer.png 0"
 0/texture = ExtResource( 5 )
@@ -1273,54 +1389,6 @@ glow_strength = 0.84
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
-
-[sub_resource type="TileSet" id=344]
-0/name = "tiles final.png 0"
-0/texture = ExtResource( 21 )
-0/tex_offset = Vector2( 0, -64 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 320, 96 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186 ]
-0/autotile/icon_coordinate = Vector2( 0, 0 )
-0/autotile/tile_size = Vector2( 32, 96 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-1/name = "stone wall final.png 1"
-1/texture = ExtResource( 25 )
-1/tex_offset = Vector2( 0, -64 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 320, 96 )
-1/tile_mode = 1
-1/autotile/bitmask_mode = 1
-1/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186 ]
-1/autotile/icon_coordinate = Vector2( 0, 0 )
-1/autotile/tile_size = Vector2( 32, 96 )
-1/autotile/spacing = 0
-1/autotile/occluder_map = [  ]
-1/autotile/navpoly_map = [  ]
-1/autotile/priority_map = [  ]
-1/autotile/z_index_map = [  ]
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
 
 [node name="World" type="YSort"]
 script = ExtResource( 7 )
@@ -1474,6 +1542,20 @@ format = 1
 [node name="WorldEnvironment" type="WorldEnvironment" parent="PlacableTiles"]
 environment = SubResource( 339 )
 
+[node name="TileMap" type="TileMap" parent="PlacableTiles"]
+tile_set = ExtResource( 21 )
+cell_size = Vector2( 32, 32 )
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
+
+[node name="BuildingTiles" type="TileMap" parent="PlacableTiles"]
+tile_set = SubResource( 344 )
+cell_size = Vector2( 32, 32 )
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
+
 [node name="FarmingTiles" type="YSort" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -1515,11 +1597,5 @@ visible = false
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
 wait_time = 3.0
-
-[node name="TempTiles" type="TileMap" parent="."]
-tile_set = SubResource( 344 )
-cell_size = Vector2( 32, 32 )
-format = 1
-tile_data = PoolIntArray( -131080, 0, 0, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 8, -131074, 0, 1, -131073, 0, 1, -196608, 0, 8, -196607, 0, 1, -196606, 0, 1, -196605, 0, 0, -65544, 0, 4, -65539, 0, 4, -131072, 0, 4, -131069, 0, 4, -8, 0, 0, -7, 0, 2, -6, 0, 2, -5, 0, 1, -4, 0, 1, -3, 0, 6, -65536, 0, 4, -65533, 0, 4, 65533, 0, 4, 0, 0, 4, 3, 0, 4, 131069, 0, 4, 65536, 0, 5, 65537, 0, 2, 65538, 0, 8, 65539, 0, 7, 65540, 0, 2, 65541, 0, 0, 196605, 0, 4, 131072, 0, 4, 131074, 0, 4, 131077, 0, 4, 262141, 0, 5, 262142, 0, 2, 262143, 0, 1, 196608, 0, 7, 196609, 0, 2, 196610, 0, 6, 196613, 0, 4, 327677, 0, 4, 262146, 0, 4, 262149, 0, 4, 393213, 0, 0, 393214, 0, 1, 393215, 0, 2, 327680, 0, 2, 327681, 0, 1, 327682, 0, 7, 327683, 0, 2, 327684, 0, 1, 327685, 0, 0 )
 
 [connection signal="timeout" from="SpawnEnemyTimer" to="." method="_on_SpawnEnemyTimer_timeout"]

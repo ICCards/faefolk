@@ -17,6 +17,8 @@ var color7
 var color8
 
 var item_name
+var category
+var tempColor
 
 enum {
 	MOVEMENT, 
@@ -47,7 +49,8 @@ func eat():
 	
 func set_particle_colors(item_name):
 	var itemImage = Image.new()
-	itemImage.load(\"res://Assets/Images/inventory_icons/Food/\" + item_name + \".png\")
+	category = JsonData.item_data[item_name][\"ItemCategory\"]
+	itemImage.load(\"res://Assets/Images/inventory_icons/\" + category +\"/\" + item_name + \".png\")
 	itemImage.lock()
 	$EatingParticles1.color = return_pixel_color(itemImage)
 	$EatingParticles2.color = return_pixel_color(itemImage)
@@ -61,15 +64,26 @@ func set_particle_colors(item_name):
 	
 func return_pixel_color(image):
 	rng.randomize()
-	var tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
-	if tempColor != Color(0,0,0,0):
-		return tempColor
-	else:
+	if category == \"Food\":
 		tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
 		if tempColor != Color(0,0,0,0):
 			return tempColor
 		else:
-			return Color(0,0,0,0)
+			tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
+			if tempColor != Color(0,0,0,0):
+				return tempColor
+			else:
+				return Color(0,0,0,0)
+	else:
+		tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
+		if tempColor != Color(0,0,0,0):
+			return tempColor
+		else:
+			tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
+			if tempColor != Color(0,0,0,0):
+				return tempColor
+			else:
+				return Color(0,0,0,0)
 "
 
 [node name="EatingParticles" type="Node2D"]

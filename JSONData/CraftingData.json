@@ -116,4 +116,143 @@
              ["high quality metal", 25],
         ],
      },
+     
+     "wood axe": {
+         "ingredients" : [
+             ["wood", 14],
+        ],
+     },
+     "stone axe": {
+         "ingredients" : [
+             ["stone", 10],
+             ["wood", 4],
+        ],
+     },
+     "bronze axe": {
+         "ingredients" : [
+             ["bronze ingot", 10],
+             ["wood", 4],
+        ],
+     },
+     "iron axe": {
+         "ingredients" : [
+             ["iron ingot", 10],
+             ["wood", 4],
+        ],
+     },
+     "gold axe": {
+         "ingredients" : [
+             ["gold ingot", 10],
+             ["wood", 4],
+        ],
+     },
+     "wood pickaxe": {
+         "ingredients" : [
+             ["wood", 14],
+        ],
+     },
+     "stone pickaxe": {
+         "ingredients" : [
+             ["stone", 10],
+             ["wood", 4],
+        ],
+     },
+     "bronze pickaxe": {
+         "ingredients" : [
+             ["bronze ingot", 10],
+             ["wood", 4],
+        ],
+     },
+     "iron pickaxe": {
+         "ingredients" : [
+             ["iron ingot", 10],
+             ["wood", 4],
+        ],
+     },
+     "gold pickaxe": {
+         "ingredients" : [
+             ["gold ingot", 10],
+             ["wood", 4],
+        ],
+     },
+     "wood hoe": {
+         "ingredients" : [
+             ["wood", 8],
+        ],
+     },
+     "stone hoe": {
+         "ingredients" : [
+             ["stone", 4],
+             ["wood", 4],
+        ],
+     },
+     "bronze hoe": {
+         "ingredients" : [
+             ["bronze ingot", 4],
+             ["wood", 4],
+        ],
+     },
+     "iron hoe": {
+         "ingredients" : [
+             ["iron ingot", 4],
+             ["wood", 4],
+        ],
+     },
+     "gold hoe": {
+         "ingredients" : [
+             ["gold ingot", 4],
+             ["wood", 4],
+        ],
+     },
+     "wood sword": {
+         "ingredients" : [
+             ["wood", 10],
+        ],
+     },
+     "stone sword": {
+         "ingredients" : [
+             ["stone", 6],
+             ["wood", 4],
+        ],
+     },
+     "bronze sword": {
+         "ingredients" : [
+             ["bronze ingot", 6],
+             ["wood", 4],
+        ],
+     },
+     "iron sword": {
+         "ingredients" : [
+             ["iron ingot", 6],
+             ["wood", 4],
+        ],
+     },
+     "gold sword": {
+         "ingredients" : [
+             ["gold ingot", 6],
+             ["wood", 4],
+        ],
+     },
+     "stone watering can": {
+         "ingredients" : [
+             ["stone", 30],
+        ],
+     },
+     "bronze watering can": {
+         "ingredients" : [
+             ["bronze ingot", 30],
+        ],
+     },
+     "gold watering can": {
+         "ingredients" : [
+             ["gold ingot", 30],
+        ],
+     },
+     "fishing rod": {
+         "ingredients" : [
+             ["wood", 10],
+             ["rope", 2]
+        ],
+     },
+     
 }

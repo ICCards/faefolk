@@ -91,6 +91,8 @@ func set_world_visible():
 #	Tiles.valid_tiles = $WorldNavigation/ValidTiles
 #	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
 #	Tiles.path_tiles = $PlacableTiles/PathTiles
+#	Tiles.building_tiles = $PlacableTiles/BuildingTiles
+#	Tiles.ocean_tiles = $GeneratedTiles/AnimatedOceanTiles
 
 func _ready():
 	rng.randomize()
@@ -219,6 +221,7 @@ func buildMap(map):
 	Tiles.path_tiles = $PlacableTiles/PathTiles
 	Tiles.ocean_tiles = $GeneratedTiles/AnimatedOceanTiles
 	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
+	Tiles.building_tiles = $PlacableTiles/BuildingTiles
 	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
@@ -253,7 +256,8 @@ func buildMap(map):
 		snow.set_cellv(loc, 0)
 	for id in map["desert"]:
 		var loc = map["desert"][id]
-		desert.set_cellv(loc, 0)
+		#desert.set_cellv(loc, 0)
+		Tiles._set_cell(sand, loc.x, loc.y, 0)
 	for id in map["beach"]:
 		var loc = map["beach"][id]
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
@@ -329,34 +333,34 @@ func buildMap(map):
 		object.initialize(variety,loc)
 		object.position = dirt.map_to_world(loc) + Vector2(16, 24)
 		$NatureObjects.add_child(object,true)
-#	get_node("loadingScreen").set_phase("Building grass")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	var count = 0
-#	for id in map["tall_grass"]:
-#		var loc = map["tall_grass"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "tall grass")
-#		count += 1
-#		var object = TallGrassObject.instance()
-#		object.biome = map["tall_grass"][id]["b"]
-#		object.name = id
-#		object.position = dirt.map_to_world(loc) + Vector2(8, 32)
-#		$NatureObjects.add_child(object,true)
-#		if count == 130:
-#			yield(get_tree().create_timer(0.25), "timeout")
-#			count = 0
-#	get_node("loadingScreen").set_phase("Building flowers")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["flower"]:
-#		count += 1
-#		var loc = map["flower"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "flower")
-#		var object = FlowerObject.instance()
-#		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
-#		$NatureObjects.add_child(object,true)
-#		if count == 130:
-#			yield(get_tree().create_timer(0.25), "timeout")
-#			count = 0
-#	yield(get_tree().create_timer(0.5), "timeout")
+	get_node("loadingScreen").set_phase("Building grass")
+	yield(get_tree().create_timer(0.5), "timeout")
+	var count = 0
+	for id in map["tall_grass"]:
+		var loc = map["tall_grass"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "tall grass")
+		count += 1
+		var object = TallGrassObject.instance()
+		object.biome = map["tall_grass"][id]["b"]
+		object.name = id
+		object.position = dirt.map_to_world(loc) + Vector2(8, 32)
+		$NatureObjects.add_child(object,true)
+		if count == 130:
+			yield(get_tree().create_timer(0.25), "timeout")
+			count = 0
+	get_node("loadingScreen").set_phase("Building flowers")
+	yield(get_tree().create_timer(0.5), "timeout")
+	for id in map["flower"]:
+		count += 1
+		var loc = map["flower"][id]["l"]
+		Tiles.remove_nature_invalid_tiles(loc, "flower")
+		var object = FlowerObject.instance()
+		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
+		$NatureObjects.add_child(object,true)
+		if count == 130:
+			yield(get_tree().create_timer(0.25), "timeout")
+			count = 0
+	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	fill_biome_gaps(map)
 	set_water_tiles()
@@ -418,42 +422,43 @@ func set_water_tiles():
 				$GeneratedTiles/WaveTiles.set_cellv(cell, rng.randi_range(0, 4))
 	
 func fill_biome_gaps(map):
-	for loc in sand.get_used_cells():
-		if Tiles.return_neighboring_cells(loc, desert) != 4:
-			Tiles._set_cell(sand, loc.x+1, loc.y, 0)
-			Tiles._set_cell(sand, loc.x-1, loc.y, 0)
-			Tiles._set_cell(sand, loc.x, loc.y+1, 0)
-			Tiles._set_cell(sand, loc.x, loc.y-1, 0)
-	for loc in dirt.get_used_cells():
-		if Tiles.return_neighboring_cells(loc, dirt) != 4:
-			dirt.set_cellv(loc + Vector2(1, 0), 0)
-			dirt.set_cellv(loc + Vector2(-1, 0), 0)
-			dirt.set_cellv(loc + Vector2(0, 1), 0)
-			dirt.set_cellv(loc + Vector2(0, -1), 0)
-	for loc in snow.get_used_cells():
-		if Tiles.return_neighboring_cells(loc, snow) != 4:
-			snow.set_cellv(loc + Vector2(1, 0), 0)
-			snow.set_cellv(loc + Vector2(-1, 0), 0)
-			snow.set_cellv(loc + Vector2(0, 1), 0)
-			snow.set_cellv(loc + Vector2(0, -1), 0)
-	for loc in plains.get_used_cells():
-		if Tiles.return_neighboring_cells(loc, dirt) != 4:
-			plains.set_cellv(loc + Vector2(1, 0), 0)
-			plains.set_cellv(loc + Vector2(-1, 0), 0)
-			plains.set_cellv(loc + Vector2(0, 1), 0)
-			plains.set_cellv(loc + Vector2(0, -1), 0)
-	for loc in forest.get_used_cells():
-		if Tiles.return_neighboring_cells(loc, forest) != 4:
-			forest.set_cellv(loc + Vector2(1, 0), 0)
-			forest.set_cellv(loc + Vector2(-1, 0), 0)
-			forest.set_cellv(loc + Vector2(0, 1), 0)
-			forest.set_cellv(loc + Vector2(0, -1), 0)
-	for loc in desert.get_used_cells():
-		if Tiles.return_neighboring_cells(loc, desert) != 4:
-			desert.set_cellv(loc + Vector2(1, 0), 0)
-			desert.set_cellv(loc + Vector2(-1, 0), 0)
-			desert.set_cellv(loc + Vector2(0, 1), 0)
-			desert.set_cellv(loc + Vector2(0, -1), 0)
+	for i in range(2):
+		for loc in sand.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, desert) != 4:
+				Tiles._set_cell(sand, loc.x+1, loc.y, 0)
+				Tiles._set_cell(sand, loc.x-1, loc.y, 0)
+				Tiles._set_cell(sand, loc.x, loc.y+1, 0)
+				Tiles._set_cell(sand, loc.x, loc.y-1, 0)
+		for loc in dirt.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, dirt) != 4:
+				dirt.set_cellv(loc + Vector2(1, 0), 0)
+				dirt.set_cellv(loc + Vector2(-1, 0), 0)
+				dirt.set_cellv(loc + Vector2(0, 1), 0)
+				dirt.set_cellv(loc + Vector2(0, -1), 0)
+		for loc in snow.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, snow) != 4:
+				snow.set_cellv(loc + Vector2(1, 0), 0)
+				snow.set_cellv(loc + Vector2(-1, 0), 0)
+				snow.set_cellv(loc + Vector2(0, 1), 0)
+				snow.set_cellv(loc + Vector2(0, -1), 0)
+		for loc in plains.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, dirt) != 4:
+				plains.set_cellv(loc + Vector2(1, 0), 0)
+				plains.set_cellv(loc + Vector2(-1, 0), 0)
+				plains.set_cellv(loc + Vector2(0, 1), 0)
+				plains.set_cellv(loc + Vector2(0, -1), 0)
+		for loc in forest.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, forest) != 4:
+				forest.set_cellv(loc + Vector2(1, 0), 0)
+				forest.set_cellv(loc + Vector2(-1, 0), 0)
+				forest.set_cellv(loc + Vector2(0, 1), 0)
+				forest.set_cellv(loc + Vector2(0, -1), 0)
+		for loc in desert.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, desert) != 4:
+				desert.set_cellv(loc + Vector2(1, 0), 0)
+				desert.set_cellv(loc + Vector2(-1, 0), 0)
+				desert.set_cellv(loc + Vector2(0, 1), 0)
+				desert.set_cellv(loc + Vector2(0, -1), 0)
 	yield(get_tree().create_timer(0.25), "timeout")
 	
 

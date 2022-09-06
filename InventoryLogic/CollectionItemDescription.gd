@@ -15,7 +15,8 @@ func initialize(item_name):
 	$GridContainer/TopRow.rect_size.x = width
 	$GridContainer/MiddleRow.rect_size.x = width
 	$GridContainer/BottomRow.rect_size.x = width
-	$VBoxContainer/ItemDescription.rect_size.x = (width * 7) 
+	$Body.rect_size.x = width*5.7
+	$Body/ItemDescription.rect_size.x = width * 5.7
 	$ItemName.rect_size.x = width
 
 
@@ -24,22 +25,25 @@ func set_description_text(item):
 	if item:
 		var description = JsonData.item_data[item]["Description"]
 		$ItemName.set_text(item[0].to_upper() + item.substr(1,-1))
-		$VBoxContainer/ItemDescription.set_text(description)
-		$VBoxContainer/ItemAmount.set_text("Total: " + str(CollectionsData.crops[item]))
+		$Body/ItemDescription.set_text(description)
+		var category = JsonData.item_data[item]["ItemCategory"]
+		$Body/ItemAmount.modulate = Util.returnCategoryColor(category)
+		if category == "Food":
+			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.crops[item]))
+		else:
+			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.fish[item]))
 	else: 
 		hide()
 
 
 func set_size_of_description(x):
 	if x <= 210:
-		width = 58
+		width = 58	
 	else:
 		width = 58 + ((x - 210) / 5)
-	lines = $VBoxContainer/ItemDescription.get_line_count()
+	lines = $Body/ItemDescription.get_line_count()
 	if lines > 2:
-		height = (50 + (lines - 2) * 14)
+		height = (50 + (lines - 2) * 10)
 	else:
-		lines = 2
 		height = 50
-
 

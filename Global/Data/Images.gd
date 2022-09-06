@@ -419,7 +419,87 @@ func returnToolSprite(toolName, direction):
 					 return pickaxe.left
 				"swing_right":
 					 return pickaxe.right
+		"stone pickaxe":
+			match direction: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"bronze pickaxe":
+			match direction: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"iron pickaxe":
+			match direction: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"gold pickaxe":
+			match direction: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
 		"wood hoe":
+			match direction: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"stone hoe":
+			match direction: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"bronze hoe":
+			match direction: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"iron hoe":
+			match direction: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"gold hoe":
 			match direction: 
 				"swing_down":
 					 return pickaxe.down
@@ -439,6 +519,46 @@ func returnToolSprite(toolName, direction):
 					 return axe.left
 				"swing_right":
 					return axe.right
+		"stone axe":
+			match direction: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
+		"iron axe":
+			match direction: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
+		"bronze axe":
+			match direction: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
+		"gold axe":
+			match direction: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
 		"wood sword":
 			match direction: 
 				"sword_swing_down":
@@ -449,7 +569,67 @@ func returnToolSprite(toolName, direction):
 					 return sword.left
 				"sword_swing_right":
 					return sword.right
+		"stone sword":
+			match direction: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
+		"bronze sword":
+			match direction: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
+		"iron sword":
+			match direction: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
+		"gold sword":
+			match direction: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
 		"stone watering can":
+			match direction:
+				"watering_down":
+					 return human_male_can.down
+				"watering_up":
+					 return null
+				"watering_left":
+					 return human_male_can.left
+				"watering_right":
+					 return human_male_can.right
+		"bronze watering can":
+			match direction:
+				"watering_down":
+					 return human_male_can.down
+				"watering_up":
+					 return null
+				"watering_left":
+					 return human_male_can.left
+				"watering_right":
+					 return human_male_can.right
+		"gold watering can":
 			match direction:
 				"watering_down":
 					 return human_male_can.down

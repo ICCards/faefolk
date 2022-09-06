@@ -184,17 +184,20 @@ func _unhandled_input(event):
 		Sounds.current_footsteps_sound != Sounds.swimming: 
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if event.is_action_pressed("mouse_click") and item_name == "fishing rod":
+			if item_name == "blueprint" and current_building_item != null:
+				show_placable_object(current_building_item, "BUILDING")
+			elif event.is_action_pressed("mouse_click") and item_name == "fishing rod":
 				fish()
 			elif event.is_action_pressed("mouse_click") and item_category == "Tool":
 				swing(item_name)
-			elif event.is_action_pressed("mouse_click") and item_category == "Food":
+			elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish"):
 				eat(item_name)
 			elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
 				show_placable_object(item_name, item_category)
 			else:
 				destroy_placable_object()
 	else: 
+		current_building_item = null
 		destroy_placable_object()
 
 
@@ -303,7 +306,7 @@ func idle_state(_direction):
 			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
+				if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish":
 					holding_item.show()
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					animation = "holding_idle_" + _direction.to_lower()
@@ -325,7 +328,7 @@ func walk_state(_direction):
 		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if item_category == "Resource" or item_category == "Seed" or item_category == "Food":
+			if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish":
 				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 				holding_item.show()
 				animation = "holding_walk_" + _direction.to_lower()

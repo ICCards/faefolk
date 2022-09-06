@@ -5,19 +5,17 @@
 [ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=3]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd" type="Script" id=4]
 
-[node name="PlaceObject" type="Node2D"]
+[node name="PlaceObject" type="YSort"]
 script = ExtResource( 4 )
 
 [node name="ColorIndicator" parent="." instance=ExtResource( 2 )]
 
 [node name="ItemToPlace" type="TextureRect" parent="."]
-visible = false
 modulate = Color( 1, 1, 1, 0.627451 )
 margin_right = 32.0
 margin_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource( 1 )
 
 [node name="ScaledItemToPlace" type="TextureRect" parent="."]
 visible = false

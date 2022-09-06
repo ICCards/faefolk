@@ -31,8 +31,8 @@ func _input(event):
 	elif event.is_action_pressed("action") and holding_item == null and not PlayerInventory.viewInventoryMode and not PlayerInventory.chatMode:
 		if PlayerInventory.is_inside_chest_area:
 			toggle_chest()
-#			elif PlayerInventory.is_inside_workbench_area:
-#				open_workbench()
+		elif PlayerInventory.is_inside_workbench_area:
+			toggle_workbench()
 #			elif PlayerInventory.is_inside_stove_area:
 #				open_stove()
 #			elif PlayerInventory.is_inside_grain_mill_area:
@@ -107,7 +107,6 @@ func drop_item(item_name, quantity, health):
 
 func toggle_chest():
 	if not $OpenChest.visible:
-		$OpenChest.show()
 		$OpenChest.initialize()
 		$PlayerStatsUI.hide()
 		$SoundEffects.stream = Sounds.chest_open
@@ -127,9 +126,15 @@ func open_grain_mill():
 	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
 	toggle_stats_and_time()
 
-func open_workbench():
-	$Workbench.initialize()
-	$Workbench.visible = !$Workbench.visible
+func toggle_workbench():
+	if not $Workbench.visible:
+		$Workbench.initialize()
+		$Hotbar.hide()
+	else:
+		$Hotbar.show()
+		$Hotbar.initialize_hotbar()
+		$Workbench.hide()
+		drop_items()
 	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
 	toggle_stats_and_time()
 	

@@ -48,8 +48,9 @@ func update_health_bar():
 
 
 func remove_tile():
-	wall_tiles = get_node("/root/World/PlacableTiles/WallTiles")
-	wall_tiles.set_cellv(location, -1)
+	Tiles.reset_valid_tiles(location)
+	Tiles.building_tiles.set_cellv(location, -1)
+	Tiles.building_tiles.update_bitmask_region()
 	queue_free()
 
 

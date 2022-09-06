@@ -1,0 +1,181 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/CurrentTime.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/Workbench/Workbench.tscn" type="PackedScene" id=2]
+[ext_resource path="res://RadialMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/ChatBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/PlayerStatsUI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://World/Player/Player/UserInterface/interactive/OpenChest.tscn" type="PackedScene" id=14]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/Menu.tscn" type="PackedScene" id=15]
+[ext_resource path="res://World/Player/Player/UserInterface/scenes/Hotbar.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Thunder Crack - SFX Producer.mp3" type="AudioStream" id=18]
+[ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=19]
+[ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=23]
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "lightning day"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "lightning night"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0.027451, 0.054902, 0.92549 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "set night"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 9.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0.027451, 0.054902, 0.92549 ) ]
+}
+
+[node name="UserInterface" type="CanvasLayer"]
+script = ExtResource( 23 )
+
+[node name="WeatherEffects" type="ColorRect" parent="."]
+visible = false
+margin_left = -49.0
+margin_top = -39.0
+margin_right = 1093.0
+margin_bottom = 657.0
+color = Color( 0, 0, 0, 0 )
+script = ExtResource( 19 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherEffects"]
+anims/RESET = SubResource( 18 )
+"anims/lightning day" = SubResource( 19 )
+"anims/lightning night" = SubResource( 17 )
+"anims/set night" = SubResource( 20 )
+
+[node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="WeatherEffects"]
+stream = ExtResource( 18 )
+
+[node name="ChatBox" parent="." instance=ExtResource( 4 )]
+margin_left = 10.0
+margin_top = 299.0
+margin_right = -708.0
+margin_bottom = -89.0
+
+[node name="CurrentTime" parent="." instance=ExtResource( 1 )]
+position = Vector2( 866, 7 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="RadialMenu" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="PlayerStatsUI" parent="." instance=ExtResource( 12 )]
+margin_left = 892.0
+margin_top = 435.0
+margin_right = 892.0
+margin_bottom = 435.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="Workbench" parent="." instance=ExtResource( 2 )]
+visible = false
+margin_left = -317.0
+margin_top = -274.0
+margin_right = -317.0
+margin_bottom = -274.0
+
+[node name="Hotbar" parent="." instance=ExtResource( 17 )]
+margin_left = 512.0
+margin_top = 507.0
+margin_right = 512.0
+margin_bottom = 507.0
+
+[node name="OpenChest" parent="." instance=ExtResource( 14 )]
+visible = false
+margin_left = 484.0
+margin_top = 59.0
+margin_right = 484.0
+margin_bottom = 59.0
+
+[node name="Menu" parent="." instance=ExtResource( 15 )]
+visible = false
+margin_left = 139.0
+margin_top = 34.0
+margin_right = 139.0
+margin_bottom = 34.0
+
+[node name="DeathEffect" type="ColorRect" parent="."]
+visible = false
+margin_left = -58.0
+margin_top = -70.0
+margin_right = 1093.0
+margin_bottom = 680.0
+mouse_filter = 2
+color = Color( 1, 0, 0, 0 )
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]

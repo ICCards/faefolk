@@ -8,7 +8,7 @@
 [ext_resource path="res://Screen Shot 2022-07-19 at 5.24.54 PM.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.137255, 0.133333, 0.133333, 1 )
+bg_color = Color( 0.137255, 0.133333, 0.133333, 0.603922 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "zoom"

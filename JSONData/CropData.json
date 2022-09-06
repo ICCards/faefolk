@@ -44,7 +44,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Spring"],
+    "Seasons": ["Summer"],
     "yield": [2],
 },
 "green bean": {
@@ -63,19 +63,10 @@
     "Seasons": ["Spring"],
     "yield": [1]
 },
-"asparagus": {
-    "DaysToGrow": 7,
-    "GrowthImages": 4,
-    "Perennial": false,
-    "Regrowth": null,
-    "Seasons": ["Fall"],
-    "yield": [1],
-},
-
 
 
 "radish": {
-    "DaysToGrow": 6,
+    "DaysToGrow": 4,
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
@@ -83,11 +74,11 @@
     "yield": [1],
 },
 "tomato": {
-    "DaysToGrow": 11,
+    "DaysToGrow": 12,
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Summer"],
+    "Seasons": ["Spring"],
     "yield": [1, 2],
 },
 "red pepper": {
@@ -95,7 +86,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 3,
-    "Seasons": ["Summer"],
+    "Seasons": ["Fall"],
     "yield": [1, 1, 1, 2],
 },
 "blueberry": {
@@ -103,36 +94,16 @@
     "GrowthImages": 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Summer"],
+    "Seasons": ["Fall"],
     "yield": [2, 3, 4],
 },
-"green melon": {
-    "DaysToGrow": 10,
+"honeydew melon": {
+    "DaysToGrow": 14,
     "GrowthImages": 3,
     "Perennial": true,
     "Regrowth": 5,
     "Seasons": ["Summer"],
-    "yield": [3],
-},
-
-
-
-
-"wheat": {
-    "DaysToGrow" : 4,
-    "GrowthImages" : 3,
-    "Perennial": false,
-    "Regrowth": null,
-    "Seasons": ["Summer", "Fall"],
-    "yield": [1],
-},
-"corn": {
-    "DaysToGrow": 14,
-    "GrowthImages" : 4,
-    "Perennial": true,
-    "Regrowth": 4,
-    "Seasons": ["Summer", "Fall"],
-    "yield": [1],
+    "yield": [2],
 },
 
 
@@ -143,12 +114,12 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 3,
-    "Seasons": ["Fall"],
+    "Seasons": ["Summer"],
     "yield": [1, 1, 1, 2],
 },
     
 "yellow onion": {
-    "DaysToGrow" : 8,
+    "DaysToGrow" : 4,
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
@@ -165,7 +136,7 @@
 },
 
 "cabbage": {
-    "DaysToGrow": 12,
+    "DaysToGrow": 7,
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
@@ -180,6 +151,30 @@
     "Seasons": ["Fall"],
     "yield": [1, 1, 1, 2],
 },
+"asparagus": {
+    "DaysToGrow": 8,
+    "GrowthImages": 4,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Fall"],
+    "yield": [1],
+},
+"wheat": {
+    "DaysToGrow" : 4,
+    "GrowthImages" : 3,
+    "Perennial": false,
+    "Regrowth": null,
+    "Seasons": ["Spring", "Summer", "Fall"],
+    "yield": [1, 2, 3, 4, 5],
+},
+"corn": {
+    "DaysToGrow": 14,
+    "GrowthImages" : 4,
+    "Perennial": true,
+    "Regrowth": 4,
+    "Seasons": ["Spring", "Summer", "Fall"],
+    "yield": [1, 2],
+},
 "sugar cane": {
     "DaysToGrow": 7,
     "GrowthImages": 5,
@@ -188,5 +183,6 @@
     "Seasons": ["Spring", "Summer", "Fall"],
     "yield": [1, 2, 3],
 },
+
 
 }

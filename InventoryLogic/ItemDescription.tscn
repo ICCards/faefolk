@@ -18,19 +18,19 @@
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=9]
 size = 53
 font_data = SubResource( 5 )
 
 [sub_resource type="Theme" id=7]
-default_font = SubResource( 6 )
+default_font = SubResource( 9 )
 
 [sub_resource type="Theme" id=8]
-default_font = SubResource( 6 )
+default_font = SubResource( 9 )
 
 [node name="ItemDescription" type="Node2D"]
 scale = Vector2( 2.7, 2.7 )
-z_index = 1
+z_index = 2
 script = ExtResource( 5 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
