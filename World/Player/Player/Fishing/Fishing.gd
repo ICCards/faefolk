@@ -70,10 +70,14 @@ func _physics_process(delta):
 	elif waiting_for_fish_bite:
 		setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, hook.position + Vector2(4.5,4.5))
 	elif is_reeling_in_fish:
+		$CaughtFish.position = hook.position + Vector2(4.5,4.5)
 		line.points = [start_point, hook.position + Vector2(4.5,4.5)]
 
 func retract_and_stop(fish_name):
 	waiting_for_fish_bite = false
+	if fish_name:
+		$CaughtFish.show()
+		$CaughtFish.texture = load("res://Assets/Images/inventory_icons/Fish/" + fish_name + ".png")
 	reel_in_fish_line()
 	Server.player_node.composite_sprites.set_player_animation(Server.player_node.character, "retract_" + direction.to_lower(), "fishing rod retract")
 	player_animation_player.play("retract")
@@ -87,7 +91,6 @@ func retract_and_stop(fish_name):
 	stop_fishing_state()
 	
 func reel_in_fish_line():
-	print("REEL IN FISH")
 	is_reeling_in_fish = true
 	if direction == "RIGHT":
 		start_point = Vector2(20,-40)
@@ -105,6 +108,7 @@ func reel_in_fish_line():
 	
 func start_fishing_mini_game():
 	waiting_for_fish_bite = false
+	$Tween.stop_all()
 	$AnimationPlayer.play("hit")
 	$FishingMiniGame.set_active()
 	yield($AnimationPlayer, "animation_finished")

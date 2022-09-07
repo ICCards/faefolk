@@ -262,6 +262,7 @@ slot10={
 2d_physics/layer_18="OpenWorkbench"
 2d_physics/layer_19="OpenStove"
 2d_physics/layer_20="OpenGrainMill"
+2d_physics/layer_21="FishingMiniGame"
 
 [network]
 

@@ -30,9 +30,9 @@ var crops = {
 	"sugar cane": 2,
 	"tomato": 2,
 	"wheat": 1,
-	"yellow onion": 0,
-	"yellow pepper": 0,
-	"zucchinni": 0,
+	"yellow onion": 1,
+	"yellow pepper": 1,
+	"zucchinni": 1,
 }
 
 var fish = {

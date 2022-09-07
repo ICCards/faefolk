@@ -53,11 +53,11 @@ func set_size_of_description(x):
 		width = 58 + ((x - 210) / 5)
 	var lines = $Body/ItemDescription.get_line_count()
 	if lines > 2:
-		height = (50 + (lines - 2) * 20)
+		height = (50 + (lines - 2) * 9.5)
 	else:
 		height = 50
 	if item_category == "Food" or item_category == "Fish":
-		height += 46
+		height += 24
 		
 		 
 	 

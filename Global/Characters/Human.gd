@@ -848,7 +848,7 @@ var male = {
 
 	shoes_sword_swing_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWORD SWING/assets/down/shoes/shoe.png")
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/down/shoes/shoes.png")
 	},
 	shoes_sword_swing_up = {
 		0 : null,
@@ -1104,29 +1104,29 @@ var male = {
 	},
 	
 	body_cast_down = {
-		0 : preload("res://Characters/Human/male/CASTING/body/down/body.png")
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/down/body.png")
 	},
 	body_cast_up = {
-		0 : preload("res://Characters/Human/male/CASTING/body/up/body.png")
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/up/body.png")
 	},
 	body_cast_right = {
-		0 : preload("res://Characters/Human/male/CASTING/body/right/body.png")
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/right/body.png")
 	},
 	body_cast_left = {
-		0 : preload("res://Characters/Human/male/CASTING/body/left/body.png")
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/left/body.png")
 	},
 
 	arms_cast_down = {
-		0 : preload("res://Characters/Human/male/CASTING/body/down/arms.png")
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/down/arms.png")
 	},
 	arms_cast_up = {
-		0 : preload("res://Characters/Human/male/CASTING/body/up/arms.png")
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/up/arms.png")
 	},
 	arms_cast_right = {
-		0 : preload("res://Characters/Human/male/CASTING/body/right/arms.png")
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/right/arms.png")
 	},
 	arms_cast_left = {
-		0 : preload("res://Characters/Human/male/CASTING/body/left/arms.png")
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/left/arms.png")
 	},
 
 	acc_cast_down = {
@@ -1144,96 +1144,96 @@ var male = {
 
 	head_attribute_cast_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/down/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/down/head_attribute/hair.png")
 	},
 	head_attribute_cast_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/up/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/up/head_attribute/hair.png")
 	},
 	head_attribute_cast_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/right/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/right/head_attribute/hair.png")
 	},
 	head_attribute_cast_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/left/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/left/head_attribute/hair.png")
 	},
 
 	shirts_cast_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/down/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/down/shirts/shirt.png")
 	},
 	shirts_cast_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/up/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/up/shirts/shirt.png")
 	},
 	shirts_cast_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/right/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/right/shirts/shirt.png")
 	},
 	shirts_cast_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/left/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/left/shirts/shirt.png")
 	},
 
 	pants_cast_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/down/pants/pants.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/down/pants/pants.png")
 	},
 	pants_cast_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/up/pants/pants.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/up/pants/pants.png")
 	},
 	pants_cast_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/right/pants/pants.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/right/pants/pants.png")
 	},
 	pants_cast_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/left/pants/pants.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/left/pants/pants.png")
 	},
 
 	shoes_cast_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/down/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/down/shoes/shoes.png")
 	},
 	shoes_cast_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/up/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/up/shoes/shoes.png")
 	},
 	shoes_cast_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/right/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/right/shoes/shoes.png")
 	},
 	shoes_cast_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/CASTING/assets/left/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/left/shoes/shoes.png")
 	},
 	
 	body_retract_down = {
-		0 : preload("res://Characters/Human/male/RETRACTING/body/down/body.png")
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/down/body.png")
 	},
 	body_retract_up = {
-		0 : preload("res://Characters/Human/male/RETRACTING/body/up/body.png")
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/up/body.png")
 	},
 	body_retract_right = {
-		0 : preload("res://Characters/Human/male/RETRACTING/body/right/body.png")
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/right/body.png")
 	},
 	body_retract_left = {
-		0 : preload("res://Characters/Human/male/RETRACTING/body/left/body.png")
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/left/body.png")
 	},
 
 	arms_retract_down = {
-		0 : preload("res://Characters/Human/male/RETRACTING/body/down/arms.png")
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/down/arms.png")
 	},
 	arms_retract_up = {
-		0 : preload("res://Characters/Human/male/RETRACTING/body/up/arms.png")
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/up/arms.png")
 	},
 	arms_retract_right = {
-		0 : preload("res://Characters/Human/male/RETRACTING/body/right/arms.png")
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/right/arms.png")
 	},
 	arms_retract_left = {
-		0 : preload("res://Characters/Human/male/RETRACTING/body/left/arms.png")
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/left/arms.png")
 	},
 
 	acc_retract_down = {
@@ -1251,96 +1251,96 @@ var male = {
 
 	head_attribute_retract_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/down/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/down/head_attribute/hair.png")
 	},
 	head_attribute_retract_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/up/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/up/head_attribute/hair.png")
 	},
 	head_attribute_retract_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/right/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/right/head_attribute/hair.png")
 	},
 	head_attribute_retract_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/left/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/left/head_attribute/hair.png")
 	},
 
 	shirts_retract_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/down/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/down/shirts/shirt.png")
 	},
 	shirts_retract_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/up/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/up/shirts/shirt.png")
 	},
 	shirts_retract_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/right/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/right/shirts/shirt.png")
 	},
 	shirts_retract_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/left/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/left/shirts/shirt.png")
 	},
 
 	pants_retract_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/down/pants/pants.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/down/pants/pants.png")
 	},
 	pants_retract_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/up/pants/pants.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/up/pants/pants.png")
 	},
 	pants_retract_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/right/pants/pants.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/right/pants/pants.png")
 	},
 	pants_retract_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/left/pants/pants.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/left/pants/pants.png")
 	},
 
 	shoes_retract_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/down/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/down/shoes/shoes.png")
 	},
 	shoes_retract_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/up/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/up/shoes/shoes.png")
 	},
 	shoes_retract_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/right/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/right/shoes/shoes.png")
 	},
 	shoes_retract_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RETRACTING/assets/left/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/left/shoes/shoes.png")
 	},
 	
 	body_struggle_down = {
-		0 : preload("res://Characters/Human/male/STRUGGLE/body/down/body.png")
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/down/body.png")
 	},
 	body_struggle_up = {
-		0 : preload("res://Characters/Human/male/STRUGGLE/body/up/body.png")
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/up/body.png")
 	},
 	body_struggle_right = {
-		0 : preload("res://Characters/Human/male/STRUGGLE/body/right/body.png")
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/right/body.png")
 	},
 	body_struggle_left = {
-		0 : preload("res://Characters/Human/male/STRUGGLE/body/left/body.png")
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/left/body.png")
 	},
 
 	arms_struggle_down = {
-		0 : preload("res://Characters/Human/male/STRUGGLE/body/down/arms.png")
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/down/arms.png")
 	},
 	arms_struggle_up = {
-		0 : preload("res://Characters/Human/male/STRUGGLE/body/up/arms.png")
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/up/arms.png")
 	},
 	arms_struggle_right = {
-		0 : preload("res://Characters/Human/male/STRUGGLE/body/right/arms.png")
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/right/arms.png")
 	},
 	arms_struggle_left = {
-		0 : preload("res://Characters/Human/male/STRUGGLE/body/left/arms.png")
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/left/arms.png")
 	},
 
 	acc_struggle_down = {
@@ -1358,70 +1358,70 @@ var male = {
 
 	head_attribute_struggle_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/down/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/down/head_attribute/hair.png")
 	},
 	head_attribute_struggle_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/up/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/up/head_attribute/hair.png")
 	},
 	head_attribute_struggle_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/right/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/right/head_attribute/hair.png")
 	},
 	head_attribute_struggle_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/left/head_attribute/hair.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/left/head_attribute/hair.png")
 	},
 
 	shirts_struggle_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/down/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/down/shirts/shirt.png")
 	},
 	shirts_struggle_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/up/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/up/shirts/shirt.png")
 	},
 	shirts_struggle_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/right/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/right/shirts/shirt.png")
 	},
 	shirts_struggle_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/left/shirts/shirt.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/left/shirts/shirt.png")
 	},
 
 	pants_struggle_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/down/pants/pants.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/down/pants/pants.png")
 	},
 	pants_struggle_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/up/pants/pants.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/up/pants/pants.png")
 	},
 	pants_struggle_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/right/pants/pants.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/right/pants/pants.png")
 	},
 	pants_struggle_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/left/pants/pants.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/left/pants/pants.png")
 	},
 
 	shoes_struggle_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/down/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/down/shoes/shoes.png")
 	},
 	shoes_struggle_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/up/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/up/shoes/shoes.png")
 	},
 	shoes_struggle_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/right/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/right/shoes/shoes.png")
 	},
 	shoes_struggle_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/STRUGGLE/assets/left/shoes/shoes.png")
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/left/shoes/shoes.png")
 	},
 	
 	body_harvest_down = {

@@ -49,19 +49,21 @@ func _physics_process(delta):
 
 func adjusted_description_position():
 	yield(get_tree(), "idle_frame")
+#	var height = $ItemDescription/GridContainer.rect_size.y
+#	adjusted_pos = Vector2(get_local_mouse_position().x + 45, -height)
 	var lines = $ItemDescription/Body/ItemDescription.get_line_count()
 	if lines == 8:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -200)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -194)
 	elif lines == 7:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -176)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -168)
 	elif lines == 6:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -146)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -144)
 	elif lines == 5:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -120)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -118)
 	elif lines == 4:
 		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -93)
 	elif lines == 3:
-		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -68)
+		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -66)
 	else:
 		adjusted_pos = Vector2(get_local_mouse_position().x + 45, -42)
 	if item:

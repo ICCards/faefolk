@@ -35,6 +35,9 @@ func swing(item_name, direction):
 		elif item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
 			animation = "sword_swing_" + direction.to_lower()
 			player_animation_player.play(animation)
+		elif item_name == "scythe":
+			animation = "scythe_swing_" + direction.to_lower()
+			player_animation_player.play(animation)
 		else:
 			set_swing_collision_layer_and_position(item_name, direction)
 			animation = "swing_" + direction.to_lower()

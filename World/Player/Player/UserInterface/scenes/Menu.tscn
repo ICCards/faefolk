@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Images/placable_object_preview/tent.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Images/Inventory UI/tabs/skills.png" type="Texture" id=14]
-[ext_resource path="res://Characters/Weapon swings/sword/left.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stone chest.png" type="Texture" id=18]
@@ -1125,6 +1124,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
+frame = 29
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -1196,7 +1196,6 @@ hframes = 4
 [node name="ToolEquipped" type="Sprite" parent="Inventory/CompositeSprites"]
 visible = false
 position = Vector2( 0, -16 )
-texture = ExtResource( 15 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Inventory/CompositeSprites"]

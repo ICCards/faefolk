@@ -11,7 +11,6 @@ onready var snow = $GeneratedTiles/SnowTiles
 onready var ocean = $GeneratedTiles/AnimatedOceanTiles
 onready var wetSand = $GeneratedTiles/WetSandBeachBorder
 onready var sand = $GeneratedTiles/DrySandTiles
-onready var desert = $GeneratedTiles/DesertTiles
 onready var Players = $Players
 
 onready var Input_controller_template = preload("res://World/Player/PlayerTemplate/InputControllerTemplate.tscn")
@@ -391,8 +390,6 @@ func update_tile_bitmask_regions():
 	yield(get_tree().create_timer(0.5), "timeout")
 	forest.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
-	desert.update_bitmask_region()
-	yield(get_tree().create_timer(0.5), "timeout")
 	wetSand.update_bitmask_region()
 
 
@@ -405,30 +402,30 @@ func spawn_animals():
 func set_water_tiles():
 	for x in range(300): # fill ocean
 		for y in range(300):
-			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
+			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
 				wetSand.set_cell(x, y, 0)
-				ocean.set_cell(x, y, 0)
+				ocean.set_cell(x, y, 3)
+				$GeneratedTiles/BottomOcean.set_cell(x,y,0)
+				$GeneratedTiles/TopOcean.set_cell(x,y,0)
 				validTiles.set_cell(x, y, -1)
 	for loc in ocean.get_used_cells(): # remove outer layer to show wet sand
 		if sand.get_cellv(loc+Vector2(1,0)) != -1 or sand.get_cellv(loc+Vector2(-1,0)) != -1 or sand.get_cellv(loc+Vector2(0,1)) != -1 or sand.get_cellv(loc+Vector2(0,-1)) != -1:
 			ocean.set_cellv(loc, -1)
+			$GeneratedTiles/BottomOcean.set_cellv(loc,-1)
+			$GeneratedTiles/TopOcean.set_cellv(loc,-1)
 	for x in range(300): # fill empty tiles
 		for y in range(300):
-			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and desert.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
+			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
 				Tiles._set_cell(sand, x, y, 0)
-	for cell in ocean.get_used_cells(): # ocean movement effect
-		if Tiles.isCenterBitmaskTile(cell, ocean):
-			if Util.chance(50):
-				$GeneratedTiles/WaveTiles.set_cellv(cell, rng.randi_range(0, 4))
 	
 func fill_biome_gaps(map):
 	for i in range(2):
-		for loc in sand.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, desert) != 4:
-				Tiles._set_cell(sand, loc.x+1, loc.y, 0)
-				Tiles._set_cell(sand, loc.x-1, loc.y, 0)
-				Tiles._set_cell(sand, loc.x, loc.y+1, 0)
-				Tiles._set_cell(sand, loc.x, loc.y-1, 0)
+#		for loc in sand.get_used_cells():
+#			if Tiles.return_neighboring_cells(loc, desert) != 4:
+#				Tiles._set_cell(sand, loc.x+1, loc.y, 0)
+#				Tiles._set_cell(sand, loc.x-1, loc.y, 0)
+#				Tiles._set_cell(sand, loc.x, loc.y+1, 0)
+#				Tiles._set_cell(sand, loc.x, loc.y-1, 0)
 		for loc in dirt.get_used_cells():
 			if Tiles.return_neighboring_cells(loc, dirt) != 4:
 				dirt.set_cellv(loc + Vector2(1, 0), 0)
@@ -453,12 +450,6 @@ func fill_biome_gaps(map):
 				forest.set_cellv(loc + Vector2(-1, 0), 0)
 				forest.set_cellv(loc + Vector2(0, 1), 0)
 				forest.set_cellv(loc + Vector2(0, -1), 0)
-		for loc in desert.get_used_cells():
-			if Tiles.return_neighboring_cells(loc, desert) != 4:
-				desert.set_cellv(loc + Vector2(1, 0), 0)
-				desert.set_cellv(loc + Vector2(-1, 0), 0)
-				desert.set_cellv(loc + Vector2(0, 1), 0)
-				desert.set_cellv(loc + Vector2(0, -1), 0)
 	yield(get_tree().create_timer(0.25), "timeout")
 	
 
@@ -473,12 +464,11 @@ func check_and_remove_invalid_autotiles(map):
 		for cell in ocean.get_used_cells():
 			if not Tiles.isValidAutoTile(cell, ocean):
 				ocean.set_cellv(cell, -1)
+				$GeneratedTiles/BottomOcean.set_cellv(cell, -1)
+				$GeneratedTiles/TopOcean.set_cellv(cell, -1)
 		for cell in snow.get_used_cells():
 			if not Tiles.isValidAutoTile(cell, snow):
 				snow.set_cellv(cell, -1)
-		for cell in desert.get_used_cells():
-			if not Tiles.isValidAutoTile(cell, desert):
-				desert.set_cellv(cell, -1)
 		for cell in dirt.get_used_cells():
 			if not Tiles.isValidAutoTile(cell, dirt):
 				dirt.set_cellv(cell, -1)

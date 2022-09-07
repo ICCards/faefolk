@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/body.png-0ca6c4f45e0245f9b17d27cd7e8a90ba.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Characters/Human/male/CAST FISHING/body/left/body.png"
+dest_files=[ "res://.import/body.png-0ca6c4f45e0245f9b17d27cd7e8a90ba.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

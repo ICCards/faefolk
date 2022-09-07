@@ -8,7 +8,6 @@ var bounce = 0.4
 
 var fishable = true
 var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
-var game_timer = 20.0
 
 func set_active():
 	visible = true
@@ -30,11 +29,10 @@ func start():
 	get_node("Fish").start()
 	
 func start_game_timer():
+	$GameTimer.set_wait_time(get_node("Fish").game_timer) 
+	$GameTimer.start()
 	$Tween.interpolate_property($TimerProgress, "rect_size",
-		Vector2(3,128), Vector2(3,0), game_timer,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($TimerProgress, "color",
-		Color("00ff00"), Color("ff0000"), game_timer,
+		Vector2(3,128), Vector2(3,0), get_node("Fish").game_timer,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
@@ -77,12 +75,11 @@ func _physics_process(delta):
 		var g = range_lerp($Progress.value/10, 10, 50, 0, 1)
 		$Progress.modulate = Color(r, g, 0)
 		get_parent().set_moving_fish_line_position($Progress.value)
-					
-		
+
+
 func caught_fish():
 	$Tween.stop_all()
 	hide()
-	#$AnimationPlayer.play("fade")
 	get_parent().caught_fish(get_node("Fish").fish_data[0])
 	get_parent().mini_game_active = false
 	get_node("Fish").stop_fish_movement()
@@ -94,11 +91,8 @@ func lost_fish():
 	get_node("Fish").stop_fish_movement()
 	get_parent().lost_fish()
 
-
 func _on_Clicker_button_down():
 	hookVelocity -= .5
 
-
-
 func _on_GameTimer_timeout():
-	pass # Replace with function body.
+	lost_fish()

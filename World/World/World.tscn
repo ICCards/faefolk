@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://Assets/Images/Animations/fire pedestal tall/fire_pedestal_tall.tres" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/Animations/fire pedestal/fire_pedestal.tres" type="Texture" id=12]
 [ext_resource path="res://Assets/tilesets/CL_MainLev_winter.png" type="Texture" id=13]
-[ext_resource path="res://Assets/tilesets/MainLev2.0.png" type="Texture" id=14]
 [ext_resource path="res://World/Objects/Nature/Particles/RoamingStorm.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/a/wave1.tres" type="Texture" id=16]
 [ext_resource path="res://Assets/Images/Animations/ocean/waves/d/waveD.tres" type="Texture" id=17]
@@ -23,7 +22,9 @@
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/stone autotile.tres" type="TileSet" id=21]
 [ext_resource path="res://Assets/tilesets/Scaled_Camp_Graves.png" type="Texture" id=22]
 [ext_resource path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Images/Animations/new ocean/Water/ocean_bottom.tres" type="Texture" id=24]
 [ext_resource path="res://Assets/stone wall final.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Images/Animations/new ocean/Water/ocean_top.tres" type="Texture" id=26]
 
 [sub_resource type="NavigationPolygon" id=266]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -321,31 +322,6 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=262]
-0/name = "MainLev2.0.png 0"
-0/texture = ExtResource( 14 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 320, 992, 928, 192 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 255, Vector2( 0, 1 ), 507, Vector2( 1, 0 ), 447, Vector2( 1, 1 ), 510, Vector2( 2, 0 ), 27, Vector2( 2, 1 ), 216, Vector2( 3, 0 ), 54, Vector2( 3, 1 ), 432, Vector2( 5, 2 ), 432, Vector2( 5, 3 ), 438, Vector2( 5, 4 ), 438, Vector2( 5, 5 ), 438, Vector2( 5, 6 ), 54, Vector2( 6, 2 ), 504, Vector2( 6, 3 ), 511, Vector2( 6, 4 ), 511, Vector2( 6, 5 ), 511, Vector2( 6, 6 ), 63, Vector2( 7, 2 ), 504, Vector2( 7, 3 ), 511, Vector2( 7, 4 ), 511, Vector2( 7, 5 ), 511, Vector2( 7, 6 ), 63, Vector2( 8, 2 ), 504, Vector2( 8, 3 ), 511, Vector2( 8, 4 ), 511, Vector2( 8, 5 ), 511, Vector2( 8, 6 ), 63, Vector2( 9, 2 ), 216, Vector2( 9, 3 ), 219, Vector2( 9, 4 ), 219, Vector2( 9, 5 ), 219, Vector2( 9, 6 ), 27, Vector2( 20, 0 ), 511, Vector2( 20, 1 ), 511, Vector2( 20, 2 ), 511, Vector2( 20, 3 ), 511, Vector2( 20, 4 ), 511, Vector2( 21, 0 ), 511, Vector2( 21, 1 ), 511, Vector2( 21, 2 ), 511, Vector2( 21, 3 ), 511, Vector2( 21, 4 ), 511, Vector2( 22, 0 ), 511, Vector2( 22, 1 ), 511, Vector2( 22, 2 ), 511, Vector2( 22, 3 ), 511, Vector2( 22, 4 ), 511, Vector2( 23, 0 ), 511, Vector2( 23, 1 ), 511, Vector2( 23, 2 ), 511, Vector2( 23, 3 ), 511, Vector2( 23, 4 ), 511, Vector2( 24, 0 ), 511, Vector2( 24, 1 ), 511, Vector2( 24, 2 ), 511, Vector2( 24, 3 ), 511, Vector2( 24, 4 ), 511, Vector2( 25, 0 ), 511, Vector2( 25, 1 ), 511, Vector2( 25, 2 ), 511, Vector2( 25, 3 ), 511, Vector2( 25, 4 ), 511, Vector2( 26, 0 ), 511, Vector2( 26, 1 ), 511, Vector2( 26, 2 ), 511, Vector2( 26, 3 ), 511, Vector2( 26, 4 ), 511, Vector2( 27, 0 ), 511, Vector2( 27, 1 ), 511, Vector2( 27, 2 ), 511, Vector2( 27, 3 ), 511, Vector2( 27, 4 ), 511, Vector2( 28, 0 ), 511, Vector2( 28, 1 ), 511, Vector2( 28, 2 ), 511, Vector2( 28, 3 ), 511, Vector2( 28, 4 ), 511 ]
-0/autotile/icon_coordinate = Vector2( 0, 0 )
-0/autotile/tile_size = Vector2( 32, 32 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
 [sub_resource type="TileSet" id=260]
 0/name = "CL_MainLev.png 0"
 0/texture = ExtResource( 6 )
@@ -451,6 +427,38 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
+
+[sub_resource type="TileSet" id=355]
+0/name = "ocean_bottom.tres 0"
+0/texture = ExtResource( 24 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=356]
+0/name = "ocean_top.tres 0"
+0/texture = ExtResource( 26 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
 
 [sub_resource type="TileSet" id=233]
 0/name = "CL_Crafting.png 0"
@@ -1462,10 +1470,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="DesertTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = SubResource( 262 )
+[node name="AnimatedOceanTiles" type="TileMap" parent="GeneratedTiles"]
+modulate = Color( 1, 1, 0.752941, 1 )
+tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
+tile_data = PoolIntArray( 131075, 3, 0, 131076, 3, 1, 131077, 3, 1, 131078, 3, 2, 196611, 3, 65536, 196612, 3, 65537, 196613, 3, 65537, 196614, 3, 65538, 262147, 3, 131072, 262148, 3, 131073, 262149, 3, 131073, 262150, 3, 131074 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1476,6 +1486,7 @@ z_index = -1
 tile_set = SubResource( 260 )
 cell_size = Vector2( 32, 32 )
 format = 1
+tile_data = PoolIntArray( 131093, 0, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1490,14 +1501,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimatedOceanTiles" type="TileMap" parent="GeneratedTiles"]
-tile_set = ExtResource( 3 )
-cell_size = Vector2( 32, 32 )
-format = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="WaveTiles" type="TileMap" parent="GeneratedTiles"]
 tile_set = SubResource( 265 )
 cell_size = Vector2( 32, 32 )
@@ -1505,6 +1508,16 @@ format = 1
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="BottomOcean" type="TileMap" parent="GeneratedTiles"]
+tile_set = SubResource( 355 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="TopOcean" type="TileMap" parent="GeneratedTiles"]
+tile_set = SubResource( 356 )
+cell_size = Vector2( 32, 32 )
+format = 1
 
 [node name="PlacableTiles" type="YSort" parent="."]
 __meta__ = {

@@ -26,13 +26,19 @@ func set_item(nm, qt, health):
 
 func hover_item():
 	$Tween.interpolate_property($Image, "rect_scale",
-		$Image.rect_scale, Vector2(1.1, 1.1), 0.075,
+		$Image.rect_scale, Vector2(1.15, 1.15), 0.075,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Image, "rect_position",
+		$Image.rect_position, Vector2(1, 1), 0.075,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 	 
 func exit_item():
 	$Tween.interpolate_property($Image, "rect_scale",
 		$Image.rect_scale, Vector2(1.0, 1.0), 0.075,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Image, "rect_position",
+		$Image.rect_position, Vector2(3.0, 3.0), 0.075,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
