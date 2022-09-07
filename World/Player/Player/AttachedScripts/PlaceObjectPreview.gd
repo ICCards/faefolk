@@ -107,7 +107,6 @@ func set_dimensions():
 			$ItemToPlace.rect_scale = Vector2(1, 1)
 		DOOR:
 			$ItemToPlace.visible = true
-#			$ColorIndicator.tile_size =  Vector2(1, 1)
 			$ItemToPlace.rect_scale = Vector2(1, 1)
 
 
@@ -195,14 +194,6 @@ func place_buildings_state():
 func place_sleeping_bag_state():
 	get_rotation_index()
 	var direction = directions[direction_index]
-#	$RotateIcon.visible = true
-#	$ColorIndicator.visible = true
-#	$ColorIndicator.scale = Vector2(2, 1)
-#	$ScaledItemToPlace.visible = true
-#	$ScaledItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
-#	$ScaledItemToPlace.rect_scale = Vector2(0.5, 0.5)
-#	$ScaledItemToPlace.rect_size = Vector2(128, 64)
-#	$ScaledItemToPlace.rect_position = Vector2(0,0)
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	if direction == "up":
 		$ColorIndicator.tile_size = Vector2(1, 2)
@@ -287,9 +278,6 @@ func place_item_state():
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif item_name == "house" and not Tiles.validate_tiles(location, Vector2(8,4)):
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif item_name == "stone wall" and not Tiles.return_if_valid_wall_cell(location, get_node("/root/World/PlacableTiles/BuildingTiles")):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:

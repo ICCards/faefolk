@@ -110,6 +110,7 @@ margin_left = -49.0
 margin_top = -39.0
 margin_right = 1093.0
 margin_bottom = 657.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
 script = ExtResource( 19 )
 

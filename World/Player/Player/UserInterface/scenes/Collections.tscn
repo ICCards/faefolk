@@ -974,5 +974,6 @@ texture = SubResource( 60 )
 [connection signal="mouse_entered" from="CropCollection/yellow onion" to="CropCollection" method="_on_yellow_onion_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/yellow onion" to="CropCollection" method="_on_yellow_onion_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/yellow pepper" to="CropCollection" method="_on_yellow_pepper_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/yellow pepper" to="CropCollection" method="_on_yellow_pepper_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/zucchinni" to="CropCollection" method="_on_zucchinni_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/zucchinni" to="CropCollection" method="_on_zucchinni_mouse_exited"]

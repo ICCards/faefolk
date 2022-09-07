@@ -612,33 +612,33 @@ func returnToolSprite(toolName, direction):
 		"stone watering can":
 			match direction:
 				"watering_down":
-					 return human_male_can.down
+					 return watering_can.down
 				"watering_up":
 					 return null
 				"watering_left":
-					 return human_male_can.left
+					 return watering_can.left
 				"watering_right":
-					 return human_male_can.right
+					 return watering_can.right
 		"bronze watering can":
 			match direction:
 				"watering_down":
-					 return human_male_can.down
+					 return watering_can.down
 				"watering_up":
 					 return null
 				"watering_left":
-					 return human_male_can.left
+					 return watering_can.left
 				"watering_right":
-					 return human_male_can.right
+					 return watering_can.right
 		"gold watering can":
 			match direction:
 				"watering_down":
-					 return human_male_can.down
+					 return watering_can.down
 				"watering_up":
 					 return null
 				"watering_left":
-					 return human_male_can.left
+					 return watering_can.left
 				"watering_right":
-					 return human_male_can.right
+					 return watering_can.right
 		"fishing rod cast":
 			match direction:
 				"cast_down":
@@ -679,61 +679,33 @@ func returnToolSprite(toolName, direction):
 					return ripples.left
 				"swim_right":
 					return ripples.right
-#			match Server.character:
-#				"human_male":
-#					match direction: 
-#						"watering_down":
-#							 return human_male_can.down
-#						"watering_up":
-#							 return null
-#						"watering_left":
-#							 return human_male_can.left
-#						"watering_right":
-#							 return human_male_can.right
-#				"human_female":
-#					match direction: 
-#						"watering_down":
-#							 return human_female_can.down
-#						"watering_up":
-#							 return null
-#						"watering_left":
-#							 return human_female_can.left
-#						"watering_right":
-#							 return human_female_can.right
-			
 
 
 var pickaxe = {
-	down = preload("res://Characters/Weapon swings/down/pickaxe.png"), 
-	up = preload("res://Characters/Weapon swings/up/pickaxe.png"), 
-	left = preload("res://Characters/Weapon swings/left/pickaxe.png"), 
-	right = preload("res://Characters/Weapon swings/right/pickaxe.png")
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/down.png"), 
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/right.png")
 }
 
 var axe = {
-	down = preload("res://Characters/Weapon swings/down/axe.png"), 
-	up =  preload("res://Characters/Weapon swings/up/axe.png"), 
-	left = preload("res://Characters/Weapon swings/left/axe.png"), 
-	right = preload("res://Characters/Weapon swings/right/axe.png")
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/axe/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/right.png")
 }
 
 var sword = {
-	down = preload("res://Characters/Weapon swings/sword/down.png"), 
-	up =  preload("res://Characters/Weapon swings/sword/up.png"), 
-	left = preload("res://Characters/Weapon swings/sword/left.png"), 
-	right = preload("res://Characters/Weapon swings/sword/right.png")
+	down = preload("res://Characters/Weapon swings/scythe sword swing/sword/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/sword/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/right.png")
 }
 
-var human_male_can = {
-	down = preload("res://Characters/Weapon swings/watering cans/human male/down.png"),
-	left = preload("res://Characters/Weapon swings/watering cans/human male/left.png"),
-	right = preload("res://Characters/Weapon swings/watering cans/human male/right.png")
-}
-
-var human_female_can = {
-	down = preload("res://Characters/Weapon swings/watering cans/human female/down.png"),
-	left = preload("res://Characters/Weapon swings/watering cans/human female/left.png"),
-	right = preload("res://Characters/Weapon swings/watering cans/human female/right.png")
+var watering_can = {
+	down = preload("res://Characters/Weapon swings/watering cans/down.png"),
+	left = preload("res://Characters/Weapon swings/watering cans/left.png"),
+	right = preload("res://Characters/Weapon swings/watering cans/right.png")
 }
 
 

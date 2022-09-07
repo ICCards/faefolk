@@ -289,7 +289,10 @@ func movement_state(delta):
 				velocity = velocity.clamped(MAX_SPEED_PATH * delta)
 			sword_swing.knockback_vector = input_vector
 		else:
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			if Sounds.current_footsteps_sound != Sounds.swimming:
+				velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			else:
+				velocity = velocity.move_toward(Vector2.ZERO, delta/3)
 		if is_walking_on_dirt:
 			move_and_collide(velocity * MAX_SPEED_DIRT)
 		else:

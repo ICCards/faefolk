@@ -6,6 +6,9 @@ var max_movement_time
 var min_distance 
 var max_distance 
 
+var alt_move_chance
+var game_timer
+
 var min_position = 88
 var max_position = -26
 
@@ -19,8 +22,7 @@ func _ready():
 func get_fish():
 	fish_data = FishData.returnOceanDay()
 	$Fish.texture = load("res://Assets/Images/inventory_icons/Fish/" + fish_data[0] + ".png")
-	set_difficulty("medium")
-	#set_difficulty("medium")
+	set_difficulty(fish_data[1])
 
 func start():
 	plan_move()
@@ -41,7 +43,7 @@ func plan_move():
 func move(target):
 	if not is_mini_game_over:
 		randomize()
-		$Tween.interpolate_property(self, "position", position, target, movement_speed+rand_range(-1,1), Tween.TRANS_BACK, Tween.EASE_OUT)
+		$Tween.interpolate_property(self, "position", position, target, movement_speed+rand_range(-0.75,0.75), Tween.TRANS_BACK, Tween.EASE_OUT)
 		$Tween.start()
 		
 		$MoveTimer.set_wait_time(rand_range(min_movement_time, max_movement_time))
@@ -64,28 +66,53 @@ func move_to_top_or_bottom():
 		move(Vector2(self.position.x, min_position))
 
 func set_difficulty(difficulty):
+	print("FISH DIFFICULTY " + difficulty)
 	match difficulty:
 		"very easy":
 			movement_speed = 3.25
 			min_movement_time = 1.0
-			max_movement_time = 2.5
-			min_distance = 30
-			max_distance = 90
+			max_movement_time = 2.0
+			min_distance = 10
+			max_distance = 80
+			game_timer = 30.0
+			alt_move_chance = 10.0
 		"easy":
 			movement_speed = 3
-			min_movement_time = 0.5
-			max_movement_time = 2.0
-			min_distance = 30
-			max_distance = 100
-		"medium":
+			min_movement_time = 0.75
+			max_movement_time = 1.75
+			min_distance = 20
+			max_distance = 90
+			game_timer = 25.0
+			alt_move_chance = 10.0
+		"medium1":
 			movement_speed = 2.75
 			min_movement_time = 0.5
 			max_movement_time = 2.0
 			min_distance = 30
-			max_distance = 115
+			max_distance = 105
+			game_timer = 20.0
+			alt_move_chance = 20.0
+		"medium2":
+			movement_speed = 2.85
+			min_movement_time = 0.5
+			max_movement_time = 1.6
+			min_distance = 20
+			max_distance = 100
+			game_timer = 15.0
+			alt_move_chance = 15.0
 		"hard":
-			movement_speed = 2.25
-			min_movement_time = 0.2
+			movement_speed = 2.6
+			min_movement_time = 0.5
 			max_movement_time = 1.5
-			min_distance = 50
-			max_distance = 150
+			min_distance = 30
+			max_distance = 100
+			game_timer = 18.0
+			alt_move_chance = 18.0
+		"very hard":
+			movement_speed = 2.5
+			min_movement_time = 0.5
+			max_movement_time = 1.5
+			min_distance = 40
+			max_distance = 105
+			game_timer = 16.0
+			alt_move_chance = 20.0

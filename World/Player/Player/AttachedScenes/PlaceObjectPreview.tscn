@@ -8,14 +8,14 @@
 [node name="PlaceObject" type="YSort"]
 script = ExtResource( 4 )
 
-[node name="ColorIndicator" parent="." instance=ExtResource( 2 )]
-
 [node name="ItemToPlace" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.627451 )
 margin_right = 32.0
 margin_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
+
+[node name="ColorIndicator" parent="." instance=ExtResource( 2 )]
 
 [node name="ScaledItemToPlace" type="TextureRect" parent="."]
 visible = false

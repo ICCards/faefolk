@@ -64,6 +64,8 @@ __meta__ = {
 texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="Hook"]
+collision_layer = 1048576
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hook/Area2D"]
 shape = SubResource( 1 )
@@ -116,8 +118,11 @@ margin_right = 31.0
 margin_bottom = 223.0
 grow_vertical = 0
 rect_rotation = 180.0
-color = Color( 0, 1, 0, 1 )
+color = Color( 0, 1, 1, 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="GameTimer" type="Timer" parent="."]
+
 [connection signal="button_down" from="Clicker" to="." method="_on_Clicker_button_down"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
