@@ -407,10 +407,10 @@ func returnICGhostUnique(unique):
 
 
 # WEAPONS #
-func returnToolSprite(toolName, direction):
+func returnToolSprite(toolName, animation):
 	match toolName:
 		"wood pickaxe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -420,7 +420,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"stone pickaxe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -430,7 +430,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"bronze pickaxe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -440,7 +440,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"iron pickaxe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -450,7 +450,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"gold pickaxe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -460,7 +460,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"wood hoe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -470,7 +470,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"stone hoe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -480,7 +480,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"bronze hoe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -490,7 +490,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"iron hoe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -500,7 +500,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"gold hoe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -510,7 +510,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"wood axe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return axe.down
 				"swing_up":
@@ -520,7 +520,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					return axe.right
 		"stone axe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return axe.down
 				"swing_up":
@@ -530,7 +530,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					return axe.right
 		"iron axe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return axe.down
 				"swing_up":
@@ -540,7 +540,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					return axe.right
 		"bronze axe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return axe.down
 				"swing_up":
@@ -550,7 +550,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					return axe.right
 		"gold axe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return axe.down
 				"swing_up":
@@ -560,7 +560,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					return axe.right
 		"wood sword":
-			match direction: 
+			match animation: 
 				"sword_swing_down":
 					 return sword.down
 				"sword_swing_up":
@@ -570,7 +570,7 @@ func returnToolSprite(toolName, direction):
 				"sword_swing_right":
 					return sword.right
 		"stone sword":
-			match direction: 
+			match animation: 
 				"sword_swing_down":
 					 return sword.down
 				"sword_swing_up":
@@ -580,7 +580,7 @@ func returnToolSprite(toolName, direction):
 				"sword_swing_right":
 					return sword.right
 		"bronze sword":
-			match direction: 
+			match animation: 
 				"sword_swing_down":
 					 return sword.down
 				"sword_swing_up":
@@ -590,7 +590,7 @@ func returnToolSprite(toolName, direction):
 				"sword_swing_right":
 					return sword.right
 		"iron sword":
-			match direction: 
+			match animation: 
 				"sword_swing_down":
 					 return sword.down
 				"sword_swing_up":
@@ -600,7 +600,7 @@ func returnToolSprite(toolName, direction):
 				"sword_swing_right":
 					return sword.right
 		"gold sword":
-			match direction: 
+			match animation: 
 				"sword_swing_down":
 					 return sword.down
 				"sword_swing_up":
@@ -610,7 +610,7 @@ func returnToolSprite(toolName, direction):
 				"sword_swing_right":
 					return sword.right
 		"stone watering can":
-			match direction:
+			match animation:
 				"watering_down":
 					 return watering_can.down
 				"watering_up":
@@ -620,7 +620,7 @@ func returnToolSprite(toolName, direction):
 				"watering_right":
 					 return watering_can.right
 		"bronze watering can":
-			match direction:
+			match animation:
 				"watering_down":
 					 return watering_can.down
 				"watering_up":
@@ -630,7 +630,7 @@ func returnToolSprite(toolName, direction):
 				"watering_right":
 					 return watering_can.right
 		"gold watering can":
-			match direction:
+			match animation:
 				"watering_down":
 					 return watering_can.down
 				"watering_up":
@@ -640,7 +640,7 @@ func returnToolSprite(toolName, direction):
 				"watering_right":
 					 return watering_can.right
 		"fishing rod cast":
-			match direction:
+			match animation:
 				"cast_down":
 					return fishing_rod_cast.up
 				"cast_up":
@@ -650,7 +650,7 @@ func returnToolSprite(toolName, direction):
 				"cast_right":
 					return fishing_rod_cast.right
 		"fishing rod retract":
-			match direction:
+			match animation:
 				"retract_down":
 					return fishing_rod_retract.down
 				"retract_up":
@@ -660,7 +660,7 @@ func returnToolSprite(toolName, direction):
 				"retract_right":
 					return fishing_rod_retract.right
 		"fishing rod struggle":
-			match direction:
+			match animation:
 				"struggle_down":
 					return fishing_rod_struggle.down
 				"struggle_up":
@@ -670,7 +670,7 @@ func returnToolSprite(toolName, direction):
 				"struggle_right":
 					return fishing_rod_struggle.right
 		"swim":
-			match direction:
+			match animation:
 				"swim_down":
 					return ripples.down
 				"swim_up":
@@ -679,6 +679,16 @@ func returnToolSprite(toolName, direction):
 					return ripples.left
 				"swim_right":
 					return ripples.right
+		"scythe":
+			match animation:
+				"sword_swing_down":
+					return scythe.down
+				"sword_swing_up":
+					return scythe.up
+				"sword_swing_left":
+					return scythe.left
+				"sword_swing_right":
+					return scythe.right
 
 
 var pickaxe = {
@@ -701,6 +711,15 @@ var sword = {
 	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/left.png"), 
 	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/right.png")
 }
+
+var scythe = {
+	down = preload("res://Characters/Weapon swings/scythe sword swing/scythe/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/scythe/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/scythe/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/scythe/right.png")
+}
+
+
 
 var watering_can = {
 	down = preload("res://Characters/Weapon swings/watering cans/down.png"),

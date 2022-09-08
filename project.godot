@@ -255,6 +255,7 @@ slot10={
 2d_physics/layer_9="SwordSwingLayer"
 2d_physics/layer_10="WoodFootsteps"
 2d_physics/layer_11="StoneFootsteps"
+2d_physics/layer_12="ScytheBreakLayer"
 2d_physics/layer_13="InsideTreeTopLayer"
 2d_physics/layer_14="DetectOverlappingObject"
 2d_physics/layer_16="EnterSleepingBag"

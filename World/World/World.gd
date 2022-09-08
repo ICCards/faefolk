@@ -1,4 +1,5 @@
 extends YSort
+#ffffc0
 
 onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles
@@ -404,7 +405,7 @@ func set_water_tiles():
 		for y in range(300):
 			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
 				wetSand.set_cell(x, y, 0)
-				ocean.set_cell(x, y, 3)
+				ocean.set_cell(x, y, 5)
 				$GeneratedTiles/BottomOcean.set_cell(x,y,0)
 				$GeneratedTiles/TopOcean.set_cell(x,y,0)
 				validTiles.set_cell(x, y, -1)
@@ -413,19 +414,25 @@ func set_water_tiles():
 			ocean.set_cellv(loc, -1)
 			$GeneratedTiles/BottomOcean.set_cellv(loc,-1)
 			$GeneratedTiles/TopOcean.set_cellv(loc,-1)
-	for x in range(300): # fill empty tiles
-		for y in range(300):
-			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
-				Tiles._set_cell(sand, x, y, 0)
+	for loc in wetSand.get_used_cells(): # remove outer layer to show wet sand
+		if wetSand.get_cellv(loc+Vector2(1,0)) != -1 or wetSand.get_cellv(loc+Vector2(-1,0)) != -1 or wetSand.get_cellv(loc+Vector2(0,1)) != -1 or wetSand.get_cellv(loc+Vector2(0,-1)) != -1:
+			wetSand.set_cellv(loc+Vector2(1,0), 0)
+			wetSand.set_cellv(loc+Vector2(-1,0), 0)
+			wetSand.set_cellv(loc+Vector2(0,1), 0)
+			wetSand.set_cellv(loc+Vector2(0,-1), 0)
+#	for x in range(300): # fill empty tiles
+#		for y in range(300):
+#			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
+#				Tiles._set_cell(sand, x, y, 0)
 	
 func fill_biome_gaps(map):
 	for i in range(2):
-#		for loc in sand.get_used_cells():
-#			if Tiles.return_neighboring_cells(loc, desert) != 4:
-#				Tiles._set_cell(sand, loc.x+1, loc.y, 0)
-#				Tiles._set_cell(sand, loc.x-1, loc.y, 0)
-#				Tiles._set_cell(sand, loc.x, loc.y+1, 0)
-#				Tiles._set_cell(sand, loc.x, loc.y-1, 0)
+		for loc in sand.get_used_cells():
+			if Tiles.return_neighboring_cells(loc, sand) != 4:
+				Tiles._set_cell(sand, loc.x+1, loc.y, 0)
+				Tiles._set_cell(sand, loc.x-1, loc.y, 0)
+				Tiles._set_cell(sand, loc.x, loc.y+1, 0)
+				Tiles._set_cell(sand, loc.x, loc.y-1, 0)
 		for loc in dirt.get_used_cells():
 			if Tiles.return_neighboring_cells(loc, dirt) != 4:
 				dirt.set_cellv(loc + Vector2(1, 0), 0)

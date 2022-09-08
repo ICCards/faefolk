@@ -32,12 +32,12 @@ func swing(item_name, direction):
 			set_watered_tile()
 			animation = "watering_" + direction.to_lower()
 			player_animation_player.play("watering")
-		elif item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
+		elif item_name == "scythe" or item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
+			if item_name == "scythe":
+				player_animation_player.play("scythe_swing_" + direction.to_lower())
+			else:
+				player_animation_player.play("sword_swing_" + direction.to_lower())
 			animation = "sword_swing_" + direction.to_lower()
-			player_animation_player.play(animation)
-		elif item_name == "scythe":
-			animation = "scythe_swing_" + direction.to_lower()
-			player_animation_player.play(animation)
 		else:
 			set_swing_collision_layer_and_position(item_name, direction)
 			animation = "swing_" + direction.to_lower()
