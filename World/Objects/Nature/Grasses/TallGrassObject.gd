@@ -7,15 +7,25 @@ var bodyEnteredFlag2 = false
 var grass
 var biome
 var grass_list
+var front_health
+var back_heath
+var is_front_visible = true
+var is_back_visible = true
 
 func _ready():
-	if biome == "snow":
+	rng.randomize()
+	front_health = rng.randi_range(1,3)
+	back_heath = rng.randi_range(1,3)
+	if biome == "snowsss":
 		grass = Images.green_grass_winter
 	else:
+		$FrontBreak.self_modulate = Color("008d00")
+		$BackBreak.self_modulate = Color("008d00")
 		grass = Images.green_grass
 	$Front.texture = grass[0]
 	$Back.texture = grass[1]
 
+#008d00
 
 func PlayEffect(player_id):
 	play_sound_effect()
@@ -52,3 +62,28 @@ func _on_BackArea2D_body_entered(body):
 
 func _on_BackArea2D_body_exited(body):
 	bodyEnteredFlag2 = false
+
+
+func _on_Area2D_area_entered(area):
+	front_health -= 1
+	if front_health == 0:
+		$AnimationPlayer.play("front break")
+		yield($AnimationPlayer, "animation_finished")
+		is_front_visible = false
+		destroy()
+	else:
+		$AnimationPlayer.play("animate front")
+
+func _on_BackArea2D_area_entered(area):
+	back_heath -= 1
+	if back_heath == 0:
+		$AnimationPlayer2.play("back break")
+		yield($AnimationPlayer2, "animation_finished")
+		is_back_visible = false
+		destroy()
+	else:
+		$AnimationPlayer2.play("animate back")
+
+func destroy():
+	if not is_back_visible and not is_front_visible:
+		queue_free()

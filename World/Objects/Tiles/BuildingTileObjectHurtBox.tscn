@@ -311,10 +311,13 @@ texture = ExtResource( 17 )
 text = "25"
 
 [node name="WoodArea" type="Area2D" parent="UpgradeWallLabel"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpgradeWallLabel/WoodArea"]
 position = Vector2( 27.5, 23.5 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="StoneArea" type="Area2D" parent="UpgradeWallLabel"]
 position = Vector2( 0, 12 )
@@ -322,6 +325,7 @@ position = Vector2( 0, 12 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpgradeWallLabel/StoneArea"]
 position = Vector2( 27.5, 23.5 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="MetalArea" type="Area2D" parent="UpgradeWallLabel"]
 position = Vector2( 0, 24 )
@@ -329,6 +333,7 @@ position = Vector2( 0, 24 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpgradeWallLabel/MetalArea"]
 position = Vector2( 27.5, 23.5 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="ArmoredArea" type="Area2D" parent="UpgradeWallLabel"]
 position = Vector2( 0, 36 )
@@ -336,6 +341,7 @@ position = Vector2( 0, 36 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpgradeWallLabel/ArmoredArea"]
 position = Vector2( 27.5, 23.5 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="UpgradeWallLabel"]
 

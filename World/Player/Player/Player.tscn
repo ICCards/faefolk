@@ -1,22 +1,18 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Human/male/SWORD SWING/body/up/body.png" type="Texture" id=3]
-[ext_resource path="res://Characters/Human/male/SWORD SWING/body/up/arms.png" type="Texture" id=4]
+[ext_resource path="res://Characters/Weapon swings/scythe sword swing/scythe/right.png" type="Texture" id=3]
+[ext_resource path="res://Characters/Human/male/SWORD SWING/body/down/body.png" type="Texture" id=4]
 [ext_resource path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
-[ext_resource path="res://Characters/Human/male/SWORD SWING/assets/up/head_attribute/hair.png" type="Texture" id=7]
+[ext_resource path="res://Characters/Human/male/SWORD SWING/body/down/arms.png" type="Texture" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://Characters/Human/male/SWORD SWING/assets/up/shirts/shirt.png" type="Texture" id=9]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AttachedText.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
-[ext_resource path="res://Characters/Human/male/SWORD SWING/assets/up/pants/pants.png" type="Texture" id=13]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" type="Script" id=14]
-[ext_resource path="res://Characters/Human/male/SWORD SWING/assets/up/shoes/shoes.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
-[ext_resource path="res://Characters/Weapon swings/scythe sword swing/sword/up.png" type="Texture" id=17]
 [ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=18]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
 [ext_resource path="res://World/Player/Player/AttachedScripts/DetectPathType.gd" type="Script" id=23]
@@ -26,7 +22,6 @@
 [ext_resource path="res://World/Player/Player/AttachedScripts/Swinging.gd" type="Script" id=29]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 [ext_resource path="res://World/Player/Player/PlayerHitEffect.tscn" type="PackedScene" id=33]
-[ext_resource path="res://World/Player/Player/AttachedScripts/SwordSwing.gd" type="Script" id=34]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -341,6 +336,42 @@ tracks/25/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0 ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:position")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -67 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:rotation_degrees")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:disabled")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=55]
@@ -2566,6 +2597,562 @@ tracks/10/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=65]
+resource_name = "scythe_swing_down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ToolEquipped:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 15 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=66]
+resource_name = "scythe_swing_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ToolEquipped:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -39, -8 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=67]
+resource_name = "scythe_swing_right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ToolEquipped:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 39, -8 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=64]
+resource_name = "scythe_swing_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ToolEquipped:show_behind_parent")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("ToolEquipped:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -56 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("../Swing/ScytheSwing/CollisionShape2D:disabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
 [sub_resource type="Animation" id=49]
 resource_name = "set cast first frame"
 length = 0.01
@@ -3456,6 +4043,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("ToolEquipped:show_behind_parent")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=29]
 resource_name = "sword_swing_right"
@@ -4000,9 +4599,19 @@ tracks/17/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1, 1 )
 
+[sub_resource type="GDScript" id=68]
+script/source = "extends Area2D
+
+var knockback_vector = Vector2.ZERO
+"
+
+[sub_resource type="CapsuleShape2D" id=69]
+radius = 24.0
+height = 28.4444
+
 [sub_resource type="CapsuleShape2D" id=28]
-radius = 23.7778
-height = 13.3333
+radius = 39.0
+height = 28.4444
 
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 39.746
@@ -4264,31 +4873,28 @@ __meta__ = {
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 hframes = 4
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 7 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 4 )
+texture = ExtResource( 7 )
 hframes = 4
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 9 )
 hframes = 4
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 13 )
 hframes = 4
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
@@ -4299,12 +4905,11 @@ hframes = 4
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 15 )
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 17 )
+texture = ExtResource( 3 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
@@ -4320,6 +4925,10 @@ anims/harvest_up = SubResource( 60 )
 anims/idle = SubResource( 4 )
 anims/movement = SubResource( 38 )
 anims/retract = SubResource( 44 )
+anims/scythe_swing_down = SubResource( 65 )
+anims/scythe_swing_left = SubResource( 66 )
+anims/scythe_swing_right = SubResource( 67 )
+anims/scythe_swing_up = SubResource( 64 )
 "anims/set cast first frame" = SubResource( 49 )
 anims/sleep = SubResource( 33 )
 anims/struggle = SubResource( 57 )
@@ -4339,19 +4948,29 @@ __meta__ = {
 }
 
 [node name="AxePickaxeSwing" type="Area2D" parent="Swing"]
+collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/AxePickaxeSwing"]
 shape = SubResource( 2 )
 
 [node name="SwordSwing" type="Area2D" parent="Swing"]
-visible = false
-collision_layer = 256
-collision_mask = 0
-script = ExtResource( 34 )
+collision_layer = 0
+collision_mask = 2304
+script = SubResource( 68 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/SwordSwing"]
 position = Vector2( 0, -55 )
+rotation = 1.5708
+shape = SubResource( 69 )
+disabled = true
+
+[node name="ScytheSwing" type="Area2D" parent="Swing"]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/ScytheSwing"]
+position = Vector2( 0, -67 )
 rotation = 1.5708
 shape = SubResource( 28 )
 disabled = true
@@ -4385,7 +5004,6 @@ scale_amount_random = 1.0
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="Swing"]
 
 [node name="Area2Ds" type="Node2D" parent="."]
-visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -4421,6 +5039,7 @@ position = Vector2( 0, -43 )
 shape = SubResource( 10 )
 
 [node name="HurtBox" type="Area2D" parent="Area2Ds"]
+visible = false
 collision_layer = 0
 collision_mask = 128
 script = ExtResource( 32 )

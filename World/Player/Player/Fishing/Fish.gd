@@ -86,23 +86,23 @@ func set_difficulty(difficulty):
 			alt_move_chance = 10.0
 		"medium1":
 			movement_speed = 2.75
-			min_movement_time = 0.5
-			max_movement_time = 2.0
+			min_movement_time = 0.8
+			max_movement_time = 1.8
 			min_distance = 30
 			max_distance = 105
 			game_timer = 20.0
 			alt_move_chance = 20.0
 		"medium2":
 			movement_speed = 2.85
-			min_movement_time = 0.5
+			min_movement_time = 0.6
 			max_movement_time = 1.6
 			min_distance = 20
 			max_distance = 100
-			game_timer = 15.0
+			game_timer = 14.0
 			alt_move_chance = 15.0
 		"hard":
 			movement_speed = 2.6
-			min_movement_time = 0.5
+			min_movement_time = 0.7
 			max_movement_time = 1.5
 			min_distance = 30
 			max_distance = 100
@@ -110,7 +110,7 @@ func set_difficulty(difficulty):
 			alt_move_chance = 18.0
 		"very hard":
 			movement_speed = 2.5
-			min_movement_time = 0.5
+			min_movement_time = 0.6
 			max_movement_time = 1.5
 			min_distance = 40
 			max_distance = 105
