@@ -38,6 +38,9 @@ func swing(item_name, direction):
 			else:
 				player_animation_player.play("sword_swing_" + direction.to_lower())
 			animation = "sword_swing_" + direction.to_lower()
+			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Tools/sword whoosh.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+			sound_effects.play()
 		else:
 			set_swing_collision_layer_and_position(item_name, direction)
 			animation = "swing_" + direction.to_lower()
