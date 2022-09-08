@@ -16,7 +16,7 @@ func _ready():
 	rng.randomize()
 	front_health = rng.randi_range(1,3)
 	back_heath = rng.randi_range(1,3)
-	if biome == "snowsss":
+	if biome == "snow":
 		grass = Images.green_grass_winter
 	else:
 		$FrontBreak.self_modulate = Color("008d00")
@@ -28,9 +28,9 @@ func _ready():
 #008d00
 
 func PlayEffect(player_id):
-	play_sound_effect()
+	play_hit_effect()
 
-func play_sound_effect():
+func play_hit_effect():
 	if !bodyEnteredFlag and Server.isLoaded:
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
@@ -38,12 +38,14 @@ func play_sound_effect():
 		
 func play_back_effect():
 	if !bodyEnteredFlag2 and Server.isLoaded:
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
 		$AnimationPlayer2.play("animate back")
 
 func _on_Area2D_body_entered(_body):
 	var data = {"id": name, "n": "tall_grass", "d": "" }
 	Server.action("ON_HIT", data)
-	play_sound_effect()
+	play_hit_effect()
 	bodyEnteredFlag = true
 
 func _on_Area2D_body_exited(_body):
@@ -67,22 +69,32 @@ func _on_BackArea2D_body_exited(body):
 func _on_Area2D_area_entered(area):
 	front_health -= 1
 	if front_health == 0:
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
 		$AnimationPlayer.play("front break")
 		yield($AnimationPlayer, "animation_finished")
 		is_front_visible = false
 		destroy()
 	else:
 		$AnimationPlayer.play("animate front")
+		yield(get_tree().create_timer(rand_range(0, 0.75)), "timeout")
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
 
 func _on_BackArea2D_area_entered(area):
 	back_heath -= 1
 	if back_heath == 0:
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
 		$AnimationPlayer2.play("back break")
 		yield($AnimationPlayer2, "animation_finished")
 		is_back_visible = false
 		destroy()
 	else:
 		$AnimationPlayer2.play("animate back")
+		yield(get_tree().create_timer(rand_range(0, 0.75)), "timeout")
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
 
 func destroy():
 	if not is_back_visible and not is_front_visible:
