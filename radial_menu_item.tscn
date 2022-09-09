@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://radial_menu_hover.png" type="Texture" id=1]
-[ext_resource path="res://radial_menu.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/User interface/RadialMenu/radial_menu_hover.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/User interface/RadialMenu/radial_menu.png" type="Texture" id=2]
 [ext_resource path="res://radial_menu_item.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Images/User interface/RadialMenu/radial_menu_click_mask.bmp" type="BitMap" id=4]
 
 [node name="0" type="Control"]
 script = ExtResource( 3 )
@@ -13,12 +14,13 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -120.5
-margin_top = -253.0
+margin_top = -264.0
 margin_right = 120.5
-margin_bottom = -75.0
+margin_bottom = -86.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 1 )
+texture_click_mask = ExtResource( 4 )
 
-[connection signal="button_up" from="button" to="." method="_on_button_button_up"]
-[connection signal="pressed" from="button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="button" to="." method="_on_button_mouse_exited"]

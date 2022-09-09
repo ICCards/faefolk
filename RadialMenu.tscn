@@ -66,6 +66,7 @@ rect_rotation = -59.9999
 margin_right = 40.0
 margin_bottom = 40.0
 rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
 
 [node name="ScreenShot2022-07-19At52446Pm" type="Sprite" parent="Circle/icons"]
 position = Vector2( 0, -330 )

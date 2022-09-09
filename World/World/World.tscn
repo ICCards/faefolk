@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Assets/Wall23-x2.png" type="Texture" id=14]
 [ext_resource path="res://World/Objects/Nature/Particles/RoamingStorm.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/stone walls.png" type="Texture" id=16]
+[ext_resource path="res://Assets/stone floors corners.png" type="Texture" id=17]
 [ext_resource path="res://Assets/stone foundation.png" type="Texture" id=18]
 [ext_resource path="res://World/Map/WorldMap.tscn" type="PackedScene" id=20]
 [ext_resource path="res://World/Player/Player/UserInterface/scenes/stone autotile.tres" type="TileSet" id=21]
@@ -1207,6 +1208,31 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="TileSet" id=375]
+0/name = "stone floors corners.png 0"
+0/texture = ExtResource( 17 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 192, 128 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 16, Vector2( 0, 1 ), 144, Vector2( 0, 2 ), 146, Vector2( 0, 3 ), 18, Vector2( 1, 0 ), 432, Vector2( 1, 1 ), 438, Vector2( 1, 2 ), 54, Vector2( 1, 3 ), 48, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 2, 3 ), 56, Vector2( 3, 0 ), 216, Vector2( 3, 1 ), 219, Vector2( 3, 2 ), 27, Vector2( 3, 3 ), 24, Vector2( 4, 3 ), 50 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
 [sub_resource type="TileSet" id=234]
 0/name = "hoed_layer.png 0"
 0/texture = ExtResource( 5 )
@@ -1443,8 +1469,13 @@ cell_tile_origin = 2
 cell_y_sort = true
 format = 1
 
-[node name="PathTiles" type="TileMap" parent="PlacableTiles"]
+[node name="PathTilesOLD" type="TileMap" parent="PlacableTiles"]
 tile_set = SubResource( 374 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="PathTiles" type="TileMap" parent="PlacableTiles"]
+tile_set = SubResource( 375 )
 cell_size = Vector2( 32, 32 )
 format = 1
 

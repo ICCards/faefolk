@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/radial_menu_hover.png-2a35d7fc44fe0c699b6dc48d1fe9630a.stex"
+path="res://.import/stone floors corners.png-178af062c987f5d7b3a7a4f35fc668b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://radial_menu_hover.png"
-dest_files=[ "res://.import/radial_menu_hover.png-2a35d7fc44fe0c699b6dc48d1fe9630a.stex" ]
+source_file="res://Assets/stone floors corners.png"
+dest_files=[ "res://.import/stone floors corners.png-178af062c987f5d7b3a7a4f35fc668b2.stex" ]
 
 [params]
 
