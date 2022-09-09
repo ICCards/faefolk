@@ -14,16 +14,6 @@
              ["wood", 2,]
          ]
      },
-     "wood path": {
-         "ingredients" : [
-             ["wood", 1],
-         ]
-     },
-     "stone path": {
-         "ingredients" : [
-             ["stone", 1]
-         ]
-     },
      "torch": {
          "ingredients" : [
              ["wood", 1],
@@ -254,5 +244,20 @@
              ["rope", 2]
         ],
      },
+     "wall": {
+         "ingredients": [
+         ["wood", 1],
+         ]
+     },
+     "foundation": {
+         "ingredients": [
+         ["wood", 1],
+         ]
+     },
+     "door front": {
+         "ingredients": [
+         ["wood", 10],
+         ]
+     }
      
 }

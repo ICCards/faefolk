@@ -9,6 +9,7 @@ var biome
 var grass_list
 var front_health
 var back_heath
+var loc
 var is_front_visible = true
 var is_back_visible = true
 
@@ -17,15 +18,15 @@ func _ready():
 	front_health = rng.randi_range(1,3)
 	back_heath = rng.randi_range(1,3)
 	if biome == "snow":
+		$FrontBreak.self_modulate = Color("7dd7b4")
+		$BackBreak.self_modulate = Color("7dd7b4")
 		grass = Images.green_grass_winter
 	else:
-		$FrontBreak.self_modulate = Color("008d00")
-		$BackBreak.self_modulate = Color("008d00")
+		$FrontBreak.self_modulate = Color("99cc25")
+		$BackBreak.self_modulate = Color("99cc25")
 		grass = Images.green_grass
 	$Front.texture = grass[0]
 	$Back.texture = grass[1]
-
-#008d00
 
 func PlayEffect(player_id):
 	play_hit_effect()
@@ -76,8 +77,8 @@ func _on_Area2D_area_entered(area):
 		is_front_visible = false
 		destroy()
 	else:
+		yield(get_tree().create_timer(rand_range(0.1, 0.5)), "timeout")
 		$AnimationPlayer.play("animate front")
-		yield(get_tree().create_timer(rand_range(0, 0.75)), "timeout")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 
@@ -91,11 +92,12 @@ func _on_BackArea2D_area_entered(area):
 		is_back_visible = false
 		destroy()
 	else:
+		yield(get_tree().create_timer(rand_range(0.1, 0.5)), "timeout")
 		$AnimationPlayer2.play("animate back")
-		yield(get_tree().create_timer(rand_range(0, 0.75)), "timeout")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 
 func destroy():
 	if not is_back_visible and not is_front_visible:
+		Tiles.reset_valid_tiles(loc)
 		queue_free()

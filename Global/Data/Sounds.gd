@@ -115,6 +115,11 @@ var tree_hit = [
 	preload("res://Assets/Sound/Sound effects/Tree/Tree hit 3.mp3")
 ]
 
+var sword_whoosh = [
+	preload("res://Assets/Sound/Sound effects/Sword/sword whoosh.mp3"),
+	preload("res://Assets/Sound/Sound effects/Sword/sword whoosh 2.mp3"),
+]
+
 var tree_break = preload("res://Assets/Sound/Sound effects/Tree/Falling tree.mp3")
 var stump_break = preload("res://Assets/Sound/Sound effects/Tree/Stump break.mp3")
 var tool_break = preload("res://Assets/Sound/Sound effects/objects/tool break.mp3")

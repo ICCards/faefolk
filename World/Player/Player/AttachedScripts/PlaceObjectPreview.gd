@@ -18,7 +18,8 @@ enum {
 	PATH,
 	SEED,
 	WALL,
-	DOOR
+	DOOR,
+	FOUNDATION
 }
 
 func _ready():
@@ -34,14 +35,16 @@ func _process(delta):
 			place_sleeping_bag_state()
 		ITEM:
 			place_item_state()
-		PATH:
-			place_path_state()
+#		PATH:
+#			place_path_state()
 		SEED:
 			place_seed_state()
 		WALL:
 			place_buildings_state()
 		DOOR:
 			place_double_door_state()
+		FOUNDATION:
+			place_foundation_state()
 
 
 func initialize():
@@ -59,7 +62,11 @@ func initialize():
 		state = WALL
 	elif item_category == "BUILDING" and item_name == "double door":
 		state = DOOR
+	elif item_category == "BUILDING" and item_name == "foundation":
+		state = FOUNDATION
 	set_dimensions()
+	
+
 	
 func set_dimensions():
 	$ItemToPlace.hide()
@@ -88,27 +95,32 @@ func set_dimensions():
 				$ColorIndicator.tile_size = Vector2(2, 1)
 			else:
 				$ColorIndicator.tile_size = Vector2(1, 1)
-		PATH:
-			$ItemToPlace.visible = true
-			$RotateIcon.visible = true
-			$ItemToPlace.rect_position = Vector2(0,0)
-			$ItemToPlace.rect_scale = Vector2(1, 1)
-			$ColorIndicator.tile_size  = Vector2(1.0 , 1.0)
+#		PATH:
+#			$ItemToPlace.show()
+#			$RotateIcon.visible = true
+#			$ItemToPlace.rect_position = Vector2(0,0)
+#			$ItemToPlace.rect_scale = Vector2(1, 1)
+#			$ColorIndicator.tile_size  = Vector2(1.0 , 1.0)
 		SEED:
-			$ItemToPlace.visible = true
+			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
 			$ColorIndicator.tile_size =  Vector2(1, 1)
 			$ItemToPlace.rect_position = Vector2(0,0)
 			$ItemToPlace.rect_scale = Vector2(1, 1)
 		WALL:
-			$ItemToPlace.visible = true
+			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + "stone wall" + ".png")
 			$ColorIndicator.tile_size =  Vector2(1, 1)
 			$ItemToPlace.rect_scale = Vector2(1, 1)
 		DOOR:
-			$ItemToPlace.visible = true
+			$ItemToPlace.show()
 			$ItemToPlace.rect_scale = Vector2(1, 1)
-
+		FOUNDATION:
+			$ItemToPlace.show()
+			$ItemToPlace.texture = preload("res://Assets/Images/placable_object_preview/wood path2.png")
+			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wood path2.png")
+			$ItemToPlace.rect_scale = Vector2(1, 1)
+			$ColorIndicator.tile_size = Vector2(1, 1)
 
 #func sendAction(action,data): 
 #	match action:
@@ -118,6 +130,17 @@ func set_dimensions():
 #			Server.action("SWING", data)
 #		(PLACE_ITEM):
 #			Server.action("PLACE_ITEM", data)
+
+func place_foundation_state():
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	if Tiles.path_tiles.get_cellv(location) != -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if Input.is_action_pressed("mouse_click"):
+			place_object(item_name, location, "placable")
 
 
 func place_door_state():
@@ -182,7 +205,7 @@ func place_buildings_state():
 	$ColorIndicator.visible = true
 	$ColorIndicator.tile_size = Vector2(1, 1)
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.building_tiles):
+	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.building_tiles) or Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
@@ -287,33 +310,33 @@ func place_item_state():
 			place_object(item_name, location, "placable")
 
 
-func place_path_state():
-	get_path_rotation(item_name)
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.path_tiles.get_cellv(location) != -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	else:
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name + str(path_index), location, "placable")
+#func place_path_state():
+#	get_path_rotation(item_name)
+#	var location = Tiles.valid_tiles.world_to_map(mousePos)
+#	if Tiles.path_tiles.get_cellv(location) != -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
+#		$ColorIndicator.indicator_color = "Red"
+#		$ColorIndicator.set_indicator_color()
+#	else:
+#		$ColorIndicator.indicator_color = "Green"
+#		$ColorIndicator.set_indicator_color()
+#		if Input.is_action_pressed("mouse_click"):
+#			place_object(item_name, location, "placable")
 
 
-func get_path_rotation(path_name):
-	if path_name == "wood path" and path_index > 2:
-		path_index = 1
-	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + path_name + str(path_index) + ".png")
-	if path_name == "wood path":
-		if Input.is_action_pressed("rotate"):
-			path_index += 1
-			if path_index == 3:
-				path_index = 1
-	elif path_name == "stone path":
-		if Input.is_action_pressed("rotate"):
-			path_index += 1
-			if path_index == 5:
-				path_index = 1
+#func get_path_rotation(path_name):
+#	if path_name == "wood path" and path_index > 2:
+#		path_index = 1
+#	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + path_name + str(path_index) + ".png")
+#	if path_name == "wood path":
+#		if Input.is_action_pressed("rotate"):
+#			path_index += 1
+#			if path_index == 3:
+#				path_index = 1
+#	elif path_name == "stone path":
+#		if Input.is_action_pressed("rotate"):
+#			path_index += 1
+#			if path_index == 5:
+#				path_index = 1
 
 
 func place_seed_state():
@@ -330,7 +353,7 @@ func place_seed_state():
 
 func place_object(item_name, location, type):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		if item_name != "wall" and item_name != "door front" and item_name != "door side":
+		if item_name != "wall" and item_name != "door front" and item_name != "door side" and item_name != "foundation":
 			PlayerInventory.remove_single_object_from_hotbar()
 		var id = Uuid.v4()
 		if type == "placable":
@@ -339,7 +362,8 @@ func place_object(item_name, location, type):
 			$SoundEffects.stream = Sounds.place_object
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			if item_name == "wall" or item_name == "door front" or item_name == "door side":
+			if item_name == "wall" or item_name == "door front" or item_name == "door side" or item_name == "foundation":
+				PlayerInventory.craft_item(item_name)
 				PlaceObject.place_building_object_in_world(id, item_name, location)
 			else:
 				PlaceObject.place_object_in_world(id, item_name, location)

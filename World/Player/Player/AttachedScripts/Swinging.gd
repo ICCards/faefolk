@@ -13,6 +13,7 @@ onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
 onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
 onready var ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
 
+var rng = RandomNumberGenerator.new()
 
 var animation
 var direction
@@ -38,9 +39,14 @@ func swing(item_name, direction):
 			else:
 				player_animation_player.play("sword_swing_" + direction.to_lower())
 			animation = "sword_swing_" + direction.to_lower()
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Tools/sword whoosh.mp3")
+			rng.randomize()
+			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
+		elif item_name == null:
+			set_swing_collision_layer_and_position(item_name, direction)
+			animation = "punch_" + direction.to_lower()
+			player_animation_player.play("axe pickaxe swing")
 		else:
 			set_swing_collision_layer_and_position(item_name, direction)
 			animation = "swing_" + direction.to_lower()
@@ -61,6 +67,8 @@ func set_swing_collision_layer_and_position(tool_name, direction):
 	elif tool_name == "wood hoe" or tool_name == "stone hoe" or tool_name == "iron hoe" or tool_name == "bronze hoe" or tool_name == "gold hoe": 
 		axe_pickaxe_swing.set_collision_mask(0)
 		set_hoed_tile(direction)
+	elif tool_name == null:
+		axe_pickaxe_swing.set_collision_mask(8)
 
 func set_hoed_tile(direction):
 	var pos = Util.set_swing_position(global_position, direction)

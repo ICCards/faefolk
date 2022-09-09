@@ -3,7 +3,7 @@ extends Control
 
 onready var cam = get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id +  "/Camera2D")
 
-var buildings = ["wall", "double door", "door", "floor", "nothin", "nothin"]
+var buildings = ["wall", "double door", "foundation", "nada", "nothin", "nothin"]
 var current_item = -1
 
 func _ready():

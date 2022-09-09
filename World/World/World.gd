@@ -1,5 +1,4 @@
 extends YSort
-#ffffc0
 
 onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles
@@ -222,6 +221,7 @@ func buildMap(map):
 	Tiles.ocean_tiles = $GeneratedTiles/AnimatedOceanTiles
 	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
 	Tiles.building_tiles = $PlacableTiles/BuildingTiles
+	Tiles.foundation_tiles = $PlacableTiles/PathTiles
 	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
@@ -341,6 +341,7 @@ func buildMap(map):
 		Tiles.remove_nature_invalid_tiles(loc, "tall grass")
 		count += 1
 		var object = TallGrassObject.instance()
+		object.loc = loc
 		object.biome = map["tall_grass"][id]["b"]
 		object.name = id
 		object.position = dirt.map_to_world(loc) + Vector2(8, 32)
@@ -365,6 +366,7 @@ func buildMap(map):
 	fill_biome_gaps(map)
 	set_water_tiles()
 	check_and_remove_invalid_autotiles(map)
+	yield(get_tree().create_timer(0.5), "timeout")
 	update_tile_bitmask_regions()
 	get_node("loadingScreen").set_phase("Spawning in")
 	Server.player_state = "WORLD"

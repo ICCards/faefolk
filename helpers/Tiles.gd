@@ -6,6 +6,7 @@ var hoed_tiles = null
 var ocean_tiles = null
 var dirt_tiles = null
 var building_tiles = null
+var foundation_tiles = null
 
 func validate_tiles(location, dimensions):
 	var active = false

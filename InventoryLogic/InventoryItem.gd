@@ -24,6 +24,10 @@ func set_item(nm, qt, health):
 		$HealthIndicator.visible = true
 		set_health_bar(item_health)
 
+func set_init_hovered():
+	$Image.rect_scale = Vector2(1.15, 1.15)
+	$Image.rect_position = Vector2(1.0, 1.0)
+
 func hover_item():
 	$Tween.interpolate_property($Image, "rect_scale",
 		$Image.rect_scale, Vector2(1.15, 1.15), 0.075,

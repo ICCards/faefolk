@@ -91,8 +91,9 @@ func initialize_hotbar():
 			slots[i].removeFromSlot()
 		if PlayerInventory.hotbar.has(i):
 			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1], PlayerInventory.hotbar[i][2])
-
-
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		slots[PlayerInventory.active_item_slot].item.set_init_hovered()
+		
 func _input(_event):
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()

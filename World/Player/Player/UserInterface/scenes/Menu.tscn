@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -10,8 +10,6 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Images/placable_object_preview/torch.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood fence.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/placable_object_preview/stone path1.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/placable_object_preview/wood path1.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Images/placable_object_preview/tent.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Images/Inventory UI/tabs/skills.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood chest.png" type="Texture" id=16]
@@ -324,7 +322,6 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="Crafting" type="Control" parent="."]
-visible = false
 rect_scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
@@ -370,29 +367,11 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="WoodPathButton" type="Button" parent="Crafting/Page1"]
-margin_left = 98.0
-margin_top = 252.0
-margin_right = 194.0
-margin_bottom = 346.0
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="StonePathButton" type="Button" parent="Crafting/Page1"]
-margin_left = 272.0
-margin_top = 254.0
-margin_right = 368.0
-margin_bottom = 348.0
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
 [node name="CampfireButton" type="Button" parent="Crafting/Page1"]
-margin_left = 418.0
-margin_top = 254.0
-margin_right = 514.0
-margin_bottom = 348.0
+margin_left = 134.0
+margin_top = 268.0
+margin_right = 230.0
+margin_bottom = 362.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -407,28 +386,37 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="StoneChestButton" type="Button" parent="Crafting/Page1"]
-margin_left = -280.0
-margin_top = 400.0
-margin_right = -96.0
-margin_bottom = 540.0
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="FirePedestalButton" type="Button" parent="Crafting/Page1"]
-margin_left = -32.0
-margin_top = 366.0
-margin_right = 88.0
+margin_left = -268.0
+margin_top = 406.0
+margin_right = -84.0
 margin_bottom = 546.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
+[node name="FirePedestalButton" type="Button" parent="Crafting/Page1"]
+margin_left = -6.0
+margin_top = 368.0
+margin_right = 114.0
+margin_bottom = 548.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
 [node name="SleepingBagButton" type="Button" parent="Crafting/Page1"]
-margin_left = 190.0
-margin_top = 422.0
-margin_right = 418.0
-margin_bottom = 552.0
+margin_left = 308.0
+margin_top = 252.0
+margin_right = 536.0
+margin_bottom = 382.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="WorkbenchButton" type="Button" parent="Crafting/Page1"]
+margin_left = 200.0
+margin_top = 392.0
+margin_right = 396.0
+margin_bottom = 556.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -453,40 +441,35 @@ position = Vector2( -10, 296 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 9 )
 
-[node name="wood path" type="Sprite" parent="Crafting/Page1"]
-position = Vector2( 150, 300 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 12 )
-
-[node name="stone path" type="Sprite" parent="Crafting/Page1"]
-position = Vector2( 320, 302 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 11 )
-
 [node name="wood chest" type="Sprite" parent="Crafting/Page1"]
 position = Vector2( -440, 444 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 16 )
 
 [node name="stone chest" type="Sprite" parent="Crafting/Page1"]
-position = Vector2( -192, 450 )
+position = Vector2( -180, 446 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 
 [node name="campfire" type="Sprite" parent="Crafting/Page1"]
-position = Vector2( 466, 300 )
+position = Vector2( 182, 314 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 23 )
 
 [node name="fire pedestal" type="Sprite" parent="Crafting/Page1"]
-position = Vector2( 32, 456 )
+position = Vector2( 58, 458 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 28 )
 
 [node name="sleeping bag" type="Sprite" parent="Crafting/Page1"]
-position = Vector2( 304, 482 )
+position = Vector2( 422, 316 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 35 )
+
+[node name="workbench" type="Sprite" parent="Crafting/Page1"]
+position = Vector2( 296, 400 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 24 )
 
 [node name="DownButton" type="Button" parent="Crafting/Page1"]
 margin_left = 516.0
@@ -498,6 +481,7 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="Page2" type="Node2D" parent="Crafting"]
+visible = false
 position = Vector2( 750, 0 )
 
 [node name="TallFirePedestalButton" type="Button" parent="Crafting/Page2"]
@@ -536,24 +520,10 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="WorkbenchButton" type="Button" parent="Crafting/Page2"]
-margin_left = 350.0
-margin_top = 366.0
-margin_right = 546.0
-margin_bottom = 530.0
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
 [node name="tent" type="Sprite" parent="Crafting/Page2"]
 position = Vector2( -278, 372 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 13 )
-
-[node name="workbench" type="Sprite" parent="Crafting/Page2"]
-position = Vector2( 446, 382 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 24 )
 
 [node name="stove" type="Sprite" parent="Crafting/Page2"]
 position = Vector2( 202, 380 )
@@ -748,6 +718,7 @@ visible = false
 scale = Vector2( 5.4, 5.4 )
 
 [node name="Inventory" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 4 )
@@ -1124,7 +1095,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 29
+frame = 23
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -1283,12 +1254,6 @@ texture_normal = ExtResource( 43 )
 [connection signal="mouse_entered" from="Crafting/Page1/TorchButton" to="Crafting" method="_on_TorchButton_mouse_entered"]
 [connection signal="mouse_exited" from="Crafting/Page1/TorchButton" to="Crafting" method="_on_TorchButton_mouse_exited"]
 [connection signal="pressed" from="Crafting/Page1/TorchButton" to="Crafting" method="_on_TorchButton_pressed"]
-[connection signal="mouse_entered" from="Crafting/Page1/WoodPathButton" to="Crafting" method="_on_WoodPathButton_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/WoodPathButton" to="Crafting" method="_on_WoodPathButton_mouse_exited"]
-[connection signal="pressed" from="Crafting/Page1/WoodPathButton" to="Crafting" method="_on_WoodPathButton_pressed"]
-[connection signal="mouse_entered" from="Crafting/Page1/StonePathButton" to="Crafting" method="_on_StonePathButton_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page1/StonePathButton" to="Crafting" method="_on_StonePathButton_mouse_exited"]
-[connection signal="pressed" from="Crafting/Page1/StonePathButton" to="Crafting" method="_on_StonePathButton_pressed"]
 [connection signal="mouse_entered" from="Crafting/Page1/CampfireButton" to="Crafting" method="_on_CampfireButton_mouse_entered"]
 [connection signal="mouse_exited" from="Crafting/Page1/CampfireButton" to="Crafting" method="_on_CampfireButton_mouse_exited"]
 [connection signal="pressed" from="Crafting/Page1/CampfireButton" to="Crafting" method="_on_CampfireButton_pressed"]
@@ -1304,6 +1269,9 @@ texture_normal = ExtResource( 43 )
 [connection signal="mouse_entered" from="Crafting/Page1/SleepingBagButton" to="Crafting" method="_on_SleepingBagButton_mouse_entered"]
 [connection signal="mouse_exited" from="Crafting/Page1/SleepingBagButton" to="Crafting" method="_on_SleepingBagButton_mouse_exited"]
 [connection signal="pressed" from="Crafting/Page1/SleepingBagButton" to="Crafting" method="_on_SleepingBagButton_pressed"]
+[connection signal="mouse_entered" from="Crafting/Page1/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_mouse_entered"]
+[connection signal="mouse_exited" from="Crafting/Page1/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_mouse_exited"]
+[connection signal="pressed" from="Crafting/Page1/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_pressed"]
 [connection signal="pressed" from="Crafting/Page1/DownButton" to="Crafting" method="_on_DownButton_pressed"]
 [connection signal="mouse_entered" from="Crafting/Page2/TallFirePedestalButton" to="Crafting" method="_on_TallFirePedestalButton_mouse_entered"]
 [connection signal="mouse_exited" from="Crafting/Page2/TallFirePedestalButton" to="Crafting" method="_on_TallFirePedestalButton_mouse_exited"]
@@ -1317,9 +1285,6 @@ texture_normal = ExtResource( 43 )
 [connection signal="mouse_entered" from="Crafting/Page2/KitchenButton" to="Crafting" method="_on_KitchenButton_mouse_entered"]
 [connection signal="mouse_exited" from="Crafting/Page2/KitchenButton" to="Crafting" method="_on_KitchenButton_mouse_exited"]
 [connection signal="pressed" from="Crafting/Page2/KitchenButton" to="Crafting" method="_on_KitchenButton_pressed"]
-[connection signal="mouse_entered" from="Crafting/Page2/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_mouse_entered"]
-[connection signal="mouse_exited" from="Crafting/Page2/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_mouse_exited"]
-[connection signal="pressed" from="Crafting/Page2/WorkbenchButton" to="Crafting" method="_on_WorkbenchButton_pressed"]
 [connection signal="pressed" from="Crafting/Page2/UpButton" to="Crafting" method="_on_UpButton_pressed"]
 [connection signal="pressed" from="Inventory/PetUI/HideShowButton" to="Inventory/PetUI" method="_on_HideShowButton_pressed"]
 [connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]

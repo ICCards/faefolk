@@ -42,7 +42,6 @@ var inventory = {
 
 var hotbar = {
 	2: ["red salmon", 30, null],
-	1: ["wood path", 30, null],
 	5: ["scythe", 1, null],
 	3: ["carrot", 30, null],
 	4: ["blueprint", 1, null],
