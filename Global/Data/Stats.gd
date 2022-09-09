@@ -71,8 +71,9 @@ func return_max_tool_health(item_name):
 			return null
 
 func decrease_tool_health():
-	PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] -= 1
-	emit_signal("tool_health_change")
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] -= 1
+		emit_signal("tool_health_change")
 	
 
 func refill_watering_can(type):

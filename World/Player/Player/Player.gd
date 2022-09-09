@@ -175,28 +175,32 @@ func _process(_delta) -> void:
 
 
 func _unhandled_input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and \
-		not PlayerInventory.viewInventoryMode and \
+	if not PlayerInventory.viewInventoryMode and \
 		not PlayerInventory.interactive_screen_mode and \
 		not PlayerInventory.chatMode and \
 		not PlayerInventory.viewMapMode and \
 		state == MOVEMENT and \
 		Sounds.current_footsteps_sound != Sounds.swimming: 
-			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if item_name == "blueprint" and current_building_item != null:
-				show_placable_object(current_building_item, "BUILDING")
-			elif event.is_action_pressed("mouse_click") and item_name == "fishing rod":
-				fish()
-			elif event.is_action_pressed("mouse_click") and item_category == "Tool":
-				swing(item_name)
-			elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish"):
-				eat(item_name)
-			elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
-				show_placable_object(item_name, item_category)
+			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				var item_category = JsonData.item_data[item_name]["ItemCategory"]
+				if item_name == "blueprint" and current_building_item != null:
+					show_placable_object(current_building_item, "BUILDING")
+				elif event.is_action_pressed("mouse_click") and item_name == "fishing rod":
+					fish()
+				elif event.is_action_pressed("mouse_click") and item_category == "Tool":
+					swing(item_name)
+				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish"):
+					eat(item_name)
+				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
+					show_placable_object(item_name, item_category)
+				else:
+					destroy_placable_object()
 			else:
 				destroy_placable_object()
-	else: 
+				if event.is_action_pressed("mouse_click"): # punch
+					swing(null) 
+	else:
 		current_building_item = null
 		destroy_placable_object()
 
@@ -217,6 +221,7 @@ func show_placable_object(item_name, item_category):
 			get_node("PlaceObject").initialize()
 			
 func destroy_placable_object():
+	current_building_item = null
 	if has_node("PlaceObject"):
 		get_node("PlaceObject").queue_free()
 
@@ -361,10 +366,3 @@ func walk_state(_direction):
 #	day_night_animation_player.play("set night")
 #func set_day():
 #	day_night_animation_player.play_backwards("set night")
-
-
-
-func _on_DustCloudTimer_timeout():
-	var location = Tiles.ocean_tiles.world_to_map(position)
-	if Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles):
-		Server.world.play_dirt_trail_effect(velocity)

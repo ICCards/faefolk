@@ -1530,6 +1530,112 @@ var male = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/shoes/shoes.png")
 	},
+	body_punch_down = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/down/body.png")
+	},
+	body_punch_up = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/up/body.png")
+	},
+	body_punch_right = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/right/body.png")
+	},
+	body_punch_left = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/left/body.png")
+	},
+
+	arms_punch_down = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/down/arms.png")
+	},
+	arms_punch_up = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/up/arms.png")
+	},
+	arms_punch_right = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/right/arms.png")
+	},
+	arms_punch_left = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/left/arms.png")
+	},
+
+	acc_punch_down = {
+		0 : null,
+	},
+	acc_punch_up = {
+		0 : null,
+	},
+	acc_punch_right = {
+		0 : null,
+	},
+	acc_punch_left = {
+		0 : null,
+	},
+
+	head_attribute_punch_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/down/head_attribute/hair.png")
+	},
+	head_attribute_punch_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/up/head_attribute/hair.png")
+	},
+	head_attribute_punch_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/right/head_attribute/Hair.png")
+	},
+	head_attribute_punch_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/left/head_attribute/hair.png")
+	},
+
+	shirts_punch_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/down/shirts/shirts.png")
+	},
+	shirts_punch_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/up/shirts/shirts.png")
+	},
+	shirts_punch_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/right/shirts/shirts.png")
+	},
+	shirts_punch_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/left/shirts/shirts.png")
+	},
+
+	pants_punch_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/down/pants/pants.png")
+	},
+	pants_punch_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/up/pants/pants.png")
+	},
+	pants_punch_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/right/pants/pants.png")
+	},
+	pants_punch_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/left/pants/pants.png")
+	},
+
+	shoes_punch_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/down/shoes/shoes.png")
+	},
+	shoes_punch_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/up/shoes/shoes.png")
+	},
+	shoes_punch_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/right/shoes/shoes.png")
+	},
+	shoes_punch_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/left/shoes/shoes.png")
+	},
 	
 }
 var female = {

@@ -1,5 +1,116 @@
 extends Node
 
+#	body_punch_down = {
+#		0 : preload()
+#	},
+#	body_punch_up = {
+#		0 : preload()
+#	},
+#	body_punch_right = {
+#		0 : preload()
+#	},
+#	body_punch_left = {
+#		0 : preload()
+#	},
+#
+#	arms_punch_down = {
+#		0 : preload()
+#	},
+#	arms_punch_up = {
+#		0 : preload()
+#	},
+#	arms_punch_right = {
+#		0 : preload()
+#	},
+#	arms_punch_left = {
+#		0 : preload()
+#	},
+#
+#	acc_punch_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_punch_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_punch_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_punch_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_punch_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_punch_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_punch_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_punch_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_punch_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_punch_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_punch_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_punch_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_punch_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_punch_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_punch_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_punch_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_punch_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_punch_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_punch_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_punch_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
 #	body_struggle_down = {
 #		0 : preload()
 #	},
@@ -5990,6 +6101,10 @@ func set_attributes(set_char):
 	'harvest_down': character.body_harvest_down[0],
 	'harvest_left': character.body_harvest_left[0],
 	'harvest_right': character.body_harvest_right[0],
+	'punch_up': character.body_punch_up[0],
+	'punch_down': character.body_punch_down[0],
+	'punch_left': character.body_punch_left[0],
+	'punch_right': character.body_punch_right[0],
 	'eat': character.body_eat[0]
 	};
 	arms_sprites = {
@@ -6049,6 +6164,10 @@ func set_attributes(set_char):
 	'harvest_down': character.arms_harvest_down[0],
 	'harvest_left': character.arms_harvest_left[0],
 	'harvest_right': character.arms_harvest_right[0],
+	'punch_up': character.arms_punch_up[0],
+	'punch_down': character.arms_punch_down[0],
+	'punch_left': character.arms_punch_left[0],
+	'punch_right': character.arms_punch_right[0],
 	'eat': character.arms_eat[0]
 	};
 	acc_sprites = {
@@ -6108,6 +6227,10 @@ func set_attributes(set_char):
 	'harvest_down': character.acc_harvest_down[acc_index],
 	'harvest_left': character.acc_harvest_left[acc_index],
 	'harvest_right': character.acc_harvest_right[acc_index],
+	'punch_up': character.acc_punch_up[acc_index],
+	'punch_down': character.acc_punch_down[acc_index],
+	'punch_left': character.acc_punch_left[acc_index],
+	'punch_right': character.acc_punch_right[acc_index],
 	'eat': character.acc_eat[acc_index]
 	};
 	headAtr_sprites = {
@@ -6167,6 +6290,10 @@ func set_attributes(set_char):
 	'harvest_down': character.head_attribute_harvest_down[headAtr_index],
 	'harvest_left': character.head_attribute_harvest_left[headAtr_index],
 	'harvest_right': character.head_attribute_harvest_right[headAtr_index],
+	'punch_up': character.head_attribute_punch_up[headAtr_index],
+	'punch_down': character.head_attribute_punch_down[headAtr_index],
+	'punch_left': character.head_attribute_punch_left[headAtr_index],
+	'punch_right': character.head_attribute_punch_right[headAtr_index],
 	'eat': character.head_attribute_eat[headAtr_index]
 	}
 	pants_sprites = {
@@ -6226,6 +6353,10 @@ func set_attributes(set_char):
 	'harvest_down': character.pants_harvest_down[pants_index],
 	'harvest_left': character.pants_harvest_left[pants_index],
 	'harvest_right': character.pants_harvest_right[pants_index],
+	'punch_up': character.pants_punch_up[pants_index],
+	'punch_down': character.pants_punch_down[pants_index],
+	'punch_left': character.pants_punch_left[pants_index],
+	'punch_right': character.pants_punch_right[pants_index],
 	'eat': character.pants_eat[pants_index]
 	};
 	shirts_sprites = {
@@ -6285,6 +6416,10 @@ func set_attributes(set_char):
 	'harvest_down': character.shirts_harvest_down[shirts_index],
 	'harvest_left': character.shirts_harvest_left[shirts_index],
 	'harvest_right': character.shirts_harvest_right[shirts_index],
+	'punch_up': character.shirts_punch_up[shirts_index],
+	'punch_down': character.shirts_punch_down[shirts_index],
+	'punch_left': character.shirts_punch_left[shirts_index],
+	'punch_right': character.shirts_punch_right[shirts_index],
 	'eat': character.shirts_eat[shirts_index]
 	};
 	shoes_sprites = {
@@ -6344,6 +6479,10 @@ func set_attributes(set_char):
 	'harvest_down': character.shoes_harvest_down[shoes_index],
 	'harvest_left': character.shoes_harvest_left[shoes_index],
 	'harvest_right': character.shoes_harvest_right[shoes_index],
+	'punch_up': character.shoes_punch_up[shoes_index],
+	'punch_down': character.shoes_punch_down[shoes_index],
+	'punch_left': character.shoes_punch_left[shoes_index],
+	'punch_right': character.shoes_punch_right[shoes_index],
 	'eat': character.shoes_eat[shoes_index]
 	};
 	

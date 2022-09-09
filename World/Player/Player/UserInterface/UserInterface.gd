@@ -24,55 +24,55 @@ func initialize_user_interface():
 	$Hotbar.visible = true
 
 func _input(event):
-	#if Server.player_node.state == MOVEMENT:
-	if event.is_action_pressed("open_menu") and holding_item == null and \
-	not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
-		toggle_menu()
-	elif event.is_action_pressed("action") and holding_item == null and not PlayerInventory.viewInventoryMode and not PlayerInventory.chatMode:
-		if PlayerInventory.is_inside_chest_area:
-			toggle_chest()
-		elif PlayerInventory.is_inside_workbench_area:
-			toggle_workbench()
-#			elif PlayerInventory.is_inside_stove_area:
-#				open_stove()
-#			elif PlayerInventory.is_inside_grain_mill_area:
-#				open_grain_mill()
-	#		elif PlayerInventory.is_inside_sleeping_bag_area:
-	#			sleep()
-#	if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
-#		PlayerInventory.active_item_scroll_up()
-#	elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
-#		PlayerInventory.active_item_scroll_down()
-	if event.is_action_pressed("slot1"):
-		PlayerInventory.active_item_slot = 0
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot2"):
-		PlayerInventory.active_item_slot = 1
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot3"):
-		PlayerInventory.active_item_slot = 2
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot4"):
-		PlayerInventory.active_item_slot = 3
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot5"):
-		PlayerInventory.active_item_slot = 4
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot6"):
-		PlayerInventory.active_item_slot = 5
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot7"):
-		PlayerInventory.active_item_slot = 6
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot8"):
-		PlayerInventory.active_item_slot = 7
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot9"):
-		PlayerInventory.active_item_slot = 8
-		PlayerInventory.emit_signal("active_item_updated")
-	elif event.is_action_pressed("slot10"):
-		PlayerInventory.active_item_slot = 9
-		PlayerInventory.emit_signal("active_item_updated")
+	if Server.player_node.state == MOVEMENT and holding_item == null and \
+		not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
+		if event.is_action_pressed("open_menu"):
+			toggle_menu()
+		elif event.is_action_pressed("action"):
+			if PlayerInventory.is_inside_chest_area:
+				toggle_chest()
+			elif PlayerInventory.is_inside_workbench_area:
+				toggle_workbench()
+	#			elif PlayerInventory.is_inside_stove_area:
+	#				open_stove()
+	#			elif PlayerInventory.is_inside_grain_mill_area:
+	#				open_grain_mill()
+		#		elif PlayerInventory.is_inside_sleeping_bag_area:
+		#			sleep()
+	#	if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
+	#		PlayerInventory.active_item_scroll_up()
+	#	elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
+	#		PlayerInventory.active_item_scroll_down()
+		if event.is_action_pressed("slot1"):
+			PlayerInventory.active_item_slot = 0
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot2"):
+			PlayerInventory.active_item_slot = 1
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot3"):
+			PlayerInventory.active_item_slot = 2
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot4"):
+			PlayerInventory.active_item_slot = 3
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot5"):
+			PlayerInventory.active_item_slot = 4
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot6"):
+			PlayerInventory.active_item_slot = 5
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot7"):
+			PlayerInventory.active_item_slot = 6
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot8"):
+			PlayerInventory.active_item_slot = 7
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot9"):
+			PlayerInventory.active_item_slot = 8
+			PlayerInventory.emit_signal("active_item_updated")
+		elif event.is_action_pressed("slot10"):
+			PlayerInventory.active_item_slot = 9
+			PlayerInventory.emit_signal("active_item_updated")
 
 func toggle_menu():
 	if not $Menu.visible:

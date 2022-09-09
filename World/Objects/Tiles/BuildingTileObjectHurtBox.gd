@@ -34,7 +34,6 @@ func set_type():
 		"armored":
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
-	wall_tiles.update_bitmask_region()
 	update_health_bar()
 
 

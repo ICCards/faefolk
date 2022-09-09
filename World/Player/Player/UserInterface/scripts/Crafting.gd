@@ -13,17 +13,15 @@ var page1 = [
 	"wood barrel",
 	"wood fence",
 	"torch",
-	"wood path",
-	"stone path",
 	"wood chest",
 	"stone chest",
 	"campfire",
 	"fire pedestal",
-	"sleeping bag"
+	"sleeping bag",
+	"workbench"
 ]
 
 var page2 = [
-	"workbench",
 	"stove",
 	"grain mill",
 	"tall fire pedestal",

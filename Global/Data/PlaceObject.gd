@@ -67,7 +67,6 @@ func place_seed_in_world(id, item_name, location, days):
 	
 	
 func place_building_object_in_world(id, item_name, location):
-	wall_tiles = get_node("/root/World/PlacableTiles/BuildingTiles")
 	match item_name:
 		"wall":
 			var object = BuildingTileObjectHurtBox.instance()
@@ -76,22 +75,31 @@ func place_building_object_in_world(id, item_name, location):
 			object.item_name = item_name
 			object.tier = "twig"
 			Server.world.call_deferred("add_child", object, true)
-			object.global_position = wall_tiles.map_to_world(location) + Vector2(16, 16)
+			object.global_position = Tiles.building_tiles.map_to_world(location) + Vector2(16, 16)
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			wall_tiles.set_cellv(location, 0)
-			wall_tiles.update_bitmask_region()
+			Tiles.building_tiles.set_cellv(location, 0)
+			Tiles.building_tiles.update_bitmask_area(location)
 		"door front":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			var object = StoneDoubleDoor.instance()
-			object.global_position = wall_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = Tiles.building_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
 		"door side":
 			Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			var object = StoneDoubleDoorSide.instance()
-			object.global_position = wall_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = Tiles.building_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
-	
-	
+		"foundation":
+			var object = BuildingTileObjectHurtBox.instance()
+			object.name = str(id)
+			object.location = location
+			object.item_name = item_name
+			object.tier = "twig"
+			Server.world.call_deferred("add_child", object, true)
+			object.global_position = Tiles.building_tiles.map_to_world(location) + Vector2(16, 16)
+			Tiles.foundation_tiles.set_cellv(location, 0)
+			Tiles.foundation_tiles.update_bitmask_area(location)
+
 
 func place_object_in_world(id, item_name, location):
 	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
@@ -133,7 +141,7 @@ func place_object_in_world(id, item_name, location):
 		"wood fence":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			fence_tiles.set_cellv(location, 0)
-			fence_tiles.update_bitmask_region()
+			fence_tiles.update_bitmask_area(location)
 		"wood barrel":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			object_tiles.set_cellv(location, Placables.BARREL)
