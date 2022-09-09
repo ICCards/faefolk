@@ -19,11 +19,12 @@ func radial_menu_off():
 func _input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		if PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] == "blueprint":
-			if event.is_action_pressed("action"):
-				$Circle/AnimationPlayer.play("zoom")
-				cam.set_process_input(false)
-				show()
-				PlayerInventory.viewInventoryMode = true
-			if event.is_action_released("action"):
-				radial_menu_off()
-				PlayerInventory.viewInventoryMode = false
+			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+				if event.is_pressed():
+					$Circle/AnimationPlayer.play("zoom")
+					cam.set_process_input(false)
+					show()
+					PlayerInventory.viewInventoryMode = true
+				else:
+					radial_menu_off()
+					PlayerInventory.viewInventoryMode = false
