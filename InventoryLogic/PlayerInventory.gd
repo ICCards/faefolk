@@ -46,6 +46,8 @@ var hotbar = {
 	3: ["carrot", 30, null],
 	4: ["blueprint", 1, null],
 	0: ["fishing rod", 1, null],
+	6: ["hammer", 1, null],
+	
 #	2: ["hammer", 1, null],
 #	3: ["blueprint", 1, null],
 }

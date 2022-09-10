@@ -21,7 +21,7 @@
 [ext_resource path="res://World/Player/Player/AttachedScripts/EnterInteractiveZones.gd" type="Script" id=26]
 [ext_resource path="res://World/Player/Player/AttachedScripts/Swinging.gd" type="Script" id=29]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
-[ext_resource path="res://World/Player/Player/PlayerHitEffect.tscn" type="PackedScene" id=33]
+[ext_resource path="res://World/Player/Player/AttachedScenes/PlayerHitEffect.tscn" type="PackedScene" id=33]
 
 [sub_resource type="Animation" id=3]
 length = 0.001

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Help Select.png-649ed3ee7c7a14979b18eddb008b0105.stex"
+path="res://.import/Help Select.png-230a63f519de09452ccc604f67f50fcb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/mouse cursors/Help Select.png"
-dest_files=[ "res://.import/Help Select.png-649ed3ee7c7a14979b18eddb008b0105.stex" ]
+source_file="res://Assets/Mouse cursors/Help Select.png"
+dest_files=[ "res://.import/Help Select.png-230a63f519de09452ccc604f67f50fcb.stex" ]
 
 [params]
 

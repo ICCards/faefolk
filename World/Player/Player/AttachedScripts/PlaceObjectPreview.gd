@@ -109,7 +109,7 @@ func set_dimensions():
 			$ItemToPlace.rect_scale = Vector2(1, 1)
 		WALL:
 			$ItemToPlace.show()
-			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + "stone wall" + ".png")
+			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wall.png")
 			$ColorIndicator.tile_size =  Vector2(1, 1)
 			$ItemToPlace.rect_scale = Vector2(1, 1)
 		DOOR:
@@ -205,7 +205,7 @@ func place_buildings_state():
 	$ColorIndicator.visible = true
 	$ColorIndicator.tile_size = Vector2(1, 1)
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.building_tiles) or Server.player_node.position.distance_to(mousePos) > 120:
+	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:

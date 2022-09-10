@@ -39,11 +39,11 @@ func _input(event):
 	#				open_grain_mill()
 		#		elif PlayerInventory.is_inside_sleeping_bag_area:
 		#			sleep()
-	#	if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
-	#		PlayerInventory.active_item_scroll_up()
-	#	elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
-	#		PlayerInventory.active_item_scroll_down()
-		if event.is_action_pressed("slot1"):
+		if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
+			PlayerInventory.active_item_scroll_up()
+		elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
+			PlayerInventory.active_item_scroll_down()
+		elif event.is_action_pressed("slot1"):
 			PlayerInventory.active_item_slot = 0
 			PlayerInventory.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot2"):
