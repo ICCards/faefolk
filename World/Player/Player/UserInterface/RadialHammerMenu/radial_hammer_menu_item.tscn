@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Images/User interface/RadialMenu/radial_menu_click_mask.bmp" type="BitMap" id=1]
+[ext_resource path="res://Assets/Images/User interface/RadialMenu/radial_menu.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/User interface/RadialMenu/hovered.png" type="Texture" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/RadialHammerMenu/radial_hammer_menu_item.gd" type="Script" id=4]
+
+[node name="radial_hammer_menu_item" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="button" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -120.5
+margin_top = -264.0
+margin_right = 120.5
+margin_bottom = -86.0
+button_mask = 2
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+texture_click_mask = ExtResource( 1 )
+
+[connection signal="mouse_entered" from="button" to="." method="_on_button_mouse_entered"]

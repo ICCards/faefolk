@@ -15,7 +15,6 @@ func _ready():
 	set_type()
 	
 func set_type():
-	wall_tiles = get_node("/root/World/PlacableTiles/BuildingTiles")
 	match tier:
 		"twig":
 			health = Stats.MAX_TWIG_WALL
@@ -23,17 +22,17 @@ func set_type():
 		"wood":
 			health = Stats.MAX_WOOD_WALL
 			max_health = Stats.MAX_WOOD_WALL
-			wall_tiles.set_cellv(location, 2)
 		"stone":
 			health = Stats.MAX_STONE_WALL
 			max_health = Stats.MAX_STONE_WALL
-			wall_tiles.set_cellv(location, 0)
 		"metal":
 			health = Stats.MAX_METAL_WALL
 			max_health = Stats.MAX_METAL_WALL
 		"armored":
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
+		"demolish":
+			queue_free()
 	update_health_bar()
 
 
@@ -71,9 +70,11 @@ func show_health():
 	$AnimationPlayer.play("show health bar")
 
 func _on_HurtBox_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click"):
+	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
 		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 			var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			if tool_name == "hammer":
-				$UpgradeWallLabel.initialize()
-				$UpgradeWallLabel.visible = not $UpgradeWallLabel.visible
+				var autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
+				Server.player_node.get_node("Camera2D/UserInterface/RadialHammerMenu").initialize(location, autotile_cord, self)
+#				var tile = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
+#				Tiles.wall_tiles.set_cell(location.x, location.y, 2, false, false, false, tile )

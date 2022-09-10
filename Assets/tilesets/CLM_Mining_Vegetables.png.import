@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CLM_Mining_Vegetables.png-6cefc5db594b7a83a326fbc626cdcb1d.stex"
+path="res://.import/CLM_Mining_Vegetables.png-cb2260523b7380111fd8cfca07729943.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/CLM_Mining_Vegetables.png"
-dest_files=[ "res://.import/CLM_Mining_Vegetables.png-6cefc5db594b7a83a326fbc626cdcb1d.stex" ]
+source_file="res://Assets/Tilesets/CLM_Mining_Vegetables.png"
+dest_files=[ "res://.import/CLM_Mining_Vegetables.png-cb2260523b7380111fd8cfca07729943.stex" ]
 
 [params]
 

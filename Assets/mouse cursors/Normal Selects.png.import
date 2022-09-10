@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Normal Selects.png-c5129b475a2b9d81eb71cecd6d7f9af6.stex"
+path="res://.import/Normal Selects.png-554f50e2f3bb9f2bb988b5451880be5d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/mouse cursors/Normal Selects.png"
-dest_files=[ "res://.import/Normal Selects.png-c5129b475a2b9d81eb71cecd6d7f9af6.stex" ]
+source_file="res://Assets/Mouse cursors/Normal Selects.png"
+dest_files=[ "res://.import/Normal Selects.png-554f50e2f3bb9f2bb988b5451880be5d.stex" ]
 
 [params]
 

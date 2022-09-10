@@ -220,7 +220,7 @@ func buildMap(map):
 	Tiles.path_tiles = $PlacableTiles/PathTiles
 	Tiles.ocean_tiles = $GeneratedTiles/AnimatedOceanTiles
 	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
-	Tiles.building_tiles = $PlacableTiles/BuildingTiles
+	Tiles.wall_tiles = $PlacableTiles/WallTiles
 	Tiles.foundation_tiles = $PlacableTiles/PathTiles
 	build_valid_tiles()
 	print("BUILDING MAP")
