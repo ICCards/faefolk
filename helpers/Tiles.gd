@@ -57,11 +57,6 @@ func reset_valid_tiles(location, var item_name = ""):
 	elif item_name == "wood fence":
 		fence_tiles.set_cellv(location, -1)
 		fence_tiles.update_bitmask_region()
-	elif item_name == "wood path" or item_name == "stone path":
-		path_tiles.set_cellv(location, -1)
-#	elif item_name == "stone wall":
-#		building_tiles.set_cellv(location, -1)
-#		building_tiles.update_bitmask_region()
 	elif item_name == "torch" or \
 	item_name == "campfire" or \
 	item_name == "fire pedestal" or \

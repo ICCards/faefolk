@@ -67,6 +67,7 @@ func place_seed_in_world(id, item_name, location, days):
 	
 	
 func place_building_object_in_world(id, item_name, location):
+	rng.randomize()
 	match item_name:
 		"wall":
 			var object = BuildingTileObjectHurtBox.instance()
@@ -74,6 +75,7 @@ func place_building_object_in_world(id, item_name, location):
 			object.location = location
 			object.item_name = item_name
 			object.tier = "twig"
+			object.id = rng.randi_range(0, 10000)
 			Server.world.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))

@@ -67,6 +67,8 @@ func set_swing_collision_layer_and_position(tool_name, direction):
 	elif tool_name == "wood hoe" or tool_name == "stone hoe" or tool_name == "iron hoe" or tool_name == "bronze hoe" or tool_name == "gold hoe": 
 		axe_pickaxe_swing.set_collision_mask(0)
 		set_hoed_tile(direction)
+	elif tool_name == "hammer":
+		axe_pickaxe_swing.set_collision_mask(16384)
 	elif tool_name == null:
 		axe_pickaxe_swing.set_collision_mask(8)
 

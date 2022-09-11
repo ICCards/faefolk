@@ -48,6 +48,8 @@ func _process(delta):
 
 
 func initialize():
+	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+	set_global_position(mousePos)
 	if item_name == "tent":
 		state = TENT
 	elif item_name == "sleeping bag":
@@ -95,12 +97,6 @@ func set_dimensions():
 				$ColorIndicator.tile_size = Vector2(2, 1)
 			else:
 				$ColorIndicator.tile_size = Vector2(1, 1)
-#		PATH:
-#			$ItemToPlace.show()
-#			$RotateIcon.visible = true
-#			$ItemToPlace.rect_position = Vector2(0,0)
-#			$ItemToPlace.rect_scale = Vector2(1, 1)
-#			$ColorIndicator.tile_size  = Vector2(1.0 , 1.0)
 		SEED:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
@@ -133,7 +129,10 @@ func set_dimensions():
 
 func place_foundation_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.path_tiles.get_cellv(location) != -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
+	if Tiles.path_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > 120:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif Tiles.valid_tiles.get_cellv(location) != 0 and Tiles.wall_tiles.get_cellv(location) == -1:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:

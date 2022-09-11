@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/up OLD.png-dec7acce1855e6010f6840b395a72288.stex"
+path="res://.import/stone floors.png-39c018896e721fd74872e19d5f7dd677.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Weapon swings/scythe sword swing/scythe/up OLD.png"
-dest_files=[ "res://.import/up OLD.png-dec7acce1855e6010f6840b395a72288.stex" ]
+source_file="res://Assets/stone floors.png"
+dest_files=[ "res://.import/stone floors.png-39c018896e721fd74872e19d5f7dd677.stex" ]
 
 [params]
 

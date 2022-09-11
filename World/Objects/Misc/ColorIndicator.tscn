@@ -18,6 +18,7 @@ script = ExtResource( 10 )
 [node name="Grid" type="VBoxContainer" parent="."]
 margin_right = 32.0
 margin_bottom = 32.0
+mouse_filter = 2
 size_flags_vertical = 3
 custom_constants/separation = 0
 alignment = 2
@@ -25,17 +26,20 @@ alignment = 2
 [node name="Top" type="HBoxContainer" parent="Grid"]
 margin_right = 32.0
 margin_bottom = 6.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Left" type="TextureRect" parent="Grid/Top"]
 margin_right = 6.0
 margin_bottom = 6.0
+mouse_filter = 2
 texture = ExtResource( 5 )
 
 [node name="Middle" type="TextureRect" parent="Grid/Top"]
 margin_left = 6.0
 margin_right = 26.0
 margin_bottom = 6.0
+mouse_filter = 2
 size_flags_horizontal = 3
 texture = ExtResource( 4 )
 stretch_mode = 2
@@ -44,18 +48,21 @@ stretch_mode = 2
 margin_left = 26.0
 margin_right = 32.0
 margin_bottom = 6.0
+mouse_filter = 2
 texture = ExtResource( 9 )
 
 [node name="Middle" type="HBoxContainer" parent="Grid"]
 margin_top = 6.0
 margin_right = 32.0
 margin_bottom = 26.0
+mouse_filter = 2
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="Left" type="TextureRect" parent="Grid/Middle"]
 margin_right = 6.0
 margin_bottom = 20.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 stretch_mode = 2
 
@@ -63,6 +70,7 @@ stretch_mode = 2
 margin_left = 6.0
 margin_right = 26.0
 margin_bottom = 20.0
+mouse_filter = 2
 size_flags_horizontal = 3
 texture = ExtResource( 8 )
 stretch_mode = 2
@@ -71,6 +79,7 @@ stretch_mode = 2
 margin_left = 26.0
 margin_right = 32.0
 margin_bottom = 20.0
+mouse_filter = 2
 texture = ExtResource( 3 )
 stretch_mode = 2
 
@@ -78,17 +87,20 @@ stretch_mode = 2
 margin_top = 26.0
 margin_right = 32.0
 margin_bottom = 32.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Left" type="TextureRect" parent="Grid/Bottom"]
 margin_right = 6.0
 margin_bottom = 6.0
+mouse_filter = 2
 texture = ExtResource( 6 )
 
 [node name="Middle" type="TextureRect" parent="Grid/Bottom"]
 margin_left = 6.0
 margin_right = 26.0
 margin_bottom = 6.0
+mouse_filter = 2
 size_flags_horizontal = 3
 texture = ExtResource( 2 )
 stretch_mode = 2
@@ -97,4 +109,5 @@ stretch_mode = 2
 margin_left = 26.0
 margin_right = 32.0
 margin_bottom = 6.0
+mouse_filter = 2
 texture = ExtResource( 7 )

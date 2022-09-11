@@ -9,9 +9,11 @@ var location
 
 var temp_health = 0
 var wall_tiles
+var id
 
 
 func _ready():
+	name = str(id)
 	set_type()
 	
 func set_type():
@@ -38,8 +40,8 @@ func set_type():
 
 func update_health_bar():
 	if health != 0:
-		$HealthBar/WateringCanProgress.value = health
-		$HealthBar/WateringCanProgress.max_value = max_health
+		$HealthBar/Progress.value = health
+		$HealthBar/Progress.max_value = max_health
 	else:
 		remove_tile()
 
@@ -47,8 +49,8 @@ func update_health_bar():
 
 func remove_tile():
 	Tiles.reset_valid_tiles(location)
-	Tiles.building_tiles.set_cellv(location, -1)
-	Tiles.building_tiles.update_bitmask_region()
+	Tiles.wall_tiles.set_cellv(location, -1)
+	Tiles.wall_tiles.update_bitmask_area(location)
 	queue_free()
 
 
@@ -71,10 +73,13 @@ func show_health():
 
 func _on_HurtBox_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode:
 			var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			if tool_name == "hammer":
-				var autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
-				Server.player_node.get_node("Camera2D/UserInterface/RadialHammerMenu").initialize(location, autotile_cord, self)
-#				var tile = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
-#				Tiles.wall_tiles.set_cell(location.x, location.y, 2, false, false, false, tile )
+				Server.player_node.get_node("Camera2D/UserInterface/RadialHammerMenu").initialize(location, self)
+
+
+func _on_HammerRepairBox_area_entered(area):
+	set_type()
+	Server.world.play_upgrade_building_effect(location)
+	show_health()

@@ -1,11 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/radial_menu_item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.gd" type="Script" id=2]
-[ext_resource path="res://Screen Shot 2022-07-19 at 5.24.46 PM.png" type="Texture" id=3]
-[ext_resource path="res://Screen Shot 2022-07-19 at 5.27.06 PM.png" type="Texture" id=4]
-[ext_resource path="res://Screen Shot 2022-07-19 at 5.26.23 PM.png" type="Texture" id=5]
-[ext_resource path="res://Screen Shot 2022-07-19 at 5.24.54 PM.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.137255, 0.133333, 0.133333, 0.737255 )
@@ -95,30 +92,37 @@ rect_rotation = -120.0
 [node name="5" parent="Circle" instance=ExtResource( 1 )]
 rect_rotation = -59.9999
 
-[node name="icons" type="Control" parent="Circle"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Circle"]
+"anims/set active" = SubResource( 3 )
+"anims/set disabled" = SubResource( 4 )
+anims/zoom = SubResource( 2 )
+
+[node name="Labels" type="Control" parent="Circle"]
 margin_right = 40.0
 margin_bottom = 40.0
 rect_scale = Vector2( 0.5, 0.5 )
 mouse_filter = 2
 
-[node name="ScreenShot2022-07-19At52446Pm" type="Sprite" parent="Circle/icons"]
-position = Vector2( 0, -330 )
-texture = ExtResource( 3 )
+[node name="Wall" type="Label" parent="Circle/Labels"]
+margin_left = -50.0
+margin_top = -406.667
+margin_right = 60.0
+margin_bottom = -339.667
+theme = ExtResource( 3 )
+text = "Wall"
 
-[node name="ScreenShot2022-07-19At52454Pm" type="Sprite" parent="Circle/icons"]
-position = Vector2( 303.333, -136.667 )
-texture = ExtResource( 7 )
+[node name="Door" type="Label" parent="Circle/Labels"]
+margin_left = 270.0
+margin_top = -206.667
+margin_right = 380.0
+margin_bottom = -139.667
+theme = ExtResource( 3 )
+text = "Door"
 
-[node name="ScreenShot2022-07-19At52623Pm" type="Sprite" parent="Circle/icons"]
-position = Vector2( 300, 180 )
-texture = ExtResource( 5 )
-
-[node name="ScreenShot2022-07-19At52706Pm" type="Sprite" parent="Circle/icons"]
-visible = false
-position = Vector2( 0, 343.333 )
-texture = ExtResource( 4 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Circle"]
-"anims/set active" = SubResource( 3 )
-"anims/set disabled" = SubResource( 4 )
-anims/zoom = SubResource( 2 )
+[node name="Foundation" type="Label" parent="Circle/Labels"]
+margin_left = 210.0
+margin_top = 126.667
+margin_right = 436.0
+margin_bottom = 193.667
+theme = ExtResource( 3 )
+text = "Foundation"
