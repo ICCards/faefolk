@@ -134,7 +134,7 @@ margin_bottom = -89.0
 position = Vector2( 866, 7 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="RadialMenu" parent="." instance=ExtResource( 3 )]
+[node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
 visible = false
 
 [node name="RadialHammerMenu" parent="." instance=ExtResource( 5 )]

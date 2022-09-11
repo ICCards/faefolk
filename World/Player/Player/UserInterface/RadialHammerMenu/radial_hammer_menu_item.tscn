@@ -8,6 +8,7 @@
 [node name="radial_hammer_menu_item" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+input_pass_on_modal_close_click = false
 script = ExtResource( 4 )
 
 [node name="button" type="TextureButton" parent="."]

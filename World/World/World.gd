@@ -27,6 +27,7 @@ onready var Bird = preload("res://World/Animals/Bird.tscn")
 onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
 onready var HoedDirtEffect = preload("res://World/Objects/Nature/Effects/HoedDirt.tscn") 
 onready var DirtTrailEffect = preload("res://World/Objects/Nature/Effects/DustTrailEffect.tscn")
+onready var UpgradeBuildingEffect = preload("res://World/Objects/Nature/Effects/UpgradeBuilding.tscn")
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTreeObject = preload("res://World/Objects/Nature/Trees/DesertTreeObject.tscn")
@@ -631,3 +632,10 @@ func play_dirt_trail_effect(velocity):
 		dirtTrailEffect.flip_h  = true
 	dirtTrailEffect.global_position = Server.player_node.global_position
 	add_child(dirtTrailEffect)
+	
+func play_upgrade_building_effect(loc):
+	var upgradeBuildingEffect = UpgradeBuildingEffect.instance()
+	upgradeBuildingEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
+	add_child(upgradeBuildingEffect)
+	
+	

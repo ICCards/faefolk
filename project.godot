@@ -258,6 +258,7 @@ slot10={
 2d_physics/layer_12="ScytheBreakLayer"
 2d_physics/layer_13="InsideTreeTopLayer"
 2d_physics/layer_14="DetectOverlappingObject"
+2d_physics/layer_15="HammerRepairLayer"
 2d_physics/layer_16="EnterSleepingBag"
 2d_physics/layer_17="OpenChest"
 2d_physics/layer_18="OpenWorkbench"

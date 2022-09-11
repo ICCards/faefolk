@@ -74,27 +74,32 @@ monitorable = false
 light_mask = 0
 shape = SubResource( 1 )
 
-[node name="HealthBar" type="Control" parent="."]
-visible = false
-margin_left = -33.0
-margin_top = -223.0
-margin_right = -33.0
-margin_bottom = -223.0
-rect_scale = Vector2( 2.5, 3 )
+[node name="HammerRepairBox" type="Area2D" parent="."]
+collision_layer = 16384
+collision_mask = 0
+monitorable = false
 
-[node name="TextureRect" type="TextureRect" parent="HealthBar"]
-margin_left = 5.0
-margin_top = 80.0
-margin_right = 21.0
-margin_bottom = 83.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HammerRepairBox"]
+light_mask = 0
+shape = SubResource( 1 )
+
+[node name="HealthBar" type="Node2D" parent="."]
+visible = false
+position = Vector2( -20, 17 )
+scale = Vector2( 2.5, 3 )
+z_index = 1
+
+[node name="Border" type="TextureRect" parent="HealthBar"]
+margin_right = 16.0
+margin_bottom = 3.0
 texture = ExtResource( 3 )
 
-[node name="WateringCanProgress" type="TextureProgress" parent="HealthBar"]
+[node name="Progress" type="TextureProgress" parent="HealthBar"]
 modulate = Color( 0.109804, 1, 0, 1 )
-margin_left = 6.0
-margin_top = 81.0
-margin_right = 20.0
-margin_bottom = 82.0
+margin_left = 0.800002
+margin_top = 0.666664
+margin_right = 14.8
+margin_bottom = 1.66666
 max_value = 50.0
 value = 44.0
 texture_progress = ExtResource( 2 )
@@ -106,3 +111,4 @@ anims/RESET = SubResource( 4 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="input_event" from="HurtBox" to="." method="_on_HurtBox_input_event"]
+[connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

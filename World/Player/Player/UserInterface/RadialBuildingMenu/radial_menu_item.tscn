@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Images/User interface/RadialMenu/hovered.png" type="Texture" id=4]
 
 [node name="0" type="Control"]
-mouse_filter = 2
 script = ExtResource( 3 )
 
 [node name="button" type="TextureButton" parent="."]

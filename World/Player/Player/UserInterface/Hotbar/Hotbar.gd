@@ -147,3 +147,7 @@ func left_click_not_holding(slot: SlotClass):
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 
+
+
+func _on_Bg_mouse_entered():
+	Server.player_node.destroy_placable_object()

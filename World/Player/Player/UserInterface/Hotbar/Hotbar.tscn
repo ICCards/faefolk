@@ -18,7 +18,7 @@ anchor_right = 0.5
 margin_left = -303.0
 margin_right = 303.0
 margin_bottom = 93.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource( 3 )
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
@@ -178,3 +178,5 @@ margin_right = 2595.0
 margin_bottom = 61.0
 theme = ExtResource( 5 )
 text = "0"
+
+[connection signal="mouse_entered" from="Bg" to="." method="_on_Bg_mouse_entered"]

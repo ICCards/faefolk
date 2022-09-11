@@ -184,25 +184,29 @@ func _unhandled_input(event):
 			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if item_name == "blueprint" and current_building_item != null:
+				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+					#destroy_placable_object()
+					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
+				elif item_name == "blueprint" and current_building_item != null:
 					show_placable_object(current_building_item, "BUILDING")
 				elif event.is_action_pressed("mouse_click") and item_name == "fishing rod":
 					fish()
-				elif event.is_action_pressed("mouse_click") and item_category == "Tool":
+				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
 					swing(item_name)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish"):
 					eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
 					show_placable_object(item_name, item_category)
-				else:
+				elif item_name != "blueprint":
 					destroy_placable_object()
 			else:
-				destroy_placable_object()
+				#destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
 	else:
-		current_building_item = null
-		destroy_placable_object()
+		pass
+		#current_building_item = null
+		#destroy_placable_object()
 
 
 func show_placable_object(item_name, item_category):
@@ -213,6 +217,7 @@ func show_placable_object(item_name, item_category):
 		placeObject.name = "PlaceObject"
 		placeObject.item_name = item_name
 		placeObject.item_category = item_category
+		placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 		add_child(placeObject)
 	else:
 		if get_node("PlaceObject").item_name != item_name: # exists but item changed
@@ -221,7 +226,8 @@ func show_placable_object(item_name, item_category):
 			get_node("PlaceObject").initialize()
 			
 func destroy_placable_object():
-	current_building_item = null
+	pass
+	#current_building_item = null
 	if has_node("PlaceObject"):
 		get_node("PlaceObject").queue_free()
 
