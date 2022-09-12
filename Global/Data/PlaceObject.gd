@@ -41,10 +41,11 @@ enum Placables {
 }
 
 enum Lights {
-	CAMPFIRE,
+	null,
 	FIRE_PEDESTAL,
 	TALL_FIRE_PEDESTAL,
-	TORCH
+	TORCH,
+	CAMPFIRE
 }
 
 enum Paths {

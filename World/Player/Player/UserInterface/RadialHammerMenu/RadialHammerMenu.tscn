@@ -5,7 +5,7 @@
 [ext_resource path="res://World/Player/Player/UserInterface/RadialHammerMenu/RadialHammerMenu.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.137255, 0.133333, 0.133333, 0.737255 )
+bg_color = Color( 0.133333, 0.133333, 0.137255, 0.737255 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "set active"

@@ -28,6 +28,8 @@ func _on_gold_watering_can_pressed():
 	
 func _on_fishing_rod_pressed():
 	get_parent().craft("fishing rod")
+func _on_scythe_pressed():
+	get_parent().craft("scythe")
 
 
 func _on_wood_sword_mouse_entered():
@@ -75,4 +77,9 @@ func _on_fishing_rod_mouse_entered():
 func _on_fishing_rod_mouse_exited():
 	get_parent().exited_item_area("fishing rod")
 
+
+func _on_scythe_mouse_entered():
+	get_parent().entered_item_area("scythe")
+func _on_scythe_mouse_exited():
+	get_parent().exited_item_area("scythe")
 

@@ -113,7 +113,8 @@ func toggle_chest():
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 	else:
-		$PlayerStatsUI.hide()
+		print("THISxxxx")
+		$PlayerStatsUI.show()
 		$OpenChest.hide()
 		$Hotbar.initialize_hotbar()
 	$Hotbar.visible  =!$Hotbar.visible
