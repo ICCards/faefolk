@@ -16,6 +16,9 @@ func _ready():
 	name = str(id)
 	set_type()
 	
+func remove_icon():
+	$SelectedBorder.hide()
+	
 func set_type():
 	match tier:
 		"twig":
@@ -34,7 +37,7 @@ func set_type():
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
 		"demolish":
-			queue_free()
+			remove_tile()
 	update_health_bar()
 
 
@@ -76,6 +79,7 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode:
 			var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			if tool_name == "hammer":
+				$SelectedBorder.show()
 				Server.player_node.get_node("Camera2D/UserInterface/RadialHammerMenu").initialize(location, self)
 
 

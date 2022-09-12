@@ -25,10 +25,12 @@ func initialize(_loc, _node):
 func radial_menu_off():
 	cam.set_process_input(true) 
 	hide()
+	if is_instance_valid(tile_node):
+		tile_node.remove_icon()
 	if current_index != -1:
 		change_tile()
 		current_index = -1
-
+	
 func change_tile():
 	Server.world.play_upgrade_building_effect(location)
 	var new_tier = buttons[current_index]
@@ -54,8 +56,9 @@ func change_tile():
 func _input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		if PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] == "hammer":
-			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and PlayerInventory.viewInventoryMode:
 				if not event.is_pressed():
+					print("RAD MENU OFFs")
 					radial_menu_off()
 					yield(get_tree().create_timer(0.25), "timeout")
 					PlayerInventory.viewInventoryMode = false

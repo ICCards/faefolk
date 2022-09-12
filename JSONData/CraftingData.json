@@ -258,6 +258,17 @@
          "ingredients": [
          ["wood", 10],
          ]
+     },
+     "door side": {
+         "ingredients": [
+         ["wood", 10],
+         ]
+     },
+     "scythe": {
+         "ingredients": [
+         ["wood", 10],
+         ["iron ingot", 10]
+         ]
      }
      
 }

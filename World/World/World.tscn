@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=2]
+[gd_scene load_steps=122 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -419,49 +419,10 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 [sub_resource type="ConvexPolygonShape2D" id=303]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=304]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="StreamTexture" id=267]
-load_path = "res://.import/1.png-928147cc442d365e2e82ff4cf2b029cf.stex"
-
-[sub_resource type="StreamTexture" id=268]
-load_path = "res://.import/2.png-c77f361e561629cc418a38d1a6741a11.stex"
-
-[sub_resource type="StreamTexture" id=269]
-load_path = "res://.import/3.png-7b129090d2168bdd1f97f78d0f57ca12.stex"
-
-[sub_resource type="StreamTexture" id=270]
-load_path = "res://.import/4.png-075e4939c626be87ee7ba2bcc05409ea.stex"
-
-[sub_resource type="StreamTexture" id=271]
-load_path = "res://.import/5.png-098470cb2f2d8ffd6ff5b82671e644a4.stex"
-
-[sub_resource type="StreamTexture" id=272]
-load_path = "res://.import/6.png-6e79c03a9d9d0c60a5a37e6a54433953.stex"
-
-[sub_resource type="AnimatedTexture" id=305]
-frames = 6
-fps = 3.0
-frame_0/texture = SubResource( 267 )
-frame_1/texture = SubResource( 268 )
-frame_1/delay_sec = 0.0
-frame_2/texture = SubResource( 269 )
-frame_2/delay_sec = 0.0
-frame_3/texture = SubResource( 270 )
-frame_3/delay_sec = 0.0
-frame_4/texture = SubResource( 271 )
-frame_4/delay_sec = 0.0
-frame_5/texture = SubResource( 272 )
-frame_5/delay_sec = 0.0
-
 [sub_resource type="ConvexPolygonShape2D" id=306]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=307]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=308]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=309]
@@ -779,27 +740,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 13/shape_one_way_margin = 0.0
 13/shapes = [  ]
 13/z_index = 0
-14/name = "campfire.tres 14"
-14/texture = SubResource( 305 )
-14/tex_offset = Vector2( 0, -32 )
-14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 0, 0, 32, 64 )
-14/tile_mode = 0
-14/occluder_offset = Vector2( 0, 0 )
-14/navigation_offset = Vector2( 0, 0 )
-14/shape_offset = Vector2( 0, 0 )
-14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-14/shape = SubResource( 304 )
-14/shape_one_way = false
-14/shape_one_way_margin = 1.0
-14/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 304 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-14/z_index = 0
 15/name = "fire_pedestal_tall.tres 15"
 15/texture = ExtResource( 11 )
 15/tex_offset = Vector2( 0, -64 )
@@ -842,27 +782,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 16/z_index = 0
-17/name = "campfire.tres 17"
-17/texture = ExtResource( 10 )
-17/tex_offset = Vector2( 0, 0 )
-17/modulate = Color( 1, 1, 1, 1 )
-17/region = Rect2( 0, 0, 32, 32 )
-17/tile_mode = 0
-17/occluder_offset = Vector2( 0, 0 )
-17/navigation_offset = Vector2( 0, 0 )
-17/shape_offset = Vector2( 0, 0 )
-17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-17/shape = SubResource( 308 )
-17/shape_one_way = false
-17/shape_one_way_margin = 1.0
-17/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 308 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-17/z_index = 0
 20/name = "Scaled_Camp_Graves.png 20"
 20/texture = ExtResource( 22 )
 20/tex_offset = Vector2( 0, 0 )
@@ -940,9 +859,20 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 32, 0, 32 )
 24/shape_one_way_margin = 0.0
 24/shapes = [  ]
 24/z_index = 0
-
-[sub_resource type="ConvexPolygonShape2D" id=340]
-points = PoolVector2Array( 0, 9.53394, 32, 9.72087, 32, 32, 0, 32 )
+25/name = "campfire.tres 25"
+25/texture = ExtResource( 10 )
+25/tex_offset = Vector2( 0, 0 )
+25/modulate = Color( 1, 1, 1, 1 )
+25/region = Rect2( 0, 0, 32, 32 )
+25/tile_mode = 0
+25/occluder_offset = Vector2( 0, 0 )
+25/navigation_offset = Vector2( 0, 0 )
+25/shape_offset = Vector2( 0, 0 )
+25/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+25/shape_one_way = false
+25/shape_one_way_margin = 0.0
+25/shapes = [  ]
+25/z_index = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=341]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -951,27 +881,6 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=342]
-0/name = "campfire.tres 0"
-0/texture = ExtResource( 10 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 340 )
-0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 340 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-0/z_index = 0
 1/name = "fire_pedestal.tres 1"
 1/texture = ExtResource( 12 )
 1/tex_offset = Vector2( 0, -32 )
@@ -1028,6 +937,20 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
+4/name = "campfire.tres 4"
+4/texture = ExtResource( 10 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 32, 32 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
 
 [sub_resource type="TileSet" id=374]
 0/name = "stone foundation.png 0"
@@ -1782,33 +1705,6 @@ glow_strength = 0.84
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="StreamTexture" id=376]
-
-[sub_resource type="TileSet" id=357]
-0/name = "Wall23-x2.png 0"
-0/texture = SubResource( 376 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 320, 96 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [  ]
-0/autotile/icon_coordinate = Vector2( 0, 0 )
-0/autotile/tile_size = Vector2( 32, 96 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-
 [node name="World" type="YSort"]
 script = ExtResource( 7 )
 
@@ -1946,7 +1842,6 @@ collision_layer = 0
 format = 1
 
 [node name="LightTiles" type="TileMap" parent="PlacableTiles"]
-modulate = Color( 1.7, 1.7, 1.7, 1 )
 tile_set = SubResource( 342 )
 cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2
@@ -2014,10 +1909,5 @@ visible = false
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
 wait_time = 3.0
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 357 )
-cell_size = Vector2( 32, 32 )
-format = 1
 
 [connection signal="timeout" from="SpawnEnemyTimer" to="." method="_on_SpawnEnemyTimer_timeout"]

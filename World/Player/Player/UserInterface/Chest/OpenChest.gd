@@ -165,3 +165,7 @@ func _on_TrashButton_pressed():
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
+
+
+func _on_btn_pressed():
+	find_parent("UserInterface").toggle_chest()
