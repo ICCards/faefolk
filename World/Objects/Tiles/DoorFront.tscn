@@ -1,12 +1,14 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Assets/Tilesets/doors/wood.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Tilesets/doors/armored.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/4.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/2.png" type="Texture" id=4]
 [ext_resource path="res://World/Objects/Tiles/DoorFront.gd" type="Script" id=5]
 [ext_resource path="res://Assets/skull.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Images/Misc/selected tile 2x1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Misc/watering can progress indicator.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/3.png" type="Texture" id=11]
 
 [sub_resource type="Animation" id=8]
@@ -56,53 +58,45 @@ tracks/0/keys = {
 "values": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 3 ) ]
 }
 
+[sub_resource type="Animation" id=11]
+length = 0.001
+
+[sub_resource type="Animation" id=12]
+resource_name = "show health bar"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("HealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 32, 7.5 )
+
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 30, 13 )
+extents = Vector2( 30, 15.5 )
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 180 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 180 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 180 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 180 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 180 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 180 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 180 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 180 )
-
-[sub_resource type="SpriteFrames" id=13]
-animations = [ {
-"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": false,
-"name": "close",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": false,
-"name": "open",
-"speed": 5.0
-} ]
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 30.5, 15 )
 
 [node name="DoubleDoorFront" type="Node2D"]
 script = ExtResource( 5 )
@@ -131,20 +125,14 @@ anims/RESET = SubResource( 8 )
 anims/close = SubResource( 6 )
 anims/open = SubResource( 5 )
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 0, -9 )
-collision_layer = 32
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 32, -4 )
-shape = SubResource( 2 )
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 11 )
+"anims/show health bar" = SubResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 32, -36 )
-frames = SubResource( 13 )
-animation = "close"
-frame = 3
+frames = ExtResource( 1 )
+animation = "open"
 
 [node name="SelectedBorder" type="Sprite" parent="."]
 visible = false
@@ -152,6 +140,55 @@ position = Vector2( 32, -16 )
 z_index = 1
 texture = ExtResource( 7 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
+[node name="MovementCollision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
+position = Vector2( 32, -7.5 )
+shape = SubResource( 9 )
+
+[node name="EnterDoorway" type="Area2D" parent="."]
+position = Vector2( 0, -9 )
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoorway"]
+position = Vector2( 32, -1.5 )
+shape = SubResource( 2 )
+
+[node name="HealthBar" type="Node2D" parent="."]
+visible = false
+position = Vector2( 13, 2 )
+scale = Vector2( 2.5, 3 )
+z_index = 1
+
+[node name="Border" type="TextureRect" parent="HealthBar"]
+margin_right = 16.0
+margin_bottom = 3.0
+texture = ExtResource( 8 )
+
+[node name="Progress" type="TextureProgress" parent="HealthBar"]
+modulate = Color( 0.109804, 1, 0, 1 )
+margin_left = 0.800002
+margin_top = 0.666664
+margin_right = 14.8
+margin_bottom = 1.66666
+max_value = 250.0
+value = 250.0
+texture_progress = ExtResource( 9 )
+nine_patch_stretch = true
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2( 16, -16 )
+collision_layer = 24
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+light_mask = 0
+position = Vector2( 15.5, 0 )
+shape = SubResource( 10 )
+
+[connection signal="area_entered" from="EnterDoorway" to="." method="_on_EnterDoorway_area_entered"]
+[connection signal="area_exited" from="EnterDoorway" to="." method="_on_EnterDoorway_area_exited"]
+[connection signal="input_event" from="EnterDoorway" to="." method="_on_Area2D_input_event"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

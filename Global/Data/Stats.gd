@@ -2,8 +2,8 @@ extends Node
 
 signal tool_health_change
 
-const MAX_TWIG_WALL = 10
-const MAX_WOOD_WALL = 250
+const MAX_TWIG_WALL = 2
+const MAX_WOOD_WALL = 3
 const MAX_STONE_WALL = 500
 const MAX_METAL_WALL = 1000
 const MAX_ARMORED_WALL = 2000

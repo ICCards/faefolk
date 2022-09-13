@@ -19,30 +19,30 @@ region = Rect2( 128, 180, 64, 180 )
 atlas = ExtResource( 1 )
 region = Rect2( 192, 180, 64, 180 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 192, 180, 64, 180 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 180, 64, 180 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 180, 64, 180 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 180, 64, 180 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": false,
 "name": "close",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": false,
 "name": "open",
 "speed": 5.0
@@ -55,9 +55,9 @@ extents = Vector2( 32, 13 )
 script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -16, -18 )
-frames = SubResource( 11 )
-animation = "open"
+position = Vector2( -16, -50 )
+frames = SubResource( 7 )
+animation = "close"
 frame = 3
 offset = Vector2( 32, -32 )
 
@@ -69,5 +69,3 @@ collision_mask = 32
 position = Vector2( 3, -32 )
 rotation = 1.5708
 shape = SubResource( 2 )
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

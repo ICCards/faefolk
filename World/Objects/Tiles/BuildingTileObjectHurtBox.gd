@@ -53,6 +53,7 @@ func update_health_bar():
 func remove_tile():
 	Tiles.reset_valid_tiles(location)
 	Tiles.wall_tiles.set_cellv(location, -1)
+	Tiles.path_tiles.set_cellv(location, -1)
 	Tiles.wall_tiles.update_bitmask_area(location)
 	queue_free()
 
