@@ -16,15 +16,21 @@ var page1 = [
 	"wood chest",
 	"stone chest",
 	"campfire",
-	"fire pedestal",
 	"sleeping bag",
-	"workbench"
+	"workbench #1",
+	"workbench #2"
 ]
 
 var page2 = [
-	"stove",
-	"grain mill",
-	"tall fire pedestal",
+	"workbench #3",
+	"grain mill #1",
+	"grain mill #2",
+	"grain mill #3",
+	"stove #1",
+]
+var page3 = [
+	"stove #2",
+	"stove #3",
 	"tent"
 ]
 
@@ -51,6 +57,7 @@ func initialize():
 	page = 1
 	$Page1.show()
 	$Page2.hide()
+	$Page3.hide()
 	reset_hover_effect()
 	initialize_crafting()
 
@@ -59,16 +66,37 @@ func _on_DownButton_pressed():
 	page = 2
 	$Page1.hide()
 	$Page2.show()
+	$Page3.hide()
 	initialize_crafting()
-	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting2.png")
+	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting3.png")
 
-func _on_UpButton_pressed():
+func _on_Pg2UpButton_pressed():
 	play_craft_sound()
 	page = 1
 	$Page1.show()
 	$Page2.hide()
+	$Page3.hide()
 	initialize_crafting()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting1.png")
+	
+func _on_Pg2DownButton_pressed():
+	play_craft_sound()
+	page = 3
+	$Page1.hide()
+	$Page2.hide()
+	$Page3.show()
+	initialize_crafting()
+	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting2.png")
+
+	
+func _on_Pg3UpButton_pressed():
+	play_craft_sound()
+	page = 2
+	$Page1.hide()
+	$Page2.show()
+	$Page3.hide()
+	initialize_crafting()
+	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting3.png")
 
 func intialize_slots():
 	var i_slots = inventory_slots.get_children()
@@ -90,6 +118,8 @@ func reset_hover_effect():
 		$Page1.get_node(item).scale = Vector2(3,3)
 	for item in page2:
 		$Page2.get_node(item).scale = Vector2(3,3)
+	for item in page3:
+		$Page3.get_node(item).scale = Vector2(3,3)
 
 func initialize_crafting():
 	PlayerInventory.HotbarSlots = $HotbarSlots
@@ -107,6 +137,12 @@ func initialize_crafting():
 				$Page2.get_node(item).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page2.get_node(item).modulate = Color(1, 1, 1, 0.4)
+	elif page == 3:
+		for item in page3:
+			if PlayerInventory.isSufficientMaterialToCraft(item):
+				$Page3.get_node(item).modulate = Color(1, 1, 1, 1)
+			else:
+				$Page3.get_node(item).modulate = Color(1, 1, 1, 0.4)
  
 
 func _physics_process(delta):
@@ -271,20 +307,6 @@ func _on_TorchButton_mouse_exited():
 func _on_TorchButton_pressed():
 	craftable_item_pressed()
 
-func _on_WoodPathButton_mouse_exited():
-	exited_crafting_area("wood path")
-func _on_WoodPathButton_mouse_entered():
-	entered_crafting_area("wood path")
-func _on_WoodPathButton_pressed():
-	craftable_item_pressed()
-
-func _on_StonePathButton_mouse_entered():
-	entered_crafting_area("stone path")
-func _on_StonePathButton_mouse_exited():
-	exited_crafting_area("stone path")
-func _on_StonePathButton_pressed():
-	craftable_item_pressed()
-
 func _on_CampfireButton_mouse_entered():
 	entered_crafting_area("campfire")
 func _on_CampfireButton_mouse_exited():
@@ -306,13 +328,6 @@ func _on_StoneChestButton_mouse_exited():
 func _on_StoneChestButton_pressed():
 	craftable_item_pressed()
 
-func _on_FirePedestalButton_mouse_entered():
-	entered_crafting_area("fire pedestal")
-func _on_FirePedestalButton_mouse_exited():
-	exited_crafting_area("fire pedestal")
-func _on_FirePedestalButton_pressed():
-	craftable_item_pressed()
-
 func _on_SleepingBagButton_mouse_entered():
 	entered_crafting_area("sleeping bag")
 func _on_SleepingBagButton_mouse_exited():
@@ -320,14 +335,6 @@ func _on_SleepingBagButton_mouse_exited():
 func _on_SleepingBagButton_pressed():
 	craftable_item_pressed()
 
-func _on_TallFirePedestalButton_mouse_entered():
-	entered_crafting_area("tall fire pedestal")
-func _on_TallFirePedestalButton_mouse_exited():
-	exited_crafting_area("tall fire pedestal")
-func _on_TallFirePedestalButton_pressed():
-	craftable_item_pressed()
-	
-	
 func _on_TentButton_mouse_entered():
 	entered_crafting_area("tent")
 func _on_TentButton_mouse_exited():
@@ -335,27 +342,69 @@ func _on_TentButton_mouse_exited():
 func _on_TentButton_pressed():
 	craftable_item_pressed()
 	
-func _on_GrainMillButton_mouse_entered():
-	entered_crafting_area("grain mill")
-func _on_GrainMillButton_mouse_exited():
-	exited_crafting_area("grain mill")
-func _on_GrainMillButton_pressed():
-	craftable_item_pressed()
-	
-func _on_KitchenButton_mouse_entered():
-	entered_crafting_area("stove")
-func _on_KitchenButton_mouse_exited():
-	exited_crafting_area("stove")
-func _on_KitchenButton_pressed():
-	craftable_item_pressed()
-	
 func _on_WorkbenchButton_mouse_entered():
-	entered_crafting_area("workbench")
+	entered_crafting_area("workbench #1")
 func _on_WorkbenchButton_mouse_exited():
-	exited_crafting_area("workbench")
+	exited_crafting_area("workbench #1")
 func _on_WorkbenchButton_pressed():
 	craftable_item_pressed()
 
+func _on_WorkbenchButton2_mouse_entered():
+	entered_crafting_area("workbench #2")
+func _on_WorkbenchButton2_mouse_exited():
+	exited_crafting_area("workbench #2")
+func _on_WorkbenchButton2_pressed():
+	craftable_item_pressed()
 
 
+func _on_WorkbenchButton3_mouse_exited():
+	exited_crafting_area("workbench #3")
+func _on_WorkbenchButton3_mouse_entered():
+	entered_crafting_area("workbench #3")
+func _on_WorkbenchButton3_pressed():
+	craftable_item_pressed()
 
+func _on_GrainMillButton_mouse_entered():
+	entered_crafting_area("grain mill #1")
+func _on_GrainMillButton_mouse_exited():
+	exited_crafting_area("grain mill #1")
+func _on_GrainMillButton_pressed():
+	craftable_item_pressed()
+
+func _on_GrainMillButton2_pressed():
+	craftable_item_pressed()
+func _on_GrainMillButton2_mouse_entered():
+	entered_crafting_area("grain mill #2")
+func _on_GrainMillButton2_mouse_exited():
+	exited_crafting_area("grain mill #2")
+
+func _on_GrainMillButton3_pressed():
+	craftable_item_pressed()
+func _on_GrainMillButton3_mouse_entered():
+	entered_crafting_area("grain mill #3")
+
+func _on_GrainMillButton3_mouse_exited():
+	exited_crafting_area("grain mill #3")
+
+
+func _on_KitchenButton_mouse_entered():
+	entered_crafting_area("stove #1")
+func _on_KitchenButton_mouse_exited():
+	exited_crafting_area("stove #1")
+func _on_KitchenButton_pressed():
+	craftable_item_pressed()
+
+func _on_StoveButton2_mouse_entered():
+	entered_crafting_area("stove #2")
+func _on_StoveButton2_mouse_exited():
+	exited_crafting_area("stove #2")
+func _on_StoveButton2_pressed():
+	craftable_item_pressed()
+
+
+func _on_StoveButton3_mouse_entered():
+	entered_crafting_area("stove #3")
+func _on_StoveButton3_mouse_exited():
+	exited_crafting_area("stove #3")
+func _on_StoveButton3_pressed():
+	craftable_item_pressed()

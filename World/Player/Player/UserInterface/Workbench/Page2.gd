@@ -30,6 +30,10 @@ func _on_fishing_rod_pressed():
 	get_parent().craft("fishing rod")
 func _on_scythe_pressed():
 	get_parent().craft("scythe")
+func _on_hammer_pressed():
+	get_parent().craft("hammer")
+func _on_blueprint_pressed():
+	get_parent().craft("blueprint")
 
 
 func _on_wood_sword_mouse_entered():
@@ -77,9 +81,19 @@ func _on_fishing_rod_mouse_entered():
 func _on_fishing_rod_mouse_exited():
 	get_parent().exited_item_area("fishing rod")
 
-
 func _on_scythe_mouse_entered():
 	get_parent().entered_item_area("scythe")
 func _on_scythe_mouse_exited():
 	get_parent().exited_item_area("scythe")
+
+func _on_hammer_mouse_entered():
+	get_parent().entered_item_area("hammer")
+func _on_hammer_mouse_exited():
+	get_parent().exited_item_area("hammer")
+
+
+func _on_blueprint_mouse_entered():
+	get_parent().entered_item_area("blueprint")
+func _on_blueprint_mouse_exited():
+	get_parent().exited_item_area("blueprint")
 

@@ -93,7 +93,9 @@ func set_dimensions():
 				$ColorIndicator.tile_size = Vector2(8, 4)
 				$ItemToPlace.rect_position = Vector2(-3, -301)
 				$ItemToPlace.rect_scale = Vector2(0.9, 0.9)
-			elif item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove":
+			elif item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench #1" or item_name == "grain mill #1" or item_name == "stove #1" \
+					or item_name == "workbench #2" or item_name == "grain mill #2" or item_name == "stove #2" or \
+					item_name == "workbench #3" or item_name == "grain mill #3" or item_name == "stove #3":
 				$ColorIndicator.tile_size = Vector2(2, 1)
 			else:
 				$ColorIndicator.tile_size = Vector2(1, 1)
@@ -296,7 +298,9 @@ func place_item_state():
 	if Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench" or item_name == "grain mill" or item_name == "stove") and Tiles.valid_tiles.get_cellv(location + Vector2(1,0)) != 0:
+	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench #1" or item_name == "grain mill #1" or item_name == "stove #1" \
+	or item_name == "workbench #2" or item_name == "grain mill #2" or item_name == "stove #2" or \
+	item_name == "workbench #3" or item_name == "grain mill #3" or item_name == "stove #3") and Tiles.valid_tiles.get_cellv(location + Vector2(1,0)) != 0:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif item_name == "house" and not Tiles.validate_tiles(location, Vector2(8,4)):

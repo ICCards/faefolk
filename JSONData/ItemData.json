@@ -486,20 +486,50 @@
       "StackSize": 1,
       "Description": "Large placable shelter with high durability."
   },
-  "workbench": {
+  "workbench #1": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Place to upgrade or repair tools."
+      "Description": "Used to craft tools. Level 1."
   },
-  "grain mill": {
+  "workbench #2": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Place to process grains for cooking."
+      "Description": "Used to craft tools. Level 2."
   },
-  "stove": {
+  "workbench #3": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Place to cook food recipes."
+      "Description": "Used to craft tools. Level 3."
+  },
+  "grain mill #1": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to process grains for cooking recipes. Level 1."
+  },
+  "grain mill #2": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to process grains for cooking recipes. Level 2."
+  },
+  "grain mill #3": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to process grains for cooking recipes. Level 3."
+  },
+  "stove #1": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to cook recipes. Level 1."
+  },
+  "stove #2": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to cook recipes. Level 2."
+  },
+  "stove #3": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to cook recipes. Level 3."
   },
   "tent": {
       "ItemCategory": "Placable object",
