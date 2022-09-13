@@ -54,7 +54,7 @@ func set_dimensions():
 		PlayerInventory.chests[id] = {}
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
-	elif item_name == "workbench":
+	elif item_name == "workbench #1":
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 131072
 		scale.x = 2.0
