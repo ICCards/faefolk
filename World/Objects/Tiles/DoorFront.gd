@@ -19,7 +19,7 @@ func _on_Area2D_area_entered(area):
 	
 func set_type():
 	if tier == "demolish":
-		Tiles.set_valid_tiles(location, Vector2(2,0))
+		Tiles.set_valid_tiles(location, Vector2(2,1))
 		queue_free()
 	
 func remove_icon():

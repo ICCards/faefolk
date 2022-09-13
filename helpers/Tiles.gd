@@ -39,7 +39,7 @@ func remove_invalid_tiles(location, dimensions):
 func set_valid_tiles(location, dimensions):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cellv(location + Vector2(x, -y), 0)
+			valid_tiles.set_cellv(location + Vector2(x, y), 0)
 
 func reset_valid_tiles(location, var item_name = ""):
 	var object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
