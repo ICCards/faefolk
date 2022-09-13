@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var WallHitEffect = preload("res://World/Objects/Tiles/WallHitEffect.tscn")
 
 var tier
 var health
@@ -59,6 +60,7 @@ func remove_tile():
 
 
 func _on_HurtBox_area_entered(area):
+	play_hit_effect()
 	Stats.decrease_tool_health()
 	show_health()
 	if tier == "twig" or tier == "wood":
@@ -69,6 +71,14 @@ func _on_HurtBox_area_entered(area):
 			temp_health = 0
 			health -= 1
 	update_health_bar()
+
+func play_hit_effect():
+	var wallHitEffect = WallHitEffect.instance()
+	wallHitEffect.tier = tier
+	wallHitEffect.autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
+	wallHitEffect.location = location
+	wallHitEffect.position += Vector2(-16, 16)
+	add_child(wallHitEffect)
 
 
 func show_health():
