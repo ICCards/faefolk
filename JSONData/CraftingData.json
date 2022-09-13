@@ -68,22 +68,58 @@
             ["stone", 10]
          ]
      },
-     "workbench": {
+     "workbench #1": {
          "ingredients" : [
              ["wood", 10],
              ["stone", 10]
          ]
      },
-     "grain mill": {
+     "workbench #2": {
          "ingredients" : [
              ["wood", 20],
              ["stone", 20]
          ]
      },
-     "stove": {
+     "workbench #3": {
          "ingredients" : [
              ["wood", 30],
              ["stone", 30]
+         ]
+     },
+     "grain mill #1": {
+         "ingredients" : [
+             ["wood", 20],
+             ["stone", 20]
+         ]
+     },
+     "grain mill #2": {
+         "ingredients" : [
+             ["wood", 40],
+             ["stone", 40]
+         ]
+     },
+     "grain mill #3": {
+         "ingredients" : [
+             ["wood", 60],
+             ["stone", 60]
+         ]
+     },
+     "stove #1": {
+         "ingredients" : [
+             ["wood", 30],
+             ["stone", 30]
+        ],
+     },
+     "stove #2": {
+         "ingredients" : [
+             ["wood", 60],
+             ["stone", 60]
+        ],
+     },
+     "stove #3": {
+         "ingredients" : [
+             ["wood", 90],
+             ["stone", 90]
         ],
      },
      "wood wall": {
@@ -265,6 +301,18 @@
          ]
      },
      "scythe": {
+         "ingredients": [
+         ["wood", 10],
+         ["iron ingot", 10]
+         ]
+     },
+     "hammer": {
+         "ingredients": [
+         ["wood", 10],
+         ["iron ingot", 10]
+         ],
+     },
+     "blueprint": {
          "ingredients": [
          ["wood", 10],
          ["iron ingot", 10]

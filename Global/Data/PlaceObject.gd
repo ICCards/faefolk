@@ -11,6 +11,7 @@ onready var TentRight = preload("res://World/Objects/Farm/TentRight.tscn")
 onready var TentLeft = preload("res://World/Objects/Farm/TentLeft.tscn")
 onready var StoneDoubleDoor = preload("res://World/Objects/Tiles/DoorFront.tscn")
 onready var StoneDoubleDoorSide = preload("res://World/Objects/Tiles/DoubleDoorSide.tscn")
+onready var Rug  = preload("res://World/Objects/Misc/Rug.tscn")
 
 onready var valid_tiles
 onready var fence_tiles 
@@ -85,6 +86,9 @@ func place_building_object_in_world(id, item_name, location):
 		"door front":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			var object = StoneDoubleDoor.instance()
+			object.location = location
+			object.tier = "wood"
+			object.id = rng.randi_range(0, 10000)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
 		"door side":
@@ -100,7 +104,7 @@ func place_building_object_in_world(id, item_name, location):
 			object.tier = "twig"
 			Server.world.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
-			Tiles.foundation_tiles.set_cellv(location, 0)
+			Tiles.foundation_tiles.set_cellv(location, 1)
 			Tiles.foundation_tiles.update_bitmask_area(location)
 
 
@@ -130,8 +134,11 @@ func place_object_in_world(id, item_name, location):
 			object.global_position = fence_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
 		"torch":
-			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			light_tiles.set_cellv(location, Lights.TORCH)
+			var object = Rug.instance()
+			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+			Server.world.call_deferred("add_child", object, true)
+#			Tiles.remove_invalid_tiles(location, Vector2(1,1))
+#			light_tiles.set_cellv(location, Lights.TORCH)
 		"campfire":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			light_tiles.set_cellv(location, Lights.CAMPFIRE)
@@ -165,21 +172,33 @@ func place_object_in_world(id, item_name, location):
 			Server.player_house_id = str(id)
 			Server.world.get_node("PlacableTiles").call_deferred("add_child", playerHouseObject, true)
 			playerHouseObject.global_position = fence_tiles.map_to_world(location) + Vector2(6,6)
-		"workbench":
+		"workbench #1":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.WORKBENCH1)
-		"workbench2":
+		"workbench #2":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.WORKBENCH2)
-		"workbench3":
+		"workbench #3":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.WORKBENCH3)
-		"grain mill":
+		"grain mill #1":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.GRAIN_MILL1)
-		"stove":
+		"grain mill #2":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
+			object_tiles.set_cellv(location, Placables.GRAIN_MILL2)
+		"grain mill #3":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
+			object_tiles.set_cellv(location, Placables.GRAIN_MILL3)
+		"stove #1":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			object_tiles.set_cellv(location, Placables.STOVE1)
+		"stove #2":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
+			object_tiles.set_cellv(location, Placables.STOVE2)
+		"stove #3":
+			Tiles.remove_invalid_tiles(location, Vector2(2,1))
+			object_tiles.set_cellv(location, Placables.STOVE3)
 		"tent down":
 			Tiles.remove_invalid_tiles(location, Vector2(4,4))
 			var tent = TentDown.instance()
