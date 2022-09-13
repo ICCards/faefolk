@@ -102,7 +102,6 @@ extents = Vector2( 30.5, 15 )
 script = ExtResource( 5 )
 
 [node name="LightMask" type="Light2D" parent="."]
-visible = false
 light_mask = 32
 position = Vector2( 32, -53 )
 scale = Vector2( 1, 0.981482 )
@@ -112,7 +111,6 @@ range_item_cull_mask = 32
 shadow_item_cull_mask = 0
 
 [node name="Bg" type="Sprite" parent="."]
-visible = false
 light_mask = 32
 position = Vector2( 32.0252, -51.5306 )
 scale = Vector2( 0.0504334, 0.0504707 )
@@ -130,6 +128,7 @@ anims/RESET = SubResource( 11 )
 "anims/show health bar" = SubResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 32, -36 )
 frames = ExtResource( 1 )
 animation = "open"
