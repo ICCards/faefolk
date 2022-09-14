@@ -13,6 +13,8 @@ onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
 onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
 onready var ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
 
+onready var ArrowProjectile = preload("res://World/Objects/Misc/ArrowProjectile.tscn")
+
 var rng = RandomNumberGenerator.new()
 
 var animation
@@ -25,6 +27,9 @@ enum {
 	FISHING,
 	CHANGE_TILE
 }
+
+func _process(delta):
+	$ArrowDirection.look_at(get_global_mouse_position())
 
 func swing(item_name, direction):
 	if get_parent().state != SWINGING:
@@ -43,6 +48,13 @@ func swing(item_name, direction):
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
+		elif item_name == "bow":
+			if PlayerInventory.returnSufficentCraftingMaterial("arrow", 1):
+				draw_bow()
+				return
+			else:
+				get_parent().state = MOVEMENT
+				return
 		elif item_name == null:
 			set_swing_collision_layer_and_position(item_name, direction)
 			animation = "punch_" + direction.to_lower()
@@ -56,6 +68,28 @@ func swing(item_name, direction):
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
+		
+func draw_bow():
+	animation = "draw_" + get_parent().direction.to_lower()
+	player_animation_player.play("axe pickaxe swing")
+	PlayerStats.decrease_energy()
+	composite_sprites.set_player_animation(get_parent().character, animation, "bow")
+	yield(player_animation_player, "animation_finished" )
+	animation = "release_" + get_parent().direction.to_lower()
+	composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
+	player_animation_player.play("release bow")
+	yield(player_animation_player, "animation_finished" )
+	PlayerInventory.remove_material("arrow", 1)
+	shoot()
+	get_parent().state = MOVEMENT
+	
+func shoot():
+	var arrow = ArrowProjectile.instance()
+	get_node("../../../").add_child(arrow)
+	arrow.transform = $ArrowDirection.transform
+	arrow.position = $ArrowDirection/Position2D.global_position
+	arrow.velocity = get_global_mouse_position() - arrow.position
+	
 
 func set_swing_collision_layer_and_position(tool_name, direction):
 	axe_pickaxe_swing.position = Util.set_swing_position(Vector2(0,0), direction)

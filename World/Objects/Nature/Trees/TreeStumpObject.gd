@@ -38,7 +38,7 @@ func PlayEffect(player_id):
 		else: 
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump hit right")
-	else:
+	elif health == 0:
 		$SoundEffects.stream = Sounds.stump_break
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
@@ -54,7 +54,7 @@ func _on_StumpHurtBox_area_entered(_area):
 	var data = {"id": name, "n": "stump"}
 	Server.action("ON_HIT", data)
 	health -= 1
-	if health <= 0: 
+	if health == 0: 
 		Tiles.reset_valid_tiles(loc, "stump")
 		$SoundEffects.stream = Sounds.stump_break
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)

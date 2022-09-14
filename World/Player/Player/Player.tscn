@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
@@ -2461,6 +2461,202 @@ tracks/16/keys = {
 "values": [ 4 ]
 }
 
+[sub_resource type="Animation" id=70]
+resource_name = "release bow"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ToolEquipped:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Shoes:hframes")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 4 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Accessory:hframes")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 4 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Pants:hframes")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 4 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Shirts:hframes")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 4 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Arms:hframes")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 4 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("HeadAtr:hframes")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 4 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Body:hframes")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 4 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("ToolEquipped:hframes")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 4 ]
+}
+
 [sub_resource type="Animation" id=44]
 resource_name = "retract"
 length = 0.8
@@ -4921,6 +5117,7 @@ anims/harvest_right = SubResource( 54 )
 anims/harvest_up = SubResource( 60 )
 anims/idle = SubResource( 4 )
 anims/movement = SubResource( 38 )
+"anims/release bow" = SubResource( 70 )
 anims/retract = SubResource( 44 )
 anims/scythe_swing_down = SubResource( 65 )
 anims/scythe_swing_left = SubResource( 66 )
@@ -4954,7 +5151,7 @@ shape = SubResource( 2 )
 
 [node name="SwordSwing" type="Area2D" parent="Swing"]
 visible = false
-collision_layer = 0
+collision_layer = 32
 collision_mask = 2304
 script = SubResource( 68 )
 
@@ -4973,6 +5170,12 @@ position = Vector2( 0, -67 )
 rotation = 1.5708
 shape = SubResource( 28 )
 disabled = true
+
+[node name="ArrowDirection" type="Node2D" parent="Swing"]
+position = Vector2( 0, -31 )
+
+[node name="Position2D" type="Position2D" parent="Swing/ArrowDirection"]
+position = Vector2( 40, 0 )
 
 [node name="WateringCanParticles1" type="CPUParticles2D" parent="Swing"]
 modulate = Color( 0.196078, 0.435294, 0.937255, 1 )

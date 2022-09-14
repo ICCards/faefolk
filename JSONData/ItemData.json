@@ -186,6 +186,16 @@
       "StackSize": 1,
       "Description": "Used to catch fish."
   },
+  "bow":{
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Requires arrows for ammo."
+  },
+  "arrow": {
+      "ItemCategory": "Tool",
+      "StackSize": 999,
+      "Description": "Ammunition for the bow."
+  },
   
   
   "blueprint": {
@@ -199,6 +209,26 @@
       "Description": "Used to upgrade building structures."
   },
   
+  "raw wing": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A popular protein from a duck."
+  },
+  "raw filet": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A lean protein harvested from a bunny."
+  },
+  "cooked wing": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A quick and tasty snack."
+  },
+  "cooked filet": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A delicasy with long-lasting energy."
+  },
   
   
   "wheat": {

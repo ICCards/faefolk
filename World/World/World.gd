@@ -576,7 +576,7 @@ func _physics_process(delta):
 
 
 func returnValidSpawnLocation():
-	var tempLoc = Vector2(rng.randi_range(0, 32000), rng.randi_range(0, 32000))
+	var tempLoc = Vector2(rng.randi_range(0, 6200), rng.randi_range(0, 6200))
 	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
 		return tempLoc
 	else:

@@ -230,6 +230,8 @@ func destroy_placable_object():
 	#current_building_item = null
 	if has_node("PlaceObject"):
 		get_node("PlaceObject").queue_free()
+		
+
 
 func swing(item_name):
 	destroy_placable_object()

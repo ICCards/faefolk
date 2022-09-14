@@ -50,6 +50,8 @@ func exit_item():
 func set_health_bar(health):
 	$HealthIndicator/ProgressBar.value = health
 	match item_name:
+		"bow":
+			$HealthIndicator/ProgressBar.max_value = Stats.BOW_HEALTH
 		"wood axe":
 			$HealthIndicator/ProgressBar.max_value = Stats.WOOD_TOOL_HEALTH
 		"wood pickaxe":
