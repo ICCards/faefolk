@@ -18,6 +18,8 @@ const MAX_STONE_WATERING_CAN = 25
 const MAX_BRONZE_WATERING_CAN = 50
 const MAX_GOLD_WATERING_CAN = 100
 
+const BOW_HEALTH = 25
+
 
 func return_max_tool_health(item_name):
 	match item_name:
@@ -67,8 +69,8 @@ func return_max_tool_health(item_name):
 			return MAX_BRONZE_WATERING_CAN
 		"gold watering can":
 			return MAX_GOLD_WATERING_CAN
-		"fishing rod":
-			return null
+		"bow":
+			return BOW_HEALTH
 
 func decrease_tool_health():
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):

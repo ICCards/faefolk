@@ -171,6 +171,22 @@
         "Energy": 10,
         "Health": 10
     },
+    "raw wing": {
+        "Energy": 2,
+        "Health": 1
+    },
+    "cooked wing": {
+        "Energy": 16,
+        "Health": 8
+    },
+    "raw filet": {
+        "Energy": 6,
+        "Health": 2
+    },
+    "cooked filet": {
+        "Energy": 20,
+        "Health": 10
+    },
     "crab": {
         "Energy": 10,
         "Health": 10

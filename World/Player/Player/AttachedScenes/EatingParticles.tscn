@@ -64,26 +64,15 @@ func set_particle_colors(item_name):
 	
 func return_pixel_color(image):
 	rng.randomize()
-	if category == \"Food\":
-		tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
-		if tempColor != Color(0,0,0,0):
-			return tempColor
-		else:
-			tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
-			if tempColor != Color(0,0,0,0):
-				return tempColor
-			else:
-				return Color(0,0,0,0)
+	tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
+	if tempColor != Color(0,0,0,0):
+		return tempColor
 	else:
 		tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
 		if tempColor != Color(0,0,0,0):
 			return tempColor
 		else:
-			tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
-			if tempColor != Color(0,0,0,0):
-				return tempColor
-			else:
-				return Color(0,0,0,0)
+			return Color(0,0,0,0)
 "
 
 [node name="EatingParticles" type="Node2D"]

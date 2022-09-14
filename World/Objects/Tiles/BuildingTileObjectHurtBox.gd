@@ -78,7 +78,7 @@ func play_hit_effect():
 	wallHitEffect.autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
 	wallHitEffect.location = location
 	wallHitEffect.position += Vector2(-16, 16)
-	add_child(wallHitEffect)
+	call_deferred("add_child", wallHitEffect)
 
 
 func show_health():

@@ -79,10 +79,14 @@ func craft(item_name):
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 		PlayerInventory.craft_item(item_name)
 		initialize()
+	elif find_parent("UserInterface").holding_item:
+		if find_parent("UserInterface").holding_item.item_name == "arrow" and PlayerInventory.isSufficientMaterialToCraft(item_name):
+			PlayerInventory.craft_item(item_name)
+			find_parent("UserInterface").holding_item.add_item_quantity(1)
+			initialize()
 
 func return_crafted_item(item_name):
 	var inventoryItem = InventoryItem.instance()
-	print("HEALTH " + str(Stats.return_max_tool_health(item_name)))
 	inventoryItem.set_item(item_name, 1, Stats.return_max_tool_health(item_name))
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem

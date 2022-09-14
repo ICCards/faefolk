@@ -43,13 +43,13 @@ var inventory = {
 var hotbar = {
 	2: ["red salmon", 30, null],
 	5: ["scythe", 1, null],
-	3: ["carrot", 30, null],
+	3: ["rope", 30, null],
 	4: ["blueprint", 1, null],
 	0: ["fishing rod", 1, null],
 	6: ["hammer", 1, null],
 	
-#	2: ["hammer", 1, null],
-#	3: ["blueprint", 1, null],
+	7: ["bow", 1, 25],
+	8: ["arrow", 30, null],
 }
 
 var chests = {

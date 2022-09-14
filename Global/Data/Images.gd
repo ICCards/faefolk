@@ -689,7 +689,26 @@ func returnToolSprite(toolName, animation):
 					return scythe.left
 				"sword_swing_right":
 					return scythe.right
-
+		"bow":
+			match animation:
+				"draw_down":
+					return bow_draw.down
+				"draw_up":
+					return bow_draw.up
+				"draw_right":
+					return bow_draw.right
+				"draw_left":
+					return bow_draw.left
+		"bow release":
+			match animation:
+				"release_down":
+					return bow_release.down
+				"release_up":
+					return bow_release.up
+				"release_right":
+					return bow_release.right
+				"release_left":
+					return bow_release.left
 
 var pickaxe = {
 	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/down.png"), 
@@ -719,7 +738,18 @@ var scythe = {
 	right = preload("res://Characters/Weapon swings/scythe sword swing/scythe/right.png")
 }
 
-
+var bow_draw = {
+	down = preload("res://Characters/Weapon swings/bow/draw/down.png"),
+	up = preload("res://Characters/Weapon swings/bow/draw/up.png"),
+	left = preload("res://Characters/Weapon swings/bow/draw/left.png"),
+	right = preload("res://Characters/Weapon swings/bow/draw/right.png")
+}
+var bow_release = {
+	down = preload("res://Characters/Weapon swings/bow/release/down.png"),
+	up = preload("res://Characters/Weapon swings/bow/release/up.png"),
+	left = preload("res://Characters/Weapon swings/bow/release/left.png"),
+	right = preload("res://Characters/Weapon swings/bow/release/right.png")
+}
 
 var watering_can = {
 	down = preload("res://Characters/Weapon swings/watering cans/down.png"),

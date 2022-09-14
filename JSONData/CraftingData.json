@@ -280,6 +280,18 @@
              ["rope", 2]
         ],
      },
+     "bow": {
+         "ingredients" : [
+             ["wood", 10],
+             ["rope", 2]
+        ],
+     },
+     "arrow": {
+         "ingredients" : [
+             ["wood", 2],
+             ["stone", 2]
+        ],
+     },
      "wall": {
          "ingredients": [
          ["wood", 1],

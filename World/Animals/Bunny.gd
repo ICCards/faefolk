@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var worldNavigation = get_node("/root/World/WorldNavigation")
 onready var los = $LineOfSight
 var player_spotted: bool = false
@@ -9,7 +10,7 @@ var is_in_sight: bool = false
 var is_dead: bool = false
 var path: Array = []
 var player
-const SPEED: int = 190
+const SPEED: int = 200
 
 enum {
 	MOVEMENT, 
@@ -40,7 +41,7 @@ func _physics_process(delta):
 			check_player_in_detection()
 			if player_spotted:
 				move_randomly(delta)
-			else:
+			elif not is_dead:
 				random_idle_pos = null
 				$AnimatedSprite.play("sleep")
 
@@ -97,16 +98,25 @@ func check_player_in_detection() -> bool:
 
 
 func _on_HurtBox_area_entered(area):
-	Stats.decrease_tool_health()
+	if area.name == "SwordSwing":
+		Stats.decrease_tool_health()
 	is_dead = true
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
 	$AnimatedSprite.play("death")
 	yield($AnimatedSprite, "animation_finished")
 	$AnimationPlayer.play("death")
+	intitiateItemDrop("raw filet", Vector2(0,0))
 	yield($AnimationPlayer, "animation_finished")
 	yield(get_tree().create_timer(6.0), "timeout")
 	queue_free()
+
+func intitiateItemDrop(item, pos):
+	rng.randomize()
+	var itemDrop = ItemDrop.instance()
+	itemDrop.initItemDropType(item, 1)
+	get_parent().call_deferred("add_child", itemDrop)
+	itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
 
 
 func _on_VisibilityNotifier2D_screen_entered():

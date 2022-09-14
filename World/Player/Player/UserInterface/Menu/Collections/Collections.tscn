@@ -5,6 +5,7 @@
 [ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" type="Script" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/inventory_icons/Food/garlic.png" type="Texture" id=6]
 
 [sub_resource type="Shader" id=16]
 code = "shader_type canvas_item;
@@ -239,9 +240,6 @@ resource_local_to_scene = true
 shader = SubResource( 16 )
 shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
 shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=20]
-load_path = "res://.import/garlic.png-35feb1f2a88d1fdf0134cd2d54e0db2d.stex"
 
 [sub_resource type="ShaderMaterial" id=17]
 resource_local_to_scene = true
@@ -495,12 +493,12 @@ flat = true
 
 [node name="FishCollection" type="GridContainer" parent="."]
 margin_left = 108.0
-margin_top = 119.0
+margin_top = 110.0
 margin_right = 284.0
-margin_bottom = 228.0
-rect_scale = Vector2( 3, 3 )
-custom_constants/vseparation = 15
-custom_constants/hseparation = 16
+margin_bottom = 219.0
+rect_scale = Vector2( 3.5, 3.5 )
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
 columns = 6
 script = ExtResource( 1 )
 
@@ -512,359 +510,359 @@ texture = SubResource( 62 )
 
 [node name="anchovy" type="TextureRect" parent="FishCollection"]
 material = SubResource( 63 )
-margin_left = 32.0
-margin_right = 48.0
+margin_left = 28.0
+margin_right = 44.0
 margin_bottom = 16.0
 texture = SubResource( 64 )
 
 [node name="angler" type="TextureRect" parent="FishCollection"]
 material = SubResource( 65 )
-margin_left = 64.0
-margin_right = 80.0
+margin_left = 56.0
+margin_right = 72.0
 margin_bottom = 16.0
 texture = SubResource( 66 )
 
 [node name="betta" type="TextureRect" parent="FishCollection"]
 material = SubResource( 67 )
-margin_left = 96.0
-margin_right = 112.0
+margin_left = 84.0
+margin_right = 100.0
 margin_bottom = 16.0
 texture = SubResource( 68 )
 
 [node name="blowfish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 69 )
-margin_left = 128.0
-margin_right = 144.0
+margin_left = 112.0
+margin_right = 128.0
 margin_bottom = 16.0
 texture = SubResource( 70 )
 
 [node name="catfish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 71 )
-margin_left = 160.0
-margin_right = 176.0
+margin_left = 140.0
+margin_right = 156.0
 margin_bottom = 16.0
 texture = SubResource( 72 )
 
 [node name="cisco" type="TextureRect" parent="FishCollection"]
 material = SubResource( 73 )
-margin_top = 31.0
+margin_top = 28.0
 margin_right = 16.0
-margin_bottom = 47.0
+margin_bottom = 44.0
 texture = SubResource( 74 )
 
 [node name="clownfish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 75 )
-margin_left = 32.0
-margin_top = 31.0
-margin_right = 48.0
-margin_bottom = 47.0
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 44.0
+margin_bottom = 44.0
 texture = SubResource( 76 )
 
 [node name="crab" type="TextureRect" parent="FishCollection"]
 material = SubResource( 77 )
-margin_left = 64.0
-margin_top = 31.0
-margin_right = 80.0
-margin_bottom = 47.0
+margin_left = 56.0
+margin_top = 28.0
+margin_right = 72.0
+margin_bottom = 44.0
 texture = SubResource( 78 )
 
 [node name="dorado" type="TextureRect" parent="FishCollection"]
 material = SubResource( 79 )
-margin_left = 96.0
-margin_top = 31.0
-margin_right = 112.0
-margin_bottom = 47.0
+margin_left = 84.0
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 44.0
 texture = SubResource( 80 )
 
 [node name="eel" type="TextureRect" parent="FishCollection"]
 material = SubResource( 81 )
-margin_left = 128.0
-margin_top = 31.0
-margin_right = 144.0
-margin_bottom = 47.0
+margin_left = 112.0
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 44.0
 texture = SubResource( 82 )
 
 [node name="goldfish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 83 )
-margin_left = 160.0
-margin_top = 31.0
-margin_right = 176.0
-margin_bottom = 47.0
+margin_left = 140.0
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 44.0
 texture = SubResource( 84 )
 
 [node name="halibut" type="TextureRect" parent="FishCollection"]
 material = SubResource( 85 )
-margin_top = 62.0
+margin_top = 56.0
 margin_right = 16.0
-margin_bottom = 78.0
+margin_bottom = 72.0
 texture = SubResource( 86 )
 
 [node name="koi" type="TextureRect" parent="FishCollection"]
 material = SubResource( 87 )
-margin_left = 32.0
-margin_top = 62.0
-margin_right = 48.0
-margin_bottom = 78.0
+margin_left = 28.0
+margin_top = 56.0
+margin_right = 44.0
+margin_bottom = 72.0
 texture = SubResource( 88 )
 
 [node name="lingcod" type="TextureRect" parent="FishCollection"]
 material = SubResource( 89 )
-margin_left = 64.0
-margin_top = 62.0
-margin_right = 80.0
-margin_bottom = 78.0
+margin_left = 56.0
+margin_top = 56.0
+margin_right = 72.0
+margin_bottom = 72.0
 texture = SubResource( 90 )
 
 [node name="nelma" type="TextureRect" parent="FishCollection"]
 material = SubResource( 91 )
-margin_left = 96.0
-margin_top = 62.0
-margin_right = 112.0
-margin_bottom = 78.0
+margin_left = 84.0
+margin_top = 56.0
+margin_right = 100.0
+margin_bottom = 72.0
 texture = SubResource( 92 )
 
 [node name="octopus" type="TextureRect" parent="FishCollection"]
 material = SubResource( 93 )
-margin_left = 128.0
-margin_top = 62.0
-margin_right = 144.0
-margin_bottom = 78.0
+margin_left = 112.0
+margin_top = 56.0
+margin_right = 128.0
+margin_bottom = 72.0
 texture = SubResource( 94 )
 
 [node name="purple carp" type="TextureRect" parent="FishCollection"]
 material = SubResource( 95 )
-margin_left = 160.0
-margin_top = 62.0
-margin_right = 176.0
-margin_bottom = 78.0
+margin_left = 140.0
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 72.0
 texture = SubResource( 96 )
 
 [node name="purple salmon" type="TextureRect" parent="FishCollection"]
 material = SubResource( 97 )
-margin_top = 93.0
+margin_top = 84.0
 margin_right = 16.0
-margin_bottom = 109.0
+margin_bottom = 100.0
 texture = SubResource( 98 )
 
 [node name="red salmon" type="TextureRect" parent="FishCollection"]
 material = SubResource( 99 )
-margin_left = 32.0
-margin_top = 93.0
-margin_right = 48.0
-margin_bottom = 109.0
+margin_left = 28.0
+margin_top = 84.0
+margin_right = 44.0
+margin_bottom = 100.0
 texture = SubResource( 100 )
 
 [node name="seaweed" type="TextureRect" parent="FishCollection"]
 material = SubResource( 101 )
-margin_left = 64.0
-margin_top = 93.0
-margin_right = 80.0
-margin_bottom = 109.0
+margin_left = 56.0
+margin_top = 84.0
+margin_right = 72.0
+margin_bottom = 100.0
 texture = SubResource( 102 )
 
 [node name="shrimp" type="TextureRect" parent="FishCollection"]
 material = SubResource( 103 )
-margin_left = 96.0
-margin_top = 93.0
-margin_right = 112.0
-margin_bottom = 109.0
+margin_left = 84.0
+margin_top = 84.0
+margin_right = 100.0
+margin_bottom = 100.0
 texture = SubResource( 104 )
 
 [node name="siberian whitefish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 105 )
-margin_left = 128.0
-margin_top = 93.0
-margin_right = 144.0
-margin_bottom = 109.0
+margin_left = 112.0
+margin_top = 84.0
+margin_right = 128.0
+margin_bottom = 100.0
 texture = SubResource( 106 )
 
 [node name="tilapia" type="TextureRect" parent="FishCollection"]
 material = SubResource( 107 )
-margin_left = 160.0
-margin_top = 93.0
-margin_right = 176.0
-margin_bottom = 109.0
+margin_left = 140.0
+margin_top = 84.0
+margin_right = 156.0
+margin_bottom = 100.0
 texture = SubResource( 108 )
 
 [node name="Tween" type="Tween" parent="FishCollection"]
 
 [node name="CropCollection" type="GridContainer" parent="."]
-visible = false
-margin_left = 102.0
+margin_left = 108.0
 margin_top = 110.0
-margin_right = 374.0
-margin_bottom = 283.0
-rect_scale = Vector2( 2, 2 )
-custom_constants/vseparation = 15
-custom_constants/hseparation = 16
+margin_right = 290.0
+margin_bottom = 226.0
+rect_scale = Vector2( 3.5, 3.5 )
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
 columns = 6
 script = ExtResource( 5 )
 
 [node name="garlic" type="TextureRect" parent="CropCollection"]
 material = SubResource( 19 )
-margin_right = 32.0
-margin_bottom = 32.0
-texture = SubResource( 20 )
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
 
 [node name="corn" type="TextureRect" parent="CropCollection"]
 material = SubResource( 17 )
-margin_left = 48.0
-margin_right = 80.0
-margin_bottom = 32.0
+margin_left = 28.0
+margin_right = 44.0
+margin_bottom = 16.0
 texture = SubResource( 18 )
 
 [node name="blueberry" type="TextureRect" parent="CropCollection"]
 material = SubResource( 21 )
-margin_left = 96.0
-margin_right = 128.0
-margin_bottom = 32.0
+margin_left = 56.0
+margin_right = 72.0
+margin_bottom = 16.0
 texture = SubResource( 22 )
 
 [node name="asparagus" type="TextureRect" parent="CropCollection"]
 material = SubResource( 23 )
-margin_left = 144.0
-margin_right = 176.0
-margin_bottom = 32.0
+margin_left = 84.0
+margin_right = 100.0
+margin_bottom = 16.0
 texture = SubResource( 24 )
 
 [node name="cabbage" type="TextureRect" parent="CropCollection"]
 material = SubResource( 25 )
-margin_left = 192.0
-margin_right = 224.0
-margin_bottom = 32.0
+margin_left = 112.0
+margin_right = 128.0
+margin_bottom = 16.0
 texture = SubResource( 26 )
 
 [node name="carrot" type="TextureRect" parent="CropCollection"]
 material = SubResource( 27 )
-margin_left = 240.0
-margin_right = 272.0
-margin_bottom = 32.0
+margin_left = 140.0
+margin_right = 156.0
+margin_bottom = 16.0
 texture = SubResource( 28 )
 
 [node name="cauliflower" type="TextureRect" parent="CropCollection"]
 material = SubResource( 29 )
-margin_top = 47.0
-margin_right = 32.0
-margin_bottom = 79.0
+margin_top = 28.0
+margin_right = 16.0
+margin_bottom = 44.0
 texture = SubResource( 30 )
 
 [node name="grape" type="TextureRect" parent="CropCollection"]
 material = SubResource( 31 )
-margin_left = 48.0
-margin_top = 47.0
-margin_right = 80.0
-margin_bottom = 79.0
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 44.0
+margin_bottom = 44.0
 texture = SubResource( 32 )
 
 [node name="green bean" type="TextureRect" parent="CropCollection"]
 material = SubResource( 33 )
-margin_left = 96.0
-margin_top = 47.0
-margin_right = 128.0
-margin_bottom = 79.0
+margin_left = 56.0
+margin_top = 28.0
+margin_right = 72.0
+margin_bottom = 44.0
 texture = SubResource( 34 )
 
 [node name="green melon" type="TextureRect" parent="CropCollection"]
 material = SubResource( 35 )
-margin_left = 144.0
-margin_top = 47.0
-margin_right = 176.0
-margin_bottom = 79.0
+margin_left = 84.0
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 44.0
 texture = SubResource( 36 )
 
 [node name="green pepper" type="TextureRect" parent="CropCollection"]
 material = SubResource( 37 )
-margin_left = 192.0
-margin_top = 47.0
-margin_right = 224.0
-margin_bottom = 79.0
+margin_left = 112.0
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 44.0
 texture = SubResource( 38 )
 
 [node name="jalapeno" type="TextureRect" parent="CropCollection"]
 material = SubResource( 39 )
-margin_left = 240.0
-margin_top = 47.0
-margin_right = 272.0
-margin_bottom = 79.0
+margin_left = 140.0
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 44.0
 texture = SubResource( 40 )
 
 [node name="potato" type="TextureRect" parent="CropCollection"]
 material = SubResource( 41 )
-margin_top = 94.0
-margin_right = 32.0
-margin_bottom = 126.0
+margin_top = 56.0
+margin_right = 16.0
+margin_bottom = 72.0
 texture = SubResource( 42 )
 
 [node name="radish" type="TextureRect" parent="CropCollection"]
 material = SubResource( 43 )
-margin_left = 48.0
-margin_top = 94.0
-margin_right = 80.0
-margin_bottom = 126.0
+margin_left = 28.0
+margin_top = 56.0
+margin_right = 44.0
+margin_bottom = 72.0
 texture = SubResource( 44 )
 
 [node name="red pepper" type="TextureRect" parent="CropCollection"]
 material = SubResource( 45 )
-margin_left = 96.0
-margin_top = 94.0
-margin_right = 128.0
-margin_bottom = 126.0
+margin_left = 56.0
+margin_top = 56.0
+margin_right = 72.0
+margin_bottom = 72.0
 texture = SubResource( 46 )
 
 [node name="strawberry" type="TextureRect" parent="CropCollection"]
 material = SubResource( 47 )
-margin_left = 144.0
-margin_top = 94.0
-margin_right = 176.0
-margin_bottom = 126.0
+margin_left = 84.0
+margin_top = 56.0
+margin_right = 100.0
+margin_bottom = 72.0
 texture = SubResource( 48 )
 
 [node name="sugar cane" type="TextureRect" parent="CropCollection"]
 material = SubResource( 49 )
-margin_left = 192.0
-margin_top = 94.0
-margin_right = 224.0
-margin_bottom = 126.0
+margin_left = 112.0
+margin_top = 56.0
+margin_right = 128.0
+margin_bottom = 72.0
 texture = SubResource( 50 )
 
 [node name="tomato" type="TextureRect" parent="CropCollection"]
 material = SubResource( 51 )
-margin_left = 240.0
-margin_top = 94.0
-margin_right = 272.0
-margin_bottom = 126.0
+margin_left = 140.0
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 72.0
 texture = SubResource( 52 )
 
 [node name="wheat" type="TextureRect" parent="CropCollection"]
 material = SubResource( 53 )
-margin_top = 141.0
-margin_right = 32.0
-margin_bottom = 173.0
+margin_top = 84.0
+margin_right = 16.0
+margin_bottom = 100.0
 texture = SubResource( 54 )
 
 [node name="yellow onion" type="TextureRect" parent="CropCollection"]
 material = SubResource( 55 )
-margin_left = 48.0
-margin_top = 141.0
-margin_right = 80.0
-margin_bottom = 173.0
+margin_left = 28.0
+margin_top = 84.0
+margin_right = 44.0
+margin_bottom = 100.0
 texture = SubResource( 56 )
 
 [node name="yellow pepper" type="TextureRect" parent="CropCollection"]
 material = SubResource( 57 )
-margin_left = 96.0
-margin_top = 141.0
-margin_right = 128.0
-margin_bottom = 173.0
+margin_left = 56.0
+margin_top = 84.0
+margin_right = 72.0
+margin_bottom = 100.0
 texture = SubResource( 58 )
 
 [node name="zucchinni" type="TextureRect" parent="CropCollection"]
 material = SubResource( 59 )
-margin_left = 144.0
-margin_top = 141.0
-margin_right = 176.0
-margin_bottom = 173.0
+margin_left = 84.0
+margin_top = 84.0
+margin_right = 100.0
+margin_bottom = 100.0
 texture = SubResource( 60 )
+expand = true
 
 [node name="Tween" type="Tween" parent="CropCollection"]
 

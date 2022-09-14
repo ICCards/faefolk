@@ -1,5 +1,230 @@
 extends Node
 
+#	body_release_down = {
+#		0 : preload()
+#	},
+#	body_release_up = {
+#		0 : preload()
+#	},
+#	body_release_right = {
+#		0 : preload()
+#	},
+#	body_release_left = {
+#		0 : preload()
+#	},
+#
+#	arms_release_down = {
+#		0 : preload()
+#	},
+#	arms_release_up = {
+#		0 : preload()
+#	},
+#	arms_release_right = {
+#		0 : preload()
+#	},
+#	arms_release_left = {
+#		0 : preload()
+#	},
+#
+#	acc_release_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_release_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_release_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_release_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_release_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_release_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_release_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_release_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_release_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_release_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_release_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_release_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_release_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_release_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_release_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_release_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_release_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_release_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_release_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_release_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+#	body_draw_down = {
+#		0 : preload()
+#	},
+#	body_draw_up = {
+#		0 : preload()
+#	},
+#	body_draw_right = {
+#		0 : preload()
+#	},
+#	body_draw_left = {
+#		0 : preload()
+#	},
+#
+#	arms_draw_down = {
+#		0 : preload()
+#	},
+#	arms_draw_up = {
+#		0 : preload()
+#	},
+#	arms_draw_right = {
+#		0 : preload()
+#	},
+#	arms_draw_left = {
+#		0 : preload()
+#	},
+#
+#	acc_draw_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_draw_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_draw_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_draw_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_draw_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_draw_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_draw_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_draw_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_draw_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_draw_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_draw_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_draw_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_draw_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_draw_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_draw_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_draw_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_draw_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_draw_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_draw_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_draw_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+
+
+
 #	body_punch_down = {
 #		0 : preload()
 #	},
@@ -6105,6 +6330,14 @@ func set_attributes(set_char):
 	'punch_down': character.body_punch_down[0],
 	'punch_left': character.body_punch_left[0],
 	'punch_right': character.body_punch_right[0],
+	'draw_up': character.body_draw_up[0],
+	'draw_down': character.body_draw_down[0],
+	'draw_left': character.body_draw_left[0],
+	'draw_right': character.body_draw_right[0],
+	'release_up': character.body_release_up[0],
+	'release_down': character.body_release_down[0],
+	'release_left': character.body_release_left[0],
+	'release_right': character.body_release_right[0],
 	'eat': character.body_eat[0]
 	};
 	arms_sprites = {
@@ -6168,6 +6401,14 @@ func set_attributes(set_char):
 	'punch_down': character.arms_punch_down[0],
 	'punch_left': character.arms_punch_left[0],
 	'punch_right': character.arms_punch_right[0],
+	'draw_up': character.arms_draw_up[0],
+	'draw_down': character.arms_draw_down[0],
+	'draw_left': character.arms_draw_left[0],
+	'draw_right': character.arms_draw_right[0],
+	'release_up': character.arms_release_up[0],
+	'release_down': character.arms_release_down[0],
+	'release_left': character.arms_release_left[0],
+	'release_right': character.arms_release_right[0],
 	'eat': character.arms_eat[0]
 	};
 	acc_sprites = {
@@ -6231,6 +6472,14 @@ func set_attributes(set_char):
 	'punch_down': character.acc_punch_down[acc_index],
 	'punch_left': character.acc_punch_left[acc_index],
 	'punch_right': character.acc_punch_right[acc_index],
+	'draw_up': character.acc_draw_up[acc_index],
+	'draw_down': character.acc_draw_down[acc_index],
+	'draw_left': character.acc_draw_left[acc_index],
+	'draw_right': character.acc_draw_right[acc_index],
+	'release_up': character.acc_release_up[acc_index],
+	'release_down': character.acc_release_down[acc_index],
+	'release_left': character.acc_release_left[acc_index],
+	'release_right': character.acc_release_right[acc_index],
 	'eat': character.acc_eat[acc_index]
 	};
 	headAtr_sprites = {
@@ -6294,6 +6543,14 @@ func set_attributes(set_char):
 	'punch_down': character.head_attribute_punch_down[headAtr_index],
 	'punch_left': character.head_attribute_punch_left[headAtr_index],
 	'punch_right': character.head_attribute_punch_right[headAtr_index],
+	'draw_up': character.head_attribute_draw_up[headAtr_index],
+	'draw_down': character.head_attribute_draw_down[headAtr_index],
+	'draw_left': character.head_attribute_draw_left[headAtr_index],
+	'draw_right': character.head_attribute_draw_right[headAtr_index],
+	'release_up': character.head_attribute_release_up[headAtr_index],
+	'release_down': character.head_attribute_release_down[headAtr_index],
+	'release_left': character.head_attribute_release_left[headAtr_index],
+	'release_right': character.head_attribute_release_right[headAtr_index],
 	'eat': character.head_attribute_eat[headAtr_index]
 	}
 	pants_sprites = {
@@ -6357,6 +6614,14 @@ func set_attributes(set_char):
 	'punch_down': character.pants_punch_down[pants_index],
 	'punch_left': character.pants_punch_left[pants_index],
 	'punch_right': character.pants_punch_right[pants_index],
+	'draw_up': character.pants_draw_up[pants_index],
+	'draw_down': character.pants_draw_down[pants_index],
+	'draw_left': character.pants_draw_left[pants_index],
+	'draw_right': character.pants_draw_right[pants_index],
+	'release_up': character.pants_release_up[pants_index],
+	'release_down': character.pants_release_down[pants_index],
+	'release_left': character.pants_release_left[pants_index],
+	'release_right': character.pants_release_right[pants_index],
 	'eat': character.pants_eat[pants_index]
 	};
 	shirts_sprites = {
@@ -6420,6 +6685,14 @@ func set_attributes(set_char):
 	'punch_down': character.shirts_punch_down[shirts_index],
 	'punch_left': character.shirts_punch_left[shirts_index],
 	'punch_right': character.shirts_punch_right[shirts_index],
+	'draw_up': character.shirts_draw_up[shirts_index],
+	'draw_down': character.shirts_draw_down[shirts_index],
+	'draw_left': character.shirts_draw_left[shirts_index],
+	'draw_right': character.shirts_draw_right[shirts_index],
+	'release_up': character.shirts_release_up[shirts_index],
+	'release_down': character.shirts_release_down[shirts_index],
+	'release_left': character.shirts_release_left[shirts_index],
+	'release_right': character.shirts_release_right[shirts_index],
 	'eat': character.shirts_eat[shirts_index]
 	};
 	shoes_sprites = {
@@ -6483,6 +6756,14 @@ func set_attributes(set_char):
 	'punch_down': character.shoes_punch_down[shoes_index],
 	'punch_left': character.shoes_punch_left[shoes_index],
 	'punch_right': character.shoes_punch_right[shoes_index],
+	'draw_up': character.shoes_draw_up[shoes_index],
+	'draw_down': character.shoes_draw_down[shoes_index],
+	'draw_left': character.shoes_draw_left[shoes_index],
+	'draw_right': character.shoes_draw_right[shoes_index],
+	'release_up': character.shoes_release_up[shoes_index],
+	'release_down': character.shoes_release_down[shoes_index],
+	'release_left': character.shoes_release_left[shoes_index],
+	'release_right': character.shoes_release_right[shoes_index],
 	'eat': character.shoes_eat[shoes_index]
 	};
 	
