@@ -90,7 +90,6 @@ text = "Workbench:"
 clip_text = true
 
 [node name="Page2" type="GridContainer" parent="."]
-visible = false
 margin_left = 45.0
 margin_top = 87.0
 margin_right = 177.0
@@ -192,6 +191,7 @@ margin_bottom = 52.0
 texture_normal = ExtResource( 42 )
 
 [node name="Page1" type="GridContainer" parent="."]
+visible = false
 margin_left = 45.0
 margin_top = 87.0
 margin_right = 177.0
