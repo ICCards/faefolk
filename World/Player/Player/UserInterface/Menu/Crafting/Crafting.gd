@@ -31,7 +31,9 @@ var page2 = [
 var page3 = [
 	"stove #2",
 	"stove #3",
-	"tent"
+	"tent",
+	"hammer",
+	"blueprint"
 ]
 
 func _ready():
@@ -119,7 +121,10 @@ func reset_hover_effect():
 	for item in page2:
 		$Page2.get_node(item).scale = Vector2(3,3)
 	for item in page3:
-		$Page3.get_node(item).scale = Vector2(3,3)
+		if item == "blueprint" or item == "hammer":
+			$Page3.get_node(item).scale = Vector2(6,6)
+		else:
+			$Page3.get_node(item).scale = Vector2(3,3)
 
 func initialize_crafting():
 	PlayerInventory.HotbarSlots = $HotbarSlots
@@ -166,18 +171,30 @@ func entered_crafting_area(_item):
 	yield(get_tree(), "idle_frame")
 	item = null
 	crafting_item = _item
-	$Tween.interpolate_property(get_node("Page" + str(page) + "/" + crafting_item), "scale",
-		get_node("Page" + str(page) + "/" + crafting_item).scale, Vector2(3.35, 3.35), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	if crafting_item == "blueprint" or crafting_item == "hammer":
+		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + crafting_item), "scale",
+			get_node("Page" + str(page) + "/" + crafting_item).scale, Vector2(6.7, 6.7), 0.15,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Tween.start()
+	else:
+		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + crafting_item), "scale",
+			get_node("Page" + str(page) + "/" + crafting_item).scale, Vector2(3.35, 3.35), 0.15,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Tween.start()
 	
 func exited_crafting_area(_item):
 	crafting_item = null
 	if has_node("Page" + str(page) + "/" + _item):
-		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
-			get_node("Page" + str(page) + "/" + _item).scale, Vector2(3, 3), 0.15,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
+		if _item == "blueprint" or _item == "hammer":
+			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
+				get_node("Page" + str(page) + "/" + _item).scale, Vector2(6, 6), 0.15,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		else:
+			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
+				get_node("Page" + str(page) + "/" + _item).scale, Vector2(3, 3), 0.15,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
 
 
 func play_craft_sound():
@@ -416,3 +433,18 @@ func _on_DoorButton_mouse_entered():
 	entered_crafting_area("door")
 func _on_DoorButton_mouse_exited():
 	exited_crafting_area("door")
+
+
+func _on_BlueprintButton_pressed():
+	craftable_item_pressed()
+func _on_BlueprintButton_mouse_entered():
+	entered_crafting_area("blueprint")
+func _on_BlueprintButton_mouse_exited():
+	exited_crafting_area("blueprint")
+
+func _on_HammerButton_pressed():
+	craftable_item_pressed()
+func _on_HammerButton_mouse_entered():
+	entered_crafting_area("hammer")
+func _on_HammerButton_mouse_exited():
+	exited_crafting_area("hammer")

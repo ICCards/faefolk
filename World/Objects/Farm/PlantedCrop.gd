@@ -39,6 +39,9 @@ func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _i
 func _ready():
 	add_to_group("active_crops")
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
+	yield(get_tree().create_timer(1.0), "timeout")
+	days_until_harvest = 0
+	refresh_image()
 
 func refresh_image():
 	phase = return_phase()
