@@ -408,3 +408,11 @@ func _on_StoveButton3_mouse_exited():
 	exited_crafting_area("stove #3")
 func _on_StoveButton3_pressed():
 	craftable_item_pressed()
+
+
+func _on_DoorButton_pressed():
+	craftable_item_pressed()
+func _on_DoorButton_mouse_entered():
+	entered_crafting_area("door")
+func _on_DoorButton_mouse_exited():
+	exited_crafting_area("door")

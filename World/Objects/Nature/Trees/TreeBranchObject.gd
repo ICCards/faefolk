@@ -5,7 +5,6 @@ onready var branch = $Branch
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 
 var randomNum
 var treeObject
@@ -41,7 +40,8 @@ func setTreeBranchType(num):
 	$Branch.texture = Images.tree_branch_objects[num]
 
 func _on_BranchHurtBox_area_entered(_area):
-	Stats.decrease_tool_health()
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
 	Tiles.reset_valid_tiles(loc, "stump")
 	var data = {"id": name, "n": "log"}
 	Server.action("ON_HIT", data)

@@ -3,6 +3,9 @@ extends CanvasLayer
 var holding_item = null
 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var Menu = preload("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
+onready var Hotbar = preload("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
+
 var items_to_drop = []
 
 var rng = RandomNumberGenerator.new()
@@ -73,6 +76,27 @@ func _input(event):
 		elif event.is_action_pressed("slot10"):
 			PlayerInventory.active_item_slot = 9
 			PlayerInventory.emit_signal("active_item_updated")
+
+#func toggle_menu():
+#	toggle_hotbar()
+#	if has_node("Menu"):
+#		get_node("Menu").queue_free()
+#		PlayerInventory.viewInventoryMode = false
+#		drop_items()
+#	else:
+#		var menu = Menu.instance()
+#		add_child(menu)
+#		menu.rect_position = Vector2(138,39)
+#		PlayerInventory.viewInventoryMode = true
+#
+#func toggle_hotbar():
+#	if has_node("Hotbar"):
+#		get_node("Hotbar").queue_free()
+#	else:
+#		var hotbar = Hotbar.instance()
+#		add_child(hotbar)
+#		hotbar.rect_position = Vector2(512,507)
+
 
 func toggle_menu():
 	if not $Menu.visible:

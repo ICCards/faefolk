@@ -11,6 +11,7 @@ func _physics_process(delta):
 	else:
 		$ItemNameBox.hide()
 
+
 func initialize():
 	hovered_button = null
 	$Trash/Top.rotation_degrees = 0

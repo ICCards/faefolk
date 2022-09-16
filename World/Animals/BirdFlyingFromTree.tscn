@@ -12,7 +12,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, -4 )
 frames = ExtResource( 1 )
 animation = "fly down"
-frame = 3
+frame = 2
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

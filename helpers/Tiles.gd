@@ -43,7 +43,6 @@ func set_valid_tiles(location, dimensions):
 
 func reset_valid_tiles(location, var item_name = ""):
 	var object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
-	var path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 	var fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 	var light_tiles = get_node("/root/World/PlacableTiles/LightTiles")
 	valid_tiles.set_cellv(Vector2(location), 0)

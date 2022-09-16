@@ -84,7 +84,7 @@ func draw_grid_labels():
 			gridSquareLabel.rect_position = Vector2(x*200, y*200) + Vector2(2, 2)
 			add_child(gridSquareLabel)
 	
-func _process(delta):
+func _physics_process(delta):
 	if Server.player_node:
 		playerIcon.position =  Server.player_node.position
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
@@ -109,9 +109,10 @@ func adjustedGridCoordinatesScale(zoom):
 func adjustedPlayerIconScale(zoom):
 	var percent_zoomed = zoom / Vector2(1.5, 1.5)
 	return Vector2(40,40) * percent_zoomed
-		
-func set_direction(direction):
-	match direction:
+
+
+func set_direction(dir):
+	match dir:
 		"RIGHT":
 			playerIcon.rotation_degrees = 0
 		"LEFT":

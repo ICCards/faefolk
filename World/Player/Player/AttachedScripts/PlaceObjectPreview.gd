@@ -54,6 +54,8 @@ func initialize():
 		state = TENT
 	elif item_name == "sleeping bag":
 		state = SLEEPING_BAG
+	elif item_name == "door":
+		state = DOOR
 	elif item_category == "Placable object":
 		state = ITEM
 	elif item_category == "Placable path":
@@ -62,8 +64,6 @@ func initialize():
 		state = SEED
 	elif item_category == "BUILDING" and item_name == "wall":
 		state = WALL
-	elif item_category == "BUILDING" and item_name == "double door":
-		state = DOOR
 	elif item_category == "BUILDING" and item_name == "foundation":
 		state = FOUNDATION
 	set_dimensions()
@@ -115,8 +115,7 @@ func set_dimensions():
 			$ItemToPlace.rect_scale = Vector2(1, 1)
 		FOUNDATION:
 			$ItemToPlace.show()
-			$ItemToPlace.texture = preload("res://Assets/Images/placable_object_preview/wood path2.png")
-			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wood path2.png")
+			$ItemToPlace.texture = preload("res://Assets/Images/placable_object_preview/foundation.png")
 			$ItemToPlace.rect_scale = Vector2(1, 1)
 			$ColorIndicator.tile_size = Vector2(1, 1)
 
@@ -131,7 +130,7 @@ func set_dimensions():
 
 func place_foundation_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.path_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > 120:
+	if Tiles.foundation_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif Tiles.valid_tiles.get_cellv(location) != 0 and Tiles.wall_tiles.get_cellv(location) == -1:
@@ -182,14 +181,17 @@ func place_double_door_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	if direction == "up" or direction == "down":
 		$ColorIndicator.tile_size = Vector2(2, 1)
-		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/stone door front.png")
+		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/door.png")
 	else:
 		$ColorIndicator.tile_size = Vector2(1, 2)
-		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/stone door side.png")
+		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/door side.png")
 	if (direction == "up" or direction == "down")  and not Tiles.validate_tiles(location, Vector2(2,1)):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(1,2)):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
@@ -356,7 +358,7 @@ func place_seed_state():
 
 func place_object(item_name, location, type):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		if item_name != "wall" and item_name != "door front" and item_name != "door side" and item_name != "foundation":
+		if item_name != "wall" and item_name != "foundation":
 			PlayerInventory.remove_single_object_from_hotbar()
 		var id = Uuid.v4()
 		if type == "placable":

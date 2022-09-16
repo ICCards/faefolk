@@ -4,13 +4,16 @@ onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles
 onready var forest = $GeneratedTiles/DarkGreenGrassTiles
 onready var water = $GeneratedTiles/Water
-onready var validTiles = $WorldNavigation/ValidTiles
+onready var validTiles = $ValidTiles
 onready var hoed = $FarmingTiles/HoedAutoTiles
 onready var watered = $FarmingTiles/WateredAutoTiles
 onready var snow = $GeneratedTiles/SnowTiles
-onready var ocean = $GeneratedTiles/AnimatedOceanTiles
+onready var waves = $GeneratedTiles/WaveTiles
 onready var wetSand = $GeneratedTiles/WetSandBeachBorder
 onready var sand = $GeneratedTiles/DrySandTiles
+onready var shallow_ocean = $GeneratedTiles/ShallowOcean
+onready var deep_ocean = $GeneratedTiles/DeepOcean
+onready var top_ocean = $GeneratedTiles/TopOcean
 onready var Players = $Players
 
 onready var Input_controller_template = preload("res://World/Player/PlayerTemplate/InputControllerTemplate.tscn")
@@ -56,8 +59,8 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 30
-const NUM_BUNNIES = 30
+const NUM_DUCKS = 20
+const NUM_BUNNIES = 20
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -67,22 +70,6 @@ const interpolation_offset = 100
 var mark_for_despawn = []
 var tile_ids = {}
 
-func set_world_invisible():
-	$GeneratedTiles.visible = false
-	$PlacableTiles.visible = false
-	$FarmingTiles.visible = false
-	$NatureObjects.visible = false
-	get_node("PlacableTiles/" + Server.player_house_id).set_player_inside_house()
-	
-	
-func set_world_visible():
-	$GeneratedTiles.visible = true
-	$PlacableTiles.visible = true
-	$FarmingTiles.visible = true
-	$NatureObjects.visible = true
-	get_node("PlacableTiles/" + Server.player_house_id).set_player_outside_house()
-
-
 #func _ready():
 #	spawnPlayerExample()
 #	Server.isLoaded = true
@@ -90,10 +77,11 @@ func set_world_visible():
 #	build_valid_tiles()
 #	Tiles.valid_tiles = $WorldNavigation/ValidTiles
 #	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
-#	Tiles.path_tiles = $PlacableTiles/PathTiles
-#	Tiles.building_tiles = $PlacableTiles/BuildingTiles
-#	Tiles.ocean_tiles = $GeneratedTiles/AnimatedOceanTiles
-
+#	Tiles.ocean_tiles = $GeneratedTiles/ShallowOcean
+#	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
+#	Tiles.wall_tiles = $PlacableTiles/WallTiles
+#	Tiles.foundation_tiles = $PlacableTiles/FoundationTiles
+	
 func _ready():
 	rng.randomize()
 	var loadingScreen = LoadingScreen.instance()
@@ -216,13 +204,12 @@ func DespawnPlayer(player_id):
 	
 	
 func buildMap(map):
-	Tiles.valid_tiles = $WorldNavigation/ValidTiles
+	Tiles.valid_tiles = $ValidTiles
 	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
-	Tiles.path_tiles = $PlacableTiles/PathTiles
-	Tiles.ocean_tiles = $GeneratedTiles/AnimatedOceanTiles
+	Tiles.ocean_tiles = $GeneratedTiles/ShallowOcean
 	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
 	Tiles.wall_tiles = $PlacableTiles/WallTiles
-	Tiles.foundation_tiles = $PlacableTiles/PathTiles
+	Tiles.foundation_tiles = $PlacableTiles/FoundationTiles
 	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
@@ -355,7 +342,6 @@ func buildMap(map):
 	for id in map["flower"]:
 		count += 1
 		var loc = map["flower"][id]["l"]
-		Tiles.remove_nature_invalid_tiles(loc, "flower")
 		var object = FlowerObject.instance()
 		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
 		$NatureObjects.add_child(object,true)
@@ -372,13 +358,13 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Spawning in")
 	Server.player_state = "WORLD"
 	print("Map loaded")
-#	yield(get_tree().create_timer(8.5), "timeout")
+	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
 	#spawnPlayer()
 	spawnPlayerExample()
 	Server.isLoaded = true
 	Server.world = self
-	spawn_animals()
+	#spawn_animals()
 
 
 func update_tile_bitmask_regions():
@@ -386,7 +372,7 @@ func update_tile_bitmask_regions():
 	yield(get_tree().create_timer(0.5), "timeout")
 	snow.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
-	ocean.update_bitmask_region()
+	waves.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
 	sand.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
@@ -395,34 +381,51 @@ func update_tile_bitmask_regions():
 	forest.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
 	wetSand.update_bitmask_region()
+	yield(get_tree().create_timer(0.5), "timeout")
+	deep_ocean.update_bitmask_region()
 
 
-func spawn_animals():
-	for i in range(NUM_BUNNIES):
-		spawnRandomBunny()
-	for i in range(NUM_DUCKS):
-		spawnRandomDuck()
+#func spawn_animals():
+#	for i in range(NUM_BUNNIES):
+#		spawnRandomBunny()
+#	for i in range(NUM_DUCKS):
+#		spawnRandomDuck()
 	
 func set_water_tiles():
 	for x in range(300): # fill ocean
 		for y in range(300):
 			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
 				wetSand.set_cell(x, y, 0)
-				ocean.set_cell(x, y, 5)
-				$GeneratedTiles/BottomOcean.set_cell(x,y,0)
-				$GeneratedTiles/TopOcean.set_cell(x,y,0)
+				waves.set_cell(x, y, 5)
+				shallow_ocean.set_cell(x,y,0)
+				top_ocean.set_cell(x,y,0)
+				deep_ocean.set_cell(x,y,0)
 				validTiles.set_cell(x, y, -1)
-	for loc in ocean.get_used_cells(): # remove outer layer to show wet sand
+	for loc in waves.get_used_cells(): # remove outer layer to show wet sand
 		if sand.get_cellv(loc+Vector2(1,0)) != -1 or sand.get_cellv(loc+Vector2(-1,0)) != -1 or sand.get_cellv(loc+Vector2(0,1)) != -1 or sand.get_cellv(loc+Vector2(0,-1)) != -1:
-			ocean.set_cellv(loc, -1)
-			$GeneratedTiles/BottomOcean.set_cellv(loc,-1)
-			$GeneratedTiles/TopOcean.set_cellv(loc,-1)
-	for loc in wetSand.get_used_cells(): # remove outer layer to show wet sand
+			waves.set_cellv(loc, -1)
+			shallow_ocean.set_cellv(loc,-1)
+			deep_ocean.set_cellv(loc,-1)
+			top_ocean.set_cellv(loc,-1)
+	for loc in wetSand.get_used_cells(): # add outer layer to show wet sand
 		if wetSand.get_cellv(loc+Vector2(1,0)) != -1 or wetSand.get_cellv(loc+Vector2(-1,0)) != -1 or wetSand.get_cellv(loc+Vector2(0,1)) != -1 or wetSand.get_cellv(loc+Vector2(0,-1)) != -1:
 			wetSand.set_cellv(loc+Vector2(1,0), 0)
 			wetSand.set_cellv(loc+Vector2(-1,0), 0)
 			wetSand.set_cellv(loc+Vector2(0,1), 0)
 			wetSand.set_cellv(loc+Vector2(0,-1), 0)
+	for loc in waves.get_used_cells(): # remove outer layer to show wet sand
+		if wetSand.get_cellv(loc+Vector2(1,0)) != -1 or wetSand.get_cellv(loc+Vector2(-1,0)) != -1 or wetSand.get_cellv(loc+Vector2(0,1)) != -1 or wetSand.get_cellv(loc+Vector2(0,-1)) != -1:
+			wetSand.set_cellv(loc+Vector2(1,0), 0)
+			wetSand.set_cellv(loc+Vector2(-1,0), 0)
+			wetSand.set_cellv(loc+Vector2(0,1), 0)
+			wetSand.set_cellv(loc+Vector2(0,-1), 0)
+	for loc in shallow_ocean.get_used_cells():
+		for i in range(6): # shallow depth length
+			if shallow_ocean.get_cellv(loc+Vector2(i,0)) == -1 or shallow_ocean.get_cellv(loc+Vector2(-i,0)) == -1 or shallow_ocean.get_cellv(loc+Vector2(0,i)) == -1 or shallow_ocean.get_cellv(loc+Vector2(0,-i)) == -1:
+				deep_ocean.set_cellv(loc+Vector2(1,0), -1)
+				deep_ocean.set_cellv(loc+Vector2(-1,0), -1)
+				deep_ocean.set_cellv(loc+Vector2(0,1), -1)
+				deep_ocean.set_cellv(loc+Vector2(0,-1), -1)
 #	for x in range(300): # fill empty tiles
 #		for y in range(300):
 #			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
@@ -471,11 +474,12 @@ func check_and_remove_invalid_autotiles(map):
 		for cell in forest.get_used_cells(): 
 			if not Tiles.isValidAutoTile(cell, forest):
 				forest.set_cellv(cell, -1)
-		for cell in ocean.get_used_cells():
-			if not Tiles.isValidAutoTile(cell, ocean):
-				ocean.set_cellv(cell, -1)
-				$GeneratedTiles/BottomOcean.set_cellv(cell, -1)
-				$GeneratedTiles/TopOcean.set_cellv(cell, -1)
+		for cell in waves.get_used_cells():
+			if not Tiles.isValidAutoTile(cell, waves):
+				waves.set_cellv(cell, -1)
+				deep_ocean.set_cellv(cell, -1)
+				shallow_ocean.set_cellv(cell, -1)
+				top_ocean.set_cellv(cell, -1)
 		for cell in snow.get_used_cells():
 			if not Tiles.isValidAutoTile(cell, snow):
 				snow.set_cellv(cell, -1)
@@ -511,110 +515,103 @@ func ChangeTile(data):
 	watered.update_bitmask_region()
 
 
-func UpdateWorldState(world_state):
-#	if Server.day == null:
-#		if get_node("Players").has_node(Server.player_id):
-#			get_node("Players/" + Server.player_id).init_day_night_cycle(int(world_state["time_elapsed"]))
-	if world_state["t"] > last_world_state:
-		var new_day = bool(world_state["day"])
-		if has_node(active_player):
-			get_node(active_player + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
-		if Server.day != new_day and Server.isLoaded:
-			Server.day = new_day
-			if new_day == false:
-				if has_node(active_player):
-					pass
-					#get_node(active_player).set_night()
-			else:
-				if has_node(active_player):
-					pass
-					#watered.clear()
-					#get_node(active_player).set_day()
-		last_world_state = world_state["t"]
-		world_state_buffer.append(world_state)
+#func UpdateWorldState(world_state):
+##	if Server.day == null:
+##		if get_node("Players").has_node(Server.player_id):
+##			get_node("Players/" + Server.player_id).init_day_night_cycle(int(world_state["time_elapsed"]))
+#	if world_state["t"] > last_world_state:
+#		var new_day = bool(world_state["day"])
+#		if has_node(active_player):
+#			get_node(active_player + "/Camera2D/UserInterface/CurrentTime").update_time(int(world_state["time_elapsed"]))
+#		if Server.day != new_day and Server.isLoaded:
+#			Server.day = new_day
+#			if new_day == false:
+#				if has_node(active_player):
+#					pass
+#					#get_node(active_player).set_night()
+#			else:
+#				if has_node(active_player):
+#					pass
+#					#watered.clear()
+#					#get_node(active_player).set_day()
+#		last_world_state = world_state["t"]
+#		world_state_buffer.append(world_state)
 
 
-func _physics_process(delta):
-	var render_time = OS.get_system_time_msecs() - interpolation_offset
-	if world_state_buffer.size() > 1:
-		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].t:
-			world_state_buffer.remove(0)
-		if world_state_buffer.size() > 2:
-			for decoration in world_state_buffer[2]["decorations"].keys():
-				match decoration:
-					"seed":
-						for item in world_state_buffer[2]["decorations"][decoration].keys():
-							var data = world_state_buffer[2]["decorations"][decoration][item]
-							if has_node(str(item)):
-								get_node(str(item)).days_until_harvest = data["d"]
-								get_node(str(item)).refresh_image()
-			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
-			for player in world_state_buffer[2]["players"].keys():
-				if str(player) == "t":
-					continue
-				if str(player) == Server.player_id:
-					continue
-				if Players.has_node(str(player)):
-					var player_node = Players.get_node(str(player))
-					if world_state_buffer[1]["players"].has(player):
-						var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
-						player_node.move(new_position, world_state_buffer[1]["players"][player]["d"])
-				else:
-					spawnNewPlayer(world_state_buffer[2]["players"][player])
-		elif render_time > world_state_buffer[1].t:
-			#var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
-			for player in world_state_buffer[1]["players"].keys():
-				if str(player) == "t":
-					continue
-				if str(player) == Server.player_id:
-					continue
-				if Players.has_node(str(player)):
-					pass
-					#var position_delta = (Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) - Util.string_to_vector2(world_state_buffer[0]["players"][player]["p"]))
-					#var new_position = Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) + (position_delta * extrapolation_factor)
-					#$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
+#func _physics_process(delta):
+#	var render_time = OS.get_system_time_msecs() - interpolation_offset
+#	if world_state_buffer.size() > 1:
+#		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].t:
+#			world_state_buffer.remove(0)
+#		if world_state_buffer.size() > 2:
+#			for decoration in world_state_buffer[2]["decorations"].keys():
+#				match decoration:
+#					"seed":
+#						for item in world_state_buffer[2]["decorations"][decoration].keys():
+#							var data = world_state_buffer[2]["decorations"][decoration][item]
+#							if has_node(str(item)):
+#								get_node(str(item)).days_until_harvest = data["d"]
+#								get_node(str(item)).refresh_image()
+#			var interpolation_factor = float(render_time - world_state_buffer[1]["t"]) / float(world_state_buffer[2]["t"] - world_state_buffer[1]["t"])
+#			for player in world_state_buffer[2]["players"].keys():
+#				if str(player) == "t":
+#					continue
+#				if str(player) == Server.player_id:
+#					continue
+#				if Players.has_node(str(player)):
+#					var player_node = Players.get_node(str(player))
+#					if world_state_buffer[1]["players"].has(player):
+#						var new_position = lerp(world_state_buffer[1]["players"][player]["p"], world_state_buffer[2]["players"][player]["p"], interpolation_factor)
+#						player_node.move(new_position, world_state_buffer[1]["players"][player]["d"])
+#				else:
+#					spawnNewPlayer(world_state_buffer[2]["players"][player])
+#		elif render_time > world_state_buffer[1].t:
+#			#var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"] - world_state_buffer[0]["t"]) - 1.00
+#			for player in world_state_buffer[1]["players"].keys():
+#				if str(player) == "t":
+#					continue
+#				if str(player) == Server.player_id:
+#					continue
+#				if Players.has_node(str(player)):
+#					pass
+#					#var position_delta = (Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) - Util.string_to_vector2(world_state_buffer[0]["players"][player]["p"]))
+#					#var new_position = Util.string_to_vector2(world_state_buffer[1]["players"][player]["p"]) + (position_delta * extrapolation_factor)
+#					#$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 
 
-func returnValidSpawnLocation():
-	var tempLoc = Vector2(rng.randi_range(0, 6200), rng.randi_range(0, 6200))
-	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
-		return tempLoc
-	else:
-		return null
+#func returnValidSpawnLocation():
+#	var tempLoc = Vector2(rng.randi_range(0, 6200), rng.randi_range(0, 6200))
+#	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
+#		return tempLoc
+#	else:
+#		return null
+#
+#func spawnRandomSnake():
+#	var snake = Snake.instance()
+#	snake.global_position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(rng.randi_range(-500, 500), rng.randi_range(-500, 500))
+#	add_child(snake)
+#
+#func spawnRandomBunny():
+#	var loc = returnValidSpawnLocation()
+#	if loc != null:
+#		var bunny = Bunny.instance()
+#		bunny.global_position = loc
+#		$Animals.add_child(bunny)
+#
+#func spawnRandomBird():
+#	var loc = returnValidSpawnLocation()
+#	if loc != null:
+#		var bird = Bird.instance()
+#		bird.global_position = loc
+#		$Animals.add_child(bird)
+#
+#func spawnRandomDuck():
+#	var loc = returnValidSpawnLocation()
+#	if loc != null:
+#		var duck = Duck.instance()
+#		duck.global_position = loc
+#		$Animals.add_child(duck)
 
-func spawnRandomSnake():
-	var snake = Snake.instance()
-	snake.global_position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(rng.randi_range(-500, 500), rng.randi_range(-500, 500))
-	add_child(snake)
-	
-func spawnRandomBunny():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var bunny = Bunny.instance()
-		bunny.global_position = loc
-		$Animals.add_child(bunny)
-		
-func spawnRandomBird():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var bird = Bird.instance()
-		bird.global_position = loc
-		$Animals.add_child(bird)
-	
-func spawnRandomDuck():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var duck = Duck.instance()
-		duck.global_position = loc
-		$Animals.add_child(duck)
-
-func _on_SpawnEnemyTimer_timeout():
-	if has_node("/root/World/Players/" + Server.player_id):
-		spawn_IC_Ghost(get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id).position)
-#		print("spawn snake")
-#		var snake = Snake.instance()
-#		snake.global_position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(rng.randi_range(-500, 500), rng.randi_range(-500, 500))
-#		add_child(snake)
 
 func play_watering_can_effect(loc):
 	var wateringCanEffect = WateringCanEffect.instance()

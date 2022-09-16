@@ -11,7 +11,7 @@ onready var composite_sprites = get_node("../CompositeSprites")
 onready var dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
 onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
 onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-onready var ocean_tiles = get_node("/root/World/GeneratedTiles/AnimatedOceanTiles")
+onready var ocean_tiles = get_node("/root/World/GeneratedTiles/ShallowOcean")
 
 onready var ArrowProjectile = preload("res://World/Objects/Misc/ArrowProjectile.tscn")
 
@@ -28,40 +28,67 @@ enum {
 	CHANGE_TILE
 }
 
-func _process(delta):
-	$ArrowDirection.look_at(get_global_mouse_position())
+var is_drawing = false
+var is_releasing = false
 
-func swing(item_name, direction):
+func _process(delta):
+	if is_drawing or is_releasing:
+		var degrees = int($ArrowDirection.rotation_degrees) % 360
+		$ArrowDirection.look_at(get_global_mouse_position())
+		if $ArrowDirection.rotation_degrees >= 0:
+			if degrees <= 45 or degrees >= 315:
+				direction = "RIGHT"
+			elif degrees <= 135:
+				direction = "DOWN"
+			elif degrees <= 225:
+				direction = "LEFT"
+			else:
+				direction = "UP"
+		else:
+			if degrees >= -45 or degrees <= -315:
+				direction = "RIGHT"
+			elif degrees >= -135:
+				direction = "UP"
+			elif degrees >= -225:
+				direction = "LEFT"
+			else:
+				direction = "DOWN"
+		if is_drawing:
+			composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
+		elif is_releasing:
+			composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
+
+func swing(item_name, _direction):
 	if get_parent().state != SWINGING:
 		get_parent().state = SWINGING
 		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 			set_watered_tile()
-			animation = "watering_" + direction.to_lower()
+			animation = "watering_" + _direction.to_lower()
 			player_animation_player.play("watering")
 		elif item_name == "scythe" or item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
 			if item_name == "scythe":
-				player_animation_player.play("scythe_swing_" + direction.to_lower())
+				player_animation_player.play("scythe_swing_" + _direction.to_lower())
 			else:
-				player_animation_player.play("sword_swing_" + direction.to_lower())
-			animation = "sword_swing_" + direction.to_lower()
+				player_animation_player.play("sword_swing_" + _direction.to_lower())
+			animation = "sword_swing_" + _direction.to_lower()
 			rng.randomize()
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
 		elif item_name == "bow":
 			if PlayerInventory.returnSufficentCraftingMaterial("arrow", 1):
-				draw_bow()
+				draw_bow(_direction)
 				return
 			else:
 				get_parent().state = MOVEMENT
 				return
 		elif item_name == null:
-			set_swing_collision_layer_and_position(item_name, direction)
-			animation = "punch_" + direction.to_lower()
+			set_swing_collision_layer_and_position(item_name, _direction)
+			animation = "punch_" + _direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
 		else:
-			set_swing_collision_layer_and_position(item_name, direction)
-			animation = "swing_" + direction.to_lower()
+			set_swing_collision_layer_and_position(item_name, _direction)
+			animation = "swing_" + _direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
 		PlayerStats.decrease_energy()
 		#sendAction(SWING, {"tool": item_name, "direction": direction})
@@ -69,18 +96,23 @@ func swing(item_name, direction):
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
 		
-func draw_bow():
-	animation = "draw_" + get_parent().direction.to_lower()
+func draw_bow(init_direction):
+	is_drawing = true
+	animation = "draw_" + init_direction.to_lower()
 	player_animation_player.play("axe pickaxe swing")
 	PlayerStats.decrease_energy()
 	composite_sprites.set_player_animation(get_parent().character, animation, "bow")
 	yield(player_animation_player, "animation_finished" )
-	animation = "release_" + get_parent().direction.to_lower()
+	is_drawing = false
+	is_releasing = true
+	animation = "release_" + direction.to_lower()
 	composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
 	player_animation_player.play("release bow")
 	yield(player_animation_player, "animation_finished" )
+	is_releasing = false
 	PlayerInventory.remove_material("arrow", 1)
 	shoot()
+	get_parent().direction = direction
 	get_parent().state = MOVEMENT
 	
 func shoot():

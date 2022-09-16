@@ -5373,6 +5373,7 @@ volume_db = -16.0
 stream = ExtResource( 6 )
 autoplay = true
 stream_paused = true
+bus = "Bus1"
 script = ExtResource( 5 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]

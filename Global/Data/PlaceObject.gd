@@ -49,14 +49,6 @@ enum Lights {
 	CAMPFIRE
 }
 
-enum Paths {
-	WOOD_PATH1,
-	WOOD_PATH2,
-	STONE_PATH1,
-	STONE_PATH2,
-	STONE_PATH3,
-	STONE_PATH4
-}
 
 func place_seed_in_world(id, item_name, location, days):
 	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
@@ -81,8 +73,6 @@ func place_building_object_in_world(id, item_name, location):
 			Server.world.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			Tiles.wall_tiles.set_cellv(location, 0)
-			Tiles.wall_tiles.update_bitmask_area(location)
 		"door front":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			var object = StoneDoubleDoor.instance()
@@ -94,6 +84,9 @@ func place_building_object_in_world(id, item_name, location):
 		"door side":
 			Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			var object = StoneDoubleDoorSide.instance()
+			object.location = location
+			object.tier = "wood"
+			object.id = rng.randi_range(0, 10000)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
 		"foundation":
@@ -104,15 +97,11 @@ func place_building_object_in_world(id, item_name, location):
 			object.tier = "twig"
 			Server.world.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
-			Tiles.foundation_tiles.set_cellv(location, 1)
-			Tiles.foundation_tiles.update_bitmask_area(location)
 
 
 func place_object_in_world(id, item_name, location):
-	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 	fence_tiles = get_node("/root/World/PlacableTiles/FenceTiles")
 	object_tiles = get_node("/root/World/PlacableTiles/ObjectTiles")
-	path_tiles = get_node("/root/World/PlacableTiles/PathTiles")
 	light_tiles = get_node("/root/World/PlacableTiles/LightTiles")
 	#building_tiles = get_node("/root/World/PlacableTiles/BuildingTiles")
 	#wall_tiles = get_node("/root/World/PlacableTiles/WallTiles")
@@ -121,7 +110,7 @@ func place_object_in_world(id, item_name, location):
 	tileObjectHurtBox.name = str(id)
 	tileObjectHurtBox.initialize(item_name, location)
 	Server.world.call_deferred("add_child", tileObjectHurtBox, true)
-	tileObjectHurtBox.global_position = valid_tiles.map_to_world(location) + Vector2(16, 16)
+	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(16, 16)
 	match item_name:
 		"double door":
 			Tiles.remove_invalid_tiles(location, Vector2(2,1))
@@ -247,18 +236,6 @@ func place_object_in_world(id, item_name, location):
 			sleepingBag.direction = "left"
 			Server.world.add_child(sleepingBag, true)
 			sleepingBag.global_position = valid_tiles.map_to_world(location) 
-		"wood path1":
-			path_tiles.set_cellv(location, Paths.WOOD_PATH1)
-		"wood path2":
-			path_tiles.set_cellv(location, Paths.WOOD_PATH2)
-		"stone path1":
-			path_tiles.set_cellv(location, Paths.STONE_PATH1)
-		"stone path2":
-			path_tiles.set_cellv(location, Paths.STONE_PATH2)
-		"stone path3":
-			path_tiles.set_cellv(location, Paths.STONE_PATH3)
-		"stone path4":
-			path_tiles.set_cellv(location, Paths.STONE_PATH4)
 
 func upgrade_workbench(player_pos):
 	if object_tiles.get_cellv(valid_tiles.world_to_map(player_pos + Vector2(0, -32))) == Placables.WORKBENCH1:
