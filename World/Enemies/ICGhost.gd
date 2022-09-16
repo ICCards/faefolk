@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 onready var background = $CompositeSprites/background
 onready var body = $CompositeSprites/body
 onready var ears = $CompositeSprites/ears
@@ -50,9 +49,13 @@ var test_ghost = [
 		  }
 ]
 
-onready var player = get_node("/root/World/Players/" + Server.player_id)
+var velocity = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var knockback = Vector2.ZERO
+export var MAX_SPEED = 160
+export var ACCELERATION = 200
+export var FRICTION = 80
+export var KNOCKBACK_AMOUNT = 550
 
 func _ready():
 	background.texture = Images.returnICGhostBackground(test_ghost[0]["v"])
@@ -67,14 +70,35 @@ func _ready():
 	
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
-	knockback = move_and_slide(knockback)
-	var velocity = player.global_position - global_position
-	velocity = move_and_slide(velocity)
-	if velocity.x > 0:
-		flip_horizontal_false()
+	rng.randomize()
+	if knockback != Vector2.ZERO:
+		knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
+		knockback = move_and_slide(knockback)
 	else:
-		flip_horizontal_true()
+		var direction = (Server.player_node.global_position - global_position).normalized()
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+		velocity = move_and_slide(velocity)
+		if velocity.x > 0:
+			flip_horizontal_false()
+		else:
+			flip_horizontal_true()
+	#set_direction()
+
+
+
+func set_direction():
+	if abs(velocity.y) > abs(velocity.x):
+		if velocity.y > 0:
+			$AnimatedSprite.animation = "down"
+		else: 
+			$AnimatedSprite.animation = "up"
+	else: 
+		if velocity.x > 0:
+			$AnimatedSprite.animation = "right"
+		else: 
+			$AnimatedSprite.animation = "left"
+
+
 
 func flip_horizontal_true():
 	background.flip_h = true
@@ -102,5 +126,6 @@ func flip_horizontal_false():
 
 
 func _on_Area2D_area_entered(area):
+	$HurtBox/AnimationPlayer.play("hit")
 	if area.knockback_vector != null:
-		knockback = area.knockback_vector * 275
+		knockback = area.knockback_vector * 400

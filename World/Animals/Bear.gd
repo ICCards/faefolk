@@ -1,46 +1,53 @@
-extends KinematicBody2D
+extends StaticBody2D
 
-const SPEED: int = 120
-var velocity: Vector2 = Vector2.ZERO
-
+const GALLUP_SPEED: int = 180
+const IDLE_SPEED: int = 120
+var is_in_sight: bool = false
+var changing_direction: bool = false
 var path: Array = []
-var worldNavigation: Navigation2D = null
 var player = null
 var direction = "down"
+var random_idle_pos = null
 var player_spotted: bool = false
 var playing_sound_effect: bool = false
-var swinging = false
+var in_idle_state: bool = false
+var swinging: bool = false
+var current_pos = null
 onready var los = $LineOfSight
+onready var worldNavigation = get_node("/root/World/WorldNavigation")
 
 var rng = RandomNumberGenerator.new()
+var state = IDLE
 
 
-func _ready():
-	wait_for_map()
+enum {
+	CHASE,
+	SWING,
+	IDLE,
+	WALK
+}
 
-func wait_for_map():
-	if Server.isLoaded:
-		if Server.world.has_node("WorldNavigation"):
-			print('set world nav')
-			worldNavigation = get_node("/root/World/WorldNavigation")
-		if Server.world.has_node("Players/" + Server.player_id):
-			print('set player')
-			player = get_node("/root/World/Players/" + Server.player_id)
-	else:
-		yield(get_tree().create_timer(2.5), "timeout")
-		wait_for_map()
-		
+
 func _physics_process(delta):
-	set_direction()
-	if player:
+	if is_in_sight:
+		player = get_node("/root/World/Players/" + Server.player_id).get_children()[0]
 		los.look_at(player.global_position)
-		check_player_in_detection()
-		if player_spotted:
-			start_sound_effects()
-			move()
-		else:
-			stop_sound_effects()
-			idle()
+		match state:
+			CHASE:
+				chase(delta)
+			SWING:
+				swing()
+			IDLE:
+				check_player_in_detection()
+				idle()
+			WALK:
+				check_player_in_detection()
+				navigate(delta)
+	
+	
+func idle():
+	$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
+	$Body/Fangs.texture = null
 	
 	
 func play_groan_sound_effect():
@@ -51,7 +58,7 @@ func play_groan_sound_effect():
 	yield($AudioStreamPlayer2D, "finished")
 	playing_sound_effect = false
 	start_sound_effects()
-	
+
 	
 func start_sound_effects():
 	if not playing_sound_effect:
@@ -60,12 +67,13 @@ func start_sound_effects():
 		$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$AudioStreamPlayer2D.play()
 		
+		
 func stop_sound_effects():
 	playing_sound_effect = false
 	$AudioStreamPlayer2D.stop()
 		
 
-func set_direction():
+func set_swing_direction():
 	var degrees = int(los.rotation_degrees)
 	if degrees > 0:
 		degrees = degrees % 360
@@ -88,76 +96,122 @@ func set_direction():
 		else:
 			direction = "down"
 
-func check_player_in_detection() -> bool:
-	var collider = los.get_collider()
-	if global_position.distance_to(player.global_position) >= 500:
-		player_spotted = false
-	if collider and collider == player:
-		player_spotted = true
-		return true
-	return false
 
-func navigate():
-	if path.size() > 1:
-		velocity = global_position.direction_to(path[1]) * SPEED
+func check_player_in_detection():
+	var collider = los.get_collider()
+	if collider and collider == player and not player.is_player_dead:
+		if worldNavigation.get_simple_path(global_position, player.global_position, true).size() > 1:
+			state = CHASE
+
+
+func navigate(delta):
+	if path.size() > 0:
+		set_direction(path[0])
+		set_texture()
+		$AnimationPlayer.play("loop")
+		if state == CHASE:
+			position = position.move_toward(path[0], delta * GALLUP_SPEED)
+		else:
+			position = position.move_toward(path[0], delta * IDLE_SPEED)
 		if global_position == path[0]:
 			path.pop_front()
-	
-func generate_path():
-	if worldNavigation != null and player != null:
-		path = worldNavigation.get_simple_path(global_position, player.global_position, false)
+	else:
+		if state == WALK:
+			state = IDLE
+		elif state == CHASE and position.distance_to(player.position) > 350:
+			state = IDLE
 
 
-func idle():
-	if direction == "left":
-		$AnimatedSprite.play("idle side")
-		$AnimatedSprite.flip_h = true
-	elif direction == "right":
-		$AnimatedSprite.play("idle side")
-		$AnimatedSprite.flip_h = false
-	else: 
-		$AnimatedSprite.play("idle " + direction)
+func set_texture():
+	match state:
+		CHASE:
+			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png")
+			$Body/Fangs.texture = load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png")
+		WALK:
+			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png")
+			$Body/Fangs.texture = null #load("res://Assets/Images/Animals/Bear/walk/fangs/" + direction  + ".png")
 
-func move():
-	if not swinging:
-		if worldNavigation != null and player != null:
-			velocity = move_and_slide(velocity)
-			if position.distance_to(player.position) > 50:
-				if direction == "left":
-					$AnimatedSprite.play("walk side")
-					$AnimatedSprite.flip_h = true
-				elif direction == "right":
-					$AnimatedSprite.play("walk side")
-					$AnimatedSprite.flip_h = false
-				else:
-					$AnimatedSprite.play("walk " + direction)
-					$AnimatedSprite.flip_h = false
+
+func set_direction(new_pos):
+	if not changing_direction:
+		var tempPos = position - new_pos
+		if abs(tempPos.y) > abs(tempPos.x):
+			if tempPos.y > 0:
+				change_direction("up")
 			else:
-				swing(direction)
-	
-	
-
-func swing(direction):
-	if not swinging:
-		play_groan_sound_effect()
-		swinging = true
-		if direction == "left":
-			$AnimationPlayer.play("swing left")
-			$AnimatedSprite.flip_h = true
-			$AnimatedSprite.play("swing side")
-		elif direction == "right":	
-			$AnimationPlayer.play("swing right")
-			$AnimatedSprite.flip_h = false
-			$AnimatedSprite.play("swing side")
-		else:
-			$AnimationPlayer.play("swing "+ direction)
-			$AnimatedSprite.play("swing " + direction)
-		yield($AnimatedSprite, "animation_finished")
-		swinging = false
+				change_direction("down")
+		elif tempPos.x > 0:
+			change_direction("left")
+		elif tempPos.x < 0:
+			change_direction("right")
 
 
+func change_direction(new_direction):
+	if new_direction != direction:
+		changing_direction = true
+		direction = new_direction
+		yield(get_tree().create_timer(0.25), "timeout")
+		changing_direction = false
 
-func _on_Timer_timeout():
-	if player:
-		generate_path()
-		navigate()
+
+func chase(delta):
+	if (position + Vector2(0,-26)).distance_to(player.position) > 70:
+		navigate(delta)
+	else:
+		state = SWING
+
+
+func swing():
+	if not player.is_player_dead and path.size() > 0:
+		if not swinging:
+			swinging = true
+			yield(get_tree().create_timer(0.15), "timeout")
+			play_groan_sound_effect()
+			set_swing_direction()
+			if (position + Vector2(0,-26)).distance_to(player.position) < 50:
+				$AnimationPlayer.play("bite " + direction)
+			else:
+				$AnimationPlayer.play("swing " + direction)
+			yield($AnimationPlayer, "animation_finished")
+			swinging = false
+			path = worldNavigation.get_simple_path(global_position, player.global_position, true)
+			state = CHASE
+	else:
+		state = IDLE
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+	is_in_sight = true
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false
+	is_in_sight = false
+
+
+func _on_PathToPlayerTimer_timeout():
+	if state == CHASE:
+		path = worldNavigation.get_simple_path(global_position, player.global_position, true)
+		if path.size() == 0:
+			state = IDLE
+
+
+func _on_RandomPathTimer_timeout():
+	if state == IDLE:
+		rng.randomize()
+		random_idle_pos = Vector2(rng.randi_range(-300, 300), rng.randi_range(-300, 300))
+		path = worldNavigation.get_simple_path(position, position + random_idle_pos, true)
+		state = WALK
+
+func _on_HurtBox_area_entered(area):
+	$HurtBox/AnimationPlayer.play("hit")
+
+
+func _on_CheckPositionTimer_timeout():
+	if current_pos == position:
+		rng.randomize()
+		random_idle_pos = Vector2(rng.randi_range(-300, 300), rng.randi_range(-300, 300))
+		path = worldNavigation.get_simple_path(position, position + random_idle_pos, true)
+	else:
+		current_pos = position

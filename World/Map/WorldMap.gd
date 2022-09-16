@@ -84,18 +84,16 @@ func draw_grid_labels():
 			gridSquareLabel.rect_position = Vector2(x*200, y*200) + Vector2(2, 2)
 			add_child(gridSquareLabel)
 	
-func _process(delta):
-	pass
-#	if has_node("/root/World/Players/" + Server.player_id):
-#		player = get_node("/root/World/Players/" + Server.player_id).get_children()[0]
-#		playerIcon.position =  player.position
-#		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
-#		set_direction(player.direction)
-#		change_label_size()
-#		roamingStorm = get_node("/root/World/RoamingStorm")
-#		roamingStorm2 = get_node("/root/World/RoamingStorm2")
-#		stormIcon.position = roamingStorm.position
-#		stormIcon2.position = roamingStorm2.position
+func _physics_process(delta):
+	if Server.player_node:
+		playerIcon.position =  Server.player_node.position
+		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
+		set_direction(Server.player_node.direction)
+		#change_label_size()
+		roamingStorm = get_node("/root/World/RoamingStorm")
+		#roamingStorm2 = get_node("/root/World/RoamingStorm2")
+		stormIcon.position = roamingStorm.position
+		#stormIcon2.position = roamingStorm2.position
 		
 	
 	
@@ -111,9 +109,10 @@ func adjustedGridCoordinatesScale(zoom):
 func adjustedPlayerIconScale(zoom):
 	var percent_zoomed = zoom / Vector2(1.5, 1.5)
 	return Vector2(40,40) * percent_zoomed
-		
-func set_direction(direction):
-	match direction:
+
+
+func set_direction(dir):
+	match dir:
 		"RIGHT":
 			playerIcon.rotation_degrees = 0
 		"LEFT":

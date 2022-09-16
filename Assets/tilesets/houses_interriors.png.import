@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/houses_interriors.png-dec4f4e8089e7b2db98e310266a93fff.stex"
+path="res://.import/houses_interriors.png-63b724c739a365588026b27748d87e98.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/houses_interriors.png"
-dest_files=[ "res://.import/houses_interriors.png-dec4f4e8089e7b2db98e310266a93fff.stex" ]
+source_file="res://Assets/Tilesets/houses_interriors.png"
+dest_files=[ "res://.import/houses_interriors.png-63b724c739a365588026b27748d87e98.stex" ]
 
 [params]
 

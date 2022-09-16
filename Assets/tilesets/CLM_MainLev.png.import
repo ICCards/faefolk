@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CLM_MainLev.png-30b7d9b3c8e36c9ea60c695c4bf89064.stex"
+path="res://.import/CLM_MainLev.png-c78a8457bd686a1d26dddf6ff390537d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/CLM_MainLev.png"
-dest_files=[ "res://.import/CLM_MainLev.png-30b7d9b3c8e36c9ea60c695c4bf89064.stex" ]
+source_file="res://Assets/Tilesets/CLM_MainLev.png"
+dest_files=[ "res://.import/CLM_MainLev.png-c78a8457bd686a1d26dddf6ff390537d.stex" ]
 
 [params]
 

@@ -1,0 +1,128 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://World/Player/Player/Fishing/FishingMiniGame.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Misc/Fishing/progress.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Misc/Fishing/fishing with extra bar.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Misc/Fishing/rod decoration.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Misc/Fishing/spr_fish_64_x.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Misc/Fishing/animated reel.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 10 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="FishingMiniGame" type="Node2D"]
+scale = Vector2( 2.5, 2.5 )
+z_index = 1
+script = ExtResource( 1 )
+
+[node name="Bg" type="TextureRect" parent="."]
+margin_left = 0.4
+margin_top = -35.2
+margin_right = 40.4
+margin_bottom = 96.8
+texture = ExtResource( 4 )
+
+[node name="Hook" type="Node2D" parent="."]
+position = Vector2( 15, 83 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Hook"]
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Hook"]
+collision_layer = 1048576
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hook/Area2D"]
+shape = SubResource( 1 )
+
+[node name="Clicker" type="TextureButton" parent="."]
+margin_left = -318.4
+margin_top = -84.8
+margin_right = 775.6
+margin_bottom = 583.2
+
+[node name="Progress" type="TextureProgress" parent="."]
+modulate = Color( 0.313726, 1, 0, 1 )
+margin_left = 2.0
+margin_top = -33.0
+margin_right = 5.0
+margin_bottom = 95.0
+max_value = 1000.0
+value = 200.0
+texture_progress = ExtResource( 3 )
+fill_mode = 3
+
+[node name="TempFishIcon" type="Sprite" parent="."]
+visible = false
+position = Vector2( 15, 83 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="RodDecoration" type="TextureRect" parent="."]
+margin_left = -8.4
+margin_top = -31.6
+margin_right = 31.6
+margin_bottom = 100.4
+mouse_filter = 2
+texture = ExtResource( 5 )
+
+[node name="AnimatedReel" type="Sprite" parent="."]
+position = Vector2( -2.39999, 87.2 )
+rotation = -6.28319
+texture = ExtResource( 7 )
+offset = Vector2( 0, -1.47369 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/fade = SubResource( 3 )
+
+[node name="TimerProgress" type="ColorRect" parent="."]
+margin_left = 28.0
+margin_top = 95.0
+margin_right = 31.0
+margin_bottom = 223.0
+grow_vertical = 0
+rect_rotation = 180.0
+color = Color( 0, 1, 1, 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[connection signal="button_down" from="Clicker" to="." method="_on_Clicker_button_down"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]

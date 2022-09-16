@@ -6,6 +6,7 @@ var ambient_volume = 50
 var footstep_volume = 50
 
 signal volume_change
+signal footsteps_sound_change
 
 func _ready():
 	set_music_volume(music_volume)
@@ -73,10 +74,13 @@ func return_adjusted_sound_db(category, init_sound):
 var current_footsteps_sound = wood_footsteps
 
 
+
+
 ### Sound effects ##
 var wood_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/wood footsteps.mp3")
 var dirt_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3")
 var stone_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3")
+var swimming = preload("res://Assets/Sound/Sound effects/Footsteps/swimming.mp3")
 
 var button_hover = preload("res://Assets/Sound/Sound effects/UI/button hover.mp3")
 var button_select = preload("res://Assets/Sound/Sound effects/UI/button select.mp3")
@@ -111,8 +115,14 @@ var tree_hit = [
 	preload("res://Assets/Sound/Sound effects/Tree/Tree hit 3.mp3")
 ]
 
+var sword_whoosh = [
+	preload("res://Assets/Sound/Sound effects/Sword/sword whoosh.mp3"),
+	preload("res://Assets/Sound/Sound effects/Sword/sword whoosh 2.mp3"),
+]
+
 var tree_break = preload("res://Assets/Sound/Sound effects/Tree/Falling tree.mp3")
 var stump_break = preload("res://Assets/Sound/Sound effects/Tree/Stump break.mp3")
+var tool_break = preload("res://Assets/Sound/Sound effects/objects/tool break.mp3")
 
 var bear_grown = [
 	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/ES_Monster Bear Groan 1 - SFX Producer.mp3"),

@@ -15,7 +15,7 @@ position = Vector2( 0, -6 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "walk down"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,7 +26,6 @@ shape = SubResource( 1 )
 [node name="LineOfSight" type="RayCast2D" parent="."]
 position = Vector2( -2.38419e-07, -9.53674e-07 )
 rotation = -0.485202
-scale = Vector2( 1, 1 )
 enabled = true
 cast_to = Vector2( 200, 0 )
 

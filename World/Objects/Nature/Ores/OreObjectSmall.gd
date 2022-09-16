@@ -1,13 +1,12 @@
 extends Node2D
 
-
+onready var OreBreak = preload("res://World/Objects/Nature/Effects/OreBreak.tscn")
 onready var OreHitEffect = preload("res://World/Objects/Nature/Effects/OreHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var smallOreSprite = $SmallOre
 onready var animation_player = $AnimationPlayer
 var rng = RandomNumberGenerator.new()
-onready var world = get_tree().current_scene
+
 var oreObject
 var position_of_object
 var variety
@@ -34,31 +33,35 @@ func PlayEffect(player_id):
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 32))
 		animation_player.play("small_ore_hit_right")
 	else:
+		Tiles.reset_valid_tiles(position_of_object)
 		visible = false
 		$SmallMovementCollisionBox/CollisionShape2D.disabled = true
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 42))
-		valid_tiles.set_cellv(position_of_object, 0)
 		yield($SoundEffects, "finished")
 		queue_free()
 
 
 func _on_SmallHurtBox_area_entered(_area):
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
 	rng.randomize()
 	var data = {"id": name, "n": "ore"}
 	Server.action("ON_HIT", data)
 	health -= 1
 	if health == 0:
+		Tiles.reset_valid_tiles(position_of_object)
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
+		oreBreakEffect()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 42))
-		intitiateItemDrop(variety, Vector2(0, 40))
+		intitiateItemDrop(variety, Vector2(0, 40), 3)
 		animation_player.play("small_ore_break")
-		valid_tiles.set_cellv(position_of_object, 0)
 		yield($SoundEffects, "finished")
+		yield(get_tree().create_timer(0.6), "timeout")
 		queue_free()
 	if health != 0:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
@@ -69,19 +72,25 @@ func _on_SmallHurtBox_area_entered(_area):
 		
 		
 ## Effect functions
-func intitiateItemDrop(item, pos):
-	if item == "Stone" or item == "Cobblestone":
-		item = "stone ore"
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item, 1)
-	get_parent().call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + pos + Vector2(0, -36)
+func intitiateItemDrop(item, pos, amount):
+	rng.randomize()
+	for i in range(amount):
+		var itemDrop = ItemDrop.instance()
+		itemDrop.initItemDropType("stone", 1)
+		get_parent().call_deferred("add_child", itemDrop)
+		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), -36)
 
 func initiateOreHitEffect(ore, effect, pos):
 	var oreHitEffect = OreHitEffect.instance()
 	oreHitEffect.init(ore, effect)
 	add_child(oreHitEffect)
 	oreHitEffect.global_position = global_position + pos + Vector2(0, -36)
+
+func oreBreakEffect():
+	var oreBreak = OreBreak.instance()
+	oreBreak.variety = variety
+	add_child(oreBreak)
+	oreBreak.global_position = global_position + Vector2(0,-12)
 
 
 func _on_VisibilityNotifier2D_screen_entered():

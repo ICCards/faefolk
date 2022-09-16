@@ -14,12 +14,14 @@ var being_added_to_inventory = false
 var item_name
 var randomInt
 var rng = RandomNumberGenerator.new()
-var quantity
+var item_quantity
+var item_health
 
 
-func initItemDropType(_item_name, var _quantity = 1):
+func initItemDropType(_item_name, var _quantity = 1, var _health = null):
 	item_name = _item_name
-	quantity = _quantity
+	item_quantity = _quantity
+	item_health = _health
 	if item_name == "wood path1" or item_name == "wood path2":
 		item_name = "wood path"
 	elif item_name == "stone path1" or item_name == "stone path2" or  item_name == "stone path3" or item_name == "stone path4": 
@@ -31,11 +33,12 @@ func initItemDropType(_item_name, var _quantity = 1):
 #		api_call_name = "stone ore"
 
 func _ready():
-	itemSprite.texture = load("res://Assets/Images/dropped_item_icon/" + item_name + ".png")
-	if quantity == 1:
+	#itemSprite.texture = load("res://Assets/Images/dropped_item_icon/" + item_name + ".png")
+	itemSprite.texture = load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png")
+	if item_quantity == 1:
 		itemQuantity.visible = false
 	else:
-		itemQuantity.text = str(quantity)
+		itemQuantity.text = str(item_quantity)
 	rng.randomize()
 	randomInt = rng.randi_range(1, 5)
 	animationPlayer.play("Animate " + String(randomInt))
@@ -73,7 +76,7 @@ func _physics_process(_delta):
 				if item_name == "wood" or item_name == "stone ore":
 					pass
 					#RustCalls.mint_object(item_name)
-				PlayerInventory.add_item_to_hotbar(item_name, quantity)
+				PlayerInventory.add_item_to_hotbar(item_name, item_quantity, item_health)
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")

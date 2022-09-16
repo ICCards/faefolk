@@ -7,7 +7,8 @@ func _ready():
 var items_in_range = {}
 
 func _on_PickupZone_body_entered(body):
-	items_in_range[body] = body
+	if PlayerInventory.can_item_be_added_to_inventory(body.item_name, body.item_quantity):
+		items_in_range[body] = body
 
 
 func _on_PickupZone_body_exited(body):

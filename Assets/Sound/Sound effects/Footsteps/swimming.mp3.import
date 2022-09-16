@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/swimming.mp3-b4fef3ceacbe03497b02bf343b57de5b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Footsteps/swimming.mp3"
+dest_files=[ "res://.import/swimming.mp3-b4fef3ceacbe03497b02bf343b57de5b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

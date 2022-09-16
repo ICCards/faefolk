@@ -23,96 +23,7 @@ func _play_hover_effect(button_name):
 		$SoundEffects.stream = Sounds.button_hover
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 		$SoundEffects.play()
-
-func _on_PlayArea_mouse_entered():
-	_play_hover_effect("play")
-	$Tween.interpolate_property($PlayShopQuit/Play, "scale",
-		$PlayShopQuit/Play.get_scale(), Vector2(1.035, 1.035), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Play, "position",
-		$PlayShopQuit/Play.get_position(), Vector2(0, -5),  0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func _on_QuitArea_mouse_entered():
-	_play_hover_effect("quit")
-	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
-		$PlayShopQuit/Quit.get_scale(), Vector2(1.035, 1.035), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Quit, "position",
-		$PlayShopQuit/Quit.get_position(), Vector2(0, -15),  0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-	
-func _on_ShopArea_mouse_entered():
-	_play_hover_effect("options")
-	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
-		$PlayShopQuit/Shop.get_scale(), Vector2(1.035, 1.035), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Shop, "position",
-		$PlayShopQuit/Shop.get_position(), Vector2(0, -10),  0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func _on_ShopArea_mouse_exited():
-	hovered_button = ""
-	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
-		$PlayShopQuit/Shop.get_scale(), Vector2(1, 1), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Shop, "position",
-		$PlayShopQuit/Shop.get_position(), Vector2(0, 0), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func _on_PlayArea_mouse_exited():
-	hovered_button = ""
-	$Tween.interpolate_property($PlayShopQuit/Play, "scale",
-		$PlayShopQuit/Play.get_scale(), Vector2(1, 1), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Play, "position",
-		$PlayShopQuit/Play.get_position(), Vector2(0, 0), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func _on_QuitArea_mouse_exited():
-	hovered_button = ""
-	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
-		$PlayShopQuit/Quit.get_scale(), Vector2(1, 1), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Quit, "position",
-		$PlayShopQuit/Quit.get_position(), Vector2(0, 0), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func _on_PlayArea_input_event(viewport, event, shape_idx):
-	
-	if event.is_action_pressed("mouse_click") and not changing_scene_active:
-		changing_scene_active = true
-		get_parent().get_node("TitleMusic").stop()
-		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-		$SoundEffects.play()
-		SceneChanger.goto_scene("res://World/World/World.tscn")
-
-
-func _on_QuitArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click") and not changing_scene_active:
-		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-		$SoundEffects.play()
-		#get_tree().quit()
-
-
-func _on_ShopArea_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("mouse_click") and not changing_scene_active:
-		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-		$SoundEffects.play()
+ 
 
 func _on_ConnectToPlugButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
@@ -151,3 +62,94 @@ func _on_ConnectToPlugButton_mouse_exited():
 	$Tween.start()
 
 
+
+
+func _on_PlayBtn_mouse_entered():
+	_play_hover_effect("play")
+	$Tween.interpolate_property($PlayShopQuit/Play, "scale",
+		$PlayShopQuit/Play.get_scale(), Vector2(1.035, 1.035), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($PlayShopQuit/Play, "position",
+		$PlayShopQuit/Play.get_position(), Vector2(94, -5),  0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func _on_PlayBtn_mouse_exited():
+	hovered_button = ""
+	$Tween.interpolate_property($PlayShopQuit/Play, "scale",
+		$PlayShopQuit/Play.get_scale(), Vector2(1, 1), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($PlayShopQuit/Play, "position",
+		$PlayShopQuit/Play.get_position(), Vector2(94, 0), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func _on_PlayBtn_pressed():
+	if not changing_scene_active:
+		changing_scene_active = true
+		get_parent().get_node("TitleMusic").stop()
+		$SoundEffects.stream = Sounds.button_select
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+		$SoundEffects.play()
+		SceneChanger.goto_scene("res://World/World/World.tscn")
+
+
+func _on_ShopBtn_mouse_entered():
+	_play_hover_effect("options")
+	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
+		$PlayShopQuit/Shop.get_scale(), Vector2(1.035, 1.035), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($PlayShopQuit/Shop, "position",
+		$PlayShopQuit/Shop.get_position(), Vector2(115, -10),  0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func _on_ShopBtn_mouse_exited():
+	hovered_button = ""
+	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
+		$PlayShopQuit/Shop.get_scale(), Vector2(1, 1), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($PlayShopQuit/Shop, "position",
+		$PlayShopQuit/Shop.get_position(), Vector2(115, 0), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func _on_ShopBtn_pressed():
+	if not changing_scene_active:
+		$SoundEffects.stream = Sounds.button_select
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+		$SoundEffects.play()
+
+
+func _on_QuitBtn_mouse_entered():
+	_play_hover_effect("quit")
+	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
+		$PlayShopQuit/Quit.get_scale(), Vector2(1.035, 1.035), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($PlayShopQuit/Quit, "position",
+		$PlayShopQuit/Quit.get_position(), Vector2(137, -15),  0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func _on_QuitBtn_mouse_exited():
+	hovered_button = ""
+	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
+		$PlayShopQuit/Quit.get_scale(), Vector2(1, 1), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($PlayShopQuit/Quit, "position",
+		$PlayShopQuit/Quit.get_position(), Vector2(137, 0), 0.15,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func _on_QuitBtn_pressed():
+	if not changing_scene_active:
+		$SoundEffects.stream = Sounds.button_select
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+		$SoundEffects.play()
+		#get_tree().quit()

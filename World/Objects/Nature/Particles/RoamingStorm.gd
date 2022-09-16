@@ -6,7 +6,7 @@ var is_snow_storm = false
 
 func _ready():
 	randomize()
-	position = Vector2(rand_range(0, 32000), rand_range(0, 32000))
+	position = Vector2(rand_range(0, 32000), rand_range(0, 32000)) #Vector2( 4000, 4000) #Vector2(rand_range(0, 4000), rand_range(0, 4000))
 	initiate_storm()
 
 func initiate_storm():
@@ -15,7 +15,7 @@ func initiate_storm():
 	yield(get_tree().create_timer(rand_range(60, 180)), "timeout")
 	initiate_storm()
 
-func _process(delta):
+func _physics_process(delta):
 	if Server.isLoaded and not PlayerInventory.viewMapMode:
 		visible = true
 		position = position.move_toward(random_storm_position, delta * 10)
