@@ -158,4 +158,5 @@ func _on_Exit_mouse_exited():
 
 
 func _on_ExitButton_pressed():
-	get_parent().toggle_menu()
+	if not get_parent().holding_item:
+		get_parent().toggle_menu()

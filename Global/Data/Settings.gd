@@ -9,8 +9,8 @@ var key_dict = {
 	"move_left":65,
 	"move_up": 87,
 	"move_down": 83,
-	"open_menu": 69,
-	"action": 88,
+	"open_menu": 73,
+	"action": 69,
 	"rotate": 82,
 	"open_map": 71
 }
