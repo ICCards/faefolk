@@ -1,13 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://World/Objects/Farm/PlantedCrop.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/harvest.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Images/Animations/plant/plant break.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15, 15 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "animate"
@@ -28,6 +26,42 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 15, 15 )
 
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 80, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+} ]
+
 [node name="PlantedCrop" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -45,13 +79,6 @@ position = Vector2( -1, -13 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayAnimBox"]
 position = Vector2( 17, 14 )
 shape = SubResource( 2 )
-
-[node name="HarvestBox" type="Area2D" parent="."]
-position = Vector2( -1, -13 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HarvestBox"]
-position = Vector2( 16, 13 )
-shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/animate = SubResource( 3 )
@@ -76,11 +103,23 @@ shape = SubResource( 4 )
 position = Vector2( 15, 0 )
 scale = Vector2( 1.6, 1.6 )
 
+[node name="Harvest" type="TextureButton" parent="."]
+margin_left = -1.0
+margin_top = -18.0
+margin_right = 31.0
+margin_bottom = 14.0
+
+[node name="LeafEffect" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 15, 0 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 12 )
+
 [connection signal="body_entered" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_entered"]
 [connection signal="body_exited" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_exited"]
-[connection signal="input_event" from="HarvestBox" to="." method="_on_Area2D_input_event"]
-[connection signal="mouse_entered" from="HarvestBox" to="." method="_on_Area2D_mouse_entered"]
-[connection signal="mouse_exited" from="HarvestBox" to="." method="_on_Area2D_mouse_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="mouse_entered" from="Harvest" to="." method="_on_Harvest_mouse_entered"]
+[connection signal="mouse_exited" from="Harvest" to="." method="_on_Harvest_mouse_exited"]
+[connection signal="pressed" from="Harvest" to="." method="_on_Harvest_pressed"]

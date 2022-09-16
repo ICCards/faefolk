@@ -1,0 +1,977 @@
+[gd_scene load_steps=99 format=2]
+
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" type="Script" id=1]
+[ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=2]
+[ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" type="Script" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/inventory_icons/Food/garlic.png" type="Texture" id=6]
+
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=61]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=62]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="ShaderMaterial" id=63]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=64]
+load_path = "res://.import/anchovy.png-d115a4eb5ece03701b4943889c6b8daf.stex"
+
+[sub_resource type="ShaderMaterial" id=65]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=66]
+load_path = "res://.import/angler.png-26a4cc20a9df82a2540b9886038447b8.stex"
+
+[sub_resource type="ShaderMaterial" id=67]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=68]
+load_path = "res://.import/betta.png-1a3901726a29b2a496b23079ab8310de.stex"
+
+[sub_resource type="ShaderMaterial" id=69]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=70]
+load_path = "res://.import/blowfish.png-cba75b0523f8961c7c26eec0af9e4e97.stex"
+
+[sub_resource type="ShaderMaterial" id=71]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=72]
+load_path = "res://.import/catfish.png-bcf867c295f4e0662ad37d4e6c66f971.stex"
+
+[sub_resource type="ShaderMaterial" id=73]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=74]
+load_path = "res://.import/cisco.png-50355cf2072cd2a85166c94070dd0e3e.stex"
+
+[sub_resource type="ShaderMaterial" id=75]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=76]
+load_path = "res://.import/clownfish.png-2616920a50f83e602f6d22e80f6c405d.stex"
+
+[sub_resource type="ShaderMaterial" id=77]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=78]
+load_path = "res://.import/crab.png-543d62de4c832b4959bccdeda4b3d179.stex"
+
+[sub_resource type="ShaderMaterial" id=79]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=80]
+load_path = "res://.import/dorado.png-b464278032d9f4cf61b28daacc939bfe.stex"
+
+[sub_resource type="ShaderMaterial" id=81]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=82]
+load_path = "res://.import/eel.png-5f8f45a442e95f390916d1d735f9a954.stex"
+
+[sub_resource type="ShaderMaterial" id=83]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=84]
+load_path = "res://.import/goldfish.png-606a0a1a621e4255884ee1209463f300.stex"
+
+[sub_resource type="ShaderMaterial" id=85]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=86]
+load_path = "res://.import/halibut.png-14ae4a8ca296f733f33c52dc0e2b3c57.stex"
+
+[sub_resource type="ShaderMaterial" id=87]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=88]
+load_path = "res://.import/koi.png-4f1ddb77a494f4fcb215c3ce7f8945bb.stex"
+
+[sub_resource type="ShaderMaterial" id=89]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=90]
+load_path = "res://.import/lingcod.png-c090c6ceebe94692f9ddbbe5c4595f2f.stex"
+
+[sub_resource type="ShaderMaterial" id=91]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=92]
+load_path = "res://.import/nelma.png-babc3fb5285311b7ccbe23eea418f152.stex"
+
+[sub_resource type="ShaderMaterial" id=93]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=94]
+load_path = "res://.import/octopus.png-09066fd2ae53c853b9f6d3576995ed5c.stex"
+
+[sub_resource type="ShaderMaterial" id=95]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=96]
+load_path = "res://.import/purple carp.png-2b2ce804b7f34ebfed2e9f59e2ec9224.stex"
+
+[sub_resource type="ShaderMaterial" id=97]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=98]
+load_path = "res://.import/purple salmon.png-f46977d0ddf832c2bca9d74926b23a76.stex"
+
+[sub_resource type="ShaderMaterial" id=99]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=100]
+load_path = "res://.import/red salmon.png-cd8b8e18516bdb7eb0a31f6ffb4f75c1.stex"
+
+[sub_resource type="ShaderMaterial" id=101]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=102]
+load_path = "res://.import/seaweed.png-47a7b82af07c258b21b7c7153caf345c.stex"
+
+[sub_resource type="ShaderMaterial" id=103]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=104]
+load_path = "res://.import/shrimp.png-06ed0aaf690ac1cb0a13d012086ff357.stex"
+
+[sub_resource type="ShaderMaterial" id=105]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=106]
+load_path = "res://.import/siberian whitefish.png-30c71aeb2418608cc35a04ecba281695.stex"
+
+[sub_resource type="ShaderMaterial" id=107]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=108]
+load_path = "res://.import/tilapia.png-9c7fb118d5b42c1790bb9af958e066fb.stex"
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=18]
+load_path = "res://.import/corn.png-02627346a6a1f68f420e715610ef1d68.stex"
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=22]
+load_path = "res://.import/blueberry.png-d22ca14ecfdaf5a4fee9843c38af140b.stex"
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=24]
+load_path = "res://.import/asparagus.png-d205c6cc57c9f016998e1ed4bc3140e3.stex"
+
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=26]
+load_path = "res://.import/cabbage.png-3d439fee711bdd5580f3c811c12e3405.stex"
+
+[sub_resource type="ShaderMaterial" id=27]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=28]
+load_path = "res://.import/carrot.png-3432d3d22777dae77ef9c89c4a48961a.stex"
+
+[sub_resource type="ShaderMaterial" id=29]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=30]
+load_path = "res://.import/cauliflower.png-bce5ccec518a370bfc7005e5dfbbc8c2.stex"
+
+[sub_resource type="ShaderMaterial" id=31]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=32]
+load_path = "res://.import/grape.png-16c4562ca4bb83dda221cbe4231eee1d.stex"
+
+[sub_resource type="ShaderMaterial" id=33]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=34]
+load_path = "res://.import/green bean.png-5f733ea1f842150128e7f373d0d6cda8.stex"
+
+[sub_resource type="ShaderMaterial" id=35]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=36]
+load_path = "res://.import/green melon.png-95415523229b797655b64a6300c15d02.stex"
+
+[sub_resource type="ShaderMaterial" id=37]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=38]
+load_path = "res://.import/green pepper.png-ac63db552be065b312fd67f99fb0dd01.stex"
+
+[sub_resource type="ShaderMaterial" id=39]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=40]
+load_path = "res://.import/jalapeno.png-f62682740f72cf93cb2149208fd80b47.stex"
+
+[sub_resource type="ShaderMaterial" id=41]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=42]
+load_path = "res://.import/potato.png-1523a25a473847bf015aba9672eebb0b.stex"
+
+[sub_resource type="ShaderMaterial" id=43]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=44]
+load_path = "res://.import/radish.png-72930f1187c2163ac63b0c34f26aea54.stex"
+
+[sub_resource type="ShaderMaterial" id=45]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=46]
+load_path = "res://.import/red pepper.png-59efc7920657508c2f600f53b7590a35.stex"
+
+[sub_resource type="ShaderMaterial" id=47]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=48]
+load_path = "res://.import/strawberry.png-7ed752a60024deedda64011f68cd4d35.stex"
+
+[sub_resource type="ShaderMaterial" id=49]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=50]
+load_path = "res://.import/sugar cane.png-f14256320eda1b382118f44cb47490cc.stex"
+
+[sub_resource type="ShaderMaterial" id=51]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=52]
+load_path = "res://.import/tomato.png-c44894750b54b5a2b6f127768ee7554f.stex"
+
+[sub_resource type="ShaderMaterial" id=53]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=54]
+load_path = "res://.import/wheat.png-de4705b00aedfc01e984f4ea4fb0584f.stex"
+
+[sub_resource type="ShaderMaterial" id=55]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=56]
+load_path = "res://.import/yellow onion.png-ec63c3cb98187eb7ad12b5599cc601b9.stex"
+
+[sub_resource type="ShaderMaterial" id=57]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=58]
+load_path = "res://.import/yellow pepper.png-d9d6395760f4a9d0b7db8496eed38b01.stex"
+
+[sub_resource type="ShaderMaterial" id=59]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=60]
+load_path = "res://.import/zucchinni.png-064c1ae0051a126fb738c133619dbbfd.stex"
+
+[node name="Collections" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+
+[node name="CollectionItemDescription" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="ItemNameBox" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="SideTabButtons" type="VBoxContainer" parent="."]
+margin_top = 118.0
+margin_right = 64.0
+margin_bottom = 463.0
+custom_constants/separation = 5
+
+[node name="Crops" type="Button" parent="SideTabButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Fish" type="Button" parent="SideTabButtons"]
+margin_top = 69.0
+margin_right = 64.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Forage" type="Button" parent="SideTabButtons"]
+margin_top = 138.0
+margin_right = 64.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Minerals" type="Button" parent="SideTabButtons"]
+margin_top = 207.0
+margin_right = 64.0
+margin_bottom = 271.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Foods" type="Button" parent="SideTabButtons"]
+margin_top = 276.0
+margin_right = 64.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="FishCollection" type="GridContainer" parent="."]
+margin_left = 108.0
+margin_top = 110.0
+margin_right = 284.0
+margin_bottom = 219.0
+rect_scale = Vector2( 3.5, 3.5 )
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
+columns = 6
+script = ExtResource( 1 )
+
+[node name="albacore" type="TextureRect" parent="FishCollection"]
+material = SubResource( 61 )
+margin_right = 16.0
+margin_bottom = 16.0
+texture = SubResource( 62 )
+
+[node name="anchovy" type="TextureRect" parent="FishCollection"]
+material = SubResource( 63 )
+margin_left = 28.0
+margin_right = 44.0
+margin_bottom = 16.0
+texture = SubResource( 64 )
+
+[node name="angler" type="TextureRect" parent="FishCollection"]
+material = SubResource( 65 )
+margin_left = 56.0
+margin_right = 72.0
+margin_bottom = 16.0
+texture = SubResource( 66 )
+
+[node name="betta" type="TextureRect" parent="FishCollection"]
+material = SubResource( 67 )
+margin_left = 84.0
+margin_right = 100.0
+margin_bottom = 16.0
+texture = SubResource( 68 )
+
+[node name="blowfish" type="TextureRect" parent="FishCollection"]
+material = SubResource( 69 )
+margin_left = 112.0
+margin_right = 128.0
+margin_bottom = 16.0
+texture = SubResource( 70 )
+
+[node name="catfish" type="TextureRect" parent="FishCollection"]
+material = SubResource( 71 )
+margin_left = 140.0
+margin_right = 156.0
+margin_bottom = 16.0
+texture = SubResource( 72 )
+
+[node name="cisco" type="TextureRect" parent="FishCollection"]
+material = SubResource( 73 )
+margin_top = 28.0
+margin_right = 16.0
+margin_bottom = 44.0
+texture = SubResource( 74 )
+
+[node name="clownfish" type="TextureRect" parent="FishCollection"]
+material = SubResource( 75 )
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 44.0
+margin_bottom = 44.0
+texture = SubResource( 76 )
+
+[node name="crab" type="TextureRect" parent="FishCollection"]
+material = SubResource( 77 )
+margin_left = 56.0
+margin_top = 28.0
+margin_right = 72.0
+margin_bottom = 44.0
+texture = SubResource( 78 )
+
+[node name="dorado" type="TextureRect" parent="FishCollection"]
+material = SubResource( 79 )
+margin_left = 84.0
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 44.0
+texture = SubResource( 80 )
+
+[node name="eel" type="TextureRect" parent="FishCollection"]
+material = SubResource( 81 )
+margin_left = 112.0
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 44.0
+texture = SubResource( 82 )
+
+[node name="goldfish" type="TextureRect" parent="FishCollection"]
+material = SubResource( 83 )
+margin_left = 140.0
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 44.0
+texture = SubResource( 84 )
+
+[node name="halibut" type="TextureRect" parent="FishCollection"]
+material = SubResource( 85 )
+margin_top = 56.0
+margin_right = 16.0
+margin_bottom = 72.0
+texture = SubResource( 86 )
+
+[node name="koi" type="TextureRect" parent="FishCollection"]
+material = SubResource( 87 )
+margin_left = 28.0
+margin_top = 56.0
+margin_right = 44.0
+margin_bottom = 72.0
+texture = SubResource( 88 )
+
+[node name="lingcod" type="TextureRect" parent="FishCollection"]
+material = SubResource( 89 )
+margin_left = 56.0
+margin_top = 56.0
+margin_right = 72.0
+margin_bottom = 72.0
+texture = SubResource( 90 )
+
+[node name="nelma" type="TextureRect" parent="FishCollection"]
+material = SubResource( 91 )
+margin_left = 84.0
+margin_top = 56.0
+margin_right = 100.0
+margin_bottom = 72.0
+texture = SubResource( 92 )
+
+[node name="octopus" type="TextureRect" parent="FishCollection"]
+material = SubResource( 93 )
+margin_left = 112.0
+margin_top = 56.0
+margin_right = 128.0
+margin_bottom = 72.0
+texture = SubResource( 94 )
+
+[node name="purple carp" type="TextureRect" parent="FishCollection"]
+material = SubResource( 95 )
+margin_left = 140.0
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 72.0
+texture = SubResource( 96 )
+
+[node name="purple salmon" type="TextureRect" parent="FishCollection"]
+material = SubResource( 97 )
+margin_top = 84.0
+margin_right = 16.0
+margin_bottom = 100.0
+texture = SubResource( 98 )
+
+[node name="red salmon" type="TextureRect" parent="FishCollection"]
+material = SubResource( 99 )
+margin_left = 28.0
+margin_top = 84.0
+margin_right = 44.0
+margin_bottom = 100.0
+texture = SubResource( 100 )
+
+[node name="seaweed" type="TextureRect" parent="FishCollection"]
+material = SubResource( 101 )
+margin_left = 56.0
+margin_top = 84.0
+margin_right = 72.0
+margin_bottom = 100.0
+texture = SubResource( 102 )
+
+[node name="shrimp" type="TextureRect" parent="FishCollection"]
+material = SubResource( 103 )
+margin_left = 84.0
+margin_top = 84.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = SubResource( 104 )
+
+[node name="siberian whitefish" type="TextureRect" parent="FishCollection"]
+material = SubResource( 105 )
+margin_left = 112.0
+margin_top = 84.0
+margin_right = 128.0
+margin_bottom = 100.0
+texture = SubResource( 106 )
+
+[node name="tilapia" type="TextureRect" parent="FishCollection"]
+material = SubResource( 107 )
+margin_left = 140.0
+margin_top = 84.0
+margin_right = 156.0
+margin_bottom = 100.0
+texture = SubResource( 108 )
+
+[node name="Tween" type="Tween" parent="FishCollection"]
+
+[node name="CropCollection" type="GridContainer" parent="."]
+margin_left = 108.0
+margin_top = 110.0
+margin_right = 290.0
+margin_bottom = 226.0
+rect_scale = Vector2( 3.5, 3.5 )
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
+columns = 6
+script = ExtResource( 5 )
+
+[node name="garlic" type="TextureRect" parent="CropCollection"]
+material = SubResource( 19 )
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+
+[node name="corn" type="TextureRect" parent="CropCollection"]
+material = SubResource( 17 )
+margin_left = 28.0
+margin_right = 44.0
+margin_bottom = 16.0
+texture = SubResource( 18 )
+
+[node name="blueberry" type="TextureRect" parent="CropCollection"]
+material = SubResource( 21 )
+margin_left = 56.0
+margin_right = 72.0
+margin_bottom = 16.0
+texture = SubResource( 22 )
+
+[node name="asparagus" type="TextureRect" parent="CropCollection"]
+material = SubResource( 23 )
+margin_left = 84.0
+margin_right = 100.0
+margin_bottom = 16.0
+texture = SubResource( 24 )
+
+[node name="cabbage" type="TextureRect" parent="CropCollection"]
+material = SubResource( 25 )
+margin_left = 112.0
+margin_right = 128.0
+margin_bottom = 16.0
+texture = SubResource( 26 )
+
+[node name="carrot" type="TextureRect" parent="CropCollection"]
+material = SubResource( 27 )
+margin_left = 140.0
+margin_right = 156.0
+margin_bottom = 16.0
+texture = SubResource( 28 )
+
+[node name="cauliflower" type="TextureRect" parent="CropCollection"]
+material = SubResource( 29 )
+margin_top = 28.0
+margin_right = 16.0
+margin_bottom = 44.0
+texture = SubResource( 30 )
+
+[node name="grape" type="TextureRect" parent="CropCollection"]
+material = SubResource( 31 )
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 44.0
+margin_bottom = 44.0
+texture = SubResource( 32 )
+
+[node name="green bean" type="TextureRect" parent="CropCollection"]
+material = SubResource( 33 )
+margin_left = 56.0
+margin_top = 28.0
+margin_right = 72.0
+margin_bottom = 44.0
+texture = SubResource( 34 )
+
+[node name="green melon" type="TextureRect" parent="CropCollection"]
+material = SubResource( 35 )
+margin_left = 84.0
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 44.0
+texture = SubResource( 36 )
+
+[node name="green pepper" type="TextureRect" parent="CropCollection"]
+material = SubResource( 37 )
+margin_left = 112.0
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 44.0
+texture = SubResource( 38 )
+
+[node name="jalapeno" type="TextureRect" parent="CropCollection"]
+material = SubResource( 39 )
+margin_left = 140.0
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 44.0
+texture = SubResource( 40 )
+
+[node name="potato" type="TextureRect" parent="CropCollection"]
+material = SubResource( 41 )
+margin_top = 56.0
+margin_right = 16.0
+margin_bottom = 72.0
+texture = SubResource( 42 )
+
+[node name="radish" type="TextureRect" parent="CropCollection"]
+material = SubResource( 43 )
+margin_left = 28.0
+margin_top = 56.0
+margin_right = 44.0
+margin_bottom = 72.0
+texture = SubResource( 44 )
+
+[node name="red pepper" type="TextureRect" parent="CropCollection"]
+material = SubResource( 45 )
+margin_left = 56.0
+margin_top = 56.0
+margin_right = 72.0
+margin_bottom = 72.0
+texture = SubResource( 46 )
+
+[node name="strawberry" type="TextureRect" parent="CropCollection"]
+material = SubResource( 47 )
+margin_left = 84.0
+margin_top = 56.0
+margin_right = 100.0
+margin_bottom = 72.0
+texture = SubResource( 48 )
+
+[node name="sugar cane" type="TextureRect" parent="CropCollection"]
+material = SubResource( 49 )
+margin_left = 112.0
+margin_top = 56.0
+margin_right = 128.0
+margin_bottom = 72.0
+texture = SubResource( 50 )
+
+[node name="tomato" type="TextureRect" parent="CropCollection"]
+material = SubResource( 51 )
+margin_left = 140.0
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 72.0
+texture = SubResource( 52 )
+
+[node name="wheat" type="TextureRect" parent="CropCollection"]
+material = SubResource( 53 )
+margin_top = 84.0
+margin_right = 16.0
+margin_bottom = 100.0
+texture = SubResource( 54 )
+
+[node name="yellow onion" type="TextureRect" parent="CropCollection"]
+material = SubResource( 55 )
+margin_left = 28.0
+margin_top = 84.0
+margin_right = 44.0
+margin_bottom = 100.0
+texture = SubResource( 56 )
+
+[node name="yellow pepper" type="TextureRect" parent="CropCollection"]
+material = SubResource( 57 )
+margin_left = 56.0
+margin_top = 84.0
+margin_right = 72.0
+margin_bottom = 100.0
+texture = SubResource( 58 )
+
+[node name="zucchinni" type="TextureRect" parent="CropCollection"]
+material = SubResource( 59 )
+margin_left = 84.0
+margin_top = 84.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = SubResource( 60 )
+expand = true
+
+[node name="Tween" type="Tween" parent="CropCollection"]
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="mouse_entered" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_exited"]
+[connection signal="pressed" from="SideTabButtons/Crops" to="." method="_on_Crops_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Fish" to="." method="_on_Fish_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Fish" to="." method="_on_Fish_mouse_exited"]
+[connection signal="pressed" from="SideTabButtons/Fish" to="." method="_on_Fish_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Forage" to="." method="_on_Forage_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Forage" to="." method="_on_Forage_mouse_exited"]
+[connection signal="pressed" from="SideTabButtons/Forage" to="." method="_on_Forage_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Minerals" to="." method="_on_Minerals_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Minerals" to="." method="_on_Minerals_mouse_exited"]
+[connection signal="pressed" from="SideTabButtons/Minerals" to="." method="_on_Minerals_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Foods" to="." method="_on_Foods_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Foods" to="." method="_on_Foods_mouse_exited"]
+[connection signal="pressed" from="SideTabButtons/Foods" to="." method="_on_Foods_pressed"]
+[connection signal="mouse_entered" from="FishCollection/albacore" to="FishCollection" method="_on_albacore_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/albacore" to="FishCollection" method="_on_albacore_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/anchovy" to="FishCollection" method="_on_anchovy_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/anchovy" to="FishCollection" method="_on_anchovy_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/angler" to="FishCollection" method="_on_angler_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/angler" to="FishCollection" method="_on_angler_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/betta" to="FishCollection" method="_on_betta_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/betta" to="FishCollection" method="_on_betta_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/blowfish" to="FishCollection" method="_on_blowfish_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/blowfish" to="FishCollection" method="_on_blowfish_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/catfish" to="FishCollection" method="_on_catfish_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/catfish" to="FishCollection" method="_on_catfish_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/cisco" to="FishCollection" method="_on_cisco_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/cisco" to="FishCollection" method="_on_cisco_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/clownfish" to="FishCollection" method="_on_clownfish_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/clownfish" to="FishCollection" method="_on_clownfish_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/crab" to="FishCollection" method="_on_crab_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/crab" to="FishCollection" method="_on_crab_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/dorado" to="FishCollection" method="_on_dorado_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/dorado" to="FishCollection" method="_on_dorado_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/eel" to="FishCollection" method="_on_eel_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/eel" to="FishCollection" method="_on_eel_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/goldfish" to="FishCollection" method="_on_goldfish_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/goldfish" to="FishCollection" method="_on_goldfish_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/halibut" to="FishCollection" method="_on_halibut_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/halibut" to="FishCollection" method="_on_halibut_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/koi" to="FishCollection" method="_on_koi_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/koi" to="FishCollection" method="_on_koi_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/lingcod" to="FishCollection" method="_on_lingcod_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/lingcod" to="FishCollection" method="_on_lingcod_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/nelma" to="FishCollection" method="_on_nelma_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/nelma" to="FishCollection" method="_on_nelma_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/octopus" to="FishCollection" method="_on_octopus_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/octopus" to="FishCollection" method="_on_octopus_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/purple carp" to="FishCollection" method="_on_purple_carp_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/purple carp" to="FishCollection" method="_on_purple_carp_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/purple salmon" to="FishCollection" method="_on_purple_salmon_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/purple salmon" to="FishCollection" method="_on_purple_salmon_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/red salmon" to="FishCollection" method="_on_red_salmon_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/red salmon" to="FishCollection" method="_on_red_salmon_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/seaweed" to="FishCollection" method="_on_seaweed_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/seaweed" to="FishCollection" method="_on_seaweed_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/shrimp" to="FishCollection" method="_on_shrimp_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/shrimp" to="FishCollection" method="_on_shrimp_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/siberian whitefish" to="FishCollection" method="_on_siberian_whitefish_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/siberian whitefish" to="FishCollection" method="_on_siberian_whitefish_mouse_exited"]
+[connection signal="mouse_entered" from="FishCollection/tilapia" to="FishCollection" method="_on_tilapia_mouse_entered"]
+[connection signal="mouse_exited" from="FishCollection/tilapia" to="FishCollection" method="_on_tilapia_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection" method="_on_garlic_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection" method="_on_garlic_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/corn" to="CropCollection" method="_on_corn_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/corn" to="CropCollection" method="_on_corn_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/blueberry" to="CropCollection" method="_on_blueberry_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/blueberry" to="CropCollection" method="_on_blueberry_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/asparagus" to="CropCollection" method="_on_asparagus_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/asparagus" to="CropCollection" method="_on_asparagus_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/cabbage" to="CropCollection" method="_on_cabbage_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/cabbage" to="CropCollection" method="_on_cabbage_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/carrot" to="CropCollection" method="_on_carrot_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/carrot" to="CropCollection" method="_on_carrot_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/cauliflower" to="CropCollection" method="_on_cauliflower_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/cauliflower" to="CropCollection" method="_on_cauliflower_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/grape" to="CropCollection" method="_on_grape_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/grape" to="CropCollection" method="_on_grape_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/green bean" to="CropCollection" method="_on_green_bean_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/green bean" to="CropCollection" method="_on_green_bean_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/green melon" to="CropCollection" method="_on_green_melon_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/green melon" to="CropCollection" method="_on_green_melon_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/green pepper" to="CropCollection" method="_on_green_pepper_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/green pepper" to="CropCollection" method="_on_green_pepper_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/jalapeno" to="CropCollection" method="_on_jalapeno_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/jalapeno" to="CropCollection" method="_on_jalapeno_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/potato" to="CropCollection" method="_on_potato_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/potato" to="CropCollection" method="_on_potato_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/radish" to="CropCollection" method="_on_radish_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/radish" to="CropCollection" method="_on_radish_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/red pepper" to="CropCollection" method="_on_red_pepper_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/red pepper" to="CropCollection" method="_on_red_pepper_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/strawberry" to="CropCollection" method="_on_strawberry_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/strawberry" to="CropCollection" method="_on_strawberry_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/sugar cane" to="CropCollection" method="_on_sugar_cane_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/sugar cane" to="CropCollection" method="_on_sugar_cane_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/tomato" to="CropCollection" method="_on_tomato_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/tomato" to="CropCollection" method="_on_tomato_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/wheat" to="CropCollection" method="_on_wheat_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/wheat" to="CropCollection" method="_on_wheat_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/yellow onion" to="CropCollection" method="_on_yellow_onion_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/yellow onion" to="CropCollection" method="_on_yellow_onion_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/yellow pepper" to="CropCollection" method="_on_yellow_pepper_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/yellow pepper" to="CropCollection" method="_on_yellow_pepper_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/zucchinni" to="CropCollection" method="_on_zucchinni_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/zucchinni" to="CropCollection" method="_on_zucchinni_mouse_exited"]

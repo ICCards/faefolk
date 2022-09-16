@@ -12,7 +12,6 @@ func _play_background_music():
 	volume_db =  Sounds.return_adjusted_sound_db("music", -32)
 	play()
 	yield(self, "finished")
-	stop()
 	_play_background_music()
 
 

@@ -13,19 +13,15 @@ var energy_maximum = 100.0
 var health_maximum = 100.0
 var mana_maximum 
 
-var watering_can_maximum = 25.0
-var watering_can = 18.0
-
-
-func refill_watering_can():
-	watering_can = watering_can_maximum
-	emit_signal("watering_can_changed")
-
-func decrease_watering_can():
-	watering_can -= 1
-	if watering_can <= 0:
-		watering_can = 0
-	emit_signal("watering_can_changed")
+func eat(food_name):
+	health += JsonData.food_data[food_name]["Health"]
+	energy += JsonData.food_data[food_name]["Energy"]
+	if health > 100:
+		health = 100
+	if energy > 100:
+		energy = 100
+	emit_signal("energy_changed")
+	emit_signal("health_changed")
 
 
 func decrease_health(amount):

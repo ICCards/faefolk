@@ -1,0 +1,195 @@
+{
+    "carrot": {
+        "Energy": 8,
+        "Health": 4
+    },
+    "potato": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "garlic": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "cauliflower": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "yellow pepper": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "strawberry": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "green bean": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "radish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "tomato": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "red pepper": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "blueberry": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "green melon": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "wheat": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "corn": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "green pepper": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "zucchinni": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "yellow onion": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "grape": {
+        "Energy": 20,
+        "Health": 18
+    },
+    "cabbage": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "jalapeno": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "eel": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "clownfish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "nelma": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "halibut": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "anchovy": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "cisco": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "goldfish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "betta": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "siberian whitefish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "red salmon": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "catfish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "koi": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "purple salmon": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "lingcod": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "tilapia": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "albacore": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "purple carp": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "dorado": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "blowfish": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "angler": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "seaweed": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "octopus": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "shrimp": {
+        "Energy": 10,
+        "Health": 10
+    },
+    "raw wing": {
+        "Energy": 2,
+        "Health": 1
+    },
+    "cooked wing": {
+        "Energy": 16,
+        "Health": 8
+    },
+    "raw filet": {
+        "Energy": 6,
+        "Health": 2
+    },
+    "cooked filet": {
+        "Energy": 20,
+        "Health": 10
+    },
+    "crab": {
+        "Energy": 10,
+        "Health": 10
+    },
+    
+}

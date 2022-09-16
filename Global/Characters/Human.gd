@@ -848,7 +848,7 @@ var male = {
 
 	shoes_sword_swing_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/SWORD SWING/assets/down/shoes/shoe.png")
+		1 : preload("res://Characters/Human/male/SWORD SWING/assets/down/shoes/shoes.png")
 	},
 	shoes_sword_swing_up = {
 		0 : null,
@@ -862,6 +862,994 @@ var male = {
 		0 : null,
 		1 : preload("res://Characters/Human/male/SWORD SWING/assets/left/shoes/shoes.png")
 	},
+	
+	body_holding_idle_down = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/down/body.png")
+	},
+	body_holding_idle_up = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/up/body.png")
+	},
+	body_holding_idle_right = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/right/body.png")
+	},
+	body_holding_idle_left = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/left/body.png")
+	},
+
+	arms_holding_idle_down = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/down/arms.png")
+	},
+	arms_holding_idle_up = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/up/arms.png")
+	},
+	arms_holding_idle_right = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/right/arms.png")
+	},
+	arms_holding_idle_left = {
+		0 : preload("res://Characters/Human/male/HOLDING IDLE/body/left/arms.png")
+	},
+
+	acc_holding_idle_down = {
+		0 : null,
+	},
+	acc_holding_idle_up = {
+		0 : null,
+	},
+	acc_holding_idle_right = {
+		0 : null,
+	},
+	acc_holding_idle_left = {
+		0 : null,
+	},
+
+	head_attribute_holding_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_holding_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_holding_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_holding_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_holding_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/down/shirts/shirt.png")
+	},
+	shirts_holding_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/up/shirts/shirt.png")
+	},
+	shirts_holding_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/right/shirts/shirt.png")
+	},
+	shirts_holding_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/shirts/shirt.png")
+	},
+
+	pants_holding_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/down/pants/pants.png")
+	},
+	pants_holding_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/up/pants/pants.png")
+	},
+	pants_holding_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/right/pants/pants.png")
+	},
+	pants_holding_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/pants/pants.png")
+	},
+
+	shoes_holding_idle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/down/shoes/shoes.png")
+	},
+	shoes_holding_idle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/up/shoes/shoes.png")
+	},
+	shoes_holding_idle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/right/shoes/shoes.png")
+	},
+	shoes_holding_idle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HOLDING IDLE/assets/left/shoes/shoes.png")
+	},
+	
+	body_eat = {
+		0 : preload("res://Characters/Human/male/EATING/body/down/body.png")
+	},
+	arms_eat = {
+		0 : preload("res://Characters/Human/male/EATING/body/down/arms.png")
+	},
+	acc_eat = {
+		0 : null,
+	},
+	head_attribute_eat = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/EATING/assets/down/head_attribute/hair.png")
+	},
+	shirts_eat = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/EATING/assets/down/shirts/shirt.png")
+	},
+	pants_eat = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/EATING/assets/down/pants/pants.png")
+	},
+	shoes_eat = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/EATING/assets/down/shoes/shoes.png")
+	},
+	
+	body_swim_down = {
+		0 : preload("res://Characters/Human/male/SWIMMING/body/down/body.png")
+	},
+	body_swim_up = {
+		0 : preload("res://Characters/Human/male/SWIMMING/body/up/body.png")
+	},
+	body_swim_right = {
+		0 : preload("res://Characters/Human/male/SWIMMING/body/right/body.png")
+	},
+	body_swim_left = {
+		0 : preload("res://Characters/Human/male/SWIMMING/body/left/body.png")
+	},
+
+	arms_swim_down = {
+		0 : preload("res://Characters/Human/male/SWIMMING/body/down/arms.png")
+	},
+	arms_swim_up = {
+		0 : preload("res://Characters/Human/male/SWIMMING/body/up/arms.png")
+	},
+	arms_swim_right = {
+		0 : preload("res://Characters/Human/male/SWIMMING/body/right/arms.png")
+	},
+	arms_swim_left = {
+		0 : preload("res://Characters/Human/male/SWIMMING/body/left/arms.png")
+	},
+
+	acc_swim_down = {
+		0 : null,
+	},
+	acc_swim_up = {
+		0 : null,
+	},
+	acc_swim_right = {
+		0 : null,
+	},
+	acc_swim_left = {
+		0 : null,
+	},
+
+	head_attribute_swim_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWIMMING/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_swim_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWIMMING/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_swim_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWIMMING/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_swim_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWIMMING/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_swim_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWIMMING/assets/down/shirts/shirt.png")
+	},
+	shirts_swim_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWIMMING/assets/up/shirts/shirt.png")
+	},
+	shirts_swim_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWIMMING/assets/right/shirts/shirt.png")
+	},
+	shirts_swim_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/SWIMMING/assets/left/shirts/shirt.png")
+	},
+
+	pants_swim_down = {
+		0 : null,
+		1 : null
+	},
+	pants_swim_up = {
+		0 : null,
+		1 : null
+	},
+	pants_swim_right = {
+		0 : null,
+		1 : null
+	},
+	pants_swim_left = {
+		0 : null,
+		1 : null
+	},
+
+	shoes_swim_down = {
+		0 : null,
+		1 : null
+	},
+	shoes_swim_up = {
+		0 : null,
+		1 : null
+	},
+	shoes_swim_right = {
+		0 : null,
+		1 : null
+	},
+	shoes_swim_left = {
+		0 : null,
+		1 : null
+	},
+	
+	body_cast_down = {
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/down/body.png")
+	},
+	body_cast_up = {
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/up/body.png")
+	},
+	body_cast_right = {
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/right/body.png")
+	},
+	body_cast_left = {
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/left/body.png")
+	},
+
+	arms_cast_down = {
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/down/arms.png")
+	},
+	arms_cast_up = {
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/up/arms.png")
+	},
+	arms_cast_right = {
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/right/arms.png")
+	},
+	arms_cast_left = {
+		0 : preload("res://Characters/Human/male/CAST FISHING/body/left/arms.png")
+	},
+
+	acc_cast_down = {
+		0 : null,
+	},
+	acc_cast_up = {
+		0 : null,
+	},
+	acc_cast_right = {
+		0 : null,
+	},
+	acc_cast_left = {
+		0 : null,
+	},
+
+	head_attribute_cast_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_cast_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_cast_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_cast_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_cast_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/down/shirts/shirt.png")
+	},
+	shirts_cast_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/up/shirts/shirt.png")
+	},
+	shirts_cast_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/right/shirts/shirt.png")
+	},
+	shirts_cast_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/left/shirts/shirt.png")
+	},
+
+	pants_cast_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/down/pants/pants.png")
+	},
+	pants_cast_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/up/pants/pants.png")
+	},
+	pants_cast_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/right/pants/pants.png")
+	},
+	pants_cast_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/left/pants/pants.png")
+	},
+
+	shoes_cast_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/down/shoes/shoes.png")
+	},
+	shoes_cast_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/up/shoes/shoes.png")
+	},
+	shoes_cast_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/right/shoes/shoes.png")
+	},
+	shoes_cast_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/CAST FISHING/assets/left/shoes/shoes.png")
+	},
+	
+	body_retract_down = {
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/down/body.png")
+	},
+	body_retract_up = {
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/up/body.png")
+	},
+	body_retract_right = {
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/right/body.png")
+	},
+	body_retract_left = {
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/left/body.png")
+	},
+
+	arms_retract_down = {
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/down/arms.png")
+	},
+	arms_retract_up = {
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/up/arms.png")
+	},
+	arms_retract_right = {
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/right/arms.png")
+	},
+	arms_retract_left = {
+		0 : preload("res://Characters/Human/male/RETRACT FISHING/body/left/arms.png")
+	},
+
+	acc_retract_down = {
+		0 : null,
+	},
+	acc_retract_up = {
+		0 : null,
+	},
+	acc_retract_right = {
+		0 : null,
+	},
+	acc_retract_left = {
+		0 : null,
+	},
+
+	head_attribute_retract_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_retract_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_retract_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_retract_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_retract_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/down/shirts/shirt.png")
+	},
+	shirts_retract_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/up/shirts/shirt.png")
+	},
+	shirts_retract_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/right/shirts/shirt.png")
+	},
+	shirts_retract_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/left/shirts/shirt.png")
+	},
+
+	pants_retract_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/down/pants/pants.png")
+	},
+	pants_retract_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/up/pants/pants.png")
+	},
+	pants_retract_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/right/pants/pants.png")
+	},
+	pants_retract_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/left/pants/pants.png")
+	},
+
+	shoes_retract_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/down/shoes/shoes.png")
+	},
+	shoes_retract_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/up/shoes/shoes.png")
+	},
+	shoes_retract_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/right/shoes/shoes.png")
+	},
+	shoes_retract_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RETRACT FISHING/assets/left/shoes/shoes.png")
+	},
+	
+	body_struggle_down = {
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/down/body.png")
+	},
+	body_struggle_up = {
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/up/body.png")
+	},
+	body_struggle_right = {
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/right/body.png")
+	},
+	body_struggle_left = {
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/left/body.png")
+	},
+
+	arms_struggle_down = {
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/down/arms.png")
+	},
+	arms_struggle_up = {
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/up/arms.png")
+	},
+	arms_struggle_right = {
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/right/arms.png")
+	},
+	arms_struggle_left = {
+		0 : preload("res://Characters/Human/male/STRUGGLE FISHING/body/left/arms.png")
+	},
+
+	acc_struggle_down = {
+		0 : null,
+	},
+	acc_struggle_up = {
+		0 : null,
+	},
+	acc_struggle_right = {
+		0 : null,
+	},
+	acc_struggle_left = {
+		0 : null,
+	},
+
+	head_attribute_struggle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_struggle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_struggle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_struggle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_struggle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/down/shirts/shirt.png")
+	},
+	shirts_struggle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/up/shirts/shirt.png")
+	},
+	shirts_struggle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/right/shirts/shirt.png")
+	},
+	shirts_struggle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/left/shirts/shirt.png")
+	},
+
+	pants_struggle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/down/pants/pants.png")
+	},
+	pants_struggle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/up/pants/pants.png")
+	},
+	pants_struggle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/right/pants/pants.png")
+	},
+	pants_struggle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/left/pants/pants.png")
+	},
+
+	shoes_struggle_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/down/shoes/shoes.png")
+	},
+	shoes_struggle_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/up/shoes/shoes.png")
+	},
+	shoes_struggle_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/right/shoes/shoes.png")
+	},
+	shoes_struggle_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/STRUGGLE FISHING/assets/left/shoes/shoes.png")
+	},
+	
+	body_harvest_down = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/down/body.png")
+	},
+	body_harvest_up = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/up/body.png")
+	},
+	body_harvest_right = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/right/body.png")
+	},
+	body_harvest_left = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/left/body.png")
+	},
+
+	arms_harvest_down = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/down/arms.png")
+	},
+	arms_harvest_up = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/up/arms.png")
+	},
+	arms_harvest_right = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/right/arms.png")
+	},
+	arms_harvest_left = {
+		0 : preload("res://Characters/Human/male/HARVESTING/body/left/arms.png")
+	},
+
+	acc_harvest_down = {
+		0 : null,
+	},
+	acc_harvest_up = {
+		0 : null,
+	},
+	acc_harvest_right = {
+		0 : null,
+	},
+	acc_harvest_left = {
+		0 : null,
+	},
+
+	head_attribute_harvest_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_harvest_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_harvest_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_harvest_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_harvest_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/down/shirts/shirt.png")
+	},
+	shirts_harvest_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/up/shirts/shirt.png")
+	},
+	shirts_harvest_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/right/shirts/shirt.png")
+	},
+	shirts_harvest_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/shirts/shirt.png")
+	},
+
+	pants_harvest_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/down/pants/pants.png")
+	},
+	pants_harvest_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/up/pants/pants.png")
+	},
+	pants_harvest_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/right/pants/pants.png")
+	},
+	pants_harvest_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/pants/pants.png")
+	},
+
+	shoes_harvest_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/down/shoes/shoes.png")
+	},
+	shoes_harvest_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/up/shoes/shoes.png")
+	},
+	shoes_harvest_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/right/shoes/shoes.png")
+	},
+	shoes_harvest_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/HARVESTING/assets/left/shoes/shoes.png")
+	},
+	body_punch_down = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/down/body.png")
+	},
+	body_punch_up = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/up/body.png")
+	},
+	body_punch_right = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/right/body.png")
+	},
+	body_punch_left = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/left/body.png")
+	},
+
+	arms_punch_down = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/down/arms.png")
+	},
+	arms_punch_up = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/up/arms.png")
+	},
+	arms_punch_right = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/right/arms.png")
+	},
+	arms_punch_left = {
+		0 : preload("res://Characters/Human/male/PUNCH/body/left/arms.png")
+	},
+
+	acc_punch_down = {
+		0 : null,
+	},
+	acc_punch_up = {
+		0 : null,
+	},
+	acc_punch_right = {
+		0 : null,
+	},
+	acc_punch_left = {
+		0 : null,
+	},
+
+	head_attribute_punch_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/down/head_attribute/hair.png")
+	},
+	head_attribute_punch_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/up/head_attribute/hair.png")
+	},
+	head_attribute_punch_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/right/head_attribute/Hair.png")
+	},
+	head_attribute_punch_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/left/head_attribute/hair.png")
+	},
+
+	shirts_punch_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/down/shirts/shirts.png")
+	},
+	shirts_punch_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/up/shirts/shirts.png")
+	},
+	shirts_punch_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/right/shirts/shirts.png")
+	},
+	shirts_punch_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/left/shirts/shirts.png")
+	},
+
+	pants_punch_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/down/pants/pants.png")
+	},
+	pants_punch_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/up/pants/pants.png")
+	},
+	pants_punch_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/right/pants/pants.png")
+	},
+	pants_punch_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/left/pants/pants.png")
+	},
+
+	shoes_punch_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/down/shoes/shoes.png")
+	},
+	shoes_punch_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/up/shoes/shoes.png")
+	},
+	shoes_punch_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/right/shoes/shoes.png")
+	},
+	shoes_punch_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/PUNCH/assests/left/shoes/shoes.png")
+	},
+	body_draw_down = {
+		0 : preload("res://Characters/Human/male/DRAW/body/down/body.png")
+	},
+	body_draw_up = {
+		0 : preload("res://Characters/Human/male/DRAW/body/up/body.png")
+	},
+	body_draw_right = {
+		0 : preload("res://Characters/Human/male/DRAW/body/right/body.png")
+	},
+	body_draw_left = {
+		0 : preload("res://Characters/Human/male/DRAW/body/left/body.png")
+	},
+
+	arms_draw_down = {
+		0 : preload("res://Characters/Human/male/DRAW/body/down/arms.png")
+	},
+	arms_draw_up = {
+		0 : preload("res://Characters/Human/male/DRAW/body/up/arms.png")
+	},
+	arms_draw_right = {
+		0 : preload("res://Characters/Human/male/DRAW/body/right/arms.png")
+	},
+	arms_draw_left = {
+		0 : preload("res://Characters/Human/male/DRAW/body/left/arms.png")
+	},
+
+	acc_draw_down = {
+		0 : null,
+	},
+	acc_draw_up = {
+		0 : null,
+	},
+	acc_draw_right = {
+		0 : null,
+	},
+	acc_draw_left = {
+		0 : null,
+	},
+
+	head_attribute_draw_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_draw_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_draw_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_draw_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_draw_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/down/shirts/shirt.png")
+	},
+	shirts_draw_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/up/shirts/shirt.png")
+	},
+	shirts_draw_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/right/shirts/shirt.png")
+	},
+	shirts_draw_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/left/shirts/shirts.png")
+	},
+
+	pants_draw_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/down/pants/pants.png")
+	},
+	pants_draw_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/up/pants/pants.png")
+	},
+	pants_draw_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/right/pants/pants.png")
+	},
+	pants_draw_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/left/pants/pants.png")
+	},
+
+	shoes_draw_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/down/shoes/shoes.png")
+	},
+	shoes_draw_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/up/shoes/shoes.png")
+	},
+	shoes_draw_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/right/shoes/shoes.png")
+	},
+	shoes_draw_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/DRAW/assets/left/shoes/shoes.png")
+	},
+	
+	body_release_down = {
+		0 : preload("res://Characters/Human/male/RELEASE/body/down/body.png")
+	},
+	body_release_up = {
+		0 : preload("res://Characters/Human/male/RELEASE/body/up/body.png")
+	},
+	body_release_right = {
+		0 : preload("res://Characters/Human/male/RELEASE/body/right/body.png")
+	},
+	body_release_left = {
+		0 : preload("res://Characters/Human/male/RELEASE/body/left/body.png")
+	},
+
+	arms_release_down = {
+		0 : preload("res://Characters/Human/male/RELEASE/body/down/arms.png")
+	},
+	arms_release_up = {
+		0 : preload("res://Characters/Human/male/RELEASE/body/up/arms.png")
+	},
+	arms_release_right = {
+		0 : preload("res://Characters/Human/male/RELEASE/body/right/arms.png")
+	},
+	arms_release_left = {
+		0 : preload("res://Characters/Human/male/RELEASE/body/left/arms.png")
+	},
+
+	acc_release_down = {
+		0 : null,
+	},
+	acc_release_up = {
+		0 : null,
+	},
+	acc_release_right = {
+		0 : null,
+	},
+	acc_release_left = {
+		0 : null,
+	},
+
+	head_attribute_release_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_release_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_release_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_release_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_release_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/down/shirts/shirt.png")
+	},
+	shirts_release_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/up/shirts/shirts.png")
+	},
+	shirts_release_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/right/shirts/shirt.png")
+	},
+	shirts_release_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/left/shirts/shirts.png")
+	},
+
+	pants_release_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/down/pants/pants.png")
+	},
+	pants_release_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/up/pants/pants.png")
+	},
+	pants_release_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/right/pants/pants.png")
+	},
+	pants_release_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/left/pants/pants.png")
+	},
+
+	shoes_release_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/down/shoes/shoes.png")
+	},
+	shoes_release_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/up/shoes/shoes.png")
+	},
+	shoes_release_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/right/shoes/shoes.png")
+	},
+	shoes_release_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RELEASE/assets/left/shoes/shoes.png")
+	},
+	
 }
 var female = {
 	body_idle_down = {

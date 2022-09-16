@@ -42,21 +42,41 @@ func string_to_vector2(string := "") -> Vector2:
 
 		
 func set_swing_position(_pos, _direction):
-	if _direction == "UP":
-		_pos += Vector2(0, -32)
-	elif _direction == "DOWN":
-		_pos += Vector2(0, 20)
-	elif _direction == "LEFT":
-		_pos += Vector2(-32, -8)
-	elif _direction == "RIGHT":
-		_pos += Vector2(32, -8)
+	match _direction:
+		"UP":
+			_pos += Vector2(0, -32)
+		"DOWN":
+			_pos += Vector2(0, 20)
+		"LEFT":
+			_pos += Vector2(-32, -8)
+		"RIGHT":
+			_pos += Vector2(32, -8)
 	return _pos
 	
 func returnAdjustedWateringCanPariclePos(direction):
 	match direction:
 		"RIGHT":
-			return Vector2(15, -12)
+			return Vector2(28, -20)
 		"LEFT":
-			return Vector2(-15, -12)
+			return Vector2(-28, -20)
 		"DOWN":
-			return Vector2(0, -10)
+			return Vector2(0, -15)
+			
+func returnCategoryColor(category):
+	match category:
+		"Tool":
+			return Color("ff2525")
+		"Resource":
+			return Color("00ffc3")
+		"Placable object":
+			return Color("fffb00")
+		"Seed":
+			return Color("26ff00")
+		"Food":
+			return Color("eb00ff")
+		"Placable path":
+			return Color("3c1aff")
+		"Construction":
+			return Color("ff25f1")
+		"Fish":
+			return Color("ff6d00")

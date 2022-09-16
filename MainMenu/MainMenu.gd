@@ -42,9 +42,10 @@ func toggle_menu_open():
 
 
 func open_options_menu():
-	$Options/OptionsMenu.initialize()
-	$Options.visible = true
-	is_menu_open = true
+	pass
+#	$Options/OptionsMenu.initialize()
+#	$Options.visible = true
+#	is_menu_open = true
 
 
 func close_options_menu():

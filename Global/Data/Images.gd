@@ -407,10 +407,50 @@ func returnICGhostUnique(unique):
 
 
 # WEAPONS #
-func returnToolSprite(toolName, direction):
+func returnToolSprite(toolName, animation):
 	match toolName:
 		"wood pickaxe":
-			match direction: 
+			match animation: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"stone pickaxe":
+			match animation: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"bronze pickaxe":
+			match animation: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"iron pickaxe":
+			match animation: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"gold pickaxe":
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -420,7 +460,47 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"wood hoe":
-			match direction: 
+			match animation: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"stone hoe":
+			match animation: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"bronze hoe":
+			match animation: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"iron hoe":
+			match animation: 
+				"swing_down":
+					 return pickaxe.down
+				"swing_up":
+					 return pickaxe.up
+				"swing_left":
+					 return pickaxe.left
+				"swing_right":
+					 return pickaxe.right
+		"gold hoe":
+			match animation: 
 				"swing_down":
 					 return pickaxe.down
 				"swing_up":
@@ -430,7 +510,7 @@ func returnToolSprite(toolName, direction):
 				"swing_right":
 					 return pickaxe.right
 		"wood axe":
-			match direction: 
+			match animation: 
 				"swing_down":
 					 return axe.down
 				"swing_up":
@@ -439,81 +519,271 @@ func returnToolSprite(toolName, direction):
 					 return axe.left
 				"swing_right":
 					return axe.right
-#		"wood sword":
-#			match direction: 
-#				"sword_swing_down":
-#					 return sword.down
-#				"sword_swing_up":
-#					 return sword.up
-#				"sword_swing_left":
-#					 return sword.left
-#				"sword_swing_right":
-#					return sword.right
+		"stone axe":
+			match animation: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
+		"iron axe":
+			match animation: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
+		"bronze axe":
+			match animation: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
+		"gold axe":
+			match animation: 
+				"swing_down":
+					 return axe.down
+				"swing_up":
+					 return axe.up
+				"swing_left":
+					 return axe.left
+				"swing_right":
+					return axe.right
+		"wood sword":
+			match animation: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
+		"stone sword":
+			match animation: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
+		"bronze sword":
+			match animation: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
+		"iron sword":
+			match animation: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
+		"gold sword":
+			match animation: 
+				"sword_swing_down":
+					 return sword.down
+				"sword_swing_up":
+					 return sword.up
+				"sword_swing_left":
+					 return sword.left
+				"sword_swing_right":
+					return sword.right
 		"stone watering can":
-			match direction:
+			match animation:
 				"watering_down":
-					 return human_male_can.down
+					 return watering_can.down
 				"watering_up":
 					 return null
 				"watering_left":
-					 return human_male_can.left
+					 return watering_can.left
 				"watering_right":
-					 return human_male_can.right
-#			match Server.character:
-#				"human_male":
-#					match direction: 
-#						"watering_down":
-#							 return human_male_can.down
-#						"watering_up":
-#							 return null
-#						"watering_left":
-#							 return human_male_can.left
-#						"watering_right":
-#							 return human_male_can.right
-#				"human_female":
-#					match direction: 
-#						"watering_down":
-#							 return human_female_can.down
-#						"watering_up":
-#							 return null
-#						"watering_left":
-#							 return human_female_can.left
-#						"watering_right":
-#							 return human_female_can.right
-			
-
+					 return watering_can.right
+		"bronze watering can":
+			match animation:
+				"watering_down":
+					 return watering_can.down
+				"watering_up":
+					 return null
+				"watering_left":
+					 return watering_can.left
+				"watering_right":
+					 return watering_can.right
+		"gold watering can":
+			match animation:
+				"watering_down":
+					 return watering_can.down
+				"watering_up":
+					 return null
+				"watering_left":
+					 return watering_can.left
+				"watering_right":
+					 return watering_can.right
+		"fishing rod cast":
+			match animation:
+				"cast_down":
+					return fishing_rod_cast.up
+				"cast_up":
+					return fishing_rod_cast.down
+				"cast_left":
+					return fishing_rod_cast.left
+				"cast_right":
+					return fishing_rod_cast.right
+		"fishing rod retract":
+			match animation:
+				"retract_down":
+					return fishing_rod_retract.down
+				"retract_up":
+					return fishing_rod_retract.up
+				"retract_left":
+					return fishing_rod_retract.left
+				"retract_right":
+					return fishing_rod_retract.right
+		"fishing rod struggle":
+			match animation:
+				"struggle_down":
+					return fishing_rod_struggle.down
+				"struggle_up":
+					return fishing_rod_struggle.up
+				"struggle_left":
+					return fishing_rod_struggle.left
+				"struggle_right":
+					return fishing_rod_struggle.right
+		"swim":
+			match animation:
+				"swim_down":
+					return ripples.down
+				"swim_up":
+					return ripples.up
+				"swim_left":
+					return ripples.left
+				"swim_right":
+					return ripples.right
+		"scythe":
+			match animation:
+				"sword_swing_down":
+					return scythe.down
+				"sword_swing_up":
+					return scythe.up
+				"sword_swing_left":
+					return scythe.left
+				"sword_swing_right":
+					return scythe.right
+		"bow":
+			match animation:
+				"draw_down":
+					return bow_draw.down
+				"draw_up":
+					return bow_draw.up
+				"draw_right":
+					return bow_draw.right
+				"draw_left":
+					return bow_draw.left
+		"bow release":
+			match animation:
+				"release_down":
+					return bow_release.down
+				"release_up":
+					return bow_release.up
+				"release_right":
+					return bow_release.right
+				"release_left":
+					return bow_release.left
 
 var pickaxe = {
-	down = preload("res://Characters/Weapon swings/down/pickaxe.png"), 
-	up = preload("res://Characters/Weapon swings/up/pickaxe.png"), 
-	left = preload("res://Characters/Weapon swings/left/pickaxe.png"), 
-	right = preload("res://Characters/Weapon swings/right/pickaxe.png")
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/down.png"), 
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/right.png")
 }
 
 var axe = {
-	down = preload("res://Characters/Weapon swings/down/axe.png"), 
-	up =  preload("res://Characters/Weapon swings/up/axe.png"), 
-	left = preload("res://Characters/Weapon swings/left/axe.png"), 
-	right = preload("res://Characters/Weapon swings/right/axe.png")
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/axe/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/right.png")
 }
 
 var sword = {
-	down = preload("res://Characters/Weapon swings/sword/down.png"), 
-	up =  preload("res://Characters/Weapon swings/sword/up.png"), 
-	left = preload("res://Characters/Weapon swings/sword/left.png"), 
-	right = preload("res://Characters/Weapon swings/sword/right.png")
+	down = preload("res://Characters/Weapon swings/scythe sword swing/sword/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/sword/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/right.png")
 }
 
-var human_male_can = {
-	down = preload("res://Characters/Weapon swings/watering cans/human male/down.png"),
-	left = preload("res://Characters/Weapon swings/watering cans/human male/left.png"),
-	right = preload("res://Characters/Weapon swings/watering cans/human male/right.png")
+var scythe = {
+	down = preload("res://Characters/Weapon swings/scythe sword swing/scythe/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/scythe/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/scythe/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/scythe/right.png")
 }
 
-var human_female_can = {
-	down = preload("res://Characters/Weapon swings/watering cans/human female/down.png"),
-	left = preload("res://Characters/Weapon swings/watering cans/human female/left.png"),
-	right = preload("res://Characters/Weapon swings/watering cans/human female/right.png")
+var bow_draw = {
+	down = preload("res://Characters/Weapon swings/bow/draw/down.png"),
+	up = preload("res://Characters/Weapon swings/bow/draw/up.png"),
+	left = preload("res://Characters/Weapon swings/bow/draw/left.png"),
+	right = preload("res://Characters/Weapon swings/bow/draw/right.png")
+}
+var bow_release = {
+	down = preload("res://Characters/Weapon swings/bow/release/down.png"),
+	up = preload("res://Characters/Weapon swings/bow/release/up.png"),
+	left = preload("res://Characters/Weapon swings/bow/release/left.png"),
+	right = preload("res://Characters/Weapon swings/bow/release/right.png")
+}
+
+var watering_can = {
+	down = preload("res://Characters/Weapon swings/watering cans/down.png"),
+	left = preload("res://Characters/Weapon swings/watering cans/left.png"),
+	right = preload("res://Characters/Weapon swings/watering cans/right.png")
+}
+
+
+var fishing_rod_cast = {
+	down = preload("res://Characters/Weapon swings/fishing rod cast/down.png"),
+	left = preload("res://Characters/Weapon swings/fishing rod cast/left.png"),
+	right = preload("res://Characters/Weapon swings/fishing rod cast/right.png"),
+	up = preload("res://Characters/Weapon swings/fishing rod cast/up.png")
+}
+
+var fishing_rod_retract = {
+	down = preload("res://Characters/Weapon swings/fishing rod retract/down.png"),
+	left = preload("res://Characters/Weapon swings/fishing rod retract/left.png"),
+	right = preload("res://Characters/Weapon swings/fishing rod retract/right.png"),
+	up = preload("res://Characters/Weapon swings/fishing rod retract/up.png")
+}
+
+var fishing_rod_struggle = {
+	down = preload("res://Characters/Weapon swings/fishing rod struggle/down.png"),
+	left = preload("res://Characters/Weapon swings/fishing rod struggle/left.png"),
+	right = preload("res://Characters/Weapon swings/fishing rod struggle/right.png"),
+	up = preload("res://Characters/Weapon swings/fishing rod struggle/up.png")
+}
+
+var ripples = {
+	down = preload("res://Characters/Weapon swings/ripples/down.png"),
+	left = preload("res://Characters/Weapon swings/ripples/left.png"),
+	right = preload("res://Characters/Weapon swings/ripples/right.png"),
+	up = preload("res://Characters/Weapon swings/ripples/up.png")
 }
 
 # TALL GRASS #

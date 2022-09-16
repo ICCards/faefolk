@@ -1,6 +1,5 @@
 extends Node2D
 
-
 onready var rng = RandomNumberGenerator.new()
 var variety
 var bodyEnteredFlag = false
@@ -8,45 +7,31 @@ var bodyEnteredFlag2 = false
 var grass
 var biome
 var grass_list
+var front_health
+var back_heath
+var loc
+var is_front_visible = true
+var is_back_visible = true
 
 func _ready():
+	rng.randomize()
+	front_health = rng.randi_range(1,3)
+	back_heath = rng.randi_range(1,3)
 	if biome == "snow":
+		$FrontBreak.self_modulate = Color("7dd7b4")
+		$BackBreak.self_modulate = Color("7dd7b4")
 		grass = Images.green_grass_winter
 	else:
+		$FrontBreak.self_modulate = Color("99cc25")
+		$BackBreak.self_modulate = Color("99cc25")
 		grass = Images.green_grass
-	#grass = Images.returnTallGrassObject(biome, str(variety))
 	$Front.texture = grass[0]
 	$Back.texture = grass[1]
 
-#func get_grass():
-#	print(variety)
-##	if biome == "snow":
-##		grass_list = [Images.dark_green_grass_winter, Images.green_grass_winter, Images.yellow_grass_winter, Images.red_grass_winter]
-##	else:
-##		grass_list = [Images.dark_green_grass, Images.green_grass, Images.yellow_grass, Images.red_grass]
-#	match variety:
-#		"1":
-#			$Front.texture = Images.dark_green_grass[0]
-#			$Back.texture = Images.dark_green_grass[1]
-#			#grass = Images.dark_green_grass
-#		"2": 
-#			print("var2")
-#			$Front.texture = Images.green_grass[0]
-#			$Back.texture = Images.green_grass[1]
-#			#grass = Images.green_grass
-#		"3":
-#			$Front.texture = Images.yellow_grass[0]
-#			$Back.texture = Images.yellow_grass[1]
-#			#grass = Images.yellow_grass
-#		"4": 
-#			$Front.texture = Images.red_grass[0]
-#			$Back.texture = Images.red_grass[1]
-#			#grass = Images.red_grass
-
 func PlayEffect(player_id):
-	play_sound_effect()
+	play_hit_effect()
 
-func play_sound_effect():
+func play_hit_effect():
 	if !bodyEnteredFlag and Server.isLoaded:
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
@@ -54,12 +39,14 @@ func play_sound_effect():
 		
 func play_back_effect():
 	if !bodyEnteredFlag2 and Server.isLoaded:
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
 		$AnimationPlayer2.play("animate back")
 
 func _on_Area2D_body_entered(_body):
 	var data = {"id": name, "n": "tall_grass", "d": "" }
 	Server.action("ON_HIT", data)
-	play_sound_effect()
+	play_hit_effect()
 	bodyEnteredFlag = true
 
 func _on_Area2D_body_exited(_body):
@@ -78,3 +65,39 @@ func _on_BackArea2D_body_entered(body):
 
 func _on_BackArea2D_body_exited(body):
 	bodyEnteredFlag2 = false
+
+
+func _on_Area2D_area_entered(area):
+	front_health -= 1
+	if front_health == 0:
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
+		$AnimationPlayer.play("front break")
+		yield($AnimationPlayer, "animation_finished")
+		is_front_visible = false
+		destroy()
+	else:
+		yield(get_tree().create_timer(rand_range(0.1, 0.5)), "timeout")
+		$AnimationPlayer.play("animate front")
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
+
+func _on_BackArea2D_area_entered(area):
+	back_heath -= 1
+	if back_heath == 0:
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
+		$AnimationPlayer2.play("back break")
+		yield($AnimationPlayer2, "animation_finished")
+		is_back_visible = false
+		destroy()
+	else:
+		yield(get_tree().create_timer(rand_range(0.1, 0.5)), "timeout")
+		$AnimationPlayer2.play("animate back")
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.play()
+
+func destroy():
+	if not is_back_visible and not is_front_visible:
+		Tiles.reset_valid_tiles(loc)
+		queue_free()

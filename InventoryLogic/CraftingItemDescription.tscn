@@ -15,7 +15,7 @@
 
 [node name="CraftingItemDescription" type="Node2D"]
 scale = Vector2( 5.4, 5.4 )
-z_index = 1
+z_index = 2
 script = ExtResource( 11 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -121,14 +121,14 @@ margin_left = 6.0
 margin_top = 27.1111
 margin_right = 49.0
 margin_bottom = 28.1111
-color = Color( 0.266667, 0.141176, 0.203922, 1 )
+color = Color( 0.121569, 0.105882, 0.184314, 1 )
 
 [node name="Divider2" type="ColorRect" parent="."]
 margin_left = 6.0
 margin_top = 52.0
 margin_right = 49.0
 margin_bottom = 53.0
-color = Color( 0.266667, 0.141176, 0.203922, 1 )
+color = Color( 0.121569, 0.105882, 0.184314, 1 )
 
 [node name="Ingredients" type="Label" parent="."]
 margin_left = 6.0
@@ -142,16 +142,16 @@ valign = 1
 autowrap = true
 
 [node name="Ingredient1" parent="." instance=ExtResource( 12 )]
-margin_left = 6.0
-margin_top = 26.5555
-margin_right = 6.0
-margin_bottom = 58.5555
+margin_left = 5.92593
+margin_top = 26.4814
+margin_right = 5.92593
+margin_bottom = 58.4814
 
 [node name="Ingredient2" parent="." instance=ExtResource( 12 )]
-margin_left = 6.0
-margin_top = 36.0
-margin_right = 6.0
-margin_bottom = 68.0
+margin_left = 5.92593
+margin_top = 36.6668
+margin_right = 5.92593
+margin_bottom = 68.6668
 
 [node name="ItemName" type="Label" parent="."]
 margin_left = 5.14286

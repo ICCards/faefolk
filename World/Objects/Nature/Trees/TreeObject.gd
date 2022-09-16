@@ -10,7 +10,6 @@ onready var Bird = preload("res://World/Animals/BirdFlyingFromTree.tscn")
 onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 var rng = RandomNumberGenerator.new()
 
 var treeObject
@@ -61,7 +60,7 @@ func set_random_leaves_falling():
 
 func PlayEffect(player_id):
 	health -= 1
-	if get_node("/root/World/Players/" + str(player_id)).get_position().x < get_position().x:
+	if get_node("/root/World/Players/" + str(player_id) + "/" +  str(player_id)).get_position().x < get_position().x:
 		hit_dir = "right"
 	else:
 		hit_dir = "left"
@@ -98,24 +97,20 @@ func PlayEffect(player_id):
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump hit right")
 	else:
+		Tiles.reset_valid_tiles(loc, "tree")
 		$SoundEffectsStump.stream = Sounds.stump_break
 		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		yield(stump_animation_player, "animation_finished")
-		reset_cells()
 		queue_free()
-			
-func reset_cells():
-	valid_tiles.set_cellv(loc, 0)
-	valid_tiles.set_cellv(loc + Vector2(-1,0), 0)
-	valid_tiles.set_cellv(loc + Vector2(-1,-1), 0)
-	valid_tiles.set_cellv(loc + Vector2(0,-1), 0)
 
 
 ### Tree hurtbox
 func _on_Hurtbox_area_entered(_area):
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
 	health -= 1
@@ -127,7 +122,7 @@ func _on_Hurtbox_area_entered(_area):
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
 		
-		if get_node("/root/World/Players/" + str(Server.player_id)).get_position().x <= get_position().x:	
+		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:	
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			tree_animation_player.play("tree hit right")
 		else: 
@@ -142,7 +137,7 @@ func _on_Hurtbox_area_entered(_area):
 		$SoundEffectsTree.stream = Sounds.tree_break
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsTree.play()
-		if get_node("/root/World/Players/" + str(Server.player_id)).get_position().x <= get_position().x:
+		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
 			tree_animation_player.play("tree fall right")
 			yield(tree_animation_player, "animation_finished" )
 			intitiateItemDrop("wood", Vector2(130, -8), 7)
@@ -156,20 +151,20 @@ func _on_Hurtbox_area_entered(_area):
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
-		if get_node("/root/World/Players/" +  str(Server.player_id)).get_position().x <= get_position().x:
+		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
 			stump_animation_player.play("stump hit right")
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 		else: 
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump hit right")
 	elif health == 0: 
+		Tiles.reset_valid_tiles(loc, "tree")
 		$SoundEffectsStump.stream = Sounds.stump_break
 		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		intitiateItemDrop("wood", Vector2(0, 12), 3)
-		reset_cells()
 		yield($SoundEffectsStump, "finished")
 		queue_free()
 	
@@ -205,13 +200,20 @@ func intitiateItemDrop(item, pos, amt):
 	
 func initiateBirdEffect():
 	if Util.chance(33):
-		rng.randomize()
-		var bird = Bird.instance()
-		bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
-		get_parent().call_deferred("add_child", bird)
-		bird.global_position = global_position + Vector2(0, -120)
-
-
+		if Util.chance(50):
+			rng.randomize()
+			var bird = Bird.instance()
+			bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
+			get_parent().call_deferred("add_child", bird)
+			bird.global_position = global_position + Vector2(0, -120)
+		else:
+			for i in range(2):
+				rng.randomize()
+				var bird = Bird.instance()
+				bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
+				get_parent().call_deferred("add_child", bird)
+				bird.global_position = global_position + Vector2(0, -120)
+			
 ### Tree modulate functions
 func set_tree_top_collision_shape():
 	if variety == "A":
