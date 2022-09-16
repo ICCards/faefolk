@@ -51,13 +51,12 @@ enum Lights {
 
 
 func place_seed_in_world(id, item_name, location, days):
-	valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
-	valid_tiles.set_cellv(location, -1)
+	Tiles.valid_tiles.set_cellv(location, -1)
 	var plantedCrop = PlantedCrop.instance()
 	plantedCrop.name = str(id)
-	plantedCrop.initialize(item_name, location, 0, false, false)
+	plantedCrop.initialize(item_name, location, JsonData.crop_data[item_name]["DaysToGrow"], false, false)
 	Server.world.add_child(plantedCrop, true)
-	plantedCrop.global_position = valid_tiles.map_to_world(location) + Vector2(0, 16)
+	plantedCrop.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0, 16)
 	
 	
 func place_building_object_in_world(id, item_name, location):
