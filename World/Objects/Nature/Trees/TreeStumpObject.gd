@@ -4,7 +4,6 @@ onready var stump_animation_player = $StumpAnimationPlayer
 onready var treeStumpSprite = $TreeSprites/TreeStump
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
 onready var treeTypes = ['A','B', 'C', 'D', 'E']
 var rng = RandomNumberGenerator.new()
 var treeObject
@@ -50,7 +49,8 @@ func PlayEffect(player_id):
 		
 
 func _on_StumpHurtBox_area_entered(_area):
-	Stats.decrease_tool_health()
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
 	var data = {"id": name, "n": "stump"}
 	Server.action("ON_HIT", data)
 	health -= 1

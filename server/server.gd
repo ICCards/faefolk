@@ -267,7 +267,8 @@ func _process(_delta):
 
 remote func updateState(data):
 	if world:
-		world.UpdateWorldState(data)
+		pass
+		#world.UpdateWorldState(data)
 
 remote func ReturnServerTime(server_time,client_time):
 	latency = (OS.get_system_time_msecs() - client_time) / 2

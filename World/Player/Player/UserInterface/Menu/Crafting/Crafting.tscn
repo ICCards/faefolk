@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/workbench 2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/placable_object_preview/door.png" type="Texture" id=3]
 [ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd" type="Script" id=6]
@@ -184,6 +185,7 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="Page2" type="Node2D" parent="."]
+visible = false
 position = Vector2( 750, 0 )
 
 [node name="workbench #3" type="Sprite" parent="Page2"]
@@ -275,7 +277,6 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="Page3" type="Node2D" parent="."]
-visible = false
 position = Vector2( 750, 0 )
 
 [node name="Pg3UpButton" type="Button" parent="Page3"]
@@ -302,11 +303,25 @@ position = Vector2( -6, 400 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 9 )
 
+[node name="door" type="Sprite" parent="Page3"]
+position = Vector2( 228, 420 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+
 [node name="TentButton" type="Button" parent="Page3"]
 margin_left = -90.0
 margin_top = 264.0
 margin_right = 76.0
 margin_bottom = 540.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="DoorButton" type="Button" parent="Page3"]
+margin_left = 132.0
+margin_top = 300.0
+margin_right = 324.0
+margin_bottom = 542.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -549,6 +564,9 @@ scale = Vector2( 5.4, 5.4 )
 [connection signal="mouse_entered" from="Page3/TentButton" to="." method="_on_TentButton_mouse_entered"]
 [connection signal="mouse_exited" from="Page3/TentButton" to="." method="_on_TentButton_mouse_exited"]
 [connection signal="pressed" from="Page3/TentButton" to="." method="_on_TentButton_pressed"]
+[connection signal="mouse_entered" from="Page3/DoorButton" to="." method="_on_DoorButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page3/DoorButton" to="." method="_on_DoorButton_mouse_exited"]
+[connection signal="pressed" from="Page3/DoorButton" to="." method="_on_DoorButton_pressed"]
 [connection signal="mouse_entered" from="Page3/StoveButton2" to="." method="_on_StoveButton2_mouse_entered"]
 [connection signal="mouse_exited" from="Page3/StoveButton2" to="." method="_on_StoveButton2_mouse_exited"]
 [connection signal="pressed" from="Page3/StoveButton2" to="." method="_on_StoveButton2_pressed"]

@@ -302,12 +302,7 @@
          ["wood", 1],
          ]
      },
-     "door front": {
-         "ingredients": [
-         ["wood", 10],
-         ]
-     },
-     "door side": {
+     "door": {
          "ingredients": [
          ["wood", 10],
          ]

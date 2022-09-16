@@ -2,16 +2,15 @@ extends Node2D
 
 
 func _process(delta):
-	pass
-#	var location = Tiles.ocean_tiles.world_to_map(Server.player_node.position)
-#	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles):
-#		if Sounds.current_footsteps_sound != Sounds.swimming:
-#			Sounds.current_footsteps_sound = Sounds.swimming
-#			Sounds.emit_signal("footsteps_sound_change")
-#	else:
-#		if Sounds.current_footsteps_sound == Sounds.swimming:
-#			Sounds.current_footsteps_sound = Sounds.dirt_footsteps
-#			Sounds.emit_signal("footsteps_sound_change")
+	var location = Tiles.ocean_tiles.world_to_map(Server.player_node.position)
+	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles):
+		if Sounds.current_footsteps_sound != Sounds.swimming:
+			Sounds.current_footsteps_sound = Sounds.swimming
+			Sounds.emit_signal("footsteps_sound_change")
+	else:
+		if Sounds.current_footsteps_sound == Sounds.swimming:
+			Sounds.current_footsteps_sound = Sounds.dirt_footsteps
+			Sounds.emit_signal("footsteps_sound_change")
 
 func _on_DetectWoodPath_area_entered(area):
 	if Sounds.current_footsteps_sound != Sounds.wood_footsteps:

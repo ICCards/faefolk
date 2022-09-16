@@ -27,29 +27,15 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	5: ["tomato seeds", 30, null],
-	2: ["blueberry seeds", 60, null],
-	6: ["corn seeds", 60, null],
 	9: ["potato seeds", 30, null],
-	3: ["radish seeds", 30, null],
-	4: ["wood", 299, null],
-	1: ["wood", 499, null],
-	7: ["stone", 699, null],
-	8: ["gold ingot", 40, null],
-	0: ["iron ingot", 40, null]
-
+	8: ["radish seeds", 30, null],
+	3: ["rope", 20, null],
+	2: ["wood", 499, null],
+	1: ["stone", 699, null],
+	0: ["iron ingot", 60, null]
 }
 
 var hotbar = {
-	2: ["red salmon", 30, null],
-	5: ["scythe", 1, null],
-	3: ["rope", 30, null],
-	4: ["blueprint", 1, null],
-	0: ["fishing rod", 1, null],
-	6: ["hammer", 1, null],
-	
-	7: ["bow", 1, 25],
-	8: ["arrow", 30, null],
 }
 
 var chests = {
@@ -83,6 +69,8 @@ func returnSufficentCraftingMaterial(ingredient, amount_needed):
 
 
 func craft_item(item):
+	if item == "door front" or item == "door side":
+		item = "door"
 	var ingredients = JsonData.crafting_data[item]["ingredients"]
 	for i in range(ingredients.size()):
 		remove_material(ingredients[i][0], ingredients[i][1])

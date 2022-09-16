@@ -111,18 +111,10 @@ margin_bottom = -339.667
 theme = ExtResource( 3 )
 text = "Wall"
 
-[node name="Door" type="Label" parent="Circle/Labels"]
-margin_left = 270.0
-margin_top = -206.667
-margin_right = 380.0
-margin_bottom = -139.667
-theme = ExtResource( 3 )
-text = "Door"
-
 [node name="Foundation" type="Label" parent="Circle/Labels"]
-margin_left = 210.0
-margin_top = 126.667
-margin_right = 436.0
-margin_bottom = 193.667
+margin_left = 223.333
+margin_top = -186.667
+margin_right = 449.333
+margin_bottom = -119.667
 theme = ExtResource( 3 )
 text = "Foundation"

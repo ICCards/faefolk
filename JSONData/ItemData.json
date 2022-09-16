@@ -455,7 +455,11 @@
   },
   
   
-  
+  "door" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to provide entry into bases."
+  },
   "torch" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,

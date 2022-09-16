@@ -45,7 +45,8 @@ func PlayEffect(player_id):
 
 
 func _on_SmallHurtBox_area_entered(_area):
-	Stats.decrease_tool_health()
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
 	rng.randomize()
 	var data = {"id": name, "n": "ore"}
 	Server.action("ON_HIT", data)

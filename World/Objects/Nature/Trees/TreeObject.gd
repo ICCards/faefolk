@@ -109,7 +109,8 @@ func PlayEffect(player_id):
 
 ### Tree hurtbox
 func _on_Hurtbox_area_entered(_area):
-	Stats.decrease_tool_health()
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
 	health -= 1

@@ -21,7 +21,7 @@ func initialize(_loc, _node):
 	PlayerInventory.viewInventoryMode = true
 
 
-func radial_menu_off():
+func destroy():
 	cam.set_process_input(true) 
 	hide()
 	if is_instance_valid(tile_node):
@@ -35,23 +35,6 @@ func change_tile():
 	var new_tier = buttons[current_index]
 	tile_node.tier = new_tier
 	tile_node.set_type()
-	match new_tier:
-		"twig":
-			Tiles.wall_tiles.set_cell(location.x, location.y, 0)
-		"wood":
-			Tiles.wall_tiles.set_cell(location.x, location.y, 1)
-		"stone":
-			Tiles.wall_tiles.set_cell(location.x, location.y, 2)
-		"metal":
-			Tiles.wall_tiles.set_cell(location.x, location.y, 5)
-		"armored":
-			Tiles.wall_tiles.set_cell(location.x, location.y, 4)
-		"demolish":
-			Tiles.wall_tiles.set_cell(location.x, location.y, -1)
-			Tiles.path_tiles.set_cell(location.x, location.y, -1)
-			Tiles.reset_valid_tiles(location)
-	Tiles.wall_tiles.update_bitmask_area(location)
-	Tiles.path_tiles.update_bitmask_area(location)
 
 
 func _input(event):
@@ -59,6 +42,6 @@ func _input(event):
 		if PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] == "hammer":
 			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and PlayerInventory.viewInventoryMode:
 				if not event.is_pressed():
-					radial_menu_off()
+					destroy()
 					yield(get_tree().create_timer(0.25), "timeout")
 					PlayerInventory.viewInventoryMode = false

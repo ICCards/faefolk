@@ -125,6 +125,15 @@ anims/RESET = SubResource( 18 )
 [node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="WeatherEffects"]
 stream = ExtResource( 18 )
 
+[node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="RadialUpgradeMenu" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="RadialDoorMenu" parent="." instance=ExtResource( 6 )]
+visible = false
+
 [node name="ChatBox" parent="." instance=ExtResource( 4 )]
 margin_left = 10.0
 margin_top = 299.0
@@ -135,21 +144,19 @@ margin_bottom = -89.0
 position = Vector2( 866, 7 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="RadialDoorMenu" parent="." instance=ExtResource( 6 )]
-visible = false
-
-[node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
-visible = false
-
-[node name="RadialHammerMenu" parent="." instance=ExtResource( 5 )]
-visible = false
-
 [node name="PlayerStatsUI" parent="." instance=ExtResource( 12 )]
 margin_left = 892.0
 margin_top = 435.0
 margin_right = 892.0
 margin_bottom = 435.0
 rect_scale = Vector2( 2, 2 )
+
+[node name="Menu" parent="." instance=ExtResource( 15 )]
+visible = false
+margin_left = 138.0
+margin_top = 32.0
+margin_right = 138.0
+margin_bottom = 32.0
 
 [node name="Workbench" parent="." instance=ExtResource( 2 )]
 visible = false
@@ -170,13 +177,6 @@ margin_left = 484.0
 margin_top = 59.0
 margin_right = 484.0
 margin_bottom = 59.0
-
-[node name="Menu" parent="." instance=ExtResource( 15 )]
-visible = false
-margin_left = 139.0
-margin_top = 34.0
-margin_right = 139.0
-margin_bottom = 34.0
 
 [node name="DeathEffect" type="ColorRect" parent="."]
 visible = false

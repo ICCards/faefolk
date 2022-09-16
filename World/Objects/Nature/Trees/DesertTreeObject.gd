@@ -26,7 +26,8 @@ func _ready():
 		$AnimatedSprite.position = Vector2(0, 12)
 		
 func _on_TreeHurtbox_area_entered(area):
-	Stats.decrease_tool_health()
+	if area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
 	health -= 1
