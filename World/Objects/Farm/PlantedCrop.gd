@@ -9,7 +9,7 @@ var phase
 var is_in_regrowth_phase
 var crop_is_dead 
 var valid_tiles
-var isBeingHarvested = false	
+var isBeingHarvested = false
 var bodyEnteredFlag = false
 
 enum {
