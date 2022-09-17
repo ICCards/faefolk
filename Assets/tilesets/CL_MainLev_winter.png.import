@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CL_MainLev_winter.png-ff05f338dc3045c19d268416a42eaada.stex"
+path="res://.import/CL_MainLev_winter.png-d6e4af7cf448bf4b79e82a32450f4f3b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/CL_MainLev_winter.png"
-dest_files=[ "res://.import/CL_MainLev_winter.png-ff05f338dc3045c19d268416a42eaada.stex" ]
+source_file="res://Assets/tilesets/CL_MainLev_winter.png"
+dest_files=[ "res://.import/CL_MainLev_winter.png-d6e4af7cf448bf4b79e82a32450f4f3b.stex" ]
 
 [params]
 

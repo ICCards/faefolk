@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/jonathangreen/Documents/FaeFolk/faefolk/faefolk.csproj": {}
+  },
+  "projects": {
+    "/Users/jonathangreen/Documents/FaeFolk/faefolk/faefolk.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/jonathangreen/Documents/FaeFolk/faefolk/faefolk.csproj",
+        "projectName": "faefolk",
+        "projectPath": "/Users/jonathangreen/Documents/FaeFolk/faefolk/faefolk.csproj",
+        "packagesPath": "/Users/jonathangreen/.nuget/packages/",
+        "outputPath": "/Users/jonathangreen/Documents/FaeFolk/faefolk/.mono/temp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/jonathangreen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "EdjCase.ICP.Agent": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "EdjCase.ICP.Candid": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.2, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

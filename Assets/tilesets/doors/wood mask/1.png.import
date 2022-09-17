@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1.png-d0dba43210053983aeba4a140e6f2cde.stex"
+path="res://.import/1.png-da287c850765aa63979f5e10b9ca5491.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/doors/wood mask/1.png"
-dest_files=[ "res://.import/1.png-d0dba43210053983aeba4a140e6f2cde.stex" ]
+source_file="res://Assets/tilesets/doors/wood mask/1.png"
+dest_files=[ "res://.import/1.png-da287c850765aa63979f5e10b9ca5491.stex" ]
 
 [params]
 
