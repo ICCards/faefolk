@@ -6,7 +6,7 @@ onready var GroundMap = $RedGroundMap
 onready var GrassMap = $GrassMap
 onready var CaveDoorsMap = $CaveDoorsMap
 
-const Player = preload("res://World/Player/Player.tscn")
+const Player = preload("res://World/Player/Player/Player.tscn")
 
 export(int)   var map_w         = 120
 export(int)   var map_h         = 75
