@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/2.png-667226dc405e6caa9875fb754fb36605.stex"
+path="res://.import/2.png-81893b6a1c1d32ce810ad7523d0ef9f8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/walls/hit effects/stone/2.png"
-dest_files=[ "res://.import/2.png-667226dc405e6caa9875fb754fb36605.stex" ]
+source_file="res://Assets/tilesets/walls/hit effects/stone/2.png"
+dest_files=[ "res://.import/2.png-81893b6a1c1d32ce810ad7523d0ef9f8.stex" ]
 
 [params]
 

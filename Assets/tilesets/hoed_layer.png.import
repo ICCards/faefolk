@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hoed_layer.png-07bc32952c3894fd01df8fe7e268d446.stex"
+path="res://.import/hoed_layer.png-feea06ff963f338b6120caa6801dd538.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/hoed_layer.png"
-dest_files=[ "res://.import/hoed_layer.png-07bc32952c3894fd01df8fe7e268d446.stex" ]
+source_file="res://Assets/tilesets/hoed_layer.png"
+dest_files=[ "res://.import/hoed_layer.png-feea06ff963f338b6120caa6801dd538.stex" ]
 
 [params]
 
