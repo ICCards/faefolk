@@ -46,11 +46,23 @@
               "target": "Package",
               "version": "[1.0.2, )"
             },
+            "HDWallet.Ed25519": {
+              "target": "Package",
+              "version": "[0.10.0, )"
+            },
+            "HDWallet.Secp256k1": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
             "Microsoft.NETFramework.ReferenceAssemblies": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[1.0.2, )",
               "autoReferenced": true
+            },
+            "Nethereum.HdWallet": {
+              "target": "Package",
+              "version": "[4.8.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
