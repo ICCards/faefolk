@@ -10,7 +10,8 @@ func _ready():
 		get_parent().spawn_player_in_menu()
 
 func _connect_plug(args):
-	IC.login(login_callback)
+	pass;
+	#IC.login(login_callback)
 	
 func _login(args):
 	var value = Util.toMessage("LOGIN",{"d":{}})

@@ -37,13 +37,13 @@ Server="*res://server/server.gd"
 Chat="*res://Global/Data/Chat.gd"
 PlaceObject="*res://Global/Data/PlaceObject.gd"
 Tiles="*res://helpers/Tiles.gd"
-IC="*res://helpers/IC.gd"
 Settings="*res://Global/Data/Settings.gd"
 Goblin="*res://Global/Characters/Goblin.gd"
 Human="*res://Global/Characters/Human.gd"
 Stats="*res://Global/Data/Stats.gd"
 FishData="*res://Global/Data/FishData.gd"
 CollectionsData="*res://Global/Data/CollectionsData.gd"
+IC="*res://helpers/ic.cs"
 
 [display]
 
