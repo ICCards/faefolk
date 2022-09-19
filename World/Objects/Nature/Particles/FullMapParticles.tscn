@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Particles/FallingLeaf.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Objects/Nature/Particles/Clouds.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/Objects/Nature/Particles/FullMapParticles.gd" type="Script" id=3]
+[ext_resource path="res://World/Objects/Nature/Particles/LargeClouds.tscn" type="PackedScene" id=4]
 
 [node name="FullMapParticles" type="Node2D"]
 position = Vector2( 16000, 16000 )
 script = ExtResource( 3 )
 
+[node name="LargeClouds" parent="." instance=ExtResource( 4 )]
+
 [node name="Clouds" parent="." instance=ExtResource( 2 )]
-amount = 2500
 initial_velocity_random = 0.62
 damping_random = 0.75
-scale_amount = 3.0
 
 [node name="FallingLeaf" parent="." instance=ExtResource( 1 )]

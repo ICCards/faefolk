@@ -66,10 +66,10 @@ func _on_HurtBox_area_entered(area):
 		Stats.decrease_tool_health()
 	if door_open:
 		$HitEffect/Sprite.texture = load("res://Assets/Tilesets/doors/hit effects/" + tier + "/side/open.png")
-		$HitEffect/Sprite.position = Vector2(11,-73)
+		$HitEffect/Sprite.position = Vector2(10,-69)
 	else:
 		$HitEffect/Sprite.texture = load("res://Assets/Tilesets/doors/hit effects/" + tier + "/side/closed.png")
-		$HitEffect/Sprite.position = Vector2(3,-67)
+		$HitEffect/Sprite.position = Vector2(2,-63)
 	$HitEffect/AnimationPlayer.stop()
 	$HitEffect/AnimationPlayer.play("hit")
 	show_health()

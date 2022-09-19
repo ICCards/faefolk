@@ -7,29 +7,11 @@ var rng = RandomNumberGenerator.new()
 var location
 var item_name
 var id
+var direction
 
-func initialize(_name, loc):
-	item_name = _name
-	location = loc
-	
 func _ready():
 	set_dimensions()
-	if item_name == "wood path1" or item_name == "wood path2":
-		item_name = "wood path"
-	elif item_name == "stone path1" or item_name == "stone path2" or  item_name == "stone path3" or item_name == "stone path4": 
-		item_name = "stone path"
-	if item_name == "wood path":
-		$TypeOfTileArea.set_collision_mask(512)
-	elif item_name == "stone path":
-		$TypeOfTileArea.set_collision_mask(1024)
-	elif item_name == "torch" or \
-	item_name == "campfire" or \
-	item_name == "fire pedestal" or \
-	item_name == "tall fire pedestal":
-		$Light2D.enabled = true
-	elif item_name == "house" or item_name.substr(0, 12) == "sleeping bag" or item_name.substr(0, 4) == "tent":
-		queue_free()
-		
+
 func PlayEffect(_player_id):
 	$Light2D.enabled = false
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
@@ -46,7 +28,9 @@ func PlayEffect(_player_id):
 
 func set_dimensions():
 	rng.randomize()
-	if item_name == "wood chest" or item_name == "stone chest":
+	if item_name == "torch" or item_name == "campfire" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
+		$Light2D.enabled = true
+	elif item_name == "wood chest" or item_name == "stone chest":
 		id = str(rng.randi_range(0, 100000))
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 65536
@@ -57,16 +41,19 @@ func set_dimensions():
 	elif item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3":
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 131072
+		$InteractiveArea.name = item_name
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
-	elif item_name == "stove":
+	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 262144
+		$InteractiveArea.name = item_name
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
-	elif item_name == "grain mill":
+	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 524288
+		$InteractiveArea.name = item_name
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
 

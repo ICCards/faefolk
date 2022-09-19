@@ -13,15 +13,14 @@ const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 
-var chest_id = null
 var viewInventoryMode = false
 var viewMapMode = false
 var interactive_screen_mode = false
 var chatMode = false
-var is_inside_chest_area = false
-var is_inside_workbench_area = false
-var is_inside_stove_area = false
-var is_inside_grain_mill_area = false
+var chest_id = null
+var workbench_id = null
+var stove_id = null
+var grain_mill_id = null
 var is_inside_sleeping_bag_area = false
 var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
@@ -69,8 +68,8 @@ func returnSufficentCraftingMaterial(ingredient, amount_needed):
 
 
 func craft_item(item):
-	if item == "door front" or item == "door side":
-		item = "door"
+	if item == "wood door side":
+		item = "wood door"
 	var ingredients = JsonData.crafting_data[item]["ingredients"]
 	for i in range(ingredients.size()):
 		remove_material(ingredients[i][0], ingredients[i][1])
@@ -211,6 +210,7 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 			update_inventory_slot_visual(i, inventory[i][0], inventory[i][1], inventory[i][2])
 			return
 	if hotbar.size() == NUM_HOTBAR_SLOTS:
+		### FIX
 		print("ITEM CANT BE ADDED TO INVENTORY " + item_name)
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity, item_health):

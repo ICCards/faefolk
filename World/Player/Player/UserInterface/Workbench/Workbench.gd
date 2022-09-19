@@ -2,6 +2,11 @@ extends Control
 
 var crafting_item
 var item
+var level
+var page
+
+var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can"]
+var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "fishing rod", "scythe"]
 
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots
@@ -36,11 +41,19 @@ func _physics_process(delta):
 	else:
 		$ItemDescription.hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
-		$CraftingItemDescription.show()
-		$CraftingItemDescription.item_name = crafting_item
-		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-		$CraftingItemDescription.initialize()
+		if page == 1 and get_node("Page1/"+crafting_item).disabled:
+			$ItemNameBox.show()
+			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
+		elif page == 2 and get_node("Page2/"+crafting_item).disabled:
+			$ItemNameBox.show()
+			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
+		else:
+			$CraftingItemDescription.show()
+			$CraftingItemDescription.item_name = crafting_item
+			$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
+			$CraftingItemDescription.initialize()
 	else:
+		$ItemNameBox.hide()
 		$CraftingItemDescription.hide()
 
 
@@ -78,12 +91,12 @@ func craft(item_name):
 		find_parent("UserInterface").holding_item = return_crafted_item(item_name)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 		PlayerInventory.craft_item(item_name)
-		initialize()
+		reset()
 	elif find_parent("UserInterface").holding_item:
 		if find_parent("UserInterface").holding_item.item_name == "arrow" and PlayerInventory.isSufficientMaterialToCraft(item_name):
 			PlayerInventory.craft_item(item_name)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
-			initialize()
+			reset()
 
 func return_crafted_item(item_name):
 	var inventoryItem = InventoryItem.instance()
@@ -92,6 +105,7 @@ func return_crafted_item(item_name):
 	return inventoryItem
 
 func _on_DownButton_pressed():
+	page = 2
 	$Page1.hide()
 	$Page2.show()
 	$Page2.initialize()
@@ -100,16 +114,26 @@ func _on_DownButton_pressed():
 	
 
 func _on_UpButton_pressed():
-	$Page1.show()
+	page = 1
 	$Page2.hide()
+	$Page1.show()
 	$Page1.initialize()
 	$DownButton.show()
 	$UpButton.hide()
 
 func initialize():
+	page = 1
 	item = null
 	crafting_item = null
+	$Title.text = level[0].to_upper() + level.substr(1,-1) + ":"
 	show()
+	$Page1.show()
+	$Page2.hide()
+	$DownButton.show()
+	$UpButton.hide()
+	reset()
+	
+func reset():
 	$Page1.initialize()
 	$Page2.initialize()
 	initialize_hotbar()
@@ -225,4 +249,4 @@ func _on_BackgroundButton_pressed():
 
 
 func _on_ExitButton_pressed():
-	get_parent().toggle_workbench()
+	get_parent().hide_workbench()

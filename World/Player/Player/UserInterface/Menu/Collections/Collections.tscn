@@ -6,6 +6,10 @@
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" type="Script" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/inventory_icons/Food/garlic.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Themes/LockedAsset.tres" type="Material" id=7]
+
+[sub_resource type="StreamTexture" id=62]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
 [sub_resource type="Shader" id=16]
 code = "shader_type canvas_item;
@@ -18,15 +22,6 @@ void fragment() {
 	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
 	COLOR = color;
 }"
-
-[sub_resource type="ShaderMaterial" id=61]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=62]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
 [sub_resource type="ShaderMaterial" id=63]
 resource_local_to_scene = true
@@ -503,7 +498,7 @@ columns = 6
 script = ExtResource( 1 )
 
 [node name="albacore" type="TextureRect" parent="FishCollection"]
-material = SubResource( 61 )
+material = ExtResource( 7 )
 margin_right = 16.0
 margin_bottom = 16.0
 texture = SubResource( 62 )

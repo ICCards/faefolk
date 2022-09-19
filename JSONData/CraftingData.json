@@ -302,11 +302,33 @@
          ["wood", 1],
          ]
      },
-     "door": {
+     "wood door": {
          "ingredients": [
-         ["wood", 10],
+         ["wood", 30],
          ]
      },
+     "metal door": {
+         "ingredients": [
+         ["iron ingot", 20],
+         ]
+     },
+     "armored door": {
+         "ingredients": [
+         ["iron ingot", 40],
+         ]
+     },
+     "furnace": {
+         "ingredients": [
+         ["stone", 100],
+         ]
+     },
+     "tool cabinet": {
+         "ingredients": [
+         ["wood", 100],
+         ["stone", 100]
+         ]
+     },
+     
      "scythe": {
          "ingredients": [
          ["wood", 10],
@@ -324,6 +346,37 @@
          ["wood", 10],
          ["iron ingot", 10]
          ]
-     }
+     },
+     "calamari with tomatoes": {
+         "ingredients": [
+         ["octopus", 1],
+         ["tomato", 4]
+         ]
+     },
+     "spicy eel": {
+         "ingredients": [
+         ["eel", 1],
+         ["red pepper", 4],
+         ["jalapeno", 2]
+         ]
+     },
+     "spicy eel": {
+         "ingredients": [
+         ["eel", 1],
+         ["red pepper", 4],
+         ["jalapeno", 2]
+         ]
+     },
+     "mushroom soup": {
+         "ingredients": [
+         ["mushrooms", 5],
+         ]
+     },
+     "mushroom soup": {
+         "ingredients": [
+         ["mushrooms", 5],
+         ["garlic", 2],
+         ]
+     },
      
 }

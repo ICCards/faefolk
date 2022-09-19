@@ -210,6 +210,9 @@ func buildMap(map):
 	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
 	Tiles.wall_tiles = $PlacableTiles/WallTiles
 	Tiles.foundation_tiles = $PlacableTiles/FoundationTiles
+	Tiles.object_tiles = $PlacableTiles/ObjectTiles
+	Tiles.fence_tiles = $PlacableTiles/FenceTiles
+	Tiles.light_tiles = $PlacableTiles/LightTiles
 	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")

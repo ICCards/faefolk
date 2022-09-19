@@ -28,16 +28,16 @@ func initialize_user_interface():
 
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and \
-		not PlayerInventory.interactive_screen_mode and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
+		not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
 		if event.is_action_pressed("open_menu"):
 			toggle_menu()
 		elif event.is_action_pressed("action"):
-			if PlayerInventory.is_inside_chest_area:
+			if PlayerInventory.chest_id:
 				toggle_chest()
-			elif PlayerInventory.is_inside_workbench_area:
-				toggle_workbench()
-	#			elif PlayerInventory.is_inside_stove_area:
-	#				open_stove()
+			elif PlayerInventory.workbench_id:
+				toggle_workbench(PlayerInventory.workbench_id)
+			elif PlayerInventory.stove_id:
+				toggle_stove(PlayerInventory.stove_id)
 	#			elif PlayerInventory.is_inside_grain_mill_area:
 	#				open_grain_mill()
 		#		elif PlayerInventory.is_inside_sleeping_bag_area:
@@ -137,7 +137,6 @@ func toggle_chest():
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 	else:
-		print("THISxxxx")
 		$PlayerStatsUI.show()
 		$OpenChest.hide()
 		$Hotbar.initialize_hotbar()
@@ -151,8 +150,9 @@ func open_grain_mill():
 	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
 	toggle_stats_and_time()
 
-func toggle_workbench():
+func toggle_workbench(level):
 	if not $Workbench.visible:
+		$Workbench.level = level
 		$Workbench.initialize()
 		$Hotbar.hide()
 	else:
@@ -163,11 +163,35 @@ func toggle_workbench():
 	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
 	toggle_stats_and_time()
 	
-func open_stove():
-	$Stove.initialize()
-	$Stove.visible = !$Stove.visible
+func hide_workbench():
+	$Hotbar.show()
+	$Hotbar.initialize_hotbar()
+	$Workbench.hide()
+	drop_items()
+	PlayerInventory.interactive_screen_mode = false
+	toggle_stats_and_time()
+	
+func toggle_stove(level):
+	if not $Stove.visible:
+		$Stove.level = level
+		$Stove.initialize()
+		$Hotbar.hide()
+	else:
+		$Hotbar.show()
+		$Hotbar.initialize_hotbar()
+		$Stove.hide()
+		drop_items()
 	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
 	toggle_stats_and_time()
+	
+func close_stove():
+	$Hotbar.show()
+	$Hotbar.initialize_hotbar()
+	$Stove.hide()
+	drop_items()
+	PlayerInventory.interactive_screen_mode = false
+	toggle_stats_and_time()
+	
 	
 func toggle_stats_and_time():
 	$CurrentTime.visible = !$CurrentTime.visible

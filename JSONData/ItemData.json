@@ -455,11 +455,37 @@
   },
   
   
-  "door" : {
+  "wood door" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Used to provide entry into bases."
+      "Description": "Entry point for bases with low durability."
   },
+  "metal door" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Entry point for bases with medium durability."
+  },
+  "armored door" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Entry point for bases with high durability."
+  },
+  "furnace" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Turns ore and coal into metal bars."
+  },
+  "display table" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "A table for decoration."
+  },
+  "tool cabinet" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Sets building point."
+  },
+  
   "torch" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,

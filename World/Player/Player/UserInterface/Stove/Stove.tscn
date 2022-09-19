@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Images/Inventory UI/Workbench/workbench menu.png" type="Texture" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/Misc/Buttons/exit button.png" type="Texture" id=10]
+[ext_resource path="res://World/Player/Player/UserInterface/Stove/dish_button.gd" type="Script" id=11]
+[ext_resource path="res://Assets/Images/inventory_icons/Dish/asparagus omelette.png" type="Texture" id=12]
+[ext_resource path="res://World/Player/Player/UserInterface/Stove/Page1.gd" type="Script" id=13]
+[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=14]
+[ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=15]
 
 [node name="Stove" type="Control"]
 anchor_right = 1.0
@@ -27,10 +32,6 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="CraftingItemDescription" parent="." instance=ExtResource( 7 )]
-visible = false
-scale = Vector2( 2.7, 2.7 )
-
 [node name="Bg" type="TextureRect" parent="."]
 margin_right = 633.0
 margin_bottom = 548.0
@@ -47,8 +48,386 @@ theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
 custom_constants/shadow_offset_y = 6
-text = "Stove:"
+text = "Stove #3:"
 clip_text = true
+
+[node name="Page1" type="GridContainer" parent="."]
+margin_left = 53.0
+margin_top = 84.0
+margin_right = 185.0
+margin_bottom = 136.0
+rect_scale = Vector2( 4, 4 )
+custom_constants/vseparation = 2
+custom_constants/hseparation = 6
+columns = 6
+script = ExtResource( 13 )
+
+[node name="asparagus omelette" type="TextureButton" parent="Page1"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="baked catfish" type="TextureButton" parent="Page1"]
+margin_left = 22.0
+margin_right = 38.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="baked dorado" type="TextureButton" parent="Page1"]
+margin_left = 44.0
+margin_right = 60.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="baked zucchini" type="TextureButton" parent="Page1"]
+margin_left = 66.0
+margin_right = 82.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="blowfish tails" type="TextureButton" parent="Page1"]
+margin_left = 88.0
+margin_right = 104.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="blueberry cake" type="TextureButton" parent="Page1"]
+margin_left = 110.0
+margin_right = 126.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="blueberry pie" type="TextureButton" parent="Page1"]
+margin_top = 18.0
+margin_right = 16.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="calamari with tomatoes" type="TextureButton" parent="Page1"]
+margin_left = 22.0
+margin_top = 18.0
+margin_right = 38.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="cauliflower soup" type="TextureButton" parent="Page1"]
+margin_left = 44.0
+margin_top = 18.0
+margin_right = 60.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="cooked corn" type="TextureButton" parent="Page1"]
+margin_left = 66.0
+margin_top = 18.0
+margin_right = 82.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="cooked green beans" type="TextureButton" parent="Page1"]
+margin_left = 88.0
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="cooked wheat berries" type="TextureButton" parent="Page1"]
+margin_left = 110.0
+margin_top = 18.0
+margin_right = 126.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="crab cakes" type="TextureButton" parent="Page1"]
+margin_top = 36.0
+margin_right = 16.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="filet mignon" type="TextureButton" parent="Page1"]
+margin_left = 22.0
+margin_top = 36.0
+margin_right = 38.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="filet soup" type="TextureButton" parent="Page1"]
+margin_left = 44.0
+margin_top = 36.0
+margin_right = 60.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="filet with garlic mash" type="TextureButton" parent="Page1"]
+margin_left = 66.0
+margin_top = 36.0
+margin_right = 82.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="filet with tomatoes" type="TextureButton" parent="Page1"]
+margin_left = 88.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="grape pastry" type="TextureButton" parent="Page1"]
+margin_left = 110.0
+margin_top = 36.0
+margin_right = 126.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="Page2" type="GridContainer" parent="."]
+visible = false
+margin_left = 52.0
+margin_top = 84.0
+margin_right = 184.0
+margin_bottom = 136.0
+rect_scale = Vector2( 4, 4 )
+custom_constants/vseparation = 2
+custom_constants/hseparation = 6
+columns = 6
+script = ExtResource( 13 )
+
+[node name="green melon with sugar" type="TextureButton" parent="Page2"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="green pepper soup" type="TextureButton" parent="Page2"]
+margin_left = 22.0
+margin_right = 38.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="mini grape tarts" type="TextureButton" parent="Page2"]
+margin_left = 44.0
+margin_right = 60.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="mushroom soup" type="TextureButton" parent="Page2"]
+margin_left = 66.0
+margin_right = 82.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="potato soup" type="TextureButton" parent="Page2"]
+margin_left = 88.0
+margin_right = 104.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="potatoes with asparagus" type="TextureButton" parent="Page2"]
+margin_left = 110.0
+margin_right = 126.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="potatoes with corn and asparagus" type="TextureButton" parent="Page2"]
+margin_top = 18.0
+margin_right = 16.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="potatoes with green beans" type="TextureButton" parent="Page2"]
+margin_left = 22.0
+margin_top = 18.0
+margin_right = 38.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="radish soup" type="TextureButton" parent="Page2"]
+margin_left = 44.0
+margin_top = 18.0
+margin_right = 60.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="red pepper soup" type="TextureButton" parent="Page2"]
+margin_left = 66.0
+margin_top = 18.0
+margin_right = 82.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="sashimi" type="TextureButton" parent="Page2"]
+margin_left = 88.0
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="sauteed cabbage with garlic" type="TextureButton" parent="Page2"]
+margin_left = 110.0
+margin_top = 18.0
+margin_right = 126.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="scrambled eggs" type="TextureButton" parent="Page2"]
+margin_top = 36.0
+margin_right = 16.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="seaweed salad" type="TextureButton" parent="Page2"]
+margin_left = 22.0
+margin_top = 36.0
+margin_right = 38.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="sliced tomatoes and potatoes" type="TextureButton" parent="Page2"]
+margin_left = 44.0
+margin_top = 36.0
+margin_right = 60.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="smoked jalapeno with eggs" type="TextureButton" parent="Page2"]
+margin_left = 66.0
+margin_top = 36.0
+margin_right = 82.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="spaghetti" type="TextureButton" parent="Page2"]
+margin_left = 88.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 52.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="yellow onion soup" type="TextureButton" parent="Page2"]
+margin_left = 0.25
+margin_right = 16.25
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="Page3" type="GridContainer" parent="."]
+visible = false
+margin_left = 53.0
+margin_top = 84.0
+margin_right = 185.0
+margin_bottom = 136.0
+rect_scale = Vector2( 4, 4 )
+custom_constants/vseparation = 2
+custom_constants/hseparation = 6
+columns = 6
+script = ExtResource( 13 )
+
+[node name="yellow pepper and asparagus stir fry" type="TextureButton" parent="Page3"]
+margin_left = 22.0
+margin_right = 38.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="yellow pepper soup" type="TextureButton" parent="Page3"]
+margin_left = 44.0
+margin_right = 60.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="zuchinni soup" type="TextureButton" parent="Page3"]
+margin_left = 66.0
+margin_right = 82.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="spicy shrimps" type="TextureButton" parent="Page3"]
+margin_left = 88.0
+margin_right = 104.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="strawberry cake" type="TextureButton" parent="Page3"]
+margin_left = 110.0
+margin_right = 126.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="strawberry tart" type="TextureButton" parent="Page3"]
+margin_top = 18.0
+margin_right = 16.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="sugar cane kheer" type="TextureButton" parent="Page3"]
+margin_left = 22.0
+margin_top = 18.0
+margin_right = 38.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="tomato soup" type="TextureButton" parent="Page3"]
+margin_left = 44.0
+margin_top = 18.0
+margin_right = 60.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="vegetable soup" type="TextureButton" parent="Page3"]
+margin_left = 66.0
+margin_top = 18.0
+margin_right = 82.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="wings with corn" type="TextureButton" parent="Page3"]
+margin_left = 88.0
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 34.0
+texture_normal = ExtResource( 12 )
+script = ExtResource( 11 )
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
 margin_left = 33.0
@@ -210,15 +589,28 @@ script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="DownButton" type="TextureButton" parent="."]
+[node name="Pg1DownButton" type="TextureButton" parent="."]
 margin_left = 577.0
 margin_top = 263.0
-margin_right = 617.0
+margin_right = 613.0
 margin_bottom = 305.0
 texture_normal = ExtResource( 9 )
 
-[node name="UpButton" type="TextureButton" parent="."]
-visible = false
+[node name="Pg2DownButton" type="TextureButton" parent="."]
+margin_left = 577.0
+margin_top = 263.0
+margin_right = 613.0
+margin_bottom = 305.0
+texture_normal = ExtResource( 9 )
+
+[node name="Pg2UpButton" type="TextureButton" parent="."]
+margin_left = 577.0
+margin_top = 25.0
+margin_right = 617.0
+margin_bottom = 67.0
+texture_normal = ExtResource( 8 )
+
+[node name="Pg3UpButton" type="TextureButton" parent="."]
 margin_left = 577.0
 margin_top = 25.0
 margin_right = 617.0
@@ -255,3 +647,19 @@ margin_right = 708.0
 margin_bottom = 72.0
 rect_scale = Vector2( 0.6, 0.6 )
 texture_normal = ExtResource( 10 )
+
+[node name="ItemNameBox" parent="." instance=ExtResource( 15 )]
+visible = false
+
+[node name="CraftingItemDescription" parent="." instance=ExtResource( 7 )]
+visible = false
+scale = Vector2( 2.7, 2.7 )
+
+[node name="ItemDescription" parent="." instance=ExtResource( 14 )]
+visible = false
+
+[connection signal="pressed" from="Pg1DownButton" to="." method="_on_Pg1DownButton_pressed"]
+[connection signal="pressed" from="Pg2DownButton" to="." method="_on_Pg2DownButton_pressed"]
+[connection signal="pressed" from="Pg2UpButton" to="." method="_on_Pg2UpButton_pressed"]
+[connection signal="pressed" from="Pg3UpButton" to="." method="_on_Pg3UpButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

@@ -32,9 +32,18 @@ var page3 = [
 	"stove #2",
 	"stove #3",
 	"tent",
-	"hammer",
-	"blueprint"
+	"wood door",
+	"metal door"
 ]
+
+var page4 = [
+	"armored door",
+	"furnace",
+	"hammer",
+	"blueprint",
+	"tool cabinet"
+]
+
 
 func _ready():
 	var i_slots = inventory_slots.get_children()
@@ -60,6 +69,7 @@ func initialize():
 	$Page1.show()
 	$Page2.hide()
 	$Page3.hide()
+	$Page4.hide()
 	reset_hover_effect()
 	initialize_crafting()
 
@@ -69,6 +79,7 @@ func _on_DownButton_pressed():
 	$Page1.hide()
 	$Page2.show()
 	$Page3.hide()
+	$Page4.hide()
 	initialize_crafting()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting3.png")
 
@@ -78,6 +89,7 @@ func _on_Pg2UpButton_pressed():
 	$Page1.show()
 	$Page2.hide()
 	$Page3.hide()
+	$Page4.hide()
 	initialize_crafting()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting1.png")
 	
@@ -87,8 +99,9 @@ func _on_Pg2DownButton_pressed():
 	$Page1.hide()
 	$Page2.hide()
 	$Page3.show()
+	$Page4.hide()
 	initialize_crafting()
-	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting2.png")
+	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting3.png")
 
 	
 func _on_Pg3UpButton_pressed():
@@ -97,6 +110,28 @@ func _on_Pg3UpButton_pressed():
 	$Page1.hide()
 	$Page2.show()
 	$Page3.hide()
+	$Page4.hide()
+	initialize_crafting()
+	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting3.png")
+
+
+func _on_Pg3DownButton_pressed():
+	play_craft_sound()
+	page = 4
+	$Page1.hide()
+	$Page2.hide()
+	$Page3.hide()
+	$Page4.show()
+	initialize_crafting()
+	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting2.png")
+
+func _on_Pg4UpButton_pressed():
+	play_craft_sound()
+	page = 3
+	$Page1.hide()
+	$Page2.hide()
+	$Page3.show()
+	$Page4.hide()
 	initialize_crafting()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/crafting3.png")
 
@@ -121,10 +156,12 @@ func reset_hover_effect():
 	for item in page2:
 		$Page2.get_node(item).scale = Vector2(3,3)
 	for item in page3:
+		$Page3.get_node(item).scale = Vector2(3,3)
+	for item in page4:
 		if item == "blueprint" or item == "hammer":
-			$Page3.get_node(item).scale = Vector2(6,6)
+			$Page4.get_node(item).scale = Vector2(6,6)
 		else:
-			$Page3.get_node(item).scale = Vector2(3,3)
+			$Page4.get_node(item).scale = Vector2(3,3)
 
 func initialize_crafting():
 	PlayerInventory.HotbarSlots = $HotbarSlots
@@ -148,6 +185,12 @@ func initialize_crafting():
 				$Page3.get_node(item).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page3.get_node(item).modulate = Color(1, 1, 1, 0.4)
+	elif page == 4:
+		for item in page4:
+			if PlayerInventory.isSufficientMaterialToCraft(item):
+				$Page4.get_node(item).modulate = Color(1, 1, 1, 1)
+			else:
+				$Page4.get_node(item).modulate = Color(1, 1, 1, 0.4)
  
 
 func _physics_process(delta):
@@ -430,9 +473,9 @@ func _on_StoveButton3_pressed():
 func _on_DoorButton_pressed():
 	craftable_item_pressed()
 func _on_DoorButton_mouse_entered():
-	entered_crafting_area("door")
+	entered_crafting_area("wood door")
 func _on_DoorButton_mouse_exited():
-	exited_crafting_area("door")
+	exited_crafting_area("wood door")
 
 
 func _on_BlueprintButton_pressed():
@@ -448,3 +491,34 @@ func _on_HammerButton_mouse_entered():
 	entered_crafting_area("hammer")
 func _on_HammerButton_mouse_exited():
 	exited_crafting_area("hammer")
+
+func _on_MetalDoorButton_pressed():
+	craftable_item_pressed()
+func _on_MetalDoorButton_mouse_entered():
+	entered_crafting_area("metal door")
+func _on_MetalDoorButton_mouse_exited():
+	exited_crafting_area("metal door")
+
+
+func _on_FurnaceButton_pressed():
+	craftable_item_pressed()
+func _on_FurnaceButton_mouse_entered():
+	entered_crafting_area("furnace")
+func _on_FurnaceButton_mouse_exited():
+	exited_crafting_area("furnace")
+
+
+func _on_ArmoredDoor_pressed():
+	craftable_item_pressed()
+func _on_ArmoredDoor_mouse_entered():
+	entered_crafting_area("armored door")
+func _on_ArmoredDoor_mouse_exited():
+	exited_crafting_area("armored door")
+
+
+func _on_ToolCabinetButton_pressed():
+	craftable_item_pressed()
+func _on_ToolCabinetButton_mouse_entered():
+	entered_crafting_area("tool cabinet")
+func _on_ToolCabinetButton_mouse_exited():
+	exited_crafting_area("tool cabinet")

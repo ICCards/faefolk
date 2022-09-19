@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Clock/CurrentTime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/Workbench/Workbench.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/UpgradeWallMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/UpgradeDoorMenu/RadialDoorMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/Player/Player/UserInterface/Stove/Stove.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerStatsUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://World/Player/Player/UserInterface/Chest/OpenChest.tscn" type="PackedScene" id=14]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
@@ -139,6 +140,13 @@ margin_left = 10.0
 margin_top = 299.0
 margin_right = -708.0
 margin_bottom = -89.0
+
+[node name="Stove" parent="." instance=ExtResource( 7 )]
+visible = false
+margin_left = 195.0
+margin_top = 26.0
+margin_right = -829.0
+margin_bottom = -574.0
 
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
 position = Vector2( 866, 7 )

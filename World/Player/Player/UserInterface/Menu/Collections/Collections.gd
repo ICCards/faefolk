@@ -35,13 +35,8 @@ func _physics_process(delta):
 func set_adjusted_pos():
 	yield(get_tree(), "idle_frame")
 	var height = $CollectionItemDescription/GridContainer.rect_size.y
-	#print(height)
-	print(get_local_mouse_position().y + 25 + height)
 	adjusted_pos = get_local_mouse_position() + Vector2(20 , 25)
-#		adjusted_pos = Vector2(get_local_mouse_position().x + 20, 460)
-#	else:
-#		adjusted_pos = get_local_mouse_position() + Vector2(20 , 25)
-	
+
 
 func initialize():
 	show()

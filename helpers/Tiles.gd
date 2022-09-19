@@ -7,6 +7,10 @@ var ocean_tiles = null
 var dirt_tiles = null
 var wall_tiles = null
 var foundation_tiles = null
+var object_tiles = null
+var fence_tiles = null
+var light_tiles = null
+
 
 func validate_tiles(location, dimensions):
 	var active = false

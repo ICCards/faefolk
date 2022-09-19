@@ -1,8 +1,8 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/workbench 2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/placable_object_preview/door.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/placable_object_preview/wood door.png" type="Texture" id=3]
 [ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood box.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd" type="Script" id=6]
@@ -25,6 +25,10 @@
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/stove 3.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Images/inventory_icons/Construction/hammer.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Images/inventory_icons/Construction/blueprint.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Images/placable_object_preview/metal door.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Images/placable_object_preview/tool cabinet/down.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Images/placable_object_preview/armored door.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Images/placable_object_preview/furnace/down.png" type="Texture" id=29]
 
 [node name="Crafting" type="Control"]
 rect_scale = Vector2( 0.5, 0.5 )
@@ -281,15 +285,6 @@ flat = true
 visible = false
 position = Vector2( 750, 0 )
 
-[node name="Pg3UpButton" type="Button" parent="Page3"]
-margin_left = 516.0
-margin_top = 234.0
-margin_right = 576.0
-margin_bottom = 306.0
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
 [node name="stove #2" type="Sprite" parent="Page3"]
 position = Vector2( -460, 398 )
 scale = Vector2( 3, 3 )
@@ -301,56 +296,42 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 23 )
 
 [node name="tent" type="Sprite" parent="Page3"]
-position = Vector2( -6, 400 )
+position = Vector2( -16, 400 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 9 )
 
-[node name="door" type="Sprite" parent="Page3"]
-position = Vector2( 228, 420 )
+[node name="wood door" type="Sprite" parent="Page3"]
+position = Vector2( 188, 420 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 
-[node name="blueprint" type="Sprite" parent="Page3"]
-position = Vector2( 446, 356 )
-scale = Vector2( 6, 6 )
-texture = ExtResource( 25 )
-
-[node name="hammer" type="Sprite" parent="Page3"]
-position = Vector2( 446, 488 )
-scale = Vector2( 6, 6 )
-texture = ExtResource( 24 )
+[node name="metal door" type="Sprite" parent="Page3"]
+position = Vector2( 410, 410 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 26 )
 
 [node name="TentButton" type="Button" parent="Page3"]
-margin_left = -90.0
+margin_left = -100.0
 margin_top = 264.0
-margin_right = 76.0
+margin_right = 66.0
 margin_bottom = 540.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
 [node name="DoorButton" type="Button" parent="Page3"]
-margin_left = 132.0
+margin_left = 92.0
 margin_top = 300.0
-margin_right = 324.0
+margin_right = 284.0
 margin_bottom = 542.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="BlueprintButton" type="Button" parent="Page3"]
-margin_left = 418.0
-margin_top = 306.0
-margin_right = 522.0
-margin_bottom = 410.0
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="HammerButton" type="Button" parent="Page3"]
-margin_left = 416.0
-margin_top = 436.0
-margin_right = 520.0
+[node name="MetalDoorButton" type="Button" parent="Page3"]
+margin_left = 314.0
+margin_top = 280.0
+margin_right = 506.0
 margin_bottom = 540.0
 focus_mode = 0
 enabled_focus_mode = 0
@@ -370,6 +351,107 @@ margin_left = -332.0
 margin_top = 250.0
 margin_right = -130.0
 margin_bottom = 542.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Pg3UpButton" type="Button" parent="Page3"]
+margin_left = 516.0
+margin_top = 234.0
+margin_right = 576.0
+margin_bottom = 306.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Pg3DownButton" type="Button" parent="Page3"]
+margin_left = 516.0
+margin_top = 432.0
+margin_right = 576.0
+margin_bottom = 504.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Page4" type="Node2D" parent="."]
+visible = false
+position = Vector2( 750, 0 )
+
+[node name="blueprint" type="Sprite" parent="Page4"]
+position = Vector2( 180, 342 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 25 )
+
+[node name="hammer" type="Sprite" parent="Page4"]
+position = Vector2( 182, 466 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 24 )
+
+[node name="furnace" type="Sprite" parent="Page4"]
+position = Vector2( 9.99997, 398 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 29 )
+
+[node name="tool cabinet" type="Sprite" parent="Page4"]
+position = Vector2( -210, 404 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 27 )
+
+[node name="armored door" type="Sprite" parent="Page4"]
+position = Vector2( -464, 412 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 28 )
+
+[node name="BlueprintButton" type="Button" parent="Page4"]
+margin_left = 128.0
+margin_top = 292.0
+margin_right = 232.0
+margin_bottom = 396.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="FurnaceButton" type="Button" parent="Page4"]
+margin_left = -40.0
+margin_top = 284.0
+margin_right = 60.0
+margin_bottom = 544.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="ToolCabinetButton" type="Button" parent="Page4"]
+margin_left = -308.0
+margin_top = 266.0
+margin_right = -112.0
+margin_bottom = 540.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="ArmoredDoor" type="Button" parent="Page4"]
+margin_left = -562.0
+margin_top = 282.0
+margin_right = -366.0
+margin_bottom = 544.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="HammerButton" type="Button" parent="Page4"]
+margin_left = 130.0
+margin_top = 416.0
+margin_right = 234.0
+margin_bottom = 520.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Pg4UpButton" type="Button" parent="Page4"]
+margin_left = 516.0
+margin_top = 234.0
+margin_right = 576.0
+margin_bottom = 306.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -590,22 +672,36 @@ scale = Vector2( 5.4, 5.4 )
 [connection signal="pressed" from="Page2/KitchenButton" to="." method="_on_KitchenButton_pressed"]
 [connection signal="pressed" from="Page2/Pg2UpButton" to="." method="_on_Pg2UpButton_pressed"]
 [connection signal="pressed" from="Page2/Pg2DownButton" to="." method="_on_Pg2DownButton_pressed"]
-[connection signal="pressed" from="Page3/Pg3UpButton" to="." method="_on_Pg3UpButton_pressed"]
 [connection signal="mouse_entered" from="Page3/TentButton" to="." method="_on_TentButton_mouse_entered"]
 [connection signal="mouse_exited" from="Page3/TentButton" to="." method="_on_TentButton_mouse_exited"]
 [connection signal="pressed" from="Page3/TentButton" to="." method="_on_TentButton_pressed"]
 [connection signal="mouse_entered" from="Page3/DoorButton" to="." method="_on_DoorButton_mouse_entered"]
 [connection signal="mouse_exited" from="Page3/DoorButton" to="." method="_on_DoorButton_mouse_exited"]
 [connection signal="pressed" from="Page3/DoorButton" to="." method="_on_DoorButton_pressed"]
-[connection signal="mouse_entered" from="Page3/BlueprintButton" to="." method="_on_BlueprintButton_mouse_entered"]
-[connection signal="mouse_exited" from="Page3/BlueprintButton" to="." method="_on_BlueprintButton_mouse_exited"]
-[connection signal="pressed" from="Page3/BlueprintButton" to="." method="_on_BlueprintButton_pressed"]
-[connection signal="mouse_entered" from="Page3/HammerButton" to="." method="_on_HammerButton_mouse_entered"]
-[connection signal="mouse_exited" from="Page3/HammerButton" to="." method="_on_HammerButton_mouse_exited"]
-[connection signal="pressed" from="Page3/HammerButton" to="." method="_on_HammerButton_pressed"]
+[connection signal="mouse_entered" from="Page3/MetalDoorButton" to="." method="_on_MetalDoorButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page3/MetalDoorButton" to="." method="_on_MetalDoorButton_mouse_exited"]
+[connection signal="pressed" from="Page3/MetalDoorButton" to="." method="_on_MetalDoorButton_pressed"]
 [connection signal="mouse_entered" from="Page3/StoveButton2" to="." method="_on_StoveButton2_mouse_entered"]
 [connection signal="mouse_exited" from="Page3/StoveButton2" to="." method="_on_StoveButton2_mouse_exited"]
 [connection signal="pressed" from="Page3/StoveButton2" to="." method="_on_StoveButton2_pressed"]
 [connection signal="mouse_entered" from="Page3/StoveButton3" to="." method="_on_StoveButton3_mouse_entered"]
 [connection signal="mouse_exited" from="Page3/StoveButton3" to="." method="_on_StoveButton3_mouse_exited"]
 [connection signal="pressed" from="Page3/StoveButton3" to="." method="_on_StoveButton3_pressed"]
+[connection signal="pressed" from="Page3/Pg3UpButton" to="." method="_on_Pg3UpButton_pressed"]
+[connection signal="pressed" from="Page3/Pg3DownButton" to="." method="_on_Pg3DownButton_pressed"]
+[connection signal="mouse_entered" from="Page4/BlueprintButton" to="." method="_on_BlueprintButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/BlueprintButton" to="." method="_on_BlueprintButton_mouse_exited"]
+[connection signal="pressed" from="Page4/BlueprintButton" to="." method="_on_BlueprintButton_pressed"]
+[connection signal="mouse_entered" from="Page4/FurnaceButton" to="." method="_on_FurnaceButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/FurnaceButton" to="." method="_on_FurnaceButton_mouse_exited"]
+[connection signal="pressed" from="Page4/FurnaceButton" to="." method="_on_FurnaceButton_pressed"]
+[connection signal="mouse_entered" from="Page4/ToolCabinetButton" to="." method="_on_ToolCabinetButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/ToolCabinetButton" to="." method="_on_ToolCabinetButton_mouse_exited"]
+[connection signal="pressed" from="Page4/ToolCabinetButton" to="." method="_on_ToolCabinetButton_pressed"]
+[connection signal="mouse_entered" from="Page4/ArmoredDoor" to="." method="_on_ArmoredDoor_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/ArmoredDoor" to="." method="_on_ArmoredDoor_mouse_exited"]
+[connection signal="pressed" from="Page4/ArmoredDoor" to="." method="_on_ArmoredDoor_pressed"]
+[connection signal="mouse_entered" from="Page4/HammerButton" to="." method="_on_HammerButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/HammerButton" to="." method="_on_HammerButton_mouse_exited"]
+[connection signal="pressed" from="Page4/HammerButton" to="." method="_on_HammerButton_pressed"]
+[connection signal="pressed" from="Page4/Pg4UpButton" to="." method="_on_Pg4UpButton_pressed"]
