@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -1690,7 +1690,666 @@ points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
 } ]
 4/z_index = 0
 
+[sub_resource type="TileSet" id=490]
+0/name = "twig.png 0"
+0/texture = ExtResource( 19 )
+0/tex_offset = Vector2( 0, -64 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 448, 96 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186, Vector2( 10, 0 ), 176, Vector2( 11, 0 ), 152, Vector2( 12, 0 ), 50, Vector2( 13, 0 ), 26 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 96 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 473 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 3, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 4, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 6, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 7, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 8, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 9, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 10, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 11, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 12, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 13, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 473 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "wood.png 1"
+1/texture = ExtResource( 14 )
+1/tex_offset = Vector2( 0, -64 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 448, 96 )
+1/tile_mode = 1
+1/autotile/bitmask_mode = 1
+1/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186, Vector2( 10, 0 ), 176, Vector2( 11, 0 ), 152, Vector2( 12, 0 ), 50, Vector2( 13, 0 ), 26 ]
+1/autotile/icon_coordinate = Vector2( 0, 0 )
+1/autotile/tile_size = Vector2( 32, 96 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 474 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 13, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 3, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 4, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 6, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 7, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 8, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 9, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 10, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 11, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 12, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 474 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "stone.png 2"
+2/texture = ExtResource( 16 )
+2/tex_offset = Vector2( 0, -64 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 448, 96 )
+2/tile_mode = 1
+2/autotile/bitmask_mode = 1
+2/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186, Vector2( 10, 0 ), 176, Vector2( 11, 0 ), 152, Vector2( 12, 0 ), 50, Vector2( 13, 0 ), 26 ]
+2/autotile/icon_coordinate = Vector2( 0, 0 )
+2/autotile/tile_size = Vector2( 32, 96 )
+2/autotile/spacing = 0
+2/autotile/occluder_map = [  ]
+2/autotile/navpoly_map = [  ]
+2/autotile/priority_map = [  ]
+2/autotile/z_index_map = [  ]
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 475 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 3, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 4, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 6, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 7, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 8, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 9, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 10, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 11, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 12, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 13, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 475 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+3/name = "metal.png 3"
+3/texture = ExtResource( 27 )
+3/tex_offset = Vector2( 0, -64 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 448, 96 )
+3/tile_mode = 1
+3/autotile/bitmask_mode = 1
+3/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186, Vector2( 10, 0 ), 176, Vector2( 11, 0 ), 152, Vector2( 12, 0 ), 50, Vector2( 13, 0 ), 26 ]
+3/autotile/icon_coordinate = Vector2( 0, 0 )
+3/autotile/tile_size = Vector2( 32, 96 )
+3/autotile/spacing = 0
+3/autotile/occluder_map = [  ]
+3/autotile/navpoly_map = [  ]
+3/autotile/priority_map = [  ]
+3/autotile/z_index_map = [  ]
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 476 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 13, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 3, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 4, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 6, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 7, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 8, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 9, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 10, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 11, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 12, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 476 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+4/name = "armored.png 4"
+4/texture = ExtResource( 25 )
+4/tex_offset = Vector2( 0, -64 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 448, 96 )
+4/tile_mode = 1
+4/autotile/bitmask_mode = 1
+4/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 56, Vector2( 3, 0 ), 24, Vector2( 4, 0 ), 146, Vector2( 5, 0 ), 178, Vector2( 6, 0 ), 154, Vector2( 7, 0 ), 58, Vector2( 8, 0 ), 184, Vector2( 9, 0 ), 186, Vector2( 10, 0 ), 176, Vector2( 11, 0 ), 152, Vector2( 12, 0 ), 50, Vector2( 13, 0 ), 26 ]
+4/autotile/icon_coordinate = Vector2( 0, 0 )
+4/autotile/tile_size = Vector2( 32, 96 )
+4/autotile/spacing = 0
+4/autotile/occluder_map = [  ]
+4/autotile/navpoly_map = [  ]
+4/autotile/priority_map = [  ]
+4/autotile/z_index_map = [  ]
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape = SubResource( 477 )
+4/shape_one_way = false
+4/shape_one_way_margin = 1.0
+4/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 3, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 4, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 6, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 7, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 8, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 9, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 10, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 11, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 12, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 13, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 477 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+4/z_index = 0
+
 [sub_resource type="TileSet" id=450]
+0/name = "twig.png 0"
+0/texture = ExtResource( 21 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 256, 256 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 16, Vector2( 0, 1 ), 144, Vector2( 0, 2 ), 146, Vector2( 0, 3 ), 18, Vector2( 0, 4 ), 434, Vector2( 0, 5 ), 62, Vector2( 0, 6 ), 218, Vector2( 0, 7 ), 440, Vector2( 1, 0 ), 432, Vector2( 1, 1 ), 438, Vector2( 1, 2 ), 54, Vector2( 1, 3 ), 48, Vector2( 1, 4 ), 248, Vector2( 1, 5 ), 155, Vector2( 1, 6 ), 59, Vector2( 1, 7 ), 182, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 2, 3 ), 56, Vector2( 2, 4 ), 26, Vector2( 2, 5 ), 152, Vector2( 2, 6 ), 443, Vector2( 3, 0 ), 216, Vector2( 3, 1 ), 219, Vector2( 3, 2 ), 27, Vector2( 3, 3 ), 24, Vector2( 3, 4 ), 50, Vector2( 3, 5 ), 176, Vector2( 3, 6 ), 254, Vector2( 4, 0 ), 446, Vector2( 4, 1 ), 191, Vector2( 4, 2 ), 442, Vector2( 4, 3 ), 190, Vector2( 4, 4 ), 178, Vector2( 4, 5 ), 58, Vector2( 5, 0 ), 506, Vector2( 5, 1 ), 251, Vector2( 5, 2 ), 250, Vector2( 5, 3 ), 187, Vector2( 5, 4 ), 184, Vector2( 5, 5 ), 154, Vector2( 6, 0 ), 510, Vector2( 6, 1 ), 447, Vector2( 6, 2 ), 186, Vector2( 7, 0 ), 507, Vector2( 7, 1 ), 255 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "wood.png 1"
+1/texture = ExtResource( 17 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 256, 256 )
+1/tile_mode = 1
+1/autotile/bitmask_mode = 1
+1/autotile/bitmask_flags = [ Vector2( 0, 0 ), 16, Vector2( 0, 1 ), 144, Vector2( 0, 2 ), 146, Vector2( 0, 3 ), 18, Vector2( 0, 4 ), 434, Vector2( 0, 5 ), 62, Vector2( 0, 6 ), 218, Vector2( 0, 7 ), 440, Vector2( 1, 0 ), 432, Vector2( 1, 1 ), 438, Vector2( 1, 2 ), 54, Vector2( 1, 3 ), 48, Vector2( 1, 4 ), 248, Vector2( 1, 5 ), 155, Vector2( 1, 6 ), 59, Vector2( 1, 7 ), 182, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 2, 3 ), 56, Vector2( 2, 4 ), 26, Vector2( 2, 5 ), 152, Vector2( 2, 6 ), 443, Vector2( 3, 0 ), 216, Vector2( 3, 1 ), 219, Vector2( 3, 2 ), 27, Vector2( 3, 3 ), 24, Vector2( 3, 4 ), 50, Vector2( 3, 5 ), 176, Vector2( 3, 6 ), 254, Vector2( 4, 0 ), 446, Vector2( 4, 1 ), 191, Vector2( 4, 2 ), 442, Vector2( 4, 3 ), 190, Vector2( 4, 4 ), 178, Vector2( 4, 5 ), 58, Vector2( 5, 0 ), 506, Vector2( 5, 1 ), 251, Vector2( 5, 2 ), 250, Vector2( 5, 3 ), 187, Vector2( 5, 4 ), 184, Vector2( 5, 5 ), 154, Vector2( 6, 0 ), 510, Vector2( 6, 1 ), 447, Vector2( 6, 2 ), 186, Vector2( 7, 0 ), 507, Vector2( 7, 1 ), 255 ]
+1/autotile/icon_coordinate = Vector2( 0, 0 )
+1/autotile/tile_size = Vector2( 32, 32 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "stone.png 2"
+2/texture = ExtResource( 31 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 256, 256 )
+2/tile_mode = 1
+2/autotile/bitmask_mode = 1
+2/autotile/bitmask_flags = [ Vector2( 0, 0 ), 16, Vector2( 0, 1 ), 144, Vector2( 0, 2 ), 146, Vector2( 0, 3 ), 18, Vector2( 0, 4 ), 434, Vector2( 0, 5 ), 62, Vector2( 0, 6 ), 218, Vector2( 0, 7 ), 440, Vector2( 1, 0 ), 432, Vector2( 1, 1 ), 438, Vector2( 1, 2 ), 54, Vector2( 1, 3 ), 48, Vector2( 1, 4 ), 248, Vector2( 1, 5 ), 155, Vector2( 1, 6 ), 59, Vector2( 1, 7 ), 182, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 2, 3 ), 56, Vector2( 2, 4 ), 26, Vector2( 2, 5 ), 152, Vector2( 2, 6 ), 443, Vector2( 3, 0 ), 216, Vector2( 3, 1 ), 219, Vector2( 3, 2 ), 27, Vector2( 3, 3 ), 24, Vector2( 3, 4 ), 50, Vector2( 3, 5 ), 176, Vector2( 3, 6 ), 254, Vector2( 4, 0 ), 446, Vector2( 4, 1 ), 191, Vector2( 4, 2 ), 442, Vector2( 4, 3 ), 190, Vector2( 4, 4 ), 178, Vector2( 4, 5 ), 58, Vector2( 5, 0 ), 506, Vector2( 5, 1 ), 251, Vector2( 5, 2 ), 250, Vector2( 5, 3 ), 187, Vector2( 5, 4 ), 184, Vector2( 5, 5 ), 154, Vector2( 6, 0 ), 510, Vector2( 6, 1 ), 447, Vector2( 6, 2 ), 186, Vector2( 7, 0 ), 507, Vector2( 7, 1 ), 255 ]
+2/autotile/icon_coordinate = Vector2( 0, 0 )
+2/autotile/tile_size = Vector2( 32, 32 )
+2/autotile/spacing = 0
+2/autotile/occluder_map = [  ]
+2/autotile/navpoly_map = [  ]
+2/autotile/priority_map = [  ]
+2/autotile/z_index_map = [  ]
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "metal.png 3"
+3/texture = ExtResource( 30 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 256, 256 )
+3/tile_mode = 1
+3/autotile/bitmask_mode = 1
+3/autotile/bitmask_flags = [ Vector2( 0, 0 ), 16, Vector2( 0, 1 ), 144, Vector2( 0, 2 ), 146, Vector2( 0, 3 ), 18, Vector2( 0, 4 ), 434, Vector2( 0, 5 ), 62, Vector2( 0, 6 ), 218, Vector2( 0, 7 ), 440, Vector2( 1, 0 ), 432, Vector2( 1, 1 ), 438, Vector2( 1, 2 ), 54, Vector2( 1, 3 ), 48, Vector2( 1, 4 ), 248, Vector2( 1, 5 ), 155, Vector2( 1, 6 ), 59, Vector2( 1, 7 ), 182, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 2, 3 ), 56, Vector2( 2, 4 ), 26, Vector2( 2, 5 ), 152, Vector2( 2, 6 ), 443, Vector2( 3, 0 ), 216, Vector2( 3, 1 ), 219, Vector2( 3, 2 ), 27, Vector2( 3, 3 ), 24, Vector2( 3, 4 ), 50, Vector2( 3, 5 ), 176, Vector2( 3, 6 ), 254, Vector2( 4, 0 ), 446, Vector2( 4, 1 ), 191, Vector2( 4, 2 ), 442, Vector2( 4, 3 ), 190, Vector2( 4, 4 ), 178, Vector2( 4, 5 ), 58, Vector2( 5, 0 ), 506, Vector2( 5, 1 ), 251, Vector2( 5, 2 ), 250, Vector2( 5, 3 ), 187, Vector2( 5, 4 ), 184, Vector2( 5, 5 ), 154, Vector2( 6, 0 ), 510, Vector2( 6, 1 ), 447, Vector2( 6, 2 ), 186, Vector2( 7, 0 ), 507, Vector2( 7, 1 ), 255 ]
+3/autotile/icon_coordinate = Vector2( 0, 0 )
+3/autotile/tile_size = Vector2( 32, 32 )
+3/autotile/spacing = 0
+3/autotile/occluder_map = [  ]
+3/autotile/navpoly_map = [  ]
+3/autotile/priority_map = [  ]
+3/autotile/z_index_map = [  ]
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "armored.png 4"
+4/texture = ExtResource( 29 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 256, 256 )
+4/tile_mode = 1
+4/autotile/bitmask_mode = 1
+4/autotile/bitmask_flags = [ Vector2( 0, 0 ), 16, Vector2( 0, 1 ), 144, Vector2( 0, 2 ), 146, Vector2( 0, 3 ), 18, Vector2( 0, 4 ), 434, Vector2( 0, 5 ), 62, Vector2( 0, 6 ), 218, Vector2( 0, 7 ), 440, Vector2( 1, 0 ), 432, Vector2( 1, 1 ), 438, Vector2( 1, 2 ), 54, Vector2( 1, 3 ), 48, Vector2( 1, 4 ), 248, Vector2( 1, 5 ), 155, Vector2( 1, 6 ), 59, Vector2( 1, 7 ), 182, Vector2( 2, 0 ), 504, Vector2( 2, 1 ), 511, Vector2( 2, 2 ), 63, Vector2( 2, 3 ), 56, Vector2( 2, 4 ), 26, Vector2( 2, 5 ), 152, Vector2( 2, 6 ), 443, Vector2( 3, 0 ), 216, Vector2( 3, 1 ), 219, Vector2( 3, 2 ), 27, Vector2( 3, 3 ), 24, Vector2( 3, 4 ), 50, Vector2( 3, 5 ), 176, Vector2( 3, 6 ), 254, Vector2( 4, 0 ), 446, Vector2( 4, 1 ), 191, Vector2( 4, 2 ), 442, Vector2( 4, 3 ), 190, Vector2( 4, 4 ), 178, Vector2( 4, 5 ), 58, Vector2( 5, 0 ), 506, Vector2( 5, 1 ), 251, Vector2( 5, 2 ), 250, Vector2( 5, 3 ), 187, Vector2( 5, 4 ), 184, Vector2( 5, 5 ), 154, Vector2( 6, 0 ), 510, Vector2( 6, 1 ), 447, Vector2( 6, 2 ), 186, Vector2( 7, 0 ), 507, Vector2( 7, 1 ), 255 ]
+4/autotile/icon_coordinate = Vector2( 0, 0 )
+4/autotile/tile_size = Vector2( 32, 32 )
+4/autotile/spacing = 0
+4/autotile/occluder_map = [  ]
+4/autotile/navpoly_map = [  ]
+4/autotile/priority_map = [  ]
+4/autotile/z_index_map = [  ]
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+
+[sub_resource type="TileSet" id=491]
 0/name = "twig.png 0"
 0/texture = ExtResource( 21 )
 0/tex_offset = Vector2( 0, 0 )
@@ -2053,8 +2712,23 @@ cell_y_sort = true
 show_collision = true
 format = 1
 
+[node name="SelectedWallTiles" type="TileMap" parent="PlacableTiles"]
+modulate = Color( 0, 0.717647, 1, 1 )
+tile_set = SubResource( 490 )
+cell_size = Vector2( 32, 32 )
+cell_tile_origin = 2
+cell_y_sort = true
+show_collision = true
+format = 1
+
 [node name="FoundationTiles" type="TileMap" parent="PlacableTiles"]
 tile_set = SubResource( 450 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="SelectedFoundationTiles" type="TileMap" parent="PlacableTiles"]
+modulate = Color( 0, 0.717647, 1, 1 )
+tile_set = SubResource( 491 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
@@ -2100,6 +2774,7 @@ visible = false
 [node name="FullMapParticles" parent="." instance=ExtResource( 23 )]
 
 [node name="ValidTiles" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1

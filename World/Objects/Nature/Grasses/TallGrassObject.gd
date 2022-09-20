@@ -77,7 +77,7 @@ func _on_Area2D_area_entered(area):
 		is_front_visible = false
 		destroy()
 	else:
-		yield(get_tree().create_timer(rand_range(0.1, 0.5)), "timeout")
+		yield(get_tree().create_timer(rand_range(0.0, 0.5)), "timeout")
 		$AnimationPlayer.play("animate front")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()

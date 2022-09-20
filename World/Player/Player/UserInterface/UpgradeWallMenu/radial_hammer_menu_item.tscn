@@ -26,6 +26,5 @@ texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 texture_click_mask = ExtResource( 1 )
 
-[connection signal="button_up" from="button" to="." method="_on_button_button_up"]
 [connection signal="mouse_entered" from="button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="button" to="." method="_on_button_mouse_exited"]

@@ -1,4 +1,4 @@
-extends Node2D
+extends YSort
 
 onready var WallHitEffect = preload("res://World/Objects/Tiles/WallHitEffect.tscn")
 
@@ -26,28 +26,35 @@ func _ready():
 	
 func remove_icon():
 	$SelectedBorder.hide()
+	Tiles.selected_wall_tiles.set_cellv(location,-1)
+	Tiles.selected_foundation_tiles.set_cellv(location,-1)
 	
 func set_type():
 	match item_name:
 		"wall":
 			match tier:
 				"twig":
+					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/twig.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.TWIG)
 					health = Stats.MAX_TWIG_WALL
 					max_health = Stats.MAX_TWIG_WALL
 				"wood":
+					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/wood.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.WOOD)
 					health = Stats.MAX_WOOD_WALL
 					max_health = Stats.MAX_WOOD_WALL
 				"stone":
+					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/stone.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.STONE)
 					health = Stats.MAX_STONE_WALL
 					max_health = Stats.MAX_STONE_WALL
 				"metal":
+					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/metal.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.METAL)
 					health = Stats.MAX_METAL_WALL
 					max_health = Stats.MAX_METAL_WALL
 				"armored":
+					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/armored.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.ARMORED)
 					health = Stats.MAX_ARMORED_WALL
 					max_health = Stats.MAX_ARMORED_WALL
@@ -145,8 +152,42 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 			var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			if tool_name == "hammer":
 				$SelectedBorder.show()
+				show_selected_tile()
+#				Tiles.wall_tiles.set_cellv(location,-1)
+#				var autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
+#				Tiles.selected_wall_tiles.set_cell(location.x, location.y, false, false, false)
+#				$SelectedWallVisual.frame = autotile_cord.x 
+#				$SelectedWallVisual.show()
 				Server.player_node.get_node("Camera2D/UserInterface/RadialUpgradeMenu").initialize(location, self)
 
+func show_selected_tile():
+	match item_name:
+		"wall":
+			var autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
+			match tier:
+				"twig":
+					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.TWIG, false, false, false, autotile_cord)
+				"wood":
+					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.WOOD, false, false, false, autotile_cord)
+				"stone":
+					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.STONE, false, false, false, autotile_cord)
+				"metal":
+					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.METAL, false, false, false, autotile_cord)
+				"armored":
+					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
+		"foundation":
+			var autotile_cord = Tiles.foundation_tiles.get_cell_autotile_coord(location.x, location.y)
+			match tier:
+				"twig":
+					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.TWIG, false, false, false, autotile_cord)
+				"wood":
+					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.WOOD, false, false, false, autotile_cord)
+				"stone":
+					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.STONE, false, false, false, autotile_cord)
+				"metal":
+					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.METAL, false, false, false, autotile_cord)
+				"armored":
+					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
 
 func _on_HammerRepairBox_area_entered(area):
 	set_type()

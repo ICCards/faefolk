@@ -209,7 +209,9 @@ func buildMap(map):
 	Tiles.ocean_tiles = $GeneratedTiles/ShallowOcean
 	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
 	Tiles.wall_tiles = $PlacableTiles/WallTiles
+	Tiles.selected_wall_tiles = $PlacableTiles/SelectedWallTiles
 	Tiles.foundation_tiles = $PlacableTiles/FoundationTiles
+	Tiles.selected_foundation_tiles = $PlacableTiles/SelectedFoundationTiles
 	Tiles.object_tiles = $PlacableTiles/ObjectTiles
 	Tiles.fence_tiles = $PlacableTiles/FenceTiles
 	Tiles.light_tiles = $PlacableTiles/LightTiles

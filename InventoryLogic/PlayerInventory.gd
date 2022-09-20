@@ -44,7 +44,7 @@ func clear_chest_data(chest_id):
 	PlayerInventory.chests.erase(chest_id)
 
 func isSufficientMaterialToCraft(item):
-	var ingredients = JsonData.crafting_data[item]["ingredients"]
+	var ingredients = JsonData.item_data[item]["Ingredients"]
 	for i in range(ingredients.size()):
 		if returnSufficentCraftingMaterial(ingredients[i][0], ingredients[i][1]):
 			continue
@@ -70,7 +70,7 @@ func returnSufficentCraftingMaterial(ingredient, amount_needed):
 func craft_item(item):
 	if item == "wood door side":
 		item = "wood door"
-	var ingredients = JsonData.crafting_data[item]["ingredients"]
+	var ingredients = JsonData.item_data[item]["Ingredients"]
 	for i in range(ingredients.size()):
 		remove_material(ingredients[i][0], ingredients[i][1])
 

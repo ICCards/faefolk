@@ -1,11 +1,13 @@
 extends Control
 
 var object_tiles
-var level
+var level 
 var crafting_item
 var item
 var page
-
+var level_1_items = ["cooked filet", "cooked wing", "bread", "cooked corn", "mushroom soup",  "tomato soup"]
+var level_2_items = ["baked zucchini", "blowfish tails", "asparagus omelette", "cooked green beans", "cauliflower soup", "potatoes with asparagus"]
+ 
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots
 
@@ -29,6 +31,45 @@ func _ready():
 		slots_in_hotbar[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
 
 
+func entered_crafting_area(item_name):
+	crafting_item = item_name
+	match page:
+		1:
+			$Tween.interpolate_property($Page1.get_node(item_name), "rect_scale",
+				$Page1.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		2:
+			$Tween.interpolate_property($Page2.get_node(item_name), "rect_scale",
+				$Page2.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		3:
+			$Tween.interpolate_property($Page3.get_node(item_name), "rect_scale",
+				$Page3.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+
+func exited_crafting_area(item_name):
+	crafting_item = null
+	match page:
+		1:
+			$Tween.interpolate_property($Page1.get_node(item_name), "rect_scale",
+				$Page1.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		2:
+			$Tween.interpolate_property($Page2.get_node(item_name), "rect_scale",
+				$Page2.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		3:
+			$Tween.interpolate_property($Page3.get_node(item_name), "rect_scale",
+				$Page3.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+
+
 func _physics_process(delta):
 	if item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.show()
@@ -38,14 +79,14 @@ func _physics_process(delta):
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.hide()
-	if crafting_item and not find_parent("UserInterface").holding_item:
-		if page == 1 and get_node("Page1/"+crafting_item).disabled:
+	if crafting_item: #and not find_parent("UserInterface").holding_item:
+		if page == 1 and get_node("Page1/"+crafting_item+"/button").disabled:
 			$ItemNameBox.show()
 			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == 2 and get_node("Page2/"+crafting_item).disabled:
+		elif page == 2 and get_node("Page2/"+crafting_item+"/button").disabled:
 			$ItemNameBox.show()
 			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == 3 and get_node("Page3/"+crafting_item).disabled:
+		elif page == 3 and get_node("Page3/"+crafting_item+"/button").disabled:
 			$ItemNameBox.show()
 			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
 		else:
@@ -69,7 +110,8 @@ func initialize():
 
 
 func _on_ExitButton_pressed():
-	get_parent().close_stove()
+	if not get_parent().holding_item:
+		get_parent().close_stove()
 
 
 func _on_Pg1DownButton_pressed():
