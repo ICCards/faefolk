@@ -1,306 +1,35 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/Stove/item_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/Player/Player/UserInterface/Stove/Page1.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Images/Inventory UI/Workbench/workbench menu.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Workbench/Workbench.gd" type="Script" id=6]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=12]
-[ext_resource path="res://World/Player/Player/UserInterface/Workbench/Page1.gd" type="Script" id=20]
 [ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=22]
-[ext_resource path="res://World/Player/Player/UserInterface/Workbench/Page2.gd" type="Script" id=32]
 [ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=33]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash top.png" type="Texture" id=34]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=35]
 [ext_resource path="res://Assets/Images/Misc/Buttons/exit button.png" type="Texture" id=36]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=37]
 
-[sub_resource type="Shader" id=16]
-code = "shader_type canvas_item;
-
-uniform vec4 flash_color : hint_color = vec4(1.0);
-uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV);
-	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
-	COLOR = color;
-}"
-
-[sub_resource type="ShaderMaterial" id=47]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=48]
-load_path = "res://.import/wood sword.png-af66c318e1ec1934e3987df9634c85c0.stex"
-
-[sub_resource type="ShaderMaterial" id=49]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=50]
-load_path = "res://.import/stone sword.png-56c5fd1d1ffda4c046df59db21e228d5.stex"
-
-[sub_resource type="ShaderMaterial" id=51]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=52]
-load_path = "res://.import/bronze sword.png-018b4653fbc211400e2002c1da41a499.stex"
-
-[sub_resource type="ShaderMaterial" id=53]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=54]
-load_path = "res://.import/iron sword.png-6868469f91ba9a7fea2685ee0b9311e1.stex"
-
-[sub_resource type="ShaderMaterial" id=55]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=56]
-load_path = "res://.import/gold sword.png-64341244dd71b8c06929f35f554d819c.stex"
-
-[sub_resource type="ShaderMaterial" id=57]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=58]
-load_path = "res://.import/stone watering can.png-da025bd76bbe884c2f538a7eb4d6a0b0.stex"
-
-[sub_resource type="ShaderMaterial" id=59]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=60]
-load_path = "res://.import/bronze watering can.png-3399a169b314c9b6ad5e07946786e42f.stex"
-
-[sub_resource type="ShaderMaterial" id=61]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=62]
-load_path = "res://.import/gold watering can.png-cf2f645a8f0da5bfa5a81480b07b8e04.stex"
-
-[sub_resource type="ShaderMaterial" id=63]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=64]
-load_path = "res://.import/fishing rod.png-78288acf24230b5640efdbddd5b0d3ee.stex"
-
-[sub_resource type="ShaderMaterial" id=65]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=66]
-load_path = "res://.import/scythe.png-73e9e60c03d17624b15dc424b86dbdd1.stex"
-
-[sub_resource type="ShaderMaterial" id=67]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=68]
-load_path = "res://.import/bow.png-1aa8a50c647121afd71fb7840a1a6179.stex"
-
-[sub_resource type="ShaderMaterial" id=69]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=70]
-load_path = "res://.import/arrow.png-e1fdbadf981c060c7bd014897a9073df.stex"
-
-[sub_resource type="Shader" id=71]
-code = "shader_type canvas_item;
-
-uniform vec4 flash_color : hint_color = vec4(1.0);
-uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV);
-	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
-	COLOR = color;
-}"
-
-[sub_resource type="ShaderMaterial" id=17]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=18]
-load_path = "res://.import/wood axe.png-15c11e6ffbb48745a1636e9ce085d9c2.stex"
-
-[sub_resource type="ShaderMaterial" id=19]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=20]
-load_path = "res://.import/stone axe.png-3cf57b66eeafd55f33be8caa67a1a8d9.stex"
-
-[sub_resource type="ShaderMaterial" id=21]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=22]
-load_path = "res://.import/bronze axe.png-667042627d0fae079dc6aa3ad374b40d.stex"
-
-[sub_resource type="ShaderMaterial" id=23]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=24]
-load_path = "res://.import/iron axe.png-ad2212f95c42a51bd8a478f66b73957c.stex"
-
-[sub_resource type="ShaderMaterial" id=25]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=26]
-load_path = "res://.import/gold axe.png-1f6d2cd4638b9bd3d005144fbad91597.stex"
-
-[sub_resource type="ShaderMaterial" id=27]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=28]
-load_path = "res://.import/wood pickaxe.png-68c53a1f7007c36f1562d8e69640de34.stex"
-
-[sub_resource type="ShaderMaterial" id=29]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=30]
-load_path = "res://.import/stone pickaxe.png-98bc99d67fd95244f8180de9b06d86fd.stex"
-
-[sub_resource type="ShaderMaterial" id=31]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=32]
-load_path = "res://.import/bronze pickaxe.png-cb2627a58f4eb6da51f70838f1c24942.stex"
-
-[sub_resource type="ShaderMaterial" id=33]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=34]
-load_path = "res://.import/iron pickaxe.png-ec913aea56adc705f6e7a399493ae80c.stex"
-
-[sub_resource type="ShaderMaterial" id=35]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=36]
-load_path = "res://.import/gold pickaxe.png-005763917f04b976b04b78ddd02f177a.stex"
-
-[sub_resource type="ShaderMaterial" id=37]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=38]
-load_path = "res://.import/wood hoe.png-f653c78ca7ffe9abb545865a44240fd4.stex"
-
-[sub_resource type="ShaderMaterial" id=39]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=40]
-load_path = "res://.import/stone hoe.png-c2823f3527f95181f82d355adcb230a1.stex"
-
-[sub_resource type="ShaderMaterial" id=41]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=42]
-load_path = "res://.import/bronze hoe.png-9b107a4501335b2120b0fb2ee8d7acd1.stex"
-
-[sub_resource type="ShaderMaterial" id=43]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=44]
-load_path = "res://.import/iron hoe.png-f1ce0884a3698ea74641dc190c49e763.stex"
-
-[sub_resource type="ShaderMaterial" id=45]
-resource_local_to_scene = true
-shader = SubResource( 71 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=46]
-load_path = "res://.import/gold hoe.png-632f09a6bff4002cc14a5ff7ce886fc6.stex"
-
 [node name="Workbench" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -300.0
-margin_right = -512.0
-margin_bottom = -300.0
 script = ExtResource( 6 )
 
 [node name="ItemNameBox" parent="." instance=ExtResource( 1 )]
 visible = false
 
 [node name="BackgroundButton" type="Button" parent="."]
-margin_left = -255.0
-margin_top = -108.0
-margin_right = 955.0
-margin_bottom = 672.0
+margin_left = -571.0
+margin_top = -382.0
+margin_right = 639.0
+margin_bottom = 398.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -313,16 +42,22 @@ scale = Vector2( 2.7, 2.7 )
 visible = false
 
 [node name="Bg" type="TextureRect" parent="."]
-margin_right = 633.0
-margin_bottom = 548.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -316.0
+margin_top = -274.0
+margin_right = 317.0
+margin_bottom = 274.0
 texture = ExtResource( 5 )
 stretch_mode = 4
 
 [node name="Title" type="Label" parent="."]
-margin_left = 33.0
-margin_top = 25.0
-margin_right = 818.0
-margin_bottom = 166.0
+margin_left = -283.0
+margin_top = -249.0
+margin_right = 502.0
+margin_bottom = -108.0
 rect_scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 12 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -331,234 +66,250 @@ custom_constants/shadow_offset_y = 6
 text = "Workbench:"
 clip_text = true
 
+[node name="Page1" type="GridContainer" parent="."]
+margin_left = -271.0
+margin_top = -187.0
+margin_right = -139.0
+margin_bottom = -135.0
+rect_scale = Vector2( 4, 4 )
+custom_constants/vseparation = 2
+custom_constants/hseparation = 12
+columns = 5
+script = ExtResource( 3 )
+
+[node name="wood axe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 16.0
+margin_bottom = 16.0
+
+[node name="stone axe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 28.0
+margin_right = 44.0
+margin_bottom = 16.0
+
+[node name="bronze axe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 56.0
+margin_right = 72.0
+margin_bottom = 16.0
+
+[node name="iron axe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 84.0
+margin_right = 100.0
+margin_bottom = 16.0
+
+[node name="gold axe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 112.0
+margin_right = 128.0
+margin_bottom = 16.0
+
+[node name="wood pickaxe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 16.0
+margin_bottom = 34.0
+
+[node name="stone pickaxe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 28.0
+margin_top = 18.0
+margin_right = 44.0
+margin_bottom = 34.0
+
+[node name="bronze pickaxe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 56.0
+margin_top = 18.0
+margin_right = 72.0
+margin_bottom = 34.0
+
+[node name="iron pickaxe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 84.0
+margin_top = 18.0
+margin_right = 100.0
+margin_bottom = 34.0
+
+[node name="gold pickaxe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 112.0
+margin_top = 18.0
+margin_right = 128.0
+margin_bottom = 34.0
+
+[node name="wood hoe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 36.0
+margin_right = 16.0
+margin_bottom = 52.0
+
+[node name="stone hoe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 28.0
+margin_top = 36.0
+margin_right = 44.0
+margin_bottom = 52.0
+
+[node name="bronze hoe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 56.0
+margin_top = 36.0
+margin_right = 72.0
+margin_bottom = 52.0
+
+[node name="iron hoe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 84.0
+margin_top = 36.0
+margin_right = 100.0
+margin_bottom = 52.0
+
+[node name="gold hoe" parent="Page1" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 112.0
+margin_top = 36.0
+margin_right = 128.0
+margin_bottom = 52.0
+
 [node name="Page2" type="GridContainer" parent="."]
 visible = false
-margin_left = 45.0
-margin_top = 87.0
-margin_right = 177.0
-margin_bottom = 139.0
+margin_left = -271.0
+margin_top = -187.0
+margin_right = -139.0
+margin_bottom = -135.0
 rect_scale = Vector2( 4, 4 )
 custom_constants/vseparation = 2
 custom_constants/hseparation = 12
 columns = 5
-script = ExtResource( 32 )
+script = ExtResource( 3 )
 
-[node name="wood sword" type="TextureButton" parent="Page2"]
-material = SubResource( 47 )
+[node name="wood sword" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 16.0
 margin_bottom = 16.0
-texture_normal = SubResource( 48 )
 
-[node name="stone sword" type="TextureButton" parent="Page2"]
-material = SubResource( 49 )
+[node name="stone sword" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 28.0
 margin_right = 44.0
 margin_bottom = 16.0
-texture_normal = SubResource( 50 )
 
-[node name="bronze sword" type="TextureButton" parent="Page2"]
-material = SubResource( 51 )
+[node name="bronze sword" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 56.0
 margin_right = 72.0
 margin_bottom = 16.0
-texture_normal = SubResource( 52 )
 
-[node name="iron sword" type="TextureButton" parent="Page2"]
-material = SubResource( 53 )
+[node name="iron sword" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 84.0
 margin_right = 100.0
 margin_bottom = 16.0
-texture_normal = SubResource( 54 )
 
-[node name="gold sword" type="TextureButton" parent="Page2"]
-material = SubResource( 55 )
+[node name="gold sword" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 112.0
 margin_right = 128.0
 margin_bottom = 16.0
-texture_normal = SubResource( 56 )
 
-[node name="stone watering can" type="TextureButton" parent="Page2"]
-material = SubResource( 57 )
+[node name="stone watering can" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 18.0
 margin_right = 16.0
 margin_bottom = 34.0
-texture_normal = SubResource( 58 )
 
-[node name="bronze watering can" type="TextureButton" parent="Page2"]
-material = SubResource( 59 )
+[node name="bronze watering can" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 28.0
 margin_top = 18.0
 margin_right = 44.0
 margin_bottom = 34.0
-texture_normal = SubResource( 60 )
 
-[node name="gold watering can" type="TextureButton" parent="Page2"]
-material = SubResource( 61 )
-margin_left = 56.0
-margin_top = 18.0
-margin_right = 72.0
-margin_bottom = 34.0
-texture_normal = SubResource( 62 )
-
-[node name="fishing rod" type="TextureButton" parent="Page2"]
-material = SubResource( 63 )
-margin_left = 84.0
-margin_top = 18.0
-margin_right = 100.0
-margin_bottom = 34.0
-texture_normal = SubResource( 64 )
-
-[node name="scythe" type="TextureButton" parent="Page2"]
-material = SubResource( 65 )
-margin_left = 112.0
-margin_top = 18.0
-margin_right = 128.0
-margin_bottom = 34.0
-texture_normal = SubResource( 66 )
-
-[node name="bow" type="TextureButton" parent="Page2"]
-material = SubResource( 67 )
-margin_top = 36.0
-margin_right = 16.0
-margin_bottom = 52.0
-texture_normal = SubResource( 68 )
-
-[node name="arrow" type="TextureButton" parent="Page2"]
-material = SubResource( 69 )
-margin_left = 28.0
-margin_top = 36.0
-margin_right = 44.0
-margin_bottom = 52.0
-texture_normal = SubResource( 70 )
-
-[node name="Page1" type="GridContainer" parent="."]
-margin_left = 45.0
-margin_top = 87.0
-margin_right = 177.0
-margin_bottom = 139.0
-rect_scale = Vector2( 4, 4 )
-custom_constants/vseparation = 2
-custom_constants/hseparation = 12
-columns = 5
-script = ExtResource( 20 )
-
-[node name="wood axe" type="TextureButton" parent="Page1"]
-material = SubResource( 17 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture_normal = SubResource( 18 )
-
-[node name="stone axe" type="TextureButton" parent="Page1"]
-material = SubResource( 19 )
-margin_left = 28.0
-margin_right = 44.0
-margin_bottom = 16.0
-texture_normal = SubResource( 20 )
-
-[node name="bronze axe" type="TextureButton" parent="Page1"]
-material = SubResource( 21 )
-margin_left = 56.0
-margin_right = 72.0
-margin_bottom = 16.0
-texture_normal = SubResource( 22 )
-
-[node name="iron axe" type="TextureButton" parent="Page1"]
-material = SubResource( 23 )
-margin_left = 84.0
-margin_right = 100.0
-margin_bottom = 16.0
-texture_normal = SubResource( 24 )
-
-[node name="gold axe" type="TextureButton" parent="Page1"]
-material = SubResource( 25 )
-margin_left = 112.0
-margin_right = 128.0
-margin_bottom = 16.0
-texture_normal = SubResource( 26 )
-
-[node name="wood pickaxe" type="TextureButton" parent="Page1"]
-material = SubResource( 27 )
-margin_top = 18.0
-margin_right = 16.0
-margin_bottom = 34.0
-texture_normal = SubResource( 28 )
-
-[node name="stone pickaxe" type="TextureButton" parent="Page1"]
-material = SubResource( 29 )
-margin_left = 28.0
-margin_top = 18.0
-margin_right = 44.0
-margin_bottom = 34.0
-texture_normal = SubResource( 30 )
-
-[node name="bronze pickaxe" type="TextureButton" parent="Page1"]
-material = SubResource( 31 )
+[node name="gold watering can" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 56.0
 margin_top = 18.0
 margin_right = 72.0
 margin_bottom = 34.0
-texture_normal = SubResource( 32 )
 
-[node name="iron pickaxe" type="TextureButton" parent="Page1"]
-material = SubResource( 33 )
+[node name="wood fishing rod" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 84.0
 margin_top = 18.0
 margin_right = 100.0
 margin_bottom = 34.0
-texture_normal = SubResource( 34 )
 
-[node name="gold pickaxe" type="TextureButton" parent="Page1"]
-material = SubResource( 35 )
+[node name="stone fishing rod" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 112.0
 margin_top = 18.0
 margin_right = 128.0
 margin_bottom = 34.0
-texture_normal = SubResource( 36 )
 
-[node name="wood hoe" type="TextureButton" parent="Page1"]
-material = SubResource( 37 )
+[node name="gold fishing rod" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 36.0
 margin_right = 16.0
 margin_bottom = 52.0
-texture_normal = SubResource( 38 )
 
-[node name="stone hoe" type="TextureButton" parent="Page1"]
-material = SubResource( 39 )
+[node name="scythe" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 28.0
 margin_top = 36.0
 margin_right = 44.0
 margin_bottom = 52.0
-texture_normal = SubResource( 40 )
 
-[node name="bronze hoe" type="TextureButton" parent="Page1"]
-material = SubResource( 41 )
+[node name="bow" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 56.0
 margin_top = 36.0
 margin_right = 72.0
 margin_bottom = 52.0
-texture_normal = SubResource( 42 )
 
-[node name="iron hoe" type="TextureButton" parent="Page1"]
-material = SubResource( 43 )
+[node name="arrow" parent="Page2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 84.0
 margin_top = 36.0
 margin_right = 100.0
 margin_bottom = 52.0
-texture_normal = SubResource( 44 )
-
-[node name="gold hoe" type="TextureButton" parent="Page1"]
-material = SubResource( 45 )
-margin_left = 112.0
-margin_top = 36.0
-margin_right = 128.0
-margin_bottom = 52.0
-texture_normal = SubResource( 46 )
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
-margin_left = 33.0
-margin_top = 342.0
-margin_right = 600.0
-margin_bottom = 396.0
+margin_left = -283.0
+margin_top = 68.0
+margin_right = 284.0
+margin_bottom = 122.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 3
 columns = 10
@@ -633,10 +384,10 @@ rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 10 )
 
 [node name="InventorySlots" type="GridContainer" parent="."]
-margin_left = 33.0
-margin_top = 402.0
-margin_right = 600.0
-margin_bottom = 456.0
+margin_left = -283.0
+margin_top = 128.0
+margin_right = 284.0
+margin_bottom = 182.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 3
 columns = 10
@@ -710,30 +461,33 @@ margin_bottom = 54.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 10 )
 
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-
-[node name="Tween" type="Tween" parent="."]
-
 [node name="DownButton" type="TextureButton" parent="."]
-margin_left = 577.0
-margin_top = 263.0
-margin_right = 617.0
-margin_bottom = 305.0
+margin_left = 261.0
+margin_top = -11.0
+margin_right = 301.0
+margin_bottom = 31.0
 texture_normal = ExtResource( 22 )
 
 [node name="UpButton" type="TextureButton" parent="."]
-visible = false
-margin_left = 577.0
-margin_top = 25.0
-margin_right = 617.0
-margin_bottom = 67.0
+margin_left = 261.0
+margin_top = -249.0
+margin_right = 301.0
+margin_bottom = -207.0
 texture_normal = ExtResource( 33 )
 
+[node name="ExitButton" type="TextureButton" parent="."]
+margin_left = 320.0
+margin_top = -274.0
+margin_right = 392.0
+margin_bottom = -202.0
+rect_scale = Vector2( 0.6, 0.6 )
+texture_normal = ExtResource( 36 )
+
 [node name="Trash" type="Control" parent="."]
-margin_left = 323.0
-margin_top = -5.0
-margin_right = 323.0
-margin_bottom = -5.0
+margin_left = 7.0
+margin_top = -279.0
+margin_right = 7.0
+margin_bottom = -279.0
 
 [node name="Bottom" type="Sprite" parent="Trash"]
 position = Vector2( 381, 398 )
@@ -753,98 +507,14 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="ExitButton" type="TextureButton" parent="."]
-margin_left = 636.0
-margin_right = 708.0
-margin_bottom = 72.0
-rect_scale = Vector2( 0.6, 0.6 )
-texture_normal = ExtResource( 36 )
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
-[connection signal="mouse_entered" from="Page2/wood sword" to="Page2" method="_on_wood_sword_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/wood sword" to="Page2" method="_on_wood_sword_mouse_exited"]
-[connection signal="pressed" from="Page2/wood sword" to="Page2" method="_on_wood_sword_pressed"]
-[connection signal="mouse_entered" from="Page2/stone sword" to="Page2" method="_on_stone_sword_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/stone sword" to="Page2" method="_on_stone_sword_mouse_exited"]
-[connection signal="pressed" from="Page2/stone sword" to="Page2" method="_on_stone_sword_pressed"]
-[connection signal="mouse_entered" from="Page2/bronze sword" to="Page2" method="_on_bronze_sword_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/bronze sword" to="Page2" method="_on_bronze_sword_mouse_exited"]
-[connection signal="pressed" from="Page2/bronze sword" to="Page2" method="_on_bronze_sword_pressed"]
-[connection signal="mouse_entered" from="Page2/iron sword" to="Page2" method="_on_iron_sword_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/iron sword" to="Page2" method="_on_iron_sword_mouse_exited"]
-[connection signal="pressed" from="Page2/iron sword" to="Page2" method="_on_iron_sword_pressed"]
-[connection signal="mouse_entered" from="Page2/gold sword" to="Page2" method="_on_gold_sword_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/gold sword" to="Page2" method="_on_gold_sword_mouse_exited"]
-[connection signal="pressed" from="Page2/gold sword" to="Page2" method="_on_gold_sword_pressed"]
-[connection signal="mouse_entered" from="Page2/stone watering can" to="Page2" method="_on_stone_watering_can_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/stone watering can" to="Page2" method="_on_stone_watering_can_mouse_exited"]
-[connection signal="pressed" from="Page2/stone watering can" to="Page2" method="_on_stone_watering_can_pressed"]
-[connection signal="mouse_entered" from="Page2/bronze watering can" to="Page2" method="_on_bronze_watering_can_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/bronze watering can" to="Page2" method="_on_bronze_watering_can_mouse_exited"]
-[connection signal="pressed" from="Page2/bronze watering can" to="Page2" method="_on_bronze_watering_can_pressed"]
-[connection signal="mouse_entered" from="Page2/gold watering can" to="Page2" method="_on_gold_watering_can_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/gold watering can" to="Page2" method="_on_gold_watering_can_mouse_exited"]
-[connection signal="pressed" from="Page2/gold watering can" to="Page2" method="_on_gold_watering_can_pressed"]
-[connection signal="mouse_entered" from="Page2/fishing rod" to="Page2" method="_on_fishing_rod_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/fishing rod" to="Page2" method="_on_fishing_rod_mouse_exited"]
-[connection signal="pressed" from="Page2/fishing rod" to="Page2" method="_on_fishing_rod_pressed"]
-[connection signal="mouse_entered" from="Page2/scythe" to="Page2" method="_on_scythe_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/scythe" to="Page2" method="_on_scythe_mouse_exited"]
-[connection signal="pressed" from="Page2/scythe" to="Page2" method="_on_scythe_pressed"]
-[connection signal="mouse_entered" from="Page2/bow" to="Page2" method="_on_bow_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/bow" to="Page2" method="_on_bow_mouse_exited"]
-[connection signal="pressed" from="Page2/bow" to="Page2" method="_on_bow_pressed"]
-[connection signal="mouse_entered" from="Page2/arrow" to="Page2" method="_on_arrow_mouse_entered"]
-[connection signal="mouse_exited" from="Page2/arrow" to="Page2" method="_on_arrow_mouse_exited"]
-[connection signal="pressed" from="Page2/arrow" to="Page2" method="_on_arrow_pressed"]
-[connection signal="mouse_entered" from="Page1/wood axe" to="Page1" method="_on_wood_axe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/wood axe" to="Page1" method="_on_wood_axe_mouse_exited"]
-[connection signal="pressed" from="Page1/wood axe" to="Page1" method="_on_wood_axe_pressed"]
-[connection signal="mouse_entered" from="Page1/stone axe" to="Page1" method="_on_stone_axe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/stone axe" to="Page1" method="_on_stone_axe_mouse_exited"]
-[connection signal="pressed" from="Page1/stone axe" to="Page1" method="_on_stone_axe_pressed"]
-[connection signal="mouse_entered" from="Page1/bronze axe" to="Page1" method="_on_bronze_axe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/bronze axe" to="Page1" method="_on_bronze_axe_mouse_exited"]
-[connection signal="pressed" from="Page1/bronze axe" to="Page1" method="_on_bronze_axe_pressed"]
-[connection signal="mouse_entered" from="Page1/iron axe" to="Page1" method="_on_iron_axe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/iron axe" to="Page1" method="_on_iron_axe_mouse_exited"]
-[connection signal="pressed" from="Page1/iron axe" to="Page1" method="_on_iron_axe_pressed"]
-[connection signal="mouse_entered" from="Page1/gold axe" to="Page1" method="_on_gold_axe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/gold axe" to="Page1" method="_on_gold_axe_mouse_exited"]
-[connection signal="pressed" from="Page1/gold axe" to="Page1" method="_on_gold_axe_pressed"]
-[connection signal="mouse_entered" from="Page1/wood pickaxe" to="Page1" method="_on_wood_pickaxe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/wood pickaxe" to="Page1" method="_on_wood_pickaxe_mouse_exited"]
-[connection signal="pressed" from="Page1/wood pickaxe" to="Page1" method="_on_wood_pickaxe_pressed"]
-[connection signal="mouse_entered" from="Page1/stone pickaxe" to="Page1" method="_on_stone_pickaxe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/stone pickaxe" to="Page1" method="_on_stone_pickaxe_mouse_exited"]
-[connection signal="pressed" from="Page1/stone pickaxe" to="Page1" method="_on_stone_pickaxe_pressed"]
-[connection signal="mouse_entered" from="Page1/bronze pickaxe" to="Page1" method="_on_bronze_pickaxe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/bronze pickaxe" to="Page1" method="_on_bronze_pickaxe_mouse_exited"]
-[connection signal="pressed" from="Page1/bronze pickaxe" to="Page1" method="_on_bronze_pickaxe_pressed"]
-[connection signal="mouse_entered" from="Page1/iron pickaxe" to="Page1" method="_on_iron_pickaxe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/iron pickaxe" to="Page1" method="_on_iron_pickaxe_mouse_exited"]
-[connection signal="pressed" from="Page1/iron pickaxe" to="Page1" method="_on_iron_pickaxe_pressed"]
-[connection signal="mouse_entered" from="Page1/gold pickaxe" to="Page1" method="_on_gold_pickaxe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/gold pickaxe" to="Page1" method="_on_gold_pickaxe_mouse_exited"]
-[connection signal="pressed" from="Page1/gold pickaxe" to="Page1" method="_on_gold_pickaxe_pressed"]
-[connection signal="mouse_entered" from="Page1/wood hoe" to="Page1" method="_on_wood_hoe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/wood hoe" to="Page1" method="_on_wood_hoe_mouse_exited"]
-[connection signal="pressed" from="Page1/wood hoe" to="Page1" method="_on_wood_hoe_pressed"]
-[connection signal="mouse_entered" from="Page1/stone hoe" to="Page1" method="_on_stone_hoe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/stone hoe" to="Page1" method="_on_stone_hoe_mouse_exited"]
-[connection signal="pressed" from="Page1/stone hoe" to="Page1" method="_on_stone_hoe_pressed"]
-[connection signal="mouse_entered" from="Page1/bronze hoe" to="Page1" method="_on_bronze_hoe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/bronze hoe" to="Page1" method="_on_bronze_hoe_mouse_exited"]
-[connection signal="pressed" from="Page1/bronze hoe" to="Page1" method="_on_bronze_hoe_pressed"]
-[connection signal="mouse_entered" from="Page1/iron hoe" to="Page1" method="_on_iron_hoe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/iron hoe" to="Page1" method="_on_iron_hoe_mouse_exited"]
-[connection signal="pressed" from="Page1/iron hoe" to="Page1" method="_on_iron_hoe_pressed"]
-[connection signal="mouse_entered" from="Page1/gold hoe" to="Page1" method="_on_gold_hoe_mouse_entered"]
-[connection signal="mouse_exited" from="Page1/gold hoe" to="Page1" method="_on_gold_hoe_mouse_exited"]
-[connection signal="pressed" from="Page1/gold hoe" to="Page1" method="_on_gold_hoe_pressed"]
 [connection signal="pressed" from="DownButton" to="." method="_on_DownButton_pressed"]
 [connection signal="pressed" from="UpButton" to="." method="_on_UpButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
 [connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
 [connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]
-[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

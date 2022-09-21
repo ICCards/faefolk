@@ -14,8 +14,8 @@ var health_maximum = 100.0
 var mana_maximum 
 
 func eat(food_name):
-	health += JsonData.food_data[food_name]["Health"]
-	energy += JsonData.food_data[food_name]["Energy"]
+	energy += JsonData.item_data[food_name]["EnergyHealth"][0]
+	health += JsonData.item_data[food_name]["EnergyHealth"][1]
 	if health > 100:
 		health = 100
 	if energy > 100:

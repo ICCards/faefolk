@@ -263,22 +263,22 @@
   "wood fishing rod":{
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used to catch fish.",
+      "Description": "Used to catch fish. Tier 1.",
       "Ingredients": [["wood", 10],["rope", 2]],
       "EnergyHealth": null
   },
   "stone fishing rod":{
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used to catch fish.",
+      "Description": "Used to catch fish. Tier 2.",
       "Ingredients": [["stone", 10],["rope", 2]],
       "EnergyHealth": null
   },
   "gold fishing rod":{
       "ItemCategory": "Tool",
       "StackSize": 1,
-      "Description": "Used to catch fish.",
-      "Ingredients": [["gold", 10],["rope", 2]],
+      "Description": "Used to catch fish. Tier 3",
+      "Ingredients": [["gold ingot", 10],["rope", 2]],
       "EnergyHealth": null
   },
   "bow":{
@@ -378,158 +378,158 @@
   
   
   "wheat": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Can be processed into a great flour for breads and cakes.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "potato": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A widely cultivated tuber.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "yellow onion": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Has a distinctive strong and complex flavor.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "garlic": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Adds a wonderful zestiness to dishes. High quality garlic can be pretty spicy.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "radish": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A crisp and refreshing root vegetable with hints of pepper when eaten raw.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "carrot": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A spring tuber with an earthy taste and is full of nutrients.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "cauliflower": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Valuable, but slow-growing. Despite its pale color, the florets are packed with nutrients.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "cabbage": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Often used in salads and coleslaws.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "yellow pepper": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Mildly sweet and spicy.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "red pepper": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Very sweet with a spicy aftertaste.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "green pepper": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A sweet vegetable with a little kick.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "strawberry": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A sweet, juicy favorite with an appealing red color.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "blueberry": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A popular and tasty berry reported to have many health benefits.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "grape": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A sweet cluster of fruit.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "green bean": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A juicy little bean with a cool, crisp snap.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "zucchini": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A summer squash packed with nutrients.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "honeydew melon": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A cool, sweet summer treat.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "corn": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "One of the most popular grains with many culinary uses.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "jalapeno": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Fiery hot with a hint of sweetness.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "tomato": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "Rich, red and juicy, the Tomato has a wide variety of culinary uses.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
   "sugar cane": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "When processed into sugar, it adds a sweetness to baked goods.",
       "Ingredients": null,
-      "EnergyHealth": null
+      "EnergyHealth": [10,10]
   },
   "asparagus": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Crop",
       "StackSize": 999,
       "Description": "A small and skinny vegetable packed with nutrients.",
       "Ingredients": null,
-      "EnergyHealth": null
+      "EnergyHealth": [10,10]
   },
   
   

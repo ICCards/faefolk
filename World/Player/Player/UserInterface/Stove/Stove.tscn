@@ -16,32 +16,38 @@
 [ext_resource path="res://World/Player/Player/UserInterface/Stove/item_button.tscn" type="PackedScene" id=16]
 
 [node name="Stove" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -1024.0
-margin_bottom = -600.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 script = ExtResource( 6 )
 
 [node name="BackgroundButton" type="Button" parent="."]
-margin_left = -255.0
-margin_top = -108.0
-margin_right = 955.0
-margin_bottom = 672.0
+margin_left = -572.0
+margin_top = -382.0
+margin_right = 638.0
+margin_bottom = 398.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
 [node name="Bg" type="TextureRect" parent="."]
-margin_right = 633.0
-margin_bottom = 548.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -316.5
+margin_top = -274.0
+margin_right = 316.5
+margin_bottom = 274.0
 texture = ExtResource( 1 )
 stretch_mode = 4
 
 [node name="Title" type="Label" parent="."]
-margin_left = 33.0
-margin_top = 25.0
-margin_right = 709.0
-margin_bottom = 166.0
+margin_left = -284.0
+margin_top = -249.0
+margin_right = 392.0
+margin_bottom = -108.0
 rect_scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -51,11 +57,10 @@ text = "Stove #3:"
 clip_text = true
 
 [node name="Page1" type="GridContainer" parent="."]
-visible = false
-margin_left = 52.0
-margin_top = 84.0
-margin_right = 184.0
-margin_bottom = 136.0
+margin_left = -265.0
+margin_top = -190.0
+margin_right = -133.0
+margin_bottom = -138.0
 rect_scale = Vector2( 4, 4 )
 custom_constants/vseparation = 2
 custom_constants/hseparation = 6
@@ -65,15 +70,14 @@ script = ExtResource( 13 )
 [node name="bread" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 22.0
-margin_right = 38.0
+margin_right = 16.0
 margin_bottom = 16.0
 
 [node name="cooked wing" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 66.0
-margin_right = 82.0
+margin_left = 22.0
+margin_right = 38.0
 margin_bottom = 16.0
 
 [node name="cooked filet" parent="Page1" instance=ExtResource( 16 )]
@@ -86,32 +90,40 @@ margin_bottom = 16.0
 [node name="tomato soup" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 16.0
+margin_left = 66.0
+margin_right = 82.0
 margin_bottom = 16.0
 
 [node name="cooked corn" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 44.0
-margin_top = 36.0
-margin_right = 60.0
-margin_bottom = 52.0
+margin_left = 88.0
+margin_right = 104.0
+margin_bottom = 16.0
 
 [node name="mushroom soup" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 44.0
-margin_right = 60.0
+margin_left = 110.0
+margin_right = 126.0
 margin_bottom = 16.0
 
 [node name="potatoes with asparagus" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 88.0
-margin_right = 104.0
-margin_bottom = 16.0
+margin_top = 18.0
+margin_right = 16.0
+margin_bottom = 34.0
 
 [node name="baked zucchini" parent="Page1" instance=ExtResource( 16 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 22.0
+margin_top = 18.0
+margin_right = 38.0
+margin_bottom = 34.0
+
+[node name="asparagus omelette" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 44.0
@@ -119,88 +131,83 @@ margin_top = 18.0
 margin_right = 60.0
 margin_bottom = 34.0
 
-[node name="asparagus omelette" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_right = 126.0
-margin_bottom = 16.0
-
 [node name="cooked green beans" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_top = 36.0
-margin_right = 82.0
-margin_bottom = 52.0
-
-[node name="cauliflower soup" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_top = 36.0
-margin_right = 38.0
-margin_bottom = 52.0
-
-[node name="blowfish tails" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 66.0
 margin_top = 18.0
 margin_right = 82.0
+margin_bottom = 34.0
+
+[node name="cauliflower soup" parent="Page1" instance=ExtResource( 16 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 34.0
+
+[node name="blowfish tails" parent="Page1" instance=ExtResource( 16 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 110.0
+margin_top = 18.0
+margin_right = 126.0
 margin_bottom = 34.0
 
 [node name="baked catfish" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 18.0
+margin_top = 36.0
 margin_right = 16.0
-margin_bottom = 34.0
+margin_bottom = 52.0
 
 [node name="baked dorado" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 22.0
-margin_top = 18.0
+margin_top = 36.0
 margin_right = 38.0
-margin_bottom = 34.0
+margin_bottom = 52.0
 
 [node name="blueberry cake" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 88.0
-margin_top = 18.0
-margin_right = 104.0
-margin_bottom = 34.0
+margin_left = 44.0
+margin_top = 36.0
+margin_right = 60.0
+margin_bottom = 52.0
 
 [node name="blueberry pie" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 110.0
-margin_top = 18.0
-margin_right = 126.0
-margin_bottom = 34.0
+margin_left = 66.0
+margin_top = 36.0
+margin_right = 82.0
+margin_bottom = 52.0
 
 [node name="calamari with tomatoes" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_left = 88.0
 margin_top = 36.0
-margin_right = 16.0
+margin_right = 104.0
 margin_bottom = 52.0
 
 [node name="honeydew melon with sugar" parent="Page1" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 88.0
+margin_left = 110.0
 margin_top = 36.0
-margin_right = 104.0
+margin_right = 126.0
 margin_bottom = 52.0
 
 [node name="Page2" type="GridContainer" parent="."]
-margin_left = 52.0
-margin_top = 84.0
-margin_right = 184.0
-margin_bottom = 136.0
+visible = false
+margin_left = -265.0
+margin_top = -190.0
+margin_right = -133.0
+margin_bottom = -138.0
 rect_scale = Vector2( 4, 4 )
 custom_constants/vseparation = 2
 custom_constants/hseparation = 6
@@ -344,10 +351,10 @@ margin_bottom = 52.0
 
 [node name="Page3" type="GridContainer" parent="."]
 visible = false
-margin_left = 52.0
-margin_top = 84.0
-margin_right = 184.0
-margin_bottom = 136.0
+margin_left = -265.0
+margin_top = -190.0
+margin_right = -133.0
+margin_bottom = -138.0
 rect_scale = Vector2( 4, 4 )
 custom_constants/vseparation = 2
 custom_constants/hseparation = 6
@@ -449,11 +456,18 @@ margin_top = 36.0
 margin_right = 16.0
 margin_bottom = 52.0
 
+[node name="spicy eel" parent="Page3" instance=ExtResource( 16 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 36.0
+margin_right = 16.0
+margin_bottom = 52.0
+
 [node name="HotbarSlots" type="GridContainer" parent="."]
-margin_left = 33.0
-margin_top = 342.0
-margin_right = 600.0
-margin_bottom = 396.0
+margin_left = -284.0
+margin_top = 68.0
+margin_right = 283.0
+margin_bottom = 122.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 3
 columns = 10
@@ -528,10 +542,10 @@ rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 2 )
 
 [node name="InventorySlots" type="GridContainer" parent="."]
-margin_left = 33.0
-margin_top = 402.0
-margin_right = 600.0
-margin_bottom = 456.0
+margin_left = -284.0
+margin_top = 128.0
+margin_right = 283.0
+margin_bottom = 182.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 3
 columns = 10
@@ -609,39 +623,25 @@ script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="Pg1DownButton" type="TextureButton" parent="."]
-margin_left = 577.0
-margin_top = 263.0
-margin_right = 613.0
-margin_bottom = 305.0
+[node name="DownButton" type="TextureButton" parent="."]
+margin_left = 260.0
+margin_top = -11.0
+margin_right = 296.0
+margin_bottom = 31.0
 texture_normal = ExtResource( 9 )
 
-[node name="Pg2DownButton" type="TextureButton" parent="."]
-margin_left = 577.0
-margin_top = 263.0
-margin_right = 613.0
-margin_bottom = 305.0
-texture_normal = ExtResource( 9 )
-
-[node name="Pg2UpButton" type="TextureButton" parent="."]
-margin_left = 577.0
-margin_top = 25.0
-margin_right = 617.0
-margin_bottom = 67.0
-texture_normal = ExtResource( 8 )
-
-[node name="Pg3UpButton" type="TextureButton" parent="."]
-margin_left = 577.0
-margin_top = 25.0
-margin_right = 617.0
-margin_bottom = 67.0
+[node name="UpButton" type="TextureButton" parent="."]
+margin_left = 260.0
+margin_top = -249.0
+margin_right = 300.0
+margin_bottom = -207.0
 texture_normal = ExtResource( 8 )
 
 [node name="Trash" type="Control" parent="."]
-margin_left = 323.0
-margin_top = -5.0
-margin_right = 323.0
-margin_bottom = -5.0
+margin_left = 6.0
+margin_top = -279.0
+margin_right = 6.0
+margin_bottom = -279.0
 
 [node name="Bottom" type="Sprite" parent="Trash"]
 position = Vector2( 381, 398 )
@@ -662,9 +662,10 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="ExitButton" type="TextureButton" parent="."]
-margin_left = 636.0
-margin_right = 708.0
-margin_bottom = 72.0
+margin_left = 319.0
+margin_top = -274.0
+margin_right = 391.0
+margin_bottom = -202.0
 rect_scale = Vector2( 0.6, 0.6 )
 texture_normal = ExtResource( 10 )
 
@@ -678,8 +679,10 @@ scale = Vector2( 2.7, 2.7 )
 [node name="ItemDescription" parent="." instance=ExtResource( 14 )]
 visible = false
 
-[connection signal="pressed" from="Pg1DownButton" to="." method="_on_Pg1DownButton_pressed"]
-[connection signal="pressed" from="Pg2DownButton" to="." method="_on_Pg2DownButton_pressed"]
-[connection signal="pressed" from="Pg2UpButton" to="." method="_on_Pg2UpButton_pressed"]
-[connection signal="pressed" from="Pg3UpButton" to="." method="_on_Pg3UpButton_pressed"]
+[connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
+[connection signal="pressed" from="DownButton" to="." method="_on_DownButton_pressed"]
+[connection signal="pressed" from="UpButton" to="." method="_on_UpButton_pressed"]
+[connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
+[connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
+[connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

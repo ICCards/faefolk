@@ -2772,6 +2772,7 @@ visible = false
 visible = false
 
 [node name="FullMapParticles" parent="." instance=ExtResource( 23 )]
+visible = false
 
 [node name="ValidTiles" type="TileMap" parent="."]
 visible = false

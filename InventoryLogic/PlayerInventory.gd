@@ -31,7 +31,11 @@ var inventory = {
 	3: ["rope", 20, null],
 	2: ["wood", 499, null],
 	1: ["stone", 699, null],
-	0: ["iron ingot", 60, null]
+	0: ["iron ingot", 60, null],
+	7: ["gold ingot", 60, null],
+	6: ["bronze ingot", 60, null],
+	4: ["raw wing", 7, null],
+	5: ["wheat flour", 24, null]
 }
 
 var hotbar = {

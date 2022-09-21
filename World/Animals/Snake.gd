@@ -54,9 +54,9 @@ func _physics_process(delta):
 	
 func play_swing_sound_effect():
 	rng.randomize()
-	$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Snake/ES_Snake Hiss 2 - SFX Producer.mp3")
-	$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	$AudioStreamPlayer2D.play()
+#	#$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Snake/ES_Snake Hiss 2 - SFX Producer.mp3")
+#	$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+#	$AudioStreamPlayer2D.play()
 	yield($AudioStreamPlayer2D, "finished")
 	playing_sound_effect = false
 	start_sound_effects()
@@ -65,9 +65,9 @@ func play_swing_sound_effect():
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Snake/ES_Snake Slither - SFX Producer.mp3")
-		$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$AudioStreamPlayer2D.play()
+#		$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Snake/ES_Snake Slither - SFX Producer.mp3")
+#		$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+#		$AudioStreamPlayer2D.play()
 		
 func stop_sound_effects():
 	playing_sound_effect = false

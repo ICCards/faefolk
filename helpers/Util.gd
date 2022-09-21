@@ -68,7 +68,7 @@ func returnCategoryColor(category):
 			return Color("ff2525")
 		"Resource":
 			return Color("00ffc3")
-		"Placable object":
+		"Crop":
 			return Color("fffb00")
 		"Seed":
 			return Color("26ff00")

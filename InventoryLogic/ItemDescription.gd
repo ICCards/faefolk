@@ -30,7 +30,7 @@ func show_health_and_energy():
 	$Body/Energy.show()
 	$Body/Health.show()
 	$Body/Energy/EnergyAmount.text = "+" + str(JsonData.item_data[item_name]["EnergyHealth"][0]) + " Energy"
-	$Body/Health/HealthAmount.text = "+" + str(JsonData.food_data[item_name]["EnergyHealth"][1]) + " Health"
+	$Body/Health/HealthAmount.text = "+" + str(JsonData.item_data[item_name]["EnergyHealth"][1]) + " Health"
 
 func hide_health_and_energy():
 	$Body/Energy.hide()

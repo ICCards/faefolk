@@ -185,11 +185,10 @@ func _unhandled_input(event):
 				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-					#destroy_placable_object()
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif item_name == "blueprint" and current_building_item != null:
 					show_placable_object(current_building_item, "BUILDING")
-				elif event.is_action_pressed("mouse_click") and item_name == "fishing rod":
+				elif event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
 					fish()
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
 					swing(item_name)
@@ -200,13 +199,8 @@ func _unhandled_input(event):
 				elif item_name != "blueprint":
 					destroy_placable_object()
 			else:
-				#destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
-	else:
-		pass
-		#current_building_item = null
-		#destroy_placable_object()
 
 
 func show_placable_object(item_name, item_category):
@@ -226,11 +220,8 @@ func show_placable_object(item_name, item_category):
 			get_node("PlaceObject").initialize()
 			
 func destroy_placable_object():
-	pass
-	#current_building_item = null
 	if has_node("PlaceObject"):
 		get_node("PlaceObject").queue_free()
-		
 
 
 func swing(item_name):

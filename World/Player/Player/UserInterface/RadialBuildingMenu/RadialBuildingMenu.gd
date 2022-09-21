@@ -12,6 +12,7 @@ func _ready():
 
 func initialize():
 	show()
+	Server.player_node.destroy_placable_object()
 	$Circle/AnimationPlayer.play("zoom")
 	Server.player_node.get_node("Camera2D").set_process_input(false)
 	PlayerInventory.viewInventoryMode = true
@@ -20,7 +21,6 @@ func initialize():
 func destroy():
 	Server.player_node.get_node("Camera2D").set_process_input(true) 
 	if current_item != -1:
-		Server.player_node.show_placable_object(buildings[current_item], "BUILDING")
 		Server.player_node.current_building_item = buildings[current_item]
 	hide()
 
@@ -31,6 +31,6 @@ func _input(event):
 			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
 				if not event.is_pressed():
 					destroy()
-					yield(get_tree().create_timer(0.25), "timeout")
+					yield(get_tree().create_timer(0.1), "timeout")
 					PlayerInventory.viewInventoryMode = false
 

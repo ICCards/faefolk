@@ -14,8 +14,12 @@ func _physics_process(delta):
 			set_adjusted_pos()
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
-			$CollectionItemDescription.position = adjusted_pos
+			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 		elif page == "Fish" and CollectionsData.fish[item] != 0:
+			$ItemNameBox.hide()
+			$CollectionItemDescription.initialize(item)
+			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
+		elif page == "Food" and CollectionsData.food[item] != 0:
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
@@ -44,35 +48,59 @@ func initialize():
 	$FishCollection.hide()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections1.png")
 	$CropCollection.initialize()
+	$FoodCollection1.hide()
+	$FoodCollection2.hide()
+	$FoodBtnLeft.hide()
+	$FoodBtnRight.hide()
 
 func _on_Crops_pressed():
 	page = "Crops"
 	$FishCollection.hide()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections1.png")
 	$CropCollection.initialize()
+	$FoodCollection1.hide()
+	$FoodCollection2.hide()
+	$FoodBtnLeft.hide()
+	$FoodBtnRight.hide()
 	
 
 func _on_Fish_pressed():
 	page = "Fish"
 	$CropCollection.hide()
+	$FoodBtnLeft.hide()
+	$FoodBtnRight.hide()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections2.png")
 	$FishCollection.initialize()
+	$FoodCollection1.hide()
+	$FoodCollection2.hide()
 
 func _on_Forage_pressed():
+	$FoodBtnLeft.hide()
+	$FoodBtnRight.hide()
 	$CropCollection.hide()
 	$FishCollection.hide()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections3.png")
+	$FoodCollection1.hide()
+	$FoodCollection2.hide()
 
 func _on_Minerals_pressed():
+	$FoodBtnLeft.hide()
+	$FoodBtnRight.hide()
 	$CropCollection.hide()
 	$FishCollection.hide()
+	$FoodCollection1.hide()
+	$FoodCollection2.hide()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections4.png")
 
 func _on_Foods_pressed():
+	page = "Food"
+	$FoodBtnLeft.hide()
+	$FoodBtnRight.show()
 	$CropCollection.hide()
 	$FishCollection.hide()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections5.png")
-
+	$FoodCollection1.initialize()
+	$FoodCollection2.hide()
 
 
 func _on_Crops_mouse_entered():
@@ -100,3 +128,16 @@ func _on_Foods_mouse_entered():
 func _on_Foods_mouse_exited():
 	tab = null
 
+
+
+func _on_FoodBtnLeft_pressed():
+	$FoodBtnLeft.hide()
+	$FoodBtnRight.show()
+	$FoodCollection1.initialize()
+	$FoodCollection2.hide()
+
+func _on_FoodBtnRight_pressed():
+	$FoodBtnLeft.show()
+	$FoodBtnRight.hide()
+	$FoodCollection1.hide()
+	$FoodCollection2.initialize()

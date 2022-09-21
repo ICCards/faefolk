@@ -5,6 +5,8 @@ var holding_item = null
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 onready var Menu = preload("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
 onready var Hotbar = preload("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
+onready var Workbench = preload("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
+onready var Stove = preload("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
 
 var items_to_drop = []
 
@@ -29,9 +31,9 @@ func initialize_user_interface():
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and \
 		not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
-		if event.is_action_pressed("open_menu"):
+		if event.is_action_pressed("open_menu") and not PlayerInventory.interactive_screen_mode:
 			toggle_menu()
-		elif event.is_action_pressed("action"):
+		elif event.is_action_pressed("action") and not PlayerInventory.viewInventoryMode:
 			if PlayerInventory.chest_id:
 				toggle_chest()
 			elif PlayerInventory.workbench_id:
@@ -151,48 +153,46 @@ func open_grain_mill():
 	toggle_stats_and_time()
 
 func toggle_workbench(level):
-	if not $Workbench.visible:
-		$Workbench.level = level
-		$Workbench.initialize()
+	if not has_node("Workbench"):
+		var workbench = Workbench.instance()
+		workbench.level = level
+		add_child(workbench)
 		$Hotbar.hide()
+		PlayerInventory.interactive_screen_mode = true
+		toggle_stats_and_time()
 	else:
+		close_workbench()
+	
+func close_workbench():
+	if not holding_item:
 		$Hotbar.show()
 		$Hotbar.initialize_hotbar()
-		$Workbench.hide()
+		get_node("Workbench").queue_free()
 		drop_items()
-	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
-	toggle_stats_and_time()
-	
-func hide_workbench():
-	$Hotbar.show()
-	$Hotbar.initialize_hotbar()
-	$Workbench.hide()
-	drop_items()
-	PlayerInventory.interactive_screen_mode = false
-	toggle_stats_and_time()
+		PlayerInventory.interactive_screen_mode = false
+		toggle_stats_and_time()
 	
 func toggle_stove(level):
-	if not $Stove.visible:
-		$Stove.level = level
-		$Stove.initialize()
+	if not has_node("Stove"):
+		var stove = Stove.instance()
+		stove.level = level
+		add_child(stove)
 		$Hotbar.hide()
+		PlayerInventory.interactive_screen_mode = true
+		toggle_stats_and_time()
 	else:
+		close_stove()
+
+func close_stove():
+	if not holding_item:
 		$Hotbar.show()
 		$Hotbar.initialize_hotbar()
-		$Stove.hide()
+		get_node("Stove").queue_free()
 		drop_items()
-	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
-	toggle_stats_and_time()
-	
-func close_stove():
-	$Hotbar.show()
-	$Hotbar.initialize_hotbar()
-	$Stove.hide()
-	drop_items()
-	PlayerInventory.interactive_screen_mode = false
-	toggle_stats_and_time()
-	
-	
+		PlayerInventory.interactive_screen_mode = false
+		toggle_stats_and_time()
+
+
 func toggle_stats_and_time():
 	$CurrentTime.visible = !$CurrentTime.visible
 	$PlayerStatsUI.visible = !$PlayerStatsUI.visible

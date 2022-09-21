@@ -324,36 +324,6 @@ func place_item_state():
 		if Input.is_action_pressed("mouse_click"):
 			place_object(item_name, null, location, "placable")
 
-
-#func place_path_state():
-#	get_path_rotation(item_name)
-#	var location = Tiles.valid_tiles.world_to_map(mousePos)
-#	if Tiles.path_tiles.get_cellv(location) != -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
-#		$ColorIndicator.indicator_color = "Red"
-#		$ColorIndicator.set_indicator_color()
-#	else:
-#		$ColorIndicator.indicator_color = "Green"
-#		$ColorIndicator.set_indicator_color()
-#		if Input.is_action_pressed("mouse_click"):
-#			place_object(item_name, location, "placable")
-
-
-#func get_path_rotation(path_name):
-#	if path_name == "wood path" and path_index > 2:
-#		path_index = 1
-#	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + path_name + str(path_index) + ".png")
-#	if path_name == "wood path":
-#		if Input.is_action_pressed("rotate"):
-#			path_index += 1
-#			if path_index == 3:
-#				path_index = 1
-#	elif path_name == "stone path":
-#		if Input.is_action_pressed("rotate"):
-#			path_index += 1
-#			if path_index == 5:
-#				path_index = 1
-
-
 func place_seed_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
@@ -378,7 +348,7 @@ func place_object(item_name, direction, location, type):
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 			if item_name == "wall" or item_name == "foundation":
-				PlayerInventory.craft_item(item_name)
+				# REMOVE MATERIAL HERE
 				PlaceObject.place_building_object_in_world(id, item_name, location)
 			else:
 				PlaceObject.place_object_in_world(id, item_name, direction, location)
