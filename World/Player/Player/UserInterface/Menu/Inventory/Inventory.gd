@@ -103,9 +103,9 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 				left_click_not_holding(slot)
 
 
-#func _input(_event):
-#	if find_parent("UserInterface").holding_item:
-#		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+func _input(_event):
+	if find_parent("UserInterface").holding_item:
+		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 
 func left_click_empty_slot(slot: SlotClass):
 	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)

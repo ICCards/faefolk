@@ -36,15 +36,15 @@ func exited_slot(slot: SlotClass):
 		
 
 func _physics_process(delta):
-	adjusted_description_position()
-	if item and find_parent("UserInterface").holding_item == null:
-		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
-		$ItemDescription.visible = true
-		$ItemDescription.item_name = item
-		$ItemDescription.position = adjusted_pos
-		$ItemDescription.initialize()
-	else:
-		$ItemDescription.visible = false
+		adjusted_description_position()
+		if item and find_parent("UserInterface").holding_item == null:
+			$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
+			$ItemDescription.visible = true
+			$ItemDescription.item_name = item
+			$ItemDescription.position = adjusted_pos
+			$ItemDescription.initialize()
+		else:
+			$ItemDescription.visible = false
 
 
 func adjusted_description_position():
@@ -84,6 +84,7 @@ func update_tool_health():
 	
 
 func initialize_hotbar():
+	show()
 	PlayerInventory.HotbarSlots = $HotbarSlots
 	item = null
 	for i in range(slots.size()):
@@ -93,10 +94,7 @@ func initialize_hotbar():
 			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1], PlayerInventory.hotbar[i][2])
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		slots[PlayerInventory.active_item_slot].item.set_init_hovered()
-		
-func _input(_event):
-	if find_parent("UserInterface").holding_item:
-		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+	
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
@@ -150,4 +148,5 @@ func left_click_not_holding(slot: SlotClass):
 
 
 func _on_Bg_mouse_entered():
-	Server.player_node.destroy_placable_object()
+	pass
+	#Server.player_node.destroy_placable_object()

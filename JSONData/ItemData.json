@@ -35,6 +35,13 @@
       "Ingredients": null,
       "EnergyHealth": null
   },
+  "bronze ore": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "Can be smelted into gold ingot.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
   "bronze ingot": {
       "ItemCategory": "Resource",
       "StackSize" : 999,

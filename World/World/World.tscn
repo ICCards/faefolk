@@ -420,18 +420,6 @@ points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 [sub_resource type="ConvexPolygonShape2D" id=463]
 points = PoolVector2Array( 0, 64, 128, 64, 128, 192, 0, 192 )
 
-[sub_resource type="ConvexPolygonShape2D" id=482]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
-
-[sub_resource type="ConvexPolygonShape2D" id=483]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
-
-[sub_resource type="ConvexPolygonShape2D" id=484]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
-
-[sub_resource type="ConvexPolygonShape2D" id=485]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
-
 [sub_resource type="ConvexPolygonShape2D" id=464]
 points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 
@@ -446,6 +434,18 @@ points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=489]
 points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+
+[sub_resource type="ConvexPolygonShape2D" id=492]
+points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
+
+[sub_resource type="ConvexPolygonShape2D" id=493]
+points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
+
+[sub_resource type="ConvexPolygonShape2D" id=494]
+points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
+
+[sub_resource type="ConvexPolygonShape2D" id=495]
+points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=465]
 points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
@@ -886,90 +886,6 @@ points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 25/shape_one_way_margin = 0.0
 25/shapes = [  ]
 25/z_index = 0
-26/name = "Furnace-x2.png 26"
-26/texture = ExtResource( 18 )
-26/tex_offset = Vector2( 0, -64 )
-26/modulate = Color( 1, 1, 1, 1 )
-26/region = Rect2( 64, 0, 32, 96 )
-26/tile_mode = 0
-26/occluder_offset = Vector2( 0, 0 )
-26/navigation_offset = Vector2( 0, 0 )
-26/shape_offset = Vector2( 0, 0 )
-26/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-26/shape = SubResource( 482 )
-26/shape_one_way = false
-26/shape_one_way_margin = 1.0
-26/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 482 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-26/z_index = 0
-27/name = "Furnace-x2.png 27"
-27/texture = ExtResource( 18 )
-27/tex_offset = Vector2( 0, -64 )
-27/modulate = Color( 1, 1, 1, 1 )
-27/region = Rect2( 96, 0, 32, 96 )
-27/tile_mode = 0
-27/occluder_offset = Vector2( 0, 0 )
-27/navigation_offset = Vector2( 0, 0 )
-27/shape_offset = Vector2( 0, 0 )
-27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-27/shape = SubResource( 483 )
-27/shape_one_way = false
-27/shape_one_way_margin = 1.0
-27/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 483 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-27/z_index = 0
-28/name = "Furnace-x2.png 28"
-28/texture = ExtResource( 18 )
-28/tex_offset = Vector2( 0, -64 )
-28/modulate = Color( 1, 1, 1, 1 )
-28/region = Rect2( 0, 0, 32, 96 )
-28/tile_mode = 0
-28/occluder_offset = Vector2( 0, 0 )
-28/navigation_offset = Vector2( 0, 0 )
-28/shape_offset = Vector2( 0, 0 )
-28/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-28/shape = SubResource( 484 )
-28/shape_one_way = false
-28/shape_one_way_margin = 1.0
-28/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 484 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-28/z_index = 0
-29/name = "Furnace-x2.png 29"
-29/texture = ExtResource( 18 )
-29/tex_offset = Vector2( 0, -64 )
-29/modulate = Color( 1, 1, 1, 1 )
-29/region = Rect2( 32, 0, 32, 96 )
-29/tile_mode = 0
-29/occluder_offset = Vector2( 0, 0 )
-29/navigation_offset = Vector2( 0, 0 )
-29/shape_offset = Vector2( 0, 0 )
-29/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-29/shape = SubResource( 485 )
-29/shape_one_way = false
-29/shape_one_way_margin = 1.0
-29/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 485 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-29/z_index = 0
 30/name = "TC-x2.png 30"
 30/texture = ExtResource( 28 )
 30/tex_offset = Vector2( 0, -64 )
@@ -1054,6 +970,90 @@ points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 34/z_index = 0
+35/name = "Furnace-x2.png 35"
+35/texture = ExtResource( 18 )
+35/tex_offset = Vector2( 0, -64 )
+35/modulate = Color( 1, 1, 1, 1 )
+35/region = Rect2( 64, 0, 32, 96 )
+35/tile_mode = 0
+35/occluder_offset = Vector2( 0, 0 )
+35/navigation_offset = Vector2( 0, 0 )
+35/shape_offset = Vector2( 0, 0 )
+35/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+35/shape = SubResource( 492 )
+35/shape_one_way = false
+35/shape_one_way_margin = 1.0
+35/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 492 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+35/z_index = 0
+37/name = "Furnace-x2.png 37"
+37/texture = ExtResource( 18 )
+37/tex_offset = Vector2( 0, -64 )
+37/modulate = Color( 1, 1, 1, 1 )
+37/region = Rect2( 32, 0, 32, 96 )
+37/tile_mode = 0
+37/occluder_offset = Vector2( 0, 0 )
+37/navigation_offset = Vector2( 0, 0 )
+37/shape_offset = Vector2( 0, 0 )
+37/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+37/shape = SubResource( 493 )
+37/shape_one_way = false
+37/shape_one_way_margin = 1.0
+37/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 493 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+37/z_index = 0
+38/name = "Furnace-x2.png 38"
+38/texture = ExtResource( 18 )
+38/tex_offset = Vector2( 0, -64 )
+38/modulate = Color( 1, 1, 1, 1 )
+38/region = Rect2( 96, 0, 32, 96 )
+38/tile_mode = 0
+38/occluder_offset = Vector2( 0, 0 )
+38/navigation_offset = Vector2( 0, 0 )
+38/shape_offset = Vector2( 0, 0 )
+38/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+38/shape = SubResource( 494 )
+38/shape_one_way = false
+38/shape_one_way_margin = 1.0
+38/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 494 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+38/z_index = 0
+39/name = "Furnace-x2.png 39"
+39/texture = ExtResource( 18 )
+39/tex_offset = Vector2( 0, -64 )
+39/modulate = Color( 1, 1, 1, 1 )
+39/region = Rect2( 0, 0, 32, 96 )
+39/tile_mode = 0
+39/occluder_offset = Vector2( 0, 0 )
+39/navigation_offset = Vector2( 0, 0 )
+39/shape_offset = Vector2( 0, 0 )
+39/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+39/shape = SubResource( 495 )
+39/shape_one_way = false
+39/shape_one_way_margin = 1.0
+39/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 495 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+39/z_index = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=471]
 points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )

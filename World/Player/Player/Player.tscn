@@ -5258,7 +5258,6 @@ anims/RESET = SubResource( 23 )
 anims/hit = SubResource( 22 )
 
 [node name="EnterInteractiveZones" type="Node2D" parent="Area2Ds"]
-visible = false
 script = ExtResource( 26 )
 
 [node name="ChestArea" type="Area2D" parent="Area2Ds/EnterInteractiveZones"]
@@ -5294,6 +5293,13 @@ collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterInteractiveZones/SleepingBag"]
+shape = SubResource( 15 )
+
+[node name="FurnaceArea" type="Area2D" parent="Area2Ds/EnterInteractiveZones"]
+collision_layer = 2097152
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterInteractiveZones/FurnaceArea"]
 shape = SubResource( 15 )
 
 [node name="DetectPathType" type="Node2D" parent="Area2Ds"]
@@ -5404,6 +5410,8 @@ shape = SubResource( 11 )
 [connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/GrainMillArea" to="Area2Ds/EnterInteractiveZones" method="_on_GrainMillArea_area_exited"]
 [connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/SleepingBag" to="Area2Ds/EnterInteractiveZones" method="_on_SleepingBag_area_entered"]
 [connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/SleepingBag" to="Area2Ds/EnterInteractiveZones" method="_on_SleepingBag_area_exited"]
+[connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/FurnaceArea" to="Area2Ds/EnterInteractiveZones" method="_on_FurnaceArea_area_entered"]
+[connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/FurnaceArea" to="Area2Ds/EnterInteractiveZones" method="_on_FurnaceArea_area_exited"]
 [connection signal="area_entered" from="Area2Ds/DetectPathType/DetectWoodPath" to="Area2Ds/DetectPathType" method="_on_DetectWoodPath_area_entered"]
 [connection signal="area_exited" from="Area2Ds/DetectPathType/DetectWoodPath" to="Area2Ds/DetectPathType" method="_on_DetectWoodPath_area_exited"]
 [connection signal="area_entered" from="Area2Ds/DetectPathType/DetectStonePath" to="Area2Ds/DetectPathType" method="_on_DetectStonePath_area_entered"]

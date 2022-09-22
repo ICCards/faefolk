@@ -53,9 +53,13 @@ func set_dimensions():
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 524288
-		$InteractiveArea.name = item_name
+		id = str(rng.randi_range(0, 100000))
+		$InteractiveArea.name = id
+		PlayerInventory.grain_mills[id] = {}
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
+
+
 
 func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
@@ -83,7 +87,7 @@ func _on_HurtBox_area_entered(area):
 func drop_items_in_chest():
 	for item in PlayerInventory.chests[id].keys():
 		drop_item(PlayerInventory.chests[id][item][0], PlayerInventory.chests[id][item][1], PlayerInventory.chests[id][item][2])
-	PlayerInventory.clear_chest_data(id)
+	PlayerInventory.chests.erase(id)
 
 func drop_item(item_name, quantity, health):
 	var itemDrop = ItemDrop.instance()

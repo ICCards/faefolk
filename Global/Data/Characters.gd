@@ -1,5 +1,117 @@
 extends Node
 
+#	body_run_down = {
+#		0 : preload()
+#	},
+#	body_run_up = {
+#		0 : preload()
+#	},
+#	body_run_right = {
+#		0 : preload()
+#	},
+#	body_run_left = {
+#		0 : preload()
+#	},
+#
+#	arms_run_down = {
+#		0 : preload()
+#	},
+#	arms_run_up = {
+#		0 : preload()
+#	},
+#	arms_run_right = {
+#		0 : preload()
+#	},
+#	arms_run_left = {
+#		0 : preload()
+#	},
+#
+#	acc_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+
 #	body_release_down = {
 #		0 : preload()
 #	},
@@ -6338,6 +6450,10 @@ func set_attributes(set_char):
 	'release_down': character.body_release_down[0],
 	'release_left': character.body_release_left[0],
 	'release_right': character.body_release_right[0],
+	'run_up': character.body_run_up[0],
+	'run_down': character.body_run_down[0],
+	'run_left': character.body_run_left[0],
+	'run_right': character.body_run_right[0],
 	'eat': character.body_eat[0]
 	};
 	arms_sprites = {
@@ -6409,6 +6525,10 @@ func set_attributes(set_char):
 	'release_down': character.arms_release_down[0],
 	'release_left': character.arms_release_left[0],
 	'release_right': character.arms_release_right[0],
+	'run_up': character.arms_run_up[0],
+	'run_down': character.arms_run_down[0],
+	'run_left': character.arms_run_left[0],
+	'run_right': character.arms_run_right[0],
 	'eat': character.arms_eat[0]
 	};
 	acc_sprites = {
@@ -6480,6 +6600,10 @@ func set_attributes(set_char):
 	'release_down': character.acc_release_down[acc_index],
 	'release_left': character.acc_release_left[acc_index],
 	'release_right': character.acc_release_right[acc_index],
+	'run_up': character.acc_run_up[acc_index],
+	'run_down': character.acc_run_down[acc_index],
+	'run_left': character.acc_run_left[acc_index],
+	'run_right': character.acc_run_right[acc_index],
 	'eat': character.acc_eat[acc_index]
 	};
 	headAtr_sprites = {
@@ -6551,6 +6675,10 @@ func set_attributes(set_char):
 	'release_down': character.head_attribute_release_down[headAtr_index],
 	'release_left': character.head_attribute_release_left[headAtr_index],
 	'release_right': character.head_attribute_release_right[headAtr_index],
+	'run_up': character.head_attribute_run_up[headAtr_index],
+	'run_down': character.head_attribute_run_down[headAtr_index],
+	'run_left': character.head_attribute_run_left[headAtr_index],
+	'run_right': character.head_attribute_run_right[headAtr_index],
 	'eat': character.head_attribute_eat[headAtr_index]
 	}
 	pants_sprites = {
@@ -6622,6 +6750,10 @@ func set_attributes(set_char):
 	'release_down': character.pants_release_down[pants_index],
 	'release_left': character.pants_release_left[pants_index],
 	'release_right': character.pants_release_right[pants_index],
+	'run_up': character.pants_run_up[pants_index],
+	'run_down': character.pants_run_down[pants_index],
+	'run_left': character.pants_run_left[pants_index],
+	'run_right': character.pants_run_right[pants_index],
 	'eat': character.pants_eat[pants_index]
 	};
 	shirts_sprites = {
@@ -6693,6 +6825,10 @@ func set_attributes(set_char):
 	'release_down': character.shirts_release_down[shirts_index],
 	'release_left': character.shirts_release_left[shirts_index],
 	'release_right': character.shirts_release_right[shirts_index],
+	'run_up': character.shirts_run_up[shirts_index],
+	'run_down': character.shirts_run_down[shirts_index],
+	'run_left': character.shirts_run_left[shirts_index],
+	'run_right': character.shirts_run_right[shirts_index],
 	'eat': character.shirts_eat[shirts_index]
 	};
 	shoes_sprites = {
@@ -6764,6 +6900,10 @@ func set_attributes(set_char):
 	'release_down': character.shoes_release_down[shoes_index],
 	'release_left': character.shoes_release_left[shoes_index],
 	'release_right': character.shoes_release_right[shoes_index],
+	'run_up': character.shoes_run_up[shoes_index],
+	'run_down': character.shoes_run_down[shoes_index],
+	'run_left': character.shoes_run_left[shoes_index],
+	'run_right': character.shoes_run_right[shoes_index],
 	'eat': character.shoes_eat[shoes_index]
 	};
 	

@@ -19,7 +19,9 @@ enum SlotType {
 	HOTBAR_INVENTORY,
 	INVENTORY,
 	CHEST,
-	LOCKED
+	LOCKED,
+	FURNACE,
+	GRAIN_MILL
 }
 
 var slotType = null

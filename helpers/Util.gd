@@ -74,8 +74,8 @@ func returnCategoryColor(category):
 			return Color("26ff00")
 		"Food":
 			return Color("eb00ff")
-		"Placable path":
-			return Color("3c1aff")
+		"Placable object":
+			return Color("806aff")
 		"Construction":
 			return Color("ff25f1")
 		"Fish":

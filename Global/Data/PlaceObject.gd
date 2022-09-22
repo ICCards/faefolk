@@ -12,6 +12,7 @@ onready var TentLeft = preload("res://World/Objects/Farm/TentLeft.tscn")
 onready var DoorFront = preload("res://World/Objects/Tiles/DoorFront.tscn")
 onready var DoorSide = preload("res://World/Objects/Tiles/DoubleDoorSide.tscn")
 onready var Rug  = preload("res://World/Objects/Misc/Rug.tscn")
+onready var Furnace = preload("res://World/Objects/Tiles/FurnaceObject.tscn")
 
 
 var rng = RandomNumberGenerator.new()
@@ -89,16 +90,12 @@ func place_object_in_world(id, item_name, direction, location):
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(16, 16)
 	match item_name:
 		"furnace":
+			tileObjectHurtBox.queue_free()
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			match direction:
-				"down":
-					Tiles.object_tiles.set_cellv(location, 26)
-				"up":
-					Tiles.object_tiles.set_cellv(location,  27)
-				"left":
-					Tiles.object_tiles.set_cellv(location, 28)
-				"right":
-					Tiles.object_tiles.set_cellv(location, 29)
+			var furnace = Furnace.instance()
+			furnace.direction = direction
+			furnace.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+			Server.world.call_deferred("add_child", furnace, true)
 		"tool cabinet":
 			match direction:
 				"down":

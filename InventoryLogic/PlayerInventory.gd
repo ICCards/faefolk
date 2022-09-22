@@ -21,6 +21,7 @@ var chest_id = null
 var workbench_id = null
 var stove_id = null
 var grain_mill_id = null
+var furnace_node = null
 var is_inside_sleeping_bag_area = false
 var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
@@ -32,17 +33,21 @@ var inventory = {
 	2: ["wood", 499, null],
 	1: ["stone", 699, null],
 	0: ["iron ingot", 60, null],
-	7: ["gold ingot", 60, null],
-	6: ["bronze ingot", 60, null],
+	7: ["coal", 60, null],
+	6: ["bronze ore", 60, null],
 	4: ["raw wing", 7, null],
 	5: ["wheat flour", 24, null]
 }
 
 var hotbar = {
+	6: ["sugar cane", 60, null],
+	0: ["corn", 6, null],
+	1: ["wheat", 4, null]
 }
 
-var chests = {
-}
+var chests = {}
+var furnaces = {}
+var grain_mills = {}
 
 func clear_chest_data(chest_id):
 	PlayerInventory.chests.erase(chest_id)
@@ -251,7 +256,7 @@ func update_chest_slot_visual(slot_index, item_name, new_quantity):
 	else:
 		slot.initialize_item(item_name, new_quantity)
 
-func remove_item(slot: SlotClass, var chest_id = null):
+func remove_item(slot: SlotClass, var chest_id = null, var grain_mill_id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar.erase(slot.slot_index)
@@ -261,8 +266,10 @@ func remove_item(slot: SlotClass, var chest_id = null):
 			inventory.erase(slot.slot_index)
 		SlotClass.SlotType.CHEST:
 			chests[chest_id].erase(slot.slot_index)
+		SlotClass.SlotType.GRAIN_MILL:
+			grain_mills[grain_mill_id].erase(slot.slot_index)
 
-func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var chest_id = null):
+func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var chest_id = null, var grain_mill_id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
@@ -272,9 +279,11 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var chest_id = nul
 			inventory[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.CHEST:
 			chests[chest_id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.GRAIN_MILL:
+			grain_mills[grain_mill_id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 
 
-func add_item_quantity(slot: SlotClass, quantity_to_add: int, var chest_id = null):
+func add_item_quantity(slot: SlotClass, quantity_to_add: int, var chest_id = null, var grain_mill_id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] += quantity_to_add
@@ -284,8 +293,10 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int, var chest_id = nul
 			inventory[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.CHEST:
 			chests[chest_id][slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.GRAIN_MILL:
+			grain_mills[grain_mill_id][slot.slot_index][1] += quantity_to_add
 
-func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var chest_id = null):
+func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var chest_id = null, var grain_mill_id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] -= quantity_to_subtract
@@ -295,6 +306,9 @@ func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var ches
 			inventory[slot.slot_index][1] -= quantity_to_subtract
 		SlotClass.SlotType.CHEST:
 			chests[chest_id][slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.GRAIN_MILL:
+			grain_mills[grain_mill_id][slot.slot_index][1] -= quantity_to_subtract
+			
 
 
 ###

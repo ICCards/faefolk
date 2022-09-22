@@ -9,7 +9,7 @@ onready var Eating_particles = preload("res://World/Player/Player/AttachedScenes
 onready var Fishing = preload("res://World/Player/Player/Fishing/Fishing.tscn")
 onready var PlaceObjectScene = preload("res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
 
-
+var running = false
 var principal
 var character 
 var setting
@@ -192,7 +192,7 @@ func _unhandled_input(event):
 					fish()
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
 					swing(item_name)
-				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish"):
+				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
 					eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
 					show_placable_object(item_name, item_category)
@@ -201,6 +201,10 @@ func _unhandled_input(event):
 			else:
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
+	if event.is_action_pressed("run"):
+		running = true
+	elif event.is_action_released("run"):
+		running = false
 
 
 func show_placable_object(item_name, item_category):
@@ -313,7 +317,7 @@ func idle_state(_direction):
 			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish":
+				if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop":
 					holding_item.show()
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					animation = "holding_idle_" + _direction.to_lower()
@@ -330,12 +334,12 @@ func idle_state(_direction):
 
 func walk_state(_direction):
 	$Sounds/FootstepsSound.stream_paused = false
-	if Sounds.current_footsteps_sound != Sounds.swimming:
+	if Sounds.current_footsteps_sound != Sounds.swimming and not running:
 		animation_player.play("movement")
 		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish":
+			if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop":
 				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 				holding_item.show()
 				animation = "holding_walk_" + _direction.to_lower()
@@ -345,6 +349,9 @@ func walk_state(_direction):
 		else:
 			holding_item.hide()
 			animation = "walk_" + _direction.to_lower()
+		composite_sprites.set_player_animation(character, animation, null)
+	elif running:
+		animation = "run_" + _direction.to_lower()
 		composite_sprites.set_player_animation(character, animation, null)
 	else:
 		animation_player.play("swim")

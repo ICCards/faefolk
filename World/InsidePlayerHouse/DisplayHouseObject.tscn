@@ -99,6 +99,7 @@ position = Vector2( 32, -40 )
 scale = Vector2( 0.075, 0.075 )
 frames = SubResource( 6 )
 animation = "active fire"
+frame = 5
 
 [node name="FireStone" type="Sprite" parent="LightFireplaceUI"]
 visible = false

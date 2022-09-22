@@ -51,12 +51,15 @@ func _physics_process(delta):
 		$ItemDescription.hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
 		if page == 1 and get_node("Page1/"+crafting_item+"/button").disabled:
+			$CraftingItemDescription.hide()
 			$ItemNameBox.show()
 			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
 		elif page == 2 and get_node("Page2/"+crafting_item+"/button").disabled:
+			$CraftingItemDescription.hide()
 			$ItemNameBox.show()
 			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
 		else:
+			$ItemNameBox.hide()
 			$CraftingItemDescription.show()
 			$CraftingItemDescription.item_name = crafting_item
 			$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)

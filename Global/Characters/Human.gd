@@ -1850,6 +1850,113 @@ var male = {
 		1 : preload("res://Characters/Human/male/RELEASE/assets/left/shoes/shoes.png")
 	},
 	
+	body_run_down = {
+		0 : preload("res://Characters/Human/male/RUN/body/down/body.png")
+	},
+	body_run_up = {
+		0 : preload("res://Characters/Human/male/RUN/body/up/body.png")
+	},
+	body_run_right = {
+		0 : preload("res://Characters/Human/male/RUN/body/right/body.png")
+	},
+	body_run_left = {
+		0 : preload("res://Characters/Human/male/RUN/body/left/body.png")
+	},
+
+	arms_run_down = {
+		0 : preload("res://Characters/Human/male/RUN/body/down/arms.png")
+	},
+	arms_run_up = {
+		0 : preload("res://Characters/Human/male/RUN/body/up/arms.png")
+	},
+	arms_run_right = {
+		0 : preload("res://Characters/Human/male/RUN/body/right/arms.png")
+	},
+	arms_run_left = {
+		0 : preload("res://Characters/Human/male/RUN/body/left/arms.png")
+	},
+
+	acc_run_down = {
+		0 : null,
+	},
+	acc_run_up = {
+		0 : null,
+	},
+	acc_run_right = {
+		0 : null,
+	},
+	acc_run_left = {
+		0 : null,
+	},
+
+	head_attribute_run_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_run_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_run_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_run_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_run_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/down/shirts/shirts.png")
+	},
+	shirts_run_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/up/shirts/shirts.png")
+	},
+	shirts_run_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/right/shirts/shirts.png")
+	},
+	shirts_run_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/left/shirts/shirts.png")
+	},
+
+	pants_run_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/down/pants/pants.png")
+	},
+	pants_run_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/up/pants/pants.png")
+	},
+	pants_run_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/right/pants/pants.png")
+	},
+	pants_run_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/left/pants/pants.png")
+	},
+
+	shoes_run_down = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/down/shoes/shoes.png")
+	},
+	shoes_run_up = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/up/shoes/shoes.png")
+	},
+	shoes_run_right = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/right/shoes/shoes.png")
+	},
+	shoes_run_left = {
+		0 : null,
+		1 : preload("res://Characters/Human/male/RUN/assets/left/shoes/shoes.png")
+	},
+	
 }
 var female = {
 	body_idle_down = {

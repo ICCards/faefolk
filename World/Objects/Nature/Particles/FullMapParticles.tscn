@@ -10,8 +10,10 @@ position = Vector2( 16000, 16000 )
 script = ExtResource( 3 )
 
 [node name="LargeClouds" parent="." instance=ExtResource( 4 )]
+amount = 750
 
 [node name="Clouds" parent="." instance=ExtResource( 2 )]
+amount = 1800
 initial_velocity_random = 0.62
 damping_random = 0.75
 

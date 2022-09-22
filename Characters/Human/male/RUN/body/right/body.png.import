@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Furnace.png-577860c08b6b5d1be728fd9e5f8d639b.stex"
+path="res://.import/body.png-c3907356615c8460f4010eac0735f114.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/Furniture/Furnace.png"
-dest_files=[ "res://.import/Furnace.png-577860c08b6b5d1be728fd9e5f8d639b.stex" ]
+source_file="res://Characters/Human/male/RUN/body/right/body.png"
+dest_files=[ "res://.import/body.png-c3907356615c8460f4010eac0735f114.stex" ]
 
 [params]
 

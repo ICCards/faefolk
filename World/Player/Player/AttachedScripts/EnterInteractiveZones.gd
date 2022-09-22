@@ -24,3 +24,9 @@ func _on_SleepingBag_area_entered(area):
 	PlayerInventory.is_inside_sleeping_bag_area = true
 func _on_SleepingBag_area_exited(area):
 	PlayerInventory.is_inside_sleeping_bag_area = false
+
+
+func _on_FurnaceArea_area_entered(area):
+	PlayerInventory.furnace_node = area
+func _on_FurnaceArea_area_exited(area):
+	PlayerInventory.furnace_node = null

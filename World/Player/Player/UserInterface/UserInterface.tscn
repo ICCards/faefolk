@@ -105,6 +105,12 @@ tracks/0/keys = {
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 23 )
 
+[node name="Menu" parent="." instance=ExtResource( 15 )]
+visible = false
+
+[node name="Hotbar" parent="." instance=ExtResource( 17 )]
+visible = false
+
 [node name="WeatherEffects" type="ColorRect" parent="."]
 visible = false
 margin_left = -49.0
@@ -149,19 +155,6 @@ margin_top = 435.0
 margin_right = 892.0
 margin_bottom = 435.0
 rect_scale = Vector2( 2, 2 )
-
-[node name="Menu" parent="." instance=ExtResource( 15 )]
-visible = false
-margin_left = 138.0
-margin_top = 32.0
-margin_right = 138.0
-margin_bottom = 32.0
-
-[node name="Hotbar" parent="." instance=ExtResource( 17 )]
-margin_left = 512.0
-margin_top = 507.0
-margin_right = 512.0
-margin_bottom = 507.0
 
 [node name="OpenChest" parent="." instance=ExtResource( 14 )]
 visible = false

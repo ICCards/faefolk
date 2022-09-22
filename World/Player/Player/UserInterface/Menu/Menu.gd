@@ -3,16 +3,10 @@ extends Control
 var item
 var hovered_button
 
-func _physics_process(delta):
-	if hovered_button:
-		$ItemNameBox.item_name = hovered_button
-		$ItemNameBox.initialize()
-		$ItemNameBox.position = get_local_mouse_position() + Vector2(28 , 40)
-	else:
-		$ItemNameBox.hide()
-
 
 func initialize():
+	show()
+	Server.player_node.destroy_placable_object()
 	hovered_button = null
 	$Trash/Top.rotation_degrees = 0
 	$Trash.show()
@@ -23,7 +17,15 @@ func initialize():
 	$Skills.hide()
 	$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/inventory.png")
 	$Background.texture = preload("res://Assets/Images/Inventory UI/menus/inventory.png")
-	$Background.rect_position.x = 57
+
+
+func _physics_process(delta):
+	if hovered_button:
+		$ItemNameBox.item_name = hovered_button
+		$ItemNameBox.initialize()
+		$ItemNameBox.position = get_local_mouse_position() + Vector2(28 , 40)
+	else:
+		$ItemNameBox.hide()
 
 
 func _on_Inventory_pressed():
@@ -40,7 +42,6 @@ func _on_Skills_pressed():
 		$Skills.initialize()
 		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/skills.png")
 		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/empty.png")
-		$Background.rect_position.x = 57
 
 
 func _on_Crafting_pressed():
@@ -53,7 +54,6 @@ func _on_Crafting_pressed():
 		$OptionsMenu.hide()
 		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/crafting.png")
 		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/crafting1.png")
-		$Background.rect_position.x = 57
 
 func _on_Collections_pressed():
 	if not find_parent("UserInterface").holding_item:
@@ -65,7 +65,6 @@ func _on_Collections_pressed():
 		$Collections.initialize()
 		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/collections.png")
 		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/collections1.png")
-		$Background.rect_position.x = -3
 
 func _on_Options_pressed():
 	if not find_parent("UserInterface").holding_item:
@@ -77,7 +76,6 @@ func _on_Options_pressed():
 		$Skills.hide()
 		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/options.png")
 		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/empty.png")
-		$Background.rect_position.x = 57
 
 
 func _on_Exit_pressed():
