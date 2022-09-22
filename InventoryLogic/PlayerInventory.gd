@@ -34,7 +34,7 @@ var inventory = {
 	1: ["stone", 699, null],
 	0: ["iron ingot", 60, null],
 	7: ["coal", 60, null],
-	6: ["bronze ore", 60, null],
+	6: ["bronze ingot", 60, null],
 	4: ["raw wing", 7, null],
 	5: ["wheat flour", 24, null]
 }
@@ -42,7 +42,8 @@ var inventory = {
 var hotbar = {
 	6: ["sugar cane", 60, null],
 	0: ["corn", 6, null],
-	1: ["wheat", 4, null]
+	1: ["wheat", 4, null],
+	2: ["gold ingot", 60, null],
 }
 
 var chests = {}

@@ -24,10 +24,8 @@ enum {
 }
 
 func _ready():
-	initialize_user_interface()
+	add_hotbar_clock_and_stats()
 
-func initialize_user_interface():
-	add_hotbar()
 
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and \
@@ -97,47 +95,51 @@ func toggle_chest():
 
 
 
-func close_hotbar():
+func close_hotbar_clock_and_stats():
+	PlayerInventory.interactive_screen_mode = true
 	$Hotbar.hide()
+	$CurrentTime.hide()
+	$PlayerStatsUI.hide()
 
-func add_hotbar():
+
+func add_hotbar_clock_and_stats():
+	PlayerInventory.interactive_screen_mode = false
 	$Hotbar.initialize_hotbar()
+	$CurrentTime.show()
+	$PlayerStatsUI.show()
+
+
+func toggle_menu():
+	if not $Menu.visible:
+		$Hotbar.hide()
+		$CurrentTime.hide()
+		$PlayerStatsUI.hide()
+		PlayerInventory.viewInventoryMode = true
+		$Menu.initialize()
+	else:
+		PlayerInventory.viewInventoryMode = false
+		$Hotbar.initialize_hotbar()
+		$CurrentTime.show()
+		$PlayerStatsUI.show()
+		$Menu.hide()
+		drop_items()
 
 
 func toggle_grain_mill():
 	if not has_node("GrainMill"):
 		var grainMill = GrainMill.instance()
 		add_child(grainMill)
-		close_hotbar()
+		close_hotbar_clock_and_stats()
 	else:
-		add_hotbar()
 		close_grain_mill()
-	PlayerInventory.interactive_screen_mode = !PlayerInventory.interactive_screen_mode
-	toggle_stats_and_time()
-	
-func close_grain_mill():
-	get_node("GrainMill").queue_free()
 
-func toggle_menu():
-	if not $Menu.visible:
-		close_hotbar()
-		$Menu.initialize()
-		PlayerInventory.viewInventoryMode = true
-	else:
-		add_hotbar()
-		$Menu.hide()
-		drop_items()
-		PlayerInventory.viewInventoryMode = false
-	toggle_stats_and_time()
 
 func toggle_workbench(level):
 	if not has_node("Workbench"):
 		var workbench = Workbench.instance()
 		workbench.level = level
 		add_child(workbench)
-		close_hotbar()
-		PlayerInventory.interactive_screen_mode = true
-		toggle_stats_and_time()
+		close_hotbar_clock_and_stats()
 	else:
 		close_workbench()
 
@@ -146,27 +148,27 @@ func toggle_stove(level):
 		var stove = Stove.instance()
 		stove.level = level
 		add_child(stove)
-		close_hotbar()
-		PlayerInventory.interactive_screen_mode = true
-		toggle_stats_and_time()
+		close_hotbar_clock_and_stats()
 	else:
 		close_stove()
 
+func close_grain_mill():
+	if not holding_item:
+		add_hotbar_clock_and_stats()
+		get_node("GrainMill").destroy()
+		drop_items()
+
 func close_workbench():
 	if not holding_item:
-		add_hotbar()
-		get_node("Workbench").queue_free()
+		add_hotbar_clock_and_stats()
+		get_node("Workbench").destroy()
 		drop_items()
-		PlayerInventory.interactive_screen_mode = false
-		toggle_stats_and_time()
 
 func close_stove():
 	if not holding_item:
-		add_hotbar()
-		get_node("Stove").queue_free()
+		add_hotbar_clock_and_stats()
+		get_node("Stove").destroy()
 		drop_items()
-		PlayerInventory.interactive_screen_mode = false
-		toggle_stats_and_time()
 
 
 func drop_items():
@@ -183,7 +185,4 @@ func drop_item(item_name, quantity, health):
 	itemDrop.global_position = Server.player_node.global_position + Vector2(rng.randi_range(-12, 12), rng.randi_range(-12, 12))
 
 
-func toggle_stats_and_time():
-	$CurrentTime.visible = !$CurrentTime.visible
-	$PlayerStatsUI.visible = !$PlayerStatsUI.visible
 

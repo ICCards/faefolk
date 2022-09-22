@@ -199,6 +199,7 @@ func _unhandled_input(event):
 				elif item_name != "blueprint":
 					destroy_placable_object()
 			else:
+				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
 	if event.is_action_pressed("run"):

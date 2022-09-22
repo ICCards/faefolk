@@ -71,6 +71,13 @@ func exited_crafting_area(item_name):
 			$Tween.start()
 
 
+func destroy():
+	set_physics_process(false)
+	$ItemDescription.queue_free()
+	$CraftingItemDescription.queue_free()
+	$ItemNameBox.queue_free()
+	queue_free()
+
 func _physics_process(delta):
 	if item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.show()

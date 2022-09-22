@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -15,10 +15,14 @@
 [ext_resource path="res://Assets/Images/inventory_icons/Crop/wheat.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Images/inventory_icons/Crop/corn.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Images/inventory_icons/Crop/sugar cane.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=16]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 12 )
 region_rect = Rect2( 0, 0, 54, 54 )
+
+[sub_resource type="StreamTexture" id=3]
+load_path = "res://.import/slot locked.png-6b5ec7dbd098197891b38cf3f969131b.stex"
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 93.0054
@@ -227,8 +231,9 @@ margin_right = 296.0
 margin_bottom = 176.0
 
 [node name="WheatSlot" type="Panel" parent="GrainMillSlots"]
+margin_top = -2.0
 margin_right = 54.0
-margin_bottom = 54.0
+margin_bottom = 52.0
 rect_min_size = Vector2( 54, 54 )
 custom_styles/panel = SubResource( 2 )
 script = ExtResource( 2 )
@@ -250,6 +255,12 @@ rect_min_size = Vector2( 54, 54 )
 custom_styles/panel = SubResource( 2 )
 script = ExtResource( 2 )
 
+[node name="LockSlot" type="TextureRect" parent="GrainMillSlots/CornSlot"]
+visible = false
+margin_right = 54.0
+margin_bottom = 54.0
+texture = ExtResource( 16 )
+
 [node name="TextureRect" type="TextureRect" parent="GrainMillSlots/CornSlot"]
 modulate = Color( 1, 1, 1, 0.392157 )
 margin_left = 3.0
@@ -260,12 +271,18 @@ texture = ExtResource( 14 )
 expand = true
 
 [node name="SugarCaneSlot" type="Panel" parent="GrainMillSlots"]
-margin_top = 124.0
+margin_top = 126.0
 margin_right = 54.0
-margin_bottom = 178.0
+margin_bottom = 180.0
 rect_min_size = Vector2( 54, 54 )
 custom_styles/panel = SubResource( 2 )
 script = ExtResource( 2 )
+
+[node name="LockSlot" type="TextureRect" parent="GrainMillSlots/SugarCaneSlot"]
+visible = false
+margin_right = 54.0
+margin_bottom = 54.0
+texture = SubResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="GrainMillSlots/SugarCaneSlot"]
 modulate = Color( 1, 1, 1, 0.392157 )
@@ -277,10 +294,10 @@ texture = ExtResource( 15 )
 expand = true
 
 [node name="YieldSlot" type="Panel" parent="GrainMillSlots"]
-margin_left = 309.0
-margin_top = 134.0
-margin_right = 363.0
-margin_bottom = 188.0
+margin_left = 292.0
+margin_top = 136.0
+margin_right = 346.0
+margin_bottom = 190.0
 rect_min_size = Vector2( 54, 54 )
 custom_styles/panel = SubResource( 2 )
 script = ExtResource( 2 )

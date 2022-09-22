@@ -2,7 +2,8 @@ extends Control
 
 var item
 var dragging = false
-var grain_mill_id = PlayerInventory.grain_mill_id
+var grain_mill_id = PlayerInventory.grain_mill_id.substr(2,-1)
+var level = PlayerInventory.grain_mill_id.substr(0,1)
 
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots
@@ -14,7 +15,6 @@ onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
 func _ready():
 	var slots_in_inventory = inventory_slots.get_children()
 	var slots_in_hotbar = hotbar_slots.get_children()
-	var slots_in_grain_mill = grain_mill_slots.get_children()
 	for i in range(slots_in_inventory.size()):
 		slots_in_inventory[i].connect("gui_input", self, "slot_gui_input", [slots_in_inventory[i]])
 		slots_in_inventory[i].connect("mouse_entered", self, "hovered_slot", [slots_in_inventory[i]])
@@ -27,20 +27,52 @@ func _ready():
 		slots_in_hotbar[i].connect("mouse_exited", self, "exited_slot", [slots_in_hotbar[i]])
 		slots_in_hotbar[i].slot_index = i
 		slots_in_hotbar[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
-	for i in range(slots_in_grain_mill.size()):
-		slots_in_grain_mill[i].connect("gui_input", self, "slot_gui_input", [slots_in_grain_mill[i]])
-		slots_in_grain_mill[i].slot_index = i
-		slots_in_grain_mill[i].slotType = SlotClass.SlotType.GRAIN_MILL
+	initialize_locked_slots()
 	initialize()
+	
+func initialize_locked_slots():
+	var slots_in_grain_mill = grain_mill_slots.get_children()
+	if level == "1":
+		$GrainMillSlots/SugarCaneSlot/LockSlot.show()
+		$GrainMillSlots/CornSlot/LockSlot.show()
+		for i in range(slots_in_grain_mill.size()):
+			if i != 1 and i != 2:
+				slots_in_grain_mill[i].connect("gui_input", self, "slot_gui_input", [slots_in_grain_mill[i]])
+				slots_in_grain_mill[i].connect("mouse_entered", self, "hovered_slot", [slots_in_grain_mill[i]])
+				slots_in_grain_mill[i].connect("mouse_exited", self, "exited_slot", [slots_in_grain_mill[i]])
+			slots_in_grain_mill[i].slot_index = i
+			slots_in_grain_mill[i].slotType = SlotClass.SlotType.GRAIN_MILL
+	elif level == "2":
+		$GrainMillSlots/SugarCaneSlot/LockSlot.show()
+		for i in range(slots_in_grain_mill.size()):
+			if i != 2:
+				slots_in_grain_mill[i].connect("gui_input", self, "slot_gui_input", [slots_in_grain_mill[i]])
+				slots_in_grain_mill[i].connect("mouse_entered", self, "hovered_slot", [slots_in_grain_mill[i]])
+				slots_in_grain_mill[i].connect("mouse_exited", self, "exited_slot", [slots_in_grain_mill[i]])
+			slots_in_grain_mill[i].slot_index = i
+			slots_in_grain_mill[i].slotType = SlotClass.SlotType.GRAIN_MILL
+	else:
+		for i in range(slots_in_grain_mill.size()):
+			slots_in_grain_mill[i].connect("gui_input", self, "slot_gui_input", [slots_in_grain_mill[i]])
+			slots_in_grain_mill[i].connect("mouse_entered", self, "hovered_slot", [slots_in_grain_mill[i]])
+			slots_in_grain_mill[i].connect("mouse_exited", self, "exited_slot", [slots_in_grain_mill[i]])
+			slots_in_grain_mill[i].slot_index = i
+			slots_in_grain_mill[i].slotType = SlotClass.SlotType.GRAIN_MILL
 
 func initialize():
 	Server.player_node.destroy_placable_object()
 	item = null
+	$Title.text = "Grain mill #" + str(level) + ":"
 	show()
 	initialize_hotbar()
 	initialize_inventory()
 	initialize_grain_mill_data()
 	
+	
+func destroy():
+	set_physics_process(false)
+	$ItemDescription.queue_free()
+	queue_free()
 	
 func able_to_put_into_slot(slot: SlotClass):
 	var holding_item = find_parent("UserInterface").holding_item
@@ -129,7 +161,7 @@ func initialize_inventory():
 
 
 func hovered_slot(slot: SlotClass):
-	if slot.item:
+	if slot.item and not $GrainMillCrank.dragging:
 		slot.item.hover_item()
 		item = slot.item.item_name
 

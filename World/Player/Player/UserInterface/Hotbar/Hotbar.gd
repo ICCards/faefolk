@@ -25,6 +25,7 @@ func _ready():
 	
 
 func hovered_slot(slot: SlotClass):
+	Server.player_node.destroy_placable_object()
 	if slot.item:
 		slot.item.hover_item()
 		item = slot.item.item_name

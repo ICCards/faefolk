@@ -28,10 +28,10 @@ func PlayEffect(_player_id):
 
 func set_dimensions():
 	rng.randomize()
+	id = str(rng.randi_range(0, 100000))
 	if item_name == "torch" or item_name == "campfire" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
 		$Light2D.enabled = true
 	elif item_name == "wood chest" or item_name == "stone chest":
-		id = str(rng.randi_range(0, 100000))
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 65536
 		$InteractiveArea.name = id
@@ -53,8 +53,7 @@ func set_dimensions():
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 524288
-		id = str(rng.randi_range(0, 100000))
-		$InteractiveArea.name = id
+		$InteractiveArea.name = str(item_name.substr(12) + " " + id)
 		PlayerInventory.grain_mills[id] = {}
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)

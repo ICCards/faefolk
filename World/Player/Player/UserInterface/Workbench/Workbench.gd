@@ -39,6 +39,13 @@ func initialize():
 	$Title.text = level[0].to_upper() + level.substr(1,-1) + ":"
 	show()
 	set_current_page()
+	
+func destroy():
+	set_physics_process(false)
+	$ItemDescription.queue_free()
+	$CraftingItemDescription.queue_free()
+	$ItemNameBox.queue_free()
+	queue_free()
 
 func _physics_process(delta):
 	if item and not find_parent("UserInterface").holding_item:
@@ -242,6 +249,7 @@ func _on_TrashButton_pressed():
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
+		set_current_page()
 
 
 func _on_BackgroundButton_pressed():
