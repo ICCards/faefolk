@@ -214,7 +214,7 @@ func entered_crafting_area(_item):
 	yield(get_tree(), "idle_frame")
 	item = null
 	crafting_item = _item
-	if crafting_item == "blueprint" or crafting_item == "hammer":
+	if crafting_item == "blueprint" or crafting_item == "hammer" or crafting_item == "wood sword" or crafting_item == "wood axe" or crafting_item == "wood pickaxe" or crafting_item == "wood hoe":
 		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + crafting_item), "scale",
 			get_node("Page" + str(page) + "/" + crafting_item).scale, Vector2(6.7, 6.7), 0.15,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -228,7 +228,7 @@ func entered_crafting_area(_item):
 func exited_crafting_area(_item):
 	crafting_item = null
 	if has_node("Page" + str(page) + "/" + _item):
-		if _item == "blueprint" or _item == "hammer":
+		if _item == "blueprint" or _item == "hammer" or _item == "wood sword" or _item == "wood axe" or _item == "wood pickaxe" or _item == "wood hoe":
 			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "scale",
 				get_node("Page" + str(page) + "/" + _item).scale, Vector2(6, 6), 0.15,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -254,7 +254,7 @@ func play_error_sound():
 	
 func return_crafted_item(item_name):
 	var crafted = InventoryItem.instance()
-	crafted.set_item(item_name, 1, null)
+	crafted.set_item(item_name, 1, Stats.return_max_tool_health(item_name))
 	find_parent("UserInterface").add_child(crafted)
 	return crafted
 	
@@ -263,7 +263,7 @@ func craftable_item_pressed():
 	if PlayerInventory.isSufficientMaterialToCraft(crafting_item) and not find_parent("UserInterface").holding_item:
 		craft(crafting_item)
 	elif find_parent("UserInterface").holding_item:
-		if find_parent("UserInterface").holding_item.item_name == crafting_item and PlayerInventory.isSufficientMaterialToCraft(crafting_item):
+		if find_parent("UserInterface").holding_item.item_name == crafting_item and PlayerInventory.isSufficientMaterialToCraft(crafting_item) and JsonData.item_data[crafting_item]["StackSize"] != 1:
 			PlayerInventory.craft_item(crafting_item)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
 			initialize_crafting()
@@ -522,3 +522,35 @@ func _on_ToolCabinetButton_mouse_entered():
 	entered_crafting_area("tool cabinet")
 func _on_ToolCabinetButton_mouse_exited():
 	exited_crafting_area("tool cabinet")
+
+
+func _on_WoodAxeButton_pressed():
+	craftable_item_pressed()
+func _on_WoodAxeButton_mouse_entered():
+	entered_crafting_area("wood axe")
+func _on_WoodAxeButton_mouse_exited():
+	exited_crafting_area("wood axe")
+
+
+func _on_WoodPickaxeButton_pressed():
+	craftable_item_pressed()
+func _on_WoodPickaxeButton_mouse_entered():
+	entered_crafting_area("wood pickaxe")
+func _on_WoodPickaxeButton_mouse_exited():
+	exited_crafting_area("wood pickaxe")
+
+
+func _on_WoodHoeButton_pressed():
+	craftable_item_pressed()
+func _on_WoodHoeButton_mouse_entered():
+	entered_crafting_area("wood hoe")
+func _on_WoodHoeButton_mouse_exited():
+	exited_crafting_area("wood hoe")
+
+
+func _on_WoodSwordButton_pressed():
+	craftable_item_pressed()
+func _on_WoodSwordButton_mouse_entered():
+	entered_crafting_area("wood sword")
+func _on_WoodSwordButton_mouse_exited():
+	exited_crafting_area("wood sword")

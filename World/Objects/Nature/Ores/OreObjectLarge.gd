@@ -13,6 +13,8 @@ var oreObject
 var loc
 var variety
 var health
+var large_break = false
+var small_break = false
 
 
 func initialize(_variety, _loc):
@@ -75,8 +77,15 @@ func _on_BigHurtBox_area_entered(_area):
 	rng.randomize()
 	var data = {"id": name, "n": "large_ore"}
 	Server.action("ON_HIT", data)
-	health -= 1
-	if health == 0:
+	deduct_health(_area.tool_name)
+	if health >= 40:
+		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		$SoundEffects.play()
+		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-25, 25), rng.randi_range(-8, 32)))
+		animation_player.play("big_ore_hit_right")
+	elif not large_break:
+		large_break = true
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
@@ -85,12 +94,6 @@ func _on_BigHurtBox_area_entered(_area):
 		animation_player.play("big_ore_break")
 		$LargeOreOccupiedTiles/CollisionShape2D.set_deferred("disabled", true)
 
-	if health != 0:
-		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffects.play()
-		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-25, 25), rng.randi_range(-8, 32)))
-		animation_player.play("big_ore_hit_right")
 
 
 func _on_SmallHurtBox_area_entered(_area):
@@ -99,8 +102,9 @@ func _on_SmallHurtBox_area_entered(_area):
 	rng.randomize()
 	var data = {"id": name, "n": "large_ore"}
 	Server.action("ON_HIT", data)
-	health -= 1
-	if health <= 0:
+	deduct_health(_area.tool_name)
+	if health <= 0 and not small_break:
+		small_break = true
 		Tiles.reset_valid_tiles(loc, "large ore")
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -112,14 +116,26 @@ func _on_SmallHurtBox_area_entered(_area):
 		yield($SoundEffects, "finished")
 		yield(get_tree().create_timer(0.6), "timeout")
 		queue_free()
-		
-	if health != 0:
+	elif health >= 1:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 24))
 		animation_player.play("small_ore_hit_right")
 
+
+func deduct_health(tool_name):
+	match tool_name:
+		"wood pickaxe":
+			health -= Stats.WOOD_TOOL_DAMAGE
+		"stone pickaxe":
+			health -= Stats.STONE_TOOL_DAMAGE
+		"bronze pickaxe":
+			health -= Stats.BRONZE_TOOL_DAMAGE
+		"iron pickaxe":
+			health -= Stats.IRON_TOOL_DAMAGE
+		"gold pickaxe":
+			health -= Stats.GOLD_TOOL_DAMAGE
 
 
 

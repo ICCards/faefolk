@@ -73,120 +73,97 @@ margin_right = -139.0
 margin_bottom = -135.0
 rect_scale = Vector2( 4, 4 )
 custom_constants/vseparation = 2
-custom_constants/hseparation = 12
-columns = 5
+custom_constants/hseparation = 22
+columns = 4
 script = ExtResource( 3 )
-
-[node name="wood axe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 16.0
-margin_bottom = 16.0
 
 [node name="stone axe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 28.0
-margin_right = 44.0
+margin_right = 16.0
 margin_bottom = 16.0
 
 [node name="bronze axe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 56.0
-margin_right = 72.0
+margin_left = 38.0
+margin_right = 54.0
 margin_bottom = 16.0
 
 [node name="iron axe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 84.0
-margin_right = 100.0
+margin_left = 76.0
+margin_right = 92.0
 margin_bottom = 16.0
 
 [node name="gold axe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 112.0
-margin_right = 128.0
+margin_left = 114.0
+margin_right = 130.0
 margin_bottom = 16.0
-
-[node name="wood pickaxe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 16.0
-margin_bottom = 34.0
 
 [node name="stone pickaxe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 28.0
 margin_top = 18.0
-margin_right = 44.0
+margin_right = 16.0
 margin_bottom = 34.0
 
 [node name="bronze pickaxe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 56.0
+margin_left = 38.0
 margin_top = 18.0
-margin_right = 72.0
+margin_right = 54.0
 margin_bottom = 34.0
 
 [node name="iron pickaxe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 84.0
+margin_left = 76.0
 margin_top = 18.0
-margin_right = 100.0
+margin_right = 92.0
 margin_bottom = 34.0
 
 [node name="gold pickaxe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 112.0
+margin_left = 114.0
 margin_top = 18.0
-margin_right = 128.0
+margin_right = 130.0
 margin_bottom = 34.0
 
-[node name="wood hoe" parent="Page1" instance=ExtResource( 2 )]
+[node name="stone hoe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 36.0
 margin_right = 16.0
 margin_bottom = 52.0
 
-[node name="stone hoe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 28.0
-margin_top = 36.0
-margin_right = 44.0
-margin_bottom = 52.0
-
 [node name="bronze hoe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 56.0
+margin_left = 38.0
 margin_top = 36.0
-margin_right = 72.0
+margin_right = 54.0
 margin_bottom = 52.0
 
 [node name="iron hoe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 84.0
+margin_left = 76.0
 margin_top = 36.0
-margin_right = 100.0
+margin_right = 92.0
 margin_bottom = 52.0
 
 [node name="gold hoe" parent="Page1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 112.0
+margin_left = 114.0
 margin_top = 36.0
-margin_right = 128.0
+margin_right = 130.0
 margin_bottom = 52.0
 
 [node name="Page2" type="GridContainer" parent="."]
@@ -197,15 +174,9 @@ margin_right = -139.0
 margin_bottom = -135.0
 rect_scale = Vector2( 4, 4 )
 custom_constants/vseparation = 2
-custom_constants/hseparation = 12
-columns = 5
+custom_constants/hseparation = 22
+columns = 4
 script = ExtResource( 3 )
-
-[node name="wood sword" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 16.0
-margin_bottom = 16.0
 
 [node name="stone sword" parent="Page2" instance=ExtResource( 2 )]
 anchor_right = 0.0

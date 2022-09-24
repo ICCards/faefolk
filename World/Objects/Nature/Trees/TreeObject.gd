@@ -19,6 +19,8 @@ var hit_dir
 var health
 var adjusted_leaves_falling_pos 
 var biome
+var tree_fallen = false
+var tree_broke = false
 
 func initialize(inputVar, _loc):
 	variety = inputVar
@@ -113,10 +115,10 @@ func _on_Hurtbox_area_entered(_area):
 		Stats.decrease_tool_health()
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
-	health -= 1
-	if health == 7:
+	if health == 100:
 		initiateBirdEffect()
-	if health >= 4:
+	deduct_health(_area.tool_name)
+	if health >= 40:
 		initiateLeavesFallingEffect(treeObject)
 		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -128,7 +130,8 @@ func _on_Hurtbox_area_entered(_area):
 		else: 
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			tree_animation_player.play("tree hit left")
-	elif health == 3:
+	elif not tree_fallen:
+		tree_fallen = true
 		timer.stop()
 		disable_tree_top_collision_box()
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
@@ -147,7 +150,7 @@ func _on_Hurtbox_area_entered(_area):
 			intitiateItemDrop("wood", Vector2(-130, -8), 7)
 
 
-	elif health >= 1 :
+	elif health >= 1:
 		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffectsStump.play()
@@ -157,7 +160,8 @@ func _on_Hurtbox_area_entered(_area):
 		else: 
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump hit right")
-	elif health == 0: 
+	elif health <= 0 and not tree_broke: 
+		tree_broke = true
 		Tiles.reset_valid_tiles(loc, "tree")
 		$SoundEffectsStump.stream = Sounds.stump_break
 		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -169,6 +173,21 @@ func _on_Hurtbox_area_entered(_area):
 		queue_free()
 	
 
+
+func deduct_health(tool_name):
+	match tool_name:
+		"punch":
+			health -= Stats.PUNCH_DAMAGE
+		"wood axe":
+			health -= Stats.WOOD_TOOL_DAMAGE
+		"stone axe":
+			health -= Stats.STONE_TOOL_DAMAGE
+		"bronze axe":
+			health -= Stats.BRONZE_TOOL_DAMAGE
+		"iron axe":
+			health -= Stats.IRON_TOOL_DAMAGE
+		"gold axe":
+			health -= Stats.GOLD_TOOL_DAMAGE
 
 
 ### Effect functions		

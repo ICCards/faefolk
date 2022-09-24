@@ -14,6 +14,13 @@ const BRONZE_TOOL_HEALTH = 100
 const IRON_TOOL_HEALTH = 200
 const GOLD_TOOL_HEALTH = 400
 
+const PUNCH_DAMAGE = 10 #10
+const WOOD_TOOL_DAMAGE = 14 #8
+const STONE_TOOL_DAMAGE = 16 #7
+const BRONZE_TOOL_DAMAGE = 18 #6
+const IRON_TOOL_DAMAGE = 20 #5
+const GOLD_TOOL_DAMAGE = 25 #4
+
 const MAX_STONE_WATERING_CAN = 25
 const MAX_BRONZE_WATERING_CAN = 50
 const MAX_GOLD_WATERING_CAN = 100
@@ -71,6 +78,8 @@ func return_max_tool_health(item_name):
 			return MAX_GOLD_WATERING_CAN
 		"bow":
 			return BOW_HEALTH
+		_:
+			return null
 
 func decrease_tool_health():
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):

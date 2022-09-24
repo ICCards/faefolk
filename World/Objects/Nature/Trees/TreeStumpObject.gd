@@ -9,6 +9,7 @@ var rng = RandomNumberGenerator.new()
 var treeObject
 var loc 
 var health
+var stump_break = false
 
 func initialize(variety, _loc):
 	loc = _loc
@@ -53,8 +54,9 @@ func _on_StumpHurtBox_area_entered(_area):
 		Stats.decrease_tool_health()
 	var data = {"id": name, "n": "stump"}
 	Server.action("ON_HIT", data)
-	health -= 1
-	if health == 0: 
+	deduct_health(_area.tool_name)
+	if health <= 0 and not stump_break:
+		stump_break = true 
 		Tiles.reset_valid_tiles(loc, "stump")
 		$SoundEffects.stream = Sounds.stump_break
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -75,6 +77,22 @@ func _on_StumpHurtBox_area_entered(_area):
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			stump_animation_player.play("stump hit right")
 
+
+
+func deduct_health(tool_name):
+	match tool_name:
+		"punch":
+			health -= Stats.PUNCH_DAMAGE
+		"wood axe":
+			health -= Stats.WOOD_TOOL_DAMAGE
+		"stone axe":
+			health -= Stats.STONE_TOOL_DAMAGE
+		"bronze axe":
+			health -= Stats.BRONZE_TOOL_DAMAGE
+		"iron axe":
+			health -= Stats.IRON_TOOL_DAMAGE
+		"gold axe":
+			health -= Stats.GOLD_TOOL_DAMAGE
 
 ### Effect functions		
 func initiateTreeHitEffect(tree, effect, pos):

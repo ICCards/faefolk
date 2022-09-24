@@ -48,6 +48,7 @@ func toggle_map():
 
 
 func initialize():
+	Server.player_node.destroy_placable_object()
 	PlayerInventory.viewMapMode = true
 	$Camera2D.current = true
 	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar").visible = false

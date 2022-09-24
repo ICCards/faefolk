@@ -126,17 +126,21 @@ func shoot():
 func set_swing_collision_layer_and_position(tool_name, direction):
 	axe_pickaxe_swing.position = Util.set_swing_position(Vector2(0,0), direction)
 	if tool_name == "wood axe" or tool_name == "stone axe" or tool_name == "iron axe" or tool_name == "bronze axe" or tool_name == "gold axe": 
+		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_mask(8)
 	elif tool_name == "wood pickaxe" or tool_name == "stone pickaxe" or tool_name == "iron pickaxe" or tool_name == "bronze pickaxe" or tool_name == "gold pickaxe": 
+		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_mask(16)
 		remove_hoed_tile(direction)
 	elif tool_name == "wood hoe" or tool_name == "stone hoe" or tool_name == "iron hoe" or tool_name == "bronze hoe" or tool_name == "gold hoe": 
+		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_mask(0)
 		set_hoed_tile(direction)
 	elif tool_name == "hammer":
 		axe_pickaxe_swing.set_collision_mask(16384)
 	elif tool_name == null:
 		axe_pickaxe_swing.set_collision_mask(8)
+		axe_pickaxe_swing.tool_name = "punch"
 
 func set_hoed_tile(direction):
 	var pos = Util.set_swing_position(global_position, direction)

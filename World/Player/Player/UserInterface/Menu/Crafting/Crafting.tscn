@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/workbench 2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=2]
@@ -29,6 +29,10 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/tool cabinet/down.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Images/placable_object_preview/armored door.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Images/placable_object_preview/furnace/down.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Images/inventory_icons/Tool/wood pickaxe.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Images/inventory_icons/Tool/wood axe.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Images/inventory_icons/Tool/wood hoe.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Images/inventory_icons/Tool/wood sword.png" type="Texture" id=33]
 
 [node name="Crafting" type="Control"]
 rect_scale = Vector2( 0.5, 0.5 )
@@ -38,6 +42,7 @@ script = ExtResource( 6 )
 visible = false
 
 [node name="Page1" type="Node2D" parent="."]
+visible = false
 position = Vector2( 750, 0 )
 
 [node name="WoodBoxButton" type="Button" parent="Page1"]
@@ -374,7 +379,6 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="Page4" type="Node2D" parent="."]
-visible = false
 position = Vector2( 750, 0 )
 
 [node name="blueprint" type="Sprite" parent="Page4"]
@@ -386,6 +390,26 @@ texture = ExtResource( 25 )
 position = Vector2( 182, 466 )
 scale = Vector2( 6, 6 )
 texture = ExtResource( 24 )
+
+[node name="wood axe" type="Sprite" parent="Page4"]
+position = Vector2( 330, 346 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 31 )
+
+[node name="wood pickaxe" type="Sprite" parent="Page4"]
+position = Vector2( 330, 468 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 30 )
+
+[node name="wood hoe" type="Sprite" parent="Page4"]
+position = Vector2( 446, 346 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 32 )
+
+[node name="wood sword" type="Sprite" parent="Page4"]
+position = Vector2( 454, 468 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 33 )
 
 [node name="furnace" type="Sprite" parent="Page4"]
 position = Vector2( 9.99997, 398 )
@@ -407,6 +431,42 @@ margin_left = 128.0
 margin_top = 292.0
 margin_right = 232.0
 margin_bottom = 396.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="WoodAxeButton" type="Button" parent="Page4"]
+margin_left = 276.0
+margin_top = 292.0
+margin_right = 380.0
+margin_bottom = 396.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="WoodPickaxeButton" type="Button" parent="Page4"]
+margin_left = 278.0
+margin_top = 414.0
+margin_right = 382.0
+margin_bottom = 518.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="WoodHoeButton" type="Button" parent="Page4"]
+margin_left = 394.0
+margin_top = 292.0
+margin_right = 498.0
+margin_bottom = 396.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="WoodSwordButton" type="Button" parent="Page4"]
+margin_left = 396.0
+margin_top = 414.0
+margin_right = 500.0
+margin_bottom = 518.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
@@ -692,6 +752,18 @@ scale = Vector2( 5.4, 5.4 )
 [connection signal="mouse_entered" from="Page4/BlueprintButton" to="." method="_on_BlueprintButton_mouse_entered"]
 [connection signal="mouse_exited" from="Page4/BlueprintButton" to="." method="_on_BlueprintButton_mouse_exited"]
 [connection signal="pressed" from="Page4/BlueprintButton" to="." method="_on_BlueprintButton_pressed"]
+[connection signal="mouse_entered" from="Page4/WoodAxeButton" to="." method="_on_WoodAxeButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/WoodAxeButton" to="." method="_on_WoodAxeButton_mouse_exited"]
+[connection signal="pressed" from="Page4/WoodAxeButton" to="." method="_on_WoodAxeButton_pressed"]
+[connection signal="mouse_entered" from="Page4/WoodPickaxeButton" to="." method="_on_WoodPickaxeButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/WoodPickaxeButton" to="." method="_on_WoodPickaxeButton_mouse_exited"]
+[connection signal="pressed" from="Page4/WoodPickaxeButton" to="." method="_on_WoodPickaxeButton_pressed"]
+[connection signal="mouse_entered" from="Page4/WoodHoeButton" to="." method="_on_WoodHoeButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/WoodHoeButton" to="." method="_on_WoodHoeButton_mouse_exited"]
+[connection signal="pressed" from="Page4/WoodHoeButton" to="." method="_on_WoodHoeButton_pressed"]
+[connection signal="mouse_entered" from="Page4/WoodSwordButton" to="." method="_on_WoodSwordButton_mouse_entered"]
+[connection signal="mouse_exited" from="Page4/WoodSwordButton" to="." method="_on_WoodSwordButton_mouse_exited"]
+[connection signal="pressed" from="Page4/WoodSwordButton" to="." method="_on_WoodSwordButton_pressed"]
 [connection signal="mouse_entered" from="Page4/FurnaceButton" to="." method="_on_FurnaceButton_mouse_entered"]
 [connection signal="mouse_exited" from="Page4/FurnaceButton" to="." method="_on_FurnaceButton_mouse_exited"]
 [connection signal="pressed" from="Page4/FurnaceButton" to="." method="_on_FurnaceButton_pressed"]

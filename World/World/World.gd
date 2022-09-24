@@ -260,7 +260,7 @@ func buildMap(map):
 		var biome = map["tree"][id]["b"]
 		if biome == "desert":
 			var object = DesertTreeObject.instance()
-			object.health = map["tree"][id]["h"]
+			object.health = 100
 			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
 			object.name = id
 			$NatureObjects.add_child(object,true)
@@ -269,7 +269,7 @@ func buildMap(map):
 			var variety = treeTypes.front()
 			var object = TreeObject.instance()
 			object.biome = biome
-			object.health = map["tree"][id]["h"]
+			object.health = 100
 			object.initialize(variety, loc)
 			object.position = dirt.map_to_world(loc) + Vector2(0, -8)
 			object.name = id
@@ -294,7 +294,7 @@ func buildMap(map):
 		treeTypes.shuffle()
 		var variety = treeTypes.front()
 		var object = StumpObject.instance()
-		object.health = map["stump"][id]["h"]
+		object.health = 40
 		object.name = id
 		object.initialize(variety,loc)
 		object.position = dirt.map_to_world(loc) + Vector2(4,0)
@@ -308,7 +308,7 @@ func buildMap(map):
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = OreObject.instance()
-		object.health = map["ore_large"][id]["h"]
+		object.health = 100
 		object.name = id
 		object.initialize(variety,loc)
 		object.position = dirt.map_to_world(loc) 
@@ -321,7 +321,7 @@ func buildMap(map):
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = SmallOreObject.instance()
-		object.health = map["ore"][id]["h"]
+		object.health = 40
 		object.name = id
 		object.initialize(variety,loc)
 		object.position = dirt.map_to_world(loc) + Vector2(16, 24)

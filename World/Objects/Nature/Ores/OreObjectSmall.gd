@@ -11,6 +11,7 @@ var oreObject
 var position_of_object
 var variety
 var health
+var ore_break = false
 
 func initialize(varietyInput, inputPos):
 	variety = varietyInput
@@ -50,8 +51,9 @@ func _on_SmallHurtBox_area_entered(_area):
 	rng.randomize()
 	var data = {"id": name, "n": "ore"}
 	Server.action("ON_HIT", data)
-	health -= 1
-	if health == 0:
+	deduct_health(_area.tool_name)
+	if health <= 0 and not ore_break:
+		ore_break = true
 		Tiles.reset_valid_tiles(position_of_object)
 		$SoundEffects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -63,13 +65,26 @@ func _on_SmallHurtBox_area_entered(_area):
 		yield($SoundEffects, "finished")
 		yield(get_tree().create_timer(0.6), "timeout")
 		queue_free()
-	if health != 0:
+	elif health >= 1:
 		$SoundEffects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore hit", Vector2(rng.randi_range(-10, 10), 32))
 		animation_player.play("small_ore_hit_right")
 		
+		
+func deduct_health(tool_name):
+	match tool_name:
+		"wood pickaxe":
+			health -= Stats.WOOD_TOOL_DAMAGE
+		"stone pickaxe":
+			health -= Stats.STONE_TOOL_DAMAGE
+		"bronze pickaxe":
+			health -= Stats.BRONZE_TOOL_DAMAGE
+		"iron pickaxe":
+			health -= Stats.IRON_TOOL_DAMAGE
+		"gold pickaxe":
+			health -= Stats.GOLD_TOOL_DAMAGE
 		
 ## Effect functions
 func intitiateItemDrop(item, pos, amount):
