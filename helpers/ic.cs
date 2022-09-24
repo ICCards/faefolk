@@ -18,6 +18,7 @@ public class ic : Node
 	public override void _Ready()
 	{
 		Mnemonic mnemo = new Mnemonic(Wordlist.English, WordCount.Twelve);
+		GD.Print(mnemo.ToString());
 		IHDWallet<SampleWallet> _wallet = new TestHDWalletEd25519(mnemonic: mnemo.ToString(), "");
 		SampleWallet wallet = _wallet.GetAccount(0).GetExternalWallet(0);
 		ED25519PublicKey publicKey = new ED25519PublicKey(wallet.PublicKeyBytes);
