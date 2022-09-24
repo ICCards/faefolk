@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://Assets/Themes/FenceAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
@@ -2561,6 +2561,22 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/shapes = [  ]
 1/z_index = 0
 
+[sub_resource type="TileSet" id=496]
+0/name = "CL_MainLev.png 0"
+0/texture = ExtResource( 6 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 1056, 1152, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
 [node name="World" type="YSort"]
 script = ExtResource( 7 )
 
@@ -2783,4 +2799,10 @@ format = 1
 [node name="Navigation2D" type="Navigation2D" parent="."]
 visible = false
 
-[node name="Node2D" type="Node2D" parent="Navigation2D"]
+[node name="NavigationTiles" type="TileMap" parent="Navigation2D"]
+tile_set = SubResource( 496 )
+cell_size = Vector2( 32, 32 )
+bake_navigation = true
+format = 1
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

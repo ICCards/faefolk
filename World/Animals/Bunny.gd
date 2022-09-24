@@ -53,7 +53,7 @@ func move_randomly(delta):
 			in_idle_state = false
 			rng.randomize()
 			random_idle_pos = Vector2(rng.randi_range(-300, 300), rng.randi_range(-300, 300))
-			path = worldNavigation.get_simple_path(position, position + random_idle_pos, true)
+			path = worldNavigation.map_get_path(position, position + random_idle_pos, true)
 		else:
 			navigate(delta)
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Furnace/Furnace.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/inventory_icons/Resource/coal.png" type="Texture" id=4]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash top.png" type="Texture" id=6]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=7]
@@ -213,7 +214,7 @@ script = ExtResource( 5 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Slot1" type="Panel" parent="FurnaceSlots"]
+[node name="OreSlot" type="Panel" parent="FurnaceSlots"]
 margin_left = -127.0
 margin_top = -166.0
 margin_right = -73.0
@@ -221,7 +222,7 @@ margin_bottom = -112.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 5 )
 
-[node name="Slot2" type="Panel" parent="FurnaceSlots"]
+[node name="CoalSlot" type="Panel" parent="FurnaceSlots"]
 margin_left = -126.0
 margin_top = -90.0
 margin_right = -72.0
@@ -229,7 +230,16 @@ margin_bottom = -36.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 5 )
 
-[node name="Slot3" type="Panel" parent="FurnaceSlots"]
+[node name="TextureRect" type="TextureRect" parent="FurnaceSlots/CoalSlot"]
+modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 51.0
+margin_bottom = 51.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="YieldSlot" type="Panel" parent="FurnaceSlots"]
 margin_left = 71.0
 margin_top = -132.0
 margin_right = 125.0
@@ -272,3 +282,8 @@ texture_normal = ExtResource( 8 )
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+
+[connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
+[connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
+[connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

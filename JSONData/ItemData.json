@@ -308,14 +308,14 @@
       "ItemCategory": "Construction",
       "StackSize": 1,
       "Description": "Used to create building structures.",
-      "Ingredients": [["wood", 10], ["iron ingot", 10]],
+      "Ingredients": [["wood", 10]],
       "EnergyHealth": null
   },
   "hammer": {
       "ItemCategory": "Construction",
       "StackSize": 1,
       "Description": "Used to upgrade building structures.",
-      "Ingredients": [["wood", 10], ["iron ingot", 10]],
+      "Ingredients": [["wood", 10]],
       "EnergyHealth": null
   },
   

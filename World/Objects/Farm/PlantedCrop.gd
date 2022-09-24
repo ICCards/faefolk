@@ -186,7 +186,7 @@ func _on_Harvest_pressed():
 			harvest_and_remove()
 		var anim = "harvest_" + Server.player_node.direction.to_lower()
 		Server.player_node.state = HARVESTING
-		Server.player_node.holding_item.texture = load("res://Assets/Images/inventory_icons/Food/" + crop_name + ".png")
+		Server.player_node.holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + crop_name + ".png")
 		Server.player_node.composite_sprites.set_player_animation(Server.player_node.character, anim)
 		Server.player_node.animation_player.play(anim)
 		yield(Server.player_node.animation_player, "animation_finished")
