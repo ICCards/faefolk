@@ -41,7 +41,11 @@ var page4 = [
 	"furnace",
 	"hammer",
 	"blueprint",
-	"tool cabinet"
+	"tool cabinet",
+	"wood axe",
+	"wood pickaxe",
+	"wood sword",
+	"wood hoe"
 ]
 
 
@@ -158,7 +162,7 @@ func reset_hover_effect():
 	for item in page3:
 		$Page3.get_node(item).scale = Vector2(3,3)
 	for item in page4:
-		if item == "blueprint" or item == "hammer":
+		if item == "blueprint" or item == "hammer" or item == "wood sword" or item == "wood axe" or item == "wood pickaxe" or item == "wood hoe":
 			$Page4.get_node(item).scale = Vector2(6,6)
 		else:
 			$Page4.get_node(item).scale = Vector2(3,3)

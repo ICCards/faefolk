@@ -90,7 +90,7 @@ func _on_BigHurtBox_area_entered(_area):
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(0, 24))
-		intitiateItemDrop(variety, Vector2(0, 4), 5)
+		intitiateItemDrop(variety, Vector2(0, 4), Stats.return_item_drop_quantity(_area.tool_name, "large ore"))
 		animation_player.play("big_ore_break")
 		$LargeOreOccupiedTiles/CollisionShape2D.set_deferred("disabled", true)
 
@@ -111,7 +111,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		$SoundEffects.play()
 		oreBreakEffect()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 32))
-		intitiateItemDrop(variety, Vector2(0, 28), 3)
+		intitiateItemDrop(variety, Vector2(0, 28), Stats.return_item_drop_quantity(_area.tool_name, "small ore"))
 		animation_player.play("small_ore_break")
 		yield($SoundEffects, "finished")
 		yield(get_tree().create_timer(0.6), "timeout")

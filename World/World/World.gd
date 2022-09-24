@@ -294,7 +294,7 @@ func buildMap(map):
 		treeTypes.shuffle()
 		var variety = treeTypes.front()
 		var object = StumpObject.instance()
-		object.health = 40
+		object.health = 50
 		object.name = id
 		object.initialize(variety,loc)
 		object.position = dirt.map_to_world(loc) + Vector2(4,0)
@@ -321,7 +321,7 @@ func buildMap(map):
 		oreTypes.shuffle()
 		var variety = oreTypes.front()
 		var object = SmallOreObject.instance()
-		object.health = 40
+		object.health = 50
 		object.name = id
 		object.initialize(variety,loc)
 		object.position = dirt.map_to_world(loc) + Vector2(16, 24)

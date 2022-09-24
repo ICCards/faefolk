@@ -60,7 +60,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		$SoundEffects.play()
 		oreBreakEffect()
 		initiateOreHitEffect(oreObject, "ore break", Vector2(rng.randi_range(-10, 10), 42))
-		intitiateItemDrop(variety, Vector2(0, 40), 3)
+		intitiateItemDrop(variety, Vector2(0, 40), Stats.return_item_drop_quantity(_area.tool_name, "small ore"))
 		animation_player.play("small_ore_break")
 		yield($SoundEffects, "finished")
 		yield(get_tree().create_timer(0.6), "timeout")

@@ -143,11 +143,11 @@ func _on_Hurtbox_area_entered(_area):
 		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
 			tree_animation_player.play("tree fall right")
 			yield(tree_animation_player, "animation_finished" )
-			intitiateItemDrop("wood", Vector2(130, -8), 7)
+			intitiateItemDrop("wood", Vector2(130, -8), Stats.return_item_drop_quantity(_area.tool_name, "tree"))
 		else:
 			tree_animation_player.play("tree fall left")
 			yield(tree_animation_player, "animation_finished" )
-			intitiateItemDrop("wood", Vector2(-130, -8), 7)
+			intitiateItemDrop("wood", Vector2(-130, -8), Stats.return_item_drop_quantity(_area.tool_name, "tree"))
 
 
 	elif health >= 1:
@@ -168,7 +168,7 @@ func _on_Hurtbox_area_entered(_area):
 		$SoundEffectsStump.play()
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
-		intitiateItemDrop("wood", Vector2(0, 12), 3)
+		intitiateItemDrop("wood", Vector2(0, 12), Stats.return_item_drop_quantity(_area.tool_name, "stump"))
 		yield($SoundEffectsStump, "finished")
 		queue_free()
 	

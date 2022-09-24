@@ -33,9 +33,7 @@ var inventory = {
 	6: ["bronze ingot", 60, null],
 }
 
-var hotbar = {
-}
-
+var hotbar = {}
 var chests = {}
 var furnaces = {}
 var grain_mills = {}

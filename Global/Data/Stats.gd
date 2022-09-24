@@ -28,6 +28,76 @@ const MAX_GOLD_WATERING_CAN = 100
 const BOW_HEALTH = 25
 
 
+func return_item_drop_quantity(tool_name, object_name):
+	match object_name:
+		"tree":
+			match tool_name:
+				"punch":
+					return 3
+				"wood axe":
+					return 6
+				"stone axe":
+					return 9
+				"bronze axe":
+					return 12
+				"iron axe":
+					return 15
+				"gold axe":
+					return 18
+		"stump":
+			match tool_name:
+				"punch":
+					return 2
+				"wood axe":
+					return 4
+				"stone axe":
+					return 6
+				"bronze axe":
+					return 8
+				"iron axe":
+					return 10
+				"gold axe":
+					return 12
+		"branch":
+			match tool_name:
+				"punch":
+					return 1
+				"wood axe":
+					return 2
+				"stone axe":
+					return 3
+				"bronze axe":
+					return 4
+				"iron axe":
+					return 5
+				"gold axe":
+					return 6
+		"large ore":
+			match tool_name:
+				"wood pickaxe":
+					return 3
+				"stone pickaxe":
+					return 6
+				"bronze pickaxe":
+					return 9
+				"iron pickaxe":
+					return 12
+				"gold pickaxe":
+					return 15
+		"small ore":
+			match tool_name:
+				"wood pickaxe":
+					return 2
+				"stone pickaxe":
+					return 4
+				"bronze pickaxe":
+					return 6
+				"iron pickaxe":
+					return 8
+				"gold pickaxe":
+					return 10
+
+
 func return_max_tool_health(item_name):
 	match item_name:
 		"wood axe":

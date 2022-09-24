@@ -50,7 +50,7 @@ func _on_BranchHurtBox_area_entered(_area):
 	$SoundEffects.play()
 	$AnimationPlayer.play("break")
 	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
-	intitiateItemDrop("wood", Vector2(0, 0))
+	intitiateItemDrop("wood", Vector2(0, 0), Stats.return_item_drop_quantity(_area.tool_name, "branch"))
 	yield(get_tree().create_timer(1.2), "timeout")
 	queue_free()
 
@@ -62,11 +62,13 @@ func initiateTreeHitEffect(tree, effect, pos):
 	add_child(trunkHitEffect)
 	trunkHitEffect.global_position = global_position + pos 
 	
-func intitiateItemDrop(item, pos):
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item, 1)
-	get_parent().call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + pos
+func intitiateItemDrop(item, pos, qt):
+	rng.randomize()
+	for i in range(qt):
+		var itemDrop = ItemDrop.instance()
+		itemDrop.initItemDropType(item, 1)
+		get_parent().call_deferred("add_child", itemDrop)
+		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
 
 
 func _on_VisibilityNotifier2D_screen_entered():
