@@ -2,7 +2,7 @@ extends Control
 
 var item
 
-var furnace_id
+var furnace_id = PlayerInventory.furnace_id
 
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots
@@ -41,7 +41,13 @@ func initialize():
 	show()
 	initialize_hotbar()
 	initialize_inventory()
-	initialize_furnace()
+	#initialize_furnace()
+
+func destroy():
+	set_physics_process(false)
+	$ItemDescription.queue_free()
+	queue_free()
+
 
 func _physics_process(delta):
 	if item and not find_parent("UserInterface").holding_item:
@@ -55,6 +61,7 @@ func _physics_process(delta):
 
 
 func initialize_furnace():
+	print(PlayerInventory.furnaces[furnace_id])
 	var slots_in_furnace = furnace_slots.get_children()
 	for i in range(slots_in_furnace.size()):
 		if slots_in_furnace[i].item != null:

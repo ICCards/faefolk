@@ -25,8 +25,7 @@ func _on_SleepingBag_area_entered(area):
 func _on_SleepingBag_area_exited(area):
 	PlayerInventory.is_inside_sleeping_bag_area = false
 
-
 func _on_FurnaceArea_area_entered(area):
-	PlayerInventory.furnace_node = area
+	PlayerInventory.furnace_id = area.name
 func _on_FurnaceArea_area_exited(area):
-	PlayerInventory.furnace_node = null
+	PlayerInventory.furnace_id = null

@@ -103,15 +103,15 @@ func draw_bow(init_direction):
 	PlayerStats.decrease_energy()
 	composite_sprites.set_player_animation(get_parent().character, animation, "bow")
 	yield(player_animation_player, "animation_finished" )
+	PlayerInventory.remove_material("arrow", 1)
+	shoot()
 	is_drawing = false
 	is_releasing = true
 	animation = "release_" + direction.to_lower()
 	composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
-	player_animation_player.play("release bow")
+	player_animation_player.play("axe pickaxe swing")
 	yield(player_animation_player, "animation_finished" )
 	is_releasing = false
-	PlayerInventory.remove_material("arrow", 1)
-	shoot()
 	get_parent().direction = direction
 	get_parent().state = MOVEMENT
 	

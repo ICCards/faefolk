@@ -21,14 +21,17 @@ var chest_id = null
 var workbench_id = null
 var stove_id = null
 var grain_mill_id = null
-var furnace_node = null
+var furnace_id = null
 var is_inside_sleeping_bag_area = false
 var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
+	1: ["wheat", 20, null],
 	2: ["gold ingot", 60, null],
 	3: ["rope", 20, null],
+	4: ["wood", 200, null],
+	5: ["stone", 200, null],
 	0: ["iron ingot", 60, null],
 	6: ["bronze ingot", 60, null],
 }

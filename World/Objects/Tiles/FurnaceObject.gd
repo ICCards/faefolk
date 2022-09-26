@@ -9,7 +9,9 @@ var id
 
 func _ready():
 	id = rng.randi_range(0,100000)
+	$Position2D/InteractiveArea.name = str(id)
 	PlayerInventory.furnaces[id] = {}
+	print(PlayerInventory.furnaces)
 	set_direction()
 	
 func set_direction():

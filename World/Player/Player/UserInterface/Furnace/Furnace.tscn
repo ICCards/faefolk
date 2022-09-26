@@ -1,14 +1,41 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Furnace/Furnace.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/inventory_icons/Resource/coal.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Themes/HideCollection.tres" type="Material" id=4]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash top.png" type="Texture" id=6]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Images/Misc/Buttons/exit button.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Images/Inventory UI/Workbench/workbench menu.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/User interface/Furnace/furnace progress.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/User interface/Furnace/furnace arrow.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/Animations/furnace/furnace.png" type="Texture" id=13]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 13 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 128, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 13 )
+region = Rect2( 128, 128, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Furnace" type="Control"]
 anchor_left = 0.5
@@ -214,36 +241,51 @@ script = ExtResource( 5 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="OreSlot" type="Panel" parent="FurnaceSlots"]
-margin_left = -127.0
-margin_top = -166.0
-margin_right = -73.0
-margin_bottom = -112.0
+[node name="FuelSlot" type="Panel" parent="FurnaceSlots"]
+margin_left = -208.0
+margin_top = -125.0
+margin_right = -154.0
+margin_bottom = -71.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 5 )
 
-[node name="CoalSlot" type="Panel" parent="FurnaceSlots"]
-margin_left = -126.0
-margin_top = -90.0
-margin_right = -72.0
-margin_bottom = -36.0
+[node name="OreSlot1" type="Panel" parent="FurnaceSlots"]
+margin_left = -130.0
+margin_top = -155.0
+margin_right = -76.0
+margin_bottom = -101.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 5 )
 
-[node name="TextureRect" type="TextureRect" parent="FurnaceSlots/CoalSlot"]
-modulate = Color( 1, 1, 1, 0.392157 )
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 51.0
-margin_bottom = 51.0
-texture = ExtResource( 4 )
-expand = true
+[node name="OreSlot2" type="Panel" parent="FurnaceSlots"]
+margin_left = -130.0
+margin_top = -95.0
+margin_right = -76.0
+margin_bottom = -41.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 5 )
 
-[node name="YieldSlot" type="Panel" parent="FurnaceSlots"]
-margin_left = 71.0
-margin_top = -132.0
-margin_right = 125.0
-margin_bottom = -78.0
+[node name="YieldSlot1" type="Panel" parent="FurnaceSlots"]
+margin_left = 80.0
+margin_top = -186.0
+margin_right = 134.0
+margin_bottom = -132.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 5 )
+
+[node name="YieldSlot2" type="Panel" parent="FurnaceSlots"]
+margin_left = 80.0
+margin_top = -125.0
+margin_right = 134.0
+margin_bottom = -71.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 5 )
+
+[node name="YieldSlot3" type="Panel" parent="FurnaceSlots"]
+margin_left = 80.0
+margin_top = -63.0
+margin_right = 134.0
+margin_bottom = -9.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 5 )
 
@@ -282,6 +324,24 @@ texture_normal = ExtResource( 8 )
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="FurnaceProgress" type="Sprite" parent="."]
+visible = false
+light_mask = 2
+position = Vector2( -1.35899e-05, -103 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 10 )
+
+[node name="FurnaceArrow" type="Sprite" parent="."]
+position = Vector2( 0, -103 )
+texture = ExtResource( 11 )
+
+[node name="FireAnimatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 4 )
+position = Vector2( 0, -35 )
+frames = SubResource( 5 )
+frame = 3
+playing = true
 
 [connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
 [connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]

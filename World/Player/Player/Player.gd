@@ -46,8 +46,8 @@ const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
 	Settings.load_keys()
-	character = _character.new()
-	character.LoadPlayerCharacter("human_male")
+#	character = _character.new()
+#	character.LoadPlayerCharacter("human_male")
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
 	Server.player_node = self
@@ -202,10 +202,10 @@ func _unhandled_input(event):
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
-	if event.is_action_pressed("run"):
-		running = true
-	elif event.is_action_released("run"):
-		running = false
+#	if event.is_action_pressed("run"):
+#		running = true
+#	elif event.is_action_released("run"):
+#		running = false
 
 
 func show_placable_object(item_name, item_category):

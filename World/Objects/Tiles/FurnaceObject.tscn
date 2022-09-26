@@ -92,7 +92,6 @@ position = Vector2( 16, -23.5 )
 scale = Vector2( 0.05, 0.05 )
 frames = SubResource( 1 )
 animation = "active fire"
-frame = 4
 playing = true
 
 [node name="Smoke" type="AnimatedSprite" parent="."]

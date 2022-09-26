@@ -21,7 +21,7 @@ func initialize():
 	$ItemName.rect_size.x = width
 
 func set_health_and_energy():
-	if item_category == "Food" or item_category == "Fish":
+	if item_category == "Food" or item_category == "Fish" or item_category == "Crop":
 		show_health_and_energy()
 	else:
 		hide_health_and_energy()

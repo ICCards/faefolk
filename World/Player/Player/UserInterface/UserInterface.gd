@@ -8,6 +8,7 @@ onready var Hotbar = preload("res://World/Player/Player/UserInterface/Hotbar/Hot
 onready var Workbench = preload("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
 onready var Stove = preload("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
 onready var GrainMill = preload("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
+onready var Furnace = preload("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
 
 var items_to_drop = []
 
@@ -39,8 +40,9 @@ func _input(event):
 				toggle_workbench(PlayerInventory.workbench_id)
 			elif PlayerInventory.stove_id:
 				toggle_stove(PlayerInventory.stove_id)
-			elif PlayerInventory.furnace_node:
-				PlayerInventory.furnace_node.set_furnace_active()
+			elif PlayerInventory.furnace_id:
+				toggle_furnace()
+				#PlayerInventory.furnace_node.set_furnace_active()
 			elif PlayerInventory.grain_mill_id:
 				toggle_grain_mill()
 		#		elif PlayerInventory.is_inside_sleeping_bag_area:
@@ -94,6 +96,13 @@ func toggle_chest():
 		PlayerInventory.interactive_screen_mode = false
 
 
+func toggle_furnace():
+	if not has_node("Furnace"):
+		var furnace = Furnace.instance()
+		add_child(furnace)
+		close_hotbar_clock_and_stats()
+	else:
+		close_furnace()
 
 func close_hotbar_clock_and_stats():
 	PlayerInventory.interactive_screen_mode = true
@@ -151,6 +160,12 @@ func toggle_stove(level):
 		close_hotbar_clock_and_stats()
 	else:
 		close_stove()
+		
+func close_furnace():
+	if not holding_item:
+		add_hotbar_clock_and_stats()
+		get_node("Furnace").destroy()
+		drop_items()
 
 func close_grain_mill():
 	if not holding_item:

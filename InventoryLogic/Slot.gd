@@ -20,8 +20,8 @@ enum SlotType {
 	INVENTORY,
 	CHEST,
 	LOCKED,
-	FURNACE,
-	GRAIN_MILL
+	GRAIN_MILL,
+	FURNACE
 }
 
 var slotType = null
