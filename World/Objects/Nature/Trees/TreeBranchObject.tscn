@@ -128,6 +128,8 @@ visible = false
 position = Vector2( -3.57628e-07, 1.11111 )
 scale = Vector2( 2.33333, 2.55556 )
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+
 [connection signal="area_entered" from="BranchHurtBox" to="." method="_on_BranchHurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

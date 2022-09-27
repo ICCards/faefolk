@@ -9,11 +9,12 @@
 script = ExtResource( 3 )
 
 [node name="TextureRect2" type="TextureRect" parent="."]
-rect_scale = Vector2( 3, 3 )
+rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="ClockHand" type="Sprite" parent="."]
-position = Vector2( 100, 101 )
+position = Vector2( 67, 68 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 1 )
 offset = Vector2( 1, -24 )
 
@@ -22,11 +23,10 @@ autostart = true
 
 [node name="SeasonDay" type="Label" parent="."]
 modulate = Color( 0.12549, 0.0901961, 0.0627451, 1 )
-margin_left = 6.0
-margin_top = 213.0
-margin_right = 276.0
-margin_bottom = 274.0
-rect_scale = Vector2( 0.7, 0.7 )
+margin_top = 140.0
+margin_right = 270.0
+margin_bottom = 201.0
+rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Summer, 29"

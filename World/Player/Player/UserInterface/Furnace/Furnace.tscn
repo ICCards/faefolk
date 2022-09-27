@@ -329,7 +329,6 @@ texture_normal = ExtResource( 8 )
 visible = false
 light_mask = 2
 position = Vector2( -1.35899e-05, -103 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 10 )
 
 [node name="FurnaceArrow" type="Sprite" parent="."]

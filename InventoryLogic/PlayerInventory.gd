@@ -30,16 +30,19 @@ var inventory = {
 	1: ["wheat", 20, null],
 	2: ["gold ingot", 60, null],
 	3: ["rope", 20, null],
-	4: ["wood", 200, null],
-	5: ["stone", 200, null],
+	4: ["wood", 800, null],
+	5: ["stone", 800, null],
 	0: ["iron ingot", 60, null],
-	6: ["bronze ingot", 60, null],
+	6: ["potato seeds", 60, null],
+	7: ["blowfish", 60, null],
+	8: ["bread", 60, null],
 }
 
 var hotbar = {}
 var chests = {}
 var furnaces = {}
 var grain_mills = {}
+var stoves = {}
 
 func clear_chest_data(chest_id):
 	PlayerInventory.chests.erase(chest_id)
@@ -248,7 +251,7 @@ func update_chest_slot_visual(slot_index, item_name, new_quantity):
 	else:
 		slot.initialize_item(item_name, new_quantity)
 
-func remove_item(slot: SlotClass, var chest_id = null, var grain_mill_id = null):
+func remove_item(slot: SlotClass, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar.erase(slot.slot_index)
@@ -257,11 +260,13 @@ func remove_item(slot: SlotClass, var chest_id = null, var grain_mill_id = null)
 		SlotClass.SlotType.INVENTORY:
 			inventory.erase(slot.slot_index)
 		SlotClass.SlotType.CHEST:
-			chests[chest_id].erase(slot.slot_index)
+			chests[id].erase(slot.slot_index)
 		SlotClass.SlotType.GRAIN_MILL:
-			grain_mills[grain_mill_id].erase(slot.slot_index)
+			grain_mills[id].erase(slot.slot_index)
+		SlotClass.SlotType.STOVE:
+			stoves[id].erase(slot.slot_index)
 
-func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var chest_id = null, var grain_mill_id = null):
+func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
@@ -270,12 +275,14 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var chest_id = nul
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.CHEST:
-			chests[chest_id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+			chests[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.GRAIN_MILL:
-			grain_mills[grain_mill_id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+			grain_mills[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.STOVE:
+			stoves[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 
 
-func add_item_quantity(slot: SlotClass, quantity_to_add: int, var chest_id = null, var grain_mill_id = null):
+func add_item_quantity(slot: SlotClass, quantity_to_add: int, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] += quantity_to_add
@@ -284,11 +291,13 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int, var chest_id = nul
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.CHEST:
-			chests[chest_id][slot.slot_index][1] += quantity_to_add
+			chests[id][slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.GRAIN_MILL:
-			grain_mills[grain_mill_id][slot.slot_index][1] += quantity_to_add
+			grain_mills[id][slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.STOVE:
+			stoves[id][slot.slot_index][1] += quantity_to_add
 
-func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var chest_id = null, var grain_mill_id = null):
+func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] -= quantity_to_subtract
@@ -297,9 +306,11 @@ func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var ches
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index][1] -= quantity_to_subtract
 		SlotClass.SlotType.CHEST:
-			chests[chest_id][slot.slot_index][1] -= quantity_to_subtract
+			chests[id][slot.slot_index][1] -= quantity_to_subtract
 		SlotClass.SlotType.GRAIN_MILL:
-			grain_mills[grain_mill_id][slot.slot_index][1] -= quantity_to_subtract
+			grain_mills[id][slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.STOVE:
+			stoves[id][slot.slot_index][1] -= quantity_to_subtract
 			
 
 

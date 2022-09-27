@@ -60,13 +60,13 @@ var random_rain_storm_position
 var random_snow_storm_position
 
 const NUM_DUCKS = 20
-const NUM_BUNNIES = 20
+const NUM_BUNNIES = 30
 
 const _character = preload("res://Global/Data/Characters.gd")
 
 var last_world_state = 0
 var world_state_buffer = []
-const interpolation_offset = 100
+const interpolation_offset = 30
 var mark_for_despawn = []
 var tile_ids = {}
 
@@ -369,7 +369,7 @@ func buildMap(map):
 	spawnPlayerExample()
 	Server.isLoaded = true
 	Server.world = self
-	#spawn_animals()
+	spawn_animals()
 
 
 func update_tile_bitmask_regions():
@@ -390,9 +390,9 @@ func update_tile_bitmask_regions():
 	deep_ocean.update_bitmask_region()
 
 
-#func spawn_animals():
-#	for i in range(NUM_BUNNIES):
-#		spawnRandomBunny()
+func spawn_animals():
+	for i in range(NUM_BUNNIES):
+		spawnRandomBunny()
 #	for i in range(NUM_DUCKS):
 #		spawnRandomDuck()
 	
@@ -584,24 +584,24 @@ func ChangeTile(data):
 #					#$Players.get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["players"][player]["d"])
 
 
-#func returnValidSpawnLocation():
-#	var tempLoc = Vector2(rng.randi_range(0, 6200), rng.randi_range(0, 6200))
-#	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
-#		return tempLoc
-#	else:
-#		return null
+func returnValidSpawnLocation():
+	var tempLoc = Vector2(rng.randi_range(100*32, 200*32), rng.randi_range(100*32, 200*32))
+	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
+		return tempLoc
+	else:
+		return null
 #
 #func spawnRandomSnake():
 #	var snake = Snake.instance()
 #	snake.global_position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(rng.randi_range(-500, 500), rng.randi_range(-500, 500))
 #	add_child(snake)
 #
-#func spawnRandomBunny():
-#	var loc = returnValidSpawnLocation()
-#	if loc != null:
-#		var bunny = Bunny.instance()
-#		bunny.global_position = loc
-#		$Animals.add_child(bunny)
+func spawnRandomBunny():
+	var loc = returnValidSpawnLocation()
+	if loc != null:
+		var bunny = Bunny.instance()
+		bunny.global_position = loc
+		$Animals.add_child(bunny)
 #
 #func spawnRandomBird():
 #	var loc = returnValidSpawnLocation()

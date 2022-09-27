@@ -56,7 +56,7 @@ func set_size_of_description(x):
 		height = (50 + (lines - 2) * 9.5)
 	else:
 		height = 50
-	if item_category == "Food" or item_category == "Fish":
+	if item_category == "Food" or item_category == "Fish" or item_category == "Crop":
 		height += 24
 		
 		 

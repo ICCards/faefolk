@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=2]
+[gd_scene load_steps=139 format=2]
 
 [ext_resource path="res://Assets/Images/Animations/campfire/campfire.tres" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/Animations/ocean/water_sheet new/divide.tres" type="Texture" id=2]
@@ -22,11 +22,9 @@
 [ext_resource path="res://Assets/Tilesets/CL_MainLev_winter.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Tilesets/walls/walls/stone.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Tilesets/foundation/wood.png" type="Texture" id=22]
-[ext_resource path="res://Assets/stone foundation.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Tilesets/walls/walls/twig.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Tilesets/foundation/twig.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Images/Animations/fire pedestal/fire_pedestal.tres" type="Texture" id=26]
-[ext_resource path="res://Assets/Images/Animations/ocean/water_sheet (3)/divide.tres" type="Texture" id=27]
 [ext_resource path="res://Assets/Images/Animations/fire pedestal tall/fire_pedestal_tall.tres" type="Texture" id=28]
 [ext_resource path="res://TestScene.gd" type="Script" id=29]
 
@@ -336,7 +334,6 @@
 
 [sub_resource type="TileSet" id=457]
 0/name = "divide.tres 0"
-0/texture = ExtResource( 27 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 128, 128 )
@@ -361,7 +358,6 @@
 
 [sub_resource type="TileSet" id=458]
 0/name = "divide.tres 0"
-0/texture = ExtResource( 27 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 32, 64, 32, 32 )
@@ -982,7 +978,6 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="TileSet" id=464]
 0/name = "stone foundation.png 0"
-0/texture = ExtResource( 23 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 384, 128 )

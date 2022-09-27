@@ -307,6 +307,8 @@ shape = SubResource( 14 )
 position = Vector2( 0.588236, 2.35294 )
 scale = Vector2( 4.29412, 3.64706 )
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+
 [connection signal="area_entered" from="BigHurtBox" to="." method="_on_BigHurtBox_area_entered"]
 [connection signal="area_entered" from="SmallHurtBox" to="." method="_on_SmallHurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

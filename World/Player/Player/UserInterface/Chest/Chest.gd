@@ -7,14 +7,7 @@ onready var hotbar_slots = $HotbarSlots
 onready var locked_slots = $LockedSlots
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 var chest_id
-
-func initialize():
-	show()
-	chest_id = PlayerInventory.chest_id
-	initialize_chest_data()
-	initialize_inventory()
-	initialize_hotbar()
-
+var item
 
 func _ready():
 	var slots_in_inventory = inventory_slots.get_children()
@@ -22,18 +15,50 @@ func _ready():
 	var slots_in_hotbar = hotbar_slots.get_children()
 	for i in range(slots_in_inventory.size()):
 		slots_in_inventory[i].connect("gui_input", self, "slot_gui_input", [slots_in_inventory[i]])
+		slots_in_inventory[i].connect("mouse_entered", self, "hovered_slot", [slots_in_inventory[i]])
+		slots_in_inventory[i].connect("mouse_exited", self, "exited_slot", [slots_in_inventory[i]])
 		slots_in_inventory[i].slot_index = i
 		slots_in_inventory[i].slotType = SlotClass.SlotType.INVENTORY
 	for i in range(slots_in_chest.size()):
 		slots_in_chest[i].connect("gui_input", self, "slot_gui_input", [slots_in_chest[i]])
+		slots_in_chest[i].connect("mouse_entered", self, "hovered_slot", [slots_in_chest[i]])
+		slots_in_chest[i].connect("mouse_exited", self, "exited_slot", [slots_in_chest[i]])
 		slots_in_chest[i].slot_index = i
 		slots_in_chest[i].slotType = SlotClass.SlotType.CHEST
 	for i in range(slots_in_hotbar.size()):
 		slots_in_hotbar[i].connect("gui_input", self, "slot_gui_input", [slots_in_hotbar[i]])
+		slots_in_hotbar[i].connect("mouse_entered", self, "hovered_slot", [slots_in_hotbar[i]])
+		slots_in_hotbar[i].connect("mouse_exited", self, "exited_slot", [slots_in_hotbar[i]])
 		slots_in_hotbar[i].slot_index = i
 		slots_in_hotbar[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
-	PlayerInventory.connect("clear_chest", self, "clear_chest_data")
-	
+	initialize()
+
+
+func initialize():
+	Server.player_node.destroy_placable_object()
+	show()
+	chest_id = PlayerInventory.chest_id
+	initialize_chest_data()
+	initialize_inventory()
+	initialize_hotbar()
+
+func destroy():
+	set_physics_process(false)
+	$ItemDescription.queue_free()
+	queue_free()
+
+func _physics_process(delta):
+	if item and not find_parent("UserInterface").holding_item:
+		$ItemDescription.show()
+		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
+		$ItemDescription.item_name = item
+		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
+		$ItemDescription.initialize()
+	else:
+		$ItemDescription.hide()
+
+
+
 func initialize_hotbar():
 	var slots = hotbar_slots.get_children()
 	for i in range(slots.size()):
@@ -58,7 +83,17 @@ func initialize_inventory():
 			slots[i].removeFromSlot()
 		if PlayerInventory.inventory.has(i):
 			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1], PlayerInventory.inventory[i][2])
-	
+
+
+func hovered_slot(slot: SlotClass):
+	if slot.item:
+		slot.item.hover_item()
+		item = slot.item.item_name
+
+func exited_slot(slot: SlotClass):
+	item = null
+	if slot.item:
+		slot.item.exit_item()
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
@@ -112,6 +147,7 @@ func left_click_not_holding(slot: SlotClass):
 	if slot.slotType == slot.SlotType.INVENTORY or slot.slotType == slot.SlotType.HOTBAR_INVENTORY:
 		for i in range(slots_in_chest.size()):
 			if not PlayerInventory.chests[chest_id].has(i):
+				item = null
 				PlayerInventory.remove_item(slot)
 				PlayerInventory.add_item_to_empty_slot(slot.item, chest_slots.get_children()[i], chest_id)
 				slot.removeFromSlot()
@@ -122,6 +158,7 @@ func left_click_not_holding(slot: SlotClass):
 	elif slot.slotType == slot.SlotType.CHEST:
 			for i in range(slots_in_hotbar.size()):
 				if not PlayerInventory.hotbar.has(i):
+					item = null
 					PlayerInventory.remove_item(slot, chest_id)
 					PlayerInventory.add_item_to_empty_slot(slot.item, hotbar_slots.get_children()[i])
 					slot.removeFromSlot()
@@ -131,6 +168,7 @@ func left_click_not_holding(slot: SlotClass):
 					return
 			for i in range(slots_in_inventory.size()):
 				if not PlayerInventory.inventory.has(i):
+					item = null
 					PlayerInventory.remove_item(slot, chest_id)
 					PlayerInventory.add_item_to_empty_slot(slot.item, inventory_slots.get_children()[i])
 					slot.removeFromSlot()
@@ -168,4 +206,4 @@ func _on_TrashButton_pressed():
 
 
 func _on_btn_pressed():
-	find_parent("UserInterface").toggle_chest()
+	find_parent("UserInterface").close_chest()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Clock/CurrentTime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" type="PackedScene" id=3]
@@ -6,7 +6,6 @@
 [ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/UpgradeDoorMenu/RadialDoorMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerStatsUI.tscn" type="PackedScene" id=12]
-[ext_resource path="res://World/Player/Player/UserInterface/Chest/OpenChest.tscn" type="PackedScene" id=14]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Thunder Crack - SFX Producer.mp3" type="AudioStream" id=18]
@@ -146,8 +145,7 @@ margin_right = -708.0
 margin_bottom = -89.0
 
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
-position = Vector2( 866, 7 )
-scale = Vector2( 0.75, 0.75 )
+position = Vector2( 885, 11 )
 
 [node name="PlayerStatsUI" parent="." instance=ExtResource( 12 )]
 margin_left = 892.0
@@ -155,13 +153,6 @@ margin_top = 435.0
 margin_right = 892.0
 margin_bottom = 435.0
 rect_scale = Vector2( 2, 2 )
-
-[node name="OpenChest" parent="." instance=ExtResource( 14 )]
-visible = false
-margin_left = 484.0
-margin_top = 59.0
-margin_right = 484.0
-margin_bottom = 59.0
 
 [node name="DeathEffect" type="ColorRect" parent="."]
 visible = false

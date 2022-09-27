@@ -9,6 +9,7 @@ onready var Workbench = preload("res://World/Player/Player/UserInterface/Workben
 onready var Stove = preload("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
 onready var GrainMill = preload("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
 onready var Furnace = preload("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
+onready var Chest = preload("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
 
 var items_to_drop = []
 
@@ -39,7 +40,7 @@ func _input(event):
 			elif PlayerInventory.workbench_id:
 				toggle_workbench(PlayerInventory.workbench_id)
 			elif PlayerInventory.stove_id:
-				toggle_stove(PlayerInventory.stove_id)
+				toggle_stove()
 			elif PlayerInventory.furnace_id:
 				toggle_furnace()
 				#PlayerInventory.furnace_node.set_furnace_active()
@@ -83,18 +84,12 @@ func _input(event):
 			PlayerInventory.emit_signal("active_item_updated")
 
 func toggle_chest():
-	if not $OpenChest.visible:
-		$OpenChest.initialize()
-		$PlayerStatsUI.hide()
-		$SoundEffects.stream = Sounds.chest_open
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		$SoundEffects.play()
-		PlayerInventory.interactive_screen_mode = true
+	if not has_node("Chest"):
+		var chest = Chest.instance()
+		add_child(chest)
+		close_hotbar_clock_and_stats()
 	else:
-		$PlayerStatsUI.show()
-		$OpenChest.hide()
-		PlayerInventory.interactive_screen_mode = false
-
+		close_chest()
 
 func toggle_furnace():
 	if not has_node("Furnace"):
@@ -152,10 +147,9 @@ func toggle_workbench(level):
 	else:
 		close_workbench()
 
-func toggle_stove(level):
+func toggle_stove():
 	if not has_node("Stove"):
 		var stove = Stove.instance()
-		stove.level = level
 		add_child(stove)
 		close_hotbar_clock_and_stats()
 	else:
@@ -183,6 +177,12 @@ func close_stove():
 	if not holding_item:
 		add_hotbar_clock_and_stats()
 		get_node("Stove").destroy()
+		drop_items()
+
+func close_chest():
+	if not holding_item:
+		add_hotbar_clock_and_stats()
+		get_node("Chest").destroy()
 		drop_items()
 
 

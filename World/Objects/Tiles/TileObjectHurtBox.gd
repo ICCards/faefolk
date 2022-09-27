@@ -47,7 +47,8 @@ func set_dimensions():
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		$InteractiveArea/CollisionShape2D.disabled = false
 		$InteractiveArea.collision_mask = 262144
-		$InteractiveArea.name = item_name
+		$InteractiveArea.name = str(item_name.substr(7) + " " + id)
+		PlayerInventory.stoves[id] = {}
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
@@ -73,6 +74,12 @@ func _on_HurtBox_area_entered(area):
 	elif item_name == "wood chest" or item_name == "stone chest":
 		drop_items_in_chest()
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
+		drop_items_in_grain_mill()
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
+		drop_items_in_stove()
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	else: 
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -82,6 +89,16 @@ func _on_HurtBox_area_entered(area):
 	yield($SoundEffects, "finished")
 	queue_free()
 
+
+func drop_items_in_stove():
+	for item in PlayerInventory.stoves[id].keys():
+		drop_item(PlayerInventory.stoves[id][item][0], PlayerInventory.stoves[id][item][1], PlayerInventory.stoves[id][item][2])
+	PlayerInventory.stoves.erase(id)
+
+func drop_items_in_grain_mill():
+	for item in PlayerInventory.grain_mills[id].keys():
+		drop_item(PlayerInventory.grain_mills[id][item][0], PlayerInventory.grain_mills[id][item][1], PlayerInventory.grain_mills[id][item][2])
+	PlayerInventory.grain_mills.erase(id)
 
 func drop_items_in_chest():
 	for item in PlayerInventory.chests[id].keys():

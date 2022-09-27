@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Images/Inventory UI/Workbench/workbench menu.png" type="Texture" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -6,14 +6,36 @@
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Stove/Stove.gd" type="Script" id=6]
-[ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Themes/HideCollection.tres" type="Material" id=8]
+[ext_resource path="res://Assets/Images/User interface/Furnace/furnace arrow.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/Misc/Buttons/exit button.png" type="Texture" id=10]
-[ext_resource path="res://World/Player/Player/UserInterface/Stove/Page1.gd" type="Script" id=13]
+[ext_resource path="res://Assets/Images/Animations/furnace/furnace.png" type="Texture" id=11]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=14]
-[ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=15]
-[ext_resource path="res://World/Player/Player/UserInterface/Stove/item_button.tscn" type="PackedScene" id=16]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 11 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 128, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 11 )
+region = Rect2( 128, 128, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Stove" type="Control"]
 anchor_left = 0.5
@@ -55,413 +77,6 @@ custom_constants/shadow_offset_x = 6
 custom_constants/shadow_offset_y = 6
 text = "Stove #3:"
 clip_text = true
-
-[node name="Page1" type="GridContainer" parent="."]
-margin_left = -265.0
-margin_top = -190.0
-margin_right = -133.0
-margin_bottom = -138.0
-rect_scale = Vector2( 4, 4 )
-custom_constants/vseparation = 2
-custom_constants/hseparation = 6
-columns = 6
-script = ExtResource( 13 )
-
-[node name="bread" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="cooked wing" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_right = 38.0
-margin_bottom = 16.0
-
-[node name="cooked filet" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_right = 60.0
-margin_bottom = 16.0
-
-[node name="tomato soup" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_right = 82.0
-margin_bottom = 16.0
-
-[node name="cooked corn" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 88.0
-margin_right = 104.0
-margin_bottom = 16.0
-
-[node name="mushroom soup" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_right = 126.0
-margin_bottom = 16.0
-
-[node name="potatoes with asparagus" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 16.0
-margin_bottom = 34.0
-
-[node name="baked zucchini" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_top = 18.0
-margin_right = 38.0
-margin_bottom = 34.0
-
-[node name="asparagus omelette" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_top = 18.0
-margin_right = 60.0
-margin_bottom = 34.0
-
-[node name="cooked green beans" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_top = 18.0
-margin_right = 82.0
-margin_bottom = 34.0
-
-[node name="cauliflower soup" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 88.0
-margin_top = 18.0
-margin_right = 104.0
-margin_bottom = 34.0
-
-[node name="blowfish tails" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_top = 18.0
-margin_right = 126.0
-margin_bottom = 34.0
-
-[node name="baked catfish" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 36.0
-margin_right = 16.0
-margin_bottom = 52.0
-
-[node name="baked dorado" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_top = 36.0
-margin_right = 38.0
-margin_bottom = 52.0
-
-[node name="blueberry cake" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_top = 36.0
-margin_right = 60.0
-margin_bottom = 52.0
-
-[node name="blueberry pie" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_top = 36.0
-margin_right = 82.0
-margin_bottom = 52.0
-
-[node name="calamari with tomatoes" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 88.0
-margin_top = 36.0
-margin_right = 104.0
-margin_bottom = 52.0
-
-[node name="honeydew melon with sugar" parent="Page1" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_top = 36.0
-margin_right = 126.0
-margin_bottom = 52.0
-
-[node name="Page2" type="GridContainer" parent="."]
-visible = false
-margin_left = -265.0
-margin_top = -190.0
-margin_right = -133.0
-margin_bottom = -138.0
-rect_scale = Vector2( 4, 4 )
-custom_constants/vseparation = 2
-custom_constants/hseparation = 6
-columns = 6
-script = ExtResource( 13 )
-
-[node name="green pepper soup" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="cooked wheat berries" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_right = 38.0
-margin_bottom = 16.0
-
-[node name="mini grape tarts" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_right = 60.0
-margin_bottom = 16.0
-
-[node name="potato soup" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_right = 82.0
-margin_bottom = 16.0
-
-[node name="potatoes with corn and zucchini" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 88.0
-margin_right = 104.0
-margin_bottom = 16.0
-
-[node name="potatoes with green beans" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_right = 126.0
-margin_bottom = 16.0
-
-[node name="radish soup" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 16.0
-margin_bottom = 34.0
-
-[node name="red pepper soup" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_top = 18.0
-margin_right = 38.0
-margin_bottom = 34.0
-
-[node name="sashimi" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_top = 18.0
-margin_right = 60.0
-margin_bottom = 34.0
-
-[node name="sauteed cabbage with garlic" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_top = 18.0
-margin_right = 82.0
-margin_bottom = 34.0
-
-[node name="scrambled eggs" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 88.0
-margin_top = 18.0
-margin_right = 104.0
-margin_bottom = 34.0
-
-[node name="seaweed salad" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_top = 18.0
-margin_right = 126.0
-margin_bottom = 34.0
-
-[node name="sliced tomatoes and potatoes" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 36.0
-margin_right = 16.0
-margin_bottom = 52.0
-
-[node name="smoked jalapeno with eggs" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_top = 36.0
-margin_right = 38.0
-margin_bottom = 52.0
-
-[node name="spaghetti" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_top = 36.0
-margin_right = 60.0
-margin_bottom = 52.0
-
-[node name="crab cakes" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_top = 36.0
-margin_right = 82.0
-margin_bottom = 52.0
-
-[node name="filet mignon" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 88.0
-margin_top = 36.0
-margin_right = 104.0
-margin_bottom = 52.0
-
-[node name="yellow onion soup" parent="Page2" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_top = 36.0
-margin_right = 126.0
-margin_bottom = 52.0
-
-[node name="Page3" type="GridContainer" parent="."]
-visible = false
-margin_left = -265.0
-margin_top = -190.0
-margin_right = -133.0
-margin_bottom = -138.0
-rect_scale = Vector2( 4, 4 )
-custom_constants/vseparation = 2
-custom_constants/hseparation = 6
-columns = 6
-script = ExtResource( 13 )
-
-[node name="filet soup" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="filet with garlic mash" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_right = 38.0
-margin_bottom = 16.0
-
-[node name="filet with tomatoes" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_right = 60.0
-margin_bottom = 16.0
-
-[node name="grape pastry" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_right = 82.0
-margin_bottom = 16.0
-
-[node name="pepper and asparagus stir fry" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 88.0
-margin_right = 104.0
-margin_bottom = 16.0
-
-[node name="yellow pepper soup" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_right = 126.0
-margin_bottom = 16.0
-
-[node name="zucchini soup" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 16.0
-margin_bottom = 34.0
-
-[node name="spicy shrimps" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 22.0
-margin_top = 18.0
-margin_right = 38.0
-margin_bottom = 34.0
-
-[node name="strawberry cake" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_top = 18.0
-margin_right = 60.0
-margin_bottom = 34.0
-
-[node name="strawberry tart" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 66.0
-margin_top = 18.0
-margin_right = 82.0
-margin_bottom = 34.0
-
-[node name="sugar cane kheer" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 88.0
-margin_top = 18.0
-margin_right = 104.0
-margin_bottom = 34.0
-
-[node name="vegetable soup" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 110.0
-margin_top = 18.0
-margin_right = 126.0
-margin_bottom = 34.0
-
-[node name="wings with corn" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 36.0
-margin_right = 16.0
-margin_bottom = 52.0
-
-[node name="spicy eel" parent="Page3" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 36.0
-margin_right = 16.0
-margin_bottom = 52.0
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
 margin_left = -284.0
@@ -619,23 +234,71 @@ margin_bottom = 54.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 2 )
 
+[node name="StoveSlots" type="Control" parent="."]
+margin_left = -299.0
+margin_top = -200.0
+margin_right = 299.0
+margin_bottom = 32.0
+
+[node name="FuelSlot" type="Panel" parent="StoveSlots"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -222.0
+margin_top = -38.0
+margin_right = -168.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="Ingredient1" type="Panel" parent="StoveSlots"]
+margin_left = 160.0
+margin_top = 16.0
+margin_right = 214.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="Ingredient2" type="Panel" parent="StoveSlots"]
+margin_left = 160.0
+margin_top = 78.0
+margin_right = 214.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="LockSlot" type="TextureRect" parent="StoveSlots/Ingredient2"]
+visible = false
+margin_right = 54.0
+margin_bottom = 54.0
+texture = ExtResource( 7 )
+
+[node name="Ingredient3" type="Panel" parent="StoveSlots"]
+margin_left = 160.0
+margin_top = 140.0
+margin_right = 214.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="LockSlot" type="TextureRect" parent="StoveSlots/Ingredient3"]
+visible = false
+margin_right = 54.0
+margin_bottom = 54.0
+texture = ExtResource( 7 )
+
+[node name="YieldSlot" type="Panel" parent="StoveSlots"]
+margin_left = 381.0
+margin_top = 78.0
+margin_right = 435.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="DownButton" type="TextureButton" parent="."]
-margin_left = 260.0
-margin_top = -11.0
-margin_right = 296.0
-margin_bottom = 31.0
-texture_normal = ExtResource( 9 )
-
-[node name="UpButton" type="TextureButton" parent="."]
-margin_left = 260.0
-margin_top = -249.0
-margin_right = 300.0
-margin_bottom = -207.0
-texture_normal = ExtResource( 8 )
 
 [node name="Trash" type="Control" parent="."]
 margin_left = 6.0
@@ -669,19 +332,20 @@ margin_bottom = -202.0
 rect_scale = Vector2( 0.6, 0.6 )
 texture_normal = ExtResource( 10 )
 
-[node name="ItemNameBox" parent="." instance=ExtResource( 15 )]
-visible = false
-
-[node name="CraftingItemDescription" parent="." instance=ExtResource( 7 )]
-visible = false
-scale = Vector2( 2.7, 2.7 )
-
 [node name="ItemDescription" parent="." instance=ExtResource( 14 )]
 visible = false
 
+[node name="FurnaceArrow" type="Sprite" parent="."]
+position = Vector2( 0, -98 )
+texture = ExtResource( 9 )
+
+[node name="FireAnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.588235 )
+material = ExtResource( 8 )
+position = Vector2( 0, -35 )
+frames = SubResource( 5 )
+
 [connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
-[connection signal="pressed" from="DownButton" to="." method="_on_DownButton_pressed"]
-[connection signal="pressed" from="UpButton" to="." method="_on_UpButton_pressed"]
 [connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
 [connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
 [connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]

@@ -2561,21 +2561,10 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="TileSet" id=496]
-0/name = "CL_MainLev.png 0"
-0/texture = ExtResource( 6 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 1056, 1152, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
+[sub_resource type="NavigationPolygon" id=496]
+vertices = PoolVector2Array( 9856, 4096, 152432, 6901, 157424, 104335, 11120, 101775 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 9856, 4096, 152432, 6901, 157424, 104335, 11120, 101775 ) ]
 
 [node name="World" type="YSort"]
 script = ExtResource( 7 )
@@ -2796,13 +2785,6 @@ tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="Navigation2D" type="Navigation2D" parent="."]
-visible = false
-
-[node name="NavigationTiles" type="TileMap" parent="Navigation2D"]
-tile_set = SubResource( 496 )
-cell_size = Vector2( 32, 32 )
-bake_navigation = true
-format = 1
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+position = Vector2( -15661, -9291 )
+navpoly = SubResource( 496 )

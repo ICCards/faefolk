@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Bunny",
+"language": "GDScript",
+"path": "res://World/Animals/Bunny.gd"
+}, {
 "base": "Camera2D",
 "class": "PanningCamera2D",
 "language": "GDScript",
 "path": "res://World/Map/Camera2D.gd"
 } ]
 _global_script_class_icons={
+"Bunny": "",
 "PanningCamera2D": ""
 }
 

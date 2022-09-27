@@ -1,15 +1,15 @@
 extends Control
 
 var object_tiles
-var level 
-var crafting_item
 var item
-var page
-var level_1_items = ["cooked filet", "cooked wing", "bread", "cooked corn", "mushroom soup",  "tomato soup"]
-var level_2_items = ["baked zucchini", "blowfish tails", "asparagus omelette", "cooked green beans", "cauliflower soup", "potatoes with asparagus"]
- 
+var stove_id = PlayerInventory.stove_id.substr(2,-1)
+var level = PlayerInventory.stove_id.substr(0,1)
+var is_stove_active
+var ingredients = []
+
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots
+onready var stove_slots = $StoveSlots
 
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
@@ -17,6 +17,7 @@ onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
 func _ready():
 	var slots_in_inventory = inventory_slots.get_children()
 	var slots_in_hotbar = hotbar_slots.get_children()
+	var slots_in_stove = stove_slots.get_children()
 	for i in range(slots_in_inventory.size()):
 		slots_in_inventory[i].connect("gui_input", self, "slot_gui_input", [slots_in_inventory[i]])
 		slots_in_inventory[i].connect("mouse_entered", self, "hovered_slot", [slots_in_inventory[i]])
@@ -29,53 +30,19 @@ func _ready():
 		slots_in_hotbar[i].connect("mouse_exited", self, "exited_slot", [slots_in_hotbar[i]])
 		slots_in_hotbar[i].slot_index = i
 		slots_in_hotbar[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
+	for i in range(slots_in_stove.size()):
+		slots_in_stove[i].connect("gui_input", self, "slot_gui_input", [slots_in_stove[i]])
+		slots_in_stove[i].connect("mouse_entered", self, "hovered_slot", [slots_in_stove[i]])
+		slots_in_stove[i].connect("mouse_exited", self, "exited_slot", [slots_in_stove[i]])
+		slots_in_stove[i].slot_index = i
+		slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 	initialize()
 
-
-func entered_crafting_area(item_name):
-	crafting_item = item_name
-	match page:
-		1:
-			$Tween.interpolate_property($Page1.get_node(item_name), "rect_scale",
-				$Page1.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
-		2:
-			$Tween.interpolate_property($Page2.get_node(item_name), "rect_scale",
-				$Page2.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
-		3:
-			$Tween.interpolate_property($Page3.get_node(item_name), "rect_scale",
-				$Page3.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
-
-func exited_crafting_area(item_name):
-	crafting_item = null
-	match page:
-		1:
-			$Tween.interpolate_property($Page1.get_node(item_name), "rect_scale",
-				$Page1.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
-		2:
-			$Tween.interpolate_property($Page2.get_node(item_name), "rect_scale",
-				$Page2.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
-		3:
-			$Tween.interpolate_property($Page3.get_node(item_name), "rect_scale",
-				$Page3.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
 
 
 func destroy():
 	set_physics_process(false)
 	$ItemDescription.queue_free()
-	$CraftingItemDescription.queue_free()
-	$ItemNameBox.queue_free()
 	queue_free()
 
 func _physics_process(delta):
@@ -87,95 +54,41 @@ func _physics_process(delta):
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.hide()
-	if crafting_item and not find_parent("UserInterface").holding_item:
-		if page == 1 and get_node("Page1/"+crafting_item+"/button").disabled:
-			$CraftingItemDescription.hide()
-			$ItemNameBox.show()
-			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == 2 and get_node("Page2/"+crafting_item+"/button").disabled:
-			$CraftingItemDescription.hide()
-			$ItemNameBox.show()
-			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == 3 and get_node("Page3/"+crafting_item+"/button").disabled:
-			$CraftingItemDescription.hide()
-			$ItemNameBox.show()
-			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
-		else:
-			$ItemNameBox.hide()
-			$CraftingItemDescription.show()
-			$CraftingItemDescription.item_name = crafting_item
-			$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-			$CraftingItemDescription.initialize()
-	else:
-		$ItemNameBox.hide()
-		$CraftingItemDescription.hide()
-
-func craft(item_name):
-	if not get_parent().holding_item and PlayerInventory.isSufficientMaterialToCraft(item_name):
-		find_parent("UserInterface").holding_item = return_crafted_item(item_name)
-		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-		PlayerInventory.craft_item(item_name)
-		set_current_page()
-	elif find_parent("UserInterface").holding_item:
-		if find_parent("UserInterface").holding_item.item_name == item_name and PlayerInventory.isSufficientMaterialToCraft(item_name):
-			PlayerInventory.craft_item(item_name)
-			find_parent("UserInterface").holding_item.add_item_quantity(1)
-			set_current_page()
-
-func return_crafted_item(item_name):
-	var inventoryItem = InventoryItem.instance()
-	inventoryItem.set_item(item_name, 1, Stats.return_max_tool_health(item_name))
-	find_parent("UserInterface").add_child(inventoryItem)
-	return inventoryItem
-
 
 func initialize():
 	Server.player_node.destroy_placable_object()
 	show()
-	$Title.text = level[0].to_upper() + level.substr(1,-1) + ":"
-	page = 1
-	set_current_page()
-
-
-func _on_ExitButton_pressed():
-	get_parent().close_stove()
-
-
-func _on_DownButton_pressed():
-	if page != 3:
-		page += 1
-		set_current_page()
-
-
-func _on_UpButton_pressed():
-	if page != 1:
-		page -= 1
-		set_current_page()
-
-func set_current_page():
-	match page:
-		1:
-			$Page1.initialize()
-			$Page2.hide()
-			$Page3.hide()
-			$UpButton.hide()
-			$DownButton.show()
-		2:
-			$Page1.hide()
-			$Page2.initialize()
-			$Page3.hide()
-			$UpButton.show()
-			$DownButton.show()
-		3:
-			$Page1.hide()
-			$Page2.hide()
-			$Page3.initialize()
-			$UpButton.show()
-			$DownButton.hide()
+	$Title.text = "Stove #" + level[0].to_upper() + level.substr(1,-1) + ":" 
 	initialize_hotbar()
 	initialize_inventory()
+	initialize_stove_data()
+	check_valid_recipe()
+	
+	
+func check_valid_recipe():
+#	if not $StoveSlots/FuelSlot.item:
+#		return false
+	ingredients = []
+	if $StoveSlots/Ingredient1.item:
+		ingredients.append([$StoveSlots/Ingredient1.item.item_name, $StoveSlots/Ingredient1.item.item_quantity])
+	if $StoveSlots/Ingredient2.item:
+		ingredients.append([$StoveSlots/Ingredient2.item.item_name, $StoveSlots/Ingredient2.item.item_quantity])
+	if $StoveSlots/Ingredient3.item:
+		ingredients.append([$StoveSlots/Ingredient3.item.item_name, $StoveSlots/Ingredient3.item.item_quantity])
+#	for item in JsonData.item_data:
+#		if JsonData.item_data[item]["ItemCategory"] == "Food":
+#			#for ingredient in JsonData.item_data[item]["Ingredients"]:
+#			for input in ingredients:
+#				if input[0] == ingredients
+	print(ingredients)
 
-
+func initialize_stove_data():
+	var slots_in_stove = stove_slots.get_children()
+	for i in range(slots_in_stove.size()):
+		if slots_in_stove[i].item != null:
+			slots_in_stove[i].removeFromSlot()
+		if PlayerInventory.stoves[stove_id].has(i):
+			slots_in_stove[i].initialize_item(PlayerInventory.stoves[stove_id][i][0], PlayerInventory.stoves[stove_id][i][1], PlayerInventory.stoves[stove_id][i][2])
 func initialize_hotbar():
 	var slots = hotbar_slots.get_children()
 	for i in range(slots.size()):
@@ -183,7 +96,6 @@ func initialize_hotbar():
 			slots[i].removeFromSlot()
 		if PlayerInventory.hotbar.has(i):
 			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1], PlayerInventory.hotbar[i][2])
-
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
@@ -202,6 +114,20 @@ func exited_slot(slot: SlotClass):
 	if slot.item:
 		slot.item.exit_item()
 
+func able_to_put_into_slot(slot: SlotClass):
+	var holding_item = find_parent("UserInterface").holding_item
+	if holding_item == null:
+		return true
+	var holding_item_name = holding_item.item_name 
+	var holding_item_category = JsonData.item_data[holding_item_name]["ItemCategory"]
+	if slot.slot_index == 0 and slot.name == "FuelSlot": # fuel
+		return holding_item_name == "wood"
+	elif (slot.slot_index == 1 or slot.slot_index == 2 or slot.slot_index == 3) and slot.name.substr(0,10) == "Ingredient": # ingredients
+		return holding_item_category == "Crop" or holding_item_category == "Fish" or holding_item_category == "Food"
+	elif slot.slotType == SlotClass.SlotType.STOVE and slot.slot_index == 4: # yield
+		return false
+	return true
+
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
@@ -219,34 +145,38 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 
 
 func left_click_empty_slot(slot: SlotClass):
-	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
-	slot.putIntoSlot(find_parent("UserInterface").holding_item)
-	find_parent("UserInterface").holding_item = null
+	if able_to_put_into_slot(slot):
+		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, stove_id)
+		slot.putIntoSlot(find_parent("UserInterface").holding_item)
+		find_parent("UserInterface").holding_item = null
+		check_valid_recipe()
 
 func left_click_different_item(event: InputEvent, slot: SlotClass):
-	PlayerInventory.remove_item(slot)
-	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
-	var temp_item = slot.item
-	slot.pickFromSlot()
-	temp_item.global_position = event.global_position
-	slot.putIntoSlot(find_parent("UserInterface").holding_item)
-	find_parent("UserInterface").holding_item = temp_item
+	if able_to_put_into_slot(slot):
+		PlayerInventory.remove_item(slot, stove_id)
+		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, stove_id)
+		var temp_item = slot.item
+		slot.pickFromSlot()
+		temp_item.global_position = event.global_position
+		slot.putIntoSlot(find_parent("UserInterface").holding_item)
+		find_parent("UserInterface").holding_item = temp_item
 
 func left_click_same_item(slot: SlotClass):
-	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
-	var able_to_add = stack_size - slot.item.item_quantity
-	if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-		PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
-		slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
-	else:
-		PlayerInventory.add_item_quantity(slot, able_to_add)
-		slot.item.add_item_quantity(able_to_add)
-		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
+	if able_to_put_into_slot(slot):
+		var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
+		var able_to_add = stack_size - slot.item.item_quantity
+		if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
+			PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity, stove_id)
+			slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
+			find_parent("UserInterface").holding_item.queue_free()
+			find_parent("UserInterface").holding_item = null
+		else:
+			PlayerInventory.add_item_quantity(slot, able_to_add, stove_id)
+			slot.item.add_item_quantity(able_to_add)
+			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 
 func left_click_not_holding(slot: SlotClass):
-	PlayerInventory.remove_item(slot)
+	PlayerInventory.remove_item(slot, stove_id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
@@ -264,6 +194,8 @@ func close_trash_can():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
+func _on_ExitButton_pressed():
+	get_parent().close_stove()
 
 func _on_TrashButton_mouse_entered():
 	open_trash_can()
@@ -274,7 +206,6 @@ func _on_TrashButton_pressed():
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
-		set_current_page()
 
 
 func _on_BackgroundButton_pressed():

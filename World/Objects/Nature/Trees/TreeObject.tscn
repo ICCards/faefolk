@@ -656,6 +656,8 @@ shape = SubResource( 22 )
 position = Vector2( -2.86102e-06, -93.3333 )
 scale = Vector2( 7.11111, 12.2222 )
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+
 [connection signal="area_entered" from="TreeHurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="TreeTopArea" to="." method="_on_TreeTopArea_area_entered"]
 [connection signal="area_exited" from="TreeTopArea" to="." method="_on_TreeTopArea_area_exited"]
