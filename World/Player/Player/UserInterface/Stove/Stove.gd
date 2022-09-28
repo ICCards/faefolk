@@ -173,6 +173,12 @@ func _on_CookTimer_timeout():
 			if $StoveSlots/FuelSlot.item.item_quantity == 0:
 				$StoveSlots/FuelSlot.removeFromSlot()
 				PlayerInventory.remove_item($StoveSlots/FuelSlot, stove_id)
+			if $StoveSlots/CoalYieldSlot.item:
+				PlayerInventory.add_item_quantity($StoveSlots/CoalYieldSlot, 3, stove_id)
+				$StoveSlots/CoalYieldSlot.item.add_item_quantity(3)
+			else:
+				$StoveSlots/CoalYieldSlot.initialize_item("coal", 3, null)
+				PlayerInventory.stoves[stove_id][6] = ["coal", 3, null]
 		elif $StoveSlots/FuelSlot.item.item_name == "coal":
 			$StoveSlots/FuelSlot.item.decrease_item_quantity(1)
 			PlayerInventory.decrease_item_quantity($StoveSlots/FuelSlot, 1, stove_id)
@@ -212,6 +218,8 @@ func check_valid_yield_slot_and_fuel(new_item):
 func valid_fuel():
 	if $StoveSlots/FuelSlot.item:
 		if $StoveSlots/FuelSlot.item.item_name == "wood" and $StoveSlots/FuelSlot.item.item_quantity >= 3:
+			return true
+		elif $StoveSlots/FuelSlot.item.item_name == "coal" and $StoveSlots/FuelSlot.item.item_quantity >= 1:
 			return true
 	return false
 

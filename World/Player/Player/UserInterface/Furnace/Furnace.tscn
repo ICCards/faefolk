@@ -333,7 +333,7 @@ texture = ExtResource( 11 )
 material = ExtResource( 4 )
 position = Vector2( 0, -35 )
 frames = SubResource( 5 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="CookTimer" type="Timer" parent="."]
