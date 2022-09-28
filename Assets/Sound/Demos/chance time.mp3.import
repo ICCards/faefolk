@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/chance time.mp3-950b60c69a4b8ce273f0d1d5dab55291.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Demos/chance time.mp3"
+dest_files=[ "res://.import/chance time.mp3-950b60c69a4b8ce273f0d1d5dab55291.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

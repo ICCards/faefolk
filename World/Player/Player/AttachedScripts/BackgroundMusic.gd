@@ -1,17 +1,25 @@
 extends AudioStreamPlayer
 
 var rng = RandomNumberGenerator.new()
+var index
 
 func _ready():
 	Sounds.connect("volume_change", self, "set_new_music_volume")
+	Sounds.connect("song_changed", self, "set_song")
 	_play_background_music()
+
+func set_song():
+	stop()
+	stream = load("res://Assets/Sound/Demos/" + Sounds.demo_names[Sounds.index] + ".mp3")
+	play()
 
 func _play_background_music():
 	rng.randomize()
-	stream = Sounds.background_music[rng.randi_range(0, Sounds.background_music.size() - 1)]
+	stream = load("res://Assets/Sound/Demos/" + Sounds.demo_names[Sounds.index] + ".mp3")
 	volume_db =  Sounds.return_adjusted_sound_db("music", -32)
 	play()
 	yield(self, "finished")
+	Sounds.index += 1
 	_play_background_music()
 
 

@@ -31,43 +31,42 @@ func set_footstep_volume(val):
 	emit_signal("volume_change")
 	
 func return_adjusted_sound_db(category, init_sound):
-	return -80
-#	if category == "music":
-#		var progress = music_volume / 100
-#		if progress == 0.5:
-#			return init_sound
-#		elif progress < 0.5:
-#			var dis_to_mute =  -(80 + init_sound)
-#			return (init_sound + ((1 - (progress * 2)) * dis_to_mute))
-#		elif progress > 0.5:
-#			return init_sound + ((progress - 0.5) / 5) * 150
-#	elif category == "sound":
-#		var progress = sound_volume / 100
-#		if progress == 0.5:
-#			return init_sound
-#		elif progress < 0.5:
-#			var dis_to_mute =  -(80 + init_sound)
-#			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
-#		elif progress > 0.5:
-#			return init_sound + ((progress - 0.5) / 5) * 150
-#	elif category == "ambient":
-#		var progress = ambient_volume / 100
-#		if progress == 0.5:
-#			return init_sound
-#		elif progress < 0.5:
-#			var dis_to_mute =  -(80 + init_sound)
-#			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
-#		elif progress > 0.5:
-#			return init_sound + ((progress - 0.5) / 5) * 150
-#	elif category == "footstep":
-#		var progress = footstep_volume / 100
-#		if progress == 0.5:
-#			return init_sound
-#		elif progress < 0.5:
-#			var dis_to_mute =  -(60 + init_sound)
-#			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
-#		elif progress > 0.5:
-#			return init_sound + ((progress - 0.5) / 5) * 150
+	if category == "music":
+		var progress = music_volume / 100
+		if progress == 0.5:
+			return init_sound
+		elif progress < 0.5:
+			var dis_to_mute =  -(80 + init_sound)
+			return (init_sound + ((1 - (progress * 2)) * dis_to_mute))
+		elif progress > 0.5:
+			return init_sound + ((progress - 0.5) / 5) * 150
+	elif category == "sound":
+		var progress = sound_volume / 100
+		if progress == 0.5:
+			return init_sound
+		elif progress < 0.5:
+			var dis_to_mute =  -(80 + init_sound)
+			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
+		elif progress > 0.5:
+			return init_sound + ((progress - 0.5) / 5) * 150
+	elif category == "ambient":
+		var progress = ambient_volume / 100
+		if progress == 0.5:
+			return init_sound
+		elif progress < 0.5:
+			var dis_to_mute =  -(80 + init_sound)
+			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
+		elif progress > 0.5:
+			return init_sound + ((progress - 0.5) / 5) * 150
+	elif category == "footstep":
+		var progress = footstep_volume / 100
+		if progress == 0.5:
+			return init_sound
+		elif progress < 0.5:
+			var dis_to_mute =  -(60 + init_sound)
+			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
+		elif progress > 0.5:
+			return init_sound + ((progress - 0.5) / 5) * 150
 
 
 ### Handles switching footsteps sound
@@ -146,3 +145,33 @@ var background_music = [
 	preload("res://Assets/Sound/music/125_full_make-it-easy_0159.mp3"),
 	preload("res://Assets/Sound/music/136_full_edutainment_0162.mp3")
 ]
+
+var demos = [
+	preload("res://Assets/Sound/Demos/8 bit adventure.mp3"),
+	preload("res://Assets/Sound/Demos/8 bit creature.mp3"),
+	preload("res://Assets/Sound/Demos/a productive day.mp3"),
+	preload("res://Assets/Sound/Demos/arcade.mp3"),
+	preload("res://Assets/Sound/Demos/chance time.mp3"),
+	preload("res://Assets/Sound/Demos/clock tower.mp3"),
+	preload("res://Assets/Sound/Demos/dance of the baobabs.mp3"),
+	preload("res://Assets/Sound/Demos/happy donk.mp3"),
+	preload("res://Assets/Sound/Demos/pixel squirrel.mp3"),
+	preload("res://Assets/Sound/Demos/pixel wave.mp3")
+]
+
+signal song_changed
+var index = 0
+var demo_names = [
+	"8 bit adventure",
+	"8 bit creature",
+	"a productive day",
+	"arcade",
+	"chance time",
+	"clock tower",
+	"dance of the baobabs",
+	"happy donk",
+	"pixel squirrel",
+	"pixel wave"
+]
+
+

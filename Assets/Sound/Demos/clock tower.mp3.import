@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/clock tower.mp3-7a29d24d37176e4f004fb454599b0422.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Demos/clock tower.mp3"
+dest_files=[ "res://.import/clock tower.mp3-7a29d24d37176e4f004fb454599b0422.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

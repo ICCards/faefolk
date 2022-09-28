@@ -344,4 +344,3 @@ root_node = NodePath("../CollisionShape2D")
 anims/RESET = SubResource( 3 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-volume_db = -24.0

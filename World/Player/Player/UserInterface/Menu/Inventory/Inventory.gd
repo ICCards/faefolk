@@ -7,6 +7,7 @@ onready var hotbar_slots = $HotbarSlots
 var item
 
 func _ready():
+	$NameOfSong.text = Sounds.demo_names[Sounds.index]
 	PlayerInventory.InventorySlots = $InventorySlots
 	var i_slots = inventory_slots.get_children()
 	for i in range(i_slots.size()):
@@ -142,3 +143,11 @@ func left_click_not_holding(slot: SlotClass):
 
 
 
+
+
+func _on_SkipSong_pressed():
+	Sounds.index += 1
+	if Sounds.index == Sounds.demo_names.size():
+		Sounds.index = 0
+	$NameOfSong.text = Sounds.demo_names[Sounds.index]
+	Sounds.emit_signal("song_changed")
