@@ -169,7 +169,7 @@ func _on_Hurtbox_area_entered(_area):
 		stump_animation_player.play("stump destroyed")
 		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
 		intitiateItemDrop("wood", Vector2(0, 12), Stats.return_item_drop_quantity(_area.tool_name, "stump"))
-		yield($SoundEffectsStump, "finished")
+		yield(get_tree().create_timer(3.0), "timeout")
 		queue_free()
 	
 

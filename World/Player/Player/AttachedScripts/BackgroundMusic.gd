@@ -5,7 +5,7 @@ var index
 
 func _ready():
 	Sounds.connect("volume_change", self, "set_new_music_volume")
-	Sounds.connect("song_changed", self, "set_song")
+	Sounds.connect("song_skipped", self, "set_song")
 	_play_background_music()
 
 func set_song():
@@ -20,6 +20,7 @@ func _play_background_music():
 	play()
 	yield(self, "finished")
 	Sounds.index += 1
+	Sounds.emit_signal("song_finished")
 	_play_background_music()
 
 

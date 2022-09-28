@@ -8,6 +8,7 @@ var item
 
 func _ready():
 	$NameOfSong.text = Sounds.demo_names[Sounds.index]
+	Sounds.connect("song_finished", self, "set_current_song")
 	PlayerInventory.InventorySlots = $InventorySlots
 	var i_slots = inventory_slots.get_children()
 	for i in range(i_slots.size()):
@@ -24,6 +25,8 @@ func _ready():
 		h_slots[i].slot_index = i
 		h_slots[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
 
+func set_current_song():
+	$NameOfSong.text = Sounds.demo_names[Sounds.index]
 
 func initialize():
 	PlayerInventory.InventorySlots = $InventorySlots
@@ -150,4 +153,4 @@ func _on_SkipSong_pressed():
 	if Sounds.index == Sounds.demo_names.size():
 		Sounds.index = 0
 	$NameOfSong.text = Sounds.demo_names[Sounds.index]
-	Sounds.emit_signal("song_changed")
+	Sounds.emit_signal("song_skipped")

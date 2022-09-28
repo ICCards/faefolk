@@ -159,7 +159,8 @@ var demos = [
 	preload("res://Assets/Sound/Demos/pixel wave.mp3")
 ]
 
-signal song_changed
+signal song_skipped
+signal song_finished
 var index = 0
 var demo_names = [
 	"8 bit adventure",
