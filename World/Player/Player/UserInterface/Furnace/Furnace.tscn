@@ -325,12 +325,6 @@ texture_normal = ExtResource( 8 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="FurnaceProgress" type="Sprite" parent="."]
-visible = false
-light_mask = 2
-position = Vector2( -1.35899e-05, -103 )
-texture = ExtResource( 10 )
-
 [node name="FurnaceArrow" type="Sprite" parent="."]
 position = Vector2( 0, -103 )
 texture = ExtResource( 11 )
@@ -339,8 +333,20 @@ texture = ExtResource( 11 )
 material = ExtResource( 4 )
 position = Vector2( 0, -35 )
 frames = SubResource( 5 )
-frame = 3
+frame = 1
 playing = true
+
+[node name="CookTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="TimerProgress" type="TextureProgress" parent="."]
+modulate = Color( 0.513726, 0.513726, 0.513726, 1 )
+margin_left = -44.0
+margin_top = -126.0
+margin_right = 43.0
+margin_bottom = -81.0
+value = 85.0
+texture_progress = ExtResource( 10 )
 
 [connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
 [connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]

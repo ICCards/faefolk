@@ -1,4 +1,4 @@
-[gd_scene load_steps=292 format=2]
+[gd_scene load_steps=289 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=2]
@@ -1731,36 +1731,6 @@ func _on_collection_item_mouse_exited():
 	get_node(\"../\").exited_item_area(name)
 "
 
-[sub_resource type="ShaderMaterial" id=191]
-resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=192]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=193]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=194]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -3426,117 +3396,108 @@ margin_bottom = 44.0
 texture = SubResource( 189 )
 script = SubResource( 190 )
 
-[node name="cooked wheat berries" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 191 )
+[node name="cooked wing" type="TextureRect" parent="FoodCollection1"]
+material = SubResource( 194 )
 margin_left = 140.0
 margin_top = 28.0
 margin_right = 156.0
 margin_bottom = 44.0
-texture = SubResource( 192 )
-script = SubResource( 193 )
-
-[node name="cooked wing" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 194 )
-margin_top = 56.0
-margin_right = 16.0
-margin_bottom = 72.0
 texture = SubResource( 195 )
 script = SubResource( 196 )
 
 [node name="crab cakes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 197 )
-margin_left = 28.0
 margin_top = 56.0
-margin_right = 44.0
+margin_right = 16.0
 margin_bottom = 72.0
 texture = SubResource( 198 )
 script = SubResource( 199 )
 
 [node name="filet mignon" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 200 )
-margin_left = 56.0
+margin_left = 28.0
 margin_top = 56.0
-margin_right = 72.0
+margin_right = 44.0
 margin_bottom = 72.0
 texture = SubResource( 201 )
 script = SubResource( 202 )
 
 [node name="filet soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 203 )
-margin_left = 84.0
+margin_left = 56.0
 margin_top = 56.0
-margin_right = 100.0
+margin_right = 72.0
 margin_bottom = 72.0
 texture = SubResource( 204 )
 script = SubResource( 205 )
 
 [node name="filet with garlic mash" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 206 )
-margin_left = 112.0
+margin_left = 84.0
 margin_top = 56.0
-margin_right = 128.0
+margin_right = 100.0
 margin_bottom = 72.0
 texture = SubResource( 207 )
 script = SubResource( 208 )
 
 [node name="filet with tomatoes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 209 )
-margin_left = 140.0
+margin_left = 112.0
 margin_top = 56.0
-margin_right = 156.0
+margin_right = 128.0
 margin_bottom = 72.0
 texture = SubResource( 210 )
 script = SubResource( 211 )
 
 [node name="grape pastry" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 212 )
-margin_top = 84.0
-margin_right = 16.0
-margin_bottom = 100.0
+margin_left = 140.0
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 72.0
 texture = SubResource( 213 )
 script = SubResource( 214 )
 
 [node name="green pepper soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 215 )
-margin_left = 28.0
 margin_top = 84.0
-margin_right = 44.0
+margin_right = 16.0
 margin_bottom = 100.0
 texture = SubResource( 216 )
 script = SubResource( 217 )
 
 [node name="honeydew melon with sugar" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 218 )
-margin_left = 56.0
+margin_left = 28.0
 margin_top = 84.0
-margin_right = 72.0
+margin_right = 44.0
 margin_bottom = 100.0
 texture = SubResource( 219 )
 script = SubResource( 220 )
 
 [node name="mushroom soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 221 )
-margin_left = 84.0
+margin_left = 56.0
 margin_top = 84.0
-margin_right = 100.0
+margin_right = 72.0
 margin_bottom = 100.0
 texture = SubResource( 222 )
 script = SubResource( 223 )
 
 [node name="pepper and asparagus stir fry" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 224 )
-margin_left = 112.0
+margin_left = 84.0
 margin_top = 84.0
-margin_right = 128.0
+margin_right = 100.0
 margin_bottom = 100.0
 texture = SubResource( 225 )
 script = SubResource( 226 )
 
 [node name="mini grape tarts" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 227 )
-margin_left = 140.0
+margin_left = 112.0
 margin_top = 84.0
-margin_right = 156.0
+margin_right = 128.0
 margin_bottom = 100.0
 texture = SubResource( 228 )
 script = SubResource( 229 )
@@ -3906,8 +3867,6 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="FoodCollection1/cooked filet" to="FoodCollection1/cooked filet" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FoodCollection1/cooked green beans" to="FoodCollection1/cooked green beans" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FoodCollection1/cooked green beans" to="FoodCollection1/cooked green beans" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="FoodCollection1/cooked wheat berries" to="FoodCollection1/cooked wheat berries" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="FoodCollection1/cooked wheat berries" to="FoodCollection1/cooked wheat berries" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FoodCollection1/cooked wing" to="FoodCollection1/cooked wing" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FoodCollection1/cooked wing" to="FoodCollection1/cooked wing" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FoodCollection1/crab cakes" to="FoodCollection1/crab cakes" method="_on_collection_item_mouse_entered"]

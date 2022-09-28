@@ -1107,7 +1107,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "[description]",
-        "Ingredients": [["blueberry", 10],["sugar", 4], ["wheat flour", 4]],
+        "Ingredients": [["blueberry", 10],["sugar", 4], ["corn flour", 4]],
         "EnergyHealth": [10,10]
     },
     "sauteed cabbage with garlic":{
@@ -1248,13 +1248,6 @@
         "StackSize": 999,
         "Description": "[description]",
         "Ingredients": [["cooked filet", 1], ["potato", 2],["asparagus", 4]],
-        "EnergyHealth": [10,10]
-    },
-    "cooked wheat berries":{
-        "ItemCategory": "Food",
-        "StackSize": 999,
-        "Description": "[description]",
-        "Ingredients": [["wheat", 10]],
         "EnergyHealth": [10,10]
     },
     "sliced tomatoes and potatoes":{

@@ -41,7 +41,7 @@ func initialize():
 	show()
 	initialize_hotbar()
 	initialize_inventory()
-	#initialize_furnace()
+	initialize_furnace()
 
 func destroy():
 	set_physics_process(false)

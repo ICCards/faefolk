@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Clock/CurrentTime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/Player/Player/UserInterface/UpgradeDoorMenu/RadialDoorMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerStatsUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" type="PackedScene" id=17]
@@ -133,9 +132,6 @@ stream = ExtResource( 18 )
 visible = false
 
 [node name="RadialUpgradeMenu" parent="." instance=ExtResource( 5 )]
-visible = false
-
-[node name="RadialDoorMenu" parent="." instance=ExtResource( 6 )]
 visible = false
 
 [node name="ChatBox" parent="." instance=ExtResource( 4 )]

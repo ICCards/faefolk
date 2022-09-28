@@ -38,7 +38,14 @@ var inventory = {
 	8: ["bread", 60, null],
 }
 
-var hotbar = {}
+var hotbar = {
+	0 : ["stove #1", 2, null],
+	1 : ["radish", 28, null],
+	2: ["tomato", 12, null],
+	3: ["blueberry", 100, null],
+	4 : ["wheat flour", 60, null],
+	5 : ["sugar", 80, null],
+}
 var chests = {}
 var furnaces = {}
 var grain_mills = {}
