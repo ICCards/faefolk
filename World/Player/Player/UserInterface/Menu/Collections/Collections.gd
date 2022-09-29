@@ -9,6 +9,8 @@ func _ready():
 	initialize()
 
 func _physics_process(delta):
+	if not visible:
+		return
 	if item:
 		if page == "Crops" and CollectionsData.crops[item] != 0:
 			set_adjusted_pos()

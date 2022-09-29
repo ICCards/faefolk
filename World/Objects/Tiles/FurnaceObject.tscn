@@ -92,6 +92,7 @@ position = Vector2( 16, -23.5 )
 scale = Vector2( 0.05, 0.05 )
 frames = SubResource( 1 )
 animation = "active fire"
+frame = 5
 playing = true
 
 [node name="Smoke" type="AnimatedSprite" parent="."]
@@ -99,7 +100,7 @@ visible = false
 position = Vector2( 21, -107 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 15 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="SmeltTimer" type="Timer" parent="."]

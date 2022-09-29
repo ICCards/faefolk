@@ -37,15 +37,17 @@ func exited_slot(slot: SlotClass):
 		
 
 func _physics_process(delta):
-		adjusted_description_position()
-		if item and find_parent("UserInterface").holding_item == null:
-			$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
-			$ItemDescription.visible = true
-			$ItemDescription.item_name = item
-			$ItemDescription.position = adjusted_pos
-			$ItemDescription.initialize()
-		else:
-			$ItemDescription.visible = false
+	if not visible:
+		return
+	adjusted_description_position()
+	if item and find_parent("UserInterface").holding_item == null:
+		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
+		$ItemDescription.visible = true
+		$ItemDescription.item_name = item
+		$ItemDescription.position = adjusted_pos
+		$ItemDescription.initialize()
+	else:
+		$ItemDescription.visible = false
 
 
 func adjusted_description_position():

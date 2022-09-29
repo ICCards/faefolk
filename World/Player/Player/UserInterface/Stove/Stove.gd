@@ -144,60 +144,66 @@ func cooking_inactive():
 
 func _on_CookTimer_timeout():
 	if current_cooking_item:
-		add_to_yield_slot(current_cooking_item)
-		for ingredient in JsonData.item_data[current_cooking_item]["Ingredients"]:
-			if $StoveSlots/Ingredient1.item:
-				if ingredient[0] == $StoveSlots/Ingredient1.item.item_name:
-					PlayerInventory.decrease_item_quantity($StoveSlots/Ingredient1, ingredient[1], stove_id)
-					$StoveSlots/Ingredient1.item.decrease_item_quantity(ingredient[1])
-					if $StoveSlots/Ingredient1.item.item_quantity == 0:
-						$StoveSlots/Ingredient1.removeFromSlot()
-						PlayerInventory.remove_item($StoveSlots/Ingredient1, stove_id)
-			if $StoveSlots/Ingredient2.item:
-				if ingredient[0] == $StoveSlots/Ingredient2.item.item_name:
-					PlayerInventory.decrease_item_quantity($StoveSlots/Ingredient2, ingredient[1], stove_id)
-					$StoveSlots/Ingredient2.item.decrease_item_quantity(ingredient[1])
-					if $StoveSlots/Ingredient2.item.item_quantity == 0:
-						$StoveSlots/Ingredient2.removeFromSlot()
-						PlayerInventory.remove_item($StoveSlots/Ingredient2, stove_id)
-			if $StoveSlots/Ingredient3.item:
-				if ingredient[0] == $StoveSlots/Ingredient3.item.item_name:
-					PlayerInventory.decrease_item_quantity($StoveSlots/Ingredient3, ingredient[1], stove_id)
-					$StoveSlots/Ingredient3.item.decrease_item_quantity(ingredient[1])
-					if $StoveSlots/Ingredient3.item.item_quantity == 0:
-						$StoveSlots/Ingredient3.removeFromSlot()
-						PlayerInventory.remove_item($StoveSlots/Ingredient3, stove_id)
-		if $StoveSlots/FuelSlot.item.item_name == "wood":
-			$StoveSlots/FuelSlot.item.decrease_item_quantity(3)
-			PlayerInventory.decrease_item_quantity($StoveSlots/FuelSlot, 3, stove_id)
-			if $StoveSlots/FuelSlot.item.item_quantity == 0:
-				$StoveSlots/FuelSlot.removeFromSlot()
-				PlayerInventory.remove_item($StoveSlots/FuelSlot, stove_id)
-			if $StoveSlots/CoalYieldSlot.item:
-				PlayerInventory.add_item_quantity($StoveSlots/CoalYieldSlot, 3, stove_id)
-				$StoveSlots/CoalYieldSlot.item.add_item_quantity(3)
-			else:
-				$StoveSlots/CoalYieldSlot.initialize_item("coal", 3, null)
-				PlayerInventory.stoves[stove_id][6] = ["coal", 3, null]
-		elif $StoveSlots/FuelSlot.item.item_name == "coal":
-			$StoveSlots/FuelSlot.item.decrease_item_quantity(1)
-			PlayerInventory.decrease_item_quantity($StoveSlots/FuelSlot, 1, stove_id)
-			if $StoveSlots/FuelSlot.item.item_quantity == 0:
-				$StoveSlots/FuelSlot.removeFromSlot()
-				PlayerInventory.remove_item($StoveSlots/FuelSlot, stove_id)
+		add_to_yield_slot()
+		remove_ingredients()
+		remove_fuel()
 		check_valid_recipe()
-					
 
-func add_to_yield_slot(new_item):
+
+func remove_fuel():
+	if $StoveSlots/FuelSlot.item.item_name == "wood":
+		$StoveSlots/FuelSlot.item.decrease_item_quantity(3)
+		PlayerInventory.decrease_item_quantity($StoveSlots/FuelSlot, 3, stove_id)
+		if $StoveSlots/FuelSlot.item.item_quantity == 0:
+			$StoveSlots/FuelSlot.removeFromSlot()
+			PlayerInventory.remove_item($StoveSlots/FuelSlot, stove_id)
+		if $StoveSlots/CoalYieldSlot.item:
+			PlayerInventory.add_item_quantity($StoveSlots/CoalYieldSlot, 3, stove_id)
+			$StoveSlots/CoalYieldSlot.item.add_item_quantity(3)
+		else:
+			$StoveSlots/CoalYieldSlot.initialize_item("coal", 3, null)
+			PlayerInventory.stoves[stove_id][6] = ["coal", 3, null]
+	elif $StoveSlots/FuelSlot.item.item_name == "coal":
+		$StoveSlots/FuelSlot.item.decrease_item_quantity(1)
+		PlayerInventory.decrease_item_quantity($StoveSlots/FuelSlot, 1, stove_id)
+		if $StoveSlots/FuelSlot.item.item_quantity == 0:
+			$StoveSlots/FuelSlot.removeFromSlot()
+			PlayerInventory.remove_item($StoveSlots/FuelSlot, stove_id)
+
+func remove_ingredients():
+	for ingredient in JsonData.item_data[current_cooking_item]["Ingredients"]:
+		if $StoveSlots/Ingredient1.item:
+			if ingredient[0] == $StoveSlots/Ingredient1.item.item_name:
+				PlayerInventory.decrease_item_quantity($StoveSlots/Ingredient1, ingredient[1], stove_id)
+				$StoveSlots/Ingredient1.item.decrease_item_quantity(ingredient[1])
+				if $StoveSlots/Ingredient1.item.item_quantity == 0:
+					$StoveSlots/Ingredient1.removeFromSlot()
+					PlayerInventory.remove_item($StoveSlots/Ingredient1, stove_id)
+		if $StoveSlots/Ingredient2.item:
+			if ingredient[0] == $StoveSlots/Ingredient2.item.item_name:
+				PlayerInventory.decrease_item_quantity($StoveSlots/Ingredient2, ingredient[1], stove_id)
+				$StoveSlots/Ingredient2.item.decrease_item_quantity(ingredient[1])
+				if $StoveSlots/Ingredient2.item.item_quantity == 0:
+					$StoveSlots/Ingredient2.removeFromSlot()
+					PlayerInventory.remove_item($StoveSlots/Ingredient2, stove_id)
+		if $StoveSlots/Ingredient3.item:
+			if ingredient[0] == $StoveSlots/Ingredient3.item.item_name:
+				PlayerInventory.decrease_item_quantity($StoveSlots/Ingredient3, ingredient[1], stove_id)
+				$StoveSlots/Ingredient3.item.decrease_item_quantity(ingredient[1])
+				if $StoveSlots/Ingredient3.item.item_quantity == 0:
+					$StoveSlots/Ingredient3.removeFromSlot()
+					PlayerInventory.remove_item($StoveSlots/Ingredient3, stove_id)
+
+func add_to_yield_slot():
 	if not $StoveSlots/YieldSlot1.item:
-		$StoveSlots/YieldSlot1.initialize_item(new_item, 1, null)
-		PlayerInventory.stoves[stove_id][4] = [new_item, 1, null]
+		$StoveSlots/YieldSlot1.initialize_item(current_cooking_item, 1, null)
+		PlayerInventory.stoves[stove_id][4] = [current_cooking_item, 1, null]
 	elif not $StoveSlots/YieldSlot1.item.item_quantity == 999:
 		PlayerInventory.add_item_quantity($StoveSlots/YieldSlot1, 1, stove_id)
 		$StoveSlots/YieldSlot1.item.add_item_quantity(1)
 	elif not $StoveSlots/YieldSlot2.item:
-		$StoveSlots/YieldSlot1.initialize_item(new_item, 1, null)
-		PlayerInventory.stoves[stove_id][4] = [new_item, 1, null]
+		$StoveSlots/YieldSlot1.initialize_item(current_cooking_item, 1, null)
+		PlayerInventory.stoves[stove_id][4] = [current_cooking_item, 1, null]
 	else:
 		PlayerInventory.add_item_quantity($StoveSlots/YieldSlot1, 1, stove_id)
 		$StoveSlots/YieldSlot1.item.add_item_quantity(1)
@@ -295,12 +301,10 @@ func hovered_slot(slot: SlotClass):
 	if slot.item:
 		slot.item.hover_item()
 		item = slot.item.item_name
-
 func exited_slot(slot: SlotClass):
 	item = null
 	if slot.item:
 		slot.item.exit_item()
-
 func able_to_put_into_slot(slot: SlotClass):
 	var holding_item = find_parent("UserInterface").holding_item
 	if holding_item == null:
@@ -314,8 +318,7 @@ func able_to_put_into_slot(slot: SlotClass):
 	elif slot.slotType == SlotClass.SlotType.STOVE and (slot.slot_index == 4 or slot.slot_index == 5 or slot.slot_index == 6): # yield
 		return false
 	return true
-
-
+	
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
@@ -332,7 +335,6 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 		elif event.button_index == BUTTON_RIGHT && event.pressed:
 			if slot.item and not find_parent("UserInterface").holding_item:
 				right_click_slot(slot)
-
 
 func right_click_slot(slot):
 	if slot.item.item_quantity > 1:

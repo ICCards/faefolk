@@ -281,7 +281,7 @@ margin_bottom = -71.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 5 )
 
-[node name="YieldSlot3" type="Panel" parent="FurnaceSlots"]
+[node name="CoalYieldSlot" type="Panel" parent="FurnaceSlots"]
 margin_left = 80.0
 margin_top = -63.0
 margin_right = 134.0
@@ -333,7 +333,7 @@ texture = ExtResource( 11 )
 material = ExtResource( 4 )
 position = Vector2( 0, -35 )
 frames = SubResource( 5 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="CookTimer" type="Timer" parent="."]
@@ -345,10 +345,10 @@ margin_left = -44.0
 margin_top = -126.0
 margin_right = 43.0
 margin_bottom = -81.0
-value = 85.0
 texture_progress = ExtResource( 10 )
 
 [connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
 [connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
 [connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="timeout" from="CookTimer" to="." method="_on_CookTimer_timeout"]

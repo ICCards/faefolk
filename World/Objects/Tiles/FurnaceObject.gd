@@ -8,10 +8,12 @@ var rng = RandomNumberGenerator.new()
 var id
 
 func _ready():
+	rng.randomize()
 	id = rng.randi_range(0,100000)
 	$Position2D/InteractiveArea.name = str(id)
 	PlayerInventory.furnaces[id] = {}
 	print(PlayerInventory.furnaces)
+	print(PlayerInventory.furnaces[id])
 	set_direction()
 	
 func set_direction():

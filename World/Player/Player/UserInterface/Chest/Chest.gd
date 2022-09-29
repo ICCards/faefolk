@@ -6,6 +6,8 @@ onready var chest_slots = $ChestSlots
 onready var hotbar_slots = $HotbarSlots
 onready var locked_slots = $LockedSlots
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
+onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
+
 var chest_id
 var item
 
@@ -108,17 +110,35 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
+		elif event.button_index == BUTTON_RIGHT && event.pressed:
+			if slot.item and not find_parent("UserInterface").holding_item:
+				right_click_slot(slot)
+
+
+func right_click_slot(slot):
+	if slot.item.item_quantity > 1:
+		var new_qt = slot.item.item_quantity / 2
+		PlayerInventory.decrease_item_quantity(slot, slot.item.item_quantity / 2, chest_id)
+		slot.item.decrease_item_quantity(slot.item.item_quantity / 2)
+		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
+		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+
+func return_holding_item(item_name, qt):
+	var inventoryItem = InventoryItem.instance()
+	inventoryItem.set_item(item_name, qt, null)
+	find_parent("UserInterface").add_child(inventoryItem)
+	return inventoryItem
 
 
 func left_click_empty_slot(slot: SlotClass):
-	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, chest_id)
 	slot.putIntoSlot(find_parent("UserInterface").holding_item)
 	find_parent("UserInterface").holding_item = null
 
 
 func left_click_different_item(event: InputEvent, slot: SlotClass):
-	PlayerInventory.remove_item(slot)
-	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+	PlayerInventory.remove_item(slot, chest_id)
+	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, chest_id)
 	var temp_item = slot.item
 	slot.pickFromSlot()
 	temp_item.global_position = event.global_position
@@ -130,12 +150,12 @@ func left_click_same_item(slot: SlotClass):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 	var able_to_add = stack_size - slot.item.item_quantity
 	if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-		PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
+		PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity, chest_id)
 		slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
 	else:
-		PlayerInventory.add_item_quantity(slot, able_to_add)
+		PlayerInventory.add_item_quantity(slot, able_to_add, chest_id)
 		slot.item.add_item_quantity(able_to_add)
 		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 

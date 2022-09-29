@@ -90,12 +90,21 @@ func place_object_in_world(id, item_name, direction, location):
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(16, 16)
 	match item_name:
 		"furnace":
-			tileObjectHurtBox.queue_free()
+#			tileObjectHurtBox.queue_free()
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			var furnace = Furnace.instance()
-			furnace.direction = direction
-			furnace.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
-			Server.world.call_deferred("add_child", furnace, true)
+#			var furnace = Furnace.instance()
+#			furnace.direction = direction
+#			furnace.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+#			Server.world.call_deferred("add_child", furnace, true)
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 35)
+				"up":
+					Tiles.object_tiles.set_cellv(location,  31)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 33)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 34)
 		"tool cabinet":
 			match direction:
 				"down":

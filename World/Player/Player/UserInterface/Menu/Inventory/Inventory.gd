@@ -1,6 +1,6 @@
 extends Control
 
-
+onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 onready var inventory_slots = $InventorySlots
 onready var hotbar_slots = $HotbarSlots
@@ -56,6 +56,8 @@ enum SlotType {
 
 
 func _physics_process(delta):
+	if not visible:
+		return
 	if item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.visible = true
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
@@ -105,7 +107,23 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
+		elif event.button_index == BUTTON_RIGHT && event.pressed:
+			if slot.item and not find_parent("UserInterface").holding_item:
+				right_click_slot(slot)
 
+func right_click_slot(slot):
+	if slot.item.item_quantity > 1:
+		var new_qt = slot.item.item_quantity / 2
+		PlayerInventory.decrease_item_quantity(slot, slot.item.item_quantity / 2)
+		slot.item.decrease_item_quantity(slot.item.item_quantity / 2)
+		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
+		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+
+func return_holding_item(item_name, qt):
+	var inventoryItem = InventoryItem.instance()
+	inventoryItem.set_item(item_name, qt, null)
+	find_parent("UserInterface").add_child(inventoryItem)
+	return inventoryItem
 
 func _input(_event):
 	if find_parent("UserInterface").holding_item:

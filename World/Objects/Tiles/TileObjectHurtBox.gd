@@ -58,6 +58,11 @@ func set_dimensions():
 		PlayerInventory.grain_mills[id] = {}
 		scale.x = 2.0
 		position = position +  Vector2(16, 0)
+	elif item_name == "furnace":
+		$InteractiveArea/CollisionShape2D.disabled = false
+		$InteractiveArea.collision_mask = 2097152
+		$InteractiveArea.name = str(id)
+		PlayerInventory.furnaces[id] = {}
 
 
 

@@ -20,6 +20,8 @@ func initialize():
 
 
 func _physics_process(delta):
+	if not visible:
+		return
 	if hovered_button:
 		$ItemNameBox.item_name = hovered_button
 		$ItemNameBox.initialize()

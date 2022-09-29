@@ -28,18 +28,18 @@ var active_item_slot = 0
 
 var inventory = {
 	1: ["wheat", 20, null],
-	2: ["gold ingot", 60, null],
+	2: ["gold ore", 60, null],
 	3: ["rope", 20, null],
 	4: ["wood", 800, null],
 	5: ["stone", 800, null],
-	0: ["iron ingot", 60, null],
+	0: ["iron ore", 60, null],
 	6: ["potato seeds", 60, null],
-	7: ["blowfish", 60, null],
+	7: ["bronze ore", 12, null],
 	8: ["bread", 60, null],
 }
 
 var hotbar = {
-	0 : ["stove #1", 2, null],
+	0 : ["furnace", 2, null],
 	1 : ["radish", 28, null],
 	2: ["tomato", 12, null],
 	3: ["blueberry", 100, null],
@@ -51,8 +51,7 @@ var furnaces = {}
 var grain_mills = {}
 var stoves = {}
 
-func clear_chest_data(chest_id):
-	PlayerInventory.chests.erase(chest_id)
+
 
 func isSufficientMaterialToCraft(item):
 	var ingredients = JsonData.item_data[item]["Ingredients"]
@@ -272,6 +271,8 @@ func remove_item(slot: SlotClass, var id = null):
 			grain_mills[id].erase(slot.slot_index)
 		SlotClass.SlotType.STOVE:
 			stoves[id].erase(slot.slot_index)
+		SlotClass.SlotType.FURNACE:
+			furnaces[id].erase(slot.slot_index)
 
 func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var id = null):
 	match slot.slotType:
@@ -287,6 +288,8 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var id = null):
 			grain_mills[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.STOVE:
 			stoves[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.FURNACE:
+			furnaces[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 
 
 func add_item_quantity(slot: SlotClass, quantity_to_add: int, var id = null):
@@ -303,6 +306,8 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int, var id = null):
 			grain_mills[id][slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.STOVE:
 			stoves[id][slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.FURNACE:
+			furnaces[id][slot.slot_index][1] += quantity_to_add
 
 func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var id = null):
 	match slot.slotType:
@@ -318,7 +323,8 @@ func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var id =
 			grain_mills[id][slot.slot_index][1] -= quantity_to_subtract
 		SlotClass.SlotType.STOVE:
 			stoves[id][slot.slot_index][1] -= quantity_to_subtract
-			
+		SlotClass.SlotType.FURNACE:
+			furnaces[id][slot.slot_index][1] -= quantity_to_subtract
 
 
 ###
