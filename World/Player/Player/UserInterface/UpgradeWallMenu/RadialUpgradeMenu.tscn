@@ -1,11 +1,73 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/armored.png" type="Texture" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.gd" type="Script" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_0.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/metal.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/wood.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/stone.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/demolish.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=10]
+[ext_resource path="res://Assets/Images/User interface/radial menus/middle-circle.png" type="Texture" id=11]
+[ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_4.tscn" type="PackedScene" id=12]
+[ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_3.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.133333, 0.133333, 0.137255, 0.568627 )
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Control
+
+
+func _on_button_mouse_entered():
+	get_node(\"../../\").current_index = name.to_int()
+	$hovered.show()
+
+
+func _on_button_mouse_exited():
+	get_node(\"../../\").current_index = -1
+	$hovered.hide()
+
+
+func set_disabled():
+	modulate = Color(\"8c8c8c\")
+	$button.disabled = true
+	$hovered.hide()
+
+func set_enabled():
+	modulate = Color(\"ffffff\")
+	$button.disabled = false
+	$hovered.hide()
+"
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Control
+
+
+
+
+func _on_button_mouse_entered():
+	get_node(\"../../\").current_index = name.to_int()
+	$hovered.show()
+
+
+func _on_button_mouse_exited():
+	get_node(\"../../\").current_index = -1
+	$hovered.hide()
+
+
+func set_disabled():
+	modulate = Color(\"8c8c8c\")
+	$button.disabled = true
+	$hovered.hide()
+
+func set_enabled():
+	modulate = Color(\"ffffff\")
+	$button.disabled = false
+	$hovered.hide()
+"
 
 [sub_resource type="Animation" id=2]
 resource_name = "set active"
@@ -47,73 +109,98 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_top = -25.0
 margin_bottom = -25.0
-rect_scale = Vector2( 0.6, 0.6 )
 mouse_filter = 2
 
 [node name="0" parent="Circle" instance=ExtResource( 3 )]
+margin_top = 31.0
+margin_right = 0.0
+margin_bottom = 31.0
 
-[node name="1" parent="Circle" instance=ExtResource( 3 )]
-rect_rotation = 60.0
+[node name="1" parent="Circle" instance=ExtResource( 4 )]
+margin_left = 160.0
+margin_top = 64.3333
+margin_right = 160.0
+margin_bottom = 64.3333
+script = SubResource( 5 )
 
-[node name="2" parent="Circle" instance=ExtResource( 3 )]
-rect_rotation = 120.0
+[node name="2" parent="Circle" instance=ExtResource( 5 )]
+margin_left = 127.667
+margin_top = 256.0
+margin_right = 127.667
+margin_bottom = 256.0
+script = SubResource( 6 )
 
-[node name="3" parent="Circle" instance=ExtResource( 3 )]
-rect_rotation = 180.0
+[node name="3" parent="Circle" instance=ExtResource( 13 )]
+margin_left = -128.0
+margin_top = 256.0
+margin_right = -128.0
+margin_bottom = 256.0
 
-[node name="4" parent="Circle" instance=ExtResource( 3 )]
-rect_rotation = 240.0
+[node name="4" parent="Circle" instance=ExtResource( 12 )]
+margin_left = -160.0
+margin_top = 64.0
+margin_right = -160.0
+margin_bottom = 64.0
 
-[node name="5" parent="Circle" instance=ExtResource( 3 )]
-rect_rotation = 300.0
-
-[node name="labels" type="Control" parent="Circle"]
+[node name="Icons" type="Control" parent="Circle"]
+margin_top = 31.0
 margin_right = 40.0
-margin_bottom = 40.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_bottom = 71.0
 mouse_filter = 2
 
-[node name="Wood" type="Label" parent="Circle/labels"]
-margin_left = 276.667
-margin_top = -206.667
-margin_right = 386.667
-margin_bottom = -139.667
-theme = ExtResource( 1 )
-text = "Wood"
+[node name="Wood" type="Sprite" parent="Circle/Icons"]
+position = Vector2( 0, -165 )
+texture = ExtResource( 7 )
 
-[node name="Stone" type="Label" parent="Circle/labels"]
-margin_left = 280.0
-margin_top = 123.333
-margin_right = 390.0
-margin_bottom = 190.333
-theme = ExtResource( 1 )
-text = "Stone"
+[node name="Stone" type="Sprite" parent="Circle/Icons"]
+position = Vector2( 125, -73.3333 )
+texture = ExtResource( 8 )
 
-[node name="Metal" type="Label" parent="Circle/labels"]
-margin_left = -36.6666
-margin_top = 323.333
-margin_right = 73.3334
-margin_bottom = 390.333
-theme = ExtResource( 1 )
-text = "Metal"
+[node name="Metal" type="Sprite" parent="Circle/Icons"]
+position = Vector2( 81.6667, 70 )
+texture = ExtResource( 6 )
 
-[node name="Armored" type="Label" parent="Circle/labels"]
-margin_left = -410.0
-margin_top = 140.0
-margin_right = -300.0
-margin_bottom = 207.0
-theme = ExtResource( 1 )
-text = "Armored"
+[node name="Armored" type="Sprite" parent="Circle/Icons"]
+position = Vector2( -81.6667, 70 )
+texture = ExtResource( 1 )
 
-[node name="Demolish" type="Label" parent="Circle/labels"]
-margin_left = -403.333
-margin_top = -206.667
-margin_right = -214.333
-margin_bottom = -139.667
-theme = ExtResource( 1 )
-text = "Demolish"
+[node name="Demolish" type="Sprite" parent="Circle/Icons"]
+position = Vector2( -123.333, -78.3333 )
+texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Circle"]
 "anims/set active" = SubResource( 2 )
 "anims/set disabled" = SubResource( 3 )
 anims/zoom = SubResource( 4 )
+
+[node name="Middle-circle" type="TextureRect" parent="Circle"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -224.0
+margin_right = 224.0
+margin_bottom = 224.0
+mouse_filter = 2
+texture = ExtResource( 11 )
+
+[node name="Title" type="Label" parent="."]
+margin_left = 462.0
+margin_top = 248.0
+margin_right = 718.0
+margin_bottom = 309.0
+rect_scale = Vector2( 0.4, 0.4 )
+theme = ExtResource( 10 )
+text = "Metal:"
+align = 1
+
+[node name="Resources" type="Label" parent="."]
+margin_left = 418.0
+margin_top = 281.0
+margin_right = 1051.0
+margin_bottom = 342.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 10 )
+text = "1 x Wood(total wood)"
+align = 1

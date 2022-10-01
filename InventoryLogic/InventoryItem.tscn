@@ -7,7 +7,6 @@
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/tall fire pedestal.png" type="Texture" id=5]
 
 [node name="Item" type="Node2D"]
-z_index = 1
 script = ExtResource( 2 )
 
 [node name="Image" type="TextureRect" parent="."]

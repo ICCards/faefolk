@@ -348,7 +348,7 @@ func place_object(item_name, direction, location, type):
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 			if item_name == "wall" or item_name == "foundation":
-				# REMOVE MATERIAL HERE
+				PlayerInventory.remove_material("wood", 1)
 				PlaceObject.place_building_object_in_world(id, item_name, location)
 			else:
 				PlaceObject.place_object_in_world(id, item_name, direction, location)

@@ -113,9 +113,9 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 
 func right_click_slot(slot):
 	if slot.item.item_quantity > 1:
-		var new_qt = slot.item.item_quantity / 2
-		PlayerInventory.decrease_item_quantity(slot, slot.item.item_quantity / 2)
-		slot.item.decrease_item_quantity(slot.item.item_quantity / 2)
+		var new_qt = int(slot.item.item_quantity / 2)
+		PlayerInventory.decrease_item_quantity(slot, int(slot.item.item_quantity / 2))
+		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))
 		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 

@@ -3,7 +3,7 @@ extends Control
 
 onready var cam = get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id +  "/Camera2D")
 
-var buttons = [null, "wood", "stone", "metal", "armored", "demolish"]
+var buttons = ["wood", "stone", "metal", "armored", "demolish"]
 var current_index = -1
 var location
 var tile_node
@@ -22,38 +22,92 @@ func initialize(_loc, _node):
 	PlayerInventory.viewInventoryMode = true
 
 
+func _physics_process(delta):
+	if not visible:
+		return
+	set_icon_position()
+	if current_index != -1:
+		$Title.show()
+		$Title.text = buttons[current_index][0].to_upper() + buttons[current_index].substr(1,-1) + ":"
+		$Resources.show()
+		$Resources.text = "1 x Wood ( " + PlayerInventory.total_wood() + " )"
+	else:
+		$Title.hide()
+		$Resources.hide()
+		
+		
+func set_icon_position():
+	match current_index:
+		-1:
+			$Circle/Icons/Wood.position = Vector2(0,-162)
+			$Circle/Icons/Stone.position = Vector2(125, -75)
+			$Circle/Icons/Demolish.position = Vector2(-125, -75)
+			$Circle/Icons/Metal.position = Vector2(80,70)
+			$Circle/Icons/Armored.position = Vector2(-80,70)
+		0:
+			$Circle/Icons/Wood.position = Vector2(0,-178)
+			$Circle/Icons/Stone.position = Vector2(125, -75)
+			$Circle/Icons/Demolish.position = Vector2(-125, -75)
+			$Circle/Icons/Metal.position = Vector2(80,70)
+			$Circle/Icons/Armored.position = Vector2(-80,70)
+		1:
+			$Circle/Icons/Wood.position = Vector2(0,-162)
+			$Circle/Icons/Stone.position = Vector2(140, -82)
+			$Circle/Icons/Demolish.position = Vector2(-125, -75)
+			$Circle/Icons/Metal.position = Vector2(80,70)
+			$Circle/Icons/Armored.position = Vector2(-80,70)
+		2: 
+			$Circle/Icons/Wood.position = Vector2(0,-162)
+			$Circle/Icons/Stone.position = Vector2(125, -75)
+			$Circle/Icons/Demolish.position = Vector2(-125, -75)
+			$Circle/Icons/Metal.position = Vector2(90,80)
+			$Circle/Icons/Armored.position = Vector2(-80,70)
+		3:
+			$Circle/Icons/Wood.position = Vector2(0,-162)
+			$Circle/Icons/Stone.position = Vector2(125, -75)
+			$Circle/Icons/Demolish.position = Vector2(-125, -75)
+			$Circle/Icons/Metal.position = Vector2(80,70)
+			$Circle/Icons/Armored.position = Vector2(-90,80)
+		4: 
+			$Circle/Icons/Wood.position = Vector2(0,-162)
+			$Circle/Icons/Stone.position = Vector2(125, -75)
+			$Circle/Icons/Demolish.position = Vector2(-140, -82)
+			$Circle/Icons/Metal.position = Vector2(80,70)
+			$Circle/Icons/Armored.position = Vector2(-80,70)
+
+
 func set_active_buttons():
 	match tile_node.tier:
 		"twig":
+			get_node("Circle/0").set_enabled()
+			get_node("Circle/1").set_enabled()
+			get_node("Circle/2").set_enabled()
+			get_node("Circle/3").set_enabled()
+			get_node("Circle/4").initialize()
+		"wood":
 			get_node("Circle/0").set_disabled()
 			get_node("Circle/1").set_enabled()
 			get_node("Circle/2").set_enabled()
 			get_node("Circle/3").set_enabled()
-			get_node("Circle/4").set_enabled()
-		"wood":
+			get_node("Circle/4").initialize()
+		"stone":
 			get_node("Circle/0").set_disabled()
 			get_node("Circle/1").set_disabled()
 			get_node("Circle/2").set_enabled()
 			get_node("Circle/3").set_enabled()
-			get_node("Circle/4").set_enabled()
-		"stone":
-			get_node("Circle/0").set_disabled()
-			get_node("Circle/1").set_disabled()
-			get_node("Circle/2").set_disabled()
-			get_node("Circle/3").set_enabled()
-			get_node("Circle/4").set_enabled()
+			get_node("Circle/4").initialize()
 		"metal":
 			get_node("Circle/0").set_disabled()
 			get_node("Circle/1").set_disabled()
 			get_node("Circle/2").set_disabled()
-			get_node("Circle/3").set_disabled()
-			get_node("Circle/4").set_enabled()
+			get_node("Circle/3").set_enabled()
+			get_node("Circle/4").initialize()
 		"armored":
 			get_node("Circle/0").set_disabled()
 			get_node("Circle/1").set_disabled()
 			get_node("Circle/2").set_disabled()
 			get_node("Circle/3").set_disabled()
-			get_node("Circle/4").set_disabled()
+			get_node("Circle/4").initialize()
 
 
 

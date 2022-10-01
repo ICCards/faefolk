@@ -141,14 +141,16 @@ margin_right = -708.0
 margin_bottom = -89.0
 
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
-position = Vector2( 885, 11 )
+margin_left = 920.0
+margin_top = 8.0
+margin_right = 920.0
+margin_bottom = 8.0
 
 [node name="PlayerStatsUI" parent="." instance=ExtResource( 12 )]
-margin_left = 892.0
-margin_top = 435.0
-margin_right = 892.0
-margin_bottom = 435.0
-rect_scale = Vector2( 2, 2 )
+margin_left = 920.0
+margin_top = 448.0
+margin_right = 920.0
+margin_bottom = 448.0
 
 [node name="DeathEffect" type="ColorRect" parent="."]
 visible = false

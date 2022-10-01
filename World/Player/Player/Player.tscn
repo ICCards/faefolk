@@ -5379,7 +5379,6 @@ autoplay = true
 script = ExtResource( 18 )
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="Sounds"]
-autoplay = true
 script = ExtResource( 14 )
 
 [node name="HoldingItem" type="TextureRect" parent="."]

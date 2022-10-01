@@ -2,7 +2,6 @@ extends Control
 
 var item
 var furnace_id
-var current_smelting
 
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots
@@ -279,6 +278,9 @@ func right_click_slot(slot):
 		slot.item.decrease_item_quantity(slot.item.item_quantity / 2)
 		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
+			check_if_furnace_active()
+		
 
 func return_holding_item(item_name, qt):
 	var inventoryItem = InventoryItem.instance()
@@ -292,7 +294,8 @@ func left_click_empty_slot(slot: SlotClass):
 		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, furnace_id)
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = null
-		check_if_furnace_active()
+		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
+			check_if_furnace_active()
 
 func left_click_different_item(event: InputEvent, slot: SlotClass):
 	if able_to_put_into_slot(slot):
@@ -303,6 +306,8 @@ func left_click_different_item(event: InputEvent, slot: SlotClass):
 		temp_item.global_position = event.global_position
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = temp_item
+		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
+			check_if_furnace_active()
 
 func left_click_same_item(slot: SlotClass):
 	if able_to_put_into_slot(slot):
@@ -317,13 +322,16 @@ func left_click_same_item(slot: SlotClass):
 			PlayerInventory.add_item_quantity(slot, able_to_add, furnace_id)
 			slot.item.add_item_quantity(able_to_add)
 			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
+		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
+			check_if_furnace_active()
 
 func left_click_not_holding(slot: SlotClass):
 	PlayerInventory.remove_item(slot, furnace_id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-
+	if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
+		check_if_furnace_active()
 
 func open_trash_can():
 	$Tween.interpolate_property($Trash/Top, "rotation_degrees",

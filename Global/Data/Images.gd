@@ -409,6 +409,16 @@ func returnICGhostUnique(unique):
 # WEAPONS #
 func returnToolSprite(toolName, animation):
 	match toolName:
+		"hammer":
+			match animation: 
+				"swing_down":
+					 return hammer.down
+				"swing_up":
+					 return hammer.up
+				"swing_left":
+					 return hammer.left
+				"swing_right":
+					 return hammer.right
 		"wood pickaxe":
 			match animation: 
 				"swing_down":
@@ -896,6 +906,13 @@ var ripples = {
 	left = preload("res://Characters/Weapon swings/ripples/left.png"),
 	right = preload("res://Characters/Weapon swings/ripples/right.png"),
 	up = preload("res://Characters/Weapon swings/ripples/up.png")
+}
+
+var hammer = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/hammer/iron/down.png"),
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/hammer/iron/left.png"),
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/hammer/iron/right.png"),
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/hammer/iron/up.png")
 }
 
 # TALL GRASS #
