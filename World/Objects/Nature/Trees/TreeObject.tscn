@@ -521,7 +521,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="CapsuleShape2D" id=22]
-radius = 15.7639
+radius = 14.3333
 height = 10.6944
 
 [node name="TreeObject" type="Node2D"]
@@ -644,6 +644,10 @@ disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+estimate_radius = false
+radius = 40.0
+
 [node name="MovementCollisionBox" type="StaticBody2D" parent="."]
 position = Vector2( 3.33333, -25.5556 )
 
@@ -655,8 +659,6 @@ shape = SubResource( 22 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -2.86102e-06, -93.3333 )
 scale = Vector2( 7.11111, 12.2222 )
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 
 [connection signal="area_entered" from="TreeHurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="TreeTopArea" to="." method="_on_TreeTopArea_area_entered"]

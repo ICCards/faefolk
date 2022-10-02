@@ -4776,6 +4776,7 @@ extents = Vector2( 1, 1 )
 [sub_resource type="GDScript" id=68]
 script/source = "extends Area2D
 
+var tool_name = \"\"
 var knockback_vector = Vector2.ZERO
 "
 
@@ -5141,7 +5142,7 @@ shape = SubResource( 2 )
 
 [node name="SwordSwing" type="Area2D" parent="Swing"]
 visible = false
-collision_layer = 32
+collision_layer = 0
 collision_mask = 2304
 script = SubResource( 68 )
 

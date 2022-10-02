@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://World/Animals/Bear.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Animals/Bear/claw/body/right.png" type="Texture" id=2]
@@ -19,6 +19,51 @@ height = 36.0
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = SubResource( 18 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 18.0
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id=13]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 33.2415
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "hit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=21]
+radius = 261.008
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -792,49 +837,7 @@ tracks/5/keys = {
 "values": [ null ]
 }
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 18.0
-height = 44.0
-
-[sub_resource type="CapsuleShape2D" id=13]
-radius = 15.0
-
-[sub_resource type="CircleShape2D" id=14]
-radius = 33.2415
-
-[sub_resource type="Animation" id=20]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("..:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-
-[sub_resource type="Animation" id=15]
-resource_name = "hit"
-length = 0.25
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("..:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.0 ]
-}
-
-[node name="Bear" type="StaticBody2D"]
+[node name="Bear" type="KinematicBody2D"]
 material = ExtResource( 3 )
 script = ExtResource( 1 )
 
@@ -844,13 +847,6 @@ position = Vector2( 0, -26 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
-
-[node name="LineOfSight" type="RayCast2D" parent="."]
-visible = false
-position = Vector2( -8.52651e-14, -5 )
-rotation = -0.485202
-enabled = true
-cast_to = Vector2( 350, 0 )
 
 [node name="Body" type="Sprite" parent="."]
 material = SubResource( 19 )
@@ -868,20 +864,6 @@ use_parent_material = true
 position = Vector2( 2, -40 )
 scale = Vector2( 1.8, 1.8 )
 hframes = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 3 )
-"anims/bite down" = SubResource( 9 )
-"anims/bite left" = SubResource( 10 )
-"anims/bite right" = SubResource( 11 )
-"anims/bite up" = SubResource( 12 )
-anims/loop = SubResource( 8 )
-"anims/swing down" = SubResource( 4 )
-"anims/swing left" = SubResource( 5 )
-"anims/swing right" = SubResource( 6 )
-"anims/swing up" = SubResource( 7 )
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="BearClaw" type="Area2D" parent="."]
 visible = false
@@ -915,24 +897,45 @@ shape = SubResource( 14 )
 anims/RESET = SubResource( 20 )
 anims/hit = SubResource( 15 )
 
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 21 )
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 100.0
+target_desired_distance = 100.0
+avoidance_enabled = true
+radius = 24.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+"anims/bite down" = SubResource( 9 )
+"anims/bite left" = SubResource( 10 )
+"anims/bite right" = SubResource( 11 )
+"anims/bite up" = SubResource( 12 )
+anims/loop = SubResource( 8 )
+"anims/swing down" = SubResource( 4 )
+"anims/swing left" = SubResource( 5 )
+"anims/swing right" = SubResource( 6 )
+"anims/swing up" = SubResource( 7 )
+
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false
 position = Vector2( -2.98023e-08, -32 )
 scale = Vector2( 9.65, 8.2 )
 
-[node name="PathToPlayerTimer" type="Timer" parent="."]
-wait_time = 0.25
-autostart = true
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
-[node name="RandomPathTimer" type="Timer" parent="."]
+[node name="IdleTimer" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
 
-[node name="CheckPositionTimer" type="Timer" parent="."]
+[node name="ChaseTimer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="timeout" from="PathToPlayerTimer" to="." method="_on_PathToPlayerTimer_timeout"]
-[connection signal="timeout" from="RandomPathTimer" to="." method="_on_RandomPathTimer_timeout"]
-[connection signal="timeout" from="CheckPositionTimer" to="." method="_on_CheckPositionTimer_timeout"]

@@ -14,6 +14,7 @@ var principal
 var character 
 var setting
 var current_building_item = null
+var running_speed_change = 1.0
 
 onready var state = MOVEMENT
 enum {
@@ -46,8 +47,8 @@ const _character = preload("res://Global/Data/Characters.gd")
 
 func _ready():
 	Settings.load_keys()
-#	character = _character.new()
-#	character.LoadPlayerCharacter("human_male")
+	character = _character.new()
+	character.LoadPlayerCharacter("human_male")
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
 	Server.player_node = self
@@ -202,10 +203,12 @@ func _unhandled_input(event):
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
-#	if event.is_action_pressed("run"):
-#		running = true
-#	elif event.is_action_released("run"):
-#		running = false
+	if event.is_action_pressed("run"):
+		running_speed_change = 1.2
+		running = true
+	elif event.is_action_released("run"):
+		running_speed_change = 1.0
+		running = false
 
 
 func show_placable_object(item_name, item_category):
@@ -299,13 +302,13 @@ func movement_state(delta):
 			sword_swing.knockback_vector = input_vector
 		else:
 			if Sounds.current_footsteps_sound != Sounds.swimming:
-				velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+				velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta )
 			else:
 				velocity = velocity.move_toward(Vector2.ZERO, delta/3)
 		if is_walking_on_dirt:
-			move_and_collide(velocity * MAX_SPEED_DIRT)
+			move_and_collide(velocity * MAX_SPEED_DIRT * running_speed_change)
 		else:
-			move_and_collide(velocity * MAX_SPEED_PATH)
+			move_and_collide(velocity * MAX_SPEED_PATH * running_speed_change)
 	else:
 		idle_state(direction)
 
@@ -351,7 +354,8 @@ func walk_state(_direction):
 			holding_item.hide()
 			animation = "walk_" + _direction.to_lower()
 		composite_sprites.set_player_animation(character, animation, null)
-	elif running:
+	elif running and Sounds.current_footsteps_sound != Sounds.swimming:
+		animation_player.play("movement")
 		animation = "run_" + _direction.to_lower()
 		composite_sprites.set_player_animation(character, animation, null)
 	else:

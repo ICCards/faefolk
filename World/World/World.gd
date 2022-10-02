@@ -48,7 +48,7 @@ var tall_grass_types = ["dark green", "green", "red", "yellow"]
 var treeTypes = ['A','B', 'C', 'D', 'E']
 var oreTypes = ["Stone", "Cobblestone"]
 
-var active_player = "Players/" + Server.player_id + "/" + Server.player_id
+#var active_player = "Players/" + Server.player_id + "/" + Server.player_id
 
 var object_name
 var position_of_object
@@ -59,8 +59,8 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 20
-const NUM_BUNNIES = 30
+const NUM_DUCKS = 60
+const NUM_BUNNIES = 60
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -206,6 +206,7 @@ func DespawnPlayer(player_id):
 func buildMap(map):
 	Tiles.valid_tiles = $ValidTiles
 	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
+	Tiles.watered_tiles = $FarmingTiles/WateredAutoTiles
 	Tiles.ocean_tiles = $GeneratedTiles/ShallowOcean
 	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
 	Tiles.wall_tiles = $PlacableTiles/WallTiles
@@ -393,8 +394,8 @@ func update_tile_bitmask_regions():
 func spawn_animals():
 	for i in range(NUM_BUNNIES):
 		spawnRandomBunny()
-#	for i in range(NUM_DUCKS):
-#		spawnRandomDuck()
+	for i in range(NUM_DUCKS):
+		spawnRandomDuck()
 	
 func set_water_tiles():
 	for x in range(300): # fill ocean
@@ -610,12 +611,12 @@ func spawnRandomBunny():
 #		bird.global_position = loc
 #		$Animals.add_child(bird)
 #
-#func spawnRandomDuck():
-#	var loc = returnValidSpawnLocation()
-#	if loc != null:
-#		var duck = Duck.instance()
-#		duck.global_position = loc
-#		$Animals.add_child(duck)
+func spawnRandomDuck():
+	var loc = returnValidSpawnLocation()
+	if loc != null:
+		var duck = Duck.instance()
+		duck.global_position = loc
+		$Animals.add_child(duck)
 
 
 func play_watering_can_effect(loc):

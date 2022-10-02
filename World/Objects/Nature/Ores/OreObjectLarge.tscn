@@ -308,6 +308,8 @@ position = Vector2( 0.588236, 2.35294 )
 scale = Vector2( 4.29412, 3.64706 )
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+estimate_radius = false
+radius = 50.0
 
 [connection signal="area_entered" from="BigHurtBox" to="." method="_on_BigHurtBox_area_entered"]
 [connection signal="area_entered" from="SmallHurtBox" to="." method="_on_SmallHurtBox_area_entered"]

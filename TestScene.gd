@@ -40,16 +40,6 @@ func _ready():
 	Tiles.wall_tiles = $PlacableTiles/WallTiles
 	Tiles.foundation_tiles = $PlacableTiles/FoundationTiles
 
-	rng.randomize()
-	var loadingScreen = LoadingScreen.instance()
-	loadingScreen.name = "loadingScreen"
-	add_child(loadingScreen)
-	get_node("loadingScreen").set_phase("Getting map")
-	yield(get_tree().create_timer(1), "timeout")
-	Server.generated_map.clear()
-	Server.generate_map()
-	wait_for_map()
-
 func build_valid_tiles():
 	for x in range(1000):
 		for y in range(1000):

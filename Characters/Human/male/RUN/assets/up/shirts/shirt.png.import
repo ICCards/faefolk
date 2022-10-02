@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shirts.png-4afffeeddac13bd079ae858f89fb6583.stex"
+path="res://.import/shirt.png-4f6e641a53056f8fdfb198782fe16e73.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Human/male/RUN/assets/right/shirts/shirts.png"
-dest_files=[ "res://.import/shirts.png-4afffeeddac13bd079ae858f89fb6583.stex" ]
+source_file="res://Characters/Human/male/RUN/assets/up/shirts/shirt.png"
+dest_files=[ "res://.import/shirt.png-4f6e641a53056f8fdfb198782fe16e73.stex" ]
 
 [params]
 

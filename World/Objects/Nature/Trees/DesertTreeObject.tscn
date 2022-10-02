@@ -102,7 +102,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 3, 23 )
 frames = ExtResource( 1 )
-frame = 4
+frame = 6
 playing = true
 offset = Vector2( 0, -48.3333 )
 
@@ -145,6 +145,10 @@ anims/RESET = SubResource( 15 )
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+estimate_radius = false
+radius = 40.0
 
 [connection signal="area_entered" from="TreeHurtbox" to="." method="_on_TreeHurtbox_area_entered"]
 [connection signal="area_entered" from="TreeTopArea" to="." method="_on_TreeTopArea_area_entered"]

@@ -3,6 +3,7 @@ extends Node
 var valid_tiles = null
 var path_tiles = null
 var hoed_tiles = null
+var watered_tiles = null
 var ocean_tiles = null
 var dirt_tiles = null
 var wall_tiles = null

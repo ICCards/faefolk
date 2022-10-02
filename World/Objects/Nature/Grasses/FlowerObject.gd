@@ -20,8 +20,8 @@ func play_sound_effect():
 		$AnimationPlayer.play("animate")
 
 func _on_Area2D_body_entered(_body):
-	var data = {"id": name, "n": "flower", "d": ""}
-	Server.action("ON_HIT", data)
+#	var data = {"id": name, "n": "flower", "d": ""}
+#	Server.action("ON_HIT", data)
 	play_sound_effect()
 	bodyEnteredFlag = true
 

@@ -3,15 +3,12 @@ extends Node2D
 
 onready var sound_effects = $SoundEffects
 onready var axe_pickaxe_swing = $AxePickaxeSwing
+onready var sword_swing = $SwordSwing
 onready var watering_can_particles1 = $WateringCanParticles1
 onready var watering_can_particles2 = $WateringCanParticles2
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var composite_sprites = get_node("../CompositeSprites")
-onready var dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
-onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
-onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-onready var ocean_tiles = get_node("/root/World/GeneratedTiles/ShallowOcean")
 
 onready var ArrowProjectile = preload("res://World/Objects/Misc/ArrowProjectile.tscn")
 
@@ -31,7 +28,7 @@ enum {
 var is_drawing = false
 var is_releasing = false
 
-func _process(delta):
+func _physics_process(delta):
 	if is_drawing or is_releasing:
 		var degrees = int($ArrowDirection.rotation_degrees) % 360
 		$ArrowDirection.look_at(get_global_mouse_position())
@@ -57,6 +54,8 @@ func _process(delta):
 			composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
 		elif is_releasing:
 			composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
+	else:
+		return
 
 func swing(item_name, _direction):
 	if get_parent().state != SWINGING:
@@ -69,6 +68,7 @@ func swing(item_name, _direction):
 			if item_name == "scythe":
 				player_animation_player.play("scythe_swing_" + _direction.to_lower())
 			else:
+				sword_swing.tool_name = item_name
 				player_animation_player.play("sword_swing_" + _direction.to_lower())
 			animation = "sword_swing_" + _direction.to_lower()
 			rng.randomize()
@@ -146,8 +146,8 @@ func set_hoed_tile(direction):
 	var pos = Util.set_swing_position(global_position, direction)
 	var location = Tiles.valid_tiles.world_to_map(pos)
 	if Tiles.valid_tiles.get_cellv(location) == 0 and \
-	hoed_tiles.get_cellv(location) == -1 and \
-	Tiles.isCenterBitmaskTile(location, dirt_tiles):
+	Tiles.hoed_tiles.get_cellv(location) == -1 and \
+	Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles):
 		yield(get_tree().create_timer(0.6), "timeout")
 #		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 #		var data = {"id": id, "l": location}
@@ -157,14 +157,14 @@ func set_hoed_tile(direction):
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
-		hoed_tiles.set_cellv(location, 0)
-		hoed_tiles.update_bitmask_region()	
+		Tiles.hoed_tiles.set_cellv(location, 0)
+		Tiles.hoed_tiles.update_bitmask_region()	
 
 
 func remove_hoed_tile(direction):
 	var pos = Util.set_swing_position(global_position, direction)
-	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) != -1:
+	var location = Tiles.hoed_tiles.world_to_map(pos)
+	if Tiles.hoed_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
 		Stats.decrease_tool_health()
 #		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
@@ -173,17 +173,17 @@ func remove_hoed_tile(direction):
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
-		watered_tiles.set_cellv(location, -1)
-		hoed_tiles.set_cellv(location, -1)
-		hoed_tiles.update_bitmask_region()
-		watered_tiles.update_bitmask_region()
+		Tiles.watered_tiles.set_cellv(location, -1)
+		Tiles.hoed_tiles.set_cellv(location, -1)
+		Tiles.hoed_tiles.update_bitmask_area(location)
+		Tiles.watered_tiles.update_bitmask_area(location)
 		
 		
 func set_watered_tile():
 	direction = get_parent().direction
 	var pos = Util.set_swing_position(global_position, direction)
-	var location = hoed_tiles.world_to_map(pos)
-	if ocean_tiles.get_cellv(location) != -1:
+	var location = Tiles.hoed_tiles.world_to_map(pos)
+	if Tiles.ocean_tiles.get_cellv(location) != -1:
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
@@ -203,12 +203,12 @@ func set_watered_tile():
 		yield(get_tree().create_timer(0.4), "timeout")
 		watering_can_particles1.emitting = false
 		watering_can_particles2.emitting = false
-		if hoed_tiles.get_cellv(location) != -1:
+		if Tiles.hoed_tiles.get_cellv(location) != -1:
 	#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 	#		var data = {"id": id, "l": location}
 	#		Server.action("WATER", data)
-			watered_tiles.set_cellv(location, 0)
-			watered_tiles.update_bitmask_region()
+			Tiles.watered_tiles.set_cellv(location, 0)
+			Tiles.watered_tiles.update_bitmask_region()
 	else: 
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

@@ -1901,19 +1901,19 @@ var male = {
 
 	shirts_run_down = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RUN/assets/down/shirts/shirts.png")
+		1 : preload("res://Characters/Human/male/RUN/assets/down/shirts/shirt.png")
 	},
 	shirts_run_up = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RUN/assets/up/shirts/shirts.png")
+		1 : preload("res://Characters/Human/male/RUN/assets/up/shirts/shirt.png")
 	},
 	shirts_run_right = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RUN/assets/right/shirts/shirts.png")
+		1 : preload("res://Characters/Human/male/RUN/assets/right/shirts/shirt.png")
 	},
 	shirts_run_left = {
 		0 : null,
-		1 : preload("res://Characters/Human/male/RUN/assets/left/shirts/shirts.png")
+		1 : preload("res://Characters/Human/male/RUN/assets/left/shirts/shirt.png")
 	},
 
 	pants_run_down = {

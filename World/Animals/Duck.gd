@@ -1,130 +1,149 @@
-extends StaticBody2D
+extends KinematicBody2D
 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var valid_tiles = get_node("/root/World/WorldNavigation/ValidTiles")
-onready var worldNavigation = get_node("/root/World/WorldNavigation")
-onready var los = $LineOfSight
-var player_spotted: bool = false
-var random_idle_pos = null
-var in_idle_state: bool = false
+
+onready var _timer: Timer = $Timer
+onready var animation_player = $AnimationPlayer
+onready var navigation_agent = $NavigationAgent2D
+
+var is_eating: bool = false
 var is_dead: bool = false
-var is_in_sight: bool = false
-var path: Array = []
-var player
-const SPEED: int = 145
-var rng = RandomNumberGenerator.new()
-
-
-
-enum {
-	MOVEMENT, 
-	SWINGING,
-	EATING,
-	FISHING,
-	HARVESTING,
-	DYING,
-	SLEEPING
-}
+var velocity := Vector2.ZERO
+var health: int = 100
+var running_state: bool = false
+var random_pos
 
 func _ready():
-	rng.randomize()
+	set_random_attributes()
+	_timer.connect("timeout", self, "_update_pathfinding")
+	navigation_agent.connect("velocity_computed", self, "move")
+
+func set_random_attributes():
+	randomize()
 	Images.DuckVariations.shuffle()
 	$AnimatedSprite.frames = Images.DuckVariations[0]
-	los.cast_to = Vector2(rng.randi_range(100, 400), 0)
+	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
 		$AnimatedSprite.flip_h = true
 
+func get_random_pos():
+	if running_state:
+		var randomDistance = rand_range(350, 450)
+		if Util.chance(25):
+			random_pos = Vector2(randomDistance, randomDistance)
+		elif Util.chance(25):
+			random_pos = Vector2(-randomDistance, randomDistance)
+		elif Util.chance(25):
+			random_pos = Vector2(randomDistance, -randomDistance)
+		else:
+			random_pos = Vector2(-randomDistance, -randomDistance)
+	else:
+		random_pos = Vector2(rand_range(-300, 300), rand_range(-300, 300))
+	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
+		return position + random_pos
+	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1:
+		return position - random_pos
+	else:
+		return position
+
 
 func _physics_process(delta):
-	if is_in_sight:
-		player = get_node("/root/World/Players/" + Server.player_id).get_children()[0]
-		if player:
-			los.look_at(player.global_position)
-			check_player_in_detection()
-			if player_spotted:
-				move_randomly(delta)
-			elif not is_dead:
-				random_idle_pos = null
-				$AnimatedSprite.play("idle")
-
-
-func move_randomly(delta):
-	if not is_dead:
-		if random_idle_pos == null:
-			$AnimatedSprite.play("walk")
-			in_idle_state = false
-			rng.randomize()
-			random_idle_pos = Vector2(rng.randi_range(-300, 300), rng.randi_range(-300, 300))
-			path = worldNavigation.get_simple_path(position, position + random_idle_pos, true)
-		else:
-			navigate(delta)
-
-func set_direction(new_pos):
-	var tempPos = position - new_pos
-	if tempPos.x > 0:
-		$AnimatedSprite.flip_h = true
-	else:
-		$AnimatedSprite.flip_h = false
-
-
-func navigate(delta):
-	if path.size() > 0:
-		set_direction(path[0])
-		position = position.move_toward(path[0], delta * SPEED)
-		if position == path[0]:
-			path.pop_front()
-	else:
-		idle_state()
-
-
-func idle_state():
-	if not in_idle_state:
-		in_idle_state = true
-		randomize()
-		yield(get_tree().create_timer(rand_range(0, 0.5)), "timeout")
-		if Util.chance(25) and not is_dead:
+	if not visible or is_dead or is_eating:
+		return
+	if navigation_agent.is_navigation_finished():
+		if Util.chance(20):
+			is_eating = true
 			$AnimatedSprite.play("eat")
 			yield($AnimatedSprite, "animation_finished")
-		random_idle_pos = null	
+			is_eating = false
+		else:
+			$AnimatedSprite.play("idle")
+		return
+	$AnimatedSprite.play("walk")
+	
+	var target = navigation_agent.get_next_location()
+	var move_direction = position.direction_to(target)
+	var desired_velocity = move_direction * navigation_agent.max_speed
+	var steering = (desired_velocity - velocity) * delta * 2.0
+	velocity += steering
+	navigation_agent.set_velocity(velocity)
+	if _get_direction_string(velocity) == "Right":
+		$AnimatedSprite.flip_h = false
+	else:
+		$AnimatedSprite.flip_h = true
+		
+func move(velocity: Vector2) -> void:
+	if running_state:
+		velocity = move_and_slide(velocity*1.5)
+	else:
+		velocity = move_and_slide(velocity)
 
 
+func _get_direction_string(veloctiy) -> String:
+	if velocity.x > 0:
+		return "Right"
+	return "Left"
 
-func check_player_in_detection() -> bool:
-	if not player.state == DYING:
-		var collider = los.get_collider()
-		if global_position.distance_to(player.global_position) >= 600:
-			player_spotted = false
-		if collider and collider == player:
-			player_spotted = true
-			return true
-		return false
-	return false
 
+func _update_pathfinding() -> void:
+	navigation_agent.set_target_location(get_random_pos())
 
 func _on_HurtBox_area_entered(area):
+	is_eating = false
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	is_dead = true
-	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-	$CollisionShape2D.set_deferred("disabled", true)
-	$AnimatedSprite.play("death")
-	yield($AnimatedSprite, "animation_finished")
-	$AnimationPlayer.play("death")
-	intitiateItemDrop("raw wing", Vector2(0,0))
-	yield($AnimationPlayer, "animation_finished")
-	queue_free()
+	start_run_state()
+	deduct_health(area.tool_name)
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("hit")
+	if health <= 0 and not is_dead:
+		is_dead = true
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+		$CollisionShape2D.set_deferred("disabled", true)
+		$AnimatedSprite.play("death")
+		yield($AnimatedSprite, "animation_finished")
+		$AnimationPlayer.play("death")
+		intitiateItemDrop("raw wing", Vector2(0,0))
+		yield($AnimationPlayer, "animation_finished")
+		queue_free()
+
+
+func deduct_health(tool_name):
+	match tool_name:
+		"wood sword":
+			health -= Stats.WOOD_SWORD_DAMAGE
+		"stone sword":
+			health -= Stats.STONE_SWORD_DAMAGE
+		"bronze sword":
+			health -= Stats.BRONZE_SWORD_DAMAGE
+		"iron sword":
+			health -= Stats.IRON_SWORD_DAMAGE
+		"gold sword":
+			health -= Stats.GOLD_SWORD_DAMAGE
+		"arrow":
+			health -= Stats.ARROW_DAMAGE
+	
+func start_run_state():
+	running_state = true
+	$RunStateTimer.start()
+	_timer.wait_time = 2.0
+	_update_pathfinding()
+	
 	
 func intitiateItemDrop(item, pos):
-	rng.randomize()
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType(item, 1)
 	get_parent().call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
+	itemDrop.global_position = global_position + pos + Vector2(rand_range(-12, 12), 0)
 
 
 func _on_VisibilityNotifier2D_screen_entered():
-	is_in_sight = true
-
+	visible = true
 
 func _on_VisibilityNotifier2D_screen_exited():
-	is_in_sight = false
+	visible = false
+
+
+func _on_RunStateTimer_timeout():
+	running_state = false
+	_timer.wait_time = rand_range(2.5, 5.0)

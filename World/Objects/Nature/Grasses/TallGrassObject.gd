@@ -44,8 +44,8 @@ func play_back_effect():
 		$AnimationPlayer2.play("animate back")
 
 func _on_Area2D_body_entered(_body):
-	var data = {"id": name, "n": "tall_grass", "d": "" }
-	Server.action("ON_HIT", data)
+#	var data = {"id": name, "n": "tall_grass", "d": "" }
+#	Server.action("ON_HIT", data)
 	play_hit_effect()
 	bodyEnteredFlag = true
 

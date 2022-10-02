@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Images/Animals/Duck/duck2.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://World/Animals/Duck.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=3]
 
 [sub_resource type="CapsuleShape2D" id=24]
 radius = 5.0
@@ -10,6 +11,21 @@ height = 6.0
 [sub_resource type="CapsuleShape2D" id=25]
 radius = 15.0
 height = 6.0
+
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=26]
 resource_name = "death"
@@ -26,15 +42,34 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="Duck" type="StaticBody2D"]
+[sub_resource type="Animation" id=27]
+resource_name = "hit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[node name="Duck" type="KinematicBody2D"]
+material = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+use_parent_material = true
 position = Vector2( 0, -30 )
 scale = Vector2( 0.75, 0.75 )
 frames = ExtResource( 1 )
 animation = "eat"
-frame = 3
+frame = 11
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -42,28 +77,37 @@ position = Vector2( 0, 1 )
 rotation = 1.5708
 shape = SubResource( 24 )
 
-[node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2( 0, -2.99999 )
-rotation = -0.485202
-enabled = true
-cast_to = Vector2( 320, 0 )
-
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2( 0, -3 )
-collision_layer = 0
-collision_mask = 256
+collision_layer = 256
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 rotation = 1.5708
 shape = SubResource( 25 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/death = SubResource( 26 )
-
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0, -3 )
 scale = Vector2( 4.16875, 4.16875 )
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 100.0
+target_desired_distance = 100.0
+avoidance_enabled = true
+radius = 24.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 28 )
+anims/death = SubResource( 26 )
+anims/hit = SubResource( 27 )
+
+[node name="RunStateTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="RunStateTimer" to="." method="_on_RunStateTimer_timeout"]
