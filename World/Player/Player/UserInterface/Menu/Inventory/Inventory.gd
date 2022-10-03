@@ -59,13 +59,12 @@ func _physics_process(delta):
 	if not visible:
 		return
 	if item and not find_parent("UserInterface").holding_item:
-		$ItemDescription.visible = true
+		$ItemDescription.show()
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.item_name = item
-		$ItemDescription.position = get_local_mouse_position() + Vector2(20, 25)
 		$ItemDescription.initialize()
 	else:
-		$ItemDescription.visible = false
+		$ItemDescription.hide()
 
 func initialize_inventory_menu():
 	item = null

@@ -61,6 +61,7 @@ var random_snow_storm_position
 
 const NUM_DUCKS = 60
 const NUM_BUNNIES = 60
+const NUM_BEARS = 10
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -149,7 +150,6 @@ func spawnPlayerExample():
 	$Players.add_child(controller)
 	if Server.player_house_position == null:
 		player.position = Server.player["p"]
-		#spawnRandomBear(Server.player["p"])
 		#spawn_IC_Ghost(Server.player["p"])
 	else: 
 		player.position = dirt.map_to_world(Server.player_house_position) + Vector2(135, 60)
@@ -162,12 +162,8 @@ func spawn_IC_Ghost(loc):
 	ghost.global_position = loc + Vector2(100, 100)
 
 	
-func spawnRandomBear(pos):
-	var bear = Bear.instance()
-	$Players.add_child(bear)
-	bear.global_position = pos + Vector2(100, 100)
 	
-	
+
 func spawn_IC_kitty():
 	var kitty = Player_pet.instance()
 	kitty.name = "kittyNode"
@@ -396,6 +392,8 @@ func spawn_animals():
 		spawnRandomBunny()
 	for i in range(NUM_DUCKS):
 		spawnRandomDuck()
+	for i in range(NUM_BEARS):
+		spawnRandomBear()
 	
 func set_water_tiles():
 	for x in range(300): # fill ocean
@@ -586,7 +584,7 @@ func ChangeTile(data):
 
 
 func returnValidSpawnLocation():
-	var tempLoc = Vector2(rng.randi_range(100*32, 200*32), rng.randi_range(100*32, 200*32))
+	var tempLoc = Vector2(rng.randi_range(80*32, 300*32), rng.randi_range(80*32, 300*32))
 	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
 		return tempLoc
 	else:
@@ -618,6 +616,12 @@ func spawnRandomDuck():
 		duck.global_position = loc
 		$Animals.add_child(duck)
 
+func spawnRandomBear():
+	var loc = returnValidSpawnLocation()
+	if loc != null:
+		var bear = Bear.instance()
+		$Players.add_child(bear)
+		bear.global_position = loc
 
 func play_watering_can_effect(loc):
 	var wateringCanEffect = WateringCanEffect.instance()

@@ -9,7 +9,7 @@ onready var navigation_agent = $NavigationAgent2D
 var is_eating: bool = false
 var is_dead: bool = false
 var velocity := Vector2.ZERO
-var health: int = 100
+var health: int = Stats.DUCK_HEALTH
 var running_state: bool = false
 var random_pos
 

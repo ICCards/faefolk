@@ -25,7 +25,8 @@ mouse_filter = 0
 texture = ExtResource( 3 )
 
 [node name="ItemDescription" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1080, -94 )
+visible = false
+position = Vector2( -512, -596 )
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
 margin_left = -282.0

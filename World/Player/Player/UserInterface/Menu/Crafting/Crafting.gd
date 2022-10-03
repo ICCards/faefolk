@@ -204,7 +204,6 @@ func _physics_process(delta):
 		$ItemDescription.visible = true
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.item_name = item
-		$ItemDescription.position = get_local_mouse_position() + Vector2(55 , 75)
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.visible = false
