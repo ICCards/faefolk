@@ -34,12 +34,12 @@ var inventory = {
 	5: ["stone", 800, null],
 	0: ["iron ingot", 60, null],
 	6: ["potato seeds", 60, null],
-	7: ["bronze ore", 12, null],
+	7: ["bronze ingot", 12, null],
 	8: ["bread", 60, null],
 }
 
 var hotbar = {
-	1 : ["radish", 28, null],
+	1 : ["wood box", 800, null],
 }
 var chests = {}
 var furnaces = {}

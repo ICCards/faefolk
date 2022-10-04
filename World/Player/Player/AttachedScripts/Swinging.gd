@@ -102,7 +102,13 @@ func draw_bow(init_direction):
 	player_animation_player.play("axe pickaxe swing")
 	PlayerStats.decrease_energy()
 	composite_sprites.set_player_animation(get_parent().character, animation, "bow")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.play()
 	yield(player_animation_player, "animation_finished" )
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.play()
 	PlayerInventory.remove_material("arrow", 1)
 	shoot()
 	is_drawing = false
@@ -116,6 +122,7 @@ func draw_bow(init_direction):
 	get_parent().state = MOVEMENT
 	
 func shoot():
+	Stats.decrease_tool_health()
 	var arrow = ArrowProjectile.instance()
 	get_node("../../../").add_child(arrow)
 	arrow.transform = $ArrowDirection.transform

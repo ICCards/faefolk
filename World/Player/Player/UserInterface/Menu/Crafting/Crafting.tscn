@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/workbench 2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/placable_object_preview/wood barrel.png" type="Texture" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/workbench 3.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/sleeping bag.png" type="Texture" id=18]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=19]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/grain mill 2.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/grain mill 3.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Images/inventory_icons/Placable object/stove 3.png" type="Texture" id=23]
@@ -679,10 +678,6 @@ margin_right = 567.0
 margin_bottom = 54.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 19 )
-
-[node name="ItemDescription" parent="." instance=ExtResource( 20 )]
-visible = false
-scale = Vector2( 5.4, 5.4 )
 
 [connection signal="mouse_entered" from="Page1/WoodBoxButton" to="." method="_on_WoodBoxButton_mouse_entered"]
 [connection signal="mouse_exited" from="Page1/WoodBoxButton" to="." method="_on_WoodBoxButton_mouse_exited"]

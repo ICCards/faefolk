@@ -8,10 +8,11 @@ onready var navigation_agent = $NavigationAgent2D
 
 var is_sleeping: bool = true
 var is_dead: bool = false
-var velocity := Vector2.ZERO
+var _velocity := Vector2.ZERO
 var health: int = Stats.BUNNY_HEALTH
 var running_state: bool = false
 var random_pos
+var MAX_MOVE_DISTANCE: float = 500.0
 
 func _ready(): 
 	set_random_attributes()
@@ -41,7 +42,7 @@ func get_random_pos():
 		else:
 			random_pos = Vector2(-randomDistance, -randomDistance)
 	else:
-		random_pos = Vector2(rand_range(-300, 300), rand_range(-300, 300))
+		random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
 	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1 and not Tiles.valid_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
 		return position + random_pos
 	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1 and not Tiles.valid_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
@@ -63,14 +64,13 @@ func _physics_process(delta):
 		$AnimatedSprite.play("idle")
 		return
 	$AnimatedSprite.play("walk")
-	
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
-	var steering = (desired_velocity - velocity) * delta * 2.0
-	velocity += steering
-	navigation_agent.set_velocity(velocity)
-	if _get_direction_string(velocity) == "Right":
+	var steering = (desired_velocity - _velocity) * delta * 4.0
+	_velocity += steering
+	navigation_agent.set_velocity(_velocity)
+	if _get_direction_string(_velocity) == "Right":
 		$AnimatedSprite.flip_h = false
 	else:
 		$AnimatedSprite.flip_h = true
@@ -78,18 +78,20 @@ func _physics_process(delta):
 
 func move(velocity: Vector2) -> void:
 	if running_state:
-		velocity = move_and_slide(velocity*1.5)
+		_velocity = move_and_slide(velocity*1.5)
 	else:
-		velocity = move_and_slide(velocity)
+		_velocity = move_and_slide(velocity)
 	
 
 func _get_direction_string(veloctiy) -> String:
-	if velocity.x > 0:
+	if _velocity.x > 0:
 		return "Right"
 	return "Left"
 
 
 func _on_HurtBox_area_entered(area):
+	if is_sleeping:
+		is_sleeping = false
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
 	start_run_state()
@@ -97,6 +99,7 @@ func _on_HurtBox_area_entered(area):
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 	if health <= 0 and not is_dead:
+		set_physics_process(false)
 		is_dead = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)

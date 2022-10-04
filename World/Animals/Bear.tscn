@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://World/Animals/Bear.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Animals/Bear/claw/body/right.png" type="Texture" id=2]
@@ -491,6 +491,21 @@ tracks/5/keys = {
 "values": [ null ]
 }
 
+[sub_resource type="Animation" id=23]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [sub_resource type="Animation" id=8]
 resource_name = "loop"
 length = 0.8
@@ -859,14 +874,14 @@ use_parent_material = true
 [node name="Bear" type="Sprite" parent="Body"]
 use_parent_material = true
 position = Vector2( 0, -40 )
-scale = Vector2( 1.8, 1.8 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 7 )
 hframes = 4
 
 [node name="Fangs" type="Sprite" parent="Body"]
 use_parent_material = true
 position = Vector2( 0, -40 )
-scale = Vector2( 1.8, 1.8 )
+scale = Vector2( 2, 2 )
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -900,7 +915,7 @@ visible = false
 collision_layer = 256
 collision_mask = 0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( 0, -26 )
 shape = SubResource( 14 )
 
@@ -920,7 +935,6 @@ shape = SubResource( 21 )
 path_desired_distance = 100.0
 target_desired_distance = 100.0
 avoidance_enabled = true
-radius = 80.0
 max_speed = 100.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -929,6 +943,7 @@ anims/RESET = SubResource( 3 )
 "anims/bite left" = SubResource( 10 )
 "anims/bite right" = SubResource( 11 )
 "anims/bite up" = SubResource( 12 )
+anims/death = SubResource( 23 )
 anims/loop = SubResource( 8 )
 "anims/swing down" = SubResource( 4 )
 "anims/swing left" = SubResource( 5 )
@@ -948,8 +963,6 @@ autostart = true
 
 [node name="ChaseTimer" type="Timer" parent="."]
 wait_time = 0.1
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]

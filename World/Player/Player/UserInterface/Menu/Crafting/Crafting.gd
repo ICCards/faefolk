@@ -201,12 +201,12 @@ func _physics_process(delta):
 	if not visible:
 		return
 	if item and not find_parent("UserInterface").holding_item:
-		$ItemDescription.visible = true
-		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
-		$ItemDescription.item_name = item
-		$ItemDescription.initialize()
+		get_node("../ItemDescription").show()
+		get_node("../ItemDescription").item_category = JsonData.item_data[item]["ItemCategory"]
+		get_node("../ItemDescription").item_name = item
+		get_node("../ItemDescription").initialize()
 	else:
-		$ItemDescription.visible = false
+		get_node("../ItemDescription").hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
 		$CraftingItemDescription.visible = true
 		$CraftingItemDescription.item_name = crafting_item

@@ -94,7 +94,6 @@ scale = Vector2( 4.16875, 4.16875 )
 path_desired_distance = 100.0
 target_desired_distance = 100.0
 avoidance_enabled = true
-radius = 24.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 28 )
@@ -106,8 +105,6 @@ wait_time = 5.0
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

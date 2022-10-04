@@ -26,7 +26,7 @@ onready var Snake = preload("res://World/Animals/Snake.tscn")
 onready var IC_Ghost = preload("res://World/Enemies/ICGhost.tscn")
 onready var Bunny = preload("res://World/Animals/Bunny.tscn")
 onready var Duck = preload("res://World/Animals/Duck.tscn")
-onready var Bird = preload("res://World/Animals/Bird.tscn")
+onready var Boar = preload("res://World/Animals/Boar.tscn")
 onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
 onready var HoedDirtEffect = preload("res://World/Objects/Nature/Effects/HoedDirt.tscn") 
 onready var DirtTrailEffect = preload("res://World/Objects/Nature/Effects/DustTrailEffect.tscn")
@@ -59,9 +59,10 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 60
-const NUM_BUNNIES = 60
+const NUM_DUCKS = 200
+const NUM_BUNNIES = 200
 const NUM_BEARS = 10
+const NUM_BOARS = 0
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -394,6 +395,8 @@ func spawn_animals():
 		spawnRandomDuck()
 	for i in range(NUM_BEARS):
 		spawnRandomBear()
+	for i in range(NUM_BOARS):
+		spawnRandomBoar()
 	
 func set_water_tiles():
 	for x in range(300): # fill ocean
@@ -589,26 +592,15 @@ func returnValidSpawnLocation():
 		return tempLoc
 	else:
 		return null
-#
-#func spawnRandomSnake():
-#	var snake = Snake.instance()
-#	snake.global_position = get_node("/root/World/Players/" + Server.player_id).position + Vector2(rng.randi_range(-500, 500), rng.randi_range(-500, 500))
-#	add_child(snake)
-#
+
+
 func spawnRandomBunny():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var bunny = Bunny.instance()
 		bunny.global_position = loc
 		$Animals.add_child(bunny)
-#
-#func spawnRandomBird():
-#	var loc = returnValidSpawnLocation()
-#	if loc != null:
-#		var bird = Bird.instance()
-#		bird.global_position = loc
-#		$Animals.add_child(bird)
-#
+
 func spawnRandomDuck():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
@@ -620,8 +612,15 @@ func spawnRandomBear():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var bear = Bear.instance()
-		$Players.add_child(bear)
+		$Animals.add_child(bear)
 		bear.global_position = loc
+		
+func spawnRandomBoar():
+	var loc = returnValidSpawnLocation()
+	if loc != null:
+		var boar = Boar.instance()
+		$Animals.add_child(boar)
+		boar.global_position = loc
 
 func play_watering_can_effect(loc):
 	var wateringCanEffect = WateringCanEffect.instance()

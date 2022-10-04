@@ -313,6 +313,9 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
+[node name="ItemDescription" parent="." instance=ExtResource( 36 )]
+visible = false
+
 [node name="Crafting" parent="." instance=ExtResource( 6 )]
 visible = false
 margin_left = -375.0
@@ -715,7 +718,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 30
+frame = 6
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -729,9 +732,6 @@ custom_styles/pressed = SubResource( 18 )
 custom_styles/focus = SubResource( 20 )
 custom_styles/normal = SubResource( 19 )
 text = "Hide"
-
-[node name="ItemDescription" parent="Inventory" instance=ExtResource( 36 )]
-visible = false
 
 [node name="PlayerFrame" type="TextureRect" parent="Inventory"]
 margin_left = 152.0

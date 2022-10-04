@@ -1,22 +1,17 @@
 extends KinematicBody2D
 
-onready var animation_player = $AnimationPlayer
-onready var navigation_agent = $NavigationAgent2D
+onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var _idle_timer: Timer = $IdleTimer
 onready var _chase_timer: Timer = $ChaseTimer
 
-const GALLUP_SPEED: int = 180
-const IDLE_SPEED: int = 120
-var is_in_sight: bool = false
 var player = Server.player_node
-var direction = "down"
-var random_pos = null
-var player_spotted: bool = false
-var is_dead: bool = false
+var direction: String = "down"
+var dying: bool = false
+var attacking: bool = false
 var playing_sound_effect: bool = false
-var swinging: bool = false
-var current_pos = null
-var velocity := Vector2.ZERO
+var random_pos := Vector2.ZERO
+var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 
 var rng = RandomNumberGenerator.new()
@@ -26,7 +21,7 @@ var KNOCKBACK_AMOUNT = 400
 
 enum {
 	CHASE,
-	SWING,
+	ATTACK,
 	IDLE,
 	WALK
 }
@@ -59,65 +54,45 @@ func get_random_pos():
 
 
 func _physics_process(delta):
-	if not visible and not is_dead:
+	if not visible or dying:
 		return
-	match state:
-		CHASE:
-			chase()
-		SWING:
-			swing()
-		IDLE:
-			idle()
-		WALK:
-			walk()
 	set_direction()
 	set_texture()
 	if knockback != Vector2.ZERO:
-		velocity = Vector2.ZERO
+		_velocity = Vector2.ZERO
 		knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
 		knockback = move_and_slide(knockback)
 	if navigation_agent.is_navigation_finished() and state == WALK or state == IDLE:
 		state = IDLE
 		return
-	if state == CHASE and (position + Vector2(0,-26)).distance_to(player.position) < 70:
-		state = SWING
+	if state == CHASE and (position + Vector2(0,-26)).distance_to(player.position) < 75:
+		state = ATTACK
 		swing()
-		
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
-	var steering = (desired_velocity - velocity) * delta * 0.5
-	velocity += steering
-	navigation_agent.set_velocity(velocity)
-	
-func idle():
-	pass
-	
-func walk():
-	pass
-	
-	
+	var steering = (desired_velocity - _velocity) * delta * 4.0
+	_velocity += steering
+	navigation_agent.set_velocity(_velocity)
+
 func move(velocity: Vector2) -> void:
-	if not swinging:
-		if state == IDLE:
-			velocity = move_and_slide(velocity)
+	if not attacking and not dying:
+		if state == IDLE or state == WALK:
+			_velocity = move_and_slide(velocity)
 		else:
-			velocity = move_and_slide(velocity*2.5)
+			_velocity = move_and_slide(velocity*2.5)
 
 func set_direction():
-	if abs(velocity.x) >= abs(velocity.y):
-		if velocity.x >= 0:
+	if abs(_velocity.x) >= abs(_velocity.y):
+		if _velocity.x >= 0:
 			direction = "right"
 		else:
 			direction = "left"
 	else:
-		if velocity.y >= 0:
+		if _velocity.y >= 0:
 			direction = "down"
 		else:
 			direction = "up"
-
-func chase():
-	pass
 
 
 func play_groan_sound_effect():
@@ -156,36 +131,41 @@ func set_texture():
 			$Body/Fangs.texture = null
 
 
-
 func swing():
 	if not player.state == 5: # player dead
-		if not swinging:
-			swinging = true
+		if not attacking:
+			attacking = true
 			yield(get_tree().create_timer(0.15), "timeout")
 			play_groan_sound_effect()
-			#set_swing_direction()
 			if (position + Vector2(0,-26)).distance_to(player.position) < 45:
 				$AnimationPlayer.play("bite " + direction)
 			else:
 				$AnimationPlayer.play("swing " + direction)
 			yield($AnimationPlayer, "animation_finished")
-			swinging = false
+			attacking = false
 			animation_player.play("loop")
 			state = CHASE
 	else:
 		state = IDLE
 
 
-
 func _on_HurtBox_area_entered(area):
+	if state == IDLE or state == WALK:
+		start_chase_state()
 	if area.knockback_vector != null:
 		knockback = area.knockback_vector * 100
+	if area.name == "SwordSwing":
+		Stats.decrease_tool_health()
 	$HurtBox/AnimationPlayer.play("hit")
 	deduct_health(area.tool_name)
-	if health <= 0 and not is_dead:
-		is_dead = true
-		yield(get_tree().create_timer(2.0), "timeout")
+	if health <= 0 and not dying:
+		dying = true
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+		$CollisionShape2D.set_deferred("disabled", true)
+		$AnimationPlayer.play("death")
+		yield($AnimationPlayer, "animation_finished")
 		queue_free()
+
 
 func deduct_health(tool_name):
 	match tool_name:
@@ -209,7 +189,13 @@ func _on_VisibilityNotifier2D_screen_exited():
 	visible = false
 
 func _on_DetectPlayer_area_entered(area):
+	start_chase_state()
+
+
+func start_chase_state():
+	start_sound_effects()
 	_idle_timer.stop()
 	_chase_timer.start()
 	state = CHASE
+	
 

@@ -8,9 +8,10 @@ onready var navigation_agent = $NavigationAgent2D
 
 var is_eating: bool = false
 var is_dead: bool = false
-var velocity := Vector2.ZERO
+var _velocity := Vector2.ZERO
 var health: int = Stats.DUCK_HEALTH
 var running_state: bool = false
+var MAX_MOVE_DISTANCE: float = 500.0
 var random_pos
 
 func _ready():
@@ -38,7 +39,7 @@ func get_random_pos():
 		else:
 			random_pos = Vector2(-randomDistance, -randomDistance)
 	else:
-		random_pos = Vector2(rand_range(-300, 300), rand_range(-300, 300))
+		random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
 	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
 		return position + random_pos
 	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1:
@@ -57,30 +58,33 @@ func _physics_process(delta):
 			yield($AnimatedSprite, "animation_finished")
 			is_eating = false
 		else:
+			is_eating = true
 			$AnimatedSprite.play("idle")
+			yield(get_tree().create_timer(rand_range(1.0, 4.0)), "timeout")
+			is_eating = false
 		return
 	$AnimatedSprite.play("walk")
 	
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
-	var steering = (desired_velocity - velocity) * delta * 2.0
-	velocity += steering
-	navigation_agent.set_velocity(velocity)
-	if _get_direction_string(velocity) == "Right":
+	var steering = (desired_velocity - _velocity) * delta * 4.0
+	_velocity += steering
+	navigation_agent.set_velocity(_velocity)
+	if _get_direction_string(_velocity) == "Right":
 		$AnimatedSprite.flip_h = false
 	else:
 		$AnimatedSprite.flip_h = true
 		
 func move(velocity: Vector2) -> void:
 	if running_state:
-		velocity = move_and_slide(velocity*1.5)
+		_velocity = move_and_slide(velocity*1.5)
 	else:
-		velocity = move_and_slide(velocity)
+		_velocity = move_and_slide(velocity)
 
 
-func _get_direction_string(veloctiy) -> String:
-	if velocity.x > 0:
+func _get_direction_string(velocitiy) -> String:
+	if velocitiy.x > 0:
 		return "Right"
 	return "Left"
 
@@ -97,6 +101,7 @@ func _on_HurtBox_area_entered(area):
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 	if health <= 0 and not is_dead:
+		set_physics_process(false)
 		is_dead = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)

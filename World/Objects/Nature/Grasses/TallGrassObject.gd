@@ -14,6 +14,7 @@ var is_front_visible = true
 var is_back_visible = true
 
 func _ready():
+	hide()
 	rng.randomize()
 	front_health = rng.randi_range(1,3)
 	back_heath = rng.randi_range(1,3)
@@ -32,13 +33,13 @@ func PlayEffect(player_id):
 	play_hit_effect()
 
 func play_hit_effect():
-	if !bodyEnteredFlag and Server.isLoaded:
+	if !bodyEnteredFlag and Server.isLoaded and visible:
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("animate front")
 		
 func play_back_effect():
-	if !bodyEnteredFlag2 and Server.isLoaded:
+	if !bodyEnteredFlag2 and Server.isLoaded and visible:
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer2.play("animate back")

@@ -40,6 +40,10 @@ collision_mask = 8192
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectObjectOverPathBox"]
 shape = SubResource( 2 )
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+estimate_radius = false
+radius = 32.0
+
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 24
 collision_mask = 0

@@ -9,8 +9,8 @@ func _on_HurtBox_area_entered(area):
 		health_to_subtract = rng.randi_range(18, 29)
 	elif area.name == "BearClaw":
 		health_to_subtract = rng.randi_range(4, 12)
-	elif area.name == "ICGhostHit":
-		health_to_subtract = rng.randi_range(8, 20)
+	elif area.name == "BoarBite":
+		health_to_subtract = rng.randi_range(8, 16)
 	else:
 		health_to_subtract = 0
 	PlayerStats.decrease_health(health_to_subtract)

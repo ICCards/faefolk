@@ -117,9 +117,6 @@ anims/hit = SubResource( 13 )
 path_desired_distance = 100.0
 target_desired_distance = 100.0
 avoidance_enabled = true
-radius = 24.0
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]

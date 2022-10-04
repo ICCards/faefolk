@@ -2785,6 +2785,6 @@ tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+[node name="Nav" type="NavigationPolygonInstance" parent="."]
 position = Vector2( -15661, -9291 )
 navpoly = SubResource( 496 )

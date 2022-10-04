@@ -42,6 +42,7 @@ func initialize():
 	
 func destroy():
 	set_physics_process(false)
+	$ItemDescription.set_physics_process(false)
 	$ItemDescription.queue_free()
 	$CraftingItemDescription.queue_free()
 	$ItemNameBox.queue_free()
@@ -52,7 +53,6 @@ func _physics_process(delta):
 		$ItemDescription.show()
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.item_name = item
-		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.hide()
