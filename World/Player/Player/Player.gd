@@ -204,7 +204,7 @@ func _unhandled_input(event):
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
 	if event.is_action_pressed("run"):
-		running_speed_change = 1.2
+		running_speed_change = 1.6
 		running = true
 	elif event.is_action_released("run"):
 		running_speed_change = 1.0

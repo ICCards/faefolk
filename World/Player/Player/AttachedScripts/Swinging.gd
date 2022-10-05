@@ -28,6 +28,14 @@ enum {
 var is_drawing = false
 var is_releasing = false
 
+var mouse_left_down: bool = false
+func _input( event ):
+	if event is InputEventMouseButton:
+		if event.button_index == 1 and event.is_pressed():
+			mouse_left_down = true
+		elif event.button_index == 1 and not event.is_pressed():
+			mouse_left_down = false
+
 func _physics_process(delta):
 	if is_drawing or is_releasing:
 		var degrees = int($ArrowDirection.rotation_degrees) % 360
@@ -106,20 +114,27 @@ func draw_bow(init_direction):
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 	yield(player_animation_player, "animation_finished" )
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-	sound_effects.play()
-	PlayerInventory.remove_material("arrow", 1)
-	shoot()
-	is_drawing = false
-	is_releasing = true
-	animation = "release_" + direction.to_lower()
-	composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
-	player_animation_player.play("axe pickaxe swing")
-	yield(player_animation_player, "animation_finished" )
-	is_releasing = false
-	get_parent().direction = direction
-	get_parent().state = MOVEMENT
+	wait_for_release()
+		
+func wait_for_release():
+	if not mouse_left_down:
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.play()
+		PlayerInventory.remove_material("arrow", 1)
+		shoot()
+		is_drawing = false
+		is_releasing = true
+		animation = "release_" + direction.to_lower()
+		composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
+		player_animation_player.play("axe pickaxe swing")
+		yield(player_animation_player, "animation_finished" )
+		is_releasing = false
+		get_parent().direction = direction
+		get_parent().state = MOVEMENT
+	else:
+		yield(get_tree().create_timer(0.1), "timeout")
+		wait_for_release()
 	
 func shoot():
 	Stats.decrease_tool_health()

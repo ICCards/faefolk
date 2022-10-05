@@ -4,7 +4,7 @@ const SlotClass = preload("res://InventoryLogic/Slot.gd")
 onready var hotbar_slots = $HotbarSlots
 onready var slots = hotbar_slots.get_children()
 var item = null
-var adjusted_pos
+var adjusted_pos = Vector2(0,0)
 
 enum SlotType {
 	HOTBAR = 0,
@@ -39,16 +39,41 @@ func exited_slot(slot: SlotClass):
 func _physics_process(delta):
 	if not visible:
 		return
+	adjusted_description_position()
 	if item and find_parent("UserInterface").holding_item == null:
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.show()
 		$ItemDescription.item_name = item
 		$ItemDescription.initialize()
+		$ItemDescription.position = adjusted_pos
 	else:
 		$ItemDescription.hide()
 
 
 
+func adjusted_description_position():
+	yield(get_tree(), "idle_frame")
+	if item:
+		var item_category = JsonData.item_data[item]["ItemCategory"]
+		#position = Vector2(get_local_mouse_position().x - 110, get_local_mouse_position().y + 110)
+		#adjusted_pos = Vector2(get_local_mouse_position().x + 45, -height)
+		var lines = $ItemDescription/Body/ItemDescription.get_line_count()
+		if lines == 8:
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -288)
+		elif lines == 7:
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -260)
+		elif lines == 6:
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -236)
+		elif lines == 5:
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -210)
+		elif lines == 4:
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -184)
+		elif lines == 3:
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -158)
+		else:
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -134)
+		if item_category == "Food" or item_category == "Fish" or item_category == "Crop":
+			adjusted_pos += Vector2(0, -64)
 
 func update_tool_health():
 	if PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] == 0 and PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] != "stone watering can":

@@ -6,6 +6,8 @@ onready var treeStumpSprite = $TreeSprites/TreeStump
 onready var treeBottomSprite = $TreeSprites/TreeBottom
 onready var treeTopSprite = $TreeSprites/TreeTop
 
+onready var navigation_obstacle: NavigationObstacle2D = $NavigationObstacle2D
+
 onready var Bird = preload("res://World/Animals/BirdFlyingFromTree.tscn")
 onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
@@ -36,6 +38,7 @@ func _ready():
 		$TreeSprites/TreeTop.visible = false
 		$TreeSprites/TreeBottom.visible = false
 		$TreeS/stumpHurtBox.disabled = false
+	#Navigation2DServer.agent_set_map(navigation_obstacle.get_rid(), get_world_2d().navigation_map)
 
 func setTexture(tree):
 	set_tree_top_collision_shape()

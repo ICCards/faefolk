@@ -17,14 +17,14 @@ func initialize():
 	$Body/ItemDescription.rect_size.x = (width*5.7) 
 	$ItemName.rect_size.x = width
 
-func _physics_process(delta):
-	if not visible:
-		return
-	adjusted_description_position()
-
-func adjusted_description_position():
-	yield(get_tree(), "idle_frame")
-	position = Vector2(get_local_mouse_position().x - 110, get_local_mouse_position().y + 110)
+#func _physics_process(delta):
+#	if not visible:
+#		return
+#	adjusted_description_position()
+#
+#func adjusted_description_position():
+#	yield(get_tree(), "idle_frame")
+#	position = Vector2(get_local_mouse_position().x - 110, get_local_mouse_position().y + 110)
 #	adjusted_pos = Vector2(get_local_mouse_position().x + 45, -height)
 #	var lines = $ItemDescription/Body/ItemDescription.get_line_count()
 #	if lines == 8:
@@ -68,6 +68,7 @@ func set_description_text(item):
 		$ItemName.set_text(item[0].to_upper() + item.substr(1,-1))
 		$Body/ItemCategory.set_text(category[0].to_upper() + category.substr(1,-1))
 		$Body/ItemDescription.set_text(description)
+		#$Body/ItemDescription.set_text("description fds dsf sdf sdfddasd asd asdsa das fdsf f dsf fsdfdsdfsfds dasdsa a sdd asads das s")
 
 
 func set_size_of_description(x):

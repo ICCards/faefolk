@@ -5375,7 +5375,6 @@ bus = "Bus1"
 script = ExtResource( 5 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
-autoplay = true
 bus = "Bus1"
 script = ExtResource( 18 )
 

@@ -2562,9 +2562,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/z_index = 0
 
 [sub_resource type="NavigationPolygon" id=496]
-vertices = PoolVector2Array( 9856, 4096, 152432, 6901, 157424, 104335, 11120, 101775 )
+vertices = PoolVector2Array( 15676, 9300, 64119, 9531, 64119, 28852, 15495, 28880 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 9856, 4096, 152432, 6901, 157424, 104335, 11120, 101775 ) ]
+outlines = [ PoolVector2Array( 15676, 9300, 64119, 9531, 64119, 28852, 15495, 28880 ) ]
 
 [node name="World" type="YSort"]
 script = ExtResource( 7 )
@@ -2785,6 +2785,6 @@ tile_set = SubResource( 24 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="Nav" type="NavigationPolygonInstance" parent="."]
-position = Vector2( -15661, -9291 )
+[node name="NavPolygon" type="NavigationPolygonInstance" parent="."]
+position = Vector2( -15660, -9290 )
 navpoly = SubResource( 496 )

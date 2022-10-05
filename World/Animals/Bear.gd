@@ -4,6 +4,7 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var _idle_timer: Timer = $IdleTimer
 onready var _chase_timer: Timer = $ChaseTimer
+onready var navigation_obstacle: NavigationObstacle2D = $NavigationObstacle2D
 
 var player = Server.player_node
 var direction: String = "down"
@@ -33,6 +34,7 @@ func _ready():
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	navigation_agent.connect("velocity_computed", self, "move")
+	#Navigation2DServer.agent_set_map(navigation_obstacle.get_rid(), get_world_2d().navigation_map)
 
 
 func _update_pathfinding_idle():
@@ -40,7 +42,7 @@ func _update_pathfinding_idle():
 	navigation_agent.set_target_location(get_random_pos())
 
 func _update_pathfinding_chase():
-	navigation_agent.set_target_location(player.global_position)
+	navigation_agent.set_target_location(player.position)
 
 
 func get_random_pos():
@@ -77,10 +79,7 @@ func _physics_process(delta):
 
 func move(velocity: Vector2) -> void:
 	if not attacking and not dying:
-		if state == IDLE or state == WALK:
-			_velocity = move_and_slide(velocity)
-		else:
-			_velocity = move_and_slide(velocity*2.5)
+		_velocity = move_and_slide(velocity)
 
 func set_direction():
 	if abs(_velocity.x) >= abs(_velocity.y):
@@ -162,6 +161,7 @@ func _on_HurtBox_area_entered(area):
 		dying = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
+		$AnimationPlayer.stop()
 		$AnimationPlayer.play("death")
 		yield($AnimationPlayer, "animation_finished")
 		queue_free()
@@ -193,9 +193,16 @@ func _on_DetectPlayer_area_entered(area):
 
 
 func start_chase_state():
+	navigation_agent.max_speed = 250
 	start_sound_effects()
 	_idle_timer.stop()
 	_chase_timer.start()
 	state = CHASE
 	
 
+func _on_NavigationAgent2D_path_changed():
+	$Line2D.points = navigation_agent.get_nav_path()
+
+
+func _on_NavigationAgent2D_navigation_finished():
+	$Line2D.points = []

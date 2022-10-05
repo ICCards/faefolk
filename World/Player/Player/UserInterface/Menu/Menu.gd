@@ -22,6 +22,7 @@ func initialize():
 func _physics_process(delta):
 	if not visible:
 		return
+	$ItemDescription.position = get_local_mouse_position() + Vector2(28 , 40)
 	if hovered_button:
 		$ItemNameBox.item_name = hovered_button
 		$ItemNameBox.initialize()
