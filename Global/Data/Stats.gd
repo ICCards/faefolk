@@ -22,6 +22,10 @@ const BRONZE_TOOL_DAMAGE = 18 #6
 const IRON_TOOL_DAMAGE = 20 #5
 const GOLD_TOOL_DAMAGE = 25 #4
 
+const STUMP_HEALTH = 25
+const TREE_HEALTH = 100
+const SMALL_ORE_HEALTH = 25
+const LARGE_ORE_HEALTH = 100
 
 const WOOD_SWORD_DAMAGE = 20
 const STONE_SWORD_DAMAGE = 30
@@ -40,6 +44,35 @@ const BUNNY_HEALTH = 50
 const BEAR_HEALTH = 160
 const BOAR_HEALTH = 140
 
+
+
+func return_pickaxe_damage(tool_name):
+	match tool_name:
+		"wood pickaxe":
+			return Stats.WOOD_TOOL_DAMAGE
+		"stone pickaxe":
+			return Stats.STONE_TOOL_DAMAGE
+		"bronze pickaxe":
+			return Stats.BRONZE_TOOL_DAMAGE
+		"iron pickaxe":
+			return Stats.IRON_TOOL_DAMAGE
+		"gold pickaxe":
+			return Stats.GOLD_TOOL_DAMAGE
+
+func return_axe_damage(tool_name):
+	match tool_name:
+		"punch":
+			return Stats.PUNCH_DAMAGE
+		"wood axe":
+			return Stats.WOOD_TOOL_DAMAGE
+		"stone axe":
+			return Stats.STONE_TOOL_DAMAGE
+		"bronze axe":
+			return Stats.BRONZE_TOOL_DAMAGE
+		"iron axe":
+			return Stats.IRON_TOOL_DAMAGE
+		"gold axe":
+			return Stats.GOLD_TOOL_DAMAGE
 
 func return_item_drop_quantity(tool_name, object_name):
 	match object_name:

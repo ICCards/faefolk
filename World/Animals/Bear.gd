@@ -4,7 +4,6 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var _idle_timer: Timer = $IdleTimer
 onready var _chase_timer: Timer = $ChaseTimer
-onready var navigation_obstacle: NavigationObstacle2D = $NavigationObstacle2D
 
 var player = Server.player_node
 var direction: String = "down"
@@ -19,6 +18,7 @@ var rng = RandomNumberGenerator.new()
 var state = IDLE
 var health: int = Stats.BEAR_HEALTH
 var KNOCKBACK_AMOUNT = 400
+var MAX_MOVE_DISTANCE: float = 400.0
 
 enum {
 	CHASE,
@@ -34,7 +34,6 @@ func _ready():
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	navigation_agent.connect("velocity_computed", self, "move")
-	#Navigation2DServer.agent_set_map(navigation_obstacle.get_rid(), get_world_2d().navigation_map)
 
 
 func _update_pathfinding_idle():
@@ -46,7 +45,7 @@ func _update_pathfinding_chase():
 
 
 func get_random_pos():
-	random_pos = Vector2(rand_range(-300, 300), rand_range(-300, 300))
+	random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
 	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
 		return position + random_pos
 	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1:
@@ -124,7 +123,7 @@ func set_texture():
 			$Body/Fangs.texture = load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png")
 		WALK:
 			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png")
-			$Body/Fangs.texture = null #load("res://Assets/Images/Animals/Bear/walk/fangs/" + direction  + ".png")
+			$Body/Fangs.texture = null 
 		IDLE:
 			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
 			$Body/Fangs.texture = null
@@ -145,7 +144,7 @@ func swing():
 			animation_player.play("loop")
 			state = CHASE
 	else:
-		state = IDLE
+		end_chase_state()
 
 
 func _on_HurtBox_area_entered(area):
@@ -191,6 +190,12 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_DetectPlayer_area_entered(area):
 	start_chase_state()
 
+func end_chase_state():
+	navigation_agent.max_speed = 100
+	stop_sound_effects()
+	_idle_timer.start()
+	_chase_timer.stop()
+	state = IDLE
 
 func start_chase_state():
 	navigation_agent.max_speed = 250
@@ -198,11 +203,3 @@ func start_chase_state():
 	_idle_timer.stop()
 	_chase_timer.start()
 	state = CHASE
-	
-
-func _on_NavigationAgent2D_path_changed():
-	$Line2D.points = navigation_agent.get_nav_path()
-
-
-func _on_NavigationAgent2D_navigation_finished():
-	$Line2D.points = []

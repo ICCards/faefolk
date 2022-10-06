@@ -1,75 +1,54 @@
 extends Node2D
 
-onready var branch = $Branch
+onready var branch: Sprite = $Branch
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
 
 var randomNum
-var treeObject
-var loc
-var health
-
-func initialize(variety, _loc):
-	randomNum = variety
-	loc = _loc
+var variety #number
+var tree_variety
+var location
 
 func _ready():
-	setTreeBranchType(randomNum)
+	setTreeBranchType(variety)
 	
 func PlayEffect(player_id):
-	Tiles.reset_valid_tiles(loc)
-	$SoundEffects.stream = Sounds.stump_break
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	$SoundEffects.play()
-	$AnimationPlayer.play("break")
-	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
-	yield($AnimationPlayer, "animation_finished")
+	Tiles.reset_valid_tiles(location)
+	sound_effects.stream = Sounds.stump_break
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+	sound_effects.play()
+	animation_player.play("break")
+	InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position)
+	yield(animation_player, "animation_finished")
 	queue_free()
 
 func setTreeBranchType(num):
 	if num <= 2:
-		treeObject = Images.returnTreeObject('D')
+		tree_variety = 'D'
 	elif num <= 5:
-		treeObject = Images.returnTreeObject('B')
+		tree_variety = 'B'
 	elif num <= 8:
-		treeObject = Images.returnTreeObject('A')
+		tree_variety = 'A'
 	else:
-		treeObject = Images.returnTreeObject('C')
-	$Branch.texture = Images.tree_branch_objects[num]
+		tree_variety = 'C'
+	branch.texture = Images.tree_branch_objects[num]
 
 func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	Tiles.reset_valid_tiles(loc, "stump")
+	Tiles.reset_valid_tiles(location)
 	var data = {"id": name, "n": "log"}
 	Server.action("ON_HIT", data)
-	$SoundEffects.stream = Sounds.stump_break
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	$SoundEffects.play()
-	$AnimationPlayer.play("break")
-	initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
-	intitiateItemDrop("wood", Vector2(0, 0), Stats.return_item_drop_quantity(_area.tool_name, "branch"))
+	sound_effects.stream = Sounds.stump_break
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+	sound_effects.play()
+	animation_player.play("break")
+	InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position+Vector2(-16, 32))
+	InstancedScenes.intitiateItemDrop("wood", position, Stats.return_item_drop_quantity(_area.tool_name, "branch"))
 	yield(get_tree().create_timer(1.2), "timeout")
 	queue_free()
-
-
-### Effect functions		
-func initiateTreeHitEffect(tree, effect, pos):
-	var trunkHitEffect = TrunkHitEffect.instance()
-	trunkHitEffect.init(tree, effect)
-	add_child(trunkHitEffect)
-	trunkHitEffect.global_position = global_position + pos 
-	
-func intitiateItemDrop(item, pos, qt):
-	rng.randomize()
-	for i in range(qt):
-		var itemDrop = ItemDrop.instance()
-		itemDrop.initItemDropType(item, 1)
-		get_parent().call_deferred("add_child", itemDrop)
-		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
-
 
 func _on_VisibilityNotifier2D_screen_entered():
 	visible = true

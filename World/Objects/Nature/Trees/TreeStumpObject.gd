@@ -1,25 +1,22 @@
 extends Node2D
 
-onready var stump_animation_player = $StumpAnimationPlayer 
-onready var treeStumpSprite = $TreeSprites/TreeStump
-onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var treeTypes = ['A','B', 'C', 'D', 'E']
-var rng = RandomNumberGenerator.new()
-var treeObject
-var loc 
-var health
-var stump_break = false
+onready var animation_player: AnimationPlayer = $AnimationPlayer 
+onready var tree_stump_sprite: Sprite = $TreeSprites/TreeStump
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
-func initialize(variety, _loc):
-	loc = _loc
-	treeObject = Images.returnTreeObject(variety)
+var rng = RandomNumberGenerator.new()
+
+var tree_object
+var location 
+var health
+var variety
 
 func _ready():
-	setTexture(treeObject)
+	tree_object = Images.returnTreeObject(variety)
+	setTexture(tree_object)
 	
 func setTexture(tree):
-	treeStumpSprite.texture = tree.largeStump
+	tree_stump_sprite.texture = tree.largeStump
 
 func PlayEffect(player_id):
 	health -= 1
@@ -29,85 +26,51 @@ func PlayEffect(player_id):
 	else:
 		hit_dir = "right"
 	if health >= 1:
-		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffects.play()
+		sound_effects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects.play()
 		if hit_dir == "right":
-			stump_animation_player.play("stump hit right")
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
+			animation_player.play("stump hit right")
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))
 		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			stump_animation_player.play("stump hit right")
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
+			animation_player.play("stump hit right")
 	elif health == 0:
-		$SoundEffects.stream = Sounds.stump_break
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffects.play()
-		stump_animation_player.play("stump destroyed")
-		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
-		Tiles.reset_valid_tiles(loc, "stump")
-		yield($SoundEffects, "finished")
+		sound_effects.stream = Sounds.stump_break
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects.play()
+		animation_player.play("stump destroyed")
+		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-16, 32))
+		Tiles.reset_valid_tiles(location, "stump")
+		yield(sound_effects, "finished")
 		queue_free()
 		
-
 func _on_StumpHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	var data = {"id": name, "n": "stump"}
 	Server.action("ON_HIT", data)
-	deduct_health(_area.tool_name)
-	if health <= 0 and not stump_break:
-		stump_break = true 
-		Tiles.reset_valid_tiles(loc, "stump")
-		$SoundEffects.stream = Sounds.stump_break
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffects.play()
-		stump_animation_player.play("stump destroyed")
-		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-16, 32))
-		intitiateItemDrop("wood", Vector2(0, 0), Stats.return_item_drop_quantity(_area.tool_name, "stump"))
-		yield($SoundEffects, "finished")
-		queue_free()
-	else:
-		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffects.play()
-		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
-			stump_animation_player.play("stump hit right")
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
+	health -= Stats.return_axe_damage(_area.tool_name)
+	if health > 0:
+		sound_effects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects.play()
+		if Server.player_node.get_position().x <= get_position().x:
+			animation_player.play("stump hit right")
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))
 		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			stump_animation_player.play("stump hit right")
-
-
-
-func deduct_health(tool_name):
-	match tool_name:
-		"punch":
-			health -= Stats.PUNCH_DAMAGE
-		"wood axe":
-			health -= Stats.WOOD_TOOL_DAMAGE
-		"stone axe":
-			health -= Stats.STONE_TOOL_DAMAGE
-		"bronze axe":
-			health -= Stats.BRONZE_TOOL_DAMAGE
-		"iron axe":
-			health -= Stats.IRON_TOOL_DAMAGE
-		"gold axe":
-			health -= Stats.GOLD_TOOL_DAMAGE
-
-### Effect functions		
-func initiateTreeHitEffect(tree, effect, pos):
-	var trunkHitEffect = TrunkHitEffect.instance()
-	trunkHitEffect.init(tree, effect)
-	add_child(trunkHitEffect)
-	trunkHitEffect.global_position = global_position + pos
-	
-func intitiateItemDrop(item, pos, amt):
-	for _i in range(amt):
-		rng.randomize()
-		var itemDrop = ItemDrop.instance()
-		itemDrop.initItemDropType(item, 1)
-		get_parent().call_deferred("add_child", itemDrop)
-		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
+			animation_player.play("stump hit right")
+	else:
+		Tiles.reset_valid_tiles(location, "stump")
+		sound_effects.stream = Sounds.stump_break
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects.play()
+		animation_player.play("stump destroyed")
+		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-16, 32))
+		InstancedScenes.intitiateItemDrop("wood", position, Stats.return_item_drop_quantity(_area.tool_name, "stump"))
+		yield(sound_effects, "finished")
+		queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_entered():

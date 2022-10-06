@@ -16,8 +16,8 @@ var rng = RandomNumberGenerator.new()
 
 var treeObject
 
-func initLeavesEffect(treeType):
-	treeObject = treeType
+func initLeavesEffect(_variety):
+	treeObject = Images.returnTreeObject(_variety)
 	
 func _ready():
 	randomizeDisplayedLeaves()

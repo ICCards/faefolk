@@ -1202,125 +1202,132 @@ var Apple_tree = {
 
 func returnOreObject(oreType):
 	match oreType:
-		"Red gem":
-			return Red_ore
-		"Cyan gem": 
-			return Cyan_ore
-		"Dark blue gem":
-			return Dark_blue_ore
-		"Green gem":
-			return Green_ore
-		"Iron ore":
+		"bronze ore":
+			return Bronze_ore
+		"iron ore":
 			return Iron_ore
-		"Gold ore":
+		"gold ore":
 			return Gold_ore
-		"Stone":
-			return Stone_ore
-		"Cobblestone":
-			return Cobblestone_ore
+		"stone1":
+			return Stone_ore1
+		"stone2":
+			return Stone_ore2
 
-var Red_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/red/red_gemstone_large.png"),
-	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_6.png"),
-	},
-	chip = preload("res://Assets/Images/ore_sets/red/red_chip.png")
-}
+#var red_gemstone = {
+#	largeOre = preload("res://Assets/Images/ore_sets/red/red_gemstone_large.png"),
+#	mediumOres = {
+#		0 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_1.png"),
+#		1 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_2.png"),
+#		2 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_3.png"),
+#		3 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_4.png"),
+#		4 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_5.png"),
+#		5 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_6.png"),
+#	},
+#	chip = preload("res://Assets/Images/ore_sets/red/red_chip.png")
+#}
+#
+#var Cyan_ore = {
+#	largeOre = preload("res://Assets/Images/ore_sets/cyan/cyan_gemstone_large.png"),
+#	mediumOres = {
+#		0 : preload("res://Assets/Images/ore_sets/cyan/medium/cyan_gemstone_1.png"),
+#		1 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_2.png"),
+#		2 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_3.png"),
+#		3 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_4.png"),
+#		4 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_5.png"),
+#		5 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_6.png"),
+#	},
+#	chip = preload("res://Assets/Images/ore_sets/cyan/cyan_chip.png")
+#}
+#
+#var Green_ore = {
+#	largeOre = preload("res://Assets/Images/ore_sets/green/green_gemstone_large.png"),
+#	mediumOres = {
+#		0 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_1.png"),
+#		1 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_2.png"),
+#		2 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_3.png"),
+#		3 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_4.png"),
+#		4 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_5.png"),
+#		5 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_6.png"),
+#	},
+#	chip = preload("res://Assets/Images/ore_sets/cyan/cyan_chip.png")
+#}
+#
+#var Dark_blue_ore = {
+#	largeOre =  preload("res://Assets/Images/ore_sets/dark_blue/dark_blue_gemstone_large.png"),
+#	mediumOres = {
+#	0 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_1.png"),
+#	1 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_2.png"),
+#	2 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_3.png"),
+#	3 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_4.png"),
+#	4 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_5.png"),
+#	5 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_6.png"),
+#	},
+#	chip = preload("res://Assets/Images/ore_sets/dark_blue/chip.png")
+#}
 
-var Cyan_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/cyan/cyan_gemstone_large.png"),
+var Bronze_ore = {
+	largeOre = preload("res://Assets/Images/Ores/bronze/large.png"),
 	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/cyan/medium/cyan_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_6.png"),
+	0 : preload("res://Assets/Images/Ores/bronze/medium/1.png"),
+	1 : preload("res://Assets/Images/Ores/bronze/medium/2.png"),
+	2 : preload("res://Assets/Images/Ores/bronze/medium/3.png"),
+	3 : preload("res://Assets/Images/Ores/bronze/medium/4.png"),
+	4 : preload("res://Assets/Images/Ores/bronze/medium/5.png"),
+	5 : preload("res://Assets/Images/Ores/bronze/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/cyan/cyan_chip.png")
-}
-
-var Green_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/green/green_gemstone_large.png"),
-	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_6.png"),
-	},
-	chip = preload("res://Assets/Images/ore_sets/cyan/cyan_chip.png")
-}
-
-var Dark_blue_ore = {
-	largeOre =  preload("res://Assets/Images/ore_sets/dark_blue/dark_blue_gemstone_large.png"),
-	mediumOres = {
-	0 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_1.png"),
-	1 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_2.png"),
-	2 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_3.png"),
-	3 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_4.png"),
-	4 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_5.png"),
-	5 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_6.png"),
-	},
-	chip = preload("res://Assets/Images/ore_sets/dark_blue/chip.png")
+	chip = preload("res://Assets/Images/Ores/bronze/chip.png")
 }
 
 var Iron_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/iron/large.png"),
+	largeOre = preload("res://Assets/Images/Ores/iron/large.png"),
 	mediumOres = {
-	0 : preload("res://Assets/Images/ore_sets/iron/medium/1.png"),
-	1 : preload("res://Assets/Images/ore_sets/iron/medium/2.png"),
-	2 : preload("res://Assets/Images/ore_sets/iron/medium/3.png"),
-	3 : preload("res://Assets/Images/ore_sets/iron/medium/4.png"),
-	4 : preload("res://Assets/Images/ore_sets/iron/medium/5.png"),
-	5 : preload("res://Assets/Images/ore_sets/iron/medium/6.png"),
+	0 : preload("res://Assets/Images/Ores/iron/medium/1.png"),
+	1 : preload("res://Assets/Images/Ores/iron/medium/2.png"),
+	2 : preload("res://Assets/Images/Ores/iron/medium/3.png"),
+	3 : preload("res://Assets/Images/Ores/iron/medium/4.png"),
+	4 : preload("res://Assets/Images/Ores/iron/medium/5.png"),
+	5 : preload("res://Assets/Images/Ores/iron/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/iron/chip.png")
+	chip = preload("res://Assets/Images/Ores/iron/chip.png")
 }
 
 var Gold_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/gold/large.png"), 
+	largeOre = preload("res://Assets/Images/Ores/gold/large.png"), 
 	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/gold/medium/1.png"),
-		1 : preload("res://Assets/Images/ore_sets/gold/medium/2.png"),
-		2 : preload("res://Assets/Images/ore_sets/gold/medium/3.png"),
-		3 : preload("res://Assets/Images/ore_sets/gold/medium/4.png"),
-		4 : preload("res://Assets/Images/ore_sets/gold/medium/5.png"),
-		5 : preload("res://Assets/Images/ore_sets/gold/medium/6.png"),
+		0 : preload("res://Assets/Images/Ores/gold/medium/1.png"),
+		1 : preload("res://Assets/Images/Ores/gold/medium/2.png"),
+		2 : preload("res://Assets/Images/Ores/gold/medium/3.png"),
+		3 : preload("res://Assets/Images/Ores/gold/medium/4.png"),
+		4 : preload("res://Assets/Images/Ores/gold/medium/5.png"),
+		5 : preload("res://Assets/Images/Ores/gold/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/gold/chip.png")
+	chip = preload("res://Assets/Images/Ores/gold/chip.png")
 }
 
-var Stone_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/stone/stone_gemstone_large.png"),
+var Stone_ore1 = {
+	largeOre = preload("res://Assets/Images/Ores/stone1/large.png"),
 	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_6.png"),
+		0 : preload("res://Assets/Images/Ores/stone1/medium/1.png"),
+		1 : preload("res://Assets/Images/Ores/stone1/medium/2.png"),
+		2 : preload("res://Assets/Images/Ores/stone1/medium/3.png"),
+		3 : preload("res://Assets/Images/Ores/stone1/medium/4.png"),
+		4 : preload("res://Assets/Images/Ores/stone1/medium/5.png"),
+		5 : preload("res://Assets/Images/Ores/stone1/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/stone/beige_stone_chip.png")
+	chip = preload("res://Assets/Images/Ores/stone1/chip.png")
 }
 
-var Cobblestone_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/cobblestone/cobblestone_gemstone_large.png"),
+var Stone_ore2 = {
+	largeOre = preload("res://Assets/Images/Ores/stone2/large.png"),
 	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_6.png"),
+		0 : preload("res://Assets/Images/Ores/stone2/medium/1.png"),
+		1 : preload("res://Assets/Images/Ores/stone2/medium/2.png"),
+		2 : preload("res://Assets/Images/Ores/stone2/medium/3.png"),
+		3 : preload("res://Assets/Images/Ores/stone2/medium/4.png"),
+		4 : preload("res://Assets/Images/Ores/stone2/medium/5.png"),
+		5 : preload("res://Assets/Images/Ores/stone2/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/cobblestone/stone_chip.png")
+	chip = preload("res://Assets/Images/Ores/stone2/chip.png")
 }
 
 func return_house_object(item_name):

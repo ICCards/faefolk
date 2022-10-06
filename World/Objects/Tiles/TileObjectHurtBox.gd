@@ -9,9 +9,51 @@ var item_name
 var id
 var direction
 
+
 func _ready():
 	set_dimensions()
+	#set_navigation_cutout()
 
+func set_navigation_cutout():
+	var polygon = get_node("/root/World/NavPolygon").get_navigation_polygon()
+	var cutout = PoolVector2Array([position + Vector2(-16,-16), position + Vector2(-16,16), position + Vector2(16,16), position + Vector2(16,-16)])
+	for new_point in cutout:
+		for current_cutouts in Server.cutout_points:
+			if current_cutouts.has(new_point):
+				
+				#add_points_to_existing_cutout()
+				print("FOUND NEIGHBORING VERTICE")
+				var new_cutout = current_cutouts
+				for point in cutout:
+					print("CHECK POINT " + str(point))
+					if current_cutouts.has(new_point):
+						new_cutout.append(point)
+						print("NEW POINT " + str(point))
+				new_cutout = remove_duplicate_vals(new_cutout)
+				polygon.set_outline(Server.cutout_points.find(current_cutouts) + 1, new_cutout)
+				polygon.make_polygons_from_outlines()
+				get_node("/root/World/NavPolygon").set_navigation_polygon(polygon)
+				return
+	Server.cutout_points.append(cutout)
+	polygon.add_outline(cutout)
+	polygon.make_polygons_from_outlines()
+	get_node("/root/World/NavPolygon").set_navigation_polygon(polygon)
+
+func remove_duplicate_vals(array):
+	var unique: PoolVector2Array = []
+
+	for item in array:
+		if not unique.has(item):
+			unique.append(item)
+		else:
+			unique.remove(unique.find(item))
+	print(unique)
+	return unique
+
+#			var cutout = PoolVector2Array([pos + Vector2(-31,-31), pos + Vector2(-31,31), pos + Vector2(31,31), pos + Vector2(31,-31)])
+#			polygon.add_outline(cutout)
+#			polygon.make_polygons_from_outlines()
+#	$NavPolygon.set_navigation_polygon(polygon)
 func PlayEffect(_player_id):
 	$Light2D.enabled = false
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
@@ -90,31 +132,25 @@ func _on_HurtBox_area_entered(area):
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
 	Tiles.reset_valid_tiles(location, item_name)
-	drop_item(item_name, 1, null)
+	InstancedScenes.intitiateItemDrop(item_name, position, 1)
 	yield($SoundEffects, "finished")
 	queue_free()
 
 
 func drop_items_in_stove():
 	for item in PlayerInventory.stoves[id].keys():
-		drop_item(PlayerInventory.stoves[id][item][0], PlayerInventory.stoves[id][item][1], PlayerInventory.stoves[id][item][2])
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.chests[id][item], position)
 	PlayerInventory.stoves.erase(id)
 
 func drop_items_in_grain_mill():
 	for item in PlayerInventory.grain_mills[id].keys():
-		drop_item(PlayerInventory.grain_mills[id][item][0], PlayerInventory.grain_mills[id][item][1], PlayerInventory.grain_mills[id][item][2])
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.chests[id][item], position)
 	PlayerInventory.grain_mills.erase(id)
 
 func drop_items_in_chest():
 	for item in PlayerInventory.chests[id].keys():
-		drop_item(PlayerInventory.chests[id][item][0], PlayerInventory.chests[id][item][1], PlayerInventory.chests[id][item][2])
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.chests[id][item], position)
 	PlayerInventory.chests.erase(id)
-
-func drop_item(item_name, quantity, health):
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item_name, quantity, health)
-	get_parent().call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position 
 
 
 func _on_DetectObjectOverPathBox_area_entered(area):

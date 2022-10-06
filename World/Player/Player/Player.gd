@@ -16,6 +16,8 @@ var setting
 var current_building_item = null
 var running_speed_change = 1.0
 
+var spawn_position
+
 onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
@@ -138,17 +140,32 @@ func player_death():
 		$Camera2D/UserInterface/ChatBox.hide()
 		$Camera2D/UserInterface/CurrentTime.hide()
 		$Camera2D/UserInterface/PlayerStatsUI.hide()
+		$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", true) 
+		drop_inventory_items()
 		yield(animation_player, "animation_finished")
-		PlayerStats.health = PlayerStats.health_maximum
-		PlayerStats.emit_signal("health_changed")
-		animation_player.stop()
-		$Camera2D/UserInterface/Hotbar.show()
-		$Camera2D/UserInterface/ChatBox.show()
-		$Camera2D/UserInterface/CurrentTime.show()
-		$Camera2D/UserInterface/PlayerStatsUI.show()
-		$Camera2D/UserInterface/DeathEffect.visible = false
-		state = MOVEMENT
+		respawn()
 	
+func drop_inventory_items():
+	for item in PlayerInventory.hotbar.keys(): 
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.hotbar[item], position)
+	for item in PlayerInventory.inventory.keys(): 
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.inventory[item], position)
+	PlayerInventory.hotbar = {}
+	PlayerInventory.inventory = {}
+	
+func respawn():
+	position = spawn_position
+	PlayerStats.health = PlayerStats.health_maximum
+	PlayerStats.emit_signal("health_changed")
+	animation_player.stop()
+	$Camera2D/UserInterface/Hotbar.initialize_hotbar()
+	$Camera2D/UserInterface/ChatBox.show()
+	$Camera2D/UserInterface/CurrentTime.show()
+	$Camera2D/UserInterface/PlayerStatsUI.show()
+	$Camera2D/UserInterface/DeathEffect.visible = false
+	$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", false) 
+	state = MOVEMENT
+
 	
 func initialize_camera_limits(top_left, bottom_right):
 	$Camera2D.limit_top = top_left.y
@@ -296,9 +313,9 @@ func movement_state(delta):
 		if input_vector != Vector2.ZERO:
 			velocity += input_vector * ACCELERATION * delta
 			if is_walking_on_dirt:
-				velocity = velocity.clamped(MAX_SPEED_DIRT * delta)
+				velocity = velocity.limit_length(MAX_SPEED_DIRT * delta)
 			else:
-				velocity = velocity.clamped(MAX_SPEED_PATH * delta)
+				velocity = velocity.limit_length(MAX_SPEED_PATH * delta)
 			sword_swing.knockback_vector = input_vector
 		else:
 			if Sounds.current_footsteps_sound != Sounds.swimming:

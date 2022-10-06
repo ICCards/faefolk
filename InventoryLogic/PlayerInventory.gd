@@ -27,28 +27,28 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	1: ["wheat", 20, null],
-	2: ["gold ore", 60, null],
-	3: ["rope", 20, null],
-	4: ["wood", 800, null],
-	5: ["stone", 800, null],
-	0: ["iron ingot", 60, null],
-	6: ["potato seeds", 60, null],
-	7: ["bronze ingot", 12, null],
-	8: ["bread", 60, null],
+#	1: ["wheat", 20, null],
+#	2: ["gold ore", 60, null],
+#	3: ["rope", 20, null],
+#	4: ["wood", 800, null],
+#	5: ["stone", 800, null],
+#	0: ["iron ingot", 60, null],
+#	6: ["potato seeds", 60, null],
+#	7: ["bronze ingot", 12, null],
+#	8: ["bread", 60, null],
 }
 
 var hotbar = {
-	0 : ["wood box", 800, null],
-	2 : ["wood sword", 1, null],
-	3 : ["wood sword", 1, null],
-	4 : ["stone sword", 1, null],
-	5 : ["bronze sword", 1, null],
-	6 : ["iron sword", 1, null],
-	8 : ["bow", 1, null],
-	9 : ["arrow", 800, null],
-	
+#	0 : ["wood box", 800, null],
+#	2 : ["wood sword", 1, null],
+#	3 : ["wood sword", 1, null],
+#	4 : ["stone sword", 1, null],
+#	5 : ["bronze axe", 1, null],
+#	6 : ["iron pickaxe", 1, null],
+#	8 : ["bow", 1, null],
+#	9 : ["arrow", 800, null],
 }
+
 var chests = {}
 var furnaces = {}
 var grain_mills = {}
