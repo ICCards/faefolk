@@ -3,7 +3,7 @@ extends Node2D
 
 func _process(delta):
 	var location = Tiles.ocean_tiles.world_to_map(Server.player_node.position)
-	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles):
+	if Tiles.isCenterBitmaskTile(location, Tiles.deep_ocean_tiles):
 		if Sounds.current_footsteps_sound != Sounds.swimming:
 			Sounds.current_footsteps_sound = Sounds.swimming
 			Sounds.emit_signal("footsteps_sound_change")

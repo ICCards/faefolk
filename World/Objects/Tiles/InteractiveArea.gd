@@ -1,4 +1,4 @@
 extends Area2D
 
-
-var level_of_placable = null
+var object_name = ""
+var object_level = ""

@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/136_full_edutainment_0162.mp3-3a7bbe403bdb34f935bd27c5ab7c581f.mp3str"
+path="res://.import/136_full_edutainment_0162.mp3-9c03e22efee003f8c155a80f317fe2af.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Music/136_full_edutainment_0162.mp3"
-dest_files=[ "res://.import/136_full_edutainment_0162.mp3-3a7bbe403bdb34f935bd27c5ab7c581f.mp3str" ]
+source_file="res://Assets/Sound/music/136_full_edutainment_0162.mp3"
+dest_files=[ "res://.import/136_full_edutainment_0162.mp3-9c03e22efee003f8c155a80f317fe2af.mp3str" ]
 
 [params]
 

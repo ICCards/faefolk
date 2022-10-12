@@ -45,6 +45,7 @@ Stats="*res://Global/Data/Stats.gd"
 FishData="*res://Global/Data/FishData.gd"
 CollectionsData="*res://Global/Data/CollectionsData.gd"
 InstancedScenes="*res://Global/Data/InstancedScenes.gd"
+Constants="*res://Global/Data/Constants.gd"
 
 [display]
 
@@ -267,11 +268,8 @@ run={
 2d_physics/layer_15="HammerRepairLayer"
 2d_physics/layer_16="EnterSleepingBag"
 2d_physics/layer_17="OpenChest"
-2d_physics/layer_18="OpenWorkbench"
-2d_physics/layer_19="OpenStove"
-2d_physics/layer_20="OpenGrainMill"
+2d_physics/layer_18="EnterInteractiveArea"
 2d_physics/layer_21="FishingMiniGame"
-2d_physics/layer_22="EnterFurnaceArea"
 
 [network]
 

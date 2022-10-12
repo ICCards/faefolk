@@ -124,12 +124,15 @@ func get_state():
 	return {'x': position.x, 'y': position.y, 'counter': counter, 'collisionMask': collisionMask}
 	
 	
-func sleep(direction_of_sleeping_bag):
+func sleep(direction_of_sleeping_bag, pos):
 	if state != SLEEPING:
 		state = SLEEPING
-		position += Vector2(0, 6)
+		spawn_position = position
+		position = pos
 		animation_player.play("sleep")
 		composite_sprites.set_player_animation(character, "sleep_" + direction_of_sleeping_bag.to_lower())
+		yield(animation_player, "animation_finished")
+		state = MOVEMENT
 	
 func player_death():
 	if state != DYING:
@@ -141,6 +144,8 @@ func player_death():
 		$Camera2D/UserInterface/CurrentTime.hide()
 		$Camera2D/UserInterface/PlayerStatsUI.hide()
 		$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", true) 
+		if has_node("Fishing"):
+			get_node("Fishing").queue_free()
 		drop_inventory_items()
 		yield(animation_player, "animation_finished")
 		respawn()
@@ -221,7 +226,7 @@ func _unhandled_input(event):
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
 	if event.is_action_pressed("run"):
-		running_speed_change = 1.6
+		running_speed_change = 1.25
 		running = true
 	elif event.is_action_released("run"):
 		running_speed_change = 1.0
@@ -244,6 +249,28 @@ func show_placable_object(item_name, item_category):
 			get_node("PlaceObject").item_category = item_category
 			get_node("PlaceObject").initialize()
 			
+
+
+func harvest_crop(item_name):
+	state = HARVESTING
+	var anim = "harvest_" + direction.to_lower()
+	holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + item_name + ".png")
+	composite_sprites.set_player_animation(Server.player_node.character, anim)
+	animation_player.play(anim)
+	yield(animation_player, "animation_finished")
+	state = MOVEMENT
+	
+	
+func harvest_forage(item_name):
+	state = HARVESTING
+	var anim = "harvest_" + direction.to_lower()
+	holding_item.texture = load("res://Assets/Images/Forage/" + item_name + ".png")
+	composite_sprites.set_player_animation(Server.player_node.character, anim)
+	animation_player.play(anim)
+	yield(animation_player, "animation_finished")
+	state = MOVEMENT
+
+
 func destroy_placable_object():
 	if has_node("PlaceObject"):
 		get_node("PlaceObject").queue_free()
@@ -272,6 +299,7 @@ func fish():
 		PlayerStats.decrease_energy()
 		state = FISHING
 		var fishing = Fishing.instance()
+		fishing.fishing_rod_type = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		add_child(fishing)
 
 
@@ -338,7 +366,7 @@ func idle_state(_direction):
 			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop":
+				if Util.valid_holding_item_category(item_category):
 					holding_item.show()
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					animation = "holding_idle_" + _direction.to_lower()
@@ -356,11 +384,11 @@ func idle_state(_direction):
 func walk_state(_direction):
 	$Sounds/FootstepsSound.stream_paused = false
 	if Sounds.current_footsteps_sound != Sounds.swimming and not running:
-		animation_player.play("movement")
+		animation_player.play("walk")
 		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop":
+			if Util.valid_holding_item_category(item_category):
 				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 				holding_item.show()
 				animation = "holding_walk_" + _direction.to_lower()
@@ -372,13 +400,24 @@ func walk_state(_direction):
 			animation = "walk_" + _direction.to_lower()
 		composite_sprites.set_player_animation(character, animation, null)
 	elif running and Sounds.current_footsteps_sound != Sounds.swimming:
-		animation_player.play("movement")
+		animation_player.play("sprint")
 		animation = "run_" + _direction.to_lower()
 		composite_sprites.set_player_animation(character, animation, null)
+		check_if_holding_item()
 	else:
 		animation_player.play("swim")
 		composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
+func check_if_holding_item():
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		var item_qt = PlayerInventory.hotbar[PlayerInventory.active_item_slot][1]
+		var item_category = JsonData.item_data[item_name]["ItemCategory"]
+		if Util.valid_holding_item_category(item_category):
+			holding_item.hide()
+			PlayerInventory.hotbar.erase(PlayerInventory.active_item_slot)
+			$Camera2D/UserInterface/Hotbar.initialize_hotbar()
+			InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
 
 
 #func init_day_night_cycle(_time_elapsed):
@@ -394,3 +433,5 @@ func walk_state(_direction):
 #	day_night_animation_player.play("set night")
 #func set_day():
 #	day_night_animation_player.play_backwards("set night")
+
+

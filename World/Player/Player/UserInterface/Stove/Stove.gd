@@ -1,8 +1,9 @@
 extends Control
 
+var id
+var level
+
 var item
-var stove_id = PlayerInventory.stove_id.substr(2,-1)
-var level = PlayerInventory.stove_id.substr(0,1)
 var ingredients = []
 
 onready var hotbar_slots = $HotbarSlots
@@ -61,12 +62,11 @@ func _physics_process(delta):
 func initialize():
 	Server.player_node.destroy_placable_object()
 	show()
-	$Title.text = "Stove #" + level[0].to_upper() + level.substr(1,-1) + ":" 
+	$Title.text = "Stove #" + str(level) + ":" 
 	initialize_hotbar()
 	initialize_inventory()
 	initialize_stove_data()
 	initialize_locked_slots()
-	check_valid_recipe()
 	
 	
 func initialize_locked_slots():
@@ -148,7 +148,7 @@ func cooking_inactive():
 
 
 func _on_CookTimer_timeout():
-	if current_cooking_item:
+	if current_cooking_item and PlayerInventory.stoves.has(id):
 		add_to_yield_slot()
 		remove_ingredients()
 		remove_fuel()
@@ -158,59 +158,59 @@ func _on_CookTimer_timeout():
 func remove_fuel():
 	if fuel_slot.item.item_name == "wood":
 		fuel_slot.item.decrease_item_quantity(3)
-		PlayerInventory.decrease_item_quantity(fuel_slot, 3, stove_id)
+		PlayerInventory.decrease_item_quantity(fuel_slot, 3, id)
 		if fuel_slot.item.item_quantity == 0:
 			fuel_slot.removeFromSlot()
-			PlayerInventory.remove_item(fuel_slot, stove_id)
+			PlayerInventory.remove_item(fuel_slot, id)
 		if coal_yield_slot.item:
-			PlayerInventory.add_item_quantity(coal_yield_slot, 3, stove_id)
+			PlayerInventory.add_item_quantity(coal_yield_slot, 3, id)
 			coal_yield_slot.item.add_item_quantity(3)
 		else:
 			coal_yield_slot.initialize_item("coal", 3, null)
-			PlayerInventory.stoves[stove_id][6] = ["coal", 3, null]
+			PlayerInventory.stoves[id][6] = ["coal", 3, null]
 	elif fuel_slot.item.item_name == "coal":
 		fuel_slot.item.decrease_item_quantity(1)
-		PlayerInventory.decrease_item_quantity(fuel_slot, 1, stove_id)
+		PlayerInventory.decrease_item_quantity(fuel_slot, 1, id)
 		if fuel_slot.item.item_quantity == 0:
 			fuel_slot.removeFromSlot()
-			PlayerInventory.remove_item(fuel_slot, stove_id)
+			PlayerInventory.remove_item(fuel_slot, id)
 
 func remove_ingredients():
 	for ingredient in JsonData.item_data[current_cooking_item]["Ingredients"]:
 		if ingredient_slot1.item:
 			if ingredient[0] == ingredient_slot1.item.item_name:
-				PlayerInventory.decrease_item_quantity(ingredient_slot1, ingredient[1], stove_id)
+				PlayerInventory.decrease_item_quantity(ingredient_slot1, ingredient[1], id)
 				ingredient_slot1.item.decrease_item_quantity(ingredient[1])
 				if ingredient_slot1.item.item_quantity == 0:
 					ingredient_slot1.removeFromSlot()
-					PlayerInventory.remove_item(ingredient_slot1, stove_id)
+					PlayerInventory.remove_item(ingredient_slot1, id)
 		if ingredient_slot2.item:
 			if ingredient[0] == ingredient_slot2.item.item_name:
-				PlayerInventory.decrease_item_quantity(ingredient_slot2, ingredient[1], stove_id)
+				PlayerInventory.decrease_item_quantity(ingredient_slot2, ingredient[1], id)
 				ingredient_slot2.item.decrease_item_quantity(ingredient[1])
 				if ingredient_slot2.item.item_quantity == 0:
 					ingredient_slot2.removeFromSlot()
-					PlayerInventory.remove_item(ingredient_slot2, stove_id)
+					PlayerInventory.remove_item(ingredient_slot2, id)
 		if ingredient_slot3.item:
 			if ingredient[0] == ingredient_slot3.item.item_name:
-				PlayerInventory.decrease_item_quantity(ingredient_slot3, ingredient[1], stove_id)
+				PlayerInventory.decrease_item_quantity(ingredient_slot3, ingredient[1], id)
 				ingredient_slot3.item.decrease_item_quantity(ingredient[1])
 				if ingredient_slot3.item.item_quantity == 0:
 					ingredient_slot3.removeFromSlot()
-					PlayerInventory.remove_item(ingredient_slot3, stove_id)
+					PlayerInventory.remove_item(ingredient_slot3, id)
 
 func add_to_yield_slot():
 	if not yield_slot1.item:
 		yield_slot1.initialize_item(current_cooking_item, 1, null)
-		PlayerInventory.stoves[stove_id][4] = [current_cooking_item, 1, null]
+		PlayerInventory.stoves[id][4] = [current_cooking_item, 1, null]
 	elif not yield_slot1.item.item_quantity == 999:
-		PlayerInventory.add_item_quantity(yield_slot1, 1, stove_id)
+		PlayerInventory.add_item_quantity(yield_slot1, 1, id)
 		yield_slot1.item.add_item_quantity(1)
 	elif not yield_slot2.item:
 		yield_slot2.initialize_item(current_cooking_item, 1, null)
-		PlayerInventory.stoves[stove_id][5] = [current_cooking_item, 1, null]
+		PlayerInventory.stoves[id][5] = [current_cooking_item, 1, null]
 	else:
-		PlayerInventory.add_item_quantity(yield_slot2, 1, stove_id)
+		PlayerInventory.add_item_quantity(yield_slot2, 1, id)
 		yield_slot2.item.add_item_quantity(1)
 
 
@@ -290,8 +290,8 @@ func initialize_stove_data():
 	for i in range(slots_in_stove.size()):
 		if slots_in_stove[i].item != null:
 			slots_in_stove[i].removeFromSlot()
-		if PlayerInventory.stoves[stove_id].has(i):
-			slots_in_stove[i].initialize_item(PlayerInventory.stoves[stove_id][i][0], PlayerInventory.stoves[stove_id][i][1], PlayerInventory.stoves[stove_id][i][2])
+		if PlayerInventory.stoves[id].has(i):
+			slots_in_stove[i].initialize_item(PlayerInventory.stoves[id][i][0], PlayerInventory.stoves[id][i][1], PlayerInventory.stoves[id][i][2])
 
 func initialize_hotbar():
 	var slots = hotbar_slots.get_children()
@@ -352,9 +352,9 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 
 func right_click_slot(slot):
 	if slot.item.item_quantity > 1:
-		var new_qt = slot.item.item_quantity / 2
-		PlayerInventory.decrease_item_quantity(slot, slot.item.item_quantity / 2, stove_id)
-		slot.item.decrease_item_quantity(slot.item.item_quantity / 2)
+		var new_qt = int(slot.item.item_quantity / 2)
+		PlayerInventory.decrease_item_quantity(slot, int(slot.item.item_quantity / 2), id)
+		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))
 		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 		check_valid_recipe()
@@ -369,15 +369,15 @@ func return_holding_item(item_name, qt):
 
 func left_click_empty_slot(slot: SlotClass):
 	if able_to_put_into_slot(slot):
-		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, stove_id)
+		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = null
 		check_valid_recipe()
 
 func left_click_different_item(event: InputEvent, slot: SlotClass):
 	if able_to_put_into_slot(slot):
-		PlayerInventory.remove_item(slot, stove_id)
-		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, stove_id)
+		PlayerInventory.remove_item(slot, id)
+		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
 		var temp_item = slot.item
 		slot.pickFromSlot()
 		temp_item.global_position = event.global_position
@@ -390,18 +390,18 @@ func left_click_same_item(slot: SlotClass):
 		var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 		var able_to_add = stack_size - slot.item.item_quantity
 		if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-			PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity, stove_id)
+			PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity, id)
 			slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
 			find_parent("UserInterface").holding_item.queue_free()
 			find_parent("UserInterface").holding_item = null
 		else:
-			PlayerInventory.add_item_quantity(slot, able_to_add, stove_id)
+			PlayerInventory.add_item_quantity(slot, able_to_add, id)
 			slot.item.add_item_quantity(able_to_add)
 			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 		check_valid_recipe()
 
 func left_click_not_holding(slot: SlotClass):
-	PlayerInventory.remove_item(slot, stove_id)
+	PlayerInventory.remove_item(slot, id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
@@ -420,8 +420,12 @@ func close_trash_can():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
+#func _unhandled_input(event):
+#	if event.is_action_pressed("action"):
+#		get_parent().close_stove(id)
+
 func _on_ExitButton_pressed():
-	get_parent().close_stove()
+	get_parent().close_stove(id)
 
 func _on_TrashButton_mouse_entered():
 	open_trash_can()

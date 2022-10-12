@@ -107,7 +107,7 @@ func swing(item_name, _direction):
 func draw_bow(init_direction):
 	is_drawing = true
 	animation = "draw_" + init_direction.to_lower()
-	player_animation_player.play("axe pickaxe swing")
+	player_animation_player.play("bow draw release")
 	PlayerStats.decrease_energy()
 	composite_sprites.set_player_animation(get_parent().character, animation, "bow")
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
@@ -127,7 +127,7 @@ func wait_for_release():
 		is_releasing = true
 		animation = "release_" + direction.to_lower()
 		composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
-		player_animation_player.play("axe pickaxe swing")
+		player_animation_player.play("bow draw release")
 		yield(player_animation_player, "animation_finished" )
 		is_releasing = false
 		get_parent().direction = direction

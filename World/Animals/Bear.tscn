@@ -17,7 +17,7 @@
 shader = SubResource( 18 )
 
 [sub_resource type="CircleShape2D" id=22]
-radius = 50.04
+radius = 56.0
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 18.0
@@ -27,7 +27,7 @@ height = 44.0
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id=14]
-radius = 33.2415
+radius = 36.0
 
 [sub_resource type="Animation" id=20]
 length = 0.001
@@ -189,7 +189,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "bite down"
-length = 0.8
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Bear:texture")
 tracks/0/interp = 1
@@ -203,95 +203,19 @@ tracks/0/keys = {
 "values": [ ExtResource( 5 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body/Bear:frame")
+tracks/1/path = NodePath("BearBite/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("BearBite/CollisionShape2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("BearBite/CollisionShape2D:rotation_degrees")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BearBite/CollisionShape2D:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Body/Fangs:texture")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ null ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "bite left"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/Bear:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body/Bear:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 9 ) ]
-}
 tracks/2/type = "value"
-tracks/2/path = NodePath("BearBite/CollisionShape2D:position")
+tracks/2/path = NodePath("BearBite/CollisionShape2D:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -300,10 +224,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -52, -25 ) ]
+"values": [ 0.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("BearBite/CollisionShape2D:rotation_degrees")
+tracks/3/path = NodePath("Body/Fangs:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -311,37 +235,113 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 90.0 ]
+"update": 1,
+"values": [ null ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("BearBite/CollisionShape2D:disabled")
+tracks/4/path = NodePath("BearClaw/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Body/Fangs:texture")
+tracks/5/path = NodePath("Body/Bear:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "bite left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Bear:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BearBite/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -52, -25 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BearBite/CollisionShape2D:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Fangs:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ null ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("BearClaw/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/Bear:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "bite right"
-length = 0.8
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Bear:texture")
 tracks/0/interp = 1
@@ -355,19 +355,19 @@ tracks/0/keys = {
 "values": [ ExtResource( 4 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body/Bear:frame")
+tracks/1/path = NodePath("BearBite/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 52, -25 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("BearBite/CollisionShape2D:position")
+tracks/2/path = NodePath("BearBite/CollisionShape2D:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -376,10 +376,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 52, -25 ) ]
+"values": [ 90.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("BearBite/CollisionShape2D:rotation_degrees")
+tracks/3/path = NodePath("Body/Fangs:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -387,37 +387,37 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 90.0 ]
+"update": 1,
+"values": [ null ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("BearBite/CollisionShape2D:disabled")
+tracks/4/path = NodePath("BearClaw/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Body/Fangs:texture")
+tracks/5/path = NodePath("Body/Bear:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ null ]
+"values": [ 0, 1, 2, 3 ]
 }
 
 [sub_resource type="Animation" id=12]
 resource_name = "bite up"
-length = 0.8
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Bear:texture")
 tracks/0/interp = 1
@@ -431,19 +431,19 @@ tracks/0/keys = {
 "values": [ ExtResource( 10 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body/Bear:frame")
+tracks/1/path = NodePath("BearBite/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -72 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("BearBite/CollisionShape2D:position")
+tracks/2/path = NodePath("BearBite/CollisionShape2D:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -452,10 +452,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -72 ) ]
+"values": [ 0.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("BearBite/CollisionShape2D:rotation_degrees")
+tracks/3/path = NodePath("Body/Fangs:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -463,32 +463,32 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"update": 1,
+"values": [ null ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("BearBite/CollisionShape2D:disabled")
+tracks/4/path = NodePath("BearClaw/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Body/Fangs:texture")
+tracks/5/path = NodePath("Body/Bear:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ null ]
+"values": [ 0, 1, 2, 3 ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -508,8 +508,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "loop"
-length = 0.8
+length = 0.6
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Bear:frame")
 tracks/0/interp = 1
@@ -517,7 +518,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -553,7 +554,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -561,7 +562,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "swing down"
-length = 0.8
+length = 0.6
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("BearClaw/CollisionShape2D:position")
 tracks/0/interp = 1
@@ -581,7 +583,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -605,7 +607,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -637,7 +639,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "swing left"
-length = 0.8
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("BearClaw/CollisionShape2D:position")
 tracks/0/interp = 1
@@ -663,57 +665,57 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("BearClaw/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Body/Bear:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body/Bear:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Body/Bear:texture")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 8 ) ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Body/Fangs:texture")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Fangs:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ null ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("BearClaw/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/Bear:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "swing right"
-length = 0.8
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("BearClaw/CollisionShape2D:position")
 tracks/0/interp = 1
@@ -739,57 +741,57 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("BearClaw/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Body/Bear:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body/Bear:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Body/Bear:texture")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 2 ) ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Body/Fangs:texture")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Fangs:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ null ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("BearClaw/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/Bear:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "swing up"
-length = 0.8
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("BearClaw/CollisionShape2D:rotation_degrees")
 tracks/0/interp = 1
@@ -815,52 +817,52 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -75 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("BearClaw/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Body/Bear:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body/Bear:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Body/Bear:texture")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 6 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Fangs:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BearClaw/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
 tracks/5/type = "value"
-tracks/5/path = NodePath("Body/Fangs:texture")
+tracks/5/path = NodePath("Body/Bear:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ null ]
+"values": [ 0, 1, 2, 3 ]
 }
 
 [node name="Bear" type="KinematicBody2D"]
@@ -911,12 +913,11 @@ shape = SubResource( 13 )
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
 collision_layer = 256
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2( 0, -26 )
+position = Vector2( 0, -32 )
 shape = SubResource( 14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
@@ -932,10 +933,10 @@ collision_mask = 32
 shape = SubResource( 21 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 20.0
+path_desired_distance = 2.0
 target_desired_distance = 10.0
+path_max_distance = 20.0
 avoidance_enabled = true
-radius = 1.0
 max_speed = 100.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -964,6 +965,11 @@ autostart = true
 
 [node name="ChaseTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="EndChaseState" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]

@@ -18,7 +18,8 @@ func _ready():
 	set_random_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
 	navigation_agent.connect("velocity_computed", self, "move")
-
+	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	#navigation_agent.set_navigation_map(get_world_2d().navigation_map)
 
 func set_random_attributes():
 	randomize()
@@ -43,12 +44,12 @@ func get_random_pos():
 			random_pos = Vector2(-randomDistance, -randomDistance)
 	else:
 		random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
-	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1 and not Tiles.valid_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
-		return position + random_pos
-	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1 and not Tiles.valid_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
-		return position - random_pos
-	else:
-		return position
+#	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
+	return position + random_pos
+#	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1:
+#		return position - random_pos
+#	else:
+#		return position
 
 
 func _update_pathfinding() -> void:

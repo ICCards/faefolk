@@ -1,8 +1,9 @@
 extends Control
 
+var level
+
 var crafting_item
 var item
-var level
 var page
 
 var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can", "wood fishing rod"]
@@ -36,7 +37,7 @@ func initialize():
 	page = 1
 	item = null
 	crafting_item = null
-	$Title.text = level[0].to_upper() + level.substr(1,-1) + ":"
+	$Title.text = "Workbench #" + str(level) + ":"
 	show()
 	set_current_page()
 	

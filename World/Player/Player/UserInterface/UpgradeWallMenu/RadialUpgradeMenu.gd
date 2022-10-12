@@ -121,11 +121,13 @@ func destroy():
 		current_index = -1
 
 func change_tile():
-	Server.world.play_upgrade_building_effect(location)
 	var new_tier = buttons[current_index]
 	tile_node.tier = new_tier
 	tile_node.set_type()
-
+	if new_tier != "demolish":
+		Server.world.play_upgrade_building_effect(location)
+	else:
+		Server.world.play_remove_building_effect(location)
 
 func _input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):

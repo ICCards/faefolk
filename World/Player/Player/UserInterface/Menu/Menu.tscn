@@ -2,7 +2,7 @@
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Inventory UI/menus/inventory.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Inventory UI/menus/crafting.png" type="Texture" id=3]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" type="Script" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/PetUI.gd" type="Script" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" type="PackedScene" id=6]
@@ -226,21 +226,20 @@ script = ExtResource( 1 )
 [node name="Tab" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -317.5
+margin_left = -317.0
 margin_top = 37.0
-margin_right = 315.5
+margin_right = 316.0
 margin_bottom = 121.0
 texture = ExtResource( 14 )
 
 [node name="Background" type="TextureRect" parent="."]
-margin_left = -378.0
+margin_left = -377.0
 margin_top = 121.0
-margin_right = 315.0
+margin_right = 316.0
 margin_bottom = 562.0
 texture = ExtResource( 3 )
 
 [node name="BackgroundButton" type="Button" parent="."]
-visible = false
 margin_left = -595.0
 margin_top = -69.0
 margin_right = 615.0
@@ -317,17 +316,17 @@ flat = true
 visible = false
 
 [node name="Crafting" parent="." instance=ExtResource( 6 )]
-visible = false
 margin_left = -375.0
 margin_top = 37.0
 margin_right = -375.0
 margin_bottom = 37.0
 
 [node name="Inventory" type="Control" parent="."]
+visible = false
 margin_left = -377.0
 margin_top = 39.0
-margin_right = -337.0
-margin_bottom = 79.0
+margin_right = -377.0
+margin_bottom = 39.0
 script = ExtResource( 4 )
 
 [node name="NameOfSong" type="Label" parent="Inventory"]
@@ -718,7 +717,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 23
+frame = 22
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]

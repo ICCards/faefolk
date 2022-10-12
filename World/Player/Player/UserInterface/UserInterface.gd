@@ -15,6 +15,10 @@ var items_to_drop = []
 
 var rng = RandomNumberGenerator.new()
 
+var object_name
+var object_level
+var object_id
+
 enum {
 	MOVEMENT, 
 	SWINGING,
@@ -35,19 +39,18 @@ func _input(event):
 		if event.is_action_pressed("open_menu") and not PlayerInventory.interactive_screen_mode:
 			toggle_menu()
 		elif event.is_action_pressed("action") and not PlayerInventory.viewInventoryMode:
-			if PlayerInventory.chest_id:
-				toggle_chest()
-			elif PlayerInventory.workbench_id:
-				toggle_workbench(PlayerInventory.workbench_id)
-			elif PlayerInventory.stove_id:
-				toggle_stove()
-			elif PlayerInventory.furnace_id:
-				toggle_furnace()
-				#PlayerInventory.furnace_node.set_furnace_active()
-			elif PlayerInventory.grain_mill_id:
-				toggle_grain_mill()
-		#		elif PlayerInventory.is_inside_sleeping_bag_area:
-		#			sleep()
+			if object_id:
+				match object_name:
+					"workbench":
+						toggle_workbench(object_level)
+					"grain mill":
+						toggle_grain_mill(object_id, object_level)
+					"stove":
+						toggle_stove(object_id, object_level)
+					"chest":
+						toggle_chest(object_id)
+					"furnace":
+						toggle_furnace(object_id)
 		if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
 			PlayerInventory.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
@@ -83,21 +86,16 @@ func _input(event):
 			PlayerInventory.active_item_slot = 9
 			PlayerInventory.emit_signal("active_item_updated")
 
-func toggle_chest():
+func toggle_chest(id):
 	if not has_node("Chest"):
+		Server.world.get_node("Placables/"+id).open_chest()
+		yield(get_tree().create_timer(0.5), "timeout")
 		var chest = Chest.instance()
+		chest.id = id
 		add_child(chest)
 		close_hotbar_clock_and_stats()
 	else:
-		close_chest()
-
-func toggle_furnace():
-	if not has_node("Furnace"):
-		var furnace = Furnace.instance()
-		add_child(furnace)
-		close_hotbar_clock_and_stats()
-	else:
-		close_furnace()
+		close_chest(id)
 
 func close_hotbar_clock_and_stats():
 	PlayerInventory.interactive_screen_mode = true
@@ -129,9 +127,12 @@ func toggle_menu():
 		drop_items()
 
 
-func toggle_grain_mill():
+
+func toggle_grain_mill(id, level):
 	if not has_node("GrainMill"):
 		var grainMill = GrainMill.instance()
+		grainMill.level = level
+		grainMill.id = id
 		add_child(grainMill)
 		close_hotbar_clock_and_stats()
 	else:
@@ -147,18 +148,39 @@ func toggle_workbench(level):
 	else:
 		close_workbench()
 
-func toggle_stove():
-	if not has_node("Stove"):
-		var stove = Stove.instance()
-		add_child(stove)
+
+func toggle_furnace(id):
+	if not has_node(id):
+		var furnace = Furnace.instance()
+		furnace.name = str(id)
+		furnace.id = id
+		add_child(furnace)
+		close_hotbar_clock_and_stats()
+	elif has_node(id) and not get_node(id).visible:
+		get_node(id).initialize()
 		close_hotbar_clock_and_stats()
 	else:
-		close_stove()
+		close_furnace(id)
+
+
+func toggle_stove(id, level):
+	if not has_node(id):
+		var stove = Stove.instance()
+		stove.name = str(id)
+		stove.level = level
+		stove.id = id
+		add_child(stove)
+		close_hotbar_clock_and_stats()
+	elif has_node(id) and not get_node(id).visible:
+		get_node(id).initialize()
+		close_hotbar_clock_and_stats()
+	else:
+		close_stove(id)
 		
-func close_furnace():
+func close_furnace(id):
 	if not holding_item:
 		add_hotbar_clock_and_stats()
-		get_node("Furnace").destroy()
+		get_node(id).hide()
 		drop_items()
 
 func close_grain_mill():
@@ -173,14 +195,15 @@ func close_workbench():
 		get_node("Workbench").destroy()
 		drop_items()
 
-func close_stove():
+func close_stove(id):
 	if not holding_item:
 		add_hotbar_clock_and_stats()
-		get_node("Stove").destroy()
+		get_node(id).hide()
 		drop_items()
 
-func close_chest():
+func close_chest(id):
 	if not holding_item:
+		Server.world.get_node("Placables/"+id).close_chest()
 		add_hotbar_clock_and_stats()
 		get_node("Chest").destroy()
 		drop_items()
@@ -189,15 +212,10 @@ func close_chest():
 func drop_items():
 	yield(get_tree().create_timer(0.25), "timeout")
 	for i in range(items_to_drop.size()):
-		drop_item(items_to_drop[i][0], items_to_drop[i][1], items_to_drop[i][2])
+		InstancedScenes.initiateInventoryItemDrop(items_to_drop[i], Server.player_node.position)
 	items_to_drop = []
 	
-func drop_item(item_name, quantity, health):
-	rng.randomize()
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item_name, quantity, health)
-	Server.world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = Server.player_node.global_position + Vector2(rng.randi_range(-12, 12), rng.randi_range(-12, 12))
+
 
 
 

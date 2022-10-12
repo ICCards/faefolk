@@ -18,6 +18,8 @@ func _ready():
 	set_random_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
 	navigation_agent.connect("velocity_computed", self, "move")
+	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	#navigation_agent.set_navigation(get_node("/root/TestScene/Navigation2D"))
 
 func set_random_attributes():
 	randomize()

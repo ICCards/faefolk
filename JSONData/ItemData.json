@@ -1,5 +1,32 @@
 {
-    
+    "clam": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Has a small chance of containing a pearl.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "pearl": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A rare treasure from the sea.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "starfish": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A washed up sea specimen.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
   "wood": {
     "ItemCategory": "Resource",
     "StackSize": 999,

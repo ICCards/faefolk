@@ -12,48 +12,8 @@ var direction
 
 func _ready():
 	set_dimensions()
-	#set_navigation_cutout()
 
-func set_navigation_cutout():
-	var polygon = get_node("/root/World/NavPolygon").get_navigation_polygon()
-	var cutout = PoolVector2Array([position + Vector2(-16,-16), position + Vector2(-16,16), position + Vector2(16,16), position + Vector2(16,-16)])
-	for new_point in cutout:
-		for current_cutouts in Server.cutout_points:
-			if current_cutouts.has(new_point):
-				
-				#add_points_to_existing_cutout()
-				print("FOUND NEIGHBORING VERTICE")
-				var new_cutout = current_cutouts
-				for point in cutout:
-					print("CHECK POINT " + str(point))
-					if current_cutouts.has(new_point):
-						new_cutout.append(point)
-						print("NEW POINT " + str(point))
-				new_cutout = remove_duplicate_vals(new_cutout)
-				polygon.set_outline(Server.cutout_points.find(current_cutouts) + 1, new_cutout)
-				polygon.make_polygons_from_outlines()
-				get_node("/root/World/NavPolygon").set_navigation_polygon(polygon)
-				return
-	Server.cutout_points.append(cutout)
-	polygon.add_outline(cutout)
-	polygon.make_polygons_from_outlines()
-	get_node("/root/World/NavPolygon").set_navigation_polygon(polygon)
 
-func remove_duplicate_vals(array):
-	var unique: PoolVector2Array = []
-
-	for item in array:
-		if not unique.has(item):
-			unique.append(item)
-		else:
-			unique.remove(unique.find(item))
-	print(unique)
-	return unique
-
-#			var cutout = PoolVector2Array([pos + Vector2(-31,-31), pos + Vector2(-31,31), pos + Vector2(31,31), pos + Vector2(31,-31)])
-#			polygon.add_outline(cutout)
-#			polygon.make_polygons_from_outlines()
-#	$NavPolygon.set_navigation_polygon(polygon)
 func PlayEffect(_player_id):
 	$Light2D.enabled = false
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
@@ -71,40 +31,154 @@ func PlayEffect(_player_id):
 func set_dimensions():
 	rng.randomize()
 	id = str(rng.randi_range(0, 100000))
-	if item_name == "torch" or item_name == "campfire" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
-		$Light2D.enabled = true
-	elif item_name == "wood chest" or item_name == "stone chest":
-		$InteractiveArea/CollisionShape2D.disabled = false
-		$InteractiveArea.collision_mask = 65536
-		$InteractiveArea.name = id
+	name = str(id)
+	if item_name == "wood chest" or item_name == "stone chest":
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Position2D/StaticBody2D/CollisionShape2D.disabled = false
+		$Position2D/InteractiveArea.object_name = "chest"
+		$Position2D/InteractiveArea.object_level = ""
+		$Position2D/InteractiveArea.name = str(id)
 		PlayerInventory.chests[id] = {}
-		scale.x = 2.0
-		position = position +  Vector2(16, 0)
+		$Position2D.scale.x = 2.0
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+				if item_name == "wood chest":
+					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/left.tres")
+				else:
+					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Left.tres")
+				$Chest.flip_h = false
+				$Chest.position = Vector2(18,0)
+				$Position2D.position = Vector2(16, -32)
+				$Chest.position = Vector2(16, -32)
+				Tiles.remove_invalid_tiles(location, Vector2(1,2))
+			"right":
+				if item_name == "wood chest":
+					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/left.tres")
+				else:
+					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Left.tres")
+				$Chest.flip_h = true
+				$Position2D.rotation_degrees = 270
+				$Position2D.position = Vector2(16, -32)
+				$Chest.position = Vector2(16, -32)
+				Tiles.remove_invalid_tiles(location, Vector2(1,2))
+			"up":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 180
+				$Chest.position = Vector2(32,-32)
+				if item_name == "wood chest":
+					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/up.tres")
+				else:
+					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Up.tres")
+				Tiles.remove_invalid_tiles(location, Vector2(2,1))
+			"down":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 0
+				$Chest.position = Vector2(32,-32)
+				if item_name == "wood chest":
+					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/down.tres")
+				else:
+					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Down.tres")
+				Tiles.remove_invalid_tiles(location, Vector2(2,1))
+		$Chest.animation = "open"
+		$Chest.show()
 	elif item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3":
-		$InteractiveArea/CollisionShape2D.disabled = false
-		$InteractiveArea.collision_mask = 131072
-		$InteractiveArea.name = item_name
-		scale.x = 2.0
-		position = position +  Vector2(16, 0)
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Position2D/InteractiveArea.object_name = "workbench"
+		$Position2D/InteractiveArea.object_level = item_name.substr(11)
+		$Position2D/InteractiveArea.name = str(id)
+		$Position2D.scale.x = 2.0
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+				$Position2D.position = Vector2(16, -32)
+			"right":
+				$Position2D.rotation_degrees = 270
+				$Position2D.position = Vector2(16, -32)
+			"up":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 180
+			"down":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 0
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
-		$InteractiveArea/CollisionShape2D.disabled = false
-		$InteractiveArea.collision_mask = 262144
-		$InteractiveArea.name = str(item_name.substr(7) + " " + id)
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Position2D/InteractiveArea.object_name = "stove"
+		$Position2D/InteractiveArea.object_level = item_name.substr(7)
+		$Position2D/InteractiveArea.name = str(id)
 		PlayerInventory.stoves[id] = {}
-		scale.x = 2.0
-		position = position +  Vector2(16, 0)
+		$Position2D.scale.x = 2.0
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+				$Position2D.position = Vector2(16, -32)
+			"right":
+				$Position2D.rotation_degrees = 270
+				$Position2D.position = Vector2(16, -32)
+			"up":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 180
+			"down":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 0
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
-		$InteractiveArea/CollisionShape2D.disabled = false
-		$InteractiveArea.collision_mask = 524288
-		$InteractiveArea.name = str(item_name.substr(12) + " " + id)
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Position2D/InteractiveArea.object_name = "grain mill"
+		$Position2D/InteractiveArea.object_level = item_name.substr(12)
+		$Position2D/InteractiveArea.name = str(id)
 		PlayerInventory.grain_mills[id] = {}
-		scale.x = 2.0
-		position = position +  Vector2(16, 0)
+		$Position2D.scale.x = 2.0
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+				$Position2D.position = Vector2(16, -32)
+			"right":
+				$Position2D.rotation_degrees = 270
+				$Position2D.position = Vector2(16, -32)
+			"up":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 180
+			"down":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 0
 	elif item_name == "furnace":
-		$InteractiveArea/CollisionShape2D.disabled = false
-		$InteractiveArea.collision_mask = 2097152
-		$InteractiveArea.name = str(id)
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Position2D/InteractiveArea.object_name = "furnace"
+		$Position2D/InteractiveArea.object_level = ""
+		$Position2D/InteractiveArea.name = str(id)
 		PlayerInventory.furnaces[id] = {}
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+			"right":
+				$Position2D.rotation_degrees = 270
+			"up":
+				$Position2D.rotation_degrees = 180
+			"down":
+				$Position2D.rotation_degrees = 0
+	elif item_name == "tool cabinet":
+		$Position2D.scale.x = 2.0
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+				$Position2D.position = Vector2(16, -32)
+				$Chest.position = Vector2(16, -32)
+				Tiles.remove_invalid_tiles(location, Vector2(1,2))
+			"right":
+				$Position2D.rotation_degrees = 270
+				$Position2D.position = Vector2(16, -32)
+				$Chest.position = Vector2(16, -32)
+				Tiles.remove_invalid_tiles(location, Vector2(1,2))
+			"up":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 180
+				$Chest.position = Vector2(32,-32)
+				Tiles.remove_invalid_tiles(location, Vector2(2,1))
+			"down":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 0
+				$Chest.position = Vector2(32,-32)
+				Tiles.remove_invalid_tiles(location, Vector2(2,1))
 
 
 
@@ -112,8 +186,12 @@ func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	$Light2D.enabled = false
-	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
+	$Chest.hide()
+	if has_node(id):
+		get_node(id+ "/CollisionShape2D").set_deferred("disabled", true)
+	$Position2D/HurtBox/CollisionShape2D.set_deferred("disabled", true)
+	$Position2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
+	$Position2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
 	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
 	Server.action("ON_HIT", data)
 	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
@@ -127,11 +205,19 @@ func _on_HurtBox_area_entered(area):
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		drop_items_in_stove()
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	elif item_name == "furnace":
+		drop_items_in_furnace()
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	else: 
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
-	Tiles.reset_valid_tiles(location, item_name)
+	var dimensions = Constants.dimensions_dict[item_name]
+	if direction == "left" or direction == "right":
+		Tiles.set_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
+	else:
+		Tiles.set_valid_tiles(location, dimensions)
+	Tiles.object_tiles.set_cellv(location, -1)
 	InstancedScenes.intitiateItemDrop(item_name, position, 1)
 	yield($SoundEffects, "finished")
 	queue_free()
@@ -139,12 +225,12 @@ func _on_HurtBox_area_entered(area):
 
 func drop_items_in_stove():
 	for item in PlayerInventory.stoves[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.chests[id][item], position)
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.stoves[id][item], position)
 	PlayerInventory.stoves.erase(id)
 
 func drop_items_in_grain_mill():
 	for item in PlayerInventory.grain_mills[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.chests[id][item], position)
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.grain_mills[id][item], position)
 	PlayerInventory.grain_mills.erase(id)
 
 func drop_items_in_chest():
@@ -152,19 +238,25 @@ func drop_items_in_chest():
 		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.chests[id][item], position)
 	PlayerInventory.chests.erase(id)
 
+func drop_items_in_furnace():
+	for item in PlayerInventory.furnaces[id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.furnaces[id][item], position)
+	PlayerInventory.furnaces.erase(id)
+
 
 func _on_DetectObjectOverPathBox_area_entered(area):
 	if item_name == "wood path" or item_name == "stone path":
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-
 
 func _on_DetectObjectOverPathBox_area_exited(area):
 	if item_name == "wood path" or item_name == "stone path":
 		yield(get_tree().create_timer(0.25), "timeout")
 		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 
-func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
 
-func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
+func open_chest():
+	$Chest.play("open")
+	
+func close_chest():
+	yield(get_tree().create_timer(0.2), "timeout")
+	$Chest.play("open", true)

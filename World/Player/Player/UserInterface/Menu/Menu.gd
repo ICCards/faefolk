@@ -56,7 +56,7 @@ func _on_Crafting_pressed():
 		$Collections.hide()
 		$OptionsMenu.hide()
 		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/crafting.png")
-		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/crafting1.png")
+		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/crafting.png")
 
 func _on_Collections_pressed():
 	if not find_parent("UserInterface").holding_item:

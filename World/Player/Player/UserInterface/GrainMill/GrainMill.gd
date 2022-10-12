@@ -2,8 +2,8 @@ extends Control
 
 var item
 var dragging = false
-var grain_mill_id = PlayerInventory.grain_mill_id.substr(2,-1)
-var level = PlayerInventory.grain_mill_id.substr(0,1)
+var id
+var level
 
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots
@@ -94,34 +94,34 @@ func craft():
 		add_to_yield_slot("wheat flour")
 		if $GrainMillSlots/WheatSlot.item.item_quantity -1 != 0:
 			$GrainMillSlots/WheatSlot.item.decrease_item_quantity(1)
-			PlayerInventory.add_item_quantity($GrainMillSlots/WheatSlot, -1, grain_mill_id)
+			PlayerInventory.add_item_quantity($GrainMillSlots/WheatSlot, -1, id)
 		else:
 			$GrainMillSlots/WheatSlot.removeFromSlot()
-			PlayerInventory.remove_item($GrainMillSlots/WheatSlot, grain_mill_id)
+			PlayerInventory.remove_item($GrainMillSlots/WheatSlot, id)
 	elif $GrainMillSlots/CornSlot.item:
 		add_to_yield_slot("corn flour")
 		if $GrainMillSlots/CornSlot.item.item_quantity -1 != 0:
 			$GrainMillSlots/CornSlot.item.decrease_item_quantity(1)
-			PlayerInventory.add_item_quantity($GrainMillSlots/CornSlot, -1, grain_mill_id)
+			PlayerInventory.add_item_quantity($GrainMillSlots/CornSlot, -1, id)
 		else:
 			$GrainMillSlots/CornSlot.removeFromSlot()
-			PlayerInventory.remove_item($GrainMillSlots/CornSlot, grain_mill_id)
+			PlayerInventory.remove_item($GrainMillSlots/CornSlot, id)
 	elif $GrainMillSlots/SugarCaneSlot.item:
 		add_to_yield_slot("sugar")
 		if $GrainMillSlots/SugarCaneSlot.item.item_quantity -1 != 0:
 			$GrainMillSlots/SugarCaneSlot.item.decrease_item_quantity(1)
-			PlayerInventory.add_item_quantity($GrainMillSlots/SugarCaneSlot, -1, grain_mill_id)
+			PlayerInventory.add_item_quantity($GrainMillSlots/SugarCaneSlot, -1, id)
 		else:
 			$GrainMillSlots/SugarCaneSlot.removeFromSlot()
-			PlayerInventory.remove_item($GrainMillSlots/SugarCaneSlot, grain_mill_id)
+			PlayerInventory.remove_item($GrainMillSlots/SugarCaneSlot, id)
 
 
 func add_to_yield_slot(item_name):
 	if not $GrainMillSlots/YieldSlot.item:
 		$GrainMillSlots/YieldSlot.initialize_item(item_name, 1, null)
-		PlayerInventory.grain_mills[grain_mill_id][3] = [item_name, 1, null]
+		PlayerInventory.grain_mills[id][3] = [item_name, 1, null]
 	else:
-		PlayerInventory.add_item_quantity($GrainMillSlots/YieldSlot, 1, grain_mill_id)
+		PlayerInventory.add_item_quantity($GrainMillSlots/YieldSlot, 1, id)
 		$GrainMillSlots/YieldSlot.item.add_item_quantity(1)
 
 func _physics_process(delta):
@@ -139,8 +139,8 @@ func initialize_grain_mill_data():
 	for i in range(slots_in_grain_mill.size()):
 		if slots_in_grain_mill[i].item != null:
 			slots_in_grain_mill[i].removeFromSlot()
-		if PlayerInventory.grain_mills[grain_mill_id].has(i):
-			slots_in_grain_mill[i].initialize_item(PlayerInventory.grain_mills[grain_mill_id][i][0], PlayerInventory.grain_mills[grain_mill_id][i][1], PlayerInventory.grain_mills[grain_mill_id][i][2])
+		if PlayerInventory.grain_mills[id].has(i):
+			slots_in_grain_mill[i].initialize_item(PlayerInventory.grain_mills[id][i][0], PlayerInventory.grain_mills[id][i][1], PlayerInventory.grain_mills[id][i][2])
 
 func initialize_hotbar():
 	var slots = hotbar_slots.get_children()
@@ -190,7 +190,7 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 
 func right_click_slot(slot):
 	if slot.item.item_quantity > 1:
-		var new_qt = slot.item.item_quantity / 2
+		var new_qt = int(slot.item.item_quantity / 2)
 		PlayerInventory.decrease_item_quantity(slot, slot.item.item_quantity / 2)
 		slot.item.decrease_item_quantity(slot.item.item_quantity / 2)
 		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
@@ -205,7 +205,7 @@ func return_holding_item(item_name, qt):
 
 func left_click_empty_slot(slot: SlotClass):
 	if able_to_put_into_slot(slot):
-		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, grain_mill_id)
+		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = null
 
@@ -224,17 +224,17 @@ func left_click_same_item(slot: SlotClass):
 		var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 		var able_to_add = stack_size - slot.item.item_quantity
 		if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-			PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity,  grain_mill_id)
+			PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity,  id)
 			slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
 			find_parent("UserInterface").holding_item.queue_free()
 			find_parent("UserInterface").holding_item = null
 		else:
-			PlayerInventory.add_item_quantity(slot, able_to_add, grain_mill_id)
+			PlayerInventory.add_item_quantity(slot, able_to_add, id)
 			slot.item.add_item_quantity(able_to_add)
 			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 
 func left_click_not_holding(slot: SlotClass):
-	PlayerInventory.remove_item(slot, grain_mill_id)
+	PlayerInventory.remove_item(slot, id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()

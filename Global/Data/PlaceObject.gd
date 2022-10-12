@@ -5,10 +5,6 @@ onready var TileObjectHurtBox = preload("res://World/Objects/Tiles/TileObjectHur
 onready var BuildingTileObjectHurtBox = preload("res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn")
 onready var PlayerHouseObject = preload("res://World/Objects/Farm/PlayerHouse.tscn")
 onready var SleepingBag = preload("res://World/Objects/Tiles/SleepingBag.tscn")
-onready var TentDown = preload("res://World/Objects/Farm/TentDown.tscn")
-onready var TentUp = preload("res://World/Objects/Farm/TentUp.tscn")
-onready var TentRight = preload("res://World/Objects/Farm/TentRight.tscn")
-onready var TentLeft = preload("res://World/Objects/Farm/TentLeft.tscn")
 onready var DoorFront = preload("res://World/Objects/Tiles/DoorFront.tscn")
 onready var DoorSide = preload("res://World/Objects/Tiles/DoubleDoorSide.tscn")
 onready var Rug  = preload("res://World/Objects/Misc/Rug.tscn")
@@ -53,7 +49,7 @@ func place_seed_in_world(id, item_name, location, days):
 	var plantedCrop = PlantedCrop.instance()
 	plantedCrop.name = str(id)
 	plantedCrop.initialize(item_name, location, JsonData.crop_data[item_name]["DaysToGrow"], false, false)
-	Server.world.add_child(plantedCrop, true)
+	Server.world.get_node("Placables").add_child(plantedCrop, true)
 	plantedCrop.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0, 16)
 	
 	
@@ -67,7 +63,7 @@ func place_building_object_in_world(id, item_name, location):
 			object.item_name = item_name
 			object.tier = "twig"
 			object.id = rng.randi_range(0, 10000)
-			Server.world.call_deferred("add_child", object, true)
+			Server.world.get_node("Placables").call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 		"foundation":
@@ -76,7 +72,7 @@ func place_building_object_in_world(id, item_name, location):
 			object.location = location
 			object.item_name = item_name
 			object.tier = "twig"
-			Server.world.call_deferred("add_child", object, true)
+			Server.world.get_node("Placables").call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 
 
@@ -86,8 +82,8 @@ func place_object_in_world(id, item_name, direction, location):
 	tileObjectHurtBox.item_name = item_name
 	tileObjectHurtBox.location = location
 	tileObjectHurtBox.direction = direction
-	Server.world.call_deferred("add_child", tileObjectHurtBox, true)
-	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(16, 16)
+	Server.world.get_node("Placables").call_deferred("add_child", tileObjectHurtBox, true)
+	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 	match item_name:
 		"furnace":
 #			tileObjectHurtBox.queue_free()
@@ -100,11 +96,11 @@ func place_object_in_world(id, item_name, direction, location):
 				"down":
 					Tiles.object_tiles.set_cellv(location, 35)
 				"up":
-					Tiles.object_tiles.set_cellv(location,  31)
+					Tiles.object_tiles.set_cellv(location,  39)
 				"left":
-					Tiles.object_tiles.set_cellv(location, 33)
+					Tiles.object_tiles.set_cellv(location, 38)
 				"right":
-					Tiles.object_tiles.set_cellv(location, 34)
+					Tiles.object_tiles.set_cellv(location, 37)
 		"tool cabinet":
 			match direction:
 				"down":
@@ -181,7 +177,7 @@ func place_object_in_world(id, item_name, direction, location):
 #			light_tiles.set_cellv(location, Lights.TORCH)
 		"campfire":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
-			Tiles.light_tiles.set_cellv(location, Lights.CAMPFIRE)
+			Tiles.object_tiles.set_cellv(location, 40)
 		"fire pedestal":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			Tiles.light_tiles.set_cellv(location, Lights.FIRE_PEDESTAL)
@@ -198,95 +194,140 @@ func place_object_in_world(id, item_name, direction, location):
 		"wood box":
 			Tiles.remove_invalid_tiles(location, Vector2(1,1))
 			Tiles.object_tiles.set_cellv(location, Placables.BOX)
-		"wood chest":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.WOOD_CHEST)
-		"stone chest":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.STONE_CHEST)
-		"house":
-			Tiles.remove_invalid_tiles(location, Vector2(8,4))
-			var playerHouseObject = PlayerHouseObject.instance()
-			playerHouseObject.name = str(id)
-			Server.player_house_position = location
-			Server.player_house_id = str(id)
-			Server.world.get_node("PlacableTiles").call_deferred("add_child", playerHouseObject, true)
-			playerHouseObject.global_position = Tiles.fence_tiles.map_to_world(location) + Vector2(6,6)
 		"workbench #1":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH1)
-		"workbench #2":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH2)
-		"workbench #3":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH3)
-		"grain mill #1":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL1)
-		"grain mill #2":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL2)
-		"grain mill #3":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL3)
-		"stove #1":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.STOVE1)
-		"stove #2":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.STOVE2)
-		"stove #3":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			Tiles.object_tiles.set_cellv(location, Placables.STOVE3)
-		"tent":
 			match direction:
 				"down":
-					Tiles.remove_invalid_tiles(location, Vector2(4,4))
-					var tent = TentDown.instance()
-					tent.name = str(id)
-					tent.global_position = Tiles.fence_tiles.map_to_world(location)
-					Server.world.call_deferred("add_child", tent, true)
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH1)
 				"up":
-					Tiles.remove_invalid_tiles(location, Vector2(4,4))
-					var tent = TentUp.instance()
-					tent.name = str(id)
-					tent.global_position = Tiles.fence_tiles.map_to_world(location)
-					Server.world.call_deferred("add_child", tent, true)
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 41)
 				"right":
-					Tiles.remove_invalid_tiles(location, Vector2(6,3))
-					var tent = TentRight.instance()
-					tent.name = str(id)
-					tent.global_position = Tiles.fence_tiles.map_to_world(location)
-					Server.world.call_deferred("add_child", tent, true)
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 43)
 				"left":
-					Tiles.remove_invalid_tiles(location, Vector2(6,3))
-					var tent = TentLeft.instance()
-					tent.name = str(id)
-					tent.global_position = Tiles.fence_tiles.map_to_world(location)
-					Server.world.call_deferred("add_child", tent, true)
-		"sleeping bag down":
-			Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 42)
+		"workbench #2":
+			match direction:
+				"down":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH2)
+				"up":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 44)
+				"right":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 46)
+				"left":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 45)
+		"workbench #3":
+			match direction:
+				"down":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH3)
+				"up":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 47)
+				"right":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 49)
+				"left":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 48)
+		"grain mill #1":
+			match direction:
+				"down":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL1)
+				"up":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 53)
+				"right":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 54)
+				"left":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 55)
+		"grain mill #2":
+			match direction:
+				"down":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL2)
+				"up":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 50)
+				"right":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 51)
+				"left":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 52)
+		"grain mill #3":
+			match direction:
+				"down":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL3)
+				"up":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 56)
+				"right":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 57)
+				"left":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 58)
+		"stove #1":
+			match direction:
+				"down":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.STOVE1)
+				"up":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 59)
+				"right":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 60)
+				"left":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 61)
+		"stove #2":
+			match direction:
+				"down":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.STOVE2)
+				"up":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 62)
+				"right":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 63)
+				"left":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 64)
+		"stove #3":
+			match direction:
+				"down":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, Placables.STOVE3)
+				"up":
+					Tiles.remove_invalid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 65)
+				"right":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 66)
+				"left":
+					Tiles.remove_invalid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 67)
+		"sleeping bag":
 			var sleepingBag = SleepingBag.instance()
-			sleepingBag.direction = "down"
+			sleepingBag.direction = direction
 			Server.world.add_child(sleepingBag, true)
 			sleepingBag.global_position = Tiles.valid_tiles.map_to_world(location) 
-		"sleeping bag up":
-			Tiles.remove_invalid_tiles(location, Vector2(1,2))
-			var sleepingBag = SleepingBag.instance()
-			sleepingBag.direction = "up"
-			Server.world.add_child(sleepingBag, true)
-			sleepingBag.global_position = Tiles.valid_tiles.map_to_world(location) 
-		"sleeping bag right":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			var sleepingBag = SleepingBag.instance()
-			sleepingBag.direction = "right"
-			Server.world.add_child(sleepingBag, true)
-			sleepingBag.global_position = Tiles.valid_tiles.map_to_world(location) 
-		"sleeping bag left":
-			Tiles.remove_invalid_tiles(location, Vector2(2,1))
-			var sleepingBag = SleepingBag.instance()
-			sleepingBag.direction = "left"
-			Server.world.add_child(sleepingBag, true)
-			sleepingBag.global_position = Tiles.valid_tiles.map_to_world(location) 
+			if direction == "up" or direction == "down":
+				Tiles.remove_invalid_tiles(location, Vector2(1,2))
+			else:
+				Tiles.remove_invalid_tiles(location, Vector2(2,1))
+
 

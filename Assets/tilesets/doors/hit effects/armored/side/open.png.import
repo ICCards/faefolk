@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/open.png-50f86f1b76cc96525dd6688526bac8af.stex"
+path="res://.import/open.png-81447bb29fe8bba31fddc060c5cabc28.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/doors/hit effects/armored/side/open.png"
-dest_files=[ "res://.import/open.png-50f86f1b76cc96525dd6688526bac8af.stex" ]
+source_file="res://Assets/tilesets/doors/hit effects/armored/side/open.png"
+dest_files=[ "res://.import/open.png-81447bb29fe8bba31fddc060c5cabc28.stex" ]
 
 [params]
 

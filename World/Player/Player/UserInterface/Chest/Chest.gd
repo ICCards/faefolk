@@ -8,7 +8,7 @@ onready var locked_slots = $LockedSlots
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
 
-var chest_id
+var id
 var item
 
 func _ready():
@@ -39,10 +39,10 @@ func _ready():
 func initialize():
 	Server.player_node.destroy_placable_object()
 	show()
-	chest_id = PlayerInventory.chest_id
 	initialize_chest_data()
 	initialize_inventory()
 	initialize_hotbar()
+	
 
 func destroy():
 	set_physics_process(false)
@@ -75,8 +75,8 @@ func initialize_chest_data():
 	for i in range(slots_in_chest.size()):
 		if slots_in_chest[i].item != null:
 			slots_in_chest[i].removeFromSlot()
-		if PlayerInventory.chests[chest_id].has(i):
-			slots_in_chest[i].initialize_item(PlayerInventory.chests[chest_id][i][0], PlayerInventory.chests[chest_id][i][1], PlayerInventory.chests[chest_id][i][2])
+		if PlayerInventory.chests[id].has(i):
+			slots_in_chest[i].initialize_item(PlayerInventory.chests[id][i][0], PlayerInventory.chests[id][i][1], PlayerInventory.chests[id][i][2])
 
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
@@ -118,7 +118,7 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 func right_click_slot(slot):
 	if slot.item.item_quantity > 1:
 		var new_qt = slot.item.item_quantity / 2
-		PlayerInventory.decrease_item_quantity(slot, slot.item.item_quantity / 2, chest_id)
+		PlayerInventory.decrease_item_quantity(slot, slot.item.item_quantity / 2, id)
 		slot.item.decrease_item_quantity(slot.item.item_quantity / 2)
 		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
@@ -131,14 +131,14 @@ func return_holding_item(item_name, qt):
 
 
 func left_click_empty_slot(slot: SlotClass):
-	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, chest_id)
+	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
 	slot.putIntoSlot(find_parent("UserInterface").holding_item)
 	find_parent("UserInterface").holding_item = null
 
 
 func left_click_different_item(event: InputEvent, slot: SlotClass):
-	PlayerInventory.remove_item(slot, chest_id)
-	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, chest_id)
+	PlayerInventory.remove_item(slot, id)
+	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
 	var temp_item = slot.item
 	slot.pickFromSlot()
 	temp_item.global_position = event.global_position
@@ -150,12 +150,12 @@ func left_click_same_item(slot: SlotClass):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 	var able_to_add = stack_size - slot.item.item_quantity
 	if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-		PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity, chest_id)
+		PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity, id)
 		slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
 	else:
-		PlayerInventory.add_item_quantity(slot, able_to_add, chest_id)
+		PlayerInventory.add_item_quantity(slot, able_to_add, id)
 		slot.item.add_item_quantity(able_to_add)
 		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 
@@ -166,10 +166,10 @@ func left_click_not_holding(slot: SlotClass):
 	var slots_in_hotbar = hotbar_slots.get_children()
 	if slot.slotType == slot.SlotType.INVENTORY or slot.slotType == slot.SlotType.HOTBAR_INVENTORY:
 		for i in range(slots_in_chest.size()):
-			if not PlayerInventory.chests[chest_id].has(i):
+			if not PlayerInventory.chests[id].has(i):
 				item = null
 				PlayerInventory.remove_item(slot)
-				PlayerInventory.add_item_to_empty_slot(slot.item, chest_slots.get_children()[i], chest_id)
+				PlayerInventory.add_item_to_empty_slot(slot.item, chest_slots.get_children()[i], id)
 				slot.removeFromSlot()
 				initialize_chest_data()
 				initialize_inventory()
@@ -179,7 +179,7 @@ func left_click_not_holding(slot: SlotClass):
 			for i in range(slots_in_hotbar.size()):
 				if not PlayerInventory.hotbar.has(i):
 					item = null
-					PlayerInventory.remove_item(slot, chest_id)
+					PlayerInventory.remove_item(slot, id)
 					PlayerInventory.add_item_to_empty_slot(slot.item, hotbar_slots.get_children()[i])
 					slot.removeFromSlot()
 					initialize_inventory()
@@ -189,7 +189,7 @@ func left_click_not_holding(slot: SlotClass):
 			for i in range(slots_in_inventory.size()):
 				if not PlayerInventory.inventory.has(i):
 					item = null
-					PlayerInventory.remove_item(slot, chest_id)
+					PlayerInventory.remove_item(slot, id)
 					PlayerInventory.add_item_to_empty_slot(slot.item, inventory_slots.get_children()[i])
 					slot.removeFromSlot()
 					initialize_inventory()
@@ -226,4 +226,4 @@ func _on_TrashButton_pressed():
 
 
 func _on_btn_pressed():
-	find_parent("UserInterface").close_chest()
+	find_parent("UserInterface").close_chest(id)

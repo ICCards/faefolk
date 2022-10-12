@@ -100,7 +100,7 @@ visible = false
 position = Vector2( 21, -107 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 15 )
-frame = 2
+frame = 4
 playing = true
 
 [node name="SmeltTimer" type="Timer" parent="."]

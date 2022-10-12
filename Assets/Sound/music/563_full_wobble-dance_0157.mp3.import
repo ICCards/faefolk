@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/563_full_wobble-dance_0157.mp3-bbb3671128ec33788881e41e7f17430d.mp3str"
+path="res://.import/563_full_wobble-dance_0157.mp3-b056af99124252fdc31d0be66575e16f.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Music/563_full_wobble-dance_0157.mp3"
-dest_files=[ "res://.import/563_full_wobble-dance_0157.mp3-bbb3671128ec33788881e41e7f17430d.mp3str" ]
+source_file="res://Assets/Sound/music/563_full_wobble-dance_0157.mp3"
+dest_files=[ "res://.import/563_full_wobble-dance_0157.mp3-b056af99124252fdc31d0be66575e16f.mp3str" ]
 
 [params]
 

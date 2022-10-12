@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Furnace-x2.png-79012e4be094cfe3780c95c199b4ab5f.stex"
+path="res://.import/Furnace-x2.png-f71f2635687318d3bc2e41af13b4af52.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/Furniture/Furnace-x2.png"
-dest_files=[ "res://.import/Furnace-x2.png-79012e4be094cfe3780c95c199b4ab5f.stex" ]
+source_file="res://Assets/tilesets/Furniture/Furnace-x2.png"
+dest_files=[ "res://.import/Furnace-x2.png-f71f2635687318d3bc2e41af13b4af52.stex" ]
 
 [params]
 

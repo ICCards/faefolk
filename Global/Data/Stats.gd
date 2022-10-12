@@ -43,7 +43,7 @@ const DUCK_HEALTH = 50
 const BUNNY_HEALTH = 50
 const BEAR_HEALTH = 160
 const BOAR_HEALTH = 140
-
+const DEER_HEALTH = 150
 
 
 func return_pickaxe_damage(tool_name):
@@ -73,6 +73,22 @@ func return_axe_damage(tool_name):
 			return Stats.IRON_TOOL_DAMAGE
 		"gold axe":
 			return Stats.GOLD_TOOL_DAMAGE
+
+func return_sword_damage(tool_name):
+	match tool_name:
+		"wood sword":
+			return Stats.WOOD_SWORD_DAMAGE
+		"stone sword":
+			return Stats.STONE_SWORD_DAMAGE
+		"bronze sword":
+			return Stats.BRONZE_SWORD_DAMAGE
+		"iron sword":
+			return Stats.IRON_SWORD_DAMAGE
+		"gold sword":
+			return Stats.GOLD_SWORD_DAMAGE
+		"arrow":
+			return Stats.ARROW_DAMAGE
+
 
 func return_item_drop_quantity(tool_name, object_name):
 	match object_name:

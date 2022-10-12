@@ -11,10 +11,6 @@ var item_name
 var item_category
 var state
 
-var dimensions_dict = {
-	"furnace" : Vector2(1,1),
-	"tool cabinet": Vector2(2,1),
-}
 
 enum {
 	TENT, 
@@ -61,7 +57,9 @@ func initialize():
 		state = TENT
 	elif item_name == "sleeping bag":
 		state = SLEEPING_BAG
-	elif item_name == "furnace" or item_name == "tool cabinet":
+	elif item_name == "furnace" or item_name == "tool cabinet" or item_name == "stone chest" or item_name == "wood chest" or \
+	item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3" or item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or\
+	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		state = ROTATABLE
 	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR
@@ -135,14 +133,14 @@ func set_dimensions():
 func place_rotatable_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	var direction = directions[direction_index]
-	var dimensions = dimensions_dict[item_name]
+	var dimensions = Constants.dimensions_dict[item_name]
 	get_rotation_index()
 	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + direction + ".png")
 	if (direction == "up" or direction == "down"):
 		$ColorIndicator.tile_size = dimensions
 	else:
 		$ColorIndicator.tile_size = Vector2(dimensions.y, dimensions.x)
-	if Server.player_node.position.distance_to(mousePos) > 120:
+	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions):
@@ -168,7 +166,7 @@ func place_rotatable_state():
 
 func place_foundation_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.foundation_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > 120:
+	if Tiles.foundation_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif Tiles.valid_tiles.get_cellv(location) != 0 and Tiles.wall_tiles.get_cellv(location) == -1:
@@ -218,7 +216,7 @@ func place_buildings_state():
 	$ColorIndicator.visible = true
 	$ColorIndicator.tile_size = Vector2(1, 1)
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > 120:
+	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
@@ -307,7 +305,7 @@ func get_rotation_index():
 
 func place_item_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
+	if Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench #1" or item_name == "grain mill #1" or item_name == "stove #1" \
@@ -326,7 +324,7 @@ func place_item_state():
 
 func place_seed_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
+	if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:	

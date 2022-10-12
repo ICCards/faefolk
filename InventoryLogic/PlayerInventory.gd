@@ -17,34 +17,24 @@ var viewInventoryMode = false
 var viewMapMode = false
 var interactive_screen_mode = false
 var chatMode = false
-var chest_id = null
-var workbench_id = null
-var stove_id = null
-var grain_mill_id = null
-var furnace_id = null
 var is_inside_sleeping_bag_area = false
 var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-#	1: ["wheat", 20, null],
-#	2: ["gold ore", 60, null],
-#	3: ["rope", 20, null],
-#	4: ["wood", 800, null],
-#	5: ["stone", 800, null],
-#	0: ["iron ingot", 60, null],
-#	6: ["potato seeds", 60, null],
-#	7: ["bronze ingot", 12, null],
-#	8: ["bread", 60, null],
+	2: ["gold ore", 32, null],
+	4: ["wood", 400, null],
+	5: ["stone", 400, null],
+	9: ["rope", 12, null],
+	0: ["iron ingot", 27, null],
+	6: ["potato seeds", 60, null],
+	7: ["bronze ingot", 12, null],
 }
 
 var hotbar = {
-#	0 : ["wood box", 800, null],
-#	2 : ["wood sword", 1, null],
-#	3 : ["wood sword", 1, null],
-#	4 : ["stone sword", 1, null],
-#	5 : ["bronze axe", 1, null],
-#	6 : ["iron pickaxe", 1, null],
+	0 : ["wood box", 800, null],
+	5 : ["scythe", 1, null],
+	6 : ["gold sword", 1, null],
 #	8 : ["bow", 1, null],
 #	9 : ["arrow", 800, null],
 }
@@ -233,8 +223,7 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 			update_inventory_slot_visual(i, inventory[i][0], inventory[i][1], inventory[i][2])
 			return
 	if hotbar.size() == NUM_HOTBAR_SLOTS:
-		### FIX
-		print("ITEM CANT BE ADDED TO INVENTORY " + item_name)
+		InstancedScenes.initiateInventoryItemDrop([item_name, item_quantity, item_health], Server.player_node.position)
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity, item_health):
 	var slot = HotbarSlots.get_node("Slot" + str(slot_index + 1))

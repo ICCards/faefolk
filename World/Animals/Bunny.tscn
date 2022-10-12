@@ -114,9 +114,10 @@ anims/death = SubResource( 11 )
 anims/hit = SubResource( 13 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 100.0
-target_desired_distance = 100.0
+path_desired_distance = 20.0
+target_desired_distance = 20.0
 avoidance_enabled = true
+radius = 1.0
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]

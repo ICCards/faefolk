@@ -80,3 +80,12 @@ func returnCategoryColor(category):
 			return Color("ff25f1")
 		"Fish":
 			return Color("ff6d00")
+		"Forage":
+			return Color("ffc500")
+
+func valid_holding_item_category(item_category):
+	if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop" or item_category == "Forage":
+		return true
+	return false
+	
+	

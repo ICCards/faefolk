@@ -26,6 +26,22 @@ func set_direction():
 			$Position2D.position = Vector2(32,-32) 
 			$Position2D/Image.flip_v = false
 
+func _unhandled_input(event):
+	if event.is_action_pressed("action"):
+		if $Position2D/DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
+			Server.player_node.sleep(direction, adjusted_pos())
+
+func adjusted_pos():
+	match direction:
+		"down":
+			return position + Vector2(16,30)
+		"up":
+			return position + Vector2(16,30)
+		"right":
+			return position + Vector2(16,30)
+		"left":
+			return position + Vector2(16,30)
+
 func _on_HurtBox_area_entered(area):
 	var itemDrop = ItemDrop.instance()
 	itemDrop.initItemDropType("sleeping bag")

@@ -371,7 +371,6 @@ margin_left = -44.0
 margin_top = -121.0
 margin_right = 43.0
 margin_bottom = -76.0
-value = 85.0
 texture_progress = ExtResource( 12 )
 
 [connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]

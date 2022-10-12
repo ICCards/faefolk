@@ -5,6 +5,7 @@ onready var plains = $GeneratedTiles/GreenGrassTiles
 onready var forest = $GeneratedTiles/DarkGreenGrassTiles
 onready var water = $GeneratedTiles/Water
 onready var validTiles = $ValidTiles
+onready var navTiles = $Navigation2D/NavTiles
 onready var hoed = $FarmingTiles/HoedAutoTiles
 onready var watered = $FarmingTiles/WateredAutoTiles
 onready var snow = $GeneratedTiles/SnowTiles
@@ -27,19 +28,25 @@ onready var IC_Ghost = preload("res://World/Enemies/ICGhost.tscn")
 onready var Bunny = preload("res://World/Animals/Bunny.tscn")
 onready var Duck = preload("res://World/Animals/Duck.tscn")
 onready var Boar = preload("res://World/Animals/Boar.tscn")
+onready var Deer = preload("res://World/Animals/Deer.tscn")
+onready var Clam = preload("res://World/Objects/Nature/Forage/Clam.tscn")
+onready var Starfish = preload("res://World/Objects/Nature/Forage/Starfish.tscn")
 onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
 onready var HoedDirtEffect = preload("res://World/Objects/Nature/Effects/HoedDirt.tscn") 
 onready var DirtTrailEffect = preload("res://World/Objects/Nature/Effects/DustTrailEffect.tscn")
 onready var UpgradeBuildingEffect = preload("res://World/Objects/Nature/Effects/UpgradeBuilding.tscn")
+onready var RemoveBuildingEffect = preload("res://World/Objects/Nature/Effects/RemoveBuilding.tscn")
+
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
-onready var DesertTreeObject = preload("res://World/Objects/Nature/Trees/DesertTreeObject.tscn")
-onready var BranchObject = preload("res://World/Objects/Nature/Trees/TreeBranchObject.tscn")
-onready var StumpObject = preload("res://World/Objects/Nature/Trees/TreeStumpObject.tscn")
-onready var OreObject = preload("res://World/Objects/Nature/Ores/OreObjectLarge.tscn")
-onready var SmallOreObject = preload("res://World/Objects/Nature/Ores/OreObjectSmall.tscn")
-onready var TallGrassObject = preload("res://World/Objects/Nature/Grasses/TallGrassObject.tscn")
-onready var FlowerObject = preload("res://World/Objects/Nature/Grasses/FlowerObject.tscn")
+onready var DesertTree = preload("res://World/Objects/Nature/Trees/DesertTree.tscn")
+onready var Log = preload("res://World/Objects/Nature/Trees/Log.tscn")
+onready var Stump = preload("res://World/Objects/Nature/Trees/Stump.tscn")
+onready var LargeOre = preload("res://World/Objects/Nature/Ores/LargeOre.tscn")
+onready var SmallOre = preload("res://World/Objects/Nature/Ores/SmallOre.tscn")
+onready var TallGrass = preload("res://World/Objects/Nature/Grasses/TallGrass.tscn")
+onready var Weed = preload("res://World/Objects/Nature/Grasses/Weed.tscn")
+onready var Flower = preload("res://World/Objects/Nature/Forage/Flower.tscn")
 onready var LoadingScreen = preload("res://MainMenu/LoadingScreen.tscn")
 var rng = RandomNumberGenerator.new()
 
@@ -58,10 +65,11 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 60
-const NUM_BUNNIES = 60
-const NUM_BEARS = 40
+const NUM_DUCKS = 40
+const NUM_BUNNIES = 40
+const NUM_BEARS = 10
 const NUM_BOARS = 0
+const NUM_DEER = 0
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -82,6 +90,8 @@ func _ready():
 	Server.generated_map.clear()
 	Server.generate_map()
 	wait_for_map()
+	
+
 
 
 func wait_for_map():
@@ -156,6 +166,7 @@ func buildMap(map):
 	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
 	Tiles.watered_tiles = $FarmingTiles/WateredAutoTiles
 	Tiles.ocean_tiles = $GeneratedTiles/ShallowOcean
+	Tiles.deep_ocean_tiles = $GeneratedTiles/DeepOcean
 	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
 	Tiles.wall_tiles = $PlacableTiles/WallTiles
 	Tiles.selected_wall_tiles = $PlacableTiles/SelectedWallTiles
@@ -164,12 +175,6 @@ func buildMap(map):
 	Tiles.object_tiles = $PlacableTiles/ObjectTiles
 	Tiles.fence_tiles = $PlacableTiles/FenceTiles
 	Tiles.light_tiles = $PlacableTiles/LightTiles
-	#var polygon = NavigationPolygon.new()
-	#var outline = PoolVector2Array([Vector2(0, 0), Vector2(0, 50000), Vector2(50000, 50000), Vector2(50000, 0)])
-	#polygon.add_outline(outline)
-	#polygon.make_polygons_from_outlines()
-	#$NavPolygon.navpoly = polygon
-	var polygon = $NavPolygon.get_navigation_polygon()
 	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
@@ -214,7 +219,7 @@ func buildMap(map):
 		Tiles.remove_nature_invalid_tiles(loc, "tree")
 		var biome = map["tree"][id]["b"]
 		if biome == "desert":
-			var object = DesertTreeObject.instance()
+			var object = DesertTree.instance()
 			var pos = dirt.map_to_world(loc)
 			object.health = 100
 			object.position = pos + Vector2(0, -8)
@@ -242,7 +247,7 @@ func buildMap(map):
 		var loc = map["log"][id]["l"]
 		Tiles.remove_nature_invalid_tiles(loc, "log")
 		var variety = rng.randi_range(0, 11)
-		var object = BranchObject.instance()
+		var object = Log.instance()
 		object.name = id
 		object.variety = variety
 		object.location = loc
@@ -254,7 +259,7 @@ func buildMap(map):
 		var loc = map["stump"][id]["l"]
 		Tiles.remove_nature_invalid_tiles(loc, "stump")
 		treeTypes.shuffle()
-		var object = StumpObject.instance()
+		var object = Stump.instance()
 		object.variety = treeTypes.front()
 		object.location = loc
 		object.health = Stats.STUMP_HEALTH
@@ -268,7 +273,7 @@ func buildMap(map):
 		var loc = map["ore_large"][id]["l"]
 		Tiles.remove_nature_invalid_tiles(loc, "large ore")
 		oreTypes.shuffle()
-		var object = OreObject.instance()
+		var object = LargeOre.instance()
 		object.health = Stats.LARGE_ORE_HEALTH
 		object.name = id
 		object.variety = oreTypes.front()
@@ -281,7 +286,7 @@ func buildMap(map):
 		var loc = map["ore"][id]["l"]
 		Tiles.remove_nature_invalid_tiles(loc, "ore")
 		oreTypes.shuffle()
-		var object = SmallOreObject.instance()
+		var object = SmallOre.instance()
 		object.health = Stats.SMALL_ORE_HEALTH
 		object.name = id
 		object.variety = oreTypes.front()
@@ -295,7 +300,7 @@ func buildMap(map):
 		var loc = map["tall_grass"][id]["l"]
 		Tiles.remove_nature_invalid_tiles(loc, "tall grass")
 		count += 1
-		var object = TallGrassObject.instance()
+		var object = TallGrass.instance()
 		object.loc = loc
 		object.biome = map["tall_grass"][id]["b"]
 		object.name = id
@@ -307,11 +312,19 @@ func buildMap(map):
 	get_node("loadingScreen").set_phase("Building flowers")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
-		count += 1
 		var loc = map["flower"][id]["l"]
-		var object = FlowerObject.instance()
-		object.position = dirt.map_to_world(loc) + Vector2(16, 32)
-		$NatureObjects.add_child(object,true)
+		if Util.chance(50):
+			var object = Weed.instance()
+			object.location = loc
+			object.position = dirt.map_to_world(loc) + Vector2(16, 32)
+			$NatureObjects.add_child(object,true)
+		else:
+			var object = Flower.instance()
+			object.location = loc
+			object.position = dirt.map_to_world(loc)
+			$NatureObjects.add_child(object,true)
+		Tiles.remove_nature_invalid_tiles(loc, "flower")
+		count += 1
 		if count == 130:
 			yield(get_tree().create_timer(0.25), "timeout")
 			count = 0
@@ -332,7 +345,24 @@ func buildMap(map):
 	Server.isLoaded = true
 	Server.world = self
 	spawn_animals()
+	set_random_beach_forage()
+	set_nav()
+	
+	
+func set_nav():
+	var player_loc = validTiles.world_to_map(Server.player_node.position)
+	navTiles.clear()
+	for x in range(60):
+		for y in range(60):
+			var loc = player_loc+Vector2(-30,-30)+Vector2(x,y)
+			if validTiles.get_cellv(loc) != -1 and Tiles.isCenterBitmaskTile(loc, validTiles):
+				navTiles.set_cellv(loc,0)
+			elif wetSand.get_cellv(loc) != -1 and deep_ocean.get_cellv(loc) == -1:
+				navTiles.set_cellv(loc,0)
+	$Timer.start()
 
+func _on_Timer_timeout():
+	set_nav()
 
 func update_tile_bitmask_regions():
 	dirt.update_bitmask_region()
@@ -361,6 +391,25 @@ func spawn_animals():
 		spawnRandomBear()
 	for i in range(NUM_BOARS):
 		spawnRandomBoar()
+	for i in range(NUM_DEER):
+		spawnRandomDeer()
+	
+func set_random_beach_forage():
+	for id in Server.generated_map["beach"]:
+		if Util.chance(7):
+			var loc = Server.generated_map["beach"][id]
+			if dirt.get_cellv(loc) == -1 and forest.get_cellv(loc) == -1 and snow.get_cellv(loc) == -1 and plains.get_cellv(loc) == -1:
+				if Util.chance(50):
+					var clam = Clam.instance()
+					clam.location = loc
+					clam.global_position = Tiles.valid_tiles.map_to_world(loc)
+					$ForageItems.add_child(clam)
+				else:
+					var starfish = Starfish.instance()
+					starfish.location = loc
+					starfish.global_position = Tiles.valid_tiles.map_to_world(loc)
+					$ForageItems.add_child(starfish)
+
 	
 func set_water_tiles():
 	for x in range(300): # fill ocean
@@ -467,8 +516,8 @@ func check_and_remove_invalid_autotiles(map):
 		yield(get_tree().create_timer(1.0), "timeout")
 
 func build_valid_tiles():
-	for x in range(1000):
-		for y in range(1000):
+	for x in range(800):
+		for y in range(800):
 			validTiles.set_cellv(Vector2(x+1, y+1), 0)
 
 func ChangeTile(data):
@@ -586,6 +635,13 @@ func spawnRandomBoar():
 		$Animals.add_child(boar)
 		boar.global_position = loc
 
+func spawnRandomDeer():
+	var loc = returnValidSpawnLocation()
+	if loc != null:
+		var deer = Deer.instance()
+		$Animals.add_child(deer)
+		deer.global_position = loc
+
 func play_watering_can_effect(loc):
 	var wateringCanEffect = WateringCanEffect.instance()
 	wateringCanEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
@@ -608,4 +664,10 @@ func play_upgrade_building_effect(loc):
 	upgradeBuildingEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
 	add_child(upgradeBuildingEffect)
 	
+func play_remove_building_effect(loc):
+	var removeBuildingEffect = RemoveBuildingEffect.instance()
+	removeBuildingEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
+	add_child(removeBuildingEffect)
 	
+
+

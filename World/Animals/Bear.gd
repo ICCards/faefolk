@@ -4,12 +4,14 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var _idle_timer: Timer = $IdleTimer
 onready var _chase_timer: Timer = $ChaseTimer
+onready var _end_chase_state_timer: Timer = $EndChaseState
 
 var player = Server.player_node
 var direction: String = "down"
 var dying: bool = false
 var attacking: bool = false
 var playing_sound_effect: bool = false
+var changed_direction: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
@@ -17,7 +19,7 @@ var knockback := Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var state = IDLE
 var health: int = Stats.BEAR_HEALTH
-var KNOCKBACK_AMOUNT = 400
+var KNOCKBACK_AMOUNT = 300
 var MAX_MOVE_DISTANCE: float = 400.0
 
 enum {
@@ -33,7 +35,9 @@ func _ready():
 	_idle_timer.wait_time = rand_range(4.0, 6.0)
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
+	_end_chase_state_timer.connect("timeout", self, "end_chase_state")
 	navigation_agent.connect("velocity_computed", self, "move")
+	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
 
 func _update_pathfinding_idle():
@@ -81,16 +85,30 @@ func move(velocity: Vector2) -> void:
 		_velocity = move_and_slide(velocity)
 
 func set_direction():
-	if abs(_velocity.x) >= abs(_velocity.y):
-		if _velocity.x >= 0:
-			direction = "right"
+	if not changed_direction:
+		if abs(_velocity.x) >= abs(_velocity.y):
+			if _velocity.x >= 0:
+				if direction != "right":
+					direction = "right"
+					set_change_direction_wait()
+			else:
+				if direction != "left":
+					direction = "left"
+					set_change_direction_wait()
 		else:
-			direction = "left"
-	else:
-		if _velocity.y >= 0:
-			direction = "down"
-		else:
-			direction = "up"
+			if _velocity.y >= 0:
+				if direction != "down":
+					direction = "down"
+					set_change_direction_wait()
+			else:
+				if direction != "up":
+					direction = "up"
+					set_change_direction_wait()
+
+func set_change_direction_wait():
+	changed_direction = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	changed_direction = false
 
 
 func play_groan_sound_effect():
@@ -133,18 +151,22 @@ func swing():
 	if not player.state == 5: # player dead
 		if not attacking:
 			attacking = true
-			yield(get_tree().create_timer(0.15), "timeout")
+			yield(get_tree().create_timer(0.1), "timeout")
 			play_groan_sound_effect()
 			if (position + Vector2(0,-26)).distance_to(player.position) < 45:
 				$AnimationPlayer.play("bite " + direction)
 			else:
-				$AnimationPlayer.play("swing " + direction)
+				if Util.chance(25):
+					$AnimationPlayer.play("bite " + direction)
+				else:
+					$AnimationPlayer.play("swing " + direction)
 			yield($AnimationPlayer, "animation_finished")
 			attacking = false
 			animation_player.play("loop")
 			state = CHASE
 	else:
 		end_chase_state()
+
 
 
 func _on_HurtBox_area_entered(area):
@@ -154,38 +176,25 @@ func _on_HurtBox_area_entered(area):
 		knockback = area.knockback_vector * 100
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
+	_end_chase_state_timer.stop()
+	_end_chase_state_timer.start()
 	$HurtBox/AnimationPlayer.play("hit")
-	deduct_health(area.tool_name)
+	health -= Stats.return_sword_damage(area.tool_name)
 	if health <= 0 and not dying:
 		dying = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
-		$AnimationPlayer.stop()
-		$AnimationPlayer.play("death")
-		yield($AnimationPlayer, "animation_finished")
+		animation_player.stop()
+		animation_player.play("death")
+		yield(animation_player, "animation_finished")
 		queue_free()
 
 
-func deduct_health(tool_name):
-	match tool_name:
-		"wood sword":
-			health -= Stats.WOOD_SWORD_DAMAGE
-		"stone sword":
-			health -= Stats.STONE_SWORD_DAMAGE
-		"bronze sword":
-			health -= Stats.BRONZE_SWORD_DAMAGE
-		"iron sword":
-			health -= Stats.IRON_SWORD_DAMAGE
-		"gold sword":
-			health -= Stats.GOLD_SWORD_DAMAGE
-		"arrow":
-			health -= Stats.ARROW_DAMAGE
-
 func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
+	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
+	hide()
 
 func _on_DetectPlayer_area_entered(area):
 	start_chase_state()
@@ -195,11 +204,14 @@ func end_chase_state():
 	stop_sound_effects()
 	_idle_timer.start()
 	_chase_timer.stop()
+	_end_chase_state_timer.stop()
 	state = IDLE
 
 func start_chase_state():
-	navigation_agent.max_speed = 250
+	navigation_agent.max_speed = 240
 	start_sound_effects()
 	_idle_timer.stop()
 	_chase_timer.start()
+	_end_chase_state_timer.start()
 	state = CHASE
+	

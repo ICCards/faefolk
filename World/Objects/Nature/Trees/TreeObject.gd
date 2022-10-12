@@ -87,7 +87,7 @@ func PlayEffect(player_id):
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", Vector2(-24, 12))
 			animation_player_stump.play("stump hit right")
 	else:
-		Tiles.reset_valid_tiles(location, "tree")
+		Tiles.set_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects_stump.stream = Sounds.stump_break
 		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects_stump.play()
@@ -147,7 +147,7 @@ func _on_Hurtbox_area_entered(_area):
 			animation_player_stump.play("stump hit right")
 	elif health <= 0 and not tree_broke: 
 		tree_broke = true
-		Tiles.reset_valid_tiles(location, "tree")
+		Tiles.set_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects_stump.stream = Sounds.stump_break
 		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects_stump.play()

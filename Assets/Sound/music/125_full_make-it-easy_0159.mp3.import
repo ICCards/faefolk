@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/125_full_make-it-easy_0159.mp3-e6abfcfb512f4a85a0cd5a97ed260161.mp3str"
+path="res://.import/125_full_make-it-easy_0159.mp3-b81a910446c3ca38c7214037c3cb5136.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Music/125_full_make-it-easy_0159.mp3"
-dest_files=[ "res://.import/125_full_make-it-easy_0159.mp3-e6abfcfb512f4a85a0cd5a97ed260161.mp3str" ]
+source_file="res://Assets/Sound/music/125_full_make-it-easy_0159.mp3"
+dest_files=[ "res://.import/125_full_make-it-easy_0159.mp3-b81a910446c3ca38c7214037c3cb5136.mp3str" ]
 
 [params]
 

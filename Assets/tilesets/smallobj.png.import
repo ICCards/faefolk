@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/smallobj.png-94801ee36e16125aa03a5efe7953dce8.stex"
+path="res://.import/smallobj.png-9a29d49ea571dea747d3e599a742474c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/smallobj.png"
-dest_files=[ "res://.import/smallobj.png-94801ee36e16125aa03a5efe7953dce8.stex" ]
+source_file="res://Assets/tilesets/smallobj.png"
+dest_files=[ "res://.import/smallobj.png-9a29d49ea571dea747d3e599a742474c.stex" ]
 
 [params]
 

@@ -185,5 +185,3 @@ margin_right = 2595.0
 margin_bottom = 61.0
 theme = ExtResource( 5 )
 text = "0"
-
-[connection signal="mouse_entered" from="Bg" to="." method="_on_Bg_mouse_entered"]

@@ -4,10 +4,10 @@ extends Control
 func _ready():
 	$button.texture_normal = load("res://Assets/Images/inventory_icons/"+ JsonData.item_data[name]["ItemCategory"] + "/"  + name + ".png")
 	set_locked()
-	
-	
+
+
 func set_locked():
-	if get_node("../../").level == "stove #1" or get_node("../../").level == "workbench #1":
+	if get_node("../../").level == "1":
 		if get_node("../../").level_1_items.find(name) != -1:
 			$button.modulate = Color("ffffff") # unlocked
 			$button.material.set_shader_param("flash_modifier", 0)
@@ -15,7 +15,7 @@ func set_locked():
 			$button.disabled = true
 			$button.modulate = Color("50ffffff") # locked
 			$button.material.set_shader_param("flash_modifier", 1)
-	elif get_node("../../").level == "stove #2" or get_node("../../").level == "workbench #2":
+	elif get_node("../../").level == "2":
 		if get_node("../../").level_1_items.find(name) != -1 or get_node("../../").level_2_items.find(name) != -1:
 			$button.modulate = Color("ffffff") # unlocked
 			$button.material.set_shader_param("flash_modifier", 0)

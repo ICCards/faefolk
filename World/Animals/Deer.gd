@@ -13,6 +13,9 @@ var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
+var changed_direction: bool = false
+var health: int = Stats.DEER_HEALTH
+var KNOCKBACK_AMOUNT = 300
 
 var state = IDLE
 
@@ -29,6 +32,7 @@ func _ready():
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	navigation_agent.connect("velocity_computed", self, "move") 
+	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
 func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.global_position)
@@ -37,20 +41,20 @@ func _update_pathfinding_idle():
 	navigation_agent.set_target_location(get_random_pos())
 	
 func get_random_pos():
-	random_pos = Vector2(rand_range(-300, 300), rand_range(-300, 300))
-	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
+	random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
+	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position + random_pos)) == -1:
 		return position + random_pos
-	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1:
+	elif Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position - random_pos)) == -1:
 		return position - random_pos
 	else:
 		return position
 	
 func move(velocity: Vector2) -> void:
-	if not dying:
-		velocity = move_and_slide(velocity)
+	if not dying and not attacking:
+		_velocity = move_and_slide(velocity)
 
 func _physics_process(delta):
-	if state == ATTACK:
+	if dying:
 		return
 	if navigation_agent.is_navigation_finished():
 		animation_player.play("idle_" + direction)
@@ -65,19 +69,52 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(_velocity)
 	
 func set_direction():
-	if abs(_velocity.x) >= abs(_velocity.y):
-		if _velocity.x >= 0:
-			direction = "right"
+	if not changed_direction:
+		if abs(_velocity.x) >= abs(_velocity.y):
+			if _velocity.x >= 0:
+				if direction != "right":
+					direction = "right"
+					set_change_direction_wait()
+			else:
+				if direction != "left":
+					direction = "left"
+					set_change_direction_wait()
 		else:
-			direction = "left"
-	else:
-		if _velocity.y >= 0:
-			direction = "down"
-		else:
-			direction = "up"
+			if _velocity.y >= 0:
+				if direction != "down":
+					direction = "down"
+					set_change_direction_wait()
+			else:
+				if direction != "up":
+					direction = "up"
+					set_change_direction_wait()
+
+func set_change_direction_wait():
+	changed_direction = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	changed_direction = false
+
 
 func _on_HurtBox_area_entered(area):
-	start_chase_state()
-	
-func start_chase_state():
-	pass
+	if area.knockback_vector != null:
+		knockback = area.knockback_vector * 100
+	if area.name == "SwordSwing":
+		Stats.decrease_tool_health()
+	$HurtBox/AnimationPlayer.play("hit")
+	health -= Stats.return_sword_damage(area.tool_name)
+	if health <= 0 and not dying:
+		dying = true
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+		$CollisionShape2D.set_deferred("disabled", true)
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("death")
+		yield($AnimationPlayer, "animation_finished")
+		queue_free()
+
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()
