@@ -157,28 +157,25 @@ func set_dimensions():
 			"down":
 				$Position2D.rotation_degrees = 0
 	elif item_name == "tool cabinet":
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Position2D/InteractiveArea.object_name = "tool cabinet"
+		$Position2D/InteractiveArea.object_level = ""
+		$Position2D/InteractiveArea.name = str(id)
+		PlayerInventory.tool_cabinets[id] = {}
 		$Position2D.scale.x = 2.0
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
 				$Position2D.position = Vector2(16, -32)
-				$Chest.position = Vector2(16, -32)
-				Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			"right":
 				$Position2D.rotation_degrees = 270
 				$Position2D.position = Vector2(16, -32)
-				$Chest.position = Vector2(16, -32)
-				Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			"up":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 180
-				$Chest.position = Vector2(32,-32)
-				Tiles.remove_invalid_tiles(location, Vector2(2,1))
 			"down":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
-				$Chest.position = Vector2(32,-32)
-				Tiles.remove_invalid_tiles(location, Vector2(2,1))
 
 
 

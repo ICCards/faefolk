@@ -174,7 +174,7 @@ func left_click_not_holding(slot: SlotClass):
 				initialize_inventory()
 				initialize_hotbar()
 				return
-	elif slot.slotType == slot.SlotType.CHEST:
+	elif slot.slotType == slot.SlotType.TOOL_CABINET:
 			for i in range(slots_in_hotbar.size()):
 				if not PlayerInventory.hotbar.has(i):
 					item = null

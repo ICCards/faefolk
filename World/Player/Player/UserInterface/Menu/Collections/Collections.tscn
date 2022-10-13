@@ -1,4 +1,4 @@
-[gd_scene load_steps=289 format=2]
+[gd_scene load_steps=228 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FoodCollection1.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=8]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/ForageCollection.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Themes/LockedAsset.tres" type="Material" id=10]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" type="Script" id=11]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/MineralCollection.gd" type="Script" id=14]
 
 [sub_resource type="Shader" id=16]
 code = "shader_type canvas_item;
@@ -30,27 +34,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=87]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=88]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=89]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -59,27 +42,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=90]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=91]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=92]
 resource_local_to_scene = true
@@ -90,27 +52,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=93]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=94]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=95]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -119,27 +60,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=96]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=97]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=98]
 resource_local_to_scene = true
@@ -150,27 +70,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=99]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=100]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=101]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -179,27 +78,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=102]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=103]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=104]
 resource_local_to_scene = true
@@ -210,27 +88,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=105]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=106]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=107]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -239,27 +96,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=108]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=109]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=110]
 resource_local_to_scene = true
@@ -270,27 +106,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=111]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=112]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=113]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -299,27 +114,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=114]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=115]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=116]
 resource_local_to_scene = true
@@ -330,27 +124,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=117]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=118]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=119]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -359,27 +132,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=120]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=121]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=122]
 resource_local_to_scene = true
@@ -390,27 +142,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=123]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=124]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=125]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -419,27 +150,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=126]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=127]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=128]
 resource_local_to_scene = true
@@ -450,27 +160,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=129]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=130]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=131]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -479,27 +168,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=132]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=133]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=134]
 resource_local_to_scene = true
@@ -510,27 +178,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=135]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=136]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=137]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -539,27 +186,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=138]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=139]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=140]
 resource_local_to_scene = true
@@ -570,27 +196,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=141]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=142]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=143]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -599,27 +204,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=144]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=145]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=146]
 resource_local_to_scene = true
@@ -630,27 +214,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=147]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=148]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=149]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -659,27 +222,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=150]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=151]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=152]
 resource_local_to_scene = true
@@ -690,27 +232,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=153]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=154]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=155]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -720,26 +241,107 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=156]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=157]
-script/source = "extends TextureRect
+[sub_resource type="StreamTexture" id=303]
+load_path = "res://.import/blue flower.png-0f469c6f8f90ae08649063cb4017a37e.stex"
 
+[sub_resource type="StreamTexture" id=306]
+load_path = "res://.import/purple flower.png-525a00a21d2f26953c9cc996a05c5141.stex"
 
+[sub_resource type="StreamTexture" id=309]
+load_path = "res://.import/red flower.png-8fee67064b9bfff5f32dfa877f8ba88b.stex"
 
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
+[sub_resource type="StreamTexture" id=312]
+load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
+[sub_resource type="StreamTexture" id=315]
+load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
-func set_locked():
-	pass
+[sub_resource type="StreamTexture" id=318]
+load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
+[sub_resource type="StreamTexture" id=321]
+load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
+[sub_resource type="StreamTexture" id=324]
+load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
+[sub_resource type="StreamTexture" id=327]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="StreamTexture" id=330]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="StreamTexture" id=333]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="StreamTexture" id=336]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="StreamTexture" id=339]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="StreamTexture" id=342]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="StreamTexture" id=345]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="StreamTexture" id=348]
+load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="ShaderMaterial" id=350]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=351]
+load_path = "res://.import/aquamarine.png-b19148f04753fa45b6d3a40852e26874.stex"
+
+[sub_resource type="ShaderMaterial" id=353]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=354]
+load_path = "res://.import/aquamarine.png-b19148f04753fa45b6d3a40852e26874.stex"
+
+[sub_resource type="ShaderMaterial" id=356]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=357]
+load_path = "res://.import/aquamarine.png-b19148f04753fa45b6d3a40852e26874.stex"
+
+[sub_resource type="ShaderMaterial" id=359]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=360]
+load_path = "res://.import/aquamarine.png-b19148f04753fa45b6d3a40852e26874.stex"
+
+[sub_resource type="ShaderMaterial" id=362]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=363]
+load_path = "res://.import/aquamarine.png-b19148f04753fa45b6d3a40852e26874.stex"
+
+[sub_resource type="ShaderMaterial" id=365]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="StreamTexture" id=366]
+load_path = "res://.import/aquamarine.png-b19148f04753fa45b6d3a40852e26874.stex"
 
 [sub_resource type="ShaderMaterial" id=20]
 resource_local_to_scene = true
@@ -750,27 +352,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=21]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=22]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=23]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -779,27 +360,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=24]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=25]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=26]
 resource_local_to_scene = true
@@ -810,27 +370,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=27]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=28]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=29]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -839,27 +378,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=30]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=31]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=32]
 resource_local_to_scene = true
@@ -870,27 +388,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=33]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=34]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=35]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -899,27 +396,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=36]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=37]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=38]
 resource_local_to_scene = true
@@ -930,27 +406,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=39]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=40]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -959,27 +414,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=42]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=43]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=44]
 resource_local_to_scene = true
@@ -990,27 +424,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=45]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=46]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=47]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1019,27 +432,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=48]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=49]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=50]
 resource_local_to_scene = true
@@ -1050,27 +442,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=51]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=52]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=53]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1079,27 +450,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=54]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=55]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=56]
 resource_local_to_scene = true
@@ -1110,27 +460,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=57]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=58]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=59]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1139,27 +468,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=60]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=61]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=62]
 resource_local_to_scene = true
@@ -1170,27 +478,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=63]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=64]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=65]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1199,27 +486,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=66]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=67]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=68]
 resource_local_to_scene = true
@@ -1230,27 +496,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=69]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=70]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=71]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1259,27 +504,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=72]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=73]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=74]
 resource_local_to_scene = true
@@ -1290,27 +514,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=75]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=76]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=77]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1319,27 +522,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=78]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=79]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=80]
 resource_local_to_scene = true
@@ -1350,27 +532,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=81]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=82]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=83]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1379,27 +540,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=84]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=85]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=158]
 resource_local_to_scene = true
@@ -1410,27 +550,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=159]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=160]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=161]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1439,27 +558,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=162]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=163]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=164]
 resource_local_to_scene = true
@@ -1470,27 +568,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=165]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=166]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=167]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1499,27 +576,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=168]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=169]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=170]
 resource_local_to_scene = true
@@ -1530,27 +586,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=171]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=172]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=173]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1559,27 +594,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=174]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=175]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=176]
 resource_local_to_scene = true
@@ -1590,27 +604,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=177]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=178]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=179]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1619,27 +612,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=180]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=181]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=182]
 resource_local_to_scene = true
@@ -1650,27 +622,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=183]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=184]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=185]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1679,27 +630,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=186]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=187]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=188]
 resource_local_to_scene = true
@@ -1710,27 +640,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=189]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=190]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=194]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1739,27 +648,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=195]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=196]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=197]
 resource_local_to_scene = true
@@ -1770,27 +658,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=198]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=199]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=200]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1799,27 +666,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=201]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=202]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=203]
 resource_local_to_scene = true
@@ -1830,27 +676,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=204]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=205]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=206]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1859,27 +684,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=207]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=208]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=209]
 resource_local_to_scene = true
@@ -1890,27 +694,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=210]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=211]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=212]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1919,27 +702,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=213]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=214]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=215]
 resource_local_to_scene = true
@@ -1950,27 +712,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=216]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=217]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=218]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -1979,27 +720,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=219]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=220]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=221]
 resource_local_to_scene = true
@@ -2010,27 +730,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=222]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=223]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=224]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2039,27 +738,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=225]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=226]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=227]
 resource_local_to_scene = true
@@ -2070,27 +748,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=228]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=229]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=230]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2099,27 +756,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=231]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=232]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=233]
 resource_local_to_scene = true
@@ -2130,27 +766,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=234]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=235]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=236]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2159,27 +774,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=237]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=238]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=239]
 resource_local_to_scene = true
@@ -2190,27 +784,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=240]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=241]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=242]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2219,27 +792,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=243]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=244]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=245]
 resource_local_to_scene = true
@@ -2250,27 +802,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=246]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=247]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=248]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2279,27 +810,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=249]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=250]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=251]
 resource_local_to_scene = true
@@ -2310,27 +820,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=252]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=253]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=254]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2339,27 +828,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=255]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=256]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=257]
 resource_local_to_scene = true
@@ -2370,27 +838,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=258]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=259]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=260]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2399,27 +846,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=261]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=262]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=263]
 resource_local_to_scene = true
@@ -2430,27 +856,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=264]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=265]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=266]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2459,27 +864,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=267]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=268]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=269]
 resource_local_to_scene = true
@@ -2490,27 +874,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=270]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=271]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=272]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2519,27 +882,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=273]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=274]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=275]
 resource_local_to_scene = true
@@ -2550,27 +892,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=276]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=277]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=278]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2579,27 +900,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=279]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=280]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=281]
 resource_local_to_scene = true
@@ -2610,27 +910,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=282]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=283]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=284]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2639,27 +918,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=285]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=286]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=287]
 resource_local_to_scene = true
@@ -2670,27 +928,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=288]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=289]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=290]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2699,27 +936,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=291]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=292]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [sub_resource type="ShaderMaterial" id=293]
 resource_local_to_scene = true
@@ -2730,27 +946,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=294]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=295]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=296]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2760,27 +955,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="StreamTexture" id=297]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
-[sub_resource type="GDScript" id=298]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
-
 [sub_resource type="ShaderMaterial" id=299]
 resource_local_to_scene = true
 shader = SubResource( 16 )
@@ -2789,27 +963,6 @@ shader_param/flash_modifier = 0.0
 
 [sub_resource type="StreamTexture" id=300]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=301]
-script/source = "extends TextureRect
-
-
-
-func _ready():
-	texture = load(\"res://Assets/Images/inventory_icons/\"+ JsonData.item_data[name][\"ItemCategory\"] + \"/\"  + name + \".png\")
-	set_locked()
-
-
-func set_locked():
-	pass
-
-
-func _on_collection_item_mouse_entered():
-	get_node(\"../\").entered_item_area(name)
-
-func _on_collection_item_mouse_exited():
-	get_node(\"../\").exited_item_area(name)
-"
 
 [node name="Collections" type="Control"]
 margin_right = 40.0
@@ -2889,7 +1042,7 @@ material = SubResource( 86 )
 margin_right = 16.0
 margin_bottom = 16.0
 texture = SubResource( 87 )
-script = SubResource( 88 )
+script = ExtResource( 11 )
 
 [node name="anchovy" type="TextureRect" parent="FishCollection"]
 material = SubResource( 89 )
@@ -2897,7 +1050,7 @@ margin_left = 28.0
 margin_right = 44.0
 margin_bottom = 16.0
 texture = SubResource( 90 )
-script = SubResource( 91 )
+script = ExtResource( 11 )
 
 [node name="angler" type="TextureRect" parent="FishCollection"]
 material = SubResource( 92 )
@@ -2905,7 +1058,7 @@ margin_left = 56.0
 margin_right = 72.0
 margin_bottom = 16.0
 texture = SubResource( 93 )
-script = SubResource( 94 )
+script = ExtResource( 11 )
 
 [node name="betta" type="TextureRect" parent="FishCollection"]
 material = SubResource( 95 )
@@ -2913,7 +1066,7 @@ margin_left = 84.0
 margin_right = 100.0
 margin_bottom = 16.0
 texture = SubResource( 96 )
-script = SubResource( 97 )
+script = ExtResource( 11 )
 
 [node name="blowfish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 98 )
@@ -2921,7 +1074,7 @@ margin_left = 112.0
 margin_right = 128.0
 margin_bottom = 16.0
 texture = SubResource( 99 )
-script = SubResource( 100 )
+script = ExtResource( 11 )
 
 [node name="catfish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 101 )
@@ -2929,7 +1082,7 @@ margin_left = 140.0
 margin_right = 156.0
 margin_bottom = 16.0
 texture = SubResource( 102 )
-script = SubResource( 103 )
+script = ExtResource( 11 )
 
 [node name="cisco" type="TextureRect" parent="FishCollection"]
 material = SubResource( 104 )
@@ -2937,7 +1090,7 @@ margin_top = 28.0
 margin_right = 16.0
 margin_bottom = 44.0
 texture = SubResource( 105 )
-script = SubResource( 106 )
+script = ExtResource( 11 )
 
 [node name="clownfish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 107 )
@@ -2946,7 +1099,7 @@ margin_top = 28.0
 margin_right = 44.0
 margin_bottom = 44.0
 texture = SubResource( 108 )
-script = SubResource( 109 )
+script = ExtResource( 11 )
 
 [node name="crab" type="TextureRect" parent="FishCollection"]
 material = SubResource( 110 )
@@ -2955,7 +1108,7 @@ margin_top = 28.0
 margin_right = 72.0
 margin_bottom = 44.0
 texture = SubResource( 111 )
-script = SubResource( 112 )
+script = ExtResource( 11 )
 
 [node name="dorado" type="TextureRect" parent="FishCollection"]
 material = SubResource( 113 )
@@ -2964,7 +1117,7 @@ margin_top = 28.0
 margin_right = 100.0
 margin_bottom = 44.0
 texture = SubResource( 114 )
-script = SubResource( 115 )
+script = ExtResource( 11 )
 
 [node name="eel" type="TextureRect" parent="FishCollection"]
 material = SubResource( 116 )
@@ -2973,7 +1126,7 @@ margin_top = 28.0
 margin_right = 128.0
 margin_bottom = 44.0
 texture = SubResource( 117 )
-script = SubResource( 118 )
+script = ExtResource( 11 )
 
 [node name="goldfish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 119 )
@@ -2982,7 +1135,7 @@ margin_top = 28.0
 margin_right = 156.0
 margin_bottom = 44.0
 texture = SubResource( 120 )
-script = SubResource( 121 )
+script = ExtResource( 11 )
 
 [node name="halibut" type="TextureRect" parent="FishCollection"]
 material = SubResource( 122 )
@@ -2990,7 +1143,7 @@ margin_top = 56.0
 margin_right = 16.0
 margin_bottom = 72.0
 texture = SubResource( 123 )
-script = SubResource( 124 )
+script = ExtResource( 11 )
 
 [node name="koi" type="TextureRect" parent="FishCollection"]
 material = SubResource( 125 )
@@ -2999,7 +1152,7 @@ margin_top = 56.0
 margin_right = 44.0
 margin_bottom = 72.0
 texture = SubResource( 126 )
-script = SubResource( 127 )
+script = ExtResource( 11 )
 
 [node name="lingcod" type="TextureRect" parent="FishCollection"]
 material = SubResource( 128 )
@@ -3008,7 +1161,7 @@ margin_top = 56.0
 margin_right = 72.0
 margin_bottom = 72.0
 texture = SubResource( 129 )
-script = SubResource( 130 )
+script = ExtResource( 11 )
 
 [node name="nelma" type="TextureRect" parent="FishCollection"]
 material = SubResource( 131 )
@@ -3017,7 +1170,7 @@ margin_top = 56.0
 margin_right = 100.0
 margin_bottom = 72.0
 texture = SubResource( 132 )
-script = SubResource( 133 )
+script = ExtResource( 11 )
 
 [node name="octopus" type="TextureRect" parent="FishCollection"]
 material = SubResource( 134 )
@@ -3026,7 +1179,7 @@ margin_top = 56.0
 margin_right = 128.0
 margin_bottom = 72.0
 texture = SubResource( 135 )
-script = SubResource( 136 )
+script = ExtResource( 11 )
 
 [node name="purple carp" type="TextureRect" parent="FishCollection"]
 material = SubResource( 137 )
@@ -3035,7 +1188,7 @@ margin_top = 56.0
 margin_right = 156.0
 margin_bottom = 72.0
 texture = SubResource( 138 )
-script = SubResource( 139 )
+script = ExtResource( 11 )
 
 [node name="purple salmon" type="TextureRect" parent="FishCollection"]
 material = SubResource( 140 )
@@ -3043,7 +1196,7 @@ margin_top = 84.0
 margin_right = 16.0
 margin_bottom = 100.0
 texture = SubResource( 141 )
-script = SubResource( 142 )
+script = ExtResource( 11 )
 
 [node name="red salmon" type="TextureRect" parent="FishCollection"]
 material = SubResource( 143 )
@@ -3052,7 +1205,7 @@ margin_top = 84.0
 margin_right = 44.0
 margin_bottom = 100.0
 texture = SubResource( 144 )
-script = SubResource( 145 )
+script = ExtResource( 11 )
 
 [node name="seaweed" type="TextureRect" parent="FishCollection"]
 material = SubResource( 146 )
@@ -3061,7 +1214,7 @@ margin_top = 84.0
 margin_right = 72.0
 margin_bottom = 100.0
 texture = SubResource( 147 )
-script = SubResource( 148 )
+script = ExtResource( 11 )
 
 [node name="shrimp" type="TextureRect" parent="FishCollection"]
 material = SubResource( 149 )
@@ -3070,7 +1223,7 @@ margin_top = 84.0
 margin_right = 100.0
 margin_bottom = 100.0
 texture = SubResource( 150 )
-script = SubResource( 151 )
+script = ExtResource( 11 )
 
 [node name="siberian whitefish" type="TextureRect" parent="FishCollection"]
 material = SubResource( 152 )
@@ -3079,7 +1232,7 @@ margin_top = 84.0
 margin_right = 128.0
 margin_bottom = 100.0
 texture = SubResource( 153 )
-script = SubResource( 154 )
+script = ExtResource( 11 )
 
 [node name="tilapia" type="TextureRect" parent="FishCollection"]
 material = SubResource( 155 )
@@ -3088,9 +1241,226 @@ margin_top = 84.0
 margin_right = 156.0
 margin_bottom = 100.0
 texture = SubResource( 156 )
-script = SubResource( 157 )
+script = ExtResource( 11 )
 
 [node name="Tween" type="Tween" parent="FishCollection"]
+
+[node name="ForageCollection" type="GridContainer" parent="."]
+visible = false
+margin_left = 108.0
+margin_top = 110.0
+margin_right = 284.0
+margin_bottom = 219.0
+rect_scale = Vector2( 3.5, 3.5 )
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
+columns = 6
+script = ExtResource( 9 )
+
+[node name="blue flower" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_right = 16.0
+margin_bottom = 16.0
+texture = SubResource( 303 )
+script = ExtResource( 11 )
+
+[node name="purple flower" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 28.0
+margin_right = 44.0
+margin_bottom = 16.0
+texture = SubResource( 306 )
+script = ExtResource( 11 )
+
+[node name="red flower" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 56.0
+margin_right = 72.0
+margin_bottom = 16.0
+texture = SubResource( 309 )
+script = ExtResource( 11 )
+
+[node name="green flower" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 84.0
+margin_right = 100.0
+margin_bottom = 16.0
+texture = SubResource( 312 )
+script = ExtResource( 11 )
+
+[node name="green grass" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 112.0
+margin_right = 128.0
+margin_bottom = 16.0
+texture = SubResource( 315 )
+script = ExtResource( 11 )
+
+[node name="red grass" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 140.0
+margin_right = 156.0
+margin_bottom = 16.0
+texture = SubResource( 318 )
+script = ExtResource( 11 )
+
+[node name="yellow grass" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_top = 28.0
+margin_right = 16.0
+margin_bottom = 44.0
+texture = SubResource( 321 )
+script = ExtResource( 11 )
+
+[node name="dark green grass" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 44.0
+margin_bottom = 44.0
+texture = SubResource( 324 )
+script = ExtResource( 11 )
+
+[node name="pink clam" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 56.0
+margin_top = 28.0
+margin_right = 72.0
+margin_bottom = 44.0
+texture = SubResource( 327 )
+script = ExtResource( 11 )
+
+[node name="blue clam" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 84.0
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 44.0
+texture = SubResource( 330 )
+script = ExtResource( 11 )
+
+[node name="red clam" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 112.0
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 44.0
+texture = SubResource( 333 )
+script = ExtResource( 11 )
+
+[node name="starfish" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 140.0
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 44.0
+texture = SubResource( 336 )
+script = ExtResource( 11 )
+
+[node name="baby starfish" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_top = 56.0
+margin_right = 16.0
+margin_bottom = 72.0
+texture = SubResource( 339 )
+script = ExtResource( 11 )
+
+[node name="blue pearl" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 28.0
+margin_top = 56.0
+margin_right = 44.0
+margin_bottom = 72.0
+texture = SubResource( 342 )
+script = ExtResource( 11 )
+
+[node name="pink pearl" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 56.0
+margin_top = 56.0
+margin_right = 72.0
+margin_bottom = 72.0
+texture = SubResource( 345 )
+script = ExtResource( 11 )
+
+[node name="white pearl" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 84.0
+margin_top = 56.0
+margin_right = 100.0
+margin_bottom = 72.0
+texture = SubResource( 348 )
+script = ExtResource( 11 )
+
+[node name="Tween" type="Tween" parent="ForageCollection"]
+
+[node name="MineralCollection" type="GridContainer" parent="."]
+margin_left = 108.0
+margin_top = 110.0
+margin_right = 284.0
+margin_bottom = 219.0
+rect_scale = Vector2( 3.5, 3.5 )
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
+columns = 6
+script = ExtResource( 14 )
+
+[node name="bronze ore" type="TextureRect" parent="MineralCollection"]
+material = SubResource( 350 )
+margin_right = 16.0
+margin_bottom = 16.0
+texture = SubResource( 351 )
+script = ExtResource( 11 )
+
+[node name="iron ore" type="TextureRect" parent="MineralCollection"]
+material = SubResource( 350 )
+margin_left = 28.0
+margin_right = 44.0
+margin_bottom = 16.0
+texture = SubResource( 351 )
+script = ExtResource( 11 )
+
+[node name="gold ore" type="TextureRect" parent="MineralCollection"]
+material = SubResource( 353 )
+margin_left = 56.0
+margin_right = 72.0
+margin_bottom = 16.0
+texture = SubResource( 354 )
+script = ExtResource( 11 )
+
+[node name="aquamarine" type="TextureRect" parent="MineralCollection"]
+material = SubResource( 356 )
+margin_left = 84.0
+margin_right = 100.0
+margin_bottom = 16.0
+texture = SubResource( 357 )
+script = ExtResource( 11 )
+
+[node name="emerald" type="TextureRect" parent="MineralCollection"]
+material = SubResource( 359 )
+margin_left = 112.0
+margin_right = 128.0
+margin_bottom = 16.0
+texture = SubResource( 360 )
+script = ExtResource( 11 )
+
+[node name="ruby" type="TextureRect" parent="MineralCollection"]
+material = SubResource( 362 )
+margin_left = 140.0
+margin_right = 156.0
+margin_bottom = 16.0
+texture = SubResource( 363 )
+script = ExtResource( 11 )
+
+[node name="sapphire" type="TextureRect" parent="MineralCollection"]
+material = SubResource( 365 )
+margin_top = 28.0
+margin_right = 16.0
+margin_bottom = 44.0
+texture = SubResource( 366 )
+script = ExtResource( 11 )
+
+[node name="Tween" type="Tween" parent="MineralCollection"]
 
 [node name="CropCollection" type="GridContainer" parent="."]
 visible = false
@@ -3109,7 +1479,7 @@ material = SubResource( 20 )
 margin_right = 16.0
 margin_bottom = 16.0
 texture = SubResource( 21 )
-script = SubResource( 22 )
+script = ExtResource( 11 )
 
 [node name="corn" type="TextureRect" parent="CropCollection"]
 material = SubResource( 23 )
@@ -3117,7 +1487,7 @@ margin_left = 28.0
 margin_right = 44.0
 margin_bottom = 16.0
 texture = SubResource( 24 )
-script = SubResource( 25 )
+script = ExtResource( 11 )
 
 [node name="blueberry" type="TextureRect" parent="CropCollection"]
 material = SubResource( 26 )
@@ -3125,7 +1495,7 @@ margin_left = 56.0
 margin_right = 72.0
 margin_bottom = 16.0
 texture = SubResource( 27 )
-script = SubResource( 28 )
+script = ExtResource( 11 )
 
 [node name="asparagus" type="TextureRect" parent="CropCollection"]
 material = SubResource( 29 )
@@ -3133,7 +1503,7 @@ margin_left = 84.0
 margin_right = 100.0
 margin_bottom = 16.0
 texture = SubResource( 30 )
-script = SubResource( 31 )
+script = ExtResource( 11 )
 
 [node name="cabbage" type="TextureRect" parent="CropCollection"]
 material = SubResource( 32 )
@@ -3141,7 +1511,7 @@ margin_left = 112.0
 margin_right = 128.0
 margin_bottom = 16.0
 texture = SubResource( 33 )
-script = SubResource( 34 )
+script = ExtResource( 11 )
 
 [node name="carrot" type="TextureRect" parent="CropCollection"]
 material = SubResource( 35 )
@@ -3149,7 +1519,7 @@ margin_left = 140.0
 margin_right = 156.0
 margin_bottom = 16.0
 texture = SubResource( 36 )
-script = SubResource( 37 )
+script = ExtResource( 11 )
 
 [node name="cauliflower" type="TextureRect" parent="CropCollection"]
 material = SubResource( 38 )
@@ -3157,7 +1527,7 @@ margin_top = 28.0
 margin_right = 16.0
 margin_bottom = 44.0
 texture = SubResource( 39 )
-script = SubResource( 40 )
+script = ExtResource( 11 )
 
 [node name="grape" type="TextureRect" parent="CropCollection"]
 material = SubResource( 41 )
@@ -3166,7 +1536,7 @@ margin_top = 28.0
 margin_right = 44.0
 margin_bottom = 44.0
 texture = SubResource( 42 )
-script = SubResource( 43 )
+script = ExtResource( 11 )
 
 [node name="green bean" type="TextureRect" parent="CropCollection"]
 material = SubResource( 44 )
@@ -3175,7 +1545,7 @@ margin_top = 28.0
 margin_right = 72.0
 margin_bottom = 44.0
 texture = SubResource( 45 )
-script = SubResource( 46 )
+script = ExtResource( 11 )
 
 [node name="honeydew melon" type="TextureRect" parent="CropCollection"]
 material = SubResource( 47 )
@@ -3184,7 +1554,7 @@ margin_top = 28.0
 margin_right = 100.0
 margin_bottom = 44.0
 texture = SubResource( 48 )
-script = SubResource( 49 )
+script = ExtResource( 11 )
 
 [node name="green pepper" type="TextureRect" parent="CropCollection"]
 material = SubResource( 50 )
@@ -3193,7 +1563,7 @@ margin_top = 28.0
 margin_right = 128.0
 margin_bottom = 44.0
 texture = SubResource( 51 )
-script = SubResource( 52 )
+script = ExtResource( 11 )
 
 [node name="jalapeno" type="TextureRect" parent="CropCollection"]
 material = SubResource( 53 )
@@ -3202,7 +1572,7 @@ margin_top = 28.0
 margin_right = 156.0
 margin_bottom = 44.0
 texture = SubResource( 54 )
-script = SubResource( 55 )
+script = ExtResource( 11 )
 
 [node name="potato" type="TextureRect" parent="CropCollection"]
 material = SubResource( 56 )
@@ -3210,7 +1580,7 @@ margin_top = 56.0
 margin_right = 16.0
 margin_bottom = 72.0
 texture = SubResource( 57 )
-script = SubResource( 58 )
+script = ExtResource( 11 )
 
 [node name="radish" type="TextureRect" parent="CropCollection"]
 material = SubResource( 59 )
@@ -3219,7 +1589,7 @@ margin_top = 56.0
 margin_right = 44.0
 margin_bottom = 72.0
 texture = SubResource( 60 )
-script = SubResource( 61 )
+script = ExtResource( 11 )
 
 [node name="red pepper" type="TextureRect" parent="CropCollection"]
 material = SubResource( 62 )
@@ -3228,7 +1598,7 @@ margin_top = 56.0
 margin_right = 72.0
 margin_bottom = 72.0
 texture = SubResource( 63 )
-script = SubResource( 64 )
+script = ExtResource( 11 )
 
 [node name="strawberry" type="TextureRect" parent="CropCollection"]
 material = SubResource( 65 )
@@ -3237,7 +1607,7 @@ margin_top = 56.0
 margin_right = 100.0
 margin_bottom = 72.0
 texture = SubResource( 66 )
-script = SubResource( 67 )
+script = ExtResource( 11 )
 
 [node name="sugar cane" type="TextureRect" parent="CropCollection"]
 material = SubResource( 68 )
@@ -3246,7 +1616,7 @@ margin_top = 56.0
 margin_right = 128.0
 margin_bottom = 72.0
 texture = SubResource( 69 )
-script = SubResource( 70 )
+script = ExtResource( 11 )
 
 [node name="tomato" type="TextureRect" parent="CropCollection"]
 material = SubResource( 71 )
@@ -3255,7 +1625,7 @@ margin_top = 56.0
 margin_right = 156.0
 margin_bottom = 72.0
 texture = SubResource( 72 )
-script = SubResource( 73 )
+script = ExtResource( 11 )
 
 [node name="wheat" type="TextureRect" parent="CropCollection"]
 material = SubResource( 74 )
@@ -3263,7 +1633,7 @@ margin_top = 84.0
 margin_right = 16.0
 margin_bottom = 100.0
 texture = SubResource( 75 )
-script = SubResource( 76 )
+script = ExtResource( 11 )
 
 [node name="yellow onion" type="TextureRect" parent="CropCollection"]
 material = SubResource( 77 )
@@ -3272,7 +1642,7 @@ margin_top = 84.0
 margin_right = 44.0
 margin_bottom = 100.0
 texture = SubResource( 78 )
-script = SubResource( 79 )
+script = ExtResource( 11 )
 
 [node name="yellow pepper" type="TextureRect" parent="CropCollection"]
 material = SubResource( 80 )
@@ -3281,7 +1651,7 @@ margin_top = 84.0
 margin_right = 72.0
 margin_bottom = 100.0
 texture = SubResource( 81 )
-script = SubResource( 82 )
+script = ExtResource( 11 )
 
 [node name="zucchini" type="TextureRect" parent="CropCollection"]
 material = SubResource( 83 )
@@ -3290,11 +1660,12 @@ margin_top = 84.0
 margin_right = 100.0
 margin_bottom = 100.0
 texture = SubResource( 84 )
-script = SubResource( 85 )
+script = ExtResource( 11 )
 
 [node name="Tween" type="Tween" parent="CropCollection"]
 
 [node name="FoodCollection1" type="GridContainer" parent="."]
+visible = false
 margin_left = 108.0
 margin_top = 110.0
 margin_right = 290.0
@@ -3310,7 +1681,7 @@ material = SubResource( 158 )
 margin_right = 16.0
 margin_bottom = 16.0
 texture = SubResource( 159 )
-script = SubResource( 160 )
+script = ExtResource( 11 )
 
 [node name="baked catfish" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 161 )
@@ -3318,7 +1689,7 @@ margin_left = 28.0
 margin_right = 44.0
 margin_bottom = 16.0
 texture = SubResource( 162 )
-script = SubResource( 163 )
+script = ExtResource( 11 )
 
 [node name="baked dorado" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 164 )
@@ -3326,7 +1697,7 @@ margin_left = 56.0
 margin_right = 72.0
 margin_bottom = 16.0
 texture = SubResource( 165 )
-script = SubResource( 166 )
+script = ExtResource( 11 )
 
 [node name="baked zucchini" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 167 )
@@ -3334,7 +1705,7 @@ margin_left = 84.0
 margin_right = 100.0
 margin_bottom = 16.0
 texture = SubResource( 168 )
-script = SubResource( 169 )
+script = ExtResource( 11 )
 
 [node name="blowfish tails" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 170 )
@@ -3342,7 +1713,7 @@ margin_left = 112.0
 margin_right = 128.0
 margin_bottom = 16.0
 texture = SubResource( 171 )
-script = SubResource( 172 )
+script = ExtResource( 11 )
 
 [node name="blueberry cake" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 173 )
@@ -3350,7 +1721,7 @@ margin_left = 140.0
 margin_right = 156.0
 margin_bottom = 16.0
 texture = SubResource( 174 )
-script = SubResource( 175 )
+script = ExtResource( 11 )
 
 [node name="blueberry pie" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 176 )
@@ -3358,7 +1729,7 @@ margin_top = 28.0
 margin_right = 16.0
 margin_bottom = 44.0
 texture = SubResource( 177 )
-script = SubResource( 178 )
+script = ExtResource( 11 )
 
 [node name="calamari with tomatoes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 179 )
@@ -3367,7 +1738,7 @@ margin_top = 28.0
 margin_right = 44.0
 margin_bottom = 44.0
 texture = SubResource( 180 )
-script = SubResource( 181 )
+script = ExtResource( 11 )
 
 [node name="cauliflower soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 182 )
@@ -3376,7 +1747,7 @@ margin_top = 28.0
 margin_right = 72.0
 margin_bottom = 44.0
 texture = SubResource( 183 )
-script = SubResource( 184 )
+script = ExtResource( 11 )
 
 [node name="cooked filet" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 185 )
@@ -3385,7 +1756,7 @@ margin_top = 28.0
 margin_right = 100.0
 margin_bottom = 44.0
 texture = SubResource( 186 )
-script = SubResource( 187 )
+script = ExtResource( 11 )
 
 [node name="cooked green beans" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 188 )
@@ -3394,7 +1765,7 @@ margin_top = 28.0
 margin_right = 128.0
 margin_bottom = 44.0
 texture = SubResource( 189 )
-script = SubResource( 190 )
+script = ExtResource( 11 )
 
 [node name="cooked wing" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 194 )
@@ -3403,7 +1774,7 @@ margin_top = 28.0
 margin_right = 156.0
 margin_bottom = 44.0
 texture = SubResource( 195 )
-script = SubResource( 196 )
+script = ExtResource( 11 )
 
 [node name="crab cakes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 197 )
@@ -3411,7 +1782,7 @@ margin_top = 56.0
 margin_right = 16.0
 margin_bottom = 72.0
 texture = SubResource( 198 )
-script = SubResource( 199 )
+script = ExtResource( 11 )
 
 [node name="filet mignon" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 200 )
@@ -3420,7 +1791,7 @@ margin_top = 56.0
 margin_right = 44.0
 margin_bottom = 72.0
 texture = SubResource( 201 )
-script = SubResource( 202 )
+script = ExtResource( 11 )
 
 [node name="filet soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 203 )
@@ -3429,7 +1800,7 @@ margin_top = 56.0
 margin_right = 72.0
 margin_bottom = 72.0
 texture = SubResource( 204 )
-script = SubResource( 205 )
+script = ExtResource( 11 )
 
 [node name="filet with garlic mash" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 206 )
@@ -3438,7 +1809,7 @@ margin_top = 56.0
 margin_right = 100.0
 margin_bottom = 72.0
 texture = SubResource( 207 )
-script = SubResource( 208 )
+script = ExtResource( 11 )
 
 [node name="filet with tomatoes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 209 )
@@ -3447,7 +1818,7 @@ margin_top = 56.0
 margin_right = 128.0
 margin_bottom = 72.0
 texture = SubResource( 210 )
-script = SubResource( 211 )
+script = ExtResource( 11 )
 
 [node name="grape pastry" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 212 )
@@ -3456,7 +1827,7 @@ margin_top = 56.0
 margin_right = 156.0
 margin_bottom = 72.0
 texture = SubResource( 213 )
-script = SubResource( 214 )
+script = ExtResource( 11 )
 
 [node name="green pepper soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 215 )
@@ -3464,7 +1835,7 @@ margin_top = 84.0
 margin_right = 16.0
 margin_bottom = 100.0
 texture = SubResource( 216 )
-script = SubResource( 217 )
+script = ExtResource( 11 )
 
 [node name="honeydew melon with sugar" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 218 )
@@ -3473,7 +1844,7 @@ margin_top = 84.0
 margin_right = 44.0
 margin_bottom = 100.0
 texture = SubResource( 219 )
-script = SubResource( 220 )
+script = ExtResource( 11 )
 
 [node name="mushroom soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 221 )
@@ -3482,7 +1853,7 @@ margin_top = 84.0
 margin_right = 72.0
 margin_bottom = 100.0
 texture = SubResource( 222 )
-script = SubResource( 223 )
+script = ExtResource( 11 )
 
 [node name="pepper and asparagus stir fry" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 224 )
@@ -3491,7 +1862,7 @@ margin_top = 84.0
 margin_right = 100.0
 margin_bottom = 100.0
 texture = SubResource( 225 )
-script = SubResource( 226 )
+script = ExtResource( 11 )
 
 [node name="mini grape tarts" type="TextureRect" parent="FoodCollection1"]
 material = SubResource( 227 )
@@ -3500,7 +1871,14 @@ margin_top = 84.0
 margin_right = 128.0
 margin_bottom = 100.0
 texture = SubResource( 228 )
-script = SubResource( 229 )
+script = ExtResource( 11 )
+
+[node name="potato soup" type="TextureRect" parent="FoodCollection1"]
+material = SubResource( 230 )
+margin_right = 16.0
+margin_bottom = 16.0
+texture = SubResource( 231 )
+script = ExtResource( 11 )
 
 [node name="FoodCollection2" type="GridContainer" parent="."]
 visible = false
@@ -3514,20 +1892,13 @@ custom_constants/hseparation = 12
 columns = 6
 script = ExtResource( 6 )
 
-[node name="potato soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 230 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture = SubResource( 231 )
-script = SubResource( 232 )
-
 [node name="potatoes with asparagus" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 233 )
 margin_left = 28.0
 margin_right = 44.0
 margin_bottom = 16.0
 texture = SubResource( 234 )
-script = SubResource( 235 )
+script = ExtResource( 11 )
 
 [node name="potatoes with green beans" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 236 )
@@ -3535,7 +1906,7 @@ margin_left = 56.0
 margin_right = 72.0
 margin_bottom = 16.0
 texture = SubResource( 237 )
-script = SubResource( 238 )
+script = ExtResource( 11 )
 
 [node name="radish soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 239 )
@@ -3543,7 +1914,7 @@ margin_left = 84.0
 margin_right = 100.0
 margin_bottom = 16.0
 texture = SubResource( 240 )
-script = SubResource( 241 )
+script = ExtResource( 11 )
 
 [node name="red pepper soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 242 )
@@ -3551,7 +1922,7 @@ margin_left = 112.0
 margin_right = 128.0
 margin_bottom = 16.0
 texture = SubResource( 243 )
-script = SubResource( 244 )
+script = ExtResource( 11 )
 
 [node name="sashimi" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 245 )
@@ -3559,7 +1930,7 @@ margin_left = 140.0
 margin_right = 156.0
 margin_bottom = 16.0
 texture = SubResource( 246 )
-script = SubResource( 247 )
+script = ExtResource( 11 )
 
 [node name="sauteed cabbage with garlic" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 248 )
@@ -3567,7 +1938,7 @@ margin_top = 28.0
 margin_right = 16.0
 margin_bottom = 44.0
 texture = SubResource( 249 )
-script = SubResource( 250 )
+script = ExtResource( 11 )
 
 [node name="scrambled eggs" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 251 )
@@ -3576,7 +1947,7 @@ margin_top = 28.0
 margin_right = 44.0
 margin_bottom = 44.0
 texture = SubResource( 252 )
-script = SubResource( 253 )
+script = ExtResource( 11 )
 
 [node name="seaweed salad" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 254 )
@@ -3585,7 +1956,7 @@ margin_top = 28.0
 margin_right = 72.0
 margin_bottom = 44.0
 texture = SubResource( 255 )
-script = SubResource( 256 )
+script = ExtResource( 11 )
 
 [node name="sliced tomatoes and potatoes" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 257 )
@@ -3594,7 +1965,7 @@ margin_top = 28.0
 margin_right = 100.0
 margin_bottom = 44.0
 texture = SubResource( 258 )
-script = SubResource( 259 )
+script = ExtResource( 11 )
 
 [node name="smoked jalapeno with eggs" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 260 )
@@ -3603,7 +1974,7 @@ margin_top = 28.0
 margin_right = 128.0
 margin_bottom = 44.0
 texture = SubResource( 261 )
-script = SubResource( 262 )
+script = ExtResource( 11 )
 
 [node name="spaghetti" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 263 )
@@ -3612,7 +1983,7 @@ margin_top = 28.0
 margin_right = 156.0
 margin_bottom = 44.0
 texture = SubResource( 264 )
-script = SubResource( 265 )
+script = ExtResource( 11 )
 
 [node name="spicy eel" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 266 )
@@ -3620,7 +1991,7 @@ margin_top = 56.0
 margin_right = 16.0
 margin_bottom = 72.0
 texture = SubResource( 267 )
-script = SubResource( 268 )
+script = ExtResource( 11 )
 
 [node name="spicy shrimps" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 269 )
@@ -3629,7 +2000,7 @@ margin_top = 56.0
 margin_right = 44.0
 margin_bottom = 72.0
 texture = SubResource( 270 )
-script = SubResource( 271 )
+script = ExtResource( 11 )
 
 [node name="strawberry cake" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 272 )
@@ -3638,7 +2009,7 @@ margin_top = 56.0
 margin_right = 72.0
 margin_bottom = 72.0
 texture = SubResource( 273 )
-script = SubResource( 274 )
+script = ExtResource( 11 )
 
 [node name="strawberry tart" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 275 )
@@ -3647,7 +2018,7 @@ margin_top = 56.0
 margin_right = 100.0
 margin_bottom = 72.0
 texture = SubResource( 276 )
-script = SubResource( 277 )
+script = ExtResource( 11 )
 
 [node name="sugar cane kheer" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 278 )
@@ -3656,7 +2027,7 @@ margin_top = 56.0
 margin_right = 128.0
 margin_bottom = 72.0
 texture = SubResource( 279 )
-script = SubResource( 280 )
+script = ExtResource( 11 )
 
 [node name="tomato sandwich" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 281 )
@@ -3665,7 +2036,7 @@ margin_top = 56.0
 margin_right = 156.0
 margin_bottom = 72.0
 texture = SubResource( 282 )
-script = SubResource( 283 )
+script = ExtResource( 11 )
 
 [node name="tomato soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 284 )
@@ -3673,7 +2044,7 @@ margin_top = 84.0
 margin_right = 16.0
 margin_bottom = 100.0
 texture = SubResource( 285 )
-script = SubResource( 286 )
+script = ExtResource( 11 )
 
 [node name="vegetable soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 287 )
@@ -3682,7 +2053,7 @@ margin_top = 84.0
 margin_right = 44.0
 margin_bottom = 100.0
 texture = SubResource( 288 )
-script = SubResource( 289 )
+script = ExtResource( 11 )
 
 [node name="wings with corn" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 290 )
@@ -3691,7 +2062,7 @@ margin_top = 84.0
 margin_right = 72.0
 margin_bottom = 100.0
 texture = SubResource( 291 )
-script = SubResource( 292 )
+script = ExtResource( 11 )
 
 [node name="yellow onion soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 293 )
@@ -3700,7 +2071,7 @@ margin_top = 84.0
 margin_right = 100.0
 margin_bottom = 100.0
 texture = SubResource( 294 )
-script = SubResource( 295 )
+script = ExtResource( 11 )
 
 [node name="yellow pepper soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 296 )
@@ -3709,7 +2080,7 @@ margin_top = 84.0
 margin_right = 128.0
 margin_bottom = 100.0
 texture = SubResource( 297 )
-script = SubResource( 298 )
+script = ExtResource( 11 )
 
 [node name="zucchini soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource( 299 )
@@ -3718,7 +2089,7 @@ margin_top = 84.0
 margin_right = 156.0
 margin_bottom = 100.0
 texture = SubResource( 300 )
-script = SubResource( 301 )
+script = ExtResource( 11 )
 
 [node name="FoodBtnRight" type="TextureButton" parent="."]
 margin_left = 668.0
@@ -3801,6 +2172,52 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="FishCollection/siberian whitefish" to="FishCollection/siberian whitefish" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FishCollection/tilapia" to="FishCollection/tilapia" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FishCollection/tilapia" to="FishCollection/tilapia" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/blue flower" to="ForageCollection/blue flower" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/blue flower" to="ForageCollection/blue flower" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/purple flower" to="ForageCollection/purple flower" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/purple flower" to="ForageCollection/purple flower" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/red flower" to="ForageCollection/red flower" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/red flower" to="ForageCollection/red flower" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/green flower" to="ForageCollection/green flower" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/green flower" to="ForageCollection/green flower" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/green grass" to="ForageCollection/green grass" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/green grass" to="ForageCollection/green grass" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/red grass" to="ForageCollection/red grass" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/red grass" to="ForageCollection/red grass" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/yellow grass" to="ForageCollection/yellow grass" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/yellow grass" to="ForageCollection/yellow grass" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/dark green grass" to="ForageCollection/dark green grass" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/dark green grass" to="ForageCollection/dark green grass" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/pink clam" to="ForageCollection/pink clam" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/pink clam" to="ForageCollection/pink clam" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/blue clam" to="ForageCollection/blue clam" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/blue clam" to="ForageCollection/blue clam" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/red clam" to="ForageCollection/red clam" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/red clam" to="ForageCollection/red clam" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/starfish" to="ForageCollection/starfish" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/starfish" to="ForageCollection/starfish" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/baby starfish" to="ForageCollection/baby starfish" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/baby starfish" to="ForageCollection/baby starfish" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/blue pearl" to="ForageCollection/blue pearl" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/blue pearl" to="ForageCollection/blue pearl" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/pink pearl" to="ForageCollection/pink pearl" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/pink pearl" to="ForageCollection/pink pearl" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MineralCollection/bronze ore" to="MineralCollection/bronze ore" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MineralCollection/bronze ore" to="MineralCollection/bronze ore" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MineralCollection/iron ore" to="MineralCollection/iron ore" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MineralCollection/iron ore" to="MineralCollection/iron ore" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MineralCollection/gold ore" to="MineralCollection/gold ore" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MineralCollection/gold ore" to="MineralCollection/gold ore" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MineralCollection/aquamarine" to="MineralCollection/aquamarine" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MineralCollection/aquamarine" to="MineralCollection/aquamarine" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MineralCollection/emerald" to="MineralCollection/emerald" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MineralCollection/emerald" to="MineralCollection/emerald" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MineralCollection/ruby" to="MineralCollection/ruby" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MineralCollection/ruby" to="MineralCollection/ruby" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MineralCollection/sapphire" to="MineralCollection/sapphire" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MineralCollection/sapphire" to="MineralCollection/sapphire" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/corn" to="CropCollection/corn" method="_on_collection_item_mouse_entered"]
@@ -3891,8 +2308,8 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="FoodCollection1/pepper and asparagus stir fry" to="FoodCollection1/pepper and asparagus stir fry" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FoodCollection1/mini grape tarts" to="FoodCollection1/mini grape tarts" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FoodCollection1/mini grape tarts" to="FoodCollection1/mini grape tarts" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="FoodCollection2/potato soup" to="FoodCollection2/potato soup" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="FoodCollection2/potato soup" to="FoodCollection2/potato soup" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="FoodCollection1/potato soup" to="FoodCollection1/potato soup" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="FoodCollection1/potato soup" to="FoodCollection1/potato soup" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FoodCollection2/potatoes with asparagus" to="FoodCollection2/potatoes with asparagus" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FoodCollection2/potatoes with asparagus" to="FoodCollection2/potatoes with asparagus" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FoodCollection2/potatoes with green beans" to="FoodCollection2/potatoes with green beans" method="_on_collection_item_mouse_entered"]

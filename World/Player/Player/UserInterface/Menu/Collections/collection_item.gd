@@ -3,12 +3,8 @@ extends TextureRect
 
 
 func _ready():
+	material = material.duplicate()
 	texture = load("res://Assets/Images/inventory_icons/"+ JsonData.item_data[name]["ItemCategory"] + "/"  + name + ".png")
-	set_locked()
-
-
-func set_locked():
-	pass
 
 
 func _on_collection_item_mouse_entered():

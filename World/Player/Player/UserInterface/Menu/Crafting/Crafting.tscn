@@ -184,9 +184,9 @@ visible = false
 
 [node name="workbench #1" parent="Page2" instance=ExtResource( 24 )]
 margin_left = 160.0
-margin_top = 382.0
+margin_top = 376.0
 margin_right = 176.0
-margin_bottom = 398.0
+margin_bottom = 392.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page2/workbench #1" index="0"]
@@ -196,9 +196,9 @@ texture_normal = ExtResource( 12 )
 
 [node name="workbench #2" parent="Page2" instance=ExtResource( 24 )]
 margin_left = 440.0
-margin_top = 278.0
+margin_top = 272.0
 margin_right = 456.0
-margin_bottom = 294.0
+margin_bottom = 288.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page2/workbench #2" index="0"]
@@ -208,9 +208,9 @@ texture_normal = ExtResource( 11 )
 
 [node name="workbench #3" parent="Page2" instance=ExtResource( 24 )]
 margin_left = 716.0
-margin_top = 182.0
+margin_top = 176.0
 margin_right = 732.0
-margin_bottom = 198.0
+margin_bottom = 192.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page2/workbench #3" index="0"]
@@ -220,9 +220,9 @@ texture_normal = ExtResource( 14 )
 
 [node name="stove #1" parent="Page2" instance=ExtResource( 24 )]
 margin_left = 1008.0
-margin_top = 352.0
+margin_top = 346.0
 margin_right = 1024.0
-margin_bottom = 368.0
+margin_bottom = 362.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page2/stove #1" index="0"]
@@ -237,9 +237,9 @@ margin_bottom = 40.0
 
 [node name="stove #2" parent="Page3" instance=ExtResource( 24 )]
 margin_left = 206.0
-margin_top = 220.0
+margin_top = 214.0
 margin_right = 222.0
-margin_bottom = 236.0
+margin_bottom = 230.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page3/stove #2" index="0"]
@@ -249,9 +249,9 @@ texture_normal = ExtResource( 15 )
 
 [node name="stove #3" parent="Page3" instance=ExtResource( 24 )]
 margin_left = 502.0
-margin_top = 180.0
+margin_top = 174.0
 margin_right = 518.0
-margin_bottom = 196.0
+margin_bottom = 190.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page3/stove #3" index="0"]
@@ -261,9 +261,9 @@ texture_normal = ExtResource( 16 )
 
 [node name="grain mill #1" parent="Page3" instance=ExtResource( 24 )]
 margin_left = 782.0
-margin_top = 260.0
+margin_top = 254.0
 margin_right = 798.0
-margin_bottom = 276.0
+margin_bottom = 270.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page3/grain mill #1" index="0"]
@@ -273,9 +273,9 @@ texture_normal = ExtResource( 17 )
 
 [node name="grain mill #2" parent="Page3" instance=ExtResource( 24 )]
 margin_left = 1014.0
-margin_top = 260.0
+margin_top = 254.0
 margin_right = 1030.0
-margin_bottom = 276.0
+margin_bottom = 270.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page3/grain mill #2" index="0"]
@@ -290,9 +290,9 @@ margin_bottom = 40.0
 
 [node name="grain mill #3" parent="Page4" instance=ExtResource( 24 )]
 margin_left = 198.0
-margin_top = 166.0
+margin_top = 160.0
 margin_right = 214.0
-margin_bottom = 182.0
+margin_bottom = 176.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page4/grain mill #3" index="0"]
@@ -304,9 +304,9 @@ texture_normal = ExtResource( 28 )
 
 [node name="furnace" parent="Page4" instance=ExtResource( 24 )]
 margin_left = 498.0
-margin_top = 182.0
+margin_top = 176.0
 margin_right = 514.0
-margin_bottom = 198.0
+margin_bottom = 192.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page4/furnace" index="0"]
@@ -316,9 +316,9 @@ texture_normal = ExtResource( 23 )
 
 [node name="tool cabinet" parent="Page4" instance=ExtResource( 24 )]
 margin_left = 666.0
-margin_top = 198.0
+margin_top = 192.0
 margin_right = 682.0
-margin_bottom = 214.0
+margin_bottom = 208.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page4/tool cabinet" index="0"]
@@ -328,9 +328,9 @@ texture_normal = ExtResource( 20 )
 
 [node name="wood door" parent="Page4" instance=ExtResource( 24 )]
 margin_left = 962.0
-margin_top = 246.0
+margin_top = 240.0
 margin_right = 978.0
-margin_bottom = 262.0
+margin_bottom = 256.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page4/wood door" index="0"]
@@ -345,9 +345,9 @@ margin_bottom = 40.0
 
 [node name="metal door" parent="Page5" instance=ExtResource( 24 )]
 margin_left = 222.0
-margin_top = 222.0
+margin_top = 216.0
 margin_right = 238.0
-margin_bottom = 238.0
+margin_bottom = 232.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page5/metal door" index="0"]
@@ -357,9 +357,9 @@ texture_normal = ExtResource( 18 )
 
 [node name="armored door" parent="Page5" instance=ExtResource( 24 )]
 margin_left = 518.0
-margin_top = 222.0
+margin_top = 216.0
 margin_right = 534.0
-margin_bottom = 238.0
+margin_bottom = 232.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page5/armored door" index="0"]
@@ -369,9 +369,9 @@ texture_normal = ExtResource( 25 )
 
 [node name="sleeping bag" parent="Page5" instance=ExtResource( 24 )]
 margin_left = 814.0
-margin_top = 406.0
+margin_top = 400.0
 margin_right = 830.0
-margin_bottom = 422.0
+margin_bottom = 416.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page5/sleeping bag" index="0"]

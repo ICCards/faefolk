@@ -55,10 +55,12 @@ func _on_SmallHurtBox_area_entered(_area):
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
 		InstancedScenes.initiateOreHitEffect(variety, "ore destroyed", position)
+		var amount = Stats.return_item_drop_quantity(_area.tool_name, "small ore")
+		add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
-			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 12), Stats.return_item_drop_quantity(_area.tool_name, "small ore"))
+			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 12), amount)
 		else:
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 12), Stats.return_item_drop_quantity(_area.tool_name, "small ore"))
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 12), amount)
 		animation_player.play("small_ore_break")
 		yield(sound_effects, "finished")
 		yield(get_tree().create_timer(0.6), "timeout")
@@ -69,6 +71,12 @@ func _on_SmallHurtBox_area_entered(_area):
 		sound_effects.play()
 		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-10, 10), 8))
 		animation_player.play("small_ore_hit_right")
+
+
+func add_to_collection(type, amt):
+	if type != "stone1" or type != "stone2":
+		CollectionsData.minerals[type] += 1
+
 
 
 func _on_VisibilityNotifier2D_screen_entered():

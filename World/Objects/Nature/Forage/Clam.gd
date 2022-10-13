@@ -1,19 +1,19 @@
 extends Node2D
 
-var rng = RandomNumberGenerator.new()
 var type
 var location
-var is_player
+var types = ["pink", "red", "blue"]
+var pearl_types = ["pink", "white", "blue"]
 
 func _ready():
-	rng.randomize()
-	set_random_texture()
+	randomize()
+	types.shuffle()
+	type = types[0]
+	set_random_texture() 
 
 func set_random_texture():
-	rng.randomize()
 	Tiles.remove_invalid_tiles(location)
-	type = rng.randi_range(1,3)
-	$Clam.texture = load("res://Assets/Images/Forage/clam"+ str(type) +".png")
+	$Clam.texture = load("res://Assets/Images/Forage/" + str(type) + " clam.png")
 
 func _on_Btn_mouse_entered():
 	if not $Btn.disabled:
@@ -24,16 +24,19 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
+		CollectionsData.forage[str(type)+" clam"] += 1
 		Tiles.set_valid_tiles(location)
 		$Clam.hide()
 		$Btn.disabled = true
 		$MovementCollision/CollisionShape2D.disabled = true
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
-		Server.player_node.harvest_forage("clam"+str(type))
+		Server.player_node.harvest_forage(str(type)+" clam")
 		yield(get_tree().create_timer(0.6), "timeout")
-		PlayerInventory.add_item_to_hotbar("clam", 1, null)
+		PlayerInventory.add_item_to_hotbar(str(type) + " clam", 1, null)
 		if Util.chance(1):
-			PlayerInventory.add_item_to_hotbar("pearl", 1, null)
+			pearl_types.shuffle()
+			PlayerInventory.add_item_to_hotbar(pearl_types[0], 1, null)
+			CollectionsData.forage[pearl_types[0]] += 1
 		queue_free()
 
 func set_mouse_cursor_type():

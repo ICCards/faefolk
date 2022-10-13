@@ -8,7 +8,7 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Characters/Human/male/SLEEP/assets/down/head_attribute/hair.png" type="Texture" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://World/Player/Player/AxePickaxeSwing.gd" type="Script" id=9]
+[ext_resource path="res://World/Player/Player/AttachedScripts/AxePickaxeSwing.gd" type="Script" id=9]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AttachedText.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]

@@ -8,7 +8,6 @@ onready var SleepingBag = preload("res://World/Objects/Tiles/SleepingBag.tscn")
 onready var DoorFront = preload("res://World/Objects/Tiles/DoorFront.tscn")
 onready var DoorSide = preload("res://World/Objects/Tiles/DoubleDoorSide.tscn")
 onready var Rug  = preload("res://World/Objects/Misc/Rug.tscn")
-onready var Furnace = preload("res://World/Objects/Tiles/FurnaceObject.tscn")
 
 
 var rng = RandomNumberGenerator.new()

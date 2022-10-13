@@ -2,13 +2,42 @@ extends Node
 
 
 var skills = {
-	"farming": 2,
-	"mining": 6,
-	"foraging": 2,
-	"fishing": 10,
-	"combat": 6
+	"farming": 0,
+	"mining": 0,
+	"foraging": 0,
+	"fishing": 0,
+	"combat": 0
 }
 
+var forage = {
+	"purple flower": 0,
+	"blue flower": 0,
+	"green flower": 0,
+	"red flower": 0,
+	"red clam": 0,
+	"blue clam": 0,
+	"pink clam": 0,
+	"starfish": 0,
+	"baby starfish": 0,
+	"white pearl": 0,
+	"blue pearl": 0,
+	"pink pearl": 0,
+	"dark green grass": 0,
+	"green grass": 0,
+	"red grass": 0,
+	"yellow grass": 0,
+
+}
+
+var minerals = {
+	"bronze ore": 0,
+	"iron ore": 0,
+	"gold ore": 0,
+	"aquamarine": 0,
+	"emerald": 0,
+	"ruby": 0,
+	"sapphire": 0,
+}
 
 var crops = {
 	"asparagus": 0,
@@ -75,7 +104,6 @@ var food = {
 	"cauliflower soup": 0,
 	"cooked filet": 0,
 	"cooked green beans": 0,
-	"cooked wheat berries": 0,
 	"cooked wing": 0,
 	"crab cakes": 0,
 	"filet mignon": 0,

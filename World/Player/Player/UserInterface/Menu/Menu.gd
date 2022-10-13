@@ -4,6 +4,7 @@ var item
 var hovered_button
 
 
+
 func initialize():
 	show()
 	Server.player_node.destroy_placable_object()

@@ -1,12 +1,40 @@
 {
-    "clam": {
+    "pink clam": {
       "ItemCategory": "Forage",
       "StackSize": 999,
       "Description": "Has a small chance of containing a pearl.",
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "pearl": {
+    "red clam": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Has a small chance of containing a pearl.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "blue clam": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Has a small chance of containing a pearl.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "white pearl": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A rare treasure from the sea.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "blue pearl": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A rare treasure from the sea.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "pink pearl": {
       "ItemCategory": "Forage",
       "StackSize": 999,
       "Description": "A rare treasure from the sea.",
@@ -20,10 +48,66 @@
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "flower": {
+    "baby starfish": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A wild flower.",
+      "Description": "A washed up sea specimen.",
+      "Ingredients": null,
+      "EnergyHealth": null,
+      },
+    "blue flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, blue flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "green flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, green flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "purple flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, purple flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "red flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, red flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "dark green grass": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "[grass desc.]",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "green grass": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "[grass desc.]",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "red grass": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "[grass desc.]",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "yellow grass": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "[grass desc.]",
       "Ingredients": null,
       "EnergyHealth": null
     },
@@ -97,28 +181,28 @@
       "Ingredients": null,
       "EnergyHealth": null
   },
-  "red gem": {
+  "ruby": {
       "ItemCategory": "Mineral",
       "StackSize" : 999,
       "Description": "[gem description]",
       "Ingredients": null,
       "EnergyHealth": null
   },
-  "green gem": {
+  "emerald": {
       "ItemCategory": "Mineral",
       "StackSize" : 999,
       "Description": "[gem description]",
       "Ingredients": null,
       "EnergyHealth": null
   },
-  "cyan gem": {
+  "aquamarine": {
       "ItemCategory": "Mineral",
       "StackSize" : 999,
       "Description": "[gem description]",
       "Ingredients": null,
       "EnergyHealth": null
   },
-  "dark blue gem": {
+  "sapphire": {
       "ItemCategory": "Mineral",
       "StackSize" : 999,
       "Description": "[gem description]",
