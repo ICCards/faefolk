@@ -6,7 +6,7 @@ var rng = RandomNumberGenerator.new()
 func _on_HurtBox_area_entered(area):
 	rng.randomize()
 	if area.name == "BearBite":
-		health_to_subtract = rng.randi_range(18, 29)
+		health_to_subtract = rng.randi_range(12, 22)
 	elif area.name == "BearClaw":
 		health_to_subtract = rng.randi_range(4, 12)
 	elif area.name == "BoarBite":

@@ -43,6 +43,7 @@ var chests = {}
 var furnaces = {}
 var grain_mills = {}
 var stoves = {}
+var tool_cabinets = {}
 
 
 
@@ -115,25 +116,6 @@ func remove_material(item, amount):
 					update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1], inventory[slot][2])
 
 
-# Location of bottom left tile
-var player_home = {
-	0 : ["Fireplace", Vector2(2,0)],
-	1 : ["Crafting_table", Vector2(8,0)],
-	2 : ["Shelves", Vector2(16,0)],
-	3 : ["Left_chair", Vector2(2,6)],
-	4 : ["Middle_chair", Vector2(4, 5)],
-	5 : ["Right_chair", Vector2(5, 6)],
-	6 : ["Table", Vector2(3, 7)],
-	7 : ["Rug", Vector2(10, 7)],
-	8 : ["Side_dresser", Vector2(19, 5)],
-	9 : ["Bed", Vector2(18, 9)],
-	10 : ["Small_dresser", Vector2(10,0)],
-	11 : ["Stool", Vector2(4, 8)],
-	12 : ["Window 1", Vector2(5, -2)],
-	13 : ["Window 2", Vector2(14, -2)],
-	14 : ["Painting1", Vector2(9, -2)]
-}
-var isFireplaceLit = false
 
 func remove_single_object_from_hotbar():
 	hotbar[active_item_slot][1] -= 1
@@ -275,6 +257,8 @@ func remove_item(slot: SlotClass, var id = null):
 			stoves[id].erase(slot.slot_index)
 		SlotClass.SlotType.FURNACE:
 			furnaces[id].erase(slot.slot_index)
+		SlotClass.SlotType.TOOL_CABINET:
+			tool_cabinets[id].erase(slot.slot_index)
 
 func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var id = null):
 	match slot.slotType:
@@ -292,6 +276,8 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var id = null):
 			stoves[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.FURNACE:
 			furnaces[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.TOOL_CABINET:
+			tool_cabinets[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 
 
 func add_item_quantity(slot: SlotClass, quantity_to_add: int, var id = null):
@@ -310,6 +296,8 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int, var id = null):
 			stoves[id][slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.FURNACE:
 			furnaces[id][slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.TOOL_CABINET:
+			tool_cabinets[id][slot.slot_index][1] += quantity_to_add
 
 func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var id = null):
 	match slot.slotType:
@@ -327,6 +315,9 @@ func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var id =
 			stoves[id][slot.slot_index][1] -= quantity_to_subtract
 		SlotClass.SlotType.FURNACE:
 			furnaces[id][slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.TOOL_CABINET:
+			tool_cabinets[id][slot.slot_index][1] -= quantity_to_subtract
+
 
 
 ###

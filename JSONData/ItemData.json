@@ -755,7 +755,7 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "A table for decoration.",
-      "Ingredients": [["wood", 5]],
+      "Ingredients": [["wood", 2]],
       "EnergyHealth": null
   },
   "tool cabinet" : {
@@ -770,14 +770,14 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to generate modest light.",
-      "Ingredients": [["coal", 1], ["stone", 1]],
+      "Ingredients": [["wood", 1], ["stone", 1]],
       "EnergyHealth": null
   },
   "campfire" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to generate moderate light.",
-      "Ingredients": [["coal", 4],["stone", 4]],
+      "Ingredients": [["wood", 4],["stone", 4]],
       "EnergyHealth": null
   },
   "wood fence": {

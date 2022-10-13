@@ -139,10 +139,7 @@ func player_death():
 		state = DYING
 		composite_sprites.set_player_animation(character, "death_" + direction.to_lower(), null)
 		animation_player.play("death")
-		$Camera2D/UserInterface/Hotbar.hide()
-		$Camera2D/UserInterface/ChatBox.hide()
-		$Camera2D/UserInterface/CurrentTime.hide()
-		$Camera2D/UserInterface/PlayerStatsUI.hide()
+		$Camera2D/UserInterface.death()
 		$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", true) 
 		if has_node("Fishing"):
 			get_node("Fishing").queue_free()
@@ -163,11 +160,7 @@ func respawn():
 	PlayerStats.health = PlayerStats.health_maximum
 	PlayerStats.emit_signal("health_changed")
 	animation_player.stop()
-	$Camera2D/UserInterface/Hotbar.initialize_hotbar()
-	$Camera2D/UserInterface/ChatBox.show()
-	$Camera2D/UserInterface/CurrentTime.show()
-	$Camera2D/UserInterface/PlayerStatsUI.show()
-	$Camera2D/UserInterface/DeathEffect.visible = false
+	$Camera2D/UserInterface.respawn()
 	$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", false) 
 	state = MOVEMENT
 

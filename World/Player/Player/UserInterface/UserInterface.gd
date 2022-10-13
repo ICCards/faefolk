@@ -10,6 +10,7 @@ onready var Stove = preload("res://World/Player/Player/UserInterface/Stove/Stove
 onready var GrainMill = preload("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
 onready var Furnace = preload("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
 onready var Chest = preload("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
+onready var Tool_cabinet = preload("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
 
 var items_to_drop = []
 
@@ -51,6 +52,8 @@ func _input(event):
 						toggle_chest(object_id)
 					"furnace":
 						toggle_furnace(object_id)
+					"tool cabinet":
+						toggle_tc(object_id)
 		if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
 			PlayerInventory.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
@@ -86,6 +89,40 @@ func _input(event):
 			PlayerInventory.active_item_slot = 9
 			PlayerInventory.emit_signal("active_item_updated")
 
+
+func death():
+	if $Menu.visible:
+		hide_menu()
+	else:
+		match object_name:
+			"workbench":
+				close_workbench()
+			"grain mill":
+				close_grain_mill()
+			"stove":
+				close_stove(object_id)
+			"chest":
+				close_chest(object_id)
+			"furnace":
+				close_furnace(object_id)
+	close_hotbar_clock_and_stats()
+	if holding_item:
+		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
+		holding_item.queue_free()
+		holding_item = null
+
+func respawn():
+	add_hotbar_clock_and_stats()
+
+func toggle_tc(id):
+	if not has_node("Tool cabinet"):
+		var tc = Tool_cabinet.instance()
+		tc.id = id
+		add_child(tc)
+		close_hotbar_clock_and_stats()
+	else:
+		close_tc(id)
+
 func toggle_chest(id):
 	if not has_node("Chest"):
 		Server.world.get_node("Placables/"+id).open_chest()
@@ -113,20 +150,25 @@ func add_hotbar_clock_and_stats():
 
 func toggle_menu():
 	if not $Menu.visible:
-		$Hotbar.hide()
-		$CurrentTime.hide()
-		$PlayerStatsUI.hide()
-		PlayerInventory.viewInventoryMode = true
-		$Menu.initialize()
+		show_menu()
 	else:
-		PlayerInventory.viewInventoryMode = false
-		$Hotbar.initialize_hotbar()
-		$CurrentTime.show()
-		$PlayerStatsUI.show()
-		$Menu.hide()
-		drop_items()
+		hide_menu()
 
 
+func show_menu():
+	$Hotbar.hide()
+	$CurrentTime.hide()
+	$PlayerStatsUI.hide()
+	PlayerInventory.viewInventoryMode = true
+	$Menu.initialize()
+
+func hide_menu():
+	PlayerInventory.viewInventoryMode = false
+	$Hotbar.initialize_hotbar()
+	$CurrentTime.show()
+	$PlayerStatsUI.show()
+	$Menu.hide()
+	drop_items()
 
 func toggle_grain_mill(id, level):
 	if not has_node("GrainMill"):
@@ -177,6 +219,8 @@ func toggle_stove(id, level):
 	else:
 		close_stove(id)
 		
+
+
 func close_furnace(id):
 	if not holding_item:
 		add_hotbar_clock_and_stats()
@@ -208,6 +252,11 @@ func close_chest(id):
 		get_node("Chest").destroy()
 		drop_items()
 
+func close_tc(id):
+	if not holding_item:
+		add_hotbar_clock_and_stats()
+		get_node("Tool cabinet").destroy()
+		drop_items()
 
 func drop_items():
 	yield(get_tree().create_timer(0.25), "timeout")

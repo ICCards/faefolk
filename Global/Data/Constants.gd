@@ -8,6 +8,7 @@ var dimensions_dict = {
 	"wood box" : Vector2(1,1),
 	"wood fence" : Vector2(1,1),
 	"wood barrel" : Vector2(1,1),
+	"display table" : Vector2(1,1),
 	"campfire" : Vector2(1,1),
 	"torch" : Vector2(1,1),
 	"tool cabinet": Vector2(2,1),

@@ -26,6 +26,7 @@ var tree_broke = false
 
 
 func _ready():
+	rng.randomize()
 	random_leaves_falling_timer.wait_time = rng.randi_range(15.0, 60.0)
 	treeObject = Images.returnTreeObject(variety)
 	setTexture(treeObject)

@@ -329,5 +329,9 @@ func place_object_in_world(id, item_name, direction, location):
 				Tiles.remove_invalid_tiles(location, Vector2(1,2))
 			else:
 				Tiles.remove_invalid_tiles(location, Vector2(2,1))
+		"display table":
+			Tiles.fence_tiles.set_cellv(location, 1)
+			Tiles.remove_invalid_tiles(location)
+			Tiles.fence_tiles.update_bitmask_area(location)
 
 
