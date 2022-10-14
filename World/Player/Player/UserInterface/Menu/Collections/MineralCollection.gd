@@ -3,13 +3,13 @@ extends GridContainer
 
 func initialize():
 	show()
-	for mineral in CollectionsData.minerals.keys():
-		if CollectionsData.minerals[mineral] > 0:
-			get_node(mineral).modulate = Color("ffffff") # unlocked
-			get_node(mineral).material.set_shader_param("flash_modifier", 0)
+	for item in CollectionsData.resources.keys():
+		if CollectionsData.resources[item] > 0:
+			get_node(item).modulate = Color("ffffff") # unlocked
+			get_node(item).material.set_shader_param("flash_modifier", 0)
 		else:
-			get_node(mineral).modulate = Color("50ffffff") # locked
-			get_node(mineral).material.set_shader_param("flash_modifier", 1)
+			get_node(item).modulate = Color("50ffffff") # locked
+			get_node(item).material.set_shader_param("flash_modifier", 1)
 
 func entered_item_area(item_name):
 	get_parent().item = item_name

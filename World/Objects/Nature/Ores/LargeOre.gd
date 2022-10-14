@@ -122,8 +122,10 @@ func _on_SmallHurtBox_area_entered(_area):
 		animation_player.play("small_ore_hit_right")
 
 func add_to_collection(type, amt):
-	if type != "stone1" or type != "stone2":
-		CollectionsData.minerals[type] += 1
+	if type != "stone1" and type != "stone2":
+		CollectionsData.resources[type] += amt
+	else:
+		CollectionsData.resources["stone"] += amt
 
 
 func _on_VisibilityNotifier2D_screen_entered():

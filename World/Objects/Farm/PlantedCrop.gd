@@ -106,7 +106,7 @@ func harvest_and_remove():
 		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$HarvestSound.play()
 		$CropText.visible = false
-		Tiles.reset_valid_tiles(loc)
+		Tiles.set_valid_tiles(loc)
 		isBeingHarvested = true
 		yield(get_tree().create_timer(0.6), "timeout")
 		phase = ""

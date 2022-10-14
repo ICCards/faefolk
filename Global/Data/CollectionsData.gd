@@ -29,7 +29,11 @@ var forage = {
 
 }
 
-var minerals = {
+var resources = {
+	"wood": 0,
+	"stone": 0,
+	"coal": 0,
+	"rope": 0,
 	"bronze ore": 0,
 	"iron ore": 0,
 	"gold ore": 0,

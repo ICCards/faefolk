@@ -322,12 +322,9 @@ func place_object_in_world(id, item_name, direction, location):
 		"sleeping bag":
 			var sleepingBag = SleepingBag.instance()
 			sleepingBag.direction = direction
+			sleepingBag.location = location
 			Server.world.add_child(sleepingBag, true)
 			sleepingBag.global_position = Tiles.valid_tiles.map_to_world(location) 
-			if direction == "up" or direction == "down":
-				Tiles.remove_invalid_tiles(location, Vector2(1,2))
-			else:
-				Tiles.remove_invalid_tiles(location, Vector2(2,1))
 		"display table":
 			Tiles.fence_tiles.set_cellv(location, 1)
 			Tiles.remove_invalid_tiles(location)

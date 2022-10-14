@@ -34,6 +34,10 @@ func set_description_text(item):
 			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.fish[item]))
 		elif category == "Food":
 			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.food[item]))
+		elif category == "Forage":
+			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.forage[item]))
+		elif category == "Resource":
+			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.resources[item]))
 	else: 
 		hide()
 

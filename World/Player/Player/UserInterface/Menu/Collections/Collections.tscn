@@ -1394,7 +1394,7 @@ script = ExtResource( 11 )
 
 [node name="Tween" type="Tween" parent="ForageCollection"]
 
-[node name="MineralCollection" type="GridContainer" parent="."]
+[node name="ResourceCollection" type="GridContainer" parent="."]
 margin_left = 108.0
 margin_top = 110.0
 margin_right = 284.0
@@ -1405,14 +1405,14 @@ custom_constants/hseparation = 12
 columns = 6
 script = ExtResource( 14 )
 
-[node name="bronze ore" type="TextureRect" parent="MineralCollection"]
+[node name="wood" type="TextureRect" parent="ResourceCollection"]
 material = SubResource( 350 )
 margin_right = 16.0
 margin_bottom = 16.0
 texture = SubResource( 351 )
 script = ExtResource( 11 )
 
-[node name="iron ore" type="TextureRect" parent="MineralCollection"]
+[node name="stone" type="TextureRect" parent="ResourceCollection"]
 material = SubResource( 350 )
 margin_left = 28.0
 margin_right = 44.0
@@ -1420,47 +1420,83 @@ margin_bottom = 16.0
 texture = SubResource( 351 )
 script = ExtResource( 11 )
 
-[node name="gold ore" type="TextureRect" parent="MineralCollection"]
-material = SubResource( 353 )
+[node name="coal" type="TextureRect" parent="ResourceCollection"]
+material = SubResource( 350 )
 margin_left = 56.0
 margin_right = 72.0
 margin_bottom = 16.0
-texture = SubResource( 354 )
+texture = SubResource( 351 )
 script = ExtResource( 11 )
 
-[node name="aquamarine" type="TextureRect" parent="MineralCollection"]
-material = SubResource( 356 )
+[node name="rope" type="TextureRect" parent="ResourceCollection"]
+material = SubResource( 350 )
 margin_left = 84.0
 margin_right = 100.0
 margin_bottom = 16.0
-texture = SubResource( 357 )
+texture = SubResource( 351 )
 script = ExtResource( 11 )
 
-[node name="emerald" type="TextureRect" parent="MineralCollection"]
-material = SubResource( 359 )
+[node name="bronze ore" type="TextureRect" parent="ResourceCollection"]
+material = SubResource( 350 )
 margin_left = 112.0
 margin_right = 128.0
 margin_bottom = 16.0
-texture = SubResource( 360 )
+texture = SubResource( 351 )
 script = ExtResource( 11 )
 
-[node name="ruby" type="TextureRect" parent="MineralCollection"]
-material = SubResource( 362 )
+[node name="iron ore" type="TextureRect" parent="ResourceCollection"]
+material = SubResource( 350 )
 margin_left = 140.0
 margin_right = 156.0
 margin_bottom = 16.0
+texture = SubResource( 351 )
+script = ExtResource( 11 )
+
+[node name="gold ore" type="TextureRect" parent="ResourceCollection"]
+material = SubResource( 353 )
+margin_top = 28.0
+margin_right = 16.0
+margin_bottom = 44.0
+texture = SubResource( 354 )
+script = ExtResource( 11 )
+
+[node name="aquamarine" type="TextureRect" parent="ResourceCollection"]
+material = SubResource( 356 )
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 44.0
+margin_bottom = 44.0
+texture = SubResource( 357 )
+script = ExtResource( 11 )
+
+[node name="emerald" type="TextureRect" parent="ResourceCollection"]
+material = SubResource( 359 )
+margin_left = 56.0
+margin_top = 28.0
+margin_right = 72.0
+margin_bottom = 44.0
+texture = SubResource( 360 )
+script = ExtResource( 11 )
+
+[node name="ruby" type="TextureRect" parent="ResourceCollection"]
+material = SubResource( 362 )
+margin_left = 84.0
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 44.0
 texture = SubResource( 363 )
 script = ExtResource( 11 )
 
-[node name="sapphire" type="TextureRect" parent="MineralCollection"]
+[node name="sapphire" type="TextureRect" parent="ResourceCollection"]
 material = SubResource( 365 )
+margin_left = 112.0
 margin_top = 28.0
-margin_right = 16.0
+margin_right = 128.0
 margin_bottom = 44.0
 texture = SubResource( 366 )
 script = ExtResource( 11 )
 
-[node name="Tween" type="Tween" parent="MineralCollection"]
+[node name="Tween" type="Tween" parent="ResourceCollection"]
 
 [node name="CropCollection" type="GridContainer" parent="."]
 visible = false
@@ -2204,20 +2240,28 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="ForageCollection/pink pearl" to="ForageCollection/pink pearl" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="MineralCollection/bronze ore" to="MineralCollection/bronze ore" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="MineralCollection/bronze ore" to="MineralCollection/bronze ore" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="MineralCollection/iron ore" to="MineralCollection/iron ore" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="MineralCollection/iron ore" to="MineralCollection/iron ore" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="MineralCollection/gold ore" to="MineralCollection/gold ore" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="MineralCollection/gold ore" to="MineralCollection/gold ore" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="MineralCollection/aquamarine" to="MineralCollection/aquamarine" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="MineralCollection/aquamarine" to="MineralCollection/aquamarine" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="MineralCollection/emerald" to="MineralCollection/emerald" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="MineralCollection/emerald" to="MineralCollection/emerald" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="MineralCollection/ruby" to="MineralCollection/ruby" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="MineralCollection/ruby" to="MineralCollection/ruby" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="MineralCollection/sapphire" to="MineralCollection/sapphire" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="MineralCollection/sapphire" to="MineralCollection/sapphire" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/wood" to="ResourceCollection/wood" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/wood" to="ResourceCollection/wood" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/stone" to="ResourceCollection/stone" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/stone" to="ResourceCollection/stone" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/coal" to="ResourceCollection/coal" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/coal" to="ResourceCollection/coal" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/rope" to="ResourceCollection/rope" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/rope" to="ResourceCollection/rope" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/bronze ore" to="ResourceCollection/bronze ore" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/bronze ore" to="ResourceCollection/bronze ore" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/iron ore" to="ResourceCollection/iron ore" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/iron ore" to="ResourceCollection/iron ore" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/gold ore" to="ResourceCollection/gold ore" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/gold ore" to="ResourceCollection/gold ore" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/aquamarine" to="ResourceCollection/aquamarine" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/aquamarine" to="ResourceCollection/aquamarine" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/emerald" to="ResourceCollection/emerald" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/emerald" to="ResourceCollection/emerald" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/ruby" to="ResourceCollection/ruby" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/ruby" to="ResourceCollection/ruby" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ResourceCollection/sapphire" to="ResourceCollection/sapphire" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ResourceCollection/sapphire" to="ResourceCollection/sapphire" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/corn" to="CropCollection/corn" method="_on_collection_item_mouse_entered"]

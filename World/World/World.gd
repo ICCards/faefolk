@@ -65,9 +65,9 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 40
-const NUM_BUNNIES = 40
-const NUM_BEARS = 10
+const NUM_DUCKS = 25
+const NUM_BUNNIES = 25
+const NUM_BEARS = 4
 const NUM_BOARS = 0
 const NUM_DEER = 0
 
@@ -90,7 +90,6 @@ func _ready():
 	Server.generated_map.clear()
 	Server.generate_map()
 	wait_for_map()
-	
 
 
 
@@ -215,7 +214,7 @@ func buildMap(map):
 		var loc = map["beach"][id]
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
 	for id in map["tree"]:
-		var loc = map["tree"][id]["l"]
+		var loc = map["tree"][id]["l"] + Vector2(1,0)
 		Tiles.remove_nature_invalid_tiles(loc, "tree")
 		var biome = map["tree"][id]["b"]
 		if biome == "desert":
@@ -244,7 +243,7 @@ func buildMap(map):
 	print("LOADED TREES")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["log"]:
-		var loc = map["log"][id]["l"]
+		var loc = map["log"][id]["l"] + Vector2(1,0)
 		Tiles.remove_nature_invalid_tiles(loc, "log")
 		var variety = rng.randi_range(0, 11)
 		var object = Log.instance()
@@ -256,7 +255,7 @@ func buildMap(map):
 	print("LOADED LOGS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["stump"]:
-		var loc = map["stump"][id]["l"]
+		var loc = map["stump"][id]["l"] + Vector2(1,0)
 		Tiles.remove_nature_invalid_tiles(loc, "stump")
 		treeTypes.shuffle()
 		var object = Stump.instance()
@@ -298,36 +297,38 @@ func buildMap(map):
 	var count = 0
 	for id in map["tall_grass"]:
 		var loc = map["tall_grass"][id]["l"]
-		Tiles.remove_nature_invalid_tiles(loc, "tall grass")
-		count += 1
-		var object = TallGrass.instance()
-		object.loc = loc
-		object.biome = map["tall_grass"][id]["b"]
-		object.name = id
-		object.position = dirt.map_to_world(loc) + Vector2(8, 32)
-		$NatureObjects.add_child(object,true)
-		if count == 130:
-			yield(get_tree().create_timer(0.25), "timeout")
-			count = 0
+		if validTiles.get_cellv(loc) != -1:
+			Tiles.remove_nature_invalid_tiles(loc, "tall grass")
+			count += 1
+			var object = TallGrass.instance()
+			object.loc = loc
+			object.biome = map["tall_grass"][id]["b"]
+			object.name = id
+			object.position = dirt.map_to_world(loc) + Vector2(8, 32)
+			$NatureObjects.add_child(object,true)
+			if count == 130:
+				yield(get_tree().create_timer(0.25), "timeout")
+				count = 0
 	get_node("loadingScreen").set_phase("Building flowers")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["flower"]:
 		var loc = map["flower"][id]["l"]
-		if Util.chance(50):
-			var object = Weed.instance()
-			object.location = loc
-			object.position = dirt.map_to_world(loc) + Vector2(16, 32)
-			$NatureObjects.add_child(object,true)
-		else:
-			var object = Flower.instance()
-			object.location = loc
-			object.position = dirt.map_to_world(loc)
-			$NatureObjects.add_child(object,true)
-		Tiles.remove_nature_invalid_tiles(loc, "flower")
-		count += 1
-		if count == 130:
-			yield(get_tree().create_timer(0.25), "timeout")
-			count = 0
+		if validTiles.get_cellv(loc) != -1:
+			if Util.chance(50):
+				var object = Weed.instance()
+				object.location = loc
+				object.position = dirt.map_to_world(loc) + Vector2(16, 32)
+				$NatureObjects.add_child(object,true)
+			else:
+				var object = Flower.instance()
+				object.location = loc
+				object.position = dirt.map_to_world(loc)
+				$NatureObjects.add_child(object,true)
+			Tiles.remove_nature_invalid_tiles(loc, "flower")
+			count += 1
+			if count == 130:
+				yield(get_tree().create_timer(0.25), "timeout")
+				count = 0
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	fill_biome_gaps(map)
@@ -600,11 +601,15 @@ func ChangeTile(data):
 
 
 func returnValidSpawnLocation():
-	var tempLoc = Vector2(rng.randi_range(80*32, 300*32), rng.randi_range(80*32, 300*32))
+	rng.randomize()
+	var tempLoc = Vector2(rng.randi_range(80*32, 400*32), rng.randi_range(80*32, 400*32))
 	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
 		return tempLoc
-	else:
-		return null
+	tempLoc = Vector2(rng.randi_range(80*32, 400*32), rng.randi_range(80*32, 400*32))
+	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
+		return tempLoc
+
+	return null
 
 
 func spawnRandomBunny():
@@ -624,6 +629,7 @@ func spawnRandomDuck():
 func spawnRandomBear():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
+		print("SPAWN BEAR")
 		var bear = Bear.instance()
 		$Animals.add_child(bear)
 		bear.global_position = loc
@@ -671,3 +677,8 @@ func play_remove_building_effect(loc):
 	
 
 
+
+func _on_SpawnBearTimer_timeout():
+	spawnRandomBear()
+	spawnRandomDuck()
+	spawnRandomBunny()

@@ -7,7 +7,7 @@ var is_menu_open = false
 
 func _ready():
 	$TitleMusic.stream = Sounds.title_music
-	$TitleMusic.volume_db = -80
+	$TitleMusic.volume_db = -32 #Sounds.return_adjusted_sound_db("music", -32)
 	$TitleMusic.play()
 	Sounds.connect("volume_change", self, "change_title_volume")
 	$Background/Water1.playing = true

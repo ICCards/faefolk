@@ -55,6 +55,7 @@ func _physics_process(delta):
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.item_name = item
 		$ItemDescription.initialize()
+		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 	else:
 		$ItemDescription.hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
@@ -90,6 +91,11 @@ func entered_crafting_area(item_name):
 				$Page2.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
+		3:
+			$Tween.interpolate_property($Page3.get_node(item_name), "rect_scale",
+				$Page3.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
 
 func exited_crafting_area(item_name):
 	crafting_item = null
@@ -102,6 +108,11 @@ func exited_crafting_area(item_name):
 		2:
 			$Tween.interpolate_property($Page2.get_node(item_name), "rect_scale",
 				$Page2.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		3:
+			$Tween.interpolate_property($Page3.get_node(item_name), "rect_scale",
+				$Page3.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 
@@ -124,7 +135,7 @@ func return_crafted_item(item_name):
 	return inventoryItem
 
 func _on_DownButton_pressed():
-	if page != 2:
+	if page != 3:
 		page += 1
 	set_current_page()
 	
@@ -139,10 +150,18 @@ func set_current_page():
 		1:
 			$Page1.initialize()
 			$Page2.hide()
+			$Page3.hide()
 			$UpButton.hide()
 			$DownButton.show()
 		2:
+			$Page3.hide()
 			$Page2.initialize()
+			$Page1.hide()
+			$UpButton.show()
+			$DownButton.show()
+		3:
+			$Page3.initialize()
+			$Page2.hide()
 			$Page1.hide()
 			$UpButton.show()
 			$DownButton.hide()

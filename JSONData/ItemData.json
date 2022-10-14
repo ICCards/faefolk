@@ -182,28 +182,28 @@
       "EnergyHealth": null
   },
   "ruby": {
-      "ItemCategory": "Mineral",
+      "ItemCategory": "Resource",
       "StackSize" : 999,
       "Description": "[gem description]",
       "Ingredients": null,
       "EnergyHealth": null
   },
   "emerald": {
-      "ItemCategory": "Mineral",
+      "ItemCategory": "Resource",
       "StackSize" : 999,
       "Description": "[gem description]",
       "Ingredients": null,
       "EnergyHealth": null
   },
   "aquamarine": {
-      "ItemCategory": "Mineral",
+      "ItemCategory": "Resource",
       "StackSize" : 999,
       "Description": "[gem description]",
       "Ingredients": null,
       "EnergyHealth": null
   },
   "sapphire": {
-      "ItemCategory": "Mineral",
+      "ItemCategory": "Resource",
       "StackSize" : 999,
       "Description": "[gem description]",
       "Ingredients": null,

@@ -130,11 +130,15 @@ func _on_Hurtbox_area_entered(_area):
 		if Server.player_node.get_position().x <= get_position().x:
 			animation_player_tree.play("tree fall right")
 			yield(animation_player_tree, "animation_finished" )
-			InstancedScenes.intitiateItemDrop("wood", position+Vector2(130, -8), Stats.return_item_drop_quantity(_area.tool_name, "tree"))
+			var amt = Stats.return_item_drop_quantity(_area.tool_name, "tree")
+			CollectionsData.resources["wood"] += amt
+			InstancedScenes.intitiateItemDrop("wood", position+Vector2(130, -8), amt)
 		else:
 			animation_player_tree.play("tree fall left")
 			yield(animation_player_tree, "animation_finished" )
-			InstancedScenes.intitiateItemDrop("wood", position+Vector2(-130, -8), Stats.return_item_drop_quantity(_area.tool_name, "tree"))
+			var amt = Stats.return_item_drop_quantity(_area.tool_name, "tree")
+			CollectionsData.resources["wood"] += amt
+			InstancedScenes.intitiateItemDrop("wood", position+Vector2(-130, -8), amt)
 
 	elif health >= 1:
 		sound_effects_stump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
@@ -153,10 +157,14 @@ func _on_Hurtbox_area_entered(_area):
 		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects_stump.play()
 		animation_player_stump.play("stump destroyed")
+		var amt = Stats.return_item_drop_quantity(_area.tool_name, "stump")
 		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-8, 32))
-		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), Stats.return_item_drop_quantity(_area.tool_name, "stump"))
+		CollectionsData.resources["wood"] += amt
+		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
 		yield(get_tree().create_timer(3.0), "timeout")
 		queue_free()
+
+
 
 
 ### Tree modulate functions

@@ -68,7 +68,9 @@ func _on_StumpHurtBox_area_entered(_area):
 		sound_effects.play()
 		animation_player.play("stump destroyed")
 		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-16, 32))
-		InstancedScenes.intitiateItemDrop("wood", position, Stats.return_item_drop_quantity(_area.tool_name, "stump"))
+		var amt = Stats.return_item_drop_quantity(_area.tool_name, "stump")
+		CollectionsData.resources["wood"] += amt
+		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		yield(sound_effects, "finished")
 		queue_free()
 

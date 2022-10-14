@@ -3,13 +3,13 @@ extends GridContainer
 
 func initialize():
 	show()
-	for forage in CollectionsData.forage.keys():
-		if CollectionsData.forage[forage] > 0:
-			get_node(forage).modulate = Color("ffffff") # unlocked
-			get_node(forage).material.set_shader_param("flash_modifier", 0)
+	for item in CollectionsData.forage.keys():
+		if CollectionsData.forage[item] > 0:
+			get_node(item).modulate = Color("ffffff") # unlocked
+			get_node(item).material.set_shader_param("flash_modifier", 0)
 		else:
-			get_node(forage).modulate = Color("50ffffff") # locked
-			get_node(forage).material.set_shader_param("flash_modifier", 1)
+			get_node(item).modulate = Color("50ffffff") # locked
+			get_node(item).material.set_shader_param("flash_modifier", 1)
 
 func entered_item_area(item_name):
 	get_parent().item = item_name

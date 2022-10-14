@@ -176,6 +176,8 @@ func set_dimensions():
 			"down":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
+	elif item_name == "sleeping bag":
+		queue_free()
 
 
 
@@ -204,6 +206,9 @@ func _on_HurtBox_area_entered(area):
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	elif item_name == "furnace":
 		drop_items_in_furnace()
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	elif item_name == "tool cabinet":
+		drop_items_in_tc()
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	else: 
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
@@ -241,6 +246,11 @@ func drop_items_in_furnace():
 	for item in PlayerInventory.furnaces[id].keys():
 		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.furnaces[id][item], position)
 	PlayerInventory.furnaces.erase(id)
+
+func drop_items_in_tc():
+	for item in PlayerInventory.tool_cabinets[id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.tool_cabinets[id][item], position)
+	PlayerInventory.tool_cabinets.erase(id)
 
 
 func _on_DetectObjectOverPathBox_area_entered(area):

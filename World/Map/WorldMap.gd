@@ -34,7 +34,8 @@ func _input(event):
 	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode:
 		show()
 		initialize()
-	if event.is_action_released("open_map"):
+	if event.is_action_released("open_map") and not PlayerInventory.interactive_screen_mode and \
+	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode:
 		hide()
 		set_inactive()
 

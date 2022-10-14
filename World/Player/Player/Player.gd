@@ -124,14 +124,21 @@ func get_state():
 	return {'x': position.x, 'y': position.y, 'counter': counter, 'collisionMask': collisionMask}
 	
 	
-func sleep(direction_of_sleeping_bag, pos):
+func sleep(sleeping_bag_direction, pos):
 	if state != SLEEPING:
 		state = SLEEPING
 		spawn_position = position
 		position = pos
 		animation_player.play("sleep")
-		composite_sprites.set_player_animation(character, "sleep_" + direction_of_sleeping_bag.to_lower())
+		composite_sprites.set_player_animation(character, "sleep_" + "down")
+		if sleeping_bag_direction == "left":
+			composite_sprites.rotation_degrees = -90
+		elif sleeping_bag_direction == "right":
+			composite_sprites.rotation_degrees = 90
+		elif sleeping_bag_direction == "up":
+			composite_sprites.rotation_degrees = 180
 		yield(animation_player, "animation_finished")
+		composite_sprites.rotation_degrees = 0
 		state = MOVEMENT
 	
 func player_death():
@@ -163,6 +170,15 @@ func respawn():
 	$Camera2D/UserInterface.respawn()
 	$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", false) 
 	state = MOVEMENT
+
+
+func show_set_button_dialogue():
+	if not $Camera2D/UserInterface/EnterNewKey.visible:
+		$Camera2D/UserInterface/EnterNewKey.show()
+		
+func hide_set_button_dialogue():
+	if $Camera2D/UserInterface/EnterNewKey.visible:
+		$Camera2D/UserInterface/EnterNewKey.hide()
 
 	
 func initialize_camera_limits(top_left, bottom_right):
@@ -218,10 +234,10 @@ func _unhandled_input(event):
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
-	if event.is_action_pressed("run"):
+	if event.is_action_pressed("sprint"):
 		running_speed_change = 1.25
 		running = true
-	elif event.is_action_released("run"):
+	elif event.is_action_released("sprint"):
 		running_speed_change = 1.0
 		running = false
 
@@ -393,6 +409,7 @@ func walk_state(_direction):
 			animation = "walk_" + _direction.to_lower()
 		composite_sprites.set_player_animation(character, animation, null)
 	elif running and Sounds.current_footsteps_sound != Sounds.swimming:
+		decrease_energy_or_health()
 		animation_player.play("sprint")
 		animation = "run_" + _direction.to_lower()
 		composite_sprites.set_player_animation(character, animation, null)
@@ -400,6 +417,22 @@ func walk_state(_direction):
 	else:
 		animation_player.play("swim")
 		composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
+
+var temp = 0
+
+func decrease_energy_or_health():
+	temp += 1
+	if temp > 500:
+		temp = 0
+		if PlayerStats.energy == 0:
+			rng.randomize()
+			var amt = rng.randi_range(1,3)
+			$Area2Ds/HurtBox/AnimationPlayer.play("hit")
+			$Area2Ds/HurtBox/PlayerHitEffect/Label.text = str(amt)
+			$Area2Ds/HurtBox/PlayerHitEffect/AnimationPlayer.play("Animate" + str(rng.randi_range(1,2)))
+			PlayerStats.decrease_health(amt)
+		else:
+			PlayerStats.decrease_energy()
 
 func check_if_holding_item():
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):

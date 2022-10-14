@@ -3163,12 +3163,13 @@ outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
 script = ExtResource( 7 )
 
 [node name="GeneratedTiles" type="YSort" parent="."]
-z_index = -1
+z_index = -2
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="DecorationTiles" type="TileMap" parent="GeneratedTiles"]
+z_index = -2
 tile_set = SubResource( 236 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3177,6 +3178,7 @@ __meta__ = {
 }
 
 [node name="Water" type="TileMap" parent="GeneratedTiles"]
+z_index = -2
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3186,6 +3188,7 @@ __meta__ = {
 
 [node name="GreenGrassTiles" type="TileMap" parent="GeneratedTiles"]
 modulate = Color( 0.486275, 1, 0, 1 )
+z_index = -2
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3194,7 +3197,8 @@ __meta__ = {
 }
 
 [node name="DarkGreenGrassTiles" type="TileMap" parent="GeneratedTiles"]
-modulate = Color( 0.423667, 0.62, 0, 1 )
+modulate = Color( 0.401333, 0.56, 0, 1 )
+z_index = -2
 tile_set = SubResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3204,7 +3208,7 @@ __meta__ = {
 
 [node name="DirtTiles" type="TileMap" parent="GeneratedTiles"]
 modulate = Color( 0.92549, 0.894118, 0.8, 1 )
-z_index = -1
+z_index = -2
 tile_set = SubResource( 263 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3214,6 +3218,7 @@ __meta__ = {
 }
 
 [node name="SnowTiles" type="TileMap" parent="GeneratedTiles"]
+z_index = -2
 tile_set = SubResource( 261 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3222,7 +3227,7 @@ __meta__ = {
 }
 
 [node name="WetSandBeachBorder" type="TileMap" parent="GeneratedTiles"]
-z_index = -3
+z_index = -4
 tile_set = SubResource( 260 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3231,6 +3236,7 @@ __meta__ = {
 }
 
 [node name="WaveTiles" type="TileMap" parent="GeneratedTiles"]
+z_index = -1
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3239,7 +3245,7 @@ __meta__ = {
 }
 
 [node name="DrySandTiles" type="TileMap" parent="GeneratedTiles"]
-z_index = -4
+z_index = -6
 tile_set = SubResource( 319 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3249,7 +3255,7 @@ __meta__ = {
 
 [node name="TopOcean" type="TileMap" parent="GeneratedTiles"]
 modulate = Color( 1, 1, 1, 0.717647 )
-z_index = -1
+z_index = -2
 tile_set = SubResource( 356 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3258,7 +3264,7 @@ __meta__ = {
 }
 
 [node name="DeepOcean" type="TileMap" parent="GeneratedTiles"]
-z_index = -2
+z_index = -3
 tile_set = SubResource( 480 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3267,7 +3273,7 @@ __meta__ = {
 }
 
 [node name="ShallowOcean" type="TileMap" parent="GeneratedTiles"]
-z_index = -3
+z_index = -4
 tile_set = SubResource( 481 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3320,12 +3326,14 @@ show_collision = true
 format = 1
 
 [node name="FoundationTiles" type="TileMap" parent="PlacableTiles"]
+z_index = -1
 tile_set = SubResource( 450 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="SelectedFoundationTiles" type="TileMap" parent="PlacableTiles"]
 modulate = Color( 0, 0.717647, 1, 1 )
+z_index = -1
 tile_set = SubResource( 491 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -3394,4 +3402,9 @@ format = 1
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="SpawnBearTimer" type="Timer" parent="."]
+wait_time = 90.0
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="SpawnBearTimer" to="." method="_on_SpawnBearTimer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu/MainMenuButtons.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Images/Misc/MainMenu/quit button.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Misc/MainMenu/shop button.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=6]
+[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=7]
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_7.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_5.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_4.png" type="Texture" id=13]
@@ -61,11 +62,11 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 
 [node name="PlayLabel" type="Label" parent="PlayShopQuit/Play"]
-margin_left = 128.0
-margin_top = 38.0
-margin_right = 587.0
-margin_bottom = 179.0
-theme = ExtResource( 6 )
+margin_left = 126.0
+margin_top = 27.0
+margin_right = 585.0
+margin_bottom = 173.0
+theme = ExtResource( 7 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
 custom_constants/shadow_offset_y = 6
@@ -82,10 +83,10 @@ texture = ExtResource( 5 )
 
 [node name="ShopLabel" type="Label" parent="PlayShopQuit/Shop"]
 margin_left = 238.0
-margin_top = 213.0
+margin_top = 200.0
 margin_right = 695.0
-margin_bottom = 354.0
-theme = ExtResource( 6 )
+margin_bottom = 346.0
+theme = ExtResource( 7 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
 custom_constants/shadow_offset_y = 6
@@ -101,11 +102,11 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 
 [node name="QuitLabel" type="Label" parent="PlayShopQuit/Quit"]
-margin_left = 345.0
-margin_top = 386.0
-margin_right = 803.0
-margin_bottom = 527.0
-theme = ExtResource( 6 )
+margin_left = 344.0
+margin_top = 366.0
+margin_right = 802.0
+margin_bottom = 512.0
+theme = ExtResource( 7 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
 custom_constants/shadow_offset_y = 6
@@ -144,23 +145,22 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="ConnectToPlugButton" type="Button" parent="ConnectToPlug"]
-margin_left = 1789.0
-margin_top = -807.0
-margin_right = 1921.0
-margin_bottom = -775.0
-rect_scale = Vector2( 5, 5 )
+margin_left = 1939.0
+margin_top = -823.0
+margin_right = 2071.0
+margin_bottom = -791.0
+rect_scale = Vector2( 4, 4 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 
-[node name="ConnectToPlugLabel" type="Label" parent="ConnectToPlug/ConnectToPlugButton"]
-margin_left = 6.0
-margin_top = 2.0
-margin_right = 806.0
-margin_bottom = 186.0
-rect_scale = Vector2( 0.15, 0.15 )
+[node name="ConnectToPlugLabel" type="Label" parent="ConnectToPlug"]
+margin_left = 1799.0
+margin_top = -855.0
+margin_right = 2599.0
+margin_bottom = -671.0
 theme = ExtResource( 6 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
@@ -175,7 +175,6 @@ visible = false
 position = Vector2( 1349, -52 )
 scale = Vector2( 18, 18 )
 frames = SubResource( 6 )
-frame = 1
 playing = true
 
 [node name="Tween" type="Tween" parent="."]

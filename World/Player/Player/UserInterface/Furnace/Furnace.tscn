@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Furnace/Furnace.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Themes/HideCollection.tres" type="Material" id=4]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=5]

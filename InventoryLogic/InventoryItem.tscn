@@ -20,10 +20,10 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
-margin_left = 14.0
-margin_top = 35.0
-margin_right = 134.0
-margin_bottom = 96.0
+margin_left = 19.0
+margin_top = 41.0
+margin_right = 139.0
+margin_bottom = 102.0
 grow_horizontal = 2
 rect_scale = Vector2( 0.3, 0.3 )
 mouse_filter = 1

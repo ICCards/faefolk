@@ -27,7 +27,7 @@ func _play_hover_effect(button_name):
 
 func _on_ConnectToPlugButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.volume_db = -28 #Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
 	_login_test()
 	#IC.connect_plug(connect_callback)

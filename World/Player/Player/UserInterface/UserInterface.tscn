@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Clock/CurrentTime.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
 [ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" type="PackedScene" id=5]
@@ -104,7 +105,6 @@ tracks/0/keys = {
 script = ExtResource( 23 )
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
-visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
 visible = false
@@ -170,3 +170,23 @@ margin_bottom = 680.0
 color = Color( 0, 0, 0, 0.552941 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="EnterNewKey" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.921569 )
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Label" type="Label" parent="EnterNewKey"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -148.0
+margin_top = -30.5
+margin_right = 148.0
+margin_bottom = 30.5
+theme = ExtResource( 2 )
+text = "Enter new key"
+align = 1
+valign = 1

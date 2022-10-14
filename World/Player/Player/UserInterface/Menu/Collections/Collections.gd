@@ -31,7 +31,7 @@ func _physics_process(delta):
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == "Mineral" and CollectionsData.minerals[item] != 0:
+		elif page == "Resources" and CollectionsData.resources[item] != 0:
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
@@ -63,7 +63,7 @@ func initialize():
 	$ForageCollection.hide()
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
-	$MineralCollection.hide()
+	$ResourceCollection.hide()
 	$FoodBtnLeft.hide()
 	$FoodBtnRight.hide()
 
@@ -77,7 +77,7 @@ func _on_Crops_pressed():
 	$FoodCollection2.hide()
 	$FoodBtnLeft.hide()
 	$FoodBtnRight.hide()
-	$MineralCollection.hide()
+	$ResourceCollection.hide()
 	
 
 func _on_Fish_pressed():
@@ -90,7 +90,7 @@ func _on_Fish_pressed():
 	$ForageCollection.hide()
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
-	$MineralCollection.hide()
+	$ResourceCollection.hide()
 
 func _on_Forage_pressed():
 	page = "Forage"
@@ -102,10 +102,10 @@ func _on_Forage_pressed():
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections3.png")
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
-	$MineralCollection.hide()
+	$ResourceCollection.hide()
 
 func _on_Minerals_pressed():
-	page = "Minerals"
+	page = "Resources"
 	$FoodBtnLeft.hide()
 	$FoodBtnRight.hide()
 	$CropCollection.hide()
@@ -113,7 +113,7 @@ func _on_Minerals_pressed():
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
 	$ForageCollection.hide()
-	$MineralCollection.initialize()
+	$ResourceCollection.initialize()
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections4.png")
 
 func _on_Foods_pressed():
@@ -126,7 +126,7 @@ func _on_Foods_pressed():
 	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections5.png")
 	$FoodCollection1.initialize()
 	$FoodCollection2.hide()
-	$MineralCollection.hide()
+	$ResourceCollection.hide()
 
 
 func _on_Crops_mouse_entered():
@@ -145,7 +145,7 @@ func _on_Forage_mouse_exited():
 	tab = null
 	
 func _on_Minerals_mouse_entered():
-	tab = "Minerals"
+	tab = "Resources"
 func _on_Minerals_mouse_exited():
 	tab = null
 	

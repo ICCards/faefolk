@@ -4,7 +4,7 @@
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash top.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=5]
+[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Stove/Stove.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Themes/HideCollection.tres" type="Material" id=8]

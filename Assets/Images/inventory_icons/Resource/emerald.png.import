@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/red_stone.png-e052d80828a8b9fbbbd3455e588a2e15.stex"
+path="res://.import/emerald.png-599438654ff86623c45f7bc01c916f22.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/Resource/red_stone.png"
-dest_files=[ "res://.import/red_stone.png-e052d80828a8b9fbbbd3455e588a2e15.stex" ]
+source_file="res://Assets/Images/inventory_icons/Resource/emerald.png"
+dest_files=[ "res://.import/emerald.png-599438654ff86623c45f7bc01c916f22.stex" ]
 
 [params]
 

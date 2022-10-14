@@ -20,6 +20,8 @@ var object_name
 var object_level
 var object_id
 
+var is_opening_chest: bool = false
+
 enum {
 	MOVEMENT, 
 	SWINGING,
@@ -31,6 +33,7 @@ enum {
 }
 
 func _ready():
+	$Menu.hide()
 	add_hotbar_clock_and_stats()
 
 
@@ -124,15 +127,18 @@ func toggle_tc(id):
 		close_tc(id)
 
 func toggle_chest(id):
-	if not has_node("Chest"):
-		Server.world.get_node("Placables/"+id).open_chest()
-		yield(get_tree().create_timer(0.5), "timeout")
-		var chest = Chest.instance()
-		chest.id = id
-		add_child(chest)
-		close_hotbar_clock_and_stats()
-	else:
-		close_chest(id)
+	if not is_opening_chest:
+		if not has_node("Chest"):
+			is_opening_chest = true
+			Server.world.get_node("Placables/"+id).open_chest()
+			yield(get_tree().create_timer(0.5), "timeout")
+			is_opening_chest = false
+			var chest = Chest.instance()
+			chest.id = id
+			add_child(chest)
+			close_hotbar_clock_and_stats()
+		else:
+			close_chest(id)
 
 func close_hotbar_clock_and_stats():
 	PlayerInventory.interactive_screen_mode = true

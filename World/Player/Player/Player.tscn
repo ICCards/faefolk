@@ -5682,7 +5682,7 @@ volume_db = -16.0
 
 [node name="FootstepsSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 6 )
-volume_db = -80.0
+volume_db = -16.0
 autoplay = true
 stream_paused = true
 bus = "Bus1"

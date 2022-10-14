@@ -12,7 +12,9 @@ var key_dict = {
 	"open_menu": 73,
 	"action": 69,
 	"rotate": 82,
-	"open_map": 71
+	"open_map": 71,
+	"sprint": 16777237,
+	
 }
 
 func save_keys():
@@ -53,9 +55,9 @@ func delete_old_keys():
 func setup_keys():
 	print("SETTING UP KEYS")
 	for i in key_dict:
-		for j in get_tree().get_nodes_in_group("button_keys"):
-			if(j.action_name == i):
-				j.text = OS.get_scancode_string(key_dict[i])
+#		for j in get_tree().get_nodes_in_group("button_keys"):
+#			if(j.action_name == i):
+#				j.text = OS.get_scancode_string(key_dict[i])
 		var newkey = InputEventKey.new()
 		newkey.scancode = int(key_dict[i])
 		InputMap.action_add_event(i,newkey)

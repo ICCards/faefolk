@@ -225,5 +225,5 @@ func _on_TrashButton_pressed():
 
 
 func _on_btn_pressed():
-	find_parent("UserInterface").close_chest(id)
+	find_parent("UserInterface").close_tc(id)
 

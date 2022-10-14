@@ -8,66 +8,70 @@ var footstep_volume = 50
 signal volume_change
 signal footsteps_sound_change
 
-func _ready():
-	set_music_volume(music_volume)
-	set_sound_volume(sound_volume)
-	set_ambient_volume(ambient_volume)
-	set_footstep_volume(footstep_volume)
-
+##func _ready():
+##	set_music_volume(music_volume)
+##	set_sound_volume(sound_volume)
+##	set_ambient_volume(ambient_volume)
+##	set_footstep_volume(footstep_volume)
+#
 func set_music_volume(val):
-	music_volume = val
-	emit_signal("volume_change")
+	pass
+#	music_volume = val
+#	emit_signal("volume_change")
 
 func set_sound_volume(val):
-	sound_volume = val
-	emit_signal("volume_change")
-	
+	pass
+#	sound_volume = val
+#	emit_signal("volume_change")
+
 func set_ambient_volume(val):
-	ambient_volume = val
-	emit_signal("volume_change")
+	pass
+#	ambient_volume = val
+#	emit_signal("volume_change")
 
 func set_footstep_volume(val):
-	footstep_volume = val
-	emit_signal("volume_change")
+	pass
+#	footstep_volume = val
+#	emit_signal("volume_change")
 	
 func return_adjusted_sound_db(category, init_sound):
-	return -80
-#	if category == "music":
-#		var progress = music_volume / 100
-#		if progress == 0.5:
-#			return init_sound
-#		elif progress < 0.5:
-#			var dis_to_mute =  -(80 + init_sound)
-#			return (init_sound + ((1 - (progress * 2)) * dis_to_mute))
-#		elif progress > 0.5:
-#			return init_sound + ((progress - 0.5) / 5) * 150
-#	elif category == "sound":
-#		var progress = sound_volume / 100
-#		if progress == 0.5:
-#			return init_sound
-#		elif progress < 0.5:
-#			var dis_to_mute =  -(80 + init_sound)
-#			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
-#		elif progress > 0.5:
-#			return init_sound + ((progress - 0.5) / 5) * 150
-#	elif category == "ambient":
-#		var progress = ambient_volume / 100
-#		if progress == 0.5:
-#			return init_sound
-#		elif progress < 0.5:
-#			var dis_to_mute =  -(80 + init_sound)
-#			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
-#		elif progress > 0.5:
-#			return init_sound + ((progress - 0.5) / 5) * 150
-#	elif category == "footstep":
-#		var progress = footstep_volume / 100
-#		if progress == 0.5:
-#			return init_sound
-#		elif progress < 0.5:
-#			var dis_to_mute =  -(60 + init_sound)
-#			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
-#		elif progress > 0.5:
-#			return init_sound + ((progress - 0.5) / 5) * 150
+	return init_sound
+	if category == "music":
+		var progress = music_volume / 100
+		if progress == 0.5:
+			return init_sound
+		elif progress < 0.5:
+			var dis_to_mute =  -(80 + init_sound)
+			return (init_sound + ((1 - (progress * 2)) * dis_to_mute))
+		elif progress > 0.5:
+			return init_sound + ((progress - 0.5) / 5) * 150
+	elif category == "sound":
+		var progress = sound_volume / 100
+		if progress == 0.5:
+			return init_sound
+		elif progress < 0.5:
+			var dis_to_mute =  -(80 + init_sound)
+			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
+		elif progress > 0.5:
+			return init_sound + ((progress - 0.5) / 5) * 150
+	elif category == "ambient":
+		var progress = ambient_volume / 100
+		if progress == 0.5:
+			return init_sound
+		elif progress < 0.5:
+			var dis_to_mute =  -(80 + init_sound)
+			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
+		elif progress > 0.5:
+			return init_sound + ((progress - 0.5) / 5) * 150
+	elif category == "footstep":
+		var progress = footstep_volume / 100
+		if progress == 0.5:
+			return init_sound
+		elif progress < 0.5:
+			var dis_to_mute =  -(60 + init_sound)
+			return init_sound + ((1 - (progress * 2)) * dis_to_mute)
+		elif progress > 0.5:
+			return init_sound + ((progress - 0.5) / 5) * 150
 
 
 ### Handles switching footsteps sound

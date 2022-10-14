@@ -35,7 +35,7 @@ func _on_Btn_pressed():
 		PlayerInventory.add_item_to_hotbar(str(type) + " clam", 1, null)
 		if Util.chance(1):
 			pearl_types.shuffle()
-			PlayerInventory.add_item_to_hotbar(pearl_types[0], 1, null)
+			PlayerInventory.add_item_to_hotbar(pearl_types[0]+" pearl", 1, null)
 			CollectionsData.forage[pearl_types[0]] += 1
 		queue_free()
 

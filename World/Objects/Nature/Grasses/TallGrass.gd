@@ -40,8 +40,8 @@ func play_hit_effect():
 		
 func play_back_effect():
 	if !bodyEnteredFlag2 and Server.isLoaded and visible:
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
-		$SoundEffects.play()
+#		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+#		$SoundEffects.play()
 		$AnimationPlayer2.play("animate back")
 
 func _on_Area2D_body_entered(_body):

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ruby.png-573cbc653f63a632d8e2720013964c13.stex"
+path="res://.import/grabber.png-ffa76aa324ff15a079900fb5733916e9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/Mineral/ruby.png"
-dest_files=[ "res://.import/ruby.png-573cbc653f63a632d8e2720013964c13.stex" ]
+source_file="res://Assets/Images/Inventory UI/Options/grabber.png"
+dest_files=[ "res://.import/grabber.png-ffa76aa324ff15a079900fb5733916e9.stex" ]
 
 [params]
 
