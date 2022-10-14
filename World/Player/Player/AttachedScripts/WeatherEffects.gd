@@ -8,7 +8,7 @@ func _ready():
 
 func play_lightning_effect():
 	rng.randomize()
-	var randomDelay = rng.randi_range(10, 30)
+	var randomDelay = rng.randi_range(20, 50)
 	if has_node("/root/World/Players/" + Server.player_id):
 		var player = get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id)
 		yield(get_tree().create_timer(randomDelay), "timeout")

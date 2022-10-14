@@ -38,6 +38,7 @@ scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
 
 [node name="StormIcon2" type="Sprite" parent="Map"]
+visible = false
 scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
 

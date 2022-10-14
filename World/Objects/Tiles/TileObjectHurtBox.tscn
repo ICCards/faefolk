@@ -127,7 +127,7 @@ position = Vector2( 21, -112 )
 scale = Vector2( 0.75, 0.75 )
 z_index = 1
 frames = SubResource( 15 )
-frame = 7
+frame = 3
 playing = true
 
 [node name="Chest" type="AnimatedSprite" parent="."]

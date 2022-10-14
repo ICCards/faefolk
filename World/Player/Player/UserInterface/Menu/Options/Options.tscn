@@ -281,7 +281,6 @@ __meta__ = {
 }
 
 [node name="Grid2" type="GridContainer" parent="VBoxContainer"]
-margin_left = 20.0
 margin_top = 340.0
 margin_right = 446.0
 margin_bottom = 804.0
