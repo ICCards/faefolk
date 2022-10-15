@@ -26,8 +26,10 @@ var tree_broke = false
 
 
 func _ready():
+	hide()
 	rng.randomize()
 	random_leaves_falling_timer.wait_time = rng.randi_range(15.0, 60.0)
+	random_leaves_falling_timer.start()
 	treeObject = Images.returnTreeObject(variety)
 	setTexture(treeObject)
 	### FIX THIS IF TREE ALREADY BROKE
@@ -229,9 +231,9 @@ func _on_TreeTopArea_area_exited(_area):
 	set_tree_visible()
 
 func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
+	show()
 func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
+	hide()
 
 func _on_RandomLeavesFallingTimer_timeout():
 	random_leaves_falling_timer.wait_time = rng.randi_range(15.0, 60.0)

@@ -15,6 +15,7 @@ var small_break = false
 
 
 func _ready():
+	hide()
 	ore_object = Images.returnOreObject(variety)
 	setTexture(ore_object)
 	
@@ -129,6 +130,6 @@ func add_to_collection(type, amt):
 
 
 func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
+	show()
 func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
+	hide()

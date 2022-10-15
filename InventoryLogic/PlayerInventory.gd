@@ -30,9 +30,9 @@ var inventory = {
 }
 
 var hotbar = {
-	#0 : ["wood box", 800, null],
-	#5 : ["scythe", 1, null],
-	#6 : ["gold sword", 1, null], 
+	0 : ["stone axe", 1, null],
+	5 : ["scythe", 1, null],
+	6 : ["gold sword", 1, null], 
 #	8 : ["bow", 1, null],
 #	9 : ["arrow", 800, null],
 }

@@ -12,6 +12,7 @@ var health
 var variety
 
 func _ready():
+	hide()
 	tree_object = Images.returnTreeObject(variety)
 	setTexture(tree_object)
 	
@@ -76,7 +77,7 @@ func _on_StumpHurtBox_area_entered(_area):
 
 
 func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
+	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
+	hide()

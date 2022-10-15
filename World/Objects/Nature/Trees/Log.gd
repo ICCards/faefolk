@@ -12,6 +12,7 @@ var tree_variety
 var location
 
 func _ready():
+	hide()
 	setTreeBranchType(variety)
 	
 func PlayEffect(player_id):

@@ -5,8 +5,8 @@ var random_storm_position
 var is_snow_storm = false
 
 
-var MIN_DIST = 1000
-var MAX_DIST = 4000
+var MIN_DIST = 4000
+var MAX_DIST = 28000
 
 
 func _ready():

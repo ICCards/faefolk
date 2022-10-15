@@ -6,6 +6,7 @@ var location
 var types = ["blue", "green", "purple", "red"]
 
 func _ready():
+	hide()
 	randomize()
 	types.shuffle()
 	type = types[0]
@@ -49,3 +50,9 @@ func _on_DetectPlayer_area_exited(area):
 	if $Btn.is_hovered():
 		set_mouse_cursor_type()
 
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

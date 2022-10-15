@@ -28,8 +28,14 @@ collision_mask = 32
 position = Vector2( 16, 16 )
 shape = SubResource( 1 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 16, 16 )
+scale = Vector2( 5.0375, 4.2125 )
+
 [connection signal="mouse_entered" from="Btn" to="." method="_on_Btn_mouse_entered"]
 [connection signal="mouse_exited" from="Btn" to="." method="_on_Btn_mouse_exited"]
 [connection signal="pressed" from="Btn" to="." method="_on_Btn_pressed"]
 [connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
 [connection signal="area_exited" from="DetectPlayer" to="." method="_on_DetectPlayer_area_exited"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
