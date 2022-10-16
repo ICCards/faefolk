@@ -20,6 +20,8 @@ func _play_background_music():
 	play()
 	yield(self, "finished")
 	Sounds.index += 1
+	if Sounds.index == 10:
+		Sounds.index = 0
 	Sounds.emit_signal("song_finished")
 	_play_background_music()
 

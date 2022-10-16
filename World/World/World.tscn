@@ -3404,7 +3404,6 @@ format = 1
 
 [node name="SpawnBearTimer" type="Timer" parent="."]
 wait_time = 90.0
-autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="SpawnBearTimer" to="." method="_on_SpawnBearTimer_timeout"]
