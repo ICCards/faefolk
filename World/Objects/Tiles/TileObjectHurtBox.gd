@@ -32,6 +32,7 @@ func set_dimensions():
 	rng.randomize()
 	id = str(rng.randi_range(0, 100000))
 	name = str(id)
+	$Position2D.scale = Constants.dimensions_dict[item_name]
 	if item_name == "wood chest" or item_name == "stone chest":
 		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
 		$Position2D/StaticBody2D/CollisionShape2D.disabled = false
@@ -39,7 +40,6 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_level = ""
 		$Position2D/InteractiveArea.name = str(id)
 		PlayerInventory.chests[id] = {}
-		$Position2D.scale.x = 2.0
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -87,7 +87,6 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "workbench"
 		$Position2D/InteractiveArea.object_level = item_name.substr(11)
 		$Position2D/InteractiveArea.name = str(id)
-		$Position2D.scale.x = 2.0
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -107,7 +106,6 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_level = item_name.substr(7)
 		$Position2D/InteractiveArea.name = str(id)
 		PlayerInventory.stoves[id] = {}
-		$Position2D.scale.x = 2.0
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -127,7 +125,6 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_level = item_name.substr(12)
 		$Position2D/InteractiveArea.name = str(id)
 		PlayerInventory.grain_mills[id] = {}
-		$Position2D.scale.x = 2.0
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -162,7 +159,6 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_level = ""
 		$Position2D/InteractiveArea.name = str(id)
 		PlayerInventory.tool_cabinets[id] = {}
-		$Position2D.scale.x = 2.0
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -176,6 +172,27 @@ func set_dimensions():
 			"down":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
+	elif item_name == "dresser":
+#		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+#		$Position2D/InteractiveArea.object_name = "workbench"
+#		$Position2D/InteractiveArea.object_level = item_name.substr(11)
+#		$Position2D/InteractiveArea.name = str(id)
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+				$Position2D.position = Vector2(16, -32)
+			"right":
+				$Position2D.rotation_degrees = 270
+				$Position2D.position = Vector2(16, -32)
+			"up":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 180
+			"down":
+				$Position2D.position = Vector2(32, -16)
+				$Position2D.rotation_degrees = 0
+	elif item_name == "well":
+		$Position2D.scale = Constants.dimensions_dict[item_name]
+		$Position2D.position = Vector2(48, -32)
 	elif item_name == "sleeping bag":
 		queue_free()
 

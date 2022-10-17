@@ -2,10 +2,6 @@ extends Node
 
 var item_data: Dictionary
 var crop_data: Dictionary
-var house_objects_data: Dictionary
-var crafting_data: Dictionary
-var food_data: Dictionary
-var fish_data: Dictionary
 
 func _ready():
 	item_data = LoadData("res://JSONData/ItemData.json")

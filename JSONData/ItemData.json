@@ -806,7 +806,41 @@
       "EnergyHealth": null
   },
   
-  
+  "well" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Provides a place for you to refill your watering can.",
+      "Ingredients": [["wood", 20], ["stone", 50]],
+      "EnergyHealth": null
+  },
+  "chair" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "stool" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "table" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "dresser" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
   "wood door" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
@@ -845,7 +879,7 @@
   "tool cabinet" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Sets building point.",
+      "Description": "Sets building point and building upkeep.",
       "Ingredients": [["wood", 150]],
       "EnergyHealth": null
   },
@@ -979,7 +1013,7 @@
     "sleeping bag": {
         "ItemCategory": "Placable object",
         "StackSize": 999,
-        "Description": "Can be placed and used to set respawn point in the world.",
+        "Description": "Can be placed and used to set respawn point.",
         "Ingredients": [["wood", 10],["stone", 2]],
         "EnergyHealth": null
     },

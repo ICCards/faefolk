@@ -85,12 +85,7 @@ func place_object_in_world(id, item_name, direction, location):
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 	match item_name:
 		"furnace":
-#			tileObjectHurtBox.queue_free()
 			Tiles.remove_valid_tiles(location)
-#			var furnace = Furnace.instance()
-#			furnace.direction = direction
-#			furnace.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
-#			Server.world.call_deferred("add_child", furnace, true)
 			match direction:
 				"down":
 					Tiles.object_tiles.set_cellv(location, 35)
@@ -100,6 +95,40 @@ func place_object_in_world(id, item_name, direction, location):
 					Tiles.object_tiles.set_cellv(location, 38)
 				"right":
 					Tiles.object_tiles.set_cellv(location, 37)
+		"chair":
+			Tiles.remove_valid_tiles(location)
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 68)
+				"up":
+					Tiles.object_tiles.set_cellv(location,  71)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 69)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 70)
+		"dresser":
+			match direction:
+				"down":
+					Tiles.remove_valid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location, 76)
+				"up":
+					Tiles.remove_valid_tiles(location, Vector2(2,1))
+					Tiles.object_tiles.set_cellv(location,  76)
+				"left":
+					Tiles.remove_valid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 78)
+				"right":
+					Tiles.remove_valid_tiles(location, Vector2(1,2))
+					Tiles.object_tiles.set_cellv(location, 77)
+		"stool":
+			Tiles.remove_valid_tiles(location)
+			Tiles.object_tiles.set_cellv(location, 72)
+		"table":
+			Tiles.remove_valid_tiles(location, Vector2(2,2))
+			Tiles.object_tiles.set_cellv(location, 74)
+		"well":
+			Tiles.remove_valid_tiles(location, Vector2(3,2))
+			Tiles.object_tiles.set_cellv(location, 75)
 		"tool cabinet":
 			match direction:
 				"down":
@@ -107,7 +136,7 @@ func place_object_in_world(id, item_name, direction, location):
 					Tiles.object_tiles.set_cellv(location, 30)
 				"up":
 					Tiles.remove_valid_tiles(location, Vector2(2,1))
-					Tiles.object_tiles.set_cellv(location,  31)
+					Tiles.object_tiles.set_cellv(location, 31)
 				"left":
 					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 33)
@@ -320,6 +349,10 @@ func place_object_in_world(id, item_name, direction, location):
 					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 67)
 		"sleeping bag":
+			if direction == "up" or direction == "down":
+				Tiles.remove_valid_tiles(location, Vector2(2,1))
+			else:
+				Tiles.remove_valid_tiles(location, Vector2(1,2))
 			var sleepingBag = SleepingBag.instance()
 			sleepingBag.direction = direction
 			sleepingBag.location = location

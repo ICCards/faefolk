@@ -25,7 +25,13 @@ var dimensions_dict = {
 	"grain mill #1": Vector2(2,1),
 	"grain mill #2": Vector2(2,1),
 	"grain mill #3": Vector2(2,1),
+	"chair": Vector2(1,1),
+	"stool": Vector2(1,1),
+	"well": Vector2(3,2),
+	"dresser": Vector2(2,1),
+	"table": Vector2(2,2)
 }
+
 
 
 

@@ -317,7 +317,6 @@ flat = true
 visible = false
 
 [node name="Crafting" parent="." instance=ExtResource( 6 )]
-visible = false
 margin_left = -375.0
 margin_top = 37.0
 margin_right = -375.0
@@ -719,7 +718,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 23
+frame = 19
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -846,6 +845,7 @@ rect_scale = Vector2( 0.6, 0.6 )
 texture_normal = ExtResource( 43 )
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 7 )]
+visible = false
 margin_left = -286.0
 margin_top = 121.0
 margin_right = 297.0

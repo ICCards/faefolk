@@ -59,7 +59,7 @@ func initialize():
 		state = SLEEPING_BAG
 	elif item_name == "furnace" or item_name == "tool cabinet" or item_name == "stone chest" or item_name == "wood chest" or \
 	item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3" or item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or\
-	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
+	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "chair" or item_name == "dresser":
 		state = ROTATABLE
 	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR
@@ -96,16 +96,8 @@ func set_dimensions():
 		ITEM:
 			$ItemToPlace.visible = true
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
-			if item_name == "house":
-				$ColorIndicator.tile_size = Vector2(8, 4)
-				$ItemToPlace.rect_position = Vector2(-3, -301)
-				$ItemToPlace.rect_scale = Vector2(0.9, 0.9)
-			elif item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench #1" or item_name == "grain mill #1" or item_name == "stove #1" \
-					or item_name == "workbench #2" or item_name == "grain mill #2" or item_name == "stove #2" or \
-					item_name == "workbench #3" or item_name == "grain mill #3" or item_name == "stove #3":
-				$ColorIndicator.tile_size = Vector2(2, 1)
-			else:
-				$ColorIndicator.tile_size = Vector2(1, 1)
+			var dimensions = Constants.dimensions_dict[item_name]
+			$ColorIndicator.tile_size = dimensions
 		SEED:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
@@ -305,15 +297,8 @@ func get_rotation_index():
 
 func place_item_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench #1" or item_name == "grain mill #1" or item_name == "stove #1" \
-	or item_name == "workbench #2" or item_name == "grain mill #2" or item_name == "stove #2" or \
-	item_name == "workbench #3" or item_name == "grain mill #3" or item_name == "stove #3") and Tiles.valid_tiles.get_cellv(location + Vector2(1,0)) != 0:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif item_name == "house" and not Tiles.validate_tiles(location, Vector2(8,4)):
+	var dimensions = Constants.dimensions_dict[item_name]
+	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
