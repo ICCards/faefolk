@@ -16,7 +16,7 @@ func _ready():
 	setTreeBranchType(variety)
 	
 func PlayEffect(player_id):
-	Tiles.reset_valid_tiles(location)
+	Tiles.add_valid_tiles(location)
 	sound_effects.stream = Sounds.stump_break
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 	sound_effects.play()
@@ -39,7 +39,8 @@ func setTreeBranchType(num):
 func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	Tiles.set_valid_tiles(location)
+	Server.generated_map["log"].erase(name)
+	Tiles.add_valid_tiles(location)
 	var data = {"id": name, "n": "log"}
 	Server.action("ON_HIT", data)
 	sound_effects.stream = Sounds.stump_break

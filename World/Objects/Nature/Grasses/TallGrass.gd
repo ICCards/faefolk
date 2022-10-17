@@ -53,11 +53,6 @@ func _on_Area2D_body_entered(_body):
 func _on_Area2D_body_exited(_body):
 	bodyEnteredFlag = false
 
-func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
-	
-func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
 
 
 func _on_BackArea2D_body_entered(body):
@@ -74,6 +69,7 @@ func _on_Area2D_area_entered(area):
 		$AnimationPlayer.play("animate front")
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 		if Util.chance(50):
+			CollectionsData.forage["green grass"] += 1
 			InstancedScenes.intitiateItemDrop("green grass",position+Vector2(0,-16),1)
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sund", -24)
 		$SoundEffects.play()
@@ -93,6 +89,7 @@ func _on_BackArea2D_area_entered(area):
 		$AnimationPlayer.play("animate front")
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 		if Util.chance(50):
+			CollectionsData.forage["green grass"] += 1
 			InstancedScenes.intitiateItemDrop("green grass",position+Vector2(0,-8), 1)
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
@@ -108,5 +105,11 @@ func _on_BackArea2D_area_entered(area):
 
 func destroy():
 	if not is_back_visible and not is_front_visible:
-		Tiles.set_valid_tiles(loc)
+		Server.generated_map["tall_grass"].erase(name)
+		Tiles.add_valid_tiles(loc)
 		queue_free()
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

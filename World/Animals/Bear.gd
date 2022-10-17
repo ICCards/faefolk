@@ -30,6 +30,7 @@ enum {
 }
 
 func _ready():
+	hide()
 	animation_player.play("loop")
 	randomize()
 	_idle_timer.wait_time = rand_range(4.0, 6.0)

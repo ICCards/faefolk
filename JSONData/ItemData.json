@@ -832,7 +832,7 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Turns ore and coal into metal bars.",
-      "Ingredients": [["wood", 50], ["stone", 100]],
+      "Ingredients": [["wood", 10], ["stone", 100]],
       "EnergyHealth": null
   },
   "display table" : {

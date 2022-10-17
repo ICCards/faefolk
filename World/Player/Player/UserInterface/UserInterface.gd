@@ -91,6 +91,10 @@ func _input(event):
 		elif event.is_action_pressed("slot10"):
 			PlayerInventory.active_item_slot = 9
 			PlayerInventory.emit_signal("active_item_updated")
+	elif PlayerInventory.viewMapMode:
+		$MapLabels.show()
+		return
+	$MapLabels.hide()
 
 
 func death():
@@ -129,6 +133,7 @@ func toggle_tc(id):
 func toggle_chest(id):
 	if not is_opening_chest:
 		if not has_node("Chest"):
+			PlayerInventory.interactive_screen_mode = true
 			is_opening_chest = true
 			Server.world.get_node("Placables/"+id).open_chest()
 			yield(get_tree().create_timer(0.5), "timeout")

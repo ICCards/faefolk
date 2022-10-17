@@ -4,10 +4,11 @@ var rng = RandomNumberGenerator.new()
 onready var tween = $Tween
 onready var timer = $Timer
 onready var tree_animation_player = $AnimationPlayer
-
+var tree_fallen: bool = false
 var health
 var treeObject
 var adjusted_leaves_falling_pos
+var location
 
 onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
@@ -28,28 +29,31 @@ func _ready():
 func _on_TreeHurtbox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
+	health -= Stats.return_axe_damage(area.tool_name)
+	Server.generated_map["tree"][name]["h"] = health
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
 	health -= 1
-	if health >= 4:
+	if health >= 1:
 		initiateLeavesFallingEffect(treeObject)
 		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
 		
-		if get_node("/root/World/Players/" + str(Server.player_id)).get_position().x <= get_position().x:	
+		if Server.player_node.get_position().x <= get_position().x:	
 			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			tree_animation_player.play("tree hit right")
 		else: 
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			tree_animation_player.play("tree hit left")
-	elif health == 3:
+	elif not tree_fallen:
+		tree_fallen = true
 		timer.stop()
 		disable_tree_top_collision_box()
 		$SoundEffects.stream = Sounds.tree_break
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
-		if get_node("/root/World/Players/" + str(Server.player_id)).get_position().x <= get_position().x:
+		if Server.player_node.get_position().x <= get_position().x:
 			tree_animation_player.play("tree fall right")
 			yield(tree_animation_player, "animation_finished" )
 			intitiateItemDrop("wood", Vector2(130, -8), 7)
@@ -57,6 +61,8 @@ func _on_TreeHurtbox_area_entered(area):
 			tree_animation_player.play("tree fall left")
 			yield(tree_animation_player, "animation_finished" )
 			intitiateItemDrop("wood", Vector2(-130, -8), 7)
+		Server.generated_map["tree"].erase(name)
+		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		queue_free()
 			
 			

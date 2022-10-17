@@ -104,7 +104,7 @@ func update_health_bar():
 
 
 func remove_wall():
-	Tiles.set_valid_tiles(location)
+	Tiles.add_valid_tiles(location)
 	Tiles.wall_tiles.set_cellv(location, -1)
 	Tiles.wall_tiles.update_bitmask_area(location)
 	queue_free()
@@ -153,11 +153,6 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 			if tool_name == "hammer":
 				$SelectedBorder.show()
 				show_selected_tile()
-#				Tiles.wall_tiles.set_cellv(location,-1)
-#				var autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
-#				Tiles.selected_wall_tiles.set_cell(location.x, location.y, false, false, false)
-#				$SelectedWallVisual.frame = autotile_cord.x 
-#				$SelectedWallVisual.show()
 				Server.player_node.get_node("Camera2D/UserInterface/RadialUpgradeMenu").initialize(location, self)
 
 func show_selected_tile():
@@ -193,8 +188,6 @@ func _on_HammerRepairBox_area_entered(area):
 	set_type()
 	Server.world.play_upgrade_building_effect(location)
 	show_health()
-
-
 
 
 func _on_DetectObjectOverPathBox_area_entered(area):

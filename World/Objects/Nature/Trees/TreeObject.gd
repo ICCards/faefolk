@@ -24,7 +24,6 @@ var tree_fallen = false
 var tree_broke = false
 
 
-
 func _ready():
 	hide()
 	rng.randomize()
@@ -32,8 +31,8 @@ func _ready():
 	random_leaves_falling_timer.start()
 	treeObject = Images.returnTreeObject(variety)
 	setTexture(treeObject)
-	### FIX THIS IF TREE ALREADY BROKE
-	if health <= 3:
+	if health < Stats.STUMP_HEALTH:
+		tree_fallen = true
 		disable_tree_top_collision_box()
 		tree_top_sprite.hide()
 		tree_bottom_sprite.hide()
@@ -90,7 +89,7 @@ func PlayEffect(player_id):
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", Vector2(-24, 12))
 			animation_player_stump.play("stump hit right")
 	else:
-		Tiles.set_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects_stump.stream = Sounds.stump_break
 		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects_stump.play()
@@ -104,12 +103,13 @@ func PlayEffect(player_id):
 func _on_Hurtbox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	var data = {"id": name, "n": "tree"}
-	Server.action("ON_HIT", data)
+	#var data = {"id": name, "n": "tree"}
+	#Server.action("ON_HIT", data)
 	if health == 100:
 		InstancedScenes.initiateBirdEffect(position)
 	health -= Stats.return_axe_damage(_area.tool_name)
-	if health > 25:
+	Server.generated_map["tree"][name]["h"] = health
+	if health >= Stats.STUMP_HEALTH:
 		InstancedScenes.initiateLeavesFallingEffect(variety, position)
 		sound_effects_tree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		sound_effects_tree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -154,7 +154,7 @@ func _on_Hurtbox_area_entered(_area):
 			animation_player_stump.play("stump hit right")
 	elif health <= 0 and not tree_broke: 
 		tree_broke = true
-		Tiles.set_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects_stump.stream = Sounds.stump_break
 		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects_stump.play()
@@ -164,6 +164,7 @@ func _on_Hurtbox_area_entered(_area):
 		CollectionsData.resources["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
 		yield(get_tree().create_timer(3.0), "timeout")
+		Server.generated_map["tree"].erase(name)
 		queue_free()
 
 

@@ -7,7 +7,7 @@
 extents = Vector2( 22.7778, 28.3507 )
 
 [sub_resource type="CircleShape2D" id=22]
-radius = 19.8889
+radius = 17.6666
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -557,7 +557,7 @@ shape = SubResource( 21 )
 position = Vector2( 3.33333, -25.5556 )
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
-position = Vector2( -3.33333, 29.8889 )
+position = Vector2( -3.33333, 33.2222 )
 rotation = -1.5708
 shape = SubResource( 22 )
 

@@ -27,27 +27,32 @@ func validate_tiles(location, dimensions):
 					break
 		return true
 		
-func remove_nature_invalid_tiles(location, _name = ""):
-	if _name == "tree" or _name == "stump" or _name == "large ore":
-		valid_tiles.set_cellv(location, -1)
-		valid_tiles.set_cellv(location + Vector2(-1, -1), -1 )
-		valid_tiles.set_cellv(location + Vector2(-1, 0), -1 )
-		valid_tiles.set_cellv(location + Vector2(0, -1), -1)
-	elif _name == "tall grass" or _name == "flower":
-		valid_tiles.set_cellv(location, 1)
-	else:
-		valid_tiles.set_cellv(location, -1)
+#func remove_nature_invalid_tiles(location, _name = ""):
+#	if _name == "tree" or _name == "stump" or _name == "large ore":
+#		valid_tiles.set_cellv(location, -1)
+#		valid_tiles.set_cellv(location + Vector2(-1, -1), -1 )
+#		valid_tiles.set_cellv(location + Vector2(-1, 0), -1 )
+#		valid_tiles.set_cellv(location + Vector2(0, -1), -1)
+#	elif _name == "tall grass" or _name == "flower":
+#		valid_tiles.set_cellv(location, 1)
+#	else:
+#		valid_tiles.set_cellv(location, -1)
 
 
-func remove_invalid_tiles(location,var dimensions = Vector2(1,1)):
+func remove_valid_tiles(location,var dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 
-func set_valid_tiles(location, var dimensions = Vector2(1,1)):
+func add_valid_tiles(location, var dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.set_cellv(location + Vector2(x, -y), 0)
+			
+func add_navigation_tiles(location, var dimensions = Vector2(1,1)):
+	for x in range(dimensions.x):
+		for y in range(dimensions.y):
+			valid_tiles.set_cellv(location + Vector2(x, -y), 1)
 
 
 func isValidAutoTile(_pos, _map):

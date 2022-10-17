@@ -46,15 +46,9 @@ func _on_Area2D_body_entered(_body):
 func _on_Area2D_body_exited(_body):
 	bodyEnteredFlag = false
 
-func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
-	
-func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
-
-
 func _on_Area2D_area_entered(area):
-	Tiles.set_valid_tiles(location)
+	Tiles.add_valid_tiles(location)
+	Server.generated_map["flower"].erase(name)
 	$Sprite.hide()
 	$LeafBreak.show()
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
@@ -62,3 +56,10 @@ func _on_Area2D_area_entered(area):
 	$LeafBreak.playing = true
 	yield($LeafBreak, "animation_finished")
 	queue_free()
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+	
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

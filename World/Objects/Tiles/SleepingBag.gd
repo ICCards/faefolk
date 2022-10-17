@@ -53,7 +53,7 @@ func _on_HurtBox_area_entered(area):
 	get_parent().call_deferred("add_child", itemDrop)
 	itemDrop.global_position = global_position 
 	if direction == "up" or direction == "down":
-		Tiles.set_valid_tiles(location, Vector2(1,2))
+		Tiles.add_valid_tiles(location, Vector2(1,2))
 	else:
-		Tiles.set_valid_tiles(location, Vector2(2,1))
+		Tiles.add_valid_tiles(location, Vector2(2,1))
 	queue_free()

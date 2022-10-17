@@ -53,7 +53,7 @@ func setTexture(ore):
 	rng.randomize()
 	bigOreSprite.texture = ore.largeOre
 	smallOreSprite.texture = ore.mediumOres[rng.randi_range(0, 5)]
-	if health <= 3:
+	if health <= 40:
 		$BigHurtBox/bigHurtBox.disabled = true
 		$BigMovementCollisionBox/BigMovementBox.disabled = true
 		$SmallHurtBox/smallHurtBox.disabled = false
@@ -67,10 +67,11 @@ func _on_BigHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	rng.randomize()
-	var data = {"id": name, "n": "large_ore"}
-	Server.action("ON_HIT", data)
+	#var data = {"id": name, "n": "large_ore"}
+	#Server.action("ON_HIT", data)
 	health -= Stats.return_pickaxe_damage(_area.tool_name)
-	if health > 25:
+	Server.generated_map["ore_large"][name]["h"] = health
+	if health > 40:
 		sound_effects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
@@ -100,7 +101,8 @@ func _on_SmallHurtBox_area_entered(_area):
 	health -= Stats.return_pickaxe_damage(_area.tool_name)
 	if health <= 0 and not small_break:
 		small_break = true
-		Tiles.set_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+		Server.generated_map["ore_large"].erase(name)
+		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()

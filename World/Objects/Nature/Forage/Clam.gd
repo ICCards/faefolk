@@ -12,7 +12,6 @@ func _ready():
 	set_random_texture() 
 
 func set_random_texture():
-	Tiles.remove_invalid_tiles(location)
 	$Clam.texture = load("res://Assets/Images/Forage/" + str(type) + " clam.png")
 
 func _on_Btn_mouse_entered():
@@ -25,7 +24,7 @@ func _on_Btn_mouse_exited():
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
 		CollectionsData.forage[str(type)+" clam"] += 1
-		Tiles.set_valid_tiles(location)
+		Tiles.add_valid_tiles(location)
 		$Clam.hide()
 		$Btn.disabled = true
 		$MovementCollision/CollisionShape2D.disabled = true
@@ -36,7 +35,7 @@ func _on_Btn_pressed():
 		if Util.chance(1):
 			pearl_types.shuffle()
 			PlayerInventory.add_item_to_hotbar(pearl_types[0]+" pearl", 1, null)
-			CollectionsData.forage[pearl_types[0]] += 1
+			CollectionsData.forage[pearl_types[0]+" pearl"] += 1
 		queue_free()
 
 func set_mouse_cursor_type():

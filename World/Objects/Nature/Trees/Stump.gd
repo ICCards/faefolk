@@ -49,9 +49,10 @@ func PlayEffect(player_id):
 func _on_StumpHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	var data = {"id": name, "n": "stump"}
-	Server.action("ON_HIT", data)
+#	var data = {"id": name, "n": "stump"}
+#	Server.action("ON_HIT", data)
 	health -= Stats.return_axe_damage(_area.tool_name)
+	Server.generated_map["stump"][name]["h"] = health
 	if health > 0:
 		sound_effects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -63,7 +64,8 @@ func _on_StumpHurtBox_area_entered(_area):
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
 			animation_player.play("stump hit right")
 	else:
-		Tiles.set_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+		Server.generated_map["stump"].erase(name)
+		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.stream = Sounds.stump_break
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()

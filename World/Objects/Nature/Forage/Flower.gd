@@ -13,7 +13,6 @@ func _ready():
 	set_random_texture()
 
 func set_random_texture():
-	Tiles.remove_invalid_tiles(location)
 	$Flower.texture = load("res://Assets/Images/Forage/"+ str(type) +" flower.png")
 
 func _on_Btn_mouse_entered():
@@ -24,8 +23,9 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
+		Server.generated_map["flower"].erase(name)
 		CollectionsData.forage[str(type)+" flower"] += 1
-		Tiles.set_valid_tiles(location)
+		Tiles.add_valid_tiles(location)
 		$Flower.hide()
 		$Btn.disabled = true
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))

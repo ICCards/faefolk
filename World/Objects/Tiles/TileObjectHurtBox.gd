@@ -18,7 +18,7 @@ func PlayEffect(_player_id):
 	$Light2D.enabled = false
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
-	Tiles.reset_valid_tiles(location, item_name)
+	Tiles.add_valid_tiles(location, item_name)
 	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
@@ -51,7 +51,7 @@ func set_dimensions():
 				$Chest.position = Vector2(18,0)
 				$Position2D.position = Vector2(16, -32)
 				$Chest.position = Vector2(16, -32)
-				Tiles.remove_invalid_tiles(location, Vector2(1,2))
+				Tiles.remove_valid_tiles(location, Vector2(1,2))
 			"right":
 				if item_name == "wood chest":
 					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/left.tres")
@@ -61,7 +61,7 @@ func set_dimensions():
 				$Position2D.rotation_degrees = 270
 				$Position2D.position = Vector2(16, -32)
 				$Chest.position = Vector2(16, -32)
-				Tiles.remove_invalid_tiles(location, Vector2(1,2))
+				Tiles.remove_valid_tiles(location, Vector2(1,2))
 			"up":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 180
@@ -70,7 +70,7 @@ func set_dimensions():
 					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/up.tres")
 				else:
 					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Up.tres")
-				Tiles.remove_invalid_tiles(location, Vector2(2,1))
+				Tiles.remove_valid_tiles(location, Vector2(2,1))
 			"down":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
@@ -79,7 +79,7 @@ func set_dimensions():
 					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/down.tres")
 				else:
 					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Down.tres")
-				Tiles.remove_invalid_tiles(location, Vector2(2,1))
+				Tiles.remove_valid_tiles(location, Vector2(2,1))
 		$Chest.animation = "open"
 		$Chest.show()
 	elif item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3":
@@ -216,9 +216,9 @@ func _on_HurtBox_area_entered(area):
 	$SoundEffects.play()
 	var dimensions = Constants.dimensions_dict[item_name]
 	if direction == "left" or direction == "right":
-		Tiles.set_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
+		Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 	else:
-		Tiles.set_valid_tiles(location, dimensions)
+		Tiles.add_valid_tiles(location, dimensions)
 	Tiles.object_tiles.set_cellv(location, -1)
 	Tiles.fence_tiles.set_cellv(location, -1)
 	Tiles.fence_tiles.update_bitmask_area(location)

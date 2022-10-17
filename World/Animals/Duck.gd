@@ -15,6 +15,7 @@ var MAX_MOVE_DISTANCE: float = 500.0
 var random_pos
 
 func _ready():
+	hide()
 	set_random_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
 	navigation_agent.connect("velocity_computed", self, "move")
@@ -145,10 +146,10 @@ func intitiateItemDrop(item, pos):
 
 
 func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
+	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
+	hide()
 
 
 func _on_RunStateTimer_timeout():

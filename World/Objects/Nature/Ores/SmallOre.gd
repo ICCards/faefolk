@@ -46,12 +46,14 @@ func _on_SmallHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	rng.randomize()
-	var data = {"id": name, "n": "ore"}
-	Server.action("ON_HIT", data)
+	#var data = {"id": name, "n": "ore"}
+	#Server.action("ON_HIT", data)
 	health -= Stats.return_pickaxe_damage(_area.tool_name)
+	Server.generated_map["ore"][name]["h"] = health
 	if health <= 0 and not ore_break:
 		ore_break = true
-		Tiles.set_valid_tiles(location)
+		Server.generated_map["ore"].erase(name)
+		Tiles.add_valid_tiles(location)
 		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()

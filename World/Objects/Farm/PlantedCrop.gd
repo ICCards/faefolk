@@ -13,10 +13,9 @@ var isBeingHarvested = false
 var bodyEnteredFlag = false
 
 
-func PlayEffect(player_id):
-	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
-	valid_tiles.set_cellv(loc, 0)
-	queue_free()
+#func PlayEffect(player_id):
+#	Tiles.add_valid_tiles(locatio)
+#	queue_free()
 
 func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _is_crop_dead):
 	crop_name = _crop_name
@@ -38,8 +37,6 @@ func refresh_image():
 	phase = return_phase()
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 
-func delete_crop():
-	queue_free() 
 
 #func return_if_crop_is_dead(if_crop_is_already_dead):
 #	if if_crop_is_already_dead: #or !JsonData.crop_data[crop_name]["Seasons"].has(DayNightTimer.season):
@@ -106,7 +103,7 @@ func harvest_and_remove():
 		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$HarvestSound.play()
 		$CropText.visible = false
-		Tiles.set_valid_tiles(loc)
+		Tiles.add_valid_tiles(loc)
 		isBeingHarvested = true
 		yield(get_tree().create_timer(0.6), "timeout")
 		phase = ""
@@ -152,17 +149,12 @@ func _on_PlayAnimBox_body_exited(body):
 
 
 func _on_HurtBox_area_entered(area):
-	Tiles.reset_valid_tiles(loc)
+	Tiles.add_valid_tiles(loc)
 	var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 	Server.action("ON_HIT", data)
 	queue_free()
 
 
-func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
-
-func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
 
 
 func _on_Harvest_pressed():
@@ -200,3 +192,9 @@ func _on_DetectPlayer_area_entered(area):
 func _on_DetectPlayer_area_exited(area):
 	if phase == "harvest" and $Harvest.is_hovered():
 		set_mouse_cursor_type()
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

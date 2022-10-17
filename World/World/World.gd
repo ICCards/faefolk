@@ -65,9 +65,9 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 100
-const NUM_BUNNIES = 100
-const NUM_BEARS = 20
+const NUM_DUCKS = 200
+const NUM_BUNNIES = 200
+const NUM_BEARS = 50
 const NUM_BOARS = 0
 const NUM_DEER = 0
 
@@ -175,7 +175,6 @@ func buildMap(map):
 	Tiles.object_tiles = $PlacableTiles/ObjectTiles
 	Tiles.fence_tiles = $PlacableTiles/FenceTiles
 	Tiles.light_tiles = $PlacableTiles/LightTiles
-	build_valid_tiles()
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
 	for id in map["dirt"]:
@@ -202,7 +201,6 @@ func buildMap(map):
 		var loc = map["forest"][id]
 		forest.set_cellv(loc, 0)
 	print("LOADED DG")
-	get_node("loadingScreen").set_phase("Building trees")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["snow"]:
 		var loc = map["snow"][id]
@@ -214,118 +212,6 @@ func buildMap(map):
 	for id in map["beach"]:
 		var loc = map["beach"][id]
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
-#	for id in map["tree"]:
-#		var loc = map["tree"][id]["l"] + Vector2(1,0)
-#		Tiles.remove_nature_invalid_tiles(loc, "tree")
-#		var biome = map["tree"][id]["b"]
-#		if biome == "desert":
-#			var object = DesertTree.instance()
-#			var pos = dirt.map_to_world(loc)
-#			object.health = 100
-#			object.position = pos + Vector2(0, -8)
-#			object.name = id
-#			$NatureObjects.add_child(object,true)
-#		else:
-#			treeTypes.shuffle()
-#			var object = TreeObject.instance()
-#			var pos = dirt.map_to_world(loc)
-#			object.biome = biome
-#			object.health = Stats.TREE_HEALTH
-#			object.variety = treeTypes.front()
-#			object.location = loc
-#			object.position = pos + Vector2(0, -8)
-#			object.name = id
-#			$NatureObjects.add_child(object,true)
-#	print("LOADED TREES")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["log"]:
-#		var loc = map["log"][id]["l"] + Vector2(1,0)
-#		Tiles.remove_nature_invalid_tiles(loc, "log")
-#		var variety = rng.randi_range(0, 11)
-#		var object = Log.instance()
-#		object.name = id
-#		object.variety = variety
-#		object.location = loc
-#		object.position = dirt.map_to_world(loc) + Vector2(16, 16)
-#		$NatureObjects.add_child(object,true)
-#	print("LOADED LOGS")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["stump"]:
-#		var loc = map["stump"][id]["l"] + Vector2(1,0)
-#		Tiles.remove_nature_invalid_tiles(loc, "stump")
-#		treeTypes.shuffle()
-#		var object = Stump.instance()
-#		object.variety = treeTypes.front()
-#		object.location = loc
-#		object.health = Stats.STUMP_HEALTH
-#		object.name = id
-#		object.position = dirt.map_to_world(loc) + Vector2(4,0)
-#		$NatureObjects.add_child(object,true)
-#	print("LOADED STUMPS")
-#	get_node("loadingScreen").set_phase("Building ore")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["ore_large"]:
-#		var loc = map["ore_large"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "large ore")
-#		oreTypes.shuffle()
-#		var object = LargeOre.instance()
-#		object.health = Stats.LARGE_ORE_HEALTH
-#		object.name = id
-#		object.variety = oreTypes.front()
-#		object.location = loc
-#		object.position = dirt.map_to_world(loc) 
-#		$NatureObjects.add_child(object,true)
-#	print("LOADED LARGE OrE")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["ore"]:
-#		var loc = map["ore"][id]["l"]
-#		Tiles.remove_nature_invalid_tiles(loc, "ore")
-#		oreTypes.shuffle()
-#		var object = SmallOre.instance()
-#		object.health = Stats.SMALL_ORE_HEALTH
-#		object.name = id
-#		object.variety = oreTypes.front()
-#		object.location = loc
-#		object.position = dirt.map_to_world(loc) + Vector2(16, 24)
-#		$NatureObjects.add_child(object,true)
-#	get_node("loadingScreen").set_phase("Building grass")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	var count = 0
-#	for id in map["tall_grass"]:
-#		var loc = map["tall_grass"][id]["l"]
-#		tall_grass_locs.append(loc)
-#		if validTiles.get_cellv(loc) != -1:
-#			Tiles.remove_nature_invalid_tiles(loc, "tall grass")
-#			count += 1
-#			var object = TallGrass.instance()
-#			object.loc = loc
-#			object.biome = map["tall_grass"][id]["b"]
-#			object.name = id
-#			object.position = dirt.map_to_world(loc) + Vector2(8, 32)
-#			$NatureObjects.add_child(object,true)
-#			if count == 130:
-#				yield(get_tree().create_timer(0.25), "timeout")
-#				count = 0
-#	get_node("loadingScreen").set_phase("Building flowers")
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	for id in map["flower"]:
-#		var loc = map["flower"][id]["l"]
-#		if validTiles.get_cellv(loc) != -1:
-#			if Util.chance(50):
-#				var object = Weed.instance()
-#				object.location = loc
-#				object.position = dirt.map_to_world(loc) + Vector2(16, 32)
-#				$NatureObjects.add_child(object,true)
-#			else:
-#				var object = Flower.instance()
-#				object.location = loc
-#				object.position = dirt.map_to_world(loc)
-#				$NatureObjects.add_child(object,true)
-#			Tiles.remove_nature_invalid_tiles(loc, "flower")
-#			count += 1
-#			if count == 130:
-#				yield(get_tree().create_timer(0.25), "timeout")
-#				count = 0
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	fill_biome_gaps(map)
@@ -340,648 +226,224 @@ func buildMap(map):
 	get_node("loadingScreen").queue_free()
 	#spawnPlayer()
 	spawnPlayerExample()
+	$SpawnNature.start()
+	$SpawnBearTimer.start()
 	Server.isLoaded = true
 	Server.world = self
-	#spawn_animals()
+	spawn_animals()
 	set_random_beach_forage()
-	set_nature_object_quadrants()
+	#set_nature_object_quadrants()
 	set_nav()
 	
 
-var player_quadrant
-
-func set_nature_object_quadrants():
-	for id in Server.generated_map["tree"]:
-		var loc = Server.generated_map["tree"][id]["l"]
-		add_to_quadrant("tree", loc, id)
-	for id in Server.generated_map["stump"]:
-		var loc = Server.generated_map["stump"][id]["l"]
-		add_to_quadrant("stump", loc, id)
-	for id in Server.generated_map["log"]:
-		var loc = Server.generated_map["log"][id]["l"]
-		add_to_quadrant("log", loc, id)
-	for id in Server.generated_map["ore"]:
-		var loc = Server.generated_map["ore"][id]["l"]
-		add_to_quadrant("ore", loc, id)
-	for id in Server.generated_map["ore_large"]:
-		var loc = Server.generated_map["ore_large"][id]["l"]
-		add_to_quadrant("ore_large", loc, id)
-	for id in Server.generated_map["flower"]:
-		var loc = Server.generated_map["flower"][id]["l"]
-		add_to_quadrant("flower", loc, id)
-	for id in Server.generated_map["flower"]:
-		var loc = Server.generated_map["flower"][id]["l"]
-		add_to_quadrant("flower", loc, id)
-	for id in Server.generated_map["tall_grass"]:
-		var loc = Server.generated_map["tall_grass"][id]["l"]
-		add_to_quadrant("tall_grass", loc, id)
-
-
-func add_to_quadrant(type, loc, id):
-	var column
-	var row
-	if loc.x < 187.5:
-		column = 1
-	elif loc.x < 250:
-		column = 2
-	elif loc.x < 312.5:
-		column = 3
-	elif loc.x < 375:
-		column = 4
-	elif loc.x < 437.5:
-		column = 5
-	elif loc.x < 500:
-		column = 6
-	elif loc.x < 562.5:
-		column = 7
-	elif loc.x < 625:
-		column = 8
-	elif loc.x < 687.5:
-		column = 9
-	elif loc.x < 750:
-		column = 10
-	elif loc.x < 812.5:
-		column = 11
-	else:
-		column = 12
-	if loc.y < 187.5:
-		row = "A"
-	elif loc.y < 250:
-		row = "B"
-	elif loc.y < 312.5:
-		row = "C"
-	elif loc.y < 375:
-		row = "D"
-	elif loc.y < 437.5:
-		row = "E"
-	elif loc.y < 500:
-		row = "F"
-	elif loc.y < 562.5:
-		row = "G"
-	elif loc.y < 625:
-		row = "H"
-	elif loc.y < 687.5:
-		row = "I"
-	elif loc.y < 750:
-		row = "J"
-	elif loc.y < 812.5:
-		row = "K"
-	else:
-		row = "L"
-	var chunk = row+str(column)
-	match chunk:
-		"A1":
-			Constants.a1[type][id] = Server.generated_map[type][id]
-		"A2":
-			Constants.a2[type][id] = Server.generated_map[type][id]
-		"A3":
-			Constants.a3[type][id] = Server.generated_map[type][id]
-		"A4":
-			Constants.a4[type][id] = Server.generated_map[type][id]
-		"A5":
-			Constants.a5[type][id] = Server.generated_map[type][id]
-		"A6":
-			Constants.a6[type][id] = Server.generated_map[type][id]
-		"A7":
-			Constants.a7[type][id] = Server.generated_map[type][id]
-		"A8":
-			Constants.a8[type][id] = Server.generated_map[type][id]
-		"A9":
-			Constants.a9[type][id] = Server.generated_map[type][id]
-		"A10":
-			Constants.a10[type][id] = Server.generated_map[type][id]
-		"A11":
-			Constants.a11[type][id] = Server.generated_map[type][id]
-		"A12":
-			Constants.a12[type][id] = Server.generated_map[type][id]
-		"B1":
-			Constants.b1[type][id] = Server.generated_map[type][id]
-		"B2":
-			Constants.b2[type][id] = Server.generated_map[type][id]
-		"B3":
-			Constants.b3[type][id] = Server.generated_map[type][id]
-		"B4":
-			Constants.b4[type][id] = Server.generated_map[type][id]
-		"B5":
-			Constants.b5[type][id] = Server.generated_map[type][id]
-		"B6":
-			Constants.b6[type][id] = Server.generated_map[type][id]
-		"B7":
-			Constants.b7[type][id] = Server.generated_map[type][id]
-		"B8":
-			Constants.b8[type][id] = Server.generated_map[type][id]
-		"B9":
-			Constants.b9[type][id] = Server.generated_map[type][id]
-		"B10":
-			Constants.b10[type][id] = Server.generated_map[type][id]
-		"B11":
-			Constants.b11[type][id] = Server.generated_map[type][id]
-		"B12":
-			Constants.b12[type][id] = Server.generated_map[type][id]
-		"C1":
-			Constants.c1[type][id] = Server.generated_map[type][id]
-		"C2":
-			Constants.c2[type][id] = Server.generated_map[type][id]
-		"C3":
-			Constants.c3[type][id] = Server.generated_map[type][id]
-		"C4":
-			Constants.c4[type][id] = Server.generated_map[type][id]
-		"C5":
-			Constants.c5[type][id] = Server.generated_map[type][id]
-		"C6":
-			Constants.c6[type][id] = Server.generated_map[type][id]
-		"C7":
-			Constants.c7[type][id] = Server.generated_map[type][id]
-		"C8":
-			Constants.c8[type][id] = Server.generated_map[type][id]
-		"C9":
-			Constants.c9[type][id] = Server.generated_map[type][id]
-		"C10":
-			Constants.c10[type][id] = Server.generated_map[type][id]
-		"C11":
-			Constants.c11[type][id] = Server.generated_map[type][id]
-		"C12":
-			Constants.c12[type][id] = Server.generated_map[type][id]
-		"D1":
-			Constants.d1[type][id] = Server.generated_map[type][id]
-		"D2":
-			Constants.d2[type][id] = Server.generated_map[type][id]
-		"D3":
-			Constants.d3[type][id] = Server.generated_map[type][id]
-		"D4":
-			Constants.d4[type][id] = Server.generated_map[type][id]
-		"D5":
-			Constants.d5[type][id] = Server.generated_map[type][id]
-		"D6":
-			Constants.d6[type][id] = Server.generated_map[type][id]
-		"D7":
-			Constants.d7[type][id] = Server.generated_map[type][id]
-		"D8":
-			Constants.d8[type][id] = Server.generated_map[type][id]
-		"D9":
-			Constants.d9[type][id] = Server.generated_map[type][id]
-		"D10":
-			Constants.d10[type][id] = Server.generated_map[type][id]
-		"D11":
-			Constants.d11[type][id] = Server.generated_map[type][id]
-		"D12":
-			Constants.d12[type][id] = Server.generated_map[type][id]
-		"E1":
-			Constants.e1[type][id] = Server.generated_map[type][id]
-		"E2":
-			Constants.e2[type][id] = Server.generated_map[type][id]
-		"E3":
-			Constants.e3[type][id] = Server.generated_map[type][id]
-		"E4":
-			Constants.e4[type][id] = Server.generated_map[type][id]
-		"E5":
-			Constants.e5[type][id] = Server.generated_map[type][id]
-		"E6":
-			Constants.e6[type][id] = Server.generated_map[type][id]
-		"E7":
-			Constants.e7[type][id] = Server.generated_map[type][id]
-		"E8":
-			Constants.e8[type][id] = Server.generated_map[type][id]
-		"E9":
-			Constants.e9[type][id] = Server.generated_map[type][id]
-		"E10":
-			Constants.e10[type][id] = Server.generated_map[type][id]
-		"E11":
-			Constants.e11[type][id] = Server.generated_map[type][id]
-		"E12":
-			Constants.e12[type][id] = Server.generated_map[type][id]
-		"F1":
-			Constants.f1[type][id] = Server.generated_map[type][id]
-		"F2":
-			Constants.f2[type][id] = Server.generated_map[type][id]
-		"F3":
-			Constants.f3[type][id] = Server.generated_map[type][id]
-		"F4":
-			Constants.f4[type][id] = Server.generated_map[type][id]
-		"F5":
-			Constants.f5[type][id] = Server.generated_map[type][id]
-		"F6":
-			Constants.f6[type][id] = Server.generated_map[type][id]
-		"F7":
-			Constants.f7[type][id] = Server.generated_map[type][id]
-		"F8":
-			Constants.f8[type][id] = Server.generated_map[type][id]
-		"F9":
-			Constants.f9[type][id] = Server.generated_map[type][id]
-		"F10":
-			Constants.f10[type][id] = Server.generated_map[type][id]
-		"F11":
-			Constants.f11[type][id] = Server.generated_map[type][id]
-		"F12":
-			Constants.f12[type][id] = Server.generated_map[type][id]
-		"G1":
-			Constants.g1[type][id] = Server.generated_map[type][id]
-		"G2":
-			Constants.g2[type][id] = Server.generated_map[type][id]
-		"G3":
-			Constants.g3[type][id] = Server.generated_map[type][id]
-		"G4":
-			Constants.g4[type][id] = Server.generated_map[type][id]
-		"G5":
-			Constants.g5[type][id] = Server.generated_map[type][id]
-		"G6":
-			Constants.g6[type][id] = Server.generated_map[type][id]
-		"G7":
-			Constants.g7[type][id] = Server.generated_map[type][id]
-		"G8":
-			Constants.g8[type][id] = Server.generated_map[type][id]
-		"G9":
-			Constants.g9[type][id] = Server.generated_map[type][id]
-		"G10":
-			Constants.g10[type][id] = Server.generated_map[type][id]
-		"G11":
-			Constants.g11[type][id] = Server.generated_map[type][id]
-		"G12":
-			Constants.g12[type][id] = Server.generated_map[type][id]
-		"H1":
-			Constants.h1[type][id] = Server.generated_map[type][id]
-		"H2":
-			Constants.h2[type][id] = Server.generated_map[type][id]
-		"H3":
-			Constants.h3[type][id] = Server.generated_map[type][id]
-		"H4":
-			Constants.h4[type][id] = Server.generated_map[type][id]
-		"H5":
-			Constants.h5[type][id] = Server.generated_map[type][id]
-		"H6":
-			Constants.h6[type][id] = Server.generated_map[type][id]
-		"H7":
-			Constants.h7[type][id] = Server.generated_map[type][id]
-		"H8":
-			Constants.h8[type][id] = Server.generated_map[type][id]
-		"H9":
-			Constants.h9[type][id] = Server.generated_map[type][id]
-		"H10":
-			Constants.h10[type][id] = Server.generated_map[type][id]
-		"H11":
-			Constants.h11[type][id] = Server.generated_map[type][id]
-		"H12":
-			Constants.h12[type][id] = Server.generated_map[type][id]
-		"I1":
-			Constants.i1[type][id] = Server.generated_map[type][id]
-		"I2":
-			Constants.i2[type][id] = Server.generated_map[type][id]
-		"I3":
-			Constants.i3[type][id] = Server.generated_map[type][id]
-		"I4":
-			Constants.i4[type][id] = Server.generated_map[type][id]
-		"I5":
-			Constants.i5[type][id] = Server.generated_map[type][id]
-		"I6":
-			Constants.i6[type][id] = Server.generated_map[type][id]
-		"I7":
-			Constants.i7[type][id] = Server.generated_map[type][id]
-		"I8":
-			Constants.i8[type][id] = Server.generated_map[type][id]
-		"I9":
-			Constants.i9[type][id] = Server.generated_map[type][id]
-		"I10":
-			Constants.i10[type][id] = Server.generated_map[type][id]
-		"I11":
-			Constants.i11[type][id] = Server.generated_map[type][id]
-		"I12":
-			Constants.i12[type][id] = Server.generated_map[type][id]
-		"J1":
-			Constants.j1[type][id] = Server.generated_map[type][id]
-		"J2":
-			Constants.j2[type][id] = Server.generated_map[type][id]
-		"J3":
-			Constants.j3[type][id] = Server.generated_map[type][id]
-		"J4":
-			Constants.j4[type][id] = Server.generated_map[type][id]
-		"J5":
-			Constants.j5[type][id] = Server.generated_map[type][id]
-		"J6":
-			Constants.j6[type][id] = Server.generated_map[type][id]
-		"J7":
-			Constants.j7[type][id] = Server.generated_map[type][id]
-		"J8":
-			Constants.j8[type][id] = Server.generated_map[type][id]
-		"J9":
-			Constants.j9[type][id] = Server.generated_map[type][id]
-		"J10":
-			Constants.j10[type][id] = Server.generated_map[type][id]
-		"J11":
-			Constants.j11[type][id] = Server.generated_map[type][id]
-		"J12":
-			Constants.j12[type][id] = Server.generated_map[type][id]
-		"K1":
-			Constants.k1[type][id] = Server.generated_map[type][id]
-		"K2":
-			Constants.k2[type][id] = Server.generated_map[type][id]
-		"K3":
-			Constants.k3[type][id] = Server.generated_map[type][id]
-		"K4":
-			Constants.k4[type][id] = Server.generated_map[type][id]
-		"K5":
-			Constants.k5[type][id] = Server.generated_map[type][id]
-		"K6":
-			Constants.k6[type][id] = Server.generated_map[type][id]
-		"K7":
-			Constants.k7[type][id] = Server.generated_map[type][id]
-		"K8":
-			Constants.k8[type][id] = Server.generated_map[type][id]
-		"K9":
-			Constants.k9[type][id] = Server.generated_map[type][id]
-		"K10":
-			Constants.k10[type][id] = Server.generated_map[type][id]
-		"K11":
-			Constants.k11[type][id] = Server.generated_map[type][id]
-		"K12":
-			Constants.k12[type][id] = Server.generated_map[type][id]
-		"L1":
-			Constants.l1[type][id] = Server.generated_map[type][id]
-		"L2":
-			Constants.l2[type][id] = Server.generated_map[type][id]
-		"L3":
-			Constants.l3[type][id] = Server.generated_map[type][id]
-		"L4":
-			Constants.l4[type][id] = Server.generated_map[type][id]
-		"L5":
-			Constants.l5[type][id] = Server.generated_map[type][id]
-		"L6":
-			Constants.l6[type][id] = Server.generated_map[type][id]
-		"L7":
-			Constants.l7[type][id] = Server.generated_map[type][id]
-		"L8":
-			Constants.l8[type][id] = Server.generated_map[type][id]
-		"L9":
-			Constants.l9[type][id] = Server.generated_map[type][id]
-		"L10":
-			Constants.l10[type][id] = Server.generated_map[type][id]
-		"L11":
-			Constants.l11[type][id] = Server.generated_map[type][id]
-		"L12":
-			Constants.l12[type][id] = Server.generated_map[type][id]
+var trees_thread := Thread.new()
+var ores_thread := Thread.new()
+var grass_thread := Thread.new()
+var flower_thread := Thread.new()
+var remove_objects_thread := Thread.new()
+var remove_grass_thread := Thread.new()
 
 
 
+func remove_nature():
+	for node in $NatureObjects.get_children():
+		if is_instance_valid(node):
+			var player_pos = Server.player_node.position
+			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_SPAWN_OBJECT*32:
+				$NatureObjects.remove_child(node)
+				#node.queue_free()
+				yield(get_tree().create_timer(0.01), "timeout")
+	var value = remove_objects_thread.wait_to_finish()
 
-var current_chunks = []
-func set_player_quadrant(loc):
-	var columns
-	var rows
-	var new_chunks = []
-	var chunks_to_remove = []
-	print(loc.x)
-	if loc.x < 218.75:
-		columns = [1,2]
-	elif loc.x < 281.25:
-		columns = [2,3]
-	elif loc.x < 343.75:
-		columns = [3,4]
-	elif loc.x < 406.25:
-		columns = [4,5]
-	elif loc.x < 468.75:
-		columns = [5,6]
-	elif loc.x < 531.25:
-		columns = [6,7]
-	elif loc.x < 593.75:
-		columns = [7,8]
-	elif loc.x < 656.25:
-		columns = [8,9]
-	elif loc.x < 718.75:
-		columns = [9,10]
-	elif loc.x < 781.25:
-		columns = [10,11]
-	else:
-		columns = [11,12]
-		
-	if loc.y < 218.75:
-		rows = ["A","B"]
-	elif loc.y < 281.25:
-		rows = ["B","C"]
-	elif loc.y < 343.75:
-		rows = ["C","D"]
-	elif loc.y < 406.25:
-		rows = ["D","E"]
-	elif loc.y < 468.75:
-		rows = ["E","F"]
-	elif loc.y < 531.25:
-		rows = ["F","G"]
-	elif loc.y < 593.75:
-		rows = ["G","H"]
-	elif loc.y < 656.25:
-		rows = ["H","I"]
-	elif loc.y < 718.75:
-		rows = ["I","J"]
-	elif loc.y < 781.25:
-		rows = ["J","K"]
-	else:
-		rows = ["K","L"]
-	for column in columns:
-		for row in rows:
-			new_chunks.append(row+str(column))
-	if new_chunks == current_chunks:
-		return
-	for current_chunk in current_chunks:
-		if not new_chunks.has(current_chunk):
-			chunks_to_remove.append(current_chunk)
-			#thread.start(self, "remove_chunk", Constants.return_chunk(current_chunk[0],current_chunk[1]))
-			#var wait_to_finish = thread.wait_to_finish()
-			yield(get_tree().create_timer(1.0), "timeout")
-			remove_chunk(Constants.return_chunk(current_chunk[0],current_chunk[1]))
-			#yield(self, "removed_chunk")
-			#yield(remove_chunk(Constants.return_chunk(current_chunk[0],current_chunk[1])), "completed")
-	for new_chunk in new_chunks:
-		if not current_chunks.has(new_chunk):
-#			thread2.start(self, "spawn_chunk", Constants.return_chunk(new_chunk[0],new_chunk[1]))
-#			var wait_to_finish = thread2.wait_to_finish()
-			yield(get_tree().create_timer(1.0), "timeout")
-			print("SPAWN CHUNK " + new_chunk)
-			spawn_chunk(Constants.return_chunk(new_chunk[0],new_chunk[1]))
-			#yield(self, "spawned_chunk")
-			#yield(spawn_chunk(Constants.return_chunk(new_chunk[0],new_chunk[1])), "completed")
-	current_chunks = new_chunks
+func remove_grass():
+	for node in $GrassObjects.get_children():
+		if is_instance_valid(node):
+			var player_pos = Server.player_node.position
+			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_SPAWN_OBJECT*32:
+				$GrassObjects.remove_child(node)
+				yield(get_tree().create_timer(0.01), "timeout")
+	var value = remove_grass_thread.wait_to_finish()
 
-var thread := Thread.new()
-var thread2 := Thread.new()
 
-func remove_chunk(map):
-	print("REMOVING NATURE")
+
+func spawn_trees():
+	var player_loc = validTiles.world_to_map(Server.player_node.position)
+	var map = Server.generated_map
 	for id in map["tree"]:
-		remove_object(id)
-#	yield(get_tree().create_timer(0.25), "timeout")
-	for id in map["stump"]:
-		remove_object(id)
-#	yield(get_tree().create_timer(0.25), "timeout")
+		var loc = map["tree"][id]["l"] + Vector2(1,0)
+		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+			if not $NatureObjects.has_node(id):
+				Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
+				var biome = map["tree"][id]["b"]
+				if biome == "desert":
+					var object = DesertTree.instance()
+					var pos = dirt.map_to_world(loc)
+					object.health = map["tree"][id]["h"]
+					object.position = pos + Vector2(0, -8)
+					object.name = id
+					object.location = loc
+					$NatureObjects.call_deferred("add_child",object,true)
+					yield(get_tree().create_timer(0.01), "timeout")
+				else:
+					treeTypes.shuffle()
+					var object = TreeObject.instance()
+					var pos = dirt.map_to_world(loc)
+					object.biome = biome
+					object.health = map["tree"][id]["h"]
+					object.variety = treeTypes.front()
+					object.location = loc
+					object.position = pos + Vector2(0, -8)
+					object.name = id
+					$NatureObjects.call_deferred("add_child",object,true)
+					yield(get_tree().create_timer(0.01), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
 	for id in map["log"]:
-		remove_object(id)
-#	yield(get_tree().create_timer(0.25), "timeout")
-	for id in map["ore"]:
-		remove_object(id)
-#	yield(get_tree().create_timer(0.25), "timeout")
-	for id in map["ore_large"]:
-		remove_object(id)
-#	yield(get_tree().create_timer(0.25), "timeout")
-	for id in map["tall_grass"]:
-		remove_object(id)
-#	yield(get_tree().create_timer(0.25), "timeout")
-	for id in map["flower"]:
-		remove_object(id)
-	#call_deferred("removing_done")
-	print("REMOVED NATURE")
-
-func remove_object(id):
-	if $NatureObjects.has_node(id):
-		yield(get_tree().create_timer(0.025), "timeout")
-		$NatureObjects.get_node(id).queue_free()
-		#yield(get_tree(), "idle_frame")
-
-func spawn_chunk(map):
-	print("SPAWNING CHUNK")
-	for id in map["tree"]:
-		if not $NatureObjects.has_node(id):
-			var loc = map["tree"][id]["l"] + Vector2(1,0)
-			Tiles.remove_nature_invalid_tiles(loc, "tree")
-			var biome = map["tree"][id]["b"]
-			if biome == "desert":
-				var object = DesertTree.instance()
-				var pos = dirt.map_to_world(loc)
-				object.health = 100
-				object.position = pos + Vector2(0, -8)
+		var loc = map["log"][id]["l"]
+		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+			if not $NatureObjects.has_node(id):
+				Tiles.remove_valid_tiles(loc)
+				var variety = rng.randi_range(0, 11)
+				var object = Log.instance()
 				object.name = id
-				$NatureObjects.add_child(object, true)
-				#$NatureObjects.call_deferred("add_child",object,true)
-			else:
+				object.variety = variety
+				object.location = loc
+				object.position = dirt.map_to_world(loc) + Vector2(16, 16)
+				$NatureObjects.call_deferred("add_child",object,true)
+				yield(get_tree().create_timer(0.01), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
+	for id in map["stump"]:
+		var loc = map["stump"][id]["l"] + Vector2(1,0)
+		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+			if not $NatureObjects.has_node(id):
+				Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
 				treeTypes.shuffle()
-				var object = TreeObject.instance()
-				var pos = dirt.map_to_world(loc)
-				object.biome = biome
-				object.health = Stats.TREE_HEALTH
+				var object = Stump.instance()
 				object.variety = treeTypes.front()
 				object.location = loc
-				object.position = pos + Vector2(0, -8)
+				object.health = map["stump"][id]["h"]
 				object.name = id
-				$NatureObjects.add_child(object, true)
-				#$NatureObjects.call_deferred("add_child",object,true)
-#			yield(get_tree().create_timer(0.11), "timeout")
-#	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["log"]:
-		if not $NatureObjects.has_node(id):
-			var loc = map["log"][id]["l"] + Vector2(1,0)
-			Tiles.remove_nature_invalid_tiles(loc, "log")
-			var variety = rng.randi_range(0, 11)
-			var object = Log.instance()
-			object.name = id
-			object.variety = variety
-			object.location = loc
-			object.position = dirt.map_to_world(loc) + Vector2(16, 16)
-			$NatureObjects.add_child(object, true)
-			#$NatureObjects.call_deferred("add_child",object,true)
-			#yield(get_tree().create_timer(0.01), "timeout")
-#	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["stump"]:
-		if not $NatureObjects.has_node(id):
-			var loc = map["stump"][id]["l"] + Vector2(1,0)
-			Tiles.remove_nature_invalid_tiles(loc, "stump")
-			treeTypes.shuffle()
-			var object = Stump.instance()
-			object.variety = treeTypes.front()
-			object.location = loc
-			object.health = Stats.STUMP_HEALTH
-			object.name = id
-			object.position = dirt.map_to_world(loc) + Vector2(4,0)
-			$NatureObjects.add_child(object, true)
-			#$NatureObjects.call_deferred("add_child",object,true)
-#			yield(get_tree().create_timer(0.01), "timeout")
-#	yield(get_tree().create_timer(0.5), "timeout")
+				object.position = dirt.map_to_world(loc) + Vector2(4,0)
+				$NatureObjects.call_deferred("add_child",object,true)
+				yield(get_tree().create_timer(0.01), "timeout")
+	var value = trees_thread.wait_to_finish()
+
+func spawn_ores():
+	var map = Server.generated_map
 	for id in map["ore_large"]:
-		if not $NatureObjects.has_node(id):
-			var loc = map["ore_large"][id]["l"]
-			Tiles.remove_nature_invalid_tiles(loc, "large ore")
-			oreTypes.shuffle()
-			var object = LargeOre.instance()
-			object.health = Stats.LARGE_ORE_HEALTH
-			object.name = id
-			object.variety = oreTypes.front()
-			object.location = loc
-			object.position = dirt.map_to_world(loc) 
-			$NatureObjects.add_child(object, true)
-			#$NatureObjects.call_deferred("add_child",object,true)
-#			yield(get_tree().create_timer(0.01), "timeout")
-#	yield(get_tree().create_timer(0.5), "timeout")
+		var loc = map["ore_large"][id]["l"]
+		var player_loc = validTiles.world_to_map(Server.player_node.position)
+		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+			if not $NatureObjects.has_node(id):
+				Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
+				oreTypes.shuffle()
+				var object = LargeOre.instance()
+				object.health = map["ore_large"][id]["h"]
+				object.name = id
+				object.variety = oreTypes.front()
+				object.location = loc
+				object.position = dirt.map_to_world(loc) 
+				$NatureObjects.call_deferred("add_child",object,true)
+				yield(get_tree().create_timer(0.01), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
 	for id in map["ore"]:
-		if not $NatureObjects.has_node(id):
-			var loc = map["ore"][id]["l"]
-			Tiles.remove_nature_invalid_tiles(loc, "ore")
-			oreTypes.shuffle()
-			var object = SmallOre.instance()
-			object.health = Stats.SMALL_ORE_HEALTH
-			object.name = id
-			object.variety = oreTypes.front()
-			object.location = loc
-			object.position = dirt.map_to_world(loc) + Vector2(16, 24)
-			$NatureObjects.add_child(object, true)
-			#$NatureObjects.call_deferred("add_child",object,true)
-#			yield(get_tree().create_timer(0.01), "timeout")
-#	yield(get_tree().create_timer(0.5), "timeout")
-	var count = 0
+		var loc = map["ore"][id]["l"]
+		var player_loc = validTiles.world_to_map(Server.player_node.position)
+		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+			if not $NatureObjects.has_node(id):
+				Tiles.remove_valid_tiles(loc)
+				oreTypes.shuffle()
+				var object = SmallOre.instance()
+				object.health = map["ore"][id]["h"]
+				object.name = id
+				object.variety = oreTypes.front()
+				object.location = loc
+				object.position = dirt.map_to_world(loc) + Vector2(16, 24)
+				$NatureObjects.call_deferred("add_child",object,true)
+				yield(get_tree().create_timer(0.01), "timeout")
+	var value = ores_thread.wait_to_finish()
+
+func spawn_grass():
+	var map = Server.generated_map
 	for id in map["tall_grass"]:
-		if not $NatureObjects.has_node(id):
-			var loc = map["tall_grass"][id]["l"]
-			if validTiles.get_cellv(loc) != -1:
-				Tiles.remove_nature_invalid_tiles(loc, "tall grass")
-				count += 1
+		var loc = map["tall_grass"][id]["l"]
+		var player_loc = validTiles.world_to_map(Server.player_node.position)
+		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+			if not $GrassObjects.has_node(id):
+				Tiles.add_navigation_tiles(loc)
 				var object = TallGrass.instance()
 				object.loc = loc
 				object.biome = map["tall_grass"][id]["b"]
 				object.name = id
 				object.position = dirt.map_to_world(loc) + Vector2(8, 32)
-				$NatureObjects.add_child(object, true)
-				#$NatureObjects.call_deferred("add_child",object,true)
-#				if count == 130:
-#					yield(get_tree().create_timer(0.25), "timeout")
-#					count = 0
-#	yield(get_tree().create_timer(0.5), "timeout")
+				$GrassObjects.call_deferred("add_child",object,true)
+	var value = grass_thread.wait_to_finish()
+
+func spawn_flowers():
+	var map = Server.generated_map
 	for id in map["flower"]:
-		if not $NatureObjects.has_node(id):
-			var loc = map["flower"][id]["l"]
-			Tiles.remove_nature_invalid_tiles(loc, "flower")
-			if validTiles.get_cellv(loc) != -1:
+		var loc = map["flower"][id]["l"]
+		var player_loc = validTiles.world_to_map(Server.player_node.position)
+		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+			if not $GrassObjects.has_node(id):
+				Tiles.add_navigation_tiles(loc)
 				if Util.chance(50):
 					var object = Weed.instance()
 					object.name = id
 					object.location = loc
 					object.position = dirt.map_to_world(loc) + Vector2(16, 32)
-					$NatureObjects.add_child(object, true)
-					#$NatureObjects.call_deferred("add_child",object,true)
+					$GrassObjects.call_deferred("add_child",object,true)
 				else:
 					var object = Flower.instance()
 					object.name = id
 					object.location = loc
 					object.position = dirt.map_to_world(loc)
-					$NatureObjects.add_child(object, true)
-					#$NatureObjects.call_deferred("add_child",object,true)
-#				if count == 130:
-#					yield(get_tree().create_timer(0.25), "timeout")
-#					count = 0
-	print("SPAWNED CHUNK")
-#			count += 1
-#			if count == 130:
-#				yield(get_tree().create_timer(0.25), "timeout")
-#				count = 0
+					$GrassObjects.call_deferred("add_child",object,true)
+	var value = flower_thread.wait_to_finish()
 
+
+func _whoAmI(_value):
+	call_deferred("remove_nature")
+	
+func _whoAmI5(_value):
+	call_deferred("remove_grass")
+	
+func _whoAmI2(_value):
+	call_deferred("spawn_trees")
+	
+func _whoAmI3(_value):
+	call_deferred("spawn_ores")
+	
+func _whoAmI4(_value):
+	call_deferred("spawn_grass")
+
+func _whoAmI6(_value):
+	call_deferred("spawn_flowers")
+
+func spawn_nature():
+	if not remove_objects_thread.is_active():
+		remove_objects_thread.start(self, "_whoAmI", null)
+	if not remove_grass_thread.is_active():
+		remove_grass_thread.start(self, "_whoAmI5", null)
+	if not trees_thread.is_active():
+		trees_thread.start(self, "_whoAmI2", null)
+	if not ores_thread.is_active():
+		ores_thread.start(self, "_whoAmI3", null)
+	if not grass_thread.is_active():
+		grass_thread.start(self, "_whoAmI4", null)
+	if not flower_thread.is_active():
+		flower_thread.start(self, "_whoAmI6", null)
 
 
 func set_nav():
-	pass
-	print("TOTAL OBJECTS " + str($NatureObjects.get_children().size()))
 	var player_loc = validTiles.world_to_map(Server.player_node.position)
-	set_player_quadrant(player_loc)
-#	navTiles.clear()
-#	for x in range(60):
-#		for y in range(60):
-#			var loc = player_loc+Vector2(-30,-30)+Vector2(x,y)
-#			if validTiles.get_cellv(loc) != -1 and Tiles.isCenterBitmaskTile(loc, validTiles):
-#				navTiles.set_cellv(loc,0)
-#			elif wetSand.get_cellv(loc) != -1 and deep_ocean.get_cellv(loc) == -1:
-#				navTiles.set_cellv(loc,0)
+	navTiles.clear()
+	for x in range(60):
+		for y in range(60):
+			var loc = player_loc+Vector2(-30,-30)+Vector2(x,y)
+			if validTiles.get_cellv(loc) != -1 and Tiles.isCenterBitmaskTile(loc, validTiles):
+				navTiles.set_cellv(loc,0)
+			elif wetSand.get_cellv(loc) != -1 and deep_ocean.get_cellv(loc) == -1:
+				navTiles.set_cellv(loc,0)
 	$Timer.start()
 
 func _on_Timer_timeout():
@@ -1019,15 +481,17 @@ func spawn_animals():
 	
 func set_random_beach_forage():
 	for id in Server.generated_map["beach"]:
-		if Util.chance(4):
+		if Util.chance(3):
 			var loc = Server.generated_map["beach"][id]
 			if dirt.get_cellv(loc) == -1 and forest.get_cellv(loc) == -1 and snow.get_cellv(loc) == -1 and plains.get_cellv(loc) == -1:
 				if Util.chance(50):
+					Tiles.remove_valid_tiles(loc)
 					var clam = Clam.instance()
 					clam.location = loc
 					clam.global_position = Tiles.valid_tiles.map_to_world(loc)
 					$ForageItems.add_child(clam)
 				else:
+					Tiles.add_navigation_tiles(loc)
 					var starfish = Starfish.instance()
 					starfish.location = loc
 					starfish.global_position = Tiles.valid_tiles.map_to_world(loc)
@@ -1138,10 +602,6 @@ func check_and_remove_invalid_autotiles(map):
 				Tiles._set_cell(sand, cell.x, cell.y, 0)
 		yield(get_tree().create_timer(1.0), "timeout")
 
-func build_valid_tiles():
-	for x in range(800):
-		for y in range(800):
-			validTiles.set_cellv(Vector2(x+1, y+1), 0)
 
 func ChangeTile(data):
 	var loc = Util.string_to_vector2(data["l"])
@@ -1224,10 +684,10 @@ func ChangeTile(data):
 
 func returnValidSpawnLocation():
 	rng.randomize()
-	var tempLoc = Vector2(rng.randi_range(4000, 28000), rng.randi_range(4000, 28000))
+	var tempLoc = Vector2(rng.randi_range(8000, 24000), rng.randi_range(8000, 24000))
 	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
 		return tempLoc
-	tempLoc = Vector2(rng.randi_range(4000, 28000), rng.randi_range(4000, 28000))
+	tempLoc = Vector2(rng.randi_range(8000, 24000), rng.randi_range(8000, 24000))
 	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
 		return tempLoc
 	return null
@@ -1297,9 +757,11 @@ func play_remove_building_effect(loc):
 	add_child(removeBuildingEffect)
 	
 
-
-
 func _on_SpawnBearTimer_timeout():
 	spawnRandomBear()
 	spawnRandomDuck()
 	spawnRandomBunny()
+
+
+func _on_SpawnNature_timeout():
+	spawn_nature()

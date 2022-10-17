@@ -22,7 +22,6 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	#2: ["gold ore", 32, null],
 	9: ["rope", 12, null],
 	8: ["iron ingot", 15, null],
 	6: ["potato seeds", 60, null],
@@ -30,11 +29,6 @@ var inventory = {
 }
 
 var hotbar = {
-	0 : ["stone axe", 1, null],
-	5 : ["scythe", 1, null],
-	6 : ["gold sword", 1, null], 
-#	8 : ["bow", 1, null],
-#	9 : ["arrow", 800, null],
 }
 
 var chests = {}

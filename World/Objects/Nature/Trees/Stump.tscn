@@ -3,10 +3,6 @@
 [ext_resource path="res://World/Objects/Nature/Trees/Stump.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/tree_sets/A/large_stumpA.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 15.7639
-height = 10.6944
-
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 22.7083, 28.1439 )
 
@@ -48,18 +44,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( -4, 106 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_name = "stump destroyed"
@@ -88,7 +72,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
+tracks/2/path = NodePath("StumpHurtBox/stumpHurtBox:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -100,7 +84,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("StumpHurtBox/stumpHurtBox:disabled")
+tracks/3/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -128,6 +112,9 @@ tracks/0/keys = {
 "values": [ Vector2( -4, 106 ), Vector2( -7, 106 ), Vector2( -2, 106 ), Vector2( -8, 106 ), Vector2( -3, 106 ), Vector2( -4, 106 ) ]
 }
 
+[sub_resource type="CircleShape2D" id=7]
+radius = 17.6666
+
 [node name="Stump" type="Node2D"]
 scale = Vector2( 0.9, 0.9 )
 script = ExtResource( 1 )
@@ -140,14 +127,6 @@ position = Vector2( -4, 106 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -120 )
 
-[node name="MovementCollisionBox" type="StaticBody2D" parent="."]
-position = Vector2( 0, -31 )
-
-[node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
-position = Vector2( -3.33333, 29.8889 )
-rotation = -1.5708
-shape = SubResource( 5 )
-
 [node name="StumpHurtBox" type="Area2D" parent="."]
 visible = false
 position = Vector2( 0, -31 )
@@ -158,6 +137,7 @@ collision_mask = 0
 position = Vector2( -3.33333, 28.7778 )
 rotation = -1.5708
 shape = SubResource( 6 )
+disabled = true
 
 [node name="OccupiedTiles" type="Area2D" parent="."]
 visible = false
@@ -170,7 +150,7 @@ rotation = -1.5708
 shape = SubResource( 6 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -9.53674e-07, -22.2222 )
+position = Vector2( 1.13687e-13, -13.3333 )
 scale = Vector2( 4.11111, 3.88889 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
@@ -180,6 +160,14 @@ volume_db = -12.0
 anims/RESET = SubResource( 2 )
 "anims/stump destroyed" = SubResource( 3 )
 "anims/stump hit right" = SubResource( 4 )
+
+[node name="MovementCollisionBox" type="StaticBody2D" parent="."]
+position = Vector2( 3.33333, -36.6667 )
+
+[node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
+position = Vector2( -3.33333, 33.2222 )
+rotation = -1.5708
+shape = SubResource( 7 )
 
 [connection signal="area_entered" from="StumpHurtBox" to="." method="_on_StumpHurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
