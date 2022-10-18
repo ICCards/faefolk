@@ -22,8 +22,6 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	0: ["wood", 300, null],
-	1: ["stone", 300, null],
 	9: ["rope", 12, null],
 	8: ["iron ingot", 15, null],
 	6: ["potato seeds", 60, null],
