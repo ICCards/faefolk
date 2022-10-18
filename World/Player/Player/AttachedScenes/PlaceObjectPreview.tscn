@@ -8,8 +8,6 @@
 [node name="PlaceObject" type="YSort"]
 script = ExtResource( 4 )
 
-[node name="ColorIndicator" parent="." instance=ExtResource( 2 )]
-
 [node name="ItemToPlace" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.627451 )
 margin_right = 32.0
@@ -35,6 +33,9 @@ margin_right = 48.0
 margin_bottom = 48.0
 rect_scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
+
+[node name="ColorIndicator" parent="." instance=ExtResource( 2 )]
+z_index = -1
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 visible = false

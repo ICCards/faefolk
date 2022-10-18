@@ -93,9 +93,9 @@ func _physics_process(delta):
 		set_direction(Server.player_node.direction)
 		#change_label_size()
 		roamingStorm = get_node("/root/World/RoamingStorm")
-		#roamingStorm2 = get_node("/root/World/RoamingStorm2")
+		roamingStorm2 = get_node("/root/World/RoamingStorm2")
 		stormIcon.position = roamingStorm.position
-		#stormIcon2.position = roamingStorm2.position
+		stormIcon2.position = roamingStorm2.position
 		
 	
 	

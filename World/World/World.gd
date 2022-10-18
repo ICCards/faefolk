@@ -264,8 +264,6 @@ func remove_grass():
 				yield(get_tree().create_timer(0.01), "timeout")
 	var value = remove_grass_thread.wait_to_finish()
 
-
-
 func spawn_trees():
 	var player_loc = validTiles.world_to_map(Server.player_node.position)
 	var map = Server.generated_map
@@ -489,13 +487,13 @@ func set_random_beach_forage():
 					var clam = Clam.instance()
 					clam.location = loc
 					clam.global_position = Tiles.valid_tiles.map_to_world(loc)
-					$ForageItems.add_child(clam)
+					$ForageObjects.add_child(clam)
 				else:
 					Tiles.add_navigation_tiles(loc)
 					var starfish = Starfish.instance()
 					starfish.location = loc
 					starfish.global_position = Tiles.valid_tiles.map_to_world(loc)
-					$ForageItems.add_child(starfish)
+					$ForageObjects.add_child(starfish)
 
 	
 func set_water_tiles():
@@ -710,7 +708,6 @@ func spawnRandomDuck():
 func spawnRandomBear():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
-		print("SPAWN BEAR")
 		var bear = Bear.instance()
 		$Animals.add_child(bear)
 		bear.global_position = loc
@@ -755,13 +752,11 @@ func play_remove_building_effect(loc):
 	var removeBuildingEffect = RemoveBuildingEffect.instance()
 	removeBuildingEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
 	add_child(removeBuildingEffect)
-	
 
 func _on_SpawnBearTimer_timeout():
 	spawnRandomBear()
 	spawnRandomDuck()
 	spawnRandomBunny()
-
 
 func _on_SpawnNature_timeout():
 	spawn_nature()

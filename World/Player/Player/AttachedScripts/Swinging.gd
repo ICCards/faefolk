@@ -115,7 +115,7 @@ func draw_bow(init_direction):
 	sound_effects.play()
 	yield(player_animation_player, "animation_finished" )
 	wait_for_release()
-		
+
 func wait_for_release():
 	if not mouse_left_down:
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
@@ -143,7 +143,6 @@ func shoot():
 	arrow.transform = $ArrowDirection.transform
 	arrow.position = $ArrowDirection/Position2D.global_position
 	arrow.velocity = get_global_mouse_position() - arrow.position
-	
 
 func set_swing_collision_layer_and_position(tool_name, direction):
 	axe_pickaxe_swing.position = Util.set_swing_position(Vector2(0,0), direction)
@@ -205,7 +204,7 @@ func set_watered_tile():
 	direction = get_parent().direction
 	var pos = Util.set_swing_position(global_position, direction)
 	var location = Tiles.hoed_tiles.world_to_map(pos)
-	if Tiles.ocean_tiles.get_cellv(location) != -1:
+	if Tiles.ocean_tiles.get_cellv(location) != -1 or is_well_tile(location, direction):
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
@@ -236,3 +235,18 @@ func set_watered_tile():
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
 
+func is_well_tile(loc, direction):
+	match direction:
+		"UP":
+			if Tiles.object_tiles.get_cellv(loc) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-1,0)) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-2,0)) == 75:
+				return true
+		"DOWN":
+			if Tiles.object_tiles.get_cellv(loc+Vector2(0,1)) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-1,1)) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
+				return true
+		"LEFT":
+			if Tiles.object_tiles.get_cellv(loc+Vector2(-2,0)) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
+				return true
+		"RIGHT":
+			if Tiles.object_tiles.get_cellv(loc) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(0,1)) == 75:
+				return true
+	return false

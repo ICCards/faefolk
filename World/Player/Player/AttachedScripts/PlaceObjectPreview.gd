@@ -1,10 +1,12 @@
 extends YSort
 
 var directions = ["down", "left", "up", "right"]
+var varieties = [1, 2, 3, 4]
 var vertical: bool = true
 var direction_index: int = 0
-var path_index: int = 1
+var varieties_index: int = 0
 var rotation_delay: bool = false
+var variety_delay: bool = false
 var mousePos := Vector2.ZERO 
 
 var item_name
@@ -21,7 +23,8 @@ enum {
 	WALL,
 	DOOR,
 	FOUNDATION,
-	ROTATABLE
+	ROTATABLE,
+	CUSTOMIZABLE
 }
 
 func _ready():
@@ -49,6 +52,8 @@ func _process(delta):
 			place_foundation_state()
 		ROTATABLE:
 			place_rotatable_state()
+		CUSTOMIZABLE:
+			place_customizable_state()
 
 func initialize():
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
@@ -63,6 +68,8 @@ func initialize():
 		state = ROTATABLE
 	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR
+	elif item_name == "couch":
+		state = CUSTOMIZABLE
 	elif item_category == "Placable object":
 		state = ITEM
 	elif item_category == "Placable path":
@@ -120,6 +127,49 @@ func set_dimensions():
 		ROTATABLE:
 			$ItemToPlace.show()
 			$RotateIcon.visible = true
+		CUSTOMIZABLE:
+			$ItemToPlace.show()
+			$RotateIcon.visible = true
+
+
+func place_customizable_state():
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var direction = directions[direction_index]
+	var dimensions = Constants.dimensions_dict[item_name]
+	var variety = varieties[varieties_index]
+	get_rotation_index()
+	get_variety_index()
+	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + str(variety) + "/"  + direction + ".png")
+	if (direction == "up" or direction == "down"):
+		$ColorIndicator.tile_size = dimensions
+	else:
+		$ColorIndicator.tile_size = Vector2(dimensions.y, dimensions.x)
+	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if Input.is_action_pressed("mouse_click"):
+			place_object(item_name+str(variety), directions[direction_index], location, "placable")
+
+
+func get_variety_index():
+	if varieties_index == null:
+		varieties_index = 0
+	if Input.is_action_pressed("change_object_type") and not variety_delay:
+		variety_delay = true
+		varieties_index += 1
+		if varieties_index == 4:
+			varieties_index = 0
+		yield(get_tree().create_timer(0.25), "timeout")
+		variety_delay = false
 
 
 func place_rotatable_state():

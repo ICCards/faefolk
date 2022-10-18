@@ -29,7 +29,8 @@ var dimensions_dict = {
 	"stool": Vector2(1,1),
 	"well": Vector2(3,2),
 	"dresser": Vector2(2,1),
-	"table": Vector2(2,2)
+	"table": Vector2(2,2),
+	"couch": Vector2(3,2),
 }
 
 

@@ -32,6 +32,8 @@ func set_dimensions():
 	rng.randomize()
 	id = str(rng.randi_range(0, 100000))
 	name = str(id)
+	if item_name.substr(0,5) == "couch":
+		item_name = "couch"
 	$Position2D.scale = Constants.dimensions_dict[item_name]
 	if item_name == "wood chest" or item_name == "stone chest":
 		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
@@ -191,8 +193,22 @@ func set_dimensions():
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
 	elif item_name == "well":
-		$Position2D.scale = Constants.dimensions_dict[item_name]
 		$Position2D.position = Vector2(48, -32)
+	elif item_name == "couch":
+		item_name = "couch"
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+				$Position2D.position = Vector2(32, -48)
+			"right":
+				$Position2D.rotation_degrees = 270
+				$Position2D.position =  Vector2(32, -48)
+			"up":
+				$Position2D.position = Vector2(48, -32)
+				$Position2D.rotation_degrees = 180
+			"down":
+				$Position2D.position = Vector2(48, -32)
+				$Position2D.rotation_degrees = 0
 	elif item_name == "sleeping bag":
 		queue_free()
 

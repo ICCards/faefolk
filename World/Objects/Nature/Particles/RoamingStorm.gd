@@ -11,7 +11,7 @@ var MAX_DIST = 28000
 
 func _ready():
 	randomize()
-	position = Vector2(rand_range(MIN_DIST, MAX_DIST), rand_range(MIN_DIST, MAX_DIST)) #Vector2( 4000, 4000) #Vector2(rand_range(0, 4000), rand_range(0, 4000))
+	position = Vector2(rand_range(MIN_DIST, MAX_DIST), rand_range(MIN_DIST, MAX_DIST))
 	initiate_storm()
 
 func initiate_storm():
