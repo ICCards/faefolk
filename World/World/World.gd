@@ -79,7 +79,8 @@ const interpolation_offset = 30
 var mark_for_despawn = []
 var tile_ids = {}
 
-var tall_grass_locs = []
+const BATCH_DRAW_COUNT = 1000
+const BATCH_DRAW_DELAY = 0.1
 
 func _ready():
 	rng.randomize()
@@ -178,6 +179,7 @@ func buildMap(map):
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
+	var count = 0
 	for id in map["dirt"]:
 #		var loc = Util.string_to_vector2(map["dirt"][id])
 #		var x = loc.x
@@ -189,30 +191,54 @@ func buildMap(map):
 #		if map["dirt"][id]["isHoed"]:
 #			hoed.set_cellv(loc, 0)
 		dirt.set_cellv(map["dirt"][id], 0)
-	hoed.update_bitmask_region()
-	watered.update_bitmask_region()
+		count += 1
+		if count == BATCH_DRAW_COUNT:
+			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+			count = 0
+#	hoed.update_bitmask_region()
+#	watered.update_bitmask_region()
 	print("LOADED DIRT")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["plains"]:
 		var loc = map["plains"][id]
 		plains.set_cellv(loc, 0)
+		count += 1
+		if count == BATCH_DRAW_COUNT:
+			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+			count = 0
 	print("LOADED PLAINS")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["forest"]:
 		var loc = map["forest"][id]
 		forest.set_cellv(loc, 0)
+		count += 1
+		if count == BATCH_DRAW_COUNT:
+			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+			count = 0
 	print("LOADED DG")
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["snow"]:
 		var loc = map["snow"][id]
 		snow.set_cellv(loc, 0)
+		count += 1
+		if count == BATCH_DRAW_COUNT:
+			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+			count = 0
 	for id in map["desert"]:
 		var loc = map["desert"][id]
 		#desert.set_cellv(loc, 0)
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
+		count += 1
+		if count == BATCH_DRAW_COUNT:
+			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+			count = 0
 	for id in map["beach"]:
 		var loc = map["beach"][id]
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
+		count += 1
+		if count == BATCH_DRAW_COUNT:
+			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+			count = 0
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	fill_biome_gaps(map)
@@ -442,13 +468,13 @@ func spawn_nature():
 func set_nav():
 	var player_loc = validTiles.world_to_map(Server.player_node.position)
 	navTiles.clear()
-	var count = 0
+	#var count = 0
 	for x in range(60):
 		for y in range(60):
 			var loc = player_loc+Vector2(-30,-30)+Vector2(x,y)
 			if Tiles.isValidNavigationTile(loc):
 				navTiles.set_cellv(loc,0)
-			count += 1
+			#count += 1
 	#yield(get_tree(), "idle_frame")
 	yield(get_tree().create_timer(1.0), "timeout")
 	var value = navigation_thread.wait_to_finish()
@@ -471,9 +497,9 @@ func update_tile_bitmask_regions():
 	yield(get_tree().create_timer(0.5), "timeout")
 	forest.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
-	wetSand.update_bitmask_region()
-	yield(get_tree().create_timer(0.5), "timeout")
-	deep_ocean.update_bitmask_region()
+#	wetSand.update_bitmask_region()
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	deep_ocean.update_bitmask_region()
 
 
 func spawn_animals():
@@ -508,6 +534,7 @@ func set_random_beach_forage():
 
 	
 func set_water_tiles():
+	var count = 0
 	for x in range(1000): # fill ocean
 		for y in range(1000):
 			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
@@ -517,12 +544,20 @@ func set_water_tiles():
 				top_ocean.set_cell(x,y,0)
 				deep_ocean.set_cell(x,y,0)
 				validTiles.set_cell(x, y, -1)
+#				count += 1
+#				if count == BATCH_DRAW_COUNT*2:
+#					yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+#					count = 0
 	for loc in waves.get_used_cells(): # remove outer layer to show wet sand
 		if sand.get_cellv(loc+Vector2(1,0)) != -1 or sand.get_cellv(loc+Vector2(-1,0)) != -1 or sand.get_cellv(loc+Vector2(0,1)) != -1 or sand.get_cellv(loc+Vector2(0,-1)) != -1:
 			waves.set_cellv(loc, -1)
 			shallow_ocean.set_cellv(loc,-1)
 			deep_ocean.set_cellv(loc,-1)
 			top_ocean.set_cellv(loc,-1)
+			count += 1
+#			if count == BATCH_DRAW_COUNT*2:
+#				yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+#				count = 0
 	for loc in wetSand.get_used_cells(): # add outer layer to show wet sand
 		if wetSand.get_cellv(loc+Vector2(1,0)) != -1 or wetSand.get_cellv(loc+Vector2(-1,0)) != -1 or wetSand.get_cellv(loc+Vector2(0,1)) != -1 or wetSand.get_cellv(loc+Vector2(0,-1)) != -1:
 			wetSand.set_cellv(loc+Vector2(1,0), 0)
@@ -542,6 +577,12 @@ func set_water_tiles():
 				deep_ocean.set_cellv(loc+Vector2(-1,0), -1)
 				deep_ocean.set_cellv(loc+Vector2(0,1), -1)
 				deep_ocean.set_cellv(loc+Vector2(0,-1), -1)
+	yield(get_tree().create_timer(0.5), "timeout")
+	wetSand.update_bitmask_region()
+	yield(get_tree().create_timer(0.5), "timeout")
+	deep_ocean.update_bitmask_region()
+	yield(get_tree().create_timer(0.5), "timeout")
+	shallow_ocean.update_bitmask_region()
 #	for x in range(300): # fill empty tiles
 #		for y in range(300):
 #			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
