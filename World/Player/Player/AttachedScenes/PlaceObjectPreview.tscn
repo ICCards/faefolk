@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Images/placable_object_preview/foundation.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/Misc/ColorIndicator.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Images/Misc/rotate icon.png" type="Texture" id=3]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd" type="Script" id=4]
 
 [node name="PlaceObject" type="YSort"]
@@ -24,15 +23,6 @@ margin_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
 stretch_mode = 1
-
-[node name="RotateIcon" type="TextureRect" parent="."]
-visible = false
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 48.0
-margin_bottom = 48.0
-rect_scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 3 )
 
 [node name="ColorIndicator" parent="." instance=ExtResource( 2 )]
 z_index = -1

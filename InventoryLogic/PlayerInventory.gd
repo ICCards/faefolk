@@ -22,18 +22,22 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
+	0: ["wood", 999, null],
+	1: ["stone", 999, null],
 	9: ["rope", 12, null],
 	8: ["iron ingot", 15, null],
 	6: ["potato seeds", 60, null],
-	7: ["wheat seeds", 60, null]
+	7: ["wheat seeds", 60, null],
+	2: ["gold axe", 1, null]
 }
 
 var hotbar = {
+	0: ["wood sword", 1, null]
 }
-
 var chests = {}
 var furnaces = {}
 var grain_mills = {}
+var grain_mills_dict = {}
 var stoves = {}
 var tool_cabinets = {}
 

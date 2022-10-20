@@ -827,6 +827,27 @@
       "Ingredients": [["wood", 4]],
       "EnergyHealth": null
   },
+  "large rug" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "medium rug" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "small rug" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
   "couch" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
@@ -834,10 +855,31 @@
       "Ingredients": [["wood", 10]],
       "EnergyHealth": null
   },
+  "armchair" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 5]],
+      "EnergyHealth": null
+  },
   "table" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "round table" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "bed" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed and used to set respawn point.",
       "Ingredients": [["wood", 8]],
       "EnergyHealth": null
   },
@@ -910,6 +952,13 @@
       "StackSize": 999,
       "Description": "Wood fence for decoration.",
       "Ingredients": [["wood", 2]],
+      "EnergyHealth": null
+  },
+  "wood gate": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Wood gate for decoration.",
+      "Ingredients": [["wood", 8]],
       "EnergyHealth": null
   },
   "wood barrel": {

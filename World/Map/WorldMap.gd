@@ -87,6 +87,8 @@ func draw_grid_labels():
 			add_child(gridSquareLabel)
 	
 func _physics_process(delta):
+	if not visible:
+		return
 	if Server.player_node:
 		playerIcon.position =  Server.player_node.position
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
@@ -96,9 +98,7 @@ func _physics_process(delta):
 		roamingStorm2 = get_node("/root/World/RoamingStorm2")
 		stormIcon.position = roamingStorm.position
 		stormIcon2.position = roamingStorm2.position
-		
-	
-	
+
 func change_label_size():
 	for x in range(NUM_ROWS):
 		for y in range(NUM_COLUMNS):

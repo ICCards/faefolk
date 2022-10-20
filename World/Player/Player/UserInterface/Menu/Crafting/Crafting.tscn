@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Assets/Images/craftable object preview/campfire.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/craftable object preview/wood barrel.png" type="Texture" id=2]
@@ -36,6 +36,13 @@
 [ext_resource path="res://Assets/Images/craftable object preview/stool.png" type="Texture" id=34]
 [ext_resource path="res://Assets/Images/craftable object preview/chair.png" type="Texture" id=35]
 [ext_resource path="res://Assets/Images/craftable object preview/couch.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Images/inventory_icons/Placable object/armchair.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Images/craftable object preview/medium rug.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Images/craftable object preview/small rug.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Images/craftable object preview/large rug.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Images/craftable object preview/bed.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Images/craftable object preview/round table.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Images/craftable object preview/wood gate.png" type="Texture" id=43]
 
 [node name="Crafting" type="Control"]
 rect_scale = Vector2( 0.5, 0.5 )
@@ -57,7 +64,6 @@ __meta__ = {
 visible = false
 
 [node name="Page1" type="Control" parent="."]
-visible = false
 margin_left = 742.0
 margin_right = 742.0
 
@@ -140,10 +146,10 @@ margin_bottom = 50.0
 texture_normal = ExtResource( 2 )
 
 [node name="wood chest" parent="Page1" instance=ExtResource( 24 )]
-margin_left = 188.0
-margin_top = 182.0
-margin_right = 204.0
-margin_bottom = 198.0
+margin_left = 236.0
+margin_top = 370.0
+margin_right = 252.0
+margin_bottom = 386.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page1/wood chest" index="0"]
@@ -151,17 +157,18 @@ margin_right = 64.0
 margin_bottom = 46.0
 texture_normal = ExtResource( 8 )
 
-[node name="stone chest" parent="Page1" instance=ExtResource( 24 )]
-margin_left = 230.0
-margin_top = 374.0
-margin_right = 246.0
-margin_bottom = 390.0
+[node name="wood gate" parent="Page1" instance=ExtResource( 24 )]
+margin_left = 200.0
+margin_top = 188.0
+margin_right = 216.0
+margin_bottom = 204.0
 rect_scale = Vector2( 4, 4 )
 
-[node name="btn" parent="Page1/stone chest" index="0"]
+[node name="btn" parent="Page1/wood gate" index="0"]
 margin_right = 64.0
 margin_bottom = 46.0
-texture_normal = ExtResource( 3 )
+disabled = true
+texture_normal = ExtResource( 43 )
 
 [node name="torch" parent="Page1" instance=ExtResource( 24 )]
 margin_left = -36.0
@@ -201,6 +208,18 @@ texture_normal = ExtResource( 29 )
 
 [node name="Page2" type="Control" parent="."]
 visible = false
+
+[node name="stone chest" parent="Page2" instance=ExtResource( 24 )]
+margin_left = 166.0
+margin_top = 180.0
+margin_right = 182.0
+margin_bottom = 196.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page2/stone chest" index="0"]
+margin_right = 64.0
+margin_bottom = 46.0
+texture_normal = ExtResource( 3 )
 
 [node name="workbench #1" parent="Page2" instance=ExtResource( 24 )]
 margin_left = 160.0
@@ -415,65 +434,40 @@ margin_bottom = 40.0
 texture_normal = ExtResource( 9 )
 
 [node name="Page6" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="well" parent="Page6" instance=ExtResource( 24 )]
-margin_left = 210.0
-margin_top = 220.0
-margin_right = 226.0
-margin_bottom = 236.0
-rect_scale = Vector2( 4, 4 )
-
-[node name="btn" parent="Page6/well" index="0"]
-margin_left = -10.5
-margin_top = -9.0
-margin_right = 85.5
-margin_bottom = 105.0
-rect_scale = Vector2( 0.8, 0.8 )
-texture_normal = ExtResource( 31 )
-
 [node name="table" parent="Page6" instance=ExtResource( 24 )]
-margin_left = 502.0
-margin_top = 260.0
-margin_right = 518.0
-margin_bottom = 276.0
+margin_left = 194.0
+margin_top = 226.0
+margin_right = 210.0
+margin_bottom = 242.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page6/table" index="0"]
-margin_right = 64.0
-margin_bottom = 72.0
+margin_right = 96.0
+margin_bottom = 80.0
 texture_normal = ExtResource( 33 )
 
-[node name="chair" parent="Page6" instance=ExtResource( 24 )]
-margin_left = 778.0
+[node name="armchair" parent="Page6" instance=ExtResource( 24 )]
+margin_left = 1014.0
 margin_top = 292.0
-margin_right = 794.0
+margin_right = 1030.0
 margin_bottom = 308.0
 rect_scale = Vector2( 4, 4 )
 
-[node name="btn" parent="Page6/chair" index="0"]
-margin_right = 32.0
+[node name="btn" parent="Page6/armchair" index="0"]
+margin_left = -1.0
+margin_right = 95.0
 margin_bottom = 64.0
-texture_normal = ExtResource( 35 )
-
-[node name="stool" parent="Page6" instance=ExtResource( 24 )]
-margin_left = 866.0
-margin_top = 178.0
-margin_right = 882.0
-margin_bottom = 194.0
-rect_scale = Vector2( 4, 4 )
-
-[node name="btn" parent="Page6/stool" index="0"]
-margin_right = 32.0
-margin_bottom = 64.0
-texture_normal = ExtResource( 34 )
+texture_normal = ExtResource( 37 )
 
 [node name="couch" parent="Page6" instance=ExtResource( 24 )]
-margin_left = 920.0
-margin_top = 304.0
-margin_right = 936.0
-margin_bottom = 320.0
+margin_left = 626.0
+margin_top = 298.0
+margin_right = 642.0
+margin_bottom = 314.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page6/couch" index="0"]
@@ -481,6 +475,119 @@ margin_left = -1.0
 margin_right = 95.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 36 )
+
+[node name="Page7" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="small rug" parent="Page7" instance=ExtResource( 24 )]
+margin_left = 236.0
+margin_top = 426.0
+margin_right = 252.0
+margin_bottom = 442.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page7/small rug" index="0"]
+margin_left = -1.0
+margin_right = 31.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 39 )
+
+[node name="medium rug" parent="Page7" instance=ExtResource( 24 )]
+margin_left = 404.0
+margin_top = 298.0
+margin_right = 420.0
+margin_bottom = 314.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page7/medium rug" index="0"]
+margin_left = -1.0
+margin_right = 31.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 38 )
+
+[node name="large rug" parent="Page7" instance=ExtResource( 24 )]
+margin_left = 788.0
+margin_top = 290.0
+margin_right = 804.0
+margin_bottom = 306.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page7/large rug" index="0"]
+margin_left = -19.5
+margin_top = -29.5
+margin_right = 108.5
+margin_bottom = 66.5
+texture_normal = ExtResource( 40 )
+
+[node name="Page8" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="well" parent="Page8" instance=ExtResource( 24 )]
+margin_left = 210.0
+margin_top = 220.0
+margin_right = 226.0
+margin_bottom = 236.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page8/well" index="0"]
+margin_left = -10.5
+margin_top = -9.0
+margin_right = 85.5
+margin_bottom = 105.0
+rect_scale = Vector2( 0.8, 0.8 )
+texture_normal = ExtResource( 31 )
+
+[node name="chair" parent="Page8" instance=ExtResource( 24 )]
+margin_left = 500.0
+margin_top = 284.0
+margin_right = 516.0
+margin_bottom = 300.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page8/chair" index="0"]
+margin_right = 32.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 35 )
+
+[node name="stool" parent="Page8" instance=ExtResource( 24 )]
+margin_left = 580.0
+margin_top = 170.0
+margin_right = 596.0
+margin_bottom = 186.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page8/stool" index="0"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 34 )
+
+[node name="round table" parent="Page8" instance=ExtResource( 24 )]
+margin_left = 680.0
+margin_top = 274.0
+margin_right = 696.0
+margin_bottom = 290.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page8/round table" index="0"]
+margin_right = 60.0
+margin_bottom = 68.0
+texture_normal = ExtResource( 42 )
+
+[node name="bed" parent="Page8" instance=ExtResource( 24 )]
+margin_left = 956.0
+margin_top = 170.0
+margin_right = 972.0
+margin_bottom = 186.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="btn" parent="Page8/bed" index="0"]
+margin_right = 64.0
+margin_bottom = 96.0
+texture_normal = ExtResource( 41 )
 
 [node name="InventorySlots" type="GridContainer" parent="."]
 margin_left = 180.0
@@ -669,10 +776,11 @@ texture_normal = ExtResource( 26 )
 [editable path="Page1/wood box"]
 [editable path="Page1/wood barrel"]
 [editable path="Page1/wood chest"]
-[editable path="Page1/stone chest"]
+[editable path="Page1/wood gate"]
 [editable path="Page1/torch"]
 [editable path="Page1/wood fence"]
 [editable path="Page1/display table"]
+[editable path="Page2/stone chest"]
 [editable path="Page2/workbench #1"]
 [editable path="Page2/workbench #2"]
 [editable path="Page2/workbench #3"]
@@ -689,8 +797,14 @@ texture_normal = ExtResource( 26 )
 [editable path="Page5/armored door"]
 [editable path="Page5/dresser"]
 [editable path="Page5/sleeping bag"]
-[editable path="Page6/well"]
 [editable path="Page6/table"]
-[editable path="Page6/chair"]
-[editable path="Page6/stool"]
+[editable path="Page6/armchair"]
 [editable path="Page6/couch"]
+[editable path="Page7/small rug"]
+[editable path="Page7/medium rug"]
+[editable path="Page7/large rug"]
+[editable path="Page8/well"]
+[editable path="Page8/chair"]
+[editable path="Page8/stool"]
+[editable path="Page8/round table"]
+[editable path="Page8/bed"]

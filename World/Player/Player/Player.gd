@@ -126,6 +126,7 @@ func get_state():
 	
 func sleep(sleeping_bag_direction, pos):
 	if state != SLEEPING:
+		z_index = 1
 		state = SLEEPING
 		spawn_position = position
 		position = pos
@@ -138,6 +139,7 @@ func sleep(sleeping_bag_direction, pos):
 		elif sleeping_bag_direction == "up":
 			composite_sprites.rotation_degrees = 180
 		yield(animation_player, "animation_finished")
+		z_index = 0
 		composite_sprites.rotation_degrees = 0
 		state = MOVEMENT
 	
@@ -282,7 +284,9 @@ func harvest_forage(item_name):
 
 func destroy_placable_object():
 	if has_node("PlaceObject"):
-		get_node("PlaceObject").queue_free()
+		get_node("Camera2D/UserInterface/RotateLabel").hide()
+		get_node("Camera2D/UserInterface/VarietyLabel").hide()
+		get_node("PlaceObject").destroy()
 
 
 func swing(item_name):

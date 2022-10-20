@@ -18,4 +18,4 @@ initial_velocity_random = 0.62
 damping_random = 0.75
 
 [node name="FallingLeaf" parent="." instance=ExtResource( 1 )]
-amount = 24000
+amount = 36000

@@ -78,6 +78,13 @@ func place_building_object_in_world(id, item_name, location):
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 
 
+func remove_valid_tiles(item_name,direction, location):
+	item_name = Util.return_adjusted_item_name(item_name)
+	if direction == "left" or direction == "right":
+		Tiles.remove_valid_tiles(location, Vector2(Constants.dimensions_dict[item_name].y, Constants.dimensions_dict[item_name].x))
+	else:
+		Tiles.remove_valid_tiles(location, Constants.dimensions_dict[item_name])
+		
 func place_object_in_world(id, item_name, direction, location):
 	PlacableObjects = Server.world.get_node("PlacableObjects")
 	var tileObjectHurtBox = TileObjectHurtBox.instance()
@@ -87,7 +94,100 @@ func place_object_in_world(id, item_name, direction, location):
 	tileObjectHurtBox.direction = direction
 	PlacableObjects.call_deferred("add_child", tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
+	remove_valid_tiles(item_name, direction, location)
 	match item_name:
+		"round table1":
+			Tiles.object_tiles.set_cellv(location, 175)
+		"round table2": 
+			Tiles.object_tiles.set_cellv(location, 176)
+		"round table3":
+			Tiles.object_tiles.set_cellv(location, 177)
+		"round table4":
+			Tiles.object_tiles.set_cellv(location, 178)
+		"bed1":
+			Tiles.object_tiles.set_cellv(location, 167)
+		"bed2":
+			Tiles.object_tiles.set_cellv(location, 168)
+		"bed3":
+			Tiles.object_tiles.set_cellv(location, 169)
+		"bed4":
+			Tiles.object_tiles.set_cellv(location, 170)
+		"bed5":
+			Tiles.object_tiles.set_cellv(location, 171)
+		"bed6":
+			Tiles.object_tiles.set_cellv(location, 172)
+		"bed7":
+			Tiles.object_tiles.set_cellv(location, 173)
+		"bed8":
+			Tiles.object_tiles.set_cellv(location, 174)
+		"table1":
+			if direction == "left" or direction == "right":
+				Tiles.object_tiles.set_cellv(location, 159)
+			else:
+				Tiles.object_tiles.set_cellv(location, 160)
+		"table2":
+			if direction == "left" or direction == "right":
+				Tiles.object_tiles.set_cellv(location, 161)
+			else:
+				Tiles.object_tiles.set_cellv(location, 162)
+		"table3":
+			if direction == "left" or direction == "right":
+				Tiles.object_tiles.set_cellv(location, 163)
+			else:
+				Tiles.object_tiles.set_cellv(location, 164)
+		"table4":
+			if direction == "left" or direction == "right":
+				Tiles.object_tiles.set_cellv(location, 165)
+			else:
+				Tiles.object_tiles.set_cellv(location, 166)
+		"large rug1":
+			Tiles.object_tiles.set_cellv(location, 135)
+		"large rug2":
+			Tiles.object_tiles.set_cellv(location, 136)
+		"large rug3":
+			Tiles.object_tiles.set_cellv(location, 137)
+		"large rug4":
+			Tiles.object_tiles.set_cellv(location, 138)
+		"large rug5":
+			Tiles.object_tiles.set_cellv(location, 139)
+		"large rug6":
+			Tiles.object_tiles.set_cellv(location, 140)
+		"large rug7":
+			Tiles.object_tiles.set_cellv(location, 141)
+		"large rug8":
+			Tiles.object_tiles.set_cellv(location, 142)
+		"medium rug1":
+			Tiles.object_tiles.set_cellv(location, 143)
+		"medium rug2":
+			Tiles.object_tiles.set_cellv(location, 144)
+		"medium rug3":
+			Tiles.object_tiles.set_cellv(location, 145)
+		"medium rug4":
+			Tiles.object_tiles.set_cellv(location, 146)
+		"medium rug5":
+			Tiles.object_tiles.set_cellv(location, 147)
+		"medium rug6":
+			Tiles.object_tiles.set_cellv(location, 148)
+		"medium rug7":
+			Tiles.object_tiles.set_cellv(location, 149)
+		"medium rug8":
+			Tiles.object_tiles.set_cellv(location, 150)
+		"small rug1":
+			Tiles.object_tiles.set_cellv(location, 151)
+		"small rug2":
+			Tiles.object_tiles.set_cellv(location, 152)
+		"small rug3":
+			Tiles.object_tiles.set_cellv(location, 153)
+		"small rug4":
+			Tiles.object_tiles.set_cellv(location, 154)
+		"small rug5":
+			Tiles.object_tiles.set_cellv(location, 155)
+		"small rug6":
+			Tiles.object_tiles.set_cellv(location, 156)
+		"small rug7":
+			Tiles.object_tiles.set_cellv(location, 157)
+		"small rug8":
+			Tiles.object_tiles.set_cellv(location, 158)
 		"furnace":
 			Tiles.remove_valid_tiles(location)
 			match direction:
@@ -99,113 +199,184 @@ func place_object_in_world(id, item_name, direction, location):
 					Tiles.object_tiles.set_cellv(location, 38)
 				"right":
 					Tiles.object_tiles.set_cellv(location, 37)
-		"chair":
+		"chair1":
 			Tiles.remove_valid_tiles(location)
 			match direction:
 				"down":
-					Tiles.object_tiles.set_cellv(location, 68)
+					Tiles.object_tiles.set_cellv(location, 97)
 				"up":
-					Tiles.object_tiles.set_cellv(location,  71)
+					Tiles.object_tiles.set_cellv(location,  98)
 				"left":
-					Tiles.object_tiles.set_cellv(location, 69)
+					Tiles.object_tiles.set_cellv(location, 95)
 				"right":
-					Tiles.object_tiles.set_cellv(location, 70)
+					Tiles.object_tiles.set_cellv(location, 96)
+		"chair2":
+			Tiles.remove_valid_tiles(location)
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 101)
+				"up":
+					Tiles.object_tiles.set_cellv(location,  102)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 99)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 100)
+		"chair3":
+			Tiles.remove_valid_tiles(location)
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 105)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 106)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 103)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 104)
+		"chair4":
+			Tiles.remove_valid_tiles(location)
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 109)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 110)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 107)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 108)
+		"chair5":
+			Tiles.remove_valid_tiles(location)
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 113)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 114)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 111)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 112)
+		"chair6":
+			Tiles.remove_valid_tiles(location)
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 117)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 118)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 115)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 116)
 		"dresser":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 76)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location,  76)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 78)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 77)
 		"couch1":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(3,2))
 					Tiles.object_tiles.set_cellv(location, 79)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,3))
 					Tiles.object_tiles.set_cellv(location,  82)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(2,3))
 					Tiles.object_tiles.set_cellv(location, 81)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(3,2))
 					Tiles.object_tiles.set_cellv(location, 80)
 		"couch2":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(3,2))
 					Tiles.object_tiles.set_cellv(location, 83)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,3))
 					Tiles.object_tiles.set_cellv(location,  84)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(2,3))
 					Tiles.object_tiles.set_cellv(location, 85)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(3,2))
 					Tiles.object_tiles.set_cellv(location, 86)
 		"couch3":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(3,2))
 					Tiles.object_tiles.set_cellv(location, 87)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,3))
 					Tiles.object_tiles.set_cellv(location,  88)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(2,3))
 					Tiles.object_tiles.set_cellv(location, 89)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(3,2))
 					Tiles.object_tiles.set_cellv(location, 90)
 		"couch4":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(3,2))
 					Tiles.object_tiles.set_cellv(location, 91)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,3))
 					Tiles.object_tiles.set_cellv(location,  92)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(2,3))
 					Tiles.object_tiles.set_cellv(location, 93)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(3,2))
 					Tiles.object_tiles.set_cellv(location, 94)
+		"armchair1":
+			Tiles.remove_valid_tiles(location, Vector2(2,2))
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 121)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 122)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 119)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 120)
+		"armchair2":
+			Tiles.remove_valid_tiles(location, Vector2(2,2))
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 125)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 126)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 123)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 124)
+		"armchair3":
+			Tiles.remove_valid_tiles(location, Vector2(2,2))
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 129)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 130)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 127)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 128)
+		"armchair4":
+			Tiles.remove_valid_tiles(location, Vector2(2,2))
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 133)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 134)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 131)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 132)
 		"stool":
-			Tiles.remove_valid_tiles(location)
 			Tiles.object_tiles.set_cellv(location, 72)
 		"table":
-			Tiles.remove_valid_tiles(location, Vector2(2,2))
 			Tiles.object_tiles.set_cellv(location, 74)
 		"well":
-			Tiles.remove_valid_tiles(location, Vector2(3,2))
 			Tiles.object_tiles.set_cellv(location, 75)
 		"tool cabinet":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 30)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 31)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 33)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 34)
 		"wood door":
 			tileObjectHurtBox.queue_free()
-			Tiles.remove_valid_tiles(location, Vector2(2,1))
 			var object = DoorFront.instance()
 			object.location = location
 			object.tier = "wood"
@@ -214,7 +385,6 @@ func place_object_in_world(id, item_name, direction, location):
 			Server.world.call_deferred("add_child", object, true)
 		"wood door side":
 			tileObjectHurtBox.queue_free()
-			Tiles.remove_valid_tiles(location, Vector2(1,2))
 			var object = DoorSide.instance()
 			object.location = location
 			object.tier = "wood"
@@ -223,7 +393,6 @@ func place_object_in_world(id, item_name, direction, location):
 			PlacableObjects.call_deferred("add_child", object, true)
 		"metal door":
 			tileObjectHurtBox.queue_free()
-			Tiles.remove_valid_tiles(location, Vector2(2,1))
 			var object = DoorFront.instance()
 			object.location = location
 			object.tier = "metal"
@@ -232,7 +401,6 @@ func place_object_in_world(id, item_name, direction, location):
 			PlacableObjects.call_deferred("add_child", object, true)
 		"metal door side":
 			tileObjectHurtBox.queue_free()
-			Tiles.remove_valid_tiles(location, Vector2(1,2))
 			var object = DoorSide.instance()
 			object.location = location
 			object.tier = "metal"
@@ -241,7 +409,6 @@ func place_object_in_world(id, item_name, direction, location):
 			PlacableObjects.call_deferred("add_child", object, true)
 		"armored door":
 			tileObjectHurtBox.queue_free()
-			Tiles.remove_valid_tiles(location, Vector2(2,1))
 			var object = DoorFront.instance()
 			object.location = location
 			object.tier = "armored"
@@ -250,7 +417,6 @@ func place_object_in_world(id, item_name, direction, location):
 			PlacableObjects.call_deferred("add_child", object, true)
 		"armored door side":
 			tileObjectHurtBox.queue_free()
-			Tiles.remove_valid_tiles(location, Vector2(1,2))
 			var object = DoorSide.instance()
 			object.location = location
 			object.tier = "armored"
@@ -258,161 +424,113 @@ func place_object_in_world(id, item_name, direction, location):
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"torch":
+			pass
 			var object = Rug.instance()
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 #			Tiles.remove_valid_tiles(location, Vector2(1,1))
 #			light_tiles.set_cellv(location, Lights.TORCH)
 		"campfire":
-			Tiles.remove_valid_tiles(location, Vector2(1,1))
 			Tiles.object_tiles.set_cellv(location, 40)
-		"fire pedestal":
-			Tiles.remove_valid_tiles(location, Vector2(1,1))
-			Tiles.light_tiles.set_cellv(location, Lights.FIRE_PEDESTAL)
-		"tall fire pedestal":
-			Tiles.remove_valid_tiles(location, Vector2(1,1))
-			Tiles.light_tiles.set_cellv(location, Lights.TALL_FIRE_PEDESTAL)
 		"wood fence":
-			Tiles.remove_valid_tiles(location, Vector2(1,1))
 			Tiles.fence_tiles.set_cellv(location, 0)
 			Tiles.fence_tiles.update_bitmask_area(location)
 		"wood barrel":
-			Tiles.remove_valid_tiles(location, Vector2(1,1))
 			Tiles.object_tiles.set_cellv(location, Placables.BARREL)
 		"wood box":
-			Tiles.remove_valid_tiles(location, Vector2(1,1))
 			Tiles.object_tiles.set_cellv(location, Placables.BOX)
 		"workbench #1":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH1)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 41)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 43)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 42)
 		"workbench #2":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH2)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 44)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 46)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 45)
 		"workbench #3":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.WORKBENCH3)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 47)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 49)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 48)
 		"grain mill #1":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL1)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 53)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 54)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 55)
 		"grain mill #2":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL2)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 50)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 51)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 52)
 		"grain mill #3":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.GRAIN_MILL3)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 56)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 57)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 58)
 		"stove #1":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.STOVE1)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 59)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 60)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 61)
 		"stove #2":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.STOVE2)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 62)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 63)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 64)
 		"stove #3":
 			match direction:
 				"down":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, Placables.STOVE3)
 				"up":
-					Tiles.remove_valid_tiles(location, Vector2(2,1))
 					Tiles.object_tiles.set_cellv(location, 65)
 				"right":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 66)
 				"left":
-					Tiles.remove_valid_tiles(location, Vector2(1,2))
 					Tiles.object_tiles.set_cellv(location, 67)
 		"sleeping bag":
-			if direction == "up" or direction == "down":
-				Tiles.remove_valid_tiles(location, Vector2(2,1))
-			else:
-				Tiles.remove_valid_tiles(location, Vector2(1,2))
+			tileObjectHurtBox.queue_free()
 			var sleepingBag = SleepingBag.instance()
 			sleepingBag.direction = direction
 			sleepingBag.location = location

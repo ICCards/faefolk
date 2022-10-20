@@ -1,7 +1,11 @@
 extends YSort
 
 var directions = ["down", "left", "up", "right"]
-var varieties = [1, 2, 3, 4]
+var couch_varieties = [1, 2, 3, 4]
+var table_varieties = [1, 2, 3, 4]
+var chair_varieties = [1, 2, 3, 4, 5, 6]
+var rug_varieties = [1, 2, 3, 4, 5, 6, 7, 8]
+var bed_varieties = [1, 2, 3, 4, 5, 6, 7, 8]
 var vertical: bool = true
 var direction_index: int = 0
 var varieties_index: int = 0
@@ -12,7 +16,7 @@ var mousePos := Vector2.ZERO
 var item_name
 var item_category
 var state
-
+var variety
 
 enum {
 	TENT, 
@@ -24,18 +28,24 @@ enum {
 	DOOR,
 	FOUNDATION,
 	ROTATABLE,
-	CUSTOMIZABLE
+	CUSTOMIZABLE,
+	CUSTOMIZABLE_ROTATABLE
 }
 
 func _ready():
 	initialize()
 
-func _process(delta):
+func destroy():
+	name = "removing"
+	hide()
+	set_physics_process(false)
+	yield(get_tree().create_timer(0.25), "timeout")
+	queue_free()
+
+func _physics_process(delta):
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
 	match state:
-		TENT:
-			place_tent_state()
 		SLEEPING_BAG:
 			place_sleeping_bag_state()
 		ITEM:
@@ -47,28 +57,30 @@ func _process(delta):
 		WALL:
 			place_buildings_state()
 		DOOR:
-			place_double_door_state()
+			place_door_state()
 		FOUNDATION:
 			place_foundation_state()
 		ROTATABLE:
 			place_rotatable_state()
+		CUSTOMIZABLE_ROTATABLE:
+			place_customizable_rotatable_state()
 		CUSTOMIZABLE:
 			place_customizable_state()
 
 func initialize():
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
-	if item_name == "tent":
-		state = TENT
-	elif item_name == "sleeping bag":
+	if item_name == "sleeping bag":
 		state = SLEEPING_BAG
 	elif item_name == "furnace" or item_name == "tool cabinet" or item_name == "stone chest" or item_name == "wood chest" or \
 	item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3" or item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or\
-	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "chair" or item_name == "dresser":
+	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "dresser":
 		state = ROTATABLE
 	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR
-	elif item_name == "couch":
+	elif item_name == "couch" or item_name == "chair" or item_name == "armchair" or item_name == "table":
+		state = CUSTOMIZABLE_ROTATABLE
+	elif item_name == "large rug" or item_name == "medium rug" or item_name == "small rug" or item_name == "bed" or item_name == "round table":
 		state = CUSTOMIZABLE
 	elif item_category == "Placable object":
 		state = ITEM
@@ -88,12 +100,7 @@ func set_dimensions():
 	$ItemToPlace.hide()
 	$ScaledItemToPlace.hide()
 	match state:
-		TENT:
-			$RotateIcon.visible = true
-			$ItemToPlace.visible = true
-			$ItemToPlace.rect_scale = Vector2(1, 1)
 		SLEEPING_BAG:
-			$RotateIcon.visible = true
 			$ColorIndicator.tile_size = Vector2(2, 1)
 			$ScaledItemToPlace.visible = true
 			$ScaledItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
@@ -101,44 +108,78 @@ func set_dimensions():
 			$ScaledItemToPlace.rect_size = Vector2(128, 64)
 			$ScaledItemToPlace.rect_position = Vector2(0,0)
 		ITEM:
-			$ItemToPlace.visible = true
+			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 			var dimensions = Constants.dimensions_dict[item_name]
 			$ColorIndicator.tile_size = dimensions
 		SEED:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
-			$ColorIndicator.tile_size =  Vector2(1, 1)
-			$ItemToPlace.rect_position = Vector2(0,0)
-			$ItemToPlace.rect_scale = Vector2(1, 1)
+			$ColorIndicator.tile_size =  Vector2(1,1)
 		WALL:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wall.png")
-			$ColorIndicator.tile_size =  Vector2(1, 1)
-			$ItemToPlace.rect_scale = Vector2(1, 1)
+			$ColorIndicator.tile_size =  Vector2(1,1)
 		DOOR:
+			Server.player_node.get_node("Camera2D/UserInterface/RotateLabel").show()
 			$ItemToPlace.show()
-			$ItemToPlace.rect_scale = Vector2(1, 1)
 		FOUNDATION:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = preload("res://Assets/Images/placable_object_preview/foundation.png")
-			$ItemToPlace.rect_scale = Vector2(1, 1)
-			$ColorIndicator.tile_size = Vector2(1, 1)
+			$ColorIndicator.tile_size = Vector2(1,1)
 		ROTATABLE:
+			Server.player_node.get_node("Camera2D/UserInterface/RotateLabel").show()
 			$ItemToPlace.show()
-			$RotateIcon.visible = true
+		CUSTOMIZABLE_ROTATABLE:
+			Server.player_node.get_node("Camera2D/UserInterface/RotateLabel").show()
+			Server.player_node.get_node("Camera2D/UserInterface/VarietyLabel").show()
+			$ItemToPlace.show()
 		CUSTOMIZABLE:
+			Server.player_node.get_node("Camera2D/UserInterface/VarietyLabel").show()
 			$ItemToPlace.show()
-			$RotateIcon.visible = true
 
 
 func place_customizable_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
-	var variety = varieties[varieties_index]
+	if item_name == "large rug" or item_name == "medium rug" or item_name == "small rug":
+		variety = rug_varieties[varieties_index]
+		get_variety_index(rug_varieties.size())
+	elif item_name == "bed":
+		variety = bed_varieties[varieties_index]
+		get_variety_index(bed_varieties.size())
+	elif item_name == "round table":
+		variety = table_varieties[varieties_index]
+		get_variety_index(table_varieties.size())
+	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + str(variety) + ".png")
+	$ColorIndicator.tile_size = dimensions
+	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif not Tiles.validate_tiles(location, dimensions):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if Input.is_action_pressed("mouse_click"):
+			place_object(item_name+str(variety), null, location, "placable")
+
+func place_customizable_rotatable_state():
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var direction = directions[direction_index]
+	var dimensions = Constants.dimensions_dict[item_name]
+	if item_name == "couch" or item_name == "armchair":
+		variety = couch_varieties[varieties_index]
+		get_variety_index(couch_varieties.size())
+	elif item_name == "chair":
+		variety = chair_varieties[varieties_index]
+		get_variety_index(chair_varieties.size())
+	elif item_name == "table":
+		variety = table_varieties[varieties_index]
+		get_variety_index(table_varieties.size())
 	get_rotation_index()
-	get_variety_index()
 	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + str(variety) + "/"  + direction + ".png")
 	if (direction == "up" or direction == "down"):
 		$ColorIndicator.tile_size = dimensions
@@ -160,13 +201,13 @@ func place_customizable_state():
 			place_object(item_name+str(variety), directions[direction_index], location, "placable")
 
 
-func get_variety_index():
+func get_variety_index(num_varieties):
 	if varieties_index == null:
 		varieties_index = 0
 	if Input.is_action_pressed("change_object_type") and not variety_delay:
 		variety_delay = true
 		varieties_index += 1
-		if varieties_index == 4:
+		if varieties_index == num_varieties:
 			varieties_index = 0
 		yield(get_tree().create_timer(0.25), "timeout")
 		variety_delay = false
@@ -221,10 +262,7 @@ func place_foundation_state():
 			place_object(item_name, null, location, "placable")
 
 
-func place_double_door_state():
-	$RotateIcon.visible = true
-	$ColorIndicator.visible = true
-	$ItemToPlace.visible = true
+func place_door_state():
 	$ItemToPlace.rect_scale = Vector2(1, 1)
 	get_rotation_index()
 	var direction = directions[direction_index]

@@ -29,8 +29,26 @@ var dimensions_dict = {
 	"stool": Vector2(1,1),
 	"well": Vector2(3,2),
 	"dresser": Vector2(2,1),
-	"table": Vector2(2,2),
+	"table": Vector2(3,2),
 	"couch": Vector2(3,2),
+	"armchair": Vector2(2,2),
+	"bed": Vector2(2,2),
+	"large rug": Vector2(4,3),
+	"medium rug": Vector2(2,2),
+	"small rug": Vector2(1,1),
+	"sleeping bag": Vector2(1,2),
+	"round table": Vector2(2,2),
+	"wood door": Vector2(2,1),
+	"wood door side": Vector2(1,2),
+	"metal door": Vector2(2,1),
+	"metal door side": Vector2(1,2),
+	"armored door": Vector2(2,1),
+	"armored door side": Vector2(1,2),
+	"wood gate": Vector2(2,1),
+	"wood gate side": Vector2(1,2),
+	
+	
+	
 }
 
 

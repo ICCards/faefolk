@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://World/Objects/Tiles/TileObjectHurtBox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
@@ -19,6 +19,9 @@ extents = Vector2( 14, 14 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15, 15 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 36, 30 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 4 )
@@ -72,6 +75,7 @@ animations = [ {
 script = ExtResource( 1 )
 
 [node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 16, -16 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Position2D"]
 
@@ -112,6 +116,17 @@ monitorable = false
 light_mask = 0
 shape = SubResource( 1 )
 
+[node name="DetectPlayerAroundBed" type="Area2D" parent="Position2D"]
+position = Vector2( -13, 8 )
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/DetectPlayerAroundBed"]
+position = Vector2( 26, -16 )
+shape = SubResource( 17 )
+disabled = true
+
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 volume_db = -16.0
 
@@ -126,7 +141,7 @@ position = Vector2( 21, -112 )
 scale = Vector2( 0.75, 0.75 )
 z_index = 1
 frames = SubResource( 15 )
-frame = 1
+frame = 9
 playing = true
 
 [node name="Chest" type="AnimatedSprite" parent="."]

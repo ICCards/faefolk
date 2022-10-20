@@ -43,6 +43,8 @@ func set_current_page():
 			$Page4.hide()
 			$Page5.hide()
 			$Page6.hide()
+			$Page7.hide()
+			$Page8.hide()
 			$UpButton.hide()
 			$DownButton.show()
 		2:
@@ -52,6 +54,8 @@ func set_current_page():
 			$Page4.hide()
 			$Page5.hide()
 			$Page6.hide()
+			$Page7.hide()
+			$Page8.hide()
 			$UpButton.show()
 			$DownButton.show()
 		3:
@@ -61,6 +65,8 @@ func set_current_page():
 			$Page4.hide()
 			$Page5.hide()
 			$Page6.hide()
+			$Page7.hide()
+			$Page8.hide()
 			$UpButton.show()
 			$DownButton.show()
 		4:
@@ -70,6 +76,8 @@ func set_current_page():
 			$Page4.show()
 			$Page5.hide()
 			$Page6.hide()
+			$Page7.hide()
+			$Page8.hide()
 			$UpButton.show()
 			$DownButton.show()
 		5:
@@ -79,6 +87,8 @@ func set_current_page():
 			$Page4.hide()
 			$Page5.show()
 			$Page6.hide()
+			$Page7.hide()
+			$Page8.hide()
 			$UpButton.show()
 			$DownButton.show()
 		6:
@@ -88,6 +98,30 @@ func set_current_page():
 			$Page4.hide()
 			$Page5.hide()
 			$Page6.show()
+			$Page7.hide()
+			$Page8.hide()
+			$UpButton.show()
+			$DownButton.show()
+		7:
+			$Page1.hide()
+			$Page2.hide()
+			$Page3.hide()
+			$Page4.hide()
+			$Page5.hide()
+			$Page6.hide()
+			$Page7.show()
+			$Page8.hide()
+			$UpButton.show()
+			$DownButton.show()
+		8:
+			$Page1.hide()
+			$Page2.hide()
+			$Page3.hide()
+			$Page4.hide()
+			$Page5.hide()
+			$Page6.hide()
+			$Page7.hide()
+			$Page8.show()
 			$UpButton.show()
 			$DownButton.hide()
 
@@ -114,7 +148,7 @@ func _on_UpButton_pressed():
 		initialize_crafting()
 
 func _on_DownButton_pressed():
-	if page != 6:
+	if page != 8:
 		page += 1
 		set_current_page()
 		initialize_crafting()
@@ -142,6 +176,13 @@ func reset_hover_effect():
 	for item in $Page6.get_children():
 		item = str(item.name)
 		$Page6.get_node(item).rect_scale = Vector2(4,4)
+	for item in $Page7.get_children():
+		item = str(item.name)
+		$Page7.get_node(item).rect_scale = Vector2(4,4)
+	for item in $Page8.get_children():
+		item = str(item.name)
+		$Page8.get_node(item).rect_scale = Vector2(4,4)
+
 
 func initialize_crafting():
 	PlayerInventory.HotbarSlots = $HotbarSlots
@@ -183,6 +224,18 @@ func initialize_crafting():
 				$Page6.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
 			else:
 				$Page6.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
+	elif page == 7:
+		for item in $Page7.get_children():
+			if PlayerInventory.isSufficientMaterialToCraft(str(item.name)):
+				$Page7.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
+			else:
+				$Page7.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
+	elif page == 8:
+		for item in $Page8.get_children():
+			if PlayerInventory.isSufficientMaterialToCraft(str(item.name)):
+				$Page8.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
+			else:
+				$Page8.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
  
 
 func _physics_process(delta):

@@ -204,7 +204,7 @@ func cooking_active():
 	$FireAnimatedSprite.playing = true
 	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 0)
 	$FireAnimatedSprite.modulate = Color("ffffff")
-	Server.world.get_node("Placables/"+id+"/FurnaceSmoke").show()
+	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").show()
 
 func cooking_inactive():
 	$CookTimer.stop()
@@ -212,7 +212,7 @@ func cooking_inactive():
 	$FireAnimatedSprite.playing = false
 	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 1)
 	$FireAnimatedSprite.modulate = Color("96ffffff")
-	Server.world.get_node("Placables/"+id+"/FurnaceSmoke").hide()
+	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").hide()
 
 
 func valid_fuel():

@@ -175,6 +175,7 @@ func buildMap(map):
 	Tiles.object_tiles = $PlacableTiles/ObjectTiles
 	Tiles.fence_tiles = $PlacableTiles/FenceTiles
 	Tiles.light_tiles = $PlacableTiles/LightTiles
+	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
 	for id in map["dirt"]:
@@ -233,7 +234,7 @@ func buildMap(map):
 	spawn_animals()
 	set_random_beach_forage()
 	#set_nature_object_quadrants()
-	set_nav()
+	#set_nav()
 	
 
 var trees_thread := Thread.new()
@@ -242,6 +243,7 @@ var grass_thread := Thread.new()
 var flower_thread := Thread.new()
 var remove_objects_thread := Thread.new()
 var remove_grass_thread := Thread.new()
+var navigation_thread := Thread.new()
 
 
 
@@ -416,6 +418,9 @@ func _whoAmI4(_value):
 
 func _whoAmI6(_value):
 	call_deferred("spawn_flowers")
+	
+func _whoAmI7(_value):
+	call_deferred("set_nav")
 
 func spawn_nature():
 	if not remove_objects_thread.is_active():
@@ -430,22 +435,28 @@ func spawn_nature():
 		grass_thread.start(self, "_whoAmI4", null)
 	if not flower_thread.is_active():
 		flower_thread.start(self, "_whoAmI6", null)
+	if not navigation_thread.is_active():
+		navigation_thread.start(self, "_whoAmI7", null)
 
 
 func set_nav():
 	var player_loc = validTiles.world_to_map(Server.player_node.position)
 	navTiles.clear()
+	var count = 0
 	for x in range(60):
 		for y in range(60):
 			var loc = player_loc+Vector2(-30,-30)+Vector2(x,y)
-			if validTiles.get_cellv(loc) != -1 and Tiles.isCenterBitmaskTile(loc, validTiles):
+			if Tiles.isValidNavigationTile(loc):
 				navTiles.set_cellv(loc,0)
-			elif wetSand.get_cellv(loc) != -1 and deep_ocean.get_cellv(loc) == -1:
-				navTiles.set_cellv(loc,0)
-	$Timer.start()
-
-func _on_Timer_timeout():
-	set_nav()
+			count += 1
+	#yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(1.0), "timeout")
+	var value = navigation_thread.wait_to_finish()
+#			if validTiles.get_cellv(loc) != -1 and Tiles.isCenterBitmaskTile(loc, validTiles):
+#				navTiles.set_cellv(loc,0)
+#			elif wetSand.get_cellv(loc) != -1 and deep_ocean.get_cellv(loc) == -1:
+#				navTiles.set_cellv(loc,0)
+	#$Timer.start()
 
 func update_tile_bitmask_regions():
 	dirt.update_bitmask_region()
@@ -754,9 +765,10 @@ func play_remove_building_effect(loc):
 	add_child(removeBuildingEffect)
 
 func _on_SpawnBearTimer_timeout():
-	spawnRandomBear()
-	spawnRandomDuck()
-	spawnRandomBunny()
+	pass
+#	spawnRandomBear()
+#	spawnRandomDuck()
+#	spawnRandomBunny()
 
 func _on_SpawnNature_timeout():
 	spawn_nature()

@@ -56,6 +56,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "stump destroyed"
@@ -178,7 +190,6 @@ position = Vector2( 3.33333, -36.6667 )
 position = Vector2( -3.33333, 33.2222 )
 rotation = -1.5708
 shape = SubResource( 7 )
-disabled = true
 
 [connection signal="area_entered" from="StumpHurtBox" to="." method="_on_StumpHurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

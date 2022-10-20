@@ -14,6 +14,7 @@ var selected_foundation_tiles = null
 var object_tiles = null
 var fence_tiles = null
 var light_tiles = null
+var wet_sand_tiles = null
 
 
 func validate_tiles(location, dimensions):
@@ -27,6 +28,28 @@ func validate_tiles(location, dimensions):
 					break
 		return true
 		
+		
+func isValidNavigationTile(loc) -> bool:
+	if wet_sand_tiles.get_cellv(loc) != -1 and deep_ocean_tiles.get_cellv(loc) == -1:
+		return true
+	elif valid_tiles.get_cellv(loc) == -1:
+		return false
+	elif valid_tiles.get_cellv(loc+Vector2(1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,1)) == -1:
+		return false
+	elif valid_tiles.get_cellv(loc+Vector2(1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,-1)) == -1:
+		return false
+	elif valid_tiles.get_cellv(loc+Vector2(-1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,1)) == -1:
+		return false
+	elif valid_tiles.get_cellv(loc+Vector2(-1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,-1)) == -1:
+		return false
+	elif valid_tiles.get_cellv(loc+Vector2(-1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(1,0)) == -1:
+		return false
+	elif valid_tiles.get_cellv(loc+Vector2(0,1)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,-1)) == -1:
+		return false
+	
+	return true
+
+
 #func remove_nature_invalid_tiles(location, _name = ""):
 #	if _name == "tree" or _name == "stump" or _name == "large ore":
 #		valid_tiles.set_cellv(location, -1)

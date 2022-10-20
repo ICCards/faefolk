@@ -106,9 +106,9 @@ tracks/0/keys = {
 script = ExtResource( 23 )
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
+visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
-visible = false
 
 [node name="WeatherEffects" type="ColorRect" parent="."]
 visible = false
@@ -183,6 +183,28 @@ rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 6 )
 text = "-Scroll to zoom
 -Double-click to move"
+
+[node name="RotateLabel" type="Label" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 209.0
+margin_top = 478.0
+margin_right = 1086.0
+margin_bottom = 624.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "Press [R] to rotate"
+
+[node name="VarietyLabel" type="Label" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 550.0
+margin_top = 477.0
+margin_right = 1875.0
+margin_bottom = 623.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "Press [V] to change variety"
 
 [node name="EnterNewKey" type="Panel" parent="."]
 visible = false

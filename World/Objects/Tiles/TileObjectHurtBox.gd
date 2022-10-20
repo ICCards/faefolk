@@ -14,6 +14,12 @@ func _ready():
 	set_dimensions()
 
 
+func _unhandled_input(event):
+	if event.is_action_pressed("action"):
+		if $Position2D/DetectPlayerAroundBed.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
+			Server.player_node.sleep("down", position + Vector2(32,-24))
+
+
 func PlayEffect(_player_id):
 	$Light2D.enabled = false
 	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
@@ -32,8 +38,7 @@ func set_dimensions():
 	rng.randomize()
 	id = str(rng.randi_range(0, 100000))
 	name = str(id)
-	if item_name.substr(0,5) == "couch":
-		item_name = "couch"
+	item_name = Util.return_adjusted_item_name(item_name)
 	$Position2D.scale = Constants.dimensions_dict[item_name]
 	if item_name == "wood chest" or item_name == "stone chest":
 		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
@@ -126,7 +131,7 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "grain mill"
 		$Position2D/InteractiveArea.object_level = item_name.substr(12)
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.grain_mills[id] = {}
+#		PlayerInventory.grain_mills_dict[id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -195,7 +200,6 @@ func set_dimensions():
 	elif item_name == "well":
 		$Position2D.position = Vector2(48, -32)
 	elif item_name == "couch":
-		item_name = "couch"
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -209,9 +213,31 @@ func set_dimensions():
 			"down":
 				$Position2D.position = Vector2(48, -32)
 				$Position2D.rotation_degrees = 0
-	elif item_name == "sleeping bag":
-		queue_free()
-
+	elif item_name == "table":
+		if direction == "left" or direction == "right":
+			$Position2D.rotation_degrees = 90
+			$Position2D.position = Vector2(32, -48)
+		else:
+			$Position2D.position = Vector2(48, -32)
+			$Position2D.rotation_degrees = 180
+	elif item_name == "armchair":
+		$Position2D.position =  Vector2(32, -32)
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+			"right":
+				$Position2D.rotation_degrees = 270
+			"up":
+				$Position2D.rotation_degrees = 180
+			"down":
+				$Position2D.rotation_degrees = 0
+	elif item_name == "bed":
+		$Position2D.position =  Vector2(32, -32)
+		$Position2D/DetectPlayerAroundBed/CollisionShape2D.disabled = false
+	elif item_name == "medium rug":
+		$Position2D.position =  Vector2(32, -32)
+	elif item_name == "large rug":
+		$Position2D.position =  Vector2(64, -48)
 
 
 func _on_HurtBox_area_entered(area):
@@ -224,6 +250,7 @@ func _on_HurtBox_area_entered(area):
 	$Position2D/HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
+	$Position2D/DetectPlayerAroundBed/CollisionShape2D.set_deferred("disabled", true)
 	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
 	Server.action("ON_HIT", data)
 	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":

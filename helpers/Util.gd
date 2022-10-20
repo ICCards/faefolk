@@ -88,4 +88,23 @@ func valid_holding_item_category(item_category):
 		return true
 	return false
 	
-	
+func return_adjusted_item_name(item_name):
+	if item_name.substr(0,5) == "couch":
+		return "couch"
+	elif item_name.substr(0,5) == "chair":
+		return "chair"
+	elif item_name.substr(0,8) == "armchair":
+		return "armchair"
+	elif item_name.substr(0,9) == "large rug":
+		return "large rug"
+	elif item_name.substr(0,10) == "medium rug":
+		return "medium rug"
+	elif item_name.substr(0,9) == "small rug":
+		return "small rug"
+	elif item_name.substr(0,5) == "table":
+		return "table"
+	elif item_name.substr(0,3) == "bed":
+		return "bed"
+	elif item_name.substr(0,11) == "round table":
+		return "round table"
+	return item_name
