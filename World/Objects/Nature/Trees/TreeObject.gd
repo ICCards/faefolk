@@ -21,7 +21,7 @@ var health
 var adjusted_leaves_falling_pos 
 var biome
 var tree_fallen = false
-var tree_broke = false
+var destroyed = false
 
 
 func _ready():
@@ -99,15 +99,10 @@ func PlayEffect(player_id):
 		queue_free()
 
 
-### Tree hurtbox
-func _on_Hurtbox_area_entered(_area):
-	if _area.name == "AxePickaxeSwing":
-		Stats.decrease_tool_health()
-	#var data = {"id": name, "n": "tree"}
-	#Server.action("ON_HIT", data)
+func hit(tool_name):
 	if health == 100:
 		InstancedScenes.initiateBirdEffect(position)
-	health -= Stats.return_axe_damage(_area.tool_name)
+	health -= Stats.return_axe_damage(tool_name)
 	Server.generated_map["tree"][name]["h"] = health
 	if health >= Stats.STUMP_HEALTH:
 		InstancedScenes.initiateLeavesFallingEffect(variety, position)
@@ -132,13 +127,13 @@ func _on_Hurtbox_area_entered(_area):
 		if Server.player_node.get_position().x <= get_position().x:
 			animation_player_tree.play("tree fall right")
 			yield(animation_player_tree, "animation_finished" )
-			var amt = Stats.return_item_drop_quantity(_area.tool_name, "tree")
+			var amt = Stats.return_item_drop_quantity(tool_name, "tree")
 			CollectionsData.resources["wood"] += amt
 			InstancedScenes.intitiateItemDrop("wood", position+Vector2(130, -8), amt)
 		else:
 			animation_player_tree.play("tree fall left")
 			yield(animation_player_tree, "animation_finished" )
-			var amt = Stats.return_item_drop_quantity(_area.tool_name, "tree")
+			var amt = Stats.return_item_drop_quantity(tool_name, "tree")
 			CollectionsData.resources["wood"] += amt
 			InstancedScenes.intitiateItemDrop("wood", position+Vector2(-130, -8), amt)
 
@@ -152,20 +147,30 @@ func _on_Hurtbox_area_entered(_area):
 		else: 
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
 			animation_player_stump.play("stump hit right")
-	elif health <= 0 and not tree_broke: 
-		tree_broke = true
+	elif health <= 0 and not destroyed: 
+		destroyed = true
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects_stump.stream = Sounds.stump_break
 		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects_stump.play()
 		animation_player_stump.play("stump destroyed")
-		var amt = Stats.return_item_drop_quantity(_area.tool_name, "stump")
+		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-8, 32))
 		CollectionsData.resources["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
 		yield(get_tree().create_timer(3.0), "timeout")
 		Server.generated_map["tree"].erase(name)
 		queue_free()
+
+
+### Tree hurtbox
+func _on_Hurtbox_area_entered(_area):
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
+	#var data = {"id": name, "n": "tree"}
+	#Server.action("ON_HIT", data)
+	if _area.tool_name != "lightning spell" and  _area.tool_name != "explosion spell":
+		hit(_area.tool_name)
 
 
 

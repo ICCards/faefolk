@@ -32,8 +32,10 @@ var inventory = {
 }
 
 var hotbar = {
-	0: ["wood sword", 1, null]
+	0: ["bow", 1, null],
+	1: ["arrow", 100, null]
 }
+
 var chests = {}
 var furnaces = {}
 var grain_mills = {}

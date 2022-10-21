@@ -10,6 +10,7 @@ var randomNum
 var variety #number
 var tree_variety
 var location
+var destroyed: bool = false
 
 func _ready():
 	hide()
@@ -36,23 +37,29 @@ func setTreeBranchType(num):
 		tree_variety = 'C'
 	log_sprite.texture = Images.tree_branch_objects[num]
 
+func hit(tool_name):
+	if not destroyed:
+		destroyed = true
+		Server.generated_map["log"].erase(name)
+		Tiles.add_valid_tiles(location)
+		var data = {"id": name, "n": "log"}
+		Server.action("ON_HIT", data)
+		sound_effects.stream = Sounds.stump_break
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects.play()
+		animation_player.play("break")
+		InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position+Vector2(-16, 32))
+		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
+		CollectionsData.resources["wood"] += amt
+		InstancedScenes.intitiateItemDrop("wood", position, amt)
+		yield(get_tree().create_timer(1.2), "timeout")
+		queue_free()
+
 func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	Server.generated_map["log"].erase(name)
-	Tiles.add_valid_tiles(location)
-	var data = {"id": name, "n": "log"}
-	Server.action("ON_HIT", data)
-	sound_effects.stream = Sounds.stump_break
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	sound_effects.play()
-	animation_player.play("break")
-	InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position+Vector2(-16, 32))
-	var amt = Stats.return_item_drop_quantity(_area.tool_name, "branch")
-	CollectionsData.resources["wood"] += amt
-	InstancedScenes.intitiateItemDrop("wood", position, amt)
-	yield(get_tree().create_timer(1.2), "timeout")
-	queue_free()
+	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
+		hit(_area.tool_name)
 
 func _on_VisibilityNotifier2D_screen_entered():
 	show()

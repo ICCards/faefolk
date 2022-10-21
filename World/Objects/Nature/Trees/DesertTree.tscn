@@ -102,7 +102,6 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 3, 23 )
 frames = ExtResource( 1 )
-frame = 9
 playing = true
 offset = Vector2( 0, -48.3333 )
 
@@ -116,7 +115,7 @@ shape = SubResource( 12 )
 
 [node name="TreeHurtbox" type="Area2D" parent="."]
 position = Vector2( 0, -31 )
-collision_layer = 8
+collision_layer = 262152
 collision_mask = 0
 
 [node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]

@@ -7,7 +7,7 @@ onready var animation_player = $AnimationPlayer
 onready var navigation_agent = $NavigationAgent2D
 
 var is_eating: bool = false
-var is_dead: bool = false
+var destroyed: bool = false
 var _velocity := Vector2.ZERO
 var health: int = Stats.DUCK_HEALTH
 var running_state: bool = false
@@ -52,7 +52,7 @@ func get_random_pos():
 
 
 func _physics_process(delta):
-	if not visible or is_dead or is_eating:
+	if not visible or destroyed or is_eating:
 		return
 	if navigation_agent.is_navigation_finished():
 		if Util.chance(20):
@@ -96,25 +96,28 @@ func _update_pathfinding() -> void:
 	navigation_agent.set_target_location(get_random_pos())
 
 func _on_HurtBox_area_entered(area):
-	is_eating = false
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
+	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+		hit(area.tool_name)
+
+func hit(tool_name):
+	is_eating = false
 	start_run_state()
-	deduct_health(area.tool_name)
+	deduct_health(tool_name)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
-	if health <= 0 and not is_dead:
+	if health <= 0 and not destroyed:
 		set_physics_process(false)
-		is_dead = true
+		destroyed = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
 		$AnimatedSprite.play("death")
 		yield($AnimatedSprite, "animation_finished")
 		$AnimationPlayer.play("death")
-		intitiateItemDrop("raw wing", Vector2(0,0))
+		InstancedScenes.intitiateItemDrop("raw wing", Vector2(0,0), 1)
 		yield($AnimationPlayer, "animation_finished")
 		queue_free()
-
 
 func deduct_health(tool_name):
 	match tool_name:
@@ -136,18 +139,10 @@ func start_run_state():
 	$RunStateTimer.start()
 	_timer.wait_time = 2.0
 	_update_pathfinding()
-	
-	
-func intitiateItemDrop(item, pos):
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item, 1)
-	get_parent().call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + pos + Vector2(rand_range(-12, 12), 0)
 
 
 func _on_VisibilityNotifier2D_screen_entered():
 	show()
-
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
 

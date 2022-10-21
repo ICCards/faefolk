@@ -50,14 +50,6 @@ func set_type():
 func remove_icon():
 	$SelectedBorder.hide()
 
-func _on_Area2D_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode:
-			var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-			if tool_name == "hammer":
-				$SelectedBorder.show()
-				Server.player_node.get_node("Camera2D/UserInterface/RadialDoorMenu").initialize(location, self)
-
 
 func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":

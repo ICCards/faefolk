@@ -11,6 +11,9 @@ onready var player_animation_player = get_node("../CompositeSprites/AnimationPla
 onready var composite_sprites = get_node("../CompositeSprites")
 
 onready var ArrowProjectile = preload("res://World/Objects/Misc/ArrowProjectile.tscn")
+onready var LightningProjectile = preload("res://World/Objects/Projectiles/LightningProjectile.tscn")
+onready var ExplosionProjectile = preload("res://World/Objects/Misc/ExplosionProjectile.tscn")
+
 
 var rng = RandomNumberGenerator.new()
 
@@ -138,7 +141,7 @@ func wait_for_release():
 	
 func shoot():
 	Stats.decrease_tool_health()
-	var arrow = ArrowProjectile.instance()
+	var arrow = LightningProjectile.instance()
 	get_node("../../../").add_child(arrow)
 	arrow.transform = $ArrowDirection.transform
 	arrow.position = $ArrowDirection/Position2D.global_position

@@ -19,4 +19,5 @@ func _ready():
 
 func _on_Area2D_area_entered(area):
 	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShape2D.set_deferred("disabled", true)
 	collided = true

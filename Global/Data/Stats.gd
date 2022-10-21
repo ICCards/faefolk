@@ -35,6 +35,9 @@ const GOLD_SWORD_DAMAGE = 60
 
 const ARROW_DAMAGE = 50
 
+const LIGHTNING_SPELL_DAMAGE = 20
+const EXPLOSION_SPELL_DAMAGE = 20
+
 const MAX_STONE_WATERING_CAN = 25
 const MAX_BRONZE_WATERING_CAN = 50
 const MAX_GOLD_WATERING_CAN = 100
@@ -48,52 +51,68 @@ const DEER_HEALTH = 150
 
 func return_pickaxe_damage(tool_name):
 	match tool_name:
+		"lightning spell":
+			return LIGHTNING_SPELL_DAMAGE
+		"explosion":
+			return EXPLOSION_SPELL_DAMAGE
 		"wood pickaxe":
-			return Stats.WOOD_TOOL_DAMAGE
+			return WOOD_TOOL_DAMAGE
 		"stone pickaxe":
-			return Stats.STONE_TOOL_DAMAGE
+			return STONE_TOOL_DAMAGE
 		"bronze pickaxe":
-			return Stats.BRONZE_TOOL_DAMAGE
+			return BRONZE_TOOL_DAMAGE
 		"iron pickaxe":
-			return Stats.IRON_TOOL_DAMAGE
+			return IRON_TOOL_DAMAGE
 		"gold pickaxe":
-			return Stats.GOLD_TOOL_DAMAGE
+			return GOLD_TOOL_DAMAGE
 
 func return_axe_damage(tool_name):
 	match tool_name:
+		"lightning spell":
+			return LIGHTNING_SPELL_DAMAGE
+		"explosion":
+			return EXPLOSION_SPELL_DAMAGE
 		"punch":
-			return Stats.PUNCH_DAMAGE
+			return PUNCH_DAMAGE
 		"wood axe":
-			return Stats.WOOD_TOOL_DAMAGE
+			return WOOD_TOOL_DAMAGE
 		"stone axe":
-			return Stats.STONE_TOOL_DAMAGE
+			return STONE_TOOL_DAMAGE
 		"bronze axe":
-			return Stats.BRONZE_TOOL_DAMAGE
+			return BRONZE_TOOL_DAMAGE
 		"iron axe":
-			return Stats.IRON_TOOL_DAMAGE
+			return IRON_TOOL_DAMAGE
 		"gold axe":
-			return Stats.GOLD_TOOL_DAMAGE
+			return GOLD_TOOL_DAMAGE
 
 func return_sword_damage(tool_name):
 	match tool_name:
+		"lightning spell":
+			return LIGHTNING_SPELL_DAMAGE
+		"explosion":
+			return EXPLOSION_SPELL_DAMAGE
 		"wood sword":
-			return Stats.WOOD_SWORD_DAMAGE
+			return WOOD_SWORD_DAMAGE
 		"stone sword":
-			return Stats.STONE_SWORD_DAMAGE
+			return STONE_SWORD_DAMAGE
 		"bronze sword":
-			return Stats.BRONZE_SWORD_DAMAGE
+			return BRONZE_SWORD_DAMAGE
 		"iron sword":
-			return Stats.IRON_SWORD_DAMAGE
+			return IRON_SWORD_DAMAGE
 		"gold sword":
-			return Stats.GOLD_SWORD_DAMAGE
+			return GOLD_SWORD_DAMAGE
 		"arrow":
-			return Stats.ARROW_DAMAGE
+			return ARROW_DAMAGE
 
 
 func return_item_drop_quantity(tool_name, object_name):
 	match object_name:
 		"tree":
 			match tool_name:
+				"lightning spell":
+					return 3
+				"explosion":
+					return 3
 				"punch":
 					return 3
 				"wood axe":
@@ -108,6 +127,10 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 18
 		"stump":
 			match tool_name:
+				"lightning spell":
+					return 2
+				"explosion":
+					return 2
 				"punch":
 					return 2
 				"wood axe":
@@ -122,6 +145,10 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 12
 		"branch":
 			match tool_name:
+				"lightning spell":
+					return 1
+				"explosion":
+					return 1
 				"punch":
 					return 1
 				"wood axe":
@@ -136,6 +163,10 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 6
 		"large ore":
 			match tool_name:
+				"lightning spell":
+					return 3
+				"explosion":
+					return 3
 				"wood pickaxe":
 					return 3
 				"stone pickaxe":
@@ -148,6 +179,10 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 15
 		"small ore":
 			match tool_name:
+				"lightning spell":
+					return 2
+				"explosion":
+					return 2
 				"wood pickaxe":
 					return 2
 				"stone pickaxe":

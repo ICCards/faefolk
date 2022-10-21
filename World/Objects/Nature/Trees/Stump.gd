@@ -10,6 +10,7 @@ var tree_object
 var location 
 var health
 var variety
+var destroyed: bool = false
 
 func _ready():
 	hide()
@@ -46,12 +47,8 @@ func PlayEffect(player_id):
 		yield(sound_effects, "finished")
 		queue_free()
 		
-func _on_StumpHurtBox_area_entered(_area):
-	if _area.name == "AxePickaxeSwing":
-		Stats.decrease_tool_health()
-#	var data = {"id": name, "n": "stump"}
-#	Server.action("ON_HIT", data)
-	health -= Stats.return_axe_damage(_area.tool_name)
+func hit(tool_name):
+	health -= Stats.return_axe_damage(tool_name)
 	Server.generated_map["stump"][name]["h"] = health
 	if health > 0:
 		sound_effects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
@@ -63,7 +60,8 @@ func _on_StumpHurtBox_area_entered(_area):
 		else: 
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
 			animation_player.play("stump hit right")
-	else:
+	elif not destroyed:
+		destroyed = true
 		Server.generated_map["stump"].erase(name)
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.stream = Sounds.stump_break
@@ -71,11 +69,19 @@ func _on_StumpHurtBox_area_entered(_area):
 		sound_effects.play()
 		animation_player.play("stump destroyed")
 		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-16, 32))
-		var amt = Stats.return_item_drop_quantity(_area.tool_name, "stump")
+		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		CollectionsData.resources["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		yield(sound_effects, "finished")
 		queue_free()
+		
+func _on_StumpHurtBox_area_entered(_area):
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
+#	var data = {"id": name, "n": "stump"}
+#	Server.action("ON_HIT", data)
+	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
+		hit(_area.tool_name)
 
 
 func _on_VisibilityNotifier2D_screen_entered():

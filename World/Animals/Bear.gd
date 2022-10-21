@@ -8,7 +8,7 @@ onready var _end_chase_state_timer: Timer = $EndChaseState
 
 var player = Server.player_node
 var direction: String = "down"
-var dying: bool = false
+var destroyed: bool = false
 var attacking: bool = false
 var playing_sound_effect: bool = false
 var changed_direction: bool = false
@@ -60,7 +60,7 @@ func get_random_pos():
 
 
 func _physics_process(delta):
-	if not visible or dying:
+	if not visible or destroyed:
 		return
 	set_direction()
 	set_texture()
@@ -82,7 +82,7 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(_velocity)
 
 func move(velocity: Vector2) -> void:
-	if not attacking and not dying:
+	if not attacking and not destroyed:
 		_velocity = move_and_slide(velocity)
 
 func set_direction():
@@ -170,25 +170,31 @@ func swing():
 
 
 
-func _on_HurtBox_area_entered(area):
+func hit(tool_name):
 	if state == IDLE or state == WALK:
 		start_chase_state()
-	if area.knockback_vector != null:
-		knockback = area.knockback_vector * 100
-	if area.name == "SwordSwing":
-		Stats.decrease_tool_health()
 	_end_chase_state_timer.stop()
 	_end_chase_state_timer.start()
 	$HurtBox/AnimationPlayer.play("hit")
-	health -= Stats.return_sword_damage(area.tool_name)
-	if health <= 0 and not dying:
-		dying = true
+	health -= Stats.return_sword_damage(tool_name)
+	if health <= 0 and not destroyed:
+		destroyed = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
 		animation_player.stop()
 		animation_player.play("death")
 		yield(animation_player, "animation_finished")
 		queue_free()
+
+
+func _on_HurtBox_area_entered(area):
+	if area.name == "SwordSwing":
+		Stats.decrease_tool_health()
+	if area.knockback_vector != null:
+		knockback = area.knockback_vector * 100
+	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+		hit(area.tool_name)
+
 
 
 func _on_VisibilityNotifier2D_screen_entered():

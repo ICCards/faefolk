@@ -36,7 +36,7 @@ onready var HoedDirtEffect = preload("res://World/Objects/Nature/Effects/HoedDir
 onready var DirtTrailEffect = preload("res://World/Objects/Nature/Effects/DustTrailEffect.tscn")
 onready var UpgradeBuildingEffect = preload("res://World/Objects/Nature/Effects/UpgradeBuilding.tscn")
 onready var RemoveBuildingEffect = preload("res://World/Objects/Nature/Effects/RemoveBuilding.tscn")
-
+onready var LightningLine = preload("res://World/Objects/Misc/LightningLine.tscn")
 
 onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTree = preload("res://World/Objects/Nature/Trees/DesertTree.tscn")
@@ -93,7 +93,31 @@ func _ready():
 	Server.generate_map()
 	wait_for_map()
 
+func draw_mst(path):
+	if path:
+		for p in path.get_points():
+			for c in path.get_point_connections(p):
+				var pp = path.get_point_position(p)
+				var cp = path.get_point_position(c)
+				var lightning_line = LightningLine.instance()
+				lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
+				add_child(lightning_line)
+	
 
+#func _draw():
+#	if path:
+#		for p in path.get_points():
+#			for c in path.get_point_connections(p):
+#				var pp = path.get_point_position(p)
+#				var cp = path.get_point_position(c)
+#				var lightning_line = LightningLine.instance()
+#				lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
+#				add_child(lightning_line)
+#				$Line2D.points.append(Vector2(pp.x, pp.y))
+#				$Line2D.points.append(Vector2(cp.x, cp.y))
+#				draw_line(Vector2(pp.x, pp.y),
+#						  Vector2(cp.x, cp.y),
+#						  Color(1, 1, 0, 1), 15, true)
 
 func wait_for_map():
 	if not Server.generated_map.empty():

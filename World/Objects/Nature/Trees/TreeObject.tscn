@@ -545,7 +545,7 @@ offset = Vector2( 0, -120 )
 
 [node name="TreeHurtbox" type="Area2D" parent="."]
 position = Vector2( 0, -31 )
-collision_layer = 8
+collision_layer = 262152
 collision_mask = 0
 
 [node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]

@@ -11,7 +11,7 @@ var location
 var variety
 var health
 var large_break = false
-var small_break = false
+var destroyed = false
 
 
 func _ready():
@@ -62,14 +62,11 @@ func setTexture(ore):
 		smallOreSprite.visible = true
 
 
-
-func _on_BigHurtBox_area_entered(_area):
-	if _area.name == "AxePickaxeSwing":
-		Stats.decrease_tool_health()
+func hit(tool_name):
 	rng.randomize()
 	#var data = {"id": name, "n": "large_ore"}
 	#Server.action("ON_HIT", data)
-	health -= Stats.return_pickaxe_damage(_area.tool_name)
+	health -= Stats.return_pickaxe_damage(tool_name)
 	Server.generated_map["ore_large"][name]["h"] = health
 	if health > 40:
 		sound_effects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
@@ -83,31 +80,28 @@ func _on_BigHurtBox_area_entered(_area):
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
 		InstancedScenes.initiateOreHitEffect(variety, "large ore break", position+Vector2(0, 24))
-		var amount = Stats.return_item_drop_quantity(_area.tool_name, "large ore")
+		var amount = Stats.return_item_drop_quantity(tool_name, "large ore")
 		add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
 			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 28), amount)
 		else:
 			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 4), amount)
 		animation_player.play("big_ore_break")
-
-
-func _on_SmallHurtBox_area_entered(_area):
-	if _area.name == "AxePickaxeSwing":
-		Stats.decrease_tool_health()
-	rng.randomize()
-	var data = {"id": name, "n": "large_ore"}
-	Server.action("ON_HIT", data)
-	health -= Stats.return_pickaxe_damage(_area.tool_name)
-	if health <= 0 and not small_break:
-		small_break = true
+	elif health >= 1:
+		sound_effects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects.play()
+		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-10, 10), 32))
+		animation_player.play("small_ore_hit_right")
+	elif health <= 0 and not destroyed:
+		destroyed = true
 		Server.generated_map["ore_large"].erase(name)
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
 		InstancedScenes.initiateOreHitEffect(variety, "ore destroyed", position+Vector2(rng.randi_range(-10, 10), 32))
-		var amount = Stats.return_item_drop_quantity(_area.tool_name, "small ore")
+		var amount = Stats.return_item_drop_quantity(tool_name, "small ore")
 		add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
 			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 28), amount)
@@ -117,12 +111,20 @@ func _on_SmallHurtBox_area_entered(_area):
 		yield(sound_effects, "finished")
 		yield(get_tree().create_timer(0.6), "timeout")
 		queue_free()
-	elif health >= 1:
-		sound_effects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects.play()
-		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-10, 10), 32))
-		animation_player.play("small_ore_hit_right")
+
+
+func _on_BigHurtBox_area_entered(_area):
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
+	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
+		hit(_area.tool_name)
+
+
+func _on_SmallHurtBox_area_entered(_area):
+	if _area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
+	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
+		hit(_area.tool_name)
 
 func add_to_collection(type, amt):
 	if type != "stone1" and type != "stone2":

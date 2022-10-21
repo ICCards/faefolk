@@ -153,20 +153,10 @@ offset = Vector2( 0, -120 )
 
 [node name="StumpHurtBox" type="Area2D" parent="."]
 position = Vector2( 0, -31 )
-collision_layer = 8
+collision_layer = 262152
 collision_mask = 0
 
 [node name="stumpHurtBox" type="CollisionShape2D" parent="StumpHurtBox"]
-position = Vector2( -3.33333, 28.7778 )
-rotation = -1.5708
-shape = SubResource( 6 )
-
-[node name="OccupiedTiles" type="Area2D" parent="."]
-visible = false
-position = Vector2( 0, -31 )
-collision_mask = 0
-
-[node name="occupiedTiles" type="CollisionShape2D" parent="OccupiedTiles"]
 position = Vector2( -3.33333, 28.7778 )
 rotation = -1.5708
 shape = SubResource( 6 )

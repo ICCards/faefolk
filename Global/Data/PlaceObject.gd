@@ -8,6 +8,7 @@ onready var SleepingBag = preload("res://World/Objects/Tiles/SleepingBag.tscn")
 onready var DoorFront = preload("res://World/Objects/Tiles/DoorFront.tscn")
 onready var DoorSide = preload("res://World/Objects/Tiles/DoubleDoorSide.tscn")
 onready var Rug  = preload("res://World/Objects/Misc/Rug.tscn")
+onready var Gate
 
 
 var rng = RandomNumberGenerator.new()
@@ -96,6 +97,9 @@ func place_object_in_world(id, item_name, direction, location):
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 	remove_valid_tiles(item_name, direction, location)
 	match item_name:
+		"wood gate":
+			tileObjectHurtBox.queue_free()
+			
 		"round table1":
 			Tiles.object_tiles.set_cellv(location, 175)
 		"round table2": 

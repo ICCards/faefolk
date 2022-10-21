@@ -7,7 +7,7 @@ onready var animation_player = $AnimationPlayer
 onready var navigation_agent = $NavigationAgent2D
 
 var is_sleeping: bool = true
-var is_dead: bool = false
+var destroyed: bool = false
 var _velocity := Vector2.ZERO
 var health: int = Stats.BUNNY_HEALTH
 var running_state: bool = false
@@ -57,7 +57,7 @@ func _update_pathfinding() -> void:
 	navigation_agent.set_target_location(get_random_pos())
 
 func _physics_process(delta):
-	if not visible or is_dead:
+	if not visible or destroyed:
 		return
 	if is_sleeping:
 		$AnimatedSprite.play("sleep")
@@ -91,27 +91,32 @@ func _get_direction_string(veloctiy) -> String:
 	return "Left"
 
 
-func _on_HurtBox_area_entered(area):
+func hit(tool_name):
 	if is_sleeping:
 		is_sleeping = false
-	if area.name == "SwordSwing":
-		Stats.decrease_tool_health()
 	start_run_state()
-	deduct_health(area.tool_name)
+	deduct_health(tool_name)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
-	if health <= 0 and not is_dead:
+	if health <= 0 and not destroyed:
 		set_physics_process(false)
-		is_dead = true
+		destroyed = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
 		$AnimatedSprite.play("death")
 		yield($AnimatedSprite, "animation_finished")
 		$AnimationPlayer.play("death")
-		intitiateItemDrop("raw filet", Vector2(0,0))
+		InstancedScenes.intitiateItemDrop("raw filet", Vector2(0,0), 1)
 		yield($AnimationPlayer, "animation_finished")
 		yield(get_tree().create_timer(6.0), "timeout")
 		queue_free()
+
+func _on_HurtBox_area_entered(area):
+	if area.name == "SwordSwing":
+		Stats.decrease_tool_health()
+	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+		hit(area.tool_name)
+
 	
 func start_run_state():
 	running_state = true
@@ -134,13 +139,6 @@ func deduct_health(tool_name):
 			health -= Stats.GOLD_SWORD_DAMAGE
 		"arrow":
 			health -= Stats.ARROW_DAMAGE
-
-
-func intitiateItemDrop(item, pos):
-	var itemDrop = ItemDrop.instance()
-	itemDrop.initItemDropType(item, 1)
-	get_parent().call_deferred("add_child", itemDrop)
-	itemDrop.global_position = global_position + pos + Vector2(rand_range(-12, 12), 0)
 
 
 func _on_DetectPlayer_area_entered(area):

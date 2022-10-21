@@ -4,7 +4,7 @@ var rng = RandomNumberGenerator.new()
 onready var tween = $Tween
 onready var timer = $Timer
 onready var tree_animation_player = $AnimationPlayer
-var tree_fallen: bool = false
+var destroyed: bool = false
 var health
 var treeObject
 var adjusted_leaves_falling_pos
@@ -29,7 +29,11 @@ func _ready():
 func _on_TreeHurtbox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	health -= Stats.return_axe_damage(area.tool_name)
+	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+		hit(area.tool_name)
+
+func hit(tool_name):
+	health -= Stats.return_axe_damage(tool_name)
 	Server.generated_map["tree"][name]["h"] = health
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
@@ -46,8 +50,8 @@ func _on_TreeHurtbox_area_entered(area):
 		else: 
 			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			tree_animation_player.play("tree hit left")
-	elif not tree_fallen:
-		tree_fallen = true
+	elif not destroyed:
+		destroyed = true
 		timer.stop()
 		disable_tree_top_collision_box()
 		$SoundEffects.stream = Sounds.tree_break
@@ -56,16 +60,16 @@ func _on_TreeHurtbox_area_entered(area):
 		if Server.player_node.get_position().x <= get_position().x:
 			tree_animation_player.play("tree fall right")
 			yield(tree_animation_player, "animation_finished" )
-			intitiateItemDrop("wood", Vector2(130, -8), 7)
+			InstancedScenes.intitiateItemDrop("wood", Vector2(130, -8), 7)
 		else:
 			tree_animation_player.play("tree fall left")
 			yield(tree_animation_player, "animation_finished" )
-			intitiateItemDrop("wood", Vector2(-130, -8), 7)
+			InstancedScenes.intitiateItemDrop("wood", Vector2(-130, -8), 7)
 		Server.generated_map["tree"].erase(name)
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		queue_free()
-			
-			
+
+		
 func disable_tree_top_collision_box():
 	set_tree_visible()
 	$TreeTopArea/CollisionPolygon2D.set_deferred("disabled", true)
@@ -92,13 +96,6 @@ func initiateTreeHitEffect(tree, effect, pos):
 #	add_child(trunkHitEffect)
 #	trunkHitEffect.global_position = global_position + pos
 	
-func intitiateItemDrop(item, pos, amt):
-	for _i in range(amt):
-		rng.randomize()
-		var itemDrop = ItemDrop.instance()
-		itemDrop.initItemDropType(item, 1)
-		get_parent().call_deferred("add_child", itemDrop)
-		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
 
 
 func set_tree_visible():
