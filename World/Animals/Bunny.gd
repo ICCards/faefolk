@@ -8,6 +8,7 @@ onready var navigation_agent = $NavigationAgent2D
 
 var is_sleeping: bool = true
 var destroyed: bool = false
+var frozen: bool = false
 var _velocity := Vector2.ZERO
 var health: int = Stats.BUNNY_HEALTH
 var running_state: bool = false
@@ -45,12 +46,7 @@ func get_random_pos():
 			random_pos = Vector2(-randomDistance, -randomDistance)
 	else:
 		random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
-#	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
 	return position + random_pos
-#	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1:
-#		return position - random_pos
-#	else:
-#		return position
 
 
 func _update_pathfinding() -> void:
@@ -79,7 +75,9 @@ func _physics_process(delta):
 
 
 func move(velocity: Vector2) -> void:
-	if running_state:
+	if frozen:
+		_velocity = move_and_slide(velocity*0.75)
+	elif running_state:
 		_velocity = move_and_slide(velocity*1.5)
 	else:
 		_velocity = move_and_slide(velocity)
@@ -106,7 +104,7 @@ func hit(tool_name):
 		$AnimatedSprite.play("death")
 		yield($AnimatedSprite, "animation_finished")
 		$AnimationPlayer.play("death")
-		InstancedScenes.intitiateItemDrop("raw filet", Vector2(0,0), 1)
+		InstancedScenes.intitiateItemDrop("raw filet", position, 1)
 		yield($AnimationPlayer, "animation_finished")
 		yield(get_tree().create_timer(6.0), "timeout")
 		queue_free()
@@ -116,7 +114,15 @@ func _on_HurtBox_area_entered(area):
 		Stats.decrease_tool_health()
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		hit(area.tool_name)
-
+	if area.tool_name == "ice spell":
+		start_frozen_state()
+	
+	
+func start_frozen_state():
+	$FrozenTimer.stop()
+	$FrozenTimer.start()
+	$AnimatedSprite.modulate = Color("00c9ff")
+	frozen = true
 	
 func start_run_state():
 	running_state = true
@@ -154,3 +160,8 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
+
+
+func _on_FrozenTimer_timeout():
+	$AnimatedSprite.modulate = Color("ffffff")
+	frozen = false

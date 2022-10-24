@@ -8,6 +8,7 @@ onready var navigation_agent = $NavigationAgent2D
 
 var is_eating: bool = false
 var destroyed: bool = false
+var frozen: bool = false
 var _velocity := Vector2.ZERO
 var health: int = Stats.DUCK_HEALTH
 var running_state: bool = false
@@ -50,22 +51,22 @@ func get_random_pos():
 	else:
 		return position
 
-
 func _physics_process(delta):
 	if not visible or destroyed or is_eating:
 		return
 	if navigation_agent.is_navigation_finished():
-		if Util.chance(20):
-			is_eating = true
-			$AnimatedSprite.play("eat")
-			yield($AnimatedSprite, "animation_finished")
-			is_eating = false
-		else:
-			is_eating = true
-			$AnimatedSprite.play("idle")
-			yield(get_tree().create_timer(rand_range(1.0, 4.0)), "timeout")
-			is_eating = false
-		return
+		if not frozen:
+			if Util.chance(20):
+				is_eating = true
+				$AnimatedSprite.play("eat")
+				yield($AnimatedSprite, "animation_finished")
+				is_eating = false
+			else:
+				is_eating = true
+				$AnimatedSprite.play("idle")
+				yield(get_tree().create_timer(rand_range(1.0, 4.0)), "timeout")
+				is_eating = false
+			return
 	$AnimatedSprite.play("walk")
 	
 	var target = navigation_agent.get_next_location()
@@ -80,7 +81,9 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = true
 		
 func move(velocity: Vector2) -> void:
-	if running_state:
+	if frozen:
+		_velocity = move_and_slide(velocity*0.75)
+	elif running_state:
 		_velocity = move_and_slide(velocity*1.5)
 	else:
 		_velocity = move_and_slide(velocity)
@@ -100,6 +103,14 @@ func _on_HurtBox_area_entered(area):
 		Stats.decrease_tool_health()
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		hit(area.tool_name)
+	if area.tool_name == "ice spell":
+		start_frozen_state()
+		
+func start_frozen_state():
+	$FrozenTimer.stop()
+	$FrozenTimer.start()
+	$AnimatedSprite.modulate = Color("00c9ff")
+	frozen = true
 
 func hit(tool_name):
 	is_eating = false
@@ -115,7 +126,7 @@ func hit(tool_name):
 		$AnimatedSprite.play("death")
 		yield($AnimatedSprite, "animation_finished")
 		$AnimationPlayer.play("death")
-		InstancedScenes.intitiateItemDrop("raw wing", Vector2(0,0), 1)
+		InstancedScenes.intitiateItemDrop("raw wing", position, 1)
 		yield($AnimationPlayer, "animation_finished")
 		queue_free()
 
@@ -150,3 +161,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_RunStateTimer_timeout():
 	running_state = false
 	_timer.wait_time = rand_range(2.5, 5.0)
+
+
+func _on_FrozenTimer_timeout():
+	$AnimatedSprite.modulate = Color("ffffff")
+	frozen = false

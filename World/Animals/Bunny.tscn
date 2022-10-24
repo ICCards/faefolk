@@ -119,8 +119,12 @@ target_desired_distance = 20.0
 avoidance_enabled = true
 radius = 1.0
 
+[node name="FrozenTimer" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="RunStateTimer" to="." method="_on_RunStateTimer_timeout"]
+[connection signal="timeout" from="FrozenTimer" to="." method="_on_FrozenTimer_timeout"]

@@ -203,77 +203,77 @@ func buildMap(map):
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	print("BUILDING MAP")
 	get_node("loadingScreen").set_phase("Building terrain")
-	var count = 0
-	for id in map["dirt"]:
-#		var loc = Util.string_to_vector2(map["dirt"][id])
-#		var x = loc.x
-#		var y = loc.y
-#		tile_ids["" + str(x) + "" + str(y)] = id
-#		if map["dirt"][id]["isWatered"]:
-#			watered.set_cellv(loc, 0)
-#			hoed.set_cellv(loc, 0)
-#		if map["dirt"][id]["isHoed"]:
-#			hoed.set_cellv(loc, 0)
-		dirt.set_cellv(map["dirt"][id], 0)
-		count += 1
-		if count == BATCH_DRAW_COUNT:
-			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
-			count = 0
-#	hoed.update_bitmask_region()
-#	watered.update_bitmask_region()
-	print("LOADED DIRT")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["plains"]:
-		var loc = map["plains"][id]
-		plains.set_cellv(loc, 0)
-		count += 1
-		if count == BATCH_DRAW_COUNT:
-			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
-			count = 0
-	print("LOADED PLAINS")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["forest"]:
-		var loc = map["forest"][id]
-		forest.set_cellv(loc, 0)
-		count += 1
-		if count == BATCH_DRAW_COUNT:
-			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
-			count = 0
-	print("LOADED DG")
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["snow"]:
-		var loc = map["snow"][id]
-		snow.set_cellv(loc, 0)
-		count += 1
-		if count == BATCH_DRAW_COUNT:
-			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
-			count = 0
-	for id in map["desert"]:
-		var loc = map["desert"][id]
-		#desert.set_cellv(loc, 0)
-		Tiles._set_cell(sand, loc.x, loc.y, 0)
-		count += 1
-		if count == BATCH_DRAW_COUNT:
-			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
-			count = 0
-	for id in map["beach"]:
-		var loc = map["beach"][id]
-		Tiles._set_cell(sand, loc.x, loc.y, 0)
-		count += 1
-		if count == BATCH_DRAW_COUNT:
-			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
-			count = 0
-	yield(get_tree().create_timer(0.5), "timeout")
-	get_node("loadingScreen").set_phase("Generating world")
-	fill_biome_gaps(map)
-	set_water_tiles()
-	check_and_remove_invalid_autotiles(map)
-	yield(get_tree().create_timer(0.5), "timeout")
-	update_tile_bitmask_regions()
-	get_node("loadingScreen").set_phase("Spawning in")
-	Server.player_state = "WORLD"
-	print("Map loaded")
-	yield(get_tree().create_timer(8.5), "timeout")
+#	var count = 0
+#	for id in map["dirt"]:
+##		var loc = Util.string_to_vector2(map["dirt"][id])
+##		var x = loc.x
+##		var y = loc.y
+##		tile_ids["" + str(x) + "" + str(y)] = id
+##		if map["dirt"][id]["isWatered"]:
+##			watered.set_cellv(loc, 0)
+##			hoed.set_cellv(loc, 0)
+##		if map["dirt"][id]["isHoed"]:
+##			hoed.set_cellv(loc, 0)
+#		dirt.set_cellv(map["dirt"][id], 0)
+#		count += 1
+#		if count == BATCH_DRAW_COUNT:
+#			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+#			count = 0
+##	hoed.update_bitmask_region()
+##	watered.update_bitmask_region()
+#	print("LOADED DIRT")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["plains"]:
+#		var loc = map["plains"][id]
+#		plains.set_cellv(loc, 0)
+#		count += 1
+#		if count == BATCH_DRAW_COUNT:
+#			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+#			count = 0
+#	print("LOADED PLAINS")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["forest"]:
+#		var loc = map["forest"][id]
+#		forest.set_cellv(loc, 0)
+#		count += 1
+#		if count == BATCH_DRAW_COUNT:
+#			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+#			count = 0
+#	print("LOADED DG")
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	for id in map["snow"]:
+#		var loc = map["snow"][id]
+#		snow.set_cellv(loc, 0)
+#		count += 1
+#		if count == BATCH_DRAW_COUNT:
+#			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+#			count = 0
+#	for id in map["desert"]:
+#		var loc = map["desert"][id]
+#		#desert.set_cellv(loc, 0)
+#		Tiles._set_cell(sand, loc.x, loc.y, 0)
+#		count += 1
+#		if count == BATCH_DRAW_COUNT:
+#			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+#			count = 0
+#	for id in map["beach"]:
+#		var loc = map["beach"][id]
+#		Tiles._set_cell(sand, loc.x, loc.y, 0)
+#		count += 1
+#		if count == BATCH_DRAW_COUNT:
+#			yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
+#			count = 0
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	get_node("loadingScreen").set_phase("Generating world")
+#	fill_biome_gaps(map)
+#	set_water_tiles()
+#	check_and_remove_invalid_autotiles(map)
+#	yield(get_tree().create_timer(0.5), "timeout")
+#	update_tile_bitmask_regions()
+#	get_node("loadingScreen").set_phase("Spawning in")
+#	Server.player_state = "WORLD"
+#	print("Map loaded")
+#	yield(get_tree().create_timer(8.5), "timeout")
 	get_node("loadingScreen").queue_free()
 	#spawnPlayer()
 	spawnPlayerExample()

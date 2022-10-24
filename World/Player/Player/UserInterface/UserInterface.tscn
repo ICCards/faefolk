@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Clock/CurrentTime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=6]
+[ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI2.png" type="Texture" id=8]
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerStatsUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" type="PackedScene" id=17]
@@ -172,6 +174,75 @@ color = Color( 0, 0, 0, 0.552941 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
+[node name="ChangeRotation" type="Control" parent="."]
+visible = false
+margin_top = -2.0
+margin_right = 40.0
+margin_bottom = 38.0
+
+[node name="TextureRect" type="TextureRect" parent="ChangeRotation"]
+margin_left = 209.0
+margin_top = 469.0
+margin_right = 310.0
+margin_bottom = 488.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="RotateLabel" type="Label" parent="ChangeRotation"]
+margin_left = 248.0
+margin_top = 475.0
+margin_right = 1028.0
+margin_bottom = 621.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "Change rotation"
+align = 1
+
+[node name="RotateKey" type="Label" parent="ChangeRotation"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 217.0
+margin_top = 471.0
+margin_right = 337.0
+margin_bottom = 617.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "R"
+align = 1
+
+[node name="ChangeVariety" type="Control" parent="."]
+visible = false
+margin_top = -2.0
+margin_right = 40.0
+margin_bottom = 38.0
+
+[node name="TextureRect" type="TextureRect" parent="ChangeVariety"]
+margin_left = 613.0
+margin_top = 469.0
+margin_right = 714.0
+margin_bottom = 488.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+
+[node name="VarietyLabel" type="Label" parent="ChangeVariety"]
+margin_left = 621.0
+margin_top = 475.0
+margin_right = 1411.0
+margin_bottom = 621.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "Change variety"
+
+[node name="VarietyKey" type="Label" parent="ChangeVariety"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 783.0
+margin_top = 471.0
+margin_right = 903.0
+margin_bottom = 617.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "V"
+align = 1
+
 [node name="MapLabels" type="Label" parent="."]
 visible = false
 modulate = Color( 0, 0, 0, 1 )
@@ -183,28 +254,6 @@ rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 6 )
 text = "-Scroll to zoom
 -Double-click to move"
-
-[node name="RotateLabel" type="Label" parent="."]
-visible = false
-modulate = Color( 0, 0, 0, 1 )
-margin_left = 209.0
-margin_top = 478.0
-margin_right = 1086.0
-margin_bottom = 624.0
-rect_scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
-text = "Press [R] to rotate"
-
-[node name="VarietyLabel" type="Label" parent="."]
-visible = false
-modulate = Color( 0, 0, 0, 1 )
-margin_left = 550.0
-margin_top = 477.0
-margin_right = 1875.0
-margin_bottom = 623.0
-rect_scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
-text = "Press [V] to change variety"
 
 [node name="EnterNewKey" type="Panel" parent="."]
 visible = false

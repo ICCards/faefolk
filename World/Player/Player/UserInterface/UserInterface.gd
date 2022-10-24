@@ -57,40 +57,42 @@ func _input(event):
 						toggle_furnace(object_id)
 					"tool cabinet":
 						toggle_tc(object_id)
+					"chair":
+						Server.player_node.sit(object_level)
 		if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
 			PlayerInventory.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
 			PlayerInventory.active_item_scroll_down()
-		elif event.is_action_pressed("slot1"):
-			PlayerInventory.active_item_slot = 0
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot2"):
-			PlayerInventory.active_item_slot = 1
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot3"):
-			PlayerInventory.active_item_slot = 2
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot4"):
-			PlayerInventory.active_item_slot = 3
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot5"):
-			PlayerInventory.active_item_slot = 4
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot6"):
-			PlayerInventory.active_item_slot = 5
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot7"):
-			PlayerInventory.active_item_slot = 6
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot8"):
-			PlayerInventory.active_item_slot = 7
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot9"):
-			PlayerInventory.active_item_slot = 8
-			PlayerInventory.emit_signal("active_item_updated")
-		elif event.is_action_pressed("slot10"):
-			PlayerInventory.active_item_slot = 9
-			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot1"):
+#			PlayerInventory.active_item_slot = 0
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot2"):
+#			PlayerInventory.active_item_slot = 1
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot3"):
+#			PlayerInventory.active_item_slot = 2
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot4"):
+#			PlayerInventory.active_item_slot = 3
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot5"):
+#			PlayerInventory.active_item_slot = 4
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot6"):
+#			PlayerInventory.active_item_slot = 5
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot7"):
+#			PlayerInventory.active_item_slot = 6
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot8"):
+#			PlayerInventory.active_item_slot = 7
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot9"):
+#			PlayerInventory.active_item_slot = 8
+#			PlayerInventory.emit_signal("active_item_updated")
+#		elif event.is_action_pressed("slot10"):
+#			PlayerInventory.active_item_slot = 9
+#			PlayerInventory.emit_signal("active_item_updated")
 	elif PlayerInventory.viewMapMode:
 		$MapLabels.show()
 		return

@@ -12,9 +12,11 @@ var destroyed: bool = false
 var attacking: bool = false
 var playing_sound_effect: bool = false
 var changed_direction: bool = false
+var frozen: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
+#var desired_velocity := Vector2.ZERO
 
 var rng = RandomNumberGenerator.new()
 var state = IDLE
@@ -68,7 +70,7 @@ func _physics_process(delta):
 		_velocity = Vector2.ZERO
 		knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
 		knockback = move_and_slide(knockback)
-	if navigation_agent.is_navigation_finished() and state == WALK or state == IDLE:
+	if navigation_agent.is_navigation_finished() and (state == WALK or state == IDLE):
 		state = IDLE
 		return
 	if state == CHASE and (position + Vector2(0,-26)).distance_to(player.position) < 75:
@@ -82,7 +84,9 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(_velocity)
 
 func move(velocity: Vector2) -> void:
-	if not attacking and not destroyed:
+	if frozen:
+		_velocity = move_and_slide(velocity*0.75)
+	elif not attacking and not destroyed:
 		_velocity = move_and_slide(velocity)
 
 func set_direction():
@@ -155,19 +159,21 @@ func swing():
 			yield(get_tree().create_timer(0.1), "timeout")
 			play_groan_sound_effect()
 			if (position + Vector2(0,-26)).distance_to(player.position) < 45:
-				$AnimationPlayer.play("bite " + direction)
+				animation_player.play("bite " + direction)
 			else:
 				if Util.chance(25):
-					$AnimationPlayer.play("bite " + direction)
+					animation_player.play("bite " + direction)
 				else:
-					$AnimationPlayer.play("swing " + direction)
-			yield($AnimationPlayer, "animation_finished")
+					animation_player.play("swing " + direction)
+			yield(animation_player, "animation_finished")
+			if frozen:
+				animation_player.play("loop frozen")
+			else:
+				animation_player.play("loop")
 			attacking = false
-			animation_player.play("loop")
 			state = CHASE
 	else:
 		end_chase_state()
-
 
 
 func hit(tool_name):
@@ -194,19 +200,24 @@ func _on_HurtBox_area_entered(area):
 		knockback = area.knockback_vector * 100
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		hit(area.tool_name)
+	if area.tool_name == "ice spell":
+		start_frozen_state()
 
 
+func start_frozen_state():
+	$Body.modulate = Color("00c9ff")
+	frozen = true
+	$FrozenTimer.stop()
+	$FrozenTimer.start()
+	if not attacking and not destroyed:
+		animation_player.play("loop frozen")
 
-func _on_VisibilityNotifier2D_screen_entered():
-	show()
-
-func _on_VisibilityNotifier2D_screen_exited():
-	hide()
 
 func _on_DetectPlayer_area_entered(area):
 	start_chase_state()
 
 func end_chase_state():
+	print("END CHASE STATE")
 	navigation_agent.max_speed = 100
 	stop_sound_effects()
 	_idle_timer.start()
@@ -221,4 +232,16 @@ func start_chase_state():
 	_chase_timer.start()
 	_end_chase_state_timer.start()
 	state = CHASE
-	
+
+
+func _on_FrozenTimer_timeout():
+	$Body.modulate = Color("ffffff")
+	frozen = false
+	animation_player.play("loop")
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

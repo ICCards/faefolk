@@ -26,7 +26,8 @@ enum {
 	FISHING,
 	HARVESTING,
 	DYING,
-	SLEEPING
+	SLEEPING,
+	SITTING
 }
 
 var direction = "DOWN"
@@ -37,12 +38,14 @@ var MAX_SPEED_PATH := 14.5
 var MAX_SPEED_SWIMMING := 12
 var is_walking_on_dirt: bool = true
 var is_swimming: bool = false
+var is_sitting: bool = false
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
 var input_vector
 var counter = -1
 var collisionMask = null
+var direction_of_current_chair
 
 
 const _character = preload("res://Global/Data/Characters.gd")
@@ -226,6 +229,16 @@ func _unhandled_input(event):
 					fish()
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
 					swing(item_name)
+				elif item_name == "bow" and event.is_action_pressed("slot1"):
+					$Swing.cast_spell("lightning spell", direction)
+				elif item_name == "bow" and event.is_action_pressed("slot2"):
+					$Swing.cast_spell("explosion spell", direction)
+				elif item_name == "bow" and event.is_action_pressed("slot3"):
+					$Swing.cast_spell("whirlwind spell", direction)
+				elif item_name == "bow" and event.is_action_pressed("slot4"):
+					$Swing.cast_spell("tornado spell", direction)
+				elif item_name == "bow" and event.is_action_pressed("slot5"):
+					$Swing.cast_spell("ice spell", direction)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
 					eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
@@ -259,7 +272,7 @@ func show_placable_object(item_name, item_category):
 			get_node("PlaceObject").item_name = item_name
 			get_node("PlaceObject").item_category = item_category
 			get_node("PlaceObject").initialize()
-			
+
 
 
 func harvest_crop(item_name):
@@ -284,10 +297,26 @@ func harvest_forage(item_name):
 
 func destroy_placable_object():
 	if has_node("PlaceObject"):
-		get_node("Camera2D/UserInterface/RotateLabel").hide()
-		get_node("Camera2D/UserInterface/VarietyLabel").hide()
+		get_node("Camera2D/UserInterface/ChangeRotation").hide()
+		get_node("Camera2D/UserInterface/ChangeVariety").hide()
 		get_node("PlaceObject").destroy()
 
+
+func sit(adjusted_position, direction_of_chair):
+	direction_of_current_chair = direction_of_chair
+	is_sitting = true
+	state = SITTING
+	position = adjusted_position
+	composite_sprites.set_player_animation(character, "sit_"+direction_of_current_chair, null)
+	animation_player.play("sit_"+direction_of_current_chair)
+	yield(animation_player, "animation_finished")
+	is_sitting = false
+
+func stand_up():
+	if not is_sitting:
+		animation_player.play_backwards("sit_"+direction_of_current_chair)
+		yield(animation_player, "animation_finished")
+		state = MOVEMENT
 
 func swing(item_name):
 	destroy_placable_object()

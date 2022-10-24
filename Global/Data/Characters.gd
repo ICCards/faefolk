@@ -6077,6 +6077,14 @@ func set_attributes(set_char):
 	'run_down': character.body_run_down[0],
 	'run_left': character.body_run_left[0],
 	'run_right': character.body_run_right[0],
+	'magic_cast_up': character.body_magic_cast_up[0],
+	'magic_cast_down': character.body_magic_cast_down[0],
+	'magic_cast_left': character.body_magic_cast_left[0],
+	'magic_cast_right': character.body_magic_cast_right[0],
+	'sit_up': character.body_sit_up[0],
+	'sit_down': character.body_sit_down[0],
+	'sit_left': character.body_sit_left[0],
+	'sit_right': character.body_sit_right[0],
 	'eat': character.body_eat[0]
 	};
 	arms_sprites = {
@@ -6152,6 +6160,14 @@ func set_attributes(set_char):
 	'run_down': character.arms_run_down[0],
 	'run_left': character.arms_run_left[0],
 	'run_right': character.arms_run_right[0],
+	'magic_cast_up': character.arms_magic_cast_up[0],
+	'magic_cast_down': character.arms_magic_cast_down[0],
+	'magic_cast_left': character.arms_magic_cast_left[0],
+	'magic_cast_right': character.arms_magic_cast_right[0],
+	'sit_up': character.arms_sit_up[0],
+	'sit_down': character.arms_sit_down[0],
+	'sit_left': character.arms_sit_left[0],
+	'sit_right': character.arms_sit_right[0],
 	'eat': character.arms_eat[0]
 	};
 	acc_sprites = {
@@ -6227,6 +6243,14 @@ func set_attributes(set_char):
 	'run_down': character.acc_run_down[acc_index],
 	'run_left': character.acc_run_left[acc_index],
 	'run_right': character.acc_run_right[acc_index],
+	'magic_cast_up': character.acc_magic_cast_up[acc_index],
+	'magic_cast_down': character.acc_magic_cast_down[acc_index],
+	'magic_cast_left': character.acc_magic_cast_left[acc_index],
+	'magic_cast_right': character.acc_magic_cast_right[acc_index],
+	'sit_up': character.acc_sit_up[acc_index],
+	'sit_down': character.acc_sit_down[acc_index],
+	'sit_left': character.acc_sit_left[acc_index],
+	'sit_right': character.acc_sit_right[acc_index],
 	'eat': character.acc_eat[acc_index]
 	};
 	headAtr_sprites = {
@@ -6302,6 +6326,14 @@ func set_attributes(set_char):
 	'run_down': character.head_attribute_run_down[headAtr_index],
 	'run_left': character.head_attribute_run_left[headAtr_index],
 	'run_right': character.head_attribute_run_right[headAtr_index],
+	'magic_cast_up': character.head_attribute_magic_cast_up[headAtr_index],
+	'magic_cast_down': character.head_attribute_magic_cast_down[headAtr_index],
+	'magic_cast_left': character.head_attribute_magic_cast_left[headAtr_index],
+	'magic_cast_right': character.head_attribute_magic_cast_right[headAtr_index],
+	'sit_up': character.head_attribute_sit_up[headAtr_index],
+	'sit_down': character.head_attribute_sit_down[headAtr_index],
+	'sit_left': character.head_attribute_sit_left[headAtr_index],
+	'sit_right': character.head_attribute_sit_right[headAtr_index],
 	'eat': character.head_attribute_eat[headAtr_index]
 	}
 	pants_sprites = {
@@ -6377,6 +6409,14 @@ func set_attributes(set_char):
 	'run_down': character.pants_run_down[pants_index],
 	'run_left': character.pants_run_left[pants_index],
 	'run_right': character.pants_run_right[pants_index],
+	'magic_cast_up': character.pants_magic_cast_up[pants_index],
+	'magic_cast_down': character.pants_magic_cast_down[pants_index],
+	'magic_cast_left': character.pants_magic_cast_left[pants_index],
+	'magic_cast_right': character.pants_magic_cast_right[pants_index],
+	'sit_up': character.pants_sit_up[pants_index],
+	'sit_down': character.pants_sit_down[pants_index],
+	'sit_left': character.pants_sit_left[pants_index],
+	'sit_right': character.pants_sit_right[pants_index],
 	'eat': character.pants_eat[pants_index]
 	};
 	shirts_sprites = {
@@ -6452,6 +6492,14 @@ func set_attributes(set_char):
 	'run_down': character.shirts_run_down[shirts_index],
 	'run_left': character.shirts_run_left[shirts_index],
 	'run_right': character.shirts_run_right[shirts_index],
+	'magic_cast_up': character.shirts_magic_cast_up[shirts_index],
+	'magic_cast_down': character.shirts_magic_cast_down[shirts_index],
+	'magic_cast_left': character.shirts_magic_cast_left[shirts_index],
+	'magic_cast_right': character.shirts_magic_cast_right[shirts_index],
+	'sit_up': character.shirts_sit_up[shirts_index],
+	'sit_down': character.shirts_sit_down[shirts_index],
+	'sit_left': character.shirts_sit_left[shirts_index],
+	'sit_right': character.shirts_sit_right[shirts_index],
 	'eat': character.shirts_eat[shirts_index]
 	};
 	shoes_sprites = {
@@ -6527,6 +6575,14 @@ func set_attributes(set_char):
 	'run_down': character.shoes_run_down[shoes_index],
 	'run_left': character.shoes_run_left[shoes_index],
 	'run_right': character.shoes_run_right[shoes_index],
+	'magic_cast_up': character.shoes_magic_cast_up[shoes_index],
+	'magic_cast_down': character.shoes_magic_cast_down[shoes_index],
+	'magic_cast_left': character.shoes_magic_cast_left[shoes_index],
+	'magic_cast_right': character.shoes_magic_cast_right[shoes_index],
+	'sit_up': character.shoes_sit_up[shoes_index],
+	'sit_down': character.shoes_sit_down[shoes_index],
+	'sit_left': character.shoes_sit_left[shoes_index],
+	'sit_right': character.shoes_sit_right[shoes_index],
 	'eat': character.shoes_eat[shoes_index]
 	};
 	

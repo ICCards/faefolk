@@ -9,6 +9,8 @@ var item_name
 var id
 var direction
 
+var is_player_sitting: bool = false
+
 
 func _ready():
 	set_dimensions()
@@ -200,6 +202,7 @@ func set_dimensions():
 	elif item_name == "well":
 		$Position2D.position = Vector2(48, -32)
 	elif item_name == "couch":
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -221,7 +224,19 @@ func set_dimensions():
 			$Position2D.position = Vector2(48, -32)
 			$Position2D.rotation_degrees = 180
 	elif item_name == "armchair":
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
 		$Position2D.position =  Vector2(32, -32)
+		match direction:
+			"left":
+				$Position2D.rotation_degrees = 90
+			"right":
+				$Position2D.rotation_degrees = 270
+			"up":
+				$Position2D.rotation_degrees = 180
+			"down":
+				$Position2D.rotation_degrees = 0
+	elif item_name == "chair":
+		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -239,6 +254,56 @@ func set_dimensions():
 	elif item_name == "large rug":
 		$Position2D.position =  Vector2(64, -48)
 
+func _input(event):
+	if Server.player_node.state == 0 and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
+		if event.is_action_pressed("action") and not PlayerInventory.viewInventoryMode:
+			if item_name == "chair" or item_name == "armchair" or item_name == "couch":
+				if $Position2D/InteractiveArea.get_overlapping_areas().size() >= 1:
+					Server.player_node.sit(return_adjusted_chair_position(direction), direction)
+	elif event.is_action_pressed("action") and Server.player_node.state == 7:
+		Server.player_node.stand_up()
+		
+		
+		
+func return_adjusted_chair_position(direction):
+	match item_name:
+		"chair":
+			match direction:
+				"down":
+					return position+Vector2(16,0)
+				"up":
+					return position+Vector2(16,-32)
+				"left":
+					return position+Vector2(-4,0)
+				"right":
+					return position+Vector2(36,0)
+		"armchair":
+			match direction:
+				"down":
+					return position+Vector2(32,0)
+				"up":
+					return position+Vector2(32,-48)
+				"left":
+					return position+Vector2(8,0)
+				"right":
+					return position+Vector2(56,0)
+		"couch":
+			match direction:
+				"down":
+					if Server.player_node.position.x - 32 > position.x:
+						 return position+Vector2(64,0)
+					else:
+						return position+Vector2(32,0)
+				"up":
+					return position+Vector2(32,-48)
+				"left":
+					if Server.player_node.position.y + 48 < position.y:
+						return position+Vector2(8,-32)
+					else:
+						return position+Vector2(8,0)
+				"right":
+					return position+Vector2(56,0)
+				
 
 func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":

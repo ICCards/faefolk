@@ -1,31 +1,77 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=125 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Human/male/SLEEP/body/down/body.png" type="Texture" id=3]
-[ext_resource path="res://Characters/Human/male/SLEEP/body/down/arms.png" type="Texture" id=4]
+[ext_resource path="res://Characters/Human/male/SITTING/body/right/body.png" type="Texture" id=3]
+[ext_resource path="res://Characters/Human/male/SITTING/assets/right/shirt/shirt.png" type="Texture" id=4]
 [ext_resource path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
-[ext_resource path="res://Characters/Human/male/SLEEP/assets/down/head_attribute/hair.png" type="Texture" id=7]
+[ext_resource path="res://Characters/Human/male/SITTING/assets/right/shoes/shoes.png" type="Texture" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AxePickaxeSwing.gd" type="Script" id=9]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AttachedText.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
-[ext_resource path="res://Characters/Human/male/SLEEP/assets/down/shirts/shirt.png" type="Texture" id=13]
+[ext_resource path="res://Characters/Human/male/SITTING/body/right/arms.png" type="Texture" id=13]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" type="Script" id=14]
-[ext_resource path="res://Characters/Human/male/SLEEP/assets/down/pants/pants.png" type="Texture" id=15]
+[ext_resource path="res://Characters/Human/male/SITTING/assets/right/head_attribute/hair.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
-[ext_resource path="res://Characters/Human/male/SLEEP/assets/down/shoes/shoes.png" type="Texture" id=17]
+[ext_resource path="res://Characters/Human/male/SITTING/assets/right/pants/pants.png" type="Texture" id=17]
 [ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=18]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX036.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX042.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX045.png" type="Texture" id=21]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
 [ext_resource path="res://World/Player/Player/AttachedScripts/DetectPathType.gd" type="Script" id=23]
 [ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=24]
 [ext_resource path="res://Assets/Images/Misc/chat bubble.png" type="Texture" id=25]
 [ext_resource path="res://World/Player/Player/AttachedScripts/EnterInteractiveZones.gd" type="Script" id=26]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX013.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX010.png" type="Texture" id=28]
 [ext_resource path="res://World/Player/Player/AttachedScripts/Swinging.gd" type="Script" id=29]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX015.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX002.png" type="Texture" id=31]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 [ext_resource path="res://World/Player/Player/AttachedScenes/PlayerHitEffect.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX004.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX003.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX006.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX008.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX035.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX031.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX039.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX012.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX040.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX044.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX025.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX029.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX022.png" type="Texture" id=46]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX001.png" type="Texture" id=47]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX014.png" type="Texture" id=48]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX033.png" type="Texture" id=49]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX041.png" type="Texture" id=50]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX005.png" type="Texture" id=51]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX026.png" type="Texture" id=52]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX024.png" type="Texture" id=53]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX016.png" type="Texture" id=54]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX017.png" type="Texture" id=55]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX018.png" type="Texture" id=56]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX020.png" type="Texture" id=57]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX034.png" type="Texture" id=58]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX021.png" type="Texture" id=59]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX023.png" type="Texture" id=60]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX032.png" type="Texture" id=61]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX028.png" type="Texture" id=62]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX030.png" type="Texture" id=63]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX037.png" type="Texture" id=64]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX038.png" type="Texture" id=65]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX007.png" type="Texture" id=66]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX009.png" type="Texture" id=67]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX011.png" type="Texture" id=68]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX043.png" type="Texture" id=69]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX019.png" type="Texture" id=70]
+[ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX027.png" type="Texture" id=71]
+[ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=72]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -3462,6 +3508,409 @@ tracks/17/keys = {
 "values": [ 4 ]
 }
 
+[sub_resource type="Animation" id=77]
+resource_name = "sit_down"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="Animation" id=78]
+resource_name = "sit_left"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.17, 0.35, 0.52 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.17, 0.35, 0.52 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.17, 0.35, 0.52 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.17, 0.35, 0.52 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.17, 0.35, 0.52 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.17, 0.35, 0.52 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.17, 0.35, 0.52 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 12, -8 ) ]
+}
+
+[sub_resource type="Animation" id=79]
+resource_name = "sit_right"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -12, -12 ) ]
+}
+
+[sub_resource type="Animation" id=80]
+resource_name = "sit_up"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Accessory:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shirts:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 12 ) ]
+}
+
 [sub_resource type="Animation" id=33]
 resource_name = "sleep"
 length = 4.0
@@ -5132,6 +5581,96 @@ height = 28.4444
 radius = 39.0
 height = 28.4444
 
+[sub_resource type="SpriteFrames" id=73]
+animations = [ {
+"frames": [ ExtResource( 47 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 34 ), ExtResource( 51 ), ExtResource( 36 ), ExtResource( 66 ), ExtResource( 37 ), ExtResource( 67 ), ExtResource( 28 ), ExtResource( 68 ), ExtResource( 41 ), ExtResource( 27 ), ExtResource( 48 ), ExtResource( 30 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 70 ), ExtResource( 57 ), ExtResource( 59 ), ExtResource( 46 ), ExtResource( 60 ), ExtResource( 53 ), ExtResource( 44 ), ExtResource( 52 ), ExtResource( 71 ), ExtResource( 62 ), ExtResource( 45 ), ExtResource( 63 ), ExtResource( 39 ), ExtResource( 61 ), ExtResource( 49 ), ExtResource( 58 ), ExtResource( 38 ), ExtResource( 19 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 40 ), ExtResource( 42 ), ExtResource( 50 ), ExtResource( 20 ), ExtResource( 69 ), ExtResource( 43 ), ExtResource( 21 ) ],
+"loop": false,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="CircleShape2D" id=74]
+radius = 96.0052
+
+[sub_resource type="Animation" id=76]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=75]
+resource_name = "play"
+length = 3.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2, 1.6, 2, 2.4, 2.8, 3.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.9, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 39.746
 height = 22.2163
@@ -5401,28 +5940,28 @@ hframes = 4
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 7 )
+texture = ExtResource( 15 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 4 )
+texture = ExtResource( 13 )
 hframes = 4
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 13 )
+texture = ExtResource( 4 )
 hframes = 4
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 15 )
+texture = ExtResource( 17 )
 hframes = 4
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
@@ -5435,7 +5974,7 @@ hframes = 4
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 17 )
+texture = ExtResource( 7 )
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
@@ -5461,6 +6000,10 @@ anims/scythe_swing_left = SubResource( 66 )
 anims/scythe_swing_right = SubResource( 67 )
 anims/scythe_swing_up = SubResource( 64 )
 "anims/set cast first frame" = SubResource( 49 )
+anims/sit_down = SubResource( 77 )
+anims/sit_left = SubResource( 78 )
+anims/sit_right = SubResource( 79 )
+anims/sit_up = SubResource( 80 )
 anims/sleep = SubResource( 33 )
 anims/sprint = SubResource( 71 )
 anims/struggle = SubResource( 57 )
@@ -5545,6 +6088,30 @@ scale_amount = 1.5
 scale_amount_random = 1.0
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="Swing"]
+
+[node name="Whirlwind" type="Node2D" parent="Swing"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Swing/Whirlwind"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -8, -25 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 73 )
+frame = 44
+playing = true
+
+[node name="Area2D" type="Area2D" parent="Swing/Whirlwind"]
+collision_layer = 0
+collision_mask = 264192
+script = ExtResource( 72 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/Whirlwind/Area2D"]
+position = Vector2( 0, -31 )
+shape = SubResource( 74 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Swing/Whirlwind"]
+anims/RESET = SubResource( 76 )
+anims/play = SubResource( 75 )
 
 [node name="Area2Ds" type="Node2D" parent="."]
 __meta__ = {

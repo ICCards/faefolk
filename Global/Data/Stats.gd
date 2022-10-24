@@ -37,6 +37,9 @@ const ARROW_DAMAGE = 50
 
 const LIGHTNING_SPELL_DAMAGE = 20
 const EXPLOSION_SPELL_DAMAGE = 20
+const WHIRLWIND_SPELL_DAMAGE = 20
+const TORNADO_SPELL_DAMAGE = 20
+const ICE_SPELL_DAMAGE = 20
 
 const MAX_STONE_WATERING_CAN = 25
 const MAX_BRONZE_WATERING_CAN = 50
@@ -51,6 +54,12 @@ const DEER_HEALTH = 150
 
 func return_pickaxe_damage(tool_name):
 	match tool_name:
+		"ice spell":
+			return ICE_SPELL_DAMAGE
+		"tornado spell":
+			return TORNADO_SPELL_DAMAGE
+		"whirlwind spell":
+			return LIGHTNING_SPELL_DAMAGE
 		"lightning spell":
 			return LIGHTNING_SPELL_DAMAGE
 		"explosion":
@@ -68,6 +77,12 @@ func return_pickaxe_damage(tool_name):
 
 func return_axe_damage(tool_name):
 	match tool_name:
+		"ice spell":
+			return ICE_SPELL_DAMAGE
+		"tornado spell":
+			return TORNADO_SPELL_DAMAGE
+		"whirlwind spell":
+			return LIGHTNING_SPELL_DAMAGE
 		"lightning spell":
 			return LIGHTNING_SPELL_DAMAGE
 		"explosion":
@@ -87,6 +102,12 @@ func return_axe_damage(tool_name):
 
 func return_sword_damage(tool_name):
 	match tool_name:
+		"ice spell":
+			return ICE_SPELL_DAMAGE
+		"tornado spell":
+			return TORNADO_SPELL_DAMAGE
+		"whirlwind spell":
+			return LIGHTNING_SPELL_DAMAGE
 		"lightning spell":
 			return LIGHTNING_SPELL_DAMAGE
 		"explosion":
@@ -109,6 +130,12 @@ func return_item_drop_quantity(tool_name, object_name):
 	match object_name:
 		"tree":
 			match tool_name:
+				"ice spell":
+					return 3
+				"tornado spell":
+					return 3
+				"whirlwind spell":
+					return 3
 				"lightning spell":
 					return 3
 				"explosion":
@@ -127,6 +154,12 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 18
 		"stump":
 			match tool_name:
+				"ice spell":
+					return 2
+				"tornado spell":
+					return 2
+				"whirlwind spell":
+					return 2
 				"lightning spell":
 					return 2
 				"explosion":
@@ -145,6 +178,12 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 12
 		"branch":
 			match tool_name:
+				"ice spell":
+					return 1
+				"tornado spell":
+					return 1
+				"whirlwind spell":
+					return 1
 				"lightning spell":
 					return 1
 				"explosion":
@@ -163,6 +202,12 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 6
 		"large ore":
 			match tool_name:
+				"ice spell":
+					return 3
+				"tornado spell":
+					return 3
+				"whirlwind spell":
+					return 3
 				"lightning spell":
 					return 3
 				"explosion":
@@ -179,6 +224,12 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 15
 		"small ore":
 			match tool_name:
+				"ice spell":
+					return 2
+				"tornado spell":
+					return 2
+				"whirlwind spell":
+					return 2
 				"lightning spell":
 					return 2
 				"explosion":

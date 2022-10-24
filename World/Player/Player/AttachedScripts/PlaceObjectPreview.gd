@@ -121,21 +121,21 @@ func set_dimensions():
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wall.png")
 			$ColorIndicator.tile_size =  Vector2(1,1)
 		DOOR:
-			Server.player_node.get_node("Camera2D/UserInterface/RotateLabel").show()
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
 			$ItemToPlace.show()
 		FOUNDATION:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = preload("res://Assets/Images/placable_object_preview/foundation.png")
 			$ColorIndicator.tile_size = Vector2(1,1)
 		ROTATABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/RotateLabel").show()
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
 			$ItemToPlace.show()
 		CUSTOMIZABLE_ROTATABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/RotateLabel").show()
-			Server.player_node.get_node("Camera2D/UserInterface/VarietyLabel").show()
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeVariety").show()
 			$ItemToPlace.show()
 		CUSTOMIZABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/VarietyLabel").show()
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeVariety").show()
 			$ItemToPlace.show()
 
 
