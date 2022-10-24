@@ -41,7 +41,8 @@ var BunnyVariations = [
 # DUCKS #
 var DuckVariations = [
 	preload("res://Assets/Images/Animals/Duck/duck1.tres"),
-	preload("res://Assets/Images/Animals/Duck/duck2.tres")
+	preload("res://Assets/Images/Animals/Duck/duck2.tres"),
+	preload("res://Assets/Images/Animals/Duck/duck3.tres")
 ]
 
 # BIRDS #
@@ -719,6 +720,23 @@ func returnToolSprite(toolName, animation):
 					return bow_release.right
 				"release_left":
 					return bow_release.left
+		"magic staff":
+			match animation:
+				"magic_cast_down":
+					return magic_staff.down
+				"magic_cast_up":
+					return magic_staff.up
+				"magic_cast_right":
+					return magic_staff.right
+				"magic_cast_left":
+					return magic_staff.left
+
+var magic_staff = {
+	down = preload("res://Characters/Weapon swings/magic staff/down.png"),
+	up = preload("res://Characters/Weapon swings/magic staff/up.png"),
+	left = preload("res://Characters/Weapon swings/magic staff/left.png"),
+	right = preload("res://Characters/Weapon swings/magic staff/right.png")
+}
 
 var wood_pickaxe = {
 	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/wood/down.png"), 

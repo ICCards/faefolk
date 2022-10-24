@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Assets/Images/Animals/Duck/duck2.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Images/Animals/Duck/duck3.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://World/Animals/Duck.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=3]
 
@@ -68,8 +68,8 @@ use_parent_material = true
 position = Vector2( 0, -30 )
 scale = Vector2( 0.75, 0.75 )
 frames = ExtResource( 1 )
-animation = "eat"
-frame = 11
+animation = "walk"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

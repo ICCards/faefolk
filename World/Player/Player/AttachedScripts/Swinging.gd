@@ -32,8 +32,11 @@ enum {
 	SLEEPING
 }
 
-var is_drawing = false
-var is_releasing = false
+var is_drawing: bool = false
+var is_releasing: bool = false
+var is_casting: bool = false
+
+
 
 var mouse_left_down: bool = false
 func _input( event ):
@@ -44,7 +47,7 @@ func _input( event ):
 			mouse_left_down = false
 
 func _physics_process(delta):
-	if is_drawing or is_releasing:
+	if is_drawing or is_releasing or is_casting:
 		var degrees = int($ArrowDirection.rotation_degrees) % 360
 		$ArrowDirection.look_at(get_global_mouse_position())
 		if $ArrowDirection.rotation_degrees >= 0:
@@ -69,71 +72,61 @@ func _physics_process(delta):
 			composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
 		elif is_releasing:
 			composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
+		elif is_casting:
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_" + direction.to_lower(), "magic staff")
 	else:
 		return
 
 
 func cast_spell(spell_name, init_direction):
-	if get_parent().state != SWINGING and PlayerStats.mana > 0:
+	if get_parent().state != SWINGING and PlayerStats.mana > 2:
 		PlayerStats.decrease_energy()
 		get_parent().state = SWINGING
-		is_drawing = true
-		animation = "draw_" + init_direction.to_lower()
+		is_casting = true
+		animation = "magic_cast_" + init_direction.to_lower()
 		player_animation_player.play("bow draw release")
-		composite_sprites.set_player_animation(get_parent().character, animation, "bow")
+		print(animation)
+		composite_sprites.set_player_animation(get_parent().character, animation, "magic staff")
 		yield(player_animation_player, "animation_finished" )
-		if get_parent().state != DYING:
-			wait_for_cast_release(spell_name)
+		cast(spell_name)
 	
 	
-func wait_for_cast_release(spell_name):
-	if not mouse_left_down:
-		match spell_name:
-				"lightning spell":
-					PlayerStats.decrease_mana(5)
-					var spell = LightningProjectile.instance()
-					spell.transform = $ArrowDirection.transform
-					spell.position = $ArrowDirection/Position2D.global_position
-					spell.velocity = get_global_mouse_position() - spell.position
-					get_node("../../../").add_child(spell)
-				"explosion spell":
-					PlayerStats.decrease_mana(2)
-					var spell = ExplosionProjectile.instance()
-					spell.transform = $ArrowDirection.transform
-					spell.position = $ArrowDirection/Position2D.global_position
-					spell.velocity = get_global_mouse_position() - spell.position
-					get_node("../../../").add_child(spell)
-				"whirlwind spell":
-					PlayerStats.decrease_mana(2)
-					play_whirlwind()
-				"tornado spell":
-					PlayerStats.decrease_mana(2)
-					var spell = TornadoProjectile.instance()
-					spell.transform = $ArrowDirection.transform
-					spell.position = $ArrowDirection/Position2D.global_position
-					spell.velocity = get_global_mouse_position() - spell.position
-					get_node("../../../").add_child(spell)
-				"ice spell":
-					PlayerStats.decrease_mana(2)
-					var spell = IceProjectile.instance()
-					spell.transform = $ArrowDirection.transform
-					spell.position = $ArrowDirection/Position2D.global_position
-					spell.velocity = get_global_mouse_position() - spell.position
-					get_node("../../../").add_child(spell)
-		is_drawing = false
-		is_releasing = true
-		animation = "release_" + direction.to_lower()
-		composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
-		player_animation_player.play("bow draw release")
-		yield(player_animation_player, "animation_finished" )
-		is_releasing = false
-		get_parent().direction = direction
-		get_parent().state = MOVEMENT
-	elif get_parent().state == DYING:
-		return
-	else:
-		yield(get_tree().create_timer(0.1), "timeout")
-		wait_for_cast_release(spell_name)
+func cast(spell_name):
+	match spell_name:
+			"lightning spell":
+				PlayerStats.decrease_mana(2)
+				var spell = LightningProjectile.instance()
+				spell.transform = $ArrowDirection.transform
+				spell.position = $ArrowDirection/Position2D.global_position
+				spell.velocity = get_global_mouse_position() - spell.position
+				get_node("../../../").add_child(spell)
+			"explosion spell":
+				PlayerStats.decrease_mana(2)
+				var spell = ExplosionProjectile.instance()
+				spell.transform = $ArrowDirection.transform
+				spell.position = $ArrowDirection/Position2D.global_position
+				spell.velocity = get_global_mouse_position() - spell.position
+				get_node("../../../").add_child(spell)
+			"whirlwind spell":
+				PlayerStats.decrease_mana(2)
+				play_whirlwind()
+			"tornado spell":
+				PlayerStats.decrease_mana(2)
+				var spell = TornadoProjectile.instance()
+				spell.transform = $ArrowDirection.transform
+				spell.position = $ArrowDirection/Position2D.global_position
+				spell.velocity = get_global_mouse_position() - spell.position
+				get_node("../../../").add_child(spell)
+			"ice spell":
+				PlayerStats.decrease_mana(2)
+				var spell = IceProjectile.instance()
+				spell.transform = $ArrowDirection.transform
+				spell.position = $ArrowDirection/Position2D.global_position
+				spell.velocity = get_global_mouse_position() - spell.position
+				get_node("../../../").add_child(spell)
+	is_casting = false
+	get_parent().direction = direction
+	get_parent().state = MOVEMENT
 
 func swing(item_name, _direction):
 	if get_parent().state != SWINGING:
