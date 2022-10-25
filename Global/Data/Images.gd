@@ -1,6 +1,15 @@
 extends Node
 
 
+# SKILLS # 
+var lightning_skill = [
+	preload("res://Assets/Images/Skills/lightning/1.png"),
+	preload("res://Assets/Images/Skills/lightning/2.png"),
+	preload("res://Assets/Images/Skills/lightning/3.png"),
+	preload("res://Assets/Images/Skills/lightning/4.png"),
+]
+
+
 # IC Kitties #
 var randomKitty
 func _ready():
@@ -18,18 +27,6 @@ var KittyVariations = [
 	preload("res://Assets/Images/IC Kitties/SpriteFrames/White.tres")
 ]
 
-
-func returnRandomSnake():
-	SnakeVariations.shuffle()
-	return SnakeVariations[0]
-
-# SNAKES #
-var SnakeVariations = [
-	preload("res://Assets/Images/Animals/Snake/brown.tres"),
-	preload("res://Assets/Images/Animals/Snake/brownBlack.tres"),
-	preload("res://Assets/Images/Animals/Snake/green.tres"),
-	preload("res://Assets/Images/Animals/Snake/greenYellow.tres")
-]
 
 # BUNNIES #
 var BunnyVariations = [
@@ -50,6 +47,10 @@ var BirdVariations = [
 	preload("res://Assets/Images/Animals/Bird/bird1.tres"),
 	preload("res://Assets/Images/Animals/Bird/bird2.tres")
 ]
+
+
+
+
 
 
 # IC GHOSTS #

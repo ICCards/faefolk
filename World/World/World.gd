@@ -79,8 +79,8 @@ const interpolation_offset = 30
 var mark_for_despawn = []
 var tile_ids = {}
 
-const BATCH_DRAW_COUNT = 1000
-const BATCH_DRAW_DELAY = 0.1
+const BATCH_DRAW_COUNT = 2000
+const BATCH_DRAW_DELAY = 0.25
 
 func _ready():
 	rng.randomize()
@@ -266,7 +266,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	fill_biome_gaps(map)
-	set_water_tiles()
+	#set_water_tiles()
 	check_and_remove_invalid_autotiles(map)
 	yield(get_tree().create_timer(0.5), "timeout")
 	update_tile_bitmask_regions()
@@ -521,9 +521,11 @@ func update_tile_bitmask_regions():
 	yield(get_tree().create_timer(0.5), "timeout")
 	forest.update_bitmask_region()
 	yield(get_tree().create_timer(0.5), "timeout")
-#	wetSand.update_bitmask_region()
-#	yield(get_tree().create_timer(0.5), "timeout")
-#	deep_ocean.update_bitmask_region()
+	wetSand.update_bitmask_region()
+	yield(get_tree().create_timer(0.5), "timeout")
+	deep_ocean.update_bitmask_region()
+	yield(get_tree().create_timer(0.5), "timeout")
+	shallow_ocean.update_bitmask_region()
 
 
 func spawn_animals():
@@ -578,7 +580,7 @@ func set_water_tiles():
 			shallow_ocean.set_cellv(loc,-1)
 			deep_ocean.set_cellv(loc,-1)
 			top_ocean.set_cellv(loc,-1)
-			count += 1
+#			count += 1
 #			if count == BATCH_DRAW_COUNT*2:
 #				yield(get_tree().create_timer(BATCH_DRAW_DELAY), "timeout")
 #				count = 0
@@ -601,16 +603,6 @@ func set_water_tiles():
 				deep_ocean.set_cellv(loc+Vector2(-1,0), -1)
 				deep_ocean.set_cellv(loc+Vector2(0,1), -1)
 				deep_ocean.set_cellv(loc+Vector2(0,-1), -1)
-	yield(get_tree().create_timer(0.5), "timeout")
-	wetSand.update_bitmask_region()
-	yield(get_tree().create_timer(0.5), "timeout")
-	deep_ocean.update_bitmask_region()
-	yield(get_tree().create_timer(0.5), "timeout")
-	shallow_ocean.update_bitmask_region()
-#	for x in range(300): # fill empty tiles
-#		for y in range(300):
-#			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
-#				Tiles._set_cell(sand, x, y, 0)
 	
 func fill_biome_gaps(map):
 	for i in range(2):

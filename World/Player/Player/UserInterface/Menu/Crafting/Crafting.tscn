@@ -165,8 +165,9 @@ margin_bottom = 204.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page1/wood gate" index="0"]
+margin_left = 1.0
 margin_top = 0.5
-margin_right = 64.0
+margin_right = 85.0
 margin_bottom = 40.5
 texture_normal = ExtResource( 43 )
 

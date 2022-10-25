@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/combat.png-099e1ac5d7655f141c236369d07e260c.stex"
+path="res://.import/1.png-82a7cb4a90c165d48062ee7c5fd9ea7d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Inventory UI/skills/combat.png"
-dest_files=[ "res://.import/combat.png-099e1ac5d7655f141c236369d07e260c.stex" ]
+source_file="res://Assets/Images/Skills/lightning/1.png"
+dest_files=[ "res://.import/1.png-82a7cb4a90c165d48062ee7c5fd9ea7d.stex" ]
 
 [params]
 

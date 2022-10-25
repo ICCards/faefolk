@@ -225,20 +225,16 @@ func _unhandled_input(event):
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif item_name == "blueprint" and current_building_item != null:
 					show_placable_object(current_building_item, "BUILDING")
-				elif event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
+				if item_name == "lightning staff":
+					$Camera2D/UserInterface/MagicStaffUI.show()
+				else:
+					$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
+				if event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
 					fish()
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
 					swing(item_name)
-				elif item_name == "bow" and event.is_action_pressed("slot1"):
+				elif item_name == "lightning staff" and event.is_action_pressed("mouse_click"):
 					$Swing.cast_spell("lightning spell", direction)
-				elif item_name == "bow" and event.is_action_pressed("slot2"):
-					$Swing.cast_spell("explosion spell", direction)
-				elif item_name == "bow" and event.is_action_pressed("slot3"):
-					$Swing.cast_spell("whirlwind spell", direction)
-				elif item_name == "bow" and event.is_action_pressed("slot4"):
-					$Swing.cast_spell("tornado spell", direction)
-				elif item_name == "bow" and event.is_action_pressed("slot5"):
-					$Swing.cast_spell("ice spell", direction)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
 					eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":

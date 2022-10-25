@@ -33,7 +33,8 @@ var inventory = {
 
 var hotbar = {
 	0: ["bow", 1, null],
-	1: ["arrow", 100, null]
+	1: ["arrow", 100, null],
+	2: ["lightning staff", 1, null]
 }
 
 var chests = {}

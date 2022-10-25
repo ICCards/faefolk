@@ -719,7 +719,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 5
+frame = 13
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -829,10 +829,10 @@ margin_right = -334.0
 margin_bottom = 77.0
 
 [node name="Skills" parent="." instance=ExtResource( 39 )]
-margin_left = -377.0
-margin_top = 37.0
-margin_right = -337.0
-margin_bottom = 77.0
+margin_left = -296.0
+margin_top = 127.0
+margin_right = -256.0
+margin_bottom = 167.0
 
 [node name="Tween" type="Tween" parent="."]
 

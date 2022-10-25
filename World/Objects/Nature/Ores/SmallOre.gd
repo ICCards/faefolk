@@ -10,7 +10,7 @@ var ore_object
 var location
 var variety
 var health
-var destroyed = false
+var destroyed: bool = false
 
 func _ready():
 	hide()

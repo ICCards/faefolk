@@ -6,7 +6,14 @@ var skills = {
 	"mining": 0,
 	"foraging": 0,
 	"fishing": 0,
-	"combat": 0
+	"swordsmanship": 0,
+	"markmanship": 2,
+	"wizardry": 10,
+	"lightning magic": 0,
+	"fire magic": 0,
+	"wind magic": 0,
+	"ice magic": 0,
+	"healing magic": 0
 }
 
 var forage = {

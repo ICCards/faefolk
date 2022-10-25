@@ -78,60 +78,95 @@ func _physics_process(delta):
 		return
 
 
-func cast_spell(spell_name, init_direction):
-	if get_parent().state != SWINGING and PlayerStats.mana > 2:
+func cast_spell(staff_name, init_direction):
+	if get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown():
 		PlayerStats.decrease_energy()
 		get_parent().state = SWINGING
-		is_casting = true
-		animation = "magic_cast_" + init_direction.to_lower()
-		player_animation_player.play("bow draw release")
-		print(animation)
-		composite_sprites.set_player_animation(get_parent().character, animation, "magic staff")
-		yield(player_animation_player, "animation_finished" )
-		cast(spell_name)
+		if get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell != 2:
+			is_casting = true
+			animation = "magic_cast_" + init_direction.to_lower()
+			player_animation_player.play("bow draw release")
+			composite_sprites.set_player_animation(get_parent().character, animation, "magic staff")
+			yield(player_animation_player, "animation_finished" )
+		wait_for_cast_release(staff_name)
+	else:
+		get_parent().state = MOVEMENT
 	
 	
-func cast(spell_name):
-	match spell_name:
-			"lightning spell":
-				PlayerStats.decrease_mana(2)
-				var spell = LightningProjectile.instance()
-				spell.transform = $ArrowDirection.transform
-				spell.position = $ArrowDirection/Position2D.global_position
-				spell.velocity = get_global_mouse_position() - spell.position
-				get_node("../../../").add_child(spell)
-			"explosion spell":
-				PlayerStats.decrease_mana(2)
-				var spell = ExplosionProjectile.instance()
-				spell.transform = $ArrowDirection.transform
-				spell.position = $ArrowDirection/Position2D.global_position
-				spell.velocity = get_global_mouse_position() - spell.position
-				get_node("../../../").add_child(spell)
-			"whirlwind spell":
-				PlayerStats.decrease_mana(2)
-				play_whirlwind()
-			"tornado spell":
-				PlayerStats.decrease_mana(2)
-				var spell = TornadoProjectile.instance()
-				spell.transform = $ArrowDirection.transform
-				spell.position = $ArrowDirection/Position2D.global_position
-				spell.velocity = get_global_mouse_position() - spell.position
-				get_node("../../../").add_child(spell)
-			"ice spell":
-				PlayerStats.decrease_mana(2)
-				var spell = IceProjectile.instance()
-				spell.transform = $ArrowDirection.transform
-				spell.position = $ArrowDirection/Position2D.global_position
-				spell.velocity = get_global_mouse_position() - spell.position
-				get_node("../../../").add_child(spell)
+func wait_for_cast_release(staff_name):
+	if not mouse_left_down:
+		cast(staff_name, get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell)
+	elif get_parent().state == DYING:
+		return
+	else:
+		yield(get_tree().create_timer(0.1), "timeout")
+		wait_for_cast_release(staff_name)
+	
+	
+func cast(staff_name, spell_index):
+	get_node("../Camera2D/UserInterface/MagicStaffUI").start_spell_cooldown()
+	match staff_name:
+		"lightning staff":
+			match spell_index:
+				1:
+					PlayerStats.decrease_mana(2)
+					var spell = LightningProjectile.instance()
+					get_node("../../../").add_child(spell)
+					spell.transform = $ArrowDirection.transform
+					spell.position = $ArrowDirection/Position2D.global_position
+					spell.velocity = get_global_mouse_position() - spell.position
+				2:
+					$Iceberg.show()
+					$Iceberg.animation = "start"
+					$Iceberg.play()
+					yield($Iceberg, "animation_finished")
+					$Iceberg.animation = "idle"
+					$Iceberg.play()
+					yield($Iceberg, "animation_finished")
+					$Iceberg.animation = "end"
+					$Iceberg.play()
+					yield($Iceberg, "animation_finished")
+					$Iceberg.hide()
+				3:
+					pass
+				4:
+					pass
+		"explosion spell":
+			PlayerStats.decrease_mana(2)
+			var spell = ExplosionProjectile.instance()
+			get_node("../../../").add_child(spell)
+			spell.transform = $ArrowDirection.transform
+			spell.position = $ArrowDirection/Position2D.global_position
+			spell.velocity = get_global_mouse_position() - spell.positionds
+		"whirlwind spell":
+			PlayerStats.decrease_mana(2)
+			play_whirlwind()
+		"tornado spell":
+			PlayerStats.decrease_mana(2)
+			var spell = TornadoProjectile.instance()
+			get_node("../../../").add_child(spell)
+			spell.transform = $ArrowDirection.transform
+			spell.position = $ArrowDirection/Position2D.global_position
+			spell.velocity = get_global_mouse_position() - spell.position
+		"ice spell":
+			PlayerStats.decrease_mana(2)
+			var spell = IceProjectile.instance()
+			get_node("../../../").add_child(spell)
+			spell.transform = $ArrowDirection.transform
+			spell.position = $ArrowDirection/Position2D.global_position
+			spell.velocity = get_global_mouse_position() - spell.position
 	is_casting = false
 	get_parent().direction = direction
-	get_parent().state = MOVEMENT
+	if get_parent().state != DYING: 
+		get_parent().state = MOVEMENT
 
 func swing(item_name, _direction):
 	if get_parent().state != SWINGING:
 		get_parent().state = SWINGING
-		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
+		if item_name == "lightning staff":
+			cast_spell(item_name, _direction)
+			return
+		elif item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 			set_watered_tile()
 			animation = "watering_" + _direction.to_lower()
 			player_animation_player.play("watering")

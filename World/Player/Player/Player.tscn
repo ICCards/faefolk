@@ -1,22 +1,22 @@
-[gd_scene load_steps=125 format=2]
+[gd_scene load_steps=178 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Human/male/SITTING/body/right/body.png" type="Texture" id=3]
-[ext_resource path="res://Characters/Human/male/SITTING/assets/right/shirt/shirt.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Magic/lightning/lightning effect.png" type="Texture" id=3]
+[ext_resource path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" type="Texture" id=4]
 [ext_resource path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
-[ext_resource path="res://Characters/Human/male/SITTING/assets/right/shoes/shoes.png" type="Texture" id=7]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AxePickaxeSwing.gd" type="Script" id=9]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AttachedText.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
-[ext_resource path="res://Characters/Human/male/SITTING/body/right/arms.png" type="Texture" id=13]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=13]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" type="Script" id=14]
-[ext_resource path="res://Characters/Human/male/SITTING/assets/right/head_attribute/hair.png" type="Texture" id=15]
+[ext_resource path="res://Characters/Human/male/IDLE/assets/down/pants/pants.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
-[ext_resource path="res://Characters/Human/male/SITTING/assets/right/pants/pants.png" type="Texture" id=17]
+[ext_resource path="res://Characters/Human/male/IDLE/assets/down/shirts/shirt.png" type="Texture" id=17]
 [ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=18]
 [ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX036.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX042.png" type="Texture" id=20]
@@ -72,6 +72,10 @@
 [ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX019.png" type="Texture" id=70]
 [ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX027.png" type="Texture" id=71]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=72]
+[ext_resource path="res://Assets/Images/Magic/ice defense/1Iceburg_Start.png" type="Texture" id=73]
+[ext_resource path="res://Assets/Images/Magic/ice defense/1Iceburg_Idle.png" type="Texture" id=74]
+[ext_resource path="res://Assets/Images/Magic/ice defense/1Iceburg_End.png" type="Texture" id=75]
+[ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=76]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -5671,6 +5675,220 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="AtlasTexture" id=112]
+atlas = ExtResource( 75 )
+region = Rect2( 0, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=113]
+atlas = ExtResource( 75 )
+region = Rect2( 82, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=114]
+atlas = ExtResource( 75 )
+region = Rect2( 164, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=115]
+atlas = ExtResource( 75 )
+region = Rect2( 246, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=116]
+atlas = ExtResource( 75 )
+region = Rect2( 328, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=117]
+atlas = ExtResource( 75 )
+region = Rect2( 0, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=118]
+atlas = ExtResource( 75 )
+region = Rect2( 82, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=119]
+atlas = ExtResource( 75 )
+region = Rect2( 164, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=120]
+atlas = ExtResource( 75 )
+region = Rect2( 246, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=121]
+atlas = ExtResource( 75 )
+region = Rect2( 328, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 74 )
+region = Rect2( 0, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=93]
+atlas = ExtResource( 74 )
+region = Rect2( 82, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=94]
+atlas = ExtResource( 74 )
+region = Rect2( 164, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=95]
+atlas = ExtResource( 74 )
+region = Rect2( 246, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = ExtResource( 74 )
+region = Rect2( 328, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=97]
+atlas = ExtResource( 74 )
+region = Rect2( 0, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=98]
+atlas = ExtResource( 74 )
+region = Rect2( 82, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=99]
+atlas = ExtResource( 74 )
+region = Rect2( 164, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=100]
+atlas = ExtResource( 74 )
+region = Rect2( 246, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=101]
+atlas = ExtResource( 74 )
+region = Rect2( 328, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=102]
+atlas = ExtResource( 74 )
+region = Rect2( 0, 164, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=103]
+atlas = ExtResource( 74 )
+region = Rect2( 82, 164, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=104]
+atlas = ExtResource( 74 )
+region = Rect2( 164, 164, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=105]
+atlas = ExtResource( 74 )
+region = Rect2( 246, 164, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=106]
+atlas = ExtResource( 74 )
+region = Rect2( 328, 164, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=107]
+atlas = ExtResource( 74 )
+region = Rect2( 0, 246, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=108]
+atlas = ExtResource( 74 )
+region = Rect2( 82, 246, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=109]
+atlas = ExtResource( 74 )
+region = Rect2( 164, 246, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=110]
+atlas = ExtResource( 74 )
+region = Rect2( 246, 246, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=111]
+atlas = ExtResource( 74 )
+region = Rect2( 328, 246, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 73 )
+region = Rect2( 0, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 73 )
+region = Rect2( 82, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 73 )
+region = Rect2( 164, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 73 )
+region = Rect2( 246, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 73 )
+region = Rect2( 328, 0, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 73 )
+region = Rect2( 0, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 73 )
+region = Rect2( 82, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 73 )
+region = Rect2( 164, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 73 )
+region = Rect2( 246, 82, 82, 82 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 73 )
+region = Rect2( 328, 82, 82, 82 )
+
+[sub_resource type="SpriteFrames" id=91]
+animations = [ {
+"frames": [ SubResource( 112 ), SubResource( 113 ), SubResource( 114 ), SubResource( 115 ), SubResource( 116 ), SubResource( 117 ), SubResource( 118 ), SubResource( 119 ), SubResource( 120 ), SubResource( 121 ) ],
+"loop": false,
+"name": "end",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ), SubResource( 102 ), SubResource( 103 ), SubResource( 104 ), SubResource( 105 ), SubResource( 106 ), SubResource( 107 ), SubResource( 108 ), SubResource( 109 ), SubResource( 110 ), SubResource( 111 ) ],
+"loop": false,
+"name": "idle",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ), SubResource( 89 ), SubResource( 90 ) ],
+"loop": false,
+"name": "start",
+"speed": 8.0
+} ]
+
+[sub_resource type="AtlasTexture" id=122]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=123]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=124]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=125]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 80, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=126]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 80, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=127]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 80, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=128]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 160, 96, 80 )
+
+[sub_resource type="SpriteFrames" id=129]
+animations = [ {
+"frames": [ SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ) ],
+"loop": true,
+"name": "play",
+"speed": 5.0
+} ]
+
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 39.746
 height = 22.2163
@@ -5933,14 +6151,14 @@ __meta__ = {
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 hframes = 4
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 15 )
+texture = ExtResource( 4 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
@@ -5954,14 +6172,14 @@ hframes = 4
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 4 )
+texture = ExtResource( 17 )
 hframes = 4
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 17 )
+texture = ExtResource( 15 )
 hframes = 4
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
@@ -5974,7 +6192,7 @@ hframes = 4
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 7 )
+texture = ExtResource( 76 )
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
@@ -6090,6 +6308,7 @@ scale_amount_random = 1.0
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="Swing"]
 
 [node name="Whirlwind" type="Node2D" parent="Swing"]
+visible = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Swing/Whirlwind"]
 modulate = Color( 1, 1, 1, 0 )
@@ -6113,7 +6332,26 @@ disabled = true
 anims/RESET = SubResource( 76 )
 anims/play = SubResource( 75 )
 
+[node name="Iceberg" type="AnimatedSprite" parent="Swing"]
+visible = false
+modulate = Color( 1, 1, 1, 0.705882 )
+position = Vector2( 0, -58 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 91 )
+animation = "idle"
+frame = 19
+playing = true
+
+[node name="Electricity" type="AnimatedSprite" parent="Swing"]
+visible = false
+position = Vector2( 0, -31 )
+frames = SubResource( 129 )
+animation = "play"
+frame = 6
+playing = true
+
 [node name="Area2Ds" type="Node2D" parent="."]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -6204,6 +6442,7 @@ collision_mask = 0
 shape = SubResource( 10 )
 
 [node name="Texts" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true

@@ -1,4 +1,11 @@
 {
+    "lightning staff": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Used to cast electric spells.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
     "pink clam": {
       "ItemCategory": "Forage",
       "StackSize": 999,

@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 var velocity = Vector2(-1,0)
-var speed = 450
+var speed = 500
 var collided = false
 
 func _physics_process(delta):

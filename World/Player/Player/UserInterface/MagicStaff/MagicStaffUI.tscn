@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
+[ext_resource path="res://World/Player/Player/UserInterface/MagicStaff/MagicStaffUI.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Images/Skills/lightning/4.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Skills/lightning/3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Skills/lightning/1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Skills/lightning/2.png" type="Texture" id=7]
+
+[node name="MagicStaffUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1024.0
+margin_bottom = -600.0
+rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="SelectedBg" type="ColorRect" parent="."]
+margin_right = 24.0
+margin_bottom = 24.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Bg" type="HBoxContainer" parent="."]
+margin_right = 96.0
+margin_bottom = 24.0
+custom_constants/separation = 0
+
+[node name="btn1" type="TextureButton" parent="Bg"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 6 )
+
+[node name="btn2" type="TextureButton" parent="Bg"]
+margin_left = 24.0
+margin_right = 48.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 7 )
+
+[node name="btn3" type="TextureButton" parent="Bg"]
+margin_left = 48.0
+margin_right = 72.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 5 )
+
+[node name="btn4" type="TextureButton" parent="Bg"]
+margin_left = 72.0
+margin_right = 96.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 4 )
+
+[node name="Labels" type="HBoxContainer" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 7.0
+margin_top = 16.0
+margin_right = 683.0
+margin_bottom = 77.0
+rect_scale = Vector2( 0.12, 0.12 )
+mouse_filter = 2
+custom_constants/separation = 160
+
+[node name="1" type="Label" parent="Labels"]
+margin_right = 44.0
+margin_bottom = 61.0
+theme = ExtResource( 2 )
+text = "F1"
+
+[node name="2" type="Label" parent="Labels"]
+margin_left = 204.0
+margin_right = 256.0
+margin_bottom = 61.0
+theme = ExtResource( 2 )
+text = "F2"
+
+[node name="3" type="Label" parent="Labels"]
+margin_left = 416.0
+margin_right = 468.0
+margin_bottom = 61.0
+theme = ExtResource( 2 )
+text = "F3"
+
+[node name="4" type="Label" parent="Labels"]
+margin_left = 628.0
+margin_right = 676.0
+margin_bottom = 61.0
+theme = ExtResource( 2 )
+text = "F4"
+
+[node name="Cooldown1" type="ColorRect" parent="."]
+margin_left = 22.0
+margin_top = 22.0
+margin_right = 42.0
+margin_bottom = 22.0
+grow_vertical = 0
+rect_min_size = Vector2( 20, 0 )
+rect_rotation = 180.0
+mouse_filter = 2
+color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
+
+[node name="Cooldown2" type="ColorRect" parent="."]
+margin_left = 46.0
+margin_top = 22.0
+margin_right = 66.0
+margin_bottom = 22.0
+grow_vertical = 0
+rect_min_size = Vector2( 20, 0 )
+rect_rotation = 180.0
+mouse_filter = 2
+color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
+
+[node name="Cooldown3" type="ColorRect" parent="."]
+margin_left = 70.0
+margin_top = 22.0
+margin_right = 90.0
+margin_bottom = 22.0
+grow_vertical = 0
+rect_min_size = Vector2( 20, 0 )
+rect_rotation = 180.0
+mouse_filter = 2
+color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
+
+[node name="Cooldown4" type="ColorRect" parent="."]
+margin_left = 94.0
+margin_top = 22.0
+margin_right = 114.0
+margin_bottom = 22.0
+grow_vertical = 0
+rect_min_size = Vector2( 20, 0 )
+rect_rotation = 180.0
+mouse_filter = 2
+color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="Bg/btn1" to="." method="_on_1_pressed"]
+[connection signal="pressed" from="Bg/btn2" to="." method="_on_2_pressed"]
+[connection signal="pressed" from="Bg/btn3" to="." method="_on_3_pressed"]
+[connection signal="pressed" from="Bg/btn4" to="." method="_on_4_pressed"]
