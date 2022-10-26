@@ -1,15 +1,6 @@
 extends Node
 
 
-# SKILLS # 
-var lightning_skill = [
-	preload("res://Assets/Images/Skills/lightning/1.png"),
-	preload("res://Assets/Images/Skills/lightning/2.png"),
-	preload("res://Assets/Images/Skills/lightning/3.png"),
-	preload("res://Assets/Images/Skills/lightning/4.png"),
-]
-
-
 # IC Kitties #
 var randomKitty
 func _ready():

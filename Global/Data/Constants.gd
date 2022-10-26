@@ -47,8 +47,6 @@ var dimensions_dict = {
 	"wood gate": Vector2(2,1),
 	"wood gate side": Vector2(1,2),
 	
-	
-	
 }
 
 

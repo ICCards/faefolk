@@ -14,20 +14,10 @@ func _physics_process(delta):
 func _ready():
 	$Area2D.tool_name = "lightning spell"
 	$Area2D.knockback_vector = Vector2.ZERO
-	projectile_sprite.play("cast")
-	yield(projectile_sprite, "animation_finished")
-	projectile_sprite.play("movement")
-	yield(projectile_sprite, "animation_finished")
-
-
+	projectile_sprite.play("default")
+	
 func _on_Area2D_area_entered(area):
 	chain_effect(area.name)
-	$Area2D/CollisionShape2D.set_deferred("disabled", true)
-	$CollisionShape2D.set_deferred("disabled", true)
-	collided = true
-	projectile_sprite.play("hit")
-	yield(projectile_sprite, "animation_finished")
-	queue_free()
 
 func chain_effect(start_name):
 	var nodes = []
@@ -41,6 +31,7 @@ func chain_effect(start_name):
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
 	yield(get_tree(), 'idle_frame')
 	Server.world.draw_mst(find_mst(nodes))
+	queue_free()
 
 func find_mst(nodes):
 	# Prim's algorithm

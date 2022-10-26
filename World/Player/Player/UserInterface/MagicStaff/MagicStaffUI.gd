@@ -5,23 +5,23 @@ var selected_staff = ""
 
 
 var COOL_DOWN_PERIOD_1: int = 1
-var COOL_DOWN_PERIOD_2: int = 5
-var COOL_DOWN_PERIOD_3: int = 10
-var COOL_DOWN_PERIOD_4: int = 20
+var COOL_DOWN_PERIOD_2: int = 2
+var COOL_DOWN_PERIOD_3: int = 2
+var COOL_DOWN_PERIOD_4: int = 4
 
 func initialize(_staff):
-	selected_spell = 1
-	selected_staff = _staff
-	set_selected_spell()
-	set_bgs()
-	
+	if selected_staff != _staff:
+		show()
+		selected_spell = 1
+		selected_staff = _staff
+		set_selected_spell()
+		set_bgs()
+		
 func set_bgs():
-	match selected_staff:
-		"lightning staff":
-			$Bg/btn1.texture_normal = Images.lighting_staff[0]
-			$Bg/btn2.texture_normal = Images.lighting_staff[1]
-			$Bg/btn3.texture_normal = Images.lighting_staff[2]
-			$Bg/btn4.texture_normal = Images.lighting_staff[3]
+	$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+	$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
+	$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
+	$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
 
 
 func set_selected_spell():

@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
 [ext_resource path="res://World/Player/Player/UserInterface/MagicStaff/MagicStaffUI.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/Skills/lightning/4.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Skills/lightning/3.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/Skills/lightning/1.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Skills/lightning/2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Spell icons/lightning staff/4.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Spell icons/lightning staff/3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Spell icons/lightning staff/1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Spell icons/lightning staff/2.png" type="Texture" id=7]
 
 [node name="MagicStaffUI" type="Control"]
 anchor_right = 1.0

@@ -6,101 +6,110 @@
 [ext_resource path="res://Assets/Images/Inventory UI/skills/farming.png" type="Texture" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Skills/skill.gd" type="Script" id=5]
 
-[node name="skill" type="HBoxContainer"]
+[node name="skill" type="Control"]
 margin_right = 749.0
 margin_bottom = 61.0
 rect_scale = Vector2( 0.6, 0.6 )
-custom_constants/separation = 6
 script = ExtResource( 5 )
 
 [node name="Title" type="Label" parent="."]
-margin_right = 234.0
+margin_left = 11.6667
+margin_right = 344.667
 margin_bottom = 61.0
 rect_min_size = Vector2( 175, 61 )
 theme = ExtResource( 1 )
-text = "Swordswm"
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+text = "Swordsmanship"
+align = 2
 
-[node name="Icon" type="TextureRect" parent="."]
-margin_left = 240.0
-margin_right = 304.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 369.667
+margin_top = 10.0
+margin_right = 891.667
+margin_bottom = 71.0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+margin_right = 64.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 64, 0 )
 texture = ExtResource( 4 )
 stretch_mode = 4
 
-[node name="1" type="TextureRect" parent="."]
-margin_left = 310.0
-margin_right = 340.0
+[node name="1" type="TextureRect" parent="HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
 margin_bottom = 61.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="2" type="TextureRect" parent="."]
-margin_left = 346.0
-margin_right = 376.0
+[node name="2" type="TextureRect" parent="HBoxContainer"]
+margin_left = 102.0
+margin_right = 132.0
 margin_bottom = 61.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="3" type="TextureRect" parent="."]
-margin_left = 382.0
-margin_right = 412.0
+[node name="3" type="TextureRect" parent="HBoxContainer"]
+margin_left = 136.0
+margin_right = 166.0
 margin_bottom = 61.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="4" type="TextureRect" parent="."]
-margin_left = 418.0
-margin_right = 448.0
+[node name="4" type="TextureRect" parent="HBoxContainer"]
+margin_left = 170.0
+margin_right = 200.0
 margin_bottom = 61.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="5" type="TextureRect" parent="."]
-margin_left = 454.0
-margin_right = 511.0
+[node name="5" type="TextureRect" parent="HBoxContainer"]
+margin_left = 204.0
+margin_right = 261.0
 margin_bottom = 61.0
 texture = ExtResource( 3 )
 stretch_mode = 4
 
-[node name="6" type="TextureRect" parent="."]
-margin_left = 517.0
-margin_right = 547.0
+[node name="6" type="TextureRect" parent="HBoxContainer"]
+margin_left = 265.0
+margin_right = 295.0
 margin_bottom = 61.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="7" type="TextureRect" parent="."]
-margin_left = 553.0
-margin_right = 583.0
+[node name="7" type="TextureRect" parent="HBoxContainer"]
+margin_left = 299.0
+margin_right = 329.0
 margin_bottom = 61.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="8" type="TextureRect" parent="."]
-margin_left = 589.0
-margin_right = 619.0
+[node name="8" type="TextureRect" parent="HBoxContainer"]
+margin_left = 333.0
+margin_right = 363.0
 margin_bottom = 61.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="9" type="TextureRect" parent="."]
-margin_left = 625.0
-margin_right = 655.0
+[node name="9" type="TextureRect" parent="HBoxContainer"]
+margin_left = 367.0
+margin_right = 397.0
 margin_bottom = 61.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="10" type="TextureRect" parent="."]
-margin_left = 661.0
-margin_right = 718.0
+[node name="10" type="TextureRect" parent="HBoxContainer"]
+margin_left = 401.0
+margin_right = 458.0
 margin_bottom = 61.0
 texture = ExtResource( 3 )
 stretch_mode = 4
 
-[node name="Level" type="Label" parent="."]
-margin_left = 724.0
-margin_right = 784.0
+[node name="Level" type="Label" parent="HBoxContainer"]
+margin_left = 462.0
+margin_right = 522.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 60, 0 )
 theme = ExtResource( 1 )

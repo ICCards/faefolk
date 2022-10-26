@@ -11,7 +11,7 @@ func _physics_process(delta):
 
 
 func _ready():
-	$Area2D.tool_name = "ice spell"
+	$Area2D.tool_name = "ice projectile"
 	$Area2D.knockback_vector = Vector2.ZERO
 
 

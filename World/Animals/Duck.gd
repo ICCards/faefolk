@@ -103,7 +103,7 @@ func _on_HurtBox_area_entered(area):
 		Stats.decrease_tool_health()
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		hit(area.tool_name)
-	if area.tool_name == "ice spell":
+	if area.tool_name == "ice projectile":
 		start_frozen_state()
 		
 func start_frozen_state():

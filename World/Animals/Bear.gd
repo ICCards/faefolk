@@ -166,12 +166,13 @@ func swing():
 				else:
 					animation_player.play("swing " + direction)
 			yield(animation_player, "animation_finished")
-			if frozen:
-				animation_player.play("loop frozen")
-			else:
-				animation_player.play("loop")
-			attacking = false
-			state = CHASE
+			if not destroyed:
+				if frozen:
+					animation_player.play("loop frozen")
+				else:
+					animation_player.play("loop")
+				attacking = false
+				state = CHASE
 	else:
 		end_chase_state()
 
@@ -200,7 +201,7 @@ func _on_HurtBox_area_entered(area):
 		knockback = area.knockback_vector * 100
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		hit(area.tool_name)
-	if area.tool_name == "ice spell":
+	if area.tool_name == "ice projectile":
 		start_frozen_state()
 
 

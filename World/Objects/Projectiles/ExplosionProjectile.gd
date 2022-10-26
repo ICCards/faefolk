@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-onready var projectile_sprite: AnimatedSprite = $AnimatedSprite
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 var velocity = Vector2(0,0)
 var speed = 500
@@ -17,13 +16,15 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
-	projectile_sprite.frame = 1
-	projectile_sprite.play("explode")
+	$Fireball.hide()
+	$Explosion.show()
+	$Explosion.frame = 1
+	$Explosion.play("explode")
 	animation_player.play("explode")
 	$Area2D/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
 	collided = true
-	yield(projectile_sprite, "animation_finished")
+	yield($Explosion, "animation_finished")
 	queue_free()
 
 

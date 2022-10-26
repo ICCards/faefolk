@@ -11,10 +11,6 @@ onready var player_animation_player = get_node("../CompositeSprites/AnimationPla
 onready var composite_sprites = get_node("../CompositeSprites")
 
 onready var ArrowProjectile = preload("res://World/Objects/Projectiles/ArrowProjectile.tscn")
-onready var LightningProjectile = preload("res://World/Objects/Projectiles/LightningProjectile.tscn")
-onready var ExplosionProjectile = preload("res://World/Objects/Projectiles/ExplosionProjectile.tscn")
-onready var TornadoProjectile = preload("res://World/Objects/Projectiles/TornadoProjectile.tscn")
-onready var IceProjectile = preload("res://World/Objects/Projectiles/IceProjectile.tscn")
 
 
 var rng = RandomNumberGenerator.new()
@@ -29,12 +25,13 @@ enum {
 	FISHING,
 	HARVESTING,
 	DYING,
-	SLEEPING
+	SLEEPING,
+	SITTING,
+	MAGIC_CASTING
 }
 
 var is_drawing: bool = false
 var is_releasing: bool = false
-var is_casting: bool = false
 
 
 
@@ -47,126 +44,38 @@ func _input( event ):
 			mouse_left_down = false
 
 func _physics_process(delta):
-	if is_drawing or is_releasing or is_casting:
-		var degrees = int($ArrowDirection.rotation_degrees) % 360
-		$ArrowDirection.look_at(get_global_mouse_position())
-		if $ArrowDirection.rotation_degrees >= 0:
-			if degrees <= 45 or degrees >= 315:
-				direction = "RIGHT"
-			elif degrees <= 135:
-				direction = "DOWN"
-			elif degrees <= 225:
-				direction = "LEFT"
-			else:
-				direction = "UP"
+	if not is_drawing or not is_releasing:
+		return
+	var degrees = int($ArrowDirection.rotation_degrees) % 360
+	$ArrowDirection.look_at(get_global_mouse_position())
+	if $ArrowDirection.rotation_degrees >= 0:
+		if degrees <= 45 or degrees >= 315:
+			direction = "RIGHT"
+		elif degrees <= 135:
+			direction = "DOWN"
+		elif degrees <= 225:
+			direction = "LEFT"
 		else:
-			if degrees >= -45 or degrees <= -315:
-				direction = "RIGHT"
-			elif degrees >= -135:
-				direction = "UP"
-			elif degrees >= -225:
-				direction = "LEFT"
-			else:
-				direction = "DOWN"
-		if is_drawing:
-			composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
-		elif is_releasing:
-			composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
-		elif is_casting:
-			composite_sprites.set_player_animation(get_parent().character, "magic_cast_" + direction.to_lower(), "magic staff")
+			direction = "UP"
 	else:
-		return
+		if degrees >= -45 or degrees <= -315:
+			direction = "RIGHT"
+		elif degrees >= -135:
+			direction = "UP"
+		elif degrees >= -225:
+			direction = "LEFT"
+		else:
+			direction = "DOWN"
+	if is_drawing:
+		composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
+	elif is_releasing:
+		composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
 
-
-func cast_spell(staff_name, init_direction):
-	if get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown():
-		PlayerStats.decrease_energy()
-		get_parent().state = SWINGING
-		if get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell != 2:
-			is_casting = true
-			animation = "magic_cast_" + init_direction.to_lower()
-			player_animation_player.play("bow draw release")
-			composite_sprites.set_player_animation(get_parent().character, animation, "magic staff")
-			yield(player_animation_player, "animation_finished" )
-		wait_for_cast_release(staff_name)
-	else:
-		get_parent().state = MOVEMENT
-	
-	
-func wait_for_cast_release(staff_name):
-	if not mouse_left_down:
-		cast(staff_name, get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell)
-	elif get_parent().state == DYING:
-		return
-	else:
-		yield(get_tree().create_timer(0.1), "timeout")
-		wait_for_cast_release(staff_name)
-	
-	
-func cast(staff_name, spell_index):
-	get_node("../Camera2D/UserInterface/MagicStaffUI").start_spell_cooldown()
-	match staff_name:
-		"lightning staff":
-			match spell_index:
-				1:
-					PlayerStats.decrease_mana(2)
-					var spell = LightningProjectile.instance()
-					get_node("../../../").add_child(spell)
-					spell.transform = $ArrowDirection.transform
-					spell.position = $ArrowDirection/Position2D.global_position
-					spell.velocity = get_global_mouse_position() - spell.position
-				2:
-					$Iceberg.show()
-					$Iceberg.animation = "start"
-					$Iceberg.play()
-					yield($Iceberg, "animation_finished")
-					$Iceberg.animation = "idle"
-					$Iceberg.play()
-					yield($Iceberg, "animation_finished")
-					$Iceberg.animation = "end"
-					$Iceberg.play()
-					yield($Iceberg, "animation_finished")
-					$Iceberg.hide()
-				3:
-					pass
-				4:
-					pass
-		"explosion spell":
-			PlayerStats.decrease_mana(2)
-			var spell = ExplosionProjectile.instance()
-			get_node("../../../").add_child(spell)
-			spell.transform = $ArrowDirection.transform
-			spell.position = $ArrowDirection/Position2D.global_position
-			spell.velocity = get_global_mouse_position() - spell.positionds
-		"whirlwind spell":
-			PlayerStats.decrease_mana(2)
-			play_whirlwind()
-		"tornado spell":
-			PlayerStats.decrease_mana(2)
-			var spell = TornadoProjectile.instance()
-			get_node("../../../").add_child(spell)
-			spell.transform = $ArrowDirection.transform
-			spell.position = $ArrowDirection/Position2D.global_position
-			spell.velocity = get_global_mouse_position() - spell.position
-		"ice spell":
-			PlayerStats.decrease_mana(2)
-			var spell = IceProjectile.instance()
-			get_node("../../../").add_child(spell)
-			spell.transform = $ArrowDirection.transform
-			spell.position = $ArrowDirection/Position2D.global_position
-			spell.velocity = get_global_mouse_position() - spell.position
-	is_casting = false
-	get_parent().direction = direction
-	if get_parent().state != DYING: 
-		get_parent().state = MOVEMENT
 
 func swing(item_name, _direction):
 	if get_parent().state != SWINGING:
 		get_parent().state = SWINGING
-		if item_name == "lightning staff":
-			cast_spell(item_name, _direction)
-			return
-		elif item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
+		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 			set_watered_tile()
 			animation = "watering_" + _direction.to_lower()
 			player_animation_player.play("watering")
@@ -204,11 +113,8 @@ func swing(item_name, _direction):
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
-		
-		
-func play_whirlwind():
-	$Whirlwind/Area2D.tool_name = "whirlwind spell"
-	$Whirlwind/AnimationPlayer.play("play")
+
+
 
 func draw_bow(init_direction):
 	is_drawing = true
@@ -312,7 +218,7 @@ func set_watered_tile():
 	direction = get_parent().direction
 	var pos = Util.set_swing_position(global_position, direction)
 	var location = Tiles.hoed_tiles.world_to_map(pos)
-	if Tiles.ocean_tiles.get_cellv(location) != -1 or is_well_tile(location, direction):
+	if Tiles.ocean_tiles.get_cellv(location) != -1 or Tiles.is_well_tile(location, direction):
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
@@ -343,18 +249,4 @@ func set_watered_tile():
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
 
-func is_well_tile(loc, direction):
-	match direction:
-		"UP":
-			if Tiles.object_tiles.get_cellv(loc) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-1,0)) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-2,0)) == 75:
-				return true
-		"DOWN":
-			if Tiles.object_tiles.get_cellv(loc+Vector2(0,1)) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-1,1)) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
-				return true
-		"LEFT":
-			if Tiles.object_tiles.get_cellv(loc+Vector2(-2,0)) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
-				return true
-		"RIGHT":
-			if Tiles.object_tiles.get_cellv(loc) == 75 or Tiles.object_tiles.get_cellv(loc+Vector2(0,1)) == 75:
-				return true
-	return false
+

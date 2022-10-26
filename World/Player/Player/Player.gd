@@ -27,7 +27,8 @@ enum {
 	HARVESTING,
 	DYING,
 	SLEEPING,
-	SITTING
+	SITTING,
+	MAGIC_CASTING
 }
 
 var direction = "DOWN"
@@ -207,8 +208,17 @@ func _process(_delta) -> void:
 		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
 	if state == MOVEMENT:
 		movement_state(_delta)
+	elif state == MAGIC_CASTING:
+		magic_casting_movement_state(_delta)
 	else:
 		$Sounds/FootstepsSound.stream_paused = true
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		var item_category = JsonData.item_data[item_name]["ItemCategory"]
+		if item_category == "Magic":
+			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
+			return
+	$Camera2D/UserInterface/MagicStaffUI.hide()
 
 
 func _unhandled_input(event):
@@ -225,16 +235,13 @@ func _unhandled_input(event):
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif item_name == "blueprint" and current_building_item != null:
 					show_placable_object(current_building_item, "BUILDING")
-				if item_name == "lightning staff":
-					$Camera2D/UserInterface/MagicStaffUI.show()
-				else:
-					$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
+		
 				if event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
 					fish()
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
 					swing(item_name)
-				elif item_name == "lightning staff" and event.is_action_pressed("mouse_click"):
-					$Swing.cast_spell("lightning spell", direction)
+				if item_category == "Magic" and event.is_action_pressed("mouse_click"):
+					$Magic.cast_spell(item_name, direction)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
 					eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
@@ -242,6 +249,7 @@ func _unhandled_input(event):
 				elif item_name != "blueprint":
 					destroy_placable_object()
 			else:
+				$Camera2D/UserInterface/MagicStaffUI.hide()
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
@@ -341,8 +349,42 @@ func fish():
 		add_child(fishing)
 
 
+
+func magic_casting_movement_state(_delta):
+	input_vector = Vector2.ZERO
+	if Input.is_action_pressed("move_up"):
+		input_vector.y -= 1.0
+		direction = "UP"
+#			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
+	if Input.is_action_pressed("move_down"):
+		input_vector.y += 1.0
+		direction = "DOWN"
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
+	if Input.is_action_pressed("move_left"):
+		input_vector.x -= 1.0
+		direction = "LEFT"
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
+	if Input.is_action_pressed("move_right"):
+		input_vector.x += 1.0
+		direction = "RIGHT"
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)		
+	if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
+		pass
+	input_vector = input_vector.normalized()
+	if input_vector != Vector2.ZERO:
+		velocity += input_vector * ACCELERATION * _delta
+		velocity = velocity.limit_length(MAX_SPEED_DIRT * _delta)
+		velocity = velocity.move_toward(Vector2.ZERO, _delta/3)
+		move_and_collide(velocity * MAX_SPEED_DIRT)
+
 func movement_state(delta):
-	if state == MOVEMENT and \
+	if (state == MAGIC_CASTING or state == MOVEMENT) and \
 	not PlayerInventory.chatMode and \
 	not PlayerInventory.viewInventoryMode and \
 	not PlayerInventory.interactive_screen_mode:

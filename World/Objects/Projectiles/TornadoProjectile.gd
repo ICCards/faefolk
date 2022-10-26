@@ -12,10 +12,15 @@ func _ready():
 	if velocity.x < 0:
 		$AnimatedSprite.flip_v = true
 	$Area2D.tool_name = "tornado spell"
-	$Area2D.knockback_vector = velocity
-	yield(get_tree().create_timer(1.0), "timeout")
-	$AnimationPlayer.play("fade out")
-	yield($AnimationPlayer, "animation_finished")
+	#$Area2D.knockback_vector = velocity
+	$AnimatedSprite.play("anim")
+	yield($AnimatedSprite, "animation_finished")
+#	$AnimatedSprite.play("middle")
+#	yield($AnimatedSprite, "animation_finished")
+##	$AnimatedSprite.play("middle")
+##	yield($AnimatedSprite, "animation_finished")
+#	$AnimatedSprite.play("end")
+#	yield($AnimatedSprite, "animation_finished")
 	queue_free()
 
 

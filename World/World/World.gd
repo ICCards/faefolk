@@ -55,6 +55,14 @@ var tall_grass_types = ["dark green", "green", "red", "yellow"]
 var treeTypes = ['A','B', 'C', 'D', 'E']
 var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
 
+var trees_thread := Thread.new()
+var ores_thread := Thread.new()
+var grass_thread := Thread.new()
+var flower_thread := Thread.new()
+var remove_objects_thread := Thread.new()
+var remove_grass_thread := Thread.new()
+var navigation_thread := Thread.new()
+
 
 var object_name
 var position_of_object
@@ -94,30 +102,18 @@ func _ready():
 	wait_for_map()
 
 func draw_mst(path):
+	var current_lines = []
 	if path:
 		for p in path.get_points():
 			for c in path.get_point_connections(p):
 				var pp = path.get_point_position(p)
 				var cp = path.get_point_position(c)
-				var lightning_line = LightningLine.instance()
-				lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
-				add_child(lightning_line)
-	
+				if not current_lines.has([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]) and not current_lines.has([Vector2(cp.x, cp.y), Vector2(pp.x, pp.y)]):
+					var lightning_line = LightningLine.instance()
+					current_lines.append([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)])
+					lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
+					add_child(lightning_line)
 
-#func _draw():
-#	if path:
-#		for p in path.get_points():
-#			for c in path.get_point_connections(p):
-#				var pp = path.get_point_position(p)
-#				var cp = path.get_point_position(c)
-#				var lightning_line = LightningLine.instance()
-#				lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
-#				add_child(lightning_line)
-#				$Line2D.points.append(Vector2(pp.x, pp.y))
-#				$Line2D.points.append(Vector2(cp.x, cp.y))
-#				draw_line(Vector2(pp.x, pp.y),
-#						  Vector2(cp.x, cp.y),
-#						  Color(1, 1, 0, 1), 15, true)
 
 func wait_for_map():
 	if not Server.generated_map.empty():
@@ -266,7 +262,7 @@ func buildMap(map):
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("loadingScreen").set_phase("Generating world")
 	fill_biome_gaps(map)
-	#set_water_tiles()
+	set_water_tiles()
 	check_and_remove_invalid_autotiles(map)
 	yield(get_tree().create_timer(0.5), "timeout")
 	update_tile_bitmask_regions()
@@ -285,17 +281,6 @@ func buildMap(map):
 	set_random_beach_forage()
 	#set_nature_object_quadrants()
 	#set_nav()
-	
-
-var trees_thread := Thread.new()
-var ores_thread := Thread.new()
-var grass_thread := Thread.new()
-var flower_thread := Thread.new()
-var remove_objects_thread := Thread.new()
-var remove_grass_thread := Thread.new()
-var navigation_thread := Thread.new()
-
-
 
 func remove_nature():
 	for node in $NatureObjects.get_children():

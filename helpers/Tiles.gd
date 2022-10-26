@@ -161,3 +161,19 @@ func _set_cell(tilemap, x, y, id):
 	tilemap.set_cell(x, y, id, false, false, false, Tiles.get_subtile_with_priority(id,tilemap))
 
 
+func is_well_tile(loc, direction):
+	match direction:
+		"UP":
+			if object_tiles.get_cellv(loc) == 75 or object_tiles.get_cellv(loc+Vector2(-1,0)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,0)) == 75:
+				return true
+		"DOWN":
+			if object_tiles.get_cellv(loc+Vector2(0,1)) == 75 or object_tiles.get_cellv(loc+Vector2(-1,1)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
+				return true
+		"LEFT":
+			if object_tiles.get_cellv(loc+Vector2(-2,0)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
+				return true
+		"RIGHT":
+			if object_tiles.get_cellv(loc) == 75 or object_tiles.get_cellv(loc+Vector2(0,1)) == 75:
+				return true
+	return false
+
