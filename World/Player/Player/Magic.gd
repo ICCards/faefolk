@@ -150,7 +150,7 @@ func cast(staff_name, spell_index):
 				3:
 					pass
 				4:
-					pass
+					play_earthquake()
 		"health staff":
 			match spell_index:
 				1:
@@ -174,6 +174,11 @@ func play_earth_strike():
 	var spell = EarthStrike.instance()
 	get_node("../../../").add_child(spell)
 	spell.position = get_global_mouse_position()
+
+func play_earthquake():
+	$Earthquake/Area2D.tool_name = "earthquake"
+	$Earthquake/AnimationPlayer.play("play")
+	get_node("../Camera2D").start_shake()
 
 # Lightning #
 

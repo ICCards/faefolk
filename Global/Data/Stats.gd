@@ -43,6 +43,7 @@ const ICE_SPELL_DAMAGE = 20
 const EARTH_STRIKE_DAMAGE = 20
 const FIRE_PROJECTILE_DAMAGE = 20
 const FLAMETHROWER_DAMAGE = 20
+const EARTHQUAKE_DAMAGE = 20
 
 const MAX_STONE_WATERING_CAN = 25
 const MAX_BRONZE_WATERING_CAN = 50
@@ -57,6 +58,8 @@ const DEER_HEALTH = 150
 
 func return_pickaxe_damage(tool_name):
 	match tool_name:
+		"earthquake":
+			return EARTHQUAKE_DAMAGE
 		"flamethrower":
 			return FLAMETHROWER_DAMAGE
 		"fire projectile":
@@ -86,6 +89,8 @@ func return_pickaxe_damage(tool_name):
 
 func return_axe_damage(tool_name):
 	match tool_name:
+		"earthquake":
+			return EARTHQUAKE_DAMAGE
 		"flamethrower":
 			return FLAMETHROWER_DAMAGE
 		"fire projectile":
@@ -117,6 +122,8 @@ func return_axe_damage(tool_name):
 
 func return_sword_damage(tool_name):
 	match tool_name:
+		"earthquake":
+			return EARTHQUAKE_DAMAGE
 		"flamethrower":
 			return FLAMETHROWER_DAMAGE
 		"fire projectile":
@@ -151,6 +158,8 @@ func return_item_drop_quantity(tool_name, object_name):
 	match object_name:
 		"tree":
 			match tool_name:
+				"earthquake":
+					return 3
 				"flamethrower":
 					return 3
 				"fire projectile":
@@ -181,6 +190,8 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 18
 		"stump":
 			match tool_name:
+				"earthquake":
+					return 2
 				"flamethrower":
 					return 2
 				"fire projectile":
@@ -211,6 +222,8 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 12
 		"branch":
 			match tool_name:
+				"earthquake":
+					return 1
 				"flamethrower":
 					return 1
 				"fire projectile":
@@ -241,6 +254,8 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 6
 		"large ore":
 			match tool_name:
+				"earthquake":
+					return 3
 				"flamethrower":
 					return 3
 				"fire projectile":
@@ -269,6 +284,8 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 15
 		"small ore":
 			match tool_name:
+				"earthquake":
+					return 2
 				"flamethrower":
 					return 2
 				"fire projectile":
