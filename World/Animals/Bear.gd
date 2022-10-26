@@ -188,7 +188,6 @@ func hit(tool_name):
 		destroyed = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
-		animation_player.stop()
 		animation_player.play("death")
 		yield(animation_player, "animation_finished")
 		queue_free()

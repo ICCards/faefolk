@@ -7,10 +7,12 @@ onready var IceProjectile = preload("res://World/Objects/Projectiles/IceProjecti
 onready var EarthStrike = preload("res://World/Objects/Projectiles/EarthStrike.tscn")
 onready var FireProjectile = preload("res://World/Objects/Projectiles/FireProjectile.tscn")
 onready var FlameThrower = preload("res://World/Objects/Projectiles/Flamethrower.tscn")
+onready var DashGhost = preload("res://World/Objects/Projectiles/DashGhost.tscn")
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var composite_sprites = get_node("../CompositeSprites")
 
+var dashing = false
 
 enum {
 	MOVEMENT, 
@@ -24,8 +26,7 @@ enum {
 	MAGIC_CASTING
 }
 
-signal flame_thrower_finished
-signal fire_projectile_finished
+signal spell_finished
 
 var animation: String = ""
 var direction: String = "DOWN"
@@ -110,21 +111,21 @@ func cast(staff_name, spell_index):
 			match spell_index:
 				1:
 					play_fire_projectile()
-					yield(self, "fire_projectile_finished")
+					yield(self, "spell_finished")
 				2:
 					pass
 				3:
 					play_fire_explosion()
-					yield(self, "fire_projectile_finished")
+					yield(self, "spell_finished")
 				4:
 					play_flamethrower()
-					yield(self, "flame_thrower_finished")
+					yield(self, "spell_finished")
 		"wind staff":
 			match spell_index:
 				1:
 					play_wind_projectile()
 				2:
-					pass
+					play_dash()
 				3:
 					pass
 				4:
@@ -209,14 +210,46 @@ func play_ice_shield():
 # Wind #
 func play_wind_projectile():
 	var spell = TornadoProjectile.instance()
-	get_node("../../../").add_child(spell)
 	spell.position = $CastDirection/Position2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
+	get_node("../../../").add_child(spell)
+
+
+func play_dash():
+	$DustParticles.emitting = true
+	$DustBurst.rotation = (get_parent().input_vector*-1).angle()
+	$DustBurst.restart()
+	$DustBurst.emitting = true
+	set_player_whitened()
+	dashing = true
+	$GhostTimer.start()
+	yield(get_tree().create_timer(0.5), "timeout")
+	$DustParticles.emitting = false
+	$DustBurst.emitting = false
+	dashing = false
+	$GhostTimer.stop()
+
+func set_player_whitened():
+	composite_sprites.material.set_shader_param("flash_modifier", 0.7)
+	yield(get_tree().create_timer(0.5), "timeout")
+	composite_sprites.material.set_shader_param("flash_modifier", 0.0)
+
+var body_sprites = ["Shoes", "Shirts", "Pants", "Accessory", "Arms", "HeadAtr", "Body"]
+
+func _on_GhostTimer_timeout():
+	for sprite_name in body_sprites:
+		var sprite = get_node("../CompositeSprites/" + sprite_name)
+		var ghost: Sprite = DashGhost.instance()
+		get_node("../../").add_child(ghost)
+		ghost.global_position = global_position + Vector2(0,-32)
+		ghost.texture = sprite.texture
+		ghost.hframes = sprite.hframes
+		ghost.frame = sprite.frame
+	
 
 func play_whirlwind():
 	$Whirlwind/Area2D.tool_name = "whirlwind spell"
 	$Whirlwind/AnimationPlayer.play("play")
-
 
 # Fire #
 func play_fire_projectile():
@@ -226,7 +259,7 @@ func play_fire_projectile():
 		spell.position = $CastDirection/Position2D.global_position
 		spell.velocity = get_global_mouse_position() - spell.position
 		yield(get_tree().create_timer(0.25), "timeout")
-	emit_signal("fire_projectile_finished")
+	emit_signal("spell_finished")
 
 func play_fire_explosion():
 	for i in range(3):
@@ -235,7 +268,7 @@ func play_fire_explosion():
 		spell.position = $CastDirection/Position2D.global_position
 		spell.velocity = get_global_mouse_position() - spell.position
 		yield(get_tree().create_timer(0.25), "timeout")
-	emit_signal("fire_projectile_finished")
+	emit_signal("spell_finished")
 	
 func play_flamethrower():
 	var spell = FlameThrower.instance()
@@ -243,4 +276,5 @@ func play_flamethrower():
 	$CastDirection.add_child(spell)
 	spell.position = $CastDirection/Position2D.position
 	yield(get_tree().create_timer(3.0), "timeout")
-	emit_signal("flame_thrower_finished")
+	emit_signal("spell_finished")
+

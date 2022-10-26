@@ -29,3 +29,5 @@ func _on_Area2D_area_entered(area):
 
 
 
+func _on_Timer_timeout():
+	queue_free()

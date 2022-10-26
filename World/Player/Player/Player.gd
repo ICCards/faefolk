@@ -36,6 +36,7 @@ var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
 var MAX_SPEED_DIRT := 13
 var MAX_SPEED_PATH := 14.5
+var DASH_SPEED := 55
 var MAX_SPEED_SWIMMING := 12
 var is_walking_on_dirt: bool = true
 var is_swimming: bool = false
@@ -235,7 +236,6 @@ func _unhandled_input(event):
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif item_name == "blueprint" and current_building_item != null:
 					show_placable_object(current_building_item, "BUILDING")
-		
 				if event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
 					fish()
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
@@ -430,7 +430,9 @@ func movement_state(delta):
 				velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta )
 			else:
 				velocity = velocity.move_toward(Vector2.ZERO, delta/3)
-		if is_walking_on_dirt:
+		if $Magic.dashing:
+			move_and_collide(velocity * DASH_SPEED)
+		elif is_walking_on_dirt:
 			move_and_collide(velocity * MAX_SPEED_DIRT * running_speed_change)
 		else:
 			move_and_collide(velocity * MAX_SPEED_PATH * running_speed_change)
