@@ -1,14 +1,45 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://World/Objects/Projectiles/DashGhost.gd" type="Script" id=1]
-[ext_resource path="res://index.icon.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Themes/whiten.tres" type="Material" id=3]
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 1.0
+
+[sub_resource type="StreamTexture" id=18]
+load_path = "res://.import/index.icon.png-5665fad188e88d1e882500a4376bfe02.stex"
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends Sprite
+
+
+
+func _ready():
+	$Tween.interpolate_property(self, \"modulate:a\", 1.0, 0.0, 0.5, 3, 1)
+	$Tween.start()
+
+
+func _on_Tween_tween_completed(object, key):
+	queue_free()
+"
 
 [node name="DashGhost" type="Sprite"]
-material = ExtResource( 3 )
+material = SubResource( 17 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
-script = ExtResource( 1 )
+texture = SubResource( 18 )
+script = SubResource( 19 )
 
 [node name="Tween" type="Tween" parent="."]
 

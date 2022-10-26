@@ -54,6 +54,7 @@ func wait_for_cast_release(staff_name):
 
 func cast_spell(staff_name, init_direction):
 	if get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown():
+		direction = init_direction
 		PlayerStats.decrease_energy()
 		if get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell != 2:
 			get_parent().state = MAGIC_CASTING
@@ -102,7 +103,7 @@ func cast(staff_name, spell_index):
 				1:
 					play_lightning_projectile()
 				2:
-					pass
+					play_flash_step()
 				3:
 					pass
 				4:
@@ -175,6 +176,19 @@ func play_earth_strike():
 	spell.position = get_global_mouse_position()
 
 # Lightning #
+
+func play_flash_step():
+	get_parent().position = get_global_mouse_position()
+	composite_sprites.material.set_shader_param("flash_modifier", 0.7)
+	yield(get_tree().create_timer(0.2), "timeout")
+	composite_sprites.material.set_shader_param("flash_modifier", 0.0)
+	$Electricity.show()
+	$Electricity.play("play")
+	yield($Electricity, "animation_finished")
+	$Electricity.play("play")
+	yield($Electricity, "animation_finished")
+	$Electricity.hide()
+
 func play_lightning_projectile():
 	var spell = LightningProjectile.instance()
 	get_node("../../../").add_child(spell)

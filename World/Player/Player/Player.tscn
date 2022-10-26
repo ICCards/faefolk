@@ -5890,7 +5890,7 @@ animations = [ {
 "frames": [ SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ) ],
 "loop": true,
 "name": "play",
-"speed": 5.0
+"speed": 8.0
 } ]
 
 [sub_resource type="AtlasTexture" id=147]
@@ -6531,7 +6531,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 3
+frame = 4
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Magic"]
@@ -6539,7 +6539,7 @@ visible = false
 position = Vector2( 0, -91 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 14
+frame = 13
 playing = true
 
 [node name="GhostTimer" type="Timer" parent="Magic"]
