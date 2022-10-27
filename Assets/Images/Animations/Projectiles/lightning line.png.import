@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1Iceburg_End.png-4382224b1b1ed905e5b4ddf60d2693ad.stex"
+path="res://.import/lightning line.png-215d736d4f6b81cb2f7c1e00cedb7e93.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Magic/ice defense/1Iceburg_End.png"
-dest_files=[ "res://.import/1Iceburg_End.png-4382224b1b1ed905e5b4ddf60d2693ad.stex" ]
+source_file="res://Assets/Images/Animations/Projectiles/lightning line.png"
+dest_files=[ "res://.import/lightning line.png-215d736d4f6b81cb2f7c1e00cedb7e93.stex" ]
 
 [params]
 

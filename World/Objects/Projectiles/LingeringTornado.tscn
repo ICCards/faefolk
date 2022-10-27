@@ -1,0 +1,165 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://World/Objects/Projectiles/LingeringTornado.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Magic/wind/projectile.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 0, 0 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 2 )
+region = Rect2( 112, 0, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 2 )
+region = Rect2( 224, 0, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 2 )
+region = Rect2( 336, 0, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 112, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 112, 112, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 224, 112, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 336, 112, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 224, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 2 )
+region = Rect2( 112, 224, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 2 )
+region = Rect2( 224, 112, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 2 )
+region = Rect2( 336, 112, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 224, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 2 )
+region = Rect2( 112, 224, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
+region = Rect2( 224, 0, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 2 )
+region = Rect2( 336, 0, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 112, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 2 )
+region = Rect2( 112, 112, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 112, 0, 112, 112 )
+
+[sub_resource type="SpriteFrames" id=40]
+animations = [ {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
+"loop": false,
+"name": "anim",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": false,
+"name": "end",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": true,
+"name": "middle",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": false,
+"name": "start",
+"speed": 8.0
+} ]
+
+[sub_resource type="GDScript" id=43]
+script/source = "extends Area2D
+
+
+var tool_name = \"\"
+var knockback_vector = Vector2.ZERO
+"
+
+[sub_resource type="CircleShape2D" id=44]
+radius = 54.037
+
+[sub_resource type="Animation" id=45]
+resource_name = "play"
+length = 2.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true, false, true, false, true ]
+}
+
+[node name="LingeringTornado" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -45 )
+shape = SubResource( 39 )
+disabled = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 29, -117 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 40 )
+animation = "anim"
+frame = 9
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2( 0, -45 )
+collision_layer = 0
+collision_mask = 264192
+script = SubResource( 43 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, -9 )
+shape = SubResource( 44 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/play = SubResource( 45 )

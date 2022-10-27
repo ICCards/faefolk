@@ -16,13 +16,17 @@ var frozen: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
-#var desired_velocity := Vector2.ZERO
+var d := 0.0
+var orbit_speed := 5.0
+var orbit_radius
 
 var rng = RandomNumberGenerator.new()
 var state = IDLE
 var health: int = Stats.BEAR_HEALTH
 var KNOCKBACK_AMOUNT = 300
 var MAX_MOVE_DISTANCE: float = 400.0
+
+var tornado_node = null
 
 enum {
 	CHASE,
@@ -35,6 +39,7 @@ func _ready():
 	hide()
 	animation_player.play("loop")
 	randomize()
+	orbit_radius = rand_range(40, 60)
 	_idle_timer.wait_time = rand_range(4.0, 6.0)
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
@@ -60,8 +65,13 @@ func get_random_pos():
 	else:
 		return position
 
-
 func _physics_process(delta):
+	if tornado_node:
+		if is_instance_valid(tornado_node):
+			d += delta
+			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
+		else: 
+			tornado_node = null
 	if not visible or destroyed:
 		return
 	set_direction()
@@ -84,6 +94,8 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(_velocity)
 
 func move(velocity: Vector2) -> void:
+	if tornado_node:
+		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
 	elif not attacking and not destroyed:
@@ -202,6 +214,8 @@ func _on_HurtBox_area_entered(area):
 		hit(area.tool_name)
 	if area.tool_name == "ice projectile":
 		start_frozen_state()
+	if area.tool_name == "lingering tornado":
+		tornado_node = area
 
 
 func start_frozen_state():

@@ -6,7 +6,7 @@ const MAX_TWIG_WALL = 3
 const MAX_WOOD_WALL = 100
 const MAX_STONE_WALL = 500
 const MAX_METAL_WALL = 1000
-const MAX_ARMORED_WALL = 2000
+const MAX_ARMORED_WALL = 200063
 
 const BOW_HEALTH = 50
 const WOOD_TOOL_HEALTH = 25
@@ -44,6 +44,7 @@ const EARTH_STRIKE_DAMAGE = 20
 const FIRE_PROJECTILE_DAMAGE = 20
 const FLAMETHROWER_DAMAGE = 20
 const EARTHQUAKE_DAMAGE = 20
+const LINGERING_TORNADO_DAMAGE = 20
 
 const MAX_STONE_WATERING_CAN = 25
 const MAX_BRONZE_WATERING_CAN = 50
@@ -66,10 +67,12 @@ func return_pickaxe_damage(tool_name):
 			return FIRE_PROJECTILE_DAMAGE
 		"earth strike":
 			return EARTH_STRIKE_DAMAGE
-		"ice projectile":
+		"ice spear":
 			return ICE_SPELL_DAMAGE
 		"tornado spell":
 			return TORNADO_SPELL_DAMAGE
+		"lingering tornado":
+			return LINGERING_TORNADO_DAMAGE
 		"whirlwind spell":
 			return LIGHTNING_SPELL_DAMAGE
 		"lightning spell":
@@ -97,10 +100,12 @@ func return_axe_damage(tool_name):
 			return FIRE_PROJECTILE_DAMAGE
 		"earth strike":
 			return EARTH_STRIKE_DAMAGE
-		"ice projectile":
+		"ice spear":
 			return ICE_SPELL_DAMAGE
 		"tornado spell":
 			return TORNADO_SPELL_DAMAGE
+		"lingering tornado":
+			return LINGERING_TORNADO_DAMAGE
 		"whirlwind spell":
 			return LIGHTNING_SPELL_DAMAGE
 		"lightning spell":
@@ -130,10 +135,12 @@ func return_sword_damage(tool_name):
 			return FIRE_PROJECTILE_DAMAGE
 		"earth strike":
 			return EARTH_STRIKE_DAMAGE
-		"ice projectile":
+		"ice spear":
 			return ICE_SPELL_DAMAGE
 		"tornado spell":
 			return TORNADO_SPELL_DAMAGE
+		"lingering tornado":
+			return LINGERING_TORNADO_DAMAGE
 		"whirlwind spell":
 			return LIGHTNING_SPELL_DAMAGE
 		"lightning spell":
@@ -166,9 +173,11 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 3
 				"earth strike":
 					return 3
-				"ice projectile":
+				"ice spear":
 					return 3
 				"tornado spell":
+					return 3
+				"lingering tornado":
 					return 3
 				"whirlwind spell":
 					return 3
@@ -198,9 +207,11 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 2
 				"earth strike":
 					return 2
-				"ice projectile":
+				"ice spear":
 					return 2
 				"tornado spell":
+					return 2
+				"lingering tornado":
 					return 2
 				"whirlwind spell":
 					return 2
@@ -230,9 +241,11 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 1
 				"earth strike":
 					return 1
-				"ice projectile":
+				"ice spear":
 					return 1
 				"tornado spell":
+					return 1
+				"lingering tornado":
 					return 1
 				"whirlwind spell":
 					return 1
@@ -262,10 +275,12 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 3
 				"earth strike":
 					return 3
-				"ice projectile":
+				"ice spear":
 					return 3
 				"tornado spell":
 					return 3
+				"lingering tornado":
+					return 2
 				"whirlwind spell":
 					return 3
 				"lightning spell":
@@ -292,9 +307,11 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 2
 				"earth strike":
 					return 2
-				"ice projectile":
+				"ice spear":
 					return 2
 				"tornado spell":
+					return 2
+				"lingering tornado":
 					return 2
 				"whirlwind spell":
 					return 2

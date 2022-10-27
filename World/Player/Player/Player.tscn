@@ -1,4 +1,4 @@
-[gd_scene load_steps=224 format=2]
+[gd_scene load_steps=226 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
@@ -72,9 +72,9 @@
 [ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX019.png" type="Texture" id=70]
 [ext_resource path="res://Assets/Images/Animations/Projectiles/whirlwind/FX027.png" type="Texture" id=71]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=72]
-[ext_resource path="res://Assets/Images/Magic/ice defense/1Iceburg_Start.png" type="Texture" id=73]
-[ext_resource path="res://Assets/Images/Magic/ice defense/1Iceburg_Idle.png" type="Texture" id=74]
-[ext_resource path="res://Assets/Images/Magic/ice defense/1Iceburg_End.png" type="Texture" id=75]
+[ext_resource path="res://Assets/Images/Magic/ice/2/1Iceburg_Start.png" type="Texture" id=73]
+[ext_resource path="res://Assets/Images/Magic/ice/2/1Iceburg_Idle.png" type="Texture" id=74]
+[ext_resource path="res://Assets/Images/Magic/ice/2/1Iceburg_End.png" type="Texture" id=75]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=76]
 [ext_resource path="res://Assets/Images/Magic/lightning/ThunderDrop/ThunderDrop_Big.png" type="Texture" id=77]
 [ext_resource path="res://Assets/Images/Magic/lightning/ThunderDrop/ThunderDrop_Small.png" type="Texture" id=78]
@@ -5598,8 +5598,16 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[sub_resource type="CircleShape2D" id=74]
-radius = 524.452
+[sub_resource type="GDScript" id=173]
+script/source = "extends Area2D
+
+
+var tool_name = \"\"
+var knockback_vector = Vector2.ZERO
+"
+
+[sub_resource type="CircleShape2D" id=174]
+radius = 97.0206
 
 [sub_resource type="Animation" id=163]
 length = 0.001
@@ -6062,6 +6070,9 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 [sub_resource type="Curve" id=171]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
+[sub_resource type="CircleShape2D" id=74]
+radius = 524.452
+
 [sub_resource type="Animation" id=172]
 resource_name = "play"
 length = 3.0
@@ -6514,9 +6525,9 @@ position = Vector2( 0, -32 )
 position = Vector2( 40, -7.62939e-06 )
 
 [node name="Whirlwind" type="Node2D" parent="Magic"]
-visible = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Magic/Whirlwind"]
+visible = false
 position = Vector2( -8, -25 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 73 )
@@ -6524,13 +6535,14 @@ frame = 44
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Magic/Whirlwind"]
+visible = false
 collision_layer = 0
 collision_mask = 264192
-script = ExtResource( 72 )
+script = SubResource( 173 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Magic/Whirlwind/Area2D"]
 position = Vector2( 0, -31 )
-shape = SubResource( 74 )
+shape = SubResource( 174 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Magic/Whirlwind"]
@@ -6539,7 +6551,7 @@ anims/play = SubResource( 164 )
 
 [node name="Iceberg" type="AnimatedSprite" parent="Magic"]
 visible = false
-modulate = Color( 1, 1, 1, 0.54902 )
+modulate = Color( 1, 1, 1, 0.627451 )
 position = Vector2( 0, -58 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 91 )
@@ -6553,7 +6565,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 5
+frame = 3
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Magic"]
@@ -6561,7 +6573,7 @@ visible = false
 position = Vector2( 0, -91 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 4
+frame = 6
 playing = true
 
 [node name="GhostTimer" type="Timer" parent="Magic"]
@@ -6610,6 +6622,7 @@ anim_speed_curve = SubResource( 171 )
 [node name="Earthquake" type="Node2D" parent="Magic"]
 
 [node name="Area2D" type="Area2D" parent="Magic/Earthquake"]
+visible = false
 collision_layer = 0
 collision_mask = 262144
 script = ExtResource( 72 )

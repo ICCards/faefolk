@@ -3,11 +3,13 @@ extends Node2D
 onready var LightningProjectile = preload("res://World/Objects/Projectiles/LightningProjectile.tscn")
 onready var ExplosionProjectile = preload("res://World/Objects/Projectiles/ExplosionProjectile.tscn")
 onready var TornadoProjectile = preload("res://World/Objects/Projectiles/TornadoProjectile.tscn")
-onready var IceProjectile = preload("res://World/Objects/Projectiles/IceProjectile.tscn")
 onready var EarthStrike = preload("res://World/Objects/Projectiles/EarthStrike.tscn")
 onready var FireProjectile = preload("res://World/Objects/Projectiles/FireProjectile.tscn")
 onready var FlameThrower = preload("res://World/Objects/Projectiles/Flamethrower.tscn")
 onready var DashGhost = preload("res://World/Objects/Projectiles/DashGhost.tscn")
+onready var IceSpear = preload("res://World/Objects/Projectiles/IceSpear.tscn")
+onready var IceSpearRain = preload("res://World/Objects/Projectiles/IceSpearRain.tscn")
+onready var LingeringTornado = preload("res://World/Objects/Projectiles/LingeringTornado.tscn")
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var composite_sprites = get_node("../CompositeSprites")
@@ -91,7 +93,8 @@ func _physics_process(delta):
 			direction = "LEFT"
 		else:
 			direction = "DOWN"
-	composite_sprites.set_player_animation(get_parent().character, "magic_cast_" + direction.to_lower(), "magic staff")
+	if get_parent().state != DYING:
+		composite_sprites.set_player_animation(get_parent().character, "magic_cast_" + direction.to_lower(), "magic staff")
 
 
 func cast(staff_name, spell_index):
@@ -128,17 +131,17 @@ func cast(staff_name, spell_index):
 				2:
 					play_dash()
 				3:
-					pass
+					play_lingering_tornado()
 				4:
 					play_whirlwind()
 		"ice staff":
 			match spell_index:
 				1:
-					play_ice_projectile()
+					play_ice_spear()
 				2:
 					play_ice_shield()
 				3:
-					pass
+					play_ice_spear_rain()
 				4:
 					pass
 		"earth staff":
@@ -203,12 +206,16 @@ func play_lightning_projectile():
 
 
 # Ice #
-func play_ice_projectile():
-	var spell = IceProjectile.instance()
+
+func play_ice_spear():
+	var spell = IceSpear.instance()
 	get_node("../../../").add_child(spell)
-	spell.transform = $CastDirection.transform
-	spell.position = $CastDirection/Position2D.global_position
-	spell.velocity = get_global_mouse_position() - spell.position
+	spell.position = get_global_mouse_position()
+
+func play_ice_spear_rain():
+	var spell = IceSpearRain.instance()
+	get_node("../../../").add_child(spell)
+	spell.position = get_global_mouse_position()
 
 func play_ice_shield():
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", true)
@@ -227,6 +234,14 @@ func play_ice_shield():
 
 
 # Wind #
+
+func play_lingering_tornado():
+	var spell = LingeringTornado.instance()
+	spell.target = get_global_mouse_position() + Vector2(0,32)
+	spell.position = $CastDirection/Position2D.global_position
+	spell.velocity = get_global_mouse_position() - spell.position 
+	get_node("../../../").add_child(spell)
+
 func play_wind_projectile():
 	var spell = TornadoProjectile.instance()
 	spell.position = $CastDirection/Position2D.global_position

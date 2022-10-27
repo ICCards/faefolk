@@ -15,16 +15,5 @@ func _ready():
 	#$Area2D.knockback_vector = velocity
 	$AnimatedSprite.play("anim")
 	yield($AnimatedSprite, "animation_finished")
-#	$AnimatedSprite.play("middle")
-#	yield($AnimatedSprite, "animation_finished")
-##	$AnimatedSprite.play("middle")
-##	yield($AnimatedSprite, "animation_finished")
-#	$AnimatedSprite.play("end")
-#	yield($AnimatedSprite, "animation_finished")
 	queue_free()
 
-
-func _on_Area2D_area_entered(area):
-	$Area2D/CollisionShape2D.set_deferred("disabled", true)
-	$CollisionShape2D.set_deferred("disabled", true)
-	collided = true

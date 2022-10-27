@@ -14,6 +14,10 @@ var health: int = Stats.DUCK_HEALTH
 var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 500.0
 var random_pos
+var d := 0.0
+var orbit_speed := 5.0
+var orbit_radius
+var tornado_node
 
 func _ready():
 	hide()
@@ -27,6 +31,7 @@ func set_random_attributes():
 	randomize()
 	Images.DuckVariations.shuffle()
 	$AnimatedSprite.frames = Images.DuckVariations[0]
+	orbit_radius = rand_range(30, 70)
 	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
 		$AnimatedSprite.flip_h = true
@@ -52,6 +57,12 @@ func get_random_pos():
 		return position
 
 func _physics_process(delta):
+	if tornado_node:
+		if is_instance_valid(tornado_node):
+			d += delta
+			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
+		else: 
+			tornado_node = null
 	if not visible or destroyed or is_eating:
 		return
 	if navigation_agent.is_navigation_finished():
@@ -81,6 +92,8 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = true
 		
 func move(velocity: Vector2) -> void:
+	if tornado_node:
+		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
 	elif running_state:
@@ -105,6 +118,8 @@ func _on_HurtBox_area_entered(area):
 		hit(area.tool_name)
 	if area.tool_name == "ice projectile":
 		start_frozen_state()
+	if area.tool_name == "lingering tornado":
+		tornado_node = area
 		
 func start_frozen_state():
 	$FrozenTimer.stop()
@@ -115,7 +130,7 @@ func start_frozen_state():
 func hit(tool_name):
 	is_eating = false
 	start_run_state()
-	deduct_health(tool_name)
+	health -= Stats.return_sword_damage(tool_name)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 	if health <= 0 and not destroyed:
@@ -130,21 +145,6 @@ func hit(tool_name):
 		yield($AnimationPlayer, "animation_finished")
 		queue_free()
 
-func deduct_health(tool_name):
-	match tool_name:
-		"wood sword":
-			health -= Stats.WOOD_SWORD_DAMAGE
-		"stone sword":
-			health -= Stats.STONE_SWORD_DAMAGE
-		"bronze sword":
-			health -= Stats.BRONZE_SWORD_DAMAGE
-		"iron sword":
-			health -= Stats.IRON_SWORD_DAMAGE
-		"gold sword":
-			health -= Stats.GOLD_SWORD_DAMAGE
-		"arrow":
-			health -= Stats.ARROW_DAMAGE
-	
 func start_run_state():
 	running_state = true
 	$RunStateTimer.start()

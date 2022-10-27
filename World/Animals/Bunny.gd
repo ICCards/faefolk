@@ -14,13 +14,19 @@ var health: int = Stats.BUNNY_HEALTH
 var running_state: bool = false
 var random_pos
 var MAX_MOVE_DISTANCE: float = 500.0
+var d := 0.0
+var orbit_speed := 5.0
+var orbit_radius
+var tornado_node
 
 func _ready(): 
 	hide()
+	randomize()
 	set_random_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
 	navigation_agent.connect("velocity_computed", self, "move")
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	orbit_radius = rand_range(30,70)
 	#navigation_agent.set_navigation_map(get_world_2d().navigation_map)
 
 func set_random_attributes():
@@ -52,7 +58,14 @@ func get_random_pos():
 func _update_pathfinding() -> void:
 	navigation_agent.set_target_location(get_random_pos())
 
+
 func _physics_process(delta):
+	if tornado_node:
+		if is_instance_valid(tornado_node):
+			d += delta
+			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
+		else: 
+			tornado_node = null
 	if not visible or destroyed:
 		return
 	if is_sleeping:
@@ -75,6 +88,8 @@ func _physics_process(delta):
 
 
 func move(velocity: Vector2) -> void:
+	if tornado_node:
+		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
 	elif running_state:
@@ -93,7 +108,7 @@ func hit(tool_name):
 	if is_sleeping:
 		is_sleeping = false
 	start_run_state()
-	deduct_health(tool_name)
+	health -= Stats.return_sword_damage(tool_name)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 	if health <= 0 and not destroyed:
@@ -116,6 +131,8 @@ func _on_HurtBox_area_entered(area):
 		hit(area.tool_name)
 	if area.tool_name == "ice projectile":
 		start_frozen_state()
+	if area.tool_name == "lingering tornado":
+		tornado_node = area
 	
 	
 func start_frozen_state():
@@ -129,22 +146,6 @@ func start_run_state():
 	$RunStateTimer.start()
 	_timer.wait_time = 2.0
 	_update_pathfinding()
-
-
-func deduct_health(tool_name):
-	match tool_name:
-		"wood sword":
-			health -= Stats.WOOD_SWORD_DAMAGE
-		"stone sword":
-			health -= Stats.STONE_SWORD_DAMAGE
-		"bronze sword":
-			health -= Stats.BRONZE_SWORD_DAMAGE
-		"iron sword":
-			health -= Stats.IRON_SWORD_DAMAGE
-		"gold sword":
-			health -= Stats.GOLD_SWORD_DAMAGE
-		"arrow":
-			health -= Stats.ARROW_DAMAGE
 
 
 func _on_DetectPlayer_area_entered(area):
