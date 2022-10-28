@@ -11,8 +11,7 @@ func _physics_process(delta):
 func _ready():
 	if velocity.x < 0:
 		$AnimatedSprite.flip_h = true
-	$Area2D.tool_name = "tornado spell"
-	#$Area2D.knockback_vector = velocity
+	$Hitbox.tool_name = "tornado spell"
 	$AnimatedSprite.play("anim")
 	yield($AnimatedSprite, "animation_finished")
 	queue_free()

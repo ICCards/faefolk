@@ -491,8 +491,8 @@ func walk_state(_direction):
 		animation_player.play("swim")
 		composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
-var temp = 0
 
+var temp = 0
 func decrease_energy_or_health():
 	temp += 1
 	if temp > 500:

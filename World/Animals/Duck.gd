@@ -8,6 +8,7 @@ onready var navigation_agent = $NavigationAgent2D
 
 var is_eating: bool = false
 var destroyed: bool = false
+var stunned: bool = false
 var frozen: bool = false
 var _velocity := Vector2.ZERO
 var health: int = Stats.DUCK_HEALTH
@@ -63,7 +64,7 @@ func _physics_process(delta):
 			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
 		else: 
 			tornado_node = null
-	if not visible or destroyed or is_eating:
+	if not visible or destroyed or is_eating or stunned:
 		return
 	if navigation_agent.is_navigation_finished():
 		if not frozen:
@@ -92,7 +93,7 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = true
 		
 func move(velocity: Vector2) -> void:
-	if tornado_node:
+	if tornado_node or stunned:
 		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
@@ -120,19 +121,23 @@ func _on_HurtBox_area_entered(area):
 		start_frozen_state()
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
-		
+	if area.special_ability == "stun":
+		start_stunned_state()
+
 func start_frozen_state():
 	$FrozenTimer.stop()
 	$FrozenTimer.start()
 	$AnimatedSprite.modulate = Color("00c9ff")
 	frozen = true
 
-func hit(tool_name):
+func hit(tool_name, var special_ability = ""):
 	is_eating = false
 	start_run_state()
 	health -= Stats.return_sword_damage(tool_name)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
+	if special_ability == "stun":
+		start_stunned_state()
 	if health <= 0 and not destroyed:
 		set_physics_process(false)
 		destroyed = true
@@ -166,3 +171,14 @@ func _on_RunStateTimer_timeout():
 func _on_FrozenTimer_timeout():
 	$AnimatedSprite.modulate = Color("ffffff")
 	frozen = false
+
+
+func start_stunned_state():
+	if not destroyed:
+		stunned = true
+		$AnimatedSprite.playing = false
+		$StunnedTimer.start()
+		
+func _on_StunnedTimer_timeout():
+	$AnimatedSprite.playing = true
+	stunned = false

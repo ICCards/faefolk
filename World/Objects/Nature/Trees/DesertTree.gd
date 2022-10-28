@@ -32,7 +32,7 @@ func _on_TreeHurtbox_area_entered(area):
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		hit(area.tool_name)
 
-func hit(tool_name):
+func hit(tool_name, var special_ability = ""):
 	health -= Stats.return_axe_damage(tool_name)
 	Server.generated_map["tree"][name]["h"] = health
 	var data = {"id": name, "n": "tree"}

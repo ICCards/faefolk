@@ -62,7 +62,7 @@ func setTexture(ore):
 		smallOreSprite.visible = true
 
 
-func hit(tool_name):
+func hit(tool_name, var special_ability = ""):
 	rng.randomize()
 	#var data = {"id": name, "n": "large_ore"}
 	#Server.action("ON_HIT", data)

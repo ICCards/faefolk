@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ThunderDrop_Big.png-270545c3549d95c01a1fb46f72469dab.stex"
+path="res://.import/Ice2 (100x100px).png-fa33c45d21bc257a762bd99b31e7dadb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Magic/lightning/ThunderDrop/ThunderDrop_Big.png"
-dest_files=[ "res://.import/ThunderDrop_Big.png-270545c3549d95c01a1fb46f72469dab.stex" ]
+source_file="res://Assets/Images/Magic/ice/1/Ice2 (100x100px).png"
+dest_files=[ "res://.import/Ice2 (100x100px).png-fa33c45d21bc257a762bd99b31e7dadb.stex" ]
 
 [params]
 

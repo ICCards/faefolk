@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ice_spear_from_sky_single-Sheet.png-d9a5e2666570e9bf7370c7b9246b1d25.stex"
+path="res://.import/Untitled_10-27-2022_07-00-20.png-83ba95f361d6f718d4b6920d57782b19.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Magic/ice/1/ice_spear_from_sky_single-Sheet.png"
-dest_files=[ "res://.import/ice_spear_from_sky_single-Sheet.png-d9a5e2666570e9bf7370c7b9246b1d25.stex" ]
+source_file="res://Assets/mouse cursors/Untitled_10-27-2022_07-00-20.png"
+dest_files=[ "res://.import/Untitled_10-27-2022_07-00-20.png-83ba95f361d6f718d4b6920d57782b19.stex" ]
 
 [params]
 

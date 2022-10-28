@@ -11,8 +11,8 @@ func _physics_process(delta):
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
-	$Area2D.tool_name = "explosion spell"
-	$ExplosionArea.tool_name = "explosion"
+	$Hitbox.tool_name = "explosion spell"
+	$ExplosionHitbox.tool_name = "explosion"
 
 
 func _on_Area2D_area_entered(area):
@@ -21,12 +21,11 @@ func _on_Area2D_area_entered(area):
 	$Explosion.frame = 1
 	$Explosion.play("explode")
 	animation_player.play("explode")
-	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
 	collided = true
 	yield($Explosion, "animation_finished")
 	queue_free()
-
 
 
 func _on_Timer_timeout():

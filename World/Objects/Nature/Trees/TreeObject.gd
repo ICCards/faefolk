@@ -99,7 +99,7 @@ func PlayEffect(player_id):
 		queue_free()
 
 
-func hit(tool_name):
+func hit(tool_name, var special_ability = ""):
 	if health == 100:
 		InstancedScenes.initiateBirdEffect(position)
 	health -= Stats.return_axe_damage(tool_name)

@@ -908,12 +908,12 @@ shape = SubResource( 24 )
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, -40 )
 collision_layer = 262400
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 0, 15 )
 shape = SubResource( 14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
@@ -967,6 +967,11 @@ wait_time = 45.0
 
 [node name="FrozenTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
+
+[node name="StunnedTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -975,3 +980,4 @@ wait_time = 5.0
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
+[connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]

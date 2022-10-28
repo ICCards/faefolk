@@ -38,12 +38,12 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 flip_h = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 256
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 11, -1 )
 rotation = 1.5708
 shape = SubResource( 2 )
@@ -51,4 +51,4 @@ shape = SubResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/fade out" = SubResource( 3 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]

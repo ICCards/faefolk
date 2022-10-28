@@ -34,7 +34,7 @@ radius = 77.6466
 [sub_resource type="Animation" id=5]
 resource_name = "explode"
 tracks/0/type = "value"
-tracks/0/path = NodePath("ExplosionArea/CollisionShape2D:disabled")
+tracks/0/path = NodePath("ExplosionHitbox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -114,23 +114,23 @@ animation = "explode"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 position = Vector2( -17, 0 )
 collision_layer = 0
 collision_mask = 262144
 script = ExtResource( 11 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 17, 0 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[node name="ExplosionArea" type="Area2D" parent="."]
+[node name="ExplosionHitbox" type="Area2D" parent="."]
 collision_layer = 128
 collision_mask = 264192
 script = ExtResource( 11 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitbox"]
 shape = SubResource( 6 )
 disabled = true
 
@@ -142,10 +142,10 @@ position = Vector2( 0, -11 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 18 )
 animation = "play"
-frame = 1
+frame = 11
 playing = true
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

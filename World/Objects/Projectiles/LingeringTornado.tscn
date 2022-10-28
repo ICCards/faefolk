@@ -2,6 +2,7 @@
 
 [ext_resource path="res://World/Objects/Projectiles/LingeringTornado.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Magic/wind/projectile.png" type="Texture" id=2]
+[ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=39]
 extents = Vector2( 0, 0 )
@@ -109,14 +110,6 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="GDScript" id=43]
-script/source = "extends Area2D
-
-
-var tool_name = \"\"
-var knockback_vector = Vector2.ZERO
-"
-
 [sub_resource type="CircleShape2D" id=44]
 radius = 54.037
 
@@ -155,7 +148,7 @@ frame = 9
 position = Vector2( 0, -45 )
 collision_layer = 0
 collision_mask = 264192
-script = SubResource( 43 )
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -9 )

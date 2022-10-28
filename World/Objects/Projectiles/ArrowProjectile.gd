@@ -10,8 +10,8 @@ func _physics_process(delta):
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
-	$Area2D.tool_name = "arrow"
-	$Area2D.knockback_vector = velocity
+	$Hitbox.tool_name = "arrow"
+	$Hitbox.knockback_vector = velocity
 	yield(get_tree().create_timer(1.0), "timeout")
 	$AnimationPlayer.play("fade out")
 	yield($AnimationPlayer, "animation_finished")
@@ -19,6 +19,6 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
-	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
 	collided = true

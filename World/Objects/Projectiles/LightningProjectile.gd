@@ -6,14 +6,16 @@ var velocity = Vector2(0,0)
 var speed = 500
 var collided = false
 var path
+var debuff 
 
 func _physics_process(delta):
 	if not collided:
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
-	$Area2D.tool_name = "lightning spell"
-	$Area2D.knockback_vector = Vector2.ZERO
+	if debuff:
+		$Hitbox.special_ability = "stun"
+	$Hitbox.tool_name = "lightning spell"
 	projectile_sprite.play("default")
 	
 func _on_Area2D_area_entered(area):
@@ -23,47 +25,34 @@ func chain_effect(start_name):
 	var nodes = []
 	for node in get_node("/root/World/NatureObjects").get_children():
 		if not node.destroyed and self.position.distance_to(node.position) < 250 and node.name != start_name:
-			node.hit("lightning spell")
+			node.hit("lightning spell", $Hitbox.special_ability)
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
 	for node in get_node("/root/World/Animals").get_children():
 		if not node.destroyed and self.position.distance_to(node.position) < 250 and node.name != start_name:
-			node.hit("lightning spell")
+			node.hit("lightning spell", $Hitbox.special_ability)
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
 	yield(get_tree(), 'idle_frame')
 	Server.world.draw_mst(find_mst(nodes))
 	queue_free()
 
 func find_mst(nodes):
-	# Prim's algorithm
-	# Given an array of positions (nodes), generates a minimum
-	# spanning tree
-	# Returns an AStar object
-
-	# Initialize the AStar and add the first point
 	var path = AStar.new()
 	path.add_point(path.get_available_point_id(), nodes.pop_front())
-
-	# Repeat until no more nodes remain
+	
 	while nodes:
-		var min_dist = INF  # Minimum distance found so far
-		var min_p = null  # Position of that node
-		var p = null  # Current position
-		# Loop through the points in the path
+		var min_dist = INF
+		var min_p = null 
+		var p = null  
 		for p1 in path.get_points():
 			p1 = path.get_point_position(p1)
-			# Loop through the remaining nodes in the given array
 			for p2 in nodes:
-				# If the node is closer, make it the closest
 				if p1.distance_to(p2) < min_dist:
 					min_dist = p1.distance_to(p2)
 					min_p = p2
 					p = p1
-		# Insert the resulting node into the path and add
-		# its connection
 		var n = path.get_available_point_id()
 		path.add_point(n, min_p)
 		path.connect_points(path.get_closest_point(p), n)
-		# Remove the node from the array so it isn't visited again
 		nodes.erase(min_p)
 	return path
 

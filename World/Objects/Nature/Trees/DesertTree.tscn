@@ -102,6 +102,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 3, 23 )
 frames = ExtResource( 1 )
+frame = 2
 playing = true
 offset = Vector2( 0, -48.3333 )
 

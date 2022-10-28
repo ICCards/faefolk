@@ -37,7 +37,7 @@ func setTreeBranchType(num):
 		tree_variety = 'C'
 	log_sprite.texture = Images.tree_branch_objects[num]
 
-func hit(tool_name):
+func hit(tool_name, var special_ability = ""):
 	if not destroyed:
 		destroyed = true
 		Server.generated_map["log"].erase(name)

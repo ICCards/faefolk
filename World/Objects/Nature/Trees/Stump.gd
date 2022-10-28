@@ -47,7 +47,7 @@ func PlayEffect(player_id):
 		yield(sound_effects, "finished")
 		queue_free()
 		
-func hit(tool_name):
+func hit(tool_name, var special_ability = ""):
 	health -= Stats.return_axe_damage(tool_name)
 	Server.generated_map["stump"][name]["h"] = health
 	if health > 0:

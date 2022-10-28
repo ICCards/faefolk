@@ -9,6 +9,7 @@ onready var _end_chase_state_timer: Timer = $EndChaseState
 var player = Server.player_node
 var direction: String = "down"
 var destroyed: bool = false
+var stunned: bool = false
 var attacking: bool = false
 var playing_sound_effect: bool = false
 var changed_direction: bool = false
@@ -72,7 +73,7 @@ func _physics_process(delta):
 			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
 		else: 
 			tornado_node = null
-	if not visible or destroyed:
+	if not visible or destroyed or stunned: 
 		return
 	set_direction()
 	set_texture()
@@ -94,7 +95,7 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(_velocity)
 
 func move(velocity: Vector2) -> void:
-	if tornado_node:
+	if tornado_node or stunned:
 		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
@@ -189,13 +190,15 @@ func swing():
 		end_chase_state()
 
 
-func hit(tool_name):
+func hit(tool_name, var special_ability = ""):
 	if state == IDLE or state == WALK:
 		start_chase_state()
 	_end_chase_state_timer.stop()
 	_end_chase_state_timer.start()
 	$HurtBox/AnimationPlayer.play("hit")
 	health -= Stats.return_sword_damage(tool_name)
+	if special_ability == "stun":
+		start_stunned_state()
 	if health <= 0 and not destroyed:
 		destroyed = true
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
@@ -216,7 +219,23 @@ func _on_HurtBox_area_entered(area):
 		start_frozen_state()
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
+	if area.special_ability == "stun":
+		start_stunned_state()
+		
+func start_stunned_state():
+	if not destroyed:
+		$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", true)
+		$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", true)
+		animation_player.stop(false)
+		$StunnedTimer.start()
+		stunned = true
 
+func _on_StunnedTimer_timeout():
+	if not destroyed:
+		$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
+		$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", false)
+		stunned = false
+		animation_player.play()
 
 func start_frozen_state():
 	$Body.modulate = Color("00c9ff")
@@ -259,3 +278,4 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
+

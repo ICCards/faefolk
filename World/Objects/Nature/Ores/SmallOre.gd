@@ -41,7 +41,7 @@ func PlayEffect(player_id):
 		queue_free()
 
 
-func hit(tool_name):
+func hit(tool_name, var special_ability = ""):
 	rng.randomize()
 	#var data = {"id": name, "n": "ore"}
 	#Server.action("ON_HIT", data)

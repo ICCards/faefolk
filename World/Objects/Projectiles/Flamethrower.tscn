@@ -120,7 +120,7 @@ height = 40.0
 resource_name = "play"
 length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -210,7 +210,7 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
 position = Vector2( 23, -67 )
-rotation = 0.20944
+rotation = 0.279253
 scale = Vector2( 2, 2 )
 frames = SubResource( 26 )
 animation = "start"
@@ -219,7 +219,7 @@ playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( -23, -67 )
-rotation = -0.20944
+rotation = -0.279253
 scale = Vector2( 2, 2 )
 frames = SubResource( 26 )
 animation = "start"
@@ -234,12 +234,12 @@ animation = "start"
 frame = 24
 playing = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 264192
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -3.8147e-06, -72 )
 shape = SubResource( 27 )
 disabled = true

@@ -11,8 +11,8 @@ func _physics_process(delta):
 
 func _ready():
 	$AnimatedSprite.play("play")
-	$Area2D.tool_name = "fire projectile"
-	$Area2D.knockback_vector = Vector2.ZERO
+	$Hitbox.tool_name = "fire projectile"
+	$Hitbox.knockback_vector = Vector2.ZERO
 
 func _on_Area2D_area_entered(area):
 	collided = true

@@ -28,7 +28,7 @@ var inventory = {
 	8: ["iron ingot", 15, null],
 	6: ["potato seeds", 60, null],
 	7: ["wheat seeds", 60, null],
-	2: ["gold axe", 1, null]
+	2: ["gold pickaxe", 1, null]
 }
 
 var hotbar = {

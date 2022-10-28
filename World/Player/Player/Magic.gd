@@ -7,9 +7,13 @@ onready var EarthStrike = preload("res://World/Objects/Projectiles/EarthStrike.t
 onready var FireProjectile = preload("res://World/Objects/Projectiles/FireProjectile.tscn")
 onready var FlameThrower = preload("res://World/Objects/Projectiles/Flamethrower.tscn")
 onready var DashGhost = preload("res://World/Objects/Projectiles/DashGhost.tscn")
-onready var IceSpear = preload("res://World/Objects/Projectiles/IceSpear.tscn")
-onready var IceSpearRain = preload("res://World/Objects/Projectiles/IceSpearRain.tscn")
 onready var LingeringTornado = preload("res://World/Objects/Projectiles/LingeringTornado.tscn")
+onready var Earthquake = preload("res://World/Objects/Projectiles/Earthquake.tscn")
+onready var Whirlwind = preload("res://World/Objects/Projectiles/Whirlwind.tscn")
+onready var IceDefense = preload("res://World/Objects/Projectiles/IceDefense.tscn")
+onready var LightningStrike = preload("res://World/Objects/Projectiles/LightningStrike.tscn")
+onready var IceProjectile = preload("res://World/Objects/Projectiles/IceProjectile.tscn")
+onready var IceProjectileDebuff = preload("res://World/Objects/Projectiles/IceProjectileDebuff.tscn")
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var composite_sprites = get_node("../CompositeSprites")
@@ -104,13 +108,13 @@ func cast(staff_name, spell_index):
 		"lightning staff":
 			match spell_index:
 				1:
-					play_lightning_projectile()
+					play_lightning_projectile(false)
 				2:
 					play_flash_step()
 				3:
-					pass
+					play_lightning_projectile(true)
 				4:
-					pass
+					play_lightning_strike()
 		"fire staff":
 			match spell_index:
 				1:
@@ -137,11 +141,11 @@ func cast(staff_name, spell_index):
 		"ice staff":
 			match spell_index:
 				1:
-					play_ice_spear()
+					play_ice_projectile()
 				2:
 					play_ice_shield()
 				3:
-					play_ice_spear_rain()
+					play_ice_projectile_debuff()
 				4:
 					pass
 		"earth staff":
@@ -179,8 +183,8 @@ func play_earth_strike():
 	spell.position = get_global_mouse_position()
 
 func play_earthquake():
-	$Earthquake/Area2D.tool_name = "earthquake"
-	$Earthquake/AnimationPlayer.play("play")
+	var spell = Earthquake.instance()
+	add_child(spell)
 	get_node("../Camera2D").start_shake()
 
 # Lightning #
@@ -197,39 +201,42 @@ func play_flash_step():
 	yield($Electricity, "animation_finished")
 	$Electricity.hide()
 
-func play_lightning_projectile():
+func play_lightning_projectile(debuff):
 	var spell = LightningProjectile.instance()
-	get_node("../../../").add_child(spell)
+	spell.debuff = debuff
 	spell.transform = $CastDirection.transform
 	spell.position = $CastDirection/Position2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
+	get_node("../../../").add_child(spell)
 
+func play_lightning_strike():
+	var spell = LightningStrike.instance()
+	get_node("../../../").add_child(spell)
+	spell.position = get_global_mouse_position()
 
 # Ice #
 
-func play_ice_spear():
-	var spell = IceSpear.instance()
+func play_ice_projectile():
+	var spell = IceProjectile.instance()
+	spell.transform = $CastDirection.transform
+	spell.position = $CastDirection/Position2D.global_position
+	spell.velocity = get_global_mouse_position() - spell.position
 	get_node("../../../").add_child(spell)
-	spell.position = get_global_mouse_position()
+	
+func play_ice_projectile_debuff():
+	var spell = IceProjectileDebuff.instance()
+	spell.transform = $CastDirection.transform
+	spell.position = $CastDirection/Position2D.global_position
+	spell.velocity = get_global_mouse_position() - spell.position
+	get_node("../../../").add_child(spell)
 
-func play_ice_spear_rain():
-	var spell = IceSpearRain.instance()
-	get_node("../../../").add_child(spell)
-	spell.position = get_global_mouse_position()
+
 
 func play_ice_shield():
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", true)
-	$Iceberg.show()
-	$Iceberg.animation = "start"
-	$Iceberg.play()
-	yield($Iceberg, "animation_finished")
-	$Iceberg.animation = "idle"
-	$Iceberg.play()
-	yield($Iceberg, "animation_finished")
-	$Iceberg.animation = "end"
-	$Iceberg.play()
-	yield($Iceberg, "animation_finished")
-	$Iceberg.hide()
+	var spell = IceDefense.instance()
+	add_child(spell)
+	yield(self, "spell_finished")
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", false)
 
 
@@ -279,11 +286,10 @@ func _on_GhostTimer_timeout():
 		ghost.texture = sprite.texture
 		ghost.hframes = sprite.hframes
 		ghost.frame = sprite.frame
-	
 
 func play_whirlwind():
-	$Whirlwind/Area2D.tool_name = "whirlwind spell"
-	$Whirlwind/AnimationPlayer.play("play")
+	var spell = Whirlwind.instance()
+	add_child(spell)
 
 # Fire #
 func play_fire_projectile():
