@@ -23,7 +23,7 @@ tracks/0/keys = {
 [node name="LightningLine" type="Line2D"]
 position = Vector2( -2, 0 )
 width = 38.0
-default_color = Color( 1, 1, 1, 1 )
+default_color = Color( 1.2, 1.2, 1.2, 1 )
 texture = ExtResource( 1 )
 texture_mode = 1
 script = ExtResource( 2 )

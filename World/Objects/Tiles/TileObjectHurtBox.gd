@@ -358,9 +358,10 @@ func drop_items_in_stove():
 	PlayerInventory.stoves.erase(id)
 
 func drop_items_in_grain_mill():
-	for item in PlayerInventory.grain_mills[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.grain_mills[id][item], position)
-	PlayerInventory.grain_mills.erase(id)
+	pass # BROKEN
+#	for item in PlayerInventory.grain_mills[id].keys():
+#		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.grain_mills[id][item], position)
+#	PlayerInventory.grain_mills.erase(id)
 
 func drop_items_in_chest():
 	for item in PlayerInventory.chests[id].keys():

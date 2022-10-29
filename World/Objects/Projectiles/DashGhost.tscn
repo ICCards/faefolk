@@ -24,6 +24,7 @@ shader_param/flash_modifier = 1.0
 load_path = "res://.import/index.icon.png-5665fad188e88d1e882500a4376bfe02.stex"
 
 [node name="DashGhost" type="Sprite"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 material = SubResource( 17 )
 scale = Vector2( 2, 2 )
 texture = SubResource( 18 )

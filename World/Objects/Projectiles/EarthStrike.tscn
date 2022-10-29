@@ -76,6 +76,7 @@ tracks/1/keys = {
 }
 
 [node name="EarthStrike" type="Node2D"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

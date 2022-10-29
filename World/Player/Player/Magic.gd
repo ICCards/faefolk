@@ -1,7 +1,6 @@
 extends Node2D
 
 onready var LightningProjectile = preload("res://World/Objects/Projectiles/LightningProjectile.tscn")
-onready var ExplosionProjectile = preload("res://World/Objects/Projectiles/ExplosionProjectile.tscn")
 onready var TornadoProjectile = preload("res://World/Objects/Projectiles/TornadoProjectile.tscn")
 onready var EarthStrike = preload("res://World/Objects/Projectiles/EarthStrike.tscn")
 onready var FireProjectile = preload("res://World/Objects/Projectiles/FireProjectile.tscn")
@@ -13,7 +12,6 @@ onready var Whirlwind = preload("res://World/Objects/Projectiles/Whirlwind.tscn"
 onready var IceDefense = preload("res://World/Objects/Projectiles/IceDefense.tscn")
 onready var LightningStrike = preload("res://World/Objects/Projectiles/LightningStrike.tscn")
 onready var IceProjectile = preload("res://World/Objects/Projectiles/IceProjectile.tscn")
-onready var IceProjectileDebuff = preload("res://World/Objects/Projectiles/IceProjectileDebuff.tscn")
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var composite_sprites = get_node("../CompositeSprites")
@@ -118,12 +116,12 @@ func cast(staff_name, spell_index):
 		"fire staff":
 			match spell_index:
 				1:
-					play_fire_projectile()
+					play_fire_projectile(false)
 					yield(self, "spell_finished")
 				2:
 					pass
 				3:
-					play_fire_explosion()
+					play_fire_projectile(true)
 					yield(self, "spell_finished")
 				4:
 					play_flamethrower()
@@ -141,11 +139,11 @@ func cast(staff_name, spell_index):
 		"ice staff":
 			match spell_index:
 				1:
-					play_ice_projectile()
+					play_ice_projectile(false)
 				2:
 					play_ice_shield()
 				3:
-					play_ice_projectile_debuff()
+					play_ice_projectile(true)
 				4:
 					pass
 		"earth staff":
@@ -216,20 +214,14 @@ func play_lightning_strike():
 
 # Ice #
 
-func play_ice_projectile():
+func play_ice_projectile(debuff):
 	var spell = IceProjectile.instance()
-	spell.transform = $CastDirection.transform
+	spell.debuff = debuff
+	spell.projectile_transform = $CastDirection.transform
 	spell.position = $CastDirection/Position2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
 	get_node("../../../").add_child(spell)
 	
-func play_ice_projectile_debuff():
-	var spell = IceProjectileDebuff.instance()
-	spell.transform = $CastDirection.transform
-	spell.position = $CastDirection/Position2D.global_position
-	spell.velocity = get_global_mouse_position() - spell.position
-	get_node("../../../").add_child(spell)
-
 
 
 func play_ice_shield():
@@ -275,7 +267,8 @@ func set_player_whitened():
 	yield(get_tree().create_timer(0.5), "timeout")
 	composite_sprites.material.set_shader_param("flash_modifier", 0.0)
 
-var body_sprites = ["Shoes", "Shirts", "Pants", "Accessory", "Arms", "HeadAtr", "Body"]
+var body_sprites = ["Arms", "Body"]
+#var body_sprites = ["Shoes", "Shirts", "Pants", "Accessory", "Arms", "HeadAtr", "Body"]
 
 func _on_GhostTimer_timeout():
 	for sprite_name in body_sprites:
@@ -292,23 +285,17 @@ func play_whirlwind():
 	add_child(spell)
 
 # Fire #
-func play_fire_projectile():
+func play_fire_projectile(debuff):
 	for i in range(3):
 		var spell = FireProjectile.instance()
-		get_node("../../../").add_child(spell)
+		spell.debuff = debuff
+		spell.particles_transform = $CastDirection.transform
 		spell.position = $CastDirection/Position2D.global_position
 		spell.velocity = get_global_mouse_position() - spell.position
-		yield(get_tree().create_timer(0.25), "timeout")
+		get_node("../../../").add_child(spell)
+		yield(get_tree().create_timer(0.35), "timeout")
 	emit_signal("spell_finished")
 
-func play_fire_explosion():
-	for i in range(3):
-		var spell = ExplosionProjectile.instance()
-		get_node("../../../").add_child(spell)
-		spell.position = $CastDirection/Position2D.global_position
-		spell.velocity = get_global_mouse_position() - spell.position
-		yield(get_tree().create_timer(0.25), "timeout")
-	emit_signal("spell_finished")
 	
 func play_flamethrower():
 	var spell = FlameThrower.instance()

@@ -139,6 +139,7 @@ tracks/4/keys = {
 }
 
 [node name="Whirlwind" type="Node2D"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 script = ExtResource( 46 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/skull.png" type="Texture" id=2]
 
 [node name="Rug" type="Node2D"]
-z_index = 1
+z_index = -1
 
 [node name="LightMask" type="Light2D" parent="."]
 light_mask = 32

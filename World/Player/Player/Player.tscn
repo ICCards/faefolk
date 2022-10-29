@@ -6043,13 +6043,14 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 6
+frame = 3
 playing = true
 
 [node name="GhostTimer" type="Timer" parent="Magic"]
 wait_time = 0.03
 
 [node name="DustParticles" type="CPUParticles2D" parent="Magic"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 material = SubResource( 165 )
 z_index = -1
 emitting = false
@@ -6068,6 +6069,7 @@ color_ramp = SubResource( 166 )
 anim_speed_curve = SubResource( 167 )
 
 [node name="DustBurst" type="CPUParticles2D" parent="Magic"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 material = SubResource( 168 )
 z_index = -1
 emitting = false

@@ -1,116 +1,34 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Assets/Images/Magic/fire/flamethrower.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/Projectiles/Flamethrower.gd" type="Script" id=2]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 96, 96 )
+[sub_resource type="Curve" id=31]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 137.518 ), 0.0, 317.742, 0, 0, Vector2( 0.994859, 43.8243 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 96, 96 )
+[sub_resource type="Curve" id=32]
+max_value = 4.0
+_data = [ Vector2( 0, 2.18933 ), 0.0, 3.04366, 0, 0, Vector2( 1, 1.73888 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 96, 96 )
+[sub_resource type="Gradient" id=29]
+offsets = PoolRealArray( 0.000555864, 0.171765, 0.454118, 0.762353, 1 )
+colors = PoolColorArray( 1, 0.992157, 0.713726, 1, 1, 0.737227, 0, 1, 0.851586, 0.504755, 0.0706631, 1, 0.994795, 0.323645, 0.204007, 1, 1, 0, 0, 1 )
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 96, 96 )
+[sub_resource type="Curve" id=33]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 200 ), 0.0, 551.546, 0, 0, Vector2( 0.142077, -108.005 ), 0.0, 0.0, 0, 0, Vector2( 1, -113.41 ), 75.1283, 0.0, 0, 0 ]
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 96, 96 )
+[sub_resource type="Curve" id=34]
+min_value = 1.0
+max_value = 5.0
+_data = [ Vector2( 0, 0.99 ), 0.0, 0.0, 0, 0, Vector2( 1, 5 ), 10.0041, 0.0, 0, 0 ]
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 384, 96, 96 )
-
-[sub_resource type="SpriteFrames" id=26]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
-"loop": false,
-"name": "start",
-"speed": 8.0
-} ]
+[sub_resource type="Gradient" id=35]
+offsets = PoolRealArray( 0, 0.994737, 1 )
+colors = PoolColorArray( 0.509804, 0.509804, 0.509804, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
 
 [sub_resource type="CapsuleShape2D" id=27]
 radius = 52.0
@@ -131,108 +49,53 @@ tracks/0/keys = {
 "update": 1,
 "values": [ true, false, true, false, true, false, true, false, true, false, true ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedSprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedSprite3:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("AnimatedSprite2:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite3:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("AnimatedSprite2:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
 
 [node name="Flamethrower" type="Node2D"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 rotation = 1.5708
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
-position = Vector2( 23, -67 )
-rotation = 0.279253
-scale = Vector2( 2, 2 )
-frames = SubResource( 26 )
-animation = "start"
-frame = 24
-playing = true
+[node name="Fire" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 800
+lifetime = 1.85
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2( 0, -1 )
+spread = 35.0
+gravity = Vector2( 0, -20 )
+initial_velocity = 50.0
+initial_velocity_random = 0.5
+linear_accel = 50.0
+linear_accel_random = 0.5
+linear_accel_curve = SubResource( 31 )
+scale_amount = 3.0
+scale_amount_random = 0.7
+scale_amount_curve = SubResource( 32 )
+color_ramp = SubResource( 29 )
 
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-position = Vector2( -23, -67 )
-rotation = -0.279253
-scale = Vector2( 2, 2 )
-frames = SubResource( 26 )
-animation = "start"
-frame = 24
-playing = true
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -68 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 26 )
-animation = "start"
-frame = 24
-playing = true
+[node name="Smoke" type="CPUParticles2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.823529 )
+show_behind_parent = true
+emitting = false
+amount = 450
+lifetime = 2.0
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2( 0, -1 )
+spread = 35.0
+gravity = Vector2( 0, -40 )
+initial_velocity = 50.0
+initial_velocity_random = 0.5
+linear_accel = 100.0
+linear_accel_random = 0.5
+linear_accel_curve = SubResource( 33 )
+scale_amount = 3.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 34 )
+color_ramp = SubResource( 35 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0

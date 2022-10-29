@@ -184,7 +184,7 @@ animations = [ {
 } ]
 
 [node name="IceDefense" type="AnimatedSprite"]
-modulate = Color( 1, 1, 1, 0.627451 )
+modulate = Color( 1.2, 1.2, 1.2, 0.75 )
 position = Vector2( 0, -58 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 91 )

@@ -60,12 +60,13 @@ radius = 8.99999
 height = 32.0
 
 [node name="LightningSpell" type="KinematicBody2D"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 39 )
-frame = 3
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

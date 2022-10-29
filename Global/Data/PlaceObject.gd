@@ -64,7 +64,7 @@ func place_building_object_in_world(id, item_name, location):
 			object.name = str(id)
 			object.location = location
 			object.item_name = item_name
-			object.tier = "twig"
+			object.tier = "stone"
 			object.id = rng.randi_range(0, 10000)
 			PlacableObjects.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
@@ -74,7 +74,7 @@ func place_building_object_in_world(id, item_name, location):
 			object.name = str(id)
 			object.location = location
 			object.item_name = item_name
-			object.tier = "twig"
+			object.tier = "stone"
 			PlacableObjects.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 
