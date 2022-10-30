@@ -203,30 +203,30 @@ func disable_tree_top_collision_box():
 
 
 func set_tree_transparent():
-	tween.interpolate_property(tree_top_sprite, "modulate",
-		tree_top_sprite.get_modulate(), Color(1, 1, 1, 0.45), 0.5,
+	tween.interpolate_property(tree_top_sprite, "modulate:a",
+		tree_top_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	tween.interpolate_property(tree_stump_sprite, "modulate",
-		tree_stump_sprite.get_modulate(), Color(1, 1, 1, 0.45), 0.5,
+	tween.interpolate_property(tree_stump_sprite, "modulate:a",
+		tree_stump_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	tween.interpolate_property(tree_bottom_sprite, "modulate",
-		tree_bottom_sprite.get_modulate(), Color(1, 1, 1, 0.45), 0.5,
+	tween.interpolate_property(tree_bottom_sprite, "modulate:a",
+		tree_bottom_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 
 func set_tree_visible():
-	tween.interpolate_property(tree_top_sprite, "modulate",
-		tree_top_sprite.get_modulate(), Color(1, 1, 1, 1), 0.5,
+	tween.interpolate_property(tree_top_sprite, "modulate:a",
+		tree_top_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	tween.interpolate_property(tree_stump_sprite, "modulate",
-		tree_stump_sprite.get_modulate(), Color(1, 1, 1, 1), 0.5,
+	tween.interpolate_property(tree_stump_sprite, "modulate:a",
+		tree_stump_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	tween.interpolate_property(tree_bottom_sprite, "modulate",
-		tree_bottom_sprite.get_modulate(), Color(1, 1, 1, 1), 0.5,
+	tween.interpolate_property(tree_bottom_sprite, "modulate:a",
+		tree_bottom_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 

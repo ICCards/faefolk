@@ -859,6 +859,7 @@ tracks/4/keys = {
 }
 
 [node name="Bear" type="KinematicBody2D"]
+modulate = Color( 1.3, 1.3, 1.3, 1 )
 material = ExtResource( 3 )
 script = ExtResource( 1 )
 

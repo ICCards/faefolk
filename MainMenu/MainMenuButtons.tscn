@@ -48,10 +48,9 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 2 )
 
-[node name="PlayShopQuit" type="Control" parent="."]
+[node name="PlayShopQuit" type="Node2D" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+z_index = 1
 
 [node name="Play" type="Sprite" parent="PlayShopQuit"]
 position = Vector2( 94, 0 )
@@ -62,10 +61,11 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 
 [node name="PlayLabel" type="Label" parent="PlayShopQuit/Play"]
-margin_left = 126.0
-margin_top = 27.0
-margin_right = 585.0
-margin_bottom = 173.0
+margin_left = 163.0
+margin_top = 52.0
+margin_right = 622.0
+margin_bottom = 198.0
+rect_scale = Vector2( 0.8, 0.8 )
 theme = ExtResource( 7 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
@@ -82,10 +82,11 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 
 [node name="ShopLabel" type="Label" parent="PlayShopQuit/Shop"]
-margin_left = 238.0
-margin_top = 200.0
-margin_right = 695.0
-margin_bottom = 346.0
+margin_left = 278.0
+margin_top = 227.0
+margin_right = 735.0
+margin_bottom = 373.0
+rect_scale = Vector2( 0.8, 0.8 )
 theme = ExtResource( 7 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
@@ -102,10 +103,11 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 
 [node name="QuitLabel" type="Label" parent="PlayShopQuit/Quit"]
-margin_left = 344.0
-margin_top = 366.0
-margin_right = 802.0
-margin_bottom = 512.0
+margin_left = 379.0
+margin_top = 399.0
+margin_right = 837.0
+margin_bottom = 545.0
+rect_scale = Vector2( 0.8, 0.8 )
 theme = ExtResource( 7 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
@@ -175,6 +177,7 @@ visible = false
 position = Vector2( 1349, -52 )
 scale = Vector2( 18, 18 )
 frames = SubResource( 6 )
+frame = 1
 playing = true
 
 [node name="Tween" type="Tween" parent="."]

@@ -5845,6 +5845,8 @@ script = ExtResource( 8 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.85, 0.85 )
+smoothing_enabled = true
+smoothing_speed = 20.0
 script = ExtResource( 81 )
 
 [node name="timer_shake_length" type="Timer" parent="Camera2D"]
@@ -5886,18 +5888,18 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 13 )
 hframes = 4
 
-[node name="Shirts" type="Sprite" parent="CompositeSprites"]
-light_mask = 0
-use_parent_material = true
-position = Vector2( 0, -16 )
-texture = ExtResource( 17 )
-hframes = 4
-
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 15 )
+hframes = 4
+
+[node name="Shirts" type="Sprite" parent="CompositeSprites"]
+light_mask = 0
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 17 )
 hframes = 4
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
@@ -6043,7 +6045,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 3
+frame = 5
 playing = true
 
 [node name="GhostTimer" type="Timer" parent="Magic"]

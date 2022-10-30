@@ -147,6 +147,7 @@ anims/RESET = SubResource( 1 )
 anims/animate = SubResource( 2 )
 
 [node name="Logo" type="TextureRect" parent="."]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

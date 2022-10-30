@@ -536,6 +536,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [node name="TreeObject" type="Node2D"]
+modulate = Color( 1.3, 1.3, 1.3, 1 )
 scale = Vector2( 0.9, 0.9 )
 script = ExtResource( 1 )
 

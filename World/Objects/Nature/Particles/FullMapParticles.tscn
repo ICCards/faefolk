@@ -6,6 +6,7 @@
 [ext_resource path="res://World/Objects/Nature/Particles/LargeClouds.tscn" type="PackedScene" id=4]
 
 [node name="FullMapParticles" type="Node2D"]
+modulate = Color( 1.3, 1.3, 1.3, 1 )
 position = Vector2( 16000, 16000 )
 script = ExtResource( 3 )
 

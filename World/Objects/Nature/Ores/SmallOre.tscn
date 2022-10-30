@@ -118,6 +118,7 @@ tracks/0/keys = {
 }
 
 [node name="SmallOreObject" type="Node2D"]
+modulate = Color( 1.32, 1.32, 1.32, 1 )
 scale = Vector2( 0.85, 0.85 )
 script = ExtResource( 2 )
 

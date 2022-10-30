@@ -37,24 +37,25 @@ func chain_effect(start_name):
 
 func find_mst(nodes):
 	var path = AStar.new()
-	path.add_point(path.get_available_point_id(), nodes.pop_front())
-	
-	while nodes:
-		var min_dist = INF
-		var min_p = null 
-		var p = null  
-		for p1 in path.get_points():
-			p1 = path.get_point_position(p1)
-			for p2 in nodes:
-				if p1.distance_to(p2) < min_dist:
-					min_dist = p1.distance_to(p2)
-					min_p = p2
-					p = p1
-		var n = path.get_available_point_id()
-		path.add_point(n, min_p)
-		path.connect_points(path.get_closest_point(p), n)
-		nodes.erase(min_p)
-	return path
+	if nodes.pop_front():
+		path.add_point(path.get_available_point_id(), nodes.pop_front())
+		
+		while nodes:
+			var min_dist = INF
+			var min_p = null 
+			var p = null  
+			for p1 in path.get_points():
+				p1 = path.get_point_position(p1)
+				for p2 in nodes:
+					if p1.distance_to(p2) < min_dist:
+						min_dist = p1.distance_to(p2)
+						min_p = p2
+						p = p1
+			var n = path.get_available_point_id()
+			path.add_point(n, min_p)
+			path.connect_points(path.get_closest_point(p), n)
+			nodes.erase(min_p)
+		return path
 
 
 func _on_Timer_timeout():

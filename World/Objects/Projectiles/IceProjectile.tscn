@@ -370,7 +370,7 @@ frames = SubResource( 87 )
 position = Vector2( 10, -9 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
-frame = 8
+frame = 11
 playing = true
 
 [node name="TrailParticles" type="Node2D" parent="."]
