@@ -191,6 +191,9 @@ func swing():
 
 
 func hit(tool_name, var special_ability = ""):
+	if tool_name == "blizzard":
+		start_frozen_state(8)
+		return
 	if state == IDLE or state == WALK:
 		start_chase_state()
 	_end_chase_state_timer.stop()
@@ -216,7 +219,7 @@ func _on_HurtBox_area_entered(area):
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		hit(area.tool_name)
 	if area.tool_name == "ice projectile":
-		start_frozen_state()
+		start_frozen_state(3)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
 	if area.special_ability == "stun":
@@ -237,11 +240,11 @@ func _on_StunnedTimer_timeout():
 		stunned = false
 		animation_player.play()
 
-func start_frozen_state():
+func start_frozen_state(timer_length):
 	$Body.modulate = Color("00c9ff")
 	frozen = true
 	$FrozenTimer.stop()
-	$FrozenTimer.start()
+	$FrozenTimer.start(timer_length)
 	if not attacking and not destroyed:
 		animation_player.play("loop frozen")
 
@@ -250,13 +253,14 @@ func _on_DetectPlayer_area_entered(area):
 	start_chase_state()
 
 func end_chase_state():
-	print("END CHASE STATE")
-	navigation_agent.max_speed = 100
-	stop_sound_effects()
-	_idle_timer.start()
-	_chase_timer.stop()
-	_end_chase_state_timer.stop()
-	state = IDLE
+	pass
+#	print("END CHASE STATE")
+#	navigation_agent.max_speed = 100
+#	stop_sound_effects()
+#	_idle_timer.start()
+#	_chase_timer.stop()
+#	_end_chase_state_timer.stop()
+#	state = IDLE
 
 func start_chase_state():
 	navigation_agent.max_speed = 240

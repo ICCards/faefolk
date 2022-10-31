@@ -75,9 +75,9 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 400
-const NUM_BUNNIES = 400
-const NUM_BEARS = 200
+const NUM_DUCKS = 300
+const NUM_BUNNIES = 300
+const NUM_BEARS = 100
 const NUM_BOARS = 0
 const NUM_DEER = 0
 

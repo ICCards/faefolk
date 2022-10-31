@@ -337,15 +337,14 @@ max_value = 2.5
 _data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=90]
-offsets = PoolRealArray( 0.000555864, 0.482895, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.278431, 1, 1, 1, 0.0901961, 0.568627, 0.933333, 1 )
+offsets = PoolRealArray( 0.000555864, 0.711538, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.278431, 1, 1, 1, 0.31255, 0.698204, 0.992188, 1 )
 
 [sub_resource type="Curve" id=91]
 max_value = 3.0
 _data = [ Vector2( 0, 2.73165 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.73165 ), 0.0, 0.0, 0, 0 ]
 
 [node name="IceProjectile" type="KinematicBody2D"]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -362,21 +361,23 @@ shape = SubResource( 3 )
 
 [node name="Explosion" type="AnimatedSprite" parent="."]
 visible = false
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, 15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 87 )
 
 [node name="Projectile" type="AnimatedSprite" parent="."]
+modulate = Color( 1.17, 1.17, 1.17, 1 )
 position = Vector2( 10, -9 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
-frame = 11
+frame = 21
 playing = true
 
 [node name="TrailParticles" type="Node2D" parent="."]
 
 [node name="Particles3" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color( 0.454902, 1, 1, 1 )
+modulate = Color( 1.35, 1.35, 1.35, 1 )
 position = Vector2( -43, 0 )
 emitting = false
 amount = 30
@@ -392,9 +393,10 @@ initial_velocity = 70.0
 initial_velocity_random = 0.5
 scale_amount = 4.0
 scale_amount_random = 0.7
+color = Color( 0.454902, 1, 1, 1 )
 
 [node name="Particles2" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color( 0.0705882, 0.588235, 0.956863, 1 )
+modulate = Color( 1.35, 1.35, 1.35, 1 )
 position = Vector2( -43, 0 )
 emitting = false
 amount = 30
@@ -410,9 +412,10 @@ initial_velocity = 70.0
 initial_velocity_random = 0.5
 scale_amount = 4.0
 scale_amount_random = 0.7
+color = Color( 0.101961, 0.67451, 1, 1 )
 
 [node name="Particles" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color( 0.164706, 0.462745, 0.733333, 1 )
+modulate = Color( 1.35, 1.35, 1.35, 1 )
 position = Vector2( -43, 0 )
 emitting = false
 amount = 30
@@ -428,11 +431,13 @@ initial_velocity = 70.0
 initial_velocity_random = 0.5
 scale_amount = 4.0
 scale_amount_random = 0.7
+color = Color( 0, 0.4, 0.870588, 1 )
 
 [node name="ExplosionParticles" type="Node2D" parent="."]
 position = Vector2( 10, 0 )
 
 [node name="Explosion" type="CPUParticles2D" parent="ExplosionParticles"]
+modulate = Color( 1.12, 1.12, 1.12, 1 )
 emitting = false
 amount = 250
 lifetime = 1.4
@@ -462,6 +467,7 @@ scale_amount_curve = SubResource( 89 )
 color_ramp = SubResource( 90 )
 
 [node name="Shards" type="CPUParticles2D" parent="ExplosionParticles/Explosion"]
+modulate = Color( 1.12, 1.12, 1.12, 1 )
 emitting = false
 amount = 100
 lifetime = 1.4

@@ -17,7 +17,7 @@ func _ready():
 	stop_trail_particles()
 	$AnimatedSprite.hide()
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-	yield(get_tree().create_timer(2.0), "timeout")
+	yield(get_tree().create_timer(4.0), "timeout")
 	queue_free()
 
 func set_particles():
@@ -36,6 +36,6 @@ func stop_trail_particles():
 	$TornadoParticles/P1.emitting = false
 	$TornadoParticles/P2.emitting = false
 	$TornadoParticles/P3.emitting = false
-#	$TrailParticles/P1.emitting = false
-#	$TrailParticles/P2.emitting = false
-#	$TrailParticles/P3.emitting = false
+	$TrailParticles/P1.emitting = false
+	$TrailParticles/P2.emitting = false
+	$TrailParticles/P3.emitting = false

@@ -52,19 +52,19 @@ rotation = 1.5708
 script = ExtResource( 2 )
 
 [node name="Fire" type="CPUParticles2D" parent="."]
-amount = 2000
-lifetime = 1.7
-lifetime_randomness = 0.5
+amount = 1500
+lifetime = 1.5
+lifetime_randomness = 0.3
 emission_shape = 1
 emission_sphere_radius = 3.0
 direction = Vector2( 0, -1 )
-spread = 35.0
-gravity = Vector2( 0, -10 )
-initial_velocity = 50.0
-initial_velocity_random = 0.5
-linear_accel = 50.0
+spread = 20.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
 linear_accel_random = 0.5
 linear_accel_curve = SubResource( 31 )
+radial_accel = 70.0
+radial_accel_random = 0.5
 scale_amount = 3.0
 scale_amount_random = 0.7
 scale_amount_curve = SubResource( 32 )
@@ -74,18 +74,20 @@ color_ramp = SubResource( 29 )
 self_modulate = Color( 1, 1, 1, 0.823529 )
 show_behind_parent = true
 amount = 450
-lifetime = 2.0
-lifetime_randomness = 0.4
+lifetime = 1.7
+lifetime_randomness = 0.3
 emission_shape = 1
 emission_sphere_radius = 2.0
 direction = Vector2( 0, -1 )
-spread = 35.0
-gravity = Vector2( 0, -15 )
-initial_velocity = 50.0
+spread = 20.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
 initial_velocity_random = 0.5
 linear_accel = 100.0
 linear_accel_random = 0.5
 linear_accel_curve = SubResource( 33 )
+radial_accel = 70.0
+radial_accel_random = 0.5
 scale_amount = 3.0
 scale_amount_random = 1.0
 scale_amount_curve = SubResource( 34 )
@@ -97,7 +99,7 @@ collision_mask = 264192
 script = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
-polygon = PoolVector2Array( 0, 0, -108.001, -175, 110.999, -177 )
+polygon = PoolVector2Array( 0, 0, -131.001, -176, 128.999, -176 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

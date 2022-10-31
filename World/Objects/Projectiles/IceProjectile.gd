@@ -28,8 +28,8 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
-	destroy()
-
+	if not collided:
+		destroy()
 
 func destroy():
 	collided = true
@@ -43,13 +43,11 @@ func destroy():
 		$Explosion.playing = true
 		yield(get_tree().create_timer(1.5), "timeout")
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-		yield(get_tree().create_timer(2.5), "timeout")
-		queue_free()
 	else:
 		$ExplosionParticles/Explosion.emitting = true
 		$ExplosionParticles/Explosion/Shards.emitting = true
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-		yield(get_tree().create_timer(4.0), "timeout")
-		queue_free()
+	yield(get_tree().create_timer(4.0), "timeout")
+	queue_free()
 
 

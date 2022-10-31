@@ -108,6 +108,9 @@ func _get_direction_string(veloctiy) -> String:
 func hit(tool_name, var special_ability= ""):
 	if is_sleeping:
 		is_sleeping = false
+	if tool_name == "blizzard":
+		start_frozen_state(8)
+		return
 	start_run_state()
 	health -= Stats.return_sword_damage(tool_name)
 	$AnimationPlayer.stop()
@@ -133,15 +136,16 @@ func _on_HurtBox_area_entered(area):
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		hit(area.tool_name)
 	if area.tool_name == "ice projectile":
-		start_frozen_state()
+		start_frozen_state(3)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
 	if area.special_ability == "stun":
 		start_stunned_state()
 	
 	
-func start_frozen_state():
+func start_frozen_state(timer_length):
 	$FrozenTimer.stop()
+	$FrozenTimer.wait_time = timer_length
 	$FrozenTimer.start()
 	$AnimatedSprite.modulate = Color("00c9ff")
 	frozen = true

@@ -5845,7 +5845,6 @@ script = ExtResource( 8 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.85, 0.85 )
-smoothing_enabled = true
 smoothing_speed = 20.0
 script = ExtResource( 81 )
 
@@ -6045,7 +6044,6 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 5
 playing = true
 
 [node name="GhostTimer" type="Timer" parent="Magic"]

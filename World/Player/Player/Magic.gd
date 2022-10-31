@@ -12,6 +12,7 @@ onready var Whirlwind = preload("res://World/Objects/Projectiles/Whirlwind.tscn"
 onready var IceDefense = preload("res://World/Objects/Projectiles/IceDefense.tscn")
 onready var LightningStrike = preload("res://World/Objects/Projectiles/LightningStrike.tscn")
 onready var IceProjectile = preload("res://World/Objects/Projectiles/IceProjectile.tscn")
+onready var BlizzardFog = preload("res://World/Objects/Projectiles/BlizzardFog.tscn")
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var composite_sprites = get_node("../CompositeSprites")
@@ -145,7 +146,7 @@ func cast(staff_name, spell_index):
 				3:
 					play_ice_projectile(true)
 				4:
-					pass
+					play_blizzard()
 		"earth staff":
 			match spell_index:
 				1:
@@ -221,7 +222,6 @@ func play_ice_projectile(debuff):
 	spell.position = $CastDirection/Position2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
 	get_node("../../../").add_child(spell)
-	
 
 
 func play_ice_shield():
@@ -231,6 +231,15 @@ func play_ice_shield():
 	yield(self, "spell_finished")
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", false)
 
+
+func play_blizzard():
+	var spell = BlizzardFog.instance()
+	spell.position = get_parent().position
+	get_node("../../../").add_child(spell)
+	yield(get_tree().create_timer(1.0), "timeout")
+	for animal in get_node("/root/World/Animals").get_children():
+		if not animal.destroyed and get_parent().position.distance_to(animal.position) < 1286:
+			animal.hit("blizzard")
 
 # Wind #
 

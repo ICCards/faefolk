@@ -33,6 +33,8 @@ func _ready():
 	$AnimatedSprite.play("end")
 	stop_trail_particles()
 	yield($AnimatedSprite, "animation_finished")
+	$AnimatedSprite.hide()
+	yield(get_tree().create_timer(3.0), "timeout")
 	queue_free()
 
 

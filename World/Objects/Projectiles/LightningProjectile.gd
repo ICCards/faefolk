@@ -37,7 +37,7 @@ func chain_effect(start_name):
 
 func find_mst(nodes):
 	var path = AStar.new()
-	if nodes.pop_front():
+	if not nodes.empty():
 		path.add_point(path.get_available_point_id(), nodes.pop_front())
 		
 		while nodes:
