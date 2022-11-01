@@ -82,6 +82,9 @@ func _on_StumpHurtBox_area_entered(_area):
 #	Server.action("ON_HIT", data)
 	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
 		hit(_area.tool_name)
+	if _area.special_ability == "fire":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-18,12)))
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 
 
 func _on_VisibilityNotifier2D_screen_entered():

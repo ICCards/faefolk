@@ -1,5 +1,6 @@
 extends Node
 
+onready var ExplosionParticles = preload("res://World/Objects/Nature/Effects/ExplosionParticles.tscn")
 onready var Bird = preload("res://World/Animals/BirdFlyingFromTree.tscn")
 onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
@@ -76,3 +77,8 @@ func initiateOreHitEffect(variety: String, effect_type: String, pos: Vector2):
 	oreHitEffect.global_position = pos
 	
 
+func initiateExplosionParticles(pos: Vector2):
+	var explosion = ExplosionParticles.instance()
+	Server.world.add_child(explosion)
+	explosion.global_position = pos + Vector2(0,32)
+	

@@ -13,6 +13,7 @@ var location
 var destroyed: bool = false
 
 func _ready():
+	randomize()
 	hide()
 	setTreeBranchType(variety)
 	
@@ -48,7 +49,7 @@ func hit(tool_name, var special_ability = ""):
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
 		animation_player.play("break")
-		InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position+Vector2(-16, 32))
+		InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position+Vector2(-16, 16))
 		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
 		CollectionsData.resources["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
@@ -60,6 +61,8 @@ func _on_BranchHurtBox_area_entered(_area):
 		Stats.decrease_tool_health()
 	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
 		hit(_area.tool_name)
+	if _area.special_ability == "fire":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-16,16)))
 
 func _on_VisibilityNotifier2D_screen_entered():
 	show()

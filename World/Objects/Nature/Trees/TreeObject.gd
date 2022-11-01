@@ -171,6 +171,9 @@ func _on_Hurtbox_area_entered(_area):
 	#Server.action("ON_HIT", data)
 	if _area.tool_name != "lightning spell" and  _area.tool_name != "explosion spell":
 		hit(_area.tool_name)
+	if _area.special_ability == "fire":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-10,22)))
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 
 
 

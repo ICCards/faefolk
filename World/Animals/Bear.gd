@@ -202,6 +202,8 @@ func hit(tool_name, var special_ability = ""):
 	health -= Stats.return_sword_damage(tool_name)
 	if special_ability == "stun":
 		start_stunned_state()
+	elif special_ability == "fire":
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 	if health <= 0 and not destroyed:
 		destroyed = true
 		stop_sound_effects()
@@ -224,8 +226,6 @@ func _on_HurtBox_area_entered(area):
 		start_frozen_state(3)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
-	if area.special_ability == "stun":
-		start_stunned_state()
 
 
 func start_stunned_state():

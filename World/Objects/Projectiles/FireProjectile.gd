@@ -24,7 +24,6 @@ func _ready():
 		$TrailParticles/Particles3.emitting = true
 
 
-
 func _on_Area2D_area_entered(area):
 	destroy()
 

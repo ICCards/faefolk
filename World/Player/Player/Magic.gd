@@ -21,6 +21,10 @@ onready var composite_sprites = get_node("../CompositeSprites")
 
 var dashing = false
 
+var player_fire_buff: bool = false
+
+const FIRE_BUFF_LENGTH = 10
+
 enum {
 	MOVEMENT, 
 	SWINGING,
@@ -126,7 +130,7 @@ func cast(staff_name, spell_index):
 					play_fire_projectile(false)
 					yield(self, "spell_finished")
 				2:
-					pass
+					play_fire_buff()
 				3:
 					play_fire_projectile(true)
 					yield(self, "spell_finished")
@@ -334,7 +338,6 @@ func set_player_whitened():
 	composite_sprites.material.set_shader_param("flash_modifier", 0.0)
 
 var body_sprites = ["Arms", "Body"]
-#var body_sprites = ["Shoes", "Shirts", "Pants", "Accessory", "Arms", "HeadAtr", "Body"]
 
 func _on_GhostTimer_timeout():
 	for sprite_name in body_sprites:
@@ -362,6 +365,11 @@ func play_fire_projectile(debuff):
 		yield(get_tree().create_timer(0.35), "timeout")
 	emit_signal("spell_finished")
 
+
+func play_fire_buff():
+	player_fire_buff = true
+	yield(get_tree().create_timer(FIRE_BUFF_LENGTH), "timeout")
+	player_fire_buff = false
 	
 func play_flamethrower():
 	var spell = FlameThrower.instance()

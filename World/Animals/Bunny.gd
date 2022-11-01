@@ -120,6 +120,7 @@ func hit(tool_name, var special_ability= ""):
 	if health <= 0 and not destroyed:
 		set_physics_process(false)
 		destroyed = true
+		$Electricity.hide()
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
 		$AnimatedSprite.play("death")
@@ -141,6 +142,8 @@ func _on_HurtBox_area_entered(area):
 		tornado_node = area
 	if area.special_ability == "stun":
 		start_stunned_state()
+	elif area.special_ability == "fire":
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 	
 	
 func start_frozen_state(timer_length):
@@ -179,10 +182,12 @@ func _on_FrozenTimer_timeout():
 func start_stunned_state():
 	if not destroyed:
 		stunned = true
+		$Electricity.show()
 		$AnimatedSprite.playing = false
 		$StunnedTimer.start()
 
 func _on_StunnedTimer_timeout():
+	$Electricity.hide()
 	$AnimatedSprite.playing = true
 	stunned = false
 

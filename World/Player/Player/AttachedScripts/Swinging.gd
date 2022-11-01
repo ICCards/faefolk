@@ -16,7 +16,7 @@ onready var ArrowProjectile = preload("res://World/Objects/Projectiles/ArrowProj
 var rng = RandomNumberGenerator.new()
 
 var animation
-var direction
+var direction: String = "down"
 
 enum {
 	MOVEMENT, 
@@ -44,7 +44,7 @@ func _input( event ):
 			mouse_left_down = false
 
 func _physics_process(delta):
-	if not is_drawing or not is_releasing:
+	if not is_drawing and not is_releasing:
 		return
 	var degrees = int($ArrowDirection.rotation_degrees) % 360
 	$ArrowDirection.look_at(get_global_mouse_position())
@@ -153,13 +153,21 @@ func wait_for_release():
 func shoot():
 	Stats.decrease_tool_health()
 	var arrow = ArrowProjectile.instance()
-	get_node("../../../").add_child(arrow)
+	if get_node("../Magic").player_fire_buff:
+		arrow.is_on_fire = true
+	else:
+		arrow.is_on_fire = false
 	arrow.transform = $ArrowDirection.transform
 	arrow.position = $ArrowDirection/Position2D.global_position
 	arrow.velocity = get_global_mouse_position() - arrow.position
+	get_node("../../../").add_child(arrow)
 
 func set_swing_collision_layer_and_position(tool_name, direction):
 	axe_pickaxe_swing.position = Util.set_swing_position(Vector2(0,0), direction)
+	if get_node("../Magic").player_fire_buff:
+		axe_pickaxe_swing.special_ability = "fire"
+	else:
+		axe_pickaxe_swing.special_ability = ""
 	if tool_name == "wood axe" or tool_name == "stone axe" or tool_name == "iron axe" or tool_name == "bronze axe" or tool_name == "gold axe": 
 		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_mask(8)

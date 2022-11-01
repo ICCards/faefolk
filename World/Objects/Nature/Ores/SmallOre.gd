@@ -77,6 +77,10 @@ func _on_SmallHurtBox_area_entered(_area):
 		Stats.decrease_tool_health()
 	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
 		hit(_area.tool_name)
+	if _area.special_ability == "fire":
+		health -= Stats.FIRE_DEBUFF_DAMAGE
+		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-8, 8), rand_range(-16,0)))
+	
 
 
 func add_to_collection(type, amt):
