@@ -11,6 +11,7 @@ func _physics_process(delta):
 
 func _ready():
 	$Hitbox.tool_name = "tornado spell"
+	$Hitbox.knockback_vector = velocity / 150
 	$AnimatedSprite.play("anim")
 	set_particles()
 	yield($AnimatedSprite, "animation_finished")

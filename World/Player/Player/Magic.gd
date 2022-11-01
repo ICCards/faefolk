@@ -13,6 +13,8 @@ onready var IceDefense = preload("res://World/Objects/Projectiles/IceDefense.tsc
 onready var LightningStrike = preload("res://World/Objects/Projectiles/LightningStrike.tscn")
 onready var IceProjectile = preload("res://World/Objects/Projectiles/IceProjectile.tscn")
 onready var BlizzardFog = preload("res://World/Objects/Projectiles/BlizzardFog.tscn")
+onready var EarthGolem = preload("res://World/Objects/Projectiles/EarthGolem.tscn")
+onready var EarthStrikeDebuff = preload("res://World/Objects/Projectiles/EarthStrikeDebuff.tscn")
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var composite_sprites = get_node("../CompositeSprites")
@@ -39,6 +41,9 @@ var is_casting: bool = false
 var flamethrower_active: bool = false
 var mouse_left_down: bool = false
 
+var starting_mouse_point
+var ending_mouse_point
+
 
 func _input( event ):
 	if event is InputEventMouseButton:
@@ -61,6 +66,7 @@ func cast_spell(staff_name, init_direction):
 	if get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown():
 		direction = init_direction
 		PlayerStats.decrease_energy()
+		starting_mouse_point = get_global_mouse_position()
 		if get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell != 2:
 			get_parent().state = MAGIC_CASTING
 			is_casting = true
@@ -152,9 +158,10 @@ func cast(staff_name, spell_index):
 				1:
 					play_earth_strike()
 				2:
-					pass
+					play_earth_golem()
+					yield(self, "spell_finished")
 				3:
-					pass
+					play_earth_strike_buff()
 				4:
 					play_earthquake()
 		"health staff":
@@ -181,6 +188,54 @@ func play_earth_strike():
 	get_node("../../../").add_child(spell)
 	spell.position = get_global_mouse_position()
 
+func play_earth_golem():
+	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", true)
+	var spell = EarthGolem.instance()
+	add_child(spell)
+	yield(get_tree().create_timer(1.0), "timeout")
+	composite_sprites.hide()
+	yield(get_tree().create_timer(3.4), "timeout")
+	get_node("../Camera2D").start_small_shake()
+	yield(get_tree().create_timer(0.5), "timeout")
+	composite_sprites.show()
+	yield(self, "spell_finished")
+	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", false)
+
+func play_earth_strike_buff():
+	ending_mouse_point = get_global_mouse_position()
+	var current_pt = Tiles.valid_tiles.world_to_map(starting_mouse_point) * 32
+	if abs(abs(ending_mouse_point.x) - abs(starting_mouse_point.x)) > abs(abs(ending_mouse_point.y) - abs(starting_mouse_point.y)): # Horizontal
+		if ending_mouse_point.x > starting_mouse_point.x: # Moving right:
+			#var current_pt = starting_mouse_point
+			while current_pt.x < ending_mouse_point.x:
+				var spell = EarthStrikeDebuff.instance()
+				spell.position = current_pt
+				get_node("../../../").add_child(spell)
+				current_pt.x += 96
+		else: # Moving left
+			#var current_pt = starting_mouse_point
+			while current_pt.x > ending_mouse_point.x:
+				var spell = EarthStrikeDebuff.instance()
+				spell.position = current_pt
+				get_node("../../../").add_child(spell)
+				current_pt.x -= 96
+			
+	else: # Vertical 
+		if ending_mouse_point.y > starting_mouse_point.y: # Moving down:
+			#var current_pt = starting_mouse_point
+			while current_pt.y < ending_mouse_point.y:
+				var spell = EarthStrikeDebuff.instance()
+				spell.position = current_pt
+				get_node("../../../").add_child(spell)
+				current_pt.y += 64
+		else: # Moving up
+			#var current_pt = starting_mouse_point
+			while current_pt.y > ending_mouse_point.y:
+				var spell = EarthStrikeDebuff.instance()
+				spell.position = current_pt
+				get_node("../../../").add_child(spell)
+				current_pt.y -= 64
+	
 func play_earthquake():
 	var spell = Earthquake.instance()
 	add_child(spell)

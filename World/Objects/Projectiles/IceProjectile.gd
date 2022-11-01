@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-var velocity = Vector2(1,0)
+var velocity = Vector2(0,0)
 var speed = 350
 var collided = false
 var debuff
@@ -39,8 +39,9 @@ func destroy():
 	$TrailParticles/Particles3.emitting = false
 	if debuff:
 		$Hitbox/CollisionShape2D.shape.radius = 80
-		$Explosion.show()
-		$Explosion.playing = true
+		$BuffedExplosionParticles.emitting = true
+		$BuffedExplosionSprite.show()
+		$BuffedExplosionSprite.playing = true
 		yield(get_tree().create_timer(1.5), "timeout")
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	else:

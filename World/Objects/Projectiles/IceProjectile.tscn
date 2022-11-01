@@ -11,6 +11,19 @@
 resource_local_to_scene = true
 radius = 16.0
 
+[sub_resource type="Curve" id=92]
+min_value = -200.0
+max_value = 400.0
+_data = [ Vector2( 0, 75.6757 ), 0.0, 1093.5, 0, 0, Vector2( 0.228546, 151.736 ), -914.189, -914.189, 0, 0, Vector2( 1, -167.568 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=89]
+max_value = 2.5
+_data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=90]
+offsets = PoolRealArray( 0.000555864, 0.490826, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.278431, 1, 1, 1, 0.0549683, 0.423291, 1, 1 )
+
 [sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 96, 96 )
@@ -327,19 +340,6 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="Curve" id=92]
-min_value = -200.0
-max_value = 400.0
-_data = [ Vector2( 0, 75.6757 ), 0.0, 1093.5, 0, 0, Vector2( 0.228546, 151.736 ), -914.189, -914.189, 0, 0, Vector2( 1, -167.568 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=89]
-max_value = 2.5
-_data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Gradient" id=90]
-offsets = PoolRealArray( 0.000555864, 0.711538, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.278431, 1, 1, 1, 0.31255, 0.698204, 0.992188, 1 )
-
 [sub_resource type="Curve" id=91]
 max_value = 3.0
 _data = [ Vector2( 0, 2.73165 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.73165 ), 0.0, 0.0, 0, 0 ]
@@ -348,10 +348,12 @@ _data = [ Vector2( 0, 2.73165 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.73165 ), 0.0, 0.0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 86 )
 disabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 262144
 script = ExtResource( 4 )
@@ -359,7 +361,33 @@ script = ExtResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 3 )
 
-[node name="Explosion" type="AnimatedSprite" parent="."]
+[node name="BuffedExplosionParticles" type="CPUParticles2D" parent="."]
+modulate = Color( 1.12, 1.12, 1.12, 1 )
+emitting = false
+amount = 600
+lifetime = 1.4
+one_shot = true
+explosiveness = 0.6
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 0.2
+angular_velocity = 0.1
+angular_velocity_random = 1.0
+linear_accel = 50.0
+linear_accel_random = 0.5
+linear_accel_curve = SubResource( 92 )
+radial_accel = 6.0
+scale_amount = 2.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 89 )
+color_ramp = SubResource( 90 )
+
+[node name="BuffedExplosionSprite" type="AnimatedSprite" parent="."]
 visible = false
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, 15 )

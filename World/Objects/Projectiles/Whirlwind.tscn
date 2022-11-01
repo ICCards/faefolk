@@ -148,11 +148,8 @@ script = ExtResource( 46 )
 position = Vector2( -8, -25 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 73 )
-frame = 44
-playing = true
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 264192
 script = ExtResource( 47 )

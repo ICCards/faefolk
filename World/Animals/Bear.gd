@@ -33,7 +33,7 @@ enum {
 	CHASE,
 	ATTACK,
 	IDLE,
-	WALK
+	WALK,
 }
 
 func _ready():
@@ -125,7 +125,7 @@ func set_direction():
 
 func set_change_direction_wait():
 	changed_direction = true
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.25), "timeout")
 	changed_direction = false
 
 
@@ -204,6 +204,8 @@ func hit(tool_name, var special_ability = ""):
 		start_stunned_state()
 	if health <= 0 and not destroyed:
 		destroyed = true
+		stop_sound_effects()
+		$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/death/" + direction  + "/body.png")
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
 		animation_player.play("death")
@@ -224,9 +226,13 @@ func _on_HurtBox_area_entered(area):
 		tornado_node = area
 	if area.special_ability == "stun":
 		start_stunned_state()
-		
+
+
 func start_stunned_state():
 	if not destroyed:
+		rng.randomize()
+		$Electricity.frame = rng.randi_range(1,6)
+		$Electricity.show()
 		$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", true)
 		$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", true)
 		animation_player.stop(false)
@@ -235,6 +241,7 @@ func start_stunned_state():
 
 func _on_StunnedTimer_timeout():
 	if not destroyed:
+		$Electricity.hide()
 		$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
 		$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", false)
 		stunned = false
