@@ -6,6 +6,8 @@ onready var _idle_timer: Timer = $IdleTimer
 onready var _chase_timer: Timer = $ChaseTimer
 onready var _end_chase_state_timer: Timer = $EndChaseState
 
+var enemy_name = "bear"
+
 var player = Server.player_node
 var direction: String = "down"
 var destroyed: bool = false
@@ -75,6 +77,11 @@ func _physics_process(delta):
 			tornado_node = null
 	if not visible or destroyed or stunned: 
 		return
+	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not player.state == 5 and not player.get_node("Magic").invisibility_active:
+		if state != CHASE and state != ATTACK:
+			start_chase_state()
+	if state == CHASE and (player.state == 5 or player.get_node("Magic").invisibility_active):
+		end_chase_state()
 	set_direction()
 	set_texture()
 	if knockback != Vector2.ZERO:
@@ -95,7 +102,7 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(_velocity)
 
 func move(velocity: Vector2) -> void:
-	if tornado_node or stunned:
+	if tornado_node or stunned or state == IDLE:
 		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
@@ -159,14 +166,14 @@ func set_texture():
 			$Body/Fangs.texture = load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png")
 		WALK:
 			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png")
-			$Body/Fangs.texture = null 
+			$Body/Fangs.texture = null
 		IDLE:
 			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
 			$Body/Fangs.texture = null
 
 
 func swing():
-	if not player.state == 5: # player dead
+	if not player.state == 5 and not player.get_node("Magic").invisibility_active: # player dead
 		if not attacking:
 			attacking = true
 			yield(get_tree().create_timer(0.1), "timeout")
@@ -207,9 +214,11 @@ func hit(tool_name, var special_ability = ""):
 	if health <= 0 and not destroyed:
 		destroyed = true
 		stop_sound_effects()
+		$Body/Fangs.texture = null
 		$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/death/" + direction  + "/body.png")
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
+		yield(get_tree(), "idle_frame")
 		animation_player.play("death")
 		yield(animation_player, "animation_finished")
 		queue_free()
@@ -255,33 +264,29 @@ func start_frozen_state(timer_length):
 	if not attacking and not destroyed:
 		animation_player.play("loop frozen")
 
-
-func _on_DetectPlayer_area_entered(area):
-	start_chase_state()
-
 func end_chase_state():
-	pass
-#	print("END CHASE STATE")
-#	navigation_agent.max_speed = 100
-#	stop_sound_effects()
-#	_idle_timer.start()
-#	_chase_timer.stop()
-#	_end_chase_state_timer.stop()
-#	state = IDLE
+	navigation_agent.max_speed = 100
+	stop_sound_effects()
+	_idle_timer.start()
+	_chase_timer.stop()
+	_end_chase_state_timer.stop()
+	state = IDLE
 
 func start_chase_state():
+	state = CHASE
+	$Body/Fangs.show()
 	navigation_agent.max_speed = 240
 	start_sound_effects()
 	_idle_timer.stop()
 	_chase_timer.start()
 	_end_chase_state_timer.start()
-	state = CHASE
 
 
 func _on_FrozenTimer_timeout():
 	$Body.modulate = Color("ffffff")
 	frozen = false
-	animation_player.play("loop")
+	if not destroyed:
+		animation_player.play("loop")
 
 
 func _on_VisibilityNotifier2D_screen_entered():

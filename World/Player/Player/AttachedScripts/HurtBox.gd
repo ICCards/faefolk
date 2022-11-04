@@ -16,6 +16,7 @@ func _on_HurtBox_area_entered(area):
 	else:
 		health_to_subtract = 0
 	PlayerStats.decrease_health(health_to_subtract)
+	get_node("../../Camera2D").player_hit_screen_shake()
 	$AnimationPlayer.play("hit")
-	$PlayerHitEffect/Label.text = str(health_to_subtract)
-	$PlayerHitEffect/AnimationPlayer.play("Animate" + str(rng.randi_range(1,2)))
+	get_node("../PlayerHitEffect/Label").text = str(health_to_subtract)
+	get_node("../PlayerHitEffect/AnimationPlayer").play("Animate" + str(rng.randi_range(1,2)))

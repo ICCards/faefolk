@@ -6,6 +6,7 @@ onready var _timer: Timer = $Timer
 onready var animation_player = $AnimationPlayer
 onready var navigation_agent = $NavigationAgent2D
 
+var enemy_name = "bunny"
 var is_sleeping: bool = true
 var destroyed: bool = false
 var stunned: bool = false

@@ -126,6 +126,7 @@ animations = [ {
 
 [node name="Duck" type="KinematicBody2D"]
 material = ExtResource( 3 )
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -134,7 +135,7 @@ position = Vector2( 0, -30 )
 scale = Vector2( 0.75, 0.75 )
 frames = ExtResource( 1 )
 animation = "walk"
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -180,11 +181,11 @@ one_shot = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
 visible = false
-modulate = Color( 1.2, 1.2, 1.2, 1 )
+modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 12
+frame = 6
 playing = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

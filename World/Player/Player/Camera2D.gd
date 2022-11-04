@@ -12,6 +12,9 @@ var strength_of_shake = 3.0
 var time_of_small_shake = 0.75
 var strength_of_small_shake = 2.0
 
+var time_of_player_hit_shake = 0.5
+var strength_of_player_hit_shake = 1.5
+
 var reset_speed = 0
 var strength = 0
 var doing_shake = false
@@ -46,11 +49,18 @@ func start_shake():
 	timer_wait_times.start(speed_of_shake)
 	
 	
-func start_small_shake():
+func player_hit_screen_shake():
 	doing_shake = true
 	strength = strength_of_small_shake
 	reset_speed = speed_of_shake
 	timer_shake_length.start(time_of_small_shake)
+	timer_wait_times.start(speed_of_shake)
+	
+func start_small_shake():
+	doing_shake = true
+	strength = strength_of_player_hit_shake
+	reset_speed = speed_of_shake
+	timer_shake_length.start(time_of_player_hit_shake)
 	timer_wait_times.start(speed_of_shake)
 	
 ##This is our flash tween, we tween up, then once we reach up, yield will fire, and we'll tween back down

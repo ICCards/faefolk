@@ -12,7 +12,7 @@ func _physics_process(delta):
 
 func _ready():
 	$Hitbox.tool_name = "arrow"
-	$Hitbox.knockback_vector = velocity
+	$Hitbox.knockback_vector = velocity / 150
 	if is_on_fire:
 		$Hitbox.special_ability = "fire"
 		$Sprite.modulate = Color("ff0000")

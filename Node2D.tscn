@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=1]
-[ext_resource path="res://World/Objects/Projectiles/BlizzardFog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/Objects/Magic/Ice/BlizzardFog.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Tilesets/CL_MainLev.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Themes/waves.tres" type="TileSet" id=5]
 [ext_resource path="res://Assets/Tilesets/grass_tilesets.png" type="Texture" id=6]

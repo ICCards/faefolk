@@ -1,4 +1,11 @@
 {
+    "dark magic staff": {
+      "ItemCategory": "Magic",
+      "StackSize": 1,
+      "Description": "Used to cast dark magic spells.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
     "lightning staff": {
       "ItemCategory": "Magic",
       "StackSize": 1,

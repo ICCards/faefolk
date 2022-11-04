@@ -1,8 +1,7 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Med.png" type="Texture" id=3]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" type="Texture" id=4]
 [ext_resource path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
@@ -5532,70 +5531,6 @@ height = 28.4444
 radius = 39.0
 height = 28.4444
 
-[sub_resource type="AtlasTexture" id=172]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=173]
-atlas = ExtResource( 3 )
-region = Rect2( 34, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=174]
-atlas = ExtResource( 3 )
-region = Rect2( 68, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=175]
-atlas = ExtResource( 3 )
-region = Rect2( 102, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=176]
-atlas = ExtResource( 3 )
-region = Rect2( 136, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=177]
-atlas = ExtResource( 3 )
-region = Rect2( 170, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=178]
-atlas = ExtResource( 3 )
-region = Rect2( 204, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=179]
-atlas = ExtResource( 3 )
-region = Rect2( 238, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=180]
-atlas = ExtResource( 3 )
-region = Rect2( 272, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=181]
-atlas = ExtResource( 3 )
-region = Rect2( 306, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=182]
-atlas = ExtResource( 3 )
-region = Rect2( 340, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=183]
-atlas = ExtResource( 3 )
-region = Rect2( 374, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=184]
-atlas = ExtResource( 3 )
-region = Rect2( 408, 0, 34, 34 )
-
-[sub_resource type="AtlasTexture" id=185]
-atlas = ExtResource( 3 )
-region = Rect2( 442, 0, 34, 34 )
-
-[sub_resource type="SpriteFrames" id=129]
-animations = [ {
-"frames": [ SubResource( 172 ), SubResource( 173 ), SubResource( 174 ), SubResource( 175 ), SubResource( 176 ), SubResource( 177 ), SubResource( 178 ), SubResource( 179 ), SubResource( 180 ), SubResource( 181 ), SubResource( 182 ), SubResource( 183 ), SubResource( 184 ), SubResource( 185 ) ],
-"loop": true,
-"name": "play",
-"speed": 8.0
-} ]
-
 [sub_resource type="CanvasItemMaterial" id=165]
 particles_animation = true
 particles_anim_h_frames = 5
@@ -6060,16 +5995,6 @@ position = Vector2( 0, -32 )
 [node name="Position2D" type="Position2D" parent="Magic/CastDirection"]
 position = Vector2( 40, -7.62939e-06 )
 
-[node name="Electricity" type="AnimatedSprite" parent="Magic"]
-visible = false
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-position = Vector2( 0, -31 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 129 )
-animation = "play"
-frame = 7
-playing = true
-
 [node name="GhostTimer" type="Timer" parent="Magic"]
 wait_time = 0.03
 
@@ -6115,6 +6040,8 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 170 )
 anim_speed_curve = SubResource( 171 )
 
+[node name="Tween" type="Tween" parent="Magic"]
+
 [node name="Area2Ds" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -6150,24 +6077,25 @@ collision_mask = 4096
 position = Vector2( 0, -43 )
 shape = SubResource( 10 )
 
-[node name="HurtBox" type="Area2D" parent="Area2Ds"]
-collision_layer = 0
-collision_mask = 128
-script = ExtResource( 32 )
-
-[node name="PlayerHitEffect" parent="Area2Ds/HurtBox" instance=ExtResource( 33 )]
+[node name="PlayerHitEffect" parent="Area2Ds" instance=ExtResource( 33 )]
 position = Vector2( -11.1111, -24.4444 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="Label" parent="Area2Ds/HurtBox/PlayerHitEffect" index="0"]
+[node name="Label" parent="Area2Ds/PlayerHitEffect" index="0"]
 visible = true
 margin_bottom = 141.0
 text = ""
 
-[node name="AnimationPlayer" parent="Area2Ds/HurtBox/PlayerHitEffect" index="1"]
+[node name="AnimationPlayer" parent="Area2Ds/PlayerHitEffect" index="1"]
 anims/Animate1 = SubResource( 24 )
 anims/Animate2 = SubResource( 25 )
 anims/RESET = SubResource( 26 )
+
+[node name="HurtBox" type="Area2D" parent="Area2Ds"]
+visible = false
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/HurtBox"]
 position = Vector2( 0, -20 )
@@ -6294,4 +6222,4 @@ shape = SubResource( 11 )
 [connection signal="area_entered" from="Area2Ds/DetectPathType/DetectStonePath" to="Area2Ds/DetectPathType" method="_on_DetectStonePath_area_entered"]
 [connection signal="area_exited" from="Area2Ds/DetectPathType/DetectStonePath" to="Area2Ds/DetectPathType" method="_on_DetectStonePath_area_exited"]
 
-[editable path="Area2Ds/HurtBox/PlayerHitEffect"]
+[editable path="Area2Ds/PlayerHitEffect"]

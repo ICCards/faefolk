@@ -129,6 +129,15 @@ func get_state():
 	return {'x': position.x, 'y': position.y, 'counter': counter, 'collisionMask': collisionMask}
 	
 	
+func teleport(portal_position):
+	var adjusted_pos = input_vector*40
+	if adjusted_pos == Vector2.ZERO:
+		adjusted_pos = Vector2(0,40)
+	if $Magic.portal_1_position == portal_position and $Magic.portal_2_position:
+		position = $Magic.portal_2_position + adjusted_pos
+	elif $Magic.portal_2_position == portal_position:
+		position = $Magic.portal_1_position + adjusted_pos
+	
 func sleep(sleeping_bag_direction, pos):
 	if state != SLEEPING:
 		z_index = 1
