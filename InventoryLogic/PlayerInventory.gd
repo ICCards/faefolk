@@ -39,8 +39,8 @@ var hotbar = {
 	4: ["ice staff", 1, null],
 	5: ["fire staff", 1, null],
 	6: ["earth staff", 1, null],
-	7: ["health staff", 1, null],
-	8: ["dark magic staff", 1, null],
+	7: ["dark magic staff", 1, null],
+	9: ["health potion", 10, null],
 }
 
 var chests = {}

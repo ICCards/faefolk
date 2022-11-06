@@ -1,8 +1,7 @@
 extends Node2D
 
 var rng = RandomNumberGenerator.new()
-onready var tween = $Tween
-onready var timer = $Timer
+onready var tween: Tween = $Tween
 onready var tree_animation_player = $AnimationPlayer
 var destroyed: bool = false
 var health
@@ -29,30 +28,31 @@ func _ready():
 func _on_TreeHurtbox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
+	if area.special_ability == "fire buff":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-18,12)))
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 
-func hit(tool_name, var special_ability = ""):
-	health -= Stats.return_axe_damage(tool_name)
+func hit(tool_name):
+	health -= Stats.return_tool_damage(tool_name)
 	Server.generated_map["tree"][name]["h"] = health
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
 	health -= 1
 	if health >= 1:
-		initiateLeavesFallingEffect(treeObject)
+		#initiateLeavesFallingEffect(treeObject)
 		$SoundEffects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		$SoundEffects.play()
-		
 		if Server.player_node.get_position().x <= get_position().x:	
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
+			#initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
 			tree_animation_player.play("tree hit right")
 		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
+			#initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
 			tree_animation_player.play("tree hit left")
 	elif not destroyed:
 		destroyed = true
-		timer.stop()
 		disable_tree_top_collision_box()
 		$SoundEffects.stream = Sounds.tree_break
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -69,34 +69,9 @@ func hit(tool_name, var special_ability = ""):
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		queue_free()
 
-		
 func disable_tree_top_collision_box():
 	set_tree_visible()
 	$TreeTopArea/CollisionPolygon2D.set_deferred("disabled", true)
-
-			
-### Effect functions		
-func initiateLeavesFallingEffect(tree):
-	pass
-#	if tree == Images.D_tree:
-#		adjusted_leaves_falling_pos = Vector2(0, 50)
-#	elif tree == Images.B_tree:
-#		adjusted_leaves_falling_pos = Vector2(0, 25)
-#	else: 
-#		adjusted_leaves_falling_pos = Vector2(0, 0)
-#	var leavesEffect = LeavesFallEffect.instance()
-#	leavesEffect.initLeavesEffect(tree)
-#	add_child(leavesEffect)
-#	leavesEffect.global_position = global_position + adjusted_leaves_falling_pos
-		
-func initiateTreeHitEffect(tree, effect, pos):
-	pass
-#	var trunkHitEffect = TrunkHitEffect.instance()
-#	trunkHitEffect.init(tree, effect)
-#	add_child(trunkHitEffect)
-#	trunkHitEffect.global_position = global_position + pos
-	
-
 
 func set_tree_visible():
 	tween.interpolate_property($AnimatedSprite, "modulate",

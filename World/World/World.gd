@@ -1,6 +1,6 @@
 extends YSort
 
-var build_tiles = false
+var build_tiles = true
 
 onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles
@@ -29,7 +29,7 @@ onready var Snake = preload("res://World/Animals/Snake.tscn")
 onready var IC_Ghost = preload("res://World/Enemies/ICGhost.tscn")
 onready var Bunny = preload("res://World/Animals/Bunny.tscn")
 onready var Duck = preload("res://World/Animals/Duck.tscn")
-onready var Boar = preload("res://World/Animals/Boar.tscn")
+#onready var Boar = preload("res://World/Animals/Boar.tscn")
 onready var Deer = preload("res://World/Animals/Deer.tscn")
 onready var Clam = preload("res://World/Objects/Nature/Forage/Clam.tscn")
 onready var Starfish = preload("res://World/Objects/Nature/Forage/Starfish.tscn")
@@ -75,11 +75,11 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 400
-const NUM_BUNNIES = 400
+const NUM_DUCKS = 200
+const NUM_BUNNIES = 200
 const NUM_BEARS = 100
 const NUM_BOARS = 0
-const NUM_DEER = 0
+const NUM_DEER = 100
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -282,8 +282,7 @@ func buildMap(map):
 	Server.world = self
 	spawn_animals()
 	set_random_beach_forage()
-	#set_nature_object_quadrants()
-	#set_nav()
+
 
 func remove_nature():
 	for node in $NatureObjects.get_children():
@@ -414,6 +413,7 @@ func spawn_grass():
 				object.name = id
 				object.position = dirt.map_to_world(loc) + Vector2(8, 32)
 				$GrassObjects.call_deferred("add_child",object,true)
+				yield(get_tree().create_timer(0.01), "timeout")
 	var value = grass_thread.wait_to_finish()
 
 func spawn_flowers():
@@ -436,6 +436,7 @@ func spawn_flowers():
 					object.location = loc
 					object.position = dirt.map_to_world(loc)
 					$GrassObjects.call_deferred("add_child",object,true)
+				yield(get_tree().create_timer(0.01), "timeout")
 	var value = flower_thread.wait_to_finish()
 
 
@@ -480,16 +481,19 @@ func spawn_nature():
 func set_nav():
 	var player_loc = validTiles.world_to_map(Server.player_node.position)
 	navTiles.clear()
-	#var count = 0
-	for x in range(60):
-		for y in range(60):
-			var loc = player_loc+Vector2(-30,-30)+Vector2(x,y)
+	for y in range(40):
+		for x in range(60):
+			var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
 			if Tiles.isValidNavigationTile(loc):
+				#if navTiles.get_cellv(loc) != 0:
 				navTiles.set_cellv(loc,0)
-			#count += 1
-	#yield(get_tree(), "idle_frame")
-	yield(get_tree().create_timer(1.0), "timeout")
+#			else:
+#				#if navTiles.get_cellv(loc) != -1:
+#				navTiles.set_cellv(loc,-1)
+	yield(get_tree().create_timer(0.25), "timeout")
 	var value = navigation_thread.wait_to_finish()
+
+
 #			if validTiles.get_cellv(loc) != -1 and Tiles.isCenterBitmaskTile(loc, validTiles):
 #				navTiles.set_cellv(loc,0)
 #			elif wetSand.get_cellv(loc) != -1 and deep_ocean.get_cellv(loc) == -1:
@@ -770,10 +774,10 @@ func spawnRandomBear():
 		
 func spawnRandomBoar():
 	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var boar = Boar.instance()
-		$Animals.add_child(boar)
-		boar.global_position = loc
+#	if loc != null:
+#		var boar = Boar.instance()
+#		$Animals.add_child(boar)
+#		boar.global_position = loc
 
 func spawnRandomDeer():
 	var loc = returnValidSpawnLocation()

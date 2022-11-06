@@ -14,7 +14,7 @@ var destroyed: bool = false
 var stunned: bool = false
 var attacking: bool = false
 var playing_sound_effect: bool = false
-var changed_direction: bool = false
+var changed_direction_delay: bool = false
 var frozen: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
@@ -69,14 +69,14 @@ func get_random_pos():
 		return position
 
 func _physics_process(delta):
+	if not visible or destroyed or stunned: 
+		return
 	if tornado_node:
 		if is_instance_valid(tornado_node):
 			d += delta
 			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
 		else: 
 			tornado_node = null
-	if not visible or destroyed or stunned: 
-		return
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not player.state == 5 and not player.get_node("Magic").invisibility_active:
 		if state != CHASE and state != ATTACK:
 			start_chase_state()
@@ -102,38 +102,33 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(_velocity)
 
 func move(velocity: Vector2) -> void:
-	if tornado_node or stunned or state == IDLE:
+	if tornado_node or stunned or attacking or destroyed:
 		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
-	elif not attacking and not destroyed:
+	else:
 		_velocity = move_and_slide(velocity)
 
 func set_direction():
-	if not changed_direction:
+	if not changed_direction_delay:
 		if abs(_velocity.x) >= abs(_velocity.y):
 			if _velocity.x >= 0:
 				if direction != "right":
 					direction = "right"
-					set_change_direction_wait()
+					set_change_direction_delay()
 			else:
 				if direction != "left":
 					direction = "left"
-					set_change_direction_wait()
+					set_change_direction_delay()
 		else:
 			if _velocity.y >= 0:
 				if direction != "down":
 					direction = "down"
-					set_change_direction_wait()
+					set_change_direction_delay()
 			else:
 				if direction != "up":
 					direction = "up"
-					set_change_direction_wait()
-
-func set_change_direction_wait():
-	changed_direction = true
-	yield(get_tree().create_timer(0.25), "timeout")
-	changed_direction = false
+					set_change_direction_delay()
 
 
 func play_groan_sound_effect():
@@ -173,44 +168,40 @@ func set_texture():
 
 
 func swing():
-	if not player.state == 5 and not player.get_node("Magic").invisibility_active: # player dead
-		if not attacking:
-			attacking = true
-			yield(get_tree().create_timer(0.1), "timeout")
-			play_groan_sound_effect()
-			if (position + Vector2(0,-26)).distance_to(player.position) < 45:
+	if not attacking:
+		attacking = true
+		yield(get_tree().create_timer(0.1), "timeout")
+		play_groan_sound_effect()
+		if (position + Vector2(0,-26)).distance_to(player.position) < 45:
+			animation_player.play("bite " + direction)
+		else:
+			if Util.chance(25):
 				animation_player.play("bite " + direction)
 			else:
-				if Util.chance(25):
-					animation_player.play("bite " + direction)
-				else:
-					animation_player.play("swing " + direction)
-			yield(animation_player, "animation_finished")
-			if not destroyed:
-				if frozen:
-					animation_player.play("loop frozen")
-				else:
-					animation_player.play("loop")
-				attacking = false
-				state = CHASE
-	else:
-		end_chase_state()
+				animation_player.play("swing " + direction)
+		yield(animation_player, "animation_finished")
+		if not destroyed:
+			if frozen:
+				animation_player.play("loop frozen")
+			else:
+				animation_player.play("loop")
+			attacking = false
+			state = CHASE
 
-
-func hit(tool_name, var special_ability = ""):
+func hit(tool_name):
 	if tool_name == "blizzard":
 		start_frozen_state(8)
 		return
+	elif tool_name == "ice projectile":
+		start_frozen_state(3)
+	elif tool_name == "lightning spell debuff":
+		start_stunned_state()
 	if state == IDLE or state == WALK:
 		start_chase_state()
 	_end_chase_state_timer.stop()
 	_end_chase_state_timer.start()
 	$HurtBox/AnimationPlayer.play("hit")
-	health -= Stats.return_sword_damage(tool_name)
-	if special_ability == "stun":
-		start_stunned_state()
-	elif special_ability == "fire":
-		health -= Stats.FIRE_DEBUFF_DAMAGE
+	health -= Stats.return_tool_damage(tool_name)
 	if health <= 0 and not destroyed:
 		destroyed = true
 		stop_sound_effects()
@@ -218,7 +209,6 @@ func hit(tool_name, var special_ability = ""):
 		$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/death/" + direction  + "/body.png")
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
-		yield(get_tree(), "idle_frame")
 		animation_player.play("death")
 		yield(animation_player, "animation_finished")
 		queue_free()
@@ -227,12 +217,11 @@ func hit(tool_name, var special_ability = ""):
 func _on_HurtBox_area_entered(area):
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	if area.knockback_vector != null:
+	if area.knockback_vector != Vector2.ZERO:
+		set_change_direction_delay()
 		knockback = area.knockback_vector * 100
-	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
-	if area.tool_name == "ice projectile":
-		start_frozen_state(3)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
 
@@ -251,8 +240,6 @@ func start_stunned_state():
 func _on_StunnedTimer_timeout():
 	if not destroyed:
 		$Electricity.hide()
-		$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
-		$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", false)
 		stunned = false
 		animation_player.play()
 
@@ -289,9 +276,15 @@ func _on_FrozenTimer_timeout():
 		animation_player.play("loop")
 
 
+func set_change_direction_delay():
+	changed_direction_delay = true
+	$ChangeDirectionDelay.start()
+
+func _on_ChangeDirectionDelay_timeout():
+	changed_direction_delay = false
+
+
 func _on_VisibilityNotifier2D_screen_entered():
 	show()
-
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
-

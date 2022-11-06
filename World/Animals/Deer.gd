@@ -1,33 +1,46 @@
 extends KinematicBody2D
 
+onready var deer_sprite: Sprite = $DeerSprite
 onready var _idle_timer: Timer = $IdleTimer
 onready var _chase_timer: Timer = $ChaseTimer
+onready var _end_chase_state_timer: Timer = $EndChaseState
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var player = Server.player_node
 var direction: String = "down"
-var dying: bool = false
+var destroyed: bool = false
+var frozen: bool = false
+var stunned: bool = false
+var chasing: bool = false
 var attacking: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
-var changed_direction: bool = false
+var changed_direction_delay: bool = false
 var health: int = Stats.DEER_HEALTH
 var KNOCKBACK_AMOUNT = 300
-
+var tornado_node = null
+var d := 0.0
+var orbit_speed := 5.0
+var orbit_radius
 var state = IDLE
 
 enum {
 	IDLE,
 	WALK,
-	RUN,
-	ATTACK
+	CHASE,
+	ATTACK,
+	DEATH
 }
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	randomize()
+	hide()
+	orbit_radius = rand_range(30, 50)
+	animation_player.play("loop")
 	_idle_timer.wait_time = rand_range(4.0,6.0)
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
@@ -40,6 +53,15 @@ func _update_pathfinding_chase():
 func _update_pathfinding_idle():
 	navigation_agent.set_target_location(get_random_pos())
 	
+func set_sprite_texture():
+	match state:
+		IDLE:
+			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png")
+		WALK:
+			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png")
+		CHASE:
+			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
+
 func get_random_pos():
 	random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
 	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position + random_pos)) == -1:
@@ -50,17 +72,41 @@ func get_random_pos():
 		return position
 	
 func move(velocity: Vector2) -> void:
-	if not dying and not attacking:
+	if tornado_node or stunned or attacking or destroyed:
+		return
+	if frozen:
+		_velocity = move_and_slide(velocity*0.75)
+	else:
 		_velocity = move_and_slide(velocity)
 
 func _physics_process(delta):
-	if dying:
+	if not visible or destroyed or stunned or attacking: 
 		return
-	if navigation_agent.is_navigation_finished():
-		animation_player.play("idle_" + direction)
+	if tornado_node:
+		if is_instance_valid(tornado_node):
+			d += delta
+			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
+		else: 
+			tornado_node = null
+	if knockback != Vector2.ZERO:
+		_velocity = Vector2.ZERO
+		knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
+		knockback = move_and_slide(knockback)
 		return
 	set_direction()
-	animation_player.play("run_" + direction)
+	set_sprite_texture()
+	if navigation_agent.is_navigation_finished():
+		state = IDLE
+		return
+	if player.state == 5 or player.get_node("Magic").invisibility_active:
+		end_chase_state()
+	if chasing:
+		state = CHASE
+	else:
+		state = WALK
+	if state == CHASE and (position+Vector2(0,-14)).distance_to(player.position) < 70:
+		state = ATTACK
+		attack()
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
@@ -68,49 +114,149 @@ func _physics_process(delta):
 	_velocity += steering
 	navigation_agent.set_velocity(_velocity)
 	
+func attack():
+	if not attacking:
+		attacking = true
+		$DeerSlam.look_at(player.position)
+		set_swing_direction()
+		deer_sprite.texture = load("res://Assets/Images/Animals/Deer/attack/" +  direction + "/body.png")
+		animation_player.play("attack")
+		yield(animation_player, "animation_finished")
+		if not destroyed:
+			if frozen:
+				animation_player.play("loop frozen")
+			else:
+				animation_player.play("loop")
+			attacking = false
+			state = CHASE
+	
 func set_direction():
-	if not changed_direction:
+	if not changed_direction_delay:
 		if abs(_velocity.x) >= abs(_velocity.y):
 			if _velocity.x >= 0:
 				if direction != "right":
 					direction = "right"
-					set_change_direction_wait()
+					set_change_direction_delay()
 			else:
 				if direction != "left":
 					direction = "left"
-					set_change_direction_wait()
+					set_change_direction_delay()
 		else:
 			if _velocity.y >= 0:
 				if direction != "down":
 					direction = "down"
-					set_change_direction_wait()
+					set_change_direction_delay()
 			else:
 				if direction != "up":
 					direction = "up"
-					set_change_direction_wait()
+					set_change_direction_delay()
 
-func set_change_direction_wait():
-	changed_direction = true
-	yield(get_tree().create_timer(0.5), "timeout")
-	changed_direction = false
+func set_swing_direction():
+	var degrees = int($DeerSlam.rotation_degrees) % 360
+	if $DeerSlam.rotation_degrees >= 0:
+		if degrees <= 45 or degrees >= 315:
+			direction = "right"
+		elif degrees <= 135:
+			direction = "down"
+		elif degrees <= 225:
+			direction = "left"
+		else:
+			direction = "up"
+	else:
+		if degrees >= -45 or degrees <= -315:
+			direction = "right"
+		elif degrees >= -135:
+			direction = "up"
+		elif degrees >= -225:
+			direction = "left"
+		else:
+			direction = "down"
+
+
+func hit(tool_name):
+	if tool_name == "blizzard":
+		start_frozen_state(8)
+		return
+	elif tool_name == "ice projectile":
+		start_frozen_state(3)
+	elif tool_name == "lightning spell debuff":
+		start_stunned_state()
+	if state == IDLE or state == WALK:
+		start_chase_state()
+	_end_chase_state_timer.stop()
+	_end_chase_state_timer.start()
+	$HurtBox/AnimationPlayer.play("hit")
+	health -= Stats.return_tool_damage(tool_name)
+	if health <= 0 and not destroyed:
+		destroyed = true
+		deer_sprite.texture = load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png")
+		animation_player.play("death")
+		yield(animation_player, "animation_finished")
+		queue_free()
 
 
 func _on_HurtBox_area_entered(area):
-	if area.knockback_vector != null:
-		knockback = area.knockback_vector * 100
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	$HurtBox/AnimationPlayer.play("hit")
-	health -= Stats.return_sword_damage(area.tool_name)
-	if health <= 0 and not dying:
-		dying = true
-		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-		$CollisionShape2D.set_deferred("disabled", true)
-		$AnimationPlayer.stop()
-		$AnimationPlayer.play("death")
-		yield($AnimationPlayer, "animation_finished")
-		queue_free()
+	if area.knockback_vector != Vector2.ZERO:
+		set_change_direction_delay()
+		knockback = area.knockback_vector * 100
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+		hit(area.tool_name)
+	if area.tool_name == "lingering tornado":
+		tornado_node = area
 
+
+func start_chase_state():
+	navigation_agent.max_speed = 250
+	_idle_timer.stop()
+	_chase_timer.start()
+	chasing = true
+	state = CHASE
+
+func end_chase_state():
+	navigation_agent.max_speed = 100
+	_chase_timer.stop()
+	_idle_timer.start()
+	chasing = false
+	state = IDLE
+
+func set_change_direction_delay():
+	changed_direction_delay = true
+	$ChangeDirectionDelay.start()
+
+func _on_ChangeDirectionDelay_timeout():
+	changed_direction_delay = false
+
+func start_frozen_state(timer_length):
+	deer_sprite.modulate = Color("00c9ff")
+	frozen = true
+	$FrozenTimer.stop()
+	$FrozenTimer.start(timer_length)
+	if not attacking and not destroyed:
+		animation_player.play("loop frozen")
+
+func _on_FrozenTimer_timeout():
+	deer_sprite.modulate = Color("ffffff")
+	frozen = false
+	if not destroyed:
+		animation_player.play("loop")
+
+func start_stunned_state():
+	if not destroyed:
+		rng.randomize()
+		$Electricity.frame = rng.randi_range(1,13)
+		$Electricity.show()
+		$DeerSlam/CollisionShape2D.set_deferred("disabled", true)
+		animation_player.stop(false)
+		$StunnedTimer.start()
+		stunned = true
+
+func _on_StunnedTimer_timeout():
+	if not destroyed:
+		$Electricity.hide()
+		stunned = false
+		animation_player.play()
 
 
 func _on_VisibilityNotifier2D_screen_entered():

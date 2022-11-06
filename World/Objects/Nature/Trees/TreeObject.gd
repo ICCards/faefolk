@@ -7,7 +7,6 @@ onready var sound_effects_stump: AudioStreamPlayer2D = $SoundEffectsStump
 onready var sound_effects_tree: AudioStreamPlayer2D = $SoundEffectsTree
 onready var animation_player_tree: AnimationPlayer = $AnimationPlayerTree
 onready var animation_player_stump: AnimationPlayer = $AnimationPlayerStump
-onready var navigation_obstacle: NavigationObstacle2D = $NavigationObstacle2D
 onready var random_leaves_falling_timer: Timer = $RandomLeavesFallingTimer
 onready var tween: Tween = $TreeSprites/Tween
 
@@ -49,60 +48,10 @@ func setTexture(tree):
 		"snow":
 			tree_top_sprite.texture = tree.topTreeWinter
 
-
-func PlayEffect(player_id):
-	health -= 1
-	if get_node("/root/World/Players/" + str(player_id) + "/" +  str(player_id)).get_position().x < get_position().x:
-		hit_dir = "right"
-	else:
-		hit_dir = "left"
-	if health >= 5:
-		InstancedScenes.initiateLeavesFallingEffect(variety, position)
-		sound_effects_tree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		sound_effects_tree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects_tree.play()
-		if hit_dir == "right":
-			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", Vector2(0, 12))
-			animation_player_tree.play("tree hit right")
-		else: 
-			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", Vector2(-24, 12))
-			animation_player_tree.play("tree hit left")
-	elif health == 3:
-		sound_effects_stump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects_stump.play()
-		sound_effects_tree.stream = Sounds.tree_break
-		sound_effects_tree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects_tree.play()
-		if hit_dir == "right":
-			animation_player_tree.play("tree fall right")
-		else:
-			animation_player_tree.play("tree fall left")
-	elif health >= 1:
-		sound_effects_tree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		sound_effects_tree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects_tree.play()
-		if hit_dir == "right":
-			animation_player_stump.play("stump hit right")
-			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", Vector2(0, 12))
-		else:
-			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", Vector2(-24, 12))
-			animation_player_stump.play("stump hit right")
-	else:
-		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
-		sound_effects_stump.stream = Sounds.stump_break
-		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects_stump.play()
-		animation_player_stump.play("stump destroyed")
-		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", Vector2(-8, 32))
-		yield(animation_player_stump, "animation_finished")
-		queue_free()
-
-
-func hit(tool_name, var special_ability = ""):
+func hit(tool_name):
 	if health == 100:
 		InstancedScenes.initiateBirdEffect(position)
-	health -= Stats.return_axe_damage(tool_name)
+	health -= Stats.return_tool_damage(tool_name)
 	Server.generated_map["tree"][name]["h"] = health
 	if health >= Stats.STUMP_HEALTH:
 		InstancedScenes.initiateLeavesFallingEffect(variety, position)
@@ -167,15 +116,11 @@ func hit(tool_name, var special_ability = ""):
 func _on_Hurtbox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	#var data = {"id": name, "n": "tree"}
-	#Server.action("ON_HIT", data)
-	if _area.tool_name != "lightning spell" and  _area.tool_name != "explosion spell":
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		hit(_area.tool_name)
-	if _area.special_ability == "fire":
+	if _area.special_ability == "fire buff":
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-10,22)))
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-
-
 
 
 ### Tree modulate functions

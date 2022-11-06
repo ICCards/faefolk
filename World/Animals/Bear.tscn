@@ -1050,6 +1050,10 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="ChangeDirectionDelay" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -1058,7 +1062,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 3
+frame = 5
 playing = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
@@ -1066,3 +1070,4 @@ playing = true
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
 [connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
+[connection signal="timeout" from="ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]

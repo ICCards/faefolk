@@ -59,14 +59,14 @@ func get_random_pos():
 		return position
 
 func _physics_process(delta):
+	if not visible or destroyed or is_eating or stunned:
+		return
 	if tornado_node:
 		if is_instance_valid(tornado_node):
 			d += delta
 			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
 		else: 
 			tornado_node = null
-	if not visible or destroyed or is_eating or stunned:
-		return
 	if navigation_agent.is_navigation_finished():
 		if not frozen:
 			if Util.chance(20):
@@ -81,7 +81,6 @@ func _physics_process(delta):
 				is_eating = false
 			return
 	$AnimatedSprite.play("walk")
-	
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
@@ -116,10 +115,8 @@ func _update_pathfinding() -> void:
 func _on_HurtBox_area_entered(area):
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
-	if area.tool_name == "ice projectile":
-		start_frozen_state(3.0)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
 	elif area.special_ability == "fire":
@@ -133,16 +130,18 @@ func start_frozen_state(timer_length):
 	frozen = true
 
 func hit(tool_name, var special_ability = ""):
-	is_eating = false
-	start_run_state()
 	if tool_name == "blizzard":
 		start_frozen_state(8)
 		return
-	health -= Stats.return_sword_damage(tool_name)
+	elif tool_name == "ice projectile":
+		start_frozen_state(3.0)
+	elif tool_name == "lightning spell debuff":
+		start_stunned_state()
+	is_eating = false
+	start_run_state()
+	health -= Stats.return_tool_damage(tool_name)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
-	if special_ability == "stun":
-		start_stunned_state()
 	if health <= 0 and not destroyed:
 		set_physics_process(false)
 		destroyed = true
@@ -155,6 +154,7 @@ func hit(tool_name, var special_ability = ""):
 		InstancedScenes.intitiateItemDrop("raw wing", position, 1)
 		yield($AnimationPlayer, "animation_finished")
 		queue_free()
+
 
 func start_run_state():
 	running_state = true

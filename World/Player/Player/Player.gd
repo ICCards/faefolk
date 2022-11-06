@@ -28,7 +28,8 @@ enum {
 	DYING,
 	SLEEPING,
 	SITTING,
-	MAGIC_CASTING
+	MAGIC_CASTING,
+	BOW_ARROW_SHOOTING
 }
 
 var direction = "DOWN"
@@ -218,7 +219,7 @@ func _process(_delta) -> void:
 		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
 	if state == MOVEMENT:
 		movement_state(_delta)
-	elif state == MAGIC_CASTING:
+	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
 		magic_casting_movement_state(_delta)
 	else:
 		$Sounds/FootstepsSound.stream_paused = true
@@ -250,7 +251,10 @@ func _unhandled_input(event):
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
 					swing(item_name)
 				if item_category == "Magic" and event.is_action_pressed("mouse_click"):
-					$Magic.cast_spell(item_name, direction)
+					if item_name == "health potion":
+						$Magic.throw_potion(item_name, direction)
+					else:
+						$Magic.cast_spell(item_name, direction)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
 					eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
@@ -510,8 +514,8 @@ func decrease_energy_or_health():
 			rng.randomize()
 			var amt = rng.randi_range(1,3)
 			$Area2Ds/HurtBox/AnimationPlayer.play("hit")
-			$Area2Ds/HurtBox/PlayerHitEffect/Label.text = str(amt)
-			$Area2Ds/HurtBox/PlayerHitEffect/AnimationPlayer.play("Animate" + str(rng.randi_range(1,2)))
+			$Area2Ds/PlayerHitEffect/Label.text = str(amt)
+			$Area2Ds/PlayerHitEffect/AnimationPlayer.play("Animate" + str(rng.randi_range(1,2)))
 			PlayerStats.decrease_health(amt)
 		else:
 			PlayerStats.decrease_energy()

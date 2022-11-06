@@ -38,9 +38,9 @@ const ARROW_DAMAGE = 50
 const FIRE_DEBUFF_DAMAGE = 20
 
 const LIGHTNING_SPELL_DAMAGE = 20
+const LIGHTNING_SPELL_DEBUFF_DAMAGE = 20
 const LIGHTNING_STRIKE_DAMAGE = 50
 
-const EXPLOSION_SPELL_DAMAGE = 20
 const WHIRLWIND_SPELL_DAMAGE = 20
 const TORNADO_SPELL_DAMAGE = 20
 const ICE_SPELL_DAMAGE = 20
@@ -61,7 +61,7 @@ const BOAR_HEALTH = 140
 const DEER_HEALTH = 150
 
 
-func return_pickaxe_damage(tool_name):
+func return_tool_damage(tool_name):
 	match tool_name:
 		"earthquake":
 			return EARTHQUAKE_DAMAGE
@@ -81,82 +81,10 @@ func return_pickaxe_damage(tool_name):
 			return LIGHTNING_SPELL_DAMAGE
 		"lightning spell":
 			return LIGHTNING_SPELL_DAMAGE
+		"lightning spell debuff":
+			return LIGHTNING_SPELL_DEBUFF_DAMAGE
 		"lightning strike":
 			return LIGHTNING_STRIKE_DAMAGE
-		"explosion":
-			return EXPLOSION_SPELL_DAMAGE
-		"wood pickaxe":
-			return WOOD_TOOL_DAMAGE
-		"stone pickaxe":
-			return STONE_TOOL_DAMAGE
-		"bronze pickaxe":
-			return BRONZE_TOOL_DAMAGE
-		"iron pickaxe":
-			return IRON_TOOL_DAMAGE
-		"gold pickaxe":
-			return GOLD_TOOL_DAMAGE
-
-func return_axe_damage(tool_name):
-	match tool_name:
-		"earthquake":
-			return EARTHQUAKE_DAMAGE
-		"flamethrower":
-			return FLAMETHROWER_DAMAGE
-		"fire projectile":
-			return FIRE_PROJECTILE_DAMAGE
-		"earth strike":
-			return EARTH_STRIKE_DAMAGE
-		"ice projectile":
-			return ICE_SPELL_DAMAGE
-		"tornado spell":
-			return TORNADO_SPELL_DAMAGE
-		"lingering tornado":
-			return LINGERING_TORNADO_DAMAGE
-		"whirlwind spell":
-			return LIGHTNING_SPELL_DAMAGE
-		"lightning spell":
-			return LIGHTNING_SPELL_DAMAGE
-		"lightning strike":
-			return LIGHTNING_STRIKE_DAMAGE
-		"explosion":
-			return EXPLOSION_SPELL_DAMAGE
-		"punch":
-			return PUNCH_DAMAGE
-		"wood axe":
-			return WOOD_TOOL_DAMAGE
-		"stone axe":
-			return STONE_TOOL_DAMAGE
-		"bronze axe":
-			return BRONZE_TOOL_DAMAGE
-		"iron axe":
-			return IRON_TOOL_DAMAGE
-		"gold axe":
-			return GOLD_TOOL_DAMAGE
-
-func return_sword_damage(tool_name):
-	match tool_name:
-		"earthquake":
-			return EARTHQUAKE_DAMAGE
-		"flamethrower":
-			return FLAMETHROWER_DAMAGE
-		"fire projectile":
-			return FIRE_PROJECTILE_DAMAGE
-		"earth strike":
-			return EARTH_STRIKE_DAMAGE
-		"ice projectile":
-			return ICE_SPELL_DAMAGE
-		"tornado spell":
-			return TORNADO_SPELL_DAMAGE
-		"lingering tornado":
-			return LINGERING_TORNADO_DAMAGE
-		"whirlwind spell":
-			return LIGHTNING_SPELL_DAMAGE
-		"lightning spell":
-			return LIGHTNING_SPELL_DAMAGE
-		"lightning strike":
-			return LIGHTNING_STRIKE_DAMAGE
-		"explosion":
-			return EXPLOSION_SPELL_DAMAGE
 		"wood sword":
 			return WOOD_SWORD_DAMAGE
 		"stone sword":
@@ -169,34 +97,34 @@ func return_sword_damage(tool_name):
 			return GOLD_SWORD_DAMAGE
 		"arrow":
 			return ARROW_DAMAGE
+		"punch":
+			return PUNCH_DAMAGE
+		"wood axe":
+			return WOOD_TOOL_DAMAGE
+		"stone axe":
+			return STONE_TOOL_DAMAGE
+		"bronze axe":
+			return BRONZE_TOOL_DAMAGE
+		"iron axe":
+			return IRON_TOOL_DAMAGE
+		"gold axe":
+			return GOLD_TOOL_DAMAGE
+		"wood pickaxe":
+			return WOOD_TOOL_DAMAGE
+		"stone pickaxe":
+			return STONE_TOOL_DAMAGE
+		"bronze pickaxe":
+			return BRONZE_TOOL_DAMAGE
+		"iron pickaxe":
+			return IRON_TOOL_DAMAGE
+		"gold pickaxe":
+			return GOLD_TOOL_DAMAGE
 
 
 func return_item_drop_quantity(tool_name, object_name):
 	match object_name:
 		"tree":
 			match tool_name:
-				"earthquake":
-					return 3
-				"flamethrower":
-					return 3
-				"fire projectile":
-					return 3
-				"earth strike":
-					return 3
-				"ice projectile":
-					return 3
-				"tornado spell":
-					return 3
-				"lingering tornado":
-					return 3
-				"whirlwind spell":
-					return 3
-				"lightning spell":
-					return 3
-				"lightning strike":
-					return 3
-				"explosion":
-					return 3
 				"punch":
 					return 3
 				"wood axe":
@@ -209,30 +137,10 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 15
 				"gold axe":
 					return 18
+				_:
+					return 3
 		"stump":
 			match tool_name:
-				"earthquake":
-					return 2
-				"flamethrower":
-					return 2
-				"fire projectile":
-					return 2
-				"earth strike":
-					return 2
-				"ice projectile":
-					return 2
-				"tornado spell":
-					return 2
-				"lingering tornado":
-					return 2
-				"whirlwind spell":
-					return 2
-				"lightning spell":
-					return 2
-				"lightning strike":
-					return 2
-				"explosion":
-					return 2
 				"punch":
 					return 2
 				"wood axe":
@@ -245,30 +153,10 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 10
 				"gold axe":
 					return 12
+				_:
+					return 2
 		"branch":
 			match tool_name:
-				"earthquake":
-					return 1
-				"flamethrower":
-					return 1
-				"fire projectile":
-					return 1
-				"earth strike":
-					return 1
-				"ice projectile":
-					return 1
-				"tornado spell":
-					return 1
-				"lingering tornado":
-					return 1
-				"whirlwind spell":
-					return 1
-				"lightning spell":
-					return 1
-				"lightning strike":
-					return 1
-				"explosion":
-					return 1
 				"punch":
 					return 1
 				"wood axe":
@@ -281,30 +169,10 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 5
 				"gold axe":
 					return 6
+				_:
+					return 1
 		"large ore":
 			match tool_name:
-				"earthquake":
-					return 3
-				"flamethrower":
-					return 3
-				"fire projectile":
-					return 3
-				"earth strike":
-					return 3
-				"ice projectile":
-					return 3
-				"tornado spell":
-					return 3
-				"lingering tornado":
-					return 2
-				"whirlwind spell":
-					return 3
-				"lightning spell":
-					return 3
-				"lightning strike":
-					return 3
-				"explosion":
-					return 3
 				"wood pickaxe":
 					return 3
 				"stone pickaxe":
@@ -315,30 +183,10 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 12
 				"gold pickaxe":
 					return 15
+				_:
+					return 3
 		"small ore":
 			match tool_name:
-				"earthquake":
-					return 2
-				"flamethrower":
-					return 2
-				"fire projectile":
-					return 2
-				"earth strike":
-					return 2
-				"ice projectile":
-					return 2
-				"tornado spell":
-					return 2
-				"lingering tornado":
-					return 2
-				"whirlwind spell":
-					return 2
-				"lightning spell":
-					return 2
-				"lightning strike":
-					return 2
-				"explosion":
-					return 2
 				"wood pickaxe":
 					return 2
 				"stone pickaxe":
@@ -349,6 +197,8 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 8
 				"gold pickaxe":
 					return 10
+				_:
+					return 2
 
 
 func return_max_tool_health(item_name):

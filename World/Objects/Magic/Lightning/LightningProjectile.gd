@@ -7,6 +7,7 @@ var speed = 500
 var collided = false
 var path
 var debuff 
+var type
 
 func _physics_process(delta):
 	if not collided:
@@ -14,8 +15,10 @@ func _physics_process(delta):
 
 func _ready():
 	if debuff:
-		$Hitbox.special_ability = "stun"
-	$Hitbox.tool_name = "lightning spell"
+		type = "lightning spell debuff"
+	else:
+		type = "lightning spell"
+	$Hitbox.tool_name = type
 	projectile_sprite.play("default")
 	
 func _on_Area2D_area_entered(area):
@@ -25,11 +28,11 @@ func chain_effect(start_name):
 	var nodes = []
 	for node in get_node("/root/World/NatureObjects").get_children():
 		if not node.destroyed and self.position.distance_to(node.position) < 250 and node.name != start_name:
-			node.hit("lightning spell", $Hitbox.special_ability)
+			node.hit(type)
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
 	for node in get_node("/root/World/Animals").get_children():
 		if not node.destroyed and self.position.distance_to(node.position) < 250 and node.name != start_name:
-			node.hit("lightning spell", $Hitbox.special_ability)
+			node.hit(type)
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
 	yield(get_tree(), 'idle_frame')
 	Server.world.draw_mst(find_mst(nodes))

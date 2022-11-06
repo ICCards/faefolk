@@ -1,7 +1,7 @@
 extends Node2D
 
 
-onready var small_ore_sprite = $SmallOre
+onready var small_ore_sprite: Sprite = $SmallOre
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var rng = RandomNumberGenerator.new()
@@ -20,32 +20,11 @@ func setTexture():
 	rng.randomize()
 	ore_object = Images.returnOreObject(variety)
 	small_ore_sprite.texture = ore_object.mediumOres[rng.randi_range(0, 5)]
-	
-func PlayEffect(player_id):
-	health -= 1
-	if health >= 1:
-		sound_effects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects.play()
-		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-10, 10), 32))
-		animation_player.play("small_ore_hit_right")
-	else:
-		Tiles.reset_valid_tiles(location)
-		visible = false
-		$SmallMovementCollisionBox/CollisionShape2D.disabled = true
-		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects.play()
-		InstancedScenes.initiateOreHitEffect(variety, "ore destroyed", position+Vector2(rng.randi_range(-10, 10), 42))
-		yield(sound_effects, "finished")
-		queue_free()
 
 
-func hit(tool_name, var special_ability = ""):
+func hit(tool_name):
 	rng.randomize()
-	#var data = {"id": name, "n": "ore"}
-	#Server.action("ON_HIT", data)
-	health -= Stats.return_pickaxe_damage(tool_name)
+	health -= Stats.return_tool_damage(tool_name)
 	Server.generated_map["ore"][name]["h"] = health
 	if health <= 0 and not destroyed:
 		destroyed = true
@@ -75,12 +54,11 @@ func hit(tool_name, var special_ability = ""):
 func _on_SmallHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		hit(_area.tool_name)
-	if _area.special_ability == "fire":
+	if _area.special_ability == "fire buff":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-8, 8), rand_range(-16,0)))
-	
 
 
 func add_to_collection(type, amt):

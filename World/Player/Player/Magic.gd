@@ -11,6 +11,7 @@ onready var Whirlwind = preload("res://World/Objects/Magic/Wind/Whirlwind.tscn")
 
 onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProjectile.tscn")
 onready var FlameThrower = preload("res://World/Objects/Magic/Fire/Flamethrower.tscn")
+onready var FireBuff = preload("res://World/Objects/Magic/Fire/AttachedFlame.tscn")
 
 onready var EarthStrike = preload("res://World/Objects/Magic/Earth/EarthStrike.tscn")
 onready var EarthGolem = preload("res://World/Objects/Magic/Earth/EarthGolem.tscn")
@@ -55,6 +56,7 @@ signal spell_finished
 var animation: String = ""
 var direction: String = "DOWN"
 var is_casting: bool = false
+var is_throwing: bool = false
 var flamethrower_active: bool = false
 var invisibility_active: bool = false
 var mouse_left_down: bool = false
@@ -70,6 +72,17 @@ func _input( event ):
 		elif event.button_index == 1 and not event.is_pressed():
 			mouse_left_down = false
 
+
+func throw_potion(potion_name, init_direction):
+	is_throwing = true
+	direction = init_direction
+	get_parent().state = MAGIC_CASTING
+	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), null)
+	player_animation_player.play("bow draw release")
+	yield(player_animation_player, "animation_finished" )
+	is_throwing = false
+	get_parent().state = MOVEMENT
+	get_parent().direction = direction
 
 func wait_for_cast_release(staff_name):
 	if not mouse_left_down:
@@ -99,7 +112,7 @@ func cast_spell(staff_name, init_direction):
 
 
 func _physics_process(delta):
-	if not is_casting and not flamethrower_active:
+	if not is_casting and not flamethrower_active and not is_throwing:
 		return
 	var degrees = int($CastDirection.rotation_degrees) % 360
 	$CastDirection.look_at(get_global_mouse_position())
@@ -121,8 +134,10 @@ func _physics_process(delta):
 			direction = "LEFT"
 		else:
 			direction = "DOWN"
-	if get_parent().state != DYING:
+	if get_parent().state != DYING and is_casting:
 		composite_sprites.set_player_animation(get_parent().character, "magic_cast_" + direction.to_lower(), "magic staff")
+	elif get_parent().state != DYING and is_throwing:
+		composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), null)
 
 
 func cast(staff_name, spell_index):
@@ -371,10 +386,7 @@ func play_blizzard():
 	var spell = BlizzardFog.instance()
 	spell.position = get_parent().position
 	get_node("../../../").add_child(spell)
-	yield(get_tree().create_timer(1.0), "timeout")
-	for animal in get_node("/root/World/Animals").get_children():
-		if not animal.destroyed and get_parent().position.distance_to(animal.position) < 1286:
-			animal.hit("blizzard")
+
 
 # Wind #
 
@@ -442,6 +454,8 @@ func play_fire_projectile(debuff):
 
 
 func play_fire_buff():
+	var spell = FireBuff.instance()
+	get_node("../").add_child(spell)
 	player_fire_buff = true
 	yield(get_tree().create_timer(FIRE_BUFF_LENGTH), "timeout")
 	player_fire_buff = false

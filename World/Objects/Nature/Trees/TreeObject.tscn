@@ -665,10 +665,6 @@ disabled = true
 [node name="RandomLeavesFallingTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-estimate_radius = false
-radius = 40.0
-
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -2.86102e-06, -93.3333 )
 scale = Vector2( 7.11111, 12.2222 )

@@ -62,14 +62,14 @@ func _update_pathfinding() -> void:
 
 
 func _physics_process(delta):
+	if not visible or destroyed or stunned:
+		return
 	if tornado_node:
 		if is_instance_valid(tornado_node):
 			d += delta
 			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
 		else: 
 			tornado_node = null
-	if not visible or destroyed or stunned:
-		return
 	if is_sleeping:
 		$AnimatedSprite.play("sleep")
 		return
@@ -106,18 +106,20 @@ func _get_direction_string(veloctiy) -> String:
 	return "Left"
 
 
-func hit(tool_name, var special_ability= ""):
-	if is_sleeping:
-		is_sleeping = false
+func hit(tool_name):
 	if tool_name == "blizzard":
 		start_frozen_state(8)
 		return
+	elif tool_name == "ice projectile":
+		start_frozen_state(3)
+	elif tool_name == "lightning spell debuff":
+		start_stunned_state()
+	elif is_sleeping:
+		is_sleeping = false
 	start_run_state()
-	health -= Stats.return_sword_damage(tool_name)
+	health -= Stats.return_tool_damage(tool_name)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
-	if special_ability == "stun":
-		start_stunned_state()
 	if health <= 0 and not destroyed:
 		set_physics_process(false)
 		destroyed = true
@@ -135,15 +137,11 @@ func hit(tool_name, var special_ability= ""):
 func _on_HurtBox_area_entered(area):
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
-	if area.tool_name == "ice projectile":
-		start_frozen_state(3)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
-	if area.special_ability == "stun":
-		start_stunned_state()
-	elif area.special_ability == "fire":
+	if area.special_ability == "fire":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 	
 	

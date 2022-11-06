@@ -16,16 +16,6 @@ func _ready():
 	randomize()
 	hide()
 	setTreeBranchType(variety)
-	
-func PlayEffect(player_id):
-	Tiles.add_valid_tiles(location)
-	sound_effects.stream = Sounds.stump_break
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	sound_effects.play()
-	animation_player.play("break")
-	InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position)
-	yield(animation_player, "animation_finished")
-	queue_free()
 
 func setTreeBranchType(num):
 	if num <= 2:
@@ -43,8 +33,6 @@ func hit(tool_name, var special_ability = ""):
 		destroyed = true
 		Server.generated_map["log"].erase(name)
 		Tiles.add_valid_tiles(location)
-		var data = {"id": name, "n": "log"}
-		Server.action("ON_HIT", data)
 		sound_effects.stream = Sounds.stump_break
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
@@ -59,13 +47,12 @@ func hit(tool_name, var special_ability = ""):
 func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		hit(_area.tool_name)
-	if _area.special_ability == "fire":
+	if _area.special_ability == "fire buff":
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-16,16)))
 
 func _on_VisibilityNotifier2D_screen_entered():
 	show()
-
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()

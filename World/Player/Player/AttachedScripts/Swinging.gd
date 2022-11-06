@@ -27,7 +27,8 @@ enum {
 	DYING,
 	SLEEPING,
 	SITTING,
-	MAGIC_CASTING
+	MAGIC_CASTING,
+	BOW_ARROW_SHOOTING
 }
 
 var is_drawing: bool = false
@@ -117,6 +118,7 @@ func swing(item_name, _direction):
 
 
 func draw_bow(init_direction):
+	get_parent().state = BOW_ARROW_SHOOTING
 	is_drawing = true
 	animation = "draw_" + init_direction.to_lower()
 	player_animation_player.play("bow draw release")

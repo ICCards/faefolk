@@ -142,8 +142,6 @@ anims/RESET = SubResource( 15 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="Tween" type="Tween" parent="."]
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]

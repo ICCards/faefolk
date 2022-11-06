@@ -1,4 +1,11 @@
 {
+    "health potion": {
+      "ItemCategory": "Magic",
+      "StackSize": 999,
+      "Description": "Increases health slightly.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
     "dark magic staff": {
       "ItemCategory": "Magic",
       "StackSize": 1,
