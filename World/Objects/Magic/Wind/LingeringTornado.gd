@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var velocity = Vector2(0,0)
 var speed = 350
@@ -14,6 +15,8 @@ func _physics_process(delta):
 		$TrailParticles/P3.emitting = false
 
 func _ready():
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
+	sound_effects.play()
 	$Hitbox.tool_name = "lingering tornado"
 	$AnimationPlayer.play("play")
 	$AnimatedSprite.play("start")
@@ -32,6 +35,7 @@ func _ready():
 	$Hitbox.queue_free()
 	$AnimatedSprite.play("end")
 	stop_trail_particles()
+	fade_out_sound()
 	yield($AnimatedSprite, "animation_finished")
 	$AnimatedSprite.hide()
 	yield(get_tree().create_timer(3.0), "timeout")
@@ -57,3 +61,7 @@ func stop_trail_particles():
 	$TrailParticles/P1.emitting = false
 	$TrailParticles/P2.emitting = false
 	$TrailParticles/P3.emitting = false
+	
+func fade_out_sound():
+	$Tween.interpolate_property(sound_effects, "volume_db", Sounds.return_adjusted_sound_db("sound", -20), -80, 3.0, 1, Tween.EASE_IN, 0)
+	$Tween.start()

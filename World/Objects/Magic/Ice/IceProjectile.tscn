@@ -1,6 +1,7 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.wav" type="AudioStream" id=2]
 [ext_resource path="res://World/Objects/Magic/Ice/IceProjectile.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Images/Magic/ice/1/Ice2 (100x100px).png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Magic/ice/3/Ice1 (100x100px).png" type="Texture" id=5]
@@ -374,7 +375,7 @@ modulate = Color( 1.17, 1.17, 1.17, 1 )
 position = Vector2( 10, -9 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
-frame = 25
+frame = 21
 playing = true
 
 [node name="TrailParticles" type="Node2D" parent="."]
@@ -498,5 +499,11 @@ scale_amount = 2.5
 scale_amount_random = 1.0
 scale_amount_curve = SubResource( 91 )
 color_ramp = SubResource( 90 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+
+[node name="SoundEffects2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]

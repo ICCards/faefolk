@@ -214,11 +214,11 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 34, 34 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=39]
 atlas = ExtResource( 2 )
 region = Rect2( 34, 0, 34, 34 )
 
@@ -270,15 +270,16 @@ region = Rect2( 408, 0, 34, 34 )
 atlas = ExtResource( 2 )
 region = Rect2( 442, 0, 34, 34 )
 
-[sub_resource type="SpriteFrames" id=38]
+[sub_resource type="SpriteFrames" id=40]
 animations = [ {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
+"frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
 [node name="Deer" type="KinematicBody2D"]
+collision_mask = 3
 script = ExtResource( 12 )
 
 [node name="DeerSprite" type="Sprite" parent="."]
@@ -346,6 +347,7 @@ one_shot = true
 
 [node name="EndChaseState" type="Timer" parent="."]
 wait_time = 45.0
+one_shot = true
 
 [node name="StunnedTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -355,13 +357,16 @@ one_shot = true
 visible = false
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 38 )
-frame = 10
+frames = SubResource( 40 )
+frame = 8
 playing = true
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]
 [connection signal="timeout" from="FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
+[connection signal="timeout" from="EndChaseState" to="." method="_on_EndChaseState_timeout"]
 [connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]

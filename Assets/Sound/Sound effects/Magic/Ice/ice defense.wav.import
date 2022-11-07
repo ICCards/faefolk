@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ice defense.wav-03fd30a9fdf3825a7512fa66347c2c5f.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Ice/ice defense.wav"
+dest_files=[ "res://.import/ice defense.wav-03fd30a9fdf3825a7512fa66347c2c5f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

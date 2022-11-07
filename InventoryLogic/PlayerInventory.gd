@@ -22,13 +22,13 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	0: ["wood", 999, null],
-	1: ["stone", 999, null],
-	9: ["rope", 12, null],
-	8: ["iron ingot", 15, null],
-	6: ["potato seeds", 60, null],
-	7: ["wheat seeds", 60, null],
-	2: ["gold pickaxe", 1, null]
+#	0: ["wood", 999, null],
+#	1: ["stone", 999, null],
+#	9: ["rope", 12, null],
+#	8: ["iron ingot", 15, null],
+#	6: ["potato seeds", 60, null],
+#	7: ["wheat seeds", 60, null],
+#	2: ["gold pickaxe", 1, null]
 }
 
 var hotbar = {
@@ -40,7 +40,7 @@ var hotbar = {
 	5: ["fire staff", 1, null],
 	6: ["earth staff", 1, null],
 	7: ["dark magic staff", 1, null],
-	9: ["health potion", 10, null],
+	8: ["stone sword", 1, null],
 }
 
 var chests = {}

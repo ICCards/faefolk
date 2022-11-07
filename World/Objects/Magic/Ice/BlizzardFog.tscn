@@ -1,10 +1,20 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://index.icon.png" type="Texture" id=1]
 [ext_resource path="res://world_fog.tres" type="Shader" id=2]
 [ext_resource path="res://World/Objects/Magic/Ice/BlizzardFog.gd" type="Script" id=3]
 [ext_resource path="res://World/Objects/Nature/Particles/Snow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Ice/blizzard.wav" type="AudioStream" id=6]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+shader_param/color = Vector3( 0.05, 0.95, 0.95 )
+shader_param/OCTAVES = 8
+shader_param/circle_size = 0.5
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 1286.0
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -85,22 +95,9 @@ tracks/2/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 2 )
-shader_param/color = Vector3( 0.05, 0.95, 0.95 )
-shader_param/OCTAVES = 8
-shader_param/circle_size = 0.5
-
-[sub_resource type="CircleShape2D" id=5]
-radius = 1286.0
-
 [node name="BlizzardFog" type="Node2D"]
 z_index = 1
 script = ExtResource( 3 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 3 )
-anims/play = SubResource( 2 )
 
 [node name="Snow" parent="." instance=ExtResource( 4 )]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
@@ -126,5 +123,12 @@ script = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 5 )
 disabled = true
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/play = SubResource( 2 )
 
 [editable path="Snow"]

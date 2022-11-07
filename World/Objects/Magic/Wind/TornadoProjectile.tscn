@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Magic/wind/projectile.png" type="Texture" id=2]
 [ext_resource path="res://World/Objects/Magic/Wind/TornadoProjectile.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Wind/tornado.mp3" type="AudioStream" id=4]
 
 [sub_resource type="Curve" id=40]
 max_value = 3.0
@@ -241,9 +242,6 @@ script = ExtResource( 1 )
 position = Vector2( 13, 3 )
 shape = SubResource( 8 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/fade out" = SubResource( 9 )
-
 [node name="TrailParticles" type="Node2D" parent="."]
 position = Vector2( 0, 13 )
 
@@ -303,3 +301,11 @@ initial_velocity_random = 0.5
 scale_amount = 4.0
 scale_amount_random = 0.7
 color = Color( 1, 1, 0.160784, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/fade out" = SubResource( 9 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]

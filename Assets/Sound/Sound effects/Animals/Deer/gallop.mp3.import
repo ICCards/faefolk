@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gallop.mp3-72d3d2d6f79c436a0041ee60cd3acee6.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3"
+dest_files=[ "res://.import/gallop.mp3-72d3d2d6f79c436a0041ee60cd3acee6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

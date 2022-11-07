@@ -1,7 +1,6 @@
 extends Control
 
 
-onready var cam = get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id +  "/Camera2D")
 
 var buttons = ["wood", "stone", "metal", "armored", "demolish"]
 var current_index = -1
@@ -18,7 +17,7 @@ func initialize(_loc, _node):
 	set_active_buttons()
 	show()
 	$Circle/AnimationPlayer.play("zoom")
-	cam.set_process_input(false)
+	Server.player_node.get_node("Camera2D").set_process_input(false)
 	PlayerInventory.viewInventoryMode = true
 
 
@@ -112,7 +111,7 @@ func set_active_buttons():
 
 
 func destroy():
-	cam.set_process_input(true) 
+	Server.player_node.get_node("Camera2D").set_process_input(true) 
 	hide()
 	if is_instance_valid(tile_node):
 		tile_node.remove_icon()

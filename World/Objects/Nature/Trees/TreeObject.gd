@@ -71,7 +71,7 @@ func hit(tool_name):
 		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects_stump.play()
 		sound_effects_tree.stream = Sounds.tree_break
-		sound_effects_tree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects_tree.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 		sound_effects_tree.play()
 		if Server.player_node.get_position().x <= get_position().x:
 			animation_player_tree.play("tree fall right")

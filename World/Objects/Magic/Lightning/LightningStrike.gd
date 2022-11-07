@@ -1,6 +1,6 @@
 extends Node2D
 
-
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 func _ready():
 	$Hitbox.tool_name = "lightning strike"
@@ -9,6 +9,8 @@ func _ready():
 
 
 func play():
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	$AnimationPlayer.play("play")
 	$AnimatedSprite.frame = 0
 	$AnimatedSprite.playing = true

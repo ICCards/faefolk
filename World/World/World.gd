@@ -29,7 +29,7 @@ onready var Snake = preload("res://World/Animals/Snake.tscn")
 onready var IC_Ghost = preload("res://World/Enemies/ICGhost.tscn")
 onready var Bunny = preload("res://World/Animals/Bunny.tscn")
 onready var Duck = preload("res://World/Animals/Duck.tscn")
-#onready var Boar = preload("res://World/Animals/Boar.tscn")
+onready var Boar = preload("res://World/Animals/Boar.tscn")
 onready var Deer = preload("res://World/Animals/Deer.tscn")
 onready var Clam = preload("res://World/Objects/Nature/Forage/Clam.tscn")
 onready var Starfish = preload("res://World/Objects/Nature/Forage/Starfish.tscn")
@@ -75,11 +75,11 @@ var valid_spawn_position
 var random_rain_storm_position
 var random_snow_storm_position
 
-const NUM_DUCKS = 200
-const NUM_BUNNIES = 200
-const NUM_BEARS = 100
-const NUM_BOARS = 0
-const NUM_DEER = 100
+const NUM_DUCKS = 250
+const NUM_BUNNIES = 250
+const NUM_BEARS = 150
+const NUM_BOARS = 150
+const NUM_DEER = 150
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -169,8 +169,8 @@ func spawnPlayerExample():
 	#player.character.LoadPlayerCharacter(Server.player["c"])
 	player.character.LoadPlayerCharacter("human_male")
 	$Players.add_child(controller)
-	player.spawn_position = Server.player["p"]
-	player.position = Server.player["p"]
+	player.spawn_position = Vector2(500*32,500*32) #Server.player["p"]
+	player.position = Vector2(500*32,500*32) #Server.player["p"]
 
 
 func DespawnPlayer(player_id):
@@ -182,8 +182,8 @@ func DespawnPlayer(player_id):
 		var player = get_node(str(player_id))
 		remove_child(player)
 		player.queue_free()
-	
-	
+
+
 func buildMap(map):
 	Tiles.valid_tiles = $ValidTiles
 	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
@@ -774,10 +774,10 @@ func spawnRandomBear():
 		
 func spawnRandomBoar():
 	var loc = returnValidSpawnLocation()
-#	if loc != null:
-#		var boar = Boar.instance()
-#		$Animals.add_child(boar)
-#		boar.global_position = loc
+	if loc != null:
+		var boar = Boar.instance()
+		$Animals.add_child(boar)
+		boar.global_position = loc
 
 func spawnRandomDeer():
 	var loc = returnValidSpawnLocation()

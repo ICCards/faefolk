@@ -161,6 +161,7 @@ func sleep(sleeping_bag_direction, pos):
 func player_death():
 	if state != DYING:
 		state = DYING
+		yield(get_tree(), "idle_frame")
 		composite_sprites.set_player_animation(character, "death_" + direction.to_lower(), null)
 		animation_player.play("death")
 		$Camera2D/UserInterface.death()
@@ -173,9 +174,9 @@ func player_death():
 	
 func drop_inventory_items():
 	for item in PlayerInventory.hotbar.keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.hotbar[item], position)
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.hotbar[item], position+Vector2(rand_range(-16,16), rand_range(-16,16)))
 	for item in PlayerInventory.inventory.keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.inventory[item], position)
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.inventory[item], position+Vector2(rand_range(-16,16), rand_range(-16,16)))
 	PlayerInventory.hotbar = {}
 	PlayerInventory.inventory = {}
 	
@@ -455,54 +456,56 @@ func movement_state(delta):
 
 func idle_state(_direction):
 	$Sounds/FootstepsSound.stream_paused = true
-	if Sounds.current_footsteps_sound != Sounds.swimming:
-		if state == MOVEMENT:
-			animation_player.play("idle")
+	if state != DYING:
+		if Sounds.current_footsteps_sound != Sounds.swimming:
+			if state == MOVEMENT:
+				animation_player.play("idle")
+				if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+					var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+					var item_category = JsonData.item_data[item_name]["ItemCategory"]
+					if Util.valid_holding_item_category(item_category):
+						holding_item.show()
+						holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+						animation = "holding_idle_" + _direction.to_lower()
+					else:
+						holding_item.hide()
+						animation = "idle_" + _direction.to_lower()
+				else:
+					holding_item.hide()
+					animation = "idle_" + _direction.to_lower()
+				composite_sprites.set_player_animation(character, animation, null)
+		else:
+			animation_player.play("swim")
+			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
+
+func walk_state(_direction):
+	if state != DYING:
+		$Sounds/FootstepsSound.stream_paused = false
+		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
+			animation_player.play("walk")
 			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
-					holding_item.show()
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-					animation = "holding_idle_" + _direction.to_lower()
+					holding_item.show()
+					animation = "holding_walk_" + _direction.to_lower()
 				else:
 					holding_item.hide()
-					animation = "idle_" + _direction.to_lower()
-			else:
-				holding_item.hide()
-				animation = "idle_" + _direction.to_lower()
-			composite_sprites.set_player_animation(character, animation, null)
-	else:
-		animation_player.play("swim")
-		composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
-
-func walk_state(_direction):
-	$Sounds/FootstepsSound.stream_paused = false
-	if Sounds.current_footsteps_sound != Sounds.swimming and not running:
-		animation_player.play("walk")
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-			var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if Util.valid_holding_item_category(item_category):
-				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-				holding_item.show()
-				animation = "holding_walk_" + _direction.to_lower()
+					animation = "walk_" + _direction.to_lower()
 			else:
 				holding_item.hide()
 				animation = "walk_" + _direction.to_lower()
+			composite_sprites.set_player_animation(character, animation, null)
+		elif running and Sounds.current_footsteps_sound != Sounds.swimming:
+			decrease_energy_or_health()
+			animation_player.play("sprint")
+			animation = "run_" + _direction.to_lower()
+			composite_sprites.set_player_animation(character, animation, null)
+			check_if_holding_item()
 		else:
-			holding_item.hide()
-			animation = "walk_" + _direction.to_lower()
-		composite_sprites.set_player_animation(character, animation, null)
-	elif running and Sounds.current_footsteps_sound != Sounds.swimming:
-		decrease_energy_or_health()
-		animation_player.play("sprint")
-		animation = "run_" + _direction.to_lower()
-		composite_sprites.set_player_animation(character, animation, null)
-		check_if_holding_item()
-	else:
-		animation_player.play("swim")
-		composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
+			animation_player.play("swim")
+			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
 
 var temp = 0

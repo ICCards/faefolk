@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var velocity = Vector2(1,0)
 var speed = 350
@@ -10,11 +11,14 @@ func _physics_process(delta):
 	var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
+	sound_effects.play()
 	$Hitbox.tool_name = "tornado spell"
 	$Hitbox.knockback_vector = velocity / 150
 	$AnimatedSprite.play("anim")
 	set_particles()
 	yield($AnimatedSprite, "animation_finished")
+	fade_out_sound()
 	stop_trail_particles()
 	$AnimatedSprite.hide()
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
@@ -40,3 +44,7 @@ func stop_trail_particles():
 	$TrailParticles/P1.emitting = false
 	$TrailParticles/P2.emitting = false
 	$TrailParticles/P3.emitting = false
+	
+func fade_out_sound():
+	$Tween.interpolate_property(sound_effects, "volume_db", Sounds.return_adjusted_sound_db("sound", -20), -80, 3.0, 1, Tween.EASE_IN, 0)
+	$Tween.start()

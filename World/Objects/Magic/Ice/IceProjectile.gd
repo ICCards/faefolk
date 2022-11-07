@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+onready var sound_effects2: AudioStreamPlayer2D = $SoundEffects2
 
 var velocity = Vector2(0,0)
 var speed = 350
@@ -13,6 +15,9 @@ func _physics_process(delta):
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Ice/cast.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
+	sound_effects.play()
 	$Projectile.transform = projectile_transform
 	$TrailParticles.transform = projectile_transform
 	$TrailParticles.position += Vector2(0,32)
@@ -37,11 +42,17 @@ func destroy():
 	$TrailParticles/Particles.emitting = false
 	$TrailParticles/Particles2.emitting = false
 	$TrailParticles/Particles3.emitting = false
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Ice/explosion.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
+	sound_effects.play()
 	if debuff:
 		$Hitbox/CollisionShape2D.shape.radius = 80
 		$BuffedExplosionParticles.emitting = true
 		$BuffedExplosionSprite.show()
 		$BuffedExplosionSprite.playing = true
+		sound_effects2.stream = preload("res://Assets/Sound/Sound effects/Magic/Ice/blizzard.wav")
+		sound_effects2.volume_db = Sounds.return_adjusted_sound_db("sound", -18)
+		sound_effects2.play()
 		yield($BuffedExplosionSprite, "animation_finished")
 		$BuffedExplosionSprite.hide()
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)

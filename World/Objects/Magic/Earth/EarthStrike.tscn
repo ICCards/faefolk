@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://World/Objects/Magic/Earth/EarthStrike.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Magic/earth/Skill_Effect_04.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Earth/spawn.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -95,3 +96,6 @@ shape = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/play = SubResource( 11 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )

@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
+
 onready var LightningProjectile = preload("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
 onready var LightningStrike = preload("res://World/Objects/Magic/Lightning/LightningStrike.tscn")
 onready var FlashStep = preload("res://World/Objects/Magic/Lightning/FlashStep.tscn")
@@ -225,6 +227,9 @@ func cast(staff_name, spell_index):
 
 
 func set_invisibility():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Dark/invisibility.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	$Tween.interpolate_property(composite_sprites.get_node("Body"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
 	$Tween.start()
 	$Tween.interpolate_property(composite_sprites.get_node("Arms"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
@@ -315,12 +320,14 @@ func play_earth_strike_buff():
 				spell.position = current_pt
 				get_node("../../../").add_child(spell)
 				current_pt.x += 96
+				yield(get_tree().create_timer(0.1), "timeout")
 		else: # Moving left
 			while current_pt.x > ending_mouse_point.x:
 				var spell = EarthStrikeDebuff.instance()
 				spell.position = current_pt
 				get_node("../../../").add_child(spell)
 				current_pt.x -= 96
+				yield(get_tree().create_timer(0.1), "timeout")
 	else: # Vertical 
 		if ending_mouse_point.y > starting_mouse_point.y: # Moving down:
 			while current_pt.y < ending_mouse_point.y:
@@ -328,21 +335,26 @@ func play_earth_strike_buff():
 				spell.position = current_pt
 				get_node("../../../").add_child(spell)
 				current_pt.y += 64
+				yield(get_tree().create_timer(0.1), "timeout")
 		else: # Moving up
 			while current_pt.y > ending_mouse_point.y:
 				var spell = EarthStrikeDebuff.instance()
 				spell.position = current_pt
 				get_node("../../../").add_child(spell)
 				current_pt.y -= 64
+				yield(get_tree().create_timer(0.1), "timeout")
 	
 func play_earthquake():
 	var spell = Earthquake.instance()
 	add_child(spell)
-	get_node("../Camera2D").start_shake()
 
 # Lightning #
 
 func play_flash_step():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/teleport.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+	sound_effects.play()
+	yield(get_tree().create_timer(0.2), "timeout")
 	get_parent().position = get_global_mouse_position()
 	composite_sprites.material.set_shader_param("flash_modifier", 0.7)
 	yield(get_tree().create_timer(0.2), "timeout")
@@ -406,6 +418,9 @@ func play_wind_projectile():
 	get_node("../../../").add_child(spell)
 
 func play_dash():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Wind/dash.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+	sound_effects.play()
 	$DustParticles.emitting = true
 	$DustBurst.rotation = (get_parent().input_vector*-1).angle()
 	$DustBurst.restart()
@@ -465,6 +480,6 @@ func play_flamethrower():
 	spell.name = "FlameThrower"
 	$CastDirection.add_child(spell)
 	spell.position = $CastDirection/Position2D.position
-	yield(get_tree().create_timer(3.0), "timeout")
+	yield(get_tree().create_timer(4.0), "timeout")
 	emit_signal("spell_finished")
 

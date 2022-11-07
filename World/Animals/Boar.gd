@@ -1,11 +1,13 @@
 extends KinematicBody2D
 
-onready var deer_sprite: Sprite = $DeerSprite
+onready var hit_box: Area2D = $BoarBite
+onready var boar_sprite: Sprite = $BoarSprite
 onready var _idle_timer: Timer = $IdleTimer
 onready var _chase_timer: Timer = $ChaseTimer
 onready var _end_chase_state_timer: Timer = $EndChaseState
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var player = Server.player_node
 var direction: String = "down"
@@ -14,6 +16,7 @@ var frozen: bool = false
 var stunned: bool = false
 var chasing: bool = false
 var attacking: bool = false
+var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
@@ -56,11 +59,11 @@ func _update_pathfinding_idle():
 func set_sprite_texture():
 	match state:
 		IDLE:
-			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png")
+			boar_sprite.texture = load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png")
 		WALK:
-			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png")
+			boar_sprite.texture = load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png")
 		CHASE:
-			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
+			boar_sprite.texture = load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png")
 
 func get_random_pos():
 	random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
@@ -80,7 +83,11 @@ func move(velocity: Vector2) -> void:
 		_velocity = move_and_slide(velocity)
 
 func _physics_process(delta):
-	if not visible or destroyed or stunned or attacking: 
+	if not visible or destroyed:
+		if chasing:
+			end_chase_state()
+		return
+	if stunned or attacking:
 		return
 	if tornado_node:
 		if is_instance_valid(tornado_node):
@@ -104,7 +111,7 @@ func _physics_process(delta):
 		state = CHASE
 	else:
 		state = WALK
-	if state == CHASE and (position+Vector2(0,-14)).distance_to(player.position) < 70:
+	if state == CHASE and (position+Vector2(0,-9)).distance_to(player.position) < 70:
 		state = ATTACK
 		attack()
 	var target = navigation_agent.get_next_location()
@@ -116,10 +123,11 @@ func _physics_process(delta):
 	
 func attack():
 	if not attacking:
+		play_groan_sound_effect()
 		attacking = true
-		$DeerSlam.look_at(player.position)
+		hit_box.look_at(player.position)
 		set_swing_direction()
-		deer_sprite.texture = load("res://Assets/Images/Animals/Deer/attack/" +  direction + "/body.png")
+		boar_sprite.texture = load("res://Assets/Images/Animals/Boar/attack/" +  direction + "/body.png")
 		animation_player.play("attack")
 		yield(animation_player, "animation_finished")
 		if not destroyed:
@@ -152,8 +160,8 @@ func set_direction():
 					set_change_direction_delay()
 
 func set_swing_direction():
-	var degrees = int($DeerSlam.rotation_degrees) % 360
-	if $DeerSlam.rotation_degrees >= 0:
+	var degrees = int(hit_box.rotation_degrees) % 360
+	if hit_box.rotation_degrees >= 0:
 		if degrees <= 45 or degrees >= 315:
 			direction = "right"
 		elif degrees <= 135:
@@ -189,7 +197,7 @@ func hit(tool_name):
 	health -= Stats.return_tool_damage(tool_name)
 	if health <= 0 and not destroyed:
 		destroyed = true
-		deer_sprite.texture = load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png")
+		boar_sprite.texture = load("res://Assets/Images/Animals/Boar/death/" +  direction + "/body.png")
 		animation_player.play("death")
 		yield(animation_player, "animation_finished")
 		queue_free()
@@ -198,7 +206,7 @@ func hit(tool_name):
 func _on_HurtBox_area_entered(area):
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	if area.knockback_vector != Vector2.ZERO:
+	if area.knockback_vector != Vector2.ZERO and not attacking:
 		set_change_direction_delay()
 		knockback = area.knockback_vector * 100
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
@@ -206,20 +214,28 @@ func _on_HurtBox_area_entered(area):
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
 
+func _on_DetectPlayer_area_entered(area):
+	start_chase_state()
 
 func start_chase_state():
+	start_sound_effects()
 	navigation_agent.max_speed = 250
 	_idle_timer.stop()
 	_chase_timer.start()
+	_end_chase_state_timer.start()
 	chasing = true
 	state = CHASE
 
 func end_chase_state():
+	stop_sound_effects()
 	navigation_agent.max_speed = 100
 	_chase_timer.stop()
 	_idle_timer.start()
 	chasing = false
 	state = IDLE
+
+func _on_EndChaseState_timeout():
+	end_chase_state()
 
 func set_change_direction_delay():
 	changed_direction_delay = true
@@ -229,7 +245,7 @@ func _on_ChangeDirectionDelay_timeout():
 	changed_direction_delay = false
 
 func start_frozen_state(timer_length):
-	deer_sprite.modulate = Color("00c9ff")
+	boar_sprite.modulate = Color("00c9ff")
 	frozen = true
 	$FrozenTimer.stop()
 	$FrozenTimer.start(timer_length)
@@ -237,7 +253,7 @@ func start_frozen_state(timer_length):
 		animation_player.play("loop frozen")
 
 func _on_FrozenTimer_timeout():
-	deer_sprite.modulate = Color("ffffff")
+	boar_sprite.modulate = Color("ffffff")
 	frozen = false
 	if not destroyed:
 		animation_player.play("loop")
@@ -247,7 +263,7 @@ func start_stunned_state():
 		rng.randomize()
 		$Electricity.frame = rng.randi_range(1,13)
 		$Electricity.show()
-		$DeerSlam/CollisionShape2D.set_deferred("disabled", true)
+		$BoarBite/CollisionShape2D.set_deferred("disabled", true)
 		animation_player.stop(false)
 		$StunnedTimer.start()
 		stunned = true
@@ -259,8 +275,32 @@ func _on_StunnedTimer_timeout():
 		animation_player.play()
 
 
+func play_groan_sound_effect():
+	rng.randomize()
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+	sound_effects.play()
+	yield(sound_effects, "finished")
+	playing_sound_effect = false
+	start_sound_effects()
+
+
+func start_sound_effects():
+	if not playing_sound_effect:
+		playing_sound_effect = true
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
+
+
+func stop_sound_effects():
+	playing_sound_effect = false
+	sound_effects.stop()
+
 func _on_VisibilityNotifier2D_screen_entered():
 	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
+
+

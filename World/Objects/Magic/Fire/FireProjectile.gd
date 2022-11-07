@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var velocity = Vector2(0,0)
 var speed = 500
@@ -12,6 +13,9 @@ func _physics_process(delta):
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/cast.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -10)
+	sound_effects.play()
 	$Projectile.play("play")
 	$Hitbox.tool_name = "fire projectile"
 	$Hitbox.knockback_vector = Vector2.ZERO
@@ -39,6 +43,10 @@ func destroy():
 	$TrailParticles/Particles2.emitting = false
 	$TrailParticles/Particles3.emitting = false
 	if debuff:
+		$Hitbox.set_collision_mask(264192) # scythe layer break
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/explosion.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -18)
+		sound_effects.play()
 		$Explosion.show()
 		$Explosion.frame = 1
 		$Explosion.play("explode")
@@ -48,6 +56,9 @@ func destroy():
 		yield($Explosion, "animation_finished")
 		$Explosion.hide()
 	else:
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/fireball.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+		sound_effects.play()
 		$ExplosionParticles/Explosion.emitting = true
 		$ExplosionParticles/Explosion/Shards.emitting = true
 		$ExplosionParticles/Explosion/Smoke.emitting = true

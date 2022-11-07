@@ -63,10 +63,10 @@ height = 32.0
 modulate = Color( 1.18, 1.18, 1.18, 1 )
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Projectile" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 39 )
-frame = 8
+frame = 9
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -84,6 +84,8 @@ rotation = 1.5708
 shape = SubResource( 23 )
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

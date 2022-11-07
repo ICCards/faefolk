@@ -6,7 +6,7 @@ onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProject
 onready var IceProjectile = preload("res://World/Objects/Magic/Ice/IceProjectile.tscn")
 
 onready var demon_sprite: AnimatedSprite = $AnimatedSprite
-
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var state = IDLE
 
 enum {
@@ -150,16 +150,19 @@ func swing():
 	demon_sprite.frame = 0
 	demon_sprite.play("swing")
 	yield(get_tree().create_timer(0.5), "timeout")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Dark/swoosh.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	$HitBox/CollisionShape2D.set_deferred('disabled', false)
 	yield(get_tree().create_timer(0.5), "timeout")
 	$HitBox/CollisionShape2D.set_deferred('disabled', true)
 	attacking = false
 
 
-func _on_DetectEnemyBox_body_entered(body):
-	if not enemy_node:
-		if body.enemy_name == "bear" or body.enemy_name == "duck" or body.enemy_name == "bunny":
-			enemy_node = body
+#func _on_DetectEnemyBox_body_entered(body):
+#	if not enemy_node:
+#		#if body.enemy_name == "bear" or body.enemy_name == "duck" or body.enemy_name == "bunny":
+#		enemy_node = body
 
 func set_trail_particles_direction():
 	if velocity == Vector2.ZERO or state == IDLE:

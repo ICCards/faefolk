@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Magic/lightning/4/Electric_Effect_03.png" type="Texture" id=2]
 [ext_resource path="res://World/Objects/Magic/Lightning/LightningStrike.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Lightning/lightning strike.wav" type="AudioStream" id=4]
 
 [sub_resource type="Curve" id=177]
 min_value = -400.0
@@ -131,7 +132,7 @@ scale_amount_curve = SubResource( 178 )
 color = Color( 0.462745, 0.854902, 0.917647, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1.15, 1.15, 1.15, 1 )
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -79 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 163 )
@@ -149,3 +150,6 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/play = SubResource( 165 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )

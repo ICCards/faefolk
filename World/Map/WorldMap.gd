@@ -52,7 +52,7 @@ func initialize():
 	Server.player_node.destroy_placable_object()
 	PlayerInventory.viewMapMode = true
 	$Camera2D.current = true
-	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar").visible = false
+	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = false
 	if not is_first_time_opened:
 		is_first_time_opened = true
 		$Camera2D.position = Vector2(800, 800)
@@ -61,8 +61,8 @@ func initialize():
 func set_inactive():
 	PlayerInventory.viewMapMode = false
 	$Camera2D.current = false
-	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D").current = true
-	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar").visible = true
+	Server.player_node.get_node("Camera2D").current = true
+	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = true
 
 func _ready():
 	wait_for_map()

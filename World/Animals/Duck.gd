@@ -153,6 +153,7 @@ func hit(tool_name, var special_ability = ""):
 		$AnimationPlayer.play("death")
 		InstancedScenes.intitiateItemDrop("raw wing", position, 1)
 		yield($AnimationPlayer, "animation_finished")
+		yield(get_tree().create_timer(3.0), "timeout")
 		queue_free()
 
 

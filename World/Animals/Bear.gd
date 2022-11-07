@@ -5,6 +5,7 @@ onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var _idle_timer: Timer = $IdleTimer
 onready var _chase_timer: Timer = $ChaseTimer
 onready var _end_chase_state_timer: Timer = $EndChaseState
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var enemy_name = "bear"
 
@@ -69,7 +70,11 @@ func get_random_pos():
 		return position
 
 func _physics_process(delta):
-	if not visible or destroyed or stunned: 
+	if not visible or destroyed:
+		if state == CHASE:
+			end_chase_state()
+		return
+	if stunned or attacking:
 		return
 	if tornado_node:
 		if is_instance_valid(tornado_node):
@@ -133,10 +138,10 @@ func set_direction():
 
 func play_groan_sound_effect():
 	rng.randomize()
-	$AudioStreamPlayer2D.stream = Sounds.bear_grown[rng.randi_range(0, 2)]
-	$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	$AudioStreamPlayer2D.play()
-	yield($AudioStreamPlayer2D, "finished")
+	sound_effects.stream = Sounds.bear_grown[rng.randi_range(0, 2)]
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+	sound_effects.play()
+	yield(sound_effects, "finished")
 	playing_sound_effect = false
 	start_sound_effects()
 
@@ -144,14 +149,14 @@ func play_groan_sound_effect():
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3")
-		$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		$AudioStreamPlayer2D.play()
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 
 
 func stop_sound_effects():
 	playing_sound_effect = false
-	$AudioStreamPlayer2D.stop()
+	sound_effects.stop()
 
 
 func set_texture():
@@ -243,6 +248,9 @@ func _on_StunnedTimer_timeout():
 		stunned = false
 		animation_player.play()
 
+func _on_EndChaseState_timeout():
+	end_chase_state()
+
 func start_frozen_state(timer_length):
 	$Body.modulate = Color("00c9ff")
 	frozen = true
@@ -288,3 +296,4 @@ func _on_VisibilityNotifier2D_screen_entered():
 	show()
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
+

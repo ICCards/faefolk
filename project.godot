@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="faefolk"
-run/main_scene="res://MainMenu/MainMenu.tscn"
+run/main_scene="res://World/World/World.tscn"
 
 [autoload]
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tornado.mp3-2ad2bbe7b9066bc39842d29819c66155.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Wind/tornado.mp3"
+dest_files=[ "res://.import/tornado.mp3-2ad2bbe7b9066bc39842d29819c66155.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

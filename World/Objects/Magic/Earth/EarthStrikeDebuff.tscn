@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World/Objects/Magic/Earth/EarthStrikeDebuff.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Magic/earth/Skill_Effect_04.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Earth/spawn.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
@@ -73,5 +74,8 @@ shape = SubResource( 10 )
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

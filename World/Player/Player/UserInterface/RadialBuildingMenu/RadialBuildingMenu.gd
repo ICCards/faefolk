@@ -1,8 +1,6 @@
 extends Control
 
 
-onready var cam = get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id +  "/Camera2D")
-
 var buildings = ["wall", "foundation", "stairs", "ceiling"]
 var current_item = -1
 
