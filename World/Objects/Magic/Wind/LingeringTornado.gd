@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
-var velocity = Vector2(0,0)
 var speed = 350
 var target 
 var particles_transform

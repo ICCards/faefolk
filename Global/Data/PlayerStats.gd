@@ -48,6 +48,12 @@ func decrease_health(amount):
 		emit_signal("health_depleted")
 	emit_signal("health_changed")
 
+func increase_health(amount):
+	health += amount
+	if health >= 100:
+		health = 100
+	emit_signal("health_changed")
+
 func decrease_energy():
 	if energy >= 1:
 		energy -= 1.0

@@ -967,8 +967,8 @@ position = Vector2( 0, -40 )
 
 [node name="BearClaw" type="Area2D" parent="Position2D"]
 position = Vector2( 0, 36 )
-collision_layer = 128
-collision_mask = 0
+collision_layer = 0
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/BearClaw"]
 shape = SubResource( 2 )
@@ -976,8 +976,8 @@ disabled = true
 
 [node name="BearBite" type="Area2D" parent="Position2D"]
 position = Vector2( 0, 40 )
-collision_layer = 128
-collision_mask = 0
+collision_layer = 0
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/BearBite"]
 rotation = 1.5708
@@ -1063,6 +1063,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
+frame = 5
 playing = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

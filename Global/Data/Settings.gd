@@ -20,7 +20,7 @@ var key_dict = {
 func save_keys():
 	var file = File.new()
 	file.open(file_name,File.WRITE)
-	file.store_string(to_json(Settings.key_dict))
+	file.store_string(to_json(key_dict))
 	file.close()
 	print("saved")
 	pass

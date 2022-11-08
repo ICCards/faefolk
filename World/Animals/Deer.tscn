@@ -279,6 +279,7 @@ animations = [ {
 } ]
 
 [node name="Deer" type="KinematicBody2D"]
+modulate = Color( 1.22, 1.22, 1.22, 1 )
 collision_mask = 3
 script = ExtResource( 12 )
 
@@ -306,8 +307,8 @@ anims/hit = SubResource( 16 )
 
 [node name="DeerAttack" type="Area2D" parent="."]
 position = Vector2( 0, -14 )
-collision_layer = 128
-collision_mask = 0
+collision_layer = 0
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeerAttack"]
 position = Vector2( 35, 0 )
@@ -358,7 +359,7 @@ visible = false
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 8
+frame = 5
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

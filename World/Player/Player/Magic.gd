@@ -50,7 +50,8 @@ enum {
 	DYING,
 	SLEEPING,
 	SITTING,
-	MAGIC_CASTING
+	MAGIC_CASTING,
+	THROWING
 }
 
 signal spell_finished
@@ -58,7 +59,6 @@ signal spell_finished
 var animation: String = ""
 var direction: String = "DOWN"
 var is_casting: bool = false
-var is_throwing: bool = false
 var flamethrower_active: bool = false
 var invisibility_active: bool = false
 var mouse_left_down: bool = false
@@ -74,17 +74,6 @@ func _input( event ):
 		elif event.button_index == 1 and not event.is_pressed():
 			mouse_left_down = false
 
-
-func throw_potion(potion_name, init_direction):
-	is_throwing = true
-	direction = init_direction
-	get_parent().state = MAGIC_CASTING
-	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), null)
-	player_animation_player.play("bow draw release")
-	yield(player_animation_player, "animation_finished" )
-	is_throwing = false
-	get_parent().state = MOVEMENT
-	get_parent().direction = direction
 
 func wait_for_cast_release(staff_name):
 	if not mouse_left_down:
@@ -114,7 +103,7 @@ func cast_spell(staff_name, init_direction):
 
 
 func _physics_process(delta):
-	if not is_casting and not flamethrower_active and not is_throwing:
+	if not is_casting and not flamethrower_active:
 		return
 	var degrees = int($CastDirection.rotation_degrees) % 360
 	$CastDirection.look_at(get_global_mouse_position())
@@ -138,8 +127,6 @@ func _physics_process(delta):
 			direction = "DOWN"
 	if get_parent().state != DYING and is_casting:
 		composite_sprites.set_player_animation(get_parent().character, "magic_cast_" + direction.to_lower(), "magic staff")
-	elif get_parent().state != DYING and is_throwing:
-		composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), null)
 
 
 func cast(staff_name, spell_index):
@@ -407,7 +394,6 @@ func play_lingering_tornado():
 	spell.particles_transform = $CastDirection.transform
 	spell.target = get_global_mouse_position() + Vector2(0,32)
 	spell.position = $CastDirection/Position2D.global_position
-	spell.velocity = get_global_mouse_position() - spell.position 
 	get_node("../../../").add_child(spell)
 
 func play_wind_projectile():

@@ -304,6 +304,7 @@ animations = [ {
 } ]
 
 [node name="Boar" type="KinematicBody2D"]
+modulate = Color( 1.22, 1.22, 1.22, 1 )
 collision_mask = 3
 script = ExtResource( 13 )
 
@@ -342,8 +343,8 @@ shape = SubResource( 18 )
 [node name="BoarBite" type="Area2D" parent="."]
 position = Vector2( 0, -15 )
 rotation = 1.5708
-collision_layer = 128
-collision_mask = 0
+collision_layer = 0
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoarBite"]
 position = Vector2( 32, 0 )
@@ -396,7 +397,6 @@ visible = false
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 10
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

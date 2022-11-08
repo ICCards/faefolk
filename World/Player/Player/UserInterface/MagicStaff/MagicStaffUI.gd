@@ -9,19 +9,31 @@ var COOL_DOWN_PERIOD_2: int = 2
 var COOL_DOWN_PERIOD_3: int = 2
 var COOL_DOWN_PERIOD_4: int = 4
 
+
 func initialize(_staff):
-	if selected_staff != _staff:
-		show()
-		selected_spell = 1
-		selected_staff = _staff
-		set_selected_spell()
-		set_bgs()
+	pass
+#	if selected_staff != _staff:
+#		show()
+#		selected_spell = 1
+#		selected_staff = _staff
+#		set_selected_spell()
+#		set_bgs()
 		
 func set_bgs():
 	$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
 	$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
 	$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
 	$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
+
+func _input(event):
+	if event.is_action_pressed("slot1"):
+		selected_spell = 1
+	elif event.is_action_pressed("slot2"):
+		selected_spell = 2
+	elif event.is_action_pressed("slot3"):
+		selected_spell = 3
+	elif event.is_action_pressed("slot4"):
+		selected_spell = 4
 
 
 func set_selected_spell():

@@ -253,7 +253,7 @@ func _unhandled_input(event):
 					swing(item_name)
 				if item_category == "Magic" and event.is_action_pressed("mouse_click"):
 					if item_name == "health potion":
-						$Magic.throw_potion(item_name, direction)
+						$Throwing.throw_potion(item_name, direction)
 					else:
 						$Magic.cast_spell(item_name, direction)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):

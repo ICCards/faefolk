@@ -1,6 +1,6 @@
 extends YSort
 
-var build_tiles = true
+var build_tiles = false
 
 onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles
@@ -77,9 +77,9 @@ var random_snow_storm_position
 
 const NUM_DUCKS = 250
 const NUM_BUNNIES = 250
-const NUM_BEARS = 150
-const NUM_BOARS = 150
-const NUM_DEER = 150
+const NUM_BEARS = 75
+const NUM_BOARS = 75
+const NUM_DEER = 75
 
 const _character = preload("res://Global/Data/Characters.gd")
 
