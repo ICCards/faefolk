@@ -1,8 +1,85 @@
 {
-    "health potion": {
-      "ItemCategory": "Magic",
+    "health potion I": {
+      "ItemCategory": "Potion",
       "StackSize": 999,
-      "Description": "Increases health slightly.",
+      "Description": "Instantly restores health by 4.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "health potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly restores health by 12.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "health potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly restores health by 30.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "regeneration potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Restores 10% of depleted health over time.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "regeneration potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Restores 25% of depleted health over time.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "regeneration potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Restores 50% of depleted health over time.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "destruction potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly diminishes 10 health.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "destruction potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly diminishes 25 health.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "destruction potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly diminishes 50 health.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "poison potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Diminishes 8% of maximum health over time.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "poison potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Diminishes 20% of maximum health over time.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "poison potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Diminishes 32% of maximum health over time.",
       "Ingredients": null,
       "EnergyHealth": null
     },

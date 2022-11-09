@@ -50,19 +50,21 @@ func _physics_process(delta):
 
 
 func throw_potion(potion_name, init_direction):
+	PlayerInventory.remove_single_object_from_hotbar()
 	is_throwing = true
 	direction = init_direction
 	get_parent().state = MAGIC_CASTING
 	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), null)
 	player_animation_player.play("bow draw release")
 	yield(player_animation_player, "animation_finished" )
-	throw()
+	throw(potion_name)
 	is_throwing = false
 	get_parent().state = MOVEMENT
 	get_parent().direction = direction
 	
-func throw():
+func throw(potion_name):
 	var potion = PotionProjectile.instance()
+	potion.potion_name = potion_name
 	potion.particles_transform = $ThrowDirection.transform
 	potion.target = get_global_mouse_position()
 	potion.position = $ThrowDirection/Position2D.global_position

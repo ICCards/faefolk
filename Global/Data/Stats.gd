@@ -35,6 +35,10 @@ const GOLD_SWORD_DAMAGE = 60
 
 const ARROW_DAMAGE = 50
 
+const DESTRUCTION_POTION_I = 10
+const DESTRUCTION_POTION_II = 25
+const DESTRUCTION_POTION_III = 50
+
 const FIRE_DEBUFF_DAMAGE = 20
 
 const LIGHTNING_SPELL_DAMAGE = 20
@@ -63,6 +67,12 @@ const DEER_HEALTH = 150
 
 func return_tool_damage(tool_name):
 	match tool_name:
+		"destruction potion I":
+			return DESTRUCTION_POTION_I
+		"destruction potion II":
+			return DESTRUCTION_POTION_II
+		"destruction potion III":
+			return DESTRUCTION_POTION_III
 		"earthquake":
 			return EARTHQUAKE_DAMAGE
 		"flamethrower":

@@ -29,19 +29,30 @@ var inventory = {
 #	6: ["potato seeds", 60, null],
 #	7: ["wheat seeds", 60, null],
 #	2: ["gold pickaxe", 1, null]
+	7: ["health potion I", 10, null],
+	8: ["health potion II", 10, null],
+	9: ["health potion III", 10, null],
 }
 
 var hotbar = {
 #	0: ["bow", 1, null],
 #	1: ["arrow", 100, null],
-	2: ["lightning staff", 1, null],
+	0: ["lightning staff", 1, null],
 #	3: ["wind staff", 1, null],
 #	4: ["ice staff", 1, null],
 #	5: ["fire staff", 1, null],
 #	6: ["earth staff", 1, null],
 #	7: ["dark magic staff", 1, null],
 #	8: ["stone sword", 1, null],
-	8: ["health potion", 10, null],
+	1: ["poison potion I", 10, null],
+	2: ["poison potion II", 10, null],
+	3: ["poison potion III", 10, null],
+	4: ["regeneration potion I", 10, null],
+	5: ["regeneration potion II", 10, null],
+	6: ["regeneration potion III", 10, null],
+	7: ["destruction potion I", 10, null],
+	8: ["destruction potion II", 10, null],
+	9: ["destruction potion III", 10, null],
 }
 
 var chests = {}

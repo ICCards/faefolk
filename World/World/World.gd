@@ -1,6 +1,6 @@
 extends YSort
 
-var build_tiles = false
+var build_tiles = true
 
 onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles

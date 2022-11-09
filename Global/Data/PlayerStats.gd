@@ -41,18 +41,15 @@ func decrease_mana(amount):
 		mana = 0
 	emit_signal("mana_changed")
 
-func decrease_health(amount):
-	health -= amount
+func change_health(amount):
+	health += amount
 	if health <= 0:
 		health = 0
 		emit_signal("health_depleted")
+	elif health >= health_maximum:
+		health = health_maximum
 	emit_signal("health_changed")
 
-func increase_health(amount):
-	health += amount
-	if health >= 100:
-		health = 100
-	emit_signal("health_changed")
 
 func decrease_energy():
 	if energy >= 1:

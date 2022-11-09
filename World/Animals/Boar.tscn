@@ -397,6 +397,7 @@ visible = false
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
+frame = 12
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

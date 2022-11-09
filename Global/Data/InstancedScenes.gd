@@ -7,6 +7,8 @@ onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHi
 
 onready var OreHitEffect = preload("res://World/Objects/Nature/Effects/OreHitEffect.tscn")
 
+onready var PlayerHitEffect = preload("res://World/Player/Player/AttachedScenes/PlayerHitEffect.tscn")
+
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
 
@@ -81,4 +83,10 @@ func initiateExplosionParticles(pos: Vector2):
 	var explosion = ExplosionParticles.instance()
 	Server.world.add_child(explosion)
 	explosion.global_position = pos + Vector2(0,32)
+	
+func player_hit_effect(amt: int, pos: Vector2):
+	var effect = PlayerHitEffect.instance()
+	effect.amount = amt
+	effect.position = pos
+	Server.world.add_child(effect)
 	

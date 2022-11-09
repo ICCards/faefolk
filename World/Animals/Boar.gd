@@ -194,16 +194,24 @@ func hit(tool_name):
 	_end_chase_state_timer.stop()
 	_end_chase_state_timer.start()
 	$HurtBox/AnimationPlayer.play("hit")
-	health -= Stats.return_tool_damage(tool_name)
+	var dmg = Stats.return_tool_damage(tool_name)
+	health -= dmg
+	InstancedScenes.player_hit_effect(-dmg, position)
 	if health <= 0 and not destroyed:
-		destroyed = true
-		boar_sprite.texture = load("res://Assets/Images/Animals/Boar/death/" +  direction + "/body.png")
-		animation_player.play("death")
-		yield(animation_player, "animation_finished")
-		queue_free()
+		destroy()
 
+func destroy():
+	destroyed = true
+	boar_sprite.texture = load("res://Assets/Images/Animals/Boar/death/" +  direction + "/body.png")
+	animation_player.play("death")
+	yield(animation_player, "animation_finished")
+	queue_free()
 
 func _on_HurtBox_area_entered(area):
+	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+		$HurtBox/AnimationPlayer.play("hit")
+		diminish_HOT(area.tool_name)
+		return
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
 	if area.knockback_vector != Vector2.ZERO and not attacking:
@@ -213,6 +221,30 @@ func _on_HurtBox_area_entered(area):
 		hit(area.tool_name)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
+
+func diminish_HOT(type):
+	var amount_to_diminish
+	match type:
+		"poison potion I":
+			amount_to_diminish = Stats.BOAR_HEALTH * 0.08
+		"poison potion II":
+			amount_to_diminish = Stats.BOAR_HEALTH * 0.2
+		"poison potion III":
+			amount_to_diminish = Stats.BOAR_HEALTH * 0.32
+	var increment = int(ceil(amount_to_diminish / 4))
+	while int(amount_to_diminish) > 0 and not destroyed:
+		if amount_to_diminish < increment:
+			health -= amount_to_diminish
+			InstancedScenes.player_hit_effect(-amount_to_diminish, position)
+			amount_to_diminish = 0
+		else:
+			health -= increment
+			InstancedScenes.player_hit_effect(-increment, position)
+			amount_to_diminish -= increment
+		if health <= 0 and not destroyed:
+			destroy()
+		yield(get_tree().create_timer(2.0), "timeout")
+
 
 func _on_DetectPlayer_area_entered(area):
 	start_chase_state()

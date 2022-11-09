@@ -251,11 +251,10 @@ func _unhandled_input(event):
 					fish()
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
 					swing(item_name)
-				if item_category == "Magic" and event.is_action_pressed("mouse_click"):
-					if item_name == "health potion":
-						$Throwing.throw_potion(item_name, direction)
-					else:
-						$Magic.cast_spell(item_name, direction)
+				if item_category == "Potion" and event.is_action_pressed("mouse_click"):
+					$Throwing.throw_potion(item_name, direction)
+				elif item_category == "Magic" and event.is_action_pressed("mouse_click"):
+					$Magic.cast_spell(item_name, direction)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
 					eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":

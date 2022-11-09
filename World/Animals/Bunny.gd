@@ -117,24 +117,32 @@ func hit(tool_name):
 	elif is_sleeping:
 		is_sleeping = false
 	start_run_state()
-	health -= Stats.return_tool_damage(tool_name)
+	var dmg = Stats.return_tool_damage(tool_name)
+	health -= dmg
+	InstancedScenes.player_hit_effect(-dmg, position)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 	if health <= 0 and not destroyed:
-		set_physics_process(false)
-		destroyed = true
-		$Electricity.hide()
-		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-		$CollisionShape2D.set_deferred("disabled", true)
-		$AnimatedSprite.play("death")
-		yield($AnimatedSprite, "animation_finished")
-		$AnimationPlayer.play("death")
-		InstancedScenes.intitiateItemDrop("raw filet", position, 1)
-		yield($AnimationPlayer, "animation_finished")
-		yield(get_tree().create_timer(6.0), "timeout")
-		queue_free()
+		destroy()
+
+func destroy():
+	destroyed = true
+	$Electricity.hide()
+	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShape2D.set_deferred("disabled", true)
+	$AnimatedSprite.play("death")
+	yield($AnimatedSprite, "animation_finished")
+	$AnimationPlayer.play("death")
+	InstancedScenes.intitiateItemDrop("raw filet", position, 1)
+	yield($AnimationPlayer, "animation_finished")
+	yield(get_tree().create_timer(6.0), "timeout")
+	queue_free()
 
 func _on_HurtBox_area_entered(area):
+	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+		$AnimationPlayer.play("hit")
+		diminish_HOT(area.tool_name)
+		return
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
@@ -143,6 +151,29 @@ func _on_HurtBox_area_entered(area):
 		tornado_node = area
 	if area.special_ability == "fire":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
+	
+func diminish_HOT(type):
+	var amount_to_diminish
+	match type:
+		"poison potion I":
+			amount_to_diminish = Stats.BUNNY_HEALTH * 0.08
+		"poison potion II":
+			amount_to_diminish = Stats.BUNNY_HEALTH * 0.2
+		"poison potion III":
+			amount_to_diminish = Stats.BUNNY_HEALTH * 0.32
+	var increment = int(ceil(amount_to_diminish / 4))
+	while int(amount_to_diminish) > 0 and not destroyed:
+		if amount_to_diminish < increment:
+			health -= amount_to_diminish
+			InstancedScenes.player_hit_effect(-amount_to_diminish, position)
+			amount_to_diminish = 0
+		else:
+			health -= increment
+			InstancedScenes.player_hit_effect(-increment, position)
+			amount_to_diminish -= increment
+		if health <= 0 and not destroyed:
+			destroy()
+		yield(get_tree().create_timer(2.0), "timeout")
 	
 	
 func start_frozen_state(timer_length):

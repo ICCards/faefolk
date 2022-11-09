@@ -5885,6 +5885,7 @@ light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
 shape = SubResource( 11 )
+disabled = true
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_exited"]

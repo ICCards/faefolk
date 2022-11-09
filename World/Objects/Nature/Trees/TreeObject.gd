@@ -52,6 +52,7 @@ func hit(tool_name):
 	if health == 100:
 		InstancedScenes.initiateBirdEffect(position)
 	health -= Stats.return_tool_damage(tool_name)
+	print(health)
 	Server.generated_map["tree"][name]["h"] = health
 	if health >= Stats.STUMP_HEALTH:
 		InstancedScenes.initiateLeavesFallingEffect(variety, position)
@@ -65,6 +66,8 @@ func hit(tool_name):
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
 			animation_player_tree.play("tree hit left")
 	elif not tree_fallen:
+		if health <= 0 and not destroyed:
+			destroy(tool_name)
 		tree_fallen = true
 		disable_tree_top_collision_box()
 		sound_effects_stump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
@@ -96,21 +99,24 @@ func hit(tool_name):
 		else: 
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
 			animation_player_stump.play("stump hit right")
-	elif health <= 0 and not destroyed: 
-		destroyed = true
-		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
-		sound_effects_stump.stream = Sounds.stump_break
-		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects_stump.play()
-		animation_player_stump.play("stump destroyed")
-		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
-		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-8, 32))
-		CollectionsData.resources["wood"] += amt
-		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
-		yield(get_tree().create_timer(3.0), "timeout")
-		Server.generated_map["tree"].erase(name)
-		queue_free()
+	if health <= 0 and not destroyed: 
+		destroy(tool_name)
 
+
+func destroy(tool_name):
+	destroyed = true
+	Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+	sound_effects_stump.stream = Sounds.stump_break
+	sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+	sound_effects_stump.play()
+	animation_player_stump.play("stump destroyed")
+	var amt = Stats.return_item_drop_quantity(tool_name, "stump")
+	InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-8, 32))
+	CollectionsData.resources["wood"] += amt
+	InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
+	yield(get_tree().create_timer(3.0), "timeout")
+	Server.generated_map["tree"].erase(name)
+	queue_free()
 
 ### Tree hurtbox
 func _on_Hurtbox_area_entered(_area):

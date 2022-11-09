@@ -198,7 +198,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -7 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 8
+frame = 7
 playing = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
