@@ -19,8 +19,8 @@ func spawnPlayerExample():
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
 	add_child(player)
-	player.spawn_position = Vector2(12*32,12*32)
-	player.position = Vector2(0,0) 
+	player.spawn_position = Vector2(32*32,32*32)
+	player.position =  Vector2(32*32,32*32)
 
 func _ready():
 	rng.randomize()

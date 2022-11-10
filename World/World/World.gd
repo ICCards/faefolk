@@ -19,8 +19,8 @@ onready var deep_ocean = $GeneratedTiles/DeepOcean
 onready var top_ocean = $GeneratedTiles/TopOcean
 onready var Players = $Players
 
-onready var Input_controller_template = preload("res://World/Player/PlayerTemplate/InputControllerTemplate.tscn")
-onready var Input_controller = preload("res://World/Player/Player/InputController.tscn")
+#onready var Input_controller_template = preload("res://World/Player/PlayerTemplate/InputControllerTemplate.tscn")
+#onready var Input_controller = preload("res://World/Player/Player/InputController.tscn")
 onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
 onready var Player_pet = preload("res://World/Player/Pet/PlayerPet.tscn")
@@ -77,9 +77,9 @@ var random_snow_storm_position
 
 const NUM_DUCKS = 250
 const NUM_BUNNIES = 250
-const NUM_BEARS = 75
-const NUM_BOARS = 75
-const NUM_DEER = 75
+const NUM_BEARS = 150
+const NUM_BOARS = 150
+const NUM_DEER = 150
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -161,14 +161,12 @@ func wait_for_map():
 #	#spawn_IC_kitty()
 	
 func spawnPlayerExample():
-	var controller = Input_controller.instance()
-	var player = controller.get_children()[0]
-	controller.name = str(get_tree().get_network_unique_id())
+	var player = Player.instance()
 	player.name = str(get_tree().get_network_unique_id())
 	player.character = _character.new()
 	#player.character.LoadPlayerCharacter(Server.player["c"])
 	player.character.LoadPlayerCharacter("human_male")
-	$Players.add_child(controller)
+	$Players.add_child(player)
 	player.spawn_position = Vector2(500*32,500*32) #Server.player["p"]
 	player.position = Vector2(500*32,500*32) #Server.player["p"]
 

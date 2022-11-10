@@ -100,15 +100,15 @@ animations = [ {
 "frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
 "loop": false,
 "name": "eat",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [ SubResource( 54 ), SubResource( 55 ) ],
 "loop": true,
 "name": "idle",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [ SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ) ],
 "loop": true,
 "name": "walk",
-"speed": 5.0
+"speed": 8.0
 } ]

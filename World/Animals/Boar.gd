@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 onready var hit_box: Area2D = $BoarBite
 onready var boar_sprite: Sprite = $BoarSprite
-onready var _idle_timer: Timer = $IdleTimer
-onready var _chase_timer: Timer = $ChaseTimer
-onready var _end_chase_state_timer: Timer = $EndChaseState
+onready var _idle_timer: Timer = $Timers/IdleTimer
+onready var _chase_timer: Timer = $Timers/ChaseTimer
+onready var _end_chase_state_timer: Timer = $Timers/EndChaseState
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
@@ -14,6 +14,7 @@ var direction: String = "down"
 var destroyed: bool = false
 var frozen: bool = false
 var stunned: bool = false
+var poisoned: bool = false
 var chasing: bool = false
 var attacking: bool = false
 var playing_sound_effect: bool = false
@@ -79,6 +80,8 @@ func move(velocity: Vector2) -> void:
 		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
+	elif poisoned:
+		_velocity = move_and_slide(velocity*0.9)
 	else:
 		_velocity = move_and_slide(velocity)
 
@@ -87,6 +90,10 @@ func _physics_process(delta):
 		if chasing:
 			end_chase_state()
 		return
+	if poisoned:
+		$PoisonParticles/P1.direction = -_velocity
+		$PoisonParticles/P2.direction = -_velocity
+		$PoisonParticles/P3.direction = -_velocity
 	if stunned or attacking:
 		return
 	if tornado_node:
@@ -201,6 +208,9 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	$PoisonParticles/P1.emitting = false
+	$PoisonParticles/P2.emitting = false
+	$PoisonParticles/P3.emitting = false
 	destroyed = true
 	boar_sprite.texture = load("res://Assets/Images/Animals/Boar/death/" +  direction + "/body.png")
 	animation_player.play("death")
@@ -223,6 +233,7 @@ func _on_HurtBox_area_entered(area):
 		tornado_node = area
 
 func diminish_HOT(type):
+	start_poison_state()
 	var amount_to_diminish
 	match type:
 		"poison potion I":
@@ -271,7 +282,7 @@ func _on_EndChaseState_timeout():
 
 func set_change_direction_delay():
 	changed_direction_delay = true
-	$ChangeDirectionDelay.start()
+	$Timers/ChangeDirectionDelay.start()
 
 func _on_ChangeDirectionDelay_timeout():
 	changed_direction_delay = false
@@ -279,16 +290,36 @@ func _on_ChangeDirectionDelay_timeout():
 func start_frozen_state(timer_length):
 	boar_sprite.modulate = Color("00c9ff")
 	frozen = true
-	$FrozenTimer.stop()
-	$FrozenTimer.start(timer_length)
+	$Timers/FrozenTimer.start(timer_length)
 	if not attacking and not destroyed:
 		animation_player.play("loop frozen")
 
 func _on_FrozenTimer_timeout():
-	boar_sprite.modulate = Color("ffffff")
 	frozen = false
-	if not destroyed:
-		animation_player.play("loop")
+	if not poisoned:
+		boar_sprite.modulate = Color("ffffff")
+		if not destroyed:
+			animation_player.play("loop")
+
+func start_poison_state():
+	$PoisonParticles/P1.emitting = true
+	$PoisonParticles/P2.emitting = true
+	$PoisonParticles/P3.emitting = true
+	boar_sprite.modulate = Color("009000")
+	poisoned = true
+	$Timers/PoisonTimer.start()
+	if not attacking and not destroyed:
+		animation_player.play("loop frozen")
+
+func _on_PoisonTimer_timeout():
+	$PoisonParticles/P1.emitting = false
+	$PoisonParticles/P2.emitting = false
+	$PoisonParticles/P3.emitting = false
+	poisoned = false
+	if not frozen:
+		boar_sprite.modulate = Color("ffffff")
+		if not destroyed:
+			animation_player.play("loop")
 
 func start_stunned_state():
 	if not destroyed:
@@ -297,7 +328,7 @@ func start_stunned_state():
 		$Electricity.show()
 		$BoarBite/CollisionShape2D.set_deferred("disabled", true)
 		animation_player.stop(false)
-		$StunnedTimer.start()
+		$Timers/StunnedTimer.start()
 		stunned = true
 
 func _on_StunnedTimer_timeout():
@@ -334,5 +365,4 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
-
 

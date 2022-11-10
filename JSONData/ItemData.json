@@ -65,21 +65,42 @@
     "poison potion I": {
       "ItemCategory": "Potion",
       "StackSize": 999,
-      "Description": "Diminishes 8% of maximum health over time.",
+      "Description": "Diminishes 8% of maximum health over time and slows movement speed.",
       "Ingredients": null,
       "EnergyHealth": null
     },
     "poison potion II": {
       "ItemCategory": "Potion",
       "StackSize": 999,
-      "Description": "Diminishes 20% of maximum health over time.",
+      "Description": "Diminishes 20% of maximum health over time and slows movement speed.",
       "Ingredients": null,
       "EnergyHealth": null
     },
     "poison potion III": {
       "ItemCategory": "Potion",
       "StackSize": 999,
-      "Description": "Diminishes 32% of maximum health over time.",
+      "Description": "Diminishes 32% of maximum health over time and slows movement speed.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "speed potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Increases movement speed for 5 seconds.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "speed potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Increases movement speed for 15 seconds.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "speed potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Increases movement speed for 40 seconds.",
       "Ingredients": null,
       "EnergyHealth": null
     },

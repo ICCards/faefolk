@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 
-onready var _timer: Timer = $Timer
+onready var bunny_sprite: AnimatedSprite = $BunnySprite
+onready var _timer: Timer = $Timers/Timer
 onready var animation_player = $AnimationPlayer
 onready var navigation_agent = $NavigationAgent2D
 
@@ -10,6 +11,7 @@ var enemy_name = "bunny"
 var is_sleeping: bool = true
 var destroyed: bool = false
 var stunned: bool = false
+var poisoned: bool = false
 var frozen: bool = false
 var _velocity := Vector2.ZERO
 var health: int = Stats.BUNNY_HEALTH
@@ -34,12 +36,12 @@ func _ready():
 func set_random_attributes():
 	randomize()
 	Images.BunnyVariations.shuffle()
-	$AnimatedSprite.frames = Images.BunnyVariations[0]
+	bunny_sprite.frames = Images.BunnyVariations[0]
 	var randomRadiusScale = rand_range(0.5,2.0)
 	$DetectPlayer/CollisionShape2D.scale = Vector2(randomRadiusScale, randomRadiusScale)
 	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
-		$AnimatedSprite.flip_h = true
+		bunny_sprite.flip_h = true
 
 func get_random_pos():
 	if running_state:
@@ -64,6 +66,10 @@ func _update_pathfinding() -> void:
 func _physics_process(delta):
 	if not visible or destroyed or stunned:
 		return
+	if poisoned:
+		$PoisonParticles/P1.direction = -_velocity
+		$PoisonParticles/P2.direction = -_velocity
+		$PoisonParticles/P3.direction = -_velocity
 	if tornado_node:
 		if is_instance_valid(tornado_node):
 			d += delta
@@ -71,12 +77,12 @@ func _physics_process(delta):
 		else: 
 			tornado_node = null
 	if is_sleeping:
-		$AnimatedSprite.play("sleep")
+		bunny_sprite.play("sleep")
 		return
 	if navigation_agent.is_navigation_finished():
-		$AnimatedSprite.play("idle")
+		bunny_sprite.play("idle")
 		return
-	$AnimatedSprite.play("walk")
+	bunny_sprite.play("walk")
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
@@ -84,9 +90,9 @@ func _physics_process(delta):
 	_velocity += steering
 	navigation_agent.set_velocity(_velocity)
 	if _get_direction_string(_velocity) == "Right":
-		$AnimatedSprite.flip_h = false
+		bunny_sprite.flip_h = false
 	else:
-		$AnimatedSprite.flip_h = true
+		bunny_sprite.flip_h = true
 
 
 func move(velocity: Vector2) -> void:
@@ -127,15 +133,11 @@ func hit(tool_name):
 
 func destroy():
 	destroyed = true
-	$Electricity.hide()
-	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-	$CollisionShape2D.set_deferred("disabled", true)
-	$AnimatedSprite.play("death")
-	yield($AnimatedSprite, "animation_finished")
+	bunny_sprite.play("death")
 	$AnimationPlayer.play("death")
+	yield(get_tree().create_timer(0.5), "timeout")
 	InstancedScenes.intitiateItemDrop("raw filet", position, 1)
 	yield($AnimationPlayer, "animation_finished")
-	yield(get_tree().create_timer(6.0), "timeout")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -153,6 +155,7 @@ func _on_HurtBox_area_entered(area):
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 	
 func diminish_HOT(type):
+	start_poison_state()
 	var amount_to_diminish
 	match type:
 		"poison potion I":
@@ -174,20 +177,34 @@ func diminish_HOT(type):
 		if health <= 0 and not destroyed:
 			destroy()
 		yield(get_tree().create_timer(2.0), "timeout")
-	
-	
+
+
 func start_frozen_state(timer_length):
-	$FrozenTimer.stop()
-	$FrozenTimer.wait_time = timer_length
-	$FrozenTimer.start()
-	$AnimatedSprite.modulate = Color("00c9ff")
+	$Timers/FrozenTimer.start(timer_length)
+	bunny_sprite.modulate = Color("00c9ff")
 	frozen = true
 	
 func start_run_state():
 	running_state = true
-	$RunStateTimer.start()
+	$Timers/RunStateTimer.start()
 	_timer.wait_time = 2.0
 	_update_pathfinding()
+
+func start_poison_state():
+	$PoisonParticles/P1.emitting = true
+	$PoisonParticles/P2.emitting = true
+	$PoisonParticles/P3.emitting = true
+	bunny_sprite.modulate = Color("009000")
+	poisoned = true
+	$Timers/PoisonTimer.start()
+
+func _on_PoisonTimer_timeout():
+	$PoisonParticles/P1.emitting = false
+	$PoisonParticles/P2.emitting = false
+	$PoisonParticles/P3.emitting = false
+	poisoned = false
+	if not frozen and not destroyed:
+		bunny_sprite.modulate = Color("ffffff")
 
 
 func _on_DetectPlayer_area_entered(area):
@@ -198,26 +215,25 @@ func _on_RunStateTimer_timeout():
 	_timer.wait_time = rand_range(2.5, 5.0)
 
 
-func _on_VisibilityNotifier2D_screen_entered():
-	show()
-
-func _on_VisibilityNotifier2D_screen_exited():
-	hide()
-
-
 func _on_FrozenTimer_timeout():
-	$AnimatedSprite.modulate = Color("ffffff")
 	frozen = false
+	if not poisoned and not destroyed:
+		bunny_sprite.modulate = Color("ffffff")
 	
 func start_stunned_state():
 	if not destroyed:
 		stunned = true
 		$Electricity.show()
-		$AnimatedSprite.playing = false
-		$StunnedTimer.start()
+		bunny_sprite.playing = false
+		$Timers/StunnedTimer.start()
 
 func _on_StunnedTimer_timeout():
 	$Electricity.hide()
-	$AnimatedSprite.playing = true
+	bunny_sprite.playing = true
 	stunned = false
 
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

@@ -13,7 +13,8 @@ onready var Whirlwind = preload("res://World/Objects/Magic/Wind/Whirlwind.tscn")
 
 onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProjectile.tscn")
 onready var FlameThrower = preload("res://World/Objects/Magic/Fire/Flamethrower.tscn")
-onready var FireBuff = preload("res://World/Objects/Magic/Fire/AttachedFlame.tscn")
+onready var FireBuffFront = preload("res://World/Objects/Magic/Fire/AttachedFlameBehind.tscn")
+onready var FireBuffBehind = preload("res://World/Objects/Magic/Fire/AttachedFlameFront.tscn")
 
 onready var EarthStrike = preload("res://World/Objects/Magic/Earth/EarthStrike.tscn")
 onready var EarthGolem = preload("res://World/Objects/Magic/Earth/EarthGolem.tscn")
@@ -455,8 +456,10 @@ func play_fire_projectile(debuff):
 
 
 func play_fire_buff():
-	var spell = FireBuff.instance()
+	var spell = FireBuffFront.instance()
 	get_node("../").add_child(spell)
+	var spell2 = FireBuffBehind.instance()
+	get_node("../").add_child(spell2)
 	player_fire_buff = true
 	yield(get_tree().create_timer(FIRE_BUFF_LENGTH), "timeout")
 	player_fire_buff = false

@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 
-onready var _timer: Timer = $Timer
+onready var duck_sprite: AnimatedSprite = $DuckSprite
+onready var _timer: Timer = $Timers/Timer
 onready var animation_player = $AnimationPlayer
 onready var navigation_agent = $NavigationAgent2D
 
@@ -11,6 +12,7 @@ var is_eating: bool = false
 var destroyed: bool = false
 var stunned: bool = false
 var frozen: bool = false
+var poisoned: bool = false
 var _velocity := Vector2.ZERO
 var health: int = Stats.DUCK_HEALTH
 var running_state: bool = false
@@ -32,11 +34,11 @@ func _ready():
 func set_random_attributes():
 	randomize()
 	Images.DuckVariations.shuffle()
-	$AnimatedSprite.frames = Images.DuckVariations[0]
+	duck_sprite.frames = Images.DuckVariations[0]
 	orbit_radius = rand_range(30, 70)
 	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
-		$AnimatedSprite.flip_h = true
+		duck_sprite.flip_h = true
 
 func get_random_pos():
 	if running_state:
@@ -61,6 +63,10 @@ func get_random_pos():
 func _physics_process(delta):
 	if not visible or destroyed or is_eating or stunned:
 		return
+	if poisoned:
+		$PoisonParticles/P1.direction = -_velocity
+		$PoisonParticles/P2.direction = -_velocity
+		$PoisonParticles/P3.direction = -_velocity
 	if tornado_node:
 		if is_instance_valid(tornado_node):
 			d += delta
@@ -71,16 +77,16 @@ func _physics_process(delta):
 		if not frozen:
 			if Util.chance(20):
 				is_eating = true
-				$AnimatedSprite.play("eat")
-				yield($AnimatedSprite, "animation_finished")
+				duck_sprite.play("eat")
+				yield(duck_sprite, "animation_finished")
 				is_eating = false
 			else:
 				is_eating = true
-				$AnimatedSprite.play("idle")
+				duck_sprite.play("idle")
 				yield(get_tree().create_timer(rand_range(1.0, 4.0)), "timeout")
 				is_eating = false
 			return
-	$AnimatedSprite.play("walk")
+	duck_sprite.play("walk")
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
@@ -88,15 +94,17 @@ func _physics_process(delta):
 	_velocity += steering
 	navigation_agent.set_velocity(_velocity)
 	if _get_direction_string(_velocity) == "Right":
-		$AnimatedSprite.flip_h = false
+		duck_sprite.flip_h = false
 	else:
-		$AnimatedSprite.flip_h = true
+		duck_sprite.flip_h = true
 		
 func move(velocity: Vector2) -> void:
 	if tornado_node or stunned:
 		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
+	elif poisoned:
+		_velocity = move_and_slide(velocity*0.9)
 	elif running_state:
 		_velocity = move_and_slide(velocity*1.5)
 	else:
@@ -128,9 +136,8 @@ func _on_HurtBox_area_entered(area):
 
 
 func start_frozen_state(timer_length):
-	$FrozenTimer.stop()
-	$FrozenTimer.start(timer_length)
-	$AnimatedSprite.modulate = Color("00c9ff")
+	$Timers/FrozenTimer.start(timer_length)
+	duck_sprite.modulate = Color("00c9ff")
 	frozen = true
 
 func hit(tool_name, var special_ability = ""):
@@ -153,18 +160,15 @@ func hit(tool_name, var special_ability = ""):
 		
 func destroy():
 	destroyed = true
-	$Electricity.hide()
-	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-	$CollisionShape2D.set_deferred("disabled", true)
-	$AnimatedSprite.play("death")
-	yield($AnimatedSprite, "animation_finished")
+	duck_sprite.play("death")
 	$AnimationPlayer.play("death")
+	yield(get_tree().create_timer(0.5), "timeout")
 	InstancedScenes.intitiateItemDrop("raw wing", position, 1)
 	yield($AnimationPlayer, "animation_finished")
-	yield(get_tree().create_timer(3.0), "timeout")
 	queue_free()
 
 func diminish_HOT(type):
+	start_poison_state()
 	var amount_to_diminish
 	match type:
 		"poison potion I":
@@ -187,17 +191,14 @@ func diminish_HOT(type):
 			destroy()
 		yield(get_tree().create_timer(2.0), "timeout")
 
+
+
+
 func start_run_state():
 	running_state = true
-	$RunStateTimer.start()
+	$Timers/RunStateTimer.start()
 	_timer.wait_time = 2.0
 	_update_pathfinding()
-
-
-func _on_VisibilityNotifier2D_screen_entered():
-	show()
-func _on_VisibilityNotifier2D_screen_exited():
-	hide()
 
 
 func _on_RunStateTimer_timeout():
@@ -206,18 +207,39 @@ func _on_RunStateTimer_timeout():
 
 
 func _on_FrozenTimer_timeout():
-	$AnimatedSprite.modulate = Color("ffffff")
 	frozen = false
+	if not poisoned and not destroyed:
+		duck_sprite.modulate = Color("ffffff")
 
+func start_poison_state():
+	$PoisonParticles/P1.emitting = true
+	$PoisonParticles/P2.emitting = true
+	$PoisonParticles/P3.emitting = true
+	duck_sprite.modulate = Color("009000")
+	poisoned = true
+	$Timers/PoisonTimer.start()
+
+func _on_PoisonTimer_timeout():
+	$PoisonParticles/P1.emitting = false
+	$PoisonParticles/P2.emitting = false
+	$PoisonParticles/P3.emitting = false
+	poisoned = false
+	if not frozen and not destroyed:
+		duck_sprite.modulate = Color("ffffff")
 
 func start_stunned_state():
 	if not destroyed:
 		stunned = true
 		$Electricity.show()
-		$AnimatedSprite.playing = false
-		$StunnedTimer.start()
+		duck_sprite.playing = false
+		$Timers/StunnedTimer.start()
 		
 func _on_StunnedTimer_timeout():
 	$Electricity.hide()
-	$AnimatedSprite.playing = true
+	duck_sprite.playing = true
 	stunned = false
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

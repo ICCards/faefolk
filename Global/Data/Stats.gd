@@ -63,6 +63,7 @@ const BUNNY_HEALTH = 50
 const BEAR_HEALTH = 160
 const BOAR_HEALTH = 140
 const DEER_HEALTH = 150
+const SLIME_HEALTH = 100
 
 
 func return_tool_damage(tool_name):

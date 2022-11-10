@@ -42,6 +42,8 @@ var MAX_SPEED_SWIMMING := 12
 var is_walking_on_dirt: bool = true
 var is_swimming: bool = false
 var is_sitting: bool = false
+var poisoned: bool = false
+var speed_buff_active: bool = false
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
@@ -60,76 +62,41 @@ func _ready():
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
 	Server.player_node = self
-	
-	
-#reset object state to that in a given game_state, executed once per rollback 
-func reset_state(game_state : Dictionary):
-	#check if this object exists within the checked game_state
-	if game_state.has(name):
-		position.x = game_state[name]['x']
-		position.y = game_state[name]['y']
-		counter = game_state[name]['counter']
-		collisionMask = game_state[name]['collisionMask']
+
+func start_speed_buff(length):
+	speed_buff_active = true
+	$SpeedParticles/P1.emitting = true
+	$SpeedParticles/P2.emitting = true
+	$SpeedParticles/P3.emitting = true
+	if $SpeedParticles/SpeedStateTimer.time_left == 0:
+		$SpeedParticles/SpeedStateTimer.start(length)
 	else:
-		queue_free()
+		$SpeedParticles/SpeedStateTimer.start(length+$SpeedParticles/SpeedStateTimer.time_left)
 
+func _on_SpeedStateTimer_timeout():
+	speed_buff_active = false
+	$SpeedParticles/P1.emitting = false
+	$SpeedParticles/P2.emitting = false
+	$SpeedParticles/P3.emitting = false
 
-func frame_start():
-	pass
-	#code to run at beginning of frame
-	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
-
-
-func input_update(input, game_state : Dictionary):
-	pass
-#	#calculate state of object for the given input
-#	var vect = Vector2(0, 0)
-#
-#	#Collision detection for InputControl children that can pass through each other
-##    for object in game_state:
-##        if object != name:
-##            if collisionMask.intersects(game_state[object]['collisionMask']):
-##                counter += 1
-#	if !swingActive and not PlayerInventory.chatMode:
-#		animation_player.play("movement")
-#		if input.local_input[0]: #W
-#			vect.y -= 7
-#			direction = "UP"
-#			walk_state(direction)
-#		if input.local_input[2]: #S
-#			vect.y += 7
-#			direction = "DOWN"
-#			walk_state(direction)
-#		if input.local_input[1]: #A
-#			vect.x -= 7
-#			direction = "LEFT"
-#			walk_state(direction)
-#		if input.local_input[3]: #D
-#			vect.x += 7
-#			direction = "RIGHT"
-#			walk_state(direction)
-#		if input.local_input[5]:
-#			idle_state(direction)
-#
-#	#move_and_collide for "solid" stationary objects
-#	var collision = move_and_collide(vect)
-#	if collision:
-#		vect = vect.slide(collision.normal)
-#		move_and_collide(vect)
-#	#print(position)
-#	#collisionMask = Rect2(Vector2(position.x - rectExtents.x, position.y - rectExtents.y), Vector2(rectExtents.x, rectExtents.y) * 2)
-
-func frame_end():
-	pass
-	#code to run at end of frame (after all input_update calls)
-	#label.text = str(counter)
-
-
-func get_state():
-	#return dict of state variables to be stored in Frame_States
-	return {'x': position.x, 'y': position.y, 'counter': counter, 'collisionMask': collisionMask}
+func start_poison_state():
+	running = false
+	$PoisonParticles/PoisonTimer.start()
+	poisoned = true
+	$PoisonParticles/P1.emitting = true
+	$PoisonParticles/P2.emitting = true
+	$PoisonParticles/P3.emitting = true
+	composite_sprites.modulate = Color("009000")
 	
-	
+func _on_PoisonTimer_timeout():
+	poisoned = false
+	$PoisonParticles/P1.emitting = false
+	$PoisonParticles/P2.emitting = false
+	$PoisonParticles/P3.emitting = false
+	composite_sprites.modulate = Color("ffffff")
+	if Input.is_action_pressed("sprint"):
+		running = true
+
 func teleport(portal_position):
 	var adjusted_pos = input_vector*40
 	if adjusted_pos == Vector2.ZERO:
@@ -218,6 +185,7 @@ func _process(_delta) -> void:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
 		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
+	set_movement_speed_change()
 	if state == MOVEMENT:
 		movement_state(_delta)
 	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
@@ -232,6 +200,20 @@ func _process(_delta) -> void:
 			return
 	$Camera2D/UserInterface/MagicStaffUI.hide()
 
+
+func set_movement_speed_change():
+	if poisoned and speed_buff_active:
+		running_speed_change = 1.0
+	elif poisoned:
+		running_speed_change = 0.8
+	elif speed_buff_active and not running:
+		running_speed_change = 1.25
+	elif speed_buff_active and running:
+		running_speed_change = 1.5
+	elif running:
+		running_speed_change = 1.25
+	else:
+		running_speed_change = 1.0
 
 func _unhandled_input(event):
 	if not PlayerInventory.viewInventoryMode and \
@@ -266,11 +248,9 @@ func _unhandled_input(event):
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
-	if event.is_action_pressed("sprint"):
-		running_speed_change = 1.25
+	if event.is_action_pressed("sprint") and not poisoned:
 		running = true
-	elif event.is_action_released("sprint"):
-		running_speed_change = 1.0
+	elif event.is_action_released("sprint") and not poisoned:
 		running = false
 
 
@@ -368,33 +348,24 @@ func magic_casting_movement_state(_delta):
 	if Input.is_action_pressed("move_up"):
 		input_vector.y -= 1.0
 		direction = "UP"
-#			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
 	if Input.is_action_pressed("move_down"):
 		input_vector.y += 1.0
 		direction = "DOWN"
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
 	if Input.is_action_pressed("move_left"):
 		input_vector.x -= 1.0
 		direction = "LEFT"
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
 	if Input.is_action_pressed("move_right"):
 		input_vector.x += 1.0
 		direction = "RIGHT"
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)		
 	if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
 		pass
 	input_vector = input_vector.normalized()
 	if input_vector != Vector2.ZERO:
 		velocity += input_vector * ACCELERATION * _delta
 		velocity = velocity.limit_length(MAX_SPEED_DIRT * _delta)
 		velocity = velocity.move_toward(Vector2.ZERO, _delta/3)
-		move_and_collide(velocity * MAX_SPEED_DIRT)
+		move_and_collide(velocity * MAX_SPEED_DIRT * running_speed_change)
+
 
 func movement_state(delta):
 	if (state == MAGIC_CASTING or state == MOVEMENT) and \
@@ -547,5 +518,7 @@ func check_if_holding_item():
 #	day_night_animation_player.play("set night")
 #func set_day():
 #	day_night_animation_player.play_backwards("set night")
+
+
 
 

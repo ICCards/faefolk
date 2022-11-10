@@ -28,6 +28,10 @@ func _ready():
 		$PoisonTrailParticles.show()
 		$PoisonTrailParticles.transform = particles_transform
 		$PoisonTrailParticles.position += Vector2(0,32)
+	elif potion_name == "speed potion I" or potion_name == "speed potion II" or potion_name == "speed potion III":
+		$SpeedTrailParticles.show()
+		$SpeedTrailParticles.transform = particles_transform
+		$SpeedTrailParticles.position += Vector2(0,32)
 	else:
 		$HealthTrailParticles.show()
 		$HealthTrailParticles.transform = particles_transform
@@ -46,6 +50,8 @@ func destroy():
 		$AnimationPlayer.play("destruction potion")
 	elif potion_name == "poison potion I" or potion_name == "poison potion II" or potion_name == "poison potion III":
 		$AnimationPlayer.play("poison potion")
+	elif potion_name == "speed potion I" or potion_name == "speed potion II" or potion_name == "speed potion III":
+		$AnimationPlayer.play("speed potion")
 	else:
 		$AnimationPlayer.play("health potion")
 	yield($AnimationPlayer, "animation_finished")

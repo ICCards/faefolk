@@ -29,8 +29,18 @@ func _on_HurtBox_area_entered(area):
 			start_HOT(area.tool_name)
 			return
 		elif area.tool_name == "poison potion I" or area.tool_name == "poison potion II" or area.tool_name == "poison potion III":
+			get_node("../../").start_poison_state()
 			$AnimationPlayer.play("hit")
 			diminish_HOT(area.tool_name)
+			return
+		elif area.tool_name == "speed potion I" or area.tool_name == "speed potion II" or area.tool_name == "speed potion III":
+			match area.tool_name:
+				"speed potion I":
+					get_node("../../").start_speed_buff(5)
+				"speed potion II":
+					get_node("../../").start_speed_buff(15)
+				"speed potion III":
+					get_node("../../").start_speed_buff(40)
 			return
 		PlayerStats.change_health(health_to_add)
 		InstancedScenes.player_hit_effect(health_to_add, get_node("../../").position)

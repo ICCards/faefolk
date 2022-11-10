@@ -1,0 +1,347 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://Assets/Images/Enemies/slime.png" type="Texture" id=1]
+[ext_resource path="res://World/Enemies/Slime/Slime.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "New Anim 1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 9.05539
+
+[sub_resource type="CircleShape2D" id=35]
+radius = 13.0384
+
+[sub_resource type="Animation" id=36]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BoarSprite:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "hit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../BoarSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=38]
+radius = 261.008
+
+[sub_resource type="CircleShape2D" id=39]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 3 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 3 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 3 )
+region = Rect2( 72, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 3 )
+region = Rect2( 120, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 3 )
+region = Rect2( 144, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 3 )
+region = Rect2( 168, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 3 )
+region = Rect2( 216, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 3 )
+region = Rect2( 240, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 3 )
+region = Rect2( 264, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 3 )
+region = Rect2( 288, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 3 )
+region = Rect2( 312, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=40]
+animations = [ {
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="Slime" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="SlimeSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.196078, 1, 0, 1 )
+position = Vector2( 0, -4 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "idle"
+frame = 2
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 14 )
+
+[node name="PoisonParticles" type="Node2D" parent="."]
+position = Vector2( 0, -15 )
+
+[node name="P3" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 12, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0, 0.332031, 0, 1 )
+
+[node name="P2" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0.145098, 0.545098, 0.145098, 1 )
+
+[node name="P1" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0.14902, 0.937255, 0.14902, 1 )
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 262400
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource( 35 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+anims/RESET = SubResource( 36 )
+anims/hit = SubResource( 37 )
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 38 )
+
+[node name="SlimeHit" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, -15 )
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeHit"]
+position = Vector2( 15, -5.34058e-05 )
+shape = SubResource( 39 )
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 6.0
+target_desired_distance = 10.0
+path_max_distance = 16.0
+avoidance_enabled = true
+radius = 1.0
+max_speed = 150.0
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -9.53674e-07, -21 )
+scale = Vector2( 8.6, 7.1 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="ChaseTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+
+[node name="IdleTimer" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="ChangeDirectionDelay" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="FrozenTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="StunnedTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="EndChaseState" type="Timer" parent="Timers"]
+wait_time = 45.0
+one_shot = true
+
+[node name="PoisonTimer" type="Timer" parent="Timers"]
+wait_time = 8.0
+one_shot = true
+
+[node name="Electricity" type="AnimatedSprite" parent="."]
+visible = false
+modulate = Color( 1.22, 1.22, 1.22, 1 )
+position = Vector2( 0, -15 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 40 )
+frame = 6
+playing = true
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

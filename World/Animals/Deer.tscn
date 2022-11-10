@@ -115,7 +115,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=20]
 resource_name = "death"
-length = 2.0
+length = 2.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("DeerSprite:frame")
@@ -136,10 +136,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1.2, 1.2, 1.2, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("HurtBox/CollisionShape2D:disabled")
@@ -176,6 +176,42 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("PoisonParticles/P1:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("PoisonParticles/P2:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("PoisonParticles/P3:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -279,11 +315,68 @@ animations = [ {
 } ]
 
 [node name="Deer" type="KinematicBody2D"]
-modulate = Color( 1.22, 1.22, 1.22, 1 )
 collision_mask = 3
 script = ExtResource( 12 )
 
+[node name="PoisonParticles" type="Node2D" parent="."]
+position = Vector2( 0, -14 )
+
+[node name="P3" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 12, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0, 0.332031, 0, 1 )
+
+[node name="P2" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0.145098, 0.545098, 0.145098, 1 )
+
+[node name="P1" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0.14902, 0.937255, 0.14902, 1 )
+
 [node name="DeerSprite" type="Sprite" parent="."]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 material = ExtResource( 14 )
 position = Vector2( 5, -37 )
 scale = Vector2( 2, 2 )
@@ -333,41 +426,49 @@ anims/death = SubResource( 20 )
 anims/loop = SubResource( 18 )
 "anims/loop frozen" = SubResource( 19 )
 
-[node name="IdleTimer" type="Timer" parent="."]
-autostart = true
-
-[node name="ChaseTimer" type="Timer" parent="."]
-wait_time = 0.1
-
-[node name="ChangeDirectionDelay" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="FrozenTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="EndChaseState" type="Timer" parent="."]
-wait_time = 45.0
-one_shot = true
-
-[node name="StunnedTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="Electricity" type="AnimatedSprite" parent="."]
 visible = false
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 13
+frame = 3
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="IdleTimer" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="ChaseTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+
+[node name="ChangeDirectionDelay" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="PoisonTimer" type="Timer" parent="Timers"]
+wait_time = 8.0
+one_shot = true
+
+[node name="FrozenTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="EndChaseState" type="Timer" parent="Timers"]
+wait_time = 45.0
+one_shot = true
+
+[node name="StunnedTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="timeout" from="ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]
-[connection signal="timeout" from="FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
-[connection signal="timeout" from="EndChaseState" to="." method="_on_EndChaseState_timeout"]
-[connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
+[connection signal="timeout" from="Timers/ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]
+[connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
+[connection signal="timeout" from="Timers/FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
+[connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]
+[connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
