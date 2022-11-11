@@ -5454,8 +5454,8 @@ height = 22.2163
 [sub_resource type="CircleShape2D" id=10]
 
 [sub_resource type="CapsuleShape2D" id=21]
-radius = 18.0
-height = 0.0
+radius = 11.0
+height = 6.0
 
 [sub_resource type="Animation" id=23]
 length = 0.001
@@ -5888,13 +5888,12 @@ position = Vector2( 0, -43 )
 shape = SubResource( 10 )
 
 [node name="HurtBox" type="Area2D" parent="Area2Ds"]
-visible = false
 collision_layer = 128
 collision_mask = 0
 script = ExtResource( 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/HurtBox"]
-position = Vector2( 0, -17 )
+position = Vector2( 0, -13 )
 shape = SubResource( 21 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2Ds/HurtBox"]
@@ -6001,12 +6000,10 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
 shape = SubResource( 11 )
-disabled = true
 
 [connection signal="timeout" from="PoisonParticles/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
 [connection signal="timeout" from="SpeedParticles/SpeedStateTimer" to="." method="_on_SpeedStateTimer_timeout"]

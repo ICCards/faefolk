@@ -202,15 +202,19 @@ func _process(_delta) -> void:
 
 
 func set_movement_speed_change():
-	if poisoned and speed_buff_active:
+	if state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
+		running_speed_change = 0.9
+	elif (state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING) and poisoned:
+		running_speed_change = 0.7
+	elif poisoned and speed_buff_active:
 		running_speed_change = 1.0
 	elif poisoned:
 		running_speed_change = 0.8
-	elif speed_buff_active and not running:
+	elif speed_buff_active and not running and state == MOVEMENT:
 		running_speed_change = 1.25
-	elif speed_buff_active and running:
+	elif speed_buff_active and running and state == MOVEMENT:
 		running_speed_change = 1.5
-	elif running:
+	elif running and state == MOVEMENT:
 		running_speed_change = 1.25
 	else:
 		running_speed_change = 1.0
@@ -487,9 +491,8 @@ func decrease_energy_or_health():
 			rng.randomize()
 			var amt = rng.randi_range(1,3)
 			$Area2Ds/HurtBox/AnimationPlayer.play("hit")
-			$Area2Ds/PlayerHitEffect/Label.text = str(amt)
-			$Area2Ds/PlayerHitEffect/AnimationPlayer.play("Animate" + str(rng.randi_range(1,2)))
-			PlayerStats.decrease_health(amt)
+			InstancedScenes.player_hit_effect(-amt, position)
+			PlayerStats.change_health(-amt)
 		else:
 			PlayerStats.decrease_energy()
 

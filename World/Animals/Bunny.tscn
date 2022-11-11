@@ -104,7 +104,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("PoisonParticles/P2:emitting")
@@ -116,7 +116,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("PoisonParticles/P3:emitting")
@@ -128,7 +128,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Electricity:visible")
@@ -338,7 +338,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -7 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 7
+frame = 12
 playing = true
 
 [node name="Timers" type="Node" parent="."]

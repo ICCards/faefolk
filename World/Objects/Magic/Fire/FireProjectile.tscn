@@ -304,4 +304,5 @@ color_ramp = SubResource( 30 )
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

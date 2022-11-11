@@ -38,23 +38,23 @@ var inventory = {
 }
 
 var hotbar = {
-#	0: ["bow", 1, null],
-#	1: ["arrow", 100, null],
+	0: ["bow", 1, null],
+	1: ["arrow", 100, null],
 #	0: ["dstaff", 1, null],
 #	3: ["wind staff", 1, null],
 #	4: ["ice staff", 1, null],
 #	5: ["fire staff", 1, null],
 	6: ["fire staff", 1, null],
 	7: ["dark magic staff", 1, null],
-#	8: ["stone sword", 1, null],
-	1: ["poison potion I", 100, null],
+	8: ["stone sword", 1, null],
+	#1: ["poison potion I", 100, null],
 	2: ["poison potion II", 100, null],
-	3: ["poison potion III", 100, null],
-	4: ["regeneration potion I", 10, null],
-	5: ["regeneration potion II", 10, null],
+	#3: ["poison potion III", 100, null],
+#	4: ["regeneration potion I", 10, null],
+#	5: ["regeneration potion II", 10, null],
 #	6: ["regeneration potion III", 10, null],
 #	7: ["speed potion I", 10, null],
-	8: ["speed potion II", 10, null],
+#	8: ["speed potion II", 10, null],
 	9: ["speed potion III", 10, null],
 }
 

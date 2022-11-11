@@ -55,6 +55,12 @@ func _on_HurtBox_area_entered(area):
 			health_to_subtract = 20
 		elif area.name == "DeerAttack":
 			health_to_subtract = rng.randi_range(6, 12)
+		elif area.name == "WolfClaw":
+			health_to_subtract = rng.randi_range(4, 8)
+		elif area.name == "WolfBite":
+			health_to_subtract = rng.randi_range(8, 12)
+		elif area.name == "BatHit":
+			health_to_subtract = rng.randi_range(8, 12)
 		else:
 			health_to_subtract = 0
 		$AnimationPlayer.play("hit")

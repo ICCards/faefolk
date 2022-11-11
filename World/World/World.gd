@@ -1,6 +1,6 @@
 extends YSort
 
-var build_tiles = true
+var build_tiles = false
 
 onready var dirt = $GeneratedTiles/DirtTiles
 onready var plains = $GeneratedTiles/GreenGrassTiles
@@ -25,12 +25,12 @@ onready var Player = preload("res://World/Player/Player/Player.tscn")
 onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
 onready var Player_pet = preload("res://World/Player/Pet/PlayerPet.tscn")
 onready var Bear = preload("res://World/Animals/Bear.tscn")
-onready var Snake = preload("res://World/Animals/Snake.tscn")
 onready var IC_Ghost = preload("res://World/Enemies/ICGhost.tscn")
 onready var Bunny = preload("res://World/Animals/Bunny.tscn")
 onready var Duck = preload("res://World/Animals/Duck.tscn")
 onready var Boar = preload("res://World/Animals/Boar.tscn")
 onready var Deer = preload("res://World/Animals/Deer.tscn")
+onready var Wolf = preload("res://World/Animals/Wolf.tscn")
 onready var Clam = preload("res://World/Objects/Nature/Forage/Clam.tscn")
 onready var Starfish = preload("res://World/Objects/Nature/Forage/Starfish.tscn")
 onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
@@ -77,9 +77,10 @@ var random_snow_storm_position
 
 const NUM_DUCKS = 250
 const NUM_BUNNIES = 250
-const NUM_BEARS = 150
-const NUM_BOARS = 150
-const NUM_DEER = 150
+const NUM_BEARS = 15
+const NUM_BOARS = 15
+const NUM_DEER = 15
+const NUM_WOLVES = 150
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -529,6 +530,8 @@ func spawn_animals():
 		spawnRandomBoar()
 	for i in range(NUM_DEER):
 		spawnRandomDeer()
+	for i in range(NUM_WOLVES):
+		spawnRandomWolf()
 	
 func set_random_beach_forage():
 	for id in Server.generated_map["beach"]:
@@ -748,6 +751,13 @@ func returnValidSpawnLocation():
 		return tempLoc
 	return null
 
+
+func spawnRandomWolf():
+	var loc = returnValidSpawnLocation()
+	if loc != null:
+		var wolf = Wolf.instance()
+		wolf.global_position = loc
+		$Animals.add_child(wolf)
 
 func spawnRandomBunny():
 	var loc = returnValidSpawnLocation()

@@ -7,6 +7,7 @@ onready var composite_sprites = get_node("../CompositeSprites")
 
 var is_throwing: bool = false
 var animation: String = ""
+var current_potion: String = ""
 var direction: String = "DOWN"
 
 enum {
@@ -46,15 +47,16 @@ func _physics_process(delta):
 		else:
 			direction = "DOWN"
 	if get_parent().state != DYING and is_throwing:
-		composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), null)
+		composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), current_potion)
 
 
 func throw_potion(potion_name, init_direction):
 	PlayerInventory.remove_single_object_from_hotbar()
 	is_throwing = true
+	current_potion = potion_name
 	direction = init_direction
 	get_parent().state = MAGIC_CASTING
-	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), null)
+	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), potion_name)
 	player_animation_player.play("bow draw release")
 	yield(player_animation_player, "animation_finished" )
 	throw(potion_name)

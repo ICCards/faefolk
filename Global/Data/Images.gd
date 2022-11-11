@@ -401,6 +401,16 @@ func returnICGhostUnique(unique):
 
 # WEAPONS #
 func returnToolSprite(toolName, animation):
+	if toolName == "health potion I" or toolName == "health potion II" or toolName == "health potion III":
+		match animation:
+			"throw_down":
+				return health_potion_throw.down
+			"throw_up":
+				return health_potion_throw.up
+			"throw_left":
+				return health_potion_throw.left
+			"throw_right":
+				return health_potion_throw.right
 	match toolName:
 		"hammer":
 			match animation: 
@@ -722,6 +732,14 @@ func returnToolSprite(toolName, animation):
 					return magic_staff.right
 				"magic_cast_left":
 					return magic_staff.left
+
+
+var health_potion_throw = {
+	down = preload("res://Characters/Weapon swings/health potion throw/down.png"),
+	up = preload("res://Characters/Weapon swings/health potion throw/up.png"),
+	left = preload("res://Characters/Weapon swings/health potion throw/left.png"),
+	right = preload("res://Characters/Weapon swings/health potion throw/right.png")
+}
 
 var magic_staff = {
 	down = preload("res://Characters/Weapon swings/magic staff/down.png"),

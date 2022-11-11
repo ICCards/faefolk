@@ -11,12 +11,14 @@ func spawnPlayerExample():
 	player.name = str(get_tree().get_network_unique_id())
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
-	add_child(player)
+	$Players.add_child(player)
 	player.spawn_position = Vector2(32*32,32*32)
-	player.position =  Vector2(6*32,6*32)
+	player.position =  Vector2(12*32,12*32)
+	Server.player_node = player
 
 
 func _ready():
+	Server.world = self
 	spawnPlayerExample()
 	set_nav()
 	
