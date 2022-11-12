@@ -13,10 +13,13 @@ var stunned: bool = false
 var poisoned: bool = false
 var chasing: bool = false
 var jumping: bool = false
+var jump_delay: bool = false
+var start_jump: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
+var jump_direction := Vector2.ZERO
 var jump := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 100.0
 var changed_direction_delay: bool = false
@@ -33,10 +36,11 @@ var rng = RandomNumberGenerator.new()
 
 var JUMP_AMOUNT = 100
 var KNOCKBACK_AMOUNT = 180
-export var MAX_SPEED = 160
+export var MAX_SPEED = 80
 export var ACCELERATION = 200
 export var FRICTION = 80
 
+var cancel_jump = false
 
 enum {
 	IDLE,
@@ -53,16 +57,6 @@ func _ready():
 	slime_sprite.frame = rng.randi_range(0, 13)
 
 	
-#func set_sprite_texture():
-#	match state:
-#		IDLE:
-#			boar_sprite.texture = load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png")
-#		WALK:
-#			boar_sprite.texture = load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png")
-#		CHASE:
-#			boar_sprite.texture = load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png")
-
-	
 func move(velocity: Vector2) -> void:
 	if tornado_node or stunned or jumping or destroyed:
 		return
@@ -77,91 +71,38 @@ func _physics_process(delta):
 	if destroyed or not visible:
 		return
 	if jumping:
-		jump = jump.move_toward(jump, KNOCKBACK_AMOUNT * delta)
-		jump = move_and_slide(jump)
+		velocity = velocity.move_toward(jump_direction * MAX_SPEED * 6, ACCELERATION * delta * 10)
+		velocity = move_and_slide(velocity)
 		return
-	if knockback != Vector2.ZERO:
-		knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
-		knockback = move_and_slide(knockback)
-	else:
+	if not start_jump:
 		var direction = (Server.player_node.global_position - global_position).normalized()
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 		move(velocity)
-		if velocity.x > 0:
-			slime_sprite.flip_h = false
-		else:
-			slime_sprite.flip_h = true
-	if (position+Vector2(0,-9)).distance_to(Server.player_node.position) < 70 and not jumping:
-		jumping = true
-		jump = self.position.direction_to(Server.player_node.position) * 100
-		print(jump * 100)
-		animation_player.play("jump forward")
-		yield(animation_player, "animation_finished")
-		jumping = false
-		#jump_forward()
+		slime_sprite.flip_h = velocity.x > 0
+		if (position+Vector2(0,-9)).distance_to(Server.player_node.position) < 120 and not jump_delay:
+			jump_forward()
 		
 func jump_forward():
-	jumping = true
-	animation_player.play("jump forward")
-	yield(get_tree().create_timer(0.4), "timeout")
-	jump()
-	yield(animation_player, "animation_finished")
+	start_jump = true
+	jump_delay = true
+	$Timers/JumpDelay.start(rand_range(0.5, 2.0))
+	slime_sprite.play("jump")
+	yield(slime_sprite, "animation_finished")
+	if not cancel_jump:
+		slime_sprite.play("jumping")
+		jumping = true
+		jump_direction = (Server.player_node.global_position - global_position).normalized()
+		yield(slime_sprite, "animation_finished")
+		velocity = Vector2.ZERO
+	cancel_jump = false
 	jumping = false
-	
-	
-func jump():
-	$Tween.interpolate_property(self, "position", position, Server.player_node.position, 1.2, 3, 1)
-	$Tween.start()
-		
-#			state = ATTACK
-	
-	
-#	if Server.player_node:
-#		if not visible or destroyed:
-#			if chasing:
-#				end_chase_state()
-#			return
-#		if poisoned:
-#			$PoisonParticles/P1.direction = -_velocity
-#			$PoisonParticles/P2.direction = -_velocity
-#			$PoisonParticles/P3.direction = -_velocity
-#		if stunned or attacking:
-#			return
-#		if tornado_node:
-#			if is_instance_valid(tornado_node):
-#				d += delta
-#				position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
-#			else: 
-#				tornado_node = null
-#		if knockback != Vector2.ZERO:
-#			_velocity = Vector2.ZERO
-#			knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
-#			knockback = move_and_slide(knockback)
-#			return
-#		set_direction()
-#		#set_sprite_texture()
-#		if state == CHASE and (position+Vector2(0,-9)).distance_to(Server.player_node.position) < 70:
-#			state = ATTACK
-#			attack()
+	start_jump = false
+	slime_sprite.play("idle")
 
 
-#func attack():
-#	if not attacking:
-#		play_groan_sound_effect()
-#		attacking = true
-#		hit_box.look_at(Server.player_node.position)
-#		set_swing_direction()
-#		#boar_sprite.texture = load("res://Assets/Images/Animals/Boar/attack/" +  direction + "/body.png")
-#		#animation_player.play("attack")
-#		#yield(animation_player, "animation_finished")
-#		if not destroyed:
-##			if frozen:
-##				animation_player.play("loop frozen")
-##			else:
-##				animation_player.play("loop")
-#			attacking = false
-#			state = CHASE
-	
+func _on_JumpDelay_timeout():
+	jump_delay = false
+
 
 func set_swing_direction():
 	var degrees = int(hit_box.rotation_degrees) % 360
@@ -214,11 +155,22 @@ func _on_HurtBox_area_entered(area):
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
 	if area.knockback_vector != Vector2.ZERO:
-		knockback = area.knockback_vector * 100
+		velocity = Vector2.ZERO
+		knockback = area.knockback_vector
+		velocity = knockback * 200
+		if start_jump:
+			slime_sprite.play("idle")
+			jumping = false
+			start_jump = false
+			cancel_jump = true
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
+	if area.special_ability == "fire":
+		InstancedScenes.initiateExplosionParticles(position)
+		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position)
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 
 func diminish_HOT(type):
 	start_poison_state()
@@ -323,4 +275,5 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
+
 

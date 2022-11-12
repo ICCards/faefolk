@@ -328,7 +328,6 @@ _data = [ Vector2( 0, 2.73165 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.73165 ), 0.0, 0.0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 86 )
 disabled = true
 
@@ -375,7 +374,7 @@ modulate = Color( 1.17, 1.17, 1.17, 1 )
 position = Vector2( 10, -9 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
-frame = 26
+frame = 6
 playing = true
 
 [node name="TrailParticles" type="Node2D" parent="."]
@@ -507,3 +506,4 @@ stream = ExtResource( 2 )
 stream = ExtResource( 2 )
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

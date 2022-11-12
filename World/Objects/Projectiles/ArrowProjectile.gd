@@ -32,6 +32,13 @@ func fade_out():
 	$Tween.start()
 
 func _on_Area2D_area_entered(area):
+	destroy()
+
+func _on_Hitbox_body_entered(body):
+	destroy()
+
+
+func destroy():
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
 	collided = true

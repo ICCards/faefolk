@@ -10,7 +10,7 @@ var chasing: bool = false
 var jumping: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
-var knockback := Vector2.ZERO
+var knockback_vector := Vector2.ZERO
 var jump := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 100.0
 var changed_direction_delay: bool = false
@@ -26,10 +26,10 @@ var health: int = Stats.BAT_HEALTH
 var velocity = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 
-export var MAX_SPEED = 205
-export var ACCELERATION = 240
+export var MAX_SPEED = 160
+export var ACCELERATION = 180
 export var FRICTION = 80
-export var KNOCKBACK_AMOUNT = 90
+export var KNOCKBACK_AMOUNT = 70
 
 
 func _ready():
@@ -40,28 +40,46 @@ func _physics_process(delta):
 	if not visible:
 		return
 	if not destroyed:
+		$BatHit.look_at(Server.player_node.position)
 		set_direction()
-		if knockback != Vector2.ZERO:
-			knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
-			knockback = move_and_slide(knockback)
-		else:
-			bat_sprite.play("fly " + direction)
-			var direction = (Server.player_node.global_position - global_position).normalized()
-			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-			velocity = move_and_slide(velocity)
+		bat_sprite.play("fly " + direction)
+		var direction = (Server.player_node.global_position - global_position).normalized()
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+		move(velocity)
+
+
+func move(velocity: Vector2) -> void:
+	if tornado_node or stunned or jumping or destroyed:
+		return
+	if frozen:
+		velocity = move_and_slide(velocity*0.75)
+	elif poisoned:
+		velocity = move_and_slide(velocity*0.9)
+	else:
+		velocity = move_and_slide(velocity)
 
 
 func set_direction():
-	if abs(velocity.y) > abs(velocity.x):
-		if velocity.y > 0:
-			direction = "down"
-		else: 
-			direction = "up"
-	else: 
-		if velocity.x > 0:
+	var degrees = int($BatHit.rotation_degrees) % 360
+	if $BatHit.rotation_degrees >= 0:
+		if degrees <= 45 or degrees >= 315:
 			direction = "right"
-		else: 
+		elif degrees <= 135:
+			direction = "down"
+		elif degrees <= 225:
 			direction = "left"
+		else:
+			direction = "up"
+	else:
+		if degrees >= -45 or degrees <= -315:
+			direction = "right"
+		elif degrees >= -135:
+			direction = "up"
+		elif degrees >= -225:
+			direction = "left"
+		else:
+			direction = "down"
+
 
 
 func _on_HurtBox_area_entered(area):
@@ -73,11 +91,16 @@ func _on_HurtBox_area_entered(area):
 		if area.name == "SwordSwing":
 			Stats.decrease_tool_health()
 		if area.knockback_vector != Vector2.ZERO:
-			knockback = area.knockback_vector * 100
+			knockback_vector = area.knockback_vector
+			velocity = knockback_vector * 200
 		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 			hit(area.tool_name)
 		if area.tool_name == "lingering tornado":
 			tornado_node = area
+		if area.special_ability == "fire":
+			InstancedScenes.initiateExplosionParticles(position)
+			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position)
+			health -= Stats.FIRE_DEBUFF_DAMAGE
 		
 		
 func hit(tool_name):
@@ -206,3 +229,4 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
+

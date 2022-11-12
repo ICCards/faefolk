@@ -44,10 +44,7 @@ func _physics_process(delta):
 				var direction = (enemy_node.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 				velocity = move_and_slide(velocity)
-				if velocity.x > 0:
-					demon_sprite.flip_h = false
-				else:
-					demon_sprite.flip_h = true
+				demon_sprite.flip_h = velocity.x > 0
 				if not attacking and self.position.distance_to(enemy_node.position) < 150:
 					swing()
 				return

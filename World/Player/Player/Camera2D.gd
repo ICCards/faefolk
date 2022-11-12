@@ -9,8 +9,8 @@ var time_of_shake = 3.0
 var speed_of_shake = 0.02
 var strength_of_shake = 3.0
 
-var time_of_small_shake = 0.75
-var strength_of_small_shake = 2.0
+var time_of_small_shake = 0.5
+var strength_of_small_shake = 1.5
 
 var time_of_player_hit_shake = 0.5
 var strength_of_player_hit_shake = 1.5

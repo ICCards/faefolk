@@ -12,15 +12,15 @@ func spawnPlayerExample():
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
 	$Players.add_child(player)
-	player.spawn_position = Vector2(32*32,32*32)
-	player.position =  Vector2(12*32,12*32)
+	player.spawn_position = Vector2(4*32,4*32)
+	player.position =  Vector2(4*32,4*32)
 	Server.player_node = player
 
 
 func _ready():
 	Server.world = self
 	spawnPlayerExample()
-	set_nav()
+	#set_nav()
 	
 func set_nav():
 	for x in range(80):

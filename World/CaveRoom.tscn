@@ -1424,7 +1424,6 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="7" type="YSort" parent="."]
-visible = false
 
 [node name="Floors" type="TileMap" parent="7"]
 tile_set = SubResource( 38 )
@@ -1491,6 +1490,7 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="8" type="YSort" parent="."]
+visible = false
 
 [node name="Floors" type="TileMap" parent="8"]
 tile_set = SubResource( 38 )

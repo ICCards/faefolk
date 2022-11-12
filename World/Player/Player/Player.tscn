@@ -5454,8 +5454,8 @@ height = 22.2163
 [sub_resource type="CircleShape2D" id=10]
 
 [sub_resource type="CapsuleShape2D" id=21]
-radius = 11.0
-height = 6.0
+radius = 9.0
+height = 4.0
 
 [sub_resource type="Animation" id=23]
 length = 0.001
@@ -5544,7 +5544,7 @@ script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.85, 0.85 )
+zoom = Vector2( 0.8, 0.8 )
 smoothing_enabled = true
 smoothing_speed = 20.0
 script = ExtResource( 81 )
@@ -5637,7 +5637,7 @@ emission_rect_extents = Vector2( 12, 4 )
 direction = Vector2( -1, 0 )
 spread = 24.0
 gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
+initial_velocity = 40.0
 initial_velocity_random = 0.8
 scale_amount = 4.0
 scale_amount_random = 0.7
@@ -5655,7 +5655,7 @@ emission_rect_extents = Vector2( 32, 4 )
 direction = Vector2( -1, 0 )
 spread = 24.0
 gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
+initial_velocity = 40.0
 initial_velocity_random = 0.8
 scale_amount = 4.0
 scale_amount_random = 0.7
@@ -5673,7 +5673,7 @@ emission_rect_extents = Vector2( 32, 4 )
 direction = Vector2( -1, 0 )
 spread = 24.0
 gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
+initial_velocity = 40.0
 initial_velocity_random = 0.8
 scale_amount = 4.0
 scale_amount_random = 0.7
@@ -5893,7 +5893,7 @@ collision_mask = 0
 script = ExtResource( 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/HurtBox"]
-position = Vector2( 0, -13 )
+position = Vector2( 0, -11 )
 shape = SubResource( 21 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2Ds/HurtBox"]

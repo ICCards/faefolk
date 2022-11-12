@@ -81,6 +81,10 @@ func swing(item_name, _direction):
 			animation = "watering_" + _direction.to_lower()
 			player_animation_player.play("watering")
 		elif item_name == "scythe" or item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
+			if get_node("../Magic").player_fire_buff:
+				sword_swing.special_ability = "fire"
+			else:
+				sword_swing.special_ability = ""
 			if item_name == "scythe":
 				player_animation_player.play("scythe_swing_" + _direction.to_lower())
 			else:

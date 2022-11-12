@@ -181,6 +181,12 @@ func sendAction(action,data):
 
 
 func _process(_delta) -> void:
+	$PoisonParticles/P1.direction = -velocity
+	$PoisonParticles/P2.direction = -velocity
+	$PoisonParticles/P3.direction = -velocity
+	$SpeedParticles/P1.direction = -velocity
+	$SpeedParticles/P2.direction = -velocity
+	$SpeedParticles/P3.direction = -velocity
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
