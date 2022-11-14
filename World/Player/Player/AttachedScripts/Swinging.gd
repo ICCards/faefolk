@@ -129,7 +129,7 @@ func draw_bow(init_direction):
 	PlayerStats.decrease_energy()
 	composite_sprites.set_player_animation(get_parent().character, animation, "bow")
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
 	yield(player_animation_player, "animation_finished" )
 	wait_for_release()
@@ -137,7 +137,7 @@ func draw_bow(init_direction):
 func wait_for_release():
 	if not mouse_left_down:
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
 		PlayerInventory.remove_material("arrow", 1)
 		shoot()

@@ -641,7 +641,7 @@
       "EnergyHealth": [0,0]
   },
   "mushroom": {
-      "ItemCategory": "Food",
+      "ItemCategory": "Forage",
       "StackSize": 999,
       "Description": "A fungus found in the caves.",
       "Ingredients": null,

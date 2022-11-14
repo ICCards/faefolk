@@ -15,6 +15,7 @@ var chasing: bool = false
 var jumping: bool = false
 var jump_delay: bool = false
 var start_jump: bool = false
+var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
@@ -51,9 +52,10 @@ enum {
 }
 
 func _ready():
+	randomize()
 	rng.randomize()
 	hide()
-	#orbit_radius = rand_range(30, 50)
+	orbit_radius = rand_range(20, 40)
 	slime_sprite.frame = rng.randi_range(0, 13)
 
 	
@@ -70,8 +72,18 @@ func move(velocity: Vector2) -> void:
 func _physics_process(delta):
 	if destroyed or not visible:
 		return
+	if tornado_node:
+		if is_instance_valid(tornado_node):
+			d += delta
+			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
+		else: 
+			tornado_node = null
+	if knocking_back:
+		velocity = velocity.move_toward(knockback * MAX_SPEED * 7, ACCELERATION * delta * 8)
+		velocity = move_and_slide(velocity)
+		return
 	if jumping:
-		velocity = velocity.move_toward(jump_direction * MAX_SPEED * 6, ACCELERATION * delta * 10)
+		velocity = velocity.move_toward(jump_direction * MAX_SPEED * 7, ACCELERATION * delta * 8)
 		velocity = move_and_slide(velocity)
 		return
 	if not start_jump:
@@ -82,10 +94,16 @@ func _physics_process(delta):
 		if (position+Vector2(0,-9)).distance_to(Server.player_node.position) < 120 and not jump_delay:
 			jump_forward()
 		
+
+func _on_KnockbackTimer_timeout():
+	velocity = Vector2.ZERO
+	knocking_back = false
+
+
 func jump_forward():
 	start_jump = true
 	jump_delay = true
-	$Timers/JumpDelay.start(rand_range(0.5, 2.0))
+	$Timers/JumpDelay.start(rand_range(1.0, 2.5))
 	slime_sprite.play("jump")
 	yield(slime_sprite, "animation_finished")
 	if not cancel_jump:
@@ -155,6 +173,8 @@ func _on_HurtBox_area_entered(area):
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
 	if area.knockback_vector != Vector2.ZERO:
+		knocking_back = true
+		$Timers/KnockbackTimer.start()
 		velocity = Vector2.ZERO
 		knockback = area.knockback_vector
 		velocity = knockback * 200
@@ -207,7 +227,7 @@ func start_frozen_state(timer_length):
 func _on_FrozenTimer_timeout():
 	frozen = false
 	if not poisoned:
-		slime_sprite.modulate = Color("ffffff")
+		slime_sprite.modulate = Color("00ff00")
 		#if not destroyed:
 			#animation_player.play("loop")
 
@@ -275,5 +295,4 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
-
 

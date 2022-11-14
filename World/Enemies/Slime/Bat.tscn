@@ -385,7 +385,7 @@ scale = Vector2( 1.2, 1.2 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "fly down"
-frame = 2
+frame = 1
 playing = true
 
 [node name="PoisonParticles" type="Node2D" parent="."]
@@ -458,19 +458,12 @@ anims/RESET = SubResource( 36 )
 anims/hit = SubResource( 37 )
 
 [node name="BatHit" type="Area2D" parent="."]
-position = Vector2( 0, -21 )
-rotation = 1.5708
+position = Vector2( 0, -7 )
 collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BatHit"]
-position = Vector2( 18, -6.58035e-05 )
 shape = SubResource( 38 )
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( 0, 2.38419e-07 )
-scale = Vector2( 5.5, 4.4 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
@@ -493,7 +486,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 41 )
-frame = 11
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -506,8 +499,6 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
 [connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]

@@ -6,10 +6,11 @@ var storm2
 
 
 func _ready():
-	stream = Sounds.nature
-	volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
-	play()
-	Sounds.connect("volume_change", self, "set_new_music_volume")
+	if has_node("/root/World"):
+		stream = Sounds.nature
+		volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
+		play()
+		Sounds.connect("volume_change", self, "set_new_music_volume")
 
 
 func set_new_music_volume():

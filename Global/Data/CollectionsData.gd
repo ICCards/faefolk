@@ -32,7 +32,7 @@ var forage = {
 	"green grass": 0,
 	"red grass": 0,
 	"yellow grass": 0,
-
+	"mushroom": 0,
 }
 
 var resources = {

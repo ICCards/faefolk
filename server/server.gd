@@ -31,7 +31,23 @@ var player_house_position
 var player_house_id
 var world
 var map
-var generated_map = {}
+var generated_map = {
+	"dirt":[],
+	#"ocean":[],
+	"beach":[],
+	"plains":[],
+	"forest":[],
+	"desert":[],
+	"snow":[],
+	"tree":[],
+	"tall_grass":[],
+	"ore_large":[],
+	"ore":[],
+	"log":[],
+	"stump":[],
+	"flower":[],
+#    "tile": [],
+}
 var player_state = "WORLD"
 var day
 var num_day = 1

@@ -33,12 +33,17 @@ export var KNOCKBACK_AMOUNT = 70
 
 
 func _ready():
+	randomize()
 	rng.randomize()
-	hide()
+	orbit_radius = rand_range(20, 40)
 
 func _physics_process(delta):
-	if not visible:
-		return
+	if tornado_node:
+		if is_instance_valid(tornado_node):
+			d += delta
+			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
+		else: 
+			tornado_node = null
 	if not destroyed:
 		$BatHit.look_at(Server.player_node.position)
 		set_direction()
@@ -225,8 +230,10 @@ func stop_sound_effects():
 	#sound_effects.stop()
 
 func _on_VisibilityNotifier2D_screen_entered():
+	pass
 	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
-	hide()
+	pass
+	#hide()
 

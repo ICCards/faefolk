@@ -61,6 +61,12 @@ func _on_HurtBox_area_entered(area):
 			health_to_subtract = rng.randi_range(8, 12)
 		elif area.name == "BatHit":
 			health_to_subtract = rng.randi_range(8, 12)
+		elif area.name == "SlimeHit":
+			get_node("../../").start_poison_state()
+			diminish_HOT(area.name)
+			$AnimationPlayer.play("hit")
+			get_node("../../Camera2D").player_hit_screen_shake()
+			return
 		else:
 			health_to_subtract = 0
 		$AnimationPlayer.play("hit")
@@ -77,6 +83,8 @@ func diminish_HOT(type):
 			amount_to_diminish = PlayerStats.health_maximum * 0.2
 		"poison potion III":
 			amount_to_diminish = PlayerStats.health_maximum * 0.32
+		"SlimeHit":
+			amount_to_diminish = PlayerStats.health_maximum * 0.08
 	var increment = int(ceil(amount_to_diminish / 4))
 	while int(amount_to_diminish) > 0:
 		if amount_to_diminish < increment:

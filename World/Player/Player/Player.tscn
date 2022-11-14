@@ -5540,11 +5540,16 @@ radius = 8.00011
 height = 7.99978
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 0
 script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.8, 0.8 )
+limit_left = 0
+limit_top = 0
+limit_right = 1600
+limit_bottom = 1600
 smoothing_enabled = true
 smoothing_speed = 20.0
 script = ExtResource( 81 )

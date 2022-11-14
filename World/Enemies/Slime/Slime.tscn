@@ -1,9 +1,9 @@
 [gd_scene load_steps=41 format=2]
 
+[ext_resource path="res://Assets/Images/Enemies/slime colored.png" type="Texture" id=1]
 [ext_resource path="res://World/Enemies/Slime/Slime.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=7]
-[ext_resource path="res://Assets/Images/Enemies/slime.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=14]
 radius = 5.0
@@ -25,6 +25,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../SlimeSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=37]
 resource_name = "hit"
@@ -41,6 +53,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../SlimeSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="CircleShape2D" id=39]
@@ -253,62 +277,62 @@ tracks/6/keys = {
 resource_name = "jump forward"
 length = 2.0
 
-[sub_resource type="AtlasTexture" id=152]
-atlas = ExtResource( 8 )
+[sub_resource type="AtlasTexture" id=148]
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=153]
-atlas = ExtResource( 8 )
+[sub_resource type="AtlasTexture" id=149]
+atlas = ExtResource( 1 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=154]
-atlas = ExtResource( 8 )
+[sub_resource type="AtlasTexture" id=150]
+atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=155]
-atlas = ExtResource( 8 )
+[sub_resource type="AtlasTexture" id=151]
+atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=148]
-atlas = ExtResource( 8 )
+[sub_resource type="AtlasTexture" id=152]
+atlas = ExtResource( 1 )
 region = Rect2( 0, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=149]
-atlas = ExtResource( 8 )
+[sub_resource type="AtlasTexture" id=153]
+atlas = ExtResource( 1 )
 region = Rect2( 16, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=150]
-atlas = ExtResource( 8 )
+[sub_resource type="AtlasTexture" id=154]
+atlas = ExtResource( 1 )
 region = Rect2( 32, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=151]
-atlas = ExtResource( 8 )
+[sub_resource type="AtlasTexture" id=155]
+atlas = ExtResource( 1 )
 region = Rect2( 48, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=156]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=157]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 1 )
 region = Rect2( 16, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=158]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 1 )
 region = Rect2( 32, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=159]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 1 )
 region = Rect2( 48, 32, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=147]
 animations = [ {
-"frames": [ SubResource( 152 ), SubResource( 153 ), SubResource( 154 ), SubResource( 155 ) ],
+"frames": [ SubResource( 148 ), SubResource( 149 ), SubResource( 150 ), SubResource( 151 ) ],
 "loop": true,
 "name": "idle",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 148 ), SubResource( 149 ), SubResource( 150 ), SubResource( 151 ) ],
+"frames": [ SubResource( 152 ), SubResource( 153 ), SubResource( 154 ), SubResource( 155 ) ],
 "loop": false,
 "name": "jump",
 "speed": 4.0
@@ -320,8 +344,8 @@ animations = [ {
 } ]
 
 [node name="Slime" type="KinematicBody2D"]
-collision_layer = 3
-collision_mask = 2
+collision_layer = 2
+collision_mask = 262146
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -416,6 +440,10 @@ scale = Vector2( 8.6, 7.1 )
 
 [node name="Timers" type="Node" parent="."]
 
+[node name="KnockbackTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
 [node name="FrozenTimer" type="Timer" parent="Timers"]
 one_shot = true
 
@@ -448,12 +476,12 @@ anims/death = SubResource( 142 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="SlimeSprite" type="AnimatedSprite" parent="."]
-self_modulate = Color( 0, 1, 0, 1 )
 material = ExtResource( 7 )
 position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
+frame = 2
 playing = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -461,6 +489,7 @@ playing = true
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
 [connection signal="timeout" from="Timers/FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
 [connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]

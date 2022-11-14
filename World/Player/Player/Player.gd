@@ -141,9 +141,9 @@ func player_death():
 	
 func drop_inventory_items():
 	for item in PlayerInventory.hotbar.keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.hotbar[item], position+Vector2(rand_range(-16,16), rand_range(-16,16)))
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.hotbar[item], position+Vector2(rand_range(-32,32), rand_range(-32,32)))
 	for item in PlayerInventory.inventory.keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.inventory[item], position+Vector2(rand_range(-16,16), rand_range(-16,16)))
+		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.inventory[item], position+Vector2(rand_range(-32,32), rand_range(-32,32)))
 	PlayerInventory.hotbar = {}
 	PlayerInventory.inventory = {}
 	
@@ -387,30 +387,30 @@ func movement_state(delta):
 			input_vector.y -= 1.0
 			direction = "UP"
 			walk_state(direction)
-			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)
+#			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
 		if Input.is_action_pressed("move_down"):
 			input_vector.y += 1.0
 			direction = "DOWN"
 			walk_state(direction)
-			var data = {"p":position,"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
 		if Input.is_action_pressed("move_left"):
 			input_vector.x -= 1.0
 			direction = "LEFT"
 			walk_state(direction)
-			var data = {"p":position,"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
 		if Input.is_action_pressed("move_right"):
 			input_vector.x += 1.0
 			direction = "RIGHT"
 			walk_state(direction)
-			var data = {"p":position,"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)		
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)		
 		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
 			idle_state(direction)
-			var data = {"p":position,"d":direction,"t":Server.client_clock}
-			sendAction(MOVEMENT,data)
+#			var data = {"p":position,"d":direction,"t":Server.client_clock}
+#			sendAction(MOVEMENT,data)
 		input_vector = input_vector.normalized()
 		if input_vector != Vector2.ZERO:
 			velocity += input_vector * ACCELERATION * delta
