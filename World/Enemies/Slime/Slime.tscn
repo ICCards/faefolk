@@ -441,7 +441,7 @@ scale = Vector2( 8.6, 7.1 )
 [node name="Timers" type="Node" parent="."]
 
 [node name="KnockbackTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.25
 one_shot = true
 
 [node name="FrozenTimer" type="Timer" parent="Timers"]
@@ -464,7 +464,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 5
+frame = 13
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -476,12 +476,12 @@ anims/death = SubResource( 142 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="SlimeSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 material = ExtResource( 7 )
 position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
-frame = 2
 playing = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

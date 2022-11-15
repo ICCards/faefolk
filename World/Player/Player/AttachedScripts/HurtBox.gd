@@ -61,6 +61,8 @@ func _on_HurtBox_area_entered(area):
 			health_to_subtract = rng.randi_range(8, 12)
 		elif area.name == "BatHit":
 			health_to_subtract = rng.randi_range(8, 12)
+		elif area.name == "SpiderHit":
+			health_to_subtract = rng.randi_range(8, 12)
 		elif area.name == "SlimeHit":
 			get_node("../../").start_poison_state()
 			diminish_HOT(area.name)

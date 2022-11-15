@@ -5472,24 +5472,12 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../CompositeSprites:visible")
+tracks/1/path = NodePath("../../CompositeSprites:material:shader_param/flash_modifier")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../../CompositeSprites:material:shader_param/flash_modifier")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -5546,10 +5534,6 @@ script = ExtResource( 8 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.8, 0.8 )
-limit_left = 0
-limit_top = 0
-limit_right = 1600
-limit_bottom = 1600
 smoothing_enabled = true
 smoothing_speed = 20.0
 script = ExtResource( 81 )

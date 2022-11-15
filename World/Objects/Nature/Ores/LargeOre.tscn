@@ -241,6 +241,7 @@ position = Vector2( 0, -12 )
 [node name="BigMovementCollisionBox" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2( -1, -28 )
+collision_layer = 35
 
 [node name="BigMovementBox" type="CollisionShape2D" parent="BigMovementCollisionBox"]
 position = Vector2( 1, 40.9412 )
@@ -250,6 +251,7 @@ shape = SubResource( 9 )
 [node name="SmallMovementCollisionBox" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2( -64.7059, -57.6471 )
+collision_layer = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
 position = Vector2( 64.7059, 75.2941 )

@@ -163,7 +163,7 @@ region = Rect2( 0, 0, 24, 24 )
 atlas = ExtResource( 3 )
 region = Rect2( 24, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=146]
 atlas = ExtResource( 3 )
 region = Rect2( 48, 0, 24, 24 )
 
@@ -213,13 +213,13 @@ region = Rect2( 312, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=41]
 animations = [ {
-"frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
+"frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 146 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
-[sub_resource type="Animation" id=146]
+[sub_resource type="Animation" id=148]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BatSprite:modulate")
@@ -369,6 +369,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("ShadowSprite:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 8
@@ -385,7 +397,7 @@ scale = Vector2( 1.2, 1.2 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "fly down"
-frame = 1
+frame = 2
 playing = true
 
 [node name="PoisonParticles" type="Node2D" parent="."]
@@ -486,11 +498,11 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 41 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 146 )
+anims/RESET = SubResource( 148 )
 anims/death = SubResource( 43 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]

@@ -16,6 +16,8 @@ var fence_tiles = null
 var light_tiles = null
 var wet_sand_tiles = null
 
+var cave_wall_tiles = null
+
 
 func validate_tiles(location, dimensions):
 	var active = false

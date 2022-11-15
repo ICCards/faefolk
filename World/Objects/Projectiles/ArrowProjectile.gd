@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 var velocity = Vector2(-1,0)
-var speed = 500
+var speed = 525
 var collided = false
 var is_on_fire: bool = true
 

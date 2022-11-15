@@ -105,8 +105,11 @@ func jump_forward():
 	jump_delay = true
 	$Timers/JumpDelay.start(rand_range(1.0, 2.5))
 	slime_sprite.play("jump")
-	yield(slime_sprite, "animation_finished")
 	if not cancel_jump:
+		yield(slime_sprite, "animation_finished")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slime.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+		sound_effects.play()
 		slime_sprite.play("jumping")
 		jumping = true
 		jump_direction = (Server.player_node.global_position - global_position).normalized()
@@ -163,9 +166,13 @@ func destroy():
 	destroyed = true
 	animation_player.play("death")
 	yield(animation_player, "animation_finished")
+	yield(get_tree().create_timer(2.0), "timeout")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slimeHit.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 		$HurtBox/AnimationPlayer.play("hit")
 		diminish_HOT(area.tool_name)
@@ -175,7 +182,6 @@ func _on_HurtBox_area_entered(area):
 	if area.knockback_vector != Vector2.ZERO:
 		knocking_back = true
 		$Timers/KnockbackTimer.start()
-		velocity = Vector2.ZERO
 		knockback = area.knockback_vector
 		velocity = knockback * 200
 		if start_jump:
@@ -266,25 +272,6 @@ func _on_StunnedTimer_timeout():
 		$Electricity.hide()
 		stunned = false
 		#animation_player.play()
-
-
-func play_groan_sound_effect():
-	rng.randomize()
-	#sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	sound_effects.play()
-	yield(sound_effects, "finished")
-	playing_sound_effect = false
-	start_sound_effects()
-
-
-func start_sound_effects():
-	if not playing_sound_effect:
-		playing_sound_effect = true
-		#sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
-
 
 func stop_sound_effects():
 	playing_sound_effect = false

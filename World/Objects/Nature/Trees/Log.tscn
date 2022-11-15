@@ -100,6 +100,7 @@ texture = ExtResource( 2 )
 
 [node name="MovementCollisionBox2" type="StaticBody2D" parent="."]
 position = Vector2( 2, -18 )
+collision_layer = 33
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox2"]
 position = Vector2( -1.99998, 22.4444 )

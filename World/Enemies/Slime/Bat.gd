@@ -19,7 +19,7 @@ var tornado_node = null
 var d := 0.0
 var orbit_speed := 5.0
 var orbit_radius
-
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var bat_sprite: AnimatedSprite = $BatSprite
 var health: int = Stats.BAT_HEALTH
@@ -35,6 +35,9 @@ export var KNOCKBACK_AMOUNT = 70
 func _ready():
 	randomize()
 	rng.randomize()
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/batScreech.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	orbit_radius = rand_range(20, 40)
 
 func _physics_process(delta):
@@ -89,6 +92,9 @@ func set_direction():
 
 func _on_HurtBox_area_entered(area):
 	if not destroyed:
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+		sound_effects.play()
 		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 			$HurtBox/AnimationPlayer.play("hit")
 			diminish_HOT(area.tool_name)
