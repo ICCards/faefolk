@@ -1135,10 +1135,7 @@ tile_data = PoolIntArray( -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 
 [node name="Enemies" type="YSort" parent="."]
 
 [node name="Slime" parent="Enemies" instance=ExtResource( 8 )]
-position = Vector2( 1242, 600 )
-
-[node name="Slime2" parent="Enemies" instance=ExtResource( 8 )]
-position = Vector2( 353, 347 )
+position = Vector2( 255, 300 )
 
 [node name="Slime3" parent="Enemies" instance=ExtResource( 8 )]
 position = Vector2( 346, 1079 )
@@ -1151,9 +1148,6 @@ position = Vector2( 1487, 507 )
 
 [node name="Spider5" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 217, 854 )
-
-[node name="Spider3" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 905, 1058 )
 
 [node name="Spider6" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 596, 1361 )
