@@ -5,7 +5,7 @@
 [ext_resource path="res://Magic.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" type="Texture" id=4]
 [ext_resource path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=9]

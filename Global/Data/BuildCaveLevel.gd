@@ -1,5 +1,8 @@
 extends Node
 
+onready var Slime = preload("res://World/Enemies/Slime/Slime.tscn")
+onready var Spider = preload("res://World/Enemies/Spider.tscn")
+onready var FireMageSkeleton = preload("res://World/Enemies/Skeleton.tscn")
 onready var TileObjectHurtBox = preload("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
 onready var CaveLadder = preload("res://World/Caves/Objects/CaveLadder.tscn")
 onready var LargeOre = preload("res://World/Objects/Nature/Ores/LargeOre.tscn")
@@ -7,7 +10,6 @@ onready var SmallOre = preload("res://World/Objects/Nature/Ores/SmallOre.tscn")
 onready var Mushroom = preload("res://World/Objects/Nature/Forage/Mushroom.tscn")
 onready var TallGrass = preload("res://World/Objects/Nature/Grasses/TallGrass.tscn")
 onready var CaveGrass = preload("res://World/Caves/Objects/CaveGrass.tscn")
-onready var Bat = preload("res://World/Enemies/Slime/Bat.tscn")
 onready var CaveLight = preload("res://World/Caves/Objects/CaveLight.tscn")
 onready var Player = preload("res://World/Player/Player/Player.tscn")
 const _character = preload("res://Global/Data/Characters.gd")
@@ -47,7 +49,28 @@ func build():
 	set_tall_grass_nodes()
 	set_mushroom_forage()
 	set_down_cave_ladder()
+	spawn_enemies_randomly()
 	set_nav()
+
+
+func spawn_enemies_randomly():
+	var locs = valid_tiles.get_used_cells()
+	locs.shuffle()
+	for i in range(Server.world.NUM_SLIMES):
+		var slime = Slime.instance()
+		Server.world.get_node("Enemies").add_child(slime)
+		slime.position = locs[i]*32 + Vector2(16,16)
+	locs.shuffle()
+	for i in range(Server.world.NUM_SPIDERS):
+		var spider = Spider.instance()
+		Server.world.get_node("Enemies").add_child(spider)
+		spider.position = locs[i]*32 + Vector2(16,16)
+	locs.shuffle()
+	for i in range(Server.world.NUM_SKELETONS):
+		var skele = FireMageSkeleton.instance()
+		Server.world.get_node("Enemies").add_child(skele)
+		skele.position = locs[i]*32 + Vector2(16,16)
+	
 	
 func set_chest():
 	var id = rand_range(0,10000)

@@ -62,6 +62,11 @@ func _ready():
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
 	Server.player_node = self
+	
+func destroy():
+	set_process(false)
+	set_process_unhandled_input(false)
+	state = DYING
 
 func start_speed_buff(length):
 	speed_buff_active = true

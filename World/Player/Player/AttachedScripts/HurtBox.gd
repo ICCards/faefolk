@@ -1,5 +1,17 @@
 extends Area2D
 
+enum {
+	MOVEMENT, 
+	SWINGING,
+	EATING,
+	FISHING,
+	HARVESTING,
+	DYING,
+	SLEEPING,
+	SITTING,
+	MAGIC_CASTING,
+	BOW_ARROW_SHOOTING
+}
 
 var health_to_subtract 
 var health_to_add
@@ -90,7 +102,7 @@ func diminish_HOT(type):
 		"SlimeHit":
 			amount_to_diminish = PlayerStats.health_maximum * 0.08
 	var increment = int(ceil(amount_to_diminish / 4))
-	while int(amount_to_diminish) > 0:
+	while int(amount_to_diminish) > 0 and get_node("../../").state != DYING:
 		if amount_to_diminish < increment:
 			PlayerStats.change_health(-amount_to_diminish)
 			InstancedScenes.player_hit_effect(-amount_to_diminish, get_node("../../").position)

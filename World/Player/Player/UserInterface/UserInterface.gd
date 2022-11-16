@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+
 var holding_item = null
 
 onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
@@ -135,6 +137,9 @@ func toggle_tc(id):
 func toggle_chest(id):
 	if not is_opening_chest:
 		if not has_node("Chest"):
+			sound_effects.stream = preload("res://Assets/Sound/Sound effects/chest/open.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+			sound_effects.play()
 			PlayerInventory.interactive_screen_mode = true
 			is_opening_chest = true
 			Server.world.get_node("PlacableObjects/"+id).open_chest()

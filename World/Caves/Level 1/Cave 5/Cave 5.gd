@@ -1,11 +1,14 @@
 extends YSort
 
-
 onready var Bat = preload("res://World/Enemies/Slime/Bat.tscn")
 
+var is_changing_scene: bool = false
 var nav_node
 var cave_chest_id = "level 1, room 5"
 var bat_count = 0
+var NUM_SLIMES = 2
+var NUM_SPIDERS = 2
+var NUM_SKELETONS = 3
 
 func _ready():
 	nav_node = $Navigation2D
@@ -16,7 +19,13 @@ func _ready():
 	Server.isLoaded = true
 
 func advance_cave_level():
-	SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1/Cave 1.tscn")
+	if not is_changing_scene:
+		Server.player_node.destroy()
+		is_changing_scene = true
+		for enemy in $Enemies.get_children():
+			enemy.destroy()
+		yield(get_tree().create_timer(1.0), "timeout")
+		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 6/Cave 6.tscn")
 	
 func _on_SpawnBatTimer_timeout():
 	if bat_count < 5:

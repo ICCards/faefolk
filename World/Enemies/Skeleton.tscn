@@ -592,8 +592,7 @@ material = ExtResource( 4 )
 position = Vector2( 0, -30 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 9 )
-animation = "idle"
-frame = 4
+animation = "death"
 playing = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -610,7 +609,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 2.0
+wait_time = 3.0
 
 [node name="FrozenTimer" type="Timer" parent="Timers"]
 wait_time = 5.0
@@ -649,7 +648,6 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 163 )
-frame = 8
 playing = true
 
 [node name="DetectPlayer" type="Area2D" parent="."]

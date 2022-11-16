@@ -166,7 +166,6 @@ func destroy():
 	destroyed = true
 	animation_player.play("death")
 	yield(animation_player, "animation_finished")
-	yield(get_tree().create_timer(2.0), "timeout")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
