@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
-onready var hit_box: Area2D = $SpiderHit
-onready var spider_sprite: AnimatedSprite = $Spider
+onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+
+onready var skeleton_sprite: AnimatedSprite = $SkeletonSprite
 onready var _idle_timer: Timer = $Timers/IdleTimer
 onready var _chase_timer: Timer = $Timers/ChaseTimer
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-#onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var direction: String = "down"
@@ -22,6 +23,7 @@ var _velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 60.0
 var changed_direction_delay: bool = false
+var cancel_attack: bool = false
 var health: int = Stats.DEER_HEALTH
 var tornado_node = null
 var d := 0.0
@@ -32,20 +34,17 @@ const KNOCKBACK_SPEED = 100
 const ACCELERATION = 180
 const FRICTION = 80
 const KNOCKBACK_AMOUNT = 70
-const MAX_RANDOM_CHASE_DIST = 50
+
 enum {
 	IDLE,
 	WALK,
 	CHASE,
-	ATTACK,
-	DEATH
 }
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	yield(get_tree().create_timer(1.0), "timeout")
 	randomize()
-	#hide()
 	orbit_radius = rand_range(30, 50)
 #	animation_player.play("loop")
 	_idle_timer.wait_time = rand_range(4.0,6.0)
@@ -55,11 +54,26 @@ func _ready():
 	navigation_agent.set_navigation(get_node("../../").nav_node)
 
 func _update_pathfinding_chase():
-	random_pos = Vector2(rand_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST), rand_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST))
-	navigation_agent.set_target_location(Server.player_node.global_position+random_pos)
+	navigation_agent.set_target_location(get_random_player_pos(Server.player_node.global_position))
 	
 func _update_pathfinding_idle():
 	navigation_agent.set_target_location(get_random_pos())
+
+
+func get_random_player_pos(_player_pos):
+	var random1 = rand_range(75, 100)
+	var random2 = rand_range(75, 100)
+	if Util.chance(50):
+		random1 *= -1
+	if Util.chance(50):
+		random2 *= -1
+	random_pos = Vector2(random1, random2)
+	if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(_player_pos + random_pos)) == -1:
+		return _player_pos + random_pos
+	elif Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(_player_pos - random_pos)) == -1:
+		return _player_pos - random_pos
+	else:
+		return _player_pos
 
 func get_random_pos():
 	random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
@@ -71,7 +85,7 @@ func get_random_pos():
 		return position
 	
 func move(velocity: Vector2) -> void:
-	if tornado_node or stunned or attacking or destroyed:
+	if tornado_node or stunned or destroyed or knocking_back:
 		return
 	if frozen:
 		_velocity = move_and_slide(velocity*0.75)
@@ -82,16 +96,12 @@ func move(velocity: Vector2) -> void:
 
 func _physics_process(delta):
 	if Server.player_node:
-		if not visible or destroyed:
-			if chasing:
-				end_chase_state()
+		if not visible or destroyed or stunned:
 			return
 		if poisoned:
 			$PoisonParticles/P1.direction = -_velocity
 			$PoisonParticles/P2.direction = -_velocity
 			$PoisonParticles/P3.direction = -_velocity
-		if stunned or attacking:
-			return
 		if knocking_back:
 			_velocity = _velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
 			_velocity = move_and_slide(_velocity)
@@ -102,7 +112,6 @@ func _physics_process(delta):
 				position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
 			else: 
 				tornado_node = null
-		set_direction()
 		set_sprite_texture()
 		if navigation_agent.is_navigation_finished():
 			state = IDLE
@@ -122,42 +131,47 @@ func _physics_process(delta):
 	
 	
 func set_sprite_texture():
+	$ShootDirection.look_at(Server.player_node.position)
 	if state == IDLE:
-		if direction == "left":
-			$Spider.flip_h = true
-			$Spider.play("idle right")
+		skeleton_sprite.play("idle")
+	elif state == WALK:
+		skeleton_sprite.flip_h = _velocity.x <= 0
+		skeleton_sprite.play("walk")
+	elif not destroyed:
+		attack()
+		
+func attack():
+	var degrees = int($ShootDirection.rotation_degrees) % 360
+	if $ShootDirection.rotation_degrees >= 0:
+		if degrees <= 90 or degrees >= 270:
+			direction = "right"
 		else:
-			$Spider.flip_h = false
-			$Spider.play("idle " + direction)
+			direction = "left"
 	else:
-		if direction == "left":
-			$Spider.flip_h = true
-			$Spider.play("walk right")
+		if degrees >= -90 or degrees <= -270:
+			direction = "right"
 		else:
-			$Spider.flip_h = false
-			$Spider.play("walk " + direction)
+			direction = "left"
+	skeleton_sprite.flip_h = direction == "left"
+	if not attacking:
+		attacking = true
+		skeleton_sprite.play("attack")
+		yield(get_tree().create_timer(2.0), "timeout")
+		if not destroyed and not cancel_attack:
+			shoot_projectile()
+			yield(skeleton_sprite, "animation_finished")
+		attacking = false
+		cancel_attack = false
+		
+		
+func shoot_projectile():
+	var spell = FireProjectile.instance()
+	spell.particles_transform = $ShootDirection.transform
+	spell.position = $ShootDirection/Position2D.global_position
+	spell.velocity = Server.player_node.position - spell.position
+	get_node("../").add_child(spell)
 	
-func set_direction():
-	if not changed_direction_delay:
-		if abs(_velocity.x) >= abs(_velocity.y):
-			if _velocity.x >= 0:
-				if direction != "right":
-					direction = "right"
-					set_change_direction_delay()
-			else:
-				if direction != "left":
-					direction = "left"
-					set_change_direction_delay()
-		else:
-			if _velocity.y >= 0:
-				if direction != "down":
-					direction = "down"
-					set_change_direction_delay()
-			else:
-				if direction != "up":
-					direction = "up"
-					set_change_direction_delay()
-
+	
 
 func hit(tool_name):
 	if tool_name == "blizzard":
@@ -169,6 +183,8 @@ func hit(tool_name):
 		start_stunned_state()
 	if state == IDLE or state == WALK:
 		start_chase_state()
+	cancel_attack = true
+	skeleton_sprite.play("hit")
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
@@ -177,13 +193,9 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
-	$PoisonParticles/P1.emitting = false
-	$PoisonParticles/P2.emitting = false
-	$PoisonParticles/P3.emitting = false
+	animation_player.play("death")
 	destroyed = true
-	#boar_sprite.texture = load("res://Assets/Images/Animals/Boar/death/" +  direction + "/body.png")
-	#animation_player.play("death")
-	#yield(animation_player, "animation_finished")
+	yield(skeleton_sprite, "animation_finished")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -196,8 +208,7 @@ func _on_HurtBox_area_entered(area):
 		return
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	if area.knockback_vector != Vector2.ZERO and not attacking:
-		set_change_direction_delay()
+	if area.knockback_vector != Vector2.ZERO:
 		knocking_back = true
 		$Timers/KnockbackTimer.start()
 		knockback = area.knockback_vector
@@ -236,16 +247,15 @@ func _on_DetectPlayer_area_entered(area):
 	start_chase_state()
 
 func start_chase_state():
-	start_sound_effects()
-	navigation_agent.max_speed = 200
+	navigation_agent.max_speed = 125
 	_idle_timer.stop()
 	_chase_timer.start()
+	navigation_agent.set_target_location(get_random_player_pos(Server.player_node.global_position))
 	chasing = true
 	state = CHASE
 
 func end_chase_state():
-	stop_sound_effects()
-	navigation_agent.max_speed = 100
+	navigation_agent.max_speed = 75
 	_chase_timer.stop()
 	_idle_timer.start()
 	chasing = false
@@ -254,15 +264,12 @@ func end_chase_state():
 func _on_EndChaseState_timeout():
 	end_chase_state()
 
-func set_change_direction_delay():
-	changed_direction_delay = true
-	$Timers/ChangeDirectionDelay.start()
 
 func _on_ChangeDirectionDelay_timeout():
 	changed_direction_delay = false
 
 func start_frozen_state(timer_length):
-	spider_sprite.modulate = Color("00c9ff")
+	skeleton_sprite.modulate = Color("00c9ff")
 	frozen = true
 	$Timers/FrozenTimer.start(timer_length)
 #	if not attacking and not destroyed:
@@ -271,7 +278,7 @@ func start_frozen_state(timer_length):
 func _on_FrozenTimer_timeout():
 	frozen = false
 	if not poisoned:
-		spider_sprite.modulate = Color("ffffff")
+		skeleton_sprite.modulate = Color("ffffff")
 #		if not destroyed:
 #			animation_player.play("loop")
 
@@ -279,7 +286,7 @@ func start_poison_state():
 	$PoisonParticles/P1.emitting = true
 	$PoisonParticles/P2.emitting = true
 	$PoisonParticles/P3.emitting = true
-	spider_sprite.modulate = Color("009000")
+	skeleton_sprite.modulate = Color("009000")
 	poisoned = true
 	$Timers/PoisonTimer.start()
 #	if not attacking and not destroyed:
@@ -291,7 +298,7 @@ func _on_PoisonTimer_timeout():
 	$PoisonParticles/P3.emitting = false
 	poisoned = false
 	if not frozen:
-		spider_sprite.modulate = Color("ffffff")
+		skeleton_sprite.modulate = Color("ffffff")
 #		if not destroyed:
 #			animation_player.play("loop")
 
@@ -311,36 +318,6 @@ func _on_StunnedTimer_timeout():
 		stunned = false
 		#animation_player.play()
 
-
-func play_groan_sound_effect():
-	rng.randomize()
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	sound_effects.play()
-	yield(sound_effects, "finished")
-	playing_sound_effect = false
-	start_sound_effects()
-
-
-func start_sound_effects():
-	if not playing_sound_effect:
-		playing_sound_effect = true
-#		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3")
-#		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-#		sound_effects.play()
-
-
-func stop_sound_effects():
-	playing_sound_effect = false
-	sound_effects.stop()
-
-func _on_VisibilityNotifier2D_screen_entered():
-	show()
-
-func _on_VisibilityNotifier2D_screen_exited():
-	hide()
-
-
-
 func _on_KnockbackTimer_timeout():
 	knocking_back = false
+

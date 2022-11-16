@@ -432,9 +432,8 @@ position = Vector2( 10, -3.62396e-05 )
 shape = SubResource( 39 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( -1, 2 )
-scale = Vector2( 8.6, 7.1 )
+position = Vector2( 1, -6 )
+scale = Vector2( 1.4, 1.4 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
@@ -464,7 +463,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 13
+frame = 12
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -482,6 +481,7 @@ position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

@@ -46,6 +46,7 @@ FishData="*res://Global/Data/FishData.gd"
 CollectionsData="*res://Global/Data/CollectionsData.gd"
 InstancedScenes="*res://Global/Data/InstancedScenes.gd"
 Constants="*res://Global/Data/Constants.gd"
+BuildCaveLevel="*res://Global/Data/BuildCaveLevel.gd"
 
 [display]
 

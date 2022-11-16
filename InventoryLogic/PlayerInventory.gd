@@ -29,35 +29,60 @@ var inventory = {
 #	6: ["potato seeds", 60, null],
 #	7: ["wheat seeds", 60, null],
 #	2: ["gold pickaxe", 1, null]
-	4: ["destruction potion I", 10, null],
-	5: ["destruction potion II", 10, null],
-	6: ["destruction potion III", 10, null],
-	7: ["health potion I", 10, null],
-	8: ["health potion II", 10, null],
-	9: ["health potion III", 10, null],
+#	4: ["destruction potion I", 10, null],
+#	5: ["destruction potion II", 10, null],
+#	6: ["destruction potion III", 10, null],
+#	7: ["health potion I", 10, null],
+#	8: ["health potion II", 10, null],
+#	9: ["health potion III", 10, null],
 }
 
 var hotbar = {
-	0: ["bow", 1, null],
-	1: ["arrow", 50, null],
-#	0: ["dstaff", 1, null],
-	#3: ["earth staff", 1, null],
-	4: ["ice staff", 1, null],
-	6: ["fire staff", 1, null],
-	#7: ["wind staff", 1, null],
-	8: ["stone sword", 1, null],
-	#1: ["poison potion I", 100, null],
-	2: ["poison potion II", 10, null],
-	#3: ["poison potion III", 100, null],
-#	4: ["regeneration potion I", 10, null],
-	5: ["regeneration potion II", 10, null],
-#	6: ["regeneration potion III", 10, null],
-#	7: ["speed potion I", 10, null],
-#	8: ["speed potion II", 10, null],
-	9: ["speed potion II", 10, null],
+#	0: ["bow", 1, null],
+#	1: ["arrow", 50, null],
+##	0: ["dstaff", 1, null],
+#	#3: ["earth staff", 1, null],
+##	4: ["ice staff", 1, null],
+##	6: ["fire staff", 1, null],
+#	#7: ["wind staff", 1, null],
+	1: ["stone sword", 1, null],
+#	#1: ["poison potion I", 100, null],
+#	2: ["poison potion II", 10, null],
+#	#3: ["poison potion III", 100, null],
+##	4: ["regeneration potion I", 10, null],
+#	5: ["regeneration potion II", 10, null],
+##	6: ["regeneration potion III", 10, null],
+##	7: ["speed potion I", 10, null],
+##	8: ["speed potion II", 10, null],
+#	9: ["speed potion II", 10, null],
 }
 
-var chests = {}
+var chests = {
+	"level 1, room 1" : {
+		1: ["bread", 12, null],
+		5: ["bow",1, null],
+		3: ["arrow", 20, null],
+	},
+	"level 1, room 2" : {
+		2: ["poison potion II", 4, null],
+		6: ["speed potion I", 2, null],
+	},
+	"level 1, room 3" : {
+		2: ["health potion I", 6, null],
+		9: ["destruction potion II", 4, null],
+		6: ["arrow", 30, null],
+	},
+	"level 1, room 4" : {
+		5: ["regeneration potion III",1, null],
+		3: ["speed potion III", 1, null],
+		8: ["poison potion III", 2, null],
+	},
+	"level 1, room 5" : {
+		5: ["destruction potion III",1, null],
+		3: ["poison potion III", 1, null],
+	},
+	
+}
 var furnaces = {}
 var grain_mills = {}
 var grain_mills_dict = {}

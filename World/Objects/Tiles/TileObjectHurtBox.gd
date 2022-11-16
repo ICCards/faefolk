@@ -8,6 +8,7 @@ var location
 var item_name
 var id
 var direction
+var is_preset_object_string: String = ""
 
 var is_player_sitting: bool = false
 
@@ -47,8 +48,13 @@ func set_dimensions():
 		$Position2D/StaticBody2D/CollisionShape2D.disabled = false
 		$Position2D/InteractiveArea.object_name = "chest"
 		$Position2D/InteractiveArea.object_level = ""
-		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.chests[id] = {}
+		if is_preset_object_string != "":
+			$Position2D/InteractiveArea.name = is_preset_object_string
+			name = is_preset_object_string
+			id = is_preset_object_string
+		else:
+			$Position2D/InteractiveArea.name = str(id)
+			PlayerInventory.chests[id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -344,9 +350,10 @@ func _on_HurtBox_area_entered(area):
 		Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 	else:
 		Tiles.add_valid_tiles(location, dimensions)
-	Tiles.object_tiles.set_cellv(location, -1)
-	Tiles.fence_tiles.set_cellv(location, -1)
-	Tiles.fence_tiles.update_bitmask_area(location)
+	if Tiles.object_tiles:
+		Tiles.object_tiles.set_cellv(location, -1)
+		Tiles.fence_tiles.set_cellv(location, -1)
+		Tiles.fence_tiles.update_bitmask_area(location)
 	InstancedScenes.intitiateItemDrop(item_name, position, 1)
 	yield($SoundEffects, "finished")
 	queue_free()

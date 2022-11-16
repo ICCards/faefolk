@@ -29,6 +29,7 @@
 [ext_resource path="res://Assets/Images/Enemies/Spider/WalkingPurple2/SpiderWalkingSide3.png" type="Texture" id=31]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id=15]
 radius = 12.0
@@ -72,7 +73,7 @@ tracks/0/keys = {
 atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=40]
+[sub_resource type="AtlasTexture" id=151]
 atlas = ExtResource( 14 )
 region = Rect2( 24, 0, 24, 24 )
 
@@ -80,53 +81,53 @@ region = Rect2( 24, 0, 24, 24 )
 atlas = ExtResource( 14 )
 region = Rect2( 48, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=152]
 atlas = ExtResource( 14 )
 region = Rect2( 72, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=153]
 atlas = ExtResource( 14 )
 region = Rect2( 96, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=154]
 atlas = ExtResource( 14 )
 region = Rect2( 120, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=155]
 atlas = ExtResource( 14 )
 region = Rect2( 144, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=156]
 atlas = ExtResource( 14 )
 region = Rect2( 168, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=157]
 atlas = ExtResource( 14 )
 region = Rect2( 192, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=31]
+[sub_resource type="AtlasTexture" id=158]
 atlas = ExtResource( 14 )
 region = Rect2( 216, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=32]
+[sub_resource type="AtlasTexture" id=159]
 atlas = ExtResource( 14 )
 region = Rect2( 240, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=33]
+[sub_resource type="AtlasTexture" id=160]
 atlas = ExtResource( 14 )
 region = Rect2( 264, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=161]
 atlas = ExtResource( 14 )
 region = Rect2( 288, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=162]
 atlas = ExtResource( 14 )
 region = Rect2( 312, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=147]
 animations = [ {
-"frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 146 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
+"frames": [ SubResource( 145 ), SubResource( 151 ), SubResource( 146 ), SubResource( 152 ), SubResource( 153 ), SubResource( 154 ), SubResource( 155 ), SubResource( 156 ), SubResource( 157 ), SubResource( 158 ), SubResource( 159 ), SubResource( 160 ), SubResource( 161 ), SubResource( 162 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
@@ -289,7 +290,6 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
-frame = 11
 playing = true
 
 [node name="DetectPlayer" type="Area2D" parent="."]
@@ -304,6 +304,7 @@ material = ExtResource( 15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "walk up"
+frame = 3
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

@@ -37,6 +37,7 @@ func _ready():
 
 
 func initialize():
+	print(PlayerInventory.chests)
 	Server.player_node.destroy_placable_object()
 	show()
 	initialize_chest_data()

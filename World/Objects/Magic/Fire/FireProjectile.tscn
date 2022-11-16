@@ -132,6 +132,8 @@ offsets = PoolRealArray( 0, 0.994737, 1 )
 colors = PoolColorArray( 0.51083, 0.51083, 0.51083, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
 
 [node name="FireProjectile" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 8 )
 
 [node name="Explosion" type="AnimatedSprite" parent="."]
@@ -155,7 +157,7 @@ shape = SubResource( 19 )
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2( -17, 0 )
 collision_layer = 0
-collision_mask = 262144
+collision_mask = 262272
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

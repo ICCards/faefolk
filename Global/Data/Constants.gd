@@ -14,6 +14,7 @@ var dimensions_dict = {
 	"campfire" : Vector2(1,1),
 	"torch" : Vector2(1,1),
 	"tool cabinet": Vector2(2,1),
+	"preset stone chest": Vector2(2,1),
 	"stone chest": Vector2(2,1),
 	"wood chest": Vector2(2,1),
 	"workbench #1": Vector2(2,1),

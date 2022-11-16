@@ -89,6 +89,9 @@ func start_poison_state():
 	composite_sprites.modulate = Color("009000")
 	
 func _on_PoisonTimer_timeout():
+	stop_poison_state()
+
+func stop_poison_state():
 	poisoned = false
 	$PoisonParticles/P1.emitting = false
 	$PoisonParticles/P2.emitting = false
@@ -128,6 +131,7 @@ func sleep(sleeping_bag_direction, pos):
 func player_death():
 	if state != DYING:
 		state = DYING
+		stop_poison_state()
 		yield(get_tree(), "idle_frame")
 		composite_sprites.set_player_animation(character, "death_" + direction.to_lower(), null)
 		animation_player.play("death")
@@ -332,6 +336,9 @@ func swing(item_name):
 func eat(item_name):
 	destroy_placable_object()
 	if state != EATING:
+		$Sounds/SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Player/eat.wav")
+		$Sounds/SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+		$Sounds/SoundEffects.play()
 		state = EATING
 		PlayerInventory.remove_single_object_from_hotbar()
 		var eating_paricles = Eating_particles.instance()

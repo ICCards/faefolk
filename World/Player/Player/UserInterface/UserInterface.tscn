@@ -108,15 +108,6 @@ tracks/0/keys = {
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 23 )
 
-[node name="CaveDim" type="ColorRect" parent="."]
-visible = false
-margin_left = -67.0
-margin_top = -56.0
-margin_right = 1131.0
-margin_bottom = 622.0
-mouse_filter = 2
-color = Color( 0, 0, 0, 0.431373 )
-
 [node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
 visible = false
 margin_left = 209.0
@@ -136,7 +127,6 @@ margin_top = -39.0
 margin_right = 1093.0
 margin_bottom = 657.0
 mouse_filter = 2
-color = Color( 0.0303029, 0.0569221, 0.0835413, 0.927748 )
 script = ExtResource( 19 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherEffects"]

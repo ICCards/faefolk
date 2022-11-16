@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://World/Enemies/Spider.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Tilesets/CL_MainLev.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/tilesets/caves.png" type="Texture" id=6]
 [ext_resource path="res://World/Caves/Level 1/Cave 1/Cave 1.gd" type="Script" id=7]
 [ext_resource path="res://World/Enemies/Slime/Slime.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/tilesets/CL_Buildings.png" type="Texture" id=10]
 
 [sub_resource type="NavigationPolygon" id=584]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -939,46 +940,6 @@ outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
 3/shapes = [  ]
 3/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=595]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
-
-[sub_resource type="TileSet" id=582]
-0/name = "caves.png 0"
-0/texture = ExtResource( 6 )
-0/tex_offset = Vector2( 0, -160 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 1920, 288, 32, 192 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-1/name = "caves.png 1"
-1/texture = ExtResource( 6 )
-1/tex_offset = Vector2( 0, -32 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 1952, 352, 64, 64 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 595 )
-1/shape_one_way = false
-1/shape_one_way_margin = 1.0
-1/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 595 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-1/z_index = 0
-
 [sub_resource type="TileSet" id=598]
 0/name = "CL_MainLev.png 0"
 0/texture = ExtResource( 3 )
@@ -994,6 +955,92 @@ points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
+
+[sub_resource type="ConvexPolygonShape2D" id=622]
+points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
+
+[sub_resource type="TileSet" id=623]
+1/name = "caves.png 1"
+1/texture = ExtResource( 6 )
+1/tex_offset = Vector2( 0, -32 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 1952, 352, 64, 64 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 622 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 622 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+
+[sub_resource type="TileSet" id=624]
+0/name = "caves.png 0"
+0/texture = ExtResource( 6 )
+0/tex_offset = Vector2( 0, -160 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 1920, 288, 32, 192 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=625]
+0/name = "CL_Buildings.png 0"
+0/texture = ExtResource( 10 )
+0/tex_offset = Vector2( 0, -32 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 480, 896, 32, 64 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "CL_Buildings.png 1"
+1/texture = ExtResource( 10 )
+1/tex_offset = Vector2( 0, -32 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 448, 896, 32, 64 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "CL_Buildings.png 2"
+2/texture = ExtResource( 10 )
+2/tex_offset = Vector2( 0, -32 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 512, 896, 32, 64 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
 
 [sub_resource type="Environment" id=599]
 background_mode = 4
@@ -1090,7 +1137,7 @@ cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( 196631, 0, 0, 262158, 2, 0, 393241, 0, 0 )
+tile_data = PoolIntArray( 196631, 0, 0, 262158, 2, 0 )
 
 [node name="Lights" type="TileMap" parent="Tiles"]
 modulate = Color( 1.25, 1.25, 1.25, 1 )
@@ -1116,14 +1163,6 @@ cell_y_sort = true
 format = 1
 tile_data = PoolIntArray( 851974, 1, 0, 1114142, 0, 0, 1245214, 0, 0, 1245215, 0, 0, 1245232, 0, 0, 1310765, 0, 0, 1376300, 0, 0, 2949134, 2, 0 )
 
-[node name="Ladders" type="TileMap" parent="Tiles"]
-tile_set = SubResource( 582 )
-cell_size = Vector2( 32, 32 )
-cell_tile_origin = 2
-cell_y_sort = true
-format = 1
-tile_data = PoolIntArray( 1835013, 1, 0 )
-
 [node name="BatSpawnTiles" type="TileMap" parent="Tiles"]
 visible = false
 z_index = 1
@@ -1132,28 +1171,46 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 0, 0, -327671, 0, 0, -327670, 0, 0, -327669, 0, 0, -327668, 0, 0, -327667, 0, 0, -327666, 0, 0, -327665, 0, 0, -327664, 0, 0, -327663, 0, 0, -327662, 0, 0, -327661, 0, 0, -327660, 0, 0, -327659, 0, 0, -327658, 0, 0, -327657, 0, 0, -327656, 0, 0, -327655, 0, 0, -327654, 0, 0, -327653, 0, 0, -327652, 0, 0, -327651, 0, 0, -327650, 0, 0, -327649, 0, 0, -327648, 0, 0, -327647, 0, 0, -327646, 0, 0, -327645, 0, 0, -327644, 0, 0, -327643, 0, 0, -327642, 0, 0, -327641, 0, 0, -327640, 0, 0, -327639, 0, 0, -327638, 0, 0, -327637, 0, 0, -327636, 0, 0, -327635, 0, 0, -327634, 0, 0, -327633, 0, 0, -327632, 0, 0, -327631, 0, 0, -327630, 0, 0, -327629, 0, 0, -327628, 0, 0, -327627, 0, 0, -327626, 0, 0, -327625, 0, 0, -327624, 0, 0, -196610, 0, 0, -262088, 0, 0, -131074, 0, 0, -196552, 0, 0, -65538, 0, 0, -131016, 0, 0, -2, 0, 0, -65480, 0, 0, 65534, 0, 0, 56, 0, 0, 131070, 0, 0, 65592, 0, 0, 196606, 0, 0, 131128, 0, 0, 262142, 0, 0, 196664, 0, 0, 327678, 0, 0, 262200, 0, 0, 393214, 0, 0, 327736, 0, 0, 458750, 0, 0, 393272, 0, 0, 524286, 0, 0, 458808, 0, 0, 589822, 0, 0, 524344, 0, 0, 655358, 0, 0, 589880, 0, 0, 720894, 0, 0, 655416, 0, 0, 786430, 0, 0, 720952, 0, 0, 851966, 0, 0, 786488, 0, 0, 917502, 0, 0, 852024, 0, 0, 983038, 0, 0, 917560, 0, 0, 1048574, 0, 0, 983096, 0, 0, 1114110, 0, 0, 1048632, 0, 0, 1179646, 0, 0, 1114168, 0, 0, 1245182, 0, 0, 1179704, 0, 0, 1310718, 0, 0, 1245240, 0, 0, 1376254, 0, 0, 1310776, 0, 0, 1441790, 0, 0, 1376312, 0, 0, 1507326, 0, 0, 1441848, 0, 0, 1572862, 0, 0, 1507384, 0, 0, 1638398, 0, 0, 1572920, 0, 0, 1703934, 0, 0, 1638456, 0, 0, 1769470, 0, 0, 1703992, 0, 0, 1835006, 0, 0, 1769528, 0, 0, 1900542, 0, 0, 1835064, 0, 0, 1966078, 0, 0, 1900600, 0, 0, 2031614, 0, 0, 1966136, 0, 0, 2097150, 0, 0, 2031672, 0, 0, 2162686, 0, 0, 2097208, 0, 0, 2228222, 0, 0, 2162744, 0, 0, 2293758, 0, 0, 2228280, 0, 0, 2359294, 0, 0, 2293816, 0, 0, 2424830, 0, 0, 2359352, 0, 0, 2490366, 0, 0, 2424888, 0, 0, 2555902, 0, 0, 2490424, 0, 0, 2621438, 0, 0, 2555960, 0, 0, 2686974, 0, 0, 2621496, 0, 0, 2752510, 0, 0, 2687032, 0, 0, 2818046, 0, 0, 2752568, 0, 0, 2883582, 0, 0, 2818104, 0, 0, 2949118, 0, 0, 2883640, 0, 0, 3014654, 0, 0, 2949176, 0, 0, 3080190, 0, 0, 3014712, 0, 0, 3145726, 0, 0, 3080248, 0, 0, 3211262, 0, 0, 3145784, 0, 0, 3276798, 0, 0, 3211320, 0, 0, 3342334, 0, 0, 3342335, 0, 0, 3276800, 0, 0, 3276801, 0, 0, 3276802, 0, 0, 3276803, 0, 0, 3276804, 0, 0, 3276805, 0, 0, 3276806, 0, 0, 3276807, 0, 0, 3276808, 0, 0, 3276809, 0, 0, 3276810, 0, 0, 3276811, 0, 0, 3276812, 0, 0, 3276813, 0, 0, 3276814, 0, 0, 3276815, 0, 0, 3276816, 0, 0, 3276817, 0, 0, 3276818, 0, 0, 3276819, 0, 0, 3276820, 0, 0, 3276821, 0, 0, 3276822, 0, 0, 3276823, 0, 0, 3276824, 0, 0, 3276825, 0, 0, 3276826, 0, 0, 3276827, 0, 0, 3276828, 0, 0, 3276829, 0, 0, 3276830, 0, 0, 3276831, 0, 0, 3276832, 0, 0, 3276833, 0, 0, 3276834, 0, 0, 3276835, 0, 0, 3276836, 0, 0, 3276837, 0, 0, 3276838, 0, 0, 3276839, 0, 0, 3276840, 0, 0, 3276841, 0, 0, 3276842, 0, 0, 3276843, 0, 0, 3276844, 0, 0, 3276845, 0, 0, 3276846, 0, 0, 3276847, 0, 0, 3276848, 0, 0, 3276849, 0, 0, 3276850, 0, 0, 3276851, 0, 0, 3276852, 0, 0, 3276853, 0, 0, 3276854, 0, 0, 3276855, 0, 0, 3276856, 0, 0 )
 
+[node name="DownLadder" type="TileMap" parent="Tiles"]
+tile_set = SubResource( 623 )
+cell_size = Vector2( 32, 32 )
+cell_y_sort = true
+format = 1
+tile_data = PoolIntArray( 1769478, 1, 0, 2883596, 1, 0 )
+
+[node name="UpLadder" type="TileMap" parent="Tiles"]
+tile_set = SubResource( 624 )
+cell_size = Vector2( 32, 32 )
+cell_y_sort = true
+format = 1
+tile_data = PoolIntArray( 458778, 0, 0 )
+
+[node name="Chests" type="TileMap" parent="Tiles"]
+z_index = 1
+tile_set = SubResource( 625 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 1900584, 0, 0, 2949129, 2, 0 )
+
 [node name="Enemies" type="YSort" parent="."]
 
 [node name="Slime" parent="Enemies" instance=ExtResource( 8 )]
-position = Vector2( 255, 300 )
+position = Vector2( 1244, 1159 )
+
+[node name="Slime2" parent="Enemies" instance=ExtResource( 8 )]
+position = Vector2( 273, 340 )
 
 [node name="Slime3" parent="Enemies" instance=ExtResource( 8 )]
-position = Vector2( 346, 1079 )
+position = Vector2( 307, 1047 )
 
-[node name="Slime5" parent="Enemies" instance=ExtResource( 8 )]
-position = Vector2( 1341, 1111 )
+[node name="Slime4" parent="Enemies" instance=ExtResource( 8 )]
+position = Vector2( 1319, 505 )
+
+[node name="Spider" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 170, 860 )
 
 [node name="Spider2" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 1487, 507 )
-
-[node name="Spider5" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 217, 854 )
-
-[node name="Spider6" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 596, 1361 )
-
-[node name="Spider4" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 468, 566 )
+position = Vector2( 913, 1206 )
 
 [node name="GrassObjects" type="YSort" parent="."]
 
@@ -1167,5 +1224,9 @@ autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 599 )
+
+[node name="PlacableObjects" type="YSort" parent="."]
+
+[node name="LightObjects" type="YSort" parent="."]
 
 [connection signal="timeout" from="SpawnBatTimer" to="." method="_on_SpawnBatTimer_timeout"]
