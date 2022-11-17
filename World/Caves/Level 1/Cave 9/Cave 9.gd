@@ -26,7 +26,7 @@ func advance_cave_level():
 		for enemy in $Enemies.get_children():
 			enemy.destroy()
 		yield(get_tree().create_timer(1.0), "timeout")
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 8/Cave 8.tscn")
+		#SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 7/Cave 7.tscn")
 	
 func _on_SpawnBatTimer_timeout():
 	if bat_count < 5:

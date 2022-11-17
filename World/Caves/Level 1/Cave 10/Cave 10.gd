@@ -7,9 +7,9 @@ var is_changing_scene: bool = false
 var nav_node
 var cave_chest_id = "level 1, room 7"
 var bat_count = 0
-var NUM_SLIMES = 3
-var NUM_SPIDERS = 0
-var NUM_SKELETONS = 3
+var NUM_SLIMES = 4
+var NUM_SPIDERS = 4
+var NUM_SKELETONS = 4
 
 func _ready():
 	nav_node = $Navigation2D
@@ -26,7 +26,7 @@ func advance_cave_level():
 		for enemy in $Enemies.get_children():
 			enemy.destroy()
 		yield(get_tree().create_timer(1.0), "timeout")
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 8/Cave 8.tscn")
+		#SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 7/Cave 7.tscn")
 	
 func _on_SpawnBatTimer_timeout():
 	if bat_count < 5:

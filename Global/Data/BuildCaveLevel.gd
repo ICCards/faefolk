@@ -21,11 +21,8 @@ const NUM_MUSHROOMS = 20
 const NUM_SMALL_ORE = 20
 const NUM_LARGE_ORE = 6
 const MAX_TALL_GRASS_SIZE = 60
-var ore_count = 0
+var count = 0
 var nav_node
-
-var cave_level_5_dict = {}
-
 var valid_tiles
 
 
@@ -43,6 +40,7 @@ func spawn_player():
 func build():
 	valid_tiles = Server.world.get_node("Tiles/ValidTiles")
 	spawn_player()
+	set_valid_tiles()
 	set_chest()
 	set_light_nodes()
 	set_ore()
@@ -52,6 +50,67 @@ func build():
 	spawn_enemies_randomly()
 	set_nav()
 
+
+func set_valid_tiles():
+	for x in range(50):
+		for y in range(50):
+			if Tiles.cave_wall_tiles.get_cell(x,y) == -1:
+				valid_tiles.set_cell(x,y,0)
+	for loc in Server.world.get_node("Tiles/Rail").get_used_cells():
+		if valid_tiles.get_cellv(loc) != -1:
+			valid_tiles.set_cellv(loc, 1)
+	for loc in Server.world.get_node("Tiles/Hole").get_used_cells():
+		valid_tiles.set_cellv(loc, -1)
+		valid_tiles.set_cellv(loc+Vector2(0,-1), -1)
+		valid_tiles.set_cellv(loc+Vector2(0,-2), -1)
+	for loc in Server.world.get_node("Tiles/Fence").get_used_cells():
+		valid_tiles.set_cellv(loc, -1)
+	for loc in Server.world.get_node("Tiles/Decoration").get_used_cells():
+		var type = Server.world.get_node("Tiles/Decoration").get_cellv(loc)
+		if type == 7:
+			valid_tiles.set_cellv(loc, -1)
+			valid_tiles.set_cellv(loc+Vector2(1,0), -1)
+			valid_tiles.set_cellv(loc+Vector2(2,0), -1)
+			valid_tiles.set_cellv(loc+Vector2(3,0), -1)
+			valid_tiles.set_cellv(loc+Vector2(5,0), -1)
+			valid_tiles.set_cellv(loc+Vector2(6,0), -1)
+			valid_tiles.set_cellv(loc+Vector2(7,0), -1)
+			valid_tiles.set_cellv(loc+Vector2(8,0), -1)
+		elif type == 6:
+			valid_tiles.set_cellv(loc, 1)
+			valid_tiles.set_cellv(loc+Vector2(1,0), 1)
+			valid_tiles.set_cellv(loc+Vector2(2,0), 1)
+			valid_tiles.set_cellv(loc+Vector2(3,0), 1)
+			valid_tiles.set_cellv(loc+Vector2(5,0), 1)
+			valid_tiles.set_cellv(loc+Vector2(6,0), 1)
+			valid_tiles.set_cellv(loc+Vector2(7,0), 1)
+		elif type == 8:
+			valid_tiles.set_cellv(loc, 1)
+			valid_tiles.set_cellv(loc+Vector2(1,0), 1)
+			valid_tiles.set_cellv(loc+Vector2(2,0), 1)
+			valid_tiles.set_cellv(loc+Vector2(3,0), 1)
+			valid_tiles.set_cellv(loc+Vector2(0,1), 1)
+			valid_tiles.set_cellv(loc+Vector2(1,1), 1)
+			valid_tiles.set_cellv(loc+Vector2(2,1), 1)
+			valid_tiles.set_cellv(loc+Vector2(3,1), 1)
+		elif type == 0 or type == 1 or type == 2:
+			valid_tiles.set_cellv(loc, -1)
+		elif type == 3 or type == 4 or type == 5 or type == 12 or type == 13 or type == 14 or type == 15 or type == 16 or type == 17 or type == 18 or type == 21:
+			valid_tiles.set_cellv(loc, -1)
+			valid_tiles.set_cellv(loc+Vector2(1,0), -1)
+		elif type == 19 or type == 20:
+			valid_tiles.set_cellv(loc, -1)
+			valid_tiles.set_cellv(loc+Vector2(0,-1), -1)
+	
+	# ladders
+	if Server.world.get_node("Tiles/DownLadder").get_used_cells().size() != 0:
+		var ladder_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
+		valid_tiles.set_cellv(ladder_loc, -1)
+		valid_tiles.set_cellv(ladder_loc+Vector2(1,0), -1)
+	var up_ladder_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+	valid_tiles.set_cellv(up_ladder_loc, -1)
+	valid_tiles.set_cellv(up_ladder_loc+Vector2(0,1), -1)
+	
 
 func spawn_enemies_randomly():
 	var locs = valid_tiles.get_used_cells()
@@ -82,7 +141,7 @@ func set_chest():
 	tileObjectHurtBox.item_name = "stone chest"
 	tileObjectHurtBox.location = loc
 	tileObjectHurtBox.direction = direction
-	Server.world.get_node("PlacableObjects").call_deferred("add_child", tileObjectHurtBox, true)
+	Server.world.get_node("PlacableObjects").add_child(tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(Server.world.get_node("Tiles/Chests").get_used_cells()[0]) + Vector2(0,32)
 	Server.world.get_node("Tiles/Chests").clear()
 
@@ -102,9 +161,10 @@ func set_nav():
 				Server.world.get_node("Navigation2D/NavTiles").set_cellv(Vector2(x,y), 0)
 
 func set_down_cave_ladder():
-	var caveLadder = CaveLadder.instance()
-	Server.world.add_child(caveLadder)
-	caveLadder.position = (Server.world.get_node("Tiles/DownLadder").get_used_cells()[0] * 32) + Vector2(32,16)
+	if Server.world.get_node("Tiles/DownLadder").get_used_cells().size() != 0:
+		var caveLadder = CaveLadder.instance()
+		Server.world.add_child(caveLadder)
+		caveLadder.position = (Server.world.get_node("Tiles/DownLadder").get_used_cells()[0] * 32) + Vector2(32,16)
 
 func set_mushroom_forage():
 	for i in range(NUM_MUSHROOMS):
@@ -156,12 +216,12 @@ func set_ore():
 			object.location = loc
 			object.position = loc*32 + Vector2(16, 24)
 			Server.world.get_node("OreObjects").call_deferred("add_child",object,true)
-	while ore_count < NUM_LARGE_ORE:
+	while count < NUM_LARGE_ORE:
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
 		var loc = locs[0]
 		if Tiles.validate_tiles(loc+Vector2(-1,0), Vector2(2,2)):
-			ore_count += 1
+			count += 1
 			Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
 			oreTypes.shuffle()
 			var object = LargeOre.instance()

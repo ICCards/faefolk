@@ -137,7 +137,6 @@ func player_death():
 	if state != DYING:
 		state = DYING
 		stop_poison_state()
-		yield(get_tree(), "idle_frame")
 		composite_sprites.set_player_animation(character, "death_" + direction.to_lower(), null)
 		animation_player.play("death")
 		$Camera2D/UserInterface.death()
@@ -158,8 +157,10 @@ func drop_inventory_items():
 	
 func respawn():
 	position = spawn_position
+	PlayerStats.energy = PlayerStats.energy_maximum
 	PlayerStats.health = PlayerStats.health_maximum
 	PlayerStats.emit_signal("health_changed")
+	PlayerStats.emit_signal("energy_changed")
 	animation_player.stop()
 	$Camera2D/UserInterface.respawn()
 	$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", false) 
