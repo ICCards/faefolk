@@ -9,18 +9,43 @@ var bounce = 0.4
 var fishable = true
 var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
 
-func set_active():
+var MIN_Y
+var MAX_Y
+
+var fishing_rod_level
+
+func set_active(_fishing_rod_type):
+	fishing_rod_level = _fishing_rod_type
 	visible = true
 	spawn_fish()
 	modulate = Color(1,1,1,1)
-	$Hook.position.y = 83
-	$TempFishIcon.position.y = 83
 	$Progress.value = 250
 	$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
+	set_fishing_rod_level()
+	
+	
+func set_fishing_rod_level():
+	get_node(fishing_rod_level).show()
+	match fishing_rod_level:
+		"wood fishing rod":
+			MIN_Y = 83
+			MAX_Y = -21
+			get_node(fishing_rod_level).position.y = MIN_Y
+			$TempFishIcon.position.y = MIN_Y
+		"stone fishing rod":
+			MIN_Y = 81
+			MAX_Y = -19
+			get_node(fishing_rod_level).position.y = MIN_Y
+			$TempFishIcon.position.y = MIN_Y
+		"gold fishing rod":
+			MIN_Y = 79
+			MAX_Y = -17
+			get_node(fishing_rod_level).position.y = MIN_Y
+			$TempFishIcon.position.y = MIN_Y
 
 func spawn_fish():
 	var f = fish.instance()
-	f.position = Vector2($Hook.position.x, $Hook.position.y)
+	f.position = Vector2(get_node(fishing_rod_level).position.x, get_node(fishing_rod_level).position.y)
 	add_child(f)
 	fishable = false
 
@@ -50,24 +75,24 @@ func _physics_process(delta):
 		if (Input.is_action_just_pressed("ui_accept")):
 			hookVelocity -= .5
 
-		var target = $Hook.position.y + hookVelocity
-		if (target >= 83):
+		var target = get_node(fishing_rod_level).position.y + hookVelocity
+		if (target >= MIN_Y):
 			hookVelocity *= -bounce
-		elif (target <= -21):
+		elif (target <= MAX_Y):
 			hookVelocity = 0
-			$Hook.position.y = -21
+			get_node(fishing_rod_level).position.y = MAX_Y
 		else:
-			$Hook.position.y = target
+			get_node(fishing_rod_level).position.y = target
 
 		# Adjust Value
 		if (fishable == false):
-			if (len($Hook/Area2D.get_overlapping_areas()) > 0):
-				$Hook.modulate = Color("ffffff")
+			if (len(get_node(fishing_rod_level + "/Area2D").get_overlapping_areas()) > 0):
+				get_node(fishing_rod_level).modulate = Color("ffffff")
 				$Progress.value += 195 * delta
 				if ($Progress.value >= 999):
 					caught_fish()
 			else:
-				$Hook.modulate = Color("7dffffff")
+				get_node(fishing_rod_level).modulate = Color("7dffffff")
 				$Progress.value -= 195 * delta
 				if ($Progress.value <= 0):
 					lost_fish()

@@ -1,5 +1,117 @@
 extends Node
 
+#	body_run_down = {
+#		0 : preload()
+#	},
+#	body_run_up = {
+#		0 : preload()
+#	},
+#	body_run_right = {
+#		0 : preload()
+#	},
+#	body_run_left = {
+#		0 : preload()
+#	},
+#
+#	arms_run_down = {
+#		0 : preload()
+#	},
+#	arms_run_up = {
+#		0 : preload()
+#	},
+#	arms_run_right = {
+#		0 : preload()
+#	},
+#	arms_run_left = {
+#		0 : preload()
+#	},
+#
+#	acc_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	acc_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	head_attribute_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	head_attribute_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shirts_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shirts_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	pants_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	pants_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+#
+#	shoes_run_down = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_run_up = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_run_right = {
+#		0 : null,
+#		1 : preload()
+#	},
+#	shoes_run_left = {
+#		0 : null,
+#		1 : preload()
+#	},
+
+
 #	body_release_down = {
 #		0 : preload()
 #	},
@@ -5818,391 +5930,14 @@ var pants_index
 var shirts_index
 var shoes_index
 
-# CREATE OBJECT OF EACH ATTRIBUTE
-var body_sprites = {
-	'idle_down' : null,
-	'idle_up' : null,
-	'idle_left' : null, 
-	'idle_right' : null,
-	'walk_down' : null,
-	'walk_up' : null,
-	'walk_left' : null,
-	'walk_right' : null,
-	'swing_down' : null, 
-	'swing_up' : null, 
-	'swing_left' : null,
-	'swing_right' : null,
-	'holding_idle_down': null,
-	'holding_idle_up': null,
-	'holding_idle_left': null,
-	'holding_idle_right': null,
-	'holding_walk_down': null,
-	'holding_walk_up': null,
-	'holding_walk_left': null,
-	'holding_walk_right': null,
-	'death_up': null,
-	'death_down': null,
-	'death_left': null,
-	'death_right': null,
-	'sleep_up': null,
-	'sleep_down': null,
-	'sleep_left': null,
-	'sleep_right': null,
-	'cast_up': null,
-	'cast_down': null,
-	'cast_left': null,
-	'cast_right': null,
-	'retract_up': null,
-	'retract_down': null,
-	'retract_left': null,
-	'retract_right': null,
-	'struggle_up': null,
-	'struggle_down': null,
-	'struggle_left': null,
-	'struggle_right': null,
-	'sword_swing_down': null,
-	'sword_swing_up': null,
-	'sword_swing_left': null,
-	'sword_swing_right': null,
-	'harvest_up': null,
-	'harvest_down': null,
-	'harvest_left': null,
-	'harvest_right': null,
-	'eat': null,
-	}
-
-var arms_sprites = {
-	'idle_down' : null,
-	'idle_up' : null,
-	'idle_left' : null,
-	'idle_right' : null,
-	'walk_down' : null,
-	'walk_up' : null,
-	'walk_left' : null,
-	'walk_right' : null,
-	'swing_down' : null,
-	'swing_up' : null,
-	'swing_left' : null,
-	'swing_right' : null,
-	'holding_idle_down': null,
-	'holding_idle_up': null,
-	'holding_idle_left': null,
-	'holding_idle_right': null,
-	'holding_walk_down': null,
-	'holding_walk_up': null,
-	'holding_walk_left': null,
-	'holding_walk_right': null,
-	'death_up': null,
-	'death_down': null,
-	'death_left': null,
-	'death_right': null,
-	'sleep_up': null,
-	'sleep_down': null,
-	'sleep_left': null,
-	'sleep_right': null,
-	'cast_up': null,
-	'cast_down': null,
-	'cast_left': null,
-	'cast_right': null,
-	'retract_up': null,
-	'retract_down': null,
-	'retract_left': null,
-	'retract_right': null,
-	'struggle_up': null,
-	'struggle_down': null,
-	'struggle_left': null,
-	'struggle_right': null,
-	'sword_swing_down': null,
-	'sword_swing_up': null,
-	'sword_swing_left': null,
-	'sword_swing_right': null,
-	'harvest_up': null,
-	'harvest_down': null,
-	'harvest_left': null,
-	'harvest_right': null,
-	'eat': null,
-	};
-
-var acc_sprites = {
-	'idle_down' : null,
-	'idle_up' : null,
-	'idle_left' : null,
-	'idle_right' : null,
-	'walk_down' : null,
-	'walk_up' : null,
-	'walk_left' : null,
-	'walk_right' : null,
-	'swing_down' : null,
-	'swing_up' : null,
-	'swing_left' : null,
-	'swing_right' : null,
-	'holding_idle_down': null,
-	'holding_idle_up': null,
-	'holding_idle_left': null,
-	'holding_idle_right': null,
-	'holding_walk_down': null,
-	'holding_walk_up': null,
-	'holding_walk_left': null,
-	'holding_walk_right': null,
-	'death_up': null,
-	'death_down': null,
-	'death_left': null,
-	'death_right': null,
-	'sleep_up': null,
-	'sleep_down': null,
-	'sleep_left': null,
-	'sleep_right': null,
-	'swim_up': null,
-	'swim_down': null,
-	'swim_left': null,
-	'swim_right': null,
-	'cast_up': null,
-	'cast_down': null,
-	'cast_left': null,
-	'cast_right': null,
-	'retract_up': null,
-	'retract_down': null,
-	'retract_left': null,
-	'retract_right': null,
-	'struggle_up': null,
-	'struggle_down': null,
-	'struggle_left': null,
-	'struggle_right': null,
-	'sword_swing_down': null,
-	'sword_swing_up': null,
-	'sword_swing_left': null,
-	'sword_swing_right': null,
-	'harvest_up': null,
-	'harvest_down': null,
-	'harvest_left': null,
-	'harvest_right': null,
-	'eat': null,
-	};
-
-var headAtr_sprites = {
-	'idle_down' : null,
-	'idle_up' : null,
-	'idle_left' : null,
-	'idle_right' : null,
-	'walk_down' : null,
-	'walk_up' : null,
-	'walk_left' : null, 
-	'walk_right' : null,
-	'swing_down' : null,
-	'swing_up' : null, 
-	'swing_left' : null, 
-	'swing_right' : null,
-	'holding_idle_down': null,
-	'holding_idle_up': null,
-	'holding_idle_left': null,
-	'holding_idle_right': null,
-	'holding_walk_down': null,
-	'holding_walk_up': null,
-	'holding_walk_left': null,
-	'holding_walk_right': null,
-	'death_up': null,
-	'death_down': null,
-	'death_left': null,
-	'death_right': null,
-	'sleep_up': null,
-	'sleep_down': null,
-	'sleep_left': null,
-	'sleep_right': null,
-	'swim_up': null,
-	'swim_down': null,
-	'swim_left': null,
-	'swim_right': null,
-	'cast_up': null,
-	'cast_down': null,
-	'cast_left': null,
-	'cast_right': null,
-	'retract_up': null,
-	'retract_down': null,
-	'retract_left': null,
-	'retract_right': null,
-	'struggle_up': null,
-	'struggle_down': null,
-	'struggle_left': null,
-	'struggle_right': null,
-	'sword_swing_down': null,
-	'sword_swing_up': null,
-	'sword_swing_left': null,
-	'sword_swing_right': null,
-	'harvest_up': null,
-	'harvest_down': null,
-	'harvest_left': null,
-	'harvest_right': null,
-	'eat': null,
-	};
-
-var pants_sprites = {
-	'idle_down' : null,
-	'idle_up' : null, 
-	'idle_left' : null, 
-	'idle_right' : null, 
-	'walk_down' : null, 
-	'walk_up' : null, 
-	'walk_left' : null, 
-	'walk_right' : null,
-	'swing_down' : null,
-	'swing_up' : null, 
-	'swing_left' : null, 
-	'swing_right' : null, 
-	'holding_idle_down': null,
-	'holding_idle_up': null,
-	'holding_idle_left': null,
-	'holding_idle_right': null,
-	'holding_walk_down': null,
-	'holding_walk_up': null,
-	'holding_walk_left': null,
-	'holding_walk_right': null,
-	'death_up': null,
-	'death_down': null,
-	'death_left': null,
-	'death_right': null,
-	'sleep_up': null,
-	'sleep_down': null,
-	'sleep_left': null,
-	'sleep_right': null,
-	'swim_up': null,
-	'swim_down': null,
-	'swim_left': null,
-	'swim_right': null,
-	'cast_up': null,
-	'cast_down': null,
-	'cast_left': null,
-	'cast_right': null,
-	'retract_up': null,
-	'retract_down': null,
-	'retract_left': null,
-	'retract_right': null,
-	'struggle_up': null,
-	'struggle_down': null,
-	'struggle_left': null,
-	'struggle_right': null,
-	'sword_swing_down': null,
-	'sword_swing_up': null,
-	'sword_swing_left': null,
-	'sword_swing_right': null,
-	'harvest_up': null,
-	'harvest_down': null,
-	'harvest_left': null,
-	'harvest_right': null,
-	'eat': null,
-	};
-
-var shirts_sprites = {
-	'idle_down' : null, 
-	'idle_up' : null, 
-	'idle_left' : null, 
-	'idle_right' : null,
-	'walk_down' : null, 
-	'walk_up' : null, 
-	'walk_left' : null,
-	'walk_right' : null, 
-	'swing_down' : null, 
-	'swing_up' : null, 
-	'swing_left' : null, 
-	'swing_right' : null,
-	'holding_idle_down': null,
-	'holding_idle_up': null,
-	'holding_idle_left': null,
-	'holding_idle_right': null,
-	'holding_walk_down': null,
-	'holding_walk_up': null,
-	'holding_walk_left': null,
-	'holding_walk_right': null,
-	'death_up': null,
-	'death_down': null,
-	'death_left': null,
-	'death_right': null,
-	'sleep_up': null,
-	'sleep_down': null,
-	'sleep_left': null,
-	'sleep_right': null,
-	'swim_up': null,
-	'swim_down': null,
-	'swim_left': null,
-	'swim_right': null,
-	'cast_up': null,
-	'cast_down': null,
-	'cast_left': null,
-	'cast_right': null,
-	'retract_up': null,
-	'retract_down': null,
-	'retract_left': null,
-	'retract_right': null,
-	'struggle_up': null,
-	'struggle_down': null,
-	'struggle_left': null,
-	'struggle_right': null,
-	'sword_swing_down': null,
-	'sword_swing_up': null,
-	'sword_swing_left': null,
-	'sword_swing_right': null,
-	'harvest_up': null,
-	'harvest_down': null,
-	'harvest_left': null,
-	'harvest_right': null,
-	'eat': null,
-	};
-
-var shoes_sprites = {
-	'idle_down' : null, 
-	'idle_up' : null, 
-	'idle_left' : null, 
-	'idle_right' : null, 
-	'walk_down' : null, 
-	'walk_up' : null, 
-	'walk_left' : null, 
-	'walk_right' : null, 
-	'swing_down' : null,
-	'swing_up' : null,
-	'swing_left' : null, 
-	'swing_right' : null,
-	'holding_idle_down': null,
-	'holding_idle_up': null,
-	'holding_idle_left': null,
-	'holding_idle_right': null,
-	'holding_walk_down': null,
-	'holding_walk_up': null,
-	'holding_walk_left': null,
-	'holding_walk_right': null,
-	'death_up': null,
-	'death_down': null,
-	'death_left': null,
-	'death_right': null,
-	'sleep_up': null,
-	'sleep_down': null,
-	'sleep_left': null,
-	'sleep_right': null,
-	'swim_up': null,
-	'swim_down': null,
-	'swim_left': null,
-	'swim_right': null,
-	'cast_up': null,
-	'cast_down': null,
-	'cast_left': null,
-	'cast_right': null,
-	'retract_up': null,
-	'retract_down': null,
-	'retract_left': null,
-	'retract_right': null,
-	'struggle_up': null,
-	'struggle_down': null,
-	'struggle_left': null,
-	'struggle_right': null,
-	'sword_swing_down': null,
-	'sword_swing_up': null,
-	'sword_swing_left': null,
-	'sword_swing_right': null,
-	'harvest_up': null,
-	'harvest_down': null,
-	'harvest_left': null,
-	'harvest_right': null,
-	'eat': null,
-	};
-
+# OBJECT OF EACH ATTRIBUTE ANIMATION
+var body_sprites = {}
+var arms_sprites = {}
+var acc_sprites = {}
+var headAtr_sprites = {}
+var pants_sprites = {}
+var shirts_sprites = {}
+var shoes_sprites = {}
 
 
 var set_char
@@ -6220,8 +5955,8 @@ func LoadPlayerCharacter(character_info):
 	match character_info:
 		"human_male":
 			set_char = Human.male
-		"human_female":
-			set_char = Human.female
+#		"human_female":
+#			set_char = Human.female
 		"goblin_male":
 			set_char = goblin_male
 		"goblin_female":
@@ -6252,7 +5987,7 @@ func LoadPlayerCharacter(character_info):
 			set_char = succubus
 		
 	acc_index = set_char.acc_idle_down.size() - 1
-	headAtr_index =  set_char.head_attribute_idle_down.size() - 1
+	headAtr_index = set_char.head_attribute_idle_down.size() - 1
 	pants_index = set_char.pants_idle_down.size() - 1
 	shirts_index = set_char.shirts_idle_down.size() - 1
 	shoes_index = set_char.shoes_idle_down.size() - 1
@@ -6294,10 +6029,10 @@ func set_attributes(set_char):
 	'watering_up' : character.body_watering_up[0],
 	'watering_right' : character.body_watering_right[0],
 	'watering_left' : character.body_watering_left[0],
-#	'sleep_up': character.body_sleep_up[0],
-#	'sleep_down': character.body_sleep_down[0],
-#	'sleep_left': character.body_sleep_left[0],
-#	'sleep_right': character.body_sleep_right[0],
+	'sleep_up': character.body_sleep_up[0],
+	'sleep_down': character.body_sleep_down[0],
+	'sleep_left': character.body_sleep_left[0],
+	'sleep_right': character.body_sleep_right[0],
 	'swim_up': character.body_swim_up[0],
 	'swim_down': character.body_swim_down[0],
 	'swim_left': character.body_swim_left[0],
@@ -6338,6 +6073,22 @@ func set_attributes(set_char):
 	'release_down': character.body_release_down[0],
 	'release_left': character.body_release_left[0],
 	'release_right': character.body_release_right[0],
+	'run_up': character.body_run_up[0],
+	'run_down': character.body_run_down[0],
+	'run_left': character.body_run_left[0],
+	'run_right': character.body_run_right[0],
+	'magic_cast_up': character.body_magic_cast_up[0],
+	'magic_cast_down': character.body_magic_cast_down[0],
+	'magic_cast_left': character.body_magic_cast_left[0],
+	'magic_cast_right': character.body_magic_cast_right[0],
+	'sit_up': character.body_sit_up[0],
+	'sit_down': character.body_sit_down[0],
+	'sit_left': character.body_sit_left[0],
+	'sit_right': character.body_sit_right[0],
+	'throw_up': character.body_throw_up[0],
+	'throw_down': character.body_throw_down[0],
+	'throw_left': character.body_throw_left[0],
+	'throw_right': character.body_throw_right[0],
 	'eat': character.body_eat[0]
 	};
 	arms_sprites = {
@@ -6365,10 +6116,10 @@ func set_attributes(set_char):
 	'watering_up' : character.arms_watering_up[0],
 	'watering_right' : character.arms_watering_right[0],
 	'watering_left' : character.arms_watering_left[0],
-#	'sleep_up': character.arms_sleep_up[0],
-#	'sleep_down': character.arms_sleep_down[0],
-#	'sleep_left': character.arms_sleep_left[0],
-#	'sleep_right': character.arms_sleep_right[0],
+	'sleep_up': character.arms_sleep_up[0],
+	'sleep_down': character.arms_sleep_down[0],
+	'sleep_left': character.arms_sleep_left[0],
+	'sleep_right': character.arms_sleep_right[0],
 	'swim_up': character.arms_swim_up[0],
 	'swim_down': character.arms_swim_down[0],
 	'swim_left': character.arms_swim_left[0],
@@ -6409,6 +6160,22 @@ func set_attributes(set_char):
 	'release_down': character.arms_release_down[0],
 	'release_left': character.arms_release_left[0],
 	'release_right': character.arms_release_right[0],
+	'run_up': character.arms_run_up[0],
+	'run_down': character.arms_run_down[0],
+	'run_left': character.arms_run_left[0],
+	'run_right': character.arms_run_right[0],
+	'magic_cast_up': character.arms_magic_cast_up[0],
+	'magic_cast_down': character.arms_magic_cast_down[0],
+	'magic_cast_left': character.arms_magic_cast_left[0],
+	'magic_cast_right': character.arms_magic_cast_right[0],
+	'sit_up': character.arms_sit_up[0],
+	'sit_down': character.arms_sit_down[0],
+	'sit_left': character.arms_sit_left[0],
+	'sit_right': character.arms_sit_right[0],
+	'throw_up': character.arms_throw_up[0],
+	'throw_down': character.arms_throw_down[0],
+	'throw_left': character.arms_throw_left[0],
+	'throw_right': character.arms_throw_right[0],
 	'eat': character.arms_eat[0]
 	};
 	acc_sprites = {
@@ -6436,10 +6203,10 @@ func set_attributes(set_char):
 	'watering_up' : character.acc_watering_up[acc_index],
 	'watering_right' : character.acc_watering_right[acc_index],
 	'watering_left' : character.acc_watering_left[acc_index],
-#	'sleep_up': character.acc_sleep_up[acc_index],
-#	'sleep_down': character.acc_sleep_down[acc_index],
-#	'sleep_left': character.acc_sleep_left[acc_index],
-#	'sleep_right': character.acc_sleep_right[acc_index],
+	'sleep_up': character.acc_sleep_up[acc_index],
+	'sleep_down': character.acc_sleep_down[acc_index],
+	'sleep_left': character.acc_sleep_left[acc_index],
+	'sleep_right': character.acc_sleep_right[acc_index],
 	'swim_up': character.acc_swim_up[acc_index],
 	'swim_down': character.acc_swim_down[acc_index],
 	'swim_left': character.acc_swim_left[acc_index],
@@ -6480,6 +6247,22 @@ func set_attributes(set_char):
 	'release_down': character.acc_release_down[acc_index],
 	'release_left': character.acc_release_left[acc_index],
 	'release_right': character.acc_release_right[acc_index],
+	'run_up': character.acc_run_up[acc_index],
+	'run_down': character.acc_run_down[acc_index],
+	'run_left': character.acc_run_left[acc_index],
+	'run_right': character.acc_run_right[acc_index],
+	'magic_cast_up': character.acc_magic_cast_up[acc_index],
+	'magic_cast_down': character.acc_magic_cast_down[acc_index],
+	'magic_cast_left': character.acc_magic_cast_left[acc_index],
+	'magic_cast_right': character.acc_magic_cast_right[acc_index],
+	'sit_up': character.acc_sit_up[acc_index],
+	'sit_down': character.acc_sit_down[acc_index],
+	'sit_left': character.acc_sit_left[acc_index],
+	'sit_right': character.acc_sit_right[acc_index],
+	'throw_up': character.acc_throw_up[acc_index],
+	'throw_down': character.acc_throw_down[acc_index],
+	'throw_left': character.acc_throw_left[acc_index],
+	'throw_right': character.acc_throw_right[acc_index],
 	'eat': character.acc_eat[acc_index]
 	};
 	headAtr_sprites = {
@@ -6507,10 +6290,10 @@ func set_attributes(set_char):
 	'watering_up' : character.head_attribute_watering_up[headAtr_index],
 	'watering_right' : character.head_attribute_watering_right[headAtr_index],
 	'watering_left' : character.head_attribute_watering_left[headAtr_index],
-#	'sleep_up': character.head_attribute_sleep_up[headAtr_index],
-#	'sleep_down': character.head_attribute_sleep_down[headAtr_index],
-#	'sleep_left': character.head_attribute_sleep_left[headAtr_index],
-#	'sleep_right': character.head_attribute_sleep_right[headAtr_index],
+	'sleep_up': character.head_attribute_sleep_up[headAtr_index],
+	'sleep_down': character.head_attribute_sleep_down[headAtr_index],
+	'sleep_left': character.head_attribute_sleep_left[headAtr_index],
+	'sleep_right': character.head_attribute_sleep_right[headAtr_index],
 	'swim_up': character.head_attribute_swim_up[headAtr_index],
 	'swim_down': character.head_attribute_swim_down[headAtr_index],
 	'swim_left': character.head_attribute_swim_left[headAtr_index],
@@ -6551,6 +6334,22 @@ func set_attributes(set_char):
 	'release_down': character.head_attribute_release_down[headAtr_index],
 	'release_left': character.head_attribute_release_left[headAtr_index],
 	'release_right': character.head_attribute_release_right[headAtr_index],
+	'run_up': character.head_attribute_run_up[headAtr_index],
+	'run_down': character.head_attribute_run_down[headAtr_index],
+	'run_left': character.head_attribute_run_left[headAtr_index],
+	'run_right': character.head_attribute_run_right[headAtr_index],
+	'magic_cast_up': character.head_attribute_magic_cast_up[headAtr_index],
+	'magic_cast_down': character.head_attribute_magic_cast_down[headAtr_index],
+	'magic_cast_left': character.head_attribute_magic_cast_left[headAtr_index],
+	'magic_cast_right': character.head_attribute_magic_cast_right[headAtr_index],
+	'sit_up': character.head_attribute_sit_up[headAtr_index],
+	'sit_down': character.head_attribute_sit_down[headAtr_index],
+	'sit_left': character.head_attribute_sit_left[headAtr_index],
+	'sit_right': character.head_attribute_sit_right[headAtr_index],
+	'throw_up': character.head_attribute_throw_up[headAtr_index],
+	'throw_down': character.head_attribute_throw_down[headAtr_index],
+	'throw_left': character.head_attribute_throw_left[headAtr_index],
+	'throw_right': character.head_attribute_throw_right[headAtr_index],
 	'eat': character.head_attribute_eat[headAtr_index]
 	}
 	pants_sprites = {
@@ -6578,10 +6377,10 @@ func set_attributes(set_char):
 	'watering_up' : character.pants_watering_up[pants_index],
 	'watering_right' : character.pants_watering_right[pants_index],
 	'watering_left' : character.pants_watering_left[pants_index],
-#	'sleep_up': character.pants_sleep_up[pants_index],
-#	'sleep_down': character.pants_sleep_down[pants_index],
-#	'sleep_left': character.pants_sleep_left[pants_index],
-#	'sleep_right': character.pants_sleep_right[pants_index],
+	'sleep_up': character.pants_sleep_up[pants_index],
+	'sleep_down': character.pants_sleep_down[pants_index],
+	'sleep_left': character.pants_sleep_left[pants_index],
+	'sleep_right': character.pants_sleep_right[pants_index],
 	'swim_up': character.pants_swim_up[pants_index],
 	'swim_down': character.pants_swim_down[pants_index],
 	'swim_left': character.pants_swim_left[pants_index],
@@ -6622,6 +6421,22 @@ func set_attributes(set_char):
 	'release_down': character.pants_release_down[pants_index],
 	'release_left': character.pants_release_left[pants_index],
 	'release_right': character.pants_release_right[pants_index],
+	'run_up': character.pants_run_up[pants_index],
+	'run_down': character.pants_run_down[pants_index],
+	'run_left': character.pants_run_left[pants_index],
+	'run_right': character.pants_run_right[pants_index],
+	'magic_cast_up': character.pants_magic_cast_up[pants_index],
+	'magic_cast_down': character.pants_magic_cast_down[pants_index],
+	'magic_cast_left': character.pants_magic_cast_left[pants_index],
+	'magic_cast_right': character.pants_magic_cast_right[pants_index],
+	'sit_up': character.pants_sit_up[pants_index],
+	'sit_down': character.pants_sit_down[pants_index],
+	'sit_left': character.pants_sit_left[pants_index],
+	'sit_right': character.pants_sit_right[pants_index],
+	'throw_up': character.pants_throw_up[pants_index],
+	'throw_down': character.pants_throw_down[pants_index],
+	'throw_left': character.pants_throw_left[pants_index],
+	'throw_right': character.pants_throw_right[pants_index],
 	'eat': character.pants_eat[pants_index]
 	};
 	shirts_sprites = {
@@ -6649,10 +6464,10 @@ func set_attributes(set_char):
 	'watering_up' : character.shirts_watering_up[shirts_index],
 	'watering_right' : character.shirts_watering_right[shirts_index],
 	'watering_left' : character.shirts_watering_left[shirts_index],
-#	'sleep_up': character.shirts_sleep_up[shirts_index],
-#	'sleep_down': character.shirts_sleep_down[shirts_index],
-#	'sleep_left': character.shirts_sleep_left[shirts_index],
-#	'sleep_right': character.shirts_sleep_right[shirts_index],
+	'sleep_up': character.shirts_sleep_up[shirts_index],
+	'sleep_down': character.shirts_sleep_down[shirts_index],
+	'sleep_left': character.shirts_sleep_left[shirts_index],
+	'sleep_right': character.shirts_sleep_right[shirts_index],
 	'swim_up': character.shirts_swim_up[shirts_index],
 	'swim_down': character.shirts_swim_down[shirts_index],
 	'swim_left': character.shirts_swim_left[shirts_index],
@@ -6693,6 +6508,22 @@ func set_attributes(set_char):
 	'release_down': character.shirts_release_down[shirts_index],
 	'release_left': character.shirts_release_left[shirts_index],
 	'release_right': character.shirts_release_right[shirts_index],
+	'run_up': character.shirts_run_up[shirts_index],
+	'run_down': character.shirts_run_down[shirts_index],
+	'run_left': character.shirts_run_left[shirts_index],
+	'run_right': character.shirts_run_right[shirts_index],
+	'magic_cast_up': character.shirts_magic_cast_up[shirts_index],
+	'magic_cast_down': character.shirts_magic_cast_down[shirts_index],
+	'magic_cast_left': character.shirts_magic_cast_left[shirts_index],
+	'magic_cast_right': character.shirts_magic_cast_right[shirts_index],
+	'sit_up': character.shirts_sit_up[shirts_index],
+	'sit_down': character.shirts_sit_down[shirts_index],
+	'sit_left': character.shirts_sit_left[shirts_index],
+	'sit_right': character.shirts_sit_right[shirts_index],
+	'throw_up': character.shirts_throw_up[shirts_index],
+	'throw_down': character.shirts_throw_down[shirts_index],
+	'throw_left': character.shirts_throw_left[shirts_index],
+	'throw_right': character.shirts_throw_right[shirts_index],
 	'eat': character.shirts_eat[shirts_index]
 	};
 	shoes_sprites = {
@@ -6720,10 +6551,10 @@ func set_attributes(set_char):
 	'watering_up' : character.shoes_watering_up[shoes_index],
 	'watering_right' : character.shoes_watering_right[shoes_index],
 	'watering_left' : character.shoes_watering_left[shoes_index],
-#	'sleep_up': character.shoes_sleep_up[shoes_index],
-#	'sleep_down': character.shoes_sleep_down[shoes_index],
-#	'sleep_left': character.shoes_sleep_left[shoes_index],
-#	'sleep_right': character.shoes_sleep_right[shoes_index],
+	'sleep_up': character.shoes_sleep_up[shoes_index],
+	'sleep_down': character.shoes_sleep_down[shoes_index],
+	'sleep_left': character.shoes_sleep_left[shoes_index],
+	'sleep_right': character.shoes_sleep_right[shoes_index],
 	'swim_up': character.shoes_swim_up[shoes_index],
 	'swim_down': character.shoes_swim_down[shoes_index],
 	'swim_left': character.shoes_swim_left[shoes_index],
@@ -6764,6 +6595,22 @@ func set_attributes(set_char):
 	'release_down': character.shoes_release_down[shoes_index],
 	'release_left': character.shoes_release_left[shoes_index],
 	'release_right': character.shoes_release_right[shoes_index],
+	'run_up': character.shoes_run_up[shoes_index],
+	'run_down': character.shoes_run_down[shoes_index],
+	'run_left': character.shoes_run_left[shoes_index],
+	'run_right': character.shoes_run_right[shoes_index],
+	'magic_cast_up': character.shoes_magic_cast_up[shoes_index],
+	'magic_cast_down': character.shoes_magic_cast_down[shoes_index],
+	'magic_cast_left': character.shoes_magic_cast_left[shoes_index],
+	'magic_cast_right': character.shoes_magic_cast_right[shoes_index],
+	'sit_up': character.shoes_sit_up[shoes_index],
+	'sit_down': character.shoes_sit_down[shoes_index],
+	'sit_left': character.shoes_sit_left[shoes_index],
+	'sit_right': character.shoes_sit_right[shoes_index],
+	'throw_up': character.shoes_throw_up[shoes_index],
+	'throw_down': character.shoes_throw_down[shoes_index],
+	'throw_left': character.shoes_throw_left[shoes_index],
+	'throw_right': character.shoes_throw_right[shoes_index],
 	'eat': character.shoes_eat[shoes_index]
 	};
 	

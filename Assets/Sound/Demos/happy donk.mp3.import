@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/happy donk.mp3-321eefb8f9b8b48f083f2e325f553342.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Demos/happy donk.mp3"
+dest_files=[ "res://.import/happy donk.mp3-321eefb8f9b8b48f083f2e325f553342.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

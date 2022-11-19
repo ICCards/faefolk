@@ -153,6 +153,12 @@ margin_top = 36.6668
 margin_right = 5.92593
 margin_bottom = 68.6668
 
+[node name="Ingredient3" parent="." instance=ExtResource( 12 )]
+margin_left = 5.926
+margin_top = 46.0
+margin_right = 5.926
+margin_bottom = 78.0
+
 [node name="ItemName" type="Label" parent="."]
 margin_left = 5.14286
 margin_top = 3.61905

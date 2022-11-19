@@ -1,0 +1,62 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://World/Objects/Magic/Fire/AttachedFlameBehind.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Fire/fire buff.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Images/Magic/fire/FlameBehind.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 34, 48 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 4 )
+region = Rect2( 34, 0, 34, 48 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 4 )
+region = Rect2( 68, 0, 34, 48 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 4 )
+region = Rect2( 102, 0, 34, 48 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 4 )
+region = Rect2( 136, 0, 34, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 4 )
+region = Rect2( 170, 0, 34, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 4 )
+region = Rect2( 204, 0, 34, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 4 )
+region = Rect2( 238, 0, 34, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 4 )
+region = Rect2( 272, 0, 34, 48 )
+
+[sub_resource type="SpriteFrames" id=30]
+animations = [ {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="AttachedFlameBehind" type="AnimatedSprite"]
+modulate = Color( 1.25, 1.25, 1.25, 1 )
+show_behind_parent = true
+position = Vector2( 0, -42 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 30 )
+frame = 6
+playing = true
+script = ExtResource( 2 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

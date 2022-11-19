@@ -43,7 +43,10 @@ Human="*res://Global/Characters/Human.gd"
 Stats="*res://Global/Data/Stats.gd"
 FishData="*res://Global/Data/FishData.gd"
 CollectionsData="*res://Global/Data/CollectionsData.gd"
-IC="*res://helpers/ic.cs"
+InstancedScenes="*res://Global/Data/InstancedScenes.gd"
+Constants="*res://Global/Data/Constants.gd"
+BuildCaveLevel="*res://Global/Data/BuildCaveLevel.gd"
+MapData="*res://Global/Data/MapData.gd"
 
 [display]
 
@@ -239,6 +242,15 @@ slot9={
 slot10={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":48,"unicode":0,"echo":false,"script":null)
+ ]
+}
+sprint={
+"deadzone": 0.5,
+"events": [  ]
+}
+change_object_type={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":86,"unicode":0,"echo":false,"script":null)
  ]
 }
 

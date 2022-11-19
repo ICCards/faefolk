@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/draw.mp3-f7b730a8796e3fa2c3f13b0596cceedb.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3"
+dest_files=[ "res://.import/draw.mp3-f7b730a8796e3fa2c3f13b0596cceedb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

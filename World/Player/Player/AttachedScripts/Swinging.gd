@@ -3,60 +3,75 @@ extends Node2D
 
 onready var sound_effects = $SoundEffects
 onready var axe_pickaxe_swing = $AxePickaxeSwing
+onready var sword_swing = $SwordSwing
 onready var watering_can_particles1 = $WateringCanParticles1
 onready var watering_can_particles2 = $WateringCanParticles2
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var composite_sprites = get_node("../CompositeSprites")
-onready var dirt_tiles = get_node("/root/World/GeneratedTiles/DirtTiles")
-onready var hoed_tiles = get_node("/root/World/FarmingTiles/HoedAutoTiles")
-onready var watered_tiles = get_node("/root/World/FarmingTiles/WateredAutoTiles")
-onready var ocean_tiles = get_node("/root/World/GeneratedTiles/ShallowOcean")
 
-onready var ArrowProjectile = preload("res://World/Objects/Misc/ArrowProjectile.tscn")
+onready var ArrowProjectile = preload("res://World/Objects/Projectiles/ArrowProjectile.tscn")
+
 
 var rng = RandomNumberGenerator.new()
 
 var animation
-var direction
+var direction: String = "down"
 
 enum {
 	MOVEMENT, 
 	SWINGING,
-	EAT,
+	EATING,
 	FISHING,
-	CHANGE_TILE
+	HARVESTING,
+	DYING,
+	SLEEPING,
+	SITTING,
+	MAGIC_CASTING,
+	BOW_ARROW_SHOOTING
 }
 
-var is_drawing = false
-var is_releasing = false
+var is_drawing: bool = false
+var is_releasing: bool = false
 
-func _process(delta):
-	if is_drawing or is_releasing:
-		var degrees = int($ArrowDirection.rotation_degrees) % 360
-		$ArrowDirection.look_at(get_global_mouse_position())
-		if $ArrowDirection.rotation_degrees >= 0:
-			if degrees <= 45 or degrees >= 315:
-				direction = "RIGHT"
-			elif degrees <= 135:
-				direction = "DOWN"
-			elif degrees <= 225:
-				direction = "LEFT"
-			else:
-				direction = "UP"
+
+
+var mouse_left_down: bool = false
+func _input( event ):
+	if event is InputEventMouseButton:
+		if event.button_index == 1 and event.is_pressed():
+			mouse_left_down = true
+		elif event.button_index == 1 and not event.is_pressed():
+			mouse_left_down = false
+
+func _physics_process(delta):
+	if not is_drawing and not is_releasing:
+		return
+	var degrees = int($ArrowDirection.rotation_degrees) % 360
+	$ArrowDirection.look_at(get_global_mouse_position())
+	if $ArrowDirection.rotation_degrees >= 0:
+		if degrees <= 45 or degrees >= 315:
+			direction = "RIGHT"
+		elif degrees <= 135:
+			direction = "DOWN"
+		elif degrees <= 225:
+			direction = "LEFT"
 		else:
-			if degrees >= -45 or degrees <= -315:
-				direction = "RIGHT"
-			elif degrees >= -135:
-				direction = "UP"
-			elif degrees >= -225:
-				direction = "LEFT"
-			else:
-				direction = "DOWN"
-		if is_drawing:
-			composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
-		elif is_releasing:
-			composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
+			direction = "UP"
+	else:
+		if degrees >= -45 or degrees <= -315:
+			direction = "RIGHT"
+		elif degrees >= -135:
+			direction = "UP"
+		elif degrees >= -225:
+			direction = "LEFT"
+		else:
+			direction = "DOWN"
+	if is_drawing:
+		composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
+	elif is_releasing:
+		composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
+
 
 func swing(item_name, _direction):
 	if get_parent().state != SWINGING:
@@ -66,9 +81,14 @@ func swing(item_name, _direction):
 			animation = "watering_" + _direction.to_lower()
 			player_animation_player.play("watering")
 		elif item_name == "scythe" or item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
+			if get_node("../Magic").player_fire_buff:
+				sword_swing.special_ability = "fire"
+			else:
+				sword_swing.special_ability = ""
 			if item_name == "scythe":
 				player_animation_player.play("scythe_swing_" + _direction.to_lower())
 			else:
+				sword_swing.tool_name = item_name
 				player_animation_player.play("sword_swing_" + _direction.to_lower())
 			animation = "sword_swing_" + _direction.to_lower()
 			rng.randomize()
@@ -82,6 +102,9 @@ func swing(item_name, _direction):
 			else:
 				get_parent().state = MOVEMENT
 				return
+		elif item_name == "arrow":
+			get_parent().state = MOVEMENT
+			return
 		elif item_name == null:
 			set_swing_collision_layer_and_position(item_name, _direction)
 			animation = "punch_" + _direction.to_lower()
@@ -95,55 +118,84 @@ func swing(item_name, _direction):
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
-		
+
+
+
 func draw_bow(init_direction):
+	get_parent().state = BOW_ARROW_SHOOTING
 	is_drawing = true
 	animation = "draw_" + init_direction.to_lower()
-	player_animation_player.play("axe pickaxe swing")
+	player_animation_player.play("bow draw release")
 	PlayerStats.decrease_energy()
 	composite_sprites.set_player_animation(get_parent().character, animation, "bow")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	yield(player_animation_player, "animation_finished" )
-	is_drawing = false
-	is_releasing = true
-	animation = "release_" + direction.to_lower()
-	composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
-	player_animation_player.play("release bow")
-	yield(player_animation_player, "animation_finished" )
-	is_releasing = false
-	PlayerInventory.remove_material("arrow", 1)
-	shoot()
-	get_parent().direction = direction
-	get_parent().state = MOVEMENT
+	wait_for_release()
+
+func wait_for_release():
+	if not mouse_left_down:
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects.play()
+		PlayerInventory.remove_material("arrow", 1)
+		shoot()
+		is_drawing = false
+		is_releasing = true
+		animation = "release_" + direction.to_lower()
+		composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
+		player_animation_player.play("bow draw release")
+		yield(player_animation_player, "animation_finished" )
+		is_releasing = false
+		get_parent().direction = direction
+		get_parent().state = MOVEMENT
+	elif get_parent().state == DYING:
+		return
+	else:
+		yield(get_tree().create_timer(0.1), "timeout")
+		wait_for_release()
 	
 func shoot():
+	Stats.decrease_tool_health()
 	var arrow = ArrowProjectile.instance()
-	get_node("../../../").add_child(arrow)
-	arrow.transform = $ArrowDirection.transform
+	if get_node("../Magic").player_fire_buff:
+		arrow.is_on_fire = true
+	else:
+		arrow.is_on_fire = false
 	arrow.position = $ArrowDirection/Position2D.global_position
 	arrow.velocity = get_global_mouse_position() - arrow.position
-	
+	get_node("../../../").add_child(arrow)
 
 func set_swing_collision_layer_and_position(tool_name, direction):
 	axe_pickaxe_swing.position = Util.set_swing_position(Vector2(0,0), direction)
+	if get_node("../Magic").player_fire_buff:
+		axe_pickaxe_swing.special_ability = "fire"
+	else:
+		axe_pickaxe_swing.special_ability = ""
 	if tool_name == "wood axe" or tool_name == "stone axe" or tool_name == "iron axe" or tool_name == "bronze axe" or tool_name == "gold axe": 
+		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_mask(8)
 	elif tool_name == "wood pickaxe" or tool_name == "stone pickaxe" or tool_name == "iron pickaxe" or tool_name == "bronze pickaxe" or tool_name == "gold pickaxe": 
+		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_mask(16)
 		remove_hoed_tile(direction)
 	elif tool_name == "wood hoe" or tool_name == "stone hoe" or tool_name == "iron hoe" or tool_name == "bronze hoe" or tool_name == "gold hoe": 
+		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_mask(0)
 		set_hoed_tile(direction)
 	elif tool_name == "hammer":
 		axe_pickaxe_swing.set_collision_mask(16384)
 	elif tool_name == null:
 		axe_pickaxe_swing.set_collision_mask(8)
+		axe_pickaxe_swing.tool_name = "punch"
 
 func set_hoed_tile(direction):
 	var pos = Util.set_swing_position(global_position, direction)
 	var location = Tiles.valid_tiles.world_to_map(pos)
 	if Tiles.valid_tiles.get_cellv(location) == 0 and \
-	hoed_tiles.get_cellv(location) == -1 and \
-	Tiles.isCenterBitmaskTile(location, dirt_tiles):
+	Tiles.hoed_tiles.get_cellv(location) == -1 and \
+	Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles):
 		yield(get_tree().create_timer(0.6), "timeout")
 #		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 #		var data = {"id": id, "l": location}
@@ -153,14 +205,14 @@ func set_hoed_tile(direction):
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
-		hoed_tiles.set_cellv(location, 0)
-		hoed_tiles.update_bitmask_region()	
+		Tiles.hoed_tiles.set_cellv(location, 0)
+		Tiles.hoed_tiles.update_bitmask_region()	
 
 
 func remove_hoed_tile(direction):
 	var pos = Util.set_swing_position(global_position, direction)
-	var location = hoed_tiles.world_to_map(pos)
-	if hoed_tiles.get_cellv(location) != -1:
+	var location = Tiles.hoed_tiles.world_to_map(pos)
+	if Tiles.hoed_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
 		Stats.decrease_tool_health()
 #		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
@@ -169,17 +221,17 @@ func remove_hoed_tile(direction):
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
-		watered_tiles.set_cellv(location, -1)
-		hoed_tiles.set_cellv(location, -1)
-		hoed_tiles.update_bitmask_region()
-		watered_tiles.update_bitmask_region()
+		Tiles.watered_tiles.set_cellv(location, -1)
+		Tiles.hoed_tiles.set_cellv(location, -1)
+		Tiles.hoed_tiles.update_bitmask_area(location)
+		Tiles.watered_tiles.update_bitmask_area(location)
 		
 		
 func set_watered_tile():
 	direction = get_parent().direction
 	var pos = Util.set_swing_position(global_position, direction)
-	var location = hoed_tiles.world_to_map(pos)
-	if ocean_tiles.get_cellv(location) != -1:
+	var location = Tiles.hoed_tiles.world_to_map(pos)
+	if Tiles.ocean_tiles.get_cellv(location) != -1 or Tiles.is_well_tile(location, direction):
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
@@ -199,14 +251,15 @@ func set_watered_tile():
 		yield(get_tree().create_timer(0.4), "timeout")
 		watering_can_particles1.emitting = false
 		watering_can_particles2.emitting = false
-		if hoed_tiles.get_cellv(location) != -1:
+		if Tiles.hoed_tiles.get_cellv(location) != -1:
 	#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 	#		var data = {"id": id, "l": location}
 	#		Server.action("WATER", data)
-			watered_tiles.set_cellv(location, 0)
-			watered_tiles.update_bitmask_region()
+			Tiles.watered_tiles.set_cellv(location, 0)
+			Tiles.watered_tiles.update_bitmask_region()
 	else: 
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
+
 

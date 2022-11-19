@@ -1,60 +1,89 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Images/Inventory UI/Workbench/workbench menu.png" type="Texture" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash top.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=5]
+[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Stove/Stove.gd" type="Script" id=6]
-[ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Themes/HideCollection.tres" type="Material" id=8]
+[ext_resource path="res://Assets/Images/User interface/Furnace/furnace arrow.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/Misc/Buttons/exit button.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/Animations/furnace/furnace.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/User interface/Furnace/furnace progress.png" type="Texture" id=12]
+[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=14]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 11 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 128, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 11 )
+region = Rect2( 128, 128, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Stove" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -1024.0
-margin_bottom = -600.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 script = ExtResource( 6 )
 
 [node name="BackgroundButton" type="Button" parent="."]
-margin_left = -255.0
-margin_top = -108.0
-margin_right = 955.0
-margin_bottom = 672.0
+margin_left = -572.0
+margin_top = -382.0
+margin_right = 638.0
+margin_bottom = 398.0
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="CraftingItemDescription" parent="." instance=ExtResource( 7 )]
-visible = false
-scale = Vector2( 2.7, 2.7 )
-
 [node name="Bg" type="TextureRect" parent="."]
-margin_right = 633.0
-margin_bottom = 548.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -316.5
+margin_top = -274.0
+margin_right = 316.5
+margin_bottom = 274.0
 texture = ExtResource( 1 )
 stretch_mode = 4
 
 [node name="Title" type="Label" parent="."]
-margin_left = 33.0
-margin_top = 25.0
-margin_right = 709.0
-margin_bottom = 166.0
+margin_left = -284.0
+margin_top = -249.0
+margin_right = 392.0
+margin_bottom = -108.0
 rect_scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 6
 custom_constants/shadow_offset_y = 6
-text = "Stove:"
+text = "Stove #3:"
 clip_text = true
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
-margin_left = 33.0
-margin_top = 342.0
-margin_right = 600.0
-margin_bottom = 396.0
+margin_left = -284.0
+margin_top = 68.0
+margin_right = 283.0
+margin_bottom = 122.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 3
 columns = 10
@@ -129,10 +158,10 @@ rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 2 )
 
 [node name="InventorySlots" type="GridContainer" parent="."]
-margin_left = 33.0
-margin_top = 402.0
-margin_right = 600.0
-margin_bottom = 456.0
+margin_left = -284.0
+margin_top = 128.0
+margin_right = 283.0
+margin_bottom = 182.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 3
 columns = 10
@@ -206,30 +235,93 @@ margin_bottom = 54.0
 rect_min_size = Vector2( 54, 54 )
 script = ExtResource( 2 )
 
+[node name="StoveSlots" type="Control" parent="."]
+margin_left = -299.0
+margin_top = -200.0
+margin_right = 299.0
+margin_bottom = 32.0
+
+[node name="FuelSlot" type="Panel" parent="StoveSlots"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -222.0
+margin_top = -38.0
+margin_right = -168.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="Ingredient1" type="Panel" parent="StoveSlots"]
+margin_left = 160.0
+margin_top = 16.0
+margin_right = 214.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="Ingredient2" type="Panel" parent="StoveSlots"]
+margin_left = 160.0
+margin_top = 78.0
+margin_right = 214.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="LockSlot" type="TextureRect" parent="StoveSlots/Ingredient2"]
+visible = false
+margin_right = 54.0
+margin_bottom = 54.0
+texture = ExtResource( 7 )
+
+[node name="Ingredient3" type="Panel" parent="StoveSlots"]
+margin_left = 160.0
+margin_top = 140.0
+margin_right = 214.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="LockSlot" type="TextureRect" parent="StoveSlots/Ingredient3"]
+visible = false
+margin_right = 54.0
+margin_bottom = 54.0
+texture = ExtResource( 7 )
+
+[node name="YieldSlot1" type="Panel" parent="StoveSlots"]
+margin_left = 375.0
+margin_top = 16.0
+margin_right = 429.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="YieldSlot2" type="Panel" parent="StoveSlots"]
+margin_left = 375.0
+margin_top = 78.0
+margin_right = 429.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
+[node name="CoalYieldSlot" type="Panel" parent="StoveSlots"]
+margin_left = 375.0
+margin_top = 140.0
+margin_right = 429.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 2 )
+
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="DownButton" type="TextureButton" parent="."]
-margin_left = 577.0
-margin_top = 263.0
-margin_right = 617.0
-margin_bottom = 305.0
-texture_normal = ExtResource( 9 )
-
-[node name="UpButton" type="TextureButton" parent="."]
-visible = false
-margin_left = 577.0
-margin_top = 25.0
-margin_right = 617.0
-margin_bottom = 67.0
-texture_normal = ExtResource( 8 )
-
 [node name="Trash" type="Control" parent="."]
-margin_left = 323.0
-margin_top = -5.0
-margin_right = 323.0
-margin_bottom = -5.0
+margin_left = 6.0
+margin_top = -279.0
+margin_right = 6.0
+margin_bottom = -279.0
 
 [node name="Bottom" type="Sprite" parent="Trash"]
 position = Vector2( 381, 398 )
@@ -250,8 +342,40 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="ExitButton" type="TextureButton" parent="."]
-margin_left = 636.0
-margin_right = 708.0
-margin_bottom = 72.0
+margin_left = 319.0
+margin_top = -274.0
+margin_right = 391.0
+margin_bottom = -202.0
 rect_scale = Vector2( 0.6, 0.6 )
 texture_normal = ExtResource( 10 )
+
+[node name="ItemDescription" parent="." instance=ExtResource( 14 )]
+visible = false
+
+[node name="FurnaceArrow" type="Sprite" parent="."]
+position = Vector2( 0, -98 )
+texture = ExtResource( 9 )
+
+[node name="FireAnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.588235 )
+material = ExtResource( 8 )
+position = Vector2( 0, -35 )
+frames = SubResource( 5 )
+
+[node name="CookTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="TimerProgress" type="TextureProgress" parent="."]
+modulate = Color( 0.513726, 0.513726, 0.513726, 1 )
+margin_left = -44.0
+margin_top = -121.0
+margin_right = 43.0
+margin_bottom = -76.0
+texture_progress = ExtResource( 12 )
+
+[connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
+[connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
+[connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
+[connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="timeout" from="CookTimer" to="." method="_on_CookTimer_timeout"]

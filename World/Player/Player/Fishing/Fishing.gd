@@ -29,6 +29,8 @@ var temp_end_point
 var temp
 var rng = RandomNumberGenerator.new()
 
+var fishing_rod_type
+
 const MIN_FISH_BITE_TIME = 1
 const MAX_FISH_BITE_TIME = 3
 
@@ -110,7 +112,7 @@ func start_fishing_mini_game():
 	waiting_for_fish_bite = false
 	$Tween.stop_all()
 	$AnimationPlayer.play("hit")
-	$FishingMiniGame.set_active()
+	$FishingMiniGame.set_active(fishing_rod_type)
 	yield($AnimationPlayer, "animation_finished")
 	yield(get_tree().create_timer(0.25), "timeout")
 	composite_sprites.set_player_animation(get_parent().character, "struggle_" + direction.to_lower(), "fishing rod struggle")

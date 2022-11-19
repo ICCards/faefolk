@@ -1,12 +1,14 @@
 extends Control
 
-
+onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
 const SlotClass = preload("res://InventoryLogic/Slot.gd")
 onready var inventory_slots = $InventorySlots
 onready var hotbar_slots = $HotbarSlots
 var item
 
 func _ready():
+	$NameOfSong.text = Sounds.demo_names[Sounds.index]
+	Sounds.connect("song_finished", self, "set_current_song")
 	PlayerInventory.InventorySlots = $InventorySlots
 	var i_slots = inventory_slots.get_children()
 	for i in range(i_slots.size()):
@@ -23,12 +25,14 @@ func _ready():
 		h_slots[i].slot_index = i
 		h_slots[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
 
+func set_current_song():
+	$NameOfSong.text = Sounds.demo_names[Sounds.index]
 
 func initialize():
 	PlayerInventory.InventorySlots = $InventorySlots
 	show()
-	$CompositeSprites.set_player_animation(Server.player_node.character, "idle_down")
-	$CompositeSprites/AnimationPlayer.play("loop")
+	#$CompositeSprites.set_player_animation(Server.player_node.character, "idle_down")
+	#$CompositeSprites/AnimationPlayer.play("loop")
 	item = null
 	var i_slots = inventory_slots.get_children()
 	for i in range(i_slots.size()):
@@ -52,14 +56,15 @@ enum SlotType {
 
 
 func _physics_process(delta):
+	if not visible:
+		return
 	if item and not find_parent("UserInterface").holding_item:
-		$ItemDescription.visible = true
-		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
-		$ItemDescription.item_name = item
-		$ItemDescription.position = get_local_mouse_position() + Vector2(20, 25)
-		$ItemDescription.initialize()
+		get_node("../ItemDescription").show()
+		get_node("../ItemDescription").item_category = JsonData.item_data[item]["ItemCategory"]
+		get_node("../ItemDescription").item_name = item
+		get_node("../ItemDescription").initialize()
 	else:
-		$ItemDescription.visible = false
+		get_node("../ItemDescription").hide()
 
 func initialize_inventory_menu():
 	item = null
@@ -101,11 +106,27 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
+		elif event.button_index == BUTTON_RIGHT && event.pressed:
+			if slot.item and not find_parent("UserInterface").holding_item:
+				right_click_slot(slot)
 
+func right_click_slot(slot):
+	if slot.item.item_quantity > 1:
+		var new_qt = int(slot.item.item_quantity / 2)
+		PlayerInventory.decrease_item_quantity(slot, int(slot.item.item_quantity / 2))
+		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))
+		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
+		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 
-#func _input(_event):
-#	if find_parent("UserInterface").holding_item:
-#		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+func return_holding_item(item_name, qt):
+	var inventoryItem = InventoryItem.instance()
+	inventoryItem.set_item(item_name, qt, null)
+	find_parent("UserInterface").add_child(inventoryItem)
+	return inventoryItem
+
+func _input(_event):
+	if find_parent("UserInterface").holding_item:
+		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 
 func left_click_empty_slot(slot: SlotClass):
 	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
@@ -142,3 +163,11 @@ func left_click_not_holding(slot: SlotClass):
 
 
 
+
+
+func _on_SkipSong_pressed():
+	Sounds.index += 1
+	if Sounds.index == Sounds.demo_names.size():
+		Sounds.index = 0
+	$NameOfSong.text = Sounds.demo_names[Sounds.index]
+	Sounds.emit_signal("song_skipped")

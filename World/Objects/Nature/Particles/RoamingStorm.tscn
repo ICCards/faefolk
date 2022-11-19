@@ -5,6 +5,7 @@
 [ext_resource path="res://World/Objects/Nature/Particles/RoamingStorm.gd" type="Script" id=3]
 
 [node name="RoamingStorm" type="Node2D"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 script = ExtResource( 3 )
 
 [node name="Snow" parent="." instance=ExtResource( 2 )]

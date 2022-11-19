@@ -28,10 +28,16 @@ func set_description_text(item):
 		$Body/ItemDescription.set_text(description)
 		var category = JsonData.item_data[item]["ItemCategory"]
 		$Body/ItemAmount.modulate = Util.returnCategoryColor(category)
-		if category == "Food":
+		if category == "Crop":
 			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.crops[item]))
-		else:
+		elif category == "Fish":
 			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.fish[item]))
+		elif category == "Food":
+			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.food[item]))
+		elif category == "Forage":
+			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.forage[item]))
+		elif category == "Resource":
+			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.resources[item]))
 	else: 
 		hide()
 

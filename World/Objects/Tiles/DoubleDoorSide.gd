@@ -42,14 +42,13 @@ func set_type():
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
 		"demolish":
-			Tiles.set_valid_tiles(location, Vector2(2,1))
+			Tiles.add_valid_tiles(location, Vector2(2,1))
 			queue_free()
 	update_health_bar()
-			
-			
+
+
 func remove_icon():
 	$SelectedBorder.hide()
-
 
 func _on_EnterDoorway_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
@@ -60,16 +59,15 @@ func _on_EnterDoorway_input_event(viewport, event, shape_idx):
 				Server.player_node.get_node("Camera2D/UserInterface/RadialDoorMenu").initialize(location, self)
 
 
-
 func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if door_open:
 		$HitEffect/Sprite.texture = load("res://Assets/Tilesets/doors/hit effects/" + tier + "/side/open.png")
-		$HitEffect/Sprite.position = Vector2(11,-73)
+		$HitEffect/Sprite.position = Vector2(10,-69)
 	else:
 		$HitEffect/Sprite.texture = load("res://Assets/Tilesets/doors/hit effects/" + tier + "/side/closed.png")
-		$HitEffect/Sprite.position = Vector2(3,-67)
+		$HitEffect/Sprite.position = Vector2(2,-63)
 	$HitEffect/AnimationPlayer.stop()
 	$HitEffect/AnimationPlayer.play("hit")
 	show_health()
@@ -90,7 +88,7 @@ func update_health_bar():
 		remove_tile()
 
 func remove_tile():
-	Tiles.set_valid_tiles(location, Vector2(1,2))
+	Tiles.add_valid_tiles(location, Vector2(1,2))
 	queue_free()
 
 

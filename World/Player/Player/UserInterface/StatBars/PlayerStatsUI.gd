@@ -3,8 +3,13 @@ extends Control
 func _ready():
 	PlayerStats.connect("energy_changed", self, "set_energy_bar")
 	PlayerStats.connect("health_changed", self, "set_health_bar")
+	PlayerStats.connect("mana_changed", self, "set_mana_bar")
 	set_energy_bar()
 	set_health_bar()
+	
+func set_mana_bar():
+	$ManaPgBar.max_value = PlayerStats.mana_maximum
+	$ManaPgBar.value = PlayerStats.mana
 	
 func set_energy_bar():
 	$EnergyPgBar.max_value = PlayerStats.energy_maximum
