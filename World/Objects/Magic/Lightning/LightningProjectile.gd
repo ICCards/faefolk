@@ -33,11 +33,11 @@ func _on_Area2D_area_entered(area):
 
 func chain_effect(start_name):
 	var nodes = []
-	for node in get_node("/root/World/NatureObjects").get_children():
+	for node in Server.world.get_node("NatureObjects").get_children():
 		if not node.destroyed and self.position.distance_to(node.position) < 250 and node.name != start_name:
 			node.hit(type)
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
-	for node in get_node("/root/World/Animals").get_children():
+	for node in Server.world.get_node("Enemies").get_children():
 		if not node.destroyed and self.position.distance_to(node.position) < 250 and node.name != start_name:
 			node.hit(type)
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
@@ -74,4 +74,8 @@ func find_mst(nodes):
 
 
 func _on_Timer_timeout():
+	queue_free()
+
+
+func _on_Hitbox_body_entered(body):
 	queue_free()

@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+onready var ArrowProjectile = preload("res://World/Objects/Projectiles/ArrowProjectile.tscn")
 
 onready var skeleton_sprite: AnimatedSprite = $SkeletonSprite
 onready var _idle_timer: Timer = $Timers/IdleTimer
@@ -107,6 +108,7 @@ func _physics_process(delta):
 			_velocity = move_and_slide(_velocity)
 			return
 		if tornado_node:
+			orbit_radius += 1.0
 			if is_instance_valid(tornado_node):
 				d += delta
 				position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
@@ -165,11 +167,12 @@ func attack():
 		
 		
 func shoot_projectile():
-	var spell = FireProjectile.instance()
-	spell.particles_transform = $ShootDirection.transform
+	var spell = ArrowProjectile.instance()
+	#spell.particles_transform = $ShootDirection.transform
+	spell.is_hostile = true
 	spell.position = $ShootDirection/Position2D.global_position
 	spell.velocity = Server.player_node.position - spell.position
-	get_node("../").add_child(spell)
+	get_node("../../").add_child(spell)
 	
 	
 
@@ -216,6 +219,7 @@ func _on_HurtBox_area_entered(area):
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
 	if area.tool_name == "lingering tornado":
+		orbit_radius = 0
 		tornado_node = area
 
 func diminish_HOT(type):

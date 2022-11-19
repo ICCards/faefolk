@@ -1,16 +1,20 @@
 extends KinematicBody2D
 
 
-var velocity = Vector2(-1,0)
+var velocity = Vector2(-1,-1)
 var speed = 525
 var collided = false
-var is_on_fire: bool = true
+var is_on_fire: bool = false
+var is_hostile: bool = false
 
 func _physics_process(delta):
 	if not collided:
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
+	if is_hostile:
+		$Hitbox.set_collision_mask(128)
+	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.tool_name = "arrow"
 	$Hitbox.knockback_vector = velocity / 150
 	if is_on_fire:

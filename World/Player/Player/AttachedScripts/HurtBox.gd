@@ -82,8 +82,8 @@ func _on_HurtBox_area_entered(area):
 				$AnimationPlayer.play("hit")
 				get_node("../../Camera2D").player_hit_screen_shake()
 				return
-			elif area.name == "Hitbox" and area.tool_name == "fire projectile":
-				health_to_subtract = Stats.FIRE_PROJECTILE_DAMAGE
+			elif area.name == "Hitbox":
+				health_to_subtract = Stats.return_tool_damage(area.tool_name)
 			else:
 				health_to_subtract = 0
 			$AnimationPlayer.play("hit")

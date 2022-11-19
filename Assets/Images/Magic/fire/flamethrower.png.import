@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/flamethrower.png-1494ef99f86c1bc97a26d833ad5cf972.stex"
+path="res://.import/FlameThrower.png-2178281200d91a0aec6f31b814934630.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Magic/fire/flamethrower.png"
-dest_files=[ "res://.import/flamethrower.png-1494ef99f86c1bc97a26d833ad5cf972.stex" ]
+source_file="res://Assets/Images/Magic/fire/FlameThrower.png"
+dest_files=[ "res://.import/FlameThrower.png-2178281200d91a0aec6f31b814934630.stex" ]
 
 [params]
 

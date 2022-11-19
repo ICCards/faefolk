@@ -15,6 +15,13 @@ var NUM_SPIDERS = 2
 var NUM_SKELETONS = 2
 var is_changing_scene = false
 
+var cave_data = {
+	"ore": {},
+	"large_ore": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+
 func _ready():
 	nav_node = $Navigation2D
 	Tiles.cave_wall_tiles = $Tiles/Walls
@@ -23,14 +30,24 @@ func _ready():
 	BuildCaveLevel.build()
 	Server.isLoaded = true
 
-func advance_cave_level():
+func advance_up_cave_level():
 	if not is_changing_scene:
+		BuildCaveLevel.is_player_going_down = false
 		Server.player_node.destroy()
 		is_changing_scene = true
 		for enemy in $Enemies.get_children():
 			enemy.destroy()
-		yield(get_tree().create_timer(1.0), "timeout")
+		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1/Cave 1.tscn")
+
+func advance_down_cave_level():
+	if not is_changing_scene:
+		BuildCaveLevel.is_player_going_down = true
+		Server.player_node.destroy()
+		is_changing_scene = true
+		for enemy in $Enemies.get_children():
+			enemy.destroy()
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 3/Cave 3.tscn")
+	
 	
 func _on_SpawnBatTimer_timeout():
 	if bat_count < maximum_bats:
@@ -40,3 +57,16 @@ func _on_SpawnBatTimer_timeout():
 		$Enemies.add_child(bat)
 		bat.position = locs[0]*32 + Vector2(16,16)
 		bat_count += 1
+
+func draw_mst(path):
+	var current_lines = []
+	if path:
+		for p in path.get_points():
+			for c in path.get_point_connections(p):
+				var pp = path.get_point_position(p)
+				var cp = path.get_point_position(c)
+				if not current_lines.has([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]) and not current_lines.has([Vector2(cp.x, cp.y), Vector2(pp.x, pp.y)]):
+					var lightning_line = LightningLine.instance()
+					current_lines.append([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)])
+					lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
+					add_child(lightning_line)

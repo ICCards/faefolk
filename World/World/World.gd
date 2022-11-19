@@ -764,34 +764,34 @@ func spawnRandomBunny():
 	if loc != null:
 		var bunny = Bunny.instance()
 		bunny.global_position = loc
-		$Animals.add_child(bunny)
+		$Enemies.add_child(bunny)
 
 func spawnRandomDuck():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var duck = Duck.instance()
 		duck.global_position = loc
-		$Animals.add_child(duck)
+		$Enemies.add_child(duck)
 
 func spawnRandomBear():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var bear = Bear.instance()
-		$Animals.add_child(bear)
+		$Enemies.add_child(bear)
 		bear.global_position = loc
 		
 func spawnRandomBoar():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var boar = Boar.instance()
-		$Animals.add_child(boar)
+		$Enemies.add_child(boar)
 		boar.global_position = loc
 
 func spawnRandomDeer():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var deer = Deer.instance()
-		$Animals.add_child(deer)
+		$Enemies.add_child(deer)
 		deer.global_position = loc
 
 func play_watering_can_effect(loc):

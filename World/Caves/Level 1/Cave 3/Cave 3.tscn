@@ -9,7 +9,7 @@
 [ext_resource path="res://Assets/tilesets/CL_Buildings.png" type="Texture" id=7]
 [ext_resource path="res://Assets/tilesets/cave fence.png" type="Texture" id=8]
 
-[sub_resource type="NavigationPolygon" id=609]
+[sub_resource type="NavigationPolygon" id=692]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
@@ -23,7 +23,7 @@ outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
-0/navigation = SubResource( 609 )
+0/navigation = SubResource( 692 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 0/shape_one_way = false
@@ -1414,7 +1414,7 @@ format = 1
 
 [node name="ForageObjects" type="YSort" parent="."]
 
-[node name="OreObjects" type="YSort" parent="."]
+[node name="NatureObjects" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
 wait_time = 10.0

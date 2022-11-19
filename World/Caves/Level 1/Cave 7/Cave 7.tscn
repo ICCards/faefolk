@@ -1620,7 +1620,7 @@ format = 1
 
 [node name="ForageObjects" type="YSort" parent="."]
 
-[node name="OreObjects" type="YSort" parent="."]
+[node name="NatureObjects" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
 wait_time = 10.0

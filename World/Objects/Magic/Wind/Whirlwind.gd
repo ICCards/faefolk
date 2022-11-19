@@ -1,8 +1,11 @@
 extends Node2D
 
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+var is_attached_to_wind_boss: bool = false
 
 func _ready():
+	if is_attached_to_wind_boss:
+		$Hitbox.set_collision_mask(128)
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 16)
 	sound_effects.play()
 	$Hitbox.tool_name = "whirlwind spell"

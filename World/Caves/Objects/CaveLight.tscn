@@ -12,3 +12,4 @@ texture = ExtResource( 1 )
 color = Color( 0.988235, 1, 0.796078, 1 )
 energy = 1.1
 mode = 2
+shadow_enabled = true

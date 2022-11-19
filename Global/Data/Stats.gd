@@ -33,7 +33,7 @@ const BRONZE_SWORD_DAMAGE = 40
 const IRON_SWORD_DAMAGE = 50
 const GOLD_SWORD_DAMAGE = 60
 
-const ARROW_DAMAGE = 50
+const ARROW_DAMAGE = 25
 
 const DESTRUCTION_POTION_I = 10
 const DESTRUCTION_POTION_II = 25
@@ -65,6 +65,7 @@ const BOAR_HEALTH = 140
 const DEER_HEALTH = 150
 const SLIME_HEALTH = 100
 const BAT_HEALTH = 100
+const WIND_BOSS = 1500
 
 
 func return_tool_damage(tool_name):

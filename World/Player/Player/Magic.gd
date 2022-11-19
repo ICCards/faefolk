@@ -339,11 +339,15 @@ func play_earthquake():
 # Lightning #
 
 func play_flash_step():
+	var mouse_pos = get_global_mouse_position()
+	if Server.world.name.substr(0,4) == "Cave":
+		if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(mouse_pos)) != -1:
+			return
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/teleport.wav")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	sound_effects.play()
 	yield(get_tree().create_timer(0.2), "timeout")
-	get_parent().position = get_global_mouse_position()
+	get_parent().position = mouse_pos
 	composite_sprites.material.set_shader_param("flash_modifier", 0.7)
 	yield(get_tree().create_timer(0.2), "timeout")
 	composite_sprites.material.set_shader_param("flash_modifier", 0.0)

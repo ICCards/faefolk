@@ -1636,7 +1636,7 @@ tile_data = PoolIntArray( 393229, 0, 5, 393230, 0, 6, 393231, 0, 1, 393232, 1, 0
 
 [node name="ForageObjects" type="YSort" parent="."]
 
-[node name="OreObjects" type="YSort" parent="."]
+[node name="NatureObjects" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
 wait_time = 10.0

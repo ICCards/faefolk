@@ -5,7 +5,7 @@ onready var spider_sprite: AnimatedSprite = $Spider
 onready var _idle_timer: Timer = $Timers/IdleTimer
 onready var _chase_timer: Timer = $Timers/ChaseTimer
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-#onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var direction: String = "down"
@@ -97,6 +97,7 @@ func _physics_process(delta):
 			_velocity = move_and_slide(_velocity)
 			return
 		if tornado_node:
+			orbit_radius += 1.0
 			if is_instance_valid(tornado_node):
 				d += delta
 				position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
@@ -169,6 +170,9 @@ func hit(tool_name):
 		start_stunned_state()
 	if state == IDLE or state == WALK:
 		start_chase_state()
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
@@ -177,19 +181,12 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
-	$PoisonParticles/P1.emitting = false
-	$PoisonParticles/P2.emitting = false
-	$PoisonParticles/P3.emitting = false
 	destroyed = true
-	#boar_sprite.texture = load("res://Assets/Images/Animals/Boar/death/" +  direction + "/body.png")
-	#animation_player.play("death")
-	#yield(animation_player, "animation_finished")
+	animation_player.play("destroy")
+	yield(animation_player, "animation_finished")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
-	sound_effects.play()
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 		$HurtBox/AnimationPlayer.play("hit")
 		diminish_HOT(area.tool_name)
@@ -197,6 +194,7 @@ func _on_HurtBox_area_entered(area):
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
 	if area.knockback_vector != Vector2.ZERO and not attacking:
+		$KnockbackParticles.emitting = true
 		set_change_direction_delay()
 		knocking_back = true
 		$Timers/KnockbackTimer.start()
@@ -205,7 +203,10 @@ func _on_HurtBox_area_entered(area):
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
 	if area.tool_name == "lingering tornado":
+		orbit_radius = 0
 		tornado_node = area
+	yield(get_tree().create_timer(0.25), "timeout")
+	$KnockbackParticles.emitting = false
 
 func diminish_HOT(type):
 	start_poison_state()
@@ -297,11 +298,10 @@ func _on_PoisonTimer_timeout():
 
 func start_stunned_state():
 	if not destroyed:
+		spider_sprite.playing = false
 		rng.randomize()
 		$Electricity.frame = rng.randi_range(1,13)
 		$Electricity.show()
-		$BoarBite/CollisionShape2D.set_deferred("disabled", true)
-#		animation_player.stop(false)
 		$Timers/StunnedTimer.start()
 		stunned = true
 
@@ -309,7 +309,7 @@ func _on_StunnedTimer_timeout():
 	if not destroyed:
 		$Electricity.hide()
 		stunned = false
-		#animation_player.play()
+		spider_sprite.playing = true
 
 
 func play_groan_sound_effect():

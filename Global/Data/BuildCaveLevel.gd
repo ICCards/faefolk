@@ -25,9 +25,15 @@ var count = 0
 var nav_node
 var valid_tiles
 
+var is_player_going_down: bool = true
+
 
 func spawn_player():
-	var spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+	var spawn_loc
+	if is_player_going_down:
+		spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+	else:
+		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
 	var player = Player.instance()
 	player.name = str(get_tree().get_network_unique_id())
 	player.character = _character.new()
@@ -38,15 +44,16 @@ func spawn_player():
 	Server.player_node = player
 
 func build():
+	print(Server.world.name)
 	valid_tiles = Server.world.get_node("Tiles/ValidTiles")
 	spawn_player()
 	set_valid_tiles()
 	set_chest()
 	set_light_nodes()
-	set_ore()
-	set_tall_grass_nodes()
-	set_mushroom_forage()
-	set_down_cave_ladder()
+	generate_ore()
+	generate_tall_grass()
+	generate_mushroom_forage()
+	set_cave_ladders()
 	spawn_enemies_randomly()
 	set_nav()
 
@@ -160,76 +167,94 @@ func set_nav():
 			if valid_tiles.get_cellv(Vector2(x,y)) != -1:
 				Server.world.get_node("Navigation2D/NavTiles").set_cellv(Vector2(x,y), 0)
 
-func set_down_cave_ladder():
+func set_cave_ladders():
 	if Server.world.get_node("Tiles/DownLadder").get_used_cells().size() != 0:
 		var caveLadder = CaveLadder.instance()
+		caveLadder.is_down_ladder = true
 		Server.world.add_child(caveLadder)
 		caveLadder.position = (Server.world.get_node("Tiles/DownLadder").get_used_cells()[0] * 32) + Vector2(32,16)
+	if Server.world.get_node("Tiles/UpLadder").get_used_cells().size() != 0:
+		var caveLadder = CaveLadder.instance()
+		caveLadder.is_down_ladder = false
+		Server.world.add_child(caveLadder)
+		caveLadder.position = (Server.world.get_node("Tiles/UpLadder").get_used_cells()[0] * 32) + Vector2(16,0)
 
-func set_mushroom_forage():
+func generate_mushroom_forage():
 	for i in range(NUM_MUSHROOMS):
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
 		var loc = locs[0]
 		if Tiles.validate_tiles(loc, Vector2(1,1)):
+			var id = rng.randi_range(0,100000)
 			Tiles.add_navigation_tiles(loc)
 			var mushroom = Mushroom.instance()
+			mushroom.name = str(id)
 			mushroom.location = loc
 			mushroom.global_position = Tiles.valid_tiles.map_to_world(loc)
 			Server.world.get_node("ForageObjects").add_child(mushroom)
+			Server.world.cave_data["mushroom"][id] = {"l": loc}
 	
-func set_tall_grass_nodes():
+func generate_tall_grass():
 	for i in range(4):
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
 		var start_loc = locs[0]
-		create_grass_bunch(start_loc, i+1)
+		generate_grass_bunch(start_loc, i+1)
 		
-func create_grass_bunch(loc, variety):
+func generate_grass_bunch(loc, variety):
 	rng.randomize()
 	var randomNum = rng.randi_range(20, MAX_TALL_GRASS_SIZE)
 	for _i in range(randomNum):
 		randomAdjacentTiles.shuffle()
 		loc += randomAdjacentTiles[0]
 		if Tiles.valid_tiles.get_cellv(loc) == 0:
+			var id = rng.randi_range(0,100000)
 			Tiles.add_navigation_tiles(loc)
 			var caveGrass = CaveGrass.instance()
+			caveGrass.name = str(id)
 			caveGrass.variety = variety
 			caveGrass.loc = loc
 			Server.world.get_node("GrassObjects").call_deferred("add_child", caveGrass)
 			caveGrass.position = loc*32 + Vector2(16,32)
+			Server.world.cave_data["tall_grass"][id] = {"l": loc, "v": variety}
 		else:
 			loc -= randomAdjacentTiles[0]
 	
 	
-func set_ore():
+func generate_ore():
 	for i in range(NUM_SMALL_ORE):
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
 		var loc = locs[0]
 		if Tiles.validate_tiles(loc, Vector2(1,1)):
+			var id = rng.randi_range(0,100000)
 			Tiles.remove_valid_tiles(loc)
 			oreTypes.shuffle()
 			var object = SmallOre.instance()
+			object.name = str(id)
 			object.health = Stats.SMALL_ORE_HEALTH
 			object.variety = oreTypes.front()
 			object.location = loc
 			object.position = loc*32 + Vector2(16, 24)
-			Server.world.get_node("OreObjects").call_deferred("add_child",object,true)
+			Server.world.get_node("NatureObjects").call_deferred("add_child",object,true)
+			Server.world.cave_data["ore"][id] = {"l": loc, "v": oreTypes.front()}
 	while count < NUM_LARGE_ORE:
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
 		var loc = locs[0]
 		if Tiles.validate_tiles(loc+Vector2(-1,0), Vector2(2,2)):
+			var id = rng.randi_range(0,100000)
 			count += 1
 			Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
 			oreTypes.shuffle()
 			var object = LargeOre.instance()
+			object.name = str(id)
 			object.health = Stats.LARGE_ORE_HEALTH
 			object.variety = oreTypes.front()
 			object.location = loc
 			object.position = loc*32
-			Server.world.get_node("OreObjects").call_deferred("add_child",object,true)
+			Server.world.get_node("NatureObjects").call_deferred("add_child",object,true)
+			Server.world.cave_data["large_ore"][id] = {"l": loc, "v": oreTypes.front()}
 
 func set_light_nodes():
 	for loc in Server.world.get_node("Tiles/Lights").get_used_cells():

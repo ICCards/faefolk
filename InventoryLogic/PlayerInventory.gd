@@ -22,6 +22,12 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
+	0: ["lightning staff", 1, null],
+	1: ["dark magic staff", 1, null],
+	2: ["fire staff", 1, null],
+	3: ["wind staff", 1, null],
+	4: ["ice staff", 1, null],
+	5: ["earth staff", 1, null],
 #	0: ["wood", 999, null],
 #	1: ["stone", 999, null],
 #	9: ["rope", 12, null],
@@ -41,11 +47,9 @@ var hotbar = {
 #	0: ["bow", 1, null],
 #	1: ["arrow", 50, null],
 ##	0: ["dstaff", 1, null],
-#	#3: ["earth staff", 1, null],
-##	4: ["ice staff", 1, null],
-#	6: ["fire staff", 1, null],
-#	#7: ["wind staff", 1, null],
 	1: ["stone sword", 1, null],
+	2: ["bow",1, null],
+	3: ["arrow", 100, null],
 #	#1: ["poison potion I", 100, null],
 #	2: ["poison potion II", 10, null],
 #	#3: ["poison potion III", 100, null],
@@ -60,8 +64,8 @@ var hotbar = {
 var chests = {
 	"level 1, room 1" : {
 		1: ["bread", 12, null],
-		5: ["bow",1, null],
-		3: ["arrow", 10, null],
+		6: ["health potion I", 4, null],
+		9: ["destruction potion I", 4, null],
 	},
 	"level 1, room 2" : {
 		2: ["poison potion I", 4, null],
@@ -69,31 +73,34 @@ var chests = {
 		5: ["regeneration potion II",1, null],
 	},
 	"level 1, room 3" : {
-		2: ["health potion I", 6, null],
-		9: ["destruction potion I", 4, null],
+		1: ["cooked filet", 12, null],
+		2: ["health potion II", 6, null],
+		9: ["destruction potion II", 4, null],
 		6: ["arrow", 20, null],
 	},
 	"level 1, room 4" : {
-		9: ["destruction potion II", 4, null],
 		5: ["regeneration potion III",1, null],
 		3: ["speed potion II", 1, null],
 		8: ["poison potion II", 2, null],
 	},
 	"level 1, room 5" : {
+		8: ["shrimp", 17, null],
 		5: ["destruction potion III",1, null],
 		3: ["poison potion III", 1, null],
 		6: ["arrow", 20, null],
 	},
 	"level 1, room 6" : {
+		1: ["crab", 6, null],
 		5: ["destruction potion III",1, null],
 		3: ["poison potion III", 1, null],
 	},
 	"level 1, room 7" : {
+		1: ["cooked wing", 6, null],
 		5: ["destruction potion III",1, null],
 		3: ["poison potion III", 1, null],
-	},
-	
+	},    
 }
+
 var furnaces = {}
 var grain_mills = {}
 var grain_mills_dict = {}

@@ -163,7 +163,6 @@ func shoot():
 		arrow.is_on_fire = true
 	else:
 		arrow.is_on_fire = false
-	arrow.transform = $ArrowDirection.transform
 	arrow.position = $ArrowDirection/Position2D.global_position
 	arrow.velocity = get_global_mouse_position() - arrow.position
 	get_node("../../../").add_child(arrow)

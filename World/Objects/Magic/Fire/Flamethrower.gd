@@ -9,11 +9,15 @@ func _ready():
 	$Fire.emitting = true
 	$Smoke.emitting = true
 	$AnimationPlayer.play("play")
-	yield(get_tree().create_timer(4.0), "timeout")
+	$Flamethrower.play("start")
+	yield($Flamethrower, "animation_finished")
+	$Flamethrower.play("loop")
+	yield(get_tree().create_timer(3.0), "timeout")
+	$Flamethrower.play("start", true)
 	fade_out_sound()
 	$Fire.emitting = false
 	$Smoke.emitting = false
-	yield(get_tree().create_timer(4.0), "timeout")
+	yield($Flamethrower, "animation_finished")
 	queue_free()
 
 func fade_out_sound():

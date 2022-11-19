@@ -55,7 +55,7 @@ func _ready():
 	randomize()
 	rng.randomize()
 	hide()
-	orbit_radius = rand_range(20, 40)
+	orbit_radius = 0 #rand_range(20, 40)
 	slime_sprite.frame = rng.randi_range(0, 13)
 
 	
@@ -70,9 +70,10 @@ func move(velocity: Vector2) -> void:
 		_velocity = move_and_slide(velocity)
 
 func _physics_process(delta):
-	if destroyed or not visible:
+	if destroyed or not visible or stunned:
 		return
 	if tornado_node:
+		orbit_radius += 1.0
 		if is_instance_valid(tornado_node):
 			d += delta
 			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
@@ -105,8 +106,8 @@ func jump_forward():
 	jump_delay = true
 	$Timers/JumpDelay.start(rand_range(1.0, 2.5))
 	slime_sprite.play("jump")
-	if not cancel_jump:
-		yield(slime_sprite, "animation_finished")
+	yield(slime_sprite, "animation_finished")
+	if not cancel_jump and not destroyed:
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slime.wav")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
@@ -118,7 +119,8 @@ func jump_forward():
 	cancel_jump = false
 	jumping = false
 	start_jump = false
-	slime_sprite.play("idle")
+	if not destroyed:
+		slime_sprite.play("idle")
 
 
 func _on_JumpDelay_timeout():
@@ -155,6 +157,9 @@ func hit(tool_name):
 		start_frozen_state(3)
 	elif tool_name == "lightning spell debuff":
 		start_stunned_state()
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slimeHit.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
@@ -169,33 +174,35 @@ func destroy():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slimeHit.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
-	sound_effects.play()
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 		$HurtBox/AnimationPlayer.play("hit")
 		diminish_HOT(area.tool_name)
 		return
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	if area.knockback_vector != Vector2.ZERO:
-		knocking_back = true
-		$Timers/KnockbackTimer.start()
-		knockback = area.knockback_vector
-		velocity = knockback * 200
-		if start_jump:
-			slime_sprite.play("idle")
-			jumping = false
-			start_jump = false
-			cancel_jump = true
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
+	if area.knockback_vector != Vector2.ZERO:
+		if not destroyed:
+			$KnockbackParticles.emitting = true
+			knocking_back = true
+			$Timers/KnockbackTimer.start()
+			knockback = area.knockback_vector
+			velocity = knockback * 200
+			if start_jump:
+				slime_sprite.play("idle")
+				jumping = false
+				start_jump = false
+				cancel_jump = true
 	if area.tool_name == "lingering tornado":
+		orbit_radius = 0
 		tornado_node = area
 	if area.special_ability == "fire":
 		InstancedScenes.initiateExplosionParticles(position)
 		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position)
 		health -= Stats.FIRE_DEBUFF_DAMAGE
+	yield(get_tree().create_timer(0.25), "timeout")
+	$KnockbackParticles.emitting = false
 
 func diminish_HOT(type):
 	start_poison_state()
@@ -258,16 +265,17 @@ func _on_PoisonTimer_timeout():
 
 func start_stunned_state():
 	if not destroyed:
+		slime_sprite.playing = false
 		rng.randomize()
 		$Electricity.frame = rng.randi_range(1,13)
 		$Electricity.show()
-		$BoarBite/CollisionShape2D.set_deferred("disabled", true)
 		#animation_player.stop(false)
 		$Timers/StunnedTimer.start()
 		stunned = true
 
 func _on_StunnedTimer_timeout():
 	if not destroyed:
+		slime_sprite.playing = true
 		$Electricity.hide()
 		stunned = false
 		#animation_player.play()
