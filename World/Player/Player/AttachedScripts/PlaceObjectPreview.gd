@@ -1,15 +1,22 @@
 extends YSort
 
 var directions = ["down", "left", "up", "right"]
+var couch_varieties = [1, 2, 3, 4]
+var table_varieties = [1, 2, 3, 4]
+var chair_varieties = [1, 2, 3, 4, 5, 6]
+var rug_varieties = [1, 2, 3, 4, 5, 6, 7, 8]
+var bed_varieties = [1, 2, 3, 4, 5, 6, 7, 8]
 var vertical: bool = true
 var direction_index: int = 0
-var path_index: int = 1
+var varieties_index: int = 0
 var rotation_delay: bool = false
+var variety_delay: bool = false
 var mousePos := Vector2.ZERO 
 
 var item_name
 var item_category
 var state
+var variety
 
 enum {
 	TENT, 
@@ -19,18 +26,26 @@ enum {
 	SEED,
 	WALL,
 	DOOR,
-	FOUNDATION
+	FOUNDATION,
+	ROTATABLE,
+	CUSTOMIZABLE,
+	CUSTOMIZABLE_ROTATABLE
 }
 
 func _ready():
 	initialize()
 
-func _process(delta):
+func destroy():
+	name = "removing"
+	hide()
+	set_physics_process(false)
+	yield(get_tree().create_timer(0.25), "timeout")
+	queue_free()
+
+func _physics_process(delta):
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
 	match state:
-		TENT:
-			place_tent_state()
 		SLEEPING_BAG:
 			place_sleeping_bag_state()
 		ITEM:
@@ -42,20 +57,31 @@ func _process(delta):
 		WALL:
 			place_buildings_state()
 		DOOR:
-			place_double_door_state()
+			place_door_state()
 		FOUNDATION:
 			place_foundation_state()
-
+		ROTATABLE:
+			place_rotatable_state()
+		CUSTOMIZABLE_ROTATABLE:
+			place_customizable_rotatable_state()
+		CUSTOMIZABLE:
+			place_customizable_state()
 
 func initialize():
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
-	if item_name == "tent":
-		state = TENT
-	elif item_name == "sleeping bag":
+	if item_name == "sleeping bag":
 		state = SLEEPING_BAG
-	elif item_name == "door":
+	elif item_name == "furnace" or item_name == "tool cabinet" or item_name == "stone chest" or item_name == "wood chest" or \
+	item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3" or item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or\
+	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "dresser":
+		state = ROTATABLE
+	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR
+	elif item_name == "couch" or item_name == "chair" or item_name == "armchair" or item_name == "table":
+		state = CUSTOMIZABLE_ROTATABLE
+	elif item_name == "large rug" or item_name == "medium rug" or item_name == "small rug" or item_name == "bed" or item_name == "round table":
+		state = CUSTOMIZABLE
 	elif item_category == "Placable object":
 		state = ITEM
 	elif item_category == "Placable path":
@@ -74,12 +100,7 @@ func set_dimensions():
 	$ItemToPlace.hide()
 	$ScaledItemToPlace.hide()
 	match state:
-		TENT:
-			$RotateIcon.visible = true
-			$ItemToPlace.visible = true
-			$ItemToPlace.rect_scale = Vector2(1, 1)
 		SLEEPING_BAG:
-			$RotateIcon.visible = true
 			$ColorIndicator.tile_size = Vector2(2, 1)
 			$ScaledItemToPlace.visible = true
 			$ScaledItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
@@ -87,37 +108,135 @@ func set_dimensions():
 			$ScaledItemToPlace.rect_size = Vector2(128, 64)
 			$ScaledItemToPlace.rect_position = Vector2(0,0)
 		ITEM:
-			$ItemToPlace.visible = true
+			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
-			if item_name == "house":
-				$ColorIndicator.tile_size = Vector2(8, 4)
-				$ItemToPlace.rect_position = Vector2(-3, -301)
-				$ItemToPlace.rect_scale = Vector2(0.9, 0.9)
-			elif item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench #1" or item_name == "grain mill #1" or item_name == "stove #1" \
-					or item_name == "workbench #2" or item_name == "grain mill #2" or item_name == "stove #2" or \
-					item_name == "workbench #3" or item_name == "grain mill #3" or item_name == "stove #3":
-				$ColorIndicator.tile_size = Vector2(2, 1)
-			else:
-				$ColorIndicator.tile_size = Vector2(1, 1)
+			var dimensions = Constants.dimensions_dict[item_name]
+			$ColorIndicator.tile_size = dimensions
 		SEED:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
-			$ColorIndicator.tile_size =  Vector2(1, 1)
-			$ItemToPlace.rect_position = Vector2(0,0)
-			$ItemToPlace.rect_scale = Vector2(1, 1)
+			$ColorIndicator.tile_size =  Vector2(1,1)
 		WALL:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wall.png")
-			$ColorIndicator.tile_size =  Vector2(1, 1)
-			$ItemToPlace.rect_scale = Vector2(1, 1)
+			$ColorIndicator.tile_size =  Vector2(1,1)
 		DOOR:
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
 			$ItemToPlace.show()
-			$ItemToPlace.rect_scale = Vector2(1, 1)
 		FOUNDATION:
 			$ItemToPlace.show()
 			$ItemToPlace.texture = preload("res://Assets/Images/placable_object_preview/foundation.png")
-			$ItemToPlace.rect_scale = Vector2(1, 1)
-			$ColorIndicator.tile_size = Vector2(1, 1)
+			$ColorIndicator.tile_size = Vector2(1,1)
+		ROTATABLE:
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
+			$ItemToPlace.show()
+		CUSTOMIZABLE_ROTATABLE:
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeVariety").show()
+			$ItemToPlace.show()
+		CUSTOMIZABLE:
+			Server.player_node.get_node("Camera2D/UserInterface/ChangeVariety").show()
+			$ItemToPlace.show()
+
+
+func place_customizable_state():
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var direction = directions[direction_index]
+	var dimensions = Constants.dimensions_dict[item_name]
+	if item_name == "large rug" or item_name == "medium rug" or item_name == "small rug":
+		variety = rug_varieties[varieties_index]
+		get_variety_index(rug_varieties.size())
+	elif item_name == "bed":
+		variety = bed_varieties[varieties_index]
+		get_variety_index(bed_varieties.size())
+	elif item_name == "round table":
+		variety = table_varieties[varieties_index]
+		get_variety_index(table_varieties.size())
+	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + str(variety) + ".png")
+	$ColorIndicator.tile_size = dimensions
+	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif not Tiles.validate_tiles(location, dimensions):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if Input.is_action_pressed("mouse_click"):
+			place_object(item_name+str(variety), null, location, "placable")
+
+func place_customizable_rotatable_state():
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var direction = directions[direction_index]
+	var dimensions = Constants.dimensions_dict[item_name]
+	if item_name == "couch" or item_name == "armchair":
+		variety = couch_varieties[varieties_index]
+		get_variety_index(couch_varieties.size())
+	elif item_name == "chair":
+		variety = chair_varieties[varieties_index]
+		get_variety_index(chair_varieties.size())
+	elif item_name == "table":
+		variety = table_varieties[varieties_index]
+		get_variety_index(table_varieties.size())
+	get_rotation_index()
+	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + str(variety) + "/"  + direction + ".png")
+	if (direction == "up" or direction == "down"):
+		$ColorIndicator.tile_size = dimensions
+	else:
+		$ColorIndicator.tile_size = Vector2(dimensions.y, dimensions.x)
+	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if Input.is_action_pressed("mouse_click"):
+			place_object(item_name+str(variety), directions[direction_index], location, "placable")
+
+
+func get_variety_index(num_varieties):
+	if varieties_index == null:
+		varieties_index = 0
+	if Input.is_action_pressed("change_object_type") and not variety_delay:
+		variety_delay = true
+		varieties_index += 1
+		if varieties_index == num_varieties:
+			varieties_index = 0
+		yield(get_tree().create_timer(0.25), "timeout")
+		variety_delay = false
+
+
+func place_rotatable_state():
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var direction = directions[direction_index]
+	var dimensions = Constants.dimensions_dict[item_name]
+	get_rotation_index()
+	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + direction + ".png")
+	if (direction == "up" or direction == "down"):
+		$ColorIndicator.tile_size = dimensions
+	else:
+		$ColorIndicator.tile_size = Vector2(dimensions.y, dimensions.x)
+	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if Input.is_action_pressed("mouse_click"):
+			place_object(item_name, directions[direction_index], location, "placable")
 
 #func sendAction(action,data): 
 #	match action:
@@ -130,61 +249,30 @@ func set_dimensions():
 
 func place_foundation_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.foundation_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > 120:
+	if Tiles.foundation_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif Tiles.valid_tiles.get_cellv(location) != 0 and Tiles.wall_tiles.get_cellv(location) == -1:
+	elif not Tiles.validate_tiles(location, Vector2(1,1)):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, location, "placable")
+			place_object(item_name, null, location, "placable")
 
 
 func place_door_state():
-	$RotateIcon.visible = true
-	$ColorIndicator.visible = true
-	$ColorIndicator.scale = Vector2(1, 1)
-	$ItemToPlace.visible = true
-	$ItemToPlace.rect_scale = Vector2(1, 1)
-	get_rotation_index()
-	var direction = directions[direction_index]
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if direction == "up" or direction == "down":
-		$ItemToPlace.rect_position = Vector2(0,-32)
-		$ItemToPlace.texture = load("res://Assets/Images/Animations/door/door/front/wood/1.png")
-	else:
-		$ItemToPlace.rect_position = Vector2(0,0)
-		$ItemToPlace.texture = load("res://Assets/Images/Animations/door/door/side/stone/1.png")
-	if (direction == "up" or direction == "down")  and not Tiles.validate_tiles(location, Vector2(1,1)):
-		$ColorIndicator.indicator_color = "Red"
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(1,1)):
-		$ColorIndicator.indicator_color = "Red"
-	else:
-		$ColorIndicator.indicator_color = "Green"
-		if Input.is_action_pressed("mouse_click"):
-			if direction == "up" or direction == "down":
-				place_object("door", location, "placable")
-			else:
-				place_object("door side", location, "placable")
-
-
-func place_double_door_state():
-	$RotateIcon.visible = true
-	$ColorIndicator.visible = true
-	$ItemToPlace.visible = true
 	$ItemToPlace.rect_scale = Vector2(1, 1)
 	get_rotation_index()
 	var direction = directions[direction_index]
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	if direction == "up" or direction == "down":
 		$ColorIndicator.tile_size = Vector2(2, 1)
-		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/door.png")
+		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 	else:
 		$ColorIndicator.tile_size = Vector2(1, 2)
-		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/door side.png")
+		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + " side.png")
 	if (direction == "up" or direction == "down")  and not Tiles.validate_tiles(location, Vector2(2,1)):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
@@ -199,23 +287,23 @@ func place_double_door_state():
 		$ColorIndicator.set_indicator_color()
 		if Input.is_action_pressed("mouse_click"):
 			if direction == "up" or direction == "down":
-				place_object("door front", location, "placable")
+				place_object(item_name, null, location, "placable")
 			else:
-				place_object("door side", location, "placable")
+				place_object(item_name + " side", null, location, "placable")
 
 
 func place_buildings_state():
 	$ColorIndicator.visible = true
 	$ColorIndicator.tile_size = Vector2(1, 1)
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > 120:
+	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, location, "placable")
+			place_object(item_name, null, location, "placable")
 
 func place_sleeping_bag_state():
 	get_rotation_index()
@@ -254,7 +342,7 @@ func place_sleeping_bag_state():
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if Input.is_action_pressed("mouse_click"):
-			place_object("sleeping bag " + direction, location, "placable")
+			place_object("sleeping bag", direction, location, "placable")
 
 
 func place_tent_state():
@@ -281,7 +369,7 @@ func place_tent_state():
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if Input.is_action_pressed("mouse_click"):
-			place_object("tent " + direction, location, "placable")
+			place_object("tent", direction, location, "placable")
 	
 func get_rotation_index():
 	if direction_index == null:
@@ -297,66 +385,29 @@ func get_rotation_index():
 
 func place_item_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif (item_name == "wood chest" or item_name == "stone chest" or item_name == "workbench #1" or item_name == "grain mill #1" or item_name == "stove #1" \
-	or item_name == "workbench #2" or item_name == "grain mill #2" or item_name == "stove #2" or \
-	item_name == "workbench #3" or item_name == "grain mill #3" or item_name == "stove #3") and Tiles.valid_tiles.get_cellv(location + Vector2(1,0)) != 0:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif item_name == "house" and not Tiles.validate_tiles(location, Vector2(8,4)):
+	var dimensions = Constants.dimensions_dict[item_name]
+	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, location, "placable")
-
-
-#func place_path_state():
-#	get_path_rotation(item_name)
-#	var location = Tiles.valid_tiles.world_to_map(mousePos)
-#	if Tiles.path_tiles.get_cellv(location) != -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
-#		$ColorIndicator.indicator_color = "Red"
-#		$ColorIndicator.set_indicator_color()
-#	else:
-#		$ColorIndicator.indicator_color = "Green"
-#		$ColorIndicator.set_indicator_color()
-#		if Input.is_action_pressed("mouse_click"):
-#			place_object(item_name, location, "placable")
-
-
-#func get_path_rotation(path_name):
-#	if path_name == "wood path" and path_index > 2:
-#		path_index = 1
-#	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + path_name + str(path_index) + ".png")
-#	if path_name == "wood path":
-#		if Input.is_action_pressed("rotate"):
-#			path_index += 1
-#			if path_index == 3:
-#				path_index = 1
-#	elif path_name == "stone path":
-#		if Input.is_action_pressed("rotate"):
-#			path_index += 1
-#			if path_index == 5:
-#				path_index = 1
-
+			place_object(item_name, null, location, "placable")
 
 func place_seed_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > 120:
+	if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:	
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, location, "seed")	
+			place_object(item_name, null, location, "seed")	
 
 
-func place_object(item_name, location, type):
+func place_object(item_name, direction, location, type):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		if item_name != "wall" and item_name != "foundation":
 			PlayerInventory.remove_single_object_from_hotbar()
@@ -367,11 +418,11 @@ func place_object(item_name, location, type):
 			$SoundEffects.stream = Sounds.place_object
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			if item_name == "wall" or item_name == "door front" or item_name == "door side" or item_name == "foundation":
-				PlayerInventory.craft_item(item_name)
+			if item_name == "wall" or item_name == "foundation":
+				PlayerInventory.remove_material("wood", 1)
 				PlaceObject.place_building_object_in_world(id, item_name, location)
 			else:
-				PlaceObject.place_object_in_world(id, item_name, location)
+				PlaceObject.place_object_in_world(id, item_name, direction, location)
 		elif type == "seed":
 	#		var tile_id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
 	#		var data = {"id": id, "name": item_name, "l": location, "item": type, "d": JsonData.crop_data[item_name]["DaysToGrow"], "g": tile_id}

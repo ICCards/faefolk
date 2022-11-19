@@ -1,0 +1,154 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Images/tree_sets/desert/1a.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://World/Objects/Nature/Trees/DesertTree.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=12]
+radius = 10.3333
+height = 7.3334
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 14.1111, 18.6754 )
+
+[sub_resource type="Animation" id=15]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 23 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "tree fall left"
+length = 1.2
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -0.0833435, -0.25, 0, 0, -0.109882, -0.0833435, -0.25, 0, 0.297548, -2.15202, -90, -0.2, 47.7376, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.00245179, 1.2 )
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "tree fall right"
+length = 1.2
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 90, -0.1, -64.5, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.2 )
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "tree hit left"
+length = 0.6
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.251919, 0.400107, 0.551999, 0.600984 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -4.0, 3.0, -2.0, 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "tree hit right"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.251919, 0.400107, 0.551999, 0.600984 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 4.0, -3.0, 2.0, -1.0, 0.0 ]
+}
+
+[node name="DesertTreeObject" type="Node2D"]
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 3, 23 )
+frames = ExtResource( 1 )
+frame = 2
+playing = true
+offset = Vector2( 0, -48.3333 )
+
+[node name="MovementCollisionBox" type="StaticBody2D" parent="."]
+position = Vector2( 3.33333, -25.5556 )
+collision_layer = 33
+
+[node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
+position = Vector2( -3.33333, 27.5556 )
+rotation = -1.5708
+shape = SubResource( 12 )
+
+[node name="TreeHurtbox" type="Area2D" parent="."]
+position = Vector2( 0, -31 )
+collision_layer = 262152
+collision_mask = 0
+
+[node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]
+position = Vector2( 0, 32 )
+rotation = -1.5708
+shape = SubResource( 13 )
+
+[node name="TreeTopArea" type="Area2D" parent="."]
+position = Vector2( 0, -11 )
+collision_layer = 4096
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TreeTopArea"]
+visible = false
+polygon = PoolVector2Array( -5, -1, 8, -1, 6, -20, 23, -22, 27, -31, 18, -43, 38, -49, 24, -66, 4, -61, -16, -68, -32, -59, -16, -48, -24, -33, -17, -25, -10, -30, -5, -21 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 15 )
+"anims/tree fall left" = SubResource( 16 )
+"anims/tree fall right" = SubResource( 14 )
+"anims/tree hit left" = SubResource( 17 )
+"anims/tree hit right" = SubResource( 18 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+estimate_radius = false
+radius = 40.0
+
+[connection signal="area_entered" from="TreeHurtbox" to="." method="_on_TreeHurtbox_area_entered"]
+[connection signal="area_entered" from="TreeTopArea" to="." method="_on_TreeTopArea_area_entered"]
+[connection signal="area_exited" from="TreeTopArea" to="." method="_on_TreeTopArea_area_exited"]

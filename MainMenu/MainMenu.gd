@@ -15,8 +15,8 @@ func _ready():
 
 
 func spawn_player_in_menu():
-	var value = Server.player
-	if not value.empty():
+#	var value = Server.player
+#	if not value.empty():
 		$MainMenuButtons/LoadingIndicator.visible = false
 		$MainMenuButtons/PlayShopQuit.visible = true
 		playerMenuState = PlayerMenuState.instance()
@@ -25,9 +25,9 @@ func spawn_player_in_menu():
 		playerMenuState.character.LoadPlayerCharacter("human_male")
 		add_child(playerMenuState)
 		playerMenuState.global_position = Vector2(600, 472 )
-	else:
-		yield(get_tree().create_timer(0.25), "timeout")
-		spawn_player_in_menu()
+#	else:
+#		yield(get_tree().create_timer(0.25), "timeout")
+#		spawn_player_in_menu()
 
 
 func change_title_volume():

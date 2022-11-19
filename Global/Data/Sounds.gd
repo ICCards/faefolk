@@ -8,29 +8,34 @@ var footstep_volume = 50
 signal volume_change
 signal footsteps_sound_change
 
-func _ready():
-	set_music_volume(music_volume)
-	set_sound_volume(sound_volume)
-	set_ambient_volume(ambient_volume)
-	set_footstep_volume(footstep_volume)
-
+##func _ready():
+##	set_music_volume(music_volume)
+##	set_sound_volume(sound_volume)
+##	set_ambient_volume(ambient_volume)
+##	set_footstep_volume(footstep_volume)
+#
 func set_music_volume(val):
-	music_volume = val
-	emit_signal("volume_change")
+	pass
+#	music_volume = val
+#	emit_signal("volume_change")
 
 func set_sound_volume(val):
-	sound_volume = val
-	emit_signal("volume_change")
-	
+	pass
+#	sound_volume = val
+#	emit_signal("volume_change")
+
 func set_ambient_volume(val):
-	ambient_volume = val
-	emit_signal("volume_change")
+	pass
+#	ambient_volume = val
+#	emit_signal("volume_change")
 
 func set_footstep_volume(val):
-	footstep_volume = val
-	emit_signal("volume_change")
+	pass
+#	footstep_volume = val
+#	emit_signal("volume_change")
 	
 func return_adjusted_sound_db(category, init_sound):
+	return init_sound
 	if category == "music":
 		var progress = music_volume / 100
 		if progress == 0.5:
@@ -71,7 +76,7 @@ func return_adjusted_sound_db(category, init_sound):
 
 ### Handles switching footsteps sound
 
-var current_footsteps_sound = wood_footsteps
+var current_footsteps_sound = stone_footsteps
 
 
 
@@ -145,3 +150,34 @@ var background_music = [
 	preload("res://Assets/Sound/music/125_full_make-it-easy_0159.mp3"),
 	preload("res://Assets/Sound/music/136_full_edutainment_0162.mp3")
 ]
+
+var demos = [
+	preload("res://Assets/Sound/Demos/8 bit adventure.mp3"),
+	preload("res://Assets/Sound/Demos/8 bit creature.mp3"),
+	preload("res://Assets/Sound/Demos/a productive day.mp3"),
+	preload("res://Assets/Sound/Demos/arcade.mp3"),
+	preload("res://Assets/Sound/Demos/chance time.mp3"),
+	preload("res://Assets/Sound/Demos/clock tower.mp3"),
+	preload("res://Assets/Sound/Demos/dance of the baobabs.mp3"),
+	preload("res://Assets/Sound/Demos/happy donk.mp3"),
+	preload("res://Assets/Sound/Demos/pixel squirrel.mp3"),
+	preload("res://Assets/Sound/Demos/pixel wave.mp3")
+]
+
+signal song_skipped
+signal song_finished
+var index = 0
+var demo_names = [
+	"8 bit adventure",
+	"8 bit creature",
+	"a productive day",
+	"arcade",
+	"chance time",
+	"clock tower",
+	"dance of the baobabs",
+	"happy donk",
+	"pixel squirrel",
+	"pixel wave"
+]
+
+

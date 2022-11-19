@@ -1,0 +1,221 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
+[ext_resource path="res://World/Objects/Magic/Fire/Flamethrower.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Images/Magic/fire/FlameThrower.png" type="Texture" id=4]
+
+[sub_resource type="Curve" id=31]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 137.518 ), 0.0, 317.742, 0, 0, Vector2( 0.994859, 43.8243 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=32]
+max_value = 4.0
+_data = [ Vector2( 0, 2.18933 ), 0.0, 3.04366, 0, 0, Vector2( 1, 1.73888 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=29]
+offsets = PoolRealArray( 0.000555864, 0.171765, 0.454118, 0.762353, 1 )
+colors = PoolColorArray( 1, 0.992157, 0.713726, 1, 1, 0.737227, 0, 1, 0.851586, 0.504755, 0.0706631, 1, 0.994795, 0.323645, 0.204007, 1, 1, 0, 0, 1 )
+
+[sub_resource type="Curve" id=33]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 200 ), 0.0, 551.546, 0, 0, Vector2( 0.142077, -108.005 ), 0.0, 0.0, 0, 0, Vector2( 1, -113.41 ), 75.1283, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=34]
+min_value = 1.0
+max_value = 5.0
+_data = [ Vector2( 0, 0.99 ), 0.0, 0.0, 0, 0, Vector2( 1, 5 ), 10.0041, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=35]
+offsets = PoolRealArray( 0, 0.994737, 1 )
+colors = PoolColorArray( 0.509804, 0.509804, 0.509804, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=28]
+resource_name = "play"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitbox/CollisionPolygon2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true ]
+}
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 4 )
+region = Rect2( 512, 96, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 96, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 192, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 192, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 192, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 192, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 4 )
+region = Rect2( 512, 192, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 192, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 288, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 288, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 288, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 4 )
+region = Rect2( 512, 0, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 0, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 96, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 96, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 96, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 96, 128, 96 )
+
+[sub_resource type="SpriteFrames" id=57]
+animations = [ {
+"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
+"loop": true,
+"name": "loop",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ],
+"loop": true,
+"name": "start",
+"speed": 8.0
+} ]
+
+[node name="Flamethrower" type="Node2D"]
+rotation = 1.5708
+script = ExtResource( 2 )
+
+[node name="Fire" type="CPUParticles2D" parent="."]
+visible = false
+amount = 3000
+lifetime = 1.5
+lifetime_randomness = 0.1
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2( 0, -1 )
+spread = 20.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+linear_accel_random = 0.5
+linear_accel_curve = SubResource( 31 )
+radial_accel = 70.0
+radial_accel_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 0.7
+scale_amount_curve = SubResource( 32 )
+color_ramp = SubResource( 29 )
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.823529 )
+show_behind_parent = true
+amount = 450
+lifetime = 1.7
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2( 0, -1 )
+spread = 20.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+linear_accel = 100.0
+linear_accel_random = 0.5
+linear_accel_curve = SubResource( 33 )
+radial_accel = 70.0
+radial_accel_random = 0.5
+scale_amount = 3.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 34 )
+color_ramp = SubResource( 35 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 264192
+script = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PoolVector2Array( 0, 0, -131.001, -176, 128.999, -176 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/play = SubResource( 28 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Flamethrower" type="AnimatedSprite" parent="."]
+modulate = Color( 1.3, 1.3, 1.3, 0.86 )
+position = Vector2( -0.000465393, -128 )
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+frames = SubResource( 57 )
+animation = "loop"
+frame = 9
+playing = true

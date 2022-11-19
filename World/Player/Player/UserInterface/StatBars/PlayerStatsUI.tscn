@@ -1,65 +1,50 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerStatsUI.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/PlayerStatsUI/health bar.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/PlayerStatsUI/energy progress.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/PlayerStatsUI/mana progress.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/PlayerStatsUI/health progress.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/PlayerStatsUI/mana bar.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/PlayerStatsUI/energy bar.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/User interface/Player stats/health.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/User interface/Player stats/energy.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/User interface/Player stats/mana.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/User interface/Player stats/stats-bars-x2.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 3.5 )
 
 [node name="PlayerStatsUI" type="Control"]
+rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
 
 [node name="EnergyBg" type="TextureRect" parent="."]
 margin_right = 19.0
 margin_bottom = 74.0
 mouse_filter = 2
-texture = ExtResource( 7 )
-
-[node name="ManaBg" type="TextureRect" parent="."]
-margin_left = 19.0
-margin_right = 38.0
-margin_bottom = 74.0
-mouse_filter = 2
-texture = ExtResource( 6 )
-
-[node name="HealthBg" type="TextureRect" parent="."]
-margin_left = 38.0
-margin_right = 57.0
-margin_bottom = 74.0
-mouse_filter = 2
-texture = ExtResource( 2 )
+texture = ExtResource( 5 )
 
 [node name="HealthPgBar" type="TextureProgress" parent="."]
-margin_left = 43.0
-margin_top = 19.0
-margin_right = 52.0
-margin_bottom = 69.0
+margin_left = 46.0
+margin_top = 30.0
+margin_right = 58.0
+margin_bottom = 88.0
 mouse_filter = 2
 value = 90.0
-texture_progress = ExtResource( 5 )
+texture_progress = ExtResource( 2 )
 fill_mode = 3
 nine_patch_stretch = true
 
 [node name="EnergyPgBar" type="TextureProgress" parent="."]
-margin_left = 5.0
-margin_top = 19.0
-margin_right = 14.0
-margin_bottom = 69.0
+margin_left = 6.0
+margin_top = 30.0
+margin_right = 18.0
+margin_bottom = 88.0
 mouse_filter = 2
 value = 100.0
 texture_progress = ExtResource( 3 )
 fill_mode = 3
 
 [node name="ManaPgBar" type="TextureProgress" parent="."]
-margin_left = 24.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 69.0
+margin_left = 26.0
+margin_top = 30.0
+margin_right = 38.0
+margin_bottom = 88.0
 mouse_filter = 2
 value = 100.0
 texture_progress = ExtResource( 4 )

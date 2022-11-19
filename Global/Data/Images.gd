@@ -19,18 +19,6 @@ var KittyVariations = [
 ]
 
 
-func returnRandomSnake():
-	SnakeVariations.shuffle()
-	return SnakeVariations[0]
-
-# SNAKES #
-var SnakeVariations = [
-	preload("res://Assets/Images/Animals/Snake/brown.tres"),
-	preload("res://Assets/Images/Animals/Snake/brownBlack.tres"),
-	preload("res://Assets/Images/Animals/Snake/green.tres"),
-	preload("res://Assets/Images/Animals/Snake/greenYellow.tres")
-]
-
 # BUNNIES #
 var BunnyVariations = [
 	preload("res://Assets/Images/Animals/Bunny/brownBunny.tres"),
@@ -41,7 +29,8 @@ var BunnyVariations = [
 # DUCKS #
 var DuckVariations = [
 	preload("res://Assets/Images/Animals/Duck/duck1.tres"),
-	preload("res://Assets/Images/Animals/Duck/duck2.tres")
+	preload("res://Assets/Images/Animals/Duck/duck2.tres"),
+	preload("res://Assets/Images/Animals/Duck/duck3.tres")
 ]
 
 # BIRDS #
@@ -49,6 +38,10 @@ var BirdVariations = [
 	preload("res://Assets/Images/Animals/Bird/bird1.tres"),
 	preload("res://Assets/Images/Animals/Bird/bird2.tres")
 ]
+
+
+
+
 
 
 # IC GHOSTS #
@@ -408,237 +401,257 @@ func returnICGhostUnique(unique):
 
 # WEAPONS #
 func returnToolSprite(toolName, animation):
+	if toolName == "health potion I" or toolName == "health potion II" or toolName == "health potion III":
+		match animation:
+			"throw_down":
+				return health_potion_throw.down
+			"throw_up":
+				return health_potion_throw.up
+			"throw_left":
+				return health_potion_throw.left
+			"throw_right":
+				return health_potion_throw.right
 	match toolName:
+		"hammer":
+			match animation: 
+				"swing_down":
+					 return hammer.down
+				"swing_up":
+					 return hammer.up
+				"swing_left":
+					 return hammer.left
+				"swing_right":
+					 return hammer.right
 		"wood pickaxe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return wood_pickaxe.down
 				"swing_up":
-					 return pickaxe.up
+					 return wood_pickaxe.up
 				"swing_left":
-					 return pickaxe.left
+					 return wood_pickaxe.left
 				"swing_right":
-					 return pickaxe.right
+					 return wood_pickaxe.right
 		"stone pickaxe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return stone_pickaxe.down
 				"swing_up":
-					 return pickaxe.up
+					 return stone_pickaxe.up
 				"swing_left":
-					 return pickaxe.left
+					 return stone_pickaxe.left
 				"swing_right":
-					 return pickaxe.right
+					 return stone_pickaxe.right
 		"bronze pickaxe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return bronze_pickaxe.down
 				"swing_up":
-					 return pickaxe.up
+					 return bronze_pickaxe.up
 				"swing_left":
-					 return pickaxe.left
+					 return bronze_pickaxe.left
 				"swing_right":
-					 return pickaxe.right
+					 return bronze_pickaxe.right
 		"iron pickaxe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return iron_pickaxe.down
 				"swing_up":
-					 return pickaxe.up
+					 return iron_pickaxe.up
 				"swing_left":
-					 return pickaxe.left
+					 return iron_pickaxe.left
 				"swing_right":
-					 return pickaxe.right
+					 return iron_pickaxe.right
 		"gold pickaxe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return gold_pickaxe.down
 				"swing_up":
-					 return pickaxe.up
+					 return gold_pickaxe.up
 				"swing_left":
-					 return pickaxe.left
+					 return gold_pickaxe.left
 				"swing_right":
-					 return pickaxe.right
+					 return gold_pickaxe.right
 		"wood hoe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return wood_hoe.down
 				"swing_up":
-					 return pickaxe.up
+					 return wood_hoe.up
 				"swing_left":
-					 return pickaxe.left
+					 return wood_hoe.left
 				"swing_right":
-					 return pickaxe.right
+					 return wood_hoe.right
 		"stone hoe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return stone_hoe.down
 				"swing_up":
-					 return pickaxe.up
+					 return stone_hoe.up
 				"swing_left":
-					 return pickaxe.left
+					 return stone_hoe.left
 				"swing_right":
-					 return pickaxe.right
+					 return stone_hoe.right
 		"bronze hoe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return bronze_hoe.down
 				"swing_up":
-					 return pickaxe.up
+					 return bronze_hoe.up
 				"swing_left":
-					 return pickaxe.left
+					 return bronze_hoe.left
 				"swing_right":
-					 return pickaxe.right
+					 return bronze_hoe.right
 		"iron hoe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return iron_hoe.down
 				"swing_up":
-					 return pickaxe.up
+					 return iron_hoe.up
 				"swing_left":
-					 return pickaxe.left
+					 return iron_hoe.left
 				"swing_right":
-					 return pickaxe.right
+					 return iron_hoe.right
 		"gold hoe":
 			match animation: 
 				"swing_down":
-					 return pickaxe.down
+					 return gold_hoe.down
 				"swing_up":
-					 return pickaxe.up
+					 return gold_hoe.up
 				"swing_left":
-					 return pickaxe.left
+					 return gold_hoe.left
 				"swing_right":
-					 return pickaxe.right
+					 return gold_hoe.right
 		"wood axe":
 			match animation: 
 				"swing_down":
-					 return axe.down
+					 return wood_axe.down
 				"swing_up":
-					 return axe.up
+					 return wood_axe.up
 				"swing_left":
-					 return axe.left
+					 return wood_axe.left
 				"swing_right":
-					return axe.right
+					return wood_axe.right
 		"stone axe":
 			match animation: 
 				"swing_down":
-					 return axe.down
+					 return stone_axe.down
 				"swing_up":
-					 return axe.up
+					 return stone_axe.up
 				"swing_left":
-					 return axe.left
+					 return stone_axe.left
 				"swing_right":
-					return axe.right
+					return stone_axe.right
 		"iron axe":
 			match animation: 
 				"swing_down":
-					 return axe.down
+					 return iron_axe.down
 				"swing_up":
-					 return axe.up
+					 return iron_axe.up
 				"swing_left":
-					 return axe.left
+					 return iron_axe.left
 				"swing_right":
-					return axe.right
+					return iron_axe.right
 		"bronze axe":
 			match animation: 
 				"swing_down":
-					 return axe.down
+					 return bronze_axe.down
 				"swing_up":
-					 return axe.up
+					 return bronze_axe.up
 				"swing_left":
-					 return axe.left
+					 return bronze_axe.left
 				"swing_right":
-					return axe.right
+					return bronze_axe.right
 		"gold axe":
 			match animation: 
 				"swing_down":
-					 return axe.down
+					 return gold_axe.down
 				"swing_up":
-					 return axe.up
+					 return gold_axe.up
 				"swing_left":
-					 return axe.left
+					 return gold_axe.left
 				"swing_right":
-					return axe.right
+					return gold_axe.right
 		"wood sword":
 			match animation: 
 				"sword_swing_down":
-					 return sword.down
+					 return wood_sword.down
 				"sword_swing_up":
-					 return sword.up
+					 return wood_sword.up
 				"sword_swing_left":
-					 return sword.left
+					 return wood_sword.left
 				"sword_swing_right":
-					return sword.right
+					return wood_sword.right
 		"stone sword":
 			match animation: 
 				"sword_swing_down":
-					 return sword.down
+					 return stone_sword.down
 				"sword_swing_up":
-					 return sword.up
+					 return stone_sword.up
 				"sword_swing_left":
-					 return sword.left
+					 return stone_sword.left
 				"sword_swing_right":
-					return sword.right
+					return stone_sword.right
 		"bronze sword":
 			match animation: 
 				"sword_swing_down":
-					 return sword.down
+					 return bronze_sword.down
 				"sword_swing_up":
-					 return sword.up
+					 return bronze_sword.up
 				"sword_swing_left":
-					 return sword.left
+					 return bronze_sword.left
 				"sword_swing_right":
-					return sword.right
+					return bronze_sword.right
 		"iron sword":
 			match animation: 
 				"sword_swing_down":
-					 return sword.down
+					 return iron_sword.down
 				"sword_swing_up":
-					 return sword.up
+					 return iron_sword.up
 				"sword_swing_left":
-					 return sword.left
+					 return iron_sword.left
 				"sword_swing_right":
-					return sword.right
+					return iron_sword.right
 		"gold sword":
 			match animation: 
 				"sword_swing_down":
-					 return sword.down
+					 return gold_sword.down
 				"sword_swing_up":
-					 return sword.up
+					 return gold_sword.up
 				"sword_swing_left":
-					 return sword.left
+					 return gold_sword.left
 				"sword_swing_right":
-					return sword.right
+					return gold_sword.right
 		"stone watering can":
 			match animation:
 				"watering_down":
-					 return watering_can.down
+					 return stone_watering_can.down
 				"watering_up":
 					 return null
 				"watering_left":
-					 return watering_can.left
+					 return stone_watering_can.left
 				"watering_right":
-					 return watering_can.right
+					 return stone_watering_can.right
 		"bronze watering can":
 			match animation:
 				"watering_down":
-					 return watering_can.down
+					 return bronze_watering_can.down
 				"watering_up":
 					 return null
 				"watering_left":
-					 return watering_can.left
+					 return bronze_watering_can.left
 				"watering_right":
-					 return watering_can.right
+					 return bronze_watering_can.right
 		"gold watering can":
 			match animation:
 				"watering_down":
-					 return watering_can.down
+					 return gold_watering_can.down
 				"watering_up":
 					 return null
 				"watering_left":
-					 return watering_can.left
+					 return gold_watering_can.left
 				"watering_right":
-					 return watering_can.right
+					 return gold_watering_can.right
 		"fishing rod cast":
 			match animation:
 				"cast_down":
@@ -709,26 +722,153 @@ func returnToolSprite(toolName, animation):
 					return bow_release.right
 				"release_left":
 					return bow_release.left
+		"magic staff":
+			match animation:
+				"magic_cast_down":
+					return magic_staff.down
+				"magic_cast_up":
+					return magic_staff.up
+				"magic_cast_right":
+					return magic_staff.right
+				"magic_cast_left":
+					return magic_staff.left
 
-var pickaxe = {
-	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/down.png"), 
-	up = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/up.png"), 
-	left = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/left.png"), 
-	right = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/right.png")
+
+var health_potion_throw = {
+	down = preload("res://Characters/Weapon swings/health potion throw/down.png"),
+	up = preload("res://Characters/Weapon swings/health potion throw/up.png"),
+	left = preload("res://Characters/Weapon swings/health potion throw/left.png"),
+	right = preload("res://Characters/Weapon swings/health potion throw/right.png")
 }
 
-var axe = {
-	down = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/down.png"), 
-	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/axe/up.png"), 
-	left = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/left.png"), 
-	right = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/right.png")
+var magic_staff = {
+	down = preload("res://Characters/Weapon swings/magic staff/down.png"),
+	up = preload("res://Characters/Weapon swings/magic staff/up.png"),
+	left = preload("res://Characters/Weapon swings/magic staff/left.png"),
+	right = preload("res://Characters/Weapon swings/magic staff/right.png")
 }
 
-var sword = {
-	down = preload("res://Characters/Weapon swings/scythe sword swing/sword/down.png"), 
-	up =  preload("res://Characters/Weapon swings/scythe sword swing/sword/up.png"), 
-	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/left.png"), 
-	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/right.png")
+var wood_pickaxe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/wood/down.png"), 
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/wood/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/wood/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/wood/right.png")
+}
+var stone_pickaxe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/stone/down.png"), 
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/stone/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/stone/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/stone/right.png")
+}
+var bronze_pickaxe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/bronze/down.png"), 
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/bronze/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/bronze/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/bronze/right.png")
+}
+var iron_pickaxe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/iron/down.png"), 
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/iron/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/iron/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/iron/right.png")
+}
+var gold_pickaxe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/gold/down.png"), 
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/gold/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/gold/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/pickaxe/gold/right.png")
+}
+
+var wood_axe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/wood/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/axe/wood/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/wood/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/wood/right.png")
+}
+var stone_axe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/stone/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/axe/stone/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/stone/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/stone/right.png")
+}
+var bronze_axe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/bronze/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/axe/bronze/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/bronze/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/bronze/right.png")
+}
+var iron_axe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/iron/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/axe/iron/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/iron/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/iron/right.png")
+}
+var gold_axe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/gold/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/axe/gold/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/gold/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/axe/gold/right.png")
+}
+
+var wood_hoe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/wood/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/wood/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/wood/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/wood/right.png")
+}
+var stone_hoe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/stone/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/stone/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/stone/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/stone/right.png")
+}
+var bronze_hoe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/bronze/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/bronze/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/bronze/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/bronze/right.png")
+}
+var iron_hoe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/iron/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/iron/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/iron/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/iron/right.png")
+}
+var gold_hoe = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/gold/down.png"), 
+	up =  preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/gold/up.png"), 
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/gold/left.png"), 
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/hoe/gold/right.png")
+}
+var wood_sword = {
+	down = preload("res://Characters/Weapon swings/scythe sword swing/sword/wood/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/sword/wood/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/wood/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/wood/right.png")
+}
+var stone_sword = {
+	down = preload("res://Characters/Weapon swings/scythe sword swing/sword/stone/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/sword/stone/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/stone/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/stone/right.png")
+}
+var bronze_sword = {
+	down = preload("res://Characters/Weapon swings/scythe sword swing/sword/bronze/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/sword/bronze/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/bronze/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/bronze/right.png")
+}
+var iron_sword = {
+	down = preload("res://Characters/Weapon swings/scythe sword swing/sword/iron/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/sword/iron/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/iron/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/iron/right.png")
+}
+var gold_sword = {
+	down = preload("res://Characters/Weapon swings/scythe sword swing/sword/gold/down.png"), 
+	up =  preload("res://Characters/Weapon swings/scythe sword swing/sword/gold/up.png"), 
+	left = preload("res://Characters/Weapon swings/scythe sword swing/sword/gold/left.png"), 
+	right = preload("res://Characters/Weapon swings/scythe sword swing/sword/gold/right.png")
 }
 
 var scythe = {
@@ -751,10 +891,20 @@ var bow_release = {
 	right = preload("res://Characters/Weapon swings/bow/release/right.png")
 }
 
-var watering_can = {
-	down = preload("res://Characters/Weapon swings/watering cans/down.png"),
-	left = preload("res://Characters/Weapon swings/watering cans/left.png"),
-	right = preload("res://Characters/Weapon swings/watering cans/right.png")
+var stone_watering_can = {
+	down = preload("res://Characters/Weapon swings/watering cans/stone/down.png"),
+	left = preload("res://Characters/Weapon swings/watering cans/stone/left.png"),
+	right = preload("res://Characters/Weapon swings/watering cans/stone/right.png")
+}
+var bronze_watering_can = {
+	down = preload("res://Characters/Weapon swings/watering cans/bronze/down.png"),
+	left = preload("res://Characters/Weapon swings/watering cans/bronze/left.png"),
+	right = preload("res://Characters/Weapon swings/watering cans/bronze/right.png")
+}
+var gold_watering_can = {
+	down = preload("res://Characters/Weapon swings/watering cans/gold/down.png"),
+	left = preload("res://Characters/Weapon swings/watering cans/gold/left.png"),
+	right = preload("res://Characters/Weapon swings/watering cans/gold/right.png")
 }
 
 
@@ -784,6 +934,13 @@ var ripples = {
 	left = preload("res://Characters/Weapon swings/ripples/left.png"),
 	right = preload("res://Characters/Weapon swings/ripples/right.png"),
 	up = preload("res://Characters/Weapon swings/ripples/up.png")
+}
+
+var hammer = {
+	down = preload("res://Characters/Weapon swings/axe pickaxe swing/hammer/iron/down.png"),
+	left = preload("res://Characters/Weapon swings/axe pickaxe swing/hammer/iron/left.png"),
+	right = preload("res://Characters/Weapon swings/axe pickaxe swing/hammer/iron/right.png"),
+	up = preload("res://Characters/Weapon swings/axe pickaxe swing/hammer/iron/up.png")
 }
 
 # TALL GRASS #
@@ -1073,172 +1230,130 @@ var Apple_tree = {
 
 func returnOreObject(oreType):
 	match oreType:
-		"Red gem":
-			return Red_ore
-		"Cyan gem": 
-			return Cyan_ore
-		"Dark blue gem":
-			return Dark_blue_ore
-		"Green gem":
-			return Green_ore
-		"Iron ore":
+		"bronze ore":
+			return Bronze_ore
+		"iron ore":
 			return Iron_ore
-		"Gold ore":
+		"gold ore":
 			return Gold_ore
-		"Stone":
-			return Stone_ore
-		"Cobblestone":
-			return Cobblestone_ore
+		"stone1":
+			return Stone_ore1
+		"stone2":
+			return Stone_ore2
 
-var Red_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/red/red_gemstone_large.png"),
-	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_6.png"),
-	},
-	chip = preload("res://Assets/Images/ore_sets/red/red_chip.png")
-}
+#var red_gemstone = {
+#	largeOre = preload("res://Assets/Images/ore_sets/red/red_gemstone_large.png"),
+#	mediumOres = {
+#		0 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_1.png"),
+#		1 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_2.png"),
+#		2 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_3.png"),
+#		3 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_4.png"),
+#		4 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_5.png"),
+#		5 : preload("res://Assets/Images/ore_sets/red/medium/red_gemstone_6.png"),
+#	},
+#	chip = preload("res://Assets/Images/ore_sets/red/red_chip.png")
+#}
+#
+#var Cyan_ore = {
+#	largeOre = preload("res://Assets/Images/ore_sets/cyan/cyan_gemstone_large.png"),
+#	mediumOres = {
+#		0 : preload("res://Assets/Images/ore_sets/cyan/medium/cyan_gemstone_1.png"),
+#		1 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_2.png"),
+#		2 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_3.png"),
+#		3 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_4.png"),
+#		4 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_5.png"),
+#		5 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_6.png"),
+#	},
+#	chip = preload("res://Assets/Images/ore_sets/cyan/cyan_chip.png")
+#}
+#
+#var Green_ore = {
+#	largeOre = preload("res://Assets/Images/ore_sets/green/green_gemstone_large.png"),
+#	mediumOres = {
+#		0 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_1.png"),
+#		1 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_2.png"),
+#		2 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_3.png"),
+#		3 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_4.png"),
+#		4 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_5.png"),
+#		5 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_6.png"),
+#	},
+#	chip = preload("res://Assets/Images/ore_sets/cyan/cyan_chip.png")
+#}
+#
+#var Dark_blue_ore = {
+#	largeOre =  preload("res://Assets/Images/ore_sets/dark_blue/dark_blue_gemstone_large.png"),
+#	mediumOres = {
+#	0 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_1.png"),
+#	1 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_2.png"),
+#	2 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_3.png"),
+#	3 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_4.png"),
+#	4 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_5.png"),
+#	5 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_6.png"),
+#	},
+#	chip = preload("res://Assets/Images/ore_sets/dark_blue/chip.png")
+#}
 
-var Cyan_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/cyan/cyan_gemstone_large.png"),
+var Bronze_ore = {
+	largeOre = preload("res://Assets/Images/Ores/bronze/large.png"),
 	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/cyan/medium/cyan_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/cyan/medium/teal_gemstone_6.png"),
+	0 : preload("res://Assets/Images/Ores/bronze/medium/1.png"),
+	1 : preload("res://Assets/Images/Ores/bronze/medium/2.png"),
+	2 : preload("res://Assets/Images/Ores/bronze/medium/3.png"),
+	3 : preload("res://Assets/Images/Ores/bronze/medium/4.png"),
+	4 : preload("res://Assets/Images/Ores/bronze/medium/5.png"),
+	5 : preload("res://Assets/Images/Ores/bronze/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/cyan/cyan_chip.png")
-}
-
-var Green_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/green/green_gemstone_large.png"),
-	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/green/medium/green_gemstone_6.png"),
-	},
-	chip = preload("res://Assets/Images/ore_sets/cyan/cyan_chip.png")
-}
-
-var Dark_blue_ore = {
-	largeOre =  preload("res://Assets/Images/ore_sets/dark_blue/dark_blue_gemstone_large.png"),
-	mediumOres = {
-	0 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_1.png"),
-	1 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_2.png"),
-	2 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_3.png"),
-	3 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_4.png"),
-	4 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_5.png"),
-	5 : preload("res://Assets/Images/ore_sets/dark_blue/medium/dark_blue_gemstone_6.png"),
-	},
-	chip = preload("res://Assets/Images/ore_sets/dark_blue/chip.png")
+	chip = preload("res://Assets/Images/Ores/bronze/chip.png")
 }
 
 var Iron_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/iron/iron_gemstone_large.png"),
+	largeOre = preload("res://Assets/Images/Ores/iron/large.png"),
 	mediumOres = {
-	0 : preload("res://Assets/Images/ore_sets/iron/medium/iron_gemstone_1.png"),
-	1 : preload("res://Assets/Images/ore_sets/iron/medium/iron_gemstone_2.png"),
-	2 : preload("res://Assets/Images/ore_sets/iron/medium/iron_gemstone_3.png"),
-	3 : preload("res://Assets/Images/ore_sets/iron/medium/iron_gemstone_4.png"),
-	4 : preload("res://Assets/Images/ore_sets/iron/medium/iron_gemstone_5.png"),
-	5 : preload("res://Assets/Images/ore_sets/iron/medium/iron_gemstone_6.png"),
+	0 : preload("res://Assets/Images/Ores/iron/medium/1.png"),
+	1 : preload("res://Assets/Images/Ores/iron/medium/2.png"),
+	2 : preload("res://Assets/Images/Ores/iron/medium/3.png"),
+	3 : preload("res://Assets/Images/Ores/iron/medium/4.png"),
+	4 : preload("res://Assets/Images/Ores/iron/medium/5.png"),
+	5 : preload("res://Assets/Images/Ores/iron/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/iron/iron_chip.png")
+	chip = preload("res://Assets/Images/Ores/iron/chip.png")
 }
 
 var Gold_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/gold/gold_gemstone_large.png"), 
+	largeOre = preload("res://Assets/Images/Ores/gold/large.png"), 
 	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/gold/medium/gold_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/gold/medium/gold_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/gold/medium/gold_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/gold/medium/gold_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/gold/medium/gold_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/gold/medium/gold_gemstone_6.png"),
+		0 : preload("res://Assets/Images/Ores/gold/medium/1.png"),
+		1 : preload("res://Assets/Images/Ores/gold/medium/2.png"),
+		2 : preload("res://Assets/Images/Ores/gold/medium/3.png"),
+		3 : preload("res://Assets/Images/Ores/gold/medium/4.png"),
+		4 : preload("res://Assets/Images/Ores/gold/medium/5.png"),
+		5 : preload("res://Assets/Images/Ores/gold/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/gold/gold_chip.png")
+	chip = preload("res://Assets/Images/Ores/gold/chip.png")
 }
 
-var Stone_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/stone/stone_gemstone_large.png"),
+var Stone_ore1 = {
+	largeOre = preload("res://Assets/Images/Ores/stone1/large.png"),
 	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/stone/medium/stone_gemstone_6.png"),
+		0 : preload("res://Assets/Images/Ores/stone1/medium/1.png"),
+		1 : preload("res://Assets/Images/Ores/stone1/medium/2.png"),
+		2 : preload("res://Assets/Images/Ores/stone1/medium/3.png"),
+		3 : preload("res://Assets/Images/Ores/stone1/medium/4.png"),
+		4 : preload("res://Assets/Images/Ores/stone1/medium/5.png"),
+		5 : preload("res://Assets/Images/Ores/stone1/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/stone/beige_stone_chip.png")
+	chip = preload("res://Assets/Images/Ores/stone1/chip.png")
 }
 
-var Cobblestone_ore = {
-	largeOre = preload("res://Assets/Images/ore_sets/cobblestone/cobblestone_gemstone_large.png"),
+var Stone_ore2 = {
+	largeOre = preload("res://Assets/Images/Ores/stone2/large.png"),
 	mediumOres = {
-		0 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_1.png"),
-		1 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_2.png"),
-		2 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_3.png"),
-		3 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_4.png"),
-		4 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_5.png"),
-		5 : preload("res://Assets/Images/ore_sets/cobblestone/medium/cobblestone_gemstone_6.png"),
+		0 : preload("res://Assets/Images/Ores/stone2/medium/1.png"),
+		1 : preload("res://Assets/Images/Ores/stone2/medium/2.png"),
+		2 : preload("res://Assets/Images/Ores/stone2/medium/3.png"),
+		3 : preload("res://Assets/Images/Ores/stone2/medium/4.png"),
+		4 : preload("res://Assets/Images/Ores/stone2/medium/5.png"),
+		5 : preload("res://Assets/Images/Ores/stone2/medium/6.png"),
 	},
-	chip = preload("res://Assets/Images/ore_sets/cobblestone/stone_chip.png")
+	chip = preload("res://Assets/Images/Ores/stone2/chip.png")
 }
-
-func return_house_object(item_name):
-	print(item_name)
-	match item_name:
-		"Bed":
-			return bed
-		"Crafting_table": 
-			return crafting_table
-		"Fireplace":
-			return fireplace
-		"Left_chair":
-			return left_chair
-		"Middle_chair":
-			return middle_chair
-		"Painting1":
-			return painting1
-		"Right_chair":
-			return right_chair
-		"Rug":
-			return rug
-		"Shelves":
-			return shelves
-		"Side_dresser":
-			return side_dresser
-		"Stool":
-			return stool
-		"Table":
-			return table
-		"Window 1":
-			return window1
-		"Window 2":
-			return window2
-
-var bed = preload("res://Assets/Images/house_objects/bed.png")
-var crafting_table = preload("res://Assets/Images/house_objects/crafting_table.png")
-var fireplace = preload("res://Assets/Images/house_objects/fireplace.png")
-var left_chair = preload("res://Assets/Images/house_objects/left_chair.png")
-var middle_chair = preload("res://Assets/Images/house_objects/middle_chair.png")
-var painting1 = preload("res://Assets/Images/house_objects/painting1.png")
-var right_chair = preload("res://Assets/Images/house_objects/right_chair.png")
-var rug = preload("res://Assets/Images/house_objects/rug.png")
-var shelves = preload("res://Assets/Images/house_objects/shelves.png")
-var side_dresser = preload("res://Assets/Images/house_objects/side_dresser.png")
-var small_dresser = preload("res://Assets/Images/house_objects/small_dresser.png")
-var stool = preload("res://Assets/Images/house_objects/stool.png")
-var table = preload("res://Assets/Images/house_objects/table.png")
-var window1 = preload("res://Assets/Images/house_objects/window 1.png")
-var window2 = preload("res://Assets/Images/house_objects/window 2.png")
-

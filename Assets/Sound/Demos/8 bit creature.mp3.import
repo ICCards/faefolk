@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/8 bit creature.mp3-8182a6a613926226e620ff18238d3eb0.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Demos/8 bit creature.mp3"
+dest_files=[ "res://.import/8 bit creature.mp3-8182a6a613926226e620ff18238d3eb0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

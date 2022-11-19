@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/portal.wav-37b2654bcc01c4b494b07e0a89fc020a.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Dark/portal.wav"
+dest_files=[ "res://.import/portal.wav-37b2654bcc01c4b494b07e0a89fc020a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

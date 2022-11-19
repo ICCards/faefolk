@@ -31,7 +31,7 @@ enum Tiles {
 
 func _input(event):
 	if event.is_action_pressed("open_map") and not PlayerInventory.interactive_screen_mode and \
-	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode:
+	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode and has_node("/root/World"):
 		show()
 		initialize()
 	if event.is_action_released("open_map"):
@@ -50,7 +50,7 @@ func toggle_map():
 func initialize():
 	PlayerInventory.viewMapMode = true
 	$Camera2D.current = true
-	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar").visible = false
+	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = false
 	if not is_first_time_opened:
 		is_first_time_opened = true
 		$Camera2D.position = Vector2(800, 800)
@@ -59,8 +59,8 @@ func initialize():
 func set_inactive():
 	PlayerInventory.viewMapMode = false
 	$Camera2D.current = false
-	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D").current = true
-	get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/Hotbar").visible = true
+	Server.player_node.get_node("Camera2D").current = true
+	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = true
 
 func _ready():
 	wait_for_map()
@@ -94,9 +94,8 @@ func _physics_process(delta):
 		#roamingStorm2 = get_node("/root/World/RoamingStorm2")
 		stormIcon.position = roamingStorm.position
 		#stormIcon2.position = roamingStorm2.position
-		
-	
-	
+
+
 func change_label_size():
 	for x in range(NUM_ROWS):
 		for y in range(NUM_COLUMNS):

@@ -12,20 +12,10 @@ var valid_tiles
 var isBeingHarvested = false
 var bodyEnteredFlag = false
 
-enum {
-	MOVEMENT, 
-	SWING,
-	EAT,
-	FISHING,
-	CHANGE_TILE,
-	HARVESTING
-}
 
-
-func PlayEffect(player_id):
-	valid_tiles = get_node("/root/World/GeneratedTiles/ValidTiles")
-	valid_tiles.set_cellv(loc, 0)
-	queue_free()
+#func PlayEffect(player_id):
+#	Tiles.add_valid_tiles(locatio)
+#	queue_free()
 
 func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _is_crop_dead):
 	crop_name = _crop_name
@@ -39,7 +29,7 @@ func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _i
 func _ready():
 	add_to_group("active_crops")
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(15.0), "timeout")
 	days_until_harvest = 0
 	refresh_image()
 
@@ -47,8 +37,6 @@ func refresh_image():
 	phase = return_phase()
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 
-func delete_crop():
-	queue_free() 
 
 #func return_if_crop_is_dead(if_crop_is_already_dead):
 #	if if_crop_is_already_dead: #or !JsonData.crop_data[crop_name]["Seasons"].has(DayNightTimer.season):
@@ -115,10 +103,11 @@ func harvest_and_remove():
 		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		$HarvestSound.play()
 		$CropText.visible = false
-		Tiles.reset_valid_tiles(loc)
+		Tiles.add_valid_tiles(loc)
 		isBeingHarvested = true
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 		yield(get_tree().create_timer(0.6), "timeout")
+		phase = ""
+		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		yield(get_tree().create_timer(1.0), "timeout")
 		queue_free()
@@ -128,21 +117,20 @@ func harvest_and_keep_planted():
 		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$HarvestSound.play()
 		isBeingHarvested = true
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 		yield(get_tree().create_timer(0.6), "timeout")
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		phase = "empty"
+		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
 		$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 		isBeingHarvested = false
 		
 
 func intitiateItemDrop(item, pos, yield_list):
+	PlayerInventory.add_item_to_hotbar(item, 1, null)
 	yield_list.shuffle()
-	for _i in range(yield_list[0]):
-		var itemDrop = ItemDrop.instance()
-		itemDrop.initItemDropType(item)
-		get_parent().call_deferred("add_child", itemDrop)
-		itemDrop.global_position = global_position + pos 
+	var amount = yield_list.front()
+	if amount > 1:
+		InstancedScenes.intitiateItemDrop(item, position+Vector2(0,16), amount-1)
 		
 
 func play_effect():
@@ -161,43 +149,52 @@ func _on_PlayAnimBox_body_exited(body):
 
 
 func _on_HurtBox_area_entered(area):
-	Tiles.reset_valid_tiles(loc)
+	Tiles.add_valid_tiles(loc)
 	var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
 	Server.action("ON_HIT", data)
 	queue_free()
 
 
-func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
-
-func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
 
 
 func _on_Harvest_pressed():
 	if phase == "harvest" and \
-	position.distance_to(Server.player_node.position) < 600 and \
-	Server.player_node.state == MOVEMENT and \
+	position.distance_to(Server.player_node.position) < 100 and \
+	Server.player_node.state == 0 and \
 	not isBeingHarvested:
 		CollectionsData.crops[crop_name] += 1
 		if JsonData.crop_data[crop_name]["Perennial"]:
 			harvest_and_keep_planted()
 		else:
 			harvest_and_remove()
-		var anim = "harvest_" + Server.player_node.direction.to_lower()
-		Server.player_node.state = HARVESTING
-		Server.player_node.holding_item.texture = load("res://Assets/Images/inventory_icons/Food/" + crop_name + ".png")
-		Server.player_node.composite_sprites.set_player_animation(Server.player_node.character, anim)
-		Server.player_node.animation_player.play(anim)
-		yield(Server.player_node.animation_player, "animation_finished")
-		Server.player_node.state = MOVEMENT
-	
+		Server.player_node.harvest_crop(crop_name)
 
 
 func _on_Harvest_mouse_entered():
 	if phase == "harvest":
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Help Select.png"))
+		set_mouse_cursor_type()
 
+func set_mouse_cursor_type():
+	if not $Harvest.disabled:
+		if $DetectPlayer.get_overlapping_areas().size() >= 1:
+			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/harvest.png"))
+		else:
+			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/harvest transparent.png"))
 
 func _on_Harvest_mouse_exited():
 	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+
+
+func _on_DetectPlayer_area_entered(area):
+	if phase == "harvest" and $Harvest.is_hovered():
+		set_mouse_cursor_type()
+
+func _on_DetectPlayer_area_exited(area):
+	if phase == "harvest" and $Harvest.is_hovered():
+		set_mouse_cursor_type()
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

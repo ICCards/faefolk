@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/2 click mask.png-ada33d972a701888f304ec65531ca674.res"
+
+[deps]
+
+source_file="res://Assets/Images/User interface/radial menus/5-segment-menu/unselected/2 click mask.png"
+dest_files=[ "res://.import/2 click mask.png-ada33d972a701888f304ec65531ca674.res" ]
+
+[params]
+
+create_from=0
+threshold=0.5

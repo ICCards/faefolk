@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/arcade.mp3-ff2a0d0a9427b7bb37512a5997ea4394.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Demos/arcade.mp3"
+dest_files=[ "res://.import/arcade.mp3-ff2a0d0a9427b7bb37512a5997ea4394.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

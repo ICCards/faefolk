@@ -1,0 +1,680 @@
+[gd_scene load_steps=86 format=2]
+
+[ext_resource path="res://Assets/Images/Enemies/Skeleton/Skeleton Mage.png" type="Texture" id=1]
+[ext_resource path="res://World/Enemies/Skeleton.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Med.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=4]
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 4.0
+height = 0.0
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 240, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 336, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 432, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 480, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 528, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 576, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 624, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 672, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 720, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 768, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 1 )
+region = Rect2( 816, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 1 )
+region = Rect2( 864, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 1 )
+region = Rect2( 912, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 1 )
+region = Rect2( 960, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 1 )
+region = Rect2( 240, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 1 )
+region = Rect2( 336, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 1 )
+region = Rect2( 432, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 1 )
+region = Rect2( 480, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 1 )
+region = Rect2( 528, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 1 )
+region = Rect2( 576, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 1 )
+region = Rect2( 624, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 1 )
+region = Rect2( 672, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 1 )
+region = Rect2( 720, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 1 )
+region = Rect2( 768, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 1 )
+region = Rect2( 816, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 240, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 336, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 1 )
+region = Rect2( 240, 96, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
+"loop": true,
+"name": "attack",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
+"loop": false,
+"name": "death",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ) ],
+"loop": false,
+"name": "hit",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "idle",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=165]
+radius = 24.0
+height = 4.0
+
+[sub_resource type="Animation" id=149]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../SkeletonSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=150]
+resource_name = "hit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../SkeletonSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=164]
+radius = 194.003
+
+[sub_resource type="Animation" id=166]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SkeletonSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "death" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SkeletonSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=167]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PoisonParticles/P1:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("PoisonParticles/P2:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("PoisonParticles/P3:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SkeletonSprite:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death" ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SkeletonSprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SkeletonSprite:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="AtlasTexture" id=168]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=169]
+atlas = ExtResource( 3 )
+region = Rect2( 34, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=170]
+atlas = ExtResource( 3 )
+region = Rect2( 68, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=171]
+atlas = ExtResource( 3 )
+region = Rect2( 102, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=172]
+atlas = ExtResource( 3 )
+region = Rect2( 136, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=173]
+atlas = ExtResource( 3 )
+region = Rect2( 170, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=174]
+atlas = ExtResource( 3 )
+region = Rect2( 204, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=175]
+atlas = ExtResource( 3 )
+region = Rect2( 238, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=176]
+atlas = ExtResource( 3 )
+region = Rect2( 272, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=177]
+atlas = ExtResource( 3 )
+region = Rect2( 306, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=178]
+atlas = ExtResource( 3 )
+region = Rect2( 340, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=179]
+atlas = ExtResource( 3 )
+region = Rect2( 374, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=180]
+atlas = ExtResource( 3 )
+region = Rect2( 408, 0, 34, 34 )
+
+[sub_resource type="AtlasTexture" id=181]
+atlas = ExtResource( 3 )
+region = Rect2( 442, 0, 34, 34 )
+
+[sub_resource type="SpriteFrames" id=182]
+animations = [ {
+"frames": [ SubResource( 168 ), SubResource( 169 ), SubResource( 170 ), SubResource( 171 ), SubResource( 172 ), SubResource( 173 ), SubResource( 174 ), SubResource( 175 ), SubResource( 176 ), SubResource( 177 ), SubResource( 178 ), SubResource( 179 ), SubResource( 180 ), SubResource( 181 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="Skeleton" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 10 )
+
+[node name="PoisonParticles" type="Node2D" parent="."]
+position = Vector2( 0, -20 )
+
+[node name="P3" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 12, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0, 0.332031, 0, 1 )
+
+[node name="P2" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0.145098, 0.545098, 0.145098, 1 )
+
+[node name="P1" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0.14902, 0.937255, 0.14902, 1 )
+
+[node name="SkeletonSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
+material = ExtResource( 4 )
+position = Vector2( 0, -30 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 9 )
+animation = "idle"
+playing = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 2.0
+target_desired_distance = 10.0
+path_max_distance = 20.0
+avoidance_enabled = true
+max_speed = 100.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="IdleTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+autostart = true
+
+[node name="ChaseTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+
+[node name="FrozenTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+one_shot = true
+
+[node name="StunnedTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="ChangeDirectionDelay" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="PoisonTimer" type="Timer" parent="Timers"]
+wait_time = 8.0
+one_shot = true
+
+[node name="KnockbackTimer" type="Timer" parent="Timers"]
+wait_time = 0.25
+one_shot = true
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 262400
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 0, -20 )
+shape = SubResource( 165 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+anims/RESET = SubResource( 149 )
+anims/hit = SubResource( 150 )
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 164 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ShootDirection" type="Node2D" parent="."]
+position = Vector2( 0, -33 )
+
+[node name="Position2D" type="Position2D" parent="ShootDirection"]
+position = Vector2( 45, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 166 )
+anims/death = SubResource( 167 )
+
+[node name="Electricity" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -17 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 182 )
+frame = 8
+playing = true
+
+[connection signal="timeout" from="Timers/FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
+[connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
+[connection signal="timeout" from="Timers/ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]
+[connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
+[connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
