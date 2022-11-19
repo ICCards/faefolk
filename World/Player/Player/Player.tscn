@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
@@ -402,6 +402,18 @@ tracks/30/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("../Swing/SwordSwing/CollisionShape2D:disabled")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=55]
@@ -1272,6 +1284,18 @@ tracks/17/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 4 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("../Swing/SwordSwing/CollisionShape2D:disabled")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=39]
@@ -5611,9 +5635,6 @@ expand_margin_bottom = 4.0
 radius = 8.00011
 height = 7.99978
 
-[sub_resource type="OccluderPolygon2D" id=81]
-polygon = PoolVector2Array( 6, 0, 6, -28, -6, -28, -6, 0 )
-
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 8 )
@@ -6080,9 +6101,6 @@ light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
 shape = SubResource( 11 )
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource( 81 )
 
 [connection signal="timeout" from="PoisonParticles/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
 [connection signal="timeout" from="SpeedParticles/SpeedStateTimer" to="." method="_on_SpeedStateTimer_timeout"]

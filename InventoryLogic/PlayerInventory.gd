@@ -51,7 +51,7 @@ var hotbar = {
 	2: ["bow",1, null],
 	3: ["arrow", 100, null],
 #	#1: ["poison potion I", 100, null],
-#	2: ["poison potion II", 10, null],
+	#4: ["poison potion II", 100, null],
 #	#3: ["poison potion III", 100, null],
 ##	4: ["regeneration potion I", 10, null],
 #	5: ["regeneration potion II", 10, null],

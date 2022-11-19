@@ -256,7 +256,7 @@ func start_chase_state():
 	_chase_timer.start()
 	navigation_agent.set_target_location(get_random_player_pos(Server.player_node.global_position))
 	chasing = true
-	state = CHASE
+	state = CHASE 
 
 func end_chase_state():
 	navigation_agent.max_speed = 75
@@ -276,15 +276,11 @@ func start_frozen_state(timer_length):
 	skeleton_sprite.modulate = Color("00c9ff")
 	frozen = true
 	$Timers/FrozenTimer.start(timer_length)
-#	if not attacking and not destroyed:
-#		animation_player.play("loop frozen")
 
 func _on_FrozenTimer_timeout():
 	frozen = false
 	if not poisoned:
 		skeleton_sprite.modulate = Color("ffffff")
-#		if not destroyed:
-#			animation_player.play("loop")
 
 func start_poison_state():
 	$PoisonParticles/P1.emitting = true
@@ -293,8 +289,7 @@ func start_poison_state():
 	skeleton_sprite.modulate = Color("009000")
 	poisoned = true
 	$Timers/PoisonTimer.start()
-#	if not attacking and not destroyed:
-#		animation_player.play("loop frozen")
+
 
 func _on_PoisonTimer_timeout():
 	$PoisonParticles/P1.emitting = false
@@ -303,24 +298,21 @@ func _on_PoisonTimer_timeout():
 	poisoned = false
 	if not frozen:
 		skeleton_sprite.modulate = Color("ffffff")
-#		if not destroyed:
-#			animation_player.play("loop")
 
 func start_stunned_state():
 	if not destroyed:
+		skeleton_sprite.playing = false
 		rng.randomize()
 		$Electricity.frame = rng.randi_range(1,13)
 		$Electricity.show()
-		$BoarBite/CollisionShape2D.set_deferred("disabled", true)
-#		animation_player.stop(false)
 		$Timers/StunnedTimer.start()
 		stunned = true
 
 func _on_StunnedTimer_timeout():
 	if not destroyed:
+		skeleton_sprite.playing = true
 		$Electricity.hide()
 		stunned = false
-		#animation_player.play()
 
 func _on_KnockbackTimer_timeout():
 	knocking_back = false

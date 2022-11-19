@@ -614,7 +614,7 @@ position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -623,7 +623,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -6 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

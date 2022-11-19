@@ -42,7 +42,10 @@ func chain_effect(start_name):
 			node.hit(type)
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
 	yield(get_tree(), 'idle_frame')
-	Server.world.draw_mst(find_mst(nodes))
+	if Server.world.name == "World":
+		Server.world.draw_mst(find_mst(nodes))
+	else:
+		BuildCaveLevel.draw_mst(find_mst(nodes))
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/zap.wav")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 	sound_effects.play()

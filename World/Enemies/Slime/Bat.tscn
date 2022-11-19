@@ -97,45 +97,6 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=147]
-radius = 18.0
-height = 12.0
-
-[sub_resource type="Animation" id=36]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("../BatSprite:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-
-[sub_resource type="Animation" id=37]
-resource_name = "hit"
-length = 0.25
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("../BatSprite:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 1.0, 0.0 ]
-}
-
-[sub_resource type="CircleShape2D" id=38]
-radius = 8.0
-
 [sub_resource type="AtlasTexture" id=145]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 24, 24 )
@@ -199,6 +160,45 @@ animations = [ {
 "name": "default",
 "speed": 8.0
 } ]
+
+[sub_resource type="CapsuleShape2D" id=147]
+radius = 18.0
+height = 12.0
+
+[sub_resource type="Animation" id=36]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../BatSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "hit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../BatSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=38]
+radius = 8.0
 
 [sub_resource type="Animation" id=148]
 length = 0.001
@@ -397,7 +397,17 @@ scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "fly down"
-frame = 3
+frame = 2
+playing = true
+
+[node name="Electricity" type="AnimatedSprite" parent="."]
+visible = false
+modulate = Color( 1.22, 1.22, 1.22, 1 )
+position = Vector2( 0, -26 )
+scale = Vector2( 2, 2 )
+z_index = 1
+frames = SubResource( 41 )
+frame = 2
 playing = true
 
 [node name="PoisonParticles" type="Node2D" parent="."]
@@ -493,15 +503,6 @@ one_shot = true
 wait_time = 8.0
 one_shot = true
 
-[node name="Electricity" type="AnimatedSprite" parent="."]
-visible = false
-modulate = Color( 1.22, 1.22, 1.22, 1 )
-position = Vector2( 0, -15 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 41 )
-frame = 7
-playing = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 148 )
 anims/death = SubResource( 43 )
@@ -528,6 +529,8 @@ spread = 90.0
 gravity = Vector2( 0, 60 )
 initial_velocity = 45.0
 initial_velocity_random = 1.0
+angle = 180.0
+angle_random = 1.0
 scale_amount = 2.0
 anim_speed_random = 1.0
 anim_offset = 1.0

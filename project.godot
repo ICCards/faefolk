@@ -47,6 +47,7 @@ CollectionsData="*res://Global/Data/CollectionsData.gd"
 InstancedScenes="*res://Global/Data/InstancedScenes.gd"
 Constants="*res://Global/Data/Constants.gd"
 BuildCaveLevel="*res://Global/Data/BuildCaveLevel.gd"
+MapData="*res://Global/Data/MapData.gd"
 
 [display]
 

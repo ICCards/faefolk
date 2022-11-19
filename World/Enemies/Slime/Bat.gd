@@ -187,6 +187,7 @@ func _on_PoisonTimer_timeout():
 
 func start_stunned_state():
 	if not destroyed:
+		$Timers/StunnedTimer.start()
 		bat_sprite.playing = false
 		rng.randomize()
 		$Electricity.frame = rng.randi_range(1,13)

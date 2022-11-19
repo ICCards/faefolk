@@ -212,9 +212,8 @@ func _process(_delta) -> void:
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
 		if item_category == "Magic":
-			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
+			#$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
 			return
-	$Camera2D/UserInterface/MagicStaffUI.hide()
 
 
 func set_movement_speed_change():
@@ -264,7 +263,7 @@ func _unhandled_input(event):
 				elif item_name != "blueprint":
 					destroy_placable_object()
 			else:
-				$Camera2D/UserInterface/MagicStaffUI.hide()
+				#$Camera2D/UserInterface/MagicStaffUI.hide()
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 

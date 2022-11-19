@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Clock/CurrentTime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI1.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI2.png" type="Texture" id=8]
 [ext_resource path="res://World/Player/Player/UserInterface/MagicStaff/MagicStaffUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Player/Player/UserInterface/Combat hotbar/Combat hotbar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerStatsUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" type="PackedScene" id=17]
@@ -108,12 +109,8 @@ tracks/0/keys = {
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 23 )
 
-[node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
+[node name="Combat hotbar" parent="." instance=ExtResource( 10 )]
 visible = false
-margin_left = 209.0
-margin_top = 435.0
-margin_right = 209.0
-margin_bottom = 435.0
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
 visible = false
@@ -215,6 +212,9 @@ rect_scale = Vector2( 0.2, 0.2 )
 theme = ExtResource( 6 )
 text = "R"
 align = 1
+
+[node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
+visible = false
 
 [node name="ChangeVariety" type="Control" parent="."]
 visible = false

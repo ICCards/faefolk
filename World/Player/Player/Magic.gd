@@ -100,7 +100,7 @@ func cast_spell(staff_name, init_direction):
 			yield(player_animation_player, "animation_finished" )
 		wait_for_cast_release(staff_name)
 	else:
-		get_parent().state = MOVEMENT
+			get_parent().state = MOVEMENT
 
 
 func _physics_process(delta):

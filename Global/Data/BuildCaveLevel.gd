@@ -1,5 +1,6 @@
 extends Node
 
+onready var LightningLine = preload("res://World/Objects/Misc/LightningLine.tscn")
 onready var Slime = preload("res://World/Enemies/Slime/Slime.tscn")
 onready var Spider = preload("res://World/Enemies/Spider.tscn")
 onready var FireMageSkeleton = preload("res://World/Enemies/Skeleton.tscn")
@@ -17,7 +18,7 @@ var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "sto
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
 var rng = RandomNumberGenerator.new()
-const NUM_MUSHROOMS = 20
+const NUM_MUSHROOMS = 10
 const NUM_SMALL_ORE = 20
 const NUM_LARGE_ORE = 6
 const MAX_TALL_GRASS_SIZE = 60
@@ -27,6 +28,18 @@ var valid_tiles
 
 var is_player_going_down: bool = true
 
+func draw_mst(path):
+	var current_lines = []
+	if path:
+		for p in path.get_points():
+			for c in path.get_point_connections(p):
+				var pp = path.get_point_position(p)
+				var cp = path.get_point_position(c)
+				if not current_lines.has([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]) and not current_lines.has([Vector2(cp.x, cp.y), Vector2(pp.x, pp.y)]):
+					var lightning_line = LightningLine.instance()
+					current_lines.append([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)])
+					lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
+					Server.world.add_child(lightning_line)
 
 func spawn_player():
 	var spawn_loc
@@ -44,19 +57,50 @@ func spawn_player():
 	Server.player_node = player
 
 func build():
-	print(Server.world.name)
 	valid_tiles = Server.world.get_node("Tiles/ValidTiles")
 	spawn_player()
 	set_valid_tiles()
 	set_chest()
 	set_light_nodes()
-	generate_ore()
-	generate_tall_grass()
-	generate_mushroom_forage()
 	set_cave_ladders()
+#	if return_if_cave_built(Server.name):
+#		load_cave(Server.name)
+#	else:
+	build_cave(Server.name)
 	spawn_enemies_randomly()
 	set_nav()
 
+func load_cave(cave_name):
+	pass
+
+func build_cave(cave_name):
+	generate_ore()
+	generate_tall_grass()
+	generate_mushroom_forage()
+
+
+func return_if_cave_built(cave_name):
+	match cave_name:
+		"Cave 1":
+			return MapData.is_cave_1_built
+		"Cave 2":
+			return MapData.is_cave_2_built
+		"Cave 3":
+			return MapData.is_cave_3_built
+		"Cave 4":
+			return MapData.is_cave_4_built
+		"Cave 5":
+			return MapData.is_cave_5_built
+		"Cave 6":
+			return MapData.is_cave_6_built
+		"Cave 7":
+			return MapData.is_cave_7_built
+		"Cave 8":
+			return MapData.is_cave_8_built
+		"Cave 9":
+			return MapData.is_cave_9_built
+		"Cave 10":
+			return MapData.is_cave_10_built
 
 func set_valid_tiles():
 	for x in range(50):
@@ -192,7 +236,7 @@ func generate_mushroom_forage():
 			mushroom.location = loc
 			mushroom.global_position = Tiles.valid_tiles.map_to_world(loc)
 			Server.world.get_node("ForageObjects").add_child(mushroom)
-			Server.world.cave_data["mushroom"][id] = {"l": loc}
+			#Server.world.cave_data["mushroom"][id] = {"l": loc}
 	
 func generate_tall_grass():
 	for i in range(4):
@@ -216,7 +260,7 @@ func generate_grass_bunch(loc, variety):
 			caveGrass.loc = loc
 			Server.world.get_node("GrassObjects").call_deferred("add_child", caveGrass)
 			caveGrass.position = loc*32 + Vector2(16,32)
-			Server.world.cave_data["tall_grass"][id] = {"l": loc, "v": variety}
+			#Server.world.cave_data["tall_grass"][id] = {"l": loc, "v": variety}
 		else:
 			loc -= randomAdjacentTiles[0]
 	
@@ -237,7 +281,7 @@ func generate_ore():
 			object.location = loc
 			object.position = loc*32 + Vector2(16, 24)
 			Server.world.get_node("NatureObjects").call_deferred("add_child",object,true)
-			Server.world.cave_data["ore"][id] = {"l": loc, "v": oreTypes.front()}
+		#	Server.world.cave_data["ore"][id] = {"l": loc, "v": oreTypes.front()}
 	while count < NUM_LARGE_ORE:
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
@@ -254,7 +298,7 @@ func generate_ore():
 			object.location = loc
 			object.position = loc*32
 			Server.world.get_node("NatureObjects").call_deferred("add_child",object,true)
-			Server.world.cave_data["large_ore"][id] = {"l": loc, "v": oreTypes.front()}
+			#Server.world.cave_data["large_ore"][id] = {"l": loc, "v": oreTypes.front()}
 
 func set_light_nodes():
 	for loc in Server.world.get_node("Tiles/Lights").get_used_cells():

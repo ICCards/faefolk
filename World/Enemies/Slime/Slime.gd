@@ -239,9 +239,7 @@ func start_frozen_state(timer_length):
 func _on_FrozenTimer_timeout():
 	frozen = false
 	if not poisoned:
-		slime_sprite.modulate = Color("00ff00")
-		#if not destroyed:
-			#animation_player.play("loop")
+		slime_sprite.modulate = Color("ffffff")
 
 func start_poison_state():
 	$PoisonParticles/P1.emitting = true
@@ -250,8 +248,6 @@ func start_poison_state():
 	slime_sprite.modulate = Color("009000")
 	poisoned = true
 	$Timers/PoisonTimer.start()
-	#if not attacking and not destroyed:
-		#animation_player.play("loop frozen")
 
 func _on_PoisonTimer_timeout():
 	$PoisonParticles/P1.emitting = false
@@ -260,8 +256,6 @@ func _on_PoisonTimer_timeout():
 	poisoned = false
 	if not frozen:
 		slime_sprite.modulate = Color("ffffff")
-		#if not destroyed:
-			#animation_player.play("loop")
 
 func start_stunned_state():
 	if not destroyed:
@@ -269,7 +263,6 @@ func start_stunned_state():
 		rng.randomize()
 		$Electricity.frame = rng.randi_range(1,13)
 		$Electricity.show()
-		#animation_player.stop(false)
 		$Timers/StunnedTimer.start()
 		stunned = true
 
@@ -278,7 +271,6 @@ func _on_StunnedTimer_timeout():
 		slime_sprite.playing = true
 		$Electricity.hide()
 		stunned = false
-		#animation_player.play()
 
 func stop_sound_effects():
 	playing_sound_effect = false
@@ -286,7 +278,6 @@ func stop_sound_effects():
 
 func _on_VisibilityNotifier2D_screen_entered():
 	show()
-
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
 

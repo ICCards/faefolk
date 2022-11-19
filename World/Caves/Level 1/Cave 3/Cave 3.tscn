@@ -1426,3 +1426,5 @@ environment = SubResource( 608 )
 [node name="LightObjects" type="YSort" parent="."]
 
 [node name="PlacableObjects" type="YSort" parent="."]
+
+[connection signal="timeout" from="SpawnBatTimer" to="." method="_on_SpawnBatTimer_timeout"]
