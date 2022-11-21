@@ -51,7 +51,7 @@ var input_vector
 var counter = -1
 var collisionMask = null
 var direction_of_current_chair
-
+var is_building_world = false
 
 const _character = preload("res://Global/Data/Characters.gd")
 
@@ -62,6 +62,12 @@ func _ready():
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
 	Server.player_node = self
+	if is_building_world:
+		state = DYING
+		$Camera2D/UserInterface/LoadingScreen.show()
+	yield(get_tree().create_timer(3.0), "timeout")
+	state = MOVEMENT
+	$Camera2D/UserInterface/LoadingScreen.hide()
 	
 func destroy():
 	set_process(false)

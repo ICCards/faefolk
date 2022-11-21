@@ -83,8 +83,9 @@ func _physics_process(delta):
 			else:
 				is_eating = true
 				duck_sprite.play("idle")
-				yield(get_tree().create_timer(rand_range(1.0, 4.0)), "timeout")
-				is_eating = false
+				$Timers/IdleTimer.start(rand_range(1.0, 4.0))
+				#yield(get_tree().create_timer(rand_range(1.0, 4.0)), "timeout")
+				#is_eating = false
 			return
 	duck_sprite.play("walk")
 	var target = navigation_agent.get_next_location()
@@ -243,3 +244,7 @@ func _on_VisibilityNotifier2D_screen_entered():
 	show()
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
+
+
+func _on_IdleTimer_timeout():
+	is_eating = false

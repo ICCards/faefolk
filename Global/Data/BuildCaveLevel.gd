@@ -26,7 +26,9 @@ var count = 0
 var nav_node
 var valid_tiles
 
+var is_player_exiting_cave: bool = false
 var is_player_going_down: bool = true
+
 
 func draw_mst(path):
 	var current_lines = []

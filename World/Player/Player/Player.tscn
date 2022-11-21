@@ -5863,6 +5863,11 @@ shape = SubResource( 21 )
 anims/RESET = SubResource( 23 )
 anims/hit = SubResource( 22 )
 
+[node name="PoisonTimer" type="Timer" parent="Area2Ds/HurtBox"]
+wait_time = 2.0
+
+[node name="RegenerationTimer" type="Timer" parent="Area2Ds/HurtBox"]
+
 [node name="EnterInteractiveZones" type="Node2D" parent="Area2Ds"]
 script = ExtResource( 26 )
 
@@ -5973,6 +5978,8 @@ shape = SubResource( 11 )
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_exited"]
 [connection signal="area_entered" from="Area2Ds/HurtBox" to="Area2Ds/HurtBox" method="_on_HurtBox_area_entered"]
+[connection signal="timeout" from="Area2Ds/HurtBox/PoisonTimer" to="Area2Ds/HurtBox" method="_on_PoisonTimer_timeout"]
+[connection signal="timeout" from="Area2Ds/HurtBox/RegenerationTimer" to="Area2Ds/HurtBox" method="_on_RegenerationTimer_timeout"]
 [connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/Area2D" to="Area2Ds/EnterInteractiveZones" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/Area2D" to="Area2Ds/EnterInteractiveZones" method="_on_Area2D_area_exited"]
 [connection signal="area_entered" from="Area2Ds/DetectPathType/DetectWoodPath" to="Area2Ds/DetectPathType" method="_on_DetectWoodPath_area_entered"]

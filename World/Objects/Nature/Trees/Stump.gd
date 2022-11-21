@@ -23,7 +23,8 @@ func setTexture(tree):
 
 func hit(tool_name):
 	health -= Stats.return_tool_damage(tool_name)
-	Server.generated_map["stump"][name]["h"] = health
+	if MapData.world["stump"].has(name):
+		MapData.world["stump"][name]["h"] = health
 	if health > 0:
 		sound_effects.stream = Sounds.tree_hit[rng.randi_range(0,2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -36,7 +37,8 @@ func hit(tool_name):
 			animation_player.play("stump hit right")
 	elif not destroyed:
 		destroyed = true
-		Server.generated_map["stump"].erase(name)
+		if MapData.world["stump"].has(name):
+			MapData.world["stump"].erase(name)
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.stream = Sounds.stump_break
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)

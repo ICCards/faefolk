@@ -133,12 +133,12 @@ tracks/2/keys = {
 }
 
 [node name="LoadingScreen" type="Node2D"]
-z_index = 1
+z_index = 3
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 2486.0
-margin_bottom = 1541.0
+margin_right = 1024.0
+margin_bottom = 600.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -172,7 +172,7 @@ margin_right = 933.0
 margin_bottom = 594.0
 grow_horizontal = 0
 theme = ExtResource( 1 )
-text = "Buildin"
+text = "Building world"
 
 [node name="Dot1" type="Label" parent="Control"]
 margin_left = 940.0

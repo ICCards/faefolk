@@ -31,7 +31,8 @@ func setTreeBranchType(num):
 func hit(tool_name, var special_ability = ""):
 	if not destroyed:
 		destroyed = true
-		Server.generated_map["log"].erase(name)
+		if MapData.world["log"].has(name):
+			MapData.world["log"].erase(name)
 		Tiles.add_valid_tiles(location)
 		sound_effects.stream = Sounds.stump_break
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)

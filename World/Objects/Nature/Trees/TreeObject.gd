@@ -52,7 +52,8 @@ func hit(tool_name):
 	if health == 100:
 		InstancedScenes.initiateBirdEffect(position)
 	health -= Stats.return_tool_damage(tool_name)
-	Server.generated_map["tree"][name]["h"] = health
+	if MapData.world["tree"].has(name):
+		MapData.world["tree"][name]["h"] = health
 	if health >= Stats.STUMP_HEALTH:
 		InstancedScenes.initiateLeavesFallingEffect(variety, position)
 		sound_effects_tree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
@@ -114,7 +115,7 @@ func destroy(tool_name):
 	CollectionsData.resources["wood"] += amt
 	InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
 	yield(get_tree().create_timer(3.0), "timeout")
-	Server.generated_map["tree"].erase(name)
+	MapData.world["tree"].erase(name)
 	queue_free()
 
 ### Tree hurtbox
