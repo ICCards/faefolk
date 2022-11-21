@@ -12,7 +12,7 @@ var NUM_BATS = 4
 var NUM_SLIMES = 4
 var NUM_SPIDERS = 4
 var NUM_SKELETONS = 0
-var is_changing_scene = false
+var is_changing_scene: bool = false
 
 func _ready():
 	nav_node = $Navigation2D
@@ -24,6 +24,7 @@ func _ready():
 
 func advance_up_cave_level():
 	if not is_changing_scene:
+		BuildCaveLevel.is_player_exiting_cave = true
 		BuildCaveLevel.is_player_going_down = false
 		Server.player_node.destroy()
 		is_changing_scene = true

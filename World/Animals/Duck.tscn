@@ -326,7 +326,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 7
+frame = 3
 playing = true
 
 [node name="Timers" type="Node" parent="."]
@@ -348,6 +348,8 @@ one_shot = true
 wait_time = 8.0
 one_shot = true
 
+[node name="IdleTimer" type="Timer" parent="Timers"]
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
@@ -355,3 +357,4 @@ one_shot = true
 [connection signal="timeout" from="Timers/FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
 [connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
+[connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_IdleTimer_timeout"]

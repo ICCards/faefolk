@@ -22,7 +22,6 @@ func goto_scene(path):
 	# we can be sure that no code from the current scene is running:
 	animation_player.play("fade")
 	yield(animation_player, "animation_finished")
-	yield(get_tree().create_timer(3.0), "timeout")
 	call_deferred("_deferred_goto_scene", path)
 
 

@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ImageTexture",
+"class": "CustomGradientTexture",
+"language": "GDScript",
+"path": "res://Global/Functions/maujoe.custom_gradient_texture/custom_gradient_texture.gd"
+}, {
 "base": "Camera2D",
 "class": "PanningCamera2D",
 "language": "GDScript",
 "path": "res://World/Map/Camera2D.gd"
 } ]
 _global_script_class_icons={
+"CustomGradientTexture": "",
 "PanningCamera2D": ""
 }
 

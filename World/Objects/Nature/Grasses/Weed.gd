@@ -48,7 +48,8 @@ func _on_Area2D_body_exited(_body):
 
 func _on_Area2D_area_entered(area):
 	Tiles.add_valid_tiles(location)
-	Server.generated_map["flower"].erase(name)
+	if MapData.world["flower"].has(name):
+		MapData.world["flower"].erase(name)
 	$Sprite.hide()
 	$LeafBreak.show()
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)

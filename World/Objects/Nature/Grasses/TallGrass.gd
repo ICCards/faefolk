@@ -107,7 +107,7 @@ func _on_BackArea2D_area_entered(area):
 
 func destroy():
 	if not is_back_visible and not is_front_visible:
-		Server.generated_map["tall_grass"].erase(name)
+		MapData.world["tall_grass"].erase(name)
 		Tiles.add_valid_tiles(loc)
 		queue_free()
 

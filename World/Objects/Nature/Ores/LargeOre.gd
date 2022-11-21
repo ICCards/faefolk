@@ -36,8 +36,8 @@ func setTexture(ore):
 func hit(tool_name):
 	rng.randomize()
 	health -= Stats.return_tool_damage(tool_name)
-	if Server.generated_map["ore_large"].has(name):
-		Server.generated_map["ore_large"][name]["h"] = health
+	if MapData.world["ore_large"].has(name):
+		MapData.world["ore_large"][name]["h"] = health
 	if health > 40:
 		sound_effects.stream = Sounds.ore_hit[rng.randi_range(0, 2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
@@ -65,8 +65,8 @@ func hit(tool_name):
 		animation_player.play("small_ore_hit_right")
 	elif health <= 0 and not destroyed:
 		destroyed = true
-		if Server.generated_map["ore_large"].has(name):
-			Server.generated_map["ore_large"].erase(name)
+		if MapData.world["ore_large"].has(name):
+			MapData.world["ore_large"].erase(name)
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)

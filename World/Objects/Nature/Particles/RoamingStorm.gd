@@ -17,8 +17,7 @@ func _ready():
 func initiate_storm():
 	randomize()
 	random_storm_position = Vector2(rand_range(MIN_DIST, MAX_DIST), rand_range(MIN_DIST, MAX_DIST))
-	yield(get_tree().create_timer(rand_range(60, 180)), "timeout")
-	initiate_storm()
+	$IdleTimer.start(rand_range(60, 180))
 
 func _physics_process(delta):
 	if Server.isLoaded and not PlayerInventory.viewMapMode:
@@ -37,3 +36,7 @@ func _physics_process(delta):
 			$RainStorm/RainOnFloor.emitting = false
 	else:
 		visible = false
+
+
+func _on_IdleTimer_timeout():
+	initiate_storm()

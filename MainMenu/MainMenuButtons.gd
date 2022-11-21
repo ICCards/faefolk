@@ -33,10 +33,15 @@ func _on_ConnectToPlugButton_pressed():
 	#IC.connect_plug(connect_callback)
 	$ConnectToPlug.hide()
 	$LoadingIndicator.show()
-	yield(get_tree().create_timer(0.5), "timeout")
-	$LoadingIndicator.hide()
-	get_parent().spawn_player_in_menu()
+	wait_for_map_build()
 	
+func wait_for_map_build():
+	if MapData.is_world_built:
+		$LoadingIndicator.hide()
+		get_parent().spawn_player_in_menu()
+	else:
+		yield(get_tree().create_timer(0.5), "timeout")
+		wait_for_map_build()
 	
 #
 #func _login_test():

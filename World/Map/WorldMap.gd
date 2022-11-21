@@ -63,8 +63,8 @@ func set_inactive():
 	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = true
 
 func _ready():
-	wait_for_map()
-	
+	if has_node("/root/World"):
+		buildMap(MapData.world)
 
 func draw_grid():
 	for x in range(NUM_ROWS):
@@ -120,35 +120,28 @@ func set_direction(dir):
 			playerIcon.rotation_degrees = 90
 		"UP":
 			playerIcon.rotation_degrees = -90
-
-func wait_for_map():
-	if not Server.generated_map.empty():
-		buildMap(Server.generated_map)
-	else:
-		yield(get_tree().create_timer(1.5), "timeout")
-		wait_for_map()
 		
 func buildMap(map):
 	for id in map["dirt"]:
-		var loc = map["dirt"][id]
+		var loc = Util.string_to_vector2(map["dirt"][id])
 		miniMap.set_cellv(loc, Tiles.DIRT)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["forest"]:
-		var loc = map["forest"][id]
+		var loc = Util.string_to_vector2(map["forest"][id])
 		miniMap.set_cellv(loc , Tiles.FOREST)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["plains"]:
-		var loc = map["plains"][id]
+		var loc = Util.string_to_vector2(map["plains"][id])
 		miniMap.set_cellv(loc , Tiles.PLAINS)
 	yield(get_tree().create_timer(0.5), "timeout")
 	for id in map["beach"]:
-		var loc = map["beach"][id]
+		var loc = Util.string_to_vector2(map["beach"][id])
 		miniMap.set_cellv(loc , Tiles.BEACH)
 	for id in map["desert"]:
-		var loc = map["desert"][id]
+		var loc = Util.string_to_vector2(map["desert"][id])
 		miniMap.set_cellv(loc , Tiles.DESERT)
 	for id in map["snow"]:
-		var loc = map["snow"][id]
+		var loc = Util.string_to_vector2(map["snow"][id])
 		miniMap.set_cellv(loc , Tiles.SNOW)
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):
