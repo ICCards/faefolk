@@ -94,6 +94,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true, false, true ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "fade_out_sound"
+} ]
+}
 
 [node name="BlizzardFog" type="Node2D"]
 z_index = 1
@@ -131,5 +145,7 @@ stream = ExtResource( 6 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/play = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [editable path="Snow"]

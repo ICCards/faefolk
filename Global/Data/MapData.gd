@@ -1,6 +1,9 @@
 extends Node
 
-var openSimplexNoise := OpenSimplexNoise.new()
+
+var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
+var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
+
 
 var is_world_built: bool = true
 var is_cave_1_built: bool = false
@@ -14,7 +17,54 @@ var is_cave_8_built: bool = false
 var is_cave_9_built: bool = false
 var is_cave_10_built: bool = false
 
+func return_if_cave_built(cave_name):
+	match cave_name:
+		"Cave 1":
+			return is_cave_1_built
+		"Cave 2":
+			return is_cave_2_built
+		"Cave 3":
+			return is_cave_3_built
+		"Cave 4":
+			return is_cave_4_built
+		"Cave 5":
+			return is_cave_5_built
+		"Cave 6":
+			return is_cave_6_built
+		"Cave 7":
+			return is_cave_7_built
+		"Cave 8":
+			return is_cave_8_built
+		"Cave 9":
+			return is_cave_9_built
+		"Cave 10":
+			return is_cave_10_built
+
+func set_cave_built(cave_name):
+	match cave_name:
+		"Cave 1":
+			is_cave_1_built = true
+		"Cave 2":
+			is_cave_2_built = true
+		"Cave 3":
+			is_cave_3_built = true
+		"Cave 4":
+			is_cave_4_built = true
+		"Cave 5":
+			is_cave_5_built = true
+		"Cave 6":
+			is_cave_6_built = true
+		"Cave 7":
+			is_cave_7_built = true
+		"Cave 8":
+			is_cave_8_built = true
+		"Cave 9":
+			is_cave_9_built = true
+		"Cave 10":
+			is_cave_10_built = true
+
 var world = {
+	"placables":{},
 	"dirt":{},
 	"ocean":{},
 	"beach":{},
@@ -33,99 +83,99 @@ var world = {
 	"cave_entrance_location": null
 }
 var cave_1_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_2_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_3_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_4_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_5_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_6_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_7_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_8_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_9_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 var cave_10_data = {
+	"placables":{},
 	"ore": {},
-	"large_ore": {},
+	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
 
-export var width := 1000
-export var height := 1000
-export var MAX_GRASS_BUNCH_SIZE = 500
 
+func add_placable(id, data):
+	var map = return_cave_data(Server.world.name)
+	map["placables"][id] = data
+	
+func remove_placable(id):
+	var map = return_cave_data(Server.world.name)
+	map["placables"].erase(id)
 
-var rng = RandomNumberGenerator.new()
-#onready var tile_maps = [_Tree,Stump,Log,Ore_Large,Ore,Flower]
-var _uuid = preload("res://helpers/UUID.gd")
-onready var uuid = _uuid.new()
-
-var altittude = {}
-var temperature = {}
-var moisture = {}
-
-var decoration_locations = []
-
-const STUMP_HEALTH = 40
-const TREE_HEALTH = 100
-const SMALL_ORE_HEALTH = 40
-const LARGE_ORE_HEALTH = 100
-signal build_finished
+func remove_object(type, id):
+	var map = return_cave_data(Server.world.name)
+	map[type].erase(id)
+	
+func update_object_health(type, id, new_health):
+	var map = return_cave_data(Server.world.name)
+	if map[type].has(id):
+		map[type][id]["h"] = new_health
 
 func _ready() -> void:
-	rng.randomize()
-	randomize()
-	temperature = generate_map(5,300)
-	moisture = generate_map(5,300)
-	altittude = generate_map(5,150)
 	world = JsonData.world_data
 	add_tiles_to_chunks()
 	add_nature_objects_to_chunks()
-	#build_terrian()
-	#fix_tiles()
+#
 #	print("BUILT TERRAIN")
 #	generate_trees(snow,"snow")
 #	yield(get_tree(), "idle_frame")
@@ -152,21 +202,44 @@ func _ready() -> void:
 #	save_keys()
 #	is_world_built = true
 #	print("done")
-var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach"]
-var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
+
+func return_cave_data(cave_name):
+	match cave_name:
+		"World":
+			return world
+		"Cave 1":
+			return cave_1_data
+		"Cave 2":
+			return cave_2_data
+		"Cave 3":
+			return cave_3_data
+		"Cave 4":
+			return cave_4_data
+		"Cave 5":
+			return cave_5_data
+		"Cave 6":
+			return cave_6_data
+		"Cave 7":
+			return cave_7_data
+		"Cave 8":
+			return cave_8_data
+		"Cave 9":
+			return cave_9_data
+		"Cave 10":
+			return cave_10_data
 
 
 func add_nature_objects_to_chunks():
 	for type in nature_types:
 		for id in world[type]:
 			var loc = Util.string_to_vector2(world[type][id]["l"])
-			add_to_chunk(type, loc, world[type][id])
+			add_to_chunk(type, loc, id)
 
 func add_tiles_to_chunks():
 	for type in tile_types:
 		for id in world[type]:
 			var loc = Util.string_to_vector2(world[type][id])
-			add_to_chunk(type, loc, loc)
+			add_to_chunk(type, loc, id)
 
 #	for id in world["plains"]:
 #		var loc = Util.string_to_vector2(world["plains"][id])
@@ -188,379 +261,35 @@ func add_tiles_to_chunks():
 #		add_to_chunk("beach", loc, loc)
 
 
-var file_name = "res://JSONData/world.json"
-
-func save_keys():
-	var file = File.new()
-	file.open(file_name,File.WRITE)
-	file.store_string(to_json(world))
-	file.close()
-	print("saved")
-	pass
-	
-
-var plains = []
-var forest = []
-var desert = []
-var beach = []
-var snow = []
-var dirt = []
-
-var tile_arrays = [plains, forest, desert, beach, snow, dirt]
-
-func generate_flowers(locations,biome):
-	print("Building "+biome+" Flowers")
-	var NUM_FLOWER = int(locations.size()/100)
-	for _i in range(NUM_FLOWER):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_flower(location,biome)
-	
-
-func create_flower(loc,biome):
-	var id = uuid.v4()
-	if isValidPosition(loc):
-		world["flower"][id] = {"l":loc,"h":5, "b":biome}
-		#Flower.set_cellv(loc,0)
-		decoration_locations.append(loc)
-
-func generate_ores(locations,biome):
-	var NUM_ORE_LARGE = int(locations.size()/100)
-	var NUM_ORE = int(locations.size()/120)
-	for _i in range(NUM_ORE_LARGE):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_ore_large(location,biome)
-			
-	for _i in range(NUM_ORE):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_ore(location,biome)
-
-var num_ore = 0
-func create_ore_large(loc,biome):
-	var id = uuid.v4()
-	if check_64x64(loc) and isValidPosition(loc):
-		world["ore_large"][id] = {"l":loc,"h":LARGE_ORE_HEALTH,"b":biome}
-		#Ore_Large.set_cellv(loc,0)
-		decoration_locations.append(loc)
-		decoration_locations.append(loc + Vector2(1,0))
-		decoration_locations.append(loc + Vector2(0,-1))
-		decoration_locations.append(loc + Vector2(1,-1))
-		num_ore += 1
-
-func create_ore(loc,biome):
-	var id = uuid.v4()
-	if isValidPosition(loc):
-		world["ore"][id] = {"l":loc,"h":SMALL_ORE_HEALTH,"b":biome}
-		#Ore.set_cellv(loc,0)
-		decoration_locations.append(loc)
-#		decoration_locations.append(loc + Vector2(1,0))
-#		decoration_locations.append(loc + Vector2(0,-1))
-#		decoration_locations.append(loc + Vector2(1,-1))
-
-func generate_grass_bunches(locations,biome):
-	var NUM_GRASS_BUNCHES = int(locations.size()/100)
-	for _i in range(NUM_GRASS_BUNCHES):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_grass_bunch(location,biome)
-
-func create_grass_bunch(loc,biome):
-	rng.randomize()
-	var randomNum = rng.randi_range(1, MAX_GRASS_BUNCH_SIZE)
-	for _i in range(randomNum):
-		loc += Vector2(rng.randi_range(-1, 1), rng.randi_range(-1, 1))
-		if isValidPosition(loc):
-			var id = uuid.v4()
-			world["tall_grass"][id] = {"l":loc,"h":5,"b":biome}
-			#Grass.set_cellv(loc,0)
-			decoration_locations.append(loc)
-
-func fix_tiles():
-#	for id in world["plains"]:
-#		plains.append(Util.string_to_vector2(world["plains"][id]))
-#	for id in world["forest"]:
-#		forest.append(Util.string_to_vector2(world["forest"][id]))
-#	for id in world["snow"]:
-#		snow.append(Util.string_to_vector2(world["snow"][id]))
-#	for id in world["beach"]:
-#		beach.append(Util.string_to_vector2(world["beach"][id]))
-#	for id in world["dirt"]:
-#		dirt.append(Util.string_to_vector2(world["dirt"][id]))
-#	for id in world["desert"]:
-#		desert.append(Util.string_to_vector2(world["desert"][id]))
-	for tile_array in tile_arrays: 
-		var border_tiles = []
-		for loc in tile_array:
-			if is_border_tile(loc, tile_array):
-				border_tiles.append(loc)
-		for loc in border_tiles:
-			if not tile_array.has(loc+Vector2(1,0)):
-				tile_array.append(loc+Vector2(1,0))
-			if not tile_array.has(loc+Vector2(-1,0)):
-				tile_array.append(loc+Vector2(-1,0))
-			if not tile_array.has(loc+Vector2(0,1)):
-				tile_array.append(loc+Vector2(0,1))
-			if not tile_array.has(loc+Vector2(0,-1)):
-				tile_array.append(loc+Vector2(0,-1))
-			if not tile_array.has(loc+Vector2(1,1)):
-				tile_array.append(loc+Vector2(1,1))
-			if not tile_array.has(loc+Vector2(-1,1)):
-				tile_array.append(loc+Vector2(-1,1))
-			if not tile_array.has(loc+Vector2(1,-1)):
-				tile_array.append(loc+Vector2(1,-1))
-			if not tile_array.has(loc+Vector2(-1,-1)):
-				tile_array.append(loc+Vector2(-1,-1))
-		yield(get_tree(), "idle_frame")
-	for loc in plains: 
-		var id = uuid.v4()
-		world["plains"][id] = loc
-		add_to_chunk("plains", loc, loc)
-	yield(get_tree(), "idle_frame")
-	for loc in forest: 
-		var id = uuid.v4()
-		world["forest"][id] = loc
-		add_to_chunk("forest", loc, loc)
-	yield(get_tree(), "idle_frame")
-	for loc in snow: 
-		var id = uuid.v4()
-		world["snow"][id] = loc
-		add_to_chunk("snow", loc, loc)
-	yield(get_tree(), "idle_frame")
-	for loc in desert: 
-		var id = uuid.v4()
-		world["desert"][id] = loc
-		add_to_chunk("desert", loc, loc)
-	yield(get_tree(), "idle_frame")
-	for loc in beach: 
-		var id = uuid.v4()
-		world["beach"][id] = loc
-		add_to_chunk("beach", loc, loc)
-	yield(get_tree(), "idle_frame")
-	for loc in dirt: 
-		var id = uuid.v4()
-		world["dirt"][id] = loc
-		add_to_chunk("dirt", loc, loc)
-
-func is_border_tile(_pos, _tiles):
-	if not _tiles.has(_pos+Vector2(1,0)):
-		return true
-	if not _tiles.has(_pos+Vector2(-1,0)):
-		return true
-	if not  _tiles.has(_pos+Vector2(0,1)):
-		return true
-	if not _tiles.has(_pos+Vector2(0,-1)):
-		return true
-	return false
-
-func isInvalidAutoTile(_pos, _map):
-	var count = 0
-	if _map.has(_pos + Vector2(0,1)):
-		count += 1
-	if _map.has(_pos + Vector2(0,-1)):
-		count += 1
-	if _map.has(_pos + Vector2(1,0)):
-		count += 1
-	if _map.has(_pos + Vector2(-1,0)):
-		count += 1
-	if count <= 1:
-		return true
-	else:
-		if _map.has(_pos + Vector2(-1,-1)):
-			count += 1
-		if _map.has(_pos + Vector2(-1,1)):
-			count += 1
-		if _map.has(_pos + Vector2(1,-1)):
-			count += 1
-		if _map.has(_pos + Vector2(1,1)):
-			count += 1
-		if count == 6:
-			if _map.has(_pos + Vector2(-1,-1)) and _map.has(_pos + Vector2(1,1)):
-				return true
-			elif _map.has(_pos + Vector2(1,-1)) and _map.has(_pos + Vector2(-1,1)):
-				return true
-	return false
-
-
-func generate_map(octaves,period):
-	var grid = {}
-	openSimplexNoise.seed = randi()
-	openSimplexNoise.octaves = octaves
-	openSimplexNoise.period = period
-	var custom_gradient = CustomGradientTexture.new()
-	custom_gradient.gradient = Gradient.new()
-	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
-	custom_gradient.size = Vector2(width,height)
-	var gradient_data = custom_gradient.get_data()
-	gradient_data.lock()
-	for x in width:
-		for y in height:
-			#var rand := floor((abs(openSimplexNoise.get_noise_2d(x,y)))*11)
-			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5
-			var value = openSimplexNoise.get_noise_2d(x,y)
-			value += gradient_value
-			grid[Vector2(x,y)] = value
-	return grid
-
-func build_terrian():
-	print("BUILDING")
-	for x in width:
-		for y in height:
-			var pos = Vector2(x,y)
-			var alt = altittude[pos]
-			var temp = temperature[pos]
-			var moist = moisture[pos]
-			var id = uuid.v4()
-			#Ocean
-			if alt > 0.8:
-				pass
-			#	Ground.set_cell(x,y, 3)
-				#ocean.append(Vector2(x,y))
-				#world["ocean"][id] = (Vector2(x,y))
-			#Beach	
-			elif between(alt,0.75,0.8):
-				#Ground.set_cell(x,y, 5)
-				#get_parent().spawnable_locations.append(Vector2(x,y))
-				beach.append(Vector2(x,y))
-				#world["beach"][id] = (Vector2(x,y))
-			#Biomes	
-			elif between(alt,-1.4,0.8):
-				#plains
-				if between(moist,0,0.4) and between(temp,0.2,0.6):
-					#Ground.set_cell(x,y, 1)
-					plains.append(Vector2(x,y))
-					#world["plains"][id] = (Vector2(x,y))
-					#generate_trees(get_parent().map["plains"].values())
-				#forest
-				elif between(moist,0.5,0.85) and temp > 0.6:
-					#Ground.set_cell(x,y, 2)
-					forest.append(Vector2(x,y))
-					#world["forest"][id] = (Vector2(x,y))
-					#generate_trees(get_parent().map["forest"].values())
-				#desert	
-				elif temp > 0.6 and moist < 0.5:
-					#Ground.set_cell(x,y, 5)
-					desert.append(Vector2(x,y))
-					#world["desert"][id] = (Vector2(x,y))
-					#generate_trees(get_parent().map["desert"].values())
-				#snow	
-				elif temp < 0.2:
-					#Ground.set_cell(x,y, 6)
-					snow.append(Vector2(x,y))
-					#world["snow"][id] = (Vector2(x,y))
-					#generate_trees(get_parent().map["snow"].values())
-				else:
-					#dirt
-					#Ground.set_cell(x,y, 0)
-					dirt.append(Vector2(x,y))
-					#world["dirt"][id] = (Vector2(x,y))
-			else:
-				#Ground.set_cell(x,y, 0)
-				dirt.append(Vector2(x,y))
-				#world["dirt"][id] = (Vector2(x,y))
-				#print(get_parent().map["dirt"])
-	print("FINISHED BUILD")
-	fix_tiles()
-
-func check_64x64(loc):
-	if not decoration_locations.has(loc) and not decoration_locations.has(loc+Vector2(1,0)) and \
-	not decoration_locations.has(loc+Vector2(1,-1)) and not decoration_locations.has(loc+Vector2(0,-1)):
-		return true
-	return false
- 
-var num_trees = 0
-func generate_trees(locations,biome):
-	print("Building "+biome+" Trees")
-	var NUM_TREES = int(locations.size()/100)
-	var NUM_STUMPS = int(locations.size()/120)
-	var NUM_LOGS = int(locations.size()/140)
-	print(NUM_TREES)
-	print(NUM_STUMPS)
-	print(NUM_LOGS)
-	for _i in range(NUM_TREES):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_tree(location,biome)
-	for _i in range(NUM_STUMPS):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_stump(location,biome)
-	for _i in range(NUM_LOGS):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_log(location,biome)
-
-func create_tree(loc,biome):
-	var id = uuid.v4()
-	if check_64x64(loc) and isValidPosition(loc):
-		num_trees += 1
-		world["tree"][id] = {"l":loc,"h":TREE_HEALTH,"b":biome}
-		decoration_locations.append(loc)
-		decoration_locations.append(loc + Vector2(1,0))
-		decoration_locations.append(loc + Vector2(0,-1))
-		decoration_locations.append(loc + Vector2(1,-1))
-		
-func create_stump(loc,biome):
-	var id = uuid.v4()
-	if check_64x64(loc) and isValidPosition(loc):
-		num_trees += 1
-		world["stump"][id] = {"l":loc,"h":STUMP_HEALTH,"b":biome}
-		#Stump.set_cellv(loc,0)
-		decoration_locations.append(loc)
-		decoration_locations.append(loc + Vector2(1,0))
-		decoration_locations.append(loc + Vector2(0,-1))
-		decoration_locations.append(loc + Vector2(1,-1))
-	
-func create_log(loc,biome):
-	var id = uuid.v4()
-	if isValidPosition(loc):
-		num_trees += 1
-		world["log"][id] = {"l":loc,"h":1,"b":biome}
-		#Log.set_cellv(loc,0)
-		decoration_locations.append(loc)
-#		decoration_locations.append(loc + Vector2(1,0))
-#		decoration_locations.append(loc + Vector2(0,-1))
-#		decoration_locations.append(loc + Vector2(1,-1))
-
-func isValidPosition(loc):
-	if decoration_locations.has(loc):
-		return false
-	return true
-
-func between(val, start, end):
-	if start <= val and val < end:
-		return true	
-		
 func return_chunk(_row, _col):
 	_col = int(_col)
 	match _row:
 		"A":
 			match _col:
 				1:
-					return c1
+					return a1
 				2:
-					return c2
+					return a2
 				3:
-					return c3
+					return a3
 				4:
-					return c4
+					return a4
 				5:
-					return c5
+					return a5
 				6:
-					return c6
+					return a6
 				7:
-					return c7
+					return a7
 				8:
-					return c8
+					return a8
 				9:
-					return c9
+					return a9
 				10:
-					return c10
+					return a10
 				11:
-					return c11
+					return a11
 				12:
-					return c12
+					return a12
 		"B":
 			match _col:
 				1:
@@ -3154,60 +2883,12 @@ var l12 = {
 	"flower":{},
 }
 
-func add_to_chunk(type, loc, data):
+func add_to_chunk(type, loc, id):
 	var column
 	var row
-	var id = uuid.v4()
-	if loc.x < 187.5:
-		column = 1
-	elif loc.x < 250:
-		column = 2
-	elif loc.x < 312.5:
-		column = 3
-	elif loc.x < 375:
-		column = 4
-	elif loc.x < 437.5:
-		column = 5
-	elif loc.x < 500:
-		column = 6
-	elif loc.x < 562.5:
-		column = 7
-	elif loc.x < 625:
-		column = 8
-	elif loc.x < 687.5:
-		column = 9
-	elif loc.x < 750:
-		column = 10
-	elif loc.x < 812.5:
-		column = 11
-	else:
-		column = 12
-	if loc.y < 187.5:
-		row = "A"
-	elif loc.y < 250:
-		row = "B"
-	elif loc.y < 312.5:
-		row = "C"
-	elif loc.y < 375:
-		row = "D"
-	elif loc.y < 437.5:
-		row = "E"
-	elif loc.y < 500:
-		row = "F"
-	elif loc.y < 562.5:
-		row = "G"
-	elif loc.y < 625:
-		row = "H"
-	elif loc.y < 687.5:
-		row = "I"
-	elif loc.y < 750:
-		row = "J"
-	elif loc.y < 812.5:
-		row = "K"
-	else:
-		row = "L"
-	var chunk = row+str(column)
-	match chunk:
+	var data = world[type][id]
+	var chunk_name = get_chunk_from_location(loc)
+	match chunk_name:
 		"A1":
 			a1[type][id] = data
 		"A2":
@@ -3497,4 +3178,56 @@ func add_to_chunk(type, loc, data):
 		"L12":
 			l12[type][id] = data
 
+func get_chunk_from_location(loc):
+	var column
+	var row
+	if loc.x < 187.5:
+		column = 1
+	elif loc.x < 250:
+		column = 2
+	elif loc.x < 312.5:
+		column = 3
+	elif loc.x < 375:
+		column = 4
+	elif loc.x < 437.5:
+		column = 5
+	elif loc.x < 500:
+		column = 6
+	elif loc.x < 562.5:
+		column = 7
+	elif loc.x < 625:
+		column = 8
+	elif loc.x < 687.5:
+		column = 9
+	elif loc.x < 750:
+		column = 10
+	elif loc.x < 812.5:
+		column = 11
+	else:
+		column = 12
+	if loc.y < 187.5:
+		row = "A"
+	elif loc.y < 250:
+		row = "B"
+	elif loc.y < 312.5:
+		row = "C"
+	elif loc.y < 375:
+		row = "D"
+	elif loc.y < 437.5:
+		row = "E"
+	elif loc.y < 500:
+		row = "F"
+	elif loc.y < 562.5:
+		row = "G"
+	elif loc.y < 625:
+		row = "H"
+	elif loc.y < 687.5:
+		row = "I"
+	elif loc.y < 750:
+		row = "J"
+	elif loc.y < 812.5:
+		row = "K"
+	else:
+		row = "L"
+	return row+str(column)
 

@@ -1115,7 +1115,7 @@ var E_tree = {
 
 # BRANCH OBJECTS #
 var tree_branch_objects = {
-	0 : preload("res://Assets/Images/tree_sets/branch_objects/branch1.png"),
+	12 : preload("res://Assets/Images/tree_sets/branch_objects/branch1.png"),
 	1 : preload("res://Assets/Images/tree_sets/branch_objects/branch2.png"),
 	2 : preload("res://Assets/Images/tree_sets/branch_objects/branch3.png"),
 	3 : preload("res://Assets/Images/tree_sets/branch_objects/branch4.png"),

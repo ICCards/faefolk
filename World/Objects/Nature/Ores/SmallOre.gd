@@ -25,12 +25,10 @@ func setTexture():
 func hit(tool_name):
 	rng.randomize()
 	health -= Stats.return_tool_damage(tool_name)
-	if MapData.world["ore"].has(name):
-		MapData.world["ore"][name]["h"] = health
+	MapData.update_object_health("ore", name, health)
 	if health <= 0 and not destroyed:
 		destroyed = true
-		if MapData.world["ore"].has(name):
-			MapData.world["ore"].erase(name)
+		MapData.remove_object("ore", name)
 		Tiles.add_valid_tiles(location)
 		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)

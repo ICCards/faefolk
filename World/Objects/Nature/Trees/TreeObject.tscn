@@ -568,7 +568,7 @@ shape = SubResource( 21 )
 
 [node name="MovementCollisionBox" type="StaticBody2D" parent="."]
 position = Vector2( 3.33333, -25.5556 )
-collision_layer = 33
+collision_layer = 35
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
 position = Vector2( -3.33333, 33.2222 )

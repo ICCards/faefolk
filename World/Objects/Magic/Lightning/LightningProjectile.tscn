@@ -59,14 +59,13 @@ extents = Vector2( 11, 1.5 )
 radius = 8.99999
 height = 32.0
 
-[node name="LightningSpell" type="KinematicBody2D"]
+[node name="LightningProjectile" type="KinematicBody2D"]
 modulate = Color( 1.18, 1.18, 1.18, 1 )
 script = ExtResource( 3 )
 
 [node name="Projectile" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 39 )
-frame = 8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

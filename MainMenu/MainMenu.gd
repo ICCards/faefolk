@@ -6,9 +6,9 @@ var playerMenuState
 var is_menu_open = false
 
 func _ready():
-	$TitleMusic.stream = Sounds.title_music
-	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
-	$TitleMusic.play()
+#	$TitleMusic.stream = Sounds.title_music
+#	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
+#	$TitleMusic.play()
 	Sounds.connect("volume_change", self, "change_title_volume")
 	$Background/Water1.playing = true
 	$Background/Water2.playing = true

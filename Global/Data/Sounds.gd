@@ -76,7 +76,7 @@ func return_adjusted_sound_db(category, init_sound):
 
 ### Handles switching footsteps sound
 
-var current_footsteps_sound = stone_footsteps
+var current_footsteps_sound
 
 
 

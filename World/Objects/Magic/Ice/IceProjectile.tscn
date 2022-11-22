@@ -374,7 +374,6 @@ modulate = Color( 1.17, 1.17, 1.17, 1 )
 position = Vector2( 10, -9 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
-frame = 24
 playing = true
 
 [node name="TrailParticles" type="Node2D" parent="."]
@@ -504,6 +503,8 @@ stream = ExtResource( 2 )
 
 [node name="SoundEffects2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

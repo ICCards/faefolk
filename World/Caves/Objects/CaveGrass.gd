@@ -94,5 +94,6 @@ func _on_BackArea2D_area_entered(area):
 
 func destroy():
 	if not is_back_visible and not is_front_visible:
+		MapData.remove_object("tall_grass", name)
 		Tiles.add_valid_tiles(loc)
 		queue_free()

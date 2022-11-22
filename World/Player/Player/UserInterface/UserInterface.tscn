@@ -109,6 +109,13 @@ tracks/0/keys = {
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 23 )
 
+[node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
+visible = false
+margin_left = 209.0
+margin_top = 456.0
+margin_right = -815.0
+margin_bottom = -144.0
+
 [node name="Combat hotbar" parent="." instance=ExtResource( 10 )]
 visible = false
 
@@ -208,9 +215,6 @@ rect_scale = Vector2( 0.2, 0.2 )
 theme = ExtResource( 6 )
 text = "R"
 align = 1
-
-[node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
-visible = false
 
 [node name="ChangeVariety" type="Control" parent="."]
 visible = false

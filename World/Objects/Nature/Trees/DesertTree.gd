@@ -36,7 +36,7 @@ func _on_TreeHurtbox_area_entered(area):
 
 func hit(tool_name):
 	health -= Stats.return_tool_damage(tool_name)
-	Server.generated_map["tree"][name]["h"] = health
+	MapData.update_object_health("tree", name, health)
 	var data = {"id": name, "n": "tree"}
 	Server.action("ON_HIT", data)
 	health -= 1
@@ -65,7 +65,7 @@ func hit(tool_name):
 			tree_animation_player.play("tree fall left")
 			yield(tree_animation_player, "animation_finished" )
 			InstancedScenes.intitiateItemDrop("wood", Vector2(-130, -8), 7)
-		Server.generated_map["tree"].erase(name)
+		MapData.remove_object("tree", name)
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		queue_free()
 

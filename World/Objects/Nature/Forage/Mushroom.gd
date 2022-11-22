@@ -2,16 +2,15 @@ extends Node2D
 
 
 var rng = RandomNumberGenerator.new()
-var type
+var variety
 var location
 
 func _ready():
 	rng.randomize()
-	type = rng.randi_range(1,12)
 	set_random_texture()
 
 func set_random_texture():
-	$Mushroom.texture = load("res://Assets/Images/Forage/Mushroom/"+ str(type) +".png")
+	$Mushroom.texture = load("res://Assets/Images/Forage/Mushroom/"+ str(variety) +".png")
 
 func _on_Btn_mouse_entered():
 	set_mouse_cursor_type()
@@ -26,7 +25,8 @@ func _on_Btn_pressed():
 		$Mushroom.hide()
 		$Btn.disabled = true
 		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
-		Server.player_node.harvest_forage("Mushroom/"+str(type))
+		Server.player_node.harvest_forage("Mushroom/"+str(variety))
+		MapData.remove_object("mushroom", name)
 		yield(get_tree().create_timer(0.6), "timeout")
 		PlayerInventory.add_item_to_hotbar("mushroom", 1, null)
 		queue_free()

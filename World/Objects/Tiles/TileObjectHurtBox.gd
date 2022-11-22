@@ -139,7 +139,7 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "grain mill"
 		$Position2D/InteractiveArea.object_level = item_name.substr(12)
 		$Position2D/InteractiveArea.name = str(id)
-#		PlayerInventory.grain_mills_dict[id] = {}
+		PlayerInventory.grain_mills_dict[id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -322,8 +322,6 @@ func _on_HurtBox_area_entered(area):
 	$Position2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/DetectPlayerAroundBed/CollisionShape2D.set_deferred("disabled", true)
-	var data = {"id": name, "n": "decorations","t":"ON_HIT","name":item_name,"item":"placable"}
-	Server.action("ON_HIT", data)
 	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "wood chest" or item_name == "stone chest":
@@ -350,11 +348,12 @@ func _on_HurtBox_area_entered(area):
 		Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 	else:
 		Tiles.add_valid_tiles(location, dimensions)
-	if Tiles.object_tiles:
+	if Server.world.name == "World":
 		Tiles.object_tiles.set_cellv(location, -1)
 		Tiles.fence_tiles.set_cellv(location, -1)
 		Tiles.fence_tiles.update_bitmask_area(location)
 	InstancedScenes.intitiateItemDrop(item_name, position, 1)
+	MapData.remove_placable(id)
 	yield($SoundEffects, "finished")
 	queue_free()
 

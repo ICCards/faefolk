@@ -510,6 +510,8 @@ one_shot = true
 wait_time = 0.25
 one_shot = true
 
+[node name="DiminishHOT" type="Timer" parent="Timers"]
+
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false
 collision_layer = 262400
@@ -543,7 +545,7 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
-frame = 7
+frame = 11
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
@@ -643,5 +645,6 @@ anims/destroy = SubResource( 195 )
 [connection signal="timeout" from="Timers/ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+[connection signal="timeout" from="Timers/DiminishHOT" to="." method="_on_DiminishHOT_timeout"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]

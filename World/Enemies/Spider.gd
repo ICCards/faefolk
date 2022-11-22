@@ -33,6 +33,10 @@ const ACCELERATION = 180
 const FRICTION = 80
 const KNOCKBACK_AMOUNT = 70
 const MAX_RANDOM_CHASE_DIST = 50
+
+var poison_increment = 0
+var amount_to_diminish = 0
+
 enum {
 	IDLE,
 	WALK,
@@ -181,6 +185,7 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	InstancedScenes.intitiateItemDrop("rope", position, 1)
 	destroyed = true
 	animation_player.play("destroy")
 	yield(animation_player, "animation_finished")
@@ -210,7 +215,6 @@ func _on_HurtBox_area_entered(area):
 
 func diminish_HOT(type):
 	start_poison_state()
-	var amount_to_diminish
 	match type:
 		"poison potion I":
 			amount_to_diminish = Stats.BOAR_HEALTH * 0.08
@@ -218,20 +222,31 @@ func diminish_HOT(type):
 			amount_to_diminish = Stats.BOAR_HEALTH * 0.2
 		"poison potion III":
 			amount_to_diminish = Stats.BOAR_HEALTH * 0.32
-	var increment = int(ceil(amount_to_diminish / 4))
-	while int(amount_to_diminish) > 0 and not destroyed:
-		if amount_to_diminish < increment:
+	poison_increment = int(ceil(amount_to_diminish / 4))
+	if amount_to_diminish < poison_increment:
+		health -= amount_to_diminish
+		InstancedScenes.player_hit_effect(-amount_to_diminish, position)
+		amount_to_diminish = 0
+	else:
+		health -= poison_increment
+		InstancedScenes.player_hit_effect(-poison_increment, position)
+		amount_to_diminish -= poison_increment
+		$Timers/DiminishHOT.start(2)
+		if health <= 0 and not destroyed:
+			destroy()
+
+func _on_DiminishHOT_timeout():
+	if not destroyed:
+		if amount_to_diminish < poison_increment:
 			health -= amount_to_diminish
 			InstancedScenes.player_hit_effect(-amount_to_diminish, position)
 			amount_to_diminish = 0
+			$Timers/DiminishHOT.stop()
 		else:
-			health -= increment
-			InstancedScenes.player_hit_effect(-increment, position)
-			amount_to_diminish -= increment
-		if health <= 0 and not destroyed:
-			destroy()
-		yield(get_tree().create_timer(2.0), "timeout")
-
+			health -= poison_increment
+			InstancedScenes.player_hit_effect(-poison_increment, position)
+			amount_to_diminish -= poison_increment
+			$Timers/DiminishHOT.start(2)
 
 func _on_DetectPlayer_area_entered(area):
 	start_chase_state()
@@ -344,3 +359,4 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_KnockbackTimer_timeout():
 	knocking_back = false
+

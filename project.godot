@@ -53,6 +53,7 @@ InstancedScenes="*res://Global/Data/InstancedScenes.gd"
 Constants="*res://Global/Data/Constants.gd"
 BuildCaveLevel="*res://Global/Data/BuildCaveLevel.gd"
 MapData="*res://Global/Data/MapData.gd"
+GenerateNewWorld="*res://Global/Data/GenerateNewWorld.gd"
 
 [display]
 
