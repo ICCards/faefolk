@@ -196,6 +196,7 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	InstancedScenes.intitiateItemDrop("arrow", position, 1)
 	animation_player.play("death")
 	destroyed = true
 	yield(skeleton_sprite, "animation_finished")

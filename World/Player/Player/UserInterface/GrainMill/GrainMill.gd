@@ -139,8 +139,8 @@ func initialize_grain_mill_data():
 	for i in range(slots_in_grain_mill.size()):
 		if slots_in_grain_mill[i].item != null:
 			slots_in_grain_mill[i].removeFromSlot()
-		if PlayerInventory.grain_mills[id].has(i):
-			slots_in_grain_mill[i].initialize_item(PlayerInventory.grain_mills[id][i][0], PlayerInventory.grain_mills[id][i][1], PlayerInventory.grain_mills[id][i][2])
+		if PlayerInventory.grain_mills_dict[id].has(i):
+			slots_in_grain_mill[i].initialize_item(PlayerInventory.grain_mills_dict[id][i][0], PlayerInventory.grain_mills_dict[id][i][1], PlayerInventory.grain_mills_dict[id][i][2])
 
 func initialize_hotbar():
 	var slots = hotbar_slots.get_children()

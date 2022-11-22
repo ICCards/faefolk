@@ -13,7 +13,7 @@ func _physics_process(delta):
 
 func _ready():
 	if is_hostile:
-		$Hitbox.set_collision_mask(128)
+		$Hitbox.set_collision_mask(128+2)
 	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.tool_name = "arrow"
 	$Hitbox.knockback_vector = velocity / 150
@@ -49,3 +49,6 @@ func destroy():
 	if is_on_fire:
 		$Sprite.hide()
 		InstancedScenes.initiateExplosionParticles(position+Vector2(12,0))
+	$ArrowBreak.playing = true
+	yield($ArrowBreak, "animation_finished")
+	$ArrowBreak.hide()

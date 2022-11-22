@@ -600,6 +600,8 @@ one_shot = true
 [node name="JumpDelay" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="DiminishHOT" type="Timer" parent="Timers"]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/RESET = SubResource( 143 )
@@ -614,7 +616,7 @@ position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -623,7 +625,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -6 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 2
+frame = 10
 playing = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -711,3 +713,4 @@ color_ramp = SubResource( 168 )
 [connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
 [connection signal="timeout" from="Timers/JumpDelay" to="." method="_on_JumpDelay_timeout"]
+[connection signal="timeout" from="Timers/DiminishHOT" to="." method="_on_DiminishHOT_timeout"]

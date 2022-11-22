@@ -238,14 +238,6 @@ func place_rotatable_state():
 		if Input.is_action_pressed("mouse_click"):
 			place_object(item_name, directions[direction_index], location, "placable")
 
-#func sendAction(action,data): 
-#	match action:
-#		(MOVEMENT):
-#			Server.action("MOVEMENT",data)
-#		(SWING):
-#			Server.action("SWING", data)
-#		(PLACE_ITEM):
-#			Server.action("PLACE_ITEM", data)
 
 func place_foundation_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
@@ -413,8 +405,7 @@ func place_object(item_name, direction, location, type):
 			PlayerInventory.remove_single_object_from_hotbar()
 		var id = Uuid.v4()
 		if type == "placable":
-	#		var data = {"id": id, "name": item_name, "l": location, "item": type}
-	#		sendAction(PLACE_ITEM, data)
+			MapData.add_placable(id, {"n":item_name,"d":direction,"l":location})
 			$SoundEffects.stream = Sounds.place_object
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
@@ -424,9 +415,6 @@ func place_object(item_name, direction, location, type):
 			else:
 				PlaceObject.place_object_in_world(id, item_name, direction, location)
 		elif type == "seed":
-	#		var tile_id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-	#		var data = {"id": id, "name": item_name, "l": location, "item": type, "d": JsonData.crop_data[item_name]["DaysToGrow"], "g": tile_id}
-	#		sendAction(PLACE_ITEM, data)
 			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()

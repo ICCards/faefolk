@@ -1368,6 +1368,7 @@ format = 1
 tile_set = SubResource( 604 )
 cell_size = Vector2( 32, 32 )
 cell_y_sort = true
+collision_layer = 262145
 format = 1
 tile_data = PoolIntArray( 1966086, 1, 0 )
 

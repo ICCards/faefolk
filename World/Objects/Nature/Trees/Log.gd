@@ -15,18 +15,19 @@ var destroyed: bool = false
 func _ready():
 	randomize()
 	hide()
-	setTreeBranchType(variety)
+	setTreeBranchType()
 
-func setTreeBranchType(num):
-	if num <= 2:
+func setTreeBranchType():
+	variety = int(variety)
+	if variety <= 2:
 		tree_variety = 'D'
-	elif num <= 5:
+	elif variety <= 5:
 		tree_variety = 'B'
-	elif num <= 8:
+	elif variety <= 8:
 		tree_variety = 'A'
 	else:
 		tree_variety = 'C'
-	log_sprite.texture = Images.tree_branch_objects[num]
+	log_sprite.texture = Images.tree_branch_objects[variety]
 
 func hit(tool_name, var special_ability = ""):
 	if not destroyed:

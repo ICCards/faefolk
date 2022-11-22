@@ -119,7 +119,6 @@ custom_styles/focus = SubResource( 8 )
 custom_styles/normal = SubResource( 5 )
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
-autoplay = true
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 

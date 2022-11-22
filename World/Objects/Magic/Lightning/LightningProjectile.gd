@@ -9,6 +9,7 @@ var collided = false
 var path
 var debuff 
 var type
+var destroyed: bool = false
 
 func _physics_process(delta):
 	if not collided:
@@ -26,10 +27,12 @@ func _ready():
 	projectile_sprite.play("default")
 	
 func _on_Area2D_area_entered(area):
-	projectile_sprite.hide()
-	$CollisionShape2D.set_deferred("disabled", true)
-	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-	chain_effect(area.name)
+	if not destroyed:
+		destroyed = true
+		projectile_sprite.hide()
+		$CollisionShape2D.set_deferred("disabled", true)
+		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+		chain_effect(area.name)
 
 func chain_effect(start_name):
 	var nodes = []
@@ -77,8 +80,11 @@ func find_mst(nodes):
 
 
 func _on_Timer_timeout():
-	queue_free()
-
+	if not destroyed:
+		destroyed = true
+		queue_free()
 
 func _on_Hitbox_body_entered(body):
-	queue_free()
+	if not destroyed:
+		destroyed = true
+		queue_free()

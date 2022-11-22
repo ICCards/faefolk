@@ -3795,7 +3795,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 2, 1 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Arms:frame")
@@ -3807,7 +3807,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 2, 1 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Accessory:frame")
@@ -3819,7 +3819,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 2, 1 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("HeadAtr:frame")
@@ -3831,7 +3831,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 2, 1 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Pants:frame")
@@ -3843,7 +3843,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 2, 1 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shirts:frame")
@@ -3855,7 +3855,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 2, 1 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Shoes:frame")
@@ -3867,7 +3867,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 2, 1 ]
 }
 
 [sub_resource type="Animation" id=71]

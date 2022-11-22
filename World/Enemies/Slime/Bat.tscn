@@ -397,7 +397,6 @@ scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "fly down"
-frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -407,7 +406,7 @@ position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 41 )
-frame = 2
+frame = 10
 playing = true
 
 [node name="PoisonParticles" type="Node2D" parent="."]
@@ -508,7 +507,6 @@ anims/RESET = SubResource( 148 )
 anims/death = SubResource( 43 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
-visible = false
 modulate = Color( 0, 0, 0, 0.435294 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )

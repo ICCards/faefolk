@@ -6,35 +6,23 @@ var selected_staff = ""
 
 var COOL_DOWN_PERIOD_1: int = 1
 var COOL_DOWN_PERIOD_2: int = 2
-var COOL_DOWN_PERIOD_3: int = 2
-var COOL_DOWN_PERIOD_4: int = 4
+var COOL_DOWN_PERIOD_3: int = 5
+var COOL_DOWN_PERIOD_4: int = 10
 
 
 func initialize(_staff):
-	pass
-#	if selected_staff != _staff:
-#		show()
-#		selected_spell = 1
-#		selected_staff = _staff
-#		set_selected_spell()
-#		set_bgs()
-		
-func set_bgs():
-	pass
-#	$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
-#	$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
-#	$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
-#	$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
-
-func _input(event):
-	if event.is_action_pressed("slot1"):
+	show()
+	if selected_staff != _staff:
 		selected_spell = 1
-	elif event.is_action_pressed("slot2"):
-		selected_spell = 2
-	elif event.is_action_pressed("slot3"):
-		selected_spell = 3
-	elif event.is_action_pressed("slot4"):
-		selected_spell = 4
+		selected_staff = _staff
+		set_selected_spell()
+		set_bgs()
+
+func set_bgs():
+	$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+	$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
+	$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
+	$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
 
 
 func set_selected_spell():
@@ -42,30 +30,30 @@ func set_selected_spell():
 		1:
 			$SelectedBg.rect_position.x = 0
 		2:
-			$SelectedBg.rect_position.x = 24
+			$SelectedBg.rect_position.x = 17
 		3:
-			$SelectedBg.rect_position.x = 48
+			$SelectedBg.rect_position.x = 34
 		4:
-			$SelectedBg.rect_position.x = 72
+			$SelectedBg.rect_position.x = 51
 
 
 func start_spell_cooldown():
 	match selected_spell:
 		1:
 			$Tween.interpolate_property(get_node("Cooldown"+str(selected_spell)), "rect_size",
-				Vector2(20,20), Vector2(20,0), COOL_DOWN_PERIOD_1,
+				Vector2(16,16), Vector2(16,0), COOL_DOWN_PERIOD_1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		2:
 			$Tween.interpolate_property(get_node("Cooldown"+str(selected_spell)), "rect_size",
-				Vector2(20,20), Vector2(20,0), COOL_DOWN_PERIOD_2,
+				Vector2(16,16), Vector2(16,0), COOL_DOWN_PERIOD_2,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		3:
 			$Tween.interpolate_property(get_node("Cooldown"+str(selected_spell)), "rect_size",
-				Vector2(20,20), Vector2(20,0), COOL_DOWN_PERIOD_3,
+				Vector2(16,16), Vector2(16,0), COOL_DOWN_PERIOD_3,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		4:
 			$Tween.interpolate_property(get_node("Cooldown"+str(selected_spell)), "rect_size",
-				Vector2(20,20), Vector2(20,0), COOL_DOWN_PERIOD_4,
+				Vector2(16,16), Vector2(16,0), COOL_DOWN_PERIOD_4,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 

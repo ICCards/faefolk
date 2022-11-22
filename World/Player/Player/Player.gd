@@ -61,13 +61,16 @@ func _ready():
 	character.LoadPlayerCharacter("human_male")
 	PlayerStats.connect("health_depleted", self, "player_death")
 	PlayerInventory.emit_signal("active_item_updated")
+	PlayerInventory.connect("active_item_updated", self, "set_held_object")
 	Server.player_node = self
 	if is_building_world:
 		state = DYING
 		$Camera2D/UserInterface/LoadingScreen.show()
-	yield(get_tree().create_timer(3.0), "timeout")
+		yield(get_tree().create_timer(10.0), "timeout")
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
+	yield(get_tree(), "idle_frame")
+	set_held_object()
 	
 func destroy():
 	set_process(false)
@@ -127,7 +130,7 @@ func sleep(sleeping_bag_direction, pos):
 		spawn_position = position
 		position = pos
 		animation_player.play("sleep")
-		composite_sprites.set_player_animation(character, "sleep_" + "down")
+		composite_sprites.set_player_animation(character, "sleep_" + sleeping_bag_direction)
 		if sleeping_bag_direction == "left":
 			composite_sprites.rotation_degrees = -90
 		elif sleeping_bag_direction == "right":
@@ -147,6 +150,7 @@ func player_death():
 		animation_player.play("death")
 		$Camera2D/UserInterface.death()
 		$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", true) 
+		$Camera2D/UserInterface/MagicStaffUI.hide()
 		if has_node("Fishing"):
 			get_node("Fishing").queue_free()
 		drop_inventory_items()
@@ -195,6 +199,15 @@ func sendAction(action,data):
 		(SWINGING):
 			Server.action("SWING", data)
 
+func set_held_object():
+	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		var item_category = JsonData.item_data[item_name]["ItemCategory"]
+		if item_category == "Magic":
+			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
+			return
+	$Camera2D/UserInterface/MagicStaffUI.hide()
+
 
 func _process(_delta) -> void:
 	$PoisonParticles/P1.direction = -velocity
@@ -214,12 +227,6 @@ func _process(_delta) -> void:
 		magic_casting_movement_state(_delta)
 	else:
 		$Sounds/FootstepsSound.stream_paused = true
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Magic":
-			#$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
-			return
 
 
 func set_movement_speed_change():
@@ -269,7 +276,6 @@ func _unhandled_input(event):
 				elif item_name != "blueprint":
 					destroy_placable_object()
 			else:
-				#$Camera2D/UserInterface/MagicStaffUI.hide()
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					swing(null) 
@@ -405,30 +411,20 @@ func movement_state(delta):
 			input_vector.y -= 1.0
 			direction = "UP"
 			walk_state(direction)
-#			var data = {"p":get_global_position(),"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
 		if Input.is_action_pressed("move_down"):
 			input_vector.y += 1.0
 			direction = "DOWN"
 			walk_state(direction)
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
 		if Input.is_action_pressed("move_left"):
 			input_vector.x -= 1.0
 			direction = "LEFT"
 			walk_state(direction)
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
 		if Input.is_action_pressed("move_right"):
 			input_vector.x += 1.0
 			direction = "RIGHT"
 			walk_state(direction)
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)		
 		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
 			idle_state(direction)
-#			var data = {"p":position,"d":direction,"t":Server.client_clock}
-#			sendAction(MOVEMENT,data)
 		input_vector = input_vector.normalized()
 		if input_vector != Vector2.ZERO:
 			velocity += input_vector * ACCELERATION * delta

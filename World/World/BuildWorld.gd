@@ -32,15 +32,14 @@ func spawn_player():
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
 	get_node("../Players").add_child(player)
-	player.spawn_position = Vector2(500*32,500*32)
+	player.spawn_position = Vector2(300*32,300*32)
 	if BuildCaveLevel.is_player_exiting_cave:
 		player.position = Util.string_to_vector2(MapData.world["cave_entrance_location"])*32 + Vector2(32,0)
 	else:
-		player.position = Vector2(500*32,500*32)
+		player.position = Vector2(300*32,300*32)
 
 func _on_BuildTerrain_timeout():
 	build_terrain()
-
 
 func build_terrain():
 	if Server.player_node:
@@ -100,6 +99,7 @@ func build_terrain():
 		if current_chunks == new_chunks:
 			return
 		current_chunks = new_chunks
+		print(MapData.world["ocean"].size())
 		for new_chunk in new_chunks:
 			if not built_chunks.has(new_chunk):
 				built_chunks.append(new_chunk)
@@ -107,33 +107,48 @@ func build_terrain():
 				spawn_chunk(new_chunk)
 
 func spawn_chunk(chunk_name):
-	var _chunk = MapData.return_chunk(chunk_name[0],chunk_name[1])
+	var _chunk = MapData.return_chunk(chunk_name[0],chunk_name.substr(1,-1))
 	for id in _chunk["plains"]:
-		var loc = _chunk["plains"][id]
+		var loc = Util.string_to_vector2(_chunk["plains"][id])
 		plains.set_cellv(loc, 0)
 	yield(get_tree(), "idle_frame")
 	for id in _chunk["snow"]:
-		var loc = _chunk["snow"][id]
+		var loc = Util.string_to_vector2(_chunk["snow"][id])
 		snow.set_cellv(loc, 0)
 	yield(get_tree(), "idle_frame")
 	for id in _chunk["forest"]:
-		var loc = _chunk["forest"][id]
+		var loc = Util.string_to_vector2(_chunk["forest"][id])
 		forest.set_cellv(loc, 0)
 	yield(get_tree(), "idle_frame")
 	for id in _chunk["beach"]:
-		var loc = _chunk["beach"][id]
+		var loc = Util.string_to_vector2(_chunk["beach"][id])
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
 	yield(get_tree(), "idle_frame")
 	for id in _chunk["desert"]:
-		var loc = _chunk["desert"][id]
+		var loc = Util.string_to_vector2(_chunk["desert"][id])
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
 	yield(get_tree(), "idle_frame")
 	for id in _chunk["dirt"]:
-		var loc = _chunk["dirt"][id]
+		var loc = Util.string_to_vector2(_chunk["dirt"][id])
 		dirt.set_cellv(loc, 0)
+	yield(get_tree(), "idle_frame")
+	for id in _chunk["ocean"]:
+		var loc = Util.string_to_vector2(_chunk["ocean"][id])
+		wetSand.set_cellv(loc, 0)
+		waves.set_cellv(loc, 5)
+		shallow_ocean.set_cellv(loc,0)
+		top_ocean.set_cellv(loc,0)
+		deep_ocean.set_cellv(loc,0)
+		validTiles.set_cellv(loc,-1)
+#	yield(get_tree(), "idle_frame")
+#	for loc in wetSand.get_used_cells():
+#		if Tiles.return_neighboring_cells(loc,wetSand) != 4:
+#			waves.set_cellv(loc, -1)
+#			shallow_ocean.set_cellv(loc,-1)
+#			top_ocean.set_cellv(loc,-1)
+#			deep_ocean.set_cellv(loc,-1)
 	update_bitmasks(chunk_name)
 	yield(get_tree(), "idle_frame")
-
 
 func update_bitmasks(chunk_name):
 	var row = chunk_name[0]
@@ -216,10 +231,16 @@ func update_bitmasks(chunk_name):
 		"L":
 			start_y = 813
 			end_y = 1000
-	plains.update_bitmask_region(Vector2(start_x, start_y), Vector2(end_x, end_y))
+	plains.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
 	yield(get_tree(), "idle_frame")
-	snow.update_bitmask_region(Vector2(start_x, start_y), Vector2(end_x, end_y))
+	snow.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
 	yield(get_tree(), "idle_frame")
-	forest.update_bitmask_region(Vector2(start_x, start_y), Vector2(end_x, end_y))
+	forest.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
 	yield(get_tree(), "idle_frame")
-	dirt.update_bitmask_region(Vector2(start_x, start_y), Vector2(end_x, end_y))
+	dirt.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
+	wetSand.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
+	waves.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
+	deep_ocean.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
