@@ -13,7 +13,7 @@ const LCOAL_DEFAULT_PORT = 65124
 var websocket_url = LOCAL_DEFAULT_IP+":"+str(LCOAL_DEFAULT_PORT)
 
 # Our WebSocketClient instance
-var _client = WebSocketClient.new()
+#var _client = WebSocketClient.new()
 
 var latency = 0
 var client_clock = 0
@@ -60,30 +60,31 @@ func _closed(was_clean = false):
 	print("Closed, clean: ", was_clean)
 	set_process(false)
 
-func _connected(proto = ""):
-	# This is called on connection, "proto" will be the selected WebSocket
-	# sub-protocol (which is optional)
-	print("Connected with protocol: ", proto)
-	# You MUST always use get_peer(1).put_packet to send data to server,
-	# and not put_packet directly when not using the MultiplayerAPI.
-	#_client.get_peer(1).put_packet("Test packet".to_utf8())
-	print("Successfully connected to server")
-	var data = {"d":OS.get_system_time_msecs()}
-	var message = Util.toMessage("FetchServerTime",data)
-	_client.get_peer(1).put_packet(message)
-	var timer = Timer.new()
-	timer.wait_time = 0.5
-	timer.autostart = true
-	timer.connect("timeout", self, "DetermineLatency")
-	self.add_child(timer)
+#func _connected(proto = ""):
+#	# This is called on connection, "proto" will be the selected WebSocket
+#	# sub-protocol (which is optional)
+#	print("Connected with protocol: ", proto)
+#	# You MUST always use get_peer(1).put_packet to send data to server,
+#	# and not put_packet directly when not using the MultiplayerAPI.
+#	#_client.get_peer(1).put_packet("Test packet".to_utf8())
+#	print("Successfully connected to server")
+#	var data = {"d":OS.get_system_time_msecs()}
+#	var message = Util.toMessage("FetchServerTime",data)
+#	_client.get_peer(1).put_packet(message)
+#	var timer = Timer.new()
+#	timer.wait_time = 0.5
+#	timer.autostart = true
+#	timer.connect("timeout", self, "DetermineLatency")
+#	self.add_child(timer)
 	
 func action(type,data):
-	var value = {"d": data}
-	value["t"] = type
-	if value["t"] == "ON_HIT":
-		print(data)
-	var message = Util.toMessage("action",value)
-	_client.get_peer(1).put_packet(message)
+	pass
+#	var value = {"d": data}
+#	value["t"] = type
+#	if value["t"] == "ON_HIT":
+#		print(data)
+#	var message = Util.toMessage("action",value)
+#	_client.get_peer(1).put_packet(message)
 
 #func generate_map():
 ##	map = {
@@ -241,17 +242,17 @@ func generate_map():
 	print("getting map")
 	rpc_id(1, "get_map",key)
 
-func _ready():
-	get_tree().connect("network_peer_connected",self,"_on_network_peer_connected")
-	get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
-	get_tree().connect("server_disconnected", self, "_on_server_disconnected")
-	
-	# Initiate connection to the given URL.
-	var err = _client.connect_to_url(websocket_url,PoolStringArray(), true)
-	if err != OK:
-		print("Unable to connect")
-		set_process(false)
-	get_tree().network_peer = _client
+#func _ready():
+#	get_tree().connect("network_peer_connected",self,"_on_network_peer_connected")
+#	get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
+#	get_tree().connect("server_disconnected", self, "_on_server_disconnected")
+#
+#	# Initiate connection to the given URL.
+#	var err = _client.connect_to_url(websocket_url,PoolStringArray(), true)
+#	if err != OK:
+#		print("Unable to connect")
+#		set_process(false)
+#	get_tree().network_peer = _client
 	
 func _on_network_peer_connected(id):
 	pass
@@ -262,8 +263,8 @@ func _on_network_peer_disconnected(player_id):
 func _on_server_disconnected():
 	_on_network_peer_disconnected(1)
 
-func _process(_delta):
-	_client.poll()
+#func _process(_delta):
+#	_client.poll()
 
 remote func updateState(data):
 	if world:

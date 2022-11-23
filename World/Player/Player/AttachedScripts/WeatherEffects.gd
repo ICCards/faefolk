@@ -4,16 +4,17 @@ extends ColorRect
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	play_lightning_effect()
+	randomize()
+	$LightningTimer.start(rand_range(30,60))
 
 func play_lightning_effect():
-	rng.randomize()
-	var randomDelay = rng.randi_range(10, 30)
-	if has_node("/root/World/Players/" + Server.player_id):
-		var player = get_node("/root/World/Players/" + Server.player_id + "/" + Server.player_id)
-		yield(get_tree().create_timer(randomDelay), "timeout")
-		if player.position.distance_to(get_node("/root/World/RoamingStorm").position) <= 2000:
+	if Server.player_node and has_node("/root/World"):
+		if Server.player_node.position.distance_to(get_node("/root/World/RoamingStorm").position) <= 2000:
 			$AnimationPlayer.play("lightning day")
 			$ThunderSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 			$ThunderSoundEffects.play()
-		play_lightning_effect()
+
+
+func _on_LightningTimer_timeout():
+	play_lightning_effect()
+	$LightningTimer.start(rand_range(30,60))

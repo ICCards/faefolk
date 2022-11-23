@@ -4,16 +4,20 @@ extends Node2D
 var random_storm_position
 var is_snow_storm = false
 
+
+var MIN_DIST = 4000
+var MAX_DIST = 28000
+
+
 func _ready():
 	randomize()
-	position = Vector2(rand_range(0, 32000), rand_range(0, 32000)) #Vector2( 4000, 4000) #Vector2(rand_range(0, 4000), rand_range(0, 4000))
+	position = Vector2(rand_range(MIN_DIST, MAX_DIST), rand_range(MIN_DIST, MAX_DIST))
 	initiate_storm()
 
 func initiate_storm():
 	randomize()
-	random_storm_position = Vector2(rand_range(0, 32000), rand_range(0, 32000))
-	yield(get_tree().create_timer(rand_range(60, 180)), "timeout")
-	initiate_storm()
+	random_storm_position = Vector2(rand_range(MIN_DIST, MAX_DIST), rand_range(MIN_DIST, MAX_DIST))
+	$IdleTimer.start(rand_range(60, 180))
 
 func _physics_process(delta):
 	if Server.isLoaded and not PlayerInventory.viewMapMode:
@@ -32,3 +36,7 @@ func _physics_process(delta):
 			$RainStorm/RainOnFloor.emitting = false
 	else:
 		visible = false
+
+
+func _on_IdleTimer_timeout():
+	initiate_storm()

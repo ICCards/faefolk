@@ -13,39 +13,102 @@ const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 
-var chest_id = null
 var viewInventoryMode = false
 var viewMapMode = false
 var interactive_screen_mode = false
 var chatMode = false
-var is_inside_chest_area = false
-var is_inside_workbench_area = false
-var is_inside_stove_area = false
-var is_inside_grain_mill_area = false
 var is_inside_sleeping_bag_area = false
 var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	9: ["potato seeds", 30, null],
-	8: ["radish seeds", 30, null],
-	3: ["rope", 20, null],
-	2: ["wood", 499, null],
-	1: ["stone", 699, null],
-	0: ["iron ingot", 60, null]
+	0: ["lightning staff", 1, null],
+	1: ["dark magic staff", 1, null],
+	2: ["fire staff", 1, null],
+	3: ["wind staff", 1, null],
+	4: ["ice staff", 1, null],
+	5: ["earth staff", 1, null],
+#	0: ["wood", 999, null],
+#	9: ["stone", 999, null],
+#	9: ["rope", 12, null],
+#	8: ["iron ingot", 150, null],
+#	6: ["potato seeds", 60, null],
+#	7: ["wheat seeds", 60, null],
+#	2: ["gold pickaxe", 1, null]
+#	4: ["destruction potion I", 10, null],
+#	5: ["destruction potion II", 10, null],
+#	6: ["destruction potion III", 10, null],
+#	7: ["health potion I", 10, null],
+#	8: ["health potion II", 10, null],
+#	9: ["health potion III", 10, null],
 }
 
 var hotbar = {
+#	0: ["bow", 1, null],
+#	1: ["arrow", 50, null],
+##	0: ["dstaff", 1, null],
+#	3: ["wood box", 100, null],
+#	#1: ["poison potion I", 100, null],
+#	5: ["poison potion II", 100, null],
+#	#3: ["poison potion III", 100, null],
+#	4: ["regeneration potion I", 10, null],
+#	5: ["regeneration potion II", 10, null],
+##	6: ["regeneration potion III", 10, null],
+##	7: ["speed potion I", 10, null],
+##	8: ["speed potion II", 10, null],
+#	9: ["speed potion II", 10, null],
 }
 
 var chests = {
+	"level 1, room 1" : {
+		1: ["bread", 12, null],
+		6: ["health potion I", 4, null],
+		9: ["destruction potion I", 4, null],
+	},
+	"level 1, room 2" : {
+		2: ["poison potion I", 4, null],
+		6: ["speed potion I", 2, null],
+		5: ["regeneration potion II",1, null],
+	},
+	"level 1, room 3" : {
+		1: ["cooked filet", 12, null],
+		2: ["health potion II", 6, null],
+		9: ["destruction potion II", 4, null],
+		6: ["arrow", 20, null],
+	},
+	"level 1, room 4" : {
+		5: ["regeneration potion III",1, null],
+		3: ["speed potion II", 1, null],
+		8: ["poison potion II", 2, null],
+	},
+	"level 1, room 5" : {
+		8: ["shrimp", 17, null],
+		5: ["destruction potion III",1, null],
+		3: ["poison potion III", 1, null],
+		6: ["arrow", 20, null],
+	},
+	"level 1, room 6" : {
+		1: ["crab", 6, null],
+		5: ["destruction potion III",1, null],
+		3: ["poison potion III", 1, null],
+	},
+	"level 1, room 7" : {
+		1: ["cooked wing", 6, null],
+		5: ["destruction potion III",1, null],
+		3: ["poison potion III", 1, null],
+	},    
 }
 
-func clear_chest_data(chest_id):
-	PlayerInventory.chests.erase(chest_id)
+var furnaces = {}
+var grain_mills = {}
+var grain_mills_dict = {}
+var stoves = {}
+var tool_cabinets = {}
+
+
 
 func isSufficientMaterialToCraft(item):
-	var ingredients = JsonData.crafting_data[item]["ingredients"]
+	var ingredients = JsonData.item_data[item]["Ingredients"]
 	for i in range(ingredients.size()):
 		if returnSufficentCraftingMaterial(ingredients[i][0], ingredients[i][1]):
 			continue
@@ -53,6 +116,16 @@ func isSufficientMaterialToCraft(item):
 			return false
 	return true
 
+
+func total_wood():
+	var total_wood = 0
+	for slot in hotbar:
+		if hotbar[slot][0] == "wood":
+			total_wood +=  hotbar[slot][1]
+	for slot in inventory:
+		if inventory[slot][0] == "wood":
+			total_wood += inventory[slot][1]
+	return str(total_wood)
 
 func returnSufficentCraftingMaterial(ingredient, amount_needed):
 	var total = 0
@@ -69,9 +142,9 @@ func returnSufficentCraftingMaterial(ingredient, amount_needed):
 
 
 func craft_item(item):
-	if item == "door front" or item == "door side":
-		item = "door"
-	var ingredients = JsonData.crafting_data[item]["ingredients"]
+	if item == "wood door side":
+		item = "wood door"
+	var ingredients = JsonData.item_data[item]["Ingredients"]
 	for i in range(ingredients.size()):
 		remove_material(ingredients[i][0], ingredients[i][1])
 
@@ -103,25 +176,6 @@ func remove_material(item, amount):
 					update_inventory_slot_visual(slot, inventory[slot][0], inventory[slot][1], inventory[slot][2])
 
 
-# Location of bottom left tile
-var player_home = {
-	0 : ["Fireplace", Vector2(2,0)],
-	1 : ["Crafting_table", Vector2(8,0)],
-	2 : ["Shelves", Vector2(16,0)],
-	3 : ["Left_chair", Vector2(2,6)],
-	4 : ["Middle_chair", Vector2(4, 5)],
-	5 : ["Right_chair", Vector2(5, 6)],
-	6 : ["Table", Vector2(3, 7)],
-	7 : ["Rug", Vector2(10, 7)],
-	8 : ["Side_dresser", Vector2(19, 5)],
-	9 : ["Bed", Vector2(18, 9)],
-	10 : ["Small_dresser", Vector2(10,0)],
-	11 : ["Stool", Vector2(4, 8)],
-	12 : ["Window 1", Vector2(5, -2)],
-	13 : ["Window 2", Vector2(14, -2)],
-	14 : ["Painting1", Vector2(9, -2)]
-}
-var isFireplaceLit = false
 
 func remove_single_object_from_hotbar():
 	hotbar[active_item_slot][1] -= 1
@@ -211,7 +265,7 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 			update_inventory_slot_visual(i, inventory[i][0], inventory[i][1], inventory[i][2])
 			return
 	if hotbar.size() == NUM_HOTBAR_SLOTS:
-		print("ITEM CANT BE ADDED TO INVENTORY " + item_name)
+		InstancedScenes.initiateInventoryItemDrop([item_name, item_quantity, item_health], Server.player_node.position)
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity, item_health):
 	var slot = HotbarSlots.get_node("Slot" + str(slot_index + 1))
@@ -247,7 +301,7 @@ func update_chest_slot_visual(slot_index, item_name, new_quantity):
 	else:
 		slot.initialize_item(item_name, new_quantity)
 
-func remove_item(slot: SlotClass, var chest_id = null):
+func remove_item(slot: SlotClass, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar.erase(slot.slot_index)
@@ -256,9 +310,17 @@ func remove_item(slot: SlotClass, var chest_id = null):
 		SlotClass.SlotType.INVENTORY:
 			inventory.erase(slot.slot_index)
 		SlotClass.SlotType.CHEST:
-			chests[chest_id].erase(slot.slot_index)
+			chests[id].erase(slot.slot_index)
+		SlotClass.SlotType.GRAIN_MILL:
+			grain_mills[id].erase(slot.slot_index)
+		SlotClass.SlotType.STOVE:
+			stoves[id].erase(slot.slot_index)
+		SlotClass.SlotType.FURNACE:
+			furnaces[id].erase(slot.slot_index)
+		SlotClass.SlotType.TOOL_CABINET:
+			tool_cabinets[id].erase(slot.slot_index)
 
-func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var chest_id = null):
+func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
@@ -267,10 +329,18 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var chest_id = nul
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.CHEST:
-			chests[chest_id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+			chests[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.GRAIN_MILL:
+			grain_mills[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.STOVE:
+			stoves[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.FURNACE:
+			furnaces[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.TOOL_CABINET:
+			tool_cabinets[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 
 
-func add_item_quantity(slot: SlotClass, quantity_to_add: int, var chest_id = null):
+func add_item_quantity(slot: SlotClass, quantity_to_add: int, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] += quantity_to_add
@@ -279,9 +349,17 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int, var chest_id = nul
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.CHEST:
-			chests[chest_id][slot.slot_index][1] += quantity_to_add
+			chests[id][slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.GRAIN_MILL:
+			grain_mills[id][slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.STOVE:
+			stoves[id][slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.FURNACE:
+			furnaces[id][slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.TOOL_CABINET:
+			tool_cabinets[id][slot.slot_index][1] += quantity_to_add
 
-func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var chest_id = null):
+func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] -= quantity_to_subtract
@@ -290,7 +368,16 @@ func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var ches
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index][1] -= quantity_to_subtract
 		SlotClass.SlotType.CHEST:
-			chests[chest_id][slot.slot_index][1] -= quantity_to_subtract
+			chests[id][slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.GRAIN_MILL:
+			grain_mills[id][slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.STOVE:
+			stoves[id][slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.FURNACE:
+			furnaces[id][slot.slot_index][1] -= quantity_to_subtract
+		SlotClass.SlotType.TOOL_CABINET:
+			tool_cabinets[id][slot.slot_index][1] -= quantity_to_subtract
+
 
 
 ###

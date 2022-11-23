@@ -7,15 +7,15 @@ onready var treeChip4Sprite = $TreeChips/TreeChip4
 onready var treeChip5Sprite = $TreeChips/TreeChip5
 onready var treeChip6Sprite = $TreeChips/TreeChip6
 
-onready var AnimPlayer = $AnimationPlayer
+onready var animation_player = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
 var treeObject
 var effectType
 
-func init(treeTypeInput, effectTypeInput):
-	treeObject = treeTypeInput
+func init(variety, effectTypeInput):
+	treeObject = Images.returnTreeObject(variety)
 	effectType = effectTypeInput
 
 
@@ -23,13 +23,13 @@ func _ready():
 	setTexture(treeObject)
 	if effectType == "tree hit right": 
 		randomizeDisplayedSprites()
-		AnimPlayer.play("tree hit right")
+		animation_player.play("tree hit right")
 	elif effectType == "tree hit left":
 		randomizeDisplayedSprites()
-		AnimPlayer.play("tree hit left")
+		animation_player.play("tree hit left")
 	elif effectType == "trunk break":
-		AnimPlayer.play("trunk break")
-	yield(AnimPlayer, "animation_finished")
+		animation_player.play("trunk break")
+	yield(animation_player, "animation_finished")
 	queue_free()
 
 	

@@ -1,219 +1,134 @@
 extends Node2D
 
-onready var tree_animation_player = $TreeAnimationPlayer 
-onready var stump_animation_player = $StumpAnimationPlayer 
-onready var treeStumpSprite = $TreeSprites/TreeStump
-onready var treeBottomSprite = $TreeSprites/TreeBottom
-onready var treeTopSprite = $TreeSprites/TreeTop
+onready var tree_stump_sprite: Sprite = $TreeSprites/TreeStump
+onready var tree_bottom_sprite: Sprite = $TreeSprites/TreeBottom
+onready var tree_top_sprite: Sprite = $TreeSprites/TreeTop
+onready var sound_effects_stump: AudioStreamPlayer2D = $SoundEffectsStump
+onready var sound_effects_tree: AudioStreamPlayer2D = $SoundEffectsTree
+onready var animation_player_tree: AnimationPlayer = $AnimationPlayerTree
+onready var animation_player_stump: AnimationPlayer = $AnimationPlayerStump
+onready var random_leaves_falling_timer: Timer = $RandomLeavesFallingTimer
+onready var tween: Tween = $TreeSprites/Tween
 
-onready var Bird = preload("res://World/Animals/BirdFlyingFromTree.tscn")
-onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
-onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
 var rng = RandomNumberGenerator.new()
 
 var treeObject
-var loc
+var location
 var variety
 var hit_dir
 var health
 var adjusted_leaves_falling_pos 
 var biome
+var tree_fallen = false
+var destroyed = false
 
-func initialize(inputVar, _loc):
-	variety = inputVar
-	treeObject = Images.returnTreeObject(inputVar)
-	loc = _loc
 
 func _ready():
+	hide()
+	rng.randomize()
+	random_leaves_falling_timer.wait_time = rng.randi_range(15.0, 60.0)
+	random_leaves_falling_timer.start()
+	treeObject = Images.returnTreeObject(variety)
 	setTexture(treeObject)
-	set_random_leaves_falling()
-	if health <= 3:
-		timer.stop()
+	if health < Stats.STUMP_HEALTH:
+		tree_fallen = true
 		disable_tree_top_collision_box()
-		$TreeSprites/TreeTop.visible = false
-		$TreeSprites/TreeBottom.visible = false
-		$TreeS/stumpHurtBox.disabled = false
+		tree_top_sprite.hide()
+		tree_bottom_sprite.hide()
 
 func setTexture(tree):
 	set_tree_top_collision_shape()
-	treeStumpSprite.texture = tree.stump
-	treeBottomSprite.texture = tree.bottomTree
+	tree_stump_sprite.texture = tree.stump
+	tree_bottom_sprite.texture = tree.bottomTree
 	$TreeChipParticles.texture = tree.chip 
 	$TreeLeavesParticles.texture = tree.leaves
 	match biome:
 		"forest":
-			treeTopSprite.texture = tree.topTree
+			tree_top_sprite.texture = tree.topTree
 		"snow":
-			treeTopSprite.texture = tree.topTreeWinter
-	
-onready var timer = $Timer
-func set_random_leaves_falling():
-	rng.randomize()
-	var randomDelay = rng.randi_range(1, 80)
-	timer.wait_time = randomDelay
-	timer.start()
-	yield(timer, "timeout")
-	initiateLeavesFallingEffect(treeObject)
-	set_random_leaves_falling()
+			tree_top_sprite.texture = tree.topTreeWinter
 
-
-func PlayEffect(player_id):
-	health -= 1
-	if get_node("/root/World/Players/" + str(player_id) + "/" +  str(player_id)).get_position().x < get_position().x:
-		hit_dir = "right"
-	else:
-		hit_dir = "left"
-	if health >= 5:
-		initiateLeavesFallingEffect(treeObject)
-		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsTree.play()
-		if hit_dir == "right":
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
-			tree_animation_player.play("tree hit right")
+func hit(tool_name):
+	if health == 100:
+		InstancedScenes.initiateBirdEffect(position)
+	health -= Stats.return_tool_damage(tool_name)
+	if MapData.world["tree"].has(name):
+		MapData.world["tree"][name]["h"] = health
+	if health >= Stats.STUMP_HEALTH:
+		InstancedScenes.initiateLeavesFallingEffect(variety, position)
+		sound_effects_tree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		sound_effects_tree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects_tree.play()
+		if Server.player_node.get_position().x <= get_position().x:
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))
+			animation_player_tree.play("tree hit right")
 		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			tree_animation_player.play("tree hit left")
-	elif health == 3:
-		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsStump.play()
-		$SoundEffectsTree.stream = Sounds.tree_break
-		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsTree.play()
-		if hit_dir == "right":
-			tree_animation_player.play("tree fall right")
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
+			animation_player_tree.play("tree hit left")
+	elif not tree_fallen:
+		if health <= 0 and not destroyed:
+			destroy(tool_name)
+		tree_fallen = true
+		disable_tree_top_collision_box()
+		sound_effects_stump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects_stump.play()
+		sound_effects_tree.stream = Sounds.tree_break
+		sound_effects_tree.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
+		sound_effects_tree.play()
+		if Server.player_node.get_position().x <= get_position().x:
+			animation_player_tree.play("tree fall right")
+			yield(animation_player_tree, "animation_finished" )
+			var amt = Stats.return_item_drop_quantity(tool_name, "tree")
+			CollectionsData.resources["wood"] += amt
+			InstancedScenes.intitiateItemDrop("wood", position+Vector2(130, -8), amt)
 		else:
-			tree_animation_player.play("tree fall left")
-	elif health >= 1:
-		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsTree.play()
-		if hit_dir == "right":
-			stump_animation_player.play("stump hit right")
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
-		else:
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			stump_animation_player.play("stump hit right")
-	else:
-		Tiles.reset_valid_tiles(loc, "tree")
-		$SoundEffectsStump.stream = Sounds.stump_break
-		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsStump.play()
-		stump_animation_player.play("stump destroyed")
-		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
-		yield(stump_animation_player, "animation_finished")
-		queue_free()
+			animation_player_tree.play("tree fall left")
+			yield(animation_player_tree, "animation_finished" )
+			var amt = Stats.return_item_drop_quantity(tool_name, "tree")
+			CollectionsData.resources["wood"] += amt
+			InstancedScenes.intitiateItemDrop("wood", position+Vector2(-130, -8), amt)
 
+	elif health >= 1:
+		sound_effects_stump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
+		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		sound_effects_stump.play()
+		if Server.player_node.get_position().x <= get_position().x:
+			animation_player_stump.play("stump hit right")
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))
+		else: 
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
+			animation_player_stump.play("stump hit right")
+	if health <= 0 and not destroyed: 
+		destroy(tool_name)
+
+
+func destroy(tool_name):
+	destroyed = true
+	Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+	sound_effects_stump.stream = Sounds.stump_break
+	sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+	sound_effects_stump.play()
+	animation_player_stump.play("stump destroyed")
+	var amt = Stats.return_item_drop_quantity(tool_name, "stump")
+	InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-8, 32))
+	CollectionsData.resources["wood"] += amt
+	InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
+	yield(get_tree().create_timer(3.0), "timeout")
+	MapData.world["tree"].erase(name)
+	queue_free()
 
 ### Tree hurtbox
 func _on_Hurtbox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	var data = {"id": name, "n": "tree"}
-	Server.action("ON_HIT", data)
-	health -= 1
-	if health == 7:
-		initiateBirdEffect()
-	if health >= 4:
-		initiateLeavesFallingEffect(treeObject)
-		$SoundEffectsTree.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsTree.play()
-		
-		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:	
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
-			tree_animation_player.play("tree hit right")
-		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			tree_animation_player.play("tree hit left")
-	elif health == 3:
-		timer.stop()
-		disable_tree_top_collision_box()
-		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsStump.play()
-		$SoundEffectsTree.stream = Sounds.tree_break
-		$SoundEffectsTree.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsTree.play()
-		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
-			tree_animation_player.play("tree fall right")
-			yield(tree_animation_player, "animation_finished" )
-			intitiateItemDrop("wood", Vector2(130, -8), 7)
-		else:
-			tree_animation_player.play("tree fall left")
-			yield(tree_animation_player, "animation_finished" )
-			intitiateItemDrop("wood", Vector2(-130, -8), 7)
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
+		hit(_area.tool_name)
+	if _area.special_ability == "fire buff":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-10,22)))
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 
 
-	elif health >= 1 :
-		$SoundEffectsStump.stream = Sounds.tree_hit[rng.randi_range(0,2)]
-		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsStump.play()
-		if get_node("/root/World/Players/" + str(Server.player_id) + "/" +  str(Server.player_id)).get_position().x <= get_position().x:
-			stump_animation_player.play("stump hit right")
-			initiateTreeHitEffect(treeObject, "tree hit right", Vector2(0, 12))
-		else: 
-			initiateTreeHitEffect(treeObject, "tree hit left", Vector2(-24, 12))
-			stump_animation_player.play("stump hit right")
-	elif health == 0: 
-		Tiles.reset_valid_tiles(loc, "tree")
-		$SoundEffectsStump.stream = Sounds.stump_break
-		$SoundEffectsStump.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		$SoundEffectsStump.play()
-		stump_animation_player.play("stump destroyed")
-		initiateTreeHitEffect(treeObject, "trunk break", Vector2(-8, 32))
-		intitiateItemDrop("wood", Vector2(0, 12), 3)
-		yield($SoundEffectsStump, "finished")
-		queue_free()
-	
-
-
-
-### Effect functions		
-func initiateLeavesFallingEffect(tree):
-	if tree == Images.D_tree:
-		adjusted_leaves_falling_pos = Vector2(0, 50)
-	elif tree == Images.B_tree:
-		adjusted_leaves_falling_pos = Vector2(0, 25)
-	else: 
-		adjusted_leaves_falling_pos = Vector2(0, 0)
-	var leavesEffect = LeavesFallEffect.instance()
-	leavesEffect.initLeavesEffect(tree)
-	add_child(leavesEffect)
-	leavesEffect.global_position = global_position + adjusted_leaves_falling_pos
-		
-func initiateTreeHitEffect(tree, effect, pos):
-	var trunkHitEffect = TrunkHitEffect.instance()
-	trunkHitEffect.init(tree, effect)
-	add_child(trunkHitEffect)
-	trunkHitEffect.global_position = global_position + pos
-	
-func intitiateItemDrop(item, pos, amt):
-	for _i in range(amt):
-		rng.randomize()
-		var itemDrop = ItemDrop.instance()
-		itemDrop.initItemDropType(item, 1)
-		get_parent().call_deferred("add_child", itemDrop)
-		itemDrop.global_position = global_position + pos + Vector2(rng.randi_range(-12, 12), 0)
-	
-func initiateBirdEffect():
-	if Util.chance(33):
-		if Util.chance(50):
-			rng.randomize()
-			var bird = Bird.instance()
-			bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
-			get_parent().call_deferred("add_child", bird)
-			bird.global_position = global_position + Vector2(0, -120)
-		else:
-			for i in range(2):
-				rng.randomize()
-				var bird = Bird.instance()
-				bird.fly_position = position + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
-				get_parent().call_deferred("add_child", bird)
-				bird.global_position = global_position + Vector2(0, -120)
-			
 ### Tree modulate functions
 func set_tree_top_collision_shape():
 	if variety == "A":
@@ -240,49 +155,46 @@ func disable_tree_top_collision_box():
 	elif variety == "E":
 		$TreeTopArea/E.set_deferred("disabled", true)
 
-onready var tween = $TreeSprites/Tween
+
 func set_tree_transparent():
-	tween.interpolate_property($TreeSprites/TreeTop, "modulate",
-		$TreeSprites/TreeTop.get_modulate(), Color(1, 1, 1, 0.5), 0.5,
+	tween.interpolate_property(tree_top_sprite, "modulate:a",
+		tree_top_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	
-	tween.interpolate_property($TreeSprites/TreeStump, "modulate",
-		$TreeSprites/TreeStump.get_modulate(), Color(1, 1, 1, 0.5), 0.5,
+	tween.interpolate_property(tree_stump_sprite, "modulate:a",
+		tree_stump_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	
-	tween.interpolate_property($TreeSprites/TreeBottom, "modulate",
-		$TreeSprites/TreeBottom.get_modulate(), Color(1, 1, 1, 0.5), 0.5,
+	tween.interpolate_property(tree_bottom_sprite, "modulate:a",
+		tree_bottom_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	
-	
+
 func set_tree_visible():
-	tween.interpolate_property($TreeSprites/TreeTop, "modulate",
-		$TreeSprites/TreeTop.get_modulate(), Color(1, 1, 1, 1), 0.5,
+	tween.interpolate_property(tree_top_sprite, "modulate:a",
+		tree_top_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	
-	tween.interpolate_property($TreeSprites/TreeStump, "modulate",
-		$TreeSprites/TreeStump.get_modulate(), Color(1, 1, 1, 1), 0.5,
+	tween.interpolate_property(tree_stump_sprite, "modulate:a",
+		tree_stump_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-	
-	tween.interpolate_property($TreeSprites/TreeBottom, "modulate",
-		$TreeSprites/TreeBottom.get_modulate(), Color(1, 1, 1, 1), 0.5,
+	tween.interpolate_property(tree_bottom_sprite, "modulate:a",
+		tree_bottom_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
+
 
 func _on_TreeTopArea_area_entered(_area):
 	set_tree_transparent()
-
 func _on_TreeTopArea_area_exited(_area):
 	set_tree_visible()
 
 func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
-
-
+	show()
 func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
+	hide()
+
+func _on_RandomLeavesFallingTimer_timeout():
+	random_leaves_falling_timer.wait_time = rng.randi_range(15.0, 60.0)
+	InstancedScenes.initiateLeavesFallingEffect(variety, position)

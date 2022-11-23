@@ -11,8 +11,8 @@ var max_health
 var temp_health = 0
 var entered = false
 
-func _ready():
-	set_type()
+#func _ready():
+#	set_type()
 
 
 func _input(event):
@@ -42,25 +42,13 @@ func set_type():
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
 		"demolish":
-			Tiles.set_valid_tiles(location, Vector2(2,1))
+			Tiles.add_valid_tiles(location, Vector2(2,1))
 			queue_free()
 	update_health_bar()
-			
-
 
 
 func remove_icon():
 	$SelectedBorder.hide()
-
-
-func _on_Area2D_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode:
-			var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-			if tool_name == "hammer":
-				$SelectedBorder.show()
-				Server.player_node.get_node("Camera2D/UserInterface/RadialDoorMenu").initialize(location, self)
-
 
 
 func _on_HurtBox_area_entered(area):
@@ -92,7 +80,7 @@ func update_health_bar():
 		remove_tile()
 
 func remove_tile():
-	Tiles.set_valid_tiles(location, Vector2(2,1))
+	Tiles.add_valid_tiles(location, Vector2(2,1))
 	queue_free()
 
 
@@ -106,7 +94,6 @@ func _on_EnterDoorway_area_entered(area):
 
 func _on_EnterDoorway_area_exited(area):
 	entered = false
-
 
 func _on_HammerRepairBox_area_entered(area):
 	set_type()

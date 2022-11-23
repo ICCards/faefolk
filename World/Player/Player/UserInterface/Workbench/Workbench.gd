@@ -1,7 +1,13 @@
 extends Control
 
+var level
+
 var crafting_item
 var item
+var page
+
+var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can", "wood fishing rod"]
+var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod", "scythe"]
 
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots
@@ -24,66 +30,103 @@ func _ready():
 		slots_in_hotbar[i].connect("mouse_exited", self, "exited_slot", [slots_in_hotbar[i]])
 		slots_in_hotbar[i].slot_index = i
 		slots_in_hotbar[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
+	initialize()
 
+func initialize():
+	Server.player_node.destroy_placable_object()
+	page = 1
+	item = null
+	crafting_item = null
+	$Title.text = "Workbench #" + str(level) + ":"
+	show()
+	set_current_page()
+	
+func destroy():
+	set_physics_process(false)
+	$ItemDescription.set_physics_process(false)
+	$ItemDescription.queue_free()
+	$CraftingItemDescription.queue_free()
+	$ItemNameBox.queue_free()
+	queue_free()
 
 func _physics_process(delta):
 	if item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.show()
 		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.item_name = item
-		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 		$ItemDescription.initialize()
+		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 	else:
 		$ItemDescription.hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
-		$CraftingItemDescription.show()
-		$CraftingItemDescription.item_name = crafting_item
-		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-		$CraftingItemDescription.initialize()
+		if page == 1 and get_node("Page1/"+crafting_item+"/button").disabled:
+			$CraftingItemDescription.hide()
+			$ItemNameBox.show()
+			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
+		elif page == 2 and get_node("Page2/"+crafting_item+"/button").disabled:
+			$CraftingItemDescription.hide()
+			$ItemNameBox.show()
+			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
+		else:
+			$ItemNameBox.hide()
+			$CraftingItemDescription.show()
+			$CraftingItemDescription.item_name = crafting_item
+			$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
+			$CraftingItemDescription.initialize()
 	else:
+		$ItemNameBox.hide()
 		$CraftingItemDescription.hide()
 
 
-func entered_item_area(item_name):
+func entered_crafting_area(item_name):
 	crafting_item = item_name
-	if $Page1.visible:
-		$Tween.interpolate_property($Page1.get_node(item_name), "rect_scale",
-			$Page1.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.075,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
-	else:
-		$Tween.interpolate_property($Page2.get_node(item_name), "rect_scale",
-			$Page2.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.075,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
-
-func exited_item_area(item_name):
-	crafting_item = null
-	if $Page1.visible:
-		if $Page1.has_node(item_name):
+	match page:
+		1:
 			$Tween.interpolate_property($Page1.get_node(item_name), "rect_scale",
-				$Page1.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.075,
+				$Page1.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
-	else:
-		if $Page2.has_node(item_name):
+		2:
 			$Tween.interpolate_property($Page2.get_node(item_name), "rect_scale",
-			$Page2.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.075,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
+				$Page2.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		3:
+			$Tween.interpolate_property($Page3.get_node(item_name), "rect_scale",
+				$Page3.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
 
+func exited_crafting_area(item_name):
+	crafting_item = null
+	match page:
+		1:
+			$Tween.interpolate_property($Page1.get_node(item_name), "rect_scale",
+				$Page1.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		2:
+			$Tween.interpolate_property($Page2.get_node(item_name), "rect_scale",
+				$Page2.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+		3:
+			$Tween.interpolate_property($Page3.get_node(item_name), "rect_scale",
+				$Page3.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
 
 func craft(item_name):
 	if not get_parent().holding_item and PlayerInventory.isSufficientMaterialToCraft(item_name):
 		find_parent("UserInterface").holding_item = return_crafted_item(item_name)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 		PlayerInventory.craft_item(item_name)
-		initialize()
+		set_current_page()
 	elif find_parent("UserInterface").holding_item:
 		if find_parent("UserInterface").holding_item.item_name == "arrow" and PlayerInventory.isSufficientMaterialToCraft(item_name):
 			PlayerInventory.craft_item(item_name)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
-			initialize()
+			set_current_page()
 
 func return_crafted_item(item_name):
 	var inventoryItem = InventoryItem.instance()
@@ -92,28 +135,39 @@ func return_crafted_item(item_name):
 	return inventoryItem
 
 func _on_DownButton_pressed():
-	$Page1.hide()
-	$Page2.show()
-	$Page2.initialize()
-	$DownButton.hide()
-	$UpButton.show()
+	if page != 3:
+		page += 1
+	set_current_page()
 	
 
 func _on_UpButton_pressed():
-	$Page1.show()
-	$Page2.hide()
-	$Page1.initialize()
-	$DownButton.show()
-	$UpButton.hide()
-
-func initialize():
-	item = null
-	crafting_item = null
-	show()
-	$Page1.initialize()
-	$Page2.initialize()
+	if page != 1:
+		page -= 1
+	set_current_page()
+	
+func set_current_page():
+	match page:
+		1:
+			$Page1.initialize()
+			$Page2.hide()
+			$Page3.hide()
+			$UpButton.hide()
+			$DownButton.show()
+		2:
+			$Page3.hide()
+			$Page2.initialize()
+			$Page1.hide()
+			$UpButton.show()
+			$DownButton.show()
+		3:
+			$Page3.initialize()
+			$Page2.hide()
+			$Page1.hide()
+			$UpButton.show()
+			$DownButton.hide()
 	initialize_hotbar()
 	initialize_inventory()
+
 
 func initialize_hotbar():
 	var slots = hotbar_slots.get_children()
@@ -215,6 +269,7 @@ func _on_TrashButton_pressed():
 	if find_parent("UserInterface").holding_item:
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
+		set_current_page()
 
 
 func _on_BackgroundButton_pressed():
@@ -225,4 +280,4 @@ func _on_BackgroundButton_pressed():
 
 
 func _on_ExitButton_pressed():
-	get_parent().toggle_workbench()
+	get_parent().close_workbench()

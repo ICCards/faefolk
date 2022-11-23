@@ -19,7 +19,11 @@ enum SlotType {
 	HOTBAR_INVENTORY,
 	INVENTORY,
 	CHEST,
-	LOCKED
+	LOCKED,
+	GRAIN_MILL,
+	FURNACE,
+	STOVE,
+	TOOL_CABINET
 }
 
 var slotType = null

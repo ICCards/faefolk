@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/1 click map.png-f2def37c980c2472c357f3f14099d8fb.res"
+
+[deps]
+
+source_file="res://Assets/Images/User interface/radial menus/5-segment-menu/unselected/1 click map.png"
+dest_files=[ "res://.import/1 click map.png-f2def37c980c2472c357f3f14099d8fb.res" ]
+
+[params]
+
+create_from=0
+threshold=0.5

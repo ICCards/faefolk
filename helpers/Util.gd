@@ -68,15 +68,48 @@ func returnCategoryColor(category):
 			return Color("ff2525")
 		"Resource":
 			return Color("00ffc3")
-		"Placable object":
+		"Crop":
 			return Color("fffb00")
 		"Seed":
 			return Color("26ff00")
 		"Food":
 			return Color("eb00ff")
-		"Placable path":
-			return Color("3c1aff")
+		"Placable object":
+			return Color("806aff")
 		"Construction":
 			return Color("ff25f1")
 		"Fish":
 			return Color("ff6d00")
+		"Forage":
+			return Color("ffc500")
+		"Magic":
+			return Color("ff006c")
+		"Potion":
+			return Color("ff006c")
+
+func valid_holding_item_category(item_category):
+	if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop" or item_category == "Forage":
+		return true
+	return false
+	
+func return_adjusted_item_name(item_name):
+	if item_name.substr(0,5) == "couch":
+		return "couch"
+	elif item_name.substr(0,5) == "chair":
+		return "chair"
+	elif item_name.substr(0,8) == "armchair":
+		return "armchair"
+	elif item_name.substr(0,9) == "large rug":
+		return "large rug"
+	elif item_name.substr(0,10) == "medium rug":
+		return "medium rug"
+	elif item_name.substr(0,9) == "small rug":
+		return "small rug"
+	elif item_name.substr(0,5) == "table":
+		return "table"
+	elif item_name.substr(0,3) == "bed":
+		return "bed"
+	elif item_name.substr(0,11) == "round table":
+		return "round table"
+	return item_name
+	

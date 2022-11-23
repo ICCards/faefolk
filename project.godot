@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ImageTexture",
+"class": "CustomGradientTexture",
+"language": "GDScript",
+"path": "res://Global/Functions/maujoe.custom_gradient_texture/custom_gradient_texture.gd"
+}, {
 "base": "Camera2D",
 "class": "PanningCamera2D",
 "language": "GDScript",
 "path": "res://World/Map/Camera2D.gd"
 } ]
 _global_script_class_icons={
+"CustomGradientTexture": "",
 "PanningCamera2D": ""
 }
 
@@ -32,7 +38,7 @@ SceneChanger="*res://Global/Functions/SceneChanger.tscn"
 Sounds="*res://Global/Data/Sounds.gd"
 PlayerStats="*res://Global/Data/PlayerStats.gd"
 Util="*res://helpers/Util.gd"
-Uuid="*res://helpers/uuid.gd"
+Uuid="*res://helpers/UUID.gd"
 Server="*res://server/server.gd"
 Chat="*res://Global/Data/Chat.gd"
 PlaceObject="*res://Global/Data/PlaceObject.gd"
@@ -43,11 +49,15 @@ Human="*res://Global/Characters/Human.gd"
 Stats="*res://Global/Data/Stats.gd"
 FishData="*res://Global/Data/FishData.gd"
 CollectionsData="*res://Global/Data/CollectionsData.gd"
-IC="*res://helpers/ic.cs"
+InstancedScenes="*res://Global/Data/InstancedScenes.gd"
+Constants="*res://Global/Data/Constants.gd"
+BuildCaveLevel="*res://Global/Data/BuildCaveLevel.gd"
+MapData="*res://Global/Data/MapData.gd"
+GenerateNewWorld="*res://Global/Data/GenerateNewWorld.gd"
 
 [display]
 
-mouse_cursor/custom_image="res://Assets/Mouse cursors/Normal Selects.png"
+mouse_cursor/custom_image="res://Assets/mouse cursors/Normal Selects.png"
 window/stretch/mode="2d"
 
 [global]
@@ -239,6 +249,15 @@ slot9={
 slot10={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":48,"unicode":0,"echo":false,"script":null)
+ ]
+}
+sprint={
+"deadzone": 0.5,
+"events": [  ]
+}
+change_object_type={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":86,"unicode":0,"echo":false,"script":null)
  ]
 }
 

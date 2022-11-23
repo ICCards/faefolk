@@ -9,15 +9,14 @@ func _ready():
 	if not Server.player.empty():
 		get_parent().spawn_player_in_menu()
 
-func _connect_plug(args):
-	pass;
-	#IC.login(login_callback)
+#func _connect_plug(args):
+#	IC.login(login_callback)
 	
-func _login(args):
-	var value = Util.toMessage("LOGIN",{"d":{}})
-	print("logging in")
-	Server._client.get_peer(1).put_packet(value)
-	get_parent().spawn_player_in_menu()
+#func _login(args):
+#	var value = Util.toMessage("LOGIN",{"d":{}})
+#	print("logging in")
+#	Server._client.get_peer(1).put_packet(value)
+#	get_parent().spawn_player_in_menu()
 	
 func _play_hover_effect(button_name):
 	if hovered_button != button_name and not changing_scene_active:
@@ -28,17 +27,27 @@ func _play_hover_effect(button_name):
 
 func _on_ConnectToPlugButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.volume_db = -28 #Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
-	_login_test()
+	#_login_test()
 	#IC.connect_plug(connect_callback)
-	$ConnectToPlug.visible = false
-	$LoadingIndicator.visible = true	
-
-func _login_test():
-	print("logging in")
-	Server.rpc_id(1, "login_test")
-	get_parent().spawn_player_in_menu()
+	$ConnectToPlug.hide()
+	$LoadingIndicator.show()
+	wait_for_map_build()
+	
+func wait_for_map_build():
+	if MapData.is_world_built:
+		$LoadingIndicator.hide()
+		get_parent().spawn_player_in_menu()
+	else:
+		yield(get_tree().create_timer(0.5), "timeout")
+		wait_for_map_build()
+	
+#
+#func _login_test():
+#	print("logging in")
+#	Server.rpc_id(1, "login_test")
+#	get_parent().spawn_player_in_menu()
 
 
 func _on_ConnectToPlugButton_mouse_entered():

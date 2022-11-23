@@ -14,6 +14,7 @@ var character
 var player
 
 func _ready():
+	Settings.load_keys()
 	animPlayer.play("idle")
 	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
 	$FootstepsSound.play()

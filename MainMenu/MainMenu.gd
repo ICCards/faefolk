@@ -6,17 +6,17 @@ var playerMenuState
 var is_menu_open = false
 
 func _ready():
-	$TitleMusic.stream = Sounds.title_music
-	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
-	$TitleMusic.play()
+#	$TitleMusic.stream = Sounds.title_music
+#	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
+#	$TitleMusic.play()
 	Sounds.connect("volume_change", self, "change_title_volume")
 	$Background/Water1.playing = true
 	$Background/Water2.playing = true
 
 
 func spawn_player_in_menu():
-	var value = Server.player
-	if not value.empty():
+#	var value = Server.player
+#	if not value.empty():
 		$MainMenuButtons/LoadingIndicator.visible = false
 		$MainMenuButtons/PlayShopQuit.visible = true
 		playerMenuState = PlayerMenuState.instance()
@@ -25,9 +25,9 @@ func spawn_player_in_menu():
 		playerMenuState.character.LoadPlayerCharacter("human_male")
 		add_child(playerMenuState)
 		playerMenuState.global_position = Vector2(600, 472 )
-	else:
-		yield(get_tree().create_timer(0.25), "timeout")
-		spawn_player_in_menu()
+#	else:
+#		yield(get_tree().create_timer(0.25), "timeout")
+#		spawn_player_in_menu()
 
 
 func change_title_volume():

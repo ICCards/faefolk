@@ -6,23 +6,24 @@ var storm2
 
 
 func _ready():
-	stream = Sounds.nature
-	volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
-	play()
-	Sounds.connect("volume_change", self, "set_new_music_volume")
+	if has_node("/root/World"):
+		stream = Sounds.nature
+		volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
+		play()
+		Sounds.connect("volume_change", self, "set_new_music_volume")
 
 
 func set_new_music_volume():
-	volume_db = Sounds.return_adjusted_sound_db("ambient", -16)
+	volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
 
-func _process(delta):
+func _physics_process(delta):
 	if Server.isLoaded and has_node("/root/World"):
 		storm1 = get_node("/root/World/RoamingStorm")
-		#storm2 = get_node("/root/World/RoamingStorm2")
+		storm2 = get_node("/root/World/RoamingStorm2")
 		if Server.player_node.position.distance_to(storm1.position) <= 2000:
 			inside_storm(storm1)
-#		elif get_parent().position.distance_to(storm2.position) <= 2000:
-#			inside_storm(storm2)
+		elif Server.player_node.position.distance_to(storm2.position) <= 2000:
+			inside_storm(storm2)
 		else:
 			outside_storm()
 

@@ -1,125 +1,169 @@
-extends StaticBody2D
+extends KinematicBody2D
 
-const GALLUP_SPEED: int = 180
-const IDLE_SPEED: int = 120
-var is_in_sight: bool = false
-var changing_direction: bool = false
-var path: Array = []
-var player = null
-var direction = "down"
-var random_idle_pos = null
-var player_spotted: bool = false
+onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+onready var _idle_timer: Timer = $Timers/IdleTimer
+onready var _chase_timer: Timer = $Timers/ChaseTimer
+onready var _end_chase_state_timer: Timer = $Timers/EndChaseState
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+
+var enemy_name = "bear"
+
+var player = Server.player_node
+var direction: String = "down"
+var destroyed: bool = false
+var stunned: bool = false
+var poisoned: bool = false
+var attacking: bool = false
 var playing_sound_effect: bool = false
-var in_idle_state: bool = false
-var swinging: bool = false
-var current_pos = null
-onready var los = $LineOfSight
-onready var worldNavigation = get_node("/root/World/WorldNavigation")
+var changed_direction_delay: bool = false
+var frozen: bool = false
+var random_pos := Vector2.ZERO
+var _velocity := Vector2.ZERO
+var knockback := Vector2.ZERO
+var d := 0.0
+var orbit_speed := 5.0
+var orbit_radius
 
 var rng = RandomNumberGenerator.new()
 var state = IDLE
+var health: int = Stats.BEAR_HEALTH
+var KNOCKBACK_AMOUNT = 300
+var MAX_MOVE_DISTANCE: float = 400.0
 
+var tornado_node = null
 
 enum {
 	CHASE,
-	SWING,
+	ATTACK,
 	IDLE,
-	WALK
+	WALK,
 }
 
+func _ready():
+	hide()
+	animation_player.play("loop")
+	randomize()
+	orbit_radius = rand_range(40, 60)
+	_idle_timer.wait_time = rand_range(4.0, 6.0)
+	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
+	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
+	_end_chase_state_timer.connect("timeout", self, "end_chase_state")
+	navigation_agent.connect("velocity_computed", self, "move")
+	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+
+
+func _update_pathfinding_idle():
+	state = WALK
+	navigation_agent.set_target_location(get_random_pos())
+
+func _update_pathfinding_chase():
+	navigation_agent.set_target_location(player.position)
+
+
+func get_random_pos():
+	random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
+	if Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position + random_pos)) == -1:
+		return position + random_pos
+	elif Tiles.ocean_tiles.get_cellv(Tiles.ocean_tiles.world_to_map(position - random_pos)) == -1:
+		return position - random_pos
+	else:
+		return position
 
 func _physics_process(delta):
-	if is_in_sight:
-		player = get_node("/root/World/Players/" + Server.player_id).get_children()[0]
-		los.look_at(player.global_position)
-		match state:
-			CHASE:
-				chase(delta)
-			SWING:
-				swing()
-			IDLE:
-				check_player_in_detection()
-				idle()
-			WALK:
-				check_player_in_detection()
-				navigate(delta)
-	
-	
-func idle():
-	$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
-	$Body/Fangs.texture = null
-	
-	
+	if not visible or destroyed:
+		if state == CHASE:
+			end_chase_state()
+		return
+	if poisoned:
+		$PoisonParticles/P1.direction = -_velocity
+		$PoisonParticles/P2.direction = -_velocity
+		$PoisonParticles/P3.direction = -_velocity
+	if stunned or attacking:
+		return
+	if tornado_node:
+		if is_instance_valid(tornado_node):
+			d += delta
+			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
+		else: 
+			tornado_node = null
+	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not player.state == 5 and not player.get_node("Magic").invisibility_active:
+		if state != CHASE and state != ATTACK:
+			start_chase_state()
+	if state == CHASE and (player.state == 5 or player.get_node("Magic").invisibility_active):
+		end_chase_state()
+	set_direction()
+	set_texture()
+	if knockback != Vector2.ZERO:
+		_velocity = Vector2.ZERO
+		knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
+		knockback = move_and_slide(knockback)
+	if navigation_agent.is_navigation_finished() and (state == WALK or state == IDLE):
+		state = IDLE
+		return
+	if state == CHASE and (position + Vector2(0,-26)).distance_to(player.position) < 75:
+		state = ATTACK
+		swing()
+	var target = navigation_agent.get_next_location()
+	var move_direction = position.direction_to(target)
+	var desired_velocity = move_direction * navigation_agent.max_speed
+	var steering = (desired_velocity - _velocity) * delta * 4.0
+	_velocity += steering
+	navigation_agent.set_velocity(_velocity)
+
+func move(velocity: Vector2) -> void:
+	if tornado_node or stunned or attacking or destroyed:
+		return
+	if frozen:
+		_velocity = move_and_slide(velocity*0.75)
+	elif poisoned:
+		_velocity = move_and_slide(velocity*0.9)
+	else:
+		_velocity = move_and_slide(velocity)
+
+func set_direction():
+	if not changed_direction_delay:
+		if abs(_velocity.x) >= abs(_velocity.y):
+			if _velocity.x >= 0:
+				if direction != "right":
+					direction = "right"
+					set_change_direction_delay()
+			else:
+				if direction != "left":
+					direction = "left"
+					set_change_direction_delay()
+		else:
+			if _velocity.y >= 0:
+				if direction != "down":
+					direction = "down"
+					set_change_direction_delay()
+			else:
+				if direction != "up":
+					direction = "up"
+					set_change_direction_delay()
+
+
 func play_groan_sound_effect():
 	rng.randomize()
-	$AudioStreamPlayer2D.stream = Sounds.bear_grown[rng.randi_range(0, 2)]
-	$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	$AudioStreamPlayer2D.play()
-	yield($AudioStreamPlayer2D, "finished")
+	sound_effects.stream = Sounds.bear_grown[rng.randi_range(0, 2)]
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+	sound_effects.play()
+	yield(sound_effects, "finished")
 	playing_sound_effect = false
 	start_sound_effects()
 
-	
+
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		$AudioStreamPlayer2D.stream = preload("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3")
-		$AudioStreamPlayer2D.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		$AudioStreamPlayer2D.play()
-		
-		
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
+
+
 func stop_sound_effects():
 	playing_sound_effect = false
-	$AudioStreamPlayer2D.stop()
-		
-
-func set_swing_direction():
-	var degrees = int(los.rotation_degrees)
-	if degrees > 0:
-		degrees = degrees % 360
-		if degrees < 45 or degrees > 315:
-			direction = "right"
-		elif degrees > 45 and degrees < 135:
-			direction = "down"
-		elif degrees > 135 and degrees < 225:
-			direction = "left"
-		else:
-			direction = "up"
-	else:
-		degrees = -degrees % 360
-		if degrees < 45 or degrees > 315:
-			direction = "right"
-		elif degrees > 45 and degrees < 135:
-			direction = "up"
-		elif degrees > 135 and degrees < 225:
-			direction = "left"
-		else:
-			direction = "down"
-
-
-func check_player_in_detection():
-	var collider = los.get_collider()
-	if collider and collider == player and not player.is_player_dead:
-		if worldNavigation.get_simple_path(global_position, player.global_position, true).size() > 1:
-			state = CHASE
-
-
-func navigate(delta):
-	if path.size() > 0:
-		set_direction(path[0])
-		set_texture()
-		$AnimationPlayer.play("loop")
-		if state == CHASE:
-			position = position.move_toward(path[0], delta * GALLUP_SPEED)
-		else:
-			position = position.move_toward(path[0], delta * IDLE_SPEED)
-		if global_position == path[0]:
-			path.pop_front()
-	else:
-		if state == WALK:
-			state = IDLE
-		elif state == CHASE and position.distance_to(player.position) > 350:
-			state = IDLE
+	sound_effects.stop()
 
 
 func set_texture():
@@ -129,89 +173,183 @@ func set_texture():
 			$Body/Fangs.texture = load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png")
 		WALK:
 			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png")
-			$Body/Fangs.texture = null #load("res://Assets/Images/Animals/Bear/walk/fangs/" + direction  + ".png")
-
-
-func set_direction(new_pos):
-	if not changing_direction:
-		var tempPos = position - new_pos
-		if abs(tempPos.y) > abs(tempPos.x):
-			if tempPos.y > 0:
-				change_direction("up")
-			else:
-				change_direction("down")
-		elif tempPos.x > 0:
-			change_direction("left")
-		elif tempPos.x < 0:
-			change_direction("right")
-
-
-func change_direction(new_direction):
-	if new_direction != direction:
-		changing_direction = true
-		direction = new_direction
-		yield(get_tree().create_timer(0.25), "timeout")
-		changing_direction = false
-
-
-func chase(delta):
-	if (position + Vector2(0,-26)).distance_to(player.position) > 70:
-		navigate(delta)
-	else:
-		state = SWING
+			$Body/Fangs.texture = null
+		IDLE:
+			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
+			$Body/Fangs.texture = null
 
 
 func swing():
-	if not player.is_player_dead and path.size() > 0:
-		if not swinging:
-			swinging = true
-			yield(get_tree().create_timer(0.15), "timeout")
-			play_groan_sound_effect()
-			set_swing_direction()
-			if (position + Vector2(0,-26)).distance_to(player.position) < 50:
-				$AnimationPlayer.play("bite " + direction)
+	if not attacking:
+		attacking = true
+		yield(get_tree().create_timer(0.1), "timeout")
+		play_groan_sound_effect()
+		if (position + Vector2(0,-26)).distance_to(player.position) < 45:
+			animation_player.play("bite " + direction)
+		else:
+			if Util.chance(25):
+				animation_player.play("bite " + direction)
 			else:
-				$AnimationPlayer.play("swing " + direction)
-			yield($AnimationPlayer, "animation_finished")
-			swinging = false
-			path = worldNavigation.get_simple_path(global_position, player.global_position, true)
+				animation_player.play("swing " + direction)
+		yield(animation_player, "animation_finished")
+		if not destroyed:
+			if frozen or poisoned:
+				animation_player.play("loop frozen")
+			else:
+				animation_player.play("loop")
+			attacking = false
 			state = CHASE
-	else:
-		state = IDLE
+
+func hit(tool_name):
+	if tool_name == "blizzard":
+		start_frozen_state(8)
+		return
+	elif tool_name == "ice projectile":
+		start_frozen_state(3)
+	elif tool_name == "lightning spell debuff":
+		start_stunned_state()
+	if state == IDLE or state == WALK:
+		start_chase_state()
+	_end_chase_state_timer.stop()
+	_end_chase_state_timer.start()
+	$HurtBox/AnimationPlayer.play("hit")
+	var dmg = Stats.return_tool_damage(tool_name)
+	health -= dmg
+	InstancedScenes.player_hit_effect(-dmg, position)
+	if health <= 0 and not destroyed:
+		destroy()
+
+func destroy():
+	destroyed = true
+	stop_sound_effects()
+	$Body/Fangs.texture = null
+	$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/death/" + direction  + "/body.png")
+	animation_player.play("death")
+	yield(animation_player, "animation_finished")
+	queue_free()
+
+func _on_HurtBox_area_entered(area):
+	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+		$HurtBox/AnimationPlayer.play("hit")
+		diminish_HOT(area.tool_name)
+		return
+	if area.name == "SwordSwing":
+		Stats.decrease_tool_health()
+	if area.knockback_vector != Vector2.ZERO:
+		set_change_direction_delay()
+		knockback = area.knockback_vector * 100
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+		hit(area.tool_name)
+	if area.tool_name == "lingering tornado":
+		tornado_node = area
+
+func diminish_HOT(type):
+	start_poison_state()
+	var amount_to_diminish
+	match type:
+		"poison potion I":
+			amount_to_diminish = Stats.BEAR_HEALTH * 0.08
+		"poison potion II":
+			amount_to_diminish = Stats.BEAR_HEALTH * 0.2
+		"poison potion III":
+			amount_to_diminish = Stats.BEAR_HEALTH * 0.32
+	var increment = int(ceil(amount_to_diminish / 4))
+	while int(amount_to_diminish) > 0 and not destroyed:
+		if amount_to_diminish < increment:
+			health -= amount_to_diminish
+			InstancedScenes.player_hit_effect(-amount_to_diminish, position)
+			amount_to_diminish = 0
+		else:
+			health -= increment
+			InstancedScenes.player_hit_effect(-increment, position)
+			amount_to_diminish -= increment
+		if health <= 0 and not destroyed:
+			destroy()
+		yield(get_tree().create_timer(2.0), "timeout")
+
+func start_poison_state():
+	$PoisonParticles/P1.emitting = true
+	$PoisonParticles/P2.emitting = true
+	$PoisonParticles/P3.emitting = true
+	$Body.modulate = Color("009000")
+	poisoned = true
+	$Timers/PoisonTimer.start()
+	if not attacking and not destroyed:
+		animation_player.play("loop frozen")
+
+func _on_PoisonTimer_timeout():
+	$PoisonParticles/P1.emitting = false
+	$PoisonParticles/P2.emitting = false
+	$PoisonParticles/P3.emitting = false
+	poisoned = false
+	if not frozen:
+		$Body.modulate = Color("ffffff")
+		if not destroyed:
+			animation_player.play("loop")
+
+func start_stunned_state():
+	if not destroyed:
+		rng.randomize()
+		$Electricity.frame = rng.randi_range(1,6)
+		$Electricity.show()
+		$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", true)
+		$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", true)
+		animation_player.stop(false)
+		$Timers/StunnedTimer.start()
+		stunned = true
+
+func _on_StunnedTimer_timeout():
+	if not destroyed:
+		$Electricity.hide()
+		stunned = false
+		animation_player.play()
+
+
+func start_frozen_state(timer_length):
+	$Body.modulate = Color("00c9ff")
+	frozen = true
+	$Timers/FrozenTimer.start(timer_length)
+	if not attacking and not destroyed:
+		animation_player.play("loop frozen")
+
+func _on_FrozenTimer_timeout():
+	frozen = false
+	if not poisoned:
+		$Body.modulate = Color("ffffff")
+		if not destroyed:
+			animation_player.play("loop")
+
+func _on_EndChaseState_timeout():
+	end_chase_state()
+
+func end_chase_state():
+	navigation_agent.max_speed = 100
+	stop_sound_effects()
+	_idle_timer.start()
+	_chase_timer.stop()
+	_end_chase_state_timer.stop()
+	state = IDLE
+
+func start_chase_state():
+	state = CHASE
+	$Body/Fangs.show()
+	navigation_agent.max_speed = 240
+	start_sound_effects()
+	_idle_timer.stop()
+	_chase_timer.start()
+	_end_chase_state_timer.start()
+
+
+func set_change_direction_delay():
+	changed_direction_delay = true
+	$Timers/ChangeDirectionDelay.start()
+
+func _on_ChangeDirectionDelay_timeout():
+	changed_direction_delay = false
 
 
 func _on_VisibilityNotifier2D_screen_entered():
-	visible = true
-	is_in_sight = true
-
-
+	show()
 func _on_VisibilityNotifier2D_screen_exited():
-	visible = false
-	is_in_sight = false
+	hide()
 
-
-func _on_PathToPlayerTimer_timeout():
-	if state == CHASE:
-		path = worldNavigation.get_simple_path(global_position, player.global_position, true)
-		if path.size() == 0:
-			state = IDLE
-
-
-func _on_RandomPathTimer_timeout():
-	if state == IDLE:
-		rng.randomize()
-		random_idle_pos = Vector2(rng.randi_range(-300, 300), rng.randi_range(-300, 300))
-		path = worldNavigation.get_simple_path(position, position + random_idle_pos, true)
-		state = WALK
-
-func _on_HurtBox_area_entered(area):
-	$HurtBox/AnimationPlayer.play("hit")
-
-
-func _on_CheckPositionTimer_timeout():
-	if current_pos == position:
-		rng.randomize()
-		random_idle_pos = Vector2(rng.randi_range(-300, 300), rng.randi_range(-300, 300))
-		path = worldNavigation.get_simple_path(position, position + random_idle_pos, true)
-	else:
-		current_pos = position

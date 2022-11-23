@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://World/Player/Player/Fishing/FishingMiniGame.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Assets/Images/Misc/Fishing/rod decoration.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Images/Misc/Fishing/spr_fish_64_x.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Images/Misc/Fishing/animated reel.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Misc/Fishing/hook2.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/Misc/Fishing/hook3.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 10 )
@@ -54,20 +56,48 @@ margin_right = 40.4
 margin_bottom = 96.8
 texture = ExtResource( 4 )
 
-[node name="Hook" type="Node2D" parent="."]
+[node name="wood fishing rod" type="Node2D" parent="."]
+visible = false
 position = Vector2( 15, 83 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Sprite" type="Sprite" parent="Hook"]
+[node name="Sprite" type="Sprite" parent="wood fishing rod"]
 texture = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="Hook"]
+[node name="Area2D" type="Area2D" parent="wood fishing rod"]
 collision_layer = 1048576
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hook/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wood fishing rod/Area2D"]
+shape = SubResource( 1 )
+
+[node name="stone fishing rod" type="Node2D" parent="."]
+visible = false
+position = Vector2( 15, 81 )
+
+[node name="Sprite" type="Sprite" parent="stone fishing rod"]
+texture = ExtResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="stone fishing rod"]
+scale = Vector2( 1, 1.2 )
+collision_layer = 1048576
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stone fishing rod/Area2D"]
+shape = SubResource( 1 )
+
+[node name="gold fishing rod" type="Node2D" parent="."]
+visible = false
+position = Vector2( 15, 79 )
+
+[node name="Sprite" type="Sprite" parent="gold fishing rod"]
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="gold fishing rod"]
+scale = Vector2( 1, 1.4 )
+collision_layer = 1048576
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gold fishing rod/Area2D"]
 shape = SubResource( 1 )
 
 [node name="Clicker" type="TextureButton" parent="."]
@@ -95,9 +125,9 @@ texture = ExtResource( 6 )
 
 [node name="RodDecoration" type="TextureRect" parent="."]
 margin_left = -8.4
-margin_top = -31.6
+margin_top = -32.0
 margin_right = 31.6
-margin_bottom = 100.4
+margin_bottom = 100.0
 mouse_filter = 2
 texture = ExtResource( 5 )
 

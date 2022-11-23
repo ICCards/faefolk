@@ -1,0 +1,650 @@
+[gd_scene load_steps=62 format=2]
+
+[ext_resource path="res://Assets/Images/Enemies/Spider/idle.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Enemies/Spider/walk.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Enemies/knockback dust.png" type="Texture" id=3]
+[ext_resource path="res://World/Enemies/Spider.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=15]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id=15]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id=16]
+radius = 16.0312
+
+[sub_resource type="Animation" id=17]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Spider:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "hit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Spider:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=148]
+radius = 194.003
+
+[sub_resource type="AtlasTexture" id=196]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=197]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=198]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=199]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=200]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=201]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=202]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=203]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=204]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=205]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=206]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=207]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=208]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=209]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=210]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=211]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=212]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=213]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=214]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=215]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=216]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=217]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=218]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=219]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 48, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 196 ), SubResource( 197 ), SubResource( 198 ), SubResource( 199 ) ],
+"loop": true,
+"name": "idle down",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 200 ), SubResource( 201 ), SubResource( 202 ), SubResource( 203 ) ],
+"loop": true,
+"name": "idle right",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 204 ), SubResource( 205 ), SubResource( 206 ), SubResource( 207 ) ],
+"loop": true,
+"name": "idle up",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 208 ), SubResource( 209 ), SubResource( 210 ), SubResource( 211 ) ],
+"loop": true,
+"name": "walk down",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 212 ), SubResource( 213 ), SubResource( 214 ), SubResource( 215 ) ],
+"loop": true,
+"name": "walk right",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 216 ), SubResource( 217 ), SubResource( 218 ), SubResource( 219 ) ],
+"loop": true,
+"name": "walk up",
+"speed": 8.0
+} ]
+
+[sub_resource type="AtlasTexture" id=145]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=151]
+atlas = ExtResource( 14 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=146]
+atlas = ExtResource( 14 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=152]
+atlas = ExtResource( 14 )
+region = Rect2( 72, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=153]
+atlas = ExtResource( 14 )
+region = Rect2( 96, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=154]
+atlas = ExtResource( 14 )
+region = Rect2( 120, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=155]
+atlas = ExtResource( 14 )
+region = Rect2( 144, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=156]
+atlas = ExtResource( 14 )
+region = Rect2( 168, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=157]
+atlas = ExtResource( 14 )
+region = Rect2( 192, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=158]
+atlas = ExtResource( 14 )
+region = Rect2( 216, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=159]
+atlas = ExtResource( 14 )
+region = Rect2( 240, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=160]
+atlas = ExtResource( 14 )
+region = Rect2( 264, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=161]
+atlas = ExtResource( 14 )
+region = Rect2( 288, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=162]
+atlas = ExtResource( 14 )
+region = Rect2( 312, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=147]
+animations = [ {
+"frames": [ SubResource( 145 ), SubResource( 151 ), SubResource( 146 ), SubResource( 152 ), SubResource( 153 ), SubResource( 154 ), SubResource( 155 ), SubResource( 156 ), SubResource( 157 ), SubResource( 158 ), SubResource( 159 ), SubResource( 160 ), SubResource( 161 ), SubResource( 162 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=187]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=188]
+min_value = -400.0
+max_value = 400.0
+_data = [ Vector2( 0.00225479, 400 ), 0.0, 6785.07, 0, 0, Vector2( 0.0963725, 84.2162 ), -1232.57, -1232.57, 0, 0, Vector2( 1, -200 ), 1228.09, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=189]
+max_value = 2.5
+_data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=190]
+offsets = PoolRealArray( 0.000555864, 0.339658, 0.724858, 1 )
+colors = PoolColorArray( 0.517647, 0.494118, 0.713726, 1, 0.392157, 0.372549, 0.572549, 1, 0.188235, 0.172549, 0.286275, 1, 0.0980392, 0.0901961, 0.141176, 1 )
+
+[sub_resource type="Curve" id=191]
+max_value = 3.0
+_data = [ Vector2( 0, 2.75318 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.35797 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=192]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 200 ), 0.0, 551.546, 0, 0, Vector2( 0.110634, -116.595 ), 0.0, 0.0, 0, 0, Vector2( 1, -138.216 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=193]
+min_value = 0.99
+max_value = 5.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 5 ), 10.0041, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=194]
+offsets = PoolRealArray( 0, 0.994737, 1 )
+colors = PoolColorArray( 0.51083, 0.51083, 0.51083, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=195]
+resource_name = "destroy"
+tracks/0/type = "value"
+tracks/0/path = NodePath("PoisonParticles/P1:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PoisonParticles/P2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PoisonParticles/P3:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpiderHit/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ExplosionParticles/Explosion:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ExplosionParticles/Explosion/Shards:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ExplosionParticles/Explosion/Smoke:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Spider:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Electricity:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="Spider" type="KinematicBody2D"]
+collision_mask = 3
+script = ExtResource( 5 )
+
+[node name="PoisonParticles" type="Node2D" parent="."]
+
+[node name="P3" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 12, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0, 0.332031, 0, 1 )
+
+[node name="P2" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0.145098, 0.545098, 0.145098, 1 )
+
+[node name="P1" type="CPUParticles2D" parent="PoisonParticles"]
+modulate = Color( 1.35, 1.35, 1.35, 1 )
+emitting = false
+amount = 10
+lifetime = 2.5
+lifetime_randomness = 0.8
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 4 )
+direction = Vector2( -1, 0 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 70.0
+initial_velocity_random = 0.8
+scale_amount = 4.0
+scale_amount_random = 0.7
+color = Color( 0.14902, 0.937255, 0.14902, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 2.0
+target_desired_distance = 10.0
+path_max_distance = 20.0
+avoidance_enabled = true
+max_speed = 100.0
+
+[node name="SpiderHit" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpiderHit"]
+shape = SubResource( 15 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="IdleTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+autostart = true
+
+[node name="ChaseTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+
+[node name="FrozenTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+one_shot = true
+
+[node name="StunnedTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="ChangeDirectionDelay" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="PoisonTimer" type="Timer" parent="Timers"]
+wait_time = 8.0
+one_shot = true
+
+[node name="KnockbackTimer" type="Timer" parent="Timers"]
+wait_time = 0.25
+one_shot = true
+
+[node name="DiminishHOT" type="Timer" parent="Timers"]
+
+[node name="HurtBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 262400
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource( 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+anims/RESET = SubResource( 17 )
+anims/hit = SubResource( 18 )
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 148 )
+
+[node name="Spider" type="AnimatedSprite" parent="."]
+material = ExtResource( 15 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+animation = "walk right"
+frame = 2
+playing = true
+
+[node name="Electricity" type="AnimatedSprite" parent="."]
+visible = false
+modulate = Color( 1.22, 1.22, 1.22, 1 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 147 )
+frame = 9
+playing = true
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="KnockbackParticles" type="CPUParticles2D" parent="."]
+material = SubResource( 187 )
+emitting = false
+amount = 3
+lifetime = 0.5
+explosiveness = 0.5
+local_coords = false
+texture = ExtResource( 3 )
+gravity = Vector2( 0, 0 )
+scale_amount = 2.0
+anim_speed = 2.0
+
+[node name="ExplosionParticles" type="Node2D" parent="."]
+modulate = Color( 1.25, 1.25, 1.25, 1 )
+position = Vector2( 0, -3 )
+
+[node name="Explosion" type="CPUParticles2D" parent="ExplosionParticles"]
+emitting = false
+amount = 50
+lifetime = 0.8
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.5
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.5
+linear_accel = 60.0
+linear_accel_random = 0.2
+linear_accel_curve = SubResource( 188 )
+scale_amount = 2.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 189 )
+color_ramp = SubResource( 190 )
+
+[node name="Shards" type="CPUParticles2D" parent="ExplosionParticles/Explosion"]
+emitting = false
+amount = 10
+lifetime = 0.9
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.8
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 140 )
+initial_velocity = 40.0
+initial_velocity_random = 0.3
+linear_accel = 100.0
+linear_accel_random = 0.4
+scale_amount = 2.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 191 )
+color_ramp = SubResource( 190 )
+
+[node name="Smoke" type="CPUParticles2D" parent="ExplosionParticles/Explosion"]
+self_modulate = Color( 1, 1, 1, 0.823529 )
+show_behind_parent = true
+emitting = false
+amount = 30
+lifetime = 0.9
+one_shot = true
+speed_scale = 3.0
+explosiveness = 0.8
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.15
+orbit_velocity_random = 1.0
+linear_accel = 100.0
+linear_accel_random = 0.5
+linear_accel_curve = SubResource( 192 )
+scale_amount = 2.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 193 )
+color_ramp = SubResource( 194 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/destroy = SubResource( 195 )
+
+[connection signal="timeout" from="Timers/FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
+[connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
+[connection signal="timeout" from="Timers/ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]
+[connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
+[connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+[connection signal="timeout" from="Timers/DiminishHOT" to="." method="_on_DiminishHOT_timeout"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
