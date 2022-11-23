@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/2.png-43c525d86a01f81657efafa295d095ba.stex"
+path="res://.import/2.png-2dab499a1321fffded2baae352aa0bcc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/walls/hit effects/twig/2.png"
-dest_files=[ "res://.import/2.png-43c525d86a01f81657efafa295d095ba.stex" ]
+source_file="res://Assets/Tilesets/walls/hit effects/twig/2.png"
+dest_files=[ "res://.import/2.png-2dab499a1321fffded2baae352aa0bcc.stex" ]
 
 [params]
 

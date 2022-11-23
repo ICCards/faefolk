@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/closed.png-a7e0ca81c38f833d6933ca98a57d1bb3.stex"
+path="res://.import/closed.png-b2987f411b38e6c01b7069ed8f6f2ac9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/doors/hit effects/wood/side/closed.png"
-dest_files=[ "res://.import/closed.png-a7e0ca81c38f833d6933ca98a57d1bb3.stex" ]
+source_file="res://Assets/Tilesets/doors/hit effects/wood/side/closed.png"
+dest_files=[ "res://.import/closed.png-b2987f411b38e6c01b7069ed8f6f2ac9.stex" ]
 
 [params]
 

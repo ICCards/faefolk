@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/caves.png-9af8f58ffba78741349f691598502b99.stex"
+path="res://.import/caves.png-cec48bab10b0d4f43889cda5b5c64abf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/caves.png"
-dest_files=[ "res://.import/caves.png-9af8f58ffba78741349f691598502b99.stex" ]
+source_file="res://Assets/Tilesets/caves.png"
+dest_files=[ "res://.import/caves.png-cec48bab10b0d4f43889cda5b5c64abf.stex" ]
 
 [params]
 

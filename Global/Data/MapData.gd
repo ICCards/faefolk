@@ -175,33 +175,7 @@ func _ready() -> void:
 	world = JsonData.world_data
 	add_tiles_to_chunks()
 	add_nature_objects_to_chunks()
-#
-#	print("BUILT TERRAIN")
-#	generate_trees(snow,"snow")
-#	yield(get_tree(), "idle_frame")
-#	generate_trees(forest,"forest")
-#	yield(get_tree(), "idle_frame")
-#	generate_trees(desert,"desert")
-#	yield(get_tree(), "idle_frame")
-#	generate_grass_bunches(plains,"plains")
-#	yield(get_tree(), "idle_frame")
-#	generate_grass_bunches(snow,"snow")
-#	yield(get_tree(), "idle_frame")
-#	generate_ores(snow,"snow")
-#	yield(get_tree(), "idle_frame")
-#	generate_ores(desert,"desert")
-#	yield(get_tree(), "idle_frame")
-#	generate_ores(dirt,"dirt")
-#	yield(get_tree(), "idle_frame")
-#	generate_flowers(forest,"forest")
-#	yield(get_tree(), "idle_frame")
-#	generate_flowers(plains,"plains")
-#	print("NUM ORES " + str(num_ore))
-#	print("NUM TREES " + str(num_trees))
-#	world["cave_entrance_location"] = Vector2(rng.randi_range(490, 510), rng.randi_range(490, 510))
-#	save_keys()
-#	is_world_built = true
-#	print("done")
+	
 
 func return_cave_data(cave_name):
 	match cave_name:
@@ -240,25 +214,6 @@ func add_tiles_to_chunks():
 		for id in world[type]:
 			var loc = Util.string_to_vector2(world[type][id])
 			add_to_chunk(type, loc, id)
-
-#	for id in world["plains"]:
-#		var loc = Util.string_to_vector2(world["plains"][id])
-#		add_to_chunk("plains", loc, loc)
-#	for id in world["forest"]:
-#		var loc = Util.string_to_vector2(world["forest"][id])
-#		add_to_chunk("forest", loc, loc)
-#	for id in world["dirt"]:
-#		var loc = Util.string_to_vector2(world["dirt"][id])
-#		add_to_chunk("dirt", loc, loc)
-#	for id in world["desert"]:
-#		var loc = Util.string_to_vector2(world["desert"][id])
-#		add_to_chunk("desert", loc, loc)
-#	for id in world["snow"]:
-#		var loc = Util.string_to_vector2(world["snow"][id])
-#		add_to_chunk("snow", loc, loc)
-#	for id in world["beach"]:
-#		var loc = Util.string_to_vector2(world["beach"][id])
-#		add_to_chunk("beach", loc, loc)
 
 
 func return_chunk(_row, _col):

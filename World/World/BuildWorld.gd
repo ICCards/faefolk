@@ -28,7 +28,8 @@ func _ready():
 func spawn_player():
 	var player = Player.instance()
 	player.is_building_world = true
-	player.name = str(get_tree().get_network_unique_id())
+	#player.name = str(get_tree().get_network_unique_id())
+	player.name = str("PLAYER")
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
 	get_node("../Players").add_child(player)

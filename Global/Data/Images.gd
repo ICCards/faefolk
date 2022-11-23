@@ -41,7 +41,7 @@ var BirdVariations = [
 
 
 
-
+onready var normal_mouse = preload("res://Assets/mouse cursors/Normal Selects.png")
 
 
 # IC GHOSTS #

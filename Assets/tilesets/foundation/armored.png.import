@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armored.png-6234458577b2031b611840b6422cb97f.stex"
+path="res://.import/armored.png-1c7559cc333a4d5f789c13623e445827.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/foundation/armored.png"
-dest_files=[ "res://.import/armored.png-6234458577b2031b611840b6422cb97f.stex" ]
+source_file="res://Assets/Tilesets/foundation/armored.png"
+dest_files=[ "res://.import/armored.png-1c7559cc333a4d5f789c13623e445827.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/11.png-0f89a956d2a221f42221ee255ed4eb28.stex"
+path="res://.import/11.png-0479b1ca762d20b7bea6f6210f5e002f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/walls/hit effects/armored/11.png"
-dest_files=[ "res://.import/11.png-0f89a956d2a221f42221ee255ed4eb28.stex" ]
+source_file="res://Assets/Tilesets/walls/hit effects/armored/11.png"
+dest_files=[ "res://.import/11.png-0479b1ca762d20b7bea6f6210f5e002f.stex" ]
 
 [params]
 

@@ -19,7 +19,7 @@ func _on_Btn_mouse_entered():
 		set_mouse_cursor_type()
 
 func _on_Btn_mouse_exited():
-	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+	Input.set_custom_mouse_cursor(Images.normal_mouse)
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
@@ -28,7 +28,7 @@ func _on_Btn_pressed():
 		$Clam.hide()
 		$Btn.disabled = true
 		$MovementCollision/CollisionShape2D.disabled = true
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+		Input.set_custom_mouse_cursor(Images.normal_mouse)
 		Server.player_node.harvest_forage(str(type)+" clam")
 		yield(get_tree().create_timer(0.6), "timeout")
 		PlayerInventory.add_item_to_hotbar(str(type) + " clam", 1, null)

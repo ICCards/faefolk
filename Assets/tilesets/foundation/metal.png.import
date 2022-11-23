@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/metal.png-cf775126bd0b9b1fe313123043d91437.stex"
+path="res://.import/metal.png-df1340a0b194bb745583109d39680b14.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/foundation/metal.png"
-dest_files=[ "res://.import/metal.png-cf775126bd0b9b1fe313123043d91437.stex" ]
+source_file="res://Assets/Tilesets/foundation/metal.png"
+dest_files=[ "res://.import/metal.png-df1340a0b194bb745583109d39680b14.stex" ]
 
 [params]
 

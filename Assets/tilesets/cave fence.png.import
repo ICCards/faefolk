@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cave fence.png-10c88b1f5c89873fc4b6040f026a056c.stex"
+path="res://.import/cave fence.png-b180b6816650bd7318c4ef39d8479794.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/cave fence.png"
-dest_files=[ "res://.import/cave fence.png-10c88b1f5c89873fc4b6040f026a056c.stex" ]
+source_file="res://Assets/Tilesets/cave fence.png"
+dest_files=[ "res://.import/cave fence.png-b180b6816650bd7318c4ef39d8479794.stex" ]
 
 [params]
 

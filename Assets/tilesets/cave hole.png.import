@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cave hole.png-ff1bff54e9ef354b775b080c1bb37282.stex"
+path="res://.import/cave hole.png-24cdd276d6f5c1b83dd674830a77977c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/cave hole.png"
-dest_files=[ "res://.import/cave hole.png-ff1bff54e9ef354b775b080c1bb37282.stex" ]
+source_file="res://Assets/Tilesets/cave hole.png"
+dest_files=[ "res://.import/cave hole.png-24cdd276d6f5c1b83dd674830a77977c.stex" ]
 
 [params]
 
