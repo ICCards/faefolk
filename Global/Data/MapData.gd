@@ -153,6 +153,10 @@ var cave_10_data = {
 	"mushroom": {}
 }
 
+#func _ready() -> void:
+#	world = JsonData.world_data
+#	add_tiles_to_chunks()
+#	#add_nature_objects_to_chunks()
 
 func add_placable(id, data):
 	var map = return_cave_data(Server.world.name)
@@ -170,12 +174,6 @@ func update_object_health(type, id, new_health):
 	var map = return_cave_data(Server.world.name)
 	if map[type].has(id):
 		map[type][id]["h"] = new_health
-
-func _ready() -> void:
-	world = JsonData.world_data
-	add_tiles_to_chunks()
-	add_nature_objects_to_chunks()
-	
 
 func return_cave_data(cave_name):
 	match cave_name:
@@ -202,7 +200,6 @@ func return_cave_data(cave_name):
 		"Cave 10":
 			return cave_10_data
 
-
 func add_nature_objects_to_chunks():
 	for type in nature_types:
 		for id in world[type]:
@@ -214,7 +211,6 @@ func add_tiles_to_chunks():
 		for id in world[type]:
 			var loc = Util.string_to_vector2(world[type][id])
 			add_to_chunk(type, loc, id)
-
 
 func return_chunk(_row, _col):
 	_col = int(_col)
@@ -531,7 +527,6 @@ func return_chunk(_row, _col):
 					return l11
 				12:
 					return l12
-
 
 var a1 = {
 	"dirt":{},

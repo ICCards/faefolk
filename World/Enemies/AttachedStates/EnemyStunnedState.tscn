@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.gd" type="Script" id=1]
+
+[node name="EnemyStunnedState" type="Node"]
+script = ExtResource( 1 )
+
+[node name="StunnedTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]

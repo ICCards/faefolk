@@ -114,11 +114,9 @@ func swing(item_name, _direction):
 			animation = "swing_" + _direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
 		PlayerStats.decrease_energy()
-		#sendAction(SWING, {"tool": item_name, "direction": direction})
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
-
 
 
 func draw_bow(init_direction):
@@ -197,10 +195,7 @@ func set_hoed_tile(direction):
 	Tiles.hoed_tiles.get_cellv(location) == -1 and \
 	Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles):
 		yield(get_tree().create_timer(0.6), "timeout")
-#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-#		var data = {"id": id, "l": location}
-#		Server.action("HOE", data)
-		Server.world.play_hoed_dirt_effect(location)
+		InstancedScenes.play_hoed_dirt_effect(location)
 		Stats.decrease_tool_health()
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -215,9 +210,6 @@ func remove_hoed_tile(direction):
 	if Tiles.hoed_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
 		Stats.decrease_tool_health()
-#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-#		var data = {"id": id, "l": location}
-#		Server.action("PICKAXE", data)
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
@@ -242,7 +234,7 @@ func set_watered_tile():
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
 		yield(get_tree().create_timer(0.2), "timeout")
-		Server.world.play_watering_can_effect(location)
+		InstancedScenes.play_watering_can_effect(location)
 		if direction != "UP":
 			watering_can_particles1.position = Util.returnAdjustedWateringCanPariclePos(direction)
 			watering_can_particles1.emitting = true
@@ -252,9 +244,6 @@ func set_watered_tile():
 		watering_can_particles1.emitting = false
 		watering_can_particles2.emitting = false
 		if Tiles.hoed_tiles.get_cellv(location) != -1:
-	#		var id = get_node("/root/World").tile_ids["" + str(location.x) + "" + str(location.y)]
-	#		var data = {"id": id, "l": location}
-	#		Server.action("WATER", data)
 			Tiles.watered_tiles.set_cellv(location, 0)
 			Tiles.watered_tiles.update_bitmask_region()
 	else: 

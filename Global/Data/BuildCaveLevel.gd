@@ -35,20 +35,6 @@ var NatureObjects
 var GrassObjects
 var ForageObjects 
 
-
-func draw_mst(path):
-	var current_lines = []
-	if path:
-		for p in path.get_points():
-			for c in path.get_point_connections(p):
-				var pp = path.get_point_position(p)
-				var cp = path.get_point_position(c)
-				if not current_lines.has([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]) and not current_lines.has([Vector2(cp.x, cp.y), Vector2(pp.x, pp.y)]):
-					var lightning_line = LightningLine.instance()
-					current_lines.append([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)])
-					lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
-					Server.world.add_child(lightning_line)
-
 func spawn_player():
 	var spawn_loc
 	if is_player_going_down:
@@ -56,7 +42,6 @@ func spawn_player():
 	else:
 		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
 	var player = Player.instance()
-	player.name = str(get_tree().get_network_unique_id())
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
 	Server.world.get_node("Players").add_child(player)
@@ -75,7 +60,7 @@ func build():
 	set_chest()
 	set_light_nodes()
 	set_cave_ladders()
-	if return_if_cave_built(Server.world.name):
+	if MapData.return_if_cave_built(Server.world.name):
 		load_cave()
 	else:
 		build_cave()
@@ -126,34 +111,12 @@ func load_cave():
 
 
 func build_cave():
-	generate_ore()
-	generate_tall_grass()
-	generate_mushroom_forage()
-	MapData.set_cave_built(Server.world.name)
+	if Server.world.name != "Cave 10-5":
+		generate_ore()
+		generate_tall_grass()
+		generate_mushroom_forage()
+		MapData.set_cave_built(Server.world.name)
 
-
-func return_if_cave_built(cave_name):
-	match cave_name:
-		"Cave 1":
-			return MapData.is_cave_1_built
-		"Cave 2":
-			return MapData.is_cave_2_built
-		"Cave 3":
-			return MapData.is_cave_3_built
-		"Cave 4":
-			return MapData.is_cave_4_built
-		"Cave 5":
-			return MapData.is_cave_5_built
-		"Cave 6":
-			return MapData.is_cave_6_built
-		"Cave 7":
-			return MapData.is_cave_7_built
-		"Cave 8":
-			return MapData.is_cave_8_built
-		"Cave 9":
-			return MapData.is_cave_9_built
-		"Cave 10":
-			return MapData.is_cave_10_built
 
 func set_valid_tiles():
 	for x in range(50):

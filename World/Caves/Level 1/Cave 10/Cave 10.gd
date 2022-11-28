@@ -7,7 +7,7 @@ var is_changing_scene: bool = false
 var nav_node
 var cave_chest_id = "level 1, room 7"
 var count = 0
-var NUM_BATS = 3
+var NUM_BATS = 0
 var NUM_SLIMES = 0
 var NUM_SPIDERS = 0
 var NUM_SKELETONS = 0
@@ -21,7 +21,6 @@ func _ready():
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true
-	yield(get_tree().create_timer(2.0), "timeout")
 	spawn_boss()
 	
 func advance_up_cave_level():
@@ -31,6 +30,16 @@ func advance_up_cave_level():
 		for enemy in $Enemies.get_children():
 			enemy.destroy()
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 9/Cave 9.tscn")
+
+func advance_down_cave_level():
+	if not is_changing_scene:
+		BuildCaveLevel.is_player_going_down = true
+		Server.player_node.destroy()
+		is_changing_scene = true
+		for enemy in $Enemies.get_children():
+			enemy.destroy()
+		SceneChanger.goto_scene("res://World/Caves/Level 2/Cave 10-5/Cave 10-5.tscn")
+
 
 func _on_SpawnBatTimer_timeout():
 	if count < NUM_BATS:
@@ -43,6 +52,6 @@ func _on_SpawnBatTimer_timeout():
 
 func spawn_boss():
 	var boss = WindBoss.instance()
-	boss.position = Vector2(rand_range(20,40), rand_range(20,40))*32
+	boss.position = Vector2(20,20)*32 #Vector2(rand_range(20,40), rand_range(20,40))*32
 	$Enemies.add_child(boss)
 

@@ -406,7 +406,7 @@ position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 41 )
-frame = 10
+frame = 2
 playing = true
 
 [node name="PoisonParticles" type="Node2D" parent="."]

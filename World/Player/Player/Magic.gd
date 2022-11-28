@@ -403,7 +403,7 @@ func play_lingering_tornado():
 
 func play_wind_projectile():
 	var spell = TornadoProjectile.instance()
-	spell.particles_transform = $CastDirection.transform
+	#spell.particles_transform = $CastDirection.transform
 	spell.position = $CastDirection/Position2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
 	get_node("../../../").add_child(spell)

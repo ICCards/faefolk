@@ -211,7 +211,7 @@ disabled = true
 position = Vector2( -14, 14 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 47 )
-frame = 9
+frame = 33
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

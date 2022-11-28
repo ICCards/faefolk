@@ -17,6 +17,7 @@ var poisoned: bool = false
 var stunned: bool = false
 var chasing: bool = false
 var attacking: bool = false
+var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
@@ -24,7 +25,11 @@ var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
 var changed_direction_delay: bool = false
 var health: int = Stats.DEER_HEALTH
-var KNOCKBACK_AMOUNT = 300
+
+const KNOCKBACK_SPEED = 100
+const ACCELERATION = 180
+const KNOCKBACK_AMOUNT = 70
+
 var tornado_node = null
 var d := 0.0
 var orbit_speed := 5.0
@@ -94,6 +99,10 @@ func _physics_process(delta):
 		$PoisonParticles/P1.direction = -_velocity
 		$PoisonParticles/P2.direction = -_velocity
 		$PoisonParticles/P3.direction = -_velocity
+	if knocking_back:
+		_velocity = _velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
+		_velocity = move_and_slide(_velocity)
+		return
 	if stunned or attacking:
 		return
 	if tornado_node:
@@ -102,12 +111,6 @@ func _physics_process(delta):
 			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
 		else: 
 			tornado_node = null
-	if knockback != Vector2.ZERO:
-		_velocity = Vector2.ZERO
-		knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
-		knockback = move_and_slide(knockback)
-		return
-	set_direction()
 	set_sprite_texture()
 	if navigation_agent.is_navigation_finished():
 		state = IDLE
@@ -145,7 +148,7 @@ func attack():
 			attacking = false
 			state = CHASE
 	
-func set_direction():
+func set_direction_idle_state():
 	if not changed_direction_delay:
 		if abs(_velocity.x) >= abs(_velocity.y):
 			if _velocity.x >= 0:
@@ -165,6 +168,27 @@ func set_direction():
 				if direction != "up":
 					direction = "up"
 					set_change_direction_delay()
+
+func set_direction_chase_state():
+	var degrees = int(hit_box.rotation_degrees) % 360
+	if hit_box.rotation_degrees >= 0:
+		if degrees <= 45 or degrees >= 315:
+			direction = "right"
+		elif degrees <= 135:
+			direction = "down"
+		elif degrees <= 225:
+			direction = "left"
+		else:
+			direction = "up"
+	else:
+		if degrees >= -45 or degrees <= -315:
+			direction = "right"
+		elif degrees >= -135:
+			direction = "up"
+		elif degrees >= -225:
+			direction = "left"
+		else:
+			direction = "down"
 
 func set_swing_direction():
 	var degrees = int(hit_box.rotation_degrees) % 360
@@ -223,12 +247,18 @@ func _on_HurtBox_area_entered(area):
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
 	if area.knockback_vector != Vector2.ZERO and not attacking:
+		$KnockbackParticles.emitting = true
 		set_change_direction_delay()
-		knockback = area.knockback_vector * 100
+		knocking_back = true
+		$Timers/KnockbackTimer.start()
+		knockback = area.knockback_vector
+		_velocity = knockback * 200
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
 	if area.tool_name == "lingering tornado":
 		tornado_node = area
+	yield(get_tree().create_timer(0.25), "timeout")
+	$KnockbackParticles.emitting = false
 
 func diminish_HOT(type):
 	start_poison_state()
@@ -332,6 +362,9 @@ func _on_StunnedTimer_timeout():
 		stunned = false
 		animation_player.play()
 
+func _on_KnockbackTimer_timeout():
+	knocking_back = false
+
 func play_groan_sound_effect():
 	rng.randomize()
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3")
@@ -353,12 +386,5 @@ func start_sound_effects():
 func stop_sound_effects():
 	playing_sound_effect = false
 	sound_effects.stop()
-
-
-func _on_VisibilityNotifier2D_screen_entered():
-	show()
-
-func _on_VisibilityNotifier2D_screen_exited():
-	hide()
 
 

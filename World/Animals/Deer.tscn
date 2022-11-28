@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Images/Animals/Deer/attack/right/body.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/Magic/lightning/Shock_Med.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Enemies/knockback dust.png" type="Texture" id=3]
 [ext_resource path="res://World/Animals/Deer.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=14]
 
@@ -314,6 +315,12 @@ animations = [ {
 "speed": 8.0
 } ]
 
+[sub_resource type="CanvasItemMaterial" id=41]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [node name="Deer" type="KinematicBody2D"]
 collision_mask = 3
 script = ExtResource( 12 )
@@ -414,11 +421,6 @@ target_desired_distance = 10.0
 avoidance_enabled = true
 max_speed = 100.0
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( 1.77636e-15, -32 )
-scale = Vector2( 9.65, 8.2 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 22 )
 anims/attack = SubResource( 21 )
@@ -432,7 +434,6 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 6
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
@@ -464,11 +465,26 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="KnockbackTimer" type="Timer" parent="Timers"]
+wait_time = 0.25
+one_shot = true
+
+[node name="KnockbackParticles" type="CPUParticles2D" parent="."]
+material = SubResource( 41 )
+emitting = false
+amount = 3
+lifetime = 0.5
+explosiveness = 0.5
+local_coords = false
+texture = ExtResource( 3 )
+gravity = Vector2( 0, 0 )
+scale_amount = 2.0
+anim_speed = 2.0
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
 [connection signal="timeout" from="Timers/FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
 [connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]
 [connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
+[connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]

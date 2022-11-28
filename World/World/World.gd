@@ -25,12 +25,6 @@ onready var Deer = preload("res://World/Animals/Deer.tscn")
 onready var Wolf = preload("res://World/Animals/Wolf.tscn")
 onready var Clam = preload("res://World/Objects/Nature/Forage/Clam.tscn")
 onready var Starfish = preload("res://World/Objects/Nature/Forage/Starfish.tscn")
-onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
-onready var HoedDirtEffect = preload("res://World/Objects/Nature/Effects/HoedDirt.tscn") 
-onready var DirtTrailEffect = preload("res://World/Objects/Nature/Effects/DustTrailEffect.tscn")
-onready var UpgradeBuildingEffect = preload("res://World/Objects/Nature/Effects/UpgradeBuilding.tscn")
-onready var RemoveBuildingEffect = preload("res://World/Objects/Nature/Effects/RemoveBuilding.tscn")
-onready var LightningLine = preload("res://World/Objects/Misc/LightningLine.tscn")
 onready var CaveLadder = preload("res://World/Caves/Objects/CaveLadder.tscn")
 
 var rng = RandomNumberGenerator.new()
@@ -39,7 +33,7 @@ const NUM_DUCKS = 250
 const NUM_BUNNIES = 250
 const NUM_BEARS = 30
 const NUM_BOARS = 30
-const NUM_DEER = 100
+const NUM_DEER = 500
 const NUM_WOLVES = 30
 
 var is_changing_scene: bool = false
@@ -58,18 +52,6 @@ func advance_down_cave_level():
 			enemy.destroy()
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1/Cave 1.tscn")
 
-func draw_mst(path):
-	var current_lines = []
-	if path:
-		for p in path.get_points():
-			for c in path.get_point_connections(p):
-				var pp = path.get_point_position(p)
-				var cp = path.get_point_position(c)
-				if not current_lines.has([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]) and not current_lines.has([Vector2(cp.x, cp.y), Vector2(pp.x, pp.y)]):
-					var lightning_line = LightningLine.instance()
-					current_lines.append([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)])
-					lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
-					add_child(lightning_line)
 
 func buildMap(map):
 	Tiles.valid_tiles = $ValidTiles
@@ -226,23 +208,4 @@ func spawnRandomDeer():
 		$Enemies.add_child(deer)
 		deer.global_position = loc
 
-func play_watering_can_effect(loc):
-	var wateringCanEffect = WateringCanEffect.instance()
-	wateringCanEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
-	add_child(wateringCanEffect)
-	
-func play_hoed_dirt_effect(loc):
-	var hoedDirtEffect = HoedDirtEffect.instance()
-	hoedDirtEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,20)
-	add_child(hoedDirtEffect)
-
-func play_upgrade_building_effect(loc):
-	var upgradeBuildingEffect = UpgradeBuildingEffect.instance()
-	upgradeBuildingEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
-	add_child(upgradeBuildingEffect)
-	
-func play_remove_building_effect(loc):
-	var removeBuildingEffect = RemoveBuildingEffect.instance()
-	removeBuildingEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
-	add_child(removeBuildingEffect)
 

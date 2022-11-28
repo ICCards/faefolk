@@ -18,6 +18,7 @@ var stunned: bool = false
 var poisoned: bool = false
 var chasing: bool = false
 var attacking: bool = false
+var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var _velocity := Vector2.ZERO
@@ -25,8 +26,12 @@ var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
 var changed_direction_delay: bool = false
 var health: int = Stats.DEER_HEALTH
-var KNOCKBACK_AMOUNT = 300
 var tornado_node = null
+
+const KNOCKBACK_SPEED = 100
+const ACCELERATION = 180
+const KNOCKBACK_AMOUNT = 70
+
 var d := 0.0
 var orbit_speed := 5.0
 var orbit_radius
@@ -108,20 +113,21 @@ func _physics_process(delta):
 		knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_AMOUNT * delta)
 		knockback = move_and_slide(knockback)
 		return
-	set_direction()
-	set_sprite_texture()
 	if navigation_agent.is_navigation_finished():
 		state = IDLE
 		return
 	if player.state == 5 or player.get_node("Magic").invisibility_active:
 		end_chase_state()
 	if chasing:
+		set_direction_chase_state()
 		state = CHASE
 	else:
+		set_direction_idle_state()
 		state = WALK
 	if state == CHASE and (position+Vector2(0,-9)).distance_to(player.position) < 70:
 		state = ATTACK
 		attack()
+	set_sprite_texture()
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
@@ -135,7 +141,6 @@ func attack():
 		attacking = true
 		claw_hit_box.look_at(player.position)
 		bite_hit_box.look_at(player.position)
-		set_swing_direction()
 		if Util.chance(50):
 			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/claw/" +  direction + "/body.png")
 			animation_player.play("claw")
@@ -151,7 +156,7 @@ func attack():
 			attacking = false
 			state = CHASE
 	
-func set_direction():
+func set_direction_idle_state():
 	if not changed_direction_delay:
 		if abs(_velocity.x) >= abs(_velocity.y):
 			if _velocity.x >= 0:
@@ -172,7 +177,7 @@ func set_direction():
 					direction = "up"
 					set_change_direction_delay()
 
-func set_swing_direction():
+func set_direction_chase_state():
 	var degrees = int(claw_hit_box.rotation_degrees) % 360
 	if claw_hit_box.rotation_degrees >= 0:
 		if degrees <= 45 or degrees >= 315:
@@ -286,12 +291,12 @@ func end_chase_state():
 func _on_EndChaseState_timeout():
 	end_chase_state()
 
+
 func set_change_direction_delay():
 	changed_direction_delay = true
-	$Timers/ChangeDirectionDelay.start()
-
-func _on_ChangeDirectionDelay_timeout():
+	yield(get_tree().create_timer(0.25), "timeout")
 	changed_direction_delay = false
+
 
 func start_frozen_state(timer_length):
 	wolf_sprite.modulate = Color("00c9ff")

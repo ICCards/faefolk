@@ -121,10 +121,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.2, 1.6, 2, 2.4, 2.8, 3.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.2, 1.5, 1.6, 1.9, 2, 2.3, 2.4, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, true, false, true, false, true ]
+"values": [ true, false, true, false, true, false, true, false, true ]
 }
 tracks/4/type = "method"
 tracks/4/path = NodePath(".")
@@ -149,9 +149,11 @@ script = ExtResource( 38 )
 position = Vector2( -8, -25 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 73 )
+frame = 44
+playing = true
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 264192
 script = ExtResource( 13 )
 
