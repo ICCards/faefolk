@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Images/Enemies/Bird Boss/idle/down/body.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/Magic/lightning/lightning effect.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Images/Enemies/shadow sprite.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Misc/watering can progress indicator.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=6]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Images/Enemies/Bird Boss/death/body.png" type="Texture" id=8]
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=10]
@@ -140,6 +139,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=190]
 resource_name = "attack"
@@ -159,7 +170,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=186]
 resource_name = "death"
-length = 2.0
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Boss:frame")
 tracks/0/interp = 1
@@ -191,7 +202,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
+"times": PoolRealArray( 0, 3, 4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -220,6 +231,66 @@ tracks/4/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("HealthBar:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Boss:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -90 ), Vector2( 0, -60 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=187]
 resource_name = "loop"
@@ -236,6 +307,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_wing_flap"
+} ]
 }
 
 [sub_resource type="Animation" id=188]
@@ -264,6 +349,20 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -60 ), Vector2( 0, -90 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_wing_flap"
+} ]
 }
 
 [sub_resource type="Animation" id=189]
@@ -301,7 +400,14 @@ script = ExtResource( 3 )
 
 [node name="EnemyPoisonState" parent="." instance=ExtResource( 9 )]
 
-[node name="EnemyStunnedState" parent="." instance=ExtResource( 7 )]
+[node name="P3" parent="EnemyPoisonState/PoisonParticles" index="0"]
+position = Vector2( 0, -58 )
+
+[node name="P2" parent="EnemyPoisonState/PoisonParticles" index="1"]
+position = Vector2( 0, -76 )
+
+[node name="P1" parent="EnemyPoisonState/PoisonParticles" index="2"]
+position = Vector2( 0, -95 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 16 )
@@ -342,6 +448,7 @@ wait_time = 12.0
 position = Vector2( 75, 0 )
 
 [node name="HealthBar" type="Node2D" parent="."]
+visible = false
 position = Vector2( -19, 20 )
 scale = Vector2( 2.5, 3 )
 z_index = 1
@@ -380,7 +487,7 @@ position = Vector2( 0, -76 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 182 )
 animation = "play"
-frame = 5
+frame = 1
 playing = true
 
 [node name="DetectPlayer" type="Area2D" parent="."]
@@ -403,4 +510,5 @@ anims/loop = SubResource( 187 )
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="Timers/ChangePos" to="." method="_on_ChangePos_timeout"]
 [connection signal="timeout" from="Timers/WhirlwindTimer" to="." method="_on_WhirlwindTimer_timeout"]
-[connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
+
+[editable path="EnemyPoisonState"]

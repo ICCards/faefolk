@@ -61,8 +61,7 @@ scale_amount = 4.0
 scale_amount_random = 0.7
 color = Color( 0.14902, 0.937255, 0.14902, 1 )
 
-[node name="DiminishHOT" type="Timer" parent="."]
-wait_time = 2.0
+[node name="PoisonedTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="timeout" from="DiminishHOT" to="." method="_on_DiminishHOT_timeout"]
+[connection signal="timeout" from="PoisonedTimer" to="." method="_on_PoisonedTimer_timeout"]

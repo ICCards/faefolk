@@ -78,6 +78,7 @@ script = ExtResource( 1 )
 position = Vector2( 16, -16 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Position2D"]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/StaticBody2D"]
 shape = SubResource( 16 )
@@ -140,7 +141,7 @@ position = Vector2( 21, -112 )
 scale = Vector2( 0.75, 0.75 )
 z_index = 1
 frames = SubResource( 15 )
-frame = 8
+frame = 1
 playing = true
 
 [node name="Chest" type="AnimatedSprite" parent="."]

@@ -1381,4 +1381,9 @@ environment = SubResource( 609 )
 
 [node name="PlacableObjects" type="YSort" parent="."]
 
+[node name="UpdateNavigation" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [connection signal="timeout" from="SpawnBatTimer" to="." method="_on_SpawnBatTimer_timeout"]
+[connection signal="timeout" from="UpdateNavigation" to="." method="_on_UpdateNavigation_timeout"]

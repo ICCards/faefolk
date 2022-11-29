@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+
 var hookVelocity = 0.0;
 var hookAcceleration = 0.05;
 var hookDeceleration = 0.06;
@@ -20,7 +22,7 @@ func set_active(_fishing_rod_type):
 	spawn_fish()
 	modulate = Color(1,1,1,1)
 	$Progress.value = 250
-	$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
+	#$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
 	set_fishing_rod_level()
 	
 	
@@ -64,17 +66,15 @@ func start_game_timer():
 func _physics_process(delta):
 	if get_parent().mini_game_active:
 		if ($Clicker.pressed == true):
+			play_reel_sound_effects(true)
 			if hookVelocity > -maxVelocity:
 				$AnimatedReel.rotation_degrees += 18
 				hookVelocity -= hookAcceleration
 		else:
+			play_reel_sound_effects(false)
 			if hookVelocity < maxVelocity:
 				$AnimatedReel.rotation_degrees -= 4
 				hookVelocity += hookDeceleration
-
-		if (Input.is_action_just_pressed("ui_accept")):
-			hookVelocity -= .5
-
 		var target = get_node(fishing_rod_level).position.y + hookVelocity
 		if (target >= MIN_Y):
 			hookVelocity *= -bounce
@@ -96,10 +96,23 @@ func _physics_process(delta):
 				$Progress.value -= 195 * delta
 				if ($Progress.value <= 0):
 					lost_fish()
-		var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
-		var g = range_lerp($Progress.value/10, 10, 50, 0, 1)
-		$Progress.modulate = Color(r, g, 0)
+		#var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
+		#var g = range_lerp($Progress.value/10, 10, 50, 0, 0.8)
+		#$Progress.modulate = Color(r, g, 0)
 		get_parent().set_moving_fish_line_position($Progress.value)
+	else:
+		sound_effects.playing = false
+
+
+func play_reel_sound_effects(is_being_pressed):
+	if is_being_pressed:
+		if sound_effects.stream != preload("res://Assets/Sound/Sound effects/Fishing/fastReel.wav"):
+			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/fastReel.wav")
+	else:
+		if sound_effects.stream != preload("res://Assets/Sound/Sound effects/Fishing/slowReel.wav"):
+			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/slowReel.wav")
+	if not sound_effects.playing:
+		sound_effects.playing = true
 
 
 func caught_fish():

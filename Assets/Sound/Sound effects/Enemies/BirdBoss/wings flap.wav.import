@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wings flap.wav-ba35ec155b328930002479a2a189a9ca.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.wav"
+dest_files=[ "res://.import/wings flap.wav-ba35ec155b328930002479a2a189a9ca.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

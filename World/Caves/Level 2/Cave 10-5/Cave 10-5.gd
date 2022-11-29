@@ -3,7 +3,6 @@ extends YSort
 var is_changing_scene: bool = false
 var cave_chest_id = "level 1, room 10-5"
 
-
 var NUM_BATS = 0
 var NUM_SLIMES = 0
 var NUM_SPIDERS = 0
@@ -13,6 +12,7 @@ func _ready():
 	randomize()
 	Tiles.cave_wall_tiles = $Tiles/Walls
 	Tiles.valid_tiles = $Tiles/ValidTiles
+	Tiles.ocean_tiles = $Tiles/Water
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true

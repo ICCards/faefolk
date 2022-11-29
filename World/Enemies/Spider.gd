@@ -99,11 +99,9 @@ func _physics_process(delta):
 		if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
 			if state != CHASE:
 				start_chase_state()
-#		if (Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active) and state == CHASE:
-#			end_chase_state()
-#		elif $DetectPlayer.get_overlapping_areas().size() > 0 and state != CHASE:
-#			start_chase_state()
-		if navigation_agent.is_navigation_finished():
+		elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
+			end_chase_state()
+		if navigation_agent.is_navigation_finished() and state != CHASE:
 			state = IDLE
 			return
 		var target = navigation_agent.get_next_location()
@@ -201,16 +199,14 @@ func _on_HurtBox_area_entered(area):
 	$KnockbackParticles.emitting = false
 
 func start_chase_state():
-	print("START CHASE")
 	state = CHASE
 	navigation_agent.max_speed = 200
 	_idle_timer.stop()
 	_chase_timer.start()
 
 func end_chase_state():
-	print("END CHASE")
 	state = IDLE
-	navigation_agent.max_speed = 100
+	navigation_agent.max_speed = 75
 	_chase_timer.stop()
 	_idle_timer.start()
 

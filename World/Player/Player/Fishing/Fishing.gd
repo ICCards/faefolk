@@ -4,6 +4,7 @@ onready var progress = $CastingProgress
 onready var progress_background = $ProgressBackground
 onready var line = $Line2D
 onready var hook = $CastedFishHook
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 onready var player_animation_player = Server.player_node.animation_player
 onready var composite_sprites = Server.player_node.composite_sprites
@@ -66,9 +67,9 @@ func _physics_process(delta):
 					is_progress_going_upwards = true
 		elif Input.is_action_just_released("mouse_click"):
 			cast()
-		var r = range_lerp(progress.value, 10, 100, 1, 0)
-		var g = range_lerp(progress.value, 10, 50, 0, 1)
-		progress.modulate = Color(r, g, 0)
+#		var r = range_lerp(progress.value, 10, 100, 1, 0)
+#		var g = range_lerp(progress.value, 10, 50, 0, 1)
+#		progress.modulate = Color(r, g, 0)
 	elif waiting_for_fish_bite:
 		setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, hook.position + Vector2(4.5,4.5))
 	elif is_reeling_in_fish:
@@ -76,6 +77,9 @@ func _physics_process(delta):
 		line.points = [start_point, hook.position + Vector2(4.5,4.5)]
 
 func retract_and_stop(fish_name):
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/pullItemFromWater.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	waiting_for_fish_bite = false
 	if fish_name:
 		$CaughtFish.show()
@@ -113,6 +117,9 @@ func start_fishing_mini_game():
 	$Tween.stop_all()
 	$AnimationPlayer.play("hit")
 	$FishingMiniGame.set_active(fishing_rod_type)
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/jingle1.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	yield($AnimationPlayer, "animation_finished")
 	yield(get_tree().create_timer(0.25), "timeout")
 	composite_sprites.set_player_animation(get_parent().character, "struggle_" + direction.to_lower(), "fishing rod struggle")
@@ -172,6 +179,9 @@ func move_bob(start, end):
 
 
 func cast():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/cast.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	in_casting_state = false
 	progress.hide()
 	progress_background.hide()
@@ -209,6 +219,9 @@ func draw_cast_line():
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
 	var location = Tiles.ocean_tiles.world_to_map(hook.position + get_parent().position)
 	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles): # valid cast
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		waiting_for_fish_bite = true
 		if direction == "RIGHT" or direction == "LEFT":
 			player_animation_player.play("waiting for fish side")
@@ -252,6 +265,9 @@ func return_adjusted_end_point(progress_of_game):
 
 func _on_FishBiteTimer_timeout():
 	if waiting_for_fish_bite:
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/bob.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		$AnimationPlayer.play("bite")
 		click_to_start_mini_game = true
 		yield($AnimationPlayer, "animation_finished")

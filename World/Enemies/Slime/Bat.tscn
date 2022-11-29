@@ -236,7 +236,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BatSprite:visible")
@@ -387,7 +387,9 @@ collision_mask = 10
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 42 )
+disabled = true
 
 [node name="BatSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
@@ -397,6 +399,7 @@ scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "fly down"
+frame = 1
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -406,7 +409,7 @@ position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 41 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="PoisonParticles" type="Node2D" parent="."]
@@ -467,6 +470,7 @@ scale_amount_random = 0.7
 color = Color( 0.14902, 0.937255, 0.14902, 1 )
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 262400
 collision_mask = 0
 
@@ -479,6 +483,7 @@ anims/RESET = SubResource( 36 )
 anims/hit = SubResource( 37 )
 
 [node name="BatHit" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -7 )
 collision_layer = 0
 collision_mask = 128

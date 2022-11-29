@@ -48,9 +48,9 @@ var hotbar = {
 	1: ["stone sword", 1, null],
 	7: ["arrow", 100, null],
 #	3: ["wood box", 100, null],
-	6: ["poison potion I", 100, null],
-	5: ["poison potion II", 100, null],
-	3: ["poison potion III", 100, null],
+#	6: ["poison potion I", 100, null],
+#	5: ["poison potion II", 100, null],
+#	3: ["poison potion III", 100, null],
 #	4: ["regeneration potion I", 10, null],
 #	5: ["regeneration potion II", 10, null],
 ##	6: ["regeneration potion III", 10, null],
@@ -98,7 +98,7 @@ var chests = {
 		3: ["poison potion III", 1, null],
 	},   
 	"level 1, room 10-5"  : {
-		5: ["wind staff", 1, null],
+		5: ["wood fishing rod", 1, null],
 	},  
 	
 }

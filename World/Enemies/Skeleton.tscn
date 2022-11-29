@@ -1,13 +1,16 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://Assets/Images/Enemies/Skeleton/Skeleton Mage.png" type="Texture" id=1]
 [ext_resource path="res://World/Enemies/Skeleton.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Magic/lightning/Shock_Med.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=4]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape2D" id=10]
-radius = 4.0
-height = 0.0
+radius = 5.99999
+height = 8.00001
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
@@ -269,195 +272,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=165]
-radius = 24.0
-height = 4.0
-
-[sub_resource type="Animation" id=149]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("../SkeletonSprite:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-
-[sub_resource type="Animation" id=150]
-resource_name = "hit"
-length = 0.25
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("../SkeletonSprite:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.0 ]
-}
-
-[sub_resource type="CircleShape2D" id=164]
-radius = 194.003
-
-[sub_resource type="Animation" id=166]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("HurtBox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SkeletonSprite:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ "death" ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SkeletonSprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=167]
-resource_name = "death"
-tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("PoisonParticles/P1:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("PoisonParticles/P2:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("PoisonParticles/P3:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("SkeletonSprite:animation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death" ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("SkeletonSprite:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("SkeletonSprite:playing")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
 [sub_resource type="AtlasTexture" id=168]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 34, 34 )
@@ -522,69 +336,173 @@ animations = [ {
 "speed": 8.0
 } ]
 
+[sub_resource type="CapsuleShape2D" id=165]
+radius = 24.0
+height = 4.0
+
+[sub_resource type="Animation" id=149]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../SkeletonSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=150]
+resource_name = "hit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../SkeletonSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=164]
+radius = 194.003
+
+[sub_resource type="Animation" id=166]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SkeletonSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "idle" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SkeletonSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=167]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SkeletonSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SkeletonSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SkeletonSprite:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [node name="Skeleton" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 3
 script = ExtResource( 2 )
+
+[node name="EnemyStunnedState" parent="." instance=ExtResource( 6 )]
+
+[node name="EnemyPoisonState" parent="." instance=ExtResource( 5 )]
+
+[node name="EnemyFrozenState" parent="." instance=ExtResource( 7 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource( 10 )
-
-[node name="PoisonParticles" type="Node2D" parent="."]
-position = Vector2( 0, -20 )
-
-[node name="P3" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 12, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0, 0.332031, 0, 1 )
-
-[node name="P2" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.145098, 0.545098, 0.145098, 1 )
-
-[node name="P1" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.14902, 0.937255, 0.14902, 1 )
 
 [node name="SkeletonSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
@@ -592,46 +510,19 @@ material = ExtResource( 4 )
 position = Vector2( 0, -30 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 9 )
-animation = "death"
+animation = "idle"
 playing = true
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 2.0
-target_desired_distance = 10.0
-path_max_distance = 20.0
-avoidance_enabled = true
-max_speed = 100.0
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="IdleTimer" type="Timer" parent="Timers"]
-wait_time = 5.0
-autostart = true
-
-[node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 3.0
-
-[node name="FrozenTimer" type="Timer" parent="Timers"]
-wait_time = 5.0
-one_shot = true
-
-[node name="StunnedTimer" type="Timer" parent="Timers"]
-wait_time = 2.0
-one_shot = true
-
-[node name="ChangeDirectionDelay" type="Timer" parent="Timers"]
-wait_time = 0.5
-one_shot = true
-
-[node name="PoisonTimer" type="Timer" parent="Timers"]
-wait_time = 8.0
-one_shot = true
-
-[node name="KnockbackTimer" type="Timer" parent="Timers"]
-wait_time = 0.25
-one_shot = true
+[node name="Electricity" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -17 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 182 )
+frame = 5
+playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 262400
 collision_mask = 0
 
@@ -651,29 +542,37 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
 shape = SubResource( 164 )
 
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-
 [node name="ShootDirection" type="Node2D" parent="."]
 position = Vector2( 0, -33 )
 
 [node name="Position2D" type="Position2D" parent="ShootDirection"]
 position = Vector2( 45, 0 )
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="IdleTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+autostart = true
+
+[node name="ChaseTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+
+[node name="KnockbackTimer" type="Timer" parent="Timers"]
+wait_time = 0.25
+one_shot = true
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 2.0
+target_desired_distance = 10.0
+path_max_distance = 20.0
+avoidance_enabled = true
+max_speed = 100.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 166 )
 anims/death = SubResource( 167 )
 
-[node name="Electricity" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( 0, -17 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 182 )
-playing = true
-
-[connection signal="timeout" from="Timers/FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
-[connection signal="timeout" from="Timers/StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
-[connection signal="timeout" from="Timers/ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]
-[connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
-[connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
+[connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]

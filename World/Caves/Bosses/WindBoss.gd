@@ -11,9 +11,8 @@ onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var direction: String = "down"
 var destroyed: bool = false
-var frozen: bool = false
-var stunned: bool = false
 var poisoned: bool = false
+var frozen: bool = false
 var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 100.0
@@ -26,8 +25,8 @@ var rng = RandomNumberGenerator.new()
 
 var phase = 1
 
-export var MAX_SPEED = 100
-export var ACCELERATION = 200
+var MAX_SPEED = 100
+var ACCELERATION = 200
 
 enum {
 	IDLE,
@@ -50,7 +49,12 @@ func _on_AttackTimer_timeout():
 	attack()
 
 func attack():
-	if state != IDLE:
+	if state != IDLE and state != TRANSITION_TO_IDLE and not destroyed:
+		if state == TRANSITION_TO_FLY:
+			return
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack2.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+		sound_effects.play()
 		$ShootDirection.look_at(Server.player_node.position)
 		var amt
 		if phase == 1:
@@ -62,6 +66,8 @@ func attack():
 		state = ATTACK
 		animation_player.play("attack")
 		yield(animation_player, "animation_finished")
+		if destroyed:
+			return
 		animation_player.play("loop")
 		state = FLY
 		if phase == 1 or phase == 2:
@@ -101,29 +107,33 @@ func set_texture():
 
 
 func move(_velocity: Vector2) -> void:
-	if stunned or destroyed:
+	if destroyed:
 		return
-	if frozen:
+	elif frozen:
+		boss_sprite.modulate = Color("00c9ff")
 		velocity = move_and_slide(_velocity*0.75)
 	elif poisoned:
+		boss_sprite.modulate = Color("009000")
 		velocity = move_and_slide(_velocity*0.9)
 	else:
+		boss_sprite.modulate = Color("ffffff")
 		velocity = move_and_slide(_velocity)
 
 func _physics_process(delta):
 	if destroyed:
-		$HealthBar/Progress.hide()
 		return
 	$HealthBar/Progress.value = health
 	set_texture()
-	if state == IDLE:
+	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
+		if state == IDLE:
+			start_attack_state()
+	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
+		if state != IDLE and state != TRANSITION_TO_IDLE:
+			end_attack_state()
+	if state == IDLE or state == TRANSITION_TO_IDLE:
 		return
 	set_direction_chase_state()
 	$ShootDirection.look_at(Server.player_node.position)
-	if destroyed:
-		return
-#	if phase == 3 and not has_node("Whirlwind"):
-#		play_whirlwind()
 	var direction = (random_pos - global_position).normalized()
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 	move(velocity)
@@ -155,8 +165,10 @@ func hit(tool_name):
 		return
 	elif tool_name == "ice projectile":
 		$EnemyFrozenState.start(3)
+		pass
 	elif tool_name == "lightning spell debuff":
-		$EnemyStunnedState.start()
+		#$EnemyStunnedState.start()
+		pass
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
@@ -165,15 +177,24 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/killAnimal.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.play()
 	destroyed = true
 	animation_player.play("death")
+	$Timers/AttackTimer.stop()
+	$Timers/WhirlwindTimer.stop()
+	yield(get_tree().create_timer(0.4), "timeout")
+	InstancedScenes.intitiateItemDrop("wind staff", position, 1)
 	yield(animation_player, "animation_finished")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/killAnimal.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
+	if state == IDLE:
+		start_attack_state()
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 		$HurtBox/AnimationPlayer.play("hit")
 		$EnemyPoisonState.start(area.tool_name)
@@ -193,10 +214,11 @@ func set_phase():
 		return
 	elif health > 350 and phase != 2:
 		phase = 2
+		MAX_SPEED = 125
 		$Timers/WhirlwindTimer.start()
 		play_whirlwind()
 	elif health < 350 and phase != 3:
-		#play_dash()
+		MAX_SPEED = 150
 		phase = 3
 
 func play_whirlwind():
@@ -204,16 +226,18 @@ func play_whirlwind():
 	spell.is_hostile = true
 	call_deferred("add_child", spell)
 
-func _on_DetectPlayer_area_entered(area):
-	if state == IDLE:
-		start_attack_state()
-	
 func start_attack_state():
-	$Timers/AttackTimer.start()
 	state = TRANSITION_TO_FLY
 	animation_player.play("transition to fly")
 	yield(animation_player, "animation_finished")
 	state = FLY
+	animation_player.play("loop")
+	
+func end_attack_state():
+	state = TRANSITION_TO_IDLE
+	animation_player.play("transition to idle")
+	yield(animation_player, "animation_finished")
+	state = IDLE
 	animation_player.play("loop")
 	
 func _on_ChangePos_timeout():
@@ -221,3 +245,9 @@ func _on_ChangePos_timeout():
 
 func _on_WhirlwindTimer_timeout():
 	play_whirlwind()
+	
+func play_wing_flap():
+	if state != IDLE:
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.play()

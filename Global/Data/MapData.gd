@@ -16,6 +16,16 @@ var is_cave_7_built: bool = false
 var is_cave_8_built: bool = false
 var is_cave_9_built: bool = false
 var is_cave_10_built: bool = false
+var is_cave_11_built: bool = false
+var is_cave_12_built: bool = false
+var is_cave_13_built: bool = false
+var is_cave_14_built: bool = false
+var is_cave_15_built: bool = false
+var is_cave_16_built: bool = false
+var is_cave_17_built: bool = false
+var is_cave_18_built: bool = false
+var is_cave_19_built: bool = false
+var is_cave_20_built: bool = false
 
 func return_if_cave_built(cave_name):
 	match cave_name:
@@ -39,6 +49,26 @@ func return_if_cave_built(cave_name):
 			return is_cave_9_built
 		"Cave 10":
 			return is_cave_10_built
+		"Cave 11":
+			return is_cave_11_built
+		"Cave 12":
+			return is_cave_12_built
+		"Cave 13":
+			return is_cave_13_built
+		"Cave 14":
+			return is_cave_14_built
+		"Cave 15":
+			return is_cave_15_built
+		"Cave 16":
+			return is_cave_16_built
+		"Cave 17":
+			return is_cave_17_built
+		"Cave 18":
+			return is_cave_18_built
+		"Cave 19":
+			return is_cave_19_built
+		"Cave 20":
+			return is_cave_20_built
 
 func set_cave_built(cave_name):
 	match cave_name:
@@ -62,6 +92,26 @@ func set_cave_built(cave_name):
 			is_cave_9_built = true
 		"Cave 10":
 			is_cave_10_built = true
+		"Cave 11":
+			is_cave_11_built = true
+		"Cave 12":
+			is_cave_12_built = true
+		"Cave 13":
+			is_cave_13_built = true
+		"Cave 14":
+			is_cave_14_built = true
+		"Cave 15":
+			is_cave_15_built = true
+		"Cave 16":
+			is_cave_16_built = true
+		"Cave 17":
+			is_cave_17_built = true
+		"Cave 18":
+			is_cave_18_built = true
+		"Cave 19":
+			is_cave_19_built = true
+		"Cave 20":
+			is_cave_20_built = true
 
 var world = {
 	"placables":{},
@@ -152,6 +202,76 @@ var cave_10_data = {
 	"tall_grass": {},
 	"mushroom": {}
 }
+var cave_11_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_12_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_13_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_14_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_15_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_16_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_17_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_18_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_19_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
+var cave_20_data = {
+	"placables":{},
+	"ore": {},
+	"ore_large": {},
+	"tall_grass": {},
+	"mushroom": {}
+}
 
 #func _ready() -> void:
 #	world = JsonData.world_data
@@ -199,6 +319,26 @@ func return_cave_data(cave_name):
 			return cave_9_data
 		"Cave 10":
 			return cave_10_data
+		"Cave 11":
+			return cave_11_data
+		"Cave 12":
+			return cave_12_data
+		"Cave 13":
+			return cave_13_data
+		"Cave 14":
+			return cave_14_data
+		"Cave 15":
+			return cave_15_data
+		"Cave 16":
+			return cave_16_data
+		"Cave 17":
+			return cave_17_data
+		"Cave 18":
+			return cave_18_data
+		"Cave 19":
+			return cave_19_data
+		"Cave 20":
+			return cave_20_data
 
 func add_nature_objects_to_chunks():
 	for type in nature_types:

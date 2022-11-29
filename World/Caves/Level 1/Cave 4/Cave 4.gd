@@ -10,7 +10,7 @@ var NUM_SLIMES = 3
 var NUM_SPIDERS = 3
 var NUM_SKELETONS = 2
 var cave_chest_id = "level 1, room 4"
-
+var map_size = 50
 
 func _ready():
 	nav_node = $Navigation2D
@@ -46,3 +46,13 @@ func _on_SpawnBatTimer_timeout():
 		$Enemies.add_child(bat)
 		bat.position = locs[0]*32
 		count += 1
+
+func _on_UpdateNavigation_timeout():
+	update_navigation()
+	
+func update_navigation():
+	for x in range(map_size):
+		for y in range(map_size):
+			if Tiles.valid_tiles.get_cellv(Vector2(x,y)) != -1:
+				$Navigation2D/NavTiles.set_cellv(Vector2(x,y), 0)
+

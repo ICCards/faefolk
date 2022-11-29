@@ -11,7 +11,7 @@ var NUM_BATS = 0
 var NUM_SLIMES = 0
 var NUM_SPIDERS = 0
 var NUM_SKELETONS = 0
-
+var map_size = 50
 
 func _ready():
 	randomize()
@@ -52,6 +52,16 @@ func _on_SpawnBatTimer_timeout():
 
 func spawn_boss():
 	var boss = WindBoss.instance()
-	boss.position = Vector2(20,20)*32 #Vector2(rand_range(20,40), rand_range(20,40))*32
+	boss.position = Vector2(rand_range(20,40), rand_range(20,40))*32
 	$Enemies.add_child(boss)
+
+
+func _on_UpdateNavigation_timeout():
+	update_navigation()
+	
+func update_navigation():
+	for x in range(50):
+		for y in range(50):
+			if Tiles.valid_tiles.get_cellv(Vector2(x,y)) != -1:
+				$Navigation2D/NavTiles.set_cellv(Vector2(x,y), 0)
 

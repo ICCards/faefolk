@@ -67,9 +67,9 @@ func _physics_process(delta):
 			direction = "LEFT"
 		else:
 			direction = "DOWN"
-	if is_drawing:
+	if is_drawing and get_parent().state != DYING:
 		composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
-	elif is_releasing:
+	elif is_releasing and get_parent().state != DYING:
 		composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
 
 
@@ -120,17 +120,18 @@ func swing(item_name, _direction):
 
 
 func draw_bow(init_direction):
-	get_parent().state = BOW_ARROW_SHOOTING
-	is_drawing = true
-	animation = "draw_" + init_direction.to_lower()
-	player_animation_player.play("bow draw release")
-	PlayerStats.decrease_energy()
-	composite_sprites.set_player_animation(get_parent().character, animation, "bow")
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
-	sound_effects.play()
-	yield(player_animation_player, "animation_finished" )
-	wait_for_release()
+	if get_parent().state != DYING:
+		get_parent().state = BOW_ARROW_SHOOTING
+		is_drawing = true
+		animation = "draw_" + init_direction.to_lower()
+		player_animation_player.play("bow draw release")
+		PlayerStats.decrease_energy()
+		composite_sprites.set_player_animation(get_parent().character, animation, "bow")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+		sound_effects.play()
+		yield(player_animation_player, "animation_finished" )
+		wait_for_release()
 
 func wait_for_release():
 	if not mouse_left_down:

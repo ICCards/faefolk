@@ -65,7 +65,6 @@ func build():
 	else:
 		build_cave()
 	spawn_enemies_randomly()
-	set_nav()
 
 func load_cave():
 	var map = MapData.return_cave_data(Server.world.name)
@@ -119,8 +118,8 @@ func build_cave():
 
 
 func set_valid_tiles():
-	for x in range(50):
-		for y in range(50):
+	for x in range(Server.world.map_size):
+		for y in range(Server.world.map_size):
 			if Tiles.cave_wall_tiles.get_cell(x,y) == -1:
 				valid_tiles.set_cell(x,y,0)
 	for loc in Server.world.get_node("Tiles/Rail").get_used_cells():
@@ -168,7 +167,6 @@ func set_valid_tiles():
 		elif type == 19 or type == 20:
 			valid_tiles.set_cellv(loc, -1)
 			valid_tiles.set_cellv(loc+Vector2(0,-1), -1)
-	
 	# ladders
 	if Server.world.get_node("Tiles/DownLadder").get_used_cells().size() != 0:
 		var ladder_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
@@ -221,11 +219,6 @@ func return_chest_direction(loc):
 	elif type == 1:
 		return "right"
 
-func set_nav():
-	for x in range(80):
-		for y in range(80):
-			if valid_tiles.get_cellv(Vector2(x,y)) != -1:
-				Server.world.get_node("Navigation2D/NavTiles").set_cellv(Vector2(x,y), 0)
 
 func set_cave_ladders():
 	if Server.world.get_node("Tiles/DownLadder").get_used_cells().size() != 0:

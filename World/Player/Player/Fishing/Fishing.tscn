@@ -255,5 +255,7 @@ visible = false
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="timeout" from="MoveBobTimer" to="." method="_on_MoveBobTimer_timeout"]
 [connection signal="timeout" from="FishBiteTimer" to="." method="_on_FishBiteTimer_timeout"]
