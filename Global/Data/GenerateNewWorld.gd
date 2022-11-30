@@ -77,7 +77,7 @@ func build_terrian():
 			#Beach	
 			elif between(alt,0.75,0.8):
 				MapData.world["beach"][id] = Vector2(x,y)
-				#beach.append(Vector2(x,y))
+				beach.append(Vector2(x,y))
 			#Biomes	
 			elif between(alt,-1.4,0.8):
 				#plains
@@ -237,7 +237,7 @@ func create_grass_bunch(loc,biome):
 	for _i in range(randomNum):
 		randomAdjacentTiles.shuffle()
 		loc += randomAdjacentTiles[0]
-		if isValidPosition(loc):
+		if isValidPosition(loc) and not beach.has(loc):
 			var id = uuid.v4()
 			MapData.world["tall_grass"][id] = {"l":loc,"h":5,"b":biome}
 			decoration_locations.append(loc)

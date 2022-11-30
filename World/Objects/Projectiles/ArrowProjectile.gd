@@ -19,7 +19,7 @@ func _ready():
 	$Hitbox.knockback_vector = velocity / 150
 	if is_on_fire:
 		$Hitbox.special_ability = "fire"
-		$Sprite.modulate = Color("ff0000")
+		$ArrowBreak.modulate = Color("ff0000")
 		$TrailParticles/Particles.emitting = true
 		$TrailParticles/Particles2.emitting = true
 		$TrailParticles/Particles3.emitting = true
@@ -46,9 +46,6 @@ func destroy():
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
 	collided = true
-	if is_on_fire:
-		$Sprite.hide()
-		InstancedScenes.initiateExplosionParticles(position+Vector2(12,0))
 	$ArrowBreak.playing = true
 	yield($ArrowBreak, "animation_finished")
 	$ArrowBreak.hide()

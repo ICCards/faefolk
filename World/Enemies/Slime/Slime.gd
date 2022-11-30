@@ -26,11 +26,7 @@ var MAX_MOVE_DISTANCE: float = 100.0
 var changed_direction_delay: bool = false
 var health: int = Stats.SLIME_HEALTH
 var STARTING_HEALTH: int = Stats.SLIME_HEALTH
-
 var tornado_node = null
-var d := 0.0
-var orbit_speed := 5.0
-var orbit_radius = 0
 var state = IDLE
 
 var rng = RandomNumberGenerator.new()
@@ -65,27 +61,17 @@ func move(_velocity: Vector2) -> void:
 		return
 	elif frozen:
 		slime_sprite.modulate = Color("00c9ff")
-		if state != IDLE:
-			velocity = move_and_slide(_velocity*0.75)
+		velocity = move_and_slide(_velocity*0.75)
 	elif poisoned:
 		slime_sprite.modulate = Color("009000")
-		if state != IDLE:
-			velocity = move_and_slide(_velocity*0.9)
+		velocity = move_and_slide(_velocity*0.9)
 	else:
 		slime_sprite.modulate = Color("ffffff")
-		if state != IDLE:
-			velocity = move_and_slide(_velocity)
+		velocity = move_and_slide(_velocity)
 
 func _physics_process(delta):
 	if destroyed or not visible or stunned:
 		return
-	if tornado_node:
-		orbit_radius += 1.0
-		if is_instance_valid(tornado_node):
-			d += delta
-			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
-		else: 
-			tornado_node = null
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
 		if state != CHASE:
 			start_chase_state()
@@ -176,11 +162,12 @@ func _on_HurtBox_area_entered(area):
 				start_jump = false
 				cancel_jump = true
 	if area.tool_name == "lingering tornado":
-		orbit_radius = 0
+		$EnemyTornadoState.orbit_radius = rand_range(0,20)
 		tornado_node = area
 	if area.special_ability == "fire":
-		InstancedScenes.initiateExplosionParticles(position)
-		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position)
+		var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+		InstancedScenes.initiateExplosionParticles(position+randomPos)
+		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 	yield(get_tree().create_timer(0.25), "timeout")
 	$KnockbackParticles.emitting = false

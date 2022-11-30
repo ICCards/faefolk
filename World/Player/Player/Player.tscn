@@ -6057,6 +6057,7 @@ scale_amount_random = 1.0
 [node name="Throwing" parent="." instance=ExtResource( 19 )]
 
 [node name="Area2Ds" type="Node2D" parent="."]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -6209,6 +6210,7 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708

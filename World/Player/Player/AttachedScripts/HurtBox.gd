@@ -116,7 +116,6 @@ func diminish_HOT(type):
 			InstancedScenes.player_hit_effect(-poison_increment, get_node("../../").position)
 			amount_to_diminish -= poison_increment
 		$PoisonTimer.start(2)
-		print("POISON INCREMENT " + str(poison_increment))
 	
 
 func start_HOT(type):
@@ -144,9 +143,7 @@ func start_HOT(type):
 
 func _on_PoisonTimer_timeout():
 	if int(amount_to_diminish) > 0 and get_node("../../").state != DYING:
-		print("POISON INCREMENT " + str(poison_increment))
 		if amount_to_diminish < poison_increment:
-			print("STOP POISON")
 			PlayerStats.change_health(-amount_to_diminish)
 			InstancedScenes.player_hit_effect(-amount_to_diminish, get_node("../../").position)
 			amount_to_diminish = 0

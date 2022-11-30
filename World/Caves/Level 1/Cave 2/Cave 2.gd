@@ -48,8 +48,6 @@ func _on_SpawnBatTimer_timeout():
 		$Enemies.add_child(bat)
 		bat.position = locs[0]*32 + Vector2(16,16)
 		count += 1
-	
-
 
 func _on_UpdateNavigation_timeout():
 	update_navigation()

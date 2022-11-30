@@ -49,8 +49,6 @@ func _on_SpawnBatTimer_timeout():
 		bat.position = locs[0]*32
 		count += 1
 
-
-
 func _on_UpdateNavigation_timeout():
 	update_navigation()
 	

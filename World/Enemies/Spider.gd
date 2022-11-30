@@ -13,19 +13,18 @@ var destroyed: bool = false
 var frozen: bool = false
 var stunned: bool = false
 var poisoned: bool = false
+var chasing: bool = false
+var attacking: bool = false
 var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 60.0
-var changed_direction_delay: bool = false
 var STARTING_HEALTH: int = Stats.SPIDER_HEALTH
 var tornado_node = null
-var d := 0.0
-var orbit_speed := 5.0
-var orbit_radius = 0
 var state = IDLE
+
 const KNOCKBACK_SPEED = 100
 const ACCELERATION = 180
 const KNOCKBACK_AMOUNT = 70
@@ -53,17 +52,8 @@ func _update_pathfinding_chase():
 	navigation_agent.set_target_location(Server.player_node.global_position+random_pos)
 	
 func _update_pathfinding_idle():
-	navigation_agent.set_target_location(get_random_pos())
+	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
-func get_random_pos():
-	random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
-	if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(position + random_pos)) == -1:
-		return position + random_pos
-	elif Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(position - random_pos)) == -1:
-		return position - random_pos
-	else:
-		return position
-	
 func move(_velocity: Vector2) -> void:
 	if tornado_node or stunned or destroyed:
 		return
@@ -78,38 +68,29 @@ func move(_velocity: Vector2) -> void:
 		velocity = move_and_slide(_velocity)
 
 func _physics_process(delta):
-	if Server.player_node:
-		if destroyed or stunned:
-			spider_sprite.playing = false
-			return
-		spider_sprite.playing = true
-		if knocking_back:
-			velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
-			velocity = move_and_slide(velocity)
-			return
-		if tornado_node:
-			orbit_radius += 1.0
-			if is_instance_valid(tornado_node):
-				d += delta
-				position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
-			else: 
-				tornado_node = null
-		set_direction()
-		set_sprite_texture()
-		if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
-			if state != CHASE:
-				start_chase_state()
-		elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
-			end_chase_state()
-		if navigation_agent.is_navigation_finished() and state != CHASE:
-			state = IDLE
-			return
-		var target = navigation_agent.get_next_location()
-		var move_direction = position.direction_to(target)
-		var desired_velocity = move_direction * navigation_agent.max_speed
-		var steering = (desired_velocity - velocity) * delta * 4.0
-		velocity += steering
-		navigation_agent.set_velocity(velocity)
+	if destroyed or stunned:
+		spider_sprite.playing = false
+		return
+	spider_sprite.playing = true
+	if knocking_back:
+		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
+		velocity = move_and_slide(velocity)
+		return
+	set_sprite_texture()
+	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
+		if state != CHASE:
+			start_chase_state()
+	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
+		end_chase_state()
+	if navigation_agent.is_navigation_finished() and state != CHASE:
+		state = IDLE
+		return
+	var target = navigation_agent.get_next_location()
+	var move_direction = position.direction_to(target)
+	var desired_velocity = move_direction * navigation_agent.max_speed
+	var steering = (desired_velocity - velocity) * delta * 4.0
+	velocity += steering
+	navigation_agent.set_velocity(velocity)
 	
 	
 func set_sprite_texture():
@@ -127,27 +108,6 @@ func set_sprite_texture():
 		else:
 			$Spider.flip_h = false
 			$Spider.play("walk " + direction)
-	
-func set_direction():
-	if not changed_direction_delay:
-		if abs(velocity.x) >= abs(velocity.y):
-			if velocity.x >= 0:
-				if direction != "right":
-					direction = "right"
-					set_change_direction_delay()
-			else:
-				if direction != "left":
-					direction = "left"
-					set_change_direction_delay()
-		else:
-			if velocity.y >= 0:
-				if direction != "down":
-					direction = "down"
-					set_change_direction_delay()
-			else:
-				if direction != "up":
-					direction = "up"
-					set_change_direction_delay()
 
 
 func hit(tool_name):
@@ -193,28 +153,29 @@ func _on_HurtBox_area_entered(area):
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
 	if area.tool_name == "lingering tornado":
-		orbit_radius = 0
+		$EnemyTornadoState.orbit_radius = rand_range(0,20)
 		tornado_node = area
+	if area.special_ability == "fire":
+		var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+		InstancedScenes.initiateExplosionParticles(position+randomPos)
+		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 	yield(get_tree().create_timer(0.25), "timeout")
 	$KnockbackParticles.emitting = false
 
 func start_chase_state():
+	chasing = true
 	state = CHASE
 	navigation_agent.max_speed = 200
 	_idle_timer.stop()
 	_chase_timer.start()
 
 func end_chase_state():
+	chasing = false
 	state = IDLE
 	navigation_agent.max_speed = 75
 	_chase_timer.stop()
 	_idle_timer.start()
-
-
-func set_change_direction_delay():
-	changed_direction_delay = true
-	yield(get_tree().create_timer(0.25), "timeout")
-	changed_direction_delay = false
 
 func _on_KnockbackTimer_timeout():
 	knocking_back = false

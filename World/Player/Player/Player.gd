@@ -66,7 +66,7 @@ func _ready():
 	if is_building_world:
 		state = DYING
 		$Camera2D/UserInterface/LoadingScreen.show()
-		yield(get_tree().create_timer(10.0), "timeout")
+		#yield(get_tree().create_timer(10.0), "timeout")
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	yield(get_tree(), "idle_frame")
@@ -204,8 +204,10 @@ func set_held_object():
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
 		if item_category == "Magic":
+			$Magic.is_staff_held = true
 			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
 			return
+	$Magic.is_staff_held = false
 	$Camera2D/UserInterface/MagicStaffUI.hide()
 
 
@@ -302,7 +304,6 @@ func show_placable_object(item_name, item_category):
 			get_node("PlaceObject").initialize()
 
 
-
 func harvest_crop(item_name):
 	state = HARVESTING
 	var anim = "harvest_" + direction.to_lower()
@@ -311,7 +312,6 @@ func harvest_crop(item_name):
 	animation_player.play(anim)
 	yield(animation_player, "animation_finished")
 	state = MOVEMENT
-	
 	
 func harvest_forage(item_name):
 	state = HARVESTING

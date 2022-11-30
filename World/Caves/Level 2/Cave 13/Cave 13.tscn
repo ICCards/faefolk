@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Tilesets/CL_MainLev.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Tilesets/cave hole.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Tilesets/cave fence.png" type="Texture" id=7]
-[ext_resource path="res://World/Caves/Level 2/Cave 11/Cave 11.gd" type="Script" id=8]
+[ext_resource path="res://World/Caves/Level 2/Cave 13/Cave 13.gd" type="Script" id=8]
 
 [sub_resource type="TileSet" id=738]
 0/name = "CL_Buildings.png 0"
@@ -1504,6 +1504,7 @@ z_index = 1
 tile_set = SubResource( 738 )
 cell_size = Vector2( 32, 32 )
 format = 1
+tile_data = PoolIntArray( 655422, 2, 0 )
 
 [node name="Floors" type="TileMap" parent="Tiles"]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
@@ -1651,7 +1652,7 @@ tile_data = PoolIntArray( -589834, 0, 0, -589833, 0, 0, -589832, 0, 0, -589831, 
 [node name="PlacableObjects" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -1667,3 +1668,10 @@ tile_set = SubResource( 753 )
 cell_size = Vector2( 32, 32 )
 bake_navigation = true
 format = 1
+
+[node name="UpdateNavigation" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="SpawnBatTimer" to="." method="_on_SpawnBatTimer_timeout"]
+[connection signal="timeout" from="UpdateNavigation" to="." method="_on_UpdateNavigation_timeout"]

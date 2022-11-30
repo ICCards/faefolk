@@ -12,14 +12,15 @@ position = Vector2( 0, -5.96046e-08 )
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "walk down"
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -0.666667 )
 rotation = 1.5708
 shape = SubResource( 22 )

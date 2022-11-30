@@ -1,5 +1,6 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
+[ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Tilesets/CL_MainLev.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilesets/cave walls.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Tilesets/caves.png" type="Texture" id=4]
@@ -1362,6 +1363,12 @@ cell_tile_origin = 2
 cell_y_sort = true
 format = 1
 
+[node name="Water" type="TileMap" parent="Tiles"]
+z_index = -1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
 [node name="Enemies" type="YSort" parent="."]
 
 [node name="GrassObjects" type="YSort" parent="."]
@@ -1371,7 +1378,7 @@ format = 1
 [node name="NatureObjects" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 25.0
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

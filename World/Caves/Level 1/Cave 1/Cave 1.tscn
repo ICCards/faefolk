@@ -1,6 +1,7 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Assets/Tilesets/cave hole.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=2]
 [ext_resource path="res://Assets/Tilesets/CL_MainLev.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Tilesets/cave walls.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Tilesets/CLM_Mining_Vegetables.png" type="Texture" id=5]
@@ -1358,6 +1359,13 @@ cell_tile_origin = 2
 cell_y_sort = true
 format = 1
 
+[node name="Water" type="TileMap" parent="Tiles"]
+z_index = -1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -589805, 0, 262146, -589804, 0, 262146, -524269, 0, 262146, -458730, 0, 262146, -458729, 0, 262146, -458728, 0, 262146, -458727, 0, 131077, -393199, 0, 262146, -393192, 0, 458752, -393191, 0, 262146, -393190, 0, 262146, -327665, 0, 262146, -327661, 0, 262146, -327660, 0, 262146, -327654, 0, 262146, -262128, 0, 262146, -262124, 0, 262146, -262123, 0, 131074, -262122, 0, 131074, -262121, 0, 3, -262118, 0, 262146, -196593, 0, 262146, -196588, 0, 65538, -196587, 0, 458756, -196586, 0, 458756, -196585, 0, 458757, -196583, 0, 262146 )
+
 [node name="Enemies" type="YSort" parent="."]
 
 [node name="GrassObjects" type="YSort" parent="."]
@@ -1367,7 +1375,7 @@ format = 1
 [node name="NatureObjects" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 30.0
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

@@ -57,6 +57,8 @@ enum {
 
 signal spell_finished
 
+var is_staff_held: bool = false
+
 var animation: String = ""
 var direction: String = "DOWN"
 var is_casting: bool = false
@@ -69,6 +71,15 @@ var ending_mouse_point
 
 
 func _input( event ):
+	if is_staff_held:
+		#$AimDownSightLine.show()
+		$CastDirection.look_at(get_global_mouse_position())
+		var start_pt = $CastDirection.position
+		var end_pt = get_local_mouse_position()
+		$AimDownSightLine.points = [start_pt, end_pt]
+	else:
+		$AimDownSightLine.hide()
+		
 	if event is InputEventMouseButton:
 		if event.button_index == 1 and event.is_pressed():
 			mouse_left_down = true
@@ -89,7 +100,6 @@ func cast_spell(staff_name, init_direction):
 	yield(get_tree(), "idle_frame")
 	if get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown():
 		direction = init_direction
-		PlayerStats.decrease_energy()
 		starting_mouse_point = get_global_mouse_position()
 		if get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell != 2:
 			get_parent().state = MAGIC_CASTING
@@ -132,7 +142,15 @@ func _physics_process(delta):
 
 func cast(staff_name, spell_index):
 	get_node("../Camera2D/UserInterface/MagicStaffUI").start_spell_cooldown()
-	PlayerStats.decrease_mana(2)
+	match spell_index:
+		1:
+			PlayerStats.decrease_mana(1)
+		2:
+			PlayerStats.decrease_mana(2)
+		3:
+			PlayerStats.decrease_mana(5)
+		4:
+			PlayerStats.decrease_mana(10)
 	match staff_name:
 		"lightning staff":
 			match spell_index:

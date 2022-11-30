@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://World/Player/Player/Magic.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Particles/dust.png" type="Texture" id=2]
+[ext_resource path="res://World/Player/Player/AttachedScenes/AimDownSightLine.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 particles_animation = true
@@ -35,6 +36,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AimDownSightLine" parent="." instance=ExtResource( 3 )]
 
 [node name="CastDirection" type="Node2D" parent="."]
 position = Vector2( 0, -32 )
@@ -92,3 +95,5 @@ anim_speed_curve = SubResource( 7 )
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="GhostTimer" to="." method="_on_GhostTimer_timeout"]
+
+[editable path="AimDownSightLine"]

@@ -269,10 +269,6 @@ func set_nav():
 		for x in range(60):
 			var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
 			if Tiles.isValidNavigationTile(loc):
-				#if navTiles.get_cellv(loc) != 0:
 				navTiles.set_cellv(loc,0)
-#			else:
-#				#if navTiles.get_cellv(loc) != -1:
-#				navTiles.set_cellv(loc,-1)
 	yield(get_tree().create_timer(0.25), "timeout")
 	var value = navigation_thread.wait_to_finish()

@@ -31,7 +31,7 @@ func advance_up_cave_level():
 		is_changing_scene = true
 		for enemy in $Enemies.get_children():
 			enemy.destroy()
-		SceneChanger.goto_scene("res://World/World/World.tscn")
+		SceneChanger.goto_scene("res://World/Caves/Level 2/Cave 10-5/Cave 10-5.tscn")
 
 func advance_down_cave_level():
 	if not is_changing_scene:
@@ -40,7 +40,7 @@ func advance_down_cave_level():
 		is_changing_scene = true
 		for enemy in $Enemies.get_children():
 			enemy.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 2/Cave 2.tscn")
+		SceneChanger.goto_scene("res://World/Caves/Level 2/Cave 12/Cave 12.tscn")
 	
 func _on_SpawnBatTimer_timeout():
 	if count < NUM_BATS:

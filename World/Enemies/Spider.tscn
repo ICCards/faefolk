@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://Assets/Images/Enemies/Spider/idle.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/Enemies/Spider/walk.png" type="Texture" id=2]
@@ -7,8 +7,16 @@
 [ext_resource path="res://World/Enemies/Spider.gd" type="Script" id=5]
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=8]
+[ext_resource path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=15]
+
+[sub_resource type="CanvasItemMaterial" id=187]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="AtlasTexture" id=196]
 atlas = ExtResource( 1 )
@@ -247,12 +255,6 @@ radius = 194.003
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="CanvasItemMaterial" id=187]
-particles_animation = true
-particles_anim_h_frames = 9
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
 [sub_resource type="Curve" id=188]
 min_value = -400.0
 max_value = 400.0
@@ -332,6 +334,42 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
 "values": [ false ]
 }
 
@@ -434,11 +472,63 @@ tracks/7/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Spider" type="KinematicBody2D"]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource( 5 )
+
+[node name="KnockbackParticles" type="CPUParticles2D" parent="."]
+material = SubResource( 187 )
+emitting = false
+amount = 3
+lifetime = 0.5
+explosiveness = 0.5
+local_coords = false
+texture = ExtResource( 3 )
+gravity = Vector2( 0, 0 )
+scale_amount = 2.0
+anim_speed = 2.0
+
+[node name="SetEnemyDirection" parent="." instance=ExtResource( 9 )]
+
+[node name="EnemyTornadoState" parent="." instance=ExtResource( 8 )]
 
 [node name="EnemyStunnedState" parent="." instance=ExtResource( 7 )]
 
@@ -451,6 +541,7 @@ material = ExtResource( 15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "walk right"
+frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -458,7 +549,7 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
-frame = 11
+frame = 5
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]
@@ -490,18 +581,6 @@ shape = SubResource( 148 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
 shape = SubResource( 1 )
-
-[node name="KnockbackParticles" type="CPUParticles2D" parent="."]
-material = SubResource( 187 )
-emitting = false
-amount = 3
-lifetime = 0.5
-explosiveness = 0.5
-local_coords = false
-texture = ExtResource( 3 )
-gravity = Vector2( 0, 0 )
-scale_amount = 2.0
-anim_speed = 2.0
 
 [node name="ExplosionParticles" type="Node2D" parent="."]
 modulate = Color( 1.25, 1.25, 1.25, 1 )
@@ -606,3 +685,5 @@ anims/destroy = SubResource( 195 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+
+[editable path="EnemyPoisonState"]

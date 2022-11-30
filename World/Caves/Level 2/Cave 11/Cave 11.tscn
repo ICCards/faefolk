@@ -1636,6 +1636,10 @@ tile_data = PoolIntArray( -589834, 0, 0, -589833, 0, 0, -589832, 0, 0, -589831, 
 wait_time = 10.0
 autostart = true
 
+[node name="UpdateNavigation" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 752 )
 
@@ -1649,9 +1653,5 @@ tile_set = SubResource( 753 )
 cell_size = Vector2( 32, 32 )
 bake_navigation = true
 format = 1
-
-[node name="UpdateNavigation" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
 
 [connection signal="timeout" from="UpdateNavigation" to="." method="_on_UpdateNavigation_timeout"]

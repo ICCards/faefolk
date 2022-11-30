@@ -20,10 +20,11 @@ func _ready():
 func start_mana_timer():
 	yield(get_tree().create_timer(2.0), "timeout")
 	if mana != 100:
-		mana += 4
+		mana += 1
+		if mana > 100:
+			mana = 100
 		emit_signal("mana_changed")
 	start_mana_timer()
-
 
 func eat(food_name):
 	energy += JsonData.item_data[food_name]["EnergyHealth"][0]

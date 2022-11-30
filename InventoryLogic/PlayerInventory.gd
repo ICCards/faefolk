@@ -25,7 +25,6 @@ var inventory = {
 	0: ["lightning staff", 1, null],
 	1: ["dark magic staff", 1, null],
 	2: ["fire staff", 1, null],
-	3: ["wind staff", 1, null],
 	4: ["ice staff", 1, null],
 	5: ["earth staff", 1, null],
 #	0: ["wood", 999, null],
@@ -44,11 +43,12 @@ var inventory = {
 }
 
 var hotbar = {
-	0: ["bow", 1, null],
+	0: ["wind staff", 1, null],
+	2: ["bow", 1, null],
 	1: ["stone sword", 1, null],
 	7: ["arrow", 100, null],
 #	3: ["wood box", 100, null],
-#	6: ["poison potion I", 100, null],
+	6: ["poison potion I", 100, null],
 #	5: ["poison potion II", 100, null],
 #	3: ["poison potion III", 100, null],
 #	4: ["regeneration potion I", 10, null],
@@ -95,11 +95,31 @@ var chests = {
 	"level 1, room 7" : {
 		1: ["cooked wing", 6, null],
 		5: ["destruction potion III",1, null],
-		3: ["poison potion III", 1, null],
-	},   
+		3: ["health potion III", 1, null],
+	}, 
+	"level 1, room 8" : {
+		11: ["asparagus", 9, null],
+		5: ["destruction potion III",1, null],
+		7: ["poison potion III", 2, null],
+	},    
+	"level 1, room 9" : {
+		14: ["carrot", 20, null],
+		5: ["speed potion III",1, null],
+		7: ["regeneration potion III", 2, null],
+	},
+	"level 1, room 10" : {
+		1: ["cooked wing", 6, null],
+		5: ["destruction potion III",1, null],
+		3: ["health potion III", 1, null],
+	}, 
 	"level 1, room 10-5"  : {
 		5: ["wood fishing rod", 1, null],
 	},  
+	"level 2, room 1" : {
+		1: ["bread", 12, null],
+		6: ["health potion II", 4, null],
+		9: ["destruction potion III", 4, null],
+	},
 	
 }
 

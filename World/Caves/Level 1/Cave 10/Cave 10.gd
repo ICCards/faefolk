@@ -5,7 +5,7 @@ onready var Bat = preload("res://World/Enemies/Slime/Bat.tscn")
 
 var is_changing_scene: bool = false
 var nav_node
-var cave_chest_id = "level 1, room 7"
+var cave_chest_id = "level 1, room 10"
 var count = 0
 var NUM_BATS = 0
 var NUM_SLIMES = 0
@@ -15,9 +15,6 @@ var map_size = 50
 
 func _ready():
 	randomize()
-	nav_node = $Navigation2D
-	Tiles.cave_wall_tiles = $Tiles/Walls
-	Tiles.valid_tiles = $Tiles/ValidTiles
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true
@@ -54,7 +51,6 @@ func spawn_boss():
 	var boss = WindBoss.instance()
 	boss.position = Vector2(rand_range(20,40), rand_range(20,40))*32
 	$Enemies.add_child(boss)
-
 
 func _on_UpdateNavigation_timeout():
 	update_navigation()

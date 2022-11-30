@@ -113,3 +113,12 @@ func return_adjusted_item_name(item_name):
 		return "round table"
 	return item_name
 	
+
+func get_random_idle_pos(pos, max_move_dist):
+	var random_pos = Vector2(rand_range(-max_move_dist, max_move_dist), rand_range(-max_move_dist, max_move_dist))
+	if Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos+random_pos)) != -1:
+		return pos+random_pos
+	elif Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos-random_pos)) != -1:
+		return pos-random_pos
+	else:
+		return pos

@@ -1,8 +1,9 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Assets/Tilesets/cave fence.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Tilesets/cave hole.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilesets/cave walls.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=4]
 [ext_resource path="res://Assets/Tilesets/CL_MainLev.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Tilesets/caves.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Tilesets/CL_Buildings.png" type="Texture" id=7]
@@ -1628,6 +1629,12 @@ cell_y_sort = true
 format = 1
 tile_data = PoolIntArray( 393229, 0, 5, 393230, 0, 6, 393231, 0, 1, 393232, 1, 0, 458761, 0, 5, 458762, 0, 6, 458763, 0, 1, 458764, 0, 6, 458765, 0, 4, 524294, 0, 5, 524295, 0, 1, 524296, 0, 8, 524297, 0, 4, 589828, 0, 5, 589829, 0, 3, 589830, 0, 4, 655363, 0, 5, 655364, 0, 4, 720897, 0, 9, 720898, 0, 1, 720899, 0, 4, 1179663, 3, 0, 1310735, 0, 9, 1376271, 0, 0, 1376272, 0, 1, 1376273, 0, 9, 1441809, 0, 0, 1441810, 0, 9, 1507346, 0, 0, 1507347, 0, 3, 1507348, 0, 9, 1572884, 0, 11, 1638420, 0, 0, 1638421, 0, 8, 1638422, 0, 9, 1703958, 0, 0, 1703959, 0, 9, 1769495, 0, 0, 1769496, 0, 8, 1769497, 0, 9, 1835033, 0, 11, 1900569, 0, 11, 1966105, 0, 1 )
 
+[node name="Water" type="TileMap" parent="Tiles"]
+z_index = -1
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
 [node name="LightObjects" type="YSort" parent="."]
 
 [node name="Enemies" type="YSort" parent="."]
@@ -1639,7 +1646,7 @@ tile_data = PoolIntArray( 393229, 0, 5, 393230, 0, 6, 393231, 0, 1, 393232, 1, 0
 [node name="NatureObjects" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 25.0
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

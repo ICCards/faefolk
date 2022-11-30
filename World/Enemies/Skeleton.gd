@@ -216,7 +216,7 @@ func _on_HurtBox_area_entered(area):
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
 	if area.tool_name == "lingering tornado":
-		orbit_radius = 0
+		orbit_radius = rand_range(0,20)
 		tornado_node = area
 
 func start_chase_state():

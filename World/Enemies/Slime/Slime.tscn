@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Assets/Images/Enemies/slime/slime.png" type="Texture" id=1]
 [ext_resource path="res://World/Enemies/Slime/Slime.gd" type="Script" id=2]
@@ -9,6 +9,13 @@
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=7]
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=10]
+
+[sub_resource type="CanvasItemMaterial" id=160]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="AtlasTexture" id=148]
 atlas = ExtResource( 1 )
@@ -208,12 +215,6 @@ radius = 293.0
 [sub_resource type="CircleShape2D" id=14]
 radius = 5.0
 
-[sub_resource type="CanvasItemMaterial" id=160]
-particles_animation = true
-particles_anim_h_frames = 9
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
 [sub_resource type="CanvasItemMaterial" id=161]
 particles_animation = true
 particles_anim_h_frames = 9
@@ -301,6 +302,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=142]
 resource_name = "death"
@@ -360,7 +397,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -372,7 +409,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -384,7 +421,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -396,7 +433,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -408,7 +445,7 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -425,11 +462,62 @@ tracks/9/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Slime" type="KinematicBody2D"]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource( 2 )
+
+[node name="KnockbackParticles" type="CPUParticles2D" parent="."]
+material = SubResource( 160 )
+position = Vector2( 0, -11 )
+emitting = false
+amount = 3
+lifetime = 0.5
+explosiveness = 0.5
+local_coords = false
+texture = ExtResource( 5 )
+gravity = Vector2( 0, 0 )
+scale_amount = 2.0
+anim_speed = 2.0
+
+[node name="EnemyTornadoState" parent="." instance=ExtResource( 10 )]
 
 [node name="EnemyStunnedState" parent="." instance=ExtResource( 8 )]
 
@@ -444,7 +532,6 @@ position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
-frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -453,7 +540,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -6 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 7
+frame = 11
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -490,19 +577,6 @@ shape = SubResource( 169 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -3 )
 shape = SubResource( 14 )
-
-[node name="KnockbackParticles" type="CPUParticles2D" parent="."]
-material = SubResource( 160 )
-position = Vector2( 0, -11 )
-emitting = false
-amount = 3
-lifetime = 0.5
-explosiveness = 0.5
-local_coords = false
-texture = ExtResource( 5 )
-gravity = Vector2( 0, 0 )
-scale_amount = 2.0
-anim_speed = 2.0
 
 [node name="BreakParticles" type="CPUParticles2D" parent="."]
 modulate = Color( 1, 1, 1, 0.627451 )
@@ -616,3 +690,5 @@ anims/death = SubResource( 142 )
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
 [connection signal="timeout" from="Timers/JumpDelay" to="." method="_on_JumpDelay_timeout"]
+
+[editable path="EnemyPoisonState"]

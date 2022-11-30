@@ -20,21 +20,19 @@ var attacking: bool = false
 var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
-var _velocity := Vector2.ZERO
+var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
-var changed_direction_delay: bool = false
+var STARTING_HEALTH: int = Stats.DEER_HEALTH
 var health: int = Stats.DEER_HEALTH
 
-const KNOCKBACK_SPEED = 100
+const KNOCKBACK_SPEED = 50
 const ACCELERATION = 180
 const KNOCKBACK_AMOUNT = 70
 
 var tornado_node = null
-var d := 0.0
-var orbit_speed := 5.0
-var orbit_radius
-var state = IDLE
+
+var state = WALK
 
 enum {
 	IDLE,
@@ -48,9 +46,8 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	randomize()
 	hide()
-	orbit_radius = rand_range(30, 50)
 	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(4.0,6.0)
+	_idle_timer.wait_time = rand_range(5.0,8.0)
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	navigation_agent.connect("velocity_computed", self, "move") 
@@ -60,7 +57,8 @@ func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.global_position)
 	
 func _update_pathfinding_idle():
-	navigation_agent.set_target_location(get_random_pos())
+	state = WALK
+	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 	
 func set_sprite_texture():
 	match state:
@@ -70,158 +68,70 @@ func set_sprite_texture():
 			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png")
 		CHASE:
 			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
-
-func get_random_pos():
-	random_pos = Vector2(rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE), rand_range(-MAX_MOVE_DISTANCE, MAX_MOVE_DISTANCE))
-	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position + random_pos)) == -1:
-		return position + random_pos
-	elif Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position - random_pos)) == -1:
-		return position - random_pos
-	else:
-		return position
 	
-func move(velocity: Vector2) -> void:
+func move(_velocity: Vector2) -> void:
 	if tornado_node or stunned or attacking or destroyed:
 		return
+	if not animation_player.is_playing():
+		animation_player.play()
 	if frozen:
-		_velocity = move_and_slide(velocity*0.75)
+		deer_sprite.modulate = Color("00c9ff")
+		velocity = move_and_slide(_velocity*0.75)
 	elif poisoned:
-		_velocity = move_and_slide(velocity*0.9)
+		deer_sprite.modulate = Color("009000")
+		velocity = move_and_slide(_velocity*0.9)
 	else:
-		_velocity = move_and_slide(velocity)
+		deer_sprite.modulate = Color("ffffff")
+		velocity = move_and_slide(_velocity)
 
 func _physics_process(delta):
-	if not visible or destroyed: 
-		if chasing:
-			end_chase_state()
+	if not visible or destroyed or stunned: 
+		if stunned:
+			animation_player.stop(false)
 		return
-	if poisoned:
-		$PoisonParticles/P1.direction = -_velocity
-		$PoisonParticles/P2.direction = -_velocity
-		$PoisonParticles/P3.direction = -_velocity
 	if knocking_back:
-		_velocity = _velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
-		_velocity = move_and_slide(_velocity)
+		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
+		velocity = move_and_slide(velocity)
 		return
-	if stunned or attacking:
-		return
-	if tornado_node:
-		if is_instance_valid(tornado_node):
-			d += delta
-			position = Vector2(sin(d * orbit_speed) * orbit_radius, cos(d * orbit_speed) * orbit_radius) + tornado_node.global_position
-		else: 
-			tornado_node = null
 	set_sprite_texture()
 	if navigation_agent.is_navigation_finished():
 		state = IDLE
+		velocity = Vector2.ZERO
 		return
 	if player.state == 5 or player.get_node("Magic").invisibility_active:
 		end_chase_state()
-	if chasing:
-		state = CHASE
-	else:
-		state = WALK
 	if state == CHASE and (position+Vector2(0,-14)).distance_to(player.position) < 70:
 		state = ATTACK
 		attack()
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
-	var steering = (desired_velocity - _velocity) * delta * 4.0
-	_velocity += steering
-	navigation_agent.set_velocity(_velocity)
+	var steering = (desired_velocity - velocity) * delta * 4.0
+	velocity += steering
+	navigation_agent.set_velocity(velocity)
 	
 func attack():
 	if not attacking and not destroyed:
 		play_groan_sound_effect()
 		attacking = true
-		hit_box.look_at(player.position)
-		set_swing_direction()
 		deer_sprite.texture = load("res://Assets/Images/Animals/Deer/attack/" +  direction + "/body.png")
 		animation_player.play("attack")
 		yield(animation_player, "animation_finished")
 		if not destroyed:
-			if frozen:
-				animation_player.play("loop frozen")
-			else:
-				animation_player.play("loop")
+			animation_player.play("loop")
 			attacking = false
 			state = CHASE
-	
-func set_direction_idle_state():
-	if not changed_direction_delay:
-		if abs(_velocity.x) >= abs(_velocity.y):
-			if _velocity.x >= 0:
-				if direction != "right":
-					direction = "right"
-					set_change_direction_delay()
-			else:
-				if direction != "left":
-					direction = "left"
-					set_change_direction_delay()
-		else:
-			if _velocity.y >= 0:
-				if direction != "down":
-					direction = "down"
-					set_change_direction_delay()
-			else:
-				if direction != "up":
-					direction = "up"
-					set_change_direction_delay()
-
-func set_direction_chase_state():
-	var degrees = int(hit_box.rotation_degrees) % 360
-	if hit_box.rotation_degrees >= 0:
-		if degrees <= 45 or degrees >= 315:
-			direction = "right"
-		elif degrees <= 135:
-			direction = "down"
-		elif degrees <= 225:
-			direction = "left"
-		else:
-			direction = "up"
-	else:
-		if degrees >= -45 or degrees <= -315:
-			direction = "right"
-		elif degrees >= -135:
-			direction = "up"
-		elif degrees >= -225:
-			direction = "left"
-		else:
-			direction = "down"
-
-func set_swing_direction():
-	var degrees = int(hit_box.rotation_degrees) % 360
-	if hit_box.rotation_degrees >= 0:
-		if degrees <= 45 or degrees >= 315:
-			direction = "right"
-		elif degrees <= 135:
-			direction = "down"
-		elif degrees <= 225:
-			direction = "left"
-		else:
-			direction = "up"
-	else:
-		if degrees >= -45 or degrees <= -315:
-			direction = "right"
-		elif degrees >= -135:
-			direction = "up"
-		elif degrees >= -225:
-			direction = "left"
-		else:
-			direction = "down"
-
 
 func hit(tool_name):
-	if tool_name == "blizzard":
-		start_frozen_state(8)
-		return
-	elif tool_name == "ice projectile":
-		start_frozen_state(3)
-	elif tool_name == "lightning spell debuff":
-		start_stunned_state()
 	if state == IDLE or state == WALK:
 		start_chase_state()
+	if tool_name == "blizzard":
+		$EnemyFrozenState.start(8)
+		return
+	elif tool_name == "ice projectile":
+		$EnemyFrozenState.start(3)
+	elif tool_name == "lightning spell debuff":
+		$EnemyStunnedState.start()
 	_end_chase_state_timer.stop()
 	_end_chase_state_timer.start()
 	$HurtBox/AnimationPlayer.play("hit")
@@ -231,62 +141,46 @@ func hit(tool_name):
 	if health <= 0 and not destroyed:
 		destroy()
 
-
 func destroy():
+	stop_sound_effects()
 	destroyed = true
 	deer_sprite.texture = load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png")
 	animation_player.play("death")
+	yield(get_tree().create_timer(0.5), "timeout")
+	InstancedScenes.intitiateItemDrop("raw filet", position, 2)
 	yield(animation_player, "animation_finished")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 		$HurtBox/AnimationPlayer.play("hit")
-		diminish_HOT(area.tool_name)
+		$EnemyPoisonState.start(area.tool_name)
 		return
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
-	if area.knockback_vector != Vector2.ZERO and not attacking:
+	if area.knockback_vector != Vector2.ZERO:
 		$KnockbackParticles.emitting = true
-		set_change_direction_delay()
 		knocking_back = true
 		$Timers/KnockbackTimer.start()
 		knockback = area.knockback_vector
-		_velocity = knockback * 200
+		velocity = knockback * 200
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
 	if area.tool_name == "lingering tornado":
+		$EnemyTornadoState.orbit_radius = rand_range(0,20)
 		tornado_node = area
+	if area.special_ability == "fire":
+		var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+		InstancedScenes.initiateExplosionParticles(position+randomPos)
+		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 	yield(get_tree().create_timer(0.25), "timeout")
 	$KnockbackParticles.emitting = false
 
-func diminish_HOT(type):
-	start_poison_state()
-	var amount_to_diminish
-	match type:
-		"poison potion I":
-			amount_to_diminish = Stats.DEER_HEALTH * 0.08
-		"poison potion II":
-			amount_to_diminish = Stats.DEER_HEALTH * 0.2
-		"poison potion III":
-			amount_to_diminish = Stats.DEER_HEALTH * 0.32
-	var increment = int(ceil(amount_to_diminish / 4))
-	while int(amount_to_diminish) > 0 and not destroyed:
-		if amount_to_diminish < increment:
-			health -= amount_to_diminish
-			InstancedScenes.player_hit_effect(-amount_to_diminish, position)
-			amount_to_diminish = 0
-		else:
-			health -= increment
-			InstancedScenes.player_hit_effect(-increment, position)
-			amount_to_diminish -= increment
-		if health <= 0 and not destroyed:
-			destroy()
-		yield(get_tree().create_timer(2.0), "timeout")
 
 func start_chase_state():
 	start_sound_effects()
-	navigation_agent.max_speed = 250
+	navigation_agent.max_speed = 220
 	_idle_timer.stop()
 	_chase_timer.start()
 	_end_chase_state_timer.start()
@@ -300,67 +194,10 @@ func end_chase_state():
 	_idle_timer.start()
 	chasing = false
 	state = IDLE
+	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func _on_EndChaseState_timeout():
 	end_chase_state()
-
-func set_change_direction_delay():
-	changed_direction_delay = true
-	$Timers/ChangeDirectionDelay.start()
-
-func _on_ChangeDirectionDelay_timeout():
-	changed_direction_delay = false
-
-func start_frozen_state(timer_length):
-	deer_sprite.modulate = Color("00c9ff")
-	frozen = true
-	$Timers/FrozenTimer.stop()
-	$Timers/FrozenTimer.start(timer_length)
-	if not attacking and not destroyed:
-		animation_player.play("loop frozen")
-
-func _on_FrozenTimer_timeout():
-	frozen = false
-	if not poisoned:
-		deer_sprite.modulate = Color("ffffff")
-		if not destroyed:
-			animation_player.play("loop")
-
-func start_poison_state():
-	$PoisonParticles/P1.emitting = true
-	$PoisonParticles/P2.emitting = true
-	$PoisonParticles/P3.emitting = true
-	deer_sprite.modulate = Color("009000")
-	poisoned = true
-	$Timers/PoisonTimer.start()
-	if not attacking and not destroyed:
-		animation_player.play("loop frozen")
-
-func _on_PoisonTimer_timeout():
-	$PoisonParticles/P1.emitting = false
-	$PoisonParticles/P2.emitting = false
-	$PoisonParticles/P3.emitting = false
-	poisoned = false
-	if not frozen:
-		deer_sprite.modulate = Color("ffffff")
-		if not destroyed:
-			animation_player.play("loop")
-
-func start_stunned_state():
-	if not destroyed:
-		rng.randomize()
-		$Electricity.frame = rng.randi_range(1,13)
-		$Electricity.show()
-		$DeerAttack/CollisionShape2D.set_deferred("disabled", true)
-		animation_player.stop(false)
-		$Timers/StunnedTimer.start()
-		stunned = true
-
-func _on_StunnedTimer_timeout():
-	if not destroyed:
-		$Electricity.hide()
-		stunned = false
-		animation_player.play()
 
 func _on_KnockbackTimer_timeout():
 	knocking_back = false
@@ -374,7 +211,6 @@ func play_groan_sound_effect():
 	playing_sound_effect = false
 	start_sound_effects()
 
-
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
@@ -382,9 +218,11 @@ func start_sound_effects():
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 
-
 func stop_sound_effects():
 	playing_sound_effect = false
 	sound_effects.stop()
 
-
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()

@@ -130,7 +130,6 @@ func shoot_random_projectile():
 		get_node("../").add_child(spell)
 	elif rand < 75:
 		var spell = TornadoProjectile.instance()
-		spell.particles_transform = $ShootDirection.transform
 		spell.position = $ShootDirection/Position2D.global_position
 		spell.velocity = enemy_node.position - spell.position
 		get_node("../").add_child(spell)
