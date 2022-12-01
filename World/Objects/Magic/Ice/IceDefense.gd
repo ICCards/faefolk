@@ -17,3 +17,8 @@ func _ready():
 	yield(self, "animation_finished")
 	get_parent().emit_signal("spell_finished")
 	queue_free()
+
+
+func destroy():
+	stop()
+	queue_free()

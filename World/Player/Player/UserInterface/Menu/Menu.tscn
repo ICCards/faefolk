@@ -719,7 +719,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 13
+frame = 25
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -749,6 +749,12 @@ scale = Vector2( 3.5, 3.5 )
 script = ExtResource( 22 )
 
 [node name="Body" type="Sprite" parent="Inventory/CompositeSprites"]
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 19 )
+hframes = 4
+
+[node name="Legs" type="Sprite" parent="Inventory/CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 19 )

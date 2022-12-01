@@ -1654,4 +1654,6 @@ cell_size = Vector2( 32, 32 )
 bake_navigation = true
 format = 1
 
+[node name="Projectiles" type="YSort" parent="."]
+
 [connection signal="timeout" from="UpdateNavigation" to="." method="_on_UpdateNavigation_timeout"]

@@ -47,7 +47,7 @@ func _ready():
 	randomize()
 	hide()
 	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(4.0,6.0)
+	_idle_timer.wait_time = rand_range(4.0,8.0)
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	navigation_agent.connect("velocity_computed", self, "move") 
@@ -70,7 +70,7 @@ func set_sprite_texture():
 
 	
 func move(_velocity: Vector2) -> void:
-	if tornado_node or stunned or destroyed or attacking:
+	if not visible or tornado_node or stunned or destroyed or attacking:
 		return
 	if frozen:
 		boar_sprite.modulate = Color("00c9ff")

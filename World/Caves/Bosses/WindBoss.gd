@@ -10,6 +10,7 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var direction: String = "down"
+var changing_phase: bool = false
 var destroyed: bool = false
 var poisoned: bool = false
 var frozen: bool = false
@@ -49,7 +50,7 @@ func _on_AttackTimer_timeout():
 	attack()
 
 func attack():
-	if state != IDLE and state != TRANSITION_TO_IDLE and not destroyed:
+	if state != IDLE and state != TRANSITION_TO_IDLE and not destroyed and not changing_phase:
 		if state == TRANSITION_TO_FLY:
 			return
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack2.wav")
@@ -107,7 +108,7 @@ func set_texture():
 
 
 func move(_velocity: Vector2) -> void:
-	if destroyed:
+	if destroyed and not changing_phase:
 		return
 	elif frozen:
 		boss_sprite.modulate = Color("00c9ff")
@@ -213,13 +214,28 @@ func set_phase():
 	if health > 650:
 		return
 	elif health > 350 and phase != 2:
+		play_change_phase()
+		yield(get_tree().create_timer(1.0), "timeout")
 		phase = 2
 		MAX_SPEED = 125
 		$Timers/WhirlwindTimer.start()
 		play_whirlwind()
 	elif health < 350 and phase != 3:
+		play_change_phase()
+		yield(get_tree().create_timer(1.0), "timeout")
 		MAX_SPEED = 150
 		phase = 3
+
+func play_change_phase():
+	animation_player.stop(false)
+	changing_phase = true
+	$UpgradePhase.show()
+	$UpgradePhase.frame = 0
+	$UpgradePhase.playing = true
+	yield($UpgradePhase, "animation_finished")
+	animation_player.play()
+	changing_phase = false
+	$UpgradePhase.hide()
 
 func play_whirlwind():
 	var spell = Whirlwind.instance()
@@ -244,7 +260,8 @@ func _on_ChangePos_timeout():
 	random_pos = Vector2(rand_range(10,40), rand_range(10,40))*32
 
 func _on_WhirlwindTimer_timeout():
-	play_whirlwind()
+	if not changing_phase:
+		play_whirlwind()
 	
 func play_wing_flap():
 	if state != IDLE:

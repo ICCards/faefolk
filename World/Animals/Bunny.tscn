@@ -265,7 +265,6 @@ rotation = 1.5708
 shape = SubResource( 10 )
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -293,7 +292,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -7 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 2
+frame = 7
 playing = true
 
 [node name="Timers" type="Node" parent="."]

@@ -13,7 +13,7 @@ func _physics_process(delta):
 
 func _ready():
 	if is_hostile:
-		$Hitbox.set_collision_mask(128+1)
+		$Hitbox.set_collision_mask(128+2)
 	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.tool_name = "arrow"
 	$Hitbox.knockback_vector = velocity / 150
@@ -23,13 +23,7 @@ func _ready():
 		$TrailParticles/Particles.emitting = true
 		$TrailParticles/Particles2.emitting = true
 		$TrailParticles/Particles3.emitting = true
-	yield(get_tree().create_timer(1.0), "timeout")
-	fade_out()
-	$TrailParticles/Particles.emitting = false
-	$TrailParticles/Particles2.emitting = false
-	$TrailParticles/Particles3.emitting = false
-	yield(get_tree().create_timer(2.0), "timeout")
-	queue_free()
+
 
 func fade_out():
 	$Tween.interpolate_property($Sprite, "modulate:a", 1.0, 0.0, 0.5, 3, 1)
@@ -41,11 +35,18 @@ func _on_Area2D_area_entered(area):
 func _on_Hitbox_body_entered(body):
 	destroy()
 
-
 func destroy():
-	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-	$CollisionShape2D.set_deferred("disabled", true)
-	collided = true
-	$ArrowBreak.playing = true
-	yield($ArrowBreak, "animation_finished")
-	$ArrowBreak.hide()
+	if not collided:
+		$TrailParticles/Particles.emitting = false
+		$TrailParticles/Particles2.emitting = false
+		$TrailParticles/Particles3.emitting = false
+		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+		$CollisionShape2D.set_deferred("disabled", true)
+		collided = true
+		$ArrowBreak.playing = true
+		yield($ArrowBreak, "animation_finished")
+		$ArrowBreak.hide()
+
+func _on_Timer_timeout():
+	hide()
+	destroy()

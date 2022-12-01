@@ -34,7 +34,7 @@ func spawn_player():
 	player.character.LoadPlayerCharacter("human_male")
 	get_node("../Players").add_child(player)
 	player.spawn_position = Vector2(300*32,300*32)
-	if BuildCaveLevel.is_player_exiting_cave:
+	if not BuildCaveLevel.is_player_going_down:
 		player.position = Util.string_to_vector2(MapData.world["cave_entrance_location"])*32 + Vector2(32,0)
 	else:
 		player.position = Vector2(300*32,300*32)

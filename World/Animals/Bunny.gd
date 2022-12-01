@@ -45,6 +45,9 @@ func _physics_process(delta):
 		if stunned:
 			bunny_sprite.playing = false
 		return
+	if $DetectPlayer.get_overlapping_areas().size() >= 1 and is_sleeping:
+		start_run_state()
+		is_sleeping = false
 	if is_sleeping:
 		bunny_sprite.play("sleep")
 		return

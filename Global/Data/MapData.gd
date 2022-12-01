@@ -273,8 +273,8 @@ var cave_20_data = {
 	"mushroom": {}
 }
 
-#func _ready() -> void:
-#	world = JsonData.world_data
+func _ready() -> void:
+	world = JsonData.world_data
 #	add_tiles_to_chunks()
 #	add_nature_objects_to_chunks()
 

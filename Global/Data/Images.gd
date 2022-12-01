@@ -723,14 +723,15 @@ func returnToolSprite(toolName, animation):
 				"release_left":
 					return bow_release.left
 		"magic staff":
+			animation = animation.substr(0,13)
 			match animation:
-				"magic_cast_down":
+				"magic_cast_do":
 					return magic_staff.down
 				"magic_cast_up":
 					return magic_staff.up
-				"magic_cast_right":
+				"magic_cast_ri":
 					return magic_staff.right
-				"magic_cast_left":
+				"magic_cast_le":
 					return magic_staff.left
 
 

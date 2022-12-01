@@ -147,5 +147,10 @@ color = Color( 0.996078, 0.0784314, 0.00784314, 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

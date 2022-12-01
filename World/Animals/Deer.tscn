@@ -437,7 +437,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 2
+frame = 9
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
@@ -459,9 +459,7 @@ wait_time = 0.35
 one_shot = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( -1.52588e-05, -0.218754 )
-scale = Vector2( 24.2, 16.3219 )
+scale = Vector2( 30.15, 25.05 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]

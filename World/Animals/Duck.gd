@@ -106,11 +106,6 @@ func _on_HurtBox_area_entered(area):
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 
 
-func start_frozen_state(timer_length):
-	$Timers/FrozenTimer.start(timer_length)
-	duck_sprite.modulate = Color("00c9ff")
-	frozen = true
-
 func hit(tool_name, var special_ability = ""):
 	if tool_name == "blizzard":
 		$EnemyFrozenState.start(8)

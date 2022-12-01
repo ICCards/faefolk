@@ -66,7 +66,7 @@ script = ExtResource( 3 )
 [node name="Projectile" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 39 )
-frame = 3
+frame = 8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -47,7 +47,7 @@ func _ready():
 	randomize()
 	hide()
 	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(5.0,8.0)
+	_idle_timer.wait_time = rand_range(4.0,8.0)
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	navigation_agent.connect("velocity_computed", self, "move") 
@@ -70,7 +70,7 @@ func set_sprite_texture():
 			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
 	
 func move(_velocity: Vector2) -> void:
-	if tornado_node or stunned or attacking or destroyed:
+	if not visible or tornado_node or stunned or attacking or destroyed:
 		return
 	if not animation_player.is_playing():
 		animation_player.play()
@@ -86,8 +86,6 @@ func move(_velocity: Vector2) -> void:
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
-		if stunned:
-			animation_player.stop(false)
 		return
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)

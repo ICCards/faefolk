@@ -31,10 +31,10 @@ var rng = RandomNumberGenerator.new()
 
 const NUM_DUCKS = 350
 const NUM_BUNNIES = 350
-const NUM_BEARS = 00
-const NUM_BOARS = 00
-const NUM_DEER = 600
-const NUM_WOLVES = 00
+const NUM_BEARS = 80
+const NUM_BOARS = 80
+const NUM_DEER = 200
+const NUM_WOLVES = 80
 
 var is_changing_scene: bool = false
 
@@ -48,8 +48,10 @@ func advance_down_cave_level():
 		yield(get_tree(), "idle_frame")
 		BuildCaveLevel.is_player_going_down = true
 		Server.player_node.destroy()
-		for enemy in $Enemies.get_children():
-			enemy.destroy()
+		for node in $Projectiles.get_children():
+			node.destroy()
+		for node in $Enemies.get_children():
+			node.destroy()
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1/Cave 1.tscn")
 
 

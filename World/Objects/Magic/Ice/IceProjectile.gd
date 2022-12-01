@@ -6,6 +6,7 @@ onready var sound_effects2: AudioStreamPlayer2D = $SoundEffects2
 var velocity = Vector2(0,0)
 var speed = 350
 var collided = false
+var destroyed = false
 var debuff
 var projectile_transform
 
@@ -34,9 +35,9 @@ func _ready():
 
 func _on_Area2D_area_entered(area):
 	if not collided:
-		destroy()
+		projectile_collided()
 
-func destroy():
+func projectile_collided():
 	collided = true
 	$Projectile.hide()
 	$TrailParticles/Particles.emitting = false
@@ -65,11 +66,17 @@ func destroy():
 	yield(get_tree().create_timer(3.0), "timeout")
 	queue_free()
 
+func destroy():
+	$BuffedExplosionSprite.stop()
+	destroyed = true
+	fade_out_sound()
+	yield(get_tree().create_timer(1.0), "timeout")
+	queue_free()
+
 func fade_out_sound():
 	$Tween.interpolate_property(sound_effects2, "volume_db", Sounds.return_adjusted_sound_db("sound", -18), -80, 1.0, 1, Tween.EASE_IN, 0)
 	$Tween.start()
 
 
-
 func _on_Hitbox_body_entered(body):
-	destroy()
+	projectile_collided()

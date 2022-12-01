@@ -9,8 +9,8 @@ var count = 0
 var cave_chest_id = "level 1, room 1"
 
 var NUM_BATS = 3
-var NUM_SLIMES = 4
-var NUM_SPIDERS = 4
+var NUM_SLIMES = 3
+var NUM_SPIDERS = 3
 var NUM_SKELETONS = 0
 var is_changing_scene: bool = false
 var map_size = 50
@@ -22,12 +22,13 @@ func _ready():
 
 func advance_up_cave_level():
 	if not is_changing_scene:
-		BuildCaveLevel.is_player_exiting_cave = true
 		BuildCaveLevel.is_player_going_down = false
 		Server.player_node.destroy()
 		is_changing_scene = true
-		for enemy in $Enemies.get_children():
-			enemy.destroy()
+		for node in $Projectiles.get_children():
+			node.destroy()
+		for node in $Enemies.get_children():
+			node.destroy()
 		SceneChanger.goto_scene("res://World/World/World.tscn")
 
 func advance_down_cave_level():
@@ -35,8 +36,10 @@ func advance_down_cave_level():
 		BuildCaveLevel.is_player_going_down = true
 		Server.player_node.destroy()
 		is_changing_scene = true
-		for enemy in $Enemies.get_children():
-			enemy.destroy()
+		for node in $Projectiles.get_children():
+			node.destroy()
+		for node in $Enemies.get_children():
+			node.destroy()
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 2/Cave 2.tscn")
 	
 func _on_SpawnBatTimer_timeout():
@@ -47,7 +50,6 @@ func _on_SpawnBatTimer_timeout():
 		$Enemies.add_child(bat)
 		bat.position = locs[0]*32
 		count += 1
-
 
 func _on_UpdateNavigation_timeout():
 	update_navigation()

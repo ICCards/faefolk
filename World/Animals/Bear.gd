@@ -47,7 +47,7 @@ func _ready():
 	hide()
 	randomize()
 	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(4.0, 6.0)
+	_idle_timer.wait_time = rand_range(4.0, 9.0)
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_end_chase_state_timer.connect("timeout", self, "end_chase_state")
@@ -92,7 +92,7 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(velocity)
 
 func move(_velocity: Vector2) -> void:
-	if tornado_node or stunned or attacking or destroyed:
+	if not visible or tornado_node or stunned or attacking or destroyed:
 		return
 	if frozen:
 		bear_sprite.modulate = Color("00c9ff")

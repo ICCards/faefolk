@@ -32,6 +32,7 @@ onready var HealthProjectile = preload("res://World/Objects/Magic/Health/HealthP
 onready var HealthBuff = preload("res://World/Objects/Magic/Health/HealthBuff.tscn")
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
+onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
 onready var composite_sprites = get_node("../CompositeSprites")
 
 var dashing = false
@@ -61,6 +62,7 @@ var is_staff_held: bool = false
 
 var animation: String = ""
 var direction: String = "DOWN"
+var movement_direction: String = ""
 var is_casting: bool = false
 var flamethrower_active: bool = false
 var invisibility_active: bool = false
@@ -114,8 +116,8 @@ func cast_spell(staff_name, init_direction):
 
 
 func _physics_process(delta):
-	if not is_casting and not flamethrower_active:
-		return
+#	if not is_casting and not flamethrower_active:
+#		return
 	var degrees = int($CastDirection.rotation_degrees) % 360
 	$CastDirection.look_at(get_global_mouse_position())
 	if $CastDirection.rotation_degrees >= 0:
@@ -137,7 +139,12 @@ func _physics_process(delta):
 		else:
 			direction = "DOWN"
 	if get_parent().state != DYING and is_casting:
-		composite_sprites.set_player_animation(get_parent().character, "magic_cast_" + direction.to_lower(), "magic staff")
+		if get_parent().cast_movement_direction == "":
+			player_animation_player2.stop(false)
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower(), "magic staff")
+		else:
+			player_animation_player2.play("walk legs")
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, "magic staff")
 
 
 func cast(staff_name, spell_index):
@@ -206,16 +213,6 @@ func cast(staff_name, spell_index):
 					play_earth_strike_buff()
 				4:
 					play_earthquake()
-		"health staff":
-			match spell_index:
-				1:
-					play_health_projectile(false)
-				2:
-					play_health_debuff()
-				3:
-					pass
-				4:
-					pass
 		"dark magic staff":
 			match spell_index:
 				1:
@@ -249,44 +246,27 @@ func set_invisibility():
 	$Tween.start()
 
 
-# Health #
-
-func play_health_projectile(debuff):
-	var spell = HealthProjectile.instance()
-	spell.debuff = debuff
-	spell.projectile_transform = $CastDirection.transform
-	spell.position = $CastDirection/Position2D.global_position
-	spell.velocity = get_global_mouse_position() - spell.position
-	get_node("../../../").add_child(spell)
-
-func play_health_debuff():
-	var spell = HealthBuff.instance()
-	add_child(spell)
-	
-
-
-
 # Dark magic #
 func set_portal():
 	if not portal_1_position and not portal_2_position:
 		portal_1_position = get_global_mouse_position()
 		var spell = PortalNode.instance()
-		get_node("../../../").add_child(spell)
+		get_node("../../../Projectiles").add_child(spell)
 		spell.name = "Portal1"
 		spell.position = get_global_mouse_position()
 	elif portal_1_position and not portal_2_position:
 		portal_2_position = get_global_mouse_position()
 		var spell = PortalNode.instance()
-		get_node("../../../").add_child(spell)
+		get_node("../../../Projectiles").add_child(spell)
 		spell.name = "Portal2"
 		spell.position = get_global_mouse_position()
 	elif portal_1_position and portal_2_position:
-		get_node("../../../Portal1").queue_free()
-		get_node("../../../Portal2").queue_free()
+		get_node("../../../Projectiles/Portal1").queue_free()
+		get_node("../../../Projectiles/Portal2").queue_free()
 		portal_2_position = null
 		portal_1_position = get_global_mouse_position()
 		var spell = PortalNode.instance()
-		get_node("../../../").add_child(spell)
+		get_node("../../../Projectiles").add_child(spell)
 		yield(get_tree(), "idle_frame")
 		spell.name = "Portal1"
 		spell.position = get_global_mouse_position()
@@ -393,7 +373,7 @@ func play_ice_projectile(debuff):
 	spell.projectile_transform = $CastDirection.transform
 	spell.position = $CastDirection/Position2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
-	get_node("../../../").add_child(spell)
+	get_node("../../../Projectiles").add_child(spell)
 
 
 func play_ice_shield():

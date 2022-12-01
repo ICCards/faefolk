@@ -32,6 +32,7 @@ enum {
 	BOW_ARROW_SHOOTING
 }
 
+var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
@@ -173,6 +174,7 @@ func respawn():
 	PlayerStats.emit_signal("energy_changed")
 	animation_player.stop()
 	$Camera2D/UserInterface.respawn()
+	yield(get_tree().create_timer(0.5), "timeout")
 	$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", false) 
 	state = MOVEMENT
 
@@ -364,6 +366,12 @@ func eat(item_name):
 		composite_sprites.set_player_animation(character, "eat", null)
 		animation_player.play("eat")
 		yield(animation_player, "animation_finished")
+		$CompositeSprites/Body.hframes = 4
+		$CompositeSprites/Arms.hframes = 4
+		$CompositeSprites/Pants.hframes = 4
+		$CompositeSprites/Shoes.hframes = 4
+		$CompositeSprites/Shirts.hframes = 4
+		$CompositeSprites/HeadAtr.hframes = 4
 		state = MOVEMENT
 
 func fish():
@@ -376,22 +384,26 @@ func fish():
 		add_child(fishing)
 
 
-
 func magic_casting_movement_state(_delta):
 	input_vector = Vector2.ZERO
 	if Input.is_action_pressed("move_up"):
+		cast_movement_direction = "up"
 		input_vector.y -= 1.0
 		direction = "UP"
 	if Input.is_action_pressed("move_down"):
+		cast_movement_direction = "down"
 		input_vector.y += 1.0
 		direction = "DOWN"
 	if Input.is_action_pressed("move_left"):
+		cast_movement_direction = "left"
 		input_vector.x -= 1.0
 		direction = "LEFT"
 	if Input.is_action_pressed("move_right"):
+		cast_movement_direction = "right"
 		input_vector.x += 1.0
 		direction = "RIGHT"
 	if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
+		cast_movement_direction = ""
 		pass
 	input_vector = input_vector.normalized()
 	if input_vector != Vector2.ZERO:

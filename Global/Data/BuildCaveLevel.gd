@@ -27,7 +27,6 @@ const MAX_TALL_GRASS_SIZE = 60
 var count = 0
 var nav_node
 
-var is_player_exiting_cave: bool = false
 var is_player_going_down: bool = true
 
 var valid_tiles

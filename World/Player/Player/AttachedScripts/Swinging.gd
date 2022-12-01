@@ -8,6 +8,7 @@ onready var watering_can_particles1 = $WateringCanParticles1
 onready var watering_can_particles2 = $WateringCanParticles2
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
+onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
 onready var composite_sprites = get_node("../CompositeSprites")
 
 onready var ArrowProjectile = preload("res://World/Objects/Projectiles/ArrowProjectile.tscn")
@@ -68,7 +69,12 @@ func _physics_process(delta):
 		else:
 			direction = "DOWN"
 	if is_drawing and get_parent().state != DYING:
-		composite_sprites.set_player_animation(get_parent().character, "draw_" + direction.to_lower(), "bow")
+		if get_parent().cast_movement_direction == "":
+			player_animation_player2.stop(false)
+			composite_sprites.set_player_animation(get_parent().character, "draw_"+direction.to_lower(), "bow")
+		else:
+			player_animation_player2.play("walk legs")
+			composite_sprites.set_player_animation(get_parent().character, "draw_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, "bow")
 	elif is_releasing and get_parent().state != DYING:
 		composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
 
@@ -126,7 +132,7 @@ func draw_bow(init_direction):
 		animation = "draw_" + init_direction.to_lower()
 		player_animation_player.play("bow draw release")
 		PlayerStats.decrease_energy()
-		composite_sprites.set_player_animation(get_parent().character, animation, "bow")
+		#composite_sprites.set_player_animation(get_parent().character, animation, "bow")
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()

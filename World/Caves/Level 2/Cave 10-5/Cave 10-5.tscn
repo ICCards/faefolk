@@ -1647,3 +1647,5 @@ tile_set = SubResource( 753 )
 cell_size = Vector2( 32, 32 )
 bake_navigation = true
 format = 1
+
+[node name="Projectiles" type="YSort" parent="."]

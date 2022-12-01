@@ -1656,5 +1656,7 @@ format = 1
 wait_time = 3.0
 autostart = true
 
+[node name="Projectiles" type="YSort" parent="."]
+
 [connection signal="timeout" from="SpawnBatTimer" to="." method="_on_SpawnBatTimer_timeout"]
 [connection signal="timeout" from="UpdateNavigation" to="." method="_on_UpdateNavigation_timeout"]

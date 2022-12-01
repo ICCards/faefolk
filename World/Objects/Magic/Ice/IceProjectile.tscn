@@ -374,6 +374,7 @@ modulate = Color( 1.17, 1.17, 1.17, 1 )
 position = Vector2( 10, -9 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
+frame = 11
 playing = true
 
 [node name="TrailParticles" type="Node2D" parent="."]

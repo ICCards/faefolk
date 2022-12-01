@@ -13,9 +13,6 @@ var cave_chest_id = "level 1, room 4"
 var map_size = 50
 
 func _ready():
-	nav_node = $Navigation2D
-	Tiles.cave_wall_tiles = $Tiles/Walls
-	Tiles.valid_tiles = $Tiles/ValidTiles
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true
@@ -25,8 +22,10 @@ func advance_up_cave_level():
 		BuildCaveLevel.is_player_going_down = false
 		Server.player_node.destroy()
 		is_changing_scene = true
-		for enemy in $Enemies.get_children():
-			enemy.destroy()
+		for node in $Projectiles.get_children():
+			node.destroy()
+		for node in $Enemies.get_children():
+			node.destroy()
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 3/Cave 3.tscn")
 
 func advance_down_cave_level():
@@ -34,8 +33,10 @@ func advance_down_cave_level():
 		BuildCaveLevel.is_player_going_down = true
 		Server.player_node.destroy()
 		is_changing_scene = true
-		for enemy in $Enemies.get_children():
-			enemy.destroy()
+		for node in $Projectiles.get_children():
+			node.destroy()
+		for node in $Enemies.get_children():
+			node.destroy()
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 5/Cave 5.tscn")
 	
 func _on_SpawnBatTimer_timeout():
