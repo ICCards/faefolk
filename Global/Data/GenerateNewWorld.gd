@@ -2,12 +2,10 @@ extends Node
 
 var plains = []
 var forest = []
-var desert = []
 var beach = []
 var snow = []
 var dirt = []
-var ocean = []
-var tile_arrays = [plains, forest, snow, dirt]
+var tile_arrays = [plains, forest, snow, dirt, beach]
 
 var decoration_locations = []
 var occupied_terrain_tiles = []
@@ -71,12 +69,10 @@ func build_terrian():
 			var id = uuid.v4()
 			#Ocean
 			if alt > 0.8:
-				pass
 				MapData.world["ocean"][id] = Vector2(x,y)
-				#ocean.append(Vector2(x,y))
 			#Beach	
 			elif between(alt,0.75,0.8):
-				MapData.world["beach"][id] = Vector2(x,y)
+				#MapData.world["beach"][id] = Vector2(x,y)
 				beach.append(Vector2(x,y))
 			#Biomes	
 			elif between(alt,-1.4,0.8):
@@ -144,9 +140,9 @@ func fix_tiles():
 #	for loc in desert: 
 #		var id = uuid.v4()
 #		MapData.world["desert"][id] = loc
-#	for loc in beach: 
-#		var id = uuid.v4()
-#		MapData.world["beach"][id] = loc
+	for loc in beach: 
+		var id = uuid.v4()
+		MapData.world["beach"][id] = loc
 	for loc in dirt: 
 		var id = uuid.v4()
 		MapData.world["dirt"][id] = loc

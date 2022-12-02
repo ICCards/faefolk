@@ -29,16 +29,17 @@ onready var CaveLadder = preload("res://World/Caves/Objects/CaveLadder.tscn")
 
 var rng = RandomNumberGenerator.new()
 
-const NUM_DUCKS = 350
-const NUM_BUNNIES = 350
-const NUM_BEARS = 80
-const NUM_BOARS = 80
-const NUM_DEER = 200
-const NUM_WOLVES = 80
+const NUM_DUCKS = 250
+const NUM_BUNNIES = 250
+const NUM_BEARS = 30
+const NUM_BOARS = 30
+const NUM_DEER = 80
+const NUM_WOLVES = 30
 
 var is_changing_scene: bool = false
 
 func _ready():
+	Server.world = self
 	buildMap(MapData.world)
 	
 func advance_down_cave_level():
@@ -71,7 +72,6 @@ func buildMap(map):
 	Tiles.light_tiles = $PlacableTiles/LightTiles
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	Server.isLoaded = true
-	Server.world = self
 	spawn_animals()
 	create_cave_entrance(map["cave_entrance_location"])
 	set_random_beach_forage()

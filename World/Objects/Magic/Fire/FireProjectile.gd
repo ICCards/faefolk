@@ -27,15 +27,18 @@ func _ready():
 		$TrailParticles/Particles2.emitting = true
 		$TrailParticles/Particles3.emitting = true
 
-
-func _on_Area2D_area_entered(area):
-	destroy()
-
-func _on_Timer_timeout():
-	if not collided:
+func destroy():
+	if is_instance_valid(self):
 		queue_free()
 
-func destroy():
+func _on_Area2D_area_entered(area):
+	projectile_collided()
+
+func _on_Timer_timeout():
+	if not collided and is_instance_valid(self):
+		queue_free()
+
+func projectile_collided():
 	if not collided:
 		collided = true
 		$Projectile.hide()
@@ -56,8 +59,6 @@ func destroy():
 			$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 			yield($Explosion, "animation_finished")
 			$Explosion.hide()
-			yield(get_tree().create_timer(1.0), "timeout")
-			queue_free()
 		else:
 			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/fireball.wav")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
@@ -66,10 +67,6 @@ func destroy():
 			$ExplosionParticles/Explosion/Shards.emitting = true
 			$ExplosionParticles/Explosion/Smoke.emitting = true
 			$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-			yield(get_tree().create_timer(2.0), "timeout")
-			queue_free()
-	
-
 
 func _on_Hitbox_body_entered(body):
-	destroy()
+	projectile_collided()

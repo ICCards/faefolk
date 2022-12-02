@@ -508,6 +508,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("KnockbackParticles:emitting")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Spider" type="KinematicBody2D"]
 collision_layer = 0
@@ -541,7 +553,7 @@ material = ExtResource( 15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "walk right"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -549,7 +561,7 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]

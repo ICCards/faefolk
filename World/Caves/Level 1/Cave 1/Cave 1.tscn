@@ -1374,22 +1374,22 @@ tile_data = PoolIntArray( -589805, 0, 262146, -589804, 0, 262146, -524269, 0, 26
 
 [node name="NatureObjects" type="YSort" parent="."]
 
-[node name="SpawnBatTimer" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 599 )
+[node name="Projectiles" type="YSort" parent="."]
 
 [node name="PlacableObjects" type="YSort" parent="."]
 
 [node name="LightObjects" type="YSort" parent="."]
 
+[node name="SpawnBatTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [node name="UpdateNavigation" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
 
-[node name="Projectiles" type="YSort" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 599 )
 
 [connection signal="timeout" from="SpawnBatTimer" to="." method="_on_SpawnBatTimer_timeout"]
 [connection signal="timeout" from="UpdateNavigation" to="." method="_on_UpdateNavigation_timeout"]

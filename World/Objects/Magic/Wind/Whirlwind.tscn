@@ -149,8 +149,6 @@ script = ExtResource( 38 )
 position = Vector2( -8, -25 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 73 )
-frame = 44
-playing = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 2

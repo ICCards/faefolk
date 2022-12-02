@@ -55,28 +55,31 @@ func projectile_collided():
 		sound_effects2.volume_db = Sounds.return_adjusted_sound_db("sound", -18)
 		sound_effects2.play()
 		yield($BuffedExplosionSprite, "animation_finished")
+		$Timer.start()
 		fade_out_sound()
 		$BuffedExplosionSprite.hide()
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 		$BuffedExplosionParticles.emitting = false
 	else:
+		$Timer.start()
 		$ExplosionParticles/Explosion.emitting = true
 		$ExplosionParticles/Explosion/Shards.emitting = true
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-	yield(get_tree().create_timer(3.0), "timeout")
-	queue_free()
 
 func destroy():
-	$BuffedExplosionSprite.stop()
+	$BuffedExplosionSprite.playing = false
 	destroyed = true
-	fade_out_sound()
 	yield(get_tree().create_timer(1.0), "timeout")
-	queue_free()
+	if is_instance_valid(self):
+		queue_free()
 
 func fade_out_sound():
 	$Tween.interpolate_property(sound_effects2, "volume_db", Sounds.return_adjusted_sound_db("sound", -18), -80, 1.0, 1, Tween.EASE_IN, 0)
 	$Tween.start()
 
-
 func _on_Hitbox_body_entered(body):
 	projectile_collided()
+
+func _on_Timer_timeout():
+	if is_instance_valid(self):
+		queue_free()

@@ -11,7 +11,6 @@ onready var player_animation_player = get_node("../CompositeSprites/AnimationPla
 onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
 onready var composite_sprites = get_node("../CompositeSprites")
 
-onready var ArrowProjectile = preload("res://World/Objects/Projectiles/ArrowProjectile.tscn")
 
 
 var rng = RandomNumberGenerator.new()
@@ -31,52 +30,6 @@ enum {
 	MAGIC_CASTING,
 	BOW_ARROW_SHOOTING
 }
-
-var is_drawing: bool = false
-var is_releasing: bool = false
-
-
-
-var mouse_left_down: bool = false
-func _input( event ):
-	if event is InputEventMouseButton:
-		if event.button_index == 1 and event.is_pressed():
-			mouse_left_down = true
-		elif event.button_index == 1 and not event.is_pressed():
-			mouse_left_down = false
-
-func _physics_process(delta):
-	if not is_drawing and not is_releasing:
-		return
-	var degrees = int($ArrowDirection.rotation_degrees) % 360
-	$ArrowDirection.look_at(get_global_mouse_position())
-	if $ArrowDirection.rotation_degrees >= 0:
-		if degrees <= 45 or degrees >= 315:
-			direction = "RIGHT"
-		elif degrees <= 135:
-			direction = "DOWN"
-		elif degrees <= 225:
-			direction = "LEFT"
-		else:
-			direction = "UP"
-	else:
-		if degrees >= -45 or degrees <= -315:
-			direction = "RIGHT"
-		elif degrees >= -135:
-			direction = "UP"
-		elif degrees >= -225:
-			direction = "LEFT"
-		else:
-			direction = "DOWN"
-	if is_drawing and get_parent().state != DYING:
-		if get_parent().cast_movement_direction == "":
-			player_animation_player2.stop(false)
-			composite_sprites.set_player_animation(get_parent().character, "draw_"+direction.to_lower(), "bow")
-		else:
-			player_animation_player2.play("walk legs")
-			composite_sprites.set_player_animation(get_parent().character, "draw_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, "bow")
-	elif is_releasing and get_parent().state != DYING:
-		composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
 
 
 func swing(item_name, _direction):
@@ -101,13 +54,6 @@ func swing(item_name, _direction):
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
-		elif item_name == "bow":
-			if PlayerInventory.returnSufficentCraftingMaterial("arrow", 1):
-				draw_bow(_direction)
-				return
-			else:
-				get_parent().state = MOVEMENT
-				return
 		elif item_name == "arrow":
 			get_parent().state = MOVEMENT
 			return
@@ -124,53 +70,6 @@ func swing(item_name, _direction):
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
 
-
-func draw_bow(init_direction):
-	if get_parent().state != DYING:
-		get_parent().state = BOW_ARROW_SHOOTING
-		is_drawing = true
-		animation = "draw_" + init_direction.to_lower()
-		player_animation_player.play("bow draw release")
-		PlayerStats.decrease_energy()
-		#composite_sprites.set_player_animation(get_parent().character, animation, "bow")
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
-		sound_effects.play()
-		yield(player_animation_player, "animation_finished" )
-		wait_for_release()
-
-func wait_for_release():
-	if not mouse_left_down:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects.play()
-		PlayerInventory.remove_material("arrow", 1)
-		shoot()
-		is_drawing = false
-		is_releasing = true
-		animation = "release_" + direction.to_lower()
-		composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
-		player_animation_player.play("bow draw release")
-		yield(player_animation_player, "animation_finished" )
-		is_releasing = false
-		get_parent().direction = direction
-		get_parent().state = MOVEMENT
-	elif get_parent().state == DYING:
-		return
-	else:
-		yield(get_tree().create_timer(0.1), "timeout")
-		wait_for_release()
-	
-func shoot():
-	Stats.decrease_tool_health()
-	var arrow = ArrowProjectile.instance()
-	if get_node("../Magic").player_fire_buff:
-		arrow.is_on_fire = true
-	else:
-		arrow.is_on_fire = false
-	arrow.position = $ArrowDirection/Position2D.global_position
-	arrow.velocity = get_global_mouse_position() - arrow.position
-	get_node("../../../").add_child(arrow)
 
 func set_swing_collision_layer_and_position(tool_name, direction):
 	axe_pickaxe_swing.position = Util.set_swing_position(Vector2(0,0), direction)
@@ -224,8 +123,8 @@ func remove_hoed_tile(direction):
 		Tiles.hoed_tiles.set_cellv(location, -1)
 		Tiles.hoed_tiles.update_bitmask_area(location)
 		Tiles.watered_tiles.update_bitmask_area(location)
-		
-		
+
+
 func set_watered_tile():
 	direction = get_parent().direction
 	var pos = Util.set_swing_position(global_position, direction)

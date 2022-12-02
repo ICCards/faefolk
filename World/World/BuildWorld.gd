@@ -135,19 +135,41 @@ func spawn_chunk(chunk_name):
 	yield(get_tree(), "idle_frame")
 	for id in _chunk["ocean"]:
 		var loc = Util.string_to_vector2(_chunk["ocean"][id])
-		wetSand.set_cellv(loc, 0)
-		waves.set_cellv(loc, 5)
-		shallow_ocean.set_cellv(loc,0)
-		top_ocean.set_cellv(loc,0)
-		deep_ocean.set_cellv(loc,0)
-		validTiles.set_cellv(loc,-1)
-#	yield(get_tree(), "idle_frame")
-#	for loc in wetSand.get_used_cells():
-#		if Tiles.return_neighboring_cells(loc,wetSand) != 4:
-#			waves.set_cellv(loc, -1)
-#			shallow_ocean.set_cellv(loc,-1)
-#			top_ocean.set_cellv(loc,-1)
-#			deep_ocean.set_cellv(loc,-1)
+		if sand.get_cellv(loc) == -1:
+			wetSand.set_cellv(loc, 0)
+			waves.set_cellv(loc, 5)
+			shallow_ocean.set_cellv(loc,0)
+			top_ocean.set_cellv(loc,0)
+			deep_ocean.set_cellv(loc,0)
+			validTiles.set_cellv(loc,-1)
+	for id in _chunk["beach"]:
+		var loc = Util.string_to_vector2(_chunk["beach"][id])
+		#Tiles._set_cell(sand, loc.x, loc.y, 0)
+		for i in range(4):
+			if sand.get_cellv(loc+Vector2(i,0)) != -1 or sand.get_cellv(loc+Vector2(-i,0)) != -1 or sand.get_cellv(loc+Vector2(0,i)) != -1 or sand.get_cellv(loc+Vector2(0,-i)) != -1:
+				shallow_ocean.set_cellv(loc+Vector2(i,0),-1)
+				top_ocean.set_cellv(loc+Vector2(i,0),-1)
+				deep_ocean.set_cellv(loc+Vector2(i,0),-1)
+				waves.set_cellv(loc+Vector2(i,0), -1)
+				shallow_ocean.set_cellv(loc+Vector2(-i,0),-1)
+				top_ocean.set_cellv(loc+Vector2(-i,0),-1)
+				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
+				waves.set_cellv(loc+Vector2(-i,0), -1)
+				shallow_ocean.set_cellv(loc+Vector2(0,i),-1)
+				top_ocean.set_cellv(loc+Vector2(0,i),-1)
+				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
+				waves.set_cellv(loc+Vector2(0,i), -1)
+				shallow_ocean.set_cellv(loc+Vector2(0,-i),-1)
+				top_ocean.set_cellv(loc+Vector2(0,-i),-1)
+				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
+				waves.set_cellv(loc+Vector2(0,-i), -1)
+		for i in range(4):
+			i += 4
+			if sand.get_cellv(loc+Vector2(i,0)) != -1 or sand.get_cellv(loc+Vector2(-i,0)) != -1 or sand.get_cellv(loc+Vector2(0,i)) != -1 or sand.get_cellv(loc+Vector2(0,-i)) != -1:
+				deep_ocean.set_cellv(loc+Vector2(i,0),-1)
+				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
+				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
+				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
 	update_bitmasks(chunk_name)
 	yield(get_tree(), "idle_frame")
 

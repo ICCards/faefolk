@@ -419,7 +419,7 @@ shape = SubResource( 23 )
 disabled = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 2.0
+path_desired_distance = 10.0
 target_desired_distance = 10.0
 avoidance_enabled = true
 max_speed = 100.0
@@ -437,7 +437,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 9
+frame = 8
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

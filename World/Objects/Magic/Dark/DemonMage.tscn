@@ -315,7 +315,6 @@ shape = SubResource( 19 )
 disabled = true
 
 [node name="DetectEnemyBox" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, 25 )
 collision_layer = 2
 collision_mask = 0

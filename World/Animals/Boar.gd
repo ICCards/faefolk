@@ -26,6 +26,7 @@ var MAX_MOVE_DISTANCE: float = 500.0
 var health: int = Stats.BOAR_HEALTH
 var STARTING_HEALTH: int = Stats.BOAR_HEALTH
 var tornado_node = null
+var hit_projectiles = []
 
 const KNOCKBACK_SPEED = 40
 const ACCELERATION = 150
@@ -151,30 +152,33 @@ func destroy():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-		$HurtBox/AnimationPlayer.play("hit")
-		$EnemyPoisonState.start(area.tool_name)
-		return
-	if area.name == "SwordSwing":
-		Stats.decrease_tool_health()
-	if area.knockback_vector != Vector2.ZERO:
-		$KnockbackParticles.emitting = true
-		knocking_back = true
-		$Timers/KnockbackTimer.start()
-		knockback = area.knockback_vector
-		velocity = knockback * 200
-	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-		hit(area.tool_name)
-	if area.tool_name == "lingering tornado":
-		$EnemyTornadoState.orbit_radius = rand_range(0,20)
-		tornado_node = area
-	if area.special_ability == "fire":
-		var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
-		InstancedScenes.initiateExplosionParticles(position+randomPos)
-		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
-		health -= Stats.FIRE_DEBUFF_DAMAGE
-	yield(get_tree().create_timer(0.25), "timeout")
-	$KnockbackParticles.emitting = false
+	if not hit_projectiles.has(area.id):
+		if area.id != "":
+			hit_projectiles.append(area.id)
+		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+			$HurtBox/AnimationPlayer.play("hit")
+			$EnemyPoisonState.start(area.tool_name)
+			return
+		if area.name == "SwordSwing":
+			Stats.decrease_tool_health()
+		if area.knockback_vector != Vector2.ZERO:
+			$KnockbackParticles.emitting = true
+			knocking_back = true
+			$Timers/KnockbackTimer.start()
+			knockback = area.knockback_vector
+			velocity = knockback * 200
+		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+			hit(area.tool_name)
+		if area.tool_name == "lingering tornado":
+			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			tornado_node = area
+		if area.special_ability == "fire":
+			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+			InstancedScenes.initiateExplosionParticles(position+randomPos)
+			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
+			health -= Stats.FIRE_DEBUFF_DAMAGE
+		yield(get_tree().create_timer(0.25), "timeout")
+		$KnockbackParticles.emitting = false
 
 
 func start_chase_state():
@@ -224,6 +228,8 @@ func _on_VisibilityNotifier2D_screen_entered():
 	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
+	if playing_sound_effect:
+		stop_sound_effects()
 	hide()
 
 

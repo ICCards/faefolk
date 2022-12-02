@@ -18,6 +18,7 @@ var MAX_MOVE_DISTANCE: float = 100.0
 var changed_direction_delay: bool = false
 
 var tornado_node = null
+var hit_projectiles = []
 
 var health: int = Stats.BAT_HEALTH
 var STARTING_HEALTH: int = Stats.BAT_HEALTH
@@ -62,7 +63,9 @@ func move(_velocity: Vector2) -> void:
 		velocity = move_and_slide(_velocity)
 
 func _on_HurtBox_area_entered(area):
-	if not destroyed:
+	if not hit_projectiles.has(area.id):
+		if area.id != "":
+			hit_projectiles.append(area.id)
 		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 			$HurtBox/AnimationPlayer.play("hit")
 			$EnemyPoisonState.start(area.tool_name)

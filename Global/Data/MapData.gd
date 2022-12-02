@@ -4,7 +4,6 @@ extends Node
 var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
 
-
 var is_world_built: bool = true
 var is_cave_1_built: bool = false
 var is_cave_2_built: bool = false

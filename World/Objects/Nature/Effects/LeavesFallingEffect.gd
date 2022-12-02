@@ -10,7 +10,7 @@ onready var leaf7Sprite = $Leaves/Leaf7
 onready var leaf8Sprite = $Leaves/Leaf8
 onready var leaf9Sprite = $Leaves/Leaf9
 onready var leaf10Sprite = $Leaves/Leaf10
-onready var AnimPlayer = $AnimationPlayer
+onready var animation_player = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
@@ -22,8 +22,8 @@ func initLeavesEffect(_variety):
 func _ready():
 	randomizeDisplayedLeaves()
 	setRandomTexture()
-	AnimPlayer.play("leaves falling effect")
-	yield(AnimPlayer, "animation_finished")
+	animation_player.play("leaves falling effect")
+	yield(animation_player, "animation_finished")
 	queue_free()
 	
 	

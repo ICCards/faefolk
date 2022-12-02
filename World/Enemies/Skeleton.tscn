@@ -162,6 +162,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("KnockbackParticles:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=167]
 resource_name = "death"
@@ -284,6 +296,18 @@ tracks/9/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("KnockbackParticles:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=183]
@@ -410,7 +434,7 @@ visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 182 )
-frame = 12
+frame = 3
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]

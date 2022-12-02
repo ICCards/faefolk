@@ -7,6 +7,9 @@ var collided = false
 var is_on_fire: bool = false
 var is_hostile: bool = false
 
+var _uuid = preload("res://helpers/UUID.gd")
+onready var uuid = _uuid.new()
+
 func _physics_process(delta):
 	if not collided:
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)

@@ -1427,7 +1427,7 @@ tile_data = PoolIntArray( -589805, 0, 262146, -589804, 0, 262146, -524269, 0, 26
 [node name="Projectiles" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 10.0
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

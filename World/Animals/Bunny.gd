@@ -61,10 +61,8 @@ func _physics_process(delta):
 	var steering = (desired_velocity - velocity) * delta * 4.0
 	velocity += steering
 	navigation_agent.set_velocity(velocity)
-	if _get_direction_string() == "Right":
-		bunny_sprite.flip_h = false
-	else:
-		bunny_sprite.flip_h = true
+	bunny_sprite.flip_h = _get_direction_string() != "Right"
+
 
 func move(_velocity: Vector2) -> void:
 	if tornado_node or stunned or destroyed:
@@ -84,14 +82,16 @@ func _get_direction_string() -> String:
 		return "Right"
 	return "Left"
 
-
 func hit(tool_name):
 	if is_sleeping:
+		start_run_state()
 		is_sleeping = false
 	if tool_name == "blizzard":
+		bunny_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(8)
 		return
 	elif tool_name == "ice projectile":
+		bunny_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()
@@ -115,6 +115,7 @@ func destroy():
 
 func _on_HurtBox_area_entered(area):
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+		bunny_sprite.modulate = Color("009000")
 		$AnimationPlayer.play("hit")
 		$EnemyPoisonState.start(area.tool_name)
 		return
@@ -132,12 +133,14 @@ func _on_HurtBox_area_entered(area):
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 
 func start_run_state():
+	navigation_agent.max_speed = 300
 	running_state = true
 	$Timers/RunStateTimer.start()
-	_timer.wait_time = 2.0
+	_timer.wait_time = 0.75
 	_update_pathfinding()
 
 func _on_RunStateTimer_timeout():
+	navigation_agent.max_speed = 200
 	running_state = false
 	_timer.wait_time = rand_range(2.5, 5.0)
 

@@ -5,12 +5,17 @@ onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var velocity = Vector2(1,0)
 var speed = 350
 var collided = false
+var destroyed = false
 var is_hostile_projectile: bool = false
+
+var _uuid = preload("res://helpers/UUID.gd")
+onready var uuid = _uuid.new()
 
 func _physics_process(delta):
 	var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
+	$Hitbox.id = uuid.v4()
 	if is_hostile_projectile:
 		$Hitbox.set_collision_mask(128+2048+8+16)
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
@@ -24,8 +29,13 @@ func _ready():
 	stop_trail_particles()
 	$AnimatedSprite.hide()
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-	yield(get_tree().create_timer(4.0), "timeout")
-	queue_free()
+
+
+func destroy():
+	if not destroyed:
+		destroyed = true
+		$AnimatedSprite.stop()
+		queue_free()
 
 func set_particles():
 	$TornadoParticles/P1.emitting = true
@@ -50,3 +60,7 @@ func stop_trail_particles():
 func fade_out_sound():
 	$Tween.interpolate_property(sound_effects, "volume_db", Sounds.return_adjusted_sound_db("sound", -20), -80, 3.0, 1, Tween.EASE_IN, 0)
 	$Tween.start()
+
+
+func _on_Timer_timeout():
+	destroy()

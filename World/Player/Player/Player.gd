@@ -267,11 +267,13 @@ func _unhandled_input(event):
 					show_placable_object(current_building_item, "BUILDING")
 				if event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
 					fish()
-				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer"):
-					swing(item_name)
-				if item_category == "Potion" and event.is_action_pressed("mouse_click"):
+				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
+					$Swing.swing(item_name, direction)
+				elif item_category == "Potion" and event.is_action_pressed("mouse_click"):
 					$Throwing.throw_potion(item_name, direction)
-				elif item_category == "Magic" and event.is_action_pressed("mouse_click"):
+				elif event.is_action_pressed("mouse_click") and item_name == "bow":
+					$Magic.draw_bow(direction)
+				elif event.is_action_pressed("mouse_click") and item_category == "Magic":
 					$Magic.cast_spell(item_name, direction)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
 					eat(item_name)
@@ -282,7 +284,7 @@ func _unhandled_input(event):
 			else:
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
-					swing(null) 
+					$Swing.swing(null) 
 	if event.is_action_pressed("sprint") and not poisoned:
 		running = true
 	elif event.is_action_released("sprint") and not poisoned:
@@ -347,10 +349,6 @@ func stand_up():
 		animation_player.play_backwards("sit_"+direction_of_current_chair)
 		yield(animation_player, "animation_finished")
 		state = MOVEMENT
-
-func swing(item_name):
-	destroy_placable_object()
-	$Swing.swing(item_name, direction)
 
 func eat(item_name):
 	destroy_placable_object()

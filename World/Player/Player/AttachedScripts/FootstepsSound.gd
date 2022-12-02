@@ -9,7 +9,7 @@ func _ready():
 		Sounds.current_footsteps_sound = Sounds.dirt_footsteps
 	else:
 		Sounds.current_footsteps_sound = Sounds.stone_footsteps
-
+	set_footsteps_sound()
 
 func set_footsteps_sound():
 	stream = Sounds.current_footsteps_sound

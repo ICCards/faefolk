@@ -40,17 +40,19 @@ func _physics_process(delta):
 			duck_sprite.playing = false
 		return
 	if navigation_agent.is_navigation_finished():
-		if not frozen:
-			if Util.chance(20):
-				is_eating = true
-				duck_sprite.play("eat")
-				yield(duck_sprite, "animation_finished")
-				is_eating = false
-			else:
-				is_eating = true
-				duck_sprite.play("idle")
-				$Timers/IdleTimer.start(rand_range(1.0, 4.0))
+		if running_state or frozen:
+			_update_pathfinding()
 			return
+		if Util.chance(20):
+			is_eating = true
+			duck_sprite.play("eat")
+			yield(duck_sprite, "animation_finished")
+			is_eating = false
+		else:
+			is_eating = true
+			duck_sprite.play("idle")
+			$Timers/IdleTimer.start(rand_range(1.0, 4.0))
+		return
 	duck_sprite.play("walk")
 	var target = navigation_agent.get_next_location()
 	var move_direction = position.direction_to(target)
@@ -58,10 +60,7 @@ func _physics_process(delta):
 	var steering = (desired_velocity - velocity) * delta * 4.0
 	velocity += steering
 	navigation_agent.set_velocity(velocity)
-	if _get_direction_string(velocity) == "Right":
-		duck_sprite.flip_h = false
-	else:
-		duck_sprite.flip_h = true
+	duck_sprite.flip_h = _get_direction_string(velocity) != "Right"
 
 
 func move(_velocity: Vector2) -> void:
@@ -89,8 +88,10 @@ func _update_pathfinding() -> void:
 
 func _on_HurtBox_area_entered(area):
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+		duck_sprite.modulate = Color("009000")
 		$AnimationPlayer.play("hit")
 		$EnemyPoisonState.start(area.tool_name)
+		start_run_state()
 		return
 	if area.name == "SwordSwing":
 		Stats.decrease_tool_health()
@@ -108,9 +109,11 @@ func _on_HurtBox_area_entered(area):
 
 func hit(tool_name, var special_ability = ""):
 	if tool_name == "blizzard":
+		duck_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(8)
 		return
 	elif tool_name == "ice projectile":
+		duck_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()
@@ -134,13 +137,14 @@ func destroy():
 	queue_free()
 
 func start_run_state():
+	navigation_agent.max_speed = 300
 	running_state = true
 	$Timers/RunStateTimer.start()
-	_timer.wait_time = 2.0
+	_timer.wait_time = 0.75
 	_update_pathfinding()
 
-
 func _on_RunStateTimer_timeout():
+	navigation_agent.max_speed = 200
 	running_state = false
 	_timer.wait_time = rand_range(2.5, 5.0)
 

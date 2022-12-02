@@ -28,6 +28,7 @@ var cancel_attack: bool = false
 var health: int = Stats.SKELETON_HEALTH
 var STARTING_HEALTH: int = Stats.SKELETON_HEALTH
 var tornado_node = null
+var hit_projectiles = []
 
 var orbit_radius = 0
 var state = IDLE
@@ -187,6 +188,9 @@ func hit(tool_name):
 		start_chase_state()
 	if state == AIM_IDLE or state == AIM_WALK or state == RELEASE:
 		state = WALK
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.play()
 	cancel_attack = true
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
@@ -203,35 +207,35 @@ func destroy():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
-	sound_effects.play()
-	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-		$HurtBox/AnimationPlayer.play("hit")
-		$EnemyPoisonState.start(area.tool_name)
-		if state == IDLE or state == WALK:
-			start_chase_state()
-		return
-	if area.name == "SwordSwing":
-		Stats.decrease_tool_health()
-	if area.knockback_vector != Vector2.ZERO:
-		$KnockbackParticles.emitting = true
-		knocking_back = true
-		$Timers/KnockbackTimer.start()
-		knockback = area.knockback_vector
-		velocity = knockback * 200
-	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-		hit(area.tool_name)
-	if area.tool_name == "lingering tornado":
-		$EnemyTornadoState.orbit_radius = rand_range(0,20)
-		tornado_node = area
-	if area.special_ability == "fire":
-		var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
-		InstancedScenes.initiateExplosionParticles(position+randomPos)
-		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
-		health -= Stats.FIRE_DEBUFF_DAMAGE
-	yield(get_tree().create_timer(0.25), "timeout")
-	$KnockbackParticles.emitting = false
+	if not hit_projectiles.has(area.id):
+		if area.id != "":
+			hit_projectiles.append(area.id)
+		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+			$HurtBox/AnimationPlayer.play("hit")
+			$EnemyPoisonState.start(area.tool_name)
+			if state == IDLE or state == WALK:
+				start_chase_state()
+			return
+		if area.name == "SwordSwing":
+			Stats.decrease_tool_health()
+		if area.knockback_vector != Vector2.ZERO:
+			$KnockbackParticles.emitting = true
+			knocking_back = true
+			$Timers/KnockbackTimer.start()
+			knockback = area.knockback_vector
+			velocity = knockback * 200
+		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+			hit(area.tool_name)
+		if area.tool_name == "lingering tornado":
+			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			tornado_node = area
+		if area.special_ability == "fire":
+			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+			InstancedScenes.initiateExplosionParticles(position+randomPos)
+			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
+			health -= Stats.FIRE_DEBUFF_DAMAGE
+		yield(get_tree().create_timer(0.25), "timeout")
+		$KnockbackParticles.emitting = false
 
 func start_chase_state():
 	$Timers/AttackTimer.start()
