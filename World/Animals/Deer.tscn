@@ -351,7 +351,8 @@ animations = [ {
 } ]
 
 [node name="Deer" type="KinematicBody2D"]
-collision_mask = 3
+collision_layer = 0
+collision_mask = 67
 script = ExtResource( 12 )
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
@@ -437,7 +438,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 8
+frame = 10
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

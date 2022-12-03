@@ -18,7 +18,6 @@ func _ready():
 	sound_effects.play()
 	$Projectile.play("play")
 	$Hitbox.tool_name = "fire projectile"
-	$Hitbox.knockback_vector = Vector2.ZERO
 	$TrailParticles.transform = particles_transform
 	$TrailParticles.position += Vector2(0,32)
 	yield(get_tree().create_timer(0.2), "timeout")

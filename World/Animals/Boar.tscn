@@ -68,7 +68,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=18]
-radius = 261.008
+radius = 207.002
 
 [sub_resource type="CircleShape2D" id=21]
 radius = 32.0
@@ -364,7 +364,8 @@ animations = [ {
 } ]
 
 [node name="Boar" type="KinematicBody2D"]
-collision_mask = 3
+collision_layer = 0
+collision_mask = 67
 script = ExtResource( 13 )
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
@@ -423,7 +424,6 @@ anims/RESET = SubResource( 16 )
 anims/hit = SubResource( 17 )
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -442,9 +442,9 @@ shape = SubResource( 21 )
 disabled = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 6.0
-target_desired_distance = 10.0
-path_max_distance = 16.0
+path_desired_distance = 10.0
+target_desired_distance = 20.0
+path_max_distance = 10.0
 avoidance_enabled = true
 radius = 1.0
 max_speed = 150.0
@@ -466,7 +466,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 7
+frame = 12
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

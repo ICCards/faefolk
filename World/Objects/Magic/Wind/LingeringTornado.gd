@@ -44,6 +44,13 @@ func _ready():
 	queue_free()
 
 
+func destroy():
+	$AnimatedSprite.stop()
+	yield(get_tree().create_timer(0.5), "timeout")
+	queue_free()
+	
+
+
 func set_particles():
 	$TornadoParticles/P1.emitting = true
 	$TornadoParticles/P2.emitting = true

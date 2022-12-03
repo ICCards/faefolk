@@ -59,5 +59,6 @@ func _on_Timer_timeout():
 
 func _on_Hitbox_body_entered(body):
 	if not destroyed:
+		yield(get_tree().create_timer(0.1), "timeout")
 		destroyed = true
 		queue_free()

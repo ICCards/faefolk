@@ -4,7 +4,7 @@
 [ext_resource path="res://World/Objects/Nature/Ores/SmallOre.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 19.4118, 18.2353 )
+extents = Vector2( 21.1765, 20 )
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 14.1176
@@ -128,19 +128,19 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -28 )
 
 [node name="SmallHurtBox" type="Area2D" parent="."]
-visible = false
 position = Vector2( 1.49254, -55.2239 )
 collision_layer = 262160
 collision_mask = 0
 
 [node name="smallHurtBox" type="CollisionShape2D" parent="SmallHurtBox"]
-position = Vector2( -0.904305, 45.2239 )
+position = Vector2( -1.49254, 44.6357 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="SmallMovementCollisionBox" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2( -64.7059, -57.6471 )
-collision_layer = 259
+collision_layer = 3
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
 position = Vector2( 64.7059, 49.4118 )

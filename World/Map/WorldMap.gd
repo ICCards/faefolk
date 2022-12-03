@@ -89,18 +89,12 @@ func _physics_process(delta):
 		playerIcon.position =  Server.player_node.position
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 		set_direction(Server.player_node.direction)
-		#change_label_size()
 		roamingStorm = get_node("/root/World/RoamingStorm")
-		#roamingStorm2 = get_node("/root/World/RoamingStorm2")
+		roamingStorm2 = get_node("/root/World/RoamingStorm2")
 		stormIcon.position = roamingStorm.position
-		#stormIcon2.position = roamingStorm2.position
+		stormIcon2.position = roamingStorm2.position
 
 
-func change_label_size():
-	for x in range(NUM_ROWS):
-		for y in range(NUM_COLUMNS):
-			get_node(alphabet[y] + str(x+1)).rect_scale = adjustedGridCoordinatesScale($Camera2D.zoom)
-	
 func adjustedGridCoordinatesScale(zoom):
 	var percent_zoomed = zoom / Vector2(1.5, 1.5)
 	return Vector2(0.5,0.5) * percent_zoomed

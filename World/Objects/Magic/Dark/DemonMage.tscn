@@ -316,7 +316,7 @@ disabled = true
 
 [node name="DetectEnemyBox" type="Area2D" parent="."]
 position = Vector2( 0, 25 )
-collision_layer = 2
+collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectEnemyBox"]

@@ -172,7 +172,7 @@ func shoot_projectile(player_pos):
 	var spell = ArrowProjectile.instance()
 	spell.is_hostile = true
 	spell.position = $ShootDirection/Position2D.global_position
-	spell.velocity = player_pos - spell.position
+	spell.velocity = (player_pos - spell.position).normalized()
 	get_node("../../").add_child(spell)
 	
 

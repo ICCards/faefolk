@@ -6,8 +6,8 @@ var crafting_item
 var item
 var page
 
-var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can", "wood fishing rod"]
-var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod", "scythe"]
+var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can", "wood fishing rod", "scythe", "arrow"]
+var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod"]
 
 onready var hotbar_slots = $HotbarSlots
 onready var inventory_slots = $InventorySlots

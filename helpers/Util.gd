@@ -114,11 +114,16 @@ func return_adjusted_item_name(item_name):
 	return item_name
 	
 
-func get_random_idle_pos(pos, max_move_dist):
-	var random_pos = Vector2(rand_range(-max_move_dist, max_move_dist), rand_range(-max_move_dist, max_move_dist))
-	if Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos+random_pos)) != -1:
-		return pos+random_pos
-	elif Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos-random_pos)) != -1:
-		return pos-random_pos
+func get_random_idle_pos(pos,max_move_dist):
+	var random1 = rand_range(max_move_dist-200,max_move_dist)
+	var random2 = rand_range(max_move_dist-200,max_move_dist)
+	if Util.chance(50):
+		random1*=-1
+	if Util.chance(50):
+		random2*=-1
+	if Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos+Vector2(random1,random2))) != -1:
+		return pos+Vector2(random1,random2)
+	elif Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos-Vector2(random1,random2))) != -1:
+		return pos-Vector2(random1,random2)
 	else:
 		return pos

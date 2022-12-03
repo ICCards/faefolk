@@ -38,17 +38,18 @@ const KNOCKBACK_AMOUNT = 70
 var tornado_node = null
 
 enum {
-	CHASE,
-	ATTACK,
 	IDLE,
 	WALK,
+	CHASE,
+	ATTACK,
+	DEATH
 }
 
 func _ready():
 	hide()
 	randomize()
 	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(4.0, 9.0)
+	_idle_timer.wait_time = rand_range(5.0, 10.0)
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_end_chase_state_timer.connect("timeout", self, "end_chase_state")
@@ -73,15 +74,14 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity)
 		return
 	set_texture()
-	if navigation_agent.is_navigation_finished():
+	if navigation_agent.is_navigation_finished() and state == WALK:
 		state = IDLE
 		velocity = Vector2.ZERO
 		return
-	if player.state == 5 or player.get_node("Magic").invisibility_active:
+	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
-	elif $DetectPlayer.get_overlapping_areas().size() >= 1:
-		if state != CHASE and state != ATTACK:
-			start_chase_state()
+	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing:
+		start_chase_state()
 	if state == CHASE and (position + Vector2(0,-26)).distance_to(player.position) < 75:
 		state = ATTACK
 		swing()
@@ -93,7 +93,7 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(velocity)
 
 func move(_velocity: Vector2) -> void:
-	if not visible or tornado_node or stunned or attacking or destroyed:
+	if not visible or tornado_node or stunned or attacking or destroyed or state == IDLE:
 		return
 	if frozen:
 		bear_sprite.modulate = Color("00c9ff")
@@ -167,9 +167,11 @@ func hit(tool_name):
 	if state == IDLE or state == WALK:
 		start_chase_state()
 	if tool_name == "blizzard":
+		bear_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(8)
 		return
 	elif tool_name == "ice projectile":
+		bear_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()
@@ -198,6 +200,7 @@ func _on_HurtBox_area_entered(area):
 		if area.id != "":
 			hit_projectiles.append(area.id)
 		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+			bear_sprite.modulate = Color("009000")
 			$HurtBox/AnimationPlayer.play("hit")
 			$EnemyPoisonState.start(area.tool_name)
 			return
@@ -233,10 +236,10 @@ func end_chase_state():
 	chasing = false
 	navigation_agent.max_speed = 100
 	stop_sound_effects()
-	_idle_timer.start()
 	_chase_timer.stop()
+	_idle_timer.start()
 	_end_chase_state_timer.stop()
-	state = IDLE
+	_update_pathfinding_idle()
 
 func start_chase_state():
 	chasing = true
@@ -250,7 +253,10 @@ func start_chase_state():
 
 
 func _on_VisibilityNotifier2D_screen_entered():
+	if chasing:
+		start_sound_effects()
 	show()
+
 func _on_VisibilityNotifier2D_screen_exited():
 	if playing_sound_effect:
 		stop_sound_effects()

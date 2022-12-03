@@ -93,6 +93,9 @@ func _on_HurtBox_area_entered(area):
 			PlayerStats.change_health(-health_to_subtract)
 			get_node("../../Camera2D").player_hit_screen_shake()
 			InstancedScenes.player_hit_effect(-health_to_subtract, get_node("../../").position)
+			yield($AnimationPlayer, "animation_finished")
+			if not get_node("../../Magic").ice_shield_active:
+				$CollisionShape2D.set_deferred("disabled", false)
 
 
 func diminish_HOT(type):

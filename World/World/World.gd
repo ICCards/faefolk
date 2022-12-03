@@ -31,10 +31,10 @@ var rng = RandomNumberGenerator.new()
 
 const NUM_DUCKS = 250
 const NUM_BUNNIES = 250
-const NUM_BEARS = 30
-const NUM_BOARS = 30
-const NUM_DEER = 80
-const NUM_WOLVES = 30
+const NUM_BEARS = 80
+const NUM_BOARS = 80
+const NUM_DEER = 150
+const NUM_WOLVES = 80
 
 var is_changing_scene: bool = false
 

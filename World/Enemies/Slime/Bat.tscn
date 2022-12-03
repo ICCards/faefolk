@@ -459,8 +459,8 @@ particles_anim_v_frames = 2
 particles_anim_loop = false
 
 [node name="Bat" type="KinematicBody2D"]
-collision_layer = 8
-collision_mask = 10
+collision_layer = 0
+collision_mask = 64
 script = ExtResource( 2 )
 
 [node name="SetEnemyDirection" parent="." instance=ExtResource( 11 )]
@@ -493,7 +493,7 @@ scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "fly down"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -503,7 +503,7 @@ position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 41 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]

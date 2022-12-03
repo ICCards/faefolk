@@ -56,6 +56,7 @@ func build():
 	Tiles.cave_wall_tiles = Server.world.get_node("Tiles/Walls")
 	Tiles.valid_tiles = Server.world.get_node("Tiles/ValidTiles")
 	Tiles.ocean_tiles = Server.world.get_node("Tiles/Water")
+	Tiles.object_tiles = Server.world.get_node("PlacableTiles/ObjectTiles")
 	Server.world.nav_node = Server.world.get_node("Navigation2D")
 	rng.randomize()
 	spawn_player()

@@ -269,7 +269,7 @@ change_object_type={
 2d_physics/layer_4="AxeBreakLayer"
 2d_physics/layer_5="PickaxeBreakLayer"
 2d_physics/layer_6="EnterDoors"
-2d_physics/layer_7="PlayerHomeCollision"
+2d_physics/layer_7="Enemies"
 2d_physics/layer_8="PlayerEnemyHurtbox"
 2d_physics/layer_9="SwordSwingLayer"
 2d_physics/layer_10="WoodFootsteps"
@@ -284,6 +284,7 @@ change_object_type={
 2d_physics/layer_19="OpenStove"
 2d_physics/layer_20="OpenGrainMill"
 2d_physics/layer_21="FishingMiniGame"
+2d_physics/layer_22="HoleInCave"
 
 [network]
 

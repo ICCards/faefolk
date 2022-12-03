@@ -205,11 +205,9 @@ func set_held_object():
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Magic":
-			$Magic.is_staff_held = true
+		if item_category == "Magic" or item_name == "bow":
 			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
 			return
-	$Magic.is_staff_held = false
 	$Camera2D/UserInterface/MagicStaffUI.hide()
 
 
@@ -284,7 +282,7 @@ func _unhandled_input(event):
 			else:
 				destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
-					$Swing.swing(null) 
+					$Swing.swing(null, direction) 
 	if event.is_action_pressed("sprint") and not poisoned:
 		running = true
 	elif event.is_action_released("sprint") and not poisoned:
@@ -450,10 +448,10 @@ func movement_state(delta):
 				velocity = velocity.move_toward(Vector2.ZERO, delta/3)
 		if $Magic.dashing:
 			move_and_collide(velocity * DASH_SPEED)
-		elif is_walking_on_dirt:
-			move_and_collide(velocity * MAX_SPEED_DIRT * running_speed_change)
-		else:
+		elif not is_walking_on_dirt and has_node("/root/World"):
 			move_and_collide(velocity * MAX_SPEED_PATH * running_speed_change)
+		else:
+			move_and_collide(velocity * MAX_SPEED_DIRT * running_speed_change)
 	else:
 		idle_state(direction)
 
@@ -515,7 +513,7 @@ func walk_state(_direction):
 var temp = 0
 func decrease_energy_or_health():
 	temp += 1
-	if temp > 500:
+	if temp > 1000:
 		temp = 0
 		if PlayerStats.energy == 0:
 			rng.randomize()

@@ -53,6 +53,7 @@ func _update_pathfinding_chase():
 	navigation_agent.set_target_location(Server.player_node.global_position+random_pos)
 	
 func _update_pathfinding_idle():
+	state = WALK
 	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func move(_velocity: Vector2) -> void:

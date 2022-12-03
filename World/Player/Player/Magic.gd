@@ -62,8 +62,6 @@ enum {
 
 signal spell_finished
 
-var is_staff_held: bool = false
-
 var animation: String = ""
 var direction: String = "DOWN"
 var movement_direction: String = ""
@@ -72,14 +70,15 @@ var is_drawing: bool = false
 var is_releasing: bool = false
 var flamethrower_active: bool = false
 var invisibility_active: bool = false
+var ice_shield_active: bool = false
 var mouse_left_down: bool = false
+
 
 var starting_mouse_point
 var ending_mouse_point
 
 
 func _input( event ):
-	#var spell = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
 	if is_casting or is_drawing:
 		$AimDownSightLine.show()
 		$CastDirection.look_at(get_global_mouse_position())
@@ -114,8 +113,8 @@ func wait_for_bow_release():
 		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
-		PlayerInventory.remove_material("arrow", 1)
-		multishot()
+		Stats.decrease_tool_health()
+		shoot()
 		is_drawing = false
 		is_releasing = true
 		animation = "release_" + direction.to_lower()
@@ -132,18 +131,44 @@ func wait_for_bow_release():
 		wait_for_bow_release()
 
 func shoot():
-	Stats.decrease_tool_health()
+	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
+	match index:
+		1:
+			single_arrow_shot()
+		2:
+			pass
+		3: 
+			multi_arrow_shot()
+		4:
+			ricochet_arrow_shot()
+
+func ricochet_arrow_shot():
+	PlayerInventory.remove_material("arrow", 2)
+	var arrow = ArrowProjectile.instance()
+	if get_node("../Magic").player_fire_buff:
+		arrow.is_on_fire = true
+	else:
+		arrow.is_on_fire = false
+	arrow.is_ricochet_shot = true
+	arrow.position = $CastDirection/Position2D.global_position
+	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
+	get_node("../../../").add_child(arrow)
+
+
+func single_arrow_shot():
+	PlayerInventory.remove_material("arrow", 1)
 	var arrow = ArrowProjectile.instance()
 	if get_node("../Magic").player_fire_buff:
 		arrow.is_on_fire = true
 	else:
 		arrow.is_on_fire = false
 	arrow.position = $CastDirection/Position2D.global_position
-	arrow.velocity = get_global_mouse_position() - arrow.position
+	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
 	get_node("../../../").add_child(arrow)
-	
-func multishot():
-	Stats.decrease_tool_health()
+
+
+func multi_arrow_shot():
+	PlayerInventory.remove_material("arrow", 1)
 	for i in range(3):
 		var arrow = ArrowProjectile.instance()
 		if get_node("../Magic").player_fire_buff:
@@ -152,11 +177,11 @@ func multishot():
 			arrow.is_on_fire = false
 		arrow.position = $CastDirection/Position2D.global_position
 		if i == 0:
-			arrow.velocity = get_global_mouse_position() - arrow.position
-		elif i == 1:
-			arrow.velocity = (get_global_mouse_position() - arrow.position)+Vector2(36,36)
+			arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
+		elif i == 1: 
+			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()+Vector2(0.25,0.25)).normalized()
 		elif i == 2:
-			arrow.velocity = (get_global_mouse_position() - arrow.position)-Vector2(36,36)
+			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()-Vector2(0.25,0.25)).normalized()
 		get_node("../../../").add_child(arrow)
 
 
@@ -328,6 +353,9 @@ func set_invisibility():
 
 # Dark magic #
 func set_portal():
+	if Server.world.name.substr(0,4) == "Cave":
+		if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(get_global_mouse_position())) != -1:
+			return
 	if not portal_1_position and not portal_2_position:
 		portal_1_position = get_global_mouse_position()
 		var spell = PortalNode.instance()
@@ -457,10 +485,12 @@ func play_ice_projectile(debuff):
 
 
 func play_ice_shield():
+	ice_shield_active = true
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", true)
 	var spell = IceDefense.instance()
 	add_child(spell)
 	yield(self, "spell_finished")
+	ice_shield_active = false
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", false)
 
 
@@ -477,7 +507,7 @@ func play_lingering_tornado():
 	spell.particles_transform = $CastDirection.transform
 	spell.target = get_global_mouse_position() + Vector2(0,32)
 	spell.position = $CastDirection/Position2D.global_position
-	get_node("../../../").add_child(spell)
+	get_node("../../../Projectiles").add_child(spell)
 
 func play_wind_projectile():
 	var spell = TornadoProjectile.instance()

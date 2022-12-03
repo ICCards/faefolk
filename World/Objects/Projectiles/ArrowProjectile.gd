@@ -6,20 +6,25 @@ var speed = 525
 var collided = false
 var is_on_fire: bool = false
 var is_hostile: bool = false
+var is_ricochet_shot: bool = false
+var is_multishot1: bool = false
+var is_multishot2: bool = false
+var ricochet_enemies = []
 
 var _uuid = preload("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 
 func _physics_process(delta):
 	if not collided:
-		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
+		var collision_info = move_and_collide(velocity * delta * speed)
 
 func _ready():
 	if is_hostile:
 		$Hitbox.set_collision_mask(128+2)
 	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
+	$Hitbox.id = uuid.v4()
 	$Hitbox.tool_name = "arrow"
-	$Hitbox.knockback_vector = velocity / 150
+	$Hitbox.knockback_vector = velocity
 	if is_on_fire:
 		$Hitbox.special_ability = "fire"
 		$ArrowBreak.modulate = Color("ff0000")
@@ -33,7 +38,30 @@ func fade_out():
 	$Tween.start()
 
 func _on_Area2D_area_entered(area):
-	destroy()
+	if is_ricochet_shot:
+		ricochet_enemies.append(area.get_parent().name)
+		find_next_player()
+	else:
+		destroy()
+		
+		
+func find_next_player():
+	var temp = null
+	for new_body in $DetectEnemyBox.get_overlapping_bodies():
+		if not ricochet_enemies.has(new_body.name):
+			if temp == null:
+				temp = new_body
+			elif self.position.distance_to(new_body.position) < self.position.distance_to(temp.position):
+				temp = new_body
+	if temp == null:
+		destroy()
+		return
+	ricochet_enemies.append(temp.name)
+	velocity = (temp.position - self.position).normalized()
+	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
+	$Hitbox.knockback_vector = velocity
+#		elif self.position.distance_to(new_body.position) < self.position.distance_to(enemy_node.position):
+#			temp = new_body
 
 func _on_Hitbox_body_entered(body):
 	destroy()

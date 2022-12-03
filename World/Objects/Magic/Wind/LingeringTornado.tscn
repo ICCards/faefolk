@@ -139,6 +139,7 @@ tracks/0/keys = {
 }
 
 [node name="LingeringTornado" type="KinematicBody2D"]
+collision_layer = 0
 script = ExtResource( 3 )
 
 [node name="TornadoParticles" type="Node2D" parent="."]

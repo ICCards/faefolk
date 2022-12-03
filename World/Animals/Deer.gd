@@ -22,7 +22,7 @@ var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
-var MAX_MOVE_DISTANCE: float = 500.0
+var MAX_MOVE_DISTANCE: float = 400.0
 var STARTING_HEALTH: int = Stats.DEER_HEALTH
 var health: int = Stats.DEER_HEALTH
 
@@ -97,7 +97,7 @@ func _physics_process(delta):
 		state = IDLE
 		velocity = Vector2.ZERO
 		return
-	if player.state == 5 or player.get_node("Magic").invisibility_active:
+	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
 	if state == CHASE and (position+Vector2(0,-14)).distance_to(player.position) < 70:
 		state = ATTACK
@@ -196,7 +196,7 @@ func end_chase_state():
 	_idle_timer.start()
 	chasing = false
 	state = IDLE
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+	_update_pathfinding_idle()
 
 func _on_EndChaseState_timeout():
 	end_chase_state()
@@ -225,7 +225,10 @@ func stop_sound_effects():
 	sound_effects.stop()
 
 func _on_VisibilityNotifier2D_screen_entered():
+	if chasing:
+		start_sound_effects()
 	show()
+
 func _on_VisibilityNotifier2D_screen_exited():
 	if playing_sound_effect:
 		stop_sound_effects()

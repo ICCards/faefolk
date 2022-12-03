@@ -12,10 +12,10 @@ radius = 14.1176
 height = 7.05882
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.2031, 34.5 )
+extents = Vector2( 24.0266, 34.5 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 27.3943, 21.0175 )
+extents = Vector2( 27.3943, 21.6852 )
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -149,7 +149,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -241,7 +241,8 @@ position = Vector2( 0, -12 )
 [node name="BigMovementCollisionBox" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2( -1, -28 )
-collision_layer = 259
+collision_layer = 3
+collision_mask = 0
 
 [node name="BigMovementBox" type="CollisionShape2D" parent="BigMovementCollisionBox"]
 position = Vector2( 1, 40.9412 )
@@ -251,7 +252,8 @@ shape = SubResource( 9 )
 [node name="SmallMovementCollisionBox" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2( -64.7059, -57.6471 )
-collision_layer = 259
+collision_layer = 3
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
 position = Vector2( 64.7059, 75.2941 )
@@ -265,7 +267,7 @@ collision_layer = 262160
 collision_mask = 0
 
 [node name="bigHurtBox" type="CollisionShape2D" parent="BigHurtBox"]
-position = Vector2( 2.5, 40.7969 )
+position = Vector2( 2.5, 41.6204 )
 rotation = -1.5708
 shape = SubResource( 1 )
 
@@ -275,7 +277,7 @@ collision_layer = 262160
 collision_mask = 0
 
 [node name="smallHurtBox" type="CollisionShape2D" parent="SmallHurtBox"]
-position = Vector2( -1.49254, 70.518 )
+position = Vector2( -1.49254, 71.1857 )
 shape = SubResource( 11 )
 disabled = true
 

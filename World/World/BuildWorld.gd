@@ -33,11 +33,11 @@ func spawn_player():
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
 	get_node("../Players").add_child(player)
-	player.spawn_position = Vector2(300*32,300*32)
+	player.spawn_position = Vector2(500*32,500*32)
 	if not BuildCaveLevel.is_player_going_down:
 		player.position = Util.string_to_vector2(MapData.world["cave_entrance_location"])*32 + Vector2(32,0)
 	else:
-		player.position = Vector2(300*32,300*32)
+		player.position = Vector2(500*32,500*32)
 
 func _on_BuildTerrain_timeout():
 	build_terrain()
@@ -163,6 +163,7 @@ func spawn_chunk(chunk_name):
 				top_ocean.set_cellv(loc+Vector2(0,-i),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
 				waves.set_cellv(loc+Vector2(0,-i), -1)
+		yield(get_tree(), "idle_frame")
 		for i in range(4):
 			i += 4
 			if sand.get_cellv(loc+Vector2(i,0)) != -1 or sand.get_cellv(loc+Vector2(-i,0)) != -1 or sand.get_cellv(loc+Vector2(0,i)) != -1 or sand.get_cellv(loc+Vector2(0,-i)) != -1:
@@ -170,6 +171,7 @@ func spawn_chunk(chunk_name):
 				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
+		yield(get_tree(), "idle_frame")
 	update_bitmasks(chunk_name)
 	yield(get_tree(), "idle_frame")
 

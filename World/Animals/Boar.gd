@@ -58,6 +58,7 @@ func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.global_position)
 	
 func _update_pathfinding_idle():
+	state = WALK
 	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 	
 func set_sprite_texture():
@@ -71,7 +72,7 @@ func set_sprite_texture():
 
 	
 func move(_velocity: Vector2) -> void:
-	if not visible or tornado_node or stunned or destroyed or attacking:
+	if not visible or tornado_node or stunned or destroyed or attacking or state == IDLE:
 		return
 	if frozen:
 		boar_sprite.modulate = Color("00c9ff")
@@ -91,14 +92,14 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity)
 		return
 	set_sprite_texture()
-	if navigation_agent.is_navigation_finished():
+	if navigation_agent.is_navigation_finished() and state == WALK:
 		state = IDLE
+		velocity = Vector2.ZERO
 		return
-	if player.state == 5 or player.get_node("Magic").invisibility_active:
+	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
-	elif $DetectPlayer.get_overlapping_areas().size() >= 1:
-		if state != CHASE and state != ATTACK:
-			start_chase_state()
+	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing:
+		start_chase_state()
 	if state == CHASE and (position+Vector2(0,-9)).distance_to(player.position) < 70:
 		state = ATTACK
 		attack()
@@ -126,9 +127,11 @@ func hit(tool_name):
 	if state == IDLE or state == WALK:
 		start_chase_state()
 	if tool_name == "blizzard":
+		boar_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(8)
 		return
 	elif tool_name == "ice projectile":
+		boar_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()
@@ -156,6 +159,7 @@ func _on_HurtBox_area_entered(area):
 		if area.id != "":
 			hit_projectiles.append(area.id)
 		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+			boar_sprite.modulate = Color("009000")
 			$HurtBox/AnimationPlayer.play("hit")
 			$EnemyPoisonState.start(area.tool_name)
 			return
@@ -196,7 +200,7 @@ func end_chase_state():
 	_chase_timer.stop()
 	_idle_timer.start()
 	chasing = false
-	state = IDLE
+	state = WALK
 
 func _on_KnockbackTimer_timeout():
 	knocking_back = false
@@ -225,6 +229,8 @@ func stop_sound_effects():
 	sound_effects.stop()
 
 func _on_VisibilityNotifier2D_screen_entered():
+	if chasing:
+		start_sound_effects()
 	show()
 
 func _on_VisibilityNotifier2D_screen_exited():

@@ -1069,7 +1069,7 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Turns ore and coal into metal bars.",
-      "Ingredients": [["wood", 10], ["stone", 100]],
+      "Ingredients": [["wood", 10], ["stone", 40]],
       "EnergyHealth": null
   },
   "display table" : {
@@ -1161,14 +1161,14 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 2.",
-      "Ingredients": [["wood",30],["bronze ingot",10]],
+      "Ingredients": [["wood",30],["stone",30]],
       "EnergyHealth": null
   },
   "workbench #3": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 3.",
-      "Ingredients": [["wood",30],["iron ingot",10]],
+      "Ingredients": [["wood",100],["stone",100]],
       "EnergyHealth": null
   },
   "grain mill #1": {

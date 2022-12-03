@@ -54,7 +54,7 @@ func set_direction_chase_state():
 			
 			
 func set_direction_idle_state():
-	if not changed_direction_delay:
+	if not changed_direction_delay and get_parent().state != 0:
 		if abs(get_parent().velocity.x) >= abs(get_parent().velocity.y):
 			if get_parent().velocity.x >= 0:
 				if get_parent().direction != "right":
