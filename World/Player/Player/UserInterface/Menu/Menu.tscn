@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
@@ -7,14 +7,13 @@
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/PetUI.gd" type="Script" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Images/Inventory UI/tabs/skills.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=17]
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=19]
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=21]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
-[ext_resource path="res://Assets/Images/Inventory UI/trash/trash top.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=33]
 [ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=34]
@@ -324,7 +323,6 @@ margin_right = -375.0
 margin_bottom = 37.0
 
 [node name="Inventory" type="Control" parent="."]
-visible = false
 margin_left = -377.0
 margin_top = 39.0
 margin_right = -377.0
@@ -719,7 +717,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 33 )
 animation = "idle right"
-frame = 13
+frame = 11
 playing = true
 
 [node name="HideShowButton" type="Button" parent="Inventory/PetUI"]
@@ -802,30 +800,8 @@ anims/loop = SubResource( 22 )
 
 [node name="Tween" type="Tween" parent="Inventory"]
 
-[node name="Trash" type="Control" parent="."]
+[node name="Trash" parent="." instance=ExtResource( 8 )]
 visible = false
-margin_left = -5.0
-margin_top = 45.0
-margin_right = -5.0
-margin_bottom = 45.0
-
-[node name="Bottom" type="Sprite" parent="Trash"]
-position = Vector2( 381, 398 )
-texture = ExtResource( 31 )
-
-[node name="Top" type="Sprite" parent="Trash"]
-position = Vector2( 413, 386 )
-texture = ExtResource( 29 )
-offset = Vector2( -32, -21 )
-
-[node name="TrashButton" type="Button" parent="Trash"]
-margin_left = 340.0
-margin_top = 344.0
-margin_right = 421.0
-margin_bottom = 446.0
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
 
 [node name="Collections" parent="." instance=ExtResource( 37 )]
 visible = false
@@ -835,6 +811,7 @@ margin_right = -334.0
 margin_bottom = 77.0
 
 [node name="Skills" parent="." instance=ExtResource( 39 )]
+visible = false
 margin_left = -296.0
 margin_top = 127.0
 margin_right = -256.0
@@ -857,6 +834,8 @@ margin_top = 121.0
 margin_right = 297.0
 margin_bottom = 544.0
 
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
 [connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
 [connection signal="mouse_entered" from="TabButtons/Inventory" to="." method="_on_Inventory_mouse_entered"]
 [connection signal="mouse_exited" from="TabButtons/Inventory" to="." method="_on_Inventory_mouse_exited"]
@@ -878,7 +857,4 @@ margin_bottom = 544.0
 [connection signal="pressed" from="TabButtons/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="Inventory/SkipSong" to="Inventory" method="_on_SkipSong_pressed"]
 [connection signal="pressed" from="Inventory/PetUI/HideShowButton" to="Inventory/PetUI" method="_on_HideShowButton_pressed"]
-[connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
-[connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
-[connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

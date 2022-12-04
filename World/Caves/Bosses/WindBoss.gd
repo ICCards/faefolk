@@ -71,13 +71,20 @@ func attack():
 			return
 		animation_player.play("loop")
 		state = FLY
-		if phase == 1 or phase == 2:
-			for i in range(amt):
-				var spell = TornadoProjectile.instance()
-				spell.is_hostile_projectile = true
+		if phase == 1:
+			var spell = TornadoProjectile.instance()
+			spell.is_hostile_projectile = true
+			spell.position =$ShootDirection/Position2D.global_position
+			spell.velocity = Server.player_node.position - position
+			get_node("../../../").add_child(spell)
+			yield(get_tree().create_timer(0.5), "timeout")
+		elif phase == 2:
+			for i in range(3):
+				var spell = LingeringTornado.instance()
 				spell.position =$ShootDirection/Position2D.global_position
-				spell.velocity = Server.player_node.position - position
-				get_node("../../../").add_child(spell)
+				spell.is_hostile_projectile = true
+				spell.target = Server.player_node.position
+				get_node("../../").add_child(spell)
 				yield(get_tree().create_timer(0.5), "timeout")
 		else:
 			for i in range(12):

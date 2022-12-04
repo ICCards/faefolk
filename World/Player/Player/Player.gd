@@ -67,7 +67,7 @@ func _ready():
 	if is_building_world:
 		state = DYING
 		$Camera2D/UserInterface/LoadingScreen.show()
-		#yield(get_tree().create_timer(10.0), "timeout")
+		yield(get_tree().create_timer(5.0), "timeout")
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	yield(get_tree(), "idle_frame")
@@ -448,7 +448,7 @@ func movement_state(delta):
 				velocity = velocity.move_toward(Vector2.ZERO, delta/3)
 		if $Magic.dashing:
 			move_and_collide(velocity * DASH_SPEED)
-		elif not is_walking_on_dirt and has_node("/root/World"):
+		elif not is_walking_on_dirt:
 			move_and_collide(velocity * MAX_SPEED_PATH * running_speed_change)
 		else:
 			move_and_collide(velocity * MAX_SPEED_DIRT * running_speed_change)

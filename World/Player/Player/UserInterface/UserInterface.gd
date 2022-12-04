@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var holding_item = null
 
@@ -127,6 +127,7 @@ func respawn():
 
 func toggle_tc(id):
 	if not has_node("Tool cabinet"):
+		play_open_menu_sound()
 		var tc = Tool_cabinet.instance()
 		tc.id = id
 		add_child(tc)
@@ -174,6 +175,7 @@ func toggle_menu():
 
 
 func show_menu():
+	play_open_menu_sound()
 	$Hotbar.hide()
 	$CurrentTime.hide()
 	$PlayerStatsUI.hide()
@@ -191,6 +193,7 @@ func hide_menu():
 
 func toggle_grain_mill(id, level):
 	if not has_node("GrainMill"):
+		play_open_menu_sound()
 		var grainMill = GrainMill.instance()
 		grainMill.level = level
 		grainMill.id = id
@@ -202,6 +205,7 @@ func toggle_grain_mill(id, level):
 
 func toggle_workbench(level):
 	if not has_node("Workbench"):
+		play_open_menu_sound()
 		var workbench = Workbench.instance()
 		workbench.level = level
 		add_child(workbench)
@@ -212,6 +216,7 @@ func toggle_workbench(level):
 
 func toggle_furnace(id):
 	if not has_node(id):
+		play_open_menu_sound()
 		var furnace = Furnace.instance()
 		furnace.name = str(id)
 		furnace.id = id
@@ -226,6 +231,7 @@ func toggle_furnace(id):
 
 func toggle_stove(id, level):
 	if not has_node(id):
+		play_open_menu_sound()
 		var stove = Stove.instance()
 		stove.name = str(id)
 		stove.level = level
@@ -283,7 +289,11 @@ func drop_items():
 		InstancedScenes.initiateInventoryItemDrop(items_to_drop[i], Server.player_node.position)
 	items_to_drop = []
 	
-
+	
+func play_open_menu_sound():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/backpackIN.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 
 
 

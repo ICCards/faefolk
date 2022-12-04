@@ -188,8 +188,8 @@ func hit(tool_name):
 		start_chase_state()
 	if state == AIM_IDLE or state == AIM_WALK or state == RELEASE:
 		state = WALK
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonHit.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	cancel_attack = true
 	$HurtBox/AnimationPlayer.play("hit")
@@ -200,7 +200,14 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
-	InstancedScenes.intitiateItemDrop("arrow", position, 1)
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonDie.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
+	if Util.chance(05):
+		InstancedScenes.initiateInventoryItemDrop(["bow", 1, Stats.return_max_tool_health("bow")], position)
+		#InstancedScenes.intitiateItemDrop("bow", position, 1)
+	else:
+		InstancedScenes.intitiateItemDrop("arrow", position, 1)
 	animation_player.play("death")
 	destroyed = true
 	yield(animation_player, "animation_finished")

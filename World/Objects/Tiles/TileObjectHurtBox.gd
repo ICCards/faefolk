@@ -348,10 +348,9 @@ func _on_HurtBox_area_entered(area):
 		Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 	else:
 		Tiles.add_valid_tiles(location, dimensions)
-	if Server.world.name == "World":
-		Tiles.object_tiles.set_cellv(location, -1)
-		Tiles.fence_tiles.set_cellv(location, -1)
-		Tiles.fence_tiles.update_bitmask_area(location)
+	Tiles.object_tiles.set_cellv(location, -1)
+	Tiles.fence_tiles.set_cellv(location, -1)
+	Tiles.fence_tiles.update_bitmask_area(location)
 	InstancedScenes.intitiateItemDrop(item_name, position, 1)
 	MapData.remove_placable(id)
 	yield($SoundEffects, "finished")

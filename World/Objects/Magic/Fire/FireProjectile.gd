@@ -14,7 +14,7 @@ func _physics_process(delta):
 
 func _ready():
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/cast.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -10)
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
 	$Projectile.play("play")
 	$Hitbox.tool_name = "fire projectile"

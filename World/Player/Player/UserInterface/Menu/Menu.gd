@@ -3,6 +3,7 @@ extends Control
 var item
 var hovered_button
 
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 func initialize():
 	show()
@@ -93,38 +94,12 @@ func _on_Exit_pressed():
 
 func _on_BackgroundButton_pressed():
 	if find_parent("UserInterface").holding_item:
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/throwDownITem.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		find_parent("UserInterface").items_to_drop.append([find_parent("UserInterface").holding_item.item_name, find_parent("UserInterface").holding_item.item_quantity, find_parent("UserInterface").holding_item.item_health])
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
-
-
-
-func open_trash_can():
-	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
-		$Trash/Top.rotation_degrees, 90, 0.35,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-	
-func close_trash_can():
-	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
-		$Trash/Top.rotation_degrees, 0, 0.35,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func _on_TrashButton_mouse_entered():
-	open_trash_can()
-
-
-func _on_TrashButton_mouse_exited():
-	close_trash_can()
-
-
-func _on_TrashButton_pressed():
-	if find_parent("UserInterface").holding_item:
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
-
 
 
 func _on_Inventory_mouse_entered():

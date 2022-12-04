@@ -1,5 +1,7 @@
 extends Area2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+
 enum {
 	MOVEMENT, 
 	SWINGING,
@@ -44,10 +46,12 @@ func _on_HurtBox_area_entered(area):
 				start_HOT(area.tool_name)
 				return
 			elif area.tool_name == "poison potion I" or area.tool_name == "poison potion II" or area.tool_name == "poison potion III":
-				print("POISON HIT")
 				get_node("../../").start_poison_state()
 				$AnimationPlayer.play("hit")
 				diminish_HOT(area.tool_name)
+				yield($AnimationPlayer, "animation_finished")
+				if not get_node("../../Magic").ice_shield_active:
+					$CollisionShape2D.set_deferred("disabled", false)
 				return
 			elif area.tool_name == "speed potion I" or area.tool_name == "speed potion II" or area.tool_name == "speed potion III":
 				match area.tool_name:
@@ -84,6 +88,9 @@ func _on_HurtBox_area_entered(area):
 				diminish_HOT(area.name)
 				$AnimationPlayer.play("hit")
 				get_node("../../Camera2D").player_hit_screen_shake()
+				yield($AnimationPlayer, "animation_finished")
+				if not get_node("../../Magic").ice_shield_active:
+					$CollisionShape2D.set_deferred("disabled", false)
 				return
 			elif area.name == "Hitbox":
 				health_to_subtract = Stats.return_tool_damage(area.tool_name)
@@ -168,3 +175,9 @@ func _on_RegenerationTimer_timeout():
 			PlayerStats.change_health(regeneration_increment)
 			InstancedScenes.player_hit_effect(regeneration_increment, get_node("../../").position)
 			amount_to_heal -= regeneration_increment
+
+
+func play_sound_effect():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Player/ow.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()

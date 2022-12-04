@@ -57,6 +57,7 @@ func build():
 	Tiles.valid_tiles = Server.world.get_node("Tiles/ValidTiles")
 	Tiles.ocean_tiles = Server.world.get_node("Tiles/Water")
 	Tiles.object_tiles = Server.world.get_node("PlacableTiles/ObjectTiles")
+	Tiles.fence_tiles = Server.world.get_node("PlacableTiles/FenceTiles")
 	Server.world.nav_node = Server.world.get_node("Navigation2D")
 	rng.randomize()
 	spawn_player()
@@ -111,6 +112,13 @@ func load_cave():
 		caveGrass.location = loc
 		ForageObjects.call_deferred("add_child", caveGrass)
 		caveGrass.position = loc*32 + Vector2(16,32)
+	for id in map["placables"]:
+		var item_name = map["placables"][id]["n"]
+		var location = map["placables"][id]["l"]
+		if item_name == "wall" or item_name == "foundation":
+			PlaceObject.place_building_object_in_world(id,item_name,location)
+		else:
+			PlaceObject.place_object_in_world(id,item_name,map["placables"][id]["d"],location)
 
 
 func build_cave():

@@ -45,9 +45,10 @@ func _ready():
 
 
 func destroy():
-	$AnimatedSprite.stop()
-	yield(get_tree().create_timer(0.5), "timeout")
-	queue_free()
+	if $AnimatedSprite.visible:
+		$AnimatedSprite.stop()
+		yield(get_tree().create_timer(0.5), "timeout")
+		queue_free()
 	
 
 

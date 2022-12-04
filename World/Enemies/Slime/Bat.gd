@@ -35,7 +35,7 @@ func _ready():
 	randomize()
 	rng.randomize()
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/batScreech.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 
 func _physics_process(delta):
@@ -96,7 +96,7 @@ func hit(tool_name):
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
@@ -106,6 +106,9 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/monsterdead.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	destroyed = true
 	animation_player.play("death")
 	yield(animation_player, "animation_finished")

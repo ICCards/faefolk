@@ -123,7 +123,7 @@ func hit(tool_name):
 	if state == IDLE or state == WALK:
 		start_chase_state()
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
@@ -133,6 +133,9 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/monsterdead.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	InstancedScenes.intitiateItemDrop("rope", position, 1)
 	destroyed = true
 	animation_player.play("destroy")

@@ -31,8 +31,8 @@ func set_current_song():
 func initialize():
 	PlayerInventory.InventorySlots = $InventorySlots
 	show()
-	#$CompositeSprites.set_player_animation(Server.player_node.character, "idle_down")
-	#$CompositeSprites/AnimationPlayer.play("loop")
+	$CompositeSprites.set_player_animation(Server.player_node.character, "idle_down")
+	$CompositeSprites/AnimationPlayer.play("loop")
 	item = null
 	var i_slots = inventory_slots.get_children()
 	for i in range(i_slots.size()):

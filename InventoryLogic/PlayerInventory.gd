@@ -27,11 +27,11 @@ var inventory = {
 	2: ["fire staff", 1, null],
 	4: ["ice staff", 1, null],
 	5: ["earth staff", 1, null],
-#	0: ["wood", 999, null],
+#	9: ["wood", 999, null],
 #	9: ["stone", 999, null],
 #	9: ["rope", 12, null],
-#	8: ["iron ingot", 150, null],
-	6: ["workbench #3", 1, null],
+	#8: ["iron ore", 150, null],
+	#6: ["furnace", 1, null],
 #	7: ["wheat seeds", 60, null],
 #	2: ["gold pickaxe", 1, null]
 #	4: ["destruction potion I", 10, null],
@@ -44,9 +44,9 @@ var inventory = {
 
 var hotbar = {
 	0: ["wind staff", 1, null],
-#	2: ["bow", 1, null],
-#	1: ["stone sword", 1, null],
-#	7: ["arrow", 100, null],
+	2: ["bow", 1, null],
+	1: ["stone sword", 1, null],
+	7: ["arrow", 500, null],
 #	3: ["wood box", 100, null],
 #	6: ["poison potion I", 100, null],
 #	5: ["poison potion II", 100, null],

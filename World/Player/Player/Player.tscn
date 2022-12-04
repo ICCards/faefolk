@@ -11029,6 +11029,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 1.0, 0.0, 1.0, 0.0, 1.0, 0.0 ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_sound_effect"
+} ]
+}
 
 [sub_resource type="CircleShape2D" id=15]
 radius = 1.0
@@ -11457,6 +11471,8 @@ anims/hit = SubResource( 22 )
 wait_time = 2.0
 
 [node name="RegenerationTimer" type="Timer" parent="Area2Ds/HurtBox"]
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="Area2Ds/HurtBox"]
 
 [node name="EnterInteractiveZones" type="Node2D" parent="Area2Ds"]
 script = ExtResource( 26 )

@@ -28,7 +28,7 @@ func advance_up_cave_level():
 			node.destroy()
 		for node in $Enemies.get_children():
 			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 9/Cave 9.tscn")
+		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 7/Cave 7.tscn")
 
 func advance_down_cave_level():
 	if not is_changing_scene:
