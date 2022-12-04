@@ -100,7 +100,6 @@ func build_terrain():
 		if current_chunks == new_chunks:
 			return
 		current_chunks = new_chunks
-		print(MapData.world["ocean"].size())
 		for new_chunk in new_chunks:
 			if not built_chunks.has(new_chunk):
 				built_chunks.append(new_chunk)

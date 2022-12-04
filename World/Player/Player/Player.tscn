@@ -11202,6 +11202,7 @@ scale_amount_random = 0.7
 color = Color( 0.145098, 0.305882, 0.545098, 1 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
+modulate = Color( 1.1, 1.1, 1.1, 1 )
 light_mask = 0
 material = ExtResource( 11 )
 scale = Vector2( 2, 2 )

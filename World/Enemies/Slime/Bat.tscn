@@ -493,6 +493,7 @@ scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "fly down"
+frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -502,6 +503,7 @@ position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 41 )
+frame = 10
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]

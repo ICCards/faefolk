@@ -136,6 +136,7 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	InstancedScenes.intitiateItemDrop("slime orb", position, 1)
 	destroyed = true
 	animation_player.play("death")
 	yield(animation_player, "animation_finished")

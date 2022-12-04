@@ -106,6 +106,7 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	InstancedScenes.intitiateItemDrop("bat wing", position, 1)
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/monsterdead.wav")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()

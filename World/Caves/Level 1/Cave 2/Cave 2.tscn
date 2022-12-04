@@ -1,4 +1,4 @@
-[gd_scene load_steps=266 format=2]
+[gd_scene load_steps=267 format=2]
 
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Tilesets/CL_MainLev.png" type="Texture" id=2]
@@ -1258,6 +1258,22 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 "shape": SubResource( 693 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
+1/z_index = 0
+
+[sub_resource type="TileSet" id=883]
+1/name = "CL_MainLev.png 1"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 576, 64, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
 1/z_index = 0
 
 [sub_resource type="Environment" id=609]
@@ -6412,6 +6428,13 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
 format = 1
+
+[node name="BridgeTiles" type="TileMap" parent="Tiles"]
+visible = false
+tile_set = SubResource( 883 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 2359316, 1, 0, 2359317, 1, 0, 2359318, 1, 0, 2359319, 1, 0, 2359320, 1, 0, 2359321, 1, 0, 2359324, 1, 0, 2359325, 1, 0, 2359326, 1, 0, 2359327, 1, 0, 2424852, 1, 0, 2424853, 1, 0, 2424854, 1, 0, 2424855, 1, 0, 2424856, 1, 0, 2424857, 1, 0, 2424860, 1, 0, 2424861, 1, 0, 2424862, 1, 0, 2424863, 1, 0, 2490388, 1, 0, 2490389, 1, 0, 2490390, 1, 0, 2490391, 1, 0, 2490392, 1, 0, 2490393, 1, 0, 2490396, 1, 0, 2490397, 1, 0, 2490398, 1, 0, 2490399, 1, 0 )
 
 [node name="Enemies" type="YSort" parent="."]
 

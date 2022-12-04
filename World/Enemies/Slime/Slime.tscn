@@ -210,7 +210,7 @@ tracks/1/keys = {
 radius = 13.0
 
 [sub_resource type="CircleShape2D" id=169]
-radius = 293.0
+radius = 225.036
 
 [sub_resource type="CircleShape2D" id=14]
 radius = 5.0
@@ -532,6 +532,7 @@ position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
+frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -540,7 +541,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -6 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 9
+frame = 1
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]

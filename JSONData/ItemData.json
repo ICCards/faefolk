@@ -1,4 +1,32 @@
 {
+    "slime orb": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A mysterious ball of slime.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "bone": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A bone from a skeleton.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "bat wing": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A delicate material harvested from a bat.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "silk": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A thin string harvested from a spider.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
     "health potion I": {
       "ItemCategory": "Potion",
       "StackSize": 999,
@@ -536,28 +564,28 @@
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to catch fish. Tier 1.",
-      "Ingredients": [["wood", 10],["rope", 2]],
+      "Ingredients": [["wood", 10],["silk", 2]],
       "EnergyHealth": null
   },
   "stone fishing rod":{
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to catch fish. Tier 2.",
-      "Ingredients": [["stone", 10],["rope", 2]],
+      "Ingredients": [["stone", 10],["silk", 2]],
       "EnergyHealth": null
   },
   "gold fishing rod":{
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to catch fish. Tier 3",
-      "Ingredients": [["gold ingot", 10],["rope", 2]],
+      "Ingredients": [["gold ingot", 10],["silk", 2]],
       "EnergyHealth": null
   },
   "bow":{
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Requires arrows for ammo.",
-      "Ingredients": [["wood", 10],["rope", 1]],
+      "Ingredients": [["wood", 10],["silk", 1]],
       "EnergyHealth": null
   },
   "arrow": {

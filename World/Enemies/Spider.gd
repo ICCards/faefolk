@@ -84,7 +84,7 @@ func _physics_process(delta):
 			start_chase_state()
 	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
 		end_chase_state()
-	if navigation_agent.is_navigation_finished() and state != CHASE:
+	if navigation_agent.is_navigation_finished() and velocity == Vector2.ZERO:
 		state = IDLE
 		return
 	var target = navigation_agent.get_next_location()
@@ -136,7 +136,7 @@ func destroy():
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/monsterdead.wav")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
-	InstancedScenes.intitiateItemDrop("rope", position, 1)
+	InstancedScenes.intitiateItemDrop("silk", position, 1)
 	destroyed = true
 	animation_player.play("destroy")
 	yield(animation_player, "animation_finished")

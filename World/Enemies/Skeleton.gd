@@ -200,13 +200,15 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	var random = rng.randi_range(1,3)
+	for i in range(random):
+		InstancedScenes.intitiateItemDrop("bone", position, 1)
 	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonDie.wav")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
-	if Util.chance(05):
+	if Util.chance(5):
 		InstancedScenes.initiateInventoryItemDrop(["bow", 1, Stats.return_max_tool_health("bow")], position)
-		#InstancedScenes.intitiateItemDrop("bow", position, 1)
-	else:
+	elif Util.chance(50):
 		InstancedScenes.intitiateItemDrop("arrow", position, 1)
 	animation_player.play("death")
 	destroyed = true

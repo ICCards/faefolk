@@ -117,7 +117,7 @@ func start_fishing_mini_game():
 	$Tween.stop_all()
 	$AnimationPlayer.play("hit")
 	$FishingMiniGame.set_active(fishing_rod_type)
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/jingle1.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/FishHit.wav")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	yield($AnimationPlayer, "animation_finished")
@@ -265,7 +265,7 @@ func return_adjusted_end_point(progress_of_game):
 
 func _on_FishBiteTimer_timeout():
 	if waiting_for_fish_bite:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/bob.wav")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/fishBite.wav")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 		$AnimationPlayer.play("bite")

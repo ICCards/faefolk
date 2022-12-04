@@ -198,7 +198,8 @@ func _on_DetectObjectOverPathBox_area_entered(area):
 
 
 func _on_DetectObjectOverPathBox_area_exited(area):
-	if item_name == "foundation":
-		yield(get_tree().create_timer(0.25), "timeout")
-		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
-		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)
+	if not Server.world.is_changing_scene:
+		if item_name == "foundation":
+			yield(get_tree().create_timer(0.25), "timeout")
+			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
+			$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)

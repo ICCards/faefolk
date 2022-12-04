@@ -13,9 +13,6 @@ var count = 0
 var map_size = 50
 
 func _ready():
-	nav_node = $Navigation2D
-	Tiles.cave_wall_tiles = $Tiles/Walls
-	Tiles.valid_tiles = $Tiles/ValidTiles
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true

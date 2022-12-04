@@ -123,6 +123,9 @@ func caught_fish():
 	get_node("Fish").stop_fish_movement()
 	
 func lost_fish():
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/fishEscape.wav")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
 	$Tween.stop_all()
 	get_parent().mini_game_active = false
 	$AnimationPlayer.play("fade")
