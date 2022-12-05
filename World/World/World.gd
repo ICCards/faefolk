@@ -29,12 +29,12 @@ onready var CaveLadder = preload("res://World/Caves/Objects/CaveLadder.tscn")
 
 var rng = RandomNumberGenerator.new()
 
-const NUM_DUCKS = 250
-const NUM_BUNNIES = 250
-const NUM_BEARS = 80
-const NUM_BOARS = 80
-const NUM_DEER = 150
-const NUM_WOLVES = 80
+const NUM_DUCKS = 200
+const NUM_BUNNIES = 200
+const NUM_BEARS = 60
+const NUM_BOARS = 60
+const NUM_DEER = 120
+const NUM_WOLVES = 60
 
 var is_changing_scene: bool = false
 

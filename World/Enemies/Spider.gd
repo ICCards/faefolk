@@ -47,6 +47,7 @@ func _ready():
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	navigation_agent.connect("velocity_computed", self, "move") 
 	navigation_agent.set_navigation(get_node("../../").nav_node)
+	_update_pathfinding_idle()
 
 func _update_pathfinding_chase():
 	random_pos = Vector2(rand_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST), rand_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST))
@@ -57,7 +58,7 @@ func _update_pathfinding_idle():
 	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func move(_velocity: Vector2) -> void:
-	if tornado_node or stunned or destroyed:
+	if tornado_node or stunned or destroyed or state == IDLE:
 		return
 	elif frozen:
 		spider_sprite.modulate = Color("00c9ff")
@@ -80,11 +81,13 @@ func _physics_process(delta):
 		return
 	set_sprite_texture()
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
-		if state != CHASE:
+		if not chasing:
 			start_chase_state()
 	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
-		end_chase_state()
-	if navigation_agent.is_navigation_finished() and velocity == Vector2.ZERO:
+		if chasing:
+			end_chase_state()
+	if navigation_agent.is_navigation_finished() and state == WALK and not chasing:
+		velocity = Vector2.ZERO
 		state = IDLE
 		return
 	var target = navigation_agent.get_next_location()

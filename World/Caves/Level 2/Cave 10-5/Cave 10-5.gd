@@ -28,15 +28,16 @@ func advance_up_cave_level():
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 10/Cave 10.tscn")
 
 func advance_down_cave_level():
-	if not is_changing_scene:
-		BuildCaveLevel.is_player_going_down = true
-		Server.player_node.destroy()
-		is_changing_scene = true
-		for node in $Projectiles.get_children():
-			node.destroy()
-		for node in $Enemies.get_children():
-			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 2/Cave 11/Cave 11.tscn")
+	pass
+#	if not is_changing_scene:
+#		BuildCaveLevel.is_player_going_down = true
+#		Server.player_node.destroy()
+#		is_changing_scene = true
+#		for node in $Projectiles.get_children():
+#			node.destroy()
+#		for node in $Enemies.get_children():
+#			node.destroy()
+#		SceneChanger.goto_scene("res://World/Caves/Level 2/Cave 11/Cave 11.tscn")
 
 
 

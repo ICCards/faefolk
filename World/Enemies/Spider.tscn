@@ -553,6 +553,7 @@ material = ExtResource( 15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "walk right"
+frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -560,7 +561,7 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
-frame = 3
+frame = 13
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]
@@ -685,9 +686,9 @@ wait_time = 0.25
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 2.0
+path_desired_distance = 10.0
 target_desired_distance = 10.0
-path_max_distance = 20.0
+path_max_distance = 10.0
 avoidance_enabled = true
 max_speed = 75.0
 

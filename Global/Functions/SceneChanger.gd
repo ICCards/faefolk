@@ -11,7 +11,7 @@ func _ready():
 func goto_scene(path):
 	animation_player.play("fade")
 	yield(animation_player, "animation_finished")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(3.0), "timeout")
 	call_deferred("_deferred_goto_scene", path)
 
 

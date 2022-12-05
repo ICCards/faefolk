@@ -66,8 +66,6 @@ func _update_pathfinding_chase():
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
-		if stunned:
-			animation_player.stop(false)
 		return
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)

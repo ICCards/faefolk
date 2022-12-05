@@ -329,13 +329,13 @@ func _on_HurtBox_area_entered(area):
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		drop_items_in_grain_mill()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		drop_items_in_stove()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "furnace":
 		drop_items_in_furnace()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "tool cabinet":
 		drop_items_in_tc()
 		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")

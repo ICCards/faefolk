@@ -107,7 +107,8 @@ func _physics_process(delta):
 		if not chasing:
 			start_chase_state()
 	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
-		end_chase_state()
+		if chasing:
+			end_chase_state()
 	if navigation_agent.is_navigation_finished() and not aiming:
 		velocity = Vector2.ZERO
 		state = IDLE

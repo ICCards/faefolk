@@ -17,6 +17,7 @@ func _ready():
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true
+	update_navigation()
 
 func advance_up_cave_level():
 	if not is_changing_scene:

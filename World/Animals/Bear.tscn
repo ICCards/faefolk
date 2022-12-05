@@ -745,7 +745,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 6
+frame = 4
 playing = true
 
 [node name="Timers" type="Node" parent="."]

@@ -461,7 +461,7 @@ visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 182 )
-frame = 9
+frame = 2
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]
@@ -519,7 +519,7 @@ wait_time = 3.5
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
 target_desired_distance = 20.0
-path_max_distance = 20.0
+path_max_distance = 10.0
 avoidance_enabled = true
 max_speed = 100.0
 

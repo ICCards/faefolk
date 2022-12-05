@@ -8,7 +8,7 @@ var nav_node
 var count = 0
 var cave_chest_id = "level 1, room 1"
 
-var NUM_BATS = 4
+var NUM_BATS = 3
 var NUM_SLIMES = 3
 var NUM_SPIDERS = 3
 var NUM_SKELETONS = 0
@@ -19,6 +19,7 @@ func _ready():
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true
+	update_navigation()
 
 
 func advance_up_cave_level():
