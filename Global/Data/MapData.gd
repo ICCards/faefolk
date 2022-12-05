@@ -274,8 +274,8 @@ var cave_20_data = {
 
 func _ready() -> void:
 	world = JsonData.world_data
-#	add_tiles_to_chunks()
-#	add_nature_objects_to_chunks()
+	add_tiles_to_chunks()
+	add_nature_objects_to_chunks()
 
 func add_placable(id, data):
 	var map = return_cave_data(Server.world.name)
