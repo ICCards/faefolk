@@ -294,7 +294,7 @@ func play_craft_sound():
 	
 func play_error_sound():
 	$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
 	$SoundEffects.play()
 
 

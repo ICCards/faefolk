@@ -34,7 +34,7 @@ func spawn_placables():
 		var item_name = MapData.world["placables"][id]["n"]
 		var location = MapData.world["placables"][id]["l"]
 		if item_name == "wall" or item_name == "foundation":
-			PlaceObject.place_building_object_in_world(id,item_name,location)
+			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placables"][id]["v"],location)
 		else:
 			PlaceObject.place_object_in_world(id,item_name,MapData.world["placables"][id]["d"],location)
 

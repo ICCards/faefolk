@@ -553,7 +553,7 @@ material = ExtResource( 15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "walk right"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -561,7 +561,7 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
-frame = 13
+frame = 12
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]

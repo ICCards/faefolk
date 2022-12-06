@@ -11056,11 +11056,10 @@ expand_margin_bottom = 4.0
 
 [sub_resource type="CapsuleShape2D" id=11]
 radius = 8.00011
-height = 7.99978
+height = 3.99978
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0, -1 )
-collision_layer = 0
 collision_mask = 2097153
 script = ExtResource( 8 )
 
@@ -11575,7 +11574,6 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708

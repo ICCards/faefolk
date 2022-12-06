@@ -463,10 +463,10 @@ texture = ExtResource( 4 )
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 40 )
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 262400
 collision_mask = 0
 
@@ -479,6 +479,7 @@ anims/RESET = SubResource( 42 )
 anims/hit = SubResource( 43 )
 
 [node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -536,7 +537,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 51 )
-frame = 4
+frame = 5
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

@@ -7,10 +7,10 @@ var is_changing_scene: bool = false
 var nav_node
 var cave_chest_id = "level 1, room 10"
 var count = 0
-var NUM_BATS = 2
-var NUM_SLIMES = 2
-var NUM_SPIDERS = 2
-var NUM_SKELETONS = 2
+var NUM_BATS = 0
+var NUM_SLIMES = 0
+var NUM_SPIDERS = 0
+var NUM_SKELETONS = 0
 var map_size = 50
 
 func _ready():
@@ -29,7 +29,7 @@ func advance_up_cave_level():
 			node.destroy()
 		for node in $Enemies.get_children():
 			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 7/Cave 7.tscn")
+		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 3/Cave 3.tscn")
 
 func advance_down_cave_level():
 	if not is_changing_scene:

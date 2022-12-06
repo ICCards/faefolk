@@ -2,17 +2,25 @@ extends Node
 
 
 var skills = {
-	"farming": 0,
-	"mining": 0,
-	"foraging": 0,
-	"fishing": 0,
-	"swordsmanship": 0,
-	"markmanship": 0,
-	"lightning magic": 0,
-	"fire magic": 0,
-	"wind magic": 0,
-	"ice magic": 0,
-	"healing magic": 0
+	"sword": 1,
+	"bow": 1,
+	"dark": 0,
+	"electric": 0,
+	"earth": 0,
+	"fire": 0,
+	"wind": 0,
+	"ice": 0,
+}
+
+var skill_descriptions = {
+	"sword": {1:{"n":"Sword swing","c":"1 energy","d":"A fast sword swipe."}, 2: {"n":"Sword defense","c":"1 energy","d":"Protects against incoming enemy projectiles."}, 3: {"n":"Enchantment","c":"1 mana","d":"Allows poison, ice or fire attacks."}, 4: {"n":"TBD","c":"TBD","d":"TBD"}},
+	"bow": {1:{"n":"Single-shot","c":"1 energy, 1 arrow","d":"Shoots a single arrow projectile."}, 2: {"n":"Multi-shot","c":"1 energy, 3 arrows","d":"Shoots three arrow projectiles."}, 3: {"n":"Enchantment","c":"1 mana","d":"Allows poison, ice or fire attacks."}, 4: {"n":"Ricochet shot","c":"1 energy, 1 arrow","d":"Makes arrows bounce between close targets"}},
+	"dark": {1:{"n":"Demon warrior","c":"1 mana","d":"..."}, 2: {"n":"Invisibility","c":"2 mana","d":"..."}, 3: {"n":"Demon mage","c":"5 mana","d":"..."}, 4: {"n":"Portal","c":"10 mana","d":"..."}},
+	"electric": {1:{"n":"Electric chain","c":"1 mana","d":"..."}, 2: {"n":"Flash-step","c":"2 mana","d":"..."}, 3: {"n":"Stunned electric chain","c":"5 mana","d":"..."}, 4: {"n":"Lightning strike","c":"10 mana","d":"..."}},
+	"earth": {1:{"n":"Electric chain","c":"1 mana","d":"..."}, 2: {"n":"Flash-step","c":"2 mana","d":"..."}, 3: {"n":"Stunned electric chain","c":"5 mana","d":"..."}, 4: {"n":"Lightning strike","c":"10 mana","d":"..."}},
+	"fire": 0,
+	"wind": 0,
+	"ice": 0,
 }
 
 var forage = {

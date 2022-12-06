@@ -1,7 +1,7 @@
 extends Control
 
 
-
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
 var buttons = ["wood", "stone", "metal", "armored", "demolish"]
 var current_index = -1
 var location
@@ -29,12 +29,38 @@ func _physics_process(delta):
 		$Title.show()
 		$Title.text = buttons[current_index][0].to_upper() + buttons[current_index].substr(1,-1) + ":"
 		$Resources.show()
-		$Resources.text = "1 x Wood ( " + PlayerInventory.total_wood() + " )"
+		$Resources.bbcode_text = return_resource_cost_string(current_index)
 	else:
 		$Title.hide()
 		$Resources.hide()
 		
 		
+func return_resource_cost_string(index):
+	match index:
+		0:
+			if PlayerInventory.return_resource_total("wood") >= 20:
+				return "[center]20 x Wood ( [color=#00ff00]" + str(PlayerInventory.return_resource_total("wood")) + "[/color] )[/center]"
+			else:
+				return "[center]20 x Wood ( [color=#ff0000]" + str(PlayerInventory.return_resource_total("wood")) + "[/color] )[/center]"
+		1:
+			if PlayerInventory.return_resource_total("stone") >= 30:
+				return "[center]30 x Stone ( [color=#00ff00]" + str(PlayerInventory.return_resource_total("stone")) + "[/color] )[/center]"
+			else:
+				return "[center]30 x Stone ( [color=#ff0000]" + str(PlayerInventory.return_resource_total("stone")) + "[/color] )[/center]"
+		2:
+			if PlayerInventory.return_resource_total("bronze ingot") >= 20:
+				return "[center]20 x Bronze ingot ( [color=#00ff00]" + str(PlayerInventory.return_resource_total("bronze ingot")) + "[/color] )[/center]"
+			else:
+				return "[center]20 x Bronze ingot ( [color=#ff0000]" + str(PlayerInventory.return_resource_total("bronze ingot")) + "[/color] )[/center]"
+		3:
+			if PlayerInventory.return_resource_total("iron ingot") >= 25:
+				return "[center]25 x Iron ingot ( [color=#00ff00]" + str(PlayerInventory.return_resource_total("iron ingot")) + "[/color] )[/center]"
+			else:
+				return "[center]25 x Iron ingot ( [color=#ff0000]" + str(PlayerInventory.return_resource_total("iron ingot")) + "[/color] )[/center]"
+		4:
+			return ""
+	
+
 func set_icon_position():
 	match current_index:
 		-1:
@@ -120,13 +146,22 @@ func destroy():
 		current_index = -1
 
 func change_tile():
-	var new_tier = buttons[current_index]
-	tile_node.tier = new_tier
-	tile_node.set_type()
-	if new_tier != "demolish":
-		InstancedScenes.play_upgrade_building_effect(location)
+	if return_valid_building_upgrade(current_index):
+		var new_tier = buttons[current_index]
+		tile_node.tier = new_tier
+		tile_node.set_type()
+		remove_materials(current_index)
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Building/crafting.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
+		if new_tier != "demolish":
+			InstancedScenes.play_upgrade_building_effect(location)
+		else:
+			InstancedScenes.play_remove_building_effect(location)
 	else:
-		InstancedScenes.play_remove_building_effect(location)
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
+		sound_effects.play()
 
 func _input(event):
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
@@ -136,3 +171,30 @@ func _input(event):
 					destroy()
 					yield(get_tree().create_timer(0.25), "timeout")
 					PlayerInventory.viewInventoryMode = false
+
+func remove_materials(index):
+	match index:
+		0:
+			PlayerInventory.remove_material("wood", 20)
+		1:
+			PlayerInventory.remove_material("stone", 30)
+		2:
+			PlayerInventory.remove_material("bronze ingot", 20)
+		3:
+			PlayerInventory.remove_material("iron ingot", 25)
+		4:
+			pass
+			
+
+func return_valid_building_upgrade(index):
+	match index:
+		0:
+			return PlayerInventory.returnSufficentCraftingMaterial("wood", 20)
+		1:
+			return PlayerInventory.returnSufficentCraftingMaterial("stone", 30)
+		2:
+			return PlayerInventory.returnSufficentCraftingMaterial("bronze ingot", 20)
+		3:
+			return PlayerInventory.returnSufficentCraftingMaterial("iron ingot", 25)
+		4:
+			return true

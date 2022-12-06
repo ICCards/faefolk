@@ -140,29 +140,21 @@ func isSufficientMaterialToCraft(item):
 			return false
 	return true
 
-
-func total_wood():
-	var total_wood = 0
-	for slot in hotbar:
-		if hotbar[slot][0] == "wood":
-			total_wood +=  hotbar[slot][1]
-	for slot in inventory:
-		if inventory[slot][0] == "wood":
-			total_wood += inventory[slot][1]
-	return str(total_wood)
-
-func returnSufficentCraftingMaterial(ingredient, amount_needed):
+func return_resource_total(item_name):
 	var total = 0
 	for slot in hotbar:
-		if hotbar[slot][0] == ingredient:
+		if hotbar[slot][0] == item_name:
 			total +=  hotbar[slot][1]
 	for slot in inventory:
-		if inventory[slot][0] == ingredient:
+		if inventory[slot][0] == item_name:
 			total += inventory[slot][1]
+	return total
+
+func returnSufficentCraftingMaterial(ingredient, amount_needed):
+	var total = return_resource_total(ingredient)
 	if total >= amount_needed:
 		return true
-	else:
-		return false
+	return false
 
 
 func craft_item(item):

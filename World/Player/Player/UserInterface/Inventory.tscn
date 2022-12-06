@@ -1,0 +1,694 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=2]
+[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" type="Script" id=5]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/PetUI.gd" type="Script" id=6]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=7]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=9]
+[ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Images/Inventory UI/frame with background.png" type="Texture" id=13]
+
+[sub_resource type="StyleBoxTexture" id=17]
+texture = ExtResource( 11 )
+region_rect = Rect2( 0, 0, 30, 14 )
+
+[sub_resource type="StyleBoxTexture" id=18]
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 46, 14 )
+
+[sub_resource type="StyleBoxTexture" id=20]
+texture = ExtResource( 11 )
+region_rect = Rect2( 0, 0, 30, 14 )
+
+[sub_resource type="StyleBoxTexture" id=19]
+texture = ExtResource( 11 )
+region_rect = Rect2( 0, 0, 30, 14 )
+
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeadAtr:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Arms:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shirts:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Accessory:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "loop"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeadAtr:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Arms:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shirts:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Accessory:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Inventory" type="Control"]
+visible = false
+margin_left = -377.0
+margin_top = 39.0
+margin_right = -377.0
+margin_bottom = 39.0
+script = ExtResource( 5 )
+
+[node name="NameOfSong" type="Label" parent="."]
+margin_left = 369.0
+margin_top = 343.0
+margin_right = 716.0
+margin_bottom = 404.0
+rect_scale = Vector2( 0.8, 0.8 )
+theme = ExtResource( 4 )
+text = "A productive day"
+
+[node name="SkipSong" type="Button" parent="."]
+margin_left = 506.0
+margin_top = 435.0
+margin_right = 606.0
+margin_bottom = 474.0
+text = "SKIP SONG"
+
+[node name="HotbarLabels" type="HBoxContainer" parent="."]
+margin_left = 114.0
+margin_top = 84.0
+margin_right = 2709.0
+margin_bottom = 145.0
+rect_scale = Vector2( 0.2, 0.2 )
+custom_constants/separation = 260
+
+[node name="1" type="Label" parent="HotbarLabels"]
+margin_right = 19.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "1"
+
+[node name="2" type="Label" parent="HotbarLabels"]
+margin_left = 279.0
+margin_right = 306.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "2"
+
+[node name="3" type="Label" parent="HotbarLabels"]
+margin_left = 566.0
+margin_right = 593.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "3"
+
+[node name="4" type="Label" parent="HotbarLabels"]
+margin_left = 853.0
+margin_right = 876.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "4"
+
+[node name="5" type="Label" parent="HotbarLabels"]
+margin_left = 1136.0
+margin_right = 1163.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "5"
+
+[node name="6" type="Label" parent="HotbarLabels"]
+margin_left = 1423.0
+margin_right = 1450.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "6"
+
+[node name="7" type="Label" parent="HotbarLabels"]
+margin_left = 1710.0
+margin_right = 1735.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "7"
+
+[node name="8" type="Label" parent="HotbarLabels"]
+margin_left = 1995.0
+margin_right = 2022.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "8"
+
+[node name="9" type="Label" parent="HotbarLabels"]
+margin_left = 2282.0
+margin_right = 2308.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "9"
+
+[node name="0" type="Label" parent="HotbarLabels"]
+margin_left = 2568.0
+margin_right = 2595.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "0"
+
+[node name="InventorySlots" type="GridContainer" parent="."]
+margin_left = 90.0
+margin_top = 166.0
+margin_right = 657.0
+margin_bottom = 220.0
+custom_constants/vseparation = 3
+custom_constants/hseparation = 3
+columns = 10
+
+[node name="Slot1" type="Panel" parent="InventorySlots"]
+margin_right = 54.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot2" type="Panel" parent="InventorySlots"]
+margin_left = 57.0
+margin_right = 111.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot3" type="Panel" parent="InventorySlots"]
+margin_left = 114.0
+margin_right = 168.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot4" type="Panel" parent="InventorySlots"]
+margin_left = 171.0
+margin_right = 225.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot5" type="Panel" parent="InventorySlots"]
+margin_left = 228.0
+margin_right = 282.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot6" type="Panel" parent="InventorySlots"]
+margin_left = 285.0
+margin_right = 339.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot7" type="Panel" parent="InventorySlots"]
+margin_left = 342.0
+margin_right = 396.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot8" type="Panel" parent="InventorySlots"]
+margin_left = 399.0
+margin_right = 453.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot9" type="Panel" parent="InventorySlots"]
+margin_left = 456.0
+margin_right = 510.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot10" type="Panel" parent="InventorySlots"]
+margin_left = 513.0
+margin_right = 567.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="HotbarSlots" type="GridContainer" parent="."]
+margin_left = 90.0
+margin_top = 97.0
+margin_right = 657.0
+margin_bottom = 151.0
+rect_min_size = Vector2( 54, 54 )
+custom_constants/vseparation = 3
+custom_constants/hseparation = 3
+columns = 10
+
+[node name="Slot1" type="Panel" parent="HotbarSlots"]
+margin_right = 54.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot2" type="Panel" parent="HotbarSlots"]
+margin_left = 57.0
+margin_right = 111.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot3" type="Panel" parent="HotbarSlots"]
+margin_left = 114.0
+margin_right = 168.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot4" type="Panel" parent="HotbarSlots"]
+margin_left = 171.0
+margin_right = 225.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot5" type="Panel" parent="HotbarSlots"]
+margin_left = 228.0
+margin_right = 282.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot6" type="Panel" parent="HotbarSlots"]
+margin_left = 285.0
+margin_right = 339.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot7" type="Panel" parent="HotbarSlots"]
+margin_left = 342.0
+margin_right = 396.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot8" type="Panel" parent="HotbarSlots"]
+margin_left = 399.0
+margin_right = 453.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot9" type="Panel" parent="HotbarSlots"]
+margin_left = 456.0
+margin_right = 510.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="Slot10" type="Panel" parent="HotbarSlots"]
+margin_left = 513.0
+margin_right = 567.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 3 )
+
+[node name="LockedSlots" type="GridContainer" parent="."]
+margin_left = 90.0
+margin_top = 224.0
+margin_right = 657.0
+margin_bottom = 278.0
+custom_constants/vseparation = 6
+custom_constants/hseparation = 3
+columns = 10
+
+[node name="locked1" type="TextureRect" parent="LockedSlots"]
+margin_right = 54.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked2" type="TextureRect" parent="LockedSlots"]
+margin_left = 57.0
+margin_right = 111.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked3" type="TextureRect" parent="LockedSlots"]
+margin_left = 114.0
+margin_right = 168.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked4" type="TextureRect" parent="LockedSlots"]
+margin_left = 171.0
+margin_right = 225.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked5" type="TextureRect" parent="LockedSlots"]
+margin_left = 228.0
+margin_right = 282.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked6" type="TextureRect" parent="LockedSlots"]
+margin_left = 285.0
+margin_right = 339.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked7" type="TextureRect" parent="LockedSlots"]
+margin_left = 342.0
+margin_right = 396.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked8" type="TextureRect" parent="LockedSlots"]
+margin_left = 399.0
+margin_right = 453.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked9" type="TextureRect" parent="LockedSlots"]
+margin_left = 456.0
+margin_right = 510.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked10" type="TextureRect" parent="LockedSlots"]
+margin_left = 513.0
+margin_right = 567.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="AttributeSlots" type="GridContainer" parent="."]
+margin_left = 92.0
+margin_top = 324.0
+margin_right = 308.0
+margin_bottom = 498.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 132
+columns = 2
+
+[node name="locked1" type="TextureRect" parent="AttributeSlots"]
+margin_right = 54.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked2" type="TextureRect" parent="AttributeSlots"]
+margin_left = 186.0
+margin_right = 240.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+
+[node name="locked3" type="TextureRect" parent="AttributeSlots"]
+margin_top = 58.0
+margin_right = 54.0
+margin_bottom = 112.0
+texture = ExtResource( 2 )
+
+[node name="locked4" type="TextureRect" parent="AttributeSlots"]
+margin_left = 186.0
+margin_top = 58.0
+margin_right = 240.0
+margin_bottom = 112.0
+texture = ExtResource( 2 )
+
+[node name="locked5" type="TextureRect" parent="AttributeSlots"]
+margin_top = 116.0
+margin_right = 54.0
+margin_bottom = 170.0
+texture = ExtResource( 2 )
+
+[node name="locked6" type="TextureRect" parent="AttributeSlots"]
+margin_left = 186.0
+margin_top = 116.0
+margin_right = 240.0
+margin_bottom = 170.0
+texture = ExtResource( 2 )
+
+[node name="PetUI" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 6 )
+
+[node name="PetLabel" type="Label" parent="PetUI"]
+margin_left = 49.0
+margin_top = 672.0
+margin_right = 141.0
+margin_bottom = 763.0
+rect_scale = Vector2( 1.25, 1.25 )
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Pet:"
+valign = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PetUI"]
+position = Vector2( 257, 684 )
+scale = Vector2( 4, 4 )
+frames = ExtResource( 1 )
+animation = "idle right"
+frame = 10
+playing = true
+
+[node name="HideShowButton" type="Button" parent="PetUI"]
+margin_left = 393.0
+margin_top = 688.0
+margin_right = 554.0
+margin_bottom = 767.0
+theme = ExtResource( 4 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 20 )
+custom_styles/normal = SubResource( 19 )
+text = "Hide"
+
+[node name="PlayerFrame" type="TextureRect" parent="."]
+margin_left = 152.0
+margin_top = 320.0
+margin_right = 286.0
+margin_bottom = 518.0
+rect_scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 13 )
+
+[node name="CompositeSprites" type="Node2D" parent="."]
+material = ExtResource( 9 )
+position = Vector2( 212, 465 )
+scale = Vector2( 3.5, 3.5 )
+script = ExtResource( 10 )
+
+[node name="Body" type="Sprite" parent="CompositeSprites"]
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 7 )
+hframes = 4
+
+[node name="Legs" type="Sprite" parent="CompositeSprites"]
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 7 )
+hframes = 4
+
+[node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="Arms" type="Sprite" parent="CompositeSprites"]
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 8 )
+hframes = 4
+
+[node name="Shirts" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="Pants" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="Accessory" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="Shoes" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
+visible = false
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
+anims/RESET = SubResource( 21 )
+anims/loop = SubResource( 22 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="SkipSong" to="." method="_on_SkipSong_pressed"]
+[connection signal="pressed" from="PetUI/HideShowButton" to="PetUI" method="_on_HideShowButton_pressed"]

@@ -39,7 +39,7 @@ func advance_down_cave_level():
 			node.destroy()
 		for node in $Enemies.get_children():
 			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 4/Cave 4.tscn")
+		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 10/Cave 10.tscn")
 	
 func _on_SpawnBatTimer_timeout():
 	if count < NUM_BATS:

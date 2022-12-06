@@ -216,12 +216,16 @@ theme = ExtResource( 10 )
 text = "Metal:"
 align = 1
 
-[node name="Resources" type="Label" parent="."]
-margin_left = 418.0
-margin_top = 281.0
-margin_right = 1051.0
-margin_bottom = 342.0
+[node name="Resources" type="RichTextLabel" parent="."]
+margin_left = 414.0
+margin_top = 282.0
+margin_right = 1067.0
+margin_bottom = 345.0
 rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 10 )
+bbcode_enabled = true
+bbcode_text = "[center]1 x Wood(total wood)[/center]"
 text = "1 x Wood(total wood)"
-align = 1
+scroll_active = false
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]

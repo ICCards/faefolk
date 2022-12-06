@@ -55,7 +55,7 @@ func place_seed_in_world(id, item_name, location, days):
 	plantedCrop.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0, 16)
 
 
-func place_building_object_in_world(id, item_name, location):
+func place_building_object_in_world(id, item_name, variety , location):
 	PlacableObjects = Server.world.get_node("PlacableObjects")
 	rng.randomize()
 	match item_name:
@@ -64,8 +64,8 @@ func place_building_object_in_world(id, item_name, location):
 			object.name = str(id)
 			object.location = location
 			object.item_name = item_name
-			object.tier = "twig"
-			object.id = rng.randi_range(0, 10000)
+			object.tier = variety
+			object.id = id
 			PlacableObjects.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 			Tiles.remove_valid_tiles(location, Vector2(1,1))
@@ -74,7 +74,8 @@ func place_building_object_in_world(id, item_name, location):
 			object.name = str(id)
 			object.location = location
 			object.item_name = item_name
-			object.tier = "twig"
+			object.id = id
+			object.tier = variety
 			PlacableObjects.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 
@@ -93,13 +94,13 @@ func place_object_in_world(id, item_name, direction, location):
 	tileObjectHurtBox.item_name = item_name
 	tileObjectHurtBox.location = location
 	tileObjectHurtBox.direction = direction
+	tileObjectHurtBox.id = id
 	PlacableObjects.call_deferred("add_child", tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 	remove_valid_tiles(item_name, direction, location)
 	match item_name:
 		"wood gate":
 			tileObjectHurtBox.queue_free()
-			
 		"round table1":
 			Tiles.object_tiles.set_cellv(location, 175)
 		"round table2": 

@@ -39,8 +39,6 @@ func PlayEffect(_player_id):
 
 func set_dimensions():
 	rng.randomize()
-	id = str(rng.randi_range(0, 100000))
-	name = str(id)
 	item_name = Util.return_adjusted_item_name(item_name)
 	$Position2D.scale = Constants.dimensions_dict[item_name]
 	if item_name == "wood chest" or item_name == "stone chest":
@@ -269,8 +267,6 @@ func _input(event):
 	elif event.is_action_pressed("action") and Server.player_node.state == 7:
 		Server.player_node.stand_up()
 		
-		
-		
 func return_adjusted_chair_position(direction):
 	match item_name:
 		"chair":
@@ -352,7 +348,7 @@ func _on_HurtBox_area_entered(area):
 	Tiles.fence_tiles.set_cellv(location, -1)
 	Tiles.fence_tiles.update_bitmask_area(location)
 	InstancedScenes.intitiateItemDrop(item_name, position, 1)
-	MapData.remove_placable(id)
+	MapData.remove_placable(str(name))
 	yield($SoundEffects, "finished")
 	queue_free()
 

@@ -32,6 +32,9 @@ enum {
 	CUSTOMIZABLE_ROTATABLE
 }
 
+var _uuid = preload("res://helpers/UUID.gd")
+onready var uuid = _uuid.new()
+
 func _ready():
 	initialize()
 
@@ -405,15 +408,21 @@ func place_object(item_name, direction, location, type):
 			PlayerInventory.remove_single_object_from_hotbar()
 		var id = Uuid.v4()
 		if type == "placable":
-			MapData.add_placable(id, {"n":item_name,"d":direction,"l":location})
-			$SoundEffects.stream = Sounds.place_object
-			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-			$SoundEffects.play()
-			if item_name == "wall" or item_name == "foundation":
-				PlayerInventory.remove_material("wood", 1)
-				PlaceObject.place_building_object_in_world(id, item_name, location)
+			if PlayerInventory.returnSufficentCraftingMaterial("wood", 5):
+				$SoundEffects.stream = Sounds.place_object
+				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+				$SoundEffects.play()
+				if item_name == "wall" or item_name == "foundation":
+					MapData.add_placable(id, {"n":item_name,"v":"twig","l":location})
+					PlayerInventory.remove_material("wood", 5)
+					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
+				else:
+					MapData.add_placable(id, {"n":item_name,"d":direction,"l":location})
+					PlaceObject.place_object_in_world(id, item_name, direction, location)
 			else:
-				PlaceObject.place_object_in_world(id, item_name, direction, location)
+				$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
+				$SoundEffects.play()
 		elif type == "seed":
 			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

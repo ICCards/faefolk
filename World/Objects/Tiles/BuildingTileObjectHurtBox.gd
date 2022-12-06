@@ -30,6 +30,8 @@ func remove_icon():
 	Tiles.selected_foundation_tiles.set_cellv(location,-1)
 	
 func set_type():
+	if tier != "demolish":
+		MapData.world["placables"][str(name)]["v"] = tier
 	match item_name:
 		"wall":
 			match tier:
@@ -104,13 +106,14 @@ func update_health_bar():
 
 
 func remove_wall():
-	MapData.remove_placable(id)
+	MapData.remove_placable(str(name))
 	Tiles.add_valid_tiles(location)
 	Tiles.wall_tiles.set_cellv(location, -1)
 	Tiles.wall_tiles.update_bitmask_area(location)
 	queue_free()
 
 func remove_foundation():
+	MapData.remove_placable(str(name))
 	Tiles.foundation_tiles.set_cellv(location, -1)
 	Tiles.foundation_tiles.update_bitmask_area(location)
 	queue_free()
@@ -187,7 +190,7 @@ func show_selected_tile():
 
 func _on_HammerRepairBox_area_entered(area):
 	set_type()
-	Server.world.play_upgrade_building_effect(location)
+	InstancedScenes.play_upgrade_building_effect(location)
 	show_health()
 
 

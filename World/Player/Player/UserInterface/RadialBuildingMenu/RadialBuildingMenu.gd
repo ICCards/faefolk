@@ -27,7 +27,10 @@ func _physics_process(delta):
 		$Title.show()
 		$Title.text = buildings[current_item][0].to_upper() + buildings[current_item].substr(1,-1) + ":"
 		$Resources.show()
-		$Resources.text = "1 x Wood ( " + PlayerInventory.total_wood() + " )"
+		if current_item == 1 or current_item == 0:
+			$Resources.text = "5 x Wood ( " + str(PlayerInventory.return_resource_total("wood")) + " )"
+		else:
+			$Resources.text = "Coming soon..."
 	else:
 		$Title.hide()
 		$Resources.hide()
