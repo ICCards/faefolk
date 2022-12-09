@@ -2,14 +2,14 @@ extends Control
 
 var skill = "sword"
 
-func _ready():
-	initialize()
-
 func initialize():
+	show()
 	set_bg()
 	
 func set_bg():
 	$Background.texture = load("res://Assets/Images/Inventory UI/skill menus/"+skill+".png")
+	$FrontPgBar.texture_progress = load("res://Assets/Images/Spell icons/"+ skill +"/front.png")
+	$BackPgBar.texture_progress = load("res://Assets/Images/Spell icons/"+ skill +"/back.png")
 	$Title.text = skill[0].to_upper() + skill.substr(1,-1)
 	set_skills()
 	match skill:
@@ -87,7 +87,38 @@ func set_bg():
 			$DarkMagicBtn.rect_position.x = 130
 			
 func set_skills():
-	var level = CollectionsData.skills[skill]
+	var experience = CollectionsData.skill_experience[skill]
+	var level
+	if experience == 0:
+		level = 0
+		$BackPgBar.value = 0
+		$FrontPgBar.value = 0
+		$BackPgBar.max_value = 100
+		$FrontPgBar.max_value = 100
+	elif experience < 100:
+		level = 1
+		$BackPgBar.value = experience
+		$FrontPgBar.value = experience * 0.95
+		$BackPgBar.max_value = 100
+		$FrontPgBar.max_value = 100
+	elif experience < 500:
+		level = 2
+		$BackPgBar.value = experience
+		$FrontPgBar.value = experience * 0.95
+		$BackPgBar.max_value = 500
+		$FrontPgBar.max_value = 500
+	elif experience < 1000:
+		level = 3
+		$BackPgBar.value = experience
+		$FrontPgBar.value = experience * 0.95
+		$BackPgBar.max_value = 1000
+		$FrontPgBar.max_value = 1000
+	else: 
+		level = 4
+		$BackPgBar.value = 1000
+		$FrontPgBar.value = 1000 * 0.95
+		$BackPgBar.max_value = 1000
+		$FrontPgBar.max_value = 1000
 	if level == 0:
 		$Icon1.texture = load("res://Assets/Images/Spell icons/"+skill+"/locked.png")
 		$Icon2.texture = load("res://Assets/Images/Spell icons/"+skill+"/locked.png")
@@ -97,8 +128,15 @@ func set_skills():
 		$AttackTitles/Attack2.text = "?????"
 		$AttackTitles/Attack3.text = "?????"
 		$AttackTitles/Attack4.text = "?????"
+		$AttackDescriptions/Attack1.text = "?????"
+		$AttackDescriptions/Attack2.text = "?????"
+		$AttackDescriptions/Attack3.text = "?????"
+		$AttackDescriptions/Attack4.text = "?????"
+		$AttackCosts/Attack1.text = "?????"
+		$AttackCosts/Attack2.text = "?????"
+		$AttackCosts/Attack3.text = "?????"
+		$AttackCosts/Attack4.text = "?????"
 	elif level == 1:
-		print(CollectionsData.skill_descriptions[skill])
 		$Icon1.texture = load("res://Assets/Images/Spell icons/"+skill+"/1.png")
 		$Icon2.texture = load("res://Assets/Images/Spell icons/"+skill+"/locked.png")
 		$Icon3.texture = load("res://Assets/Images/Spell icons/"+skill+"/locked.png")
@@ -107,6 +145,14 @@ func set_skills():
 		$AttackTitles/Attack2.text = "?????"
 		$AttackTitles/Attack3.text = "?????"
 		$AttackTitles/Attack4.text = "?????"
+		$AttackDescriptions/Attack1.text = CollectionsData.skill_descriptions[skill][1]["d"]
+		$AttackDescriptions/Attack2.text = "?????"
+		$AttackDescriptions/Attack3.text = "?????"
+		$AttackDescriptions/Attack4.text = "?????"
+		$AttackCosts/Attack1.text = CollectionsData.skill_descriptions[skill][1]["c"]
+		$AttackCosts/Attack2.text = "?????"
+		$AttackCosts/Attack3.text = "?????"
+		$AttackCosts/Attack4.text = "?????"
 	elif level == 2:
 		$Icon1.texture = load("res://Assets/Images/Spell icons/"+skill+"/1.png")
 		$Icon2.texture = load("res://Assets/Images/Spell icons/"+skill+"/2.png")
@@ -116,6 +162,14 @@ func set_skills():
 		$AttackTitles/Attack2.text = CollectionsData.skill_descriptions[skill][2]["n"]
 		$AttackTitles/Attack3.text = "?????"
 		$AttackTitles/Attack4.text = "?????"
+		$AttackDescriptions/Attack1.text = CollectionsData.skill_descriptions[skill][1]["d"]
+		$AttackDescriptions/Attack2.text = CollectionsData.skill_descriptions[skill][2]["d"]
+		$AttackDescriptions/Attack3.text = "?????"
+		$AttackDescriptions/Attack4.text = "?????"
+		$AttackCosts/Attack1.text = CollectionsData.skill_descriptions[skill][1]["c"]
+		$AttackCosts/Attack2.text = CollectionsData.skill_descriptions[skill][2]["c"]
+		$AttackCosts/Attack3.text = "?????"
+		$AttackCosts/Attack4.text = "?????"
 	elif level == 3:
 		$Icon1.texture = load("res://Assets/Images/Spell icons/"+skill+"/1.png")
 		$Icon2.texture = load("res://Assets/Images/Spell icons/"+skill+"/2.png")
@@ -125,6 +179,14 @@ func set_skills():
 		$AttackTitles/Attack2.text = CollectionsData.skill_descriptions[skill][2]["n"]
 		$AttackTitles/Attack3.text = CollectionsData.skill_descriptions[skill][3]["n"]
 		$AttackTitles/Attack4.text = "?????"
+		$AttackDescriptions/Attack1.text = CollectionsData.skill_descriptions[skill][1]["d"]
+		$AttackDescriptions/Attack2.text = CollectionsData.skill_descriptions[skill][2]["d"]
+		$AttackDescriptions/Attack3.text = CollectionsData.skill_descriptions[skill][3]["d"]
+		$AttackDescriptions/Attack4.text = "?????"
+		$AttackCosts/Attack1.text = CollectionsData.skill_descriptions[skill][1]["c"]
+		$AttackCosts/Attack2.text = CollectionsData.skill_descriptions[skill][2]["c"]
+		$AttackCosts/Attack3.text = CollectionsData.skill_descriptions[skill][3]["c"]
+		$AttackCosts/Attack4.text = "?????"
 	elif level == 4:
 		$Icon1.texture = load("res://Assets/Images/Spell icons/"+skill+"/1.png")
 		$Icon2.texture = load("res://Assets/Images/Spell icons/"+skill+"/2.png")
@@ -134,25 +196,14 @@ func set_skills():
 		$AttackTitles/Attack2.text = CollectionsData.skill_descriptions[skill][2]["n"]
 		$AttackTitles/Attack3.text = CollectionsData.skill_descriptions[skill][3]["n"]
 		$AttackTitles/Attack4.text = CollectionsData.skill_descriptions[skill][4]["n"]
-	
-#	match skill:
-#		"sword":
-#
-#		"bow":
-#
-#		"wind":
-#
-#		"fire":
-#
-#		"earth":
-#
-#		"ice":
-#
-#		"electric":
-#
-#		"dark":
-
-			
+		$AttackDescriptions/Attack1.text = CollectionsData.skill_descriptions[skill][1]["d"]
+		$AttackDescriptions/Attack2.text = CollectionsData.skill_descriptions[skill][2]["d"]
+		$AttackDescriptions/Attack3.text = CollectionsData.skill_descriptions[skill][3]["d"]
+		$AttackDescriptions/Attack4.text = CollectionsData.skill_descriptions[skill][4]["d"]
+		$AttackCosts/Attack1.text = CollectionsData.skill_descriptions[skill][1]["c"]
+		$AttackCosts/Attack2.text = CollectionsData.skill_descriptions[skill][2]["c"]
+		$AttackCosts/Attack3.text = CollectionsData.skill_descriptions[skill][3]["c"]
+		$AttackCosts/Attack4.text = CollectionsData.skill_descriptions[skill][4]["c"]
 
 func _on_BowBtn_pressed():
 	skill = "bow"

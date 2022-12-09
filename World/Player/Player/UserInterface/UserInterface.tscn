@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Clock/CurrentTime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
@@ -10,10 +10,11 @@
 [ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI2.png" type="Texture" id=8]
 [ext_resource path="res://World/Player/Player/UserInterface/MagicStaff/MagicStaffUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Player/Player/UserInterface/Combat hotbar/Combat hotbar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://World/Player/Player/UserInterface/InsideCaveEffect.gd" type="Script" id=11]
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerStatsUI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" type="AudioStream" id=13]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Sound/Sound effects/Ambience/ES_Thunder Crack - SFX Producer.mp3" type="AudioStream" id=18]
 [ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=19]
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=23]
 
@@ -109,6 +110,36 @@ tracks/0/keys = {
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 23 )
 
+[node name="InsideCaveEffect" type="ColorRect" parent="."]
+margin_left = -49.0
+margin_top = -39.0
+margin_right = 1093.0
+margin_bottom = 657.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.14902 )
+script = ExtResource( 11 )
+
+[node name="WeatherEffects" type="ColorRect" parent="."]
+visible = false
+margin_left = -49.0
+margin_top = -39.0
+margin_right = 1093.0
+margin_bottom = 657.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.52549 )
+script = ExtResource( 19 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherEffects"]
+anims/RESET = SubResource( 18 )
+"anims/lightning day" = SubResource( 19 )
+"anims/lightning night" = SubResource( 17 )
+"anims/set night" = SubResource( 20 )
+
+[node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="WeatherEffects"]
+stream = ExtResource( 13 )
+
+[node name="LightningTimer" type="Timer" parent="WeatherEffects"]
+
 [node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
 visible = false
 margin_left = 209.0
@@ -123,26 +154,6 @@ visible = false
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
-
-[node name="WeatherEffects" type="ColorRect" parent="."]
-visible = false
-margin_left = -49.0
-margin_top = -39.0
-margin_right = 1093.0
-margin_bottom = 657.0
-mouse_filter = 2
-script = ExtResource( 19 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherEffects"]
-anims/RESET = SubResource( 18 )
-"anims/lightning day" = SubResource( 19 )
-"anims/lightning night" = SubResource( 17 )
-"anims/set night" = SubResource( 20 )
-
-[node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="WeatherEffects"]
-stream = ExtResource( 18 )
-
-[node name="LightningTimer" type="Timer" parent="WeatherEffects"]
 
 [node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
 visible = false

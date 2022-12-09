@@ -53,7 +53,7 @@ func advance_down_cave_level():
 			node.destroy()
 		for node in $Enemies.get_children():
 			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1/Cave 1.tscn")
+		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1-1/Cave 1-1.tscn")
 
 
 func buildMap(map):
@@ -69,7 +69,6 @@ func buildMap(map):
 	Tiles.selected_foundation_tiles = $PlacableTiles/SelectedFoundationTiles
 	Tiles.object_tiles = $PlacableTiles/ObjectTiles
 	Tiles.fence_tiles = $PlacableTiles/FenceTiles
-	Tiles.light_tiles = $PlacableTiles/LightTiles
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	Server.isLoaded = true
 	spawn_animals()

@@ -217,5 +217,5 @@ rotation = -1.5708
 scale = Vector2( 2, 2 )
 frames = SubResource( 57 )
 animation = "loop"
-frame = 9
+frame = 1
 playing = true

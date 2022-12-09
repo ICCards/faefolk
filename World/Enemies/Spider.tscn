@@ -561,7 +561,7 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
-frame = 12
+frame = 8
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]

@@ -139,10 +139,10 @@
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "lightning staff": {
+    "electric staff": {
       "ItemCategory": "Magic",
       "StackSize": 1,
-      "Description": "Used to cast lightning spells.",
+      "Description": "Used to cast electric spells.",
       "Ingredients": null,
       "EnergyHealth": null
     },

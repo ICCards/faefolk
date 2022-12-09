@@ -122,7 +122,7 @@ func load_cave():
 
 
 func build_cave():
-	if Server.world.name != "Cave 10-5":
+	if Server.world.name != "Cave 1-Fishing":
 		generate_ore()
 		generate_tall_grass()
 		generate_mushroom_forage()
@@ -209,12 +209,11 @@ func spawn_enemies_randomly():
 	
 	
 func set_chest():
-	var id = rand_range(0,10000)
 	var direction = return_chest_direction(Server.world.get_node("Tiles/Chests").get_used_cells()[0])
 	var loc = Server.world.get_node("Tiles/Chests").get_used_cells()[0]
 	var tileObjectHurtBox = TileObjectHurtBox.instance()
-	tileObjectHurtBox.name = str(id)
-	tileObjectHurtBox.is_preset_object_string = Server.world.cave_chest_id
+	tileObjectHurtBox.name = Server.world.cave_chest_id
+	tileObjectHurtBox.id = Server.world.cave_chest_id
 	tileObjectHurtBox.item_name = "stone chest"
 	tileObjectHurtBox.location = loc
 	tileObjectHurtBox.direction = direction

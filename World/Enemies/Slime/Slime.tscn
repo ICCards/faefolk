@@ -500,7 +500,6 @@ tracks/12/keys = {
 }
 
 [node name="Slime" type="KinematicBody2D"]
-collision_layer = 0
 collision_mask = 2097219
 script = ExtResource( 2 )
 
@@ -541,7 +540,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -6 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 1
+frame = 7
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]

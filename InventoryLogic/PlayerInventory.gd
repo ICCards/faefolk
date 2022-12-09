@@ -22,7 +22,7 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	0: ["lightning staff", 1, null],
+	0: ["electric staff", 1, null],
 	1: ["dark magic staff", 1, null],
 	2: ["fire staff", 1, null],
 	4: ["ice staff", 1, null],
@@ -30,7 +30,7 @@ var inventory = {
 	8: ["wood", 500, null],
 	9: ["stone", 500, null],
 #	9: ["rope", 12, null],
-	#8: ["iron ore", 150, null],
+	7: ["iron ingot", 150, null],
 	#6: ["furnace", 1, null],
 #	7: ["wheat seeds", 60, null],
 #	2: ["gold pickaxe", 1, null]
@@ -125,7 +125,6 @@ var chests = {
 
 var furnaces = {}
 var grain_mills = {}
-var grain_mills_dict = {}
 var stoves = {}
 var tool_cabinets = {}
 

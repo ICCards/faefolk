@@ -1,8 +1,11 @@
 extends Node2D
 
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+var is_hostile: bool = false
 
 func _ready():
+	if is_hostile:
+		$Hitbox.set_collision_mask(2+8+16+128+2048)
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -10)
 	sound_effects.play()
 	$Hitbox.tool_name = "flamethrower"

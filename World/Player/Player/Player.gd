@@ -205,7 +205,7 @@ func set_held_object():
 	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
 		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Magic" or item_name == "bow":
+		if item_category == "Magic" or item_name == "bow" or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
 			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
 			return
 	$Camera2D/UserInterface/MagicStaffUI.hide()
@@ -499,7 +499,7 @@ func walk_state(_direction):
 				holding_item.hide()
 				animation = "walk_" + _direction.to_lower()
 			composite_sprites.set_player_animation(character, animation, null)
-		elif running and Sounds.current_footsteps_sound != Sounds.swimming:
+		elif Input.is_action_pressed("sprint") and Sounds.current_footsteps_sound != Sounds.swimming:
 			decrease_energy_or_health()
 			animation_player.play("sprint")
 			animation = "run_" + _direction.to_lower()

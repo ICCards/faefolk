@@ -136,9 +136,9 @@ func shoot():
 		1:
 			single_arrow_shot()
 		2:
-			pass
-		3: 
 			multi_arrow_shot()
+		3: 
+			pass
 		4:
 			ricochet_arrow_shot()
 
@@ -558,7 +558,6 @@ func play_fire_projectile(debuff):
 	for i in range(3):
 		var spell = FireProjectile.instance()
 		spell.debuff = debuff
-		spell.particles_transform = $CastDirection.transform
 		spell.position = $CastDirection/Position2D.global_position
 		spell.velocity = get_global_mouse_position() - spell.position
 		get_node("../../../Projectiles").add_child(spell)

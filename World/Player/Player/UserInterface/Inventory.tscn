@@ -214,22 +214,6 @@ margin_right = -377.0
 margin_bottom = 39.0
 script = ExtResource( 5 )
 
-[node name="NameOfSong" type="Label" parent="."]
-margin_left = 369.0
-margin_top = 343.0
-margin_right = 716.0
-margin_bottom = 404.0
-rect_scale = Vector2( 0.8, 0.8 )
-theme = ExtResource( 4 )
-text = "A productive day"
-
-[node name="SkipSong" type="Button" parent="."]
-margin_left = 506.0
-margin_top = 435.0
-margin_right = 606.0
-margin_bottom = 474.0
-text = "SKIP SONG"
-
 [node name="HotbarLabels" type="HBoxContainer" parent="."]
 margin_left = 114.0
 margin_top = 84.0
@@ -602,7 +586,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle right"
-frame = 10
+frame = 30
 playing = true
 
 [node name="HideShowButton" type="Button" parent="PetUI"]
@@ -690,5 +674,4 @@ anims/loop = SubResource( 22 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="pressed" from="SkipSong" to="." method="_on_SkipSong_pressed"]
 [connection signal="pressed" from="PetUI/HideShowButton" to="PetUI" method="_on_HideShowButton_pressed"]

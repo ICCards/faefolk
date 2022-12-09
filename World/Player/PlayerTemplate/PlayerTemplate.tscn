@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Characters/Angels/seraphim/male/idle/body/down/body.png" type="Texture" id=1]
 [ext_resource path="res://World/Player/PlayerTemplate/PlayerTemplate.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=8]
 [ext_resource path="res://Assets/Images/Misc/chat bubble.png" type="Texture" id=9]
@@ -220,7 +219,6 @@ scale = Vector2( 2, 2 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 1 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]

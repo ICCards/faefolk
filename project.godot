@@ -57,7 +57,7 @@ GenerateNewWorld="*res://Global/Data/GenerateNewWorld.gd"
 
 [display]
 
-mouse_cursor/custom_image="res://Assets/mouse cursors/Normal Selects.png"
+mouse_cursor/custom_image="res://Assets/mouse cursors/cursor.png"
 window/stretch/mode="2d"
 
 [global]
@@ -279,10 +279,8 @@ change_object_type={
 2d_physics/layer_14="DetectOverlappingObject"
 2d_physics/layer_15="HammerRepairLayer"
 2d_physics/layer_16="EnterSleepingBag"
-2d_physics/layer_17="OpenChest"
-2d_physics/layer_18="OpenWorkbench"
-2d_physics/layer_19="OpenStove"
-2d_physics/layer_20="OpenGrainMill"
+2d_physics/layer_18="EnterInteractiveZones"
+2d_physics/layer_19="Spells"
 2d_physics/layer_21="FishingMiniGame"
 2d_physics/layer_22="HoleInCave"
 

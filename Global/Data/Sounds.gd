@@ -79,8 +79,6 @@ func return_adjusted_sound_db(category, init_sound):
 var current_footsteps_sound
 
 
-
-
 ### Sound effects ##
 var wood_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/wood footsteps.mp3")
 var dirt_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3")
@@ -137,47 +135,48 @@ var bear_grown = [
 
 
 ### Ambient ###
-var rain = preload("res://Assets/Sound/Sound effects/Ambience/ES_Rain Downpour 2 - SFX Producer.mp3")
-var nature = preload("res://Assets/Sound/Sound effects/Ambience/ES_Forest 7 - SFX Producer.mp3")
-var blizzard = preload("res://Assets/Sound/Sound effects/Ambience/ES_Blizzard Forest 5 - SFX Producer.mp3") 
 
 var fire_start = preload("res://Assets/Sound/Sound effects/Fire/start.mp3")
-var fire_crackle = preload("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
+var fire_crackle = preload("res://Assets/Sound/Sound effects/Fire/crackle.wav")
 
 ### Music ###
-var title_music = preload("res://Assets/Sound/music/563_full_wobble-dance_0157.mp3")
+var title_music = preload("res://Assets/Sound/music/wobble dance.mp3")
 var background_music = [
-	preload("res://Assets/Sound/music/125_full_make-it-easy_0159.mp3"),
-	preload("res://Assets/Sound/music/136_full_edutainment_0162.mp3")
+	preload("res://Assets/Sound/music/make it easy.mp3"),
+	preload("res://Assets/Sound/music/edutainment.mp3")
 ]
-
-var demos = [
-	preload("res://Assets/Sound/Demos/8 bit adventure.mp3"),
-	preload("res://Assets/Sound/Demos/8 bit creature.mp3"),
-	preload("res://Assets/Sound/Demos/a productive day.mp3"),
-	preload("res://Assets/Sound/Demos/arcade.mp3"),
-	preload("res://Assets/Sound/Demos/chance time.mp3"),
-	preload("res://Assets/Sound/Demos/clock tower.mp3"),
-	preload("res://Assets/Sound/Demos/dance of the baobabs.mp3"),
-	preload("res://Assets/Sound/Demos/happy donk.mp3"),
-	preload("res://Assets/Sound/Demos/pixel squirrel.mp3"),
-	preload("res://Assets/Sound/Demos/pixel wave.mp3")
+var background_music_names = [
+	"Make it easy",
+	"Edutainment"
 ]
+#
+#var demos = [
+#	preload("res://Assets/Sound/Demos/8 bit adventure.mp3"),
+#	preload("res://Assets/Sound/Demos/8 bit creature.mp3"),
+#	preload("res://Assets/Sound/Demos/a productive day.mp3"),
+#	preload("res://Assets/Sound/Demos/arcade.mp3"),
+#	preload("res://Assets/Sound/Demos/chance time.mp3"),
+#	preload("res://Assets/Sound/Demos/clock tower.mp3"),
+#	preload("res://Assets/Sound/Demos/dance of the baobabs.mp3"),
+#	preload("res://Assets/Sound/Demos/happy donk.mp3"),
+#	preload("res://Assets/Sound/Demos/pixel squirrel.mp3"),
+#	preload("res://Assets/Sound/Demos/pixel wave.mp3")
+#]
 
 signal song_skipped
 signal song_finished
 var index = 0
-var demo_names = [
-	"8 bit adventure",
-	"8 bit creature",
-	"a productive day",
-	"arcade",
-	"chance time",
-	"clock tower",
-	"dance of the baobabs",
-	"happy donk",
-	"pixel squirrel",
-	"pixel wave"
-]
+#var demo_names = [
+#	"8 bit adventure",
+#	"8 bit creature",
+#	"a productive day",
+#	"arcade",
+#	"chance time",
+#	"clock tower",
+#	"dance of the baobabs",
+#	"happy donk",
+#	"pixel squirrel",
+#	"pixel wave"
+#]
 
 

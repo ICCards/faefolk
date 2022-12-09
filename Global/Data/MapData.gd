@@ -131,140 +131,119 @@ var world = {
 	"tile": {},
 	"cave_entrance_location": null
 }
-var cave_1_data = {
+var cave_1_1 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_2_data = {
+var cave_1_2 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_3_data = {
+var cave_1_3 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_4_data = {
+var cave_1_4 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_5_data = {
+var cave_1_5 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_6_data = {
+var cave_1_6 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_7_data = {
+var cave_1_7 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_8_data = {
+var cave_1_boss = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_9_data = {
+var cave_1_fishing = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_10_data = {
+var cave_2_1 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_11_data = {
+var cave_2_2 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_12_data = {
+var cave_2_3 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_13_data = {
+var cave_2_4 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_14_data = {
+var cave_2_5 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_15_data = {
+var cave_2_6 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_16_data = {
+var cave_2_7 = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
 	"tall_grass": {},
 	"mushroom": {}
 }
-var cave_17_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_18_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_19_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_20_data = {
+var cave_2_boss = {
 	"placables":{},
 	"ore": {},
 	"ore_large": {},
@@ -274,8 +253,8 @@ var cave_20_data = {
 
 func _ready() -> void:
 	world = JsonData.world_data
-	add_tiles_to_chunks()
-	add_nature_objects_to_chunks()
+#	add_tiles_to_chunks()
+#	add_nature_objects_to_chunks()
 
 func add_placable(id, data):
 	var map = return_cave_data(Server.world.name)
@@ -298,46 +277,40 @@ func return_cave_data(cave_name):
 	match cave_name:
 		"World":
 			return world
-		"Cave 1":
-			return cave_1_data
-		"Cave 2":
-			return cave_2_data
-		"Cave 3":
-			return cave_3_data
-		"Cave 4":
-			return cave_4_data
-		"Cave 5":
-			return cave_5_data
-		"Cave 6":
-			return cave_6_data
-		"Cave 7":
-			return cave_7_data
-		"Cave 8":
-			return cave_8_data
-		"Cave 9":
-			return cave_9_data
-		"Cave 10":
-			return cave_10_data
-		"Cave 11":
-			return cave_11_data
-		"Cave 12":
-			return cave_12_data
-		"Cave 13":
-			return cave_13_data
-		"Cave 14":
-			return cave_14_data
-		"Cave 15":
-			return cave_15_data
-		"Cave 16":
-			return cave_16_data
-		"Cave 17":
-			return cave_17_data
-		"Cave 18":
-			return cave_18_data
-		"Cave 19":
-			return cave_19_data
-		"Cave 20":
-			return cave_20_data
+		"Cave 1-1":
+			return cave_1_1
+		"Cave 1-2":
+			return cave_1_2
+		"Cave 1-3":
+			return cave_1_3
+		"Cave 1-4":
+			return cave_1_4
+		"Cave 1-5":
+			return cave_1_5
+		"Cave 1-6":
+			return cave_1_6
+		"Cave 1-7":
+			return cave_1_7
+		"Cave 1-Boss":
+			return cave_1_boss
+		"Cave 1-Fishing":
+			return cave_1_fishing
+		"Cave 2-1":
+			return cave_2_1
+		"Cave 2-2":
+			return cave_2_2
+		"Cave 2-3":
+			return cave_2_3
+		"Cave 2-4":
+			return cave_2_4
+		"Cave 2-5":
+			return cave_2_5
+		"Cave 2-6":
+			return cave_2_6
+		"Cave 2-7":
+			return cave_2_7
+		"Cave 2-Boss":
+			return cave_2_boss
 
 func add_nature_objects_to_chunks():
 	for type in nature_types:

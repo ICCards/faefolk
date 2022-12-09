@@ -178,7 +178,7 @@ visible = false
 position = Vector2( 1349, -52 )
 scale = Vector2( 18, 18 )
 frames = SubResource( 6 )
-frame = 4
+frame = 1
 playing = true
 
 [node name="Tween" type="Tween" parent="."]

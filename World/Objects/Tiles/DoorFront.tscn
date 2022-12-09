@@ -1,11 +1,10 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Tilesets/doors/doors/wood.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/4.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/2.png" type="Texture" id=4]
 [ext_resource path="res://World/Objects/Tiles/DoorFront.gd" type="Script" id=5]
-[ext_resource path="res://Assets/skull.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Images/Misc/selected tile 2x1.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/Misc/watering can progress indicator.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=9]
@@ -235,7 +234,6 @@ visible = false
 light_mask = 32
 position = Vector2( 32.0252, -51.5306 )
 scale = Vector2( 0.0504334, 0.0504707 )
-texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 349.28, -178.5, 1269, 2043.62 )
 

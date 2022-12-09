@@ -10,19 +10,61 @@ var COOL_DOWN_PERIOD_3: int = 5
 var COOL_DOWN_PERIOD_4: int = 10
 
 
-func initialize(_staff):
+func initialize(item_name):
 	show()
-	if selected_staff != _staff:
-		selected_spell = 1
-		selected_staff = _staff
-		set_selected_spell()
-		set_bgs()
+	selected_spell = 1
+	if item_name == "wind staff":
+		selected_staff = "wind"
+	elif item_name == "fire staff":
+		selected_staff = "fire"
+	elif item_name == "earth staff":
+		selected_staff = "earth"
+	elif item_name == "ice staff":
+		selected_staff = "ice"
+	elif item_name == "dark magic staff":
+		selected_staff = "dark"
+	elif item_name == "electric staff":
+		selected_staff = "electric"
+	elif item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
+		selected_staff = "sword"
+	elif item_name == "bow":
+		selected_staff = "bow"
+	set_selected_spell()
+	set_bgs()
 
 func set_bgs():
-	$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
-	$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
-	$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
-	$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
+	var experience = CollectionsData.skill_experience[selected_staff]
+	var level
+	if experience == 0:
+		level = 0
+		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+	elif experience < 100:
+		level = 1
+		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+	elif experience < 500:
+		level = 2
+		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
+		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+	elif experience < 1000:
+		level = 3
+		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
+		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
+		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+	else: 
+		level = 4
+		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
+		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
+		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
 
 
 func set_selected_spell():

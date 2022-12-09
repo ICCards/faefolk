@@ -46,12 +46,10 @@ func set_dimensions():
 		$Position2D/StaticBody2D/CollisionShape2D.disabled = false
 		$Position2D/InteractiveArea.object_name = "chest"
 		$Position2D/InteractiveArea.object_level = ""
-		if is_preset_object_string != "":
-			$Position2D/InteractiveArea.name = is_preset_object_string
-			name = is_preset_object_string
-			id = is_preset_object_string
+		$Position2D/InteractiveArea.name = str(id)
+		if PlayerInventory.chests.has(id):
+			pass
 		else:
-			$Position2D/InteractiveArea.name = str(id)
 			PlayerInventory.chests[id] = {}
 		match direction:
 			"left":
@@ -137,7 +135,7 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "grain mill"
 		$Position2D/InteractiveArea.object_level = item_name.substr(12)
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.grain_mills_dict[id] = {}
+		PlayerInventory.grain_mills[id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90

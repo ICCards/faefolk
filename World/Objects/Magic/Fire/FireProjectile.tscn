@@ -153,7 +153,7 @@ shape = SubResource( 20 )
 
 [node name="TrailParticles" type="Node2D" parent="."]
 
-[node name="Particles3" type="CPUParticles2D" parent="TrailParticles"]
+[node name="P3" type="CPUParticles2D" parent="TrailParticles"]
 modulate = Color( 1.35, 1.35, 1.35, 1 )
 position = Vector2( -23, 0 )
 emitting = false
@@ -172,7 +172,7 @@ scale_amount = 4.0
 scale_amount_random = 0.7
 color = Color( 1, 0.792157, 0.203922, 1 )
 
-[node name="Particles2" type="CPUParticles2D" parent="TrailParticles"]
+[node name="P2" type="CPUParticles2D" parent="TrailParticles"]
 modulate = Color( 1.35, 1.35, 1.35, 1 )
 position = Vector2( -23, 0 )
 emitting = false
@@ -191,7 +191,7 @@ scale_amount = 4.0
 scale_amount_random = 0.7
 color = Color( 0.996078, 0.380392, 0.203922, 1 )
 
-[node name="Particles" type="CPUParticles2D" parent="TrailParticles"]
+[node name="P1" type="CPUParticles2D" parent="TrailParticles"]
 modulate = Color( 1.35, 1.35, 1.35, 1 )
 position = Vector2( -23, 0 )
 emitting = false

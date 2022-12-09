@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Images/Farm/player_house.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/Farm/PlayerHouse.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -12,7 +11,6 @@ script = ExtResource( 2 )
 
 [node name="HouseSprite" type="Sprite" parent="."]
 position = Vector2( 192, -85 )
-texture = ExtResource( 1 )
 offset = Vector2( -58, -65 )
 
 [node name="Doorway" type="Area2D" parent="."]
