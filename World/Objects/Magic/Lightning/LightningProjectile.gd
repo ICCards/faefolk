@@ -16,7 +16,7 @@ func _physics_process(delta):
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/electric proj.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/electric proj.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 	sound_effects.play()
 	if debuff:
@@ -46,7 +46,7 @@ func chain_effect(start_name):
 			nodes.append(Vector3(node.position.x, node.position.y, 0))
 	yield(get_tree(), 'idle_frame')
 	InstancedScenes.draw_mst_lightning_lines(nodes)
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/zap.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/zap.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 	sound_effects.play()
 	yield(sound_effects, "finished")

@@ -64,7 +64,7 @@ func _on_BackArea2D_body_exited(body):
 
 
 func _on_Area2D_area_entered(area):
-	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+	#if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
 		front_health -= 1
 		if front_health == 0:
 			$AnimationPlayer.play("animate front")
@@ -85,7 +85,7 @@ func _on_Area2D_area_entered(area):
 			$SoundEffects.play()
 
 func _on_BackArea2D_area_entered(area):
-	if area.tool_name != "lightning spell" or area.tool_name != "explosion spell":
+	#if area.tool_name != "lightning spell" or area.tool_name != "explosion spell":
 		back_heath -= 1
 		if back_heath == 0:
 			$AnimationPlayer.play("animate front")

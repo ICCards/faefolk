@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/crafting.mp3-9f5555e5060a7f197924cdabcc021709.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Building/crafting.mp3"
+dest_files=[ "res://.import/crafting.mp3-9f5555e5060a7f197924cdabcc021709.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

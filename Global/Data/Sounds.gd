@@ -128,16 +128,16 @@ var stump_break = preload("res://Assets/Sound/Sound effects/Tree/Stump break.mp3
 var tool_break = preload("res://Assets/Sound/Sound effects/objects/tool break.mp3")
 
 var bear_grown = [
-	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/ES_Monster Bear Groan 1 - SFX Producer.mp3"),
-	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/ES_Monster Bear Groan 2 - SFX Producer.mp3"),
-	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/ES_Monster Bear Groan 3 - SFX Producer.mp3")
+	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 1.mp3"),
+	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 2.mp3"),
+	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 3.mp3")
 ]
 
 
 ### Ambient ###
 
 var fire_start = preload("res://Assets/Sound/Sound effects/Fire/start.mp3")
-var fire_crackle = preload("res://Assets/Sound/Sound effects/Fire/crackle.wav")
+var fire_crackle = preload("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
 
 ### Music ###
 var title_music = preload("res://Assets/Sound/music/wobble dance.mp3")

@@ -59,7 +59,7 @@ func throw_potion(potion_name, init_direction):
 	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), potion_name)
 	player_animation_player.play("bow draw release")
 	yield(get_tree().create_timer(0.3), "timeout")
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Potion/throw.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Potion/throw.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	yield(player_animation_player, "animation_finished" )

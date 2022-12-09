@@ -2,7 +2,7 @@
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://World/Objects/Magic/Fire/Flamethrower.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Assets/Images/Magic/fire/FlameThrower.png" type="Texture" id=4]
 
 [sub_resource type="Curve" id=31]

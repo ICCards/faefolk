@@ -264,7 +264,7 @@ func cast(staff_name, spell_index):
 		4:
 			PlayerStats.decrease_mana(10)
 	match staff_name:
-		"lightning staff":
+		"electric staff":
 			match spell_index:
 				1:
 					play_lightning_projectile(false)
@@ -359,22 +359,22 @@ func set_portal():
 	if not portal_1_position and not portal_2_position:
 		portal_1_position = get_global_mouse_position()
 		var spell = PortalNode.instance()
-		get_node("../../../Projectiles").add_child(spell)
+		get_node("../../..").add_child(spell)
 		spell.name = "Portal1"
 		spell.position = get_global_mouse_position()
 	elif portal_1_position and not portal_2_position:
 		portal_2_position = get_global_mouse_position()
 		var spell = PortalNode.instance()
-		get_node("../../../Projectiles").add_child(spell)
+		get_node("../../..").add_child(spell)
 		spell.name = "Portal2"
 		spell.position = get_global_mouse_position()
 	elif portal_1_position and portal_2_position:
 		get_node("../../../Projectiles/Portal1").queue_free()
-		get_node("../../../Projectiles/Portal2").queue_free()
+		get_node("../../../Portal2").queue_free()
 		portal_2_position = null
 		portal_1_position = get_global_mouse_position()
 		var spell = PortalNode.instance()
-		get_node("../../../Projectiles").add_child(spell)
+		get_node("../../..").add_child(spell)
 		yield(get_tree(), "idle_frame")
 		spell.name = "Portal1"
 		spell.position = get_global_mouse_position()
@@ -449,7 +449,7 @@ func play_flash_step():
 	if Server.world.name.substr(0,4) == "Cave":
 		if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(mouse_pos)) != -1:
 			return
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/teleport.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/teleport.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	sound_effects.play()
 	yield(get_tree().create_timer(0.2), "timeout")
@@ -516,7 +516,7 @@ func play_wind_projectile():
 	get_node("../../../").add_child(spell)
 
 func play_dash():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Wind/dash.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	sound_effects.play()
 	$DustParticles.emitting = true

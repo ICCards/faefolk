@@ -5,7 +5,7 @@
 [ext_resource path="res://World/Objects/Magic/Ice/BlizzardFog.gd" type="Script" id=3]
 [ext_resource path="res://World/Objects/Nature/Particles/Snow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Ice/blizzard.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Ice/blizzard.mp3" type="AudioStream" id=6]
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 2 )

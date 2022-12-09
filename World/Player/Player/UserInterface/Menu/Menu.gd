@@ -94,7 +94,7 @@ func _on_Exit_pressed():
 
 func _on_BackgroundButton_pressed():
 	if find_parent("UserInterface").holding_item:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/throwDownITem.wav")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/throwDownITem.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 		find_parent("UserInterface").items_to_drop.append([find_parent("UserInterface").holding_item.item_name, find_parent("UserInterface").holding_item.item_quantity, find_parent("UserInterface").holding_item.item_health])

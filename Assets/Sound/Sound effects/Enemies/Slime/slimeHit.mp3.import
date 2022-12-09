@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/slimeHit.mp3-e3c5112d5be13db9385e9b6a5900417b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Enemies/Slime/slimeHit.mp3"
+dest_files=[ "res://.import/slimeHit.mp3-e3c5112d5be13db9385e9b6a5900417b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

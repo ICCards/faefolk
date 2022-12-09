@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fishHit.mp3-84ce89e4dfa7aa77ef5e495f46c79da3.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Fishing/fishHit.mp3"
+dest_files=[ "res://.import/fishHit.mp3-84ce89e4dfa7aa77ef5e495f46c79da3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

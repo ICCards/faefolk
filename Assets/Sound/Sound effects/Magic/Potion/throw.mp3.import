@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/throw.mp3-1a850a8165ffd0f5628f6115b8edf39c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Potion/throw.mp3"
+dest_files=[ "res://.import/throw.mp3-1a850a8165ffd0f5628f6115b8edf39c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

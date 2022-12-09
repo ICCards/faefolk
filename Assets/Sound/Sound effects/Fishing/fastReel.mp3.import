@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fastReel.mp3-84c157dc4987bea49b998238e6e3df23.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Fishing/fastReel.mp3"
+dest_files=[ "res://.import/fastReel.mp3-84c157dc4987bea49b998238e6e3df23.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

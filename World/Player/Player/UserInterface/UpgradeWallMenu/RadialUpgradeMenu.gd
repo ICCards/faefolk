@@ -151,7 +151,7 @@ func change_tile():
 		tile_node.tier = new_tier
 		tile_node.set_type()
 		remove_materials(current_index)
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Building/crafting.wav")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Building/crafting.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 		if new_tier != "demolish":

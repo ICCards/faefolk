@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fire buff.mp3-a490ad4a32fad2411b45f09908925db6.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Fire/fire buff.mp3"
+dest_files=[ "res://.import/fire buff.mp3-a490ad4a32fad2411b45f09908925db6.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

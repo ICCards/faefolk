@@ -424,7 +424,7 @@ func place_object(item_name, direction, location, type):
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
 				$SoundEffects.play()
 		elif type == "seed":
-			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
+			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 			PlaceObject.place_seed_in_world(id, item_name, location, JsonData.crop_data[item_name]["DaysToGrow"])

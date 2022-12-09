@@ -1,4 +1,4 @@
-[gd_scene load_steps=276 format=2]
+[gd_scene load_steps=270 format=2]
 
 [ext_resource path="res://Assets/Themes/water.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/Tilesets/cave hole.png" type="Texture" id=2]
@@ -19,9 +19,6 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/table/sheet.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Images/placable_object_preview/stool.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Images/placable_object_preview/stove #3/up.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Images/Animations/torch/torch.tres" type="Texture" id=20]
-[ext_resource path="res://Assets/Images/Animations/fire pedestal tall/fire_pedestal_tall.tres" type="Texture" id=21]
-[ext_resource path="res://Assets/Images/Animations/fire pedestal/fire_pedestal.tres" type="Texture" id=22]
 [ext_resource path="res://Assets/Images/placable_object_preview/workbench #1/up.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Tilesets/foundation/wood.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Tilesets/Furniture/Furnace-x2.png" type="Texture" id=25]
@@ -101,116 +98,6 @@ outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
-
-[sub_resource type="ConvexPolygonShape2D" id=471]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
-
-[sub_resource type="ConvexPolygonShape2D" id=472]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
-
-[sub_resource type="StreamTexture" id=779]
-load_path = "res://.import/1.png-928147cc442d365e2e82ff4cf2b029cf.stex"
-
-[sub_resource type="StreamTexture" id=780]
-load_path = "res://.import/2.png-c77f361e561629cc418a38d1a6741a11.stex"
-
-[sub_resource type="StreamTexture" id=781]
-load_path = "res://.import/3.png-7b129090d2168bdd1f97f78d0f57ca12.stex"
-
-[sub_resource type="StreamTexture" id=782]
-load_path = "res://.import/4.png-075e4939c626be87ee7ba2bcc05409ea.stex"
-
-[sub_resource type="StreamTexture" id=783]
-load_path = "res://.import/5.png-098470cb2f2d8ffd6ff5b82671e644a4.stex"
-
-[sub_resource type="StreamTexture" id=784]
-load_path = "res://.import/6.png-6e79c03a9d9d0c60a5a37e6a54433953.stex"
-
-[sub_resource type="AnimatedTexture" id=507]
-frames = 6
-frame_0/texture = SubResource( 779 )
-frame_1/texture = SubResource( 780 )
-frame_1/delay_sec = 0.0
-frame_2/texture = SubResource( 781 )
-frame_2/delay_sec = 0.0
-frame_3/texture = SubResource( 782 )
-frame_3/delay_sec = 0.0
-frame_4/texture = SubResource( 783 )
-frame_4/delay_sec = 0.0
-frame_5/texture = SubResource( 784 )
-frame_5/delay_sec = 0.0
-
-[sub_resource type="TileSet" id=785]
-1/name = "fire_pedestal.tres 1"
-1/texture = ExtResource( 22 )
-1/tex_offset = Vector2( 0, -32 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 32, 64 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 471 )
-1/shape_one_way = false
-1/shape_one_way_margin = 1.0
-1/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 471 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-1/z_index = 0
-2/name = "fire_pedestal_tall.tres 2"
-2/texture = ExtResource( 21 )
-2/tex_offset = Vector2( 0, -64 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 0, 0, 32, 96 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape = SubResource( 472 )
-2/shape_one_way = false
-2/shape_one_way_margin = 1.0
-2/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 472 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-2/z_index = 0
-3/name = "torch.tres 3"
-3/texture = ExtResource( 20 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 0, 0, 32, 32 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
-3/z_index = 0
-4/name = "campfire.tres 4"
-4/texture = SubResource( 507 )
-4/tex_offset = Vector2( 0, 0 )
-4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 0, 0, 32, 32 )
-4/tile_mode = 0
-4/occluder_offset = Vector2( 0, 0 )
-4/navigation_offset = Vector2( 0, 0 )
-4/shape_offset = Vector2( 0, 0 )
-4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape_one_way = false
-4/shape_one_way_margin = 0.0
-4/shapes = [  ]
-4/z_index = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=455]
 points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
@@ -427,6 +314,38 @@ points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=508]
 points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+
+[sub_resource type="StreamTexture" id=779]
+load_path = "res://.import/1.png-928147cc442d365e2e82ff4cf2b029cf.stex"
+
+[sub_resource type="StreamTexture" id=780]
+load_path = "res://.import/2.png-c77f361e561629cc418a38d1a6741a11.stex"
+
+[sub_resource type="StreamTexture" id=781]
+load_path = "res://.import/3.png-7b129090d2168bdd1f97f78d0f57ca12.stex"
+
+[sub_resource type="StreamTexture" id=782]
+load_path = "res://.import/4.png-075e4939c626be87ee7ba2bcc05409ea.stex"
+
+[sub_resource type="StreamTexture" id=783]
+load_path = "res://.import/5.png-098470cb2f2d8ffd6ff5b82671e644a4.stex"
+
+[sub_resource type="StreamTexture" id=784]
+load_path = "res://.import/6.png-6e79c03a9d9d0c60a5a37e6a54433953.stex"
+
+[sub_resource type="AnimatedTexture" id=507]
+frames = 6
+frame_0/texture = SubResource( 779 )
+frame_1/texture = SubResource( 780 )
+frame_1/delay_sec = 0.0
+frame_2/texture = SubResource( 781 )
+frame_2/delay_sec = 0.0
+frame_3/texture = SubResource( 782 )
+frame_3/delay_sec = 0.0
+frame_4/texture = SubResource( 783 )
+frame_4/delay_sec = 0.0
+frame_5/texture = SubResource( 784 )
+frame_5/delay_sec = 0.0
 
 [sub_resource type="ConvexPolygonShape2D" id=509]
 points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
@@ -6505,13 +6424,6 @@ __meta__ = {
 
 [node name="FenceTiles" type="TileMap" parent="PlacableTiles"]
 tile_set = ExtResource( 15 )
-cell_size = Vector2( 32, 32 )
-cell_tile_origin = 2
-cell_y_sort = true
-format = 1
-
-[node name="LightTiles" type="TileMap" parent="PlacableTiles"]
-tile_set = SubResource( 785 )
 cell_size = Vector2( 32, 32 )
 cell_tile_origin = 2
 cell_y_sort = true

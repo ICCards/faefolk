@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://World/Player/Player/Fishing/FishingMiniGame.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Images/Misc/Fishing/animated reel.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/Misc/Fishing/hook2.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Images/Misc/Fishing/hook3.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Sound/Sound effects/Fishing/fastReel.wav" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 10 )
@@ -156,7 +155,6 @@ color = Color( 0, 1, 1, 1 )
 [node name="GameTimer" type="Timer" parent="."]
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 10 )
 autoplay = true
 
 [connection signal="button_down" from="Clicker" to="." method="_on_Clicker_button_down"]

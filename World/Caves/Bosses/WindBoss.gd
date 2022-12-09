@@ -53,7 +53,7 @@ func attack():
 	if state != IDLE and state != TRANSITION_TO_IDLE and not destroyed and not changing_phase:
 		if state == TRANSITION_TO_FLY:
 			return
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack2.wav")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
 		$ShootDirection.look_at(Server.player_node.position)
@@ -185,7 +185,7 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/killAnimal.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 	destroyed = true
@@ -198,7 +198,7 @@ func destroy():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 	if state == IDLE:
@@ -272,6 +272,6 @@ func _on_WhirlwindTimer_timeout():
 	
 func play_wing_flap():
 	if state != IDLE:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.wav")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 		sound_effects.play()

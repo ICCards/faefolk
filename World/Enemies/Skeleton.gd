@@ -189,7 +189,7 @@ func hit(tool_name):
 		start_chase_state()
 	if state == AIM_IDLE or state == AIM_WALK or state == RELEASE:
 		state = WALK
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonHit.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonHit.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	cancel_attack = true
@@ -204,7 +204,7 @@ func destroy():
 	var random = rng.randi_range(1,3)
 	for i in range(random):
 		InstancedScenes.intitiateItemDrop("bone", position, 1)
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonDie.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonDie.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	if Util.chance(5):

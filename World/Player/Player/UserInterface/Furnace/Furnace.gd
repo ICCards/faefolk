@@ -207,7 +207,7 @@ func cooking_active():
 	$FireAnimatedSprite.modulate = Color("ffffff")
 	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").show()
 	if self.visible:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/furnace/furnace.wav")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 

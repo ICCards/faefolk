@@ -101,7 +101,7 @@ func jump_forward():
 	slime_sprite.play("jump")
 	yield(slime_sprite, "animation_finished")
 	if not cancel_jump and not destroyed:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slime.wav")
+		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slime.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 		slime_sprite.play("jumping")
@@ -125,7 +125,7 @@ func hit(tool_name):
 		$EnemyStunnedState.start()
 	if state == IDLE:
 		start_chase_state()
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slimeHit.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/Slime/slimeHit.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	$HurtBox/AnimationPlayer.play("hit")

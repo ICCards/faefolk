@@ -351,7 +351,7 @@ func stand_up():
 func eat(item_name):
 	destroy_placable_object()
 	if state != EATING:
-		$Sounds/SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Player/eat.wav")
+		$Sounds/SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Player/eat.mp3")
 		$Sounds/SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		$Sounds/SoundEffects.play()
 		state = EATING

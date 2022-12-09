@@ -15,7 +15,7 @@ func _physics_process(delta):
 func _ready():
 	if is_hostile_projectile:
 		$Hitbox.set_collision_mask(2+8+16+128)
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/cast.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/cast.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
 	$Projectile.play("play")
@@ -63,7 +63,7 @@ func projectile_collided():
 			yield($Explosion, "animation_finished")
 			$Explosion.hide()
 		else:
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/fireball.wav")
+			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Fire/fireball.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 			sound_effects.play()
 			$ExplosionParticles/Explosion.emitting = true

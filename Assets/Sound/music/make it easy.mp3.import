@@ -11,5 +11,5 @@ dest_files=[ "res://.import/make it easy.mp3-81814650d6cacaafebf74db0a50c6786.mp
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

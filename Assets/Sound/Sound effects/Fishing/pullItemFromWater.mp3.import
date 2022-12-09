@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pullItemFromWater.mp3-6174ab132deb7633cc2e83fcd3803b08.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Fishing/pullItemFromWater.mp3"
+dest_files=[ "res://.import/pullItemFromWater.mp3-6174ab132deb7633cc2e83fcd3803b08.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

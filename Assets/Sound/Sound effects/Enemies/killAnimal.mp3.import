@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/killAnimal.mp3-5f047b617de10cdd50937c0e83576e87.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"
+dest_files=[ "res://.import/killAnimal.mp3-5f047b617de10cdd50937c0e83576e87.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

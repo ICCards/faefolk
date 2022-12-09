@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://World/InsidePlayerHouse/DisplayHouseObject.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sound/Sound effects/Fire/start.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Sound/Sound effects/Fire/crackle.wav" type="AudioStream" id=4]
 [ext_resource path="res://Assets/Images/Animations/fireplace/stone.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Images/Animations/fireplace/7.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Images/Animations/fireplace/5.png" type="Texture" id=7]
@@ -115,10 +114,8 @@ energy = 0.5
 
 [node name="FireStartSoundEffects" type="AudioStreamPlayer2D" parent="LightFireplaceUI"]
 stream = ExtResource( 3 )
-volume_db = -4.0
 
 [node name="FireCrackleSoundEffects" type="AudioStreamPlayer2D" parent="LightFireplaceUI"]
-stream = ExtResource( 4 )
 
 [node name="WindowLightingUI" type="Node2D" parent="."]
 

@@ -291,7 +291,7 @@ func drop_items():
 	
 	
 func play_open_menu_sound():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/backpackIN.wav")
+	sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/backpackIN.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 

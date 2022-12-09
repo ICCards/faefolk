@@ -118,7 +118,6 @@ func shoot_random_projectile():
 	var rand = rand_range(0,100)
 	if rand < 25:
 		var spell = FireProjectile.instance()
-		spell.particles_transform = $ShootDirection.transform
 		spell.position = $ShootDirection/Position2D.global_position
 		spell.velocity = enemy_node.position - spell.position
 		get_node("../").add_child(spell)

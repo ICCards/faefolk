@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/slowReel.mp3-a6f433e0f532018f36bb74899a9fc7c0.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Fishing/slowReel.mp3"
+dest_files=[ "res://.import/slowReel.mp3-a6f433e0f532018f36bb74899a9fc7c0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

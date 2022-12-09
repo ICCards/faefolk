@@ -7,7 +7,7 @@ var storm2
 
 func _ready():
 	if has_node("/root/World"):
-		stream = preload("res://Assets/Sound/Sound effects/Ambience/spring_day.wav")
+		stream = preload("res://Assets/Sound/Sound effects/Ambience/spring_day.mp3")
 		volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
 		play()
 		Sounds.connect("volume_change", self, "set_new_music_volume")
@@ -34,14 +34,14 @@ func _physics_process(delta):
 func inside_storm(storm):
 	if not is_inside_storm:
 		if storm.is_snow_storm:
-			stream = preload("res://Assets/Sound/Sound effects/Ambience/winter_day.wav")
+			stream = preload("res://Assets/Sound/Sound effects/Ambience/winter_day.mp3")
 		else:
-			stream = preload("res://Assets/Sound/Sound effects/Ambience/rain.wav")
+			stream = preload("res://Assets/Sound/Sound effects/Ambience/rain.mp3")
 		is_inside_storm = true
 		play()
 
 func outside_storm():
 	if is_inside_storm:
 		is_inside_storm = false
-		stream = preload("res://Assets/Sound/Sound effects/Ambience/spring_day.wav")
+		stream = preload("res://Assets/Sound/Sound effects/Ambience/spring_day.mp3")
 		play()

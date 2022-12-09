@@ -253,7 +253,7 @@ tracks/0/keys = {
 radius = 122.016
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 6.0
+radius = 7.0
 
 [sub_resource type="Curve" id=188]
 min_value = -400.0
@@ -552,8 +552,8 @@ anim_speed = 2.0
 material = ExtResource( 15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-animation = "walk right"
-frame = 1
+animation = "walk down"
+frame = 3
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -561,7 +561,7 @@ visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
-frame = 8
+frame = 11
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]
@@ -593,8 +593,6 @@ collision_mask = 32
 shape = SubResource( 148 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 3 )
 shape = SubResource( 1 )
 
 [node name="ExplosionParticles" type="Node2D" parent="."]
