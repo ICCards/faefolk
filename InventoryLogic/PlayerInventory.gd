@@ -8,8 +8,8 @@ var time
 var InventorySlots
 var HotbarSlots
 
-const SlotClass = preload("res://InventoryLogic/Slot.gd")
-const ItemClass = preload("res://InventoryLogic/InventoryItem.gd")
+onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 
@@ -22,15 +22,15 @@ var direction_of_sleeping_bag = "left"
 var active_item_slot = 0
 
 var inventory = {
-	0: ["electric staff", 1, null],
-	1: ["dark magic staff", 1, null],
-	2: ["fire staff", 1, null],
-	4: ["ice staff", 1, null],
-	3: ["earth staff", 1, null],
-	8: ["wood", 500, null],
-	9: ["stone", 500, null],
-#	9: ["rope", 12, null],
-	7: ["iron ingot", 150, null],
+#	0: ["electric staff", 1, null],
+#	1: ["dark magic staff", 1, null],
+#	2: ["fire staff", 1, null],
+#	4: ["ice staff", 1, null],
+#	3: ["earth staff", 1, null],
+#	8: ["wood", 500, null],
+#	9: ["stone", 500, null],
+##	9: ["rope", 12, null],
+#	7: ["iron ingot", 150, null],
 	#6: ["furnace", 1, null],
 #	7: ["wheat seeds", 60, null],
 #	2: ["gold pickaxe", 1, null]
@@ -41,23 +41,28 @@ var inventory = {
 #	8: ["health potion II", 10, null],
 #	9: ["health potion III", 10, null],
 }
+#
+#var hotbar = {
+#	0: ["wind staff", 1, null],
+#	2: ["bow", 1, null],
+#	1: ["stone sword", 1, null],
+#	7: ["arrow", 500, null],
+##	3: ["wood box", 100, null],
+##	6: ["poison potion I", 100, null],
+##	5: ["poison potion II", 100, null],
+##	3: ["poison potion III", 100, null],
+##	4: ["regeneration potion I", 10, null],
+##	5: ["regeneration potion II", 10, null],
+###	6: ["regeneration potion III", 10, null],
+###	7: ["speed potion I", 10, null],
+###	8: ["speed potion II", 10, null],
+##	9: ["speed potion II", 10, null],
+#}
+var hotbar = {}
 
-var hotbar = {
-	0: ["wind staff", 1, null],
-	2: ["bow", 1, null],
-	1: ["stone sword", 1, null],
-	7: ["arrow", 500, null],
-#	3: ["wood box", 100, null],
-#	6: ["poison potion I", 100, null],
-#	5: ["poison potion II", 100, null],
-#	3: ["poison potion III", 100, null],
-#	4: ["regeneration potion I", 10, null],
-#	5: ["regeneration potion II", 10, null],
-##	6: ["regeneration potion III", 10, null],
-##	7: ["speed potion I", 10, null],
-##	8: ["speed potion II", 10, null],
-#	9: ["speed potion II", 10, null],
-}
+#func _ready():
+#	hotbar = JsonData.player_data["hotbar"]
+#	print(hotbar)
 
 var chests = {
 	"level 1, room 1" : {
@@ -316,7 +321,7 @@ func update_chest_slot_visual(slot_index, item_name, new_quantity):
 	else:
 		slot.initialize_item(item_name, new_quantity)
 
-func remove_item(slot: SlotClass, var id = null):
+func remove_item(slot, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar.erase(slot.slot_index)
@@ -335,7 +340,7 @@ func remove_item(slot: SlotClass, var id = null):
 		SlotClass.SlotType.TOOL_CABINET:
 			tool_cabinets[id].erase(slot.slot_index)
 
-func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var id = null):
+func add_item_to_empty_slot(item, slot, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
@@ -355,7 +360,7 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, var id = null):
 			tool_cabinets[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 
 
-func add_item_quantity(slot: SlotClass, quantity_to_add: int, var id = null):
+func add_item_quantity(slot, quantity_to_add: int, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] += quantity_to_add
@@ -374,7 +379,7 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int, var id = null):
 		SlotClass.SlotType.TOOL_CABINET:
 			tool_cabinets[id][slot.slot_index][1] += quantity_to_add
 
-func decrease_item_quantity(slot: SlotClass, quantity_to_subtract: int, var id = null):
+func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] -= quantity_to_subtract

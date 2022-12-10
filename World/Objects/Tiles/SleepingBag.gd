@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
 var direction
 var location

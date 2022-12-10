@@ -1,6 +1,6 @@
 extends Control
 
-const SlotClass = preload("res://InventoryLogic/Slot.gd")
+#const SlotClass = load("res://InventoryLogic/Slot.gd")
 #onready var hotbar_slots = $HotbarSlots
 #onready var slots = hotbar_slots.get_children()
 var item = null

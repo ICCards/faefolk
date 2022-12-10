@@ -19,7 +19,7 @@ const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vecto
 
 var openSimplexNoise := OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
-var _uuid = preload("res://helpers/UUID.gd")
+var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 
 var altittude = {}

@@ -59,6 +59,6 @@ func _on_TextureButton_pressed():
 	$ColorRect.visible = !$ColorRect.visible
 	$VBoxContainer.visible = !$VBoxContainer.visible
 	if $ColorRect.visible == false:
-		$TextureButton.texture_normal = preload("res://Assets/Images/Misc/right arrow.png")
+		$TextureButton.texture_normal = load("res://Assets/Images/Misc/right arrow.png")
 	else:
-		$TextureButton.texture_normal = preload("res://Assets/Images/Misc/left arrow.png")
+		$TextureButton.texture_normal = load("res://Assets/Images/Misc/left arrow.png")

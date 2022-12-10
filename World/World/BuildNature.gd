@@ -1,14 +1,14 @@
 extends Node
 
-onready var TreeObject = preload("res://World/Objects/Nature/Trees/TreeObject.tscn")
-onready var DesertTree = preload("res://World/Objects/Nature/Trees/DesertTree.tscn")
-onready var Log = preload("res://World/Objects/Nature/Trees/Log.tscn")
-onready var Stump = preload("res://World/Objects/Nature/Trees/Stump.tscn")
-onready var LargeOre = preload("res://World/Objects/Nature/Ores/LargeOre.tscn")
-onready var SmallOre = preload("res://World/Objects/Nature/Ores/SmallOre.tscn")
-onready var TallGrass = preload("res://World/Objects/Nature/Grasses/TallGrass.tscn")
-onready var Weed = preload("res://World/Objects/Nature/Grasses/Weed.tscn")
-onready var Flower = preload("res://World/Objects/Nature/Forage/Flower.tscn")
+onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
+onready var DesertTree = load("res://World/Objects/Nature/Trees/DesertTree.tscn")
+onready var Log = load("res://World/Objects/Nature/Trees/Log.tscn")
+onready var Stump = load("res://World/Objects/Nature/Trees/Stump.tscn")
+onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
+onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
+onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
+onready var Weed = load("res://World/Objects/Nature/Grasses/Weed.tscn")
+onready var Flower = load("res://World/Objects/Nature/Forage/Flower.tscn")
 
 var rng := RandomNumberGenerator.new()
 var trees_thread := Thread.new()
@@ -25,8 +25,8 @@ onready var GrassObjects = get_node("../../GrassObjects")
 onready var NatureObjects = get_node("../../NatureObjects")
 
 
-func _ready():
-	spawn_placables()
+#func _ready():
+#	spawn_placables()
 	
 func spawn_placables():
 	yield(get_tree().create_timer(3.0), "timeout")

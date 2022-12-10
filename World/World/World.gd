@@ -17,15 +17,15 @@ onready var deep_ocean = $GeneratedTiles/DeepOcean
 onready var top_ocean = $GeneratedTiles/TopOcean
 onready var Players = $Players
 
-onready var Bear = preload("res://World/Animals/Bear.tscn")
-onready var Bunny = preload("res://World/Animals/Bunny.tscn")
-onready var Duck = preload("res://World/Animals/Duck.tscn")
-onready var Boar = preload("res://World/Animals/Boar.tscn")
-onready var Deer = preload("res://World/Animals/Deer.tscn")
-onready var Wolf = preload("res://World/Animals/Wolf.tscn")
-onready var Clam = preload("res://World/Objects/Nature/Forage/Clam.tscn")
-onready var Starfish = preload("res://World/Objects/Nature/Forage/Starfish.tscn")
-onready var CaveLadder = preload("res://World/Caves/Objects/CaveLadder.tscn")
+onready var Bear = load("res://World/Animals/Bear.tscn")
+onready var Bunny = load("res://World/Animals/Bunny.tscn")
+onready var Duck = load("res://World/Animals/Duck.tscn")
+onready var Boar = load("res://World/Animals/Boar.tscn")
+onready var Deer = load("res://World/Animals/Deer.tscn")
+onready var Wolf = load("res://World/Animals/Wolf.tscn")
+onready var Clam = load("res://World/Objects/Nature/Forage/Clam.tscn")
+onready var Starfish = load("res://World/Objects/Nature/Forage/Starfish.tscn")
+onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 
 var rng = RandomNumberGenerator.new()
 

@@ -162,9 +162,9 @@ visible = false
 visible = false
 
 [node name="CurrentTime" parent="." instance=ExtResource( 1 )]
-margin_left = 920.0
+margin_left = 876.0
 margin_top = 8.0
-margin_right = 920.0
+margin_right = 876.0
 margin_bottom = 8.0
 
 [node name="PlayerStatsUI" parent="." instance=ExtResource( 12 )]

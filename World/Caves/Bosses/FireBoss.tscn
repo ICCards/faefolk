@@ -428,7 +428,6 @@ position = Vector2( 0, -95 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 199 )
-disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 262400
@@ -445,11 +444,8 @@ anims/hit = SubResource( 202 )
 [node name="Timers" type="Node" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="Timers"]
-wait_time = 4.0
+wait_time = 3.0
 one_shot = true
-
-[node name="WhirlwindTimer" type="Timer" parent="Timers"]
-wait_time = 12.0
 
 [node name="IdleTimer" type="Timer" parent="Timers"]
 wait_time = 5.0
@@ -501,7 +497,7 @@ position = Vector2( 0, -76 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 203 )
 animation = "play"
-frame = 2
+frame = 3
 playing = true
 
 [node name="DetectPlayer" type="Area2D" parent="."]

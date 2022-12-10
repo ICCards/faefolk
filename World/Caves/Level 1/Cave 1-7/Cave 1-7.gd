@@ -1,7 +1,7 @@
 extends YSort
 
 
-onready var Bat = preload("res://World/Enemies/Slime/Bat.tscn")
+onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 
 var is_changing_scene: bool = false
 var nav_node

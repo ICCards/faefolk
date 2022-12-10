@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-onready var LightningProjectile = preload("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
-onready var TornadoProjectile = preload("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
-onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProjectile.tscn")
-onready var IceProjectile = preload("res://World/Objects/Magic/Ice/IceProjectile.tscn")
+onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
+onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+onready var IceProjectile = load("res://World/Objects/Magic/Ice/IceProjectile.tscn")
 
 onready var demon_sprite: AnimatedSprite = $AnimatedSprite
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
@@ -145,7 +145,7 @@ func swing():
 	demon_sprite.frame = 0
 	demon_sprite.play("swing")
 	yield(get_tree().create_timer(0.5), "timeout")
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Dark/swoosh.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Dark/swoosh.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
 	$HitBox/CollisionShape2D.set_deferred('disabled', false)

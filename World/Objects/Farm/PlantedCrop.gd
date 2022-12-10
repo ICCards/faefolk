@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
 var crop_name
 var days_until_harvest
@@ -107,7 +107,7 @@ func harvest_and_remove():
 		isBeingHarvested = true
 		yield(get_tree().create_timer(0.6), "timeout")
 		phase = ""
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/Normal Selects.png"))
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		yield(get_tree().create_timer(1.0), "timeout")
 		queue_free()
@@ -120,7 +120,7 @@ func harvest_and_keep_planted():
 		yield(get_tree().create_timer(0.6), "timeout")
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		phase = "empty"
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/Normal Selects.png"))
 		$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 		isBeingHarvested = false
 		
@@ -177,12 +177,12 @@ func _on_Harvest_mouse_entered():
 func set_mouse_cursor_type():
 	if not $Harvest.disabled:
 		if $DetectPlayer.get_overlapping_areas().size() >= 1:
-			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/harvest.png"))
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest.png"))
 		else:
-			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/harvest transparent.png"))
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest transparent.png"))
 
 func _on_Harvest_mouse_exited():
-	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+	Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/Normal Selects.png"))
 
 
 func _on_DetectPlayer_area_entered(area):

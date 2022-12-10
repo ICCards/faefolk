@@ -1,13 +1,13 @@
 extends Node
 
-onready var PlantedCrop  = preload("res://World/Objects/Farm/PlantedCrop.tscn")
-onready var TileObjectHurtBox = preload("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
-onready var BuildingTileObjectHurtBox = preload("res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn")
-onready var PlayerHouseObject = preload("res://World/Objects/Farm/PlayerHouse.tscn")
-onready var SleepingBag = preload("res://World/Objects/Tiles/SleepingBag.tscn")
-onready var DoorFront = preload("res://World/Objects/Tiles/DoorFront.tscn")
-onready var DoorSide = preload("res://World/Objects/Tiles/DoubleDoorSide.tscn")
-onready var Rug  = preload("res://World/Objects/Misc/Rug.tscn")
+onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
+onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
+onready var BuildingTileObjectHurtBox = load("res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn")
+onready var PlayerHouseObject = load("res://World/Objects/Farm/PlayerHouse.tscn")
+onready var SleepingBag = load("res://World/Objects/Tiles/SleepingBag.tscn")
+onready var DoorFront = load("res://World/Objects/Tiles/DoorFront.tscn")
+onready var DoorSide = load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
+onready var Rug  = load("res://World/Objects/Misc/Rug.tscn")
 onready var Gate
 
 

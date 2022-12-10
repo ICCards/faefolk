@@ -34,7 +34,7 @@ export var KNOCKBACK_AMOUNT = 70
 func _ready():
 	randomize()
 	rng.randomize()
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/batScreech.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/batScreech.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 
@@ -98,7 +98,7 @@ func hit(tool_name):
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/hitEnemy.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	$HurtBox/AnimationPlayer.play("hit")
@@ -110,7 +110,7 @@ func hit(tool_name):
 
 func destroy():
 	InstancedScenes.intitiateItemDrop("bat wing", position, 1)
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/monsterdead.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/monsterdead.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	destroyed = true

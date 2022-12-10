@@ -32,7 +32,7 @@ enum {
 	CUSTOMIZABLE_ROTATABLE
 }
 
-var _uuid = preload("res://helpers/UUID.gd")
+var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 
 func _ready():
@@ -128,7 +128,7 @@ func set_dimensions():
 			$ItemToPlace.show()
 		FOUNDATION:
 			$ItemToPlace.show()
-			$ItemToPlace.texture = preload("res://Assets/Images/placable_object_preview/foundation.png")
+			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/foundation.png")
 			$ColorIndicator.tile_size = Vector2(1,1)
 		ROTATABLE:
 			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
@@ -420,11 +420,11 @@ func place_object(item_name, direction, location, type):
 					MapData.add_placable(id, {"n":item_name,"d":direction,"l":location})
 					PlaceObject.place_object_in_world(id, item_name, direction, location)
 			else:
-				$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+				$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
 				$SoundEffects.play()
 		elif type == "seed":
-			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
+			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 			PlaceObject.place_seed_in_world(id, item_name, location, JsonData.crop_data[item_name]["DaysToGrow"])

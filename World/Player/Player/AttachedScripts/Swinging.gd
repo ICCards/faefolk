@@ -104,7 +104,7 @@ func set_hoed_tile(direction):
 			yield(get_tree().create_timer(0.6), "timeout")
 			InstancedScenes.play_hoed_dirt_effect(location)
 			Stats.decrease_tool_health()
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
 			Tiles.hoed_tiles.set_cellv(location, 0)
@@ -117,7 +117,7 @@ func remove_hoed_tile(direction):
 	if Tiles.hoed_tiles.get_cellv(location) != -1:
 		yield(get_tree().create_timer(0.6), "timeout")
 		Stats.decrease_tool_health()
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 		sound_effects.play()
 		Tiles.watered_tiles.set_cellv(location, -1)
@@ -132,13 +132,13 @@ func set_watered_tile():
 		var pos = Util.set_swing_position(global_position, direction)
 		var location = Tiles.hoed_tiles.world_to_map(pos)
 		if Tiles.ocean_tiles.get_cellv(location) != -1 or Tiles.is_well_tile(location, direction):
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
 			Stats.refill_watering_can(PlayerInventory.hotbar[PlayerInventory.active_item_slot][0])
 		elif PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] >= 1:
 			Stats.decrease_tool_health()
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/water.mp3")
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
 			yield(get_tree().create_timer(0.2), "timeout")
@@ -155,7 +155,7 @@ func set_watered_tile():
 				Tiles.watered_tiles.set_cellv(location, 0)
 				Tiles.watered_tiles.update_bitmask_region()
 		else: 
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
 

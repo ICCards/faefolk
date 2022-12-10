@@ -1,6 +1,6 @@
 extends YSort
 
-onready var WallHitEffect = preload("res://World/Objects/Tiles/WallHitEffect.tscn")
+onready var WallHitEffect = load("res://World/Objects/Tiles/WallHitEffect.tscn")
 
 var tier
 var health
@@ -36,27 +36,27 @@ func set_type():
 		"wall":
 			match tier:
 				"twig":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/twig.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/twig.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.TWIG)
 					health = Stats.MAX_TWIG_WALL
 					max_health = Stats.MAX_TWIG_WALL
 				"wood":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/wood.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/wood.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.WOOD)
 					health = Stats.MAX_WOOD_WALL
 					max_health = Stats.MAX_WOOD_WALL
 				"stone":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/stone.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/stone.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.STONE)
 					health = Stats.MAX_STONE_WALL
 					max_health = Stats.MAX_STONE_WALL
 				"metal":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/metal.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/metal.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.METAL)
 					health = Stats.MAX_METAL_WALL
 					max_health = Stats.MAX_METAL_WALL
 				"armored":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/armored.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/armored.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.ARMORED)
 					health = Stats.MAX_ARMORED_WALL
 					max_health = Stats.MAX_ARMORED_WALL
@@ -198,7 +198,6 @@ func _on_DetectObjectOverPathBox_area_entered(area):
 	if item_name == "foundation":
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
-
 
 func _on_DetectObjectOverPathBox_area_exited(area):
 	if not Server.world.is_changing_scene:

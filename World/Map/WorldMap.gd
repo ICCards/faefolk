@@ -2,7 +2,7 @@ extends Node2D
 
 
 
-onready var GridSquareLabel = preload("res://World/Map/GridSquareLabel.tscn")
+onready var GridSquareLabel = load("res://World/Map/GridSquareLabel.tscn")
 onready var playerIcon = $Map/PlayerIcon
 onready var stormIcon = $Map/StormIcon
 onready var stormIcon2 = $Map/StormIcon2

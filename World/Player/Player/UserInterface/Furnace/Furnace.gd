@@ -14,8 +14,8 @@ onready var yield_slot1 = $FurnaceSlots/YieldSlot1
 onready var yield_slot2 = $FurnaceSlots/YieldSlot2
 onready var coal_yield_slot = $FurnaceSlots/CoalYieldSlot
 
-const SlotClass = preload("res://InventoryLogic/Slot.gd")
-onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
+onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 
 func _ready():
 	var slots_in_inventory = inventory_slots.get_children()
@@ -70,7 +70,7 @@ func _physics_process(delta):
 		$TimerProgress.value = (10-$CookTimer.time_left)*10
 
 
-func able_to_put_into_slot(slot: SlotClass):
+func able_to_put_into_slot(slot):
 	var holding_item = find_parent("UserInterface").holding_item
 	if holding_item == null:
 		return true
@@ -207,7 +207,7 @@ func cooking_active():
 	$FireAnimatedSprite.modulate = Color("ffffff")
 	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").show()
 	if self.visible:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 
@@ -249,16 +249,16 @@ func initialize_inventory():
 			slots[i].removeFromSlot()
 		if PlayerInventory.inventory.has(i):
 			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1], PlayerInventory.inventory[i][2])
-func hovered_slot(slot: SlotClass):
+func hovered_slot(slot):
 	if slot.item:
 		slot.item.hover_item()
 		item = slot.item.item_name
-func exited_slot(slot: SlotClass):
+func exited_slot(slot):
 	item = null
 	if slot.item:
 		slot.item.exit_item()
 
-func slot_gui_input(event: InputEvent, slot: SlotClass):
+func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if find_parent("UserInterface").holding_item != null:
@@ -294,7 +294,7 @@ func return_holding_item(item_name, qt):
 	return inventoryItem
 
 
-func left_click_empty_slot(slot: SlotClass):
+func left_click_empty_slot(slot):
 	if able_to_put_into_slot(slot):
 		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
@@ -302,7 +302,7 @@ func left_click_empty_slot(slot: SlotClass):
 		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
 			check_if_furnace_active()
 
-func left_click_different_item(event: InputEvent, slot: SlotClass):
+func left_click_different_item(event: InputEvent, slot):
 	if able_to_put_into_slot(slot):
 		PlayerInventory.remove_item(slot, id)
 		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
@@ -314,7 +314,7 @@ func left_click_different_item(event: InputEvent, slot: SlotClass):
 		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
 			check_if_furnace_active()
 
-func left_click_same_item(slot: SlotClass):
+func left_click_same_item(slot):
 	if able_to_put_into_slot(slot):
 		var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 		var able_to_add = stack_size - slot.item.item_quantity
@@ -330,7 +330,7 @@ func left_click_same_item(slot: SlotClass):
 		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
 			check_if_furnace_active()
 
-func left_click_not_holding(slot: SlotClass):
+func left_click_not_holding(slot):
 	PlayerInventory.remove_item(slot, id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()

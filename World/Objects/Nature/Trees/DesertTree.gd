@@ -9,9 +9,9 @@ var treeObject
 var adjusted_leaves_falling_pos
 var location
 
-onready var LeavesFallEffect = preload("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
-onready var TrunkHitEffect = preload("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var LeavesFallEffect = load("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
+onready var TrunkHitEffect = load("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
 var desertTrees = ["1a", "1b", "2a", "2b"]
 

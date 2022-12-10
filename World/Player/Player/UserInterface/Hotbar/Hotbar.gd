@@ -1,6 +1,6 @@
 extends Control
 
-const SlotClass = preload("res://InventoryLogic/Slot.gd")
+onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 onready var hotbar_slots = $HotbarSlots
 onready var slots = hotbar_slots.get_children()
 var item = null
@@ -13,6 +13,7 @@ enum SlotType {
 }
 
 func _ready():
+	yield(get_tree(), "idle_frame")
 	for i in range(slots.size()):
 		PlayerInventory.connect("active_item_updated", slots[i], "refresh_style")
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
@@ -23,13 +24,13 @@ func _ready():
 	initialize_hotbar()
 	Stats.connect("tool_health_change", self, "update_tool_health")
 	
-func hovered_slot(slot: SlotClass):
+func hovered_slot(slot):
 	Server.player_node.destroy_placable_object()
 	if slot.item:
 		slot.item.hover_item()
 		item = slot.item.item_name
 
-func exited_slot(slot: SlotClass):
+func exited_slot(slot):
 	item = null
 	if slot.item and not (slot.slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot.slot_index):
 		slot.item.exit_item()
@@ -87,15 +88,13 @@ func initialize_hotbar():
 	PlayerInventory.HotbarSlots = $HotbarSlots
 	item = null
 	for i in range(slots.size()):
-		if slots[i].item != null:
-			slots[i].removeFromSlot()
-		if PlayerInventory.hotbar.has(i):
-			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1], PlayerInventory.hotbar[i][2])
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+		if JsonData.player_data["hotbar"].has(str(i)):
+			slots[i].initialize_item(JsonData.player_data["hotbar"][str(i)][0], JsonData.player_data["hotbar"][str(i)][1], JsonData.player_data["hotbar"][str(i)][2])
+	if JsonData.player_data["hotbar"].has(str(PlayerInventory.active_item_slot)):
 		slots[PlayerInventory.active_item_slot].item.set_init_hovered()
 
 
-func slot_gui_input(event: InputEvent, slot: SlotClass):
+func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if Server.player_node.state == 0:

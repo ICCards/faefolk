@@ -44,3 +44,4 @@ func _on_EnergyArea_mouse_entered():
 
 func _on_EnergyArea_mouse_exited():
 	$EnergyUI/EnergyLabel.visible = false
+

@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var InsidePlayerHome = preload("res://World/InsidePlayerHouse/InsidePlayerHome.tscn")
+onready var InsidePlayerHome = load("res://World/InsidePlayerHouse/InsidePlayerHome.tscn")
 
 
 func set_player_inside_house():

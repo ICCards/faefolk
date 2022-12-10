@@ -5,9 +5,9 @@ onready var sword_swing = $Swing/SwordSwing
 onready var composite_sprites = $CompositeSprites
 onready var holding_item = $HoldingItem
 
-onready var Eating_particles = preload("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
-onready var Fishing = preload("res://World/Player/Player/Fishing/Fishing.tscn")
-onready var PlaceObjectScene = preload("res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
+onready var Eating_particles = load("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
+onready var Fishing = load("res://World/Player/Player/Fishing/Fishing.tscn")
+onready var PlaceObjectScene = load("res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
 
 var running = false
 var principal
@@ -54,7 +54,7 @@ var collisionMask = null
 var direction_of_current_chair
 var is_building_world = false
 
-const _character = preload("res://Global/Data/Characters.gd")
+onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
 	Settings.load_keys()
@@ -351,7 +351,7 @@ func stand_up():
 func eat(item_name):
 	destroy_placable_object()
 	if state != EATING:
-		$Sounds/SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Player/eat.mp3")
+		$Sounds/SoundEffects.stream = load("res://Assets/Sound/Sound effects/Player/eat.mp3")
 		$Sounds/SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		$Sounds/SoundEffects.play()
 		state = EATING

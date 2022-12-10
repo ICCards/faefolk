@@ -1,0 +1,29 @@
+{
+    "day_week": "Monday",
+    "day_number": 1,
+    "time_minutes": 0,
+    "time_hours": 0,
+    "health": 100,
+    "mana": 100,
+    "energy": 100,
+    "hotbar": {
+        "0": ["wind staff", 1, null],
+	    "2": ["bow", 1, 50],
+	    "1": ["stone sword", 1, null],
+	    "7": ["arrow", 500, null]
+    },
+    "inventory": {
+            "0": ["electric staff", 1, null],
+            "1": ["dark magic staff", 1, null],
+            "2": ["fire staff", 1, null],
+            "4": ["ice staff", 1, null],
+            "3": ["earth staff", 1, null],
+            "8": ["wood", 500, null],
+            "9": ["stone", 500, null],
+            "7": ["iron ingot", 150, null],
+    },
+    "chests": {},
+    "grain_mills": {},
+    "stoves": {},
+    "tool_cabinets": {}
+}

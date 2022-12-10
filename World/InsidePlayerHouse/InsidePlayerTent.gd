@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var Player = preload("res://World/Player/Player/Player.tscn")
-const _character = preload("res://Global/Data/Characters.gd")
+onready var Player = load("res://World/Player/Player/Player.tscn")
+onready var _character = load("res://Global/Data/Characters.gd")
 
 var direction = "down"
 

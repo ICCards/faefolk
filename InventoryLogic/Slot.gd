@@ -1,16 +1,16 @@
 extends Panel
 
-var default_text = preload("res://Assets/Images/Inventory UI/slot.png")
-var empty_text = preload("res://Assets/Images/Inventory UI/slot.png")
-var selected_text = preload("res://Assets/Images/Inventory UI/slot selected.png")
-var locked_text = preload("res://Assets/Images/Inventory UI/slot locked.png")
+var default_text = load("res://Assets/Images/Inventory UI/slot.png")
+var empty_text = load("res://Assets/Images/Inventory UI/slot.png")
+var selected_text = load("res://Assets/Images/Inventory UI/slot selected.png")
+var locked_text = load("res://Assets/Images/Inventory UI/slot locked.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null
 var selected_style: StyleBoxTexture = null
 var locked_style: StyleBoxTexture = null
 
-var ItemClass = preload("res://InventoryLogic/InventoryItem.tscn")
+var ItemClass = load("res://InventoryLogic/InventoryItem.tscn")
 var item = null
 var slot_index
 

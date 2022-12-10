@@ -178,6 +178,6 @@ func _on_RegenerationTimer_timeout():
 
 
 func play_sound_effect():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Player/ow.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/ow.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()

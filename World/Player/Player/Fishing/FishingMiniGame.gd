@@ -9,7 +9,7 @@ var maxVelocity = 3;
 var bounce = 0.4
 
 var fishable = true
-var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
+var fish = load("res://World/Player/Player/Fishing/Fish.tscn")
 
 var MIN_Y
 var MAX_Y
@@ -106,11 +106,11 @@ func _physics_process(delta):
 
 func play_reel_sound_effects(is_being_pressed):
 	if is_being_pressed:
-		if sound_effects.stream != preload("res://Assets/Sound/Sound effects/Fishing/fastReel.mp3"):
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/fastReel.mp3")
+		if sound_effects.stream != load("res://Assets/Sound/Sound effects/Fishing/fastReel.mp3"):
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fastReel.mp3")
 	else:
-		if sound_effects.stream != preload("res://Assets/Sound/Sound effects/Fishing/slowReel.mp3"):
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/slowReel.mp3")
+		if sound_effects.stream != load("res://Assets/Sound/Sound effects/Fishing/slowReel.mp3"):
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/slowReel.mp3")
 	if not sound_effects.playing:
 		sound_effects.playing = true
 
@@ -123,7 +123,7 @@ func caught_fish():
 	get_node("Fish").stop_fish_movement()
 	
 func lost_fish():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/fishEscape.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fishEscape.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	sound_effects.play()
 	$Tween.stop_all()

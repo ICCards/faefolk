@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-onready var TornadoProjectile = preload("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
-onready var DashGhost = preload("res://World/Objects/Magic/Wind/DashGhost.tscn")
-onready var Whirlwind = preload("res://World/Objects/Magic/Wind/Whirlwind.tscn")
-onready var LingeringTornado = preload("res://World/Objects/Magic/Wind/LingeringTornado.tscn")
+onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+onready var DashGhost = load("res://World/Objects/Magic/Wind/DashGhost.tscn")
+onready var Whirlwind = load("res://World/Objects/Magic/Wind/Whirlwind.tscn")
+onready var LingeringTornado = load("res://World/Objects/Magic/Wind/LingeringTornado.tscn")
 
 onready var boss_sprite: Sprite = $Boss
 onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -53,7 +53,7 @@ func attack():
 	if state != IDLE and state != TRANSITION_TO_IDLE and not destroyed and not changing_phase:
 		if state == TRANSITION_TO_FLY:
 			return
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
 		$ShootDirection.look_at(Server.player_node.position)
@@ -185,7 +185,7 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 	destroyed = true
@@ -198,7 +198,7 @@ func destroy():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/hitEnemy.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 	if state == IDLE:
@@ -272,6 +272,6 @@ func _on_WhirlwindTimer_timeout():
 	
 func play_wing_flap():
 	if state != IDLE:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 		sound_effects.play()

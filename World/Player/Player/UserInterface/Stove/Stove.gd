@@ -19,8 +19,8 @@ onready var coal_yield_slot = $StoveSlots/CoalYieldSlot
 var current_cooking_item
 
 
-const SlotClass = preload("res://InventoryLogic/Slot.gd")
-onready var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
+onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 
 func _ready():
 	var slots_in_inventory = inventory_slots.get_children()
@@ -310,17 +310,17 @@ func initialize_inventory():
 		if PlayerInventory.inventory.has(i):
 			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1], PlayerInventory.inventory[i][2])
 
-func hovered_slot(slot: SlotClass):
+func hovered_slot(slot):
 	if slot.item:
 		slot.item.hover_item()
 		item = slot.item.item_name
 
-func exited_slot(slot: SlotClass):
+func exited_slot(slot):
 	item = null
 	if slot.item:
 		slot.item.exit_item()
 
-func able_to_put_into_slot(slot: SlotClass):
+func able_to_put_into_slot(slot):
 	var holding_item = find_parent("UserInterface").holding_item
 	if holding_item == null:
 		return true
@@ -334,7 +334,7 @@ func able_to_put_into_slot(slot: SlotClass):
 		return false
 	return true
 	
-func slot_gui_input(event: InputEvent, slot: SlotClass):
+func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if find_parent("UserInterface").holding_item != null:
@@ -368,14 +368,14 @@ func return_holding_item(item_name, qt):
 	return inventoryItem
 
 
-func left_click_empty_slot(slot: SlotClass):
+func left_click_empty_slot(slot):
 	if able_to_put_into_slot(slot):
 		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = null
 		check_valid_recipe()
 
-func left_click_different_item(event: InputEvent, slot: SlotClass):
+func left_click_different_item(event: InputEvent, slot):
 	if able_to_put_into_slot(slot):
 		PlayerInventory.remove_item(slot, id)
 		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
@@ -386,7 +386,7 @@ func left_click_different_item(event: InputEvent, slot: SlotClass):
 		find_parent("UserInterface").holding_item = temp_item
 		check_valid_recipe()
 
-func left_click_same_item(slot: SlotClass):
+func left_click_same_item(slot):
 	if able_to_put_into_slot(slot):
 		var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 		var able_to_add = stack_size - slot.item.item_quantity
@@ -401,7 +401,7 @@ func left_click_same_item(slot: SlotClass):
 			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 		check_valid_recipe()
 
-func left_click_not_holding(slot: SlotClass):
+func left_click_not_holding(slot):
 	PlayerInventory.remove_item(slot, id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()

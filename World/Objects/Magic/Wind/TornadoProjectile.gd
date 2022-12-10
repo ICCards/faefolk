@@ -8,7 +8,7 @@ var collided = false
 var destroyed = false
 var is_hostile_projectile: bool = false
 
-var _uuid = preload("res://helpers/UUID.gd")
+var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 
 func _physics_process(delta):

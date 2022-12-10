@@ -1,7 +1,7 @@
 extends YSort
 
-onready var WindBoss = preload("res://World/Caves/Bosses/WindBoss.tscn")
-onready var Bat = preload("res://World/Enemies/Slime/Bat.tscn")
+onready var WindBoss = load("res://World/Caves/Bosses/WindBoss.tscn")
+onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 
 var is_changing_scene: bool = false
 var nav_node

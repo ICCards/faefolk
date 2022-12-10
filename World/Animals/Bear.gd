@@ -116,7 +116,7 @@ func play_groan_sound_effect():
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 

@@ -2,12 +2,12 @@ extends Control
 
 var changing_scene_active = false
 var hovered_button = ""
-var connect_callback = JavaScript.create_callback(self, "_connect_plug")
-var login_callback = JavaScript.create_callback(self, "_login")
+#var connect_callback = JavaScript.create_callback(self, "_connect_plug")
+#var login_callback = JavaScript.create_callback(self, "_login")
 
-func _ready():
-	if not Server.player.empty():
-		get_parent().spawn_player_in_menu()
+#func _ready():
+#	if not Server.player.empty():
+#		get_parent().spawn_player_in_menu()
 
 #func _connect_plug(args):
 #	IC.login(login_callback)

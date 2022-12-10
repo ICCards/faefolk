@@ -6666,3 +6666,5 @@ autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 805 )
+
+[connection signal="timeout" from="SpawnBatTimer" to="." method="_on_SpawnBatTimer_timeout"]

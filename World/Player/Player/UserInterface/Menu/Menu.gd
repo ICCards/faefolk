@@ -16,8 +16,8 @@ func initialize():
 	$Collections.hide()
 	$OptionsMenu.hide()
 	$Skills.hide()
-	$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/inventory.png")
-	$Background.texture = preload("res://Assets/Images/Inventory UI/menus/inventory.png")
+	$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/inventory.png")
+	$Background.texture = load("res://Assets/Images/Inventory UI/menus/inventory.png")
 
 
 func _physics_process(delta):
@@ -44,8 +44,8 @@ func _on_Skills_pressed():
 		$OptionsMenu.hide()
 		$Crafting.hide()
 		$Skills.initialize()
-		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/skills.png")
-		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/empty.png")
+		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/skills.png")
+		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
 
 
 func _on_Crafting_pressed():
@@ -56,8 +56,8 @@ func _on_Crafting_pressed():
 		$Crafting.initialize()
 		$Collections.hide()
 		$OptionsMenu.hide()
-		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/crafting.png")
-		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/crafting.png")
+		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/crafting.png")
+		$Background.texture = load("res://Assets/Images/Inventory UI/menus/crafting.png")
 
 func _on_Collections_pressed():
 	if not find_parent("UserInterface").holding_item:
@@ -67,8 +67,8 @@ func _on_Collections_pressed():
 		$OptionsMenu.hide()
 		$Skills.hide()
 		$Collections.initialize()
-		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/collections.png")
-		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/collections1.png")
+		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/collections.png")
+		$Background.texture = load("res://Assets/Images/Inventory UI/menus/collections1.png")
 
 func _on_Options_pressed():
 	if not find_parent("UserInterface").holding_item:
@@ -78,8 +78,8 @@ func _on_Options_pressed():
 		$OptionsMenu.show()
 		$Collections.hide()
 		$Skills.hide()
-		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/options.png")
-		$Background.texture = preload("res://Assets/Images/Inventory UI/menus/empty.png")
+		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/options.png")
+		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
 
 
 func _on_Exit_pressed():
@@ -88,13 +88,13 @@ func _on_Exit_pressed():
 #		$Inventory.hide()
 #		$Crafting.hide()
 #		$OptionsMenu.hide()
-#		$Tab.texture = preload("res://Assets/Images/Inventory UI/tabs/exit.png")
-#		#$Background.texture = preload("res://Assets/Images/Inventory UI/menus/exit.png")
+#		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/exit.png")
+#		#$Background.texture = load("res://Assets/Images/Inventory UI/menus/exit.png")
 
 
 func _on_BackgroundButton_pressed():
 	if find_parent("UserInterface").holding_item:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/throwDownITem.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/throwDownITem.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 		find_parent("UserInterface").items_to_drop.append([find_parent("UserInterface").holding_item.item_name, find_parent("UserInterface").holding_item.item_quantity, find_parent("UserInterface").holding_item.item_health])

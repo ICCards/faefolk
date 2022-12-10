@@ -1,8 +1,8 @@
 extends YSort
 
 
-onready var FireBoss = preload("res://World/Caves/Bosses/FireBoss.tscn")
-onready var Bat = preload("res://World/Enemies/Slime/Bat.tscn")
+onready var FireBoss = load("res://World/Caves/Bosses/FireBoss.tscn")
+onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 
 func _ready():
 	randomize()
@@ -30,15 +30,15 @@ var NUM_SKELETONS = 0
 var map_size = 50
 
 func advance_up_cave_level():
-	pass
-#	if not is_changing_scene:
-#		Server.player_node.destroy()
-#		is_changing_scene = true
-#		for node in $Projectiles.get_children():
-#			node.destroy()
-#		for node in $Enemies.get_children():
-#			node.destroy()
-#		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 3/Cave 3.tscn")
+	if not is_changing_scene:
+		BuildCaveLevel.is_player_going_down = false
+		Server.player_node.destroy()
+		is_changing_scene = true
+		for node in $Projectiles.get_children():
+			node.destroy()
+		for node in $Enemies.get_children():
+			node.destroy()
+		SceneChanger.goto_scene("res://World/Caves/Level 2/Cave 2-7/Cave 2-7.tscn")
 
 func advance_down_cave_level():
 	pass

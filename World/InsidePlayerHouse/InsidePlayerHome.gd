@@ -3,10 +3,10 @@ extends Node2D
 
 var is_moving_object
 
-onready var Player = preload("res://World/Player/Player/Player.tscn")
-onready var Player_template = preload("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
-const _character = preload("res://Global/Data/Characters.gd")
-onready var DisplaceHouseObject = preload("res://World/InsidePlayerHouse/DisplayHouseObject.tscn")
+onready var Player = load("res://World/Player/Player/Player.tscn")
+onready var Player_template = load("res://World/Player/PlayerTemplate/PlayerTemplate.tscn")
+onready var _character = load("res://Global/Data/Characters.gd")
+onready var DisplaceHouseObject = load("res://World/InsidePlayerHouse/DisplayHouseObject.tscn")
 
 var last_world_state = 0
 var world_state_buffer = []

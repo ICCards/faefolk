@@ -1,8 +1,7 @@
 extends YSort
 
 
-onready var Bat = preload("res://World/Enemies/Slime/Bat.tscn")
-onready var LightningLine = preload("res://World/Objects/Misc/LightningLine.tscn")
+onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 
 var nav_node
 var count = 0

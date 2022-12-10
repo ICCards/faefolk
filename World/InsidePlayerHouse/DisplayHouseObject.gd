@@ -61,7 +61,7 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed("mouse_click"):
 		var location = (mousePos / 32 - Vector2(0, 5))
 		if moveItemFlag:
-			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/Normal Selects.png"))
 			for i in range(PlayerInventory.player_home.size()):
 				if PlayerInventory.player_home[i][0] == image and !is_colliding_other_object and !validateTileBoundary(position / 32):
 					PlayerInventory.player_home[i][1] = location
@@ -73,7 +73,7 @@ func _on_MouseInputBox_input_event(_viewport, event, _shape_idx):
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
 		elif !moveItemFlag and find_parent("InsidePlayerHome").is_moving_object == null:
-			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Text Select.png"))
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/Text Select.png"))
 			$MovementCollision/CollisionShape2D.disabled = true
 			moveItemFlag = true
 			find_parent("InsidePlayerHome").is_moving_object = true

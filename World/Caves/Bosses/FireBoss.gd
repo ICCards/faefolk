@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProjectile.tscn")
-onready var FlameThrower = preload("res://World/Objects/Magic/Fire/Flamethrower.tscn")
+onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+onready var FlameThrower = load("res://World/Objects/Magic/Fire/Flamethrower.tscn")
 
 onready var hit_box: Node2D = $ShootDirection
 onready var boss_sprite: Sprite = $Boss
@@ -69,7 +69,7 @@ func _on_AttackTimer_timeout():
 
 func attack():
 	if chasing and not destroyed and not changing_phase:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack2.wav")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack2.wav")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
 		$ShootDirection.look_at(Server.player_node.position)
@@ -170,7 +170,7 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/killAnimal.wav")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.wav")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	destroyed = true
@@ -183,7 +183,7 @@ func destroy():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	if state == IDLE:

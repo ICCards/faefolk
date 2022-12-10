@@ -30,15 +30,15 @@ func _input(event):
 func set_type():
 	match tier:
 		"wood":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/front/wood.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/wood.tres")
 			health = Stats.MAX_WOOD_WALL
 			max_health = Stats.MAX_WOOD_WALL
 		"metal":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/front/metal.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/metal.tres")
 			health = Stats.MAX_METAL_WALL
 			max_health = Stats.MAX_METAL_WALL
 		"armored":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/front/armored.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/armored.tres")
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
 		"demolish":

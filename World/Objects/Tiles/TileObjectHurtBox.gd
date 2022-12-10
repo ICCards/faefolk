@@ -1,7 +1,7 @@
 extends Node2D
 
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
 var rng = RandomNumberGenerator.new()
 var location
@@ -29,9 +29,9 @@ func PlayEffect(_player_id):
 	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
 	Tiles.add_valid_tiles(location, item_name)
 	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
 	yield($SoundEffects, "finished")
@@ -55,9 +55,9 @@ func set_dimensions():
 			"left":
 				$Position2D.rotation_degrees = 90
 				if item_name == "wood chest":
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/left.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
 				else:
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Left.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
 				$Chest.flip_h = false
 				$Chest.position = Vector2(18,0)
 				$Position2D.position = Vector2(16, -32)
@@ -65,9 +65,9 @@ func set_dimensions():
 				Tiles.remove_valid_tiles(location, Vector2(1,2))
 			"right":
 				if item_name == "wood chest":
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/left.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
 				else:
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Left.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
 				$Chest.flip_h = true
 				$Position2D.rotation_degrees = 270
 				$Position2D.position = Vector2(16, -32)
@@ -78,18 +78,18 @@ func set_dimensions():
 				$Position2D.rotation_degrees = 180
 				$Chest.position = Vector2(32,-32)
 				if item_name == "wood chest":
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/up.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/up.tres")
 				else:
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Up.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Up.tres")
 				Tiles.remove_valid_tiles(location, Vector2(2,1))
 			"down":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
 				$Chest.position = Vector2(32,-32)
 				if item_name == "wood chest":
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/down.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/down.tres")
 				else:
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Down.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Down.tres")
 				Tiles.remove_valid_tiles(location, Vector2(2,1))
 		$Chest.animation = "open"
 		$Chest.show()
@@ -317,24 +317,24 @@ func _on_HurtBox_area_entered(area):
 	$Position2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/DetectPlayerAroundBed/CollisionShape2D.set_deferred("disabled", true)
 	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "wood chest" or item_name == "stone chest":
 		drop_items_in_chest()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		drop_items_in_grain_mill()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		drop_items_in_stove()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "furnace":
 		drop_items_in_furnace()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "tool cabinet":
 		drop_items_in_tc()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	else: 
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
 	var dimensions = Constants.dimensions_dict[item_name]

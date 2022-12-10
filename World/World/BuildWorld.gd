@@ -16,8 +16,8 @@ onready var shallow_ocean = get_node("../GeneratedTiles/ShallowOcean")
 onready var deep_ocean = get_node("../GeneratedTiles/DeepOcean")
 onready var top_ocean = get_node("../GeneratedTiles/TopOcean")
 
-onready var Player = preload("res://World/Player/Player/Player.tscn")
-const _character = preload("res://Global/Data/Characters.gd")
+onready var Player = load("res://World/Player/Player/Player.tscn")
+onready var _character = load("res://Global/Data/Characters.gd")
 
 var built_chunks = []
 var current_chunks = []
@@ -40,7 +40,8 @@ func spawn_player():
 		player.position = Vector2(500*32,500*32)
 
 func _on_BuildTerrain_timeout():
-	build_terrain()
+	pass
+#	build_terrain()
 
 func build_terrain():
 	if Server.player_node:

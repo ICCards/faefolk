@@ -1,17 +1,18 @@
 extends Control
 
-onready var PlayerMenuState = preload("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
-const _character = preload("res://Global/Data/Characters.gd")
+onready var PlayerMenuState = load("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
+onready var _character = load("res://Global/Data/Characters.gd")
 var playerMenuState
 var is_menu_open = false
 
 func _ready():
-	$TitleMusic.stream = Sounds.title_music
-	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
-	$TitleMusic.play()
-	Sounds.connect("volume_change", self, "change_title_volume")
-	$Background/Water1.playing = true
-	$Background/Water2.playing = true
+	pass
+#	$TitleMusic.stream = Sounds.title_music
+#	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
+#	$TitleMusic.play()
+#	Sounds.connect("volume_change", self, "change_title_volume")
+#	$Background/Water1.playing = true
+#	$Background/Water2.playing = true
 
 
 func spawn_player_in_menu():

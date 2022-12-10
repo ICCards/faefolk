@@ -16,7 +16,7 @@ func _physics_process(delta):
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Ice/cast.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Ice/cast.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 	sound_effects.play()
 	$Projectile.transform = projectile_transform
@@ -43,7 +43,7 @@ func projectile_collided():
 	$TrailParticles/Particles.emitting = false
 	$TrailParticles/Particles2.emitting = false
 	$TrailParticles/Particles3.emitting = false
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Ice/explosion.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Ice/explosion.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 	sound_effects.play()
 	if debuff:
@@ -51,7 +51,7 @@ func projectile_collided():
 		$BuffedExplosionParticles.emitting = true
 		$BuffedExplosionSprite.show()
 		$BuffedExplosionSprite.playing = true
-		sound_effects2.stream = preload("res://Assets/Sound/Sound effects/Magic/Ice/blizzard.mp3")
+		sound_effects2.stream = load("res://Assets/Sound/Sound effects/Magic/Ice/blizzard.mp3")
 		sound_effects2.volume_db = Sounds.return_adjusted_sound_db("sound", -18)
 		sound_effects2.play()
 		yield($BuffedExplosionSprite, "animation_finished")

@@ -18,9 +18,9 @@ func set_song():
 
 func _play_background_music():
 	if Util.chance(50):
-		stream = preload("res://Assets/Sound/music/edutainment.mp3")
+		stream = load("res://Assets/Sound/music/edutainment.mp3")
 	else:
-		stream = preload("res://Assets/Sound/music/make it easy.mp3")
+		stream = load("res://Assets/Sound/music/make it easy.mp3")
 	volume_db =  Sounds.return_adjusted_sound_db("music", -32)
 	play()
 	yield(self, "finished")

@@ -2,41 +2,41 @@ extends Node2D
 
 onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
-onready var ArrowProjectile = preload("res://World/Objects/Projectiles/ArrowProjectile.tscn")
+onready var ArrowProjectile = load("res://World/Objects/Projectiles/ArrowProjectile.tscn")
 
-onready var LightningProjectile = preload("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
-onready var LightningStrike = preload("res://World/Objects/Magic/Lightning/LightningStrike.tscn")
-onready var FlashStep = preload("res://World/Objects/Magic/Lightning/FlashStep.tscn")
+onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
+onready var LightningStrike = load("res://World/Objects/Magic/Lightning/LightningStrike.tscn")
+onready var FlashStep = load("res://World/Objects/Magic/Lightning/FlashStep.tscn")
 
-onready var TornadoProjectile = preload("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
-onready var DashGhost = preload("res://World/Objects/Magic/Wind/DashGhost.tscn")
-onready var LingeringTornado = preload("res://World/Objects/Magic/Wind/LingeringTornado.tscn")
-onready var Whirlwind = preload("res://World/Objects/Magic/Wind/Whirlwind.tscn")
+onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+onready var DashGhost = load("res://World/Objects/Magic/Wind/DashGhost.tscn")
+onready var LingeringTornado = load("res://World/Objects/Magic/Wind/LingeringTornado.tscn")
+onready var Whirlwind = load("res://World/Objects/Magic/Wind/Whirlwind.tscn")
 
-onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProjectile.tscn")
-onready var FlameThrower = preload("res://World/Objects/Magic/Fire/Flamethrower.tscn")
-onready var FireBuffFront = preload("res://World/Objects/Magic/Fire/AttachedFlameBehind.tscn")
-onready var FireBuffBehind = preload("res://World/Objects/Magic/Fire/AttachedFlameFront.tscn")
+onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+onready var FlameThrower = load("res://World/Objects/Magic/Fire/Flamethrower.tscn")
+onready var FireBuffFront = load("res://World/Objects/Magic/Fire/AttachedFlameBehind.tscn")
+onready var FireBuffBehind = load("res://World/Objects/Magic/Fire/AttachedFlameFront.tscn")
 
-onready var EarthStrike = preload("res://World/Objects/Magic/Earth/EarthStrike.tscn")
-onready var EarthGolem = preload("res://World/Objects/Magic/Earth/EarthGolem.tscn")
-onready var EarthStrikeDebuff = preload("res://World/Objects/Magic/Earth/EarthStrikeDebuff.tscn")
-onready var Earthquake = preload("res://World/Objects/Magic/Earth/Earthquake.tscn")
+onready var EarthStrike = load("res://World/Objects/Magic/Earth/EarthStrike.tscn")
+onready var EarthGolem = load("res://World/Objects/Magic/Earth/EarthGolem.tscn")
+onready var EarthStrikeDebuff = load("res://World/Objects/Magic/Earth/EarthStrikeDebuff.tscn")
+onready var Earthquake = load("res://World/Objects/Magic/Earth/Earthquake.tscn")
 
-onready var IceDefense = preload("res://World/Objects/Magic/Ice/IceDefense.tscn")
-onready var IceProjectile = preload("res://World/Objects/Magic/Ice/IceProjectile.tscn")
-onready var BlizzardFog = preload("res://World/Objects/Magic/Ice/BlizzardFog.tscn")
+onready var IceDefense = load("res://World/Objects/Magic/Ice/IceDefense.tscn")
+onready var IceProjectile = load("res://World/Objects/Magic/Ice/IceProjectile.tscn")
+onready var BlizzardFog = load("res://World/Objects/Magic/Ice/BlizzardFog.tscn")
 
-onready var DemonMage = preload("res://World/Objects/Magic/Dark/DemonMage.tscn")
-onready var PortalNode = preload("res://World/Objects/Magic/Dark/Portal.tscn")
+onready var DemonMage = load("res://World/Objects/Magic/Dark/DemonMage.tscn")
+onready var PortalNode = load("res://World/Objects/Magic/Dark/Portal.tscn")
 
-onready var HealthProjectile = preload("res://World/Objects/Magic/Health/HealthProjectile.tscn")
-onready var HealthBuff = preload("res://World/Objects/Magic/Health/HealthBuff.tscn")
+onready var HealthProjectile = load("res://World/Objects/Magic/Health/HealthProjectile.tscn")
+onready var HealthBuff = load("res://World/Objects/Magic/Health/HealthBuff.tscn")
 
 onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
 onready var composite_sprites = get_node("../CompositeSprites")
-var _uuid = preload("res://helpers/UUID.gd")
+var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 
 var dashing = false
@@ -101,7 +101,7 @@ func draw_bow(init_direction):
 		animation = "draw_" + init_direction.to_lower()
 		player_animation_player.play("bow draw release")
 		PlayerStats.decrease_energy()
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
 		yield(player_animation_player, "animation_finished" )
@@ -110,7 +110,7 @@ func draw_bow(init_direction):
 
 func wait_for_bow_release():
 	if not mouse_left_down:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
 		Stats.decrease_tool_health()
@@ -335,7 +335,7 @@ func cast(staff_name, spell_index):
 
 
 func set_invisibility():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Dark/invisibility.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Dark/invisibility.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
 	$Tween.interpolate_property(composite_sprites.get_node("Body"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
@@ -449,7 +449,7 @@ func play_flash_step():
 	if Server.world.name.substr(0,4) == "Cave":
 		if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(mouse_pos)) != -1:
 			return
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Lightning/teleport.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Lightning/teleport.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	sound_effects.play()
 	yield(get_tree().create_timer(0.2), "timeout")
@@ -516,7 +516,7 @@ func play_wind_projectile():
 	get_node("../../../").add_child(spell)
 
 func play_dash():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	sound_effects.play()
 	$DustParticles.emitting = true

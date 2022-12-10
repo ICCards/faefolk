@@ -1,23 +1,23 @@
 extends Node
 
-onready var LightningLine = preload("res://World/Objects/Misc/LightningLine.tscn")
-onready var Slime = preload("res://World/Enemies/Slime/Slime.tscn")
-onready var Spider = preload("res://World/Enemies/Spider.tscn")
-onready var FireMageSkeleton = preload("res://World/Enemies/Skeleton.tscn")
-onready var TileObjectHurtBox = preload("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
-onready var CaveLadder = preload("res://World/Caves/Objects/CaveLadder.tscn")
-onready var LargeOre = preload("res://World/Objects/Nature/Ores/LargeOre.tscn")
-onready var SmallOre = preload("res://World/Objects/Nature/Ores/SmallOre.tscn")
-onready var Mushroom = preload("res://World/Objects/Nature/Forage/Mushroom.tscn")
-onready var TallGrass = preload("res://World/Objects/Nature/Grasses/TallGrass.tscn")
-onready var CaveGrass = preload("res://World/Caves/Objects/CaveGrass.tscn")
-onready var CaveLight = preload("res://World/Caves/Objects/CaveLight.tscn")
-onready var Player = preload("res://World/Player/Player/Player.tscn")
-const _character = preload("res://Global/Data/Characters.gd")
+onready var LightningLine = load("res://World/Objects/Misc/LightningLine.tscn")
+onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
+onready var Spider = load("res://World/Enemies/Spider.tscn")
+onready var FireMageSkeleton = load("res://World/Enemies/Skeleton.tscn")
+onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
+onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
+onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
+onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
+onready var Mushroom = load("res://World/Objects/Nature/Forage/Mushroom.tscn")
+onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
+onready var CaveGrass = load("res://World/Caves/Objects/CaveGrass.tscn")
+onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
+onready var Player = load("res://World/Player/Player/Player.tscn")
+onready var _character = load("res://Global/Data/Characters.gd")
 var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
-var _uuid = preload("res://helpers/UUID.gd")
+var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 var rng := RandomNumberGenerator.new()
 const NUM_MUSHROOMS = 10

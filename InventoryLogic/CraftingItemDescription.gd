@@ -4,7 +4,7 @@ var width
 var height
 var item_name
 var amount_ingredients
-onready var Ingredient = preload("res://InventoryLogic/Ingredient.tscn")
+onready var Ingredient = load("res://InventoryLogic/Ingredient.tscn")
 
 func initialize():
 	set_description_text(item_name)

@@ -9,7 +9,7 @@ onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 onready var player_animation_player = Server.player_node.animation_player
 onready var composite_sprites = Server.player_node.composite_sprites
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
 var in_casting_state: bool = false
 var mini_game_active: bool = false
@@ -77,7 +77,7 @@ func _physics_process(delta):
 		line.points = [start_point, hook.position + Vector2(4.5,4.5)]
 
 func retract_and_stop(fish_name):
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/pullItemFromWater.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/pullItemFromWater.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	waiting_for_fish_bite = false
@@ -117,7 +117,7 @@ func start_fishing_mini_game():
 	$Tween.stop_all()
 	$AnimationPlayer.play("hit")
 	$FishingMiniGame.set_active(fishing_rod_type)
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/fishHit.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fishHit.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	yield($AnimationPlayer, "animation_finished")
@@ -179,7 +179,7 @@ func move_bob(start, end):
 
 
 func cast():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/cast.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/cast.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	in_casting_state = false
@@ -219,7 +219,7 @@ func draw_cast_line():
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
 	var location = Tiles.ocean_tiles.world_to_map(hook.position + get_parent().position)
 	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles): # valid cast
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 		waiting_for_fish_bite = true
@@ -265,7 +265,7 @@ func return_adjusted_end_point(progress_of_game):
 
 func _on_FishBiteTimer_timeout():
 	if waiting_for_fish_bite:
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Fishing/fishBite.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fishBite.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 		$AnimationPlayer.play("bite")

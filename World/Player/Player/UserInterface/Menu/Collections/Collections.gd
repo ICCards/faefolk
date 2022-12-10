@@ -58,7 +58,7 @@ func initialize():
 	show()
 	page = "Crops"
 	$FishCollection.hide()
-	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections1.png")
+	get_node("../Background").texture = load("res://Assets/Images/Inventory UI/menus/collections1.png")
 	$CropCollection.initialize()
 	$ForageCollection.hide()
 	$FoodCollection1.hide()
@@ -70,7 +70,7 @@ func initialize():
 func _on_Crops_pressed():
 	page = "Crops"
 	$FishCollection.hide()
-	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections1.png")
+	get_node("../Background").texture = load("res://Assets/Images/Inventory UI/menus/collections1.png")
 	$CropCollection.initialize()
 	$ForageCollection.hide()
 	$FoodCollection1.hide()
@@ -85,7 +85,7 @@ func _on_Fish_pressed():
 	$CropCollection.hide()
 	$FoodBtnLeft.hide()
 	$FoodBtnRight.hide()
-	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections2.png")
+	get_node("../Background").texture = load("res://Assets/Images/Inventory UI/menus/collections2.png")
 	$FishCollection.initialize()
 	$ForageCollection.hide()
 	$FoodCollection1.hide()
@@ -99,7 +99,7 @@ func _on_Forage_pressed():
 	$CropCollection.hide()
 	$FishCollection.hide()
 	$ForageCollection.initialize()
-	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections3.png")
+	get_node("../Background").texture = load("res://Assets/Images/Inventory UI/menus/collections3.png")
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()
@@ -114,7 +114,7 @@ func _on_Minerals_pressed():
 	$FoodCollection2.hide()
 	$ForageCollection.hide()
 	$ResourceCollection.initialize()
-	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections4.png")
+	get_node("../Background").texture = load("res://Assets/Images/Inventory UI/menus/collections4.png")
 
 func _on_Foods_pressed():
 	page = "Food"
@@ -123,7 +123,7 @@ func _on_Foods_pressed():
 	$CropCollection.hide()
 	$FishCollection.hide()
 	$ForageCollection.hide()
-	get_node("../Background").texture = preload("res://Assets/Images/Inventory UI/menus/collections5.png")
+	get_node("../Background").texture = load("res://Assets/Images/Inventory UI/menus/collections5.png")
 	$FoodCollection1.initialize()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()

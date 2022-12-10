@@ -80,70 +80,70 @@ var current_footsteps_sound
 
 
 ### Sound effects ##
-var wood_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/wood footsteps.mp3")
-var dirt_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3")
-var stone_footsteps = preload("res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3")
-var swimming = preload("res://Assets/Sound/Sound effects/Footsteps/swimming.mp3")
+var wood_footsteps = load("res://Assets/Sound/Sound effects/Footsteps/wood footsteps.mp3")
+var dirt_footsteps = load("res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3")
+var stone_footsteps = load("res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3")
+var swimming = load("res://Assets/Sound/Sound effects/Footsteps/swimming.mp3")
 
-var button_hover = preload("res://Assets/Sound/Sound effects/UI/button hover.mp3")
-var button_select = preload("res://Assets/Sound/Sound effects/UI/button select.mp3")
+var button_hover = load("res://Assets/Sound/Sound effects/UI/button hover.mp3")
+var button_select = load("res://Assets/Sound/Sound effects/UI/button select.mp3")
 
-var pick_up_item = preload("res://Assets/Sound/Sound effects/UI/pick up item.mp3")
+var pick_up_item = load("res://Assets/Sound/Sound effects/UI/pick up item.mp3")
 
-var place_object = preload("res://Assets/Sound/Sound effects/Building/place object.mp3")
+var place_object = load("res://Assets/Sound/Sound effects/Building/place object.mp3")
 
-var pick_up_house_object = preload("res://Assets/Sound/Sound effects/UI/pick up house object.mp3")
-var put_down_house_object = preload("res://Assets/Sound/Sound effects/UI/put down house object.mp3")
+var pick_up_house_object = load("res://Assets/Sound/Sound effects/UI/pick up house object.mp3")
+var put_down_house_object = load("res://Assets/Sound/Sound effects/UI/put down house object.mp3")
 
-var door_open = preload("res://Assets/Sound/Sound effects/Door/door open.mp3")
-var door_close = preload("res://Assets/Sound/Sound effects/Door/door close.mp3")
+var door_open = load("res://Assets/Sound/Sound effects/Door/door open.mp3")
+var door_close = load("res://Assets/Sound/Sound effects/Door/door close.mp3")
 
-var chest_open = preload("res://Assets/Sound/Sound effects/chest/open.mp3")
+var chest_open = load("res://Assets/Sound/Sound effects/chest/open.mp3")
 
 var ore_hit = [
-	preload("res://Assets/Sound/Sound effects/Ore/Ore hit 1.mp3"),
-	preload("res://Assets/Sound/Sound effects/Ore/Ore hit 2.mp3"),
-	preload("res://Assets/Sound/Sound effects/Ore/Ore hit 3.mp3"),
+	load("res://Assets/Sound/Sound effects/Ore/Ore hit 1.mp3"),
+	load("res://Assets/Sound/Sound effects/Ore/Ore hit 2.mp3"),
+	load("res://Assets/Sound/Sound effects/Ore/Ore hit 3.mp3"),
 	]
 
 var ore_break = [
-	preload("res://Assets/Sound/Sound effects/Ore/Ore break 1.mp3"),
-	preload("res://Assets/Sound/Sound effects/Ore/Ore break 2.mp3"),
-	preload("res://Assets/Sound/Sound effects/Ore/Ore break 3.mp3")
+	load("res://Assets/Sound/Sound effects/Ore/Ore break 1.mp3"),
+	load("res://Assets/Sound/Sound effects/Ore/Ore break 2.mp3"),
+	load("res://Assets/Sound/Sound effects/Ore/Ore break 3.mp3")
 	]
 
 var tree_hit = [
-	preload("res://Assets/Sound/Sound effects/Tree/Tree hit 1.mp3"),
-	preload("res://Assets/Sound/Sound effects/Tree/Tree hit 2.mp3"),
-	preload("res://Assets/Sound/Sound effects/Tree/Tree hit 3.mp3")
+	load("res://Assets/Sound/Sound effects/Tree/Tree hit 1.mp3"),
+	load("res://Assets/Sound/Sound effects/Tree/Tree hit 2.mp3"),
+	load("res://Assets/Sound/Sound effects/Tree/Tree hit 3.mp3")
 ]
 
 var sword_whoosh = [
-	preload("res://Assets/Sound/Sound effects/Sword/sword whoosh.mp3"),
-	preload("res://Assets/Sound/Sound effects/Sword/sword whoosh 2.mp3"),
+	load("res://Assets/Sound/Sound effects/Sword/sword whoosh.mp3"),
+	load("res://Assets/Sound/Sound effects/Sword/sword whoosh 2.mp3"),
 ]
 
-var tree_break = preload("res://Assets/Sound/Sound effects/Tree/Falling tree.mp3")
-var stump_break = preload("res://Assets/Sound/Sound effects/Tree/Stump break.mp3")
-var tool_break = preload("res://Assets/Sound/Sound effects/objects/tool break.mp3")
+var tree_break = load("res://Assets/Sound/Sound effects/Tree/Falling tree.mp3")
+var stump_break = load("res://Assets/Sound/Sound effects/Tree/Stump break.mp3")
+var tool_break = load("res://Assets/Sound/Sound effects/objects/tool break.mp3")
 
 var bear_grown = [
-	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 1.mp3"),
-	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 2.mp3"),
-	preload("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 3.mp3")
+	load("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 1.mp3"),
+	load("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 2.mp3"),
+	load("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 3.mp3")
 ]
 
 
 ### Ambient ###
 
-var fire_start = preload("res://Assets/Sound/Sound effects/Fire/start.mp3")
-var fire_crackle = preload("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
+var fire_start = load("res://Assets/Sound/Sound effects/Fire/start.mp3")
+var fire_crackle = load("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
 
 ### Music ###
-var title_music = preload("res://Assets/Sound/music/wobble dance.mp3")
+var title_music = load("res://Assets/Sound/music/wobble dance.mp3")
 var background_music = [
-	preload("res://Assets/Sound/music/make it easy.mp3"),
-	preload("res://Assets/Sound/music/edutainment.mp3")
+	load("res://Assets/Sound/music/make it easy.mp3"),
+	load("res://Assets/Sound/music/edutainment.mp3")
 ]
 var background_music_names = [
 	"Make it easy",
@@ -151,16 +151,16 @@ var background_music_names = [
 ]
 #
 #var demos = [
-#	preload("res://Assets/Sound/Demos/8 bit adventure.mp3"),
-#	preload("res://Assets/Sound/Demos/8 bit creature.mp3"),
-#	preload("res://Assets/Sound/Demos/a productive day.mp3"),
-#	preload("res://Assets/Sound/Demos/arcade.mp3"),
-#	preload("res://Assets/Sound/Demos/chance time.mp3"),
-#	preload("res://Assets/Sound/Demos/clock tower.mp3"),
-#	preload("res://Assets/Sound/Demos/dance of the baobabs.mp3"),
-#	preload("res://Assets/Sound/Demos/happy donk.mp3"),
-#	preload("res://Assets/Sound/Demos/pixel squirrel.mp3"),
-#	preload("res://Assets/Sound/Demos/pixel wave.mp3")
+#	load("res://Assets/Sound/Demos/8 bit adventure.mp3"),
+#	load("res://Assets/Sound/Demos/8 bit creature.mp3"),
+#	load("res://Assets/Sound/Demos/a productive day.mp3"),
+#	load("res://Assets/Sound/Demos/arcade.mp3"),
+#	load("res://Assets/Sound/Demos/chance time.mp3"),
+#	load("res://Assets/Sound/Demos/clock tower.mp3"),
+#	load("res://Assets/Sound/Demos/dance of the baobabs.mp3"),
+#	load("res://Assets/Sound/Demos/happy donk.mp3"),
+#	load("res://Assets/Sound/Demos/pixel squirrel.mp3"),
+#	load("res://Assets/Sound/Demos/pixel wave.mp3")
 #]
 
 signal song_skipped

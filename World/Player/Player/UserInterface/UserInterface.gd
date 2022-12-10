@@ -4,15 +4,15 @@ onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var holding_item = null
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var Menu = preload("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
-onready var Hotbar = preload("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
-onready var Workbench = preload("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
-onready var Stove = preload("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
-onready var GrainMill = preload("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
-onready var Furnace = preload("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
-onready var Chest = preload("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
-onready var Tool_cabinet = preload("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
+onready var Menu = load("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
+onready var Hotbar = load("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
+onready var Workbench = load("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
+onready var Stove = load("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
+onready var GrainMill = load("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
+onready var Furnace = load("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
+onready var Chest = load("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
+onready var Tool_cabinet = load("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
 
 var items_to_drop = []
 
@@ -138,7 +138,7 @@ func toggle_tc(id):
 func toggle_chest(id):
 	if not is_opening_chest:
 		if not has_node("Chest"):
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/chest/open.mp3")
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/open.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
 			PlayerInventory.interactive_screen_mode = true
@@ -291,7 +291,7 @@ func drop_items():
 	
 	
 func play_open_menu_sound():
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/UI/backpackIN.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/backpackIN.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 

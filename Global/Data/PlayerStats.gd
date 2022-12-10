@@ -1,5 +1,6 @@
 extends Node
 
+signal time_changed
 signal mana_changed
 signal energy_changed
 signal health_changed
@@ -14,8 +15,16 @@ var energy_maximum = 100.0
 var health_maximum = 100.0
 var mana_maximum = 100.0
 
+var starting_time
+
 func _ready():
 	start_mana_timer()
+	start_current_time()
+	
+func start_current_time():
+	yield(get_tree().create_timer(2.0), "timeout")
+	emit_signal("time_changed")
+	start_current_time()
 	
 func start_mana_timer():
 	yield(get_tree().create_timer(2.0), "timeout")

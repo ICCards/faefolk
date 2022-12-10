@@ -209,7 +209,7 @@ func _on_KnockbackTimer_timeout():
 
 func play_groan_sound_effect():
 	rng.randomize()
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 	sound_effects.play()
 	yield(sound_effects, "finished")
@@ -219,7 +219,7 @@ func play_groan_sound_effect():
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		sound_effects.stream = preload("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 

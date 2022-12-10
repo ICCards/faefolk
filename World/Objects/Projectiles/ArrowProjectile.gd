@@ -11,7 +11,7 @@ var is_multishot1: bool = false
 var is_multishot2: bool = false
 var ricochet_enemies = []
 
-var _uuid = preload("res://helpers/UUID.gd")
+var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 
 func _physics_process(delta):
