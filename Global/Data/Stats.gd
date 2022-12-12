@@ -272,18 +272,18 @@ func return_max_tool_health(item_name):
 			return null
 
 func decrease_tool_health():
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		if PlayerInventory.hotbar[PlayerInventory.active_item_slot][2]:
-			PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] -= 1
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2]:
+			PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] -= 1
 			emit_signal("tool_health_change")
 	
 
 func refill_watering_can(type):
 	match type:
 		"stone watering can":
-			PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] = MAX_STONE_WATERING_CAN
+			PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_STONE_WATERING_CAN
 		"bronze watering can":
-			PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] = MAX_BRONZE_WATERING_CAN
+			PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_BRONZE_WATERING_CAN
 		"gold watering can":
-			PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] = MAX_GOLD_WATERING_CAN
+			PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_GOLD_WATERING_CAN
 	emit_signal("tool_health_change")

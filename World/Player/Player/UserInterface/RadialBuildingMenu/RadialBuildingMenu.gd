@@ -13,7 +13,7 @@ func initialize():
 	Server.player_node.destroy_placable_object()
 	$Circle/AnimationPlayer.play("zoom")
 	Server.player_node.get_node("Camera2D").set_process_input(false)
-	PlayerInventory.viewInventoryMode = true
+	PlayerData.viewInventoryMode = true
 	get_node("Circle/0").initialize()
 	get_node("Circle/1").initialize()
 	get_node("Circle/2").initialize()
@@ -28,7 +28,7 @@ func _physics_process(delta):
 		$Title.text = buildings[current_item][0].to_upper() + buildings[current_item].substr(1,-1) + ":"
 		$Resources.show()
 		if current_item == 1 or current_item == 0:
-			$Resources.text = "5 x Wood ( " + str(PlayerInventory.return_resource_total("wood")) + " )"
+			$Resources.text = "5 x Wood ( " + str(PlayerData.return_resource_total("wood")) + " )"
 		else:
 			$Resources.text = "Coming soon..."
 	else:
@@ -74,12 +74,12 @@ func destroy():
 	hide()
 
 
-func _input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		if PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] == "blueprint":
-			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-				if not event.is_pressed():
-					destroy()
-					yield(get_tree().create_timer(0.1), "timeout")
-					PlayerInventory.viewInventoryMode = false
+#func _input(event):
+#	if PlayerData.hotbar.has(PlayerData.active_item_slot):
+#		if PlayerData.hotbar[PlayerData.active_item_slot][0] == "blueprint":
+#			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+#				if not event.is_pressed():
+#					destroy()
+#					yield(get_tree().create_timer(0.1), "timeout")
+#					PlayerData.viewInventoryMode = false
 #

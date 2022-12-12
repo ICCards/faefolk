@@ -57,12 +57,11 @@ var is_building_world = false
 onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
-	Settings.load_keys()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	PlayerStats.connect("health_depleted", self, "player_death")
-	PlayerInventory.emit_signal("active_item_updated")
-	PlayerInventory.connect("active_item_updated", self, "set_held_object")
+	PlayerData.connect("health_depleted", self, "player_death")
+	PlayerData.emit_signal("active_item_updated")
+	PlayerData.connect("active_item_updated", self, "set_held_object")
 	Server.player_node = self
 	if is_building_world:
 		state = DYING
@@ -159,19 +158,16 @@ func player_death():
 		respawn()
 	
 func drop_inventory_items():
-	for item in PlayerInventory.hotbar.keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.hotbar[item], position+Vector2(rand_range(-32,32), rand_range(-32,32)))
-	for item in PlayerInventory.inventory.keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.inventory[item], position+Vector2(rand_range(-32,32), rand_range(-32,32)))
-	PlayerInventory.hotbar = {}
-	PlayerInventory.inventory = {}
+	for item in PlayerData.player_data["hotbar"].keys(): 
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["hotbar"][item], position+Vector2(rand_range(-32,32), rand_range(-32,32)))
+	for item in PlayerData.player_data["inventory"].keys(): 
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["inventory"][item], position+Vector2(rand_range(-32,32), rand_range(-32,32)))
+	PlayerData.player_data["hotbar"] = {}
+	PlayerData.player_data["inventory"] = {}
 	
 func respawn():
 	position = spawn_position
-	PlayerStats.energy = PlayerStats.energy_maximum
-	PlayerStats.health = PlayerStats.health_maximum
-	PlayerStats.emit_signal("health_changed")
-	PlayerStats.emit_signal("energy_changed")
+	PlayerData.respawn_player()
 	animation_player.stop()
 	$Camera2D/UserInterface.respawn()
 	yield(get_tree().create_timer(0.5), "timeout")
@@ -202,10 +198,10 @@ func sendAction(action,data):
 			Server.action("SWING", data)
 
 func set_held_object():
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Magic" or item_name == "bow" or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
+		if item_category == "Magic" or item_name == "bow": #or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
 			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
 			return
 	$Camera2D/UserInterface/MagicStaffUI.hide()
@@ -250,14 +246,13 @@ func set_movement_speed_change():
 		running_speed_change = 1.0
 
 func _unhandled_input(event):
-	if not PlayerInventory.viewInventoryMode and \
-		not PlayerInventory.interactive_screen_mode and \
-		not PlayerInventory.chatMode and \
-		not PlayerInventory.viewMapMode and \
+	if not PlayerData.viewInventoryMode and \
+		not PlayerData.interactive_screen_mode and \
+		not PlayerData.viewMapMode and \
 		state == MOVEMENT and \
 		Sounds.current_footsteps_sound != Sounds.swimming: 
-			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
@@ -355,7 +350,7 @@ func eat(item_name):
 		$Sounds/SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		$Sounds/SoundEffects.play()
 		state = EATING
-		PlayerInventory.remove_single_object_from_hotbar()
+		PlayerData.remove_single_object_from_hotbar()
 		var eating_paricles = Eating_particles.instance()
 		eating_paricles.item_name = item_name
 		add_child(eating_paricles)
@@ -373,10 +368,10 @@ func eat(item_name):
 func fish():
 	destroy_placable_object()
 	if state != FISHING:
-		PlayerStats.decrease_energy()
+		PlayerData.change_energy(-1)
 		state = FISHING
 		var fishing = Fishing.instance()
-		fishing.fishing_rod_type = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0]
 		add_child(fishing)
 
 
@@ -410,10 +405,7 @@ func magic_casting_movement_state(_delta):
 
 
 func movement_state(delta):
-	if (state == MAGIC_CASTING or state == MOVEMENT) and \
-	not PlayerInventory.chatMode and \
-	not PlayerInventory.viewInventoryMode and \
-	not PlayerInventory.interactive_screen_mode:
+	if (state == MAGIC_CASTING or state == MOVEMENT) and not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode:
 		input_vector = Vector2.ZERO
 		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0
@@ -462,8 +454,8 @@ func idle_state(_direction):
 		if Sounds.current_footsteps_sound != Sounds.swimming:
 			if state == MOVEMENT:
 				animation_player.play("idle")
-				if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-					var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+				if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+					var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 					var item_category = JsonData.item_data[item_name]["ItemCategory"]
 					if Util.valid_holding_item_category(item_category):
 						holding_item.show()
@@ -485,8 +477,8 @@ func walk_state(_direction):
 		$Sounds/FootstepsSound.stream_paused = false
 		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
 			animation_player.play("walk")
-			if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-				var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
@@ -515,23 +507,23 @@ func decrease_energy_or_health():
 	temp += 1
 	if temp > 1000:
 		temp = 0
-		if PlayerStats.energy == 0:
+		if PlayerData.player_data["energy"] == 0:
 			rng.randomize()
 			var amt = rng.randi_range(1,3)
 			$Area2Ds/HurtBox/AnimationPlayer.play("hit")
 			InstancedScenes.player_hit_effect(-amt, position)
-			PlayerStats.change_health(-amt)
+			PlayerData.change_health(-amt)
 		else:
-			PlayerStats.decrease_energy()
+			PlayerData.change_energy(-1)
 
 func check_if_holding_item():
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		var item_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
-		var item_qt = PlayerInventory.hotbar[PlayerInventory.active_item_slot][1]
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+		var item_qt = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][1]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
 		if Util.valid_holding_item_category(item_category):
 			holding_item.hide()
-			PlayerInventory.hotbar.erase(PlayerInventory.active_item_slot)
+			PlayerData.player_data["hotbar"].erase(str(PlayerData.active_item_slot))
 			$Camera2D/UserInterface/Hotbar.initialize_hotbar()
 			InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
 

@@ -30,8 +30,7 @@ enum Tiles {
 
 
 func _input(event):
-	if event.is_action_pressed("open_map") and not PlayerInventory.interactive_screen_mode and \
-	not PlayerInventory.chatMode and not PlayerInventory.viewInventoryMode and has_node("/root/World"):
+	if event.is_action_pressed("open_map") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and has_node("/root/World"):
 		show()
 		initialize()
 	if event.is_action_released("open_map"):
@@ -39,7 +38,7 @@ func _input(event):
 		set_inactive()
 
 func toggle_map():
-	PlayerInventory.viewMapMode = !PlayerInventory.viewMapMode
+	PlayerData.viewMapMode = !PlayerData.viewMapMode
 	$WorldMap.visible = !$WorldMap.visible
 	if $WorldMap.visible:
 		$WorldMap.initialize()
@@ -48,7 +47,7 @@ func toggle_map():
 
 
 func initialize():
-	PlayerInventory.viewMapMode = true
+	PlayerData.viewMapMode = true
 	$Camera2D.current = true
 	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = false
 	if not is_first_time_opened:
@@ -57,7 +56,7 @@ func initialize():
 		$Camera2D.zoom = Vector2(1.5, 1.5)
 	
 func set_inactive():
-	PlayerInventory.viewMapMode = false
+	PlayerData.viewMapMode = false
 	$Camera2D.current = false
 	Server.player_node.get_node("Camera2D").current = true
 	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = true

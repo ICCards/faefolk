@@ -62,7 +62,7 @@ func _on_HurtBox_area_entered(area):
 					"speed potion III":
 						get_node("../../").start_speed_buff(40)
 				return
-			PlayerStats.change_health(health_to_add)
+			PlayerData.change_health(health_to_add)
 			InstancedScenes.player_hit_effect(health_to_add, get_node("../../").position)
 		else:
 			if area.name == "BearBite":
@@ -97,7 +97,7 @@ func _on_HurtBox_area_entered(area):
 			else:
 				health_to_subtract = 0
 			$AnimationPlayer.play("hit")
-			PlayerStats.change_health(-health_to_subtract)
+			PlayerData.change_health(-health_to_subtract)
 			get_node("../../Camera2D").player_hit_screen_shake()
 			InstancedScenes.player_hit_effect(-health_to_subtract, get_node("../../").position)
 			yield($AnimationPlayer, "animation_finished")
@@ -108,21 +108,21 @@ func _on_HurtBox_area_entered(area):
 func diminish_HOT(type):
 	match type:
 		"poison potion I":
-			amount_to_diminish += PlayerStats.health_maximum * 0.08
+			amount_to_diminish += PlayerData.health_maximum * 0.08
 		"poison potion II":
-			amount_to_diminish += PlayerStats.health_maximum * 0.2
+			amount_to_diminish += PlayerData.health_maximum * 0.2
 		"poison potion III":
-			amount_to_diminish += PlayerStats.health_maximum * 0.32
+			amount_to_diminish += PlayerData.health_maximum * 0.32
 		"SlimeHit":
-			amount_to_diminish += PlayerStats.health_maximum * 0.08
+			amount_to_diminish += PlayerData.health_maximum * 0.08
 	poison_increment = int(ceil(amount_to_diminish / 4))
 	if int(amount_to_diminish) > 0 and get_node("../../").state != DYING:
 		if amount_to_diminish < poison_increment:
-			PlayerStats.change_health(-amount_to_diminish)
+			PlayerData.change_health(-amount_to_diminish)
 			InstancedScenes.player_hit_effect(-amount_to_diminish, get_node("../../").position)
 			amount_to_diminish = 0
 		else:
-			PlayerStats.change_health(-poison_increment)
+			PlayerData.change_health(-poison_increment)
 			InstancedScenes.player_hit_effect(-poison_increment, get_node("../../").position)
 			amount_to_diminish -= poison_increment
 		$PoisonTimer.start(2)
@@ -131,21 +131,21 @@ func diminish_HOT(type):
 func start_HOT(type):
 	match type:
 		"regeneration potion I":
-			amount_to_heal += (PlayerStats.health_maximum - PlayerStats.health) / 10
+			amount_to_heal += (PlayerData.health_maximum - PlayerData.player_data["health"]) / 10
 		"regeneration potion II":
-			amount_to_heal += (PlayerStats.health_maximum - PlayerStats.health) / 4
+			amount_to_heal += (PlayerData.health_maximum - PlayerData.player_data["health"]) / 4
 		"regeneration potion III":
-			amount_to_heal += (PlayerStats.health_maximum - PlayerStats.health) / 2
+			amount_to_heal += (PlayerData.health_maximum - PlayerData.player_data["health"]) / 2
 	if amount_to_heal > 0:
 		regeneration_increment = int(ceil(amount_to_heal / 4))
 		if regeneration_increment == 0:
 			regeneration_increment = 1
 		if amount_to_heal < regeneration_increment:
-			PlayerStats.change_health(amount_to_heal)
+			PlayerData.change_health(amount_to_heal)
 			InstancedScenes.player_hit_effect(amount_to_heal, get_node("../../").position)
 			amount_to_heal = 0
 		else:
-			PlayerStats.change_health(regeneration_increment)
+			PlayerData.change_health(regeneration_increment)
 			InstancedScenes.player_hit_effect(regeneration_increment, get_node("../../").position)
 			amount_to_heal -= regeneration_increment
 		$RegenerationTimer.start()
@@ -154,12 +154,12 @@ func start_HOT(type):
 func _on_PoisonTimer_timeout():
 	if int(amount_to_diminish) > 0 and get_node("../../").state != DYING:
 		if amount_to_diminish < poison_increment:
-			PlayerStats.change_health(-amount_to_diminish)
+			PlayerData.change_health(-amount_to_diminish)
 			InstancedScenes.player_hit_effect(-amount_to_diminish, get_node("../../").position)
 			amount_to_diminish = 0
 			$PoisonTimer.stop()
 		else:
-			PlayerStats.change_health(-poison_increment)
+			PlayerData.change_health(-poison_increment)
 			InstancedScenes.player_hit_effect(-poison_increment, get_node("../../").position)
 			amount_to_diminish -= poison_increment
 
@@ -167,12 +167,12 @@ func _on_PoisonTimer_timeout():
 func _on_RegenerationTimer_timeout():
 	if int(amount_to_heal) > 0 and get_node("../../").state != DYING:
 		if amount_to_heal < regeneration_increment:
-			PlayerStats.change_health(amount_to_heal)
+			PlayerData.change_health(amount_to_heal)
 			InstancedScenes.player_hit_effect(amount_to_heal, get_node("../../").position)
 			amount_to_heal = 0
 			$RegenerationTimer.stop()
 		else:
-			PlayerStats.change_health(regeneration_increment)
+			PlayerData.change_health(regeneration_increment)
 			InstancedScenes.player_hit_effect(regeneration_increment, get_node("../../").position)
 			amount_to_heal -= regeneration_increment
 

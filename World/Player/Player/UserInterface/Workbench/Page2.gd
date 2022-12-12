@@ -6,7 +6,7 @@ func initialize():
 			if get_parent().level_1_items.find(item.name) != -1:
 				get_node(item.name).disabled = false
 				get_node(item.name).material.set_shader_param("flash_modifier", 0)
-				if PlayerInventory.isSufficientMaterialToCraft(item.name):
+				if PlayerData.isSufficientMaterialToCraft(item.name):
 					get_node(item.name).modulate = Color(1, 1, 1, 1)
 				else:
 					get_node(item.name).modulate = Color(1, 1, 1, 0.4)
@@ -16,7 +16,7 @@ func initialize():
 			if get_parent().level_1_items.find(item.name) != -1 or get_parent().level_2_items.find(item.name) != -1:
 				get_node(item.name).disabled = false
 				get_node(item.name).material.set_shader_param("flash_modifier", 0)
-				if PlayerInventory.isSufficientMaterialToCraft(item.name):
+				if PlayerData.isSufficientMaterialToCraft(item.name):
 					get_node(item.name).modulate = Color(1, 1, 1, 1)
 				else:
 					get_node(item.name).modulate = Color(1, 1, 1, 0.4)
@@ -25,7 +25,7 @@ func initialize():
 		else: # level 3
 			get_node(item.name).disabled = false
 			get_node(item.name).material.set_shader_param("flash_modifier", 0)
-			if PlayerInventory.isSufficientMaterialToCraft(item.name):
+			if PlayerData.isSufficientMaterialToCraft(item.name):
 				get_node(item.name).modulate = Color(1, 1, 1, 1)
 			else:
 				get_node(item.name).modulate = Color(1, 1, 1, 0.4)

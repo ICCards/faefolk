@@ -65,7 +65,7 @@ func swing(item_name, _direction):
 			set_swing_collision_layer_and_position(item_name, _direction)
 			animation = "swing_" + _direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
-		PlayerStats.decrease_energy()
+		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
@@ -135,8 +135,8 @@ func set_watered_tile():
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
-			Stats.refill_watering_can(PlayerInventory.hotbar[PlayerInventory.active_item_slot][0])
-		elif PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] >= 1:
+			Stats.refill_watering_can(PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0])
+		elif PlayerData.player_data["hotbar"][PlayerData.active_item_slot][2] >= 1:
 			Stats.decrease_tool_health()
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

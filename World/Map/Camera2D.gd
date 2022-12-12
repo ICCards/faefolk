@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if PlayerInventory.viewMapMode:
+	if PlayerData.viewMapMode:
 		if event is InputEventMouseButton:
 			if event.is_pressed():
 				if event.button_index == BUTTON_WHEEL_UP:

@@ -20,6 +20,19 @@ position = Vector2( 413, 386 )
 texture = ExtResource( 2 )
 offset = Vector2( -32, -21 )
 
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="BackgroundButton" type="Button" parent="."]
+margin_left = -504.0
+margin_top = -150.0
+margin_right = 706.0
+margin_bottom = 630.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
 [node name="TrashButton" type="Button" parent="."]
 margin_left = 340.0
 margin_top = 344.0
@@ -29,10 +42,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-
-[node name="Tween" type="Tween" parent="."]
-
+[connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
 [connection signal="mouse_entered" from="TrashButton" to="." method="_on_TrashButton_mouse_entered"]
 [connection signal="mouse_exited" from="TrashButton" to="." method="_on_TrashButton_mouse_exited"]
 [connection signal="pressed" from="TrashButton" to="." method="_on_TrashButton_pressed"]

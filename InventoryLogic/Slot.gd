@@ -40,10 +40,8 @@ func _ready():
 	refresh_style()
 
 func refresh_style():
-	if slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot_index:
+	if slotType == SlotType.HOTBAR and PlayerData.active_item_slot == slot_index:
 		set('custom_styles/panel', selected_style)
-#		if item != null:
-#			item.hover_item()
 	elif item == null:
 		set('custom_styles/panel', empty_style)
 	else:
@@ -51,10 +49,6 @@ func refresh_style():
 		set('custom_styles/panel', default_style)
 	if slotType == SlotType.LOCKED:
 		set('custom_styles/panel', locked_style)
-#	else:
-#		print("set locked style")
-#		set('custom_styles/panel', locked_style)
-
 
 func pickFromSlot():
 	remove_child(item)

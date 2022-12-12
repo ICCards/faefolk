@@ -47,10 +47,11 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "chest"
 		$Position2D/InteractiveArea.object_level = ""
 		$Position2D/InteractiveArea.name = str(id)
-		if PlayerInventory.chests.has(id):
+		if PlayerData.player_data["chests"].has(id):
 			pass
 		else:
-			PlayerInventory.chests[id] = {}
+			PlayerData.player_data["chests"][id] = {}
+		print(PlayerData.player_data["chests"])
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -116,7 +117,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "stove"
 		$Position2D/InteractiveArea.object_level = item_name.substr(7)
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.stoves[id] = {}
+		if PlayerData.player_data["stoves"].has(id):
+			pass
+		else:
+			PlayerData.player_data["stoves"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -135,7 +139,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "grain mill"
 		$Position2D/InteractiveArea.object_level = item_name.substr(12)
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.grain_mills[id] = {}
+		if PlayerData.player_data["grain_mills"].has(id):
+			pass
+		else:
+			PlayerData.player_data["grain_mills"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -154,7 +161,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "furnace"
 		$Position2D/InteractiveArea.object_level = ""
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.furnaces[id] = {}
+		if PlayerData.player_data["furnaces"].has(id):
+			pass
+		else:
+			PlayerData.player_data["furnaces"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -169,7 +179,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "tool cabinet"
 		$Position2D/InteractiveArea.object_level = ""
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.tool_cabinets[id] = {}
+		if PlayerData.player_data["tool cabinets"].has(id):
+			pass
+		else:
+			PlayerData.player_data["tool cabinets"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -184,10 +197,6 @@ func set_dimensions():
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
 	elif item_name == "dresser":
-#		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-#		$Position2D/InteractiveArea.object_name = "workbench"
-#		$Position2D/InteractiveArea.object_level = item_name.substr(11)
-#		$Position2D/InteractiveArea.name = str(id)
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -257,8 +266,8 @@ func set_dimensions():
 		$Position2D.position =  Vector2(64, -48)
 
 func _input(event):
-	if Server.player_node.state == 0 and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
-		if event.is_action_pressed("action") and not PlayerInventory.viewInventoryMode:
+	if Server.player_node.state == 0 and not PlayerData.viewMapMode:
+		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode:
 			if item_name == "chair" or item_name == "armchair" or item_name == "couch":
 				if $Position2D/InteractiveArea.get_overlapping_areas().size() >= 1:
 					Server.player_node.sit(return_adjusted_chair_position(direction), direction)
@@ -352,31 +361,29 @@ func _on_HurtBox_area_entered(area):
 
 
 func drop_items_in_stove():
-	for item in PlayerInventory.stoves[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.stoves[id][item], position)
-	PlayerInventory.stoves.erase(id)
+	for item in PlayerData.player_data["stoves"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["stoves"][id][item], position)
+	PlayerData.player_data["stoves"].erase(id)
 
 func drop_items_in_grain_mill():
-	pass # BROKEN
-#	for item in PlayerInventory.grain_mills[id].keys():
-#		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.grain_mills[id][item], position)
-#	PlayerInventory.grain_mills.erase(id)
+	for item in PlayerData.player_data["grain_mills"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["grain_mills"][id][item], position)
+	PlayerData.player_data["grain_mills"].erase(id)
 
 func drop_items_in_chest():
-	for item in PlayerInventory.chests[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.chests[id][item], position)
-	PlayerInventory.chests.erase(id)
+	for item in PlayerData.player_data["chests"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["chests"][id][item], position)
+	PlayerData.player_data["chests"].erase(id)
 
 func drop_items_in_furnace():
-	for item in PlayerInventory.furnaces[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.furnaces[id][item], position)
-	PlayerInventory.furnaces.erase(id)
+	for item in PlayerData.player_data["furnaces"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["furnaces"][id][item], position)
+	PlayerData.player_data["furnaces"].erase(id)
 
 func drop_items_in_tc():
-	for item in PlayerInventory.tool_cabinets[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.tool_cabinets[id][item], position)
-	PlayerInventory.tool_cabinets.erase(id)
-
+	for item in PlayerData.player_data["tool_cabinets"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["tool_cabinets"][id][item], position)
+	PlayerData.player_data["tool_cabinets"].erase(id)
 
 func _on_DetectObjectOverPathBox_area_entered(area):
 	if item_name == "wood path" or item_name == "stone path":
@@ -387,10 +394,9 @@ func _on_DetectObjectOverPathBox_area_exited(area):
 		yield(get_tree().create_timer(0.25), "timeout")
 		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 
-
 func open_chest():
 	$Chest.play("open")
-	
+
 func close_chest():
 	yield(get_tree().create_timer(0.2), "timeout")
 	$Chest.play("open", true)

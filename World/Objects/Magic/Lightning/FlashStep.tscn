@@ -68,7 +68,7 @@ animations = [ {
 } ]
 
 [node name="FlashStep" type="AnimatedSprite"]
-modulate = Color( 1.22, 1.22, 1.22, 1 )
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -23 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 15 )

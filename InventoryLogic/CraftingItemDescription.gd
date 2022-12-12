@@ -69,7 +69,7 @@ func set_ingredients(item_name):
 
 
 func returnIfValidMaterial(item, amount):
-	if PlayerInventory.returnSufficentCraftingMaterial(item, amount):
+	if PlayerData.returnSufficentCraftingMaterial(item, amount):
 		return Color("ffffff") 
 	else:
 		return Color("ff0000") 

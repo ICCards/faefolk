@@ -117,14 +117,14 @@ func exited_crafting_area(item_name):
 			$Tween.start()
 
 func craft(item_name):
-	if not get_parent().holding_item and PlayerInventory.isSufficientMaterialToCraft(item_name):
+	if not get_parent().holding_item and PlayerData.isSufficientMaterialToCraft(item_name):
 		find_parent("UserInterface").holding_item = return_crafted_item(item_name)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-		PlayerInventory.craft_item(item_name)
+		PlayerData.craft_item(item_name)
 		set_current_page()
 	elif find_parent("UserInterface").holding_item:
-		if find_parent("UserInterface").holding_item.item_name == "arrow" and PlayerInventory.isSufficientMaterialToCraft(item_name):
-			PlayerInventory.craft_item(item_name)
+		if find_parent("UserInterface").holding_item.item_name == "arrow" and PlayerData.isSufficientMaterialToCraft(item_name):
+			PlayerData.craft_item(item_name)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
 			set_current_page()
 
@@ -165,27 +165,17 @@ func set_current_page():
 			$Page1.hide()
 			$UpButton.show()
 			$DownButton.hide()
-	initialize_hotbar()
-	initialize_inventory()
+	initialize_slots()
 
-
-func initialize_hotbar():
-	var slots = hotbar_slots.get_children()
-	for i in range(slots.size()):
-		if slots[i].item != null:
-			slots[i].removeFromSlot()
-		if PlayerInventory.hotbar.has(i):
-			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1], PlayerInventory.hotbar[i][2])
-
-func initialize_inventory():
-	var slots = inventory_slots.get_children()
-	for i in range(slots.size()):
-		if slots[i].item != null:
-			slots[i].removeFromSlot()
-		if PlayerInventory.inventory.has(i):
-			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1], PlayerInventory.inventory[i][2])
-
-
+func initialize_slots():
+	var i_slots = inventory_slots.get_children()
+	for i in range(i_slots.size()):
+		if PlayerData.player_data["inventory"].has(str(i)):
+			i_slots[i].initialize_item(PlayerData.player_data["inventory"][str(i)][0], PlayerData.player_data["inventory"][str(i)][1], PlayerData.player_data["inventory"][str(i)][2])
+	var h_slots = hotbar_slots.get_children()
+	for i in range(h_slots.size()):
+		if PlayerData.player_data["hotbar"].has(str(i)):
+			h_slots[i].initialize_item(PlayerData.player_data["hotbar"][str(i)][0], PlayerData.player_data["hotbar"][str(i)][1], PlayerData.player_data["hotbar"][str(i)][2])
 
 func hovered_slot(slot):
 	if slot.item:
@@ -214,13 +204,13 @@ func slot_gui_input(event: InputEvent, slot):
 
 
 func left_click_empty_slot(slot):
-	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
 	slot.putIntoSlot(find_parent("UserInterface").holding_item)
 	find_parent("UserInterface").holding_item = null
 
 func left_click_different_item(event: InputEvent, slot):
-	PlayerInventory.remove_item(slot)
-	PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+	PlayerData.remove_item(slot)
+	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
 	var temp_item = slot.item
 	slot.pickFromSlot()
 	temp_item.global_position = event.global_position
@@ -231,17 +221,17 @@ func left_click_same_item(slot):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 	var able_to_add = stack_size - slot.item.item_quantity
 	if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-		PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
+		PlayerData.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
 		slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
 	else:
-		PlayerInventory.add_item_quantity(slot, able_to_add)
+		PlayerData.add_item_quantity(slot, able_to_add)
 		slot.item.add_item_quantity(able_to_add)
 		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 
 func left_click_not_holding(slot):
-	PlayerInventory.remove_item(slot)
+	PlayerData.remove_item(slot)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()

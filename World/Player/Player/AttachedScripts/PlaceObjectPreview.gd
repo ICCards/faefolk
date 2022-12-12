@@ -403,18 +403,18 @@ func place_seed_state():
 
 
 func place_object(item_name, direction, location, type):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		if item_name != "wall" and item_name != "foundation":
-			PlayerInventory.remove_single_object_from_hotbar()
+			PlayerData.remove_single_object_from_hotbar()
 		var id = Uuid.v4()
 		if type == "placable":
-			if PlayerInventory.returnSufficentCraftingMaterial("wood", 5):
+			if PlayerData.returnSufficentCraftingMaterial("wood", 5):
 				$SoundEffects.stream = Sounds.place_object
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
 				if item_name == "wall" or item_name == "foundation":
 					MapData.add_placable(id, {"n":item_name,"v":"twig","l":location})
-					PlayerInventory.remove_material("wood", 5)
+					PlayerData.remove_material("wood", 5)
 					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
 				else:
 					MapData.add_placable(id, {"n":item_name,"d":direction,"l":location})
@@ -428,5 +428,5 @@ func place_object(item_name, direction, location, type):
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 			PlaceObject.place_seed_in_world(id, item_name, location, JsonData.crop_data[item_name]["DaysToGrow"])
-	if not PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		Server.player_node.destroy_placable_object()

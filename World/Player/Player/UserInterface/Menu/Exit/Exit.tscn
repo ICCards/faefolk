@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Exit/Exit.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Misc/Buttons/large exit button.png" type="Texture" id=3]
+
+[node name="Exit" type="Control"]
+script = ExtResource( 2 )
+
+[node name="Save" type="TextureButton" parent="."]
+margin_left = -55.5
+margin_right = 55.5
+margin_bottom = 51.0
+texture_normal = ExtResource( 3 )
+
+[node name="Exit" type="TextureButton" parent="."]
+margin_left = -56.0
+margin_top = 91.0
+margin_right = 55.0
+margin_bottom = 142.0
+texture_normal = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="SaveLabel" type="Label" parent="."]
+margin_left = -53.0
+margin_top = 3.0
+margin_right = 109.0
+margin_bottom = 72.0
+rect_scale = Vector2( 0.65, 0.65 )
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Save"
+align = 1
+valign = 1
+
+[node name="ExitLabel" type="Label" parent="."]
+margin_left = -53.0
+margin_top = 94.0
+margin_right = 109.0
+margin_bottom = 163.0
+rect_scale = Vector2( 0.65, 0.65 )
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Exit"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]

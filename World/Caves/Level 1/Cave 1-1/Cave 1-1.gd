@@ -7,9 +7,9 @@ var nav_node
 var count = 0
 var cave_chest_id = "level 1, room 1"
 
-var NUM_BATS = 3
-var NUM_SLIMES = 3
-var NUM_SPIDERS = 3
+var NUM_BATS = 0 #3
+var NUM_SLIMES = 0 #3
+var NUM_SPIDERS = 0 #3
 var NUM_SKELETONS = 0
 var is_changing_scene: bool = false
 var map_size = 50

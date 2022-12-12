@@ -40,11 +40,10 @@ func _ready():
 
 
 func _input(event):
-	if Server.player_node.state == MOVEMENT and holding_item == null and \
-		not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
-		if event.is_action_pressed("open_menu") and not PlayerInventory.interactive_screen_mode:
+	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:
+		if event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode:
 			toggle_menu()
-		elif event.is_action_pressed("action") and not PlayerInventory.viewInventoryMode:
+		elif event.is_action_pressed("action") and not PlayerData.viewInventoryMode:
 			if object_id:
 				match object_name:
 					"workbench":
@@ -61,44 +60,40 @@ func _input(event):
 						toggle_tc(object_id)
 					"chair":
 						Server.player_node.sit(object_level)
-		if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
-			PlayerInventory.active_item_scroll_up()
-		elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
-			PlayerInventory.active_item_scroll_down()
+		if Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
+			PlayerData.active_item_scroll_up()
+		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:
+			PlayerData.active_item_scroll_down()
 		elif event.is_action_pressed("slot1"):
-			PlayerInventory.active_item_slot = 0
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 0
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot2"):
-			PlayerInventory.active_item_slot = 1
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 1
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot3"):
-			PlayerInventory.active_item_slot = 2
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 2
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot4"):
-			PlayerInventory.active_item_slot = 3
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 3
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot5"):
-			PlayerInventory.active_item_slot = 4
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 4
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot6"):
-			PlayerInventory.active_item_slot = 5
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 5
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot7"):
-			PlayerInventory.active_item_slot = 6
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 6
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot8"):
-			PlayerInventory.active_item_slot = 7
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 7
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot9"):
-			PlayerInventory.active_item_slot = 8
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 8
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot10"):
-			PlayerInventory.active_item_slot = 9
-			PlayerInventory.emit_signal("active_item_updated")
-	elif PlayerInventory.viewMapMode:
-		$MapLabels.show()
-		return
-	$MapLabels.hide()
+			PlayerData.active_item_slot = 9
+			PlayerData.emit_signal("active_item_updated")
 
 
 func death():
@@ -141,7 +136,7 @@ func toggle_chest(id):
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/open.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
-			PlayerInventory.interactive_screen_mode = true
+			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
 			Server.world.get_node("PlacableObjects/"+id).open_chest()
 			yield(get_tree().create_timer(0.5), "timeout")
@@ -154,17 +149,15 @@ func toggle_chest(id):
 			close_chest(id)
 
 func close_hotbar_clock_and_stats():
-	PlayerInventory.interactive_screen_mode = true
+	PlayerData.interactive_screen_mode = true
 	$Hotbar.hide()
-	$CurrentTime.hide()
-	$PlayerStatsUI.hide()
+	$PlayerDataUI.hide()
 
 
 func add_hotbar_clock_and_stats():
-	PlayerInventory.interactive_screen_mode = false
+	PlayerData.interactive_screen_mode = false
 	$Hotbar.initialize_hotbar()
-	$CurrentTime.show()
-	$PlayerStatsUI.show()
+	$PlayerDataUI.show()
 
 
 func toggle_menu():
@@ -177,16 +170,14 @@ func toggle_menu():
 func show_menu():
 	play_open_menu_sound()
 	$Hotbar.hide()
-	$CurrentTime.hide()
-	$PlayerStatsUI.hide()
-	PlayerInventory.viewInventoryMode = true
+	$PlayerDataUI.hide()
+	PlayerData.viewInventoryMode = true
 	$Menu.initialize()
 
 func hide_menu():
-	PlayerInventory.viewInventoryMode = false
+	PlayerData.viewInventoryMode = false
 	$Hotbar.initialize_hotbar()
-	$CurrentTime.show()
-	$PlayerStatsUI.show()
+	$PlayerDataUI.show()
 	$Menu.hide()
 	drop_items()
 	get_node("../../").set_held_object()

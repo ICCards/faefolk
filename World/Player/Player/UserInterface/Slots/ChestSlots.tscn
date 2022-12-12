@@ -1,0 +1,241 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/ChestSlots.gd" type="Script" id=2]
+
+[node name="ChestSlots" type="GridContainer"]
+margin_left = -284.0
+margin_top = -224.0
+margin_right = 283.0
+margin_bottom = -50.0
+custom_constants/vseparation = 6
+custom_constants/hseparation = 3
+columns = 10
+script = ExtResource( 2 )
+
+[node name="Slot1" type="Panel" parent="."]
+margin_right = 54.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot2" type="Panel" parent="."]
+margin_left = 57.0
+margin_right = 111.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot3" type="Panel" parent="."]
+margin_left = 114.0
+margin_right = 168.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot4" type="Panel" parent="."]
+margin_left = 171.0
+margin_right = 225.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot5" type="Panel" parent="."]
+margin_left = 228.0
+margin_right = 282.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot6" type="Panel" parent="."]
+margin_left = 285.0
+margin_right = 339.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot7" type="Panel" parent="."]
+margin_left = 342.0
+margin_right = 396.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot8" type="Panel" parent="."]
+margin_left = 399.0
+margin_right = 453.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot9" type="Panel" parent="."]
+margin_left = 456.0
+margin_right = 510.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot10" type="Panel" parent="."]
+margin_left = 513.0
+margin_right = 567.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot11" type="Panel" parent="."]
+margin_top = 60.0
+margin_right = 54.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot12" type="Panel" parent="."]
+margin_left = 57.0
+margin_top = 60.0
+margin_right = 111.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot13" type="Panel" parent="."]
+margin_left = 114.0
+margin_top = 60.0
+margin_right = 168.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot14" type="Panel" parent="."]
+margin_left = 171.0
+margin_top = 60.0
+margin_right = 225.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot15" type="Panel" parent="."]
+margin_left = 228.0
+margin_top = 60.0
+margin_right = 282.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot16" type="Panel" parent="."]
+margin_left = 285.0
+margin_top = 60.0
+margin_right = 339.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot17" type="Panel" parent="."]
+margin_left = 342.0
+margin_top = 60.0
+margin_right = 396.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot18" type="Panel" parent="."]
+margin_left = 399.0
+margin_top = 60.0
+margin_right = 453.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot19" type="Panel" parent="."]
+margin_left = 456.0
+margin_top = 60.0
+margin_right = 510.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot20" type="Panel" parent="."]
+margin_left = 513.0
+margin_top = 60.0
+margin_right = 567.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot21" type="Panel" parent="."]
+margin_top = 120.0
+margin_right = 54.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot22" type="Panel" parent="."]
+margin_left = 57.0
+margin_top = 120.0
+margin_right = 111.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot23" type="Panel" parent="."]
+margin_left = 114.0
+margin_top = 120.0
+margin_right = 168.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot24" type="Panel" parent="."]
+margin_left = 171.0
+margin_top = 120.0
+margin_right = 225.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot25" type="Panel" parent="."]
+margin_left = 228.0
+margin_top = 120.0
+margin_right = 282.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot26" type="Panel" parent="."]
+margin_left = 285.0
+margin_top = 120.0
+margin_right = 339.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot27" type="Panel" parent="."]
+margin_left = 342.0
+margin_top = 120.0
+margin_right = 396.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot28" type="Panel" parent="."]
+margin_left = 399.0
+margin_top = 120.0
+margin_right = 453.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot29" type="Panel" parent="."]
+margin_left = 456.0
+margin_top = 120.0
+margin_right = 510.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )
+
+[node name="Slot30" type="Panel" parent="."]
+margin_left = 513.0
+margin_top = 120.0
+margin_right = 567.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 54, 54 )
+script = ExtResource( 1 )

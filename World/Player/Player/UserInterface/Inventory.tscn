@@ -1,8 +1,8 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=2]
-[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" type="Script" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/PetUI.gd" type="Script" id=6]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/Images/Misc/button.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Images/Inventory UI/frame with background.png" type="Texture" id=13]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=14]
 
 [sub_resource type="StyleBoxTexture" id=17]
 texture = ExtResource( 11 )
@@ -207,7 +208,6 @@ tracks/6/keys = {
 }
 
 [node name="Inventory" type="Control"]
-visible = false
 margin_left = -377.0
 margin_top = 39.0
 margin_right = -377.0
@@ -291,162 +291,9 @@ margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "0"
 
-[node name="InventorySlots" type="GridContainer" parent="."]
-margin_left = 90.0
-margin_top = 166.0
-margin_right = 657.0
-margin_bottom = 220.0
-custom_constants/vseparation = 3
-custom_constants/hseparation = 3
-columns = 10
+[node name="InventorySlots" parent="." instance=ExtResource( 3 )]
 
-[node name="Slot1" type="Panel" parent="InventorySlots"]
-margin_right = 54.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot2" type="Panel" parent="InventorySlots"]
-margin_left = 57.0
-margin_right = 111.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot3" type="Panel" parent="InventorySlots"]
-margin_left = 114.0
-margin_right = 168.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot4" type="Panel" parent="InventorySlots"]
-margin_left = 171.0
-margin_right = 225.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot5" type="Panel" parent="InventorySlots"]
-margin_left = 228.0
-margin_right = 282.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot6" type="Panel" parent="InventorySlots"]
-margin_left = 285.0
-margin_right = 339.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot7" type="Panel" parent="InventorySlots"]
-margin_left = 342.0
-margin_right = 396.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot8" type="Panel" parent="InventorySlots"]
-margin_left = 399.0
-margin_right = 453.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot9" type="Panel" parent="InventorySlots"]
-margin_left = 456.0
-margin_right = 510.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot10" type="Panel" parent="InventorySlots"]
-margin_left = 513.0
-margin_right = 567.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="HotbarSlots" type="GridContainer" parent="."]
-margin_left = 90.0
-margin_top = 97.0
-margin_right = 657.0
-margin_bottom = 151.0
-rect_min_size = Vector2( 54, 54 )
-custom_constants/vseparation = 3
-custom_constants/hseparation = 3
-columns = 10
-
-[node name="Slot1" type="Panel" parent="HotbarSlots"]
-margin_right = 54.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot2" type="Panel" parent="HotbarSlots"]
-margin_left = 57.0
-margin_right = 111.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot3" type="Panel" parent="HotbarSlots"]
-margin_left = 114.0
-margin_right = 168.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot4" type="Panel" parent="HotbarSlots"]
-margin_left = 171.0
-margin_right = 225.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot5" type="Panel" parent="HotbarSlots"]
-margin_left = 228.0
-margin_right = 282.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot6" type="Panel" parent="HotbarSlots"]
-margin_left = 285.0
-margin_right = 339.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot7" type="Panel" parent="HotbarSlots"]
-margin_left = 342.0
-margin_right = 396.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot8" type="Panel" parent="HotbarSlots"]
-margin_left = 399.0
-margin_right = 453.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot9" type="Panel" parent="HotbarSlots"]
-margin_left = 456.0
-margin_right = 510.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
-
-[node name="Slot10" type="Panel" parent="HotbarSlots"]
-margin_left = 513.0
-margin_right = 567.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 3 )
+[node name="HotbarInventorySlots" parent="." instance=ExtResource( 14 )]
 
 [node name="LockedSlots" type="GridContainer" parent="."]
 margin_left = 90.0
@@ -586,7 +433,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle right"
-frame = 30
+frame = 4
 playing = true
 
 [node name="HideShowButton" type="Button" parent="PetUI"]

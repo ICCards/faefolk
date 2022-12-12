@@ -2,7 +2,7 @@ extends Node
 
 
 
-var file_name = "res://keybinding.json"
+var file_name = "res://JSONData/keybinding.json"
 
 var key_dict = {
 	"move_right":68,

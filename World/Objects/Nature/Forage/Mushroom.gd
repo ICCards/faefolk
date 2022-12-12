@@ -28,7 +28,7 @@ func _on_Btn_pressed():
 		Server.player_node.harvest_forage("Mushroom/"+str(variety))
 		MapData.remove_object("mushroom", name)
 		yield(get_tree().create_timer(0.6), "timeout")
-		PlayerInventory.add_item_to_hotbar("mushroom", 1, null)
+		PlayerData.add_item_to_hotbar("mushroom", 1, null)
 		queue_free()
 
 func set_mouse_cursor_type():

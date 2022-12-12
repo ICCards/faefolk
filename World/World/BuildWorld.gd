@@ -40,8 +40,7 @@ func spawn_player():
 		player.position = Vector2(500*32,500*32)
 
 func _on_BuildTerrain_timeout():
-	pass
-#	build_terrain()
+	build_terrain()
 
 func build_terrain():
 	if Server.player_node:

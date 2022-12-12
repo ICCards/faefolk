@@ -126,7 +126,7 @@ func harvest_and_keep_planted():
 		
 
 func intitiateItemDrop(item, pos, yield_list):
-	PlayerInventory.add_item_to_hotbar(item, 1, null)
+	PlayerData.add_item_to_hotbar(item, 1, null)
 	yield_list.shuffle()
 	var amount = yield_list.front()
 	if amount > 1:

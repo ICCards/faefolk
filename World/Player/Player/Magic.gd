@@ -95,12 +95,12 @@ func _input( event ):
 
 
 func draw_bow(init_direction):
-	if PlayerInventory.returnSufficentCraftingMaterial("arrow", 1):
+	if PlayerData.returnSufficentCraftingMaterial("arrow", 1):
 		get_parent().state = MAGIC_CASTING
 		is_drawing = true
 		animation = "draw_" + init_direction.to_lower()
 		player_animation_player.play("bow draw release")
-		PlayerStats.decrease_energy()
+		PlayerData.change_energy(-1)
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
@@ -143,7 +143,7 @@ func shoot():
 			ricochet_arrow_shot()
 
 func ricochet_arrow_shot():
-	PlayerInventory.remove_material("arrow", 2)
+	PlayerData.remove_material("arrow", 2)
 	var arrow = ArrowProjectile.instance()
 	if get_node("../Magic").player_fire_buff:
 		arrow.is_on_fire = true
@@ -156,7 +156,7 @@ func ricochet_arrow_shot():
 
 
 func single_arrow_shot():
-	PlayerInventory.remove_material("arrow", 1)
+	PlayerData.remove_material("arrow", 1)
 	var arrow = ArrowProjectile.instance()
 	if get_node("../Magic").player_fire_buff:
 		arrow.is_on_fire = true
@@ -168,7 +168,7 @@ func single_arrow_shot():
 
 
 func multi_arrow_shot():
-	PlayerInventory.remove_material("arrow", 1)
+	PlayerData.remove_material("arrow", 1)
 	for i in range(3):
 		var arrow = ArrowProjectile.instance()
 		if get_node("../Magic").player_fire_buff:
@@ -256,13 +256,13 @@ func cast(staff_name, spell_index):
 	get_node("../Camera2D/UserInterface/MagicStaffUI").start_spell_cooldown()
 	match spell_index:
 		1:
-			PlayerStats.decrease_mana(1)
+			PlayerData.change_mana(-1)
 		2:
-			PlayerStats.decrease_mana(2)
+			PlayerData.change_mana(-2)
 		3:
-			PlayerStats.decrease_mana(5)
+			PlayerData.change_mana(-5)
 		4:
-			PlayerStats.decrease_mana(10)
+			PlayerData.change_mana(-10)
 	match staff_name:
 		"electric staff":
 			match spell_index:

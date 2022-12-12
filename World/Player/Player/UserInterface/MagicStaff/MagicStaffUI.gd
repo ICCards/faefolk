@@ -33,7 +33,7 @@ func initialize(item_name):
 	set_bgs()
 
 func set_bgs():
-	var experience = CollectionsData.skill_experience[selected_staff]
+	var experience = 1100 #CollectionsData.skill_experience[selected_staff]
 	var level
 	if experience == 0:
 		level = 0

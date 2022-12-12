@@ -48,11 +48,11 @@ func add_message(username, text, color):
 
 
 func _on_LineEdit_focus_entered():
-	PlayerInventory.chatMode = true
+	PlayerData.chatMode = true
 
 
 func _on_LineEdit_focus_exited():
-	PlayerInventory.chatMode = false
+	PlayerData.chatMode = false
 
 
 func _on_TextureButton_pressed():

@@ -25,8 +25,8 @@ onready var GrassObjects = get_node("../../GrassObjects")
 onready var NatureObjects = get_node("../../NatureObjects")
 
 
-#func _ready():
-#	spawn_placables()
+func _ready():
+	spawn_placables()
 	
 func spawn_placables():
 	yield(get_tree().create_timer(3.0), "timeout")

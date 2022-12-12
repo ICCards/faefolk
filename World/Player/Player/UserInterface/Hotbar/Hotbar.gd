@@ -15,7 +15,7 @@ enum SlotType {
 func _ready():
 	yield(get_tree(), "idle_frame")
 	for i in range(slots.size()):
-		PlayerInventory.connect("active_item_updated", slots[i], "refresh_style")
+		PlayerData.connect("active_item_updated", slots[i], "refresh_style")
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
 		slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
@@ -32,7 +32,7 @@ func hovered_slot(slot):
 
 func exited_slot(slot):
 	item = null
-	if slot.item and not (slot.slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot.slot_index):
+	if slot.item and not (slot.slotType == SlotType.HOTBAR and PlayerData.active_item_slot == slot.slot_index):
 		slot.item.exit_item()
 
 func _physics_process(delta):
@@ -72,30 +72,33 @@ func adjusted_description_position():
 			adjusted_pos += Vector2(0, -64)
 
 func update_tool_health():
-	if PlayerInventory.hotbar[PlayerInventory.active_item_slot][2] == 0 and PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] != "stone watering can":
-		slots[PlayerInventory.active_item_slot].removeFromSlot()
-		PlayerInventory.remove_item(slots[PlayerInventory.active_item_slot])
-		yield(get_tree().create_timer(0.1), "timeout")
-		$SoundEffects.stream = Sounds.tool_break
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -18)
-		$SoundEffects.play()
-	else:
-		slots[PlayerInventory.active_item_slot].initialize_item(PlayerInventory.hotbar[PlayerInventory.active_item_slot][0], PlayerInventory.hotbar[PlayerInventory.active_item_slot][1], PlayerInventory.hotbar[PlayerInventory.active_item_slot][2])
+	pass
+#	var item_name = PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0]
+#	if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] == 0 and item_name != "stone watering can" and item_name != "bronze watering can" and item_name != "gold watering can":
+#		slots[PlayerData.active_item_slot].removeFromSlot()
+#		PlayerData.remove_item(slots[PlayerData.active_item_slot])
+#		yield(get_tree().create_timer(0.1), "timeout")
+#		$SoundEffects.stream = Sounds.tool_break
+#		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -18)
+#		$SoundEffects.play()
+#	else:
+#		slots[PlayerData.active_item_slot].initialize_item(PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0], PlayerData.player_data["hotbar"][PlayerData.active_item_slot][1], PlayerData.player_data["hotbar"][PlayerData.active_item_slot][2])
 
 
 func initialize_hotbar():
 	show()
-	PlayerInventory.HotbarSlots = $HotbarSlots
+	PlayerData.HotbarSlots = $HotbarSlots
 	item = null
 	for i in range(slots.size()):
-		if JsonData.player_data["hotbar"].has(str(i)):
-			slots[i].initialize_item(JsonData.player_data["hotbar"][str(i)][0], JsonData.player_data["hotbar"][str(i)][1], JsonData.player_data["hotbar"][str(i)][2])
-	if JsonData.player_data["hotbar"].has(str(PlayerInventory.active_item_slot)):
-		slots[PlayerInventory.active_item_slot].item.set_init_hovered()
-
+		if slots[i].item != null:
+			slots[i].removeFromSlot()
+		if PlayerData.player_data["hotbar"].has(str(i)):
+			slots[i].initialize_item(PlayerData.player_data["hotbar"][str(i)][0], PlayerData.player_data["hotbar"][str(i)][1], PlayerData.player_data["hotbar"][str(i)][2])
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		slots[PlayerData.active_item_slot].item.set_init_hovered()
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if Server.player_node.state == 0:
-				PlayerInventory.hotbar_slot_selected(slot)
+				PlayerData.hotbar_slot_selected(slot)

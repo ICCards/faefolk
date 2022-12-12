@@ -31,7 +31,7 @@ func _on_Btn_pressed():
 		Input.set_custom_mouse_cursor(Images.normal_mouse)
 		Server.player_node.harvest_forage(str(type)+" flower")
 		yield(get_tree().create_timer(0.6), "timeout")
-		PlayerInventory.add_item_to_hotbar(str(type)+" flower", 1, null)
+		PlayerData.add_item_to_hotbar(str(type)+" flower", 1, null)
 		queue_free()
 
 func set_mouse_cursor_type():

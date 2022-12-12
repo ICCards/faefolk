@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/faefolk.icon.png-94c9a4cebe4e4b166301982eec862f8f.stex"
+path="res://.import/large exit button.png-229e6bc77f11402d8cd0ae99916c25c6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://faefolk.icon.png"
-dest_files=[ "res://.import/faefolk.icon.png-94c9a4cebe4e4b166301982eec862f8f.stex" ]
+source_file="res://Assets/Images/Misc/Buttons/large exit button.png"
+dest_files=[ "res://.import/large exit button.png-229e6bc77f11402d8cd0ae99916c25c6.stex" ]
 
 [params]
 

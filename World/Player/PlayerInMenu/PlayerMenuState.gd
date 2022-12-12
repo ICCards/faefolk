@@ -13,13 +13,13 @@ export var speed := 300.0
 var character
 var player
 
-#func _ready():
-#	Settings.load_keys()
-#	animPlayer.play("idle")
-#	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
-#	$FootstepsSound.play()
-#	setAnimationTexture("idle_down")
-#	Sounds.connect("volume_change", self, "change_footsteps_volume")
+func _ready():
+	Settings.load_keys()
+	animPlayer.play("idle")
+	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
+	$FootstepsSound.play()
+	setAnimationTexture("idle_down")
+	Sounds.connect("volume_change", self, "change_footsteps_volume")
 
 
 func _physics_process(_delta):

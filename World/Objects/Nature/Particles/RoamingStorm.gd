@@ -20,7 +20,7 @@ func initiate_storm():
 	$IdleTimer.start(rand_range(60, 180))
 
 func _physics_process(delta):
-	if Server.isLoaded and not PlayerInventory.viewMapMode:
+	if Server.isLoaded and not PlayerData.viewMapMode:
 		visible = true
 		position = position.move_toward(random_storm_position, delta * 10)
 		var snow = get_node("/root/World/GeneratedTiles/SnowTiles")

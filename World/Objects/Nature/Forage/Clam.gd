@@ -31,10 +31,10 @@ func _on_Btn_pressed():
 		Input.set_custom_mouse_cursor(Images.normal_mouse)
 		Server.player_node.harvest_forage(str(type)+" clam")
 		yield(get_tree().create_timer(0.6), "timeout")
-		PlayerInventory.add_item_to_hotbar(str(type) + " clam", 1, null)
+		PlayerData.add_item_to_hotbar(str(type) + " clam", 1, null)
 		if Util.chance(1):
 			pearl_types.shuffle()
-			PlayerInventory.add_item_to_hotbar(pearl_types[0]+" pearl", 1, null)
+			PlayerData.add_item_to_hotbar(pearl_types[0]+" pearl", 1, null)
 			CollectionsData.forage[pearl_types[0]+" pearl"] += 1
 		queue_free()
 

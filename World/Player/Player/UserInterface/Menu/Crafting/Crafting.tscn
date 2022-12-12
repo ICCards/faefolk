@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Assets/Images/craftable object preview/campfire.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/craftable object preview/wood barrel.png" type="Texture" id=2]
@@ -18,7 +18,7 @@
 [ext_resource path="res://Assets/Images/craftable object preview/stove #3.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Images/craftable object preview/grain mill #1.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Images/craftable object preview/metal door.png" type="Texture" id=18]
-[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=19]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Images/craftable object preview/tool cabinet.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Images/craftable object preview/grain mill #2.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Images/craftable object preview/wood door.png" type="Texture" id=22]
@@ -43,6 +43,7 @@
 [ext_resource path="res://Assets/Images/craftable object preview/bed.png" type="Texture" id=41]
 [ext_resource path="res://Assets/Images/craftable object preview/round table.png" type="Texture" id=42]
 [ext_resource path="res://Assets/Images/craftable object preview/wood gate.png" type="Texture" id=43]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=44]
 
 [node name="Crafting" type="Control"]
 rect_scale = Vector2( 0.5, 0.5 )
@@ -590,164 +591,19 @@ margin_right = 64.0
 margin_bottom = 96.0
 texture_normal = ExtResource( 41 )
 
-[node name="InventorySlots" type="GridContainer" parent="."]
-margin_left = 180.0
-margin_top = 755.0
-margin_right = 747.0
-margin_bottom = 809.0
+[node name="InventorySlots" parent="." instance=ExtResource( 44 )]
+margin_left = 182.0
+margin_top = 756.0
+margin_right = 749.0
+margin_bottom = 810.0
 rect_scale = Vector2( 2, 2 )
-custom_constants/vseparation = 3
-custom_constants/hseparation = 3
-columns = 10
 
-[node name="Slot1" type="Panel" parent="InventorySlots"]
-margin_right = 54.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot2" type="Panel" parent="InventorySlots"]
-margin_left = 57.0
-margin_right = 111.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot3" type="Panel" parent="InventorySlots"]
-margin_left = 114.0
-margin_right = 168.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot4" type="Panel" parent="InventorySlots"]
-margin_left = 171.0
-margin_right = 225.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot5" type="Panel" parent="InventorySlots"]
-margin_left = 228.0
-margin_right = 282.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot6" type="Panel" parent="InventorySlots"]
-margin_left = 285.0
-margin_right = 339.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot7" type="Panel" parent="InventorySlots"]
-margin_left = 342.0
-margin_right = 396.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot8" type="Panel" parent="InventorySlots"]
-margin_left = 399.0
-margin_right = 453.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot9" type="Panel" parent="InventorySlots"]
-margin_left = 456.0
-margin_right = 510.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot10" type="Panel" parent="InventorySlots"]
-margin_left = 513.0
-margin_right = 567.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="HotbarSlots" type="GridContainer" parent="."]
-margin_left = 180.0
+[node name="HotbarInventorySlots" parent="." instance=ExtResource( 19 )]
+margin_left = 182.0
 margin_top = 636.0
-margin_right = 747.0
+margin_right = 749.0
 margin_bottom = 690.0
-rect_min_size = Vector2( 54, 54 )
 rect_scale = Vector2( 2, 2 )
-custom_constants/vseparation = 3
-custom_constants/hseparation = 3
-columns = 10
-
-[node name="Slot1" type="Panel" parent="HotbarSlots"]
-margin_right = 54.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot2" type="Panel" parent="HotbarSlots"]
-margin_left = 57.0
-margin_right = 111.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot3" type="Panel" parent="HotbarSlots"]
-margin_left = 114.0
-margin_right = 168.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot4" type="Panel" parent="HotbarSlots"]
-margin_left = 171.0
-margin_right = 225.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot5" type="Panel" parent="HotbarSlots"]
-margin_left = 228.0
-margin_right = 282.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot6" type="Panel" parent="HotbarSlots"]
-margin_left = 285.0
-margin_right = 339.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot7" type="Panel" parent="HotbarSlots"]
-margin_left = 342.0
-margin_right = 396.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot8" type="Panel" parent="HotbarSlots"]
-margin_left = 399.0
-margin_right = 453.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot9" type="Panel" parent="HotbarSlots"]
-margin_left = 456.0
-margin_right = 510.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
-
-[node name="Slot10" type="Panel" parent="HotbarSlots"]
-margin_left = 513.0
-margin_right = 567.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 19 )
 
 [node name="Tween" type="Tween" parent="."]
 

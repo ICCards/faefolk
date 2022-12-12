@@ -51,7 +51,7 @@ func _physics_process(delta):
 
 
 func throw_potion(potion_name, init_direction):
-	PlayerInventory.remove_single_object_from_hotbar()
+	PlayerData.remove_single_object_from_hotbar()
 	is_throwing = true
 	current_potion = potion_name
 	direction = init_direction

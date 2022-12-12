@@ -33,7 +33,7 @@ func _ready():
 	eat()
 
 func eat():
-	PlayerStats.eat(item_name)
+	PlayerData.eat(item_name)
 	set_particle_colors(item_name)
 	$EatingParticles1.emitting = true
 	$EatingParticles2.emitting = true
