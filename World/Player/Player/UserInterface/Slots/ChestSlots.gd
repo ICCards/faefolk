@@ -20,7 +20,7 @@ func initialize_slots():
 			slots[i].removeFromSlot()
 		if PlayerData.player_data["chests"][get_parent().id].has(str(i)):
 			slots[i].initialize_item(PlayerData.player_data["chests"][get_parent().id][str(i)][0], PlayerData.player_data["chests"][get_parent().id][str(i)][1], PlayerData.player_data["chests"][get_parent().id][str(i)][2])
-
+		
 func hovered_slot(slot):
 	if slot.item:
 		slot.item.hover_item()

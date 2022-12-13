@@ -82,6 +82,7 @@ collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/StaticBody2D"]
 shape = SubResource( 16 )
+disabled = true
 
 [node name="TypeOfTileArea" type="Area2D" parent="Position2D"]
 collision_layer = 0
@@ -89,6 +90,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/TypeOfTileArea"]
 shape = SubResource( 3 )
+disabled = true
 
 [node name="InteractiveArea" type="Area2D" parent="Position2D"]
 collision_layer = 0
@@ -106,6 +108,7 @@ collision_mask = 8192
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/DetectObjectOverPathBox"]
 shape = SubResource( 2 )
+disabled = true
 
 [node name="HurtBox" type="Area2D" parent="Position2D"]
 collision_layer = 262168

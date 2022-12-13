@@ -74,12 +74,12 @@ func destroy():
 	hide()
 
 
-#func _input(event):
-#	if PlayerData.hotbar.has(PlayerData.active_item_slot):
-#		if PlayerData.hotbar[PlayerData.active_item_slot][0] == "blueprint":
-#			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-#				if not event.is_pressed():
-#					destroy()
-#					yield(get_tree().create_timer(0.1), "timeout")
-#					PlayerData.viewInventoryMode = false
+func _input(event):
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0] == "blueprint":
+			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+				if not event.is_pressed():
+					destroy()
+					yield(get_tree().create_timer(0.1), "timeout")
+					PlayerData.viewInventoryMode = false
 #

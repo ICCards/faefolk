@@ -5,7 +5,6 @@ onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 
 var nav_node
 var count = 0
-var cave_chest_id = "level 1, room 1"
 
 var NUM_BATS = 0 #3
 var NUM_SLIMES = 0 #3

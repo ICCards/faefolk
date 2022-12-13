@@ -461,7 +461,7 @@ visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 182 )
-frame = 12
+frame = 11
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]

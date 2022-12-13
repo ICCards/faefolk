@@ -1,12 +1,9 @@
 extends Control
 
-var item
+var hovered_item
 var id
 
 onready var sound_effects: AudioStreamPlayer = $SoundEffects
-onready var hotbar_slots = $HotbarSlots
-onready var inventory_slots = $InventorySlots
-onready var furnace_slots = $FurnaceSlots
 onready var ore_slot1 = $FurnaceSlots/OreSlot1
 onready var ore_slot2 = $FurnaceSlots/OreSlot2
 onready var fuel_slot = $FurnaceSlots/FuelSlot
@@ -14,52 +11,24 @@ onready var yield_slot1 = $FurnaceSlots/YieldSlot1
 onready var yield_slot2 = $FurnaceSlots/YieldSlot2
 onready var coal_yield_slot = $FurnaceSlots/CoalYieldSlot
 
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
-
 func _ready():
-	var slots_in_inventory = inventory_slots.get_children()
-	var slots_in_hotbar = hotbar_slots.get_children()
-	var slots_in_furnace = furnace_slots.get_children()
-	for i in range(slots_in_inventory.size()):
-		slots_in_inventory[i].connect("gui_input", self, "slot_gui_input", [slots_in_inventory[i]])
-		slots_in_inventory[i].connect("mouse_entered", self, "hovered_slot", [slots_in_inventory[i]])
-		slots_in_inventory[i].connect("mouse_exited", self, "exited_slot", [slots_in_inventory[i]])
-		slots_in_inventory[i].slot_index = i
-		slots_in_inventory[i].slotType = SlotClass.SlotType.INVENTORY
-	for i in range(slots_in_hotbar.size()):
-		slots_in_hotbar[i].connect("gui_input", self, "slot_gui_input", [slots_in_hotbar[i]])
-		slots_in_hotbar[i].connect("mouse_entered", self, "hovered_slot", [slots_in_hotbar[i]])
-		slots_in_hotbar[i].connect("mouse_exited", self, "exited_slot", [slots_in_hotbar[i]])
-		slots_in_hotbar[i].slot_index = i
-		slots_in_hotbar[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
-	for i in range(slots_in_furnace.size()):
-		slots_in_furnace[i].connect("gui_input", self, "slot_gui_input", [slots_in_furnace[i]])
-		slots_in_furnace[i].connect("mouse_entered", self, "hovered_slot", [slots_in_furnace[i]])
-		slots_in_furnace[i].connect("mouse_exited", self, "exited_slot", [slots_in_furnace[i]])
-		slots_in_furnace[i].slot_index = i
-		slots_in_furnace[i].slotType = SlotClass.SlotType.FURNACE
 	initialize()
 
 func initialize():
 	Server.player_node.destroy_placable_object()
-	item = null
+	hovered_item = null
 	show()
-	initialize_hotbar()
-	initialize_inventory()
-	initialize_furnace()
 
 func destroy():
 	set_physics_process(false)
 	$ItemDescription.queue_free()
 	queue_free()
 
-
 func _physics_process(delta):
-	if item and not find_parent("UserInterface").holding_item:
+	if hovered_item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.show()
-		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
-		$ItemDescription.item_name = item
+		$ItemDescription.item_category = JsonData.item_data[hovered_item]["ItemCategory"]
+		$ItemDescription.item_name = hovered_item
 		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 		$ItemDescription.initialize()
 	else:
@@ -70,21 +39,8 @@ func _physics_process(delta):
 		$TimerProgress.value = (10-$CookTimer.time_left)*10
 
 
-func able_to_put_into_slot(slot):
-	var holding_item = find_parent("UserInterface").holding_item
-	if holding_item == null:
-		return true
-	var holding_item_name = holding_item.item_name 
-	if slot.slot_index == 0 and slot.name == "FuelSlot": # fuel
-		return holding_item_name == "wood" or holding_item_name == "coal"
-	elif (slot.slot_index == 1 or slot.slot_index == 2) and slot.name.substr(0,7) == "OreSlot": # ingredients
-		return holding_item_name == "iron ore" or holding_item_name == "bronze ore" or holding_item_name == "gold ore"
-	elif slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 3 or slot.slot_index == 4 or slot.slot_index == 5): # yield
-		return false
-	return true
-
 func _on_CookTimer_timeout():
-	if PlayerData.furnaces.has(id):
+	if PlayerData.player_data["furnaces"].has(id):
 		smelt()
 		check_if_furnace_active()
 
@@ -122,7 +78,7 @@ func remove_fuel():
 			coal_yield_slot.item.add_item_quantity(3)
 		else:
 			coal_yield_slot.initialize_item("coal", 3, null)
-			PlayerData.furnaces[id][5] = ["coal", 3, null]
+			PlayerData.player_data["furnaces"][id]["5"] = ["coal", 3, null]
 	elif fuel_slot.item.item_name == "coal":
 		fuel_slot.item.decrease_item_quantity(1)
 		PlayerData.decrease_item_quantity(fuel_slot, 1, id)
@@ -151,11 +107,11 @@ func add_to_yield_slot(ore_name):
 			return
 	if not yield_slot1.item:
 		yield_slot1.initialize_item(ingot_name, 1, null)
-		PlayerData.furnaces[id][3] = [ingot_name, 1, null]
+		PlayerData.player_data["furnaces"][id]["3"] = [ingot_name, 1, null]
 		return
 	if not yield_slot2.item:
 		yield_slot2.initialize_item(ingot_name, 1, null)
-		PlayerData.furnaces[id][4] = [ingot_name, 1, null]
+		PlayerData.player_data["furnaces"][id]["4"] = [ingot_name, 1, null]
 		return
 
 
@@ -199,7 +155,6 @@ func valid_yield_slot(ore_name):
 		return true
 	return false
 
-
 func cooking_active():
 	$CookTimer.start()
 	$FireAnimatedSprite.playing = true
@@ -219,7 +174,6 @@ func cooking_inactive():
 	$FireAnimatedSprite.modulate = Color("96ffffff")
 	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").hide()
 
-
 func valid_fuel():
 	if fuel_slot.item:
 		if fuel_slot.item.item_name == "wood" and fuel_slot.item.item_quantity >= 3:
@@ -227,147 +181,6 @@ func valid_fuel():
 		elif fuel_slot.item.item_name == "coal" and fuel_slot.item.item_quantity >= 1:
 			return true
 	return false
-
-func initialize_furnace():
-	var slots_in_furnace = furnace_slots.get_children()
-	for i in range(slots_in_furnace.size()):
-		if slots_in_furnace[i].item != null:
-			slots_in_furnace[i].removeFromSlot()
-		if PlayerData.furnaces[id].has(i):
-			slots_in_furnace[i].initialize_item(PlayerData.furnaces[id][i][0], PlayerData.furnaces[id][i][1], PlayerData.furnaces[id][i][2])
-func initialize_hotbar():
-	var slots = hotbar_slots.get_children()
-	for i in range(slots.size()):
-		if slots[i].item != null:
-			slots[i].removeFromSlot()
-		if PlayerData.hotbar.has(i):
-			slots[i].initialize_item(PlayerData.hotbar[i][0], PlayerData.hotbar[i][1], PlayerData.hotbar[i][2])
-func initialize_inventory():
-	var slots = inventory_slots.get_children()
-	for i in range(slots.size()):
-		if slots[i].item != null:
-			slots[i].removeFromSlot()
-		if PlayerData.inventory.has(i):
-			slots[i].initialize_item(PlayerData.inventory[i][0], PlayerData.inventory[i][1], PlayerData.inventory[i][2])
-func hovered_slot(slot):
-	if slot.item:
-		slot.item.hover_item()
-		item = slot.item.item_name
-func exited_slot(slot):
-	item = null
-	if slot.item:
-		slot.item.exit_item()
-
-func slot_gui_input(event: InputEvent, slot):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
-			if find_parent("UserInterface").holding_item != null:
-				if !slot.item:
-					left_click_empty_slot(slot)
-				else:
-					if find_parent("UserInterface").holding_item.item_name != slot.item.item_name:
-						left_click_different_item(event, slot)
-					else:
-						left_click_same_item(slot)
-			elif slot.item:
-				left_click_not_holding(slot)
-		elif event.button_index == BUTTON_RIGHT && event.pressed:
-			if slot.item and not find_parent("UserInterface").holding_item:
-				right_click_slot(slot)
-
-
-func right_click_slot(slot):
-	if slot.item.item_quantity > 1:
-		var new_qt = int(slot.item.item_quantity / 2)
-		PlayerData.decrease_item_quantity(slot, int(slot.item.item_quantity / 2), id)
-		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))
-		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
-		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
-			check_if_furnace_active()
-		
-
-func return_holding_item(item_name, qt):
-	var inventoryItem = InventoryItem.instance()
-	inventoryItem.set_item(item_name, qt, null)
-	find_parent("UserInterface").add_child(inventoryItem)
-	return inventoryItem
-
-
-func left_click_empty_slot(slot):
-	if able_to_put_into_slot(slot):
-		PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
-		slot.putIntoSlot(find_parent("UserInterface").holding_item)
-		find_parent("UserInterface").holding_item = null
-		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
-			check_if_furnace_active()
-
-func left_click_different_item(event: InputEvent, slot):
-	if able_to_put_into_slot(slot):
-		PlayerData.remove_item(slot, id)
-		PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, id)
-		var temp_item = slot.item
-		slot.pickFromSlot()
-		temp_item.global_position = event.global_position
-		slot.putIntoSlot(find_parent("UserInterface").holding_item)
-		find_parent("UserInterface").holding_item = temp_item
-		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
-			check_if_furnace_active()
-
-func left_click_same_item(slot):
-	if able_to_put_into_slot(slot):
-		var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
-		var able_to_add = stack_size - slot.item.item_quantity
-		if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-			PlayerData.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity, id)
-			slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
-			find_parent("UserInterface").holding_item.queue_free()
-			find_parent("UserInterface").holding_item = null
-		else:
-			PlayerData.add_item_quantity(slot, able_to_add, id)
-			slot.item.add_item_quantity(able_to_add)
-			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
-		if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
-			check_if_furnace_active()
-
-func left_click_not_holding(slot):
-	PlayerData.remove_item(slot, id)
-	find_parent("UserInterface").holding_item = slot.item
-	slot.pickFromSlot()
-	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-	if slot.slotType == SlotClass.SlotType.FURNACE and (slot.slot_index == 0 or slot.slot_index == 1 or slot.slot_index == 2):
-		check_if_furnace_active()
-
-func open_trash_can():
-	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
-		$Trash/Top.rotation_degrees, 90, 0.35,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-	
-func close_trash_can():
-	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
-		$Trash/Top.rotation_degrees, 0, 0.35,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func _on_TrashButton_mouse_entered():
-	open_trash_can()
-func _on_TrashButton_mouse_exited():
-	close_trash_can()
-
-func _on_TrashButton_pressed():
-	if find_parent("UserInterface").holding_item:
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
-
-
-func _on_BackgroundButton_pressed():
-	if find_parent("UserInterface").holding_item:
-		find_parent("UserInterface").items_to_drop.append([find_parent("UserInterface").holding_item.item_name, find_parent("UserInterface").holding_item.item_quantity, find_parent("UserInterface").holding_item.item_health])
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
-
 
 func _on_ExitButton_pressed():
 	get_parent().close_furnace(id)

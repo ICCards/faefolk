@@ -179,10 +179,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "tool cabinet"
 		$Position2D/InteractiveArea.object_level = ""
 		$Position2D/InteractiveArea.name = str(id)
-		if PlayerData.player_data["tool cabinets"].has(id):
+		if PlayerData.player_data["chests"].has(id):
 			pass
 		else:
-			PlayerData.player_data["tool cabinets"][id] = {}
+			PlayerData.player_data["chests"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -319,8 +319,9 @@ func _on_HurtBox_area_entered(area):
 		Stats.decrease_tool_health()
 	$Light2D.enabled = false
 	$Chest.hide()
-	if has_node(id):
-		get_node(id+ "/CollisionShape2D").set_deferred("disabled", true)
+	$FurnaceSmoke.hide()
+	if $Position2D.has_node(str(id)):
+		$Position2D.get_node(id+ "/CollisionShape2D").set_deferred("disabled", true)
 	$Position2D/HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
@@ -340,7 +341,7 @@ func _on_HurtBox_area_entered(area):
 		drop_items_in_furnace()
 		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "tool cabinet":
-		drop_items_in_tc()
+		drop_items_in_chest()
 		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	else: 
 		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
@@ -380,10 +381,6 @@ func drop_items_in_furnace():
 		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["furnaces"][id][item], position)
 	PlayerData.player_data["furnaces"].erase(id)
 
-func drop_items_in_tc():
-	for item in PlayerData.player_data["tool_cabinets"][id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["tool_cabinets"][id][item], position)
-	PlayerData.player_data["tool_cabinets"].erase(id)
 
 func _on_DetectObjectOverPathBox_area_entered(area):
 	if item_name == "wood path" or item_name == "stone path":

@@ -117,9 +117,11 @@ func jump_forward():
 
 func hit(tool_name):
 	if tool_name == "blizzard":
+		slime_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(8)
 		return
 	elif tool_name == "ice projectile":
+		slime_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()

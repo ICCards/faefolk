@@ -53,8 +53,6 @@ func _physics_process(delta):
 			place_sleeping_bag_state()
 		ITEM:
 			place_item_state()
-#		PATH:
-#			place_path_state()
 		SEED:
 			place_seed_state()
 		WALL:
@@ -288,17 +286,18 @@ func place_door_state():
 
 
 func place_buildings_state():
-	$ColorIndicator.visible = true
-	$ColorIndicator.tile_size = Vector2(1, 1)
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	else:
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, null, location, "placable")
+	if Server.world.name == "World":
+		$ColorIndicator.visible = true
+		$ColorIndicator.tile_size = Vector2(1, 1)
+		var location = Tiles.valid_tiles.world_to_map(mousePos)
+		if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+			$ColorIndicator.indicator_color = "Red"
+			$ColorIndicator.set_indicator_color()
+		else:
+			$ColorIndicator.indicator_color = "Green"
+			$ColorIndicator.set_indicator_color()
+			if Input.is_action_pressed("mouse_click"):
+				place_object(item_name, null, location, "placable")
 
 func place_sleeping_bag_state():
 	get_rotation_index()
@@ -391,15 +390,16 @@ func place_item_state():
 			place_object(item_name, null, location, "placable")
 
 func place_seed_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	else:	
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, null, location, "seed")	
+	if Server.world.name == "World":
+		var location = Tiles.valid_tiles.world_to_map(mousePos)
+		if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+			$ColorIndicator.indicator_color = "Red"
+			$ColorIndicator.set_indicator_color()
+		else:	
+			$ColorIndicator.indicator_color = "Green"
+			$ColorIndicator.set_indicator_color()
+			if Input.is_action_pressed("mouse_click"):
+				place_object(item_name, null, location, "seed")	
 
 
 func place_object(item_name, direction, location, type):

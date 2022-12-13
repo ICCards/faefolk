@@ -152,8 +152,8 @@ func show_health():
 
 func _on_HurtBox_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		if PlayerData.player_data["hotbar"].has(PlayerData.active_item_slot) and not PlayerData.viewInventoryMode:
-			var tool_name = PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0]
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and not PlayerData.viewInventoryMode:
+			var tool_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			if tool_name == "hammer":
 				$SelectedBorder.show()
 				show_selected_tile()

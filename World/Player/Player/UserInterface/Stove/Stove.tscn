@@ -46,10 +46,10 @@ anchor_bottom = 0.5
 script = ExtResource( 6 )
 
 [node name="Trash" parent="." instance=ExtResource( 3 )]
-margin_left = 6.0
-margin_top = -279.0
-margin_right = 6.0
-margin_bottom = -279.0
+margin_left = -512.0
+margin_top = -300.0
+margin_right = -512.0
+margin_bottom = -300.0
 
 [node name="Bg" type="TextureRect" parent="."]
 anchor_left = 0.5

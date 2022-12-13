@@ -4,257 +4,100 @@ extends Node
 var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
 
-var is_world_built: bool = true
-var is_cave_1_built: bool = false
-var is_cave_2_built: bool = false
-var is_cave_3_built: bool = false
-var is_cave_4_built: bool = false
-var is_cave_5_built: bool = false
-var is_cave_6_built: bool = false
-var is_cave_7_built: bool = false
-var is_cave_8_built: bool = false
-var is_cave_9_built: bool = false
-var is_cave_10_built: bool = false
-var is_cave_11_built: bool = false
-var is_cave_12_built: bool = false
-var is_cave_13_built: bool = false
-var is_cave_14_built: bool = false
-var is_cave_15_built: bool = false
-var is_cave_16_built: bool = false
-var is_cave_17_built: bool = false
-var is_cave_18_built: bool = false
-var is_cave_19_built: bool = false
-var is_cave_20_built: bool = false
-
-func return_if_cave_built(cave_name):
-	match cave_name:
-		"Cave 1":
-			return is_cave_1_built
-		"Cave 2":
-			return is_cave_2_built
-		"Cave 3":
-			return is_cave_3_built
-		"Cave 4":
-			return is_cave_4_built
-		"Cave 5":
-			return is_cave_5_built
-		"Cave 6":
-			return is_cave_6_built
-		"Cave 7":
-			return is_cave_7_built
-		"Cave 8":
-			return is_cave_8_built
-		"Cave 9":
-			return is_cave_9_built
-		"Cave 10":
-			return is_cave_10_built
-		"Cave 11":
-			return is_cave_11_built
-		"Cave 12":
-			return is_cave_12_built
-		"Cave 13":
-			return is_cave_13_built
-		"Cave 14":
-			return is_cave_14_built
-		"Cave 15":
-			return is_cave_15_built
-		"Cave 16":
-			return is_cave_16_built
-		"Cave 17":
-			return is_cave_17_built
-		"Cave 18":
-			return is_cave_18_built
-		"Cave 19":
-			return is_cave_19_built
-		"Cave 20":
-			return is_cave_20_built
-
-func set_cave_built(cave_name):
-	match cave_name:
-		"Cave 1":
-			is_cave_1_built = true
-		"Cave 2":
-			is_cave_2_built = true
-		"Cave 3":
-			is_cave_3_built = true
-		"Cave 4":
-			is_cave_4_built = true
-		"Cave 5":
-			is_cave_5_built = true
-		"Cave 6":
-			is_cave_6_built = true
-		"Cave 7":
-			is_cave_7_built = true
-		"Cave 8":
-			is_cave_8_built = true
-		"Cave 9":
-			is_cave_9_built = true
-		"Cave 10":
-			is_cave_10_built = true
-		"Cave 11":
-			is_cave_11_built = true
-		"Cave 12":
-			is_cave_12_built = true
-		"Cave 13":
-			is_cave_13_built = true
-		"Cave 14":
-			is_cave_14_built = true
-		"Cave 15":
-			is_cave_15_built = true
-		"Cave 16":
-			is_cave_16_built = true
-		"Cave 17":
-			is_cave_17_built = true
-		"Cave 18":
-			is_cave_18_built = true
-		"Cave 19":
-			is_cave_19_built = true
-		"Cave 20":
-			is_cave_20_built = true
+var is_world_built = true
 
 var world = {
-	"placables":{},
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
-	"tree":{},
-	"tall_grass":{},
-	"ore_large":{},
-	"ore":{},
-	"log":{},
-	"stump":{},
-	"flower":{},
-	"tile": {},
-	"cave_entrance_location": null
+#	"placables":{},
+#	"dirt":{},
+#	"ocean":{},
+#	"beach":{},
+#	"plains":{},
+#	"forest":{},
+#	"desert":{},
+#	"snow":{},
+#	"tree":{},
+#	"tall_grass":{},
+#	"ore_large":{},
+#	"ore":{},
+#	"log":{},
+#	"stump":{},
+#	"flower":{},
+#	"tile": {},
+#	"cave_entrance_location": null
 }
-var cave_1_1 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_1_2 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_1_3 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_1_4 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_1_5 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_1_6 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_1_7 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_1_boss = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_1_fishing = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_1 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_2 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_3 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_4 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_5 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_6 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_7 = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_boss = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
+var caves = {}
 
 func _ready() -> void:
-	world = JsonData.world_data
+	load_world_data()
+	load_caves_data()
 #	add_tiles_to_chunks()
 #	add_nature_objects_to_chunks()
+
+func save_map_data():
+	var world_file = File.new()
+	world_file.open(world_file_name,File.WRITE)
+	world_file.store_string(to_json(world))
+	world_file.close()
+	var caves_file = File.new()
+	caves_file.open(caves_file_name,File.WRITE)
+	caves_file.store_string(to_json(caves))
+	caves_file.close()
+	print("saved map data")
+
+var world_file_name = "res://JSONData/WorldData.json"
+var caves_file_name = "res://JSONData/CavesData.json"
+
+func load_world_data():
+	var file = File.new()
+	if(file.file_exists(world_file_name)):
+		file.open(world_file_name,File.READ)
+		var data = parse_json(file.get_as_text())
+		file.close()
+		if(typeof(data) == TYPE_DICTIONARY):
+			print("loaded world data")
+			world = data
+		else:
+			printerr("corrupted world data")
+	else:
+		save_starting_world_data()
+
+func load_caves_data():
+	var file = File.new()
+	if(file.file_exists(caves_file_name)):
+		file.open(caves_file_name,File.READ)
+		var data = parse_json(file.get_as_text())
+		file.close()
+		if(typeof(data) == TYPE_DICTIONARY):
+			print("loaded caves data")
+			caves = data
+		else:
+			printerr("corrupted caves data")
+	else:
+		save_starting_caves_data()
+
+func save_starting_world_data():
+	var starting_file = File.new()
+	starting_file.open("res://JSONData/StartingWorldData.json",File.READ)
+	var data = parse_json(starting_file.get_as_text())
+	starting_file.close()
+	var file = File.new()
+	file.open(world_file_name,File.WRITE)
+	file.store_string(to_json(data))
+	file.close()
+	world = data
+	print("saved initial world data")
+
+func save_starting_caves_data():
+	var starting_file = File.new()
+	starting_file.open("res://JSONData/StartingCavesData.json",File.READ)
+	var data = parse_json(starting_file.get_as_text())
+	starting_file.close()
+	var file = File.new()
+	file.open(caves_file_name,File.WRITE)
+	file.store_string(to_json(data))
+	file.close()
+	caves = data
+	print("saved initial caves data")
 
 func add_placable(id, data):
 	var map = return_cave_data(Server.world.name)
@@ -277,40 +120,7 @@ func return_cave_data(cave_name):
 	match cave_name:
 		"World":
 			return world
-		"Cave 1-1":
-			return cave_1_1
-		"Cave 1-2":
-			return cave_1_2
-		"Cave 1-3":
-			return cave_1_3
-		"Cave 1-4":
-			return cave_1_4
-		"Cave 1-5":
-			return cave_1_5
-		"Cave 1-6":
-			return cave_1_6
-		"Cave 1-7":
-			return cave_1_7
-		"Cave 1-Boss":
-			return cave_1_boss
-		"Cave 1-Fishing":
-			return cave_1_fishing
-		"Cave 2-1":
-			return cave_2_1
-		"Cave 2-2":
-			return cave_2_2
-		"Cave 2-3":
-			return cave_2_3
-		"Cave 2-4":
-			return cave_2_4
-		"Cave 2-5":
-			return cave_2_5
-		"Cave 2-6":
-			return cave_2_6
-		"Cave 2-7":
-			return cave_2_7
-		"Cave 2-Boss":
-			return cave_2_boss
+	return caves[cave_name]
 
 func add_nature_objects_to_chunks():
 	for type in nature_types:

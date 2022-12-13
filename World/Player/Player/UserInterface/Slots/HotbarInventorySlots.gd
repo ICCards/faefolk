@@ -44,7 +44,7 @@ func slot_gui_input(event: InputEvent, slot):
 					else:
 						left_click_same_item(slot)
 			elif slot.item:
-				if get_parent().name == "Chest":
+				if get_parent().name == "Chest" or get_parent().name == "Tool cabinet":
 					left_click_not_holding_chest(slot)
 				else:
 					left_click_not_holding(slot)
@@ -65,7 +65,6 @@ func return_holding_item(item_name, qt):
 	inventoryItem.set_item(item_name, qt, null)
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem
-
 
 func left_click_empty_slot(slot):
 	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)

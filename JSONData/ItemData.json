@@ -608,7 +608,7 @@
       "ItemCategory": "Construction",
       "StackSize": 1,
       "Description": "Used to upgrade building structures.",
-      "Ingredients": [["wood", 10]],
+      "Ingredients": [["wood", 10], ["stone", 10]],
       "EnergyHealth": null
   },
   

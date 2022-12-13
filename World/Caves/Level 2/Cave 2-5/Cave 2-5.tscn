@@ -5777,7 +5777,7 @@ points = PoolVector2Array( 0, 96, 96, 96, 96, 128, 0, 128 )
 8/shape_one_way = false
 8/shape_one_way_margin = 0.0
 8/shapes = [  ]
-8/z_index = 0
+8/z_index = -1
 9/name = "caves.png 9"
 9/texture = ExtResource( 4 )
 9/tex_offset = Vector2( 0, -64 )
@@ -5805,7 +5805,7 @@ points = PoolVector2Array( 0, 96, 96, 96, 96, 128, 0, 128 )
 10/shape_one_way = false
 10/shape_one_way_margin = 0.0
 10/shapes = [  ]
-10/z_index = 0
+10/z_index = -1
 11/name = "caves.png 11"
 11/texture = ExtResource( 4 )
 11/tex_offset = Vector2( 0, 0 )
@@ -6421,7 +6421,6 @@ glow_blend_mode = 0
 script = ExtResource( 7 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 z_index = 1
 collision_layer = 2097152
 collision_mask = 0
@@ -6698,8 +6697,10 @@ tile_data = PoolIntArray( 2818062, 1, 0, 2818063, 1, 0, 2818064, 1, 0, 2818065, 
 [node name="Projectiles" type="YSort" parent="."]
 
 [node name="SpawnBatTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 35.0
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 805 )
+
+[connection signal="timeout" from="SpawnBatTimer" to="." method="_on_SpawnBatTimer_timeout"]

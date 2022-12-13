@@ -45,7 +45,7 @@ func slot_gui_input(event: InputEvent, slot):
 					else:
 						left_click_same_item(slot)
 			elif slot.item:
-				if get_parent().name == "Chest":
+				if get_parent().name == "Chest" or get_parent().name == "Tool cabinet":
 					left_click_not_holding_chest(slot)
 				else:
 					left_click_not_holding(slot)

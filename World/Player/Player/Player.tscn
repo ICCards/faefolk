@@ -11653,13 +11653,11 @@ texture_mode = 1
 [node name="Throwing" parent="." instance=ExtResource( 19 )]
 
 [node name="Area2Ds" type="Node2D" parent="."]
-visible = false
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="PickupZone" type="Area2D" parent="Area2Ds"]
-visible = false
 scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4

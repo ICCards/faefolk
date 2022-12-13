@@ -168,7 +168,7 @@ func attack():
 
 func shoot_projectile(player_pos):
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	sound_effects.play()
 	var spell = ArrowProjectile.instance()
 	spell.is_hostile = true
@@ -179,9 +179,11 @@ func shoot_projectile(player_pos):
 
 func hit(tool_name):
 	if tool_name == "blizzard":
+		skeleton_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(8)
 		return
 	elif tool_name == "ice projectile":
+		skeleton_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()

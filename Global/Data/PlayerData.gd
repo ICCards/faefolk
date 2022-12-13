@@ -51,11 +51,21 @@ var starting_player_data = {
 			"9": ["stone", 500, null],
 			"7": ["iron ingot", 150, null],
 	},
-	"chests": {},
+	"chests": {
+		"Cave 1-1": {
+			"4": ["wheat seeds", 25, null],
+			"9": ["health potion I", 2, null],
+			"14": ["destruction potion I", 5, null]
+		},
+		"Cave 1-2": {
+			"2": ["bread", 4, null],
+			"6": ["regeneration potion II", 3, null],
+			"12": ["bronze ore", 8, null]
+		}
+	},
 	"furnaces": {},
 	"grain_mills": {},
 	"stoves": {},
-	"tool_cabinets": {}
 }
 
 func _ready():

@@ -22,6 +22,8 @@ onready var _character = load("res://Global/Data/Characters.gd")
 var built_chunks = []
 var current_chunks = []
 
+onready var IcPuppy = preload("res://World/Player/Pet/IcPuppy.tscn")
+
 func _ready():
 	spawn_player()
 
@@ -38,6 +40,11 @@ func spawn_player():
 		player.position = Util.string_to_vector2(MapData.world["cave_entrance_location"])*32 + Vector2(32,0)
 	else:
 		player.position = Vector2(500*32,500*32)
+	
+func spawn_puppy():
+	var puppy = IcPuppy.instance()
+	puppy.position = Vector2(500*32,500*32)
+	get_node("../Players").add_child(puppy)
 
 func _on_BuildTerrain_timeout():
 	build_terrain()

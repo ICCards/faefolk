@@ -15,7 +15,6 @@ func initialize():
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
 	$ChestSlots.initialize_slots()
-	show()
 
 func destroy():
 	set_physics_process(false)

@@ -164,8 +164,8 @@ func change_tile():
 		sound_effects.play()
 
 func _input(event):
-	if PlayerData.player_data["hotbar"].has(PlayerData.active_item_slot):
-		if PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0] == "hammer":
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0] == "hammer":
 			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and PlayerData.viewInventoryMode:
 				if not event.is_pressed():
 					destroy()
