@@ -413,11 +413,11 @@ func place_object(item_name, direction, location, type):
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
 				if item_name == "wall" or item_name == "foundation":
-					MapData.add_placable(id, {"n":item_name,"v":"twig","l":location})
+					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location)})
 					PlayerData.remove_material("wood", 5)
 					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
 				else:
-					MapData.add_placable(id, {"n":item_name,"d":direction,"l":location})
+					MapData.add_placable(id, {"n":item_name,"d":direction,"l":str(location)})
 					PlaceObject.place_object_in_world(id, item_name, direction, location)
 			else:
 				$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
@@ -427,6 +427,8 @@ func place_object(item_name, direction, location, type):
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			PlaceObject.place_seed_in_world(id, item_name, location, JsonData.crop_data[item_name]["DaysToGrow"])
+			var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
+			MapData.add_crop(id,{"n":item_name,"l":str(location),"d":days_to_grow})
+			PlaceObject.place_seed_in_world(id, item_name, location, days_to_grow)
 	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		Server.player_node.destroy_placable_object()

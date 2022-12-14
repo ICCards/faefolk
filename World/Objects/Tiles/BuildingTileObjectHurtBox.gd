@@ -66,17 +66,14 @@ func set_type():
 		"foundation":
 			match tier:
 				"twig":
-					$TypeOfFoundationArea.set_collision_mask(512)
 					Tiles.foundation_tiles.set_cellv(location, Tiers.TWIG)
 					health = Stats.MAX_TWIG_WALL
 					max_health = Stats.MAX_TWIG_WALL
 				"wood":
-					$TypeOfFoundationArea.set_collision_mask(512)
 					Tiles.foundation_tiles.set_cellv(location, Tiers.WOOD)
 					health = Stats.MAX_WOOD_WALL
 					max_health = Stats.MAX_WOOD_WALL
 				"stone":
-					$TypeOfFoundationArea.set_collision_mask(1024)
 					Tiles.foundation_tiles.set_cellv(location, Tiers.STONE)
 					health = Stats.MAX_STONE_WALL
 					max_health = Stats.MAX_STONE_WALL

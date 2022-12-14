@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Assets/Images/User interface/Player stats/energy.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/User interface/Player stats/mana.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Images/User interface/Player stats/stats-bars-x2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Inventory UI/DateTime/clock.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Inventory UI/DateTime/clock icons/1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/Inventory UI/DateTime/season icons/spring.png" type="Texture" id=9]
 
 [node name="PlayerDataUI" type="Control"]
 script = ExtResource( 1 )
@@ -57,43 +60,56 @@ fill_mode = 3
 nine_patch_stretch = true
 
 [node name="DateTime" type="Control" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="TimeBg" type="ColorRect" parent="DateTime"]
-margin_left = 876.0
-margin_top = 8.0
-margin_right = 1016.0
-margin_bottom = 92.0
+[node name="Bg" type="TextureRect" parent="DateTime"]
+margin_left = 829.0
+margin_top = -12.0
+margin_right = 893.0
+margin_bottom = 36.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
 
 [node name="Day" type="Label" parent="DateTime"]
-modulate = Color( 0.12549, 0.0901961, 0.0627451, 1 )
-margin_left = 876.0
-margin_top = 50.0
-margin_right = 1158.0
-margin_bottom = 134.0
+margin_left = 859.0
+margin_top = 27.0
+margin_right = 1075.0
+margin_bottom = 88.0
 rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Monday, 1"
+text = "Mon. 1"
 align = 1
 valign = 1
 
 [node name="Time" type="Label" parent="DateTime"]
-modulate = Color( 0.12549, 0.0901961, 0.0627451, 1 )
-margin_left = 876.0
-margin_top = 8.0
-margin_right = 1158.0
-margin_bottom = 92.0
+margin_left = 880.0
+margin_top = 57.0
+margin_right = 1102.0
+margin_bottom = 135.0
 rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "6:00 a.m."
 align = 1
 valign = 1
 
 [node name="AdvanceTime" type="Timer" parent="DateTime"]
 autostart = true
+
+[node name="ClockIcon" type="TextureRect" parent="DateTime"]
+margin_left = 850.0
+margin_top = 75.0
+margin_right = 857.0
+margin_bottom = 82.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+
+[node name="SeasonIcon" type="TextureRect" parent="DateTime"]
+margin_left = 976.0
+margin_top = 24.0
+margin_right = 984.0
+margin_bottom = 32.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 9 )
 
 [connection signal="timeout" from="DateTime/AdvanceTime" to="." method="_on_AdvanceTime_timeout"]

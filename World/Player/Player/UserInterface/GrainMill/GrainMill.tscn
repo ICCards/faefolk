@@ -96,6 +96,7 @@ script = ExtResource( 11 )
 
 [node name="Area2D" type="Area2D" parent="GrainMillCrank"]
 position = Vector2( -394, -196 )
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrainMillCrank/Area2D"]
 position = Vector2( 393, 196 )

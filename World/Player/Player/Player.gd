@@ -77,42 +77,6 @@ func destroy():
 	set_process_unhandled_input(false)
 	state = DYING
 
-func start_speed_buff(length):
-	speed_buff_active = true
-	$SpeedParticles/P1.emitting = true
-	$SpeedParticles/P2.emitting = true
-	$SpeedParticles/P3.emitting = true
-	if $SpeedParticles/SpeedStateTimer.time_left == 0:
-		$SpeedParticles/SpeedStateTimer.start(length)
-	else:
-		$SpeedParticles/SpeedStateTimer.start(length+$SpeedParticles/SpeedStateTimer.time_left)
-
-func _on_SpeedStateTimer_timeout():
-	speed_buff_active = false
-	$SpeedParticles/P1.emitting = false
-	$SpeedParticles/P2.emitting = false
-	$SpeedParticles/P3.emitting = false
-
-func start_poison_state():
-	running = false
-	$PoisonParticles/PoisonTimer.start()
-	poisoned = true
-	$PoisonParticles/P1.emitting = true
-	$PoisonParticles/P2.emitting = true
-	$PoisonParticles/P3.emitting = true
-	composite_sprites.modulate = Color("009000")
-	
-func _on_PoisonTimer_timeout():
-	stop_poison_state()
-
-func stop_poison_state():
-	poisoned = false
-	$PoisonParticles/P1.emitting = false
-	$PoisonParticles/P2.emitting = false
-	$PoisonParticles/P3.emitting = false
-	composite_sprites.modulate = Color("ffffff")
-	if Input.is_action_pressed("sprint"):
-		running = true
 
 func teleport(portal_position):
 	var adjusted_pos = input_vector*40
@@ -145,7 +109,8 @@ func sleep(sleeping_bag_direction, pos):
 func player_death():
 	if state != DYING:
 		state = DYING
-		stop_poison_state()
+		$PoisonParticles.stop_poison_state()
+		$SpeedParticles.stop_speed_buff()
 		composite_sprites.set_player_animation(character, "death_" + direction.to_lower(), null)
 		animation_player.play("death")
 		$Camera2D/UserInterface.death()
@@ -183,12 +148,7 @@ func hide_set_button_dialogue():
 	if $Camera2D/UserInterface/EnterNewKey.visible:
 		$Camera2D/UserInterface/EnterNewKey.hide()
 
-	
-func initialize_camera_limits(top_left, bottom_right):
-	$Camera2D.limit_top = top_left.y
-	$Camera2D.limit_left = top_left.x
-	$Camera2D.limit_bottom = bottom_right.y
-	$Camera2D.limit_right = bottom_right.x
+
 	
 func sendAction(action,data): 
 	match action:
@@ -263,7 +223,7 @@ func _unhandled_input(event):
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
 					$Swing.swing(item_name, direction)
 				elif item_category == "Potion" and event.is_action_pressed("mouse_click"):
-					$Throwing.throw_potion(item_name, direction)
+					$Magic.throw_potion(item_name, direction)
 				elif event.is_action_pressed("mouse_click") and item_name == "bow":
 					$Magic.draw_bow(direction)
 				elif event.is_action_pressed("mouse_click") and item_category == "Magic":

@@ -29,7 +29,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -103,13 +103,14 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 9.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0.027451, 0.054902, 0.92549 ) ]
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0.027451, 0.054902, 0.92549 ) ]
 }
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 23 )
 
 [node name="InsideCaveEffect" type="ColorRect" parent="."]
+visible = false
 margin_left = -49.0
 margin_top = -39.0
 margin_right = 1093.0
@@ -119,13 +120,12 @@ color = Color( 0, 0, 0, 0.14902 )
 script = ExtResource( 11 )
 
 [node name="WeatherEffects" type="ColorRect" parent="."]
-visible = false
 margin_left = -49.0
 margin_top = -39.0
 margin_right = 1093.0
 margin_bottom = 657.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 0.52549 )
+color = Color( 0, 0, 0, 0 )
 script = ExtResource( 19 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherEffects"]
@@ -156,6 +156,7 @@ margin_right = -815.0
 margin_bottom = -144.0
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
+visible = false
 
 [node name="Combat hotbar" parent="." instance=ExtResource( 10 )]
 visible = false

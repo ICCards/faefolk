@@ -30,7 +30,7 @@ var caves = {}
 func _ready() -> void:
 	load_world_data()
 	load_caves_data()
-#	add_tiles_to_chunks()
+	add_tiles_to_chunks()
 #	add_nature_objects_to_chunks()
 
 func save_map_data():
@@ -98,6 +98,13 @@ func save_starting_caves_data():
 	file.close()
 	caves = data
 	print("saved initial caves data")
+	
+	
+func add_crop(id,data):
+	world["crops"][id] = data
+	
+func remove_crop(id):
+	world["crops"].erase(id)
 
 func add_placable(id, data):
 	var map = return_cave_data(Server.world.name)

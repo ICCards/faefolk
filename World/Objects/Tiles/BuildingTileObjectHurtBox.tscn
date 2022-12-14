@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Objects/Tiles/BuildingTileObjectHurtBox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=2]
@@ -10,9 +10,6 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15, 15 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 15, 14 )
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -96,13 +93,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HammerRepairBox"]
 light_mask = 0
 shape = SubResource( 1 )
-
-[node name="TypeOfFoundationArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TypeOfFoundationArea"]
-shape = SubResource( 6 )
 
 [node name="HealthBar" type="Node2D" parent="."]
 visible = false

@@ -2,6 +2,8 @@ extends Node2D
 
 onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
+onready var PotionProjectile = load("res://World/Objects/Projectiles/PotionProjectile.tscn")
+
 onready var ArrowProjectile = load("res://World/Objects/Projectiles/ArrowProjectile.tscn")
 
 onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
@@ -65,9 +67,11 @@ signal spell_finished
 var animation: String = ""
 var direction: String = "DOWN"
 var movement_direction: String = ""
+var current_potion: String = ""
 var is_casting: bool = false
 var is_drawing: bool = false
 var is_releasing: bool = false
+var is_throwing: bool = false
 var flamethrower_active: bool = false
 var invisibility_active: bool = false
 var ice_shield_active: bool = false
@@ -79,7 +83,7 @@ var ending_mouse_point
 
 
 func _input( event ):
-	if is_casting or is_drawing:
+	if is_casting or is_drawing or is_throwing:
 		$AimDownSightLine.show()
 		$CastDirection.look_at(get_global_mouse_position())
 		var start_pt = $CastDirection/Position2D.global_position-get_node("../").global_position
@@ -248,8 +252,41 @@ func _physics_process(delta):
 		else:
 			player_animation_player2.play("walk legs")
 			composite_sprites.set_player_animation(get_parent().character, "draw_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, "bow")
-	elif is_releasing and get_parent().state != DYING:
+	if is_releasing and get_parent().state != DYING:
 		composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
+	if is_throwing and get_parent().state != DYING:
+		if get_parent().cast_movement_direction == "":
+			player_animation_player2.stop(false)
+			composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), current_potion)
+		else:
+			player_animation_player2.play("walk legs")
+			composite_sprites.set_player_animation(get_parent().character, "throw_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, current_potion)
+
+func throw_potion(potion_name, init_direction):
+	PlayerData.remove_single_object_from_hotbar()
+	is_throwing = true
+	current_potion = potion_name
+	direction = init_direction
+	get_parent().state = MAGIC_CASTING
+	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), potion_name)
+	player_animation_player.play("bow draw release")
+	yield(get_tree().create_timer(0.3), "timeout")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Potion/throw.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
+	yield(player_animation_player, "animation_finished" )
+	throw(potion_name)
+	is_throwing = false
+	get_parent().state = MOVEMENT
+	get_parent().direction = direction
+	
+func throw(potion_name):
+	var potion = PotionProjectile.instance()
+	potion.potion_name = potion_name
+	potion.particles_transform = $CastDirection.transform
+	potion.target = get_global_mouse_position()
+	potion.position = $CastDirection/Position2D.global_position
+	get_node("../../../").add_child(potion)
 
 
 func cast(staff_name, spell_index):

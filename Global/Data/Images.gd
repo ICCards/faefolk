@@ -401,16 +401,47 @@ onready var normal_mouse = load("res://Assets/mouse cursors/Normal Selects.png")
 
 # WEAPONS #
 func returnToolSprite(toolName, animation):
-	if toolName == "health potion I" or toolName == "health potion II" or toolName == "health potion III":
+	if toolName == "health potion I" or toolName == "health potion II" or toolName == "health potion III" or \
+	toolName == "regeneration potion I" or toolName == "regeneration potion II" or toolName == "regeneration potion III" :
 		match animation:
 			"throw_down":
-				return health_potion_throw.down
+				return red_potion_throw.down
 			"throw_up":
-				return health_potion_throw.up
+				return red_potion_throw.up
 			"throw_left":
-				return health_potion_throw.left
+				return red_potion_throw.left
 			"throw_right":
-				return health_potion_throw.right
+				return red_potion_throw.right
+	elif toolName == "poison potion I" or toolName == "poison potion II" or toolName == "poison potion III":
+		match animation:
+			"throw_down":
+				return green_potion_throw.down
+			"throw_up":
+				return green_potion_throw.up
+			"throw_left":
+				return green_potion_throw.left
+			"throw_right":
+				return green_potion_throw.right
+	elif toolName == "destruction potion I" or toolName == "destruction potion II" or toolName == "destruction potion III":
+		match animation:
+			"throw_down":
+				return black_potion_throw.down
+			"throw_up":
+				return black_potion_throw.up
+			"throw_left":
+				return black_potion_throw.left
+			"throw_right":
+				return black_potion_throw.right
+	elif toolName == "speed potion I" or toolName == "speed potion II" or toolName == "speed potion III":
+		match animation:
+			"throw_down":
+				return blue_potion_throw.down
+			"throw_up":
+				return blue_potion_throw.up
+			"throw_left":
+				return blue_potion_throw.left
+			"throw_right":
+				return blue_potion_throw.right
 	match toolName:
 		"hammer":
 			match animation: 
@@ -735,11 +766,30 @@ func returnToolSprite(toolName, animation):
 					return magic_staff.left
 
 
-var health_potion_throw = {
-	down = load("res://Characters/Weapon swings/health potion throw/down.png"),
-	up = load("res://Characters/Weapon swings/health potion throw/up.png"),
-	left = load("res://Characters/Weapon swings/health potion throw/left.png"),
-	right = load("res://Characters/Weapon swings/health potion throw/right.png")
+var red_potion_throw = {
+	down = load("res://Characters/Weapon swings/potions/red/down.png"),
+	up = load("res://Characters/Weapon swings/potions/red/up.png"),
+	left = load("res://Characters/Weapon swings/potions/red/left.png"),
+	right = load("res://Characters/Weapon swings/potions/red/right.png")
+}
+
+var black_potion_throw = {
+	down = load("res://Characters/Weapon swings/potions/black/down.png"),
+	up = load("res://Characters/Weapon swings/potions/black/up.png"),
+	left = load("res://Characters/Weapon swings/potions/black/left.png"),
+	right = load("res://Characters/Weapon swings/potions/black/right.png")
+}
+var green_potion_throw = {
+	down = load("res://Characters/Weapon swings/potions/green/down.png"),
+	up = load("res://Characters/Weapon swings/potions/green/up.png"),
+	left = load("res://Characters/Weapon swings/potions/green/left.png"),
+	right = load("res://Characters/Weapon swings/potions/green/right.png")
+}
+var blue_potion_throw = {
+	down = load("res://Characters/Weapon swings/potions/blue/down.png"),
+	up = load("res://Characters/Weapon swings/potions/blue/up.png"),
+	left = load("res://Characters/Weapon swings/potions/blue/left.png"),
+	right = load("res://Characters/Weapon swings/potions/blue/right.png")
 }
 
 var magic_staff = {

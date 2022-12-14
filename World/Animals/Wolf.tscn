@@ -68,7 +68,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=44]
-radius = 200.04
+radius = 185.024
 
 [sub_resource type="CircleShape2D" id=45]
 radius = 35.0
@@ -479,7 +479,6 @@ anims/RESET = SubResource( 42 )
 anims/hit = SubResource( 43 )
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -537,7 +536,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 51 )
-frame = 5
+frame = 12
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

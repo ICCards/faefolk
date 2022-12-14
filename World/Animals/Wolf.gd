@@ -23,8 +23,8 @@ var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
-var health: int = Stats.DEER_HEALTH
-var STARTING_HEALTH: int = Stats.DEER_HEALTH
+var health: int = Stats.WOLF_HEALTH
+var STARTING_HEALTH: int = Stats.WOLF_HEALTH
 var tornado_node = null
 var hit_projectiles = []
 

@@ -2,6 +2,7 @@ extends Node2D
 
 onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
+var id
 var crop_name
 var days_until_harvest
 var loc
@@ -13,10 +14,6 @@ var isBeingHarvested = false
 var bodyEnteredFlag = false
 
 
-#func PlayEffect(player_id):
-#	Tiles.add_valid_tiles(locatio)
-#	queue_free()
-
 func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _is_crop_dead):
 	crop_name = _crop_name
 	loc = _loc
@@ -25,13 +22,9 @@ func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _i
 	crop_is_dead = false # return_if_crop_is_dead(_is_crop_dead)
 	phase = return_phase()
 
-
 func _ready():
 	add_to_group("active_crops")
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
-	yield(get_tree().create_timer(40.0), "timeout")
-	days_until_harvest = 0
-	refresh_image()
 
 func refresh_image():
 	phase = return_phase()
@@ -96,8 +89,6 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 	
 func harvest_and_remove():
 	if !isBeingHarvested:
-#		var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
-#		Server.action("ON_HIT", data)
 		$LeafEffect.show()
 		$LeafEffect.playing = true
 		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -150,10 +141,8 @@ func _on_PlayAnimBox_body_exited(body):
 
 func _on_HurtBox_area_entered(area):
 	Tiles.add_valid_tiles(loc)
-	var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
-	Server.action("ON_HIT", data)
+	MapData.remove_crop(id)
 	queue_free()
-
 
 
 

@@ -1,5 +1,7 @@
 extends Node
 
+signal set_day
+signal set_night
 signal mana_changed
 signal energy_changed
 signal health_changed
@@ -28,7 +30,8 @@ var active_item_slot = 0
 
 var player_data = {}
 var starting_player_data = {
-	"day_week": "Monday",
+	"season": "Spring",
+	"day_week": "Mon.",
 	"day_number": 1,
 	"time_minutes": 0,
 	"time_hours": 6,

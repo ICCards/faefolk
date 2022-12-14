@@ -16,6 +16,7 @@ func _ready():
 	initialize_slots()
 
 func initialize_slots():
+	PlayerData.InventorySlots = self
 	var slots = self.get_children()
 	for i in range(slots.size()):
 		if slots[i].item:

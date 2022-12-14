@@ -35,7 +35,7 @@ func set_footstep_volume(val):
 #	emit_signal("volume_change")
 	
 func return_adjusted_sound_db(category, init_sound):
-	return init_sound
+	return -80 #init_sound
 	if category == "music":
 		var progress = music_volume / 100
 		if progress == 0.5:

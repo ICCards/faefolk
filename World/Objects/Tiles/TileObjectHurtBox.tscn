@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://World/Objects/Tiles/TileObjectHurtBox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
@@ -8,9 +8,6 @@
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 16, 16 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 15, 14 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14, 14 )
@@ -84,14 +81,6 @@ collision_layer = 3
 shape = SubResource( 16 )
 disabled = true
 
-[node name="TypeOfTileArea" type="Area2D" parent="Position2D"]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/TypeOfTileArea"]
-shape = SubResource( 3 )
-disabled = true
-
 [node name="InteractiveArea" type="Area2D" parent="Position2D"]
 collision_layer = 0
 collision_mask = 131072
@@ -134,8 +123,10 @@ disabled = true
 volume_db = -16.0
 
 [node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 16, -16 )
 enabled = false
 texture = ExtResource( 2 )
+energy = 1.2
 mode = 2
 
 [node name="FurnaceSmoke" type="AnimatedSprite" parent="."]
@@ -144,7 +135,7 @@ position = Vector2( 21, -112 )
 scale = Vector2( 0.75, 0.75 )
 z_index = 1
 frames = SubResource( 15 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Chest" type="AnimatedSprite" parent="."]

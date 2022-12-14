@@ -122,10 +122,10 @@ func load_cave(map):
 
 func build_cave(map):
 	if Server.world.name != "Cave 1-Fishing":
+		set_initial_chest(map)
 		generate_ore(map)
 		generate_tall_grass(map)
 		generate_mushroom_forage(map)
-		set_initial_chest(map)
 	map["is_built"] = true
 
 func set_valid_tiles():
@@ -215,6 +215,7 @@ func set_initial_chest(map):
 		type = "stone chest"
 	else:
 		type = "wood chest"
+	MapData.add_placable(Server.world.name, {"n":type,"d":direction,"l":location})
 	PlaceObject.place_object_in_world(Server.world.name, type, direction, location)
 
 func return_chest_direction(loc):

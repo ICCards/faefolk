@@ -18,14 +18,14 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/shirts/shirt.png" type="Texture" id=17]
 [ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=18]
-[ext_resource path="res://World/Player/Player/Throwing.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Images/Magic/aim line.png" type="Texture" id=20]
 [ext_resource path="res://World/Player/Player/AttachedScenes/AimDownSightLine.tscn" type="PackedScene" id=21]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
-[ext_resource path="res://World/Player/Player/AttachedScripts/DetectPathType.gd" type="Script" id=23]
 [ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=24]
 [ext_resource path="res://Assets/Images/Misc/chat bubble.png" type="Texture" id=25]
 [ext_resource path="res://World/Player/Player/AttachedScripts/EnterInteractiveZones.gd" type="Script" id=26]
+[ext_resource path="res://World/Player/Player/PoisonParticles.gd" type="Script" id=27]
+[ext_resource path="res://World/Player/Player/SpeedParticles.gd" type="Script" id=28]
 [ext_resource path="res://World/Player/Player/AttachedScripts/Swinging.gd" type="Script" id=29]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=76]
@@ -11314,6 +11314,7 @@ one_shot = true
 
 [node name="PoisonParticles" type="Node2D" parent="."]
 position = Vector2( 0, -25 )
+script = ExtResource( 27 )
 
 [node name="P3" type="CPUParticles2D" parent="PoisonParticles"]
 modulate = Color( 1.35, 1.35, 1.35, 1 )
@@ -11375,9 +11376,7 @@ one_shot = true
 
 [node name="SpeedParticles" type="Node2D" parent="."]
 position = Vector2( 0, -25 )
-
-[node name="SpeedStateTimer" type="Timer" parent="SpeedParticles"]
-one_shot = true
+script = ExtResource( 28 )
 
 [node name="P3" type="CPUParticles2D" parent="SpeedParticles"]
 modulate = Color( 1.35, 1.35, 1.35, 1 )
@@ -11432,6 +11431,9 @@ initial_velocity_random = 0.8
 scale_amount = 4.0
 scale_amount_random = 0.7
 color = Color( 0.145098, 0.305882, 0.545098, 1 )
+
+[node name="SpeedStateTimer" type="Timer" parent="SpeedParticles"]
+one_shot = true
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 modulate = Color( 1.1, 1.1, 1.1, 1 )
@@ -11650,8 +11652,6 @@ texture_mode = 1
 
 [node name="Magic" parent="." instance=ExtResource( 3 )]
 
-[node name="Throwing" parent="." instance=ExtResource( 19 )]
-
 [node name="Area2Ds" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -11715,24 +11715,6 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterInteractiveZones/Area2D"]
 shape = SubResource( 15 )
-
-[node name="DetectPathType" type="Node2D" parent="Area2Ds"]
-visible = false
-script = ExtResource( 23 )
-
-[node name="DetectWoodPath" type="Area2D" parent="Area2Ds/DetectPathType"]
-collision_layer = 512
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/DetectPathType/DetectWoodPath"]
-shape = SubResource( 10 )
-
-[node name="DetectStonePath" type="Area2D" parent="Area2Ds/DetectPathType"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/DetectPathType/DetectStonePath"]
-shape = SubResource( 10 )
 
 [node name="Texts" type="Node2D" parent="."]
 visible = false
@@ -11811,8 +11793,8 @@ position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
 shape = SubResource( 11 )
 
-[connection signal="timeout" from="PoisonParticles/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
-[connection signal="timeout" from="SpeedParticles/SpeedStateTimer" to="." method="_on_SpeedStateTimer_timeout"]
+[connection signal="timeout" from="PoisonParticles/PoisonTimer" to="PoisonParticles" method="_on_PoisonTimer_timeout"]
+[connection signal="timeout" from="SpeedParticles/SpeedStateTimer" to="SpeedParticles" method="_on_SpeedStateTimer_timeout"]
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_exited"]
 [connection signal="area_entered" from="Area2Ds/HurtBox" to="Area2Ds/HurtBox" method="_on_HurtBox_area_entered"]
@@ -11820,10 +11802,6 @@ shape = SubResource( 11 )
 [connection signal="timeout" from="Area2Ds/HurtBox/RegenerationTimer" to="Area2Ds/HurtBox" method="_on_RegenerationTimer_timeout"]
 [connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/Area2D" to="Area2Ds/EnterInteractiveZones" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/Area2D" to="Area2Ds/EnterInteractiveZones" method="_on_Area2D_area_exited"]
-[connection signal="area_entered" from="Area2Ds/DetectPathType/DetectWoodPath" to="Area2Ds/DetectPathType" method="_on_DetectWoodPath_area_entered"]
-[connection signal="area_exited" from="Area2Ds/DetectPathType/DetectWoodPath" to="Area2Ds/DetectPathType" method="_on_DetectWoodPath_area_exited"]
-[connection signal="area_entered" from="Area2Ds/DetectPathType/DetectStonePath" to="Area2Ds/DetectPathType" method="_on_DetectStonePath_area_entered"]
-[connection signal="area_exited" from="Area2Ds/DetectPathType/DetectStonePath" to="Area2Ds/DetectPathType" method="_on_DetectStonePath_area_exited"]
 
 [editable path="Swing/AimDownSightLine"]
 [editable path="Magic"]

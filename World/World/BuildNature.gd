@@ -32,11 +32,16 @@ func spawn_placables():
 	yield(get_tree().create_timer(3.0), "timeout")
 	for id in MapData.world["placables"]:
 		var item_name = MapData.world["placables"][id]["n"]
-		var location = MapData.world["placables"][id]["l"]
+		var location = Util.string_to_vector2(MapData.world["placables"][id]["l"])
 		if item_name == "wall" or item_name == "foundation":
 			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placables"][id]["v"],location)
 		else:
 			PlaceObject.place_object_in_world(id,item_name,MapData.world["placables"][id]["d"],location)
+	for id in MapData.world["crops"]:
+		var item_name = MapData.world["crops"][id]["n"]
+		var location = Util.string_to_vector2(MapData.world["crops"][id]["l"])
+		var days_to_grow = MapData.world["crops"][id]["d"]
+		PlaceObject.place_seed_in_world(id,item_name,location,days_to_grow)
 
 
 var is_destroyed: bool = false

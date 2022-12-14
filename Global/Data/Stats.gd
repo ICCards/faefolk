@@ -58,18 +58,19 @@ const MAX_STONE_WATERING_CAN = 25
 const MAX_BRONZE_WATERING_CAN = 50
 const MAX_GOLD_WATERING_CAN = 100
 
-const DUCK_HEALTH = 90
-const BUNNY_HEALTH = 90
-const BEAR_HEALTH = 160
-const BOAR_HEALTH = 140
-const DEER_HEALTH = 150
+const DUCK_HEALTH = 70
+const BUNNY_HEALTH = 70
+const BEAR_HEALTH = 150
+const BOAR_HEALTH = 90
+const DEER_HEALTH = 120
+const WOLF_HEALTH = 90
 
 
 const SLIME_HEALTH = 90
 const SPIDER_HEALTH = 100
 const SKELETON_HEALTH = 100
 const BAT_HEALTH = 90
-const WIND_BOSS = 1000
+const WIND_BOSS = 1200
 
 
 func return_tool_damage(tool_name):
