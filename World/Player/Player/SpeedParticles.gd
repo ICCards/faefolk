@@ -20,7 +20,6 @@ func _on_SpeedStateTimer_timeout():
 	stop_speed_buff()
 
 func stop_speed_buff():
-	$SpeedStateTimer.time_left = 0
 	get_parent().speed_buff_active = false
 	$P1.emitting = false
 	$P2.emitting = false

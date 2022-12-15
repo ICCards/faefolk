@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/demon mage spawn.mp3-fb02be7cf307e83a79acffadff9767d0.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Dark/demon mage spawn.mp3"
+dest_files=[ "res://.import/demon mage spawn.mp3-fb02be7cf307e83a79acffadff9767d0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

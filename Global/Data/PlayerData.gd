@@ -42,7 +42,9 @@ var starting_player_data = {
 		"0": ["wind staff", 1, null],
 		"2": ["bow", 1, 50],
 		"1": ["stone sword", 1, null],
-		"7": ["arrow", 500, null]
+		"7": ["arrow", 500, null],
+		"8": ["wheat seeds", 500, null],
+		"9": ["raw egg", 100, null]
 	},
 	"inventory": {
 			"0": ["electric staff", 1, null],

@@ -30,6 +30,9 @@ var debuff: bool = false
 var random_movement_position = null
 
 func _ready():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Dark/demon mage spawn.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.play()
 	randomize()
 	$HitBox.tool_name = "wood sword"
 	if Util.chance(50):
@@ -44,7 +47,7 @@ func _physics_process(delta):
 				var direction = (enemy_node.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 				velocity = move_and_slide(velocity)
-				demon_sprite.flip_h = velocity.x > 0
+				demon_sprite.flip_h = velocity.x < 0
 				if not attacking and self.position.distance_to(enemy_node.position) < 150:
 					swing()
 				return
@@ -77,14 +80,14 @@ func _physics_process(delta):
 							demon_sprite.flip_h = true
 					else:
 						if degrees >= -90 or degrees <= -270:
-							demon_sprite.flip_h = false
-						else:
 							demon_sprite.flip_h = true
+						else:
+							demon_sprite.flip_h = false
 				else:
 					if velocity.x > 0:
-						demon_sprite.flip_h = false
-					else:
 						demon_sprite.flip_h = true
+					else:
+						demon_sprite.flip_h = false
 				if not attacking and self.position.distance_to(enemy_node.position) < 400:
 					shoot(enemy_node.position)
 				return
@@ -154,11 +157,6 @@ func swing():
 	attacking = false
 
 
-#func _on_DetectEnemyBox_body_entered(body):
-#	if not enemy_node:
-#		#if body.enemy_name == "bear" or body.enemy_name == "duck" or body.enemy_name == "bunny":
-#		enemy_node = body
-
 func set_trail_particles_direction():
 	if velocity == Vector2.ZERO or state == IDLE:
 		$TrailParticles.emitting = false 
@@ -179,6 +177,7 @@ func _on_Timer_timeout():
 	destroy()
 
 func destroy(): 
+	$Shadow.hide()
 	destroyed = true
 	set_physics_process(false)
 	yield(get_tree(), "idle_frame")

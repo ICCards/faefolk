@@ -272,9 +272,9 @@ func _input(event):
 		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode:
 			if item_name == "chair" or item_name == "armchair" or item_name == "couch":
 				if $Position2D/InteractiveArea.get_overlapping_areas().size() >= 1:
-					Server.player_node.sit(return_adjusted_chair_position(direction), direction)
+					Server.player_node.actions.sit(return_adjusted_chair_position(direction), direction)
 	elif event.is_action_pressed("action") and Server.player_node.state == 7:
-		Server.player_node.stand_up()
+		Server.player_node.actions.stand_up()
 		
 func return_adjusted_chair_position(direction):
 	match item_name:

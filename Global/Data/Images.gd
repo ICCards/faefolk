@@ -1045,23 +1045,23 @@ var yellow_grass_winter = [
 
 # DESERT TREES #
 
-var desert_trees = [
-	load("res://Assets/Images/tree_sets/desert/1a.tres"),
-	load("res://Assets/Images/tree_sets/desert/1b.tres"),
-	load("res://Assets/Images/tree_sets/desert/2a.tres"),
-	load("res://Assets/Images/tree_sets/desert/2b.tres")
-]
+#var desert_trees = [
+#	load("res://Assets/Images/tree_sets/desert/1a.tres"),
+#	load("res://Assets/Images/tree_sets/desert/1b.tres"),
+#	load("res://Assets/Images/tree_sets/desert/2a.tres"),
+#	load("res://Assets/Images/tree_sets/desert/2b.tres")
+#]
 
-func returnDesertTree(type):
-	match type:
-		"1a":
-			return desert_trees[0]
-		"1b":
-			return desert_trees[1]
-		"2a":
-			return desert_trees[2]
-		"2b":
-			return desert_trees[3]
+#func returnDesertTree(type):
+#	match type:
+#		"1a":
+#			return desert_trees[0]
+#		"1b":
+#			return desert_trees[1]
+#		"2a":
+#			return desert_trees[2]
+#		"2b":
+#			return desert_trees[3]
 
 # FRUITLESS TREES #
 

@@ -269,7 +269,6 @@ position = Vector2( 0, -30 )
 scale = Vector2( 0.75, 0.75 )
 frames = ExtResource( 1 )
 animation = "walk"
-frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -306,7 +305,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 11
+frame = 4
 playing = true
 
 [node name="Timers" type="Node" parent="."]
@@ -319,6 +318,9 @@ autostart = true
 
 [node name="IdleTimer" type="Timer" parent="Timers"]
 
+[node name="DropEggTimer" type="Timer" parent="Timers"]
+autostart = true
+
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
@@ -326,5 +328,6 @@ autostart = true
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/RunStateTimer" to="." method="_on_RunStateTimer_timeout"]
 [connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_IdleTimer_timeout"]
+[connection signal="timeout" from="Timers/DropEggTimer" to="." method="_on_DropEggTimer_timeout"]
 
 [editable path="EnemyPoisonState"]

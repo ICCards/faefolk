@@ -287,4 +287,11 @@ func play_open_menu_sound():
 	sound_effects.play()
 
 
+func show_set_button_dialogue():
+	if not $EnterNewKey.visible:
+		$EnterNewKey.show()
+		
+func hide_set_button_dialogue():
+	if $EnterNewKey.visible:
+		$EnterNewKey.hide()
 

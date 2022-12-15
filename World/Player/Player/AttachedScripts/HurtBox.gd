@@ -84,7 +84,7 @@ func _on_HurtBox_area_entered(area):
 			elif area.name == "SpiderHit":
 				health_to_subtract = rng.randi_range(8, 12)
 			elif area.name == "SlimeHit":
-				get_node("../../").start_poison_state()
+				get_node("../../PoisonParticles").start_poison_state()
 				diminish_HOT(area.name)
 				$AnimationPlayer.play("hit")
 				get_node("../../Camera2D").player_hit_screen_shake()
@@ -175,6 +175,20 @@ func _on_RegenerationTimer_timeout():
 			PlayerData.change_health(regeneration_increment)
 			InstancedScenes.player_hit_effect(regeneration_increment, get_node("../../").position)
 			amount_to_heal -= regeneration_increment
+
+var temp = 0
+func decrease_energy_or_health_while_sprinting():
+	temp += 1
+	if temp > 1000:
+		temp = 0
+		if PlayerData.player_data["energy"] == 0:
+			rng.randomize()
+			var amt = rng.randi_range(1,3)
+			$AnimationPlayer.play("hit")
+			InstancedScenes.player_hit_effect(-amt, position)
+			PlayerData.change_health(-amt)
+		else:
+			PlayerData.change_energy(-1)
 
 
 func play_sound_effect():

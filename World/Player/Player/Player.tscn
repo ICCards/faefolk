@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
-[ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=9]
+[ext_resource path="res://World/Player/Player/SpeedParticles.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Player/Player/AttachedScripts/AttachedText.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
@@ -18,15 +18,13 @@
 [ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=16]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/shirts/shirt.png" type="Texture" id=17]
 [ext_resource path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" type="Script" id=18]
-[ext_resource path="res://Assets/Images/Magic/aim line.png" type="Texture" id=20]
-[ext_resource path="res://World/Player/Player/AttachedScenes/AimDownSightLine.tscn" type="PackedScene" id=21]
+[ext_resource path="res://World/Player/Player/Swing.tscn" type="PackedScene" id=19]
+[ext_resource path="res://World/Player/Player/PoisonParticles.tscn" type="PackedScene" id=20]
+[ext_resource path="res://World/Player/Player/Actions.tscn" type="PackedScene" id=21]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
 [ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=24]
 [ext_resource path="res://Assets/Images/Misc/chat bubble.png" type="Texture" id=25]
 [ext_resource path="res://World/Player/Player/AttachedScripts/EnterInteractiveZones.gd" type="Script" id=26]
-[ext_resource path="res://World/Player/Player/PoisonParticles.gd" type="Script" id=27]
-[ext_resource path="res://World/Player/Player/SpeedParticles.gd" type="Script" id=28]
-[ext_resource path="res://World/Player/Player/AttachedScripts/Swinging.gd" type="Script" id=29]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=76]
 [ext_resource path="res://World/Player/Player/Camera2D.gd" type="Script" id=81]
@@ -11174,17 +11172,6 @@ tracks/17/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1, 1 )
-
-[sub_resource type="CapsuleShape2D" id=69]
-radius = 24.0
-height = 28.4444
-
-[sub_resource type="CapsuleShape2D" id=28]
-radius = 39.0
-height = 28.4444
-
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 39.746
 height = 22.2163
@@ -11312,128 +11299,11 @@ one_shot = true
 
 [node name="Tween" type="Tween" parent="Camera2D"]
 
-[node name="PoisonParticles" type="Node2D" parent="."]
-position = Vector2( 0, -25 )
-script = ExtResource( 27 )
+[node name="Actions" parent="." instance=ExtResource( 21 )]
 
-[node name="P3" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 12, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0, 0.332031, 0, 1 )
+[node name="PoisonParticles" parent="." instance=ExtResource( 20 )]
 
-[node name="P2" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.145098, 0.545098, 0.145098, 1 )
-
-[node name="P1" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.14902, 0.937255, 0.14902, 1 )
-
-[node name="PoisonTimer" type="Timer" parent="PoisonParticles"]
-wait_time = 8.0
-one_shot = true
-
-[node name="SpeedParticles" type="Node2D" parent="."]
-position = Vector2( 0, -25 )
-script = ExtResource( 28 )
-
-[node name="P3" type="CPUParticles2D" parent="SpeedParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 12, 4 )
-direction = Vector2( -1, 0 )
-spread = 24.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 40.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.14902, 0.466667, 0.937255, 1 )
-
-[node name="P2" type="CPUParticles2D" parent="SpeedParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
-spread = 24.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 40.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.545098, 0.701961, 0.937255, 1 )
-
-[node name="P1" type="CPUParticles2D" parent="SpeedParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
-spread = 24.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 40.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.145098, 0.305882, 0.545098, 1 )
-
-[node name="SpeedStateTimer" type="Timer" parent="SpeedParticles"]
-one_shot = true
+[node name="SpeedParticles" parent="." instance=ExtResource( 9 )]
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 modulate = Color( 1.1, 1.1, 1.1, 1 )
@@ -11581,74 +11451,7 @@ anims/walk = SubResource( 113 )
 "anims/walk legs" = SubResource( 114 )
 anims/watering = SubResource( 115 )
 
-[node name="Swing" type="Node2D" parent="."]
-script = ExtResource( 29 )
-
-[node name="AxePickaxeSwing" type="Area2D" parent="Swing"]
-visible = false
-collision_layer = 0
-collision_mask = 0
-script = ExtResource( 9 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/AxePickaxeSwing"]
-shape = SubResource( 2 )
-
-[node name="SwordSwing" type="Area2D" parent="Swing"]
-visible = false
-collision_layer = 0
-collision_mask = 2304
-script = ExtResource( 9 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/SwordSwing"]
-position = Vector2( 0, 12 )
-rotation = 1.5708
-shape = SubResource( 69 )
-disabled = true
-
-[node name="ScytheSwing" type="Area2D" parent="Swing"]
-visible = false
-collision_layer = 0
-collision_mask = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/ScytheSwing"]
-position = Vector2( 0, -67 )
-rotation = 1.5708
-shape = SubResource( 28 )
-disabled = true
-
-[node name="WateringCanParticles1" type="CPUParticles2D" parent="Swing"]
-modulate = Color( 0.196078, 0.435294, 0.937255, 1 )
-position = Vector2( 13, -12 )
-scale = Vector2( 2, 2 )
-emitting = false
-amount = 10
-lifetime = 0.6
-emission_shape = 2
-emission_rect_extents = Vector2( 2, 1 )
-gravity = Vector2( 0, 70 )
-scale_amount = 1.5
-scale_amount_random = 1.0
-
-[node name="WateringCanParticles2" type="CPUParticles2D" parent="Swing"]
-modulate = Color( 0, 0.690196, 0.901961, 1 )
-position = Vector2( 13, -12 )
-scale = Vector2( 2, 2 )
-emitting = false
-amount = 10
-lifetime = 0.6
-emission_shape = 2
-emission_rect_extents = Vector2( 2, 1 )
-gravity = Vector2( 0, 70 )
-scale_amount = 1.5
-scale_amount_random = 1.0
-
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="Swing"]
-
-[node name="AimDownSightLine" parent="Swing" instance=ExtResource( 21 )]
-width = 4.0
-default_color = Color( 1.2, 1.2, 1.2, 1 )
-texture = ExtResource( 20 )
-texture_mode = 1
+[node name="Swing" parent="." instance=ExtResource( 19 )]
 
 [node name="Magic" parent="." instance=ExtResource( 3 )]
 
@@ -11793,8 +11596,6 @@ position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
 shape = SubResource( 11 )
 
-[connection signal="timeout" from="PoisonParticles/PoisonTimer" to="PoisonParticles" method="_on_PoisonTimer_timeout"]
-[connection signal="timeout" from="SpeedParticles/SpeedStateTimer" to="SpeedParticles" method="_on_SpeedStateTimer_timeout"]
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_exited"]
 [connection signal="area_entered" from="Area2Ds/HurtBox" to="Area2Ds/HurtBox" method="_on_HurtBox_area_entered"]
@@ -11802,7 +11603,3 @@ shape = SubResource( 11 )
 [connection signal="timeout" from="Area2Ds/HurtBox/RegenerationTimer" to="Area2Ds/HurtBox" method="_on_RegenerationTimer_timeout"]
 [connection signal="area_entered" from="Area2Ds/EnterInteractiveZones/Area2D" to="Area2Ds/EnterInteractiveZones" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2Ds/EnterInteractiveZones/Area2D" to="Area2Ds/EnterInteractiveZones" method="_on_Area2D_area_exited"]
-
-[editable path="Swing/AimDownSightLine"]
-[editable path="Magic"]
-[editable path="Magic/AimDownSightLine"]

@@ -24,6 +24,8 @@ onready var navTiles = get_node("../../Navigation2D/NavTiles")
 onready var GrassObjects = get_node("../../GrassObjects")
 onready var NatureObjects = get_node("../../NatureObjects")
 
+var is_destroyed: bool = false
+
 
 func _ready():
 	spawn_placables()
@@ -42,10 +44,15 @@ func spawn_placables():
 		var location = Util.string_to_vector2(MapData.world["crops"][id]["l"])
 		var days_to_grow = MapData.world["crops"][id]["d"]
 		PlaceObject.place_seed_in_world(id,item_name,location,days_to_grow)
+	for id in MapData.world["tiles"]:
+		var loc = Util.string_to_vector2(id)
+		Tiles.hoed_tiles.set_cellv(loc, 0)
+		if MapData.world["tiles"][id] == "w":
+			Tiles.watered_tiles.set_cellv(loc, 0)
+		Tiles.hoed_tiles.update_bitmask_region()
+		Tiles.watered_tiles.update_bitmask_region()
 
 
-var is_destroyed: bool = false
-	
 func _whoAmI(_value):
 	call_deferred("remove_nature")
 	

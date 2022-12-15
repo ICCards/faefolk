@@ -50,7 +50,8 @@ func place_seed_in_world(id, item_name, location, days):
 	Tiles.remove_valid_tiles(location)
 	var plantedCrop = PlantedCrop.instance()
 	plantedCrop.name = str(id)
-	plantedCrop.initialize(item_name, location, JsonData.crop_data[item_name]["DaysToGrow"], false, false)
+	plantedCrop.id = str(id)
+	plantedCrop.initialize(item_name, location, days, false, false)
 	PlacableObjects.call_deferred("add_child", plantedCrop, true)
 	plantedCrop.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0, 16)
 

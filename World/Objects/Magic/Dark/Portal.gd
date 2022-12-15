@@ -13,5 +13,5 @@ func _ready():
 	$AnimatedSprite.play("idle")
 
 func _on_Area2D_area_entered(area):
-	Server.player_node.teleport(position)
+	Server.player_node.actions.teleport(position)
 

@@ -379,12 +379,16 @@ func set_invisibility():
 	$Tween.start()
 	$Tween.interpolate_property(composite_sprites.get_node("Arms"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
 	$Tween.start()
+	$Tween.interpolate_property(composite_sprites.get_node("Legs"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
+	$Tween.start()
 	invisibility_active = true
 	yield(get_tree().create_timer(10.0), "timeout")
 	invisibility_active = false
 	$Tween.interpolate_property(composite_sprites.get_node("Body"), "modulate:a", 0.15, 1.0, 0.5, 3, 1)
 	$Tween.start()
 	$Tween.interpolate_property(composite_sprites.get_node("Arms"), "modulate:a", 0.15, 1.0, 0.5, 3, 1)
+	$Tween.start()
+	$Tween.interpolate_property(composite_sprites.get_node("Legs"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
 	$Tween.start()
 
 

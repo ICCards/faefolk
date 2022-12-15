@@ -5,14 +5,11 @@ onready var sword_swing = $Swing/SwordSwing
 onready var composite_sprites = $CompositeSprites
 onready var holding_item = $HoldingItem
 
-onready var Eating_particles = load("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
-onready var Fishing = load("res://World/Player/Player/Fishing/Fishing.tscn")
-onready var PlaceObjectScene = load("res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
+onready var actions = $Actions
+onready var user_interface = $Camera2D/UserInterface
 
 var running = false
-var principal
-var character 
-var setting
+var character
 var current_building_item = null
 var running_speed_change = 1.0
 
@@ -42,24 +39,19 @@ var DASH_SPEED := 55
 var MAX_SPEED_SWIMMING := 12
 var is_walking_on_dirt: bool = true
 var is_swimming: bool = false
-var is_sitting: bool = false
 var poisoned: bool = false
 var speed_buff_active: bool = false
 var ACCELERATION := 6
 var FRICTION := 8
 var velocity := Vector2.ZERO
 var input_vector
-var counter = -1
-var collisionMask = null
-var direction_of_current_chair
 var is_building_world = false
-
+var isLoaded: bool = false
 onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	PlayerData.connect("health_depleted", self, "player_death")
 	PlayerData.emit_signal("active_item_updated")
 	PlayerData.connect("active_item_updated", self, "set_held_object")
 	Server.player_node = self
@@ -70,92 +62,13 @@ func _ready():
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	yield(get_tree(), "idle_frame")
+	isLoaded = true
 	set_held_object()
 	
 func destroy():
 	set_process(false)
 	set_process_unhandled_input(false)
 	state = DYING
-
-
-func teleport(portal_position):
-	var adjusted_pos = input_vector*40
-	if adjusted_pos == Vector2.ZERO:
-		adjusted_pos = Vector2(0,40)
-	if $Magic.portal_1_position == portal_position and $Magic.portal_2_position:
-		position = $Magic.portal_2_position + adjusted_pos
-	elif $Magic.portal_2_position == portal_position:
-		position = $Magic.portal_1_position + adjusted_pos
-	
-func sleep(sleeping_bag_direction, pos):
-	if state != SLEEPING:
-		z_index = 1
-		state = SLEEPING
-		spawn_position = position
-		position = pos
-		animation_player.play("sleep")
-		composite_sprites.set_player_animation(character, "sleep_" + sleeping_bag_direction)
-		if sleeping_bag_direction == "left":
-			composite_sprites.rotation_degrees = -90
-		elif sleeping_bag_direction == "right":
-			composite_sprites.rotation_degrees = 90
-		elif sleeping_bag_direction == "up":
-			composite_sprites.rotation_degrees = 180
-		yield(animation_player, "animation_finished")
-		z_index = 0
-		composite_sprites.rotation_degrees = 0
-		state = MOVEMENT
-	
-func player_death():
-	if state != DYING:
-		state = DYING
-		$PoisonParticles.stop_poison_state()
-		$SpeedParticles.stop_speed_buff()
-		composite_sprites.set_player_animation(character, "death_" + direction.to_lower(), null)
-		animation_player.play("death")
-		$Camera2D/UserInterface.death()
-		$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", true) 
-		$Camera2D/UserInterface/MagicStaffUI.hide()
-		if has_node("Fishing"):
-			get_node("Fishing").queue_free()
-		drop_inventory_items()
-		yield(animation_player, "animation_finished")
-		respawn()
-	
-func drop_inventory_items():
-	for item in PlayerData.player_data["hotbar"].keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["hotbar"][item], position+Vector2(rand_range(-32,32), rand_range(-32,32)))
-	for item in PlayerData.player_data["inventory"].keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["inventory"][item], position+Vector2(rand_range(-32,32), rand_range(-32,32)))
-	PlayerData.player_data["hotbar"] = {}
-	PlayerData.player_data["inventory"] = {}
-	
-func respawn():
-	position = spawn_position
-	PlayerData.respawn_player()
-	animation_player.stop()
-	$Camera2D/UserInterface.respawn()
-	yield(get_tree().create_timer(0.5), "timeout")
-	$Area2Ds/PickupZone/CollisionShape2D.set_deferred("disabled", false) 
-	state = MOVEMENT
-
-
-func show_set_button_dialogue():
-	if not $Camera2D/UserInterface/EnterNewKey.visible:
-		$Camera2D/UserInterface/EnterNewKey.show()
-		
-func hide_set_button_dialogue():
-	if $Camera2D/UserInterface/EnterNewKey.visible:
-		$Camera2D/UserInterface/EnterNewKey.hide()
-
-
-	
-func sendAction(action,data): 
-	match action:
-		(MOVEMENT):
-			Server.action("MOVEMENT",data)
-		(SWINGING):
-			Server.action("SWING", data)
 
 func set_held_object():
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
@@ -168,12 +81,6 @@ func set_held_object():
 
 
 func _process(_delta) -> void:
-	$PoisonParticles/P1.direction = -velocity
-	$PoisonParticles/P2.direction = -velocity
-	$PoisonParticles/P3.direction = -velocity
-	$SpeedParticles/P1.direction = -velocity
-	$SpeedParticles/P2.direction = -velocity
-	$SpeedParticles/P3.direction = -velocity
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
@@ -205,6 +112,7 @@ func set_movement_speed_change():
 	else:
 		running_speed_change = 1.0
 
+
 func _unhandled_input(event):
 	if not PlayerData.viewInventoryMode and \
 		not PlayerData.interactive_screen_mode and \
@@ -217,9 +125,9 @@ func _unhandled_input(event):
 				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif item_name == "blueprint" and current_building_item != null:
-					show_placable_object(current_building_item, "BUILDING")
-				if event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
-					fish()
+					actions.show_placable_object(current_building_item, "BUILDING")
+				elif event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
+					actions.fish()
 				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
 					$Swing.swing(item_name, direction)
 				elif item_category == "Potion" and event.is_action_pressed("mouse_click"):
@@ -229,110 +137,19 @@ func _unhandled_input(event):
 				elif event.is_action_pressed("mouse_click") and item_category == "Magic":
 					$Magic.cast_spell(item_name, direction)
 				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
-					eat(item_name)
+					actions.eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
-					show_placable_object(item_name, item_category)
+					actions.show_placable_object(item_name, item_category)
 				elif item_name != "blueprint":
-					destroy_placable_object()
+					actions.destroy_placable_object()
 			else:
-				destroy_placable_object()
+				actions.destroy_placable_object()
 				if event.is_action_pressed("mouse_click"): # punch
 					$Swing.swing(null, direction) 
 	if event.is_action_pressed("sprint") and not poisoned:
 		running = true
 	elif event.is_action_released("sprint") and not poisoned:
 		running = false
-
-
-func show_placable_object(item_name, item_category):
-	if item_category == "Seed":
-		item_name.erase(item_name.length() - 6, 6)
-	if not has_node("PlaceObject"): # does not exist yet, add to scene tree
-		var placeObject = PlaceObjectScene.instance()
-		placeObject.name = "PlaceObject"
-		placeObject.item_name = item_name
-		placeObject.item_category = item_category
-		placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
-		add_child(placeObject)
-	else:
-		if get_node("PlaceObject").item_name != item_name: # exists but item changed
-			get_node("PlaceObject").item_name = item_name
-			get_node("PlaceObject").item_category = item_category
-			get_node("PlaceObject").initialize()
-
-
-func harvest_crop(item_name):
-	state = HARVESTING
-	var anim = "harvest_" + direction.to_lower()
-	holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + item_name + ".png")
-	composite_sprites.set_player_animation(Server.player_node.character, anim)
-	animation_player.play(anim)
-	yield(animation_player, "animation_finished")
-	state = MOVEMENT
-	
-func harvest_forage(item_name):
-	state = HARVESTING
-	var anim = "harvest_" + direction.to_lower()
-	holding_item.texture = load("res://Assets/Images/Forage/" + item_name + ".png")
-	composite_sprites.set_player_animation(Server.player_node.character, anim)
-	animation_player.play(anim)
-	yield(animation_player, "animation_finished")
-	state = MOVEMENT
-
-
-func destroy_placable_object():
-	if has_node("PlaceObject"):
-		get_node("Camera2D/UserInterface/ChangeRotation").hide()
-		get_node("Camera2D/UserInterface/ChangeVariety").hide()
-		get_node("PlaceObject").destroy()
-
-
-func sit(adjusted_position, direction_of_chair):
-	direction_of_current_chair = direction_of_chair
-	is_sitting = true
-	state = SITTING
-	position = adjusted_position
-	composite_sprites.set_player_animation(character, "sit_"+direction_of_current_chair, null)
-	animation_player.play("sit_"+direction_of_current_chair)
-	yield(animation_player, "animation_finished")
-	is_sitting = false
-
-func stand_up():
-	if not is_sitting:
-		animation_player.play_backwards("sit_"+direction_of_current_chair)
-		yield(animation_player, "animation_finished")
-		state = MOVEMENT
-
-func eat(item_name):
-	destroy_placable_object()
-	if state != EATING:
-		$Sounds/SoundEffects.stream = load("res://Assets/Sound/Sound effects/Player/eat.mp3")
-		$Sounds/SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
-		$Sounds/SoundEffects.play()
-		state = EATING
-		PlayerData.remove_single_object_from_hotbar()
-		var eating_paricles = Eating_particles.instance()
-		eating_paricles.item_name = item_name
-		add_child(eating_paricles)
-		composite_sprites.set_player_animation(character, "eat", null)
-		animation_player.play("eat")
-		yield(animation_player, "animation_finished")
-		$CompositeSprites/Body.hframes = 4
-		$CompositeSprites/Arms.hframes = 4
-		$CompositeSprites/Pants.hframes = 4
-		$CompositeSprites/Shoes.hframes = 4
-		$CompositeSprites/Shirts.hframes = 4
-		$CompositeSprites/HeadAtr.hframes = 4
-		state = MOVEMENT
-
-func fish():
-	destroy_placable_object()
-	if state != FISHING:
-		PlayerData.change_energy(-1)
-		state = FISHING
-		var fishing = Fishing.instance()
-		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0]
-		add_child(fishing)
 
 
 func magic_casting_movement_state(_delta):
@@ -432,6 +249,7 @@ func idle_state(_direction):
 			animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
+
 func walk_state(_direction):
 	if state != DYING:
 		$Sounds/FootstepsSound.stream_paused = false
@@ -452,7 +270,7 @@ func walk_state(_direction):
 				animation = "walk_" + _direction.to_lower()
 			composite_sprites.set_player_animation(character, animation, null)
 		elif Input.is_action_pressed("sprint") and Sounds.current_footsteps_sound != Sounds.swimming:
-			decrease_energy_or_health()
+			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			animation_player.play("sprint")
 			animation = "run_" + _direction.to_lower()
 			composite_sprites.set_player_animation(character, animation, null)
@@ -461,20 +279,6 @@ func walk_state(_direction):
 			animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
-
-var temp = 0
-func decrease_energy_or_health():
-	temp += 1
-	if temp > 1000:
-		temp = 0
-		if PlayerData.player_data["energy"] == 0:
-			rng.randomize()
-			var amt = rng.randi_range(1,3)
-			$Area2Ds/HurtBox/AnimationPlayer.play("hit")
-			InstancedScenes.player_hit_effect(-amt, position)
-			PlayerData.change_health(-amt)
-		else:
-			PlayerData.change_energy(-1)
 
 func check_if_holding_item():
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
@@ -486,22 +290,3 @@ func check_if_holding_item():
 			PlayerData.player_data["hotbar"].erase(str(PlayerData.active_item_slot))
 			$Camera2D/UserInterface/Hotbar.initialize_hotbar()
 			InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
-
-
-#func init_day_night_cycle(_time_elapsed):
-#	if setting == "World":
-#		if _time_elapsed <= 24:
-#			$Camera2D/DayNight.color =  Color("#ffffff")
-#		else:
-#			$Camera2D/DayNight.color = Color("#00070e")
-#	else:
-#		$Camera2D/DayNight.visible = false
-#
-#func set_night():
-#	day_night_animation_player.play("set night")
-#func set_day():
-#	day_night_animation_player.play_backwards("set night")
-
-
-
-

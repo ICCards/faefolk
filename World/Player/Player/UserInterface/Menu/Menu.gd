@@ -7,7 +7,7 @@ onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 func initialize():
 	show()
-	Server.player_node.destroy_placable_object()
+	Server.player_node.actions.destroy_placable_object()
 	hovered_button = null
 	$Trash/Top.rotation_degrees = 0
 	$Trash.show()

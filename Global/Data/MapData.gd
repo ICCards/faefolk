@@ -1,6 +1,6 @@
 extends Node
 
-
+signal refresh_crops
 var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
 
@@ -31,7 +31,21 @@ func _ready() -> void:
 	load_world_data()
 	load_caves_data()
 	add_tiles_to_chunks()
-#	add_nature_objects_to_chunks()
+	add_nature_objects_to_chunks()
+	PlayerData.connect("set_day", self, "advance_crops")
+
+func advance_crops():
+	for id in world["crops"]: # if crop is watered, advance a day
+		var loc_string = world["crops"][id]["l"]
+		if world["tiles"][loc_string] == "w":
+			world["crops"][id]["d"] -= 1
+	for tile in world["tiles"]: # if tile is watered, set to not watered
+		if world["tiles"][tile] == "w":
+			world["tiles"][tile] = "h"
+	if Server.world.name == "World": # clear watered tiles if in world
+		Tiles.watered_tiles.clear()
+	emit_signal("refresh_crops")
+
 
 func save_map_data():
 	var world_file = File.new()
@@ -100,6 +114,15 @@ func save_starting_caves_data():
 	print("saved initial caves data")
 	
 	
+func set_hoed_tile(loc):
+	world["tiles"][str(loc)] = "h"
+	
+func set_watered_tile(loc):
+	world["tiles"][str(loc)] = "w"
+	
+func remove_hoed_tile(loc):
+	world["tiles"].erase(str(loc))
+
 func add_crop(id,data):
 	world["crops"][id] = data
 	

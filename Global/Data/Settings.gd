@@ -14,6 +14,7 @@ var key_dict = {
 	"rotate": 82,
 	"open_map": 71,
 	"sprint": 16777237,
+	"change_variety": 86
 }
 
 func save_keys():

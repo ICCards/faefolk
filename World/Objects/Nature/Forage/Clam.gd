@@ -29,7 +29,7 @@ func _on_Btn_pressed():
 		$Btn.disabled = true
 		$MovementCollision/CollisionShape2D.disabled = true
 		Input.set_custom_mouse_cursor(Images.normal_mouse)
-		Server.player_node.harvest_forage(str(type)+" clam")
+		Server.player_node.actions.harvest_forage(str(type)+" clam")
 		yield(get_tree().create_timer(0.6), "timeout")
 		PlayerData.add_item_to_hotbar(str(type) + " clam", 1, null)
 		if Util.chance(1):

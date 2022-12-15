@@ -35,6 +35,11 @@ func _process(delta):
 				if Sounds.current_footsteps_sound != Sounds.swimming:
 					Sounds.current_footsteps_sound = Sounds.swimming
 					Sounds.emit_signal("footsteps_sound_change")
+			elif Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles):
+				if Sounds.current_footsteps_sound != null:
+					play_water_step_sound()
+					Sounds.current_footsteps_sound = null
+					Sounds.emit_signal("footsteps_sound_change")
 			elif Tiles.foundation_tiles.get_cellv(location) == 0 or Tiles.foundation_tiles.get_cellv(location) == 1:
 				if Sounds.current_footsteps_sound != Sounds.wood_footsteps:
 					Sounds.current_footsteps_sound = Sounds.wood_footsteps
@@ -70,3 +75,15 @@ func _process(delta):
 				if Sounds.current_footsteps_sound != Sounds.stone_footsteps:
 					Sounds.current_footsteps_sound = Sounds.stone_footsteps
 					Sounds.emit_signal("footsteps_sound_change")
+
+func play_water_step_sound():
+	if Util.chance(33):
+		stream = load("res://Assets/Sound/Sound effects/Footsteps/water/water_step1.mp3")
+	elif Util.chance(33):
+		stream = load("res://Assets/Sound/Sound effects/Footsteps/water/water_step2.mp3")
+	else:
+		stream = load("res://Assets/Sound/Sound effects/Footsteps/water/water_step3.mp3")
+	play()
+	yield(self, "finished")
+	yield(get_tree(), "idle_frame")
+	play_water_step_sound()

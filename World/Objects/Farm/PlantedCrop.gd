@@ -25,8 +25,11 @@ func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _i
 func _ready():
 	add_to_group("active_crops")
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
+	MapData.connect("refresh_crops", self, "refresh_image")
+	
 
 func refresh_image():
+	days_until_harvest = MapData.world["crops"][id]["d"]
 	phase = return_phase()
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 
@@ -41,7 +44,7 @@ func refresh_image():
 func return_phase():
 	if crop_is_dead:
 		return "dead"
-	elif days_until_harvest != 0: 
+	elif days_until_harvest > 0: 
 		if is_in_regrowth_phase:
 			return "empty"
 		else:
@@ -75,8 +78,7 @@ func return_phase():
 					return "4"
 				elif phase > 0:
 					return "5"
-	else:
-		return "harvest"
+	return "harvest"
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
@@ -156,7 +158,7 @@ func _on_Harvest_pressed():
 			harvest_and_keep_planted()
 		else:
 			harvest_and_remove()
-		Server.player_node.harvest_crop(crop_name)
+		Server.player_node.actions.harvest_crop(crop_name)
 
 
 func _on_Harvest_mouse_entered():

@@ -15,15 +15,15 @@ onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
 var desertTrees = ["1a", "1b", "2a", "2b"]
 
-func _ready():
-	randomize()
-	desertTrees.shuffle()
-	treeObject = Images.returnDesertTree(desertTrees[0])
-	$AnimatedSprite.frames = Images.returnDesertTree(desertTrees[0])
-	if desertTrees[0] == "2a" or desertTrees[0] == "2b":
-		$AnimatedSprite.position = Vector2(0, 20)
-	else:
-		$AnimatedSprite.position = Vector2(0, 12)
+#func _ready():
+#	randomize()
+#	desertTrees.shuffle()
+#	treeObject = Images.returnDesertTree(desertTrees[0])
+#	$AnimatedSprite.frames = Images.returnDesertTree(desertTrees[0])
+#	if desertTrees[0] == "2a" or desertTrees[0] == "2b":
+#		$AnimatedSprite.position = Vector2(0, 20)
+#	else:
+#		$AnimatedSprite.position = Vector2(0, 12)
 		
 func _on_TreeHurtbox_area_entered(area):
 	if area.name == "AxePickaxeSwing":

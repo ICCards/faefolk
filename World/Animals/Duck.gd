@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+onready var RawEgg = load("res://World/Objects/Nature/Forage/RawEgg.tscn")
+
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 onready var duck_sprite: AnimatedSprite = $DuckSprite
 onready var _timer: Timer = $Timers/Timer
@@ -28,6 +30,7 @@ func _ready():
 
 func set_random_attributes():
 	randomize()
+	$Timers/DropEggTimer.wait_time = rand_range(20, 40)
 	Images.DuckVariations.shuffle()
 	duck_sprite.frames = Images.DuckVariations[0]
 	_timer.wait_time = rand_range(2.5, 5.0)
@@ -87,6 +90,9 @@ func _update_pathfinding() -> void:
 	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func _on_HurtBox_area_entered(area):
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 		duck_sprite.modulate = Color("009000")
 		$AnimationPlayer.play("hit")
@@ -131,6 +137,9 @@ func hit(tool_name, var special_ability = ""):
 		destroy()
 
 func destroy():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	destroyed = true
 	duck_sprite.play("death")
 	$AnimationPlayer.play("death")
@@ -158,3 +167,16 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_IdleTimer_timeout():
 	is_eating = false
+
+
+func _on_DropEggTimer_timeout():
+	if visible and not is_eating and Server.player_node.isLoaded:
+		$Timers/DropEggTimer.wait_time = rand_range(10, 40)
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.play()
+		var rawEgg = RawEgg.instance()
+		rawEgg.global_position = position
+		get_node("../../").add_child(rawEgg)
+	
+	

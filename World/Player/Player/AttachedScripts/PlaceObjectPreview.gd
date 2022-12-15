@@ -205,7 +205,7 @@ func place_customizable_rotatable_state():
 func get_variety_index(num_varieties):
 	if varieties_index == null:
 		varieties_index = 0
-	if Input.is_action_pressed("change_object_type") and not variety_delay:
+	if Input.is_action_pressed("change_variety") and not variety_delay:
 		variety_delay = true
 		varieties_index += 1
 		if varieties_index == num_varieties:
@@ -400,6 +400,9 @@ func place_seed_state():
 			$ColorIndicator.set_indicator_color()
 			if Input.is_action_pressed("mouse_click"):
 				place_object(item_name, null, location, "seed")	
+	else:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
 
 
 func place_object(item_name, direction, location, type):
@@ -431,4 +434,4 @@ func place_object(item_name, direction, location, type):
 			MapData.add_crop(id,{"n":item_name,"l":str(location),"d":days_to_grow})
 			PlaceObject.place_seed_in_world(id, item_name, location, days_to_grow)
 	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-		Server.player_node.destroy_placable_object()
+		Server.player_node.actions.destroy_placable_object()

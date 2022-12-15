@@ -1,6 +1,6 @@
 extends Control
 
-var game_time_speed_per_second = 15
+var game_time_speed_per_second = 30
 var week_days = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."]
 var seasons = ["Spring", "Summer", "Fall", "Winter"]
 var clock_icon_index = 1
@@ -55,8 +55,8 @@ func advance_day():
 	PlayerData.player_data["day_number"] += 1
 	if PlayerData.player_data["day_number"] == 31:
 		advance_season()
-		
-		
+
+
 func advance_season():
 	var index = seasons.find(PlayerData.player_data["season"])
 	index += 1
@@ -64,6 +64,7 @@ func advance_season():
 		index = 0
 	var new_szn = seasons[index]
 	PlayerData.player_data["season"] = new_szn
+	PlayerData.player_data["day_number"] = 1
 	$DateTime/SeasonIcon.texture = load("res://Assets/Images/Inventory UI/DateTime/season icons/"+ new_szn +".png")
 	
 	

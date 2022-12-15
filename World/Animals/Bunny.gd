@@ -105,6 +105,9 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	destroyed = true
 	bunny_sprite.play("death")
 	$AnimationPlayer.play("death")
@@ -114,6 +117,9 @@ func destroy():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Bunny/rabbit.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
 		bunny_sprite.modulate = Color("009000")
 		$AnimationPlayer.play("hit")

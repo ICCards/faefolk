@@ -1,4 +1,11 @@
 {
+    "cloth": {
+        "ItemCategory": "Resource",
+        "StackSize": 999,
+        "Description": "A soft material harvested from animal fur.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
     "slime orb": {
       "ItemCategory": "Resource",
       "StackSize": 999,
@@ -235,7 +242,7 @@
       "StackSize": 999,
       "Description": "A washed up sea specimen.",
       "Ingredients": null,
-      "EnergyHealth": null,
+      "EnergyHealth": null
       },
     "blue flower": {
       "ItemCategory": "Forage",
@@ -661,12 +668,12 @@
       "Ingredients": null,
       "EnergyHealth": [0,0]
   },
-  "egg": {
-      "ItemCategory": "Food",
+  "raw egg": {
+      "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A common cooking ingredient made from chickens.",
+      "Description": "A cooking material dropped from a duck.",
       "Ingredients": null,
-      "EnergyHealth": [0,0]
+      "EnergyHealth": null
   },
   "mushroom": {
       "ItemCategory": "Forage",
@@ -1469,7 +1476,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "[description]",
-        "Ingredients": [["egg", 2],["asparagus", 5]],
+        "Ingredients": [["raw egg", 2],["asparagus", 5]],
         "EnergyHealth": [10,10]
     },
     "wings with corn":{
@@ -1566,9 +1573,9 @@
     "scrambled eggs":{
         "ItemCategory": "Food",
         "StackSize": 999,
-        "Description": "[description]",
-        "Ingredients": [["egg", 3]],
-        "EnergyHealth": [10,10]
+        "Description": "Fluffy eggs served with a pinch of salt.",
+        "Ingredients": [["raw egg", 5]],
+        "EnergyHealth": [16,12]
     },
     "baked dorado":{
         "ItemCategory": "Food",
@@ -1658,7 +1665,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "[description]",
-        "Ingredients": [["jalapeno", 4],["egg", 2]],
+        "Ingredients": [["jalapeno", 4],["raw egg", 2]],
         "EnergyHealth": [10,10]
     },
     "zucchini soup":{
@@ -1758,6 +1765,6 @@
         "Description": "[description]",
         "Ingredients": [["wheat flour", 5]],
         "EnergyHealth": [10,10]
-    },
+    }
     
 }

@@ -33,7 +33,9 @@ func _ready():
 	initialize()
 
 func initialize():
-	Server.player_node.destroy_placable_object()
+	$InventorySlots.initialize_slots()
+	$HotbarInventorySlots.initialize_slots()
+	Server.player_node.actions.destroy_placable_object()
 	page = 1
 	item = null
 	crafting_item = null

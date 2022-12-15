@@ -28,7 +28,7 @@ func _on_Btn_pressed():
 		$Starfish.hide()
 		$Btn.disabled = true
 		Input.set_custom_mouse_cursor(Images.normal_mouse)
-		Server.player_node.harvest_forage(str(type))
+		Server.player_node.actions.harvest_forage(str(type))
 		yield(get_tree().create_timer(0.6), "timeout")
 		PlayerData.add_item_to_hotbar(type, 1, null)
 		queue_free()

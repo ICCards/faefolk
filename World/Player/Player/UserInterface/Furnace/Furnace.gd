@@ -15,9 +15,11 @@ func _ready():
 	initialize()
 
 func initialize():
-	Server.player_node.destroy_placable_object()
+	Server.player_node.actions.destroy_placable_object()
 	hovered_item = null
 	show()
+	$InventorySlots.initialize_slots()
+	$HotbarInventorySlots.initialize_slots()
 
 func destroy():
 	set_physics_process(false)

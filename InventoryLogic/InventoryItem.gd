@@ -4,6 +4,7 @@ var item_name
 var item_quantity
 var item_health
 
+
 func set_item(nm, qt, health):
 	item_name = nm
 	item_quantity = qt

@@ -186,7 +186,7 @@ func hit(tool_name):
 
 func destroy():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	destroyed = true
 	animation_player.play("death")

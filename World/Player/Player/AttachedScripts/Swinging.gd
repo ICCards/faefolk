@@ -12,7 +12,6 @@ onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPl
 onready var composite_sprites = get_node("../CompositeSprites")
 
 
-
 var rng = RandomNumberGenerator.new()
 
 var animation
@@ -101,6 +100,7 @@ func set_hoed_tile(direction):
 		if Tiles.valid_tiles.get_cellv(location) == 0 and \
 		Tiles.hoed_tiles.get_cellv(location) == -1 and \
 		Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles):
+			MapData.set_hoed_tile(location)
 			yield(get_tree().create_timer(0.6), "timeout")
 			InstancedScenes.play_hoed_dirt_effect(location)
 			Stats.decrease_tool_health()
@@ -108,13 +108,13 @@ func set_hoed_tile(direction):
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
 			Tiles.hoed_tiles.set_cellv(location, 0)
-			Tiles.hoed_tiles.update_bitmask_region()	
-
+			Tiles.hoed_tiles.update_bitmask_region()
 
 func remove_hoed_tile(direction):
 	var pos = Util.set_swing_position(global_position, direction)
 	var location = Tiles.hoed_tiles.world_to_map(pos)
 	if Tiles.hoed_tiles.get_cellv(location) != -1:
+		MapData.remove_hoed_tile(location)
 		yield(get_tree().create_timer(0.6), "timeout")
 		Stats.decrease_tool_health()
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
@@ -125,7 +125,6 @@ func remove_hoed_tile(direction):
 		Tiles.hoed_tiles.update_bitmask_area(location)
 		Tiles.watered_tiles.update_bitmask_area(location)
 
-
 func set_watered_tile():
 	if Server.world.name == "World":
 		direction = get_parent().direction
@@ -135,8 +134,8 @@ func set_watered_tile():
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
-			Stats.refill_watering_can(PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0])
-		elif PlayerData.player_data["hotbar"][PlayerData.active_item_slot][2] >= 1:
+			Stats.refill_watering_can(PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0])
+		elif PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] >= 1:
 			Stats.decrease_tool_health()
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -152,6 +151,7 @@ func set_watered_tile():
 			watering_can_particles1.emitting = false
 			watering_can_particles2.emitting = false
 			if Tiles.hoed_tiles.get_cellv(location) != -1:
+				MapData.set_watered_tile(location)
 				Tiles.watered_tiles.set_cellv(location, 0)
 				Tiles.watered_tiles.update_bitmask_region()
 		else: 

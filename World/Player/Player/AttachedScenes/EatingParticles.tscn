@@ -4,9 +4,6 @@
 script/source = "extends Node2D
 
 
-onready var player_animation_player = get_node(\"../CompositeSprites/AnimationPlayer\")
-onready var composite_sprites = get_node(\"../CompositeSprites\")
-
 var color1
 var color2
 var color3
@@ -20,13 +17,6 @@ var item_name
 var category
 var tempColor
 
-enum {
-	MOVEMENT, 
-	SWING,
-	EATING,
-	FISHING,
-	CHANGE_TILE
-}
 var rng = RandomNumberGenerator.new()
 
 func _ready():
@@ -60,7 +50,6 @@ func set_particle_colors(item_name):
 	$EatingParticles6.color = return_pixel_color(itemImage)
 	$EatingParticles7.color = return_pixel_color(itemImage)
 	$EatingParticles8.color = return_pixel_color(itemImage)
-	
 	
 func return_pixel_color(image):
 	rng.randomize()

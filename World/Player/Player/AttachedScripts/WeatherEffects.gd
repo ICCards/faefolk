@@ -6,10 +6,10 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	randomize()
 	yield(get_tree(), "idle_frame")
-	if Server.world.name == "World":
-		show()
-	else:
-		hide()
+#	if Server.world.name == "World":
+#		show()
+#	else:
+	hide()
 	PlayerData.connect("set_day", self, "play_set_day")
 	PlayerData.connect("set_night", self, "play_set_night")
 	$LightningTimer.start(rand_range(30,60))

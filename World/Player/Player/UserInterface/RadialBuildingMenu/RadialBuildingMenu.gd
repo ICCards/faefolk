@@ -10,7 +10,7 @@ func _ready():
 func initialize():
 	show()
 	current_item = -1
-	Server.player_node.destroy_placable_object()
+	Server.player_node.actions.destroy_placable_object()
 	$Circle/AnimationPlayer.play("zoom")
 	Server.player_node.get_node("Camera2D").set_process_input(false)
 	PlayerData.viewInventoryMode = true

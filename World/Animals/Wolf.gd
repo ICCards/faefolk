@@ -146,10 +146,14 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	stop_sound_effects()
 	destroyed = true
 	wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/death/" +  direction + "/body.png")
 	animation_player.play("death")
+	InstancedScenes.intitiateItemDrop("raw filet", position, 1)
 	yield(animation_player, "animation_finished")
 	queue_free()
 
@@ -202,6 +206,7 @@ func end_chase_state():
 	_idle_timer.start()
 	chasing = false
 	state = WALK
+	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func _on_EndChaseState_timeout():
 	end_chase_state()

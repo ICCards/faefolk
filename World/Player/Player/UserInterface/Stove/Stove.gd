@@ -6,6 +6,7 @@ var level
 var hovered_item
 var ingredients = []
 
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
 onready var stove_slots = $StoveSlots
 onready var fuel_slot = $StoveSlots/FuelSlot
 onready var ingredient_slot1 = $StoveSlots/Ingredient1
@@ -41,8 +42,10 @@ func _physics_process(delta):
 
 func initialize():
 	show()
-	Server.player_node.destroy_placable_object()
+	Server.player_node.actions.destroy_placable_object()
 	$Title.text = "Stove #" + str(level) + ":" 
+	$InventorySlots.initialize_slots()
+	$HotbarInventorySlots.initialize_slots()
 
 
 func check_valid_recipe():
@@ -81,6 +84,10 @@ func cooking_active():
 	$FireAnimatedSprite.playing = true
 	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 0)
 	$FireAnimatedSprite.modulate = Color("ffffff")
+	if self.visible:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 
 func cooking_inactive():
 	ingredients = []
@@ -113,7 +120,7 @@ func remove_fuel():
 			coal_yield_slot.item.add_item_quantity(3)
 		else:
 			coal_yield_slot.initialize_item("coal", 3, null)
-			PlayerData.player_data["stoves"][id][6] = ["coal", 3, null]
+			PlayerData.player_data["stoves"][id]["6"] = ["coal", 3, null]
 	elif fuel_slot.item.item_name == "coal":
 		fuel_slot.item.decrease_item_quantity(1)
 		PlayerData.decrease_item_quantity(fuel_slot, 1, id)
@@ -149,13 +156,13 @@ func add_to_yield_slot():
 	CollectionsData.food[current_cooking_item] += 1
 	if not yield_slot1.item:
 		yield_slot1.initialize_item(current_cooking_item, 1, null)
-		PlayerData.player_data["stoves"][id][4] = [current_cooking_item, 1, null]
+		PlayerData.player_data["stoves"][id]["4"] = [current_cooking_item, 1, null]
 	elif not yield_slot1.item.item_quantity == 999:
 		PlayerData.add_item_quantity(yield_slot1, 1, id)
 		yield_slot1.item.add_item_quantity(1)
 	elif not yield_slot2.item:
 		yield_slot2.initialize_item(current_cooking_item, 1, null)
-		PlayerData.player_data["stoves"][id][5] = [current_cooking_item, 1, null]
+		PlayerData.player_data["stoves"][id]["5"] = [current_cooking_item, 1, null]
 	else:
 		PlayerData.add_item_quantity(yield_slot2, 1, id)
 		yield_slot2.item.add_item_quantity(1)

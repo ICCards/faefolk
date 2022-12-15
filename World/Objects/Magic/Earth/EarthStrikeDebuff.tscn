@@ -65,6 +65,7 @@ frame = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 0, 32 )
+collision_layer = 2097153
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 48, -32 )

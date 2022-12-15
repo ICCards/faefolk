@@ -15,6 +15,7 @@ func set_label_texts():
 	$VBoxContainer/Grid2/RotateObjectLabel.text = "Rotate object: " + OS.get_scancode_string(Settings.key_dict["rotate"])
 	$VBoxContainer/Grid2/OpenMapLabel.text = "Open map: " + OS.get_scancode_string(Settings.key_dict["open_map"])
 	$VBoxContainer/Grid2/SprintLabel.text = "Sprint: " + OS.get_scancode_string(Settings.key_dict["sprint"])
+	$VBoxContainer/Grid2/ChangeVarietyLabel.text = "Change variety: " + OS.get_scancode_string(Settings.key_dict["change_variety"])
 
 func _ready():
 	Settings.load_keys()
