@@ -4,13 +4,15 @@ onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var is_hostile: bool = false
 
 func _ready():
+	$Hitbox.tool_name = "whirlwind spell"
 	if is_hostile:
 		z_index = -1
 		$Hitbox.set_collision_mask(128+2048+8+16)
+		$AnimationPlayer.play("play")
+	else:
+		$AnimationPlayer.play("play extended")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 16)
 	sound_effects.play()
-	$Hitbox.tool_name = "whirlwind spell"
-	$AnimationPlayer.play("play")
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 

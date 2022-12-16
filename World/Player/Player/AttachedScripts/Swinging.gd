@@ -111,19 +111,20 @@ func set_hoed_tile(direction):
 			Tiles.hoed_tiles.update_bitmask_region()
 
 func remove_hoed_tile(direction):
-	var pos = Util.set_swing_position(global_position, direction)
-	var location = Tiles.hoed_tiles.world_to_map(pos)
-	if Tiles.hoed_tiles.get_cellv(location) != -1:
-		MapData.remove_hoed_tile(location)
-		yield(get_tree().create_timer(0.6), "timeout")
-		Stats.decrease_tool_health()
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		sound_effects.play()
-		Tiles.watered_tiles.set_cellv(location, -1)
-		Tiles.hoed_tiles.set_cellv(location, -1)
-		Tiles.hoed_tiles.update_bitmask_area(location)
-		Tiles.watered_tiles.update_bitmask_area(location)
+	if Server.world.name == "World":
+		var pos = Util.set_swing_position(global_position, direction)
+		var location = Tiles.hoed_tiles.world_to_map(pos)
+		if Tiles.hoed_tiles.get_cellv(location) != -1:
+			MapData.remove_hoed_tile(location)
+			yield(get_tree().create_timer(0.6), "timeout")
+			Stats.decrease_tool_health()
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+			sound_effects.play()
+			Tiles.watered_tiles.set_cellv(location, -1)
+			Tiles.hoed_tiles.set_cellv(location, -1)
+			Tiles.hoed_tiles.update_bitmask_area(location)
+			Tiles.watered_tiles.update_bitmask_area(location)
 
 func set_watered_tile():
 	if Server.world.name == "World":

@@ -11,7 +11,7 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-		#CollectionsData.forage[str(type)] += 1
+		PlayerData.player_data["collections"]["forage"]["raw egg"] += 1
 		$Egg.hide()
 		$Btn.disabled = true
 		Input.set_custom_mouse_cursor(Images.normal_mouse)

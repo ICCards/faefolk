@@ -66,6 +66,7 @@ func advance_season():
 	PlayerData.player_data["season"] = new_szn
 	PlayerData.player_data["day_number"] = 1
 	$DateTime/SeasonIcon.texture = load("res://Assets/Images/Inventory UI/DateTime/season icons/"+ new_szn +".png")
+	PlayerData.emit_signal("season_changed")
 	
 	
 func return_adjusted_time_string(hours,minutes):

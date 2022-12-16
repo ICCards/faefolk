@@ -13,7 +13,10 @@ var loc
 var is_front_visible = true
 var is_back_visible = true
 
+var type
+
 func _ready():
+	PlayerData.connect("season_changed", self,  "set_grass_texture")
 	hide()
 	rng.randomize()
 	front_health = rng.randi_range(1,3)
@@ -28,9 +31,60 @@ func _ready():
 		grass = Images.green_grass
 	$Front.texture = grass[0]
 	$Back.texture = grass[1]
+	set_grass_texture()
+	
+func set_grass_texture():
+	var szn = PlayerData.player_data["season"]
+	if szn == "Spring":
+		type = "green grass"
+		if biome == "snow":
+			$FrontBreak.self_modulate = Color("7dd7b4")
+			$BackBreak.self_modulate = Color("7dd7b4")
+			grass = Images.green_grass_winter
+		else:
+			$FrontBreak.self_modulate = Color("99cc25")
+			$BackBreak.self_modulate = Color("99cc25")
+			grass = Images.green_grass
+		$Front.texture = grass[0]
+		$Back.texture = grass[1]
+	elif szn == "Summer":
+		type = "yellow grass"
+		if biome == "snow":
+			$FrontBreak.self_modulate = Color("f0e2c7")
+			$BackBreak.self_modulate = Color("f0e2c7")
+			grass = Images.yellow_grass_winter
+		else:
+			$FrontBreak.self_modulate = Color("ffec27")
+			$BackBreak.self_modulate = Color("ffec27")
+			grass = Images.yellow_grass
+		$Front.texture = grass[0]
+		$Back.texture = grass[1]
+	elif szn == "Fall":
+		type = "red grass"
+		if biome == "snow":
+			$FrontBreak.self_modulate = Color("beb6b5")
+			$BackBreak.self_modulate = Color("beb6b5")
+			grass = Images.red_grass_winter
+		else:
+			$FrontBreak.self_modulate = Color("e27432")
+			$BackBreak.self_modulate = Color("e27432")
+			grass = Images.red_grass
+		$Front.texture = grass[0]
+		$Back.texture = grass[1]
+	elif szn == "Winter":
+		type = "dark green grass"
+		if biome == "snow":
+			$FrontBreak.self_modulate = Color("a5ffbf")
+			$BackBreak.self_modulate = Color("a5ffbf")
+			grass = Images.dark_green_grass_winter
+		else:
+			$FrontBreak.self_modulate = Color("4b6d00")
+			$BackBreak.self_modulate = Color("4b6d00")
+			grass = Images.dark_green_grass
+		$Front.texture = grass[0]
+		$Back.texture = grass[1]
 
-func PlayEffect(player_id):
-	play_hit_effect()
+
 
 func play_hit_effect():
 	if !bodyEnteredFlag and Server.isLoaded and visible:
@@ -45,8 +99,6 @@ func play_back_effect():
 		$AnimationPlayer2.play("animate back")
 
 func _on_Area2D_body_entered(_body):
-#	var data = {"id": name, "n": "tall_grass", "d": "" }
-#	Server.action("ON_HIT", data)
 	play_hit_effect()
 	bodyEnteredFlag = true
 
@@ -69,8 +121,8 @@ func _on_Area2D_area_entered(area):
 		$AnimationPlayer.play("animate front")
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 		if Util.chance(50):
-			CollectionsData.forage["green grass"] += 1
-			InstancedScenes.intitiateItemDrop("green grass",position+Vector2(0,-16),1)
+			PlayerData.player_data["collections"]["forage"][type] += 1
+			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-16),1)
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sund", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("front break")
@@ -89,8 +141,8 @@ func _on_BackArea2D_area_entered(area):
 		$AnimationPlayer.play("animate front")
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 		if Util.chance(50):
-			CollectionsData.forage["green grass"] += 1
-			InstancedScenes.intitiateItemDrop("green grass",position+Vector2(0,-8), 1)
+			PlayerData.player_data["collections"]["forage"][type] += 1
+			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-8), 1)
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer2.play("back break")

@@ -21,6 +21,8 @@ var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 500.0
 var tornado_node
 
+var rng := RandomNumberGenerator.new()
+
 func _ready():
 	hide()
 	set_random_attributes()
@@ -144,7 +146,8 @@ func destroy():
 	duck_sprite.play("death")
 	$AnimationPlayer.play("death")
 	yield(get_tree().create_timer(0.5), "timeout")
-	InstancedScenes.intitiateItemDrop("raw wing", position, 1)
+	InstancedScenes.intitiateItemDrop("raw wing", position, rng.randi_range(0,1))
+	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,1))
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 
@@ -171,7 +174,7 @@ func _on_IdleTimer_timeout():
 
 func _on_DropEggTimer_timeout():
 	if visible and not is_eating and Server.player_node.isLoaded:
-		$Timers/DropEggTimer.wait_time = rand_range(10, 40)
+		$Timers/DropEggTimer.wait_time = rand_range(10, 20)
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 		sound_effects.play()

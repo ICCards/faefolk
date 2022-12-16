@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://Assets/Images/tall grass sets/green.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Images/tall grass sets/winter/green back.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/tall grass sets/yellow back.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/tall grass sets/winter/dark green.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Images/Animations/tall grass/tall grass break.png" type="Texture" id=3]
 [ext_resource path="res://World/Objects/Nature/Grasses/TallGrass.gd" type="Script" id=4]
 
@@ -352,12 +352,12 @@ script = ExtResource( 4 )
 
 [node name="Back" type="Sprite" parent="."]
 position = Vector2( 7, 2 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 offset = Vector2( 0, -32 )
 
 [node name="Front" type="Sprite" parent="."]
 position = Vector2( 7, 2 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -400,6 +400,7 @@ scale = Vector2( 1.8, 2.725 )
 
 [node name="FrontBreak" type="AnimatedSprite" parent="."]
 visible = false
+modulate = Color( 0.647059, 1, 0.74902, 1 )
 position = Vector2( 7, -14 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 17 )

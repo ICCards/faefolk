@@ -23,7 +23,7 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-		CollectionsData.forage[str(type)+" clam"] += 1
+		PlayerData.player_data["collections"]["forage"][str(type)+" clam"] += 1
 		Tiles.add_valid_tiles(location)
 		$Clam.hide()
 		$Btn.disabled = true
@@ -35,7 +35,7 @@ func _on_Btn_pressed():
 		if Util.chance(1):
 			pearl_types.shuffle()
 			PlayerData.add_item_to_hotbar(pearl_types[0]+" pearl", 1, null)
-			CollectionsData.forage[pearl_types[0]+" pearl"] += 1
+			PlayerData.player_data["collections"]["forage"][pearl_types[0]+" pearl"] += 1
 		queue_free()
 
 func set_mouse_cursor_type():

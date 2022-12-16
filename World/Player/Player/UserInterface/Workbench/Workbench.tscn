@@ -6,12 +6,12 @@
 [ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=4]
 [ext_resource path="res://Assets/Images/Inventory UI/Workbench/workbench menu.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Workbench/Workbench.gd" type="Script" id=6]
-[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=10]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=8]
+[ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=9]
 [ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=33]
-[ext_resource path="res://Assets/Images/Inventory UI/trash/trash top.png" type="Texture" id=34]
-[ext_resource path="res://Assets/Images/Inventory UI/trash/trash bottom.png" type="Texture" id=35]
 [ext_resource path="res://Assets/Images/Misc/Buttons/exit button.png" type="Texture" id=36]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=37]
 
@@ -52,6 +52,18 @@ margin_right = 317.0
 margin_bottom = 274.0
 texture = ExtResource( 5 )
 stretch_mode = 4
+
+[node name="InventorySlots" parent="." instance=ExtResource( 7 )]
+margin_left = -283.0
+margin_top = 128.0
+margin_right = 284.0
+margin_bottom = 182.0
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource( 8 )]
+margin_left = -283.0
+margin_top = 68.0
+margin_right = 284.0
+margin_bottom = 122.0
 
 [node name="Title" type="Label" parent="."]
 margin_left = -283.0
@@ -288,162 +300,6 @@ margin_top = 36.0
 margin_right = 100.0
 margin_bottom = 52.0
 
-[node name="HotbarSlots" type="GridContainer" parent="."]
-margin_left = -283.0
-margin_top = 68.0
-margin_right = 284.0
-margin_bottom = 122.0
-custom_constants/vseparation = 6
-custom_constants/hseparation = 3
-columns = 10
-
-[node name="Slot1" type="Panel" parent="HotbarSlots"]
-margin_right = 54.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot2" type="Panel" parent="HotbarSlots"]
-margin_left = 57.0
-margin_right = 111.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot3" type="Panel" parent="HotbarSlots"]
-margin_left = 114.0
-margin_right = 168.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot4" type="Panel" parent="HotbarSlots"]
-margin_left = 171.0
-margin_right = 225.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot5" type="Panel" parent="HotbarSlots"]
-margin_left = 228.0
-margin_right = 282.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot6" type="Panel" parent="HotbarSlots"]
-margin_left = 285.0
-margin_right = 339.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot7" type="Panel" parent="HotbarSlots"]
-margin_left = 342.0
-margin_right = 396.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot8" type="Panel" parent="HotbarSlots"]
-margin_left = 399.0
-margin_right = 453.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot9" type="Panel" parent="HotbarSlots"]
-margin_left = 456.0
-margin_right = 510.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot10" type="Panel" parent="HotbarSlots"]
-margin_left = 513.0
-margin_right = 567.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="InventorySlots" type="GridContainer" parent="."]
-margin_left = -283.0
-margin_top = 128.0
-margin_right = 284.0
-margin_bottom = 182.0
-custom_constants/vseparation = 6
-custom_constants/hseparation = 3
-columns = 10
-
-[node name="Slot1" type="Panel" parent="InventorySlots"]
-margin_right = 54.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot2" type="Panel" parent="InventorySlots"]
-margin_left = 57.0
-margin_right = 111.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot3" type="Panel" parent="InventorySlots"]
-margin_left = 114.0
-margin_right = 168.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot4" type="Panel" parent="InventorySlots"]
-margin_left = 171.0
-margin_right = 225.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot5" type="Panel" parent="InventorySlots"]
-margin_left = 228.0
-margin_right = 282.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot6" type="Panel" parent="InventorySlots"]
-margin_left = 285.0
-margin_right = 339.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot7" type="Panel" parent="InventorySlots"]
-margin_left = 342.0
-margin_right = 396.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot8" type="Panel" parent="InventorySlots"]
-margin_left = 399.0
-margin_right = 453.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot9" type="Panel" parent="InventorySlots"]
-margin_left = 456.0
-margin_right = 510.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
-[node name="Slot10" type="Panel" parent="InventorySlots"]
-margin_left = 513.0
-margin_right = 567.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-script = ExtResource( 10 )
-
 [node name="DownButton" type="TextureButton" parent="."]
 margin_left = 261.0
 margin_top = -11.0
@@ -458,6 +314,16 @@ margin_right = 301.0
 margin_bottom = -207.0
 texture_normal = ExtResource( 33 )
 
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Trash" parent="." instance=ExtResource( 9 )]
+margin_left = -512.0
+margin_top = -300.0
+margin_right = -512.0
+margin_bottom = -300.0
+
 [node name="ExitButton" type="TextureButton" parent="."]
 margin_left = 320.0
 margin_top = -274.0
@@ -466,38 +332,7 @@ margin_bottom = -202.0
 rect_scale = Vector2( 0.6, 0.6 )
 texture_normal = ExtResource( 36 )
 
-[node name="Trash" type="Control" parent="."]
-margin_left = 7.0
-margin_top = -279.0
-margin_right = 7.0
-margin_bottom = -279.0
-
-[node name="Bottom" type="Sprite" parent="Trash"]
-position = Vector2( 381, 398 )
-texture = ExtResource( 35 )
-
-[node name="Top" type="Sprite" parent="Trash"]
-position = Vector2( 413, 386 )
-texture = ExtResource( 34 )
-offset = Vector2( -32, -21 )
-
-[node name="TrashButton" type="Button" parent="Trash"]
-margin_left = 340.0
-margin_top = 344.0
-margin_right = 421.0
-margin_bottom = 446.0
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-
-[node name="Tween" type="Tween" parent="."]
-
 [connection signal="pressed" from="BackgroundButton" to="." method="_on_BackgroundButton_pressed"]
 [connection signal="pressed" from="DownButton" to="." method="_on_DownButton_pressed"]
 [connection signal="pressed" from="UpButton" to="." method="_on_UpButton_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
-[connection signal="mouse_entered" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_entered"]
-[connection signal="mouse_exited" from="Trash/TrashButton" to="." method="_on_TrashButton_mouse_exited"]
-[connection signal="pressed" from="Trash/TrashButton" to="." method="_on_TrashButton_pressed"]

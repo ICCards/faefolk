@@ -430,12 +430,8 @@ func place_object_in_world(id, item_name, direction, location):
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"torch":
-			pass
-			var object = Rug.instance()
-			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
-			PlacableObjects.call_deferred("add_child", object, true)
-#			Tiles.remove_valid_tiles(location, Vector2(1,1))
-#			light_tiles.set_cellv(location, Lights.TORCH)
+			Tiles.remove_valid_tiles(location, Vector2(1,1))
+			Tiles.object_tiles.set_cellv(location, 179)
 		"campfire":
 			Tiles.object_tiles.set_cellv(location, 40)
 		"wood fence":

@@ -158,7 +158,7 @@ func add_hotbar_clock_and_stats():
 	PlayerData.interactive_screen_mode = false
 	$Hotbar.initialize_hotbar()
 	$PlayerDataUI.show()
-
+	PlayerData.InventorySlots = $Menu/Inventory/InventorySlots
 
 func toggle_menu():
 	if not $Menu.visible:

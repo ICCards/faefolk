@@ -3,8 +3,8 @@ extends GridContainer
 
 func initialize():
 	show()
-	for crop in CollectionsData.crops.keys():
-		if CollectionsData.crops[crop] > 0:
+	for crop in PlayerData.player_data["collections"]["crops"].keys():
+		if PlayerData.player_data["collections"]["crops"][crop] > 0:
 			get_node(crop).modulate = Color("ffffff") # unlocked
 			get_node(crop).material.set_shader_param("flash_modifier", 0)
 		else:

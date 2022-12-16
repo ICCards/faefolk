@@ -8,7 +8,7 @@ func _ready():
 	initialize()
 
 func initialize():
-	Server.player_node.destroy_placable_object()
+	Server.player_node.actions.destroy_placable_object()
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
 	$ChestSlots.initialize_slots()

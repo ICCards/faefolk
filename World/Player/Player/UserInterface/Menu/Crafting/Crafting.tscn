@@ -180,8 +180,10 @@ margin_bottom = 234.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="btn" parent="Page1/torch" index="0"]
-margin_right = 8.0
-margin_bottom = 27.0
+margin_left = -10.5
+margin_top = -10.5
+margin_right = 21.5
+margin_bottom = 29.5
 texture_normal = ExtResource( 7 )
 
 [node name="wood fence" parent="Page1" instance=ExtResource( 24 )]

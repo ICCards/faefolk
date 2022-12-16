@@ -74,8 +74,8 @@ func adjusted_description_position():
 func update_tool_health():
 	var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 	if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] == 0 and item_name != "stone watering can" and item_name != "bronze watering can" and item_name != "gold watering can":
-		slots[str(PlayerData.active_item_slot)].removeFromSlot()
-		PlayerData.remove_item(slots[str(PlayerData.active_item_slot)])
+		slots[PlayerData.active_item_slot].removeFromSlot()
+		PlayerData.remove_item(slots[PlayerData.active_item_slot])
 		yield(get_tree().create_timer(0.1), "timeout")
 		$SoundEffects.stream = Sounds.tool_break
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

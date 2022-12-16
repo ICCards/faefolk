@@ -127,3 +127,10 @@ func get_random_idle_pos(pos,max_move_dist):
 		return pos-Vector2(random1,random2)
 	else:
 		return pos
+
+
+func add_to_collection(type, amt):
+	if type != "stone1" and type != "stone2":
+		PlayerData.player_data["collections"]["resources"][type] += amt
+	else:
+		PlayerData.player_data["collections"]["resources"]["stone"] += amt

@@ -2,6 +2,7 @@ extends Node
 
 signal set_day
 signal set_night
+signal season_changed
 signal mana_changed
 signal energy_changed
 signal health_changed
@@ -38,20 +39,10 @@ var starting_player_data = {
 	"health": 100,
 	"mana": 100,
 	"energy": 100,
-	"hotbar": {
-		"0": ["wind staff", 1, null],
-		"2": ["bow", 1, 50],
-		"1": ["stone sword", 1, null],
-		"7": ["arrow", 500, null],
-		"8": ["wheat seeds", 500, null],
-		"9": ["raw egg", 100, null]
-	},
+	"hotbar": {},
 	"inventory": {
-			"0": ["electric staff", 1, null],
-			"1": ["dark magic staff", 1, null],
+			"0": ["wind staff", 1, null],
 			"2": ["fire staff", 1, null],
-			"4": ["ice staff", 1, null],
-			"3": ["earth staff", 1, null],
 			"8": ["wood", 500, null],
 			"9": ["stone", 500, null],
 			"7": ["iron ingot", 150, null],
@@ -65,12 +56,223 @@ var starting_player_data = {
 		"Cave 1-2": {
 			"2": ["bread", 4, null],
 			"6": ["regeneration potion II", 3, null],
-			"12": ["bronze ore", 8, null]
+			"12": ["bronze ore", 8, null],
+			"10": ["carrot seeds", 25, null],
+		},
+		"Cave 1-3": {
+			"4": ["speed potion I", 3, null],
+			"9": ["arrow", 13, null],
+			"16": ["stone", 35, null],
+			"25": ["corn seeds", 25, null],
+		},
+		"Cave 1-4": {
+			"4": ["health potion II", 6, null],
+			"7": ["poison potion I", 3, null],
+			"12": ["wood", 27, null],
+			"28": ["tomato seeds", 25, null],
+		},
+		"Cave 1-5": {
+			"1": ["destruction potion II", 8, null],
+			"10": ["speed potion II", 6, null],
+			"16": ["stone", 35, null],
+		},
+		"Cave 1-6": {
+			"7": ["speed potion II", 3, null],
+			"18": ["corn", 6, null],
+			"10": ["potato seeds", 40, null],
+		},
+		"Cave 1-7": {
+			"4": ["poison potion III", 2, null],
+			"18": ["corn", 6, null],
+			"6": ["garlic seeds", 25, null],
+		},
+		"Cave 1-Boss": {
+			"9": ["cooked filet", 5, null],
+			"18": ["health potion III", 2, null],
+			"26": ["cabbage seeds", 25, null],
+		},
+		"Cave 2-1": {
+			"1": ["iron ore", 14, null],
+			"13": ["destruction potion III", 5, null],
+			"28": ["strawberry seeds", 25, null],
+		},
+		"Cave 2-2": {
+			"1": ["wood", 80, null],
+			"27": ["speed potion III", 3, null],
+			"10": ["radish seeds", 25, null],
+		},
+		"Cave 2-3": {
+			"7": ["crab", 6, null],
+			"21": ["regeneration potion III", 2, null],
+			"9": ["arrow", 36, null],
+		},
+		"Cave 2-4": {
+			"7": ["potato", 16, null],
+			"21": ["health potion III", 6, null],
+			"10": ["yellow onion seeds", 25, null],
+		},
+		"Cave 2-5": {
+			"21": ["poison potion III", 5, null],
+			"14": ["garlic seeds", 25, null],
+			"3": ["stone", 120, null],
+		},
+		"Cave 2-6": {
+			"18": ["speed potion III", 5, null],
+			"10": ["grape seeds", 25, null],
+			"5": ["gold ore", 11, null],
+		},
+		"Cave 2-7": {
+			"4": ["destruction potion III", 8, null],
+			"19": ["blueberry seeds", 25, null],
+			"25": ["carrot", 15, null],
+		},
+		"Cave 2-Boss": {
+			"4": ["regeneration potion III", 8, null],
+			"19": ["sugar cane seeds", 50, null],
+			"18": ["speed potion III", 5, null],
+		},
+		"Cave 1-Fishing": {
+			"2": ["wood fishing rod", 1, null],
 		}
 	},
 	"furnaces": {},
 	"grain_mills": {},
 	"stoves": {},
+	"collections": {
+		 "crops" : {
+			"asparagus": 0,
+			"blueberry": 0,
+			"cabbage": 0,
+			"carrot": 0,
+			"cauliflower": 0,
+			"corn": 0,
+			"garlic": 0,
+			"grape": 0,
+			"green bean": 0,
+			"honeydew melon": 0,
+			"green pepper": 0,
+			"jalapeno": 0,
+			"potato": 0,
+			"radish": 0,
+			"red pepper": 0,
+			"strawberry": 0,
+			"sugar cane": 0,
+			"tomato": 0,
+			"wheat": 0,
+			"yellow onion": 0,
+			"yellow pepper": 0,
+			"zucchini": 0,
+		},
+		 "resources" : {
+			"wood": 0,
+			"stone": 0,
+			"coal": 0,
+			"rope": 0,
+			"bronze ore": 0,
+			"iron ore": 0,
+			"gold ore": 0,
+			"aquamarine": 0,
+			"emerald": 0,
+			"ruby": 0,
+			"sapphire": 0,
+		},
+		"forage" : {
+			"purple flower": 0,
+			"blue flower": 0,
+			"green flower": 0,
+			"red flower": 0,
+			"red clam": 0,
+			"blue clam": 0,
+			"pink clam": 0,
+			"starfish": 0,
+			"baby starfish": 0,
+			"white pearl": 0,
+			"blue pearl": 0,
+			"pink pearl": 0,
+			"dark green grass": 0,
+			"green grass": 0,
+			"red grass": 0,
+			"yellow grass": 0,
+			"mushroom": 0,
+			"raw egg": 0,
+		},
+		 "fish" : {
+			"eel": 0,
+			"clownfish": 0,
+			"halibut": 0,
+			"anchovy": 0,
+			"cisco": 0,
+			"goldfish": 0,
+			"betta": 0,
+			"siberian whitefish": 0,
+			"red salmon": 0,
+			"catfish": 0,
+			"koi": 0,
+			"purple salmon": 0,
+			"lingcod": 0,
+			"tilapia": 0,
+			"albacore": 0,
+			"purple carp": 0,
+			"dorado": 0,
+			"blowfish": 0,
+			"angler": 0,
+			"seaweed": 0,
+			"octopus": 0,
+			"shrimp": 0,
+			"crab": 0,
+			"nelma": 0
+		},
+		"food": {
+			"asparagus omelette": 0,
+			"baked catfish": 0,
+			"baked dorado": 0,
+			"baked zucchini": 0,
+			"blowfish tails": 0,
+			"blueberry cake": 0,
+			"blueberry pie": 0,
+			"bread": 0,
+			"calamari with tomatoes": 0,
+			"cauliflower soup": 0,
+			"cooked filet": 0,
+			"cooked green beans": 0,
+			"cooked wing": 0,
+			"crab cakes": 0,
+			"filet mignon": 0,
+			"filet soup": 0,
+			"filet with garlic mash": 0,
+			"filet with tomatoes": 0,
+			"grape pastry": 0,
+			"green pepper soup": 0,
+			"honeydew melon with sugar": 0,
+			"mini grape tarts": 0,
+			"mushroom soup": 0,
+			"pepper and asparagus stir fry": 0,
+			"potato soup": 0,
+			"potatoes with asparagus": 0,
+			"potatoes with green beans": 0,
+			"radish soup": 0,
+			"red pepper soup": 0,
+			"sashimi": 0,
+			"sauteed cabbage with garlic": 0,
+			"scrambled eggs": 0,
+			"seaweed salad": 0,
+			"sliced tomatoes and potatoes": 0,
+			"smoked jalapeno with eggs": 0,
+			"spaghetti": 0,
+			"spicy eel": 0,
+			"spicy shrimps": 0,
+			"strawberry cake": 0,
+			"strawberry tart": 0,
+			"sugar cane kheer": 0,
+			"tomato sandwich": 0,
+			"tomato soup": 0,
+			"vegetable soup": 0,
+			"wings with corn": 0,
+			"yellow onion soup": 0,
+			"yellow pepper soup": 0,
+			"zucchini soup": 0
+		}
+	}
 }
 
 func _ready():
@@ -180,6 +382,7 @@ func add_item_to_hotbar(item_name, item_quantity, item_health):
 		if player_data["hotbar"].has(str(i)) == false:
 			player_data["hotbar"][str(i)] = [item_name, item_quantity, item_health]
 			update_hotbar_slot_visual(i, item_name, item_quantity, item_health)
+			Server.player_node.set_held_object()
 			return
 	# if hotbar full, add to inventory
 	add_item_to_inventory(item_name, item_quantity, item_health)
@@ -201,9 +404,9 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 				item_quantity = item_quantity - able_to_add
 	# item doesn't exist in inventory yet, so add it to an empty slot
 	for i in range(NUM_INVENTORY_SLOTS):
-		if player_data["inventory"].has(i) == false:
-			player_data["inventory"][i] = [item_name, item_quantity, item_health]
-			update_inventory_slot_visual(i, player_data["inventory"][i][0], player_data["inventory"][i][1], player_data["inventory"][i][2])
+		if player_data["inventory"].has(str(i)) == false:
+			player_data["inventory"][str(i)] = [item_name, item_quantity, item_health]
+			update_inventory_slot_visual(i, item_name, item_quantity, item_health)
 			return
 	InstancedScenes.initiateInventoryItemDrop([item_name, item_quantity, item_health], Server.player_node.position)
 
@@ -309,14 +512,14 @@ func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
 
 func return_resource_total(item_name):
 	var total = 0
-	var hotbar = PlayerData.player_data["hotbar"]
-	var inventory = PlayerData.player_data["inventory"]
+	var hotbar = player_data["hotbar"]
+	var inventory = player_data["inventory"]
 	for slot in hotbar:
-		if hotbar[slot][0] == item_name:
-			total +=  hotbar[slot][1]
+		if hotbar[str(slot)][0] == item_name:
+			total +=  hotbar[str(slot)][1]
 	for slot in inventory:
-		if inventory[slot][0] == item_name:
-			total += inventory[slot][1]
+		if inventory[str(slot)][0] == item_name:
+			total += inventory[str(slot)][1]
 	return total
 
 func returnSufficentCraftingMaterial(ingredient, amount_needed):

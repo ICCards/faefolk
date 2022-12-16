@@ -78,6 +78,7 @@ func return_phase():
 					return "4"
 				elif phase > 0:
 					return "5"
+	$Harvest.disabled = false
 	return "harvest"
 
 
@@ -122,6 +123,7 @@ func intitiateItemDrop(item, pos, yield_list):
 	PlayerData.add_item_to_hotbar(item, 1, null)
 	yield_list.shuffle()
 	var amount = yield_list.front()
+	PlayerData.player_data["collections"]["crops"][crop_name] += amount
 	if amount > 1:
 		InstancedScenes.intitiateItemDrop(item, position+Vector2(0,16), amount-1)
 		
@@ -153,7 +155,6 @@ func _on_Harvest_pressed():
 	position.distance_to(Server.player_node.position) < 100 and \
 	Server.player_node.state == 0 and \
 	not isBeingHarvested:
-		CollectionsData.crops[crop_name] += 1
 		if JsonData.crop_data[crop_name]["Perennial"]:
 			harvest_and_keep_planted()
 		else:

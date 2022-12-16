@@ -1,4 +1,4 @@
-[gd_scene load_steps=228 format=2]
+[gd_scene load_steps=229 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=2]
@@ -11,7 +11,7 @@
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/ForageCollection.gd" type="Script" id=9]
 [ext_resource path="res://Assets/Themes/LockedAsset.tres" type="Material" id=10]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" type="Script" id=11]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/MineralCollection.gd" type="Script" id=14]
+[ext_resource path="res://Assets/Images/inventory_icons/Forage/mushroom.png" type="Texture" id=12]
 
 [sub_resource type="Shader" id=16]
 code = "shader_type canvas_item;
@@ -288,6 +288,36 @@ load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
 [sub_resource type="StreamTexture" id=348]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+
+[sub_resource type="GDScript" id=367]
+script/source = "extends GridContainer
+
+
+func initialize():
+	show()
+	for item in PlayerData.player_data[\"collections\"][\"resources\"].keys():
+		if PlayerData.player_data[\"collections\"][\"resources\"][item] > 0:
+			get_node(item).modulate = Color(\"ffffff\") # unlocked
+			get_node(item).material.set_shader_param(\"flash_modifier\", 0)
+		else:
+			get_node(item).modulate = Color(\"50ffffff\") # locked
+			get_node(item).material.set_shader_param(\"flash_modifier\", 1)
+
+func entered_item_area(item_name):
+	get_parent().item = item_name
+	get_node(\"../Tween\").interpolate_property(get_node(item_name), \"rect_scale\",
+		get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.075,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	get_node(\"../Tween\").start()
+
+func exited_item_area(item_name):
+	get_parent().item = null
+	if has_node(item_name):
+		get_node(\"../Tween\").interpolate_property(get_node(item_name), \"rect_scale\",
+		get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.075,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	get_node(\"../Tween\").start()
+"
 
 [sub_resource type="ShaderMaterial" id=350]
 resource_local_to_scene = true
@@ -1240,7 +1270,6 @@ script = ExtResource( 11 )
 [node name="Tween" type="Tween" parent="FishCollection"]
 
 [node name="ForageCollection" type="GridContainer" parent="."]
-visible = false
 margin_left = 108.0
 margin_top = 110.0
 margin_right = 284.0
@@ -1386,6 +1415,24 @@ margin_bottom = 72.0
 texture = SubResource( 348 )
 script = ExtResource( 11 )
 
+[node name="mushroom" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 112.0
+margin_top = 56.0
+margin_right = 128.0
+margin_bottom = 72.0
+texture = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="raw egg" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 140.0
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 72.0
+texture = ExtResource( 12 )
+script = ExtResource( 11 )
+
 [node name="Tween" type="Tween" parent="ForageCollection"]
 
 [node name="ResourceCollection" type="GridContainer" parent="."]
@@ -1397,7 +1444,7 @@ rect_scale = Vector2( 3.5, 3.5 )
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
 columns = 6
-script = ExtResource( 14 )
+script = SubResource( 367 )
 
 [node name="wood" type="TextureRect" parent="ResourceCollection"]
 material = SubResource( 350 )
@@ -2226,6 +2273,10 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="ForageCollection/pink pearl" to="ForageCollection/pink pearl" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/mushroom" to="ForageCollection/mushroom" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/mushroom" to="ForageCollection/mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/raw egg" to="ForageCollection/raw egg" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/raw egg" to="ForageCollection/raw egg" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ResourceCollection/wood" to="ResourceCollection/wood" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ResourceCollection/wood" to="ResourceCollection/wood" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ResourceCollection/stone" to="ResourceCollection/stone" method="_on_collection_item_mouse_entered"]

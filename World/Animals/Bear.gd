@@ -192,7 +192,8 @@ func destroy():
 	$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/death/" + direction  + "/body.png")
 	animation_player.play("death")
 	yield(get_tree().create_timer(0.5), "timeout")
-	InstancedScenes.intitiateItemDrop("raw filet", position, 3)
+	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(1,3))
+	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(1,3))
 	yield(animation_player, "animation_finished")
 	queue_free()
 

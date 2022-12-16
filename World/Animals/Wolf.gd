@@ -153,7 +153,8 @@ func destroy():
 	destroyed = true
 	wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/death/" +  direction + "/body.png")
 	animation_player.play("death")
-	InstancedScenes.intitiateItemDrop("raw filet", position, 1)
+	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
+	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
 	yield(animation_player, "animation_finished")
 	queue_free()
 

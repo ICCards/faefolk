@@ -146,7 +146,8 @@ func destroy():
 	deer_sprite.texture = load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png")
 	animation_player.play("death")
 	yield(get_tree().create_timer(0.5), "timeout")
-	InstancedScenes.intitiateItemDrop("raw filet", position, 2)
+	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
+	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
 	yield(animation_player, "animation_finished")
 	queue_free()
 

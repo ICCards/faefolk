@@ -20,12 +20,12 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-		#CollectionsData.forage["mushroom"] += 1
+		PlayerData.player_data["collections"]["forage"]["mushroom"] += 1
 		Tiles.add_valid_tiles(location)
 		$Mushroom.hide()
 		$Btn.disabled = true
 		Input.set_custom_mouse_cursor(Images.normal_mouse)
-		Server.player_node.harvest_forage("Mushroom/"+str(variety))
+		Server.player_node.actions.harvest_forage("Mushroom/"+str(variety))
 		MapData.remove_object("mushroom", name)
 		yield(get_tree().create_timer(0.6), "timeout")
 		PlayerData.add_item_to_hotbar("mushroom", 1, null)

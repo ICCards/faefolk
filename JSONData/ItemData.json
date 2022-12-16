@@ -275,28 +275,28 @@
     "dark green grass": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "[grass desc.]",
+      "Description": "Tall grass harvested in the Winter.",
       "Ingredients": null,
       "EnergyHealth": null
     },
     "green grass": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "[grass desc.]",
+      "Description": "Tall grass harvested in the Spring.",
       "Ingredients": null,
       "EnergyHealth": null
     },
     "red grass": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "[grass desc.]",
+      "Description": "Tall grass harvested in the Fall.",
       "Ingredients": null,
       "EnergyHealth": null
     },
     "yellow grass": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "[grass desc.]",
+      "Description": "Tall grass harvested in the Summer.",
       "Ingredients": null,
       "EnergyHealth": null
     },

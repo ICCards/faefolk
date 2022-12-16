@@ -41,7 +41,7 @@ func set_dimensions():
 	rng.randomize()
 	item_name = Util.return_adjusted_item_name(item_name)
 	$Position2D.scale = Constants.dimensions_dict[item_name]
-	if item_name == "campfire":
+	if item_name == "campfire" or item_name == "torch":
 		$Light2D.enabled = true
 	elif item_name == "wood chest" or item_name == "stone chest":
 		$Position2D/InteractiveArea/CollisionShape2D.disabled = false

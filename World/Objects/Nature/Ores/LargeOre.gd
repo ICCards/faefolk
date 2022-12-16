@@ -50,7 +50,7 @@ func hit(tool_name):
 		sound_effects.play()
 		InstancedScenes.initiateOreHitEffect(variety, "large ore break", position+Vector2(0, 24))
 		var amount = Stats.return_item_drop_quantity(tool_name, "large ore")
-		add_to_collection(variety, amount)
+		Util.add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
 			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 28), amount)
 		else:
@@ -71,7 +71,7 @@ func hit(tool_name):
 		sound_effects.play()
 		InstancedScenes.initiateOreHitEffect(variety, "ore destroyed", position+Vector2(rng.randi_range(-10, 10), 32))
 		var amount = Stats.return_item_drop_quantity(tool_name, "small ore")
-		add_to_collection(variety, amount)
+		Util.add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
 			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 28), amount)
 		else:
@@ -101,11 +101,6 @@ func _on_SmallHurtBox_area_entered(_area):
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-20, 20), rand_range(-8,16)))
 
-func add_to_collection(type, amt):
-	if type != "stone1" and type != "stone2":
-		CollectionsData.resources[type] += amt
-	else:
-		CollectionsData.resources["stone"] += amt
 
 
 func _on_VisibilityNotifier2D_screen_entered():

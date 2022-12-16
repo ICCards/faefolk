@@ -3,33 +3,16 @@ extends Control
 var level
 
 var crafting_item
-var item
+var hovered_item
 var page
 
 var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can", "wood fishing rod", "scythe", "arrow"]
 var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod"]
 
-onready var hotbar_slots = $HotbarSlots
-onready var inventory_slots = $InventorySlots
-
 onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 
 func _ready():
-	var slots_in_inventory = inventory_slots.get_children()
-	var slots_in_hotbar = hotbar_slots.get_children()
-	for i in range(slots_in_inventory.size()):
-		slots_in_inventory[i].connect("gui_input", self, "slot_gui_input", [slots_in_inventory[i]])
-		slots_in_inventory[i].connect("mouse_entered", self, "hovered_slot", [slots_in_inventory[i]])
-		slots_in_inventory[i].connect("mouse_exited", self, "exited_slot", [slots_in_inventory[i]])
-		slots_in_inventory[i].slot_index = i
-		slots_in_inventory[i].slotType = SlotClass.SlotType.INVENTORY
-	for i in range(slots_in_hotbar.size()):
-		slots_in_hotbar[i].connect("gui_input", self, "slot_gui_input", [slots_in_hotbar[i]])
-		slots_in_hotbar[i].connect("mouse_entered", self, "hovered_slot", [slots_in_hotbar[i]])
-		slots_in_hotbar[i].connect("mouse_exited", self, "exited_slot", [slots_in_hotbar[i]])
-		slots_in_hotbar[i].slot_index = i
-		slots_in_hotbar[i].slotType = SlotClass.SlotType.HOTBAR_INVENTORY
 	initialize()
 
 func initialize():
@@ -37,7 +20,7 @@ func initialize():
 	$HotbarInventorySlots.initialize_slots()
 	Server.player_node.actions.destroy_placable_object()
 	page = 1
-	item = null
+	hovered_item = null
 	crafting_item = null
 	$Title.text = "Workbench #" + str(level) + ":"
 	show()
@@ -52,10 +35,10 @@ func destroy():
 	queue_free()
 
 func _physics_process(delta):
-	if item and not find_parent("UserInterface").holding_item:
+	if hovered_item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.show()
-		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
-		$ItemDescription.item_name = item
+		$ItemDescription.item_category = JsonData.item_data[hovered_item]["ItemCategory"]
+		$ItemDescription.item_name = hovered_item
 		$ItemDescription.initialize()
 		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 	else:
@@ -167,108 +150,6 @@ func set_current_page():
 			$Page1.hide()
 			$UpButton.show()
 			$DownButton.hide()
-	initialize_slots()
-
-func initialize_slots():
-	var i_slots = inventory_slots.get_children()
-	for i in range(i_slots.size()):
-		if PlayerData.player_data["inventory"].has(str(i)):
-			i_slots[i].initialize_item(PlayerData.player_data["inventory"][str(i)][0], PlayerData.player_data["inventory"][str(i)][1], PlayerData.player_data["inventory"][str(i)][2])
-	var h_slots = hotbar_slots.get_children()
-	for i in range(h_slots.size()):
-		if PlayerData.player_data["hotbar"].has(str(i)):
-			h_slots[i].initialize_item(PlayerData.player_data["hotbar"][str(i)][0], PlayerData.player_data["hotbar"][str(i)][1], PlayerData.player_data["hotbar"][str(i)][2])
-
-func hovered_slot(slot):
-	if slot.item:
-		slot.item.hover_item()
-		item = slot.item.item_name
-
-func exited_slot(slot):
-	item = null
-	if slot.item:
-		slot.item.exit_item()
-
-
-func slot_gui_input(event: InputEvent, slot):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
-			if find_parent("UserInterface").holding_item != null:
-				if !slot.item:
-					left_click_empty_slot(slot)
-				else:
-					if find_parent("UserInterface").holding_item.item_name != slot.item.item_name:
-						left_click_different_item(event, slot)
-					else:
-						left_click_same_item(slot)
-			elif slot.item:
-				left_click_not_holding(slot)
-
-
-func left_click_empty_slot(slot):
-	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
-	slot.putIntoSlot(find_parent("UserInterface").holding_item)
-	find_parent("UserInterface").holding_item = null
-
-func left_click_different_item(event: InputEvent, slot):
-	PlayerData.remove_item(slot)
-	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
-	var temp_item = slot.item
-	slot.pickFromSlot()
-	temp_item.global_position = event.global_position
-	slot.putIntoSlot(find_parent("UserInterface").holding_item)
-	find_parent("UserInterface").holding_item = temp_item
-
-func left_click_same_item(slot):
-	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
-	var able_to_add = stack_size - slot.item.item_quantity
-	if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-		PlayerData.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
-		slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
-	else:
-		PlayerData.add_item_quantity(slot, able_to_add)
-		slot.item.add_item_quantity(able_to_add)
-		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
-
-func left_click_not_holding(slot):
-	PlayerData.remove_item(slot)
-	find_parent("UserInterface").holding_item = slot.item
-	slot.pickFromSlot()
-	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-
-
-func open_trash_can():
-	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
-		$Trash/Top.rotation_degrees, 90, 0.35,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-	
-func close_trash_can():
-	$Tween.interpolate_property($Trash/Top, "rotation_degrees",
-		$Trash/Top.rotation_degrees, 0, 0.35,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func _on_TrashButton_mouse_entered():
-	open_trash_can()
-func _on_TrashButton_mouse_exited():
-	close_trash_can()
-
-func _on_TrashButton_pressed():
-	if find_parent("UserInterface").holding_item:
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
-		set_current_page()
-
-
-func _on_BackgroundButton_pressed():
-	if find_parent("UserInterface").holding_item:
-		find_parent("UserInterface").items_to_drop.append([find_parent("UserInterface").holding_item.item_name, find_parent("UserInterface").holding_item.item_quantity, find_parent("UserInterface").holding_item.item_health])
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
 
 
 func _on_ExitButton_pressed():

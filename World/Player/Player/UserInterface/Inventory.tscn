@@ -433,7 +433,7 @@ position = Vector2( 257, 684 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle right"
-frame = 9
+frame = 21
 playing = true
 
 [node name="HideShowButton" type="Button" parent="PetUI"]

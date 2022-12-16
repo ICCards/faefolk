@@ -24,7 +24,7 @@ func _on_Btn_mouse_exited():
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
 		MapData.world["flower"].erase(name)
-		CollectionsData.forage[str(type)+" flower"] += 1
+		PlayerData.player_data["collections"]["forage"][str(type)+" flower"] += 1
 		Tiles.add_valid_tiles(location)
 		$Flower.hide()
 		$Btn.disabled = true

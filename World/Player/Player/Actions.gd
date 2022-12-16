@@ -123,7 +123,7 @@ func fish():
 		PlayerData.change_energy(-1)
 		get_parent().state = get_parent().FISHING
 		var fishing = Fishing.instance()
-		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0]
+		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		get_parent().add_child(fishing)
 
 

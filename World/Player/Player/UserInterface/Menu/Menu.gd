@@ -92,6 +92,7 @@ func _on_Exit_pressed():
 		$Inventory.hide()
 		$Crafting.hide()
 		$OptionsMenu.hide()
+		$Collections.hide()
 		$Exit.show()
 		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/exit.png")
 		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")

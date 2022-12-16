@@ -25,7 +25,7 @@ func validate_tiles(location, dimensions):
 		active = true
 		for x in range(dimensions.x):
 			for y in range(dimensions.y):
-				if valid_tiles.get_cellv( Vector2(x, -y) + location) != 0: 
+				if valid_tiles.get_cellv( Vector2(x, -y) + location) == -1 or valid_tiles.get_cellv( Vector2(x, -y) + location) == 1: 
 					return false
 					break
 		return true

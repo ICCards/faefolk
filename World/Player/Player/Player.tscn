@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=2]
+[gd_scene load_steps=111 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/goldfish.png" type="Texture" id=2]
@@ -22,9 +22,14 @@
 [ext_resource path="res://World/Player/Player/PoisonParticles.tscn" type="PackedScene" id=20]
 [ext_resource path="res://World/Player/Player/Actions.tscn" type="PackedScene" id=21]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=24]
 [ext_resource path="res://Assets/Images/Misc/chat bubble.png" type="Texture" id=25]
 [ext_resource path="res://World/Player/Player/AttachedScripts/EnterInteractiveZones.gd" type="Script" id=26]
+[ext_resource path="res://Assets/Images/Animations/torch/1.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Images/Animations/torch/3.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Images/Animations/torch/4.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Images/Animations/torch/2.png" type="Texture" id=30]
 [ext_resource path="res://World/Player/Player/AttachedScripts/HurtBox.gd" type="Script" id=32]
 [ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=76]
 [ext_resource path="res://World/Player/Player/Camera2D.gd" type="Script" id=81]
@@ -486,6 +491,30 @@ tracks/37/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("../HoldingTorch:visible")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("../HoldingTorch:position")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 0, -84 ) ]
 }
 
 [sub_resource type="Animation" id=55]
@@ -2597,6 +2626,18 @@ tracks/16/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 4 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("../HoldingTorch:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -83 ), Vector2( 0, -81 ), Vector2( 0, -81 ), Vector2( 0, -83 ) ]
 }
 
 [sub_resource type="Animation" id=116]
@@ -5445,6 +5486,18 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../HoldingTorch:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -80 ), Vector2( 0, -82 ), Vector2( 0, -80 ), Vector2( 0, -82 ) ]
 }
 
 [sub_resource type="Animation" id=56]
@@ -11278,6 +11331,14 @@ expand_margin_bottom = 4.0
 radius = 8.00011
 height = 3.99978
 
+[sub_resource type="SpriteFrames" id=117]
+animations = [ {
+"frames": [ ExtResource( 27 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0, -1 )
 collision_mask = 2097153
@@ -11595,6 +11656,21 @@ light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
 shape = SubResource( 11 )
+
+[node name="TorchLight" type="Light2D" parent="."]
+position = Vector2( 0, -32 )
+enabled = false
+texture = ExtResource( 23 )
+energy = 1.05
+mode = 2
+shadow_enabled = true
+
+[node name="HoldingTorch" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -84 )
+frames = SubResource( 117 )
+frame = 3
+playing = true
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_exited"]

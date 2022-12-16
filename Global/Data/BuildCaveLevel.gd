@@ -1,5 +1,6 @@
 extends Node
 
+onready var CaveAmbientLight = preload("res://World/Caves/CaveAmbientLight.tscn")
 onready var LightningLine = load("res://World/Objects/Misc/LightningLine.tscn")
 onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
 onready var Spider = load("res://World/Enemies/Spider.tscn")
@@ -71,6 +72,11 @@ func build():
 		build_cave(cave)
 	Server.world.get_node("Tiles/Chests").clear()
 	spawn_enemies_randomly()
+	add_ambient_light()
+	
+func add_ambient_light():
+	var caveLight = CaveAmbientLight.instance()
+	Server.world.add_child(caveLight)
 
 func load_cave(map):
 	#var map = MapData.return_cave_data(Server.world.name)
@@ -121,8 +127,8 @@ func load_cave(map):
 
 
 func build_cave(map):
+	set_initial_chest(map)
 	if Server.world.name != "Cave 1-Fishing":
-		set_initial_chest(map)
 		generate_ore(map)
 		generate_tall_grass(map)
 		generate_mushroom_forage(map)
@@ -254,7 +260,7 @@ func generate_mushroom_forage(map):
 			mushroom.location = loc
 			mushroom.global_position = Tiles.valid_tiles.map_to_world(loc)
 			ForageObjects.add_child(mushroom)
-			map["mushroom"][id] = {"l": loc, "v": variety}
+			map["mushroom"][id] = {"l": str(loc), "v": variety}
 	
 func generate_tall_grass(map):
 	for i in range(4):
@@ -278,7 +284,7 @@ func generate_grass_bunch(loc, variety, map):
 			caveGrass.loc = loc
 			GrassObjects.call_deferred("add_child", caveGrass)
 			caveGrass.position = loc*32 + Vector2(16,32)
-			map["tall_grass"][id] = {"l": loc, "v": variety}
+			map["tall_grass"][id] = {"l": str(loc), "v": variety}
 		else:
 			loc -= randomAdjacentTiles[0]
 	
@@ -299,7 +305,7 @@ func generate_ore(map):
 			object.location = loc
 			object.position = loc*32 + Vector2(16, 24)
 			NatureObjects.call_deferred("add_child",object,true)
-			map["ore"][id] = {"l": loc, "v": oreTypes.front(), "h": Stats.SMALL_ORE_HEALTH}
+			map["ore"][id] = {"l": str(loc), "v": oreTypes.front(), "h": Stats.SMALL_ORE_HEALTH}
 	while count < NUM_LARGE_ORE:
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
@@ -316,7 +322,7 @@ func generate_ore(map):
 			object.location = loc
 			object.position = loc*32
 			NatureObjects.call_deferred("add_child",object,true)
-			map["ore_large"][id] = {"l": loc, "v": oreTypes.front(), "h": Stats.SMALL_ORE_HEALTH}
+			map["ore_large"][id] = {"l": str(loc), "v": oreTypes.front(), "h": Stats.LARGE_ORE_HEALTH}
 
 func set_light_nodes():
 	for loc in Server.world.get_node("Tiles/Lights").get_used_cells():

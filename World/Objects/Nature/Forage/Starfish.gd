@@ -23,7 +23,7 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-		CollectionsData.forage[str(type)] += 1
+		PlayerData.player_data["collections"]["forage"][type] += 1
 		Tiles.add_valid_tiles(location)
 		$Starfish.hide()
 		$Btn.disabled = true

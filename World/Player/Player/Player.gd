@@ -64,11 +64,13 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 	isLoaded = true
 	set_held_object()
-	
+
+
 func destroy():
 	set_process(false)
 	set_process_unhandled_input(false)
 	state = DYING
+
 
 func set_held_object():
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
@@ -77,6 +79,10 @@ func set_held_object():
 		if item_category == "Magic" or item_name == "bow": #or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
 			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
 			return
+		elif item_name == "torch":
+			$TorchLight.enabled = true
+			return
+	$TorchLight.enabled = false
 	$Camera2D/UserInterface/MagicStaffUI.hide()
 
 
@@ -238,10 +244,17 @@ func idle_state(_direction):
 						holding_item.show()
 						holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 						animation = "holding_idle_" + _direction.to_lower()
+						$HoldingTorch.hide()
+					elif item_name == "torch":
+						holding_item.hide()
+						$HoldingTorch.show()
+						animation = "holding_idle_" + _direction.to_lower()
 					else:
 						holding_item.hide()
 						animation = "idle_" + _direction.to_lower()
+						$HoldingTorch.hide()
 				else:
+					$HoldingTorch.hide()
 					holding_item.hide()
 					animation = "idle_" + _direction.to_lower()
 				composite_sprites.set_player_animation(character, animation, null)
@@ -262,12 +275,19 @@ func walk_state(_direction):
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					animation = "holding_walk_" + _direction.to_lower()
+					$HoldingTorch.hide()
+				elif item_name == "torch":
+					holding_item.hide()
+					$HoldingTorch.show()
+					animation = "holding_walk_" + _direction.to_lower()
 				else:
 					holding_item.hide()
 					animation = "walk_" + _direction.to_lower()
+					$HoldingTorch.hide()
 			else:
 				holding_item.hide()
 				animation = "walk_" + _direction.to_lower()
+				$HoldingTorch.hide()
 			composite_sprites.set_player_animation(character, animation, null)
 		elif Input.is_action_pressed("sprint") and Sounds.current_footsteps_sound != Sounds.swimming:
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
@@ -276,6 +296,8 @@ func walk_state(_direction):
 			composite_sprites.set_player_animation(character, animation, null)
 			check_if_holding_item()
 		else:
+			holding_item.hide()
+			$HoldingTorch.hide()
 			animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
@@ -285,8 +307,10 @@ func check_if_holding_item():
 		var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		var item_qt = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][1]
 		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if Util.valid_holding_item_category(item_category):
+		if Util.valid_holding_item_category(item_category) or item_name == "torch":
+			$HoldingTorch.hide()
 			holding_item.hide()
 			PlayerData.player_data["hotbar"].erase(str(PlayerData.active_item_slot))
 			$Camera2D/UserInterface/Hotbar.initialize_hotbar()
 			InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
+			set_held_object()

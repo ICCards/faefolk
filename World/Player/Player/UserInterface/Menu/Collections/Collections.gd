@@ -14,24 +14,24 @@ func _physics_process(delta):
 		page = ""
 		return
 	if item:
-		if page == "Crops" and CollectionsData.crops[item] != 0:
+		if page == "Crops" and PlayerData.player_data["collections"]["crops"][item] != 0:
 			set_adjusted_pos()
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == "Fish" and CollectionsData.fish[item] != 0:
+		elif page == "Fish" and PlayerData.player_data["collections"]["fish"][item] != 0:
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == "Food" and CollectionsData.food[item] != 0:
+		elif page == "Food" and PlayerData.player_data["collections"]["food"][item] != 0:
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == "Forage" and CollectionsData.forage[item] != 0:
+		elif page == "Forage" and PlayerData.player_data["collections"]["forage"][item] != 0:
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-		elif page == "Resources" and CollectionsData.resources[item] != 0:
+		elif page == "Resources" and PlayerData.player_data["collections"]["resources"][item] != 0:
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)

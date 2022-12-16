@@ -126,8 +126,9 @@ volume_db = -16.0
 position = Vector2( 16, -16 )
 enabled = false
 texture = ExtResource( 2 )
-energy = 1.2
+energy = 1.05
 mode = 2
+shadow_enabled = true
 
 [node name="FurnaceSmoke" type="AnimatedSprite" parent="."]
 visible = false
@@ -135,6 +136,7 @@ position = Vector2( 21, -112 )
 scale = Vector2( 0.75, 0.75 )
 z_index = 1
 frames = SubResource( 15 )
+frame = 7
 playing = true
 
 [node name="Chest" type="AnimatedSprite" parent="."]

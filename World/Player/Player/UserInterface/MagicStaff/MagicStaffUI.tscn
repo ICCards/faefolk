@@ -19,7 +19,6 @@ script = ExtResource( 3 )
 [node name="SelectedBg" type="ColorRect" parent="."]
 margin_right = 18.0
 margin_bottom = 17.0
-color = Color( 0, 0, 0, 1 )
 
 [node name="Bg" type="HBoxContainer" parent="."]
 margin_left = 1.0

@@ -89,7 +89,7 @@ func retract_and_stop(fish_name):
 	player_animation_player.play("retract")
 	yield(player_animation_player, "animation_finished")
 	if fish_name:
-		CollectionsData.fish[fish_name] += 1
+		PlayerData.player_data["collections"]["fish"][fish_name] += 1
 		var itemDrop = ItemDrop.instance()
 		itemDrop.initItemDropType(fish_name)
 		Server.world.add_child(itemDrop)

@@ -19,6 +19,8 @@ var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 500.0
 var tornado_node = null
 
+var rng := RandomNumberGenerator.new()
+
 func _ready(): 
 	hide()
 	randomize()
@@ -112,7 +114,8 @@ func destroy():
 	bunny_sprite.play("death")
 	$AnimationPlayer.play("death")
 	yield(get_tree().create_timer(0.5), "timeout")
-	InstancedScenes.intitiateItemDrop("raw filet", position, 1)
+	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,1))
+	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,1))
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 
