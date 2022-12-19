@@ -172,41 +172,41 @@ func spawnRandomWolf():
 	if loc != null:
 		var wolf = Wolf.instance()
 		wolf.global_position = loc
-		$Enemies.add_child(wolf)
+		$Enemies.call_deferred("add_child",wolf)
 
 func spawnRandomBunny():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var bunny = Bunny.instance()
 		bunny.global_position = loc
-		$Enemies.add_child(bunny)
+		$Enemies.call_deferred("add_child",bunny)
 
 func spawnRandomDuck():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var duck = Duck.instance()
 		duck.global_position = loc
-		$Enemies.add_child(duck)
+		$Enemies.call_deferred("add_child",duck)
 
 func spawnRandomBear():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var bear = Bear.instance()
-		$Enemies.add_child(bear)
+		$Enemies.call_deferred("add_child",bear)
 		bear.global_position = loc
 		
 func spawnRandomBoar():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var boar = Boar.instance()
-		$Enemies.add_child(boar)
+		$Enemies.call_deferred("add_child", boar)
 		boar.global_position = loc
 
 func spawnRandomDeer():
 	var loc = returnValidSpawnLocation()
 	if loc != null:
 		var deer = Deer.instance()
-		$Enemies.add_child(deer)
+		$Enemies.call_deferred("add_child", deer)
 		deer.global_position = loc
 
 

@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var progress = $CastingProgress
-onready var progress_background = $ProgressBackground
+onready var progress = $CanvasLayer/CastingProgress
+onready var progress_background = $CanvasLayer/ProgressBackground
 onready var line = $Line2D
 onready var hook = $CastedFishHook
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
@@ -85,7 +85,7 @@ func retract_and_stop(fish_name):
 		$CaughtFish.show()
 		$CaughtFish.texture = load("res://Assets/Images/inventory_icons/Fish/" + fish_name + ".png")
 	reel_in_fish_line()
-	Server.player_node.composite_sprites.set_player_animation(Server.player_node.character, "retract_" + direction.to_lower(), "fishing rod retract")
+	composite_sprites.set_player_animation(Server.player_node.character, "retract_" + direction.to_lower(), "fishing rod retract")
 	player_animation_player.play("retract")
 	yield(player_animation_player, "animation_finished")
 	if fish_name:
@@ -116,18 +116,18 @@ func start_fishing_mini_game():
 	waiting_for_fish_bite = false
 	$Tween.stop_all()
 	$AnimationPlayer.play("hit")
-	$FishingMiniGame.set_active(fishing_rod_type)
+	$CanvasLayer/FishingMiniGame.set_active(fishing_rod_type)
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fishHit.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	yield($AnimationPlayer, "animation_finished")
 	yield(get_tree().create_timer(0.25), "timeout")
-	composite_sprites.set_player_animation(get_parent().character, "struggle_" + direction.to_lower(), "fishing rod struggle")
+	composite_sprites.set_player_animation(Server.player_node.character, "struggle_" + direction.to_lower(), "fishing rod struggle")
 	player_animation_player.play("struggle")
 	mini_game_active = true
 	change_start_point_pos()
 	line.points = [start_point, end_point]
-	$FishingMiniGame.start()
+	$CanvasLayer/FishingMiniGame.start()
 
 func change_start_point_pos():
 	match direction:
@@ -217,7 +217,7 @@ func draw_cast_line():
 	hook.show()
 	hook.position = end_point - Vector2(4.5, 4.5)
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
-	var location = Tiles.ocean_tiles.world_to_map(hook.position + get_parent().position)
+	var location = Tiles.ocean_tiles.world_to_map(hook.position + Server.player_node.position)
 	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles): # valid cast
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
@@ -253,7 +253,7 @@ func return_adjusted_end_point(progress_of_game):
 			temp_end_point =  end_point + Vector2(0, ((progress_of_game-200)/800)*cast_distance)
 		"DOWN":
 			temp_end_point = end_point - Vector2(0, ((progress_of_game-200)/800)*cast_distance)
-	var location = Tiles.ocean_tiles.world_to_map(temp_end_point + get_parent().position)
+	var location = Tiles.ocean_tiles.world_to_map(temp_end_point + Server.player_node.position)
 	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles):
 		adjusted_end_point = temp_end_point
 		return temp_end_point 

@@ -99,12 +99,11 @@ func _input( event ):
 
 
 func draw_bow(init_direction):
-	if PlayerData.returnSufficentCraftingMaterial("arrow", 1):
+	if validate_bow_requirement():
 		get_parent().state = MAGIC_CASTING
 		is_drawing = true
 		animation = "draw_" + init_direction.to_lower()
 		player_animation_player.play("bow draw release")
-		PlayerData.change_energy(-1)
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
@@ -112,11 +111,24 @@ func draw_bow(init_direction):
 		wait_for_bow_release()
 
 
+func validate_bow_requirement():
+	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
+	match index:
+		1:
+			return PlayerData.returnSufficentCraftingMaterial("arrow", 1)
+		2:
+			return PlayerData.returnSufficentCraftingMaterial("arrow", 3)
+		3:
+			return PlayerData.returnSufficentCraftingMaterial("arrow", 1) and PlayerData.player_data["mana"] > 0
+		4:
+			return PlayerData.returnSufficentCraftingMaterial("arrow", 2) and PlayerData.player_data["mana"] > 1
+
 func wait_for_bow_release():
 	if not mouse_left_down:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
+		PlayerData.change_energy(-1)
 		Stats.decrease_tool_health()
 		shoot()
 		is_drawing = false
@@ -142,43 +154,58 @@ func shoot():
 		2:
 			multi_arrow_shot()
 		3: 
-			pass
+			enchanted_arrow_shot()
 		4:
 			ricochet_arrow_shot()
 
 func ricochet_arrow_shot():
 	PlayerData.remove_material("arrow", 2)
+	PlayerData.change_mana(-2)
 	var arrow = ArrowProjectile.instance()
 	if get_node("../Magic").player_fire_buff:
-		arrow.is_on_fire = true
+		arrow.is_fire_arrow = true
 	else:
-		arrow.is_on_fire = false
+		arrow.is_fire_arrow = false
 	arrow.is_ricochet_shot = true
 	arrow.position = $CastDirection/Position2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
 	get_node("../../../").add_child(arrow)
 
 
+func enchanted_arrow_shot():
+	PlayerData.remove_material("arrow", 1)
+	PlayerData.change_mana(-1)
+	var arrow = ArrowProjectile.instance()
+	if Util.chance(33):
+		arrow.is_fire_arrow = true
+	elif Util.chance(33):
+		arrow.is_ice_arrow = true
+	else:
+		arrow.is_poison_arrow = true
+	arrow.position = $CastDirection/Position2D.global_position
+	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
+	get_node("../../../").add_child(arrow)
+
 func single_arrow_shot():
 	PlayerData.remove_material("arrow", 1)
 	var arrow = ArrowProjectile.instance()
 	if get_node("../Magic").player_fire_buff:
-		arrow.is_on_fire = true
+		arrow.is_fire_arrow = true
 	else:
-		arrow.is_on_fire = false
+		arrow.is_fire_arrow = false
 	arrow.position = $CastDirection/Position2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
 	get_node("../../../").add_child(arrow)
 
 
 func multi_arrow_shot():
-	PlayerData.remove_material("arrow", 1)
+	PlayerData.remove_material("arrow", 3)
 	for i in range(3):
 		var arrow = ArrowProjectile.instance()
 		if get_node("../Magic").player_fire_buff:
-			arrow.is_on_fire = true
+			arrow.is_fire_arrow = true
 		else:
-			arrow.is_on_fire = false
+			arrow.is_fire_arrow = false
 		arrow.position = $CastDirection/Position2D.global_position
 		if i == 0:
 			arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
@@ -200,7 +227,7 @@ func wait_for_cast_release(staff_name):
 
 func cast_spell(staff_name, init_direction):
 	yield(get_tree(), "idle_frame")
-	if get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown():
+	if validate_magic_cast_requirements():
 		direction = init_direction
 		starting_mouse_point = get_global_mouse_position()
 		if get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell != 2:
@@ -212,12 +239,22 @@ func cast_spell(staff_name, init_direction):
 			yield(player_animation_player, "animation_finished" )
 		wait_for_cast_release(staff_name)
 	else:
-			get_parent().state = MOVEMENT
+		get_parent().state = MOVEMENT
 
+
+func validate_magic_cast_requirements():
+	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
+	match index:
+		1:
+			return PlayerData.player_data["mana"] >= 1 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
+		2:
+			return PlayerData.player_data["mana"] >= 2 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
+		3:
+			return PlayerData.player_data["mana"] >= 5 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
+		4:
+			return PlayerData.player_data["mana"] >= 10 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
 
 func _physics_process(delta):
-#	if not is_casting and not flamethrower_active:
-#		return
 	var degrees = int($CastDirection.rotation_degrees) % 360
 	$CastDirection.look_at(get_global_mouse_position())
 	if $CastDirection.rotation_degrees >= 0:
@@ -291,6 +328,7 @@ func throw(potion_name):
 
 func cast(staff_name, spell_index):
 	get_node("../Camera2D/UserInterface/MagicStaffUI").start_spell_cooldown()
+	yield(get_tree(), "idle_frame")
 	match spell_index:
 		1:
 			PlayerData.change_mana(-1)

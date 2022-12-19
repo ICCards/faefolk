@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/skill unlocked.mp3-1ba3e502a2707a8af80076ce5d1eaf54.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Player/skill unlocked.mp3"
+dest_files=[ "res://.import/skill unlocked.mp3-1ba3e502a2707a8af80076ce5d1eaf54.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

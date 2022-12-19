@@ -125,9 +125,11 @@ func hit(tool_name):
 	if state == IDLE or state == WALK:
 		start_chase_state()
 	if tool_name == "blizzard":
+		deer_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(8)
 		return
 	elif tool_name == "ice projectile":
+		deer_sprite.modulate = Color("00c9ff")
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()
@@ -156,14 +158,15 @@ func _on_HurtBox_area_entered(area):
 		if area.id != "":
 			hit_projectiles.append(area.id)
 		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+			deer_sprite.modulate = Color("009000")
 			$HurtBox/AnimationPlayer.play("hit")
 			$EnemyPoisonState.start(area.tool_name)
 			return
 		if area.name == "SwordSwing":
-			CollectionsData.skill_experience["sword"] += 1
+			PlayerData.player_data["skill_experience"]["sword"] += 1
 			Stats.decrease_tool_health()
 		else:
-			CollectionsData.add_skill_experience(area.tool_name)
+			PlayerDataHelpers.add_skill_experience(area.tool_name)
 		if area.knockback_vector != Vector2.ZERO:
 			$KnockbackParticles.emitting = true
 			knocking_back = true
@@ -180,6 +183,12 @@ func _on_HurtBox_area_entered(area):
 			InstancedScenes.initiateExplosionParticles(position+randomPos)
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
+		elif area.special_ability == "ice":
+			deer_sprite.modulate = Color("00c9ff")
+			$EnemyFrozenState.start(3)
+		elif area.special_ability == "poison":
+			deer_sprite.modulate = Color("009000")
+			$EnemyPoisonState.start("poison arrow")
 		yield(get_tree().create_timer(0.25), "timeout")
 		$KnockbackParticles.emitting = false
 

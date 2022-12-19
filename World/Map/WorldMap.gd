@@ -1,7 +1,5 @@
 extends Node2D
 
-
-
 onready var GridSquareLabel = load("res://World/Map/GridSquareLabel.tscn")
 onready var playerIcon = $Map/PlayerIcon
 onready var stormIcon = $Map/StormIcon
@@ -28,14 +26,14 @@ enum Tiles {
 	SNOW
 }
 
-
 func _input(event):
-	if event.is_action_pressed("open_map") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and has_node("/root/World"):
-		show()
-		initialize()
-	if event.is_action_released("open_map"):
-		hide()
-		set_inactive()
+	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and has_node("/root/World"):
+		if event.is_action_pressed("open_map"):
+			show()
+			initialize()
+		if event.is_action_released("open_map"):
+			hide()
+			set_inactive()
 
 func toggle_map():
 	PlayerData.viewMapMode = !PlayerData.viewMapMode

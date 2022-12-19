@@ -162,13 +162,18 @@ func add_hotbar_clock_and_stats():
 
 func toggle_menu():
 	if not $Menu.visible:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/bigSelect.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		show_menu()
 	else:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/bigDeSelect.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		hide_menu()
 
 
 func show_menu():
-	play_open_menu_sound()
 	$Hotbar.hide()
 	$PlayerDataUI.hide()
 	PlayerData.viewInventoryMode = true
@@ -238,38 +243,38 @@ func toggle_stove(id, level):
 
 
 func close_furnace(id):
-	if not holding_item:
+	if not holding_item and has_node(id):
 		add_hotbar_clock_and_stats()
 		get_node(id).hide()
 		drop_items()
 
 func close_grain_mill():
-	if not holding_item:
+	if not holding_item and has_node("GrainMill"):
 		add_hotbar_clock_and_stats()
 		get_node("GrainMill").destroy()
 		drop_items()
 
 func close_workbench():
-	if not holding_item:
+	if not holding_item and has_node("Workbench"):
 		add_hotbar_clock_and_stats()
 		get_node("Workbench").destroy()
 		drop_items()
 
 func close_stove(id):
-	if not holding_item:
+	if not holding_item and has_node(id):
 		add_hotbar_clock_and_stats()
 		get_node(id).hide()
 		drop_items()
 
 func close_chest(id):
-	if not holding_item:
+	if not holding_item and has_node("Chest"):
 		Server.world.get_node("PlacableObjects/"+id).close_chest()
 		add_hotbar_clock_and_stats()
 		get_node("Chest").destroy()
 		drop_items()
 
 func close_tc(id):
-	if not holding_item:
+	if not holding_item and has_node("Tool cabinet"):
 		add_hotbar_clock_and_stats()
 		get_node("Tool cabinet").destroy()
 		drop_items()

@@ -1,5 +1,7 @@
 extends Node
 
+signal new_skill_unlocked
+
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 
@@ -34,3 +36,18 @@ func can_item_be_added_to_inventory(item_name, item_quantity):
 		if PlayerData.player_data["inventory"].has(str(i)) == false:
 			return true
 	return false
+
+func add_skill_experience(tool_name):
+	if tool_name == "arrow":
+		PlayerData.player_data["skill_experience"]["bow"] += 1
+		check_level_up(PlayerData.player_data["skill_experience"]["bow"])
+	elif tool_name == "tornado spell" or tool_name == "lingering tornado":
+		PlayerData.player_data["skill_experience"]["wind"] += 1
+		check_level_up(PlayerData.player_data["skill_experience"]["wind"])
+	elif tool_name == "fire projectile":
+		PlayerData.player_data["skill_experience"]["fire"] += 1
+		check_level_up(PlayerData.player_data["skill_experience"]["fire"])
+
+func check_level_up(new_xp):
+	if new_xp == 100 or new_xp == 500 or new_xp == 1000:
+		emit_signal("new_skill_unlocked")

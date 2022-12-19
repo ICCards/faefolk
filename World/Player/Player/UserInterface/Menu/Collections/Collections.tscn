@@ -1,4 +1,4 @@
-[gd_scene load_steps=229 format=2]
+[gd_scene load_steps=230 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/Themes/LockedAsset.tres" type="Material" id=10]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Images/inventory_icons/Forage/mushroom.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" type="AudioStream" id=13]
 
 [sub_resource type="Shader" id=16]
 code = "shader_type canvas_item;
@@ -2177,6 +2178,10 @@ rect_rotation = 90.0
 texture_normal = ExtResource( 8 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -16.0
 
 [connection signal="mouse_entered" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_entered"]
 [connection signal="mouse_exited" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_exited"]

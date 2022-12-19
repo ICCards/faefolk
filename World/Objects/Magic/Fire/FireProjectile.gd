@@ -45,6 +45,7 @@ func projectile_collided():
 	if not collided:
 		collided = true
 		$Projectile.hide()
+		$Light2D.enabled = false
 		$CollisionShape2D.set_deferred("disabled", true)
 		$TrailParticles/P1.emitting = false
 		$TrailParticles/P2.emitting = false

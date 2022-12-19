@@ -8,6 +8,24 @@ var footstep_volume = 50
 signal volume_change
 signal footsteps_sound_change
 
+var background_songs = [load("res://Assets/Sound/music/bg music.mp3"),load("res://Assets/Sound/music/edutainment.mp3"),load("res://Assets/Sound/music/make it easy.mp3")]
+
+
+func play_pick_up_item_sound():
+	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/slots/pickUpItem.mp3")
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	Server.player_node.sound_effects.play()
+	
+func play_put_down_item_sound():
+	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/slots/putDownItem.mp3")
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	Server.player_node.sound_effects.play()
+
+func play_small_select_sound():
+	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	Server.player_node.sound_effects.play()
+
 ##func _ready():
 ##	set_music_volume(music_volume)
 ##	set_sound_volume(sound_volume)
@@ -85,8 +103,8 @@ var dirt_footsteps = load("res://Assets/Sound/Sound effects/Footsteps/dirt foots
 var stone_footsteps = load("res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3")
 var swimming = load("res://Assets/Sound/Sound effects/Footsteps/swimming.mp3")
 
-var button_hover = load("res://Assets/Sound/Sound effects/UI/button hover.mp3")
-var button_select = load("res://Assets/Sound/Sound effects/UI/button select.mp3")
+#var button_hover = load("res://Assets/Sound/Sound effects/UI/button hover.mp3")
+var button_select = load("res://Assets/Sound/Sound effects/UI/Menu/bigSelect.mp3")
 
 var pick_up_item = load("res://Assets/Sound/Sound effects/UI/pick up item.mp3")
 
@@ -141,15 +159,15 @@ var fire_crackle = load("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
 
 ### Music ###
 var title_music = load("res://Assets/Sound/music/wobble dance.mp3")
-var background_music = [
-	load("res://Assets/Sound/music/make it easy.mp3"),
-	load("res://Assets/Sound/music/edutainment.mp3")
-]
-var background_music_names = [
-	"Make it easy",
-	"Edutainment"
-]
-#
+#var background_music = [
+#	load("res://Assets/Sound/music/make it easy.mp3"),
+#	load("res://Assets/Sound/music/edutainment.mp3")
+#]
+#var background_music_names = [
+#	"Make it easy",
+#	"Edutainment"
+#]
+##
 #var demos = [
 #	load("res://Assets/Sound/Demos/8 bit adventure.mp3"),
 #	load("res://Assets/Sound/Demos/8 bit creature.mp3"),

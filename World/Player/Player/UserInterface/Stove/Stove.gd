@@ -153,7 +153,7 @@ func remove_ingredients():
 					PlayerData.remove_item(ingredient_slot3, id)
 
 func add_to_yield_slot():
-	CollectionsData.food[current_cooking_item] += 1
+	PlayerData.player_data["collections"]["food"][current_cooking_item] += 1
 	if not yield_slot1.item:
 		yield_slot1.initialize_item(current_cooking_item, 1, null)
 		PlayerData.player_data["stoves"][id]["4"] = [current_cooking_item, 1, null]

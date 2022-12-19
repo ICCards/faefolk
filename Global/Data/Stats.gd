@@ -2,6 +2,19 @@ extends Node
 
 signal tool_health_change
 
+var skill_descriptions = {
+	#"sword": {1:{"n":"Sword swing","c":"1 energy","d":"A fast sword swipe."}, 2: {"n":"Sword defense","c":"1 energy","d":"Protects against incoming enemy projectiles."}, 3: {"n":"Enchantment","c":"1 mana","d":"Allows poison, ice or fire sword attacks."}, 4: {"n":"TBD","c":"TBD","d":"TBD"}},
+	"sword": {1:{"n":"Sword swing","c":"1 energy","d":"A fast sword swipe."}, 2: {"n":"Coming soon...","c":"Coming soon...","d":"Coming soon..."}, 3: {"n":"Coming soon...","c":"Coming soon...","d":"Coming soon..."}, 4: {"n":"Coming soon...","c":"Coming soon...","d":"Coming soon..."}},
+	"bow": {1:{"n":"Single-shot","c":"1 energy, 1 arrow","d":"Shoots a single arrow projectile."}, 2: {"n":"Multi-shot","c":"1 energy, 3 arrows","d":"Shoots three arrow projectiles."}, 3: {"n":"Enchantment","c":"1 energy, 1 mana, 1 arrow","d":"Shoots a random poison, ice or fire arrow."}, 4: {"n":"Ricochet shot","c":"1 energy, 2 mana, 2 arrows","d":"Makes arrows bounce between close targets"}},
+	"dark": {1:{"n":"Demon warrior","c":"1 mana","d":"..."}, 2: {"n":"Invisibility","c":"2 mana","d":"..."}, 3: {"n":"Demon mage","c":"5 mana","d":"..."}, 4: {"n":"Portal","c":"10 mana","d":"..."}},
+	"electric": {1:{"n":"Electric chain","c":"1 mana","d":"..."}, 2: {"n":"Flash-step","c":"2 mana","d":"..."}, 3: {"n":"Stunned electric chain","c":"5 mana","d":"..."}, 4: {"n":"Lightning strike","c":"10 mana","d":"..."}},
+	"earth": {1:{"n":"Earth strike","c":"1 mana","d":"..."}, 2: {"n":"Earth golem","c":"2 mana","d":"..."}, 3: {"n":"Lingering earth strike","c":"5 mana","d":"..."}, 4: {"n":"Earthquake","c":"10 mana","d":"..."}},
+	"fire":  {1:{"n":"Fireball","c":"1 mana","d":"Shoots three flaming fireballs"}, 2: {"n":"Strength buff","c":"2 mana","d":"All non-magic weapons do extra damage."}, 3: {"n":"Exploding fireballs","c":"5 mana","d":"Shoots three exploding fireballs."}, 4: {"n":"Flamethrower","c":"10 mana","d":"A powerful stream of destruction."}},
+	"wind": {1:{"n":"Tornado","c":"1 mana","d":"A piercing, single shot projectile."}, 2: {"n":"Dash","c":"2 mana","d":"Increased movement speed for short duration."}, 3: {"n":"Lingering tornado","c":"5 mana","d":"Traps and damages enemies within radius."}, 4: {"n":"Whirlwind","c":"10 mana","d":"A powerful spiral attached to the player."}},
+	"ice": {1:{"n":"Ice projectile","c":"1 mana","d":"..."}, 2: {"n":"Ice shield","c":"2 mana","d":"..."}, 3: {"n":"Lingering ice projectile","c":"5 mana","d":"..."}, 4: {"n":"Blizzard","c":"10 mana","d":"..."}},
+}
+
+
 const MAX_TWIG_WALL = 3
 const MAX_WOOD_WALL = 100
 const MAX_STONE_WALL = 500

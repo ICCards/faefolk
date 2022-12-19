@@ -15,6 +15,8 @@ func start(type):
 	match type:
 		"poison potion I":
 			amount_to_diminish = get_parent().STARTING_HEALTH * 0.08
+		"poison arrow":
+			amount_to_diminish = get_parent().STARTING_HEALTH * 0.08
 		"poison potion II":
 			amount_to_diminish = get_parent().STARTING_HEALTH * 0.2
 		"poison potion III":

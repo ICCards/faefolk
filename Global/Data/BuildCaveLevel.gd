@@ -1,6 +1,6 @@
 extends Node
 
-onready var CaveAmbientLight = preload("res://World/Caves/CaveAmbientLight.tscn")
+onready var CaveAmbientLight = load("res://World/Caves/CaveAmbientLight.tscn")
 onready var LightningLine = load("res://World/Objects/Misc/LightningLine.tscn")
 onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
 onready var Spider = load("res://World/Enemies/Spider.tscn")

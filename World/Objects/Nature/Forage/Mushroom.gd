@@ -32,11 +32,10 @@ func _on_Btn_pressed():
 		queue_free()
 
 func set_mouse_cursor_type():
-	if not $Btn.disabled:
-		if $DetectPlayer.get_overlapping_areas().size() >= 1:
-			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest.png"))
-		else:
-			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest transparent.png"))
+	if $DetectPlayer.get_overlapping_areas().size() >= 1:
+		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest.png"))
+	else:
+		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest transparent.png"))
 
 
 func _on_DetectPlayer_area_entered(area):

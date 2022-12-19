@@ -112,12 +112,14 @@ func _on_UpButton_pressed():
 		page -= 1
 		set_current_page()
 		initialize_crafting()
+		Sounds.play_small_select_sound()
 
 func _on_DownButton_pressed():
 	if page != 8:
 		page += 1
 		set_current_page()
 		initialize_crafting()
+		Sounds.play_small_select_sound()
 
 
 func reset_hover_effect():

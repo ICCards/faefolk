@@ -229,10 +229,10 @@ func _on_HurtBox_area_entered(area):
 				start_chase_state()
 			return
 		if area.name == "SwordSwing":
-			CollectionsData.skill_experience["sword"] += 1
+			PlayerData.player_data["skill_experience"]["sword"] += 1
 			Stats.decrease_tool_health()
 		else:
-			CollectionsData.add_skill_experience(area.tool_name)
+			PlayerDataHelpers.add_skill_experience(area.tool_name)
 		if area.knockback_vector != Vector2.ZERO:
 			$KnockbackParticles.emitting = true
 			knocking_back = true
@@ -249,6 +249,10 @@ func _on_HurtBox_area_entered(area):
 			InstancedScenes.initiateExplosionParticles(position+randomPos)
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
+		elif area.special_ability == "ice":
+			$EnemyFrozenState.start(3)
+		elif area.special_ability == "poison":
+			$EnemyPoisonState.start("poison arrow")
 		yield(get_tree().create_timer(0.25), "timeout")
 		$KnockbackParticles.emitting = false
 

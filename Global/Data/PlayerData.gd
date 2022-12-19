@@ -41,11 +41,9 @@ var starting_player_data = {
 	"energy": 100,
 	"hotbar": {},
 	"inventory": {
-			"0": ["wind staff", 1, null],
-			"2": ["fire staff", 1, null],
-			"8": ["wood", 500, null],
-			"9": ["stone", 500, null],
-			"7": ["iron ingot", 150, null],
+			"18": ["wood", 250, null],
+			"19": ["stone", 250, null],
+			"17": ["iron ingot", 100, null],
 	},
 	"chests": {
 		"Cave 1-1": {
@@ -138,6 +136,20 @@ var starting_player_data = {
 	"furnaces": {},
 	"grain_mills": {},
 	"stoves": {},
+	"skill_experience": {
+			"farming": 0,
+			"foraging": 0,
+			"fishing": 0,
+			"mining": 0,
+			"sword": 1,
+			"bow": 1,
+			"dark": 0,
+			"electric": 0,
+			"earth": 0,
+			"fire": 0,
+			"wind": 0,
+			"ice": 0,
+		},
 	"collections": {
 		 "crops" : {
 			"asparagus": 0,

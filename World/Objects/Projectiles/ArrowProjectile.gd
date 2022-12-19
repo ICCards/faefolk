@@ -4,7 +4,9 @@ extends KinematicBody2D
 var velocity = Vector2(-1,-1)
 var speed = 525
 var collided = false
-var is_on_fire: bool = false
+var is_fire_arrow: bool = false
+var is_ice_arrow: bool = false
+var is_poison_arrow: bool = false
 var is_hostile: bool = false
 var is_ricochet_shot: bool = false
 var is_multishot1: bool = false
@@ -25,12 +27,24 @@ func _ready():
 	$Hitbox.id = uuid.v4()
 	$Hitbox.tool_name = "arrow"
 	$Hitbox.knockback_vector = velocity
-	if is_on_fire:
+	if is_fire_arrow:
 		$Hitbox.special_ability = "fire"
 		$ArrowBreak.modulate = Color("ff0000")
-		$TrailParticles/Particles.emitting = true
-		$TrailParticles/Particles2.emitting = true
-		$TrailParticles/Particles3.emitting = true
+		$FireTrailParticles/P1.emitting = true
+		$FireTrailParticles/P2.emitting = true
+		$FireTrailParticles/P3.emitting = true
+	elif is_ice_arrow:
+		$Hitbox.special_ability = "ice"
+		$ArrowBreak.modulate = Color("009bff")
+		$IceTrailParticles/P1.emitting = true
+		$IceTrailParticles/P2.emitting = true
+		$IceTrailParticles/P3.emitting = true
+	elif is_poison_arrow:
+		$Hitbox.special_ability = "poison"
+		$ArrowBreak.modulate = Color("00ee18")
+		$PoisonTrailParticles/P1.emitting = true
+		$PoisonTrailParticles/P2.emitting = true
+		$PoisonTrailParticles/P3.emitting = true
 
 
 func fade_out():
@@ -68,9 +82,15 @@ func _on_Hitbox_body_entered(body):
 
 func destroy():
 	if not collided:
-		$TrailParticles/Particles.emitting = false
-		$TrailParticles/Particles2.emitting = false
-		$TrailParticles/Particles3.emitting = false
+		$FireTrailParticles/P1.emitting = false
+		$FireTrailParticles/P2.emitting = false
+		$FireTrailParticles/P3.emitting = false
+		$IceTrailParticles/P1.emitting = false
+		$IceTrailParticles/P2.emitting = false
+		$IceTrailParticles/P3.emitting = false
+		$PoisonTrailParticles/P1.emitting = false
+		$PoisonTrailParticles/P2.emitting = false
+		$PoisonTrailParticles/P3.emitting = false
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
 		collided = true

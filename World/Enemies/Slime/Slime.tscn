@@ -532,7 +532,6 @@ position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
-frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]

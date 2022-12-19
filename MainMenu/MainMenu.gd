@@ -53,7 +53,7 @@ func close_options_menu():
 
 func _on_OptionsIconButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	$SoundEffects.play()
 	toggle_menu_open()
 

@@ -17,11 +17,12 @@ func set_song():
 #	play()
 
 func _play_background_music():
-	if Util.chance(50):
-		stream = load("res://Assets/Sound/music/edutainment.mp3")
+	var current_song_index = rng.randi_range(0,2)
+	stream = Sounds.background_songs[current_song_index]
+	if current_song_index == 0:
+		volume_db =  Sounds.return_adjusted_sound_db("music", -16)
 	else:
-		stream = load("res://Assets/Sound/music/make it easy.mp3")
-	volume_db =  Sounds.return_adjusted_sound_db("music", -32)
+		volume_db =  Sounds.return_adjusted_sound_db("music", -32)
 	play()
 	yield(self, "finished")
 	Sounds.emit_signal("song_finished")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/Inventory UI/chest slots.png" type="Texture" id=2]
 [ext_resource path="res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Slots/ChestSlots.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Images/Misc/Buttons/ok button.png" type="Texture" id=7]
@@ -19,10 +18,10 @@ anchor_bottom = 0.5
 script = ExtResource( 3 )
 
 [node name="Trash" parent="." instance=ExtResource( 1 )]
-margin_left = 1.0
-margin_top = -300.0
-margin_right = 55.0
-margin_bottom = -300.0
+margin_left = -511.0
+margin_top = -347.0
+margin_right = -457.0
+margin_bottom = -347.0
 
 [node name="ItemDescription" parent="." instance=ExtResource( 9 )]
 visible = false
@@ -50,74 +49,6 @@ margin_right = 283.0
 margin_bottom = 108.0
 
 [node name="ChestSlots" parent="." instance=ExtResource( 6 )]
-
-[node name="LockedSlots" type="GridContainer" parent="."]
-margin_left = -284.0
-margin_top = 181.0
-margin_right = 283.0
-margin_bottom = 235.0
-custom_constants/vseparation = 6
-custom_constants/hseparation = 3
-columns = 10
-
-[node name="locked1" type="TextureRect" parent="LockedSlots"]
-margin_right = 54.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked2" type="TextureRect" parent="LockedSlots"]
-margin_left = 57.0
-margin_right = 111.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked3" type="TextureRect" parent="LockedSlots"]
-margin_left = 114.0
-margin_right = 168.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked4" type="TextureRect" parent="LockedSlots"]
-margin_left = 171.0
-margin_right = 225.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked5" type="TextureRect" parent="LockedSlots"]
-margin_left = 228.0
-margin_right = 282.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked6" type="TextureRect" parent="LockedSlots"]
-margin_left = 285.0
-margin_right = 339.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked7" type="TextureRect" parent="LockedSlots"]
-margin_left = 342.0
-margin_right = 396.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked8" type="TextureRect" parent="LockedSlots"]
-margin_left = 399.0
-margin_right = 453.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked9" type="TextureRect" parent="LockedSlots"]
-margin_left = 456.0
-margin_right = 510.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
-
-[node name="locked10" type="TextureRect" parent="LockedSlots"]
-margin_left = 513.0
-margin_right = 567.0
-margin_bottom = 54.0
-texture = ExtResource( 4 )
 
 [node name="OkButton" type="Control" parent="."]
 margin_left = -30.0

@@ -1,30 +1,15 @@
 extends Node
 
 signal refresh_crops
+
+var world_file_name = "res://JSONData/world.json"
+var caves_file_name = "res://JSONData/caves.json"
+
 var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
-
 var is_world_built = true
 
-var world = {
-#	"placables":{},
-#	"dirt":{},
-#	"ocean":{},
-#	"beach":{},
-#	"plains":{},
-#	"forest":{},
-#	"desert":{},
-#	"snow":{},
-#	"tree":{},
-#	"tall_grass":{},
-#	"ore_large":{},
-#	"ore":{},
-#	"log":{},
-#	"stump":{},
-#	"flower":{},
-#	"tile": {},
-#	"cave_entrance_location": null
-}
+var world = {}
 var caves = {}
 
 func _ready() -> void:
@@ -46,7 +31,6 @@ func advance_crops():
 		Tiles.watered_tiles.clear()
 	emit_signal("refresh_crops")
 
-
 func save_map_data():
 	var world_file = File.new()
 	world_file.open(world_file_name,File.WRITE)
@@ -57,9 +41,6 @@ func save_map_data():
 	caves_file.store_string(to_json(caves))
 	caves_file.close()
 	print("saved map data")
-
-var world_file_name = "res://JSONData/WorldData.json"
-var caves_file_name = "res://JSONData/CavesData.json"
 
 func load_world_data():
 	var file = File.new()
@@ -73,7 +54,7 @@ func load_world_data():
 		else:
 			printerr("corrupted world data")
 	else:
-		save_starting_world_data()
+		printerr("world data not found")
 
 func load_caves_data():
 	var file = File.new()
@@ -87,32 +68,7 @@ func load_caves_data():
 		else:
 			printerr("corrupted caves data")
 	else:
-		save_starting_caves_data()
-
-func save_starting_world_data():
-	var starting_file = File.new()
-	starting_file.open("res://JSONData/StartingWorldData.json",File.READ)
-	var data = parse_json(starting_file.get_as_text())
-	starting_file.close()
-	var file = File.new()
-	file.open(world_file_name,File.WRITE)
-	file.store_string(to_json(data))
-	file.close()
-	world = data
-	print("saved initial world data")
-
-func save_starting_caves_data():
-	var starting_file = File.new()
-	starting_file.open("res://JSONData/StartingCavesData.json",File.READ)
-	var data = parse_json(starting_file.get_as_text())
-	starting_file.close()
-	var file = File.new()
-	file.open(caves_file_name,File.WRITE)
-	file.store_string(to_json(data))
-	file.close()
-	caves = data
-	print("saved initial caves data")
-	
+		printerr("caves data not found")
 	
 func set_hoed_tile(loc):
 	world["tiles"][str(loc)] = "h"

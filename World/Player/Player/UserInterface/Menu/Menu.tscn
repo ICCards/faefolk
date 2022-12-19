@@ -39,6 +39,7 @@ margin_right = 316.0
 margin_bottom = 562.0
 mouse_filter = 0
 texture = ExtResource( 3 )
+expand = true
 
 [node name="ItemNameBox" parent="." instance=ExtResource( 42 )]
 visible = false
@@ -115,7 +116,6 @@ margin_right = -375.0
 margin_bottom = 37.0
 
 [node name="Inventory" parent="." instance=ExtResource( 2 )]
-visible = false
 
 [node name="Collections" parent="." instance=ExtResource( 37 )]
 visible = false
@@ -147,6 +147,7 @@ rect_scale = Vector2( 0.6, 0.6 )
 texture_normal = ExtResource( 43 )
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 7 )]
+visible = false
 margin_left = -286.0
 margin_top = 121.0
 margin_right = 297.0

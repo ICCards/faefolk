@@ -39,10 +39,7 @@ func _physics_process(delta):
 			$AnimatedSprite.play("idle " + direction)
 
 
-
 func _on_VisibilityNotifier2D_viewport_entered(viewport):
 	$AnimatedSprite.playing = true
-
-
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	$AnimatedSprite.playing = false

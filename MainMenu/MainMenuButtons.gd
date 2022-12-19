@@ -18,16 +18,16 @@ var hovered_button = ""
 #	Server._client.get_peer(1).put_packet(value)
 #	get_parent().spawn_player_in_menu()
 	
-func _play_hover_effect(button_name):
-	if hovered_button != button_name and not changing_scene_active:
-		$SoundEffects.stream = Sounds.button_hover
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-		$SoundEffects.play()
+#func _play_hover_effect(button_name):
+#	if hovered_button != button_name and not changing_scene_active:
+#		$SoundEffects.stream = Sounds.button_hover
+#		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+#		$SoundEffects.play()
  
 
 func _on_ConnectToPlugButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = -28 #Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	$SoundEffects.play()
 	#_login_test()
 	#IC.connect_plug(connect_callback)
@@ -51,7 +51,7 @@ func wait_for_map_build():
 
 
 func _on_ConnectToPlugButton_mouse_entered():
-	_play_hover_effect("connect to plug")
+	#_play_hover_effect("connect to plug")
 	$Tween.interpolate_property($ConnectToPlug, "rect_scale",
 		$ConnectToPlug.get_scale(), Vector2(1.015, 1.015), 0.15,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -75,7 +75,7 @@ func _on_ConnectToPlugButton_mouse_exited():
 
 
 func _on_PlayBtn_mouse_entered():
-	_play_hover_effect("play")
+	#_play_hover_effect("play")
 	$Tween.interpolate_property($PlayShopQuit/Play, "scale",
 		$PlayShopQuit/Play.get_scale(), Vector2(1.035, 1.035), 0.15,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -101,13 +101,13 @@ func _on_PlayBtn_pressed():
 		changing_scene_active = true
 		get_parent().get_node("TitleMusic").stop()
 		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 		SceneChanger.goto_scene("res://World/World/World.tscn")
 
 
 func _on_ShopBtn_mouse_entered():
-	_play_hover_effect("options")
+	#_play_hover_effect("options")
 	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
 		$PlayShopQuit/Shop.get_scale(), Vector2(1.035, 1.035), 0.15,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -131,12 +131,12 @@ func _on_ShopBtn_mouse_exited():
 func _on_ShopBtn_pressed():
 	if not changing_scene_active:
 		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 
 
 func _on_QuitBtn_mouse_entered():
-	_play_hover_effect("quit")
+	#_play_hover_effect("quit")
 	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
 		$PlayShopQuit/Quit.get_scale(), Vector2(1.035, 1.035), 0.15,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -160,6 +160,6 @@ func _on_QuitBtn_mouse_exited():
 func _on_QuitBtn_pressed():
 	if not changing_scene_active:
 		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 		#get_tree().quit()

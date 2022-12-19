@@ -1,6 +1,6 @@
 extends Control
 
-var game_time_speed_per_second = 30
+var game_time_speed_per_second = 5
 var week_days = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."]
 var seasons = ["Spring", "Summer", "Fall", "Winter"]
 var clock_icon_index = 1
@@ -72,6 +72,8 @@ func advance_season():
 func return_adjusted_time_string(hours,minutes):
 	if minutes == 0:
 		minutes = "00"
+	elif minutes == 5:
+		minutes = "05"
 	else:
 		minutes = str(minutes)
 	if hours < 12:

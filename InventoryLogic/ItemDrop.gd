@@ -66,7 +66,7 @@ func _physics_process(_delta):
 				$Sprite.visible = false
 				$CollisionShape2D.disabled = true
 				PlayerData.add_item_to_hotbar(item_name, item_quantity, item_health)
-				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")
 				queue_free()

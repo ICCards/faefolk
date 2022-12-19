@@ -1,5 +1,7 @@
 extends Control
 
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
+
 var selected_spell: int = 1
 var selected_staff = ""
 
@@ -8,6 +10,16 @@ var COOL_DOWN_PERIOD_1: int = 1
 var COOL_DOWN_PERIOD_2: int = 2
 var COOL_DOWN_PERIOD_3: int = 5
 var COOL_DOWN_PERIOD_4: int = 10
+
+
+func _ready():
+	PlayerDataHelpers.connect("new_skill_unlocked", self, "play_level_up_sound")
+
+func play_level_up_sound():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/skill unlocked.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
+	set_bgs()
 
 
 func initialize(item_name):
@@ -33,38 +45,58 @@ func initialize(item_name):
 	set_bgs()
 
 func set_bgs():
-	var experience = 1100 #CollectionsData.skill_experience[selected_staff]
+	var experience = PlayerData.player_data["skill_experience"][selected_staff]
 	var level
 	if experience == 0:
 		level = 0
-		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
 		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
 		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
 		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn1.disabled = true
+		$Bg/btn2.disabled = true
+		$Bg/btn3.disabled = true
+		$Bg/btn4.disabled = true
 	elif experience < 100:
 		level = 1
 		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
 		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
 		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
 		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn1.disabled = false
+		$Bg/btn2.disabled = true
+		$Bg/btn3.disabled = true
+		$Bg/btn4.disabled = true
 	elif experience < 500:
 		level = 2
 		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
 		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
 		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
 		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn1.disabled = false
+		$Bg/btn2.disabled = false
+		$Bg/btn3.disabled = true
+		$Bg/btn4.disabled = true
 	elif experience < 1000:
 		level = 3
 		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
 		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
 		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
 		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+		$Bg/btn1.disabled = false
+		$Bg/btn2.disabled = false
+		$Bg/btn3.disabled = false
+		$Bg/btn4.disabled = true
 	else: 
 		level = 4
 		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
 		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
 		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
 		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
+		$Bg/btn1.disabled = false
+		$Bg/btn2.disabled = false
+		$Bg/btn3.disabled = false
+		$Bg/btn4.disabled = false
 
 
 func set_selected_spell():
@@ -103,17 +135,21 @@ func validate_spell_cooldown():
 	return get_node("Cooldown"+str(selected_spell)).rect_size.y == 0
 
 func _on_1_pressed():
+	Sounds.play_small_select_sound()
 	selected_spell = 1
 	set_selected_spell()
 
 func _on_2_pressed():
+	Sounds.play_small_select_sound()
 	selected_spell = 2
 	set_selected_spell()
 
 func _on_4_pressed():
+	Sounds.play_small_select_sound()
 	selected_spell = 4
 	set_selected_spell()
 
 func _on_3_pressed():
+	Sounds.play_small_select_sound()
 	selected_spell = 3
 	set_selected_spell()

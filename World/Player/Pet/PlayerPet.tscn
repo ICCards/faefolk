@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Orange.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/White.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://World/Player/Pet/PlayerPet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=22]
@@ -13,11 +13,11 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
-position = Vector2( 0, -26 )
+position = Vector2( 0, -23 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
-animation = "idle right"
-frame = 16
+animation = "walk down"
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

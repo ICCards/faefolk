@@ -14,7 +14,7 @@ func start_speed_buff(length):
 	if $SpeedStateTimer.time_left == 0:
 		$SpeedStateTimer.start(length)
 	else:
-		$SpeedStateTimer.start(length+$SpeedParticles/SpeedStateTimer.time_left)
+		$SpeedStateTimer.start(length+$SpeedStateTimer.time_left)
 
 func _on_SpeedStateTimer_timeout():
 	stop_speed_buff()

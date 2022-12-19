@@ -81,21 +81,11 @@ func return_phase():
 	$Harvest.disabled = false
 	return "harvest"
 
-
-func _on_Area2D_input_event(viewport, event, shape_idx):
-	pass
-#	if Input.is_action_pressed("mouse_click") and phase == "harvest":
-#		if JsonData.crop_data[crop_name]["Perennial"]:
-#			harvest_and_keep_planted()
-#		else:
-#			harvest_and_remove()
 	
 func harvest_and_remove():
 	if !isBeingHarvested:
 		$LeafEffect.show()
 		$LeafEffect.playing = true
-		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$HarvestSound.play()
 		$CropText.visible = false
 		Tiles.add_valid_tiles(loc)
 		isBeingHarvested = true
@@ -108,8 +98,6 @@ func harvest_and_remove():
 	
 func harvest_and_keep_planted():
 	if !isBeingHarvested:
-		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
-		$HarvestSound.play()
 		isBeingHarvested = true
 		yield(get_tree().create_timer(0.6), "timeout")
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])

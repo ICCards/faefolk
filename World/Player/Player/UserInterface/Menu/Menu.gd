@@ -35,10 +35,16 @@ func _physics_process(delta):
 
 func _on_Inventory_pressed():
 	if not find_parent("UserInterface").holding_item:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		initialize()
 
 func _on_Skills_pressed():
 	if not find_parent("UserInterface").holding_item:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		$Trash.hide()
 		$Inventory.hide()
 		$Collections.hide()
@@ -52,6 +58,9 @@ func _on_Skills_pressed():
 
 func _on_Crafting_pressed():
 	if not find_parent("UserInterface").holding_item:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		$Trash.show()
 		$Skills.hide()
 		$Inventory.hide()
@@ -64,6 +73,9 @@ func _on_Crafting_pressed():
 
 func _on_Collections_pressed():
 	if not find_parent("UserInterface").holding_item:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		$Trash.hide()
 		$Inventory.hide()
 		$Crafting.hide()
@@ -76,6 +88,9 @@ func _on_Collections_pressed():
 
 func _on_Options_pressed():
 	if not find_parent("UserInterface").holding_item:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		$Trash.hide()
 		$Inventory.hide()
 		$Crafting.hide()
@@ -89,11 +104,15 @@ func _on_Options_pressed():
 
 func _on_Exit_pressed():
 	if not find_parent("UserInterface").holding_item:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		$Inventory.hide()
 		$Crafting.hide()
 		$OptionsMenu.hide()
 		$Collections.hide()
 		$Exit.show()
+		$Skills.hide()
 		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/exit.png")
 		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
 

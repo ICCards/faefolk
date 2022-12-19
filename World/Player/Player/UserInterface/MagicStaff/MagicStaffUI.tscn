@@ -18,7 +18,7 @@ script = ExtResource( 3 )
 
 [node name="SelectedBg" type="ColorRect" parent="."]
 margin_right = 18.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 
 [node name="Bg" type="HBoxContainer" parent="."]
 margin_left = 1.0
@@ -133,6 +133,8 @@ mouse_filter = 2
 color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="Bg/btn1" to="." method="_on_1_pressed"]
 [connection signal="pressed" from="Bg/btn2" to="." method="_on_2_pressed"]

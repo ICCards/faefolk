@@ -185,6 +185,7 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
+	PlayerData.player_data["skill_experience"]["wind"] += 1
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()

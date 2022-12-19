@@ -5,6 +5,8 @@ var item = null
 var tab = null
 var adjusted_pos = Vector2.ZERO
 
+onready var sound_effects = $SoundEffects
+
 func _ready():
 	initialize()
 
@@ -78,6 +80,7 @@ func _on_Crops_pressed():
 	$FoodBtnLeft.hide()
 	$FoodBtnRight.hide()
 	$ResourceCollection.hide()
+	Sounds.play_small_select_sound()
 	
 
 func _on_Fish_pressed():
@@ -91,6 +94,7 @@ func _on_Fish_pressed():
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()
+	Sounds.play_small_select_sound()
 
 func _on_Forage_pressed():
 	page = "Forage"
@@ -103,6 +107,7 @@ func _on_Forage_pressed():
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()
+	Sounds.play_small_select_sound()
 
 func _on_Minerals_pressed():
 	page = "Resources"
@@ -115,6 +120,7 @@ func _on_Minerals_pressed():
 	$ForageCollection.hide()
 	$ResourceCollection.initialize()
 	get_node("../Background").texture = load("res://Assets/Images/Inventory UI/menus/collections4.png")
+	Sounds.play_small_select_sound()
 
 func _on_Foods_pressed():
 	page = "Food"
@@ -127,6 +133,7 @@ func _on_Foods_pressed():
 	$FoodCollection1.initialize()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()
+	Sounds.play_small_select_sound()
 
 
 func _on_Crops_mouse_entered():
@@ -161,9 +168,11 @@ func _on_FoodBtnLeft_pressed():
 	$FoodBtnRight.show()
 	$FoodCollection1.initialize()
 	$FoodCollection2.hide()
+	Sounds.play_small_select_sound()
 
 func _on_FoodBtnRight_pressed():
 	$FoodBtnLeft.show()
 	$FoodBtnRight.hide()
 	$FoodCollection1.hide()
 	$FoodCollection2.initialize()
+	Sounds.play_small_select_sound()

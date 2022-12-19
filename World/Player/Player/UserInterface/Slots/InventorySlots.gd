@@ -38,6 +38,7 @@ func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if find_parent("UserInterface").holding_item != null:
+				Sounds.play_put_down_item_sound()
 				if !slot.item:
 					left_click_empty_slot(slot)
 				else:
@@ -46,6 +47,7 @@ func slot_gui_input(event: InputEvent, slot):
 					else:
 						left_click_same_item(slot)
 			elif slot.item:
+				Sounds.play_pick_up_item_sound()
 				if get_parent().name == "Chest" or get_parent().name == "Tool cabinet":
 					left_click_not_holding_chest(slot)
 				else:
@@ -56,6 +58,7 @@ func slot_gui_input(event: InputEvent, slot):
 
 func right_click_slot(slot):
 	if slot.item.item_quantity > 1:
+		Sounds.play_pick_up_item_sound()
 		var new_qt = int(slot.item.item_quantity / 2)
 		PlayerData.add_item_quantity(slot, -int(slot.item.item_quantity / 2))
 		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))

@@ -45,6 +45,9 @@ func eat(item_name):
 
 
 func harvest_crop(item_name):
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/harvest.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
 	get_parent().state = get_parent().HARVESTING
 	var anim = "harvest_" + get_parent().direction.to_lower()
 	get_parent().holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + item_name + ".png")
@@ -55,6 +58,9 @@ func harvest_crop(item_name):
 
 
 func harvest_forage(item_name):
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/harvest.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
 	get_parent().state = get_parent().HARVESTING
 	var anim = "harvest_" + get_parent().direction.to_lower()
 	get_parent().holding_item.texture = load("res://Assets/Images/Forage/" + item_name + ".png")
@@ -84,6 +90,9 @@ func stand_up():
 
 func player_death():
 	if get_parent().state != get_parent().DYING:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/death.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		sound_effects.play()
 		get_parent().state = get_parent().DYING
 		get_node("../PoisonParticles").stop_poison_state()
 		get_node("../SpeedParticles").stop_speed_buff()
@@ -124,7 +133,7 @@ func fish():
 		get_parent().state = get_parent().FISHING
 		var fishing = Fishing.instance()
 		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-		get_parent().add_child(fishing)
+		get_parent().call_deferred("add_child", fishing)
 
 
 func sleep(sleeping_bag_direction, pos):

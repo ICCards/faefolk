@@ -164,14 +164,14 @@
       "ItemCategory": "Magic",
       "StackSize": 1,
       "Description": "Used to cast fire spells.",
-      "Ingredients": null,
+      "Ingredients": [["wood", 10]],
       "EnergyHealth": null
     },
     "wind staff": {
       "ItemCategory": "Magic",
       "StackSize": 1,
       "Description": "Used to cast wind spells.",
-      "Ingredients": null,
+      "Ingredients": [["wood", 10]],
       "EnergyHealth": null
     },
     "earth staff": {
@@ -1118,7 +1118,7 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Sets building point and building upkeep.",
-      "Ingredients": [["wood", 150]],
+      "Ingredients": [["wood", 75]],
       "EnergyHealth": null
   },
   
@@ -1189,14 +1189,14 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 1.",
-      "Ingredients": [["wood", 30]],
+      "Ingredients": [["wood", 25], ["stone", 10]],
       "EnergyHealth": null
   },
   "workbench #2": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 2.",
-      "Ingredients": [["wood",30],["stone",30]],
+      "Ingredients": [["wood",50],["stone",50]],
       "EnergyHealth": null
   },
   "workbench #3": {
@@ -1210,21 +1210,21 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 1.",
-      "Ingredients": [["stone", 10], ["iron ingot",10]],
+      "Ingredients": [["stone", 10], ["iron ingot",5]],
       "EnergyHealth": null
   },
   "grain mill #2": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 2.",
-      "Ingredients": [["stone", 20], ["iron ingot",20]],
+      "Ingredients": [["stone", 20], ["iron ingot",10]],
       "EnergyHealth": null
   },
   "grain mill #3": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 3.",
-      "Ingredients": [["stone", 40], ["iron ingot",40]],
+      "Ingredients": [["stone", 40], ["iron ingot",20]],
       "EnergyHealth": null
   },
   "stove #1": {
@@ -1307,7 +1307,7 @@
     "betta":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "Despite its beauty and small size, these freshwater fish are known as the Siamese fighting fish.",
+        "Description": "Also known as the Siamese fighting fish.",
         "Ingredients": null,
         "EnergyHealth": [10,10]
     },
@@ -1762,9 +1762,9 @@
     "bread":{
         "ItemCategory": "Food",
         "StackSize": 999,
-        "Description": "[description]",
+        "Description": "A quick, crunchy snack made from wheat flour.",
         "Ingredients": [["wheat flour", 5]],
-        "EnergyHealth": [10,10]
+        "EnergyHealth": [18,10]
     }
     
 }

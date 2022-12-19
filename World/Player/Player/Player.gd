@@ -7,6 +7,7 @@ onready var holding_item = $HoldingItem
 
 onready var actions = $Actions
 onready var user_interface = $Camera2D/UserInterface
+onready var sound_effects = $Sounds/SoundEffects
 
 var running = false
 var character
@@ -52,7 +53,7 @@ onready var _character = load("res://Global/Data/Characters.gd")
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	PlayerData.emit_signal("active_item_updated")
+	#PlayerData.emit_signal("active_item_updated")
 	PlayerData.connect("active_item_updated", self, "set_held_object")
 	Server.player_node = self
 	if is_building_world:

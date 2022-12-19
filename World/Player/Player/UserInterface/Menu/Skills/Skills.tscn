@@ -24,9 +24,9 @@ expand = true
 [node name="Title" type="Label" parent="."]
 margin_left = -107.0
 margin_top = 139.0
-margin_right = 35.0
-margin_bottom = 231.0
-rect_scale = Vector2( 0.65, 0.65 )
+margin_right = 48.0
+margin_bottom = 239.0
+rect_scale = Vector2( 0.6, 0.6 )
 theme = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
@@ -155,7 +155,11 @@ rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 2 )
 text = "?????"
 
-[node name="SwordBtn" type="Button" parent="."]
+[node name="Buttons" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="SwordBtn" type="Button" parent="Buttons"]
 margin_left = -290.0
 margin_top = 130.0
 margin_right = -236.0
@@ -164,7 +168,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="BowBtn" type="Button" parent="."]
+[node name="BowBtn" type="Button" parent="Buttons"]
 margin_left = -230.0
 margin_top = 130.0
 margin_right = -176.0
@@ -173,7 +177,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="WindBtn" type="Button" parent="."]
+[node name="WindBtn" type="Button" parent="Buttons"]
 margin_left = -170.0
 margin_top = 130.0
 margin_right = -116.0
@@ -182,7 +186,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="FireBtn" type="Button" parent="."]
+[node name="FireBtn" type="Button" parent="Buttons"]
 margin_left = -5.0
 margin_top = 130.0
 margin_right = 49.0
@@ -191,7 +195,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="EarthBtn" type="Button" parent="."]
+[node name="EarthBtn" type="Button" parent="Buttons"]
 margin_left = 55.0
 margin_top = 130.0
 margin_right = 109.0
@@ -200,7 +204,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="IceBtn" type="Button" parent="."]
+[node name="IceBtn" type="Button" parent="Buttons"]
 margin_left = 115.0
 margin_top = 130.0
 margin_right = 169.0
@@ -209,7 +213,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="ElectricBtn" type="Button" parent="."]
+[node name="ElectricBtn" type="Button" parent="Buttons"]
 margin_left = 175.0
 margin_top = 130.0
 margin_right = 229.0
@@ -218,7 +222,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="DarkMagicBtn" type="Button" parent="."]
+[node name="DarkMagicBtn" type="Button" parent="Buttons"]
 margin_left = 235.0
 margin_top = 130.0
 margin_right = 289.0
@@ -227,39 +231,11 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
-[node name="Icon1" type="TextureRect" parent="."]
-margin_left = -212.0
-margin_top = 220.0
-margin_right = -164.0
-margin_bottom = 268.0
-texture = ExtResource( 3 )
-expand = true
+[node name="SkillProgress" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
-[node name="Icon2" type="TextureRect" parent="."]
-margin_left = -212.0
-margin_top = 304.0
-margin_right = -164.0
-margin_bottom = 352.0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="Icon3" type="TextureRect" parent="."]
-margin_left = -212.0
-margin_top = 388.0
-margin_right = -164.0
-margin_bottom = 436.0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="Icon4" type="TextureRect" parent="."]
-margin_left = -212.0
-margin_top = 472.0
-margin_right = -164.0
-margin_bottom = 520.0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="BackPgBar" type="TextureProgress" parent="."]
+[node name="BackPgBar" type="TextureProgress" parent="SkillProgress"]
 margin_left = -269.0
 margin_top = 229.0
 margin_right = -257.0
@@ -268,7 +244,7 @@ texture_progress = ExtResource( 5 )
 fill_mode = 3
 nine_patch_stretch = true
 
-[node name="FrontPgBar" type="TextureProgress" parent="."]
+[node name="FrontPgBar" type="TextureProgress" parent="SkillProgress"]
 margin_left = -269.0
 margin_top = 229.0
 margin_right = -257.0
@@ -277,11 +253,69 @@ texture_progress = ExtResource( 4 )
 fill_mode = 3
 nine_patch_stretch = true
 
-[connection signal="pressed" from="SwordBtn" to="." method="_on_SwordBtn_pressed"]
-[connection signal="pressed" from="BowBtn" to="." method="_on_BowBtn_pressed"]
-[connection signal="pressed" from="WindBtn" to="." method="_on_WindBtn_pressed"]
-[connection signal="pressed" from="FireBtn" to="." method="_on_FireBtn_pressed"]
-[connection signal="pressed" from="EarthBtn" to="." method="_on_EarthBtn_pressed"]
-[connection signal="pressed" from="IceBtn" to="." method="_on_IceBtn_pressed"]
-[connection signal="pressed" from="ElectricBtn" to="." method="_on_ElectricBtn_pressed"]
-[connection signal="pressed" from="DarkMagicBtn" to="." method="_on_DarkMagicBtn_pressed"]
+[node name="ProgressLabel" type="Label" parent="SkillProgress"]
+margin_left = -278.0
+margin_top = 201.0
+margin_right = -178.0
+margin_bottom = 262.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "1000"
+align = 1
+
+[node name="MaxProgressLabel" type="Label" parent="SkillProgress"]
+margin_left = -278.0
+margin_top = 526.0
+margin_right = -178.0
+margin_bottom = 587.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "1000"
+align = 1
+
+[node name="Icons" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Icon1" type="TextureRect" parent="Icons"]
+margin_left = -212.0
+margin_top = 220.0
+margin_right = -164.0
+margin_bottom = 268.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Icon2" type="TextureRect" parent="Icons"]
+margin_left = -212.0
+margin_top = 304.0
+margin_right = -164.0
+margin_bottom = 352.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Icon3" type="TextureRect" parent="Icons"]
+margin_left = -212.0
+margin_top = 388.0
+margin_right = -164.0
+margin_bottom = 436.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Icon4" type="TextureRect" parent="Icons"]
+margin_left = -212.0
+margin_top = 472.0
+margin_right = -164.0
+margin_bottom = 520.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="Buttons/SwordBtn" to="." method="_on_SwordBtn_pressed"]
+[connection signal="pressed" from="Buttons/BowBtn" to="." method="_on_BowBtn_pressed"]
+[connection signal="pressed" from="Buttons/WindBtn" to="." method="_on_WindBtn_pressed"]
+[connection signal="pressed" from="Buttons/FireBtn" to="." method="_on_FireBtn_pressed"]
+[connection signal="pressed" from="Buttons/EarthBtn" to="." method="_on_EarthBtn_pressed"]
+[connection signal="pressed" from="Buttons/IceBtn" to="." method="_on_IceBtn_pressed"]
+[connection signal="pressed" from="Buttons/ElectricBtn" to="." method="_on_ElectricBtn_pressed"]
+[connection signal="pressed" from="Buttons/DarkMagicBtn" to="." method="_on_DarkMagicBtn_pressed"]

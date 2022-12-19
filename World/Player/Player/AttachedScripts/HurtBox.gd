@@ -56,11 +56,11 @@ func _on_HurtBox_area_entered(area):
 			elif area.tool_name == "speed potion I" or area.tool_name == "speed potion II" or area.tool_name == "speed potion III":
 				match area.tool_name:
 					"speed potion I":
-						get_node("../../").start_speed_buff(5)
+						get_node("../../SpeedParticles").start_speed_buff(5)
 					"speed potion II":
-						get_node("../../").start_speed_buff(15)
+						get_node("../../SpeedParticles").start_speed_buff(15)
 					"speed potion III":
-						get_node("../../").start_speed_buff(40)
+						get_node("../../SpeedParticles").start_speed_buff(40)
 				return
 			PlayerData.change_health(health_to_add)
 			InstancedScenes.player_hit_effect(health_to_add, get_node("../../").position)

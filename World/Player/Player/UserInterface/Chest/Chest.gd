@@ -1,6 +1,5 @@
 extends Control
 
-onready var locked_slots = $LockedSlots
 onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 

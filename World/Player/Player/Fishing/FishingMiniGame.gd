@@ -64,7 +64,7 @@ func start_game_timer():
 	$Tween.start()
 
 func _physics_process(delta):
-	if get_parent().mini_game_active:
+	if get_node("../../").mini_game_active:
 		if ($Clicker.pressed == true):
 			play_reel_sound_effects(true)
 			if hookVelocity > -maxVelocity:
@@ -99,7 +99,7 @@ func _physics_process(delta):
 		#var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
 		#var g = range_lerp($Progress.value/10, 10, 50, 0, 0.8)
 		#$Progress.modulate = Color(r, g, 0)
-		get_parent().set_moving_fish_line_position($Progress.value)
+		get_node("../../").set_moving_fish_line_position($Progress.value)
 	else:
 		sound_effects.playing = false
 
@@ -118,8 +118,8 @@ func play_reel_sound_effects(is_being_pressed):
 func caught_fish():
 	$Tween.stop_all()
 	hide()
-	get_parent().caught_fish(get_node("Fish").fish_data[0])
-	get_parent().mini_game_active = false
+	get_node("../../").caught_fish(get_node("Fish").fish_data[0])
+	get_node("../../").mini_game_active = false
 	get_node("Fish").stop_fish_movement()
 	
 func lost_fish():
@@ -127,10 +127,10 @@ func lost_fish():
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	sound_effects.play()
 	$Tween.stop_all()
-	get_parent().mini_game_active = false
+	get_node("../../").mini_game_active = false
 	$AnimationPlayer.play("fade")
 	get_node("Fish").stop_fish_movement()
-	get_parent().lost_fish()
+	get_node("../../").lost_fish()
 
 func _on_Clicker_button_down():
 	hookVelocity -= .5

@@ -53,7 +53,6 @@ func set_dimensions():
 			pass
 		else:
 			PlayerData.player_data["chests"][id] = {}
-		print(PlayerData.player_data["chests"])
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90

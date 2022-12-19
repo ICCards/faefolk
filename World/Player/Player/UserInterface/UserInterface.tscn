@@ -102,8 +102,12 @@ margin_bottom = 680.0
 mouse_filter = 2
 color = Color( 1, 0, 0, 0 )
 
-[node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
+[node name="Combat hotbar" parent="." instance=ExtResource( 10 )]
 visible = false
+
+[node name="Hotbar" parent="." instance=ExtResource( 17 )]
+
+[node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
 margin_left = 209.0
 margin_top = 456.0
 margin_right = -815.0
@@ -111,11 +115,6 @@ margin_bottom = -144.0
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
 visible = false
-
-[node name="Combat hotbar" parent="." instance=ExtResource( 10 )]
-visible = false
-
-[node name="Hotbar" parent="." instance=ExtResource( 17 )]
 
 [node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
 visible = false

@@ -95,6 +95,7 @@ func initialize_hotbar():
 			slots[i].initialize_item(PlayerData.player_data["hotbar"][str(i)][0], PlayerData.player_data["hotbar"][str(i)][1], PlayerData.player_data["hotbar"][str(i)][2])
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		slots[PlayerData.active_item_slot].item.set_init_hovered()
+	PlayerData.emit_signal("active_item_updated")
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:

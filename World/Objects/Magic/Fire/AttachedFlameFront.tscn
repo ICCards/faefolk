@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Images/Magic/fire/FlameFront.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/Magic/Fire/AttachedFlameFront.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -52,6 +53,13 @@ modulate = Color( 1.25, 1.25, 1.25, 1 )
 position = Vector2( 0, -42 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 10 )
-frame = 8
+frame = 6
 playing = true
 script = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, 10 )
+texture = ExtResource( 3 )
+texture_scale = 0.5
+energy = 1.01
+mode = 2
