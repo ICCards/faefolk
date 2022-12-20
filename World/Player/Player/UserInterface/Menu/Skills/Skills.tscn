@@ -1,0 +1,321 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Images/Inventory UI/skill menus/wind.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Images/Spell icons/sword/1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Spell icons/sword/front.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Spell icons/sword/back.png" type="Texture" id=5]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Skills/Skills.gd" type="Script" id=13]
+
+[node name="Skills" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 13 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_left = -377.0
+margin_top = 121.0
+margin_right = 316.0
+margin_bottom = 562.0
+mouse_filter = 0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Title" type="Label" parent="."]
+margin_left = -107.0
+margin_top = 139.0
+margin_right = 48.0
+margin_bottom = 239.0
+rect_scale = Vector2( 0.6, 0.6 )
+theme = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Wind"
+align = 1
+valign = 1
+
+[node name="AttackTitles" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Attack1" type="Label" parent="AttackTitles"]
+margin_left = -144.0
+margin_top = 222.0
+margin_right = 446.0
+margin_bottom = 283.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "Sword swing"
+
+[node name="Attack2" type="Label" parent="AttackTitles"]
+margin_left = -144.0
+margin_top = 306.0
+margin_right = 446.0
+margin_bottom = 367.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="Attack3" type="Label" parent="AttackTitles"]
+margin_left = -144.0
+margin_top = 390.0
+margin_right = 446.0
+margin_bottom = 451.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="Attack4" type="Label" parent="AttackTitles"]
+margin_left = -144.0
+margin_top = 474.0
+margin_right = 446.0
+margin_bottom = 535.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="AttackDescriptions" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Attack1" type="Label" parent="AttackDescriptions"]
+margin_left = -144.0
+margin_top = 259.0
+margin_right = 446.0
+margin_bottom = 320.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "Sword swing"
+
+[node name="Attack2" type="Label" parent="AttackDescriptions"]
+margin_left = -144.0
+margin_top = 343.0
+margin_right = 446.0
+margin_bottom = 404.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="Attack3" type="Label" parent="AttackDescriptions"]
+margin_left = -144.0
+margin_top = 427.0
+margin_right = 446.0
+margin_bottom = 488.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="Attack4" type="Label" parent="AttackDescriptions"]
+margin_left = -144.0
+margin_top = 511.0
+margin_right = 446.0
+margin_bottom = 572.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="AttackCosts" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Attack1" type="Label" parent="AttackCosts"]
+margin_left = 48.0
+margin_top = 222.0
+margin_right = 638.0
+margin_bottom = 283.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "Cost: 1 energy"
+
+[node name="Attack2" type="Label" parent="AttackCosts"]
+margin_left = 48.0
+margin_top = 306.0
+margin_right = 638.0
+margin_bottom = 367.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="Attack3" type="Label" parent="AttackCosts"]
+margin_left = 48.0
+margin_top = 390.0
+margin_right = 638.0
+margin_bottom = 451.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="Attack4" type="Label" parent="AttackCosts"]
+margin_left = 48.0
+margin_top = 474.0
+margin_right = 638.0
+margin_bottom = 535.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "?????"
+
+[node name="Buttons" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="SwordBtn" type="Button" parent="Buttons"]
+margin_left = -290.0
+margin_top = 130.0
+margin_right = -236.0
+margin_bottom = 184.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="BowBtn" type="Button" parent="Buttons"]
+margin_left = -230.0
+margin_top = 130.0
+margin_right = -176.0
+margin_bottom = 184.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="WindBtn" type="Button" parent="Buttons"]
+margin_left = -170.0
+margin_top = 130.0
+margin_right = -116.0
+margin_bottom = 184.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="FireBtn" type="Button" parent="Buttons"]
+margin_left = -5.0
+margin_top = 130.0
+margin_right = 49.0
+margin_bottom = 184.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="EarthBtn" type="Button" parent="Buttons"]
+margin_left = 55.0
+margin_top = 130.0
+margin_right = 109.0
+margin_bottom = 184.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="IceBtn" type="Button" parent="Buttons"]
+margin_left = 115.0
+margin_top = 130.0
+margin_right = 169.0
+margin_bottom = 184.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="ElectricBtn" type="Button" parent="Buttons"]
+margin_left = 175.0
+margin_top = 130.0
+margin_right = 229.0
+margin_bottom = 184.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="DarkMagicBtn" type="Button" parent="Buttons"]
+margin_left = 235.0
+margin_top = 130.0
+margin_right = 289.0
+margin_bottom = 184.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="SkillProgress" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="BackPgBar" type="TextureProgress" parent="SkillProgress"]
+margin_left = -269.0
+margin_top = 229.0
+margin_right = -257.0
+margin_bottom = 505.0
+texture_progress = ExtResource( 5 )
+fill_mode = 3
+nine_patch_stretch = true
+
+[node name="FrontPgBar" type="TextureProgress" parent="SkillProgress"]
+margin_left = -269.0
+margin_top = 229.0
+margin_right = -257.0
+margin_bottom = 505.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+nine_patch_stretch = true
+
+[node name="ProgressLabel" type="Label" parent="SkillProgress"]
+margin_left = -278.0
+margin_top = 201.0
+margin_right = -178.0
+margin_bottom = 262.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "1000"
+align = 1
+
+[node name="MaxProgressLabel" type="Label" parent="SkillProgress"]
+margin_left = -278.0
+margin_top = 526.0
+margin_right = -178.0
+margin_bottom = 587.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 2 )
+text = "1000"
+align = 1
+
+[node name="Icons" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Icon1" type="TextureRect" parent="Icons"]
+margin_left = -212.0
+margin_top = 220.0
+margin_right = -164.0
+margin_bottom = 268.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Icon2" type="TextureRect" parent="Icons"]
+margin_left = -212.0
+margin_top = 304.0
+margin_right = -164.0
+margin_bottom = 352.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Icon3" type="TextureRect" parent="Icons"]
+margin_left = -212.0
+margin_top = 388.0
+margin_right = -164.0
+margin_bottom = 436.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Icon4" type="TextureRect" parent="Icons"]
+margin_left = -212.0
+margin_top = 472.0
+margin_right = -164.0
+margin_bottom = 520.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="Buttons/SwordBtn" to="." method="_on_SwordBtn_pressed"]
+[connection signal="pressed" from="Buttons/BowBtn" to="." method="_on_BowBtn_pressed"]
+[connection signal="pressed" from="Buttons/WindBtn" to="." method="_on_WindBtn_pressed"]
+[connection signal="pressed" from="Buttons/FireBtn" to="." method="_on_FireBtn_pressed"]
+[connection signal="pressed" from="Buttons/EarthBtn" to="." method="_on_EarthBtn_pressed"]
+[connection signal="pressed" from="Buttons/IceBtn" to="." method="_on_IceBtn_pressed"]
+[connection signal="pressed" from="Buttons/ElectricBtn" to="." method="_on_ElectricBtn_pressed"]
+[connection signal="pressed" from="Buttons/DarkMagicBtn" to="." method="_on_DarkMagicBtn_pressed"]

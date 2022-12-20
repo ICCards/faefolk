@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/glass break.mp3-8d91a1d68ae32f4a4379f86cb21a3847.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Potion/glass break.mp3"
+dest_files=[ "res://.import/glass break.mp3-8d91a1d68ae32f4a4379f86cb21a3847.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

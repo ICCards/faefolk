@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://World/Player/Player/UserInterface/Stove/item_button.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/inventory_icons/Food/baked catfish.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Themes/HideCollection.tres" type="Material" id=3]
+
+[node name="item_button" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1008.0
+margin_bottom = -584.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 16, 16 )
+script = ExtResource( 1 )
+
+[node name="button" type="TextureButton" parent="."]
+material = ExtResource( 3 )
+margin_right = 16.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 2 )
+
+[connection signal="mouse_entered" from="button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="button" to="." method="_on_button_pressed"]

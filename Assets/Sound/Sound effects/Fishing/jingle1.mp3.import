@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/jingle1.mp3-302cfe6690233c7c548e42246f505a2e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Fishing/jingle1.mp3"
+dest_files=[ "res://.import/jingle1.mp3-302cfe6690233c7c548e42246f505a2e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

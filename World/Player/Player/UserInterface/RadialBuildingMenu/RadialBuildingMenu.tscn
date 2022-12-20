@@ -1,0 +1,151 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/radial_menu_item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/ceiling.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/wall.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/User interface/radial menus/middle-circle.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/stairs.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/User interface/radial menus/icons/foundation.png" type="Texture" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.133333, 0.133333, 0.137255, 0.568627 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "set active"
+tracks/0/type = "value"
+tracks/0/path = NodePath("0/button:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "set disabled"
+tracks/0/type = "value"
+tracks/0/path = NodePath("0/button:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "zoom"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.329877, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.6 ), Vector2( 0.9, 0.9 ) ]
+}
+
+[node name="RadialBuildingMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
+[node name="Circle" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -24.0
+margin_right = 1.0
+margin_bottom = -24.0
+mouse_filter = 2
+
+[node name="0" parent="Circle" instance=ExtResource( 1 )]
+
+[node name="1" parent="Circle" instance=ExtResource( 1 )]
+rect_rotation = 90.0
+
+[node name="2" parent="Circle" instance=ExtResource( 1 )]
+rect_rotation = 180.0
+
+[node name="3" parent="Circle" instance=ExtResource( 1 )]
+rect_rotation = 270.0
+
+[node name="Middle-circle" type="TextureRect" parent="Circle"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -224.0
+margin_right = 224.0
+margin_bottom = 224.0
+mouse_filter = 2
+texture = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Circle"]
+"anims/set active" = SubResource( 3 )
+"anims/set disabled" = SubResource( 4 )
+anims/zoom = SubResource( 2 )
+
+[node name="Icons" type="Control" parent="Circle"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="Wall" type="Sprite" parent="Circle/Icons"]
+position = Vector2( -1, -132 )
+texture = ExtResource( 5 )
+
+[node name="Foundation" type="Sprite" parent="Circle/Icons"]
+position = Vector2( 132, 0 )
+texture = ExtResource( 8 )
+
+[node name="Stairs" type="Sprite" parent="Circle/Icons"]
+position = Vector2( 0, 147 )
+texture = ExtResource( 7 )
+
+[node name="Ceiling" type="Sprite" parent="Circle/Icons"]
+position = Vector2( -143, 1 )
+texture = ExtResource( 4 )
+
+[node name="Title" type="Label" parent="."]
+margin_left = 865.0
+margin_top = 485.0
+margin_right = 1345.0
+margin_bottom = 546.0
+rect_scale = Vector2( 0.4, 0.4 )
+theme = ExtResource( 3 )
+text = "Wall:"
+align = 1
+
+[node name="Resources" type="Label" parent="."]
+margin_left = 863.0
+margin_top = 518.0
+margin_right = 1516.0
+margin_bottom = 579.0
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 3 )
+text = "1 x Wood(total wood)"
+align = 1

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/eq.mp3-3c0b79fd2f0b704904041966c2f5f0c4.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Earth/eq.mp3"
+dest_files=[ "res://.import/eq.mp3-3c0b79fd2f0b704904041966c2f5f0c4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

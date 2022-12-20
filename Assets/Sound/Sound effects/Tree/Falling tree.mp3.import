@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Falling tree.mp3-4d7974f324aa8602c613924378be7e89.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Tree/Falling tree.mp3"
+dest_files=[ "res://.import/Falling tree.mp3-4d7974f324aa8602c613924378be7e89.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

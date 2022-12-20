@@ -1,0 +1,1770 @@
+{
+    "cloth": {
+        "ItemCategory": "Resource",
+        "StackSize": 999,
+        "Description": "A soft material harvested from animal fur.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "slime orb": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A mysterious ball of slime.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "bone": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A bone from a skeleton.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "bat wing": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A delicate material harvested from a bat.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "silk": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A thin string harvested from a spider.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "health potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly restores health by 4.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "health potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly restores health by 12.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "health potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly restores health by 30.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "regeneration potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Restores 10% of depleted health over time.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "regeneration potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Restores 25% of depleted health over time.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "regeneration potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Restores 50% of depleted health over time.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "destruction potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly diminishes 10 health.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "destruction potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly diminishes 25 health.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "destruction potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Instantly diminishes 50 health.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "poison potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Diminishes 8% of maximum health over time and slows movement speed.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "poison potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Diminishes 20% of maximum health over time and slows movement speed.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "poison potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Diminishes 32% of maximum health over time and slows movement speed.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "speed potion I": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Increases movement speed for 5 seconds.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "speed potion II": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Increases movement speed for 15 seconds.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "speed potion III": {
+      "ItemCategory": "Potion",
+      "StackSize": 999,
+      "Description": "Increases movement speed for 40 seconds.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "dark magic staff": {
+      "ItemCategory": "Magic",
+      "StackSize": 1,
+      "Description": "Used to cast dark magic spells.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "electric staff": {
+      "ItemCategory": "Magic",
+      "StackSize": 1,
+      "Description": "Used to cast electric spells.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "ice staff": {
+      "ItemCategory": "Magic",
+      "StackSize": 1,
+      "Description": "Used to cast ice spells.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "fire staff": {
+      "ItemCategory": "Magic",
+      "StackSize": 1,
+      "Description": "Used to cast fire spells.",
+      "Ingredients": [["wood", 10]],
+      "EnergyHealth": null
+    },
+    "wind staff": {
+      "ItemCategory": "Magic",
+      "StackSize": 1,
+      "Description": "Used to cast wind spells.",
+      "Ingredients": [["wood", 10]],
+      "EnergyHealth": null
+    },
+    "earth staff": {
+      "ItemCategory": "Magic",
+      "StackSize": 1,
+      "Description": "Used to cast earth spells.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "health staff": {
+      "ItemCategory": "Magic",
+      "StackSize": 1,
+      "Description": "Used to cast earth spells.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "pink clam": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Has a small chance of containing a pearl.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "red clam": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Has a small chance of containing a pearl.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "blue clam": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Has a small chance of containing a pearl.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "white pearl": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A rare treasure from the sea.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "blue pearl": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A rare treasure from the sea.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "pink pearl": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A rare treasure from the sea.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "starfish": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A washed up sea specimen.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "baby starfish": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A washed up sea specimen.",
+      "Ingredients": null,
+      "EnergyHealth": null
+      },
+    "blue flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, blue flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "green flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, green flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "purple flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, purple flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "red flower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, red flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "dark green grass": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Tall grass harvested in the Winter.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "green grass": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Tall grass harvested in the Spring.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "red grass": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Tall grass harvested in the Fall.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "yellow grass": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "Tall grass harvested in the Summer.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+  "wood": {
+    "ItemCategory": "Resource",
+    "StackSize": 999,
+    "Description": "Wood harvested from trees.",
+    "Ingredients": null,
+    "EnergyHealth": null
+  },
+  "stone": {
+    "ItemCategory": "Resource",
+    "StackSize" : 999,
+    "Description": "Stone harvested from ore.",
+    "Ingredients": null,
+    "EnergyHealth": null
+  },
+  "rope": {
+    "ItemCategory": "Resource",
+    "StackSize" : 999,
+    "Description": "Has many applications.",
+    "Ingredients": null,
+    "EnergyHealth": null
+  },
+  "iron ore": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "Can be smelted into iron ingot.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "gold ore": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "Can be smelted into gold ingot.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "bronze ore": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "Can be smelted into gold ingot.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "bronze ingot": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "A bar of pure broze.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "iron ingot": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "A bar of pure iron.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "gold ingot": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "A bar of pure gold.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "coal": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "A combustable rock used for smelting.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "ruby": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "[gem description]",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "emerald": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "[gem description]",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "aquamarine": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "[gem description]",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "sapphire": {
+      "ItemCategory": "Resource",
+      "StackSize" : 999,
+      "Description": "[gem description]",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "wood axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 1 axe for harvesting wood.",
+      "Ingredients": [["wood", 14]],
+      "EnergyHealth": null
+  },
+  "wood pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 1 pickaxe for harvesting stone.",
+      "Ingredients": [["wood", 14]],
+      "EnergyHealth": null
+  },
+  "wood sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 1 sword for melee attacks.",
+      "Ingredients": [["wood", 12]],
+      "EnergyHealth": null
+  },
+  "wood hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 1 hoe for tilling soil.",
+      "Ingredients": [["wood", 10]],
+      "EnergyHealth": null
+  },
+  "stone axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 axe for harvesting wood.",
+      "Ingredients": [["stone", 10],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "stone pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 pickaxe for harvesting stone.",
+      "Ingredients": [["stone", 10],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "stone sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 sword for melee attacks.",
+      "Ingredients": [["stone", 8],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "stone hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 hoe for tilling soil.",
+      "Ingredients": [["stone", 6],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "bronze axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 axe for harvesting wood.",
+      "Ingredients": [["bronze ingot", 10],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "bronze pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 pickaxe for harvesting stone.",
+      "Ingredients": [["bronze ingot", 10],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "bronze sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 sword for melee attacks.",
+      "Ingredients": [["bronze ingot", 8],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "bronze hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 hoe for tilling soil.",
+      "Ingredients": [["bronze ingot", 6],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "iron axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 4 axe for harvesting wood.",
+      "Ingredients": [["iron ingot", 10],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "iron pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 4 pickaxe for harvesting stone.",
+      "Ingredients": [["iron ingot", 10],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "iron sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 4 sword for melee attacks.",
+      "Ingredients": [["iron ingot", 8],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "iron hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 4 hoe for tilling soil.",
+      "Ingredients": [["iron ingot", 6],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "gold axe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 5 axe for harvesting wood.",
+      "Ingredients": [["gold ingot", 10],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "gold pickaxe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 5 pickaxe for harvesting stone.",
+      "Ingredients": [["gold ingot", 10],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "gold sword": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 5 sword for melee attacks.",
+      "Ingredients": [["gold ingot", 8],["wood", 4]],
+      "EnergyHealth": null
+  },
+  "gold hoe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 5 hoe for tilling soil.",
+      "Ingredients": [["gold ingot", 6],["wood", 4]],
+      "EnergyHealth": null
+  },
+  
+  "stone watering can" : {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 1 watering can for watering tilled soil.",
+      "Ingredients": [["stone", 30]],
+      "EnergyHealth": null
+  },
+  "bronze watering can" : {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 2 watering can for watering tilled soil.",
+      "Ingredients": [["bronze ingot", 30]],
+      "EnergyHealth": null
+  },
+  "gold watering can" : {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Level 3 watering can for watering tilled soil.",
+      "Ingredients": [["gold ingot", 30]],
+      "EnergyHealth": null
+  },
+  "scythe": {
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Used to cut grass and flowers.",
+      "Ingredients": [["wood", 10],["iron ingot", 10]],
+      "EnergyHealth": null
+  },
+  "wood fishing rod":{
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Used to catch fish. Tier 1.",
+      "Ingredients": [["wood", 10],["silk", 2]],
+      "EnergyHealth": null
+  },
+  "stone fishing rod":{
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Used to catch fish. Tier 2.",
+      "Ingredients": [["stone", 10],["silk", 2]],
+      "EnergyHealth": null
+  },
+  "gold fishing rod":{
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Used to catch fish. Tier 3",
+      "Ingredients": [["gold ingot", 10],["silk", 2]],
+      "EnergyHealth": null
+  },
+  "bow":{
+      "ItemCategory": "Tool",
+      "StackSize": 1,
+      "Description": "Requires arrows for ammo.",
+      "Ingredients": [["wood", 10],["silk", 1]],
+      "EnergyHealth": null
+  },
+  "arrow": {
+      "ItemCategory": "Tool",
+      "StackSize": 999,
+      "Description": "Ammunition for the bow.",
+      "Ingredients": [["wood", 2],["stone", 2]],
+      "EnergyHealth": null
+  },
+  
+  
+  "blueprint": {
+      "ItemCategory": "Construction",
+      "StackSize": 1,
+      "Description": "Used to create building structures.",
+      "Ingredients": [["wood", 10]],
+      "EnergyHealth": null
+  },
+  "hammer": {
+      "ItemCategory": "Construction",
+      "StackSize": 1,
+      "Description": "Used to upgrade building structures.",
+      "Ingredients": [["wood", 10], ["stone", 10]],
+      "EnergyHealth": null
+  },
+  
+  "raw wing": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A popular protein from a duck.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "raw filet": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A lean protein from a bunny.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "cooked wing": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A quick and tasty snack.",
+      "Ingredients": [["raw wing", 1]],
+      "EnergyHealth": [10,10]
+  },
+  "cooked filet": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "Provides long-lasting energy.",
+      "Ingredients": [["raw filet", 1]],
+      "EnergyHealth": [10,10]
+  },
+  "wheat flour": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "A common cooking ingredient for breads and cakes.",
+      "Ingredients": null,
+      "EnergyHealth": [0,0]
+  },
+  "sugar": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "Adds sweetness to cakes and pastries.",
+      "Ingredients": null,
+      "EnergyHealth": [0,0]
+  },
+  "corn flour": {
+      "ItemCategory": "Food",
+      "StackSize": 999,
+      "Description": "[description]",
+      "Ingredients": null,
+      "EnergyHealth": [0,0]
+  },
+  "raw egg": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A cooking material dropped from a duck.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "mushroom": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A fungus found in the caves.",
+      "Ingredients": null,
+      "EnergyHealth": [0,0]
+  },
+  
+  
+  "wheat": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Can be processed into a great flour for breads and cakes.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "potato": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A widely cultivated tuber.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "yellow onion": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Has a distinctive strong and complex flavor.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "garlic": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Adds a wonderful zestiness to dishes. High quality garlic can be pretty spicy.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "radish": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A crisp and refreshing root vegetable with hints of pepper when eaten raw.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "carrot": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A spring tuber with an earthy taste and is full of nutrients.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "cauliflower": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Valuable, but slow-growing. Despite its pale color, the florets are packed with nutrients.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "cabbage": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Often used in salads and coleslaws.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "yellow pepper": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Mildly sweet and spicy.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "red pepper": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Very sweet with a spicy aftertaste.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "green pepper": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A sweet vegetable with a little kick.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "strawberry": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A sweet, juicy favorite with an appealing red color.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "blueberry": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A popular and tasty berry reported to have many health benefits.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "grape": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A sweet cluster of fruit.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "green bean": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A juicy little bean with a cool, crisp snap.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "zucchini": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A summer squash packed with nutrients.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "honeydew melon": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A cool, sweet summer treat.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "corn": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "One of the most popular grains with many culinary uses.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "jalapeno": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Fiery hot with a hint of sweetness.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "tomato": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "Rich, red and juicy, the Tomato has a wide variety of culinary uses.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "sugar cane": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "When processed into sugar, it adds a sweetness to baked goods.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  "asparagus": {
+      "ItemCategory": "Crop",
+      "StackSize": 999,
+      "Description": "A small and skinny vegetable packed with nutrients.",
+      "Ingredients": null,
+      "EnergyHealth": [10,10]
+  },
+  
+  
+  "wheat seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring, Summer or Fall. Takes 4 days to mature.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "potato seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring, Summer or Fall. Takes 6 days to mature and produces one or two potatos on harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "yellow onion seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Fall. Takes 4 days to mature.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "garlic seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring. Takes 8 days to mature.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "radish seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Summer. Takes 6 days to mature.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "carrot seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring. Takes 4 days to mature.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "cauliflower seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring. Takes 12 days to mature.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "cabbage seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Fall. Takes 12 days to mature.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "yellow pepper seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring. Takes 6 days to mature and has a chance of producing multiple at harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "red pepper seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Summer. Takes 6 days to mature and has a chance of producing multiple at harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "green pepper seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Fall. Takes 6 days to mature and has a chance of producing multiple at harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "strawberry seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring. Takes 8 days to mature and continues to grow after harvest. Yields 2 strawberries.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "blueberry seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Summer. Takes 13 days to mature and continues to grow after harvest. Yields 2 to 4 blueberries.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "grape seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Fall. Takes 10 days to mature and continues to grow after harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "green bean seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring. Takes 10 days to mature and continues to grow after harvest. Yields 1 to 3 green beans.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "zucchini seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Spring. Takes 12 days to mature and continues to grow after harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "honeydew melon seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Summer. Takes 10 days to mature and continues to grow after harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "corn seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Summer or Fall. Takes 14 days to mature and continues to grow after harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "jalapeno seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Fall. Takes 8 days to mature and continues to grow after harvest. Has a chance to yield multiple jalapenos at harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "tomato seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "Plant these in the Summer. Takes 11 days to mature and continues to grow after harvest. Has a chance to yield 1 or 2 tomatoes at harvest.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "sugar cane seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "need to add",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "asparagus seeds": {
+      "ItemCategory": "Seed",
+      "StackSize": 999,
+      "Description": "need to add",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  
+  "well" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Provides a place for you to refill your watering can.",
+      "Ingredients": [["wood", 20], ["stone", 50]],
+      "EnergyHealth": null
+  },
+  "chair" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "stool" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "large rug" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "medium rug" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "small rug" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "couch" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 10]],
+      "EnergyHealth": null
+  },
+  "armchair" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 5]],
+      "EnergyHealth": null
+  },
+  "table" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "round table" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "bed" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed and used to set respawn point.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "dresser" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Can be placed as decoration.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "wood door" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Entry point for bases with low durability.",
+      "Ingredients": [["wood", 20]],
+      "EnergyHealth": null
+  },
+  "metal door" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Entry point for bases with medium durability.",
+      "Ingredients": [["iron ingot", 20]],
+      "EnergyHealth": null
+  },
+  "armored door" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Entry point for bases with high durability.",
+      "Ingredients": [["iron ingot", 40]],
+      "EnergyHealth": null
+  },
+  "furnace" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Turns ore and coal into metal bars.",
+      "Ingredients": [["wood", 10], ["stone", 40]],
+      "EnergyHealth": null
+  },
+  "display table" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "A table for decoration.",
+      "Ingredients": [["wood", 2]],
+      "EnergyHealth": null
+  },
+  "tool cabinet" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Sets building point and building upkeep.",
+      "Ingredients": [["wood", 75]],
+      "EnergyHealth": null
+  },
+  
+  "torch" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to generate modest light.",
+      "Ingredients": [["wood", 1], ["stone", 1]],
+      "EnergyHealth": null
+  },
+  "campfire" : {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to generate moderate light.",
+      "Ingredients": [["wood", 4],["stone", 4]],
+      "EnergyHealth": null
+  },
+  "wood fence": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Wood fence for decoration.",
+      "Ingredients": [["wood", 2]],
+      "EnergyHealth": null
+  },
+  "wood gate": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Wood gate for decoration.",
+      "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "wood barrel": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Wood barrel for decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "wood box": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Wood box for decoration.",
+      "Ingredients": [["wood", 4]],
+      "EnergyHealth": null
+  },
+  "wood chest": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Wood chest for storage.",
+      "Ingredients": [["wood", 10],["stone", 2]],
+      "EnergyHealth": null
+  },
+  "stone chest": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Stone chest for storage.",
+      "Ingredients": [["wood", 2],["stone", 10]],
+      "EnergyHealth": null
+  },
+  "house": {
+      "ItemCategory": "Placable object",
+      "StackSize": 1,
+      "Description": "Large placable shelter with high durability.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "workbench #1": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to craft tools. Level 1.",
+      "Ingredients": [["wood", 25], ["stone", 10]],
+      "EnergyHealth": null
+  },
+  "workbench #2": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to craft tools. Level 2.",
+      "Ingredients": [["wood",50],["stone",50]],
+      "EnergyHealth": null
+  },
+  "workbench #3": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to craft tools. Level 3.",
+      "Ingredients": [["wood",100],["stone",100]],
+      "EnergyHealth": null
+  },
+  "grain mill #1": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to process grains for cooking recipes. Level 1.",
+      "Ingredients": [["stone", 10], ["iron ingot",5]],
+      "EnergyHealth": null
+  },
+  "grain mill #2": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to process grains for cooking recipes. Level 2.",
+      "Ingredients": [["stone", 20], ["iron ingot",10]],
+      "EnergyHealth": null
+  },
+  "grain mill #3": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to process grains for cooking recipes. Level 3.",
+      "Ingredients": [["stone", 40], ["iron ingot",20]],
+      "EnergyHealth": null
+  },
+  "stove #1": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to cook recipes. Level 1.",
+      "Ingredients": [["stone", 100]],
+      "EnergyHealth": null
+  },
+  "stove #2": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to cook recipes. Level 2.",
+      "Ingredients": [["stone", 200], ["iron ingot", 10]],
+      "EnergyHealth": null
+  },
+  "stove #3": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to cook recipes. Level 3.",
+      "Ingredients": [["stone", 500], ["iron ingot", 20]],
+      "EnergyHealth": null
+  },
+  "tent": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Small placable shelter with low durability.",
+      "Ingredients": [["wood", 20],["stone", 10]],
+      "EnergyHealth": null
+  },
+    "sleeping bag": {
+        "ItemCategory": "Placable object",
+        "StackSize": 999,
+        "Description": "Can be placed and used to set respawn point.",
+        "Ingredients": [["wood", 10],["stone", 2]],
+        "EnergyHealth": null
+    },
+    "eel":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A marine, snakelike fish.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "clownfish":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "An ocean fish with a bright orange color.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "halibut":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A large, flat fish with delicious meat.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "anchovy":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A common fish at the bottom of the food chain.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "cisco":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A medium sized fish found in the lakes.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "goldfish":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A rare, cave fish covered in gold.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "betta":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "Also known as the Siamese fighting fish.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "siberian whitefish":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A freshwater fish that hunts during the night.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "red salmon":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A freshwater fish with a bright, red body and black head.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "catfish":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A freshwater fish with whiskers.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "koi":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A unique, freshwater fish that is kept for decoration purposes.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "purple salmon":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A popular cave fish with a maroon color.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "lingcod":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "An ugly, cave fish with a dark brown color and blue meat.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "tilapia":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A common, freshwater fish with a mild flavor.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "albacore":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A large, seawater fish similar to tuna.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "purple carp":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A cave fish with a dark, purple color and strong fins.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "dorado":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A freshwater, gamefish with blue and gold colors.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "blowfish":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A small fish that inflates in size when challenged.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "angler":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A rare fish that uses a bioluminescent dangler to attack its prey.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "seaweed":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A salty snack used in cooking.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "octopus":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "An extraordinary, aquatic creature with a very large brain.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "shrimp":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A small, scavenger widely prized for its meat.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "crab":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A crustacean with dangerous pincers and delicious meat.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "nelma":{
+        "ItemCategory": "Fish",
+        "StackSize": 999,
+        "Description": "A large, freshwater fish that is considered a delicacy in some cultures.",
+        "Ingredients": null,
+        "EnergyHealth": [10,10]
+    },
+    "calamari with tomatoes":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["octopus", 1],["tomato", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "spicy eel":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["eel", 1],["red pepper", 4],["jalapeno", 2]],
+        "EnergyHealth": [10,10]
+    },
+    "mushroom soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["mushroom", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "sashimi":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["purple salmon", 2]],
+        "EnergyHealth": [10,10]
+    },
+    "filet soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["cooked filet", 1],["carrot", 6],["garlic", 2]],
+        "EnergyHealth": [10,10]
+    },
+    "spaghetti":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["wheat flour", 4],["tomato", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "asparagus omelette":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["raw egg", 2],["asparagus", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "wings with corn":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["cooked wing", 4],["corn", 6]],
+        "EnergyHealth": [10,10]
+    },
+    "yellow onion soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["yellow onion", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "blueberry pie":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["blueberry", 10],["sugar", 4], ["corn flour", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "sauteed cabbage with garlic":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["cabbage", 2],["garlic", 1]],
+        "EnergyHealth": [10,10]
+    },
+    "cooked green beans":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["green bean", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "cauliflower soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["cauliflower", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "mini grape tarts":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["grape", 2],["corn flour", 4],["sugar", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "honeydew melon with sugar":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["honeydew melon", 2],["sugar", 2]],
+        "EnergyHealth": [10,10]
+    },
+    "radish soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["radish", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "strawberry tart":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["strawberry", 6],["corn flour", 6],["sugar", 8]],
+        "EnergyHealth": [10,10]
+    },
+    "sugar cane kheer":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["sugar cane", 4],["grape", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "pepper and asparagus stir fry":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["yellow pepper", 6],["asparagus", 6]],
+        "EnergyHealth": [10,10]
+    },
+    "baked zucchini":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["zucchini", 4],["garlic", 2]],
+        "EnergyHealth": [10,10]
+    },
+    "scrambled eggs":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "Fluffy eggs served with a pinch of salt.",
+        "Ingredients": [["raw egg", 5]],
+        "EnergyHealth": [16,12]
+    },
+    "baked dorado":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["dorado", 1]],
+        "EnergyHealth": [10,10]
+    },
+    "tomato sandwich":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["tomato", 2],["bread", 2]],
+        "EnergyHealth": [10,10]
+    },
+    "vegetable soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["corn", 2],["carrot", 2],["cabbage", 2]],
+        "EnergyHealth": [10,10]
+    },
+    "crab cakes":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["crab", 5],["bread", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "seaweed salad":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["seaweed", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "spicy shrimps":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["shrimp", 8], ["garlic", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "blowfish tails":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["blowfish", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "baked catfish":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["catfish", 2],["tomato", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "filet mignon":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["cooked filet", 1], ["potato", 2],["asparagus", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "sliced tomatoes and potatoes":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["tomato", 5],["potato", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "tomato soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["tomato", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "cooked corn":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["corn", 10]],
+        "EnergyHealth": [10,10]
+    },
+    "smoked jalapeno with eggs":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["jalapeno", 4],["raw egg", 2]],
+        "EnergyHealth": [10,10]
+    },
+    "zucchini soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["zucchini", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "potato soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["potato", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "red pepper soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["red pepper", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "yellow pepper soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["yellow pepper", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "green pepper soup":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["green pepper", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "strawberry cake":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["strawberry", 10],["wheat flour", 6],["sugar", 8]],
+        "EnergyHealth": [10,10]
+    },
+    "blueberry cake":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["blueberry", 10],["wheat flour", 6],["sugar", 8]],
+        "EnergyHealth": [10,10]
+    },
+    "potatoes with green beans":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["potato", 5],["green bean", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "potatoes with asparagus":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["potato", 5],["asparagus", 5]],
+        "EnergyHealth": [10,10]
+    },
+    "potatoes with corn and zucchini":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["potato", 5],["corn", 5], ["zucchini", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "filet with tomatoes":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["cooked filet", 1],["tomato", 4]],
+        "EnergyHealth": [10,10]
+    },
+    "filet with garlic mash":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["cooked filet", 1],["garlic", 2], ["potato", 8]],
+        "EnergyHealth": [10,10]
+    },
+    "grape pastry":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "[description]",
+        "Ingredients": [["grape", 8],["corn flour", 6],["sugar", 8]],
+        "EnergyHealth": [10,10]
+    },
+    "bread":{
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "A quick, crunchy snack made from wheat flour.",
+        "Ingredients": [["wheat flour", 5]],
+        "EnergyHealth": [18,10]
+    }
+    
+}

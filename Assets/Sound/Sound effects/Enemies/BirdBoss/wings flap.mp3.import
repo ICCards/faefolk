@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wings flap.mp3-566cdb87e53dc5c370be53c71ebc40c7.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.mp3"
+dest_files=[ "res://.import/wings flap.mp3-566cdb87e53dc5c370be53c71ebc40c7.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

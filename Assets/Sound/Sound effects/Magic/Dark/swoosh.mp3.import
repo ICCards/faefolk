@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/swoosh.mp3-938b50b85e7c642a08c302a8df07184d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Dark/swoosh.mp3"
+dest_files=[ "res://.import/swoosh.mp3-938b50b85e7c642a08c302a8df07184d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

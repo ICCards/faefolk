@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dirt footsteps.mp3-64055a00f86b8562722029f0461dc70a.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3"
+dest_files=[ "res://.import/dirt footsteps.mp3-64055a00f86b8562722029f0461dc70a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

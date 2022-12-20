@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/groan 1.mp3-708b9e0e8cd1758c819de29633bcd60c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 1.mp3"
+dest_files=[ "res://.import/groan 1.mp3-708b9e0e8cd1758c819de29633bcd60c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

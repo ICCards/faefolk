@@ -1,0 +1,179 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+var color1
+var color2
+var color3
+var color4
+var color5
+var color6
+var color7
+var color8
+
+var item_name
+var category
+var tempColor
+
+var rng = RandomNumberGenerator.new()
+
+func _ready():
+	eat()
+
+func eat():
+	PlayerData.eat(item_name)
+	set_particle_colors(item_name)
+	$EatingParticles1.emitting = true
+	$EatingParticles2.emitting = true
+	$EatingParticles3.emitting = true
+	$EatingParticles4.emitting = true
+	$EatingParticles5.emitting = true
+	$EatingParticles6.emitting = true
+	$EatingParticles7.emitting = true
+	$EatingParticles8.emitting = true
+	yield(get_tree().create_timer(1.5), \"timeout\")
+	queue_free()
+	
+	
+func set_particle_colors(item_name):
+	var itemImage = Image.new()
+	category = JsonData.item_data[item_name][\"ItemCategory\"]
+	itemImage.load(\"res://Assets/Images/inventory_icons/\" + category +\"/\" + item_name + \".png\")
+	itemImage.lock()
+	$EatingParticles1.color = return_pixel_color(itemImage)
+	$EatingParticles2.color = return_pixel_color(itemImage)
+	$EatingParticles3.color = return_pixel_color(itemImage)
+	$EatingParticles4.color = return_pixel_color(itemImage)
+	$EatingParticles5.color = return_pixel_color(itemImage)
+	$EatingParticles6.color = return_pixel_color(itemImage)
+	$EatingParticles7.color = return_pixel_color(itemImage)
+	$EatingParticles8.color = return_pixel_color(itemImage)
+	
+func return_pixel_color(image):
+	rng.randomize()
+	tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
+	if tempColor != Color(0,0,0,0):
+		return tempColor
+	else:
+		tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
+		if tempColor != Color(0,0,0,0):
+			return tempColor
+		else:
+			return Color(0,0,0,0)
+"
+
+[node name="EatingParticles" type="Node2D"]
+script = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EatingParticles1" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.6
+one_shot = true
+local_coords = false
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 4.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles2" type="CPUParticles2D" parent="."]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.6
+one_shot = true
+local_coords = false
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 4.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles3" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.6
+one_shot = true
+local_coords = false
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 4.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles4" type="CPUParticles2D" parent="."]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.6
+one_shot = true
+local_coords = false
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 4.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles5" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.6
+one_shot = true
+local_coords = false
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 4.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles6" type="CPUParticles2D" parent="."]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.6
+one_shot = true
+local_coords = false
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 4.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles7" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.6
+one_shot = true
+local_coords = false
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 4.0
+scale_amount_random = 0.5
+
+[node name="EatingParticles8" type="CPUParticles2D" parent="."]
+position = Vector2( -4, -38 )
+emitting = false
+amount = 1
+lifetime = 1.6
+one_shot = true
+local_coords = false
+direction = Vector2( -1, 0 )
+gravity = Vector2( 0, 22 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 4.0
+scale_amount_random = 0.5

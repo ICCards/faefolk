@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/electric proj.mp3-6b17b828296238ccac7c9514c3d0ae37.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Lightning/electric proj.mp3"
+dest_files=[ "res://.import/electric proj.mp3-6b17b828296238ccac7c9514c3d0ae37.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

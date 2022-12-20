@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fishEscape.mp3-17e8be62bdea5b99c801a9b5e16aa897.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Fishing/fishEscape.mp3"
+dest_files=[ "res://.import/fishEscape.mp3-17e8be62bdea5b99c801a9b5e16aa897.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

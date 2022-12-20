@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/PA_Animation_Kitty_Walk_up_10fps_green.png-5b87dba743a70217c9500032e5eb20fc.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Assets/Images/IC Kitties/Walk/Up/PA_Animation_Kitty_Walk_up_10fps_green.png"
+dest_files=[ "res://.import/PA_Animation_Kitty_Walk_up_10fps_green.png-5b87dba743a70217c9500032e5eb20fc.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

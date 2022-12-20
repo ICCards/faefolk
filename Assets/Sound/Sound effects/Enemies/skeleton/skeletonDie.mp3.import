@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/skeletonDie.mp3-17d875e123052682ed32d2ea329a919f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonDie.mp3"
+dest_files=[ "res://.import/skeletonDie.mp3-17d875e123052682ed32d2ea329a919f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

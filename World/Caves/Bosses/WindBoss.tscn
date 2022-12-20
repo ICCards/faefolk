@@ -1,0 +1,561 @@
+[gd_scene load_steps=40 format=2]
+
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/idle/down/body.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Magic/lightning/lightning effect.png" type="Texture" id=2]
+[ext_resource path="res://World/Caves/Bosses/WindBoss.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/BirdBoss-Shadow.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Misc/watering can progress indicator.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Enemies/ChangeForm.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/death/body.png" type="Texture" id=8]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
+
+[sub_resource type="CircleShape2D" id=16]
+radius = 6.08276
+
+[sub_resource type="CapsuleShape2D" id=184]
+radius = 55.0
+height = 0.0
+
+[sub_resource type="Animation" id=147]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Boss:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=148]
+resource_name = "hit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Boss:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="AtlasTexture" id=122]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=123]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=124]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=125]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 80, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=126]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 80, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=127]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 80, 96, 80 )
+
+[sub_resource type="AtlasTexture" id=128]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 160, 96, 80 )
+
+[sub_resource type="SpriteFrames" id=182]
+animations = [ {
+"frames": [ SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ) ],
+"loop": true,
+"name": "play",
+"speed": 8.0
+} ]
+
+[sub_resource type="CircleShape2D" id=183]
+radius = 240.033
+
+[sub_resource type="Animation" id=185]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Boss:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Boss:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -60 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ShadowSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=190]
+resource_name = "attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=186]
+resource_name = "death"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Boss:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Boss:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ShadowSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("HealthBar:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Boss:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -90 ), Vector2( 0, -60 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=187]
+resource_name = "loop"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_wing_flap"
+} ]
+}
+
+[sub_resource type="Animation" id=188]
+resource_name = "transition to fly"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Boss:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -60 ), Vector2( 0, -90 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_wing_flap"
+} ]
+}
+
+[sub_resource type="Animation" id=189]
+resource_name = "transition to idle"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Boss:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -90 ), Vector2( 0, -60 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=191]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=192]
+atlas = ExtResource( 7 )
+region = Rect2( 300, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=193]
+atlas = ExtResource( 7 )
+region = Rect2( 600, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=194]
+atlas = ExtResource( 7 )
+region = Rect2( 900, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=195]
+atlas = ExtResource( 7 )
+region = Rect2( 1200, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=196]
+atlas = ExtResource( 7 )
+region = Rect2( 1500, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=197]
+atlas = ExtResource( 7 )
+region = Rect2( 1800, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=198]
+atlas = ExtResource( 7 )
+region = Rect2( 2100, 0, 300, 300 )
+
+[sub_resource type="SpriteFrames" id=199]
+animations = [ {
+"frames": [ SubResource( 191 ), SubResource( 192 ), SubResource( 193 ), SubResource( 194 ), SubResource( 195 ), SubResource( 196 ), SubResource( 197 ), SubResource( 198 ) ],
+"loop": true,
+"name": "play",
+"speed": 8.0
+} ]
+
+[node name="WindBoss" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="EnemyFrozenState" parent="." instance=ExtResource( 10 )]
+
+[node name="EnemyPoisonState" parent="." instance=ExtResource( 9 )]
+
+[node name="P3" parent="EnemyPoisonState/PoisonParticles" index="0"]
+position = Vector2( 0, -58 )
+
+[node name="P2" parent="EnemyPoisonState/PoisonParticles" index="1"]
+position = Vector2( 0, -76 )
+
+[node name="P1" parent="EnemyPoisonState/PoisonParticles" index="2"]
+position = Vector2( 0, -95 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 16 )
+disabled = true
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 262400
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 0, -49 )
+shape = SubResource( 184 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+anims/RESET = SubResource( 147 )
+anims/hit = SubResource( 148 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+autostart = true
+
+[node name="ChangePos" type="Timer" parent="Timers"]
+wait_time = 4.0
+autostart = true
+
+[node name="WhirlwindTimer" type="Timer" parent="Timers"]
+wait_time = 12.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="ShootDirection" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="ShootDirection"]
+position = Vector2( 75, 0 )
+
+[node name="HealthBar" type="Node2D" parent="."]
+position = Vector2( -19, 20 )
+scale = Vector2( 2.5, 3 )
+z_index = 1
+
+[node name="Border" type="TextureRect" parent="HealthBar"]
+margin_right = 16.0
+margin_bottom = 3.0
+texture = ExtResource( 5 )
+
+[node name="Progress" type="TextureProgress" parent="HealthBar"]
+modulate = Color( 0.109804, 1, 0, 1 )
+margin_left = 0.800002
+margin_top = 0.666664
+margin_right = 14.8
+margin_bottom = 1.66666
+max_value = 200.0
+value = 44.0
+texture_progress = ExtResource( 6 )
+nine_patch_stretch = true
+
+[node name="Boss" type="Sprite" parent="."]
+material = ExtResource( 11 )
+position = Vector2( 0, -60 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="ShadowSprite" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 0.435294 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Electricity" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -76 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 182 )
+animation = "play"
+frame = 4
+playing = true
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 183 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 185 )
+anims/attack = SubResource( 190 )
+anims/death = SubResource( 186 )
+anims/loop = SubResource( 187 )
+"anims/transition to fly" = SubResource( 188 )
+"anims/transition to idle" = SubResource( 189 )
+
+[node name="UpgradePhase" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -76 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 199 )
+animation = "play"
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="Timers/ChangePos" to="." method="_on_ChangePos_timeout"]
+[connection signal="timeout" from="Timers/WhirlwindTimer" to="." method="_on_WhirlwindTimer_timeout"]
+
+[editable path="EnemyPoisonState"]

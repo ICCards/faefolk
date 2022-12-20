@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Ore break 2.mp3-7fd5325f468460bcb72891d53f238868.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Ore/Ore break 2.mp3"
+dest_files=[ "res://.import/Ore break 2.mp3-7fd5325f468460bcb72891d53f238868.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

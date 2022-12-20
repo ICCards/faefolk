@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/winter_day.mp3-f89726f648ce64afa1935a2cb7c5e9b7.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Ambience/winter_day.mp3"
+dest_files=[ "res://.import/winter_day.mp3-f89726f648ce64afa1935a2cb7c5e9b7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

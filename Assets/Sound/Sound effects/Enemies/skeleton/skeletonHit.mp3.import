@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/skeletonHit.mp3-ce6e75d2a0c12d6404063d99322f0e7c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Enemies/skeleton/skeletonHit.mp3"
+dest_files=[ "res://.import/skeletonHit.mp3-ce6e75d2a0c12d6404063d99322f0e7c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

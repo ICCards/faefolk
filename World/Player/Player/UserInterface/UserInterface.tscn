@@ -1,0 +1,239 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
+[ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MainMenu/LoadingScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=6]
+[ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI2.png" type="Texture" id=8]
+[ext_resource path="res://World/Player/Player/UserInterface/MagicStaff/MagicStaffUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Player/Player/UserInterface/Combat hotbar/Combat hotbar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" type="AudioStream" id=13]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
+[ext_resource path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" type="PackedScene" id=17]
+[ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=19]
+[ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=23]
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "lightning day"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="UserInterface" type="CanvasLayer"]
+script = ExtResource( 23 )
+
+[node name="WeatherEffects" type="ColorRect" parent="."]
+margin_left = -49.0
+margin_top = -39.0
+margin_right = 1966.0
+margin_bottom = 1120.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+script = ExtResource( 19 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherEffects"]
+anims/RESET = SubResource( 18 )
+"anims/lightning day" = SubResource( 19 )
+
+[node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="WeatherEffects"]
+stream = ExtResource( 13 )
+
+[node name="LightningTimer" type="Timer" parent="WeatherEffects"]
+
+[node name="DeathEffect" type="ColorRect" parent="."]
+visible = false
+margin_left = -58.0
+margin_top = -70.0
+margin_right = 2021.0
+margin_bottom = 1142.0
+mouse_filter = 2
+color = Color( 1, 0, 0, 0 )
+
+[node name="Combat hotbar" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="Hotbar" parent="." instance=ExtResource( 17 )]
+
+[node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
+visible = false
+margin_left = 505.0
+margin_top = 864.0
+margin_right = -1415.0
+margin_bottom = -216.0
+rect_scale = Vector2( 4.5, 4.5 )
+
+[node name="Menu" parent="." instance=ExtResource( 15 )]
+visible = false
+margin_top = 60.0
+margin_bottom = 60.0
+rect_scale = Vector2( 1.5, 1.5 )
+
+[node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="RadialUpgradeMenu" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="PlayerDataUI" parent="." instance=ExtResource( 12 )]
+visible = false
+
+[node name="SleepEffect" type="ColorRect" parent="."]
+visible = false
+margin_left = -93.0
+margin_top = -55.0
+margin_right = 2044.0
+margin_bottom = 1182.0
+color = Color( 0, 0, 0, 0.552941 )
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="ChangeRotation" type="Control" parent="."]
+visible = false
+margin_left = 189.0
+margin_top = 180.0
+margin_right = 229.0
+margin_bottom = 220.0
+rect_scale = Vector2( 1.5, 1.5 )
+
+[node name="TextureRect" type="TextureRect" parent="ChangeRotation"]
+margin_left = 209.0
+margin_top = 469.0
+margin_right = 310.0
+margin_bottom = 488.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="RotateLabel" type="Label" parent="ChangeRotation"]
+margin_left = 248.0
+margin_top = 475.0
+margin_right = 1028.0
+margin_bottom = 621.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "Change rotation"
+align = 1
+
+[node name="RotateKey" type="Label" parent="ChangeRotation"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 217.0
+margin_top = 471.0
+margin_right = 337.0
+margin_bottom = 617.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "R"
+align = 1
+
+[node name="ChangeVariety" type="Control" parent="."]
+visible = false
+margin_left = 195.0
+margin_top = 180.0
+margin_right = 235.0
+margin_bottom = 220.0
+rect_scale = Vector2( 1.5, 1.5 )
+
+[node name="TextureRect" type="TextureRect" parent="ChangeVariety"]
+margin_left = 613.0
+margin_top = 469.0
+margin_right = 714.0
+margin_bottom = 488.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+
+[node name="VarietyLabel" type="Label" parent="ChangeVariety"]
+margin_left = 621.0
+margin_top = 475.0
+margin_right = 1411.0
+margin_bottom = 621.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "Change variety"
+
+[node name="VarietyKey" type="Label" parent="ChangeVariety"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 783.0
+margin_top = 471.0
+margin_right = 903.0
+margin_bottom = 617.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 6 )
+text = "V"
+align = 1
+
+[node name="EnterNewKey" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.921569 )
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Label" type="Label" parent="EnterNewKey"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -148.0
+margin_top = -30.5
+margin_right = 148.0
+margin_bottom = 30.5
+theme = ExtResource( 2 )
+text = "Enter new key"
+align = 1
+valign = 1
+
+[node name="LoadingScreen" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[connection signal="timeout" from="WeatherEffects/LightningTimer" to="WeatherEffects" method="_on_LightningTimer_timeout"]

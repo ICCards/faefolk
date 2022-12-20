@@ -1,0 +1,221 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top left.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top middle.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top right.png" type="Texture" id=4]
+[ext_resource path="res://InventoryLogic/ItemDescription.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle right.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle left.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle middle.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom middle.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom left.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom right.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Themes/EnergyIcon.tres" type="Theme" id=12]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/energy icon.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/health icon.png" type="Texture" id=14]
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Assets/Fonts/TEMPLOG_.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+size = 53
+font_data = SubResource( 5 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 9 )
+
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 9 )
+
+[node name="ItemDescription" type="Node2D"]
+scale = Vector2( 2.7, 2.7 )
+z_index = 2
+script = ExtResource( 5 )
+
+[node name="GridContainer" type="VBoxContainer" parent="."]
+margin_right = 55.0
+margin_bottom = 50.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="TopRow" type="GridContainer" parent="GridContainer"]
+margin_right = 55.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 0
+custom_constants/hseparation = -7
+columns = 3
+
+[node name="TopLeft" type="TextureRect" parent="GridContainer/TopRow"]
+margin_right = 11.0
+margin_bottom = 18.0
+texture = ExtResource( 2 )
+
+[node name="TopMiddle" type="TextureRect" parent="GridContainer/TopRow"]
+margin_left = 4.0
+margin_right = 49.0
+margin_bottom = 18.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+texture = ExtResource( 3 )
+stretch_mode = 1
+
+[node name="TopRight" type="TextureRect" parent="GridContainer/TopRow"]
+margin_left = 42.0
+margin_right = 55.0
+margin_bottom = 18.0
+texture = ExtResource( 4 )
+stretch_mode = 1
+
+[node name="MiddleRow" type="GridContainer" parent="GridContainer"]
+margin_top = 18.0
+margin_right = 55.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="MiddleLeft" type="TextureRect" parent="GridContainer/MiddleRow"]
+margin_right = 11.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+stretch_mode = 2
+
+[node name="MiddleLeft2" type="TextureRect" parent="GridContainer/MiddleRow"]
+margin_left = 11.0
+margin_right = 42.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 2
+
+[node name="TopRight2" type="TextureRect" parent="GridContainer/MiddleRow"]
+margin_left = 42.0
+margin_right = 55.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+stretch_mode = 2
+
+[node name="BottomRow" type="GridContainer" parent="GridContainer"]
+margin_top = 34.0
+margin_right = 55.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 16 )
+size_flags_horizontal = 3
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="BottomLeft" type="TextureRect" parent="GridContainer/BottomRow"]
+margin_right = 11.0
+margin_bottom = 16.0
+texture = ExtResource( 10 )
+
+[node name="BottomMiddle" type="TextureRect" parent="GridContainer/BottomRow"]
+margin_left = 11.0
+margin_right = 42.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+texture = ExtResource( 9 )
+expand = true
+
+[node name="BottomRight" type="TextureRect" parent="GridContainer/BottomRow"]
+margin_left = 42.0
+margin_right = 55.0
+margin_bottom = 16.0
+texture = ExtResource( 11 )
+stretch_mode = 1
+
+[node name="ItemName" type="Label" parent="."]
+margin_left = 4.44444
+margin_top = 4.07407
+margin_right = 219.444
+margin_bottom = 65.0741
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 5
+text = "Wood path"
+
+[node name="Body" type="VBoxContainer" parent="."]
+margin_left = 4.44445
+margin_top = 18.1482
+margin_right = 328.444
+margin_bottom = 296.148
+rect_min_size = Vector2( 320, 188 )
+rect_scale = Vector2( 0.15, 0.15 )
+custom_constants/separation = 4
+
+[node name="ItemCategory" type="Label" parent="Body"]
+modulate = Color( 1, 0, 0.423529, 1 )
+margin_right = 323.0
+margin_bottom = 61.0
+theme = ExtResource( 1 )
+text = "Magic"
+
+[node name="ItemDescription" type="Label" parent="Body"]
+margin_top = 65.0
+margin_right = 323.0
+margin_bottom = 190.0
+theme = ExtResource( 1 )
+text = "Some randfdssdfdso"
+autowrap = true
+
+[node name="Energy" type="HBoxContainer" parent="Body"]
+visible = false
+margin_top = 130.0
+margin_right = 324.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 0, 72 )
+custom_constants/separation = 14
+
+[node name="EnergyIcon" type="TextureRect" parent="Body/Energy"]
+margin_right = 60.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 60, 72 )
+theme = ExtResource( 12 )
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 5
+
+[node name="EnergyAmount" type="Label" parent="Body/Energy"]
+margin_left = 74.0
+margin_top = 5.0
+margin_right = 324.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 250, 0 )
+theme = SubResource( 7 )
+text = "+10 Energy"
+autowrap = true
+
+[node name="Health" type="HBoxContainer" parent="Body"]
+visible = false
+margin_top = 130.0
+margin_right = 324.0
+margin_bottom = 202.0
+custom_constants/separation = 12
+
+[node name="EnergyIcon" type="TextureRect" parent="Body/Health"]
+margin_right = 60.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 60, 72 )
+theme = ExtResource( 12 )
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 6
+
+[node name="HealthAmount" type="Label" parent="Body/Health"]
+margin_left = 72.0
+margin_top = 5.0
+margin_right = 322.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 250, 0 )
+theme = SubResource( 8 )
+text = "+10 Health"
+autowrap = true

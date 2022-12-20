@@ -1,0 +1,583 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Orange.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=2]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" type="Script" id=5]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/PetUI.gd" type="Script" id=6]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=7]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=9]
+[ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Images/Misc/Buttons/large exit button.png" type="Texture" id=11]
+[ext_resource path="res://World/Player/Player/UserInterface/EnergyManaHealth.gd" type="Script" id=12]
+[ext_resource path="res://Assets/Images/Inventory UI/day.png" type="Texture" id=13]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Images/Inventory UI/menus/inventory.png" type="Texture" id=15]
+
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeadAtr:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Arms:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shirts:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Accessory:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "loop"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeadAtr:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Arms:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shirts:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pants:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Accessory:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shoes:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Inventory" type="Control"]
+margin_left = -377.0
+margin_top = 39.0
+margin_right = -377.0
+margin_bottom = 39.0
+script = ExtResource( 5 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_top = 82.0
+margin_right = 693.0
+margin_bottom = 523.0
+mouse_filter = 0
+texture = ExtResource( 15 )
+expand = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 78.0
+margin_top = 350.0
+margin_right = 341.0
+margin_bottom = 504.0
+color = Color( 0.247059, 0.156863, 0.196078, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HotbarLabels" type="HBoxContainer" parent="."]
+margin_left = 402.0
+margin_top = 84.0
+margin_right = 2997.0
+margin_bottom = 145.0
+rect_scale = Vector2( 0.2, 0.2 )
+custom_constants/separation = 260
+
+[node name="1" type="Label" parent="HotbarLabels"]
+margin_right = 19.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "1"
+
+[node name="2" type="Label" parent="HotbarLabels"]
+margin_left = 279.0
+margin_right = 306.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "2"
+
+[node name="3" type="Label" parent="HotbarLabels"]
+margin_left = 566.0
+margin_right = 593.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "3"
+
+[node name="4" type="Label" parent="HotbarLabels"]
+margin_left = 853.0
+margin_right = 876.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "4"
+
+[node name="5" type="Label" parent="HotbarLabels"]
+margin_left = 1136.0
+margin_right = 1163.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "5"
+
+[node name="HotbarLabels2" type="HBoxContainer" parent="."]
+margin_left = 402.0
+margin_top = 151.0
+margin_right = 1574.0
+margin_bottom = 212.0
+rect_scale = Vector2( 0.2, 0.2 )
+custom_constants/separation = 260
+
+[node name="6" type="Label" parent="HotbarLabels2"]
+margin_right = 27.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "6"
+
+[node name="7" type="Label" parent="HotbarLabels2"]
+margin_left = 287.0
+margin_right = 312.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "7"
+
+[node name="8" type="Label" parent="HotbarLabels2"]
+margin_left = 572.0
+margin_right = 599.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "8"
+
+[node name="9" type="Label" parent="HotbarLabels2"]
+margin_left = 859.0
+margin_right = 885.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "9"
+
+[node name="0" type="Label" parent="HotbarLabels2"]
+margin_left = 1145.0
+margin_right = 1172.0
+margin_bottom = 61.0
+theme = ExtResource( 4 )
+text = "0"
+
+[node name="InventorySlots" parent="." instance=ExtResource( 3 )]
+margin_left = 378.0
+margin_top = 229.0
+margin_right = 660.0
+margin_bottom = 340.0
+custom_constants/vseparation = 12
+columns = 5
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource( 14 )]
+margin_left = 378.0
+margin_right = 660.0
+margin_bottom = 208.0
+custom_constants/vseparation = 12
+columns = 5
+
+[node name="AttributeSlots" type="GridContainer" parent="."]
+margin_left = 93.0
+margin_top = 97.0
+margin_right = 333.0
+margin_bottom = 271.0
+custom_constants/vseparation = 12
+custom_constants/hseparation = 132
+columns = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="locked1" type="TextureRect" parent="AttributeSlots"]
+margin_right = 54.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="locked2" type="TextureRect" parent="AttributeSlots"]
+margin_left = 186.0
+margin_right = 240.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 54, 54 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="locked3" type="TextureRect" parent="AttributeSlots"]
+margin_top = 66.0
+margin_right = 54.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 54, 54 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="locked4" type="TextureRect" parent="AttributeSlots"]
+margin_left = 186.0
+margin_top = 66.0
+margin_right = 240.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 54, 54 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="locked5" type="TextureRect" parent="AttributeSlots"]
+margin_top = 132.0
+margin_right = 54.0
+margin_bottom = 186.0
+rect_min_size = Vector2( 54, 54 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="locked6" type="TextureRect" parent="AttributeSlots"]
+margin_left = 186.0
+margin_top = 132.0
+margin_right = 240.0
+margin_bottom = 186.0
+rect_min_size = Vector2( 54, 54 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="PetUI" type="Control" parent="."]
+script = ExtResource( 6 )
+
+[node name="PetLabel" type="Label" parent="PetUI"]
+margin_left = 89.0
+margin_top = 346.0
+margin_right = 168.0
+margin_bottom = 407.0
+rect_scale = Vector2( 0.75, 0.75 )
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Pet:"
+valign = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PetUI"]
+position = Vector2( 147, 395 )
+scale = Vector2( 4, 4 )
+frames = ExtResource( 1 )
+animation = "idle right"
+frame = 13
+playing = true
+
+[node name="SpawnPet" type="TextureButton" parent="PetUI"]
+margin_left = 238.0
+margin_top = 395.0
+margin_right = 349.0
+margin_bottom = 446.0
+texture_normal = ExtResource( 11 )
+
+[node name="SpawnLabel" type="Label" parent="PetUI"]
+margin_left = 244.0
+margin_top = 401.0
+margin_right = 442.0
+margin_bottom = 479.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Spawn"
+align = 1
+valign = 1
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="PetUI"]
+
+[node name="EnergyManaHealth" type="Control" parent="."]
+margin_left = 93.0
+margin_top = 316.0
+margin_right = 693.0
+margin_bottom = 391.0
+rect_scale = Vector2( 0.4, 0.4 )
+script = ExtResource( 12 )
+
+[node name="Energy" type="Label" parent="EnergyManaHealth"]
+margin_left = 15.0
+margin_top = 7.0
+margin_right = 177.0
+margin_bottom = 68.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "100/100"
+align = 1
+valign = 1
+
+[node name="dash" type="Label" parent="EnergyManaHealth"]
+margin_left = 191.0
+margin_top = 7.0
+margin_right = 205.0
+margin_bottom = 68.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "-"
+align = 1
+valign = 1
+
+[node name="Mana" type="Label" parent="EnergyManaHealth"]
+margin_left = 219.0
+margin_top = 7.0
+margin_right = 381.0
+margin_bottom = 68.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0.14902, 0, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "121/100"
+align = 1
+valign = 1
+
+[node name="dash2" type="Label" parent="EnergyManaHealth"]
+margin_left = 395.0
+margin_top = 7.0
+margin_right = 409.0
+margin_bottom = 68.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "-"
+align = 1
+valign = 1
+
+[node name="Health" type="Label" parent="EnergyManaHealth"]
+margin_left = 423.0
+margin_top = 7.0
+margin_right = 585.0
+margin_bottom = 68.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0.976471, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "100/100"
+align = 1
+valign = 1
+
+[node name="DayNightBg" type="TextureRect" parent="."]
+margin_left = 165.0
+margin_top = 115.0
+margin_right = 272.0
+margin_bottom = 282.0
+rect_scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 13 )
+expand = true
+
+[node name="CompositeSprites" type="Node2D" parent="."]
+material = ExtResource( 9 )
+position = Vector2( 214, 248 )
+scale = Vector2( 3.5, 3.5 )
+script = ExtResource( 10 )
+
+[node name="Body" type="Sprite" parent="CompositeSprites"]
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 7 )
+hframes = 4
+
+[node name="Legs" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 7 )
+hframes = 4
+
+[node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="Arms" type="Sprite" parent="CompositeSprites"]
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 8 )
+hframes = 4
+
+[node name="Shirts" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="Pants" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="Accessory" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="Shoes" type="Sprite" parent="CompositeSprites"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
+visible = false
+position = Vector2( 0, -16 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
+anims/RESET = SubResource( 21 )
+anims/loop = SubResource( 22 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="PetUI/SpawnPet" to="PetUI" method="_on_SpawnPet_pressed"]

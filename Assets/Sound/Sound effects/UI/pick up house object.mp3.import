@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pick up house object.mp3-29fbad9d48ab2248d18cae871d86b07c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/UI/pick up house object.mp3"
+dest_files=[ "res://.import/pick up house object.mp3-29fbad9d48ab2248d18cae871d86b07c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

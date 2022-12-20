@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/teleport.mp3-d18ebfd57ab49e4bbed9aded6bc8d386.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Lightning/teleport.mp3"
+dest_files=[ "res://.import/teleport.mp3-d18ebfd57ab49e4bbed9aded6bc8d386.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

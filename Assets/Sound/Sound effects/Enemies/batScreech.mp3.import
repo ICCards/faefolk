@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/batScreech.mp3-e1384efdea59a3b7c78d1b05fb61cc4f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Enemies/batScreech.mp3"
+dest_files=[ "res://.import/batScreech.mp3-e1384efdea59a3b7c78d1b05fb61cc4f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

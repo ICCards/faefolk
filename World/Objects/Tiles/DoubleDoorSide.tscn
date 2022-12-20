@@ -1,0 +1,293 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Assets/Tilesets/doors/animated/side/armored.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Images/Misc/selected tile 2x1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Tilesets/doors/wood mask/3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Tilesets/doors/wood mask/1.png" type="Texture" id=4]
+[ext_resource path="res://World/Objects/Tiles/DoubleDoorSide.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Tilesets/doors/wood mask/4.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Tilesets/doors/wood mask/2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Misc/watering can progress indicator.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Tilesets/doors/hit effects/armored/side/open.png" type="Texture" id=10]
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "hit"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../AnimatedSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 32, 7.5 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 30.5, 15 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 30, 15.5 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 20.5, 10 )
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 29, 15 )
+
+[sub_resource type="Animation" id=15]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "close"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 4 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "open"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 6 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+
+[sub_resource type="Animation" id=19]
+resource_name = "show health bar"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("HealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="DoubleDoorSide" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -14, -50 )
+frames = ExtResource( 1 )
+animation = "open"
+offset = Vector2( 32, -32 )
+
+[node name="SelectedBorder" type="Sprite" parent="."]
+visible = false
+position = Vector2( 5, -31 )
+rotation = 1.5708
+z_index = 1
+texture = ExtResource( 2 )
+
+[node name="HealthBar" type="Node2D" parent="."]
+visible = false
+position = Vector2( -15, 2 )
+scale = Vector2( 2.5, 3 )
+z_index = 1
+
+[node name="Border" type="TextureRect" parent="HealthBar"]
+margin_right = 16.0
+margin_bottom = 3.0
+texture = ExtResource( 8 )
+
+[node name="Progress" type="TextureProgress" parent="HealthBar"]
+modulate = Color( 0.109804, 1, 0, 1 )
+margin_left = 0.800002
+margin_top = 0.666664
+margin_right = 14.8
+margin_bottom = 1.66666
+max_value = 250.0
+value = 250.0
+texture_progress = ExtResource( 9 )
+nine_patch_stretch = true
+
+[node name="HitEffect" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="HitEffect"]
+visible = false
+position = Vector2( 10, -69 )
+texture = ExtResource( 10 )
+hframes = 3
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HitEffect"]
+anims/RESET = SubResource( 20 )
+anims/hit = SubResource( 21 )
+
+[node name="MovementCollision" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2( 3, -64 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
+position = Vector2( 32, -7.5 )
+shape = SubResource( 12 )
+
+[node name="HurtBox" type="Area2D" parent="."]
+visible = false
+position = Vector2( 8, -46 )
+rotation = 1.5708
+collision_layer = 24
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+light_mask = 0
+position = Vector2( 15.5, 0 )
+shape = SubResource( 13 )
+
+[node name="EnterDoorway" type="Area2D" parent="."]
+visible = false
+position = Vector2( 7, -62 )
+rotation = 1.5708
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoorway"]
+position = Vector2( 32, -1.5 )
+shape = SubResource( 14 )
+
+[node name="DetectObjectOverPathBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 8192
+collision_mask = 8192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectObjectOverPathBox"]
+position = Vector2( 8, -32 )
+rotation = 1.5708
+shape = SubResource( 22 )
+
+[node name="HammerRepairBox" type="Area2D" parent="."]
+visible = false
+rotation = 1.5708
+collision_layer = 16384
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HammerRepairBox"]
+light_mask = 0
+position = Vector2( -30, -8 )
+shape = SubResource( 23 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 15 )
+anims/close = SubResource( 16 )
+anims/open = SubResource( 17 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 18 )
+"anims/show health bar" = SubResource( 19 )
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="area_entered" from="EnterDoorway" to="." method="_on_EnterDoorway_area_entered"]
+[connection signal="area_exited" from="EnterDoorway" to="." method="_on_EnterDoorway_area_exited"]
+[connection signal="input_event" from="EnterDoorway" to="." method="_on_EnterDoorway_input_event"]
+[connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

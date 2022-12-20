@@ -1,0 +1,5 @@
+[gd_scene format=2]
+
+[node name="CaveAmbientLight" type="CanvasModulate"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
+color = Color( 0.443137, 0.431373, 0.466667, 1 )
