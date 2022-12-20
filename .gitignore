@@ -2,3 +2,5 @@
 *.wasm
 *.pck
 *.cfg
+*.dmg
+*.exe
