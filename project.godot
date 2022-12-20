@@ -57,7 +57,6 @@ PlayerDataHelpers="*res://Global/Data/PlayerDataHelpers.gd"
 
 window/size/width=1920
 window/size/height=1080
-window/size/fullscreen=true
 window/vsync/use_vsync=false
 mouse_cursor/custom_image="res://Assets/mouse cursors/Normal Selects.png"
 window/stretch/mode="2d"

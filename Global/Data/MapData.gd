@@ -15,8 +15,8 @@ var caves = {}
 func _ready() -> void:
 	load_world_data()
 	load_caves_data()
-	add_tiles_to_chunks()
-	add_nature_objects_to_chunks()
+#	add_tiles_to_chunks()
+#	add_nature_objects_to_chunks()
 	PlayerData.connect("set_day", self, "advance_crops")
 
 func advance_crops():

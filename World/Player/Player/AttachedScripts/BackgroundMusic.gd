@@ -3,12 +3,12 @@ extends AudioStreamPlayer
 var rng = RandomNumberGenerator.new()
 var index
 
-func _ready():
-	rng.randomize()
-	Sounds.index = rng.randi_range(0,9)
-	Sounds.connect("volume_change", self, "set_new_music_volume")
-	Sounds.connect("song_skipped", self, "set_song")
-	_play_background_music()
+#func _ready():
+#	rng.randomize()
+#	Sounds.index = rng.randi_range(0,9)
+#	Sounds.connect("volume_change", self, "set_new_music_volume")
+#	Sounds.connect("song_skipped", self, "set_song")
+#	_play_background_music()
 
 func set_song():
 	pass

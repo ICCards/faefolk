@@ -10,7 +10,7 @@ signal health_depleted
 signal tool_health_change
 signal active_item_updated
 
-var file_name = "user://JSONData/PlayerData.json"
+var file_name = "res://JSONData/PlayerData.json"
 onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
 
@@ -41,18 +41,18 @@ var starting_player_data = {
 	"energy": 100,
 	"hotbar": {
 		"0": ["stone sword", 1, 50],
-		"1": ["bow", 1, 50],
-		"2": ["wind staff", 1, 50],
-		"9": ["arrow", 100, null],
+		#"1": ["bow", 1, 50],
+		#"2": ["wind staff", 1, 50],
+		#"9": ["arrow", 100, null],
 		
 		
 	},
 	"inventory": {
 			"18": ["wood", 999, null],
 			"19": ["stone", 999, null],
-			"17": ["iron ingot", 99, null],
+			"17": ["iron ore", 99, null],
 			"16": ["stone fishing rod", 1, null],
-			"15": ["wheat seeds", 24, null],
+			"15": ["raw egg", 24, null],
 	},
 	"chests": {
 		"Cave 1-1": {
@@ -302,7 +302,7 @@ func _ready():
 func save_player_data():
 	var file = File.new()
 	file.open(file_name,File.WRITE)
-	file.store_line(to_json(player_data))
+	file.store_string(to_json(player_data))
 	file.close()
 	print("saved player data")
 	
