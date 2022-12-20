@@ -29,8 +29,8 @@ onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 
 var rng = RandomNumberGenerator.new()
 
-const NUM_DUCKS = 200
-const NUM_BUNNIES = 200
+const NUM_DUCKS = 250
+const NUM_BUNNIES = 250
 const NUM_BEARS = 70
 const NUM_BOARS = 70
 const NUM_DEER = 120

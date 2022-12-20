@@ -51,25 +51,26 @@ func wait_for_map_build():
 
 
 func _on_ConnectToPlugButton_mouse_entered():
+	pass
 	#_play_hover_effect("connect to plug")
-	$Tween.interpolate_property($ConnectToPlug, "rect_scale",
-		$ConnectToPlug.get_scale(), Vector2(1.015, 1.015), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($ConnectToPlug, "rect_position",
-		$ConnectToPlug.get_position(), Vector2(-28, 12),  0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+#	$Tween.interpolate_property($ConnectToPlug, "rect_scale",
+#		$ConnectToPlug.get_scale(), Vector2(1.015, 1.015), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($ConnectToPlug, "rect_position",
+#		$ConnectToPlug.get_position(), Vector2(-28, 12),  0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.start()
 
 
 func _on_ConnectToPlugButton_mouse_exited():
 	hovered_button = ""
-	$Tween.interpolate_property($ConnectToPlug, "rect_scale",
-		$ConnectToPlug.get_scale(), Vector2(1, 1), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($ConnectToPlug, "rect_position",
-		$ConnectToPlug.get_position(), Vector2(0, 0), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+#	$Tween.interpolate_property($ConnectToPlug, "rect_scale",
+#		$ConnectToPlug.get_scale(), Vector2(1, 1), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($ConnectToPlug, "rect_position",
+#		$ConnectToPlug.get_position(), Vector2(0, 0), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.start()
 
 
 

@@ -61,6 +61,7 @@ func _ready():
 		$Camera2D/UserInterface/LoadingScreen.show()
 		yield(get_tree().create_timer(5.0), "timeout")
 	state = MOVEMENT
+	Settings.load_keys()
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	yield(get_tree(), "idle_frame")
 	isLoaded = true

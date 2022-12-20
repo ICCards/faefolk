@@ -78,8 +78,8 @@ script = ExtResource( 23 )
 [node name="WeatherEffects" type="ColorRect" parent="."]
 margin_left = -49.0
 margin_top = -39.0
-margin_right = 1093.0
-margin_bottom = 657.0
+margin_right = 1966.0
+margin_bottom = 1120.0
 mouse_filter = 2
 color = Color( 1, 1, 1, 0 )
 script = ExtResource( 19 )
@@ -97,8 +97,8 @@ stream = ExtResource( 13 )
 visible = false
 margin_left = -58.0
 margin_top = -70.0
-margin_right = 1093.0
-margin_bottom = 680.0
+margin_right = 2021.0
+margin_bottom = 1142.0
 mouse_filter = 2
 color = Color( 1, 0, 0, 0 )
 
@@ -108,13 +108,18 @@ visible = false
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
 
 [node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
-margin_left = 209.0
-margin_top = 456.0
-margin_right = -815.0
-margin_bottom = -144.0
+visible = false
+margin_left = 505.0
+margin_top = 864.0
+margin_right = -1415.0
+margin_bottom = -216.0
+rect_scale = Vector2( 4.5, 4.5 )
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
 visible = false
+margin_top = 60.0
+margin_bottom = 60.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -123,22 +128,25 @@ visible = false
 visible = false
 
 [node name="PlayerDataUI" parent="." instance=ExtResource( 12 )]
+visible = false
 
 [node name="SleepEffect" type="ColorRect" parent="."]
 visible = false
 margin_left = -93.0
 margin_top = -55.0
-margin_right = 1129.0
-margin_bottom = 680.0
+margin_right = 2044.0
+margin_bottom = 1182.0
 color = Color( 0, 0, 0, 0.552941 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="ChangeRotation" type="Control" parent="."]
 visible = false
-margin_top = -2.0
-margin_right = 40.0
-margin_bottom = 38.0
+margin_left = 189.0
+margin_top = 180.0
+margin_right = 229.0
+margin_bottom = 220.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="TextureRect" type="TextureRect" parent="ChangeRotation"]
 margin_left = 209.0
@@ -171,9 +179,11 @@ align = 1
 
 [node name="ChangeVariety" type="Control" parent="."]
 visible = false
-margin_top = -2.0
-margin_right = 40.0
-margin_bottom = 38.0
+margin_left = 195.0
+margin_top = 180.0
+margin_right = 235.0
+margin_bottom = 220.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="TextureRect" type="TextureRect" parent="ChangeVariety"]
 margin_left = 613.0
@@ -206,8 +216,8 @@ align = 1
 [node name="EnterNewKey" type="Panel" parent="."]
 visible = false
 modulate = Color( 1, 1, 1, 0.921569 )
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 
 [node name="Label" type="Label" parent="EnterNewKey"]
 anchor_left = 0.5

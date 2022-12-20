@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spring.png-38b11d037a8a4a485d2f5fdd501fe601.stex"
+path="res://.import/spring.png-3dbfcf36cd99742136722de5dd3da976.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Inventory UI/DateTime/season icons/Spring.png"
-dest_files=[ "res://.import/Spring.png-38b11d037a8a4a485d2f5fdd501fe601.stex" ]
+source_file="res://Assets/Images/Inventory UI/DateTime/season icons/spring.png"
+dest_files=[ "res://.import/spring.png-3dbfcf36cd99742136722de5dd3da976.stex" ]
 
 [params]
 

@@ -11346,7 +11346,7 @@ script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.8, 0.8 )
+zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 smoothing_speed = 20.0
 script = ExtResource( 81 )
@@ -11367,8 +11367,6 @@ one_shot = true
 [node name="SpeedParticles" parent="." instance=ExtResource( 9 )]
 
 [node name="CompositeSprites" type="Node2D" parent="."]
-modulate = Color( 1.1, 1.1, 1.1, 1 )
-light_mask = 0
 material = ExtResource( 11 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 22 )
@@ -11377,28 +11375,24 @@ __meta__ = {
 }
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
-light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 7 )
 hframes = 4
 
 [node name="Legs" type="Sprite" parent="CompositeSprites"]
-light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 hframes = 4
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
 visible = false
-light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 4 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
-light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 13 )
@@ -11406,7 +11400,6 @@ hframes = 4
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
 visible = false
-light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 15 )
@@ -11414,7 +11407,6 @@ hframes = 4
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
 visible = false
-light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 17 )
@@ -11422,21 +11414,18 @@ hframes = 4
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
 visible = false
-light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 hframes = 4
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
 visible = false
-light_mask = 0
 use_parent_material = true
 position = Vector2( 0, -16 )
 texture = ExtResource( 76 )
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
-light_mask = 0
 position = Vector2( 0, -16 )
 hframes = 4
 

@@ -18,7 +18,6 @@ func set_label_texts():
 	$VBoxContainer/Grid2/ChangeVarietyLabel.text = "Change variety: " + OS.get_scancode_string(Settings.key_dict["change_variety"])
 
 func _ready():
-	Settings.load_keys()
 	set_label_texts()
 	music_slider.value = Sounds.music_volume
 	sound_slider.value = Sounds.sound_volume

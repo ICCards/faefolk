@@ -207,20 +207,20 @@ mouse_filter = 2
 texture = ExtResource( 11 )
 
 [node name="Title" type="Label" parent="."]
-margin_left = 462.0
-margin_top = 248.0
-margin_right = 718.0
-margin_bottom = 309.0
+margin_left = 910.0
+margin_top = 486.0
+margin_right = 1166.0
+margin_bottom = 547.0
 rect_scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 10 )
 text = "Metal:"
 align = 1
 
 [node name="Resources" type="RichTextLabel" parent="."]
-margin_left = 414.0
-margin_top = 282.0
-margin_right = 1067.0
-margin_bottom = 345.0
+margin_left = 862.0
+margin_top = 520.0
+margin_right = 1515.0
+margin_bottom = 583.0
 rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 10 )
 bbcode_enabled = true

@@ -387,7 +387,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.location = location
 			object.tier = "wood"
 			object.id = rng.randi_range(0, 10000)
-			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
 		"wood door side":
 			tileObjectHurtBox.queue_free()
@@ -395,7 +395,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.location = location
 			object.tier = "wood"
 			object.id = rng.randi_range(0, 10000)
-			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"metal door":
 			tileObjectHurtBox.queue_free()
@@ -403,7 +403,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.location = location
 			object.tier = "metal"
 			object.id = rng.randi_range(0, 10000)
-			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"metal door side":
 			tileObjectHurtBox.queue_free()
@@ -411,7 +411,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.location = location
 			object.tier = "metal"
 			object.id = rng.randi_range(0, 10000)
-			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"armored door":
 			tileObjectHurtBox.queue_free()
@@ -419,7 +419,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.location = location
 			object.tier = "armored"
 			object.id = rng.randi_range(0, 10000)
-			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"armored door side":
 			tileObjectHurtBox.queue_free()
@@ -427,7 +427,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.location = location
 			object.tier = "armored"
 			object.id = rng.randi_range(0, 10000)
-			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(0,32)
+			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"torch":
 			Tiles.remove_valid_tiles(location, Vector2(1,1))

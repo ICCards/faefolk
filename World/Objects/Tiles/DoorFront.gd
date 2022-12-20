@@ -11,8 +11,8 @@ var max_health
 var temp_health = 0
 var entered = false
 
-#func _ready():
-#	set_type()
+func _ready():
+	set_type()
 
 
 func _input(event):

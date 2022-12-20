@@ -240,7 +240,7 @@ region_rect = Rect2( 349.28, -178.5, 1269, 2043.62 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 32, -36 )
 frames = SubResource( 25 )
-animation = "close"
+animation = "open"
 
 [node name="SelectedBorder" type="Sprite" parent="."]
 visible = false

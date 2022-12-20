@@ -35,7 +35,7 @@ func _ready():
 	
 func set_grass_texture():
 	var szn = PlayerData.player_data["season"]
-	if szn == "Spring":
+	if szn == "spring":
 		type = "green grass"
 		if biome == "snow":
 			$FrontBreak.self_modulate = Color("7dd7b4")
@@ -47,7 +47,7 @@ func set_grass_texture():
 			grass = Images.green_grass
 		$Front.texture = grass[0]
 		$Back.texture = grass[1]
-	elif szn == "Summer":
+	elif szn == "summer":
 		type = "yellow grass"
 		if biome == "snow":
 			$FrontBreak.self_modulate = Color("f0e2c7")
@@ -59,7 +59,7 @@ func set_grass_texture():
 			grass = Images.yellow_grass
 		$Front.texture = grass[0]
 		$Back.texture = grass[1]
-	elif szn == "Fall":
+	elif szn == "fall":
 		type = "red grass"
 		if biome == "snow":
 			$FrontBreak.self_modulate = Color("beb6b5")
@@ -71,7 +71,7 @@ func set_grass_texture():
 			grass = Images.red_grass
 		$Front.texture = grass[0]
 		$Back.texture = grass[1]
-	elif szn == "Winter":
+	elif szn == "winter":
 		type = "dark green grass"
 		if biome == "snow":
 			$FrontBreak.self_modulate = Color("a5ffbf")

@@ -58,7 +58,7 @@ func _ready():
 
 	
 func move(_velocity: Vector2) -> void:
-	if tornado_node or stunned or destroyed:
+	if tornado_node or stunned or destroyed or state == IDLE:
 		return
 	elif frozen:
 		slime_sprite.modulate = Color("00c9ff")

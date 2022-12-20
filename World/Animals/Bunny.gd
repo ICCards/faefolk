@@ -107,9 +107,9 @@ func hit(tool_name):
 		destroy()
 
 func destroy():
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
+#	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
+#	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+#	sound_effects.play()
 	destroyed = true
 	bunny_sprite.play("death")
 	$AnimationPlayer.play("death")

@@ -131,20 +131,20 @@ position = Vector2( -143, 1 )
 texture = ExtResource( 4 )
 
 [node name="Title" type="Label" parent="."]
-margin_left = 462.0
-margin_top = 248.0
-margin_right = 718.0
-margin_bottom = 309.0
+margin_left = 865.0
+margin_top = 485.0
+margin_right = 1345.0
+margin_bottom = 546.0
 rect_scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 3 )
 text = "Wall:"
 align = 1
 
 [node name="Resources" type="Label" parent="."]
-margin_left = 418.0
-margin_top = 281.0
-margin_right = 1051.0
-margin_bottom = 342.0
+margin_left = 863.0
+margin_top = 518.0
+margin_right = 1516.0
+margin_bottom = 579.0
 rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 3 )
 text = "1 x Wood(total wood)"

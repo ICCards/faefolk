@@ -11,6 +11,7 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 2 )
 
 [node name="Bg" type="TextureRect" parent="."]

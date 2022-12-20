@@ -1,8 +1,8 @@
 extends Control
 
-var game_time_speed_per_second = 5
+var game_time_speed_per_second = 30
 var week_days = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."]
-var seasons = ["Spring", "Summer", "Fall", "Winter"]
+var seasons = ["spring", "summer", "fall", "winter"]
 var clock_icon_index = 1
 
 func _ready():
