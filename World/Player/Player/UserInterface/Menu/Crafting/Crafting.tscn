@@ -50,23 +50,24 @@ rect_scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 6 )
 
 [node name="Background" type="TextureRect" parent="."]
-margin_left = -4.0
-margin_top = 168.0
-margin_right = 689.0
-margin_bottom = 609.0
-rect_scale = Vector2( 2, 2 )
+margin_left = -286.0
+margin_top = 292.0
+margin_right = 407.0
+margin_bottom = 733.0
+rect_scale = Vector2( 3, 3 )
 mouse_filter = 0
 texture = ExtResource( 32 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CraftingItemDescription" parent="." instance=ExtResource( 4 )]
 visible = false
+scale = Vector2( 7, 7 )
 
 [node name="Page1" type="Control" parent="."]
-margin_left = 742.0
-margin_right = 742.0
+margin_left = 868.0
+margin_top = 36.0
+margin_right = 868.0
+margin_bottom = 36.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="wood axe" parent="Page1" instance=ExtResource( 24 )]
 margin_left = -578.0
@@ -212,6 +213,11 @@ texture_normal = ExtResource( 29 )
 
 [node name="Page2" type="Control" parent="."]
 visible = false
+margin_left = -280.0
+margin_top = 40.0
+margin_right = -280.0
+margin_bottom = 40.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="stone chest" parent="Page2" instance=ExtResource( 24 )]
 margin_left = 166.0
@@ -275,8 +281,11 @@ texture_normal = ExtResource( 13 )
 
 [node name="Page3" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -280.0
+margin_top = 40.0
+margin_right = -240.0
+margin_bottom = 80.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="stove #2" parent="Page3" instance=ExtResource( 24 )]
 margin_left = 206.0
@@ -328,8 +337,11 @@ texture_normal = ExtResource( 21 )
 
 [node name="Page4" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -280.0
+margin_top = 40.0
+margin_right = -240.0
+margin_bottom = 80.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="grain mill #3" parent="Page4" instance=ExtResource( 24 )]
 margin_left = 198.0
@@ -383,8 +395,11 @@ texture_normal = ExtResource( 22 )
 
 [node name="Page5" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -280.0
+margin_top = 40.0
+margin_right = -240.0
+margin_bottom = 80.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="metal door" parent="Page5" instance=ExtResource( 24 )]
 margin_left = 210.0
@@ -439,8 +454,11 @@ texture_normal = ExtResource( 9 )
 
 [node name="Page6" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -280.0
+margin_top = 40.0
+margin_right = -240.0
+margin_bottom = 80.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="table" parent="Page6" instance=ExtResource( 24 )]
 margin_left = 194.0
@@ -482,8 +500,11 @@ texture_normal = ExtResource( 36 )
 
 [node name="Page7" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -280.0
+margin_top = 40.0
+margin_right = -240.0
+margin_bottom = 80.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="small rug" parent="Page7" instance=ExtResource( 24 )]
 margin_left = 236.0
@@ -527,8 +548,11 @@ texture_normal = ExtResource( 40 )
 
 [node name="Page8" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -280.0
+margin_top = 40.0
+margin_right = -240.0
+margin_bottom = 80.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="well" parent="Page8" instance=ExtResource( 24 )]
 margin_left = 210.0
@@ -594,17 +618,17 @@ margin_bottom = 96.0
 texture_normal = ExtResource( 41 )
 
 [node name="InventorySlots" parent="." instance=ExtResource( 44 )]
-margin_left = 182.0
-margin_top = 756.0
-margin_right = 749.0
-margin_bottom = 810.0
+margin_left = 6.0
+margin_top = 1190.0
+margin_right = 843.0
+margin_bottom = 1358.0
 rect_scale = Vector2( 2, 2 )
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource( 19 )]
-margin_left = 182.0
-margin_top = 636.0
-margin_right = 749.0
-margin_bottom = 690.0
+margin_left = 6.0
+margin_top = 994.0
+margin_right = 843.0
+margin_bottom = 1075.0
 rect_scale = Vector2( 2, 2 )
 
 [node name="Tween" type="Tween" parent="."]
@@ -613,19 +637,20 @@ rect_scale = Vector2( 2, 2 )
 bus = "Bus1"
 
 [node name="DownButton" type="TextureButton" parent="."]
-margin_left = 1268.0
-margin_top = 432.0
-margin_right = 1308.0
-margin_bottom = 474.0
-rect_scale = Vector2( 2, 2 )
+margin_left = 1636.0
+margin_top = 764.0
+margin_right = 1676.0
+margin_bottom = 806.0
+rect_scale = Vector2( 2.5, 2.5 )
 texture_normal = ExtResource( 27 )
 
 [node name="UpButton" type="TextureButton" parent="."]
-margin_left = 1268.0
-margin_top = 234.0
-margin_right = 1308.0
-margin_bottom = 276.0
-rect_scale = Vector2( 2, 2 )
+visible = false
+margin_left = 1636.0
+margin_top = 310.0
+margin_right = 1676.0
+margin_bottom = 352.0
+rect_scale = Vector2( 2.5, 2.5 )
 texture_normal = ExtResource( 26 )
 
 [connection signal="pressed" from="DownButton" to="." method="_on_DownButton_pressed"]

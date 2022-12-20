@@ -200,14 +200,17 @@ margin_bottom = 39.0
 script = ExtResource( 5 )
 
 [node name="Background" type="TextureRect" parent="."]
-margin_top = 82.0
-margin_right = 693.0
-margin_bottom = 523.0
+margin_left = -141.0
+margin_top = 145.0
+margin_right = 552.0
+margin_bottom = 586.0
+rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 0
 texture = ExtResource( 15 )
 expand = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_left = 78.0
 margin_top = 350.0
 margin_right = 341.0
@@ -217,13 +220,29 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="InventorySlots" parent="." instance=ExtResource( 3 )]
+margin_left = 429.0
+margin_top = 381.0
+margin_right = 846.0
+margin_bottom = 741.0
+custom_constants/vseparation = 12
+columns = 5
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource( 14 )]
+margin_left = 429.0
+margin_top = 174.0
+margin_right = 846.0
+margin_bottom = 348.0
+custom_constants/vseparation = 12
+columns = 5
+
 [node name="HotbarLabels" type="HBoxContainer" parent="."]
-margin_left = 402.0
-margin_top = 84.0
-margin_right = 2997.0
-margin_bottom = 145.0
-rect_scale = Vector2( 0.2, 0.2 )
-custom_constants/separation = 260
+margin_left = 465.0
+margin_top = 157.0
+margin_right = 1628.0
+margin_bottom = 218.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_constants/separation = 256
 
 [node name="1" type="Label" parent="HotbarLabels"]
 margin_right = 19.0
@@ -232,40 +251,40 @@ theme = ExtResource( 4 )
 text = "1"
 
 [node name="2" type="Label" parent="HotbarLabels"]
-margin_left = 279.0
-margin_right = 306.0
+margin_left = 275.0
+margin_right = 302.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "2"
 
 [node name="3" type="Label" parent="HotbarLabels"]
-margin_left = 566.0
-margin_right = 593.0
+margin_left = 558.0
+margin_right = 585.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "3"
 
 [node name="4" type="Label" parent="HotbarLabels"]
-margin_left = 853.0
-margin_right = 876.0
+margin_left = 841.0
+margin_right = 864.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "4"
 
 [node name="5" type="Label" parent="HotbarLabels"]
-margin_left = 1136.0
-margin_right = 1163.0
+margin_left = 1120.0
+margin_right = 1147.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "5"
 
 [node name="HotbarLabels2" type="HBoxContainer" parent="."]
-margin_left = 402.0
-margin_top = 151.0
-margin_right = 1574.0
-margin_bottom = 212.0
-rect_scale = Vector2( 0.2, 0.2 )
-custom_constants/separation = 260
+margin_left = 459.0
+margin_top = 252.0
+margin_right = 1631.0
+margin_bottom = 313.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_constants/separation = 256
 
 [node name="6" type="Label" parent="HotbarLabels2"]
 margin_right = 27.0
@@ -274,113 +293,93 @@ theme = ExtResource( 4 )
 text = "6"
 
 [node name="7" type="Label" parent="HotbarLabels2"]
-margin_left = 287.0
-margin_right = 312.0
+margin_left = 283.0
+margin_right = 308.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "7"
 
 [node name="8" type="Label" parent="HotbarLabels2"]
-margin_left = 572.0
-margin_right = 599.0
+margin_left = 564.0
+margin_right = 591.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "8"
 
 [node name="9" type="Label" parent="HotbarLabels2"]
-margin_left = 859.0
-margin_right = 885.0
+margin_left = 847.0
+margin_right = 873.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "9"
 
 [node name="0" type="Label" parent="HotbarLabels2"]
-margin_left = 1145.0
-margin_right = 1172.0
+margin_left = 1129.0
+margin_right = 1156.0
 margin_bottom = 61.0
 theme = ExtResource( 4 )
 text = "0"
 
-[node name="InventorySlots" parent="." instance=ExtResource( 3 )]
-margin_left = 378.0
-margin_top = 229.0
-margin_right = 660.0
-margin_bottom = 340.0
-custom_constants/vseparation = 12
-columns = 5
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="HotbarInventorySlots" parent="." instance=ExtResource( 14 )]
-margin_left = 378.0
-margin_right = 660.0
-margin_bottom = 208.0
-custom_constants/vseparation = 12
-columns = 5
-
 [node name="AttributeSlots" type="GridContainer" parent="."]
-margin_left = 93.0
-margin_top = 97.0
-margin_right = 333.0
-margin_bottom = 271.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 132
+margin_left = -2.0
+margin_top = 167.0
+margin_right = 358.0
+margin_bottom = 446.0
+custom_constants/vseparation = 18
+custom_constants/hseparation = 198
 columns = 2
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="locked1" type="TextureRect" parent="AttributeSlots"]
-margin_right = 54.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
+margin_right = 81.0
+margin_bottom = 81.0
+rect_min_size = Vector2( 81, 81 )
 texture = ExtResource( 2 )
 expand = true
 
 [node name="locked2" type="TextureRect" parent="AttributeSlots"]
-margin_left = 186.0
-margin_right = 240.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
+margin_left = 279.0
+margin_right = 360.0
+margin_bottom = 81.0
+rect_min_size = Vector2( 81, 81 )
 texture = ExtResource( 2 )
 expand = true
 
 [node name="locked3" type="TextureRect" parent="AttributeSlots"]
-margin_top = 66.0
-margin_right = 54.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 54, 54 )
+margin_top = 99.0
+margin_right = 81.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 81, 81 )
 texture = ExtResource( 2 )
 expand = true
 
 [node name="locked4" type="TextureRect" parent="AttributeSlots"]
-margin_left = 186.0
-margin_top = 66.0
-margin_right = 240.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 54, 54 )
+margin_left = 279.0
+margin_top = 99.0
+margin_right = 360.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 81, 81 )
 texture = ExtResource( 2 )
 expand = true
 
 [node name="locked5" type="TextureRect" parent="AttributeSlots"]
-margin_top = 132.0
-margin_right = 54.0
-margin_bottom = 186.0
-rect_min_size = Vector2( 54, 54 )
+margin_top = 198.0
+margin_right = 81.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 81, 81 )
 texture = ExtResource( 2 )
 expand = true
 
 [node name="locked6" type="TextureRect" parent="AttributeSlots"]
-margin_left = 186.0
-margin_top = 132.0
-margin_right = 240.0
-margin_bottom = 186.0
-rect_min_size = Vector2( 54, 54 )
+margin_left = 279.0
+margin_top = 198.0
+margin_right = 360.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 81, 81 )
 texture = ExtResource( 2 )
 expand = true
 
 [node name="PetUI" type="Control" parent="."]
+visible = false
 script = ExtResource( 6 )
 
 [node name="PetLabel" type="Label" parent="PetUI"]
@@ -401,7 +400,7 @@ position = Vector2( 147, 395 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle right"
-frame = 13
+frame = 17
 playing = true
 
 [node name="SpawnPet" type="TextureButton" parent="PetUI"]
@@ -428,11 +427,11 @@ valign = 1
 [node name="SoundEffects" type="AudioStreamPlayer" parent="PetUI"]
 
 [node name="EnergyManaHealth" type="Control" parent="."]
-margin_left = 93.0
-margin_top = 316.0
-margin_right = 693.0
-margin_bottom = 391.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = 3.0
+margin_top = 493.0
+margin_right = 603.0
+margin_bottom = 568.0
+rect_scale = Vector2( 0.6, 0.6 )
 script = ExtResource( 12 )
 
 [node name="Energy" type="Label" parent="EnergyManaHealth"]
@@ -468,7 +467,7 @@ margin_top = 7.0
 margin_right = 381.0
 margin_bottom = 68.0
 theme = ExtResource( 4 )
-custom_colors/font_color = Color( 0.14902, 0, 1, 1 )
+custom_colors/font_color = Color( 0, 0.439216, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
@@ -504,18 +503,18 @@ align = 1
 valign = 1
 
 [node name="DayNightBg" type="TextureRect" parent="."]
-margin_left = 165.0
-margin_top = 115.0
-margin_right = 272.0
-margin_bottom = 282.0
+margin_left = 107.0
+margin_top = 195.0
+margin_right = 266.0
+margin_bottom = 444.0
 rect_scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 13 )
 expand = true
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 material = ExtResource( 9 )
-position = Vector2( 214, 248 )
-scale = Vector2( 3.5, 3.5 )
+position = Vector2( 179, 395 )
+scale = Vector2( 5, 5 )
 script = ExtResource( 10 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]

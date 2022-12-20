@@ -116,10 +116,8 @@ margin_bottom = -216.0
 rect_scale = Vector2( 4.5, 4.5 )
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
-visible = false
-margin_top = 60.0
-margin_bottom = 60.0
-rect_scale = Vector2( 1.5, 1.5 )
+margin_top = 96.0
+margin_bottom = 96.0
 
 [node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
 visible = false

@@ -26,12 +26,12 @@ func set_item(nm, qt, health):
 		set_health_bar(item_health)
 
 func set_init_hovered():
-	$Image.rect_scale = Vector2(1.15, 1.15)
+	$Image.rect_scale = Vector2(1.1, 1.1)
 	$Image.rect_position = Vector2(1.0, 1.0)
 
 func hover_item():
 	$Tween.interpolate_property($Image, "rect_scale",
-		$Image.rect_scale, Vector2(1.15, 1.15), 0.075,
+		$Image.rect_scale, Vector2(1.1, 1.1), 0.075,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Image, "rect_position",
 		$Image.rect_position, Vector2(1, 1), 0.075,

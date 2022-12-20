@@ -5,6 +5,11 @@
 [ext_resource path="res://Assets/Images/Misc/Buttons/large exit button.png" type="Texture" id=3]
 
 [node name="Exit" type="Control"]
+margin_left = 48.0
+margin_top = 317.0
+margin_right = 48.0
+margin_bottom = 317.0
+rect_scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
 [node name="Save" type="TextureButton" parent="."]

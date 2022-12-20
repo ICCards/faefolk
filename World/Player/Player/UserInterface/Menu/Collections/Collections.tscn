@@ -990,8 +990,11 @@ shader_param/flash_modifier = 0.0
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
 [node name="Collections" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -520.0
+margin_top = 58.0
+margin_right = -480.0
+margin_bottom = 98.0
+rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 4 )
 
 [node name="CollectionItemDescription" parent="." instance=ExtResource( 2 )]
