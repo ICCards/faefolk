@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Assets/Images/User interface/Player stats/stats-bars-x2.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Images/Inventory UI/DateTime/clock.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/Inventory UI/DateTime/clock icons/1.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/Inventory UI/DateTime/season icons/spring.png" type="Texture" id=9]
 
 [node name="PlayerDataUI" type="Control"]
 rect_scale = Vector2( 1.5, 1.5 )
@@ -115,6 +114,5 @@ margin_top = 24.0
 margin_right = 984.0
 margin_bottom = 32.0
 rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 9 )
 
 [connection signal="timeout" from="DateTime/AdvanceTime" to="." method="_on_AdvanceTime_timeout"]
