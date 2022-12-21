@@ -40,6 +40,7 @@ data = {
 modulate = Color( 0.54902, 0.54902, 0.54902, 1 )
 margin_right = 1024.0
 margin_bottom = 600.0
+rect_scale = Vector2( 2, 2 )
 input_pass_on_modal_close_click = false
 script = SubResource( 1 )
 

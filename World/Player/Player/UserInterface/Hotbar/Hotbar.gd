@@ -55,21 +55,21 @@ func adjusted_description_position():
 		var item_category = JsonData.item_data[item]["ItemCategory"]
 		var lines = $ItemDescription/Body/ItemDescription.get_line_count()
 		if lines == 8:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -288)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -372)
 		elif lines == 7:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -260)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -340)
 		elif lines == 6:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -236)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -304)
 		elif lines == 5:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -210)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -264)
 		elif lines == 4:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -184)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -236)
 		elif lines == 3:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -158)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -198)
 		else:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -134)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -174) #-134)
 		if item_category == "Food" or item_category == "Fish" or item_category == "Crop":
-			adjusted_pos += Vector2(0, -64)
+			adjusted_pos += Vector2(0, -84)
 
 func update_tool_health():
 	var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]

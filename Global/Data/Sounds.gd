@@ -1,9 +1,9 @@
 extends Node
 
-var music_volume = 50
-var sound_volume = 50
-var ambient_volume = 50
-var footstep_volume = 50
+var music_volume = 50.0
+var sound_volume = 50.0
+var ambient_volume = 50.0
+var footstep_volume = 50.0
 
 signal volume_change
 signal footsteps_sound_change
@@ -26,36 +26,29 @@ func play_small_select_sound():
 	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	Server.player_node.sound_effects.play()
 
-##func _ready():
-##	set_music_volume(music_volume)
-##	set_sound_volume(sound_volume)
-##	set_ambient_volume(ambient_volume)
-##	set_footstep_volume(footstep_volume)
-#
+
 func set_music_volume(val):
-	pass
-#	music_volume = val
-#	emit_signal("volume_change")
+	music_volume = val
+	emit_signal("volume_change")
 
 func set_sound_volume(val):
-	pass
-#	sound_volume = val
-#	emit_signal("volume_change")
+	sound_volume = val
+	emit_signal("volume_change")
 
 func set_ambient_volume(val):
-	pass
-#	ambient_volume = val
-#	emit_signal("volume_change")
+	ambient_volume = val
+	emit_signal("volume_change")
 
 func set_footstep_volume(val):
-	pass
-#	footstep_volume = val
-#	emit_signal("volume_change")
+	footstep_volume = val
+	emit_signal("volume_change")
 	
 func return_adjusted_sound_db(category, init_sound):
-	return init_sound
 	if category == "music":
+		print("MUSIC VOLUME FROM SLIDER " + str(music_volume))
 		var progress = music_volume / 100
+		print("_---------")
+		print(progress)
 		if progress == 0.5:
 			return init_sound
 		elif progress < 0.5:
@@ -113,8 +106,8 @@ var place_object = load("res://Assets/Sound/Sound effects/Building/place object.
 var pick_up_house_object = load("res://Assets/Sound/Sound effects/UI/pick up house object.mp3")
 var put_down_house_object = load("res://Assets/Sound/Sound effects/UI/put down house object.mp3")
 
-var door_open = load("res://Assets/Sound/Sound effects/Door/door open.mp3")
-var door_close = load("res://Assets/Sound/Sound effects/Door/door close.mp3")
+#var door_open = load("res://Assets/Sound/Sound effects/Door/door open.mp3")
+#var door_close = load("res://Assets/Sound/Sound effects/Door/door close.mp3")
 
 var chest_open = load("res://Assets/Sound/Sound effects/chest/open.mp3")
 

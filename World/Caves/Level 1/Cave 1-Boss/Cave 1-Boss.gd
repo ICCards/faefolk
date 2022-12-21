@@ -5,12 +5,11 @@ onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 
 var is_changing_scene: bool = false
 var nav_node
-var cave_chest_id = "level 1, room 10"
 var count = 0
-var NUM_BATS = 0
-var NUM_SLIMES = 0
-var NUM_SPIDERS = 0
-var NUM_SKELETONS = 0
+var NUM_BATS = 3
+var NUM_SLIMES = 2
+var NUM_SPIDERS = 2
+var NUM_SKELETONS = 2
 var map_size = 50
 
 func _ready():
@@ -53,9 +52,10 @@ func _on_SpawnBatTimer_timeout():
 		count += 1
 
 func spawn_boss():
-	var boss = WindBoss.instance()
-	boss.position = Vector2(rand_range(20,40), rand_range(20,40))*32
-	$Enemies.add_child(boss)
+	if PlayerData.player_data["skill_experience"]["wind"] == 0:
+		var boss = WindBoss.instance()
+		boss.position = Vector2(rand_range(20,40), rand_range(20,40))*32
+		$Enemies.add_child(boss)
 
 func _on_UpdateNavigation_timeout():
 	update_navigation()

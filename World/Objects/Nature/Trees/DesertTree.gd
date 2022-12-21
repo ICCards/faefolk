@@ -24,15 +24,6 @@ var desertTrees = ["1a", "1b", "2a", "2b"]
 #		$AnimatedSprite.position = Vector2(0, 20)
 #	else:
 #		$AnimatedSprite.position = Vector2(0, 12)
-		
-func _on_TreeHurtbox_area_entered(area):
-	if area.name == "AxePickaxeSwing":
-		Stats.decrease_tool_health()
-	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-		hit(area.tool_name)
-	if area.special_ability == "fire buff":
-		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-18,12)))
-		health -= Stats.FIRE_DEBUFF_DAMAGE
 
 func hit(tool_name):
 	health -= Stats.return_tool_damage(tool_name)
@@ -89,3 +80,13 @@ func _on_TreeTopArea_area_entered(area):
 	set_tree_transparent()
 func _on_TreeTopArea_area_exited(area):
 	set_tree_visible()
+
+
+func _on_Hurtbox_area_entered(area):
+	if area.name == "AxePickaxeSwing":
+		Stats.decrease_tool_health()
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+		hit(area.tool_name)
+	if area.special_ability == "fire buff":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-18,12)))
+		health -= Stats.FIRE_DEBUFF_DAMAGE

@@ -629,7 +629,7 @@
   "raw filet": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "A lean protein from a bunny.",
+      "Description": "A lean protein from an animal carcass.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
@@ -638,14 +638,14 @@
       "StackSize": 999,
       "Description": "A quick and tasty snack.",
       "Ingredients": [["raw wing", 1]],
-      "EnergyHealth": [10,10]
+      "EnergyHealth": [24,16]
   },
   "cooked filet": {
       "ItemCategory": "Food",
       "StackSize": 999,
       "Description": "Provides long-lasting energy.",
       "Ingredients": [["raw filet", 1]],
-      "EnergyHealth": [10,10]
+      "EnergyHealth": [32,16]
   },
   "wheat flour": {
       "ItemCategory": "Food",
@@ -680,7 +680,7 @@
       "StackSize": 999,
       "Description": "A fungus found in the caves.",
       "Ingredients": null,
-      "EnergyHealth": [0,0]
+      "EnergyHealth": null
   },
   
   
@@ -1090,14 +1090,14 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Entry point for bases with medium durability.",
-      "Ingredients": [["iron ingot", 20]],
+      "Ingredients": [["bronze ingot", 20]],
       "EnergyHealth": null
   },
   "armored door" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Entry point for bases with high durability.",
-      "Ingredients": [["iron ingot", 40]],
+      "Ingredients": [["iron ingot", 20]],
       "EnergyHealth": null
   },
   "furnace" : {
@@ -1447,9 +1447,9 @@
     "mushroom soup":{
         "ItemCategory": "Food",
         "StackSize": 999,
-        "Description": "[description]",
+        "Description": "A warm and creamy snack.",
         "Ingredients": [["mushroom", 5]],
-        "EnergyHealth": [10,10]
+        "EnergyHealth": [18,10]
     },
     "sashimi":{
         "ItemCategory": "Food",

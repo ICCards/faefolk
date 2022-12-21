@@ -154,7 +154,7 @@ color = Color( 0, 1, 1, 1 )
 
 [node name="GameTimer" type="Timer" parent="."]
 
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
 [connection signal="button_down" from="Clicker" to="." method="_on_Clicker_button_down"]

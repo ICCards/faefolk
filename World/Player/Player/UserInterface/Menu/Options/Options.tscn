@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Themes/UI_menu.tres" type="Theme" id=1]
 [ext_resource path="res://Assets/Images/Inventory UI/Options/slider.png" type="Texture" id=3]
@@ -12,23 +12,11 @@
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 231, 21 )
 
-[sub_resource type="StyleBoxTexture" id=35]
+[sub_resource type="StyleBoxTexture" id=38]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 231, 21 )
 
 [sub_resource type="StyleBoxTexture" id=34]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 231, 21 )
-
-[sub_resource type="StyleBoxTexture" id=36]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 231, 21 )
-
-[sub_resource type="StyleBoxTexture" id=37]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 231, 21 )
-
-[sub_resource type="StyleBoxTexture" id=38]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 231, 21 )
 
@@ -109,10 +97,9 @@ custom_icons/grabber_disabled = ExtResource( 4 )
 custom_icons/grabber_highlight = ExtResource( 4 )
 custom_icons/grabber = ExtResource( 4 )
 custom_styles/slider = SubResource( 33 )
-custom_styles/grabber_area_highlight = SubResource( 35 )
+custom_styles/grabber_area_highlight = SubResource( 38 )
 custom_styles/grabber_area = SubResource( 34 )
 value = 50.0
-editable = false
 
 [node name="RightBoundary" type="TextureRect" parent="VBoxContainer/Grid/Slider1/HBoxContainer"]
 margin_left = 243.0
@@ -154,10 +141,9 @@ custom_icons/grabber_disabled = ExtResource( 4 )
 custom_icons/grabber_highlight = ExtResource( 4 )
 custom_icons/grabber = ExtResource( 4 )
 custom_styles/slider = SubResource( 33 )
-custom_styles/grabber_area_highlight = SubResource( 36 )
+custom_styles/grabber_area_highlight = SubResource( 38 )
 custom_styles/grabber_area = SubResource( 34 )
 value = 50.0
-editable = false
 
 [node name="RightBoundary" type="TextureRect" parent="VBoxContainer/Grid/Slider2/HBoxContainer"]
 margin_left = 243.0
@@ -200,10 +186,9 @@ custom_icons/grabber_disabled = ExtResource( 4 )
 custom_icons/grabber_highlight = ExtResource( 4 )
 custom_icons/grabber = ExtResource( 4 )
 custom_styles/slider = SubResource( 33 )
-custom_styles/grabber_area_highlight = SubResource( 37 )
+custom_styles/grabber_area_highlight = SubResource( 38 )
 custom_styles/grabber_area = SubResource( 34 )
 value = 50.0
-editable = false
 
 [node name="RightBoundary" type="TextureRect" parent="VBoxContainer/Grid/Slider3/HBoxContainer"]
 margin_left = 243.0

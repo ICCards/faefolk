@@ -6544,6 +6544,7 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
 format = 1
+tile_data = PoolIntArray( -262112, 0, 0, -196585, 2, 0, -131070, 2, 0, -131064, 0, 0, -65519, 1, 0, -65495, 1, 0, 65583, 2, 0, 131084, 2, 0, 262147, 1, 0, 262195, 1, 0, 589858, 0, 0, 589880, 0, 0, 655366, 2, 0, 786462, 2, 0, 983042, 0, 0, 1376315, 1, 0, 1507329, 2, 0, 1507377, 1, 0, 1638447, 2, 0, 1900556, 2, 0, 1900603, 2, 0, 2097153, 0, 0, 2162701, 1, 0, 2162705, 2, 0, 2424870, 1, 0, 2555961, 0, 0, 2621444, 1, 0, 2949174, 1, 0, 3014664, 2, 0, 3145777, 2, 0, 3342353, 0, 0, 3473449, 0, 0, 3604505, 1, 0, 3670051, 2, 0 )
 
 [node name="Decoration" type="TileMap" parent="Tiles"]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
@@ -6575,6 +6576,7 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
 format = 1
+tile_data = PoolIntArray( -131044, 1, 0, -65533, 1, 0, -65531, 1, 0, 38, 0, 0, 65554, 2, 0, 196655, 2, 0, 262155, 0, 0, 786439, 0, 0, 852003, 0, 0, 917534, 2, 0, 1245242, 1, 0, 1638402, 2, 0, 1835056, 0, 0, 2359312, 2, 0, 2555943, 1, 0 )
 
 [node name="ValidTiles" type="TileMap" parent="Tiles"]
 visible = false
@@ -6623,6 +6625,7 @@ collision_mask = 0
 format = 1
 
 [node name="Water" type="TileMap" parent="Tiles"]
+visible = false
 z_index = -1
 tile_set = ExtResource( 17 )
 cell_size = Vector2( 32, 32 )

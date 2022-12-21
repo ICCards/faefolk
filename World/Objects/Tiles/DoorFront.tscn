@@ -216,7 +216,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="DoubleDoorFront" type="Node2D"]
+[node name="DoorFront" type="Node2D"]
 script = ExtResource( 5 )
 
 [node name="LightMask" type="Light2D" parent="."]
@@ -262,7 +262,7 @@ anims/RESET = SubResource( 13 )
 anims/hit = SubResource( 14 )
 
 [node name="MovementCollision" type="StaticBody2D" parent="."]
-visible = false
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
 position = Vector2( 32, -7.5 )
@@ -340,6 +340,8 @@ anims/open = SubResource( 5 )
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 11 )
 "anims/show health bar" = SubResource( 12 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="EnterDoorway" to="." method="_on_EnterDoorway_area_entered"]
 [connection signal="area_exited" from="EnterDoorway" to="." method="_on_EnterDoorway_area_exited"]

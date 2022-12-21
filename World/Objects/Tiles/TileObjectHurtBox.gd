@@ -20,7 +20,7 @@ func _ready():
 func _unhandled_input(event):
 	if event.is_action_pressed("action"):
 		if $Position2D/DetectPlayerAroundBed.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-			Server.player_node.sleep("down", position + Vector2(32,-24))
+			Server.player_node.actions.sleep("down", position + Vector2(32,-24))
 
 
 func PlayEffect(_player_id):

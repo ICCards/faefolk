@@ -4,6 +4,7 @@ onready var hit_box: Position2D = $Position2D
 onready var wolf_sprite: Sprite = $WolfSprite
 onready var _idle_timer: Timer = $Timers/IdleTimer
 onready var _chase_timer: Timer = $Timers/ChaseTimer
+onready var _retreat_timer: Timer = $Timers/RetreatTimer
 onready var _end_chase_state_timer: Timer = $Timers/EndChaseState
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -39,7 +40,8 @@ enum {
 	WALK,
 	CHASE,
 	ATTACK,
-	DEATH
+	DEATH,
+	RETREAT
 }
 var rng = RandomNumberGenerator.new()
 
@@ -50,6 +52,7 @@ func _ready():
 	_idle_timer.wait_time = rand_range(3.0,8.0)
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
+	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	navigation_agent.connect("velocity_computed", self, "move") 
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
@@ -60,6 +63,10 @@ func _update_pathfinding_idle():
 	state = WALK
 	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 	
+func _update_pathfinding_retreat():
+	var target = -player.position*Vector2(100,100)
+	navigation_agent.set_target_location(target)
+	
 func set_sprite_texture():
 	match state:
 		IDLE:
@@ -67,6 +74,8 @@ func set_sprite_texture():
 		WALK:
 			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png")
 		CHASE:
+			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png")
+		RETREAT:
 			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png")
 
 	
@@ -97,7 +106,7 @@ func _physics_process(delta):
 		return
 	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
-	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing:
+	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
 		start_chase_state()
 	if state == CHASE and (position+Vector2(0,-9)).distance_to(player.position) < 70:
 		state = ATTACK
@@ -142,6 +151,8 @@ func hit(tool_name):
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
+	if health < STARTING_HEALTH*.3:
+		start_retreat_state()
 	if health <= 0 and not destroyed:
 		destroy()
 
@@ -196,6 +207,14 @@ func _on_HurtBox_area_entered(area):
 			$EnemyPoisonState.start("poison arrow")
 		yield(get_tree().create_timer(0.25), "timeout")
 		$KnockbackParticles.emitting = false
+
+func start_retreat_state():
+	state = RETREAT
+	_idle_timer.stop()
+	_chase_timer.stop()
+	_retreat_timer.start()
+	stop_sound_effects()
+	chasing = false
 
 func start_chase_state():
 	start_sound_effects()

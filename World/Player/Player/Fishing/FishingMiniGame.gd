@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var hookVelocity = 0.0;
 var hookAcceleration = 0.05;

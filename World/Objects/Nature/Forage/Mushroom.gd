@@ -28,14 +28,16 @@ func _on_Btn_pressed():
 		Server.player_node.actions.harvest_forage("Mushroom/"+str(variety))
 		MapData.remove_object("mushroom", name)
 		yield(get_tree().create_timer(0.6), "timeout")
+		Input.set_custom_mouse_cursor(Images.normal_mouse)
 		PlayerData.add_item_to_hotbar("mushroom", 1, null)
 		queue_free()
 
 func set_mouse_cursor_type():
-	if $DetectPlayer.get_overlapping_areas().size() >= 1:
-		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest.png"))
-	else:
-		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest transparent.png"))
+	if not $Btn.disabled:
+		if $DetectPlayer.get_overlapping_areas().size() >= 1:
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest.png"))
+		else:
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest transparent.png"))
 
 
 func _on_DetectPlayer_area_entered(area):
