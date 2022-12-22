@@ -12,6 +12,7 @@ func _ready():
 	Sounds.connect("volume_change", self, "change_title_volume")
 	$Background/Water1.playing = true
 	$Background/Water2.playing = true
+	spawn_player_in_menu()
 
 
 func spawn_player_in_menu():
@@ -23,7 +24,7 @@ func spawn_player_in_menu():
 		playerMenuState.character = _character.new()
 		playerMenuState.character.LoadPlayerCharacter("human_male")
 		add_child(playerMenuState)
-		playerMenuState.global_position = Vector2(1150, 900 )
+		playerMenuState.global_position = Vector2(1150, 850 )
 #	else:
 #		yield(get_tree().create_timer(0.25), "timeout")
 #		spawn_player_in_menu()

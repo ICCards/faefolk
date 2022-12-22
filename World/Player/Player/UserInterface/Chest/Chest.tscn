@@ -18,45 +18,52 @@ anchor_bottom = 0.5
 script = ExtResource( 3 )
 
 [node name="Trash" parent="." instance=ExtResource( 5 )]
-margin_left = -512.0
-margin_top = -300.0
-margin_right = -458.0
-margin_bottom = -300.0
+margin_left = -960.0
+margin_top = -540.0
+margin_right = -906.0
+margin_bottom = -540.0
 
 [node name="ItemDescription" parent="." instance=ExtResource( 9 )]
 visible = false
+scale = Vector2( 3.5, 3.5 )
 
 [node name="ChestSlotsImg" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -377.0
-margin_top = -257.0
-margin_right = 316.0
-margin_bottom = 268.0
+margin_left = -547.0
+margin_top = -362.0
+margin_right = 146.0
+margin_bottom = 163.0
+rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 2
 texture = ExtResource( 2 )
 
 [node name="InventorySlots" parent="." instance=ExtResource( 11 )]
-margin_left = -284.0
-margin_top = 123.0
-margin_right = 283.0
-margin_bottom = 177.0
+margin_left = -398.0
+margin_top = 216.0
+margin_right = 439.0
+margin_bottom = 384.0
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource( 10 )]
-margin_left = -284.0
-margin_top = 54.0
-margin_right = 283.0
-margin_bottom = 108.0
+margin_left = -398.0
+margin_top = 109.0
+margin_right = 439.0
+margin_bottom = 190.0
 
 [node name="ChestSlots" parent="." instance=ExtResource( 1 )]
+margin_left = -398.0
+margin_top = -312.0
+margin_right = 439.0
+margin_bottom = -57.0
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="OkButton" type="Control" parent="."]
-margin_left = -32.0
-margin_top = -224.0
-margin_right = -32.0
-margin_bottom = -224.0
+margin_left = -35.0
+margin_top = -373.0
+margin_right = -35.0
+margin_bottom = -373.0
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="btn" type="TextureButton" parent="OkButton"]
 margin_left = 377.0

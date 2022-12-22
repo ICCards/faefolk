@@ -55,10 +55,12 @@ resource_name = "button_keys"
 [node name="Options" type="ScrollContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -19.0
-margin_right = -447.0
-margin_bottom = -202.0
+margin_left = -332.0
+margin_top = 186.0
+margin_right = -779.0
+margin_bottom = 3.0
 rect_min_size = Vector2( 550, 415 )
+rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
