@@ -6,19 +6,21 @@ var storm2
 
 
 func _ready():
+	Sounds.connect("volume_change", self, "set_new_ambient_volume")
 	if has_node("/root/World"):
 		stream = load("res://Assets/Sound/Sound effects/Ambience/spring_day.mp3")
 		volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
 		play()
-		Sounds.connect("volume_change", self, "set_new_music_volume")
 	else:
 		stream = load("res://Assets/Sound/Sound effects/Ambience/cave ambience.mp3")
 		volume_db = Sounds.return_adjusted_sound_db("ambient", -20)
 		play()
 
-
-func set_new_music_volume():
-	volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
+func set_new_ambient_volume():
+	if has_node("/root/World"):
+		volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
+	else:
+		volume_db = Sounds.return_adjusted_sound_db("ambient", -20)
 
 func _physics_process(delta):
 	if Server.isLoaded and has_node("/root/World"):

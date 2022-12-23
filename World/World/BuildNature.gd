@@ -26,7 +26,6 @@ onready var NatureObjects = get_node("../../NatureObjects")
 
 var is_destroyed: bool = false
 
-
 func _ready():
 	spawn_placables()
 	
@@ -137,14 +136,15 @@ func spawn_trees():
 					Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
 					var biome = map["tree"][id]["b"]
 					if biome == "desert":
-						var object = DesertTree.instance()
-						var pos = Tiles.valid_tiles.map_to_world(loc)
-						object.health = MapData.world["tree"][id]["h"]
-						object.position = pos + Vector2(0, -8)
-						object.name = id
-						object.location = loc
-						NatureObjects.call_deferred("add_child",object,true)
-						yield(get_tree().create_timer(0.01), "timeout")
+						pass
+#						var object = DesertTree.instance()
+#						var pos = Tiles.valid_tiles.map_to_world(loc)
+#						object.health = MapData.world["tree"][id]["h"]
+#						object.position = pos + Vector2(0, -8)
+#						object.name = id
+#						object.location = loc
+#						NatureObjects.call_deferred("add_child",object,true)
+#						yield(get_tree().create_timer(0.01), "timeout")
 					else:
 						var object = TreeObject.instance()
 						var pos = Tiles.valid_tiles.map_to_world(loc)
@@ -198,7 +198,10 @@ func spawn_ores():
 					var object = LargeOre.instance()
 					object.health = MapData.world["ore_large"][id]["h"]
 					object.name = id
-					object.variety = MapData.world["ore_large"][id]["v"]
+					if Util.chance(50):
+						object.variety = "stone1" 
+					else: 
+						object.variety = "stone2"  #MapData.world["ore_large"][id]["v"]
 					object.location = loc
 					object.position = Tiles.valid_tiles.map_to_world(loc) 
 					NatureObjects.call_deferred("add_child",object,true)
@@ -213,7 +216,11 @@ func spawn_ores():
 					var object = SmallOre.instance()
 					object.health = map["ore"][id]["h"]
 					object.name = id
-					object.variety = MapData.world["ore"][id]["v"]
+					#object.variety = MapData.world["ore"][id]["v"]
+					if Util.chance(50):
+						object.variety = "stone1" 
+					else: 
+						object.variety = "stone2"
 					object.location = loc
 					object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16, 24)
 					NatureObjects.call_deferred("add_child",object,true)

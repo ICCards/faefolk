@@ -300,29 +300,30 @@ func place_buildings_state():
 				place_object(item_name, null, location, "placable")
 
 func place_sleeping_bag_state():
-	get_rotation_index()
-	var direction = directions[direction_index]
+	#get_rotation_index()
+	#var direction = directions[direction_index]
+	var direction = "down"
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if direction == "up":
-		$ColorIndicator.tile_size = Vector2(1, 2)
-		$ScaledItemToPlace.rect_position = Vector2(32,-32)
-		$ScaledItemToPlace.rect_rotation = 90
-		$ScaledItemToPlace.flip_v = false
-	elif direction == "down":
+#	if direction == "up":
+#		$ColorIndicator.tile_size = Vector2(1, 2)
+#		$ScaledItemToPlace.rect_position = Vector2(32,-32)
+#		$ScaledItemToPlace.rect_rotation = 90
+#		$ScaledItemToPlace.flip_v = false
+	if direction == "down":
 		$ColorIndicator.tile_size = Vector2(1, 2)
 		$ScaledItemToPlace.rect_position = Vector2(0,32)
 		$ScaledItemToPlace.rect_rotation = 270
 		$ScaledItemToPlace.flip_v = false
-	elif direction == "left":
-		$ColorIndicator.tile_size = Vector2(2, 1)
-		$ScaledItemToPlace.rect_position = Vector2(64,32)
-		$ScaledItemToPlace.rect_rotation = 180
-		$ScaledItemToPlace.flip_v = true
-	elif direction == "right":
-		$ColorIndicator.tile_size = Vector2(2, 1)
-		$ScaledItemToPlace.rect_position = Vector2(0,0)
-		$ScaledItemToPlace.rect_rotation = 0
-		$ScaledItemToPlace.flip_v = false
+#	elif direction == "left":
+#		$ColorIndicator.tile_size = Vector2(2, 1)
+#		$ScaledItemToPlace.rect_position = Vector2(64,32)
+#		$ScaledItemToPlace.rect_rotation = 180
+#		$ScaledItemToPlace.flip_v = true
+#	elif direction == "right":
+#		$ColorIndicator.tile_size = Vector2(2, 1)
+#		$ScaledItemToPlace.rect_position = Vector2(0,0)
+#		$ScaledItemToPlace.rect_rotation = 0
+#		$ScaledItemToPlace.flip_v = false
 	if Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()

@@ -5,13 +5,6 @@
 [ext_resource path="res://Assets/Images/tree_sets/desert/stump.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/tree_sets/desert/tree1a top.png" type="Texture" id=4]
 
-[sub_resource type="CapsuleShape2D" id=12]
-radius = 10.3333
-height = 7.3334
-
-[sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 14.1111, 18.6754 )
-
 [sub_resource type="Animation" id=15]
 length = 0.001
 tracks/0/type = "value"
@@ -172,28 +165,15 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 22.7778, 28.3507 )
+
+[sub_resource type="CircleShape2D" id=22]
+radius = 17.6666
+
 [node name="DesertTreeObject" type="Node2D"]
 scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
-
-[node name="MovementCollisionBox" type="StaticBody2D" parent="."]
-position = Vector2( 3.33333, -25.5556 )
-collision_layer = 35
-
-[node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
-position = Vector2( -3.33333, 27.5556 )
-rotation = -1.5708
-shape = SubResource( 12 )
-
-[node name="TreeHurtbox" type="Area2D" parent="."]
-position = Vector2( 0, -31 )
-collision_layer = 262152
-collision_mask = 0
-
-[node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]
-position = Vector2( 0, 32 )
-rotation = -1.5708
-shape = SubResource( 13 )
 
 [node name="TreeTopArea" type="Area2D" parent="."]
 position = Vector2( 0, -11 )
@@ -224,10 +204,11 @@ radius = 40.0
 position = Vector2( 0, -27.5 )
 
 [node name="Stump" type="Sprite" parent="TreeSprites"]
-position = Vector2( 1, -6.5 )
+position = Vector2( 1, 21.5 )
 texture = ExtResource( 3 )
 
 [node name="TreeTop" type="Sprite" parent="TreeSprites"]
+position = Vector2( 1, -2.5 )
 texture = ExtResource( 4 )
 
 [node name="AnimatedFullTree" type="Sprite" parent="TreeSprites"]
@@ -272,6 +253,27 @@ initial_velocity = 32.0
 initial_velocity_random = 0.25
 scale_amount = 2.5
 
-[connection signal="area_entered" from="TreeHurtbox" to="." method="_on_TreeHurtbox_area_entered"]
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2( 0, -16.5 )
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 262152
+collision_mask = 0
+
+[node name="treeHurtBox" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 0, 35.4444 )
+rotation = -1.5708
+shape = SubResource( 21 )
+
+[node name="MovementCollisionBox" type="StaticBody2D" parent="."]
+position = Vector2( 1.5, -15.5 )
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 35
+
+[node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
+position = Vector2( -3.33333, 33.2222 )
+rotation = -1.5708
+shape = SubResource( 22 )
+
 [connection signal="area_entered" from="TreeTopArea" to="." method="_on_TreeTopArea_area_entered"]
 [connection signal="area_exited" from="TreeTopArea" to="." method="_on_TreeTopArea_area_exited"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

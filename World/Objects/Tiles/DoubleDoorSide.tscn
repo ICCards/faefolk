@@ -223,9 +223,9 @@ anims/RESET = SubResource( 20 )
 anims/hit = SubResource( 21 )
 
 [node name="MovementCollision" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2( 3, -64 )
 rotation = 1.5708
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
 position = Vector2( 32, -7.5 )
@@ -285,6 +285,8 @@ anims/open = SubResource( 17 )
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 18 )
 "anims/show health bar" = SubResource( 19 )
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="EnterDoorway" to="." method="_on_EnterDoorway_area_entered"]

@@ -29,9 +29,11 @@ enum Tiles {
 func _input(event):
 	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and has_node("/root/World"):
 		if event.is_action_pressed("open_map"):
+			Server.world.get_node("WorldAmbience").hide()
 			show()
 			initialize()
 		if event.is_action_released("open_map"):
+			Server.world.get_node("WorldAmbience").show()
 			hide()
 			set_inactive()
 
@@ -51,7 +53,7 @@ func initialize():
 	if not is_first_time_opened:
 		is_first_time_opened = true
 		$Camera2D.position = Vector2(800, 800)
-		$Camera2D.zoom = Vector2(1.5, 1.5)
+		$Camera2D.zoom = Vector2(0.8, 0.8)
 	
 func set_inactive():
 	PlayerData.viewMapMode = false
@@ -97,7 +99,7 @@ func adjustedGridCoordinatesScale(zoom):
 	return Vector2(0.5,0.5) * percent_zoomed
 	
 func adjustedPlayerIconScale(zoom):
-	var percent_zoomed = zoom / Vector2(1.5, 1.5)
+	var percent_zoomed = zoom / Vector2(0.8, 0.8)
 	return Vector2(40,40) * percent_zoomed
 
 

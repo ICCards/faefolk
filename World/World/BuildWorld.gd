@@ -118,15 +118,15 @@ func spawn_chunk(chunk_name):
 	for id in _chunk["plains"]:
 		var loc = Util.string_to_vector2(_chunk["plains"][id])
 		plains.set_cellv(loc, 0)
-	yield(get_tree(), "idle_frame")
+	#yield(get_tree(), "idle_frame")
 	for id in _chunk["snow"]:
 		var loc = Util.string_to_vector2(_chunk["snow"][id])
 		snow.set_cellv(loc, 0)
-	yield(get_tree(), "idle_frame")
+	#yield(get_tree(), "idle_frame")
 	for id in _chunk["forest"]:
 		var loc = Util.string_to_vector2(_chunk["forest"][id])
 		forest.set_cellv(loc, 0)
-	yield(get_tree(), "idle_frame")
+	#yield(get_tree(), "idle_frame")
 	for id in _chunk["beach"]:
 		var loc = Util.string_to_vector2(_chunk["beach"][id])
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
@@ -134,11 +134,11 @@ func spawn_chunk(chunk_name):
 	for id in _chunk["desert"]:
 		var loc = Util.string_to_vector2(_chunk["desert"][id])
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
-	yield(get_tree(), "idle_frame")
+	#yield(get_tree(), "idle_frame")
 	for id in _chunk["dirt"]:
 		var loc = Util.string_to_vector2(_chunk["dirt"][id])
 		dirt.set_cellv(loc, 0)
-	yield(get_tree(), "idle_frame")
+	#yield(get_tree(), "idle_frame")
 	for id in _chunk["ocean"]:
 		var loc = Util.string_to_vector2(_chunk["ocean"][id])
 		if sand.get_cellv(loc) == -1:

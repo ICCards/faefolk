@@ -14,20 +14,21 @@ func _ready():
 
 
 func spawn_boss():
-	var boss = FireBoss.instance()
-	boss.position = Vector2(rand_range(20,25), rand_range(20,25))*32
-	$Enemies.add_child(boss)
+	if PlayerData.player_data["skill_experience"]["wind"] == 0:
+		var boss = FireBoss.instance()
+		boss.position = Vector2(rand_range(20,25), rand_range(20,25))*32
+		$Enemies.add_child(boss)
 
 
 var is_changing_scene: bool = false
 var nav_node
 var cave_chest_id = "level 1, room 10"
 var count = 0
-var NUM_BATS = 0
-var NUM_SLIMES = 0
-var NUM_SPIDERS = 0
-var NUM_SKELETONS = 0
-var map_size = 50
+var NUM_BATS = 3
+var NUM_SLIMES = 3
+var NUM_SPIDERS = 3
+var NUM_SKELETONS = 3
+var map_size = 60
 
 func advance_up_cave_level():
 	if not is_changing_scene:

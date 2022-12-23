@@ -88,7 +88,7 @@ func set_grass_texture():
 
 func play_hit_effect():
 	if !bodyEnteredFlag and Server.isLoaded and visible:
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -26)
 		$SoundEffects.play()
 		$AnimationPlayer.play("animate front")
 		

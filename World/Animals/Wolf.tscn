@@ -536,7 +536,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 51 )
-frame = 7
+frame = 10
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
@@ -545,6 +545,9 @@ playing = true
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
 wait_time = 0.1
+
+[node name="RetreatTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
 
 [node name="IdleTimer" type="Timer" parent="Timers"]
 autostart = true

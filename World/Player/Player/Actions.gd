@@ -150,7 +150,8 @@ func sleep(sleeping_bag_direction, pos):
 			get_parent().composite_sprites.rotation_degrees = 90
 		elif sleeping_bag_direction == "up":
 			get_parent().composite_sprites.rotation_degrees = 180
-		yield(get_parent().animation_player, "animation_finished")
+		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
+		yield(get_parent().user_interface.get_node("SleepEffect/AnimationPlayer"), "animation_finished")
 		get_parent().z_index = 0
 		get_parent().composite_sprites.rotation_degrees = 0
 		get_parent().state = get_parent().MOVEMENT

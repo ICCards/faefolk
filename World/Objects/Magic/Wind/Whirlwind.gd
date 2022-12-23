@@ -8,9 +8,9 @@ func _ready():
 	if is_hostile:
 		z_index = -1
 		$Hitbox.set_collision_mask(128+2048+8+16)
-		$AnimationPlayer.play("play")
+		$AnimationPlayer.play("enemy")
 	else:
-		$AnimationPlayer.play("play extended")
+		$AnimationPlayer.play("player")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 16)
 	sound_effects.play()
 	yield($AnimationPlayer, "animation_finished")
