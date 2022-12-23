@@ -97,10 +97,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -224.0
-margin_top = -224.0
-margin_right = 224.0
-margin_bottom = 224.0
+margin_left = -448.0
+margin_top = -448.0
+rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
 texture = ExtResource( 6 )
 
@@ -112,6 +111,7 @@ anims/zoom = SubResource( 2 )
 [node name="Icons" type="Control" parent="Circle"]
 margin_right = 40.0
 margin_bottom = 40.0
+rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
 
 [node name="Wall" type="Sprite" parent="Circle/Icons"]
@@ -131,21 +131,21 @@ position = Vector2( -143, 1 )
 texture = ExtResource( 4 )
 
 [node name="Title" type="Label" parent="."]
-margin_left = 865.0
-margin_top = 485.0
-margin_right = 1345.0
-margin_bottom = 546.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = 769.0
+margin_top = 448.0
+margin_right = 1249.0
+margin_bottom = 509.0
+rect_scale = Vector2( 0.8, 0.8 )
 theme = ExtResource( 3 )
 text = "Wall:"
 align = 1
 
 [node name="Resources" type="Label" parent="."]
-margin_left = 863.0
-margin_top = 518.0
-margin_right = 1516.0
-margin_bottom = 579.0
-rect_scale = Vector2( 0.3, 0.3 )
+margin_left = 765.0
+margin_top = 528.0
+margin_right = 1418.0
+margin_bottom = 589.0
+rect_scale = Vector2( 0.6, 0.6 )
 theme = ExtResource( 3 )
 text = "1 x Wood(total wood)"
 align = 1

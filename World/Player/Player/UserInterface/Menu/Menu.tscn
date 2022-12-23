@@ -2,7 +2,7 @@
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/Inventory.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Images/Inventory UI/menus/inventory.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Inventory UI/menus/collections1.png" type="Texture" id=3]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Exit/Exit.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" type="PackedScene" id=7]
@@ -159,7 +159,6 @@ margin_bottom = 122.0
 texture_normal = ExtResource( 43 )
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 7 )]
-visible = false
 margin_left = -380.0
 margin_top = 184.0
 margin_right = 203.0

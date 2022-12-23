@@ -2,13 +2,16 @@ extends Camera2D
 class_name PanningCamera2D
 
 const MIN_ZOOM: float = 0.1
-const MAX_ZOOM: float = 1.5
+const MAX_ZOOM: float = 0.8
 const ZOOM_RATE: float = 8.0
 const ZOOM_INCREMENT: float = 0.1
 
 var _target_zoom: float = 1.0
 
 onready var _tween: Tween = $Tween
+
+func _ready():
+	focus_position(Vector2(500,500))
 
 
 func _physics_process(delta: float) -> void:

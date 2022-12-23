@@ -745,7 +745,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 3
+frame = 6
 playing = true
 
 [node name="Timers" type="Node" parent="."]
@@ -753,6 +753,9 @@ playing = true
 [node name="IdleTimer" type="Timer" parent="Timers"]
 wait_time = 5.0
 autostart = true
+
+[node name="RetreatTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
 wait_time = 0.1

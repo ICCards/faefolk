@@ -40,19 +40,17 @@ var player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-		"0": ["stone sword", 1, 50],
+		#"0": ["stone sword", 1, 50],
 		#"1": ["bow", 1, 50],
 		#"2": ["wind staff", 1, 50],
 		#"9": ["arrow", 100, null],
-		
-		
 	},
 	"inventory": {
-			"18": ["wood", 999, null],
-			"19": ["stone", 999, null],
-			"17": ["iron ore", 99, null],
-			"16": ["stone fishing rod", 1, null],
-			"15": ["raw egg", 24, null],
+#			"18": ["wood", 999, null],
+#			"19": ["stone", 999, null],
+#			"17": ["iron ingot", 99, null],
+#			"15": ["bronze ingot", 99, null],
+#			"16": ["stone fishing rod", 1, null],
 	},
 	"chests": {
 		"Cave 1-1": {
@@ -156,7 +154,7 @@ var player_data = {
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 995,
+			"wind": 0,
 			"ice": 0,
 		},
 	"collections": {

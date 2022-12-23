@@ -4,7 +4,7 @@ onready var progress = $CanvasLayer/CastingProgress
 onready var progress_background = $CanvasLayer/ProgressBackground
 onready var line = $Line2D
 onready var hook = $CastedFishHook
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 onready var player_animation_player = Server.player_node.animation_player
 onready var composite_sprites = Server.player_node.composite_sprites
@@ -67,9 +67,9 @@ func _physics_process(delta):
 					is_progress_going_upwards = true
 		elif Input.is_action_just_released("mouse_click"):
 			cast()
-#		var r = range_lerp(progress.value, 10, 100, 1, 0)
-#		var g = range_lerp(progress.value, 10, 50, 0, 1)
-#		progress.modulate = Color(r, g, 0)
+		var r = range_lerp(progress.value, 10, 100, 1, 0)
+		var g = range_lerp(progress.value, 10, 50, 0, 1)
+		progress.modulate = Color(r, g, 0)
 	elif waiting_for_fish_bite:
 		setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, hook.position + Vector2(4.5,4.5))
 	elif is_reeling_in_fish:

@@ -14,6 +14,13 @@ func _ready():
 	set_mana_bar()
 	$DateTime/SeasonIcon.texture = load("res://Assets/Images/Inventory UI/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
 	
+func _on_ManaTimer_timeout():
+	PlayerData.player_data["mana"] += 1
+	if PlayerData.player_data["mana"] > 100:
+		PlayerData.player_data["mana"] = 100
+	$EnergyBars/ManaPgBar.value = PlayerData.player_data["mana"]
+		
+
 func set_mana_bar():
 	$EnergyBars/ManaPgBar.max_value = 100
 	$EnergyBars/ManaPgBar.value = PlayerData.player_data["mana"]
@@ -90,3 +97,4 @@ func advance_clock_icon():
 	if clock_icon_index == 9:
 		clock_icon_index = 1
 	$DateTime/ClockIcon.texture = load("res://Assets/Images/Inventory UI/DateTime/clock icons/"+str(clock_icon_index)+".png")
+

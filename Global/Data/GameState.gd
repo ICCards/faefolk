@@ -5,6 +5,7 @@ class_name GameState
 export var player_state = {}
 export var world_state = {}
 export var cave_state = {}
+## any other object here  and the the save and load methods that needs to be save
 
 const GAME_STATE_PATH = "user://game_state.tres"
 
@@ -20,7 +21,6 @@ func save_cave_state(value):
 	player_state = player_state
 	save_state()
 		
-
 
 func save_state():
 	var result = ResourceSaver.save(GAME_STATE_PATH, self)

@@ -61,6 +61,9 @@ texture_progress = ExtResource( 5 )
 fill_mode = 3
 nine_patch_stretch = true
 
+[node name="ManaTimer" type="Timer" parent="EnergyBars"]
+wait_time = 5.0
+
 [node name="DateTime" type="Control" parent="."]
 margin_left = 251.333
 margin_top = 4.0
@@ -115,4 +118,5 @@ margin_right = 984.0
 margin_bottom = 32.0
 rect_scale = Vector2( 3, 3 )
 
+[connection signal="timeout" from="EnergyBars/ManaTimer" to="." method="_on_ManaTimer_timeout"]
 [connection signal="timeout" from="DateTime/AdvanceTime" to="." method="_on_AdvanceTime_timeout"]

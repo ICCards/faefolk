@@ -12,24 +12,17 @@
 script/source = "extends Control
 
 
-onready var music_slider = $ScrollContainer/VBoxContainer/SoundMenu/Grid/Slider1/HBoxContainer/MusicSlider
-onready var sound_slider = $ScrollContainer/VBoxContainer/SoundMenu/Grid/Slider2/HBoxContainer/SoundSlider
-onready var ambient_slider = $ScrollContainer/VBoxContainer/SoundMenu/Grid/Slider3/HBoxContainer/AmbientSlider
-onready var footsteps_slider = $ScrollContainer/VBoxContainer/SoundMenu/Grid/Slider4/HBoxContainer/FootstepsSlider
+onready var music_slider = $ScrollContainer/VBoxContainer/Grid/Slider1/HBoxContainer/MusicSlider
+onready var sound_slider = $ScrollContainer/VBoxContainer/Grid/Slider2/HBoxContainer/SoundSlider
+onready var ambient_slider = $ScrollContainer/VBoxContainer/Grid/Slider3/HBoxContainer/AmbientSlider
+onready var footsteps_slider = $ScrollContainer/VBoxContainer/Grid/Slider4/HBoxContainer/FootstepsSlider
 
-func initialize():
-	$ScrollContainer/VBoxContainer/SoundMenu.visible = true
-	$ScrollContainer/VBoxContainer/ControlsMenu.visible = true
-	$ScrollContainer/VBoxContainer/ControlsMenu/Page1.visible = false
-	$ScrollContainer/VBoxContainer/ControlsMenu/Page2.visible = false
 
-#func _ready():
-#	initialize()
-#	Settings.load_keys()
-#	music_slider.value = Sounds.music_volume
-#	sound_slider.value = Sounds.sound_volume
-#	ambient_slider.value = Sounds.ambient_volume
-#	footsteps_slider.value = Sounds.footstep_volume
+func _ready():
+	music_slider.value = Sounds.music_volume
+	sound_slider.value = Sounds.sound_volume
+	ambient_slider.value = Sounds.ambient_volume
+	footsteps_slider.value = Sounds.footstep_volume
 
 func _on_MusicSlider_value_changed(value):
 	Sounds.set_music_volume(value)
@@ -42,37 +35,6 @@ func _on_AmbientSlider_value_changed(value):
 
 func _on_FootstepsSlider_value_changed(value):
 	Sounds.set_footstep_volume(value)
-
-
-func _on_DownButton_pressed():
-	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db(\"sound\", -28)
-	$SoundEffects.play()
-	$SoundMenu.visible = false
-	$ControlsMenu/Page1.visible = true
-	
-func _on_UpButton_pressed():
-	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db(\"sound\", -28)
-	$SoundEffects.play()
-	$SoundMenu.visible = true
-	$ControlsMenu/Page1.visible = false
-
-
-func _on_DownButton2_pressed():
-	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db(\"sound\", -28)
-	$SoundEffects.play()
-	$ControlsMenu/Page1.visible = false
-	$ControlsMenu/Page2.visible = true
-
-
-func _on_UpButton2_pressed():
-	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db(\"sound\", -28)
-	$SoundEffects.play()
-	$ControlsMenu/Page1.visible = true
-	$ControlsMenu/Page2.visible = false
 "
 
 [sub_resource type="StyleBoxTexture" id=1]
@@ -145,6 +107,7 @@ columns = 2
 
 [node name="Slider1" type="Control" parent="ScrollContainer/VBoxContainer/Grid"]
 margin_bottom = 61.0
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Grid/Slider1"]
 margin_left = -2.25

@@ -5,6 +5,7 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var _idle_timer: Timer = $Timers/IdleTimer
 onready var _chase_timer: Timer = $Timers/ChaseTimer
+onready var _retreat_timer: Timer = $Timers/RetreatTimer
 onready var _end_chase_state_timer: Timer = $Timers/EndChaseState
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 onready var hit_box: Position2D = $Position2D
@@ -42,7 +43,8 @@ enum {
 	WALK,
 	CHASE,
 	ATTACK,
-	DEATH
+	DEATH,
+	RETREAT
 }
 
 func _ready():
@@ -52,6 +54,7 @@ func _ready():
 	_idle_timer.wait_time = rand_range(5.0, 10.0)
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
+	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	_end_chase_state_timer.connect("timeout", self, "end_chase_state")
 	navigation_agent.connect("velocity_computed", self, "move")
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
@@ -63,6 +66,9 @@ func _update_pathfinding_idle():
 func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.position)
 
+func _update_pathfinding_retreat():
+	var target = -player.position*Vector2(100,100)
+	navigation_agent.set_target_location(target)
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
@@ -78,7 +84,7 @@ func _physics_process(delta):
 		return
 	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
-	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing:
+	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
 		start_chase_state()
 	if state == CHASE and (position + Vector2(0,-26)).distance_to(player.position) < 75:
 		state = ATTACK
@@ -135,6 +141,8 @@ func set_texture():
 		IDLE:
 			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
 			$Body/Fangs.texture = null
+		RETREAT:
+			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png")
 
 
 func swing():
@@ -179,13 +187,12 @@ func hit(tool_name):
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
+	if health < STARTING_HEALTH*.3:
+		start_retreat_state()
 	if health <= 0 and not destroyed:
 		destroy()
 
 func destroy():
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
 	destroyed = true
 	stop_sound_effects()
 	$Body/Fangs.texture = null
@@ -261,7 +268,15 @@ func start_chase_state():
 	_idle_timer.stop()
 	_chase_timer.start()
 	_end_chase_state_timer.start()
-
+	
+func start_retreat_state():
+	state = RETREAT
+	$Body/Fangs.hide()
+	_idle_timer.stop()
+	_chase_timer.stop()
+	_retreat_timer.start()
+	stop_sound_effects()
+	chasing = false
 
 func _on_VisibilityNotifier2D_screen_entered():
 	if chasing:
