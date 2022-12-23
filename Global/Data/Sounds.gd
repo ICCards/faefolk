@@ -45,10 +45,7 @@ func set_footstep_volume(val):
 	
 func return_adjusted_sound_db(category, init_sound):
 	if category == "music":
-		print("MUSIC VOLUME FROM SLIDER " + str(music_volume))
 		var progress = music_volume / 100
-		print("_---------")
-		print(progress)
 		if progress == 0.5:
 			return init_sound
 		elif progress < 0.5:

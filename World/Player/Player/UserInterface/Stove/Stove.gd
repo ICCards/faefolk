@@ -1,13 +1,14 @@
 extends Control
 
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
+
 var id
 var level
 
 var hovered_item
 var ingredients = []
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
-onready var stove_slots = $StoveSlots
+
 onready var fuel_slot = $StoveSlots/FuelSlot
 onready var ingredient_slot1 = $StoveSlots/Ingredient1
 onready var ingredient_slot2 = $StoveSlots/Ingredient2
@@ -16,7 +17,6 @@ onready var yield_slot1 = $StoveSlots/YieldSlot1
 onready var yield_slot2 = $StoveSlots/YieldSlot2
 onready var coal_yield_slot = $StoveSlots/CoalYieldSlot
 var current_cooking_item
-
 
 func _ready():
 	initialize()

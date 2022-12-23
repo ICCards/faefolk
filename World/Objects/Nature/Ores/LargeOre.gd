@@ -31,6 +31,7 @@ func setTexture(ore):
 		$SmallMovementCollisionBox/CollisionShape2D.disabled = false
 		big_ore_sprite.visible = false
 		small_ore_sprite.visible = true
+		large_break = true
 
 
 func hit(tool_name):

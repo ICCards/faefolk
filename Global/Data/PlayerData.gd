@@ -1,5 +1,9 @@
 extends Node
 
+var spawn_at_cave_entrance: bool = false
+var spawn_at_cave_exit: bool = false
+var spawn_at_respawn_location: bool = true
+
 signal set_day
 signal set_night
 signal season_changed
@@ -31,6 +35,8 @@ var active_item_slot = 0
 
 var player_data = {}
 var starting_player_data = {
+	"respawn_location": null,
+	"respawn_scene" : "res://World/World/World.tscn",
 	"season": "spring",
 	"day_week": "Mon.",
 	"day_number": 1,
@@ -40,16 +46,17 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-		#"0": ["stone sword", 1, 50],
-		#"1": ["bow", 1, 50],
-		#"2": ["wind staff", 1, 50],
+		"0": ["stone sword", 1, 50],
+		"1": ["wind staff", 1, null],
+		##"2": ["campfire", 10, null],
+		#"3": ["stove #1", 10, null],
 		#"9": ["arrow", 100, null],
 	},
 	"inventory": {
-#			"18": ["wood", 999, null],
-#			"19": ["stone", 999, null],
+		#	"18": ["wood", 999, null],
+			#"19": ["stone", 999, null],
 #			"17": ["iron ingot", 99, null],
-#			"15": ["bronze ingot", 99, null],
+			#"15": ["wheat flour", 99, null],
 #			"16": ["stone fishing rod", 1, null],
 	},
 	"chests": {
@@ -143,6 +150,7 @@ var starting_player_data = {
 	"furnaces": {},
 	"grain_mills": {},
 	"stoves": {},
+	"campfires": {},
 	"skill_experience": {
 			"farming": 0,
 			"foraging": 0,
@@ -154,7 +162,7 @@ var starting_player_data = {
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 0,
+			"wind": 1000,
 			"ice": 0,
 		},
 	"collections": {
@@ -350,7 +358,7 @@ func change_energy(amount):
 		player_data["energy"] = energy_maximum
 	emit_signal("energy_changed")
 
-func respawn_player():
+func reset_player_stats():
 	player_data["energy"] = energy_maximum
 	player_data["health"] = health_maximum
 	emit_signal("energy_changed")
@@ -468,8 +476,8 @@ func add_item_to_empty_slot(item, slot, var id = null):
 			player_data["stoves"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.FURNACE:
 			player_data["furnaces"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.TOOL_CABINET:
-			player_data["tool_cabinets"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.CAMPFIRE:
+			player_data["campfires"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 
 
 func remove_item(slot, var id = null):
@@ -488,8 +496,8 @@ func remove_item(slot, var id = null):
 			player_data["stoves"][id].erase(str(slot.slot_index))
 		SlotClass.SlotType.FURNACE:
 			player_data["furnaces"][id].erase(str(slot.slot_index))
-		SlotClass.SlotType.TOOL_CABINET:
-			player_data["tool_cabinets"][id].erase(str(slot.slot_index))
+		SlotClass.SlotType.CAMPFIRE:
+			player_data["campfires"][id].erase(str(slot.slot_index))
 
 func add_item_quantity(slot, quantity_to_add: int, var id = null):
 	match slot.slotType:
@@ -507,8 +515,8 @@ func add_item_quantity(slot, quantity_to_add: int, var id = null):
 			player_data["stoves"][id][str(slot.slot_index)][1] += quantity_to_add
 		SlotClass.SlotType.FURNACE:
 			player_data["furnaces"][id][str(slot.slot_index)][1] += quantity_to_add
-		SlotClass.SlotType.TOOL_CABINET:
-			player_data["tool_cabintes"][id][str(slot.slot_index)][1] += quantity_to_add
+		SlotClass.SlotType.CAMPFIRE:
+			player_data["campfires"][id][str(slot.slot_index)][1] += quantity_to_add
 			
 func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
 	match slot.slotType:
@@ -526,8 +534,8 @@ func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
 			player_data["stoves"][id][str(slot.slot_index)][1] -= quantity_to_subtract
 		SlotClass.SlotType.FURNACE:
 			player_data["furnaces"][id][str(slot.slot_index)][1] -= quantity_to_subtract
-		SlotClass.SlotType.TOOL_CABINET:
-			player_data["tool_cabintes"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+		SlotClass.SlotType.CAMPFIRE:
+			player_data["campfires"][id][str(slot.slot_index)][1] -= quantity_to_subtract
 
 func return_resource_total(item_name):
 	var total = 0

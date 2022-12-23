@@ -11340,7 +11340,6 @@ animations = [ {
 } ]
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 0, -1 )
 collision_mask = 2097153
 script = ExtResource( 8 )
 
@@ -11511,6 +11510,7 @@ __meta__ = {
 }
 
 [node name="PickupZone" type="Area2D" parent="Area2Ds"]
+visible = false
 scale = Vector2( 1.33331, 1.22853 )
 collision_layer = 0
 collision_mask = 4
@@ -11540,6 +11540,7 @@ position = Vector2( 0, -43 )
 shape = SubResource( 10 )
 
 [node name="HurtBox" type="Area2D" parent="Area2Ds"]
+visible = false
 collision_layer = 128
 collision_mask = 0
 script = ExtResource( 32 )
@@ -11560,6 +11561,7 @@ wait_time = 2.0
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="Area2Ds/HurtBox"]
 
 [node name="EnterInteractiveZones" type="Node2D" parent="Area2Ds"]
+visible = false
 script = ExtResource( 26 )
 
 [node name="Area2D" type="Area2D" parent="Area2Ds/EnterInteractiveZones"]
@@ -11641,6 +11643,7 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708

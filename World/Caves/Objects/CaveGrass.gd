@@ -57,7 +57,7 @@ func _on_Area2D_area_entered(area):
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 #		if Util.chance(50):
 #			InstancedScenes.intitiateItemDrop("green grass",position+Vector2(0,-16),1)
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sund", -24)
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("front break")
 		yield($AnimationPlayer, "animation_finished")

@@ -13,6 +13,7 @@ onready var GrainMill = load("res://World/Player/Player/UserInterface/GrainMill/
 onready var Furnace = load("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
 onready var Chest = load("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
 onready var Tool_cabinet = load("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
+onready var Campfire = load("res://World/Player/Player/UserInterface/Campfire/Campfire.tscn")
 
 var items_to_drop = []
 
@@ -60,6 +61,8 @@ func _input(event):
 						toggle_tc(object_id)
 					"chair":
 						Server.player_node.sit(object_level)
+					"campfire":
+						toggle_campfire(object_id)
 		if Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:
@@ -111,6 +114,8 @@ func death():
 				close_chest(object_id)
 			"furnace":
 				close_furnace(object_id)
+			"campfire":
+				close_campfire(object_id)
 	close_hotbar_clock_and_stats()
 	if holding_item:
 		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
@@ -239,8 +244,28 @@ func toggle_stove(id, level):
 		close_hotbar_clock_and_stats()
 	else:
 		close_stove(id)
-		
 
+
+func toggle_campfire(id):
+	if not has_node(id):
+		play_open_menu_sound()
+		var stove = Campfire.instance()
+		stove.name = str(id)
+		stove.id = id
+		add_child(stove)
+		close_hotbar_clock_and_stats()
+	elif has_node(id) and not get_node(id).visible:
+		get_node(id).initialize()
+		close_hotbar_clock_and_stats()
+	else:
+		close_campfire(id)
+
+
+func close_campfire(id):
+	if not holding_item and has_node(id):
+		add_hotbar_clock_and_stats()
+		get_node(id).hide()
+		drop_items()
 
 func close_furnace(id):
 	if not holding_item and has_node(id):

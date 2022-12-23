@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Images/Misc/MainMenu/background.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu/MainMenuButtons.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=4]
 [ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Themes/world_fog.tres" type="Shader" id=6]
-[ext_resource path="res://Assets/Images/Misc/exclamation icon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/Misc/MainMenu/logo.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/Animations/water main menu/2.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Images/Animations/water main menu/4.png" type="Texture" id=12]
@@ -103,6 +102,7 @@ scale = Vector2( 3.61719, 3.60714 )
 frames = SubResource( 4 )
 
 [node name="Sprite2" type="Sprite" parent="Background"]
+visible = false
 material = SubResource( 9 )
 position = Vector2( 1109, 669 )
 scale = Vector2( 80, 80 )
@@ -116,9 +116,6 @@ margin_bottom = 280.0
 rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 2
 texture = ExtResource( 9 )
-
-[node name="Sprite" type="Sprite" parent="Background"]
-texture = ExtResource( 7 )
 
 [node name="MainMenuButtons" parent="." instance=ExtResource( 2 )]
 margin_left = 18.0
@@ -139,7 +136,7 @@ margin_bottom = 902.5
 rect_scale = Vector2( 2, 2 )
 
 [node name="LoadingIndicator" parent="MainMenuButtons" index="2"]
-frame = 2
+frame = 5
 
 [node name="OptionsIconButton" type="Button" parent="."]
 margin_left = 1832.0

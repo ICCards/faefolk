@@ -118,13 +118,17 @@ func drop_inventory_items():
 
 
 func respawn():
-	get_parent().position = get_parent().spawn_position
-	PlayerData.respawn_player()
-	get_parent().animation_player.stop()
-	get_node("../Camera2D/UserInterface").respawn()
-	yield(get_tree().create_timer(0.5), "timeout")
-	get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", false) 
-	get_parent().state = get_parent().MOVEMENT
+	PlayerData.reset_player_stats()
+	if PlayerData.player_data["respawn_scene"] == get_tree().current_scene.filename:
+		get_parent().position = PlayerData.player_data["respawn_location"]*32
+		get_parent().animation_player.stop()
+		get_node("../Camera2D/UserInterface").respawn()
+		yield(get_tree().create_timer(0.5), "timeout")
+		get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", false) 
+		get_parent().state = get_parent().MOVEMENT
+	else:
+		BuildCaveLevel.is_player_respawning = true
+		SceneChanger.goto_scene(PlayerData.player_data["respawn_scene"])
 
 
 func fish():
@@ -152,6 +156,8 @@ func sleep(sleeping_bag_direction, pos):
 			get_parent().composite_sprites.rotation_degrees = 180
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
 		yield(get_parent().user_interface.get_node("SleepEffect/AnimationPlayer"), "animation_finished")
+		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
+		PlayerData.player_data["respawn_location"] = str(pos/32)
 		get_parent().z_index = 0
 		get_parent().composite_sprites.rotation_degrees = 0
 		get_parent().state = get_parent().MOVEMENT

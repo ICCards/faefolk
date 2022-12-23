@@ -4,7 +4,6 @@ onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 
 var nav_node
 var count = 0
-var cave_chest_id = "level 1, room 2"
 
 var NUM_BATS = 4
 var NUM_SLIMES = 2
@@ -21,7 +20,7 @@ func _ready():
 
 func advance_up_cave_level():
 	if not is_changing_scene:
-		BuildCaveLevel.is_player_going_down = false
+		PlayerData.spawn_at_cave_exit = true
 		Server.player_node.destroy()
 		is_changing_scene = true
 		for node in $Projectiles.get_children():
@@ -32,7 +31,7 @@ func advance_up_cave_level():
 
 func advance_down_cave_level():
 	if not is_changing_scene:
-		BuildCaveLevel.is_player_going_down = true
+		PlayerData.spawn_at_cave_entrance = true
 		Server.player_node.destroy()
 		is_changing_scene = true
 		for node in $Projectiles.get_children():

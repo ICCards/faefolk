@@ -32,7 +32,7 @@ var map_size = 60
 
 func advance_up_cave_level():
 	if not is_changing_scene:
-		BuildCaveLevel.is_player_going_down = false
+		PlayerData.spawn_at_cave_exit = true
 		Server.player_node.destroy()
 		is_changing_scene = true
 		for node in $Projectiles.get_children():

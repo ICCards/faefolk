@@ -23,7 +23,6 @@ func _play_background_music():
 		volume_db =  Sounds.return_adjusted_sound_db("music", -16)
 	else:
 		volume_db =  Sounds.return_adjusted_sound_db("music", -32)
-	print("MUSIC VOL " + str(volume_db))
 	play()
 	yield(self, "finished")
 	Sounds.emit_signal("song_finished")
@@ -34,4 +33,3 @@ func set_new_music_volume():
 		volume_db =  Sounds.return_adjusted_sound_db("music", -16)
 	else:
 		volume_db =  Sounds.return_adjusted_sound_db("music", -32)
-	print("NEW MUSIC VOL " + str(volume_db))

@@ -5,6 +5,8 @@ onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 var direction
 var location
 
+var id
+
 func _ready():
 	set_direction()
 
@@ -52,4 +54,5 @@ func _on_HurtBox_area_entered(area):
 		Tiles.add_valid_tiles(location, Vector2(1,2))
 	else:
 		Tiles.add_valid_tiles(location, Vector2(2,1))
+	MapData.remove_placable(id)
 	queue_free()

@@ -8,7 +8,6 @@ onready var SleepingBag = load("res://World/Objects/Tiles/SleepingBag.tscn")
 onready var DoorFront = load("res://World/Objects/Tiles/DoorFront.tscn")
 onready var DoorSide = load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
 onready var Rug  = load("res://World/Objects/Misc/Rug.tscn")
-onready var Gate
 
 
 var rng = RandomNumberGenerator.new()
@@ -536,6 +535,7 @@ func place_object_in_world(id, item_name, direction, location):
 			var sleepingBag = SleepingBag.instance()
 			sleepingBag.direction = direction
 			sleepingBag.location = location
+			sleepingBag.id = id
 			PlacableObjects.call_deferred("add_child", sleepingBag, true)
 			sleepingBag.global_position = Tiles.valid_tiles.map_to_world(location) 
 		"display table":

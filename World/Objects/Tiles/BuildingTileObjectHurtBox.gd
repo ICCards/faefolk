@@ -103,14 +103,14 @@ func update_health_bar():
 
 
 func remove_wall():
-	MapData.remove_placable(str(name))
+	MapData.remove_object("placable",id)
 	Tiles.add_valid_tiles(location)
 	Tiles.wall_tiles.set_cellv(location, -1)
 	Tiles.wall_tiles.update_bitmask_area(location)
 	queue_free()
 
 func remove_foundation():
-	MapData.remove_placable(str(name))
+	MapData.remove_object("placable",id)
 	Tiles.foundation_tiles.set_cellv(location, -1)
 	Tiles.foundation_tiles.update_bitmask_area(location)
 	queue_free()

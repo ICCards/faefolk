@@ -86,21 +86,30 @@ func remove_crop(id):
 	world["crops"].erase(id)
 
 func add_placable(id, data):
-	var map = return_cave_data(Server.world.name)
-	map["placables"][id] = data
-	
+	if Server.world.name == "World":
+		world["placables"][id] = data
+	else:
+		caves[Server.world.name]["placables"][id] = data
+
 func remove_placable(id):
-	var map = return_cave_data(Server.world.name)
-	map["placables"].erase(id)
+	if Server.world.name == "World":
+		world["placables"].erase(id)
+	else:
+		caves[Server.world.name]["placables"].erase(id)
 
 func remove_object(type, id):
-	var map = return_cave_data(Server.world.name)
-	map[type].erase(id)
+	if Server.world.name == "World":
+		world[type].erase(id)
+	else:
+		caves[Server.world.name][type].erase(id)
 	
 func update_object_health(type, id, new_health):
-	var map = return_cave_data(Server.world.name)
-	if map[type].has(id):
-		map[type][id]["h"] = new_health
+	if Server.world.name == "World":
+		if world[type].has(id):
+			world[type][id]["h"] = new_health
+	else:
+		if caves[Server.world.name].has(id):
+			caves[Server.world.name][id]["h"] = new_health
 
 func return_cave_data(cave_name):
 	match cave_name:

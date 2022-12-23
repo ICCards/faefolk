@@ -45,16 +45,15 @@ func _ready():
 func advance_down_cave_level():
 	if not is_changing_scene:
 		is_changing_scene = true
-		get_node("BuildWorld/BuildNature").is_destroyed = true
+		get_node("BuildTerrain/BuildNature").is_destroyed = true
 		yield(get_tree(), "idle_frame")
-		BuildCaveLevel.is_player_going_down = true
+		PlayerData.spawn_at_cave_entrance = true
 		Server.player_node.destroy()
 		for node in $Projectiles.get_children():
 			node.destroy()
 		for node in $Enemies.get_children():
 			node.destroy()
 		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1-1/Cave 1-1.tscn")
-
 
 func buildMap(map):
 	Tiles.valid_tiles = $ValidTiles
@@ -71,9 +70,10 @@ func buildMap(map):
 	Tiles.fence_tiles = $PlacableTiles/FenceTiles
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	Server.isLoaded = true
-	spawn_animals()
 	create_cave_entrance(map["cave_entrance_location"])
 	set_random_beach_forage()
+	yield(get_tree().create_timer(2.0), "timeout")
+	spawn_animals()
 
 func create_cave_entrance(_loc):
 	var loc = Util.string_to_vector2(_loc)

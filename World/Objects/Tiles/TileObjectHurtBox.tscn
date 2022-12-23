@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://World/Objects/Tiles/TileObjectHurtBox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
@@ -11,6 +11,9 @@ extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14, 14 )
+
+[sub_resource type="CircleShape2D" id=18]
+radius = 31.0
 
 [sub_resource type="CircleShape2D" id=2]
 
@@ -91,7 +94,17 @@ position = Vector2( 0, 14 )
 shape = SubResource( 4 )
 disabled = true
 
+[node name="ChestInteractiveArea" type="Area2D" parent="Position2D"]
+collision_layer = 0
+collision_mask = 131072
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/ChestInteractiveArea"]
+shape = SubResource( 18 )
+disabled = true
+
 [node name="DetectObjectOverPathBox" type="Area2D" parent="Position2D"]
+visible = false
 collision_layer = 8192
 collision_mask = 8192
 
@@ -100,6 +113,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="Position2D"]
+visible = false
 collision_layer = 262168
 collision_mask = 0
 monitorable = false
@@ -109,6 +123,7 @@ light_mask = 0
 shape = SubResource( 1 )
 
 [node name="DetectPlayerAroundBed" type="Area2D" parent="Position2D"]
+visible = false
 position = Vector2( -13, 8 )
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 0
@@ -123,7 +138,7 @@ disabled = true
 volume_db = -16.0
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 16, -16 )
+position = Vector2( 17, -34 )
 enabled = false
 texture = ExtResource( 2 )
 energy = 1.05
@@ -136,7 +151,7 @@ position = Vector2( 21, -112 )
 scale = Vector2( 0.75, 0.75 )
 z_index = 1
 frames = SubResource( 15 )
-frame = 1
+frame = 9
 playing = true
 
 [node name="Chest" type="AnimatedSprite" parent="."]

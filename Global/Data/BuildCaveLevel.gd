@@ -28,8 +28,6 @@ const MAX_TALL_GRASS_SIZE = 60
 var count = 0
 var nav_node
 
-var is_player_going_down: bool = true
-
 var valid_tiles
 var NatureObjects
 var GrassObjects
@@ -37,17 +35,21 @@ var ForageObjects
 
 func spawn_player():
 	var spawn_loc
-	if is_player_going_down:
+	if PlayerData.spawn_at_respawn_location:
+		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
+	elif PlayerData.spawn_at_cave_entrance:
 		spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
-	else:
+	elif PlayerData.spawn_at_cave_exit:
 		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
 	var player = Player.instance()
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
 	Server.world.get_node("Players").add_child(player)
-	player.spawn_position = (spawn_loc*32)+Vector2(16,32)
 	player.position =  (spawn_loc*32)+Vector2(16,32)
 	Server.player_node = player
+	PlayerData.spawn_at_respawn_location = false
+	PlayerData.spawn_at_cave_entrance = false
+	PlayerData.spawn_at_cave_exit = false
 
 func build():
 	valid_tiles = Server.world.get_node("Tiles/ValidTiles")
@@ -65,7 +67,7 @@ func build():
 	set_valid_tiles()
 	set_light_nodes()
 	set_cave_ladders()
-	var cave = MapData.return_cave_data(Server.world.name)
+	var cave = MapData.caves[Server.world.name]
 	if cave["is_built"]:
 		load_cave(cave)
 	else:
@@ -221,7 +223,7 @@ func set_initial_chest(map):
 		type = "stone chest"
 	else:
 		type = "wood chest"
-	MapData.add_placable(Server.world.name, {"n":type,"d":direction,"l":location})
+	MapData.add_placable(Server.world.name, {"n":type,"d":direction,"l":str(location)})
 	PlaceObject.place_object_in_world(Server.world.name, type, direction, location)
 
 func return_chest_direction(loc):

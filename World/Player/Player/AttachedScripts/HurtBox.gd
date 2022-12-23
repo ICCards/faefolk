@@ -66,23 +66,23 @@ func _on_HurtBox_area_entered(area):
 			InstancedScenes.player_hit_effect(health_to_add, get_node("../../").position)
 		else:
 			if area.name == "BearBite":
-				health_to_subtract = rng.randi_range(12, 20)
+				health_to_subtract = rng.randi_range(35,45)
 			elif area.name == "BearClaw":
-				health_to_subtract = rng.randi_range(8, 12)
+				health_to_subtract = rng.randi_range(30,40)
 			elif area.name == "BoarBite":
-				health_to_subtract = rng.randi_range(8, 16)
+				health_to_subtract = rng.randi_range(15, 25)
 			elif area.name == "ExplosionArea":
 				health_to_subtract = 20
 			elif area.name == "DeerAttack":
-				health_to_subtract = rng.randi_range(6, 12)
+				health_to_subtract = rng.randi_range(20,30)
 			elif area.name == "WolfClaw":
-				health_to_subtract = rng.randi_range(4, 8)
+				health_to_subtract = rng.randi_range(20,30)
 			elif area.name == "WolfBite":
-				health_to_subtract = rng.randi_range(8, 12)
+				health_to_subtract = rng.randi_range(25,35)
 			elif area.name == "BatHit":
-				health_to_subtract = rng.randi_range(8, 12)
+				health_to_subtract = rng.randi_range(12,16)
 			elif area.name == "SpiderHit":
-				health_to_subtract = rng.randi_range(8, 12)
+				health_to_subtract = rng.randi_range(10,14)
 			elif area.name == "SlimeHit":
 				get_node("../../PoisonParticles").start_poison_state()
 				diminish_HOT(area.name)

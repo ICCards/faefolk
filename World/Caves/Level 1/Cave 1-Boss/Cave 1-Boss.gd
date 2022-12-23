@@ -22,24 +22,25 @@ func _ready():
 	
 func advance_up_cave_level():
 	if not is_changing_scene:
+		PlayerData.spawn_at_cave_exit = true
 		Server.player_node.destroy()
 		is_changing_scene = true
 		for node in $Projectiles.get_children():
 			node.destroy()
 		for node in $Enemies.get_children():
 			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 3/Cave 3.tscn")
+		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 7/Cave 7.tscn")
 
 func advance_down_cave_level():
 	if not is_changing_scene:
-		BuildCaveLevel.is_player_going_down = true
+		PlayerData.spawn_at_cave_entrance = true
 		Server.player_node.destroy()
 		is_changing_scene = true
 		for node in $Projectiles.get_children():
 			node.destroy()
 		for node in $Enemies.get_children():
 			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 2/Cave 10-5/Cave 10-5.tscn")
+		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1-Fishing/Cave 1-Fishing.tscn")
 
 
 func _on_SpawnBatTimer_timeout():

@@ -44,7 +44,7 @@ func _on_AdvanceTime_timeout():
 		PlayerData.player_data["time_hours"] += 1
 		if PlayerData.player_data["time_hours"] == 6:
 			PlayerData.emit_signal("set_day")
-		elif PlayerData.player_data["time_hours"] == 18:
+		elif PlayerData.player_data["time_hours"] == 22:
 			PlayerData.emit_signal("set_night")
 		elif PlayerData.player_data["time_hours"] == 24:
 			advance_day()

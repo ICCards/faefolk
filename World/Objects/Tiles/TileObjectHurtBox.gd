@@ -43,6 +43,14 @@ func set_dimensions():
 	$Position2D.scale = Constants.dimensions_dict[item_name]
 	if item_name == "campfire" or item_name == "torch":
 		$Light2D.enabled = true
+		if item_name == "campfire":
+			$Position2D/ChestInteractiveArea/CollisionShape2D.disabled = false
+			$Position2D/ChestInteractiveArea.object_name = "campfire"
+			$Position2D/ChestInteractiveArea.name = str(id)
+			if PlayerData.player_data["campfires"].has(id):
+				pass
+			else:
+				PlayerData.player_data["campfires"][id] = {}
 	elif item_name == "wood chest" or item_name == "stone chest":
 		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
 		$Position2D/StaticBody2D/CollisionShape2D.disabled = false
@@ -344,6 +352,9 @@ func _on_HurtBox_area_entered(area):
 	elif item_name == "tool cabinet":
 		drop_items_in_chest()
 		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	elif item_name == "campfire":
+		drop_items_in_campfire()
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
 		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -357,10 +368,15 @@ func _on_HurtBox_area_entered(area):
 	Tiles.fence_tiles.set_cellv(location, -1)
 	Tiles.fence_tiles.update_bitmask_area(location)
 	InstancedScenes.intitiateItemDrop(item_name, position, 1)
-	MapData.remove_placable(str(name))
+	MapData.remove_placable(id)
 	yield($SoundEffects, "finished")
 	queue_free()
 
+
+func drop_items_in_campfire():
+	for item in PlayerData.player_data["campfires"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["campfires"][id][item], position)
+	PlayerData.player_data["campfires"].erase(id)
 
 func drop_items_in_stove():
 	for item in PlayerData.player_data["stoves"][id].keys():

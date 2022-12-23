@@ -14,8 +14,6 @@ var character
 var current_building_item = null
 var running_speed_change = 1.0
 
-var spawn_position
-
 onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
@@ -53,7 +51,6 @@ onready var _character = load("res://Global/Data/Characters.gd")
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	#PlayerData.emit_signal("active_item_updated")
 	PlayerData.connect("active_item_updated", self, "set_held_object")
 	Server.player_node = self
 	if is_building_world:
@@ -72,7 +69,6 @@ func destroy():
 	set_process(false)
 	set_process_unhandled_input(false)
 	state = DYING
-
 
 func set_held_object():
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
