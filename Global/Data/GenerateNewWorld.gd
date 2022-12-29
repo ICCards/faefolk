@@ -5,6 +5,8 @@ var forest = []
 var beach = []
 var snow = []
 var dirt = []
+var ocean = []
+var desert = []
 var tile_arrays = [plains, forest, snow, dirt, beach]
 
 var decoration_locations = []
@@ -28,27 +30,33 @@ var moisture = {}
 
 var file_name = "res://JSONData/world.json"
 
-#func _ready() -> void:
-#	build()
+func _ready() -> void:
+	build()
 
 func build():
 	rng.randomize()
 	randomize()
+	yield(get_tree(), "idle_frame")
 	temperature = generate_map(5,300)
+	yield(get_tree(), "idle_frame")
 	moisture = generate_map(5,300)
+	yield(get_tree(), "idle_frame")
 	altittude = generate_map(5,150)
+	yield(get_tree(), "idle_frame")
 	build_terrian()
+	yield(get_tree(), "idle_frame")
 	set_cave_entrance()
-	generate_trees(MapData.world["snow"].values(),"snow")
-	generate_trees(MapData.world["forest"].values(),"forest")
-	generate_trees(MapData.world["desert"].values(),"desert")
-	generate_grass_bunches(MapData.world["plains"].values(),"plains")
-	generate_grass_bunches(MapData.world["snow"].values(),"snow")
-	generate_ores(MapData.world["snow"].values(),"snow")
-	generate_ores(MapData.world["desert"].values(),"desert")
-	generate_ores(MapData.world["dirt"].values(),"dirt")
-	generate_flowers(MapData.world["forest"].values(),"forest")
-	generate_flowers(MapData.world["plains"].values(),"plains")
+	yield(get_tree(), "idle_frame")
+	generate_trees(snow,"snow")
+	generate_trees(forest,"forest")
+	generate_trees(desert,"desert")
+	generate_grass_bunches(plains,"plains")
+	generate_grass_bunches(snow,"snow")
+	generate_ores(snow,"snow")
+	generate_ores(desert,"desert")
+	generate_ores(dirt,"dirt")
+	generate_flowers(forest,"forest")
+	generate_flowers(plains,"plains")
 	save_world_data()
 	
 	
@@ -69,7 +77,7 @@ func build_terrian():
 			var id = uuid.v4()
 			#Ocean
 			if alt > 0.8:
-				MapData.world["ocean"][id] = Vector2(x,y)
+				ocean.append(Vector2(x,y))
 			#Beach	
 			elif between(alt,0.75,0.8):
 				#MapData.world["beach"][id] = Vector2(x,y)
@@ -86,8 +94,7 @@ func build_terrian():
 					forest.append(Vector2(x,y))
 				#desert	
 				elif temp > 0.6 and moist < 0.5:
-					MapData.world["desert"][id] = Vector2(x,y)
-					#desert.append(Vector2(x,y))
+					desert.append(Vector2(x,y))
 				#snow	
 				elif temp < 0.2:
 					#MapData.world["snow"][id] = Vector2(x,y)
@@ -128,32 +135,40 @@ func fix_tiles():
 			if not tile_array.has(loc+Vector2(-1,-1)):
 				tile_array.append(loc+Vector2(-1,-1))
 	print("FOUND BORDER TILES")
-	for loc in plains: 
-		var id = uuid.v4()
-		MapData.world["plains"][id] = loc
-	for loc in forest: 
-		var id = uuid.v4()
-		MapData.world["forest"][id] = loc
-	for loc in snow: 
-		var id = uuid.v4()
-		MapData.world["snow"][id] = loc
-#	for loc in desert: 
+	MapData.world["plains"] = plains
+	MapData.world["forest"] = forest
+	MapData.world["desert"] = desert
+	MapData.world["plains"] = plains
+	MapData.world["snow"] = snow
+	MapData.world["ocean"] = ocean
+	MapData.world["dirt"] = dirt
+#	for loc in plains: 
 #		var id = uuid.v4()
-#		MapData.world["desert"][id] = loc
-	for loc in beach: 
-		var id = uuid.v4()
-		MapData.world["beach"][id] = loc
-	for loc in dirt: 
-		var id = uuid.v4()
-		MapData.world["dirt"][id] = loc
-#	for loc in ocean: 
+#		MapData.world["plains"][id] = loc
+#	for loc in forest: 
 #		var id = uuid.v4()
-#		MapData.world["ocean"][id] = loc
-#	emit_signal("build_finished")
+#		MapData.world["forest"][id] = loc
+#	for loc in snow: 
+#		var id = uuid.v4()
+#		MapData.world["snow"][id] = loc
+##	for loc in desert: 
+##		var id = uuid.v4()
+##		MapData.world["desert"][id] = loc
+#	for loc in beach: 
+#		var id = uuid.v4()
+#		MapData.world["beach"][id] = loc
+#	for loc in dirt: 
+#		var id = uuid.v4()
+#		MapData.world["dirt"][id] = loc
+##	for loc in ocean: 
+##		var id = uuid.v4()
+##		MapData.world["ocean"][id] = loc
+##	emit_signal("build_finished")
 	print("BUILT TERRAIN FINAL")
 	#save_world_data()
 
 func is_border_tile(_pos, _tiles):
+	var count = 0
 	if not _tiles.has(_pos+Vector2(1,0)):
 		return true
 	if not _tiles.has(_pos+Vector2(-1,0)):
@@ -173,7 +188,6 @@ func save_world_data():
 	print("saved")
 	pass
 
-
 func generate_flowers(locations,biome):
 	print("Building "+biome+" Flowers")
 	var NUM_FLOWER = int(locations.size()/100)
@@ -181,7 +195,6 @@ func generate_flowers(locations,biome):
 		var index = rng.randi_range(0, locations.size() - 1)
 		var location = locations[index]
 		create_flower(location,biome)
-	
 
 func create_flower(loc,biome):
 	var id = uuid.v4()

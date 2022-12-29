@@ -123,7 +123,7 @@ func _on_Area2D_area_entered(area):
 		if Util.chance(50):
 			PlayerData.player_data["collections"]["forage"][type] += 1
 			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-16),1)
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sund", -24)
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("front break")
 		yield($AnimationPlayer, "animation_finished")

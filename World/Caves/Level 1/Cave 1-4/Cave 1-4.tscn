@@ -2579,6 +2579,7 @@ glow_blend_mode = 0
 script = ExtResource( 15 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 z_index = 1
 collision_layer = 2097152
 collision_mask = 0

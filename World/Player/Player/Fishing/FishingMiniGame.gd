@@ -22,7 +22,7 @@ func set_active(_fishing_rod_type):
 	spawn_fish()
 	modulate = Color(1,1,1,1)
 	$Progress.value = 250
-	#$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
+	$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
 	set_fishing_rod_level()
 	
 	
@@ -96,9 +96,9 @@ func _physics_process(delta):
 				$Progress.value -= 195 * delta
 				if ($Progress.value <= 0):
 					lost_fish()
-		#var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
-		#var g = range_lerp($Progress.value/10, 10, 50, 0, 0.8)
-		#$Progress.modulate = Color(r, g, 0)
+		var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
+		var g = range_lerp($Progress.value/10, 10, 50, 0, 0.8)
+		$Progress.modulate = Color(r, g, 0)
 		get_node("../../").set_moving_fish_line_position($Progress.value)
 	else:
 		sound_effects.playing = false

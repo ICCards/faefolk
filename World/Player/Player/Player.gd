@@ -287,13 +287,13 @@ func walk_state(_direction):
 				animation = "walk_" + _direction.to_lower()
 				$HoldingTorch.hide()
 			composite_sprites.set_player_animation(character, animation, null)
-		elif Input.is_action_pressed("sprint") and Sounds.current_footsteps_sound != Sounds.swimming:
+		elif running and Sounds.current_footsteps_sound != Sounds.swimming:
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			animation_player.play("sprint")
 			animation = "run_" + _direction.to_lower()
 			composite_sprites.set_player_animation(character, animation, null)
 			check_if_holding_item()
-		else:
+		elif Sounds.current_footsteps_sound == Sounds.swimming:
 			holding_item.hide()
 			$HoldingTorch.hide()
 			animation_player.play("swim")

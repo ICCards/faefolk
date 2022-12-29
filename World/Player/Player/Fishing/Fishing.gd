@@ -90,10 +90,7 @@ func retract_and_stop(fish_name):
 	yield(player_animation_player, "animation_finished")
 	if fish_name:
 		PlayerData.player_data["collections"]["fish"][fish_name] += 1
-		var itemDrop = ItemDrop.instance()
-		itemDrop.initItemDropType(fish_name)
-		Server.world.add_child(itemDrop)
-		itemDrop.global_position = Server.player_node.global_position
+		PlayerData.add_item_to_hotbar(fish_name, 1, null)
 	stop_fishing_state()
 	
 func reel_in_fish_line():
@@ -219,6 +216,8 @@ func draw_cast_line():
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
 	var location = Tiles.ocean_tiles.world_to_map(hook.position + Server.player_node.position)
 	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles): # valid cast
+		$RippleParticles.position = end_point
+		$RippleParticles.emitting = true
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
@@ -240,6 +239,9 @@ func setLinePointsToBezierCurve(a: Vector2, postA: Vector2, preB: Vector2, b: Ve
 
 func set_moving_fish_line_position(progress_of_game):
 	var temp_end_point = return_adjusted_end_point(progress_of_game)
+	$RippleParticles.one_shot = false
+	$RippleParticles.emitting = true
+	$RippleParticles.position = temp_end_point
 	hook.position = temp_end_point - Vector2(4.5,4.5)
 	line.points = [start_point, temp_end_point]
 

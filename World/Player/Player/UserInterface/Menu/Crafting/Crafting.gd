@@ -309,4 +309,3 @@ func return_holding_item(item_name, qt):
 	inventoryItem.set_item(item_name, qt, null)
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem
-

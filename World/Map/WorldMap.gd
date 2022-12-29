@@ -116,26 +116,29 @@ func set_direction(dir):
 			playerIcon.rotation_degrees = -90
 		
 func buildMap(map):
-	for id in map["dirt"]:
-		var loc = Util.string_to_vector2(map["dirt"][id])
+	var dirt = map["dirt"]
+	for loc_string in dirt:
+		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc, Tiles.DIRT)
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["forest"]:
-		var loc = Util.string_to_vector2(map["forest"][id])
+	var forest = map["forest"]
+	for loc_string in forest:
+		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.FOREST)
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["plains"]:
-		var loc = Util.string_to_vector2(map["plains"][id])
+	var plains = map["plains"]
+	for loc_string in plains:
+		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.PLAINS)
-	yield(get_tree().create_timer(0.5), "timeout")
-	for id in map["beach"]:
-		var loc = Util.string_to_vector2(map["beach"][id])
+	var beach = map["beach"]
+	for loc_string in beach:
+		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.BEACH)
-	for id in map["desert"]:
-		var loc = Util.string_to_vector2(map["desert"][id])
+	var desert = map["desert"]
+	for loc_string in desert:
+		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.DESERT)
-	for id in map["snow"]:
-		var loc = Util.string_to_vector2(map["snow"][id])
+	var snow = map["snow"]
+	for loc_string in snow:
+		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.SNOW)
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):

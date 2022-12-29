@@ -48,13 +48,13 @@ var starting_player_data = {
 	"hotbar": {
 		"0": ["stone sword", 1, 50],
 		"1": ["wind staff", 1, null],
-		##"2": ["campfire", 10, null],
+		"2": ["wood fishing rod", 1, null],
 		#"3": ["stove #1", 10, null],
 		#"9": ["arrow", 100, null],
 	},
 	"inventory": {
-		#	"18": ["wood", 999, null],
-			#"19": ["stone", 999, null],
+			"18": ["wood", 999, null],
+			"19": ["stone", 999, null],
 #			"17": ["iron ingot", 99, null],
 			#"15": ["wheat flour", 99, null],
 #			"16": ["stone fishing rod", 1, null],
@@ -435,6 +435,7 @@ func add_item_to_inventory(item_name, item_quantity, item_health):
 			player_data["inventory"][str(i)] = [item_name, item_quantity, item_health]
 			update_inventory_slot_visual(i, item_name, item_quantity, item_health)
 			return
+	# item cant be added to inventory so drop it
 	InstancedScenes.initiateInventoryItemDrop([item_name, item_quantity, item_health], Server.player_node.position)
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity, item_health):

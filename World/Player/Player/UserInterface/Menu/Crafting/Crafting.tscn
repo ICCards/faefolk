@@ -63,6 +63,7 @@ visible = false
 scale = Vector2( 7, 7 )
 
 [node name="Page1" type="Control" parent="."]
+visible = false
 margin_left = 868.0
 margin_top = 36.0
 margin_right = 868.0
@@ -213,7 +214,6 @@ margin_bottom = 56.0
 texture_normal = ExtResource( 29 )
 
 [node name="Page2" type="Control" parent="."]
-visible = false
 margin_left = -280.0
 margin_top = 40.0
 margin_right = -280.0
@@ -646,7 +646,6 @@ rect_scale = Vector2( 2.5, 2.5 )
 texture_normal = ExtResource( 27 )
 
 [node name="UpButton" type="TextureButton" parent="."]
-visible = false
 margin_left = 1636.0
 margin_top = 310.0
 margin_right = 1676.0
