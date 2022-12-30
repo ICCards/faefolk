@@ -30,5 +30,5 @@ func _physics_process(delta):
 	else:
 		$ItemDescription.hide()
 
-func _on_btn_pressed():
+func _on_ExitBtn_pressed():
 	get_parent().close_chest(id)

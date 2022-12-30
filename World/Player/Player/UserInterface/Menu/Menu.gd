@@ -9,16 +9,14 @@ func initialize():
 	show()
 	Server.player_node.actions.destroy_placable_object()
 	hovered_button = null
-	$Trash/Top.rotation_degrees = 0
-	$Trash.show()
+	$Trash.initialize()
 	$Inventory.initialize()
 	$Crafting.hide()
 	$Collections.hide()
 	$OptionsMenu.hide()
 	$Skills.hide()
 	$Exit.hide()
-	$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/inventory.png")
-	$Background.texture = load("res://Assets/Images/User interface/inventory/invenroty/inventory-tab.png")
+	$Background.texture = load("res://Assets/Images/User interface/inventory/inventory/inventory-tab.png")
 
 
 func _physics_process(delta):
@@ -52,8 +50,6 @@ func _on_Skills_pressed():
 		$Crafting.hide()
 		$Skills.initialize()
 		$Exit.hide()
-		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/skills.png")
-		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
 
 
 func _on_Crafting_pressed():
@@ -64,12 +60,11 @@ func _on_Crafting_pressed():
 		$Trash.show()
 		$Skills.hide()
 		$Inventory.hide()
-		$Crafting.initialize()
+		$Crafting.show()
 		$Collections.hide()
 		$OptionsMenu.hide()
 		$Exit.hide()
-		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/crafting.png")
-		$Background.texture = load("res://Assets/Images/Inventory UI/menus/crafting.png")
+		$Background.texture = load("res://Assets/Images/User interface/inventory/crafting/crafting-tab.png")
 
 func _on_Collections_pressed():
 	if not find_parent("UserInterface").holding_item:
@@ -83,7 +78,6 @@ func _on_Collections_pressed():
 		$Skills.hide()
 		$Exit.hide()
 		$Collections.initialize()
-		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/collections.png")
 		$Background.texture = load("res://Assets/Images/Inventory UI/menus/collections1.png")
 
 func _on_Options_pressed():
@@ -102,19 +96,19 @@ func _on_Options_pressed():
 		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
 
 
-func _on_Exit_pressed():
-	if not find_parent("UserInterface").holding_item:
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
-		$Inventory.hide()
-		$Crafting.hide()
-		$OptionsMenu.hide()
-		$Collections.hide()
-		$Exit.show()
-		$Skills.hide()
-		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/exit.png")
-		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
+#func _on_Exit_pressed():
+#	if not find_parent("UserInterface").holding_item:
+#		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
+#		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+#		sound_effects.play()
+#		$Inventory.hide()
+#		$Crafting.hide()
+#		$OptionsMenu.hide()
+#		$Collections.hide()
+#		$Exit.show()
+#		$Skills.hide()
+#		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/exit.png")
+#		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
 
 
 func _on_Inventory_mouse_entered():
@@ -142,12 +136,12 @@ func _on_Options_mouse_entered():
 func _on_Options_mouse_exited():
 	hovered_button = null
 
-func _on_Exit_mouse_entered():
-	hovered_button = "Exit"
-func _on_Exit_mouse_exited():
-	hovered_button = null
+#func _on_Exit_mouse_entered():
+#	hovered_button = "Exit"
+#func _on_Exit_mouse_exited():
+#	hovered_button = null
 
 
-func _on_ExitButton_pressed():
+func _on_ExitBtn_pressed():
 	if not get_parent().holding_item:
 		get_parent().toggle_menu()

@@ -12,114 +12,6 @@ func initialize():
 	page = 1
 	reset_hover_effect()
 	initialize_crafting()
-	set_current_page()
-
-
-func set_current_page():
-	match page:
-		1:
-			$Page1.show()
-			$Page2.hide()
-			$Page3.hide()
-			$Page4.hide()
-			$Page5.hide()
-			$Page6.hide()
-			$Page7.hide()
-			$Page8.hide()
-			$UpButton.hide()
-			$DownButton.show()
-		2:
-			$Page1.hide()
-			$Page2.show()
-			$Page3.hide()
-			$Page4.hide()
-			$Page5.hide()
-			$Page6.hide()
-			$Page7.hide()
-			$Page8.hide()
-			$UpButton.show()
-			$DownButton.show()
-		3:
-			$Page1.hide()
-			$Page2.hide()
-			$Page3.show()
-			$Page4.hide()
-			$Page5.hide()
-			$Page6.hide()
-			$Page7.hide()
-			$Page8.hide()
-			$UpButton.show()
-			$DownButton.show()
-		4:
-			$Page1.hide()
-			$Page2.hide()
-			$Page3.hide()
-			$Page4.show()
-			$Page5.hide()
-			$Page6.hide()
-			$Page7.hide()
-			$Page8.hide()
-			$UpButton.show()
-			$DownButton.show()
-		5:
-			$Page1.hide()
-			$Page2.hide()
-			$Page3.hide()
-			$Page4.hide()
-			$Page5.show()
-			$Page6.hide()
-			$Page7.hide()
-			$Page8.hide()
-			$UpButton.show()
-			$DownButton.show()
-		6:
-			$Page1.hide()
-			$Page2.hide()
-			$Page3.hide()
-			$Page4.hide()
-			$Page5.hide()
-			$Page6.show()
-			$Page7.hide()
-			$Page8.hide()
-			$UpButton.show()
-			$DownButton.show()
-		7:
-			$Page1.hide()
-			$Page2.hide()
-			$Page3.hide()
-			$Page4.hide()
-			$Page5.hide()
-			$Page6.hide()
-			$Page7.show()
-			$Page8.hide()
-			$UpButton.show()
-			$DownButton.show()
-		8:
-			$Page1.hide()
-			$Page2.hide()
-			$Page3.hide()
-			$Page4.hide()
-			$Page5.hide()
-			$Page6.hide()
-			$Page7.hide()
-			$Page8.show()
-			$UpButton.show()
-			$DownButton.hide()
-
-
-func _on_UpButton_pressed():
-	if page != 1:
-		page -= 1
-		set_current_page()
-		initialize_crafting()
-		Sounds.play_small_select_sound()
-
-func _on_DownButton_pressed():
-	if page != 8:
-		page += 1
-		set_current_page()
-		initialize_crafting()
-		Sounds.play_small_select_sound()
 
 
 func reset_hover_effect():
@@ -230,13 +122,13 @@ func entered_crafting_area(_item):
 	hovered_item = null
 	crafting_item = _item
 	if crafting_item == "blueprint" or crafting_item == "hammer" or crafting_item == "wood sword" or crafting_item == "wood axe" or crafting_item == "wood pickaxe" or crafting_item == "wood hoe":
-		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + crafting_item), "rect_scale",
-			get_node("Page" + str(page) + "/" + crafting_item).rect_scale, Vector2(8.4, 8.4), 0.1,
+		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "rect_scale",
+			get_node("CraftingMenu/Items/" + crafting_item).rect_scale, Vector2(8.4, 8.4), 0.1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 	else:
-		$Tween.interpolate_property(get_node("Page" + str(page) + "/" + crafting_item), "rect_scale",
-			get_node("Page" + str(page) + "/" + crafting_item).rect_scale, Vector2(4.2, 4.2), 0.1,
+		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "rect_scale",
+			get_node("CraftingMenu/Items/" + crafting_item).rect_scale, Vector2(4.2, 4.2), 0.1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 	
@@ -309,3 +201,7 @@ func return_holding_item(item_name, qt):
 	inventoryItem.set_item(item_name, qt, null)
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem
+
+
+func _on_Slider_value_changed(value):
+	pass # Replace with function body.

@@ -39,14 +39,14 @@ func _physics_process(delta):
 	if not visible:
 		return
 	adjusted_description_position()
-	if item and find_parent("UserInterface").holding_item == null:
-		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
-		$ItemDescription.show()
-		$ItemDescription.item_name = item
-		$ItemDescription.initialize()
-		$ItemDescription.position = adjusted_pos
-	else:
-		$ItemDescription.hide()
+#	if item and find_parent("UserInterface").holding_item == null:
+#		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
+#		$ItemDescription.show()
+#		$ItemDescription.item_name = item
+#		$ItemDescription.initialize()
+#		$ItemDescription.position = adjusted_pos
+#	else:
+#		$ItemDescription.hide()
 
 
 func adjusted_description_position():

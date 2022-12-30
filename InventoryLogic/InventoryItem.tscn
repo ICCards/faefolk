@@ -12,18 +12,19 @@ script = ExtResource( 2 )
 [node name="Image" type="TextureRect" parent="."]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 78.0
-margin_bottom = 78.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 57.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 48, 48 )
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
-margin_left = 47.0
-margin_top = 64.0
-margin_right = 167.0
-margin_bottom = 125.0
+visible = false
+margin_left = 20.0
+margin_top = 42.0
+margin_right = 140.0
+margin_bottom = 103.0
 grow_horizontal = 2
 rect_scale = Vector2( 0.3, 0.3 )
 mouse_filter = 1
@@ -33,11 +34,11 @@ align = 2
 
 [node name="HealthIndicator" type="Control" parent="."]
 visible = false
-margin_left = -20.0
-margin_top = -294.0
-margin_right = -20.0
-margin_bottom = -294.0
-rect_scale = Vector2( 4.5, 4.5 )
+margin_left = -12.0
+margin_top = -192.0
+margin_right = -12.0
+margin_bottom = -192.0
+rect_scale = Vector2( 3, 3 )
 
 [node name="TextureRect" type="TextureRect" parent="HealthIndicator"]
 margin_left = 5.0

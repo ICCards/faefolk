@@ -26,84 +26,83 @@ func initialize():
 	set_bg()
 	
 func set_bg():
-	$Background.texture = load("res://Assets/Images/Inventory UI/skill menus/"+skill+".png")
+	$Background.texture = load("res://Assets/Images/User interface/inventory/skills/"+skill +"-tab.png")
 	front_progress_bar.texture_progress = load("res://Assets/Images/Spell icons/"+ skill +"/front.png")
 	back_progress_bar.texture_progress = load("res://Assets/Images/Spell icons/"+ skill +"/back.png")
-	$Title.text = skill[0].to_upper() + skill.substr(1,-1)
 	set_skills()
 	match skill:
 		"sword":
-			$Title.rect_position.x = -227
-			bow_btn.rect_position.x = -125
-			wind_btn.rect_position.x = -65
-			fire_btn.rect_position.x = -5
-			earth_btn.rect_position.x = 55
-			ice_btn.rect_position.x = 115
-			electric_btn.rect_position.x = 175
-			dark_magic_btn.rect_position.x = 235
+			sword_btn.rect_position.x = 351
+			bow_btn.rect_position.x = 318
+			wind_btn.rect_position.x = 318
+			fire_btn.rect_position.x = 318
+			earth_btn.rect_position.x = 318
+			ice_btn.rect_position.x = 318
+			electric_btn.rect_position.x = 318
+			dark_magic_btn.rect_position.x = 318
 		"bow":
-			$Title.rect_position.x = -167
-			bow_btn.rect_position.x = -230
-			wind_btn.rect_position.x = -65
-			fire_btn.rect_position.x = -5
-			earth_btn.rect_position.x = 55
-			ice_btn.rect_position.x = 115
-			electric_btn.rect_position.x = 175
-			dark_magic_btn.rect_position.x = 235
+			sword_btn.rect_position.x = 318
+			bow_btn.rect_position.x = 351
+			wind_btn.rect_position.x = 318
+			fire_btn.rect_position.x = 318
+			earth_btn.rect_position.x = 318
+			ice_btn.rect_position.x = 318
+			electric_btn.rect_position.x = 318
+			dark_magic_btn.rect_position.x = 318
 		"wind":
-			$Title.rect_position.x = -107
-			bow_btn.rect_position.x = -230
-			wind_btn.rect_position.x = -170
-			fire_btn.rect_position.x = -5
-			earth_btn.rect_position.x = 55
-			ice_btn.rect_position.x = 115
-			electric_btn.rect_position.x = 175
-			dark_magic_btn.rect_position.x = 235
+			sword_btn.rect_position.x = 318
+			bow_btn.rect_position.x = 318
+			wind_btn.rect_position.x = 351
+			fire_btn.rect_position.x = 318
+			earth_btn.rect_position.x = 318
+			ice_btn.rect_position.x = 318
+			electric_btn.rect_position.x = 318
+			dark_magic_btn.rect_position.x = 318
 		"fire":
-			$Title.rect_position.x = -47
-			bow_btn.rect_position.x = -230
-			wind_btn.rect_position.x = -170
-			fire_btn.rect_position.x = -110
-			earth_btn.rect_position.x = 55
-			ice_btn.rect_position.x = 115
-			electric_btn.rect_position.x = 175
-			dark_magic_btn.rect_position.x = 235
+			sword_btn.rect_position.x = 318
+			bow_btn.rect_position.x = 318
+			wind_btn.rect_position.x = 318
+			fire_btn.rect_position.x = 351
+			earth_btn.rect_position.x = 318
+			ice_btn.rect_position.x = 318
+			electric_btn.rect_position.x = 318
+			dark_magic_btn.rect_position.x = 318
 		"earth":
-			$Title.rect_position.x = 13
-			bow_btn.rect_position.x = -230
-			wind_btn.rect_position.x = -170
-			fire_btn.rect_position.x = -110
-			earth_btn.rect_position.x = -50
-			ice_btn.rect_position.x = 115
-			electric_btn.rect_position.x = 175
-			dark_magic_btn.rect_position.x = 235
+			sword_btn.rect_position.x = 318
+			bow_btn.rect_position.x = 318
+			wind_btn.rect_position.x = 318
+			fire_btn.rect_position.x = 318
+			earth_btn.rect_position.x = 351
+			ice_btn.rect_position.x = 318
+			electric_btn.rect_position.x = 318
+			dark_magic_btn.rect_position.x = 318
 		"ice":
-			$Title.rect_position.x = 73
-			bow_btn.rect_position.x = -230
-			wind_btn.rect_position.x = -170
-			fire_btn.rect_position.x = -110
-			earth_btn.rect_position.x = -50
-			ice_btn.rect_position.x = 10
-			electric_btn.rect_position.x = 175
-			dark_magic_btn.rect_position.x = 235
+			sword_btn.rect_position.x = 318
+			bow_btn.rect_position.x = 318
+			wind_btn.rect_position.x = 318
+			fire_btn.rect_position.x = 318
+			earth_btn.rect_position.x = 318
+			ice_btn.rect_position.x = 351
+			electric_btn.rect_position.x = 318
+			dark_magic_btn.rect_position.x = 318
 		"electric":
-			$Title.rect_position.x = 133
-			bow_btn.rect_position.x = -230
-			wind_btn.rect_position.x = -170
-			fire_btn.rect_position.x = -110
-			earth_btn.rect_position.x = -50
-			ice_btn.rect_position.x = 10
-			electric_btn.rect_position.x = 70
-			dark_magic_btn.rect_position.x = 235
+			sword_btn.rect_position.x = 318
+			bow_btn.rect_position.x = 318
+			wind_btn.rect_position.x = 318
+			fire_btn.rect_position.x = 318
+			earth_btn.rect_position.x = 318
+			ice_btn.rect_position.x = 318
+			electric_btn.rect_position.x = 351
+			dark_magic_btn.rect_position.x = 318
 		"dark":
-			$Title.rect_position.x = 193
-			bow_btn.rect_position.x = -230
-			wind_btn.rect_position.x = -170
-			fire_btn.rect_position.x = -110
-			earth_btn.rect_position.x = -50
-			ice_btn.rect_position.x = 10
-			electric_btn.rect_position.x = 70
-			dark_magic_btn.rect_position.x = 130
+			sword_btn.rect_position.x = 318
+			bow_btn.rect_position.x = 318
+			wind_btn.rect_position.x = 318
+			fire_btn.rect_position.x = 318
+			earth_btn.rect_position.x = 318
+			ice_btn.rect_position.x = 318
+			electric_btn.rect_position.x = 318
+			dark_magic_btn.rect_position.x = 351
 			
 func set_skills():
 	var experience = PlayerData.player_data["skill_experience"][skill]

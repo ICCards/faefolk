@@ -16,11 +16,11 @@ func initialize():
 	PlayerData.InventorySlots = $InventorySlots
 	hovered_item = null
 	$EnergyManaHealth.initialize()
-	if PlayerData.player_data["time_hours"] >= 18 or PlayerData.player_data["time_hours"] < 6:
+	$BaseStats.initialize()
+	if PlayerData.player_data["time_hours"] >= 22 or PlayerData.player_data["time_hours"] < 6:
 		set_night_bg()
 	else:
 		set_day_bg()
-
 
 func set_day_bg():
 	$DayNightBg.texture = load("res://Assets/Images/Inventory UI/day.png")
@@ -44,13 +44,5 @@ func _physics_process(delta):
 		get_node("../ItemDescription").hide()
 
 
-#func play_pick_up_item_sound():
-#	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/slots/pickUpItem.mp3")
-#	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-#	sound_effects.play()
-#
-#func play_put_down_item_sound():
-#	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/slots/putDownItem.mp3")
-#	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-#	sound_effects.play()
+
 

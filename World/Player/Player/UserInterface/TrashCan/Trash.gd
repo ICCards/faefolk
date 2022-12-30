@@ -2,6 +2,9 @@ extends Control
 
 onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
+func initialize():
+	$Top.rotation_degrees = 0
+
 func _on_TrashButton_mouse_entered():
 	open_trash_can()
 

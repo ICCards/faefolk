@@ -12,7 +12,7 @@ func _ready():
 	set_energy_bar()
 	set_health_bar()
 	set_mana_bar()
-	$DateTime/SeasonIcon.texture = load("res://Assets/Images/Inventory UI/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
+	$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
 	
 func _on_ManaTimer_timeout():
 	PlayerData.player_data["mana"] += 1
@@ -72,7 +72,7 @@ func advance_season():
 	var new_szn = seasons[index]
 	PlayerData.player_data["season"] = new_szn
 	PlayerData.player_data["day_number"] = 1
-	$DateTime/SeasonIcon.texture = load("res://Assets/Images/Inventory UI/DateTime/season icons/"+ new_szn +".png")
+	$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ new_szn +".png")
 	PlayerData.emit_signal("season_changed")
 	
 	
@@ -96,5 +96,5 @@ func advance_clock_icon():
 	clock_icon_index += 1
 	if clock_icon_index == 9:
 		clock_icon_index = 1
-	$DateTime/ClockIcon.texture = load("res://Assets/Images/Inventory UI/DateTime/clock icons/"+str(clock_icon_index)+".png")
+	$DateTime/ClockIcon.texture = load("res://Assets/Images/User interface/DateTime/clock icons/"+str(clock_icon_index)+".png")
 

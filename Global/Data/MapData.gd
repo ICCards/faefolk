@@ -46,11 +46,11 @@ var caves = {"Cave 1-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},
 "Cave 2-7":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
 "Cave 2-Boss":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}}}
 
-func _ready() -> void:
-	var file = File.new()
-	if (file.file_exists("res://JSONData/world.json")):
-		start()
-	PlayerData.connect("set_day", self, "advance_crops")
+#func _ready() -> void:
+#	var file = File.new()
+#	if (file.file_exists("res://JSONData/world.json")):
+#		start()
+#	PlayerData.connect("set_day", self, "advance_crops")
 
 func start():
 	load_world_data()
