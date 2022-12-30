@@ -18,23 +18,24 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -454.5
-margin_top = -138.5
-margin_right = 151.5
-margin_bottom = -45.5
+margin_left = -615.0
+margin_top = -153.0
+margin_right = -9.0
+margin_bottom = -60.0
 rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 0
 texture = ExtResource( 3 )
+stretch_mode = 5
 
 [node name="ItemDescription" parent="." instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -512, -596 )
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
-margin_left = -417.0
-margin_top = -106.0
-margin_right = 420.0
-margin_bottom = -25.0
+margin_left = -580.0
+margin_top = -121.0
+margin_right = 539.0
+margin_bottom = -55.0
 custom_constants/hseparation = 3
 columns = 10
 
@@ -111,6 +112,7 @@ script = ExtResource( 1 )
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="HotbarLabels" type="HBoxContainer" parent="."]
+visible = false
 margin_left = -416.0
 margin_top = -109.0
 margin_right = 2179.0

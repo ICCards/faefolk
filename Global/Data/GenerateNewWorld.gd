@@ -30,23 +30,28 @@ var moisture = {}
 
 var file_name = "res://JSONData/world.json"
 
-func _ready() -> void:
-	build()
+#func _ready() -> void:
+#	build()
 
 func build():
 	rng.randomize()
 	randomize()
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(1.0), "timeout")
 	temperature = generate_map(5,300)
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(1.0), "timeout")
+	print("BUILT TEMP" + str(temperature))
 	moisture = generate_map(5,300)
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(1.0), "timeout")
+	print("BUILT MOISTURE " + str(moisture))
 	altittude = generate_map(5,150)
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(1.0), "timeout")
+	print("BUILT ALTITTUDE" + str(altittude))
+	get_node("/root/World/Loading").set_phase("Building terrain")
 	build_terrian()
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(1.0), "timeout")
 	set_cave_entrance()
-	yield(get_tree(), "idle_frame")
+	get_node("/root/World/Loading").set_phase("Building nature")
+	yield(get_tree().create_timer(1.0), "timeout")
 	generate_trees(snow,"snow")
 	generate_trees(forest,"forest")
 	generate_trees(desert,"desert")
@@ -57,7 +62,12 @@ func build():
 	generate_ores(dirt,"dirt")
 	generate_flowers(forest,"forest")
 	generate_flowers(plains,"plains")
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_node("/root/World/Loading").set_phase("Saving data")
 	save_world_data()
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_node("/root/World/Loading").queue_free()
+	Server.world.build_world()
 	
 	
 func set_cave_entrance():
@@ -138,10 +148,10 @@ func fix_tiles():
 	MapData.world["plains"] = plains
 	MapData.world["forest"] = forest
 	MapData.world["desert"] = desert
-	MapData.world["plains"] = plains
 	MapData.world["snow"] = snow
 	MapData.world["ocean"] = ocean
 	MapData.world["dirt"] = dirt
+	MapData.world["beach"] = beach
 #	for loc in plains: 
 #		var id = uuid.v4()
 #		MapData.world["plains"][id] = loc

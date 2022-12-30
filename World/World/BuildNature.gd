@@ -26,11 +26,12 @@ onready var NatureObjects = get_node("../../NatureObjects")
 
 var is_destroyed: bool = false
 
-func _ready():
+func start():
 	spawn_placables()
+	$SpawnNature.start()
 	
 func spawn_placables():
-	yield(get_tree().create_timer(3.0), "timeout")
+	yield(get_tree().create_timer(2.0), "timeout")
 	for id in MapData.world["placables"]:
 		var item_name = MapData.world["placables"][id]["n"]
 		var location = Util.string_to_vector2(MapData.world["placables"][id]["l"])
@@ -282,12 +283,13 @@ func spawn_grass():
 
 
 func set_nav():
-	var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
-	navTiles.clear()
-	for y in range(40):
-		for x in range(60):
-			var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
-			if Tiles.isValidNavigationTile(loc):
-				navTiles.set_cellv(loc,0)
-	yield(get_tree().create_timer(0.25), "timeout")
-	var value = navigation_thread.wait_to_finish()
+	if Server.player_node:
+		var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
+		navTiles.clear()
+		for y in range(40):
+			for x in range(60):
+				var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
+				if Tiles.isValidNavigationTile(loc):
+					navTiles.set_cellv(loc,0)
+		yield(get_tree().create_timer(0.25), "timeout")
+		var value = navigation_thread.wait_to_finish()

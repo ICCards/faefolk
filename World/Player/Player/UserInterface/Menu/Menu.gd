@@ -18,7 +18,7 @@ func initialize():
 	$Skills.hide()
 	$Exit.hide()
 	$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/inventory.png")
-	$Background.texture = load("res://Assets/Images/Inventory UI/menus/inventory.png")
+	$Background.texture = load("res://Assets/Images/User interface/inventory/invenroty/inventory-tab.png")
 
 
 func _physics_process(delta):

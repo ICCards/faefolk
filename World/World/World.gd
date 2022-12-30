@@ -27,6 +27,8 @@ onready var Clam = load("res://World/Objects/Nature/Forage/Clam.tscn")
 onready var Starfish = load("res://World/Objects/Nature/Forage/Starfish.tscn")
 onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 
+onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
+
 var rng = RandomNumberGenerator.new()
 
 const MAX_DUCKS = 150
@@ -45,10 +47,27 @@ var num_wolves = 0
 
 var is_changing_scene: bool = false
 
-#func _ready():
-#	Server.world = self
-#	buildMap(MapData.world)
-	
+func _ready():
+	Server.world = self
+	var file = File.new()
+	if (file.file_exists("res://JSONData/world.json")):
+		build_world()
+	else:
+		var loadingScreen = GenerateWorldLoadingScreen.instance()
+		loadingScreen.name = "Loading"
+		add_child(loadingScreen)
+		GenerateNewWorld.build()
+
+
+func build_world():
+	MapData.start()
+	buildMap(MapData.world)
+	$BuildTerrain.start()
+	$BuildTerrain/BuildNature.start()
+	$WorldMap.buildMap()
+	spawn_initial_animals()
+
+
 func advance_down_cave_level():
 	if not is_changing_scene:
 		is_changing_scene = true
@@ -93,34 +112,25 @@ func create_cave_entrance(_loc):
 	add_child(caveLadder)
 
 func spawn_initial_animals():
-	for i in range(num_bunnies):
+	for i in range(150):
 		spawnRandomBunny()
-	for i in range(num_ducks):
+	for i in range(150):
 		spawnRandomDuck()
-	for i in range(num_deer):
+	for i in range(75):
 		spawnRandomDeer()
-
-
-func spawn_animals():
-	for i in range(10):
-		spawnRandomBear()
-	for i in range(10):
+	for i in range(30):
 		spawnRandomBoar()
-	for i in range(10):
-		spawnRandomDeer()
-	for i in range(10):
+	for i in range(30):
+		spawnRandomBear()
+	for i in range(30):
 		spawnRandomWolf()
-	for i in range(10):
-		spawnRandomDeer()
-	for i in range(10):
-		spawnRandomWolf()
-	
+	yield(get_tree().create_timer(2.0), "timeout")
 
 
 func set_random_beach_forage():
-	for id in MapData.world["beach"]:
+	for loc_string in MapData.world["beach"]:
 		if Util.chance(1):
-			var loc = Util.string_to_vector2(MapData.world["beach"][id])
+			var loc = Util.string_to_vector2(loc_string)
 			if dirt.get_cellv(loc) == -1 and forest.get_cellv(loc) == -1 and snow.get_cellv(loc) == -1 and plains.get_cellv(loc) == -1:
 				if Util.chance(50):
 					Tiles.remove_valid_tiles(loc)
@@ -176,11 +186,8 @@ func set_water_tiles():
 
 func returnValidSpawnLocation():
 	rng.randomize()
-	var tempLoc = Vector2(rng.randi_range(8000, 24000), rng.randi_range(8000, 24000))
-	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
-		return tempLoc
-	tempLoc = Vector2(rng.randi_range(8000, 24000), rng.randi_range(8000, 24000))
-	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
+	var tempLoc = Vector2(rng.randi_range(100, 900), rng.randi_range(100, 900))
+	if validTiles.get_cellv(tempLoc) != -1 and not MapData.world["ocean"].has(str(tempLoc)) and (tempLoc*32).distance_to(Server.player_node.global_position) > 200:
 		return tempLoc
 	return null
 
@@ -190,27 +197,30 @@ func spawnRandomWolf():
 		var loc = returnValidSpawnLocation()
 		if loc != null:
 			var wolf = Wolf.instance()
-			wolf.global_position = loc
+			wolf.global_position = loc*32
 			$Enemies.call_deferred("add_child",wolf)
 			num_wolves += 1
+			yield(get_tree(), "idle_frame")
 
 func spawnRandomBunny():
 	if num_bunnies < MAX_BUNNIES:
 		var loc = returnValidSpawnLocation()
 		if loc != null:
 			var bunny = Bunny.instance()
-			bunny.global_position = loc
+			bunny.global_position = loc*32
 			$Enemies.call_deferred("add_child",bunny)
 			num_bunnies += 1
+			yield(get_tree(), "idle_frame")
 
 func spawnRandomDuck():
 	if num_ducks < MAX_DUCKS:
 		var loc = returnValidSpawnLocation()
 		if loc != null:
 			var duck = Duck.instance()
-			duck.global_position = loc
+			duck.global_position = loc*32
 			$Enemies.call_deferred("add_child",duck)
 			num_ducks += 1
+			yield(get_tree(), "idle_frame")
 
 func spawnRandomBear():
 	if num_bears < MAX_BEARS:
@@ -218,8 +228,9 @@ func spawnRandomBear():
 		if loc != null:
 			var bear = Bear.instance()
 			$Enemies.call_deferred("add_child",bear)
-			bear.global_position = loc
+			bear.global_position = loc*32
 			num_bears += 1
+			yield(get_tree(), "idle_frame")
 		
 func spawnRandomBoar():
 	if num_boars < MAX_BOARS:
@@ -227,8 +238,9 @@ func spawnRandomBoar():
 		if loc != null:
 			var boar = Boar.instance()
 			$Enemies.call_deferred("add_child", boar)
-			boar.global_position = loc
+			boar.global_position = loc*32
 			num_boars += 1
+			yield(get_tree(), "idle_frame")
 
 func spawnRandomDeer():
 	if num_deer < MAX_DEER:
@@ -236,7 +248,6 @@ func spawnRandomDeer():
 		if loc != null:
 			var deer = Deer.instance()
 			$Enemies.call_deferred("add_child", deer)
-			deer.global_position = loc
+			deer.global_position = loc*32
 			num_deer += 1
-
-
+			yield(get_tree(), "idle_frame")

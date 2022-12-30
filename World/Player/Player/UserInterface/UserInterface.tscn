@@ -161,8 +161,13 @@ color = Color( 1, 0, 0, 0 )
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
+margin_left = 125.0
+margin_top = 1.0
+margin_right = 125.0
+margin_bottom = 1.0
 
 [node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
+visible = false
 margin_left = 505.0
 margin_top = 865.0
 margin_right = -1415.0
@@ -181,7 +186,6 @@ visible = false
 visible = false
 
 [node name="PlayerDataUI" parent="." instance=ExtResource( 12 )]
-visible = false
 
 [node name="SleepEffect" type="ColorRect" parent="."]
 visible = false

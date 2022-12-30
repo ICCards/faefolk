@@ -144,7 +144,6 @@ func sleep(sleeping_bag_direction, pos):
 	if get_parent().state != get_parent().SLEEPING:
 		get_parent().z_index = 1
 		get_parent().state = get_parent().SLEEPING
-		get_parent().spawn_position = get_parent().position
 		get_parent().position = pos
 		get_parent().animation_player.play("sleep")
 		get_parent().composite_sprites.set_player_animation(get_parent().character, "sleep_" + sleeping_bag_direction)

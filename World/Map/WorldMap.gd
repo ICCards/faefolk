@@ -62,9 +62,6 @@ func set_inactive():
 	Server.player_node.get_node("Camera2D").current = true
 	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = true
 
-func _ready():
-	if has_node("/root/World"):
-		buildMap(MapData.world)
 
 func draw_grid():
 	for x in range(NUM_ROWS):
@@ -115,29 +112,24 @@ func set_direction(dir):
 		"UP":
 			playerIcon.rotation_degrees = -90
 		
-func buildMap(map):
-	var dirt = map["dirt"]
-	for loc_string in dirt:
+func buildMap():
+	var map = MapData.world
+	for loc_string in map["dirt"]:
 		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc, Tiles.DIRT)
-	var forest = map["forest"]
-	for loc_string in forest:
+	for loc_string in map["forest"]:
 		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.FOREST)
-	var plains = map["plains"]
-	for loc_string in plains:
+	for loc_string in map["plains"]:
 		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.PLAINS)
-	var beach = map["beach"]
-	for loc_string in beach:
+	for loc_string in map["beach"]:
 		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.BEACH)
-	var desert = map["desert"]
-	for loc_string in desert:
+	for loc_string in map["desert"]:
 		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.DESERT)
-	var snow = map["snow"]
-	for loc_string in snow:
+	for loc_string in map["snow"]:
 		var loc = Util.string_to_vector2(loc_string)
 		miniMap.set_cellv(loc , Tiles.SNOW)
 	for x in range(MAP_WIDTH):

@@ -7,9 +7,7 @@ var caves_file_name = "res://JSONData/caves.json"
 
 var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
-var is_world_built = true
-
-
+var is_world_built = false
 
 var world = {
 	"ocean": [],
@@ -30,14 +28,35 @@ var world = {
 	"tiles": {},
 	"placables": {}
 }
-var caves = {}
+var caves = {"Cave 1-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-2":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-3":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-4":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-5":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-6":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-7":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-Boss":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-Fishing":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-2":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-3":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-4":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-5":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-6":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-7":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-Boss":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}}}
 
 func _ready() -> void:
+	var file = File.new()
+	if (file.file_exists("res://JSONData/world.json")):
+		start()
+	PlayerData.connect("set_day", self, "advance_crops")
+
+func start():
 	load_world_data()
 	load_caves_data()
 	add_tiles_to_chunks()
 	add_nature_objects_to_chunks()
-	PlayerData.connect("set_day", self, "advance_crops")
 
 func advance_crops():
 	for id in world["crops"]: # if crop is watered, advance a day

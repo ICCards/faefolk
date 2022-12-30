@@ -11345,9 +11345,9 @@ script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.52, 0.52 )
 smoothing_enabled = true
-smoothing_speed = 20.0
+smoothing_speed = 40.0
 script = ExtResource( 81 )
 
 [node name="timer_shake_length" type="Timer" parent="Camera2D"]
@@ -11661,6 +11661,7 @@ shadow_enabled = true
 visible = false
 position = Vector2( 0, -84 )
 frames = SubResource( 117 )
+frame = 1
 playing = true
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]

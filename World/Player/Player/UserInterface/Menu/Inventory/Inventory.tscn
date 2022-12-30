@@ -1,20 +1,20 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Orange.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" type="Script" id=5]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/PetUI.gd" type="Script" id=6]
-[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=7]
-[ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=8]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/PetUI.gd" type="Script" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" type="Script" id=4]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/Orange.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=7]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=9]
-[ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=10]
-[ext_resource path="res://Assets/Images/Misc/Buttons/large exit button.png" type="Texture" id=11]
-[ext_resource path="res://World/Player/Player/UserInterface/EnergyManaHealth.gd" type="Script" id=12]
-[ext_resource path="res://Assets/Images/Inventory UI/day.png" type="Texture" id=13]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Images/Inventory UI/menus/inventory.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Images/Misc/Buttons/large exit button.png" type="Texture" id=10]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/Inventory UI/menus/inventory.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=13]
+[ext_resource path="res://World/Player/Player/UserInterface/EnergyManaHealth.gd" type="Script" id=14]
+[ext_resource path="res://Assets/Images/Inventory UI/day.png" type="Texture" id=15]
 
 [sub_resource type="Animation" id=21]
 length = 0.001
@@ -197,7 +197,7 @@ margin_left = -377.0
 margin_top = 39.0
 margin_right = -377.0
 margin_bottom = 39.0
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="Background" type="TextureRect" parent="."]
 margin_left = -141.0
@@ -206,7 +206,7 @@ margin_right = 552.0
 margin_bottom = 586.0
 rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 0
-texture = ExtResource( 15 )
+texture = ExtResource( 12 )
 expand = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -220,7 +220,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="InventorySlots" parent="." instance=ExtResource( 3 )]
+[node name="InventorySlots" parent="." instance=ExtResource( 5 )]
 margin_left = 429.0
 margin_top = 381.0
 margin_right = 846.0
@@ -228,7 +228,7 @@ margin_bottom = 741.0
 custom_constants/vseparation = 12
 columns = 5
 
-[node name="HotbarInventorySlots" parent="." instance=ExtResource( 14 )]
+[node name="HotbarInventorySlots" parent="." instance=ExtResource( 1 )]
 margin_left = 429.0
 margin_top = 174.0
 margin_right = 846.0
@@ -247,35 +247,35 @@ custom_constants/separation = 256
 [node name="1" type="Label" parent="HotbarLabels"]
 margin_right = 19.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "1"
 
 [node name="2" type="Label" parent="HotbarLabels"]
 margin_left = 275.0
 margin_right = 302.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "2"
 
 [node name="3" type="Label" parent="HotbarLabels"]
 margin_left = 558.0
 margin_right = 585.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "3"
 
 [node name="4" type="Label" parent="HotbarLabels"]
 margin_left = 841.0
 margin_right = 864.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "4"
 
 [node name="5" type="Label" parent="HotbarLabels"]
 margin_left = 1120.0
 margin_right = 1147.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "5"
 
 [node name="HotbarLabels2" type="HBoxContainer" parent="."]
@@ -289,35 +289,35 @@ custom_constants/separation = 256
 [node name="6" type="Label" parent="HotbarLabels2"]
 margin_right = 27.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "6"
 
 [node name="7" type="Label" parent="HotbarLabels2"]
 margin_left = 283.0
 margin_right = 308.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "7"
 
 [node name="8" type="Label" parent="HotbarLabels2"]
 margin_left = 564.0
 margin_right = 591.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "8"
 
 [node name="9" type="Label" parent="HotbarLabels2"]
 margin_left = 847.0
 margin_right = 873.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "9"
 
 [node name="0" type="Label" parent="HotbarLabels2"]
 margin_left = 1129.0
 margin_right = 1156.0
 margin_bottom = 61.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 text = "0"
 
 [node name="AttributeSlots" type="GridContainer" parent="."]
@@ -380,7 +380,7 @@ expand = true
 
 [node name="PetUI" type="Control" parent="."]
 visible = false
-script = ExtResource( 6 )
+script = ExtResource( 3 )
 
 [node name="PetLabel" type="Label" parent="PetUI"]
 margin_left = 89.0
@@ -388,7 +388,7 @@ margin_top = 346.0
 margin_right = 168.0
 margin_bottom = 407.0
 rect_scale = Vector2( 0.75, 0.75 )
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
@@ -398,9 +398,9 @@ valign = 1
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PetUI"]
 position = Vector2( 147, 395 )
 scale = Vector2( 4, 4 )
-frames = ExtResource( 1 )
+frames = ExtResource( 6 )
 animation = "idle right"
-frame = 17
+frame = 2
 playing = true
 
 [node name="SpawnPet" type="TextureButton" parent="PetUI"]
@@ -408,7 +408,7 @@ margin_left = 238.0
 margin_top = 395.0
 margin_right = 349.0
 margin_bottom = 446.0
-texture_normal = ExtResource( 11 )
+texture_normal = ExtResource( 10 )
 
 [node name="SpawnLabel" type="Label" parent="PetUI"]
 margin_left = 244.0
@@ -416,7 +416,7 @@ margin_top = 401.0
 margin_right = 442.0
 margin_bottom = 479.0
 rect_scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
@@ -432,14 +432,14 @@ margin_top = 493.0
 margin_right = 603.0
 margin_bottom = 568.0
 rect_scale = Vector2( 0.6, 0.6 )
-script = ExtResource( 12 )
+script = ExtResource( 14 )
 
 [node name="Energy" type="Label" parent="EnergyManaHealth"]
 margin_left = 15.0
 margin_top = 7.0
 margin_right = 177.0
 margin_bottom = 68.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
@@ -453,7 +453,7 @@ margin_left = 191.0
 margin_top = 7.0
 margin_right = 205.0
 margin_bottom = 68.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
@@ -466,7 +466,7 @@ margin_left = 219.0
 margin_top = 7.0
 margin_right = 381.0
 margin_bottom = 68.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 custom_colors/font_color = Color( 0, 0.439216, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
@@ -480,7 +480,7 @@ margin_left = 395.0
 margin_top = 7.0
 margin_right = 409.0
 margin_bottom = 68.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
@@ -493,7 +493,7 @@ margin_left = 423.0
 margin_top = 7.0
 margin_right = 585.0
 margin_bottom = 68.0
-theme = ExtResource( 4 )
+theme = ExtResource( 13 )
 custom_colors/font_color = Color( 0.976471, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
@@ -508,26 +508,26 @@ margin_top = 195.0
 margin_right = 266.0
 margin_bottom = 444.0
 rect_scale = Vector2( 0.9, 0.9 )
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 expand = true
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 material = ExtResource( 9 )
 position = Vector2( 179, 395 )
 scale = Vector2( 5, 5 )
-script = ExtResource( 10 )
+script = ExtResource( 7 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 hframes = 4
 
 [node name="Legs" type="Sprite" parent="CompositeSprites"]
 visible = false
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 hframes = 4
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
@@ -539,7 +539,7 @@ hframes = 4
 [node name="Arms" type="Sprite" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 8 )
+texture = ExtResource( 11 )
 hframes = 4
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]

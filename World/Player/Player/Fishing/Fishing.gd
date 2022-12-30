@@ -239,9 +239,6 @@ func setLinePointsToBezierCurve(a: Vector2, postA: Vector2, preB: Vector2, b: Ve
 
 func set_moving_fish_line_position(progress_of_game):
 	var temp_end_point = return_adjusted_end_point(progress_of_game)
-	$RippleParticles.one_shot = false
-	$RippleParticles.emitting = true
-	$RippleParticles.position = temp_end_point
 	hook.position = temp_end_point - Vector2(4.5,4.5)
 	line.points = [start_point, temp_end_point]
 
