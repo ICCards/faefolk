@@ -16,7 +16,7 @@ func set_item(nm, qt, health):
 		item_name = "stone path"
 	$Image.texture = load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png")
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-	if stack_size == 1:
+	if stack_size == 1 or item_quantity == null:
 		$Label.visible = false
 	else:
 		$Label.visible = true
@@ -24,29 +24,34 @@ func set_item(nm, qt, health):
 	if item_health != null:
 		$HealthIndicator.visible = true
 		set_health_bar(item_health)
+	if item_quantity == null:
+		$Image.rect_size = Vector2(64,64)
 
 func set_init_hovered():
-	$Image.rect_scale = Vector2(1.075, 1.075)
-	$Image.rect_position = Vector2(1.0, 1.0)
+	pass
+#	$Image.rect_scale = Vector2(1.075, 1.075)
+#	$Image.rect_position = Vector2(1.0, 1.0)
 
 func hover_item():
-	$Tween.interpolate_property($Image, "rect_scale",
-		$Image.rect_scale, Vector2(1.075, 1.075), 0.075,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($Image, "rect_position",
-		$Image.rect_position, Vector2(1, 1), 0.075,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	pass
+#	$Tween.interpolate_property($Image, "rect_scale",
+#		$Image.rect_scale, Vector2(1.075, 1.075), 0.075,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Image, "rect_position",
+#		$Image.rect_position, Vector2(1, 1), 0.075,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.start()
 	 
 func exit_item():
-	if Server.isLoaded:
-		$Tween.interpolate_property($Image, "rect_scale",
-			$Image.rect_scale, Vector2(1.0, 1.0), 0.075,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.interpolate_property($Image, "rect_position",
-			$Image.rect_position, Vector2(3.0, 3.0), 0.075,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
+	pass
+#	if Server.isLoaded:
+#		$Tween.interpolate_property($Image, "rect_scale",
+#			$Image.rect_scale, Vector2(1.0, 1.0), 0.075,
+#			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#		$Tween.interpolate_property($Image, "rect_position",
+#			$Image.rect_position, Vector2(3.0, 3.0), 0.075,
+#			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#		$Tween.start()
 
 
 func set_health_bar(health):

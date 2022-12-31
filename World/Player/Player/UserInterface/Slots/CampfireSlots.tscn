@@ -15,31 +15,31 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 616.0
 margin_top = 316.0
-margin_right = 697.0
-margin_bottom = 397.0
-rect_min_size = Vector2( 81, 81 )
+margin_right = 664.0
+margin_bottom = 364.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 1 )
 
 [node name="Ingredient" type="Panel" parent="."]
 margin_left = 751.0
 margin_top = 336.0
-margin_right = 832.0
-margin_bottom = 417.0
-rect_min_size = Vector2( 81, 81 )
+margin_right = 799.0
+margin_bottom = 384.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 1 )
 
 [node name="YieldSlot" type="Panel" parent="."]
 margin_left = 1087.0
 margin_top = 289.0
-margin_right = 1168.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 81, 81 )
+margin_right = 1135.0
+margin_bottom = 337.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 1 )
 
 [node name="CoalYieldSlot" type="Panel" parent="."]
 margin_left = 1086.0
 margin_top = 378.0
-margin_right = 1167.0
-margin_bottom = 459.0
-rect_min_size = Vector2( 81, 81 )
+margin_right = 1134.0
+margin_bottom = 426.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 1 )

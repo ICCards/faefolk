@@ -65,6 +65,7 @@ func hit(tool_name):
 		animation_player.play("small_ore_hit_right")
 	elif health <= 0 and not destroyed:
 		destroyed = true
+		PlayerData.player_data["skill_experience"]["mining"] += 1
 		MapData.remove_object("ore_large", name)
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]

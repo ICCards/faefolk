@@ -159,9 +159,7 @@ func valid_yield_slot(ore_name):
 
 func cooking_active():
 	$CookTimer.start()
-	$FireAnimatedSprite.playing = true
-	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 0)
-	$FireAnimatedSprite.modulate = Color("ffffff")
+	$FireAnimatedSprite.show()
 	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").show()
 	if self.visible:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
@@ -171,9 +169,7 @@ func cooking_active():
 func cooking_inactive():
 	$CookTimer.stop()
 	$TimerProgress.value = 0
-	$FireAnimatedSprite.playing = false
-	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$FireAnimatedSprite.modulate = Color("96ffffff")
+	$FireAnimatedSprite.hide()
 	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").hide()
 
 func valid_fuel():
@@ -184,6 +180,6 @@ func valid_fuel():
 			return true
 	return false
 
-func _on_ExitButton_pressed():
-	get_parent().close_furnace(id)
 
+func _on_ExitBtn_pressed():
+	get_parent().close_furnace(id)

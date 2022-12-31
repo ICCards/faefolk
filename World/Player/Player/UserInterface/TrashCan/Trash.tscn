@@ -16,9 +16,9 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="BackgroundButton2" type="Button" parent="."]
-margin_left = 930.0
+margin_left = 1009.0
 margin_top = -4.0
-margin_right = 1278.0
+margin_right = 1357.0
 margin_bottom = 729.0
 focus_mode = 0
 enabled_focus_mode = 0

@@ -28,6 +28,7 @@ func hit(tool_name):
 	MapData.update_object_health("ore", name, health)
 	if health <= 0 and not destroyed:
 		destroyed = true
+		PlayerData.player_data["skill_experience"]["mining"] += 1
 		MapData.remove_object("ore", name)
 		Tiles.add_valid_tiles(location)
 		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]

@@ -59,9 +59,7 @@ func check_valid_recipe():
 
 func cooking_active():
 	$CookTimer.start()
-	$FireAnimatedSprite.playing = true
-	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 0)
-	$FireAnimatedSprite.modulate = Color("ffffff")
+	$FireAnimatedSprite.show()
 	if self.visible:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
@@ -73,9 +71,7 @@ func cooking_inactive():
 	$CookTimer.stop()
 	$TimerProgress.value = 0
 	current_cooking_item = null
-	$FireAnimatedSprite.playing = false
-	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$FireAnimatedSprite.modulate = Color("96ffffff")
+	$FireAnimatedSprite.hide()
 
 
 
@@ -155,5 +151,6 @@ func check_1_ingredient_recipe():
 	return false
 
 
-func _on_ExitButton_pressed():
+
+func _on_ExitBtn_pressed():
 	get_parent().close_campfire(id)

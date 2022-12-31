@@ -214,28 +214,22 @@ __meta__ = {
 }
 
 [node name="InventorySlots" parent="." instance=ExtResource( 5 )]
-margin_left = 636.0
-margin_top = 313.0
-margin_right = 930.0
-margin_bottom = 565.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 9
+margin_left = 639.0
+margin_top = 315.0
+margin_right = 933.0
+margin_bottom = 567.0
+custom_constants/vseparation = 18
+custom_constants/hseparation = 15
 columns = 5
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource( 1 )]
-margin_left = 636.0
-margin_top = 180.0
-margin_right = 930.0
-margin_bottom = 294.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 9
+margin_left = 639.0
+margin_top = 183.0
+margin_right = 943.0
+margin_bottom = 297.0
+custom_constants/vseparation = 18
+custom_constants/hseparation = 15
 columns = 5
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="AttributeSlots" type="GridContainer" parent="."]
 margin_left = 471.0
@@ -321,13 +315,13 @@ margin_right = 63.5
 margin_bottom = 161.0
 
 [node name="Label" type="Label" parent="BaseStats/Farming"]
-margin_left = -72.0
-margin_top = 10.0
-margin_right = 108.0
-margin_bottom = 73.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = -63.0
+margin_top = 11.0
+margin_right = 117.0
+margin_bottom = 74.0
+rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 13 )
-text = "Farming"
+text = "Farming "
 align = 1
 
 [node name="Pg" type="TextureProgress" parent="BaseStats/Farming"]
@@ -346,11 +340,11 @@ margin_right = 63.5
 margin_bottom = 194.0
 
 [node name="Label" type="Label" parent="BaseStats/Fishing"]
-margin_left = -72.0
-margin_top = 10.0
-margin_right = 108.0
-margin_bottom = 73.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = -63.0
+margin_top = 11.0
+margin_right = 117.0
+margin_bottom = 74.0
+rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 13 )
 text = "Fishing"
 align = 1
@@ -371,11 +365,11 @@ margin_right = 63.5
 margin_bottom = 227.0
 
 [node name="Label" type="Label" parent="BaseStats/Foraging"]
-margin_left = -72.0
-margin_top = 10.0
-margin_right = 108.0
-margin_bottom = 73.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = -63.0
+margin_top = 11.0
+margin_right = 117.0
+margin_bottom = 74.0
+rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 13 )
 text = "Foraging"
 align = 1
@@ -396,11 +390,11 @@ margin_right = 63.5
 margin_bottom = 260.0
 
 [node name="Label" type="Label" parent="BaseStats/Mining"]
-margin_left = -72.0
-margin_top = 10.0
-margin_right = 108.0
-margin_bottom = 73.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = -63.0
+margin_top = 11.0
+margin_right = 117.0
+margin_bottom = 74.0
+rect_scale = Vector2( 0.3, 0.3 )
 theme = ExtResource( 13 )
 text = "Mining"
 align = 1
@@ -479,80 +473,73 @@ anims/RESET = SubResource( 18 )
 anims/loop = SubResource( 19 )
 
 [node name="EnergyManaHealth" type="Control" parent="."]
-margin_left = 336.0
-margin_top = 399.0
-margin_right = 936.0
-margin_bottom = 474.0
-rect_scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 14 )
 
-[node name="Energy" type="Label" parent="EnergyManaHealth"]
-margin_left = 15.0
-margin_top = 7.0
-margin_right = 177.0
-margin_bottom = 68.0
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "100/100"
-align = 1
-valign = 1
+[node name="Energy" type="ColorRect" parent="EnergyManaHealth"]
+margin_left = 394.0
+margin_top = 438.0
+margin_right = 452.0
+margin_bottom = 489.0
+rect_rotation = 180.0
+color = Color( 0.00392157, 1, 0, 1 )
 
-[node name="dash" type="Label" parent="EnergyManaHealth"]
-margin_left = 191.0
-margin_top = 7.0
-margin_right = 205.0
-margin_bottom = 68.0
-theme = ExtResource( 13 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "-"
-align = 1
-valign = 1
+[node name="Mana" type="ColorRect" parent="EnergyManaHealth"]
+margin_left = 455.0
+margin_top = 438.0
+margin_right = 513.0
+margin_bottom = 489.0
+rect_rotation = 180.0
+color = Color( 0, 0.203922, 1, 1 )
 
-[node name="Mana" type="Label" parent="EnergyManaHealth"]
-margin_left = 219.0
-margin_top = 7.0
-margin_right = 381.0
-margin_bottom = 68.0
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 0, 0.439216, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "121/100"
-align = 1
-valign = 1
+[node name="Health" type="ColorRect" parent="EnergyManaHealth"]
+margin_left = 516.0
+margin_top = 438.0
+margin_right = 574.0
+margin_bottom = 489.0
+rect_rotation = 180.0
+color = Color( 0.941176, 0, 0, 1 )
 
-[node name="dash2" type="Label" parent="EnergyManaHealth"]
-margin_left = 395.0
-margin_top = 7.0
-margin_right = 409.0
-margin_bottom = 68.0
+[node name="EnergyLabel" type="Label" parent="EnergyManaHealth"]
+margin_left = 337.0
+margin_top = 404.0
+margin_right = 497.0
+margin_bottom = 465.0
+rect_scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
-text = "-"
+text = "Energy"
 align = 1
-valign = 1
 
-[node name="Health" type="Label" parent="EnergyManaHealth"]
-margin_left = 423.0
-margin_top = 7.0
-margin_right = 585.0
-margin_bottom = 68.0
+[node name="ManaLabel" type="Label" parent="EnergyManaHealth"]
+margin_left = 398.0
+margin_top = 404.0
+margin_right = 558.0
+margin_bottom = 465.0
+rect_scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 13 )
-custom_colors/font_color = Color( 0.976471, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
-text = "100/100"
+text = "Mana"
 align = 1
-valign = 1
+
+[node name="HealthLabel" type="Label" parent="EnergyManaHealth"]
+margin_left = 459.0
+margin_top = 404.0
+margin_right = 619.0
+margin_bottom = 465.0
+rect_scale = Vector2( 0.35, 0.35 )
+theme = ExtResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Health"
+align = 1
 
 [node name="Tween" type="Tween" parent="."]
 

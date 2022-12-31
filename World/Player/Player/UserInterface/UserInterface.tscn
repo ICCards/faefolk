@@ -161,7 +161,6 @@ color = Color( 1, 0, 0, 0 )
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
-visible = false
 margin_top = 593.0
 margin_bottom = 593.0
 
@@ -174,6 +173,7 @@ margin_bottom = -215.0
 rect_scale = Vector2( 4.5, 4.5 )
 
 [node name="Menu" parent="." instance=ExtResource( 15 )]
+visible = false
 
 [node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -200,11 +200,10 @@ anims/sleep = SubResource( 21 )
 
 [node name="ChangeRotation" type="Control" parent="."]
 visible = false
-margin_left = 189.0
-margin_top = 180.0
-margin_right = 229.0
-margin_bottom = 220.0
-rect_scale = Vector2( 1.5, 1.5 )
+margin_left = 115.0
+margin_top = 109.0
+margin_right = 155.0
+margin_bottom = 149.0
 
 [node name="TextureRect" type="TextureRect" parent="ChangeRotation"]
 margin_left = 209.0
@@ -237,11 +236,10 @@ align = 1
 
 [node name="ChangeVariety" type="Control" parent="."]
 visible = false
-margin_left = 195.0
-margin_top = 180.0
-margin_right = 235.0
-margin_bottom = 220.0
-rect_scale = Vector2( 1.5, 1.5 )
+margin_left = 138.0
+margin_top = 109.0
+margin_right = 178.0
+margin_bottom = 149.0
 
 [node name="TextureRect" type="TextureRect" parent="ChangeVariety"]
 margin_left = 613.0

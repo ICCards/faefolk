@@ -26,7 +26,7 @@ func initialize():
 	set_bg()
 	
 func set_bg():
-	$Background.texture = load("res://Assets/Images/User interface/inventory/skills/"+skill +"-tab.png")
+	get_node("../Background").texture = load("res://Assets/Images/User interface/inventory/skills/"+skill +"-tab.png")
 	front_progress_bar.texture_progress = load("res://Assets/Images/Spell icons/"+ skill +"/front.png")
 	back_progress_bar.texture_progress = load("res://Assets/Images/Spell icons/"+ skill +"/back.png")
 	set_skills()

@@ -2,7 +2,7 @@ extends Panel
 
 var default_text = null #load("res://Assets/Images/Inventory UI/slot.png")
 var empty_text = null #load("res://Assets/Images/Inventory UI/slot.png")
-var selected_text = load("res://Assets/Images/Inventory UI/slot selected.png")
+var selected_text = load("res://Assets/Images/User interface/hotbars/selected slot.png")
 var locked_text = null #load("res://Assets/Images/Inventory UI/slot locked.png")
 
 var default_style: StyleBoxTexture = null
@@ -23,7 +23,8 @@ enum SlotType {
 	GRAIN_MILL,
 	FURNACE,
 	STOVE,
-	CAMPFIRE
+	CAMPFIRE,
+	CRAFTING
 }
 
 var slotType = null

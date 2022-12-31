@@ -43,7 +43,7 @@ func initialize_slots():
 		if slots[i].item != null:
 			slots[i].removeFromSlot()
 		if PlayerData.player_data["grain_mills"][get_parent().id].has(str(i)):
-			slots[i].initialize_item(PlayerData.player_data["grain_mills"][get_parent().id][i][0], PlayerData.player_data["grain_mills"][get_parent().id][i][1], PlayerData.player_data["grain_mills"][get_parent().id][i][2])
+			slots[i].initialize_item(PlayerData.player_data["grain_mills"][get_parent().id][str(i)][0], PlayerData.player_data["grain_mills"][get_parent().id][str(i)][1], PlayerData.player_data["grain_mills"][get_parent().id][str(i)][2])
 
 func able_to_put_into_slot(slot):
 	var holding_item = find_parent("UserInterface").holding_item

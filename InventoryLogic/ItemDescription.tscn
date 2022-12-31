@@ -29,7 +29,7 @@ default_font = SubResource( 9 )
 default_font = SubResource( 9 )
 
 [node name="ItemDescription" type="Node2D"]
-scale = Vector2( 3.5, 3.5 )
+scale = Vector2( 3, 3 )
 z_index = 2
 script = ExtResource( 5 )
 

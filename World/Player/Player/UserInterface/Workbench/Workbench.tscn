@@ -1,29 +1,76 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/Stove/item_button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/Stove/Page1.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/UiBackground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Player/Player/UserInterface/Workbench/CraftingMenuWorkbench.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Images/User interface/workbench/workbench-tab.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Workbench/Workbench.gd" type="Script" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Player/Player/UserInterface/Stove/staff_button.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=12]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Images/User interface/workbench/workbench-slider.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Themes/HideCollection.tres" type="Material" id=15]
+[ext_resource path="res://Assets/Images/User interface/workbench/workbench-overlay.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Themes/LockedAsset.tres" type="Material" id=17]
 [ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=33]
-[ext_resource path="res://Assets/Images/Misc/Buttons/exit button.png" type="Texture" id=36]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=37]
 
+[sub_resource type="StyleBoxTexture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=5]
+
+[sub_resource type="Theme" id=4]
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/decrement_pressed = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/icons/increment_pressed = null
+VScrollBar/styles/grabber = null
+VScrollBar/styles/grabber_highlight = null
+VScrollBar/styles/grabber_pressed = null
+VScrollBar/styles/scroll = SubResource( 5 )
+VScrollBar/styles/scroll_focus = null
+
 [node name="Workbench" type="Control"]
+script = ExtResource( 6 )
+
+[node name="Bg" type="TextureRect" parent="."]
+margin_right = 426.0
+margin_bottom = 240.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+stretch_mode = 4
+
+[node name="Frame" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-script = ExtResource( 6 )
+margin_right = 426.0
+margin_bottom = 240.0
+rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
+texture = ExtResource( 5 )
+stretch_mode = 4
 
-[node name="Bg" parent="." instance=ExtResource( 5 )]
+[node name="Frame2" type="TextureRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 426.0
+margin_bottom = 240.0
+rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
+texture = ExtResource( 16 )
+stretch_mode = 4
 
 [node name="ItemNameBox" parent="." instance=ExtResource( 1 )]
 visible = false
@@ -35,296 +82,308 @@ scale = Vector2( 3.5, 3.5 )
 [node name="ItemDescription" parent="." instance=ExtResource( 37 )]
 visible = false
 
-[node name="InventorySlots" parent="." instance=ExtResource( 7 )]
-margin_left = -409.0
-margin_top = 163.0
-margin_right = 428.0
-margin_bottom = 331.0
-custom_constants/vseparation = 9
-
-[node name="HotbarInventorySlots" parent="." instance=ExtResource( 8 )]
-margin_left = -409.0
-margin_top = 73.0
-margin_right = 428.0
-margin_bottom = 154.0
-
-[node name="Title" type="Label" parent="."]
-margin_left = -437.0
-margin_top = -404.0
-margin_right = 348.0
-margin_bottom = -258.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
-text = "Workbench:"
-clip_text = true
-
-[node name="Page1" type="GridContainer" parent="."]
-margin_left = -408.0
-margin_top = -320.0
-margin_right = -276.0
-margin_bottom = -268.0
-rect_scale = Vector2( 6, 6 )
-custom_constants/vseparation = 2
-custom_constants/hseparation = 22
-columns = 4
-script = ExtResource( 3 )
-
-[node name="stone axe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="bronze axe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 38.0
-margin_right = 54.0
-margin_bottom = 16.0
-
-[node name="iron axe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 76.0
-margin_right = 92.0
-margin_bottom = 16.0
-
-[node name="gold axe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 114.0
-margin_right = 130.0
-margin_bottom = 16.0
-
-[node name="stone pickaxe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 16.0
-margin_bottom = 34.0
-
-[node name="bronze pickaxe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 38.0
-margin_top = 18.0
-margin_right = 54.0
-margin_bottom = 34.0
-
-[node name="iron pickaxe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 76.0
-margin_top = 18.0
-margin_right = 92.0
-margin_bottom = 34.0
-
-[node name="gold pickaxe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 114.0
-margin_top = 18.0
-margin_right = 130.0
-margin_bottom = 34.0
-
-[node name="stone hoe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 36.0
-margin_right = 16.0
-margin_bottom = 52.0
-
-[node name="bronze hoe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 38.0
-margin_top = 36.0
-margin_right = 54.0
-margin_bottom = 52.0
-
-[node name="iron hoe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 76.0
-margin_top = 36.0
-margin_right = 92.0
-margin_bottom = 52.0
-
-[node name="gold hoe" parent="Page1" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 114.0
-margin_top = 36.0
-margin_right = 130.0
-margin_bottom = 52.0
-
-[node name="Page2" type="GridContainer" parent="."]
-margin_left = -408.0
-margin_top = -320.0
-margin_right = -276.0
-margin_bottom = -268.0
-rect_scale = Vector2( 6, 6 )
-custom_constants/vseparation = 2
-custom_constants/hseparation = 22
-columns = 4
-script = ExtResource( 3 )
-
-[node name="stone sword" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="bronze sword" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 38.0
-margin_right = 54.0
-margin_bottom = 16.0
-
-[node name="iron sword" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 76.0
-margin_right = 92.0
-margin_bottom = 16.0
-
-[node name="gold sword" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 114.0
-margin_right = 130.0
-margin_bottom = 16.0
-
-[node name="stone watering can" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 16.0
-margin_bottom = 34.0
-
-[node name="bronze watering can" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 38.0
-margin_top = 18.0
-margin_right = 54.0
-margin_bottom = 34.0
-
-[node name="gold watering can" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 76.0
-margin_top = 18.0
-margin_right = 92.0
-margin_bottom = 34.0
-
-[node name="wood fishing rod" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 114.0
-margin_top = 18.0
-margin_right = 130.0
-margin_bottom = 34.0
-
-[node name="stone fishing rod" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 36.0
-margin_right = 16.0
-margin_bottom = 52.0
-
-[node name="gold fishing rod" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 38.0
-margin_top = 36.0
-margin_right = 54.0
-margin_bottom = 52.0
-
-[node name="scythe" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 76.0
-margin_top = 36.0
-margin_right = 92.0
-margin_bottom = 52.0
-
-[node name="bow" parent="Page2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 114.0
-margin_top = 36.0
-margin_right = 130.0
-margin_bottom = 52.0
-
-[node name="Page3" type="GridContainer" parent="."]
-margin_left = -408.0
-margin_top = -320.0
-margin_right = -276.0
-margin_bottom = -268.0
-rect_scale = Vector2( 6, 6 )
-custom_constants/vseparation = 2
-custom_constants/hseparation = 22
-columns = 4
-script = ExtResource( 3 )
-
-[node name="arrow" parent="Page3" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="wind staff" parent="Page3" instance=ExtResource( 10 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 38.0
-margin_right = 54.0
-margin_bottom = 16.0
-
-[node name="fire staff" parent="Page3" instance=ExtResource( 10 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 76.0
-margin_right = 92.0
-margin_bottom = 16.0
-
-[node name="DownButton" type="TextureButton" parent="."]
-margin_left = 393.0
-margin_top = -48.0
-margin_right = 433.0
-margin_bottom = -6.0
-rect_scale = Vector2( 1.5, 1.5 )
-texture_normal = ExtResource( 22 )
-
-[node name="UpButton" type="TextureButton" parent="."]
-margin_left = 391.0
-margin_top = -400.0
-margin_right = 431.0
-margin_bottom = -358.0
-rect_scale = Vector2( 1.5, 1.5 )
-texture_normal = ExtResource( 33 )
+[node name="MenuTitle" parent="." instance=ExtResource( 13 )]
+margin_left = 552.0
+margin_top = 117.0
+margin_right = 868.0
+margin_bottom = 184.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Workbench #3"
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Trash" parent="." instance=ExtResource( 9 )]
-margin_left = -960.0
-margin_top = -540.0
-margin_right = -960.0
-margin_bottom = -540.0
 
-[node name="ExitButton" type="TextureButton" parent="."]
-margin_left = 482.0
-margin_top = -440.0
-margin_right = 554.0
-margin_bottom = -368.0
-texture_normal = ExtResource( 36 )
+[node name="InventorySlots" parent="." instance=ExtResource( 7 )]
+margin_left = 639.0
+margin_top = 315.0
+margin_right = 933.0
+margin_bottom = 567.0
+custom_constants/vseparation = 18
+custom_constants/hseparation = 15
+columns = 5
 
-[connection signal="pressed" from="DownButton" to="." method="_on_DownButton_pressed"]
-[connection signal="pressed" from="UpButton" to="." method="_on_UpButton_pressed"]
-[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
+[node name="HotbarInventorySlots" parent="." instance=ExtResource( 8 )]
+margin_left = 639.0
+margin_top = 183.0
+margin_right = 943.0
+margin_bottom = 297.0
+custom_constants/vseparation = 18
+custom_constants/hseparation = 15
+columns = 5
+
+[node name="ExitBtn" type="TextureButton" parent="."]
+margin_left = 918.0
+margin_top = 114.0
+margin_right = 932.0
+margin_bottom = 128.0
+rect_scale = Vector2( 3, 3 )
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
+expand = true
+
+[node name="Slider" type="VSlider" parent="."]
+margin_left = 582.0
+margin_top = 176.0
+margin_right = 601.0
+margin_bottom = 305.0
+rect_scale = Vector2( 3, 3 )
+custom_icons/grabber_disabled = ExtResource( 14 )
+custom_icons/grabber_highlight = ExtResource( 14 )
+custom_icons/grabber = ExtResource( 14 )
+custom_styles/slider = SubResource( 3 )
+value = 100.0
+
+[node name="CraftingMenuWorkbench" type="ScrollContainer" parent="."]
+margin_left = 322.0
+margin_top = 171.0
+margin_right = 391.0
+margin_bottom = 279.0
+rect_scale = Vector2( 4, 4 )
+mouse_filter = 2
+theme = SubResource( 4 )
+scroll_horizontal_enabled = false
+script = ExtResource( 3 )
+
+[node name="Items" type="GridContainer" parent="CraftingMenuWorkbench"]
+margin_right = 67.0
+margin_bottom = 124.0
+custom_constants/vseparation = 2
+custom_constants/hseparation = 1
+columns = 4
+
+[node name="stone axe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 17 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 16.0
+margin_bottom = 16.0
+
+[node name="bronze axe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_right = 33.0
+margin_bottom = 16.0
+
+[node name="iron axe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_right = 50.0
+margin_bottom = 16.0
+
+[node name="gold axe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 51.0
+margin_right = 67.0
+margin_bottom = 16.0
+
+[node name="stone pickaxe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 16.0
+margin_bottom = 34.0
+
+[node name="bronze pickaxe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_top = 18.0
+margin_right = 33.0
+margin_bottom = 34.0
+
+[node name="iron pickaxe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 18.0
+margin_right = 50.0
+margin_bottom = 34.0
+
+[node name="gold pickaxe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 51.0
+margin_top = 18.0
+margin_right = 67.0
+margin_bottom = 34.0
+
+[node name="stone hoe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 36.0
+margin_right = 16.0
+margin_bottom = 52.0
+
+[node name="bronze hoe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_top = 36.0
+margin_right = 33.0
+margin_bottom = 52.0
+
+[node name="iron hoe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 36.0
+margin_right = 50.0
+margin_bottom = 52.0
+
+[node name="gold hoe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 51.0
+margin_top = 36.0
+margin_right = 67.0
+margin_bottom = 52.0
+
+[node name="stone sword" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 54.0
+margin_right = 16.0
+margin_bottom = 70.0
+
+[node name="bronze sword" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_top = 54.0
+margin_right = 33.0
+margin_bottom = 70.0
+
+[node name="iron sword" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 54.0
+margin_right = 50.0
+margin_bottom = 70.0
+
+[node name="gold sword" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 51.0
+margin_top = 54.0
+margin_right = 67.0
+margin_bottom = 70.0
+
+[node name="stone watering can" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 72.0
+margin_right = 16.0
+margin_bottom = 88.0
+
+[node name="bronze watering can" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_top = 72.0
+margin_right = 33.0
+margin_bottom = 88.0
+
+[node name="gold watering can" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 72.0
+margin_right = 50.0
+margin_bottom = 88.0
+
+[node name="wood fishing rod" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 51.0
+margin_top = 72.0
+margin_right = 67.0
+margin_bottom = 88.0
+
+[node name="stone fishing rod" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 90.0
+margin_right = 16.0
+margin_bottom = 106.0
+
+[node name="gold fishing rod" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_top = 90.0
+margin_right = 33.0
+margin_bottom = 106.0
+
+[node name="scythe" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 90.0
+margin_right = 50.0
+margin_bottom = 106.0
+
+[node name="bow" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 51.0
+margin_top = 90.0
+margin_right = 67.0
+margin_bottom = 106.0
+
+[node name="arrow" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 2 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 108.0
+margin_right = 16.0
+margin_bottom = 124.0
+
+[node name="wind staff" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 10 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_top = 108.0
+margin_right = 33.0
+margin_bottom = 124.0
+
+[node name="fire staff" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 10 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 108.0
+margin_right = 50.0
+margin_bottom = 124.0
+
+[connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]

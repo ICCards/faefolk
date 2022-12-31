@@ -89,6 +89,7 @@ func retract_and_stop(fish_name):
 	player_animation_player.play("retract")
 	yield(player_animation_player, "animation_finished")
 	if fish_name:
+		PlayerData.player_data["skill_experience"]["fishing"] += 1
 		PlayerData.player_data["collections"]["fish"][fish_name] += 1
 		PlayerData.add_item_to_hotbar(fish_name, 1, null)
 	stop_fishing_state()

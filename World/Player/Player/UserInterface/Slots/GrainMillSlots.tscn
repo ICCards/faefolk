@@ -19,25 +19,23 @@ script = ExtResource( 7 )
 
 [node name="WheatSlot" type="Panel" parent="."]
 margin_top = -9.0
-margin_right = 81.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 81, 81 )
+margin_right = 48.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 6 )
 
 [node name="TextureRect" type="TextureRect" parent="WheatSlot"]
 modulate = Color( 1, 1, 1, 0.392157 )
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 78.0
-margin_bottom = 78.0
+margin_right = 48.0
+margin_bottom = 48.0
 texture = ExtResource( 5 )
 expand = true
 
 [node name="CornSlot" type="Panel" parent="."]
 margin_top = 80.0
-margin_right = 81.0
-margin_bottom = 161.0
-rect_min_size = Vector2( 81, 81 )
+margin_right = 48.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 6 )
 
 [node name="LockSlot" type="TextureRect" parent="CornSlot"]
@@ -49,18 +47,16 @@ expand = true
 
 [node name="TextureRect" type="TextureRect" parent="CornSlot"]
 modulate = Color( 1, 1, 1, 0.392157 )
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 78.0
-margin_bottom = 78.0
+margin_right = 48.0
+margin_bottom = 48.0
 texture = ExtResource( 1 )
 expand = true
 
 [node name="SugarCaneSlot" type="Panel" parent="."]
 margin_top = 169.0
-margin_right = 81.0
-margin_bottom = 250.0
-rect_min_size = Vector2( 81, 81 )
+margin_right = 48.0
+margin_bottom = 217.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 6 )
 
 [node name="LockSlot" type="TextureRect" parent="SugarCaneSlot"]
@@ -72,17 +68,15 @@ expand = true
 
 [node name="TextureRect" type="TextureRect" parent="SugarCaneSlot"]
 modulate = Color( 1, 1, 1, 0.392157 )
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 78.0
-margin_bottom = 78.0
+margin_right = 48.0
+margin_bottom = 48.0
 texture = ExtResource( 4 )
 expand = true
 
 [node name="YieldSlot" type="Panel" parent="."]
 margin_left = 435.0
 margin_top = 136.0
-margin_right = 516.0
-margin_bottom = 217.0
-rect_min_size = Vector2( 81, 81 )
+margin_right = 483.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 48, 48 )
 script = ExtResource( 6 )

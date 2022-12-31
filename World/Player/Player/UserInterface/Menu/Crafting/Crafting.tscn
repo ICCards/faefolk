@@ -1,18 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Images/User interface/inventory/crafting/crafting-slider.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Images/User interface/inventory/crafting/crafting-tab.png" type="Texture" id=3]
 [ext_resource path="res://InventoryLogic/CraftingItemDescription.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd" type="Script" id=6]
+[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=9]
+[ext_resource path="res://World/Player/Player/UserInterface/Workbench/CraftingMenu.gd" type="Script" id=12]
 [ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=19]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/CraftingMenuButton.tscn" type="PackedScene" id=24]
 [ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=44]
 
 [sub_resource type="StyleBoxTexture" id=1]
 
 [sub_resource type="StyleBoxTexture" id=2]
 
-[sub_resource type="Theme" id=3]
+[sub_resource type="Theme" id=5]
 VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/decrement_pressed = null
@@ -35,6 +36,7 @@ visible = false
 scale = Vector2( 2.7, 2.7 )
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -44,7 +46,7 @@ margin_top = -20.0
 margin_right = 405.0
 margin_bottom = 220.0
 rect_scale = Vector2( 3, 3 )
-mouse_filter = 0
+mouse_filter = 2
 texture = ExtResource( 3 )
 stretch_mode = 4
 
@@ -60,120 +62,281 @@ custom_icons/grabber = ExtResource( 2 )
 custom_styles/slider = SubResource( 1 )
 value = 50.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 329.0
-margin_top = 171.0
-margin_right = 471.0
-margin_bottom = 175.0
-
-[node name="1" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 142.0
-custom_constants/separation = 71
-alignment = 1
-
-[node name="wood axe" parent="VBoxContainer/1" instance=ExtResource( 24 )]
-
-[node name="wood pickaxe" parent="VBoxContainer/1" instance=ExtResource( 24 )]
-margin_left = 71.0
-margin_right = 71.0
-
-[node name="wood hoe" parent="VBoxContainer/1" instance=ExtResource( 24 )]
-margin_left = 142.0
-margin_right = 142.0
-
-[node name="2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 4.0
-margin_right = 142.0
-margin_bottom = 4.0
-custom_constants/separation = 71
-alignment = 1
-
-[node name="wood sword" parent="VBoxContainer/2" instance=ExtResource( 24 )]
-visible = false
-margin_right = 128.0
-
-[node name="blueprint" parent="VBoxContainer/2" instance=ExtResource( 24 )]
-visible = false
-margin_right = 128.0
-
-[node name="hammer" parent="VBoxContainer/2" instance=ExtResource( 24 )]
-visible = false
-margin_right = 128.0
-
-[node name="Control" type="Control" parent="VBoxContainer"]
-visible = false
-margin_top = 4.0
-margin_right = 128.0
-margin_bottom = 4.0
-
-[node name="CraftingMenu" type="ScrollContainer" parent="."]
-margin_left = 328.0
-margin_top = 171.0
-margin_right = 540.0
-margin_bottom = 602.0
-mouse_filter = 2
-theme = SubResource( 3 )
-scroll_horizontal_enabled = false
-
-[node name="Items" type="Control" parent="CraftingMenu"]
-margin_bottom = 800.0
-rect_min_size = Vector2( 0, 800 )
-
-[node name="wood axe" parent="CraftingMenu/Items" instance=ExtResource( 24 )]
-
-[node name="wood pickaxe" parent="CraftingMenu/Items" instance=ExtResource( 24 )]
-margin_left = 71.0
-margin_right = 71.0
-
-[node name="wood hoe" parent="CraftingMenu/Items" instance=ExtResource( 24 )]
-margin_left = 142.0
-margin_right = 142.0
-
-[node name="wood sword" parent="CraftingMenu/Items" instance=ExtResource( 24 )]
-margin_left = -1.0
-margin_top = 72.0
-margin_right = 127.0
-margin_bottom = 72.0
-
-[node name="blueprint" parent="CraftingMenu/Items" instance=ExtResource( 24 )]
-margin_left = 71.0
-margin_top = 72.0
-margin_right = 199.0
-margin_bottom = 72.0
-
-[node name="hammer" parent="CraftingMenu/Items" instance=ExtResource( 24 )]
-margin_left = 144.0
-margin_top = 77.0
-margin_right = 272.0
-margin_bottom = 77.0
+[node name="Tween" type="Tween" parent="."]
 
 [node name="InventorySlots" parent="." instance=ExtResource( 44 )]
-visible = false
-margin_left = 636.0
-margin_top = 313.0
-margin_right = 930.0
-margin_bottom = 565.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 9
+margin_left = 638.0
+margin_top = 315.0
+margin_right = 938.0
+margin_bottom = 567.0
+custom_constants/vseparation = 18
+custom_constants/hseparation = 15
 columns = 5
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource( 19 )]
-visible = false
-margin_left = 636.0
-margin_top = 180.0
-margin_right = 930.0
-margin_bottom = 294.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 9
+margin_left = 638.0
+margin_top = 183.0
+margin_right = 942.0
+margin_bottom = 297.0
+custom_constants/vseparation = 18
+custom_constants/hseparation = 15
 columns = 5
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Tween" type="Tween" parent="."]
+[node name="CraftingMenu" type="ScrollContainer" parent="."]
+margin_left = 323.0
+margin_top = 177.0
+margin_right = 526.0
+margin_bottom = 602.0
+mouse_filter = 2
+theme = SubResource( 5 )
+scroll_horizontal_enabled = false
+script = ExtResource( 12 )
+
+[node name="Items" type="GridContainer" parent="CraftingMenu"]
+margin_right = 202.0
+margin_bottom = 754.0
+custom_constants/vseparation = 5
+custom_constants/hseparation = 5
+columns = 3
+
+[node name="wood axe" type="Panel" parent="CraftingMenu/Items"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood pickaxe" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_right = 133.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood hoe" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_right = 202.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood sword" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 69.0
+margin_right = 64.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="blueprint" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 69.0
+margin_right = 133.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="hammer" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 69.0
+margin_right = 202.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="campfire" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 138.0
+margin_right = 64.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="torch" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 138.0
+margin_right = 133.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood box" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 138.0
+margin_right = 202.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood barrel" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 207.0
+margin_right = 64.0
+margin_bottom = 271.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="display table" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 207.0
+margin_right = 133.0
+margin_bottom = 271.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood fence" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 207.0
+margin_right = 202.0
+margin_bottom = 271.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood gate" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 276.0
+margin_right = 64.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood chest" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 276.0
+margin_right = 133.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="stone chest" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 276.0
+margin_right = 202.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="workbench #1" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 345.0
+margin_right = 64.0
+margin_bottom = 409.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="workbench #2" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 345.0
+margin_right = 133.0
+margin_bottom = 409.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="workbench #3" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 345.0
+margin_right = 202.0
+margin_bottom = 409.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="stove #1" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 414.0
+margin_right = 64.0
+margin_bottom = 478.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="stove #2" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 414.0
+margin_right = 133.0
+margin_bottom = 478.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="stove #3" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 414.0
+margin_right = 202.0
+margin_bottom = 478.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="grain mill #1" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 483.0
+margin_right = 64.0
+margin_bottom = 547.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="grain mill #2" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 483.0
+margin_right = 133.0
+margin_bottom = 547.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="grain mill #3" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 483.0
+margin_right = 202.0
+margin_bottom = 547.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="furnace" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 552.0
+margin_right = 64.0
+margin_bottom = 616.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="tool cabinet" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 552.0
+margin_right = 133.0
+margin_bottom = 616.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="wood door" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 552.0
+margin_right = 202.0
+margin_bottom = 616.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="metal door" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 621.0
+margin_right = 64.0
+margin_bottom = 685.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="armored door" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 69.0
+margin_top = 621.0
+margin_right = 133.0
+margin_bottom = 685.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="well" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 138.0
+margin_top = 621.0
+margin_right = 202.0
+margin_bottom = 685.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="sleeping bag" type="Panel" parent="CraftingMenu/Items"]
+margin_top = 690.0
+margin_right = 64.0
+margin_bottom = 754.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
 
 [connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]

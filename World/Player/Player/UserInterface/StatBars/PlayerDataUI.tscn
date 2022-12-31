@@ -68,16 +68,16 @@ margin_bottom = 44.0
 [node name="Bg" type="TextureRect" parent="DateTime"]
 margin_left = 830.667
 margin_top = -13.0
-margin_right = 830.667
-margin_bottom = -13.0
+margin_right = 894.667
+margin_bottom = 35.0
 rect_scale = Vector2( 3, 3 )
 texture = ExtResource( 7 )
 
 [node name="Day" type="Label" parent="DateTime"]
 margin_left = 861.0
-margin_top = 27.0
-margin_right = 1075.0
-margin_bottom = 97.0
+margin_top = 26.0
+margin_right = 1076.0
+margin_bottom = 98.0
 rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 2 )
 text = "Mon. 1"
@@ -86,8 +86,8 @@ valign = 1
 
 [node name="Time" type="Label" parent="DateTime"]
 margin_left = 882.0
-margin_top = 64.0
-margin_right = 1104.0
+margin_top = 62.0
+margin_right = 1103.0
 margin_bottom = 128.0
 rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 2 )

@@ -9,7 +9,6 @@ script = ExtResource( 2 )
 [node name="btn" type="TextureButton" parent="."]
 margin_right = 16.0
 margin_bottom = 16.0
-rect_scale = Vector2( 4, 4 )
 texture_normal = ExtResource( 1 )
 
 [connection signal="mouse_entered" from="btn" to="." method="_on_btn_mouse_entered"]

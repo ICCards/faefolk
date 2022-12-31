@@ -43,7 +43,7 @@ func _physics_process(delta):
 func initialize():
 	show()
 	Server.player_node.actions.destroy_placable_object()
-	$Title.text = "Stove #" + str(level) + ":" 
+	$MenuTitle.text = "Stove #" + str(level)
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
 
@@ -81,23 +81,19 @@ func check_valid_recipe():
 
 func cooking_active():
 	$CookTimer.start()
-	$FireAnimatedSprite.playing = true
-	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 0)
-	$FireAnimatedSprite.modulate = Color("ffffff")
+	$FireAnimatedSprite.show()
 	if self.visible:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
+
 
 func cooking_inactive():
 	ingredients = []
 	$CookTimer.stop()
 	$TimerProgress.value = 0
 	current_cooking_item = null
-	$FireAnimatedSprite.playing = false
-	$FireAnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$FireAnimatedSprite.modulate = Color("96ffffff")
-
+	$FireAnimatedSprite.hide()
 
 
 func _on_CookTimer_timeout():
@@ -157,7 +153,7 @@ func add_to_yield_slot():
 	if not yield_slot1.item:
 		yield_slot1.initialize_item(current_cooking_item, 1, null)
 		PlayerData.player_data["stoves"][id]["4"] = [current_cooking_item, 1, null]
-	elif not yield_slot1.item.item_quantity == 999:
+	elif not yield_slot1.item.item_quantity == 999 and yield_slot1.item.item_name == current_cooking_item:
 		PlayerData.add_item_quantity(yield_slot1, 1, id)
 		yield_slot1.item.add_item_quantity(1)
 	elif not yield_slot2.item:
@@ -240,6 +236,5 @@ func check_3_ingredient_recipe():
 	return false
 
 
-func _on_ExitButton_pressed():
+func _on_ExitBtn_pressed():
 	get_parent().close_stove(id)
-

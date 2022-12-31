@@ -1,47 +1,36 @@
 extends Control
 
+onready var slider = $Slider
+onready var crafting_menu = $CraftingMenu
+
+const MAX_SCROLL_SIZE = 369
+
 var hovered_item = null
 var crafting_item = null
-var page = 1
 var InventoryItem = preload("res://InventoryLogic/InventoryItem.tscn")
+
+func _ready():
+	slider.value = 100
+	crafting_menu.scroll_vertical = 0
 
 func initialize():
 	crafting_item = null
 	hovered_item = null
 	show()
-	page = 1
 	reset_hover_effect()
 	initialize_crafting()
 
+func _on_Slider_value_changed(value):
+	crafting_menu.scroll_vertical = ((100-value))/100*MAX_SCROLL_SIZE
 
 func reset_hover_effect():
-	for item in $Page1.get_children():
+	for item in $CraftingMenu/Items.get_children():
 		item = str(item.name)
 		if item == "blueprint" or item == "hammer" or item == "wood sword" or item == "wood axe" or item == "wood pickaxe" or item == "wood hoe":
-			$Page1.get_node(item).rect_scale = Vector2(8,8)
+			$CraftingMenu/Items.get_node(item).rect_scale = Vector2(4,4)
 		else:
-			$Page1.get_node(item).rect_scale = Vector2(4,4)
-	for item in $Page2.get_children():
-		item = str(item.name)
-		$Page2.get_node(item).rect_scale = Vector2(4,4)
-	for item in $Page3.get_children():
-		item = str(item.name)
-		$Page3.get_node(item).rect_scale = Vector2(4,4)
-	for item in $Page4.get_children():
-		item = str(item.name)
-		$Page4.get_node(item).rect_scale = Vector2(4,4)
-	for item in $Page5.get_children():
-		item = str(item.name)
-		$Page5.get_node(item).rect_scale = Vector2(4,4)
-	for item in $Page6.get_children():
-		item = str(item.name)
-		$Page6.get_node(item).rect_scale = Vector2(4,4)
-	for item in $Page7.get_children():
-		item = str(item.name)
-		$Page7.get_node(item).rect_scale = Vector2(4,4)
-	for item in $Page8.get_children():
-		item = str(item.name)
-		$Page8.get_node(item).rect_scale = Vector2(4,4)
+			$CraftingMenu/Items.get_node(item).rect_scale = Vector2(2,2)
+
 
 
 func initialize_crafting():
@@ -49,55 +38,12 @@ func initialize_crafting():
 	PlayerData.InventorySlots = $InventorySlots
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
-	if page == 1:
-		for item in $Page1.get_children():
-			if PlayerData.isSufficientMaterialToCraft(str(item.name)):
-				$Page1.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page1.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
-	elif page == 2:
-		for item in $Page2.get_children():
-			if PlayerData.isSufficientMaterialToCraft(str(item.name)):
-				$Page2.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page2.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
-	elif page == 3:
-		for item in $Page3.get_children():
-			if PlayerData.isSufficientMaterialToCraft(str(item.name)):
-				$Page3.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page3.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
-	elif page == 4:
-		for item in $Page4.get_children():
-			if PlayerData.isSufficientMaterialToCraft(str(item.name)):
-				$Page4.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page4.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
-	elif page == 5:
-		for item in $Page5.get_children():
-			if PlayerData.isSufficientMaterialToCraft(str(item.name)):
-				$Page5.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page5.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
-	elif page == 6:
-		for item in $Page6.get_children():
-			if PlayerData.isSufficientMaterialToCraft(str(item.name)):
-				$Page6.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page6.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
-	elif page == 7:
-		for item in $Page7.get_children():
-			if PlayerData.isSufficientMaterialToCraft(str(item.name)):
-				$Page7.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page7.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
-	elif page == 8:
-		for item in $Page8.get_children():
-			if PlayerData.isSufficientMaterialToCraft(str(item.name)):
-				$Page8.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-			else:
-				$Page8.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
- 
+	for item in $CraftingMenu/Items.get_children():
+		if PlayerData.isSufficientMaterialToCraft(str(item.name)):
+			$CraftingMenu/Items.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
+		else:
+			$CraftingMenu/Items.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
+
 
 func _physics_process(delta):
 	if not visible:
@@ -123,26 +69,26 @@ func entered_crafting_area(_item):
 	crafting_item = _item
 	if crafting_item == "blueprint" or crafting_item == "hammer" or crafting_item == "wood sword" or crafting_item == "wood axe" or crafting_item == "wood pickaxe" or crafting_item == "wood hoe":
 		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "rect_scale",
-			get_node("CraftingMenu/Items/" + crafting_item).rect_scale, Vector2(8.4, 8.4), 0.1,
+			get_node("CraftingMenu/Items/" + crafting_item).rect_scale, Vector2(4.2, 4.2), 0.1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 	else:
 		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "rect_scale",
-			get_node("CraftingMenu/Items/" + crafting_item).rect_scale, Vector2(4.2, 4.2), 0.1,
+			get_node("CraftingMenu/Items/" + crafting_item).rect_scale, Vector2(2.1, 2.1), 0.1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 	
 func exited_crafting_area(_item):
 	crafting_item = null
-	if has_node("Page" + str(page) + "/" + _item):
+	if has_node("CraftingMenu/Items/" + _item):
 		if _item == "blueprint" or _item == "hammer" or _item == "wood sword" or _item == "wood axe" or _item == "wood pickaxe" or _item == "wood hoe":
-			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "rect_scale",
-				get_node("Page" + str(page) + "/" + _item).rect_scale, Vector2(8, 8), 0.1,
+			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + _item), "rect_scale",
+				get_node("CraftingMenu/Items/" + _item).rect_scale, Vector2(4, 4), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 		else:
-			$Tween.interpolate_property(get_node("Page" + str(page) + "/" + _item), "rect_scale",
-				get_node("Page" + str(page) + "/" + _item).rect_scale, Vector2(4, 4), 0.1,
+			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + _item), "rect_scale",
+				get_node("CraftingMenu/Items/" + _item).rect_scale, Vector2(2, 2), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 
@@ -203,5 +149,3 @@ func return_holding_item(item_name, qt):
 	return inventoryItem
 
 
-func _on_Slider_value_changed(value):
-	pass # Replace with function body.

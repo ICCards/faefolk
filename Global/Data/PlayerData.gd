@@ -49,15 +49,16 @@ var starting_player_data = {
 		"0": ["stone sword", 1, 50],
 		"1": ["wind staff", 1, null],
 		"2": ["wood fishing rod", 1, null],
-		#"3": ["stove #1", 10, null],
-		#"9": ["arrow", 100, null],
+		"3": ["stove #1", 10, null],
+		"9": ["workbench #2", 10, null],
+		"8": ["grain mill #2", 10, null],
 	},
 	"inventory": {
 			"18": ["wood", 999, null],
 			"19": ["stone", 999, null],
-#			"17": ["iron ingot", 99, null],
-			#"15": ["wheat flour", 99, null],
-#			"16": ["stone fishing rod", 1, null],
+			"17": ["iron ingot", 99, null],
+			"15": ["wheat flour", 99, null],
+			"16": ["wheat", 100, null],
 	},
 	"chests": {
 		"Cave 1-1": {

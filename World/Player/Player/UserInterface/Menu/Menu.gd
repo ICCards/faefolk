@@ -13,10 +13,11 @@ func initialize():
 	$Inventory.initialize()
 	$Crafting.hide()
 	$Collections.hide()
-	$OptionsMenu.hide()
+	$Options.hide()
 	$Skills.hide()
 	$Exit.hide()
 	$Background.texture = load("res://Assets/Images/User interface/inventory/inventory/inventory-tab.png")
+	set_name_plate("inventory")
 
 
 func _physics_process(delta):
@@ -29,6 +30,14 @@ func _physics_process(delta):
 		$ItemNameBox.position = get_local_mouse_position() + Vector2(28 , 40)
 	else:
 		$ItemNameBox.hide()
+
+
+func set_name_plate(selected_tab):
+	for node in $NamePlates.get_children():
+		if node.name != selected_tab:
+			node.texture = load("res://Assets/Images/User interface/buttons-icons/nameplate.png")
+		else:
+			node.texture = load("res://Assets/Images/User interface/buttons-icons/nameplate-selected.png")
 
 
 func _on_Inventory_pressed():
@@ -46,10 +55,11 @@ func _on_Skills_pressed():
 		$Trash.hide()
 		$Inventory.hide()
 		$Collections.hide()
-		$OptionsMenu.hide()
+		$Options.hide()
 		$Crafting.hide()
 		$Skills.initialize()
 		$Exit.hide()
+		set_name_plate("skills")
 
 
 func _on_Crafting_pressed():
@@ -60,11 +70,12 @@ func _on_Crafting_pressed():
 		$Trash.show()
 		$Skills.hide()
 		$Inventory.hide()
-		$Crafting.show()
+		$Crafting.initialize()
 		$Collections.hide()
-		$OptionsMenu.hide()
+		$Options.hide()
 		$Exit.hide()
 		$Background.texture = load("res://Assets/Images/User interface/inventory/crafting/crafting-tab.png")
+		set_name_plate("crafting")
 
 func _on_Collections_pressed():
 	if not find_parent("UserInterface").holding_item:
@@ -74,11 +85,11 @@ func _on_Collections_pressed():
 		$Trash.hide()
 		$Inventory.hide()
 		$Crafting.hide()
-		$OptionsMenu.hide()
+		$Options.hide()
 		$Skills.hide()
 		$Exit.hide()
 		$Collections.initialize()
-		$Background.texture = load("res://Assets/Images/Inventory UI/menus/collections1.png")
+		set_name_plate("collections")
 
 func _on_Options_pressed():
 	if not find_parent("UserInterface").holding_item:
@@ -88,27 +99,12 @@ func _on_Options_pressed():
 		$Trash.hide()
 		$Inventory.hide()
 		$Crafting.hide()
-		$OptionsMenu.show()
+		$Options.show()
 		$Collections.hide()
 		$Skills.hide()
 		$Exit.hide()
-		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/options.png")
-		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
-
-
-#func _on_Exit_pressed():
-#	if not find_parent("UserInterface").holding_item:
-#		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
-#		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-#		sound_effects.play()
-#		$Inventory.hide()
-#		$Crafting.hide()
-#		$OptionsMenu.hide()
-#		$Collections.hide()
-#		$Exit.show()
-#		$Skills.hide()
-#		$Tab.texture = load("res://Assets/Images/Inventory UI/tabs/exit.png")
-#		$Background.texture = load("res://Assets/Images/Inventory UI/menus/empty.png")
+		$Background.texture = load("res://Assets/Images/User interface/inventory/options/options-tab.png")
+		set_name_plate("options")
 
 
 func _on_Inventory_mouse_entered():

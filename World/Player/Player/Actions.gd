@@ -45,6 +45,7 @@ func eat(item_name):
 
 
 func harvest_crop(item_name):
+	PlayerData.player_data["skill_experience"]["farming"] += 1
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/harvest.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	sound_effects.play()
@@ -58,6 +59,7 @@ func harvest_crop(item_name):
 
 
 func harvest_forage(item_name):
+	PlayerData.player_data["skill_experience"]["foraging"] += 1
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/harvest.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	sound_effects.play()

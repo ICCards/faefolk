@@ -24,10 +24,10 @@ func set_locked():
 
 
 func _on_button_pressed():
-	get_node("../../").craft(name)
+	get_node("../../../").craft(name)
 
 func _on_button_mouse_entered():
-	get_node("../../").entered_crafting_area(name)
+	get_node("../../../").entered_crafting_area(name)
 
 func _on_button_mouse_exited():
-	get_node("../../").exited_crafting_area(name)
+	get_node("../../../").exited_crafting_area(name)

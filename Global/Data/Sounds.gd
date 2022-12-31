@@ -26,6 +26,10 @@ func play_small_select_sound():
 	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	Server.player_node.sound_effects.play()
 
+func play_deselect_sound():
+	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/bigDeSelect.mp3")
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	Server.player_node.sound_effects.play()
 
 func set_music_volume(val):
 	music_volume = val

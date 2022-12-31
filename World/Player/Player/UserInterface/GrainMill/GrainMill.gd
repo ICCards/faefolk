@@ -10,7 +10,7 @@ func _ready():
 
 func initialize():
 	Server.player_node.actions.destroy_placable_object()
-	$Title.text = "Grain mill #" + str(level) + ":"
+	$MenuTitle.text = "Grain mill #" + str(level)
 	show()
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
@@ -64,9 +64,6 @@ func _physics_process(delta):
 	else:
 		$ItemDescription.hide()
 
-func _on_ExitButton_pressed():
+
+func _on_ExitBtn_pressed():
 	get_parent().close_grain_mill()
-
-
-
-

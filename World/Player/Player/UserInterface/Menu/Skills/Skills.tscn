@@ -13,6 +13,7 @@ margin_bottom = 40.0
 script = ExtResource( 13 )
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 margin_right = 426.0
 margin_bottom = 240.0
 rect_scale = Vector2( 3, 3 )
