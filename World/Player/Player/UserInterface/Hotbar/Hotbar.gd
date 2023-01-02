@@ -27,13 +27,13 @@ func _ready():
 func hovered_slot(slot):
 	Server.player_node.actions.destroy_placable_object()
 	if slot.item:
-		slot.item.hover_item()
+		#slot.item.hover_item()
 		item = slot.item.item_name
 
 func exited_slot(slot):
 	item = null
-	if slot.item and not (slot.slotType == SlotType.HOTBAR and PlayerData.active_item_slot == slot.slot_index):
-		slot.item.exit_item()
+#	if slot.item and not (slot.slotType == SlotType.HOTBAR and PlayerData.active_item_slot == slot.slot_index):
+#		slot.item.exit_item()
 
 func _physics_process(delta):
 	if not visible:

@@ -11,6 +11,7 @@ func _ready():
 
 func initialize():
 	show()
+	get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/inventory/inventory-tab.png")
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
 	PlayerData.InventorySlots = $InventorySlots
@@ -28,20 +29,16 @@ func set_day_bg():
 func set_night_bg():
 	$DayNightBg.texture = load("res://Assets/Images/Inventory UI/night.png")
 
-func _input(_event):
-	if find_parent("UserInterface").holding_item:
-		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-
 func _physics_process(delta):
 	if not visible:
 		return
 	if hovered_item and not find_parent("UserInterface").holding_item:
-		get_node("../ItemDescription").show()
-		get_node("../ItemDescription").item_category = JsonData.item_data[hovered_item]["ItemCategory"]
-		get_node("../ItemDescription").item_name = hovered_item
-		get_node("../ItemDescription").initialize()
+		get_node("../../ItemDescription").show()
+		get_node("../../ItemDescription").item_category = JsonData.item_data[hovered_item]["ItemCategory"]
+		get_node("../../ItemDescription").item_name = hovered_item
+		get_node("../../ItemDescription").initialize()
 	else:
-		get_node("../ItemDescription").hide()
+		get_node("../../ItemDescription").hide()
 
 
 

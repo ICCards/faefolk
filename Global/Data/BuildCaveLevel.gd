@@ -1,5 +1,6 @@
 extends Node
 
+onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 onready var CaveAmbientLight = load("res://World/Caves/CaveAmbientLight.tscn")
 onready var LightningLine = load("res://World/Objects/Misc/LightningLine.tscn")
 onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
@@ -32,6 +33,20 @@ var valid_tiles
 var NatureObjects
 var GrassObjects
 var ForageObjects 
+
+func spawn_bat():
+	var locs = Server.world.get_node("Tiles/BatSpawnTiles").get_used_cells()
+	locs.shuffle()
+	var bat = Bat.instance()
+	Server.world.get_node("Enemies").add_child(bat)
+	bat.position = locs[0]*32
+
+
+func update_navigation():
+	for x in range(Server.world.map_size):
+		for y in range(Server.world.map_size):
+			if Tiles.valid_tiles.get_cellv(Vector2(x,y)) != -1:
+				Server.world.get_node("Navigation2D/NavTiles").set_cellv(Vector2(x,y),0)
 
 func spawn_player():
 	var spawn_loc

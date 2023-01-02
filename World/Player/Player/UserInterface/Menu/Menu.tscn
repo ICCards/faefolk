@@ -1,17 +1,16 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Images/User interface/inventory/collections/crops-tab.png" type="Texture" id=3]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Exit/Exit.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/User interface/inventory/save/save-button.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate-selected.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=12]
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Images/User interface/inventory/save/save-button-selected.png" type="Texture" id=11]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" type="Texture" id=14]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=36]
@@ -76,211 +75,69 @@ expand = true
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="crafting" type="TextureRect" parent="NamePlates"]
-margin_left = 561.0
-margin_top = 117.0
-margin_right = 597.0
-margin_bottom = 129.0
-rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 10 )
-
-[node name="inventory" type="TextureRect" parent="NamePlates"]
+[node name="inventory" parent="NamePlates" instance=ExtResource( 10 )]
 margin_left = 321.0
 margin_top = 117.0
-margin_right = 357.0
+margin_right = 352.0
+margin_bottom = 130.0
+
+[node name="skills" parent="NamePlates" instance=ExtResource( 10 )]
+margin_left = 426.0
+margin_top = 117.0
+margin_right = 457.0
+margin_bottom = 130.0
+
+[node name="crafting" parent="NamePlates" instance=ExtResource( 10 )]
+margin_left = 532.0
+margin_top = 117.0
+margin_right = 563.0
+margin_bottom = 130.0
+
+[node name="collections" parent="NamePlates" instance=ExtResource( 10 )]
+margin_left = 636.0
+margin_top = 117.0
+margin_right = 667.0
+margin_bottom = 130.0
+
+[node name="options" parent="NamePlates" instance=ExtResource( 10 )]
+margin_left = 741.0
+margin_top = 117.0
+margin_right = 772.0
+margin_bottom = 130.0
+
+[node name="save" parent="NamePlates" instance=ExtResource( 10 )]
+margin_left = 846.0
+margin_top = 116.0
+margin_right = 867.0
 margin_bottom = 129.0
-rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 11 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 11 )
 
-[node name="skills" type="TextureRect" parent="NamePlates"]
-margin_left = 441.0
-margin_top = 117.0
-margin_right = 477.0
-margin_bottom = 129.0
-rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 11 )
-
-[node name="collections" type="TextureRect" parent="NamePlates"]
-margin_left = 681.0
-margin_top = 117.0
-margin_right = 717.0
-margin_bottom = 129.0
-rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 11 )
-
-[node name="options" type="TextureRect" parent="NamePlates"]
-margin_left = 801.0
-margin_top = 117.0
-margin_right = 837.0
-margin_bottom = 129.0
-rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 11 )
-
-[node name="TabLabels" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="InventoryLabel" type="Label" parent="TabLabels"]
-margin_left = 321.0
-margin_top = 117.0
-margin_right = 561.0
-margin_bottom = 197.0
-rect_scale = Vector2( 0.45, 0.45 )
-theme = ExtResource( 12 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Inventory"
-align = 1
-valign = 1
-
-[node name="CollectionsLabel" type="Label" parent="TabLabels"]
-margin_left = 681.0
-margin_top = 117.0
-margin_right = 921.0
-margin_bottom = 197.0
-rect_scale = Vector2( 0.45, 0.45 )
-theme = ExtResource( 12 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Collections"
-align = 1
-valign = 1
-
-[node name="SkillsLabel" type="Label" parent="TabLabels"]
-margin_left = 441.0
-margin_top = 117.0
-margin_right = 681.0
-margin_bottom = 197.0
-rect_scale = Vector2( 0.45, 0.45 )
-theme = ExtResource( 12 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Skills"
-align = 1
-valign = 1
-
-[node name="CraftingLabel" type="Label" parent="TabLabels"]
-margin_left = 561.0
-margin_top = 117.0
-margin_right = 801.0
-margin_bottom = 197.0
-rect_scale = Vector2( 0.45, 0.45 )
-theme = ExtResource( 12 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Crafting"
-align = 1
-valign = 1
-
-[node name="OptionsLabel" type="Label" parent="TabLabels"]
-margin_left = 801.0
-margin_top = 117.0
-margin_right = 1041.0
-margin_bottom = 197.0
-rect_scale = Vector2( 0.45, 0.45 )
-theme = ExtResource( 12 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Options"
-align = 1
-valign = 1
-
-[node name="TabButtons" type="HBoxContainer" parent="."]
-margin_left = 322.0
-margin_top = 118.0
-margin_right = 908.0
-margin_bottom = 154.0
-custom_constants/separation = 14
-
-[node name="Inventory" type="Button" parent="TabButtons"]
-margin_right = 106.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 106, 36 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="Skills" type="Button" parent="TabButtons"]
-margin_left = 120.0
-margin_right = 226.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 106, 36 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="Crafting" type="Button" parent="TabButtons"]
-margin_left = 240.0
-margin_right = 346.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 106, 36 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="Collections" type="Button" parent="TabButtons"]
-margin_left = 360.0
-margin_right = 466.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 106, 36 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="Options" type="Button" parent="TabButtons"]
-margin_left = 480.0
-margin_right = 586.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 106, 36 )
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
-
-[node name="Collections" parent="." instance=ExtResource( 13 )]
-
-[node name="Skills" parent="." instance=ExtResource( 39 )]
-visible = false
-
-[node name="Exit" parent="." instance=ExtResource( 4 )]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_top = 229.0
-margin_bottom = 229.0
-
-[node name="Options" parent="." instance=ExtResource( 7 )]
-visible = false
-
-[node name="Inventory" parent="." instance=ExtResource( 2 )]
-visible = false
-
-[node name="Crafting" parent="." instance=ExtResource( 6 )]
-visible = false
+[node name="Label" parent="NamePlates/save" index="0"]
+margin_right = 175.0
+text = "Save"
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Pages" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="inventory" parent="Pages" instance=ExtResource( 2 )]
+
+[node name="skills" parent="Pages" instance=ExtResource( 39 )]
+visible = false
+
+[node name="crafting" parent="Pages" instance=ExtResource( 6 )]
+visible = false
+
+[node name="collections" parent="Pages" instance=ExtResource( 13 )]
+
+[node name="options" parent="Pages" instance=ExtResource( 7 )]
+visible = false
+
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
-[connection signal="mouse_entered" from="TabButtons/Inventory" to="." method="_on_Inventory_mouse_entered"]
-[connection signal="mouse_exited" from="TabButtons/Inventory" to="." method="_on_Inventory_mouse_exited"]
-[connection signal="pressed" from="TabButtons/Inventory" to="." method="_on_Inventory_pressed"]
-[connection signal="mouse_entered" from="TabButtons/Skills" to="." method="_on_Skills_mouse_entered"]
-[connection signal="mouse_exited" from="TabButtons/Skills" to="." method="_on_Skills_mouse_exited"]
-[connection signal="pressed" from="TabButtons/Skills" to="." method="_on_Skills_pressed"]
-[connection signal="mouse_entered" from="TabButtons/Crafting" to="." method="_on_Crafting_mouse_entered"]
-[connection signal="mouse_exited" from="TabButtons/Crafting" to="." method="_on_Crafting_mouse_exited"]
-[connection signal="pressed" from="TabButtons/Crafting" to="." method="_on_Crafting_pressed"]
-[connection signal="mouse_entered" from="TabButtons/Collections" to="." method="_on_Collections_mouse_entered"]
-[connection signal="mouse_exited" from="TabButtons/Collections" to="." method="_on_Collections_mouse_exited"]
-[connection signal="pressed" from="TabButtons/Collections" to="." method="_on_Collections_pressed"]
-[connection signal="mouse_entered" from="TabButtons/Options" to="." method="_on_Options_mouse_entered"]
-[connection signal="mouse_exited" from="TabButtons/Options" to="." method="_on_Options_mouse_exited"]
-[connection signal="pressed" from="TabButtons/Options" to="." method="_on_Options_pressed"]
+
+[editable path="NamePlates/save"]

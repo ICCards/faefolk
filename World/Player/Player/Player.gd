@@ -119,6 +119,7 @@ func set_movement_speed_change():
 
 func _unhandled_input(event):
 	if not PlayerData.viewInventoryMode and \
+		not PlayerData.viewSaveAndExitMode and \
 		not PlayerData.interactive_screen_mode and \
 		not PlayerData.viewMapMode and \
 		state == MOVEMENT and \
@@ -186,7 +187,7 @@ func magic_casting_movement_state(_delta):
 
 
 func movement_state(delta):
-	if (state == MAGIC_CASTING or state == MOVEMENT) and not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode:
+	if (state == MAGIC_CASTING or state == MOVEMENT) and not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 		input_vector = Vector2.ZERO
 		if Input.is_action_pressed("move_up"):
 			input_vector.y -= 1.0

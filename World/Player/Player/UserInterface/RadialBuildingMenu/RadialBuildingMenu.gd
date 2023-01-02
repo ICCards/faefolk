@@ -28,12 +28,26 @@ func _physics_process(delta):
 		$Title.text = buildings[current_item][0].to_upper() + buildings[current_item].substr(1,-1) + ":"
 		$Resources.show()
 		if current_item == 1 or current_item == 0:
-			$Resources.text = "5 x Wood ( " + str(PlayerData.return_resource_total("wood")) + " )"
+			$Resources.bbcode_text = return_resource_cost_string(current_item)
 		else:
-			$Resources.text = "Coming soon..."
+			$Resources.bbcode_text = "[center]Coming soon...[/center]"
 	else:
 		$Title.hide()
 		$Resources.hide()
+
+
+func return_resource_cost_string(index):
+	match index:
+		0:
+			if PlayerData.return_resource_total("wood") >= 5:
+				return "[center]5 x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+			else:
+				return "[center]5 x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+		1:
+			if PlayerData.return_resource_total("wood") >= 2:
+				return "[center]2 x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+			else:
+				return "[center]2 x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
 
 
 func set_icon_position():

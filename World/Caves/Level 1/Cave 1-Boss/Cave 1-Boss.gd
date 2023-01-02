@@ -17,7 +17,7 @@ func _ready():
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true
-	update_navigation()
+	BuildCaveLevel.update_navigation()
 	spawn_boss()
 	
 func advance_up_cave_level():
@@ -45,11 +45,7 @@ func advance_down_cave_level():
 
 func _on_SpawnBatTimer_timeout():
 	if count < NUM_BATS:
-		var locs = $Tiles/BatSpawnTiles.get_used_cells()
-		locs.shuffle()
-		var bat = Bat.instance()
-		$Enemies.add_child(bat)
-		bat.position = locs[0]*32
+		BuildCaveLevel.spawn_bat()
 		count += 1
 
 func spawn_boss():
@@ -59,11 +55,4 @@ func spawn_boss():
 		$Enemies.add_child(boss)
 
 func _on_UpdateNavigation_timeout():
-	update_navigation()
-	
-func update_navigation():
-	for x in range(50):
-		for y in range(50):
-			if Tiles.valid_tiles.get_cellv(Vector2(x,y)) != -1:
-				$Navigation2D/NavTiles.set_cellv(Vector2(x,y), 0)
-
+	BuildCaveLevel.update_navigation()

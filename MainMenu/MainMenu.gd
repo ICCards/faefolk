@@ -24,7 +24,7 @@ func spawn_player_in_menu():
 		playerMenuState.character = _character.new()
 		playerMenuState.character.LoadPlayerCharacter("human_male")
 		add_child(playerMenuState)
-		playerMenuState.global_position = Vector2(1150, 875 )
+		playerMenuState.global_position = Vector2(735, 585 )
 #	else:
 #		yield(get_tree().create_timer(0.25), "timeout")
 #		spawn_player_in_menu()

@@ -3,7 +3,7 @@ extends Control
 onready var slider = $Slider
 onready var crafting_menu = $CraftingMenu
 
-const MAX_SCROLL_SIZE = 369
+const MAX_SCROLL_SIZE = 536
 
 var hovered_item = null
 var crafting_item = null
@@ -14,11 +14,13 @@ func _ready():
 	crafting_menu.scroll_vertical = 0
 
 func initialize():
-	crafting_item = null
-	hovered_item = null
-	show()
-	reset_hover_effect()
-	initialize_crafting()
+	if not visible:
+		crafting_item = null
+		hovered_item = null
+		show()
+		get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/crafting/crafting-tab.png")
+		reset_hover_effect()
+		initialize_crafting()
 
 func _on_Slider_value_changed(value):
 	crafting_menu.scroll_vertical = ((100-value))/100*MAX_SCROLL_SIZE
@@ -49,16 +51,16 @@ func _physics_process(delta):
 	if not visible:
 		return
 	if hovered_item and not find_parent("UserInterface").holding_item:
-		get_node("../ItemDescription").show()
-		get_node("../ItemDescription").item_category = JsonData.item_data[hovered_item]["ItemCategory"]
-		get_node("../ItemDescription").item_name = hovered_item
-		get_node("../ItemDescription").initialize()
+		get_node("../../ItemDescription").show()
+		get_node("../../ItemDescription").item_category = JsonData.item_data[hovered_item]["ItemCategory"]
+		get_node("../../ItemDescription").item_name = hovered_item
+		get_node("../../ItemDescription").initialize()
 	else:
-		get_node("../ItemDescription").hide()
+		get_node("../../ItemDescription").hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
 		$CraftingItemDescription.visible = true
 		$CraftingItemDescription.item_name = crafting_item
-		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(55 , 75)
+		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 		$CraftingItemDescription.initialize()
 	else:
 		$CraftingItemDescription.visible = false
@@ -93,18 +95,6 @@ func exited_crafting_area(_item):
 			$Tween.start()
 
 
-func play_craft_sound():
-	pass
-#	$SoundEffects.stream = Sounds.button_select
-#	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
-#	$SoundEffects.play()
-	
-func play_error_sound():
-	$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
-	$SoundEffects.play()
-
-
 func return_crafted_item(item_name):
 	var crafted = InventoryItem.instance()
 	crafted.set_item(item_name, 1, Stats.return_max_tool_health(item_name))
@@ -117,14 +107,15 @@ func craftable_item_pressed(item_name):
 		craft(item_name)
 	elif find_parent("UserInterface").holding_item:
 		if find_parent("UserInterface").holding_item.item_name == item_name and PlayerData.isSufficientMaterialToCraft(item_name) and JsonData.item_data[item_name]["StackSize"] != 1:
+			Sounds.play_small_select_sound()
 			PlayerData.craft_item(item_name)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
 			initialize_crafting()
 	else:
-		play_error_sound()
+		Sounds.play_error_sound()
 	
 func craft(item_name):
-	play_craft_sound()
+	Sounds.play_small_select_sound()
 	find_parent("UserInterface").holding_item = return_crafted_item(item_name)
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 	PlayerData.craft_item(item_name)

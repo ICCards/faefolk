@@ -80,6 +80,9 @@ margin_top = -24.0
 margin_right = 1.0
 margin_bottom = -24.0
 mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="0" parent="Circle" instance=ExtResource( 1 )]
 
@@ -97,9 +100,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -448.0
-margin_top = -448.0
-rect_scale = Vector2( 2, 2 )
+margin_left = -336.0
+margin_top = -336.0
+margin_right = 112.0
+margin_bottom = 112.0
+rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 2
 texture = ExtResource( 6 )
 
@@ -109,13 +114,11 @@ texture = ExtResource( 6 )
 anims/zoom = SubResource( 2 )
 
 [node name="Icons" type="Control" parent="Circle"]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 2
 
 [node name="Wall" type="Sprite" parent="Circle/Icons"]
-position = Vector2( -1, -132 )
+position = Vector2( 0, -132 )
 texture = ExtResource( 5 )
 
 [node name="Foundation" type="Sprite" parent="Circle/Icons"]
@@ -123,29 +126,31 @@ position = Vector2( 132, 0 )
 texture = ExtResource( 8 )
 
 [node name="Stairs" type="Sprite" parent="Circle/Icons"]
-position = Vector2( 0, 147 )
+position = Vector2( 0, 132 )
 texture = ExtResource( 7 )
 
 [node name="Ceiling" type="Sprite" parent="Circle/Icons"]
-position = Vector2( -143, 1 )
+position = Vector2( -132, 0 )
 texture = ExtResource( 4 )
 
 [node name="Title" type="Label" parent="."]
-margin_left = 769.0
-margin_top = 448.0
-margin_right = 1249.0
-margin_bottom = 509.0
-rect_scale = Vector2( 0.8, 0.8 )
+margin_left = 494.0
+margin_top = 283.0
+margin_right = 984.0
+margin_bottom = 344.0
+rect_scale = Vector2( 0.6, 0.6 )
 theme = ExtResource( 3 )
 text = "Wall:"
 align = 1
 
-[node name="Resources" type="Label" parent="."]
-margin_left = 765.0
-margin_top = 528.0
-margin_right = 1418.0
-margin_bottom = 589.0
-rect_scale = Vector2( 0.6, 0.6 )
+[node name="Resources" type="RichTextLabel" parent="."]
+margin_left = 494.0
+margin_top = 345.0
+margin_right = 1229.0
+margin_bottom = 408.0
+rect_scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]1 x Wood(total wood)[/center]"
 text = "1 x Wood(total wood)"
-align = 1
+scroll_active = false

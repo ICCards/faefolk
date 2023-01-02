@@ -13,6 +13,7 @@ func _ready():
 	set_health_bar()
 	set_mana_bar()
 	$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
+	set_date_time()
 	
 func _on_ManaTimer_timeout():
 	PlayerData.player_data["mana"] += 1

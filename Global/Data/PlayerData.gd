@@ -19,6 +19,7 @@ onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
 
 var viewInventoryMode: bool = false
+var viewSaveAndExitMode: bool = false
 var viewMapMode: bool = false
 var interactive_screen_mode: bool = false
 
@@ -26,7 +27,7 @@ var health_maximum = 100
 var energy_maximum = 100
 var mana_maximum = 100
 
-const NUM_INVENTORY_SLOTS = 10
+const NUM_INVENTORY_SLOTS = 20
 const NUM_HOTBAR_SLOTS = 10
 
 var InventorySlots
@@ -36,7 +37,7 @@ var active_item_slot = 0
 var player_data = {}
 var starting_player_data = {
 	"respawn_location": null,
-	"respawn_scene" : "res://World/World/World.tscn",
+	"respawn_scene" : null,
 	"season": "spring",
 	"day_week": "Mon.",
 	"day_number": 1,
@@ -46,17 +47,21 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-		"0": ["stone sword", 1, 50],
+		"0": ["iron sword", 1, 100],
+		"5": ["bronze sword", 1, 100],
+		"6": ["gold sword", 1, 100],
 		"1": ["wind staff", 1, null],
+		"4": ["fire staff", 1, null],
 		"2": ["wood fishing rod", 1, null],
 		"3": ["stove #1", 10, null],
 		"9": ["workbench #2", 10, null],
-		"8": ["grain mill #2", 10, null],
+		"8": ["furnace", 10, null],
 	},
 	"inventory": {
 			"18": ["wood", 999, null],
 			"19": ["stone", 999, null],
-			"17": ["iron ingot", 99, null],
+			"17": ["iron ore", 99, null],
+			"13": ["bronze ore", 99, null],
 			"15": ["wheat flour", 99, null],
 			"16": ["wheat", 100, null],
 	},

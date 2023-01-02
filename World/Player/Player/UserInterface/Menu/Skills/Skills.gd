@@ -26,7 +26,7 @@ func initialize():
 	set_bg()
 	
 func set_bg():
-	get_node("../Background").texture = load("res://Assets/Images/User interface/inventory/skills/"+skill +"-tab.png")
+	get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/skills/"+skill +"-tab.png")
 	front_progress_bar.texture_progress = load("res://Assets/Images/Spell icons/"+ skill +"/front.png")
 	back_progress_bar.texture_progress = load("res://Assets/Images/Spell icons/"+ skill +"/back.png")
 	set_skills()
@@ -226,46 +226,43 @@ func set_skills():
 		$AttackCosts/Attack4.text = Stats.skill_descriptions[skill][4]["c"]
 
 func _on_BowBtn_pressed():
-	play_select_tab_sound_effect()
+	Sounds.play_small_select_sound()
 	skill = "bow"
 	set_bg()
 
 func _on_WindBtn_pressed():
-	play_select_tab_sound_effect()
+	Sounds.play_small_select_sound()
 	skill = "wind"
 	set_bg()
 
 func _on_FireBtn_pressed():
-	play_select_tab_sound_effect()
+	Sounds.play_small_select_sound()
 	skill = "fire"
 	set_bg()
 
 func _on_EarthBtn_pressed():
-	play_select_tab_sound_effect()
+	Sounds.play_small_select_sound()
 	skill = "earth"
 	set_bg()
 
 func _on_IceBtn_pressed():
-	play_select_tab_sound_effect()
+	Sounds.play_small_select_sound()
 	skill = "ice"
 	set_bg()
 
 func _on_DarkMagicBtn_pressed():
-	play_select_tab_sound_effect()
+	Sounds.play_small_select_sound()
 	skill = "dark"
 	set_bg()
 
 func _on_SwordBtn_pressed():
-	play_select_tab_sound_effect()
+	Sounds.play_small_select_sound()
 	skill = "sword"
 	set_bg()
 
 func _on_ElectricBtn_pressed():
-	play_select_tab_sound_effect()
+	Sounds.play_small_select_sound()
 	skill = "electric"
 	set_bg()
 	
-func play_select_tab_sound_effect():
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
+

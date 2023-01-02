@@ -136,7 +136,6 @@ visible = false
 position = Vector2( 461, 465 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
-frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -164,7 +163,6 @@ margin_top = 309.0
 margin_right = 455.0
 margin_bottom = 329.0
 rect_scale = Vector2( 3, 3 )
-value = 80.0
 texture_progress = ExtResource( 14 )
 fill_mode = 3
 __meta__ = {

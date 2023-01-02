@@ -4,7 +4,7 @@ onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var holding_item = null
 
-onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
+onready var SaveAndExitDialogue = load("res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn")
 onready var Menu = load("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
 onready var Hotbar = load("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
 onready var Workbench = load("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
@@ -39,12 +39,25 @@ func _ready():
 	$Menu.hide()
 	add_hotbar_clock_and_stats()
 
+func save_player_data(exit_to_main_menu):
+	$LoadingIndicator.show()
+	yield(get_tree(), "idle_frame")
+	MapData.save_map_data()
+	yield(get_tree(), "idle_frame")
+	PlayerData.save_player_data()
+	yield(get_tree().create_timer(3.0), "timeout")
+	$LoadingIndicator.hide()
+	if exit_to_main_menu:
+		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
+
 
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:
-		if event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode:
+		if event.is_action_pressed("ui_cancel") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
+			toggle_save_and_exit()
+		if event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 			toggle_menu()
-		elif event.is_action_pressed("action") and not PlayerData.viewInventoryMode:
+		elif event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
 			if object_id:
 				match object_name:
 					"workbench":
@@ -122,6 +135,18 @@ func death():
 		holding_item.queue_free()
 		holding_item = null
 
+func toggle_save_and_exit():
+	if has_node("SaveAndExit"):
+		Sounds.play_deselect_sound()
+		PlayerData.viewSaveAndExitMode = false
+		get_node("SaveAndExit").queue_free()
+	else:
+		Sounds.play_big_select_sound()
+		var saveAndExit = SaveAndExitDialogue.instance()
+		add_child(saveAndExit)
+		PlayerData.viewSaveAndExitMode = true
+
+
 func respawn():
 	add_hotbar_clock_and_stats()
 
@@ -163,13 +188,11 @@ func add_hotbar_clock_and_stats():
 	PlayerData.interactive_screen_mode = false
 	$Hotbar.initialize_hotbar()
 	$PlayerDataUI.show()
-	PlayerData.InventorySlots = $Menu/Inventory/InventorySlots
+	PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
 
 func toggle_menu():
 	if not $Menu.visible:
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Menu/bigSelect.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
+		Sounds.play_big_select_sound()
 		show_menu()
 	else:
 		Sounds.play_deselect_sound()

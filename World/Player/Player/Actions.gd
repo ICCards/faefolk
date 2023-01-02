@@ -129,7 +129,7 @@ func respawn():
 		get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", false) 
 		get_parent().state = get_parent().MOVEMENT
 	else:
-		BuildCaveLevel.is_player_respawning = true
+		PlayerData.spawn_at_respawn_location = true
 		SceneChanger.goto_scene(PlayerData.player_data["respawn_scene"])
 
 

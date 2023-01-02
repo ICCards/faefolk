@@ -187,6 +187,8 @@ func decrease_energy_or_health_while_sprinting():
 			$AnimationPlayer.play("hit")
 			InstancedScenes.player_hit_effect(-amt, position)
 			PlayerData.change_health(-amt)
+			yield($AnimationPlayer, "animation_finished")
+			$CollisionShape2D.set_deferred("disabled", false)
 		else:
 			PlayerData.change_energy(-1)
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" type="AudioStream" id=1]
 [ext_resource path="res://World/Player/PlayerInMenu/PlayerMenuState.gd" type="Script" id=2]
+[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.93452, 14.6845 )
@@ -96,7 +97,7 @@ tracks/6/keys = {
 }
 
 [node name="PlayerMenuState" type="KinematicBody2D"]
-scale = Vector2( 6, 6 )
+scale = Vector2( 4, 4 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -106,6 +107,7 @@ shape = SubResource( 1 )
 [node name="CompositeSprites" type="Node2D" parent="."]
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
+texture = ExtResource( 3 )
 hframes = 4
 
 [node name="Arms" type="Sprite" parent="CompositeSprites"]

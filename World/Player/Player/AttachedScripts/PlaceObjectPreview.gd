@@ -414,12 +414,19 @@ func place_object(item_name, direction, location, type):
 		var id = Uuid.v4()
 		if type == "placable":
 			if item_name == "wall" or item_name == "foundation":
-				if PlayerData.returnSufficentCraftingMaterial("wood", 5):
+				if PlayerData.returnSufficentCraftingMaterial("wood", 5) and item_name == "wall":
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
 					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location)})
 					PlayerData.remove_material("wood", 5)
+					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
+				elif PlayerData.returnSufficentCraftingMaterial("wood", 2) and item_name == "foundation":
+					$SoundEffects.stream = Sounds.place_object
+					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+					$SoundEffects.play()
+					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location)})
+					PlayerData.remove_material("wood", 2)
 					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
 				else:
 					$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")

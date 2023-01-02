@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var RippleParticles = load("res://World/Player/Player/Fishing/RippleParticles.tscn")
+
 onready var progress = $CanvasLayer/CastingProgress
 onready var progress_background = $CanvasLayer/ProgressBackground
 onready var line = $Line2D
@@ -77,6 +79,8 @@ func _physics_process(delta):
 		line.points = [start_point, hook.position + Vector2(4.5,4.5)]
 
 func retract_and_stop(fish_name):
+	play_ripple_effect()
+	$RippleTimer.stop()
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/pullItemFromWater.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
@@ -126,6 +130,7 @@ func start_fishing_mini_game():
 	change_start_point_pos()
 	line.points = [start_point, end_point]
 	$CanvasLayer/FishingMiniGame.start()
+	$RippleTimer.start()
 
 func change_start_point_pos():
 	match direction:
@@ -217,8 +222,7 @@ func draw_cast_line():
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
 	var location = Tiles.ocean_tiles.world_to_map(hook.position + Server.player_node.position)
 	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles): # valid cast
-		$RippleParticles.position = end_point
-		$RippleParticles.emitting = true
+		play_ripple_effect()
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
@@ -272,3 +276,13 @@ func _on_FishBiteTimer_timeout():
 		click_to_start_mini_game = true
 		yield($AnimationPlayer, "animation_finished")
 		click_to_start_mini_game = false
+
+
+func _on_RippleTimer_timeout():
+	play_ripple_effect()
+
+func play_ripple_effect():
+	var rippleParticles = RippleParticles.instance()
+	rippleParticles.position = hook.position + Vector2(4.5,4.5)
+	add_child(rippleParticles)
+	

@@ -29,7 +29,7 @@ data = {
 }
 
 [node name="0" type="Control"]
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 1.5, 1.5 )
 script = SubResource( 1 )
 
 [node name="button" type="TextureButton" parent="."]

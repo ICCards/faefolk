@@ -16,6 +16,10 @@ func _ready():
 	$ScrollContainer.scroll_vertical = 0
 	$Slider.value = 100
 
+func initialize():
+	show()
+	get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/options/options-tab.png")
+
 func set_label_texts():
 	$ScrollContainer/VBoxContainer/Grid2/MoveLeftLabel.text = "Move left: " + OS.get_scancode_string(Settings.key_dict["move_left"])
 	$ScrollContainer/VBoxContainer/Grid2/MoveRightLabel.text = "Move right: " + OS.get_scancode_string(Settings.key_dict["move_right"])

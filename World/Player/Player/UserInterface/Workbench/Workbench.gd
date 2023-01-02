@@ -1,5 +1,7 @@
 extends Control
 
+const MAX_SCROLL_SIZE = 16
+
 var level
 
 var crafting_item
@@ -43,7 +45,7 @@ func _physics_process(delta):
 	else:
 		$ItemDescription.hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
-		if $CraftingMenu/Items.get_node(crafting_item+"/button").disabled:
+		if $CraftingMenuWorkbench/Items.get_node(crafting_item+"/button").disabled:
 			$CraftingItemDescription.hide()
 			$ItemNameBox.show()
 			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
@@ -60,16 +62,16 @@ func _physics_process(delta):
 
 func entered_crafting_area(item_name):
 	crafting_item = item_name
-	$Tween.interpolate_property($CraftingMenu/Items.get_node(item_name), "rect_scale",
-		$CraftingMenu/Items.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
+	$Tween.interpolate_property($CraftingMenuWorkbench/Items.get_node(item_name), "rect_scale",
+		$CraftingMenuWorkbench/Items.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
 
 func exited_crafting_area(item_name):
 	crafting_item = null
-	$Tween.interpolate_property($CraftingMenu/Items.get_node(item_name), "rect_scale",
-		$CraftingMenu/Items.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+	$Tween.interpolate_property($CraftingMenuWorkbench/Items.get_node(item_name), "rect_scale",
+		$CraftingMenuWorkbench/Items.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
@@ -92,3 +94,7 @@ func return_crafted_item(item_name):
 
 func _on_ExitBtn_pressed():
 	get_parent().close_workbench()
+
+
+func _on_Slider_value_changed(value):
+	$CraftingMenuWorkbench.scroll_vertical = ((100-value))/100*MAX_SCROLL_SIZE

@@ -77,7 +77,6 @@ visible = false
 
 [node name="CraftingItemDescription" parent="." instance=ExtResource( 21 )]
 visible = false
-scale = Vector2( 3.5, 3.5 )
 
 [node name="ItemDescription" parent="." instance=ExtResource( 37 )]
 visible = false
@@ -387,3 +386,4 @@ margin_right = 50.0
 margin_bottom = 124.0
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
+[connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]

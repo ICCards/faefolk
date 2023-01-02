@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World/Player/Player/Fishing/FishingMiniGame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/inventory_icons/Fish/albacore.png" type="Texture" id=2]
@@ -19,10 +19,6 @@ font_data = SubResource( 48 )
 
 [sub_resource type="Theme" id=50]
 default_font = SubResource( 49 )
-
-[sub_resource type="Gradient" id=51]
-offsets = PoolRealArray( 0, 0.458716, 1 )
-colors = PoolColorArray( 0.635294, 0.858824, 1, 1, 0.635294, 0.858824, 1, 1, 0, 0.458824, 0.454902, 0 )
 
 [sub_resource type="Animation" id=45]
 length = 0.001
@@ -197,26 +193,26 @@ script = ExtResource( 4 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ProgressBackground" type="TextureRect" parent="CanvasLayer"]
-margin_left = 886.0
-margin_top = 372.0
-margin_right = 938.0
-margin_bottom = 386.0
-rect_scale = Vector2( 3, 3 )
+margin_left = 587.0
+margin_top = 241.0
+margin_right = 639.0
+margin_bottom = 255.0
+rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 7 )
 
 [node name="CastingProgress" type="TextureProgress" parent="CanvasLayer"]
-margin_left = 916.0
-margin_top = 382.0
-margin_right = 948.0
-margin_bottom = 390.0
-rect_scale = Vector2( 3, 3 )
+margin_left = 607.0
+margin_top = 247.0
+margin_right = 639.0
+margin_bottom = 255.0
+rect_scale = Vector2( 2, 2 )
 value = 50.0
 texture_progress = ExtResource( 6 )
 
 [node name="FishingMiniGame" parent="CanvasLayer" instance=ExtResource( 1 )]
 visible = false
-position = Vector2( 671, 332 )
-scale = Vector2( 5, 5 )
+position = Vector2( 444, 209 )
+scale = Vector2( 3.5, 3.5 )
 
 [node name="ExclamationPoint" type="Sprite" parent="."]
 visible = false
@@ -238,22 +234,6 @@ align = 1
 width = 2.0
 default_color = Color( 0.156863, 0.156863, 0.156863, 1 )
 
-[node name="RippleParticles" type="CPUParticles2D" parent="."]
-position = Vector2( 4, 4 )
-emitting = false
-amount = 72
-lifetime = 1.5
-one_shot = true
-explosiveness = 1.0
-direction = Vector2( 1, 1 )
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 15.0
-damping = 5.0
-scale_amount = 2.0
-scale_amount_random = 0.25
-color_ramp = SubResource( 51 )
-
 [node name="CastedFishHook" type="Sprite" parent="."]
 visible = false
 scale = Vector2( 3, 3 )
@@ -266,6 +246,9 @@ anims/bite = SubResource( 46 )
 anims/hit = SubResource( 47 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="RippleTimer" type="Timer" parent="."]
+wait_time = 0.4
 
 [node name="MoveBobTimer" type="Timer" parent="."]
 wait_time = 4.0
@@ -282,5 +265,6 @@ texture = ExtResource( 2 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
+[connection signal="timeout" from="RippleTimer" to="." method="_on_RippleTimer_timeout"]
 [connection signal="timeout" from="MoveBobTimer" to="." method="_on_MoveBobTimer_timeout"]
 [connection signal="timeout" from="FishBiteTimer" to="." method="_on_FishBiteTimer_timeout"]

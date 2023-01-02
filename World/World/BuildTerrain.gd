@@ -41,10 +41,11 @@ func spawn_player():
 		spawn_loc = PlayerData.player_data["respawn_location"]
 	elif PlayerData.spawn_at_cave_exit:
 		spawn_loc = MapData.world["cave_entrance_location"]
-	if spawn_loc == null:
+	if spawn_loc == null: # initial random spawn
 		var tiles = MapData.world["beach"]
 		tiles.shuffle()
 		spawn_loc = tiles[0]
+		yield(get_tree(), "idle_frame")
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = spawn_loc
 		PlayerData.save_player_data()
