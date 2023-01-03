@@ -28,6 +28,6 @@ func _physics_process(delta):
 	else:
 		$ItemDescription.hide()
 
-func _on_btn_pressed():
-	find_parent("UserInterface").close_tc(id)
 
+func _on_ExitBtn_pressed():
+	find_parent("UserInterface").close_tc(id)

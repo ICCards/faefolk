@@ -1325,6 +1325,18 @@ tracks/20/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/21/type = "value"
+tracks/21/path = NodePath("../Area2Ds/EnterDoors/CollisionShape2D:disabled")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=39]
 resource_name = "eat"

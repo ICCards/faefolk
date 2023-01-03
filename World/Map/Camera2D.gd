@@ -2,11 +2,11 @@ extends Camera2D
 class_name PanningCamera2D
 
 const MIN_ZOOM: float = 0.1
-const MAX_ZOOM: float = 0.8
+const MAX_ZOOM: float = 1.2
 const ZOOM_RATE: float = 8.0
 const ZOOM_INCREMENT: float = 0.1
 
-var _target_zoom: float = 1.0
+var _target_zoom: float = 1.2
 
 onready var _tween: Tween = $Tween
 

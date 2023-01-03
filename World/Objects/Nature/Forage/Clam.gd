@@ -4,14 +4,13 @@ var type
 var location
 var types = ["pink", "red", "blue"]
 var pearl_types = ["pink", "white", "blue"]
+var variety # 1 2 or 3
 
 func _ready():
-	randomize()
-	types.shuffle()
-	type = types[0]
-	set_random_texture() 
+	type = types[variety-1]
+	set_texture() 
 
-func set_random_texture():
+func set_texture():
 	$Clam.texture = load("res://Assets/Images/Forage/" + str(type) + " clam.png")
 
 func _on_Btn_mouse_entered():
@@ -23,6 +22,7 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
+		MapData.world["forage"].erase(name)
 		PlayerData.player_data["collections"]["forage"][str(type)+" clam"] += 1
 		Tiles.add_valid_tiles(location)
 		$Clam.hide()

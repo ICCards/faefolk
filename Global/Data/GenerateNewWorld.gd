@@ -40,10 +40,9 @@ func build():
 	temperature = generate_map(5,300)
 	yield(get_tree().create_timer(1.0), "timeout")
 	moisture = generate_map(5,300)
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(2.0), "timeout")
 	altittude = generate_map(5,150)
 	yield(get_tree().create_timer(1.0), "timeout")
-	print("BUILT ALTITTUDE" + str(altittude))
 	get_node("/root/World/Loading").set_phase("Building terrain")
 	build_terrian()
 	yield(get_tree().create_timer(1.0), "timeout")
@@ -60,14 +59,25 @@ func build():
 	generate_ores(dirt,"dirt")
 	generate_flowers(forest,"forest")
 	generate_flowers(plains,"plains")
+	generate_beach_forage()
 	yield(get_tree().create_timer(1.0), "timeout")
 	get_node("/root/World/Loading").set_phase("Saving data")
 	save_world_data()
 	yield(get_tree().create_timer(1.0), "timeout")
 	get_node("/root/World/Loading").queue_free()
+	MapData.start()
 	Server.world.build_world()
 	
-	
+func generate_beach_forage():
+	for loc in beach:
+		if Util.chance(1):
+			if not dirt.has(loc) and not forest.has(loc) and not snow.has(loc) and not plains.has(loc):
+				var id = uuid.v4()
+				if Util.chance(50):
+					MapData.world["forage"][id] = {"l":loc,"n":"clam","v":rng.randi_range(1,3)}
+				else:
+					MapData.world["forage"][id] = {"l":loc,"n":"starfish","v":rng.randi_range(1,2)}
+
 func set_cave_entrance():
 	var loc = Vector2(rng.randi_range(490, 510), rng.randi_range(490, 510))
 	MapData.world["cave_entrance_location"] = loc
@@ -318,7 +328,7 @@ func create_tree(loc,biome):
 		decoration_locations.append(loc + Vector2(1,0))
 		decoration_locations.append(loc + Vector2(0,-1))
 		decoration_locations.append(loc + Vector2(1,-1))
-		
+
 func create_stump(loc,biome):
 	var id = uuid.v4()
 	if check_64x64(loc) and isValidPosition(loc):
@@ -328,7 +338,7 @@ func create_stump(loc,biome):
 		decoration_locations.append(loc + Vector2(1,0))
 		decoration_locations.append(loc + Vector2(0,-1))
 		decoration_locations.append(loc + Vector2(1,-1))
-	
+
 func create_log(loc,biome):
 	var id = uuid.v4()
 	if isValidPosition(loc):

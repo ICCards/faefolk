@@ -5,14 +5,14 @@ var rng = RandomNumberGenerator.new()
 var type
 var location
 var types = ["starfish", "baby starfish"]
+var variety # 1 or 2
 
 func _ready():
 	randomize()
-	types.shuffle()
-	type = types[0]
-	set_random_texture()
+	type = types[variety-1]
+	set_texture()
 
-func set_random_texture():
+func set_texture():
 	$Starfish.texture = load("res://Assets/Images/Forage/"+ str(type) +".png")
 
 func _on_Btn_mouse_entered():
@@ -23,6 +23,7 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
+		MapData.world["forage"].erase(name)
 		PlayerData.player_data["collections"]["forage"][type] += 1
 		Tiles.add_valid_tiles(location)
 		$Starfish.hide()

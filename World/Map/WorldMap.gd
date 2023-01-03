@@ -54,7 +54,7 @@ func initialize():
 	if not is_first_time_opened:
 		is_first_time_opened = true
 		$Camera2D.position = Vector2(800, 800)
-		$Camera2D.zoom = Vector2(0.8, 0.8)
+		$Camera2D.zoom = Vector2(1.2, 1.2)
 	
 func set_inactive():
 	PlayerData.viewMapMode = false
@@ -98,7 +98,7 @@ func adjustedGridCoordinatesScale(zoom):
 	
 func adjustedPlayerIconScale(zoom):
 	var percent_zoomed = zoom / Vector2(0.8, 0.8)
-	return Vector2(40,40) * percent_zoomed
+	return Vector2(32,32) * percent_zoomed
 
 
 func set_direction(dir):

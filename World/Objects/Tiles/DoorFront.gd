@@ -17,7 +17,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("action") and entered:
+	if event.is_action_pressed("action") and $EnterDoorway.get_overlapping_areas().size() >= 1:
 		if door_open:
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
@@ -95,12 +95,6 @@ func show_health():
 	$AnimationPlayer2.stop()
 	$AnimationPlayer2.play("show health bar")
 
-
-func _on_EnterDoorway_area_entered(area):
-	entered = true
-
-func _on_EnterDoorway_area_exited(area):
-	entered = false
 
 func _on_HammerRepairBox_area_entered(area):
 	set_type()

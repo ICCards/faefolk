@@ -27,5 +27,5 @@ func _input(event):
 			Settings.save_keys()
 			#stop setting the key
 			do_set = false
-			get_node("../../../").set_label_texts()
+			get_node("../../../../").set_label_texts()
 			Server.player_node.user_interface.hide_set_button_dialogue()

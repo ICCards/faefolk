@@ -313,7 +313,7 @@ margin_bottom = 720.0
 position = Vector2( 671, 374 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 22 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="LoadingScreen" parent="." instance=ExtResource( 4 )]

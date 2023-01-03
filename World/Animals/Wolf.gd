@@ -55,6 +55,8 @@ func _ready():
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	navigation_agent.connect("velocity_computed", self, "move") 
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	if self.position.distance_to(Server.player_node.position) < 300:
+		queue_free()
 
 func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.global_position)
@@ -108,7 +110,7 @@ func _physics_process(delta):
 		end_chase_state()
 	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
 		start_chase_state()
-	if state == CHASE and (position+Vector2(0,-9)).distance_to(player.position) < 70:
+	if chasing and (position+Vector2(0,-9)).distance_to(player.position) < 70:
 		state = ATTACK
 		attack()
 	var target = navigation_agent.get_next_location()

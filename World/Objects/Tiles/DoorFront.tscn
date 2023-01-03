@@ -343,8 +343,6 @@ anims/RESET = SubResource( 11 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
-[connection signal="area_entered" from="EnterDoorway" to="." method="_on_EnterDoorway_area_entered"]
-[connection signal="area_exited" from="EnterDoorway" to="." method="_on_EnterDoorway_area_exited"]
 [connection signal="input_event" from="EnterDoorway" to="." method="_on_Area2D_input_event"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

@@ -19,6 +19,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 focus_mode = 0
 mouse_filter = 1
+disabled = true
 enabled_focus_mode = 0
 flat = true
 

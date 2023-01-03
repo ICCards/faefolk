@@ -108,7 +108,7 @@ func _physics_process(delta):
 		return
 	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
-	if state == CHASE and (position+Vector2(0,-14)).distance_to(player.position) < 70:
+	if chasing and (position+Vector2(0,-14)).distance_to(player.position) < 70:
 		state = ATTACK
 		attack()
 	var target = navigation_agent.get_next_location()

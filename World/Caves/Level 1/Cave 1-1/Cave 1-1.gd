@@ -3,9 +3,9 @@ extends YSort
 var nav_node
 var count = 0
 
-var NUM_BATS = 0
-var NUM_SLIMES =  0
-var NUM_SPIDERS = 0
+var NUM_BATS = 3
+var NUM_SLIMES =  3
+var NUM_SPIDERS = 3
 var NUM_SKELETONS = 0
 var is_changing_scene: bool = false
 var map_size = 50
@@ -18,28 +18,14 @@ func _ready():
 
 func advance_up_cave_level(): 
 	if not is_changing_scene:
-		PlayerData.spawn_at_cave_exit = true
-		Server.player_node.destroy()
-		is_changing_scene = true
-		for node in $Projectiles.get_children():
-			node.destroy()
-		for node in $Enemies.get_children():
-			node.destroy()
-		SceneChanger.goto_scene("res://World/World/World.tscn")
+		SceneChanger.advance_cave_level(get_tree().current_scene.filename, false)
 
 func advance_down_cave_level():
 	if not is_changing_scene:
-		PlayerData.spawn_at_cave_entrance = true
-		Server.player_node.destroy()
-		is_changing_scene = true
-		for node in $Projectiles.get_children():
-			node.destroy()
-		for node in $Enemies.get_children():
-			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1-2/Cave 1-2.tscn")
+		SceneChanger.advance_cave_level(get_tree().current_scene.filename, true)
 	
 func _on_SpawnBatTimer_timeout():
-	if count < NUM_BATS:
+	if count < NUM_BATS and not is_changing_scene:
 		BuildCaveLevel.spawn_bat()
 		count += 1
 

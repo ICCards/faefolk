@@ -1,5 +1,7 @@
 extends Node
 
+onready var Clam = load("res://World/Objects/Nature/Forage/Clam.tscn")
+onready var Starfish = load("res://World/Objects/Nature/Forage/Starfish.tscn")
 onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTree = load("res://World/Objects/Nature/Trees/DesertTree.tscn")
 onready var Log = load("res://World/Objects/Nature/Trees/Log.tscn")
@@ -23,12 +25,35 @@ var current_chunks = []
 onready var navTiles = get_node("../../Navigation2D/NavTiles")
 onready var GrassObjects = get_node("../../GrassObjects")
 onready var NatureObjects = get_node("../../NatureObjects")
+onready var ForageObjects = get_node("../../ForageObjects")
 
-var is_destroyed: bool = false
 
 func start():
+	spawn_forage()
 	spawn_placables()
 	$SpawnNature.start()
+	
+func spawn_forage():
+	for id in MapData.world["forage"]:
+		var item_name = MapData.world["forage"][id]["n"]
+		var location = Util.string_to_vector2(MapData.world["forage"][id]["l"])
+		if item_name == "clam":
+			Tiles.remove_valid_tiles(location)
+			var clam = Clam.instance()
+			clam.name = id
+			clam.location = location
+			clam.variety = MapData.world["forage"][id]["v"]
+			clam.position = Tiles.valid_tiles.map_to_world(location)
+			ForageObjects.call_deferred("add_child", clam)
+		elif item_name == "starfish":
+			Tiles.add_navigation_tiles(location)
+			var starfish = Starfish.instance()
+			starfish.name = id
+			starfish.location = location
+			starfish.variety = MapData.world["forage"][id]["v"]
+			starfish.position = Tiles.valid_tiles.map_to_world(location)
+			ForageObjects.call_deferred("add_child", starfish)
+	
 	
 func spawn_placables():
 	yield(get_tree().create_timer(2.0), "timeout")
@@ -78,7 +103,7 @@ func _whoAmI8(_value):
 	call_deferred("set_player_quadrant")
 
 func _on_SpawnNature_timeout():
-	if not is_destroyed:
+	if not Server.world.is_changing_scene:
 		current_chunks = get_parent().current_chunks
 		spawn_nature()
 	
@@ -101,7 +126,7 @@ func spawn_nature():
 
 func remove_nature():
 	for node in NatureObjects.get_children():
-		if is_destroyed:
+		if Server.world.is_changing_scene:
 			var value = remove_objects_thread.wait_to_finish()
 			return
 		if is_instance_valid(node):
@@ -113,7 +138,7 @@ func remove_nature():
 
 func remove_grass():
 	for node in GrassObjects.get_children():
-		if is_destroyed:
+		if Server.world.is_changing_scene:
 			var value = remove_grass_thread.wait_to_finish()
 			return
 		if is_instance_valid(node):
@@ -126,7 +151,7 @@ func remove_grass():
 func spawn_trees():
 	var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
 	for chunk in current_chunks:
-		if is_destroyed:
+		if Server.world.is_changing_scene:
 			var value = trees_thread.wait_to_finish()
 			return
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
@@ -134,7 +159,6 @@ func spawn_trees():
 			var loc = Util.string_to_vector2(map["tree"][id]["l"]) + Vector2(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and MapData.world["tree"].has(id):
-					Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
 					var biome = map["tree"][id]["b"]
 					if biome == "desert":
 						pass
@@ -147,6 +171,7 @@ func spawn_trees():
 #						NatureObjects.call_deferred("add_child",object,true)
 #						yield(get_tree().create_timer(0.01), "timeout")
 					else:
+						Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
 						var object = TreeObject.instance()
 						var pos = Tiles.valid_tiles.map_to_world(loc)
 						object.biome = biome
@@ -186,7 +211,7 @@ func spawn_trees():
 
 func spawn_ores():
 	for chunk in current_chunks:
-		if is_destroyed:
+		if Server.world.is_changing_scene:
 			var value = ores_thread.wait_to_finish()
 			return
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
@@ -231,7 +256,7 @@ func spawn_ores():
 
 func spawn_flowers():
 	for chunk in current_chunks:
-		if is_destroyed:
+		if Server.world.is_changing_scene:
 			var value = flower_thread.wait_to_finish()
 			return
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
@@ -261,7 +286,7 @@ func spawn_grass():
 	for chunk in current_chunks:
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["tall_grass"]:
-			if is_destroyed:
+			if Server.world.is_changing_scene:
 				var value = grass_thread.wait_to_finish()
 				return
 			var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])

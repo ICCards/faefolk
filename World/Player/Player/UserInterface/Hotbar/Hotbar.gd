@@ -39,14 +39,14 @@ func _physics_process(delta):
 	if not visible:
 		return
 	adjusted_description_position()
-#	if item and find_parent("UserInterface").holding_item == null:
-#		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
-#		$ItemDescription.show()
-#		$ItemDescription.item_name = item
-#		$ItemDescription.initialize()
-#		$ItemDescription.position = adjusted_pos
-#	else:
-#		$ItemDescription.hide()
+	if item and find_parent("UserInterface").holding_item == null:
+		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
+		$ItemDescription.show()
+		$ItemDescription.item_name = item
+		$ItemDescription.initialize()
+		$ItemDescription.position = adjusted_pos
+	else:
+		$ItemDescription.hide()
 
 
 func adjusted_description_position():
@@ -55,19 +55,19 @@ func adjusted_description_position():
 		var item_category = JsonData.item_data[item]["ItemCategory"]
 		var lines = $ItemDescription/Body/ItemDescription.get_line_count()
 		if lines == 8:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -372)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -130)
 		elif lines == 7:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -340)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -106)
 		elif lines == 6:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -304)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -84)
 		elif lines == 5:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -264)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -60)
 		elif lines == 4:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -236)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -38)
 		elif lines == 3:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -198)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -14)
 		else:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -174) #-134)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, 7) #-134)
 		if item_category == "Food" or item_category == "Fish" or item_category == "Crop":
 			adjusted_pos += Vector2(0, -84)
 

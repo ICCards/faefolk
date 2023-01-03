@@ -2,7 +2,7 @@ extends Node
 
 signal new_skill_unlocked
 
-const NUM_INVENTORY_SLOTS = 10
+const NUM_INVENTORY_SLOTS = 20
 const NUM_HOTBAR_SLOTS = 10
 
 func can_item_be_added_to_inventory(item_name, item_quantity):

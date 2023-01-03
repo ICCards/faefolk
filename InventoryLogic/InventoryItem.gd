@@ -27,6 +27,19 @@ func set_item(nm, qt, health):
 	if item_quantity == null:
 		$Image.rect_size = Vector2(64,64)
 
+
+func hover_crafting_item():
+	$Tween.interpolate_property($Image, "rect_scale",
+		$Image.rect_scale, Vector2(1.05, 1.05), 0.075,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	
+func exit_crafting_item():
+	$Tween.interpolate_property($Image, "rect_scale",
+		$Image.rect_scale, Vector2(1.0, 1.0), 0.075,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
 func set_init_hovered():
 	pass
 #	$Image.rect_scale = Vector2(1.075, 1.075)

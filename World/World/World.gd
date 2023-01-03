@@ -23,8 +23,6 @@ onready var Duck = load("res://World/Animals/Duck.tscn")
 onready var Boar = load("res://World/Animals/Boar.tscn")
 onready var Deer = load("res://World/Animals/Deer.tscn")
 onready var Wolf = load("res://World/Animals/Wolf.tscn")
-onready var Clam = load("res://World/Objects/Nature/Forage/Clam.tscn")
-onready var Starfish = load("res://World/Objects/Nature/Forage/Starfish.tscn")
 onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 
 onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
@@ -33,10 +31,10 @@ var rng = RandomNumberGenerator.new()
 
 const MAX_DUCKS = 150
 const MAX_BUNNIES = 150
-const MAX_BEARS = 40
-const MAX_BOARS = 30
-const MAX_DEER = 100
-const MAX_WOLVES = 30
+const MAX_BEARS = 60
+const MAX_BOARS = 50
+const MAX_DEER = 90
+const MAX_WOLVES = 50
 
 var num_ducks = 0
 var num_bunnies = 0
@@ -60,26 +58,15 @@ func _ready():
 
 
 func build_world():
-	MapData.start()
 	buildMap(MapData.world)
 	$BuildTerrain.start()
 	$BuildTerrain/BuildNature.start()
 	$WorldMap.buildMap()
 	spawn_initial_animals()
 
-
 func advance_down_cave_level():
 	if not is_changing_scene:
-		is_changing_scene = true
-		get_node("BuildTerrain/BuildNature").is_destroyed = true
-		yield(get_tree(), "idle_frame")
-		PlayerData.spawn_at_cave_entrance = true
-		Server.player_node.destroy()
-		for node in $Projectiles.get_children():
-			node.destroy()
-		for node in $Enemies.get_children():
-			node.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1-1/Cave 1-1.tscn")
+		SceneChanger.advance_cave_level(get_tree().current_scene.filename, true)
 
 func buildMap(map):
 	Tiles.valid_tiles = $ValidTiles
@@ -97,7 +84,6 @@ func buildMap(map):
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	Server.isLoaded = true
 	create_cave_entrance(map["cave_entrance_location"])
-	set_random_beach_forage()
 	yield(get_tree().create_timer(1.0), "timeout")
 	spawn_initial_animals()
 
@@ -127,25 +113,6 @@ func spawn_initial_animals():
 	yield(get_tree().create_timer(2.0), "timeout")
 
 
-func set_random_beach_forage():
-	for loc_string in MapData.world["beach"]:
-		if Util.chance(1):
-			var loc = Util.string_to_vector2(loc_string)
-			if dirt.get_cellv(loc) == -1 and forest.get_cellv(loc) == -1 and snow.get_cellv(loc) == -1 and plains.get_cellv(loc) == -1:
-				if Util.chance(50):
-					Tiles.remove_valid_tiles(loc)
-					var clam = Clam.instance()
-					clam.location = loc
-					clam.global_position = Tiles.valid_tiles.map_to_world(loc)
-					$ForageObjects.add_child(clam)
-				else:
-					Tiles.add_navigation_tiles(loc)
-					var starfish = Starfish.instance()
-					starfish.location = loc
-					starfish.global_position = Tiles.valid_tiles.map_to_world(loc)
-					$ForageObjects.add_child(starfish)
-
-	
 func set_water_tiles():
 	#var count = 0
 	for x in range(1000): # fill ocean

@@ -25,10 +25,10 @@ func setTexture(ore):
 	big_ore_sprite.texture = ore.largeOre
 	small_ore_sprite.texture = ore.mediumOres[rng.randi_range(0, 5)]
 	if health <= 40:
-		$BigHurtBox/bigHurtBox.disabled = true
-		$BigMovementCollisionBox/BigMovementBox.disabled = true
-		$SmallHurtBox/smallHurtBox.disabled = false
-		$SmallMovementCollisionBox/CollisionShape2D.disabled = false
+		$BigHurtBox/bigHurtBox.set_deferred("disabled", true)
+		$BigMovementCollisionBox/BigMovementBox.set_deferred("disabled", true)
+		$SmallHurtBox/smallHurtBox.set_deferred("disabled", false)
+		$SmallMovementCollisionBox/CollisionShape2D.set_deferred("disabled", false)
 		big_ore_sprite.visible = false
 		small_ore_sprite.visible = true
 		large_break = true

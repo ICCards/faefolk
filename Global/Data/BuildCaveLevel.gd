@@ -50,12 +50,12 @@ func update_navigation():
 
 func spawn_player():
 	var spawn_loc
-#	if PlayerData.spawn_at_respawn_location:
-#		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
-#	elif PlayerData.spawn_at_cave_entrance:
-	spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
-#	elif PlayerData.spawn_at_cave_exit:
-#		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
+	if PlayerData.spawn_at_respawn_location:
+		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
+	elif PlayerData.spawn_at_cave_entrance:
+		spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+	elif PlayerData.spawn_at_cave_exit:
+		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
 	var player = Player.instance()
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")

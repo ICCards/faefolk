@@ -25,16 +25,14 @@ func _ready():
 #				$Items.get_node(item.name).modulate = Color(1, 1, 1, 0.4)
 
 func hovered_slot(slot):
-	pass
 	if slot.item:
-		slot.item.hover_item()
+		slot.item.hover_crafting_item()
 		get_parent().crafting_item = slot.item.item_name
 
 func exited_slot(slot):
-	pass
 	get_parent().crafting_item = null
 	if slot.item:
-		slot.item.exit_item()
+		slot.item.exit_crafting_item()
 
 func entered_crafting_area(_item):
 	yield(get_tree(), "idle_frame")

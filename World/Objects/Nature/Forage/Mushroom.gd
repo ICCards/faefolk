@@ -5,6 +5,8 @@ var rng = RandomNumberGenerator.new()
 var variety
 var location
 
+var harvested = false
+
 func _ready():
 	rng.randomize()
 	set_random_texture()
@@ -33,12 +35,21 @@ func _on_Btn_pressed():
 		queue_free()
 
 func set_mouse_cursor_type():
-	if not $Btn.disabled:
+	if not $Btn.disabled and not harvested:
 		if $DetectPlayer.get_overlapping_areas().size() >= 1:
 			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest.png"))
 		else:
 			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest transparent.png"))
 
+
+
+func _physics_process(delta):
+	if $DetectPlayer.get_overlapping_areas().size() >= 1:
+		$Btn.disabled = false
+		if $Btn.is_hovered():
+			set_mouse_cursor_type()
+	else:
+		$Btn.disabled = true
 
 func _on_DetectPlayer_area_entered(area):
 	if $Btn.is_hovered():
@@ -46,4 +57,4 @@ func _on_DetectPlayer_area_entered(area):
 
 func _on_DetectPlayer_area_exited(area):
 	if $Btn.is_hovered():
-		set_mouse_cursor_type()
+		Input.set_custom_mouse_cursor(Images.normal_mouse)

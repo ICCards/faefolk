@@ -1,6 +1,5 @@
-[gd_scene load_steps=232 format=2]
+[gd_scene load_steps=231 format=2]
 
-[ext_resource path="res://Assets/Images/User interface/inventory/collections/collections-overlay.png" type="Texture" id=1]
 [ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=2]
 [ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" type="Script" id=4]
@@ -1016,14 +1015,6 @@ margin_bottom = 240.0
 rect_scale = Vector2( 3, 3 )
 mouse_filter = 2
 texture = ExtResource( 6 )
-stretch_mode = 4
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 1 )
 stretch_mode = 4
 
 [node name="SideTabButtons" type="VBoxContainer" parent="."]

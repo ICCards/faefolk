@@ -24,6 +24,7 @@ var world = {
 	"ore": {},
 	"flower": {},
 	"tall_grass": {},
+	"forage": {},
 	"crops": {},
 	"tiles": {},
 	"placables": {}
@@ -55,8 +56,8 @@ func _ready() -> void:
 func start():
 	load_world_data()
 	load_caves_data()
-	add_tiles_to_chunks()
-	add_nature_objects_to_chunks()
+#	add_tiles_to_chunks()
+#	add_nature_objects_to_chunks()
 
 func advance_crops():
 	for id in world["crops"]: # if crop is watered, advance a day
@@ -107,7 +108,10 @@ func load_caves_data():
 		else:
 			printerr("corrupted caves data")
 	else:
-		printerr("caves data not found")
+		var caves_file = File.new()
+		caves_file.open(caves_file_name,File.WRITE)
+		caves_file.store_string(to_json(caves))
+		caves_file.close()
 	
 func set_hoed_tile(loc):
 	world["tiles"][str(loc)] = "h"
@@ -500,6 +504,7 @@ var a1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a2 = {
 	"ocean": [],
@@ -516,6 +521,7 @@ var a2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a3 = {
 	"ocean": [],
@@ -532,6 +538,7 @@ var a3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a4 = {
 	"ocean": [],
@@ -548,6 +555,7 @@ var a4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a5 = {
 	"ocean": [],
@@ -564,6 +572,7 @@ var a5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a6 = {
 	"ocean": [],
@@ -580,6 +589,7 @@ var a6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a7 = {
 	"ocean": [],
@@ -596,6 +606,7 @@ var a7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a8 = {
 	"ocean": [],
@@ -612,6 +623,7 @@ var a8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a9 = {
 	"ocean": [],
@@ -628,6 +640,7 @@ var a9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a10 = {
 	"ocean": [],
@@ -644,6 +657,7 @@ var a10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a11 = {
 	"ocean": [],
@@ -660,6 +674,7 @@ var a11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a12 = {
 	"ocean": [],
@@ -676,6 +691,7 @@ var a12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b1 = {
 	"ocean": [],
@@ -692,6 +708,7 @@ var b1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b2 = {
 	"ocean": [],
@@ -708,6 +725,7 @@ var b2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b3 = {
 	"ocean": [],
@@ -724,6 +742,7 @@ var b3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b4 = {
 	"ocean": [],
@@ -740,6 +759,7 @@ var b4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b5 = {
 	"ocean": [],
@@ -756,6 +776,7 @@ var b5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b6 = {
 	"ocean": [],
@@ -772,6 +793,7 @@ var b6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b7 = {
 	"ocean": [],
@@ -788,6 +810,7 @@ var b7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b8 = {
 	"ocean": [],
@@ -804,6 +827,7 @@ var b8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b9 = {
 	"ocean": [],
@@ -820,6 +844,7 @@ var b9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b10 = {
 	"ocean": [],
@@ -836,6 +861,7 @@ var b10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b11 = {
 	"ocean": [],
@@ -852,6 +878,7 @@ var b11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b12 = {
 	"ocean": [],
@@ -868,6 +895,7 @@ var b12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c1 = {
 	"ocean": [],
@@ -884,6 +912,7 @@ var c1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c2 = {
 	"ocean": [],
@@ -900,6 +929,7 @@ var c2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c3 = {
 	"ocean": [],
@@ -916,6 +946,7 @@ var c3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c4 = {
 	"ocean": [],
@@ -932,6 +963,7 @@ var c4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c5 = {
 	"ocean": [],
@@ -948,6 +980,7 @@ var c5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c6 = {
 	"ocean": [],
@@ -964,6 +997,7 @@ var c6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c7 = {
 	"ocean": [],
@@ -980,6 +1014,7 @@ var c7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c8 = {
 	"ocean": [],
@@ -996,6 +1031,7 @@ var c8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c9 = {
 	"ocean": [],
@@ -1012,6 +1048,7 @@ var c9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c10 = {
 	"ocean": [],
@@ -1028,6 +1065,7 @@ var c10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c11 = {
 	"ocean": [],
@@ -1044,6 +1082,7 @@ var c11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c12 = {
 	"ocean": [],
@@ -1060,6 +1099,7 @@ var c12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d1 = {
 	"ocean": [],
@@ -1076,6 +1116,7 @@ var d1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d2 = {
 	"ocean": [],
@@ -1092,6 +1133,7 @@ var d2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d3 = {
 	"ocean": [],
@@ -1108,6 +1150,7 @@ var d3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d4 = {
 	"ocean": [],
@@ -1124,6 +1167,7 @@ var d4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d5 = {
 	"ocean": [],
@@ -1140,6 +1184,7 @@ var d5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d6 = {
 	"ocean": [],
@@ -1156,6 +1201,7 @@ var d6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d7 = {
 	"ocean": [],
@@ -1172,6 +1218,7 @@ var d7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d8 = {
 	"ocean": [],
@@ -1188,6 +1235,7 @@ var d8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d9 = {
 	"ocean": [],
@@ -1204,6 +1252,7 @@ var d9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d10 = {
 	"ocean": [],
@@ -1220,6 +1269,7 @@ var d10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d11 = {
 	"ocean": [],
@@ -1236,6 +1286,7 @@ var d11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d12 = {
 	"ocean": [],
@@ -1252,6 +1303,7 @@ var d12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e1 = {
 	"ocean": [],
@@ -1268,6 +1320,7 @@ var e1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e2 = {
 	"ocean": [],
@@ -1284,6 +1337,7 @@ var e2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e3 = {
 	"ocean": [],
@@ -1300,6 +1354,7 @@ var e3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e4 = {
 	"ocean": [],
@@ -1316,6 +1371,7 @@ var e4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e5 = {
 	"ocean": [],
@@ -1332,6 +1388,7 @@ var e5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e6 = {
 	"ocean": [],
@@ -1348,6 +1405,7 @@ var e6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e7 = {
 	"ocean": [],
@@ -1364,6 +1422,7 @@ var e7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e8 = {
 	"ocean": [],
@@ -1380,6 +1439,7 @@ var e8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e9 = {
 	"ocean": [],
@@ -1396,6 +1456,7 @@ var e9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e10 = {
 	"ocean": [],
@@ -1412,6 +1473,7 @@ var e10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e11 = {
 	"ocean": [],
@@ -1428,6 +1490,7 @@ var e11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e12 = {
 	"ocean": [],
@@ -1444,6 +1507,7 @@ var e12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f1 = {
 	"ocean": [],
@@ -1460,6 +1524,7 @@ var f1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f2 = {
 	"ocean": [],
@@ -1476,6 +1541,7 @@ var f2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f3 = {
 	"ocean": [],
@@ -1492,6 +1558,7 @@ var f3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f4 = {
 	"ocean": [],
@@ -1508,6 +1575,7 @@ var f4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f5 = {
 	"ocean": [],
@@ -1524,6 +1592,7 @@ var f5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f6 = {
 	"ocean": [],
@@ -1540,6 +1609,7 @@ var f6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f7 = {
 	"ocean": [],
@@ -1556,6 +1626,7 @@ var f7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f8 = {
 	"ocean": [],
@@ -1572,6 +1643,7 @@ var f8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f9 = {
 	"ocean": [],
@@ -1588,6 +1660,7 @@ var f9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f10 = {
 	"ocean": [],
@@ -1604,6 +1677,7 @@ var f10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f11 = {
 	"ocean": [],
@@ -1620,6 +1694,7 @@ var f11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f12 = {
 	"ocean": [],
@@ -1636,6 +1711,7 @@ var f12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g1 = {
 	"ocean": [],
@@ -1652,6 +1728,7 @@ var g1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g2 = {
 	"ocean": [],
@@ -1668,6 +1745,7 @@ var g2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g3 = {
 	"ocean": [],
@@ -1684,6 +1762,7 @@ var g3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g4 = {
 	"ocean": [],
@@ -1700,6 +1779,7 @@ var g4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g5 = {
 	"ocean": [],
@@ -1716,6 +1796,7 @@ var g5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g6 = {
 	"ocean": [],
@@ -1732,6 +1813,7 @@ var g6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g7 = {
 	"ocean": [],
@@ -1748,6 +1830,7 @@ var g7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g8 = {
 	"ocean": [],
@@ -1764,6 +1847,7 @@ var g8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g9 = {
 	"ocean": [],
@@ -1780,6 +1864,7 @@ var g9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g10 = {
 	"ocean": [],
@@ -1796,6 +1881,7 @@ var g10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g11 = {
 	"ocean": [],
@@ -1812,6 +1898,7 @@ var g11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g12 = {
 	"ocean": [],
@@ -1828,6 +1915,7 @@ var g12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h1 = {
 	"ocean": [],
@@ -1844,6 +1932,7 @@ var h1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h2 = {
 	"ocean": [],
@@ -1860,6 +1949,7 @@ var h2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h3 = {
 	"ocean": [],
@@ -1876,6 +1966,7 @@ var h3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h4 = {
 	"ocean": [],
@@ -1892,6 +1983,7 @@ var h4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h5 = {
 	"ocean": [],
@@ -1908,6 +2000,7 @@ var h5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h6 = {
 	"ocean": [],
@@ -1924,6 +2017,7 @@ var h6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h7 = {
 	"ocean": [],
@@ -1940,6 +2034,7 @@ var h7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h8 = {
 	"ocean": [],
@@ -1956,6 +2051,7 @@ var h8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h9 = {
 	"ocean": [],
@@ -1972,6 +2068,7 @@ var h9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h10 = {
 	"ocean": [],
@@ -1988,6 +2085,7 @@ var h10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h11 = {
 	"ocean": [],
@@ -2004,6 +2102,7 @@ var h11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h12 = {
 	"ocean": [],
@@ -2020,6 +2119,7 @@ var h12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i1 = {
 	"ocean": [],
@@ -2036,6 +2136,7 @@ var i1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i2 = {
 	"ocean": [],
@@ -2052,6 +2153,7 @@ var i2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i3 = {
 	"ocean": [],
@@ -2068,6 +2170,7 @@ var i3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i4 = {
 	"ocean": [],
@@ -2084,6 +2187,7 @@ var i4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i5 = {
 	"ocean": [],
@@ -2100,6 +2204,7 @@ var i5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i6 = {
 	"ocean": [],
@@ -2116,6 +2221,7 @@ var i6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i7 = {
 	"ocean": [],
@@ -2132,6 +2238,7 @@ var i7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i8 = {
 	"ocean": [],
@@ -2148,6 +2255,7 @@ var i8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i9 = {
 	"ocean": [],
@@ -2164,6 +2272,7 @@ var i9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i10 = {
 	"ocean": [],
@@ -2180,6 +2289,7 @@ var i10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i11 = {
 	"ocean": [],
@@ -2196,6 +2306,7 @@ var i11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i12 = {
 	"ocean": [],
@@ -2212,6 +2323,7 @@ var i12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j1 = {
 	"ocean": [],
@@ -2228,6 +2340,7 @@ var j1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j2 = {
 	"ocean": [],
@@ -2244,6 +2357,7 @@ var j2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j3 = {
 	"ocean": [],
@@ -2260,6 +2374,7 @@ var j3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j4 = {
 	"ocean": [],
@@ -2276,6 +2391,7 @@ var j4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j5 = {
 	"ocean": [],
@@ -2292,6 +2408,7 @@ var j5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j6 = {
 	"ocean": [],
@@ -2308,6 +2425,7 @@ var j6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j7 = {
 	"ocean": [],
@@ -2324,6 +2442,7 @@ var j7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j8 = {
 	"ocean": [],
@@ -2340,6 +2459,7 @@ var j8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j9 = {
 	"ocean": [],
@@ -2356,6 +2476,7 @@ var j9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j10 = {
 	"ocean": [],
@@ -2372,6 +2493,7 @@ var j10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j11 = {
 	"ocean": [],
@@ -2388,6 +2510,7 @@ var j11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j12 = {
 	"ocean": [],
@@ -2404,6 +2527,7 @@ var j12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k1 = {
 	"ocean": [],
@@ -2420,6 +2544,7 @@ var k1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k2 = {
 	"ocean": [],
@@ -2436,6 +2561,7 @@ var k2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k3 = {
 	"ocean": [],
@@ -2452,6 +2578,7 @@ var k3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k4 = {
 	"ocean": [],
@@ -2468,6 +2595,7 @@ var k4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k5 = {
 	"ocean": [],
@@ -2484,6 +2612,7 @@ var k5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k6 = {
 	"ocean": [],
@@ -2500,6 +2629,7 @@ var k6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k7 = {
 	"ocean": [],
@@ -2516,6 +2646,7 @@ var k7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k8 = {
 	"ocean": [],
@@ -2532,6 +2663,7 @@ var k8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k9 = {
 	"ocean": [],
@@ -2548,6 +2680,7 @@ var k9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k10 = {
 	"ocean": [],
@@ -2564,6 +2697,7 @@ var k10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k11 = {
 	"ocean": [],
@@ -2580,6 +2714,7 @@ var k11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k12 = {
 	"ocean": [],
@@ -2596,6 +2731,7 @@ var k12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l1 = {
 	"ocean": [],
@@ -2612,6 +2748,7 @@ var l1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l2 = {
 	"ocean": [],
@@ -2628,6 +2765,7 @@ var l2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l3 = {
 	"ocean": [],
@@ -2644,6 +2782,7 @@ var l3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l4 = {
 	"ocean": [],
@@ -2660,6 +2799,7 @@ var l4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l5 = {
 	"ocean": [],
@@ -2676,6 +2816,7 @@ var l5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l6 = {
 	"ocean": [],
@@ -2692,6 +2833,7 @@ var l6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l7 = {
 	"ocean": [],
@@ -2708,6 +2850,7 @@ var l7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l8 = {
 	"ocean": [],
@@ -2724,6 +2867,7 @@ var l8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l9 = {
 	"ocean": [],
@@ -2740,6 +2884,7 @@ var l9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l10 = {
 	"ocean": [],
@@ -2756,6 +2901,7 @@ var l10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l11 = {
 	"ocean": [],
@@ -2772,6 +2918,7 @@ var l11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l12 = {
 	"ocean": [],
@@ -2788,6 +2935,7 @@ var l12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 func add_tile_to_chunk(type, loc):
 	var column
