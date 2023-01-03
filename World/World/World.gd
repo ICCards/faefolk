@@ -63,6 +63,7 @@ func build_world():
 	$BuildTerrain/BuildNature.start()
 	$WorldMap.buildMap()
 	spawn_initial_animals()
+	$SpawnAnimalTimer.start()
 
 func advance_down_cave_level():
 	if not is_changing_scene:
@@ -110,51 +111,12 @@ func spawn_initial_animals():
 		spawnRandomBear()
 	for i in range(30):
 		spawnRandomWolf()
-	yield(get_tree().create_timer(2.0), "timeout")
-
-
-func set_water_tiles():
-	#var count = 0
-	for x in range(1000): # fill ocean
-		for y in range(1000):
-			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
-				wetSand.set_cell(x, y, 0)
-				waves.set_cell(x, y, 5)
-				shallow_ocean.set_cell(x,y,0)
-				top_ocean.set_cell(x,y,0)
-				deep_ocean.set_cell(x,y,0)
-				validTiles.set_cell(x, y, -1)
-	for loc in waves.get_used_cells(): # remove outer layer to show wet sand
-		if sand.get_cellv(loc+Vector2(1,0)) != -1 or sand.get_cellv(loc+Vector2(-1,0)) != -1 or sand.get_cellv(loc+Vector2(0,1)) != -1 or sand.get_cellv(loc+Vector2(0,-1)) != -1:
-			waves.set_cellv(loc, -1)
-			shallow_ocean.set_cellv(loc,-1)
-			deep_ocean.set_cellv(loc,-1)
-			top_ocean.set_cellv(loc,-1)
-	for loc in wetSand.get_used_cells(): # add outer layer to show wet sand
-		if wetSand.get_cellv(loc+Vector2(1,0)) != -1 or wetSand.get_cellv(loc+Vector2(-1,0)) != -1 or wetSand.get_cellv(loc+Vector2(0,1)) != -1 or wetSand.get_cellv(loc+Vector2(0,-1)) != -1:
-			wetSand.set_cellv(loc+Vector2(1,0), 0)
-			wetSand.set_cellv(loc+Vector2(-1,0), 0)
-			wetSand.set_cellv(loc+Vector2(0,1), 0)
-			wetSand.set_cellv(loc+Vector2(0,-1), 0)
-	for loc in waves.get_used_cells(): # remove outer layer to show wet sand
-		if wetSand.get_cellv(loc+Vector2(1,0)) != -1 or wetSand.get_cellv(loc+Vector2(-1,0)) != -1 or wetSand.get_cellv(loc+Vector2(0,1)) != -1 or wetSand.get_cellv(loc+Vector2(0,-1)) != -1:
-			wetSand.set_cellv(loc+Vector2(1,0), 0)
-			wetSand.set_cellv(loc+Vector2(-1,0), 0)
-			wetSand.set_cellv(loc+Vector2(0,1), 0)
-			wetSand.set_cellv(loc+Vector2(0,-1), 0)
-	for loc in shallow_ocean.get_used_cells():
-		for i in range(6): # shallow depth length
-			if shallow_ocean.get_cellv(loc+Vector2(i,0)) == -1 or shallow_ocean.get_cellv(loc+Vector2(-i,0)) == -1 or shallow_ocean.get_cellv(loc+Vector2(0,i)) == -1 or shallow_ocean.get_cellv(loc+Vector2(0,-i)) == -1:
-				deep_ocean.set_cellv(loc+Vector2(1,0), -1)
-				deep_ocean.set_cellv(loc+Vector2(-1,0), -1)
-				deep_ocean.set_cellv(loc+Vector2(0,1), -1)
-				deep_ocean.set_cellv(loc+Vector2(0,-1), -1)
 
 
 func returnValidSpawnLocation():
 	rng.randomize()
 	var tempLoc = Vector2(rng.randi_range(100, 900), rng.randi_range(100, 900))
-	if validTiles.get_cellv(tempLoc) != -1 and not MapData.world["ocean"].has(str(tempLoc)) and (tempLoc*32).distance_to(Server.player_node.global_position) > 200:
+	if validTiles.get_cellv(tempLoc) != -1 and not MapData.world["ocean"].has(str(tempLoc)):
 		return tempLoc
 	return null
 
@@ -218,3 +180,8 @@ func spawnRandomDeer():
 			deer.global_position = loc*32
 			num_deer += 1
 			yield(get_tree(), "idle_frame")
+
+func _on_SpawnAnimalTimer_timeout():
+	spawnRandomBoar()
+	spawnRandomBear()
+	spawnRandomWolf()

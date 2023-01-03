@@ -148,7 +148,7 @@ func hit(tool_name):
 		$EnemyFrozenState.start(3)
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.start()
-	_end_chase_state_timer.start()
+	_end_chase_state_timer.start(20)
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
@@ -223,7 +223,7 @@ func start_chase_state():
 	navigation_agent.max_speed = 300
 	_idle_timer.stop()
 	_chase_timer.start()
-	_end_chase_state_timer.start()
+	_end_chase_state_timer.start(20)
 	chasing = true
 	state = CHASE
 
@@ -237,7 +237,12 @@ func end_chase_state():
 	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func _on_EndChaseState_timeout():
-	end_chase_state()
+	if not $DetectPlayer/CollisionShape2D.disabled:
+		_end_chase_state_timer.start(5)
+		$DetectPlayer/CollisionShape2D.set_deferred("disabled", true)
+		end_chase_state()
+	else:
+		$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
 
 func play_groan_sound_effect():
 	rng.randomize()
@@ -263,6 +268,8 @@ func _on_VisibilityNotifier2D_screen_entered():
 	if chasing:
 		start_sound_effects()
 	show()
+	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position)) != -1:
+		queue_free()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if playing_sound_effect:

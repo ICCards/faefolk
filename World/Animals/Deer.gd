@@ -259,6 +259,8 @@ func _on_VisibilityNotifier2D_screen_entered():
 	if chasing:
 		start_sound_effects()
 	show()
+	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position)) != -1:
+		queue_free()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if playing_sound_effect:

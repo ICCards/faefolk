@@ -104,6 +104,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 0.552941 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SavingProgress:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=21]
 resource_name = "sleep"
@@ -131,6 +143,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 0.552941 ), Color( 0, 0, 0, 0.552941 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SavingProgress:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.5, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="SpriteFrames" id=22]
@@ -198,16 +222,25 @@ visible = false
 
 [node name="SleepEffect" type="ColorRect" parent="."]
 visible = false
-margin_left = -93.0
-margin_top = -55.0
-margin_right = 2044.0
-margin_bottom = 1182.0
+margin_right = 1280.0
+margin_bottom = 720.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 0.552941 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SleepEffect"]
 anims/RESET = SubResource( 20 )
 anims/sleep = SubResource( 21 )
+
+[node name="SavingProgress" type="RichTextLabel" parent="SleepEffect"]
+visible = false
+margin_left = 20.0
+margin_top = 640.0
+margin_right = 357.0
+margin_bottom = 710.0
+theme = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[wave]Saving progress"
+text = "Saving progress"
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
@@ -313,8 +346,17 @@ margin_bottom = 720.0
 position = Vector2( 671, 374 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 22 )
-frame = 2
 playing = true
+
+[node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
+margin_left = 20.0
+margin_top = 640.0
+margin_right = 357.0
+margin_bottom = 710.0
+theme = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[wave]Saving progress"
+text = "Saving progress"
 
 [node name="LoadingScreen" parent="." instance=ExtResource( 4 )]
 visible = false

@@ -172,6 +172,8 @@ func _on_RunStateTimer_timeout():
 
 func _on_VisibilityNotifier2D_screen_entered():
 	show()
+	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position)) != -1:
+		queue_free()
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
 

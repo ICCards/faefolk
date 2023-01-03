@@ -157,6 +157,10 @@ func sleep(sleeping_bag_direction, pos):
 		elif sleeping_bag_direction == "up":
 			get_parent().composite_sprites.rotation_degrees = 180
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
+		yield(get_tree(), "idle_frame")
+		MapData.save_map_data()
+		yield(get_tree(), "idle_frame")
+		PlayerData.save_player_data()
 		yield(get_parent().user_interface.get_node("SleepEffect/AnimationPlayer"), "animation_finished")
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = str(pos/32)
