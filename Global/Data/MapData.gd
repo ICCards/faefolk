@@ -56,8 +56,8 @@ func _ready() -> void:
 func start():
 	load_world_data()
 	load_caves_data()
-#	add_tiles_to_chunks()
-#	add_nature_objects_to_chunks()
+	add_tiles_to_chunks()
+	add_nature_objects_to_chunks()
 
 func advance_crops():
 	for id in world["crops"]: # if crop is watered, advance a day
