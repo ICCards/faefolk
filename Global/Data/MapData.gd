@@ -2,6 +2,8 @@ extends Node
 
 signal refresh_crops
 
+var game_state: GameState
+
 var world_file_name = "res://JSONData/world.json"
 var caves_file_name = "res://JSONData/caves.json"
 
@@ -49,13 +51,15 @@ var caves = {"Cave 1-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},
 
 func _ready() -> void:
 	var file = File.new()
-	if (file.file_exists("res://JSONData/world.json")):
-		start()
+	if GameState.save_exists():
+		add_world_data_to_chunks()
 	PlayerData.connect("set_day", self, "advance_crops")
 
-func start():
-	load_world_data()
-	load_caves_data()
+func add_world_data_to_chunks():
+	game_state = GameState.new()
+	game_state.load_state()
+	caves = game_state.cave_state
+	world = game_state.world_state
 	add_tiles_to_chunks()
 	add_nature_objects_to_chunks()
 
@@ -72,46 +76,47 @@ func advance_crops():
 	emit_signal("refresh_crops")
 
 func save_map_data():
-	var world_file = File.new()
-	world_file.open(world_file_name,File.WRITE)
-	world_file.store_string(to_json(world))
-	world_file.close()
-	var caves_file = File.new()
-	caves_file.open(caves_file_name,File.WRITE)
-	caves_file.store_string(to_json(caves))
-	caves_file.close()
-	print("saved map data")
+	pass
+#	var world_file = File.new()
+#	world_file.open(world_file_name,File.WRITE)
+#	world_file.store_string(to_json(world))
+#	world_file.close()
+#	var caves_file = File.new()
+#	caves_file.open(caves_file_name,File.WRITE)
+#	caves_file.store_string(to_json(caves))
+#	caves_file.close()
+#	print("saved map data")
 
-func load_world_data():
-	var file = File.new()
-	if(file.file_exists(world_file_name)):
-		file.open(world_file_name,File.READ)
-		var data = parse_json(file.get_as_text())
-		file.close()
-		if(typeof(data) == TYPE_DICTIONARY):
-			print("loaded world data")
-			world = data
-		else:
-			printerr("corrupted world data")
-	else:
-		printerr("world data not found")
-
-func load_caves_data():
-	var file = File.new()
-	if(file.file_exists(caves_file_name)):
-		file.open(caves_file_name,File.READ)
-		var data = parse_json(file.get_as_text())
-		file.close()
-		if(typeof(data) == TYPE_DICTIONARY):
-			print("loaded caves data")
-			caves = data
-		else:
-			printerr("corrupted caves data")
-	else:
-		var caves_file = File.new()
-		caves_file.open(caves_file_name,File.WRITE)
-		caves_file.store_string(to_json(caves))
-		caves_file.close()
+#func load_world_data():
+#	var file = File.new()
+#	if(file.file_exists(world_file_name)):
+#		file.open(world_file_name,File.READ)
+#		var data = parse_json(file.get_as_text())
+#		file.close()
+#		if(typeof(data) == TYPE_DICTIONARY):
+#			print("loaded world data")
+#			world = data
+#		else:
+#			printerr("corrupted world data")
+#	else:
+#		printerr("world data not found")
+#
+#func load_caves_data():
+#	var file = File.new()
+#	if(file.file_exists(caves_file_name)):
+#		file.open(caves_file_name,File.READ)
+#		var data = parse_json(file.get_as_text())
+#		file.close()
+#		if(typeof(data) == TYPE_DICTIONARY):
+#			print("loaded caves data")
+#			caves = data
+#		else:
+#			printerr("corrupted caves data")
+#	else:
+#		var caves_file = File.new()
+#		caves_file.open(caves_file_name,File.WRITE)
+#		caves_file.store_string(to_json(caves))
+#		caves_file.close()
 	
 func set_hoed_tile(loc):
 	world["tiles"][str(loc)] = "h"

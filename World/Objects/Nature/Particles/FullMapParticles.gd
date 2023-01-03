@@ -3,9 +3,10 @@ extends Node2D
 func _ready():
 	PlayerData.connect("set_day", self, "play_set_day")
 	PlayerData.connect("set_night", self, "play_set_night")
-	if PlayerData.player_data["time_hours"] >= 18 or PlayerData.player_data["time_hours"] < 6:
-		$Clouds.emitting = false
-		$LargeClouds.emitting = false
+	if PlayerData.player_data:
+		if PlayerData.player_data["time_hours"] >= 18 or PlayerData.player_data["time_hours"] < 6:
+			$Clouds.emitting = false
+			$LargeClouds.emitting = false
 
 
 func _process(delta):

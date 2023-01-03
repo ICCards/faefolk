@@ -25,6 +25,8 @@ var object_id
 
 var is_opening_chest: bool = false
 
+var game_state: GameState
+
 enum {
 	MOVEMENT, 
 	SWINGING,
@@ -41,10 +43,10 @@ func _ready():
 
 func save_player_data(exit_to_main_menu):
 	$LoadingIndicator.show()
-	yield(get_tree(), "idle_frame")
-	MapData.save_map_data()
-	yield(get_tree(), "idle_frame")
-	PlayerData.save_player_data()
+	game_state = GameState.new()
+	game_state.save_player_state(PlayerData.player_data)
+	game_state.save_world_state(MapData.world)
+	game_state.save_cave_state(MapData.caves)
 	yield(get_tree().create_timer(3.0), "timeout")
 	$LoadingIndicator.hide()
 	if exit_to_main_menu:

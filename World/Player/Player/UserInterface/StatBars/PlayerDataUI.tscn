@@ -58,6 +58,7 @@ nine_patch_stretch = true
 
 [node name="ManaTimer" type="Timer" parent="EnergyBars"]
 wait_time = 5.0
+autostart = true
 
 [node name="DateTime" type="Control" parent="."]
 margin_left = 251.333

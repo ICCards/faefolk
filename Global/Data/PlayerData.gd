@@ -34,6 +34,8 @@ var InventorySlots
 var HotbarSlots
 var active_item_slot = 0
 
+var game_state: GameState
+
 var player_data = {}
 var starting_player_data = {
 	"respawn_location": null,
@@ -305,31 +307,27 @@ var starting_player_data = {
 	}
 }
 
-func _ready():
-	load_player_data()
-
+#func _ready():
+#	load_player_data()
+#
 func save_player_data():
-	var file = File.new()
-	file.open(file_name,File.WRITE)
-	file.store_string(to_json(player_data))
-	file.close()
-	print("saved player data")
-	
-func load_player_data():
-	var file = File.new()
-	if(file.file_exists(file_name)):
-		file.open(file_name,File.READ)
-		var data = parse_json(file.get_as_text())
-		file.close()
-		if(typeof(data) == TYPE_DICTIONARY):
-			print("LOADED PLAYER DATA")
-			player_data = data
-		else:
-			printerr("corrupted player data!")
-	else:
-		#No File, so lets save the default player data now
-		player_data = starting_player_data
-		save_player_data()
+	game_state = GameState.new()
+	game_state.save_player_state(player_data)
+#	var file = File.new()
+#	file.open(file_name,File.WRITE)
+#	file.store_string(to_json(player_data))
+#	file.close()
+#	print("saved player data")
+
+#func load_player_data():
+#	if GameState.save_exists():
+#		game_state = GameState.new()
+#		game_state.load_state()
+#		player_data = game_state.player_state
+#	else:
+#		game_state = GameState.new()
+#		game_state.save_player_state(starting_player_data)
+#		player_data = starting_player_data
 
 
 func eat(food_name):

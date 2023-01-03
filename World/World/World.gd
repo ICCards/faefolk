@@ -45,17 +45,24 @@ var num_wolves = 0
 
 var is_changing_scene: bool = false
 
+var game_state: GameState
+
 func _ready():
 	Server.world = self
-	var file = File.new()
-	if (file.file_exists("res://JSONData/world.json")):
+	create_or_load_world()
+
+func create_or_load_world():
+	if GameState.save_exists(): # Load world
+#		game_state = GameState.new()
+#		game_state.load_state()
+#		MapData.world = game_state.world_state
+#		MapData.caves = game_state.cave_state
 		build_world()
-	else:
+	else: # Initial launch
 		var loadingScreen = GenerateWorldLoadingScreen.instance()
 		loadingScreen.name = "Loading"
 		add_child(loadingScreen)
 		GenerateNewWorld.build()
-
 
 func build_world():
 	buildMap(MapData.world)

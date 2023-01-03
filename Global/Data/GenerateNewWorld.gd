@@ -1,5 +1,7 @@
 extends Node
 
+var game_state: GameState
+
 var plains = []
 var forest = []
 var beach = []
@@ -62,10 +64,10 @@ func build():
 	generate_beach_forage()
 	yield(get_tree().create_timer(1.0), "timeout")
 	get_node("/root/World/Loading").set_phase("Saving data")
-	save_world_data()
+	save_starting_world_data()
 	yield(get_tree().create_timer(1.0), "timeout")
 	get_node("/root/World/Loading").queue_free()
-	MapData.start()
+	MapData.add_world_data_to_chunks()
 	Server.world.build_world()
 	
 func generate_beach_forage():
@@ -198,13 +200,13 @@ func is_border_tile(_pos, _tiles):
 	return false
 
 
-func save_world_data():
-	var file = File.new()
-	file.open(file_name,File.WRITE)
-	file.store_string(to_json(MapData.world))
-	file.close()
-	print("saved")
-	pass
+func save_starting_world_data():
+	game_state = GameState.new()
+	game_state.save_world_state(MapData.world)
+	game_state.save_cave_state(MapData.caves)
+	game_state.save_player_state(PlayerData.starting_player_data)
+	PlayerData.player_data = PlayerData.starting_player_data
+
 
 func generate_flowers(locations,biome):
 	print("Building "+biome+" Flowers")

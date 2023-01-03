@@ -142,6 +142,7 @@ func fish():
 		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		get_parent().call_deferred("add_child", fishing)
 
+var game_state: GameState
 
 func sleep(sleeping_bag_direction, pos):
 	if get_parent().state != get_parent().SLEEPING:
@@ -157,13 +158,13 @@ func sleep(sleeping_bag_direction, pos):
 		elif sleeping_bag_direction == "up":
 			get_parent().composite_sprites.rotation_degrees = 180
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
-		yield(get_tree(), "idle_frame")
-		MapData.save_map_data()
-		yield(get_tree(), "idle_frame")
-		PlayerData.save_player_data()
 		yield(get_parent().user_interface.get_node("SleepEffect/AnimationPlayer"), "animation_finished")
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = str(pos/32)
+		game_state = GameState.new()
+		game_state.save_player_state(PlayerData.player_data)
+		game_state.save_world_state(MapData.world)
+		game_state.save_cave_state(MapData.caves)
 		get_parent().z_index = 0
 		get_parent().composite_sprites.rotation_degrees = 0
 		get_parent().state = get_parent().MOVEMENT

@@ -1,5 +1,7 @@
 extends Control
 
+var game_state: GameState
+
 var changing_scene_active = false
 var hovered_button = ""
 #var connect_callback = JavaScript.create_callback(self, "_connect_plug")
@@ -105,7 +107,12 @@ func _on_PlayBtn_pressed():
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 		PlayerData.spawn_at_respawn_location = true
-		if PlayerData.player_data["respawn_scene"]:
+		if GameState.save_exists():
+			game_state = GameState.new()
+			game_state.load_state()
+			PlayerData.player_data = game_state.player_state
+			MapData.world = game_state.world_state
+			MapData.caves = game_state.cave_state
 			SceneChanger.goto_scene(PlayerData.player_data["respawn_scene"])
 		else:
 			SceneChanger.goto_scene("res://World/World/World.tscn")
