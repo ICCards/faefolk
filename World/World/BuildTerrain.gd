@@ -26,6 +26,8 @@ onready var IcPuppy = preload("res://World/Player/Pet/IcPuppy.tscn")
 
 var spawn_loc
 
+var game_state: GameState
+
 func start():
 	spawn_player()
 	$BuildTerrain.start()
@@ -48,8 +50,11 @@ func spawn_player():
 		yield(get_tree(), "idle_frame")
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = spawn_loc
-		
-		
+		var game_state = GameState.new()
+		game_state.player_state = PlayerData.player_data
+		game_state.world_state = MapData.world
+		game_state.cave_state = MapData.caves
+		game_state.save_state()
 	player.position = Util.string_to_vector2(spawn_loc)*32
 	PlayerData.spawn_at_respawn_location = false
 	PlayerData.spawn_at_cave_exit = false

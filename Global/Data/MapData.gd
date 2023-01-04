@@ -57,6 +57,7 @@ func _ready() -> void:
 
 func add_world_data_to_chunks():
 	if not is_world_data_in_chunks:
+		print("ADDING TO CHUNKS")
 		is_world_data_in_chunks = true
 		add_tiles_to_chunks()
 		add_nature_objects_to_chunks()

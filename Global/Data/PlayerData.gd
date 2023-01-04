@@ -36,7 +36,6 @@ var active_item_slot = 0
 
 var game_state: GameState
 
-var player_data = {}
 var starting_player_data = {
 	"respawn_location": null,
 	"respawn_scene" : null,
@@ -57,8 +56,8 @@ var starting_player_data = {
 #		"8": ["furnace", 10, null],
 	},
 	"inventory": {
-#			"18": ["wood", 999, null],
-#			"19": ["stone", 999, null],
+			"18": ["wood", 999, null],
+			"19": ["stone", 999, null],
 #			"17": ["iron ore", 99, null],
 #			"13": ["bronze ore", 99, null],
 #			"15": ["wheat flour", 99, null],
@@ -306,6 +305,9 @@ var starting_player_data = {
 		}
 	}
 }
+
+var player_data = {}
+
 
 #func _ready():
 #	load_player_data()
