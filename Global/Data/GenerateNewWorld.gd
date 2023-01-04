@@ -202,9 +202,13 @@ func is_border_tile(_pos, _tiles):
 
 func save_starting_world_data():
 	game_state = GameState.new()
-	game_state.save_world_state(MapData.world)
-	game_state.save_cave_state(MapData.caves)
-	game_state.save_player_state(PlayerData.starting_player_data)
+#	game_state.save_world_state(MapData.world)
+#	game_state.save_cave_state(MapData.caves)
+#	game_state.save_player_state(PlayerData.starting_player_data)
+	game_state.world_state = MapData.world
+	game_state.cave_state = MapData.caves
+	game_state.player_state = PlayerData.starting_player_data
+	game_state.save_state()
 	PlayerData.player_data = PlayerData.starting_player_data
 
 

@@ -48,7 +48,8 @@ func spawn_player():
 		yield(get_tree(), "idle_frame")
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = spawn_loc
-		PlayerData.save_player_data()
+		
+		
 	player.position = Util.string_to_vector2(spawn_loc)*32
 	PlayerData.spawn_at_respawn_location = false
 	PlayerData.spawn_at_cave_exit = false

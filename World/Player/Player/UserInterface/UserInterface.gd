@@ -44,14 +44,14 @@ func _ready():
 func save_player_data(exit_to_main_menu):
 	$LoadingIndicator.show()
 	game_state = GameState.new()
-	game_state.save_player_state(PlayerData.player_data)
-	game_state.save_world_state(MapData.world)
-	game_state.save_cave_state(MapData.caves)
+	game_state.world_state = MapData.world
+	game_state.cave_state = MapData.caves
+	game_state.player_state = PlayerData.player_data
+	game_state.save_state()
 	yield(get_tree().create_timer(3.0), "timeout")
 	$LoadingIndicator.hide()
 	if exit_to_main_menu:
 		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
-
 
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:

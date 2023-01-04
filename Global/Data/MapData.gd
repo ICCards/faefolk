@@ -9,7 +9,7 @@ var caves_file_name = "res://JSONData/caves.json"
 
 var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
-var is_world_built = false
+var is_world_data_in_chunks = false
 
 var world = {
 	"ocean": [],
@@ -50,18 +50,16 @@ var caves = {"Cave 1-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},
 "Cave 2-Boss":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}}}
 
 func _ready() -> void:
-	var file = File.new()
-	if GameState.save_exists():
-		add_world_data_to_chunks()
+#	var file = File.new()
+#	if GameState.save_exists():
+#		add_world_data_to_chunks()
 	PlayerData.connect("set_day", self, "advance_crops")
 
 func add_world_data_to_chunks():
-	game_state = GameState.new()
-	game_state.load_state()
-	caves = game_state.cave_state
-	world = game_state.world_state
-	add_tiles_to_chunks()
-	add_nature_objects_to_chunks()
+	if not is_world_data_in_chunks:
+		is_world_data_in_chunks = true
+		add_tiles_to_chunks()
+		add_nature_objects_to_chunks()
 
 func advance_crops():
 	for id in world["crops"]: # if crop is watered, advance a day

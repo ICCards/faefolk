@@ -310,9 +310,9 @@ var starting_player_data = {
 #func _ready():
 #	load_player_data()
 #
-func save_player_data():
-	game_state = GameState.new()
-	game_state.save_player_state(player_data)
+#func save_player_data():
+#	game_state = GameState.new()
+#	game_state.save_player_state(player_data)
 #	var file = File.new()
 #	file.open(file_name,File.WRITE)
 #	file.store_string(to_json(player_data))

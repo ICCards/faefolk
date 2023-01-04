@@ -162,9 +162,10 @@ func sleep(sleeping_bag_direction, pos):
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = str(pos/32)
 		game_state = GameState.new()
-		game_state.save_player_state(PlayerData.player_data)
-		game_state.save_world_state(MapData.world)
-		game_state.save_cave_state(MapData.caves)
+		game_state.world_state = MapData.world
+		game_state.cave_state = MapData.caves
+		game_state.player_state = PlayerData.player_data
+		game_state.save_state()
 		get_parent().z_index = 0
 		get_parent().composite_sprites.rotation_degrees = 0
 		get_parent().state = get_parent().MOVEMENT

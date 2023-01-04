@@ -113,6 +113,8 @@ func _on_PlayBtn_pressed():
 			PlayerData.player_data = game_state.player_state
 			MapData.world = game_state.world_state
 			MapData.caves = game_state.cave_state
+			MapData.add_world_data_to_chunks()
+			print(PlayerData.player_data)
 			SceneChanger.goto_scene(PlayerData.player_data["respawn_scene"])
 		else:
 			SceneChanger.goto_scene("res://World/World/World.tscn")
