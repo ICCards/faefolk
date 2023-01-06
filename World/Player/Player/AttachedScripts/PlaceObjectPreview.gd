@@ -75,7 +75,7 @@ func initialize():
 		state = SLEEPING_BAG
 	elif item_name == "furnace" or item_name == "tool cabinet" or item_name == "stone chest" or item_name == "wood chest" or \
 	item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3" or item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or\
-	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "dresser":
+	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "dresser" or item_name == "brewing table #1" or item_name == "brewing table #2" or item_name == "brewing table #3":
 		state = ROTATABLE
 	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR

@@ -80,7 +80,6 @@ visible = false
 position = Vector2( 461, 465 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 5 )
-frame = 7
 playing = true
 
 [node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
@@ -196,8 +195,8 @@ wait_time = 10.0
 [node name="MenuTitle" parent="." instance=ExtResource( 2 )]
 margin_left = 552.0
 margin_top = 117.0
-margin_right = 868.0
-margin_bottom = 184.0
+margin_right = 915.0
+margin_bottom = 192.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Stove #3"
 

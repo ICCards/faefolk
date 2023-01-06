@@ -32,9 +32,6 @@ var moisture = {}
 
 var file_name = "res://JSONData/world.json"
 
-#func _ready() -> void:
-#	build()
-
 func build():
 	rng.randomize()
 	randomize()

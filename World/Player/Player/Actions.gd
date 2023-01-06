@@ -159,6 +159,9 @@ func sleep(sleeping_bag_direction, pos):
 			get_parent().composite_sprites.rotation_degrees = 180
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
 		yield(get_parent().user_interface.get_node("SleepEffect/AnimationPlayer"), "animation_finished")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = str(pos/32)
 		game_state = GameState.new()

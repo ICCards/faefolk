@@ -1178,13 +1178,28 @@
       "Ingredients": [["wood", 2],["stone", 10]],
       "EnergyHealth": null
   },
-  "house": {
+  "brewing table #1": {
       "ItemCategory": "Placable object",
-      "StackSize": 1,
-      "Description": "Large placable shelter with high durability.",
-      "Ingredients": null,
+      "StackSize": 999,
+      "Description": "Used to create potions. Level 1.",
+      "Ingredients": [["wood", 40]],
       "EnergyHealth": null
   },
+  "brewing table #2": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to create potions. Level 2.",
+      "Ingredients": [["stone", 40]],
+      "EnergyHealth": null
+  },
+  "brewing table #3": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to create potions. Level 3.",
+      "Ingredients": [["iron ingot", 40]],
+      "EnergyHealth": null
+  },
+
   "workbench #1": {
       "ItemCategory": "Placable object",
       "StackSize": 999,

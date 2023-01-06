@@ -25,6 +25,8 @@ var object_id
 
 var is_opening_chest: bool = false
 
+var normal_hotbar_mode: bool = true
+
 var game_state: GameState
 
 enum {
@@ -48,10 +50,26 @@ func save_player_data(exit_to_main_menu):
 	game_state.cave_state = MapData.caves
 	game_state.player_state = PlayerData.player_data
 	game_state.save_state()
-	yield(get_tree().create_timer(3.0), "timeout")
+	yield(get_tree().create_timer(2.0), "timeout")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 	$LoadingIndicator.hide()
 	if exit_to_main_menu:
 		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
+
+func switch_hotbar():
+	if $Hotbar.visible:
+		normal_hotbar_mode = false
+		$Hotbar.hide()
+		$CombatHotbar.initialize()
+		$PlayerDataUI/EnergyBars.hide()
+	else:
+		normal_hotbar_mode = true
+		$Hotbar.initialize_hotbar()
+		$CombatHotbar.hide()
+		$PlayerDataUI/EnergyBars.show()
+		
 
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:
@@ -184,13 +202,21 @@ func close_hotbar_clock_and_stats():
 	PlayerData.interactive_screen_mode = true
 	$Hotbar.hide()
 	$PlayerDataUI.hide()
+	$CombatHotbar.hide()
 
 
 func add_hotbar_clock_and_stats():
 	PlayerData.interactive_screen_mode = false
-	$Hotbar.initialize_hotbar()
-	$PlayerDataUI.show()
-	PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
+	if normal_hotbar_mode:
+		$CombatHotbar.hide()
+		$Hotbar.initialize_hotbar()
+		$PlayerDataUI.show()
+		PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
+	else:
+		$CombatHotbar.initialize()
+		$Hotbar.hide()
+		$PlayerDataUI/DateTime.show()
+		PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
 
 func toggle_menu():
 	if not $Menu.visible:
@@ -202,6 +228,7 @@ func toggle_menu():
 
 
 func show_menu():
+	$CombatHotbar.hide()
 	$Hotbar.hide()
 	$PlayerDataUI.hide()
 	PlayerData.viewInventoryMode = true
@@ -209,8 +236,12 @@ func show_menu():
 
 func hide_menu():
 	PlayerData.viewInventoryMode = false
-	$Hotbar.initialize_hotbar()
-	$PlayerDataUI.show()
+	if normal_hotbar_mode:
+		$PlayerDataUI.show()
+		$Hotbar.initialize_hotbar()
+	else:
+		$PlayerDataUI/DateTime.show()
+		$CombatHotbar.initialize()
 	$Menu.hide()
 	drop_items()
 	get_node("../../").set_held_object()

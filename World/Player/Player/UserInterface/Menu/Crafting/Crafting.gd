@@ -3,7 +3,7 @@ extends Control
 onready var slider = $Slider
 onready var crafting_menu = $CraftingMenu
 
-const MAX_SCROLL_SIZE = 536
+const MAX_SCROLL_SIZE = 605
 
 var hovered_item = null
 var crafting_item = null

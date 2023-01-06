@@ -4,23 +4,21 @@
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
 
 [node name="MenuTitle" type="Label"]
-margin_left = -88.0
-margin_top = -243.0
-margin_right = 228.0
-margin_bottom = -176.0
-rect_scale = Vector2( 0.55, 0.55 )
+margin_right = 365.0
+margin_bottom = 75.0
+rect_scale = Vector2( 0.48, 0.48 )
 theme = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
-text = "Chest"
+text = "Brewing table #3"
 align = 1
 valign = 1
 
 [node name="NamePlate" type="TextureRect" parent="."]
 show_behind_parent = true
-margin_right = 105.0
-margin_bottom = 22.0
+margin_right = 121.0
+margin_bottom = 25.0
 rect_scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 expand = true

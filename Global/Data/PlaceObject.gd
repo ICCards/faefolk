@@ -65,7 +65,7 @@ func place_building_object_in_world(id, item_name, variety , location):
 			object.location = location
 			object.item_name = item_name
 			object.tier = variety
-			object.id = id
+			object.id = str(id)
 			PlacableObjects.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
 			Tiles.remove_valid_tiles(location, Vector2(1,1))
@@ -74,7 +74,7 @@ func place_building_object_in_world(id, item_name, variety , location):
 			object.name = str(id)
 			object.location = location
 			object.item_name = item_name
-			object.id = id
+			object.id = str(id)
 			object.tier = variety
 			PlacableObjects.call_deferred("add_child", object, true)
 			object.global_position = Tiles.wall_tiles.map_to_world(location) + Vector2(16, 16)
@@ -440,6 +440,36 @@ func place_object_in_world(id, item_name, direction, location):
 			Tiles.object_tiles.set_cellv(location, Placables.BARREL)
 		"wood box":
 			Tiles.object_tiles.set_cellv(location, Placables.BOX)
+		"brewing table #1":
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 180)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 181)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 182)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 183)
+		"brewing table #2":
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 184)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 185)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 186)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 187)
+		"brewing table #3":
+			match direction:
+				"down":
+					Tiles.object_tiles.set_cellv(location, 188)
+				"up":
+					Tiles.object_tiles.set_cellv(location, 189)
+				"right":
+					Tiles.object_tiles.set_cellv(location, 190)
+				"left":
+					Tiles.object_tiles.set_cellv(location, 191)
 		"workbench #1":
 			match direction:
 				"down":
