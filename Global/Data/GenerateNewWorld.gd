@@ -45,7 +45,6 @@ var moisture = {}
 
 var file_name = "res://JSONData/world.json"
 
-<<<<<<< HEAD
 #func _ready() -> void:
 #	build()
 
