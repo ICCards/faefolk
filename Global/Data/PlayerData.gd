@@ -33,6 +33,7 @@ const NUM_HOTBAR_SLOTS = 10
 var InventorySlots
 var HotbarSlots
 var active_item_slot = 0
+var active_item_slot_combat_hotbar = 0
 
 var game_state: GameState
 
@@ -48,21 +49,29 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-#		"0": ["iron sword", 1, 100],
-#		"6": ["gold sword", 1, 100],
+		"0": ["iron sword", 1, 100],
+		"1": ["bow", 1, 50],
+		"2": ["arrow", 100, null],
+		"6": ["wind staff", 1, null],
 #		"2": ["wood fishing rod", 1, null],
 #		"3": ["stove #1", 10, null],
 #		"9": ["workbench #2", 10, null],
 #		"8": ["furnace", 10, null],
 	},
 	"inventory": {
-#			"18": ["wood", 999, null],
-#			"19": ["stone", 999, null],
-#			"17": ["iron ore", 99, null],
+			"18": ["wood", 999, null],
+			"19": ["stone", 999, null],
+			"17": ["iron ingot", 99, null],
 #			"13": ["bronze ore", 99, null],
 #			"15": ["wheat flour", 99, null],
 #			"16": ["wheat", 100, null],
 	},
+#	"combat_hotbar": {
+#		"0": "wind",
+#		"1": "wind",
+#		"2": "wind",
+#		"3": "wind",
+#	},
 	"chests": {
 		"Cave 1-1": {
 			"4": ["wheat seeds", 25, null],
@@ -306,7 +315,7 @@ var starting_player_data = {
 	}
 }
 
-var player_data = {}
+var player_data = starting_player_data
 
 
 #func _ready():
@@ -470,6 +479,8 @@ func add_item_to_empty_slot(item, slot, var id = null):
 			player_data["hotbar"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.HOTBAR_INVENTORY:
 			player_data["hotbar"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.COMBAT_HOTBAR:
+			player_data["combat_hotbar"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.CHEST:
@@ -490,6 +501,8 @@ func remove_item(slot, var id = null):
 			player_data["hotbar"].erase(str(slot.slot_index))
 		SlotClass.SlotType.HOTBAR_INVENTORY:
 			player_data["hotbar"].erase(str(slot.slot_index))
+		SlotClass.SlotType.COMBAT_HOTBAR:
+			player_data["combat_hotbar"].erase(str(slot.slot_index))
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"].erase(str(slot.slot_index))
 		SlotClass.SlotType.CHEST:
@@ -509,6 +522,8 @@ func add_item_quantity(slot, quantity_to_add: int, var id = null):
 			player_data["hotbar"][str(slot.slot_index)][1] += quantity_to_add
 		SlotClass.SlotType.HOTBAR_INVENTORY:
 			player_data["hotbar"][str(slot.slot_index)][1] += quantity_to_add
+		SlotClass.SlotType.COMBAT_HOTBAR:
+			player_data["comat_hotbar"][str(slot.slot_index)][1] += quantity_to_add
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"][str(slot.slot_index)][1] += quantity_to_add
 		SlotClass.SlotType.CHEST:
@@ -528,6 +543,8 @@ func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
 			player_data["hotbar"][str(slot.slot_index)][1] -= quantity_to_subtract
 		SlotClass.SlotType.HOTBAR_INVENTORY:
 			player_data["hotbar"][str(slot.slot_index)][1] -= quantity_to_subtract
+		SlotClass.SlotType.COMBAT_HOTBAR:
+			player_data["combat_hotbar"][str(slot.slot_index)][1] -= quantity_to_subtract
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"][str(slot.slot_index)][1] -= quantity_to_subtract
 		SlotClass.SlotType.CHEST:

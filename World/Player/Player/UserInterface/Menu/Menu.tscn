@@ -134,6 +134,7 @@ visible = false
 visible = false
 
 [node name="collections" parent="Pages" instance=ExtResource( 13 )]
+visible = false
 
 [node name="options" parent="Pages" instance=ExtResource( 7 )]
 visible = false

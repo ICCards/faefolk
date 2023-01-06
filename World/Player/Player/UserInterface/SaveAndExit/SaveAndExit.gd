@@ -25,5 +25,7 @@ func _on_SaveAndExit_pressed():
 func _on_Exit_pressed():
 	Sounds.play_small_select_sound()
 	Server.world.is_changing_scene = true
+	SceneChanger.destroy_current_scene()
+	yield(get_tree().create_timer(1.0), "timeout")
 	SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
 	get_parent().toggle_save_and_exit()

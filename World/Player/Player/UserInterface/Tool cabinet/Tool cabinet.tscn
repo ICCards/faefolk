@@ -76,6 +76,10 @@ expand = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="MenuTitle" parent="." instance=ExtResource( 11 )]
+margin_left = -88.0
+margin_top = -243.0
+margin_right = 277.0
+margin_bottom = -168.0
 text = "Tool cabinet"
 
 [node name="Frame" type="TextureRect" parent="."]

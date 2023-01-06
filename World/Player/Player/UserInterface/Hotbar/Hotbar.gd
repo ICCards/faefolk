@@ -102,3 +102,7 @@ func slot_gui_input(event: InputEvent, slot):
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if Server.player_node.state == 0:
 				PlayerData.hotbar_slot_selected(slot)
+
+
+func _on_SwitchHotbarBtn_pressed():
+	get_parent().switch_hotbar()

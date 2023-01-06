@@ -166,14 +166,14 @@ script = SubResource( 8 )
 
 [node name="Icons" type="Control" parent="Circle"]
 margin_left = 1.0
-margin_top = 85.0
+margin_top = 57.0
 margin_right = 41.0
-margin_bottom = 125.0
+margin_bottom = 97.0
 rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 2
 
 [node name="Wood" type="Sprite" parent="Circle/Icons"]
-position = Vector2( 0, -188 )
+position = Vector2( 0, -195.333 )
 texture = ExtResource( 7 )
 
 [node name="Stone" type="Sprite" parent="Circle/Icons"]
