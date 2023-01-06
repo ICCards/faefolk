@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fireball.mp3-20541084237da2b18209e68316324ad2.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Fire/fireball.mp3"
+dest_files=[ "res://.import/fireball.mp3-20541084237da2b18209e68316324ad2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

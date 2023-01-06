@@ -1,18 +1,19 @@
 extends CanvasLayer
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var holding_item = null
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
-onready var Menu = preload("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
-onready var Hotbar = preload("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
-onready var Workbench = preload("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
-onready var Stove = preload("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
-onready var GrainMill = preload("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
-onready var Furnace = preload("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
-onready var Chest = preload("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
-onready var Tool_cabinet = preload("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
+onready var SaveAndExitDialogue = load("res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn")
+onready var Menu = load("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
+onready var Hotbar = load("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
+onready var Workbench = load("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
+onready var Stove = load("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
+onready var GrainMill = load("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
+onready var Furnace = load("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
+onready var Chest = load("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
+onready var Tool_cabinet = load("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
+onready var Campfire = load("res://World/Player/Player/UserInterface/Campfire/Campfire.tscn")
 
 var items_to_drop = []
 
@@ -23,6 +24,10 @@ var object_level
 var object_id
 
 var is_opening_chest: bool = false
+
+var normal_hotbar_mode: bool = true
+
+var game_state: GameState
 
 enum {
 	MOVEMENT, 
@@ -38,13 +43,41 @@ func _ready():
 	$Menu.hide()
 	add_hotbar_clock_and_stats()
 
+func save_player_data(exit_to_main_menu):
+	$LoadingIndicator.show()
+	game_state = GameState.new()
+	game_state.world_state = MapData.world
+	game_state.cave_state = MapData.caves
+	game_state.player_state = PlayerData.player_data
+	game_state.save_state()
+	yield(get_tree().create_timer(2.0), "timeout")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
+	$LoadingIndicator.hide()
+	if exit_to_main_menu:
+		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
+
+func switch_hotbar():
+	if $Hotbar.visible:
+		normal_hotbar_mode = false
+		$Hotbar.hide()
+		$CombatHotbar.initialize()
+		$PlayerDataUI/EnergyBars.hide()
+	else:
+		normal_hotbar_mode = true
+		$Hotbar.initialize_hotbar()
+		$CombatHotbar.hide()
+		$PlayerDataUI/EnergyBars.show()
+		
 
 func _input(event):
-	if Server.player_node.state == MOVEMENT and holding_item == null and \
-		not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
-		if event.is_action_pressed("open_menu") and not PlayerInventory.interactive_screen_mode:
+	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:
+		if event.is_action_pressed("ui_cancel") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
+			toggle_save_and_exit()
+		if event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 			toggle_menu()
-		elif event.is_action_pressed("action") and not PlayerInventory.viewInventoryMode:
+		elif event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
 			if object_id:
 				match object_name:
 					"workbench":
@@ -61,44 +94,42 @@ func _input(event):
 						toggle_tc(object_id)
 					"chair":
 						Server.player_node.sit(object_level)
-		if Input.is_action_just_released("scroll_up") and not PlayerInventory.viewMapMode:
-			PlayerInventory.active_item_scroll_up()
-		elif Input.is_action_just_released("scroll_down") and not PlayerInventory.viewMapMode:
-			PlayerInventory.active_item_scroll_down()
+					"campfire":
+						toggle_campfire(object_id)
+		if Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
+			PlayerData.active_item_scroll_up()
+		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:
+			PlayerData.active_item_scroll_down()
 		elif event.is_action_pressed("slot1"):
-			PlayerInventory.active_item_slot = 0
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 0
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot2"):
-			PlayerInventory.active_item_slot = 1
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 1
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot3"):
-			PlayerInventory.active_item_slot = 2
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 2
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot4"):
-			PlayerInventory.active_item_slot = 3
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 3
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot5"):
-			PlayerInventory.active_item_slot = 4
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 4
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot6"):
-			PlayerInventory.active_item_slot = 5
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 5
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot7"):
-			PlayerInventory.active_item_slot = 6
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 6
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot8"):
-			PlayerInventory.active_item_slot = 7
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 7
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot9"):
-			PlayerInventory.active_item_slot = 8
-			PlayerInventory.emit_signal("active_item_updated")
+			PlayerData.active_item_slot = 8
+			PlayerData.emit_signal("active_item_updated")
 		elif event.is_action_pressed("slot10"):
-			PlayerInventory.active_item_slot = 9
-			PlayerInventory.emit_signal("active_item_updated")
-	elif PlayerInventory.viewMapMode:
-		$MapLabels.show()
-		return
-	$MapLabels.hide()
+			PlayerData.active_item_slot = 9
+			PlayerData.emit_signal("active_item_updated")
 
 
 func death():
@@ -116,17 +147,32 @@ func death():
 				close_chest(object_id)
 			"furnace":
 				close_furnace(object_id)
+			"campfire":
+				close_campfire(object_id)
 	close_hotbar_clock_and_stats()
 	if holding_item:
 		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
 		holding_item.queue_free()
 		holding_item = null
 
+func toggle_save_and_exit():
+	if has_node("SaveAndExit"):
+		Sounds.play_deselect_sound()
+		PlayerData.viewSaveAndExitMode = false
+		get_node("SaveAndExit").queue_free()
+	else:
+		Sounds.play_big_select_sound()
+		var saveAndExit = SaveAndExitDialogue.instance()
+		add_child(saveAndExit)
+		PlayerData.viewSaveAndExitMode = true
+
+
 func respawn():
 	add_hotbar_clock_and_stats()
 
 func toggle_tc(id):
 	if not has_node("Tool cabinet"):
+		play_open_menu_sound()
 		var tc = Tool_cabinet.instance()
 		tc.id = id
 		add_child(tc)
@@ -137,10 +183,10 @@ func toggle_tc(id):
 func toggle_chest(id):
 	if not is_opening_chest:
 		if not has_node("Chest"):
-			sound_effects.stream = preload("res://Assets/Sound/Sound effects/chest/open.mp3")
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/open.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
-			PlayerInventory.interactive_screen_mode = true
+			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
 			Server.world.get_node("PlacableObjects/"+id).open_chest()
 			yield(get_tree().create_timer(0.5), "timeout")
@@ -153,44 +199,56 @@ func toggle_chest(id):
 			close_chest(id)
 
 func close_hotbar_clock_and_stats():
-	PlayerInventory.interactive_screen_mode = true
+	PlayerData.interactive_screen_mode = true
 	$Hotbar.hide()
-	$CurrentTime.hide()
-	$PlayerStatsUI.hide()
+	$PlayerDataUI.hide()
+	$CombatHotbar.hide()
 
 
 func add_hotbar_clock_and_stats():
-	PlayerInventory.interactive_screen_mode = false
-	$Hotbar.initialize_hotbar()
-	$CurrentTime.show()
-	$PlayerStatsUI.show()
-
+	PlayerData.interactive_screen_mode = false
+	if normal_hotbar_mode:
+		$CombatHotbar.hide()
+		$Hotbar.initialize_hotbar()
+		$PlayerDataUI.show()
+		PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
+	else:
+		$CombatHotbar.initialize()
+		$Hotbar.hide()
+		$PlayerDataUI/DateTime.show()
+		PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
 
 func toggle_menu():
 	if not $Menu.visible:
+		Sounds.play_big_select_sound()
 		show_menu()
 	else:
+		Sounds.play_deselect_sound()
 		hide_menu()
 
 
 func show_menu():
+	$CombatHotbar.hide()
 	$Hotbar.hide()
-	$CurrentTime.hide()
-	$PlayerStatsUI.hide()
-	PlayerInventory.viewInventoryMode = true
+	$PlayerDataUI.hide()
+	PlayerData.viewInventoryMode = true
 	$Menu.initialize()
 
 func hide_menu():
-	PlayerInventory.viewInventoryMode = false
-	$Hotbar.initialize_hotbar()
-	$CurrentTime.show()
-	$PlayerStatsUI.show()
+	PlayerData.viewInventoryMode = false
+	if normal_hotbar_mode:
+		$PlayerDataUI.show()
+		$Hotbar.initialize_hotbar()
+	else:
+		$PlayerDataUI/DateTime.show()
+		$CombatHotbar.initialize()
 	$Menu.hide()
 	drop_items()
 	get_node("../../").set_held_object()
 
 func toggle_grain_mill(id, level):
 	if not has_node("GrainMill"):
+		play_open_menu_sound()
 		var grainMill = GrainMill.instance()
 		grainMill.level = level
 		grainMill.id = id
@@ -202,6 +260,7 @@ func toggle_grain_mill(id, level):
 
 func toggle_workbench(level):
 	if not has_node("Workbench"):
+		play_open_menu_sound()
 		var workbench = Workbench.instance()
 		workbench.level = level
 		add_child(workbench)
@@ -212,12 +271,14 @@ func toggle_workbench(level):
 
 func toggle_furnace(id):
 	if not has_node(id):
+		play_open_menu_sound()
 		var furnace = Furnace.instance()
 		furnace.name = str(id)
 		furnace.id = id
 		add_child(furnace)
 		close_hotbar_clock_and_stats()
 	elif has_node(id) and not get_node(id).visible:
+		play_open_menu_sound()
 		get_node(id).initialize()
 		close_hotbar_clock_and_stats()
 	else:
@@ -226,6 +287,7 @@ func toggle_furnace(id):
 
 func toggle_stove(id, level):
 	if not has_node(id):
+		play_open_menu_sound()
 		var stove = Stove.instance()
 		stove.name = str(id)
 		stove.level = level
@@ -233,46 +295,74 @@ func toggle_stove(id, level):
 		add_child(stove)
 		close_hotbar_clock_and_stats()
 	elif has_node(id) and not get_node(id).visible:
+		play_open_menu_sound()
 		get_node(id).initialize()
 		close_hotbar_clock_and_stats()
 	else:
 		close_stove(id)
-		
 
+
+func toggle_campfire(id):
+	if not has_node(id):
+		play_open_menu_sound()
+		var stove = Campfire.instance()
+		stove.name = str(id)
+		stove.id = id
+		add_child(stove)
+		close_hotbar_clock_and_stats()
+	elif has_node(id) and not get_node(id).visible:
+		play_open_menu_sound()
+		get_node(id).initialize()
+		close_hotbar_clock_and_stats()
+	else:
+		close_campfire(id)
+
+
+func close_campfire(id):
+	if not holding_item and has_node(id):
+		Sounds.play_deselect_sound()
+		add_hotbar_clock_and_stats()
+		get_node(id).hide()
+		drop_items()
 
 func close_furnace(id):
-	if not holding_item:
+	if not holding_item and has_node(id):
+		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
 		get_node(id).hide()
 		drop_items()
 
 func close_grain_mill():
-	if not holding_item:
+	if not holding_item and has_node("GrainMill"):
+		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
 		get_node("GrainMill").destroy()
 		drop_items()
 
 func close_workbench():
-	if not holding_item:
+	if not holding_item and has_node("Workbench"):
+		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
 		get_node("Workbench").destroy()
 		drop_items()
 
 func close_stove(id):
-	if not holding_item:
+	if not holding_item and has_node(id):
+		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
 		get_node(id).hide()
 		drop_items()
 
 func close_chest(id):
-	if not holding_item:
+	if not holding_item and has_node("Chest"):
 		Server.world.get_node("PlacableObjects/"+id).close_chest()
 		add_hotbar_clock_and_stats()
 		get_node("Chest").destroy()
 		drop_items()
 
 func close_tc(id):
-	if not holding_item:
+	if not holding_item and has_node("Tool cabinet"):
+		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
 		get_node("Tool cabinet").destroy()
 		drop_items()
@@ -283,7 +373,18 @@ func drop_items():
 		InstancedScenes.initiateInventoryItemDrop(items_to_drop[i], Server.player_node.position)
 	items_to_drop = []
 	
+	
+func play_open_menu_sound():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/backpackIN.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
 
 
-
+func show_set_button_dialogue():
+	if not $EnterNewKey.visible:
+		$EnterNewKey.show()
+		
+func hide_set_button_dialogue():
+	if $EnterNewKey.visible:
+		$EnterNewKey.hide()
 

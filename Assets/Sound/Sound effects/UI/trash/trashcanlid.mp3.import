@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/trashcanlid.mp3-55c9eb405f39be3cde67bbb7b38cbe2c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/UI/trash/trashcanlid.mp3"
+dest_files=[ "res://.import/trashcanlid.mp3-55c9eb405f39be3cde67bbb7b38cbe2c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

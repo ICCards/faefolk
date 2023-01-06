@@ -80,13 +80,13 @@ func hit(tool_name):
 			animation_player_tree.play("tree fall right")
 			yield(animation_player_tree, "animation_finished" )
 			var amt = Stats.return_item_drop_quantity(tool_name, "tree")
-			CollectionsData.resources["wood"] += amt
+			PlayerData.player_data["collections"]["resources"]["wood"] += amt
 			InstancedScenes.intitiateItemDrop("wood", position+Vector2(130, -8), amt)
 		else:
 			animation_player_tree.play("tree fall left")
 			yield(animation_player_tree, "animation_finished" )
 			var amt = Stats.return_item_drop_quantity(tool_name, "tree")
-			CollectionsData.resources["wood"] += amt
+			PlayerData.player_data["collections"]["resources"]["wood"] += amt
 			InstancedScenes.intitiateItemDrop("wood", position+Vector2(-130, -8), amt)
 
 	elif health >= 1:
@@ -112,7 +112,7 @@ func destroy(tool_name):
 	animation_player_stump.play("stump destroyed")
 	var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 	InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-8, 32))
-	CollectionsData.resources["wood"] += amt
+	PlayerData.player_data["collections"]["resources"]["wood"] += amt
 	InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
 	yield(get_tree().create_timer(3.0), "timeout")
 	MapData.world["tree"].erase(name)
@@ -132,15 +132,16 @@ func _on_Hurtbox_area_entered(_area):
 ### Tree modulate functions
 func set_tree_top_collision_shape():
 	if variety == "A":
-		$TreeTopArea/A.disabled = false
+		$TreeTopArea/A.set_deferred("disabled", false)
 	elif variety == "B":
-		$TreeTopArea/B.disabled = false
+		$TreeTopArea/B.set_deferred("disabled", false)
 	elif variety == "C":
-		$TreeTopArea/C.disabled = false
+		$TreeTopArea/C.set_deferred("disabled", false)
 	elif variety == "D":
-		$TreeTopArea/D.disabled = false
+		$TreeTopArea/D.set_deferred("disabled", false)
 	elif variety == "E":
-		$TreeTopArea/E.disabled = false
+		$TreeTopArea/E.set_deferred("disabled", false)
+
 
 func disable_tree_top_collision_box():
 	set_tree_visible()

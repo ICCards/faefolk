@@ -1,7 +1,8 @@
 extends Node2D
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
+var id
 var crop_name
 var days_until_harvest
 var loc
@@ -13,10 +14,6 @@ var isBeingHarvested = false
 var bodyEnteredFlag = false
 
 
-#func PlayEffect(player_id):
-#	Tiles.add_valid_tiles(locatio)
-#	queue_free()
-
 func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _is_crop_dead):
 	crop_name = _crop_name
 	loc = _loc
@@ -25,15 +22,14 @@ func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _i
 	crop_is_dead = false # return_if_crop_is_dead(_is_crop_dead)
 	phase = return_phase()
 
-
 func _ready():
 	add_to_group("active_crops")
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
-	yield(get_tree().create_timer(15.0), "timeout")
-	days_until_harvest = 0
-	refresh_image()
+	MapData.connect("refresh_crops", self, "refresh_image")
+	
 
 func refresh_image():
+	days_until_harvest = MapData.world["crops"][id]["d"]
 	phase = return_phase()
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 
@@ -48,7 +44,7 @@ func refresh_image():
 func return_phase():
 	if crop_is_dead:
 		return "dead"
-	elif days_until_harvest != 0: 
+	elif days_until_harvest > 0: 
 		if is_in_regrowth_phase:
 			return "empty"
 		else:
@@ -82,53 +78,40 @@ func return_phase():
 					return "4"
 				elif phase > 0:
 					return "5"
-	else:
-		return "harvest"
+	$Harvest.disabled = false
+	return "harvest"
 
-
-func _on_Area2D_input_event(viewport, event, shape_idx):
-	pass
-#	if Input.is_action_pressed("mouse_click") and phase == "harvest":
-#		if JsonData.crop_data[crop_name]["Perennial"]:
-#			harvest_and_keep_planted()
-#		else:
-#			harvest_and_remove()
 	
 func harvest_and_remove():
 	if !isBeingHarvested:
-#		var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
-#		Server.action("ON_HIT", data)
 		$LeafEffect.show()
 		$LeafEffect.playing = true
-		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-		$HarvestSound.play()
 		$CropText.visible = false
 		Tiles.add_valid_tiles(loc)
 		isBeingHarvested = true
 		yield(get_tree().create_timer(0.6), "timeout")
 		phase = ""
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/Normal Selects.png"))
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		yield(get_tree().create_timer(1.0), "timeout")
 		queue_free()
 	
 func harvest_and_keep_planted():
 	if !isBeingHarvested:
-		$HarvestSound.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
-		$HarvestSound.play()
 		isBeingHarvested = true
 		yield(get_tree().create_timer(0.6), "timeout")
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		phase = "empty"
-		Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/Normal Selects.png"))
 		$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + phase  + ".png")
 		isBeingHarvested = false
 		
 
 func intitiateItemDrop(item, pos, yield_list):
-	PlayerInventory.add_item_to_hotbar(item, 1, null)
+	PlayerData.add_item_to_hotbar(item, 1, null)
 	yield_list.shuffle()
 	var amount = yield_list.front()
+	PlayerData.player_data["collections"]["crops"][crop_name] += amount
 	if amount > 1:
 		InstancedScenes.intitiateItemDrop(item, position+Vector2(0,16), amount-1)
 		
@@ -150,10 +133,8 @@ func _on_PlayAnimBox_body_exited(body):
 
 func _on_HurtBox_area_entered(area):
 	Tiles.add_valid_tiles(loc)
-	var data = {"id": name, "n": "decorations","item":"seed","name":crop_name}
-	Server.action("ON_HIT", data)
+	MapData.remove_crop(id)
 	queue_free()
-
 
 
 
@@ -162,12 +143,11 @@ func _on_Harvest_pressed():
 	position.distance_to(Server.player_node.position) < 100 and \
 	Server.player_node.state == 0 and \
 	not isBeingHarvested:
-		CollectionsData.crops[crop_name] += 1
 		if JsonData.crop_data[crop_name]["Perennial"]:
 			harvest_and_keep_planted()
 		else:
 			harvest_and_remove()
-		Server.player_node.harvest_crop(crop_name)
+		Server.player_node.actions.harvest_crop(crop_name)
 
 
 func _on_Harvest_mouse_entered():
@@ -177,12 +157,12 @@ func _on_Harvest_mouse_entered():
 func set_mouse_cursor_type():
 	if not $Harvest.disabled:
 		if $DetectPlayer.get_overlapping_areas().size() >= 1:
-			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/harvest.png"))
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest.png"))
 		else:
-			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/harvest transparent.png"))
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest transparent.png"))
 
 func _on_Harvest_mouse_exited():
-	Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/Normal Selects.png"))
+	Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/Normal Selects.png"))
 
 
 func _on_DetectPlayer_area_entered(area):

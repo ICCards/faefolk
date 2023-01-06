@@ -25,12 +25,13 @@ func setTexture(ore):
 	big_ore_sprite.texture = ore.largeOre
 	small_ore_sprite.texture = ore.mediumOres[rng.randi_range(0, 5)]
 	if health <= 40:
-		$BigHurtBox/bigHurtBox.disabled = true
-		$BigMovementCollisionBox/BigMovementBox.disabled = true
-		$SmallHurtBox/smallHurtBox.disabled = false
-		$SmallMovementCollisionBox/CollisionShape2D.disabled = false
+		$BigHurtBox/bigHurtBox.set_deferred("disabled", true)
+		$BigMovementCollisionBox/BigMovementBox.set_deferred("disabled", true)
+		$SmallHurtBox/smallHurtBox.set_deferred("disabled", false)
+		$SmallMovementCollisionBox/CollisionShape2D.set_deferred("disabled", false)
 		big_ore_sprite.visible = false
 		small_ore_sprite.visible = true
+		large_break = true
 
 
 func hit(tool_name):
@@ -50,7 +51,7 @@ func hit(tool_name):
 		sound_effects.play()
 		InstancedScenes.initiateOreHitEffect(variety, "large ore break", position+Vector2(0, 24))
 		var amount = Stats.return_item_drop_quantity(tool_name, "large ore")
-		add_to_collection(variety, amount)
+		Util.add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
 			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 28), amount)
 		else:
@@ -64,6 +65,7 @@ func hit(tool_name):
 		animation_player.play("small_ore_hit_right")
 	elif health <= 0 and not destroyed:
 		destroyed = true
+		PlayerData.player_data["skill_experience"]["mining"] += 1
 		MapData.remove_object("ore_large", name)
 		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.stream = Sounds.ore_break[rng.randi_range(0, 2)]
@@ -71,7 +73,7 @@ func hit(tool_name):
 		sound_effects.play()
 		InstancedScenes.initiateOreHitEffect(variety, "ore destroyed", position+Vector2(rng.randi_range(-10, 10), 32))
 		var amount = Stats.return_item_drop_quantity(tool_name, "small ore")
-		add_to_collection(variety, amount)
+		Util.add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
 			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 28), amount)
 		else:
@@ -101,11 +103,6 @@ func _on_SmallHurtBox_area_entered(_area):
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-20, 20), rand_range(-8,16)))
 
-func add_to_collection(type, amt):
-	if type != "stone1" and type != "stone2":
-		CollectionsData.resources[type] += amt
-	else:
-		CollectionsData.resources["stone"] += amt
 
 
 func _on_VisibilityNotifier2D_screen_entered():

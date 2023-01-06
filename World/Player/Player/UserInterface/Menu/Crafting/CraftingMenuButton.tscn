@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 margin_right = 16.0
 margin_bottom = 16.0
 texture_normal = ExtResource( 1 )
+stretch_mode = 2
 
 [connection signal="mouse_entered" from="btn" to="." method="_on_btn_mouse_entered"]
 [connection signal="mouse_exited" from="btn" to="." method="_on_btn_mouse_exited"]

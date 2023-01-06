@@ -48,17 +48,17 @@ func add_message(username, text, color):
 
 
 func _on_LineEdit_focus_entered():
-	PlayerInventory.chatMode = true
+	PlayerData.chatMode = true
 
 
 func _on_LineEdit_focus_exited():
-	PlayerInventory.chatMode = false
+	PlayerData.chatMode = false
 
 
 func _on_TextureButton_pressed():
 	$ColorRect.visible = !$ColorRect.visible
 	$VBoxContainer.visible = !$VBoxContainer.visible
 	if $ColorRect.visible == false:
-		$TextureButton.texture_normal = preload("res://Assets/Images/Misc/right arrow.png")
+		$TextureButton.texture_normal = load("res://Assets/Images/Misc/right arrow.png")
 	else:
-		$TextureButton.texture_normal = preload("res://Assets/Images/Misc/left arrow.png")
+		$TextureButton.texture_normal = load("res://Assets/Images/Misc/left arrow.png")

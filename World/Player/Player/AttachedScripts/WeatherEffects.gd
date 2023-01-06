@@ -5,7 +5,10 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	randomize()
-	$LightningTimer.start(rand_range(30,60))
+	yield(get_tree(), "idle_frame")
+	hide()
+	
+
 
 func play_lightning_effect():
 	if Server.player_node and has_node("/root/World"):
@@ -13,7 +16,6 @@ func play_lightning_effect():
 			$AnimationPlayer.play("lightning day")
 			$ThunderSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 			$ThunderSoundEffects.play()
-
 
 func _on_LightningTimer_timeout():
 	play_lightning_effect()

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/save-game.mp3-bbdc9434cd48c80a310a1bd43b1f2edf.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/UI/save/save-game.mp3"
+dest_files=[ "res://.import/save-game.mp3-bbdc9434cd48c80a310a1bd43b1f2edf.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

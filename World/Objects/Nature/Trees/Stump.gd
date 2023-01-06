@@ -46,7 +46,7 @@ func hit(tool_name):
 		animation_player.play("stump destroyed")
 		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-16, 32))
 		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
-		CollectionsData.resources["wood"] += amt
+		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		yield(sound_effects, "finished")
 		queue_free()

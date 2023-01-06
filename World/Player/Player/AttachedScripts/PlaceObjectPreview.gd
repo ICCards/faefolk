@@ -32,6 +32,9 @@ enum {
 	CUSTOMIZABLE_ROTATABLE
 }
 
+var _uuid = load("res://helpers/UUID.gd")
+onready var uuid = _uuid.new()
+
 func _ready():
 	initialize()
 
@@ -50,8 +53,6 @@ func _physics_process(delta):
 			place_sleeping_bag_state()
 		ITEM:
 			place_item_state()
-#		PATH:
-#			place_path_state()
 		SEED:
 			place_seed_state()
 		WALL:
@@ -74,7 +75,7 @@ func initialize():
 		state = SLEEPING_BAG
 	elif item_name == "furnace" or item_name == "tool cabinet" or item_name == "stone chest" or item_name == "wood chest" or \
 	item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3" or item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or\
-	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "dresser":
+	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "dresser" or item_name == "brewing table #1" or item_name == "brewing table #2" or item_name == "brewing table #3":
 		state = ROTATABLE
 	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR
@@ -125,7 +126,7 @@ func set_dimensions():
 			$ItemToPlace.show()
 		FOUNDATION:
 			$ItemToPlace.show()
-			$ItemToPlace.texture = preload("res://Assets/Images/placable_object_preview/foundation.png")
+			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/foundation.png")
 			$ColorIndicator.tile_size = Vector2(1,1)
 		ROTATABLE:
 			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
@@ -204,7 +205,7 @@ func place_customizable_rotatable_state():
 func get_variety_index(num_varieties):
 	if varieties_index == null:
 		varieties_index = 0
-	if Input.is_action_pressed("change_object_type") and not variety_delay:
+	if Input.is_action_pressed("change_variety") and not variety_delay:
 		variety_delay = true
 		varieties_index += 1
 		if varieties_index == num_varieties:
@@ -240,18 +241,19 @@ func place_rotatable_state():
 
 
 func place_foundation_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.foundation_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif not Tiles.validate_tiles(location, Vector2(1,1)):
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	else:
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, null, location, "placable")
+	if Server.world.name == "World":
+		var location = Tiles.valid_tiles.world_to_map(mousePos)
+		if Tiles.foundation_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+			$ColorIndicator.indicator_color = "Red"
+			$ColorIndicator.set_indicator_color()
+		elif not Tiles.validate_tiles(location, Vector2(1,1)):
+			$ColorIndicator.indicator_color = "Red"
+			$ColorIndicator.set_indicator_color()
+		else:
+			$ColorIndicator.indicator_color = "Green"
+			$ColorIndicator.set_indicator_color()
+			if Input.is_action_pressed("mouse_click"):
+				place_object(item_name, null, location, "placable")
 
 
 func place_door_state():
@@ -285,42 +287,44 @@ func place_door_state():
 
 
 func place_buildings_state():
-	$ColorIndicator.visible = true
-	$ColorIndicator.tile_size = Vector2(1, 1)
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	else:
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, null, location, "placable")
+	if Server.world.name == "World":
+		$ColorIndicator.visible = true
+		$ColorIndicator.tile_size = Vector2(1, 1)
+		var location = Tiles.valid_tiles.world_to_map(mousePos)
+		if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+			$ColorIndicator.indicator_color = "Red"
+			$ColorIndicator.set_indicator_color()
+		else:
+			$ColorIndicator.indicator_color = "Green"
+			$ColorIndicator.set_indicator_color()
+			if Input.is_action_pressed("mouse_click"):
+				place_object(item_name, null, location, "placable")
 
 func place_sleeping_bag_state():
-	get_rotation_index()
-	var direction = directions[direction_index]
+	#get_rotation_index()
+	#var direction = directions[direction_index]
+	var direction = "down"
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if direction == "up":
-		$ColorIndicator.tile_size = Vector2(1, 2)
-		$ScaledItemToPlace.rect_position = Vector2(32,-32)
-		$ScaledItemToPlace.rect_rotation = 90
-		$ScaledItemToPlace.flip_v = false
-	elif direction == "down":
+#	if direction == "up":
+#		$ColorIndicator.tile_size = Vector2(1, 2)
+#		$ScaledItemToPlace.rect_position = Vector2(32,-32)
+#		$ScaledItemToPlace.rect_rotation = 90
+#		$ScaledItemToPlace.flip_v = false
+	if direction == "down":
 		$ColorIndicator.tile_size = Vector2(1, 2)
 		$ScaledItemToPlace.rect_position = Vector2(0,32)
 		$ScaledItemToPlace.rect_rotation = 270
 		$ScaledItemToPlace.flip_v = false
-	elif direction == "left":
-		$ColorIndicator.tile_size = Vector2(2, 1)
-		$ScaledItemToPlace.rect_position = Vector2(64,32)
-		$ScaledItemToPlace.rect_rotation = 180
-		$ScaledItemToPlace.flip_v = true
-	elif direction == "right":
-		$ColorIndicator.tile_size = Vector2(2, 1)
-		$ScaledItemToPlace.rect_position = Vector2(0,0)
-		$ScaledItemToPlace.rect_rotation = 0
-		$ScaledItemToPlace.flip_v = false
+#	elif direction == "left":
+#		$ColorIndicator.tile_size = Vector2(2, 1)
+#		$ScaledItemToPlace.rect_position = Vector2(64,32)
+#		$ScaledItemToPlace.rect_rotation = 180
+#		$ScaledItemToPlace.flip_v = true
+#	elif direction == "right":
+#		$ColorIndicator.tile_size = Vector2(2, 1)
+#		$ScaledItemToPlace.rect_position = Vector2(0,0)
+#		$ScaledItemToPlace.rect_rotation = 0
+#		$ScaledItemToPlace.flip_v = false
 	if Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
@@ -388,36 +392,59 @@ func place_item_state():
 			place_object(item_name, null, location, "placable")
 
 func place_seed_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+	if Server.world.name == "World":
+		var location = Tiles.valid_tiles.world_to_map(mousePos)
+		if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+			$ColorIndicator.indicator_color = "Red"
+			$ColorIndicator.set_indicator_color()
+		else:
+			$ColorIndicator.indicator_color = "Green"
+			$ColorIndicator.set_indicator_color()
+			if Input.is_action_pressed("mouse_click"):
+				place_object(item_name, null, location, "seed")	
+	else:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	else:	
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, null, location, "seed")	
 
 
 func place_object(item_name, direction, location, type):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		if item_name != "wall" and item_name != "foundation":
-			PlayerInventory.remove_single_object_from_hotbar()
+			PlayerData.remove_single_object_from_hotbar()
 		var id = Uuid.v4()
 		if type == "placable":
-			MapData.add_placable(id, {"n":item_name,"d":direction,"l":location})
-			$SoundEffects.stream = Sounds.place_object
-			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-			$SoundEffects.play()
 			if item_name == "wall" or item_name == "foundation":
-				PlayerInventory.remove_material("wood", 1)
-				PlaceObject.place_building_object_in_world(id, item_name, location)
+				if PlayerData.returnSufficentCraftingMaterial("wood", 5) and item_name == "wall":
+					$SoundEffects.stream = Sounds.place_object
+					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+					$SoundEffects.play()
+					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location)})
+					PlayerData.remove_material("wood", 5)
+					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
+				elif PlayerData.returnSufficentCraftingMaterial("wood", 2) and item_name == "foundation":
+					$SoundEffects.stream = Sounds.place_object
+					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+					$SoundEffects.play()
+					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location)})
+					PlayerData.remove_material("wood", 2)
+					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
+				else:
+					$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
+					$SoundEffects.play()
 			else:
+				$SoundEffects.stream = Sounds.place_object
+				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+				$SoundEffects.play()
+				MapData.add_placable(id, {"n":item_name,"d":direction,"l":str(location)})
 				PlaceObject.place_object_in_world(id, item_name, direction, location)
 		elif type == "seed":
-			$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/Farming/place seed 3.mp3")
+			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			PlaceObject.place_seed_in_world(id, item_name, location, JsonData.crop_data[item_name]["DaysToGrow"])
-	if not PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		Server.player_node.destroy_placable_object()
+			var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
+			MapData.add_crop(id,{"n":item_name,"l":str(location),"d":days_to_grow})
+			PlaceObject.place_seed_in_world(id, item_name, location, days_to_grow)
+	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		Server.player_node.set_held_object()
+		Server.player_node.actions.destroy_placable_object()

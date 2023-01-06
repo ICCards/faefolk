@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/eat.mp3-08686f1856479f0470b4198b29f30fb2.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Player/eat.mp3"
+dest_files=[ "res://.import/eat.mp3-08686f1856479f0470b4198b29f30fb2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

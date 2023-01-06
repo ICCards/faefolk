@@ -1,4 +1,4 @@
-extends Node2D
+extends YSort
 
 
 var autotile_cord

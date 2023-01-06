@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
+
 var hookVelocity = 0.0;
 var hookAcceleration = 0.05;
 var hookDeceleration = 0.06;
@@ -7,7 +9,7 @@ var maxVelocity = 3;
 var bounce = 0.4
 
 var fishable = true
-var fish = preload("res://World/Player/Player/Fishing/Fish.tscn")
+var fish = load("res://World/Player/Player/Fishing/Fish.tscn")
 
 var MIN_Y
 var MAX_Y
@@ -62,19 +64,17 @@ func start_game_timer():
 	$Tween.start()
 
 func _physics_process(delta):
-	if get_parent().mini_game_active:
+	if get_node("../../").mini_game_active:
 		if ($Clicker.pressed == true):
+			play_reel_sound_effects(true)
 			if hookVelocity > -maxVelocity:
 				$AnimatedReel.rotation_degrees += 18
 				hookVelocity -= hookAcceleration
 		else:
+			play_reel_sound_effects(false)
 			if hookVelocity < maxVelocity:
 				$AnimatedReel.rotation_degrees -= 4
 				hookVelocity += hookDeceleration
-
-		if (Input.is_action_just_pressed("ui_accept")):
-			hookVelocity -= .5
-
 		var target = get_node(fishing_rod_level).position.y + hookVelocity
 		if (target >= MIN_Y):
 			hookVelocity *= -bounce
@@ -97,24 +97,40 @@ func _physics_process(delta):
 				if ($Progress.value <= 0):
 					lost_fish()
 		var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
-		var g = range_lerp($Progress.value/10, 10, 50, 0, 1)
+		var g = range_lerp($Progress.value/10, 10, 50, 0, 0.8)
 		$Progress.modulate = Color(r, g, 0)
-		get_parent().set_moving_fish_line_position($Progress.value)
+		get_node("../../").set_moving_fish_line_position($Progress.value)
+	else:
+		sound_effects.playing = false
+
+
+func play_reel_sound_effects(is_being_pressed):
+	if is_being_pressed:
+		if sound_effects.stream != load("res://Assets/Sound/Sound effects/Fishing/fastReel.mp3"):
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fastReel.mp3")
+	else:
+		if sound_effects.stream != load("res://Assets/Sound/Sound effects/Fishing/slowReel.mp3"):
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/slowReel.mp3")
+	if not sound_effects.playing:
+		sound_effects.playing = true
 
 
 func caught_fish():
 	$Tween.stop_all()
 	hide()
-	get_parent().caught_fish(get_node("Fish").fish_data[0])
-	get_parent().mini_game_active = false
+	get_node("../../").caught_fish(get_node("Fish").fish_data[0])
+	get_node("../../").mini_game_active = false
 	get_node("Fish").stop_fish_movement()
 	
 func lost_fish():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fishEscape.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
 	$Tween.stop_all()
-	get_parent().mini_game_active = false
+	get_node("../../").mini_game_active = false
 	$AnimationPlayer.play("fade")
 	get_node("Fish").stop_fish_movement()
-	get_parent().lost_fish()
+	get_node("../../").lost_fish()
 
 func _on_Clicker_button_down():
 	hookVelocity -= .5

@@ -37,9 +37,9 @@ data = {
 }
 
 [node name="radial_hammer_menu_item_0" type="Control"]
-modulate = Color( 0.54902, 0.54902, 0.54902, 1 )
 margin_right = 1024.0
 margin_bottom = 600.0
+rect_scale = Vector2( 1.5, 1.5 )
 input_pass_on_modal_close_click = false
 script = SubResource( 1 )
 

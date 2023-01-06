@@ -29,15 +29,15 @@ func set_description_text(item):
 		var category = JsonData.item_data[item]["ItemCategory"]
 		$Body/ItemAmount.modulate = Util.returnCategoryColor(category)
 		if category == "Crop":
-			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.crops[item]))
+			$Body/ItemAmount.set_text("Total: " + str(PlayerData.player_data["collections"]["crops"][item]))
 		elif category == "Fish":
-			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.fish[item]))
+			$Body/ItemAmount.set_text("Total: " + str(PlayerData.player_data["collections"]["fish"][item]))
 		elif category == "Food":
-			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.food[item]))
+			$Body/ItemAmount.set_text("Total: " + str(PlayerData.player_data["collections"]["food"][item]))
 		elif category == "Forage":
-			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.forage[item]))
+			$Body/ItemAmount.set_text("Total: " + str(PlayerData.player_data["collections"]["forage"][item]))
 		elif category == "Resource":
-			$Body/ItemAmount.set_text("Total: " + str(CollectionsData.resources[item]))
+			$Body/ItemAmount.set_text("Total: " + str(PlayerData.player_data["collections"]["resources"][item]))
 	else: 
 		hide()
 

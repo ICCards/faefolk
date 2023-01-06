@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/electricity.mp3-18719e0c72c4c92a4716390d2a0b999f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Lightning/electricity.mp3"
+dest_files=[ "res://.import/electricity.mp3-18719e0c72c4c92a4716390d2a0b999f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

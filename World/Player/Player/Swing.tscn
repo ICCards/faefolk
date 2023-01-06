@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Images/Magic/aim line.png" type="Texture" id=1]
+[ext_resource path="res://World/Player/Player/AttachedScenes/AimDownSightLine.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=3]
+[ext_resource path="res://World/Player/Player/AttachedScripts/Swinging.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1, 1 )
+
+[sub_resource type="CapsuleShape2D" id=69]
+radius = 25.9999
+height = 28.4444
+
+[sub_resource type="CapsuleShape2D" id=28]
+radius = 39.0
+height = 28.4444
+
+[node name="Swing" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="AxePickaxeSwing" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AxePickaxeSwing"]
+shape = SubResource( 2 )
+
+[node name="SwordSwing" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2304
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing"]
+position = Vector2( 0, 12 )
+rotation = 1.5708
+shape = SubResource( 69 )
+disabled = true
+
+[node name="ScytheSwing" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScytheSwing"]
+position = Vector2( 0, -67 )
+rotation = 1.5708
+shape = SubResource( 28 )
+disabled = true
+
+[node name="WateringCanParticles1" type="CPUParticles2D" parent="."]
+modulate = Color( 0.196078, 0.435294, 0.937255, 1 )
+position = Vector2( 13, -12 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 10
+lifetime = 0.6
+emission_shape = 2
+emission_rect_extents = Vector2( 2, 1 )
+gravity = Vector2( 0, 70 )
+scale_amount = 1.5
+scale_amount_random = 1.0
+
+[node name="WateringCanParticles2" type="CPUParticles2D" parent="."]
+modulate = Color( 0, 0.690196, 0.901961, 1 )
+position = Vector2( 13, -12 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 10
+lifetime = 0.6
+emission_shape = 2
+emission_rect_extents = Vector2( 2, 1 )
+gravity = Vector2( 0, 70 )
+scale_amount = 1.5
+scale_amount_random = 1.0
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AimDownSightLine" parent="." instance=ExtResource( 2 )]
+width = 4.0
+default_color = Color( 1.2, 1.2, 1.2, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1

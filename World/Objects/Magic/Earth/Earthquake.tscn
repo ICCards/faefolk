@@ -2,7 +2,7 @@
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://World/Objects/Magic/Earth/Earthquake.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Earth/eq.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Earth/eq.mp3" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 524.452

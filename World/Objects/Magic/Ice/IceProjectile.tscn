@@ -1,12 +1,12 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.wav" type="AudioStream" id=2]
 [ext_resource path="res://World/Objects/Magic/Ice/IceProjectile.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Images/Magic/ice/1/Ice2 (100x100px).png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Magic/ice/3/Ice1 (100x100px).png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=86]
+extents = Vector2( 7, 7 )
 
 [sub_resource type="CircleShape2D" id=3]
 resource_local_to_scene = true
@@ -325,15 +325,15 @@ max_value = 3.0
 _data = [ Vector2( 0, 2.73165 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.73165 ), 0.0, 0.0, 0, 0 ]
 
 [node name="IceProjectile" type="KinematicBody2D"]
+collision_layer = 0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 86 )
-disabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 262144
+collision_mask = 262146
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -374,6 +374,7 @@ modulate = Color( 1.17, 1.17, 1.17, 1 )
 position = Vector2( 10, -9 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
+frame = 1
 playing = true
 
 [node name="TrailParticles" type="Node2D" parent="."]
@@ -499,12 +500,13 @@ scale_amount_curve = SubResource( 91 )
 color_ramp = SubResource( 90 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 2 )
 
 [node name="SoundEffects2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

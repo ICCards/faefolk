@@ -4,8 +4,8 @@ extends GridContainer
 
 func initialize():
 	show()
-	for fish in CollectionsData.fish.keys():
-		if CollectionsData.fish[fish] > 0:
+	for fish in PlayerData.player_data["collections"]["fish"].keys():
+		if PlayerData.player_data["collections"]["fish"][fish] > 0:
 			get_node(fish).modulate = Color("ffffff") # unlocked
 			get_node(fish).material.set_shader_param("flash_modifier", 0)
 		else:

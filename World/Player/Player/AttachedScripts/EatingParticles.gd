@@ -1,6 +1,5 @@
 extends Node2D
 
-var rng = RandomNumberGenerator.new()
 
 var color1
 var color2
@@ -12,13 +11,17 @@ var color7
 var color8
 
 var item_name
+var category
+var tempColor
+
+var rng = RandomNumberGenerator.new()
 
 func _ready():
-	var itemImage = Image.new()
-	itemImage.load("res://Assets/Images/inventory_icons/Food/" + item_name + ".png")
-	itemImage.lock()
-	set_pixel_colors(itemImage)
-	print("START")
+	eat()
+
+func eat():
+	PlayerData.eat(item_name)
+	set_particle_colors(item_name)
 	$EatingParticles1.emitting = true
 	$EatingParticles2.emitting = true
 	$EatingParticles3.emitting = true
@@ -27,28 +30,33 @@ func _ready():
 	$EatingParticles6.emitting = true
 	$EatingParticles7.emitting = true
 	$EatingParticles8.emitting = true
-	yield(get_tree().create_timer(1.2), "timeout")
+	yield(get_tree().create_timer(1.5), "timeout")
 	queue_free()
-
-
-func set_pixel_colors(itemImage):
-	color1 = return_pixel_color(itemImage)
-	color2 = return_pixel_color(itemImage)
-	color3 = return_pixel_color(itemImage)
-	color4 = return_pixel_color(itemImage)
-	color5 = return_pixel_color(itemImage)
-	color6 = return_pixel_color(itemImage)
-	color7 = return_pixel_color(itemImage)
-	color8 = return_pixel_color(itemImage)
-
-
+	
+	
+func set_particle_colors(item_name):
+	var itemImage = Image.new()
+	category = JsonData.item_data[item_name]["ItemCategory"]
+	var stream_texture = load("res://Assets/Images/inventory_icons/" + category +"/" + item_name + ".png")
+	var image_texture = ImageTexture.new()
+	itemImage = stream_texture.get_data()
+	itemImage.lock() # so i can modify pixel data
+	$EatingParticles1.color = return_pixel_color(itemImage)
+	$EatingParticles2.color = return_pixel_color(itemImage)
+	$EatingParticles3.color = return_pixel_color(itemImage)
+	$EatingParticles4.color = return_pixel_color(itemImage)
+	$EatingParticles5.color = return_pixel_color(itemImage)
+	$EatingParticles6.color = return_pixel_color(itemImage)
+	$EatingParticles7.color = return_pixel_color(itemImage)
+	$EatingParticles8.color = return_pixel_color(itemImage)
+	
 func return_pixel_color(image):
 	rng.randomize()
-	var tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
+	tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
 	if tempColor != Color(0,0,0,0):
 		return tempColor
 	else:
-		tempColor = Color(image.get_pixel(rng.randi_range(8, 24), rng.randi_range(8, 24)))
+		tempColor = Color(image.get_pixel(rng.randi_range(4, 12), rng.randi_range(4, 12)))
 		if tempColor != Color(0,0,0,0):
 			return tempColor
 		else:

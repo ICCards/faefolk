@@ -17,59 +17,64 @@ onready var deep_ocean = $GeneratedTiles/DeepOcean
 onready var top_ocean = $GeneratedTiles/TopOcean
 onready var Players = $Players
 
-onready var Bear = preload("res://World/Animals/Bear.tscn")
-onready var Bunny = preload("res://World/Animals/Bunny.tscn")
-onready var Duck = preload("res://World/Animals/Duck.tscn")
-onready var Boar = preload("res://World/Animals/Boar.tscn")
-onready var Deer = preload("res://World/Animals/Deer.tscn")
-onready var Wolf = preload("res://World/Animals/Wolf.tscn")
-onready var Clam = preload("res://World/Objects/Nature/Forage/Clam.tscn")
-onready var Starfish = preload("res://World/Objects/Nature/Forage/Starfish.tscn")
-onready var WateringCanEffect = preload("res://World/Objects/Nature/Effects/WateringCan.tscn")
-onready var HoedDirtEffect = preload("res://World/Objects/Nature/Effects/HoedDirt.tscn") 
-onready var DirtTrailEffect = preload("res://World/Objects/Nature/Effects/DustTrailEffect.tscn")
-onready var UpgradeBuildingEffect = preload("res://World/Objects/Nature/Effects/UpgradeBuilding.tscn")
-onready var RemoveBuildingEffect = preload("res://World/Objects/Nature/Effects/RemoveBuilding.tscn")
-onready var LightningLine = preload("res://World/Objects/Misc/LightningLine.tscn")
-onready var CaveLadder = preload("res://World/Caves/Objects/CaveLadder.tscn")
+onready var Bear = load("res://World/Animals/Bear.tscn")
+onready var Bunny = load("res://World/Animals/Bunny.tscn")
+onready var Duck = load("res://World/Animals/Duck.tscn")
+onready var Boar = load("res://World/Animals/Boar.tscn")
+onready var Deer = load("res://World/Animals/Deer.tscn")
+onready var Wolf = load("res://World/Animals/Wolf.tscn")
+onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
+
+onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
 
 var rng = RandomNumberGenerator.new()
 
-const NUM_DUCKS = 250
-const NUM_BUNNIES = 250
-const NUM_BEARS = 30
-const NUM_BOARS = 30
-const NUM_DEER = 100
-const NUM_WOLVES = 30
+const MAX_DUCKS = 150
+const MAX_BUNNIES = 150
+const MAX_BEARS = 60
+const MAX_BOARS = 50
+const MAX_DEER = 90
+const MAX_WOLVES = 50
+
+var num_ducks = 0
+var num_bunnies = 0
+var num_deer = 0
+var num_bears = 0
+var num_boars = 0
+var num_wolves = 0
 
 var is_changing_scene: bool = false
 
+var game_state: GameState
+
 func _ready():
+	Server.world = self
+	create_or_load_world()
+
+func create_or_load_world():
+	if GameState.save_exists(): # Load world
+#		game_state = GameState.new()
+#		game_state.load_state()
+#		MapData.world = game_state.world_state
+#		MapData.caves = game_state.cave_state
+		build_world()
+	else: # Initial launch
+		var loadingScreen = GenerateWorldLoadingScreen.instance()
+		loadingScreen.name = "Loading"
+		add_child(loadingScreen)
+		GenerateNewWorld.build()
+
+func build_world():
 	buildMap(MapData.world)
-	
+	$BuildTerrain.start()
+	$BuildTerrain/BuildNature.start()
+	$WorldMap.buildMap()
+	spawn_initial_animals()
+	$SpawnAnimalTimer.start()
+
 func advance_down_cave_level():
 	if not is_changing_scene:
-		is_changing_scene = true
-		get_node("BuildWorld/BuildNature").is_destroyed = true
-		yield(get_tree(), "idle_frame")
-		BuildCaveLevel.is_player_going_down = true
-		Server.player_node.destroy()
-		for enemy in $Enemies.get_children():
-			enemy.destroy()
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1/Cave 1.tscn")
-
-func draw_mst(path):
-	var current_lines = []
-	if path:
-		for p in path.get_points():
-			for c in path.get_point_connections(p):
-				var pp = path.get_point_position(p)
-				var cp = path.get_point_position(c)
-				if not current_lines.has([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]) and not current_lines.has([Vector2(cp.x, cp.y), Vector2(pp.x, pp.y)]):
-					var lightning_line = LightningLine.instance()
-					current_lines.append([Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)])
-					lightning_line.points = [Vector2(pp.x, pp.y), Vector2(cp.x, cp.y)]
-					add_child(lightning_line)
+		SceneChanger.advance_cave_level(get_tree().current_scene.filename, true)
 
 func buildMap(map):
 	Tiles.valid_tiles = $ValidTiles
@@ -84,13 +89,11 @@ func buildMap(map):
 	Tiles.selected_foundation_tiles = $PlacableTiles/SelectedFoundationTiles
 	Tiles.object_tiles = $PlacableTiles/ObjectTiles
 	Tiles.fence_tiles = $PlacableTiles/FenceTiles
-	Tiles.light_tiles = $PlacableTiles/LightTiles
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	Server.isLoaded = true
-	Server.world = self
-	spawn_animals()
 	create_cave_entrance(map["cave_entrance_location"])
-	set_random_beach_forage()
+	yield(get_tree().create_timer(1.0), "timeout")
+	spawn_initial_animals()
 
 func create_cave_entrance(_loc):
 	var loc = Util.string_to_vector2(_loc)
@@ -102,147 +105,90 @@ func create_cave_entrance(_loc):
 	caveLadder.position = loc*32 + Vector2(32,16)
 	add_child(caveLadder)
 
-func spawn_animals():
-	for i in range(NUM_BUNNIES):
+func spawn_initial_animals():
+	for i in range(150):
 		spawnRandomBunny()
-	for i in range(NUM_DUCKS):
+	for i in range(150):
 		spawnRandomDuck()
-	for i in range(NUM_BEARS):
-		spawnRandomBear()
-	for i in range(NUM_BOARS):
-		spawnRandomBoar()
-	for i in range(NUM_DEER):
+	for i in range(75):
 		spawnRandomDeer()
-	for i in range(NUM_WOLVES):
+	for i in range(30):
+		spawnRandomBoar()
+	for i in range(30):
+		spawnRandomBear()
+	for i in range(30):
 		spawnRandomWolf()
-	
-func set_random_beach_forage():
-	for id in MapData.world["beach"]:
-		if Util.chance(3):
-			var loc = Util.string_to_vector2(MapData.world["beach"][id])
-			if dirt.get_cellv(loc) == -1 and forest.get_cellv(loc) == -1 and snow.get_cellv(loc) == -1 and plains.get_cellv(loc) == -1:
-				if Util.chance(50):
-					Tiles.remove_valid_tiles(loc)
-					var clam = Clam.instance()
-					clam.location = loc
-					clam.global_position = Tiles.valid_tiles.map_to_world(loc)
-					$ForageObjects.add_child(clam)
-				else:
-					Tiles.add_navigation_tiles(loc)
-					var starfish = Starfish.instance()
-					starfish.location = loc
-					starfish.global_position = Tiles.valid_tiles.map_to_world(loc)
-					$ForageObjects.add_child(starfish)
-
-	
-func set_water_tiles():
-	#var count = 0
-	for x in range(1000): # fill ocean
-		for y in range(1000):
-			if dirt.get_cell(x, y) == -1 and plains.get_cell(x, y) == -1 and forest.get_cell(x, y) == -1 and snow.get_cell(x, y) == -1 and sand.get_cell(x,y) == -1:
-				wetSand.set_cell(x, y, 0)
-				waves.set_cell(x, y, 5)
-				shallow_ocean.set_cell(x,y,0)
-				top_ocean.set_cell(x,y,0)
-				deep_ocean.set_cell(x,y,0)
-				validTiles.set_cell(x, y, -1)
-	for loc in waves.get_used_cells(): # remove outer layer to show wet sand
-		if sand.get_cellv(loc+Vector2(1,0)) != -1 or sand.get_cellv(loc+Vector2(-1,0)) != -1 or sand.get_cellv(loc+Vector2(0,1)) != -1 or sand.get_cellv(loc+Vector2(0,-1)) != -1:
-			waves.set_cellv(loc, -1)
-			shallow_ocean.set_cellv(loc,-1)
-			deep_ocean.set_cellv(loc,-1)
-			top_ocean.set_cellv(loc,-1)
-	for loc in wetSand.get_used_cells(): # add outer layer to show wet sand
-		if wetSand.get_cellv(loc+Vector2(1,0)) != -1 or wetSand.get_cellv(loc+Vector2(-1,0)) != -1 or wetSand.get_cellv(loc+Vector2(0,1)) != -1 or wetSand.get_cellv(loc+Vector2(0,-1)) != -1:
-			wetSand.set_cellv(loc+Vector2(1,0), 0)
-			wetSand.set_cellv(loc+Vector2(-1,0), 0)
-			wetSand.set_cellv(loc+Vector2(0,1), 0)
-			wetSand.set_cellv(loc+Vector2(0,-1), 0)
-	for loc in waves.get_used_cells(): # remove outer layer to show wet sand
-		if wetSand.get_cellv(loc+Vector2(1,0)) != -1 or wetSand.get_cellv(loc+Vector2(-1,0)) != -1 or wetSand.get_cellv(loc+Vector2(0,1)) != -1 or wetSand.get_cellv(loc+Vector2(0,-1)) != -1:
-			wetSand.set_cellv(loc+Vector2(1,0), 0)
-			wetSand.set_cellv(loc+Vector2(-1,0), 0)
-			wetSand.set_cellv(loc+Vector2(0,1), 0)
-			wetSand.set_cellv(loc+Vector2(0,-1), 0)
-	for loc in shallow_ocean.get_used_cells():
-		for i in range(6): # shallow depth length
-			if shallow_ocean.get_cellv(loc+Vector2(i,0)) == -1 or shallow_ocean.get_cellv(loc+Vector2(-i,0)) == -1 or shallow_ocean.get_cellv(loc+Vector2(0,i)) == -1 or shallow_ocean.get_cellv(loc+Vector2(0,-i)) == -1:
-				deep_ocean.set_cellv(loc+Vector2(1,0), -1)
-				deep_ocean.set_cellv(loc+Vector2(-1,0), -1)
-				deep_ocean.set_cellv(loc+Vector2(0,1), -1)
-				deep_ocean.set_cellv(loc+Vector2(0,-1), -1)
 
 
 func returnValidSpawnLocation():
 	rng.randomize()
-	var tempLoc = Vector2(rng.randi_range(8000, 24000), rng.randi_range(8000, 24000))
-	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
-		return tempLoc
-	tempLoc = Vector2(rng.randi_range(8000, 24000), rng.randi_range(8000, 24000))
-	if validTiles.get_cellv(validTiles.world_to_map(tempLoc)) != -1:
+	var tempLoc = Vector2(rng.randi_range(100, 900), rng.randi_range(100, 900))
+	if validTiles.get_cellv(tempLoc) != -1 and not MapData.world["ocean"].has(str(tempLoc)):
 		return tempLoc
 	return null
 
 
 func spawnRandomWolf():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var wolf = Wolf.instance()
-		wolf.global_position = loc
-		$Enemies.add_child(wolf)
+	if num_wolves < MAX_WOLVES:
+		var loc = returnValidSpawnLocation()
+		if loc != null:
+			var wolf = Wolf.instance()
+			wolf.global_position = loc*32
+			$Enemies.call_deferred("add_child",wolf)
+			num_wolves += 1
+			yield(get_tree(), "idle_frame")
 
 func spawnRandomBunny():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var bunny = Bunny.instance()
-		bunny.global_position = loc
-		$Enemies.add_child(bunny)
+	if num_bunnies < MAX_BUNNIES:
+		var loc = returnValidSpawnLocation()
+		if loc != null:
+			var bunny = Bunny.instance()
+			bunny.global_position = loc*32
+			$Enemies.call_deferred("add_child",bunny)
+			num_bunnies += 1
+			yield(get_tree(), "idle_frame")
 
 func spawnRandomDuck():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var duck = Duck.instance()
-		duck.global_position = loc
-		$Enemies.add_child(duck)
+	if num_ducks < MAX_DUCKS:
+		var loc = returnValidSpawnLocation()
+		if loc != null:
+			var duck = Duck.instance()
+			duck.global_position = loc*32
+			$Enemies.call_deferred("add_child",duck)
+			num_ducks += 1
+			yield(get_tree(), "idle_frame")
 
 func spawnRandomBear():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var bear = Bear.instance()
-		$Enemies.add_child(bear)
-		bear.global_position = loc
+	if num_bears < MAX_BEARS:
+		var loc = returnValidSpawnLocation()
+		if loc != null:
+			var bear = Bear.instance()
+			$Enemies.call_deferred("add_child",bear)
+			bear.global_position = loc*32
+			num_bears += 1
+			yield(get_tree(), "idle_frame")
 		
 func spawnRandomBoar():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var boar = Boar.instance()
-		$Enemies.add_child(boar)
-		boar.global_position = loc
+	if num_boars < MAX_BOARS:
+		var loc = returnValidSpawnLocation()
+		if loc != null:
+			var boar = Boar.instance()
+			$Enemies.call_deferred("add_child", boar)
+			boar.global_position = loc*32
+			num_boars += 1
+			yield(get_tree(), "idle_frame")
 
 func spawnRandomDeer():
-	var loc = returnValidSpawnLocation()
-	if loc != null:
-		var deer = Deer.instance()
-		$Enemies.add_child(deer)
-		deer.global_position = loc
+	if num_deer < MAX_DEER:
+		var loc = returnValidSpawnLocation()
+		if loc != null:
+			var deer = Deer.instance()
+			$Enemies.call_deferred("add_child", deer)
+			deer.global_position = loc*32
+			num_deer += 1
+			yield(get_tree(), "idle_frame")
 
-func play_watering_can_effect(loc):
-	var wateringCanEffect = WateringCanEffect.instance()
-	wateringCanEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
-	add_child(wateringCanEffect)
-	
-func play_hoed_dirt_effect(loc):
-	var hoedDirtEffect = HoedDirtEffect.instance()
-	hoedDirtEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,20)
-	add_child(hoedDirtEffect)
-
-func play_upgrade_building_effect(loc):
-	var upgradeBuildingEffect = UpgradeBuildingEffect.instance()
-	upgradeBuildingEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
-	add_child(upgradeBuildingEffect)
-	
-func play_remove_building_effect(loc):
-	var removeBuildingEffect = RemoveBuildingEffect.instance()
-	removeBuildingEffect.global_position = validTiles.map_to_world(loc) + Vector2(16,16)
-	add_child(removeBuildingEffect)
-
+func _on_SpawnAnimalTimer_timeout():
+	spawnRandomBoar()
+	spawnRandomBear()
+	spawnRandomWolf()

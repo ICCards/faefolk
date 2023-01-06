@@ -2,7 +2,7 @@ extends Node
 
 
 
-var file_name = "res://keybinding.json"
+var file_name = "res://JSONData/keybinding.json"
 
 var key_dict = {
 	"move_right":68,
@@ -14,6 +14,7 @@ var key_dict = {
 	"rotate": 82,
 	"open_map": 71,
 	"sprint": 16777237,
+	"change_variety": 86
 }
 
 func save_keys():

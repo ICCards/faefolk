@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/furnace.mp3-87e3ccb5cee9f67db81399560d296d82.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3"
+dest_files=[ "res://.import/furnace.mp3-87e3ccb5cee9f67db81399560d296d82.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

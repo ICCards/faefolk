@@ -1,43 +1,78 @@
 extends CanvasLayer
 
-
-
 onready var animation_player = $AnimationPlayer
-onready var black = $Node/Black
 
 var current_scene = null
+
+var levels = [
+	"res://World/World/World.tscn",
+	"res://World/Caves/Level 1/Cave 1-1/Cave 1-1.tscn",
+	"res://World/Caves/Level 1/Cave 1-2/Cave 1-2.tscn",
+	"res://World/Caves/Level 1/Cave 1-3/Cave 1-3.tscn",
+	"res://World/Caves/Level 1/Cave 1-4/Cave 1-4.tscn",
+	"res://World/Caves/Level 1/Cave 1-5/Cave 1-5.tscn",
+	"res://World/Caves/Level 1/Cave 1-6/Cave 1-6.tscn",
+	"res://World/Caves/Level 1/Cave 1-7/Cave 1-7.tscn",
+	"res://World/Caves/Level 1/Cave 1-Boss/Cave 1-Boss.tscn",
+	"res://World/Caves/Level 1/Cave 1-Fishing/Cave 1-Fishing.tscn",
+	"res://World/Caves/Level 2/Cave 2-1/Cave 2-1.tscn",
+	"res://World/Caves/Level 2/Cave 2-2/Cave 2-2.tscn",
+	"res://World/Caves/Level 2/Cave 2-3/Cave 2-3.tscn",
+	"res://World/Caves/Level 2/Cave 2-4/Cave 2-4.tscn",
+	"res://World/Caves/Level 2/Cave 2-5/Cave 2-5.tscn",
+	"res://World/Caves/Level 2/Cave 2-6/Cave 2-6.tscn",
+	"res://World/Caves/Level 2/Cave 2-7/Cave 2-7.tscn",
+	"res://World/Caves/Level 2/Cave 2-Boss/Cave 2-Boss.tscn"
+]
 
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 	
 func goto_scene(path):
-	# This function will usually be called from a signal callback,
-	# or some other function in the current scene.
-	# Deleting the current scene at this point is
-	# a bad idea, because it may still be executing code.
-	# This will result in a crash or unexpected behavior.
-
-	# The solution is to defer the load to a later time, when
-	# we can be sure that no code from the current scene is running:
 	animation_player.play("fade")
 	yield(animation_player, "animation_finished")
+	yield(get_tree().create_timer(1.0), "timeout")
 	call_deferred("_deferred_goto_scene", path)
 
 
 func _deferred_goto_scene(path):
-	# It is now safe to remove the current scene
 	current_scene.free()
-
-	# Load the new scene.
 	var s = ResourceLoader.load(path)
-
-	# Instance the new scene.
 	current_scene = s.instance()
-
-	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
-
-	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
 	animation_player.play_backwards("fade")
+
+
+func advance_cave_level(current_scene, going_downwards):
+	destroy_current_scene()
+	var index = levels.find(current_scene)
+	if going_downwards:
+		PlayerData.spawn_at_cave_entrance = true
+		index += 1
+	else:
+		PlayerData.spawn_at_cave_exit = true
+		index -= 1
+	yield(get_tree().create_timer(1.0), "timeout")
+	goto_scene(levels[index])
+
+func respawn():
+	Server.world.is_changing_scene = true
+	Server.player_node.destroy()
+	for node in Server.world.get_node("Projectiles").get_children():
+		node.destroy()
+	for node in Server.world.get_node("Enemies").get_children():
+		node.destroy()
+	PlayerData.spawn_at_respawn_location = true
+	yield(get_tree().create_timer(1.0), "timeout")
+	goto_scene(PlayerData.player_data["respawn_scene"])
+	
+func destroy_current_scene():
+	Server.world.is_changing_scene = true
+	Server.player_node.destroy()
+	for node in Server.world.get_node("Projectiles").get_children():
+		node.destroy()
+	for node in Server.world.get_node("Enemies").get_children():
+		node.destroy()
+

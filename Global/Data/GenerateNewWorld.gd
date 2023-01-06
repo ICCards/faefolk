@@ -1,13 +1,15 @@
 extends Node
 
+var game_state: GameState
+
 var plains = []
 var forest = []
-var desert = []
 var beach = []
 var snow = []
 var dirt = []
 var ocean = []
-var tile_arrays = [plains, forest, snow, dirt]
+var desert = []
+var tile_arrays = [plains, forest, snow, dirt, beach]
 
 var decoration_locations = []
 var occupied_terrain_tiles = []
@@ -21,8 +23,21 @@ const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vecto
 
 var openSimplexNoise := OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
-var _uuid = preload("res://helpers/UUID.gd")
+var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
+
+var mutex = Mutex.new()
+var semaphore = Semaphore.new()
+var thread_counter = 1
+var thread_tile_counter = 1
+
+var thread_world = Thread.new()
+var thread_world_update = Thread.new()
+var thread_temperature = Thread.new()
+var thread_moisture = Thread.new()
+var thread_altittude = Thread.new()
+
+var threads = [thread_world,thread_temperature,thread_moisture,thread_altittude,thread_world_update]
 
 var altittude = {}
 var temperature = {}
@@ -33,27 +48,116 @@ var file_name = "res://JSONData/world.json"
 #func _ready() -> void:
 #	build()
 
+func end_altittude():
+	altittude = thread_altittude.wait_to_finish()
+	print("finish building altittude")
+	mutex.lock()
+	if thread_counter == 3:
+		#call_deferred("build_world")
+		thread_world.start(self, "build_world")
+	else:	
+		thread_counter += 1
+	mutex.unlock()
+
+
+func end_temperature():
+	temperature = thread_temperature.wait_to_finish()
+	print("finish building temperature")
+	mutex.lock()
+	if thread_counter == 3:
+		#call_deferred("build_world")
+		thread_world.start(self, "build_world")
+	else:	
+		thread_counter += 1
+	mutex.unlock()
+
+func end_moisture():
+	moisture = thread_moisture.wait_to_finish()
+	print("finish building moisture")
+	mutex.lock()
+	if thread_counter == 3:
+		#call_deferred("build_world")
+		thread_world.start(self, "build_world")
+	else:	
+		thread_counter += 1
+	mutex.unlock()
+	
+func build_altittude(octaves,period):
+	print("building altittude")
+	var data = {
+		"octaves":octaves,
+		"period":period,
+		"ending_function":"end_altittude"
+	};
+	thread_altittude.start(self, "generate_map", data)	
+	
+func build_temperature(octaves,period):
+	print("building temperature")
+	var data = {
+		"octaves":octaves,
+		"period":period,
+		"ending_function":"end_temperature"
+	};
+	thread_temperature.start(self, "generate_map", data)
+	
+func build_moisture(octaves,period):
+	print("building moisture")
+	var data = {
+		"octaves":octaves,
+		"period":period,
+		"ending_function":"end_moisture"
+	};
+	thread_moisture.start(self, "generate_map", data)
+
+func build_world():
+	print("building world")
+	get_node("/root/World/Loading").call_deferred("set_phase","Building terrain")
+	build_terrian()
+	#yield(get_tree().create_timer(1.0), "timeout")
+	set_cave_entrance()
+	#get_node("/root/World/Loading").call_deferred("set_phase","Building nature")
+	#yield(get_tree().create_timer(1.0), "timeout")
+	generate_trees(snow,"snow")
+	generate_trees(forest,"forest")
+	generate_trees(desert,"desert")
+	generate_grass_bunches(plains,"plains")
+	generate_grass_bunches(snow,"snow")
+	generate_ores(snow,"snow")
+	generate_ores(desert,"desert")
+	generate_ores(dirt,"dirt")
+	generate_flowers(forest,"forest")
+	generate_flowers(plains,"plains")
+	generate_beach_forage()
+	#yield(get_tree().create_timer(1.0), "timeout")
+	#get_node("/root/World/Loading").call_deferred("set_phase","Saving data")
+	#yield(get_tree().create_timer(1.0), "timeout")
+	## make faster
+	fix_tiles()
+	##################
+
+func build_map():
+	Server.world.build_world()
+
 func build():
 	rng.randomize()
 	randomize()
-	temperature = generate_map(5,300)
-	moisture = generate_map(5,300)
-	altittude = generate_map(5,150)
-	build_terrian()
-	set_cave_entrance()
-	generate_trees(MapData.world["snow"].values(),"snow")
-	generate_trees(MapData.world["forest"].values(),"forest")
-	generate_trees(MapData.world["desert"].values(),"desert")
-	generate_grass_bunches(MapData.world["plains"].values(),"plains")
-	generate_grass_bunches(MapData.world["snow"].values(),"snow")
-	generate_ores(MapData.world["snow"].values(),"snow")
-	generate_ores(MapData.world["desert"].values(),"desert")
-	generate_ores(MapData.world["dirt"].values(),"dirt")
-	generate_flowers(MapData.world["forest"].values(),"forest")
-	generate_flowers(MapData.world["plains"].values(),"plains")
-	save_world_data()
+	#yield(get_tree().create_timer(1.0), "timeout")
+	build_temperature(5,300)
+	#yield(get_tree().create_timer(1.0), "timeout")
+	build_moisture(5,300)
+	#yield(get_tree().create_timer(2.0), "timeout")
+	build_altittude(5,150)
 	
-	
+func generate_beach_forage():
+	for loc in beach:
+		if Util.chance(1):
+			if not dirt.has(loc) and not forest.has(loc) and not snow.has(loc) and not plains.has(loc):
+				var id = uuid.v4()
+				if Util.chance(50):
+					MapData.world["forage"][id] = {"l":loc,"n":"clam","v":rng.randi_range(1,3)}
+				else:
+					MapData.world["forage"][id] = {"l":loc,"n":"starfish","v":rng.randi_range(1,2)}
+
 func set_cave_entrance():
 	var loc = Vector2(rng.randi_range(490, 510), rng.randi_range(490, 510))
 	MapData.world["cave_entrance_location"] = loc
@@ -71,13 +175,11 @@ func build_terrian():
 			var id = uuid.v4()
 			#Ocean
 			if alt > 0.8:
-				pass
-				MapData.world["ocean"][id] = Vector2(x,y)
-				#ocean.append(Vector2(x,y))
+				ocean.append(Vector2(x,y))
 			#Beach	
 			elif between(alt,0.75,0.8):
-				MapData.world["beach"][id] = Vector2(x,y)
-				#beach.append(Vector2(x,y))
+				#MapData.world["beach"][id] = Vector2(x,y)
+				beach.append(Vector2(x,y))
 			#Biomes	
 			elif between(alt,-1.4,0.8):
 				#plains
@@ -90,8 +192,7 @@ func build_terrian():
 					forest.append(Vector2(x,y))
 				#desert	
 				elif temp > 0.6 and moist < 0.5:
-					MapData.world["desert"][id] = Vector2(x,y)
-					#desert.append(Vector2(x,y))
+					desert.append(Vector2(x,y))
 				#snow	
 				elif temp < 0.2:
 					#MapData.world["snow"][id] = Vector2(x,y)
@@ -104,60 +205,62 @@ func build_terrian():
 				#MapData.world["dirt"][id] = Vector2(x,y)
 				dirt.append(Vector2(x,y))
 	#save_world_data()
-	fix_tiles()
 
+func _fix_tiles(value):
+	print("start fixing")
+	var border_tiles = []
+	for loc in value:
+		if is_border_tile(loc, value):
+			border_tiles.append(loc)
+	for loc in border_tiles:
+		if not value.has(loc+Vector2(1,0)):
+			value.append(loc+Vector2(1,0))
+		if not value.has(loc+Vector2(-1,0)):
+			value.append(loc+Vector2(-1,0))
+		if not value.has(loc+Vector2(0,1)):
+			value.append(loc+Vector2(0,1))
+		if not value.has(loc+Vector2(0,-1)):
+			value.append(loc+Vector2(0,-1))
+		if not value.has(loc+Vector2(1,1)):
+			value.append(loc+Vector2(1,1))
+		if not value.has(loc+Vector2(-1,1)):
+			value.append(loc+Vector2(-1,1))
+		if not value.has(loc+Vector2(1,-1)):
+			value.append(loc+Vector2(1,-1))
+		if not value.has(loc+Vector2(-1,-1)):
+			value.append(loc+Vector2(-1,-1))
+	if thread_tile_counter == tile_arrays.size():
+		print("fixed")
+		#call_deferred("build_world")
+		thread_world_update.start(self, "update_fixed_map")
+	else:	
+		thread_tile_counter += 1
+		print("fixing: "+str(thread_tile_counter))
+	
+func update_fixed_map():
+	print("FOUND BORDER TILES")
+	MapData.world["plains"] = plains
+	MapData.world["forest"] = forest
+	MapData.world["desert"] = desert
+	MapData.world["snow"] = snow
+	MapData.world["ocean"] = ocean
+	MapData.world["dirt"] = dirt
+	MapData.world["beach"] = beach
+	print("BUILT TERRAIN FINAL")
+	get_node("/root/World/Loading").call_deferred("queue_free")
+	save_starting_world_data()
+	MapData.add_world_data_to_chunks()
+	call_deferred("build_map")
 
 func fix_tiles():
 	print("FIXING")
 	for tile_array in tile_arrays: 
-		var border_tiles = []
-		for loc in tile_array:
-			if is_border_tile(loc, tile_array):
-				border_tiles.append(loc)
-		for loc in border_tiles:
-			if not tile_array.has(loc+Vector2(1,0)):
-				tile_array.append(loc+Vector2(1,0))
-			if not tile_array.has(loc+Vector2(-1,0)):
-				tile_array.append(loc+Vector2(-1,0))
-			if not tile_array.has(loc+Vector2(0,1)):
-				tile_array.append(loc+Vector2(0,1))
-			if not tile_array.has(loc+Vector2(0,-1)):
-				tile_array.append(loc+Vector2(0,-1))
-			if not tile_array.has(loc+Vector2(1,1)):
-				tile_array.append(loc+Vector2(1,1))
-			if not tile_array.has(loc+Vector2(-1,1)):
-				tile_array.append(loc+Vector2(-1,1))
-			if not tile_array.has(loc+Vector2(1,-1)):
-				tile_array.append(loc+Vector2(1,-1))
-			if not tile_array.has(loc+Vector2(-1,-1)):
-				tile_array.append(loc+Vector2(-1,-1))
-	print("FOUND BORDER TILES")
-	for loc in plains: 
-		var id = uuid.v4()
-		MapData.world["plains"][id] = loc
-	for loc in forest: 
-		var id = uuid.v4()
-		MapData.world["forest"][id] = loc
-	for loc in snow: 
-		var id = uuid.v4()
-		MapData.world["snow"][id] = loc
-#	for loc in desert: 
-#		var id = uuid.v4()
-#		MapData.world["desert"][id] = loc
-#	for loc in beach: 
-#		var id = uuid.v4()
-#		MapData.world["beach"][id] = loc
-	for loc in dirt: 
-		var id = uuid.v4()
-		MapData.world["dirt"][id] = loc
-#	for loc in ocean: 
-#		var id = uuid.v4()
-#		MapData.world["ocean"][id] = loc
-#	emit_signal("build_finished")
-	print("BUILT TERRAIN FINAL")
-	#save_world_data()
-
+		var tileThread = Thread.new()
+		threads.append(tileThread)
+		tileThread.start(self, "_fix_tiles",tile_array)
+		
 func is_border_tile(_pos, _tiles):
+	var count = 0
 	if not _tiles.has(_pos+Vector2(1,0)):
 		return true
 	if not _tiles.has(_pos+Vector2(-1,0)):
@@ -169,13 +272,16 @@ func is_border_tile(_pos, _tiles):
 	return false
 
 
-func save_world_data():
-	var file = File.new()
-	file.open(file_name,File.WRITE)
-	file.store_string(to_json(MapData.world))
-	file.close()
-	print("saved")
-	pass
+func save_starting_world_data():
+	game_state = GameState.new()
+#	game_state.save_world_state(MapData.world)
+#	game_state.save_cave_state(MapData.caves)
+#	game_state.save_player_state(PlayerData.starting_player_data)
+	game_state.world_state = MapData.world
+	game_state.cave_state = MapData.caves
+	game_state.player_state = PlayerData.starting_player_data
+	game_state.save_state()
+	PlayerData.player_data = PlayerData.starting_player_data
 
 
 func generate_flowers(locations,biome):
@@ -185,7 +291,6 @@ func generate_flowers(locations,biome):
 		var index = rng.randi_range(0, locations.size() - 1)
 		var location = locations[index]
 		create_flower(location,biome)
-	
 
 func create_flower(loc,biome):
 	var id = uuid.v4()
@@ -237,19 +342,18 @@ func create_grass_bunch(loc,biome):
 	for _i in range(randomNum):
 		randomAdjacentTiles.shuffle()
 		loc += randomAdjacentTiles[0]
-		if isValidPosition(loc):
+		if isValidPosition(loc) and not beach.has(loc):
 			var id = uuid.v4()
 			MapData.world["tall_grass"][id] = {"l":loc,"h":5,"b":biome}
 			decoration_locations.append(loc)
 		else:
 			loc -= randomAdjacentTiles[0]
 
-
-func generate_map(octaves,period):
+func generate_map(data):
 	var grid = {}
 	openSimplexNoise.seed = randi()
-	openSimplexNoise.octaves = octaves
-	openSimplexNoise.period = period
+	openSimplexNoise.octaves = data.octaves
+	openSimplexNoise.period = data.period
 	var custom_gradient = CustomGradientTexture.new()
 	custom_gradient.gradient = Gradient.new()
 	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
@@ -262,6 +366,7 @@ func generate_map(octaves,period):
 			var value = openSimplexNoise.get_noise_2d(x,y)
 			value += gradient_value
 			grid[Vector2(x,y)] = value
+	call_deferred(data.ending_function)
 	return grid
 
 func check_64x64(loc):
@@ -301,7 +406,7 @@ func create_tree(loc,biome):
 		decoration_locations.append(loc + Vector2(1,0))
 		decoration_locations.append(loc + Vector2(0,-1))
 		decoration_locations.append(loc + Vector2(1,-1))
-		
+
 func create_stump(loc,biome):
 	var id = uuid.v4()
 	if check_64x64(loc) and isValidPosition(loc):
@@ -311,7 +416,7 @@ func create_stump(loc,biome):
 		decoration_locations.append(loc + Vector2(1,0))
 		decoration_locations.append(loc + Vector2(0,-1))
 		decoration_locations.append(loc + Vector2(1,-1))
-	
+
 func create_log(loc,biome):
 	var id = uuid.v4()
 	if isValidPosition(loc):
@@ -326,4 +431,7 @@ func isValidPosition(loc):
 func between(val, start, end):
 	if start <= val and val < end:
 		return true	
-		
+
+#func _exit_tree():
+#	for thread in threads:
+#		thread.wait_to_finish()

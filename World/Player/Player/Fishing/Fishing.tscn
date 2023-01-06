@@ -190,9 +190,29 @@ tracks/3/keys = {
 position = Vector2( 0, -8 )
 script = ExtResource( 4 )
 
-[node name="FishingMiniGame" parent="." instance=ExtResource( 1 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBackground" type="TextureRect" parent="CanvasLayer"]
+margin_left = 587.0
+margin_top = 241.0
+margin_right = 639.0
+margin_bottom = 255.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="CastingProgress" type="TextureProgress" parent="CanvasLayer"]
+margin_left = 607.0
+margin_top = 247.0
+margin_right = 639.0
+margin_bottom = 255.0
+rect_scale = Vector2( 2, 2 )
+value = 50.0
+texture_progress = ExtResource( 6 )
+
+[node name="FishingMiniGame" parent="CanvasLayer" instance=ExtResource( 1 )]
 visible = false
-position = Vector2( -132, -100 )
+position = Vector2( 444, 209 )
+scale = Vector2( 3.5, 3.5 )
 
 [node name="ExclamationPoint" type="Sprite" parent="."]
 visible = false
@@ -225,22 +245,10 @@ anims/RESET = SubResource( 45 )
 anims/bite = SubResource( 46 )
 anims/hit = SubResource( 47 )
 
-[node name="ProgressBackground" type="TextureRect" parent="."]
-margin_left = -52.0
-margin_top = -90.0
-margin_bottom = -76.0
-rect_scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
-
-[node name="CastingProgress" type="TextureProgress" parent="."]
-margin_left = -32.0
-margin_top = -84.0
-margin_bottom = -76.0
-rect_scale = Vector2( 2, 2 )
-value = 50.0
-texture_progress = ExtResource( 6 )
-
 [node name="Tween" type="Tween" parent="."]
+
+[node name="RippleTimer" type="Timer" parent="."]
+wait_time = 0.4
 
 [node name="MoveBobTimer" type="Timer" parent="."]
 wait_time = 4.0
@@ -255,5 +263,8 @@ visible = false
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="RippleTimer" to="." method="_on_RippleTimer_timeout"]
 [connection signal="timeout" from="MoveBobTimer" to="." method="_on_MoveBobTimer_timeout"]
 [connection signal="timeout" from="FishBiteTimer" to="." method="_on_FishBiteTimer_timeout"]

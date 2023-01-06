@@ -1,9 +1,11 @@
 extends Node2D
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
 var direction
 var location
+
+var id
 
 func _ready():
 	set_direction()
@@ -30,7 +32,7 @@ func set_direction():
 func _unhandled_input(event):
 	if event.is_action_pressed("action"):
 		if $Position2D/DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-			Server.player_node.sleep(direction, adjusted_pos())
+			Server.player_node.actions.sleep(direction, adjusted_pos())
 
 func adjusted_pos():
 	match direction:
@@ -52,4 +54,5 @@ func _on_HurtBox_area_entered(area):
 		Tiles.add_valid_tiles(location, Vector2(1,2))
 	else:
 		Tiles.add_valid_tiles(location, Vector2(2,1))
+	MapData.remove_placable(id)
 	queue_free()

@@ -1,172 +1,28 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=40 format=2]
 
-[ext_resource path="res://Assets/Images/Magic/health/Angel-Sheet.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/idle/down/body.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Magic/lightning/lightning effect.png" type="Texture" id=2]
 [ext_resource path="res://World/Caves/Bosses/WindBoss.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=4]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/BirdBoss-Shadow.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/Misc/watering can progress indicator.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Particles/dust.png" type="Texture" id=7]
-
-[sub_resource type="AtlasTexture" id=154]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=155]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=156]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=157]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=158]
-atlas = ExtResource( 1 )
-region = Rect2( 512, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=159]
-atlas = ExtResource( 1 )
-region = Rect2( 640, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=160]
-atlas = ExtResource( 1 )
-region = Rect2( 768, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=161]
-atlas = ExtResource( 1 )
-region = Rect2( 896, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=162]
-atlas = ExtResource( 1 )
-region = Rect2( 1024, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=163]
-atlas = ExtResource( 1 )
-region = Rect2( 1152, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=164]
-atlas = ExtResource( 1 )
-region = Rect2( 1280, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=165]
-atlas = ExtResource( 1 )
-region = Rect2( 1408, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=166]
-atlas = ExtResource( 1 )
-region = Rect2( 1536, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=167]
-atlas = ExtResource( 1 )
-region = Rect2( 1664, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=168]
-atlas = ExtResource( 1 )
-region = Rect2( 1792, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=169]
-atlas = ExtResource( 1 )
-region = Rect2( 1920, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=170]
-atlas = ExtResource( 1 )
-region = Rect2( 2048, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=171]
-atlas = ExtResource( 1 )
-region = Rect2( 2176, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=172]
-atlas = ExtResource( 1 )
-region = Rect2( 2304, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=173]
-atlas = ExtResource( 1 )
-region = Rect2( 2432, 384, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 512, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 640, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 768, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 896, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 1024, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 1152, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 1280, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 1 )
-region = Rect2( 1408, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 1536, 192, 128, 192 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 1664, 192, 128, 192 )
-
-[sub_resource type="SpriteFrames" id=15]
-animations = [ {
-"frames": [ SubResource( 154 ), SubResource( 155 ), SubResource( 156 ), SubResource( 157 ), SubResource( 158 ), SubResource( 159 ), SubResource( 160 ), SubResource( 161 ), SubResource( 162 ), SubResource( 163 ), SubResource( 164 ), SubResource( 165 ), SubResource( 166 ), SubResource( 167 ), SubResource( 168 ), SubResource( 169 ), SubResource( 170 ), SubResource( 171 ), SubResource( 172 ), SubResource( 173 ) ],
-"loop": false,
-"name": "death",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
-"loop": true,
-"name": "idle",
-"speed": 8.0
-} ]
+[ext_resource path="res://Assets/Images/Enemies/ChangeForm.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/death/body.png" type="Texture" id=8]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
 
 [sub_resource type="CircleShape2D" id=16]
 radius = 6.08276
 
-[sub_resource type="CircleShape2D" id=146]
-radius = 46.0
+[sub_resource type="CapsuleShape2D" id=184]
+radius = 55.0
+height = 0.0
 
 [sub_resource type="Animation" id=147]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("../BossSprite:material:shader_param/flash_modifier")
+tracks/0/path = NodePath("../Boss:material:shader_param/flash_modifier")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -183,7 +39,7 @@ resource_name = "hit"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("../BossSprite:material:shader_param/flash_modifier")
+tracks/0/path = NodePath("../Boss:material:shader_param/flash_modifier")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -195,74 +51,49 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="AtlasTexture" id=145]
+[sub_resource type="AtlasTexture" id=122]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 24, 24 )
+region = Rect2( 0, 0, 96, 80 )
 
-[sub_resource type="AtlasTexture" id=40]
+[sub_resource type="AtlasTexture" id=123]
 atlas = ExtResource( 2 )
-region = Rect2( 24, 0, 24, 24 )
+region = Rect2( 96, 0, 96, 80 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=124]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 24, 24 )
+region = Rect2( 192, 0, 96, 80 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=125]
 atlas = ExtResource( 2 )
-region = Rect2( 72, 0, 24, 24 )
+region = Rect2( 0, 80, 96, 80 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=126]
 atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 24, 24 )
+region = Rect2( 96, 80, 96, 80 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=127]
 atlas = ExtResource( 2 )
-region = Rect2( 120, 0, 24, 24 )
+region = Rect2( 192, 80, 96, 80 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=128]
 atlas = ExtResource( 2 )
-region = Rect2( 144, 0, 24, 24 )
+region = Rect2( 0, 160, 96, 80 )
 
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 2 )
-region = Rect2( 168, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 2 )
-region = Rect2( 216, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 2 )
-region = Rect2( 240, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 2 )
-region = Rect2( 264, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 2 )
-region = Rect2( 288, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 2 )
-region = Rect2( 312, 0, 24, 24 )
-
-[sub_resource type="SpriteFrames" id=150]
+[sub_resource type="SpriteFrames" id=182]
 animations = [ {
-"frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
+"frames": [ SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ) ],
 "loop": true,
-"name": "default",
+"name": "play",
 "speed": 8.0
 } ]
 
-[sub_resource type="Animation" id=151]
+[sub_resource type="CircleShape2D" id=183]
+radius = 240.033
+
+[sub_resource type="Animation" id=185]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/path = NodePath("Boss:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -271,10 +102,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ ExtResource( 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Boss:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -283,38 +114,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=152]
-resource_name = "death"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("PoisonParticles/P1:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("PoisonParticles/P2:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("PoisonParticles/P3:emitting")
+tracks/2/path = NodePath("Boss:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -322,11 +125,11 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ Vector2( 0, -60 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/path = NodePath("ShadowSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -347,10 +150,90 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=190]
+resource_name = "attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=186]
+resource_name = "death"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Boss:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Boss:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ShadowSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
 "values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("BossSprite:animation")
+tracks/5/path = NodePath("HealthBar:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -359,128 +242,225 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "death" ]
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Boss:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -90 ), Vector2( 0, -60 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
-[sub_resource type="Animation" id=153]
-resource_name = "jump forward"
-length = 2.0
+[sub_resource type="Animation" id=187]
+resource_name = "loop"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_wing_flap"
+} ]
+}
 
-[sub_resource type="CanvasItemMaterial" id=174]
-particles_animation = true
-particles_anim_h_frames = 5
-particles_anim_v_frames = 1
-particles_anim_loop = false
+[sub_resource type="Animation" id=188]
+resource_name = "transition to fly"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Boss:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -60 ), Vector2( 0, -90 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_wing_flap"
+} ]
+}
 
-[sub_resource type="Gradient" id=175]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+[sub_resource type="Animation" id=189]
+resource_name = "transition to idle"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Boss:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Boss:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -90 ), Vector2( 0, -60 ) ]
+}
 
-[sub_resource type="Curve" id=176]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="AtlasTexture" id=191]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 300, 300 )
 
-[sub_resource type="CanvasItemMaterial" id=177]
-particles_animation = true
-particles_anim_h_frames = 5
-particles_anim_v_frames = 1
-particles_anim_loop = false
+[sub_resource type="AtlasTexture" id=192]
+atlas = ExtResource( 7 )
+region = Rect2( 300, 0, 300, 300 )
 
-[sub_resource type="StreamTexture" id=178]
-load_path = "res://.import/dust.png-7ebb2e5fde40d0b06570139632aad9e2.stex"
+[sub_resource type="AtlasTexture" id=193]
+atlas = ExtResource( 7 )
+region = Rect2( 600, 0, 300, 300 )
 
-[sub_resource type="Gradient" id=179]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+[sub_resource type="AtlasTexture" id=194]
+atlas = ExtResource( 7 )
+region = Rect2( 900, 0, 300, 300 )
 
-[sub_resource type="Curve" id=180]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="AtlasTexture" id=195]
+atlas = ExtResource( 7 )
+region = Rect2( 1200, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=196]
+atlas = ExtResource( 7 )
+region = Rect2( 1500, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=197]
+atlas = ExtResource( 7 )
+region = Rect2( 1800, 0, 300, 300 )
+
+[sub_resource type="AtlasTexture" id=198]
+atlas = ExtResource( 7 )
+region = Rect2( 2100, 0, 300, 300 )
+
+[sub_resource type="SpriteFrames" id=199]
+animations = [ {
+"frames": [ SubResource( 191 ), SubResource( 192 ), SubResource( 193 ), SubResource( 194 ), SubResource( 195 ), SubResource( 196 ), SubResource( 197 ), SubResource( 198 ) ],
+"loop": true,
+"name": "play",
+"speed": 8.0
+} ]
 
 [node name="WindBoss" type="KinematicBody2D"]
 script = ExtResource( 3 )
 
-[node name="BossSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1.15, 1.15, 1.15, 1 )
-material = ExtResource( 4 )
-position = Vector2( 0, -123 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 15 )
-animation = "idle"
-frame = 1
-playing = true
+[node name="EnemyFrozenState" parent="." instance=ExtResource( 10 )]
 
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0, -122 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
-hframes = 20
-vframes = 3
-frame = 30
+[node name="EnemyPoisonState" parent="." instance=ExtResource( 9 )]
+
+[node name="P3" parent="EnemyPoisonState/PoisonParticles" index="0"]
+position = Vector2( 0, -58 )
+
+[node name="P2" parent="EnemyPoisonState/PoisonParticles" index="1"]
+position = Vector2( 0, -76 )
+
+[node name="P1" parent="EnemyPoisonState/PoisonParticles" index="2"]
+position = Vector2( 0, -95 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 16 )
-
-[node name="PoisonParticles" type="Node2D" parent="."]
-position = Vector2( 0, -15 )
-
-[node name="P3" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 12, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0, 0.332031, 0, 1 )
-
-[node name="P2" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.145098, 0.545098, 0.145098, 1 )
-
-[node name="P1" type="CPUParticles2D" parent="PoisonParticles"]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
-emitting = false
-amount = 10
-lifetime = 2.5
-lifetime_randomness = 0.8
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 70.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.14902, 0.937255, 0.14902, 1 )
+disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 262400
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource( 146 )
+position = Vector2( 0, -49 )
+shape = SubResource( 184 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
 anims/RESET = SubResource( 147 )
@@ -490,42 +470,16 @@ anims/hit = SubResource( 148 )
 
 [node name="Timers" type="Node" parent="."]
 
-[node name="FrozenTimer" type="Timer" parent="Timers"]
-one_shot = true
-
-[node name="StunnedTimer" type="Timer" parent="Timers"]
-wait_time = 2.0
-one_shot = true
-
-[node name="PoisonTimer" type="Timer" parent="Timers"]
-wait_time = 8.0
-one_shot = true
-
-[node name="JumpDelay" type="Timer" parent="Timers"]
-one_shot = true
-
 [node name="AttackTimer" type="Timer" parent="Timers"]
 wait_time = 5.0
 autostart = true
 
-[node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 3.0
+[node name="ChangePos" type="Timer" parent="Timers"]
+wait_time = 4.0
 autostart = true
 
-[node name="Electricity" type="AnimatedSprite" parent="."]
-visible = false
-modulate = Color( 1.22, 1.22, 1.22, 1 )
-position = Vector2( 0, -15 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 150 )
-frame = 8
-playing = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-reset_on_save = false
-anims/RESET = SubResource( 151 )
-anims/death = SubResource( 152 )
-"anims/jump forward" = SubResource( 153 )
+[node name="WhirlwindTimer" type="Timer" parent="Timers"]
+wait_time = 12.0
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -534,15 +488,8 @@ anims/death = SubResource( 152 )
 [node name="Position2D" type="Position2D" parent="ShootDirection"]
 position = Vector2( 75, 0 )
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 2.0
-target_desired_distance = 10.0
-path_max_distance = 20.0
-avoidance_enabled = true
-max_speed = 150.0
-
 [node name="HealthBar" type="Node2D" parent="."]
-position = Vector2( -19, 24 )
+position = Vector2( -19, 20 )
 scale = Vector2( 2.5, 3 )
 z_index = 1
 
@@ -562,53 +509,53 @@ value = 44.0
 texture_progress = ExtResource( 6 )
 nine_patch_stretch = true
 
-[node name="Dash" type="Node2D" parent="."]
+[node name="Boss" type="Sprite" parent="."]
+material = ExtResource( 11 )
+position = Vector2( 0, -60 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+hframes = 4
 
-[node name="GhostTimer" type="Timer" parent="Dash"]
-wait_time = 0.03
+[node name="ShadowSprite" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 0.435294 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
 
-[node name="DustParticles" type="CPUParticles2D" parent="Dash"]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-material = SubResource( 174 )
-z_index = -1
-emitting = false
-amount = 16
-lifetime = 1.2
-explosiveness = 0.5
-lifetime_randomness = 0.7
-local_coords = false
-texture = ExtResource( 7 )
-gravity = Vector2( 0, 0 )
-angle = 360.0
-angle_random = 0.15
-scale_amount = 2.4
-scale_amount_random = 1.0
-color_ramp = SubResource( 175 )
-anim_speed_curve = SubResource( 176 )
+[node name="Electricity" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -76 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 182 )
+animation = "play"
+frame = 4
+playing = true
 
-[node name="DustBurst" type="CPUParticles2D" parent="Dash"]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-material = SubResource( 177 )
-z_index = -1
-emitting = false
-amount = 24
-lifetime = 1.5
-explosiveness = 0.95
-lifetime_randomness = 0.7
-local_coords = false
-texture = SubResource( 178 )
-emission_shape = 1
-emission_sphere_radius = 6.0
-spread = 30.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 35.0
-angle = 360.0
-angle_random = 0.15
-scale_amount = 2.4
-scale_amount_random = 1.0
-color_ramp = SubResource( 179 )
-anim_speed_curve = SubResource( 180 )
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 183 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 185 )
+anims/attack = SubResource( 190 )
+anims/death = SubResource( 186 )
+anims/loop = SubResource( 187 )
+"anims/transition to fly" = SubResource( 188 )
+"anims/transition to idle" = SubResource( 189 )
+
+[node name="UpgradePhase" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -76 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 199 )
+animation = "play"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_AttackTimer_timeout"]
-[connection signal="timeout" from="Dash/GhostTimer" to="." method="_on_GhostTimer_timeout"]
+[connection signal="timeout" from="Timers/ChangePos" to="." method="_on_ChangePos_timeout"]
+[connection signal="timeout" from="Timers/WhirlwindTimer" to="." method="_on_WhirlwindTimer_timeout"]
+
+[editable path="EnemyPoisonState"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://World/Objects/Farm/PlantedCrop.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Sound/Sound effects/Farming/harvest.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Assets/Images/Animations/plant/plant break.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -90,10 +89,6 @@ anims/animate = SubResource( 3 )
 stream = ExtResource( 1 )
 volume_db = -24.0
 
-[node name="HarvestSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-volume_db = -16.0
-
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 0
@@ -111,6 +106,7 @@ margin_left = -1.0
 margin_top = -18.0
 margin_right = 31.0
 margin_bottom = 14.0
+disabled = true
 
 [node name="LeafEffect" type="AnimatedSprite" parent="."]
 visible = false

@@ -1,6 +1,6 @@
 extends YSort
 
-onready var WallHitEffect = preload("res://World/Objects/Tiles/WallHitEffect.tscn")
+onready var WallHitEffect = load("res://World/Objects/Tiles/WallHitEffect.tscn")
 
 var tier
 var health
@@ -30,31 +30,33 @@ func remove_icon():
 	Tiles.selected_foundation_tiles.set_cellv(location,-1)
 	
 func set_type():
+	if tier != "demolish":
+		MapData.world["placables"][str(name)]["v"] = tier
 	match item_name:
 		"wall":
 			match tier:
 				"twig":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/twig.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/twig.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.TWIG)
 					health = Stats.MAX_TWIG_WALL
 					max_health = Stats.MAX_TWIG_WALL
 				"wood":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/wood.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/wood.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.WOOD)
 					health = Stats.MAX_WOOD_WALL
 					max_health = Stats.MAX_WOOD_WALL
 				"stone":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/stone.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/stone.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.STONE)
 					health = Stats.MAX_STONE_WALL
 					max_health = Stats.MAX_STONE_WALL
 				"metal":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/metal.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/metal.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.METAL)
 					health = Stats.MAX_METAL_WALL
 					max_health = Stats.MAX_METAL_WALL
 				"armored":
-					$SelectedWallVisual.texture = preload("res://Assets/Tilesets/walls/walls/armored.png")
+					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/armored.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.ARMORED)
 					health = Stats.MAX_ARMORED_WALL
 					max_health = Stats.MAX_ARMORED_WALL
@@ -64,17 +66,14 @@ func set_type():
 		"foundation":
 			match tier:
 				"twig":
-					$TypeOfFoundationArea.set_collision_mask(512)
 					Tiles.foundation_tiles.set_cellv(location, Tiers.TWIG)
 					health = Stats.MAX_TWIG_WALL
 					max_health = Stats.MAX_TWIG_WALL
 				"wood":
-					$TypeOfFoundationArea.set_collision_mask(512)
 					Tiles.foundation_tiles.set_cellv(location, Tiers.WOOD)
 					health = Stats.MAX_WOOD_WALL
 					max_health = Stats.MAX_WOOD_WALL
 				"stone":
-					$TypeOfFoundationArea.set_collision_mask(1024)
 					Tiles.foundation_tiles.set_cellv(location, Tiers.STONE)
 					health = Stats.MAX_STONE_WALL
 					max_health = Stats.MAX_STONE_WALL
@@ -104,13 +103,14 @@ func update_health_bar():
 
 
 func remove_wall():
-	MapData.remove_placable(id)
+	MapData.remove_object("placables",id)
 	Tiles.add_valid_tiles(location)
 	Tiles.wall_tiles.set_cellv(location, -1)
 	Tiles.wall_tiles.update_bitmask_area(location)
 	queue_free()
 
 func remove_foundation():
+	MapData.remove_object("placables",id)
 	Tiles.foundation_tiles.set_cellv(location, -1)
 	Tiles.foundation_tiles.update_bitmask_area(location)
 	queue_free()
@@ -140,8 +140,8 @@ func play_wall_hit_effect():
 		wallHitEffect.tier = tier
 		wallHitEffect.autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
 		wallHitEffect.location = location
-		wallHitEffect.position += Vector2(-16, 16)
-		call_deferred("add_child", wallHitEffect)
+		wallHitEffect.position = (location*32)+Vector2(20,-12)
+		Server.world.call_deferred("add_child", wallHitEffect)
 
 func show_health():
 	$AnimationPlayer.stop()
@@ -149,8 +149,8 @@ func show_health():
 
 func _on_HurtBox_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode:
-			var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and not PlayerData.viewInventoryMode:
+			var tool_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			if tool_name == "hammer":
 				$SelectedBorder.show()
 				show_selected_tile()
@@ -187,7 +187,7 @@ func show_selected_tile():
 
 func _on_HammerRepairBox_area_entered(area):
 	set_type()
-	Server.world.play_upgrade_building_effect(location)
+	InstancedScenes.play_upgrade_building_effect(location)
 	show_health()
 
 
@@ -196,9 +196,9 @@ func _on_DetectObjectOverPathBox_area_entered(area):
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
 
-
 func _on_DetectObjectOverPathBox_area_exited(area):
-	if item_name == "foundation":
-		yield(get_tree().create_timer(0.25), "timeout")
-		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
-		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)
+	if not Server.world.is_changing_scene:
+		if item_name == "foundation":
+			yield(get_tree().create_timer(0.25), "timeout")
+			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
+			$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)

@@ -107,7 +107,7 @@ margin_right = 775.6
 margin_bottom = 583.2
 
 [node name="Progress" type="TextureProgress" parent="."]
-modulate = Color( 0.313726, 1, 0, 1 )
+modulate = Color( 0.313726, 1, 0, 0.854902 )
 margin_left = 2.0
 margin_top = -33.0
 margin_right = 5.0
@@ -153,6 +153,9 @@ color = Color( 0, 1, 1, 1 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="GameTimer" type="Timer" parent="."]
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+autoplay = true
 
 [connection signal="button_down" from="Clicker" to="." method="_on_Clicker_button_down"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]

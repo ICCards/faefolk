@@ -10,7 +10,7 @@ func _pressed():
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
 	$SoundEffects.play()
 	do_set = true
-	Server.player_node.show_set_button_dialogue()
+	Server.player_node.user_interface.show_set_button_dialogue()
 
 func _input(event):
 	if(do_set):
@@ -27,5 +27,5 @@ func _input(event):
 			Settings.save_keys()
 			#stop setting the key
 			do_set = false
-			get_node("../../../").set_label_texts()
-			Server.player_node.hide_set_button_dialogue()
+			get_node("../../../../").set_label_texts()
+			Server.player_node.user_interface.hide_set_button_dialogue()

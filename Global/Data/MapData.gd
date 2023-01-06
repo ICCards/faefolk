@@ -1,220 +1,180 @@
 extends Node
 
+signal refresh_crops
+
+var game_state: GameState
+
+var world_file_name = "res://JSONData/world.json"
+var caves_file_name = "res://JSONData/caves.json"
 
 var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
-
-
-var is_world_built: bool = true
-var is_cave_1_built: bool = false
-var is_cave_2_built: bool = false
-var is_cave_3_built: bool = false
-var is_cave_4_built: bool = false
-var is_cave_5_built: bool = false
-var is_cave_6_built: bool = false
-var is_cave_7_built: bool = false
-var is_cave_8_built: bool = false
-var is_cave_9_built: bool = false
-var is_cave_10_built: bool = false
-
-func return_if_cave_built(cave_name):
-	match cave_name:
-		"Cave 1":
-			return is_cave_1_built
-		"Cave 2":
-			return is_cave_2_built
-		"Cave 3":
-			return is_cave_3_built
-		"Cave 4":
-			return is_cave_4_built
-		"Cave 5":
-			return is_cave_5_built
-		"Cave 6":
-			return is_cave_6_built
-		"Cave 7":
-			return is_cave_7_built
-		"Cave 8":
-			return is_cave_8_built
-		"Cave 9":
-			return is_cave_9_built
-		"Cave 10":
-			return is_cave_10_built
-
-func set_cave_built(cave_name):
-	match cave_name:
-		"Cave 1":
-			is_cave_1_built = true
-		"Cave 2":
-			is_cave_2_built = true
-		"Cave 3":
-			is_cave_3_built = true
-		"Cave 4":
-			is_cave_4_built = true
-		"Cave 5":
-			is_cave_5_built = true
-		"Cave 6":
-			is_cave_6_built = true
-		"Cave 7":
-			is_cave_7_built = true
-		"Cave 8":
-			is_cave_8_built = true
-		"Cave 9":
-			is_cave_9_built = true
-		"Cave 10":
-			is_cave_10_built = true
+var is_world_data_in_chunks = false
 
 var world = {
-	"placables":{},
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
-	"tree":{},
-	"tall_grass":{},
-	"ore_large":{},
-	"ore":{},
-	"log":{},
-	"stump":{},
-	"flower":{},
-	"tile": {},
-	"cave_entrance_location": null
-}
-var cave_1_data = {
-	"placables":{},
-	"ore": {},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
+	"tree": {},
+	"stump": {},
+	"log": {},
 	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_2_data = {
-	"placables":{},
 	"ore": {},
-	"ore_large": {},
+	"flower": {},
 	"tall_grass": {},
-	"mushroom": {}
+	"forage": {},
+	"crops": {},
+	"tiles": {},
+	"placables": {}
 }
-var cave_3_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_4_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_5_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_6_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_7_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_8_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_9_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-var cave_10_data = {
-	"placables":{},
-	"ore": {},
-	"ore_large": {},
-	"tall_grass": {},
-	"mushroom": {}
-}
-
-
-func add_placable(id, data):
-	var map = return_cave_data(Server.world.name)
-	map["placables"][id] = data
-	
-func remove_placable(id):
-	var map = return_cave_data(Server.world.name)
-	map["placables"].erase(id)
-
-func remove_object(type, id):
-	var map = return_cave_data(Server.world.name)
-	map[type].erase(id)
-	
-func update_object_health(type, id, new_health):
-	var map = return_cave_data(Server.world.name)
-	if map[type].has(id):
-		map[type][id]["h"] = new_health
+var caves = {"Cave 1-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-2":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-3":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-4":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-5":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-6":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-7":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-Boss":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-Fishing":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-2":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-3":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-4":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-5":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-6":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-7":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-Boss":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}}}
 
 func _ready() -> void:
-	world = JsonData.world_data
-	add_tiles_to_chunks()
-	add_nature_objects_to_chunks()
+#	var file = File.new()
+#	if GameState.save_exists():
+#		add_world_data_to_chunks()
+	PlayerData.connect("set_day", self, "advance_crops")
+
+func add_world_data_to_chunks():
+	if not is_world_data_in_chunks:
+		is_world_data_in_chunks = true
+		add_tiles_to_chunks()
+		add_nature_objects_to_chunks()
+
+func advance_crops():
+	for id in world["crops"]: # if crop is watered, advance a day
+		var loc_string = world["crops"][id]["l"]
+		if world["tiles"][loc_string] == "w":
+			world["crops"][id]["d"] -= 1
+	for tile in world["tiles"]: # if tile is watered, set to not watered
+		if world["tiles"][tile] == "w":
+			world["tiles"][tile] = "h"
+	if Server.world.name == "World": # clear watered tiles if in world
+		Tiles.watered_tiles.clear()
+	emit_signal("refresh_crops")
+
+func save_map_data():
+	pass
+#	var world_file = File.new()
+#	world_file.open(world_file_name,File.WRITE)
+#	world_file.store_string(to_json(world))
+#	world_file.close()
+#	var caves_file = File.new()
+#	caves_file.open(caves_file_name,File.WRITE)
+#	caves_file.store_string(to_json(caves))
+#	caves_file.close()
+#	print("saved map data")
+
+#func load_world_data():
+#	var file = File.new()
+#	if(file.file_exists(world_file_name)):
+#		file.open(world_file_name,File.READ)
+#		var data = parse_json(file.get_as_text())
+#		file.close()
+#		if(typeof(data) == TYPE_DICTIONARY):
+#			print("loaded world data")
+#			world = data
+#		else:
+#			printerr("corrupted world data")
+#	else:
+#		printerr("world data not found")
+#
+#func load_caves_data():
+#	var file = File.new()
+#	if(file.file_exists(caves_file_name)):
+#		file.open(caves_file_name,File.READ)
+#		var data = parse_json(file.get_as_text())
+#		file.close()
+#		if(typeof(data) == TYPE_DICTIONARY):
+#			print("loaded caves data")
+#			caves = data
+#		else:
+#			printerr("corrupted caves data")
+#	else:
+#		var caves_file = File.new()
+#		caves_file.open(caves_file_name,File.WRITE)
+#		caves_file.store_string(to_json(caves))
+#		caves_file.close()
 	
+func set_hoed_tile(loc):
+	world["tiles"][str(loc)] = "h"
+	
+func set_watered_tile(loc):
+	world["tiles"][str(loc)] = "w"
+	
+func remove_hoed_tile(loc):
+	world["tiles"].erase(str(loc))
+
+func add_crop(id,data):
+	world["crops"][id] = data
+	
+func remove_crop(id):
+	world["crops"].erase(id)
+
+func add_placable(id, data):
+	if Server.world.name == "World":
+		world["placables"][id] = data
+	else:
+		caves[Server.world.name]["placables"][id] = data
+
+func remove_placable(id):
+	if Server.world.name == "World":
+		world["placables"].erase(id)
+	else:
+		caves[Server.world.name]["placables"].erase(id)
+
+func remove_object(type, id):
+	if Server.world.name == "World":
+		world[type].erase(id)
+	else:
+		caves[Server.world.name][type].erase(id)
+	
+func update_object_health(type, id, new_health):
+	if Server.world.name == "World":
+		if world[type].has(id):
+			world[type][id]["h"] = new_health
+	else:
+		if caves[Server.world.name].has(id):
+			caves[Server.world.name][id]["h"] = new_health
 
 func return_cave_data(cave_name):
 	match cave_name:
 		"World":
 			return world
-		"Cave 1":
-			return cave_1_data
-		"Cave 2":
-			return cave_2_data
-		"Cave 3":
-			return cave_3_data
-		"Cave 4":
-			return cave_4_data
-		"Cave 5":
-			return cave_5_data
-		"Cave 6":
-			return cave_6_data
-		"Cave 7":
-			return cave_7_data
-		"Cave 8":
-			return cave_8_data
-		"Cave 9":
-			return cave_9_data
-		"Cave 10":
-			return cave_10_data
-
+	return caves[cave_name]
 
 func add_nature_objects_to_chunks():
 	for type in nature_types:
 		for id in world[type]:
 			var loc = Util.string_to_vector2(world[type][id]["l"])
-			add_to_chunk(type, loc, id)
+			add_nature_object_to_chunk(type, loc, id)
 
 func add_tiles_to_chunks():
 	for type in tile_types:
-		for id in world[type]:
-			var loc = Util.string_to_vector2(world[type][id])
-			add_to_chunk(type, loc, id)
-
+		var loc_array = world[type]
+		for loc_string in loc_array:
+			var loc = Util.string_to_vector2(loc_string)
+			add_tile_to_chunk(type, loc)
 
 func return_chunk(_row, _col):
 	_col = int(_col)
@@ -532,15 +492,14 @@ func return_chunk(_row, _col):
 				12:
 					return l12
 
-
 var a1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -548,15 +507,16 @@ var a1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -564,15 +524,16 @@ var a2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -580,15 +541,16 @@ var a3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -596,15 +558,16 @@ var a4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -612,15 +575,16 @@ var a5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -628,15 +592,16 @@ var a6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -644,15 +609,16 @@ var a7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -660,15 +626,16 @@ var a8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -676,15 +643,16 @@ var a9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -692,15 +660,16 @@ var a10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -708,15 +677,16 @@ var a11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var a12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -724,15 +694,16 @@ var a12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -740,15 +711,16 @@ var b1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -756,15 +728,16 @@ var b2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -772,15 +745,16 @@ var b3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -788,15 +762,16 @@ var b4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -804,15 +779,16 @@ var b5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -820,15 +796,16 @@ var b6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -836,15 +813,16 @@ var b7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -852,15 +830,16 @@ var b8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -868,15 +847,16 @@ var b9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -884,15 +864,16 @@ var b10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -900,15 +881,16 @@ var b11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var b12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -916,15 +898,16 @@ var b12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -932,15 +915,16 @@ var c1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -948,15 +932,16 @@ var c2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -964,15 +949,16 @@ var c3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -980,15 +966,16 @@ var c4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -996,15 +983,16 @@ var c5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1012,15 +1000,16 @@ var c6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1028,15 +1017,16 @@ var c7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1044,15 +1034,16 @@ var c8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1060,15 +1051,16 @@ var c9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1076,15 +1068,16 @@ var c10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1092,15 +1085,16 @@ var c11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var c12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1108,15 +1102,16 @@ var c12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1124,15 +1119,16 @@ var d1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1140,15 +1136,16 @@ var d2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1156,15 +1153,16 @@ var d3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1172,15 +1170,16 @@ var d4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1188,15 +1187,16 @@ var d5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1204,15 +1204,16 @@ var d6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1220,15 +1221,16 @@ var d7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1236,15 +1238,16 @@ var d8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1252,15 +1255,16 @@ var d9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1268,15 +1272,16 @@ var d10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1284,15 +1289,16 @@ var d11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var d12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1300,15 +1306,16 @@ var d12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1316,15 +1323,16 @@ var e1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1332,15 +1340,16 @@ var e2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1348,15 +1357,16 @@ var e3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1364,15 +1374,16 @@ var e4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1380,15 +1391,16 @@ var e5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1396,15 +1408,16 @@ var e6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1412,15 +1425,16 @@ var e7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1428,15 +1442,16 @@ var e8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1444,15 +1459,16 @@ var e9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1460,15 +1476,16 @@ var e10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1476,15 +1493,16 @@ var e11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var e12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1492,15 +1510,16 @@ var e12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1508,15 +1527,16 @@ var f1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1524,15 +1544,16 @@ var f2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1540,15 +1561,16 @@ var f3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1556,15 +1578,16 @@ var f4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1572,15 +1595,16 @@ var f5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1588,15 +1612,16 @@ var f6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1604,15 +1629,16 @@ var f7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1620,15 +1646,16 @@ var f8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1636,15 +1663,16 @@ var f9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1652,15 +1680,16 @@ var f10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1668,15 +1697,16 @@ var f11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var f12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1684,15 +1714,16 @@ var f12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1700,15 +1731,16 @@ var g1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1716,15 +1748,16 @@ var g2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1732,15 +1765,16 @@ var g3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1748,15 +1782,16 @@ var g4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1764,15 +1799,16 @@ var g5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1780,15 +1816,16 @@ var g6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1796,15 +1833,16 @@ var g7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1812,15 +1850,16 @@ var g8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1828,15 +1867,16 @@ var g9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1844,15 +1884,16 @@ var g10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1860,15 +1901,16 @@ var g11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var g12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1876,15 +1918,16 @@ var g12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1892,15 +1935,16 @@ var h1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1908,15 +1952,16 @@ var h2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1924,15 +1969,16 @@ var h3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1940,15 +1986,16 @@ var h4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1956,15 +2003,16 @@ var h5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1972,15 +2020,16 @@ var h6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1988,15 +2037,16 @@ var h7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2004,15 +2054,16 @@ var h8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2020,15 +2071,16 @@ var h9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2036,15 +2088,16 @@ var h10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2052,15 +2105,16 @@ var h11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var h12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2068,15 +2122,16 @@ var h12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2084,15 +2139,16 @@ var i1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2100,15 +2156,16 @@ var i2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2116,15 +2173,16 @@ var i3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2132,15 +2190,16 @@ var i4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2148,15 +2207,16 @@ var i5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2164,15 +2224,16 @@ var i6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2180,15 +2241,16 @@ var i7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2196,15 +2258,16 @@ var i8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2212,15 +2275,16 @@ var i9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2228,15 +2292,16 @@ var i10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2244,15 +2309,16 @@ var i11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var i12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2260,15 +2326,16 @@ var i12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2276,15 +2343,16 @@ var j1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2292,15 +2360,16 @@ var j2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2308,15 +2377,16 @@ var j3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2324,15 +2394,16 @@ var j4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2340,15 +2411,16 @@ var j5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2356,15 +2428,16 @@ var j6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2372,15 +2445,16 @@ var j7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2388,15 +2462,16 @@ var j8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2404,15 +2479,16 @@ var j9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2420,15 +2496,16 @@ var j10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2436,15 +2513,16 @@ var j11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var j12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2452,15 +2530,16 @@ var j12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2468,15 +2547,16 @@ var k1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2484,15 +2564,16 @@ var k2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2500,15 +2581,16 @@ var k3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2516,15 +2598,16 @@ var k4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2532,15 +2615,16 @@ var k5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2548,15 +2632,16 @@ var k6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2564,15 +2649,16 @@ var k7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2580,15 +2666,16 @@ var k8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2596,15 +2683,16 @@ var k9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2612,15 +2700,16 @@ var k10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2628,15 +2717,16 @@ var k11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var k12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2644,15 +2734,16 @@ var k12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l1 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2660,15 +2751,16 @@ var l1 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l2 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2676,15 +2768,16 @@ var l2 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l3 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2692,15 +2785,16 @@ var l3 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l4 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2708,15 +2802,16 @@ var l4 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l5 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2724,15 +2819,16 @@ var l5 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l6 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2740,15 +2836,16 @@ var l6 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l7 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2756,15 +2853,16 @@ var l7 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l8 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2772,15 +2870,16 @@ var l8 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l9 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2788,15 +2887,16 @@ var l9 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l10 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2804,15 +2904,16 @@ var l10 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l11 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2820,15 +2921,16 @@ var l11 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
 var l12 = {
-	"dirt":{},
-	"ocean":{},
-	"beach":{},
-	"plains":{},
-	"forest":{},
-	"desert":{},
-	"snow":{},
+	"ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2836,9 +2938,358 @@ var l12 = {
 	"log":{},
 	"stump":{},
 	"flower":{},
+	"forage": {}
 }
+func add_tile_to_chunk(type, loc):
+	var column
+	var row
+	var chunk_name = get_chunk_from_location(loc)
+	match chunk_name:
+		"A1":
+			a1[type].append(loc)
+		"A2":
+			a2[type].append(loc)
+		"A3":
+			a3[type].append(loc)
+		"A4":
+			a4[type].append(loc)
+		"A5":
+			a5[type].append(loc)
+		"A6":
+			a6[type].append(loc)
+		"A7":
+			a7[type].append(loc)
+		"A8":
+			a8[type].append(loc)
+		"A9":
+			a9[type].append(loc)
+		"A10":
+			a10[type].append(loc)
+		"A11":
+			a11[type].append(loc)
+		"A12":
+			a12[type].append(loc)
+		"B1":
+			b1[type].append(loc)
+		"B2":
+			b2[type].append(loc)
+		"B3":
+			b3[type].append(loc)
+		"B4":
+			b4[type].append(loc)
+		"B5":
+			b5[type].append(loc)
+		"B6":
+			b6[type].append(loc)
+		"B7":
+			b7[type].append(loc)
+		"B8":
+			b8[type].append(loc)
+		"B9":
+			b9[type].append(loc)
+		"B10":
+			b10[type].append(loc)
+		"B11":
+			b11[type].append(loc)
+		"B12":
+			b12[type].append(loc)
+		"C1":
+			c1[type].append(loc)
+		"C2":
+			c2[type].append(loc)
+		"C3":
+			c3[type].append(loc)
+		"C4":
+			c4[type].append(loc)
+		"C5":
+			c5[type].append(loc)
+		"C6":
+			c6[type].append(loc)
+		"C7":
+			c7[type].append(loc)
+		"C8":
+			c8[type].append(loc)
+		"C9":
+			c9[type].append(loc)
+		"C10":
+			c10[type].append(loc)
+		"C11":
+			c11[type].append(loc)
+		"C12":
+			c12[type].append(loc)
+		"D1":
+			d1[type].append(loc)
+		"D2":
+			d2[type].append(loc)
+		"D3":
+			d3[type].append(loc)
+		"D4":
+			d4[type].append(loc)
+		"D5":
+			d5[type].append(loc)
+		"D6":
+			d6[type].append(loc)
+		"D7":
+			d7[type].append(loc)
+		"D8":
+			d8[type].append(loc)
+		"D9":
+			d9[type].append(loc)
+		"D10":
+			d10[type].append(loc)
+		"D11":
+			d11[type].append(loc)
+		"D12":
+			d12[type].append(loc)
+		"E1":
+			e1[type].append(loc)
+		"E2":
+			e2[type].append(loc)
+		"E3":
+			e3[type].append(loc)
+		"E4":
+			e4[type].append(loc)
+		"E5":
+			e5[type].append(loc)
+		"E6":
+			e6[type].append(loc)
+		"E7":
+			e7[type].append(loc)
+		"E8":
+			e8[type].append(loc)
+		"E9":
+			e9[type].append(loc)
+		"E10":
+			e10[type].append(loc)
+		"E11":
+			e11[type].append(loc)
+		"E12":
+			e12[type].append(loc)
+		"F1":
+			f1[type].append(loc)
+		"F2":
+			f2[type].append(loc)
+		"F3":
+			f3[type].append(loc)
+		"F4":
+			f4[type].append(loc)
+		"F5":
+			f5[type].append(loc)
+		"F6":
+			f6[type].append(loc)
+		"F7":
+			f7[type].append(loc)
+		"F8":
+			f8[type].append(loc)
+		"F9":
+			f9[type].append(loc)
+		"F10":
+			f10[type].append(loc)
+		"F11":
+			f11[type].append(loc)
+		"F12":
+			f12[type].append(loc)
+		"G1":
+			g1[type].append(loc)
+		"G2":
+			g2[type].append(loc)
+		"G3":
+			g3[type].append(loc)
+		"G4":
+			g4[type].append(loc)
+		"G5":
+			g5[type].append(loc)
+		"G6":
+			g6[type].append(loc)
+		"G7":
+			g7[type].append(loc)
+		"G8":
+			g8[type].append(loc)
+		"G9":
+			g9[type].append(loc)
+		"G10":
+			g10[type].append(loc)
+		"G11":
+			g11[type].append(loc)
+		"G12":
+			g12[type].append(loc)
+		"H1":
+			h1[type].append(loc)
+		"H2":
+			h2[type].append(loc)
+		"H3":
+			h3[type].append(loc)
+		"H4":
+			h4[type].append(loc)
+		"H5":
+			h5[type].append(loc)
+		"H6":
+			h6[type].append(loc)
+		"H7":
+			h7[type].append(loc)
+		"H8":
+			h8[type].append(loc)
+		"H9":
+			h9[type].append(loc)
+		"H10":
+			h10[type].append(loc)
+		"H11":
+			h11[type].append(loc)
+		"H12":
+			h12[type].append(loc)
+		"I1":
+			i1[type].append(loc)
+		"I2":
+			i2[type].append(loc)
+		"I3":
+			i3[type].append(loc)
+		"I4":
+			i4[type].append(loc)
+		"I5":
+			i5[type].append(loc)
+		"I6":
+			i6[type].append(loc)
+		"I7":
+			i7[type].append(loc)
+		"I8":
+			i8[type].append(loc)
+		"I9":
+			i9[type].append(loc)
+		"I10":
+			i10[type].append(loc)
+		"I11":
+			i11[type].append(loc)
+		"I12":
+			i12[type].append(loc)
+		"J1":
+			j1[type].append(loc)
+		"J2":
+			j2[type].append(loc)
+		"J3":
+			j3[type].append(loc)
+		"J4":
+			j4[type].append(loc)
+		"J5":
+			j5[type].append(loc)
+		"J6":
+			j6[type].append(loc)
+		"J7":
+			j7[type].append(loc)
+		"J8":
+			j8[type].append(loc)
+		"J9":
+			j9[type].append(loc)
+		"J10":
+			j10[type].append(loc)
+		"J11":
+			j11[type].append(loc)
+		"J12":
+			j12[type].append(loc)
+		"K1":
+			k1[type].append(loc)
+		"K2":
+			k2[type].append(loc)
+		"K3":
+			k3[type].append(loc)
+		"K4":
+			k4[type].append(loc)
+		"K5":
+			k5[type].append(loc)
+		"K6":
+			k6[type].append(loc)
+		"K7":
+			k7[type].append(loc)
+		"K8":
+			k8[type].append(loc)
+		"K9":
+			k9[type].append(loc)
+		"K10":
+			k10[type].append(loc)
+		"K11":
+			k11[type].append(loc)
+		"K12":
+			k12[type].append(loc)
+		"L1":
+			l1[type].append(loc)
+		"L2":
+			l2[type].append(loc)
+		"L3":
+			l3[type].append(loc)
+		"L4":
+			l4[type].append(loc)
+		"L5":
+			l5[type].append(loc)
+		"L6":
+			l6[type].append(loc)
+		"L7":
+			l7[type].append(loc)
+		"L8":
+			l8[type].append(loc)
+		"L9":
+			l9[type].append(loc)
+		"L10":
+			l10[type].append(loc)
+		"L11":
+			l11[type].append(loc)
+		"L12":
+			l12[type].append(loc)
 
-func add_to_chunk(type, loc, id):
+
+
+func get_chunk_from_location(loc):
+	var column
+	var row
+	if loc.x < 187.5:
+		column = 1
+	elif loc.x < 250:
+		column = 2
+	elif loc.x < 312.5:
+		column = 3
+	elif loc.x < 375:
+		column = 4
+	elif loc.x < 437.5:
+		column = 5
+	elif loc.x < 500:
+		column = 6
+	elif loc.x < 562.5:
+		column = 7
+	elif loc.x < 625:
+		column = 8
+	elif loc.x < 687.5:
+		column = 9
+	elif loc.x < 750:
+		column = 10
+	elif loc.x < 812.5:
+		column = 11
+	else:
+		column = 12
+	if loc.y < 187.5:
+		row = "A"
+	elif loc.y < 250:
+		row = "B"
+	elif loc.y < 312.5:
+		row = "C"
+	elif loc.y < 375:
+		row = "D"
+	elif loc.y < 437.5:
+		row = "E"
+	elif loc.y < 500:
+		row = "F"
+	elif loc.y < 562.5:
+		row = "G"
+	elif loc.y < 625:
+		row = "H"
+	elif loc.y < 687.5:
+		row = "I"
+	elif loc.y < 750:
+		row = "J"
+	elif loc.y < 812.5:
+		row = "K"
+	else:
+		row = "L"
+	return row+str(column)
+
+func add_nature_object_to_chunk(type, loc, id):
 	var column
 	var row
 	var data = world[type][id]
@@ -3132,57 +3583,3 @@ func add_to_chunk(type, loc, id):
 			l11[type][id] = data
 		"L12":
 			l12[type][id] = data
-
-func get_chunk_from_location(loc):
-	var column
-	var row
-	if loc.x < 187.5:
-		column = 1
-	elif loc.x < 250:
-		column = 2
-	elif loc.x < 312.5:
-		column = 3
-	elif loc.x < 375:
-		column = 4
-	elif loc.x < 437.5:
-		column = 5
-	elif loc.x < 500:
-		column = 6
-	elif loc.x < 562.5:
-		column = 7
-	elif loc.x < 625:
-		column = 8
-	elif loc.x < 687.5:
-		column = 9
-	elif loc.x < 750:
-		column = 10
-	elif loc.x < 812.5:
-		column = 11
-	else:
-		column = 12
-	if loc.y < 187.5:
-		row = "A"
-	elif loc.y < 250:
-		row = "B"
-	elif loc.y < 312.5:
-		row = "C"
-	elif loc.y < 375:
-		row = "D"
-	elif loc.y < 437.5:
-		row = "E"
-	elif loc.y < 500:
-		row = "F"
-	elif loc.y < 562.5:
-		row = "G"
-	elif loc.y < 625:
-		row = "H"
-	elif loc.y < 687.5:
-		row = "I"
-	elif loc.y < 750:
-		row = "J"
-	elif loc.y < 812.5:
-		row = "K"
-	else:
-		row = "L"
-	return row+str(column)
-

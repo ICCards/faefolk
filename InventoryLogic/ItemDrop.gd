@@ -65,20 +65,17 @@ func _physics_process(_delta):
 				being_added_to_inventory = true
 				$Sprite.visible = false
 				$CollisionShape2D.disabled = true
-				PlayerInventory.add_item_to_hotbar(item_name, item_quantity, item_health)
-				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+				PlayerData.add_item_to_hotbar(item_name, item_quantity, item_health)
+				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")
 				queue_free()
 	velocity.normalized()
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
 
 func pick_up_item(body):
-	if PlayerInventory.hotbar.size() == 10 and PlayerInventory.inventory.size() == 16:
-		pass
-	else: 
+#	if PlayerInventory.hotbar.size() == 10 and PlayerInventory.inventory.size() == 16:
+#		pass
+#	else: 
 		player = body
 		being_picked_up = true
-
-

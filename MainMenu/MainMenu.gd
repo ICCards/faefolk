@@ -1,17 +1,18 @@
 extends Control
 
-onready var PlayerMenuState = preload("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
-const _character = preload("res://Global/Data/Characters.gd")
+onready var PlayerMenuState = load("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
+onready var _character = load("res://Global/Data/Characters.gd")
 var playerMenuState
 var is_menu_open = false
 
 func _ready():
-#	$TitleMusic.stream = Sounds.title_music
-#	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
-#	$TitleMusic.play()
+	$TitleMusic.stream = Sounds.title_music
+	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
+	$TitleMusic.play()
 	Sounds.connect("volume_change", self, "change_title_volume")
 	$Background/Water1.playing = true
 	$Background/Water2.playing = true
+	spawn_player_in_menu()
 
 
 func spawn_player_in_menu():
@@ -21,10 +22,9 @@ func spawn_player_in_menu():
 		$MainMenuButtons/PlayShopQuit.visible = true
 		playerMenuState = PlayerMenuState.instance()
 		playerMenuState.character = _character.new()
-		#playerMenuState.character.LoadPlayerCharacter(value["c"])
 		playerMenuState.character.LoadPlayerCharacter("human_male")
 		add_child(playerMenuState)
-		playerMenuState.global_position = Vector2(600, 472 )
+		playerMenuState.global_position = Vector2(735, 585 )
 #	else:
 #		yield(get_tree().create_timer(0.25), "timeout")
 #		spawn_player_in_menu()
@@ -54,7 +54,7 @@ func close_options_menu():
 
 func _on_OptionsIconButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
-	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -28)
+	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	$SoundEffects.play()
 	toggle_menu_open()
 

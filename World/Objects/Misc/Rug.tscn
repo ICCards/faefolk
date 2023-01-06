@@ -1,7 +1,4 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://Assets/rug2-mask.png" type="Texture" id=1]
-[ext_resource path="res://Assets/skull.png" type="Texture" id=2]
+[gd_scene format=2]
 
 [node name="Rug" type="Node2D"]
 z_index = -1
@@ -10,7 +7,6 @@ z_index = -1
 light_mask = 32
 position = Vector2( 63, -44.9352 )
 scale = Vector2( 0.984375, 0.958826 )
-texture = ExtResource( 1 )
 mode = 3
 range_item_cull_mask = 32
 shadow_item_cull_mask = 0
@@ -19,6 +15,5 @@ shadow_item_cull_mask = 0
 light_mask = 32
 position = Vector2( 62.8625, -44.5 )
 scale = Vector2( 0.0651425, 0.0636624 )
-texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 93.875, 285.6, 1930.5, 1398.6 )

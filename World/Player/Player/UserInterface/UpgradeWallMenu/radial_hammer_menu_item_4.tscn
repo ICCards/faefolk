@@ -35,6 +35,7 @@ data = {
 [node name="radial_hammer_menu_item_4" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_scale = Vector2( 1.5, 1.5 )
 script = SubResource( 4 )
 
 [node name="button" type="TextureButton" parent="."]

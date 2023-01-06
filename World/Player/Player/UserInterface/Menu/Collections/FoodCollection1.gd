@@ -4,7 +4,7 @@ extends GridContainer
 func initialize():
 	show()
 	for item in self.get_children():
-		if CollectionsData.food[item.name] > 0:
+		if PlayerData.player_data["collections"]["food"][item.name] > 0:
 			get_node(item.name).modulate = Color("ffffff") # unlocked
 			get_node(item.name).material.set_shader_param("flash_modifier", 0)
 		else:

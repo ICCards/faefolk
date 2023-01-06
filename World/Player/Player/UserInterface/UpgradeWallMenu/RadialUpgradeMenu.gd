@@ -1,7 +1,7 @@
 extends Control
 
 
-
+onready var sound_effects: AudioStreamPlayer = $SoundEffects
 var buttons = ["wood", "stone", "metal", "armored", "demolish"]
 var current_index = -1
 var location
@@ -18,7 +18,7 @@ func initialize(_loc, _node):
 	show()
 	$Circle/AnimationPlayer.play("zoom")
 	Server.player_node.get_node("Camera2D").set_process_input(false)
-	PlayerInventory.viewInventoryMode = true
+	PlayerData.viewInventoryMode = true
 
 
 func _physics_process(delta):
@@ -29,12 +29,38 @@ func _physics_process(delta):
 		$Title.show()
 		$Title.text = buttons[current_index][0].to_upper() + buttons[current_index].substr(1,-1) + ":"
 		$Resources.show()
-		$Resources.text = "1 x Wood ( " + PlayerInventory.total_wood() + " )"
+		$Resources.bbcode_text = return_resource_cost_string(current_index)
 	else:
 		$Title.hide()
 		$Resources.hide()
 		
 		
+func return_resource_cost_string(index):
+	match index:
+		0:
+			if PlayerData.return_resource_total("wood") >= 20:
+				return "[center]20 x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+			else:
+				return "[center]20 x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+		1:
+			if PlayerData.return_resource_total("stone") >= 30:
+				return "[center]30 x Stone ( [color=#00ff00]" + str(PlayerData.return_resource_total("stone")) + "[/color] )[/center]"
+			else:
+				return "[center]30 x Stone ( [color=#ff0000]" + str(PlayerData.return_resource_total("stone")) + "[/color] )[/center]"
+		2:
+			if PlayerData.return_resource_total("bronze ingot") >= 20:
+				return "[center]20 x Bronze ingot ( [color=#00ff00]" + str(PlayerData.return_resource_total("bronze ingot")) + "[/color] )[/center]"
+			else:
+				return "[center]20 x Bronze ingot ( [color=#ff0000]" + str(PlayerData.return_resource_total("bronze ingot")) + "[/color] )[/center]"
+		3:
+			if PlayerData.return_resource_total("iron ingot") >= 25:
+				return "[center]25 x Iron ingot ( [color=#00ff00]" + str(PlayerData.return_resource_total("iron ingot")) + "[/color] )[/center]"
+			else:
+				return "[center]25 x Iron ingot ( [color=#ff0000]" + str(PlayerData.return_resource_total("iron ingot")) + "[/color] )[/center]"
+		4:
+			return ""
+	
+
 func set_icon_position():
 	match current_index:
 		-1:
@@ -120,19 +146,55 @@ func destroy():
 		current_index = -1
 
 func change_tile():
-	var new_tier = buttons[current_index]
-	tile_node.tier = new_tier
-	tile_node.set_type()
-	if new_tier != "demolish":
-		Server.world.play_upgrade_building_effect(location)
+	if return_valid_building_upgrade(current_index):
+		var new_tier = buttons[current_index]
+		tile_node.tier = new_tier
+		tile_node.set_type()
+		remove_materials(current_index)
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
+		if new_tier != "demolish":
+			InstancedScenes.play_upgrade_building_effect(location)
+		else:
+			InstancedScenes.play_remove_building_effect(location)
 	else:
-		Server.world.play_remove_building_effect(location)
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
+		sound_effects.play()
 
 func _input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		if PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] == "hammer":
-			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and PlayerInventory.viewInventoryMode:
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0] == "hammer":
+			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and PlayerData.viewInventoryMode:
 				if not event.is_pressed():
 					destroy()
 					yield(get_tree().create_timer(0.25), "timeout")
-					PlayerInventory.viewInventoryMode = false
+					PlayerData.viewInventoryMode = false
+
+func remove_materials(index):
+	match index:
+		0:
+			PlayerData.remove_material("wood", 20)
+		1:
+			PlayerData.remove_material("stone", 30)
+		2:
+			PlayerData.remove_material("bronze ingot", 20)
+		3:
+			PlayerData.remove_material("iron ingot", 25)
+		4:
+			pass # de,olish
+			
+
+func return_valid_building_upgrade(index):
+	match index:
+		0:
+			return PlayerData.returnSufficentCraftingMaterial("wood", 20)
+		1:
+			return PlayerData.returnSufficentCraftingMaterial("stone", 30)
+		2:
+			return PlayerData.returnSufficentCraftingMaterial("bronze ingot", 20)
+		3:
+			return PlayerData.returnSufficentCraftingMaterial("iron ingot", 25)
+		4:
+			return true

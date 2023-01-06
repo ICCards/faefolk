@@ -10,10 +10,10 @@ func _ready():
 func initialize():
 	show()
 	current_item = -1
-	Server.player_node.destroy_placable_object()
+	Server.player_node.actions.destroy_placable_object()
 	$Circle/AnimationPlayer.play("zoom")
 	Server.player_node.get_node("Camera2D").set_process_input(false)
-	PlayerInventory.viewInventoryMode = true
+	PlayerData.viewInventoryMode = true
 	get_node("Circle/0").initialize()
 	get_node("Circle/1").initialize()
 	get_node("Circle/2").initialize()
@@ -27,10 +27,27 @@ func _physics_process(delta):
 		$Title.show()
 		$Title.text = buildings[current_item][0].to_upper() + buildings[current_item].substr(1,-1) + ":"
 		$Resources.show()
-		$Resources.text = "1 x Wood ( " + PlayerInventory.total_wood() + " )"
+		if current_item == 1 or current_item == 0:
+			$Resources.bbcode_text = return_resource_cost_string(current_item)
+		else:
+			$Resources.bbcode_text = "[center]Coming soon...[/center]"
 	else:
 		$Title.hide()
 		$Resources.hide()
+
+
+func return_resource_cost_string(index):
+	match index:
+		0:
+			if PlayerData.return_resource_total("wood") >= 5:
+				return "[center]5 x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+			else:
+				return "[center]5 x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+		1:
+			if PlayerData.return_resource_total("wood") >= 2:
+				return "[center]2 x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+			else:
+				return "[center]2 x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
 
 
 func set_icon_position():
@@ -72,11 +89,11 @@ func destroy():
 
 
 func _input(event):
-	if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot):
-		if PlayerInventory.hotbar[PlayerInventory.active_item_slot][0] == "blueprint":
+	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+		if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0] == "blueprint":
 			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
 				if not event.is_pressed():
 					destroy()
 					yield(get_tree().create_timer(0.1), "timeout")
-					PlayerInventory.viewInventoryMode = false
+					PlayerData.viewInventoryMode = false
 #

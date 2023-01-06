@@ -3,7 +3,7 @@
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Magic/lightning/4/Electric_Effect_03.png" type="Texture" id=2]
 [ext_resource path="res://World/Objects/Magic/Lightning/LightningStrike.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Lightning/lightning strike.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Lightning/lightning strike.mp3" type="AudioStream" id=4]
 
 [sub_resource type="Curve" id=177]
 min_value = -400.0

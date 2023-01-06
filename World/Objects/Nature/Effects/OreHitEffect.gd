@@ -24,7 +24,7 @@ func _ready():
 	elif effect_type == "ore destroyed":
 		animation_player.play("ore break")
 		play_particles()
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield(animation_player, "animation_finished")
 	queue_free()
 
 

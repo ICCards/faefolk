@@ -4,7 +4,7 @@ var width
 var height
 var item_name
 var amount_ingredients
-onready var Ingredient = preload("res://InventoryLogic/Ingredient.tscn")
+onready var Ingredient = load("res://InventoryLogic/Ingredient.tscn")
 
 func initialize():
 	set_description_text(item_name)
@@ -69,7 +69,7 @@ func set_ingredients(item_name):
 
 
 func returnIfValidMaterial(item, amount):
-	if PlayerInventory.returnSufficentCraftingMaterial(item, amount):
+	if PlayerData.returnSufficentCraftingMaterial(item, amount):
 		return Color("ffffff") 
 	else:
 		return Color("ff0000") 

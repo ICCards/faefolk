@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://World/Objects/Magic/Fire/Flamethrower.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Assets/Images/Magic/fire/FlameThrower.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=5]
 
 [sub_resource type="Curve" id=31]
 min_value = -200.0
@@ -217,5 +218,11 @@ rotation = -1.5708
 scale = Vector2( 2, 2 )
 frames = SubResource( 57 )
 animation = "loop"
-frame = 9
+frame = 6
 playing = true
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -0.000396729, -109 )
+texture = ExtResource( 5 )
+energy = 1.01
+mode = 2

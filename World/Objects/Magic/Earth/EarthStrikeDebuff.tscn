@@ -2,7 +2,7 @@
 
 [ext_resource path="res://World/Objects/Magic/Earth/EarthStrikeDebuff.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Magic/earth/Skill_Effect_04.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Earth/spawn.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sound/Sound effects/Magic/Earth/spawn.mp3" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
@@ -65,6 +65,7 @@ frame = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 0, 32 )
+collision_layer = 2097153
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 48, -32 )

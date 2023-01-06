@@ -43,7 +43,7 @@ func _ready():
 func destroy():
 	destroyed = true
 	$Sprite.hide()
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Potion/glass break.wav")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Potion/glass break.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 	sound_effects.play()
 	if potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":

@@ -667,6 +667,7 @@ disabled = true
 autostart = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
 position = Vector2( -2.86102e-06, -93.3333 )
 scale = Vector2( 7.11111, 12.2222 )
 

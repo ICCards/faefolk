@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ice defense.mp3-65d450b5783307ad37138affd89328e7.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Magic/Ice/ice defense.mp3"
+dest_files=[ "res://.import/ice defense.mp3-65d450b5783307ad37138affd89328e7.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

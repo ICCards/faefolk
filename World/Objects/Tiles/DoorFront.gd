@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var door_open = false
 
@@ -11,18 +12,24 @@ var max_health
 var temp_health = 0
 var entered = false
 
-#func _ready():
-#	set_type()
+func _ready():
+	set_type()
 
 
 func _input(event):
-	if event.is_action_pressed("action") and entered:
+	if event.is_action_pressed("action") and $EnterDoorway.get_overlapping_areas().size() >= 1:
 		if door_open:
-			$AnimationPlayer.play("close")
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			sound_effects.play()
+			#$AnimationPlayer.play("close")
 			$AnimatedSprite.play("close")
 			$MovementCollision/CollisionShape2D.disabled = false
 		else:
-			$AnimationPlayer.play("open")
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			sound_effects.play()
+			#$AnimationPlayer.play("open")
 			$AnimatedSprite.play("open")
 			$MovementCollision/CollisionShape2D.disabled = true
 		door_open = !door_open
@@ -30,15 +37,15 @@ func _input(event):
 func set_type():
 	match tier:
 		"wood":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/front/wood.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/wood.tres")
 			health = Stats.MAX_WOOD_WALL
 			max_health = Stats.MAX_WOOD_WALL
 		"metal":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/front/metal.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/metal.tres")
 			health = Stats.MAX_METAL_WALL
 			max_health = Stats.MAX_METAL_WALL
 		"armored":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/front/armored.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/armored.tres")
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
 		"demolish":
@@ -88,12 +95,6 @@ func show_health():
 	$AnimationPlayer2.stop()
 	$AnimationPlayer2.play("show health bar")
 
-
-func _on_EnterDoorway_area_entered(area):
-	entered = true
-
-func _on_EnterDoorway_area_exited(area):
-	entered = false
 
 func _on_HammerRepairBox_area_entered(area):
 	set_type()

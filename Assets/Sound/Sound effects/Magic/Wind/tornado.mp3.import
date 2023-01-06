@@ -11,5 +11,5 @@ dest_files=[ "res://.import/tornado.mp3-2ad2bbe7b9066bc39842d29819c66155.mp3str"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

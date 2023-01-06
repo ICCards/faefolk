@@ -5,6 +5,8 @@ var rng = RandomNumberGenerator.new()
 var variety
 var location
 
+var harvested = false
+
 func _ready():
 	rng.randomize()
 	set_random_texture()
@@ -20,24 +22,34 @@ func _on_Btn_mouse_exited():
 
 func _on_Btn_pressed():
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-		CollectionsData.forage["mushroom"] += 1
+		PlayerData.player_data["collections"]["forage"]["mushroom"] += 1
 		Tiles.add_valid_tiles(location)
 		$Mushroom.hide()
 		$Btn.disabled = true
 		Input.set_custom_mouse_cursor(Images.normal_mouse)
-		Server.player_node.harvest_forage("Mushroom/"+str(variety))
+		Server.player_node.actions.harvest_forage("Mushroom/"+str(variety))
 		MapData.remove_object("mushroom", name)
 		yield(get_tree().create_timer(0.6), "timeout")
-		PlayerInventory.add_item_to_hotbar("mushroom", 1, null)
+		Input.set_custom_mouse_cursor(Images.normal_mouse)
+		PlayerData.add_item_to_hotbar("mushroom", 1, null)
 		queue_free()
 
 func set_mouse_cursor_type():
-	if not $Btn.disabled:
+	if not $Btn.disabled and not harvested:
 		if $DetectPlayer.get_overlapping_areas().size() >= 1:
-			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/harvest.png"))
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest.png"))
 		else:
-			Input.set_custom_mouse_cursor(preload("res://Assets/mouse cursors/harvest transparent.png"))
+			Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/harvest transparent.png"))
 
+
+
+func _physics_process(delta):
+	if $DetectPlayer.get_overlapping_areas().size() >= 1:
+		$Btn.disabled = false
+		if $Btn.is_hovered():
+			set_mouse_cursor_type()
+	else:
+		$Btn.disabled = true
 
 func _on_DetectPlayer_area_entered(area):
 	if $Btn.is_hovered():
@@ -45,4 +57,4 @@ func _on_DetectPlayer_area_entered(area):
 
 func _on_DetectPlayer_area_exited(area):
 	if $Btn.is_hovered():
-		set_mouse_cursor_type()
+		Input.set_custom_mouse_cursor(Images.normal_mouse)

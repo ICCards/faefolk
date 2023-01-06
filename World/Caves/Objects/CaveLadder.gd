@@ -9,7 +9,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Server.player_node:
-		if inside_area and Input.is_action_pressed("action") and Server.player_node.state != 5:
+		if inside_area and Input.is_action_pressed("action") and Server.player_node.state == 0:
 			$HealthBar.show()
 			if $HealthBar/Progress.value == 200:
 				if is_down_ladder:
@@ -23,11 +23,10 @@ func _physics_process(delta):
 			if $HealthBar/Progress.value == 0:
 				$HealthBar.hide()
 				return
-			$HealthBar/Progress.value -= 1
+			$HealthBar/Progress.value -= 2
 
 
 func _on_DetectPlayer_area_entered(area):
 	inside_area = true
-
 func _on_DetectPlayer_area_exited(area):
 	inside_area = false

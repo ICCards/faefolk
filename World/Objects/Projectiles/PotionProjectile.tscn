@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://Assets/Images/inventory_icons/Potion/regeneration potion III.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b11.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b2.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Images/Magic/Potions/smoke5_100x100.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Potion/glass break.wav" type="AudioStream" id=17]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.0
@@ -1057,4 +1056,3 @@ playing = true
 "anims/speed potion" = SubResource( 72 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 17 )

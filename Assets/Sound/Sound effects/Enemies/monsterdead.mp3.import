@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/monsterdead.mp3-553d0ced6e0dc1b979d6f961796a151d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Enemies/monsterdead.mp3"
+dest_files=[ "res://.import/monsterdead.mp3-553d0ced6e0dc1b979d6f961796a151d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

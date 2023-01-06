@@ -1,16 +1,16 @@
 extends Panel
 
-var default_text = preload("res://Assets/Images/Inventory UI/slot.png")
-var empty_text = preload("res://Assets/Images/Inventory UI/slot.png")
-var selected_text = preload("res://Assets/Images/Inventory UI/slot selected.png")
-var locked_text = preload("res://Assets/Images/Inventory UI/slot locked.png")
+var default_text = null #load("res://Assets/Images/Inventory UI/slot.png")
+var empty_text = null #load("res://Assets/Images/Inventory UI/slot.png")
+var selected_text = load("res://Assets/Images/User interface/hotbars/selected slot.png")
+var locked_text = null #load("res://Assets/Images/Inventory UI/slot locked.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null
 var selected_style: StyleBoxTexture = null
 var locked_style: StyleBoxTexture = null
 
-var ItemClass = preload("res://InventoryLogic/InventoryItem.tscn")
+var ItemClass = load("res://InventoryLogic/InventoryItem.tscn")
 var item = null
 var slot_index
 
@@ -23,7 +23,9 @@ enum SlotType {
 	GRAIN_MILL,
 	FURNACE,
 	STOVE,
-	TOOL_CABINET
+	CAMPFIRE,
+	CRAFTING,
+	COMBAT_HOTBAR
 }
 
 var slotType = null
@@ -40,10 +42,8 @@ func _ready():
 	refresh_style()
 
 func refresh_style():
-	if slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot_index:
+	if slotType == SlotType.HOTBAR and PlayerData.active_item_slot == slot_index:
 		set('custom_styles/panel', selected_style)
-#		if item != null:
-#			item.hover_item()
 	elif item == null:
 		set('custom_styles/panel', empty_style)
 	else:
@@ -51,10 +51,6 @@ func refresh_style():
 		set('custom_styles/panel', default_style)
 	if slotType == SlotType.LOCKED:
 		set('custom_styles/panel', locked_style)
-#	else:
-#		print("set locked style")
-#		set('custom_styles/panel', locked_style)
-
 
 func pickFromSlot():
 	remove_child(item)

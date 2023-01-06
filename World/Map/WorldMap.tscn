@@ -42,7 +42,7 @@ scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
 
 [node name="PlayerIcon" type="Sprite" parent="Map"]
-scale = Vector2( 40, 40 )
+scale = Vector2( 80, 80 )
 texture = ExtResource( 3 )
 
 [node name="Grid" type="TileMap" parent="."]
@@ -52,6 +52,8 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 800, 800 )
+zoom = Vector2( 1.2, 1.2 )
 limit_left = 0
 limit_top = 0
 limit_right = 1600

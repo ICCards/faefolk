@@ -10,6 +10,6 @@ func set_level():
 	$HBoxContainer/Level.text = str(skill_level)
 	for i in range(skill_level):
 		if i == 4 or i == 9:
-			$HBoxContainer.get_node(str(i+1)).texture = preload("res://Assets/Images/Inventory UI/skills/unlocked large.png")
+			$HBoxContainer.get_node(str(i+1)).texture = load("res://Assets/Images/Inventory UI/skills/unlocked large.png")
 		else:
-			$HBoxContainer.get_node(str(i+1)).texture = preload("res://Assets/Images/Inventory UI/skills/unlocked small.png")
+			$HBoxContainer.get_node(str(i+1)).texture = load("res://Assets/Images/Inventory UI/skills/unlocked small.png")

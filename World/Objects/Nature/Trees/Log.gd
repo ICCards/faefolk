@@ -41,7 +41,7 @@ func hit(tool_name, var special_ability = ""):
 		animation_player.play("break")
 		InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position+Vector2(-16, 16))
 		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
-		CollectionsData.resources["wood"] += amt
+		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		yield(get_tree().create_timer(1.2), "timeout")
 		queue_free()

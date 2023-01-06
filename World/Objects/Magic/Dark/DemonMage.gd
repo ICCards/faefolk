@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-onready var LightningProjectile = preload("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
-onready var TornadoProjectile = preload("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
-onready var FireProjectile = preload("res://World/Objects/Magic/Fire/FireProjectile.tscn")
-onready var IceProjectile = preload("res://World/Objects/Magic/Ice/IceProjectile.tscn")
+onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
+onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+onready var IceProjectile = load("res://World/Objects/Magic/Ice/IceProjectile.tscn")
 
 onready var demon_sprite: AnimatedSprite = $AnimatedSprite
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
@@ -30,6 +30,9 @@ var debuff: bool = false
 var random_movement_position = null
 
 func _ready():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Dark/demon mage spawn.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.play()
 	randomize()
 	$HitBox.tool_name = "wood sword"
 	if Util.chance(50):
@@ -44,7 +47,7 @@ func _physics_process(delta):
 				var direction = (enemy_node.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 				velocity = move_and_slide(velocity)
-				demon_sprite.flip_h = velocity.x > 0
+				demon_sprite.flip_h = velocity.x < 0
 				if not attacking and self.position.distance_to(enemy_node.position) < 150:
 					swing()
 				return
@@ -77,14 +80,14 @@ func _physics_process(delta):
 							demon_sprite.flip_h = true
 					else:
 						if degrees >= -90 or degrees <= -270:
-							demon_sprite.flip_h = false
-						else:
 							demon_sprite.flip_h = true
+						else:
+							demon_sprite.flip_h = false
 				else:
 					if velocity.x > 0:
-						demon_sprite.flip_h = false
-					else:
 						demon_sprite.flip_h = true
+					else:
+						demon_sprite.flip_h = false
 				if not attacking and self.position.distance_to(enemy_node.position) < 400:
 					shoot(enemy_node.position)
 				return
@@ -118,7 +121,6 @@ func shoot_random_projectile():
 	var rand = rand_range(0,100)
 	if rand < 25:
 		var spell = FireProjectile.instance()
-		spell.particles_transform = $ShootDirection.transform
 		spell.position = $ShootDirection/Position2D.global_position
 		spell.velocity = enemy_node.position - spell.position
 		get_node("../").add_child(spell)
@@ -130,7 +132,6 @@ func shoot_random_projectile():
 		get_node("../").add_child(spell)
 	elif rand < 75:
 		var spell = TornadoProjectile.instance()
-		spell.particles_transform = $ShootDirection.transform
 		spell.position = $ShootDirection/Position2D.global_position
 		spell.velocity = enemy_node.position - spell.position
 		get_node("../").add_child(spell)
@@ -147,7 +148,7 @@ func swing():
 	demon_sprite.frame = 0
 	demon_sprite.play("swing")
 	yield(get_tree().create_timer(0.5), "timeout")
-	sound_effects.stream = preload("res://Assets/Sound/Sound effects/Magic/Dark/swoosh.mp3")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Dark/swoosh.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
 	$HitBox/CollisionShape2D.set_deferred('disabled', false)
@@ -155,11 +156,6 @@ func swing():
 	$HitBox/CollisionShape2D.set_deferred('disabled', true)
 	attacking = false
 
-
-#func _on_DetectEnemyBox_body_entered(body):
-#	if not enemy_node:
-#		#if body.enemy_name == "bear" or body.enemy_name == "duck" or body.enemy_name == "bunny":
-#		enemy_node = body
 
 func set_trail_particles_direction():
 	if velocity == Vector2.ZERO or state == IDLE:
@@ -181,6 +177,7 @@ func _on_Timer_timeout():
 	destroy()
 
 func destroy(): 
+	$Shadow.hide()
 	destroyed = true
 	set_physics_process(false)
 	yield(get_tree(), "idle_frame")

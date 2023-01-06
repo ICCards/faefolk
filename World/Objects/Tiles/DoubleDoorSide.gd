@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+
 var door_open = false
 
 var id
@@ -17,10 +19,16 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("action") and entered:
 		if door_open:
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			sound_effects.play()
 			#$AnimationPlayer.play("close")
 			$AnimatedSprite.play("close")
-			$MovementCollision/CollisionShape2D.disabled = false
+			$MovementCollision/CollisionShape2D.disabled = false 
 		else:
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			sound_effects.play()
 			#$AnimationPlayer.play("open")
 			$AnimatedSprite.play("open")
 			$MovementCollision/CollisionShape2D.disabled = true
@@ -30,15 +38,15 @@ func _input(event):
 func set_type():
 	match tier:
 		"wood":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/side/wood.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/side/wood.tres")
 			health = Stats.MAX_WOOD_WALL
 			max_health = Stats.MAX_WOOD_WALL
 		"metal":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/side/metal.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/side/metal.tres")
 			health = Stats.MAX_METAL_WALL
 			max_health = Stats.MAX_METAL_WALL
 		"armored":
-			$AnimatedSprite.frames = preload("res://Assets/Tilesets/doors/animated/side/armored.tres")
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/side/armored.tres")
 			health = Stats.MAX_ARMORED_WALL
 			max_health = Stats.MAX_ARMORED_WALL
 		"demolish":
@@ -52,8 +60,8 @@ func remove_icon():
 
 func _on_EnterDoorway_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		if PlayerInventory.hotbar.has(PlayerInventory.active_item_slot) and not PlayerInventory.viewInventoryMode:
-			var tool_name = PlayerInventory.hotbar[PlayerInventory.active_item_slot][0]
+		if PlayerData.player_data["hotbar"].has(PlayerData.active_item_slot) and not PlayerData.viewInventoryMode:
+			var tool_name = PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0]
 			if tool_name == "hammer":
 				$SelectedBorder.show()
 				Server.player_node.get_node("Camera2D/UserInterface/RadialDoorMenu").initialize(location, self)

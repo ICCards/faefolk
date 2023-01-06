@@ -1,7 +1,7 @@
 extends Node2D
 
 
-onready var ItemDrop = preload("res://InventoryLogic/ItemDrop.tscn")
+onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
 var rng = RandomNumberGenerator.new()
 var location
@@ -20,7 +20,7 @@ func _ready():
 func _unhandled_input(event):
 	if event.is_action_pressed("action"):
 		if $Position2D/DetectPlayerAroundBed.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-			Server.player_node.sleep("down", position + Vector2(32,-24))
+			Server.player_node.actions.sleep("down", position + Vector2(32,-24))
 
 
 func PlayEffect(_player_id):
@@ -29,9 +29,9 @@ func PlayEffect(_player_id):
 	$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
 	Tiles.add_valid_tiles(location, item_name)
 	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
 	yield($SoundEffects, "finished")
@@ -39,29 +39,35 @@ func PlayEffect(_player_id):
 
 func set_dimensions():
 	rng.randomize()
-	id = str(rng.randi_range(0, 100000))
-	name = str(id)
 	item_name = Util.return_adjusted_item_name(item_name)
 	$Position2D.scale = Constants.dimensions_dict[item_name]
-	if item_name == "wood chest" or item_name == "stone chest":
+	if item_name == "campfire" or item_name == "torch":
+		$Light2D.enabled = true
+		if item_name == "campfire":
+			$Position2D/ChestInteractiveArea/CollisionShape2D.disabled = false
+			$Position2D/ChestInteractiveArea.object_name = "campfire"
+			$Position2D/ChestInteractiveArea.name = str(id)
+			if PlayerData.player_data["campfires"].has(id):
+				pass
+			else:
+				PlayerData.player_data["campfires"][id] = {}
+	elif item_name == "wood chest" or item_name == "stone chest":
 		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
 		$Position2D/StaticBody2D/CollisionShape2D.disabled = false
 		$Position2D/InteractiveArea.object_name = "chest"
 		$Position2D/InteractiveArea.object_level = ""
-		if is_preset_object_string != "":
-			$Position2D/InteractiveArea.name = is_preset_object_string
-			name = is_preset_object_string
-			id = is_preset_object_string
+		$Position2D/InteractiveArea.name = str(id)
+		if PlayerData.player_data["chests"].has(id):
+			pass
 		else:
-			$Position2D/InteractiveArea.name = str(id)
-			PlayerInventory.chests[id] = {}
+			PlayerData.player_data["chests"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
 				if item_name == "wood chest":
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/left.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
 				else:
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Left.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
 				$Chest.flip_h = false
 				$Chest.position = Vector2(18,0)
 				$Position2D.position = Vector2(16, -32)
@@ -69,9 +75,9 @@ func set_dimensions():
 				Tiles.remove_valid_tiles(location, Vector2(1,2))
 			"right":
 				if item_name == "wood chest":
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/left.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
 				else:
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Left.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
 				$Chest.flip_h = true
 				$Position2D.rotation_degrees = 270
 				$Position2D.position = Vector2(16, -32)
@@ -82,18 +88,18 @@ func set_dimensions():
 				$Position2D.rotation_degrees = 180
 				$Chest.position = Vector2(32,-32)
 				if item_name == "wood chest":
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/up.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/up.tres")
 				else:
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Up.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Up.tres")
 				Tiles.remove_valid_tiles(location, Vector2(2,1))
 			"down":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
 				$Chest.position = Vector2(32,-32)
 				if item_name == "wood chest":
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/wood/down.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/down.tres")
 				else:
-					$Chest.frames = preload("res://Assets/Images/Animations/chest/stone/Down.tres")
+					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Down.tres")
 				Tiles.remove_valid_tiles(location, Vector2(2,1))
 		$Chest.animation = "open"
 		$Chest.show()
@@ -120,7 +126,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "stove"
 		$Position2D/InteractiveArea.object_level = item_name.substr(7)
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.stoves[id] = {}
+		if PlayerData.player_data["stoves"].has(id):
+			pass
+		else:
+			PlayerData.player_data["stoves"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -139,7 +148,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "grain mill"
 		$Position2D/InteractiveArea.object_level = item_name.substr(12)
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.grain_mills_dict[id] = {}
+		if PlayerData.player_data["grain_mills"].has(id):
+			pass
+		else:
+			PlayerData.player_data["grain_mills"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -158,7 +170,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "furnace"
 		$Position2D/InteractiveArea.object_level = ""
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.furnaces[id] = {}
+		if PlayerData.player_data["furnaces"].has(id):
+			pass
+		else:
+			PlayerData.player_data["furnaces"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -173,7 +188,10 @@ func set_dimensions():
 		$Position2D/InteractiveArea.object_name = "tool cabinet"
 		$Position2D/InteractiveArea.object_level = ""
 		$Position2D/InteractiveArea.name = str(id)
-		PlayerInventory.tool_cabinets[id] = {}
+		if PlayerData.player_data["chests"].has(id):
+			pass
+		else:
+			PlayerData.player_data["chests"][id] = {}
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -188,10 +206,6 @@ func set_dimensions():
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
 	elif item_name == "dresser":
-#		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-#		$Position2D/InteractiveArea.object_name = "workbench"
-#		$Position2D/InteractiveArea.object_level = item_name.substr(11)
-#		$Position2D/InteractiveArea.name = str(id)
 		match direction:
 			"left":
 				$Position2D.rotation_degrees = 90
@@ -261,15 +275,13 @@ func set_dimensions():
 		$Position2D.position =  Vector2(64, -48)
 
 func _input(event):
-	if Server.player_node.state == 0 and not PlayerInventory.chatMode and not PlayerInventory.viewMapMode:
-		if event.is_action_pressed("action") and not PlayerInventory.viewInventoryMode:
+	if Server.player_node.state == 0 and not PlayerData.viewMapMode:
+		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode:
 			if item_name == "chair" or item_name == "armchair" or item_name == "couch":
 				if $Position2D/InteractiveArea.get_overlapping_areas().size() >= 1:
-					Server.player_node.sit(return_adjusted_chair_position(direction), direction)
+					Server.player_node.actions.sit(return_adjusted_chair_position(direction), direction)
 	elif event.is_action_pressed("action") and Server.player_node.state == 7:
-		Server.player_node.stand_up()
-		
-		
+		Server.player_node.actions.stand_up()
 		
 func return_adjusted_chair_position(direction):
 	match item_name:
@@ -316,31 +328,35 @@ func _on_HurtBox_area_entered(area):
 		Stats.decrease_tool_health()
 	$Light2D.enabled = false
 	$Chest.hide()
-	if has_node(id):
-		get_node(id+ "/CollisionShape2D").set_deferred("disabled", true)
+	$FurnaceSmoke.hide()
+	if $Position2D.has_node(str(id)):
+		$Position2D.get_node(id+ "/CollisionShape2D").set_deferred("disabled", true)
 	$Position2D/HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/DetectPlayerAroundBed/CollisionShape2D.set_deferred("disabled", true)
 	if item_name == "stone path" or item_name == "fire pedestal" or item_name == "tall fire pedestal":
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break stone.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "wood chest" or item_name == "stone chest":
 		drop_items_in_chest()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		drop_items_in_grain_mill()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		drop_items_in_stove()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "furnace":
 		drop_items_in_furnace()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	elif item_name == "tool cabinet":
-		drop_items_in_tc()
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		drop_items_in_chest()
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+	elif item_name == "campfire":
+		drop_items_in_campfire()
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break stone.mp3")
 	else: 
-		$SoundEffects.stream = preload("res://Assets/Sound/Sound effects/objects/break wood.mp3")
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/objects/break wood.mp3")
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	$SoundEffects.play()
 	var dimensions = Constants.dimensions_dict[item_name]
@@ -348,41 +364,39 @@ func _on_HurtBox_area_entered(area):
 		Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 	else:
 		Tiles.add_valid_tiles(location, dimensions)
-	if Server.world.name == "World":
-		Tiles.object_tiles.set_cellv(location, -1)
-		Tiles.fence_tiles.set_cellv(location, -1)
-		Tiles.fence_tiles.update_bitmask_area(location)
+	Tiles.object_tiles.set_cellv(location, -1)
+	Tiles.fence_tiles.set_cellv(location, -1)
+	Tiles.fence_tiles.update_bitmask_area(location)
 	InstancedScenes.intitiateItemDrop(item_name, position, 1)
 	MapData.remove_placable(id)
 	yield($SoundEffects, "finished")
 	queue_free()
 
 
+func drop_items_in_campfire():
+	for item in PlayerData.player_data["campfires"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["campfires"][id][item], position)
+	PlayerData.player_data["campfires"].erase(id)
+
 func drop_items_in_stove():
-	for item in PlayerInventory.stoves[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.stoves[id][item], position)
-	PlayerInventory.stoves.erase(id)
+	for item in PlayerData.player_data["stoves"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["stoves"][id][item], position)
+	PlayerData.player_data["stoves"].erase(id)
 
 func drop_items_in_grain_mill():
-	pass # BROKEN
-#	for item in PlayerInventory.grain_mills[id].keys():
-#		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.grain_mills[id][item], position)
-#	PlayerInventory.grain_mills.erase(id)
+	for item in PlayerData.player_data["grain_mills"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["grain_mills"][id][item], position)
+	PlayerData.player_data["grain_mills"].erase(id)
 
 func drop_items_in_chest():
-	for item in PlayerInventory.chests[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.chests[id][item], position)
-	PlayerInventory.chests.erase(id)
+	for item in PlayerData.player_data["chests"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["chests"][id][item], position)
+	PlayerData.player_data["chests"].erase(id)
 
 func drop_items_in_furnace():
-	for item in PlayerInventory.furnaces[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.furnaces[id][item], position)
-	PlayerInventory.furnaces.erase(id)
-
-func drop_items_in_tc():
-	for item in PlayerInventory.tool_cabinets[id].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerInventory.tool_cabinets[id][item], position)
-	PlayerInventory.tool_cabinets.erase(id)
+	for item in PlayerData.player_data["furnaces"][id].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["furnaces"][id][item], position)
+	PlayerData.player_data["furnaces"].erase(id)
 
 
 func _on_DetectObjectOverPathBox_area_entered(area):
@@ -394,10 +408,9 @@ func _on_DetectObjectOverPathBox_area_exited(area):
 		yield(get_tree().create_timer(0.25), "timeout")
 		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 
-
 func open_chest():
 	$Chest.play("open")
-	
+
 func close_chest():
 	yield(get_tree().create_timer(0.2), "timeout")
 	$Chest.play("open", true)

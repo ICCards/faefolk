@@ -1,4 +1,39 @@
 {
+    "cloth": {
+        "ItemCategory": "Resource",
+        "StackSize": 999,
+        "Description": "A soft material harvested from animal fur.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "slime orb": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A mysterious ball of slime.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "bone": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A bone from a skeleton.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "bat wing": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A delicate material harvested from a bat.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "silk": {
+      "ItemCategory": "Resource",
+      "StackSize": 999,
+      "Description": "A thin string harvested from a spider.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
     "health potion I": {
       "ItemCategory": "Potion",
       "StackSize": 999,
@@ -111,10 +146,10 @@
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "lightning staff": {
+    "electric staff": {
       "ItemCategory": "Magic",
       "StackSize": 1,
-      "Description": "Used to cast lightning spells.",
+      "Description": "Used to cast electric spells.",
       "Ingredients": null,
       "EnergyHealth": null
     },
@@ -129,14 +164,14 @@
       "ItemCategory": "Magic",
       "StackSize": 1,
       "Description": "Used to cast fire spells.",
-      "Ingredients": null,
+      "Ingredients": [["wood", 10]],
       "EnergyHealth": null
     },
     "wind staff": {
       "ItemCategory": "Magic",
       "StackSize": 1,
       "Description": "Used to cast wind spells.",
-      "Ingredients": null,
+      "Ingredients": [["wood", 10]],
       "EnergyHealth": null
     },
     "earth staff": {
@@ -207,7 +242,7 @@
       "StackSize": 999,
       "Description": "A washed up sea specimen.",
       "Ingredients": null,
-      "EnergyHealth": null,
+      "EnergyHealth": null
       },
     "blue flower": {
       "ItemCategory": "Forage",
@@ -240,28 +275,28 @@
     "dark green grass": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "[grass desc.]",
+      "Description": "Tall grass harvested in the Winter.",
       "Ingredients": null,
       "EnergyHealth": null
     },
     "green grass": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "[grass desc.]",
+      "Description": "Tall grass harvested in the Spring.",
       "Ingredients": null,
       "EnergyHealth": null
     },
     "red grass": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "[grass desc.]",
+      "Description": "Tall grass harvested in the Fall.",
       "Ingredients": null,
       "EnergyHealth": null
     },
     "yellow grass": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "[grass desc.]",
+      "Description": "Tall grass harvested in the Summer.",
       "Ingredients": null,
       "EnergyHealth": null
     },
@@ -536,28 +571,28 @@
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to catch fish. Tier 1.",
-      "Ingredients": [["wood", 10],["rope", 2]],
+      "Ingredients": [["wood", 10],["silk", 2]],
       "EnergyHealth": null
   },
   "stone fishing rod":{
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to catch fish. Tier 2.",
-      "Ingredients": [["stone", 10],["rope", 2]],
+      "Ingredients": [["stone", 10],["silk", 2]],
       "EnergyHealth": null
   },
   "gold fishing rod":{
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to catch fish. Tier 3",
-      "Ingredients": [["gold ingot", 10],["rope", 2]],
+      "Ingredients": [["gold ingot", 10],["silk", 2]],
       "EnergyHealth": null
   },
   "bow":{
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Requires arrows for ammo.",
-      "Ingredients": [["wood", 10],["rope", 1]],
+      "Ingredients": [["wood", 10],["silk", 1]],
       "EnergyHealth": null
   },
   "arrow": {
@@ -580,7 +615,7 @@
       "ItemCategory": "Construction",
       "StackSize": 1,
       "Description": "Used to upgrade building structures.",
-      "Ingredients": [["wood", 10]],
+      "Ingredients": [["wood", 10], ["stone", 10]],
       "EnergyHealth": null
   },
   
@@ -594,7 +629,7 @@
   "raw filet": {
       "ItemCategory": "Food",
       "StackSize": 999,
-      "Description": "A lean protein from a bunny.",
+      "Description": "A lean protein from an animal carcass.",
       "Ingredients": null,
       "EnergyHealth": [10,10]
   },
@@ -603,14 +638,14 @@
       "StackSize": 999,
       "Description": "A quick and tasty snack.",
       "Ingredients": [["raw wing", 1]],
-      "EnergyHealth": [10,10]
+      "EnergyHealth": [24,16]
   },
   "cooked filet": {
       "ItemCategory": "Food",
       "StackSize": 999,
       "Description": "Provides long-lasting energy.",
       "Ingredients": [["raw filet", 1]],
-      "EnergyHealth": [10,10]
+      "EnergyHealth": [32,16]
   },
   "wheat flour": {
       "ItemCategory": "Food",
@@ -633,19 +668,19 @@
       "Ingredients": null,
       "EnergyHealth": [0,0]
   },
-  "egg": {
-      "ItemCategory": "Food",
+  "raw egg": {
+      "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A common cooking ingredient made from chickens.",
+      "Description": "A cooking material dropped from a duck.",
       "Ingredients": null,
-      "EnergyHealth": [0,0]
+      "EnergyHealth": null
   },
   "mushroom": {
       "ItemCategory": "Forage",
       "StackSize": 999,
       "Description": "A fungus found in the caves.",
       "Ingredients": null,
-      "EnergyHealth": [0,0]
+      "EnergyHealth": null
   },
   
   
@@ -1055,21 +1090,21 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Entry point for bases with medium durability.",
-      "Ingredients": [["iron ingot", 20]],
+      "Ingredients": [["bronze ingot", 20]],
       "EnergyHealth": null
   },
   "armored door" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Entry point for bases with high durability.",
-      "Ingredients": [["iron ingot", 40]],
+      "Ingredients": [["iron ingot", 20]],
       "EnergyHealth": null
   },
   "furnace" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Turns ore and coal into metal bars.",
-      "Ingredients": [["wood", 10], ["stone", 100]],
+      "Ingredients": [["wood", 10], ["stone", 40]],
       "EnergyHealth": null
   },
   "display table" : {
@@ -1083,7 +1118,7 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Sets building point and building upkeep.",
-      "Ingredients": [["wood", 150]],
+      "Ingredients": [["wood", 75]],
       "EnergyHealth": null
   },
   
@@ -1143,53 +1178,68 @@
       "Ingredients": [["wood", 2],["stone", 10]],
       "EnergyHealth": null
   },
-  "house": {
+  "brewing table #1": {
       "ItemCategory": "Placable object",
-      "StackSize": 1,
-      "Description": "Large placable shelter with high durability.",
-      "Ingredients": null,
+      "StackSize": 999,
+      "Description": "Used to create potions. Level 1.",
+      "Ingredients": [["wood", 40]],
       "EnergyHealth": null
   },
+  "brewing table #2": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to create potions. Level 2.",
+      "Ingredients": [["stone", 40]],
+      "EnergyHealth": null
+  },
+  "brewing table #3": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "Used to create potions. Level 3.",
+      "Ingredients": [["iron ingot", 40]],
+      "EnergyHealth": null
+  },
+
   "workbench #1": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 1.",
-      "Ingredients": [["wood", 30]],
+      "Ingredients": [["wood", 25], ["stone", 10]],
       "EnergyHealth": null
   },
   "workbench #2": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 2.",
-      "Ingredients": [["wood",30],["bronze ingot",10]],
+      "Ingredients": [["wood",50],["stone",50]],
       "EnergyHealth": null
   },
   "workbench #3": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 3.",
-      "Ingredients": [["wood",30],["iron ingot",10]],
+      "Ingredients": [["wood",100],["stone",100]],
       "EnergyHealth": null
   },
   "grain mill #1": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 1.",
-      "Ingredients": [["stone", 10], ["iron ingot",10]],
+      "Ingredients": [["stone", 10], ["iron ingot",5]],
       "EnergyHealth": null
   },
   "grain mill #2": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 2.",
-      "Ingredients": [["stone", 20], ["iron ingot",20]],
+      "Ingredients": [["stone", 20], ["iron ingot",10]],
       "EnergyHealth": null
   },
   "grain mill #3": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 3.",
-      "Ingredients": [["stone", 40], ["iron ingot",40]],
+      "Ingredients": [["stone", 40], ["iron ingot",20]],
       "EnergyHealth": null
   },
   "stove #1": {
@@ -1272,7 +1322,7 @@
     "betta":{
         "ItemCategory": "Fish",
         "StackSize": 999,
-        "Description": "Despite its beauty and small size, these freshwater fish are known as the Siamese fighting fish.",
+        "Description": "Also known as the Siamese fighting fish.",
         "Ingredients": null,
         "EnergyHealth": [10,10]
     },
@@ -1412,9 +1462,9 @@
     "mushroom soup":{
         "ItemCategory": "Food",
         "StackSize": 999,
-        "Description": "[description]",
+        "Description": "A warm and creamy snack.",
         "Ingredients": [["mushroom", 5]],
-        "EnergyHealth": [10,10]
+        "EnergyHealth": [18,10]
     },
     "sashimi":{
         "ItemCategory": "Food",
@@ -1441,7 +1491,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "[description]",
-        "Ingredients": [["egg", 2],["asparagus", 5]],
+        "Ingredients": [["raw egg", 2],["asparagus", 5]],
         "EnergyHealth": [10,10]
     },
     "wings with corn":{
@@ -1538,9 +1588,9 @@
     "scrambled eggs":{
         "ItemCategory": "Food",
         "StackSize": 999,
-        "Description": "[description]",
-        "Ingredients": [["egg", 3]],
-        "EnergyHealth": [10,10]
+        "Description": "Fluffy eggs served with a pinch of salt.",
+        "Ingredients": [["raw egg", 5]],
+        "EnergyHealth": [16,12]
     },
     "baked dorado":{
         "ItemCategory": "Food",
@@ -1630,7 +1680,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "[description]",
-        "Ingredients": [["jalapeno", 4],["egg", 2]],
+        "Ingredients": [["jalapeno", 4],["raw egg", 2]],
         "EnergyHealth": [10,10]
     },
     "zucchini soup":{
@@ -1727,9 +1777,9 @@
     "bread":{
         "ItemCategory": "Food",
         "StackSize": 999,
-        "Description": "[description]",
+        "Description": "A quick, crunchy snack made from wheat flour.",
         "Ingredients": [["wheat flour", 5]],
-        "EnergyHealth": [10,10]
-    },
+        "EnergyHealth": [18,10]
+    }
     
 }

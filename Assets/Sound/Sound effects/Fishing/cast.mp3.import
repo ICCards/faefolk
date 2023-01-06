@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/cast.mp3-9e79f5435e115450573ff90d7469dd1e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Fishing/cast.mp3"
+dest_files=[ "res://.import/cast.mp3-9e79f5435e115450573ff90d7469dd1e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
