@@ -148,7 +148,7 @@ func _unhandled_input(event):
 					actions.destroy_placable_object()
 			else:
 				actions.destroy_placable_object()
-				if event.is_action_pressed("mouse_click"): # punch
+				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"): # punch
 					$Swing.swing(null, direction) 
 	if event.is_action_pressed("sprint") and not poisoned:
 		running = true
