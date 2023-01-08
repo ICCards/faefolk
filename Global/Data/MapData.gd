@@ -12,6 +12,7 @@ var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "f
 var is_world_data_in_chunks = false
 
 var world = {
+	"is_built": false,
 	"ocean": [],
 	"plains": [],
 	"forest": [],

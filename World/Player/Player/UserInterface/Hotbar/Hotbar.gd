@@ -6,11 +6,6 @@ onready var slots = hotbar_slots.get_children()
 var item = null
 var adjusted_pos = Vector2(0,0)
 
-enum SlotType {
-	HOTBAR = 0,
-	INVENTORY,
-	CHEST
-}
 
 func _ready():
 	yield(get_tree(), "idle_frame")
@@ -27,13 +22,10 @@ func _ready():
 func hovered_slot(slot):
 	Server.player_node.actions.destroy_placable_object()
 	if slot.item:
-		#slot.item.hover_item()
 		item = slot.item.item_name
 
 func exited_slot(slot):
 	item = null
-#	if slot.item and not (slot.slotType == SlotType.HOTBAR and PlayerData.active_item_slot == slot.slot_index):
-#		slot.item.exit_item()
 
 func _physics_process(delta):
 	if not visible:
@@ -67,9 +59,9 @@ func adjusted_description_position():
 		elif lines == 3:
 			adjusted_pos = Vector2(get_local_mouse_position().x + 45, -14)
 		else:
-			adjusted_pos = Vector2(get_local_mouse_position().x + 45, 7) #-134)
+			adjusted_pos = Vector2(get_local_mouse_position().x + 45, 7)
 		if item_category == "Food" or item_category == "Fish" or item_category == "Crop":
-			adjusted_pos += Vector2(0, -84)
+			adjusted_pos += Vector2(0, -58)
 
 func update_tool_health():
 	var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
@@ -93,14 +85,15 @@ func initialize_hotbar():
 			slots[i].removeFromSlot()
 		if PlayerData.player_data["hotbar"].has(str(i)):
 			slots[i].initialize_item(PlayerData.player_data["hotbar"][str(i)][0], PlayerData.player_data["hotbar"][str(i)][1], PlayerData.player_data["hotbar"][str(i)][2])
-	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-		slots[PlayerData.active_item_slot].item.set_init_hovered()
 	PlayerData.emit_signal("active_item_updated")
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if Server.player_node.state == 0:
+				$SoundEffects.stream = load("res://Assets/Sound/Sound effects/UI/slot.mp3")
+				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+				$SoundEffects.play()
 				PlayerData.hotbar_slot_selected(slot)
 
 

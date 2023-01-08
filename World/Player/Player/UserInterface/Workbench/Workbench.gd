@@ -1,6 +1,6 @@
 extends Control
 
-const MAX_SCROLL_SIZE = 16
+const MAX_SCROLL_SIZE = 34
 
 var level
 
@@ -8,7 +8,7 @@ var crafting_item
 var hovered_item
 
 var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can", "wood fishing rod", "scythe", "arrow"]
-var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod"]
+var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod", "bow"]
 
 onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")

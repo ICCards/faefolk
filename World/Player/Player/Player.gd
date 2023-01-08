@@ -58,7 +58,6 @@ func _ready():
 		$Camera2D/UserInterface/LoadingScreen.show()
 		yield(get_tree().create_timer(5.0), "timeout")
 	state = MOVEMENT
-	Settings.load_keys()
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	yield(get_tree(), "idle_frame")
 	isLoaded = true
@@ -131,17 +130,17 @@ func _unhandled_input(event):
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif item_name == "blueprint" and current_building_item != null:
 					actions.show_placable_object(current_building_item, "BUILDING")
-				elif event.is_action_pressed("mouse_click") and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
+				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
 					actions.fish()
-				elif event.is_action_pressed("mouse_click") and (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
+				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
 					$Swing.swing(item_name, direction)
-				elif item_category == "Potion" and event.is_action_pressed("mouse_click"):
+				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_category == "Potion":
 					$Magic.throw_potion(item_name, direction)
-				elif event.is_action_pressed("mouse_click") and item_name == "bow":
+				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_name == "bow":
 					$Magic.draw_bow(direction)
-				elif event.is_action_pressed("mouse_click") and item_category == "Magic":
+				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_category == "Magic":
 					$Magic.cast_spell(item_name, direction)
-				elif event.is_action_pressed("mouse_click") and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
+				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
 					actions.eat(item_name)
 				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
 					actions.show_placable_object(item_name, item_category)
@@ -178,6 +177,10 @@ func magic_casting_movement_state(_delta):
 	if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
 		cast_movement_direction = ""
 		pass
+	if cast_movement_direction == "":
+		$Sounds/FootstepsSound.stream_paused = true
+	else:
+		$Sounds/FootstepsSound.stream_paused = false
 	input_vector = input_vector.normalized()
 	if input_vector != Vector2.ZERO:
 		velocity += input_vector * ACCELERATION * _delta

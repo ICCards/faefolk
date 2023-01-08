@@ -16,6 +16,7 @@ func _ready():
 	BuildCaveLevel.build()
 	Server.isLoaded = true
 	BuildCaveLevel.update_navigation()
+	spawn_boss()
 
 func advance_up_cave_level(): 
 	if not is_changing_scene:

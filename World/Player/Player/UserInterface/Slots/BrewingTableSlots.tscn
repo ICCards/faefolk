@@ -1,0 +1,121 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/inventory_icons/Potion/empty potion I.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/inventory_icons/Resource/slime orb.png" type="Texture" id=3]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/BrewingTableSlots.gd" type="Script" id=4]
+
+[node name="BrewingTableSlots" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+
+[node name="FuelSlot" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 418.0
+margin_top = 493.0
+margin_right = 466.0
+margin_bottom = 541.0
+rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 1 )
+
+[node name="SlimeOrbSlot" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 355.0
+margin_top = 493.0
+margin_right = 403.0
+margin_bottom = 541.0
+rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="SlimeOrbSlot"]
+modulate = Color( 1, 1, 1, 0.392157 )
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="GlassSlot" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 481.0
+margin_top = 493.0
+margin_right = 529.0
+margin_bottom = 541.0
+rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="GlassSlot"]
+modulate = Color( 1, 1, 1, 0.392157 )
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="IngredientSlot1" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 388.0
+margin_top = 361.0
+margin_right = 436.0
+margin_bottom = 409.0
+rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 1 )
+
+[node name="IngredientSlot2" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 448.0
+margin_top = 361.0
+margin_right = 496.0
+margin_bottom = 409.0
+rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 1 )
+
+[node name="YieldSlot1" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 355.0
+margin_top = 229.0
+margin_right = 403.0
+margin_bottom = 277.0
+rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 1 )
+
+[node name="YieldSlot2" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 418.0
+margin_top = 229.0
+margin_right = 466.0
+margin_bottom = 277.0
+rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 1 )
+
+[node name="CoalYieldSlot" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 481.0
+margin_top = 229.0
+margin_right = 529.0
+margin_bottom = 277.0
+rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 1 )

@@ -1,57 +1,33 @@
 extends Control
 
-onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-
-onready var fuel_slot = $FuelSlot
-onready var ingredient_slot1 = $Ingredient1
-onready var ingredient_slot2 = $Ingredient2
-onready var ingredient_slot3 = $Ingredient3
-onready var yield_slot1 = $YieldSlot1
-onready var yield_slot2 = $YieldSlot2
-onready var coal_yield_slot = $CoalYieldSlot
+onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 
 
 func _ready():
-	initialize_locked_slots()
+	initialize()
 	initialize_slots()
 
-func initialize_locked_slots():
-	var slots_in_stove = self.get_children()
+func initialize():
+	var slots = self.get_children()
 	if get_parent().level == "1":
-		$Ingredient2/LockSlot.show()
-		$Ingredient3/LockSlot.show()
-		for i in range(slots_in_stove.size()):
-			if i != 2 and i != 3:
-				slots_in_stove[i].connect("gui_input", self, "slot_gui_input", [slots_in_stove[i]])
-				slots_in_stove[i].connect("mouse_entered", self, "hovered_slot", [slots_in_stove[i]])
-				slots_in_stove[i].connect("mouse_exited", self, "exited_slot", [slots_in_stove[i]])
-			slots_in_stove[i].slot_index = i
-			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
+		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion I.png")
 	elif get_parent().level == "2":
-		$Ingredient3/LockSlot.show()
-		for i in range(slots_in_stove.size()):
-			if i != 3:
-				slots_in_stove[i].connect("gui_input", self, "slot_gui_input", [slots_in_stove[i]])
-				slots_in_stove[i].connect("mouse_entered", self, "hovered_slot", [slots_in_stove[i]])
-				slots_in_stove[i].connect("mouse_exited", self, "exited_slot", [slots_in_stove[i]])
-			slots_in_stove[i].slot_index = i
-			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
+		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion II.png")
 	else:
-		for i in range(slots_in_stove.size()):
-			slots_in_stove[i].connect("gui_input", self, "slot_gui_input", [slots_in_stove[i]])
-			slots_in_stove[i].connect("mouse_entered", self, "hovered_slot", [slots_in_stove[i]])
-			slots_in_stove[i].connect("mouse_exited", self, "exited_slot", [slots_in_stove[i]])
-			slots_in_stove[i].slot_index = i
-			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
+		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion III.png")
+		for i in range(slots.size()):
+			slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
+			slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
+			slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
+			slots[i].slot_index = i
+			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
 
 func initialize_slots():
 	var slots = self.get_children()
 	for i in range(slots.size()):
-		if slots[i].item:
-			slots[i].removeFromSlot()
-		if PlayerData.player_data["stoves"][get_parent().id].has(str(i)):
-			slots[i].initialize_item(PlayerData.player_data["stoves"][get_parent().id][str(i)][0], PlayerData.player_data["stoves"][get_parent().id][str(i)][1], PlayerData.player_data["stoves"][get_parent().id][str(i)][2])
+		if PlayerData.player_data["brewing_tables"][get_parent().id].has(str(i)):
+			slots[i].initialize_item(PlayerData.player_data["brewing_tables"][get_parent().id][str(i)][0], PlayerData.player_data["brewing_tables"][get_parent().id][str(i)][1], PlayerData.player_data["brewing_tables"][get_parent().id][str(i)][2])
 
 func able_to_put_into_slot(slot):
 	var holding_item = find_parent("UserInterface").holding_item
@@ -59,14 +35,20 @@ func able_to_put_into_slot(slot):
 		return true
 	var holding_item_name = holding_item.item_name 
 	var holding_item_category = JsonData.item_data[holding_item_name]["ItemCategory"]
-	if slot.slot_index == 0 and slot.name == "FuelSlot": # fuel
+	if slot.name == "SlimeOrbSlot":
+		return holding_item_name == "slime orb"
+	elif slot.name == "GlassSlot" and get_parent().level == "1":
+		return holding_item_name == "empty potion I"
+	elif slot.name == "GlassSlot" and get_parent().level == "2":
+		return holding_item_name == "empty potion II"
+	elif slot.name == "GlassSlot" and get_parent().level == "3":
+		return holding_item_name == "empty potion III"
+	elif slot.name == "FuelSlot":
 		return holding_item_name == "wood" or holding_item_name == "coal"
 	elif slot.name.substr(0,10) == "Ingredient": # ingredients
-		return holding_item_category == "Crop" or holding_item_category == "Fish" or holding_item_category == "Food" or holding_item_category == "Forage" 
-	elif slot.slotType == SlotClass.SlotType.STOVE and (slot.slot_index == 4 or slot.slot_index == 5 or slot.slot_index == 6): # yield
-		return false
-	return true
-
+		return holding_item_category == "Forage" or holding_item_category == "Resource"
+	return false
+	
 func hovered_slot(slot):
 	if slot.item:
 		slot.item.hover_item()
@@ -101,7 +83,7 @@ func right_click_slot(slot):
 		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))
 		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-		get_parent().check_valid_recipe()
+
 
 func return_holding_item(item_name, qt):
 	var inventoryItem = InventoryItem.instance()
@@ -114,7 +96,7 @@ func left_click_empty_slot(slot):
 		PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, get_parent().id)
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = null
-		get_parent().check_valid_recipe()
+
 
 func left_click_different_item(event: InputEvent, slot):
 	if able_to_put_into_slot(slot):
@@ -125,7 +107,7 @@ func left_click_different_item(event: InputEvent, slot):
 		temp_item.global_position = event.global_position
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = temp_item
-		get_parent().check_valid_recipe()
+	
 
 func left_click_same_item(slot):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
@@ -139,11 +121,10 @@ func left_click_same_item(slot):
 		PlayerData.add_item_quantity(slot, able_to_add, get_parent().id)
 		slot.item.add_item_quantity(able_to_add)
 		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
-	get_parent().check_valid_recipe()
+
 
 func left_click_not_holding(slot):
 	PlayerData.remove_item(slot, get_parent().id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-	get_parent().check_valid_recipe()

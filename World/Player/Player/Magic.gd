@@ -83,16 +83,8 @@ var ending_mouse_point
 
 
 func _input( event ):
-	if is_casting or is_drawing or is_throwing:
-		$AimDownSightLine.show()
-		$CastDirection.look_at(get_global_mouse_position())
-		var start_pt = $CastDirection/Position2D.global_position-get_node("../").global_position
-		var end_pt = get_local_mouse_position()
-		$AimDownSightLine.points = [start_pt, end_pt]
-	else:
-		$AimDownSightLine.hide()
 	if event is InputEventMouseButton:
-		if event.button_index == 1 and event.is_pressed():
+		if (event.button_index == 1 and event.is_pressed()):
 			mouse_left_down = true
 		elif event.button_index == 1 and not event.is_pressed():
 			mouse_left_down = false
@@ -255,6 +247,14 @@ func validate_magic_cast_requirements():
 			return PlayerData.player_data["mana"] >= 10 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
 
 func _physics_process(delta):
+	if (is_casting or is_drawing or is_throwing) and not PlayerData.viewMapMode:
+		$AimDownSightLine.show()
+		$CastDirection.look_at(get_global_mouse_position())
+		var start_pt = $CastDirection/Position2D.global_position-get_node("../").global_position
+		var end_pt = get_local_mouse_position()
+		$AimDownSightLine.points = [start_pt, end_pt]
+	else:
+		$AimDownSightLine.hide()
 	var degrees = int($CastDirection.rotation_degrees) % 360
 	$CastDirection.look_at(get_global_mouse_position())
 	if $CastDirection.rotation_degrees >= 0:

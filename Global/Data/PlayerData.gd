@@ -49,40 +49,38 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-		"0": ["iron sword", 1, 100],
-		"1": ["bow", 1, 50],
-		"2": ["arrow", 100, null],
-		"6": ["wind staff", 1, null],
-#		"2": ["wood fishing rod", 1, null],
-#		"3": ["stove #1", 10, null],
+#		"0": ["iron sword", 1, 100],
+#		"1": ["bow", 1, 50],
+#		"2": ["arrow", 100, null],
+#		"6": ["wind staff", 1, null],
+##		"2": ["wood fishing rod", 1, null],
+#		"3": ["brewing table #1", 10, null],
+#		"4": ["brewing table #3", 10, null],
+#		"5": ["brewing table #2", 10, null],
 #		"9": ["workbench #2", 10, null],
 #		"8": ["furnace", 10, null],
 	},
 	"inventory": {
-			"18": ["wood", 999, null],
-			"19": ["stone", 999, null],
-			"17": ["iron ingot", 99, null],
+#			"18": ["wood", 999, null],
+#			"19": ["stone", 999, null],
+#			"17": ["iron ingot", 99, null],
 #			"13": ["bronze ore", 99, null],
 #			"15": ["wheat flour", 99, null],
 #			"16": ["wheat", 100, null],
 	},
-#	"combat_hotbar": {
-#		"0": "wind",
-#		"1": "wind",
-#		"2": "wind",
-#		"3": "wind",
-#	},
+	"combat_hotbar": {},
 	"chests": {
 		"Cave 1-1": {
 			"4": ["wheat seeds", 25, null],
 			"9": ["health potion I", 2, null],
-			"14": ["destruction potion I", 5, null]
+			"1": ["bow", 1, 50]
 		},
 		"Cave 1-2": {
 			"2": ["bread", 4, null],
 			"6": ["regeneration potion II", 3, null],
 			"12": ["bronze ore", 8, null],
 			"10": ["carrot seeds", 25, null],
+			"14": ["destruction potion I", 5, null]
 		},
 		"Cave 1-3": {
 			"4": ["speed potion I", 3, null],
@@ -161,6 +159,7 @@ var starting_player_data = {
 		}
 	},
 	"furnaces": {},
+	"brewing_tables": {},
 	"grain_mills": {},
 	"stoves": {},
 	"campfires": {},
@@ -311,6 +310,27 @@ var starting_player_data = {
 			"yellow onion soup": 0,
 			"yellow pepper soup": 0,
 			"zucchini soup": 0
+		}
+	},
+	"settings":{
+		"key_dict": {
+			"move_right":68,
+			"move_left":65,
+			"move_up": 87,
+			"move_down": 83,
+			"open_menu": 73,
+			"action": 69,
+			"rotate": 82,
+			"open_map": 71,
+			"sprint": 16777237,
+			"change_variety": 86,
+			"use_tool": 67,
+		},
+		"volume": {
+			"music": 50.0,
+			"sound": 50.0,
+			"ambient": 50.0,
+			"footstep": 50.0
 		}
 	}
 }

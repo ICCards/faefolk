@@ -14,6 +14,7 @@ onready var Furnace = load("res://World/Player/Player/UserInterface/Furnace/Furn
 onready var Chest = load("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
 onready var Tool_cabinet = load("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
 onready var Campfire = load("res://World/Player/Player/UserInterface/Campfire/Campfire.tscn")
+onready var BrewingTable = load("res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
 
 var items_to_drop = []
 
@@ -96,6 +97,8 @@ func _input(event):
 						Server.player_node.sit(object_level)
 					"campfire":
 						toggle_campfire(object_id)
+					"brewing table":
+						toggle_brewing_table(object_id, object_level)
 		if Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:
@@ -154,6 +157,23 @@ func death():
 		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
 		holding_item.queue_free()
 		holding_item = null
+
+
+func toggle_brewing_table(id,level):
+	if not has_node(id):
+		play_open_menu_sound()
+		var brewingTable = BrewingTable.instance()
+		brewingTable.name = str(id)
+		brewingTable.id = id
+		add_child(brewingTable)
+		close_hotbar_clock_and_stats()
+	elif has_node(id) and not get_node(id).visible:
+		play_open_menu_sound()
+		get_node(id).initialize()
+		close_hotbar_clock_and_stats()
+	else:
+		close_brewing_table(id)
+
 
 func toggle_save_and_exit():
 	if has_node("SaveAndExit"):
@@ -319,6 +339,13 @@ func toggle_campfire(id):
 
 
 func close_campfire(id):
+	if not holding_item and has_node(id):
+		Sounds.play_deselect_sound()
+		add_hotbar_clock_and_stats()
+		get_node(id).hide()
+		drop_items()
+		
+func close_brewing_table(id):
 	if not holding_item and has_node(id):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()

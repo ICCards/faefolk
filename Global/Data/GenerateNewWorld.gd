@@ -247,9 +247,10 @@ func update_fixed_map():
 	MapData.world["dirt"] = dirt
 	MapData.world["beach"] = beach
 	print("BUILT TERRAIN FINAL")
-	get_node("/root/World/Loading").call_deferred("queue_free")
+#	get_node("/root/World/Loading").call_deferred("queue_free")
 	save_starting_world_data()
 	MapData.add_world_data_to_chunks()
+	get_node("/root/World/Loading").call_deferred("queue_free")
 	call_deferred("build_map")
 
 func fix_tiles():
@@ -273,15 +274,12 @@ func is_border_tile(_pos, _tiles):
 
 
 func save_starting_world_data():
+	MapData.world["is_built"] = true
 	game_state = GameState.new()
-#	game_state.save_world_state(MapData.world)
-#	game_state.save_cave_state(MapData.caves)
-#	game_state.save_player_state(PlayerData.starting_player_data)
 	game_state.world_state = MapData.world
 	game_state.cave_state = MapData.caves
 	game_state.player_state = PlayerData.starting_player_data
 	game_state.save_state()
-	PlayerData.player_data = PlayerData.starting_player_data
 
 
 func generate_flowers(locations,biome):

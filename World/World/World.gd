@@ -45,18 +45,15 @@ var num_wolves = 0
 
 var is_changing_scene: bool = false
 
-var game_state: GameState
+#var game_state: GameState
 
 func _ready():
 	Server.world = self
 	create_or_load_world()
 
 func create_or_load_world():
-	if GameState.save_exists(): # Load world
-#		game_state = GameState.new()
-#		game_state.load_state()
-#		MapData.world = game_state.world_state
-#		MapData.caves = game_state.cave_state
+	if MapData.world["is_built"]: # Load world
+		MapData.add_world_data_to_chunks()
 		build_world()
 	else: # Initial launch
 		var loadingScreen = GenerateWorldLoadingScreen.instance()

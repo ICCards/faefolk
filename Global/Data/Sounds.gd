@@ -1,9 +1,9 @@
 extends Node
 
-var music_volume = 50.0
-var sound_volume = 50.0
-var ambient_volume = 50.0
-var footstep_volume = 50.0
+#var music_volume = 50.0
+#var sound_volume = 50.0
+#var ambient_volume = 50.0
+#var footstep_volume = 50.0
 
 signal volume_change
 signal footsteps_sound_change
@@ -41,26 +41,31 @@ func play_error_sound():
 	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
 	Server.player_node.sound_effects.play()
 
+func play_menu_select_sound():
+	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Buttons/select.mp3")
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	Server.player_node.sound_effects.play()
+
 
 func set_music_volume(val):
-	music_volume = val
+	PlayerData.player_data["settings"]["volume"]["music"] = val
 	emit_signal("volume_change")
 
 func set_sound_volume(val):
-	sound_volume = val
+	PlayerData.player_data["settings"]["volume"]["sound"] = val
 	emit_signal("volume_change")
 
 func set_ambient_volume(val):
-	ambient_volume = val
+	PlayerData.player_data["settings"]["volume"]["ambient"] = val
 	emit_signal("volume_change")
 
 func set_footstep_volume(val):
-	footstep_volume = val
+	PlayerData.player_data["settings"]["volume"]["footstep"] = val
 	emit_signal("volume_change")
 	
 func return_adjusted_sound_db(category, init_sound):
 	if category == "music":
-		var progress = music_volume / 100
+		var progress = PlayerData.player_data["settings"]["volume"]["music"] / 100
 		if progress == 0.5:
 			return init_sound
 		elif progress < 0.5:
@@ -69,7 +74,7 @@ func return_adjusted_sound_db(category, init_sound):
 		elif progress > 0.5:
 			return init_sound + ((progress - 0.5) / 5) * 150
 	elif category == "sound":
-		var progress = sound_volume / 100
+		var progress =  PlayerData.player_data["settings"]["volume"]["sound"] / 100
 		if progress == 0.5:
 			return init_sound
 		elif progress < 0.5:
@@ -78,7 +83,7 @@ func return_adjusted_sound_db(category, init_sound):
 		elif progress > 0.5:
 			return init_sound + ((progress - 0.5) / 5) * 150
 	elif category == "ambient":
-		var progress = ambient_volume / 100
+		var progress = PlayerData.player_data["settings"]["volume"]["ambient"] / 100
 		if progress == 0.5:
 			return init_sound
 		elif progress < 0.5:
@@ -87,7 +92,7 @@ func return_adjusted_sound_db(category, init_sound):
 		elif progress > 0.5:
 			return init_sound + ((progress - 0.5) / 5) * 150
 	elif category == "footstep":
-		var progress = footstep_volume / 100
+		var progress = PlayerData.player_data["settings"]["volume"]["footstep"] / 100
 		if progress == 0.5:
 			return init_sound
 		elif progress < 0.5:

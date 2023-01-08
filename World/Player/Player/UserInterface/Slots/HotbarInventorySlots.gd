@@ -16,7 +16,7 @@ func _ready():
 
 func initialize_slots():
 	var slots = self.get_children()
-	for i in range(10):
+	for i in range(slots.size()):
 		if slots[i].item:
 			slots[i].removeFromSlot()
 		if PlayerData.player_data["hotbar"].has(str(i)):

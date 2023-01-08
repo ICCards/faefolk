@@ -10,18 +10,15 @@ var map_size = 50
 var nav_node
 
 func _ready():
-	randomize()
 	Server.world = self
 	BuildCaveLevel.build()
 	Server.isLoaded = true
+	BuildCaveLevel.update_navigation()
 
-func advance_up_cave_level():
+func advance_up_cave_level(): 
 	if not is_changing_scene:
-		SceneChanger.goto_scene("res://World/Caves/Level 1/Cave 1-Boss/Cave 1-Boss.tscn")
+		SceneChanger.advance_cave_level(get_tree().current_scene.filename, false)
 
 func advance_down_cave_level():
 	if not is_changing_scene:
-		SceneChanger.goto_scene("res://World/Caves/Level 2/Cave 2-1/Cave 2-1.tscn")
-
-
-
+		SceneChanger.advance_cave_level(get_tree().current_scene.filename, true)

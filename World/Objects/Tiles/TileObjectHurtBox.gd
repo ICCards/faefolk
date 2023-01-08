@@ -165,6 +165,28 @@ func set_dimensions():
 			"down":
 				$Position2D.position = Vector2(32, -16)
 				$Position2D.rotation_degrees = 0
+#	elif item_name == "brewing table #1" or item_name == "brewing table #2" or item_name == "brewing table #3":
+#		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+#		$Position2D/InteractiveArea.object_name = "brewing table"
+#		$Position2D/InteractiveArea.object_level = item_name.substr(12)
+#		$Position2D/InteractiveArea.name = str(id)
+#		if PlayerData.player_data["brewing_tables"].has(id):
+#			pass
+#		else:
+#			PlayerData.player_data["brewing_tables"][id] = {}
+#		match direction:
+#			"left":
+#				$Position2D.rotation_degrees = 90
+#				$Position2D.position = Vector2(16, -32)
+#			"right":
+#				$Position2D.rotation_degrees = 270
+#				$Position2D.position = Vector2(16, -32)
+#			"up":
+#				$Position2D.position = Vector2(32, -16)
+#				$Position2D.rotation_degrees = 180
+#			"down":
+#				$Position2D.position = Vector2(32, -16)
+#				$Position2D.rotation_degrees = 0
 	elif item_name == "furnace":
 		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
 		$Position2D/InteractiveArea.object_name = "furnace"

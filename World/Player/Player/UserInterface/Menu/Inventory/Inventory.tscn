@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Images/User interface/inventory/inventory/inventory-tab-bar.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/BaseStats.gd" type="Script" id=6]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=7]
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" type="Texture" id=9]
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=13]
 [ext_resource path="res://World/Player/Player/UserInterface/EnergyManaHealth.gd" type="Script" id=14]
@@ -212,6 +214,19 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Background" type="TextureRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 426.0
+margin_bottom = 240.0
+rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
+texture = ExtResource( 9 )
+stretch_mode = 4
 
 [node name="InventorySlots" parent="." instance=ExtResource( 5 )]
 margin_left = 639.0
@@ -544,3 +559,29 @@ align = 1
 [node name="Tween" type="Tween" parent="."]
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="Control" type="ColorRect" parent="."]
+visible = false
+margin_left = 329.0
+margin_top = 449.0
+margin_right = 614.0
+margin_bottom = 595.0
+color = Color( 0.247059, 0.109804, 0.0627451, 1 )
+
+[node name="EnergyLabel" type="Label" parent="."]
+visible = false
+margin_left = 353.0
+margin_top = 449.0
+margin_right = 513.0
+margin_bottom = 510.0
+rect_scale = Vector2( 0.35, 0.35 )
+theme = ExtResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Combat hotbar:"
+align = 1
+
+[node name="CombatHotbarSlots" parent="." instance=ExtResource( 10 )]
+visible = false

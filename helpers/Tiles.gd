@@ -25,7 +25,7 @@ func validate_tiles(location, dimensions):
 		active = true
 		for x in range(dimensions.x):
 			for y in range(dimensions.y):
-				if valid_tiles.get_cellv( Vector2(x, -y) + location) == -1 or valid_tiles.get_cellv( Vector2(x, -y) + location) == 1: 
+				if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
 					return false
 					break
 		return true

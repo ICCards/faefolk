@@ -164,7 +164,7 @@ func place_customizable_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object(item_name+str(variety), null, location, "placable")
 
 func place_customizable_rotatable_state():
@@ -198,7 +198,7 @@ func place_customizable_rotatable_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object(item_name+str(variety), directions[direction_index], location, "placable")
 
 
@@ -236,7 +236,7 @@ func place_rotatable_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object(item_name, directions[direction_index], location, "placable")
 
 
@@ -252,7 +252,7 @@ func place_foundation_state():
 		else:
 			$ColorIndicator.indicator_color = "Green"
 			$ColorIndicator.set_indicator_color()
-			if Input.is_action_pressed("mouse_click"):
+			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 				place_object(item_name, null, location, "placable")
 
 
@@ -279,7 +279,7 @@ func place_door_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			if direction == "up" or direction == "down":
 				place_object(item_name, null, location, "placable")
 			else:
@@ -291,13 +291,15 @@ func place_buildings_state():
 		$ColorIndicator.visible = true
 		$ColorIndicator.tile_size = Vector2(1, 1)
 		var location = Tiles.valid_tiles.world_to_map(mousePos)
-		if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		if not Tiles.validate_tiles(location, Vector2(1,1)) or \
+		not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or \
+		Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 			$ColorIndicator.indicator_color = "Red"
 			$ColorIndicator.set_indicator_color()
 		else:
 			$ColorIndicator.indicator_color = "Green"
 			$ColorIndicator.set_indicator_color()
-			if Input.is_action_pressed("mouse_click"):
+			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 				place_object(item_name, null, location, "placable")
 
 func place_sleeping_bag_state():
@@ -337,7 +339,7 @@ func place_sleeping_bag_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object("sleeping bag", direction, location, "placable")
 
 
@@ -364,7 +366,7 @@ func place_tent_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object("tent", direction, location, "placable")
 	
 func get_rotation_index():
@@ -388,7 +390,7 @@ func place_item_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object(item_name, null, location, "placable")
 
 func place_seed_state():
@@ -400,7 +402,7 @@ func place_seed_state():
 		else:
 			$ColorIndicator.indicator_color = "Green"
 			$ColorIndicator.set_indicator_color()
-			if Input.is_action_pressed("mouse_click"):
+			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 				place_object(item_name, null, location, "seed")	
 	else:
 		$ColorIndicator.indicator_color = "Red"

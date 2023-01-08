@@ -58,7 +58,7 @@
     "regeneration potion I": {
       "ItemCategory": "Potion",
       "StackSize": 999,
-      "Description": "Restores 10% of depleted health over time.",
+      "Description": "Restores 12% of depleted health over time.",
       "Ingredients": null,
       "EnergyHealth": null
     },
@@ -1589,7 +1589,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "Fluffy eggs served with a pinch of salt.",
-        "Ingredients": [["raw egg", 5]],
+        "Ingredients": [["raw egg", 3]],
         "EnergyHealth": [16,12]
     },
     "baked dorado":{

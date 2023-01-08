@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
+
+[node name="EnterNewKey" type="Panel"]
+modulate = Color( 1, 1, 1, 0.921569 )
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 960.0
+margin_bottom = 540.0
+rect_scale = Vector2( 0.8, 0.8 )
+theme = ExtResource( 1 )
+text = "Enter new key"
+align = 1
+valign = 1
