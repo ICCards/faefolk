@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_7.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=6]
 [ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI1.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI2.png" type="Texture" id=8]
-[ext_resource path="res://World/Player/Player/UserInterface/MagicStaff/MagicStaffUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Player/Player/UserInterface/Combat hotbar/Combat hotbar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_5.png" type="Texture" id=11]
 [ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" type="PackedScene" id=12]
@@ -202,13 +201,6 @@ visible = false
 margin_top = 593.0
 margin_bottom = 593.0
 
-[node name="MagicStaffUI" parent="." instance=ExtResource( 9 )]
-visible = false
-margin_left = 327.0
-margin_top = 566.0
-margin_right = -953.0
-margin_bottom = -154.0
-
 [node name="Menu" parent="." instance=ExtResource( 15 )]
 visible = false
 
@@ -327,7 +319,7 @@ margin_bottom = 720.0
 position = Vector2( 671, 374 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 22 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]

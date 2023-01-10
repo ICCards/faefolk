@@ -129,15 +129,27 @@ margin_bottom = 40.0
 
 [node name="skills" parent="Pages" instance=ExtResource( 39 )]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="crafting" parent="Pages" instance=ExtResource( 6 )]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="collections" parent="Pages" instance=ExtResource( 13 )]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="options" parent="Pages" instance=ExtResource( 7 )]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 

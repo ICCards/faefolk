@@ -104,7 +104,7 @@ func draw_bow(init_direction):
 
 
 func validate_bow_requirement():
-	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
+	var index = get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell
 	match index:
 		1:
 			return PlayerData.returnSufficentCraftingMaterial("arrow", 1)
@@ -139,7 +139,7 @@ func wait_for_bow_release():
 		wait_for_bow_release()
 
 func shoot():
-	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
+	var index = get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell
 	match index:
 		1:
 			single_arrow_shot()
@@ -210,7 +210,10 @@ func multi_arrow_shot():
 
 func wait_for_cast_release(staff_name):
 	if not mouse_left_down:
-		cast(staff_name, get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell)
+		if get_parent().user_interface.normal_hotbar_mode:
+			cast(staff_name, 1)
+		else:
+			cast(staff_name, get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell)
 	elif get_parent().state == DYING:
 		return
 	else:
@@ -222,7 +225,7 @@ func cast_spell(staff_name, init_direction):
 	if validate_magic_cast_requirements():
 		direction = init_direction
 		starting_mouse_point = get_global_mouse_position()
-		if get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell != 2:
+		if get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell != 2 and not get_parent().user_interface.normal_hotbar_mode:
 			get_parent().state = MAGIC_CASTING
 			is_casting = true
 			animation = "magic_cast_" + init_direction.to_lower()
@@ -235,16 +238,20 @@ func cast_spell(staff_name, init_direction):
 
 
 func validate_magic_cast_requirements():
-	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
-	match index:
-		1:
-			return PlayerData.player_data["mana"] >= 1 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
-		2:
-			return PlayerData.player_data["mana"] >= 2 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
-		3:
-			return PlayerData.player_data["mana"] >= 5 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
-		4:
-			return PlayerData.player_data["mana"] >= 10 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
+	if get_parent().user_interface.normal_hotbar_mode:
+		return PlayerData.player_data["mana"] >= 1
+	else:
+		var index = get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell
+		match index:
+			1:
+				return PlayerData.player_data["mana"] >= 1
+			2:
+				return PlayerData.player_data["mana"] >= 2 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown()
+			3:
+				return PlayerData.player_data["mana"] >= 5 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown()
+			4:
+				return PlayerData.player_data["mana"] >= 10 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown()
+
 
 func _physics_process(delta):
 	if (is_casting or is_drawing or is_throwing) and not PlayerData.viewMapMode:
@@ -327,7 +334,7 @@ func throw(potion_name):
 
 
 func cast(staff_name, spell_index):
-	get_node("../Camera2D/UserInterface/MagicStaffUI").start_spell_cooldown()
+	get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").start_spell_cooldown()
 	yield(get_tree(), "idle_frame")
 	match spell_index:
 		1:

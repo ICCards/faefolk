@@ -105,10 +105,10 @@ func _on_PlayBtn_pressed():
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 		PlayerData.spawn_at_respawn_location = true
-		if MapData.world["is_built"]:
-			SceneChanger.goto_scene(PlayerData.player_data["respawn_scene"])
-		else:
-			SceneChanger.goto_scene("res://World/World/World.tscn")
+#		if MapData.world["is_built"]:
+#			SceneChanger.goto_scene(PlayerData.player_data["respawn_scene"])
+#		else:
+		SceneChanger.goto_scene("res://World/World/World.tscn")
 
 
 func _on_ShopBtn_mouse_entered():

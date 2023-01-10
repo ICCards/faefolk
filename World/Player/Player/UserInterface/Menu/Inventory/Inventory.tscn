@@ -317,6 +317,7 @@ expand = true
 stretch_mode = 7
 
 [node name="BaseStats" type="Control" parent="."]
+visible = false
 margin_left = 396.5
 margin_top = 327.0
 margin_right = 436.5
@@ -488,37 +489,39 @@ anims/RESET = SubResource( 18 )
 anims/loop = SubResource( 19 )
 
 [node name="EnergyManaHealth" type="Control" parent="."]
+margin_top = 123.0
+margin_bottom = 123.0
 script = ExtResource( 14 )
 
 [node name="Energy" type="ColorRect" parent="EnergyManaHealth"]
 margin_left = 394.0
-margin_top = 438.0
+margin_top = 436.0
 margin_right = 452.0
-margin_bottom = 489.0
+margin_bottom = 494.0
 rect_rotation = 180.0
 color = Color( 0.00392157, 1, 0, 1 )
 
 [node name="Mana" type="ColorRect" parent="EnergyManaHealth"]
 margin_left = 455.0
-margin_top = 438.0
+margin_top = 436.0
 margin_right = 513.0
-margin_bottom = 489.0
+margin_bottom = 494.0
 rect_rotation = 180.0
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Health" type="ColorRect" parent="EnergyManaHealth"]
 margin_left = 516.0
-margin_top = 438.0
+margin_top = 436.0
 margin_right = 574.0
-margin_bottom = 489.0
+margin_bottom = 494.0
 rect_rotation = 180.0
 color = Color( 0.941176, 0, 0, 1 )
 
 [node name="EnergyLabel" type="Label" parent="EnergyManaHealth"]
 margin_left = 337.0
-margin_top = 404.0
+margin_top = 397.0
 margin_right = 497.0
-margin_bottom = 465.0
+margin_bottom = 458.0
 rect_scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -530,9 +533,9 @@ align = 1
 
 [node name="ManaLabel" type="Label" parent="EnergyManaHealth"]
 margin_left = 398.0
-margin_top = 404.0
+margin_top = 397.0
 margin_right = 558.0
-margin_bottom = 465.0
+margin_bottom = 458.0
 rect_scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -544,9 +547,9 @@ align = 1
 
 [node name="HealthLabel" type="Label" parent="EnergyManaHealth"]
 margin_left = 459.0
-margin_top = 404.0
+margin_top = 397.0
 margin_right = 619.0
-margin_bottom = 465.0
+margin_bottom = 458.0
 rect_scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -569,11 +572,10 @@ margin_bottom = 595.0
 color = Color( 0.247059, 0.109804, 0.0627451, 1 )
 
 [node name="EnergyLabel" type="Label" parent="."]
-visible = false
-margin_left = 353.0
-margin_top = 449.0
-margin_right = 513.0
-margin_bottom = 510.0
+margin_left = 339.0
+margin_top = 374.0
+margin_right = 690.0
+margin_bottom = 435.0
 rect_scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -584,4 +586,7 @@ text = "Combat hotbar:"
 align = 1
 
 [node name="CombatHotbarSlots" parent="." instance=ExtResource( 10 )]
-visible = false
+margin_left = 351.0
+margin_top = 399.0
+margin_right = 579.0
+margin_bottom = 447.0

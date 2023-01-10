@@ -29,6 +29,7 @@ var mana_maximum = 100
 
 const NUM_INVENTORY_SLOTS = 20
 const NUM_HOTBAR_SLOTS = 10
+const NUM_COMBAT_HOTBAR_SLOTS = 4
 
 var InventorySlots
 var HotbarSlots
@@ -50,9 +51,9 @@ var starting_player_data = {
 	"energy": 100,
 	"hotbar": {
 #		"0": ["iron sword", 1, 100],
-#		"1": ["bow", 1, 50],
-#		"2": ["arrow", 100, null],
-#		"6": ["wind staff", 1, null],
+		"1": ["bow", 1, 50],
+		"2": ["arrow", 100, null],
+		"6": ["wind staff", 1, null],
 ##		"2": ["wood fishing rod", 1, null],
 #		"3": ["brewing table #1", 10, null],
 #		"4": ["brewing table #3", 10, null],
@@ -61,14 +62,15 @@ var starting_player_data = {
 #		"8": ["furnace", 10, null],
 	},
 	"inventory": {
-#			"18": ["wood", 999, null],
-#			"19": ["stone", 999, null],
+			"18": ["wood", 999, null],
+			"19": ["stone", 999, null],
 #			"17": ["iron ingot", 99, null],
 #			"13": ["bronze ore", 99, null],
 #			"15": ["wheat flour", 99, null],
-#			"16": ["wheat", 100, null],
+			"16": ["wheat", 100, null],
 	},
-	"combat_hotbar": {},
+	"combat_hotbar": {
+	},
 	"chests": {
 		"Cave 1-1": {
 			"4": ["wheat seeds", 25, null],
@@ -169,12 +171,12 @@ var starting_player_data = {
 			"fishing": 0,
 			"mining": 0,
 			"sword": 1,
-			"bow": 1,
+			"bow": 999,
 			"dark": 0,
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 0,
+			"wind": 999,
 			"ice": 0,
 		},
 	"collections": {
@@ -616,18 +618,39 @@ func remove_single_object_from_hotbar():
 
 
 ### Change active hotbar functions
+
+func slot_selected(slot_index) -> void:
+	if Server.player_node.user_interface.normal_hotbar_mode:
+		active_item_slot = slot_index
+	else:
+		if slot_index > 4 and slot_index < 8:
+			active_item_slot_combat_hotbar = slot_index - 4
+	emit_signal("active_item_updated")
+
 func active_item_scroll_up() -> void:
-	active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS
+	if Server.player_node.user_interface.normal_hotbar_mode:
+		active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS
+	else:
+		active_item_slot_combat_hotbar = (active_item_slot_combat_hotbar + 1) % NUM_COMBAT_HOTBAR_SLOTS
 	emit_signal("active_item_updated")
 
 func active_item_scroll_down() -> void:
-	if active_item_slot == 0:
-		active_item_slot = NUM_HOTBAR_SLOTS - 1
+	if Server.player_node.user_interface.normal_hotbar_mode:
+		if active_item_slot == 0:
+			active_item_slot = NUM_HOTBAR_SLOTS - 1
+		else:
+			active_item_slot -= 1
 	else:
-		active_item_slot -= 1
+		if active_item_slot_combat_hotbar == 0:
+			active_item_slot_combat_hotbar = NUM_COMBAT_HOTBAR_SLOTS - 1
+		else:
+			active_item_slot_combat_hotbar -= 1
 	emit_signal("active_item_updated")
 
 func hotbar_slot_selected(slot) -> void:
-	active_item_slot = slot.slot_index
+	if Server.player_node.user_interface.normal_hotbar_mode:
+		active_item_slot = slot.slot_index
+	else:
+		active_item_slot_combat_hotbar = slot.slot_index
 	emit_signal("active_item_updated")
 

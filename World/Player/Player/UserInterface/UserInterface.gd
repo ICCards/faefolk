@@ -104,35 +104,25 @@ func _input(event):
 		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_down()
 		elif event.is_action_pressed("slot1"):
-			PlayerData.active_item_slot = 0
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(0)
 		elif event.is_action_pressed("slot2"):
-			PlayerData.active_item_slot = 1
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(1)
 		elif event.is_action_pressed("slot3"):
-			PlayerData.active_item_slot = 2
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(2)
 		elif event.is_action_pressed("slot4"):
-			PlayerData.active_item_slot = 3
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(3)
 		elif event.is_action_pressed("slot5"):
-			PlayerData.active_item_slot = 4
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(4)
 		elif event.is_action_pressed("slot6"):
-			PlayerData.active_item_slot = 5
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(5)
 		elif event.is_action_pressed("slot7"):
-			PlayerData.active_item_slot = 6
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(6)
 		elif event.is_action_pressed("slot8"):
-			PlayerData.active_item_slot = 7
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(7)
 		elif event.is_action_pressed("slot9"):
-			PlayerData.active_item_slot = 8
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(8)
 		elif event.is_action_pressed("slot10"):
-			PlayerData.active_item_slot = 9
-			PlayerData.emit_signal("active_item_updated")
+			PlayerData.slot_selected(9)
 
 
 func death():

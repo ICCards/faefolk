@@ -11651,7 +11651,6 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2( 0, 9.91821e-05 )
 rotation = -1.5708
@@ -11669,7 +11668,6 @@ shadow_enabled = true
 visible = false
 position = Vector2( 0, -84 )
 frames = SubResource( 117 )
-frame = 3
 playing = true
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]

@@ -2,4 +2,4 @@
 
 [node name="CaveAmbientLight" type="CanvasModulate"]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
-color = Color( 0.46207, 0.4459, 0.49, 1 )
+color = Color( 0.48093, 0.4641, 0.51, 1 )

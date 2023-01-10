@@ -68,9 +68,9 @@ func update_tool_health():
 	if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] == 0 and item_name != "stone watering can" and item_name != "bronze watering can" and item_name != "gold watering can":
 		slots[PlayerData.active_item_slot].removeFromSlot()
 		PlayerData.remove_item(slots[PlayerData.active_item_slot])
-		yield(get_tree().create_timer(0.1), "timeout")
+		yield(get_tree().create_timer(0.15), "timeout")
 		$SoundEffects.stream = Sounds.tool_break
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 		$SoundEffects.play()
 	else:
 		slots[PlayerData.active_item_slot].initialize_item(PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0], PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][1], PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2])
@@ -91,9 +91,7 @@ func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if Server.player_node.state == 0:
-				$SoundEffects.stream = load("res://Assets/Sound/Sound effects/UI/slot.mp3")
-				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-				$SoundEffects.play()
+				Sounds.play_hotbar_slot_selected_sound()
 				PlayerData.hotbar_slot_selected(slot)
 
 

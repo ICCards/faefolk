@@ -70,17 +70,24 @@ func destroy():
 	state = DYING
 
 func set_held_object():
-	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-		var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if item_category == "Magic" or item_name == "bow": #or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
-			$Camera2D/UserInterface/MagicStaffUI.initialize(item_name)
-			return
-		elif item_name == "torch":
-			$TorchLight.enabled = true
-			return
-	$TorchLight.enabled = false
-	$Camera2D/UserInterface/MagicStaffUI.hide()
+	if user_interface.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			var item_category = JsonData.item_data[item_name]["ItemCategory"]
+			if item_name == "torch":
+				$TorchLight.enabled = true
+				return
+		$TorchLight.enabled = false
+	else:
+		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
+			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
+			var item_category = JsonData.item_data[item_name]["ItemCategory"]
+			if item_category == "Magic" or item_name == "bow" or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
+				$Camera2D/UserInterface/CombatHotbar/MagicSlots.initialize(item_name)
+				return
+		$Camera2D/UserInterface/CombatHotbar/MagicSlots.hide()
+
+
 
 
 func _process(_delta) -> void:
@@ -93,8 +100,6 @@ func _process(_delta) -> void:
 		movement_state(_delta)
 	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
 		magic_casting_movement_state(_delta)
-	else:
-		$Sounds/FootstepsSound.stream_paused = true
 
 
 func set_movement_speed_change():
@@ -123,38 +128,50 @@ func _unhandled_input(event):
 		not PlayerData.viewMapMode and \
 		state == MOVEMENT and \
 		Sounds.current_footsteps_sound != Sounds.swimming: 
-			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
-				elif item_name == "blueprint" and current_building_item != null:
-					actions.show_placable_object(current_building_item, "BUILDING")
-				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
-					actions.fish()
-				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
-					$Swing.swing(item_name, direction)
-				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_category == "Potion":
-					$Magic.throw_potion(item_name, direction)
-				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_name == "bow":
-					$Magic.draw_bow(direction)
-				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_category == "Magic":
-					$Magic.cast_spell(item_name, direction)
-				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
-					actions.eat(item_name)
-				elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
-					actions.show_placable_object(item_name, item_category)
-				elif item_name != "blueprint":
-					actions.destroy_placable_object()
+			if user_interface.normal_hotbar_mode:
+				if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+					var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+					var item_category = JsonData.item_data[item_name]["ItemCategory"]
+					player_action(event, item_name, item_category)
 			else:
-				actions.destroy_placable_object()
-				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"): # punch
-					$Swing.swing(null, direction) 
+				if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
+					var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
+					var item_category = JsonData.item_data[item_name]["ItemCategory"]
+					player_action(event, item_name, item_category)
 	if event.is_action_pressed("sprint") and not poisoned:
 		running = true
 	elif event.is_action_released("sprint") and not poisoned:
 		running = false
 
+
+func player_action(event, item_name, item_category):
+	if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+		$Camera2D/UserInterface/RadialBuildingMenu.initialize()
+	elif item_name == "blueprint" and current_building_item != null:
+		actions.show_placable_object(current_building_item, "BUILDING")
+	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
+		actions.fish()
+	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
+		$Swing.swing(item_name, direction)
+	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_category == "Potion":
+		$Magic.throw_potion(item_name, direction)
+	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_name == "bow":
+		$Magic.draw_bow(direction)
+	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_category == "Magic":
+		$Magic.cast_spell(item_name, direction)
+	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
+		actions.eat(item_name)
+	elif item_category == "Placable object" or item_category == "Placable path" or item_category == "Seed":
+		actions.show_placable_object(item_name, item_category)
+	elif item_name != "blueprint":
+		actions.destroy_placable_object()
+	else:
+		actions.destroy_placable_object()
+		if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"): # punch
+			$Swing.swing(null, direction) 
+		
+					
+					
 
 func magic_casting_movement_state(_delta):
 	input_vector = Vector2.ZERO
@@ -305,14 +322,28 @@ func walk_state(_direction):
 
 
 func check_if_holding_item():
-	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-		var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-		var item_qt = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][1]
-		var item_category = JsonData.item_data[item_name]["ItemCategory"]
-		if Util.valid_holding_item_category(item_category) or item_name == "torch":
-			$HoldingTorch.hide()
-			holding_item.hide()
-			PlayerData.player_data["hotbar"].erase(str(PlayerData.active_item_slot))
-			$Camera2D/UserInterface/Hotbar.initialize_hotbar()
-			InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
-			set_held_object()
+	if user_interface.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			var item_qt = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][1]
+			var item_category = JsonData.item_data[item_name]["ItemCategory"]
+			if Util.valid_holding_item_category(item_category) or item_name == "torch":
+				$HoldingTorch.hide()
+				holding_item.hide()
+				PlayerData.player_data["hotbar"].erase(str(PlayerData.active_item_slot))
+				$Camera2D/UserInterface/Hotbar.initialize_hotbar()
+				InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
+				set_held_object()
+	else:
+		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
+			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
+			var item_qt = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][1]
+			var item_category = JsonData.item_data[item_name]["ItemCategory"]
+			if Util.valid_holding_item_category(item_category) or item_name == "torch":
+				$HoldingTorch.hide()
+				holding_item.hide()
+				PlayerData.player_data["combat_hotbar"].erase(str(PlayerData.active_item_slot_combat_hotbar))
+				$Camera2D/UserInterface/CombatHotbar.initialize()
+				InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
+				set_held_object()
+			

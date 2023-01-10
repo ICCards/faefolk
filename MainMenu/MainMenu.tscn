@@ -200,7 +200,7 @@ margin_bottom = 902.5
 rect_scale = Vector2( 2, 2 )
 
 [node name="LoadingIndicator" parent="MainMenuButtons" index="2"]
-frame = 4
+frame = 5
 
 [node name="OptionsIconButton" type="Button" parent="."]
 margin_left = 1187.0
