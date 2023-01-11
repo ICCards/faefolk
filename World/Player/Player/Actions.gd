@@ -9,6 +9,9 @@ onready var sound_effects: AudioStreamPlayer = $SoundEffects
 var direction_of_current_chair: String = ""
 var sitting: bool = false
 
+
+var game_state: GameState
+
 func _ready():
 	PlayerData.connect("health_depleted", self, "player_death")
 
@@ -103,7 +106,6 @@ func player_death():
 		get_parent().animation_player.play("death")
 		get_node("../Camera2D/UserInterface").death()
 		get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", true) 
-		get_node("../Camera2D/UserInterface/MagicStaffUI").hide()
 		if has_node("../Fishing"):
 			get_node("../Fishing").queue_free()
 		drop_inventory_items()
@@ -116,8 +118,11 @@ func drop_inventory_items():
 		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["hotbar"][item], get_parent().position+Vector2(rand_range(-32,32), rand_range(-32,32)))
 	for item in PlayerData.player_data["inventory"].keys(): 
 		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["inventory"][item], get_parent().position+Vector2(rand_range(-32,32), rand_range(-32,32)))
+	for item in PlayerData.player_data["combat_hotbar"].keys():
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["combat_hotbar"][item], get_parent().position+Vector2(rand_range(-32,32), rand_range(-32,32)))
 	PlayerData.player_data["hotbar"] = {}
 	PlayerData.player_data["inventory"] = {}
+	PlayerData.player_data["combat_hotbar"] = {}
 
 
 func respawn():
@@ -141,8 +146,6 @@ func fish():
 		var fishing = Fishing.instance()
 		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		get_parent().call_deferred("add_child", fishing)
-
-var game_state: GameState
 
 func sleep(sleeping_bag_direction, pos):
 	if get_parent().state != get_parent().SLEEPING:
@@ -175,20 +178,37 @@ func sleep(sleeping_bag_direction, pos):
 
 
 func show_placable_object(item_name, item_category):
-	if item_category == "Seed":
-		item_name.erase(item_name.length() - 6, 6)
-	if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
-		var placeObject = PlaceObjectScene.instance()
-		placeObject.name = "PlaceObject"
-		placeObject.item_name = item_name
-		placeObject.item_category = item_category
-		placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
-		get_node("../").add_child(placeObject)
+	if Server.world.name == "World":
+		if item_category == "Seed":
+			item_name.erase(item_name.length() - 6, 6)
+		if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
+			var placeObject = PlaceObjectScene.instance()
+			placeObject.name = "PlaceObject"
+			placeObject.item_name = item_name
+			placeObject.item_category = item_category
+			placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+			get_node("../").add_child(placeObject)
+		else:
+			if get_node("../PlaceObject").item_name != item_name: # exists but item changed
+				get_node("../PlaceObject").item_name = item_name
+				get_node("../PlaceObject").item_category = item_category
+				get_node("../PlaceObject").initialize()
 	else:
-		if get_node("../PlaceObject").item_name != item_name: # exists but item changed
-			get_node("../PlaceObject").item_name = item_name
-			get_node("../PlaceObject").item_category = item_category
-			get_node("../PlaceObject").initialize()
+		if item_name == "campfire" or item_name == "torch" or item_name == "sleeping bag":
+			if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
+				var placeObject = PlaceObjectScene.instance()
+				placeObject.name = "PlaceObject"
+				placeObject.item_name = item_name
+				placeObject.item_category = item_category
+				placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+				get_node("../").add_child(placeObject)
+			else:
+				if get_node("../PlaceObject").item_name != item_name: # exists but item changed
+					get_node("../PlaceObject").item_name = item_name
+					get_node("../PlaceObject").item_category = item_category
+					get_node("../PlaceObject").initialize()
+		else:
+			destroy_placable_object()
 
 
 func destroy_placable_object():

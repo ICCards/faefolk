@@ -29,7 +29,6 @@ enum Tiles {
 func _input(event):
 	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/World"):
 		if event.is_action_pressed("open_map"):
-			Server.player_node.user_interface.get_node("MagicStaffUI").hide()
 			Server.player_node.actions.destroy_placable_object()
 			Server.world.get_node("WorldAmbience").hide()
 			show()
@@ -51,7 +50,8 @@ func toggle_map():
 func initialize():
 	PlayerData.viewMapMode = true
 	$Camera2D.current = true
-	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = false
+	Server.player_node.user_interface.get_node("Hotbar").hide()
+	Server.player_node.user_interface.get_node("CombatHotbar").hide()
 	if not is_first_time_opened:
 		is_first_time_opened = true
 		$Camera2D.position = Vector2(800, 800)
@@ -61,7 +61,10 @@ func set_inactive():
 	PlayerData.viewMapMode = false
 	$Camera2D.current = false
 	Server.player_node.get_node("Camera2D").current = true
-	Server.player_node.get_node("Camera2D/UserInterface/Hotbar").visible = true
+	if Server.player_node.user_interface.normal_hotbar_mode:
+		Server.player_node.user_interface.get_node("Hotbar").show()
+	else:
+		Server.player_node.user_interface.get_node("CombatHotbar").show()
 
 
 func draw_grid():

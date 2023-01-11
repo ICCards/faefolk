@@ -1,7 +1,6 @@
 extends GridContainer
 
 
-
 onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 
@@ -15,6 +14,14 @@ func _ready():
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.COMBAT_HOTBAR
 	initialize_slots()
+	
+func able_to_put_into_slot():
+	var holding_item = find_parent("UserInterface").holding_item
+	if holding_item == null:
+		return false
+	var holding_item_name = holding_item.item_name 
+	var holding_item_category = JsonData.item_data[holding_item_name]["ItemCategory"]
+	return holding_item_category == "Tool" or holding_item_category == "Magic" or holding_item_category == "Crop" or holding_item_category == "Construction" or holding_item_category == "Potion" 
 
 func initialize_slots():
 	var slots = self.get_children()
@@ -26,13 +33,10 @@ func initialize_slots():
 
 func hovered_slot(slot):
 	if slot.item:
-		slot.item.hover_item()
 		get_parent().hovered_item = slot.item.item_name
 
 func exited_slot(slot):
 	get_parent().hovered_item = null
-	if slot.item:
-		slot.item.exit_item()
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
@@ -69,18 +73,20 @@ func return_holding_item(item_name, qt):
 	return inventoryItem
 
 func left_click_empty_slot(slot):
-	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
-	slot.putIntoSlot(find_parent("UserInterface").holding_item)
-	find_parent("UserInterface").holding_item = null
+	if able_to_put_into_slot():
+		PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+		slot.putIntoSlot(find_parent("UserInterface").holding_item)
+		find_parent("UserInterface").holding_item = null
 
 func left_click_different_item(event: InputEvent, slot):
-	PlayerData.remove_item(slot)
-	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
-	var temp_item = slot.item
-	slot.pickFromSlot()
-	temp_item.global_position = event.global_position
-	slot.putIntoSlot(find_parent("UserInterface").holding_item)
-	find_parent("UserInterface").holding_item = temp_item
+	if able_to_put_into_slot():
+		PlayerData.remove_item(slot)
+		PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+		var temp_item = slot.item
+		slot.pickFromSlot()
+		temp_item.global_position = event.global_position
+		slot.putIntoSlot(find_parent("UserInterface").holding_item)
+		find_parent("UserInterface").holding_item = temp_item
 
 func left_click_same_item(slot):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])

@@ -20,7 +20,6 @@ func _ready():
 	Stats.connect("tool_health_change", self, "update_tool_health")
 	
 func hovered_slot(slot):
-	Server.player_node.actions.destroy_placable_object()
 	if slot.item:
 		item = slot.item.item_name
 

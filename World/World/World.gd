@@ -27,7 +27,12 @@ onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 
 onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
 
+onready var Player = load("res://World/Player/Player/Player.tscn")
+onready var _character = load("res://Global/Data/Characters.gd")
+
 var rng = RandomNumberGenerator.new()
+
+var spawn_loc
 
 const MAX_DUCKS = 150
 const MAX_BUNNIES = 150
@@ -45,7 +50,7 @@ var num_wolves = 0
 
 var is_changing_scene: bool = false
 
-#var game_state: GameState
+var game_state: GameState
 
 func _ready():
 	Server.world = self
@@ -63,11 +68,44 @@ func create_or_load_world():
 
 func build_world():
 	buildMap(MapData.world)
-	$BuildTerrain.start()
-	$BuildTerrain/BuildNature.start()
+	spawn_player()
+	yield(get_tree(), "idle_frame")
+	$WorldBuilder.initialize()
+	$WorldBuilder/BuildTerrain.initialize()
+	$WorldBuilder/BuildNature.initialize()
 	$WorldMap.buildMap()
 	spawn_initial_animals()
-	$SpawnAnimalTimer.start()
+
+
+func spawn_player():
+	var player = Player.instance()
+	player.is_building_world = true
+	player.name = str("PLAYER")
+	player.character = _character.new()
+	player.character.LoadPlayerCharacter("human_male")
+	$Players.add_child(player)
+	if PlayerData.spawn_at_respawn_location:
+		spawn_loc = PlayerData.player_data["respawn_location"]
+	elif PlayerData.spawn_at_cave_exit:
+		spawn_loc = MapData.world["cave_entrance_location"]
+	if spawn_loc == null: # initial random spawn
+		var tiles = MapData.world["beach"]
+		tiles.shuffle()
+		spawn_loc = tiles[0]
+		yield(get_tree(), "idle_frame")
+		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
+		PlayerData.player_data["respawn_location"] = spawn_loc
+		var game_state = GameState.new()
+		game_state.player_state = PlayerData.player_data
+		game_state.world_state = MapData.world
+		game_state.cave_state = MapData.caves
+		game_state.save_state()
+	player.position = Util.string_to_vector2(spawn_loc)*32
+	PlayerData.spawn_at_respawn_location = false
+	PlayerData.spawn_at_cave_exit = false
+
+
+
 
 func advance_down_cave_level():
 	if not is_changing_scene:

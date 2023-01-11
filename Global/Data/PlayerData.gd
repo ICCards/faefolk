@@ -613,9 +613,12 @@ func craft_item(item):
 		remove_material(ingredients[i][0], ingredients[i][1])
 
 func remove_single_object_from_hotbar():
-	player_data["hotbar"][str(active_item_slot)][1] -= 1
-	update_hotbar_slot_visual(active_item_slot, player_data["hotbar"][str(active_item_slot)][0], player_data["hotbar"][str(active_item_slot)][1] , player_data["hotbar"][str(active_item_slot)][2])
-
+	if Server.player_node.user_interface.normal_hotbar_mode:
+		player_data["hotbar"][str(active_item_slot)][1] -= 1
+		update_hotbar_slot_visual(active_item_slot, player_data["hotbar"][str(active_item_slot)][0], player_data["hotbar"][str(active_item_slot)][1] , player_data["hotbar"][str(active_item_slot)][2])
+	else:
+		player_data["combat_hotbar"][str(active_item_slot)][1] -= 1
+		update_hotbar_slot_visual(active_item_slot, player_data["combat_hotbar"][str(active_item_slot)][0], player_data["combat_hotbar"][str(active_item_slot)][1] , player_data["combat_hotbar"][str(active_item_slot)][2])
 
 ### Change active hotbar functions
 
@@ -623,7 +626,7 @@ func slot_selected(slot_index) -> void:
 	if Server.player_node.user_interface.normal_hotbar_mode:
 		active_item_slot = slot_index
 	else:
-		if slot_index > 4 and slot_index < 8:
+		if slot_index > 3 and slot_index < 8:
 			active_item_slot_combat_hotbar = slot_index - 4
 	emit_signal("active_item_updated")
 

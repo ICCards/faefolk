@@ -1,23 +1,24 @@
 extends Node
 
-onready var dirt = get_node("../GeneratedTiles/DirtTiles")
-onready var plains = get_node("../GeneratedTiles/GreenGrassTiles")
-onready var forest = get_node("../GeneratedTiles/DarkGreenGrassTiles")
+onready var dirt = get_node("../../GeneratedTiles/DirtTiles")
+onready var plains = get_node("../../GeneratedTiles/GreenGrassTiles")
+onready var forest = get_node("../../GeneratedTiles/DarkGreenGrassTiles")
 #onready var water = $GeneratedTiles/Water
-onready var validTiles = get_node("../ValidTiles") 
-onready var navTiles = get_node("../Navigation2D/NavTiles")
-onready var hoed = get_node("../FarmingTiles/HoedAutoTiles")
-onready var watered = get_node("../FarmingTiles/WateredAutoTiles")
-onready var snow = get_node("../GeneratedTiles/SnowTiles")
-onready var waves = get_node("../GeneratedTiles/WaveTiles")
-onready var wetSand = get_node("../GeneratedTiles/WetSandBeachBorder")
-onready var sand = get_node("../GeneratedTiles/DrySandTiles")
-onready var shallow_ocean = get_node("../GeneratedTiles/ShallowOcean")
-onready var deep_ocean = get_node("../GeneratedTiles/DeepOcean")
-onready var top_ocean = get_node("../GeneratedTiles/TopOcean")
+onready var validTiles = get_node("../../ValidTiles") 
+onready var navTiles = get_node("../../Navigation2D/NavTiles")
+onready var hoed = get_node("../../FarmingTiles/HoedAutoTiles")
+onready var watered = get_node("../../FarmingTiles/WateredAutoTiles")
+onready var snow = get_node("../../GeneratedTiles/SnowTiles")
+onready var waves = get_node("../../GeneratedTiles/WaveTiles")
+onready var wetSand = get_node("../../GeneratedTiles/WetSandBeachBorder")
+onready var sand = get_node("../../GeneratedTiles/DrySandTiles")
+onready var shallow_ocean = get_node("../../GeneratedTiles/ShallowOcean")
+onready var deep_ocean = get_node("../../GeneratedTiles/DeepOcean")
+onready var top_ocean = get_node("../../GeneratedTiles/TopOcean")
 
-onready var Player = load("res://World/Player/Player/Player.tscn")
-onready var _character = load("res://Global/Data/Characters.gd")
+
+
+var terrain_thread := Thread.new()
 
 var built_chunks = []
 var current_chunks = []
@@ -28,44 +29,44 @@ var spawn_loc
 
 var game_state: GameState
 
-func start():
-	spawn_player()
-	$BuildTerrain.start()
+func initialize():
+	pass
+	#$BuildTerrain.start()
 
-func spawn_player():
-	var player = Player.instance()
-	player.is_building_world = true
-	player.name = str("PLAYER")
-	player.character = _character.new()
-	player.character.LoadPlayerCharacter("human_male")
-	get_node("../Players").add_child(player)
-	if PlayerData.spawn_at_respawn_location:
-		spawn_loc = PlayerData.player_data["respawn_location"]
-	elif PlayerData.spawn_at_cave_exit:
-		spawn_loc = MapData.world["cave_entrance_location"]
-	if spawn_loc == null: # initial random spawn
-		var tiles = MapData.world["beach"]
-		tiles.shuffle()
-		spawn_loc = tiles[0]
-		yield(get_tree(), "idle_frame")
-		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
-		PlayerData.player_data["respawn_location"] = spawn_loc
-		var game_state = GameState.new()
-		game_state.player_state = PlayerData.player_data
-		game_state.world_state = MapData.world
-		game_state.cave_state = MapData.caves
-		game_state.save_state()
-	player.position = Util.string_to_vector2(spawn_loc)*32
-	PlayerData.spawn_at_respawn_location = false
-	PlayerData.spawn_at_cave_exit = false
+#func spawn_player():
+#	var player = Player.instance()
+#	player.is_building_world = true
+#	player.name = str("PLAYER")
+#	player.character = _character.new()
+#	player.character.LoadPlayerCharacter("human_male")
+#	get_node("../../Players").add_child(player)
+#	if PlayerData.spawn_at_respawn_location:
+#		spawn_loc = PlayerData.player_data["respawn_location"]
+#	elif PlayerData.spawn_at_cave_exit:
+#		spawn_loc = MapData.world["cave_entrance_location"]
+#	if spawn_loc == null: # initial random spawn
+#		var tiles = MapData.world["beach"]
+#		tiles.shuffle()
+#		spawn_loc = tiles[0]
+#		yield(get_tree(), "idle_frame")
+#		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
+#		PlayerData.player_data["respawn_location"] = spawn_loc
+#		var game_state = GameState.new()
+#		game_state.player_state = PlayerData.player_data
+#		game_state.world_state = MapData.world
+#		game_state.cave_state = MapData.caves
+#		game_state.save_state()
+#	player.position = Util.string_to_vector2(spawn_loc)*32
+#	PlayerData.spawn_at_respawn_location = false
+#	PlayerData.spawn_at_cave_exit = false
 
-func spawn_puppy():
-	var puppy = IcPuppy.instance()
-	puppy.position = Vector2(500*32,500*32)
-	get_node("../Players").add_child(puppy)
 
 func _on_BuildTerrain_timeout():
-	build_terrain()
+	if not terrain_thread.is_active():
+		terrain_thread.start(self, "_whoAmI")
+		
+func _whoAmI():
+	call_deferred("build_terrain")
 
 func build_terrain():
 	if Server.player_node:
@@ -130,6 +131,7 @@ func build_terrain():
 				built_chunks.append(new_chunk)
 				print("SPAWN CHUNK " + new_chunk)
 				spawn_chunk(new_chunk)
+		var value = terrain_thread.wait_to_finish()
 
 func spawn_chunk(chunk_name):
 	var _chunk = MapData.return_chunk(chunk_name[0],chunk_name.substr(1,-1))
@@ -293,3 +295,4 @@ func update_bitmasks(chunk_name):
 	waves.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
 	yield(get_tree(), "idle_frame")
 	deep_ocean.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")

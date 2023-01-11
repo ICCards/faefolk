@@ -28,7 +28,7 @@ onready var NatureObjects = get_node("../../NatureObjects")
 onready var ForageObjects = get_node("../../ForageObjects")
 
 
-func start():
+func initialize():
 	spawn_forage()
 	spawn_placables()
 	$SpawnNature.start()

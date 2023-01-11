@@ -43,58 +43,59 @@ func initialize(item_name):
 	set_bgs()
 
 func set_bgs():
-	var experience = PlayerData.player_data["skill_experience"][selected_staff]
-	var level
-	if experience == 0:
-		level = 0
-		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn1.disabled = true
-		$Bg/btn2.disabled = true
-		$Bg/btn3.disabled = true
-		$Bg/btn4.disabled = true
-	elif experience < 100:
-		level = 1
-		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
-		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn1.disabled = false
-		$Bg/btn2.disabled = true
-		$Bg/btn3.disabled = true
-		$Bg/btn4.disabled = true
-	elif experience < 500:
-		level = 2
-		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
-		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
-		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn1.disabled = false
-		$Bg/btn2.disabled = false
-		$Bg/btn3.disabled = true
-		$Bg/btn4.disabled = true
-	elif experience < 1000:
-		level = 3
-		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
-		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
-		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
-		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
-		$Bg/btn1.disabled = false
-		$Bg/btn2.disabled = false
-		$Bg/btn3.disabled = false
-		$Bg/btn4.disabled = true
-	else: 
-		level = 4
-		$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
-		$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
-		$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
-		$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
-		$Bg/btn1.disabled = false
-		$Bg/btn2.disabled = false
-		$Bg/btn3.disabled = false
-		$Bg/btn4.disabled = false
+	if selected_staff != "":
+		var experience = PlayerData.player_data["skill_experience"][selected_staff]
+		var level
+		if experience == 0:
+			level = 0
+			$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn1.disabled = true
+			$Bg/btn2.disabled = true
+			$Bg/btn3.disabled = true
+			$Bg/btn4.disabled = true
+		elif experience < 100:
+			level = 1
+			$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+			$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn1.disabled = false
+			$Bg/btn2.disabled = true
+			$Bg/btn3.disabled = true
+			$Bg/btn4.disabled = true
+		elif experience < 500:
+			level = 2
+			$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+			$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
+			$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn1.disabled = false
+			$Bg/btn2.disabled = false
+			$Bg/btn3.disabled = true
+			$Bg/btn4.disabled = true
+		elif experience < 1000:
+			level = 3
+			$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+			$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
+			$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
+			$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/locked.png")
+			$Bg/btn1.disabled = false
+			$Bg/btn2.disabled = false
+			$Bg/btn3.disabled = false
+			$Bg/btn4.disabled = true
+		else: 
+			level = 4
+			$Bg/btn1.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/1.png")
+			$Bg/btn2.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/2.png")
+			$Bg/btn3.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/3.png")
+			$Bg/btn4.texture_normal = load("res://Assets/Images/Spell icons/" + selected_staff + "/4.png")
+			$Bg/btn1.disabled = false
+			$Bg/btn2.disabled = false
+			$Bg/btn3.disabled = false
+			$Bg/btn4.disabled = false
 
 
 func set_selected_spell():

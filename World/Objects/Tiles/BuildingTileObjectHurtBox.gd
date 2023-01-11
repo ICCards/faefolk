@@ -36,27 +36,22 @@ func set_type():
 		"wall":
 			match tier:
 				"twig":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/twig.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.TWIG)
 					health = Stats.MAX_TWIG_WALL
 					max_health = Stats.MAX_TWIG_WALL
 				"wood":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/wood.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.WOOD)
 					health = Stats.MAX_WOOD_WALL
 					max_health = Stats.MAX_WOOD_WALL
 				"stone":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/stone.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.STONE)
 					health = Stats.MAX_STONE_WALL
 					max_health = Stats.MAX_STONE_WALL
 				"metal":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/metal.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.METAL)
 					health = Stats.MAX_METAL_WALL
 					max_health = Stats.MAX_METAL_WALL
 				"armored":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/armored.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.ARMORED)
 					health = Stats.MAX_ARMORED_WALL
 					max_health = Stats.MAX_ARMORED_WALL
@@ -103,6 +98,8 @@ func update_health_bar():
 
 
 func remove_wall():
+	if Server.world.has_node("WallHitEffect" + str(location)):
+		Server.world.get_node("WallHitEffect" + str(location)).queue_free()
 	MapData.remove_object("placables",id)
 	Tiles.add_valid_tiles(location)
 	Tiles.wall_tiles.set_cellv(location, -1)
@@ -115,10 +112,7 @@ func remove_foundation():
 	Tiles.foundation_tiles.update_bitmask_area(location)
 	queue_free()
 
-
 func _on_HurtBox_area_entered(area):
-	if item_name == "wall":
-		play_wall_hit_effect()
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if tier == "twig" or tier == "wood":
@@ -128,19 +122,21 @@ func _on_HurtBox_area_entered(area):
 		if temp_health == 3:
 			temp_health = 0
 			health -= 1
+	if item_name == "wall" and health != 0:
+		play_wall_hit_effect()
 	show_health()
 	update_health_bar()
 
 func play_wall_hit_effect():
-	if has_node("WallHitEffect"):
-		get_node("WallHitEffect").restart()
+	if Server.world.has_node("WallHitEffect" + str(location)):
+		Server.world.get_node("WallHitEffect" + str(location)).restart()
 	else:
 		var wallHitEffect = WallHitEffect.instance()
-		wallHitEffect.name = "WallHitEffect"
+		wallHitEffect.name = "WallHitEffect" + str(location)
 		wallHitEffect.tier = tier
 		wallHitEffect.autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
 		wallHitEffect.location = location
-		wallHitEffect.position = (location*32)+Vector2(20,-12)
+		wallHitEffect.position = (location*32)+Vector2(20,-20)
 		Server.world.call_deferred("add_child", wallHitEffect)
 
 func show_health():

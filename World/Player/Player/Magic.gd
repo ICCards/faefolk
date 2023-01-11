@@ -139,16 +139,19 @@ func wait_for_bow_release():
 		wait_for_bow_release()
 
 func shoot():
-	var index = get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell
-	match index:
-		1:
-			single_arrow_shot()
-		2:
-			multi_arrow_shot()
-		3: 
-			enchanted_arrow_shot()
-		4:
-			ricochet_arrow_shot()
+	if get_parent().user_interface.normal_hotbar_mode:
+		single_arrow_shot()
+	else:
+		var index = get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell
+		match index:
+			1:
+				single_arrow_shot()
+			2:
+				multi_arrow_shot()
+			3: 
+				enchanted_arrow_shot()
+			4:
+				ricochet_arrow_shot()
 
 func ricochet_arrow_shot():
 	PlayerData.remove_material("arrow", 2)
@@ -225,7 +228,7 @@ func cast_spell(staff_name, init_direction):
 	if validate_magic_cast_requirements():
 		direction = init_direction
 		starting_mouse_point = get_global_mouse_position()
-		if get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell != 2 and not get_parent().user_interface.normal_hotbar_mode:
+		if get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell != 2 or get_parent().user_interface.normal_hotbar_mode:
 			get_parent().state = MAGIC_CASTING
 			is_casting = true
 			animation = "magic_cast_" + init_direction.to_lower()
@@ -239,12 +242,12 @@ func cast_spell(staff_name, init_direction):
 
 func validate_magic_cast_requirements():
 	if get_parent().user_interface.normal_hotbar_mode:
-		return PlayerData.player_data["mana"] >= 1
+		return PlayerData.player_data["mana"] >= 1 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown()
 	else:
 		var index = get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell
 		match index:
 			1:
-				return PlayerData.player_data["mana"] >= 1
+				return PlayerData.player_data["mana"] >= 1 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown()
 			2:
 				return PlayerData.player_data["mana"] >= 2 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown()
 			3:

@@ -70,7 +70,8 @@ func switch_hotbar():
 		$Hotbar.initialize_hotbar()
 		$CombatHotbar.hide()
 		$PlayerDataUI/EnergyBars.show()
-		
+	get_node("../../").set_held_object()
+
 
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:

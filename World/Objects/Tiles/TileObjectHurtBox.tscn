@@ -92,7 +92,6 @@ disabled = true
 volume_db = -16.0
 
 [node name="Light2D" type="Light2D" parent="."]
-visible = false
 position = Vector2( 17, -34 )
 enabled = false
 texture = ExtResource( 2 )

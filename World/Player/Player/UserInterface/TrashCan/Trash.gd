@@ -3,6 +3,7 @@ extends Control
 onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 func initialize():
+	show()
 	$Top.rotation_degrees = 0
 
 func _on_TrashButton_mouse_entered():
@@ -18,6 +19,8 @@ func _on_TrashButton_pressed():
 		sound_effects.play()
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
+		if get_parent().name == "Workbench" or get_parent().name == "crafting":
+			get_parent().initialize_crafting()
 
 func open_trash_can():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/trash/trashcanlid.mp3")
@@ -43,3 +46,5 @@ func _on_BackgroundButton_pressed():
 		find_parent("UserInterface").items_to_drop.append([find_parent("UserInterface").holding_item.item_name, find_parent("UserInterface").holding_item.item_quantity, find_parent("UserInterface").holding_item.item_health])
 		find_parent("UserInterface").holding_item.queue_free()
 		find_parent("UserInterface").holding_item = null
+		if get_parent().name == "Workbench" or get_parent().name == "crafting":
+			get_parent().initialize_crafting()

@@ -17,13 +17,17 @@ func _ready():
 	initialize()
 
 func initialize():
-	$InventorySlots.initialize_slots()
-	$HotbarInventorySlots.initialize_slots()
+	initialize_crafting()
 	Server.player_node.actions.destroy_placable_object()
 	hovered_item = null
 	crafting_item = null
 	$MenuTitle.text = "Workbench #" + str(level) + ":"
 	show()
+
+func initialize_crafting():
+	$InventorySlots.initialize_slots()
+	$HotbarInventorySlots.initialize_slots()
+	$CraftingMenuWorkbench.initialize()
 
 
 func destroy():
@@ -84,13 +88,13 @@ func craft(item_name):
 		if find_parent("UserInterface").holding_item.item_name == "arrow" and PlayerData.isSufficientMaterialToCraft(item_name):
 			PlayerData.craft_item(item_name)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
+	initialize_crafting()
 
 func return_crafted_item(item_name):
 	var inventoryItem = InventoryItem.instance()
 	inventoryItem.set_item(item_name, 1, Stats.return_max_tool_health(item_name))
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem
-
 
 func _on_ExitBtn_pressed():
 	get_parent().close_workbench()

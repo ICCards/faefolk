@@ -126,8 +126,8 @@ __meta__ = {
 [node name="MenuTitle" parent="." instance=ExtResource( 3 )]
 margin_left = 552.0
 margin_top = 117.0
-margin_right = 868.0
-margin_bottom = 184.0
+margin_right = 915.0
+margin_bottom = 192.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Campfire"
 
@@ -136,6 +136,7 @@ visible = false
 position = Vector2( 461, 465 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

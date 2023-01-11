@@ -1,5 +1,6 @@
 extends CanvasModulate
 
+const LENGTH_OF_TRANSITION = 150.0
 
 func _ready():
 	PlayerData.connect("set_day", self, "play_set_day")
@@ -11,13 +12,13 @@ func _ready():
 func play_set_day():
 	if Server.world.name == "World":
 		$Tween.interpolate_property(self, "color",
-			Color("28282d"), Color("ffffff"), 120.0,
+			Color("28282d"), Color("ffffff"), LENGTH_OF_TRANSITION,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 
 func play_set_night():
 	if Server.world.name == "World":
 		$Tween.interpolate_property(self, "color",
-			Color("ffffff"), Color("28282d"), 120.0,
+			Color("ffffff"), Color("28282d"), LENGTH_OF_TRANSITION,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()

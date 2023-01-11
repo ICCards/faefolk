@@ -227,10 +227,10 @@ func place_rotatable_state():
 	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions):
+	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions) and not Tiles.validate_foundation_tiles(location, dimensions):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)):
+	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)) and not Tiles.validate_foundation_tiles(location, Vector2(dimensions.y,dimensions.x)):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
@@ -289,10 +289,11 @@ func place_door_state():
 func place_buildings_state():
 	if Server.world.name == "World":
 		$ColorIndicator.visible = true
-		$ColorIndicator.tile_size = Vector2(1, 1)
+		$ColorIndicator.tile_size = Vector2(1,1)
 		var location = Tiles.valid_tiles.world_to_map(mousePos)
-		if not Tiles.validate_tiles(location, Vector2(1,1)) or \
+		if not Tiles.validate_tiles(location,Vector2(1,1)) or \
 		not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or \
+		not Tiles.validate_foundation_tiles(location,Vector2(1,1)) or \
 		Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 			$ColorIndicator.indicator_color = "Red"
 			$ColorIndicator.set_indicator_color()
@@ -385,6 +386,9 @@ func place_item_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	var dimensions = Constants.dimensions_dict[item_name]
 	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (item_name != "campfire" or item_name != "torch" or item_name != "well") and not Tiles.validate_foundation_tiles(location, dimensions):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:

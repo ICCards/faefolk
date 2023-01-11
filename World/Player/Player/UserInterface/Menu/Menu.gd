@@ -4,11 +4,11 @@ var item
 
 onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
+
 func initialize():
 	show()
 	Server.player_node.actions.destroy_placable_object()
 	change_inventory_tab("inventory")
-
 
 func _physics_process(delta):
 	if not visible:
@@ -43,11 +43,6 @@ func set_tab(new_tab):
 			page.initialize()
 		else:
 			page.hide()
-	if new_tab == "inventory" or new_tab == "crafting":
-		$Trash.initialize()
-	else:
-		$Trash.hide()
-		
 
 func _on_ExitBtn_pressed():
 	if not get_parent().holding_item:
