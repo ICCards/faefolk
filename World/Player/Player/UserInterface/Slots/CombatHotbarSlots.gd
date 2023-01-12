@@ -12,7 +12,7 @@ func _ready():
 		slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
 		slots[i].slot_index = i
-		slots[i].slotType = SlotClass.SlotType.COMBAT_HOTBAR
+		slots[i].slotType = SlotClass.SlotType.COMBAT_HOTBAR_INVENTORY
 	initialize_slots()
 	
 func able_to_put_into_slot():
@@ -21,7 +21,7 @@ func able_to_put_into_slot():
 		return false
 	var holding_item_name = holding_item.item_name 
 	var holding_item_category = JsonData.item_data[holding_item_name]["ItemCategory"]
-	return holding_item_category == "Tool" or holding_item_category == "Magic" or holding_item_category == "Crop" or holding_item_category == "Construction" or holding_item_category == "Potion" 
+	return holding_item_category == "Tool" or holding_item_category == "Magic" or holding_item_category == "Crop" or holding_item_category == "Construction" or holding_item_category == "Potion" or holding_item_category == "Food" 
 
 func initialize_slots():
 	var slots = self.get_children()

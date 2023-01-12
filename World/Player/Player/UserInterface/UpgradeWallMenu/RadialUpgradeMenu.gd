@@ -169,7 +169,7 @@ func _input(event):
 			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and PlayerData.viewInventoryMode:
 				if not event.is_pressed():
 					destroy()
-					yield(get_tree().create_timer(0.25), "timeout")
+					yield(get_tree().create_timer(0.1), "timeout")
 					PlayerData.viewInventoryMode = false
 
 func remove_materials(index):

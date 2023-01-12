@@ -67,7 +67,7 @@ func destroy():
 	state = DYING
 
 func set_held_object():
-	if user_interface.normal_hotbar_mode:
+	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
@@ -81,8 +81,10 @@ func set_held_object():
 			if item_name == "blueprint" and current_building_item != null:
 				actions.show_placable_object(current_building_item, "BUILDING")
 				return
+		$TorchLight.enabled = false
 		actions.destroy_placable_object()
 	else:
+		$TorchLight.enabled = false
 		actions.destroy_placable_object()
 		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
 			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
@@ -127,7 +129,7 @@ func _unhandled_input(event):
 	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and \
 		not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and \
 		state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
-			if user_interface.normal_hotbar_mode:
+			if PlayerData.normal_hotbar_mode:
 				if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 					var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 					var item_category = JsonData.item_data[item_name]["ItemCategory"]
@@ -251,7 +253,7 @@ func idle_state(_direction):
 		if Sounds.current_footsteps_sound != Sounds.swimming:
 			if state == MOVEMENT:
 				animation_player.play("idle")
-				if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and user_interface.normal_hotbar_mode:
+				if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
 					var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 					var item_category = JsonData.item_data[item_name]["ItemCategory"]
 					if Util.valid_holding_item_category(item_category):
@@ -267,12 +269,25 @@ func idle_state(_direction):
 						holding_item.hide()
 						animation = "idle_" + _direction.to_lower()
 						$HoldingTorch.hide()
+				elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
+					var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
+					var item_category = JsonData.item_data[item_name]["ItemCategory"]
+					if Util.valid_holding_item_category(item_category):
+						holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+						holding_item.show()
+						animation = "holding_idle_" + _direction.to_lower()
+						$HoldingTorch.hide()
+					else:
+						$HoldingTorch.hide()
+						holding_item.hide()
+						animation = "idle_" + _direction.to_lower()
 				else:
 					$HoldingTorch.hide()
 					holding_item.hide()
 					animation = "idle_" + _direction.to_lower()
 				composite_sprites.set_player_animation(character, animation, null)
 		else:
+			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
@@ -282,7 +297,7 @@ func walk_state(_direction):
 		$Sounds/FootstepsSound.stream_paused = false
 		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
 			animation_player.play("walk")
-			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and user_interface.normal_hotbar_mode:
+			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
@@ -294,6 +309,18 @@ func walk_state(_direction):
 					holding_item.hide()
 					$HoldingTorch.show()
 					animation = "holding_walk_" + _direction.to_lower()
+				else:
+					holding_item.hide()
+					animation = "walk_" + _direction.to_lower()
+					$HoldingTorch.hide()
+			elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
+				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
+				var item_category = JsonData.item_data[item_name]["ItemCategory"]
+				if Util.valid_holding_item_category(item_category):
+					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+					holding_item.show()
+					animation = "holding_walk_" + _direction.to_lower()
+					$HoldingTorch.hide()
 				else:
 					holding_item.hide()
 					animation = "walk_" + _direction.to_lower()
@@ -310,6 +337,7 @@ func walk_state(_direction):
 			composite_sprites.set_player_animation(character, animation, null)
 			check_if_holding_item()
 		elif Sounds.current_footsteps_sound == Sounds.swimming:
+			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			holding_item.hide()
 			$HoldingTorch.hide()
 			animation_player.play("swim")
@@ -317,7 +345,7 @@ func walk_state(_direction):
 
 
 func check_if_holding_item():
-	if user_interface.normal_hotbar_mode:
+	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			var item_qt = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][1]

@@ -61,7 +61,7 @@ func set_inactive():
 	PlayerData.viewMapMode = false
 	$Camera2D.current = false
 	Server.player_node.get_node("Camera2D").current = true
-	if Server.player_node.user_interface.normal_hotbar_mode:
+	if PlayerData.normal_hotbar_mode:
 		Server.player_node.user_interface.get_node("Hotbar").show()
 	else:
 		Server.player_node.user_interface.get_node("CombatHotbar").show()

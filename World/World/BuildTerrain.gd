@@ -31,7 +31,7 @@ var game_state: GameState
 
 func initialize():
 	pass
-	#$BuildTerrain.start()
+	$BuildTerrainTimer.start()
 
 #func spawn_player():
 #	var player = Player.instance()
@@ -62,76 +62,20 @@ func initialize():
 
 
 func _on_BuildTerrain_timeout():
-	if not terrain_thread.is_active():
-		terrain_thread.start(self, "_whoAmI")
+	build_terrain()
+#	if not terrain_thread.is_active():
+#		terrain_thread.start(self, "_whoAmI")
 		
-func _whoAmI():
-	call_deferred("build_terrain")
+func _whoAmI(chunk):
+	call_deferred("spawn_chunk", chunk)
 
 func build_terrain():
 	if Server.player_node:
-		var loc = Server.player_node.position / 32
-		var columns
-		var rows
-		var new_chunks = []
-		var chunks_to_remove = []
-		if loc.x < 218.75:
-			columns = [1,2]
-		elif loc.x < 281.25:
-			columns = [2,3]
-		elif loc.x < 343.75:
-			columns = [3,4]
-		elif loc.x < 406.25:
-			columns = [4,5]
-		elif loc.x < 468.75:
-			columns = [5,6]
-		elif loc.x < 531.25:
-			columns = [6,7]
-		elif loc.x < 593.75:
-			columns = [7,8]
-		elif loc.x < 656.25:
-			columns = [8,9]
-		elif loc.x < 718.75:
-			columns = [9,10]
-		elif loc.x < 781.25:
-			columns = [10,11]
-		else:
-			columns = [11, 12]
-
-		if loc.y < 218.75:
-			rows = ["A","B"]
-		elif loc.y < 281.25:
-			rows = ["B","C"]
-		elif loc.y < 343.75:
-			rows = ["C","D"]
-		elif loc.y < 406.25:
-			rows = ["D","E"]
-		elif loc.y < 468.75:
-			rows = ["E","F"]
-		elif loc.y < 531.25:
-			rows = ["F","G"]
-		elif loc.y < 593.75:
-			rows = ["G","H"]
-		elif loc.y < 656.25:
-			rows = ["H","I"]
-		elif loc.y < 718.75:
-			rows = ["I","J"]
-		elif loc.y < 781.25:
-			rows = ["J","K"]
-		else:
-			rows = ["K","L"]
-		for column in columns:
-			for row in rows:
-				new_chunks.append(row+str(column))
-		if current_chunks == new_chunks:
-			return
-		current_chunks = new_chunks
-		for new_chunk in new_chunks:
-			if not built_chunks.has(new_chunk):
+		for new_chunk in get_parent().built_chunks:
+			if not built_chunks.has(new_chunk) and not terrain_thread.is_active():
 				built_chunks.append(new_chunk)
-				print("SPAWN CHUNK " + new_chunk)
-				spawn_chunk(new_chunk)
-		var value = terrain_thread.wait_to_finish()
+				print("BUILDING TERRAIN " + new_chunk)
+				terrain_thread.start(self, "_whoAmI", new_chunk)
 
 func spawn_chunk(chunk_name):
 	var _chunk = MapData.return_chunk(chunk_name[0],chunk_name.substr(1,-1))
@@ -196,7 +140,6 @@ func spawn_chunk(chunk_name):
 				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
-		#yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	update_bitmasks(chunk_name)
 	yield(get_tree(), "idle_frame")
@@ -296,3 +239,5 @@ func update_bitmasks(chunk_name):
 	yield(get_tree(), "idle_frame")
 	deep_ocean.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
 	yield(get_tree(), "idle_frame")
+	print("BUILT TERRAIN " + str(chunk_name))
+	terrain_thread.wait_to_finish()

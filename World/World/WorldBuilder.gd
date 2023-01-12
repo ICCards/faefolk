@@ -7,6 +7,10 @@ var current_chunks = []
 
 func initialize():
 	get_chunks()
+	$WorldBuilderTimer.start()
+
+func _on_WorldBuilderTimer_timeout():
+	get_chunks()
 
 func get_chunks():
 	if Server.player_node:

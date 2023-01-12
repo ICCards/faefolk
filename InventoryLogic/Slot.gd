@@ -25,7 +25,8 @@ enum SlotType {
 	STOVE,
 	CAMPFIRE,
 	CRAFTING,
-	COMBAT_HOTBAR
+	COMBAT_HOTBAR,
+	COMBAT_HOTBAR_INVENTORY
 }
 
 var slotType = null

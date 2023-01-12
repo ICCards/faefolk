@@ -139,7 +139,7 @@ func wait_for_bow_release():
 		wait_for_bow_release()
 
 func shoot():
-	if get_parent().user_interface.normal_hotbar_mode:
+	if PlayerData.normal_hotbar_mode:
 		single_arrow_shot()
 	else:
 		var index = get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell
@@ -213,7 +213,7 @@ func multi_arrow_shot():
 
 func wait_for_cast_release(staff_name):
 	if not mouse_left_down:
-		if get_parent().user_interface.normal_hotbar_mode:
+		if PlayerData.normal_hotbar_mode:
 			cast(staff_name, 1)
 		else:
 			cast(staff_name, get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell)
@@ -228,7 +228,7 @@ func cast_spell(staff_name, init_direction):
 	if validate_magic_cast_requirements():
 		direction = init_direction
 		starting_mouse_point = get_global_mouse_position()
-		if get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell != 2 or get_parent().user_interface.normal_hotbar_mode:
+		if get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell != 2 or PlayerData.normal_hotbar_mode:
 			get_parent().state = MAGIC_CASTING
 			is_casting = true
 			animation = "magic_cast_" + init_direction.to_lower()
@@ -241,7 +241,7 @@ func cast_spell(staff_name, init_direction):
 
 
 func validate_magic_cast_requirements():
-	if get_parent().user_interface.normal_hotbar_mode:
+	if PlayerData.normal_hotbar_mode:
 		return PlayerData.player_data["mana"] >= 1 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown()
 	else:
 		var index = get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").selected_spell

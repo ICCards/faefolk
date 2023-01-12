@@ -26,8 +26,6 @@ var object_id
 
 var is_opening_chest: bool = false
 
-var normal_hotbar_mode: bool = true
-
 var game_state: GameState
 
 enum {
@@ -41,6 +39,7 @@ enum {
 }
 
 func _ready():
+	yield(get_tree().create_timer(0.25), "timeout")
 	$Menu.hide()
 	add_hotbar_clock_and_stats()
 
@@ -60,13 +59,14 @@ func save_player_data(exit_to_main_menu):
 		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
 
 func switch_hotbar():
+	Sounds.play_small_select_sound()
 	if $Hotbar.visible:
-		normal_hotbar_mode = false
+		PlayerData.normal_hotbar_mode = false
 		$Hotbar.hide()
 		$CombatHotbar.initialize()
 		$PlayerDataUI/EnergyBars.hide()
 	else:
-		normal_hotbar_mode = true
+		PlayerData.normal_hotbar_mode = true
 		$Hotbar.initialize_hotbar()
 		$CombatHotbar.hide()
 		$PlayerDataUI/EnergyBars.show()
@@ -211,22 +211,26 @@ func toggle_chest(id):
 
 func close_hotbar_clock_and_stats():
 	PlayerData.interactive_screen_mode = true
+	$CombatHotbar.hide()
 	$Hotbar.hide()
 	$PlayerDataUI.hide()
 	$CombatHotbar.hide()
 
 
 func add_hotbar_clock_and_stats():
+	PlayerData.HotbarSlots = $Hotbar/HotbarSlots
 	PlayerData.interactive_screen_mode = false
-	if normal_hotbar_mode:
+	if PlayerData.normal_hotbar_mode:
 		$CombatHotbar.hide()
 		$Hotbar.initialize_hotbar()
 		$PlayerDataUI.show()
+		$PlayerDataUI/EnergyBars.show()
 		PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
 	else:
 		$CombatHotbar.initialize()
 		$Hotbar.hide()
-		$PlayerDataUI/DateTime.show()
+		$PlayerDataUI.show()
+		$PlayerDataUI/EnergyBars.hide()
 		PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
 
 func toggle_menu():
@@ -247,11 +251,13 @@ func show_menu():
 
 func hide_menu():
 	PlayerData.viewInventoryMode = false
-	if normal_hotbar_mode:
+	if PlayerData.normal_hotbar_mode:
 		$PlayerDataUI.show()
+		$PlayerDataUI/EnergyBars.show()
 		$Hotbar.initialize_hotbar()
 	else:
-		$PlayerDataUI/DateTime.show()
+		$PlayerDataUI.show()
+		$PlayerDataUI/EnergyBars.hide()
 		$CombatHotbar.initialize()
 	$Menu.hide()
 	drop_items()

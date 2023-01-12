@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stone break.mp3-ccbfcb7fc9a1ab9279e20578f2813cd9.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Building/stone/stone break.mp3"
+dest_files=[ "res://.import/stone break.mp3-ccbfcb7fc9a1ab9279e20578f2813cd9.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

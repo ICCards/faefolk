@@ -1,10 +1,5 @@
 extends Node
 
-#var music_volume = 50.0
-#var sound_volume = 50.0
-#var ambient_volume = 50.0
-#var footstep_volume = 50.0
-
 signal volume_change
 signal footsteps_sound_change
 
@@ -69,7 +64,6 @@ func set_footstep_volume(val):
 	emit_signal("volume_change")
 	
 func return_adjusted_sound_db(category, init_sound):
-	return -80
 	if category == "music":
 		var progress = PlayerData.player_data["settings"]["volume"]["music"] / 100
 		if progress == 0.5:

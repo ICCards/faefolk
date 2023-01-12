@@ -8,7 +8,6 @@ var adjusted_pos = Vector2(0,0)
 
 
 func _ready():
-	yield(get_tree(), "idle_frame")
 	for i in range(slots.size()):
 		PlayerData.connect("active_item_updated", slots[i], "refresh_style")
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
@@ -16,7 +15,6 @@ func _ready():
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
 		slots[i].slotType = SlotClass.SlotType.HOTBAR
 		slots[i].slot_index = i
-	initialize_hotbar()
 	Stats.connect("tool_health_change", self, "update_tool_health")
 	
 func hovered_slot(slot):
@@ -77,7 +75,6 @@ func update_tool_health():
 
 func initialize_hotbar():
 	show()
-	PlayerData.HotbarSlots = $HotbarSlots
 	item = null
 	for i in range(slots.size()):
 		if slots[i].item != null:

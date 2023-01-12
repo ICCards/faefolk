@@ -38,8 +38,8 @@ func set_type():
 	match tier:
 		"wood":
 			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/wood.tres")
-			health = Stats.MAX_WOOD_WALL
-			max_health = Stats.MAX_WOOD_WALL
+			health = 10 #Stats.MAX_WOOD_WALL
+			max_health = 10 #Stats.MAX_WOOD_WALL
 		"metal":
 			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/metal.tres")
 			health = Stats.MAX_METAL_WALL
@@ -53,9 +53,6 @@ func set_type():
 			queue_free()
 	update_health_bar()
 
-
-func remove_icon():
-	$SelectedBorder.hide()
 
 
 func _on_HurtBox_area_entered(area):
@@ -77,6 +74,8 @@ func _on_HurtBox_area_entered(area):
 		if temp_health == 3:
 			temp_health = 0
 			health -= 1
+	if health != 0:
+		play_hit_sound_effect()
 	update_health_bar()
 
 func update_health_bar():
@@ -87,17 +86,48 @@ func update_health_bar():
 		remove_tile()
 
 func remove_tile():
+	MapData.remove_placable(id)
 	Tiles.add_valid_tiles(location, Vector2(2,1))
+	play_break_sound_effect()
+	yield(get_tree().create_timer(1.5), "timeout")
 	queue_free()
-
 
 func show_health():
 	$AnimationPlayer2.stop()
 	$AnimationPlayer2.play("show health bar")
 
-
 func _on_HammerRepairBox_area_entered(area):
+	play_hammer_hit_sound()
 	set_type()
-	Server.world.play_upgrade_building_effect(location)
-	Server.world.play_upgrade_building_effect(location + Vector2(1,0))
+	InstancedScenes.play_upgrade_building_effect(location)
+	InstancedScenes.play_upgrade_building_effect(location+ Vector2(1,0))
 	show_health()
+
+
+func play_hit_sound_effect():
+	match tier:
+		"wood":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3")
+		"metal":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+		"armored":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+
+
+func play_hammer_hit_sound():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+
+func play_break_sound_effect():
+	match tier:
+		"wood":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+		"metal":
+			sound_effects.stream = null
+		"armored":
+			sound_effects.stream = null
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()

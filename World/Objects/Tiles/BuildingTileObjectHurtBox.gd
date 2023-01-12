@@ -1,5 +1,7 @@
 extends YSort
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+
 onready var WallHitEffect = load("res://World/Objects/Tiles/WallHitEffect.tscn")
 
 var tier
@@ -100,32 +102,45 @@ func update_health_bar():
 func remove_wall():
 	if Server.world.has_node("WallHitEffect" + str(location)):
 		Server.world.get_node("WallHitEffect" + str(location)).queue_free()
+	$HealthBar.hide()
+	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+	$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
 	MapData.remove_object("placables",id)
 	Tiles.add_valid_tiles(location)
 	Tiles.wall_tiles.set_cellv(location, -1)
 	Tiles.wall_tiles.update_bitmask_area(location)
+	play_break_sound_effect()
+	yield(get_tree().create_timer(1.5), "timeout")
 	queue_free()
 
 func remove_foundation():
+	$HealthBar.hide()
+	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+	$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
 	MapData.remove_object("placables",id)
 	Tiles.foundation_tiles.set_cellv(location, -1)
 	Tiles.foundation_tiles.update_bitmask_area(location)
+	play_break_sound_effect()
+	yield(get_tree().create_timer(1.5), "timeout")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	if area.name == "AxePickaxeSwing":
-		Stats.decrease_tool_health()
-	if tier == "twig" or tier == "wood":
-		health -= 1
-	else:
-		temp_health += 1
-		if temp_health == 3:
-			temp_health = 0
+	if health != 0:
+		if area.name == "AxePickaxeSwing":
+			Stats.decrease_tool_health()
+		if tier == "twig" or tier == "wood":
 			health -= 1
-	if item_name == "wall" and health != 0:
-		play_wall_hit_effect()
-	show_health()
-	update_health_bar()
+		else:
+			temp_health += 1
+			if temp_health == 3:
+				temp_health = 0
+				health -= 1
+		if item_name == "wall" and health != 0:
+			play_wall_hit_effect()
+		if health != 0:
+			play_hit_sound_effect()
+		show_health()
+		update_health_bar()
 
 func play_wall_hit_effect():
 	if Server.world.has_node("WallHitEffect" + str(location)):
@@ -150,7 +165,7 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 			if tool_name == "hammer":
 				$SelectedBorder.show()
 				show_selected_tile()
-				Server.player_node.get_node("Camera2D/UserInterface/RadialUpgradeMenu").initialize(location, self)
+				Server.player_node.user_interface.get_node("RadialUpgradeMenu").initialize(location, self)
 
 func show_selected_tile():
 	match item_name:
@@ -182,6 +197,7 @@ func show_selected_tile():
 					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
 
 func _on_HammerRepairBox_area_entered(area):
+	play_hammer_hit_sound()
 	set_type()
 	InstancedScenes.play_upgrade_building_effect(location)
 	show_health()
@@ -198,3 +214,39 @@ func _on_DetectObjectOverPathBox_area_exited(area):
 			yield(get_tree().create_timer(0.25), "timeout")
 			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 			$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)
+
+func play_hammer_hit_sound():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+
+func play_hit_sound_effect():
+	match tier:
+		"twig":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/twig/twig hit.mp3")
+		"wood":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3")
+		"stone":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/stone/stone hit.mp3")
+		"metal":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+		"armored":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+
+func play_break_sound_effect():
+	match tier:
+		"twig":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+		"wood":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+		"stone":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/stone/stone break.mp3")
+		"metal":
+			sound_effects.stream = null
+		"armored":
+			sound_effects.stream = null
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+

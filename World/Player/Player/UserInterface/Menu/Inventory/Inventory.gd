@@ -14,6 +14,7 @@ func initialize():
 	get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/inventory/inventory-tab.png")
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
+	$CombatHotbarSlots.initialize_slots()
 	PlayerData.InventorySlots = $InventorySlots
 	hovered_item = null
 	$EnergyManaHealth.initialize()

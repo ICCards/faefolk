@@ -31,7 +31,7 @@ onready var ForageObjects = get_node("../../ForageObjects")
 func initialize():
 	spawn_forage()
 	spawn_placables()
-	$SpawnNature.start()
+	$SpawnNatureTimer.start()
 	
 func spawn_forage():
 	for id in MapData.world["forage"]:
@@ -99,8 +99,6 @@ func _whoAmI6(_value):
 func _whoAmI7(_value):
 	call_deferred("set_nav")
 	
-func _whoAmI8(_value):
-	call_deferred("set_player_quadrant")
 
 func _on_SpawnNature_timeout():
 	if not Server.world.is_changing_scene:

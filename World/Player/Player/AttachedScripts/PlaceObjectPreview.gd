@@ -102,6 +102,8 @@ func set_dimensions():
 	$ScaledItemToPlace.hide()
 	match state:
 		SLEEPING_BAG:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ColorIndicator.tile_size = Vector2(2, 1)
 			$ScaledItemToPlace.visible = true
 			$ScaledItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
@@ -109,34 +111,45 @@ func set_dimensions():
 			$ScaledItemToPlace.rect_size = Vector2(128, 64)
 			$ScaledItemToPlace.rect_position = Vector2(0,0)
 		ITEM:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 			var dimensions = Constants.dimensions_dict[item_name]
 			$ColorIndicator.tile_size = dimensions
 		SEED:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
 			$ColorIndicator.tile_size =  Vector2(1,1)
 		WALL:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wall.png")
 			$ColorIndicator.tile_size =  Vector2(1,1)
 		DOOR:
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 		FOUNDATION:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/foundation.png")
 			$ColorIndicator.tile_size = Vector2(1,1)
 		ROTATABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 		CUSTOMIZABLE_ROTATABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeVariety").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeVariety").show()
 			$ItemToPlace.show()
 		CUSTOMIZABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeVariety").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").show()
 			$ItemToPlace.show()
 
 
@@ -158,7 +171,7 @@ func place_customizable_state():
 	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif not Tiles.validate_tiles(location, dimensions):
+	elif not Tiles.validate_tiles(location, dimensions) or not Tiles.validate_foundation_tiles(location, dimensions):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
@@ -189,10 +202,10 @@ func place_customizable_rotatable_state():
 	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions):
+	elif (direction == "up" or direction == "down") and (not Tiles.validate_tiles(location, dimensions) or not Tiles.validate_foundation_tiles(location, dimensions)):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)):
+	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)) or not Tiles.validate_foundation_tiles(location, Vector2(dimensions.y,dimensions.x))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
@@ -227,10 +240,10 @@ func place_rotatable_state():
 	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions) and not Tiles.validate_foundation_tiles(location, dimensions):
+	elif (direction == "up" or direction == "down") and (not Tiles.validate_tiles(location, dimensions) or not Tiles.validate_foundation_tiles(location, dimensions)):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)) and not Tiles.validate_foundation_tiles(location, Vector2(dimensions.y,dimensions.x)):
+	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)) or not Tiles.validate_foundation_tiles(location, Vector2(dimensions.y,dimensions.x))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
@@ -267,10 +280,10 @@ func place_door_state():
 	else:
 		$ColorIndicator.tile_size = Vector2(1, 2)
 		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + " side.png")
-	if (direction == "up" or direction == "down")  and not Tiles.validate_tiles(location, Vector2(2,1)):
+	if (direction == "up" or direction == "down")  and (not Tiles.validate_tiles(location, Vector2(2,1)) or not Tiles.validate_foundation_tiles(location,Vector2(2,1))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(1,2)):
+	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(1,2)) or not Tiles.validate_foundation_tiles(location,Vector2(1,2))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif Server.player_node.position.distance_to(mousePos) > 120:
@@ -343,32 +356,6 @@ func place_sleeping_bag_state():
 		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object("sleeping bag", direction, location, "placable")
 
-
-func place_tent_state():
-	get_rotation_index()
-	var direction = directions[direction_index]
-	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/tent " + direction + ".png")
-	if direction == "up" or direction == "down":
-		$ColorIndicator.tile_size = Vector2(4, 4)
-		$ItemToPlace.rect_position = Vector2(0,-160)
-	else:
-		$ColorIndicator.tile_size = Vector2(6, 3)
-		$ItemToPlace.rect_position = Vector2(0,-64)
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Server.player_node.position.distance_to(mousePos) > 120:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, Vector2(4,4)):
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(6,3)):
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	else:
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
-			place_object("tent", direction, location, "placable")
 	
 func get_rotation_index():
 	if direction_index == null:
@@ -388,9 +375,15 @@ func place_item_state():
 	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (item_name != "campfire" or item_name != "torch" or item_name != "well") and not Tiles.validate_foundation_tiles(location, dimensions):
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
+	elif (item_name != "campfire" and item_name != "torch" and item_name != "well"): 
+		if not Tiles.validate_foundation_tiles(location, dimensions):
+			$ColorIndicator.indicator_color = "Red"
+			$ColorIndicator.set_indicator_color()
+		else:
+			$ColorIndicator.indicator_color = "Green"
+			$ColorIndicator.set_indicator_color()
+			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
+				place_object(item_name, null, location, "placable")
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()

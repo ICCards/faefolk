@@ -133,6 +133,9 @@ scale = Vector2( 1.1, 1.1 )
 texture = ExtResource( 5 )
 hframes = 14
 
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+visible = false
+
 [connection signal="area_entered" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_entered"]
 [connection signal="area_exited" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

@@ -142,7 +142,7 @@ visible = false
 position = Vector2( 461, 465 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
-frame = 7
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true

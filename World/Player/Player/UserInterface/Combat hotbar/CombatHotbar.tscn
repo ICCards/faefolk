@@ -68,7 +68,7 @@ texture_progress = ExtResource( 2 )
 fill_mode = 3
 
 [node name="Front" type="TextureProgress" parent="Progresses/Health"]
-modulate = Color( 1, 0, 0, 1 )
+modulate = Color( 0.886275, 0, 0, 1 )
 margin_left = 163.0
 margin_top = 491.0
 margin_right = 195.0
@@ -94,7 +94,7 @@ texture_progress = ExtResource( 2 )
 fill_mode = 3
 
 [node name="Front" type="TextureProgress" parent="Progresses/Mana"]
-modulate = Color( 0.0509804, 0.482353, 1, 1 )
+modulate = Color( 0.0509804, 0.462745, 0.988235, 1 )
 margin_left = 763.0
 margin_top = 491.0
 margin_right = 795.0
@@ -120,7 +120,7 @@ texture_progress = ExtResource( 6 )
 fill_mode = 3
 
 [node name="Front" type="TextureProgress" parent="Progresses/Energy"]
-modulate = Color( 0.00784314, 1, 0, 1 )
+modulate = Color( 0.00784314, 0.803922, 0, 1 )
 margin_left = 505.0
 margin_top = 518.0
 margin_right = 509.0

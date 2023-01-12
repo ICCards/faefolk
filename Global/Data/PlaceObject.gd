@@ -385,7 +385,7 @@ func place_object_in_world(id, item_name, direction, location):
 			var object = DoorFront.instance()
 			object.location = location
 			object.tier = "wood"
-			object.id = rng.randi_range(0, 10000)
+			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			Server.world.call_deferred("add_child", object, true)
 		"wood door side":
@@ -393,7 +393,7 @@ func place_object_in_world(id, item_name, direction, location):
 			var object = DoorSide.instance()
 			object.location = location
 			object.tier = "wood"
-			object.id = rng.randi_range(0, 10000)
+			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"metal door":
@@ -401,7 +401,7 @@ func place_object_in_world(id, item_name, direction, location):
 			var object = DoorFront.instance()
 			object.location = location
 			object.tier = "metal"
-			object.id = rng.randi_range(0, 10000)
+			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"metal door side":
@@ -409,7 +409,7 @@ func place_object_in_world(id, item_name, direction, location):
 			var object = DoorSide.instance()
 			object.location = location
 			object.tier = "metal"
-			object.id = rng.randi_range(0, 10000)
+			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"armored door":
@@ -417,7 +417,7 @@ func place_object_in_world(id, item_name, direction, location):
 			var object = DoorFront.instance()
 			object.location = location
 			object.tier = "armored"
-			object.id = rng.randi_range(0, 10000)
+			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"armored door side":
@@ -425,7 +425,7 @@ func place_object_in_world(id, item_name, direction, location):
 			var object = DoorSide.instance()
 			object.location = location
 			object.tier = "armored"
-			object.id = rng.randi_range(0, 10000)
+			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", object, true)
 		"torch":

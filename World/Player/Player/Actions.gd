@@ -167,6 +167,7 @@ func sleep(sleeping_bag_direction, pos):
 		sound_effects.play()
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = str(pos/32)
+		yield(get_tree(), "idle_frame")
 		game_state = GameState.new()
 		game_state.world_state = MapData.world
 		game_state.cave_state = MapData.caves
