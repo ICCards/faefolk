@@ -51,10 +51,6 @@ func spawn_forage():
 					forageItem.location = loc
 					forageItem.position = Tiles.valid_tiles.map_to_world(loc)
 					ForageObjects.call_deferred("add_child", forageItem)
-					if type == "clam":
-						Tiles.remove_valid_tiles(loc)
-					else:
-						Tiles.add_navigation_tiles(loc)
 	var value = forage_thread.wait_to_finish()
 	
 

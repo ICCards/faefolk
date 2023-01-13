@@ -10,7 +10,10 @@ var harvested = false
 
 func _ready():
 	if type == "clam":
+		Tiles.remove_valid_tiles(location)
 		$MovementCollision/CollisionShape2D.set_deferred("disabled", false)
+	else:
+		Tiles.add_navigation_tiles(location)
 	set_forage_texture()
 
 func set_forage_texture():
