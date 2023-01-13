@@ -8,7 +8,7 @@ var world_file_name = "res://JSONData/world.json"
 var caves_file_name = "res://JSONData/caves.json"
 
 var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
-var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "flower"]
+var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "forage"]
 var is_world_data_in_chunks = false
 
 var world = {
@@ -25,30 +25,29 @@ var world = {
 	"log": {},
 	"ore_large": {},
 	"ore": {},
-	"flower": {},
 	"tall_grass": {},
 	"forage": {},
 	"crops": {},
 	"tiles": {},
 	"placables": {}
 }
-var caves = {"Cave 1-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 1-2":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 1-3":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 1-4":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 1-5":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 1-6":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 1-7":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 1-Boss":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 1-Fishing":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-1":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-2":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-3":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-4":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-5":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-6":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-7":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-Boss":{"is_built":false,"mushroom":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}}}
+var caves = {"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-5":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-6":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 1-Fishing":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-5":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-6":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+"Cave 2-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}}}
 
 func _ready() -> void:
 #	var file = File.new()
@@ -143,6 +142,12 @@ func remove_placable(id):
 		world["placables"].erase(id)
 	else:
 		caves[Server.world.name]["placables"].erase(id)
+
+func remove_forage(id):
+	if Server.world.name == "World":
+		world["forage"].erase(id)
+	else:
+		caves[Server.world.name]["forage"].erase(id)
 
 func remove_object(type, id):
 	if Server.world.name == "World":
@@ -507,7 +512,6 @@ var a1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a2 = {
@@ -524,7 +528,6 @@ var a2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a3 = {
@@ -541,7 +544,6 @@ var a3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a4 = {
@@ -558,7 +560,6 @@ var a4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a5 = {
@@ -575,7 +576,6 @@ var a5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a6 = {
@@ -592,7 +592,6 @@ var a6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a7 = {
@@ -609,7 +608,6 @@ var a7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a8 = {
@@ -626,7 +624,6 @@ var a8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a9 = {
@@ -643,7 +640,6 @@ var a9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a10 = {
@@ -660,7 +656,6 @@ var a10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a11 = {
@@ -677,7 +672,6 @@ var a11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var a12 = {
@@ -694,7 +688,6 @@ var a12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b1 = {
@@ -711,7 +704,6 @@ var b1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b2 = {
@@ -728,7 +720,6 @@ var b2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b3 = {
@@ -745,7 +736,6 @@ var b3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b4 = {
@@ -762,7 +752,6 @@ var b4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b5 = {
@@ -779,7 +768,6 @@ var b5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b6 = {
@@ -796,7 +784,6 @@ var b6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b7 = {
@@ -813,7 +800,6 @@ var b7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b8 = {
@@ -830,7 +816,6 @@ var b8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b9 = {
@@ -847,7 +832,6 @@ var b9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b10 = {
@@ -864,7 +848,6 @@ var b10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b11 = {
@@ -881,7 +864,6 @@ var b11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var b12 = {
@@ -898,7 +880,6 @@ var b12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c1 = {
@@ -915,7 +896,6 @@ var c1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c2 = {
@@ -932,7 +912,6 @@ var c2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c3 = {
@@ -949,7 +928,6 @@ var c3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c4 = {
@@ -966,7 +944,6 @@ var c4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c5 = {
@@ -983,7 +960,6 @@ var c5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c6 = {
@@ -1000,7 +976,6 @@ var c6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c7 = {
@@ -1017,7 +992,6 @@ var c7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c8 = {
@@ -1034,7 +1008,6 @@ var c8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c9 = {
@@ -1051,7 +1024,6 @@ var c9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c10 = {
@@ -1068,7 +1040,6 @@ var c10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c11 = {
@@ -1085,7 +1056,6 @@ var c11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var c12 = {
@@ -1102,7 +1072,6 @@ var c12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d1 = {
@@ -1119,7 +1088,6 @@ var d1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d2 = {
@@ -1136,7 +1104,6 @@ var d2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d3 = {
@@ -1153,7 +1120,6 @@ var d3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d4 = {
@@ -1170,7 +1136,6 @@ var d4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d5 = {
@@ -1187,7 +1152,6 @@ var d5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d6 = {
@@ -1204,7 +1168,6 @@ var d6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d7 = {
@@ -1221,7 +1184,6 @@ var d7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d8 = {
@@ -1238,7 +1200,6 @@ var d8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d9 = {
@@ -1255,7 +1216,6 @@ var d9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d10 = {
@@ -1272,7 +1232,6 @@ var d10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d11 = {
@@ -1289,7 +1248,6 @@ var d11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var d12 = {
@@ -1306,7 +1264,6 @@ var d12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e1 = {
@@ -1323,7 +1280,6 @@ var e1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e2 = {
@@ -1340,7 +1296,6 @@ var e2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e3 = {
@@ -1357,7 +1312,6 @@ var e3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e4 = {
@@ -1374,7 +1328,6 @@ var e4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e5 = {
@@ -1391,7 +1344,6 @@ var e5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e6 = {
@@ -1408,7 +1360,6 @@ var e6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e7 = {
@@ -1425,7 +1376,6 @@ var e7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e8 = {
@@ -1442,7 +1392,6 @@ var e8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e9 = {
@@ -1459,7 +1408,6 @@ var e9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e10 = {
@@ -1476,7 +1424,6 @@ var e10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e11 = {
@@ -1493,7 +1440,6 @@ var e11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var e12 = {
@@ -1510,7 +1456,6 @@ var e12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f1 = {
@@ -1527,7 +1472,6 @@ var f1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f2 = {
@@ -1544,7 +1488,6 @@ var f2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f3 = {
@@ -1561,7 +1504,6 @@ var f3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f4 = {
@@ -1578,7 +1520,6 @@ var f4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f5 = {
@@ -1595,7 +1536,6 @@ var f5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f6 = {
@@ -1612,7 +1552,6 @@ var f6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f7 = {
@@ -1629,7 +1568,6 @@ var f7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f8 = {
@@ -1646,7 +1584,6 @@ var f8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f9 = {
@@ -1663,7 +1600,6 @@ var f9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f10 = {
@@ -1680,7 +1616,6 @@ var f10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f11 = {
@@ -1697,7 +1632,6 @@ var f11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var f12 = {
@@ -1714,7 +1648,6 @@ var f12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g1 = {
@@ -1731,7 +1664,6 @@ var g1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g2 = {
@@ -1748,7 +1680,6 @@ var g2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g3 = {
@@ -1765,7 +1696,6 @@ var g3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g4 = {
@@ -1782,7 +1712,6 @@ var g4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g5 = {
@@ -1799,7 +1728,6 @@ var g5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g6 = {
@@ -1816,7 +1744,6 @@ var g6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g7 = {
@@ -1833,7 +1760,6 @@ var g7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g8 = {
@@ -1850,7 +1776,6 @@ var g8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g9 = {
@@ -1867,7 +1792,6 @@ var g9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g10 = {
@@ -1884,7 +1808,6 @@ var g10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g11 = {
@@ -1901,7 +1824,6 @@ var g11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var g12 = {
@@ -1918,7 +1840,6 @@ var g12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h1 = {
@@ -1935,7 +1856,6 @@ var h1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h2 = {
@@ -1952,7 +1872,6 @@ var h2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h3 = {
@@ -1969,7 +1888,6 @@ var h3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h4 = {
@@ -1986,7 +1904,6 @@ var h4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h5 = {
@@ -2003,7 +1920,6 @@ var h5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h6 = {
@@ -2020,7 +1936,6 @@ var h6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h7 = {
@@ -2037,7 +1952,6 @@ var h7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h8 = {
@@ -2054,7 +1968,6 @@ var h8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h9 = {
@@ -2071,7 +1984,6 @@ var h9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h10 = {
@@ -2088,7 +2000,6 @@ var h10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h11 = {
@@ -2105,7 +2016,6 @@ var h11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var h12 = {
@@ -2122,7 +2032,6 @@ var h12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i1 = {
@@ -2139,7 +2048,6 @@ var i1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i2 = {
@@ -2156,7 +2064,6 @@ var i2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i3 = {
@@ -2173,7 +2080,6 @@ var i3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i4 = {
@@ -2190,7 +2096,6 @@ var i4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i5 = {
@@ -2207,7 +2112,6 @@ var i5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i6 = {
@@ -2224,7 +2128,6 @@ var i6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i7 = {
@@ -2241,7 +2144,6 @@ var i7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i8 = {
@@ -2258,7 +2160,6 @@ var i8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i9 = {
@@ -2275,7 +2176,6 @@ var i9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i10 = {
@@ -2292,7 +2192,6 @@ var i10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i11 = {
@@ -2309,7 +2208,6 @@ var i11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var i12 = {
@@ -2326,7 +2224,6 @@ var i12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j1 = {
@@ -2343,7 +2240,6 @@ var j1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j2 = {
@@ -2360,7 +2256,6 @@ var j2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j3 = {
@@ -2377,7 +2272,6 @@ var j3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j4 = {
@@ -2394,7 +2288,6 @@ var j4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j5 = {
@@ -2411,7 +2304,6 @@ var j5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j6 = {
@@ -2428,7 +2320,6 @@ var j6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j7 = {
@@ -2445,7 +2336,6 @@ var j7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j8 = {
@@ -2462,7 +2352,6 @@ var j8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j9 = {
@@ -2479,7 +2368,6 @@ var j9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j10 = {
@@ -2496,7 +2384,6 @@ var j10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j11 = {
@@ -2513,7 +2400,6 @@ var j11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var j12 = {
@@ -2530,7 +2416,6 @@ var j12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k1 = {
@@ -2547,7 +2432,6 @@ var k1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k2 = {
@@ -2564,7 +2448,6 @@ var k2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k3 = {
@@ -2581,7 +2464,6 @@ var k3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k4 = {
@@ -2598,7 +2480,6 @@ var k4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k5 = {
@@ -2615,7 +2496,6 @@ var k5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k6 = {
@@ -2632,7 +2512,6 @@ var k6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k7 = {
@@ -2649,7 +2528,6 @@ var k7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k8 = {
@@ -2666,7 +2544,6 @@ var k8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k9 = {
@@ -2683,7 +2560,6 @@ var k9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k10 = {
@@ -2700,7 +2576,6 @@ var k10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k11 = {
@@ -2717,7 +2592,6 @@ var k11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var k12 = {
@@ -2734,7 +2608,6 @@ var k12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l1 = {
@@ -2751,7 +2624,6 @@ var l1 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l2 = {
@@ -2768,7 +2640,6 @@ var l2 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l3 = {
@@ -2785,7 +2656,6 @@ var l3 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l4 = {
@@ -2802,7 +2672,6 @@ var l4 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l5 = {
@@ -2819,7 +2688,6 @@ var l5 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l6 = {
@@ -2836,7 +2704,6 @@ var l6 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l7 = {
@@ -2853,7 +2720,6 @@ var l7 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l8 = {
@@ -2870,7 +2736,6 @@ var l8 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l9 = {
@@ -2887,7 +2752,6 @@ var l9 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l10 = {
@@ -2904,7 +2768,6 @@ var l10 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l11 = {
@@ -2921,7 +2784,6 @@ var l11 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 var l12 = {
@@ -2938,7 +2800,6 @@ var l12 = {
 	"ore":{},
 	"log":{},
 	"stump":{},
-	"flower":{},
 	"forage": {}
 }
 func add_tile_to_chunk(type, loc):

@@ -39,23 +39,18 @@ func set_type():
 			match tier:
 				"twig":
 					Tiles.wall_tiles.set_cellv(location, Tiers.TWIG)
-					health = Stats.MAX_TWIG_WALL
 					max_health = Stats.MAX_TWIG_WALL
 				"wood":
 					Tiles.wall_tiles.set_cellv(location, Tiers.WOOD)
-					health = Stats.MAX_WOOD_WALL
 					max_health = Stats.MAX_WOOD_WALL
 				"stone":
 					Tiles.wall_tiles.set_cellv(location, Tiers.STONE)
-					health = Stats.MAX_STONE_WALL
 					max_health = Stats.MAX_STONE_WALL
 				"metal":
 					Tiles.wall_tiles.set_cellv(location, Tiers.METAL)
-					health = Stats.MAX_METAL_WALL
 					max_health = Stats.MAX_METAL_WALL
 				"armored":
 					Tiles.wall_tiles.set_cellv(location, Tiers.ARMORED)
-					health = Stats.MAX_ARMORED_WALL
 					max_health = Stats.MAX_ARMORED_WALL
 				"demolish":
 					remove_wall()
@@ -64,23 +59,18 @@ func set_type():
 			match tier:
 				"twig":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.TWIG)
-					health = Stats.MAX_TWIG_WALL
 					max_health = Stats.MAX_TWIG_WALL
 				"wood":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.WOOD)
-					health = Stats.MAX_WOOD_WALL
 					max_health = Stats.MAX_WOOD_WALL
 				"stone":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.STONE)
-					health = Stats.MAX_STONE_WALL
 					max_health = Stats.MAX_STONE_WALL
 				"metal":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.METAL)
-					health = Stats.MAX_METAL_WALL
 					max_health = Stats.MAX_METAL_WALL
 				"armored":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.ARMORED)
-					health = Stats.MAX_ARMORED_WALL
 					max_health = Stats.MAX_ARMORED_WALL
 				"demolish":
 					remove_foundation()

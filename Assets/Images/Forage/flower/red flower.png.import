@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/baby starfish.png-1490a05b8a9c0b322e984b6706befea2.stex"
+path="res://.import/red flower.png-96afabbbace43f61d219a29f2a80149a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Forage/baby starfish.png"
-dest_files=[ "res://.import/baby starfish.png-1490a05b8a9c0b322e984b6706befea2.stex" ]
+source_file="res://Assets/Images/Forage/flower/red flower.png"
+dest_files=[ "res://.import/red flower.png-96afabbbace43f61d219a29f2a80149a.stex" ]
 
 [params]
 

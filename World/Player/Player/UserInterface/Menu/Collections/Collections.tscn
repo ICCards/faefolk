@@ -1646,7 +1646,34 @@ margin_bottom = 76.0
 texture = SubResource( 204 )
 script = ExtResource( 11 )
 
-[node name="mushroom" type="TextureRect" parent="ForageCollection"]
+[node name="common mushroom" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 116.0
+margin_bottom = 76.0
+texture = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="healing mushroom" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 116.0
+margin_bottom = 76.0
+texture = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="purple mushroom" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 116.0
+margin_bottom = 76.0
+texture = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="chanterelle" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_left = 100.0
 margin_top = 60.0
@@ -2345,8 +2372,14 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="ForageCollection/pink pearl" to="ForageCollection/pink pearl" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/mushroom" to="ForageCollection/mushroom" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/mushroom" to="ForageCollection/mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/common mushroom" to="ForageCollection/common mushroom" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/common mushroom" to="ForageCollection/common mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/healing mushroom" to="ForageCollection/healing mushroom" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/healing mushroom" to="ForageCollection/healing mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/purple mushroom" to="ForageCollection/purple mushroom" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/purple mushroom" to="ForageCollection/purple mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/chanterelle" to="ForageCollection/chanterelle" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/chanterelle" to="ForageCollection/chanterelle" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/raw egg" to="ForageCollection/raw egg" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ForageCollection/raw egg" to="ForageCollection/raw egg" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ResourceCollection/wood" to="ResourceCollection/wood" method="_on_collection_item_mouse_entered"]

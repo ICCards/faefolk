@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blue flower.png-bdea8b4d9fc1994c84a7493f45ccb3f2.stex"
+path="res://.import/green flower.png-9bbaec8c2e3bcd57c81600373a908c0d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Forage/blue flower.png"
-dest_files=[ "res://.import/blue flower.png-bdea8b4d9fc1994c84a7493f45ccb3f2.stex" ]
+source_file="res://Assets/Images/Forage/flower/green flower.png"
+dest_files=[ "res://.import/green flower.png-9bbaec8c2e3bcd57c81600373a908c0d.stex" ]
 
 [params]
 

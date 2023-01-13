@@ -259,6 +259,7 @@ func hide_menu():
 		$PlayerDataUI.show()
 		$PlayerDataUI/EnergyBars.hide()
 		$CombatHotbar.initialize()
+	PlayerData.HotbarSlots = $Hotbar/HotbarSlots
 	$Menu.hide()
 	drop_items()
 	get_node("../../").set_held_object()

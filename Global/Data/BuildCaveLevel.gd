@@ -10,15 +10,15 @@ onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBo
 onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
 onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
-onready var Mushroom = load("res://World/Objects/Nature/Forage/Mushroom.tscn")
 onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
 onready var CaveGrass = load("res://World/Caves/Objects/CaveGrass.tscn")
 onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
 onready var Player = load("res://World/Player/Player/Player.tscn")
 onready var _character = load("res://Global/Data/Characters.gd")
+onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
-
+const mushroomTypes = ["common mushroom", "healing mushroom", "purple mushroom", "chanterelle"]
 var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 var rng := RandomNumberGenerator.new()
@@ -50,13 +50,13 @@ func update_navigation():
 
 func spawn_player():
 	var spawn_loc
-	if PlayerData.spawn_at_respawn_location:
-		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
-	elif PlayerData.spawn_at_cave_entrance:
-		spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
-	elif PlayerData.spawn_at_cave_exit:
-		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
-	#spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+#	if PlayerData.spawn_at_respawn_location:
+#		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
+#	elif PlayerData.spawn_at_cave_entrance:
+#		spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+#	elif PlayerData.spawn_at_cave_exit:
+#		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
+	spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
 	var player = Player.instance()
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
@@ -131,12 +131,13 @@ func load_cave(map):
 	for id in map["mushroom"]:
 		var loc = Util.string_to_vector2(map["mushroom"][id]["l"])
 		Tiles.add_navigation_tiles(loc)
-		var caveGrass = Mushroom.instance()
-		caveGrass.name = str(id)
-		caveGrass.variety = map["mushroom"][id]["v"]
-		caveGrass.location = loc
-		ForageObjects.call_deferred("add_child", caveGrass)
-		caveGrass.position = loc*32 + Vector2(16,32)
+		var forageItem = ForageItem.instance()
+		forageItem.name = str(id)
+		forageItem.type = "mushroom"
+		forageItem.variety = map["mushroom"][id]["v"]
+		forageItem.location = loc
+		ForageObjects.call_deferred("add_child", forageItem)
+		forageItem.position = loc*32 + Vector2(16,32)
 	for id in map["placables"]:
 		var item_name = map["placables"][id]["n"]
 		var location = Util.string_to_vector2(map["placables"][id]["l"])
@@ -270,15 +271,16 @@ func generate_mushroom_forage(map):
 		var loc = locs[0]
 		if Tiles.validate_tiles(loc, Vector2(1,1)):
 			var id = uuid.v4()
-			var variety = rng.randi_range(1,12)
+			mushroomTypes.shuffle()
 			Tiles.add_navigation_tiles(loc)
-			var mushroom = Mushroom.instance()
-			mushroom.variety = variety
-			mushroom.name = str(id)
-			mushroom.location = loc
-			mushroom.global_position = Tiles.valid_tiles.map_to_world(loc)
-			ForageObjects.add_child(mushroom)
-			map["mushroom"][id] = {"l": str(loc), "v": variety}
+			var forageItem = ForageItem.instance()
+			forageItem.type = "mushroom"
+			forageItem.variety = mushroomTypes.front()
+			forageItem.name = str(id)
+			forageItem.location = loc
+			forageItem.global_position = Tiles.valid_tiles.map_to_world(loc)
+			ForageObjects.add_child(forageItem)
+			map["forage"][id] = {"l": str(loc), "v": mushroomTypes.front()}
 	
 func generate_tall_grass(map):
 	for i in range(4):

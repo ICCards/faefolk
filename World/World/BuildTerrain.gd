@@ -17,7 +17,6 @@ onready var deep_ocean = get_node("../../GeneratedTiles/DeepOcean")
 onready var top_ocean = get_node("../../GeneratedTiles/TopOcean")
 
 
-
 var terrain_thread := Thread.new()
 
 var built_chunks = []
@@ -33,39 +32,10 @@ func initialize():
 	pass
 	$BuildTerrainTimer.start()
 
-#func spawn_player():
-#	var player = Player.instance()
-#	player.is_building_world = true
-#	player.name = str("PLAYER")
-#	player.character = _character.new()
-#	player.character.LoadPlayerCharacter("human_male")
-#	get_node("../../Players").add_child(player)
-#	if PlayerData.spawn_at_respawn_location:
-#		spawn_loc = PlayerData.player_data["respawn_location"]
-#	elif PlayerData.spawn_at_cave_exit:
-#		spawn_loc = MapData.world["cave_entrance_location"]
-#	if spawn_loc == null: # initial random spawn
-#		var tiles = MapData.world["beach"]
-#		tiles.shuffle()
-#		spawn_loc = tiles[0]
-#		yield(get_tree(), "idle_frame")
-#		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
-#		PlayerData.player_data["respawn_location"] = spawn_loc
-#		var game_state = GameState.new()
-#		game_state.player_state = PlayerData.player_data
-#		game_state.world_state = MapData.world
-#		game_state.cave_state = MapData.caves
-#		game_state.save_state()
-#	player.position = Util.string_to_vector2(spawn_loc)*32
-#	PlayerData.spawn_at_respawn_location = false
-#	PlayerData.spawn_at_cave_exit = false
-
 
 func _on_BuildTerrain_timeout():
 	build_terrain()
-#	if not terrain_thread.is_active():
-#		terrain_thread.start(self, "_whoAmI")
-		
+
 func _whoAmI(chunk):
 	call_deferred("spawn_chunk", chunk)
 

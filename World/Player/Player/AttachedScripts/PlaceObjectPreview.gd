@@ -417,7 +417,7 @@ func place_object(item_name, direction, location, type):
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location)})
+					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location),"h":Stats.MAX_TWIG_BUILDING})
 					PlayerData.remove_material("wood", 5)
 					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
 				elif PlayerData.returnSufficentCraftingMaterial("wood", 2) and item_name == "foundation":

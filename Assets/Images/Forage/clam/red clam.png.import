@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blue clam.png-5666d30cef8e539ef20fe31e3c7e2254.stex"
+path="res://.import/red clam.png-90358f52271dae97e7f64e483f4ad21c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Forage/blue clam.png"
-dest_files=[ "res://.import/blue clam.png-5666d30cef8e539ef20fe31e3c7e2254.stex" ]
+source_file="res://Assets/Images/Forage/clam/red clam.png"
+dest_files=[ "res://.import/red clam.png-90358f52271dae97e7f64e483f4ad21c.stex" ]
 
 [params]
 

@@ -61,14 +61,14 @@ func harvest_crop(item_name):
 	get_parent().state = get_parent().MOVEMENT
 
 
-func harvest_forage(item_name):
+func harvest_forage(variety):
 	PlayerData.player_data["skill_experience"]["foraging"] += 1
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/harvest.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	sound_effects.play()
 	get_parent().state = get_parent().HARVESTING
 	var anim = "harvest_" + get_parent().direction.to_lower()
-	get_parent().holding_item.texture = load("res://Assets/Images/Forage/" + item_name + ".png")
+	get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+variety+".png")
 	get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
 	get_parent().animation_player.play(anim)
 	yield(get_parent().animation_player, "animation_finished")

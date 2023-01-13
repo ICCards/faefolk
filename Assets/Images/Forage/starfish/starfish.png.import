@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/green flower.png-166536ba7229976ecaa2de7f87c55a45.stex"
+path="res://.import/starfish.png-1f565f65b093d8de98a5d10c680b361e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Forage/green flower.png"
-dest_files=[ "res://.import/green flower.png-166536ba7229976ecaa2de7f87c55a45.stex" ]
+source_file="res://Assets/Images/Forage/starfish/starfish.png"
+dest_files=[ "res://.import/starfish.png-1f565f65b093d8de98a5d10c680b361e.stex" ]
 
 [params]
 

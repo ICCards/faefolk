@@ -19,6 +19,10 @@ const height := 1000
 const MAX_GRASS_BUNCH_SIZE = 150
 const oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
 const treeTypes = ['A','B', 'C', 'D', 'E']
+const weedTypes = ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4"]
+const flowerTypes = ["blue flower","green flower","purple flower","red flower"]
+const clamTypes = ["blue clam","pink clam","red clam"]
+const starfishTypes = ["starfish", "baby starfish"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
 var openSimplexNoise := OpenSimplexNoise.new()
@@ -127,7 +131,9 @@ func build_world():
 	generate_ores(dirt,"dirt")
 	generate_flowers(forest,"forest")
 	generate_flowers(plains,"plains")
-	generate_beach_forage()
+	generate_weeds(forest,"forest")
+	generate_weeds(plains,"plains")
+	generate_beach_forage(beach)
 	#yield(get_tree().create_timer(1.0), "timeout")
 	#get_node("/root/World/Loading").call_deferred("set_phase","Saving data")
 	#yield(get_tree().create_timer(1.0), "timeout")
@@ -148,15 +154,6 @@ func build():
 	#yield(get_tree().create_timer(2.0), "timeout")
 	build_altittude(5,150)
 	
-func generate_beach_forage():
-	for loc in beach:
-		if Util.chance(1):
-			if not dirt.has(loc) and not forest.has(loc) and not snow.has(loc) and not plains.has(loc):
-				var id = uuid.v4()
-				if Util.chance(50):
-					MapData.world["forage"][id] = {"l":loc,"n":"clam","v":rng.randi_range(1,3)}
-				else:
-					MapData.world["forage"][id] = {"l":loc,"n":"starfish","v":rng.randi_range(1,2)}
 
 func set_cave_entrance():
 	var loc = Vector2(rng.randi_range(490, 510), rng.randi_range(490, 510))
@@ -282,9 +279,39 @@ func save_starting_world_data():
 	game_state.save_state()
 
 
+func generate_beach_forage(locations):
+	print("Building beach forage")
+	var NUM_FORAGE = int(locations.size()/150)
+	for _i in range(NUM_FORAGE):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if not dirt.has(location) and not forest.has(location) and not snow.has(location) and not plains.has(location) and not desert.has(location):
+			var id = uuid.v4()
+			if Util.chance(50):
+				clamTypes.shuffle()
+				MapData.world["forage"][id] = {"l":location,"n":"clam","v":clamTypes.front()}
+			else:
+				starfishTypes.shuffle()
+				MapData.world["forage"][id] = {"l":location,"n":"starfish","v":starfishTypes.front()}
+
+func generate_weeds(locations,biome):
+	print("Building "+biome+" weeds")
+	var NUM_FLOWER = int(locations.size()/200)
+	for _i in range(NUM_FLOWER):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		create_weed(location,biome)
+		
+func create_weed(loc,biome):
+	var id = uuid.v4()
+	if isValidPosition(loc):
+		weedTypes.shuffle()
+		MapData.world["tall_grass"][id] = {"l":loc,"n":"weed","v":weedTypes.front()}
+		decoration_locations.append(loc)
+
 func generate_flowers(locations,biome):
 	print("Building "+biome+" Flowers")
-	var NUM_FLOWER = int(locations.size()/100)
+	var NUM_FLOWER = int(locations.size()/200)
 	for _i in range(NUM_FLOWER):
 		var index = rng.randi_range(0, locations.size() - 1)
 		var location = locations[index]
@@ -293,7 +320,8 @@ func generate_flowers(locations,biome):
 func create_flower(loc,biome):
 	var id = uuid.v4()
 	if isValidPosition(loc):
-		MapData.world["flower"][id] = {"l":loc,"h":5, "b":biome}
+		flowerTypes.shuffle()
+		MapData.world["forage"][id] = {"l":loc,"n":"flower","v":flowerTypes.front()}
 		decoration_locations.append(loc)
 
 func generate_ores(locations,biome):
@@ -342,7 +370,7 @@ func create_grass_bunch(loc,biome):
 		loc += randomAdjacentTiles[0]
 		if isValidPosition(loc) and not beach.has(loc):
 			var id = uuid.v4()
-			MapData.world["tall_grass"][id] = {"l":loc,"h":5,"b":biome}
+			MapData.world["tall_grass"][id] = {"l":loc,"b":biome,"n":"grass"}
 			decoration_locations.append(loc)
 		else:
 			loc -= randomAdjacentTiles[0]

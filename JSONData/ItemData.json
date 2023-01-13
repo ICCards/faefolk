@@ -675,10 +675,31 @@
       "Ingredients": null,
       "EnergyHealth": null
   },
-  "mushroom": {
+  "common mushroom": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A fungus found in the caves.",
+      "Description": "An edible fungus used in cooking.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "healing mushroom": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A mushroom with healing properties.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "purple mushroom": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A mysterious fungus found in the caves.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "chanterelle": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A rare and edible mushroom.",
       "Ingredients": null,
       "EnergyHealth": null
   },
@@ -1463,7 +1484,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "A warm and creamy snack.",
-        "Ingredients": [["mushroom", 5]],
+        "Ingredients": [["common mushroom", 5]],
         "EnergyHealth": [18,10]
     },
     "sashimi":{

@@ -15,6 +15,7 @@ func _ready():
 	initialize_slots()
 
 func initialize_slots():
+	PlayerData.HotbarSlots = self
 	var slots = self.get_children()
 	for i in range(slots.size()):
 		if slots[i].item:
