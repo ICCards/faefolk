@@ -52,9 +52,11 @@ func spawn_chunk(chunk_name):
 	for loc_string in _chunk["plains"]:
 		var loc = Util.string_to_vector2(loc_string)
 		plains.set_cellv(loc, 0)
+	yield(get_tree(), "idle_frame")
 	for loc_string in _chunk["snow"]:
 		var loc = Util.string_to_vector2(loc_string)
 		snow.set_cellv(loc, 0)
+	yield(get_tree(), "idle_frame")
 	for loc_string in _chunk["forest"]:
 		var loc = Util.string_to_vector2(loc_string)
 		forest.set_cellv(loc, 0)
@@ -62,9 +64,11 @@ func spawn_chunk(chunk_name):
 	for loc_string in _chunk["beach"]:
 		var loc = Util.string_to_vector2(loc_string)
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
+	yield(get_tree(), "idle_frame")
 	for loc_string in _chunk["desert"]:
 		var loc = Util.string_to_vector2(loc_string)
 		Tiles._set_cell(sand, loc.x, loc.y, 0)
+	yield(get_tree(), "idle_frame")
 	for loc_string in _chunk["dirt"]:
 		var loc = Util.string_to_vector2(loc_string)
 		dirt.set_cellv(loc, 0)

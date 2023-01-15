@@ -9,7 +9,6 @@ onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
 onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
 onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
 onready var Weed = load("res://World/Objects/Nature/Grasses/Weed.tscn")
-onready var Flower = load("res://World/Objects/Nature/Forage/Flower.tscn")
 
 var rng := RandomNumberGenerator.new()
 var trees_thread := Thread.new()
@@ -56,12 +55,11 @@ func spawn_forage():
 
 
 func spawn_placables():
-	yield(get_tree().create_timer(2.0), "timeout")
 	for id in MapData.world["placables"]:
 		var item_name = MapData.world["placables"][id]["n"]
 		var location = Util.string_to_vector2(MapData.world["placables"][id]["l"])
 		if item_name == "wall" or item_name == "foundation":
-			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placables"][id]["v"],location)
+			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placables"][id]["v"],location,MapData.world["placables"][id]["h"])
 		else:
 			PlaceObject.place_object_in_world(id,item_name,MapData.world["placables"][id]["d"],location)
 	for id in MapData.world["crops"]:

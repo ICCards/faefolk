@@ -41,7 +41,31 @@ enum {
 func _ready():
 	yield(get_tree().create_timer(0.25), "timeout")
 	$Menu.hide()
+	initialize_furnaces_campfires_and_stoves()
 	add_hotbar_clock_and_stats()
+
+func initialize_furnaces_campfires_and_stoves():
+	for id in PlayerData.player_data["furnaces"]:
+		var furnace = Furnace.instance()
+		furnace.name = str(id)
+		furnace.id = id
+		add_child(furnace)
+		furnace.check_if_furnace_active()
+		furnace.hide()
+	for id in PlayerData.player_data["stoves"]:
+		var stove = Stove.instance()
+		stove.name = str(id)
+		stove.id = id
+		add_child(stove)
+		stove.check_valid_recipe()
+		stove.hide()
+	for id in PlayerData.player_data["campfires"]:
+		var campfire = Campfire.instance()
+		campfire.name = str(id)
+		campfire.id = id
+		add_child(campfire)
+		campfire.check_valid_recipe()
+		campfire.hide()
 
 func save_player_data(exit_to_main_menu):
 	$LoadingIndicator.show()
@@ -314,6 +338,7 @@ func toggle_stove(id, level):
 		close_hotbar_clock_and_stats()
 	elif has_node(id) and not get_node(id).visible:
 		play_open_menu_sound()
+		get_node(id).level = level
 		get_node(id).initialize()
 		close_hotbar_clock_and_stats()
 	else:

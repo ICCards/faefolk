@@ -27,6 +27,7 @@ func teleport(portal_position):
 
 func eat(item_name):
 	if get_parent().state != get_parent().EATING:
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/eat.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 		sound_effects.play()

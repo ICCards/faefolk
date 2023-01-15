@@ -19,8 +19,8 @@ func initialize_slots():
 	for i in range(slots.size()):
 		if slots[i].item != null:
 			slots[i].removeFromSlot()
-		if PlayerData.player_data["furnaces"][get_parent().id].has(i):
-			slots[i].initialize_item(PlayerData.player_data["furnaces"][get_parent().id][i][0], PlayerData.player_data["furnaces"][get_parent().id][i][1], PlayerData.player_data["furnaces"][get_parent().id][i][2])
+		if PlayerData.player_data["furnaces"][get_parent().id].has(str(i)):
+			slots[i].initialize_item(PlayerData.player_data["furnaces"][get_parent().id][str(i)][0], PlayerData.player_data["furnaces"][get_parent().id][str(i)][1], PlayerData.player_data["furnaces"][get_parent().id][str(i)][2])
 
 func able_to_put_into_slot(slot):
 	var holding_item = find_parent("UserInterface").holding_item
@@ -69,7 +69,8 @@ func right_click_slot(slot):
 		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))
 		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-		get_parent().check_if_furnace_active()
+		if slot.name == "FuelSlot" or slot.name == "OreSlot1" or slot.name == "OreSlot2":
+			get_parent().check_if_furnace_active()
 		
 
 func return_holding_item(item_name, qt):
@@ -84,7 +85,8 @@ func left_click_empty_slot(slot):
 		PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, get_parent().id)
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = null
-		get_parent().check_if_furnace_active()
+		if slot.name == "FuelSlot" or slot.name == "OreSlot1" or slot.name == "OreSlot2":
+			get_parent().check_if_furnace_active()
 
 func left_click_different_item(event: InputEvent, slot):
 	if able_to_put_into_slot(slot):
@@ -95,7 +97,8 @@ func left_click_different_item(event: InputEvent, slot):
 		temp_item.global_position = event.global_position
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = temp_item
-		get_parent().check_if_furnace_active()
+		if slot.name == "FuelSlot" or slot.name == "OreSlot1" or slot.name == "OreSlot2":
+			get_parent().check_if_furnace_active()
 
 func left_click_same_item(slot):
 	if able_to_put_into_slot(slot):
@@ -110,11 +113,13 @@ func left_click_same_item(slot):
 			PlayerData.add_item_quantity(slot, able_to_add, get_parent().id)
 			slot.item.add_item_quantity(able_to_add)
 			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
-		get_parent().check_if_furnace_active()
+		if slot.name == "FuelSlot" or slot.name == "OreSlot1" or slot.name == "OreSlot2":
+			get_parent().check_if_furnace_active()
 
 func left_click_not_holding(slot):
 	PlayerData.remove_item(slot, get_parent().id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-	get_parent().check_if_furnace_active()
+	if slot.name == "FuelSlot" or slot.name == "OreSlot1" or slot.name == "OreSlot2":
+		get_parent().check_if_furnace_active()

@@ -33,6 +33,7 @@ enum {
 
 func swing(item_name, _direction):
 	if get_parent().state != SWINGING:
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().state = SWINGING
 		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 			set_watered_tile()

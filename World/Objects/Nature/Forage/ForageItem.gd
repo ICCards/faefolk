@@ -12,6 +12,8 @@ func _ready():
 	if type == "clam":
 		Tiles.remove_valid_tiles(location)
 		$MovementCollision/CollisionShape2D.set_deferred("disabled", false)
+	elif type == "raw egg":
+		pass
 	else:
 		Tiles.add_navigation_tiles(location)
 	set_forage_texture()
@@ -24,10 +26,11 @@ func _input(event):
 		if not harvested:
 			harvested = true
 			PlayerData.player_data["collections"]["forage"][variety] += 1
-			Tiles.add_valid_tiles(location)
 			$Sprite.hide()
+			if type != "raw egg":
+				Tiles.add_valid_tiles(location)
+				MapData.remove_forage(name)
 			Server.player_node.actions.harvest_forage(variety)
-			MapData.remove_forage(name)
 			yield(get_tree().create_timer(0.6), "timeout")
 			PlayerData.add_item_to_hotbar(variety, 1, null)
 			queue_free()

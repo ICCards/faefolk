@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var RawEgg = load("res://World/Objects/Nature/Forage/RawEgg.tscn")
+onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 onready var duck_sprite: AnimatedSprite = $DuckSprite
@@ -182,13 +182,15 @@ func _on_IdleTimer_timeout():
 
 
 func _on_DropEggTimer_timeout():
-	if visible and not is_eating:
+	if visible and not is_eating and Server.isLoaded:
 		$Timers/DropEggTimer.wait_time = rand_range(10, 20)
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 		sound_effects.play()
-		var rawEgg = RawEgg.instance()
-		rawEgg.global_position = position
-		get_node("../../").add_child(rawEgg)
+		var forageItem = ForageItem.instance()
+		forageItem.type = "raw egg"
+		forageItem.variety = "raw egg"
+		forageItem.global_position = position
+		get_node("../../").add_child(forageItem)
 	
 	

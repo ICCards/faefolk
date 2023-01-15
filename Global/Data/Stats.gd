@@ -15,7 +15,7 @@ var skill_descriptions = {
 }
 
 
-const MAX_TWIG_BUILDING = 30
+const MAX_TWIG_BUILDING = 50
 const MAX_WOOD_BUILDING = 1000
 const MAX_STONE_BUILDING = 5000
 const MAX_METAL_BUILDING = 10000

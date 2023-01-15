@@ -6,11 +6,14 @@ var built_chunks = []
 var current_chunks = []
 
 func initialize():
-	get_chunks()
 	$WorldBuilderTimer.start()
 
 func _on_WorldBuilderTimer_timeout():
-	get_chunks()
+	if not thread.is_active():
+		thread.start(self,"_whoAmI")
+
+func _whoAmI():
+	call_deferred("get_chunks")
 
 func get_chunks():
 	if Server.player_node:
@@ -68,10 +71,12 @@ func get_chunks():
 			for row in rows:
 				new_chunks.append(row+str(column))
 		if current_chunks == new_chunks:
+			thread.wait_to_finish()
 			return
 		current_chunks = new_chunks
 		for new_chunk in new_chunks:
 			if not built_chunks.has(new_chunk):
 				built_chunks.append(new_chunk)
 				print("SPAWN CHUNK " + new_chunk)
+	thread.wait_to_finish()
 

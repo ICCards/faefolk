@@ -55,13 +55,14 @@ func place_seed_in_world(id, item_name, location, days):
 	plantedCrop.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0, 16)
 
 
-func place_building_object_in_world(id, item_name, variety , location):
+func place_building_object_in_world(id, item_name, variety , location, health):
 	PlacableObjects = Server.world.get_node("PlacableObjects")
 	rng.randomize()
 	match item_name:
 		"wall":
 			var object = BuildingTileObjectHurtBox.instance()
 			object.name = str(id)
+			object.health = health
 			object.location = location
 			object.item_name = item_name
 			object.tier = variety
@@ -72,6 +73,7 @@ func place_building_object_in_world(id, item_name, variety , location):
 		"foundation":
 			var object = BuildingTileObjectHurtBox.instance()
 			object.name = str(id)
+			object.health = health
 			object.location = location
 			object.item_name = item_name
 			object.id = str(id)

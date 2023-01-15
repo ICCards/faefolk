@@ -3,6 +3,7 @@ extends Control
 var hovered_item
 var id
 
+
 onready var sound_effects: AudioStreamPlayer = $SoundEffects
 onready var ore_slot1 = $FurnaceSlots/OreSlot1
 onready var ore_slot2 = $FurnaceSlots/OreSlot2
@@ -160,8 +161,9 @@ func valid_yield_slot(ore_name):
 func cooking_active():
 	$CookTimer.start()
 	$FireAnimatedSprite.show()
-	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").show()
-	if self.visible:
+	if Server.world.has_node("PlacableObjects/"+id+"/FurnaceSmoke"):
+		Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").show()
+	if self.visible and Server.isLoaded:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()

@@ -20,7 +20,7 @@ func initialize(_crop_name, _loc, _days_until_harvest, _is_in_regrowth_phase, _i
 	days_until_harvest = _days_until_harvest
 	is_in_regrowth_phase = _is_in_regrowth_phase
 	crop_is_dead = false # return_if_crop_is_dead(_is_crop_dead)
-	phase = return_phase()
+	phase = "harvest" #return_phase()
 
 func _ready():
 	add_to_group("active_crops")

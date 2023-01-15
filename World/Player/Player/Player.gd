@@ -59,6 +59,7 @@ func _ready():
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	yield(get_tree(), "idle_frame")
+	Server.isLoaded = true
 	set_held_object()
 
 func destroy():

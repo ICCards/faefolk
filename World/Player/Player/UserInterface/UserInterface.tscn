@@ -320,7 +320,7 @@ margin_bottom = 720.0
 position = Vector2( 671, 374 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 22 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]

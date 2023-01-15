@@ -14,7 +14,7 @@ func _physics_process(delta):
 
 func _ready():
 	if is_hostile_projectile:
-		$Hitbox.set_collision_mask(2+8+16+128)
+		$Hitbox.set_collision_layer(2+8+16+128)
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Fire/cast.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
