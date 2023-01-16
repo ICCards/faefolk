@@ -21,7 +21,7 @@ func able_to_put_into_slot():
 		return false
 	var holding_item_name = holding_item.item_name 
 	var holding_item_category = JsonData.item_data[holding_item_name]["ItemCategory"]
-	return holding_item_category == "Tool" or holding_item_category == "Magic" or holding_item_category == "Crop" or holding_item_category == "Construction" or holding_item_category == "Potion" or holding_item_category == "Food" 
+	return (holding_item_category == "Tool" or holding_item_category == "Magic" or holding_item_category == "Crop" or holding_item_category == "Potion" or holding_item_category == "Food") and holding_item_name != "arrow"
 
 func initialize_slots():
 	var slots = self.get_children()

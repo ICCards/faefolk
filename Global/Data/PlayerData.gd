@@ -42,7 +42,7 @@ var game_state: GameState
 
 var starting_player_data = {
 	"respawn_location": null,
-	"respawn_scene" : null,
+	"respawn_scene" : "res://World/World/World.tscn",
 	"season": "spring",
 	"day_week": "Mon.",
 	"day_number": 1,
@@ -187,6 +187,18 @@ var starting_player_data = {
 			"ice": 0,
 		},
 	"collections": {
+		"mobs" : {
+			"bunny": 0,
+			"duck": 0,
+			"deer": 0,
+			"bear": 0,
+			"wolf": 0,
+			"boar": 0,
+			"slime": 0,
+			"spider": 0,
+			"bat": 0,
+			"skeleton": 0,
+		},
 		 "crops" : {
 			"asparagus": 0,
 			"blueberry": 0,

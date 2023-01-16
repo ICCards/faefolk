@@ -269,7 +269,7 @@ position = Vector2( 0, -30 )
 scale = Vector2( 0.75, 0.75 )
 frames = ExtResource( 1 )
 animation = "walk"
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -306,7 +306,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 13
+frame = 10
 playing = true
 
 [node name="Timers" type="Node" parent="."]

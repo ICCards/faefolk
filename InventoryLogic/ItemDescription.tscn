@@ -153,7 +153,7 @@ rect_scale = Vector2( 0.15, 0.15 )
 custom_constants/separation = 4
 
 [node name="ItemCategory" type="Label" parent="Body"]
-modulate = Color( 1, 0, 0.423529, 1 )
+modulate = Color( 0.733333, 0.380392, 1, 1 )
 margin_right = 323.0
 margin_bottom = 61.0
 theme = ExtResource( 1 )

@@ -35,6 +35,10 @@ func _physics_process(delta):
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
+		elif page == "Mobs" and PlayerData.player_data["collections"]["mobs"][item] != 0:
+			$ItemNameBox.hide()
+			$CollectionItemDescription.initialize(item)
+			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 		else:
 			$CollectionItemDescription.hide()
 			$ItemNameBox.item_name = "?????"
@@ -65,6 +69,7 @@ func initialize():
 	$ResourceCollection.hide()
 	$FoodBtnLeft.hide()
 	$FoodBtnRight.hide()
+	$MobCollection.hide()
 
 func _on_Crops_pressed():
 	page = "Crops"
@@ -82,6 +87,7 @@ func _on_Fish_pressed():
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()
+	$MobCollection.hide()
 	Sounds.play_small_select_sound()
 
 func _on_Forage_pressed():
@@ -95,6 +101,7 @@ func _on_Forage_pressed():
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()
+	$MobCollection.hide()
 	Sounds.play_small_select_sound()
 
 func _on_Minerals_pressed():
@@ -107,6 +114,7 @@ func _on_Minerals_pressed():
 	$FoodCollection2.hide()
 	$ForageCollection.hide()
 	$ResourceCollection.initialize()
+	$MobCollection.hide()
 	get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/collections/resources-tab.png")
 	Sounds.play_small_select_sound()
 
@@ -121,8 +129,22 @@ func _on_Foods_pressed():
 	$FoodCollection1.initialize()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()
+	$MobCollection.hide()
 	Sounds.play_small_select_sound()
 
+func _on_Mobs_pressed():
+	page = "Mobs"
+	$FoodBtnLeft.hide()
+	$FoodBtnRight.hide()
+	$CropCollection.hide()
+	$FishCollection.hide()
+	$ForageCollection.hide()
+	$MobCollection.initialize()
+	get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/collections/misc-tab.png")
+	$FoodCollection1.hide()
+	$FoodCollection2.hide()
+	$ResourceCollection.hide()
+	Sounds.play_small_select_sound()
 
 func _on_Crops_mouse_entered():
 	tab = "Crops"
@@ -149,6 +171,11 @@ func _on_Foods_mouse_entered():
 func _on_Foods_mouse_exited():
 	tab = null
 
+func _on_Mobs_mouse_entered():
+	tab = "Mobs"
+func _on_Mobs_mouse_exited():
+	tab = null
+
 
 func _on_FoodBtnLeft_pressed():
 	$FoodBtnLeft.hide()
@@ -163,3 +190,4 @@ func _on_FoodBtnRight_pressed():
 	$FoodCollection1.hide()
 	$FoodCollection2.initialize()
 	Sounds.play_small_select_sound()
+

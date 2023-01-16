@@ -81,6 +81,15 @@ var mouse_left_down: bool = false
 var starting_mouse_point
 var ending_mouse_point
 
+func _ready():
+	PlayerData.connect("health_depleted", self, "player_death")
+
+
+func player_death():
+	is_casting = false
+	is_drawing = false
+	is_releasing = false
+	
 
 func _input( event ):
 	if event is InputEventMouseButton:

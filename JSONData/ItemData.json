@@ -1,4 +1,44 @@
 {
+    "bunny": {
+        "ItemCategory": "Mob",
+        "Description": "A friendly animal with tasty meat.",
+      },
+    "duck": {
+        "ItemCategory": "Mob",
+        "Description": "A friendly animal that will randomly drop raw eggs.",
+      },
+    "deer": {
+        "ItemCategory": "Mob",
+        "Description": "A friendly animal until threatened.",
+      },
+    "bear": {
+        "ItemCategory": "Mob",
+        "Description": "A large and dangerous adversary.",
+      },
+    "boar": {
+        "ItemCategory": "Mob",
+        "Description": "A dangerous animal with sharp tusks.",
+      },
+    "wolf": {
+        "ItemCategory": "Mob",
+        "Description": "A quick and lethal enemy found in the snow biome.",
+      },
+    "slime": {
+        "ItemCategory": "Mob",
+        "Description": "A poisonous and pesky enemy found in the caves.",
+      },
+    "spider": {
+        "ItemCategory": "Mob",
+        "Description": "A quick and lethal ground enemy.",
+      },
+    "skeleton": {
+        "ItemCategory": "Mob",
+        "Description": "A ranged enemy with an accurate bow shot.",
+      },
+    "bat": {
+        "ItemCategory": "Mob",
+        "Description": "A flying enemy which randomly spawns in the caves.",
+      },
     "cloth": {
         "ItemCategory": "Resource",
         "StackSize": 999,

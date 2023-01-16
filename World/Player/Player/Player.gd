@@ -96,7 +96,6 @@ func set_held_object():
 		$Camera2D/UserInterface/CombatHotbar/MagicSlots.hide()
 
 
-
 func _process(_delta) -> void:
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
@@ -106,6 +105,7 @@ func _process(_delta) -> void:
 		movement_state(_delta)
 	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
 		magic_casting_movement_state(_delta)
+
 
 func set_movement_speed_change():
 	if state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
@@ -127,22 +127,26 @@ func set_movement_speed_change():
 
 
 func _unhandled_input(event):
-	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and \
-		not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and \
-		state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
-			if PlayerData.normal_hotbar_mode:
-				if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-					var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-					var item_category = JsonData.item_data[item_name]["ItemCategory"]
+	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
+		if PlayerData.normal_hotbar_mode:
+			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+				var item_category = JsonData.item_data[item_name]["ItemCategory"]
+				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
+				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
 					player_action(event, item_name, item_category)
-				else:
-					player_action(event, null, null)
 			else:
-				if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
-					var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
-					var item_category = JsonData.item_data[item_name]["ItemCategory"]
+				if (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
+					player_action(event, null, null)
+		else:
+			if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
+				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
+				var item_category = JsonData.item_data[item_name]["ItemCategory"]
+				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
 					player_action(event, item_name, item_category)
-				else:
+			else:
+				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
 					player_action(event, null, null)
 	if event.is_action_pressed("sprint") and not poisoned:
 		running = true
@@ -150,22 +154,22 @@ func _unhandled_input(event):
 		running = false
 
 
+
 func player_action(event, item_name, item_category):
-	if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		$Camera2D/UserInterface/RadialBuildingMenu.initialize()
-	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod"):
+	print(item_name)
+	if item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod":
 		actions.fish()
-	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
+	elif (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
 		$Swing.swing(item_name, direction)
-	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_category == "Potion":
+	elif item_category == "Potion":
 		$Magic.throw_potion(item_name, direction)
-	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_name == "bow":
+	elif item_name == "bow":
 		$Magic.draw_bow(direction)
-	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_category == "Magic":
+	elif item_category == "Magic":
 		$Magic.cast_spell(item_name, direction)
-	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and (item_category == "Food" or item_category == "Fish" or item_category == "Crop"):
+	elif item_category == "Food" or item_category == "Fish" or item_category == "Crop":
 		actions.eat(item_name)
-	elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")) and item_name == null:
+	elif item_name == null:
 		$Swing.swing(null, direction) 
 
 

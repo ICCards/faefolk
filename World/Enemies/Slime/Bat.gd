@@ -110,13 +110,15 @@ func hit(tool_name):
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
+func destroy(killed_by_player):
+	if killed_by_player:
+		PlayerData.player_data["collections"]["mobs"]["bat"] += 1
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/monsterdead.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 	InstancedScenes.intitiateItemDrop("bat wing", position, 1)
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/monsterdead.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
 	destroyed = true
 	animation_player.play("death")
 	yield(animation_player, "animation_finished")

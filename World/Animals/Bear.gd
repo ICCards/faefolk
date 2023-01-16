@@ -192,9 +192,11 @@ func hit(tool_name):
 	if health < STARTING_HEALTH*.3:
 		start_retreat_state()
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
+func destroy(killed_by_player):
+	if killed_by_player:
+		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
 	destroyed = true
 	stop_sound_effects()
 	$Body/Fangs.texture = null

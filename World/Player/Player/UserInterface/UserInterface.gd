@@ -98,32 +98,32 @@ func switch_hotbar():
 
 
 func _input(event):
-	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:
-		if event.is_action_pressed("ui_cancel") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
-			toggle_save_and_exit()
-		if event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
-			toggle_menu()
-		elif event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
-			if object_id:
-				match object_name:
-					"workbench":
-						toggle_workbench(object_level)
-					"grain mill":
-						toggle_grain_mill(object_id, object_level)
-					"stove":
-						toggle_stove(object_id, object_level)
-					"chest":
-						toggle_chest(object_id)
-					"furnace":
-						toggle_furnace(object_id)
-					"tool cabinet":
-						toggle_tc(object_id)
-					"chair":
-						Server.player_node.sit(object_level)
-					"campfire":
-						toggle_campfire(object_id)
-					"brewing table":
-						toggle_brewing_table(object_id, object_level)
+#	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:
+#		if event.is_action_pressed("ui_cancel") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
+#			toggle_save_and_exit()
+#		if event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+#			toggle_menu()
+#		elif event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
+#			if object_id:
+#				match object_name:
+#					"workbench":
+#						toggle_workbench(object_level)
+#					"grain mill":
+#						toggle_grain_mill(object_id, object_level)
+#					"stove":
+#						toggle_stove(object_id, object_level)
+#					"chest":
+#						toggle_chest(object_id)
+#					"furnace":
+#						toggle_furnace(object_id)
+#					"tool cabinet":
+#						toggle_tc(object_id)
+#					"chair":
+#						Server.player_node.sit(object_level)
+#					"campfire":
+#						toggle_campfire(object_id)
+#					"brewing table":
+#						toggle_brewing_table(object_id, object_level)
 		if Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:

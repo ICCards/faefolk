@@ -151,9 +151,11 @@ func hit(tool_name):
 	if health < STARTING_HEALTH*.3:
 		start_retreat_state()
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
+func destroy(killed_by_player):
+	if killed_by_player:
+		PlayerData.player_data["collections"]["mobs"]["deer"] += 1
 	stop_sound_effects()
 	destroyed = true
 	deer_sprite.texture = load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png")

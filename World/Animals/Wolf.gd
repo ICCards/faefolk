@@ -156,12 +156,14 @@ func hit(tool_name):
 	if health < STARTING_HEALTH*.3:
 		start_retreat_state()
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
+func destroy(killed_by_player):
+	if killed_by_player:
+		PlayerData.player_data["collections"]["mobs"]["wolf"] += 1
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
 	stop_sound_effects()
 	destroyed = true
 	wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/death/" +  direction + "/body.png")

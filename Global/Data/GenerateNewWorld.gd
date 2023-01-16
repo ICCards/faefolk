@@ -285,7 +285,7 @@ func generate_beach_forage(locations):
 	for _i in range(NUM_FORAGE):
 		var index = rng.randi_range(0, locations.size() - 1)
 		var location = locations[index]
-		if not dirt.has(location) and not forest.has(location) and not snow.has(location) and not plains.has(location) and not desert.has(location):
+		if isValidPosition(location):
 			var id = uuid.v4()
 			if Util.chance(50):
 				clamTypes.shuffle()

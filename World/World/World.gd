@@ -105,11 +105,10 @@ func spawn_player():
 	PlayerData.spawn_at_cave_exit = false
 
 
-
-
 func advance_down_cave_level():
 	if not is_changing_scene:
 		SceneChanger.advance_cave_level(get_tree().current_scene.filename, true)
+
 
 func buildMap(map):
 	Tiles.valid_tiles = $ValidTiles

@@ -12,8 +12,43 @@ var sitting: bool = false
 
 var game_state: GameState
 
+var interactive_object_id
+
 func _ready():
 	PlayerData.connect("health_depleted", self, "player_death")
+
+
+func _input(event):
+	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
+		if event.is_action_pressed("ui_cancel") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
+			get_parent().user_interface.toggle_save_and_exit()
+		if event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+			get_parent().user_interface.toggle_menu()
+		elif event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
+			if $DetectInteractiveArea.get_overlapping_areas().size() > 0:
+				pass
+#			if interactive_object_id:
+#				match user_interface.object_name:
+#					"workbench":
+#						user_interface.toggle_workbench(user_interface.object_level)
+#					"grain mill":
+#						toggle_grain_mill(object_id, object_level)
+#					"stove":
+#						toggle_stove(object_id, object_level)
+#					"chest":
+#						toggle_chest(object_id)
+#					"furnace":
+#						toggle_furnace(object_id)
+#					"tool cabinet":
+#						toggle_tc(object_id)
+#					"chair":
+#						Server.player_node.sit(object_level)
+#					"campfire":
+#						toggle_campfire(object_id)
+#					"brewing table":
+#						toggle_brewing_table(object_id, object_level)
+
+
 
 func teleport(portal_position):
 	var adjusted_pos = get_parent().input_vector*40

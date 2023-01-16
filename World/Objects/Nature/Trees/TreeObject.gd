@@ -3,6 +3,7 @@ extends Node2D
 onready var tree_stump_sprite: Sprite = $TreeSprites/TreeStump
 onready var tree_bottom_sprite: Sprite = $TreeSprites/TreeBottom
 onready var tree_top_sprite: Sprite = $TreeSprites/TreeTop
+onready var animated_tree_top_sprite: AnimatedSprite = $TreeSprites/AnimatedTop
 onready var sound_effects_stump: AudioStreamPlayer2D = $SoundEffectsStump
 onready var sound_effects_tree: AudioStreamPlayer2D = $SoundEffectsTree
 onready var animation_player_tree: AnimationPlayer = $AnimationPlayerTree
@@ -22,7 +23,11 @@ var biome
 var tree_fallen = false
 var destroyed = false
 
-
+# A -1,-107
+# B 0,-102
+# C 0, -122
+# D -3, -66
+# E 0, -119
 func _ready():
 	hide()
 	rng.randomize()
@@ -33,7 +38,7 @@ func _ready():
 	if health < Stats.STUMP_HEALTH:
 		tree_fallen = true
 		disable_tree_top_collision_box()
-		tree_top_sprite.hide()
+		animated_tree_top_sprite.hide()
 		tree_bottom_sprite.hide()
 
 func setTexture(tree):
@@ -42,11 +47,25 @@ func setTexture(tree):
 	tree_bottom_sprite.texture = tree.bottomTree
 	$TreeChipParticles.texture = tree.chip 
 	$TreeLeavesParticles.texture = tree.leaves
+	animated_tree_top_sprite.frame = rng.randi_range(0,19)
 	match biome:
 		"forest":
 			tree_top_sprite.texture = tree.topTree
+			animated_tree_top_sprite.frames = tree.animatedTop
 		"snow":
 			tree_top_sprite.texture = tree.topTreeWinter
+			animated_tree_top_sprite.frames = tree.animatedTopWinter
+	match variety:
+		"A":
+			animated_tree_top_sprite.offset = Vector2(-1,-107)
+		"B":
+			animated_tree_top_sprite.offset = Vector2(0,-102)
+		"C":
+			animated_tree_top_sprite.offset = Vector2(0,-122)
+		"D":
+			animated_tree_top_sprite.offset = Vector2(-3,-66)
+		"E":
+			animated_tree_top_sprite.offset = Vector2(0,-119)
 
 func hit(tool_name):
 	if health == 100:
@@ -158,6 +177,10 @@ func disable_tree_top_collision_box():
 
 
 func set_tree_transparent():
+	tween.interpolate_property(animated_tree_top_sprite, "modulate:a",
+		animated_tree_top_sprite.get_modulate().a, 0.4, 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
 	tween.interpolate_property(tree_top_sprite, "modulate:a",
 		tree_top_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -172,6 +195,10 @@ func set_tree_transparent():
 	tween.start()
 
 func set_tree_visible():
+	tween.interpolate_property(animated_tree_top_sprite, "modulate:a",
+		animated_tree_top_sprite.get_modulate().a, 1.0, 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
 	tween.interpolate_property(tree_top_sprite, "modulate:a",
 		tree_top_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -192,8 +219,10 @@ func _on_TreeTopArea_area_exited(_area):
 	set_tree_visible()
 
 func _on_VisibilityNotifier2D_screen_entered():
+	animated_tree_top_sprite.playing = true
 	show()
 func _on_VisibilityNotifier2D_screen_exited():
+	animated_tree_top_sprite.playing = false
 	hide()
 
 func _on_RandomLeavesFallingTimer_timeout():

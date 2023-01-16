@@ -1092,7 +1092,9 @@ var A_tree = {
 	chip = load("res://Assets/Images/tree_sets/A/chip.png"),
 	leaves = load("res://Assets/Images/tree_sets/A/leaves.png"),
 	largeStump = load("res://Assets/Images/tree_sets/A/large_stumpA.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/A/A winter.png")
+	topTreeWinter = load("res://Assets/Images/tree_sets/A/A winter.png"),
+	animatedTop = load("res://Assets/Images/tree_sets/animated tops/A.tres"),
+	animatedTopWinter = load("res://Assets/Images/tree_sets/animated tops/A winter.tres")
 }
 
 var B_tree = {
@@ -1109,7 +1111,9 @@ var B_tree = {
 	chip = load("res://Assets/Images/tree_sets/B/chip.png"),
 	leaves = load("res://Assets/Images/tree_sets/B/leaves.png"),
 	largeStump = load("res://Assets/Images/tree_sets/B/large_stumpB.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/B/B winter.png")
+	topTreeWinter = load("res://Assets/Images/tree_sets/B/B winter.png"),
+	animatedTop = load("res://Assets/Images/tree_sets/animated tops/B.tres"),
+	animatedTopWinter = load("res://Assets/Images/tree_sets/animated tops/B snow.tres")
 }
 
 var C_tree = {
@@ -1126,7 +1130,9 @@ var C_tree = {
 	chip = load("res://Assets/Images/tree_sets/C/chip.png"),
 	leaves = load("res://Assets/Images/tree_sets/C/leaves.png"),
 	largeStump = load("res://Assets/Images/tree_sets/C/large_stumpC.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/C/C winter.png")
+	topTreeWinter = load("res://Assets/Images/tree_sets/C/C winter.png"),
+	animatedTop = load("res://Assets/Images/tree_sets/animated tops/C.tres"),
+	animatedTopWinter = load("res://Assets/Images/tree_sets/animated tops/C snow.tres")
 }
 
 var D_tree = {
@@ -1143,7 +1149,9 @@ var D_tree = {
 	chip = load("res://Assets/Images/tree_sets/D/chip.png"),
 	leaves = load("res://Assets/Images/tree_sets/D/leaves.png"),
 	largeStump = load("res://Assets/Images/tree_sets/D/large_stumpD.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/D/D winter.png")
+	topTreeWinter = load("res://Assets/Images/tree_sets/D/D winter.png"),
+	animatedTop = load("res://Assets/Images/tree_sets/animated tops/D.tres"),
+	animatedTopWinter = load("res://Assets/Images/tree_sets/animated tops/D snow.tres")
 }
 
 var E_tree = {
@@ -1160,7 +1168,9 @@ var E_tree = {
 	chip = load("res://Assets/Images/tree_sets/E/chip.png"),
 	leaves = load("res://Assets/Images/tree_sets/E/leaves.png"),
 	largeStump = load("res://Assets/Images/tree_sets/E/large_stumpE.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/E/E winter.png")
+	topTreeWinter = load("res://Assets/Images/tree_sets/E/E winter.png"),
+	animatedTop = load("res://Assets/Images/tree_sets/animated tops/E.tres"),
+	animatedTopWinter = load("res://Assets/Images/tree_sets/animated tops/E snow.tres")
 }
 
 

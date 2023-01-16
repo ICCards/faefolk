@@ -98,6 +98,8 @@ func returnCategoryColor(category):
 			return Color("ff006c")
 		"Potion":
 			return Color("ff006c")
+		"Mob":
+			return Color("bb61ff")
 
 func valid_holding_item_category(item_category):
 	if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop" or item_category == "Forage":

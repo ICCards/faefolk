@@ -63,7 +63,7 @@ func respawn():
 	for node in Server.world.get_node("Projectiles").get_children():
 		node.destroy()
 	for node in Server.world.get_node("Enemies").get_children():
-		node.destroy()
+		node.destroy(false)
 	PlayerData.spawn_at_respawn_location = true
 	yield(get_tree().create_timer(1.0), "timeout")
 	goto_scene(PlayerData.player_data["respawn_scene"])
@@ -74,5 +74,5 @@ func destroy_current_scene():
 	for node in Server.world.get_node("Projectiles").get_children():
 		node.destroy()
 	for node in Server.world.get_node("Enemies").get_children():
-		node.destroy()
+		node.destroy(false)
 

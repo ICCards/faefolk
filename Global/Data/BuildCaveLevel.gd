@@ -278,7 +278,7 @@ func generate_mushroom_forage(map):
 			forageItem.variety = mushroomTypes.front()
 			forageItem.name = str(id)
 			forageItem.location = loc
-			forageItem.global_position = Tiles.valid_tiles.map_to_world(loc)
+			forageItem.global_position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16,16)
 			ForageObjects.add_child(forageItem)
 			map["forage"][id] = {"l": str(loc), "v": mushroomTypes.front()}
 	
