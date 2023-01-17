@@ -39,6 +39,41 @@
         "ItemCategory": "Mob",
         "Description": "A flying enemy which randomly spawns in the caves.",
       },
+    "oak seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows an oak tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "spruce seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows an spruce tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "birch seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a birch tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "pine seeds": {
+          "ItemCategory": "Seed",
+          "StackSize": 999,
+          "Description": "Grows a pine tree.",
+          "Ingredients": null,
+          "EnergyHealth": null
+        },
+      "evergreen seeds": {
+          "ItemCategory": "Seed",
+          "StackSize": 999,
+          "Description": "Grows an evergreen tree.",
+          "Ingredients": null,
+          "EnergyHealth": null
+        },
     "cloth": {
         "ItemCategory": "Resource",
         "StackSize": 999,
@@ -1023,7 +1058,7 @@
   "corn seeds": {
       "ItemCategory": "Seed",
       "StackSize": 999,
-      "Description": "Plant these in the Summer or Fall. Takes 14 days to mature and continues to grow after harvest.",
+      "Description": "Plant these in the Spring, Summer or Fall. Takes 14 days to mature and continues to grow after harvest.",
       "Ingredients": null,
       "EnergyHealth": null
   },

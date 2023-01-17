@@ -1,5 +1,6 @@
 extends Node
 
+onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
 onready var BuildingTileObjectHurtBox = load("res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn")
@@ -43,16 +44,35 @@ enum Lights {
 }
 
 var PlacableObjects 
+var NatureObjects 
 
-func place_seed_in_world(id, item_name, location, days):
+func place_tree_in_world(id, variety, location, biome ,health, phase):
+	NatureObjects = Server.world.get_node("NatureObjects")
+	Tiles.remove_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+	var object = TreeObject.instance()
+	var pos = Tiles.valid_tiles.map_to_world(location)
+	object.phase = phase
+	object.biome = biome
+	object.health = health
+	object.variety = variety
+	object.location = location
+	object.position = pos + Vector2(0, -8)
+	object.name = id
+	NatureObjects.call_deferred("add_child",object,true)
+
+
+func place_seed_in_world(id, item_name, location, days_until_harvest, days_without_water, in_regrowth_phase):
 	PlacableObjects = Server.world.get_node("PlacableObjects")
 	Tiles.remove_valid_tiles(location)
 	var plantedCrop = PlantedCrop.instance()
 	plantedCrop.name = str(id)
-	plantedCrop.id = str(id)
-	plantedCrop.initialize(item_name, location, days, false, false)
+	plantedCrop.crop_name = item_name
+	plantedCrop.location = location
+	plantedCrop.days_until_harvest = days_until_harvest
+	plantedCrop.days_without_water = days_without_water
+	plantedCrop.in_regrowth_phase = in_regrowth_phase
 	PlacableObjects.call_deferred("add_child", plantedCrop, true)
-	plantedCrop.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0, 16)
+	plantedCrop.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(16, 16)
 
 
 func place_building_object_in_world(id, item_name, variety , location, health):

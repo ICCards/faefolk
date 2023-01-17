@@ -40,14 +40,14 @@ func initiateLeavesFallingEffect(variety: String, pos: Vector2):
 	if Server.world:
 		var adjusted_leaves_falling_pos = Vector2.ZERO
 		match variety:
-			"D":
+			"evergreen":
 				adjusted_leaves_falling_pos = Vector2(0, 50)
-			"B":
+			"spruce":
 				adjusted_leaves_falling_pos = Vector2(0, 25)
 			_: 
 				adjusted_leaves_falling_pos = Vector2(0, 0)
 		var leavesEffect = LeavesFallEffect.instance()
-		leavesEffect.initLeavesEffect(variety)
+		leavesEffect.variety = variety
 		Server.world.call_deferred("add_child", leavesEffect)
 		leavesEffect.global_position = adjusted_leaves_falling_pos + pos
 

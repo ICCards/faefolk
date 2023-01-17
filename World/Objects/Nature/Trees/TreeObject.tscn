@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Trees/TreeObject.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/tree_sets/A/top.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/tree_sets/animated tops/A.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://Assets/Images/tree_sets/D/bottom.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/tree_sets/A/stump.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/tree_sets/oak/top.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/tree_sets/oak/animated top.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Assets/Images/tree_sets/oak/1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/tree_sets/oak/stump.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 22.7778, 28.3507 )
@@ -662,7 +662,7 @@ __meta__ = {
 }
 
 [node name="TreeBottom" type="Sprite" parent="TreeSprites"]
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 offset = Vector2( 0, -120 )
 region_rect = Rect2( 160, 320, 0, 0 )
 __meta__ = {
@@ -679,11 +679,16 @@ __meta__ = {
 
 [node name="AnimatedTop" type="AnimatedSprite" parent="TreeSprites"]
 frames = ExtResource( 3 )
-frame = 18
+frame = 19
 playing = true
 offset = Vector2( -1, -107 )
 
 [node name="Tween" type="Tween" parent="TreeSprites"]
+
+[node name="TreeSapling" type="Sprite" parent="TreeSprites"]
+visible = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, -86 )
 
 [node name="TreeHurtbox" type="Area2D" parent="."]
 visible = false
@@ -770,28 +775,27 @@ collision_mask = 0
 
 [node name="A" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-polygon = PoolVector2Array( 12, -8, 11, -58, 56, -89, 56, -166, 1, -199, -61, -163, -61, -85, -14, -58, -14, -8 )
+polygon = PoolVector2Array( 12, -8, 11, -58, 56, -89, 55.5556, -147.889, 0, -173.444, -62.2222, -149, -61, -85, -14, -58, -14, -8 )
 disabled = true
 
 [node name="B" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-polygon = PoolVector2Array( 10, -9, 10, -54, 48, -84, 48, -150, 1, -185, -49, -149, -48, -84, -13, -53, -14, -8 )
+polygon = PoolVector2Array( 10, -9, 10, -54, 50, -85.6667, 48, -150, 0, -169, -51.1111, -150.111, -51.1111, -89, -13, -53, -14, -8 )
 disabled = true
 
 [node name="C" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-polygon = PoolVector2Array( 10, -15.6667, 9, -57, 61, -109, 60, -185, 40, -215, 1, -235, -41, -212, -54, -178, -52, -148, -71, -121, -45, -80, -13, -79, -13.3333, -14.5556 )
+polygon = PoolVector2Array( 10, -15.6667, 9, -57, 61, -109, 60, -185, 36.6667, -196.778, -1.11111, -201.222, -41.1111, -195.667, -54, -178, -51.1111, -127.889, -60, -95.6667, -40, -73.4445, -17.7778, -71.2222, -13.3333, -14.5556 )
 disabled = true
 
 [node name="D" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
 position = Vector2( 2.22222, -0.111112 )
-polygon = PoolVector2Array( -5.55554, -6.77777, 5.55556, -6.77778, 32.2222, -34.4444, 50, -81.1111, 0, -151.222, -48.8889, -77.8889, -34.4444, -35.5556 )
+polygon = PoolVector2Array( -5.55554, -6.77777, 5.55556, -6.77778, 26.6667, -23.3333, 44.4444, -68.8889, -2.22222, -132.222, -47.7778, -68.8889, -32.2222, -25.5556 )
 disabled = true
 
 [node name="E" type="CollisionPolygon2D" parent="TreeTopArea"]
-visible = false
-polygon = PoolVector2Array( 8.88889, -10.1111, 9, -43, 30, -37, 39, -58, 21, -141, 0, -163, -20, -139, -33, -61, -31, -35, -9, -40, -13.3333, -10.1111 )
+polygon = PoolVector2Array( 8.88889, -10.1111, 9, -43, 30, -37, 39, -58, 18.8889, -115.667, 0, -142.333, -20, -117.889, -33, -61, -31, -35, -9, -40, -13.3333, -10.1111 )
 disabled = true
 
 [node name="RandomLeavesFallingTimer" type="Timer" parent="."]

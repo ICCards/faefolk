@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Effects/TrunkHitEffect.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/tree_sets/A/chip.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/tree_sets/oak/chip.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=3]
 length = 0.001

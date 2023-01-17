@@ -274,6 +274,7 @@ func generate_mushroom_forage(map):
 			mushroomTypes.shuffle()
 			Tiles.add_navigation_tiles(loc)
 			var forageItem = ForageItem.instance()
+
 			forageItem.type = "mushroom"
 			forageItem.variety = mushroomTypes.front()
 			forageItem.name = str(id)

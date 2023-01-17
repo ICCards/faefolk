@@ -14,7 +14,7 @@ stream = ExtResource( 1 )
 volume_db = -16.0
 
 [node name="DetectInteractiveArea" type="Area2D" parent="."]
-collision_layer = 131104
+collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectInteractiveArea"]

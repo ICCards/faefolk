@@ -62,10 +62,20 @@ func add_world_data_to_chunks():
 		add_nature_objects_to_chunks()
 
 func advance_crops():
-	for id in world["crops"]: # if crop is watered, advance a day
+	for id in world["tree"]:
+		print(world["tree"][id]["p"])
+		if str(world["tree"][id]["p"]) == "sapling":
+			world["tree"][id]["p"] = 1
+		elif world["tree"][id]["p"] != 5:
+			world["tree"][id]["p"] += 1
+	for id in world["crops"]: 
 		var loc_string = world["crops"][id]["l"]
-		if world["tiles"][loc_string] == "w":
-			world["crops"][id]["d"] -= 1
+		if not world["crops"][id]["dww"] == 2: # if crop isn't already dead
+			if world["tiles"][loc_string] == "w": # if crop is watered, advance a day
+				world["crops"][id]["dh"] -= 1 
+				world["crops"][id]["dww"] = 0
+			else: 
+				world["crops"][id]["dww"] += 1 # crop not watered
 	for tile in world["tiles"]: # if tile is watered, set to not watered
 		if world["tiles"][tile] == "w":
 			world["tiles"][tile] = "h"
@@ -130,6 +140,9 @@ func add_crop(id,data):
 	
 func remove_crop(id):
 	world["crops"].erase(id)
+	
+func add_tree(id,data):
+	world["tree"][id] = data
 
 func add_placable(id, data):
 	if Server.world.name == "World":

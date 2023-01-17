@@ -11513,14 +11513,13 @@ position = Vector2( 0, -31.6016 )
 scale = Vector2( 1.0756, 1.07153 )
 shape = SubResource( 9 )
 
-[node name="EnterTreeTop" type="Area2D" parent="Area2Ds"]
-visible = false
+[node name="EnterDoors" type="Area2D" parent="Area2Ds"]
 position = Vector2( 0, 11 )
-collision_layer = 0
+collision_layer = 32
 collision_mask = 4096
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterTreeTop"]
-position = Vector2( 0, -43 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterDoors"]
+position = Vector2( 0, -12 )
 shape = SubResource( 10 )
 
 [node name="HurtBox" type="Area2D" parent="Area2Ds"]
@@ -11633,6 +11632,7 @@ shadow_enabled = true
 visible = false
 position = Vector2( 0, -84 )
 frames = SubResource( 117 )
+frame = 2
 playing = true
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]

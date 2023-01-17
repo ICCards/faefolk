@@ -33,19 +33,23 @@ func play_deselect_sound():
 
 func play_error_sound():
 	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
-	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",-20)
 	Server.player_node.sound_effects.play()
 
 func play_menu_select_sound():
 	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/Buttons/select.mp3")
-	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	Server.player_node.sound_effects.play()
 
 func play_hotbar_slot_selected_sound():
 	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/slot.mp3")
-	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	Server.player_node.sound_effects.play()
 
+func play_harvest_sound():
+	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/harvest.mp3")
+	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	Server.player_node.sound_effects.play()
 
 func set_music_volume(val):
 	PlayerData.player_data["settings"]["volume"]["music"] = val

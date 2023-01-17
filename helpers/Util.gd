@@ -148,3 +148,8 @@ func add_to_collection(type, amt):
 		PlayerData.player_data["collections"]["resources"][type] += amt
 	else:
 		PlayerData.player_data["collections"]["resources"]["stone"] += amt
+		
+func return_if_tree_name(tree_name):
+	if tree_name == "oak" or tree_name == "pine" or tree_name == "birch" or tree_name == "spruce" or tree_name == "evergreen":
+		return true
+	return false

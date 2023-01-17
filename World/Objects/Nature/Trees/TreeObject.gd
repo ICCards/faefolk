@@ -13,7 +13,6 @@ onready var tween: Tween = $TreeSprites/Tween
 
 var rng = RandomNumberGenerator.new()
 
-var treeObject
 var location
 var variety
 var hit_dir
@@ -23,48 +22,68 @@ var biome
 var tree_fallen = false
 var destroyed = false
 
-# A -1,-107
-# B 0,-102
-# C 0, -122
-# D -3, -66
-# E 0, -119
+var phase
+
 func _ready():
 	hide()
 	rng.randomize()
+	MapData.connect("refresh_crops", self, "refresh_tree_type")
+	set_tree()
+
+func set_tree():
+	phase = str(phase)
+	if phase == "5":
+		animated_tree_top_sprite.show()
+		tree_bottom_sprite.show()
+		tree_stump_sprite.show()
+		tree_top_sprite.show()
+		$TreeSprites/TreeSapling.hide()
+		setGrownTreeTexture()
+	else:
+		animated_tree_top_sprite.hide()
+		tree_bottom_sprite.hide()
+		tree_stump_sprite.hide()
+		tree_top_sprite.hide()
+		$TreeSprites/TreeSapling.show()
+		$TreeSprites/TreeSapling.texture = load("res://Assets/Images/tree_sets/"+ variety +"/"+ phase +".png")
+
+
+func refresh_tree_type():
+	if phase != "5":
+		phase = MapData.world["tree"][name]["p"]
+		set_tree()
+
+
+func setGrownTreeTexture():
 	random_leaves_falling_timer.wait_time = rng.randi_range(15.0, 60.0)
-	random_leaves_falling_timer.start()
-	treeObject = Images.returnTreeObject(variety)
-	setTexture(treeObject)
 	if health < Stats.STUMP_HEALTH:
 		tree_fallen = true
 		disable_tree_top_collision_box()
 		animated_tree_top_sprite.hide()
 		tree_bottom_sprite.hide()
-
-func setTexture(tree):
 	set_tree_top_collision_shape()
-	tree_stump_sprite.texture = tree.stump
-	tree_bottom_sprite.texture = tree.bottomTree
-	$TreeChipParticles.texture = tree.chip 
-	$TreeLeavesParticles.texture = tree.leaves
+	tree_stump_sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/stump.png")
+	tree_bottom_sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/bottom.png")
+	$TreeChipParticles.texture = load("res://Assets/Images/tree_sets/"+ variety +"/chip.png")
+	$TreeLeavesParticles.texture =load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
 	animated_tree_top_sprite.frame = rng.randi_range(0,19)
 	match biome:
 		"forest":
-			tree_top_sprite.texture = tree.topTree
-			animated_tree_top_sprite.frames = tree.animatedTop
+			tree_top_sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/top.png")
+			animated_tree_top_sprite.frames = load("res://Assets/Images/tree_sets/"+ variety +"/animated top.tres")
 		"snow":
-			tree_top_sprite.texture = tree.topTreeWinter
-			animated_tree_top_sprite.frames = tree.animatedTopWinter
+			tree_top_sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/top winter.png")
+			animated_tree_top_sprite.frames =load("res://Assets/Images/tree_sets/"+ variety +"/animated top winter.tres")
 	match variety:
-		"A":
+		"oak":
 			animated_tree_top_sprite.offset = Vector2(-1,-107)
-		"B":
+		"spruce":
 			animated_tree_top_sprite.offset = Vector2(0,-102)
-		"C":
+		"birch":
 			animated_tree_top_sprite.offset = Vector2(0,-122)
-		"D":
+		"evergreen":
 			animated_tree_top_sprite.offset = Vector2(-3,-66)
-		"E":
+		"pine":
 			animated_tree_top_sprite.offset = Vector2(0,-119)
 
 func hit(tool_name):
@@ -150,29 +169,29 @@ func _on_Hurtbox_area_entered(_area):
 
 ### Tree modulate functions
 func set_tree_top_collision_shape():
-	if variety == "A":
+	if variety == "oak":
 		$TreeTopArea/A.set_deferred("disabled", false)
-	elif variety == "B":
+	elif variety == "spruce":
 		$TreeTopArea/B.set_deferred("disabled", false)
-	elif variety == "C":
+	elif variety == "birch":
 		$TreeTopArea/C.set_deferred("disabled", false)
-	elif variety == "D":
+	elif variety == "evergreen":
 		$TreeTopArea/D.set_deferred("disabled", false)
-	elif variety == "E":
+	elif variety == "pine":
 		$TreeTopArea/E.set_deferred("disabled", false)
 
 
 func disable_tree_top_collision_box():
 	set_tree_visible()
-	if variety == "A":
+	if variety == "oak":
 		$TreeTopArea/A.set_deferred("disabled", true)
-	elif variety == "B":
+	elif variety == "spruce":
 		$TreeTopArea/B.set_deferred("disabled", true)
-	elif variety == "C":
+	elif variety == "birch":
 		$TreeTopArea/C.set_deferred("disabled", true)
-	elif variety == "D":
+	elif variety == "evergreen":
 		$TreeTopArea/D.set_deferred("disabled", true)
-	elif variety == "E":
+	elif variety == "pine":
 		$TreeTopArea/E.set_deferred("disabled", true)
 
 
@@ -227,4 +246,5 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_RandomLeavesFallingTimer_timeout():
 	random_leaves_falling_timer.wait_time = rng.randi_range(15.0, 60.0)
-	InstancedScenes.initiateLeavesFallingEffect(variety, position)
+	if str(phase) == "5":
+		InstancedScenes.initiateLeavesFallingEffect(variety, position)

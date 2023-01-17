@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Trees/Stump.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/tree_sets/A/large_stumpA.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/tree_sets/oak/large_stumpA.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 22.7083, 28.1439 )

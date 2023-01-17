@@ -28,6 +28,7 @@ onready var ForageObjects = get_node("../../ForageObjects")
 
 func initialize():
 	spawn_placables()
+	spawn_crops()
 	$SpawnNatureTimer.start()
 	
 	
@@ -48,7 +49,7 @@ func spawn_forage():
 					forageItem.type = type
 					forageItem.variety = map["forage"][id]["v"]
 					forageItem.location = loc
-					forageItem.position = Tiles.valid_tiles.map_to_world(loc)
+					forageItem.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16,16)
 					ForageObjects.call_deferred("add_child", forageItem)
 	var value = forage_thread.wait_to_finish()
 	
@@ -62,11 +63,15 @@ func spawn_placables():
 			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placables"][id]["v"],location,MapData.world["placables"][id]["h"])
 		else:
 			PlaceObject.place_object_in_world(id,item_name,MapData.world["placables"][id]["d"],location)
+
+func spawn_crops():
 	for id in MapData.world["crops"]:
 		var item_name = MapData.world["crops"][id]["n"]
 		var location = Util.string_to_vector2(MapData.world["crops"][id]["l"])
-		var days_to_grow = MapData.world["crops"][id]["d"]
-		PlaceObject.place_seed_in_world(id,item_name,location,days_to_grow)
+		var days_until_harvest = MapData.world["crops"][id]["dh"]
+		var days_without_water = MapData.world["crops"][id]["dww"]
+		var regrowth_phase = MapData.world["crops"][id]["rp"]
+		PlaceObject.place_seed_in_world(id,item_name,location,days_until_harvest,days_without_water,regrowth_phase)
 	for id in MapData.world["tiles"]:
 		var loc = Util.string_to_vector2(id)
 		Tiles.hoed_tiles.set_cellv(loc, 0)
@@ -167,16 +172,10 @@ func spawn_trees():
 #						NatureObjects.call_deferred("add_child",object,true)
 #						yield(get_tree().create_timer(0.01), "timeout")
 					else:
-						Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
-						var object = TreeObject.instance()
-						var pos = Tiles.valid_tiles.map_to_world(loc)
-						object.biome = biome
-						object.health = MapData.world["tree"][id]["h"]
-						object.variety = MapData.world["tree"][id]["v"]
-						object.location = loc
-						object.position = pos + Vector2(0, -8)
-						object.name = id
-						NatureObjects.call_deferred("add_child",object,true)
+						var phase = MapData.world["tree"][id]["p"]
+						var health = MapData.world["tree"][id]["h"]
+						var variety = MapData.world["tree"][id]["v"]
+						PlaceObject.place_tree_in_world(id,variety,loc,biome,health,phase)
 						yield(get_tree().create_timer(0.01), "timeout")
 		for id in map["log"]:
 			var loc = Util.string_to_vector2(map["log"][id]["l"])

@@ -13,6 +13,7 @@
 
 [node name="ColorIndicator" type="Node2D"]
 modulate = Color( 1, 1, 1, 0.588235 )
+z_index = 3
 script = ExtResource( 10 )
 
 [node name="Grid" type="VBoxContainer" parent="."]

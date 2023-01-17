@@ -7,7 +7,7 @@ export var world_state = {}
 export var cave_state = {}
 ## any other object here  and the the save and load methods that needs to be save
 
-const GAME_STATE_PATH = "user://gamestate12121212.tres"
+const GAME_STATE_PATH = "user://gamestate121212121.tres"
 
 var game_state: GameState
 

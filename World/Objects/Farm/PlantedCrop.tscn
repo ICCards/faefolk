@@ -1,26 +1,14 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://World/Objects/Farm/PlantedCrop.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/crop_sets/wheat/1.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/Animations/plant/plant break.png" type="Texture" id=4]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=13]
+radius = 48.0
 
-[sub_resource type="Animation" id=3]
-resource_name = "animate"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("CropText:rect_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.45, 0.75, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 6.0, -4.0, 2.0, -2.0, 0.0 ]
-}
+[sub_resource type="CircleShape2D" id=2]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 15, 15 )
@@ -61,75 +49,79 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=13]
-radius = 63.0
+[sub_resource type="Animation" id=3]
+resource_name = "animate"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("CropText:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.45, 0.75, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 6.0, -4.0, 2.0, -2.0, 0.0 ]
+}
 
-[node name="PlantedCrop" type="Node2D"]
+[node name="PlantedCrop" type="Area2D"]
+collision_layer = 0
+collision_mask = 131072
 script = ExtResource( 2 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 13 )
+
 [node name="CropText" type="TextureRect" parent="."]
+margin_left = -16.0
 margin_top = -16.0
-margin_right = 32.0
+margin_right = 16.0
 margin_bottom = 16.0
 grow_vertical = 0
 rect_pivot_offset = Vector2( 16, 64 )
 mouse_filter = 2
+texture = ExtResource( 3 )
 
 [node name="PlayAnimBox" type="Area2D" parent="."]
-position = Vector2( -1, -13 )
+visible = false
+position = Vector2( -17, -13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayAnimBox"]
 position = Vector2( 17, 14 )
 shape = SubResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/animate = SubResource( 3 )
-
-[node name="RustleSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 1 )
-volume_db = -24.0
-
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2( 15, 0 )
 shape = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 15, 0 )
-scale = Vector2( 1.6, 1.6 )
-
-[node name="Harvest" type="TextureButton" parent="."]
-margin_left = -1.0
-margin_top = -18.0
-margin_right = 31.0
-margin_bottom = 14.0
-disabled = true
+visible = false
+position = Vector2( 1.90735e-06, 5 )
+scale = Vector2( 3.5, 3.7 )
 
 [node name="LeafEffect" type="AnimatedSprite" parent="."]
 visible = false
 modulate = Color( 1.2, 1.2, 1.2, 1 )
-position = Vector2( 15, 0 )
+position = Vector2( 0, -4 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 12 )
 
-[node name="DetectPlayer" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 32
+[node name="RustleSound" type="AudioStreamPlayer2D" parent="."]
+visible = false
+position = Vector2( -16, 0 )
+stream = ExtResource( 1 )
+volume_db = -24.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
-position = Vector2( 16, 0 )
-shape = SubResource( 13 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/animate = SubResource( 3 )
 
 [connection signal="body_entered" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_entered"]
 [connection signal="body_exited" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="mouse_entered" from="Harvest" to="." method="_on_Harvest_mouse_entered"]
-[connection signal="mouse_exited" from="Harvest" to="." method="_on_Harvest_mouse_exited"]
-[connection signal="pressed" from="Harvest" to="." method="_on_Harvest_pressed"]
-[connection signal="area_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_area_entered"]
-[connection signal="area_exited" from="DetectPlayer" to="." method="_on_DetectPlayer_area_exited"]

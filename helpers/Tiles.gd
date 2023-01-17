@@ -7,6 +7,7 @@ var watered_tiles = null
 var ocean_tiles = null
 var deep_ocean_tiles: TileMap = null
 var dirt_tiles = null
+var forest_tiles = null
 var wall_tiles = null
 var selected_wall_tiles = null
 var foundation_tiles = null
@@ -17,6 +18,17 @@ var light_tiles = null
 var wet_sand_tiles = null
 var cave_wall_tiles = null
 
+
+func validate_forest_tiles(location):
+	var active = false
+	if not active:
+		active = true
+		for x in range(2):
+			for y in range(2):
+				if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location or forest_tiles.get_cellv(Vector2(x,-y) + location) == -1: 
+					return false
+					break
+		return true
 
 func validate_tiles(location, dimensions):
 	var active = false

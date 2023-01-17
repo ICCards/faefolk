@@ -20,7 +20,6 @@ func _on_ManaTimer_timeout():
 	if PlayerData.player_data["mana"] > 100:
 		PlayerData.player_data["mana"] = 100
 	$EnergyBars/ManaPgBar.value = PlayerData.player_data["mana"]
-		
 
 func set_mana_bar():
 	$EnergyBars/ManaPgBar.max_value = 100
@@ -40,6 +39,7 @@ func set_date_time():
 
 func _on_AdvanceTime_timeout():
 	PlayerData.player_data["time_minutes"] += game_time_speed_per_second
+	PlayerData.emit_signal("set_day")
 	if PlayerData.player_data["time_minutes"] == 60:
 		PlayerData.player_data["time_minutes"] = 0
 		PlayerData.player_data["time_hours"] += 1

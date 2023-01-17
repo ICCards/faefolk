@@ -124,6 +124,7 @@ func buildMap(map):
 	Tiles.object_tiles = $PlacableTiles/ObjectTiles
 	Tiles.fence_tiles = $PlacableTiles/FenceTiles
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
+	Tiles.forest_tiles = $GeneratedTiles/DarkGreenGrassTiles
 	create_cave_entrance(map["cave_entrance_location"])
 	yield(get_tree().create_timer(1.0), "timeout")
 	spawn_initial_animals()

@@ -14,11 +14,10 @@ var destroyed: bool = false
 
 func _ready():
 	hide()
-	tree_object = Images.returnTreeObject(variety)
 	setTexture(tree_object)
 	
 func setTexture(tree):
-	tree_stump_sprite.texture = tree.largeStump
+	tree_stump_sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/large stump.png")
 
 
 func hit(tool_name):

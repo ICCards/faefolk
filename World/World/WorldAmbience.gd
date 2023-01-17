@@ -3,7 +3,7 @@ extends CanvasModulate
 const LENGTH_OF_TRANSITION = 150.0
 
 func _ready():
-	PlayerData.connect("set_day", self, "play_set_day")
+	#PlayerData.connect("set_day", self, "play_set_day")
 	PlayerData.connect("set_night", self, "play_set_night")
 	if PlayerData.player_data:
 		if PlayerData.player_data["time_hours"] >= 22 or PlayerData.player_data["time_hours"] < 6:

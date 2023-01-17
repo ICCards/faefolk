@@ -156,7 +156,6 @@ func _unhandled_input(event):
 
 
 func player_action(event, item_name, item_category):
-	print(item_name)
 	if item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod":
 		actions.fish()
 	elif (item_category == "Tool" or item_name == "hammer") and item_name != "bow":

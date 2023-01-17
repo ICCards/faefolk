@@ -20,13 +20,13 @@ func _ready():
 func setTreeBranchType():
 	variety = int(variety)
 	if variety <= 2:
-		tree_variety = 'D'
+		tree_variety = 'evergreen'
 	elif variety <= 5:
-		tree_variety = 'B'
+		tree_variety = 'spruce'
 	elif variety <= 8:
-		tree_variety = 'A'
+		tree_variety = 'oak'
 	else:
-		tree_variety = 'C'
+		tree_variety = 'birch'
 	log_sprite.texture = Images.tree_branch_objects[variety]
 
 func hit(tool_name, var special_ability = ""):

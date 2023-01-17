@@ -9,10 +9,24 @@ onready var sound_effects: AudioStreamPlayer = $SoundEffects
 var direction_of_current_chair: String = ""
 var sitting: bool = false
 
+onready var state = MOVEMENT
+enum {
+	MOVEMENT, 
+	SWINGING,
+	EATING,
+	FISHING,
+	HARVESTING,
+	DYING,
+	SLEEPING,
+	SITTING,
+	MAGIC_CASTING,
+	BOW_ARROW_SHOOTING
+}
+
 
 var game_state: GameState
 
-var interactive_object_id
+var current_interactive_node = null
 
 func _ready():
 	PlayerData.connect("health_depleted", self, "player_death")
@@ -20,33 +34,45 @@ func _ready():
 
 func _input(event):
 	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
-		if event.is_action_pressed("ui_cancel") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
-			get_parent().user_interface.toggle_save_and_exit()
-		if event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
-			get_parent().user_interface.toggle_menu()
-		elif event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
+		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
 			if $DetectInteractiveArea.get_overlapping_areas().size() > 0:
-				pass
-#			if interactive_object_id:
-#				match user_interface.object_name:
-#					"workbench":
-#						user_interface.toggle_workbench(user_interface.object_level)
-#					"grain mill":
-#						toggle_grain_mill(object_id, object_level)
-#					"stove":
-#						toggle_stove(object_id, object_level)
-#					"chest":
-#						toggle_chest(object_id)
-#					"furnace":
-#						toggle_furnace(object_id)
-#					"tool cabinet":
-#						toggle_tc(object_id)
-#					"chair":
-#						Server.player_node.sit(object_level)
-#					"campfire":
-#						toggle_campfire(object_id)
-#					"brewing table":
-#						toggle_brewing_table(object_id, object_level)
+				for new_node in $DetectInteractiveArea.get_overlapping_areas():
+					if is_instance_valid(new_node):
+						if current_interactive_node == null:
+							current_interactive_node = new_node
+						elif current_interactive_node.object_name == "crop" and new_node.object_name != "crop":
+							current_interactive_node = new_node
+						elif current_interactive_node.object_name == "crop" and new_node.object_name == "crop" and get_parent().position.distance_to(new_node.position) < get_parent().position.distance_to(current_interactive_node.position):
+							current_interactive_node = new_node
+						elif current_interactive_node.object_name == "forage" and new_node.object_name != "forage":
+							current_interactive_node = new_node
+						elif current_interactive_node.object_name == "forage" and new_node.object_name == "forage" and get_parent().position.distance_to(new_node.position) < get_parent().position.distance_to(current_interactive_node.position):
+							current_interactive_node = new_node
+			if current_interactive_node:
+				match current_interactive_node.object_name:
+					"crop":
+						harvest_crop(current_interactive_node)
+					"forage":
+						harvest_forage(current_interactive_node)
+					"workbench":
+						get_parent().user_interface.toggle_workbench(current_interactive_node.object_level)
+					"workbench":
+						get_parent().user_interface.toggle_workbench(current_interactive_node.object_level)
+					"grain mill":
+						get_parent().user_interface.toggle_grain_mill(current_interactive_node.name, current_interactive_node.object_level)
+					"stove":
+						get_parent().user_interface.toggle_stove(current_interactive_node.name, current_interactive_node.object_level)
+					"chest":
+						get_parent().user_interface.toggle_chest(current_interactive_node.name)
+					"furnace":
+						get_parent().user_interface.toggle_furnace(current_interactive_node.name)
+					"tool cabinet":
+						get_parent().user_interface.toggle_tc(current_interactive_node.name)
+					"campfire":
+						get_parent().user_interface.toggle_campfire(current_interactive_node.name)
+					"brewing table":
+						get_parent().user_interface.toggle_brewing_table(current_interactive_node.object_id, current_interactive_node.object_level)
+			current_interactive_node = null
 
 
 
@@ -83,35 +109,43 @@ func eat(item_name):
 		get_parent().state = get_parent().MOVEMENT
 
 
-func harvest_crop(item_name):
-	PlayerData.player_data["skill_experience"]["farming"] += 1
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/harvest.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-	sound_effects.play()
-	get_parent().state = get_parent().HARVESTING
-	var anim = "harvest_" + get_parent().direction.to_lower()
-	get_parent().holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + item_name + ".png")
-	get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
-	get_parent().animation_player.play(anim)
-	yield(get_parent().animation_player, "animation_finished")
-	get_parent().state = get_parent().MOVEMENT
+func harvest_crop(crop_node):
+	if get_parent().state != HARVESTING:
+		crop_node.harvest()
+		get_parent().state = HARVESTING
+		PlayerData.player_data["skill_experience"]["farming"] += 1
+		Sounds.play_harvest_sound()
+		var anim = "harvest_" + get_parent().direction.to_lower()
+		get_parent().holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + crop_node.crop_name + ".png")
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
+		get_parent().animation_player.play(anim)
+		yield(get_parent().animation_player, "animation_finished")
+		get_parent().state = get_parent().MOVEMENT
 
 
-func harvest_forage(variety):
-	PlayerData.player_data["skill_experience"]["foraging"] += 1
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/harvest.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-	sound_effects.play()
-	get_parent().state = get_parent().HARVESTING
-	var anim = "harvest_" + get_parent().direction.to_lower()
-	get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+variety+".png")
-	get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
-	get_parent().animation_player.play(anim)
-	yield(get_parent().animation_player, "animation_finished")
-	get_parent().state = get_parent().MOVEMENT
+func harvest_forage(forage_node):
+	if get_parent().state != HARVESTING:
+		forage_node.hide()
+		get_parent().state = HARVESTING
+		PlayerData.player_data["collections"]["forage"][forage_node.variety] += 1
+		PlayerData.player_data["skill_experience"]["foraging"] += 1
+		if forage_node.type != "raw egg":
+			Tiles.add_valid_tiles(forage_node.location)
+			MapData.remove_forage(forage_node.name)
+		Sounds.play_harvest_sound()
+		get_parent().state = get_parent().HARVESTING
+		var anim = "harvest_" + get_parent().direction.to_lower()
+		get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+forage_node.variety+".png")
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
+		get_parent().animation_player.play(anim)
+		yield(get_parent().animation_player, "animation_finished")
+		PlayerData.add_item_to_hotbar(forage_node.variety, 1, null)
+		forage_node.queue_free()
+		get_parent().state = get_parent().MOVEMENT
 
 
 func sit(adjusted_position, direction_of_chair):
+	get_node("../Sounds/FootstepsSound").stream_paused = true
 	direction_of_current_chair = direction_of_chair
 	sitting = true
 	get_parent().state = get_parent().SITTING
@@ -136,6 +170,7 @@ func player_death():
 		sound_effects.play()
 		get_node("../Magic").invisibility_active = true
 		get_parent().state = get_parent().DYING
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_node("../PoisonParticles").stop_poison_state()
 		get_node("../SpeedParticles").stop_speed_buff()
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "death_" + get_parent().direction.to_lower(), null)
