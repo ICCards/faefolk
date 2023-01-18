@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Effects/TrunkHitEffect.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/tree_sets/oak/chip.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -738,28 +737,22 @@ script = ExtResource( 1 )
 scale = Vector2( 3, 3 )
 
 [node name="TreeChip1" type="Sprite" parent="TreeChips"]
-texture = ExtResource( 2 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip2" type="Sprite" parent="TreeChips"]
-texture = ExtResource( 2 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip3" type="Sprite" parent="TreeChips"]
-texture = ExtResource( 2 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip4" type="Sprite" parent="TreeChips"]
-texture = ExtResource( 2 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip5" type="Sprite" parent="TreeChips"]
-texture = ExtResource( 2 )
 offset = Vector2( 4, -8 )
 
 [node name="TreeChip6" type="Sprite" parent="TreeChips"]
 visible = false
-texture = ExtResource( 2 )
 offset = Vector2( 4, -8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -31,7 +31,7 @@ var world = {
 	"tiles": {},
 	"placables": {}
 }
-var caves = {"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+var starting_caves_data = {"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
 "Cave 1-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
 "Cave 1-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
 "Cave 1-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
@@ -49,11 +49,17 @@ var caves = {"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"p
 "Cave 2-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
 "Cave 2-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}}}
 
+var caves = starting_caves_data
+
 func _ready() -> void:
 #	var file = File.new()
 #	if GameState.save_exists():
 #		add_world_data_to_chunks()
+	PlayerData.connect("season_changed", self,  "reset_cave_data")
 	PlayerData.connect("set_day", self, "advance_crops")
+
+func reset_cave_data():
+	caves = starting_caves_data
 
 func add_world_data_to_chunks():
 	if not is_world_data_in_chunks:
@@ -63,11 +69,12 @@ func add_world_data_to_chunks():
 
 func advance_crops():
 	for id in world["tree"]:
-		print(world["tree"][id]["p"])
-		if str(world["tree"][id]["p"]) == "sapling":
-			world["tree"][id]["p"] = 1
-		elif world["tree"][id]["p"] != 5:
-			world["tree"][id]["p"] += 1
+		if Util.isNonFruitTree(world["tree"][id]["v"]): # if non-fruit tree
+			if not str(world["tree"][id]["p"]) == "5":
+				world["tree"][id]["p"] = return_advanced_tree_phase(world["tree"][id]["p"])
+		else:
+			if not world["tree"][id]["p"] == "harvest":
+				world["tree"][id]["p"] = return_advanced_fruit_tree_phase(world["tree"][id]["p"])
 	for id in world["crops"]: 
 		var loc_string = world["crops"][id]["l"]
 		if not world["crops"][id]["dww"] == 2: # if crop isn't already dead
@@ -82,50 +89,41 @@ func advance_crops():
 	if Server.world.name == "World": # clear watered tiles if in world
 		Tiles.watered_tiles.clear()
 	emit_signal("refresh_crops")
-
-func save_map_data():
-	pass
-#	var world_file = File.new()
-#	world_file.open(world_file_name,File.WRITE)
-#	world_file.store_string(to_json(world))
-#	world_file.close()
-#	var caves_file = File.new()
-#	caves_file.open(caves_file_name,File.WRITE)
-#	caves_file.store_string(to_json(caves))
-#	caves_file.close()
-#	print("saved map data")
-
-#func load_world_data():
-#	var file = File.new()
-#	if(file.file_exists(world_file_name)):
-#		file.open(world_file_name,File.READ)
-#		var data = parse_json(file.get_as_text())
-#		file.close()
-#		if(typeof(data) == TYPE_DICTIONARY):
-#			print("loaded world data")
-#			world = data
-#		else:
-#			printerr("corrupted world data")
-#	else:
-#		printerr("world data not found")
-#
-#func load_caves_data():
-#	var file = File.new()
-#	if(file.file_exists(caves_file_name)):
-#		file.open(caves_file_name,File.READ)
-#		var data = parse_json(file.get_as_text())
-#		file.close()
-#		if(typeof(data) == TYPE_DICTIONARY):
-#			print("loaded caves data")
-#			caves = data
-#		else:
-#			printerr("corrupted caves data")
-#	else:
-#		var caves_file = File.new()
-#		caves_file.open(caves_file_name,File.WRITE)
-#		caves_file.store_string(to_json(caves))
-#		caves_file.close()
 	
+	
+func return_advanced_tree_phase(current_phase):
+	match current_phase:
+		"sapling":
+			return "1"
+		"1":
+			return "2"
+		"2":
+			return "3"
+		"3":
+			return "4"
+		"4":
+			return "5"
+
+
+func return_advanced_fruit_tree_phase(current_phase):
+	match current_phase:
+		"sapling":
+			return "1"
+		"1":
+			return "2"
+		"2":
+			return "3"
+		"3":
+			return "4"
+		"4":
+			return "mature1"
+		"empty":
+			return "mature1"
+		"mature1":
+			return "mature2"
+		"mature2":
+			return "harvest"
+
 func set_hoed_tile(loc):
 	world["tiles"][str(loc)] = "h"
 	

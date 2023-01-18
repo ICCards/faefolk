@@ -45,7 +45,7 @@ var starting_player_data = {
 	"respawn_scene" : "res://World/World/World.tscn",
 	"season": "spring",
 	"day_week": "Mon.",
-	"day_number": 1,
+	"day_number": 28,
 	"time_minutes": 0,
 	"time_hours": 6,
 	"health": 100,
@@ -189,7 +189,7 @@ var starting_player_data = {
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 0,
+			"wind": 1000,
 			"ice": 0,
 		},
 	"collections": {

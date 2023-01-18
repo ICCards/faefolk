@@ -121,16 +121,14 @@ func set_dimensions():
 		SEED:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
-			if Util.return_if_tree_name(item_name):
-				$TreeSeedToPlace.texture = load("res://Assets/Images/tree_sets/" + item_name + "/sapling.png")
+			if Util.isFruitTree(item_name) or Util.isNonFruitTree(item_name):
+				$TreeSeedToPlace.texture = load("res://Assets/Images/tree_sets/" + item_name + "/growing/sapling.png")
 				$ColorIndicator.tile_size =  Vector2(2,2)
-				$ItemToPlace.hide()
 				$TreeSeedToPlace.show()
 			else:
 				$ItemToPlace.show()
 				$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
 				$ColorIndicator.tile_size =  Vector2(1,1)
-				$TreeSeedToPlace.hide()
 		WALL:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
@@ -401,7 +399,7 @@ func place_item_state():
 func place_seed_state():
 	if Server.world.name == "World":
 		var location = Tiles.valid_tiles.world_to_map(mousePos)
-		if Util.return_if_tree_name(item_name):
+		if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
 			if not Tiles.validate_forest_tiles(location) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 				$ColorIndicator.indicator_color = "Red"
 				$ColorIndicator.set_indicator_color()
@@ -459,9 +457,10 @@ func place_object(item_name, direction, location, type):
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			if Util.return_if_tree_name(item_name):
+			if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
 				PlaceObject.place_tree_in_world(id,item_name,location+Vector2(1,0),"forest",Stats.TREE_HEALTH,"sapling")
 				MapData.add_tree(id,{"l":str(location+Vector2(1,0)),"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
+				MapData.add_nature_object_to_chunk("tree",location,id)
 			else:
 				var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
 				MapData.add_crop(id,{"n":item_name,"l":str(location),"dh":days_to_grow,"dww":0,"rp":false})

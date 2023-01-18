@@ -46,10 +46,10 @@ func randomizeDisplayedSprites():
 	treeChip6Sprite.visible = false
 	
 func setTexture(tree):
-	treeChip1Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/chip.png")
-	treeChip2Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/chip.png")
-	treeChip3Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/chip.png")
-	treeChip4Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/chip.png")
-	treeChip5Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/chip.png")
-	treeChip6Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/chip.png")
+	treeChip1Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip2Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip3Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip4Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip5Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip6Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
 	

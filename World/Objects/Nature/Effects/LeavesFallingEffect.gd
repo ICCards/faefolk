@@ -42,16 +42,16 @@ func randomizeDisplayedLeaves():
 	
 
 func setRandomTexture():
-	leaf1Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf2Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf3Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf4Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf5Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf6Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf7Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf8Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf9Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
-	leaf10Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/leaves.png")
+	leaf1Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf2Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf3Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf4Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf5Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf6Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf7Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf8Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf9Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf10Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
 	
 	rng.randomize()
 	leaf1Sprite.set_frame(rng.randi_range(0 , 11))

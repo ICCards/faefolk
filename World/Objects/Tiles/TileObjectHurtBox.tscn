@@ -157,6 +157,10 @@ visible = false
 frames = ExtResource( 5 )
 animation = "open"
 
+[node name="ResetTempHealthTimer" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="area_entered" from="Position2D/DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_entered"]
 [connection signal="area_exited" from="Position2D/DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_exited"]
 [connection signal="area_entered" from="Position2D/HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="timeout" from="ResetTempHealthTimer" to="." method="_on_ResetTempHealthTimer_timeout"]

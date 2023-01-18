@@ -32,7 +32,7 @@ func set_direction():
 func _unhandled_input(event):
 	if event.is_action_pressed("action"):
 		if $Position2D/DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-			Server.player_node.actions.sleep(direction, adjusted_pos())
+			Server.player_node.actions.sleep(direction, adjusted_pos(),Server.player_node.position)
 
 func adjusted_pos():
 	match direction:

@@ -23,7 +23,7 @@ func _ready():
 func _unhandled_input(event):
 	if event.is_action_pressed("action"):
 		if $Position2D/DetectPlayerAroundBed.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-			Server.player_node.actions.sleep("down", position + Vector2(32,-24))
+			Server.player_node.actions.sleep("down", position + Vector2(32,-24), Server.player_node.position)
 
 
 func PlayEffect(_player_id):
@@ -357,6 +357,7 @@ func _on_HurtBox_area_entered(area):
 		sound_effects.play()
 		$AnimationPlayer.play("shake")
 		temp_health -= 1
+		$ResetTempHealthTimer.start()
 	else:
 		$Light2D.enabled = false
 		$ChestPos/Chest.hide()
@@ -450,3 +451,7 @@ func open_chest():
 func close_chest():
 	yield(get_tree().create_timer(0.2), "timeout")
 	$ChestPos/Chest.play("open", true)
+
+
+func _on_ResetTempHealthTimer_timeout():
+	temp_health = 3

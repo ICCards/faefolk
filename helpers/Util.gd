@@ -149,7 +149,13 @@ func add_to_collection(type, amt):
 	else:
 		PlayerData.player_data["collections"]["resources"]["stone"] += amt
 		
-func return_if_tree_name(tree_name):
+		
+func isFruitTree(tree_name):
+	if tree_name == "cherry" or tree_name == "apple" or tree_name == "plum" or tree_name == "pear":
+		return true
+	return false
+
+func isNonFruitTree(tree_name):
 	if tree_name == "oak" or tree_name == "pine" or tree_name == "birch" or tree_name == "spruce" or tree_name == "evergreen":
 		return true
 	return false

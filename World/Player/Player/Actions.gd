@@ -218,11 +218,11 @@ func fish():
 		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		get_parent().call_deferred("add_child", fishing)
 
-func sleep(sleeping_bag_direction, pos):
+func sleep(sleeping_bag_direction, sleeping_bag_pos, player_enter_position):
 	if get_parent().state != get_parent().SLEEPING:
 		get_parent().z_index = 1
 		get_parent().state = get_parent().SLEEPING
-		get_parent().position = pos
+		get_parent().position = sleeping_bag_pos
 		get_parent().animation_player.play("sleep")
 		get_parent().composite_sprites.set_player_animation(get_parent().character, "sleep_" + sleeping_bag_direction)
 		if sleeping_bag_direction == "left":
@@ -237,7 +237,7 @@ func sleep(sleeping_bag_direction, pos):
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
-		PlayerData.player_data["respawn_location"] = str(pos/32)
+		PlayerData.player_data["respawn_location"] = str(player_enter_position/32)
 		yield(get_tree(), "idle_frame")
 		game_state = GameState.new()
 		game_state.world_state = MapData.world

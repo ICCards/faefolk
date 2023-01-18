@@ -1,6 +1,6 @@
 extends Control
 
-var game_time_speed_per_second = 5
+var game_time_speed_per_second = 30 #5
 var week_days = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."]
 var seasons = ["spring", "summer", "fall", "winter"]
 var clock_icon_index = 1
@@ -38,21 +38,21 @@ func set_date_time():
 	$DateTime/Time.text = return_adjusted_time_string(PlayerData.player_data["time_hours"],PlayerData.player_data["time_minutes"])
 
 func _on_AdvanceTime_timeout():
-	PlayerData.player_data["time_minutes"] += game_time_speed_per_second
-	PlayerData.emit_signal("set_day")
-	if PlayerData.player_data["time_minutes"] == 60:
-		PlayerData.player_data["time_minutes"] = 0
-		PlayerData.player_data["time_hours"] += 1
-		if PlayerData.player_data["time_hours"] == 6:
-			PlayerData.emit_signal("set_day")
-		elif PlayerData.player_data["time_hours"] == 22:
-			PlayerData.emit_signal("set_night")
-		elif PlayerData.player_data["time_hours"] == 24:
-			advance_day()
-		elif PlayerData.player_data["time_hours"] == 25:
-			 PlayerData.player_data["time_hours"] = 1
-	set_date_time()
-	advance_clock_icon()
+	if Server.isLoaded:
+		PlayerData.player_data["time_minutes"] += game_time_speed_per_second
+		if PlayerData.player_data["time_minutes"] == 60:
+			PlayerData.player_data["time_minutes"] = 0
+			PlayerData.player_data["time_hours"] += 1
+			if PlayerData.player_data["time_hours"] == 6:
+				PlayerData.emit_signal("set_day")
+			elif PlayerData.player_data["time_hours"] == 22:
+				PlayerData.emit_signal("set_night")
+			elif PlayerData.player_data["time_hours"] == 24:
+				advance_day()
+			elif PlayerData.player_data["time_hours"] == 25:
+				 PlayerData.player_data["time_hours"] = 1
+		set_date_time()
+		advance_clock_icon()
 	
 func advance_day():
 	var index = week_days.find(PlayerData.player_data["day_week"])

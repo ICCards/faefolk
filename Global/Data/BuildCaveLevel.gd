@@ -16,13 +16,14 @@ onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
 onready var Player = load("res://World/Player/Player/Player.tscn")
 onready var _character = load("res://Global/Data/Characters.gd")
 onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
-var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
+var oreTypesLevel1 = ["stone1", "stone2", "stone1", "stone2", "bronze ore", "bronze ore", "bronze ore", "iron ore"]
+var oreTypesLevel2 = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "bronze ore", "bronze ore", "iron ore", "iron ore", "gold ore"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 const mushroomTypes = ["common mushroom", "healing mushroom", "purple mushroom", "chanterelle"]
 var _uuid = load("res://helpers/UUID.gd")
 onready var uuid = _uuid.new()
 var rng := RandomNumberGenerator.new()
-const NUM_MUSHROOMS = 100
+const NUM_MUSHROOMS = 10
 const NUM_SMALL_ORE = 20
 const NUM_LARGE_ORE = 6
 const MAX_TALL_GRASS_SIZE = 60
@@ -111,7 +112,6 @@ func load_cave(map):
 	for id in map["ore"]:
 		var loc = Util.string_to_vector2(map["ore"][id]["l"])
 		Tiles.remove_valid_tiles(loc)
-		oreTypes.shuffle()
 		var object = SmallOre.instance()
 		object.health = map["ore"][id]["h"]
 		object.name = id
@@ -128,13 +128,13 @@ func load_cave(map):
 		caveGrass.loc = loc
 		GrassObjects.call_deferred("add_child", caveGrass)
 		caveGrass.position = loc*32 + Vector2(16,32)
-	for id in map["mushroom"]:
-		var loc = Util.string_to_vector2(map["mushroom"][id]["l"])
+	for id in map["forage"]:
+		var loc = Util.string_to_vector2(map["forage"][id]["l"])
 		Tiles.add_navigation_tiles(loc)
 		var forageItem = ForageItem.instance()
 		forageItem.name = str(id)
 		forageItem.type = "mushroom"
-		forageItem.variety = map["mushroom"][id]["v"]
+		forageItem.variety = map["forage"][id]["v"]
 		forageItem.location = loc
 		ForageObjects.call_deferred("add_child", forageItem)
 		forageItem.position = loc*32 + Vector2(16,32)
@@ -274,7 +274,6 @@ func generate_mushroom_forage(map):
 			mushroomTypes.shuffle()
 			Tiles.add_navigation_tiles(loc)
 			var forageItem = ForageItem.instance()
-
 			forageItem.type = "mushroom"
 			forageItem.variety = mushroomTypes.front()
 			forageItem.name = str(id)
@@ -317,33 +316,45 @@ func generate_ore(map):
 		var loc = locs[0]
 		if Tiles.validate_tiles(loc, Vector2(1,1)):
 			var id = uuid.v4()
+			var variety
 			Tiles.remove_valid_tiles(loc)
-			oreTypes.shuffle()
 			var object = SmallOre.instance()
 			object.name = str(id)
 			object.health = Stats.SMALL_ORE_HEALTH
-			object.variety = oreTypes.front()
+			if return_cave_tier() == "1":
+				oreTypesLevel1.shuffle()
+				variety = oreTypesLevel1.front()
+			else:
+				oreTypesLevel2.shuffle()
+				variety = oreTypesLevel2.front()
+			object.variety = variety
 			object.location = loc
 			object.position = loc*32 + Vector2(16, 24)
 			NatureObjects.call_deferred("add_child",object,true)
-			map["ore"][id] = {"l": str(loc), "v": oreTypes.front(), "h": Stats.SMALL_ORE_HEALTH}
+			map["ore"][id] = {"l": str(loc), "v": variety, "h": Stats.SMALL_ORE_HEALTH}
 	while count < NUM_LARGE_ORE:
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
 		var loc = locs[0]
 		if Tiles.validate_tiles(loc+Vector2(-1,0), Vector2(2,2)):
 			var id = uuid.v4()
+			var variety
 			count += 1
 			Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
-			oreTypes.shuffle()
+			if return_cave_tier() == "1":
+				oreTypesLevel1.shuffle()
+				variety = oreTypesLevel1.front()
+			else:
+				oreTypesLevel2.shuffle()
+				variety = oreTypesLevel2.front()
 			var object = LargeOre.instance()
 			object.name = str(id)
 			object.health = Stats.LARGE_ORE_HEALTH
-			object.variety = oreTypes.front()
+			object.variety = variety
 			object.location = loc
 			object.position = loc*32
 			NatureObjects.call_deferred("add_child",object,true)
-			map["ore_large"][id] = {"l": str(loc), "v": oreTypes.front(), "h": Stats.LARGE_ORE_HEALTH}
+			map["ore_large"][id] = {"l": str(loc), "v": variety, "h": Stats.LARGE_ORE_HEALTH}
 
 func set_light_nodes():
 	for loc in Server.world.get_node("Tiles/Lights").get_used_cells():
@@ -357,3 +368,5 @@ func set_light_nodes():
 		Server.world.get_node("LightObjects").add_child(caveLight)
 		caveLight.position = loc*32 + Vector2(16,16)
 
+func return_cave_tier():
+	return Server.world.name.substr(5,1)

@@ -39,6 +39,34 @@
         "ItemCategory": "Mob",
         "Description": "A flying enemy which randomly spawns in the caves.",
       },
+    "apple seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows an apple tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "pear seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a pear tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "plum seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a plum tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "cherry seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a cherry tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
     "oak seeds": {
         "ItemCategory": "Seed",
         "StackSize": 999,
@@ -49,7 +77,7 @@
     "spruce seeds": {
         "ItemCategory": "Seed",
         "StackSize": 999,
-        "Description": "Grows an spruce tree.",
+        "Description": "Grows a spruce tree.",
         "Ingredients": null,
         "EnergyHealth": null
       },

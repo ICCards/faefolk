@@ -93,7 +93,7 @@ func spawn_player():
 		tiles.shuffle()
 		spawn_loc = tiles[0]
 		yield(get_tree(), "idle_frame")
-		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
+		PlayerData.player_data["respawn_scene"] = "res://World/World/World.tscn"
 		PlayerData.player_data["respawn_location"] = spawn_loc
 		var game_state = GameState.new()
 		game_state.player_state = PlayerData.player_data
