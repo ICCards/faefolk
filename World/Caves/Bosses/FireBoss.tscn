@@ -413,6 +413,17 @@ script = ExtResource( 6 )
 
 [node name="EnemyFrozenState" parent="." instance=ExtResource( 10 )]
 
+[node name="EnemyPoisonState2" parent="." instance=ExtResource( 9 )]
+
+[node name="P3" parent="EnemyPoisonState2/PoisonParticles" index="0"]
+position = Vector2( 0, -58 )
+
+[node name="P2" parent="EnemyPoisonState2/PoisonParticles" index="1"]
+position = Vector2( 0, -76 )
+
+[node name="P1" parent="EnemyPoisonState2/PoisonParticles" index="2"]
+position = Vector2( 0, -95 )
+
 [node name="SetEnemyDirection" parent="." instance=ExtResource( 11 )]
 
 [node name="EnemyPoisonState" parent="." instance=ExtResource( 9 )]
@@ -497,7 +508,6 @@ position = Vector2( 0, -76 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 203 )
 animation = "play"
-frame = 4
 playing = true
 
 [node name="DetectPlayer" type="Area2D" parent="."]
@@ -517,6 +527,7 @@ anims/loop = SubResource( 208 )
 
 [node name="UpgradePhase" type="AnimatedSprite" parent="."]
 visible = false
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -76 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 211 )
@@ -534,4 +545,5 @@ max_speed = 75.0
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_AttackTimer_timeout"]
 
+[editable path="EnemyPoisonState2"]
 [editable path="EnemyPoisonState"]

@@ -75,7 +75,8 @@ func right_click_slot(slot):
 		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))
 		find_parent("UserInterface").holding_item = return_holding_item(slot.item.item_name, new_qt)
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-		get_parent().check_valid_recipe()
+		if slot.name == "FuelSlot" or slot.name == "Ingredient":
+			get_parent().check_valid_recipe()
 
 func return_holding_item(item_name, qt):
 	var inventoryItem = InventoryItem.instance()
@@ -88,7 +89,8 @@ func left_click_empty_slot(slot):
 		PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, get_parent().id)
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = null
-		get_parent().check_valid_recipe()
+		if slot.name == "FuelSlot" or slot.name == "Ingredient":
+			get_parent().check_valid_recipe()
 
 func left_click_different_item(event: InputEvent, slot):
 	if able_to_put_into_slot(slot):
@@ -99,7 +101,8 @@ func left_click_different_item(event: InputEvent, slot):
 		temp_item.global_position = event.global_position
 		slot.putIntoSlot(find_parent("UserInterface").holding_item)
 		find_parent("UserInterface").holding_item = temp_item
-		get_parent().check_valid_recipe()
+		if slot.name == "FuelSlot" or slot.name == "Ingredient":
+			get_parent().check_valid_recipe()
 
 func left_click_same_item(slot):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
@@ -113,11 +116,13 @@ func left_click_same_item(slot):
 		PlayerData.add_item_quantity(slot, able_to_add, get_parent().id)
 		slot.item.add_item_quantity(able_to_add)
 		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
-	get_parent().check_valid_recipe()
+	if slot.name == "FuelSlot" or slot.name == "Ingredient":
+		get_parent().check_valid_recipe()
 
 func left_click_not_holding(slot):
 	PlayerData.remove_item(slot, get_parent().id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
-	get_parent().check_valid_recipe()
+	if slot.name == "FuelSlot" or slot.name == "Ingredient":
+		get_parent().check_valid_recipe()

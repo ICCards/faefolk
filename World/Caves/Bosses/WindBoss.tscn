@@ -527,7 +527,6 @@ position = Vector2( 0, -76 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 182 )
 animation = "play"
-frame = 4
 playing = true
 
 [node name="DetectPlayer" type="Area2D" parent="."]
@@ -548,6 +547,7 @@ anims/loop = SubResource( 187 )
 
 [node name="UpgradePhase" type="AnimatedSprite" parent="."]
 visible = false
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -76 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 199 )

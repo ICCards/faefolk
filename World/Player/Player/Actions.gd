@@ -139,7 +139,7 @@ func harvest_forage(forage_node):
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
 		get_parent().animation_player.play(anim)
 		yield(get_parent().animation_player, "animation_finished")
-		PlayerData.add_item_to_hotbar(forage_node.variety, 1, null)
+		PlayerData.pick_up_item(forage_node.variety, 1, null)
 		forage_node.queue_free()
 		get_parent().state = get_parent().MOVEMENT
 
@@ -212,6 +212,7 @@ func respawn():
 
 func fish():
 	if get_parent().state != get_parent().FISHING:
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		PlayerData.change_energy(-1)
 		get_parent().state = get_parent().FISHING
 		var fishing = Fishing.instance()
@@ -220,6 +221,7 @@ func fish():
 
 func sleep(sleeping_bag_direction, sleeping_bag_pos, player_enter_position):
 	if get_parent().state != get_parent().SLEEPING:
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().z_index = 1
 		get_parent().state = get_parent().SLEEPING
 		get_parent().position = sleeping_bag_pos
@@ -244,6 +246,7 @@ func sleep(sleeping_bag_direction, sleeping_bag_pos, player_enter_position):
 		game_state.cave_state = MapData.caves
 		game_state.player_state = PlayerData.player_data
 		game_state.save_state()
+		get_parent().position = player_enter_position
 		get_parent().z_index = 0
 		get_parent().composite_sprites.rotation_degrees = 0
 		get_parent().state = get_parent().MOVEMENT

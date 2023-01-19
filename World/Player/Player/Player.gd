@@ -108,20 +108,20 @@ func _process(_delta) -> void:
 
 
 func set_movement_speed_change():
-	if state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
-		running_speed_change = 0.9
-	elif (state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING) and poisoned:
+	if (state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING) and poisoned:
 		running_speed_change = 0.7
+	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
+		running_speed_change = 0.9
 	elif poisoned and speed_buff_active:
 		running_speed_change = 1.0
 	elif poisoned:
 		running_speed_change = 0.8
 	elif speed_buff_active and not running and state == MOVEMENT:
-		running_speed_change = 1.25
+		running_speed_change = 1.3
 	elif speed_buff_active and running and state == MOVEMENT:
-		running_speed_change = 1.5
+		running_speed_change = 1.6
 	elif running and state == MOVEMENT:
-		running_speed_change = 1.25
+		running_speed_change = 1.3
 	else:
 		running_speed_change = 1.0
 

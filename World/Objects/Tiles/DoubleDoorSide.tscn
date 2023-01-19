@@ -214,12 +214,12 @@ vframes = 3
 anims/RESET = SubResource( 20 )
 anims/hit = SubResource( 21 )
 
-[node name="MovementCollision" type="StaticBody2D" parent="."]
+[node name="DoorMovementCollision" type="StaticBody2D" parent="."]
 position = Vector2( 3, -64 )
 rotation = 1.5708
-collision_layer = 3
+collision_layer = 35
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorMovementCollision"]
 position = Vector2( 32, -7.5 )
 shape = SubResource( 12 )
 

@@ -36,6 +36,22 @@ func remove_icon():
 	Tiles.selected_wall_tiles.set_cellv(location,-1)
 	Tiles.selected_foundation_tiles.set_cellv(location,-1)
 	
+	
+func tile_upgraded():
+	if tier != "demolish":
+		match tier:
+				"twig":
+					health = Stats.MAX_TWIG_BUILDING
+				"wood":
+					health = Stats.MAX_WOOD_BUILDING
+				"stone":
+					health = Stats.MAX_STONE_BUILDING
+				"metal":
+					health = Stats.MAX_METAL_BUILDING
+				"armored":
+					health = Stats.MAX_ARMORED_BUILDING
+	set_type()
+	
 func set_type():
 	if tier != "demolish":
 		MapData.world["placables"][str(name)]["v"] = tier
@@ -96,6 +112,7 @@ func remove_wall():
 		$HealthBar.hide()
 		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
+		$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
 		MapData.remove_object("placables",id)
 		Tiles.add_valid_tiles(location)
 		Tiles.wall_tiles.set_cellv(location, -1)
@@ -114,7 +131,7 @@ func remove_foundation():
 		Tiles.foundation_tiles.set_cellv(location, -1)
 		Tiles.foundation_tiles.update_bitmask_area(location)
 		play_break_sound_effect()
-		yield(get_tree().create_timer(1.5), "timeout")
+		yield(get_tree().create_timer(1.0), "timeout")
 		queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -203,7 +220,7 @@ func _on_DetectObjectOverPathBox_area_entered(area):
 func _on_DetectObjectOverPathBox_area_exited(area):
 	if not Server.world.is_changing_scene:
 		if item_name == "foundation":
-			yield(get_tree().create_timer(0.25), "timeout")
+			yield(get_tree().create_timer(0.3), "timeout")
 			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 			$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)
 

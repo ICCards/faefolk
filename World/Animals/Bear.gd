@@ -58,8 +58,8 @@ func _ready():
 	_end_chase_state_timer.connect("timeout", self, "end_chase_state")
 	navigation_agent.connect("velocity_computed", self, "move")
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
-	if self.position.distance_to(Server.player_node.position) < 300:
-		queue_free()
+#	if self.position.distance_to(Server.player_node.position) < 300:
+#		queue_free()
 
 func _update_pathfinding_idle():
 	state = WALK
@@ -75,6 +75,7 @@ func _update_pathfinding_retreat():
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
 		return
+	$LineOfSight.look_at(player.global_position)
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
 		velocity = move_and_slide(velocity)
@@ -97,6 +98,19 @@ func _physics_process(delta):
 	var steering = (desired_velocity - velocity) * delta * 4.0
 	velocity += steering
 	navigation_agent.set_velocity(velocity)
+
+func check_player_in_detection():
+	var collider = $LineOfSight.get_collider()
+	if collider:
+		print(collider.name)
+	if collider and collider.name == "PLAYER":
+		print("PLAYER DETECTED")
+		if not chasing:
+			start_chase_state()
+	else:
+		if chasing:
+			end_chase_state()
+
 
 func move(_velocity: Vector2) -> void:
 	if not visible or tornado_node or stunned or attacking or destroyed or state == IDLE:
@@ -157,19 +171,35 @@ func swing():
 		if (position + Vector2(0,-26)).distance_to(player.position) < 45:
 			animation_player.play("bite")
 			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/bite/body/"+ direction +".png")
+			if player_not_inside_walls():
+				yield(get_tree().create_timer(0.3), "timeout")
+				$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
 		else:
 			if Util.chance(25):
 				animation_player.play("bite")
 				$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/bite/body/"+ direction +".png")
+				if player_not_inside_walls():
+					yield(get_tree().create_timer(0.3), "timeout")
+					$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
 			else:
 				animation_player.play("swing")
 				$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/claw/body/"+ direction +".png")
+				if player_not_inside_walls():
+					yield(get_tree().create_timer(0.3), "timeout")
+					$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if destroyed:
 			return
 		animation_player.play("loop")
 		attacking = false
 		state = CHASE
+
+func player_not_inside_walls() -> bool:
+	var collider = $LineOfSight.get_collider()
+	if collider and (collider.name == "WallTiles" or collider.name == "DoorMovementCollision"):
+		return false
+	return true
+
 
 func hit(tool_name):
 	if state == IDLE or state == WALK:
@@ -265,7 +295,6 @@ func end_chase_state():
 	stop_sound_effects()
 	_chase_timer.stop()
 	_idle_timer.start()
-	_end_chase_state_timer.stop()
 	_update_pathfinding_idle()
 
 func start_chase_state():

@@ -24,8 +24,8 @@ var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 200.0
 var changed_direction_delay: bool = false
-var health: int = 700 #Stats.WIND_BOSS
-var STARTING_HEALTH: int = Stats.WIND_BOSS
+var health: int = 800 #Stats.WIND_BOSS
+var STARTING_HEALTH: int = 800 #Stats.WIND_BOSS
 var state = IDLE
 const MAX_RANDOM_CHASE_DIST = 100
 var rng = RandomNumberGenerator.new()
@@ -69,9 +69,6 @@ func _on_AttackTimer_timeout():
 
 func attack():
 	if chasing and not destroyed and not changing_phase:
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack2.wav")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
-		sound_effects.play()
 		$ShootDirection.look_at(Server.player_node.position)
 		state = ATTACK
 		animation_player.play("attack")
@@ -177,14 +174,13 @@ func destroy():
 	destroyed = true
 	animation_player.play("death")
 	$Timers/AttackTimer.stop()
-	$Timers/WhirlwindTimer.stop()
 	yield(get_tree().create_timer(0.4), "timeout")
 	InstancedScenes.intitiateItemDrop("fire staff", position, 1)
 	yield(animation_player, "animation_finished")
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/hitEnemy.wav")
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/hitEnemy.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	if state == IDLE:

@@ -131,10 +131,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.0051069, 0.25, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.0051069, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ true, true ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -450,9 +450,16 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
+frame = 8
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+position = Vector2( 0, -25 )
+enabled = true
+cast_to = Vector2( 150, 0 )
+collision_mask = 32
 
 [node name="Timers" type="Node" parent="."]
 

@@ -275,10 +275,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ true, true ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -559,10 +559,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ true, true ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Body/Bear:frame")
@@ -671,7 +671,7 @@ scale = Vector2( 2, 2 )
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2( 0, -4 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 22 )
@@ -733,6 +733,8 @@ anims/loop = SubResource( 8 )
 anims/swing = SubResource( 7 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+position = Vector2( 0, -8 )
 scale = Vector2( 25.65, 23.25 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
@@ -745,8 +747,14 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 2
+frame = 6
 playing = true
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+position = Vector2( 0, -25 )
+enabled = true
+cast_to = Vector2( 150, 0 )
+collision_mask = 32
 
 [node name="Timers" type="Node" parent="."]
 

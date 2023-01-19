@@ -65,7 +65,7 @@ func _physics_process(_delta):
 				being_added_to_inventory = true
 				$Sprite.visible = false
 				$CollisionShape2D.disabled = true
-				PlayerData.add_item_to_hotbar(item_name, item_quantity, item_health)
+				PlayerData.pick_up_item(item_name, item_quantity, item_health)
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 				$SoundEffects.play()
 				yield($SoundEffects, "finished")

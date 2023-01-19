@@ -56,12 +56,7 @@ var starting_player_data = {
 		"1": ["bow", 1, 50],
 		"2": ["arrow", 100, null],
 		"6": ["wind staff", 1, null],
-#		"7": ["fire staff", 1, null],
-		"7": ["oak seeds", 999, null],
-		"8": ["spruce seeds", 999, null],
-		"9": ["pine seeds", 999, null],
-		"4": ["evergreen seeds", 999, null],
-		"3": ["birch seeds", 999, null],
+		"7": ["poison potion III", 100, null],
 #		"2": ["wood fishing rod", 1, null],
 	#	"3": ["blue flower", 100, null],
 #		"4": ["brewing table #3", 10, null],
@@ -189,7 +184,7 @@ var starting_player_data = {
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 1000,
+			"wind": 0,
 			"ice": 0,
 		},
 	"collections": {
@@ -451,54 +446,51 @@ func remove_material(item, amount):
 					player_data["inventory"][slot][1] = 0 
 					update_inventory_slot_visual(slot, player_data["inventory"][slot][0], player_data["inventory"][slot][1], player_data["inventory"][slot][2])
 
-func add_item_to_hotbar(item_name, item_quantity, item_health):
-	var slot_indices: Array = player_data["hotbar"].keys()
-	slot_indices.sort()
-	for item in slot_indices:
-		if player_data["hotbar"][item][0] == item_name:
-			var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-			var able_to_add = stack_size - player_data["hotbar"][item][1]
-			if able_to_add >= item_quantity:
-				player_data["hotbar"][item][1] += item_quantity
-				update_hotbar_slot_visual(item, player_data["hotbar"][item][0], player_data["hotbar"][item][1], player_data["hotbar"][item][2])
-				return
-			else:
-				player_data["hotbar"][item][1] += able_to_add
-				update_hotbar_slot_visual(item, player_data["hotbar"][item][0], player_data["hotbar"][item][1], player_data["hotbar"][item][2])
-				item_quantity = item_quantity - able_to_add
-	# item doesn't exist in hotbar yet, so add it to an empty slot
-	for i in range(NUM_HOTBAR_SLOTS):
+
+
+func pick_up_item(item_name, item_quantity, item_health):
+	for slot in NUM_HOTBAR_SLOTS: # Add to existing hotbar slot
+		slot = str(slot)
+		if player_data["hotbar"].has(slot):
+			if player_data["hotbar"][slot][0] == item_name:
+				var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+				var able_to_add = stack_size - player_data["hotbar"][slot][1]
+				if able_to_add >= item_quantity:
+					player_data["hotbar"][slot][1] += item_quantity
+					update_hotbar_slot_visual(slot, player_data["hotbar"][slot][0], player_data["hotbar"][slot][1], player_data["hotbar"][slot][2])
+					return
+				else:
+					player_data["hotbar"][slot][1] += able_to_add
+					update_hotbar_slot_visual(slot, player_data["hotbar"][slot][0], player_data["hotbar"][slot][1], player_data["hotbar"][slot][2])
+					item_quantity = item_quantity - able_to_add
+	for slot in NUM_INVENTORY_SLOTS: # Add to existing inventory slot
+		slot = str(slot)
+		if player_data["inventory"].has(slot):
+			if player_data["inventory"][slot][0] == item_name:
+				var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+				var able_to_add = stack_size - player_data["inventory"][slot][1]
+				if able_to_add >= item_quantity:
+					player_data["inventory"][slot][1] += item_quantity
+					update_inventory_slot_visual(slot, player_data["inventory"][slot][0], player_data["inventory"][slot][1], player_data["inventory"][slot][2])
+					return
+				else:
+					player_data["inventory"][slot][1] += able_to_add
+					update_inventory_slot_visual(slot, player_data["inventory"][slot][0], player_data["inventory"][slot][1] , player_data["inventory"][slot][2])
+					item_quantity = item_quantity - able_to_add
+	for i in range(NUM_HOTBAR_SLOTS): # Add to empty hotbar slot 
 		if player_data["hotbar"].has(str(i)) == false:
 			player_data["hotbar"][str(i)] = [item_name, item_quantity, item_health]
 			update_hotbar_slot_visual(i, item_name, item_quantity, item_health)
 			Server.player_node.set_held_object()
 			return
-	# if hotbar full, add to inventory
-	add_item_to_inventory(item_name, item_quantity, item_health)
-
-func add_item_to_inventory(item_name, item_quantity, item_health):
-	var slot_indices: Array = player_data["inventory"].keys()
-	slot_indices.sort()
-	for item in slot_indices:
-		if player_data["inventory"][item][0] == item_name:
-			var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-			var able_to_add = stack_size - player_data["inventory"][item][1]
-			if able_to_add >= item_quantity:
-				player_data["inventory"][item][1] += item_quantity
-				update_inventory_slot_visual(item, player_data["inventory"][item][0], player_data["inventory"][item][1], player_data["inventory"][item][2])
-				return
-			else:
-				player_data["inventory"][item][1] += able_to_add
-				update_inventory_slot_visual(item, player_data["inventory"][item][0], player_data["inventory"][item][1] , player_data["inventory"][item][2])
-				item_quantity = item_quantity - able_to_add
-	# item doesn't exist in inventory yet, so add it to an empty slot
-	for i in range(NUM_INVENTORY_SLOTS):
+	for i in range(NUM_INVENTORY_SLOTS): # Add to empty inventory slot 
 		if player_data["inventory"].has(str(i)) == false:
 			player_data["inventory"][str(i)] = [item_name, item_quantity, item_health]
 			update_inventory_slot_visual(i, item_name, item_quantity, item_health)
 			return
-	# item cant be added to inventory so drop it
+	# All slots are filled so drop it
 	InstancedScenes.initiateInventoryItemDrop([item_name, item_quantity, item_health], Server.player_node.position)
+	
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity, item_health):
 	var slot = InventorySlots.get_node("Slot" + str(int(slot_index) + 1))

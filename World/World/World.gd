@@ -157,7 +157,7 @@ func spawn_initial_animals():
 func returnValidSpawnLocation():
 	rng.randomize()
 	var tempLoc = Vector2(rng.randi_range(100, 900), rng.randi_range(100, 900))
-	if validTiles.get_cellv(tempLoc) != -1 and not MapData.world["ocean"].has(str(tempLoc)):
+	if validTiles.get_cellv(tempLoc) != -1 and not MapData.world["ocean"].has(tempLoc):
 		return tempLoc
 	return null
 

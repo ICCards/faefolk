@@ -97,6 +97,7 @@ func move(_velocity: Vector2) -> void:
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
 		return
+	$LineOfSight.look_at(player.global_position)
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
 		velocity = move_and_slide(velocity)
@@ -127,14 +128,26 @@ func attack():
 		if Util.chance(50):
 			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/claw/" +  direction + "/body.png")
 			animation_player.play("claw")
+			if player_not_inside_walls():
+				yield(get_tree().create_timer(0.4), "timeout")
+				$Position2D/WolfClaw/CollisionShape2D.set_deferred("disabled", false)
 		else:
 			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/bite/" +  direction + "/body.png")
 			animation_player.play("bite")
+			if player_not_inside_walls():
+				yield(get_tree().create_timer(0.4), "timeout")
+				$Position2D/WolfBite/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if not destroyed:
 			animation_player.play("loop")
 			attacking = false
 			state = CHASE
+
+func player_not_inside_walls() -> bool:
+	var collider = $LineOfSight.get_collider()
+	if collider and (collider.name == "WallTiles" or collider.name == "DoorMovementCollision"):
+		return false
+	return true
 
 func hit(tool_name):
 	if state == IDLE or state == WALK:
