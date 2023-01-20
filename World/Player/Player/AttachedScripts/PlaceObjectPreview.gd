@@ -460,7 +460,7 @@ func place_object(item_name, direction, location, type):
 			if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
 				PlaceObject.place_tree_in_world(id,item_name,location+Vector2(1,0),"forest",Stats.TREE_HEALTH,"sapling")
 				MapData.add_tree(id,{"l":str(location),"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
-				MapData.add_nature_object_to_chunk("tree",location,id)
+				MapData.add_object_to_chunk("tree",location,id)
 			else:
 				var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
 				MapData.add_crop(id,{"n":item_name,"l":str(location),"dh":days_to_grow,"dww":0,"rp":false})

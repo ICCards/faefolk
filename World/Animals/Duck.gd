@@ -15,13 +15,15 @@ var stunned: bool = false
 var frozen: bool = false
 var poisoned: bool = false
 var velocity := Vector2.ZERO
-var health: int = Stats.DUCK_HEALTH
+var health
 var STARTING_HEALTH: int = Stats.DUCK_HEALTH
 var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 500.0
 var tornado_node
 
 var rng := RandomNumberGenerator.new()
+
+var variety
 
 func _ready():
 	hide()
@@ -33,8 +35,7 @@ func _ready():
 func set_random_attributes():
 	randomize()
 	$Timers/DropEggTimer.wait_time = rand_range(20, 40)
-	Images.DuckVariations.shuffle()
-	duck_sprite.frames = Images.DuckVariations[0]
+	duck_sprite.frames = Images.DuckVariations[variety-1]
 	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
 		duck_sprite.flip_h = true
@@ -146,6 +147,7 @@ func hit(tool_name, var special_ability = ""):
 
 func destroy(killed_by_player):
 	if killed_by_player:
+		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)

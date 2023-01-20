@@ -105,9 +105,9 @@ func _on_PlayBtn_pressed():
 		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/UI/Buttons/select.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
-		PlayerData.spawn_at_respawn_location = true
+		PlayerData.spawn_at_last_saved_location = true
 		if MapData.world["is_built"]:
-			SceneChanger.goto_scene(PlayerData.player_data["respawn_scene"])
+			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
 		else:
 			SceneChanger.goto_scene("res://World/World/World.tscn")
 

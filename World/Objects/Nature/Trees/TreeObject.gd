@@ -67,8 +67,6 @@ func refresh_tree_type():
 			set_tree()
 
 
-
-
 func setGrownTreeTexture():
 	random_leaves_falling_timer.wait_time = rng.randi_range(15.0, 60.0)
 	if health < Stats.STUMP_HEALTH:

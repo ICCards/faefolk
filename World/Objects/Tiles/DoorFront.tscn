@@ -125,9 +125,6 @@ tracks/2/keys = {
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 32, 7.5 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 30, 15.5 )
-
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 30.5, 15 )
 
@@ -215,7 +212,12 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="DoorFront" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30, 16.5 )
+
+[node name="DoorFront" type="Area2D"]
+collision_layer = 0
+collision_mask = 131072
 script = ExtResource( 5 )
 
 [node name="LightMask" type="Light2D" parent="."]
@@ -283,16 +285,6 @@ value = 250.0
 texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
-[node name="EnterDoorway" type="Area2D" parent="."]
-visible = false
-position = Vector2( 0, -9 )
-collision_layer = 32
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoorway"]
-position = Vector2( 32, -1.5 )
-shape = SubResource( 2 )
-
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false
 position = Vector2( 16, -16 )
@@ -335,6 +327,10 @@ anims/RESET = SubResource( 11 )
 "anims/show health bar" = SubResource( 12 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 32, -7.5 )
+shape = SubResource( 2 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

@@ -1,8 +1,9 @@
 extends Node
 
+var spawn_at_last_saved_location: bool = false
 var spawn_at_cave_entrance: bool = false
 var spawn_at_cave_exit: bool = false
-var spawn_at_respawn_location: bool = true
+var spawn_at_respawn_location: bool = false
 
 var normal_hotbar_mode = true
 
@@ -41,11 +42,13 @@ var active_item_slot_combat_hotbar = 0
 var game_state: GameState
 
 var starting_player_data = {
-	"respawn_location": null,
+	"current_save_location": null,
+	"current_save_scene" : "res://World/World/World.tscn",
+	"respawn_position": null,
 	"respawn_scene" : "res://World/World/World.tscn",
 	"season": "spring",
 	"day_week": "Mon.",
-	"day_number": 28,
+	"day_number": 1,
 	"time_minutes": 0,
 	"time_hours": 6,
 	"health": 100,
@@ -56,7 +59,7 @@ var starting_player_data = {
 		"1": ["bow", 1, 50],
 		"2": ["arrow", 100, null],
 		"6": ["wind staff", 1, null],
-		"7": ["poison potion III", 100, null],
+		"7": ["speed potion III", 100, null],
 #		"2": ["wood fishing rod", 1, null],
 	#	"3": ["blue flower", 100, null],
 #		"4": ["brewing table #3", 10, null],
@@ -67,11 +70,11 @@ var starting_player_data = {
 	"inventory": {
 			"18": ["wood", 999, null],
 			"19": ["stone", 999, null],
-			"17": ["wheat seeds", 999, null],
-			"16": ["corn seeds", 999, null],
-			"15": ["red pepper seeds", 999, null],
-			"13": ["bronze ore", 99, null],
-			"12": ["garlic seeds", 99, null],
+			"17": ["oak seeds", 999, null],
+			"16": ["evergreen seeds", 999, null],
+			"15": ["pine seeds", 999, null],
+			"13": ["birch seeds", 99, null],
+			"12": ["spruce seeds", 99, null],
 ##			"15": ["wheat flour", 99, null],
 #			"16": ["wheat", 100, null],
 	},

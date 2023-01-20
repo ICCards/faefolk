@@ -1,6 +1,7 @@
 extends Node
 
-signal tool_health_change
+signal tool_health_change_hotbar
+signal tool_health_change_combat_hotbar
 
 var skill_descriptions = {
 	#"sword": {1:{"n":"Sword swing","c":"1 energy","d":"A fast sword swipe."}, 2: {"n":"Sword defense","c":"1 energy","d":"Protects against incoming enemy projectiles."}, 3: {"n":"Enchantment","c":"1 mana","d":"Allows poison, ice or fire sword attacks."}, 4: {"n":"TBD","c":"TBD","d":"TBD"}},
@@ -286,18 +287,39 @@ func return_max_tool_health(item_name):
 			return null
 
 func decrease_tool_health():
-	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-		if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2]:
-			PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] -= 1
-			emit_signal("tool_health_change")
+	if PlayerData.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2]:
+				PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] -= 1
+				emit_signal("tool_health_change_hotbar")
+	else:
+		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
+			if PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][2]:
+				PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][2] -= 1
+				emit_signal("tool_health_change_combat_hotbar")
 	
 
 func refill_watering_can(type):
 	match type:
 		"stone watering can":
-			PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_STONE_WATERING_CAN
+			if PlayerData.normal_hotbar_mode:
+				PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_STONE_WATERING_CAN
+				emit_signal("tool_health_change_hotbar")
+			else:
+				PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][2] = MAX_STONE_WATERING_CAN
+				emit_signal("tool_health_change_combat_hotbar")
 		"bronze watering can":
-			PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_BRONZE_WATERING_CAN
+			if PlayerData.normal_hotbar_mode:
+				PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_BRONZE_WATERING_CAN
+				emit_signal("tool_health_change_hotbar")
+			else:
+				PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][2] = MAX_BRONZE_WATERING_CAN
+				emit_signal("tool_health_change_combat_hotbar")
 		"gold watering can":
-			PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_GOLD_WATERING_CAN
-	emit_signal("tool_health_change")
+			if PlayerData.normal_hotbar_mode:
+				PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] = MAX_GOLD_WATERING_CAN
+				emit_signal("tool_health_change_hotbar")
+			else:
+				PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][2] = MAX_GOLD_WATERING_CAN
+				emit_signal("tool_health_change_combat_hotbar")
+

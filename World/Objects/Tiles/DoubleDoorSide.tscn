@@ -83,9 +83,6 @@ extents = Vector2( 32, 7.5 )
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 30.5, 15 )
 
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 30, 15.5 )
-
 [sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 20.5, 10 )
 
@@ -170,7 +167,12 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="DoubleDoorSide" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 30.5, 17.5 )
+
+[node name="DoubleDoorSide" type="Area2D"]
+collision_layer = 0
+collision_mask = 131072
 script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -235,17 +237,6 @@ light_mask = 0
 position = Vector2( 14, -3.00005 )
 shape = SubResource( 13 )
 
-[node name="EnterDoorway" type="Area2D" parent="."]
-visible = false
-position = Vector2( 7, -62 )
-rotation = 1.5708
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoorway"]
-position = Vector2( 32, -1.5 )
-shape = SubResource( 14 )
-
 [node name="DetectObjectOverPathBox" type="Area2D" parent="."]
 visible = false
 collision_layer = 8192
@@ -278,6 +269,11 @@ anims/RESET = SubResource( 18 )
 "anims/show health bar" = SubResource( 19 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 8.5, -30.5 )
+rotation = 1.5708
+shape = SubResource( 14 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

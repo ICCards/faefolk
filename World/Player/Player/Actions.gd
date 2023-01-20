@@ -72,6 +72,8 @@ func _input(event):
 						get_parent().user_interface.toggle_campfire(current_interactive_node.name)
 					"brewing table":
 						get_parent().user_interface.toggle_brewing_table(current_interactive_node.object_id, current_interactive_node.object_level)
+					"door":
+						current_interactive_node.toggle_door()
 			current_interactive_node = null
 
 
@@ -111,6 +113,7 @@ func eat(item_name):
 
 func harvest_crop(crop_node):
 	if get_parent().state != HARVESTING:
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		crop_node.harvest()
 		get_parent().state = HARVESTING
 		PlayerData.player_data["skill_experience"]["farming"] += 1
@@ -125,6 +128,7 @@ func harvest_crop(crop_node):
 
 func harvest_forage(forage_node):
 	if get_parent().state != HARVESTING:
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		forage_node.hide()
 		get_parent().state = HARVESTING
 		PlayerData.player_data["collections"]["forage"][forage_node.variety] += 1
@@ -238,6 +242,8 @@ func sleep(sleeping_bag_direction, sleeping_bag_pos, player_enter_position):
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
+		PlayerData.player_data["current_save_location"] = str(player_enter_position/32)
+		PlayerData.player_data["current_save_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = str(player_enter_position/32)
 		yield(get_tree(), "idle_frame")

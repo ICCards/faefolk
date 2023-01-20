@@ -27,7 +27,7 @@ var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var state = IDLE
-var health: int = Stats.BEAR_HEALTH
+var health
 var STARTING_HEALTH: int = Stats.BEAR_HEALTH
 var MAX_MOVE_DISTANCE: float = 400.0
 var hit_projectiles = []
@@ -69,8 +69,13 @@ func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.position)
 
 func _update_pathfinding_retreat():
-	var target = -player.position*Vector2(100,100)
-	navigation_agent.set_target_location(target)
+	var target = Vector2(200,200)
+	var diff = player.position - self.position
+	if diff.x > 0:
+		target.x = -200
+	if diff.y > 0:
+		target.y = -200
+	navigation_agent.set_target_location(self.position+target)
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
@@ -226,6 +231,7 @@ func hit(tool_name):
 
 func destroy(killed_by_player):
 	if killed_by_player:
+		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
 	destroyed = true
 	stop_sound_effects()

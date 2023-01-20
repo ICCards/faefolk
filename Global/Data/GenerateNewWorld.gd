@@ -133,7 +133,10 @@ func build_world():
 	generate_flowers(plains,"plains")
 	generate_weeds(forest,"forest")
 	generate_weeds(plains,"plains")
-	generate_beach_forage(beach)
+#	generate_beach_forage(beach)
+#	yield(get_tree().create_timer(1.0), "timeout")
+#	generate_animals()
+#	yield(get_tree().create_timer(1.0), "timeout")
 	#yield(get_tree().create_timer(1.0), "timeout")
 	#get_node("/root/World/Loading").call_deferred("set_phase","Saving data")
 	#yield(get_tree().create_timer(1.0), "timeout")
@@ -278,6 +281,63 @@ func save_starting_world_data():
 	game_state.player_state = PlayerData.starting_player_data
 	game_state.save_state()
 
+func generate_animals():
+	print("Building animals")
+	var locations = plains + forest + snow + dirt + desert
+	var NUM_BUNNY = int(locations.size() / 1200)
+	print("NUM BUNNIES " + str(NUM_BUNNY))
+	for _i in range(NUM_BUNNY):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
+			decoration_locations.append(location)
+	for _i in range(NUM_BUNNY):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"duck","v":rng.randi_range(1,3),"h":Stats.DUCK_HEALTH}
+			decoration_locations.append(location)
+	var NUM_BEAR = (locations.size() / 4000)
+	print("NUM BEARS " + str(NUM_BEAR))
+	for _i in range(NUM_BEAR):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"bear","h":Stats.BEAR_HEALTH}
+			decoration_locations.append(location)
+	var NUM_BOAR = (locations.size() / 4000)
+	print("NUM BEARS " + str(NUM_BOAR))
+	for _i in range(NUM_BOAR):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"boar","h":Stats.BOAR_HEALTH}
+			decoration_locations.append(location)
+	var NUM_DEER = (locations.size() / 3000)
+	print("NUM DEER " + str(NUM_DEER))
+	for _i in range(NUM_DEER):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"deer","h":Stats.DEER_HEALTH}
+			decoration_locations.append(location)
+	locations = snow
+	var NUM_WOLF = (locations.size() / 1200)
+	print("NUM WOLF " + str(NUM_WOLF))
+	for _i in range(NUM_WOLF):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"wolf","h":Stats.WOLF_HEALTH}
+			decoration_locations.append(location)
+	
 
 func generate_beach_forage(locations):
 	print("Building beach forage")

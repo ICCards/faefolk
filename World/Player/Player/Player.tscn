@@ -11633,7 +11633,7 @@ shadow_enabled = true
 visible = false
 position = Vector2( 0, -84 )
 frames = SubResource( 117 )
-frame = 3
+frame = 1
 playing = true
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]

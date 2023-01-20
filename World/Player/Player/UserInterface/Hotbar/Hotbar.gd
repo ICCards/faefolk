@@ -15,7 +15,7 @@ func _ready():
 		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
 		slots[i].slotType = SlotClass.SlotType.HOTBAR
 		slots[i].slot_index = i
-	Stats.connect("tool_health_change", self, "update_tool_health")
+	Stats.connect("tool_health_change_hotbar", self, "update_tool_health")
 	
 func hovered_slot(slot):
 	if slot.item:

@@ -667,7 +667,7 @@
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to cut grass and flowers.",
-      "Ingredients": [["wood", 10],["iron ingot", 10]],
+      "Ingredients": [["wood", 10],["stone", 10]],
       "EnergyHealth": null
   },
   "wood fishing rod":{

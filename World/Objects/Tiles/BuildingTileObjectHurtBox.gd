@@ -54,7 +54,7 @@ func tile_upgraded():
 	
 func set_type():
 	if tier != "demolish":
-		MapData.world["placables"][str(name)]["v"] = tier
+		MapData.world["placable"][str(name)]["v"] = tier
 	match item_name:
 		"wall":
 			match tier:

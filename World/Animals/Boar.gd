@@ -24,7 +24,7 @@ var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
-var health: int = Stats.BOAR_HEALTH
+var health
 var STARTING_HEALTH: int = Stats.BOAR_HEALTH
 var tornado_node = null
 var hit_projectiles = []
@@ -67,8 +67,13 @@ func _update_pathfinding_idle():
 	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 	
 func _update_pathfinding_retreat():
-	var target = -player.position*Vector2(100,100)
-	navigation_agent.set_target_location(target)
+	var target = Vector2(200,200)
+	var diff = player.position - self.position
+	if diff.x > 0:
+		target.x = -200
+	if diff.y > 0:
+		target.y = -200
+	navigation_agent.set_target_location(self.position+target)
 	
 func set_sprite_texture():
 	match state:
@@ -170,6 +175,7 @@ func hit(tool_name):
 
 func destroy(killed_by_player):
 	if killed_by_player:
+		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["boar"] += 1
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
@@ -234,7 +240,7 @@ func start_retreat_state():
 
 func start_chase_state():
 	start_sound_effects()
-	navigation_agent.max_speed = 250
+	navigation_agent.max_speed = 180
 	_idle_timer.stop()
 	_chase_timer.start()
 	_end_chase_state_timer.start(20)

@@ -137,7 +137,7 @@ func set_watered_tile():
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
 			Stats.refill_watering_can(PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0])
-		elif PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] >= 1:
+		elif return_current_tool_health() >= 1:
 			Stats.decrease_tool_health()
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -162,3 +162,8 @@ func set_watered_tile():
 			sound_effects.play()
 
 
+func return_current_tool_health():
+	if PlayerData.normal_hotbar_mode:
+		return PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2]
+	else:
+		return PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][2]

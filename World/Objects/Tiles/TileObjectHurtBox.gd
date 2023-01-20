@@ -78,9 +78,9 @@ func set_dimensions():
 				Tiles.remove_valid_tiles(location, Vector2(1,2))
 			"right":
 				if item_name == "wood chest":
-					$Chest.frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
+					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
 				else:
-					$Chest.frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
+					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
 				$ChestPos/Chest.flip_h = true
 				$Position2D.rotation_degrees = 270
 				$Position2D.position = Vector2(16, -32)

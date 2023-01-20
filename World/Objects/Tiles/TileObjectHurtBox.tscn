@@ -9,7 +9,7 @@
 extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 14, 14 )
+extents = Vector2( 15, 14 )
 
 [sub_resource type="CircleShape2D" id=18]
 radius = 31.0
@@ -54,7 +54,6 @@ shape = SubResource( 16 )
 disabled = true
 
 [node name="InteractiveArea" type="Area2D" parent="Position2D"]
-visible = false
 collision_layer = 0
 collision_mask = 131072
 script = ExtResource( 3 )
@@ -82,7 +81,6 @@ collision_mask = 8192
 shape = SubResource( 2 )
 
 [node name="HurtBox" type="Area2D" parent="Position2D"]
-visible = false
 collision_layer = 262168
 collision_mask = 0
 monitorable = false

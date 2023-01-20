@@ -747,7 +747,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 6
+frame = 3
 playing = true
 
 [node name="LineOfSight" type="RayCast2D" parent="."]

@@ -51,13 +51,15 @@ func update_navigation():
 
 func spawn_player():
 	var spawn_loc
-#	if PlayerData.spawn_at_respawn_location:
-#		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
-#	elif PlayerData.spawn_at_cave_entrance:
-#		spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
-#	elif PlayerData.spawn_at_cave_exit:
-#		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
-	spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+	if PlayerData.spawn_at_respawn_location:
+		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
+	elif PlayerData.spawn_at_cave_entrance:
+		spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+	elif PlayerData.spawn_at_cave_exit:
+		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
+	elif PlayerData.spawn_at_last_saved_location:
+		spawn_loc =  Util.string_to_vector2(PlayerData.player_data["current_save_location"])
+	#spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
 	var player = Player.instance()
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
@@ -67,6 +69,7 @@ func spawn_player():
 	PlayerData.spawn_at_respawn_location = false
 	PlayerData.spawn_at_cave_entrance = false
 	PlayerData.spawn_at_cave_exit = false
+	PlayerData.spawn_at_last_saved_location = false
 
 func build():
 	valid_tiles = Server.world.get_node("Tiles/ValidTiles")
@@ -138,10 +141,10 @@ func load_cave(map):
 		forageItem.location = loc
 		ForageObjects.call_deferred("add_child", forageItem)
 		forageItem.position = loc*32 + Vector2(16,32)
-	for id in map["placables"]:
-		var item_name = map["placables"][id]["n"]
-		var location = Util.string_to_vector2(map["placables"][id]["l"])
-		var direction = map["placables"][id]["d"]
+	for id in map["placable"]:
+		var item_name = map["placable"][id]["n"]
+		var location = Util.string_to_vector2(map["placable"][id]["l"])
+		var direction = map["placable"][id]["d"]
 		PlaceObject.place_object_in_world(id,item_name,direction,location)
 
 

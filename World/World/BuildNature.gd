@@ -56,26 +56,26 @@ func spawn_forage():
 
 
 func spawn_placables():
-	for id in MapData.world["placables"]:
-		var item_name = MapData.world["placables"][id]["n"]
-		var location = Util.string_to_vector2(MapData.world["placables"][id]["l"])
+	for id in MapData.world["placable"]:
+		var item_name = MapData.world["placable"][id]["n"]
+		var location = Util.string_to_vector2(MapData.world["placable"][id]["l"])
 		if item_name == "wall" or item_name == "foundation":
-			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placables"][id]["v"],location,MapData.world["placables"][id]["h"])
+			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placable"][id]["v"],location,MapData.world["placable"][id]["h"])
 		else:
-			PlaceObject.place_object_in_world(id,item_name,MapData.world["placables"][id]["d"],location)
+			PlaceObject.place_object_in_world(id,item_name,MapData.world["placable"][id]["d"],location)
 
 func spawn_crops():
-	for id in MapData.world["crops"]:
-		var item_name = MapData.world["crops"][id]["n"]
-		var location = Util.string_to_vector2(MapData.world["crops"][id]["l"])
-		var days_until_harvest = MapData.world["crops"][id]["dh"]
-		var days_without_water = MapData.world["crops"][id]["dww"]
-		var regrowth_phase = MapData.world["crops"][id]["rp"]
+	for id in MapData.world["crop"]:
+		var item_name = MapData.world["crop"][id]["n"]
+		var location = Util.string_to_vector2(MapData.world["crop"][id]["l"])
+		var days_until_harvest = MapData.world["crop"][id]["dh"]
+		var days_without_water = MapData.world["crop"][id]["dww"]
+		var regrowth_phase = MapData.world["crop"][id]["rp"]
 		PlaceObject.place_seed_in_world(id,item_name,location,days_until_harvest,days_without_water,regrowth_phase)
-	for id in MapData.world["tiles"]:
+	for id in MapData.world["tile"]:
 		var loc = Util.string_to_vector2(id)
 		Tiles.hoed_tiles.set_cellv(loc, 0)
-		if MapData.world["tiles"][id] == "w":
+		if MapData.world["tile"][id] == "w":
 			Tiles.watered_tiles.set_cellv(loc, 0)
 		Tiles.hoed_tiles.update_bitmask_region()
 		Tiles.watered_tiles.update_bitmask_region()
@@ -136,6 +136,7 @@ func remove_nature():
 				NatureObjects.remove_child(node)
 				yield(get_tree().create_timer(0.01), "timeout")
 	var value = remove_objects_thread.wait_to_finish()
+
 
 func remove_grass():
 	for node in GrassObjects.get_children():

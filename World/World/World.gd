@@ -73,8 +73,9 @@ func build_world():
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
 	$WorldBuilder/BuildNature.initialize()
+	$WorldBuilder/SpawnAnimal.initialize()
 	$WorldMap.buildMap()
-	spawn_initial_animals()
+	#spawn_initial_animals()
 
 
 func spawn_player():
@@ -88,11 +89,15 @@ func spawn_player():
 		spawn_loc = PlayerData.player_data["respawn_location"]
 	elif PlayerData.spawn_at_cave_exit:
 		spawn_loc = MapData.world["cave_entrance_location"]
+	elif PlayerData.spawn_at_last_saved_location:
+		spawn_loc = PlayerData.player_data["current_save_location"]
 	if spawn_loc == null: # initial random spawn
 		var tiles = MapData.world["beach"]
 		tiles.shuffle()
 		spawn_loc = tiles[0]
 		yield(get_tree(), "idle_frame")
+		PlayerData.player_data["current_save_location"] =  spawn_loc
+		PlayerData.player_data["current_save_scene"] = "res://World/World/World.tscn"
 		PlayerData.player_data["respawn_scene"] = "res://World/World/World.tscn"
 		PlayerData.player_data["respawn_location"] = spawn_loc
 		var game_state = GameState.new()
@@ -103,6 +108,7 @@ func spawn_player():
 	player.position = Util.string_to_vector2(spawn_loc)*32
 	PlayerData.spawn_at_respawn_location = false
 	PlayerData.spawn_at_cave_exit = false
+	PlayerData.spawn_at_last_saved_location = false
 
 
 func advance_down_cave_level():
@@ -126,8 +132,8 @@ func buildMap(map):
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	Tiles.forest_tiles = $GeneratedTiles/DarkGreenGrassTiles
 	create_cave_entrance(map["cave_entrance_location"])
-	yield(get_tree().create_timer(1.0), "timeout")
-	spawn_initial_animals()
+#	yield(get_tree().create_timer(1.0), "timeout")
+#	spawn_initial_animals()
 
 func create_cave_entrance(_loc):
 	var loc = Util.string_to_vector2(_loc)

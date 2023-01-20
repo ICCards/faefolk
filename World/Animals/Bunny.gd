@@ -13,26 +13,27 @@ var stunned: bool = false
 var poisoned: bool = false
 var frozen: bool = false
 var velocity := Vector2.ZERO
-var health: int = Stats.BUNNY_HEALTH
+var health
 var STARTING_HEALTH: int = Stats.BUNNY_HEALTH
 var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 500.0
 var tornado_node = null
+
+var variety
 
 var rng := RandomNumberGenerator.new()
 
 func _ready(): 
 	hide()
 	randomize()
-	set_random_attributes()
+	set_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
 	navigation_agent.connect("velocity_computed", self, "move")
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
-func set_random_attributes():
+func set_attributes():
 	randomize()
-	Images.BunnyVariations.shuffle()
-	bunny_sprite.frames = Images.BunnyVariations[0]
+	bunny_sprite.frames = Images.BunnyVariations[variety-1]
 	var randomRadiusScale = rand_range(0.5,2.0)
 	$DetectPlayer/CollisionShape2D.scale = Vector2(randomRadiusScale, randomRadiusScale)
 	_timer.wait_time = rand_range(2.5, 5.0)
@@ -108,6 +109,7 @@ func hit(tool_name):
 
 func destroy(killed_by_player):
 	if killed_by_player:
+		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["bunny"] += 1
 	destroyed = true
 	bunny_sprite.play("death")

@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
@@ -12,12 +12,13 @@ var max_health
 var temp_health = 0
 var entered = false
 
+var object_name = "door"
+
 func _ready():
 	set_type()
 
 
-func _input(event):
-	if event.is_action_pressed("action") and $EnterDoorway.get_overlapping_areas().size() >= 1:
+func toggle_door():
 		if door_open:
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
