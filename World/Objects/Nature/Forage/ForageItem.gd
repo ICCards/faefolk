@@ -21,4 +21,22 @@ func _ready():
 	set_forage_texture()
 
 func set_forage_texture():
-	$Sprite.texture = load("res://Assets/Images/inventory_icons/Forage/"+ variety +".png")
+	if type == "flower":
+		$Sprite.hide()
+		$AnimatedFlower.show()
+		$AnimatedFlower.play(variety)
+		$AnimatedFlower.frame = rng.randi_range(0,4)
+	else:
+		$Sprite.show()
+		$AnimatedFlower.hide()
+		$Sprite.texture = load("res://Assets/Images/inventory_icons/Forage/"+ variety +".png")
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()
+	$AnimatedFlower.playing = true
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()
+	$AnimatedFlower.playing = false

@@ -11,6 +11,8 @@ onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 onready var hit_box: Position2D = $Position2D
 
 
+var thread = Thread.new()
+
 var player = Server.player_node
 var direction: String = "down"
 var chasing: bool = false
@@ -20,14 +22,13 @@ var poisoned: bool = false
 var attacking: bool = false
 var knocking_back: bool = false
 var playing_sound_effect: bool = false
-var changed_direction_delay: bool = false
 var frozen: bool = false
 var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var state = IDLE
-var health
+var health: int = Stats.BEAR_HEALTH
 var STARTING_HEALTH: int = Stats.BEAR_HEALTH
 var MAX_MOVE_DISTANCE: float = 400.0
 var hit_projectiles = []
@@ -62,8 +63,9 @@ func _ready():
 #		queue_free()
 
 func _update_pathfinding_idle():
-	state = WALK
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+	if visible:
+		state = WALK
+		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.position)
@@ -231,7 +233,7 @@ func hit(tool_name):
 
 func destroy(killed_by_player):
 	if killed_by_player:
-		MapData.remove_animal(name)
+		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
 	destroyed = true
 	stop_sound_effects()

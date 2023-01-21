@@ -25,7 +25,7 @@ var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 400.0
 var STARTING_HEALTH: int = Stats.DEER_HEALTH
-var health
+var health: int = Stats.DEER_HEALTH
 
 const KNOCKBACK_SPEED = 50
 const ACCELERATION = 180
@@ -61,8 +61,9 @@ func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.global_position)
 	
 func _update_pathfinding_idle():
-	state = WALK
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+	if visible:
+		state = WALK
+		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 	
 func _update_pathfinding_retreat():
 	var target = Vector2(200,200)
@@ -170,7 +171,7 @@ func hit(tool_name):
 
 func destroy(killed_by_player):
 	if killed_by_player:
-		MapData.remove_animal(name)
+		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["deer"] += 1
 	stop_sound_effects()
 	destroyed = true

@@ -59,7 +59,6 @@ func spawn_player():
 		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
 	elif PlayerData.spawn_at_last_saved_location:
 		spawn_loc =  Util.string_to_vector2(PlayerData.player_data["current_save_location"])
-	#spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
 	var player = Player.instance()
 	player.character = _character.new()
 	player.character.LoadPlayerCharacter("human_male")
@@ -223,16 +222,19 @@ func spawn_enemies_randomly():
 		var slime = Slime.instance()
 		Server.world.get_node("Enemies").add_child(slime)
 		slime.position = locs[i]*32 + Vector2(16,16)
+		yield(get_tree(), "idle_frame")
 	locs.shuffle()
 	for i in range(Server.world.NUM_SPIDERS):
 		var spider = Spider.instance()
 		Server.world.get_node("Enemies").add_child(spider)
 		spider.position = locs[i]*32 + Vector2(16,16)
+		yield(get_tree(), "idle_frame")
 	locs.shuffle()
 	for i in range(Server.world.NUM_SKELETONS):
 		var skele = FireMageSkeleton.instance()
 		Server.world.get_node("Enemies").add_child(skele)
 		skele.position = locs[i]*32 + Vector2(16,16)
+		yield(get_tree(), "idle_frame")
 	
 	
 func set_initial_chest(map):

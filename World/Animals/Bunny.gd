@@ -13,7 +13,7 @@ var stunned: bool = false
 var poisoned: bool = false
 var frozen: bool = false
 var velocity := Vector2.ZERO
-var health
+var health: int = Stats.BUNNY_HEALTH
 var STARTING_HEALTH: int = Stats.BUNNY_HEALTH
 var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 500.0
@@ -41,7 +41,8 @@ func set_attributes():
 		bunny_sprite.flip_h = true
 
 func _update_pathfinding() -> void:
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+	if visible:
+		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned:

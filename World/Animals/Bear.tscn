@@ -747,7 +747,7 @@ position = Vector2( 0, -31 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 129 )
 animation = "play"
-frame = 3
+frame = 2
 playing = true
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
@@ -766,7 +766,7 @@ autostart = true
 wait_time = 0.5
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="EndChaseState" type="Timer" parent="Timers"]
 wait_time = 20.0

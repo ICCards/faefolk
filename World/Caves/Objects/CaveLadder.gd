@@ -9,7 +9,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Server.player_node:
-		if inside_area and Input.is_action_pressed("action") and Server.player_node.state == 0:
+		if inside_area and Input.is_action_pressed("action") and Server.player_node.state == 0 and not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode:
 			$HealthBar.show()
 			if $HealthBar/Progress.value == 200:
 				if is_down_ladder:

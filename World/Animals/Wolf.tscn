@@ -538,7 +538,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 51 )
-frame = 1
+frame = 8
 playing = true
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
@@ -552,7 +552,7 @@ collision_mask = 32
 [node name="Timers" type="Node" parent="."]
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="RetreatTimer" type="Timer" parent="Timers"]
 wait_time = 0.5

@@ -24,7 +24,7 @@ var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
-var health
+var health: int = Stats.WOLF_HEALTH
 var STARTING_HEALTH: int = Stats.WOLF_HEALTH
 var tornado_node = null
 var hit_projectiles = []
@@ -55,15 +55,14 @@ func _ready():
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	navigation_agent.connect("velocity_computed", self, "move") 
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
-	if self.position.distance_to(Server.player_node.position) < 300:
-		queue_free()
 
 func _update_pathfinding_chase():
 	navigation_agent.set_target_location(player.global_position)
 	
 func _update_pathfinding_idle():
-	state = WALK
-	navigation_agent.set_target_location(Util.get_random_idle_pos(global_position, MAX_MOVE_DISTANCE))
+	if visible:
+		state = WALK
+		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 	
 func _update_pathfinding_retreat():
 	var target = Vector2(200,200)
@@ -178,7 +177,7 @@ func hit(tool_name):
 
 func destroy(killed_by_player):
 	if killed_by_player:
-		MapData.remove_animal(name)
+		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["wolf"] += 1
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)

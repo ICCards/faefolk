@@ -73,9 +73,11 @@ func build_world():
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
 	$WorldBuilder/BuildNature.initialize()
-	$WorldBuilder/SpawnAnimal.initialize()
+	#$WorldBuilder/SpawnAnimal.initialize()
+	yield(get_tree(), "idle_frame")
 	$WorldMap.buildMap()
-	#spawn_initial_animals()
+	yield(get_tree(), "idle_frame")
+	spawn_initial_animals()
 
 
 func spawn_player():
@@ -146,17 +148,22 @@ func create_cave_entrance(_loc):
 	add_child(caveLadder)
 
 func spawn_initial_animals():
-	for i in range(150):
+	for i in range(120):
 		spawnRandomBunny()
-	for i in range(150):
+	yield(get_tree(), "idle_frame")
+	for i in range(120):
 		spawnRandomDuck()
-	for i in range(75):
+	yield(get_tree(), "idle_frame")
+	for i in range(55):
 		spawnRandomDeer()
-	for i in range(30):
+	yield(get_tree(), "idle_frame")
+	for i in range(25):
 		spawnRandomBoar()
-	for i in range(30):
+	yield(get_tree(), "idle_frame")
+	for i in range(25):
 		spawnRandomBear()
-	for i in range(30):
+	yield(get_tree(), "idle_frame")
+	for i in range(25):
 		spawnRandomWolf()
 
 
@@ -175,6 +182,7 @@ func spawnRandomWolf():
 			var wolf = Wolf.instance()
 			wolf.global_position = loc*32
 			$Enemies.call_deferred("add_child",wolf)
+			wolf.hide()
 			num_wolves += 1
 			yield(get_tree(), "idle_frame")
 
@@ -183,8 +191,10 @@ func spawnRandomBunny():
 		var loc = returnValidSpawnLocation()
 		if loc != null:
 			var bunny = Bunny.instance()
+			bunny.variety = rng.randi_range(1,3)
 			bunny.global_position = loc*32
 			$Enemies.call_deferred("add_child",bunny)
+			bunny.hide()
 			num_bunnies += 1
 			yield(get_tree(), "idle_frame")
 
@@ -193,8 +203,10 @@ func spawnRandomDuck():
 		var loc = returnValidSpawnLocation()
 		if loc != null:
 			var duck = Duck.instance()
+			duck.variety = rng.randi_range(1,3)
 			duck.global_position = loc*32
 			$Enemies.call_deferred("add_child",duck)
+			duck.hide()
 			num_ducks += 1
 			yield(get_tree(), "idle_frame")
 
@@ -205,6 +217,7 @@ func spawnRandomBear():
 			var bear = Bear.instance()
 			$Enemies.call_deferred("add_child",bear)
 			bear.global_position = loc*32
+			bear.hide()
 			num_bears += 1
 			yield(get_tree(), "idle_frame")
 		
@@ -216,6 +229,7 @@ func spawnRandomBoar():
 			$Enemies.call_deferred("add_child", boar)
 			boar.global_position = loc*32
 			num_boars += 1
+			boar.hide()
 			yield(get_tree(), "idle_frame")
 
 func spawnRandomDeer():
@@ -226,9 +240,6 @@ func spawnRandomDeer():
 			$Enemies.call_deferred("add_child", deer)
 			deer.global_position = loc*32
 			num_deer += 1
+			deer.hide()
 			yield(get_tree(), "idle_frame")
 
-func _on_SpawnAnimalTimer_timeout():
-	spawnRandomBoar()
-	spawnRandomBear()
-	spawnRandomWolf()

@@ -21,7 +21,7 @@
       },
     "wolf": {
         "ItemCategory": "Mob",
-        "Description": "A quick and lethal enemy found in the snow biome.",
+        "Description": "A quick enemy with a dangerous bite and lethal claws.",
       },
     "slime": {
         "ItemCategory": "Mob",
@@ -347,31 +347,38 @@
       "Ingredients": null,
       "EnergyHealth": null
       },
-    "blue flower": {
+    "lily of the nile": {
       "ItemCategory": "Forage",
       "StackSize": 999,
       "Description": "A wild, blue flower.",
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "green flower": {
+    "poppy flower": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A wild, green flower.",
+      "Description": "A wild, red flower with medicinal properties.",
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "purple flower": {
+    "tulip": {
       "ItemCategory": "Forage",
       "StackSize": 999,
       "Description": "A wild, purple flower.",
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "red flower": {
+    "dandelion": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A wild, red flower.",
+      "Description": "A wild, yellow flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "sunflower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, flower with a bright yellow face.",
       "Ingredients": null,
       "EnergyHealth": null
     },

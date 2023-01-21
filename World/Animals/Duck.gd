@@ -15,7 +15,7 @@ var stunned: bool = false
 var frozen: bool = false
 var poisoned: bool = false
 var velocity := Vector2.ZERO
-var health
+var health: int = Stats.DUCK_HEALTH
 var STARTING_HEALTH: int = Stats.DUCK_HEALTH
 var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 500.0
@@ -90,7 +90,8 @@ func _get_direction_string(velocitiy) -> String:
 
 
 func _update_pathfinding() -> void:
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+	if visible:
+		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func _on_HurtBox_area_entered(area):
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3")
@@ -147,7 +148,7 @@ func hit(tool_name, var special_ability = ""):
 
 func destroy(killed_by_player):
 	if killed_by_player:
-		MapData.remove_animal(name)
+		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)

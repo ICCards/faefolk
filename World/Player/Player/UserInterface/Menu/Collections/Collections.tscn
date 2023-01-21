@@ -456,28 +456,20 @@ shader_param/flash_modifier = 0.0
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
 [sub_resource type="StreamTexture" id=189]
-load_path = "res://.import/blue flower.png-0f469c6f8f90ae08649063cb4017a37e.stex"
 
 [sub_resource type="StreamTexture" id=190]
-load_path = "res://.import/purple flower.png-525a00a21d2f26953c9cc996a05c5141.stex"
 
 [sub_resource type="StreamTexture" id=191]
-load_path = "res://.import/red flower.png-8fee67064b9bfff5f32dfa877f8ba88b.stex"
 
 [sub_resource type="StreamTexture" id=192]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=193]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=194]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=195]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=196]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=197]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
@@ -1619,14 +1611,14 @@ custom_constants/hseparation = 9
 columns = 6
 script = ExtResource( 9 )
 
-[node name="blue flower" type="TextureRect" parent="ForageCollection"]
+[node name="poppy flower" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_right = 16.0
 margin_bottom = 16.0
 texture = SubResource( 189 )
 script = ExtResource( 11 )
 
-[node name="purple flower" type="TextureRect" parent="ForageCollection"]
+[node name="lily of the nile" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_left = 25.0
 margin_right = 41.0
@@ -1634,7 +1626,7 @@ margin_bottom = 16.0
 texture = SubResource( 190 )
 script = ExtResource( 11 )
 
-[node name="red flower" type="TextureRect" parent="ForageCollection"]
+[node name="tulip" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_left = 50.0
 margin_right = 66.0
@@ -1642,7 +1634,15 @@ margin_bottom = 16.0
 texture = SubResource( 191 )
 script = ExtResource( 11 )
 
-[node name="green flower" type="TextureRect" parent="ForageCollection"]
+[node name="dandelion" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 75.0
+margin_right = 91.0
+margin_bottom = 16.0
+texture = SubResource( 192 )
+script = ExtResource( 11 )
+
+[node name="sunflower" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_left = 75.0
 margin_right = 91.0
@@ -2471,14 +2471,16 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="FishCollection/siberian whitefish" to="FishCollection/siberian whitefish" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FishCollection/tilapia" to="FishCollection/tilapia" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FishCollection/tilapia" to="FishCollection/tilapia" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/blue flower" to="ForageCollection/blue flower" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/blue flower" to="ForageCollection/blue flower" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/purple flower" to="ForageCollection/purple flower" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/purple flower" to="ForageCollection/purple flower" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/red flower" to="ForageCollection/red flower" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/red flower" to="ForageCollection/red flower" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/green flower" to="ForageCollection/green flower" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/green flower" to="ForageCollection/green flower" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/poppy flower" to="ForageCollection/poppy flower" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/poppy flower" to="ForageCollection/poppy flower" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/lily of the nile" to="ForageCollection/lily of the nile" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/lily of the nile" to="ForageCollection/lily of the nile" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/tulip" to="ForageCollection/tulip" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/tulip" to="ForageCollection/tulip" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/dandelion" to="ForageCollection/dandelion" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/dandelion" to="ForageCollection/dandelion" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/sunflower" to="ForageCollection/sunflower" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/sunflower" to="ForageCollection/sunflower" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/green grass" to="ForageCollection/green grass" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ForageCollection/green grass" to="ForageCollection/green grass" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/red grass" to="ForageCollection/red grass" method="_on_collection_item_mouse_entered"]

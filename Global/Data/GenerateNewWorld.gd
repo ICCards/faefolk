@@ -20,7 +20,7 @@ const MAX_GRASS_BUNCH_SIZE = 150
 const oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
 const treeTypes = ['oak','spruce', 'birch', 'evergreen', 'pine']
 const weedTypes = ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4"]
-const flowerTypes = ["blue flower","green flower","purple flower","red flower"]
+const flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
 const clamTypes = ["blue clam","pink clam","red clam"]
 const starfishTypes = ["starfish", "baby starfish"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
@@ -133,9 +133,7 @@ func build_world():
 	generate_flowers(plains,"plains")
 	generate_weeds(forest,"forest")
 	generate_weeds(plains,"plains")
-#	generate_beach_forage(beach)
-#	yield(get_tree().create_timer(1.0), "timeout")
-#	generate_animals()
+	generate_beach_forage(beach)
 #	yield(get_tree().create_timer(1.0), "timeout")
 	#yield(get_tree().create_timer(1.0), "timeout")
 	#get_node("/root/World/Loading").call_deferred("set_phase","Saving data")
@@ -327,8 +325,7 @@ func generate_animals():
 			var id = uuid.v4()
 			MapData.world["animal"][id] = {"l":location,"n":"deer","h":Stats.DEER_HEALTH}
 			decoration_locations.append(location)
-	locations = snow
-	var NUM_WOLF = (locations.size() / 1200)
+	var NUM_WOLF = (locations.size() / 4000)
 	print("NUM WOLF " + str(NUM_WOLF))
 	for _i in range(NUM_WOLF):
 		var index = rng.randi_range(0, locations.size() - 1)

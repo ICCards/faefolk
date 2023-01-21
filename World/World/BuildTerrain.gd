@@ -29,7 +29,6 @@ var spawn_loc
 var game_state: GameState
 
 func initialize():
-	pass
 	$BuildTerrainTimer.start()
 
 

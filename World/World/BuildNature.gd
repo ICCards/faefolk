@@ -295,5 +295,5 @@ func set_nav():
 				var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
 				if Tiles.isValidNavigationTile(loc):
 					navTiles.set_cellv(loc,0)
-		yield(get_tree().create_timer(0.25), "timeout")
+		yield(get_tree().create_timer(0.5), "timeout")
 		var value = navigation_thread.wait_to_finish()

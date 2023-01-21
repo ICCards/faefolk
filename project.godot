@@ -75,7 +75,6 @@ window=false
 rendering=false
 physics=false
 thre=false
-threads=false
 
 [importer_defaults]
 
