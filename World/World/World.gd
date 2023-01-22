@@ -134,8 +134,7 @@ func buildMap(map):
 	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 	Tiles.forest_tiles = $GeneratedTiles/DarkGreenGrassTiles
 	create_cave_entrance(map["cave_entrance_location"])
-#	yield(get_tree().create_timer(1.0), "timeout")
-#	spawn_initial_animals()
+
 
 func create_cave_entrance(_loc):
 	var loc = Util.string_to_vector2(_loc)
@@ -154,17 +153,17 @@ func spawn_initial_animals():
 	for i in range(120):
 		spawnRandomDuck()
 	yield(get_tree(), "idle_frame")
-	for i in range(55):
-		spawnRandomDeer()
-	yield(get_tree(), "idle_frame")
-	for i in range(25):
-		spawnRandomBoar()
+#	for i in range(55):
+#		spawnRandomDeer()
+#	yield(get_tree(), "idle_frame")
+#	for i in range(25):
+#		spawnRandomBoar()
 	yield(get_tree(), "idle_frame")
 	for i in range(25):
 		spawnRandomBear()
 	yield(get_tree(), "idle_frame")
-	for i in range(25):
-		spawnRandomWolf()
+#	for i in range(25):
+#		spawnRandomWolf()
 
 
 func returnValidSpawnLocation():
@@ -217,7 +216,6 @@ func spawnRandomBear():
 			var bear = Bear.instance()
 			$Enemies.call_deferred("add_child",bear)
 			bear.global_position = loc*32
-			bear.hide()
 			num_bears += 1
 			yield(get_tree(), "idle_frame")
 		

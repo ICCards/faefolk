@@ -12,6 +12,7 @@ onready var hit_box: Position2D = $Position2D
 
 
 var thread = Thread.new()
+var thread2 = Thread.new()
 
 var player = Server.player_node
 var direction: String = "down"
@@ -49,26 +50,35 @@ enum {
 }
 
 func _ready():
-	hide()
 	randomize()
-	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(5.0, 10.0)
+	call_deferred("hide")
+	animation_player.call_deferred("play", "loop")
+	_idle_timer.set_deferred("wait_time", rand_range(5.0, 10.0))
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	_end_chase_state_timer.connect("timeout", self, "end_chase_state")
-	navigation_agent.connect("velocity_computed", self, "move")
+	navigation_agent.connect("velocity_computed", self, "move_deferred")
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
-#	if self.position.distance_to(Server.player_node.position) < 300:
-#		queue_free()
 
 func _update_pathfinding_idle():
-	if visible:
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 		state = WALK
-		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func _update_pathfinding_chase():
-	navigation_agent.set_target_location(player.position)
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", player.position)
+
+func _get_path(pos):
+	call_deferred("calculate_path", pos)
+	
+func calculate_path(pos):
+	if not destroyed:
+		yield(get_tree(), "idle_frame")
+		navigation_agent.call_deferred("set_target_location",pos)
+		yield(get_tree(), "idle_frame")
+		thread.wait_to_finish()
 
 func _update_pathfinding_retreat():
 	var target = Vector2(200,200)
@@ -77,7 +87,8 @@ func _update_pathfinding_retreat():
 		target.x = -200
 	if diff.y > 0:
 		target.y = -200
-	navigation_agent.set_target_location(self.position+target)
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", self.position+target)
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
@@ -106,67 +117,65 @@ func _physics_process(delta):
 	velocity += steering
 	navigation_agent.set_velocity(velocity)
 
-func check_player_in_detection():
-	var collider = $LineOfSight.get_collider()
-	if collider:
-		print(collider.name)
-	if collider and collider.name == "PLAYER":
-		print("PLAYER DETECTED")
-		if not chasing:
-			start_chase_state()
-	else:
-		if chasing:
-			end_chase_state()
 
+func move_deferred(_velocity: Vector2) -> void:
+	call_deferred("move", _velocity)
 
 func move(_velocity: Vector2) -> void:
 	if not visible or tornado_node or stunned or attacking or destroyed or state == IDLE:
 		return
 	if frozen:
-		bear_sprite.modulate = Color("00c9ff")
 		velocity = move_and_slide(_velocity*0.75)
+		if not bear_sprite.modulate == Color("00c9ff"):
+			bear_sprite.set_deferred("modulate", Color("00c9ff"))
 	elif poisoned:
-		bear_sprite.modulate = Color("009000")
 		velocity = move_and_slide(_velocity*0.9)
+		if not bear_sprite.modulate == Color("009000"):
+			bear_sprite.set_deferred("modulate", Color("009000"))
 	else:
-		bear_sprite.modulate = Color("ffffff")
 		velocity = move_and_slide(_velocity)
+		if not bear_sprite.modulate == Color("ffffff"):
+			bear_sprite.set_deferred("modulate", Color("ffffff"))
 
 
 func play_groan_sound_effect():
-	rng.randomize()
-	sound_effects.stream = Sounds.bear_grown[rng.randi_range(0, 2)]
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	sound_effects.play()
+	sound_effects.set_deferred("stream", Sounds.bear_grown[rng.randi_range(0, 2)])
+	sound_effects.set_deferred("volume_db",  Sounds.return_adjusted_sound_db("sound", -12))
+	sound_effects.call_deferred("play")
 	yield(sound_effects, "finished")
 	playing_sound_effect = false
-	start_sound_effects()
+	call_deferred("start_sound_effects")
 
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+		sound_effects.call_deferred("play")
 
 func stop_sound_effects():
 	playing_sound_effect = false
-	sound_effects.stop()
+	sound_effects.set_deferred("playing", false)
 
 func set_texture():
 	match state:
 		CHASE:
-			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png")
-			$Body/Fangs.texture = load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png")
+			if not $Body/Bear.texture == load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png"):
+				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png"))
+				$Body/Fangs.set_deferred("texture", load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png"))
 		WALK:
-			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png")
-			$Body/Fangs.texture = null
+			if not $Body/Bear.texture == load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png"):
+				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png"))
+				$Body/Fangs.set_deferred("texture", null)
 		IDLE:
-			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
-			$Body/Fangs.texture = null
+			if not $Body/Bear.texture == load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png"):
+				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png"))
+				$Body/Fangs.set_deferred("texture", null)
 		RETREAT:
-			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png")
-
+			if not $Body/Bear.texture == load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png"):
+				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png"))
+				$Body/Fangs.set_deferred("texture", null)
+	
 
 func swing():
 	if not attacking:
@@ -174,22 +183,22 @@ func swing():
 		yield(get_tree().create_timer(0.1), "timeout")
 		if destroyed:
 			return
-		play_groan_sound_effect()
+		call_deferred("play_groan_sound_effect")
 		if (position + Vector2(0,-26)).distance_to(player.position) < 45:
-			animation_player.play("bite")
-			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/bite/body/"+ direction +".png")
+			animation_player.call_deferred("play", "bite")
+			$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/bite/body/"+ direction +".png"))
 			if player_not_inside_walls():
 				yield(get_tree().create_timer(0.3), "timeout")
 				$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
 		else:
 			if Util.chance(25):
-				animation_player.play("bite")
-				$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/bite/body/"+ direction +".png")
+				animation_player.call_deferred("play", "bite")
+				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/bite/body/"+ direction +".png"))
 				if player_not_inside_walls():
 					yield(get_tree().create_timer(0.3), "timeout")
 					$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
 			else:
-				animation_player.play("swing")
+				animation_player.call_deferred("play", "swing")
 				$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/claw/body/"+ direction +".png")
 				if player_not_inside_walls():
 					yield(get_tree().create_timer(0.3), "timeout")
@@ -197,49 +206,54 @@ func swing():
 		yield(animation_player, "animation_finished")
 		if destroyed:
 			return
-		animation_player.play("loop")
+		animation_player.call_deferred("play", "loop")
 		attacking = false
 		state = CHASE
 
+
 func player_not_inside_walls() -> bool:
 	var collider = $LineOfSight.get_collider()
-	if collider and (collider.name == "WallTiles" or collider.name == "DoorMovementCollision"):
-		return false
+	if collider:
+		if (collider.name == "WallTiles" or collider.name == "DoorMovementCollision"):
+			return false
 	return true
 
 
 func hit(tool_name):
 	if state == IDLE or state == WALK:
-		start_chase_state()
+		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
-		bear_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(8)
+		bear_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 8) 
 		return
 	elif tool_name == "ice projectile":
-		bear_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(3)
+		bear_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 3)
 	elif tool_name == "lightning spell debuff":
-		$EnemyStunnedState.start()
-	_end_chase_state_timer.stop()
-	_end_chase_state_timer.start(20)
-	$HurtBox/AnimationPlayer.play("hit")
+		$EnemyStunnedState.call_deferred("start")
+	_end_chase_state_timer.call_deferred("stop")
+	_end_chase_state_timer.call_deferred("start", 20)
+	$HurtBox/AnimationPlayer.call_deferred("play", "hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
 	if health < STARTING_HEALTH*.3:
-		start_retreat_state()
+		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
-		destroy(true)
+		call_deferred("destroy", true)
 
 func destroy(killed_by_player):
 	if killed_by_player:
 		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+		sound_effects.call_deferred("play")
 	destroyed = true
 	stop_sound_effects()
-	$Body/Fangs.texture = null
-	$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/death/" + direction  + "/body.png")
-	animation_player.play("death")
+	$Body/Fangs.set_deferred("texture", null) 
+	$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/death/" + direction  + "/body.png"))
+	animation_player.call_deferred("play", "death")
 	yield(get_tree().create_timer(0.5), "timeout")
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(1,3))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(1,3))
@@ -251,9 +265,9 @@ func _on_HurtBox_area_entered(area):
 		if area.id != "":
 			hit_projectiles.append(area.id)
 		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-			bear_sprite.modulate = Color("009000")
-			$HurtBox/AnimationPlayer.play("hit")
-			$EnemyPoisonState.start(area.tool_name)
+			bear_sprite.set_deferred("modulate", Color("009000"))
+			$HurtBox/AnimationPlayer.call_deferred("play", "hit")
+			$EnemyPoisonState.call_deferred("start", area.tool_name)
 			return
 		if area.name == "SwordSwing":
 			PlayerData.player_data["skill_experience"]["sword"] += 1
@@ -261,15 +275,15 @@ func _on_HurtBox_area_entered(area):
 		else:
 			PlayerDataHelpers.add_skill_experience(area.tool_name)
 		if area.knockback_vector != Vector2.ZERO:
-			$KnockbackParticles.emitting = true
+			$KnockbackParticles.set_deferred("emitting", true)
 			knocking_back = true
-			$Timers/KnockbackTimer.start()
+			$Timers/KnockbackTimer.call_deferred("start")
 			knockback = area.knockback_vector
 			velocity = knockback * 200
 		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-			hit(area.tool_name)
+			call_deferred("hit", area.tool_name)
 		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			$EnemyTornadoState.set_deferred("orbit_radius", rand_range(0,20))
 			tornado_node = area
 		if area.special_ability == "fire":
 			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
@@ -277,61 +291,61 @@ func _on_HurtBox_area_entered(area):
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
 		elif area.special_ability == "ice":
-			bear_sprite.modulate = Color("00c9ff")
-			$EnemyFrozenState.start(3)
+			bear_sprite.set_deferred("modulate", Color("00c9ff"))
+			$EnemyFrozenState.call_deferred("start", 3)
 		elif area.special_ability == "poison":
-			bear_sprite.modulate = Color("009000")
-			$EnemyPoisonState.start("poison arrow")
+			bear_sprite.set_deferred("modulate", Color("009000"))
+			$EnemyPoisonState.call_deferred("start", "posion arrow") 
 		yield(get_tree().create_timer(0.25), "timeout")
-		$KnockbackParticles.emitting = false
-
+		$KnockbackParticles.set_deferred("emitting", false)
 
 func _on_KnockbackTimer_timeout():
 	knocking_back = false
 
 func _on_EndChaseState_timeout():
-	if not $DetectPlayer/CollisionShape2D.disabled:
-		_end_chase_state_timer.start(5)
-		$DetectPlayer/CollisionShape2D.set_deferred("disabled", true)
-		end_chase_state()
+	if $DetectPlayer.get_overlapping_areas().size() == 0:
+		if not $DetectPlayer/CollisionShape2D.disabled:
+			_end_chase_state_timer.start(5)
+			$DetectPlayer/CollisionShape2D.set_deferred("disabled", true)
+			end_chase_state()
+		else:
+			$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
 	else:
-		$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
+		_end_chase_state_timer.start(5)
 
 func end_chase_state():
 	chasing = false
-	navigation_agent.max_speed = 100
-	stop_sound_effects()
-	_chase_timer.stop()
-	_idle_timer.start()
-	_update_pathfinding_idle()
+	navigation_agent.set_deferred("max_speed", 100)
+	call_deferred("stop_sound_effects")
+	_chase_timer.call_deferred("stop") 
+	_idle_timer.call_deferred("start")
+	call_deferred("_update_pathfinding_idle")
 
 func start_chase_state():
 	chasing = true
 	state = CHASE
-	$Body/Fangs.show()
-	navigation_agent.max_speed = 240
-	start_sound_effects()
-	_idle_timer.stop()
-	_chase_timer.start()
-	_end_chase_state_timer.start(20)
+	$Body/Fangs.set_deferred("visible", true) 
+	navigation_agent.set_deferred("max_speed", 240)
+	call_deferred("start_sound_effects")
+	_idle_timer.call_deferred("stop")
+	_chase_timer.call_deferred("start")
+	_end_chase_state_timer.call_deferred("start", 20)
 	
 func start_retreat_state():
 	state = RETREAT
-	$Body/Fangs.hide()
-	_idle_timer.stop()
-	_chase_timer.stop()
-	_retreat_timer.start()
-	stop_sound_effects()
+	$Body/Fangs.set_deferred("visible", false) 
+	_idle_timer.call_deferred("stop")
+	_chase_timer.call_deferred("stop")
+	_retreat_timer.call_deferred("start")
+	call_deferred("stop_sound_effects")
 	chasing = false
 
 func _on_VisibilityNotifier2D_screen_entered():
 	if chasing:
-		start_sound_effects()
-	show()
-	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position)) != -1:
-		queue_free()
+		call_deferred("start_sound_effects")
+	set_deferred("visible", true)
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if playing_sound_effect:
-		stop_sound_effects()
-	hide()
+		call_deferred("stop_sound_effects")
+	set_deferred("visible", false)

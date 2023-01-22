@@ -5,15 +5,13 @@ func _ready():
 	PlayerData.connect("set_night", self, "play_set_night")
 	if PlayerData.player_data:
 		if PlayerData.player_data["time_hours"] >= 18 or PlayerData.player_data["time_hours"] < 6:
-			$Clouds.emitting = false
-			$LargeClouds.emitting = false
+			$Clouds.set_deferred("emitting", false)
+			$LargeClouds.set_deferred("emitting", false)
 
-
-func _process(delta):
+func _physics_process(delta):
 	if not PlayerData.viewMapMode and Server.player_node:
 		show()
-		var forest = get_node("/root/World/GeneratedTiles/DarkGreenGrassTiles")
-		if forest.get_cellv(forest.world_to_map(Server.player_node.position)) != -1:
+		if Tiles.forest_tiles.get_cellv(Tiles.forest_tiles.world_to_map(Server.player_node.position)) != -1:
 			$FallingLeaf.emitting = true
 		else: 
 			$FallingLeaf.emitting = false
@@ -21,9 +19,9 @@ func _process(delta):
 		hide()
 
 func play_set_day():
-	$Clouds.emitting = true
-	$LargeClouds.emitting = true
+	$Clouds.set_deferred("emitting", true)
+	$LargeClouds.set_deferred("emitting", true)
 
 func play_set_night():
-	$Clouds.emitting = false
-	$LargeClouds.emitting = false
+	$Clouds.set_deferred("emitting", false)
+	$LargeClouds.set_deferred("emitting", false)

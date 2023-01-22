@@ -11,6 +11,7 @@ var harvested = false
 var object_name = "forage"
 
 func _ready():
+	call_deferred("hide")
 	if type == "clam":
 		Tiles.remove_valid_tiles(location)
 		$MovementCollision/CollisionShape2D.set_deferred("disabled", false)
@@ -22,21 +23,20 @@ func _ready():
 
 func set_forage_texture():
 	if type == "flower":
-		$Sprite.hide()
-		$AnimatedFlower.show()
-		$AnimatedFlower.play(variety)
-		$AnimatedFlower.frame = rng.randi_range(0,4)
+		$Sprite.call_deferred("hide")
+		$AnimatedFlower.call_deferred("show")
+		$AnimatedFlower.call_deferred("play", variety)
+		$AnimatedFlower.set_deferred("frame", rng.randi_range(0,4))
 	else:
-		$Sprite.show()
-		$AnimatedFlower.hide()
-		$Sprite.texture = load("res://Assets/Images/inventory_icons/Forage/"+ variety +".png")
+		$Sprite.call_deferred("show")
+		$AnimatedFlower.call_deferred("hide")
+		$Sprite.set_deferred("texture", load("res://Assets/Images/inventory_icons/Forage/"+ variety +".png"))
 
 
 func _on_VisibilityNotifier2D_screen_entered():
-	show()
-	$AnimatedFlower.playing = true
-
+	call_deferred("show")
+	$AnimatedFlower.set_deferred("playing", true)
 
 func _on_VisibilityNotifier2D_screen_exited():
-	hide()
-	$AnimatedFlower.playing = false
+	call_deferred("hide")
+	$AnimatedFlower.set_deferred("playing", false)

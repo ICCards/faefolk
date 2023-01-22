@@ -77,17 +77,20 @@ func isValidNavigationTile(loc) -> bool:
 func remove_valid_tiles(location,var dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
+			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), -1 )
+			#valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 
 func add_valid_tiles(location, var dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cellv(location + Vector2(x, -y), 0)
+			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), 0)
+			#valid_tiles.set_cellv(location + Vector2(x, -y), 0)
 			
 func add_navigation_tiles(location, var dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cellv(location + Vector2(x, -y), 1)
+			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), 1)
+			#valid_tiles.set_cellv(location + Vector2(x, -y), 1)
 
 
 func isValidAutoTile(_pos, _map):

@@ -45,6 +45,7 @@ enum {
 	RETREAT
 }
 var rng = RandomNumberGenerator.new()
+var thread = Thread.new()
 
 func _ready():
 	randomize()
@@ -54,17 +55,28 @@ func _ready():
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
-	navigation_agent.connect("velocity_computed", self, "move") 
+	navigation_agent.connect("velocity_computed", self, "move_deferred") 
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
-func _update_pathfinding_chase():
-	navigation_agent.set_target_location(player.global_position)
-	
 func _update_pathfinding_idle():
-	if visible:
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 		state = WALK
-		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+
+func _update_pathfinding_chase():
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", player.position)
+
+func _get_path(pos):
+	call_deferred("calculate_path", pos)
 	
+func calculate_path(pos):
+	if not destroyed:
+		yield(get_tree(), "idle_frame")
+		navigation_agent.call_deferred("set_target_location",pos)
+		yield(get_tree(), "idle_frame")
+		thread.wait_to_finish()
+
 func _update_pathfinding_retreat():
 	var target = Vector2(200,200)
 	var diff = player.position - self.position
@@ -72,33 +84,41 @@ func _update_pathfinding_retreat():
 		target.x = -200
 	if diff.y > 0:
 		target.y = -200
-	navigation_agent.set_target_location(self.position+target)
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", self.position+target)
 	
 func set_sprite_texture():
 	match state:
 		IDLE:
-			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png")
+			if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png"):
+				deer_sprite.texture = load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png")
 		WALK:
-			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png")
-		CHASE:
-			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
-		RETREAT:
-			deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
+			if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png"):
+				deer_sprite.texture = load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png")
+		_:
+			if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png"):
+				deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
 	
+func move_deferred(_velocity: Vector2) -> void:
+	call_deferred("move", _velocity)
+
 func move(_velocity: Vector2) -> void:
 	if not visible or tornado_node or stunned or attacking or destroyed or state == IDLE:
 		return
 	if not animation_player.is_playing():
 		animation_player.play()
 	if frozen:
-		deer_sprite.modulate = Color("00c9ff")
 		velocity = move_and_slide(_velocity*0.75)
+		if not deer_sprite.modulate == Color("00c9ff"):
+			deer_sprite.set_deferred("modulate", Color("00c9ff"))
 	elif poisoned:
-		deer_sprite.modulate = Color("009000")
 		velocity = move_and_slide(_velocity*0.9)
+		if not deer_sprite.modulate == Color("009000"):
+			deer_sprite.set_deferred("modulate", Color("009000"))
 	else:
-		deer_sprite.modulate = Color("ffffff")
 		velocity = move_and_slide(_velocity)
+		if not deer_sprite.modulate == Color("ffffff"):
+			deer_sprite.set_deferred("modulate", Color("ffffff"))
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
@@ -173,6 +193,9 @@ func destroy(killed_by_player):
 	if killed_by_player:
 		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["deer"] += 1
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+		sound_effects.call_deferred("play")
 	stop_sound_effects()
 	destroyed = true
 	deer_sprite.texture = load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png")
@@ -224,29 +247,29 @@ func _on_HurtBox_area_entered(area):
 
 func start_retreat_state():
 	state = RETREAT
-	_idle_timer.stop()
-	_chase_timer.stop()
-	_retreat_timer.start()
+	_idle_timer.call_deferred("stop")
+	_chase_timer.call_deferred("stop")
+	_retreat_timer.call_deferred("start")
 	stop_sound_effects()
 	chasing = false
-
+	
 func start_chase_state():
-	start_sound_effects()
-	navigation_agent.max_speed = 200
-	_idle_timer.stop()
-	_chase_timer.start()
-	_end_chase_state_timer.start()
 	chasing = true
 	state = CHASE
+	navigation_agent.set_deferred("max_speed", 200)
+	call_deferred("start_sound_effects")
+	_idle_timer.call_deferred("stop")
+	_chase_timer.call_deferred("start")
+	_end_chase_state_timer.call_deferred("start", 20)
 
 func end_chase_state():
-	stop_sound_effects()
-	navigation_agent.max_speed = 100
-	_chase_timer.stop()
-	_idle_timer.start()
 	chasing = false
-	state = IDLE
-	_update_pathfinding_idle()
+	navigation_agent.set_deferred("max_speed", 100)
+	call_deferred("stop_sound_effects")
+	_chase_timer.call_deferred("stop") 
+	_idle_timer.call_deferred("start")
+	call_deferred("_update_pathfinding_idle")
+	state = WALK
 
 func _on_EndChaseState_timeout():
 	end_chase_state()
@@ -256,19 +279,19 @@ func _on_KnockbackTimer_timeout():
 
 func play_groan_sound_effect():
 	rng.randomize()
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	sound_effects.play()
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3"))
+	sound_effects.set_deferred( "volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+	sound_effects.call_deferred("play")
 	yield(sound_effects, "finished")
 	playing_sound_effect = false
-	start_sound_effects()
+	call_deferred("start_sound_effects")
 
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+		sound_effects.call_deferred("play")
 
 func stop_sound_effects():
 	playing_sound_effect = false
@@ -276,12 +299,11 @@ func stop_sound_effects():
 
 func _on_VisibilityNotifier2D_screen_entered():
 	if chasing:
-		start_sound_effects()
-	show()
-	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position)) != -1:
-		queue_free()
+		call_deferred("start_sound_effects")
+	set_deferred("visible", true)
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if playing_sound_effect:
-		stop_sound_effects()
-	hide()
+		call_deferred("stop_sound_effects")
+	set_deferred("visible", false)
+

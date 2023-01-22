@@ -11342,7 +11342,7 @@ script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.75, 0.75 )
+zoom = Vector2( 0.8, 0.8 )
 smoothing_enabled = true
 smoothing_speed = 40.0
 script = ExtResource( 81 )

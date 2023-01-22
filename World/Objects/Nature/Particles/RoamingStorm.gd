@@ -11,18 +11,19 @@ var MAX_DIST = 28000
 
 func _ready():
 	randomize()
-	position = Vector2(rand_range(MIN_DIST, MAX_DIST), rand_range(MIN_DIST, MAX_DIST))
-	initiate_storm()
+	set_deferred("position", Vector2(rand_range(MIN_DIST, MAX_DIST), rand_range(MIN_DIST, MAX_DIST)))
+	call_deferred("initiate_storm")
 
 func initiate_storm():
 	randomize()
 	random_storm_position = Vector2(rand_range(MIN_DIST, MAX_DIST), rand_range(MIN_DIST, MAX_DIST))
-	$IdleTimer.start(rand_range(60, 180))
+	$IdleTimer.call_deferred("start", rand_range(60, 180))
 
 func _physics_process(delta):
 	if Server.isLoaded and not PlayerData.viewMapMode:
-		visible = true
+		show()
 		position = position.move_toward(random_storm_position, delta * 10)
+		#position = position.move_toward(random_storm_position, delta * 10)
 		var snow = get_node("/root/World/GeneratedTiles/SnowTiles")
 		if snow.get_cellv(snow.world_to_map(position)) == -1:
 			is_snow_storm = false
@@ -35,8 +36,7 @@ func _physics_process(delta):
 			$RainStorm/Rain.emitting = false
 			$RainStorm/RainOnFloor.emitting = false
 	else:
-		visible = false
-
+		hide()
 
 func _on_IdleTimer_timeout():
-	initiate_storm()
+	call_deferred("initiate_storm")

@@ -30,41 +30,42 @@ func _input(event):
 	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/World"):
 		if event.is_action_pressed("open_map"):
 			Server.player_node.actions.destroy_placable_object()
-			Server.world.get_node("WorldAmbience").hide()
-			show()
-			initialize()
+			Server.world.get_node("WorldAmbience").call_deferred("hide")
+			call_deferred("show")
+			call_deferred("initialize")
 		if event.is_action_released("open_map"):
-			Server.world.get_node("WorldAmbience").show()
-			hide()
-			set_inactive()
+			Server.world.get_node("WorldAmbience").call_deferred("show")
+			call_deferred("hide")
+			call_deferred("set_inactive")
 
-func toggle_map():
-	PlayerData.viewMapMode = !PlayerData.viewMapMode
-	$WorldMap.visible = !$WorldMap.visible
-	if $WorldMap.visible:
-		$WorldMap.initialize()
-	else:
-		$WorldMap.set_inactive()
+
+#func toggle_map():
+#	PlayerData.viewMapMode = !PlayerData.viewMapMode
+#	$WorldMap.visible = !$WorldMap.visible
+#	if $WorldMap.visible:
+#		$WorldMap.initialize()
+#	else:
+#		$WorldMap.set_inactive()
 
 
 func initialize():
 	PlayerData.viewMapMode = true
-	$Camera2D.current = true
-	Server.player_node.user_interface.get_node("Hotbar").hide()
-	Server.player_node.user_interface.get_node("CombatHotbar").hide()
+	$Camera2D.set_deferred("current", true)
+	Server.player_node.user_interface.get_node("Hotbar").call_deferred("hide") 
+	Server.player_node.user_interface.get_node("CombatHotbar").call_deferred("hide")
 	if not is_first_time_opened:
 		is_first_time_opened = true
-		$Camera2D.position = Vector2(800, 800)
-		$Camera2D.zoom = Vector2(1.2, 1.2)
+		$Camera2D.set_deferred("position", Vector2(800, 800))
+		$Camera2D.set_deferred("zoom",  Vector2(1.2, 1.2))
 	
 func set_inactive():
 	PlayerData.viewMapMode = false
-	$Camera2D.current = false
-	Server.player_node.get_node("Camera2D").current = true
+	$Camera2D.set_deferred("current", false)
+	Server.player_node.get_node("Camera2D").set_deferred("current", true)
 	if PlayerData.normal_hotbar_mode:
-		Server.player_node.user_interface.get_node("Hotbar").show()
+		Server.player_node.user_interface.get_node("Hotbar").call_deferred("show") 
 	else:
-		Server.player_node.user_interface.get_node("CombatHotbar").show()
+		Server.player_node.user_interface.get_node("CombatHotbar").call_deferred("show") 
 
 
 func draw_grid():
@@ -115,7 +116,7 @@ func set_direction(dir):
 			playerIcon.rotation_degrees = 90
 		"UP":
 			playerIcon.rotation_degrees = -90
-		
+
 func buildMap():
 	var map = MapData.world
 	for loc_string in map["dirt"]:

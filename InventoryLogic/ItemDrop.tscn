@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
 [ext_resource path="res://InventoryLogic/ItemDrop.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sound/Sound effects/UI/pick up item.mp3" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=9]
 radius = 11.3333
@@ -345,3 +346,4 @@ root_node = NodePath("../CollisionShape2D")
 anims/RESET = SubResource( 3 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

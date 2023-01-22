@@ -23,7 +23,7 @@ particles_anim_loop = false
 shader = SubResource( 18 )
 
 [sub_resource type="CircleShape2D" id=22]
-radius = 31.0
+radius = 15.5
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 37.0
@@ -673,7 +673,6 @@ hframes = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -4 )
 rotation = 1.5708
-scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 22 )
 
 [node name="Position2D" type="Position2D" parent="."]
@@ -733,9 +732,8 @@ anims/loop = SubResource( 8 )
 anims/swing = SubResource( 7 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( 0, -8 )
-scale = Vector2( 25.65, 23.25 )
+position = Vector2( -4, -32.5 )
+scale = Vector2( 6.5, 6.15 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
@@ -766,7 +764,7 @@ autostart = true
 wait_time = 0.5
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 0.5
+wait_time = 0.2
 
 [node name="EndChaseState" type="Timer" parent="Timers"]
 wait_time = 20.0

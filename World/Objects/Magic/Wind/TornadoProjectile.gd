@@ -22,45 +22,44 @@ func _ready():
 	sound_effects.play()
 	$Hitbox.tool_name = "tornado spell"
 	$Hitbox.knockback_vector = velocity / 150
-	$AnimatedSprite.play("anim")
-	set_particles()
+	$AnimatedSprite.call_deferred("play", "anim")
+	call_deferred("set_particles")
 	yield($AnimatedSprite, "animation_finished")
-	fade_out_sound()
-	stop_trail_particles()
-	$AnimatedSprite.hide()
+	call_deferred("fade_out_sound")
+	call_deferred("stop_trail_particles")
+	$AnimatedSprite.call_deferred("hide")
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 
 func destroy():
 	if not destroyed:
 		destroyed = true
-		$AnimatedSprite.stop()
+		$AnimatedSprite.call_deferred("stop")
 		queue_free()
 
 func set_particles():
-	$TornadoParticles/P1.emitting = true
-	$TornadoParticles/P2.emitting = true
-	$TornadoParticles/P3.emitting = true
+	$TornadoParticles/P1.set_deferred("emitting", true)
+	$TornadoParticles/P2.set_deferred("emitting", true)
+	$TornadoParticles/P3.set_deferred("emitting", true)
 	$TrailParticles.position += Vector2(0,32)
 	$TrailParticles/P1.direction = -velocity
 	$TrailParticles/P2.direction = -velocity 
 	$TrailParticles/P3.direction = -velocity 
-	$TrailParticles/P1.emitting = true
-	$TrailParticles/P2.emitting = true
-	$TrailParticles/P3.emitting = true
+	$TrailParticles/P1.set_deferred("emitting", true)
+	$TrailParticles/P2.set_deferred("emitting", true)
+	$TrailParticles/P3.set_deferred("emitting", true)
 	
 func stop_trail_particles():
-	$TornadoParticles/P1.emitting = false
-	$TornadoParticles/P2.emitting = false
-	$TornadoParticles/P3.emitting = false
-	$TrailParticles/P1.emitting = false
-	$TrailParticles/P2.emitting = false
-	$TrailParticles/P3.emitting = false
+	$TornadoParticles/P1.set_deferred("emitting", false)
+	$TornadoParticles/P2.set_deferred("emitting", false)
+	$TornadoParticles/P3.set_deferred("emitting", false)
+	$TrailParticles/P1.set_deferred("emitting", false)
+	$TrailParticles/P2.set_deferred("emitting", false)
+	$TrailParticles/P3.set_deferred("emitting", false)
 	
 func fade_out_sound():
 	$Tween.interpolate_property(sound_effects, "volume_db", Sounds.return_adjusted_sound_db("sound", -20), -80, 3.0, 1, Tween.EASE_IN, 0)
 	$Tween.start()
-
 
 func _on_Timer_timeout():
 	destroy()

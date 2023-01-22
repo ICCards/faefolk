@@ -42,17 +42,17 @@ func _ready():
 
 func destroy():
 	destroyed = true
-	$Sprite.hide()
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Potion/glass break.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
-	sound_effects.play()
+	$Sprite.call_deferred("hide")
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Magic/Potion/glass break.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
+	sound_effects.call_deferred("play")
 	if potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
-		$AnimationPlayer.play("destruction potion")
+		$AnimationPlayer.call_deferred("play", "destruction potion")
 	elif potion_name == "poison potion I" or potion_name == "poison potion II" or potion_name == "poison potion III":
-		$AnimationPlayer.play("poison potion")
+		$AnimationPlayer.call_deferred("play", "poison potion")
 	elif potion_name == "speed potion I" or potion_name == "speed potion II" or potion_name == "speed potion III":
-		$AnimationPlayer.play("speed potion")
+		$AnimationPlayer.call_deferred("play", "speed potion")
 	else:
-		$AnimationPlayer.play("health potion")
+		$AnimationPlayer.call_deferred("play", "health potion")
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()

@@ -12,25 +12,16 @@ var back_heath
 var loc
 var is_front_visible = true
 var is_back_visible = true
+var destroyed: bool = false
 
 var type
 
 func _ready():
-	PlayerData.connect("season_changed", self,  "set_grass_texture")
-	hide()
 	rng.randomize()
-	front_health = rng.randi_range(1,3)
-	back_heath = rng.randi_range(1,3)
-	if biome == "snow":
-		$FrontBreak.self_modulate = Color("7dd7b4")
-		$BackBreak.self_modulate = Color("7dd7b4")
-		grass = Images.green_grass_winter
-	else:
-		$FrontBreak.self_modulate = Color("99cc25")
-		$BackBreak.self_modulate = Color("99cc25")
-		grass = Images.green_grass
-	$Front.texture = grass[0]
-	$Back.texture = grass[1]
+	PlayerData.connect("season_changed", self,  "set_grass_texture")
+	call_deferred("hide")
+	set_deferred("front_health", rng.randi_range(1,3))
+	set_deferred("back_heath", rng.randi_range(1,3))
 	set_grass_texture()
 	
 func set_grass_texture():
@@ -38,130 +29,126 @@ func set_grass_texture():
 	if szn == "spring":
 		type = "green grass"
 		if biome == "snow":
-			$FrontBreak.self_modulate = Color("7dd7b4")
-			$BackBreak.self_modulate = Color("7dd7b4")
+			$FrontBreak.set_deferred("self_modulate", Color("7dd7b4"))
+			$BackBreak.set_deferred("self_modulate", Color("7dd7b4"))
 			grass = Images.green_grass_winter
 		else:
-			$FrontBreak.self_modulate = Color("99cc25")
-			$BackBreak.self_modulate = Color("99cc25")
+			$FrontBreak.set_deferred("self_modulate", Color("99cc25"))
+			$BackBreak.set_deferred("self_modulate", Color("99cc25"))
 			grass = Images.green_grass
 		$Front.texture = grass[0]
 		$Back.texture = grass[1]
 	elif szn == "summer":
 		type = "yellow grass"
 		if biome == "snow":
-			$FrontBreak.self_modulate = Color("f0e2c7")
-			$BackBreak.self_modulate = Color("f0e2c7")
+			$FrontBreak.set_deferred("self_modulate", Color("f0e2c7"))
+			$BackBreak.set_deferred("self_modulate", Color("f0e2c7"))
 			grass = Images.yellow_grass_winter
 		else:
-			$FrontBreak.self_modulate = Color("ffec27")
-			$BackBreak.self_modulate = Color("ffec27")
+			$FrontBreak.set_deferred("self_modulate", Color("ffec27"))
+			$BackBreak.set_deferred("self_modulate", Color("ffec27"))
 			grass = Images.yellow_grass
-		$Front.texture = grass[0]
-		$Back.texture = grass[1]
+		$Front.set_deferred("texture", grass[0])
+		$Back.set_deferred("texture", grass[1])
 	elif szn == "fall":
 		type = "red grass"
 		if biome == "snow":
-			$FrontBreak.self_modulate = Color("beb6b5")
-			$BackBreak.self_modulate = Color("beb6b5")
+			$FrontBreak.set_deferred("self_modulate", Color("beb6b5"))
+			$BackBreak.set_deferred("self_modulate", Color("beb6b5"))
 			grass = Images.red_grass_winter
 		else:
-			$FrontBreak.self_modulate = Color("e27432")
-			$BackBreak.self_modulate = Color("e27432")
+			$FrontBreak.set_deferred("self_modulate", Color("e27432"))
+			$BackBreak.set_deferred("self_modulate", Color("e27432"))
 			grass = Images.red_grass
-		$Front.texture = grass[0]
-		$Back.texture = grass[1]
+		$Front.set_deferred("texture", grass[0])
+		$Back.set_deferred("texture", grass[1])
 	elif szn == "winter":
 		type = "dark green grass"
 		if biome == "snow":
-			$FrontBreak.self_modulate = Color("a5ffbf")
-			$BackBreak.self_modulate = Color("a5ffbf")
+			$FrontBreak.set_deferred("self_modulate", Color("a5ffbf"))
+			$BackBreak.set_deferred("self_modulate", Color("a5ffbf"))
 			grass = Images.dark_green_grass_winter
 		else:
-			$FrontBreak.self_modulate = Color("4b6d00")
-			$BackBreak.self_modulate = Color("4b6d00")
+			$FrontBreak.set_deferred("self_modulate", Color("4b6d00"))
+			$BackBreak.set_deferred("self_modulate", Color("4b6d00"))
 			grass = Images.dark_green_grass
-		$Front.texture = grass[0]
-		$Back.texture = grass[1]
-
+		$Front.set_deferred("texture", grass[0])
+		$Back.set_deferred("texture", grass[1])
 
 
 func play_hit_effect():
 	if !bodyEnteredFlag and Server.isLoaded and visible:
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -26)
-		$SoundEffects.play()
-		$AnimationPlayer.play("animate front")
+		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -26))
+		$SoundEffects.call_deferred("play")
+		$AnimationPlayer.call_deferred("play", "animate front")
 		
 func play_back_effect():
 	if !bodyEnteredFlag2 and Server.isLoaded and visible:
-#		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
-#		$SoundEffects.play()
-		$AnimationPlayer2.play("animate back")
+		$AnimationPlayer2.call_deferred("play", "animate back")
 
 func _on_Area2D_body_entered(_body):
-	play_hit_effect()
-	bodyEnteredFlag = true
+	$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -26))
+	$SoundEffects.call_deferred("play")
+	$AnimationPlayer.call_deferred("play", "animate front")
 
 func _on_Area2D_body_exited(_body):
 	bodyEnteredFlag = false
 
-
-
 func _on_BackArea2D_body_entered(body):
-	play_back_effect()
-	bodyEnteredFlag2 = true
+	$AnimationPlayer2.call_deferred("play", "animate back")
 
 func _on_BackArea2D_body_exited(body):
 	bodyEnteredFlag2 = false
 
-
 func _on_Area2D_area_entered(area):
 	front_health -= 1
 	if front_health == 0:
-		$AnimationPlayer.play("animate front")
+		$AnimationPlayer.call_deferred("play", "animate front")
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 		if Util.chance(50):
 			PlayerData.player_data["collections"]["forage"][type] += 1
 			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-16),1)
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
-		$SoundEffects.play()
-		$AnimationPlayer.play("front break")
+		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
+		$SoundEffects.call_deferred("play")
+		$AnimationPlayer.call_deferred("play", "front break")
 		yield($AnimationPlayer, "animation_finished")
 		is_front_visible = false
-		destroy()
+		call_deferred("destroy")
 	else:
 		yield(get_tree().create_timer(rand_range(0.0, 0.5)), "timeout")
-		$AnimationPlayer.play("animate front")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
-		$SoundEffects.play()
+		$AnimationPlayer.call_deferred("play", "animate front")
+		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
+		$SoundEffects.call_deferred("play")
 
 func _on_BackArea2D_area_entered(area):
 	back_heath -= 1
 	if back_heath == 0:
-		$AnimationPlayer.play("animate front")
+		$AnimationPlayer2.call_deferred("play", "animate back")
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 		if Util.chance(50):
 			PlayerData.player_data["collections"]["forage"][type] += 1
 			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-8), 1)
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
-		$SoundEffects.play()
-		$AnimationPlayer2.play("back break")
+		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
+		$SoundEffects.call_deferred("play")
+		$AnimationPlayer2.call_deferred("play", "back break")
 		yield($AnimationPlayer2, "animation_finished")
 		is_back_visible = false
-		destroy()
+		call_deferred("destroy")
 	else:
 		yield(get_tree().create_timer(rand_range(0.1, 0.5)), "timeout")
-		$AnimationPlayer2.play("animate back")
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
-		$SoundEffects.play()
+		$AnimationPlayer2.call_deferred("play", "animate back")
+		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
+		$SoundEffects.call_deferred("play")
 
 func destroy():
-	if not is_back_visible and not is_front_visible:
+	if not is_back_visible and not is_front_visible and not destroyed:
+		destroyed = true
 		MapData.world["tall_grass"].erase(name)
 		Tiles.add_valid_tiles(loc)
 		queue_free()
 
 func _on_VisibilityNotifier2D_screen_entered():
-	show()
+	call_deferred("show")
+
 func _on_VisibilityNotifier2D_screen_exited():
-	hide()
+	call_deferred("hide")

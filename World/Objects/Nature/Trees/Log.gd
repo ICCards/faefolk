@@ -14,20 +14,20 @@ var destroyed: bool = false
 
 func _ready():
 	randomize()
-	hide()
+	call_deferred("hide")
 	setTreeBranchType()
 
 func setTreeBranchType():
 	variety = int(variety)
 	if variety <= 2:
-		tree_variety = 'evergreen'
+		set_deferred("tree_variety", "evergreen")
 	elif variety <= 5:
-		tree_variety = 'spruce'
+		set_deferred("tree_variety", "spruce")
 	elif variety <= 8:
-		tree_variety = 'oak'
+		set_deferred("tree_variety", "oak")
 	else:
-		tree_variety = 'birch'
-	log_sprite.texture = Images.tree_branch_objects[variety]
+		set_deferred("tree_variety", "birch")
+	log_sprite.set_deferred("texture", Images.tree_branch_objects[variety]) 
 
 func hit(tool_name, var special_ability = ""):
 	if not destroyed:
@@ -35,10 +35,10 @@ func hit(tool_name, var special_ability = ""):
 		if MapData.world["log"].has(name):
 			MapData.world["log"].erase(name)
 		Tiles.add_valid_tiles(location)
-		sound_effects.stream = Sounds.stump_break
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects.play()
-		animation_player.play("break")
+		sound_effects.set_deferred("stream", Sounds.stump_break) 
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12)) 
+		sound_effects.call_deferred("play")
+		animation_player.call_deferred("play", "break")
 		InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position+Vector2(-16, 16))
 		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
@@ -50,11 +50,12 @@ func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		hit(_area.tool_name)
+		call_deferred("hit", _area.tool_name)
 	if _area.special_ability == "fire buff":
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-16,16)))
 
 func _on_VisibilityNotifier2D_screen_entered():
-	show()
+	call_deferred("show")
+
 func _on_VisibilityNotifier2D_screen_exited():
-	hide()
+	call_deferred("hide")

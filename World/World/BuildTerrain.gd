@@ -31,7 +31,6 @@ var game_state: GameState
 func initialize():
 	$BuildTerrainTimer.start()
 
-
 func _on_BuildTerrain_timeout():
 	build_terrain()
 
@@ -77,10 +76,10 @@ func spawn_chunk(chunk_name):
 		if sand.get_cellv(loc) == -1:
 			wetSand.set_cellv(loc, 0)
 			waves.set_cellv(loc, 5)
-			shallow_ocean.set_cellv(loc,0)
-			top_ocean.set_cellv(loc,0)
-			deep_ocean.set_cellv(loc,0)
-			validTiles.set_cellv(loc,-1)
+			shallow_ocean.set_cellv(loc, 0)
+			top_ocean.set_cellv(loc, 0)
+			deep_ocean.set_cellv(loc, 0)
+			validTiles.set_cellv(loc, -1)
 	yield(get_tree(), "idle_frame")
 	for loc_string in _chunk["beach"]:
 		var loc = Util.string_to_vector2(loc_string)
@@ -103,18 +102,19 @@ func spawn_chunk(chunk_name):
 				top_ocean.set_cellv(loc+Vector2(0,-i),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
 				waves.set_cellv(loc+Vector2(0,-i), -1)
-		for i in range(4):
-			i += 4
-			if sand.get_cellv(loc+Vector2(i,0)) != -1 or sand.get_cellv(loc+Vector2(-i,0)) != -1 or \
-			sand.get_cellv(loc+Vector2(0,i)) != -1 or sand.get_cellv(loc+Vector2(0,-i)) != -1 or \
-			sand.get_cellv(loc+Vector2(i,i)) != -1 or sand.get_cellv(loc+Vector2(-i,i)) != -1 or \
-			sand.get_cellv(loc+Vector2(i,-i)) != -1 or sand.get_cellv(loc+Vector2(-i,-i)) != -1:
-				deep_ocean.set_cellv(loc+Vector2(i,0),-1)
-				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
-				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
-				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
+#		for i in range(4):
+#			i += 4
+#			if sand.get_cellv(loc+Vector2(i,0)) != -1 or sand.get_cellv(loc+Vector2(-i,0)) != -1 or \
+#			sand.get_cellv(loc+Vector2(0,i)) != -1 or sand.get_cellv(loc+Vector2(0,-i)) != -1 or \
+#			sand.get_cellv(loc+Vector2(i,i)) != -1 or sand.get_cellv(loc+Vector2(-i,i)) != -1 or \
+#			sand.get_cellv(loc+Vector2(i,-i)) != -1 or sand.get_cellv(loc+Vector2(-i,-i)) != -1:
+#				deep_ocean.set_cellv(loc+Vector2(i,0),-1)
+#				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
+#				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
+#				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
 	yield(get_tree(), "idle_frame")
-	update_bitmasks(chunk_name)
+	call_deferred("update_bitmasks", chunk_name)
+	#update_bitmasks(chunk_name)
 	yield(get_tree(), "idle_frame")
 
 func update_bitmasks(chunk_name):
@@ -198,19 +198,27 @@ func update_bitmasks(chunk_name):
 		"L":
 			start_y = 813
 			end_y = 1000
-	plains.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	snow.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	forest.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	dirt.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	wetSand.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	waves.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	deep_ocean.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
 	yield(get_tree(), "idle_frame")
-	snow.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	forest.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	dirt.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	wetSand.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	waves.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	deep_ocean.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
+#	yield(get_tree(), "idle_frame")
+#	snow.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+#	yield(get_tree(), "idle_frame")
+#	forest.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+#	yield(get_tree(), "idle_frame")
+#	dirt.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+#	yield(get_tree(), "idle_frame")
+#	wetSand.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+#	yield(get_tree(), "idle_frame")
+#	waves.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+#	yield(get_tree(), "idle_frame")
+#	deep_ocean.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
+#	yield(get_tree(), "idle_frame")
 	print("BUILT TERRAIN " + str(chunk_name))
 	terrain_thread.wait_to_finish()

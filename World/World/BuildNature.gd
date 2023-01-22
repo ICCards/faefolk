@@ -52,7 +52,6 @@ func spawn_forage():
 					forageItem.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16,16)
 					ForageObjects.call_deferred("add_child", forageItem)
 	var value = forage_thread.wait_to_finish()
-	
 
 
 func spawn_placables():
@@ -107,7 +106,7 @@ func _on_SpawnNature_timeout():
 	if not Server.world.is_changing_scene:
 		current_chunks = get_parent().current_chunks
 		spawn_nature()
-	
+
 func spawn_nature():
 	if not remove_objects_thread.is_active():
 		remove_objects_thread.start(self, "_whoAmI", null)
@@ -130,11 +129,13 @@ func remove_nature():
 		if Server.world.is_changing_scene:
 			var value = remove_objects_thread.wait_to_finish()
 			return
-		if is_instance_valid(node):
+		if is_instance_valid(node) and not node.destroyed:
 			var player_pos = Server.player_node.position
-			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_SPAWN_OBJECT*32:
-				NatureObjects.remove_child(node)
-				yield(get_tree().create_timer(0.01), "timeout")
+			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
+				#NatureObjects.call_deferred("remove_child", node)
+				node.queue_free()
+				yield(get_tree().create_timer(0.1), "timeout")
+	yield(get_tree(), "idle_frame")
 	var value = remove_objects_thread.wait_to_finish()
 
 
@@ -143,11 +144,13 @@ func remove_grass():
 		if Server.world.is_changing_scene:
 			var value = remove_grass_thread.wait_to_finish()
 			return
-		if is_instance_valid(node):
+		if is_instance_valid(node) and not node.destroyed:
 			var player_pos = Server.player_node.position
-			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_SPAWN_OBJECT*32:
-				GrassObjects.remove_child(node)
-				yield(get_tree().create_timer(0.01), "timeout")
+			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
+				#GrassObjects.call_deferred("remove_child", node)
+				node.queue_free()
+				yield(get_tree().create_timer(0.1), "timeout")
+	yield(get_tree(), "idle_frame")
 	var value = remove_grass_thread.wait_to_finish()
 
 func spawn_trees():
@@ -250,8 +253,6 @@ func spawn_ores():
 	var value = ores_thread.wait_to_finish()
 
 
-
-var count = 0
 func spawn_grass():
 	for chunk in current_chunks:
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
@@ -273,27 +274,24 @@ func spawn_grass():
 						object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16, 32)
 						GrassObjects.call_deferred("add_child",object,true)
 					else:
-						count += 1
 						var object = TallGrass.instance()
 						object.loc = loc
 						object.biome = map["tall_grass"][id]["b"]
 						object.name = id
 						object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(8, 32)
 						GrassObjects.call_deferred("add_child",object,true)
-						if count == 20:
-							yield(get_tree().create_timer(0.01), "timeout")
-							count = 0
 	var value = grass_thread.wait_to_finish()
 
 
 func set_nav():
 	if Server.player_node:
 		var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
-		navTiles.clear()
+		navTiles.call_deferred("clear")
 		for y in range(40):
 			for x in range(60):
 				var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
 				if Tiles.isValidNavigationTile(loc):
-					navTiles.set_cellv(loc,0)
+					navTiles.call_deferred("set_cellv",loc,0)
+					#navTiles.set_cellv(loc,0)
 		yield(get_tree().create_timer(0.5), "timeout")
 		var value = navigation_thread.wait_to_finish()
