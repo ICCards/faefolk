@@ -173,7 +173,7 @@ func ricochet_arrow_shot():
 	arrow.is_ricochet_shot = true
 	arrow.position = $CastDirection/Position2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").add_child(arrow)
+	get_node("../../../").call_deferred("add_child",arrow)
 
 
 func enchanted_arrow_shot():
@@ -188,7 +188,7 @@ func enchanted_arrow_shot():
 		arrow.is_poison_arrow = true
 	arrow.position = $CastDirection/Position2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").add_child(arrow)
+	get_node("../../../").call_deferred("add_child",arrow)
 
 func single_arrow_shot():
 	PlayerData.remove_material("arrow", 1)
@@ -199,7 +199,7 @@ func single_arrow_shot():
 		arrow.is_fire_arrow = false
 	arrow.position = $CastDirection/Position2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").add_child(arrow)
+	get_node("../../../").call_deferred("add_child", arrow)
 
 
 func multi_arrow_shot():
@@ -217,7 +217,7 @@ func multi_arrow_shot():
 			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()+Vector2(0.25,0.25)).normalized()
 		elif i == 2:
 			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()-Vector2(0.25,0.25)).normalized()
-		get_node("../../../").add_child(arrow)
+		get_node("../../../").call_deferred("add_child", arrow)
 
 
 func wait_for_cast_release(staff_name):
@@ -605,35 +605,35 @@ func play_lingering_tornado():
 	spell.particles_transform = $CastDirection.transform
 	spell.target = get_global_mouse_position() + Vector2(0,32)
 	spell.position = $CastDirection/Position2D.global_position
-	get_node("../../../Projectiles").add_child(spell)
+	get_node("../../../Projectiles").call_deferred("add_child", spell)
 
 func play_wind_projectile():
 	var spell = TornadoProjectile.instance()
 	spell.position = $CastDirection/Position2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
-	get_node("../../../").add_child(spell)
+	get_node("../../../").call_deferred("add_child", spell)
 
 func play_dash():
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-	sound_effects.play()
-	$DustParticles.emitting = true
-	$DustBurst.rotation = (get_parent().input_vector*-1).angle()
-	$DustBurst.restart()
-	$DustBurst.emitting = true
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -16))
+	sound_effects.call_deferred("play")
+	$DustParticles.set_deferred("emitting", true)
+	$DustBurst.set_deferred("rotation", (get_parent().input_vector*-1).angle())
+	$DustBurst.call_deferred("restart")
+	$DustBurst.set_deferred("emitting", true)
 	set_player_whitened()
 	dashing = true
-	$GhostTimer.start()
+	$GhostTimer.call_deferred("start")
 	yield(get_tree().create_timer(0.5), "timeout")
-	$DustParticles.emitting = false
-	$DustBurst.emitting = false
+	$DustParticles.set_deferred("emitting", false)
+	$DustBurst.set_deferred("emitting", false)
 	dashing = false
-	$GhostTimer.stop()
+	$GhostTimer.call_deferred("stop")
 
 func set_player_whitened():
-	composite_sprites.material.set_shader_param("flash_modifier", 0.7)
+	composite_sprites.material.call_deferred("set_shader_param", "flash_modifier", 0.7)
 	yield(get_tree().create_timer(0.5), "timeout")
-	composite_sprites.material.set_shader_param("flash_modifier", 0.0)
+	composite_sprites.material.call_deferred("set_shader_param", "flash_modifier", 0.0)
 
 var body_sprites = ["Arms", "Body"]
 
@@ -641,7 +641,7 @@ func _on_GhostTimer_timeout():
 	for sprite_name in body_sprites:
 		var sprite = get_node("../CompositeSprites/" + sprite_name)
 		var ghost: Sprite = DashGhost.instance()
-		get_node("../../../").add_child(ghost)
+		get_node("../../../").call_deferred("add_child", ghost)
 		ghost.global_position = global_position + Vector2(0,-32)
 		ghost.texture = sprite.texture
 		ghost.hframes = sprite.hframes
@@ -649,7 +649,7 @@ func _on_GhostTimer_timeout():
 
 func play_whirlwind():
 	var spell = Whirlwind.instance()
-	add_child(spell)
+	call_deferred("add_child", spell)
 
 # Fire #
 func play_fire_projectile(debuff):
@@ -658,16 +658,16 @@ func play_fire_projectile(debuff):
 		spell.debuff = debuff
 		spell.position = $CastDirection/Position2D.global_position
 		spell.velocity = get_global_mouse_position() - spell.position
-		get_node("../../../Projectiles").add_child(spell)
+		get_node("../../../Projectiles").call_deferred("add_child", spell)
 		yield(get_tree().create_timer(0.35), "timeout")
 	emit_signal("spell_finished")
 
 
 func play_fire_buff():
 	var spell = FireBuffFront.instance()
-	get_node("../").add_child(spell)
+	get_node("../").call_deferred("add_child", spell)
 	var spell2 = FireBuffBehind.instance()
-	get_node("../").add_child(spell2)
+	get_node("../").call_deferred("add_child", spell2)
 	player_fire_buff = true
 	yield(get_tree().create_timer(FIRE_BUFF_LENGTH), "timeout")
 	player_fire_buff = false
@@ -675,7 +675,7 @@ func play_fire_buff():
 func play_flamethrower():
 	var spell = FlameThrower.instance()
 	spell.name = "FlameThrower"
-	$CastDirection.add_child(spell)
+	$CastDirection.call_deferred("add_child", spell)
 	spell.position = $CastDirection/Position2D.position
 	yield(get_tree().create_timer(4.0), "timeout")
 	emit_signal("spell_finished")

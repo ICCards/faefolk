@@ -21,6 +21,7 @@ func _ready():
 		Tiles.add_navigation_tiles(location)
 	set_forage_texture()
 
+
 func set_forage_texture():
 	if type == "flower":
 		$Sprite.call_deferred("hide")

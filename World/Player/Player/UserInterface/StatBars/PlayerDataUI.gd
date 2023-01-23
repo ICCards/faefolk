@@ -19,6 +19,7 @@ func _on_ManaTimer_timeout():
 	PlayerData.player_data["mana"] += 1
 	if PlayerData.player_data["mana"] > 100:
 		PlayerData.player_data["mana"] = 100
+	PlayerData.emit_signal("mana_changed")
 	$EnergyBars/ManaPgBar.value = PlayerData.player_data["mana"]
 
 func set_mana_bar():

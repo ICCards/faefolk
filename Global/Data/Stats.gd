@@ -15,6 +15,10 @@ var skill_descriptions = {
 	"ice": {1:{"n":"Ice projectile","c":"1 mana","d":"..."}, 2: {"n":"Ice shield","c":"2 mana","d":"..."}, 3: {"n":"Lingering ice projectile","c":"5 mana","d":"..."}, 4: {"n":"Blizzard","c":"10 mana","d":"..."}},
 }
 
+const MAX_WOOD_DOOR = 10
+const MAX_METAL_DOOR = 100
+const MAX_ARMORED_DOOR = 1000
+
 
 const MAX_TWIG_BUILDING = 50
 const MAX_WOOD_BUILDING = 1000

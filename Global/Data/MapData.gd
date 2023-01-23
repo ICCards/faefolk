@@ -53,9 +53,6 @@ var starting_caves_data = {"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"or
 var caves = starting_caves_data
 
 func _ready() -> void:
-#	var file = File.new()
-#	if GameState.save_exists():
-#		add_world_data_to_chunks()
 	PlayerData.connect("season_changed", self,  "reset_cave_data")
 	PlayerData.connect("set_day", self, "advance_crop")
 
@@ -67,7 +64,7 @@ func add_world_data_to_chunks():
 		is_world_data_in_chunks = true
 		add_tiles_to_chunks()
 		add_nature_objects_to_chunks()
-		add_animals_to_chunks()
+		#add_animals_to_chunks()
 
 func advance_crop():
 	for id in world["tree"]:

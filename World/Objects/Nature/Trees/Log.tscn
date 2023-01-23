@@ -126,7 +126,6 @@ anims/RESET = SubResource( 2 )
 anims/break = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
 position = Vector2( -3.57628e-07, 1.11111 )
 scale = Vector2( 2.33333, 2.55556 )
 

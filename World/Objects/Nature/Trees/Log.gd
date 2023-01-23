@@ -14,7 +14,7 @@ var destroyed: bool = false
 
 func _ready():
 	randomize()
-	call_deferred("hide")
+	visible = false
 	setTreeBranchType()
 
 func setTreeBranchType():

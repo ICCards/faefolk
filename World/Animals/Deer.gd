@@ -49,14 +49,14 @@ var thread = Thread.new()
 
 func _ready():
 	randomize()
-	hide()
-	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(4.0,8.0)
+	visible = false
+	animation_player.call_deferred("play", "loop")
+	_idle_timer.set_deferred("wait_time", rand_range(4.0,8.0))
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	navigation_agent.connect("velocity_computed", self, "move_deferred") 
-	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
 
 func _update_pathfinding_idle():
 	if not thread.is_active() and visible:
@@ -75,7 +75,7 @@ func calculate_path(pos):
 		yield(get_tree(), "idle_frame")
 		navigation_agent.call_deferred("set_target_location",pos)
 		yield(get_tree(), "idle_frame")
-		thread.wait_to_finish()
+	thread.wait_to_finish()
 
 func _update_pathfinding_retreat():
 	var target = Vector2(200,200)
@@ -88,16 +88,17 @@ func _update_pathfinding_retreat():
 		thread.start(self, "_get_path", self.position+target)
 	
 func set_sprite_texture():
-	match state:
-		IDLE:
-			if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png"):
-				deer_sprite.texture = load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png")
-		WALK:
-			if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png"):
-				deer_sprite.texture = load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png")
-		_:
-			if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png"):
-				deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
+	if not attacking or destroyed:
+		match state:
+			IDLE:
+				if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png"):
+					deer_sprite.texture = load("res://Assets/Images/Animals/Deer/idle/" +  direction + "/body.png")
+			WALK:
+				if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png"):
+					deer_sprite.texture = load("res://Assets/Images/Animals/Deer/walk/" +  direction + "/body.png")
+			_:
+				if not deer_sprite.texture == load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png"):
+					deer_sprite.texture = load("res://Assets/Images/Animals/Deer/run/" +  direction + "/body.png")
 	
 func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
@@ -147,16 +148,16 @@ func _physics_process(delta):
 	
 func attack():
 	if not attacking and not destroyed:
-		play_groan_sound_effect()
+		call_deferred("play_groan_sound_effect")
 		attacking = true
-		deer_sprite.texture = load("res://Assets/Images/Animals/Deer/attack/" +  direction + "/body.png")
+		deer_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Deer/attack/" +  direction + "/body.png"))
 		animation_player.play("attack")
 		if player_not_inside_walls():
 			yield(get_tree().create_timer(0.25), "timeout")
 			$DeerAttack/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if not destroyed:
-			animation_player.play("loop")
+			animation_player.call_deferred("play", "loop")
 			attacking = false
 			state = CHASE
 
@@ -168,38 +169,41 @@ func player_not_inside_walls() -> bool:
 
 func hit(tool_name):
 	if state == IDLE or state == WALK:
-		start_chase_state()
+		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
-		deer_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(8)
+		deer_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 8)
 		return
 	elif tool_name == "ice projectile":
-		deer_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(3)
+		deer_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 3)
 	elif tool_name == "lightning spell debuff":
-		$EnemyStunnedState.start()
-	_end_chase_state_timer.stop()
-	_end_chase_state_timer.start()
+		$EnemyStunnedState.call_deferred("start")
+	_end_chase_state_timer.call_deferred("start")
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
 	if health < STARTING_HEALTH*.3:
-		start_retreat_state()
+		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
-		destroy(true)
+		call_deferred("destroy", true)
 
 func destroy(killed_by_player):
+	_retreat_timer.call_deferred("stop")
+	_chase_timer.call_deferred("stop")
+	_idle_timer.call_deferred("stop")
+	set_physics_process(false)
 	if killed_by_player:
 		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["deer"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
-	stop_sound_effects()
 	destroyed = true
-	deer_sprite.texture = load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png")
-	animation_player.play("death")
+	stop_sound_effects()
+	deer_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png"))
+	animation_player.call_deferred("play", "death")
 	yield(get_tree().create_timer(0.5), "timeout")
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
@@ -211,9 +215,9 @@ func _on_HurtBox_area_entered(area):
 		if area.id != "":
 			hit_projectiles.append(area.id)
 		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-			deer_sprite.modulate = Color("009000")
-			$HurtBox/AnimationPlayer.play("hit")
-			$EnemyPoisonState.start(area.tool_name)
+			deer_sprite.set_deferred("modulate", Color("009000"))
+			$HurtBox/AnimationPlayer.call_deferred("play", "hit")
+			$EnemyPoisonState.call_deferred("start", area.tool_name)
 			return
 		if area.name == "SwordSwing":
 			PlayerData.player_data["skill_experience"]["sword"] += 1
@@ -221,15 +225,15 @@ func _on_HurtBox_area_entered(area):
 		else:
 			PlayerDataHelpers.add_skill_experience(area.tool_name)
 		if area.knockback_vector != Vector2.ZERO:
-			$KnockbackParticles.emitting = true
+			$KnockbackParticles.set_deferred("emitting", true)
 			knocking_back = true
-			$Timers/KnockbackTimer.start()
+			$Timers/KnockbackTimer.call_deferred("start")
 			knockback = area.knockback_vector
 			velocity = knockback * 200
 		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-			hit(area.tool_name)
+			call_deferred("hit", area.tool_name)
 		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			$EnemyTornadoState.set_deferred("orbit_radius", rand_range(0,20))
 			tornado_node = area
 		if area.special_ability == "fire":
 			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
@@ -237,13 +241,13 @@ func _on_HurtBox_area_entered(area):
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
 		elif area.special_ability == "ice":
-			deer_sprite.modulate = Color("00c9ff")
-			$EnemyFrozenState.start(3)
+			deer_sprite.set_deferred("modulate", Color("00c9ff"))
+			$EnemyFrozenState.call_deferred("start", 3)
 		elif area.special_ability == "poison":
-			deer_sprite.modulate = Color("009000")
-			$EnemyPoisonState.start("poison arrow")
+			deer_sprite.set_deferred("modulate", Color("009000"))
+			$EnemyPoisonState.call_deferred("start", "poison arrow")
 		yield(get_tree().create_timer(0.25), "timeout")
-		$KnockbackParticles.emitting = false
+		$KnockbackParticles.set_deferred("emitting", false)
 
 func start_retreat_state():
 	state = RETREAT
@@ -295,7 +299,7 @@ func start_sound_effects():
 
 func stop_sound_effects():
 	playing_sound_effect = false
-	sound_effects.stop()
+	sound_effects.call_deferred("stop")
 
 func _on_VisibilityNotifier2D_screen_entered():
 	if chasing:

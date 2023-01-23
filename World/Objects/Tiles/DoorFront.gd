@@ -39,16 +39,16 @@ func set_type():
 	match tier:
 		"wood":
 			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/wood.tres")
-			health = 10 #Stats.MAX_WOOD_WALL
-			max_health = 10 #Stats.MAX_WOOD_WALL
+			health = Stats.MAX_WOOD_DOOR
+			max_health = Stats.MAX_WOOD_DOOR
 		"metal":
 			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/metal.tres")
-			health = Stats.MAX_METAL_WALL
-			max_health = Stats.MAX_METAL_WALL
+			health = Stats.MAX_METAL_DOOR
+			max_health = Stats.MAX_METAL_DOOR
 		"armored":
 			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/armored.tres")
-			health = Stats.MAX_ARMORED_WALL
-			max_health = Stats.MAX_ARMORED_WALL
+			health = Stats.MAX_ARMORED_DOOR
+			max_health = Stats.MAX_ARMORED_DOOR
 		"demolish":
 			Tiles.add_valid_tiles(location, Vector2(2,1))
 			queue_free()

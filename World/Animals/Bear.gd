@@ -12,7 +12,6 @@ onready var hit_box: Position2D = $Position2D
 
 
 var thread = Thread.new()
-var thread2 = Thread.new()
 
 var player = Server.player_node
 var direction: String = "down"
@@ -51,7 +50,7 @@ enum {
 
 func _ready():
 	randomize()
-	call_deferred("hide")
+	visible = false
 	animation_player.call_deferred("play", "loop")
 	_idle_timer.set_deferred("wait_time", rand_range(5.0, 10.0))
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
@@ -59,7 +58,7 @@ func _ready():
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	_end_chase_state_timer.connect("timeout", self, "end_chase_state")
 	navigation_agent.connect("velocity_computed", self, "move_deferred")
-	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
 
 func _update_pathfinding_idle():
 	if not thread.is_active() and visible:
@@ -78,7 +77,7 @@ func calculate_path(pos):
 		yield(get_tree(), "idle_frame")
 		navigation_agent.call_deferred("set_target_location",pos)
 		yield(get_tree(), "idle_frame")
-		thread.wait_to_finish()
+	thread.wait_to_finish()
 
 func _update_pathfinding_retreat():
 	var target = Vector2(200,200)
@@ -155,7 +154,7 @@ func start_sound_effects():
 
 func stop_sound_effects():
 	playing_sound_effect = false
-	sound_effects.set_deferred("playing", false)
+	sound_effects.call_deferred("stop")
 
 func set_texture():
 	match state:
@@ -243,6 +242,10 @@ func hit(tool_name):
 		call_deferred("destroy", true)
 
 func destroy(killed_by_player):
+	_retreat_timer.call_deferred("stop")
+	_chase_timer.call_deferred("stop")
+	_idle_timer.call_deferred("stop")
+	set_physics_process(false)
 	if killed_by_player:
 		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
@@ -305,13 +308,13 @@ func _on_KnockbackTimer_timeout():
 func _on_EndChaseState_timeout():
 	if $DetectPlayer.get_overlapping_areas().size() == 0:
 		if not $DetectPlayer/CollisionShape2D.disabled:
-			_end_chase_state_timer.start(5)
+			_end_chase_state_timer.call_deferred("start", 5)
 			$DetectPlayer/CollisionShape2D.set_deferred("disabled", true)
-			end_chase_state()
+			call_deferred("end_chase_state")
 		else:
 			$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
 	else:
-		_end_chase_state_timer.start(5)
+		_end_chase_state_timer.call_deferred("start", 5)
 
 func end_chase_state():
 	chasing = false

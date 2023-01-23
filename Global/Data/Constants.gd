@@ -4,7 +4,7 @@ extends Node
 const MIN_PLACE_OBJECT_DISTANCE = 100
 
 const DISTANCE_TO_SPAWN_OBJECT = 40
-const DISTANCE_TO_REMOVE_OBJECT = 40
+const DISTANCE_TO_REMOVE_OBJECT = 80
 
 var dimensions_dict = {
 	"furnace" : Vector2(1,1),

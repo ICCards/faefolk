@@ -9,7 +9,7 @@ func _ready():
 			$LargeClouds.set_deferred("emitting", false)
 
 func _physics_process(delta):
-	if not PlayerData.viewMapMode and Server.player_node:
+	if Server.player_node:
 		show()
 		if Tiles.forest_tiles.get_cellv(Tiles.forest_tiles.world_to_map(Server.player_node.position)) != -1:
 			$FallingLeaf.emitting = true

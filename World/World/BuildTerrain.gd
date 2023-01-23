@@ -42,7 +42,7 @@ func build_terrain():
 		for new_chunk in get_parent().built_chunks:
 			if not built_chunks.has(new_chunk) and not terrain_thread.is_active():
 				built_chunks.append(new_chunk)
-				print("BUILDING TERRAIN " + new_chunk)
+				#print("BUILDING TERRAIN " + new_chunk)
 				terrain_thread.start(self, "_whoAmI", new_chunk)
 
 func spawn_chunk(chunk_name):
@@ -102,20 +102,18 @@ func spawn_chunk(chunk_name):
 				top_ocean.set_cellv(loc+Vector2(0,-i),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
 				waves.set_cellv(loc+Vector2(0,-i), -1)
-#		for i in range(4):
-#			i += 4
-#			if sand.get_cellv(loc+Vector2(i,0)) != -1 or sand.get_cellv(loc+Vector2(-i,0)) != -1 or \
-#			sand.get_cellv(loc+Vector2(0,i)) != -1 or sand.get_cellv(loc+Vector2(0,-i)) != -1 or \
-#			sand.get_cellv(loc+Vector2(i,i)) != -1 or sand.get_cellv(loc+Vector2(-i,i)) != -1 or \
-#			sand.get_cellv(loc+Vector2(i,-i)) != -1 or sand.get_cellv(loc+Vector2(-i,-i)) != -1:
-#				deep_ocean.set_cellv(loc+Vector2(i,0),-1)
-#				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
-#				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
-#				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
+		for i in range(4):
+			i += 4
+			if sand.get_cellv(loc+Vector2(i,0)) != -1 or sand.get_cellv(loc+Vector2(-i,0)) != -1 or \
+			sand.get_cellv(loc+Vector2(0,i)) != -1 or sand.get_cellv(loc+Vector2(0,-i)) != -1 or \
+			sand.get_cellv(loc+Vector2(i,i)) != -1 or sand.get_cellv(loc+Vector2(-i,i)) != -1 or \
+			sand.get_cellv(loc+Vector2(i,-i)) != -1 or sand.get_cellv(loc+Vector2(-i,-i)) != -1:
+				deep_ocean.set_cellv(loc+Vector2(i,0),-1)
+				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
+				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
+				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
 	yield(get_tree(), "idle_frame")
 	call_deferred("update_bitmasks", chunk_name)
-	#update_bitmasks(chunk_name)
-	yield(get_tree(), "idle_frame")
 
 func update_bitmasks(chunk_name):
 	var row = chunk_name[0]
@@ -199,12 +197,19 @@ func update_bitmasks(chunk_name):
 			start_y = 813
 			end_y = 1000
 	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
 	snow.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
 	forest.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
 	dirt.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
 	wetSand.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
 	waves.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
 	deep_ocean.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+	yield(get_tree(), "idle_frame")
 	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
 	yield(get_tree(), "idle_frame")
 #	yield(get_tree(), "idle_frame")
@@ -220,5 +225,5 @@ func update_bitmasks(chunk_name):
 #	yield(get_tree(), "idle_frame")
 #	deep_ocean.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
 #	yield(get_tree(), "idle_frame")
-	print("BUILT TERRAIN " + str(chunk_name))
+	#print("BUILT TERRAIN " + str(chunk_name))
 	terrain_thread.wait_to_finish()

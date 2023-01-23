@@ -87,18 +87,19 @@ func save_player_data(exit_to_main_menu):
 		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
 
 func switch_hotbar():
-	Sounds.play_small_select_sound()
-	if $Hotbar.visible:
-		PlayerData.normal_hotbar_mode = false
-		$Hotbar.hide()
-		$CombatHotbar.initialize()
-		$PlayerDataUI/EnergyBars.hide()
-	else:
-		PlayerData.normal_hotbar_mode = true
-		$Hotbar.initialize_hotbar()
-		$CombatHotbar.hide()
-		$PlayerDataUI/EnergyBars.show()
-	get_node("../../").set_held_object()
+	if Server.player_node.state == MOVEMENT:
+		Sounds.play_small_select_sound()
+		if $Hotbar.visible:
+			PlayerData.normal_hotbar_mode = false
+			$Hotbar.hide()
+			$CombatHotbar.initialize()
+			$PlayerDataUI/EnergyBars.hide()
+		else:
+			PlayerData.normal_hotbar_mode = true
+			$Hotbar.initialize_hotbar()
+			$CombatHotbar.hide()
+			$PlayerDataUI/EnergyBars.show()
+		get_node("../../").set_held_object()
 
 
 func _input(event):
@@ -107,6 +108,8 @@ func _input(event):
 			toggle_save_and_exit()
 		elif event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 			toggle_menu()
+		elif event.is_action_pressed("toggle_hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.viewInventoryMode:
+			switch_hotbar()
 		elif Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:

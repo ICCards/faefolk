@@ -22,18 +22,19 @@ var MAX_MOVE_DISTANCE: float = 500.0
 var tornado_node
 
 var rng := RandomNumberGenerator.new()
+var thread = Thread.new()
 
 var variety
 
 func _ready():
-	hide()
+	randomize()
+	visible = false
 	set_random_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
 	navigation_agent.connect("velocity_computed", self, "move_deferred")
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
 func set_random_attributes():
-	randomize()
 	$Timers/DropEggTimer.wait_time = rand_range(20, 40)
 	duck_sprite.frames = Images.DuckVariations[variety-1]
 	_timer.wait_time = rand_range(2.5, 5.0)
@@ -94,9 +95,19 @@ func _get_direction_string(velocitiy) -> String:
 	return "Left"
 
 
-func _update_pathfinding() -> void:
-	if visible:
-		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+func _update_pathfinding():
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+		
+func _get_path(pos):
+	call_deferred("calculate_path", pos)
+	
+func calculate_path(pos):
+	if not destroyed:
+		yield(get_tree(), "idle_frame")
+		navigation_agent.call_deferred("set_target_location",pos)
+		yield(get_tree(), "idle_frame")
+	thread.wait_to_finish()
 
 func _on_HurtBox_area_entered(area):
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3"))
@@ -151,6 +162,8 @@ func hit(tool_name, var special_ability = ""):
 		call_deferred("destroy", true)
 
 func destroy(killed_by_player):
+	_timer.call_deferred("stop")
+	set_physics_process(false)
 	if killed_by_player:
 		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1

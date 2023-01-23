@@ -50,14 +50,14 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	randomize()
-	call_deferred("hide")
+	visible = false
 	animation_player.call_deferred("play","loop")
 	_idle_timer.set_deferred("wait", rand_range(4.0,8.0)) 
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	navigation_agent.connect("velocity_computed", self, "move_deferred") 
-	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
 
 func _update_pathfinding_idle():
 	if not thread.is_active() and visible:
@@ -76,7 +76,7 @@ func calculate_path(pos):
 		yield(get_tree(), "idle_frame")
 		navigation_agent.call_deferred("set_target_location",pos)
 		yield(get_tree(), "idle_frame")
-		thread.wait_to_finish()
+	thread.wait_to_finish()
 
 func _update_pathfinding_retreat():
 	var target = Vector2(200,200)
@@ -149,9 +149,9 @@ func _physics_process(delta):
 	
 func attack():
 	if not attacking:
-		play_groan_sound_effect()
+		call_deferred("play_groan_sound_effect")
 		attacking = true
-		hit_box.look_at(player.position)
+		hit_box.call_deferred("look_at", player.position)
 		boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/attack/" +  direction + "/body.png"))
 		animation_player.call_deferred("play", "attack")
 		if player_not_inside_walls():
@@ -172,7 +172,7 @@ func player_not_inside_walls() -> bool:
 
 func hit(tool_name):
 	if state == IDLE or state == WALK:
-		start_chase_state()
+		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
 		boar_sprite.set_deferred("modulate", Color("00c9ff"))
 		$EnemyFrozenState.call_deferred("start", 8)
@@ -183,7 +183,7 @@ func hit(tool_name):
 	elif tool_name == "lightning spell debuff":
 		$EnemyStunnedState.call_deferred("start")
 	_end_chase_state_timer.call_deferred("start", 20)
-	$HurtBox/AnimationPlayer.play("hit")
+	$HurtBox/AnimationPlayer.call_deferred("play", "hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
@@ -193,6 +193,10 @@ func hit(tool_name):
 		call_deferred("destroy",true)
 
 func destroy(killed_by_player):
+	_retreat_timer.call_deferred("stop")
+	_chase_timer.call_deferred("stop")
+	_idle_timer.call_deferred("stop")
+	set_physics_process(false)
 	if killed_by_player:
 		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["boar"] += 1
@@ -280,22 +284,22 @@ func _on_KnockbackTimer_timeout():
 func _on_EndChaseState_timeout():
 	if $DetectPlayer.get_overlapping_areas().size() == 0:
 		if not $DetectPlayer/CollisionShape2D.disabled:
-			_end_chase_state_timer.start(5)
+			_end_chase_state_timer.call_deferred("start", 5)
 			$DetectPlayer/CollisionShape2D.set_deferred("disabled", true)
-			end_chase_state()
+			call_deferred("end_chase_state")
 		else:
 			$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
 	else:
-		_end_chase_state_timer.start(5)
+		_end_chase_state_timer.call_deferred("start", 5)
+
 
 func play_groan_sound_effect():
-	rng.randomize()
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3"))
 	sound_effects.set_deferred( "volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 	sound_effects.call_deferred("play")
 	yield(sound_effects, "finished")
 	playing_sound_effect = false
-	start_sound_effects()
+	call_deferred("start_sound_effects")
 
 func start_sound_effects():
 	if not playing_sound_effect:

@@ -10,6 +10,7 @@ var destroyed = false
 var varieties = ["A", "B", "C", "D"]
 
 func _ready():
+	visible = false
 	rng.randomize()
 	varieties.shuffle()
 	variety = varieties.front()
@@ -27,7 +28,6 @@ func set_leaf_break_modulate():
 			$LeafBreak.set_deferred("modulate", Color("85ad28"))
 		"D":
 			$LeafBreak.set_deferred("modulate", Color("4e876e"))
-
 
 
 func play_sound_effect():

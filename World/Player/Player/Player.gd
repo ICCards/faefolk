@@ -73,27 +73,27 @@ func set_held_object():
 			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if item_name == "torch":
-				$TorchLight.enabled = true
+				$TorchLight.set_deferred("enabled", true)
 			else:
-				$TorchLight.enabled = false
+				$TorchLight.set_deferred("enabled", false)
 			if item_category == "Placable object" or item_category == "Seed":
 				actions.show_placable_object(item_name, item_category)
 				return
 			if item_name == "blueprint" and current_building_item != null:
 				actions.show_placable_object(current_building_item, "BUILDING")
 				return
-		$TorchLight.enabled = false
+		$TorchLight.set_deferred("enabled", false)
 		actions.destroy_placable_object()
 	else:
-		$TorchLight.enabled = false
+		$TorchLight.set_deferred("enabled", false)
 		actions.destroy_placable_object()
 		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
 			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if item_category == "Magic" or item_name == "bow" or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
-				$Camera2D/UserInterface/CombatHotbar/MagicSlots.initialize(item_name)
+				$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("initialize", item_name)
 				return
-		$Camera2D/UserInterface/CombatHotbar/MagicSlots.hide()
+		$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("hide")
 
 
 func _process(_delta) -> void:

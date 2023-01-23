@@ -22,7 +22,7 @@ func set_day():
 		Color("28282d"), Color("ffffff"), LENGTH_OF_TRANSITION,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
-	
+
 func set_night():
 	$Tween.interpolate_property(self, "color",
 		Color("ffffff"), Color("28282d"), LENGTH_OF_TRANSITION,

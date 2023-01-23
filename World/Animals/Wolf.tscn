@@ -319,6 +319,18 @@ tracks/9/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("Position2D/WolfBite/CollisionShape2D:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=49]
 resource_name = "loop"
@@ -520,9 +532,8 @@ radius = 1.0
 max_speed = 150.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( -1.5, -8.5 )
-scale = Vector2( 23.55, 18.75 )
+position = Vector2( 0.999992, -5 )
+scale = Vector2( 10.225, 9.6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 46 )
@@ -538,7 +549,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 51 )
-frame = 4
+frame = 1
 playing = true
 
 [node name="LineOfSight" type="RayCast2D" parent="."]

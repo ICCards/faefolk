@@ -18,8 +18,8 @@ var type
 
 func _ready():
 	rng.randomize()
+	visible = false
 	PlayerData.connect("season_changed", self,  "set_grass_texture")
-	call_deferred("hide")
 	set_deferred("front_health", rng.randi_range(1,3))
 	set_deferred("back_heath", rng.randi_range(1,3))
 	set_grass_texture()
@@ -103,6 +103,7 @@ func _on_BackArea2D_body_exited(body):
 func _on_Area2D_area_entered(area):
 	front_health -= 1
 	if front_health == 0:
+		$Area2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer.call_deferred("play", "animate front")
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 		if Util.chance(50):
@@ -123,6 +124,7 @@ func _on_Area2D_area_entered(area):
 func _on_BackArea2D_area_entered(area):
 	back_heath -= 1
 	if back_heath == 0:
+		$BackArea2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer2.call_deferred("play", "animate back")
 		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
 		if Util.chance(50):

@@ -462,9 +462,8 @@ radius = 1.0
 max_speed = 150.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( 7.5, -6.5 )
-scale = Vector2( 19.25, 15.05 )
+position = Vector2( 1.52588e-05, -2 )
+scale = Vector2( 10.5, 9.65 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 24 )
@@ -479,7 +478,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 13
+frame = 7
 playing = true
 
 [node name="LineOfSight" type="RayCast2D" parent="."]

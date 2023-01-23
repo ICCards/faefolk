@@ -838,9 +838,8 @@ disabled = true
 autostart = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( -2.86102e-06, -93.3333 )
-scale = Vector2( 7.11111, 12.2222 )
+position = Vector2( -2.22222, -78.8889 )
+scale = Vector2( 10.1667, 13.6111 )
 
 [node name="ResetTempHealthTimer" type="Timer" parent="."]
 wait_time = 5.0

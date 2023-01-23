@@ -48,14 +48,14 @@ var thread = Thread.new()
 
 func _ready():
 	randomize()
-	call_deferred("hide")
+	visible = false
 	animation_player.call_deferred("play", "loop")
 	_idle_timer.set_deferred("wait_time", rand_range(3.0,8.0))
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
 	navigation_agent.connect("velocity_computed", self, "move_deferred") 
-	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
 
 func _update_pathfinding_idle():
 	if not thread.is_active() and visible:
@@ -74,7 +74,7 @@ func calculate_path(pos):
 		yield(get_tree(), "idle_frame")
 		navigation_agent.call_deferred("set_target_location",pos)
 		yield(get_tree(), "idle_frame")
-		thread.wait_to_finish()
+	thread.wait_to_finish()
 
 func _update_pathfinding_retreat():
 	var target = Vector2(200,200)
@@ -87,16 +87,17 @@ func _update_pathfinding_retreat():
 		thread.start(self, "_get_path", self.position+target)
 
 func set_sprite_texture():
-	match state:
-		IDLE:
-			if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png"):
-				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png"))
-		WALK:
-			if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png"):
-				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png"))
-		_:
-			if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png"):
-				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png"))
+	if not attacking or destroyed:
+		match state:
+			IDLE:
+				if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png"):
+					wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png"))
+			WALK:
+				if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png"):
+					wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png"))
+			_:
+				if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png"):
+					wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png"))
 
 func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
@@ -146,7 +147,7 @@ func _physics_process(delta):
 	
 func attack():
 	if not attacking:
-		play_groan_sound_effect()
+		call_deferred("play_groan_sound_effect")
 		attacking = true
 		if Util.chance(50):
 			wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/claw/" +  direction + "/body.png"))
@@ -174,7 +175,7 @@ func player_not_inside_walls() -> bool:
 
 func hit(tool_name):
 	if state == IDLE or state == WALK:
-		start_chase_state()
+		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
 		wolf_sprite.set_deferred("modulate", Color("00c9ff"))
 		$EnemyFrozenState.call_deferred("start", 8)
@@ -196,6 +197,10 @@ func hit(tool_name):
 
 func destroy(killed_by_player):
 	if not destroyed:
+		_retreat_timer.call_deferred("stop")
+		_chase_timer.call_deferred("stop")
+		_idle_timer.call_deferred("stop")
+		set_physics_process(false)
 		if killed_by_player:
 			#MapData.remove_animal(name)
 			PlayerData.player_data["collections"]["mobs"]["wolf"] += 1
@@ -205,7 +210,8 @@ func destroy(killed_by_player):
 		call_deferred("stop_sound_effects")
 		destroyed = true
 		wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/death/" +  direction + "/body.png"))
-		animation_player.call_deferred("play", "death")
+		animation_player.play("death")
+		yield(get_tree().create_timer(0.5), "timeout")
 		InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
 		InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
 		yield(animation_player, "animation_finished")
@@ -261,7 +267,7 @@ func start_retreat_state():
 func start_chase_state():
 	chasing = true
 	state = CHASE
-	navigation_agent.set_deferred("max_speed", 280)
+	navigation_agent.set_deferred("max_speed", 260)
 	call_deferred("start_sound_effects")
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("start")
@@ -280,13 +286,14 @@ func end_chase_state():
 func _on_EndChaseState_timeout():
 	if $DetectPlayer.get_overlapping_areas().size() == 0:
 		if not $DetectPlayer/CollisionShape2D.disabled:
-			_end_chase_state_timer.start(5)
+			_end_chase_state_timer.call_deferred("start", 5)
 			$DetectPlayer/CollisionShape2D.set_deferred("disabled", true)
-			end_chase_state()
+			call_deferred("end_chase_state")
 		else:
 			$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
 	else:
-		_end_chase_state_timer.start(5)
+		_end_chase_state_timer.call_deferred("start", 5)
+
 
 func play_groan_sound_effect():
 	rng.randomize()

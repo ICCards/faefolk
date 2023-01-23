@@ -147,23 +147,23 @@ func create_cave_entrance(_loc):
 	add_child(caveLadder)
 
 func spawn_initial_animals():
-	for i in range(120):
+	for i in range(220):
 		spawnRandomBunny()
 	yield(get_tree(), "idle_frame")
-	for i in range(120):
+	for i in range(220):
 		spawnRandomDuck()
 	yield(get_tree(), "idle_frame")
-#	for i in range(55):
-#		spawnRandomDeer()
-#	yield(get_tree(), "idle_frame")
-#	for i in range(25):
-#		spawnRandomBoar()
+	for i in range(175):
+		spawnRandomDeer()
+	yield(get_tree(), "idle_frame")
+	for i in range(25):
+		spawnRandomBoar()
 	yield(get_tree(), "idle_frame")
 	for i in range(25):
 		spawnRandomBear()
 	yield(get_tree(), "idle_frame")
-#	for i in range(25):
-#		spawnRandomWolf()
+	for i in range(25):
+		spawnRandomWolf()
 
 
 func returnValidSpawnLocation():

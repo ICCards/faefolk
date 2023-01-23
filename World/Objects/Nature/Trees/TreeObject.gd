@@ -27,7 +27,7 @@ var phase
 var temp_health: int = 3
 
 func _ready():
-	call_deferred("hide")
+	visible = false
 	rng.randomize()
 	MapData.connect("refresh_crops", self, "refresh_tree_type")
 	call_deferred("set_tree")
@@ -281,14 +281,6 @@ func _on_TreeTopArea_area_entered(_area):
 func _on_TreeTopArea_area_exited(_area):
 	call_deferred("set_tree_visible")
 
-func _on_VisibilityNotifier2D_screen_entered():
-	animated_tree_top_sprite.set_deferred("playing", true)
-	call_deferred("show")
-
-func _on_VisibilityNotifier2D_screen_exited():
-	animated_tree_top_sprite.set_deferred("playing", false)
-	call_deferred("hide")
-
 func _on_RandomLeavesFallingTimer_timeout():
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
 	if str(phase) == "5":
@@ -296,3 +288,11 @@ func _on_RandomLeavesFallingTimer_timeout():
 
 func _on_ResetTempHealthTimer_timeout():
 	temp_health = 3
+
+func _on_VisibilityNotifier2D_screen_entered():
+	animated_tree_top_sprite.set_deferred("playing", true)
+	call_deferred("show")
+
+func _on_VisibilityNotifier2D_screen_exited():
+	animated_tree_top_sprite.set_deferred("playing", false)
+	call_deferred("hide")

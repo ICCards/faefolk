@@ -22,10 +22,11 @@ var tornado_node = null
 var variety
 
 var rng := RandomNumberGenerator.new()
+var thread = Thread.new()
 
 
 func _ready(): 
-	hide()
+	visible = false
 	randomize()
 	set_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
@@ -40,9 +41,19 @@ func set_attributes():
 	if Util.chance(50):
 		bunny_sprite.flip_h = true
 
-func _update_pathfinding() -> void:
-	if visible:
-		navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+func _update_pathfinding():
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+		
+func _get_path(pos):
+	call_deferred("calculate_path", pos)
+	
+func calculate_path(pos):
+	if not destroyed:
+		yield(get_tree(), "idle_frame")
+		navigation_agent.call_deferred("set_target_location",pos)
+		yield(get_tree(), "idle_frame")
+	thread.wait_to_finish()
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned:
@@ -113,6 +124,8 @@ func hit(tool_name):
 		call_deferred("destroy",true)
 
 func destroy(killed_by_player):
+	_timer.call_deferred("stop")
+	set_physics_process(false)
 	if killed_by_player:
 		#MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["bunny"] += 1

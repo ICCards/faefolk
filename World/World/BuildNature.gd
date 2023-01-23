@@ -125,29 +125,35 @@ func spawn_nature():
 
 
 func remove_nature():
+	var player_pos = Server.player_node.position
 	for node in NatureObjects.get_children():
 		if Server.world.is_changing_scene:
 			var value = remove_objects_thread.wait_to_finish()
 			return
 		if is_instance_valid(node) and not node.destroyed:
-			var player_pos = Server.player_node.position
 			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				#NatureObjects.call_deferred("remove_child", node)
 				node.queue_free()
-				yield(get_tree().create_timer(0.1), "timeout")
+				yield(get_tree(), "idle_frame")
+	for node in ForageObjects.get_children():
+		if Server.world.is_changing_scene:
+			var value = remove_objects_thread.wait_to_finish()
+			return
+		if is_instance_valid(node):
+			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
+				node.queue_free()
+				yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	var value = remove_objects_thread.wait_to_finish()
 
 
 func remove_grass():
+	var player_pos = Server.player_node.position
 	for node in GrassObjects.get_children():
 		if Server.world.is_changing_scene:
 			var value = remove_grass_thread.wait_to_finish()
 			return
 		if is_instance_valid(node) and not node.destroyed:
-			var player_pos = Server.player_node.position
 			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				#GrassObjects.call_deferred("remove_child", node)
 				node.queue_free()
 				yield(get_tree().create_timer(0.1), "timeout")
 	yield(get_tree(), "idle_frame")
@@ -206,9 +212,11 @@ func spawn_trees():
 					object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(4,0)
 					NatureObjects.call_deferred("add_child",object,true)
 					yield(get_tree().create_timer(0.01), "timeout")
+	yield(get_tree().create_timer(1.0), "timeout")
 	var value = trees_thread.wait_to_finish()
 
 func spawn_ores():
+	var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
 	for chunk in current_chunks:
 		if Server.world.is_changing_scene:
 			var value = ores_thread.wait_to_finish()
@@ -216,7 +224,6 @@ func spawn_ores():
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["ore_large"]:
 			var loc = Util.string_to_vector2(map["ore_large"][id]["l"]) + Vector2(1,0)
-			var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and MapData.world["ore_large"].has(id):
 					Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
@@ -231,10 +238,9 @@ func spawn_ores():
 					object.position = Tiles.valid_tiles.map_to_world(loc) 
 					NatureObjects.call_deferred("add_child",object,true)
 					yield(get_tree().create_timer(0.01), "timeout")
-		yield(get_tree().create_timer(0.1), "timeout")
+		yield(get_tree(), "idle_frame")
 		for id in map["ore"]:
 			var loc = Util.string_to_vector2(map["ore"][id]["l"])
-			var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and MapData.world["ore"].has(id):
 					Tiles.remove_valid_tiles(loc)
@@ -250,10 +256,12 @@ func spawn_ores():
 					object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16, 24)
 					NatureObjects.call_deferred("add_child",object,true)
 					yield(get_tree().create_timer(0.01), "timeout")
+	yield(get_tree().create_timer(1.0), "timeout")
 	var value = ores_thread.wait_to_finish()
 
-
+var count = 0
 func spawn_grass():
+	var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
 	for chunk in current_chunks:
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["tall_grass"]:
@@ -262,10 +270,10 @@ func spawn_grass():
 				return
 			var type = map["tall_grass"][id]["n"]
 			var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
-			var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not GrassObjects.has_node(id) and MapData.world["tall_grass"].has(id):
 					Tiles.add_navigation_tiles(loc)
+					count += 1
 					if type == "weed":
 						var object = Weed.instance()
 						object.name = id
@@ -280,6 +288,10 @@ func spawn_grass():
 						object.name = id
 						object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(8, 32)
 						GrassObjects.call_deferred("add_child",object,true)
+					if count == 20:
+						yield(get_tree(), "idle_frame")
+						count = 0
+	yield(get_tree().create_timer(1.0), "timeout")
 	var value = grass_thread.wait_to_finish()
 
 
