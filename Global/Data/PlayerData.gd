@@ -55,7 +55,7 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-#		"0": ["gold axe", 1, 100],
+		"0": ["gold sword", 1, 100],
 #		"1": ["bow", 1, 50],
 #		"2": ["arrow", 999, null],
 #		"6": ["wind staff", 1, null],

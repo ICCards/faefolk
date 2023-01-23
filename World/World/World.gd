@@ -39,7 +39,7 @@ const MAX_BUNNIES = 150
 const MAX_BEARS = 60
 const MAX_BOARS = 50
 const MAX_DEER = 90
-const MAX_WOLVES = 50
+const MAX_WOLVES = 150
 
 var num_ducks = 0
 var num_bunnies = 0

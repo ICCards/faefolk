@@ -11,7 +11,8 @@ func _ready():
 
 func reset_sound():
 	Sounds.current_footsteps_sound = Sounds.dirt_footsteps
-	stream = Sounds.current_footsteps_sound
+	stream = Sounds.dirt_footsteps
+	set_footsteps_sound()
 
 func set_footsteps_sound():
 	stop()

@@ -188,20 +188,23 @@ func swing():
 			$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/bite/body/"+ direction +".png"))
 			if player_not_inside_walls():
 				yield(get_tree().create_timer(0.3), "timeout")
-				$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
+				if not destroyed:
+					$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
 		else:
 			if Util.chance(25):
 				animation_player.call_deferred("play", "bite")
 				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/bite/body/"+ direction +".png"))
 				if player_not_inside_walls():
 					yield(get_tree().create_timer(0.3), "timeout")
-					$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
+					if not destroyed:
+						$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", false)
 			else:
 				animation_player.call_deferred("play", "swing")
 				$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/claw/body/"+ direction +".png")
 				if player_not_inside_walls():
 					yield(get_tree().create_timer(0.3), "timeout")
-					$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", false)
+					if not destroyed:
+						$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if destroyed:
 			return
@@ -254,6 +257,8 @@ func destroy(killed_by_player):
 		sound_effects.call_deferred("play")
 	destroyed = true
 	stop_sound_effects()
+	$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", true)
+	$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", true)
 	$Body/Fangs.set_deferred("texture", null) 
 	$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/death/" + direction  + "/body.png"))
 	animation_player.call_deferred("play", "death")

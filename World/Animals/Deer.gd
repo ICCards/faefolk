@@ -154,7 +154,8 @@ func attack():
 		animation_player.play("attack")
 		if player_not_inside_walls():
 			yield(get_tree().create_timer(0.25), "timeout")
-			$DeerAttack/CollisionShape2D.set_deferred("disabled", false)
+			if not destroyed:
+				$DeerAttack/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if not destroyed:
 			animation_player.call_deferred("play", "loop")
@@ -202,6 +203,7 @@ func destroy(killed_by_player):
 		sound_effects.call_deferred("play")
 	destroyed = true
 	stop_sound_effects()
+	$DeerAttack/CollisionShape2D.set_deferred("disabled", true)
 	deer_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png"))
 	animation_player.call_deferred("play", "death")
 	yield(get_tree().create_timer(0.5), "timeout")
@@ -260,7 +262,7 @@ func start_retreat_state():
 func start_chase_state():
 	chasing = true
 	state = CHASE
-	navigation_agent.set_deferred("max_speed", 200)
+	navigation_agent.set_deferred("max_speed", 180)
 	call_deferred("start_sound_effects")
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("start")

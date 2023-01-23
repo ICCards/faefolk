@@ -156,7 +156,8 @@ func attack():
 		animation_player.call_deferred("play", "attack")
 		if player_not_inside_walls():
 			yield(get_tree().create_timer(0.4), "timeout")
-			$BoarBite/CollisionShape2D.set_deferred("disabled", false)
+			if not destroyed:
+				$BoarBite/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if not destroyed:
 			animation_player.call_deferred("play", "loop")
@@ -205,6 +206,7 @@ func destroy(killed_by_player):
 		sound_effects.call_deferred("play")
 	call_deferred("stop_sound_effects")
 	destroyed = true
+	$BoarBite/CollisionShape2D.set_deferred("disabled", true)
 	boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/death/" +  direction + "/body.png"))
 	animation_player.call_deferred("play", "death")
 	yield(get_tree().create_timer(0.5), "timeout")
