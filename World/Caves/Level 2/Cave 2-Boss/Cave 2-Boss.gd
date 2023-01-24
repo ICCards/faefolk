@@ -23,7 +23,7 @@ func _ready():
 
 
 func spawn_boss():
-	if PlayerData.player_data["skill_experience"]["fire"] == 0:
+	#if PlayerData.player_data["skill_experience"]["fire"] == 0:
 		var boss = FireBoss.instance()
 		boss.position = Vector2(rand_range(20,25), rand_range(20,25))*32
 		$Enemies.add_child(boss)

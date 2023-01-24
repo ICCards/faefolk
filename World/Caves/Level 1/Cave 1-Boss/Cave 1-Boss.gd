@@ -32,7 +32,7 @@ func _on_SpawnBatTimer_timeout():
 		count += 1
 
 func spawn_boss():
-	if PlayerData.player_data["skill_experience"]["wind"] == 0:
+	#if PlayerData.player_data["skill_experience"]["wind"] == 0:
 		var boss = WindBoss.instance()
 		boss.position = Vector2(rand_range(20,40), rand_range(20,40))*32
 		$Enemies.add_child(boss)

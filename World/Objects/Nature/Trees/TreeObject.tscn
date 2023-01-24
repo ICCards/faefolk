@@ -3,10 +3,10 @@
 [ext_resource path="res://World/Objects/Nature/Trees/TreeObject.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 22.7778, 28.3507 )
+extents = Vector2( 22.2222, 28.3507 )
 
 [sub_resource type="CircleShape2D" id=22]
-radius = 17.6666
+radius = 16.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
