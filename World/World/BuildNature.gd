@@ -184,7 +184,7 @@ func spawn_trees():
 					else:
 						var phase = MapData.world["tree"][id]["p"]
 						var health = MapData.world["tree"][id]["h"]
-						var variety = MapData.world["tree"][id]["v"]
+						var variety = "birch" #MapData.world["tree"][id]["v"]
 						PlaceObject.place_tree_in_world(id,variety,loc,biome,health,phase)
 						yield(get_tree().create_timer(0.01), "timeout")
 		for id in map["log"]:
@@ -205,7 +205,7 @@ func spawn_trees():
 				if not NatureObjects.has_node(id) and MapData.world["stump"].has(id):
 					Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
 					var object = Stump.instance()
-					object.variety = MapData.world["stump"][id]["v"]
+					object.variety = "birch" #MapData.world["stump"][id]["v"]
 					object.location = loc
 					object.health = MapData.world["stump"][id]["h"]
 					object.name = id

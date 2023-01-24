@@ -49,12 +49,12 @@ func hit(tool_name):
 		yield(sound_effects, "finished")
 		queue_free()
 		
-func _on_StumpHurtBox_area_entered(_area):
-	if _area.name == "AxePickaxeSwing":
+func _on_StumpHurtbox_area_entered(area):
+	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		call_deferred("hit", _area.tool_name)
-	if _area.special_ability == "fire buff":
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+		call_deferred("hit", area.tool_name)
+	if area.special_ability == "fire buff":
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-18,12)))
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 
@@ -63,3 +63,4 @@ func _on_VisibilityNotifier2D_screen_entered():
 	call_deferred("show")
 func _on_VisibilityNotifier2D_screen_exited():
 	call_deferred("hide")
+

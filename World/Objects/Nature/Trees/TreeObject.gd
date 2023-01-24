@@ -93,7 +93,7 @@ func setGrownTreeTexture():
 		"spruce":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-102))
 		"birch":
-			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-122))
+			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-38))
 		"evergreen":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-3,-66))
 		"pine":

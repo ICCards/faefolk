@@ -38,12 +38,14 @@ onready var uuid = _uuid.new()
 func _ready():
 	initialize()
 
+
 func destroy():
 	name = "removing"
 	hide()
 	set_physics_process(false)
 	yield(get_tree().create_timer(0.25), "timeout")
 	queue_free()
+
 
 func _physics_process(delta):
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
@@ -67,6 +69,7 @@ func _physics_process(delta):
 			place_customizable_rotatable_state()
 		CUSTOMIZABLE:
 			place_customizable_state()
+
 
 func initialize():
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
@@ -94,9 +97,8 @@ func initialize():
 	elif item_category == "BUILDING" and item_name == "foundation":
 		state = FOUNDATION
 	set_dimensions()
-	
 
-	
+
 func set_dimensions():
 	$ItemToPlace.hide()
 	$ScaledItemToPlace.hide()
