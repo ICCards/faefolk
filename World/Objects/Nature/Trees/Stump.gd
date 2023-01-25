@@ -48,7 +48,8 @@ func hit(tool_name):
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		yield(sound_effects, "finished")
 		queue_free()
-		
+
+
 func _on_StumpHurtbox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()

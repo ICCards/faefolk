@@ -13,13 +13,22 @@ export var speed := 300.0
 var character
 var player
 
+onready var _character = load("res://Global/Data/Characters.gd")
+
 func _ready():
+	Server.player_node = self
+	character = _character.new()
+	character.LoadPlayerCharacter("human_male")
 	animPlayer.play("idle")
 	$FootstepsSound.volume_db = Sounds.return_adjusted_sound_db("footstep", -4)
 	$FootstepsSound.play()
 	setAnimationTexture("idle_down")
 	Sounds.connect("volume_change", self, "change_footsteps_volume")
 
+
+func destroy():
+	set_physics_process(false)
+	character.queue_free()
 
 func _physics_process(_delta):
 	var velocity = Vector2.ZERO

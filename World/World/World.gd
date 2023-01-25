@@ -28,7 +28,6 @@ onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
 
 onready var Player = load("res://World/Player/Player/Player.tscn")
-onready var _character = load("res://Global/Data/Characters.gd")
 
 var rng = RandomNumberGenerator.new()
 
@@ -84,8 +83,6 @@ func spawn_player():
 	var player = Player.instance()
 	player.is_building_world = true
 	player.name = str("PLAYER")
-	player.character = _character.new()
-	player.character.LoadPlayerCharacter("human_male")
 	$Players.add_child(player)
 	if PlayerData.spawn_at_respawn_location:
 		spawn_loc = PlayerData.player_data["respawn_location"]

@@ -56,6 +56,7 @@ var starting_player_data = {
 	"energy": 100,
 	"hotbar": {
 		"0": ["gold sword", 1, 100],
+		"1": ["gold axe", 1, 100],
 #		"1": ["bow", 1, 50],
 #		"2": ["arrow", 999, null],
 #		"6": ["wind staff", 1, null],
@@ -70,12 +71,12 @@ var starting_player_data = {
 #		"8": ["furnace", 10, null],
 	},
 	"inventory": {
-#			"18": ["wood", 999, null],
-#			"19": ["stone", 999, null],
+			"18": ["wood", 999, null],
+			"19": ["stone", 999, null],
 #			"17": ["gold ingot", 999, null],
 #			"16": ["iron ingot", 999, null],
 #			"15": ["bronze ingot", 999, null],
-#			"13": ["birch seeds", 99, null],
+			"13": ["birch seeds", 99, null],
 #			"12": ["spruce seeds", 99, null],
 #			"15": ["wheat flour", 99, null],
 	#		"16": ["wheat", 100, null],

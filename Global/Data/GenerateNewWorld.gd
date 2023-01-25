@@ -28,7 +28,7 @@ const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vecto
 var openSimplexNoise := OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
 var _uuid = load("res://helpers/UUID.gd")
-onready var uuid = _uuid.new()
+var uuid
 
 var mutex = Mutex.new()
 var semaphore = Semaphore.new()
@@ -115,6 +115,7 @@ func build_moisture(octaves,period):
 
 func build_world():
 	print("building world")
+	uuid = _uuid.new()
 	get_node("/root/World/Loading").call_deferred("set_phase","Building terrain")
 	build_terrian()
 	#yield(get_tree().create_timer(1.0), "timeout")

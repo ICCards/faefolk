@@ -1,7 +1,6 @@
 extends Control
 
 onready var PlayerMenuState = load("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
-onready var _character = load("res://Global/Data/Characters.gd")
 var playerMenuState
 
 var game_state: GameState
@@ -11,8 +10,8 @@ func _ready():
 		game_state = GameState.new()
 		game_state.load_state()
 		PlayerData.player_data = game_state.player_state
-		#PlayerData.player_data = PlayerData.starting_player_data
-		MapData.world = game_state.world_state
+		PlayerData.player_data = PlayerData.starting_player_data
+		#MapData.world = game_state.world_state
 		MapData.caves = game_state.cave_state
 	else: # Initial launch
 		game_state = GameState.new()
@@ -27,22 +26,17 @@ func _ready():
 	$Background/Water1.playing = true
 	$Background/Water2.playing = true
 	spawn_player_in_menu()
+	print_stray_nodes()
 
 
 func spawn_player_in_menu():
-#	var value = Server.player
-#	if not value.empty():
-		$MainMenuButtons/LoadingIndicator.visible = false
-		$MainMenuButtons/PlayShopQuit.visible = true
-		playerMenuState = PlayerMenuState.instance()
-		playerMenuState.name = "Player"
-		playerMenuState.character = _character.new()
-		playerMenuState.character.LoadPlayerCharacter("human_male")
-		add_child(playerMenuState)
-		playerMenuState.global_position = Vector2(735, 585 )
-#	else:
-#		yield(get_tree().create_timer(0.25), "timeout")
-#		spawn_player_in_menu()
+	$MainMenuButtons/LoadingIndicator.visible = false
+	$MainMenuButtons/PlayShopQuit.visible = true
+	playerMenuState = PlayerMenuState.instance()
+	playerMenuState.name = "Player"
+	add_child(playerMenuState)
+	playerMenuState.global_position = Vector2(735, 585 )
+
 
 
 func change_title_volume():

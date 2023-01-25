@@ -11,7 +11,7 @@ func _ready():
 
 func initialize():
 	show()
-	get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/inventory/inventory-tab.png")
+	get_node("../../Background").set_deferred("texture", load("res://Assets/Images/User interface/inventory/inventory/inventory-tab.png"))
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
 	$CombatHotbarSlots.initialize_slots()
@@ -25,10 +25,10 @@ func initialize():
 		set_day_bg()
 
 func set_day_bg():
-	$DayNightBg.texture = load("res://Assets/Images/Inventory UI/day.png")
+	$DayNightBg.set_deferred("texture", load("res://Assets/Images/Inventory UI/day.png"))
 
 func set_night_bg():
-	$DayNightBg.texture = load("res://Assets/Images/Inventory UI/night.png")
+	$DayNightBg.set_deferred("texture", load("res://Assets/Images/Inventory UI/night.png"))
 
 func _physics_process(delta):
 	if not visible:

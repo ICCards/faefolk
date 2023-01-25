@@ -18,9 +18,9 @@ mouse_filter = 2
 [node name="TreeSeedToPlace" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.627451 )
 margin_left = -34.0
-margin_top = -234.0
+margin_top = -235.0
 margin_right = 14.0
-margin_bottom = -142.0
+margin_bottom = -143.0
 grow_vertical = 0
 rect_scale = Vector2( 2.75, 2.75 )
 mouse_filter = 2

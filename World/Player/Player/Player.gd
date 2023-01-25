@@ -65,6 +65,7 @@ func _ready():
 func destroy():
 	set_process(false)
 	set_process_unhandled_input(false)
+	character.queue_free()
 	state = DYING
 
 func set_held_object():

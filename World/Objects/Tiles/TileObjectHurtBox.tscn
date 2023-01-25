@@ -149,9 +149,9 @@ color = Color( 0.313726, 0.313726, 0.313726, 1 )
 anims/shake = SubResource( 19 )
 
 [node name="ChestPos" type="Node2D" parent="."]
+visible = false
 
 [node name="Chest" type="AnimatedSprite" parent="ChestPos"]
-visible = false
 frames = ExtResource( 5 )
 animation = "open"
 

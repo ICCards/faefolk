@@ -20,7 +20,7 @@ func _ready():
 
 func initialize():
 	show()
-	get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/options/options-tab.png")
+	get_node("../../Background").set_deferred("texture", load("res://Assets/Images/User interface/inventory/options/options-tab.png"))
 
 func set_label_texts():
 	$ScrollContainer/VBoxContainer/Grid2/MoveLeftLabel.text = "Move left: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["move_left"])

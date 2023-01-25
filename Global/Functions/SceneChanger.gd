@@ -43,6 +43,7 @@ func _deferred_goto_scene(path):
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene(current_scene)
 	animation_player.play_backwards("fade")
+	print_stray_nodes()
 
 
 func advance_cave_level(current_scene, going_downwards):
@@ -64,6 +65,12 @@ func respawn():
 		node.destroy()
 	for node in Server.world.get_node("Enemies").get_children():
 		node.destroy(false)
+	for node in Server.world.get_node("NatureObjects").get_children():
+		node.queue_free()
+	for node in Server.world.get_node("ForageObjects").get_children():
+		node.queue_free()
+	for node in Server.world.get_node("GrassObjects").get_children():
+		node.queue_free()
 	PlayerData.spawn_at_respawn_location = true
 	yield(get_tree().create_timer(1.0), "timeout")
 	goto_scene(PlayerData.player_data["respawn_scene"])
@@ -75,4 +82,10 @@ func destroy_current_scene():
 		node.destroy()
 	for node in Server.world.get_node("Enemies").get_children():
 		node.destroy(false)
+	for node in Server.world.get_node("NatureObjects").get_children():
+		node.queue_free()
+	for node in Server.world.get_node("ForageObjects").get_children():
+		node.queue_free()
+	for node in Server.world.get_node("GrassObjects").get_children():
+		node.queue_free()
 

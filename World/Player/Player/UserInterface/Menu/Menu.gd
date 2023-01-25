@@ -24,9 +24,9 @@ func set_name_plate(selected_tab):
 	for node in $NamePlates.get_children():
 		if node.name != "save":
 			if node.name != selected_tab:
-				node.texture_normal = load("res://Assets/Images/User interface/buttons-icons/nameplate.png")
+				node.set_deferred("texture_normal", load("res://Assets/Images/User interface/buttons-icons/nameplate.png"))
 			else:
-				node.texture_normal = load("res://Assets/Images/User interface/buttons-icons/nameplate-selected.png")
+				node.set_deferred("texture_normal", load("res://Assets/Images/User interface/buttons-icons/nameplate-selected.png"))
 
 func change_inventory_tab(new_tab):
 	if not find_parent("UserInterface").holding_item:
