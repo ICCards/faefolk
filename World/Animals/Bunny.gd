@@ -44,6 +44,10 @@ func set_attributes():
 func _update_pathfinding():
 	if not thread.is_active() and visible:
 		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+		if Util.chance(50):
+			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/idle.mp3"))
+			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+			sound_effects.call_deferred("play")
 		
 func _get_path(pos):
 	call_deferred("calculate_path", pos)
@@ -127,9 +131,9 @@ func destroy(killed_by_player):
 	_timer.call_deferred("stop")
 	set_physics_process(false)
 	if killed_by_player:
-		#MapData.remove_animal(name)
+		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["bunny"] += 1
-		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
 	destroyed = true
@@ -142,7 +146,7 @@ func destroy(killed_by_player):
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Bunny/rabbit.mp3"))
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/hurt"+str(rng.randi_range(1,4))+".mp3"))
 	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 	sound_effects.call_deferred("play")
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
@@ -187,4 +191,6 @@ func _on_RunStateTimer_timeout():
 func _on_VisibilityNotifier2D_screen_entered():
 	set_deferred("visible", true)
 func _on_VisibilityNotifier2D_screen_exited():
-	set_deferred("visible", false)
+	if MapData.world["animal"].has(name):
+		MapData.world["animal"][name]["l"] = position/32
+		set_deferred("visible", false)

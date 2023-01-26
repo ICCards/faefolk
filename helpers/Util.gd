@@ -159,4 +159,5 @@ func isNonFruitTree(tree_name):
 	if tree_name == "oak" or tree_name == "pine" or tree_name == "birch" or tree_name == "spruce" or tree_name == "evergreen":
 		return true
 	return false
-	
+
+

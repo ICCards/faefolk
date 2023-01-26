@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/groan 3.mp3-08d6fb865f972f09d34e3139a7969745.mp3str"
+path="res://.import/groan 3.mp3-74200dd3b3cf11d64deae76970d7d60d.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 3.mp3"
-dest_files=[ "res://.import/groan 3.mp3-08d6fb865f972f09d34e3139a7969745.mp3str" ]
+source_file="res://Assets/Sound/Sound effects/animals/bear/Groan/groan 3.mp3"
+dest_files=[ "res://.import/groan 3.mp3-74200dd3b3cf11d64deae76970d7d60d.mp3str" ]
 
 [params]
 

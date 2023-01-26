@@ -29,6 +29,7 @@ func _ready():
 func destroy():
 	set_physics_process(false)
 	character.queue_free()
+	Server.player_node = null
 
 func _physics_process(_delta):
 	var velocity = Vector2.ZERO

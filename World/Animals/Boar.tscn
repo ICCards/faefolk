@@ -68,7 +68,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=18]
-radius = 207.002
+radius = 284.016
 
 [sub_resource type="CircleShape2D" id=21]
 radius = 32.0
@@ -199,10 +199,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, true ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("CollisionShape2D:disabled")
@@ -478,7 +478,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 9
+frame = 4
 playing = true
 
 [node name="LineOfSight" type="RayCast2D" parent="."]

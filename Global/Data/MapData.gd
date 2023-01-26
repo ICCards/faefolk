@@ -32,7 +32,8 @@ var world = {
 	"tile": {},
 	"placable": {},
 }
-var starting_caves_data = {"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+var starting_caves_data = {
+"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
 "Cave 1-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
 "Cave 1-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
 "Cave 1-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
@@ -122,7 +123,11 @@ func return_advanced_fruit_tree_phase(current_phase):
 			return "mature2"
 		"mature2":
 			return "harvest"
-			
+
+
+func add_forage(id,data):
+	world["forage"][id] = data
+
 func remove_animal(id):
 	world["animal"].erase(id)
 

@@ -134,6 +134,7 @@ func _physics_process(delta):
 	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
 	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
+		print("STATE " + str(state))
 		start_chase_state()
 	if chasing and (position+Vector2(0,-9)).distance_to(player.position) < 70:
 		state = ATTACK
@@ -167,7 +168,8 @@ func attack():
 		if not destroyed:
 			animation_player.call_deferred("play","loop")
 			attacking = false
-			state = CHASE
+			if state != RETREAT:
+				state = CHASE
 
 func player_not_inside_walls() -> bool:
 	var collider = $LineOfSight.get_collider()
@@ -192,6 +194,9 @@ func hit(tool_name):
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/hurt"+str(rng.randi_range(1,3)) +".mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
 	if health < STARTING_HEALTH*.3:
 		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
@@ -204,12 +209,11 @@ func destroy(killed_by_player):
 		_idle_timer.call_deferred("stop")
 		set_physics_process(false)
 		if killed_by_player:
-			#MapData.remove_animal(name)
+			MapData.remove_animal(name)
 			PlayerData.player_data["collections"]["mobs"]["wolf"] += 1
-			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
+			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/death.mp3"))
 			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 			sound_effects.call_deferred("play")
-		call_deferred("stop_sound_effects")
 		destroyed = true
 		$Position2D/WolfBite/CollisionShape2D.set_deferred("disabled", true)
 		$Position2D/WolfClaw/CollisionShape2D.set_deferred("disabled", false)
@@ -265,7 +269,11 @@ func start_retreat_state():
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("stop")
 	_retreat_timer.call_deferred("start")
-	call_deferred("stop_sound_effects")
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/retreat.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
+	yield(sound_effects, "finished")
+	sound_effects.stop()
 	chasing = false
 	
 func start_chase_state():
@@ -301,8 +309,8 @@ func _on_EndChaseState_timeout():
 
 func play_groan_sound_effect():
 	rng.randomize()
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3"))
-	sound_effects.set_deferred( "volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/bite.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 	sound_effects.call_deferred("play")
 	yield(sound_effects, "finished")
 	playing_sound_effect = false
@@ -311,7 +319,7 @@ func play_groan_sound_effect():
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3"))
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/bear pacing.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
 
@@ -328,7 +336,9 @@ func _on_VisibilityNotifier2D_screen_entered():
 	set_deferred("visible", true)
 
 func _on_VisibilityNotifier2D_screen_exited():
-	if playing_sound_effect:
-		call_deferred("stop_sound_effects")
-	set_deferred("visible", false)
+	if MapData.world["animal"].has(name):
+		MapData.world["animal"][name]["l"] = position/32
+		if playing_sound_effect:
+			call_deferred("stop_sound_effects")
+		set_deferred("visible", false)
 

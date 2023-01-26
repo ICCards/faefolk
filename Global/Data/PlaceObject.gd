@@ -1,5 +1,6 @@
 extends Node
 
+onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
 onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
@@ -9,7 +10,7 @@ onready var SleepingBag = load("res://World/Objects/Tiles/SleepingBag.tscn")
 onready var DoorFront = load("res://World/Objects/Tiles/DoorFront.tscn")
 onready var DoorSide = load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
 onready var Rug  = load("res://World/Objects/Misc/Rug.tscn")
-
+onready var GateFront = load("res://World/Objects/Tiles/GateFront.tscn")
 
 var rng = RandomNumberGenerator.new()
 
@@ -45,6 +46,19 @@ enum Lights {
 
 var PlacableObjects 
 var NatureObjects 
+var ForageObjects
+
+
+func place_forage_in_world(id,item_name,location,first_placement):
+	ForageObjects = Server.world.get_node("ForageObjects")
+	var forageItem = ForageItem.instance()
+	forageItem.name = id
+	forageItem.item_name = item_name
+	forageItem.location = location
+	forageItem.first_placement = first_placement
+	forageItem.position = Tiles.valid_tiles.map_to_world(location) + Vector2(16,16)
+	ForageObjects.call_deferred("add_child",forageItem,true)
+
 
 func place_tree_in_world(id, variety, location, biome ,health, phase):
 	NatureObjects = Server.world.get_node("NatureObjects")
@@ -123,6 +137,9 @@ func place_object_in_world(id, item_name, direction, location):
 	match item_name:
 		"wood gate":
 			tileObjectHurtBox.queue_free()
+			var gateFront = GateFront.instance()
+			gateFront.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
+			PlacableObjects.call_deferred("add_child", gateFront, true)
 		"round table1":
 			Tiles.object_tiles.set_cellv(location, 175)
 		"round table2": 

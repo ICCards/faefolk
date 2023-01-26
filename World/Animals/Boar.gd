@@ -89,16 +89,17 @@ func _update_pathfinding_retreat():
 		thread.start(self, "_get_path", self.position+target)
 	
 func set_sprite_texture():
-	match state:
-		IDLE:
-			if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png"):
-				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png"))
-		WALK:
-			if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png"):
-				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png"))
-		_:
-			if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png"):
-				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png"))
+	if not attacking or destroyed:
+		match state:
+			IDLE:
+				if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png"):
+					boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png"))
+			WALK:
+				if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png"):
+					boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png"))
+			_:
+				if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png"):
+					boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png"))
 
 func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
@@ -162,7 +163,8 @@ func attack():
 		if not destroyed:
 			animation_player.call_deferred("play", "loop")
 			attacking = false
-			state = CHASE
+			if state != RETREAT:
+				state = CHASE
 
 func player_not_inside_walls() -> bool:
 	var collider = $LineOfSight.get_collider()
@@ -199,12 +201,11 @@ func destroy(killed_by_player):
 	_idle_timer.call_deferred("stop")
 	set_physics_process(false)
 	if killed_by_player:
-		#MapData.remove_animal(name)
+		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["boar"] += 1
-		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/boar/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
-	call_deferred("stop_sound_effects")
 	destroyed = true
 	$BoarBite/CollisionShape2D.set_deferred("disabled", true)
 	boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/death/" +  direction + "/body.png"))
@@ -259,17 +260,21 @@ func start_retreat_state():
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("stop")
 	_retreat_timer.call_deferred("start")
-	stop_sound_effects()
 	chasing = false
 	
 func start_chase_state():
 	chasing = true
 	state = CHASE
 	navigation_agent.set_deferred("max_speed", 170)
-	call_deferred("start_sound_effects")
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("start")
 	_end_chase_state_timer.call_deferred("start", 20)
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/boar/engage.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
+	yield(sound_effects, "finished")
+	if not destroyed:
+		call_deferred("start_sound_effects")
 
 func end_chase_state():
 	chasing = false
@@ -296,8 +301,8 @@ func _on_EndChaseState_timeout():
 
 
 func play_groan_sound_effect():
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3"))
-	sound_effects.set_deferred( "volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/boar/attack.mp3"))
+	sound_effects.set_deferred( "volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 	sound_effects.call_deferred("play")
 	yield(sound_effects, "finished")
 	playing_sound_effect = false
@@ -306,8 +311,8 @@ func play_groan_sound_effect():
 func start_sound_effects():
 	if not playing_sound_effect:
 		playing_sound_effect = true
-		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3"))
-		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/boar/gallop2.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
 
 func stop_sound_effects():
@@ -320,8 +325,10 @@ func _on_VisibilityNotifier2D_screen_entered():
 	set_deferred("visible", true)
 
 func _on_VisibilityNotifier2D_screen_exited():
-	if playing_sound_effect:
-		call_deferred("stop_sound_effects")
-	set_deferred("visible", false)
+	if MapData.world["animal"].has(name):
+		MapData.world["animal"][name]["l"] = position/32
+		if playing_sound_effect:
+			call_deferred("stop_sound_effects")
+		set_deferred("visible", false)
 
 

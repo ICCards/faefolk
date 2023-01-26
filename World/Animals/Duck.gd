@@ -35,11 +35,11 @@ func _ready():
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
 func set_random_attributes():
-	$Timers/DropEggTimer.wait_time = rand_range(20, 40)
-	duck_sprite.frames = Images.DuckVariations[variety-1]
-	_timer.wait_time = rand_range(2.5, 5.0)
+	$Timers/DropEggTimer.set_deferred("wait_time",  rand_range(20, 40))
+	duck_sprite.set_deferred("frames", Images.DuckVariations[variety-1])
+	_timer.set_deferred("wait_time", rand_range(2.5, 5.0))
 	if Util.chance(50):
-		duck_sprite.flip_h = true
+		duck_sprite.set_deferred("flip_h", true)
 
 func _physics_process(delta):
 	if not visible or destroyed or is_eating or stunned:
@@ -110,7 +110,7 @@ func calculate_path(pos):
 	thread.wait_to_finish()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3"))
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/quack.mp3"))
 	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 	sound_effects.call_deferred("play")
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
@@ -165,7 +165,7 @@ func destroy(killed_by_player):
 	_timer.call_deferred("stop")
 	set_physics_process(false)
 	if killed_by_player:
-		#MapData.remove_animal(name)
+		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -196,14 +196,14 @@ func _on_IdleTimer_timeout():
 	is_eating = false
 
 func _on_DropEggTimer_timeout():
-	if visible and not is_eating and Server.isLoaded and not destroyed:
-		$Timers/DropEggTimer.set_deferred("wait_time", rand_range(10, 20))
-		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3"))
+	if visible and Server.isLoaded and not destroyed and velocity != Vector2.ZERO:
+		$Timers/DropEggTimer.set_deferred("wait_time", rand_range(20, 30))
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/egg drop.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -4))
 		sound_effects.call_deferred("play")
 		var forageItem = ForageItem.instance()
-		forageItem.type = "raw egg"
-		forageItem.variety = "raw egg"
+		forageItem.first_placement = true
+		forageItem.item_name = "raw egg"
 		forageItem.global_position = position
 		get_node("../../").call_deferred("add_child", forageItem)
 	
@@ -211,4 +211,6 @@ func _on_VisibilityNotifier2D_screen_entered():
 	set_deferred("visible", true)
 
 func _on_VisibilityNotifier2D_screen_exited():
-	set_deferred("visible", false)
+	if MapData.world["animal"].has(name):
+		MapData.world["animal"][name]["l"] = position/32
+		set_deferred("visible", false)

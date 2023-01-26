@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hurt.mp3-683e7125b851f6ee7c1adb625335fcd2.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/animals/deer/hurt.mp3"
+dest_files=[ "res://.import/hurt.mp3-683e7125b851f6ee7c1adb625335fcd2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

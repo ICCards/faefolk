@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/gallop.mp3-72d3d2d6f79c436a0041ee60cd3acee6.mp3str"
+path="res://.import/gallop.mp3-31ee696269785abfe4fb4f902c50fe2d.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3"
-dest_files=[ "res://.import/gallop.mp3-72d3d2d6f79c436a0041ee60cd3acee6.mp3str" ]
+source_file="res://Assets/Sound/Sound effects/animals/deer/gallop.mp3"
+dest_files=[ "res://.import/gallop.mp3-31ee696269785abfe4fb4f902c50fe2d.mp3str" ]
 
 [params]
 

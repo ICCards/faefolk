@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/attack.mp3-0160444cc2e701c9381c806b24e09ea4.mp3str"
+path="res://.import/attack.mp3-ea79c033d82ee7be50d4d4513c83c76a.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3"
-dest_files=[ "res://.import/attack.mp3-0160444cc2e701c9381c806b24e09ea4.mp3str" ]
+source_file="res://Assets/Sound/Sound effects/animals/deer/attack.mp3"
+dest_files=[ "res://.import/attack.mp3-ea79c033d82ee7be50d4d4513c83c76a.mp3str" ]
 
 [params]
 

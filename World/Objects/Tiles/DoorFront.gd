@@ -19,21 +19,21 @@ func _ready():
 
 
 func toggle_door():
-		if door_open:
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
-			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-			sound_effects.play()
-			#$AnimationPlayer.play("close")
-			$AnimatedSprite.play("close")
-			$DoorMovementCollision/CollisionShape2D.disabled = false
-		else:
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
-			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-			sound_effects.play()
-			#$AnimationPlayer.play("open")
-			$AnimatedSprite.play("open")
-			$DoorMovementCollision/CollisionShape2D.disabled = true
-		door_open = !door_open
+	if door_open:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		sound_effects.play()
+		#$AnimationPlayer.play("close")
+		$AnimatedSprite.play("close")
+		$DoorMovementCollision/CollisionShape2D.disabled = false
+	else:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		sound_effects.play()
+		#$AnimationPlayer.play("open")
+		$AnimatedSprite.play("open")
+		$DoorMovementCollision/CollisionShape2D.disabled = true
+	door_open = !door_open
 	
 func set_type():
 	match tier:

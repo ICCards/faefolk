@@ -1,6 +1,10 @@
 extends KinematicBody2D
 
+onready var Duck = load("res://World/Animals/Duck.tscn")
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+var _uuid = load("res://helpers/UUID.gd")
+
+var rng = RandomNumberGenerator.new()
 
 var speed = 500
 var destroyed: bool = false
@@ -16,8 +20,12 @@ func _physics_process(delta):
 		return
 
 func _ready():
-	$Sprite.texture = load("res://Assets/Images/inventory_icons/Potion/"+ potion_name  +".png")
-	$PotionHitbox.tool_name = potion_name
+	rng.randomize()
+	if potion_name == "raw egg":
+		$Sprite.texture = load("res://Assets/Images/Forage/animal/raw egg.png")
+	else:
+		$Sprite.texture = load("res://Assets/Images/inventory_icons/Potion/"+ potion_name  +".png")
+		$PotionHitbox.tool_name = potion_name
 	if potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
 		$PotionHitbox.set_collision_mask(264320)
 		$DestructionTrailParticles.show()
@@ -43,10 +51,9 @@ func _ready():
 func destroy():
 	destroyed = true
 	$Sprite.call_deferred("hide")
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Magic/Potion/glass break.mp3"))
-	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
-	sound_effects.call_deferred("play")
-	if potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
+	if potion_name == "raw egg":
+		$AnimationPlayer.call_deferred("play", "raw egg break")
+	elif potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
 		$AnimationPlayer.call_deferred("play", "destruction potion")
 	elif potion_name == "poison potion I" or potion_name == "poison potion II" or potion_name == "poison potion III":
 		$AnimationPlayer.call_deferred("play", "poison potion")
@@ -56,3 +63,32 @@ func destroy():
 		$AnimationPlayer.call_deferred("play", "health potion")
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
+	
+
+
+func play_glass_break_sound():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Magic/Potion/glass break.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
+	sound_effects.call_deferred("play")
+	
+
+func play_egg_break_sound():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/duck/egg break.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -8))
+	sound_effects.call_deferred("play")
+	spawn_duck()
+	
+	
+func spawn_duck():
+	if Tiles.valid_tiles.get_cellv(global_position/32) != -1:
+		if Util.chance(25):
+			var uuid = _uuid.new()
+			var id = uuid.v4()
+			var variety = rng.randi_range(1,3)
+			MapData.world["animal"][id] = {"l":global_position/32,"n":"duck","v":variety,"h":Stats.DUCK_HEALTH}
+			var duck = Duck.instance()
+			duck.name = id
+			duck.health = Stats.DUCK_HEALTH
+			duck.variety = variety 
+			duck.global_position = global_position
+			Server.world.get_node("Enemies").call_deferred("add_child", duck)

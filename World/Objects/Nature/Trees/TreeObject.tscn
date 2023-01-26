@@ -629,7 +629,6 @@ position = Vector2( 0, -18 )
 scale = Vector2( 2.75, 2.75 )
 
 [node name="TreeStump" type="Sprite" parent="TreeSprites"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -30 )
 __meta__ = {
@@ -637,10 +636,12 @@ __meta__ = {
 }
 
 [node name="TreeBottom" type="Sprite" parent="TreeSprites"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 6 )
 offset = Vector2( 0, -30 )
 region_rect = Rect2( 160, 320, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TreeTop" type="Sprite" parent="TreeSprites"]
 visible = false
@@ -652,7 +653,6 @@ __meta__ = {
 
 [node name="AnimatedTop" type="AnimatedSprite" parent="TreeSprites"]
 frames = ExtResource( 2 )
-frame = 14
 playing = true
 offset = Vector2( 0, -38 )
 

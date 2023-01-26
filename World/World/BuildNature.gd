@@ -1,6 +1,5 @@
 extends Node
 
-onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
 onready var DesertTree = load("res://World/Objects/Nature/Trees/DesertTree.tscn")
 onready var Log = load("res://World/Objects/Nature/Trees/Log.tscn")
@@ -39,18 +38,15 @@ func spawn_forage():
 			return
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["forage"]:
-			var loc = Util.string_to_vector2(map["forage"][id]["l"])
 			var player_loc = Tiles.valid_tiles.world_to_map(Server.player_node.position)
+			var location = Util.string_to_vector2(map["forage"][id]["l"])
 			var type = map["forage"][id]["n"]
-			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+			var variety = map["forage"][id]["n"]
+			var first_placement =  map["forage"][id]["f"]
+			if player_loc.distance_to(location) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not ForageObjects.has_node(id) and MapData.world["forage"].has(id):
-					var forageItem = ForageItem.instance()
-					forageItem.name = id
-					forageItem.type = type
-					forageItem.variety = map["forage"][id]["v"]
-					forageItem.location = loc
-					forageItem.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16,16)
-					ForageObjects.call_deferred("add_child", forageItem)
+					PlaceObject.place_forage_in_world(id,variety,location,first_placement)
+
 	var value = forage_thread.wait_to_finish()
 
 
@@ -170,7 +166,7 @@ func spawn_trees():
 			var loc = Util.string_to_vector2(map["tree"][id]["l"]) + Vector2(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and MapData.world["tree"].has(id):
-					var biome = map["tree"][id]["b"]
+					var biome = "forest" #map["tree"][id]["b"]
 					if biome == "desert":
 						pass
 #						var object = DesertTree.instance()

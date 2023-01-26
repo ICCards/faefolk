@@ -32,7 +32,7 @@ var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
-var MAX_SPEED_DIRT := 13
+var MAX_SPEED_DIRT := 18 #13
 var MAX_SPEED_PATH := 14.5
 var DASH_SPEED := 55
 var MAX_SPEED_SWIMMING := 12
@@ -77,7 +77,7 @@ func set_held_object():
 				$TorchLight.set_deferred("enabled", true)
 			else:
 				$TorchLight.set_deferred("enabled", false)
-			if item_category == "Placable object" or item_category == "Seed":
+			if item_category == "Placable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
 				actions.show_placable_object(item_name, item_category)
 				return
 			if item_name == "blueprint" and current_building_item != null:
@@ -161,7 +161,7 @@ func player_action(event, item_name, item_category):
 		actions.fish()
 	elif (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
 		$Swing.swing(item_name, direction)
-	elif item_category == "Potion":
+	elif item_category == "Potion" or item_name == "raw egg":
 		$Magic.throw_potion(item_name, direction)
 	elif item_name == "bow":
 		$Magic.draw_bow(direction)

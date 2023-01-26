@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/egg drop.mp3-593a8330ef64a257fcecba61f1b78004.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/animals/duck/egg drop.mp3"
+dest_files=[ "res://.import/egg drop.mp3-593a8330ef64a257fcecba61f1b78004.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

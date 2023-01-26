@@ -164,7 +164,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 9 )
 animation = "tulip"
-frame = 4
+frame = 2
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

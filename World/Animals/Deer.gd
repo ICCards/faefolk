@@ -169,6 +169,9 @@ func player_not_inside_walls() -> bool:
 	return true
 
 func hit(tool_name):
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/deer/hurt.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
 	if state == IDLE or state == WALK:
 		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
@@ -196,13 +199,12 @@ func destroy(killed_by_player):
 	_idle_timer.call_deferred("stop")
 	set_physics_process(false)
 	if killed_by_player:
-		#MapData.remove_animal(name)
+		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["deer"] += 1
-		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/deer/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
 	destroyed = true
-	stop_sound_effects()
 	$DeerAttack/CollisionShape2D.set_deferred("disabled", true)
 	deer_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png"))
 	animation_player.call_deferred("play", "death")
@@ -256,17 +258,19 @@ func start_retreat_state():
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("stop")
 	_retreat_timer.call_deferred("start")
-	stop_sound_effects()
 	chasing = false
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/deer/retreat.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
 	
 func start_chase_state():
 	chasing = true
 	state = CHASE
 	navigation_agent.set_deferred("max_speed", 180)
-	call_deferred("start_sound_effects")
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("start")
 	_end_chase_state_timer.call_deferred("start", 20)
+	
 
 func end_chase_state():
 	chasing = false
@@ -285,8 +289,8 @@ func _on_KnockbackTimer_timeout():
 
 func play_groan_sound_effect():
 	rng.randomize()
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3"))
-	sound_effects.set_deferred( "volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/deer/attack.mp3"))
+	sound_effects.set_deferred( "volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 	sound_effects.call_deferred("play")
 	yield(sound_effects, "finished")
 	playing_sound_effect = false
@@ -309,7 +313,9 @@ func _on_VisibilityNotifier2D_screen_entered():
 	set_deferred("visible", true)
 
 func _on_VisibilityNotifier2D_screen_exited():
-	if playing_sound_effect:
-		call_deferred("stop_sound_effects")
-	set_deferred("visible", false)
+	if MapData.world["animal"].has(name):
+		MapData.world["animal"][name]["l"] = position/32
+		if playing_sound_effect:
+			call_deferred("stop_sound_effects")
+		set_deferred("visible", false)
 

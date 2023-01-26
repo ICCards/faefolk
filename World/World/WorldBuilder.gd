@@ -77,7 +77,6 @@ func get_chunks():
 		for new_chunk in new_chunks:
 			if not built_chunks.has(new_chunk):
 				built_chunks.append(new_chunk)
-				print("SPAWN CHUNK " + new_chunk)
 	yield(get_tree().create_timer(1.0), "timeout")
 	thread.wait_to_finish()
 

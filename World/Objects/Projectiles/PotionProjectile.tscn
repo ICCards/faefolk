@@ -1,6 +1,6 @@
-[gd_scene load_steps=95 format=2]
+[gd_scene load_steps=103 format=2]
 
-[ext_resource path="res://Assets/Images/inventory_icons/Potion/regeneration potion III.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Forage/animal/raw egg.png" type="Texture" id=1]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=2]
 [ext_resource path="res://World/Objects/Projectiles/PotionProjectile.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b6.png" type="Texture" id=4]
@@ -16,6 +16,37 @@
 [ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b11.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b2.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Images/Magic/Potions/smoke5_100x100.png" type="Texture" id=16]
+
+[sub_resource type="Curve" id=80]
+min_value = -400.0
+max_value = 400.0
+_data = [ Vector2( 0.00225479, 400 ), 0.0, 6785.07, 0, 0, Vector2( 0.0963725, 84.2162 ), -1232.57, -1232.57, 0, 0, Vector2( 1, -200 ), 1228.09, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=81]
+max_value = 2.5
+_data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=82]
+offsets = PoolRealArray( 0.000555864, 0.281938, 0.687225, 1 )
+colors = PoolColorArray( 1, 1, 0.780392, 1, 0.858824, 0.815686, 0.705882, 1, 0.686275, 0.615686, 0.513726, 1, 0.333333, 0.294118, 0.2, 1 )
+
+[sub_resource type="Curve" id=83]
+max_value = 3.0
+_data = [ Vector2( 0, 2.75318 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.35797 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=84]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 200 ), 0.0, 551.546, 0, 0, Vector2( 0.110634, -116.595 ), 0.0, 0.0, 0, 0, Vector2( 1, -138.216 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=85]
+min_value = 0.99
+max_value = 5.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 5 ), 10.0041, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=86]
+offsets = PoolRealArray( 0, 0.994737, 1 )
+colors = PoolColorArray( 0.51083, 0.51083, 0.51083, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.0
@@ -407,6 +438,20 @@ tracks/6/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_glass_break_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "health potion"
@@ -482,6 +527,20 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_glass_break_sound"
+} ]
 }
 
 [sub_resource type="Animation" id=71]
@@ -571,6 +630,73 @@ tracks/6/keys = {
 "update": 1,
 "values": [ true, false, true ]
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_glass_break_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=79]
+resource_name = "raw egg break"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_egg_break_sound"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RawEggParticles/Explosion:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RawEggParticles/Explosion/Shards:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RawEggParticles/Explosion/Smoke:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=72]
 resource_name = "speed potion"
@@ -646,6 +772,20 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_glass_break_sound"
+} ]
 }
 
 [node name="PotionProjectile" type="KinematicBody2D"]
@@ -889,6 +1029,79 @@ scale_amount = 4.0
 scale_amount_random = 0.7
 color = Color( 0.145098, 0.305882, 0.545098, 1 )
 
+[node name="RawEggParticles" type="Node2D" parent="."]
+
+[node name="Explosion" type="CPUParticles2D" parent="RawEggParticles"]
+emitting = false
+amount = 100
+lifetime = 0.8
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.5
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+linear_accel = 60.0
+linear_accel_random = 0.2
+linear_accel_curve = SubResource( 80 )
+scale_amount = 2.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 81 )
+color_ramp = SubResource( 82 )
+
+[node name="Shards" type="CPUParticles2D" parent="RawEggParticles/Explosion"]
+emitting = false
+amount = 10
+lifetime = 0.9
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.8
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 140 )
+initial_velocity = 50.0
+initial_velocity_random = 0.3
+linear_accel = 100.0
+linear_accel_random = 0.4
+scale_amount = 2.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 83 )
+color_ramp = SubResource( 82 )
+
+[node name="Smoke" type="CPUParticles2D" parent="RawEggParticles/Explosion"]
+self_modulate = Color( 1, 1, 1, 0.823529 )
+show_behind_parent = true
+emitting = false
+amount = 100
+lifetime = 0.9
+one_shot = true
+speed_scale = 3.0
+explosiveness = 0.8
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.15
+orbit_velocity_random = 1.0
+linear_accel = 100.0
+linear_accel_random = 0.5
+linear_accel_curve = SubResource( 84 )
+scale_amount = 2.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 85 )
+color_ramp = SubResource( 86 )
+
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
@@ -899,6 +1112,7 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="ExplosionParticles" type="Node2D" parent="."]
+visible = false
 
 [node name="Explosion" type="CPUParticles2D" parent="ExplosionParticles"]
 modulate = Color( 1.12, 1.12, 1.12, 1 )
@@ -961,6 +1175,7 @@ scale_amount_curve = SubResource( 77 )
 color_ramp = SubResource( 78 )
 
 [node name="SpeedExplosionParticles" type="Node2D" parent="."]
+visible = false
 
 [node name="Explosion" type="CPUParticles2D" parent="SpeedExplosionParticles"]
 modulate = Color( 1.12, 1.12, 1.12, 1 )
@@ -1053,6 +1268,7 @@ playing = true
 "anims/destruction potion" = SubResource( 8 )
 "anims/health potion" = SubResource( 9 )
 "anims/poison potion" = SubResource( 71 )
+"anims/raw egg break" = SubResource( 79 )
 "anims/speed potion" = SubResource( 72 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

@@ -135,6 +135,7 @@ func build_world():
 	generate_weeds(forest,"forest")
 	generate_weeds(plains,"plains")
 	generate_beach_forage(beach)
+	generate_animals()
 #	yield(get_tree().create_timer(1.0), "timeout")
 	#yield(get_tree().create_timer(1.0), "timeout")
 	#get_node("/root/World/Loading").call_deferred("set_phase","Saving data")
@@ -347,10 +348,10 @@ func generate_beach_forage(locations):
 			var id = uuid.v4()
 			if Util.chance(50):
 				clamTypes.shuffle()
-				MapData.world["forage"][id] = {"l":location,"n":"clam","v":clamTypes.front()}
+				MapData.world["forage"][id] = {"l":location,"n":clamTypes.front(),"f":true}
 			else:
 				starfishTypes.shuffle()
-				MapData.world["forage"][id] = {"l":location,"n":"starfish","v":starfishTypes.front()}
+				MapData.world["forage"][id] = {"l":location,"n":starfishTypes.front(),"f":true}
 
 func generate_weeds(locations,biome):
 	print("Building "+biome+" weeds")
@@ -379,7 +380,7 @@ func create_flower(loc,biome):
 	var id = uuid.v4()
 	if isValidPosition(loc):
 		flowerTypes.shuffle()
-		MapData.world["forage"][id] = {"l":loc,"n":"flower","v":flowerTypes.front()}
+		MapData.world["forage"][id] = {"l":loc,"n":flowerTypes.front(),"f":true}
 		decoration_locations.append(loc)
 
 func generate_ores(locations,biome):

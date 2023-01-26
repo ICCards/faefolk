@@ -17,35 +17,13 @@ onready var deep_ocean = $GeneratedTiles/DeepOcean
 onready var top_ocean = $GeneratedTiles/TopOcean
 onready var Players = $Players
 
-onready var Bear = load("res://World/Animals/Bear.tscn")
-onready var Bunny = load("res://World/Animals/Bunny.tscn")
-onready var Duck = load("res://World/Animals/Duck.tscn")
-onready var Boar = load("res://World/Animals/Boar.tscn")
-onready var Deer = load("res://World/Animals/Deer.tscn")
-onready var Wolf = load("res://World/Animals/Wolf.tscn")
 onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
-
 onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
-
 onready var Player = load("res://World/Player/Player/Player.tscn")
 
 var rng = RandomNumberGenerator.new()
 
 var spawn_loc
-
-const MAX_DUCKS = 150
-const MAX_BUNNIES = 150
-const MAX_BEARS = 60
-const MAX_BOARS = 50
-const MAX_DEER = 90
-const MAX_WOLVES = 150
-
-var num_ducks = 0
-var num_bunnies = 0
-var num_deer = 0
-var num_bears = 0
-var num_boars = 0
-var num_wolves = 0
 
 var is_changing_scene: bool = false
 
@@ -72,11 +50,9 @@ func build_world():
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
 	$WorldBuilder/BuildNature.initialize()
-	#$WorldBuilder/SpawnAnimal.initialize()
+	$WorldBuilder/SpawnAnimal.initialize()
 	yield(get_tree(), "idle_frame")
 	$WorldMap.buildMap()
-	yield(get_tree(), "idle_frame")
-	spawn_initial_animals()
 
 
 func spawn_player():
@@ -142,99 +118,3 @@ func create_cave_entrance(_loc):
 	caveLadder.is_down_ladder = true
 	caveLadder.position = loc*32 + Vector2(32,16)
 	add_child(caveLadder)
-
-func spawn_initial_animals():
-	for i in range(220):
-		spawnRandomBunny()
-	yield(get_tree(), "idle_frame")
-	for i in range(220):
-		spawnRandomDuck()
-	yield(get_tree(), "idle_frame")
-	for i in range(175):
-		spawnRandomDeer()
-	yield(get_tree(), "idle_frame")
-	for i in range(25):
-		spawnRandomBoar()
-	yield(get_tree(), "idle_frame")
-	for i in range(25):
-		spawnRandomBear()
-	yield(get_tree(), "idle_frame")
-	for i in range(25):
-		spawnRandomWolf()
-
-
-func returnValidSpawnLocation():
-	rng.randomize()
-	var tempLoc = Vector2(rng.randi_range(100, 900), rng.randi_range(100, 900))
-	if validTiles.get_cellv(tempLoc) != -1 and not MapData.world["ocean"].has(tempLoc):
-		return tempLoc
-	return null
-
-
-func spawnRandomWolf():
-	if num_wolves < MAX_WOLVES:
-		var loc = returnValidSpawnLocation()
-		if loc != null:
-			var wolf = Wolf.instance()
-			wolf.global_position = loc*32
-			$Enemies.call_deferred("add_child",wolf)
-			wolf.hide()
-			num_wolves += 1
-			yield(get_tree(), "idle_frame")
-
-func spawnRandomBunny():
-	if num_bunnies < MAX_BUNNIES:
-		var loc = returnValidSpawnLocation()
-		if loc != null:
-			var bunny = Bunny.instance()
-			bunny.variety = rng.randi_range(1,3)
-			bunny.global_position = loc*32
-			$Enemies.call_deferred("add_child",bunny)
-			bunny.hide()
-			num_bunnies += 1
-			yield(get_tree(), "idle_frame")
-
-func spawnRandomDuck():
-	if num_ducks < MAX_DUCKS:
-		var loc = returnValidSpawnLocation()
-		if loc != null:
-			var duck = Duck.instance()
-			duck.variety = rng.randi_range(1,3)
-			duck.global_position = loc*32
-			$Enemies.call_deferred("add_child",duck)
-			duck.hide()
-			num_ducks += 1
-			yield(get_tree(), "idle_frame")
-
-func spawnRandomBear():
-	if num_bears < MAX_BEARS:
-		var loc = returnValidSpawnLocation()
-		if loc != null:
-			var bear = Bear.instance()
-			$Enemies.call_deferred("add_child",bear)
-			bear.global_position = loc*32
-			num_bears += 1
-			yield(get_tree(), "idle_frame")
-		
-func spawnRandomBoar():
-	if num_boars < MAX_BOARS:
-		var loc = returnValidSpawnLocation()
-		if loc != null:
-			var boar = Boar.instance()
-			$Enemies.call_deferred("add_child", boar)
-			boar.global_position = loc*32
-			num_boars += 1
-			boar.hide()
-			yield(get_tree(), "idle_frame")
-
-func spawnRandomDeer():
-	if num_deer < MAX_DEER:
-		var loc = returnValidSpawnLocation()
-		if loc != null:
-			var deer = Deer.instance()
-			$Enemies.call_deferred("add_child", deer)
-			deer.global_position = loc*32
-			num_deer += 1
-			deer.hide()
-			yield(get_tree(), "idle_frame")
-

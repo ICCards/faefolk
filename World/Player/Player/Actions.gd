@@ -74,6 +74,8 @@ func _input(event):
 						get_parent().user_interface.toggle_brewing_table(current_interactive_node.object_id, current_interactive_node.object_level)
 					"door":
 						current_interactive_node.toggle_door()
+					"gate":
+						current_interactive_node.toggle_gate()
 			current_interactive_node = null
 
 
@@ -131,19 +133,20 @@ func harvest_forage(forage_node):
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		forage_node.hide()
 		get_parent().state = HARVESTING
-		PlayerData.player_data["collections"]["forage"][forage_node.variety] += 1
-		PlayerData.player_data["skill_experience"]["foraging"] += 1
-		if forage_node.type != "raw egg":
+		if forage_node.first_placement:
+			PlayerData.player_data["collections"]["forage"][forage_node.item_name] += 1
+			PlayerData.player_data["skill_experience"]["foraging"] += 1
+		if forage_node.item_name != "raw egg":
 			Tiles.add_valid_tiles(forage_node.location)
 			MapData.remove_forage(forage_node.name)
 		Sounds.play_harvest_sound()
 		get_parent().state = get_parent().HARVESTING
 		var anim = "harvest_" + get_parent().direction.to_lower()
-		get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+forage_node.variety+".png")
+		get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+forage_node.item_name+".png")
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
 		get_parent().animation_player.play(anim)
 		yield(get_parent().animation_player, "animation_finished")
-		PlayerData.pick_up_item(forage_node.variety, 1, null)
+		PlayerData.pick_up_item(forage_node.item_name, 1, null)
 		forage_node.queue_free()
 		get_parent().state = get_parent().MOVEMENT
 
