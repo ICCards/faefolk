@@ -57,9 +57,9 @@ var starting_player_data = {
 	"hotbar": {
 		"0": ["stone sword", 1, 100],
 		"1": ["gold axe", 1, 100],
-#		"1": ["bow", 1, 50],
-#		"2": ["arrow", 999, null],
-#		"6": ["wind staff", 1, null],
+		"4": ["bow", 1, 50],
+		"2": ["arrow", 999, null],
+		"6": ["wind staff", 1, null],
 #		"5": ["fire staff", 1, null],
 		"7": ["raw egg", 100, null],
 #		"8": ["poison potion III", 100, null],
@@ -185,12 +185,12 @@ var starting_player_data = {
 			"fishing": 0,
 			"mining": 0,
 			"sword": 1,
-			"bow": 1,
+			"bow": 1000,
 			"dark": 0,
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 0,
+			"wind": 498,
 			"ice": 0,
 		},
 	"collections": {
@@ -357,9 +357,20 @@ var starting_player_data = {
 			"sprint": 16777237,
 			"change_variety": 86,
 			"use_tool": 67,
+			"toggle_hotbar": 96,
+			"slot1": 49,
+			"slot2": 50,
+			"slot3": 51,
+			"slot4": 52,
+			"slot5": 53,
+			"slot6": 54,
+			"slot7": 55,
+			"slot8": 56,
+			"slot9": 57,
+			"slot10": 48,
 		},
 		"volume": {
-			"music": 50.0,
+			"music": 0.0, ##### 50.0,
 			"sound": 50.0,
 			"ambient": 50.0,
 			"footstep": 50.0
@@ -671,10 +682,11 @@ func remove_single_object_from_hotbar():
 func slot_selected(slot_index) -> void:
 	if PlayerData.normal_hotbar_mode:
 		active_item_slot = slot_index
+		emit_signal("active_item_updated")
 	else:
 		if slot_index > 3 and slot_index < 8:
 			active_item_slot_combat_hotbar = slot_index - 4
-	emit_signal("active_item_updated")
+			emit_signal("active_item_updated")
 
 func active_item_scroll_up() -> void:
 	if PlayerData.normal_hotbar_mode:

@@ -32,7 +32,7 @@ var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
-var MAX_SPEED_DIRT := 18 #13
+var MAX_SPEED_DIRT := 13
 var MAX_SPEED_PATH := 14.5
 var DASH_SPEED := 55
 var MAX_SPEED_SWIMMING := 12
@@ -61,6 +61,15 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 	Server.isLoaded = true
 	set_held_object()
+	
+	
+func _input( event ):
+	if Server.isLoaded:
+		if event is InputEvent:
+			if event.is_action_pressed("sprint"):
+				running = true
+			elif event.is_action_released("sprint"):
+				running = false
 
 func destroy():
 	set_process(false)
@@ -104,12 +113,12 @@ func _process(_delta) -> void:
 		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
 	if state == MOVEMENT:
 		movement_state(_delta)
-	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
+	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWINGING:
 		magic_casting_movement_state(_delta)
 
 
 func set_movement_speed_change():
-	if (state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING) and poisoned:
+	if (state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWINGING) and poisoned:
 		running_speed_change = 0.7
 	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
 		running_speed_change = 0.9
@@ -146,14 +155,30 @@ func _unhandled_input(event):
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
 					player_action(event, item_name, item_category)
+				elif item_category == "Magic" or item_name == "bow":
+					if event.is_action_pressed("slot1"):
+						if item_category == "Magic":
+							$Magic.cast_spell(item_name, direction, 1)
+						else:
+							$Magic.draw_bow(direction, 1)
+					elif event.is_action_pressed("slot2") or (event is InputEventMouseButton and event.button_index == BUTTON_RIGHT):
+						if item_category == "Magic":
+							$Magic.cast_spell(item_name, direction, 2)
+						else:
+							$Magic.draw_bow(direction, 2)
+					elif event.is_action_pressed("slot3"):
+						if item_category == "Magic":
+							$Magic.cast_spell(item_name, direction, 3)
+						else:
+							$Magic.draw_bow(direction, 3)
+					elif event.is_action_pressed("slot4"):
+						if item_category == "Magic":
+							$Magic.cast_spell(item_name, direction, 4)
+						else:
+							$Magic.draw_bow(direction, 4)
 			else:
 				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
 					player_action(event, null, null)
-	if event.is_action_pressed("sprint") and not poisoned:
-		running = true
-	elif event.is_action_released("sprint") and not poisoned:
-		running = false
-
 
 
 func player_action(event, item_name, item_category):
@@ -164,9 +189,9 @@ func player_action(event, item_name, item_category):
 	elif item_category == "Potion" or item_name == "raw egg":
 		$Magic.throw_potion(item_name, direction)
 	elif item_name == "bow":
-		$Magic.draw_bow(direction)
+		$Magic.draw_bow(direction, user_interface.get_node("CombatHotbar/MagicSlots").selected_spell)
 	elif item_category == "Magic":
-		$Magic.cast_spell(item_name, direction)
+		$Magic.cast_spell(item_name, direction, user_interface.get_node("CombatHotbar/MagicSlots").selected_spell)
 	elif item_category == "Food" or item_category == "Fish" or item_category == "Crop":
 		actions.eat(item_name)
 	elif item_name == null:
@@ -341,38 +366,11 @@ func walk_state(_direction):
 				animation_player.play("sprint")
 				animation = "run_" + _direction.to_lower()
 				composite_sprites.set_player_animation(character, animation, null)
-				check_if_holding_item()
+				$HoldingTorch.hide()
+				holding_item.hide()
 		elif Sounds.current_footsteps_sound == Sounds.swimming:
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			holding_item.hide()
 			$HoldingTorch.hide()
 			animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
-
-
-func check_if_holding_item():
-	if PlayerData.normal_hotbar_mode:
-		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-			var item_qt = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][1]
-			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if Util.valid_holding_item_category(item_category) or item_name == "torch":
-				$HoldingTorch.hide()
-				holding_item.hide()
-				PlayerData.player_data["hotbar"].erase(str(PlayerData.active_item_slot))
-				$Camera2D/UserInterface/Hotbar.initialize_hotbar()
-				InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
-				set_held_object()
-	else:
-		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
-			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
-			var item_qt = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][1]
-			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if Util.valid_holding_item_category(item_category) or item_name == "torch":
-				$HoldingTorch.hide()
-				holding_item.hide()
-				PlayerData.player_data["combat_hotbar"].erase(str(PlayerData.active_item_slot_combat_hotbar))
-				$Camera2D/UserInterface/CombatHotbar.initialize()
-				InstancedScenes.initiateInventoryItemDrop([item_name, item_qt, null], position)
-				set_held_object()
-			

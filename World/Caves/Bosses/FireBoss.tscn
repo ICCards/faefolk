@@ -508,6 +508,7 @@ position = Vector2( 0, -76 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 203 )
 animation = "play"
+frame = 2
 playing = true
 
 [node name="DetectPlayer" type="Area2D" parent="."]

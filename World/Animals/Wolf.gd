@@ -178,6 +178,7 @@ func player_not_inside_walls() -> bool:
 	return true
 
 func hit(tool_name):
+	call_deferred("play_hurt_sound_effect")
 	if state == IDLE or state == WALK:
 		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
@@ -194,9 +195,6 @@ func hit(tool_name):
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/hurt"+str(rng.randi_range(1,3)) +".mp3"))
-	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
-	sound_effects.call_deferred("play")
 	if health < STARTING_HEALTH*.3:
 		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
@@ -307,8 +305,15 @@ func _on_EndChaseState_timeout():
 		_end_chase_state_timer.call_deferred("start", 5)
 
 
+func play_hurt_sound_effect():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/hurt"+str(rng.randi_range(1,3)) +".mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
+	yield(sound_effects, "finished")
+	playing_sound_effect = false
+	call_deferred("start_sound_effects")
+
 func play_groan_sound_effect():
-	rng.randomize()
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/bite.mp3"))
 	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 	sound_effects.call_deferred("play")
@@ -317,7 +322,7 @@ func play_groan_sound_effect():
 	start_sound_effects()
 
 func start_sound_effects():
-	if not playing_sound_effect:
+	if not playing_sound_effect and not destroyed:
 		playing_sound_effect = true
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/bear pacing.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -334,6 +339,7 @@ func _on_VisibilityNotifier2D_screen_entered():
 	if chasing:
 		call_deferred("start_sound_effects")
 	set_deferred("visible", true)
+
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if MapData.world["animal"].has(name):

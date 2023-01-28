@@ -32,6 +32,8 @@ func destroy():
 	Server.player_node = null
 
 func _physics_process(_delta):
+	if not visible:
+		return
 	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_left"):
 		setAnimationTexture('walk_left')

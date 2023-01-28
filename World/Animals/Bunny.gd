@@ -44,10 +44,11 @@ func set_attributes():
 func _update_pathfinding():
 	if not thread.is_active() and visible:
 		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
-		if Util.chance(50):
-			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/idle.mp3"))
-			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
-			sound_effects.call_deferred("play")
+		if Util.chance(15):
+			if not destroyed and not sound_effects.playing:
+				sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/idle.mp3"))
+				sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+				sound_effects.call_deferred("play")
 		
 func _get_path(pos):
 	call_deferred("calculate_path", pos)
@@ -177,14 +178,14 @@ func _on_HurtBox_area_entered(area):
 		$EnemyPoisonState.call_deferred("start", "poison arrow")
 
 func start_run_state():
-	navigation_agent.set_deferred("max_speed", 300)
+	navigation_agent.set_deferred("max_speed", 280)
 	running_state = true
 	$Timers/RunStateTimer.call_deferred("start")
 	_timer.set_deferred("wait_time", 0.75)
 	_update_pathfinding()
 
 func _on_RunStateTimer_timeout():
-	navigation_agent.set_deferred("max_speed", 200)
+	navigation_agent.set_deferred("max_speed", 190)
 	running_state = false
 	_timer.set_deferred("wait_time", rand_range(2.5, 5.0))
 

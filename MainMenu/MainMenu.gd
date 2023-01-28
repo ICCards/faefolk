@@ -26,6 +26,7 @@ func _ready():
 	$Background/Water1.playing = true
 	$Background/Water2.playing = true
 	spawn_player_in_menu()
+	Server.isLoaded = false
 
 func spawn_player_in_menu():
 	$MainMenuButtons/LoadingIndicator.visible = false
@@ -42,19 +43,21 @@ func change_title_volume():
 
 
 func toggle_menu_open():
-	if $Options.visible:
+	if $OptionsMenuLayer/Options.visible:
 		close_options_menu()
 	else:
 		open_options_menu()
 
 
 func open_options_menu():
-	$Options.show()
+	$OptionsMenuLayer/Options.show()
 	$MainMenuButtons.hide()
+	Server.player_node.hide()
 
 func close_options_menu():
-	$Options.hide()
+	$OptionsMenuLayer/Options.hide()
 	$MainMenuButtons.show()
+	Server.player_node.show()
 
 func _on_OptionsIconButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
@@ -66,5 +69,6 @@ func _on_ExitBtn_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	$SoundEffects.play()
-	$Options.hide()
+	$OptionsMenuLayer.hide()
 	$MainMenuButtons.show()
+	Server.player_node.show()

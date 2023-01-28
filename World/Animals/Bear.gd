@@ -354,6 +354,7 @@ func _on_VisibilityNotifier2D_screen_entered():
 		call_deferred("start_sound_effects")
 	set_deferred("visible", true)
 
+
 func _on_VisibilityNotifier2D_screen_exited():
 	if MapData.world["animal"].has(name):
 		MapData.world["animal"][name]["l"] = position/32

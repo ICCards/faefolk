@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/retreat.mp3-656654e3f22fad6d32e8c78a8ca8a111.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/animals/boar/retreat.mp3"
+dest_files=[ "res://.import/retreat.mp3-656654e3f22fad6d32e8c78a8ca8a111.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

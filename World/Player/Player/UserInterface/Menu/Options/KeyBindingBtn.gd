@@ -13,7 +13,7 @@ func _pressed():
 	do_set = true
 	var enterNewKey = EnterNewKey.instance()
 	enterNewKey.name = "EnterNewKey"
-	if Server.player_node:
+	if Server.isLoaded:
 		Server.player_node.user_interface.add_child(enterNewKey)
 	else:
 		get_node("../../../../").add_child(enterNewKey)
@@ -34,7 +34,7 @@ func _input(event):
 			#stop setting the key
 			do_set = false
 			get_node("../../../../").set_label_texts()
-			if Server.player_node:
+			if Server.isLoaded:
 				Server.player_node.user_interface.get_node("EnterNewKey").queue_free()
 			else:
 				get_node("../../../../EnterNewKey").queue_free()

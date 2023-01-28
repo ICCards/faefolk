@@ -138,6 +138,7 @@ func place_object_in_world(id, item_name, direction, location):
 		"wood gate":
 			tileObjectHurtBox.queue_free()
 			var gateFront = GateFront.instance()
+			gateFront.name = id
 			gateFront.global_position = Tiles.valid_tiles.map_to_world(location) + Vector2(0,32)
 			PlacableObjects.call_deferred("add_child", gateFront, true)
 		"round table1":

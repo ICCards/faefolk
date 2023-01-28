@@ -98,6 +98,11 @@ func _get_direction_string(velocitiy) -> String:
 func _update_pathfinding():
 	if not thread.is_active() and visible:
 		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+		if Util.chance(5):
+			if not destroyed and not sound_effects.playing:
+				sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/quack.mp3"))
+				sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+				sound_effects.call_deferred("play")
 		
 func _get_path(pos):
 	call_deferred("calculate_path", pos)
@@ -196,8 +201,8 @@ func _on_IdleTimer_timeout():
 	is_eating = false
 
 func _on_DropEggTimer_timeout():
-	if visible and Server.isLoaded and not destroyed and velocity != Vector2.ZERO:
-		$Timers/DropEggTimer.set_deferred("wait_time", rand_range(20, 30))
+	if visible and Server.isLoaded and not destroyed and velocity != Vector2.ZERO and not is_eating:
+		$Timers/DropEggTimer.set_deferred("wait_time", rand_range(10, 30))
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/egg drop.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -4))
 		sound_effects.call_deferred("play")

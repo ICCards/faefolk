@@ -48,6 +48,7 @@ func build_world():
 	spawn_player()
 	yield(get_tree(), "idle_frame")
 	$WorldBuilder.initialize()
+	yield(get_tree(), "idle_frame")
 	$WorldBuilder/BuildTerrain.initialize()
 	$WorldBuilder/BuildNature.initialize()
 	$WorldBuilder/SpawnAnimal.initialize()

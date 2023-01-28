@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=212 format=2]
+[gd_resource type="TileSet" load_steps=213 format=2]
 
 [ext_resource path="res://Assets/Images/Animations/torch/torch.tres" type="Texture" id=1]
 [ext_resource path="res://Assets/Tilesets/CL_Crafting.png" type="Texture" id=2]
@@ -61,6 +61,7 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/brewing table #1/sheet.png" type="Texture" id=59]
 [ext_resource path="res://Assets/Images/placable_object_preview/brewing table #2/sheet.png" type="Texture" id=60]
 [ext_resource path="res://Assets/Images/placable_object_preview/brewing table #3/sheet.png" type="Texture" id=61]
+[ext_resource path="res://Assets/Images/placable_object_preview/flower trough/sheet.png" type="Texture" id=62]
 
 [sub_resource type="ConvexPolygonShape2D" id=875]
 points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
@@ -3877,3 +3878,17 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 191/z_index = 0
+192/name = "sheet.png 192"
+192/texture = ExtResource( 62 )
+192/tex_offset = Vector2( 0, -32 )
+192/modulate = Color( 1, 1, 1, 1 )
+192/region = Rect2( 0, 32, 96, 64 )
+192/tile_mode = 0
+192/occluder_offset = Vector2( 0, 0 )
+192/navigation_offset = Vector2( 0, 0 )
+192/shape_offset = Vector2( 0, 0 )
+192/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+192/shape_one_way = false
+192/shape_one_way_margin = 0.0
+192/shapes = [  ]
+192/z_index = 0

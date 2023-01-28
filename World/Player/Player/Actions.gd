@@ -50,6 +50,8 @@ func _input(event):
 							current_interactive_node = new_node
 			if current_interactive_node:
 				match current_interactive_node.object_name:
+					"bed":
+						sleep("down", current_interactive_node.object_position)
 					"crop":
 						harvest_crop(current_interactive_node)
 					"forage":
@@ -226,8 +228,9 @@ func fish():
 		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		get_parent().call_deferred("add_child", fishing)
 
-func sleep(sleeping_bag_direction, sleeping_bag_pos, player_enter_position):
+func sleep(sleeping_bag_direction, sleeping_bag_pos):
 	if get_parent().state != get_parent().SLEEPING:
+		var player_enter_position = Server.player_node.position
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().z_index = 1
 		get_parent().state = get_parent().SLEEPING

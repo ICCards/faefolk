@@ -1,6 +1,6 @@
 extends Control
 
-const MAX_SCROLL_SIZE = 543
+const MAX_SCROLL_SIZE = 1115
 
 onready var music_slider = $ScrollContainer/VBoxContainer/Grid/Slider1/Music/MusicSlider
 onready var sound_slider = $ScrollContainer/VBoxContainer/Grid/Slider2/Sound/SoundSlider
@@ -34,6 +34,18 @@ func set_label_texts():
 	$ScrollContainer/VBoxContainer/Grid2/SprintLabel.text = "Sprint: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["sprint"])
 	$ScrollContainer/VBoxContainer/Grid2/ChangeVarietyLabel.text = "Change variety: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["change_variety"])
 	$ScrollContainer/VBoxContainer/Grid2/UseToolLabel.text = "Use tool: Left-click," + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["use_tool"])
+	$ScrollContainer/VBoxContainer/Grid2/SwitchHotbar.text = "Switch hotbar: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["toggle_hotbar"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot1.text = "Slot 1: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot1"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot2.text = "Slot 2: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot2"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot3.text = "Slot 3: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot3"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot4.text = "Slot 4: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot4"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot5.text = "Slot 5: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot5"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot6.text = "Slot 6: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot6"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot7.text = "Slot 7: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot7"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot8.text = "Slot 8: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot8"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot9.text = "Slot 9: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot9"])
+	$ScrollContainer/VBoxContainer/Grid2/Slot10.text = "Slot 10: " + OS.get_scancode_string(PlayerData.player_data["settings"]["key_dict"]["slot10"])
+
 
 func _on_MusicSlider_value_changed(value):
 	Sounds.set_music_volume(value)

@@ -1281,6 +1281,13 @@
       "Ingredients": [["wood", 8]],
       "EnergyHealth": null
   },
+  "flower trough": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "A decorative wooden bed for wild flowers.",
+      "Ingredients": [["wood", 12]],
+      "EnergyHealth": null
+  },
   "wood barrel": {
       "ItemCategory": "Placable object",
       "StackSize": 999,

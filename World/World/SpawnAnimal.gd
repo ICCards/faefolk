@@ -54,7 +54,6 @@ func spawn_animals():
 		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 			if not Enemies.has_node(id) and MapData.world["animal"].has(id):
 				spawn_animal(MapData.world, id)
-				yield(get_tree().create_timer(0.1), "timeout")
 	yield(get_tree().create_timer(1.0), "timeout")
 	var value = spawn_thread.wait_to_finish()
 

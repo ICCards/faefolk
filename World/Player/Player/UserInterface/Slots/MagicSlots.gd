@@ -110,28 +110,28 @@ func set_selected_spell():
 			$SelectedBg.rect_position.x = 180
 
 
-func start_spell_cooldown():
-	match selected_spell:
+func start_spell_cooldown(spell_index):
+	match spell_index:
 		1:
-			$Tween.interpolate_property(get_node("Cooldown"+str(selected_spell)), "rect_size",
+			$Tween.interpolate_property(get_node("Cooldown"+str(spell_index)), "rect_size",
 				Vector2(48,48), Vector2(48,0), COOL_DOWN_PERIOD_1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		2:
-			$Tween.interpolate_property(get_node("Cooldown"+str(selected_spell)), "rect_size",
+			$Tween.interpolate_property(get_node("Cooldown"+str(spell_index)), "rect_size",
 				Vector2(48,48), Vector2(48,0), COOL_DOWN_PERIOD_2,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		3:
-			$Tween.interpolate_property(get_node("Cooldown"+str(selected_spell)), "rect_size",
+			$Tween.interpolate_property(get_node("Cooldown"+str(spell_index)), "rect_size",
 				Vector2(48,48), Vector2(48,0), COOL_DOWN_PERIOD_3,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		4:
-			$Tween.interpolate_property(get_node("Cooldown"+str(selected_spell)), "rect_size",
+			$Tween.interpolate_property(get_node("Cooldown"+str(spell_index)), "rect_size",
 				Vector2(48,48), Vector2(48,0), COOL_DOWN_PERIOD_4,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
-func validate_spell_cooldown():
-	return get_node("Cooldown"+str(selected_spell)).rect_size.y == 0
+func validate_spell_cooldown(spell_index):
+	return get_node("Cooldown"+str(spell_index)).rect_size.y == 0 and not get_node("Bg/btn"+str(spell_index)).disabled
 
 
 func _on_btn1_pressed():

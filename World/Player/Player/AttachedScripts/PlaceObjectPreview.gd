@@ -114,6 +114,7 @@ func set_dimensions():
 	$ScaledItemToPlace.hide()
 	$TreeSeedToPlace.hide()
 	$GateToPlace.hide()
+	$ForageItemToPlace.hide()
 	match state:
 		SLEEPING_BAG:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
@@ -177,8 +178,8 @@ func set_dimensions():
 		FORAGE:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
-			$ItemToPlace.show()
-			$ItemToPlace.texture = load("res://Assets/Images/inventory_icons/Forage/"+item_name+".png")
+			$ForageItemToPlace.show()
+			$ForageItemToPlace.texture = load("res://Assets/Images/inventory_icons/Forage/"+item_name+".png")
 
 
 

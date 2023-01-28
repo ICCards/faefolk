@@ -24,8 +24,8 @@ var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 200.0
 var changed_direction_delay: bool = false
-var health: int = 800 #Stats.WIND_BOSS
-var STARTING_HEALTH: int = 800 #Stats.WIND_BOSS
+var health: int = Stats.WIND_BOSS
+var STARTING_HEALTH: int = Stats.WIND_BOSS
 var state = IDLE
 const MAX_RANDOM_CHASE_DIST = 100
 var rng = RandomNumberGenerator.new()
@@ -80,7 +80,7 @@ func attack():
 			spell.is_hostile_projectile = true
 			spell.position =$ShootDirection/Position2D.global_position
 			spell.velocity = Server.player_node.position - position
-			get_node("../../../").add_child(spell)
+			get_node("../../../").call_deferred("add_child", spell)
 			yield(get_tree().create_timer(0.5), "timeout")
 		elif phase == 2:
 			for i in range(3):
@@ -89,14 +89,23 @@ func attack():
 				spell.position =$ShootDirection/Position2D.global_position
 				spell.is_hostile_projectile = true
 				spell.velocity = Server.player_node.position - position
-				get_node("../../").add_child(spell)
+				get_node("../../").call_deferred("add_child",spell)
 				yield(get_tree().create_timer(0.5), "timeout")
 		else:
 			var spell = FlameThrower.instance()
 			spell.is_hostile = true
-			$ShootDirection.add_child(spell)
+			$ShootDirection.call_deferred("add_child",spell)
 			spell.position = $ShootDirection/Position2D.position
-			yield(get_tree().create_timer(4.0), "timeout")
+			yield(get_tree().create_timer(0.5), "timeout")
+			for i in range(3):
+				var spell2 = FireProjectile.instance()
+				spell2.debuff = true
+				spell2.position =$ShootDirection/Position2D.global_position
+				spell2.is_hostile_projectile = true
+				spell2.velocity = Server.player_node.position - position
+				get_node("../../").call_deferred("add_child",spell2)
+				yield(get_tree().create_timer(0.5), "timeout")
+			yield(get_tree().create_timer(2.0), "timeout")
 		if destroyed:
 			return
 		animation_player.play("loop")
@@ -164,18 +173,18 @@ func hit(tool_name):
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
-	PlayerData.player_data["skill_experience"]["fire"] += 1
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.wav")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
+func destroy(killed_by_player):
+	if killed_by_player:
+		PlayerData.player_data["skill_experience"]["fire"] += 1
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.wav")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects.play()
+		InstancedScenes.intitiateItemDrop("fire staff", position, 1)
 	destroyed = true
 	animation_player.play("death")
 	$Timers/AttackTimer.stop()
-	yield(get_tree().create_timer(0.4), "timeout")
-	InstancedScenes.intitiateItemDrop("fire staff", position, 1)
 	yield(animation_player, "animation_finished")
 	queue_free()
 
@@ -210,7 +219,7 @@ func set_phase():
 	elif health < 350 and phase != 3:
 		play_change_phase()
 		yield(get_tree().create_timer(1.0), "timeout")
-		MAX_SPEED = 150
+		MAX_SPEED = 180
 		phase = 3
 
 func play_change_phase():

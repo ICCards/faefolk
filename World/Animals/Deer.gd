@@ -169,9 +169,7 @@ func player_not_inside_walls() -> bool:
 	return true
 
 func hit(tool_name):
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/deer/hurt.mp3"))
-	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
-	sound_effects.call_deferred("play")
+	call_deferred("play_hurt_sound_effect")
 	if state == IDLE or state == WALK:
 		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
@@ -287,6 +285,16 @@ func _on_EndChaseState_timeout():
 func _on_KnockbackTimer_timeout():
 	knocking_back = false
 
+
+func play_hurt_sound_effect():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/deer/hurt.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
+	yield(sound_effects, "finished")
+	playing_sound_effect = false
+	call_deferred("start_sound_effects")
+
+
 func play_groan_sound_effect():
 	rng.randomize()
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/deer/attack.mp3"))
@@ -297,7 +305,7 @@ func play_groan_sound_effect():
 	call_deferred("start_sound_effects")
 
 func start_sound_effects():
-	if not playing_sound_effect:
+	if not playing_sound_effect and not destroyed:
 		playing_sound_effect = true
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))

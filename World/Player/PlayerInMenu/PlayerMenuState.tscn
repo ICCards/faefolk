@@ -105,6 +105,7 @@ position = Vector2( -0.142857, 2.14286 )
 shape = SubResource( 1 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
+modulate = Color( 0.85, 0.85, 0.85, 1 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 texture = ExtResource( 3 )

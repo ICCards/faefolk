@@ -1,9 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://World/Objects/Tiles/TileObjectHurtBox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
 [ext_resource path="res://World/Objects/Tiles/InteractiveArea.gd" type="Script" id=3]
+[ext_resource path="res://World/World/SpawnAnimal.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Images/Animations/chest/wood/up.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://World/World/WorldBuilder.gd" type="Script" id=6]
+[ext_resource path="res://World/World/BuildTerrain.gd" type="Script" id=7]
+[ext_resource path="res://World/World/BuildNature.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 16, 16 )
@@ -20,7 +24,7 @@ radius = 31.0
 extents = Vector2( 15, 15 )
 
 [sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 36, 30 )
+extents = Vector2( 50, 30 )
 
 [sub_resource type="Animation" id=19]
 resource_name = "shake"
@@ -89,14 +93,14 @@ monitorable = false
 light_mask = 0
 shape = SubResource( 1 )
 
-[node name="DetectPlayerAroundBed" type="Area2D" parent="Position2D"]
-visible = false
+[node name="BedInteractiveArea" type="Area2D" parent="Position2D"]
 position = Vector2( -13, 8 )
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 0
-collision_mask = 32
+collision_mask = 131072
+script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/DetectPlayerAroundBed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/BedInteractiveArea"]
 position = Vector2( 26, -16 )
 shape = SubResource( 17 )
 disabled = true
@@ -158,7 +162,35 @@ animation = "open"
 [node name="ResetTempHealthTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="WorldBuilder" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="BuildTerrain" type="Node" parent="WorldBuilder"]
+script = ExtResource( 7 )
+
+[node name="BuildTerrainTimer" type="Timer" parent="WorldBuilder/BuildTerrain"]
+wait_time = 0.67
+
+[node name="BuildNature" type="Node" parent="WorldBuilder"]
+script = ExtResource( 8 )
+
+[node name="SpawnNatureTimer" type="Timer" parent="WorldBuilder/BuildNature"]
+wait_time = 1.77
+
+[node name="SpawnAnimal" type="Node" parent="WorldBuilder"]
+script = ExtResource( 4 )
+
+[node name="SpawnAnimalTimer" type="Timer" parent="WorldBuilder/SpawnAnimal"]
+wait_time = 2.77
+
+[node name="WorldBuilderTimer" type="Timer" parent="WorldBuilder"]
+wait_time = 2.31
+
 [connection signal="area_entered" from="Position2D/DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_entered"]
 [connection signal="area_exited" from="Position2D/DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_exited"]
 [connection signal="area_entered" from="Position2D/HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="ResetTempHealthTimer" to="." method="_on_ResetTempHealthTimer_timeout"]
+[connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_BuildTerrain_timeout"]
+[connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_SpawnNature_timeout"]
+[connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_SpawnAnimalTimer_timeout"]
+[connection signal="timeout" from="WorldBuilder/WorldBuilderTimer" to="WorldBuilder" method="_on_WorldBuilderTimer_timeout"]

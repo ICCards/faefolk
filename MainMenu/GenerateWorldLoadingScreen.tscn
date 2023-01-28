@@ -36,7 +36,7 @@ margin_bottom = 108.0
 grow_horizontal = 0
 rect_scale = Vector2( 0.8, 0.8 )
 theme = ExtResource( 2 )
-text = "BETA"
+text = "Beta  v1.3"
 
 [node name="Tips" type="VBoxContainer" parent="."]
 margin_left = 17.0

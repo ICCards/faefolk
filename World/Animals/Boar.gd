@@ -150,7 +150,7 @@ func _physics_process(delta):
 	
 func attack():
 	if not attacking:
-		call_deferred("play_groan_sound_effect")
+		call_deferred("play_attack_sound_effect")
 		attacking = true
 		hit_box.call_deferred("look_at", player.position)
 		boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/attack/" +  direction + "/body.png"))
@@ -174,6 +174,7 @@ func player_not_inside_walls() -> bool:
 	return true
 
 func hit(tool_name):
+	play_hurt_sound_effect()
 	if state == IDLE or state == WALK:
 		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
@@ -256,10 +257,14 @@ func _on_HurtBox_area_entered(area):
 		$KnockbackParticles.set_deferred("emitting", false)
 
 func start_retreat_state():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/boar/retreat.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
 	state = RETREAT
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("stop")
 	_retreat_timer.call_deferred("start")
+	call_deferred("start_sound_effects")
 	chasing = false
 	
 func start_chase_state():
@@ -300,7 +305,15 @@ func _on_EndChaseState_timeout():
 		_end_chase_state_timer.call_deferred("start", 5)
 
 
-func play_groan_sound_effect():
+func play_hurt_sound_effect():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/boar/hurt"+ str(rng.randi_range(1,2)) +".mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
+	yield(sound_effects, "finished")
+	playing_sound_effect = false
+	call_deferred("start_sound_effects")
+
+func play_attack_sound_effect():
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/boar/attack.mp3"))
 	sound_effects.set_deferred( "volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 	sound_effects.call_deferred("play")
@@ -309,7 +322,7 @@ func play_groan_sound_effect():
 	call_deferred("start_sound_effects")
 
 func start_sound_effects():
-	if not playing_sound_effect:
+	if not playing_sound_effect and not destroyed:
 		playing_sound_effect = true
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/boar/gallop2.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
