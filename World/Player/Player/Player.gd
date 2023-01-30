@@ -106,19 +106,19 @@ func set_held_object():
 		$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("hide")
 
 
-func _process(_delta) -> void:
+func _physics_process(_delta) -> void:
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
 		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
 	if state == MOVEMENT:
 		movement_state(_delta)
-	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWINGING:
+	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
 		magic_casting_movement_state(_delta)
 
 
 func set_movement_speed_change():
-	if (state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWINGING) and poisoned:
+	if (state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING) and poisoned:
 		running_speed_change = 0.7
 	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
 		running_speed_change = 0.9
@@ -158,24 +158,24 @@ func _unhandled_input(event):
 				elif item_category == "Magic" or item_name == "bow":
 					if event.is_action_pressed("slot1"):
 						if item_category == "Magic":
-							$Magic.cast_spell(item_name, direction, 1)
+							$Magic.cast_spell(item_name, 1)
 						else:
-							$Magic.draw_bow(direction, 1)
+							$Magic.draw_bow(1)
 					elif event.is_action_pressed("slot2") or (event is InputEventMouseButton and event.button_index == BUTTON_RIGHT):
 						if item_category == "Magic":
-							$Magic.cast_spell(item_name, direction, 2)
+							$Magic.cast_spell(item_name, 2)
 						else:
-							$Magic.draw_bow(direction, 2)
+							$Magic.draw_bow(2)
 					elif event.is_action_pressed("slot3"):
 						if item_category == "Magic":
-							$Magic.cast_spell(item_name, direction, 3)
+							$Magic.cast_spell(item_name, 3)
 						else:
-							$Magic.draw_bow(direction, 3)
+							$Magic.draw_bow(3)
 					elif event.is_action_pressed("slot4"):
 						if item_category == "Magic":
-							$Magic.cast_spell(item_name, direction, 4)
+							$Magic.cast_spell(item_name, 4)
 						else:
-							$Magic.draw_bow(direction, 4)
+							$Magic.draw_bow(4)
 			else:
 				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
 					player_action(event, null, null)
@@ -185,17 +185,17 @@ func player_action(event, item_name, item_category):
 	if item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod":
 		actions.fish()
 	elif (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
-		$Swing.swing(item_name, direction)
+		$Swing.swing(item_name)
 	elif item_category == "Potion" or item_name == "raw egg":
 		$Magic.throw_potion(item_name, direction)
 	elif item_name == "bow":
-		$Magic.draw_bow(direction, user_interface.get_node("CombatHotbar/MagicSlots").selected_spell)
+		$Magic.draw_bow(user_interface.get_node("CombatHotbar/MagicSlots").selected_spell)
 	elif item_category == "Magic":
-		$Magic.cast_spell(item_name, direction, user_interface.get_node("CombatHotbar/MagicSlots").selected_spell)
+		$Magic.cast_spell(item_name, user_interface.get_node("CombatHotbar/MagicSlots").selected_spell)
 	elif item_category == "Food" or item_category == "Fish" or item_category == "Crop":
 		actions.eat(item_name)
 	elif item_name == null:
-		$Swing.swing(null, direction) 
+		$Swing.swing(null) 
 
 
 func magic_casting_movement_state(_delta):
@@ -366,6 +366,7 @@ func walk_state(_direction):
 				animation_player.play("sprint")
 				animation = "run_" + _direction.to_lower()
 				composite_sprites.set_player_animation(character, animation, null)
+				$TorchLight.enabled = false
 				$HoldingTorch.hide()
 				holding_item.hide()
 		elif Sounds.current_footsteps_sound == Sounds.swimming:

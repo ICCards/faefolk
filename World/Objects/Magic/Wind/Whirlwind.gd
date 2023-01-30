@@ -4,6 +4,8 @@ onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var is_hostile: bool = false
 
 func _ready():
+	$Tween.interpolate_property($Light2D, "color", Color("00ffffff"), Color("ffffff"), 1.0, 1, Tween.EASE_IN, 0)
+	$Tween.start()
 	$Hitbox.tool_name = "whirlwind spell"
 	if is_hostile:
 		z_index = -1
@@ -25,4 +27,5 @@ func fade_out():
 
 func fade_out_sound():
 	$Tween.interpolate_property(sound_effects, "volume_db", Sounds.return_adjusted_sound_db("sound", 16), -80, 1.0, 1, Tween.EASE_IN, 0)
+	$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 1.0, 1, Tween.EASE_IN, 0)
 	$Tween.start()

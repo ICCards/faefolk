@@ -53,7 +53,7 @@ modulate = Color( 1.25, 1.25, 1.25, 1 )
 position = Vector2( 0, -42 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 10 )
-frame = 6
+frame = 4
 playing = true
 script = ExtResource( 2 )
 

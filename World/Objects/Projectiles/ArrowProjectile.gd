@@ -28,6 +28,7 @@ func _ready():
 	$Hitbox.tool_name = "arrow"
 	$Hitbox.knockback_vector = velocity
 	if is_fire_arrow:
+		$Light2D.enabled = true
 		$Hitbox.special_ability = "fire"
 		$ArrowBreak.modulate = Color("ff0000")
 		$FireTrailParticles/P1.emitting = true
@@ -57,8 +58,7 @@ func _on_Area2D_area_entered(area):
 		find_next_player()
 	else:
 		destroy()
-		
-		
+
 func find_next_player():
 	var temp = null
 	for new_body in $DetectEnemyBox.get_overlapping_bodies():
@@ -74,8 +74,6 @@ func find_next_player():
 	velocity = (temp.position - self.position).normalized()
 	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.knockback_vector = velocity
-#		elif self.position.distance_to(new_body.position) < self.position.distance_to(enemy_node.position):
-#			temp = new_body
 
 func _on_Hitbox_body_entered(body):
 	destroy()
@@ -95,6 +93,8 @@ func destroy():
 		$CollisionShape2D.set_deferred("disabled", true)
 		collided = true
 		$ArrowBreak.playing = true
+		$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 0.5, 1, Tween.EASE_IN, 0)
+		$Tween.start()
 		yield($ArrowBreak, "animation_finished")
 		$ArrowBreak.hide()
 

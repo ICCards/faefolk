@@ -22,7 +22,8 @@ var MAX_MOVE_DISTANCE: float = 500.0
 var tornado_node
 
 var rng := RandomNumberGenerator.new()
-var thread = Thread.new()
+var thread := Thread.new()
+var destroy_thread := Thread.new()
 
 var variety
 
@@ -164,7 +165,8 @@ func hit(tool_name, var special_ability = ""):
 	InstancedScenes.player_hit_effect(-dmg, position)
 	$AnimationPlayer.call_deferred("play", "hit")
 	if health <= 0 and not destroyed:
-		call_deferred("destroy", true)
+		if not destroy_thread.is_alive():
+			destroy_thread.start(self,"destroy",true)
 
 func destroy(killed_by_player):
 	_timer.call_deferred("stop")
@@ -183,6 +185,7 @@ func destroy(killed_by_player):
 	if Util.chance(50):
 		InstancedScenes.intitiateItemDrop("raw egg", position, 1) 
 	yield($AnimationPlayer, "animation_finished")
+	destroy_thread.wait_to_finish()
 	queue_free()
 
 func start_run_state():

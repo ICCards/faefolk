@@ -293,6 +293,8 @@ texture_scale = 0.75
 energy = 1.01
 mode = 2
 
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

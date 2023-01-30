@@ -1,6 +1,7 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=114 format=2]
 
 [ext_resource path="res://Assets/Images/Magic/wind/whirlwind.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=13]
 [ext_resource path="res://World/Objects/Magic/Wind/Whirlwind.gd" type="Script" id=38]
 [ext_resource path="res://Assets/Sound/Sound effects/Magic/Wind/whirlwind.mp3" type="AudioStream" id=48]
@@ -658,3 +659,10 @@ anims/player = SubResource( 175 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 48 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -31 )
+texture = ExtResource( 2 )
+energy = 0.9
+mode = 2
+shadow_enabled = true

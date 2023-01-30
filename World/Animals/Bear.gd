@@ -11,7 +11,9 @@ onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 onready var hit_box: Position2D = $Position2D
 
 
-var thread = Thread.new()
+var rng := RandomNumberGenerator.new()
+var thread := Thread.new()
+var destroy_thread := Thread.new()
 
 var player = Server.player_node
 var direction: String = "down"
@@ -26,7 +28,6 @@ var frozen: bool = false
 var random_pos := Vector2.ZERO
 var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
-var rng = RandomNumberGenerator.new()
 var state = IDLE
 var health: int = Stats.BEAR_HEALTH
 var STARTING_HEALTH: int = Stats.BEAR_HEALTH
@@ -146,7 +147,7 @@ func play_groan_sound_effect():
 	call_deferred("start_sound_effects")
 
 func start_sound_effects():
-	if not playing_sound_effect:
+	if not playing_sound_effect and not destroyed:
 		playing_sound_effect = true
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Animals/Bear/bear pacing.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -222,9 +223,7 @@ func player_not_inside_walls() -> bool:
 
 
 func hit(tool_name):
-	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/hurt"+str(rng.randi_range(1,2)) +".mp3"))
-	sound_effects.set_deferred("volume_db",  Sounds.return_adjusted_sound_db("sound", 0))
-	sound_effects.call_deferred("play")
+	play_hurt_sound_effect()
 	if state == IDLE or state == WALK:
 		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
@@ -245,20 +244,21 @@ func hit(tool_name):
 	if health < STARTING_HEALTH*.3:
 		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
-		call_deferred("destroy", true)
+		if not destroy_thread.is_alive():
+			destroy_thread.start(self,"destroy",true)
 
 func destroy(killed_by_player):
 	_retreat_timer.call_deferred("stop")
 	_chase_timer.call_deferred("stop")
 	_idle_timer.call_deferred("stop")
 	set_physics_process(false)
+	destroyed = true
 	if killed_by_player:
 		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
-	destroyed = true
 	$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", true)
 	$Body/Fangs.set_deferred("texture", null) 
@@ -268,6 +268,7 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(1,3))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(1,3))
 	yield(animation_player, "animation_finished")
+	destroy_thread.wait_to_finish()
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -290,8 +291,6 @@ func _on_HurtBox_area_entered(area):
 			$Timers/KnockbackTimer.call_deferred("start")
 			knockback = area.knockback_vector
 			velocity = knockback * 200
-		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-			call_deferred("hit", area.tool_name)
 		if area.tool_name == "lingering tornado":
 			$EnemyTornadoState.set_deferred("orbit_radius", rand_range(0,20))
 			tornado_node = area
@@ -306,6 +305,8 @@ func _on_HurtBox_area_entered(area):
 		elif area.special_ability == "poison":
 			bear_sprite.set_deferred("modulate", Color("009000"))
 			$EnemyPoisonState.call_deferred("start", "posion arrow") 
+		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+			call_deferred("hit", area.tool_name)
 		yield(get_tree().create_timer(0.25), "timeout")
 		$KnockbackParticles.set_deferred("emitting", false)
 
@@ -322,6 +323,16 @@ func _on_EndChaseState_timeout():
 			$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
 	else:
 		_end_chase_state_timer.call_deferred("start", 5)
+
+
+func play_hurt_sound_effect():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/hurt"+str(rng.randi_range(1,2)) +".mp3"))
+	sound_effects.set_deferred("volume_db",  Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
+	yield(sound_effects, "finished")
+	playing_sound_effect = false
+	call_deferred("start_sound_effects")
+
 
 func end_chase_state():
 	chasing = false

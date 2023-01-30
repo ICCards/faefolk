@@ -4,6 +4,8 @@ onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var is_hostile: bool = false
 
 func _ready():
+	$Tween.interpolate_property($Light2D, "color", Color("00ffffff"), Color("ffffff"), 1.5, 1, Tween.EASE_IN, 0)
+	$Tween.start()
 	if is_hostile:
 		$Hitbox.set_collision_mask(2+8+16+128+2048)
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -10)
@@ -24,5 +26,6 @@ func _ready():
 	queue_free()
 
 func fade_out_sound():
+	$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 1.5, 1, Tween.EASE_IN, 0)
 	$Tween.interpolate_property(sound_effects, "volume_db", Sounds.return_adjusted_sound_db("sound", -10), -80, 1.5, 1, Tween.EASE_IN, 0)
 	$Tween.start()

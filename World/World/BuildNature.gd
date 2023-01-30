@@ -17,6 +17,8 @@ var forage_thread := Thread.new()
 var remove_objects_thread := Thread.new()
 var remove_grass_thread := Thread.new()
 var navigation_thread := Thread.new()
+var placable_thread := Thread.new()
+var crop_thread := Thread.new()
 var current_chunks = []
 
 onready var navTiles = get_node("../../Navigation2D/NavTiles")
@@ -26,10 +28,17 @@ onready var ForageObjects = get_node("../../ForageObjects")
 
 
 func initialize():
-	spawn_placables()
-	spawn_crops()
+	yield(get_tree(),"idle_frame")
+	placable_thread.start(self,"whoAmIPlacable",null)
+	crop_thread.start(self,"whoAmICrop",null)
 	$SpawnNatureTimer.start()
 	
+	
+func whoAmIPlacable(value):
+	call_deferred("spawn_placables")
+	
+func whoAmICrop(value):
+	call_deferred("spawn_crops")
 	
 func spawn_forage():
 	for chunk in current_chunks:
@@ -46,7 +55,6 @@ func spawn_forage():
 			if player_loc.distance_to(location) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not ForageObjects.has_node(id) and MapData.world["forage"].has(id):
 					PlaceObject.place_forage_in_world(id,variety,location,first_placement)
-
 	var value = forage_thread.wait_to_finish()
 
 
@@ -58,6 +66,7 @@ func spawn_placables():
 			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placable"][id]["v"],location,MapData.world["placable"][id]["h"])
 		else:
 			PlaceObject.place_object_in_world(id,item_name,MapData.world["placable"][id]["d"],location)
+	placable_thread.wait_to_finish()
 
 func spawn_crops():
 	for id in MapData.world["crop"]:
@@ -74,6 +83,7 @@ func spawn_crops():
 			Tiles.watered_tiles.set_cellv(loc, 0)
 		Tiles.hoed_tiles.update_bitmask_region()
 		Tiles.watered_tiles.update_bitmask_region()
+	crop_thread.wait_to_finish()
 
 
 func _whoAmI(_value):
@@ -166,7 +176,7 @@ func spawn_trees():
 			var loc = Util.string_to_vector2(map["tree"][id]["l"]) + Vector2(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and MapData.world["tree"].has(id):
-					var biome = "forest" #map["tree"][id]["b"]
+					var biome = map["tree"][id]["b"]
 					if biome == "desert":
 						pass
 #						var object = DesertTree.instance()

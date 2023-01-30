@@ -35,7 +35,9 @@ const KNOCKBACK_AMOUNT = 70
 
 var state = IDLE
 
-var thread = Thread.new()
+var rng := RandomNumberGenerator.new()
+var thread := Thread.new()
+var destroy_thread := Thread.new()
 
 enum {
 	IDLE,
@@ -45,8 +47,6 @@ enum {
 	DEATH,
 	RETREAT
 }
-
-var rng = RandomNumberGenerator.new()
 
 func _ready():
 	randomize()
@@ -194,7 +194,8 @@ func hit(tool_name):
 	if health < STARTING_HEALTH*.3:
 		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
-		call_deferred("destroy",true)
+		if not destroy_thread.is_alive():
+			destroy_thread.start(self,"destroy",true)
 
 func destroy(killed_by_player):
 	_retreat_timer.call_deferred("stop")
@@ -215,6 +216,7 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
 	yield(animation_player, "animation_finished")
+	destroy_thread.wait_to_finish()
 	queue_free()
 
 func _on_HurtBox_area_entered(area):

@@ -22,7 +22,8 @@ var tornado_node = null
 var variety
 
 var rng := RandomNumberGenerator.new()
-var thread = Thread.new()
+var thread := Thread.new()
+var destroy_thread := Thread.new()
 
 
 func _ready(): 
@@ -42,7 +43,7 @@ func set_attributes():
 		bunny_sprite.flip_h = true
 
 func _update_pathfinding():
-	if not thread.is_active() and visible:
+	if not thread.is_active() and visible and not destroyed:
 		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 		if Util.chance(15):
 			if not destroyed and not sound_effects.playing:
@@ -126,7 +127,8 @@ func hit(tool_name):
 	InstancedScenes.player_hit_effect(-dmg, position)
 	$AnimationPlayer.call_deferred("play", "hit")
 	if health <= 0 and not destroyed:
-		call_deferred("destroy",true)
+		if not destroy_thread.is_alive():
+			destroy_thread.start(self,"destroy",true)
 
 func destroy(killed_by_player):
 	_timer.call_deferred("stop")
@@ -144,6 +146,7 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,1))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,1))
 	yield($AnimationPlayer, "animation_finished")
+	destroy_thread.wait_to_finish()
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -160,8 +163,6 @@ func _on_HurtBox_area_entered(area):
 		Stats.decrease_tool_health()
 	else:
 		PlayerDataHelpers.add_skill_experience(area.tool_name)
-	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-		call_deferred("hit", area.tool_name)
 	if area.tool_name == "lingering tornado":
 		$EnemyTornadoState.set_deferred("orbit_radius", rand_range(0,20))
 		tornado_node = area
@@ -176,21 +177,24 @@ func _on_HurtBox_area_entered(area):
 	elif area.special_ability == "poison":
 		bunny_sprite.set_deferred("modulate", Color("009000"))
 		$EnemyPoisonState.call_deferred("start", "poison arrow")
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+		call_deferred("hit", area.tool_name)
 
 func start_run_state():
-	navigation_agent.set_deferred("max_speed", 280)
+	navigation_agent.set_deferred("max_speed", 270)
 	running_state = true
 	$Timers/RunStateTimer.call_deferred("start")
 	_timer.set_deferred("wait_time", 0.75)
 	_update_pathfinding()
 
 func _on_RunStateTimer_timeout():
-	navigation_agent.set_deferred("max_speed", 190)
+	navigation_agent.set_deferred("max_speed", 160)
 	running_state = false
 	_timer.set_deferred("wait_time", rand_range(2.5, 5.0))
 
 func _on_VisibilityNotifier2D_screen_entered():
 	set_deferred("visible", true)
+
 func _on_VisibilityNotifier2D_screen_exited():
 	if MapData.world["animal"].has(name):
 		MapData.world["animal"][name]["l"] = position/32

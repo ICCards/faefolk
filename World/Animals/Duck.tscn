@@ -305,7 +305,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 9
+frame = 7
 playing = true
 
 [node name="Timers" type="Node" parent="."]

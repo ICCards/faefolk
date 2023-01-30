@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://World/Objects/Projectiles/ArrowProjectile.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Images/Magic/Arrow/Arrow_Hit.png" type="Texture" id=4]
 
@@ -271,6 +272,13 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectEnemyBox"]
 shape = SubResource( 12 )
+
+[node name="Light2D" type="Light2D" parent="."]
+enabled = false
+texture = ExtResource( 2 )
+texture_scale = 0.5
+energy = 1.01
+mode = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]

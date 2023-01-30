@@ -27,7 +27,7 @@ func set_dimensions():
 		if item_name == "campfire":
 			$Position2D/CampfireInteractiveArea/CollisionShape2D.set_deferred("disabled", false)
 			$Position2D/CampfireInteractiveArea.set_deferred("object_name", "campfire")
-			$Position2D/CampfireInteractiveArea.set_deferred(name,id)
+			$Position2D/CampfireInteractiveArea.set_deferred("name",id)
 			if PlayerData.player_data["campfires"].has(id):
 				pass
 			else:
@@ -36,7 +36,7 @@ func set_dimensions():
 		$Position2D/InteractiveArea/CollisionShape2D.set_deferred("disabled", false)
 		$Position2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", false)
 		$Position2D/InteractiveArea.set_deferred("object_name", "chest")
-		$Position2D/InteractiveArea.set_deferred(name,id)
+		$Position2D/InteractiveArea.set_deferred("name",id)
 		if PlayerData.player_data["chests"].has(id):
 			pass
 		else:
@@ -375,7 +375,7 @@ func _on_HurtBox_area_entered(area):
 			Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 		else:
 			Tiles.add_valid_tiles(location, dimensions)
-		Tiles.object_tiles.call_deferred("set_cellv",location -1)
+		Tiles.object_tiles.call_deferred("set_cellv",location, -1)
 		Tiles.fence_tiles.call_deferred("set_cellv",location, -1)
 		Tiles.fence_tiles.call_deferred("update_bitmask_area",location)
 		InstancedScenes.intitiateItemDrop(item_name, position, 1)

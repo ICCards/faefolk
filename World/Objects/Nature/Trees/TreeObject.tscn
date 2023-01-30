@@ -647,13 +647,10 @@ __meta__ = {
 visible = false
 texture = ExtResource( 3 )
 offset = Vector2( 0, -30 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="AnimatedTop" type="AnimatedSprite" parent="TreeSprites"]
 frames = ExtResource( 2 )
-frame = 8
+frame = 12
 playing = true
 offset = Vector2( 0, -38 )
 
@@ -665,6 +662,7 @@ texture = ExtResource( 4 )
 offset = Vector2( 0, -30 )
 
 [node name="TreeHurtbox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -31 )
 collision_layer = 262152
 collision_mask = 0
@@ -675,6 +673,7 @@ rotation = -1.5708
 shape = SubResource( 21 )
 
 [node name="MovementCollisionBox" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 0, 5.55556 )
 collision_layer = 35
 

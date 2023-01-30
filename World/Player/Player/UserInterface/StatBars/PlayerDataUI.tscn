@@ -97,6 +97,7 @@ align = 1
 valign = 1
 
 [node name="AdvanceTime" type="Timer" parent="DateTime"]
+wait_time = 3.0
 autostart = true
 
 [node name="ClockIcon" type="TextureRect" parent="DateTime"]

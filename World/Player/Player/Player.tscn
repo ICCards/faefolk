@@ -9,6 +9,7 @@
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=7]
 [ext_resource path="res://World/Player/Player/Player.gd" type="Script" id=8]
 [ext_resource path="res://World/Player/Player/SpeedParticles.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
 [ext_resource path="res://World/Player/Player/AttachedScripts/PickupZone.gd" type="Script" id=12]
 [ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=13]
@@ -21,7 +22,6 @@
 [ext_resource path="res://World/Player/Player/PoisonParticles.tscn" type="PackedScene" id=20]
 [ext_resource path="res://World/Player/Player/Actions.tscn" type="PackedScene" id=21]
 [ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=22]
-[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Images/Animations/torch/1.png" type="Texture" id=27]
 [ext_resource path="res://Assets/Images/Animations/torch/3.png" type="Texture" id=28]
 [ext_resource path="res://Assets/Images/Animations/torch/4.png" type="Texture" id=29]
@@ -11590,7 +11590,7 @@ shape = SubResource( 11 )
 [node name="TorchLight" type="Light2D" parent="."]
 position = Vector2( 0, -32 )
 enabled = false
-texture = ExtResource( 23 )
+texture = ExtResource( 10 )
 energy = 1.05
 mode = 2
 shadow_enabled = true
@@ -11599,7 +11599,7 @@ shadow_enabled = true
 visible = false
 position = Vector2( 0, -84 )
 frames = SubResource( 117 )
-frame = 1
+frame = 2
 playing = true
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_PickupZone_body_entered"]

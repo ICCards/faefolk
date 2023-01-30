@@ -33,6 +33,7 @@ func _ready():
 
 func destroy():
 	if not destroyed:
+		uuid.queue_free()
 		destroyed = true
 		$AnimatedSprite.call_deferred("stop")
 		queue_free()
@@ -59,6 +60,7 @@ func stop_trail_particles():
 	
 func fade_out_sound():
 	$Tween.interpolate_property(sound_effects, "volume_db", Sounds.return_adjusted_sound_db("sound", -20), -80, 3.0, 1, Tween.EASE_IN, 0)
+	$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 3.0, 1, Tween.EASE_IN, 0)
 	$Tween.start()
 
 func _on_Timer_timeout():

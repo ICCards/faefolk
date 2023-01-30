@@ -14,7 +14,7 @@ func _physics_process(delta):
 
 func _ready():
 	if is_hostile_projectile:
-		$Hitbox.set_collision_layer(2+8+16+128)
+		$Hitbox.set_collision_mask(2+8+16+128)
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Fire/cast.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
@@ -45,7 +45,6 @@ func projectile_collided():
 	if not collided:
 		collided = true
 		$Projectile.hide()
-		$Light2D.enabled = false
 		$CollisionShape2D.set_deferred("disabled", true)
 		$TrailParticles/P1.emitting = false
 		$TrailParticles/P2.emitting = false
@@ -60,6 +59,8 @@ func projectile_collided():
 			$Explosion.play("explode")
 			$Hitbox/CollisionShape2D.shape.radius = 80
 			yield(get_tree().create_timer(0.5), "timeout")
+			$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 0.5, 1, Tween.EASE_IN, 0)
+			$Tween.start()
 			$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 			yield($Explosion, "animation_finished")
 			$Explosion.hide()
@@ -71,7 +72,9 @@ func projectile_collided():
 			$ExplosionParticles/Explosion/Shards.emitting = true
 			$ExplosionParticles/Explosion/Smoke.emitting = true
 			$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-			yield(get_tree().create_timer(0.5), "timeout")
+			$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 0.5, 1, Tween.EASE_IN, 0)
+			$Tween.start()
+			yield(get_tree().create_timer(0.25), "timeout")
 		yield(get_tree().create_timer(1.5), "timeout")
 		destroy()
 

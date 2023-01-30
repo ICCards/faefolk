@@ -42,45 +42,51 @@ func build_terrain():
 		for new_chunk in get_parent().built_chunks:
 			if not built_chunks.has(new_chunk) and not terrain_thread.is_active():
 				built_chunks.append(new_chunk)
-				#print("BUILDING TERRAIN " + new_chunk)
 				terrain_thread.start(self, "_whoAmI", new_chunk)
 
 func spawn_chunk(chunk_name):
 	var _chunk = MapData.return_chunk(chunk_name[0],chunk_name.substr(1,-1))
-	for loc_string in _chunk["plains"]:
-		var loc = Util.string_to_vector2(loc_string)
-		plains.set_cellv(loc, 0)
-	yield(get_tree(), "idle_frame")
-	for loc_string in _chunk["snow"]:
-		var loc = Util.string_to_vector2(loc_string)
-		snow.set_cellv(loc, 0)
-	yield(get_tree(), "idle_frame")
-	for loc_string in _chunk["forest"]:
-		var loc = Util.string_to_vector2(loc_string)
-		forest.set_cellv(loc, 0)
-	yield(get_tree(), "idle_frame")
-	for loc_string in _chunk["beach"]:
-		var loc = Util.string_to_vector2(loc_string)
-		Tiles._set_cell(sand, loc.x, loc.y, 0)
-	yield(get_tree(), "idle_frame")
-	for loc_string in _chunk["desert"]:
-		var loc = Util.string_to_vector2(loc_string)
-		Tiles._set_cell(sand, loc.x, loc.y, 0)
-	yield(get_tree(), "idle_frame")
-	for loc_string in _chunk["dirt"]:
-		var loc = Util.string_to_vector2(loc_string)
-		dirt.set_cellv(loc, 0)
-	yield(get_tree(), "idle_frame")
-	for loc_string in _chunk["ocean"]:
-		var loc = Util.string_to_vector2(loc_string)
-		if sand.get_cellv(loc) == -1:
-			wetSand.set_cellv(loc, 0)
-			waves.set_cellv(loc, 5)
-			shallow_ocean.set_cellv(loc, 0)
-			top_ocean.set_cellv(loc, 0)
-			deep_ocean.set_cellv(loc, 0)
-			validTiles.set_cellv(loc, -1)
-	yield(get_tree(), "idle_frame")
+	if _chunk["plains"].size() > 0:
+		for loc_string in _chunk["plains"]:
+			var loc = Util.string_to_vector2(loc_string)
+			plains.set_cellv(loc, 0)
+		yield(get_tree(), "idle_frame")
+	if _chunk["snow"].size() > 0:
+		for loc_string in _chunk["snow"]:
+			var loc = Util.string_to_vector2(loc_string)
+			snow.set_cellv(loc, 0)
+		yield(get_tree(), "idle_frame")
+	if _chunk["forest"].size() > 0:
+		for loc_string in _chunk["forest"]:
+			var loc = Util.string_to_vector2(loc_string)
+			forest.set_cellv(loc, 0)
+		yield(get_tree(), "idle_frame")
+	if _chunk["beach"].size() > 0:
+		for loc_string in _chunk["beach"]:
+			var loc = Util.string_to_vector2(loc_string)
+			Tiles._set_cell(sand, loc.x, loc.y, 0)
+		yield(get_tree(), "idle_frame")
+	if _chunk["desert"].size() > 0:
+		for loc_string in _chunk["desert"]:
+			var loc = Util.string_to_vector2(loc_string)
+			Tiles._set_cell(sand, loc.x, loc.y, 0)
+		yield(get_tree(), "idle_frame")
+	if _chunk["dirt"].size() > 0:
+		for loc_string in _chunk["dirt"]:
+			var loc = Util.string_to_vector2(loc_string)
+			dirt.set_cellv(loc, 0)
+		yield(get_tree(), "idle_frame")
+	if _chunk["ocean"].size() > 0:
+		for loc_string in _chunk["ocean"]:
+			var loc = Util.string_to_vector2(loc_string)
+			if sand.get_cellv(loc) == -1:
+				wetSand.set_cellv(loc, 0)
+				waves.set_cellv(loc, 5)
+				shallow_ocean.set_cellv(loc, 0)
+				top_ocean.set_cellv(loc, 0)
+				deep_ocean.set_cellv(loc, 0)
+				validTiles.set_cellv(loc, -1)
+		yield(get_tree(), "idle_frame")
 	for loc_string in _chunk["beach"]:
 		var loc = Util.string_to_vector2(loc_string)
 		#Tiles._set_cell(sand, loc.x, loc.y, 0)
@@ -116,6 +122,7 @@ func spawn_chunk(chunk_name):
 	call_deferred("update_bitmasks", chunk_name)
 
 func update_bitmasks(chunk_name):
+	var _chunk = MapData.return_chunk(chunk_name[0],chunk_name.substr(1,-1))
 	var row = chunk_name[0]
 	var column = int(chunk_name.substr(1, -1))
 	var start_x
@@ -196,22 +203,27 @@ func update_bitmasks(chunk_name):
 		"L":
 			start_y = 813
 			end_y = 1000
-	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	snow.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	forest.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	dirt.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	wetSand.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	waves.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	deep_ocean.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
-	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-	yield(get_tree(), "idle_frame")
+	if _chunk["plains"].size() > 0:
+		plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+		yield(get_tree(), "idle_frame")
+	if _chunk["snow"].size() > 0:
+		snow.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+		yield(get_tree(), "idle_frame")
+	if _chunk["forest"].size() > 0:
+		forest.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+		yield(get_tree(), "idle_frame")
+	if _chunk["dirt"].size() > 0:
+		dirt.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+		yield(get_tree(), "idle_frame")
+	if _chunk["ocean"].size() > 0:
+		wetSand.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+		yield(get_tree(), "idle_frame")
+		waves.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+		yield(get_tree(), "idle_frame")
+		deep_ocean.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+		yield(get_tree(), "idle_frame")
+#	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
+#	yield(get_tree(), "idle_frame")
 #	yield(get_tree(), "idle_frame")
 #	snow.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
 #	yield(get_tree(), "idle_frame")

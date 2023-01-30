@@ -391,7 +391,7 @@ func close_stove(id):
 
 func close_chest(id):
 	if not holding_item and has_node("Chest"):
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/close.mp3")
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/closed.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 		sound_effects.play()
 		Server.world.get_node("PlacableObjects/"+id).close_chest()

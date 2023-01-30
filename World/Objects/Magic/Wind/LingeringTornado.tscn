@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Magic/wind/projectile.png" type="Texture" id=2]
 [ext_resource path="res://World/Objects/Magic/Wind/LingeringTornado.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Sound/Sound effects/Magic/Wind/tornado.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=39]
 extents = Vector2( 0, 0 )
@@ -300,3 +301,11 @@ anims/play = SubResource( 45 )
 stream = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 18, -67 )
+scale = Vector2( 0.71875, 0.746094 )
+texture = ExtResource( 5 )
+energy = 1.03
+mode = 2
+shadow_enabled = true

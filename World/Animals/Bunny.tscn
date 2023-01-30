@@ -146,6 +146,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "hit"
@@ -293,7 +305,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -7 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 8
+frame = 1
 playing = true
 
 [node name="Timers" type="Node" parent="."]

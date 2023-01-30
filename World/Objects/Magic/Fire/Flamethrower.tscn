@@ -218,11 +218,12 @@ rotation = -1.5708
 scale = Vector2( 2, 2 )
 frames = SubResource( 57 )
 animation = "loop"
-frame = 6
+frame = 8
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( -0.000396729, -109 )
 texture = ExtResource( 5 )
-energy = 1.01
+color = Color( 1, 1, 1, 0 )
+energy = 0.9
 mode = 2

@@ -1,6 +1,6 @@
 extends Control
 
-var game_time_speed_per_second = 3
+var game_time_speed_per_second = 5
 var week_days = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."]
 var seasons = ["spring", "summer", "fall", "winter"]
 var clock_icon_index = 1

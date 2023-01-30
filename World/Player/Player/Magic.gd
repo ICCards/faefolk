@@ -81,6 +81,8 @@ var mouse_left_down: bool = false
 var starting_mouse_point
 var ending_mouse_point
 
+var thread = Thread.new()
+
 func _ready():
 	PlayerData.connect("health_depleted", self, "player_death")
 
@@ -102,19 +104,26 @@ func _input( event ):
 		elif event.is_action_released("use_tool"):
 			mouse_left_down = false
 
+func draw_bow(spell_index):
+	if not thread.is_active():
+		thread.start(self,"whoAmIBow",spell_index)
+		
+func whoAmIBow(spell_index):
+	call_deferred("draw_bow_deferred",spell_index)
 
-func draw_bow(init_direction, spell_index):
+func draw_bow_deferred(spell_index):
 	if validate_bow_requirement(spell_index):
 		get_parent().state = MAGIC_CASTING
 		is_drawing = true
-		animation = "draw_" + init_direction.to_lower()
+		animation = "draw_" + get_parent().direction.to_lower()
 		player_animation_player.play("bow draw release")
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
 		yield(player_animation_player, "animation_finished" )
 		wait_for_bow_release(spell_index)
-
+	else:
+		thread.wait_to_finish()
 
 func validate_bow_requirement(spell_index):
 	match spell_index:
@@ -144,7 +153,9 @@ func wait_for_bow_release(spell_index):
 		is_releasing = false
 		get_parent().direction = direction
 		get_parent().state = MOVEMENT
+		thread.wait_to_finish()
 	elif get_parent().state == DYING:
+		thread.wait_to_finish()
 		return
 	else:
 		yield(get_tree().create_timer(0.1), "timeout")
@@ -229,26 +240,32 @@ func wait_for_cast_release(staff_name,spell_index):
 		else:
 			cast(staff_name, spell_index)
 	elif get_parent().state == DYING:
+		thread.wait_to_finish()
 		return
 	else:
 		yield(get_tree().create_timer(0.1), "timeout")
 		wait_for_cast_release(staff_name, spell_index)
 
-func cast_spell(staff_name, init_direction, spell_index):
-	yield(get_tree(), "idle_frame")
-	if validate_magic_cast_requirements(spell_index):
-		direction = init_direction
+func cast_spell(staff_name, spell_index):
+	if not thread.is_active():
+		thread.start(self,"whoAmIMagic",[staff_name,spell_index])
+
+func whoAmIMagic(staff_and_spell_index):
+	call_deferred("cast_spell_deferred", staff_and_spell_index)
+
+func cast_spell_deferred(staff_and_spell_index):
+	if validate_magic_cast_requirements(staff_and_spell_index[1]):
 		starting_mouse_point = get_global_mouse_position()
-		if spell_index != 2 or PlayerData.normal_hotbar_mode:
+		if staff_and_spell_index[1] != 2 or PlayerData.normal_hotbar_mode:
 			get_parent().state = MAGIC_CASTING
 			is_casting = true
-			animation = "magic_cast_" + init_direction.to_lower()
+			animation = "magic_cast_" + get_parent().direction.to_lower()
 			player_animation_player.play("bow draw release")
 			composite_sprites.set_player_animation(get_parent().character, animation, "magic staff")
 			yield(player_animation_player, "animation_finished" )
-		wait_for_cast_release(staff_name,spell_index)
+		wait_for_cast_release(staff_and_spell_index[0],staff_and_spell_index[1])
 	else:
-		get_parent().state = MOVEMENT
+		thread.wait_to_finish()
 
 
 func validate_magic_cast_requirements(spell_index):
@@ -428,6 +445,7 @@ func cast(staff_name, spell_index):
 	if get_parent().state != DYING: 
 		get_parent().state = MOVEMENT
 		get_parent().direction = direction
+		thread.wait_to_finish()
 
 
 func set_invisibility():
@@ -667,12 +685,14 @@ func play_fire_projectile(debuff):
 
 func play_fire_buff():
 	var spell = FireBuffFront.instance()
+	spell.name = "FIREBUFF"
 	get_node("../").call_deferred("add_child", spell)
 	var spell2 = FireBuffBehind.instance()
 	get_node("../").call_deferred("add_child", spell2)
 	player_fire_buff = true
-	yield(get_tree().create_timer(FIRE_BUFF_LENGTH), "timeout")
-	player_fire_buff = false
+	yield(get_tree().create_timer(FIRE_BUFF_LENGTH+0.25), "timeout")
+	if not get_node("../").has_node("FIREBUFF"):
+		player_fire_buff = false
 	
 func play_flamethrower():
 	var spell = FlameThrower.instance()

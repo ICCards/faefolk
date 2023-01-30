@@ -49,10 +49,10 @@ func hit(tool_name, var special_ability = ""):
 func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		call_deferred("hit", _area.tool_name)
 	if _area.special_ability == "fire buff":
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-16,16)))
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
+		call_deferred("hit", _area.tool_name)
 
 func _on_VisibilityNotifier2D_screen_entered():
 	call_deferred("show")

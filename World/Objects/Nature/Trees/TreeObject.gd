@@ -203,11 +203,11 @@ func destroy(tool_name):
 func _on_Hurtbox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		call_deferred("hit", _area.tool_name)
 	if _area.special_ability == "fire buff" and phase == "5":
 		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-10,22)))
 		health -= Stats.FIRE_DEBUFF_DAMAGE
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
+		call_deferred("hit", _area.tool_name)
 
 
 ### Tree modulate functions
