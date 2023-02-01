@@ -342,22 +342,22 @@ margin_bottom = 685.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )
 
-[node name="sleeping bag" type="Panel" parent="CraftingMenu/Items"]
+[node name="bed" type="Panel" parent="CraftingMenu/Items"]
 margin_top = 690.0
 margin_right = 64.0
-margin_bottom = 754.0
-rect_min_size = Vector2( 64, 64 )
-script = ExtResource( 9 )
-
-[node name="bed" type="Panel" parent="CraftingMenu/Items"]
-margin_left = 83.0
-margin_top = 690.0
-margin_right = 147.0
 margin_bottom = 754.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )
 
 [node name="chair" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 83.0
+margin_top = 690.0
+margin_right = 147.0
+margin_bottom = 754.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="armchair" type="Panel" parent="CraftingMenu/Items"]
 margin_left = 166.0
 margin_top = 690.0
 margin_right = 230.0
@@ -365,22 +365,22 @@ margin_bottom = 754.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )
 
-[node name="armchair" type="Panel" parent="CraftingMenu/Items"]
+[node name="couch" type="Panel" parent="CraftingMenu/Items"]
 margin_top = 759.0
 margin_right = 64.0
-margin_bottom = 823.0
-rect_min_size = Vector2( 64, 64 )
-script = ExtResource( 9 )
-
-[node name="couch" type="Panel" parent="CraftingMenu/Items"]
-margin_left = 83.0
-margin_top = 759.0
-margin_right = 147.0
 margin_bottom = 823.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )
 
 [node name="stool" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 83.0
+margin_top = 759.0
+margin_right = 147.0
+margin_bottom = 823.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="table" type="Panel" parent="CraftingMenu/Items"]
 margin_left = 166.0
 margin_top = 759.0
 margin_right = 230.0
@@ -388,22 +388,22 @@ margin_bottom = 823.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )
 
-[node name="table" type="Panel" parent="CraftingMenu/Items"]
+[node name="round table" type="Panel" parent="CraftingMenu/Items"]
 margin_top = 828.0
 margin_right = 64.0
-margin_bottom = 892.0
-rect_min_size = Vector2( 64, 64 )
-script = ExtResource( 9 )
-
-[node name="round table" type="Panel" parent="CraftingMenu/Items"]
-margin_left = 83.0
-margin_top = 828.0
-margin_right = 147.0
 margin_bottom = 892.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )
 
 [node name="dresser" type="Panel" parent="CraftingMenu/Items"]
+margin_left = 83.0
+margin_top = 828.0
+margin_right = 147.0
+margin_bottom = 892.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 9 )
+
+[node name="small rug" type="Panel" parent="CraftingMenu/Items"]
 margin_left = 166.0
 margin_top = 828.0
 margin_right = 230.0
@@ -411,25 +411,17 @@ margin_bottom = 892.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )
 
-[node name="small rug" type="Panel" parent="CraftingMenu/Items"]
+[node name="medium rug" type="Panel" parent="CraftingMenu/Items"]
 margin_top = 897.0
 margin_right = 64.0
 margin_bottom = 961.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )
 
-[node name="medium rug" type="Panel" parent="CraftingMenu/Items"]
+[node name="large rug" type="Panel" parent="CraftingMenu/Items"]
 margin_left = 83.0
 margin_top = 897.0
 margin_right = 147.0
-margin_bottom = 961.0
-rect_min_size = Vector2( 64, 64 )
-script = ExtResource( 9 )
-
-[node name="large rug" type="Panel" parent="CraftingMenu/Items"]
-margin_left = 166.0
-margin_top = 897.0
-margin_right = 230.0
 margin_bottom = 961.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 9 )

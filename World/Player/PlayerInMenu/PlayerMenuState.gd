@@ -16,7 +16,6 @@ var player
 onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
-	Server.player_node = self
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
 	animPlayer.play("idle")
@@ -29,7 +28,6 @@ func _ready():
 func destroy():
 	set_physics_process(false)
 	character.queue_free()
-	Server.player_node = null
 
 func _physics_process(_delta):
 	if not visible:

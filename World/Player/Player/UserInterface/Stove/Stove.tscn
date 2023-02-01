@@ -80,7 +80,7 @@ visible = false
 position = Vector2( 461, 465 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 5 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]

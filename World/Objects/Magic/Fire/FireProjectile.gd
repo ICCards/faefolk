@@ -20,7 +20,6 @@ func _ready():
 	sound_effects.play()
 	$Projectile.play("play")
 	$Hitbox.tool_name = "fire projectile"
-	$TrailParticles.position += Vector2(0,32)
 	$TrailParticles/P1.direction = -velocity
 	$TrailParticles/P2.direction = -velocity 
 	$TrailParticles/P3.direction = -velocity 

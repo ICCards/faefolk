@@ -80,7 +80,7 @@ func play_egg_break_sound():
 	
 	
 func spawn_duck():
-	if Tiles.valid_tiles.get_cellv(global_position/32) != -1:
+	if Tiles.valid_tiles.get_cellv(global_position/32) != -1 and Server.world.name == "World":
 		if Util.chance(25):
 			var uuid = _uuid.new()
 			var id = uuid.v4()

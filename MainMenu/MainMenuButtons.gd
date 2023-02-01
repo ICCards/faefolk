@@ -100,13 +100,12 @@ func _on_PlayBtn_mouse_exited():
 func _on_PlayBtn_pressed():
 	if not changing_scene_active:
 		changing_scene_active = true
-		Server.isLoaded = false
 		get_parent().get_node("TitleMusic").stop()
 		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/UI/Buttons/select.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 		PlayerData.spawn_at_last_saved_location = true
-		Server.player_node.destroy()
+		get_node("../PLAYER").destroy()
 		if MapData.world["is_built"]:
 			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
 		else:

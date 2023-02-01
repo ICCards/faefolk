@@ -218,7 +218,7 @@ func _on_DetectObjectOverPathBox_area_entered(area):
 		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_DetectObjectOverPathBox_area_exited(area):
-	if not Server.world.is_changing_scene:
+	if Server.isLoaded:
 		if item_name == "foundation":
 			yield(get_tree().create_timer(0.3), "timeout")
 			$HurtBox/CollisionShape2D.set_deferred("disabled", false)

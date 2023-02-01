@@ -32,14 +32,24 @@ func validate_forest_tiles(location):
 
 func validate_tiles(location, dimensions):
 	var active = false
-	if not active:
-		active = true
-		for x in range(dimensions.x):
-			for y in range(dimensions.y):
-				if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
-					return false
-					break
-		return true
+	if Server.world.name == "World":
+		if not active:
+			active = true
+			for x in range(dimensions.x):
+				for y in range(dimensions.y):
+					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location or hoed_tiles.get_cellv(Vector2(x,-y) + location) == 0: 
+						return false
+						break
+			return true
+	else:
+		if not active:
+			active = true
+			for x in range(dimensions.x):
+				for y in range(dimensions.y):
+					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
+						return false
+						break
+			return true
 
 
 func validate_foundation_tiles(location, dimensions):

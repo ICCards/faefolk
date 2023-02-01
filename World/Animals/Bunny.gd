@@ -24,6 +24,7 @@ var variety
 var rng := RandomNumberGenerator.new()
 var thread := Thread.new()
 var destroy_thread := Thread.new()
+var mutex := Mutex.new()
 
 
 func _ready(): 
@@ -36,7 +37,7 @@ func _ready():
 
 func set_attributes():
 	bunny_sprite.frames = Images.BunnyVariations[variety-1]
-	var randomRadiusScale = rand_range(0.5,2.0)
+	var randomRadiusScale = rand_range(0.25,2.0)
 	$DetectPlayer/CollisionShape2D.scale = Vector2(randomRadiusScale, randomRadiusScale)
 	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
@@ -92,16 +93,13 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		if not bunny_sprite.modulate == Color("00c9ff"):
-			bunny_sprite.set_deferred("modulate", Color("00c9ff"))
+		bunny_sprite.set_deferred("modulate", Color("00c9ff"))
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		if not bunny_sprite.modulate == Color("009000"):
-			bunny_sprite.set_deferred("modulate", Color("009000"))
+		bunny_sprite.set_deferred("modulate", Color("009000"))
 	else:
 		velocity = move_and_slide(_velocity)
-		if not bunny_sprite.modulate == Color("ffffff"):
-			bunny_sprite.set_deferred("modulate", Color("ffffff"))
+		bunny_sprite.set_deferred("modulate", Color("ffffff"))
 
 func _get_direction_string() -> String:
 	if velocity.x > 0:
@@ -127,8 +125,7 @@ func hit(tool_name):
 	InstancedScenes.player_hit_effect(-dmg, position)
 	$AnimationPlayer.call_deferred("play", "hit")
 	if health <= 0 and not destroyed:
-		if not destroy_thread.is_alive():
-			destroy_thread.start(self,"destroy",true)
+		destroy(true)
 
 func destroy(killed_by_player):
 	_timer.call_deferred("stop")
@@ -146,7 +143,6 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,1))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,1))
 	yield($AnimationPlayer, "animation_finished")
-	destroy_thread.wait_to_finish()
 	queue_free()
 
 func _on_HurtBox_area_entered(area):

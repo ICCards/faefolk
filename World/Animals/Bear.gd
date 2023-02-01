@@ -126,16 +126,13 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		if not bear_sprite.modulate == Color("00c9ff"):
-			bear_sprite.set_deferred("modulate", Color("00c9ff"))
+		bear_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		if not bear_sprite.modulate == Color("009000"):
-			bear_sprite.set_deferred("modulate", Color("009000"))
+		bear_sprite.modulate = Color("009000")
 	else:
 		velocity = move_and_slide(_velocity)
-		if not bear_sprite.modulate == Color("ffffff"):
-			bear_sprite.set_deferred("modulate", Color("ffffff"))
+		bear_sprite.modulate = Color("ffffff")
 
 
 func play_groan_sound_effect():
@@ -160,21 +157,17 @@ func stop_sound_effects():
 func set_texture():
 	match state:
 		CHASE:
-			if not $Body/Bear.texture == load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png"):
-				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png"))
-				$Body/Fangs.set_deferred("texture", load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png"))
+			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png")
+			$Body/Fangs.texture = load("res://Assets/Images/Animals/Bear/gallop/fangs/" + direction  + ".png")
 		WALK:
-			if not $Body/Bear.texture == load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png"):
-				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png"))
-				$Body/Fangs.set_deferred("texture", null)
+			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/walk/body/" + direction  + ".png")
+			$Body/Fangs.texture = null
 		IDLE:
-			if not $Body/Bear.texture == load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png"):
-				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png"))
-				$Body/Fangs.set_deferred("texture", null)
+			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/idle/body/" + direction  + ".png")
+			$Body/Fangs.texture = null
 		RETREAT:
-			if not $Body/Bear.texture == load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png"):
-				$Body/Bear.set_deferred("texture", load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png"))
-				$Body/Fangs.set_deferred("texture", null)
+			$Body/Bear.texture = load("res://Assets/Images/Animals/Bear/gallop/body/" + direction  + ".png")
+			$Body/Fangs.texture = null
 	
 
 func swing():
@@ -244,8 +237,7 @@ func hit(tool_name):
 	if health < STARTING_HEALTH*.3:
 		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
-		if not destroy_thread.is_alive():
-			destroy_thread.start(self,"destroy",true)
+		destroy(true)
 
 func destroy(killed_by_player):
 	_retreat_timer.call_deferred("stop")
@@ -268,7 +260,6 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(1,3))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(1,3))
 	yield(animation_player, "animation_finished")
-	destroy_thread.wait_to_finish()
 	queue_free()
 
 func _on_HurtBox_area_entered(area):

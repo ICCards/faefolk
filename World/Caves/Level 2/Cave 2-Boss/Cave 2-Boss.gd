@@ -17,7 +17,6 @@ func _ready():
 	randomize()
 	Server.world = self
 	BuildCaveLevel.build()
-	Server.isLoaded = true
 	BuildCaveLevel.update_navigation()
 	spawn_boss()
 

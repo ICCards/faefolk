@@ -172,7 +172,7 @@ func set_dimensions():
 			Server.player_node.user_interface.get_node("ChangeVariety").show()
 			$ItemToPlace.show()
 		GATE:
-			Server.player_node.user_interface.get_node("ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$GateToPlace.show()
 		FORAGE:
@@ -203,7 +203,7 @@ func place_gate_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
-	get_rotation_index()
+#	get_rotation_index()
 	#$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + direction + ".png")
 	if (direction == "up" or direction == "down"):
 		$ColorIndicator.tile_size = dimensions

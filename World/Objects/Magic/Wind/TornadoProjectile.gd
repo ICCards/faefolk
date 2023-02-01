@@ -42,7 +42,7 @@ func set_particles():
 	$TornadoParticles/P1.set_deferred("emitting", true)
 	$TornadoParticles/P2.set_deferred("emitting", true)
 	$TornadoParticles/P3.set_deferred("emitting", true)
-	$TrailParticles.position += Vector2(0,32)
+	#$TrailParticles.position += Vector2(0,32)
 	$TrailParticles/P1.direction = -velocity
 	$TrailParticles/P2.direction = -velocity 
 	$TrailParticles/P3.direction = -velocity 

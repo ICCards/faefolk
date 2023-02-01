@@ -68,6 +68,7 @@ var animation: String = ""
 var direction: String = "DOWN"
 var movement_direction: String = ""
 var current_potion: String = ""
+var current_staff_name: String = ""
 var is_casting: bool = false
 var is_drawing: bool = false
 var is_releasing: bool = false
@@ -258,10 +259,10 @@ func cast_spell_deferred(staff_and_spell_index):
 		starting_mouse_point = get_global_mouse_position()
 		if staff_and_spell_index[1] != 2 or PlayerData.normal_hotbar_mode:
 			get_parent().state = MAGIC_CASTING
+			current_staff_name = staff_and_spell_index[0]
 			is_casting = true
 			animation = "magic_cast_" + get_parent().direction.to_lower()
 			player_animation_player.play("bow draw release")
-			composite_sprites.set_player_animation(get_parent().character, animation, "magic staff")
 			yield(player_animation_player, "animation_finished" )
 		wait_for_cast_release(staff_and_spell_index[0],staff_and_spell_index[1])
 	else:
@@ -316,10 +317,10 @@ func _physics_process(delta):
 	if is_casting and get_parent().state != DYING:
 		if get_parent().cast_movement_direction == "":
 			player_animation_player2.stop(false)
-			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower(), "magic staff")
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower(), current_staff_name)
 		else:
 			player_animation_player2.play("walk legs")
-			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, "magic staff")
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, current_staff_name)
 	if is_drawing and get_parent().state != DYING:
 		if get_parent().cast_movement_direction == "":
 			player_animation_player2.stop(false)

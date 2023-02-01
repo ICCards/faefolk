@@ -9,8 +9,8 @@ func _ready():
 	if GameState.save_exists(): # Load world
 		game_state = GameState.new()
 		game_state.load_state()
-		#PlayerData.player_data = game_state.player_state
-		PlayerData.player_data = PlayerData.starting_player_data
+		PlayerData.player_data = game_state.player_state
+		#PlayerData.player_data = PlayerData.starting_player_data
 		MapData.world = game_state.world_state
 		MapData.caves = game_state.cave_state
 	else: # Initial launch
@@ -26,14 +26,14 @@ func _ready():
 	$Background/Water1.playing = true
 	$Background/Water2.playing = true
 	spawn_player_in_menu()
-	Server.isLoaded = false
+
 
 func spawn_player_in_menu():
 	$MainMenuButtons/LoadingIndicator.visible = false
 	$MainMenuButtons/PlayShopQuit.visible = true
 	playerMenuState = PlayerMenuState.instance()
-	playerMenuState.name = "Player"
-	add_child(playerMenuState)
+	playerMenuState.name = "PLAYER"
+	call_deferred("add_child",playerMenuState)
 	playerMenuState.global_position = Vector2(735, 585 )
 
 
@@ -69,6 +69,6 @@ func _on_ExitBtn_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	$SoundEffects.play()
-	$OptionsMenuLayer.hide()
+	$OptionsMenuLayer/Options.hide()
 	$MainMenuButtons.show()
 	Server.player_node.show()

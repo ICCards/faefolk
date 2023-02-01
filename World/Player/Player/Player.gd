@@ -59,10 +59,11 @@ func _ready():
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	yield(get_tree(), "idle_frame")
-	Server.isLoaded = true
 	set_held_object()
-	
-	
+	yield(get_tree().create_timer(0.25), "timeout")
+	Server.isLoaded = true
+
+
 func _input( event ):
 	if Server.isLoaded:
 		if event is InputEvent:
@@ -71,31 +72,26 @@ func _input( event ):
 			elif event.is_action_released("sprint"):
 				running = false
 
+
 func destroy():
 	set_process(false)
 	set_process_unhandled_input(false)
-	character.queue_free()
 	state = DYING
+	character.queue_free()
 
 func set_held_object():
 	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if item_name == "torch":
-				$TorchLight.set_deferred("enabled", true)
-			else:
-				$TorchLight.set_deferred("enabled", false)
 			if item_category == "Placable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
 				actions.show_placable_object(item_name, item_category)
 				return
 			if item_name == "blueprint" and current_building_item != null:
 				actions.show_placable_object(current_building_item, "BUILDING")
 				return
-		$TorchLight.set_deferred("enabled", false)
 		actions.destroy_placable_object()
 	else:
-		$TorchLight.set_deferred("enabled", false)
 		actions.destroy_placable_object()
 		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
 			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
@@ -106,7 +102,7 @@ func set_held_object():
 		$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("hide")
 
 
-func _physics_process(_delta) -> void:
+func _process(_delta) -> void:
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
@@ -335,13 +331,16 @@ func walk_state(_direction):
 					holding_item.show()
 					animation = "holding_walk_" + _direction.to_lower()
 					$HoldingTorch.hide()
+					$TorchLight.enabled = false
 				elif item_name == "torch":
 					holding_item.hide()
 					$HoldingTorch.show()
+					$TorchLight.enabled = true
 					animation = "holding_walk_" + _direction.to_lower()
 				else:
 					holding_item.hide()
 					animation = "walk_" + _direction.to_lower()
+					$TorchLight.enabled = false
 					$HoldingTorch.hide()
 			elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
@@ -350,14 +349,17 @@ func walk_state(_direction):
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					animation = "holding_walk_" + _direction.to_lower()
+					$TorchLight.enabled = false
 					$HoldingTorch.hide()
 				else:
 					holding_item.hide()
 					animation = "walk_" + _direction.to_lower()
+					$TorchLight.enabled = false
 					$HoldingTorch.hide()
 			else:
 				holding_item.hide()
 				animation = "walk_" + _direction.to_lower()
+				$TorchLight.enabled = false
 				$HoldingTorch.hide()
 			composite_sprites.set_player_animation(character, animation, null)
 		elif running and Sounds.current_footsteps_sound != Sounds.swimming:
@@ -372,6 +374,7 @@ func walk_state(_direction):
 		elif Sounds.current_footsteps_sound == Sounds.swimming:
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			holding_item.hide()
+			$TorchLight.enabled = false
 			$HoldingTorch.hide()
 			animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")

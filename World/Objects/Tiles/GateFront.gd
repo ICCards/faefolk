@@ -35,13 +35,13 @@ func toggle_gate():
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/gate/open.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
 		sound_effects.call_deferred("play")
-		$Gate.set_deferred("frame", 0)
+		$GatePos/Gate.set_deferred("frame", 0)
 		$MovementCollision/CollisionShape2D.set_deferred("disabled", false)
 	else:
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/gate/close.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
 		sound_effects.call_deferred("play")
-		$Gate.set_deferred("frame", 1)
+		$GatePos/Gate.set_deferred("frame", 1)
 		$MovementCollision/CollisionShape2D.set_deferred("disabled", true)
 	door_open = !door_open
 

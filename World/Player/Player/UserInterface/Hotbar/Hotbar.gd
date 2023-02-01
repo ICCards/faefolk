@@ -25,7 +25,7 @@ func exited_slot(slot):
 	item = null
 
 func _physics_process(delta):
-	if not visible:
+	if not visible or Server.isLoaded == false:
 		return
 	adjusted_description_position()
 	if item and find_parent("UserInterface").holding_item == null:

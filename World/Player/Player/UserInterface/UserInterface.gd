@@ -103,7 +103,7 @@ func switch_hotbar():
 
 
 func _input(event):
-	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode:
+	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode and not Server.world.is_changing_scene:
 		if event.is_action_pressed("ui_cancel") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
 			toggle_save_and_exit()
 		elif event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:

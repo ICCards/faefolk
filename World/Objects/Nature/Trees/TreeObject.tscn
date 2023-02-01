@@ -1,11 +1,14 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Trees/TreeObject.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/tree_sets/birch/mature/animated top winter.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Assets/Images/tree_sets/birch/mature/top winter.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/tree_sets/birch/growing/4.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/tree_sets/birch/mature/stump.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/tree_sets/birch/mature/bottom.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/tree_sets/apple/mature/empty animated.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/tree_sets/apple/mature/empty.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/tree_sets/apple/mature/bottom.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/tree_sets/apple/growing/4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/tree_sets/apple/mature/stump.png" type="Texture" id=6]
+
+[sub_resource type="CircleShape2D" id=25]
+radius = 47.0106
 
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 22, 22 )
@@ -620,23 +623,28 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[node name="TreeObject" type="Node2D"]
+[node name="TreeObject" type="Area2D"]
 modulate = Color( 1.3, 1.3, 1.3, 1 )
+collision_layer = 0
+collision_mask = 131072
 script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 25 )
 
 [node name="TreeSprites" type="Node2D" parent="."]
 position = Vector2( 0, -18 )
 scale = Vector2( 2.75, 2.75 )
 
 [node name="TreeStump" type="Sprite" parent="TreeSprites"]
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 offset = Vector2( 0, -30 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="TreeBottom" type="Sprite" parent="TreeSprites"]
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 offset = Vector2( 0, -30 )
 region_rect = Rect2( 160, 320, 0, 0 )
 __meta__ = {
@@ -650,15 +658,15 @@ offset = Vector2( 0, -30 )
 
 [node name="AnimatedTop" type="AnimatedSprite" parent="TreeSprites"]
 frames = ExtResource( 2 )
-frame = 12
+frame = 4
 playing = true
-offset = Vector2( 0, -38 )
+offset = Vector2( -1, -17 )
 
 [node name="Tween" type="Tween" parent="TreeSprites"]
 
 [node name="TreeSapling" type="Sprite" parent="TreeSprites"]
 visible = false
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 offset = Vector2( 0, -30 )
 
 [node name="TreeHurtbox" type="Area2D" parent="."]

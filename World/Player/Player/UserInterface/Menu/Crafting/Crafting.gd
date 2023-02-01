@@ -34,7 +34,6 @@ func reset_hover_effect():
 			$CraftingMenu/Items.get_node(item).rect_scale = Vector2(2,2)
 
 
-
 func initialize_crafting():
 	PlayerData.HotbarSlots = $HotbarInventorySlots
 	PlayerData.InventorySlots = $InventorySlots

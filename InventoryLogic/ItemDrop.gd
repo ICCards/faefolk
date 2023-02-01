@@ -17,6 +17,7 @@ var randomInt
 var item_quantity
 var item_health
 var adjustedPosition
+var is_tree_harvest: bool = false
 
 
 func initItemDropType(_item_name, var _quantity = 1, var _health = null):
@@ -32,6 +33,9 @@ func _ready():
 		itemQuantity.call_deferred("hide")
 	else:
 		itemQuantity.set_deferred("text", str(item_quantity))
+#	if is_tree_harvest:
+#		animationPlayer.call_deferred("play", "Tree harvest " + String(rng.randi_range(1, 2)))
+#	else:
 	randomInt = rng.randi_range(1, 5)
 	animationPlayer.call_deferred("play", "Animate " + String(randomInt))
 

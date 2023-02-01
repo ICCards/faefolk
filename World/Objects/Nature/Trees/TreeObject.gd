@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 onready var tree_stump_sprite: Sprite = $TreeSprites/TreeStump
 onready var tree_bottom_sprite: Sprite = $TreeSprites/TreeBottom
@@ -22,6 +22,8 @@ var biome
 var tree_fallen = false
 var destroyed = false
 
+var object_name = "tree"
+
 var phase
 
 var temp_health: int = 3
@@ -41,13 +43,13 @@ func set_tree():
 		tree_top_sprite.call_deferred("hide")
 		$TreeSprites/TreeSapling.call_deferred("hide")
 		setGrownTreeTexture()
-	elif phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isNonFruitTree(MapData.world["tree"][name]["v"]): # grown fruit tree
+	elif (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty") and Util.isFruitTree(MapData.world["tree"][name]["v"]): # grown fruit tree
 		animated_tree_top_sprite.call_deferred("show")
 		tree_bottom_sprite.call_deferred("show")
 		tree_stump_sprite.call_deferred("show")
-		tree_top_sprite.call_deferred("show")
+		tree_top_sprite.call_deferred("hide")
 		$TreeSprites/TreeSapling.call_deferred("hide")
-		setGrownTreeTexture()
+		setGrownFruitTreeTexture()
 	else:
 		animated_tree_top_sprite.call_deferred("hide")
 		tree_bottom_sprite.call_deferred("hide")
@@ -55,6 +57,21 @@ func set_tree():
 		tree_top_sprite.call_deferred("hide")
 		$TreeSprites/TreeSapling.call_deferred("show")
 		$TreeSprites/TreeSapling.set_deferred( "texture", load("res://Assets/Images/tree_sets/"+ variety +"/growing/"+ phase +".png"))
+
+
+func harvest():
+	if phase == "harvest":
+		$CollisionShape2D.set_deferred("disabled", true)
+		if Util.chance(5):
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 0), 3, true)
+		elif Util.chance(25):
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 0), 2, true)
+		else:
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,0), 1, true)
+		phase = "empty"
+		MapData.world["tree"][name]["p"] = "empty"
+		yield(get_tree(), "idle_frame")
+		refresh_tree_type()
 
 
 func refresh_tree_type():
@@ -66,6 +83,28 @@ func refresh_tree_type():
 			phase = MapData.world["tree"][name]["p"]
 			set_tree()
 
+func setGrownFruitTreeTexture():
+	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
+	if health < Stats.STUMP_HEALTH:
+		tree_fallen = true
+		call_deferred("disable_tree_top_collision_box")
+		animated_tree_top_sprite.call_deferred("hide")
+		tree_bottom_sprite.call_deferred("hide")
+	call_deferred("set_tree_top_collision_shape")
+	tree_stump_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/stump.png"))
+	tree_bottom_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/bottom.png"))
+	$TreeChipParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png"))
+	$TreeLeavesParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png"))
+	animated_tree_top_sprite.set_deferred("frame", rng.randi_range(0,19))
+	tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/"+ phase +".png"))
+	animated_tree_top_sprite.set_deferred("frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/"+ phase +" animated.tres"))
+	match variety:
+		"apple":
+			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-17))
+	if phase == "harvest":
+		$CollisionShape2D.set_deferred("disabled", false)
+	else:
+		$CollisionShape2D.set_deferred("disabled", true)
 
 func setGrownTreeTexture():
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
@@ -89,19 +128,19 @@ func setGrownTreeTexture():
 			animated_tree_top_sprite.set_deferred("frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated top winter.tres"))
 	match variety:
 		"oak":
-			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-107))
+			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-33))
 		"spruce":
-			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-102))
+			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-33))
 		"birch":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-38))
 		"evergreen":
-			animated_tree_top_sprite.set_deferred("offset", Vector2(-3,-66))
+			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-25))
 		"pine":
-			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-119))
+			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-37))
 
 func hit(tool_name):
 	if not destroyed:
-		if not phase == "5":
+		if not (phase == "5" and Util.isNonFruitTree(MapData.world["tree"][name]["v"])) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isNonFruitTree(MapData.world["tree"][name]["v"])):
 			animation_player_stump.call_deferred("play", "sapling hit")
 			$ResetTempHealthTimer.call_deferred("start")
 			temp_health -= 1

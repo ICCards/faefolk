@@ -92,14 +92,11 @@ func set_sprite_texture():
 	if not attacking or destroyed:
 		match state:
 			IDLE:
-				if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png"):
-					boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png"))
+				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png"))
 			WALK:
-				if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png"):
-					boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png"))
+				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png"))
 			_:
-				if not boar_sprite.texture == load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png"):
-					boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png"))
+				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png"))
 
 func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
@@ -109,16 +106,13 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		if not boar_sprite.modulate == Color("00c9ff"):
-			boar_sprite.set_deferred("modulate", Color("00c9ff"))
+		boar_sprite.set_deferred("modulate", Color("00c9ff"))
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		if not boar_sprite.modulate == Color("009000"):
-			boar_sprite.set_deferred("modulate", Color("009000"))
+		boar_sprite.set_deferred("modulate", Color("009000"))
 	else:
 		velocity = move_and_slide(_velocity)
-		if not boar_sprite.modulate == Color("ffffff"):
-			boar_sprite.set_deferred("modulate", Color("ffffff"))
+		boar_sprite.set_deferred("modulate", Color("ffffff"))
 
 
 func _physics_process(delta):
@@ -194,8 +188,7 @@ func hit(tool_name):
 	if health < STARTING_HEALTH*.3:
 		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
-		if not destroy_thread.is_alive():
-			destroy_thread.start(self,"destroy",true)
+		destroy(true)
 
 func destroy(killed_by_player):
 	_retreat_timer.call_deferred("stop")
@@ -216,7 +209,6 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
 	yield(animation_player, "animation_finished")
-	destroy_thread.wait_to_finish()
 	queue_free()
 
 func _on_HurtBox_area_entered(area):

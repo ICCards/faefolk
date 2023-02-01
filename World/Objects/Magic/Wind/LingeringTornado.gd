@@ -56,7 +56,7 @@ func set_particles():
 	$TornadoParticles/P1.emitting = true
 	$TornadoParticles/P2.emitting = true
 	$TornadoParticles/P3.emitting = true
-	$TrailParticles.position += Vector2(0,32)
+	#$TrailParticles.position += Vector2(0,32)
 	$TrailParticles/P1.direction = -target
 	$TrailParticles/P2.direction = -target
 	$TrailParticles/P3.direction = -target

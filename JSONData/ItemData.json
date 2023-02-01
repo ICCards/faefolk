@@ -39,6 +39,34 @@
         "ItemCategory": "Mob",
         "Description": "A flying enemy which randomly spawns in the caves.",
       },
+    "apple": {
+        "ItemCategory": "Crop",
+        "StackSize": 999,
+        "Description": "A crisp, juicy snack harvested from an apple tree.",
+        "Ingredients": null,
+        "EnergyHealth": [8,4]
+      },
+    "pear": {
+        "ItemCategory": "Crop",
+        "StackSize": 999,
+        "Description": "A yellow fruit with an odd shape.",
+        "Ingredients": null,
+        "EnergyHealth": [6,6]
+      },
+    "plum": {
+        "ItemCategory": "Crop",
+        "StackSize": 999,
+        "Description": "A purple fruit with a sweet and juicy consistency.",
+        "Ingredients": null,
+        "EnergyHealth": [4,8]
+      },
+    "cherry": {
+        "ItemCategory": "Crop",
+        "StackSize": 999,
+        "Description": "A sweet and juicy fruit popular in desserts.",
+        "Ingredients": null,
+        "EnergyHealth": [10,2]
+      },
     "apple seeds": {
         "ItemCategory": "Seed",
         "StackSize": 999,
@@ -1151,35 +1179,35 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 4]],
+      "Ingredients": [["cloth", 24]],
       "EnergyHealth": null
   },
   "medium rug" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 4]],
+      "Ingredients": [["cloth", 12]],
       "EnergyHealth": null
   },
   "small rug" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 4]],
+      "Ingredients": [["cloth", 4]],
       "EnergyHealth": null
   },
   "couch" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 10]],
+      "Ingredients": [["wood", 10], ["cloth", 10]],
       "EnergyHealth": null
   },
   "armchair" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 5]],
+      "Ingredients": [["wood", 5], ["cloth", 5]],
       "EnergyHealth": null
   },
   "table" : {
@@ -1200,7 +1228,7 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed and used to set respawn point.",
-      "Ingredients": [["wood", 8]],
+      "Ingredients": [["wood", 8], ["cloth", 8]],
       "EnergyHealth": null
   },
   "dresser" : {

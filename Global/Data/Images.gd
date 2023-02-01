@@ -442,6 +442,16 @@ func returnToolSprite(toolName, animation):
 				return blue_potion_throw.left
 			"throw_right":
 				return blue_potion_throw.right
+	elif toolName == "raw egg":
+		match animation:
+			"throw_down":
+				return raw_egg_throw.down
+			"throw_up":
+				return raw_egg_throw.up
+			"throw_left":
+				return raw_egg_throw.left
+			"throw_right":
+				return raw_egg_throw.right
 	match toolName:
 		"hammer":
 			match animation: 
@@ -753,17 +763,28 @@ func returnToolSprite(toolName, animation):
 					return bow_release.right
 				"release_left":
 					return bow_release.left
-		"magic staff":
+		"wind staff":
 			animation = animation.substr(0,13)
 			match animation:
 				"magic_cast_do":
-					return magic_staff.down
+					return wind_staff.down
 				"magic_cast_up":
-					return magic_staff.up
+					return wind_staff.up
 				"magic_cast_ri":
-					return magic_staff.right
+					return wind_staff.right
 				"magic_cast_le":
-					return magic_staff.left
+					return wind_staff.left
+		"fire staff":
+			animation = animation.substr(0,13)
+			match animation:
+				"magic_cast_do":
+					return fire_staff.down
+				"magic_cast_up":
+					return fire_staff.up
+				"magic_cast_ri":
+					return fire_staff.right
+				"magic_cast_le":
+					return fire_staff.left
 
 
 var red_potion_throw = {
@@ -792,11 +813,25 @@ var blue_potion_throw = {
 	right = load("res://Characters/Weapon swings/potions/blue/right.png")
 }
 
-var magic_staff = {
-	down = load("res://Characters/Weapon swings/magic staff/down.png"),
-	up = load("res://Characters/Weapon swings/magic staff/up.png"),
-	left = load("res://Characters/Weapon swings/magic staff/left.png"),
-	right = load("res://Characters/Weapon swings/magic staff/right.png")
+var raw_egg_throw = {
+	down = load("res://Characters/Weapon swings/potions/raw egg/down.png"),
+	up = load("res://Characters/Weapon swings/potions/raw egg/up.png"),
+	left = load("res://Characters/Weapon swings/potions/raw egg/left.png"),
+	right = load("res://Characters/Weapon swings/potions/raw egg/right.png")
+}
+
+var wind_staff = {
+	down = load("res://Characters/Weapon swings/magic staff/wind staff/down.png"),
+	up = load("res://Characters/Weapon swings/magic staff/wind staff/up.png"),
+	left = load("res://Characters/Weapon swings/magic staff/wind staff/left.png"),
+	right = load("res://Characters/Weapon swings/magic staff/wind staff/right.png")
+}
+
+var fire_staff = {
+	down = load("res://Characters/Weapon swings/magic staff/fire staff/down.png"),
+	up = load("res://Characters/Weapon swings/magic staff/fire staff/up.png"),
+	left = load("res://Characters/Weapon swings/magic staff/fire staff/left.png"),
+	right = load("res://Characters/Weapon swings/magic staff/fire staff/right.png")
 }
 
 var wood_pickaxe = {

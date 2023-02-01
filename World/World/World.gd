@@ -21,13 +21,15 @@ onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
 onready var Player = load("res://World/Player/Player/Player.tscn")
 
-var rng = RandomNumberGenerator.new()
+var rng := RandomNumberGenerator.new()
+var thread := Thread.new()
 
 var spawn_loc
 
 var is_changing_scene: bool = false
 
 var game_state: GameState
+
 
 func _ready():
 	Server.world = self
@@ -36,7 +38,8 @@ func _ready():
 func create_or_load_world():
 	if MapData.world["is_built"]: # Load world
 		MapData.add_world_data_to_chunks()
-		build_world()
+		thread.start(self, "build_world")
+		#build_world()
 	else: # Initial launch
 		var loadingScreen = GenerateWorldLoadingScreen.instance()
 		loadingScreen.name = "Loading"
@@ -44,6 +47,9 @@ func create_or_load_world():
 		GenerateNewWorld.build()
 
 func build_world():
+	call_deferred("build_world_deferred")
+	
+func build_world_deferred():
 	buildMap(MapData.world)
 	spawn_player()
 	yield(get_tree(), "idle_frame")
@@ -54,6 +60,8 @@ func build_world():
 	$WorldBuilder/SpawnAnimal.initialize()
 	yield(get_tree(), "idle_frame")
 	$WorldMap.buildMap()
+	yield(get_tree(), "idle_frame")
+	thread.wait_to_finish()
 
 
 func spawn_player():

@@ -109,7 +109,8 @@ func set_hoed_tile(direction):
 		var location = Tiles.valid_tiles.world_to_map(pos)
 		if Tiles.valid_tiles.get_cellv(location) == 0 and \
 		Tiles.hoed_tiles.get_cellv(location) == -1 and \
-		Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles):
+		Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles) and \
+		Tiles.foundation_tiles.get_cellv(location) == -1:
 			MapData.set_hoed_tile(location)
 			yield(get_tree().create_timer(0.6), "timeout")
 			InstancedScenes.play_hoed_dirt_effect(location)

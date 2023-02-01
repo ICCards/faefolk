@@ -145,7 +145,7 @@ func build_world():
 	##################
 
 func build_map():
-	Server.world.build_world()
+	Server.world.create_or_load_world()
 
 func build():
 	rng.randomize()

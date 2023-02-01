@@ -12,7 +12,6 @@ var map_size = 60
 func _ready():
 	Server.world = self
 	BuildCaveLevel.build()
-	Server.isLoaded = true
 	BuildCaveLevel.update_navigation()
 
 func advance_up_cave_level(): 

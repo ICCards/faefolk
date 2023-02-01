@@ -4,8 +4,8 @@ var is_changing_scene: bool = false
 var nav_node
 var count = 0
 var NUM_BATS = 6
-var NUM_SLIMES = 3
-var NUM_SPIDERS = 3
+var NUM_SLIMES = 2
+var NUM_SPIDERS = 2
 var NUM_SKELETONS = 2
 var cave_chest_id = "level 1, room 4"
 var map_size = 50
@@ -13,7 +13,6 @@ var map_size = 50
 func _ready():
 	Server.world = self
 	BuildCaveLevel.build()
-	Server.isLoaded = true
 	BuildCaveLevel.update_navigation()
 
 func advance_up_cave_level(): 

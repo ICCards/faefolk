@@ -24,6 +24,7 @@ var tornado_node
 var rng := RandomNumberGenerator.new()
 var thread := Thread.new()
 var destroy_thread := Thread.new()
+var mutex := Mutex.new()
 
 var variety
 
@@ -36,11 +37,11 @@ func _ready():
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
 func set_random_attributes():
-	$Timers/DropEggTimer.set_deferred("wait_time",  rand_range(20, 40))
-	duck_sprite.set_deferred("frames", Images.DuckVariations[variety-1])
-	_timer.set_deferred("wait_time", rand_range(2.5, 5.0))
+	$Timers/DropEggTimer.wait_time = rand_range(20, 40)
+	duck_sprite.frames = Images.DuckVariations[variety-1]
+	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
-		duck_sprite.set_deferred("flip_h", true)
+		duck_sprite.flip_h = true
 
 func _physics_process(delta):
 	if not visible or destroyed or is_eating or stunned:
@@ -78,23 +79,18 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		if not duck_sprite.modulate == Color("00c9ff"):
-			duck_sprite.set_deferred("modulate", Color("00c9ff"))
+		duck_sprite.set_deferred("modulate", Color("00c9ff"))
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		if not duck_sprite.modulate == Color("009000"):
-			duck_sprite.set_deferred("modulate", Color("009000"))
+		duck_sprite.set_deferred("modulate", Color("009000"))
 	else:
 		velocity = move_and_slide(_velocity)
-		if not duck_sprite.modulate == Color("ffffff"):
-			duck_sprite.set_deferred("modulate", Color("ffffff"))
-
+		duck_sprite.set_deferred("modulate", Color("ffffff"))
 
 func _get_direction_string(velocitiy) -> String:
 	if velocitiy.x > 0:
 		return "Right"
 	return "Left"
-
 
 func _update_pathfinding():
 	if not thread.is_active() and visible:
@@ -165,8 +161,7 @@ func hit(tool_name, var special_ability = ""):
 	InstancedScenes.player_hit_effect(-dmg, position)
 	$AnimationPlayer.call_deferred("play", "hit")
 	if health <= 0 and not destroyed:
-		if not destroy_thread.is_alive():
-			destroy_thread.start(self,"destroy",true)
+		destroy(true)
 
 func destroy(killed_by_player):
 	_timer.call_deferred("stop")
@@ -174,6 +169,7 @@ func destroy(killed_by_player):
 	if killed_by_player:
 		MapData.remove_animal(name)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
+		yield(get_tree().create_timer(rand_range(0.05,0.25)), "timeout")
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
@@ -185,7 +181,6 @@ func destroy(killed_by_player):
 	if Util.chance(50):
 		InstancedScenes.intitiateItemDrop("raw egg", position, 1) 
 	yield($AnimationPlayer, "animation_finished")
-	destroy_thread.wait_to_finish()
 	queue_free()
 
 func start_run_state():

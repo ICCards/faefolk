@@ -61,7 +61,6 @@ func cooking_active():
 	$CookTimer.start()
 	$FireAnimatedSprite.show()
 	if self.visible and Server.isLoaded:
-		print("CAMPFIRE ACTIVE")
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()

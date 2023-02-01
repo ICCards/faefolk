@@ -92,14 +92,11 @@ func set_sprite_texture():
 	if not attacking or destroyed:
 		match state:
 			IDLE:
-				if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png"):
-					wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png"))
+				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png"))
 			WALK:
-				if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png"):
-					wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png"))
+				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png"))
 			_:
-				if not wolf_sprite.texture == load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png"):
-					wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png"))
+				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png"))
 
 func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
@@ -109,16 +106,13 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		if not wolf_sprite.modulate == Color("00c9ff"):
-			wolf_sprite.set_deferred("modulate", Color("00c9ff"))
+		wolf_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		if not wolf_sprite.modulate == Color("009000"):
-			wolf_sprite.set_deferred("modulate", Color("009000"))
+		wolf_sprite.modulate = Color("009000")
 	else:
 		velocity = move_and_slide(_velocity)
-		if not wolf_sprite.modulate == Color("ffffff"):
-			wolf_sprite.set_deferred("modulate", Color("ffffff"))
+		wolf_sprite.modulate = Color("ffffff")
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
@@ -136,7 +130,6 @@ func _physics_process(delta):
 	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
 	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
-		print("STATE " + str(state))
 		start_chase_state()
 	if chasing and (position+Vector2(0,-9)).distance_to(player.position) < 70:
 		state = ATTACK
@@ -200,8 +193,7 @@ func hit(tool_name):
 	if health < STARTING_HEALTH*.3:
 		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
-		if not destroy_thread.is_alive():
-			destroy_thread.start(self,"destroy",true)
+		destroy(true)
 
 func destroy(killed_by_player):
 	if not destroyed:
@@ -224,7 +216,6 @@ func destroy(killed_by_player):
 		InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
 		InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
 		yield(animation_player, "animation_finished")
-		destroy_thread.wait_to_finish()
 		queue_free()
 
 func _on_HurtBox_area_entered(area):

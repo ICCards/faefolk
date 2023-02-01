@@ -52,6 +52,8 @@ func _input(event):
 				match current_interactive_node.object_name:
 					"bed":
 						sleep("down", current_interactive_node.object_position)
+					"tree":
+						current_interactive_node.harvest()
 					"crop":
 						harvest_crop(current_interactive_node)
 					"forage":
@@ -74,6 +76,8 @@ func _input(event):
 						get_parent().user_interface.toggle_campfire(current_interactive_node.name)
 					"brewing table":
 						get_parent().user_interface.toggle_brewing_table(current_interactive_node.object_id, current_interactive_node.object_level)
+					"chair":
+						sit(current_interactive_node.object_position, current_interactive_node.object_direction)
 					"door":
 						current_interactive_node.toggle_door()
 					"gate":

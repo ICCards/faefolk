@@ -19,10 +19,11 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 
-func intitiateItemDrop(item_name: String, pos: Vector2, amount: int):
+func intitiateItemDrop(item_name: String, pos: Vector2, amount: int, var is_tree_harvest = false):
 	for _i in range(amount):
 		rng.randomize()
 		var itemDrop = ItemDrop.instance()
+		itemDrop.is_tree_harvest = is_tree_harvest
 		itemDrop.initItemDropType(item_name)
 		Server.world.call_deferred("add_child", itemDrop)
 		itemDrop.global_position = pos + Vector2(rng.randi_range(-12, 12), rng.randi_range(-6, 6))
