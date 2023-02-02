@@ -45,9 +45,9 @@ func projectile_collided():
 		collided = true
 		$Projectile.hide()
 		$CollisionShape2D.set_deferred("disabled", true)
-		$TrailParticles/P1.emitting = false
-		$TrailParticles/P2.emitting = false
-		$TrailParticles/P3.emitting = false
+		$TrailParticles/P1.set_deferred("emitting", false)
+		$TrailParticles/P2.set_deferred("emitting", false)
+		$TrailParticles/P3.set_deferred("emitting", false)
 		if debuff:
 			$Hitbox.set_collision_mask(264192) # scythe layer break
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Fire/explosion.mp3")
@@ -56,7 +56,7 @@ func projectile_collided():
 			$Explosion.show()
 			$Explosion.frame = 1
 			$Explosion.play("explode")
-			$Hitbox/CollisionShape2D.shape.radius = 80
+			$Hitbox/CollisionShape2D.shape.set_deferred("radius", 80)
 			yield(get_tree().create_timer(0.5), "timeout")
 			$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 0.5, 1, Tween.EASE_IN, 0)
 			$Tween.start()

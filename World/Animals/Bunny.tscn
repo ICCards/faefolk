@@ -293,19 +293,13 @@ anims/RESET = SubResource( 15 )
 anims/death = SubResource( 11 )
 anims/hit = SubResource( 13 )
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 20.0
-target_desired_distance = 20.0
-avoidance_enabled = true
-radius = 1.0
-
 [node name="Electricity" type="AnimatedSprite" parent="."]
 visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -7 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 3
+frame = 13
 playing = true
 
 [node name="Timers" type="Node" parent="."]
@@ -318,6 +312,11 @@ wait_time = 4.0
 autostart = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 100.0
+target_desired_distance = 100.0
+avoidance_enabled = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

@@ -79,13 +79,13 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		duck_sprite.set_deferred("modulate", Color("00c9ff"))
+		duck_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		duck_sprite.set_deferred("modulate", Color("009000"))
+		duck_sprite.modulate = Color("009000")
 	else:
 		velocity = move_and_slide(_velocity)
-		duck_sprite.set_deferred("modulate", Color("ffffff"))
+		duck_sprite.modulate = Color("ffffff")
 
 func _get_direction_string(velocitiy) -> String:
 	if velocitiy.x > 0:

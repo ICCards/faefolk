@@ -141,16 +141,16 @@ func _unhandled_input(event):
 				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
-					player_action(event, item_name, item_category)
+					player_action(item_name, item_category)
 			else:
 				if (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
-					player_action(event, null, null)
+					player_action(null, null)
 		else:
 			if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
 				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
-					player_action(event, item_name, item_category)
+					player_action(item_name, item_category)
 				elif item_category == "Magic" or item_name == "bow":
 					if event.is_action_pressed("slot1"):
 						if item_category == "Magic":
@@ -174,10 +174,10 @@ func _unhandled_input(event):
 							$Magic.draw_bow(4)
 			else:
 				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
-					player_action(event, null, null)
+					player_action(null, null)
 
 
-func player_action(event, item_name, item_category):
+func player_action(item_name, item_category):
 	if item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod":
 		actions.fish()
 	elif (item_category == "Tool" or item_name == "hammer") and item_name != "bow":

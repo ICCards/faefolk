@@ -134,7 +134,7 @@ func setGrownTreeTexture():
 		"birch":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-38))
 		"evergreen":
-			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-25))
+			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-23))
 		"pine":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-37))
 
@@ -281,15 +281,12 @@ func set_tree_transparent():
 	tween.interpolate_property(animated_tree_top_sprite, "modulate:a",
 		animated_tree_top_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
 	tween.interpolate_property(tree_top_sprite, "modulate:a",
 		tree_top_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
 	tween.interpolate_property(tree_stump_sprite, "modulate:a",
 		tree_stump_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
 	tween.interpolate_property(tree_bottom_sprite, "modulate:a",
 		tree_bottom_sprite.get_modulate().a, 0.4, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -299,15 +296,12 @@ func set_tree_visible():
 	tween.interpolate_property(animated_tree_top_sprite, "modulate:a",
 		animated_tree_top_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
 	tween.interpolate_property(tree_top_sprite, "modulate:a",
 		tree_top_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
 	tween.interpolate_property(tree_stump_sprite, "modulate:a",
 		tree_stump_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
 	tween.interpolate_property(tree_bottom_sprite, "modulate:a",
 		tree_bottom_sprite.get_modulate().a, 1.0, 0.5,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

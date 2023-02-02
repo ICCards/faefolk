@@ -109,13 +109,13 @@ func move(_velocity: Vector2) -> void:
 		animation_player.play()
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		deer_sprite.set_deferred("modulate", Color("00c9ff"))
+		deer_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		deer_sprite.set_deferred("modulate", Color("009000"))
+		deer_sprite.modulate = Color("009000")
 	else:
 		velocity = move_and_slide(_velocity)
-		deer_sprite.set_deferred("modulate", Color("ffffff"))
+		deer_sprite.modulate = Color("ffffff")
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
@@ -199,6 +199,7 @@ func destroy(killed_by_player):
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
 	destroyed = true
+	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$DeerAttack/CollisionShape2D.set_deferred("disabled", true)
 	deer_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Deer/death/" +  direction + "/body.png"))
 	animation_player.call_deferred("play", "death")

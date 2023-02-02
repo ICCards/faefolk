@@ -62,12 +62,12 @@ func _ready():
 	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
 
 func _update_pathfinding_idle():
-	if not thread.is_active() and visible:
+	if not thread.is_active() and visible and not destroyed:
 		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 		state = WALK
 
 func _update_pathfinding_chase():
-	if not thread.is_active() and visible:
+	if not thread.is_active() and visible and not destroyed:
 		thread.start(self, "_get_path", player.position)
 
 func _get_path(pos):
@@ -87,7 +87,7 @@ func _update_pathfinding_retreat():
 		target.x = -200
 	if diff.y > 0:
 		target.y = -200
-	if not thread.is_active() and visible:
+	if not thread.is_active() and visible and not destroyed:
 		thread.start(self, "_get_path", self.position+target)
 
 func _physics_process(delta):
@@ -251,6 +251,7 @@ func destroy(killed_by_player):
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects.call_deferred("play")
+	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/BearBite/CollisionShape2D.set_deferred("disabled", true)
 	$Position2D/BearClaw/CollisionShape2D.set_deferred("disabled", true)
 	$Body/Fangs.set_deferred("texture", null) 

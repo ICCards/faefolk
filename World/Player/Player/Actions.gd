@@ -218,6 +218,7 @@ func respawn():
 		yield(get_tree().create_timer(0.5), "timeout")
 		get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", false) 
 		get_parent().state = get_parent().MOVEMENT
+		get_parent().set_held_object()
 		get_node("../Magic").invisibility_active = false
 	else:
 		SceneChanger.respawn()

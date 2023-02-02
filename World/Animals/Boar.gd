@@ -60,12 +60,12 @@ func _ready():
 	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
 
 func _update_pathfinding_idle():
-	if not thread.is_active() and visible:
+	if not thread.is_active() and visible and not destroyed:
 		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 		state = WALK
 
 func _update_pathfinding_chase():
-	if not thread.is_active() and visible:
+	if not thread.is_active() and visible and not destroyed:
 		thread.start(self, "_get_path", player.position)
 
 func _get_path(pos):
@@ -85,18 +85,18 @@ func _update_pathfinding_retreat():
 		target.x = -200
 	if diff.y > 0:
 		target.y = -200
-	if not thread.is_active() and visible:
+	if not thread.is_active() and visible and not destroyed:
 		thread.start(self, "_get_path", self.position+target)
 	
 func set_sprite_texture():
 	if not attacking or destroyed:
 		match state:
 			IDLE:
-				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png"))
+				boar_sprite.texture = load("res://Assets/Images/Animals/Boar/idle/" +  direction + "/body.png")
 			WALK:
-				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png"))
+				boar_sprite.texture = load("res://Assets/Images/Animals/Boar/walk/" +  direction + "/body.png")
 			_:
-				boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png"))
+				boar_sprite.texture = load("res://Assets/Images/Animals/Boar/run/" +  direction + "/body.png")
 
 func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
@@ -106,13 +106,13 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		boar_sprite.set_deferred("modulate", Color("00c9ff"))
+		boar_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		boar_sprite.set_deferred("modulate", Color("009000"))
+		boar_sprite.modulate = Color("009000")
 	else:
 		velocity = move_and_slide(_velocity)
-		boar_sprite.set_deferred("modulate", Color("ffffff"))
+		boar_sprite.modulate = Color("ffffff")
 
 
 func _physics_process(delta):

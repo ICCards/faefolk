@@ -1,11 +1,11 @@
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Trees/TreeObject.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/tree_sets/apple/mature/empty animated.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Assets/Images/tree_sets/apple/mature/empty.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/tree_sets/evergreen/mature/top.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/tree_sets/evergreen/mature/stump.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/tree_sets/apple/mature/bottom.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/tree_sets/apple/growing/4.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/tree_sets/apple/mature/stump.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/tree_sets/evergreen/mature/animated top winter.tres" type="SpriteFrames" id=6]
 
 [sub_resource type="CircleShape2D" id=25]
 radius = 47.0106
@@ -637,7 +637,7 @@ position = Vector2( 0, -18 )
 scale = Vector2( 2.75, 2.75 )
 
 [node name="TreeStump" type="Sprite" parent="TreeSprites"]
-texture = ExtResource( 6 )
+texture = ExtResource( 3 )
 offset = Vector2( 0, -30 )
 __meta__ = {
 "_edit_lock_": true
@@ -653,14 +653,14 @@ __meta__ = {
 
 [node name="TreeTop" type="Sprite" parent="TreeSprites"]
 visible = false
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 offset = Vector2( 0, -30 )
 
 [node name="AnimatedTop" type="AnimatedSprite" parent="TreeSprites"]
-frames = ExtResource( 2 )
-frame = 4
+frames = ExtResource( 6 )
+frame = 17
 playing = true
-offset = Vector2( -1, -17 )
+offset = Vector2( -1, -23 )
 
 [node name="Tween" type="Tween" parent="TreeSprites"]
 

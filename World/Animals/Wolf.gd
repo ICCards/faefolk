@@ -92,11 +92,11 @@ func set_sprite_texture():
 	if not attacking or destroyed:
 		match state:
 			IDLE:
-				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png"))
+				wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png")
 			WALK:
-				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png"))
+				wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png")
 			_:
-				wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png"))
+				wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png")
 
 func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
@@ -208,8 +208,9 @@ func destroy(killed_by_player):
 			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 			sound_effects.call_deferred("play")
 		destroyed = true
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$Position2D/WolfBite/CollisionShape2D.set_deferred("disabled", true)
-		$Position2D/WolfClaw/CollisionShape2D.set_deferred("disabled", false)
+		$Position2D/WolfClaw/CollisionShape2D.set_deferred("disabled", true)
 		wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/death/" +  direction + "/body.png"))
 		animation_player.play("death")
 		yield(get_tree().create_timer(0.5), "timeout")

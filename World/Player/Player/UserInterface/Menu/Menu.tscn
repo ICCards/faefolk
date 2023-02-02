@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=8]
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=9]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Images/User interface/inventory/save/save-button-selected.png" type="Texture" id=11]
@@ -144,6 +145,16 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="Beta" type="Label" parent="."]
+margin_left = 1137.0
+margin_top = 14.0
+margin_right = 1299.0
+margin_bottom = 108.0
+grow_horizontal = 0
+rect_scale = Vector2( 0.8, 0.8 )
+theme = ExtResource( 8 )
+text = "Beta  v1.3"
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 

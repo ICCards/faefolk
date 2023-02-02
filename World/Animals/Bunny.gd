@@ -33,11 +33,12 @@ func _ready():
 	set_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
 	navigation_agent.connect("velocity_computed", self, "move_deferred")
-	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
+
 
 func set_attributes():
 	bunny_sprite.frames = Images.BunnyVariations[variety-1]
-	var randomRadiusScale = rand_range(0.25,2.0)
+	var randomRadiusScale = rand_range(0.25,1.25)
 	$DetectPlayer/CollisionShape2D.scale = Vector2(randomRadiusScale, randomRadiusScale)
 	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
@@ -51,7 +52,7 @@ func _update_pathfinding():
 				sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/idle.mp3"))
 				sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 				sound_effects.call_deferred("play")
-		
+	
 func _get_path(pos):
 	call_deferred("calculate_path", pos)
 	
@@ -63,7 +64,7 @@ func calculate_path(pos):
 	thread.wait_to_finish()
 
 func _physics_process(delta):
-	if not visible or destroyed or stunned:
+	if destroyed or stunned:
 		if stunned:
 			bunny_sprite.playing = false
 		return
@@ -93,13 +94,14 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		velocity = move_and_slide(_velocity*0.75)
-		bunny_sprite.set_deferred("modulate", Color("00c9ff"))
+		bunny_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		velocity = move_and_slide(_velocity*0.9)
-		bunny_sprite.set_deferred("modulate", Color("009000"))
+		bunny_sprite.modulate = Color("009000")
 	else:
 		velocity = move_and_slide(_velocity)
-		bunny_sprite.set_deferred("modulate", Color("ffffff"))
+		bunny_sprite.modulate = Color("ffffff")
+
 
 func _get_direction_string() -> String:
 	if velocity.x > 0:

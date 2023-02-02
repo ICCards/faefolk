@@ -549,7 +549,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 51 )
-frame = 5
+frame = 8
 playing = true
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
