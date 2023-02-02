@@ -235,7 +235,7 @@ func multi_arrow_shot():
 
 
 func wait_for_cast_release(staff_name,spell_index):
-	if not mouse_left_down:
+	if not mouse_left_down and not get_parent().state == DYING:
 		if PlayerData.normal_hotbar_mode:
 			cast(staff_name, 1)
 		else:
@@ -446,7 +446,7 @@ func cast(staff_name, spell_index):
 	if get_parent().state != DYING: 
 		get_parent().state = MOVEMENT
 		get_parent().direction = direction
-		thread.wait_to_finish()
+	thread.wait_to_finish()
 
 
 func set_invisibility():

@@ -34,6 +34,14 @@ func _ready():
 	MapData.connect("refresh_crops", self, "refresh_tree_type")
 	call_deferred("set_tree")
 
+
+func remove_from_world():
+	$TreeHurtbox.call_deferred("queue_free")
+	$TreeTopArea.call_deferred("queue_free")
+	$MovementCollisionBox.call_deferred("queue_free")
+	call_deferred("queue_free")
+
+
 func set_tree():
 	phase = str(phase)
 	if phase == "5" and Util.isNonFruitTree(MapData.world["tree"][name]["v"]): # grown nonfruit tree

@@ -20,6 +20,12 @@ func _ready():
 	ore_object = Images.returnOreObject(variety)
 	call_deferred("setTexture", ore_object)
 
+func remove_from_world():
+	$BigHurtBox.call_deferred("queue_free")
+	$BigMovementCollisionBox.call_deferred("queue_free")
+	$SmallMovementCollisionBox.call_deferred("queue_free")
+	$SmallMovementCollisionBox.call_deferred("queue_free")
+	call_deferred("queue_free")
 
 func setTexture(ore):
 	big_ore_sprite.set_deferred("texture", ore.largeOre)

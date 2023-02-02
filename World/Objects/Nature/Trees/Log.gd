@@ -17,6 +17,11 @@ func _ready():
 	visible = false
 	setTreeBranchType()
 
+func remove_from_world():
+	$BranchHurtBox.call_deferred("queue_free")
+	$MovementCollisionBox.call_deferred("queue_free")
+	call_deferred("queue_free")
+
 func setTreeBranchType():
 	variety = int(variety)
 	if variety <= 2:

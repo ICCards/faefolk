@@ -24,6 +24,12 @@ func _ready():
 	set_deferred("back_heath", rng.randi_range(1,3))
 	set_grass_texture()
 	
+func remove_from_world():
+	$Area2D.call_deferred("queue_free")
+	$BackArea2D.call_deferred("queue_free")
+	call_deferred("queue_free")
+	
+	
 func set_grass_texture():
 	var szn = PlayerData.player_data["season"]
 	if szn == "spring":

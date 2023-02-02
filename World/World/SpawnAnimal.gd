@@ -39,8 +39,8 @@ func remove_animals():
 		if is_instance_valid(node):
 			var player_pos = Server.player_node.position
 			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				node.queue_free()
-				yield(get_tree().create_timer(0.1), "timeout")
+				node.call_deferred("queue_free")
+				yield(get_tree(), "idle_frame")
 	yield(get_tree().create_timer(2.0), "timeout")
 	var value = remove_thread.wait_to_finish()
 

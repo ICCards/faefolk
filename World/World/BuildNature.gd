@@ -138,7 +138,7 @@ func remove_nature():
 			return
 		if is_instance_valid(node) and not node.destroyed:
 			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				node.queue_free()
+				node.call_deferred("remove_from_world")
 				yield(get_tree(), "idle_frame")
 	for node in ForageObjects.get_children():
 		if Server.world.is_changing_scene:
@@ -146,7 +146,7 @@ func remove_nature():
 			return
 		if is_instance_valid(node):
 			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				node.queue_free()
+				node.call_deferred("remove_from_world")
 				yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	var value = remove_objects_thread.wait_to_finish()
@@ -160,9 +160,8 @@ func remove_grass():
 			return
 		if is_instance_valid(node) and not node.destroyed:
 			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				node.queue_free()
-				yield(get_tree().create_timer(0.1), "timeout")
-	yield(get_tree(), "idle_frame")
+				node.call_deferred("remove_from_world")
+				yield(get_tree(), "idle_frame")
 	var value = remove_grass_thread.wait_to_finish()
 
 func spawn_trees():
@@ -192,7 +191,7 @@ func spawn_trees():
 						var health = MapData.world["tree"][id]["h"]
 						var variety = MapData.world["tree"][id]["v"]
 						PlaceObject.place_tree_in_world(id,variety,loc,biome,health,phase)
-						yield(get_tree().create_timer(0.01), "timeout")
+						yield(get_tree(), "idle_frame")
 		for id in map["log"]:
 			var loc = Util.string_to_vector2(map["log"][id]["l"])
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
@@ -204,7 +203,7 @@ func spawn_trees():
 					object.location = loc
 					object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16, 16)
 					NatureObjects.call_deferred("add_child",object,true)
-					yield(get_tree().create_timer(0.01), "timeout")
+					yield(get_tree(), "idle_frame")
 		for id in map["stump"]:
 			var loc = Util.string_to_vector2(map["stump"][id]["l"]) + Vector2(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
@@ -217,8 +216,8 @@ func spawn_trees():
 					object.name = id
 					object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(4,0)
 					NatureObjects.call_deferred("add_child",object,true)
-					yield(get_tree().create_timer(0.01), "timeout")
-	yield(get_tree().create_timer(1.0), "timeout")
+					yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	var value = trees_thread.wait_to_finish()
 
 func spawn_ores():
@@ -243,8 +242,7 @@ func spawn_ores():
 					object.location = loc
 					object.position = Tiles.valid_tiles.map_to_world(loc) 
 					NatureObjects.call_deferred("add_child",object,true)
-					yield(get_tree().create_timer(0.01), "timeout")
-		yield(get_tree(), "idle_frame")
+					yield(get_tree(), "idle_frame")
 		for id in map["ore"]:
 			var loc = Util.string_to_vector2(map["ore"][id]["l"])
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
@@ -261,8 +259,8 @@ func spawn_ores():
 					object.location = loc
 					object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16, 24)
 					NatureObjects.call_deferred("add_child",object,true)
-					yield(get_tree().create_timer(0.01), "timeout")
-	yield(get_tree().create_timer(1.0), "timeout")
+					yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	var value = ores_thread.wait_to_finish()
 
 var count = 0

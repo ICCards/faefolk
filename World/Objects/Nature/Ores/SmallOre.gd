@@ -16,6 +16,11 @@ func _ready():
 	rng.randomize()
 	visible = false
 	call_deferred("setTexture")
+	
+func remove_from_world():
+	$SmallHurtBox.call_deferred("queue_free")
+	$SmallMovementCollisionBox.call_deferred("queue_free")
+	call_deferred("queue_free")
 
 func setTexture():
 	ore_object = Images.returnOreObject(variety)

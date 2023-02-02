@@ -37,6 +37,7 @@ func _input(event):
 			Server.world.get_node("WorldAmbience").call_deferred("show")
 			call_deferred("hide")
 			call_deferred("set_inactive")
+			Server.player_node.call_deferred("set_held_object")
 
 
 #func toggle_map():

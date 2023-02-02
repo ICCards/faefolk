@@ -20,6 +20,11 @@ func _ready():
 		Tiles.add_navigation_tiles(location)
 	set_forage_texture()
 
+func remove_from_world():
+	$MovementCollision.call_deferred("queue_free")
+	$CollisionShape2D.call_deferred("queue_free")
+	call_deferred("queue_free")
+	
 
 func set_forage_texture():
 	if item_name == "sunflower" or item_name == "dandelion" or item_name == "lily of the nile" or item_name == "poppy flower" or item_name == "tulip":

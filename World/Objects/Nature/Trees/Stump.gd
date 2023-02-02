@@ -15,9 +15,17 @@ var destroyed: bool = false
 func _ready():
 	visible = false
 	call_deferred("setTexture", tree_object)
-	
+
+
+func remove_from_world():
+	$StumpHurtbox.call_deferred("queue_free")
+	$MovementCollisionBox.call_deferred("queue_free")
+	call_deferred("queue_free")
+
+
 func setTexture(tree):
 	tree_stump_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/large stump.png"))
+
 
 func hit(tool_name):
 	health -= Stats.return_tool_damage(tool_name)

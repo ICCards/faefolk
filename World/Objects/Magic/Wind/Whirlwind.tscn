@@ -663,6 +663,7 @@ stream = ExtResource( 48 )
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -31 )
 texture = ExtResource( 2 )
+texture_scale = 1.5
 energy = 0.9
 mode = 2
 shadow_enabled = true

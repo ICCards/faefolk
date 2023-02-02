@@ -63,6 +63,7 @@ func swing_deferred(item_name):
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
 		elif item_name == "arrow":
+			thread.wait_to_finish()
 			get_parent().state = MOVEMENT
 			return
 		elif item_name == null:

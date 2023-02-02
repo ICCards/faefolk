@@ -18,6 +18,12 @@ func _ready():
 	$Sprite.set_deferred("texture", load("res://Assets/Images/Weeds/" + variety + str(random_num) + ".png"))
 	call_deferred("set_leaf_break_modulate")
 	
+	
+func remove_from_world():
+	$Area2D.call_deferred("queue_free")
+	call_deferred("queue_free")
+	
+	
 func set_leaf_break_modulate():
 	match variety:
 		"A":
