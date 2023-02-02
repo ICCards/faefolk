@@ -56,7 +56,7 @@ func set_particles():
 	$TornadoParticles/P1.emitting = true
 	$TornadoParticles/P2.emitting = true
 	$TornadoParticles/P3.emitting = true
-	$TrailParticles.position += Vector2(0,32)
+	#$TrailParticles.position += Vector2(0,32)
 	$TrailParticles/P1.direction = -target
 	$TrailParticles/P2.direction = -target
 	$TrailParticles/P3.direction = -target
@@ -74,4 +74,5 @@ func stop_trail_particles():
 	
 func fade_out_sound():
 	$Tween.interpolate_property(sound_effects, "volume_db", Sounds.return_adjusted_sound_db("sound", -20), -80, 3.0, 1, Tween.EASE_IN, 0)
+	$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 3.0, 1, Tween.EASE_IN, 0)
 	$Tween.start()

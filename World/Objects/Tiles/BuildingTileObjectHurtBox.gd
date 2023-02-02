@@ -1,5 +1,7 @@
 extends YSort
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+
 onready var WallHitEffect = load("res://World/Objects/Tiles/WallHitEffect.tscn")
 
 var tier
@@ -12,6 +14,8 @@ var temp_health = 0
 var wall_tiles
 var id
 
+var destroyed: bool = false
+
 enum Tiers {
 	TWIG,
 	WOOD,
@@ -21,45 +25,54 @@ enum Tiers {
 }
 
 func _ready():
-	name = str(id)
 	set_type()
+	if item_name == "wall":
+		$HurtBox.set_collision_layer(8+16+262144)
+	else:
+		$HurtBox.set_collision_layer(8+16)
 	
 func remove_icon():
 	$SelectedBorder.hide()
 	Tiles.selected_wall_tiles.set_cellv(location,-1)
 	Tiles.selected_foundation_tiles.set_cellv(location,-1)
 	
+	
+func tile_upgraded():
+	if tier != "demolish":
+		match tier:
+				"twig":
+					health = Stats.MAX_TWIG_BUILDING
+				"wood":
+					health = Stats.MAX_WOOD_BUILDING
+				"stone":
+					health = Stats.MAX_STONE_BUILDING
+				"metal":
+					health = Stats.MAX_METAL_BUILDING
+				"armored":
+					health = Stats.MAX_ARMORED_BUILDING
+	set_type()
+	
 func set_type():
 	if tier != "demolish":
-		MapData.world["placables"][str(name)]["v"] = tier
+		MapData.world["placable"][str(name)]["v"] = tier
 	match item_name:
 		"wall":
 			match tier:
 				"twig":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/twig.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.TWIG)
-					health = Stats.MAX_TWIG_WALL
-					max_health = Stats.MAX_TWIG_WALL
+					max_health = Stats.MAX_TWIG_BUILDING
 				"wood":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/wood.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.WOOD)
-					health = Stats.MAX_WOOD_WALL
-					max_health = Stats.MAX_WOOD_WALL
+					max_health = Stats.MAX_WOOD_BUILDING
 				"stone":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/stone.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.STONE)
-					health = Stats.MAX_STONE_WALL
-					max_health = Stats.MAX_STONE_WALL
+					max_health = Stats.MAX_STONE_BUILDING
 				"metal":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/metal.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.METAL)
-					health = Stats.MAX_METAL_WALL
-					max_health = Stats.MAX_METAL_WALL
+					max_health = Stats.MAX_METAL_BUILDING
 				"armored":
-					$SelectedWallVisual.texture = load("res://Assets/Tilesets/walls/walls/armored.png")
 					Tiles.wall_tiles.set_cellv(location, Tiers.ARMORED)
-					health = Stats.MAX_ARMORED_WALL
-					max_health = Stats.MAX_ARMORED_WALL
+					max_health = Stats.MAX_ARMORED_BUILDING
 				"demolish":
 					remove_wall()
 			Tiles.wall_tiles.update_bitmask_area(location)
@@ -67,24 +80,19 @@ func set_type():
 			match tier:
 				"twig":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.TWIG)
-					health = Stats.MAX_TWIG_WALL
-					max_health = Stats.MAX_TWIG_WALL
+					max_health = Stats.MAX_TWIG_BUILDING
 				"wood":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.WOOD)
-					health = Stats.MAX_WOOD_WALL
-					max_health = Stats.MAX_WOOD_WALL
+					max_health = Stats.MAX_WOOD_BUILDING
 				"stone":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.STONE)
-					health = Stats.MAX_STONE_WALL
-					max_health = Stats.MAX_STONE_WALL
+					max_health = Stats.MAX_STONE_BUILDING
 				"metal":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.METAL)
-					health = Stats.MAX_METAL_WALL
-					max_health = Stats.MAX_METAL_WALL
+					max_health = Stats.MAX_METAL_BUILDING
 				"armored":
 					Tiles.foundation_tiles.set_cellv(location, Tiers.ARMORED)
-					health = Stats.MAX_ARMORED_WALL
-					max_health = Stats.MAX_ARMORED_WALL
+					max_health = Stats.MAX_ARMORED_BUILDING
 				"demolish":
 					remove_foundation()
 			Tiles.foundation_tiles.update_bitmask_area(location)
@@ -92,55 +100,67 @@ func set_type():
 
 
 func update_health_bar():
-	if health != 0:
-		$HealthBar/Progress.value = health
-		$HealthBar/Progress.max_value = max_health
-	else:
-		if item_name == "foundation":
-			remove_foundation()
-		elif item_name == "wall":
-			remove_wall()
+	$HealthBar/Progress.value = health
+	$HealthBar/Progress.max_value = max_health
 
 
 func remove_wall():
-	MapData.remove_object("placables",id)
-	Tiles.add_valid_tiles(location)
-	Tiles.wall_tiles.set_cellv(location, -1)
-	Tiles.wall_tiles.update_bitmask_area(location)
-	queue_free()
+	if not destroyed:
+		destroyed = true
+		if Server.world.has_node("WallHitEffect" + str(location)):
+			Server.world.get_node("WallHitEffect" + str(location)).queue_free()
+		$HealthBar.hide()
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
+		$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
+		MapData.remove_object("placable",id)
+		Tiles.add_valid_tiles(location)
+		Tiles.wall_tiles.set_cellv(location, -1)
+		Tiles.wall_tiles.update_bitmask_area(location)
+		play_break_sound_effect()
+		yield(get_tree().create_timer(1.5), "timeout")
+		queue_free()
 
 func remove_foundation():
-	MapData.remove_object("placables",id)
-	Tiles.foundation_tiles.set_cellv(location, -1)
-	Tiles.foundation_tiles.update_bitmask_area(location)
-	queue_free()
-
+	if not destroyed:
+		destroyed = true
+		$HealthBar.hide()
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
+		MapData.remove_object("placable",id)
+		Tiles.foundation_tiles.set_cellv(location, -1)
+		Tiles.foundation_tiles.update_bitmask_area(location)
+		play_break_sound_effect()
+		yield(get_tree().create_timer(1.0), "timeout")
+		queue_free()
 
 func _on_HurtBox_area_entered(area):
-	if item_name == "wall":
-		play_wall_hit_effect()
-	if area.name == "AxePickaxeSwing":
-		Stats.decrease_tool_health()
-	if tier == "twig" or tier == "wood":
-		health -= 1
-	else:
-		temp_health += 1
-		if temp_health == 3:
-			temp_health = 0
-			health -= 1
-	show_health()
-	update_health_bar()
+	if not destroyed:
+		if area.name == "AxePickaxeSwing":
+			Stats.decrease_tool_health()
+		health -= Stats.return_tool_damage(area.tool_name)
+		if health > 0:
+			if item_name == "wall":
+				play_wall_hit_effect()
+			play_hit_sound_effect()
+			show_health()
+			update_health_bar()
+		else:
+			if item_name == "foundation":
+				remove_foundation()
+			elif item_name == "wall":
+				remove_wall()
 
 func play_wall_hit_effect():
-	if has_node("WallHitEffect"):
-		get_node("WallHitEffect").restart()
+	if Server.world.has_node("WallHitEffect" + str(location)):
+		Server.world.get_node("WallHitEffect" + str(location)).restart()
 	else:
 		var wallHitEffect = WallHitEffect.instance()
-		wallHitEffect.name = "WallHitEffect"
+		wallHitEffect.name = "WallHitEffect" + str(location)
 		wallHitEffect.tier = tier
 		wallHitEffect.autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
 		wallHitEffect.location = location
-		wallHitEffect.position = (location*32)+Vector2(20,-12)
+		wallHitEffect.position = (location*32)+Vector2(20,-20)
 		Server.world.call_deferred("add_child", wallHitEffect)
 
 func show_health():
@@ -154,7 +174,7 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 			if tool_name == "hammer":
 				$SelectedBorder.show()
 				show_selected_tile()
-				Server.player_node.get_node("Camera2D/UserInterface/RadialUpgradeMenu").initialize(location, self)
+				Server.player_node.user_interface.get_node("RadialUpgradeMenu").initialize(location, self)
 
 func show_selected_tile():
 	match item_name:
@@ -186,6 +206,7 @@ func show_selected_tile():
 					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
 
 func _on_HammerRepairBox_area_entered(area):
+	play_hammer_hit_sound()
 	set_type()
 	InstancedScenes.play_upgrade_building_effect(location)
 	show_health()
@@ -197,8 +218,44 @@ func _on_DetectObjectOverPathBox_area_entered(area):
 		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_DetectObjectOverPathBox_area_exited(area):
-	if not Server.world.is_changing_scene:
+	if Server.isLoaded:
 		if item_name == "foundation":
-			yield(get_tree().create_timer(0.25), "timeout")
+			yield(get_tree().create_timer(0.3), "timeout")
 			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 			$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)
+
+func play_hammer_hit_sound():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+
+func play_hit_sound_effect():
+	match tier:
+		"twig":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/twig/twig hit.mp3")
+		"wood":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3")
+		"stone":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/stone/stone hit.mp3")
+		"metal":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+		"armored":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+
+func play_break_sound_effect():
+	match tier:
+		"twig":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+		"wood":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+		"stone":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/stone/stone break.mp3")
+		"metal":
+			sound_effects.stream = null
+		"armored":
+			sound_effects.stream = null
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+

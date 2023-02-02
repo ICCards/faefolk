@@ -7,6 +7,7 @@ var watered_tiles = null
 var ocean_tiles = null
 var deep_ocean_tiles: TileMap = null
 var dirt_tiles = null
+var forest_tiles = null
 var wall_tiles = null
 var selected_wall_tiles = null
 var foundation_tiles = null
@@ -15,22 +16,54 @@ var object_tiles = null
 var fence_tiles = null
 var light_tiles = null
 var wet_sand_tiles = null
-
 var cave_wall_tiles = null
 
 
+func validate_forest_tiles(location):
+	var active = false
+	if not active:
+		active = true
+		for x in range(2):
+			for y in range(2):
+				if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location or forest_tiles.get_cellv(Vector2(x,-y) + location) == -1 or not foundation_tiles.get_cellv(Vector2(x,-y) + location) == -1: 
+					return false
+					break
+		return true
+
 func validate_tiles(location, dimensions):
+	var active = false
+	if Server.world.name == "World":
+		if not active:
+			active = true
+			for x in range(dimensions.x):
+				for y in range(dimensions.y):
+					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location or hoed_tiles.get_cellv(Vector2(x,-y) + location) == 0: 
+						return false
+						break
+			return true
+	else:
+		if not active:
+			active = true
+			for x in range(dimensions.x):
+				for y in range(dimensions.y):
+					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
+						return false
+						break
+			return true
+
+
+func validate_foundation_tiles(location, dimensions):
 	var active = false
 	if not active:
 		active = true
 		for x in range(dimensions.x):
 			for y in range(dimensions.y):
-				if valid_tiles.get_cellv( Vector2(x, -y) + location) == -1 or valid_tiles.get_cellv( Vector2(x, -y) + location) == 1: 
+				if foundation_tiles.get_cellv(Vector2(x,-y)+location) == -1 or foundation_tiles.get_cellv(Vector2(x,-y) + location) == 1: 
 					return false
 					break
 		return true
-		
-		
+
+
 func isValidNavigationTile(loc) -> bool:
 	if wet_sand_tiles.get_cellv(loc) != -1 and deep_ocean_tiles.get_cellv(loc) == -1:
 		return true
@@ -51,33 +84,23 @@ func isValidNavigationTile(loc) -> bool:
 	
 	return true
 
-
-#func remove_nature_invalid_tiles(location, _name = ""):
-#	if _name == "tree" or _name == "stump" or _name == "large ore":
-#		valid_tiles.set_cellv(location, -1)
-#		valid_tiles.set_cellv(location + Vector2(-1, -1), -1 )
-#		valid_tiles.set_cellv(location + Vector2(-1, 0), -1 )
-#		valid_tiles.set_cellv(location + Vector2(0, -1), -1)
-#	elif _name == "tall grass" or _name == "flower":
-#		valid_tiles.set_cellv(location, 1)
-#	else:
-#		valid_tiles.set_cellv(location, -1)
-
-
 func remove_valid_tiles(location,var dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cellv(location + Vector2(x, -y), -1)
+			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), -1 )
+			#valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 
 func add_valid_tiles(location, var dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cellv(location + Vector2(x, -y), 0)
+			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), 0)
+			#valid_tiles.set_cellv(location + Vector2(x, -y), 0)
 			
 func add_navigation_tiles(location, var dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cellv(location + Vector2(x, -y), 1)
+			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), 1)
+			#valid_tiles.set_cellv(location + Vector2(x, -y), 1)
 
 
 func isValidAutoTile(_pos, _map):

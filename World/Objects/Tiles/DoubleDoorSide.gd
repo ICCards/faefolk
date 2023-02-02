@@ -10,61 +10,48 @@ var tier
 var health
 var max_health
 var temp_health = 0
-var entered = false
+
+var object_name = "door"
 
 func _ready():
 	set_type()
 
-
-func _input(event):
-	if event.is_action_pressed("action") and entered:
-		if door_open:
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
-			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-			sound_effects.play()
-			#$AnimationPlayer.play("close")
-			$AnimatedSprite.play("close")
-			$MovementCollision/CollisionShape2D.disabled = false 
-		else:
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
-			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-			sound_effects.play()
-			#$AnimationPlayer.play("open")
-			$AnimatedSprite.play("open")
-			$MovementCollision/CollisionShape2D.disabled = true
-		door_open = !door_open
+func toggle_door():
+	if door_open:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		sound_effects.play()
+		#$AnimationPlayer.play("close")
+		$AnimatedSprite.play("close")
+		$DoorMovementCollision/CollisionShape2D.disabled = false 
+	else:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		sound_effects.play()
+		#$AnimationPlayer.play("open")
+		$AnimatedSprite.play("open")
+		$DoorMovementCollision/CollisionShape2D.disabled = true
+	door_open = !door_open
 
 
 func set_type():
 	match tier:
 		"wood":
-			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/side/wood.tres")
-			health = Stats.MAX_WOOD_WALL
-			max_health = Stats.MAX_WOOD_WALL
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/wood.tres")
+			health = Stats.MAX_WOOD_DOOR
+			max_health = Stats.MAX_WOOD_DOOR
 		"metal":
-			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/side/metal.tres")
-			health = Stats.MAX_METAL_WALL
-			max_health = Stats.MAX_METAL_WALL
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/metal.tres")
+			health = Stats.MAX_METAL_DOOR
+			max_health = Stats.MAX_METAL_DOOR
 		"armored":
-			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/side/armored.tres")
-			health = Stats.MAX_ARMORED_WALL
-			max_health = Stats.MAX_ARMORED_WALL
+			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/armored.tres")
+			health = Stats.MAX_ARMORED_DOOR
+			max_health = Stats.MAX_ARMORED_DOOR
 		"demolish":
 			Tiles.add_valid_tiles(location, Vector2(2,1))
 			queue_free()
 	update_health_bar()
-
-
-func remove_icon():
-	$SelectedBorder.hide()
-
-func _on_EnterDoorway_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		if PlayerData.player_data["hotbar"].has(PlayerData.active_item_slot) and not PlayerData.viewInventoryMode:
-			var tool_name = PlayerData.player_data["hotbar"][PlayerData.active_item_slot][0]
-			if tool_name == "hammer":
-				$SelectedBorder.show()
-				Server.player_node.get_node("Camera2D/UserInterface/RadialDoorMenu").initialize(location, self)
 
 
 func _on_HurtBox_area_entered(area):
@@ -86,6 +73,8 @@ func _on_HurtBox_area_entered(area):
 		if temp_health == 3:
 			temp_health = 0
 			health -= 1
+	if health != 0:
+		play_hit_sound_effect()
 	update_health_bar()
 
 func update_health_bar():
@@ -96,24 +85,47 @@ func update_health_bar():
 		remove_tile()
 
 func remove_tile():
+	MapData.remove_placable(id)
 	Tiles.add_valid_tiles(location, Vector2(1,2))
+	play_break_sound_effect()
+	yield(get_tree().create_timer(1.5), "timeout")
 	queue_free()
-
 
 func show_health():
 	$AnimationPlayer2.stop()
 	$AnimationPlayer2.play("show health bar")
 
 
-func _on_EnterDoorway_area_entered(area):
-	entered = true
-
-func _on_EnterDoorway_area_exited(area):
-	entered = false
-
-
 func _on_HammerRepairBox_area_entered(area):
+	play_hammer_hit_sound()
 	set_type()
-	Server.world.play_upgrade_building_effect(location)
-	Server.world.play_upgrade_building_effect(location + Vector2(0,-1))
+	InstancedScenes.play_upgrade_building_effect(location)
+	InstancedScenes.play_upgrade_building_effect(location+ Vector2(1,0))
 	show_health()
+
+func play_hit_sound_effect():
+	match tier:
+		"wood":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3")
+		"metal":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+		"armored":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+
+func play_hammer_hit_sound():
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()
+
+func play_break_sound_effect():
+	match tier:
+		"wood":
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+		"metal":
+			sound_effects.stream = null
+		"armored":
+			sound_effects.stream = null
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.play()

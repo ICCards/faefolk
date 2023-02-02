@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/twig hit.mp3-c40c61ff88b55a8247985d3d129c47b3.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Building/twig/twig hit.mp3"
+dest_files=[ "res://.import/twig hit.mp3-c40c61ff88b55a8247985d3d129c47b3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -53,6 +53,7 @@ anims/RESET = SubResource( 1 )
 anims/hit = SubResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -4, 37 )

@@ -18,13 +18,17 @@ const width := 1000
 const height := 1000
 const MAX_GRASS_BUNCH_SIZE = 150
 const oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
-const treeTypes = ['A','B', 'C', 'D', 'E']
+const treeTypes = ['oak','spruce', 'birch', 'evergreen', 'pine']
+const weedTypes = ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4"]
+const flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
+const clamTypes = ["blue clam","pink clam","red clam"]
+const starfishTypes = ["starfish", "baby starfish"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
 var openSimplexNoise := OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
 var _uuid = load("res://helpers/UUID.gd")
-onready var uuid = _uuid.new()
+var uuid
 
 var mutex = Mutex.new()
 var semaphore = Semaphore.new()
@@ -111,6 +115,7 @@ func build_moisture(octaves,period):
 
 func build_world():
 	print("building world")
+	uuid = _uuid.new()
 	get_node("/root/World/Loading").call_deferred("set_phase","Building terrain")
 	build_terrian()
 	#yield(get_tree().create_timer(1.0), "timeout")
@@ -127,7 +132,11 @@ func build_world():
 	generate_ores(dirt,"dirt")
 	generate_flowers(forest,"forest")
 	generate_flowers(plains,"plains")
-	generate_beach_forage()
+	generate_weeds(forest,"forest")
+	generate_weeds(plains,"plains")
+	generate_beach_forage(beach)
+	generate_animals()
+#	yield(get_tree().create_timer(1.0), "timeout")
 	#yield(get_tree().create_timer(1.0), "timeout")
 	#get_node("/root/World/Loading").call_deferred("set_phase","Saving data")
 	#yield(get_tree().create_timer(1.0), "timeout")
@@ -136,7 +145,7 @@ func build_world():
 	##################
 
 func build_map():
-	Server.world.build_world()
+	Server.world.create_or_load_world()
 
 func build():
 	rng.randomize()
@@ -148,15 +157,6 @@ func build():
 	#yield(get_tree().create_timer(2.0), "timeout")
 	build_altittude(5,150)
 	
-func generate_beach_forage():
-	for loc in beach:
-		if Util.chance(1):
-			if not dirt.has(loc) and not forest.has(loc) and not snow.has(loc) and not plains.has(loc):
-				var id = uuid.v4()
-				if Util.chance(50):
-					MapData.world["forage"][id] = {"l":loc,"n":"clam","v":rng.randi_range(1,3)}
-				else:
-					MapData.world["forage"][id] = {"l":loc,"n":"starfish","v":rng.randi_range(1,2)}
 
 func set_cave_entrance():
 	var loc = Vector2(rng.randi_range(490, 510), rng.randi_range(490, 510))
@@ -247,9 +247,10 @@ func update_fixed_map():
 	MapData.world["dirt"] = dirt
 	MapData.world["beach"] = beach
 	print("BUILT TERRAIN FINAL")
-	get_node("/root/World/Loading").call_deferred("queue_free")
+#	get_node("/root/World/Loading").call_deferred("queue_free")
 	save_starting_world_data()
 	MapData.add_world_data_to_chunks()
+	get_node("/root/World/Loading").call_deferred("queue_free")
 	call_deferred("build_map")
 
 func fix_tiles():
@@ -273,20 +274,103 @@ func is_border_tile(_pos, _tiles):
 
 
 func save_starting_world_data():
+	MapData.world["is_built"] = true
 	game_state = GameState.new()
-#	game_state.save_world_state(MapData.world)
-#	game_state.save_cave_state(MapData.caves)
-#	game_state.save_player_state(PlayerData.starting_player_data)
 	game_state.world_state = MapData.world
 	game_state.cave_state = MapData.caves
 	game_state.player_state = PlayerData.starting_player_data
 	game_state.save_state()
-	PlayerData.player_data = PlayerData.starting_player_data
 
+func generate_animals():
+	print("Building animals")
+	var locations = plains + forest + snow + dirt + desert
+	var NUM_BUNNY = int(locations.size() / 1200)
+	print("NUM BUNNIES " + str(NUM_BUNNY))
+	for _i in range(NUM_BUNNY):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
+			decoration_locations.append(location)
+	for _i in range(NUM_BUNNY):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"duck","v":rng.randi_range(1,3),"h":Stats.DUCK_HEALTH}
+			decoration_locations.append(location)
+	var NUM_BEAR = (locations.size() / 4000)
+	print("NUM BEARS " + str(NUM_BEAR))
+	for _i in range(NUM_BEAR):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"bear","h":Stats.BEAR_HEALTH}
+			decoration_locations.append(location)
+	var NUM_BOAR = (locations.size() / 4000)
+	print("NUM BEARS " + str(NUM_BOAR))
+	for _i in range(NUM_BOAR):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"boar","h":Stats.BOAR_HEALTH}
+			decoration_locations.append(location)
+	var NUM_DEER = (locations.size() / 3000)
+	print("NUM DEER " + str(NUM_DEER))
+	for _i in range(NUM_DEER):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"deer","h":Stats.DEER_HEALTH}
+			decoration_locations.append(location)
+	var NUM_WOLF = (locations.size() / 4000)
+	print("NUM WOLF " + str(NUM_WOLF))
+	for _i in range(NUM_WOLF):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			MapData.world["animal"][id] = {"l":location,"n":"wolf","h":Stats.WOLF_HEALTH}
+			decoration_locations.append(location)
+	
+
+func generate_beach_forage(locations):
+	print("Building beach forage")
+	var NUM_FORAGE = int(locations.size()/150)
+	for _i in range(NUM_FORAGE):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var id = uuid.v4()
+			if Util.chance(50):
+				clamTypes.shuffle()
+				MapData.world["forage"][id] = {"l":location,"n":clamTypes.front(),"f":true}
+			else:
+				starfishTypes.shuffle()
+				MapData.world["forage"][id] = {"l":location,"n":starfishTypes.front(),"f":true}
+
+func generate_weeds(locations,biome):
+	print("Building "+biome+" weeds")
+	var NUM_FLOWER = int(locations.size()/200)
+	for _i in range(NUM_FLOWER):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		create_weed(location,biome)
+		
+func create_weed(loc,biome):
+	var id = uuid.v4()
+	if isValidPosition(loc):
+		weedTypes.shuffle()
+		MapData.world["tall_grass"][id] = {"l":loc,"n":"weed","v":weedTypes.front()}
+		decoration_locations.append(loc)
 
 func generate_flowers(locations,biome):
 	print("Building "+biome+" Flowers")
-	var NUM_FLOWER = int(locations.size()/100)
+	var NUM_FLOWER = int(locations.size()/200)
 	for _i in range(NUM_FLOWER):
 		var index = rng.randi_range(0, locations.size() - 1)
 		var location = locations[index]
@@ -295,7 +379,8 @@ func generate_flowers(locations,biome):
 func create_flower(loc,biome):
 	var id = uuid.v4()
 	if isValidPosition(loc):
-		MapData.world["flower"][id] = {"l":loc,"h":5, "b":biome}
+		flowerTypes.shuffle()
+		MapData.world["forage"][id] = {"l":loc,"n":flowerTypes.front(),"f":true}
 		decoration_locations.append(loc)
 
 func generate_ores(locations,biome):
@@ -344,7 +429,7 @@ func create_grass_bunch(loc,biome):
 		loc += randomAdjacentTiles[0]
 		if isValidPosition(loc) and not beach.has(loc):
 			var id = uuid.v4()
-			MapData.world["tall_grass"][id] = {"l":loc,"h":5,"b":biome}
+			MapData.world["tall_grass"][id] = {"l":loc,"b":biome,"n":"grass"}
 			decoration_locations.append(loc)
 		else:
 			loc -= randomAdjacentTiles[0]
@@ -401,7 +486,7 @@ func create_tree(loc,biome):
 	var id = uuid.v4()
 	if check_64x64(loc) and isValidPosition(loc):
 		treeTypes.shuffle()
-		MapData.world["tree"][id] = {"l":loc,"h":Stats.TREE_HEALTH,"b":biome,"v":treeTypes.front()}
+		MapData.world["tree"][id] = {"l":loc,"h":Stats.TREE_HEALTH,"b":biome,"v":treeTypes.front(),"p":"5"}
 		decoration_locations.append(loc)
 		decoration_locations.append(loc + Vector2(1,0))
 		decoration_locations.append(loc + Vector2(0,-1))

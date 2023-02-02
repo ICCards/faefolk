@@ -1,13 +1,20 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Trees/TreeObject.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/tree_sets/A/top.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/tree_sets/evergreen/mature/top.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/tree_sets/evergreen/mature/stump.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/tree_sets/apple/mature/bottom.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/tree_sets/apple/growing/4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/tree_sets/evergreen/mature/animated top winter.tres" type="SpriteFrames" id=6]
+
+[sub_resource type="CircleShape2D" id=25]
+radius = 47.0106
 
 [sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 22.7778, 28.3507 )
+extents = Vector2( 22, 22 )
 
 [sub_resource type="CircleShape2D" id=22]
-radius = 17.6666
+radius = 16.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -36,7 +43,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("TreeSprites/TreeTop:visible")
+tracks/2/path = NodePath("TreeSprites/TreeTop:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -44,11 +51,11 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"update": 0,
+"values": [ 0.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("TreeSprites/TreeTop:rotation_degrees")
+tracks/3/path = NodePath("TreeSprites/TreeTop:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -57,10 +64,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("TreeSprites/TreeTop:position")
+tracks/4/path = NodePath("TreeSprites/TreeBottom:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -68,11 +75,11 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"update": 1,
+"values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("TreeSprites/TreeBottom:visible")
+tracks/5/path = NodePath("TreeSprites/TreeBottom:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -80,11 +87,11 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("TreeSprites/TreeBottom:modulate")
+tracks/6/path = NodePath("TreeLeavesParticles:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -93,10 +100,10 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ Vector2( 165, -4 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("TreeLeavesParticles:position")
+tracks/7/path = NodePath("TreeLeavesParticles:emitting")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -105,10 +112,10 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 165, -4 ) ]
+"values": [ false ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("TreeLeavesParticles:emitting")
+tracks/8/path = NodePath("TreeChipParticles:emitting")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -120,7 +127,7 @@ tracks/8/keys = {
 "values": [ false ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("TreeChipParticles:emitting")
+tracks/9/path = NodePath("TreeChipParticles:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -129,10 +136,10 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ Vector2( 165, -4 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("TreeChipParticles:position")
+tracks/10/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -141,10 +148,10 @@ tracks/10/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 165, -4 ) ]
+"values": [ false ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
+tracks/11/path = NodePath("TreeSprites/TreeTop:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -152,8 +159,20 @@ tracks/11/enabled = true
 tracks/11/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TreeSprites/AnimatedTop:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -203,7 +222,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -32, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -8, 0 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("TreeSprites/TreeBottom:modulate")
@@ -265,6 +284,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [ Vector2( -135, -20 ) ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("TreeSprites/TreeTop:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TreeSprites/AnimatedTop:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "tree fall right"
@@ -314,7 +357,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.01, 1.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 32, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 8, 0 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("TreeSprites/TreeBottom:modulate")
@@ -376,13 +419,37 @@ tracks/8/keys = {
 "update": 0,
 "values": [ Vector2( 135, -20 ) ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("TreeSprites/TreeTop:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TreeSprites/AnimatedTop:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=17]
 resource_name = "tree hit left"
 length = 0.6
-step = 0.01
+step = 0.005
 tracks/0/type = "value"
-tracks/0/path = NodePath("TreeSprites/TreeTop:rotation_degrees")
+tracks/0/path = NodePath("TreeSprites/AnimatedTop:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -391,19 +458,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.075, 0.25, 0.4, 0.55, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, -4.0, 3.0, -2.0, 1.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TreeSprites/TreeTop:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.075, 0.25, 0.4, 0.55, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 3, 1 ), Vector2( -2.25, 0.75 ), Vector2( 1.5, 0.5 ), Vector2( -0.75, 0 ), Vector2( 0, 0 ) ]
+"values": [ 0.0, -6.0, 4.0, -3.0, 2.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -411,7 +466,7 @@ resource_name = "tree hit right"
 length = 0.6
 step = 0.025
 tracks/0/type = "value"
-tracks/0/path = NodePath("TreeSprites/TreeTop:rotation_degrees")
+tracks/0/path = NodePath("TreeSprites/AnimatedTop:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -420,19 +475,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.075, 0.25, 0.4, 0.55, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 4.0, -3.0, 2.0, -1.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TreeSprites/TreeTop:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.075, 0.25, 0.4, 0.55, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -3, 1 ), Vector2( 2.25, 0.75 ), Vector2( -1.5, 0.5 ), Vector2( 0.75, 0 ), Vector2( 0, 0 ) ]
+"values": [ 0.0, 6.0, -4.0, 3.0, -2.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -462,22 +505,22 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "stump destroyed"
+[sub_resource type="Animation" id=24]
+resource_name = "sapling destroyed"
 tracks/0/type = "value"
-tracks/0/path = NodePath("TreeSprites/TreeStump:frame")
+tracks/0/path = NodePath("TreeHurtbox/treeHurtBox:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [  ]
+"values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TreeSprites/TreeStump:visible")
+tracks/1/path = NodePath("TreeSprites/TreeSapling:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -500,13 +543,57 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("TreeHurtbox/treeHurtBox:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+
+[sub_resource type="Animation" id=23]
+resource_name = "sapling hit"
+length = 0.6
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("TreeSprites/TreeSapling:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.25, 0.4, 0.55, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( -2, 0 ), Vector2( 1, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "stump destroyed"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TreeSprites/TreeStump:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MovementCollisionBox/movementCollisionBox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TreeHurtbox/treeHurtBox:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -516,6 +603,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=12]
 resource_name = "stump hit right"
 length = 0.6
+step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("TreeSprites/TreeStump:position")
 tracks/0/interp = 1
@@ -535,43 +623,69 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[node name="TreeObject" type="Node2D"]
+[node name="TreeObject" type="Area2D"]
 modulate = Color( 1.3, 1.3, 1.3, 1 )
-scale = Vector2( 0.9, 0.9 )
+collision_layer = 0
+collision_mask = 131072
 script = ExtResource( 1 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 25 )
+
 [node name="TreeSprites" type="Node2D" parent="."]
-position = Vector2( 0, -11 )
+position = Vector2( 0, -18 )
+scale = Vector2( 2.75, 2.75 )
 
 [node name="TreeStump" type="Sprite" parent="TreeSprites"]
-offset = Vector2( 0, -120 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, -30 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TreeBottom" type="Sprite" parent="TreeSprites"]
-offset = Vector2( 0, -120 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, -30 )
 region_rect = Rect2( 160, 320, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TreeTop" type="Sprite" parent="TreeSprites"]
+visible = false
 texture = ExtResource( 2 )
-offset = Vector2( 0, -120 )
+offset = Vector2( 0, -30 )
+
+[node name="AnimatedTop" type="AnimatedSprite" parent="TreeSprites"]
+frames = ExtResource( 6 )
+frame = 18
+playing = true
+offset = Vector2( -1, -23 )
 
 [node name="Tween" type="Tween" parent="TreeSprites"]
 
+[node name="TreeSapling" type="Sprite" parent="TreeSprites"]
+visible = false
+texture = ExtResource( 5 )
+offset = Vector2( 0, -30 )
+
 [node name="TreeHurtbox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -31 )
 collision_layer = 262152
 collision_mask = 0
 
 [node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]
-position = Vector2( 0, 35.4444 )
+position = Vector2( 2.21224e-06, 36.6111 )
 rotation = -1.5708
 shape = SubResource( 21 )
 
 [node name="MovementCollisionBox" type="StaticBody2D" parent="."]
-position = Vector2( 3.33333, -25.5556 )
+visible = false
+position = Vector2( 0, 5.55556 )
 collision_layer = 35
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
-position = Vector2( -3.33333, 33.2222 )
 rotation = -1.5708
 shape = SubResource( 22 )
 
@@ -584,6 +698,8 @@ anims/RESET = SubResource( 2 )
 
 [node name="AnimationPlayerStump" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 14 )
+"anims/sapling destroyed" = SubResource( 24 )
+"anims/sapling hit" = SubResource( 23 )
 "anims/stump destroyed" = SubResource( 13 )
 "anims/stump hit right" = SubResource( 12 )
 
@@ -633,34 +749,34 @@ initial_velocity_random = 0.25
 scale_amount = 2.5
 
 [node name="TreeTopArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -11 )
 collision_layer = 4096
 collision_mask = 0
 
 [node name="A" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-polygon = PoolVector2Array( 12, -8, 11, -58, 56, -89, 56, -166, 1, -199, -61, -163, -61, -85, -14, -58, -14, -8 )
+polygon = PoolVector2Array( 12, -8, 11, -58, 56, -89, 55.5556, -147.889, 0, -173.444, -62.2222, -149, -61, -85, -14, -58, -14, -8 )
 disabled = true
 
 [node name="B" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-polygon = PoolVector2Array( 10, -9, 10, -54, 48, -84, 48, -150, 1, -185, -49, -149, -48, -84, -13, -53, -14, -8 )
+polygon = PoolVector2Array( 10, -9, 10, -54, 50, -85.6667, 48, -150, 0, -169, -51.1111, -150.111, -51.1111, -89, -13, -53, -14, -8 )
 disabled = true
 
 [node name="C" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
-polygon = PoolVector2Array( 10, -15.6667, 9, -57, 61, -109, 60, -185, 40, -215, 1, -235, -41, -212, -54, -178, -52, -148, -71, -121, -45, -80, -13, -79, -13.3333, -14.5556 )
+polygon = PoolVector2Array( 10, -15.6667, 9, -57, 61, -109, 60, -185, 36.6667, -196.778, -1.11111, -201.222, -41.1111, -195.667, -54, -178, -51.1111, -127.889, -60, -95.6667, -40, -73.4445, -17.7778, -71.2222, -13.3333, -14.5556 )
 disabled = true
 
 [node name="D" type="CollisionPolygon2D" parent="TreeTopArea"]
 visible = false
 position = Vector2( 2.22222, -0.111112 )
-polygon = PoolVector2Array( -5.55554, -6.77777, 5.55556, -6.77778, 32.2222, -34.4444, 50, -81.1111, 0, -151.222, -48.8889, -77.8889, -34.4444, -35.5556 )
+polygon = PoolVector2Array( -5.55554, -6.77777, 5.55556, -6.77778, 26.6667, -23.3333, 44.4444, -68.8889, -2.22222, -132.222, -47.7778, -68.8889, -32.2222, -25.5556 )
 disabled = true
 
 [node name="E" type="CollisionPolygon2D" parent="TreeTopArea"]
-visible = false
-polygon = PoolVector2Array( 8.88889, -10.1111, 9, -43, 30, -37, 39, -58, 21, -141, 0, -163, -20, -139, -33, -61, -31, -35, -9, -40, -13.3333, -10.1111 )
+polygon = PoolVector2Array( 8.88889, -10.1111, 9, -43, 30, -37, 39, -58, 18.8889, -115.667, 0, -142.333, -20, -117.889, -33, -61, -31, -35, -9, -40, -13.3333, -10.1111 )
 disabled = true
 
 [node name="RandomLeavesFallingTimer" type="Timer" parent="."]
@@ -668,8 +784,11 @@ autostart = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false
-position = Vector2( -2.86102e-06, -93.3333 )
-scale = Vector2( 7.11111, 12.2222 )
+position = Vector2( -2.22222, -78.8889 )
+scale = Vector2( 10.1667, 13.6111 )
+
+[node name="ResetTempHealthTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [connection signal="area_entered" from="TreeHurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="TreeTopArea" to="." method="_on_TreeTopArea_area_entered"]
@@ -677,3 +796,4 @@ scale = Vector2( 7.11111, 12.2222 )
 [connection signal="timeout" from="RandomLeavesFallingTimer" to="." method="_on_RandomLeavesFallingTimer_timeout"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="ResetTempHealthTimer" to="." method="_on_ResetTempHealthTimer_timeout"]

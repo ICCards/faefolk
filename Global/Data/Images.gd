@@ -442,6 +442,16 @@ func returnToolSprite(toolName, animation):
 				return blue_potion_throw.left
 			"throw_right":
 				return blue_potion_throw.right
+	elif toolName == "raw egg":
+		match animation:
+			"throw_down":
+				return raw_egg_throw.down
+			"throw_up":
+				return raw_egg_throw.up
+			"throw_left":
+				return raw_egg_throw.left
+			"throw_right":
+				return raw_egg_throw.right
 	match toolName:
 		"hammer":
 			match animation: 
@@ -753,17 +763,28 @@ func returnToolSprite(toolName, animation):
 					return bow_release.right
 				"release_left":
 					return bow_release.left
-		"magic staff":
+		"wind staff":
 			animation = animation.substr(0,13)
 			match animation:
 				"magic_cast_do":
-					return magic_staff.down
+					return wind_staff.down
 				"magic_cast_up":
-					return magic_staff.up
+					return wind_staff.up
 				"magic_cast_ri":
-					return magic_staff.right
+					return wind_staff.right
 				"magic_cast_le":
-					return magic_staff.left
+					return wind_staff.left
+		"fire staff":
+			animation = animation.substr(0,13)
+			match animation:
+				"magic_cast_do":
+					return fire_staff.down
+				"magic_cast_up":
+					return fire_staff.up
+				"magic_cast_ri":
+					return fire_staff.right
+				"magic_cast_le":
+					return fire_staff.left
 
 
 var red_potion_throw = {
@@ -792,11 +813,25 @@ var blue_potion_throw = {
 	right = load("res://Characters/Weapon swings/potions/blue/right.png")
 }
 
-var magic_staff = {
-	down = load("res://Characters/Weapon swings/magic staff/down.png"),
-	up = load("res://Characters/Weapon swings/magic staff/up.png"),
-	left = load("res://Characters/Weapon swings/magic staff/left.png"),
-	right = load("res://Characters/Weapon swings/magic staff/right.png")
+var raw_egg_throw = {
+	down = load("res://Characters/Weapon swings/potions/raw egg/down.png"),
+	up = load("res://Characters/Weapon swings/potions/raw egg/up.png"),
+	left = load("res://Characters/Weapon swings/potions/raw egg/left.png"),
+	right = load("res://Characters/Weapon swings/potions/raw egg/right.png")
+}
+
+var wind_staff = {
+	down = load("res://Characters/Weapon swings/magic staff/wind staff/down.png"),
+	up = load("res://Characters/Weapon swings/magic staff/wind staff/up.png"),
+	left = load("res://Characters/Weapon swings/magic staff/wind staff/left.png"),
+	right = load("res://Characters/Weapon swings/magic staff/wind staff/right.png")
+}
+
+var fire_staff = {
+	down = load("res://Characters/Weapon swings/magic staff/fire staff/down.png"),
+	up = load("res://Characters/Weapon swings/magic staff/fire staff/up.png"),
+	left = load("res://Characters/Weapon swings/magic staff/fire staff/left.png"),
+	right = load("res://Characters/Weapon swings/magic staff/fire staff/right.png")
 }
 
 var wood_pickaxe = {
@@ -1063,105 +1098,7 @@ var yellow_grass_winter = [
 #		"2b":
 #			return desert_trees[3]
 
-# FRUITLESS TREES #
 
-func returnTreeObject(treeType):
-	match treeType:
-		"A":
-			return A_tree 
-		"B":
-			return B_tree
-		"C":
-			return C_tree 
-		"D":
-			return D_tree 
-		"E":
-			return E_tree
-
-var A_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/A/A_sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/A/1.png"),
-		2 : load("res://Assets/Images/tree_sets/A/2.png"),
-		3 : load("res://Assets/Images/tree_sets/A/3.png"),
-		4 : load("res://Assets/Images/tree_sets/A/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/A/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/A/bottom.png"),
-	topTree = load("res://Assets/Images/tree_sets/A/top.png"),
-	chip = load("res://Assets/Images/tree_sets/A/chip.png"),
-	leaves = load("res://Assets/Images/tree_sets/A/leaves.png"),
-	largeStump = load("res://Assets/Images/tree_sets/A/large_stumpA.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/A/A winter.png")
-}
-
-var B_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/B/sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/B/1.png"),
-		2 : load("res://Assets/Images/tree_sets/B/2.png"),
-		3 : load("res://Assets/Images/tree_sets/B/3.png"),
-		4 : load("res://Assets/Images/tree_sets/B/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/B/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/B/bottom.png"),
-	topTree = load("res://Assets/Images/tree_sets/B/top.png"),
-	chip = load("res://Assets/Images/tree_sets/B/chip.png"),
-	leaves = load("res://Assets/Images/tree_sets/B/leaves.png"),
-	largeStump = load("res://Assets/Images/tree_sets/B/large_stumpB.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/B/B winter.png")
-}
-
-var C_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/C/sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/C/1.png"),
-		2 : load("res://Assets/Images/tree_sets/C/2.png"),
-		3 : load("res://Assets/Images/tree_sets/C/3.png"),
-		4 : load("res://Assets/Images/tree_sets/C/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/C/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/C/bottom.png"),
-	topTree = load("res://Assets/Images/tree_sets/C/top.png"),
-	chip = load("res://Assets/Images/tree_sets/C/chip.png"),
-	leaves = load("res://Assets/Images/tree_sets/C/leaves.png"),
-	largeStump = load("res://Assets/Images/tree_sets/C/large_stumpC.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/C/C winter.png")
-}
-
-var D_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/D/sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/D/1.png"),
-		2 : load("res://Assets/Images/tree_sets/D/2.png"),
-		3 : load("res://Assets/Images/tree_sets/D/3.png"),
-		4 : load("res://Assets/Images/tree_sets/D/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/D/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/D/bottom.png"),
-	topTree = load("res://Assets/Images/tree_sets/D/top.png"),
-	chip = load("res://Assets/Images/tree_sets/D/chip.png"),
-	leaves = load("res://Assets/Images/tree_sets/D/leaves.png"),
-	largeStump = load("res://Assets/Images/tree_sets/D/large_stumpD.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/D/D winter.png")
-}
-
-var E_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/E/sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/E/1.png"),
-		2 : load("res://Assets/Images/tree_sets/E/2.png"),
-		3 : load("res://Assets/Images/tree_sets/E/3.png"),
-		4 : load("res://Assets/Images/tree_sets/E/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/E/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/E/bottom.png"),
-	topTree = load("res://Assets/Images/tree_sets/E/top.png"),
-	chip = load("res://Assets/Images/tree_sets/E/chip.png"),
-	leaves = load("res://Assets/Images/tree_sets/E/leaves.png"),
-	largeStump = load("res://Assets/Images/tree_sets/E/large_stumpE.png"),
-	topTreeWinter = load("res://Assets/Images/tree_sets/E/E winter.png")
-}
 
 
 # BRANCH OBJECTS #
@@ -1178,103 +1115,6 @@ var tree_branch_objects = {
 	9 : load("res://Assets/Images/tree_sets/branch_objects/branch10.png"),
 	10 : load("res://Assets/Images/tree_sets/branch_objects/branch11.png"),
 	11 : load("res://Assets/Images/tree_sets/branch_objects/branch12.png"),
-}
-
-
-# FRUIT TREES #
-func returnFruitTree(treeType):
-	match treeType:
-		"plum":
-			return Plum_tree
-		"pear":
-			return Pear_tree
-		"cherry":
-			return Cherry_tree
-		"apple":
-			return Apple_tree
-		
-var Plum_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/plum/growing/sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/plum/growing/1.png"),
-		2 : load("res://Assets/Images/tree_sets/plum/growing/2.png"),
-		3 : load("res://Assets/Images/tree_sets/plum/growing/3.png"),
-		4 : load("res://Assets/Images/tree_sets/plum/growing/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/plum/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/plum/bottom.png"),
-	middleTree = load("res://Assets/Images/tree_sets/plum/middle.png"),
-	topTree = {
-		0 : load("res://Assets/Images/tree_sets/plum/tops/1.png"),
-		1 : load("res://Assets/Images/tree_sets/plum/tops/2.png"),
-		2 : load("res://Assets/Images/tree_sets/plum/tops/3.png"),
-		3 : load("res://Assets/Images/tree_sets/plum/tops/harvested.png"),
-	},
-	chip = load("res://Assets/Images/tree_sets/plum/chip.png"),
-	leaves = null,
-}
-
-var Pear_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/pear/growing/sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/pear/growing/1.png"),
-		2 : load("res://Assets/Images/tree_sets/pear/growing/2.png"),
-		3 : load("res://Assets/Images/tree_sets/pear/growing/3.png"),
-		4 : load("res://Assets/Images/tree_sets/pear/growing/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/pear/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/pear/bottom.png"),
-	middleTree = load("res://Assets/Images/tree_sets/pear/middle.png"),
-	topTree = {
-		0 : load("res://Assets/Images/tree_sets/pear/tops/1.png"),
-		1 : load("res://Assets/Images/tree_sets/pear/tops/2.png"),
-		2 : load("res://Assets/Images/tree_sets/pear/tops/3.png"),
-		3 : load("res://Assets/Images/tree_sets/pear/tops/harvested.png"),
-	},
-	chip = load("res://Assets/Images/tree_sets/pear/chip.png"),
-	leaves = null,
-}
-
-var Cherry_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/cherry/growing/sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/cherry/growing/1.png"),
-		2 : load("res://Assets/Images/tree_sets/cherry/growing/2.png"),
-		3 : load("res://Assets/Images/tree_sets/cherry/growing/3.png"),
-		4 : load("res://Assets/Images/tree_sets/cherry/growing/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/cherry/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/cherry/bottom.png"),
-	middleTree = load("res://Assets/Images/tree_sets/cherry/middle.png"),
-	topTree = {
-		0 : load("res://Assets/Images/tree_sets/cherry/tops/1.png"),
-		1 : load("res://Assets/Images/tree_sets/cherry/tops/2.png"),
-		2 : load("res://Assets/Images/tree_sets/cherry/tops/3.png"),
-		3 : load("res://Assets/Images/tree_sets/cherry/tops/harvested.png"),
-	},
-	chip = load("res://Assets/Images/tree_sets/cherry/tree_chip.png"),
-	leaves = null,
-}
-
-var Apple_tree = {
-	growingStages = {
-		0 : load("res://Assets/Images/tree_sets/apple/growing/sapling.png"),
-		1 : load("res://Assets/Images/tree_sets/apple/growing/1.png"),
-		2 : load("res://Assets/Images/tree_sets/apple/growing/2.png"),
-		3 : load("res://Assets/Images/tree_sets/apple/growing/3.png"),
-		4 : load("res://Assets/Images/tree_sets/apple/growing/4.png"),
-	},
-	stump = load("res://Assets/Images/tree_sets/apple/stump.png"),
-	bottomTree = load("res://Assets/Images/tree_sets/apple/bottom.png"),
-	middleTree = load("res://Assets/Images/tree_sets/apple/middle.png"),
-	topTree = {
-		0 : load("res://Assets/Images/tree_sets/apple/tops/1.png"),
-		1 : load("res://Assets/Images/tree_sets/apple/tops/2.png"),
-		2 : load("res://Assets/Images/tree_sets/apple/tops/3.png"),
-		3 : load("res://Assets/Images/tree_sets/apple/tops/harvested.png"),
-	},
-	chip = load("res://Assets/Images/tree_sets/apple/chip.png"),
-	leaves = null,
 }
 
 # ORE OBJECTS #

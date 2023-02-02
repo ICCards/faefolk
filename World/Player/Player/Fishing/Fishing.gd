@@ -67,7 +67,7 @@ func _physics_process(delta):
 				progress.value -= 2
 				if progress.value == progress.min_value:
 					is_progress_going_upwards = true
-		elif Input.is_action_just_released("mouse_click"):
+		elif (Input.is_action_just_released("mouse_click") or Input.is_action_just_released("use_tool")):
 			cast()
 		var r = range_lerp(progress.value, 10, 100, 1, 0)
 		var g = range_lerp(progress.value, 10, 50, 0, 1)
@@ -95,7 +95,7 @@ func retract_and_stop(fish_name):
 	if fish_name:
 		PlayerData.player_data["skill_experience"]["fishing"] += 1
 		PlayerData.player_data["collections"]["fish"][fish_name] += 1
-		PlayerData.add_item_to_hotbar(fish_name, 1, null)
+		PlayerData.pick_up_item(fish_name, 1, null)
 	stop_fishing_state()
 	
 func reel_in_fish_line():

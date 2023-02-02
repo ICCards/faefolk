@@ -148,7 +148,7 @@ script = ExtResource( 3 )
 
 [node name="Items" type="GridContainer" parent="CraftingMenuWorkbench"]
 margin_right = 67.0
-margin_bottom = 124.0
+margin_bottom = 142.0
 custom_constants/vseparation = 2
 custom_constants/hseparation = 1
 columns = 4
@@ -384,6 +384,41 @@ margin_left = 34.0
 margin_top = 108.0
 margin_right = 50.0
 margin_bottom = 124.0
+
+[node name="electric staff" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 10 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 51.0
+margin_top = 108.0
+margin_right = 67.0
+margin_bottom = 124.0
+
+[node name="ice staff" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 10 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 126.0
+margin_right = 16.0
+margin_bottom = 142.0
+
+[node name="earth staff" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 10 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_top = 126.0
+margin_right = 33.0
+margin_bottom = 142.0
+
+[node name="dark magic staff" parent="CraftingMenuWorkbench/Items" instance=ExtResource( 10 )]
+material = ExtResource( 15 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 126.0
+margin_right = 50.0
+margin_bottom = 142.0
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]

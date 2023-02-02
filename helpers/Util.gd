@@ -98,6 +98,8 @@ func returnCategoryColor(category):
 			return Color("ff006c")
 		"Potion":
 			return Color("ff006c")
+		"Mob":
+			return Color("bb61ff")
 
 func valid_holding_item_category(item_category):
 	if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop" or item_category == "Forage":
@@ -146,3 +148,16 @@ func add_to_collection(type, amt):
 		PlayerData.player_data["collections"]["resources"][type] += amt
 	else:
 		PlayerData.player_data["collections"]["resources"]["stone"] += amt
+		
+		
+func isFruitTree(tree_name):
+	if tree_name == "cherry" or tree_name == "apple" or tree_name == "plum" or tree_name == "pear":
+		return true
+	return false
+
+func isNonFruitTree(tree_name):
+	if tree_name == "oak" or tree_name == "pine" or tree_name == "birch" or tree_name == "spruce" or tree_name == "evergreen":
+		return true
+	return false
+
+

@@ -190,7 +190,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.15 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
@@ -202,7 +202,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.15 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 1.0, 0.0 ]
 }
 
@@ -532,7 +532,6 @@ position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 147 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -541,7 +540,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -6 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 146 )
-frame = 12
+frame = 13
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -569,6 +568,7 @@ position = Vector2( 10, -3.62396e-05 )
 shape = SubResource( 39 )
 
 [node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 32
 

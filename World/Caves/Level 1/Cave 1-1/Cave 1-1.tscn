@@ -2825,7 +2825,7 @@ cell_y_sort = true
 collision_layer = 2097152
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 1769478, 1, 0, 2883596, 1, 0 )
+tile_data = PoolIntArray( 1769478, 1, 0 )
 
 [node name="UpLadder" type="TileMap" parent="Tiles"]
 tile_set = SubResource( 724 )

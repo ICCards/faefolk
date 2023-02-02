@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var RawEgg = load("res://World/Objects/Nature/Forage/RawEgg.tscn")
+onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 
 onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 onready var duck_sprite: AnimatedSprite = $DuckSprite
@@ -22,19 +22,23 @@ var MAX_MOVE_DISTANCE: float = 500.0
 var tornado_node
 
 var rng := RandomNumberGenerator.new()
+var thread := Thread.new()
+var destroy_thread := Thread.new()
+var mutex := Mutex.new()
+
+var variety
 
 func _ready():
-	hide()
+	randomize()
+	visible = false
 	set_random_attributes()
 	_timer.connect("timeout", self, "_update_pathfinding")
-	navigation_agent.connect("velocity_computed", self, "move")
+	navigation_agent.connect("velocity_computed", self, "move_deferred")
 	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
 
 func set_random_attributes():
-	randomize()
 	$Timers/DropEggTimer.wait_time = rand_range(20, 40)
-	Images.DuckVariations.shuffle()
-	duck_sprite.frames = Images.DuckVariations[0]
+	duck_sprite.frames = Images.DuckVariations[variety-1]
 	_timer.wait_time = rand_range(2.5, 5.0)
 	if Util.chance(50):
 		duck_sprite.flip_h = true
@@ -67,39 +71,55 @@ func _physics_process(delta):
 	navigation_agent.set_velocity(velocity)
 	duck_sprite.flip_h = _get_direction_string(velocity) != "Right"
 
+func move_deferred(_velocity: Vector2) -> void:
+	call_deferred("move", _velocity)
 
 func move(_velocity: Vector2) -> void:
 	if tornado_node or stunned or destroyed:
 		return
 	if frozen:
-		duck_sprite.modulate = Color("00c9ff")
 		velocity = move_and_slide(_velocity*0.75)
+		duck_sprite.modulate = Color("00c9ff")
 	elif poisoned:
-		duck_sprite.modulate = Color("009000")
 		velocity = move_and_slide(_velocity*0.9)
+		duck_sprite.modulate = Color("009000")
 	else:
-		duck_sprite.modulate = Color("ffffff")
 		velocity = move_and_slide(_velocity)
-
+		duck_sprite.modulate = Color("ffffff")
 
 func _get_direction_string(velocitiy) -> String:
 	if velocitiy.x > 0:
 		return "Right"
 	return "Left"
 
-
-func _update_pathfinding() -> void:
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+func _update_pathfinding():
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+		if Util.chance(5):
+			if not destroyed and not sound_effects.playing:
+				sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/quack.mp3"))
+				sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+				sound_effects.call_deferred("play")
+		
+func _get_path(pos):
+	call_deferred("calculate_path", pos)
+	
+func calculate_path(pos):
+	if not destroyed:
+		yield(get_tree(), "idle_frame")
+		navigation_agent.call_deferred("set_target_location",pos)
+		yield(get_tree(), "idle_frame")
+	thread.wait_to_finish()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/quack.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
 	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-		duck_sprite.modulate = Color("009000")
-		$AnimationPlayer.play("hit")
-		$EnemyPoisonState.start(area.tool_name)
-		start_run_state()
+		duck_sprite.set_deferred("modulate", Color("009000"))
+		$AnimationPlayer.call_deferred("play", "hit")
+		$EnemyPoisonState.call_deferred("start", area.tool_name)
+		call_deferred("start_run_state")
 		return
 	if area.name == "SwordSwing":
 		PlayerData.player_data["skill_experience"]["sword"] += 1
@@ -107,9 +127,9 @@ func _on_HurtBox_area_entered(area):
 	else:
 		PlayerDataHelpers.add_skill_experience(area.tool_name)
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-		hit(area.tool_name)
+		call_deferred("hit", area.tool_name)
 	if area.tool_name == "lingering tornado":
-		$EnemyTornadoState.orbit_radius = rand_range(0,20)
+		$EnemyTornadoState.set_deferred("orbit_radius", rand_range(0,20))
 		tornado_node = area
 	if area.special_ability == "fire":
 		var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
@@ -117,40 +137,45 @@ func _on_HurtBox_area_entered(area):
 		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 	elif area.special_ability == "ice":
-		duck_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(3)
+		duck_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 3)
 	elif area.special_ability == "poison":
-		duck_sprite.modulate = Color("009000")
-		$EnemyPoisonState.start("poison arrow")
+		duck_sprite.set_deferred("modulate", Color("009000"))
+		$EnemyPoisonState.call_deferred("start", "poison arrow")
 
 
 func hit(tool_name, var special_ability = ""):
 	if tool_name == "blizzard":
-		duck_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(8)
+		duck_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 8)
 		return
 	elif tool_name == "ice projectile":
-		duck_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(3)
+		duck_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 3)
 	elif tool_name == "lightning spell debuff":
-		$EnemyStunnedState.start()
+		$EnemyStunnedState.call_deferred("start")
 	is_eating = false
-	start_run_state()
+	call_deferred("start_run_state")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play("hit")
+	$AnimationPlayer.call_deferred("play", "hit")
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
+func destroy(killed_by_player):
+	_timer.call_deferred("stop")
+	set_physics_process(false)
+	if killed_by_player:
+		MapData.remove_animal(name)
+		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
+		yield(get_tree().create_timer(rand_range(0.05,0.25)), "timeout")
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+		sound_effects.call_deferred("play")
 	destroyed = true
-	duck_sprite.play("death")
-	$AnimationPlayer.play("death")
+	duck_sprite.call_deferred("play", "death")
+	$AnimationPlayer.call_deferred("play", "death")
 	yield(get_tree().create_timer(0.5), "timeout")
 	InstancedScenes.intitiateItemDrop("raw wing", position, 1)
 	if Util.chance(50):
@@ -159,36 +184,36 @@ func destroy():
 	queue_free()
 
 func start_run_state():
-	navigation_agent.max_speed = 300
+	navigation_agent.set_deferred("max_speed", 300)
 	running_state = true
-	$Timers/RunStateTimer.start()
-	_timer.wait_time = 0.75
-	_update_pathfinding()
+	$Timers/RunStateTimer.call_deferred("start")
+	_timer.set_deferred("wait_time", 0.75)
+	call_deferred("_update_pathfinding")
 
 func _on_RunStateTimer_timeout():
-	navigation_agent.max_speed = 200
+	navigation_agent.set_deferred("max_speed", 200)
 	running_state = false
-	_timer.wait_time = rand_range(2.5, 5.0)
-
-func _on_VisibilityNotifier2D_screen_entered():
-	show()
-	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position)) != -1:
-		queue_free()
-func _on_VisibilityNotifier2D_screen_exited():
-	hide()
+	_timer.set_deferred("wait_time", rand_range(2.5, 5.0))
 
 func _on_IdleTimer_timeout():
 	is_eating = false
 
-
 func _on_DropEggTimer_timeout():
-	if visible and not is_eating and Server.player_node.isLoaded:
-		$Timers/DropEggTimer.wait_time = rand_range(10, 20)
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Duck/Duck.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-		sound_effects.play()
-		var rawEgg = RawEgg.instance()
-		rawEgg.global_position = position
-		get_node("../../").add_child(rawEgg)
+	if visible and Server.isLoaded and not destroyed and velocity != Vector2.ZERO and not is_eating:
+		$Timers/DropEggTimer.set_deferred("wait_time", rand_range(10, 30))
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/egg drop.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -4))
+		sound_effects.call_deferred("play")
+		var forageItem = ForageItem.instance()
+		forageItem.first_placement = true
+		forageItem.item_name = "raw egg"
+		forageItem.global_position = position
+		get_node("../../").call_deferred("add_child", forageItem)
 	
-	
+func _on_VisibilityNotifier2D_screen_entered():
+	set_deferred("visible", true)
+
+func _on_VisibilityNotifier2D_screen_exited():
+	if MapData.world["animal"].has(name):
+		MapData.world["animal"][name]["l"] = position/32
+		set_deferred("visible", false)

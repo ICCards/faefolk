@@ -1,6 +1,6 @@
 extends Control
 
-const MAX_SCROLL_SIZE = 16
+const MAX_SCROLL_SIZE = 34
 
 var level
 
@@ -8,7 +8,7 @@ var crafting_item
 var hovered_item
 
 var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can", "wood fishing rod", "scythe", "arrow"]
-var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod"]
+var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod", "bow"]
 
 onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
@@ -17,13 +17,17 @@ func _ready():
 	initialize()
 
 func initialize():
-	$InventorySlots.initialize_slots()
-	$HotbarInventorySlots.initialize_slots()
+	initialize_crafting()
 	Server.player_node.actions.destroy_placable_object()
 	hovered_item = null
 	crafting_item = null
 	$MenuTitle.text = "Workbench #" + str(level) + ":"
 	show()
+
+func initialize_crafting():
+	$InventorySlots.initialize_slots()
+	$HotbarInventorySlots.initialize_slots()
+	$CraftingMenuWorkbench.initialize()
 
 
 func destroy():
@@ -84,13 +88,13 @@ func craft(item_name):
 		if find_parent("UserInterface").holding_item.item_name == "arrow" and PlayerData.isSufficientMaterialToCraft(item_name):
 			PlayerData.craft_item(item_name)
 			find_parent("UserInterface").holding_item.add_item_quantity(1)
+	initialize_crafting()
 
 func return_crafted_item(item_name):
 	var inventoryItem = InventoryItem.instance()
 	inventoryItem.set_item(item_name, 1, Stats.return_max_tool_health(item_name))
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem
-
 
 func _on_ExitBtn_pressed():
 	get_parent().close_workbench()

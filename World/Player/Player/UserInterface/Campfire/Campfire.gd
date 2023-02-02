@@ -60,7 +60,7 @@ func check_valid_recipe():
 func cooking_active():
 	$CookTimer.start()
 	$FireAnimatedSprite.show()
-	if self.visible:
+	if self.visible and Server.isLoaded:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()

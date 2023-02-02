@@ -4,7 +4,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Spring"],
+    "Seasons": ["spring"],
     "yield": [1],
 },
 "potato": {
@@ -12,7 +12,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Spring"],
+    "Seasons": ["spring"],
     "yield": [1, 2],
 },
 "garlic": {
@@ -20,7 +20,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Spring"],
+    "Seasons": ["spring"],
     "yield": [1],
 },
 "cauliflower": {
@@ -28,7 +28,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Spring"],
+    "Seasons": ["spring"],
     "yield": [1],
 },
 "yellow pepper": {
@@ -36,7 +36,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 3,
-    "Seasons": ["Spring"],
+    "Seasons": ["spring"],
     "yield": [1, 1, 1, 2],
 },
 "strawberry": {
@@ -44,7 +44,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Summer"],
+    "Seasons": ["summer"],
     "yield": [2],
 },
 "green bean": {
@@ -52,7 +52,7 @@
     "GrowthImages": 4,
     "Perennial": true,
     "Regrowth": 3,
-    "Seasons": ["Spring"],
+    "Seasons": ["spring"],
     "yield": [1, 2, 3]
 },
 "zucchinni": {
@@ -60,7 +60,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Spring"],
+    "Seasons": ["spring"],
     "yield": [1]
 },
 
@@ -70,7 +70,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Summer"],
+    "Seasons": ["summer"],
     "yield": [1],
 },
 "tomato": {
@@ -78,7 +78,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Spring"],
+    "Seasons": ["spring"],
     "yield": [1, 2],
 },
 "red pepper": {
@@ -86,7 +86,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 3,
-    "Seasons": ["Fall"],
+    "Seasons": ["fall"],
     "yield": [1, 1, 1, 2],
 },
 "blueberry": {
@@ -94,7 +94,7 @@
     "GrowthImages": 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Fall"],
+    "Seasons": ["fall"],
     "yield": [2, 3, 4],
 },
 "honeydew melon": {
@@ -102,7 +102,7 @@
     "GrowthImages": 3,
     "Perennial": true,
     "Regrowth": 5,
-    "Seasons": ["Summer"],
+    "Seasons": ["summer"],
     "yield": [2],
 },
 
@@ -114,7 +114,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 3,
-    "Seasons": ["Summer"],
+    "Seasons": ["summer"],
     "yield": [1, 1, 1, 2],
 },
     
@@ -123,7 +123,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Fall"],
+    "Seasons": ["fall"],
     "yield": [1],
 },
 "grape": {
@@ -131,7 +131,7 @@
     "GrowthImages": 4,
     "Perennial": true,
     "Regrowth": 3,
-    "Seasons": ["Fall"],
+    "Seasons": ["fall"],
     "yield": [1]
 },
 
@@ -140,7 +140,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Fall"],
+    "Seasons": ["fall"],
     "yield": [1],
 },
 "jalapeno": {
@@ -148,7 +148,7 @@
     "GrowthImages": 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Fall"],
+    "Seasons": ["fall"],
     "yield": [1, 1, 1, 2],
 },
 "asparagus": {
@@ -156,7 +156,7 @@
     "GrowthImages": 4,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Fall"],
+    "Seasons": ["fall"],
     "yield": [1],
 },
 "wheat": {
@@ -164,7 +164,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Spring", "Summer", "Fall"],
+    "Seasons": ["spring", "summer", "fall"],
     "yield": [1, 2, 3, 4, 5],
 },
 "corn": {
@@ -172,7 +172,7 @@
     "GrowthImages" : 4,
     "Perennial": true,
     "Regrowth": 4,
-    "Seasons": ["Spring", "Summer", "Fall"],
+    "Seasons": ["spring", "summer", "fall"],
     "yield": [1, 2],
 },
 "sugar cane": {
@@ -180,7 +180,7 @@
     "GrowthImages": 5,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["Spring", "Summer", "Fall"],
+    "Seasons": ["spring", "summer", "fall"],
     "yield": [1, 2, 3],
 },
 

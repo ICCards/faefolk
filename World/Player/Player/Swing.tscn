@@ -29,6 +29,7 @@ script = ExtResource( 3 )
 shape = SubResource( 2 )
 
 [node name="SwordSwing" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2304
 script = ExtResource( 3 )

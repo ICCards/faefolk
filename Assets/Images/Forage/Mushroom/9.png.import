@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/9.png-6861c63c3b10e56ddc380fa403eaabd3.stex"
+path="res://.import/9.png-b75a680813ad4a10d3d95a1ec666c5b4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Forage/Mushroom/9.png"
-dest_files=[ "res://.import/9.png-6861c63c3b10e56ddc380fa403eaabd3.stex" ]
+source_file="res://Assets/Images/Forage/mushroom/9.png"
+dest_files=[ "res://.import/9.png-b75a680813ad4a10d3d95a1ec666c5b4.stex" ]
 
 [params]
 

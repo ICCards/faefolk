@@ -3,6 +3,6 @@ extends AnimatedSprite
 
 
 func _ready():
-	play()
+	call_deferred("play")
 	yield(self, "animation_finished")
 	queue_free()

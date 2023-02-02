@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/death.mp3-b91bed3fa1e905a2ba2d15fc48c0e926.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/animals/deer/death.mp3"
+dest_files=[ "res://.import/death.mp3-b91bed3fa1e905a2ba2d15fc48c0e926.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

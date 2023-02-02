@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bite.mp3-f08203e13975bdc65dd77eace02c39ec.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/animals/wolf/bite.mp3"
+dest_files=[ "res://.import/bite.mp3-f08203e13975bdc65dd77eace02c39ec.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

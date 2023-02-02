@@ -292,7 +292,6 @@ anims/small_ore_hit_right = SubResource( 6 )
 volume_db = -12.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
 position = Vector2( 0.588236, 2.35294 )
 scale = Vector2( 4.29412, 3.64706 )
 

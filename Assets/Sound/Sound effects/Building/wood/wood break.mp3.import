@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wood break.mp3-6ed66e14c4a8924e660c06ae8574abff.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Building/wood/wood break.mp3"
+dest_files=[ "res://.import/wood break.mp3-6ed66e14c4a8924e660c06ae8574abff.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

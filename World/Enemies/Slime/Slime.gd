@@ -135,9 +135,11 @@ func hit(tool_name):
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
+func destroy(killed_by_player):
+	if killed_by_player:
+		PlayerData.player_data["collections"]["mobs"]["slime"] += 1
 	InstancedScenes.intitiateItemDrop("slime orb", position, 1)
 	destroyed = true
 	animation_player.play("death")

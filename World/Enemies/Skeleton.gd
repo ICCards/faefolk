@@ -200,9 +200,11 @@ func hit(tool_name):
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
+func destroy(killed_by_player):
+	if killed_by_player:
+		PlayerData.player_data["collections"]["mobs"]["skeleton"] += 1
 	var random = rng.randi_range(1,3)
 	for i in range(random):
 		InstancedScenes.intitiateItemDrop("bone", position, 1)

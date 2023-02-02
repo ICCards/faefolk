@@ -10,8 +10,8 @@
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=24]
-radius = 5.0
-height = 6.0
+radius = 4.0
+height = 0.0
 
 [sub_resource type="CapsuleShape2D" id=25]
 radius = 15.0
@@ -167,6 +167,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=27]
 resource_name = "hit"
@@ -273,7 +285,6 @@ frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
 rotation = 1.5708
 shape = SubResource( 24 )
 
@@ -287,7 +298,7 @@ rotation = 1.5708
 shape = SubResource( 25 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -3 )
+position = Vector2( 0, -9 )
 scale = Vector2( 4.16875, 4.16875 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -306,7 +317,7 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 1
+frame = 7
 playing = true
 
 [node name="Timers" type="Node" parent="."]
@@ -320,6 +331,7 @@ autostart = true
 [node name="IdleTimer" type="Timer" parent="Timers"]
 
 [node name="DropEggTimer" type="Timer" parent="Timers"]
+wait_time = 20.0
 autostart = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

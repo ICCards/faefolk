@@ -196,3 +196,13 @@ margin_right = 992.0
 margin_bottom = 594.0
 theme = ExtResource( 1 )
 text = "."
+
+[node name="Beta" type="Label" parent="."]
+margin_left = 1137.0
+margin_top = 14.0
+margin_right = 1299.0
+margin_bottom = 108.0
+grow_horizontal = 0
+rect_scale = Vector2( 0.8, 0.8 )
+theme = ExtResource( 1 )
+text = "Beta  v1.3"

@@ -4,7 +4,10 @@ extends TextureRect
 
 func _ready():
 	material = material.duplicate()
-	texture = load("res://Assets/Images/inventory_icons/"+ JsonData.item_data[name]["ItemCategory"] + "/"  + name + ".png")
+	if get_parent().name == "MobCollection":
+		texture = load("res://Assets/Images/User interface/buttons-icons/mob icons/"+name +".png")
+	else:
+		texture = load("res://Assets/Images/inventory_icons/"+ JsonData.item_data[name]["ItemCategory"] + "/"  + name + ".png")
 
 func _on_collection_item_mouse_entered():
 	get_node("../").entered_item_area(name)

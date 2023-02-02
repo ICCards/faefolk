@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Assets/Images/Enemies/skeleton/DRAW/down/body.png" type="Texture" id=1]
 [ext_resource path="res://World/Enemies/Skeleton.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Images/Enemies/skeleton/death.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Images/Enemies/knockback dust.png" type="Texture" id=9]
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=11]
 
 [sub_resource type="CanvasItemMaterial" id=191]
 particles_animation = true
@@ -94,11 +95,35 @@ height = 4.0
 
 [sub_resource type="Animation" id=149]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../SkeletonSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=150]
 resource_name = "hit"
-length = 0.25
+length = 0.15
 step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../SkeletonSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1.0, 0.0 ]
+}
 
 [sub_resource type="CircleShape2D" id=164]
 radius = 194.003
@@ -451,6 +476,7 @@ rotation = 1.5708
 shape = SubResource( 10 )
 
 [node name="SkeletonSprite" type="Sprite" parent="."]
+material = ExtResource( 11 )
 position = Vector2( 0, -30 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
@@ -461,7 +487,7 @@ visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 182 )
-frame = 10
+frame = 2
 playing = true
 
 [node name="SpiderHit" type="Area2D" parent="."]

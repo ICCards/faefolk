@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=212 format=2]
+[gd_resource type="TileSet" load_steps=213 format=2]
 
 [ext_resource path="res://Assets/Images/Animations/torch/torch.tres" type="Texture" id=1]
 [ext_resource path="res://Assets/Tilesets/CL_Crafting.png" type="Texture" id=2]
@@ -61,6 +61,7 @@
 [ext_resource path="res://Assets/Images/placable_object_preview/brewing table #1/sheet.png" type="Texture" id=59]
 [ext_resource path="res://Assets/Images/placable_object_preview/brewing table #2/sheet.png" type="Texture" id=60]
 [ext_resource path="res://Assets/Images/placable_object_preview/brewing table #3/sheet.png" type="Texture" id=61]
+[ext_resource path="res://Assets/Images/placable_object_preview/flower trough/sheet.png" type="Texture" id=62]
 
 [sub_resource type="ConvexPolygonShape2D" id=875]
 points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
@@ -3092,7 +3093,7 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 151/shape_one_way = false
 151/shape_one_way_margin = 0.0
 151/shapes = [  ]
-151/z_index = 0
+151/z_index = -1
 152/name = "sheet.png 152"
 152/texture = ExtResource( 50 )
 152/tex_offset = Vector2( 0, 0 )
@@ -3106,7 +3107,7 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 152/shape_one_way = false
 152/shape_one_way_margin = 0.0
 152/shapes = [  ]
-152/z_index = 0
+152/z_index = -1
 153/name = "sheet.png 153"
 153/texture = ExtResource( 50 )
 153/tex_offset = Vector2( 0, 0 )
@@ -3120,7 +3121,7 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 153/shape_one_way = false
 153/shape_one_way_margin = 0.0
 153/shapes = [  ]
-153/z_index = 0
+153/z_index = -1
 154/name = "sheet.png 154"
 154/texture = ExtResource( 50 )
 154/tex_offset = Vector2( 0, 0 )
@@ -3134,7 +3135,7 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 154/shape_one_way = false
 154/shape_one_way_margin = 0.0
 154/shapes = [  ]
-154/z_index = 0
+154/z_index = -1
 155/name = "sheet.png 155"
 155/texture = ExtResource( 50 )
 155/tex_offset = Vector2( 0, 0 )
@@ -3148,7 +3149,7 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 155/shape_one_way = false
 155/shape_one_way_margin = 0.0
 155/shapes = [  ]
-155/z_index = 0
+155/z_index = -1
 156/name = "sheet.png 156"
 156/texture = ExtResource( 50 )
 156/tex_offset = Vector2( 0, 0 )
@@ -3162,7 +3163,7 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 156/shape_one_way = false
 156/shape_one_way_margin = 0.0
 156/shapes = [  ]
-156/z_index = 0
+156/z_index = -1
 157/name = "sheet.png 157"
 157/texture = ExtResource( 50 )
 157/tex_offset = Vector2( 0, 0 )
@@ -3176,7 +3177,7 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 157/shape_one_way = false
 157/shape_one_way_margin = 0.0
 157/shapes = [  ]
-157/z_index = 0
+157/z_index = -1
 158/name = "sheet.png 158"
 158/texture = ExtResource( 50 )
 158/tex_offset = Vector2( 0, 0 )
@@ -3190,7 +3191,7 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 158/shape_one_way = false
 158/shape_one_way_margin = 0.0
 158/shapes = [  ]
-158/z_index = 0
+158/z_index = -1
 159/name = "sheet.png 159"
 159/texture = ExtResource( 51 )
 159/tex_offset = Vector2( 0, -96 )
@@ -3877,3 +3878,17 @@ points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 191/z_index = 0
+192/name = "sheet.png 192"
+192/texture = ExtResource( 62 )
+192/tex_offset = Vector2( 0, -32 )
+192/modulate = Color( 1, 1, 1, 1 )
+192/region = Rect2( 0, 32, 96, 64 )
+192/tile_mode = 0
+192/occluder_offset = Vector2( 0, 0 )
+192/navigation_offset = Vector2( 0, 0 )
+192/shape_offset = Vector2( 0, 0 )
+192/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+192/shape_one_way = false
+192/shape_one_way_margin = 0.0
+192/shapes = [  ]
+192/z_index = 0

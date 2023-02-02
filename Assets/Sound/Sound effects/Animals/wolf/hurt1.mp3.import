@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hurt1.mp3-a996bd502e2b3c2cf3ae2a8746823b49.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/animals/wolf/hurt1.mp3"
+dest_files=[ "res://.import/hurt1.mp3-a996bd502e2b3c2cf3ae2a8746823b49.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

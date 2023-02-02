@@ -2,7 +2,7 @@ extends ScrollContainer
 
 
 
-func _ready():
+func initialize():
 	for item in $Items.get_children():
 		if not $Items.get_node(item.name + "/button").disabled:
 			if PlayerData.isSufficientMaterialToCraft(item.name):

@@ -141,18 +141,6 @@ tracks/4/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Area2D/CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=7]
 length = 0.001
@@ -284,18 +272,6 @@ tracks/4/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("BackArea2D/CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
@@ -394,13 +370,11 @@ anims/RESET = SubResource( 7 )
 "anims/back break" = SubResource( 20 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
 position = Vector2( 7, -23.75 )
 scale = Vector2( 1.8, 2.725 )
 
 [node name="FrontBreak" type="AnimatedSprite" parent="."]
 visible = false
-modulate = Color( 0.647059, 1, 0.74902, 1 )
 position = Vector2( 7, -14 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 17 )

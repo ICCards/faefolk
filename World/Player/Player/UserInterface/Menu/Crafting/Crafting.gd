@@ -18,7 +18,7 @@ func initialize():
 		crafting_item = null
 		hovered_item = null
 		show()
-		get_node("../../Background").texture = load("res://Assets/Images/User interface/inventory/crafting/crafting-tab.png")
+		get_node("../../Background").set_deferred("texture", load("res://Assets/Images/User interface/inventory/crafting/crafting-tab.png"))
 		reset_hover_effect()
 		initialize_crafting()
 
@@ -32,7 +32,6 @@ func reset_hover_effect():
 			$CraftingMenu/Items.get_node(item).rect_scale = Vector2(4,4)
 		else:
 			$CraftingMenu/Items.get_node(item).rect_scale = Vector2(2,2)
-
 
 
 func initialize_crafting():

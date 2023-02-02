@@ -71,14 +71,16 @@ margin_right = 961.0
 margin_bottom = 602.0
 mouse_filter = 2
 theme = SubResource( 55 )
+scroll_vertical = 1115
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 456.0
-margin_bottom = 922.0
+margin_top = -1115.0
+margin_right = 496.0
+margin_bottom = 431.0
 custom_constants/separation = 0
 
 [node name="SoundTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 456.0
+margin_right = 496.0
 margin_bottom = 113.0
 theme = ExtResource( 8 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -91,7 +93,7 @@ __meta__ = {
 
 [node name="Grid" type="GridContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 113.0
-margin_right = 456.0
+margin_right = 496.0
 margin_bottom = 293.0
 custom_constants/hseparation = 280
 columns = 2
@@ -280,7 +282,7 @@ text = "Footstep vol."
 
 [node name="Controls" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 293.0
-margin_right = 456.0
+margin_right = 496.0
 margin_bottom = 406.0
 theme = ExtResource( 8 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -293,8 +295,8 @@ __meta__ = {
 
 [node name="Grid2" type="GridContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 406.0
-margin_right = 456.0
-margin_bottom = 922.0
+margin_right = 496.0
+margin_bottom = 1546.0
 grow_horizontal = 2
 mouse_filter = 2
 custom_constants/hseparation = 120
@@ -302,7 +304,7 @@ columns = 2
 
 [node name="MoveLeftLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 3.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 45.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -311,8 +313,8 @@ custom_constants/shadow_offset_y = 4
 text = "Move left:"
 
 [node name="KeyBindingBtn" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
-margin_right = 451.0
+margin_left = 380.0
+margin_right = 496.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 39 )
@@ -321,7 +323,7 @@ action_name = "move_left"
 
 [node name="MoveRightLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 55.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 97.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -330,9 +332,9 @@ custom_constants/shadow_offset_y = 4
 text = "Move right:"
 
 [node name="KeyBindingBtn2" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 52.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 40 )
@@ -341,7 +343,7 @@ action_name = "move_right"
 
 [node name="MoveUpLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 107.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 149.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -350,9 +352,9 @@ custom_constants/shadow_offset_y = 4
 text = "Move up:"
 
 [node name="KeyBindingBtn3" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 104.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 152.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 41 )
@@ -361,7 +363,7 @@ action_name = "move_up"
 
 [node name="MoveDownLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 159.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 201.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -370,9 +372,9 @@ custom_constants/shadow_offset_y = 4
 text = "Move down:"
 
 [node name="KeyBindingBtn4" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 156.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 204.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 42 )
@@ -381,7 +383,7 @@ action_name = "move_down"
 
 [node name="OpenMenuLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 211.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 253.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -390,9 +392,9 @@ custom_constants/shadow_offset_y = 4
 text = "Open menu:"
 
 [node name="KeyBindingBtn6" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 208.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 43 )
@@ -401,7 +403,7 @@ action_name = "open_menu"
 
 [node name="ActionLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 263.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 305.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -410,9 +412,9 @@ custom_constants/shadow_offset_y = 4
 text = "Action:"
 
 [node name="KeyBindingBtn7" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 260.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 308.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 44 )
@@ -421,7 +423,7 @@ action_name = "action"
 
 [node name="RotateObjectLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 315.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 357.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -430,9 +432,9 @@ custom_constants/shadow_offset_y = 4
 text = "Rotate object:"
 
 [node name="KeyBindingBtn8" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 312.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 360.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
@@ -441,7 +443,7 @@ action_name = "rotate"
 
 [node name="ChangeVarietyLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 367.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 409.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -450,9 +452,9 @@ custom_constants/shadow_offset_y = 4
 text = "Change variety:"
 
 [node name="KeyBindingBtn11" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 364.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 412.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
@@ -461,7 +463,7 @@ action_name = "change_variety"
 
 [node name="OpenMapLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 419.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 461.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -470,9 +472,9 @@ custom_constants/shadow_offset_y = 4
 text = "Open map:"
 
 [node name="KeyBindingBtn9" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 416.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 464.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
@@ -481,7 +483,7 @@ action_name = "open_map"
 
 [node name="SprintLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 471.0
-margin_right = 215.0
+margin_right = 260.0
 margin_bottom = 513.0
 theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -490,14 +492,254 @@ custom_constants/shadow_offset_y = 4
 text = "Sprint:"
 
 [node name="KeyBindingBtn10" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
-margin_left = 335.0
+margin_left = 380.0
 margin_top = 468.0
-margin_right = 451.0
+margin_right = 496.0
 margin_bottom = 516.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
 action_name = "sprint"
+
+[node name="UseToolLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 523.0
+margin_right = 260.0
+margin_bottom = 565.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Use tool: Left-click,"
+
+[node name="KeyBindingBtn12" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 520.0
+margin_right = 496.0
+margin_bottom = 568.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "use_tool"
+
+[node name="SwitchHotbar" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 575.0
+margin_right = 260.0
+margin_bottom = 617.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Switch hotbar:"
+
+[node name="KeyBindingBtn13" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 572.0
+margin_right = 496.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "toggle_hotbar"
+
+[node name="Slot1" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 627.0
+margin_right = 260.0
+margin_bottom = 669.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn14" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 624.0
+margin_right = 496.0
+margin_bottom = 672.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot1"
+
+[node name="Slot2" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 679.0
+margin_right = 260.0
+margin_bottom = 721.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn15" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 676.0
+margin_right = 496.0
+margin_bottom = 724.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot2"
+
+[node name="Slot3" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 731.0
+margin_right = 260.0
+margin_bottom = 773.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn16" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 728.0
+margin_right = 496.0
+margin_bottom = 776.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot3"
+
+[node name="Slot4" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 783.0
+margin_right = 260.0
+margin_bottom = 825.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn17" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 780.0
+margin_right = 496.0
+margin_bottom = 828.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot4"
+
+[node name="Slot5" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 835.0
+margin_right = 260.0
+margin_bottom = 877.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn18" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 832.0
+margin_right = 496.0
+margin_bottom = 880.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot5"
+
+[node name="Slot6" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 887.0
+margin_right = 260.0
+margin_bottom = 929.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn19" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 884.0
+margin_right = 496.0
+margin_bottom = 932.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot6"
+
+[node name="Slot7" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 939.0
+margin_right = 260.0
+margin_bottom = 981.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn20" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 936.0
+margin_right = 496.0
+margin_bottom = 984.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot7"
+
+[node name="Slot8" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 991.0
+margin_right = 260.0
+margin_bottom = 1033.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn21" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 988.0
+margin_right = 496.0
+margin_bottom = 1036.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot8"
+
+[node name="Slot9" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 1043.0
+margin_right = 260.0
+margin_bottom = 1085.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn22" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 1040.0
+margin_right = 496.0
+margin_bottom = 1088.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot9"
+
+[node name="Slot10" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 1095.0
+margin_right = 260.0
+margin_bottom = 1137.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn23" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 1092.0
+margin_right = 496.0
+margin_bottom = 1140.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot10"
 
 [node name="Slider" type="VSlider" parent="."]
 margin_left = 913.0

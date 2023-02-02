@@ -1,25 +1,50 @@
 extends Node2D
 
+onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+
 var entered = false
 var door_open = false
 var id
 var location
-var item_name = "wood gate"
 
+var object_name = "gate"
+
+var temp_health = 3
 
 func _on_HurtBox_area_entered(area):
-	if area.name == "AxePickaxeSwing":
-		Stats.decrease_tool_health()
-	InstancedScenes.intitiateItemDrop(item_name, position, 1)
-	Tiles.add_valid_tiles(location, Vector2(2,1))
-	queue_free()
+	if temp_health == 0:
+		if area.name == "AxePickaxeSwing":
+			Stats.decrease_tool_health()
+		InstancedScenes.intitiateItemDrop("wood gate", position, 1)
+		Tiles.add_valid_tiles(location, Vector2(2,1))
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
+		sound_effects.call_deferred("play")
+		yield(sound_effects, "finished")
+		queue_free()
+	else:
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
+		sound_effects.call_deferred("play")
+		$ResetTempHealthTimer.start()
+		temp_health -= 1
+		$AnimationPlayer.play("shake")
 
-func _input(event):
-	if event.is_action_pressed("action") and $DetectObjectOverPathBox.get_overlapping_areas().size() <= 0:
-		if door_open:
-			$AnimatedSprite.play("close")
-			$MovementCollision/CollisionShape2D.disabled = false
-		else:
-			$AnimatedSprite.play("open")
-			$MovementCollision/CollisionShape2D.disabled = true
-		door_open = !door_open
+func toggle_gate():
+	if door_open:
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/gate/open.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
+		sound_effects.call_deferred("play")
+		$GatePos/Gate.set_deferred("frame", 0)
+		$MovementCollision/CollisionShape2D.set_deferred("disabled", false)
+	else:
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/gate/close.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
+		sound_effects.call_deferred("play")
+		$GatePos/Gate.set_deferred("frame", 1)
+		$MovementCollision/CollisionShape2D.set_deferred("disabled", true)
+	door_open = !door_open
+
+
+func _on_ResetTempHealthTimer_timeout():
+	temp_health = 3

@@ -146,6 +146,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "hit"
@@ -281,12 +293,6 @@ anims/RESET = SubResource( 15 )
 anims/death = SubResource( 11 )
 anims/hit = SubResource( 13 )
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 20.0
-target_desired_distance = 20.0
-avoidance_enabled = true
-radius = 1.0
-
 [node name="Electricity" type="AnimatedSprite" parent="."]
 visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
@@ -306,6 +312,11 @@ wait_time = 4.0
 autostart = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 100.0
+target_desired_distance = 100.0
+avoidance_enabled = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

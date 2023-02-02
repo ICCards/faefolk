@@ -43,60 +43,81 @@ enum {
 	DEATH,
 	RETREAT
 }
-var rng = RandomNumberGenerator.new()
+
+var rng := RandomNumberGenerator.new()
+var thread := Thread.new()
+var destroy_thread := Thread.new()
 
 func _ready():
-	hide()
 	randomize()
-	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(3.0,8.0)
+	visible = false
+	animation_player.call_deferred("play", "loop")
+	_idle_timer.set_deferred("wait_time", rand_range(3.0,8.0))
 	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
 	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
 	_retreat_timer.connect("timeout", self, "_update_pathfinding_retreat")
-	navigation_agent.connect("velocity_computed", self, "move") 
-	navigation_agent.set_navigation(get_node("/root/World/Navigation2D"))
-	if self.position.distance_to(Server.player_node.position) < 300:
-		queue_free()
+	navigation_agent.connect("velocity_computed", self, "move_deferred") 
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
+
+func _update_pathfinding_idle():
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+		state = WALK
 
 func _update_pathfinding_chase():
-	navigation_agent.set_target_location(player.global_position)
-	
-func _update_pathfinding_idle():
-	state = WALK
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
-	
-func _update_pathfinding_retreat():
-	var target = -player.position*Vector2(100,100)
-	navigation_agent.set_target_location(target)
-	
-func set_sprite_texture():
-	match state:
-		IDLE:
-			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png")
-		WALK:
-			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png")
-		CHASE:
-			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png")
-		RETREAT:
-			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png")
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", player.position)
 
+func _get_path(pos):
+	call_deferred("calculate_path", pos)
 	
+func calculate_path(pos):
+	if not destroyed:
+		yield(get_tree(), "idle_frame")
+		navigation_agent.call_deferred("set_target_location",pos)
+		yield(get_tree(), "idle_frame")
+	thread.wait_to_finish()
+
+func _update_pathfinding_retreat():
+	var target = Vector2(200,200)
+	var diff = player.position - self.position
+	if diff.x > 0:
+		target.x = -200
+	if diff.y > 0:
+		target.y = -200
+	if not thread.is_active() and visible:
+		thread.start(self, "_get_path", self.position+target)
+
+func set_sprite_texture():
+	if not attacking or destroyed:
+		match state:
+			IDLE:
+				wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/idle/" +  direction + "/body.png")
+			WALK:
+				wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/walk/" +  direction + "/body.png")
+			_:
+				wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/run/" +  direction + "/body.png")
+
+func move_deferred(_velocity: Vector2) -> void:
+	call_deferred("move", _velocity)
+
 func move(_velocity: Vector2) -> void:
 	if not visible or tornado_node or stunned or destroyed or attacking or state == IDLE:
 		return
 	if frozen:
-		wolf_sprite.modulate = Color("00c9ff")
 		velocity = move_and_slide(_velocity*0.75)
+		wolf_sprite.modulate = Color("00c9ff")
 	elif poisoned:
-		wolf_sprite.modulate = Color("009000")
 		velocity = move_and_slide(_velocity*0.9)
+		wolf_sprite.modulate = Color("009000")
 	else:
-		wolf_sprite.modulate = Color("ffffff")
 		velocity = move_and_slide(_velocity)
+		wolf_sprite.modulate = Color("ffffff")
 
 func _physics_process(delta):
 	if not visible or destroyed or stunned: 
 		return
+	$LineOfSight.look_at(player.global_position)
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
 		velocity = move_and_slide(velocity)
@@ -122,63 +143,90 @@ func _physics_process(delta):
 	
 func attack():
 	if not attacking:
-		play_groan_sound_effect()
+		call_deferred("play_groan_sound_effect")
 		attacking = true
 		if Util.chance(50):
-			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/claw/" +  direction + "/body.png")
-			animation_player.play("claw")
+			wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/claw/" +  direction + "/body.png"))
+			animation_player.call_deferred("play", "claw")
+			if player_not_inside_walls():
+				yield(get_tree().create_timer(0.4), "timeout")
+				if not destroyed:
+					$Position2D/WolfClaw/CollisionShape2D.set_deferred("disabled", false)
 		else:
-			wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/bite/" +  direction + "/body.png")
-			animation_player.play("bite")
+			wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/bite/" +  direction + "/body.png"))
+			animation_player.call_deferred("play", "bite")
+			if player_not_inside_walls():
+				yield(get_tree().create_timer(0.4), "timeout")
+				if not destroyed:
+					$Position2D/WolfBite/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if not destroyed:
-			animation_player.play("loop")
+			animation_player.call_deferred("play","loop")
 			attacking = false
-			state = CHASE
+			if state != RETREAT:
+				state = CHASE
+
+func player_not_inside_walls() -> bool:
+	var collider = $LineOfSight.get_collider()
+	if collider and (collider.name == "WallTiles" or collider.name == "DoorMovementCollision"):
+		return false
+	return true
 
 func hit(tool_name):
+	call_deferred("play_hurt_sound_effect")
 	if state == IDLE or state == WALK:
-		start_chase_state()
+		call_deferred("start_chase_state")
 	if tool_name == "blizzard":
-		wolf_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(8)
+		wolf_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 8)
 		return
 	elif tool_name == "ice projectile":
-		wolf_sprite.modulate = Color("00c9ff")
-		$EnemyFrozenState.start(3)
+		wolf_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 3)
 	elif tool_name == "lightning spell debuff":
-		$EnemyStunnedState.start()
+		$EnemyStunnedState.call_deferred("start")
 	_end_chase_state_timer.start(20)
-	$HurtBox/AnimationPlayer.play("hit")
+	$HurtBox/AnimationPlayer.call_deferred("play", "hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
 	InstancedScenes.player_hit_effect(-dmg, position)
 	if health < STARTING_HEALTH*.3:
-		start_retreat_state()
+		call_deferred("start_retreat_state")
 	if health <= 0 and not destroyed:
-		destroy()
+		destroy(true)
 
-func destroy():
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-	sound_effects.play()
-	stop_sound_effects()
-	destroyed = true
-	wolf_sprite.texture = load("res://Assets/Images/Animals/Wolf/death/" +  direction + "/body.png")
-	animation_player.play("death")
-	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
-	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
-	yield(animation_player, "animation_finished")
-	queue_free()
+func destroy(killed_by_player):
+	if not destroyed:
+		_retreat_timer.call_deferred("stop")
+		_chase_timer.call_deferred("stop")
+		_idle_timer.call_deferred("stop")
+		set_physics_process(false)
+		if killed_by_player:
+			MapData.remove_animal(name)
+			PlayerData.player_data["collections"]["mobs"]["wolf"] += 1
+			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/death.mp3"))
+			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+			sound_effects.call_deferred("play")
+		destroyed = true
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+		$Position2D/WolfBite/CollisionShape2D.set_deferred("disabled", true)
+		$Position2D/WolfClaw/CollisionShape2D.set_deferred("disabled", true)
+		wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/death/" +  direction + "/body.png"))
+		animation_player.play("death")
+		yield(get_tree().create_timer(0.5), "timeout")
+		InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,2))
+		InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,2))
+		yield(animation_player, "animation_finished")
+		queue_free()
 
 func _on_HurtBox_area_entered(area):
 	if not hit_projectiles.has(area.id):
 		if area.id != "":
 			hit_projectiles.append(area.id)
 		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-			wolf_sprite.modulate = Color("009000")
-			$HurtBox/AnimationPlayer.play("hit")
-			$EnemyPoisonState.start(area.tool_name)
+			wolf_sprite.set_deferred("modulate", Color("009000"))
+			$HurtBox/AnimationPlayer.call_deferred("play", "hit")
+			$EnemyPoisonState.call_deferred("start", area.tool_name)
 			return
 		if area.name == "SwordSwing":
 			PlayerData.player_data["skill_experience"]["sword"] += 1
@@ -186,15 +234,15 @@ func _on_HurtBox_area_entered(area):
 		else:
 			PlayerDataHelpers.add_skill_experience(area.tool_name)
 		if area.knockback_vector != Vector2.ZERO:
-			$KnockbackParticles.emitting = true
+			$KnockbackParticles.set_deferred("emitting", true)
 			knocking_back = true
-			$Timers/KnockbackTimer.start()
+			$Timers/KnockbackTimer.call_deferred("start")
 			knockback = area.knockback_vector
 			velocity = knockback * 200
 		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-			hit(area.tool_name)
+			call_deferred("hit", area.tool_name)
 		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			$EnemyTornadoState.set_deferred("orbit_radius", rand_range(0,20))
 			tornado_node = area
 		if area.special_ability == "fire":
 			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
@@ -202,79 +250,97 @@ func _on_HurtBox_area_entered(area):
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
 		elif area.special_ability == "ice":
-			wolf_sprite.modulate = Color("00c9ff")
-			$EnemyFrozenState.start(3)
+			wolf_sprite.set_deferred("modulate", Color("00c9ff"))
+			$EnemyFrozenState.call_deferred("start",3)
 		elif area.special_ability == "poison":
-			wolf_sprite.modulate = Color("009000")
-			$EnemyPoisonState.start("poison arrow")
+			wolf_sprite.set_deferred("modulate", Color("009000"))
+			$EnemyPoisonState.call_deferred("start", "poison arrow")
 		yield(get_tree().create_timer(0.25), "timeout")
-		$KnockbackParticles.emitting = false
+		$KnockbackParticles.set_deferred("emitting", false)
 
 func start_retreat_state():
 	state = RETREAT
-	_idle_timer.stop()
-	_chase_timer.stop()
-	_retreat_timer.start()
-	stop_sound_effects()
+	_idle_timer.call_deferred("stop")
+	_chase_timer.call_deferred("stop")
+	_retreat_timer.call_deferred("start")
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/retreat.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
+	yield(sound_effects, "finished")
+	sound_effects.stop()
 	chasing = false
-
+	
 func start_chase_state():
-	start_sound_effects()
-	navigation_agent.max_speed = 300
-	_idle_timer.stop()
-	_chase_timer.start()
-	_end_chase_state_timer.start(20)
 	chasing = true
 	state = CHASE
+	navigation_agent.set_deferred("max_speed", 260)
+	call_deferred("start_sound_effects")
+	_idle_timer.call_deferred("stop")
+	_chase_timer.call_deferred("start")
+	_end_chase_state_timer.call_deferred("start", 20)
 
 func end_chase_state():
-	stop_sound_effects()
-	navigation_agent.max_speed = 100
-	_chase_timer.stop()
-	_idle_timer.start()
 	chasing = false
+	navigation_agent.set_deferred("max_speed", 100)
+	call_deferred("stop_sound_effects")
+	_chase_timer.call_deferred("stop") 
+	_idle_timer.call_deferred("start")
+	call_deferred("_update_pathfinding_idle")
 	state = WALK
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+
 
 func _on_EndChaseState_timeout():
-	if not $DetectPlayer/CollisionShape2D.disabled:
-		_end_chase_state_timer.start(5)
-		$DetectPlayer/CollisionShape2D.set_deferred("disabled", true)
-		end_chase_state()
+	if $DetectPlayer.get_overlapping_areas().size() == 0:
+		if not $DetectPlayer/CollisionShape2D.disabled:
+			_end_chase_state_timer.call_deferred("start", 5)
+			$DetectPlayer/CollisionShape2D.set_deferred("disabled", true)
+			call_deferred("end_chase_state")
+		else:
+			$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
 	else:
-		$DetectPlayer/CollisionShape2D.set_deferred("disabled", false)
+		_end_chase_state_timer.call_deferred("start", 5)
+
+
+func play_hurt_sound_effect():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/hurt"+str(rng.randi_range(1,3)) +".mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
+	yield(sound_effects, "finished")
+	playing_sound_effect = false
+	call_deferred("start_sound_effects")
 
 func play_groan_sound_effect():
-	rng.randomize()
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Deer/attack.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-	sound_effects.play()
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/bite.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
 	yield(sound_effects, "finished")
 	playing_sound_effect = false
 	start_sound_effects()
 
 func start_sound_effects():
-	if not playing_sound_effect:
+	if not playing_sound_effect and not destroyed:
 		playing_sound_effect = true
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Animals/Deer/gallop.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
+		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/bear pacing.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+		sound_effects.call_deferred("play")
 
 func stop_sound_effects():
 	playing_sound_effect = false
 	sound_effects.stop()
+	
+func _on_KnockbackTimer_timeout():
+	knocking_back = false
 
 func _on_VisibilityNotifier2D_screen_entered():
 	if chasing:
-		start_sound_effects()
-	show()
-	if Tiles.deep_ocean_tiles.get_cellv(Tiles.deep_ocean_tiles.world_to_map(position)) != -1:
-		queue_free()
+		call_deferred("start_sound_effects")
+	set_deferred("visible", true)
+
 
 func _on_VisibilityNotifier2D_screen_exited():
-	if playing_sound_effect:
-		stop_sound_effects()
-	hide()
+	if MapData.world["animal"].has(name):
+		MapData.world["animal"][name]["l"] = position/32
+		if playing_sound_effect:
+			call_deferred("stop_sound_effects")
+		set_deferred("visible", false)
 
-func _on_KnockbackTimer_timeout():
-	knocking_back = false

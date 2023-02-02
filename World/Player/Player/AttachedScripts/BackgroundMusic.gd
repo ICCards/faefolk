@@ -10,11 +10,13 @@ func _ready():
 	#Sounds.connect("song_skipped", self, "set_song")
 	_play_background_music()
 
+
 func set_song():
 	pass
 #	stop()
 #	stream = load("res://Assets/Sound/Demos/" + Sounds.demo_names[Sounds.index] + ".mp3")
 #	play()
+
 
 func _play_background_music():
 	current_song_index = rng.randi_range(0,2)

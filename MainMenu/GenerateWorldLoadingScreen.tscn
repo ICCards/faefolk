@@ -36,7 +36,7 @@ margin_bottom = 108.0
 grow_horizontal = 0
 rect_scale = Vector2( 0.8, 0.8 )
 theme = ExtResource( 2 )
-text = "BETA"
+text = "Beta  v1.3"
 
 [node name="Tips" type="VBoxContainer" parent="."]
 margin_left = 17.0
@@ -60,7 +60,7 @@ margin_right = 1262.0
 margin_bottom = 624.0
 grow_horizontal = 0
 theme = ExtResource( 2 )
-text = "- The entance to the caves is randomly placed on the map, clear the caves and defeat the bosses to learn their magic"
+text = "- The entrance to the caves is randomly placed on the map, clear the caves and defeat the bosses to learn their magic"
 autowrap = true
 
 [node name="3" type="Label" parent="Tips"]

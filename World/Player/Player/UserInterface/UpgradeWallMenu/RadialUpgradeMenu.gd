@@ -149,7 +149,7 @@ func change_tile():
 	if return_valid_building_upgrade(current_index):
 		var new_tier = buttons[current_index]
 		tile_node.tier = new_tier
-		tile_node.set_type()
+		tile_node.tile_upgraded()
 		remove_materials(current_index)
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
@@ -169,7 +169,7 @@ func _input(event):
 			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and PlayerData.viewInventoryMode:
 				if not event.is_pressed():
 					destroy()
-					yield(get_tree().create_timer(0.25), "timeout")
+					yield(get_tree().create_timer(0.1), "timeout")
 					PlayerData.viewInventoryMode = false
 
 func remove_materials(index):

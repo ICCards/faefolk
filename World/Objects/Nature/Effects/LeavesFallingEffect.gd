@@ -14,10 +14,8 @@ onready var animation_player = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
-var treeObject
+var variety
 
-func initLeavesEffect(_variety):
-	treeObject = Images.returnTreeObject(_variety)
 	
 func _ready():
 	randomizeDisplayedLeaves()
@@ -44,16 +42,16 @@ func randomizeDisplayedLeaves():
 	
 
 func setRandomTexture():
-	leaf1Sprite.texture = treeObject.leaves
-	leaf2Sprite.texture = treeObject.leaves
-	leaf3Sprite.texture = treeObject.leaves
-	leaf4Sprite.texture = treeObject.leaves
-	leaf5Sprite.texture = treeObject.leaves
-	leaf6Sprite.texture = treeObject.leaves
-	leaf7Sprite.texture = treeObject.leaves
-	leaf8Sprite.texture = treeObject.leaves
-	leaf9Sprite.texture = treeObject.leaves
-	leaf10Sprite.texture = treeObject.leaves
+	leaf1Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf2Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf3Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf4Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf5Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf6Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf7Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf8Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf9Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
+	leaf10Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png")
 	
 	rng.randomize()
 	leaf1Sprite.set_frame(rng.randi_range(0 , 11))

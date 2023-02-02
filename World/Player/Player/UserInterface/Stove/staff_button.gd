@@ -21,6 +21,10 @@ func set_locked():
 			$button.disabled = true
 			$button.modulate = Color("50ffffff") # locked
 			$button.material.set_shader_param("flash_modifier", 1)
+	else:
+		$button.disabled = true
+		$button.modulate = Color("50ffffff") # locked
+		$button.material.set_shader_param("flash_modifier", 1)
 
 
 func _on_button_pressed():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate2-seleceted.png" type="Texture" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.133333, 0.133333, 0.137255, 0.568627 )
@@ -115,6 +116,19 @@ text = "Don't save
 and exit"
 align = 1
 valign = 1
+
+[node name="Beta" type="Label" parent="."]
+margin_left = 1137.0
+margin_top = 14.0
+margin_right = 1299.0
+margin_bottom = 108.0
+grow_horizontal = 0
+rect_scale = Vector2( 0.8, 0.8 )
+theme = ExtResource( 8 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Beta  v1.3"
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="pressed" from="SaveAndCtn" to="." method="_on_SaveAndCtn_pressed"]

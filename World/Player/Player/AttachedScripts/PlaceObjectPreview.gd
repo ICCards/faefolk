@@ -29,7 +29,9 @@ enum {
 	FOUNDATION,
 	ROTATABLE,
 	CUSTOMIZABLE,
-	CUSTOMIZABLE_ROTATABLE
+	CUSTOMIZABLE_ROTATABLE,
+	GATE,
+	FORAGE
 }
 
 var _uuid = load("res://helpers/UUID.gd")
@@ -38,12 +40,14 @@ onready var uuid = _uuid.new()
 func _ready():
 	initialize()
 
+
 func destroy():
 	name = "removing"
 	hide()
 	set_physics_process(false)
 	yield(get_tree().create_timer(0.25), "timeout")
 	queue_free()
+
 
 func _physics_process(delta):
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
@@ -67,12 +71,19 @@ func _physics_process(delta):
 			place_customizable_rotatable_state()
 		CUSTOMIZABLE:
 			place_customizable_state()
+		GATE:
+			place_gate_state()
+		FORAGE:
+			place_forage_state()
+
 
 func initialize():
 	mousePos = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
 	set_global_position(mousePos)
 	if item_name == "sleeping bag":
 		state = SLEEPING_BAG
+	elif item_name == "wood gate":
+		state = GATE
 	elif item_name == "furnace" or item_name == "tool cabinet" or item_name == "stone chest" or item_name == "wood chest" or \
 	item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3" or item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or\
 	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "dresser" or item_name == "brewing table #1" or item_name == "brewing table #2" or item_name == "brewing table #3":
@@ -93,15 +104,21 @@ func initialize():
 		state = WALL
 	elif item_category == "BUILDING" and item_name == "foundation":
 		state = FOUNDATION
+	elif item_category == "Forage":
+		state = FORAGE
 	set_dimensions()
-	
 
-	
+
 func set_dimensions():
 	$ItemToPlace.hide()
 	$ScaledItemToPlace.hide()
+	$TreeSeedToPlace.hide()
+	$GateToPlace.hide()
+	$ForageItemToPlace.hide()
 	match state:
 		SLEEPING_BAG:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ColorIndicator.tile_size = Vector2(2, 1)
 			$ScaledItemToPlace.visible = true
 			$ScaledItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
@@ -109,35 +126,103 @@ func set_dimensions():
 			$ScaledItemToPlace.rect_size = Vector2(128, 64)
 			$ScaledItemToPlace.rect_position = Vector2(0,0)
 		ITEM:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 			var dimensions = Constants.dimensions_dict[item_name]
 			$ColorIndicator.tile_size = dimensions
 		SEED:
-			$ItemToPlace.show()
-			$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
-			$ColorIndicator.tile_size =  Vector2(1,1)
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
+			if Util.isFruitTree(item_name) or Util.isNonFruitTree(item_name):
+				$TreeSeedToPlace.texture = load("res://Assets/Images/tree_sets/" + item_name + "/growing/sapling.png")
+				$ColorIndicator.tile_size =  Vector2(2,2)
+				$TreeSeedToPlace.show()
+			else:
+				$ItemToPlace.show()
+				$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
+				$ColorIndicator.tile_size =  Vector2(1,1)
 		WALL:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wall.png")
 			$ColorIndicator.tile_size =  Vector2(1,1)
 		DOOR:
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 		FOUNDATION:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/foundation.png")
 			$ColorIndicator.tile_size = Vector2(1,1)
 		ROTATABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$ItemToPlace.show()
 		CUSTOMIZABLE_ROTATABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeRotation").show()
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeVariety").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").show()
+			Server.player_node.user_interface.get_node("ChangeVariety").show()
 			$ItemToPlace.show()
 		CUSTOMIZABLE:
-			Server.player_node.get_node("Camera2D/UserInterface/ChangeVariety").show()
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").show()
 			$ItemToPlace.show()
+		GATE:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
+			$GateToPlace.show()
+		FORAGE:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").hide()
+			$ForageItemToPlace.show()
+			$ForageItemToPlace.texture = load("res://Assets/Images/inventory_icons/Forage/"+item_name+".png")
+
+
+
+
+
+func place_forage_state():
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var dimensions = Vector2(1,1)
+	$ColorIndicator.tile_size = dimensions
+	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE or Tiles.validate_foundation_tiles(location, dimensions):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
+			place_object(item_name, null, location, "forage")
+
+
+func place_gate_state():
+	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var direction = directions[direction_index]
+	var dimensions = Constants.dimensions_dict[item_name]
+#	get_rotation_index()
+	#$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + direction + ".png")
+	if (direction == "up" or direction == "down"):
+		$ColorIndicator.tile_size = dimensions
+	else:
+		$ColorIndicator.tile_size = Vector2(dimensions.y, dimensions.x)
+	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (direction == "up" or direction == "down") and (not Tiles.validate_tiles(location, dimensions)):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x))):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
+			place_object(item_name, directions[direction_index], location, "placable")
 
 
 func place_customizable_state():
@@ -158,13 +243,13 @@ func place_customizable_state():
 	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif not Tiles.validate_tiles(location, dimensions):
+	elif not Tiles.validate_tiles(location, dimensions) or not Tiles.validate_foundation_tiles(location, dimensions):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object(item_name+str(variety), null, location, "placable")
 
 func place_customizable_rotatable_state():
@@ -189,16 +274,16 @@ func place_customizable_rotatable_state():
 	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions):
+	elif (direction == "up" or direction == "down") and (not Tiles.validate_tiles(location, dimensions) or not Tiles.validate_foundation_tiles(location, dimensions)):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)):
+	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)) or not Tiles.validate_foundation_tiles(location, Vector2(dimensions.y,dimensions.x))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object(item_name+str(variety), directions[direction_index], location, "placable")
 
 
@@ -227,16 +312,16 @@ func place_rotatable_state():
 	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, dimensions):
+	elif (direction == "up" or direction == "down") and (not Tiles.validate_tiles(location, dimensions) or not Tiles.validate_foundation_tiles(location, dimensions)):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)):
+	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x)) or not Tiles.validate_foundation_tiles(location, Vector2(dimensions.y,dimensions.x))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object(item_name, directions[direction_index], location, "placable")
 
 
@@ -252,7 +337,7 @@ func place_foundation_state():
 		else:
 			$ColorIndicator.indicator_color = "Green"
 			$ColorIndicator.set_indicator_color()
-			if Input.is_action_pressed("mouse_click"):
+			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 				place_object(item_name, null, location, "placable")
 
 
@@ -267,10 +352,10 @@ func place_door_state():
 	else:
 		$ColorIndicator.tile_size = Vector2(1, 2)
 		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + " side.png")
-	if (direction == "up" or direction == "down")  and not Tiles.validate_tiles(location, Vector2(2,1)):
+	if (direction == "up" or direction == "down")  and (not Tiles.validate_tiles(location, Vector2(2,1)) or not Tiles.validate_foundation_tiles(location,Vector2(2,1))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(1,2)):
+	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(1,2)) or not Tiles.validate_foundation_tiles(location,Vector2(1,2))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif Server.player_node.position.distance_to(mousePos) > 120:
@@ -279,7 +364,7 @@ func place_door_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			if direction == "up" or direction == "down":
 				place_object(item_name, null, location, "placable")
 			else:
@@ -289,15 +374,18 @@ func place_door_state():
 func place_buildings_state():
 	if Server.world.name == "World":
 		$ColorIndicator.visible = true
-		$ColorIndicator.tile_size = Vector2(1, 1)
+		$ColorIndicator.tile_size = Vector2(1,1)
 		var location = Tiles.valid_tiles.world_to_map(mousePos)
-		if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		if not Tiles.validate_tiles(location,Vector2(1,1)) or \
+		not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or \
+		not Tiles.validate_foundation_tiles(location,Vector2(1,1)) or \
+		Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 			$ColorIndicator.indicator_color = "Red"
 			$ColorIndicator.set_indicator_color()
 		else:
 			$ColorIndicator.indicator_color = "Green"
 			$ColorIndicator.set_indicator_color()
-			if Input.is_action_pressed("mouse_click"):
+			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 				place_object(item_name, null, location, "placable")
 
 func place_sleeping_bag_state():
@@ -337,35 +425,9 @@ func place_sleeping_bag_state():
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
 			place_object("sleeping bag", direction, location, "placable")
 
-
-func place_tent_state():
-	get_rotation_index()
-	var direction = directions[direction_index]
-	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/tent " + direction + ".png")
-	if direction == "up" or direction == "down":
-		$ColorIndicator.tile_size = Vector2(4, 4)
-		$ItemToPlace.rect_position = Vector2(0,-160)
-	else:
-		$ColorIndicator.tile_size = Vector2(6, 3)
-		$ItemToPlace.rect_position = Vector2(0,-64)
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
-	if Server.player_node.position.distance_to(mousePos) > 120:
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif (direction == "up" or direction == "down") and not Tiles.validate_tiles(location, Vector2(4,4)):
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and not Tiles.validate_tiles(location, Vector2(6,3)):
-		$ColorIndicator.indicator_color = "Red"
-		$ColorIndicator.set_indicator_color()
-	else:
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
-			place_object("tent", direction, location, "placable")
 	
 func get_rotation_index():
 	if direction_index == null:
@@ -385,23 +447,42 @@ func place_item_state():
 	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	else:
-		$ColorIndicator.indicator_color = "Green"
-		$ColorIndicator.set_indicator_color()
-		if Input.is_action_pressed("mouse_click"):
-			place_object(item_name, null, location, "placable")
-
-func place_seed_state():
-	if Server.world.name == "World":
-		var location = Tiles.valid_tiles.world_to_map(mousePos)
-		if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+	elif (item_name != "campfire" and item_name != "torch" and item_name != "well" and item_name != "wood fence" and item_name != "wood gate"): 
+		if not Tiles.validate_foundation_tiles(location, dimensions):
 			$ColorIndicator.indicator_color = "Red"
 			$ColorIndicator.set_indicator_color()
 		else:
 			$ColorIndicator.indicator_color = "Green"
 			$ColorIndicator.set_indicator_color()
-			if Input.is_action_pressed("mouse_click"):
-				place_object(item_name, null, location, "seed")	
+			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
+				place_object(item_name, null, location, "placable")
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
+			place_object(item_name, null, location, "placable")
+
+func place_seed_state():
+	if Server.world.name == "World":
+		var location = Tiles.valid_tiles.world_to_map(mousePos)
+		if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
+			if not Tiles.validate_forest_tiles(location) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+				$ColorIndicator.indicator_color = "Red"
+				$ColorIndicator.set_indicator_color()
+			else:
+				$ColorIndicator.indicator_color = "Green"
+				$ColorIndicator.set_indicator_color()
+				if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
+					place_object(item_name, null, location, "seed")	
+		else: # crops
+			if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+				$ColorIndicator.indicator_color = "Red"
+				$ColorIndicator.set_indicator_color()
+			else:
+				$ColorIndicator.indicator_color = "Green"
+				$ColorIndicator.set_indicator_color()
+				if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
+					place_object(item_name, null, location, "seed")	
 	else:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
@@ -418,16 +499,16 @@ func place_object(item_name, direction, location, type):
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location)})
+					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location),"h":Stats.MAX_TWIG_BUILDING})
 					PlayerData.remove_material("wood", 5)
-					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
+					PlaceObject.place_building_object_in_world(id,item_name,"twig",location,Stats.MAX_TWIG_BUILDING)
 				elif PlayerData.returnSufficentCraftingMaterial("wood", 2) and item_name == "foundation":
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location)})
+					MapData.add_placable(id, {"n":item_name,"v":"twig","l":str(location),"h":Stats.MAX_TWIG_BUILDING})
 					PlayerData.remove_material("wood", 2)
-					PlaceObject.place_building_object_in_world(id,item_name,"twig",location)
+					PlaceObject.place_building_object_in_world(id,item_name,"twig",location,Stats.MAX_TWIG_BUILDING)
 				else:
 					$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
@@ -442,9 +523,21 @@ func place_object(item_name, direction, location, type):
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
-			MapData.add_crop(id,{"n":item_name,"l":str(location),"d":days_to_grow})
-			PlaceObject.place_seed_in_world(id, item_name, location, days_to_grow)
+			if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
+				PlaceObject.place_tree_in_world(id,item_name,location+Vector2(1,0),"forest",Stats.TREE_HEALTH,"sapling")
+				MapData.add_tree(id,{"l":str(location),"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
+				MapData.add_object_to_chunk("tree",location,id)
+			else:
+				var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
+				MapData.add_crop(id,{"n":item_name,"l":str(location),"dh":days_to_grow,"dww":0,"rp":false})
+				PlaceObject.place_seed_in_world(id, item_name, location, days_to_grow, 0, false)
+		elif type == "forage":
+			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
+			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+			$SoundEffects.play()
+			MapData.add_forage(id,{"n":item_name,"l":str(location),"f":false})
+			MapData.add_object_to_chunk("forage",location,id)
+			PlaceObject.place_forage_in_world(id,item_name,location,false)
 	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		Server.player_node.set_held_object()
 		Server.player_node.actions.destroy_placable_object()

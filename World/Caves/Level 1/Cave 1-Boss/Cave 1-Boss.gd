@@ -14,8 +14,8 @@ var map_size = 50
 func _ready():
 	Server.world = self
 	BuildCaveLevel.build()
-	Server.isLoaded = true
 	BuildCaveLevel.update_navigation()
+	spawn_boss()
 
 func advance_up_cave_level(): 
 	if not is_changing_scene:

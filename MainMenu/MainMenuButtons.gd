@@ -1,7 +1,5 @@
 extends Control
 
-var game_state: GameState
-
 var changing_scene_active = false
 var hovered_button = ""
 #var connect_callback = JavaScript.create_callback(self, "_connect_plug")
@@ -103,19 +101,13 @@ func _on_PlayBtn_pressed():
 	if not changing_scene_active:
 		changing_scene_active = true
 		get_parent().get_node("TitleMusic").stop()
-		$SoundEffects.stream = Sounds.button_select
+		$SoundEffects.stream = load("res://Assets/Sound/Sound effects/UI/Buttons/select.mp3")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
-		PlayerData.spawn_at_respawn_location = true
-		if GameState.save_exists():
-			game_state = GameState.new()
-			game_state.load_state()
-			PlayerData.player_data = game_state.player_state
-			MapData.world = game_state.world_state
-			MapData.caves = game_state.cave_state
-			MapData.add_world_data_to_chunks()
-			yield(get_tree().create_timer(2.0), "timeout")
-			SceneChanger.goto_scene(PlayerData.player_data["respawn_scene"])
+		PlayerData.spawn_at_last_saved_location = true
+		get_node("../PLAYER").destroy()
+		if MapData.world["is_built"]:
+			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
 		else:
 			SceneChanger.goto_scene("res://World/World/World.tscn")
 
@@ -143,10 +135,11 @@ func _on_ShopBtn_mouse_exited():
 
 
 func _on_ShopBtn_pressed():
-	if not changing_scene_active:
-		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		$SoundEffects.play()
+	pass
+#	if not changing_scene_active:
+#		$SoundEffects.stream = Sounds.button_select
+#		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+#		$SoundEffects.play()
 
 
 func _on_QuitBtn_mouse_entered():
@@ -172,8 +165,9 @@ func _on_QuitBtn_mouse_exited():
 
 
 func _on_QuitBtn_pressed():
-	if not changing_scene_active:
-		$SoundEffects.stream = Sounds.button_select
-		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		$SoundEffects.play()
+	pass
+#	if not changing_scene_active:
+#		$SoundEffects.stream = Sounds.button_select
+#		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+#		$SoundEffects.play()
 		#get_tree().quit()

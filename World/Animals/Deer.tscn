@@ -131,10 +131,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.0051069, 0.25, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.0051069, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ true, true ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -196,10 +196,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, true ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("KnockbackParticles:visible")
@@ -450,10 +450,16 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 8
+frame = 9
 playing = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+position = Vector2( 0, -25 )
+enabled = true
+cast_to = Vector2( 150, 0 )
+collision_mask = 32
 
 [node name="Timers" type="Node" parent="."]
 
@@ -461,7 +467,7 @@ playing = true
 autostart = true
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="RetreatTimer" type="Timer" parent="Timers"]
 wait_time = 0.5
@@ -475,7 +481,8 @@ wait_time = 0.35
 one_shot = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-scale = Vector2( 30.15, 25.05 )
+position = Vector2( -1.5, -19.5 )
+scale = Vector2( 7.55, 6.75 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]

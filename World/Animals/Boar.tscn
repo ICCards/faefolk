@@ -68,7 +68,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=18]
-radius = 207.002
+radius = 284.016
 
 [sub_resource type="CircleShape2D" id=21]
 radius = 32.0
@@ -146,10 +146,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ true, true ]
 }
 
 [sub_resource type="Animation" id=25]
@@ -199,10 +199,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, true ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("CollisionShape2D:disabled")
@@ -462,9 +462,8 @@ radius = 1.0
 max_speed = 150.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
-position = Vector2( 7.5, -6.5 )
-scale = Vector2( 19.25, 15.05 )
+position = Vector2( 1.52588e-05, -2 )
+scale = Vector2( 10.5, 9.65 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 24 )
@@ -479,15 +478,21 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 40 )
-frame = 3
+frame = 6
 playing = true
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+position = Vector2( 0, -25 )
+enabled = true
+cast_to = Vector2( 150, 0 )
+collision_mask = 32
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="IdleTimer" type="Timer" parent="Timers"]
 autostart = true

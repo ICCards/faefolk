@@ -1,4 +1,135 @@
 {
+    "bunny": {
+        "ItemCategory": "Mob",
+        "Description": "A friendly animal with tasty meat.",
+      },
+    "duck": {
+        "ItemCategory": "Mob",
+        "Description": "A friendly animal that will randomly drop raw eggs.",
+      },
+    "deer": {
+        "ItemCategory": "Mob",
+        "Description": "A friendly animal until threatened.",
+      },
+    "bear": {
+        "ItemCategory": "Mob",
+        "Description": "A large and dangerous adversary.",
+      },
+    "boar": {
+        "ItemCategory": "Mob",
+        "Description": "A dangerous animal with sharp tusks.",
+      },
+    "wolf": {
+        "ItemCategory": "Mob",
+        "Description": "A quick enemy with a dangerous bite and lethal claws.",
+      },
+    "slime": {
+        "ItemCategory": "Mob",
+        "Description": "A poisonous and pesky enemy found in the caves.",
+      },
+    "spider": {
+        "ItemCategory": "Mob",
+        "Description": "A quick and lethal ground enemy.",
+      },
+    "skeleton": {
+        "ItemCategory": "Mob",
+        "Description": "A ranged enemy with an accurate bow shot.",
+      },
+    "bat": {
+        "ItemCategory": "Mob",
+        "Description": "A flying enemy which randomly spawns in the caves.",
+      },
+    "apple": {
+        "ItemCategory": "Crop",
+        "StackSize": 999,
+        "Description": "A crisp, juicy snack harvested from an apple tree.",
+        "Ingredients": null,
+        "EnergyHealth": [8,4]
+      },
+    "pear": {
+        "ItemCategory": "Crop",
+        "StackSize": 999,
+        "Description": "A yellow fruit with an odd shape.",
+        "Ingredients": null,
+        "EnergyHealth": [6,6]
+      },
+    "plum": {
+        "ItemCategory": "Crop",
+        "StackSize": 999,
+        "Description": "A purple fruit with a sweet and juicy consistency.",
+        "Ingredients": null,
+        "EnergyHealth": [4,8]
+      },
+    "cherry": {
+        "ItemCategory": "Crop",
+        "StackSize": 999,
+        "Description": "A sweet and juicy fruit popular in desserts.",
+        "Ingredients": null,
+        "EnergyHealth": [10,2]
+      },
+    "apple seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows an apple tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "pear seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a pear tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "plum seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a plum tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "cherry seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a cherry tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "oak seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows an oak tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "spruce seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a spruce tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "birch seeds": {
+        "ItemCategory": "Seed",
+        "StackSize": 999,
+        "Description": "Grows a birch tree.",
+        "Ingredients": null,
+        "EnergyHealth": null
+      },
+    "pine seeds": {
+          "ItemCategory": "Seed",
+          "StackSize": 999,
+          "Description": "Grows a pine tree.",
+          "Ingredients": null,
+          "EnergyHealth": null
+        },
+      "evergreen seeds": {
+          "ItemCategory": "Seed",
+          "StackSize": 999,
+          "Description": "Grows an evergreen tree.",
+          "Ingredients": null,
+          "EnergyHealth": null
+        },
     "cloth": {
         "ItemCategory": "Resource",
         "StackSize": 999,
@@ -58,7 +189,7 @@
     "regeneration potion I": {
       "ItemCategory": "Potion",
       "StackSize": 999,
-      "Description": "Restores 10% of depleted health over time.",
+      "Description": "Restores 12% of depleted health over time.",
       "Ingredients": null,
       "EnergyHealth": null
     },
@@ -244,31 +375,38 @@
       "Ingredients": null,
       "EnergyHealth": null
       },
-    "blue flower": {
+    "lily of the nile": {
       "ItemCategory": "Forage",
       "StackSize": 999,
       "Description": "A wild, blue flower.",
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "green flower": {
+    "poppy flower": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A wild, green flower.",
+      "Description": "A wild, red flower with medicinal properties.",
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "purple flower": {
+    "tulip": {
       "ItemCategory": "Forage",
       "StackSize": 999,
       "Description": "A wild, purple flower.",
       "Ingredients": null,
       "EnergyHealth": null
     },
-    "red flower": {
+    "dandelion": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A wild, red flower.",
+      "Description": "A wild, yellow flower.",
+      "Ingredients": null,
+      "EnergyHealth": null
+    },
+    "sunflower": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A wild, flower with a bright yellow face.",
       "Ingredients": null,
       "EnergyHealth": null
     },
@@ -564,7 +702,7 @@
       "ItemCategory": "Tool",
       "StackSize": 1,
       "Description": "Used to cut grass and flowers.",
-      "Ingredients": [["wood", 10],["iron ingot", 10]],
+      "Ingredients": [["wood", 10],["stone", 10]],
       "EnergyHealth": null
   },
   "wood fishing rod":{
@@ -675,10 +813,31 @@
       "Ingredients": null,
       "EnergyHealth": null
   },
-  "mushroom": {
+  "common mushroom": {
       "ItemCategory": "Forage",
       "StackSize": 999,
-      "Description": "A fungus found in the caves.",
+      "Description": "An edible fungus used in cooking.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "healing mushroom": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A mushroom with healing properties.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "purple mushroom": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A mysterious fungus found in the caves.",
+      "Ingredients": null,
+      "EnergyHealth": null
+  },
+  "chanterelle": {
+      "ItemCategory": "Forage",
+      "StackSize": 999,
+      "Description": "A rare and edible mushroom.",
       "Ingredients": null,
       "EnergyHealth": null
   },
@@ -962,7 +1121,7 @@
   "corn seeds": {
       "ItemCategory": "Seed",
       "StackSize": 999,
-      "Description": "Plant these in the Summer or Fall. Takes 14 days to mature and continues to grow after harvest.",
+      "Description": "Plant these in the Spring, Summer or Fall. Takes 14 days to mature and continues to grow after harvest.",
       "Ingredients": null,
       "EnergyHealth": null
   },
@@ -1020,35 +1179,35 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 4]],
+      "Ingredients": [["cloth", 24]],
       "EnergyHealth": null
   },
   "medium rug" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 4]],
+      "Ingredients": [["cloth", 12]],
       "EnergyHealth": null
   },
   "small rug" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 4]],
+      "Ingredients": [["cloth", 4]],
       "EnergyHealth": null
   },
   "couch" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 10]],
+      "Ingredients": [["wood", 10], ["cloth", 10]],
       "EnergyHealth": null
   },
   "armchair" : {
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
-      "Ingredients": [["wood", 5]],
+      "Ingredients": [["wood", 5], ["cloth", 5]],
       "EnergyHealth": null
   },
   "table" : {
@@ -1069,7 +1228,7 @@
       "ItemCategory": "Placable object",
       "StackSize": 999,
       "Description": "Can be placed and used to set respawn point.",
-      "Ingredients": [["wood", 8]],
+      "Ingredients": [["wood", 8], ["cloth", 8]],
       "EnergyHealth": null
   },
   "dresser" : {
@@ -1148,6 +1307,13 @@
       "StackSize": 999,
       "Description": "Wood gate for decoration.",
       "Ingredients": [["wood", 8]],
+      "EnergyHealth": null
+  },
+  "flower trough": {
+      "ItemCategory": "Placable object",
+      "StackSize": 999,
+      "Description": "A decorative wooden bed for wild flowers.",
+      "Ingredients": [["wood", 12]],
       "EnergyHealth": null
   },
   "wood barrel": {
@@ -1463,7 +1629,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "A warm and creamy snack.",
-        "Ingredients": [["mushroom", 5]],
+        "Ingredients": [["common mushroom", 5]],
         "EnergyHealth": [18,10]
     },
     "sashimi":{
@@ -1589,7 +1755,7 @@
         "ItemCategory": "Food",
         "StackSize": 999,
         "Description": "Fluffy eggs served with a pinch of salt.",
-        "Ingredients": [["raw egg", 5]],
+        "Ingredients": [["raw egg", 3]],
         "EnergyHealth": [16,12]
     },
     "baked dorado":{

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/slot.mp3-d3dd894188bf529714e037000067ff6d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/UI/slot.mp3"
+dest_files=[ "res://.import/slot.mp3-d3dd894188bf529714e037000067ff6d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

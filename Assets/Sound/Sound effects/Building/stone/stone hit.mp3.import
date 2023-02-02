@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stone hit.mp3-97b4466f6136ae52f09c8f3bc91fb870.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/Building/stone/stone hit.mp3"
+dest_files=[ "res://.import/stone hit.mp3-97b4466f6136ae52f09c8f3bc91fb870.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

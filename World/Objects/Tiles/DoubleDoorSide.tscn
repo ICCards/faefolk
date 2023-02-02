@@ -1,7 +1,6 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Tilesets/doors/animated/side/armored.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://Assets/Images/Misc/selected tile 2x1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/3.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Tilesets/doors/wood mask/1.png" type="Texture" id=4]
 [ext_resource path="res://World/Objects/Tiles/DoubleDoorSide.gd" type="Script" id=5]
@@ -84,14 +83,11 @@ extents = Vector2( 32, 7.5 )
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 30.5, 15 )
 
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 30, 15.5 )
-
 [sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 20.5, 10 )
 
 [sub_resource type="RectangleShape2D" id=23]
-extents = Vector2( 29, 15 )
+extents = Vector2( 30, 15 )
 
 [sub_resource type="Animation" id=15]
 length = 0.001
@@ -171,7 +167,12 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="DoubleDoorSide" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 30.5, 17.5 )
+
+[node name="DoubleDoorSide" type="Area2D"]
+collision_layer = 0
+collision_mask = 131072
 script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -179,13 +180,6 @@ position = Vector2( -14, -50 )
 frames = ExtResource( 1 )
 animation = "open"
 offset = Vector2( 32, -32 )
-
-[node name="SelectedBorder" type="Sprite" parent="."]
-visible = false
-position = Vector2( 5, -31 )
-rotation = 1.5708
-z_index = 1
-texture = ExtResource( 2 )
 
 [node name="HealthBar" type="Node2D" parent="."]
 visible = false
@@ -222,17 +216,16 @@ vframes = 3
 anims/RESET = SubResource( 20 )
 anims/hit = SubResource( 21 )
 
-[node name="MovementCollision" type="StaticBody2D" parent="."]
+[node name="DoorMovementCollision" type="StaticBody2D" parent="."]
 position = Vector2( 3, -64 )
 rotation = 1.5708
-collision_layer = 3
+collision_layer = 35
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorMovementCollision"]
 position = Vector2( 32, -7.5 )
 shape = SubResource( 12 )
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
 position = Vector2( 8, -46 )
 rotation = 1.5708
 collision_layer = 24
@@ -241,19 +234,8 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 light_mask = 0
-position = Vector2( 15.5, 0 )
+position = Vector2( 14, -3.00005 )
 shape = SubResource( 13 )
-
-[node name="EnterDoorway" type="Area2D" parent="."]
-visible = false
-position = Vector2( 7, -62 )
-rotation = 1.5708
-collision_layer = 32
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoorway"]
-position = Vector2( 32, -1.5 )
-shape = SubResource( 14 )
 
 [node name="DetectObjectOverPathBox" type="Area2D" parent="."]
 visible = false
@@ -274,7 +256,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HammerRepairBox"]
 light_mask = 0
-position = Vector2( -30, -8 )
+position = Vector2( -32, -10.9999 )
 shape = SubResource( 23 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -288,8 +270,10 @@ anims/RESET = SubResource( 18 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 8.5, -30.5 )
+rotation = 1.5708
+shape = SubResource( 14 )
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="area_entered" from="EnterDoorway" to="." method="_on_EnterDoorway_area_entered"]
-[connection signal="area_exited" from="EnterDoorway" to="." method="_on_EnterDoorway_area_exited"]
-[connection signal="input_event" from="EnterDoorway" to="." method="_on_EnterDoorway_input_event"]
 [connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

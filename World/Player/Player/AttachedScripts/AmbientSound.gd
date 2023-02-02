@@ -18,7 +18,10 @@ func _ready():
 
 func set_new_ambient_volume():
 	if has_node("/root/World"):
-		volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
+		if stream == load("res://Assets/Sound/Sound effects/Ambience/winter_day.mp3"):
+			volume_db = Sounds.return_adjusted_sound_db("ambient", 0)
+		else:
+			volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
 	else:
 		volume_db = Sounds.return_adjusted_sound_db("ambient", -20)
 
@@ -37,8 +40,10 @@ func inside_storm(storm):
 	if not is_inside_storm:
 		if storm.is_snow_storm:
 			stream = load("res://Assets/Sound/Sound effects/Ambience/winter_day.mp3")
+			volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 		else:
 			stream = load("res://Assets/Sound/Sound effects/Ambience/rain.mp3")
+			volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
 		is_inside_storm = true
 		play()
 

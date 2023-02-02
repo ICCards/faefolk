@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hurt3.mp3-bcfca069b7452cdd11b2ff4ee0059ef9.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound effects/animals/bunny/hurt3.mp3"
+dest_files=[ "res://.import/hurt3.mp3-bcfca069b7452cdd11b2ff4ee0059ef9.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

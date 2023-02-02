@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=5]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=8]
 [ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=9]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Images/User interface/inventory/save/save-button-selected.png" type="Texture" id=11]
@@ -31,11 +31,6 @@ scale = Vector2( 3, 3 )
 
 [node name="ItemDescription" parent="." instance=ExtResource( 36 )]
 visible = false
-
-[node name="Trash" parent="." instance=ExtResource( 8 )]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_left = 0.5
@@ -117,10 +112,6 @@ texture_pressed = ExtResource( 11 )
 margin_right = 175.0
 text = "Save"
 
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-
-[node name="Tween" type="Tween" parent="."]
-
 [node name="Pages" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -129,15 +120,44 @@ margin_bottom = 40.0
 
 [node name="skills" parent="Pages" instance=ExtResource( 39 )]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="crafting" parent="Pages" instance=ExtResource( 6 )]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="collections" parent="Pages" instance=ExtResource( 13 )]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="options" parent="Pages" instance=ExtResource( 7 )]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="Beta" type="Label" parent="."]
+margin_left = 1137.0
+margin_top = 14.0
+margin_right = 1299.0
+margin_bottom = 108.0
+grow_horizontal = 0
+rect_scale = Vector2( 0.8, 0.8 )
+theme = ExtResource( 8 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Beta  v1.3"
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 

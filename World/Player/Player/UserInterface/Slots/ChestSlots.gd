@@ -50,6 +50,7 @@ func slot_gui_input(event: InputEvent, slot):
 
 func right_click_slot(slot):
 	if slot.item.item_quantity > 1:
+		Sounds.play_pick_up_item_sound()
 		var new_qt = int(slot.item.item_quantity / 2)
 		PlayerData.add_item_quantity(slot, -int(slot.item.item_quantity / 2), get_parent().id)
 		slot.item.decrease_item_quantity(int(slot.item.item_quantity / 2))
@@ -63,11 +64,13 @@ func return_holding_item(item_name, qt):
 	return inventoryItem
 
 func left_click_empty_slot(slot):
+	Sounds.play_put_down_item_sound()
 	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, get_parent().id)
 	slot.putIntoSlot(find_parent("UserInterface").holding_item)
 	find_parent("UserInterface").holding_item = null
 
 func left_click_different_item(event: InputEvent, slot):
+	Sounds.play_pick_up_item_sound()
 	PlayerData.remove_item(slot, get_parent().id)
 	PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot, get_parent().id)
 	var temp_item = slot.item
@@ -77,6 +80,7 @@ func left_click_different_item(event: InputEvent, slot):
 	find_parent("UserInterface").holding_item = temp_item
 
 func left_click_same_item(slot):
+	Sounds.play_pick_up_item_sound()
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 	var able_to_add = stack_size - slot.item.item_quantity
 	if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
@@ -90,23 +94,66 @@ func left_click_same_item(slot):
 		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 
 func left_click_not_holding(slot):
+	Sounds.play_pick_up_item_sound()
 	PlayerData.remove_item(slot, get_parent().id)
 	find_parent("UserInterface").holding_item = slot.item
 	slot.pickFromSlot()
 	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+	
+	
+func auto_add_to_hotbar_slot(slot_clicked,i):
+	Sounds.play_auto_add_chest_sound()
+	var stack_size = int(JsonData.item_data[slot_clicked.item.item_name]["StackSize"])
+	var able_to_add = stack_size - PlayerData.player_data["hotbar"][str(i)][1]
+	if able_to_add >= slot_clicked.item.item_quantity:
+		PlayerData.remove_item(slot_clicked, get_parent().id)
+		PlayerData.add_item_quantity(get_node("../HotbarInventorySlots").get_children()[i], slot_clicked.item.item_quantity)
+		slot_clicked.removeFromSlot()
+		get_parent().initialize()
+	else:
+		PlayerData.add_item_quantity(get_node("../HotbarInventorySlots").get_children()[i], able_to_add)
+		PlayerData.decrease_item_quantity(slot_clicked,able_to_add,get_parent().id)
+		slot_clicked.item.decrease_item_quantity(able_to_add)
+		get_parent().initialize()
+
+func auto_add_to_inventory_slot(slot_clicked,i):
+	Sounds.play_auto_add_chest_sound()
+	var stack_size = int(JsonData.item_data[slot_clicked.item.item_name]["StackSize"])
+	var able_to_add = stack_size - PlayerData.player_data["inventory"][str(i)][1]
+	if able_to_add >= slot_clicked.item.item_quantity:
+		PlayerData.remove_item(slot_clicked, get_parent().id)
+		PlayerData.add_item_quantity(get_node("../InventorySlots").get_children()[i], slot_clicked.item.item_quantity)
+		slot_clicked.removeFromSlot()
+		get_parent().initialize()
+	else:
+		PlayerData.add_item_quantity(get_node("../InventorySlots").get_children()[i], able_to_add)
+		PlayerData.decrease_item_quantity(slot_clicked,able_to_add,get_parent().id)
+		slot_clicked.item.decrease_item_quantity(able_to_add)
+		get_parent().initialize()
+
 
 func left_click_not_holding_chest(slot):
 	for i in range(get_node("../HotbarInventorySlots").get_children().size()):
-		if not PlayerData.player_data["hotbar"].has(str(i)):
-			get_parent().hovered_item = null
+		if PlayerData.player_data["hotbar"].has(str(i)):
+			if PlayerData.player_data["hotbar"][str(i)][0] == slot.item.item_name and not PlayerData.player_data["hotbar"][str(i)][1] == int(JsonData.item_data[slot.item.item_name]["StackSize"]):
+				auto_add_to_hotbar_slot(slot,i)
+				return
+	for i in range(get_node("../InventorySlots").get_children().size()):
+		if PlayerData.player_data["inventory"].has(str(i)):
+			if PlayerData.player_data["inventory"][str(i)][0] == slot.item.item_name and not PlayerData.player_data["inventory"][str(i)][1] == int(JsonData.item_data[slot.item.item_name]["StackSize"]):
+				auto_add_to_inventory_slot(slot,i)
+				return
+	for i in range(get_node("../HotbarInventorySlots").get_children().size()):
+		if not PlayerData.player_data["hotbar"].has(str(i)): # add to empty hotbar slot
+			Sounds.play_pick_up_item_sound()
 			PlayerData.remove_item(slot, get_parent().id)
 			PlayerData.add_item_to_empty_slot(slot.item, get_node("../HotbarInventorySlots").get_children()[i])
 			slot.removeFromSlot()
 			get_parent().initialize()
 			return
 	for i in range(get_node("../InventorySlots").get_children().size()):
-		if not PlayerData.player_data["inventory"].has(str(i)):
-			get_parent().hovered_item = null
+		if not PlayerData.player_data["inventory"].has(str(i)): # add to empty inventory slot
+			Sounds.play_pick_up_item_sound()
 			PlayerData.remove_item(slot, get_parent().id)
 			PlayerData.add_item_to_empty_slot(slot.item, get_node("../InventorySlots").get_children()[i])
 			slot.removeFromSlot()

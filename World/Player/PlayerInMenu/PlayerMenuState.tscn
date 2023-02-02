@@ -105,6 +105,7 @@ position = Vector2( -0.142857, 2.14286 )
 shape = SubResource( 1 )
 
 [node name="CompositeSprites" type="Node2D" parent="."]
+modulate = Color( 0.85, 0.85, 0.85, 1 )
 
 [node name="Body" type="Sprite" parent="CompositeSprites"]
 texture = ExtResource( 3 )
@@ -114,23 +115,18 @@ hframes = 4
 hframes = 4
 
 [node name="Pants" type="Sprite" parent="CompositeSprites"]
-visible = false
 hframes = 4
 
 [node name="Shirts" type="Sprite" parent="CompositeSprites"]
-visible = false
 hframes = 4
 
 [node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
-visible = false
 hframes = 4
 
 [node name="Accessory" type="Sprite" parent="CompositeSprites"]
-visible = false
 hframes = 4
 
 [node name="Shoes" type="Sprite" parent="CompositeSprites"]
-visible = false
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]

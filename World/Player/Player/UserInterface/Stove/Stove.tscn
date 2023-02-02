@@ -80,6 +80,7 @@ visible = false
 position = Vector2( 461, 465 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 5 )
+frame = 5
 playing = true
 
 [node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
@@ -128,7 +129,6 @@ margin_right = 802.0
 margin_bottom = 711.0
 
 [node name="LockSlot" parent="StoveSlots/Ingredient2" index="0"]
-visible = true
 margin_left = -3.0
 margin_top = -3.0
 margin_right = 51.0
@@ -142,7 +142,6 @@ margin_right = 865.0
 margin_bottom = 711.0
 
 [node name="LockSlot" parent="StoveSlots/Ingredient3" index="0"]
-visible = true
 margin_left = -2.0
 margin_top = -3.0
 margin_right = 51.0

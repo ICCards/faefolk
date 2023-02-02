@@ -54,6 +54,7 @@ show_behind_parent = true
 position = Vector2( 0, -42 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 30 )
+frame = 6
 playing = true
 script = ExtResource( 2 )
 

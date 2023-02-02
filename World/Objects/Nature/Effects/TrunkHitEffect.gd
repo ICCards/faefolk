@@ -13,9 +13,10 @@ var rng = RandomNumberGenerator.new()
 
 var treeObject
 var effectType
+var variety
 
-func init(variety, effectTypeInput):
-	treeObject = Images.returnTreeObject(variety)
+func init(_variety, effectTypeInput):
+	variety = _variety
 	effectType = effectTypeInput
 
 
@@ -45,10 +46,10 @@ func randomizeDisplayedSprites():
 	treeChip6Sprite.visible = false
 	
 func setTexture(tree):
-	treeChip1Sprite.texture = tree.chip
-	treeChip2Sprite.texture = tree.chip
-	treeChip3Sprite.texture = tree.chip
-	treeChip4Sprite.texture = tree.chip
-	treeChip5Sprite.texture = tree.chip
-	treeChip6Sprite.texture = tree.chip
+	treeChip1Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip2Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip3Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip4Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip5Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
+	treeChip6Sprite.texture = load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png")
 	

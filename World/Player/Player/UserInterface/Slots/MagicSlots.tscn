@@ -1,0 +1,137 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://World/Player/Player/UserInterface/Slots/MagicSlots.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Images/Spell icons/earth/1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Spell icons/earth/4.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Spell icons/earth/2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Spell icons/earth/3.png" type="Texture" id=6]
+
+[node name="MagicSlots" type="Control"]
+script = ExtResource( 1 )
+
+[node name="SelectedBg" type="ColorRect" parent="."]
+margin_right = 54.0
+margin_bottom = 54.0
+
+[node name="Bg" type="HBoxContainer" parent="."]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 79.0
+margin_bottom = 19.0001
+rect_scale = Vector2( 3, 3 )
+custom_constants/separation = 4
+
+[node name="btn1" type="TextureButton" parent="Bg"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 3 )
+
+[node name="btn2" type="TextureButton" parent="Bg"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 5 )
+
+[node name="btn3" type="TextureButton" parent="Bg"]
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 6 )
+
+[node name="btn4" type="TextureButton" parent="Bg"]
+margin_left = 60.0
+margin_right = 76.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 4 )
+
+[node name="Labels" type="HBoxContainer" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 7.0
+margin_top = 16.0
+margin_right = 683.0
+margin_bottom = 77.0
+rect_scale = Vector2( 0.12, 0.12 )
+mouse_filter = 2
+custom_constants/separation = 160
+
+[node name="1" type="Label" parent="Labels"]
+margin_right = 44.0
+margin_bottom = 61.0
+theme = ExtResource( 2 )
+text = "F1"
+
+[node name="2" type="Label" parent="Labels"]
+margin_left = 204.0
+margin_right = 256.0
+margin_bottom = 61.0
+theme = ExtResource( 2 )
+text = "F2"
+
+[node name="3" type="Label" parent="Labels"]
+margin_left = 416.0
+margin_right = 468.0
+margin_bottom = 61.0
+theme = ExtResource( 2 )
+text = "F3"
+
+[node name="4" type="Label" parent="Labels"]
+margin_left = 628.0
+margin_right = 676.0
+margin_bottom = 61.0
+theme = ExtResource( 2 )
+text = "F4"
+
+[node name="Cooldown1" type="ColorRect" parent="."]
+margin_left = 51.0
+margin_top = 51.0
+margin_right = 99.0
+margin_bottom = 51.0
+grow_vertical = 0
+rect_min_size = Vector2( 16, 0 )
+rect_rotation = 180.0
+mouse_filter = 2
+color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
+
+[node name="Cooldown2" type="ColorRect" parent="."]
+margin_left = 111.0
+margin_top = 51.0
+margin_right = 159.0
+margin_bottom = 51.0
+grow_vertical = 0
+rect_min_size = Vector2( 16, 0 )
+rect_rotation = 180.0
+mouse_filter = 2
+color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
+
+[node name="Cooldown3" type="ColorRect" parent="."]
+margin_left = 171.0
+margin_top = 51.0
+margin_right = 219.0
+margin_bottom = 51.0
+grow_vertical = 0
+rect_min_size = Vector2( 16, 0 )
+rect_rotation = 180.0
+mouse_filter = 2
+color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
+
+[node name="Cooldown4" type="ColorRect" parent="."]
+margin_left = 231.0
+margin_top = 51.0
+margin_right = 279.0
+margin_bottom = 51.0
+grow_vertical = 0
+rect_min_size = Vector2( 16, 0 )
+rect_rotation = 180.0
+mouse_filter = 2
+color = Color( 0.447059, 0.447059, 0.447059, 0.823529 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="Bg/btn1" to="." method="_on_btn1_pressed"]
+[connection signal="pressed" from="Bg/btn2" to="." method="_on_btn2_pressed"]
+[connection signal="pressed" from="Bg/btn3" to="." method="_on_btn3_pressed"]
+[connection signal="pressed" from="Bg/btn4" to="." method="_on_btn4_pressed"]

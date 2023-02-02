@@ -16,11 +16,11 @@ func _ready():
 	set_date_time()
 	
 func _on_ManaTimer_timeout():
-	PlayerData.player_data["mana"] += 1
+	PlayerData.player_data["mana"] += 10
 	if PlayerData.player_data["mana"] > 100:
 		PlayerData.player_data["mana"] = 100
+	PlayerData.emit_signal("mana_changed")
 	$EnergyBars/ManaPgBar.value = PlayerData.player_data["mana"]
-		
 
 func set_mana_bar():
 	$EnergyBars/ManaPgBar.max_value = 100
@@ -39,20 +39,21 @@ func set_date_time():
 	$DateTime/Time.text = return_adjusted_time_string(PlayerData.player_data["time_hours"],PlayerData.player_data["time_minutes"])
 
 func _on_AdvanceTime_timeout():
-	PlayerData.player_data["time_minutes"] += game_time_speed_per_second
-	if PlayerData.player_data["time_minutes"] == 60:
-		PlayerData.player_data["time_minutes"] = 0
-		PlayerData.player_data["time_hours"] += 1
-		if PlayerData.player_data["time_hours"] == 6:
-			PlayerData.emit_signal("set_day")
-		elif PlayerData.player_data["time_hours"] == 22:
-			PlayerData.emit_signal("set_night")
-		elif PlayerData.player_data["time_hours"] == 24:
-			advance_day()
-		elif PlayerData.player_data["time_hours"] == 25:
-			 PlayerData.player_data["time_hours"] = 1
-	set_date_time()
-	advance_clock_icon()
+	if Server.isLoaded:
+		PlayerData.player_data["time_minutes"] += game_time_speed_per_second
+		if PlayerData.player_data["time_minutes"] == 60:
+			PlayerData.player_data["time_minutes"] = 0
+			PlayerData.player_data["time_hours"] += 1
+			if PlayerData.player_data["time_hours"] == 6:
+				PlayerData.emit_signal("set_day")
+			elif PlayerData.player_data["time_hours"] == 22:
+				PlayerData.emit_signal("set_night")
+			elif PlayerData.player_data["time_hours"] == 24:
+				advance_day()
+			elif PlayerData.player_data["time_hours"] == 25:
+				 PlayerData.player_data["time_hours"] = 1
+		set_date_time()
+		advance_clock_icon()
 	
 func advance_day():
 	var index = week_days.find(PlayerData.player_data["day_week"])

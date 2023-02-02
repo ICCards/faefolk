@@ -61,7 +61,7 @@ func able_to_put_into_slot(slot):
 	var holding_item_category = JsonData.item_data[holding_item_name]["ItemCategory"]
 	if slot.slot_index == 0 and slot.name == "FuelSlot": # fuel
 		return holding_item_name == "wood" or holding_item_name == "coal"
-	elif (slot.slot_index == 1 or slot.slot_index == 2 or slot.slot_index == 3) and slot.name.substr(0,10) == "Ingredient": # ingredients
+	elif slot.name.substr(0,10) == "Ingredient": # ingredients
 		return holding_item_category == "Crop" or holding_item_category == "Fish" or holding_item_category == "Food" or holding_item_category == "Forage" 
 	elif slot.slotType == SlotClass.SlotType.STOVE and (slot.slot_index == 4 or slot.slot_index == 5 or slot.slot_index == 6): # yield
 		return false

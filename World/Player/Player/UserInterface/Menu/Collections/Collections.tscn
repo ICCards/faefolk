@@ -1,10 +1,10 @@
-[gd_scene load_steps=231 format=2]
+[gd_scene load_steps=232 format=2]
 
+[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/MobCollection.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=2]
 [ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" type="Script" id=4]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Images/User interface/inventory/collections/crops-tab.png" type="Texture" id=6]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=8]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/ForageCollection.gd" type="Script" id=9]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Assets/Images/inventory_icons/Forage/mushroom.png" type="Texture" id=12]
 [ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FoodCollection1.gd" type="Script" id=13]
 [ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=14]
+
+[sub_resource type="StreamTexture" id=384]
+load_path = "res://.import/crops-tab.png-93c3276c2ebcb80cc39b185b5daf8e7c.stex"
 
 [sub_resource type="Shader" id=16]
 code = "shader_type canvas_item;
@@ -453,28 +456,20 @@ shader_param/flash_modifier = 0.0
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
 
 [sub_resource type="StreamTexture" id=189]
-load_path = "res://.import/blue flower.png-0f469c6f8f90ae08649063cb4017a37e.stex"
 
 [sub_resource type="StreamTexture" id=190]
-load_path = "res://.import/purple flower.png-525a00a21d2f26953c9cc996a05c5141.stex"
 
 [sub_resource type="StreamTexture" id=191]
-load_path = "res://.import/red flower.png-8fee67064b9bfff5f32dfa877f8ba88b.stex"
 
 [sub_resource type="StreamTexture" id=192]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=193]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=194]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=195]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=196]
-load_path = "res://.import/green flower.png-d688ea5aef22342e28d1e4b6ecceb229.stex"
 
 [sub_resource type="StreamTexture" id=197]
 load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
@@ -1014,7 +1009,7 @@ margin_right = 426.0
 margin_bottom = 240.0
 rect_scale = Vector2( 3, 3 )
 mouse_filter = 2
-texture = ExtResource( 6 )
+texture = SubResource( 384 )
 stretch_mode = 4
 
 [node name="SideTabButtons" type="VBoxContainer" parent="."]
@@ -1023,7 +1018,7 @@ margin_top = 171.0
 margin_right = 369.0
 margin_bottom = 435.0
 rect_min_size = Vector2( 48, 0 )
-custom_constants/separation = 6
+custom_constants/separation = 9
 
 [node name="Crops" type="Button" parent="SideTabButtons"]
 margin_right = 48.0
@@ -1034,36 +1029,45 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="Fish" type="Button" parent="SideTabButtons"]
-margin_top = 54.0
+margin_top = 57.0
 margin_right = 48.0
-margin_bottom = 102.0
+margin_bottom = 105.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
 [node name="Forage" type="Button" parent="SideTabButtons"]
-margin_top = 108.0
+margin_top = 114.0
 margin_right = 48.0
-margin_bottom = 156.0
+margin_bottom = 162.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
 [node name="Minerals" type="Button" parent="SideTabButtons"]
-margin_top = 162.0
+margin_top = 171.0
 margin_right = 48.0
-margin_bottom = 210.0
+margin_bottom = 219.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
 [node name="Foods" type="Button" parent="SideTabButtons"]
-margin_top = 216.0
+margin_top = 228.0
 margin_right = 48.0
-margin_bottom = 264.0
+margin_bottom = 276.0
+rect_min_size = Vector2( 48, 48 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Mobs" type="Button" parent="SideTabButtons"]
+margin_top = 285.0
+margin_right = 48.0
+margin_bottom = 333.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -1074,6 +1078,8 @@ visible = false
 
 [node name="ItemNameBox" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[node name="Tween" type="Tween" parent="."]
 
 [node name="CropCollection" type="GridContainer" parent="."]
 visible = false
@@ -1277,7 +1283,101 @@ script = ExtResource( 11 )
 
 [node name="Tween" type="Tween" parent="CropCollection"]
 
-[node name="Tween" type="Tween" parent="."]
+[node name="MobCollection" type="GridContainer" parent="."]
+visible = false
+margin_left = 426.0
+margin_top = 191.0
+margin_right = 568.0
+margin_bottom = 307.0
+rect_scale = Vector2( 3.5, 3.5 )
+custom_constants/vseparation = 14
+custom_constants/hseparation = 9
+columns = 6
+script = ExtResource( 1 )
+
+[node name="duck" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_right = 16.0
+margin_bottom = 16.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="bunny" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_left = 25.0
+margin_right = 41.0
+margin_bottom = 16.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="deer" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_left = 50.0
+margin_right = 66.0
+margin_bottom = 16.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="bear" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_left = 75.0
+margin_right = 91.0
+margin_bottom = 16.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="wolf" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_left = 100.0
+margin_right = 116.0
+margin_bottom = 16.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="boar" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_left = 125.0
+margin_right = 141.0
+margin_bottom = 16.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="slime" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_top = 30.0
+margin_right = 16.0
+margin_bottom = 46.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="spider" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_left = 25.0
+margin_top = 30.0
+margin_right = 41.0
+margin_bottom = 46.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="bat" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_left = 50.0
+margin_top = 30.0
+margin_right = 66.0
+margin_bottom = 46.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="skeleton" type="TextureRect" parent="MobCollection"]
+material = SubResource( 49 )
+margin_left = 75.0
+margin_top = 30.0
+margin_right = 91.0
+margin_bottom = 46.0
+texture = SubResource( 118 )
+script = ExtResource( 11 )
+
+[node name="Tween" type="Tween" parent="MobCollection"]
 
 [node name="FishCollection" type="GridContainer" parent="."]
 visible = false
@@ -1511,14 +1611,14 @@ custom_constants/hseparation = 9
 columns = 6
 script = ExtResource( 9 )
 
-[node name="blue flower" type="TextureRect" parent="ForageCollection"]
+[node name="poppy flower" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_right = 16.0
 margin_bottom = 16.0
 texture = SubResource( 189 )
 script = ExtResource( 11 )
 
-[node name="purple flower" type="TextureRect" parent="ForageCollection"]
+[node name="lily of the nile" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_left = 25.0
 margin_right = 41.0
@@ -1526,7 +1626,7 @@ margin_bottom = 16.0
 texture = SubResource( 190 )
 script = ExtResource( 11 )
 
-[node name="red flower" type="TextureRect" parent="ForageCollection"]
+[node name="tulip" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_left = 50.0
 margin_right = 66.0
@@ -1534,7 +1634,15 @@ margin_bottom = 16.0
 texture = SubResource( 191 )
 script = ExtResource( 11 )
 
-[node name="green flower" type="TextureRect" parent="ForageCollection"]
+[node name="dandelion" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 75.0
+margin_right = 91.0
+margin_bottom = 16.0
+texture = SubResource( 192 )
+script = ExtResource( 11 )
+
+[node name="sunflower" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_left = 75.0
 margin_right = 91.0
@@ -1646,7 +1754,34 @@ margin_bottom = 76.0
 texture = SubResource( 204 )
 script = ExtResource( 11 )
 
-[node name="mushroom" type="TextureRect" parent="ForageCollection"]
+[node name="common mushroom" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 116.0
+margin_bottom = 76.0
+texture = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="healing mushroom" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 116.0
+margin_bottom = 76.0
+texture = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="purple mushroom" type="TextureRect" parent="ForageCollection"]
+material = ExtResource( 10 )
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 116.0
+margin_bottom = 76.0
+texture = ExtResource( 12 )
+script = ExtResource( 11 )
+
+[node name="chanterelle" type="TextureRect" parent="ForageCollection"]
 material = ExtResource( 10 )
 margin_left = 100.0
 margin_top = 60.0
@@ -2221,6 +2356,9 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_entered" from="SideTabButtons/Foods" to="." method="_on_Foods_mouse_entered"]
 [connection signal="mouse_exited" from="SideTabButtons/Foods" to="." method="_on_Foods_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Foods" to="." method="_on_Foods_pressed"]
+[connection signal="mouse_entered" from="SideTabButtons/Mobs" to="." method="_on_Mobs_mouse_entered"]
+[connection signal="mouse_exited" from="SideTabButtons/Mobs" to="." method="_on_Mobs_mouse_exited"]
+[connection signal="pressed" from="SideTabButtons/Mobs" to="." method="_on_Mobs_pressed"]
 [connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/corn" to="CropCollection/corn" method="_on_collection_item_mouse_entered"]
@@ -2265,6 +2403,26 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="CropCollection/yellow pepper" to="CropCollection/yellow pepper" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/zucchini" to="CropCollection/zucchini" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/zucchini" to="CropCollection/zucchini" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/duck" to="MobCollection/duck" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/duck" to="MobCollection/duck" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/bunny" to="MobCollection/bunny" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/bunny" to="MobCollection/bunny" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/deer" to="MobCollection/deer" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/deer" to="MobCollection/deer" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/bear" to="MobCollection/bear" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/bear" to="MobCollection/bear" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/wolf" to="MobCollection/wolf" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/wolf" to="MobCollection/wolf" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/boar" to="MobCollection/boar" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/boar" to="MobCollection/boar" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/slime" to="MobCollection/slime" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/slime" to="MobCollection/slime" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/spider" to="MobCollection/spider" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/spider" to="MobCollection/spider" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/bat" to="MobCollection/bat" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/bat" to="MobCollection/bat" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="MobCollection/skeleton" to="MobCollection/skeleton" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="MobCollection/skeleton" to="MobCollection/skeleton" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FishCollection/albacore" to="FishCollection/albacore" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FishCollection/albacore" to="FishCollection/albacore" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FishCollection/anchovy" to="FishCollection/anchovy" method="_on_collection_item_mouse_entered"]
@@ -2313,14 +2471,16 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="FishCollection/siberian whitefish" to="FishCollection/siberian whitefish" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FishCollection/tilapia" to="FishCollection/tilapia" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FishCollection/tilapia" to="FishCollection/tilapia" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/blue flower" to="ForageCollection/blue flower" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/blue flower" to="ForageCollection/blue flower" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/purple flower" to="ForageCollection/purple flower" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/purple flower" to="ForageCollection/purple flower" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/red flower" to="ForageCollection/red flower" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/red flower" to="ForageCollection/red flower" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/green flower" to="ForageCollection/green flower" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/green flower" to="ForageCollection/green flower" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/poppy flower" to="ForageCollection/poppy flower" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/poppy flower" to="ForageCollection/poppy flower" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/lily of the nile" to="ForageCollection/lily of the nile" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/lily of the nile" to="ForageCollection/lily of the nile" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/tulip" to="ForageCollection/tulip" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/tulip" to="ForageCollection/tulip" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/dandelion" to="ForageCollection/dandelion" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/dandelion" to="ForageCollection/dandelion" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/sunflower" to="ForageCollection/sunflower" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/sunflower" to="ForageCollection/sunflower" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/green grass" to="ForageCollection/green grass" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ForageCollection/green grass" to="ForageCollection/green grass" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/red grass" to="ForageCollection/red grass" method="_on_collection_item_mouse_entered"]
@@ -2345,8 +2505,14 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="ForageCollection/pink pearl" to="ForageCollection/pink pearl" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ForageCollection/white pearl" to="ForageCollection/white pearl" method="_on_collection_item_mouse_exited"]
-[connection signal="mouse_entered" from="ForageCollection/mushroom" to="ForageCollection/mushroom" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="ForageCollection/mushroom" to="ForageCollection/mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/common mushroom" to="ForageCollection/common mushroom" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/common mushroom" to="ForageCollection/common mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/healing mushroom" to="ForageCollection/healing mushroom" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/healing mushroom" to="ForageCollection/healing mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/purple mushroom" to="ForageCollection/purple mushroom" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/purple mushroom" to="ForageCollection/purple mushroom" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="ForageCollection/chanterelle" to="ForageCollection/chanterelle" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="ForageCollection/chanterelle" to="ForageCollection/chanterelle" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ForageCollection/raw egg" to="ForageCollection/raw egg" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="ForageCollection/raw egg" to="ForageCollection/raw egg" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="ResourceCollection/wood" to="ResourceCollection/wood" method="_on_collection_item_mouse_entered"]

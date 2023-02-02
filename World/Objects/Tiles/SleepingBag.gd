@@ -8,6 +8,8 @@ var location
 var id
 
 func _ready():
+	$Position2D/InteractiveArea.object_name = "bed"
+	$Position2D/InteractiveArea.object_position = (position + Vector2(16,30))
 	set_direction()
 
 func set_direction():
@@ -29,10 +31,10 @@ func set_direction():
 			$Position2D.position = Vector2(32,-32) 
 			$Position2D/Image.flip_v = false
 
-func _unhandled_input(event):
-	if event.is_action_pressed("action"):
-		if $Position2D/DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
-			Server.player_node.actions.sleep(direction, adjusted_pos())
+#func _unhandled_input(event):
+#	if event.is_action_pressed("action"):
+#		if $Position2D/DetectPlayer.get_overlapping_areas().size() >= 1 and Server.player_node.state == 0:
+#			Server.player_node.actions.sleep(direction, adjusted_pos(),Server.player_node.position)
 
 func adjusted_pos():
 	match direction:

@@ -30,13 +30,22 @@ enum {
 	BOW_ARROW_SHOOTING
 }
 
+var thread = Thread.new()
 
-func swing(item_name, _direction):
+func swing(item_name):
+	if not thread.is_active():
+		thread.start(self,"whoAmISwing",item_name)
+
+func whoAmISwing(item_name):
+	call_deferred("swing_deferred",item_name)
+
+func swing_deferred(item_name):
 	if get_parent().state != SWINGING:
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().state = SWINGING
 		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 			set_watered_tile()
-			animation = "watering_" + _direction.to_lower()
+			animation = "watering_" + get_parent().direction.to_lower()
 			player_animation_player.play("watering")
 		elif item_name == "scythe" or item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
 			if get_node("../Magic").player_fire_buff:
@@ -44,30 +53,32 @@ func swing(item_name, _direction):
 			else:
 				sword_swing.special_ability = ""
 			if item_name == "scythe":
-				player_animation_player.play("scythe_swing_" + _direction.to_lower())
+				player_animation_player.play("scythe_swing_" + get_parent().direction.to_lower())
 			else:
 				sword_swing.tool_name = item_name
-				player_animation_player.play("sword_swing_" + _direction.to_lower())
-			animation = "sword_swing_" + _direction.to_lower()
+				player_animation_player.play("sword_swing_" + get_parent().direction.to_lower())
+			animation = "sword_swing_" + get_parent().direction.to_lower()
 			rng.randomize()
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
 		elif item_name == "arrow":
+			thread.wait_to_finish()
 			get_parent().state = MOVEMENT
 			return
 		elif item_name == null:
-			set_swing_collision_layer_and_position(item_name, _direction)
-			animation = "punch_" + _direction.to_lower()
+			set_swing_collision_layer_and_position(item_name, get_parent().direction)
+			animation = "punch_" + get_parent().direction.to_lower()
 			player_animation_player.play("punch")
 		else:
-			set_swing_collision_layer_and_position(item_name, _direction)
-			animation = "swing_" + _direction.to_lower()
+			set_swing_collision_layer_and_position(item_name, get_parent().direction)
+			animation = "swing_" + get_parent().direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
+		thread.wait_to_finish()
 
 
 func set_swing_collision_layer_and_position(tool_name, direction):
@@ -99,7 +110,8 @@ func set_hoed_tile(direction):
 		var location = Tiles.valid_tiles.world_to_map(pos)
 		if Tiles.valid_tiles.get_cellv(location) == 0 and \
 		Tiles.hoed_tiles.get_cellv(location) == -1 and \
-		Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles):
+		Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles) and \
+		Tiles.foundation_tiles.get_cellv(location) == -1:
 			MapData.set_hoed_tile(location)
 			yield(get_tree().create_timer(0.6), "timeout")
 			InstancedScenes.play_hoed_dirt_effect(location)
@@ -136,7 +148,7 @@ func set_watered_tile():
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
 			Stats.refill_watering_can(PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0])
-		elif PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] >= 1:
+		elif return_current_tool_health() >= 1:
 			Stats.decrease_tool_health()
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -161,3 +173,8 @@ func set_watered_tile():
 			sound_effects.play()
 
 
+func return_current_tool_health():
+	if PlayerData.normal_hotbar_mode:
+		return PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2]
+	else:
+		return PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][2]

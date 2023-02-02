@@ -46,11 +46,9 @@ Uuid="*res://helpers/UUID.gd"
 Server="*res://server/server.gd"
 PlaceObject="*res://Global/Data/PlaceObject.gd"
 Tiles="*res://helpers/Tiles.gd"
-Settings="*res://Global/Data/Settings.gd"
 Human="*res://Global/Characters/Human.gd"
 Stats="*res://Global/Data/Stats.gd"
 FishData="*res://Global/Data/FishData.gd"
-CollectionsData="*res://Global/Data/CollectionsData.gd"
 InstancedScenes="*res://Global/Data/InstancedScenes.gd"
 Constants="*res://Global/Data/Constants.gd"
 BuildCaveLevel="*res://Global/Data/BuildCaveLevel.gd"
@@ -63,8 +61,7 @@ PlayerDataHelpers="*res://Global/Data/PlayerDataHelpers.gd"
 
 window/size/width=1280
 window/size/height=720
-window/vsync/use_vsync=false
-mouse_cursor/custom_image="res://Assets/mouse cursors/Normal Selects.png"
+mouse_cursor/custom_image="res://Assets/mouse cursors/cursor.png"
 window/stretch/mode="2d"
 
 [global]
@@ -75,7 +72,6 @@ window=false
 rendering=false
 physics=false
 thre=false
-threads=false
 
 [importer_defaults]
 
@@ -110,13 +106,11 @@ ui_accept={
 }
 ui_select={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 ui_cancel={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777217,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777217,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_focus_next={
@@ -204,66 +198,55 @@ open_map={
 "deadzone": 0.5,
 "events": [  ]
 }
-radial_menu={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":67,"unicode":0,"echo":false,"script":null)
- ]
-}
 slot1={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":49,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot2={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":50,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot3={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":51,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot4={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":52,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot5={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":53,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot6={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":54,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot7={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":55,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot8={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":56,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot9={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":57,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 slot10={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":48,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 sprint={
 "deadzone": 0.5,
 "events": [  ]
 }
 change_variety={
+"deadzone": 0.5,
+"events": [  ]
+}
+toggle_hotbar={
 "deadzone": 0.5,
 "events": [  ]
 }
@@ -312,5 +295,4 @@ common/enable_pause_aware_picking=true
 
 2d/snapping/use_gpu_pixel_snap=true
 threads/thread_model=2
-threads/thread_safe_bvh=true
 environment/default_environment="res://default_env.tres"

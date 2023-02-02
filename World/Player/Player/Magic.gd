@@ -68,6 +68,7 @@ var animation: String = ""
 var direction: String = "DOWN"
 var movement_direction: String = ""
 var current_potion: String = ""
+var current_staff_name: String = ""
 var is_casting: bool = false
 var is_drawing: bool = false
 var is_releasing: bool = false
@@ -81,56 +82,69 @@ var mouse_left_down: bool = false
 var starting_mouse_point
 var ending_mouse_point
 
+var thread = Thread.new()
+
+func _ready():
+	PlayerData.connect("health_depleted", self, "player_death")
+
+func player_death():
+	is_casting = false
+	is_drawing = false
+	is_releasing = false
+	
 
 func _input( event ):
-	if is_casting or is_drawing or is_throwing:
-		$AimDownSightLine.show()
-		$CastDirection.look_at(get_global_mouse_position())
-		var start_pt = $CastDirection/Position2D.global_position-get_node("../").global_position
-		var end_pt = get_local_mouse_position()
-		$AimDownSightLine.points = [start_pt, end_pt]
-	else:
-		$AimDownSightLine.hide()
 	if event is InputEventMouseButton:
-		if event.button_index == 1 and event.is_pressed():
+		if (event.button_index == 1 and event.is_pressed()):
 			mouse_left_down = true
 		elif event.button_index == 1 and not event.is_pressed():
 			mouse_left_down = false
+	elif event is InputEvent:
+		if event.is_action_pressed("use_tool"):
+			mouse_left_down = true
+		elif event.is_action_released("use_tool"):
+			mouse_left_down = false
 
+func draw_bow(spell_index):
+	if not thread.is_active():
+		thread.start(self,"whoAmIBow",spell_index)
+		
+func whoAmIBow(spell_index):
+	call_deferred("draw_bow_deferred",spell_index)
 
-func draw_bow(init_direction):
-	if validate_bow_requirement():
+func draw_bow_deferred(spell_index):
+	if validate_bow_requirement(spell_index):
 		get_parent().state = MAGIC_CASTING
 		is_drawing = true
-		animation = "draw_" + init_direction.to_lower()
+		animation = "draw_" + get_parent().direction.to_lower()
 		player_animation_player.play("bow draw release")
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
 		yield(player_animation_player, "animation_finished" )
-		wait_for_bow_release()
+		wait_for_bow_release(spell_index)
+	else:
+		thread.wait_to_finish()
 
-
-func validate_bow_requirement():
-	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
-	match index:
+func validate_bow_requirement(spell_index):
+	match spell_index:
 		1:
 			return PlayerData.returnSufficentCraftingMaterial("arrow", 1)
 		2:
-			return PlayerData.returnSufficentCraftingMaterial("arrow", 3)
+			return PlayerData.returnSufficentCraftingMaterial("arrow", 3) and PlayerData.player_data["skill_experience"]["bow"] >= 100
 		3:
-			return PlayerData.returnSufficentCraftingMaterial("arrow", 1) and PlayerData.player_data["mana"] > 0
+			return PlayerData.returnSufficentCraftingMaterial("arrow", 1) and PlayerData.player_data["mana"] > 0 and PlayerData.player_data["skill_experience"]["bow"] >= 500
 		4:
-			return PlayerData.returnSufficentCraftingMaterial("arrow", 2) and PlayerData.player_data["mana"] > 1
+			return PlayerData.returnSufficentCraftingMaterial("arrow", 2) and PlayerData.player_data["mana"] > 1 and PlayerData.player_data["skill_experience"]["bow"] >= 1000
 
-func wait_for_bow_release():
+func wait_for_bow_release(spell_index):
 	if not mouse_left_down:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
 		sound_effects.play()
 		PlayerData.change_energy(-1)
 		Stats.decrease_tool_health()
-		shoot()
+		shoot(spell_index)
 		is_drawing = false
 		is_releasing = true
 		animation = "release_" + direction.to_lower()
@@ -140,23 +154,27 @@ func wait_for_bow_release():
 		is_releasing = false
 		get_parent().direction = direction
 		get_parent().state = MOVEMENT
+		thread.wait_to_finish()
 	elif get_parent().state == DYING:
+		thread.wait_to_finish()
 		return
 	else:
 		yield(get_tree().create_timer(0.1), "timeout")
-		wait_for_bow_release()
+		wait_for_bow_release(spell_index)
 
-func shoot():
-	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
-	match index:
-		1:
-			single_arrow_shot()
-		2:
-			multi_arrow_shot()
-		3: 
-			enchanted_arrow_shot()
-		4:
-			ricochet_arrow_shot()
+func shoot(spell_index):
+	if PlayerData.normal_hotbar_mode:
+		single_arrow_shot()
+	else:
+		match spell_index:
+			1:
+				single_arrow_shot()
+			2:
+				multi_arrow_shot()
+			3: 
+				enchanted_arrow_shot()
+			4:
+				ricochet_arrow_shot()
 
 func ricochet_arrow_shot():
 	PlayerData.remove_material("arrow", 2)
@@ -169,7 +187,7 @@ func ricochet_arrow_shot():
 	arrow.is_ricochet_shot = true
 	arrow.position = $CastDirection/Position2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").add_child(arrow)
+	get_node("../../../").call_deferred("add_child",arrow)
 
 
 func enchanted_arrow_shot():
@@ -184,7 +202,7 @@ func enchanted_arrow_shot():
 		arrow.is_poison_arrow = true
 	arrow.position = $CastDirection/Position2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").add_child(arrow)
+	get_node("../../../").call_deferred("add_child",arrow)
 
 func single_arrow_shot():
 	PlayerData.remove_material("arrow", 1)
@@ -195,7 +213,7 @@ func single_arrow_shot():
 		arrow.is_fire_arrow = false
 	arrow.position = $CastDirection/Position2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").add_child(arrow)
+	get_node("../../../").call_deferred("add_child", arrow)
 
 
 func multi_arrow_shot():
@@ -213,48 +231,69 @@ func multi_arrow_shot():
 			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()+Vector2(0.25,0.25)).normalized()
 		elif i == 2:
 			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()-Vector2(0.25,0.25)).normalized()
-		get_node("../../../").add_child(arrow)
+		get_node("../../../").call_deferred("add_child", arrow)
 
 
-func wait_for_cast_release(staff_name):
-	if not mouse_left_down:
-		cast(staff_name, get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell)
+func wait_for_cast_release(staff_name,spell_index):
+	if not mouse_left_down and not get_parent().state == DYING:
+		if PlayerData.normal_hotbar_mode:
+			cast(staff_name, 1)
+		else:
+			cast(staff_name, spell_index)
 	elif get_parent().state == DYING:
+		thread.wait_to_finish()
 		return
 	else:
 		yield(get_tree().create_timer(0.1), "timeout")
-		wait_for_cast_release(staff_name)
+		wait_for_cast_release(staff_name, spell_index)
 
-func cast_spell(staff_name, init_direction):
-	yield(get_tree(), "idle_frame")
-	if validate_magic_cast_requirements():
-		direction = init_direction
+func cast_spell(staff_name, spell_index):
+	if not thread.is_active():
+		thread.start(self,"whoAmIMagic",[staff_name,spell_index])
+
+func whoAmIMagic(staff_and_spell_index):
+	call_deferred("cast_spell_deferred", staff_and_spell_index)
+
+func cast_spell_deferred(staff_and_spell_index):
+	if validate_magic_cast_requirements(staff_and_spell_index[1]):
 		starting_mouse_point = get_global_mouse_position()
-		if get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell != 2:
+		if staff_and_spell_index[1] != 2 or PlayerData.normal_hotbar_mode:
 			get_parent().state = MAGIC_CASTING
+			current_staff_name = staff_and_spell_index[0]
 			is_casting = true
-			animation = "magic_cast_" + init_direction.to_lower()
+			animation = "magic_cast_" + get_parent().direction.to_lower()
 			player_animation_player.play("bow draw release")
-			composite_sprites.set_player_animation(get_parent().character, animation, "magic staff")
 			yield(player_animation_player, "animation_finished" )
-		wait_for_cast_release(staff_name)
+		wait_for_cast_release(staff_and_spell_index[0],staff_and_spell_index[1])
 	else:
-		get_parent().state = MOVEMENT
+		thread.wait_to_finish()
 
 
-func validate_magic_cast_requirements():
-	var index = get_node("../Camera2D/UserInterface/MagicStaffUI").selected_spell
-	match index:
-		1:
-			return PlayerData.player_data["mana"] >= 1 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
-		2:
-			return PlayerData.player_data["mana"] >= 2 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
-		3:
-			return PlayerData.player_data["mana"] >= 5 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
-		4:
-			return PlayerData.player_data["mana"] >= 10 and get_node("../Camera2D/UserInterface/MagicStaffUI").validate_spell_cooldown()
+func validate_magic_cast_requirements(spell_index):
+	if PlayerData.normal_hotbar_mode:
+		return PlayerData.player_data["mana"] >= 1 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown(1)
+	else:
+		match spell_index:
+			1:
+				return PlayerData.player_data["mana"] >= 1 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown(1)
+			2:
+				return PlayerData.player_data["mana"] >= 2 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown(2)
+			3:
+				return PlayerData.player_data["mana"] >= 5 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown(3)
+			4:
+				return PlayerData.player_data["mana"] >= 10 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown(4)
+
 
 func _physics_process(delta):
+	if (is_casting or is_drawing or is_throwing) and not PlayerData.viewMapMode:
+		$AimDownSightLine.show()
+		$CastDirection.look_at(get_global_mouse_position())
+		var start_pt = $CastDirection/Position2D.global_position-get_node("../").global_position
+		var end_pt = get_local_mouse_position()
+		$AimDownSightLine.points = [start_pt, end_pt]
+	else:
+		$AimDownSightLine.hide()
+		return
 	var degrees = int($CastDirection.rotation_degrees) % 360
 	$CastDirection.look_at(get_global_mouse_position())
 	if $CastDirection.rotation_degrees >= 0:
@@ -278,10 +317,10 @@ func _physics_process(delta):
 	if is_casting and get_parent().state != DYING:
 		if get_parent().cast_movement_direction == "":
 			player_animation_player2.stop(false)
-			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower(), "magic staff")
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower(), current_staff_name)
 		else:
 			player_animation_player2.play("walk legs")
-			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, "magic staff")
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, current_staff_name)
 	if is_drawing and get_parent().state != DYING:
 		if get_parent().cast_movement_direction == "":
 			player_animation_player2.stop(false)
@@ -327,7 +366,7 @@ func throw(potion_name):
 
 
 func cast(staff_name, spell_index):
-	get_node("../Camera2D/UserInterface/MagicStaffUI").start_spell_cooldown()
+	get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").start_spell_cooldown(spell_index)
 	yield(get_tree(), "idle_frame")
 	match spell_index:
 		1:
@@ -407,6 +446,7 @@ func cast(staff_name, spell_index):
 	if get_parent().state != DYING: 
 		get_parent().state = MOVEMENT
 		get_parent().direction = direction
+	thread.wait_to_finish()
 
 
 func set_invisibility():
@@ -586,35 +626,35 @@ func play_lingering_tornado():
 	spell.particles_transform = $CastDirection.transform
 	spell.target = get_global_mouse_position() + Vector2(0,32)
 	spell.position = $CastDirection/Position2D.global_position
-	get_node("../../../Projectiles").add_child(spell)
+	get_node("../../../Projectiles").call_deferred("add_child", spell)
 
 func play_wind_projectile():
 	var spell = TornadoProjectile.instance()
 	spell.position = $CastDirection/Position2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
-	get_node("../../../").add_child(spell)
+	get_node("../../../").call_deferred("add_child", spell)
 
 func play_dash():
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
-	sound_effects.play()
-	$DustParticles.emitting = true
-	$DustBurst.rotation = (get_parent().input_vector*-1).angle()
-	$DustBurst.restart()
-	$DustBurst.emitting = true
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -16))
+	sound_effects.call_deferred("play")
+	$DustParticles.set_deferred("emitting", true)
+	$DustBurst.set_deferred("rotation", (get_parent().input_vector*-1).angle())
+	$DustBurst.call_deferred("restart")
+	$DustBurst.set_deferred("emitting", true)
 	set_player_whitened()
 	dashing = true
-	$GhostTimer.start()
+	$GhostTimer.call_deferred("start")
 	yield(get_tree().create_timer(0.5), "timeout")
-	$DustParticles.emitting = false
-	$DustBurst.emitting = false
+	$DustParticles.set_deferred("emitting", false)
+	$DustBurst.set_deferred("emitting", false)
 	dashing = false
-	$GhostTimer.stop()
+	$GhostTimer.call_deferred("stop")
 
 func set_player_whitened():
-	composite_sprites.material.set_shader_param("flash_modifier", 0.7)
+	composite_sprites.material.call_deferred("set_shader_param", "flash_modifier", 0.7)
 	yield(get_tree().create_timer(0.5), "timeout")
-	composite_sprites.material.set_shader_param("flash_modifier", 0.0)
+	composite_sprites.material.call_deferred("set_shader_param", "flash_modifier", 0.0)
 
 var body_sprites = ["Arms", "Body"]
 
@@ -622,7 +662,7 @@ func _on_GhostTimer_timeout():
 	for sprite_name in body_sprites:
 		var sprite = get_node("../CompositeSprites/" + sprite_name)
 		var ghost: Sprite = DashGhost.instance()
-		get_node("../../../").add_child(ghost)
+		get_node("../../../").call_deferred("add_child", ghost)
 		ghost.global_position = global_position + Vector2(0,-32)
 		ghost.texture = sprite.texture
 		ghost.hframes = sprite.hframes
@@ -630,7 +670,7 @@ func _on_GhostTimer_timeout():
 
 func play_whirlwind():
 	var spell = Whirlwind.instance()
-	add_child(spell)
+	call_deferred("add_child", spell)
 
 # Fire #
 func play_fire_projectile(debuff):
@@ -639,24 +679,26 @@ func play_fire_projectile(debuff):
 		spell.debuff = debuff
 		spell.position = $CastDirection/Position2D.global_position
 		spell.velocity = get_global_mouse_position() - spell.position
-		get_node("../../../Projectiles").add_child(spell)
+		get_node("../../../Projectiles").call_deferred("add_child", spell)
 		yield(get_tree().create_timer(0.35), "timeout")
 	emit_signal("spell_finished")
 
 
 func play_fire_buff():
 	var spell = FireBuffFront.instance()
-	get_node("../").add_child(spell)
+	spell.name = "FIREBUFF"
+	get_node("../").call_deferred("add_child", spell)
 	var spell2 = FireBuffBehind.instance()
-	get_node("../").add_child(spell2)
+	get_node("../").call_deferred("add_child", spell2)
 	player_fire_buff = true
-	yield(get_tree().create_timer(FIRE_BUFF_LENGTH), "timeout")
-	player_fire_buff = false
+	yield(get_tree().create_timer(FIRE_BUFF_LENGTH+0.25), "timeout")
+	if not get_node("../").has_node("FIREBUFF"):
+		player_fire_buff = false
 	
 func play_flamethrower():
 	var spell = FlameThrower.instance()
 	spell.name = "FlameThrower"
-	$CastDirection.add_child(spell)
+	$CastDirection.call_deferred("add_child", spell)
 	spell.position = $CastDirection/Position2D.position
 	yield(get_tree().create_timer(4.0), "timeout")
 	emit_signal("spell_finished")

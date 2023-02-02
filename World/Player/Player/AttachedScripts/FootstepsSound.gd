@@ -5,8 +5,14 @@ func _ready():
 	volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
 	Sounds.connect("footsteps_sound_change", self, "set_footsteps_sound")
 	Sounds.connect("volume_change", self, "set_new_music_volume")
+	PlayerData.connect("health_depleted", self, "reset_sound")
 	set_footsteps_sound()
 
+
+func reset_sound():
+	Sounds.current_footsteps_sound = Sounds.dirt_footsteps
+	stream = Sounds.dirt_footsteps
+	set_footsteps_sound()
 
 func set_footsteps_sound():
 	stop()

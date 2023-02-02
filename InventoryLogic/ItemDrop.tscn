@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
 [ext_resource path="res://InventoryLogic/ItemDrop.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sound/Sound effects/UI/pick up item.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Images/inventory_icons/Crop/apple.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=9]
 radius = 11.3333
@@ -298,7 +300,103 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Tree harvest 1"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 52, 110 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../Sprite:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, 52, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("../Sprite:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.216206, 90.4461, 0.3, -125.5, 110, -0.2, -29, 0.132027, 19.1439 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Tree harvest 2"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -52, 110 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../Sprite:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, -52, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("../Sprite:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.216206, 90.4461, 0.3, -125.5, 110, -0.2, -29, 0.132027, 19.1439 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [node name="ItemDrop" type="KinematicBody2D"]
@@ -318,6 +416,7 @@ margin_bottom = 67.4783
 rect_min_size = Vector2( 84, 84 )
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 2
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 5
 
@@ -334,6 +433,7 @@ text = "99
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
 shape = SubResource( 9 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -343,5 +443,8 @@ root_node = NodePath("../CollisionShape2D")
 "anims/Animate 4" = SubResource( 6 )
 "anims/Animate 5" = SubResource( 7 )
 anims/RESET = SubResource( 3 )
+"anims/Tree harvest 1" = SubResource( 10 )
+"anims/Tree harvest 2" = SubResource( 11 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

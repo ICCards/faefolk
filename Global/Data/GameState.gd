@@ -7,21 +7,9 @@ export var world_state = {}
 export var cave_state = {}
 ## any other object here  and the the save and load methods that needs to be save
 
-const GAME_STATE_PATH = "user://gameState12.tres"
+const GAME_STATE_PATH = "user://gamestatev13New223.tres"
 
 var game_state: GameState
-
-#func save_player_state(value):
-#	player_state = value
-#	save_state()
-#
-#func save_world_state(value):
-#	world_state = value
-#	save_state()
-#
-#func save_cave_state(value):
-#	cave_state = value
-#	save_state()
 
 static func save_exists():
 	return ResourceLoader.exists(GAME_STATE_PATH)
