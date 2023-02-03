@@ -19,8 +19,8 @@ func _ready():
 	call_deferred("set_dimensions")
 	#thread.start(self,"set_dimensions_deferred",null)
 
-func set_dimensions_deferred(value):
-	call_deferred("set_dimensions")
+#func set_dimensions_deferred(value):
+#	call_deferred("set_dimensions")
 
 func set_dimensions():
 	rng.randomize()

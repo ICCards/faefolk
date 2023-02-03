@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade out"
-length = 0.6
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -32,7 +32,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -53,6 +53,7 @@ columns = 3
 [node name="TextureRect" type="TextureRect" parent="GridContainer"]
 margin_right = 26.0
 margin_bottom = 24.0
+mouse_filter = 2
 texture = ExtResource( 5 )
 stretch_mode = 1
 
@@ -60,6 +61,7 @@ stretch_mode = 1
 margin_left = 26.0
 margin_right = 85.0
 margin_bottom = 24.0
+mouse_filter = 2
 size_flags_horizontal = 3
 theme = ExtResource( 3 )
 texture = ExtResource( 4 )
@@ -69,6 +71,7 @@ expand = true
 margin_left = 85.0
 margin_right = 91.0
 margin_bottom = 24.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 
 [node name="ItemName" type="Label" parent="."]
@@ -104,7 +107,6 @@ margin_bottom = 78.0
 grow_horizontal = 0
 rect_scale = Vector2( 0.1, 0.1 )
 theme = ExtResource( 3 )
-text = "999"
 align = 2
 
 [node name="DestroyTimer" type="Timer" parent="."]

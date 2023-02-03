@@ -12,6 +12,7 @@ script = ExtResource( 3 )
 amount = 4000
 
 [node name="RainStorm" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1.05, 1.05, 1.12, 1 )
 
 [node name="IdleTimer" type="Timer" parent="."]
 one_shot = true

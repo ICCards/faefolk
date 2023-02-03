@@ -11,7 +11,7 @@ func _ready():
 	initialize()
 
 func initialize():
-	show()
+	$AnimationPlayer.call_deferred("stop")
 	set_deferred("modulate", Color("ffffff"))
 	$Icon.set_deferred("texture", load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png"))
 	$ItemName.set_deferred("text", item_name[0].to_upper() + item_name.substr(1,-1))
@@ -23,7 +23,6 @@ func initialize():
 	else:
 		$Quantity.set_deferred("visible", true)
 		$Quantity.set_deferred("text", str(item_quantity))
-	$AnimationPlayer.stop()
 	$DestroyTimer.start(3+delay)
 
 func set_size_of_description(x):
@@ -33,6 +32,6 @@ func set_size_of_description(x):
 		width = 55 + ((x - 120) / 4.75)
 
 func _on_DestroyTimer_timeout():
-	$AnimationPlayer.play("fade out")
+	$AnimationPlayer.call_deferred("play", "fade out")
 	yield($AnimationPlayer, "animation_finished")
 	call_deferred("queue_free")

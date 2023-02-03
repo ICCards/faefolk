@@ -23,7 +23,6 @@ func _physics_process(delta):
 	if Server.isLoaded and not PlayerData.viewMapMode:
 		show()
 		position = position.move_toward(random_storm_position, delta * 10)
-		#position = position.move_toward(random_storm_position, delta * 10)
 		var snow = get_node("/root/World/GeneratedTiles/SnowTiles")
 		if snow.get_cellv(snow.world_to_map(position)) == -1:
 			is_snow_storm = false
