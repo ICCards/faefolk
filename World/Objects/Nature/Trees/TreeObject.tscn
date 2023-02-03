@@ -658,7 +658,7 @@ offset = Vector2( 0, -30 )
 
 [node name="AnimatedTop" type="AnimatedSprite" parent="TreeSprites"]
 frames = ExtResource( 6 )
-frame = 18
+frame = 16
 playing = true
 offset = Vector2( -1, -23 )
 

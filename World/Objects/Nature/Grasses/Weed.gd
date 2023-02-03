@@ -62,7 +62,7 @@ func _on_Area2D_area_entered(area):
 		$SoundEffects.call_deferred("play")
 		$LeafBreak.set_deferred("playing", true)
 		yield($LeafBreak, "animation_finished")
-		queue_free()
+		call_deferred("queue_free")
 
 
 func _on_VisibilityNotifier2D_screen_entered():

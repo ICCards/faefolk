@@ -49,7 +49,7 @@ func hit(tool_name, var special_ability = ""):
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		yield(get_tree().create_timer(1.2), "timeout")
-		queue_free()
+		call_deferred("queue_free")
 
 func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":

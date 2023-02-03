@@ -9,8 +9,8 @@ func _ready():
 	if GameState.save_exists(): # Load world
 		game_state = GameState.new()
 		game_state.load_state()
-		PlayerData.player_data = game_state.player_state
-		#PlayerData.player_data = PlayerData.starting_player_data
+		#PlayerData.player_data = game_state.player_state
+		PlayerData.player_data = PlayerData.starting_player_data
 		MapData.world = game_state.world_state
 		MapData.caves = game_state.cave_state
 	else: # Initial launch
@@ -52,12 +52,12 @@ func toggle_menu_open():
 func open_options_menu():
 	$OptionsMenuLayer/Options.show()
 	$MainMenuButtons.hide()
-	Server.player_node.hide()
+	get_node("PLAYER").hide()
 
 func close_options_menu():
 	$OptionsMenuLayer/Options.hide()
 	$MainMenuButtons.show()
-	Server.player_node.show()
+	get_node("PLAYER").show()
 
 func _on_OptionsIconButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
@@ -69,6 +69,4 @@ func _on_ExitBtn_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	$SoundEffects.play()
-	$OptionsMenuLayer/Options.hide()
-	$MainMenuButtons.show()
-	Server.player_node.show()
+	close_options_menu()

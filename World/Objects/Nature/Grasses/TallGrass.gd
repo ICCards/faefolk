@@ -153,7 +153,7 @@ func destroy():
 		destroyed = true
 		MapData.world["tall_grass"].erase(name)
 		Tiles.add_valid_tiles(loc)
-		queue_free()
+		call_deferred("queue_free")
 
 func _on_VisibilityNotifier2D_screen_entered():
 	call_deferred("show")

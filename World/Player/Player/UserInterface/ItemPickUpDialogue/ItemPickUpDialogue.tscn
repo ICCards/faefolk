@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.gd" type="Script" id=3]
+
+[node name="ItemPickUpDialogue" type="VBoxContainer"]
+margin_left = 10.0
+margin_top = 429.0
+margin_right = 112.0
+margin_bottom = 479.0
+rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
+custom_constants/separation = 2
+script = ExtResource( 3 )

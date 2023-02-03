@@ -244,7 +244,7 @@ func destroy(tool_name):
 		sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects_stump.call_deferred("play")
 		yield(get_tree().create_timer(3.0), "timeout")
-	queue_free()
+	call_deferred("queue_free")
 
 ### Tree hurtbox
 func _on_Hurtbox_area_entered(_area):

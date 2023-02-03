@@ -55,7 +55,7 @@ func hit(tool_name):
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		yield(sound_effects, "finished")
-		queue_free()
+		call_deferred("queue_free")
 
 
 func _on_StumpHurtbox_area_entered(area):

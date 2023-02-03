@@ -121,6 +121,7 @@ func eat(item_name):
 
 func harvest_crop(crop_node):
 	if get_parent().state != HARVESTING:
+		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(crop_node.crop_name, 1)
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		crop_node.harvest()
 		get_parent().state = HARVESTING
@@ -136,6 +137,7 @@ func harvest_crop(crop_node):
 
 func harvest_forage(forage_node):
 	if get_parent().state != HARVESTING:
+		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(forage_node.item_name, 1)
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		forage_node.hide()
 		get_parent().state = HARVESTING

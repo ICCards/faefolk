@@ -87,7 +87,7 @@ func hit(tool_name):
 		animation_player.call_deferred("play", "small_ore_break")
 		yield(sound_effects, "finished")
 		yield(get_tree().create_timer(0.6), "timeout")
-		queue_free()
+		call_deferred("queue_free")
 
 func _on_BigHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":

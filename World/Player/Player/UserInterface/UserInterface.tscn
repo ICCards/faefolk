@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_7.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_3.png" type="Texture" id=18]
 [ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=19]
 [ext_resource path="res://Assets/Images/Animations/loading/sprite_6.png" type="Texture" id=20]
+[ext_resource path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn" type="PackedScene" id=21]
 [ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=23]
 
 [sub_resource type="Animation" id=18]
@@ -168,6 +169,12 @@ animations = [ {
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 23 )
 
+[node name="ItemPickUpDialogue" parent="." instance=ExtResource( 21 )]
+margin_left = 12.0
+margin_top = 402.0
+margin_right = 114.0
+margin_bottom = 504.0
+
 [node name="WeatherEffects" type="ColorRect" parent="."]
 margin_left = -49.0
 margin_top = -39.0
@@ -199,7 +206,6 @@ color = Color( 1, 0, 0, 0 )
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource( 17 )]
-visible = false
 margin_top = 593.0
 margin_bottom = 593.0
 
@@ -321,7 +327,7 @@ margin_bottom = 720.0
 position = Vector2( 671, 374 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 22 )
-frame = 4
+frame = 3
 playing = true
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]

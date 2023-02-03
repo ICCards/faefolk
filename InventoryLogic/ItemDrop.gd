@@ -72,7 +72,8 @@ func _physics_process(_delta):
 				$SoundEffects.set_deferred("volume_db",  Sounds.return_adjusted_sound_db("sound", 0))
 				$SoundEffects.call_deferred("play")
 				yield($SoundEffects, "finished")
-				queue_free()
+				Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(item_name, item_quantity)
+				call_deferred("queue_free")
 	velocity.normalized()
 	velocity = move_and_slide(velocity, Vector2.UP)
 

@@ -55,12 +55,12 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-#		"0": ["stone sword", 1, 100],
+		"0": ["wood sword", 1, 10],
 #		"1": ["gold axe", 1, 100],
 #		"4": ["bow", 1, 50],
 #		"2": ["arrow", 999, null],
-#		"6": ["wind staff", 1, null],
-#		"5": ["fire staff", 1, null],
+		"6": ["wind staff", 1, null],
+		"5": ["fire staff", 1, null],
 #		"7": ["raw egg", 100, null],
 #		"8": ["poison potion III", 100, null],
 	#	"2": ["wood fishing rod", 1, null],
@@ -71,8 +71,8 @@ var starting_player_data = {
 #		"8": ["furnace", 10, null],
 	},
 	"inventory": {
-#			"18": ["wood", 999, null],
-#			"19": ["stone", 999, null],
+			"18": ["wood", 999, null],
+			"19": ["stone", 999, null],
 #			"17": ["wood", 999, null],
 #			"16": ["wood", 500, null],
 #			"16": ["iron ingot", 999, null],
@@ -374,7 +374,7 @@ var starting_player_data = {
 			"slot10": 48,
 		},
 		"volume": {
-			"music": 50.0,
+			"music": 0.0,
 			"sound": 50.0,
 			"ambient": 50.0,
 			"footstep": 50.0

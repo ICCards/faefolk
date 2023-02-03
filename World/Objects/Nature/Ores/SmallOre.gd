@@ -48,7 +48,7 @@ func hit(tool_name):
 		animation_player.call_deferred("play", "small_ore_break")
 		yield(sound_effects, "finished")
 		yield(get_tree().create_timer(0.6), "timeout")
-		queue_free()
+		call_deferred("queue_free")
 	elif health >= 1:
 		sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))

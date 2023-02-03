@@ -89,15 +89,23 @@ func left_click_different_item(event: InputEvent, slot):
 func left_click_same_item(slot):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
 	var able_to_add = stack_size - slot.item.item_quantity
-	if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
-		PlayerData.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
-		slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
-		find_parent("UserInterface").holding_item.queue_free()
-		find_parent("UserInterface").holding_item = null
+	if stack_size == 1:
+		PlayerData.remove_item(slot)
+		PlayerData.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+		var temp_item = slot.item
+		slot.pickFromSlot()
+		slot.putIntoSlot(find_parent("UserInterface").holding_item)
+		find_parent("UserInterface").holding_item = temp_item
 	else:
-		PlayerData.add_item_quantity(slot, able_to_add)
-		slot.item.add_item_quantity(able_to_add)
-		find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
+		if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
+			PlayerData.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
+			slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
+			find_parent("UserInterface").holding_item.queue_free()
+			find_parent("UserInterface").holding_item = null
+		else:
+			PlayerData.add_item_quantity(slot, able_to_add)
+			slot.item.add_item_quantity(able_to_add)
+			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
 
 func left_click_not_holding(slot):
 	PlayerData.remove_item(slot)

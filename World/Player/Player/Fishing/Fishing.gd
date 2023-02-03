@@ -96,6 +96,7 @@ func retract_and_stop(fish_name):
 		PlayerData.player_data["skill_experience"]["fishing"] += 1
 		PlayerData.player_data["collections"]["fish"][fish_name] += 1
 		PlayerData.pick_up_item(fish_name, 1, null)
+		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(fish_name, 1)
 	stop_fishing_state()
 	
 func reel_in_fish_line():
