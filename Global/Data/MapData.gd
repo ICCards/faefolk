@@ -71,10 +71,10 @@ func advance_crop():
 	for id in world["tree"]:
 		if Util.isNonFruitTree(world["tree"][id]["v"]): # if non-fruit tree
 			if not str(world["tree"][id]["p"]) == "5":
-				world["tree"][id]["p"] = return_advanced_tree_phase(world["tree"][id]["p"])
+				world["tree"][id]["p"] = Util.return_advanced_tree_phase(world["tree"][id]["p"])
 		else:
 			if not world["tree"][id]["p"] == "harvest":
-				world["tree"][id]["p"] = return_advanced_fruit_tree_phase(world["tree"][id]["p"])
+				world["tree"][id]["p"] = Util.return_advanced_fruit_tree_phase(world["tree"][id]["p"])
 	for id in world["crop"]: 
 		var loc_string = world["crop"][id]["l"]
 		if not world["crop"][id]["dww"] == 2: # if crop isn't already dead
@@ -89,40 +89,6 @@ func advance_crop():
 	if Server.world.name == "World": # clear watered tiles if in world
 		Tiles.watered_tiles.clear()
 	emit_signal("refresh_crops")
-	
-	
-func return_advanced_tree_phase(current_phase):
-	match current_phase:
-		"sapling":
-			return "1"
-		"1":
-			return "2"
-		"2":
-			return "3"
-		"3":
-			return "4"
-		"4":
-			return "5"
-
-
-func return_advanced_fruit_tree_phase(current_phase):
-	match current_phase:
-		"sapling":
-			return "1"
-		"1":
-			return "2"
-		"2":
-			return "3"
-		"3":
-			return "4"
-		"4":
-			return "mature1"
-		"empty":
-			return "mature1"
-		"mature1":
-			return "mature2"
-		"mature2":
-			return "harvest"
 
 
 func add_forage(id,data):

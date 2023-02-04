@@ -16,7 +16,7 @@ var destroyed = false
 
 func _ready():
 	rng.randomize()
-	visible = false
+	call_deferred("hide")
 	ore_object = Images.returnOreObject(variety)
 	call_deferred("setTexture", ore_object)
 

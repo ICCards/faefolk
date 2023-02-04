@@ -14,7 +14,7 @@ var destroyed: bool = false
 
 func _ready():
 	randomize()
-	visible = false
+	call_deferred("hide")
 	setTreeBranchType()
 
 func remove_from_world():

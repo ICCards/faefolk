@@ -18,7 +18,7 @@ var type
 
 func _ready():
 	rng.randomize()
-	visible = false
+	call_deferred("hide")
 	PlayerData.connect("season_changed", self,  "set_grass_texture")
 	set_deferred("front_health", rng.randi_range(1,3))
 	set_deferred("back_heath", rng.randi_range(1,3))

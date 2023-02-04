@@ -18,7 +18,7 @@ const width := 1000
 const height := 1000
 const MAX_GRASS_BUNCH_SIZE = 150
 const oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
-const treeTypes = ['oak','spruce', 'birch', 'evergreen', 'pine']
+const treeTypes = ['oak','spruce','birch','evergreen','pine','apple','plum','cherry','pear']
 const weedTypes = ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4"]
 const flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
 const clamTypes = ["blue clam","pink clam","red clam"]
@@ -486,7 +486,11 @@ func create_tree(loc,biome):
 	var id = uuid.v4()
 	if check_64x64(loc) and isValidPosition(loc):
 		treeTypes.shuffle()
-		MapData.world["tree"][id] = {"l":loc,"h":Stats.TREE_HEALTH,"b":biome,"v":treeTypes.front(),"p":"5"}
+		var variety = treeTypes.front()
+		if Util.isNonFruitTree(variety):
+			MapData.world["tree"][id] = {"l":loc,"h":Stats.TREE_HEALTH,"b":biome,"v":variety,"p":"5"}
+		else:
+			MapData.world["tree"][id] = {"l":loc,"h":Stats.TREE_HEALTH,"b":biome,"v":variety,"p":"empty"}
 		decoration_locations.append(loc)
 		decoration_locations.append(loc + Vector2(1,0))
 		decoration_locations.append(loc + Vector2(0,-1))

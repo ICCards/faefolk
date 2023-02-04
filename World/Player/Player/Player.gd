@@ -25,7 +25,8 @@ enum {
 	SLEEPING,
 	SITTING,
 	MAGIC_CASTING,
-	BOW_ARROW_SHOOTING
+	BOW_ARROW_SHOOTING,
+	SWORD_SWINGING
 }
 
 var cast_movement_direction = ""
@@ -109,7 +110,7 @@ func _process(_delta) -> void:
 		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
 	if state == MOVEMENT:
 		movement_state(_delta)
-	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
+	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWORD_SWINGING:
 		magic_casting_movement_state(_delta)
 
 

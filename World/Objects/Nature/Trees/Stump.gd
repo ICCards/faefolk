@@ -13,7 +13,7 @@ var variety
 var destroyed: bool = false
 
 func _ready():
-	visible = false
+	call_deferred("hide")
 	call_deferred("setTexture", tree_object)
 
 

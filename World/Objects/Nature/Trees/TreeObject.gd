@@ -29,7 +29,7 @@ var phase
 var temp_health: int = 3
 
 func _ready():
-	visible = false
+	call_deferred("hide")
 	rng.randomize()
 	MapData.connect("refresh_crops", self, "refresh_tree_type")
 	call_deferred("set_tree")
@@ -104,11 +104,18 @@ func setGrownFruitTreeTexture():
 	$TreeChipParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png"))
 	$TreeLeavesParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png"))
 	animated_tree_top_sprite.set_deferred("frame", rng.randi_range(0,19))
-	tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/"+ phase +".png"))
-	animated_tree_top_sprite.set_deferred("frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/"+ phase +" animated.tres"))
+	tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/tops/"+ phase +".png"))
+	animated_tree_top_sprite.set_deferred("frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated.tres"))
+	animated_tree_top_sprite.set_deferred("animation", phase)
 	match variety:
 		"apple":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-17))
+		"cherry":
+			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-17))
+		"plum":
+			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-28))
+		"pear":
+			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-23))
 	if phase == "harvest":
 		$CollisionShape2D.set_deferred("disabled", false)
 	else:
@@ -148,7 +155,7 @@ func setGrownTreeTexture():
 
 func hit(tool_name):
 	if not destroyed:
-		if not (phase == "5" and Util.isNonFruitTree(MapData.world["tree"][name]["v"])) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isNonFruitTree(MapData.world["tree"][name]["v"])):
+		if not (phase == "5" and Util.isNonFruitTree(MapData.world["tree"][name]["v"])) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isFruitTree(MapData.world["tree"][name]["v"])):
 			animation_player_stump.call_deferred("play", "sapling hit")
 			$ResetTempHealthTimer.call_deferred("start")
 			temp_health -= 1
@@ -259,31 +266,12 @@ func _on_Hurtbox_area_entered(_area):
 
 ### Tree modulate functions
 func set_tree_top_collision_shape():
-	if variety == "oak":
-		$TreeTopArea/A.set_deferred("disabled", false)
-	elif variety == "spruce":
-		$TreeTopArea/B.set_deferred("disabled", false)
-	elif variety == "birch":
-		$TreeTopArea/C.set_deferred("disabled", false)
-	elif variety == "evergreen":
-		$TreeTopArea/D.set_deferred("disabled", false)
-	elif variety == "pine":
-		$TreeTopArea/E.set_deferred("disabled", false)
+	$TreeTopArea.get_node(variety).set_deferred("disabled", false)
 
 
 func disable_tree_top_collision_box():
 	set_tree_visible()
-	if variety == "oak":
-		$TreeTopArea/A.set_deferred("disabled", true)
-	elif variety == "spruce":
-		$TreeTopArea/B.set_deferred("disabled", true)
-	elif variety == "birch":
-		$TreeTopArea/C.set_deferred("disabled", true)
-	elif variety == "evergreen":
-		$TreeTopArea/D.set_deferred("disabled", true)
-	elif variety == "pine":
-		$TreeTopArea/E.set_deferred("disabled", true)
-
+	$TreeTopArea.get_node(variety).set_deferred("disabled", true)
 
 func set_tree_transparent():
 	tween.interpolate_property(animated_tree_top_sprite, "modulate:a",

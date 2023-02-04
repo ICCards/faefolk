@@ -160,4 +160,43 @@ func isNonFruitTree(tree_name):
 		return true
 	return false
 
+func return_advanced_tree_phase(current_phase):
+	match current_phase:
+		"sapling":
+			return "1"
+		"1":
+			return "2"
+		"2":
+			return "3"
+		"3":
+			return "4"
+		"4":
+			return "5"
+
+
+func return_advanced_fruit_tree_phase(current_phase):
+	match current_phase:
+		"sapling":
+			return "1"
+		"1":
+			return "2"
+		"2":
+			return "3"
+		"3":
+			return "4"
+		"4":
+			return "empty"
+		"empty":
+			if PlayerData.player_data["season"] == "Fall":
+				return "mature1"
+			return "empty"
+		"mature1":
+			if PlayerData.player_data["season"] == "Fall":
+				return "mature2"
+			return "empty"
+		"mature2":
+			if PlayerData.player_data["season"] == "Fall":
+				return "mature2"
+			return "harvest"
+
 
