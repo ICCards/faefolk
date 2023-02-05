@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=3]
 [ext_resource path="res://Assets/Images/User interface/ItemPickUpBox/middle.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Images/User interface/ItemPickUpBox/left.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/inventory_icons/Resource/wood.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/User interface/ItemPickUpBox/x.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -84,7 +84,7 @@ theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 5
 custom_constants/shadow_offset_y = 5
-text = "Workbench #3"
+text = "Inventory full!"
 valign = 1
 
 [node name="Icon" type="TextureRect" parent="."]

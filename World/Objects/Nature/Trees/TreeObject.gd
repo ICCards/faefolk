@@ -104,9 +104,14 @@ func setGrownFruitTreeTexture():
 	$TreeChipParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png"))
 	$TreeLeavesParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png"))
 	animated_tree_top_sprite.set_deferred("frame", rng.randi_range(0,19))
-	tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/tops/"+ phase +".png"))
 	animated_tree_top_sprite.set_deferred("frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated.tres"))
-	animated_tree_top_sprite.set_deferred("animation", phase)
+	match biome:
+		"forest":
+			tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/tops/"+ phase +".png"))
+			animated_tree_top_sprite.set_deferred("animation", phase)
+		"snow":
+			tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/tops/empty winter.png"))
+			animated_tree_top_sprite.set_deferred("animation", "snow")
 	match variety:
 		"apple":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-17))
@@ -175,6 +180,7 @@ func hit(tool_name):
 				sound_effects_tree.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 				sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 				sound_effects_tree.call_deferred("play") 
+				animation_player_tree.call_deferred("stop")
 				if Server.player_node.get_position().x <= get_position().x:
 					InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))
 					animation_player_tree.call_deferred("play", "tree hit right")
@@ -221,6 +227,7 @@ func hit(tool_name):
 				sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 				sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 				sound_effects_stump.call_deferred("play")
+				animation_player_stump.call_deferred("stop")
 				if Server.player_node.get_position().x <= get_position().x:
 					animation_player_stump.call_deferred("play", "stump hit right")
 					InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))

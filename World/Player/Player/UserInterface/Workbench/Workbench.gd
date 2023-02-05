@@ -18,7 +18,7 @@ func _ready():
 
 func initialize():
 	initialize_crafting()
-	Server.player_node.actions.destroy_placable_object()
+	#Server.player_node.actions.destroy_placable_object()
 	hovered_item = null
 	crafting_item = null
 	$MenuTitle.text = "Workbench #" + str(level) + ":"
@@ -62,6 +62,16 @@ func _physics_process(delta):
 	else:
 		$ItemNameBox.hide()
 		$CraftingItemDescription.hide()
+
+
+#func adjusted_item_description():
+#	var height = float($ItemDescription.height) * 2.4
+#	var pos = $ItemDescription.position.y
+#	var max_pos = 720 - height
+#	if get_local_mouse_position().y < 720:
+#		return get_local_mouse_position()
+#	else:
+#		return Vector2(get_local_mouse_position().x , max_pos.y)
 
 
 func entered_crafting_area(item_name):

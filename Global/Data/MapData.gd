@@ -73,7 +73,7 @@ func advance_crop():
 			if not str(world["tree"][id]["p"]) == "5":
 				world["tree"][id]["p"] = Util.return_advanced_tree_phase(world["tree"][id]["p"])
 		else:
-			if not world["tree"][id]["p"] == "harvest":
+			if not world["tree"][id]["p"] == "harvest" and not world["tree"][id]["b"] == "snow":
 				world["tree"][id]["p"] = Util.return_advanced_fruit_tree_phase(world["tree"][id]["p"])
 	for id in world["crop"]: 
 		var loc_string = world["crop"][id]["l"]

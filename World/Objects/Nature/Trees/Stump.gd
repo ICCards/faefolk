@@ -35,6 +35,7 @@ func hit(tool_name):
 		sound_effects.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
+		animation_player.call_deferred("stop")
 		if Server.player_node.get_position().x <= get_position().x:
 			animation_player.call_deferred("play", "stump hit right")
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))

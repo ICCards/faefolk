@@ -77,6 +77,7 @@ var flamethrower_active: bool = false
 var invisibility_active: bool = false
 var ice_shield_active: bool = false
 var mouse_left_down: bool = false
+var cancel_attack_pressed: bool = false
 
 
 var starting_mouse_point
@@ -104,6 +105,11 @@ func _input( event ):
 			mouse_left_down = true
 		elif event.is_action_released("use_tool"):
 			mouse_left_down = false
+	if event is InputEvent:
+		if event.is_action_pressed("cancel_attack"):
+			cancel_attack_pressed = true
+		elif event.is_action_released("cancel_attack"):
+			cancel_attack_pressed = false
 
 func draw_bow(spell_index):
 	if not thread.is_active():
@@ -157,6 +163,11 @@ func wait_for_bow_release(spell_index):
 		thread.wait_to_finish()
 	elif get_parent().state == DYING:
 		thread.wait_to_finish()
+		return
+	elif cancel_attack_pressed:
+		is_drawing = false
+		thread.wait_to_finish()
+		get_parent().state = MOVEMENT
 		return
 	else:
 		yield(get_tree().create_timer(0.1), "timeout")
@@ -242,6 +253,11 @@ func wait_for_cast_release(staff_name,spell_index):
 			cast(staff_name, spell_index)
 	elif get_parent().state == DYING:
 		thread.wait_to_finish()
+		return
+	elif cancel_attack_pressed:
+		is_casting = false
+		thread.wait_to_finish()
+		get_parent().state = MOVEMENT
 		return
 	else:
 		yield(get_tree().create_timer(0.1), "timeout")

@@ -160,7 +160,7 @@ anims/RESET = SubResource( 2 )
 "anims/stump hit right" = SubResource( 4 )
 
 [node name="StumpHurtbox" type="Area2D" parent="."]
-position = Vector2( 0, 7 )
+position = Vector2( 0, 6 )
 collision_layer = 262152
 collision_mask = 0
 
@@ -168,7 +168,7 @@ collision_mask = 0
 shape = SubResource( 5 )
 
 [node name="MovementCollisionBox" type="StaticBody2D" parent="."]
-position = Vector2( 0, 7 )
+position = Vector2( 0, 6 )
 collision_layer = 35
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
@@ -176,6 +176,7 @@ rotation = -1.5708
 shape = SubResource( 6 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
 position = Vector2( 1.13687e-13, -15 )
 scale = Vector2( 4.11111, 5.5 )
 

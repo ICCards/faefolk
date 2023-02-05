@@ -1,11 +1,11 @@
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Objects/Nature/Trees/TreeObject.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/tree_sets/pear/mature/bottom.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/tree_sets/plum/mature/tops/2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/tree_sets/pear/mature/stump.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/tree_sets/cherry/mature/tops/empty winter.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/tree_sets/cherry/mature/bottom.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/tree_sets/evergreen/mature/animated top.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://Assets/Images/tree_sets/apple/growing/4.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/tree_sets/oak/mature/animated top.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://Assets/Images/tree_sets/cherry/mature/stump.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=25]
 radius = 47.0106
@@ -638,14 +638,14 @@ position = Vector2( 0, -18 )
 scale = Vector2( 2.75, 2.75 )
 
 [node name="TreeStump" type="Sprite" parent="TreeSprites"]
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 offset = Vector2( 0, -30 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="TreeBottom" type="Sprite" parent="TreeSprites"]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 offset = Vector2( 0, -30 )
 region_rect = Rect2( 160, 320, 0, 0 )
 __meta__ = {
@@ -654,14 +654,14 @@ __meta__ = {
 
 [node name="TreeTop" type="Sprite" parent="TreeSprites"]
 visible = false
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 offset = Vector2( 0, -30 )
 
 [node name="AnimatedTop" type="AnimatedSprite" parent="TreeSprites"]
-frames = ExtResource( 6 )
-frame = 12
+frames = ExtResource( 4 )
+frame = 10
 playing = true
-offset = Vector2( 0, -23 )
+offset = Vector2( -1, -17 )
 
 [node name="Tween" type="Tween" parent="TreeSprites"]
 
@@ -674,23 +674,19 @@ __meta__ = {
 }
 
 [node name="TreeHurtbox" type="Area2D" parent="."]
-visible = false
-position = Vector2( 0, -31 )
+position = Vector2( 0, 6 )
 collision_layer = 262152
 collision_mask = 0
 
 [node name="treeHurtBox" type="CollisionShape2D" parent="TreeHurtbox"]
-position = Vector2( 2.21224e-06, 36.6111 )
 rotation = -1.5708
 shape = SubResource( 21 )
 
 [node name="MovementCollisionBox" type="StaticBody2D" parent="."]
-visible = false
-position = Vector2( 0, 5.55556 )
+position = Vector2( 0, 6 )
 collision_layer = 35
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
-rotation = -1.5708
 shape = SubResource( 22 )
 
 [node name="AnimationPlayerTree" type="AnimationPlayer" parent="."]

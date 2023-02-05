@@ -250,6 +250,10 @@ toggle_hotbar={
 "deadzone": 0.5,
 "events": [  ]
 }
+cancel_attack={
+"deadzone": 0.5,
+"events": [  ]
+}
 
 [layer_names]
 

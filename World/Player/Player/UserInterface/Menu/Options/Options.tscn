@@ -71,10 +71,10 @@ margin_right = 961.0
 margin_bottom = 602.0
 mouse_filter = 2
 theme = SubResource( 55 )
-scroll_vertical = 1115
+scroll_vertical = 1167
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_top = -1115.0
+margin_top = -1167.0
 margin_right = 496.0
 margin_bottom = 431.0
 custom_constants/separation = 0
@@ -296,7 +296,7 @@ __meta__ = {
 [node name="Grid2" type="GridContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 406.0
 margin_right = 496.0
-margin_bottom = 1546.0
+margin_bottom = 1598.0
 grow_horizontal = 2
 mouse_filter = 2
 custom_constants/hseparation = 120
@@ -541,7 +541,7 @@ group = SubResource( 45 )
 flat = true
 action_name = "toggle_hotbar"
 
-[node name="Slot1" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="CancelAttack" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 627.0
 margin_right = 260.0
 margin_bottom = 669.0
@@ -549,9 +549,9 @@ theme = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
-text = "Slot 1:"
+text = "Switch hotbar:"
 
-[node name="KeyBindingBtn14" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn24" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 624.0
 margin_right = 496.0
@@ -559,9 +559,9 @@ margin_bottom = 672.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot1"
+action_name = "cancel_attack"
 
-[node name="Slot2" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot1" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 679.0
 margin_right = 260.0
 margin_bottom = 721.0
@@ -571,7 +571,7 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn15" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn14" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 676.0
 margin_right = 496.0
@@ -579,9 +579,9 @@ margin_bottom = 724.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot2"
+action_name = "slot1"
 
-[node name="Slot3" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot2" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 731.0
 margin_right = 260.0
 margin_bottom = 773.0
@@ -591,7 +591,7 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn16" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn15" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 728.0
 margin_right = 496.0
@@ -599,9 +599,9 @@ margin_bottom = 776.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot3"
+action_name = "slot2"
 
-[node name="Slot4" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot3" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 783.0
 margin_right = 260.0
 margin_bottom = 825.0
@@ -611,7 +611,7 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn17" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn16" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 780.0
 margin_right = 496.0
@@ -619,9 +619,9 @@ margin_bottom = 828.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot4"
+action_name = "slot3"
 
-[node name="Slot5" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot4" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 835.0
 margin_right = 260.0
 margin_bottom = 877.0
@@ -631,7 +631,7 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn18" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn17" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 832.0
 margin_right = 496.0
@@ -639,9 +639,9 @@ margin_bottom = 880.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot5"
+action_name = "slot4"
 
-[node name="Slot6" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot5" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 887.0
 margin_right = 260.0
 margin_bottom = 929.0
@@ -651,7 +651,7 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn19" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn18" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 884.0
 margin_right = 496.0
@@ -659,9 +659,9 @@ margin_bottom = 932.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot6"
+action_name = "slot5"
 
-[node name="Slot7" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot6" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 939.0
 margin_right = 260.0
 margin_bottom = 981.0
@@ -671,7 +671,7 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn20" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn19" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 936.0
 margin_right = 496.0
@@ -679,9 +679,9 @@ margin_bottom = 984.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot7"
+action_name = "slot6"
 
-[node name="Slot8" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot7" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 991.0
 margin_right = 260.0
 margin_bottom = 1033.0
@@ -691,7 +691,7 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn21" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn20" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 988.0
 margin_right = 496.0
@@ -699,9 +699,9 @@ margin_bottom = 1036.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot8"
+action_name = "slot7"
 
-[node name="Slot9" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot8" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 1043.0
 margin_right = 260.0
 margin_bottom = 1085.0
@@ -711,7 +711,7 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn22" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn21" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 1040.0
 margin_right = 496.0
@@ -719,9 +719,9 @@ margin_bottom = 1088.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true
-action_name = "slot9"
+action_name = "slot8"
 
-[node name="Slot10" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="Slot9" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
 margin_top = 1095.0
 margin_right = 260.0
 margin_bottom = 1137.0
@@ -731,11 +731,31 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "Slot 1:"
 
-[node name="KeyBindingBtn23" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+[node name="KeyBindingBtn22" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
 margin_left = 380.0
 margin_top = 1092.0
 margin_right = 496.0
 margin_bottom = 1140.0
+rect_min_size = Vector2( 116, 42 )
+group = SubResource( 45 )
+flat = true
+action_name = "slot9"
+
+[node name="Slot10" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+margin_top = 1147.0
+margin_right = 260.0
+margin_bottom = 1189.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "Slot 1:"
+
+[node name="KeyBindingBtn23" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource( 6 )]
+margin_left = 380.0
+margin_top = 1144.0
+margin_right = 496.0
+margin_bottom = 1192.0
 rect_min_size = Vector2( 116, 42 )
 group = SubResource( 45 )
 flat = true

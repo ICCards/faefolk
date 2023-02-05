@@ -121,7 +121,6 @@ func eat(item_name):
 
 func harvest_crop(crop_node):
 	if get_parent().state != HARVESTING:
-		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(crop_node.crop_name, 1)
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		crop_node.harvest()
 		get_parent().state = HARVESTING
@@ -132,12 +131,17 @@ func harvest_crop(crop_node):
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
 		get_parent().animation_player.play(anim)
 		yield(get_parent().animation_player, "animation_finished")
+		if PlayerDataHelpers.can_item_be_added_to_inventory(crop_node.item_name, 1):
+			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(crop_node.item_name, 1)
+			PlayerData.pick_up_item(crop_node.item_name, 1, null)
+		else:
+			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up("Inventory full!", 1)
+			InstancedScenes.initiateInventoryItemDrop([crop_node.item_name, 1, null], crop_node.position)
 		get_parent().state = get_parent().MOVEMENT
 
 
 func harvest_forage(forage_node):
 	if get_parent().state != HARVESTING:
-		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(forage_node.item_name, 1)
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		forage_node.hide()
 		get_parent().state = HARVESTING
@@ -154,8 +158,13 @@ func harvest_forage(forage_node):
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
 		get_parent().animation_player.play(anim)
 		yield(get_parent().animation_player, "animation_finished")
-		PlayerData.pick_up_item(forage_node.item_name, 1, null)
-		forage_node.queue_free()
+		if PlayerDataHelpers.can_item_be_added_to_inventory(forage_node.item_name, 1):
+			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(forage_node.item_name, 1)
+			PlayerData.pick_up_item(forage_node.item_name, 1, null)
+		else:
+			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up("Inventory full!", 1)
+			InstancedScenes.initiateInventoryItemDrop([forage_node.item_name, 1, null], forage_node.position)
+		forage_node.call_deferred("queue_free")
 		get_parent().state = get_parent().MOVEMENT
 
 

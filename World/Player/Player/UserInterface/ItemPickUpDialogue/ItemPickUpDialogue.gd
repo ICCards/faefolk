@@ -19,15 +19,31 @@ func show_dialogue():
 func modify_or_add_to_box():
 	var item_name = queue[0][0]
 	var item_quantity = queue[0][1]
-	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+	if item_name == "Inventory full!":
+		add_or_extend_inventory_full_box()
+		repeat_or_end_thread()
+		return
+	else:
+		var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+		for node in self.get_children():
+			if node.item_name == item_name and stack_size != 1:
+				modify_existing_box(node,item_quantity)
+				repeat_or_end_thread()
+				return
+		add_new_box(item_name,item_quantity)
+		repeat_or_end_thread()
+		return
+		
+func add_or_extend_inventory_full_box():
 	for node in self.get_children():
-		if node.item_name == item_name and stack_size != 1:
-			modify_existing_box(node,item_quantity)
-			repeat_or_end_thread()
+		if node.item_name == "Inventory full!":
+			node.call_deferred("initialize")
 			return
-	add_new_box(item_name,item_quantity)
-	repeat_or_end_thread()
-	return
+	var itemPickUpBox = ItemPickUpBox.instance()
+	itemPickUpBox.item_name = "Inventory full!"
+	itemPickUpBox.delay = self.get_children().size()
+	call_deferred("add_child", itemPickUpBox)
+
 
 func repeat_or_end_thread():
 	queue.remove(0)

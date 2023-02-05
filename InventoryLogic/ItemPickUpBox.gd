@@ -13,17 +13,26 @@ func _ready():
 func initialize():
 	$AnimationPlayer.call_deferred("stop")
 	set_deferred("modulate", Color("ffffff"))
-	$Icon.set_deferred("texture", load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png"))
-	$ItemName.set_deferred("text", item_name[0].to_upper() + item_name.substr(1,-1))
-	yield(get_tree(), "idle_frame")
-	set_size_of_description($ItemName.rect_size.x)
-	$GridContainer.rect_size.x = width
-	if item_quantity == 1:
-		$Quantity.set_deferred("visible", false)
+	if item_name != "Inventory full!":
+		$Icon.set_deferred("texture", load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png"))
+		$ItemName.set_deferred("text", item_name[0].to_upper() + item_name.substr(1,-1))
+		yield(get_tree(), "idle_frame")
+		set_size_of_description($ItemName.rect_size.x)
+		$GridContainer.rect_size.x = width
+		if item_quantity == 1:
+			$Quantity.set_deferred("visible", false)
+		else:
+			$Quantity.set_deferred("visible", true)
+			$Quantity.set_deferred("text", str(item_quantity))
+		$DestroyTimer.start(3+delay)
 	else:
-		$Quantity.set_deferred("visible", true)
-		$Quantity.set_deferred("text", str(item_quantity))
-	$DestroyTimer.start(3+delay)
+		$Icon.set_deferred("texture", load("res://Assets/Images/User interface/ItemPickUpBox/x.png"))
+		$ItemName.set_deferred("text", item_name)
+		yield(get_tree(), "idle_frame")
+		set_size_of_description($ItemName.rect_size.x)
+		$GridContainer.rect_size.x = width
+		$Quantity.set_deferred("visible", false)
+		$DestroyTimer.start(3+delay)
 
 func set_size_of_description(x):
 	if x <= 120:

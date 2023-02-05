@@ -83,6 +83,12 @@ func swing_deferred(item_name):
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
+		if get_node("../Magic").mouse_left_down:
+			if valid_tool_health():
+				swing_deferred(item_name)
+			else:
+				swing_deferred(null)
+			return
 		thread.wait_to_finish()
 
 
@@ -177,6 +183,12 @@ func set_watered_tile():
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
 
+
+func valid_tool_health():
+	if PlayerData.normal_hotbar_mode:
+		return PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot))
+	else:
+		return PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar))
 
 func return_current_tool_health():
 	if PlayerData.normal_hotbar_mode:

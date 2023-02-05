@@ -187,16 +187,16 @@ func return_advanced_fruit_tree_phase(current_phase):
 		"4":
 			return "empty"
 		"empty":
-			if PlayerData.player_data["season"] == "Fall":
+			if PlayerData.player_data["season"] == "fall":
 				return "mature1"
 			return "empty"
 		"mature1":
-			if PlayerData.player_data["season"] == "Fall":
+			if PlayerData.player_data["season"] == "fall":
 				return "mature2"
 			return "empty"
 		"mature2":
-			if PlayerData.player_data["season"] == "Fall":
-				return "mature2"
-			return "harvest"
+			if PlayerData.player_data["season"] == "fall":
+				return "harvest"
+			return "empty"
 
 

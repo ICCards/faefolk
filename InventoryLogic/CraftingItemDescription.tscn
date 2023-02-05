@@ -19,13 +19,13 @@ z_index = 2
 script = ExtResource( 11 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
-margin_right = 55.0
-margin_bottom = 120.0
+margin_right = 61.0
+margin_bottom = 142.0
 size_flags_vertical = 3
 custom_constants/vseparation = 0
 
 [node name="TopRow" type="GridContainer" parent="GridContainer"]
-margin_right = 55.0
+margin_right = 61.0
 margin_bottom = 18.0
 size_flags_horizontal = 3
 custom_constants/vseparation = 0
@@ -39,7 +39,7 @@ texture = ExtResource( 2 )
 
 [node name="TopMiddle" type="TextureRect" parent="GridContainer/TopRow"]
 margin_left = 4.0
-margin_right = 49.0
+margin_right = 55.0
 margin_bottom = 18.0
 grow_horizontal = 2
 size_flags_horizontal = 3
@@ -47,16 +47,16 @@ texture = ExtResource( 3 )
 stretch_mode = 1
 
 [node name="TopRight" type="TextureRect" parent="GridContainer/TopRow"]
-margin_left = 42.0
-margin_right = 55.0
+margin_left = 48.0
+margin_right = 61.0
 margin_bottom = 18.0
 texture = ExtResource( 4 )
 stretch_mode = 1
 
 [node name="MiddleRow" type="GridContainer" parent="GridContainer"]
 margin_top = 18.0
-margin_right = 55.0
-margin_bottom = 69.0
+margin_right = 61.0
+margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 0
@@ -65,31 +65,31 @@ columns = 3
 
 [node name="MiddleLeft" type="TextureRect" parent="GridContainer/MiddleRow"]
 margin_right = 11.0
-margin_bottom = 51.0
+margin_bottom = 62.0
 texture = ExtResource( 6 )
 stretch_mode = 2
 
 [node name="MiddleLeft2" type="TextureRect" parent="GridContainer/MiddleRow"]
 margin_left = 10.0
-margin_right = 43.0
-margin_bottom = 51.0
+margin_right = 49.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 7 )
 expand = true
 
 [node name="TopRight2" type="TextureRect" parent="GridContainer/MiddleRow"]
-margin_left = 42.0
-margin_right = 55.0
-margin_bottom = 51.0
+margin_left = 48.0
+margin_right = 61.0
+margin_bottom = 62.0
 size_flags_vertical = 3
 texture = ExtResource( 5 )
 stretch_mode = 1
 
 [node name="BottomRow" type="GridContainer" parent="GridContainer"]
-margin_top = 69.0
-margin_right = 55.0
-margin_bottom = 120.0
+margin_top = 80.0
+margin_right = 61.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 0
@@ -103,15 +103,15 @@ texture = ExtResource( 9 )
 
 [node name="BottomMiddle" type="TextureRect" parent="GridContainer/BottomRow"]
 margin_left = 10.0
-margin_right = 43.0
+margin_right = 49.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 texture = ExtResource( 8 )
 expand = true
 
 [node name="BottomRight" type="TextureRect" parent="GridContainer/BottomRow"]
-margin_left = 42.0
-margin_right = 55.0
+margin_left = 48.0
+margin_right = 61.0
 margin_bottom = 16.0
 texture = ExtResource( 10 )
 stretch_mode = 1
