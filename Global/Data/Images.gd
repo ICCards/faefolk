@@ -616,53 +616,93 @@ func returnToolSprite(toolName, animation):
 		"wood sword":
 			match animation: 
 				"sword_swing_down":
-					 return wood_sword.down
+					 return wood_sword_swing.down
 				"sword_swing_up":
-					 return wood_sword.up
+					 return wood_sword_swing.up
 				"sword_swing_left":
-					 return wood_sword.left
+					 return wood_sword_swing.left
 				"sword_swing_right":
-					return wood_sword.right
+					return wood_sword_swing.right
+				"sword_block_down":
+					 return wood_sword_block.down
+				"sword_block_up":
+					 return wood_sword_block.up
+				"sword_block_left":
+					 return wood_sword_block.left
+				"sword_block_right":
+					return wood_sword_block.right
 		"stone sword":
 			match animation: 
 				"sword_swing_down":
-					 return stone_sword.down
+					 return stone_sword_swing.down
 				"sword_swing_up":
-					 return stone_sword.up
+					 return stone_sword_swing.up
 				"sword_swing_left":
-					 return stone_sword.left
+					 return stone_sword_swing.left
 				"sword_swing_right":
-					return stone_sword.right
+					return stone_sword_swing.right
+				"sword_block_down":
+					 return stone_sword_block.down
+				"sword_block_up":
+					 return stone_sword_block.up
+				"sword_block_left":
+					 return stone_sword_block.left
+				"sword_block_right":
+					return stone_sword_block.right
 		"bronze sword":
 			match animation: 
 				"sword_swing_down":
-					 return bronze_sword.down
+					 return bronze_sword_swing.down
 				"sword_swing_up":
-					 return bronze_sword.up
+					 return bronze_sword_swing.up
 				"sword_swing_left":
-					 return bronze_sword.left
+					 return bronze_sword_swing.left
 				"sword_swing_right":
-					return bronze_sword.right
+					return bronze_sword_swing.right
+				"sword_block_down":
+					 return bronze_sword_block.down
+				"sword_block_up":
+					 return bronze_sword_block.up
+				"sword_block_left":
+					 return bronze_sword_block.left
+				"sword_block_right":
+					return bronze_sword_block.right
 		"iron sword":
 			match animation: 
 				"sword_swing_down":
-					 return iron_sword.down
+					 return iron_sword_swing.down
 				"sword_swing_up":
-					 return iron_sword.up
+					 return iron_sword_swing.up
 				"sword_swing_left":
-					 return iron_sword.left
+					 return iron_sword_swing.left
 				"sword_swing_right":
-					return iron_sword.right
+					return iron_sword_swing.right
+				"sword_block_down":
+					 return iron_sword_block.down
+				"sword_block_up":
+					 return iron_sword_block.up
+				"sword_block_left":
+					 return iron_sword_block.left
+				"sword_block_right":
+					return iron_sword_block.right
 		"gold sword":
 			match animation: 
 				"sword_swing_down":
-					 return gold_sword.down
+					 return gold_sword_swing.down
 				"sword_swing_up":
-					 return gold_sword.up
+					 return gold_sword_swing.up
 				"sword_swing_left":
-					 return gold_sword.left
+					 return gold_sword_swing.left
 				"sword_swing_right":
-					return gold_sword.right
+					return gold_sword_swing.right
+				"sword_block_down":
+					 return gold_sword_block.down
+				"sword_block_up":
+					 return gold_sword_block.up
+				"sword_block_left":
+					 return gold_sword_block.left
+				"sword_block_right":
+					return gold_sword_block.right
 		"stone watering can":
 			match animation:
 				"watering_down":
@@ -926,35 +966,66 @@ var gold_hoe = {
 	left = load("res://Characters/Weapon swings/axe pickaxe swing/hoe/gold/left.png"), 
 	right = load("res://Characters/Weapon swings/axe pickaxe swing/hoe/gold/right.png")
 }
-var wood_sword = {
+var wood_sword_swing = {
 	down = load("res://Characters/Weapon swings/scythe sword swing/sword/wood/down.png"), 
 	up =  load("res://Characters/Weapon swings/scythe sword swing/sword/wood/up.png"), 
 	left = load("res://Characters/Weapon swings/scythe sword swing/sword/wood/left.png"), 
 	right = load("res://Characters/Weapon swings/scythe sword swing/sword/wood/right.png")
 }
-var stone_sword = {
+var stone_sword_swing = {
 	down = load("res://Characters/Weapon swings/scythe sword swing/sword/stone/down.png"), 
 	up =  load("res://Characters/Weapon swings/scythe sword swing/sword/stone/up.png"), 
 	left = load("res://Characters/Weapon swings/scythe sword swing/sword/stone/left.png"), 
 	right = load("res://Characters/Weapon swings/scythe sword swing/sword/stone/right.png")
 }
-var bronze_sword = {
+var bronze_sword_swing = {
 	down = load("res://Characters/Weapon swings/scythe sword swing/sword/bronze/down.png"), 
 	up =  load("res://Characters/Weapon swings/scythe sword swing/sword/bronze/up.png"), 
 	left = load("res://Characters/Weapon swings/scythe sword swing/sword/bronze/left.png"), 
 	right = load("res://Characters/Weapon swings/scythe sword swing/sword/bronze/right.png")
 }
-var iron_sword = {
+var iron_sword_swing = {
 	down = load("res://Characters/Weapon swings/scythe sword swing/sword/iron/down.png"), 
 	up =  load("res://Characters/Weapon swings/scythe sword swing/sword/iron/up.png"), 
 	left = load("res://Characters/Weapon swings/scythe sword swing/sword/iron/left.png"), 
 	right = load("res://Characters/Weapon swings/scythe sword swing/sword/iron/right.png")
 }
-var gold_sword = {
+var gold_sword_swing = {
 	down = load("res://Characters/Weapon swings/scythe sword swing/sword/gold/down.png"), 
 	up =  load("res://Characters/Weapon swings/scythe sword swing/sword/gold/up.png"), 
 	left = load("res://Characters/Weapon swings/scythe sword swing/sword/gold/left.png"), 
 	right = load("res://Characters/Weapon swings/scythe sword swing/sword/gold/right.png")
+}
+
+var wood_sword_block = {
+	down = load("res://Characters/Weapon swings/scythe sword swing/sword block/wood/down.png"), 
+	up =  load("res://Characters/Weapon swings/scythe sword swing/sword block/wood/up.png"), 
+	left = load("res://Characters/Weapon swings/scythe sword swing/sword block/wood/left.png"), 
+	right = load("res://Characters/Weapon swings/scythe sword swing/sword block/wood/right.png")
+}
+var stone_sword_block = {
+	down = load("res://Characters/Weapon swings/scythe sword swing/sword block/stone/down.png"), 
+	up =  load("res://Characters/Weapon swings/scythe sword swing/sword block/stone/up.png"), 
+	left = load("res://Characters/Weapon swings/scythe sword swing/sword block/stone/left.png"), 
+	right = load("res://Characters/Weapon swings/scythe sword swing/sword block/stone/right.png")
+}
+var bronze_sword_block = {
+	down = load("res://Characters/Weapon swings/scythe sword swing/sword block/bronze/down.png"), 
+	up =  load("res://Characters/Weapon swings/scythe sword swing/sword block/bronze/up.png"), 
+	left = load("res://Characters/Weapon swings/scythe sword swing/sword block/bronze/left.png"), 
+	right = load("res://Characters/Weapon swings/scythe sword swing/sword block/bronze/right.png")
+}
+var iron_sword_block = {
+	down = load("res://Characters/Weapon swings/scythe sword swing/sword block/iron/down.png"), 
+	up =  load("res://Characters/Weapon swings/scythe sword swing/sword block/iron/up.png"), 
+	left = load("res://Characters/Weapon swings/scythe sword swing/sword block/iron/left.png"), 
+	right = load("res://Characters/Weapon swings/scythe sword swing/sword block/iron/right.png")
+}
+var gold_sword_block = {
+	down = load("res://Characters/Weapon swings/scythe sword swing/sword block/gold/down.png"), 
+	up =  load("res://Characters/Weapon swings/scythe sword swing/sword block/gold/up.png"), 
+	left = load("res://Characters/Weapon swings/scythe sword swing/sword block/gold/left.png"), 
+	right = load("res://Characters/Weapon swings/scythe sword swing/sword block/gold/right.png")
 }
 
 var scythe = {

@@ -1,12 +1,15 @@
 extends Node2D
 
+const LENGTH_OF_TRANSITION = 60.0
+
+
 func _ready():
 	PlayerData.connect("set_day", self, "play_set_day")
 	PlayerData.connect("set_night", self, "play_set_night")
 	if PlayerData.player_data:
 		if PlayerData.player_data["time_hours"] >= 18 or PlayerData.player_data["time_hours"] < 6:
-			$Clouds.set_deferred("emitting", false)
-			$LargeClouds.set_deferred("emitting", false)
+			$Clouds.set_deferred("self_modulate", Color("00ffffff"))
+			$LargeClouds.set_deferred("self_modulate", Color("00ffffff"))
 
 func _physics_process(delta):
 	if Server.player_node:
@@ -19,9 +22,20 @@ func _physics_process(delta):
 		hide()
 
 func play_set_day():
-	$Clouds.set_deferred("emitting", true)
-	$LargeClouds.set_deferred("emitting", true)
+	$Tween.interpolate_property($Clouds, "self_modulate",
+		Color("00ffffff"), Color("ffffff"), LENGTH_OF_TRANSITION,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($LargeClouds, "self_modulate",
+		Color("00ffffff"), Color("ffffff"), LENGTH_OF_TRANSITION,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
 
 func play_set_night():
-	$Clouds.set_deferred("emitting", false)
-	$LargeClouds.set_deferred("emitting", false)
+	$Tween.interpolate_property($Clouds, "self_modulate",
+		Color("ffffff"), Color("00ffffff"), LENGTH_OF_TRANSITION,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($LargeClouds, "self_modulate",
+		Color("ffffff"), Color("00ffffff"), LENGTH_OF_TRANSITION,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()

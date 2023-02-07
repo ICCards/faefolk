@@ -172,7 +172,7 @@ func set_dimensions():
 			Server.player_node.user_interface.get_node("ChangeVariety").show()
 			$ItemToPlace.show()
 		GATE:
-			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeRotation").show()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$GateToPlace.show()
 		FORAGE:
@@ -203,26 +203,30 @@ func place_gate_state():
 	var location = Tiles.valid_tiles.world_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
-#	get_rotation_index()
-	#$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + direction + ".png")
-	if (direction == "up" or direction == "down"):
-		$ColorIndicator.tile_size = dimensions
+	get_rotation_index()
+	if direction == "up" or direction == "down":
+		$ColorIndicator.tile_size = Vector2(2, 1)
+		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 	else:
-		$ColorIndicator.tile_size = Vector2(dimensions.y, dimensions.x)
-	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+		$ColorIndicator.tile_size = Vector2(1, 2)
+		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + " side.png")
+	if (direction == "up" or direction == "down")  and (not Tiles.validate_tiles(location, Vector2(2,1)) or not Tiles.validate_foundation_tiles(location,Vector2(2,1))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "up" or direction == "down") and (not Tiles.validate_tiles(location, dimensions)):
+	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(1,2)) or not Tiles.validate_foundation_tiles(location,Vector2(1,2))):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
-	elif (direction == "left" or direction == "right") and (not Tiles.validate_tiles(location, Vector2(dimensions.y,dimensions.x))):
+	elif Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use_tool")):
-			place_object(item_name, directions[direction_index], location, "placable")
+			if direction == "up" or direction == "down":
+				place_object(item_name, null, location, "placable")
+			else:
+				place_object(item_name + " side", null, location, "placable")
 
 
 func place_customizable_state():

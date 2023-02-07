@@ -759,6 +759,113 @@ var male = {
 		1 : load("res://Characters/Human/male/SWORD SWING/assets/left/shoes/shoes.png")
 	},
 	
+	body_sword_block_down = {
+		0 : load("res://Characters/Human/male/SWORD BLOCK/body/down/body.png")
+	},
+	body_sword_block_up = {
+		0 : load("res://Characters/Human/male/SWORD BLOCK/body/up/body.png")
+	},
+	body_sword_block_right = {
+		0 : load("res://Characters/Human/male/SWORD BLOCK/body/right/body.png")
+	},
+	body_sword_block_left = {
+		0 : load("res://Characters/Human/male/SWORD BLOCK/body/left/body.png")
+	},
+
+	arms_sword_block_down = {
+		0 : load("res://Characters/Human/male/SWORD BLOCK/body/down/arms.png")
+	},
+	arms_sword_block_up = {
+		0 : load("res://Characters/Human/male/SWORD BLOCK/body/up/arms.png")
+	},
+	arms_sword_block_right = {
+		0 : load("res://Characters/Human/male/SWORD BLOCK/body/right/arms.png")
+	},
+	arms_sword_block_left = {
+		0 : load("res://Characters/Human/male/SWORD BLOCK/body/left/arms.png")
+	},
+
+	acc_sword_block_down = {
+		0 : null,
+	},
+	acc_sword_block_up = {
+		0 : null,
+	},
+	acc_sword_block_right = {
+		0 : null,
+	},
+	acc_sword_block_left = {
+		0 : null,
+	},
+
+	head_attribute_sword_block_down = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_sword_block_up = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_sword_block_right = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_sword_block_left = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_sword_block_down = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/down/shirts/shirt.png")
+	},
+	shirts_sword_block_up = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/up/shirts/shirt.png")
+	},
+	shirts_sword_block_right = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/right/shirts/shirt.png")
+	},
+	shirts_sword_block_left = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/left/shirts/shirt.png")
+	},
+
+	pants_sword_block_down = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/down/pants/pants.png")
+	},
+	pants_sword_block_up = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/up/pants/pants.png")
+	},
+	pants_sword_block_right = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/right/pants/pants.png")
+	},
+	pants_sword_block_left = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/left/pants/pants.png")
+	},
+
+	shoes_sword_block_down = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/down/shoes/shoes.png")
+	},
+	shoes_sword_block_up = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/up/shoes/shoes.png")
+	},
+	shoes_sword_block_right = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/right/shoes/shoes.png")
+	},
+	shoes_sword_block_left = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SWORD BLOCK/assets/left/shoes/shoes.png")
+	},
+	
 	body_holding_idle_down = {
 		0 : load("res://Characters/Human/male/HOLDING IDLE/body/down/body.png")
 	},

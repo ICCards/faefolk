@@ -46,7 +46,7 @@ var starting_player_data = {
 	"current_save_scene" : "res://World/World/World.tscn",
 	"respawn_position": null,
 	"respawn_scene" : "res://World/World/World.tscn",
-	"season": "fall",
+	"season": "spring",
 	"day_week": "Mon.",
 	"day_number": 1,
 	"time_minutes": 0,

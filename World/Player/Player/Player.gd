@@ -156,23 +156,31 @@ func _unhandled_input(event):
 					if event.is_action_pressed("slot1"):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 1)
-						else:
+						elif item_name == "bow":
 							$Magic.draw_bow(1)
+						elif Util.isSword(item_name):
+							$Swing.swing(item_name)
 					elif event.is_action_pressed("slot2") or (event is InputEventMouseButton and event.button_index == BUTTON_RIGHT):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 2)
-						else:
+						elif item_name == "bow":
 							$Magic.draw_bow(2)
+						elif Util.isSword(item_name):
+							$Swing.swing(item_name)
 					elif event.is_action_pressed("slot3"):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 3)
-						else:
+						elif item_name == "bow":
 							$Magic.draw_bow(3)
+						elif Util.isSword(item_name):
+							$Swing.swing(item_name)
 					elif event.is_action_pressed("slot4"):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 4)
-						else:
+						elif item_name == "bow":
 							$Magic.draw_bow(4)
+						elif Util.isSword(item_name):
+							$Swing.swing(item_name)
 			else:
 				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
 					player_action(null, null)

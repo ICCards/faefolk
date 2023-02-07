@@ -20,3 +20,5 @@ damping_random = 0.75
 
 [node name="FallingLeaf" parent="." instance=ExtResource( 1 )]
 amount = 36000
+
+[node name="Tween" type="Tween" parent="."]

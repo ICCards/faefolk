@@ -33,52 +33,75 @@ enum {
 
 var thread = Thread.new()
 
+
+func sword_swing(item_name):
+	if not thread.is_active():
+		thread.start(self,"whoAmISwordSwing",item_name)
+
+func whoAmISwordSwing(item_name):
+	call_deferred("sword_swing_deferred",item_name)
+
+
+func sword_swing_deferred(item_name):
+	if get_parent().state != SWORD_SWINGING:
+		if get_node("../Magic").player_fire_buff:
+			sword_swing.special_ability = "fire"
+		else:
+			sword_swing.special_ability = ""
+		animation = "sword_swing_" + get_parent().direction.to_lower()
+		get_parent().state = SWORD_SWINGING
+		sword_swing.tool_name = item_name
+		player_animation_player.play(animation)
+		sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.play()
+		PlayerData.change_energy(-1)
+		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
+		yield(player_animation_player, "animation_finished" )
+		get_parent().state = MOVEMENT
+		if get_node("../Magic").mouse_left_down:
+			if valid_tool_health():
+				sword_swing_deferred(item_name)
+			else:
+				swing_deferred(null)
+			return
+		thread.wait_to_finish()
+
+
 func swing(item_name):
 	if not thread.is_active():
 		thread.start(self,"whoAmISwing",item_name)
 
 func whoAmISwing(item_name):
 	call_deferred("swing_deferred",item_name)
+	
 
 func swing_deferred(item_name):
-	if get_parent().state != SWINGING or get_parent().state != SWORD_SWINGING:
+	if get_parent().state != SWINGING:
 		get_node("../Sounds/FootstepsSound").stream_paused = true
-		if item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
-			if get_node("../Magic").player_fire_buff:
-				sword_swing.special_ability = "fire"
-			else:
-				sword_swing.special_ability = ""
+		get_parent().state = SWINGING
+		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
+			set_watered_tile()
+			animation = "watering_" + get_parent().direction.to_lower()
+			player_animation_player.play("watering")
+		elif item_name == "scythe":
+			player_animation_player.play("scythe_swing_" + get_parent().direction.to_lower())
 			animation = "sword_swing_" + get_parent().direction.to_lower()
-			get_parent().state = SWORD_SWINGING
-			sword_swing.tool_name = item_name
-			player_animation_player.play(animation)
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
+		elif item_name == "arrow":
+			thread.wait_to_finish()
+			get_parent().state = MOVEMENT
+			return
+		elif item_name == null:
+			set_swing_collision_layer_and_position(item_name, get_parent().direction)
+			animation = "punch_" + get_parent().direction.to_lower()
+			player_animation_player.play("punch")
 		else:
-			get_parent().state = SWINGING
-			if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
-				set_watered_tile()
-				animation = "watering_" + get_parent().direction.to_lower()
-				player_animation_player.play("watering")
-			elif item_name == "scythe":
-				player_animation_player.play("scythe_swing_" + get_parent().direction.to_lower())
-				animation = "sword_swing_" + get_parent().direction.to_lower()
-				sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
-				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-				sound_effects.play()
-			elif item_name == "arrow":
-				thread.wait_to_finish()
-				get_parent().state = MOVEMENT
-				return
-			elif item_name == null:
-				set_swing_collision_layer_and_position(item_name, get_parent().direction)
-				animation = "punch_" + get_parent().direction.to_lower()
-				player_animation_player.play("punch")
-			else:
-				set_swing_collision_layer_and_position(item_name, get_parent().direction)
-				animation = "swing_" + get_parent().direction.to_lower()
-				player_animation_player.play("axe pickaxe swing")
+			set_swing_collision_layer_and_position(item_name, get_parent().direction)
+			animation = "swing_" + get_parent().direction.to_lower()
+			player_animation_player.play("axe pickaxe swing")
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )

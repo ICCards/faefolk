@@ -173,7 +173,6 @@ func return_advanced_tree_phase(current_phase):
 		"4":
 			return "5"
 
-
 func return_advanced_fruit_tree_phase(current_phase):
 	match current_phase:
 		"sapling":
@@ -198,5 +197,11 @@ func return_advanced_fruit_tree_phase(current_phase):
 			if PlayerData.player_data["season"] == "fall":
 				return "harvest"
 			return "empty"
+
+
+func isSword(item_name):
+	if item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "bronze sword" or item_name == "gold sword":
+		return true
+	return false
 
 

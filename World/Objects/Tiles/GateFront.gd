@@ -7,14 +7,22 @@ var door_open = false
 var id
 var location
 
-var object_name = "gate"
+var horizontal: bool
 
+var object_name = "gate"
 var temp_health = 3
 
+func _ready():
+	if horizontal:
+		$GatePos/Gate.animation == "wood front" 
+
+
 func _on_HurtBox_area_entered(area):
-	if temp_health == 0:
-		if area.name == "AxePickaxeSwing":
+	if area.name == "AxePickaxeSwing":
 			Stats.decrease_tool_health()
+	if temp_health == 0:
+		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
+		MapData.remove_placable(name)
 		InstancedScenes.intitiateItemDrop("wood gate", position, 1)
 		Tiles.add_valid_tiles(location, Vector2(2,1))
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
