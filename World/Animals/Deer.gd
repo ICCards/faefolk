@@ -148,21 +148,14 @@ func attack():
 		attacking = true
 		deer_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Deer/attack/" +  direction + "/body.png"))
 		animation_player.play("attack")
-		if player_not_inside_walls():
-			yield(get_tree().create_timer(0.25), "timeout")
-			if not destroyed:
-				$DeerAttack/CollisionShape2D.set_deferred("disabled", false)
+		yield(get_tree().create_timer(0.25), "timeout")
+		if not destroyed and Util.isValidEnemyAttack($LineOfSight):
+			$DeerAttack/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if not destroyed:
 			animation_player.call_deferred("play", "loop")
 			attacking = false
 			state = CHASE
-
-func player_not_inside_walls() -> bool:
-	var collider = $LineOfSight.get_collider()
-	if collider and (collider.name == "WallTiles" or collider.name == "DoorMovementCollision"):
-		return false
-	return true
 
 func hit(tool_name):
 	call_deferred("play_hurt_sound_effect")

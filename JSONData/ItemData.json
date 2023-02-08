@@ -1142,7 +1142,7 @@
   "sugar cane seeds": {
       "ItemCategory": "Seed",
       "StackSize": 999,
-      "Description": "need to add",
+      "Description": "Plant these in the Spring, Summer or Fall. Takes 7 days to mature and .",
       "Ingredients": null,
       "EnergyHealth": null
   },

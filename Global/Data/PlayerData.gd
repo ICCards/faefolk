@@ -16,6 +16,7 @@ signal health_changed
 signal health_depleted
 signal tool_health_change
 signal active_item_updated
+signal play_wind_curse
 
 var file_name = "res://JSONData/PlayerData.json"
 onready var SlotClass = load("res://InventoryLogic/Slot.gd")
@@ -38,8 +39,8 @@ var InventorySlots
 var HotbarSlots
 var active_item_slot = 0
 var active_item_slot_combat_hotbar = 0
-
-var game_state: GameState
+#
+#var game_state: GameState
 
 var starting_player_data = {
 	"current_save_location": null,
@@ -188,7 +189,7 @@ var starting_player_data = {
 			"foraging": 0,
 			"fishing": 0,
 			"mining": 0,
-			"sword": 1,
+			"sword": 100,
 			"bow": 1,
 			"dark": 0,
 			"electric": 0,
@@ -377,36 +378,13 @@ var starting_player_data = {
 		"volume": {
 			"music": 0.0,
 			"sound": 50.0,
-			"ambient": 50.0,
+			"ambient": 0.0,
 			"footstep": 50.0
 		}
 	}
 }
 
 var player_data = starting_player_data
-
-
-#func _ready():
-#	load_player_data()
-#
-#func save_player_data():
-#	game_state = GameState.new()
-#	game_state.save_player_state(player_data)
-#	var file = File.new()
-#	file.open(file_name,File.WRITE)
-#	file.store_string(to_json(player_data))
-#	file.close()
-#	print("saved player data")
-
-#func load_player_data():
-#	if GameState.save_exists():
-#		game_state = GameState.new()
-#		game_state.load_state()
-#		player_data = game_state.player_state
-#	else:
-#		game_state = GameState.new()
-#		game_state.save_player_state(starting_player_data)
-#		player_data = starting_player_data
 
 
 func eat(food_name):
@@ -433,6 +411,7 @@ func change_health(amount):
 func change_energy(amount):
 	player_data["energy"] += amount
 	if player_data["energy"] <= 0:
+		change_health(-1)
 		player_data["energy"] = 0
 	elif player_data["energy"] >= energy_maximum:
 		player_data["energy"] = energy_maximum

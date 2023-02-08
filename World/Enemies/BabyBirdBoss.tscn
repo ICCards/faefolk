@@ -1,105 +1,107 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
-[ext_resource path="res://Assets/Images/Enemies/bat/fly.png" type="Texture" id=1]
-[ext_resource path="res://World/Enemies/Slime/Bat.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/down.png" type="Texture" id=1]
+[ext_resource path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/Enemies/shadow sprite.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=5]
-[ext_resource path="res://Assets/Images/Enemies/bat/bat break.png" type="Texture" id=6]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/Enemies/BabyBirdBoss.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/Enemies/shadow sprite.png" type="Texture" id=6]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=8]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=9]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=10]
-[ext_resource path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/up.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=10]
+[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/left.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/right.png" type="Texture" id=13]
 
-[sub_resource type="CircleShape2D" id=42]
+[sub_resource type="CircleShape2D" id=165]
 radius = 4.0
 
-[sub_resource type="AtlasTexture" id=149]
+[sub_resource type="AtlasTexture" id=166]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 32, 16, 16 )
+region = Rect2( 0, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=150]
+[sub_resource type="AtlasTexture" id=167]
 atlas = ExtResource( 1 )
-region = Rect2( 16, 32, 16, 16 )
+region = Rect2( 48, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=151]
+[sub_resource type="AtlasTexture" id=168]
 atlas = ExtResource( 1 )
-region = Rect2( 32, 32, 16, 16 )
+region = Rect2( 96, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=152]
+[sub_resource type="AtlasTexture" id=169]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 32, 16, 16 )
+region = Rect2( 144, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=153]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id=179]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=154]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id=180]
+atlas = ExtResource( 12 )
+region = Rect2( 48, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=155]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id=181]
+atlas = ExtResource( 12 )
+region = Rect2( 96, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=156]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id=182]
+atlas = ExtResource( 12 )
+region = Rect2( 144, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=157]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=183]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=158]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=184]
+atlas = ExtResource( 13 )
+region = Rect2( 48, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=159]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=185]
+atlas = ExtResource( 13 )
+region = Rect2( 96, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=160]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=186]
+atlas = ExtResource( 13 )
+region = Rect2( 144, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=161]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 48, 16, 16 )
+[sub_resource type="AtlasTexture" id=187]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=162]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 48, 16, 16 )
+[sub_resource type="AtlasTexture" id=188]
+atlas = ExtResource( 9 )
+region = Rect2( 48, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=163]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 48, 16, 16 )
+[sub_resource type="AtlasTexture" id=189]
+atlas = ExtResource( 9 )
+region = Rect2( 96, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=164]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 48, 16, 16 )
+[sub_resource type="AtlasTexture" id=190]
+atlas = ExtResource( 9 )
+region = Rect2( 144, 0, 48, 48 )
 
-[sub_resource type="SpriteFrames" id=17]
+[sub_resource type="SpriteFrames" id=170]
 animations = [ {
-"frames": [ SubResource( 149 ), SubResource( 150 ), SubResource( 151 ), SubResource( 152 ) ],
+"frames": [ SubResource( 166 ), SubResource( 167 ), SubResource( 168 ), SubResource( 169 ) ],
 "loop": true,
 "name": "fly down",
-"speed": 8.0
+"speed": 6.0
 }, {
-"frames": [ SubResource( 153 ), SubResource( 154 ), SubResource( 155 ), SubResource( 156 ) ],
+"frames": [ SubResource( 179 ), SubResource( 180 ), SubResource( 181 ), SubResource( 182 ) ],
 "loop": true,
 "name": "fly left",
-"speed": 8.0
+"speed": 6.0
 }, {
-"frames": [ SubResource( 157 ), SubResource( 158 ), SubResource( 159 ), SubResource( 160 ) ],
+"frames": [ SubResource( 183 ), SubResource( 184 ), SubResource( 185 ), SubResource( 186 ) ],
 "loop": true,
 "name": "fly right",
-"speed": 8.0
+"speed": 6.0
 }, {
-"frames": [ SubResource( 161 ), SubResource( 162 ), SubResource( 163 ), SubResource( 164 ) ],
+"frames": [ SubResource( 187 ), SubResource( 188 ), SubResource( 189 ), SubResource( 190 ) ],
 "loop": true,
 "name": "fly up",
-"speed": 8.0
+"speed": 6.0
 } ]
 
 [sub_resource type="AtlasTexture" id=145]
@@ -158,7 +160,7 @@ region = Rect2( 288, 0, 24, 24 )
 atlas = ExtResource( 3 )
 region = Rect2( 312, 0, 24, 24 )
 
-[sub_resource type="SpriteFrames" id=41]
+[sub_resource type="SpriteFrames" id=171]
 animations = [ {
 "frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 146 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
 "loop": true,
@@ -166,11 +168,11 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=147]
-radius = 18.0
+[sub_resource type="CapsuleShape2D" id=172]
+radius = 22.0
 height = 12.0
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=173]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("../BatSprite:material:shader_param/flash_modifier")
@@ -185,7 +187,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=174]
 resource_name = "hit"
 length = 0.25
 step = 0.05
@@ -202,10 +204,10 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="CircleShape2D" id=38]
-radius = 8.0
+[sub_resource type="CircleShape2D" id=175]
+radius = 9.0
 
-[sub_resource type="Animation" id=148]
+[sub_resource type="Animation" id=176]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("HurtBox/CollisionShape2D:disabled")
@@ -220,7 +222,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("BatHit/CollisionShape2D:disabled")
+tracks/1/path = NodePath("BabyBirdBossHit/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -256,7 +258,7 @@ tracks/3/keys = {
 "values": [ true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("BreakParticles:emitting")
+tracks/4/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -268,7 +270,7 @@ tracks/4/keys = {
 "values": [ false ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -280,7 +282,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -292,7 +294,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/7/path = NodePath("Electricity:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -304,7 +306,7 @@ tracks/7/keys = {
 "values": [ false ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Electricity:visible")
+tracks/8/path = NodePath("ShadowSprite:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -312,23 +314,11 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("ShadowSprite:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=177]
 resource_name = "death"
 length = 2.5
 tracks/0/type = "value"
@@ -344,7 +334,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("BatHit/CollisionShape2D:disabled")
+tracks/1/path = NodePath("BabyBirdBossHit/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -392,7 +382,7 @@ tracks/4/keys = {
 "values": [ false ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("BreakParticles:emitting")
+tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -401,10 +391,10 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -416,7 +406,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -428,7 +418,7 @@ tracks/7/keys = {
 "values": [ false ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/8/path = NodePath("Electricity:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -439,35 +429,15 @@ tracks/8/keys = {
 "update": 1,
 "values": [ false ]
 }
-tracks/9/type = "value"
-tracks/9/path = NodePath("Electricity:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
 
-[sub_resource type="CanvasItemMaterial" id=165]
-particles_animation = true
-particles_anim_h_frames = 2
-particles_anim_v_frames = 2
-particles_anim_loop = false
+[node name="BabyBirdBoss" type="KinematicBody2D"]
+script = ExtResource( 5 )
 
-[node name="Bat" type="KinematicBody2D"]
-collision_layer = 268435456
-collision_mask = 268435520
-script = ExtResource( 2 )
+[node name="SetEnemyDirection" parent="." instance=ExtResource( 2 )]
 
-[node name="SetEnemyDirection" parent="." instance=ExtResource( 11 )]
+[node name="EnemyFrozenState" parent="." instance=ExtResource( 11 )]
 
-[node name="EnemyFrozenState" parent="." instance=ExtResource( 7 )]
-
-[node name="EnemyTornadoState" parent="." instance=ExtResource( 10 )]
+[node name="EnemyTornadoState" parent="." instance=ExtResource( 7 )]
 
 [node name="EnemyPoisonState" parent="." instance=ExtResource( 8 )]
 
@@ -480,19 +450,20 @@ position = Vector2( 0, -27 )
 [node name="P1" parent="EnemyPoisonState/PoisonParticles" index="2"]
 position = Vector2( 0, -27 )
 
-[node name="EnemyStunnedState" parent="." instance=ExtResource( 9 )]
+[node name="EnemyStunnedState" parent="." instance=ExtResource( 4 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 42 )
+shape = SubResource( 165 )
 
 [node name="BatSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
-material = ExtResource( 5 )
-position = Vector2( 0, -27 )
+material = ExtResource( 10 )
+position = Vector2( 0, -42 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 17 )
+frames = SubResource( 170 )
 animation = "fly down"
+frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -501,66 +472,41 @@ modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 41 )
-frame = 8
+frames = SubResource( 171 )
+frame = 6
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
 collision_layer = 262400
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( 0, -19 )
-shape = SubResource( 147 )
+shape = SubResource( 172 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
-anims/RESET = SubResource( 36 )
-anims/hit = SubResource( 37 )
+anims/RESET = SubResource( 173 )
+anims/hit = SubResource( 174 )
 
-[node name="BatHit" type="Area2D" parent="."]
-visible = false
+[node name="BabyBirdBossHit" type="Area2D" parent="."]
 position = Vector2( 0, -7 )
 collision_layer = 0
 collision_mask = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BatHit"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BabyBirdBossHit"]
 position = Vector2( 0, 4 )
-shape = SubResource( 38 )
+shape = SubResource( 175 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 148 )
-anims/death = SubResource( 43 )
+anims/RESET = SubResource( 176 )
+anims/death = SubResource( 177 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0.435294 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
-
-[node name="BreakParticles" type="CPUParticles2D" parent="."]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-material = SubResource( 165 )
-position = Vector2( 0, -34 )
-emitting = false
-amount = 6
-one_shot = true
-explosiveness = 0.9
+scale = Vector2( 3, 3 )
 texture = ExtResource( 6 )
-emission_shape = 2
-emission_rect_extents = Vector2( 4, 4 )
-direction = Vector2( 0, -1 )
-spread = 90.0
-gravity = Vector2( 0, 60 )
-initial_velocity = 45.0
-initial_velocity_random = 1.0
-angle = 180.0
-angle_random = 1.0
-scale_amount = 2.0
-anim_speed_random = 1.0
-anim_offset = 1.0
-anim_offset_random = 1.0
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 

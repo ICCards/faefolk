@@ -6,11 +6,34 @@ onready var Duck = load("res://World/Animals/Duck.tscn")
 onready var Boar = load("res://World/Animals/Boar.tscn")
 onready var Deer = load("res://World/Animals/Deer.tscn")
 onready var Wolf = load("res://World/Animals/Wolf.tscn")
+onready var BabyBirdBoss = load("res://World/Enemies/BabyBirdBoss.tscn")
 
 onready var Enemies = get_node("../../Enemies")
 
 var spawn_thread := Thread.new()
 var remove_thread := Thread.new()
+
+const NUM_WIND_CURSE_ENEMIES = 25
+
+func _ready():
+	PlayerData.connect("play_wind_curse", self ,"spawn_wind_curse_mobs")
+
+
+
+func spawn_wind_curse_mobs():
+	for i in range(NUM_WIND_CURSE_ENEMIES):
+		var babyBird = BabyBirdBoss.instance()
+		babyBird.global_position = return_baby_bird_pos()
+		Enemies.call_deferred("add_child", babyBird)
+		yield(get_tree().create_timer(3.0), "timeout")
+
+var radius = Vector2(750,0)
+var step = 2 * PI
+
+func return_baby_bird_pos():
+	var center = Server.player_node.position
+	var spawn_pos = center + radius.rotated(step * (rand_range(1,360)))
+	return spawn_pos
 
 func initialize():
 	yield(get_tree().create_timer(2.0), "timeout")

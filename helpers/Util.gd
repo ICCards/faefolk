@@ -205,3 +205,10 @@ func isSword(item_name):
 	return false
 
 
+func isValidEnemyAttack(los) -> bool:
+	var collider = los.get_collider()
+	if collider and (collider.name == "WallTiles" or collider.name == "DoorMovementCollision" or collider.name == "SwordBlock"):
+		return false
+	return true
+
+

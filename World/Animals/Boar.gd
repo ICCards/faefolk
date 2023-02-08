@@ -149,23 +149,15 @@ func attack():
 		hit_box.call_deferred("look_at", player.position)
 		boar_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Boar/attack/" +  direction + "/body.png"))
 		animation_player.call_deferred("play", "attack")
-		if player_not_inside_walls():
-			yield(get_tree().create_timer(0.4), "timeout")
-			if not destroyed:
-				$BoarBite/CollisionShape2D.set_deferred("disabled", false)
+		yield(get_tree().create_timer(0.4), "timeout")
+		if not destroyed and Util.isValidEnemyAttack($LineOfSight):
+			$BoarBite/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if not destroyed:
 			animation_player.call_deferred("play", "loop")
 			attacking = false
 			if state != RETREAT:
 				state = CHASE
-
-func player_not_inside_walls() -> bool:
-	var collider = $LineOfSight.get_collider()
-	if collider:
-		if collider.name == "WallTiles" or collider.name == "DoorMovementCollision":
-			return false
-	return true
 
 func hit(tool_name):
 	play_hurt_sound_effect()

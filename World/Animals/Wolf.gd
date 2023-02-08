@@ -148,29 +148,21 @@ func attack():
 		if Util.chance(50):
 			wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/claw/" +  direction + "/body.png"))
 			animation_player.call_deferred("play", "claw")
-			if player_not_inside_walls():
-				yield(get_tree().create_timer(0.4), "timeout")
-				if not destroyed:
-					$Position2D/WolfClaw/CollisionShape2D.set_deferred("disabled", false)
+			yield(get_tree().create_timer(0.4), "timeout")
+			if not destroyed and Util.isValidEnemyAttack($LineOfSight):
+				$Position2D/WolfClaw/CollisionShape2D.set_deferred("disabled", false)
 		else:
 			wolf_sprite.set_deferred("texture", load("res://Assets/Images/Animals/Wolf/bite/" +  direction + "/body.png"))
 			animation_player.call_deferred("play", "bite")
-			if player_not_inside_walls():
-				yield(get_tree().create_timer(0.4), "timeout")
-				if not destroyed:
-					$Position2D/WolfBite/CollisionShape2D.set_deferred("disabled", false)
+			yield(get_tree().create_timer(0.4), "timeout")
+			if not destroyed and Util.isValidEnemyAttack($LineOfSight):
+				$Position2D/WolfBite/CollisionShape2D.set_deferred("disabled", false)
 		yield(animation_player, "animation_finished")
 		if not destroyed:
 			animation_player.call_deferred("play","loop")
 			attacking = false
 			if state != RETREAT:
 				state = CHASE
-
-func player_not_inside_walls() -> bool:
-	var collider = $LineOfSight.get_collider()
-	if collider and (collider.name == "WallTiles" or collider.name == "DoorMovementCollision"):
-		return false
-	return true
 
 func hit(tool_name):
 	call_deferred("play_hurt_sound_effect")

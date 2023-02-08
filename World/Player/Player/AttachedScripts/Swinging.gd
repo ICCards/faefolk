@@ -34,34 +34,43 @@ enum {
 var thread = Thread.new()
 
 
-func sword_swing(item_name):
+func sword_swing(item_name,attack_index):
 	if not thread.is_active():
-		thread.start(self,"whoAmISwordSwing",item_name)
+		thread.start(self,"whoAmISwordSwing",[item_name,attack_index])
 
-func whoAmISwordSwing(item_name):
-	call_deferred("sword_swing_deferred",item_name)
+func whoAmISwordSwing(data):
+	call_deferred("sword_swing_deferred",data[0],data[1])
 
 
-func sword_swing_deferred(item_name):
+func sword_swing_deferred(item_name,attack_index):
 	if get_parent().state != SWORD_SWINGING:
-		if get_node("../Magic").player_fire_buff:
-			sword_swing.special_ability = "fire"
-		else:
-			sword_swing.special_ability = ""
-		animation = "sword_swing_" + get_parent().direction.to_lower()
-		get_parent().state = SWORD_SWINGING
-		sword_swing.tool_name = item_name
-		player_animation_player.play(animation)
-		sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-		sound_effects.play()
+		if attack_index == 1:
+			if get_node("../Magic").player_fire_buff:
+				sword_swing.special_ability = "fire"
+			else:
+				sword_swing.special_ability = ""
+			animation = "sword_swing_" + get_parent().direction.to_lower()
+			get_parent().state = SWORD_SWINGING
+			sword_swing.tool_name = item_name
+			player_animation_player.play(animation)
+			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+			sound_effects.play()
+		elif attack_index == 2:
+			animation = "sword_block_" + get_parent().direction.to_lower()
+			get_parent().state = SWORD_SWINGING
+#			sword_swing.tool_name = item_name
+			player_animation_player.play(animation)
+#			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
+#			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+#			sound_effects.play()
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down:
 			if valid_tool_health():
-				sword_swing_deferred(item_name)
+				sword_swing_deferred(item_name,1)
 			else:
 				swing_deferred(null)
 			return

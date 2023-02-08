@@ -181,16 +181,16 @@ func decrease_energy_or_health_while_sprinting():
 	temp += 1
 	if temp > 1000:
 		temp = 0
-		if PlayerData.player_data["energy"] == 0:
-			rng.randomize()
-			var amt = rng.randi_range(1,3)
-			$AnimationPlayer.play("hit")
-			InstancedScenes.player_hit_effect(-amt, position)
-			PlayerData.change_health(-amt)
-			yield($AnimationPlayer, "animation_finished")
-			$CollisionShape2D.set_deferred("disabled", false)
-		else:
-			PlayerData.change_energy(-1)
+#		if PlayerData.player_data["energy"] == 0:
+#			rng.randomize()
+#			var amt = rng.randi_range(1,3)
+#			$AnimationPlayer.play("hit")
+#			InstancedScenes.player_hit_effect(-amt, position)
+#			PlayerData.change_health(-amt)
+#			yield($AnimationPlayer, "animation_finished")
+#			$CollisionShape2D.set_deferred("disabled", false)
+#		else:
+		PlayerData.change_energy(-1)
 
 
 func play_sound_effect():

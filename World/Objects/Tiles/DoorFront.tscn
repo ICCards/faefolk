@@ -221,7 +221,6 @@ collision_mask = 131072
 script = ExtResource( 5 )
 
 [node name="LightMask" type="Light2D" parent="."]
-visible = false
 light_mask = 32
 position = Vector2( 32, -53 )
 scale = Vector2( 1, 0.981482 )
@@ -231,7 +230,6 @@ range_item_cull_mask = 32
 shadow_item_cull_mask = 0
 
 [node name="Bg" type="Sprite" parent="."]
-visible = false
 light_mask = 32
 position = Vector2( 32.0252, -51.5306 )
 scale = Vector2( 0.0504334, 0.0504707 )
@@ -239,11 +237,13 @@ region_enabled = true
 region_rect = Rect2( 349.28, -178.5, 1269, 2043.62 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 32, -36 )
 frames = SubResource( 25 )
 animation = "open"
 
 [node name="HitEffect" type="Node2D" parent="."]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="HitEffect"]
 visible = false
@@ -257,7 +257,8 @@ anims/RESET = SubResource( 13 )
 anims/hit = SubResource( 14 )
 
 [node name="DoorMovementCollision" type="StaticBody2D" parent="."]
-collision_layer = 35
+visible = false
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorMovementCollision"]
 position = Vector2( 32, -7.5 )
@@ -329,6 +330,7 @@ anims/RESET = SubResource( 11 )
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 32, -7.5 )
 shape = SubResource( 2 )
 

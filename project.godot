@@ -272,7 +272,6 @@ cancel_attack={
 2d_physics/layer_13="InsideTreeTopLayer"
 2d_physics/layer_14="DetectOverlappingObject"
 2d_physics/layer_15="HammerRepairLayer"
-2d_physics/layer_16="EnterSleepingBag"
 2d_physics/layer_18="EnterInteractiveZones"
 2d_physics/layer_19="Spells"
 2d_physics/layer_21="FishingMiniGame"

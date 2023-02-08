@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stone door 3.png-a29e735c141ec2a94e7aa43b284dcdc9.stex"
+path="res://.import/down.png-52377b0b9fc22a8c0387adfbbe745d8b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Animations/door/stone/front/stone door 3.png"
-dest_files=[ "res://.import/stone door 3.png-a29e735c141ec2a94e7aa43b284dcdc9.stex" ]
+source_file="res://Assets/Images/Enemies/Bird Boss/baby/down.png"
+dest_files=[ "res://.import/down.png-52377b0b9fc22a8c0387adfbbe745d8b.stex" ]
 
 [params]
 

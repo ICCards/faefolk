@@ -143,6 +143,13 @@ func _unhandled_input(event):
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
 					player_action(item_name, item_category)
+				elif (event is InputEventMouseButton and event.button_index == BUTTON_RIGHT):
+					if item_category == "Magic":
+						$Magic.cast_spell(item_name, 2)
+					elif item_name == "bow":
+						$Magic.draw_bow(2)
+					elif Util.isSword(item_name):
+						$Swing.sword_swing(item_name, 2)
 			else:
 				if (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
 					player_action(null, null)
@@ -159,28 +166,28 @@ func _unhandled_input(event):
 						elif item_name == "bow":
 							$Magic.draw_bow(1)
 						elif Util.isSword(item_name):
-							$Swing.swing(item_name)
+							$Swing.sword_swing(item_name, 1)
 					elif event.is_action_pressed("slot2") or (event is InputEventMouseButton and event.button_index == BUTTON_RIGHT):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 2)
 						elif item_name == "bow":
 							$Magic.draw_bow(2)
 						elif Util.isSword(item_name):
-							$Swing.swing(item_name)
+							$Swing.sword_swing(item_name, 2)
 					elif event.is_action_pressed("slot3"):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 3)
 						elif item_name == "bow":
 							$Magic.draw_bow(3)
 						elif Util.isSword(item_name):
-							$Swing.swing(item_name)
+							$Swing.sword_swing(item_name, 1)
 					elif event.is_action_pressed("slot4"):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 4)
 						elif item_name == "bow":
 							$Magic.draw_bow(4)
 						elif Util.isSword(item_name):
-							$Swing.swing(item_name)
+							$Swing.sword_swing(item_name, 1)
 			else:
 				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
 					player_action(null, null)
@@ -189,6 +196,8 @@ func _unhandled_input(event):
 func player_action(item_name, item_category):
 	if item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod":
 		actions.fish()
+	elif Util.isSword(item_name): 
+		$Swing.sword_swing(item_name, user_interface.get_node("CombatHotbar/MagicSlots").selected_spell)
 	elif (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
 		$Swing.swing(item_name)
 	elif item_category == "Potion" or item_name == "raw egg":
