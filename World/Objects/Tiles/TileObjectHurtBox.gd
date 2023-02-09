@@ -263,6 +263,9 @@ func set_dimensions():
 			"down":
 				$Position2D.rotation_degrees = 0
 	elif item_name == "chair":
+		$Position2D/InteractiveArea.object_direction = direction
+		$Position2D/InteractiveArea.object_position = return_adjusted_chair_position(direction)
+		$Position2D/InteractiveArea.object_name = "chair"
 		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
 		match direction:
 			"left":

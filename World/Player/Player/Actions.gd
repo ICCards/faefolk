@@ -83,6 +83,8 @@ func _input(event):
 					"gate":
 						current_interactive_node.toggle_gate()
 			current_interactive_node = null
+	elif Server.player_node.state == SITTING and event.is_action_pressed("action"):
+		stand_up()
 
 
 
@@ -177,11 +179,15 @@ func sit(adjusted_position, direction_of_chair):
 	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+direction_of_current_chair, null)
 	get_parent().animation_player.play("sit_"+direction_of_current_chair)
 	yield(get_parent().animation_player, "animation_finished")
+	yield(get_tree(), "idle_frame")
+	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_idle_"+direction_of_current_chair, null)
+	get_parent().animation_player.play("sit_idle")
 	sitting = false
 
 
 func stand_up():
 	if not sitting:
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+direction_of_current_chair, null)
 		get_parent().animation_player.play_backwards("sit_"+direction_of_current_chair)
 		yield(get_parent().animation_player, "animation_finished")
 		get_parent().state = get_parent().MOVEMENT

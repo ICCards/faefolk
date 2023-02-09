@@ -2205,6 +2205,113 @@ var male = {
 		1 : load("res://Characters/Human/male/SITTING/assets/left/shoes/shoes.png")
 	},
 	
+	body_sit_idle_down = {
+		0 : load("res://Characters/Human/male/SITTING IDLE/body/down/body.png")
+	},
+	body_sit_idle_up = {
+		0 : load("res://Characters/Human/male/SITTING IDLE/body/up/body.png")
+	},
+	body_sit_idle_right = {
+		0 : load("res://Characters/Human/male/SITTING IDLE/body/right/body.png")
+	},
+	body_sit_idle_left = {
+		0 : load("res://Characters/Human/male/SITTING IDLE/body/left/body.png")
+	},
+
+	arms_sit_idle_down = {
+		0 : load("res://Characters/Human/male/SITTING IDLE/body/down/arms.png")
+	},
+	arms_sit_idle_up = {
+		0 : load("res://Characters/Human/male/SITTING IDLE/body/up/arms.png")
+	},
+	arms_sit_idle_right = {
+		0 : load("res://Characters/Human/male/SITTING IDLE/body/right/arms.png")
+	},
+	arms_sit_idle_left = {
+		0 : load("res://Characters/Human/male/SITTING IDLE/body/left/arms.png")
+	},
+
+	acc_sit_idle_down = {
+		0 : null,
+	},
+	acc_sit_idle_up = {
+		0 : null,
+	},
+	acc_sit_idle_right = {
+		0 : null,
+	},
+	acc_sit_idle_left = {
+		0 : null,
+	},
+
+	head_attribute_sit_idle_down = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/down/head_attribute/hair.png")
+	},
+	head_attribute_sit_idle_up = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/up/head_attribute/hair.png")
+	},
+	head_attribute_sit_idle_right = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/right/head_attribute/hair.png")
+	},
+	head_attribute_sit_idle_left = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/left/head_attribute/hair.png")
+	},
+
+	shirts_sit_idle_down = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/down/shirt/shirt.png")
+	},
+	shirts_sit_idle_up = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/up/shirt/shirt.png")
+	},
+	shirts_sit_idle_right = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/right/shirt/shirt.png")
+	},
+	shirts_sit_idle_left = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/left/shirt/shirt.png")
+	},
+
+	pants_sit_idle_down = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/down/pants/pants.png")
+	},
+	pants_sit_idle_up = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/up/pants/pants.png")
+	},
+	pants_sit_idle_right = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/right/pants/pants.png")
+	},
+	pants_sit_idle_left = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/left/pants/pants.png")
+	},
+
+	shoes_sit_idle_down = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/down/shoes/shoes.png")
+	},
+	shoes_sit_idle_up = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/up/shoes/shoes.png")
+	},
+	shoes_sit_idle_right = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/right/shoes/shoes.png")
+	},
+	shoes_sit_idle_left = {
+		0 : null,
+		1 : load("res://Characters/Human/male/SITTING IDLE/assets/left/shoes/shoes.png")
+	},
+	
 	body_throw_down = {
 		0 : load("res://Characters/Human/male/THROWING/body/down/body.png")
 	},

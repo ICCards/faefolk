@@ -77,6 +77,7 @@ var flamethrower_active: bool = false
 var invisibility_active: bool = false
 var ice_shield_active: bool = false
 var mouse_left_down: bool = false
+var mouse_right_down: bool = false
 var cancel_attack_pressed: bool = false
 
 
@@ -100,12 +101,19 @@ func _input( event ):
 			mouse_left_down = true
 		elif event.button_index == 1 and not event.is_pressed():
 			mouse_left_down = false
+		if (event.button_index == 2 and event.is_pressed()):
+			mouse_right_down = true
+		elif event.button_index == 2 and not event.is_pressed():
+			mouse_right_down = false
 	elif event is InputEvent:
 		if event.is_action_pressed("use_tool"):
 			mouse_left_down = true
 		elif event.is_action_released("use_tool"):
 			mouse_left_down = false
-	if event is InputEvent:
+		if event.is_action_pressed("slot2"):
+			mouse_right_down = true
+		elif event.is_action_released("slot2"):
+			mouse_right_down = false
 		if event.is_action_pressed("cancel_attack"):
 			cancel_attack_pressed = true
 		elif event.is_action_released("cancel_attack"):
@@ -164,7 +172,7 @@ func wait_for_bow_release(spell_index):
 	elif get_parent().state == DYING:
 		thread.wait_to_finish()
 		return
-	elif cancel_attack_pressed:
+	elif cancel_attack_pressed or Sounds.current_footsteps_sound == Sounds.swimming:
 		is_drawing = false
 		thread.wait_to_finish()
 		get_parent().state = MOVEMENT
@@ -254,7 +262,7 @@ func wait_for_cast_release(staff_name,spell_index):
 	elif get_parent().state == DYING:
 		thread.wait_to_finish()
 		return
-	elif cancel_attack_pressed:
+	elif cancel_attack_pressed or Sounds.current_footsteps_sound == Sounds.swimming:
 		is_casting = false
 		thread.wait_to_finish()
 		get_parent().state = MOVEMENT

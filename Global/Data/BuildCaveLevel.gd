@@ -50,14 +50,14 @@ func update_navigation():
 
 func spawn_player():
 	var spawn_loc
-	if PlayerData.spawn_at_respawn_location:
-		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
-	elif PlayerData.spawn_at_cave_entrance:
-		spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
-	elif PlayerData.spawn_at_cave_exit:
-		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
-	elif PlayerData.spawn_at_last_saved_location:
-		spawn_loc =  Util.string_to_vector2(PlayerData.player_data["current_save_location"])
+#	if PlayerData.spawn_at_respawn_location:
+#		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
+#	elif PlayerData.spawn_at_cave_entrance:
+	spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+#	elif PlayerData.spawn_at_cave_exit:
+#		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
+#	elif PlayerData.spawn_at_last_saved_location:
+#		spawn_loc =  Util.string_to_vector2(PlayerData.player_data["current_save_location"])
 	var player = Player.instance()
 	Server.world.get_node("Players").add_child(player)
 	player.position =  (spawn_loc*32)+Vector2(16,32)

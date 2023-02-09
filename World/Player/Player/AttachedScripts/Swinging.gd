@@ -59,21 +59,21 @@ func sword_swing_deferred(item_name,attack_index):
 		elif attack_index == 2:
 			animation = "sword_block_" + get_parent().direction.to_lower()
 			get_parent().state = SWORD_SWINGING
-#			sword_swing.tool_name = item_name
 			player_animation_player.play(animation)
-#			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
-#			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-#			sound_effects.play()
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
 		yield(player_animation_player, "animation_finished" )
 		get_parent().state = MOVEMENT
-		if get_node("../Magic").mouse_left_down:
+		if get_node("../Magic").mouse_left_down and attack_index == 1:
 			if valid_tool_health():
 				sword_swing_deferred(item_name,1)
 			else:
 				swing_deferred(null)
 			return
+		elif get_node("../Magic").mouse_right_down and attack_index == 2:
+			sword_swing_deferred(item_name,2)
+			return
+		get_node("../Area2Ds/SwordBlock/CollisionShape2D").set_deferred("disabled", true)
 		thread.wait_to_finish()
 
 

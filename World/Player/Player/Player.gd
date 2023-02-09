@@ -108,7 +108,7 @@ func _process(_delta) -> void:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
 		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
-	if state == MOVEMENT:
+	if state == MOVEMENT: #or state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWORD_SWINGING:
 		movement_state(_delta)
 	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWORD_SWINGING:
 		magic_casting_movement_state(_delta)
@@ -247,7 +247,7 @@ func magic_casting_movement_state(_delta):
 
 
 func movement_state(delta):
-	if (state == MAGIC_CASTING or state == MOVEMENT) and not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 		set_movement_speed_change()
 		input_vector = Vector2.ZERO
 		if Input.is_action_pressed("move_up"):
@@ -379,7 +379,8 @@ func walk_state(_direction):
 				animation = "walk_" + _direction.to_lower()
 				$TorchLight.enabled = false
 				$HoldingTorch.hide()
-			composite_sprites.set_player_animation(character, animation, null)
+			if state == MOVEMENT:
+				composite_sprites.set_player_animation(character, animation, null)
 		elif running and Sounds.current_footsteps_sound != Sounds.swimming:
 			if state != DYING:
 				$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()

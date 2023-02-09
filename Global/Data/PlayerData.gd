@@ -54,7 +54,7 @@ var starting_player_data = {
 	"time_hours": 6,
 	"health": 100,
 	"mana": 100,
-	"energy": 100,
+	"energy": 10,
 	"hotbar": {
 		"0": ["wood sword", 1, 10],
 #		"1": ["gold axe", 1, 100],
@@ -74,7 +74,7 @@ var starting_player_data = {
 	"inventory": {
 			"18": ["wood", 999, null],
 			"19": ["stone", 999, null],
-#			"17": ["wood", 999, null],
+			"17": ["cloth", 999, null],
 #			"16": ["wood", 500, null],
 #			"16": ["iron ingot", 999, null],
 #			"15": ["bronze ingot", 999, null],

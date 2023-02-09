@@ -168,7 +168,7 @@ animations = [ {
 
 [sub_resource type="CapsuleShape2D" id=147]
 radius = 18.0
-height = 12.0
+height = 14.0
 
 [sub_resource type="Animation" id=36]
 length = 0.001
@@ -203,7 +203,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=38]
-radius = 8.0
+radius = 6.0
 
 [sub_resource type="Animation" id=148]
 length = 0.001
@@ -460,7 +460,7 @@ particles_anim_loop = false
 
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 268435456
-collision_mask = 268435520
+collision_mask = 268435552
 script = ExtResource( 2 )
 
 [node name="SetEnemyDirection" parent="." instance=ExtResource( 11 )]
@@ -493,6 +493,7 @@ scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "fly down"
+frame = 2
 playing = true
 
 [node name="Electricity" type="AnimatedSprite" parent="."]
@@ -502,7 +503,7 @@ position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 41 )
-frame = 8
+frame = 12
 playing = true
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -511,7 +512,7 @@ collision_layer = 262400
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2( 0, -19 )
+position = Vector2( 0, -16 )
 shape = SubResource( 147 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
@@ -519,13 +520,12 @@ anims/RESET = SubResource( 36 )
 anims/hit = SubResource( 37 )
 
 [node name="BatHit" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, -7 )
 collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BatHit"]
-position = Vector2( 0, 4 )
+position = Vector2( 0, 7 )
 shape = SubResource( 38 )
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
