@@ -211,4 +211,15 @@ func isValidEnemyAttack(los) -> bool:
 		return false
 	return true
 
+func is_border_tile(_pos, _tiles):
+	var count = 0
+	if not _tiles.has(_pos+Vector2(1,0)):
+		return true
+	if not _tiles.has(_pos+Vector2(-1,0)):
+		return true
+	if not  _tiles.has(_pos+Vector2(0,1)):
+		return true
+	if not _tiles.has(_pos+Vector2(0,-1)):
+		return true
+	return false
 

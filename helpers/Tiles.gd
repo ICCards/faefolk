@@ -129,6 +129,8 @@ func isValidAutoTile(_pos, _map):
 				return false
 			elif _map.get_cellv(_pos + Vector2(1,-1)) == -1 and _map.get_cellv(_pos + Vector2(-1,1)) == -1:
 				return false
+			elif count == 2:
+				return false
 			else:
 				return true
 		else:
@@ -156,8 +158,7 @@ func return_if_valid_wall_cell(_pos, _map):
 		return false 
 	elif _map.get_cellv(_pos + Vector2(-1,0)) != -1 and _map.get_cellv(_pos + Vector2(-1,1)) != -1 and _map.get_cellv(_pos + Vector2(0,1)) != -1:
 		return false 
-	else:
-		return true
+	return true
 	
 	
 func isCenterBitmaskTile(_pos, _map):
@@ -166,8 +167,7 @@ func isCenterBitmaskTile(_pos, _map):
 	_map.get_cellv(_pos + Vector2(1,1)) != -1 and _map.get_cellv(_pos + Vector2(-1,1)) != -1 and \
 	_map.get_cellv(_pos + Vector2(-1,-1)) != -1 and _map.get_cellv(_pos + Vector2(1,-1)) != -1:
 		return true
-	else:
-		return false
+	return false
 	
 func get_subtile_with_priority(id, tilemap: TileMap):
 	var tiles = tilemap.tile_set

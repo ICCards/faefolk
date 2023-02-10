@@ -210,7 +210,7 @@ func _fix_tiles(value):
 	print("start fixing")
 	var border_tiles = []
 	for loc in value:
-		if is_border_tile(loc, value):
+		if Util.is_border_tile(loc, value):
 			border_tiles.append(loc)
 	for loc in border_tiles:
 		if not value.has(loc+Vector2(1,0)):
@@ -260,17 +260,6 @@ func fix_tiles():
 		threads.append(tileThread)
 		tileThread.start(self, "_fix_tiles",tile_array)
 		
-func is_border_tile(_pos, _tiles):
-	var count = 0
-	if not _tiles.has(_pos+Vector2(1,0)):
-		return true
-	if not _tiles.has(_pos+Vector2(-1,0)):
-		return true
-	if not  _tiles.has(_pos+Vector2(0,1)):
-		return true
-	if not _tiles.has(_pos+Vector2(0,-1)):
-		return true
-	return false
 
 
 func save_starting_world_data():
@@ -519,7 +508,7 @@ func isValidPosition(loc):
 
 func between(val, start, end):
 	if start <= val and val < end:
-		return true	
+		return true
 
 #func _exit_tree():
 #	for thread in threads:
