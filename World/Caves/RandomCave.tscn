@@ -588,13 +588,15 @@ collision_mask = 0
 format = 1
 
 [node name="CaveGenerator" parent="." instance=ExtResource( 2 )]
+world_seed = "Hello Godot!fdgfds"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 2437, 1409 )
+position = Vector2( 4178, 2277 )
 current = true
-zoom = Vector2( 4, 4 )
+zoom = Vector2( 7, 7 )
 
 [node name="Ground1" type="TileMap" parent="."]
+visible = false
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 z_index = -2
 tile_set = SubResource( 716 )
@@ -604,7 +606,6 @@ collision_mask = 0
 format = 1
 
 [node name="Ground2" type="TileMap" parent="."]
-visible = false
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 z_index = -1
 tile_set = SubResource( 716 )
@@ -614,7 +615,6 @@ collision_mask = 0
 format = 1
 
 [node name="Grass1" type="TileMap" parent="."]
-visible = false
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 z_index = -1
 tile_set = SubResource( 716 )
@@ -624,7 +624,6 @@ collision_mask = 0
 format = 1
 
 [node name="Grass2" type="TileMap" parent="."]
-visible = false
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 z_index = -1
 tile_set = SubResource( 717 )

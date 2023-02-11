@@ -16,7 +16,7 @@ func _ready():
 	set_date_time()
 	
 func _on_ManaTimer_timeout():
-	PlayerData.player_data["mana"] += 10
+	PlayerData.player_data["mana"] += 1
 	if PlayerData.player_data["mana"] > 100:
 		PlayerData.player_data["mana"] = 100
 	PlayerData.emit_signal("mana_changed")
