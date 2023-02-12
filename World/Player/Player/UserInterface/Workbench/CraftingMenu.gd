@@ -1,17 +1,17 @@
 extends ScrollContainer
 
 
-onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 
 var hovered_item = null
 
 func _ready():
 	var items = $Items.get_children()
 	for i in range(items.size()):
-		items[i].connect("gui_input", self, "slot_gui_input", [items[i]])
-		items[i].connect("mouse_entered", self, "hovered_slot", [items[i]])
-		items[i].connect("mouse_exited", self, "exited_slot", [items[i]])
+		items[i].connect("gui_input",Callable(self,"slot_gui_input").bind(items[i))
+		items[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(items[i))
+		items[i].connect("mouse_exited",Callable(self,"exited_slot").bind(items[i))
 		items[i].slot_index = i
 		items[i].slotType = SlotClass.SlotType.CRAFTING
 		items[i].initialize_item(items[i].name,null,null)
@@ -35,16 +35,16 @@ func exited_slot(slot):
 		slot.item.exit_crafting_item()
 
 func entered_crafting_area(_item):
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	hovered_item = _item
 	if hovered_item == "blueprint" or hovered_item == "hammer" or hovered_item == "wood sword" or hovered_item == "wood axe" or hovered_item == "wood pickaxe" or hovered_item == "wood hoe":
-		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + hovered_item), "rect_scale",
-			get_node("CraftingMenu/Items/" + hovered_item).rect_scale, Vector2(4.2, 4.2), 0.1,
+		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + hovered_item), "scale",
+			get_node("CraftingMenu/Items/" + hovered_item).scale, Vector2(4.2, 4.2), 0.1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 	else:
-		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + hovered_item), "rect_scale",
-			get_node("CraftingMenu/Items/" + hovered_item).rect_scale, Vector2(2.1, 2.1), 0.1,
+		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + hovered_item), "scale",
+			get_node("CraftingMenu/Items/" + hovered_item).scale, Vector2(2.1, 2.1), 0.1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 	
@@ -52,13 +52,13 @@ func exited_crafting_area(_item):
 	hovered_item = null
 	if has_node("CraftingMenu/Items/" + hovered_item):
 		if hovered_item == "blueprint" or hovered_item == "hammer" or hovered_item == "wood sword" or hovered_item == "wood axe" or hovered_item == "wood pickaxe" or hovered_item == "wood hoe":
-			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + hovered_item), "rect_scale",
-				get_node("CraftingMenu/Items/" + hovered_item).rect_scale, Vector2(4, 4), 0.1,
+			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + hovered_item), "scale",
+				get_node("CraftingMenu/Items/" + hovered_item).scale, Vector2(4, 4), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 		else:
-			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + hovered_item), "rect_scale",
-				get_node("CraftingMenu/Items/" + hovered_item).rect_scale, Vector2(2, 2), 0.1,
+			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + hovered_item), "scale",
+				get_node("CraftingMenu/Items/" + hovered_item).scale, Vector2(2, 2), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 
@@ -66,7 +66,7 @@ func exited_crafting_area(_item):
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			#if find_parent("UserInterface").holding_item != null:
 			#Sounds.play_put_down_item_sound()
 #			if !slot.item:

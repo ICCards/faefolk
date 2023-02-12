@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/fishBite.mp3-fada6d4b646ba770a2c5d8fc7ac609c0.mp3str"
+uid="uid://3i3j2vlykhf1"
+path="res://.godot/imported/fishBite.mp3-fada6d4b646ba770a2c5d8fc7ac609c0.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Fishing/fishBite.mp3"
-dest_files=[ "res://.import/fishBite.mp3-fada6d4b646ba770a2c5d8fc7ac609c0.mp3str" ]
+dest_files=["res://.godot/imported/fishBite.mp3-fada6d4b646ba770a2c5d8fc7ac609c0.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

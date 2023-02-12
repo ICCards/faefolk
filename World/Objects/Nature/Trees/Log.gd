@@ -1,8 +1,8 @@
 extends Node2D
 
-onready var log_sprite: Sprite = $Log
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
-onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var log_sprite: Sprite2D = $Log
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
@@ -34,7 +34,7 @@ func setTreeBranchType():
 		set_deferred("tree_variety", "birch")
 	log_sprite.set_deferred("texture", Images.tree_branch_objects[variety]) 
 
-func hit(tool_name, var special_ability = ""):
+func hit(tool_name, special_ability = ""):
 	if not destroyed:
 		destroyed = true
 		if MapData.world["log"].has(name):
@@ -48,14 +48,14 @@ func hit(tool_name, var special_ability = ""):
 		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
-		yield(get_tree().create_timer(1.2), "timeout")
+		await get_tree().create_timer(1.2).timeout
 		call_deferred("queue_free")
 
 func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff":
-		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-16,16)))
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-16,16)))
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		call_deferred("hit", _area.tool_name)
 

@@ -1,4 +1,4 @@
-extends YSort
+extends Node2D
 
 var is_changing_scene: bool = false
 var nav_node

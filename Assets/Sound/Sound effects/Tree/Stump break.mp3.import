@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Stump break.mp3-134283f028b0c06d46d0c8cb17b2564a.mp3str"
+uid="uid://drv77lookbchh"
+path="res://.godot/imported/Stump break.mp3-134283f028b0c06d46d0c8cb17b2564a.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Tree/Stump break.mp3"
-dest_files=[ "res://.import/Stump break.mp3-134283f028b0c06d46d0c8cb17b2564a.mp3str" ]
+dest_files=["res://.godot/imported/Stump break.mp3-134283f028b0c06d46d0c8cb17b2564a.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

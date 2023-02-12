@@ -1,20 +1,20 @@
 extends Node
 
-onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
-onready var CaveAmbientLight = load("res://World/Caves/CaveAmbientLight.tscn")
-onready var LightningLine = load("res://World/Objects/Misc/LightningLine.tscn")
-onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
-onready var Spider = load("res://World/Enemies/Spider.tscn")
-onready var FireMageSkeleton = load("res://World/Enemies/Skeleton.tscn")
-onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
-onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
-onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
-onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
-onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
-onready var CaveGrass = load("res://World/Caves/Objects/CaveGrass.tscn")
-onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
-onready var Player = load("res://World/Player/Player/Player.tscn")
-onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
+@onready var Bat = load("res://World3D/Enemies/Slime/Bat.tscn")
+@onready var CaveAmbientLight = load("res://World3D/Caves/CaveAmbientLight.tscn")
+@onready var LightningLine = load("res://World3D/Objects/Misc/LightningLine.tscn")
+@onready var Slime = load("res://World3D/Enemies/Slime/Slime.tscn")
+@onready var Spider = load("res://World3D/Enemies/Spider.tscn")
+@onready var FireMageSkeleton = load("res://World/Enemies/Skeleton.tscn")
+@onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
+@onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
+@onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
+@onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
+@onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
+@onready var CaveGrass = load("res://World/Caves/Objects/CaveGrass.tscn")
+@onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
+@onready var Player = load("res://World/Player/Player/Player.tscn")
+@onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 var oreTypesLevel1 = ["stone1", "stone2", "stone1", "stone2", "bronze ore", "bronze ore", "bronze ore", "iron ore"]
 var oreTypesLevel2 = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "bronze ore", "bronze ore", "iron ore", "iron ore", "gold ore"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
@@ -37,7 +37,7 @@ var ForageObjects
 func spawn_bat():
 	var locs = Server.world.get_node("Tiles/BatSpawnTiles").get_used_cells()
 	locs.shuffle()
-	var bat = Bat.instance()
+	var bat = Bat.instantiate()
 	Server.world.get_node("Enemies").add_child(bat)
 	bat.position = locs[0]*32
 
@@ -46,7 +46,7 @@ func update_navigation():
 	for x in range(Server.world.map_size):
 		for y in range(Server.world.map_size):
 			if Tiles.valid_tiles.get_cellv(Vector2(x,y)) != -1:
-				Server.world.get_node("Navigation2D/NavTiles").set_cellv(Vector2(x,y),0)
+				Server.world.get_node("Node2D/NavTiles").set_cellv(Vector2(x,y),0)
 
 func spawn_player():
 	var spawn_loc
@@ -58,7 +58,7 @@ func spawn_player():
 #		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
 #	elif PlayerData.spawn_at_last_saved_location:
 #		spawn_loc =  Util.string_to_vector2(PlayerData.player_data["current_save_location"])
-	var player = Player.instance()
+	var player = Player.instantiate()
 	Server.world.get_node("Players").add_child(player)
 	player.position =  (spawn_loc*32)+Vector2(16,32)
 	Server.player_node = player
@@ -77,7 +77,7 @@ func build():
 	Tiles.ocean_tiles = Server.world.get_node("Tiles/Water")
 	Tiles.object_tiles = Server.world.get_node("PlacableTiles/ObjectTiles")
 	Tiles.fence_tiles = Server.world.get_node("PlacableTiles/FenceTiles")
-	Server.world.nav_node = Server.world.get_node("Navigation2D")
+	Server.world.nav_node = Server.world.get_node("Node2D")
 	rng.randomize()
 	spawn_player()
 	set_valid_tiles()
@@ -93,7 +93,7 @@ func build():
 	add_ambient_light()
 	
 func add_ambient_light():
-	var caveLight = CaveAmbientLight.instance()
+	var caveLight = CaveAmbientLight.instantiate()
 	Server.world.add_child(caveLight)
 
 func load_cave(map):
@@ -101,27 +101,27 @@ func load_cave(map):
 	for id in map["ore_large"]:
 		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
 		Tiles.remove_valid_tiles(loc+Vector2(-1,0), Vector2(2,2))
-		var object = LargeOre.instance()
+		var object = LargeOre.instantiate()
 		object.health = map["ore_large"][id]["h"]
 		object.name = id
 		object.variety = map["ore_large"][id]["v"]
 		object.location = loc
-		object.position = Tiles.valid_tiles.map_to_world(loc) 
+		object.position = Tiles.valid_tiles.map_to_local(loc) 
 		NatureObjects.call_deferred("add_child",object,true)
 	for id in map["ore"]:
 		var loc = Util.string_to_vector2(map["ore"][id]["l"])
 		Tiles.remove_valid_tiles(loc)
-		var object = SmallOre.instance()
+		var object = SmallOre.instantiate()
 		object.health = map["ore"][id]["h"]
 		object.name = id
 		object.variety = map["ore"][id]["v"]
 		object.location = loc
-		object.position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16, 24)
+		object.position = Tiles.valid_tiles.map_to_local(loc) + Vector2(16, 24)
 		NatureObjects.call_deferred("add_child",object,true)
 	for id in map["tall_grass"]:
 		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
 		Tiles.add_navigation_tiles(loc)
-		var caveGrass = CaveGrass.instance()
+		var caveGrass = CaveGrass.instantiate()
 		caveGrass.name = str(id)
 		caveGrass.variety = map["tall_grass"][id]["v"]
 		caveGrass.loc = loc
@@ -130,7 +130,7 @@ func load_cave(map):
 	for id in map["forage"]:
 		var loc = Util.string_to_vector2(map["forage"][id]["l"])
 		Tiles.add_navigation_tiles(loc)
-		var forageItem = ForageItem.instance()
+		var forageItem = ForageItem.instantiate()
 		forageItem.name = str(id)
 		forageItem.item_name = map["forage"][id]["v"]
 		forageItem.location = loc
@@ -217,22 +217,22 @@ func spawn_enemies_randomly():
 	var locs = valid_tiles.get_used_cells()
 	locs.shuffle()
 	for i in range(Server.world.NUM_SLIMES):
-		var slime = Slime.instance()
+		var slime = Slime.instantiate()
 		Server.world.get_node("Enemies").add_child(slime)
 		slime.position = locs[i]*32 + Vector2(16,16)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	locs.shuffle()
 	for i in range(Server.world.NUM_SPIDERS):
-		var spider = Spider.instance()
+		var spider = Spider.instantiate()
 		Server.world.get_node("Enemies").add_child(spider)
 		spider.position = locs[i]*32 + Vector2(16,16)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	locs.shuffle()
 	for i in range(Server.world.NUM_SKELETONS):
-		var skele = FireMageSkeleton.instance()
+		var skele = FireMageSkeleton.instantiate()
 		Server.world.get_node("Enemies").add_child(skele)
 		skele.position = locs[i]*32 + Vector2(16,16)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	
 	
 func set_initial_chest(map):
@@ -257,12 +257,12 @@ func return_chest_direction(loc):
 
 func set_cave_ladders():
 	if Server.world.get_node("Tiles/DownLadder").get_used_cells().size() != 0:
-		var caveLadder = CaveLadder.instance()
+		var caveLadder = CaveLadder.instantiate()
 		caveLadder.is_down_ladder = true
 		Server.world.add_child(caveLadder)
 		caveLadder.position = (Server.world.get_node("Tiles/DownLadder").get_used_cells()[0] * 32) + Vector2(32,16)
 	if Server.world.get_node("Tiles/UpLadder").get_used_cells().size() != 0:
-		var caveLadder = CaveLadder.instance()
+		var caveLadder = CaveLadder.instantiate()
 		caveLadder.is_down_ladder = false
 		Server.world.add_child(caveLadder)
 		caveLadder.position = (Server.world.get_node("Tiles/UpLadder").get_used_cells()[0] * 32) + Vector2(16,0)
@@ -276,11 +276,11 @@ func generate_mushroom_forage(map):
 			var id = uuid.v4()
 			mushroomTypes.shuffle()
 			Tiles.add_navigation_tiles(loc)
-			var forageItem = ForageItem.instance()
+			var forageItem = ForageItem.instantiate()
 			forageItem.item_name = mushroomTypes.front()
 			forageItem.name = str(id)
 			forageItem.location = loc
-			forageItem.global_position = Tiles.valid_tiles.map_to_world(loc) + Vector2(16,16)
+			forageItem.global_position = Tiles.valid_tiles.map_to_local(loc) + Vector2(16,16)
 			ForageObjects.add_child(forageItem)
 			map["forage"][id] = {"l": str(loc), "v": mushroomTypes.front()}
 	
@@ -300,7 +300,7 @@ func generate_grass_bunch(loc, variety, map):
 		if Tiles.valid_tiles.get_cellv(loc) == 0:
 			var id = uuid.v4()
 			Tiles.add_navigation_tiles(loc)
-			var caveGrass = CaveGrass.instance()
+			var caveGrass = CaveGrass.instantiate()
 			caveGrass.name = str(id)
 			caveGrass.variety = variety
 			caveGrass.loc = loc
@@ -320,7 +320,7 @@ func generate_ore(map):
 			var id = uuid.v4()
 			var variety
 			Tiles.remove_valid_tiles(loc)
-			var object = SmallOre.instance()
+			var object = SmallOre.instantiate()
 			object.name = str(id)
 			object.health = Stats.SMALL_ORE_HEALTH
 			if return_cave_tier() == "1":
@@ -349,7 +349,7 @@ func generate_ore(map):
 			else:
 				oreTypesLevel2.shuffle()
 				variety = oreTypesLevel2.front()
-			var object = LargeOre.instance()
+			var object = LargeOre.instantiate()
 			object.name = str(id)
 			object.health = Stats.LARGE_ORE_HEALTH
 			object.variety = variety
@@ -360,7 +360,7 @@ func generate_ore(map):
 
 func set_light_nodes():
 	for loc in Server.world.get_node("Tiles/Lights").get_used_cells():
-		var caveLight = CaveLight.instance()
+		var caveLight = CaveLight.instantiate()
 		if Server.world.get_node("Tiles/Lights").get_cellv(loc) == 0: 
 			caveLight.type = "blue"
 		elif Server.world.get_node("Tiles/Lights").get_cellv(loc) == 1: 

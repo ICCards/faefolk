@@ -1,186 +1,136 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://b3vdyc3n310f7"]
 
-[ext_resource path="res://Assets/Images/Misc/large button.png" type="Texture" id=1]
-[ext_resource path="res://MainMenu/MainMenuButtons.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Misc/MainMenu/play button.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/Misc/MainMenu/quit button.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Misc/MainMenu/shop button.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=6]
-[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=7]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_7.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_5.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_4.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_1.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_3.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_6.png" type="Texture" id=16]
+[ext_resource type="Script" path="res://MainMenu/MainMenuButtons.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dj3hn6egvrpeb" path="res://Assets/Images/Misc/MainMenu/play button.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cqo84wlgvp3e5" path="res://Assets/Images/Misc/MainMenu/quit button.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://2hsesaow6gf" path="res://Assets/Images/Misc/MainMenu/shop button.png" id="5"]
+[ext_resource type="Theme" uid="uid://cj0asnhg7avhi" path="res://Assets/Themes/MenuTitle.tres" id="6"]
+[ext_resource type="Theme" uid="uid://bf5tnmvvjqu1j" path="res://Assets/Themes/UI_Title.tres" id="7"]
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 46, 14 )
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 46, 14 )
-
-[sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 46, 14 )
-
-[sub_resource type="StyleBoxTexture" id=4]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 46, 14 )
-
-[sub_resource type="StyleBoxTexture" id=5]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 46, 14 )
-
-[sub_resource type="SpriteFrames" id=6]
-animations = [ {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 16 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[sub_resource type="SpriteFrames" id="6"]
+animations = []
 
 [node name="MainMenuButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="PlayShopQuit" type="Node2D" parent="."]
 z_index = 1
 
-[node name="Play" type="Sprite" parent="PlayShopQuit"]
-position = Vector2( 94, 0 )
+[node name="Play" type="Sprite2D" parent="PlayShopQuit"]
+position = Vector2(94, 0)
 
-[node name="PlaySprite" type="Sprite" parent="PlayShopQuit/Play"]
-position = Vector2( 288, 96 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 3 )
+[node name="PlaySprite" type="Sprite2D" parent="PlayShopQuit/Play"]
+position = Vector2(288, 96)
+scale = Vector2(3, 3)
+texture = ExtResource("3")
 
 [node name="PlayLabel" type="Label" parent="PlayShopQuit/Play"]
-margin_left = 163.0
-margin_top = 52.0
-margin_right = 622.0
-margin_bottom = 198.0
-rect_scale = Vector2( 0.8, 0.8 )
-theme = ExtResource( 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
+offset_left = 247.0
+offset_top = 56.0
+offset_right = 445.0
+offset_bottom = 172.0
+theme = ExtResource("7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_font_sizes/font_size = 100
 text = "PLAY"
-align = 1
 
-[node name="Shop" type="Sprite" parent="PlayShopQuit"]
-position = Vector2( 115, 0 )
+[node name="Shop" type="Sprite2D" parent="PlayShopQuit"]
+visible = false
+position = Vector2(115, 0)
 
-[node name="ShopSprite" type="Sprite" parent="PlayShopQuit/Shop"]
-position = Vector2( 396, 270 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 5 )
+[node name="ShopSprite" type="Sprite2D" parent="PlayShopQuit/Shop"]
+position = Vector2(396, 270)
+scale = Vector2(3, 3)
+texture = ExtResource("5")
 
 [node name="ShopLabel" type="Label" parent="PlayShopQuit/Shop"]
-margin_left = 278.0
-margin_top = 227.0
-margin_right = 735.0
-margin_bottom = 373.0
-rect_scale = Vector2( 0.8, 0.8 )
-theme = ExtResource( 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
+offset_left = 278.0
+offset_top = 227.0
+offset_right = 735.0
+offset_bottom = 373.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("7")
 text = "SHOP"
-align = 1
 
-[node name="Quit" type="Sprite" parent="PlayShopQuit"]
-position = Vector2( 137, 0 )
+[node name="Quit" type="Sprite2D" parent="PlayShopQuit"]
+visible = false
+position = Vector2(137, 0)
 
-[node name="QuitSprite" type="Sprite" parent="PlayShopQuit/Quit"]
-position = Vector2( 504, 444 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 4 )
+[node name="QuitSprite" type="Sprite2D" parent="PlayShopQuit/Quit"]
+position = Vector2(504, 444)
+scale = Vector2(3, 3)
+texture = ExtResource("4")
 
 [node name="QuitLabel" type="Label" parent="PlayShopQuit/Quit"]
-margin_left = 379.0
-margin_top = 399.0
-margin_right = 837.0
-margin_bottom = 545.0
-rect_scale = Vector2( 0.8, 0.8 )
-theme = ExtResource( 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/shadow_offset_y = 6
+offset_left = 379.0
+offset_top = 399.0
+offset_right = 837.0
+offset_bottom = 545.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("7")
 text = "QUIT"
-align = 1
 
 [node name="PlayBtn" type="Button" parent="PlayShopQuit"]
-margin_left = 70.0
-margin_top = 20.0
-margin_right = 691.0
-margin_bottom = 171.0
+offset_left = 70.0
+offset_top = 20.0
+offset_right = 691.0
+offset_bottom = 171.0
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
 
 [node name="ShopBtn" type="Button" parent="PlayShopQuit"]
-margin_left = 199.0
-margin_top = 192.0
-margin_right = 820.0
-margin_bottom = 343.0
+offset_left = 199.0
+offset_top = 192.0
+offset_right = 820.0
+offset_bottom = 343.0
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
 
 [node name="QuitBtn" type="Button" parent="PlayShopQuit"]
-margin_left = 329.0
-margin_top = 366.0
-margin_right = 950.0
-margin_bottom = 517.0
+offset_left = 329.0
+offset_top = 366.0
+offset_right = 950.0
+offset_bottom = 517.0
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
 
 [node name="ConnectToPlug" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="ConnectToPlugButton" type="Button" parent="ConnectToPlug"]
-margin_left = 1939.0
-margin_top = -823.0
-margin_right = 2071.0
-margin_bottom = -791.0
-rect_scale = Vector2( 4, 4 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+layout_mode = 0
+offset_left = 1939.0
+offset_top = -823.0
+offset_right = 2071.0
+offset_bottom = -791.0
+scale = Vector2(4, 4)
 
 [node name="ConnectToPlugLabel" type="Label" parent="ConnectToPlug"]
-margin_left = 1914.0
-margin_top = -823.0
-margin_right = 2714.0
-margin_bottom = -639.0
-rect_scale = Vector2( 0.7, 0.7 )
-theme = ExtResource( 6 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 6
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 6
+layout_mode = 0
+offset_left = 1914.0
+offset_top = -823.0
+offset_right = 2714.0
+offset_bottom = -639.0
+scale = Vector2(0.7, 0.7)
+theme = ExtResource("6")
 text = "Connect to Plug"
-align = 1
-valign = 1
 
-[node name="LoadingIndicator" type="AnimatedSprite" parent="."]
+[node name="LoadingIndicator" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2( 1349, -52 )
-scale = Vector2( 18, 18 )
-frames = SubResource( 6 )
-playing = true
-
-[node name="Tween" type="Tween" parent="."]
+position = Vector2(1349, -52)
+scale = Vector2(18, 18)
+sprite_frames = SubResource("6")
+animation = &""
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 volume_db = -28.0

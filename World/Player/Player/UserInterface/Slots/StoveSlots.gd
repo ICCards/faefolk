@@ -1,15 +1,15 @@
 extends Control
 
-onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 
-onready var fuel_slot = $FuelSlot
-onready var ingredient_slot1 = $Ingredient1
-onready var ingredient_slot2 = $Ingredient2
-onready var ingredient_slot3 = $Ingredient3
-onready var yield_slot1 = $YieldSlot1
-onready var yield_slot2 = $YieldSlot2
-onready var coal_yield_slot = $CoalYieldSlot
+@onready var fuel_slot = $FuelSlot
+@onready var ingredient_slot1 = $Ingredient1
+@onready var ingredient_slot2 = $Ingredient2
+@onready var ingredient_slot3 = $Ingredient3
+@onready var yield_slot1 = $YieldSlot1
+@onready var yield_slot2 = $YieldSlot2
+@onready var coal_yield_slot = $CoalYieldSlot
 
 
 func _ready():
@@ -23,25 +23,25 @@ func initialize_locked_slots():
 		$Ingredient3/LockSlot.show()
 		for i in range(slots_in_stove.size()):
 			if i != 2 and i != 3:
-				slots_in_stove[i].connect("gui_input", self, "slot_gui_input", [slots_in_stove[i]])
-				slots_in_stove[i].connect("mouse_entered", self, "hovered_slot", [slots_in_stove[i]])
-				slots_in_stove[i].connect("mouse_exited", self, "exited_slot", [slots_in_stove[i]])
+				slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i))
+				slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i))
+				slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i))
 			slots_in_stove[i].slot_index = i
 			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 	elif get_parent().level == "2":
 		$Ingredient3/LockSlot.show()
 		for i in range(slots_in_stove.size()):
 			if i != 3:
-				slots_in_stove[i].connect("gui_input", self, "slot_gui_input", [slots_in_stove[i]])
-				slots_in_stove[i].connect("mouse_entered", self, "hovered_slot", [slots_in_stove[i]])
-				slots_in_stove[i].connect("mouse_exited", self, "exited_slot", [slots_in_stove[i]])
+				slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i))
+				slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i))
+				slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i))
 			slots_in_stove[i].slot_index = i
 			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 	else:
 		for i in range(slots_in_stove.size()):
-			slots_in_stove[i].connect("gui_input", self, "slot_gui_input", [slots_in_stove[i]])
-			slots_in_stove[i].connect("mouse_entered", self, "hovered_slot", [slots_in_stove[i]])
-			slots_in_stove[i].connect("mouse_exited", self, "exited_slot", [slots_in_stove[i]])
+			slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i))
+			slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i))
+			slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i))
 			slots_in_stove[i].slot_index = i
 			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 
@@ -79,7 +79,7 @@ func exited_slot(slot):
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			if find_parent("UserInterface").holding_item != null:
 				if !slot.item:
 					left_click_empty_slot(slot)
@@ -90,7 +90,7 @@ func slot_gui_input(event: InputEvent, slot):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
-		elif event.button_index == BUTTON_RIGHT && event.pressed:
+		elif event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
 			if slot.item and not find_parent("UserInterface").holding_item:
 				right_click_slot(slot)
 
@@ -104,7 +104,7 @@ func right_click_slot(slot):
 		get_parent().check_valid_recipe()
 
 func return_holding_item(item_name, qt):
-	var inventoryItem = InventoryItem.instance()
+	var inventoryItem = InventoryItem.instantiate()
 	inventoryItem.set_item(item_name, qt, null)
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem

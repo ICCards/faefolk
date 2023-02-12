@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/thunder crack.mp3-d38d419511bfa3254e0bff372c995bfe.mp3str"
+uid="uid://86w4gtnxusdy"
+path="res://.godot/imported/thunder crack.mp3-d38d419511bfa3254e0bff372c995bfe.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3"
-dest_files=[ "res://.import/thunder crack.mp3-d38d419511bfa3254e0bff372c995bfe.mp3str" ]
+dest_files=["res://.godot/imported/thunder crack.mp3-d38d419511bfa3254e0bff372c995bfe.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/open.mp3-84c81ff2be643d8ea2657c58584ffdff.mp3str"
+uid="uid://cwv170r3ixx5o"
+path="res://.godot/imported/open.mp3-84c81ff2be643d8ea2657c58584ffdff.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/chest/open.mp3"
-dest_files=[ "res://.import/open.mp3-84c81ff2be643d8ea2657c58584ffdff.mp3str" ]
+dest_files=["res://.godot/imported/open.mp3-84c81ff2be643d8ea2657c58584ffdff.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var big_ore_sprite: Sprite = $BigOre
-onready var small_ore_sprite: Sprite = $SmallOre
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var big_ore_sprite: Sprite2D = $BigOre
+@onready var small_ore_sprite: Sprite2D = $SmallOre
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var rng = RandomNumberGenerator.new()
 
 var ore_object
@@ -85,8 +85,8 @@ func hit(tool_name):
 		else:
 			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 28), amount)
 		animation_player.call_deferred("play", "small_ore_break")
-		yield(sound_effects, "finished")
-		yield(get_tree().create_timer(0.6), "timeout")
+		await sound_effects.finished
+		await get_tree().create_timer(0.6).timeout
 		call_deferred("queue_free")
 
 func _on_BigHurtBox_area_entered(_area):
@@ -94,7 +94,7 @@ func _on_BigHurtBox_area_entered(_area):
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-8, 8), rand_range(8,24)))
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(8,24)))
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		call_deferred("hit", _area.tool_name)
 
@@ -104,7 +104,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-20, 20), rand_range(-8,16)))
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-20, 20), randf_range(-8,16)))
 	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
 		call_deferred("hit", _area.tool_name)
 

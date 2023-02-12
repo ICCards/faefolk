@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/blizzard.mp3-565e8ee61dcf3af5e5182a19352c47b2.mp3str"
+uid="uid://c6qvkq5pv88oy"
+path="res://.godot/imported/blizzard.mp3-565e8ee61dcf3af5e5182a19352c47b2.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Ice/blizzard.mp3"
-dest_files=[ "res://.import/blizzard.mp3-565e8ee61dcf3af5e5182a19352c47b2.mp3str" ]
+dest_files=["res://.godot/imported/blizzard.mp3-565e8ee61dcf3af5e5182a19352c47b2.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

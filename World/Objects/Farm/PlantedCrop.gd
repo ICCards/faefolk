@@ -14,7 +14,7 @@ var object_name = "crop"
 
 func _ready():
 	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + return_phase()  + ".png")
-	MapData.connect("refresh_crops", self, "refresh_image")
+	MapData.connect("refresh_crops",Callable(self,"refresh_image"))
 	
 
 func refresh_image():
@@ -74,15 +74,15 @@ func harvest_and_remove():
 		$CropText.hide()
 		Tiles.add_valid_tiles(location)
 		isBeingHarvested = true
-		yield(get_tree().create_timer(0.6), "timeout")
+		await get_tree().create_timer(0.6).timeout
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
-		yield(get_tree().create_timer(1.0), "timeout")
+		await get_tree().create_timer(1.0).timeout
 		queue_free()
 	
 func harvest_and_keep_planted():
 	if !isBeingHarvested:
 		isBeingHarvested = true
-		yield(get_tree().create_timer(0.6), "timeout")
+		await get_tree().create_timer(0.6).timeout
 		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
 		MapData.world["crops"][name]["rp"] = true # start regrowth phase
 		MapData.world["crops"][name]["dh"] = 1 # days until next harvest

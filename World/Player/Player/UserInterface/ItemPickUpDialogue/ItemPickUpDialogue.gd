@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 
-onready var ItemPickUpBox = load("res://InventoryLogic/ItemPickUpBox.tscn")
+@onready var ItemPickUpBox = load("res://InventoryLogic/ItemPickUpBox.tscn")
 
 var queue = []
 var thread := Thread.new()
@@ -10,7 +10,7 @@ func item_picked_up(item_name, item_quantity):
 	queue.append([item_name, item_quantity])
 	if thread.is_active():
 		return
-	thread.start(self,"show_dialogue")
+	thread.start(Callable(self,"show_dialogue"))
 	
 
 func show_dialogue():
@@ -39,15 +39,15 @@ func add_or_extend_inventory_full_box():
 		if node.item_name == "Inventory full!":
 			node.call_deferred("initialize")
 			return
-	var itemPickUpBox = ItemPickUpBox.instance()
+	var itemPickUpBox = ItemPickUpBox.instantiate()
 	itemPickUpBox.item_name = "Inventory full!"
 	itemPickUpBox.delay = self.get_children().size()
 	call_deferred("add_child", itemPickUpBox)
 
 
 func repeat_or_end_thread():
-	queue.remove(0)
-	if not queue.empty():
+	queue.remove_at(0)
+	if not queue.is_empty():
 		show_dialogue()
 		return
 	thread.wait_to_finish()
@@ -59,7 +59,7 @@ func modify_existing_box(node,amount_to_add):
 	node.call_deferred("initialize")
 
 func add_new_box(item_name,item_quantity):
-	var itemPickUpBox = ItemPickUpBox.instance()
+	var itemPickUpBox = ItemPickUpBox.instantiate()
 	itemPickUpBox.item_name = item_name
 	itemPickUpBox.item_quantity = item_quantity
 	itemPickUpBox.delay = self.get_children().size()

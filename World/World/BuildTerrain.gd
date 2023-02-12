@@ -1,20 +1,20 @@
 extends Node
 
-onready var dirt = get_node("../../GeneratedTiles/DirtTiles")
-onready var plains = get_node("../../GeneratedTiles/GreenGrassTiles")
-onready var forest = get_node("../../GeneratedTiles/DarkGreenGrassTiles")
+@onready var dirt = get_node("../../GeneratedTiles/DirtTiles")
+@onready var plains = get_node("../../GeneratedTiles/GreenGrassTiles")
+@onready var forest = get_node("../../GeneratedTiles/DarkGreenGrassTiles")
 #onready var water = $GeneratedTiles/Water
-onready var validTiles = get_node("../../ValidTiles") 
-onready var navTiles = get_node("../../Navigation2D/NavTiles")
-onready var hoed = get_node("../../FarmingTiles/HoedAutoTiles")
-onready var watered = get_node("../../FarmingTiles/WateredAutoTiles")
-onready var snow = get_node("../../GeneratedTiles/SnowTiles")
-onready var waves = get_node("../../GeneratedTiles/WaveTiles")
-onready var wetSand = get_node("../../GeneratedTiles/WetSandBeachBorder")
-onready var sand = get_node("../../GeneratedTiles/DrySandTiles")
-onready var shallow_ocean = get_node("../../GeneratedTiles/ShallowOcean")
-onready var deep_ocean = get_node("../../GeneratedTiles/DeepOcean")
-onready var top_ocean = get_node("../../GeneratedTiles/TopOcean")
+@onready var validTiles = get_node("../../ValidTiles") 
+@onready var navTiles = get_node("../../Node2D/NavTiles")
+@onready var hoed = get_node("../../FarmingTiles/HoedAutoTiles")
+@onready var watered = get_node("../../FarmingTiles/WateredAutoTiles")
+@onready var snow = get_node("../../GeneratedTiles/SnowTiles")
+@onready var waves = get_node("../../GeneratedTiles/WaveTiles")
+@onready var wetSand = get_node("../../GeneratedTiles/WetSandBeachBorder")
+@onready var sand = get_node("../../GeneratedTiles/DrySandTiles")
+@onready var shallow_ocean = get_node("../../GeneratedTiles/ShallowOcean")
+@onready var deep_ocean = get_node("../../GeneratedTiles/DeepOcean")
+@onready var top_ocean = get_node("../../GeneratedTiles/TopOcean")
 
 
 var terrain_thread := Thread.new()
@@ -22,7 +22,7 @@ var terrain_thread := Thread.new()
 var built_chunks = []
 var current_chunks = []
 
-onready var IcPuppy = preload("res://World/Player/Pet/IcPuppy.tscn")
+@onready var IcPuppy = preload("res://World3D/Player/Pet/IcPuppy.tscn")
 
 var spawn_loc
 
@@ -42,7 +42,7 @@ func build_terrain():
 		for new_chunk in get_parent().built_chunks:
 			if not built_chunks.has(new_chunk) and not terrain_thread.is_active():
 				built_chunks.append(new_chunk)
-				terrain_thread.start(self, "_whoAmI", new_chunk)
+				terrain_thread.start(Callable(self,"_whoAmI").bind(new_chunk))
 
 func spawn_chunk(chunk_name):
 	var _chunk = MapData.return_chunk(chunk_name[0],chunk_name.substr(1,-1))
@@ -50,32 +50,32 @@ func spawn_chunk(chunk_name):
 		for loc_string in _chunk["plains"]:
 			var loc = Util.string_to_vector2(loc_string)
 			plains.set_cellv(loc, 0)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["snow"].size() > 0:
 		for loc_string in _chunk["snow"]:
 			var loc = Util.string_to_vector2(loc_string)
 			snow.set_cellv(loc, 0)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["forest"].size() > 0:
 		for loc_string in _chunk["forest"]:
 			var loc = Util.string_to_vector2(loc_string)
 			forest.set_cellv(loc, 0)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["beach"].size() > 0:
 		for loc_string in _chunk["beach"]:
 			var loc = Util.string_to_vector2(loc_string)
 			Tiles._set_cell(sand, loc.x, loc.y, 0)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["desert"].size() > 0:
 		for loc_string in _chunk["desert"]:
 			var loc = Util.string_to_vector2(loc_string)
 			Tiles._set_cell(sand, loc.x, loc.y, 0)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["dirt"].size() > 0:
 		for loc_string in _chunk["dirt"]:
 			var loc = Util.string_to_vector2(loc_string)
 			dirt.set_cellv(loc, 0)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["ocean"].size() > 0:
 		for loc_string in _chunk["ocean"]:
 			var loc = Util.string_to_vector2(loc_string)
@@ -86,7 +86,7 @@ func spawn_chunk(chunk_name):
 				top_ocean.set_cellv(loc, 0)
 				deep_ocean.set_cellv(loc, 0)
 				validTiles.set_cellv(loc, -1)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	for loc_string in _chunk["beach"]:
 		var loc = Util.string_to_vector2(loc_string)
 		#Tiles._set_cell(sand, loc.x, loc.y, 0)
@@ -118,7 +118,7 @@ func spawn_chunk(chunk_name):
 				deep_ocean.set_cellv(loc+Vector2(-i,0),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,i),-1)
 				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	call_deferred("update_bitmasks", chunk_name)
 
 func update_bitmasks(chunk_name):
@@ -205,37 +205,37 @@ func update_bitmasks(chunk_name):
 			end_y = 1000
 	if _chunk["plains"].size() > 0:
 		plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["snow"].size() > 0:
 		snow.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["forest"].size() > 0:
 		forest.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["dirt"].size() > 0:
 		dirt.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	if _chunk["ocean"].size() > 0:
 		wetSand.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		waves.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		deep_ocean.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 #	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	yield(get_tree(), "idle_frame")
-#	yield(get_tree(), "idle_frame")
+#	await get_tree().idle_frame
+#	await get_tree().idle_frame
 #	snow.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	yield(get_tree(), "idle_frame")
+#	await get_tree().idle_frame
 #	forest.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	yield(get_tree(), "idle_frame")
+#	await get_tree().idle_frame
 #	dirt.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	yield(get_tree(), "idle_frame")
+#	await get_tree().idle_frame
 #	wetSand.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	yield(get_tree(), "idle_frame")
+#	await get_tree().idle_frame
 #	waves.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	yield(get_tree(), "idle_frame")
+#	await get_tree().idle_frame
 #	deep_ocean.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	yield(get_tree(), "idle_frame")
+#	await get_tree().idle_frame
 	#print("BUILT TERRAIN " + str(chunk_name))
 	terrain_thread.wait_to_finish()

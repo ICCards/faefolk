@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bear pacing.mp3-c3a28f8836131a7c6e46db73d21fe22f.mp3str"
+uid="uid://biklhdg1fwmac"
+path="res://.godot/imported/bear pacing.mp3-c3a28f8836131a7c6e46db73d21fe22f.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/animals/bear/bear pacing.mp3"
-dest_files=[ "res://.import/bear pacing.mp3-c3a28f8836131a7c6e46db73d21fe22f.mp3str" ]
+dest_files=["res://.godot/imported/bear pacing.mp3-c3a28f8836131a7c6e46db73d21fe22f.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

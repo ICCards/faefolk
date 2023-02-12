@@ -1,4 +1,4 @@
-extends YSort
+extends Node2D
 
 var directions = ["down", "left", "up", "right"]
 var couch_varieties = [1, 2, 3, 4]
@@ -35,7 +35,7 @@ enum {
 }
 
 var _uuid = load("res://helpers/UUID.gd")
-onready var uuid = _uuid.new()
+@onready var uuid = _uuid.new()
 
 func _ready():
 	initialize()
@@ -45,7 +45,7 @@ func destroy():
 	name = "removing"
 	hide()
 	set_physics_process(false)
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	queue_free()
 
 
@@ -122,9 +122,9 @@ func set_dimensions():
 			$ColorIndicator.tile_size = Vector2(2, 1)
 			$ScaledItemToPlace.visible = true
 			$ScaledItemToPlace.texture = load("res://Assets/Images/placable_object_preview/sleeping bag.png")
-			$ScaledItemToPlace.rect_scale = Vector2(0.5, 0.5)
-			$ScaledItemToPlace.rect_size = Vector2(128, 64)
-			$ScaledItemToPlace.rect_position = Vector2(0,0)
+			$ScaledItemToPlace.scale = Vector2(0.5, 0.5)
+			$ScaledItemToPlace.size = Vector2(128, 64)
+			$ScaledItemToPlace.position = Vector2(0,0)
 		ITEM:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
@@ -186,7 +186,7 @@ func set_dimensions():
 
 
 func place_forage_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var dimensions = Vector2(1,1)
 	$ColorIndicator.tile_size = dimensions
 	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE or Tiles.validate_foundation_tiles(location, dimensions):
@@ -200,7 +200,7 @@ func place_forage_state():
 
 
 func place_gate_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
 	get_rotation_index()
@@ -230,7 +230,7 @@ func place_gate_state():
 
 
 func place_customizable_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
 	if item_name == "large rug" or item_name == "medium rug" or item_name == "small rug":
@@ -257,7 +257,7 @@ func place_customizable_state():
 			place_object(item_name+str(variety), null, location, "placable")
 
 func place_customizable_rotatable_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
 	if item_name == "couch" or item_name == "armchair":
@@ -299,12 +299,12 @@ func get_variety_index(num_varieties):
 		varieties_index += 1
 		if varieties_index == num_varieties:
 			varieties_index = 0
-		yield(get_tree().create_timer(0.25), "timeout")
+		await get_tree().create_timer(0.25).timeout
 		variety_delay = false
 
 
 func place_rotatable_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
 	get_rotation_index()
@@ -330,8 +330,8 @@ func place_rotatable_state():
 
 
 func place_foundation_state():
-	if Server.world.name == "World":
-		var location = Tiles.valid_tiles.world_to_map(mousePos)
+	if Server.world.name == "World3D":
+		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if Tiles.foundation_tiles.get_cellv(location) != -1 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 			$ColorIndicator.indicator_color = "Red"
 			$ColorIndicator.set_indicator_color()
@@ -346,10 +346,10 @@ func place_foundation_state():
 
 
 func place_door_state():
-	$ItemToPlace.rect_scale = Vector2(1, 1)
+	$ItemToPlace.scale = Vector2(1, 1)
 	get_rotation_index()
 	var direction = directions[direction_index]
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	if direction == "up" or direction == "down":
 		$ColorIndicator.tile_size = Vector2(2, 1)
 		$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
@@ -376,10 +376,10 @@ func place_door_state():
 
 
 func place_buildings_state():
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		$ColorIndicator.visible = true
 		$ColorIndicator.tile_size = Vector2(1,1)
-		var location = Tiles.valid_tiles.world_to_map(mousePos)
+		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if not Tiles.validate_tiles(location,Vector2(1,1)) or \
 		not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or \
 		not Tiles.validate_foundation_tiles(location,Vector2(1,1)) or \
@@ -396,26 +396,26 @@ func place_sleeping_bag_state():
 	#get_rotation_index()
 	#var direction = directions[direction_index]
 	var direction = "down"
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
 #	if direction == "up":
 #		$ColorIndicator.tile_size = Vector2(1, 2)
-#		$ScaledItemToPlace.rect_position = Vector2(32,-32)
-#		$ScaledItemToPlace.rect_rotation = 90
+#		$ScaledItemToPlace.position = Vector2(32,-32)
+#		$ScaledItemToPlace.rotation = 90
 #		$ScaledItemToPlace.flip_v = false
 	if direction == "down":
 		$ColorIndicator.tile_size = Vector2(1, 2)
-		$ScaledItemToPlace.rect_position = Vector2(0,32)
-		$ScaledItemToPlace.rect_rotation = 270
+		$ScaledItemToPlace.position = Vector2(0,32)
+		$ScaledItemToPlace.rotation = 270
 		$ScaledItemToPlace.flip_v = false
 #	elif direction == "left":
 #		$ColorIndicator.tile_size = Vector2(2, 1)
-#		$ScaledItemToPlace.rect_position = Vector2(64,32)
-#		$ScaledItemToPlace.rect_rotation = 180
+#		$ScaledItemToPlace.position = Vector2(64,32)
+#		$ScaledItemToPlace.rotation = 180
 #		$ScaledItemToPlace.flip_v = true
 #	elif direction == "right":
 #		$ColorIndicator.tile_size = Vector2(2, 1)
-#		$ScaledItemToPlace.rect_position = Vector2(0,0)
-#		$ScaledItemToPlace.rect_rotation = 0
+#		$ScaledItemToPlace.position = Vector2(0,0)
+#		$ScaledItemToPlace.rotation = 0
 #		$ScaledItemToPlace.flip_v = false
 	if Server.player_node.position.distance_to(mousePos) > 120:
 		$ColorIndicator.indicator_color = "Red"
@@ -441,12 +441,12 @@ func get_rotation_index():
 		direction_index += 1
 		if direction_index == 4:
 			direction_index = 0
-		yield(get_tree().create_timer(0.25), "timeout")
+		await get_tree().create_timer(0.25).timeout
 		rotation_delay = false
 
 
 func place_item_state():
-	var location = Tiles.valid_tiles.world_to_map(mousePos)
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var dimensions = Constants.dimensions_dict[item_name]
 	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 		$ColorIndicator.indicator_color = "Red"
@@ -467,8 +467,8 @@ func place_item_state():
 			place_object(item_name, null, location, "placable")
 
 func place_seed_state():
-	if Server.world.name == "World":
-		var location = Tiles.valid_tiles.world_to_map(mousePos)
+	if Server.world.name == "World3D":
+		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
 			if not Tiles.validate_forest_tiles(location) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 				$ColorIndicator.indicator_color = "Red"

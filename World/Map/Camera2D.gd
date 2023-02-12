@@ -8,7 +8,7 @@ const ZOOM_INCREMENT: float = 0.1
 
 var _target_zoom: float = 1.2
 
-onready var _tween: Tween = $Tween
+@onready var _tween: Tween = $Tween
 
 func _ready():
 	focus_position(Vector2(500,500))
@@ -23,14 +23,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if PlayerData.viewMapMode:
 		if event is InputEventMouseButton:
 			if event.is_pressed():
-				if event.button_index == BUTTON_WHEEL_UP:
+				if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 					zoom_in()
-				if event.button_index == BUTTON_WHEEL_DOWN:
+				if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 					zoom_out()
 				if event.doubleclick:
 					focus_position(get_global_mouse_position())
 		if event is InputEventMouseMotion:
-			if event.button_mask == BUTTON_MASK_LEFT:
+			if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
 				position -= event.relative * zoom
 
 

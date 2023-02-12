@@ -1,16 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://2w2tr1rtk116"]
 
-[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=1]
+[ext_resource type="Theme" uid="uid://bvgqeuv5sk7i" path="res://Assets/Themes/button_theme.tres" id="1"]
 
 [node name="BetaLabel" type="Label"]
-margin_left = 1137.0
-margin_top = 14.0
-margin_right = 1299.0
-margin_bottom = 108.0
+offset_left = 1137.0
+offset_top = 14.0
+offset_right = 1299.0
+offset_bottom = 108.0
 grow_horizontal = 0
-rect_scale = Vector2( 0.8, 0.8 )
-theme = ExtResource( 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_font_sizes/font_size = 100
 text = "Beta  v1.4"

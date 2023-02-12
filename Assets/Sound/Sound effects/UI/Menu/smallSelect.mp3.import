@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/smallSelect.mp3-d340502bafcede16834611c314b3cd51.mp3str"
+uid="uid://bhjuh53665fa8"
+path="res://.godot/imported/smallSelect.mp3-d340502bafcede16834611c314b3cd51.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/UI/Menu/smallSelect.mp3"
-dest_files=[ "res://.import/smallSelect.mp3-d340502bafcede16834611c314b3cd51.mp3str" ]
+dest_files=["res://.godot/imported/smallSelect.mp3-d340502bafcede16834611c314b3cd51.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

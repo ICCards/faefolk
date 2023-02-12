@@ -1,10 +1,10 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
-onready var bunny_sprite: AnimatedSprite = $BunnySprite
-onready var _timer: Timer = $Timers/Timer
-onready var animation_player = $AnimationPlayer
-onready var navigation_agent = $NavigationAgent2D
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var bunny_sprite: AnimatedSprite2D = $BunnySprite
+@onready var _timer: Timer = $Timers/Timer
+@onready var animation_player = $AnimationPlayer
+@onready var navigation_agent = $NavigationAgent2D
 
 var enemy_name = "bunny"
 var is_sleeping: bool = true
@@ -31,22 +31,22 @@ func _ready():
 	visible = false
 	randomize()
 	set_attributes()
-	_timer.connect("timeout", self, "_update_pathfinding")
-	navigation_agent.connect("velocity_computed", self, "move_deferred")
-	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Navigation2D"))
+	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
+	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World3D/Node2D"))
 
 
 func set_attributes():
-	bunny_sprite.frames = Images.BunnyVariations[variety-1]
-	var randomRadiusScale = rand_range(0.25,1.25)
+	bunny_sprite.sprite_frames = Images.BunnyVariations[variety-1]
+	var randomRadiusScale = randf_range(0.25,1.25)
 	$DetectPlayer/CollisionShape2D.scale = Vector2(randomRadiusScale, randomRadiusScale)
-	_timer.wait_time = rand_range(2.5, 5.0)
+	_timer.wait_time = randf_range(2.5, 5.0)
 	if Util.chance(50):
 		bunny_sprite.flip_h = true
 
 func _update_pathfinding():
 	if not thread.is_active() and visible and not destroyed:
-		thread.start(self, "_get_path", Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
 		if Util.chance(15):
 			if not destroyed and not sound_effects.playing:
 				sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/idle.mp3"))
@@ -58,9 +58,9 @@ func _get_path(pos):
 	
 func calculate_path(pos):
 	if not destroyed:
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		navigation_agent.call_deferred("set_target_location",pos)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 	thread.wait_to_finish()
 
 func _physics_process(delta):
@@ -93,13 +93,19 @@ func move(_velocity: Vector2) -> void:
 	if tornado_node or stunned or destroyed:
 		return
 	if frozen:
-		velocity = move_and_slide(_velocity*0.75)
+		set_velocity(_velocity*0.75)
+		move_and_slide()
+		velocity = velocity
 		bunny_sprite.modulate = Color("00c9ff")
 	elif poisoned:
-		velocity = move_and_slide(_velocity*0.9)
+		set_velocity(_velocity*0.9)
+		move_and_slide()
+		velocity = velocity
 		bunny_sprite.modulate = Color("009000")
 	else:
-		velocity = move_and_slide(_velocity)
+		set_velocity(_velocity)
+		move_and_slide()
+		velocity = velocity
 		bunny_sprite.modulate = Color("ffffff")
 
 
@@ -141,10 +147,10 @@ func destroy(killed_by_player):
 	destroyed = true
 	bunny_sprite.call_deferred("play", "death")
 	$AnimationPlayer.call_deferred("play", "death")
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(0,1))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(0,1))
-	yield($AnimationPlayer, "animation_finished")
+	await $AnimationPlayer.animation_finished
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -162,10 +168,10 @@ func _on_HurtBox_area_entered(area):
 	else:
 		PlayerDataHelpers.add_skill_experience(area.tool_name)
 	if area.tool_name == "lingering tornado":
-		$EnemyTornadoState.set_deferred("orbit_radius", rand_range(0,20))
+		$EnemyTornadoState.set_deferred("orbit_radius", randf_range(0,20))
 		tornado_node = area
 	if area.special_ability == "fire":
-		var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+		var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
 		InstancedScenes.initiateExplosionParticles(position+randomPos)
 		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 		health -= Stats.FIRE_DEBUFF_DAMAGE
@@ -188,7 +194,7 @@ func start_run_state():
 func _on_RunStateTimer_timeout():
 	navigation_agent.set_deferred("max_speed", 160)
 	running_state = false
-	_timer.set_deferred("wait_time", rand_range(2.5, 5.0))
+	_timer.set_deferred("wait_time", randf_range(2.5, 5.0))
 
 func _on_VisibilityNotifier2D_screen_entered():
 	set_deferred("visible", true)

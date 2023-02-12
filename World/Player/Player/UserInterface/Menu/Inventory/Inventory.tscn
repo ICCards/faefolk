@@ -1,494 +1,365 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=20 format=3 uid="uid://drxqi2l1pd8af"]
 
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Images/User interface/inventory/inventory/inventory-tab-bar.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/locked slot.png" type="Texture" id=3]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" type="Script" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/BaseStats.gd" type="Script" id=6]
-[ext_resource path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" type="Script" id=7]
-[ext_resource path="res://Characters/Human/male/IDLE/body/down/body.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" type="Texture" id=9]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Characters/Human/male/IDLE/body/down/arms.png" type="Texture" id=11]
-[ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=13]
-[ext_resource path="res://World/Player/Player/UserInterface/EnergyManaHealth.gd" type="Script" id=14]
-[ext_resource path="res://Assets/Images/Inventory UI/day.png" type="Texture" id=15]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=17]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/pants/pants.png" type="Texture" id=18]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/shirts/shirt.png" type="Texture" id=19]
-[ext_resource path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" type="Texture" id=20]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" id="1_ecmi3"]
+[ext_resource type="Texture2D" uid="uid://ctrqx2ip8xuv6" path="res://Assets/Images/User interface/buttons-icons/locked slot.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://drie3pgeo5c4j" path="res://Assets/Images/User interface/inventory/inventory/night.png" id="4_qx6w1"]
+[ext_resource type="Texture2D" uid="uid://cng2kjrnmej2s" path="res://Characters/Human/male/IDLE/body/down/body.png" id="8"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" id="8_f7upd"]
+[ext_resource type="Texture2D" uid="uid://r6w3mbmfa6ms" path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://cs5el5bbtdavb" path="res://Characters/Human/male/IDLE/body/down/arms.png" id="11"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Inventory/EnergyManaHealth.gd" id="12_ipi64"]
+[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="13"]
+[ext_resource type="PackedScene" uid="uid://cx3b4o2xigr66" path="res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.tscn" id="15_ehd48"]
+[ext_resource type="Texture2D" uid="uid://dr7rxljxkqsao" path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" id="16"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="16_kdmwg"]
+[ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="17"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="17_2uaad"]
+[ext_resource type="Texture2D" uid="uid://dd2gw6p18itnq" path="res://Characters/Human/male/IDLE/assets/down/pants/pants.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://cjro8w1gc4g0u" path="res://Characters/Human/male/IDLE/assets/down/shirts/shirt.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://djsc7cevuwl0q" path="res://Characters/Human/male/IDLE/assets/down/shoes/shoes.png" id="20"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "loop"
 length = 0.8
-loop = true
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Arms:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Accessory:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("HeadAtr:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Pants:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Shirts:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("Shoes:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l41dg"]
+_data = {
+"loop": SubResource("1")
 }
 
 [node name="Inventory" type="Control"]
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ecmi3")
 
 [node name="Background" type="TextureRect" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 9 )
-stretch_mode = 4
-
-[node name="InventorySlots" parent="." instance=ExtResource( 5 )]
-margin_left = 639.0
-margin_top = 315.0
-margin_right = 933.0
-margin_bottom = 567.0
-custom_constants/vseparation = 18
-custom_constants/hseparation = 15
-columns = 5
-
-[node name="HotbarInventorySlots" parent="." instance=ExtResource( 1 )]
-margin_left = 639.0
-margin_top = 183.0
-margin_right = 943.0
-margin_bottom = 297.0
-custom_constants/vseparation = 18
-custom_constants/hseparation = 15
-columns = 5
-
-[node name="AttributeSlots" type="GridContainer" parent="."]
-margin_left = 471.0
-margin_top = 180.0
-margin_right = 595.0
-margin_bottom = 354.0
-custom_constants/vseparation = 6
-custom_constants/hseparation = 12
-columns = 2
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="locked1" type="TextureRect" parent="AttributeSlots"]
-margin_right = 56.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 56, 54 )
-texture = ExtResource( 3 )
-expand = true
-
-[node name="locked2" type="TextureRect" parent="AttributeSlots"]
-margin_left = 68.0
-margin_right = 124.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 56, 54 )
-texture = ExtResource( 3 )
-expand = true
-
-[node name="locked3" type="TextureRect" parent="AttributeSlots"]
-margin_top = 60.0
-margin_right = 56.0
-margin_bottom = 114.0
-rect_min_size = Vector2( 56, 54 )
-texture = ExtResource( 3 )
-expand = true
-
-[node name="locked4" type="TextureRect" parent="AttributeSlots"]
-margin_left = 68.0
-margin_top = 60.0
-margin_right = 124.0
-margin_bottom = 114.0
-rect_min_size = Vector2( 56, 54 )
-texture = ExtResource( 3 )
-expand = true
-
-[node name="locked5" type="TextureRect" parent="AttributeSlots"]
-margin_top = 120.0
-margin_right = 56.0
-margin_bottom = 174.0
-rect_min_size = Vector2( 56, 54 )
-texture = ExtResource( 3 )
-expand = true
-
-[node name="locked6" type="TextureRect" parent="AttributeSlots"]
-margin_left = 68.0
-margin_top = 120.0
-margin_right = 124.0
-margin_bottom = 174.0
-rect_min_size = Vector2( 56, 54 )
-texture = ExtResource( 3 )
-expand = true
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("9")
+stretch_mode = 3
 
 [node name="DayNightBg" type="TextureRect" parent="."]
-margin_left = 348.0
-margin_top = 192.0
-margin_right = 444.0
-margin_bottom = 342.0
-texture = ExtResource( 15 )
-expand = true
-stretch_mode = 7
-
-[node name="BaseStats" type="Control" parent="."]
-visible = false
-margin_left = 396.5
-margin_top = 327.0
-margin_right = 436.5
-margin_bottom = 367.0
-script = ExtResource( 6 )
-
-[node name="Farming" type="Control" parent="BaseStats"]
-margin_left = 23.5
-margin_top = 121.0
-margin_right = 63.5
-margin_bottom = 161.0
-
-[node name="Label" type="Label" parent="BaseStats/Farming"]
-margin_left = -63.0
-margin_top = 11.0
-margin_right = 117.0
-margin_bottom = 74.0
-rect_scale = Vector2( 0.3, 0.3 )
-theme = ExtResource( 13 )
-text = "Farming "
-align = 1
-
-[node name="Pg" type="TextureProgress" parent="BaseStats/Farming"]
-margin_left = 12.0
-margin_top = 14.0
-margin_right = 156.0
-margin_bottom = 20.0
-value = 80.0
-texture_progress = ExtResource( 2 )
-nine_patch_stretch = true
-
-[node name="Fishing" type="Control" parent="BaseStats"]
-margin_left = 23.5
-margin_top = 154.0
-margin_right = 63.5
-margin_bottom = 194.0
-
-[node name="Label" type="Label" parent="BaseStats/Fishing"]
-margin_left = -63.0
-margin_top = 11.0
-margin_right = 117.0
-margin_bottom = 74.0
-rect_scale = Vector2( 0.3, 0.3 )
-theme = ExtResource( 13 )
-text = "Fishing"
-align = 1
-
-[node name="Pg" type="TextureProgress" parent="BaseStats/Fishing"]
-margin_left = 12.0
-margin_top = 14.0
-margin_right = 156.0
-margin_bottom = 20.0
-value = 80.0
-texture_progress = ExtResource( 2 )
-nine_patch_stretch = true
-
-[node name="Foraging" type="Control" parent="BaseStats"]
-margin_left = 23.5
-margin_top = 187.0
-margin_right = 63.5
-margin_bottom = 227.0
-
-[node name="Label" type="Label" parent="BaseStats/Foraging"]
-margin_left = -63.0
-margin_top = 11.0
-margin_right = 117.0
-margin_bottom = 74.0
-rect_scale = Vector2( 0.3, 0.3 )
-theme = ExtResource( 13 )
-text = "Foraging"
-align = 1
-
-[node name="Pg" type="TextureProgress" parent="BaseStats/Foraging"]
-margin_left = 12.0
-margin_top = 14.0
-margin_right = 156.0
-margin_bottom = 20.0
-value = 80.0
-texture_progress = ExtResource( 2 )
-nine_patch_stretch = true
-
-[node name="Mining" type="Control" parent="BaseStats"]
-margin_left = 23.5
-margin_top = 220.0
-margin_right = 63.5
-margin_bottom = 260.0
-
-[node name="Label" type="Label" parent="BaseStats/Mining"]
-margin_left = -63.0
-margin_top = 11.0
-margin_right = 117.0
-margin_bottom = 74.0
-rect_scale = Vector2( 0.3, 0.3 )
-theme = ExtResource( 13 )
-text = "Mining"
-align = 1
-
-[node name="Pg" type="TextureProgress" parent="BaseStats/Mining"]
-margin_left = 12.0
-margin_top = 14.0
-margin_right = 156.0
-margin_bottom = 20.0
-value = 100.0
-texture_progress = ExtResource( 2 )
-nine_patch_stretch = true
-
-[node name="EnergyManaHealth" type="Control" parent="."]
-margin_top = 123.0
-margin_bottom = 123.0
-script = ExtResource( 14 )
-
-[node name="Energy" type="ColorRect" parent="EnergyManaHealth"]
-margin_left = 394.0
-margin_top = 436.0
-margin_right = 452.0
-margin_bottom = 494.0
-rect_rotation = 180.0
-color = Color( 0.00392157, 1, 0, 1 )
-
-[node name="Mana" type="ColorRect" parent="EnergyManaHealth"]
-margin_left = 455.0
-margin_top = 436.0
-margin_right = 513.0
-margin_bottom = 494.0
-rect_rotation = 180.0
-color = Color( 0, 0.203922, 1, 1 )
-
-[node name="Health" type="ColorRect" parent="EnergyManaHealth"]
-margin_left = 516.0
-margin_top = 436.0
-margin_right = 574.0
-margin_bottom = 494.0
-rect_rotation = 180.0
-color = Color( 0.941176, 0, 0, 1 )
-
-[node name="EnergyLabel" type="Label" parent="EnergyManaHealth"]
-margin_left = 337.0
-margin_top = 397.0
-margin_right = 497.0
-margin_bottom = 458.0
-rect_scale = Vector2( 0.35, 0.35 )
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Energy"
-align = 1
-
-[node name="ManaLabel" type="Label" parent="EnergyManaHealth"]
-margin_left = 398.0
-margin_top = 397.0
-margin_right = 558.0
-margin_bottom = 458.0
-rect_scale = Vector2( 0.35, 0.35 )
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Mana"
-align = 1
-
-[node name="HealthLabel" type="Label" parent="EnergyManaHealth"]
-margin_left = 459.0
-margin_top = 397.0
-margin_right = 619.0
-margin_bottom = 458.0
-rect_scale = Vector2( 0.35, 0.35 )
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Health"
-align = 1
-
-[node name="Tween" type="Tween" parent="."]
-
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-
-[node name="Control" type="ColorRect" parent="."]
-visible = false
-margin_left = 329.0
-margin_top = 449.0
-margin_right = 614.0
-margin_bottom = 595.0
-color = Color( 0.247059, 0.109804, 0.0627451, 1 )
-
-[node name="EnergyLabel" type="Label" parent="."]
-margin_left = 339.0
-margin_top = 374.0
-margin_right = 690.0
-margin_bottom = 435.0
-rect_scale = Vector2( 0.35, 0.35 )
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Combat hotbar:"
-align = 1
-
-[node name="CombatHotbarSlots" parent="." instance=ExtResource( 10 )]
-margin_left = 351.0
-margin_top = 399.0
-margin_right = 579.0
-margin_bottom = 447.0
-
-[node name="Trash" parent="." instance=ExtResource( 12 )]
-__meta__ = {
-"_edit_lock_": true
-}
+layout_mode = 0
+offset_left = 348.0
+offset_top = 192.0
+offset_right = 444.0
+offset_bottom = 342.0
+texture = ExtResource("4_qx6w1")
+expand_mode = 1
 
 [node name="CompositeSprites" type="Node2D" parent="."]
-modulate = Color( 0.85, 0.85, 0.85, 1 )
-material = ExtResource( 17 )
-position = Vector2( 397, 327 )
-scale = Vector2( 3.5, 3.5 )
-script = ExtResource( 7 )
+modulate = Color(0.85, 0.85, 0.85, 1)
+material = ExtResource("17")
+position = Vector2(397, 327)
+scale = Vector2(3.5, 3.5)
+script = ExtResource("8_f7upd")
+metadata/_edit_lock_ = true
 
-[node name="Body" type="Sprite" parent="CompositeSprites"]
+[node name="Body" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -16 )
-texture = ExtResource( 8 )
+position = Vector2(0, -16)
+texture = ExtResource("8")
 hframes = 4
 
-[node name="Legs" type="Sprite" parent="CompositeSprites"]
+[node name="Legs" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -16 )
+position = Vector2(0, -16)
 hframes = 4
 
-[node name="HeadAtr" type="Sprite" parent="CompositeSprites"]
+[node name="HeadAtr" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -16 )
-texture = ExtResource( 16 )
+position = Vector2(0, -16)
+texture = ExtResource("16")
 hframes = 4
 
-[node name="Arms" type="Sprite" parent="CompositeSprites"]
+[node name="Arms" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -16 )
-texture = ExtResource( 11 )
+position = Vector2(0, -16)
+texture = ExtResource("11")
 hframes = 4
 
-[node name="Pants" type="Sprite" parent="CompositeSprites"]
+[node name="Pants" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -16 )
-texture = ExtResource( 18 )
+position = Vector2(0, -16)
+texture = ExtResource("18")
 hframes = 4
 
-[node name="Shirts" type="Sprite" parent="CompositeSprites"]
+[node name="Shirts" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -16 )
-texture = ExtResource( 19 )
+position = Vector2(0, -16)
+texture = ExtResource("19")
 hframes = 4
 
-[node name="Accessory" type="Sprite" parent="CompositeSprites"]
+[node name="Accessory" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -16 )
+position = Vector2(0, -16)
 hframes = 4
 
-[node name="Shoes" type="Sprite" parent="CompositeSprites"]
+[node name="Shoes" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
-position = Vector2( 0, -16 )
-texture = ExtResource( 20 )
+position = Vector2(0, -16)
+texture = ExtResource("20")
 hframes = 4
 
-[node name="ToolEquipped" type="Sprite" parent="CompositeSprites"]
-position = Vector2( 0, -16 )
+[node name="ToolEquipped" type="Sprite2D" parent="CompositeSprites"]
+position = Vector2(0, -16)
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
-anims/loop = SubResource( 1 )
+libraries = {
+"": SubResource("AnimationLibrary_l41dg")
+}
+
+[node name="EnergyManaHealth" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 123.0
+offset_bottom = 123.0
+script = ExtResource("12_ipi64")
+
+[node name="Energy" type="ColorRect" parent="EnergyManaHealth"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 379.0
+offset_right = 394.0
+offset_bottom = 437.0
+color = Color(0.00392157, 1, 0, 1)
+
+[node name="Mana" type="ColorRect" parent="EnergyManaHealth"]
+layout_mode = 0
+offset_left = 397.0
+offset_top = 379.0
+offset_right = 455.0
+offset_bottom = 437.0
+color = Color(0, 0.203922, 1, 1)
+
+[node name="Health" type="ColorRect" parent="EnergyManaHealth"]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 379.0
+offset_right = 516.0
+offset_bottom = 437.0
+color = Color(0.941176, 0, 0, 1)
+
+[node name="EnergyLabel" type="Label" parent="EnergyManaHealth"]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 397.0
+offset_right = 497.0
+offset_bottom = 458.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("13")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 48
+text = "Energy"
+horizontal_alignment = 1
+
+[node name="ManaLabel" type="Label" parent="EnergyManaHealth"]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 397.0
+offset_right = 558.0
+offset_bottom = 458.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("13")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 48
+text = "Mana"
+horizontal_alignment = 1
+
+[node name="HealthLabel" type="Label" parent="EnergyManaHealth"]
+layout_mode = 0
+offset_left = 459.0
+offset_top = 397.0
+offset_right = 619.0
+offset_bottom = 458.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("13")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 48
+text = "Health"
+horizontal_alignment = 1
+
+[node name="CombatHotbarLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 347.0
+offset_top = 374.0
+offset_right = 698.0
+offset_bottom = 435.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("13")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 48
+text = "Combat hotbar:"
+
+[node name="AttributeSlots" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 180.0
+offset_right = 596.0
+offset_bottom = 354.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 6
+columns = 2
+metadata/_edit_lock_ = true
+
+[node name="locked1" type="TextureRect" parent="AttributeSlots"]
+custom_minimum_size = Vector2(56, 54)
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+
+[node name="locked2" type="TextureRect" parent="AttributeSlots"]
+custom_minimum_size = Vector2(56, 54)
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+
+[node name="locked3" type="TextureRect" parent="AttributeSlots"]
+custom_minimum_size = Vector2(56, 54)
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+
+[node name="locked4" type="TextureRect" parent="AttributeSlots"]
+custom_minimum_size = Vector2(56, 54)
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+
+[node name="locked5" type="TextureRect" parent="AttributeSlots"]
+custom_minimum_size = Vector2(56, 54)
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+
+[node name="locked6" type="TextureRect" parent="AttributeSlots"]
+custom_minimum_size = Vector2(56, 54)
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+
+[node name="CombatHotbarSlots" parent="." instance=ExtResource("15_ehd48")]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 399.0
+offset_right = 579.0
+offset_bottom = 447.0
+metadata/_edit_lock_ = true
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("16_kdmwg")]
+layout_mode = 0
+offset_left = 638.0
+offset_top = 184.0
+offset_right = 938.0
+offset_bottom = 298.0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 18
+columns = 5
+metadata/_edit_lock_ = true
+
+[node name="InventorySlots" parent="." instance=ExtResource("17_2uaad")]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 315.0
+offset_right = 943.0
+offset_bottom = 540.0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 18
+columns = 5
+metadata/_edit_lock_ = true
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]

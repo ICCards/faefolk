@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/water fill.mp3-4e034c1d2c6fa370c3baaf6d53144b01.mp3str"
+uid="uid://bf6aa65gk8nha"
+path="res://.godot/imported/water fill.mp3-4e034c1d2c6fa370c3baaf6d53144b01.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Farming/water fill.mp3"
-dest_files=[ "res://.import/water fill.mp3-4e034c1d2c6fa370c3baaf6d53144b01.mp3str" ]
+dest_files=["res://.godot/imported/water fill.mp3-4e034c1d2c6fa370c3baaf6d53144b01.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

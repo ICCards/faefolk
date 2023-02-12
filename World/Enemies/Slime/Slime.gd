@@ -1,9 +1,9 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var hit_box: Area2D = $SlimeHit
-onready var slime_sprite: AnimatedSprite = $SlimeSprite
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var hit_box: Area2D = $SlimeHit
+@onready var slime_sprite: AnimatedSprite2D = $SlimeSprite
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var player = Server.player_node
 var direction: String = "down"
@@ -34,9 +34,9 @@ var rng = RandomNumberGenerator.new()
 
 var JUMP_AMOUNT = 100
 var KNOCKBACK_AMOUNT = 180
-export var MAX_SPEED = 80
-export var ACCELERATION = 200
-export var FRICTION = 80
+@export var MAX_SPEED = 80
+@export var ACCELERATION = 200
+@export var FRICTION = 80
 
 var poison_increment = 0
 var amount_to_diminish = 0
@@ -62,13 +62,19 @@ func move(_velocity: Vector2) -> void:
 		return
 	elif frozen:
 		slime_sprite.modulate = Color("00c9ff")
-		velocity = move_and_slide(_velocity*0.75)
+		set_velocity(_velocity*0.75)
+		move_and_slide()
+		velocity = velocity
 	elif poisoned:
 		slime_sprite.modulate = Color("009000")
-		velocity = move_and_slide(_velocity*0.9)
+		set_velocity(_velocity*0.9)
+		move_and_slide()
+		velocity = velocity
 	else:
 		slime_sprite.modulate = Color("ffffff")
-		velocity = move_and_slide(_velocity)
+		set_velocity(_velocity)
+		move_and_slide()
+		velocity = velocity
 
 func _physics_process(delta):
 	if destroyed or not visible or stunned:
@@ -80,11 +86,15 @@ func _physics_process(delta):
 		end_chase_state()
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * MAX_SPEED * 7, ACCELERATION * delta * 8)
-		velocity = move_and_slide(velocity)
+		set_velocity(velocity)
+		move_and_slide()
+		velocity = velocity
 		return
 	if jumping:
 		velocity = velocity.move_toward(jump_direction * MAX_SPEED * 7, ACCELERATION * delta * 8)
-		velocity = move_and_slide(velocity)
+		set_velocity(velocity)
+		move_and_slide()
+		velocity = velocity
 		return
 	if not start_jump:
 		var direction = (Server.player_node.global_position - global_position).normalized()
@@ -97,9 +107,9 @@ func _physics_process(delta):
 func jump_forward():
 	start_jump = true
 	jump_delay = true
-	$Timers/JumpDelay.start(rand_range(1.0, 2.5))
+	$Timers/JumpDelay.start(randf_range(1.0, 2.5))
 	slime_sprite.play("jump")
-	yield(slime_sprite, "animation_finished")
+	await slime_sprite.animation_finished
 	if not cancel_jump and not destroyed:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/Slime/slime.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
@@ -107,7 +117,7 @@ func jump_forward():
 		slime_sprite.play("jumping")
 		jumping = true
 		jump_direction = (Server.player_node.global_position - global_position).normalized()
-		yield(slime_sprite, "animation_finished")
+		await slime_sprite.animation_finished
 		velocity = Vector2.ZERO
 	cancel_jump = false
 	jumping = false
@@ -143,7 +153,7 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("slime orb", position, 1)
 	destroyed = true
 	animation_player.play("death")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -174,10 +184,10 @@ func _on_HurtBox_area_entered(area):
 					start_jump = false
 					cancel_jump = true
 		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			$EnemyTornadoState.orbit_radius = randf_range(0,20)
 			tornado_node = area
 		if area.special_ability == "fire":
-			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+			var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
 			InstancedScenes.initiateExplosionParticles(position+randomPos)
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
@@ -185,7 +195,7 @@ func _on_HurtBox_area_entered(area):
 			$EnemyFrozenState.start(3)
 		elif area.special_ability == "poison":
 			$EnemyPoisonState.start("poison arrow")
-		yield(get_tree().create_timer(0.25), "timeout")
+		await get_tree().create_timer(0.25).timeout
 		$KnockbackParticles.emitting = false
 
 func start_chase_state():

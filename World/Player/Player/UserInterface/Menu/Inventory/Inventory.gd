@@ -1,12 +1,12 @@
 extends Control
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var hovered_item = null
 
 func _ready():
-	PlayerData.connect("set_day", self, "set_day_bg")
-	PlayerData.connect("set_night", self, "set_night_bg")
+	PlayerData.connect("set_day",Callable(self,"set_day_bg"))
+	PlayerData.connect("set_night",Callable(self,"set_night_bg"))
 	$CompositeSprites/AnimationPlayer.play("loop")
 
 func initialize():
@@ -25,10 +25,10 @@ func initialize():
 		set_day_bg()
 
 func set_day_bg():
-	$DayNightBg.set_deferred("texture", load("res://Assets/Images/Inventory UI/day.png"))
+	$DayNightBg.set_deferred("texture", load("res://Assets/Images/User interface/inventory/inventory/day.png"))
 
 func set_night_bg():
-	$DayNightBg.set_deferred("texture", load("res://Assets/Images/Inventory UI/night.png"))
+	$DayNightBg.set_deferred("texture", load("res://Assets/Images/User interface/inventory/inventory/night.png"))
 
 func _physics_process(delta):
 	if not visible:

@@ -1,21 +1,21 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/White.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://World/Player/Pet/PlayerPet.gd" type="Script" id=2]
+[ext_resource path="res://World3D/Player/Pet/PlayerPet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=22]
 radius = 1.99999
 height = 6.66669
 
-[node name="PlayerPet" type="KinematicBody2D"]
+[node name="PlayerPet" type="CharacterBody2D"]
 position = Vector2( 0, -5.96046e-08 )
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -23 )
 scale = Vector2( 2, 2 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "walk down"
 frame = 5
 playing = true
@@ -25,9 +25,9 @@ position = Vector2( 0, -0.666667 )
 rotation = 1.5708
 shape = SubResource( 22 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
 position = Vector2( 0, -6 )
 
-[connection signal="viewport_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_entered"]
-[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="viewport_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_entered"]
+[connection signal="viewport_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

@@ -1,9 +1,9 @@
 extends Camera2D
 
 
-onready var timer_shake_length = $timer_shake_length
-onready var timer_wait_times = $timer_wait_times
-onready var tween_shake = $Tween
+@onready var timer_shake_length = $timer_shake_length
+@onready var timer_wait_times = $timer_wait_times
+@onready var tween_shake = $Tween
 
 var time_of_shake = 3.0
 var speed_of_shake = 0.02
@@ -21,8 +21,8 @@ var doing_shake = false
 
 #connect out timer signal timeouts
 func _ready():
-	timer_wait_times.connect("timeout",self,"timeout_wait_times")
-	timer_shake_length.connect("timeout",self,"timeout_shake_length")
+	timer_wait_times.connect("timeout",Callable(self,"timeout_wait_times"))
+	timer_shake_length.connect("timeout",Callable(self,"timeout_shake_length"))
 	
 #This will stop the shake, and return camera offset to original value
 func timeout_shake_length():
@@ -32,7 +32,7 @@ func timeout_shake_length():
 #This function does the tween shaking between intervals
 func timeout_wait_times():
 	if(doing_shake):
-		tween_shake.interpolate_property(self,"offset",offset, Vector2(rand_range(-strength,strength),rand_range(-strength,strength)),reset_speed,Tween.TRANS_SINE,Tween.EASE_OUT)
+		tween_shake.interpolate_property(self,"offset",offset, Vector2(randf_range(-strength,strength),randf_range(-strength,strength)),reset_speed,Tween.TRANS_SINE,Tween.EASE_OUT)
 		tween_shake.start()
 		
 #once we've finished shaking the screen, tween to original offset
@@ -68,6 +68,6 @@ func start_small_shake():
 #	tween_shake.interpolate_property(flash_image,"modulate:a",0,strength,speed,Tween.TRANS_SINE,Tween.EASE_OUT)
 #	tween_shake.start()
 #
-#	yield(get_tree().create_timer(speed),"timeout")
+#	await get_tree().create_timer(speed).timeout
 #	tween_shake.interpolate_property(flash_image,"modulate:a",strength,0,speed,Tween.TRANS_SINE,Tween.EASE_OUT)
 #	tween_shake.start()

@@ -1,28 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dtyobd2b5oj0i"]
 
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate-selected.png" type="Texture" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=4]
+[ext_resource type="Texture2D" uid="uid://bai8b7wtamcjs" path="res://Assets/Images/User interface/buttons-icons/nameplate.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bhyc44ufjmueg" path="res://Assets/Images/User interface/buttons-icons/nameplate-selected.png" id="2"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.gd" id="3_ikxr7"]
+[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="4"]
 
 [node name="inventory_tab_btn" type="TextureButton"]
-margin_right = 31.0
-margin_bottom = 13.0
-rect_scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 1 )
-texture_pressed = ExtResource( 2 )
-script = ExtResource( 3 )
+offset_right = 31.0
+offset_bottom = 13.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("1")
+texture_pressed = ExtResource("2")
+script = ExtResource("3_ikxr7")
 
 [node name="Label" type="Label" parent="."]
-margin_right = 258.0
-margin_bottom = 100.0
-rect_scale = Vector2( 0.12, 0.12 )
-theme = ExtResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+layout_mode = 0
+offset_right = 258.0
+offset_bottom = 100.0
+scale = Vector2(0.12, 0.12)
+theme = ExtResource("4")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 48
 text = "Collections"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="." to="." method="_on_inventory_tab_btn_pressed"]

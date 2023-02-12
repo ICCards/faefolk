@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://World/Player/Player/Fishing/FishingMiniGame.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/Misc/Fishing/progress.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/Misc/Fishing/fishing with extra bar.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Misc/Fishing/rod decoration.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/Misc/Fishing/spr_fish_64_x.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Misc/Fishing/animated reel.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/Misc/Fishing/hook2.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/Misc/Fishing/hook3.png" type="Texture" id=9]
+[ext_resource path="res://World3D/Player/Player/Fishing/FishingMiniGame.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets/Images/Misc/Fishing/progress.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Images/Misc/Fishing/fishing with extra bar.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Images/Misc/Fishing/rod decoration.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets/Images/Misc/Fishing/spr_fish_64_x.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets/Images/Misc/Fishing/animated reel.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets/Images/Misc/Fishing/hook2.png" type="Texture2D" id=8]
+[ext_resource path="res://Assets/Images/Misc/Fishing/hook3.png" type="Texture2D" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 10 )
@@ -22,8 +22,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
@@ -38,8 +38,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1.5 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -50,17 +50,17 @@ z_index = 1
 script = ExtResource( 1 )
 
 [node name="Bg" type="TextureRect" parent="."]
-margin_left = 0.4
-margin_top = -35.2
-margin_right = 40.4
-margin_bottom = 96.8
+offset_left = 0.4
+offset_top = -35.2
+offset_right = 40.4
+offset_bottom = 96.8
 texture = ExtResource( 4 )
 
 [node name="wood fishing rod" type="Node2D" parent="."]
 visible = false
 position = Vector2( 15, 83 )
 
-[node name="Sprite" type="Sprite" parent="wood fishing rod"]
+[node name="Sprite2D" type="Sprite2D" parent="wood fishing rod"]
 texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="wood fishing rod"]
@@ -74,7 +74,7 @@ shape = SubResource( 1 )
 visible = false
 position = Vector2( 15, 81 )
 
-[node name="Sprite" type="Sprite" parent="stone fishing rod"]
+[node name="Sprite2D" type="Sprite2D" parent="stone fishing rod"]
 texture = ExtResource( 8 )
 
 [node name="Area2D" type="Area2D" parent="stone fishing rod"]
@@ -89,7 +89,7 @@ shape = SubResource( 1 )
 visible = false
 position = Vector2( 15, 79 )
 
-[node name="Sprite" type="Sprite" parent="gold fishing rod"]
+[node name="Sprite2D" type="Sprite2D" parent="gold fishing rod"]
 texture = ExtResource( 9 )
 
 [node name="Area2D" type="Area2D" parent="gold fishing rod"]
@@ -101,37 +101,37 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="Clicker" type="TextureButton" parent="."]
-margin_left = -318.4
-margin_top = -84.8
-margin_right = 775.6
-margin_bottom = 583.2
+offset_left = -318.4
+offset_top = -84.8
+offset_right = 775.6
+offset_bottom = 583.2
 
-[node name="Progress" type="TextureProgress" parent="."]
+[node name="Progress" type="TextureProgressBar" parent="."]
 modulate = Color( 0.313726, 1, 0, 0.854902 )
-margin_left = 2.0
-margin_top = -33.0
-margin_right = 5.0
-margin_bottom = 95.0
+offset_left = 2.0
+offset_top = -33.0
+offset_right = 5.0
+offset_bottom = 95.0
 max_value = 1000.0
 value = 200.0
 texture_progress = ExtResource( 3 )
 fill_mode = 3
 
-[node name="TempFishIcon" type="Sprite" parent="."]
+[node name="TempFishIcon" type="Sprite2D" parent="."]
 visible = false
 position = Vector2( 15, 83 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="RodDecoration" type="TextureRect" parent="."]
-margin_left = -8.4
-margin_top = -32.0
-margin_right = 31.6
-margin_bottom = 100.0
+offset_left = -8.4
+offset_top = -32.0
+offset_right = 31.6
+offset_bottom = 100.0
 mouse_filter = 2
 texture = ExtResource( 5 )
 
-[node name="AnimatedReel" type="Sprite" parent="."]
+[node name="AnimatedReel" type="Sprite2D" parent="."]
 position = Vector2( -2.39999, 87.2 )
 rotation = -6.28319
 texture = ExtResource( 7 )
@@ -142,12 +142,12 @@ anims/RESET = SubResource( 2 )
 anims/fade = SubResource( 3 )
 
 [node name="TimerProgress" type="ColorRect" parent="."]
-margin_left = 28.0
-margin_top = 95.0
-margin_right = 31.0
-margin_bottom = 223.0
+offset_left = 28.0
+offset_top = 95.0
+offset_right = 31.0
+offset_bottom = 223.0
 grow_vertical = 0
-rect_rotation = 180.0
+rotation = 180.0
 color = Color( 0, 1, 1, 1 )
 
 [node name="Tween" type="Tween" parent="."]

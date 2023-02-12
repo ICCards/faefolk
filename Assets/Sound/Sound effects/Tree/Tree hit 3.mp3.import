@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Tree hit 3.mp3-8bc5d797047ff4f06653b1cc49bdcab4.mp3str"
+uid="uid://dgdsx37o4gkkp"
+path="res://.godot/imported/Tree hit 3.mp3-8bc5d797047ff4f06653b1cc49bdcab4.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Tree/Tree hit 3.mp3"
-dest_files=[ "res://.import/Tree hit 3.mp3-8bc5d797047ff4f06653b1cc49bdcab4.mp3str" ]
+dest_files=["res://.godot/imported/Tree hit 3.mp3-8bc5d797047ff4f06653b1cc49bdcab4.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

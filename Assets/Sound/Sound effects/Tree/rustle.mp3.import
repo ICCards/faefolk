@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/rustle.mp3-209c58b535e9b81973ec6db3334f5265.mp3str"
+uid="uid://2u73yye23mpv"
+path="res://.godot/imported/rustle.mp3-209c58b535e9b81973ec6db3334f5265.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Tree/rustle.mp3"
-dest_files=[ "res://.import/rustle.mp3-209c58b535e9b81973ec6db3334f5265.mp3str" ]
+dest_files=["res://.godot/imported/rustle.mp3-209c58b535e9b81973ec6db3334f5265.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

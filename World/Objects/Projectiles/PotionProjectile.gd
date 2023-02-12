@@ -1,7 +1,7 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var Duck = load("res://World/Animals/Duck.tscn")
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var Duck = load("res://World3D/Animals/Duck.tscn")
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var _uuid = load("res://helpers/UUID.gd")
 
 var rng = RandomNumberGenerator.new()
@@ -22,9 +22,9 @@ func _physics_process(delta):
 func _ready():
 	rng.randomize()
 	if potion_name == "raw egg":
-		$Sprite.texture = load("res://Assets/Images/Forage/animal/raw egg.png")
+		$Sprite2D.texture = load("res://Assets/Images/Forage/animal/raw egg.png")
 	else:
-		$Sprite.texture = load("res://Assets/Images/inventory_icons/Potion/"+ potion_name  +".png")
+		$Sprite2D.texture = load("res://Assets/Images/inventory_icons/Potion/"+ potion_name  +".png")
 		$PotionHitbox.tool_name = potion_name
 	if potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
 		$PotionHitbox.set_collision_mask(264320)
@@ -44,13 +44,13 @@ func _ready():
 		$HealthTrailParticles.show()
 		$HealthTrailParticles.transform = particles_transform
 		$HealthTrailParticles.position += Vector2(0,32)
-	yield(get_tree().create_timer(0.025), "timeout")
+	await get_tree().create_timer(0.025).timeout
 	if not destroyed:
-		$Sprite.show()
+		$Sprite2D.show()
 
 func destroy():
 	destroyed = true
-	$Sprite.call_deferred("hide")
+	$Sprite2D.call_deferred("hide")
 	if potion_name == "raw egg":
 		$AnimationPlayer.call_deferred("play", "raw egg break")
 	elif potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
@@ -61,7 +61,7 @@ func destroy():
 		$AnimationPlayer.call_deferred("play", "speed potion")
 	else:
 		$AnimationPlayer.call_deferred("play", "health potion")
-	yield($AnimationPlayer, "animation_finished")
+	await $AnimationPlayer.animation_finished
 	queue_free()
 	
 
@@ -80,13 +80,13 @@ func play_egg_break_sound():
 	
 	
 func spawn_duck():
-	if Tiles.valid_tiles.get_cellv(global_position/32) != -1 and Server.world.name == "World":
+	if Tiles.valid_tiles.get_cellv(global_position/32) != -1 and Server.world.name == "World3D":
 		if Util.chance(25):
 			var uuid = _uuid.new()
 			var id = uuid.v4()
 			var variety = rng.randi_range(1,3)
 			MapData.world["animal"][id] = {"l":global_position/32,"n":"duck","v":variety,"h":Stats.DUCK_HEALTH}
-			var duck = Duck.instance()
+			var duck = Duck.instantiate()
 			duck.name = id
 			duck.health = Stats.DUCK_HEALTH
 			duck.variety = variety 

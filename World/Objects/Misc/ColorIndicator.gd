@@ -5,8 +5,8 @@ var tile_size
 
 
 func set_indicator_color():
-	$Grid.rect_position.y = (tile_size.y-1) * -32
-	$Grid.rect_size = Vector2(32*tile_size.x, 32*tile_size.y)
+	$Grid.position.y = (tile_size.y-1) * -32
+	$Grid.size = Vector2(32*tile_size.x, 32*tile_size.y)
 	$Grid/Bottom/Left.texture = load("res://Assets/Images/Misc/Color Indicator/" + indicator_color + "/bottom left.png")
 	$Grid/Bottom/Middle.texture = load("res://Assets/Images/Misc/Color Indicator/" + indicator_color + "/bottom middle.png")
 	$Grid/Bottom/Right.texture = load("res://Assets/Images/Misc/Color Indicator/" + indicator_color + "/bottom right.png")

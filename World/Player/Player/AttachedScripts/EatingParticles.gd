@@ -30,7 +30,7 @@ func eat():
 	$EatingParticles6.emitting = true
 	$EatingParticles7.emitting = true
 	$EatingParticles8.emitting = true
-	yield(get_tree().create_timer(1.5), "timeout")
+	await get_tree().create_timer(1.5).timeout
 	queue_free()
 	
 	
@@ -40,7 +40,7 @@ func set_particle_colors(item_name):
 	var stream_texture = load("res://Assets/Images/inventory_icons/" + category +"/" + item_name + ".png")
 	var image_texture = ImageTexture.new()
 	itemImage = stream_texture.get_data()
-	itemImage.lock() # so i can modify pixel data
+	false # itemImage.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed # so i can modify pixel data
 	$EatingParticles1.color = return_pixel_color(itemImage)
 	$EatingParticles2.color = return_pixel_color(itemImage)
 	$EatingParticles3.color = return_pixel_color(itemImage)

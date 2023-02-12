@@ -23,22 +23,22 @@ func loadDone():
 	elif mint_objects_queue[0] == "stone ore":
 		stone_minted += 1
 	print("Wood minted: " + str(wood_minted) + " - Stone minted: " + str(stone_minted))
-	mint_objects_queue.remove(0)
+	mint_objects_queue.remove_at(0)
 	if mint_objects_queue.size() > 0:
 		if (thread.is_active()):
 			# Already working
 			return
 		print("START THREAD!")
-		thread.start(self,"_whoAmI",null)
+		thread.start(Callable(self,"_whoAmI").bind(null))
 	
 
 func mint_object(item_name):
-	if mint_objects_queue.empty():
+	if mint_objects_queue.is_empty():
 		mint_objects_queue.append(item_name)
 		if (thread.is_active()):
 			# Already working
 			return
 		print("START THREAD!")
-		thread.start(self,"_whoAmI",null)
+		thread.start(Callable(self,"_whoAmI").bind(null))
 	else: 
 		mint_objects_queue.append(item_name)

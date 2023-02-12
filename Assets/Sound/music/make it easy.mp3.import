@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/make it easy.mp3-81814650d6cacaafebf74db0a50c6786.mp3str"
+uid="uid://bgqcjwau0qw4d"
+path="res://.godot/imported/make it easy.mp3-81814650d6cacaafebf74db0a50c6786.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/music/make it easy.mp3"
-dest_files=[ "res://.import/make it easy.mp3-81814650d6cacaafebf74db0a50c6786.mp3str" ]
+dest_files=["res://.godot/imported/make it easy.mp3-81814650d6cacaafebf74db0a50c6786.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

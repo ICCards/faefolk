@@ -1,13 +1,13 @@
 extends Control
 
-onready var chatLog = $VBoxContainer/RichTextLabel
-onready var inputLabel = $VBoxContainer/HBoxContainer/Label
-onready var inputField = $VBoxContainer/HBoxContainer/LineEdit
+@onready var chatLog = $VBoxContainer/RichTextLabel
+@onready var inputLabel = $VBoxContainer/HBoxContainer/Label
+@onready var inputField = $VBoxContainer/HBoxContainer/LineEdit
 
 
 func _ready():
 	initialize_chat_history()
-	inputField.connect("text_entered", self, "text_entered")
+	inputField.connect("text_submitted",Callable(self,"text_submitted"))
 	
 func initialize_chat_history():
 	for i in range(Chat.message_history.size()):
@@ -31,7 +31,7 @@ func _input(event):
 			inputField.release_focus()
 			
 
-func text_entered(text):
+func text_submitted(text):
 	if text != "":
 		var data =  {"u": Server.username, "d": text}
 		var message = Util.toMessage("SEND_MESSAGE",data)
@@ -40,11 +40,11 @@ func text_entered(text):
 		inputField.release_focus()
 	
 func add_message(username, text, color):
-	chatLog.bbcode_text += '\n' 
-	chatLog.bbcode_text += '[color=' + color + ']'
-	chatLog.bbcode_text += '[' + str(username).substr(0,5) + ']: '
-	chatLog.bbcode_text += text
-	chatLog.bbcode_text += '[/color]'
+	chatLog.text += '\n' 
+	chatLog.text += '[color=' + color + ']'
+	chatLog.text += '[' + str(username).substr(0,5) + ']: '
+	chatLog.text += text
+	chatLog.text += '[/color]'
 
 
 func _on_LineEdit_focus_entered():

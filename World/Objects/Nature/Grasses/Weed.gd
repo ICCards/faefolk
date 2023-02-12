@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var rng = RandomNumberGenerator.new()
+@onready var rng = RandomNumberGenerator.new()
 var variety
 var random_num
 var location
@@ -15,7 +15,7 @@ func _ready():
 	varieties.shuffle()
 	variety = varieties.front()
 	random_num = rng.randi_range(1, 4)
-	$Sprite.set_deferred("texture", load("res://Assets/Images/Weeds/" + variety + str(random_num) + ".png"))
+	$Sprite2D.set_deferred("texture", load("res://Assets/Images/Weeds/" + variety + str(random_num) + ".png"))
 	call_deferred("set_leaf_break_modulate")
 	
 	
@@ -56,12 +56,12 @@ func _on_Area2D_area_entered(area):
 		Tiles.add_valid_tiles(location)
 		if MapData.world["tall_grass"].has(name):
 			MapData.world["tall_grass"].erase(name)
-		$Sprite.call_deferred("hide")
+		$Sprite2D.call_deferred("hide")
 		$LeafBreak.call_deferred("show")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
 		$LeafBreak.set_deferred("playing", true)
-		yield($LeafBreak, "animation_finished")
+		await $LeafBreak.animation_finished
 		call_deferred("queue_free")
 
 

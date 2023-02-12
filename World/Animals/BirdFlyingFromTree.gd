@@ -6,20 +6,20 @@ var fly_position
 func _ready():
 	randomize()
 	Images.BirdVariations.shuffle()
-	$AnimatedSprite.frames = Images.BirdVariations[0]
+	$AnimatedSprite2D.sprite_frames = Images.BirdVariations[0]
 	set_direction()
 
 
 func set_direction():
 	var tempPos = fly_position - position
 	if tempPos.x < 0:
-		$AnimatedSprite.flip_h = true
+		$AnimatedSprite2D.flip_h = true
 	if abs(tempPos.x) > abs(tempPos.y):
-		$AnimatedSprite.play("fly side")
+		$AnimatedSprite2D.play("fly side")
 	elif tempPos.y < 0:
-		$AnimatedSprite.play("fly up")
+		$AnimatedSprite2D.play("fly up")
 	else: 
-		$AnimatedSprite.play("fly down")
+		$AnimatedSprite2D.play("fly down")
 
 
 func _physics_process(delta):

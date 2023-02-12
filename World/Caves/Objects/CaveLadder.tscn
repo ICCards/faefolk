@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://World/Caves/Objects/CaveLadder.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Misc/watering can progress indicator.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=3]
+[ext_resource path="res://World3D/Caves/Objects/CaveLadder.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Misc/watering can progress indicator.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture2D" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 63.0
@@ -23,16 +23,16 @@ scale = Vector2( 2.5, 3 )
 z_index = 1
 
 [node name="Border" type="TextureRect" parent="HealthBar"]
-margin_right = 16.0
-margin_bottom = 3.0
+offset_right = 16.0
+offset_bottom = 3.0
 texture = ExtResource( 2 )
 
-[node name="Progress" type="TextureProgress" parent="HealthBar"]
+[node name="Progress" type="TextureProgressBar" parent="HealthBar"]
 modulate = Color( 0.109804, 1, 0, 1 )
-margin_left = 0.800002
-margin_top = 0.666664
-margin_right = 14.8
-margin_bottom = 1.66666
+offset_left = 0.800002
+offset_top = 0.666664
+offset_right = 14.8
+offset_bottom = 1.66666
 max_value = 200.0
 value = 44.0
 texture_progress = ExtResource( 3 )

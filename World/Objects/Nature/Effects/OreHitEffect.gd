@@ -1,11 +1,11 @@
 extends Node2D
 
-onready var oreChip1: Sprite = $OreChips/OreChip1
-onready var oreChip2: Sprite = $OreChips/OreChip2
-onready var oreChip3: Sprite = $OreChips/OreChip3
-onready var oreChip4: Sprite = $OreChips/OreChip4
-onready var oreChip5: Sprite = $OreChips/OreChip5
-onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var oreChip1: Sprite2D = $OreChips/OreChip1
+@onready var oreChip2: Sprite2D = $OreChips/OreChip2
+@onready var oreChip3: Sprite2D = $OreChips/OreChip3
+@onready var oreChip4: Sprite2D = $OreChips/OreChip4
+@onready var oreChip5: Sprite2D = $OreChips/OreChip5
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
@@ -24,24 +24,24 @@ func _ready():
 	elif effect_type == "ore destroyed":
 		animation_player.play("ore break")
 		play_particles()
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 
 
 func play_particles():
 	if variety == "stone2":
-		$Particles.modulate = Color("c29c6b")
+		$GPUParticles3D.modulate = Color("c29c6b")
 	elif variety == "iron ore":
-		$Particles.modulate = Color("c3b779")
+		$GPUParticles3D.modulate = Color("c3b779")
 	elif variety == "bronze ore":
-		$Particles.modulate = Color("946c38")
+		$GPUParticles3D.modulate = Color("946c38")
 	elif variety == "gold ore":
-		$Particles.modulate = Color("c79c3e")
+		$GPUParticles3D.modulate = Color("c79c3e")
 	$Smoke.show()
-	$Particles.show()
+	$GPUParticles3D.show()
 	$Smoke.play()
-	$Particles.play()
-	yield($Particles, "animation_finished")
+	$GPUParticles3D.play()
+	await $GPUParticles3D.animation_finished
 
 
 func setTexture():

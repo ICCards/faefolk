@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
 var velocity = Vector2(-1,-1)
@@ -14,7 +14,7 @@ var is_multishot2: bool = false
 var ricochet_enemies = []
 
 var _uuid = load("res://helpers/UUID.gd")
-onready var uuid = _uuid.new()
+@onready var uuid = _uuid.new()
 
 func _physics_process(delta):
 	if not collided:
@@ -23,12 +23,12 @@ func _physics_process(delta):
 func _ready():
 	if is_hostile:
 		$Hitbox.set_collision_mask(128+2+32)
-	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
+	rotation_degrees = rad_to_deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.id = uuid.v4()
 	$Hitbox.tool_name = "arrow"
 	$Hitbox.knockback_vector = velocity
 	if is_fire_arrow:
-		$Light2D.enabled = true
+		$PointLight2D.enabled = true
 		$Hitbox.special_ability = "fire"
 		$ArrowBreak.modulate = Color("ff0000")
 		$FireTrailParticles/P1.emitting = true
@@ -49,7 +49,7 @@ func _ready():
 
 
 func fade_out():
-	$Tween.interpolate_property($Sprite, "modulate:a", 1.0, 0.0, 0.5, 3, 1)
+	$Tween.interpolate_property($Sprite2D, "modulate:a", 1.0, 0.0, 0.5, 3, 1)
 	$Tween.start()
 
 func _on_Area2D_area_entered(area):
@@ -72,7 +72,7 @@ func find_next_player():
 		return
 	ricochet_enemies.append(temp.name)
 	velocity = (temp.position - self.position).normalized()
-	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
+	rotation_degrees = rad_to_deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.knockback_vector = velocity
 
 func _on_Hitbox_body_entered(body):
@@ -93,9 +93,9 @@ func destroy():
 		$CollisionShape2D.set_deferred("disabled", true)
 		collided = true
 		$ArrowBreak.playing = true
-		$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 0.5, 1, Tween.EASE_IN, 0)
+		$Tween.interpolate_property($PointLight2D, "color", Color("ffffff"), Color("00ffffff"), 0.5, 1, Tween.EASE_IN, 0)
 		$Tween.start()
-		yield($ArrowBreak, "animation_finished")
+		await $ArrowBreak.animation_finished
 		$ArrowBreak.hide()
 
 func _on_Timer_timeout():

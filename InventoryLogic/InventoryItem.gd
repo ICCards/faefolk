@@ -4,6 +4,7 @@ var item_name
 var item_quantity
 var item_health
 
+var tween = get_tree().create_tween()
 
 func set_item(nm, qt, health):
 	item_name = nm
@@ -25,46 +26,14 @@ func set_item(nm, qt, health):
 		$HealthBar.visible = true
 		set_health_bar(item_health)
 	if item_quantity == null:
-		$Image.rect_size = Vector2(64,64)
+		$Image.size = Vector2(64,64)
 
 
 func hover_crafting_item():
-	$Tween.interpolate_property($Image, "rect_scale",
-		$Image.rect_scale, Vector2(1.05, 1.05), 0.075,
-	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	tween.tween_property($Image, "scale", Vector2(1.05, 1.05), 0.075)
 	
 func exit_crafting_item():
-	$Tween.interpolate_property($Image, "rect_scale",
-		$Image.rect_scale, Vector2(1.0, 1.0), 0.075,
-	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-func set_init_hovered():
-	pass
-#	$Image.rect_scale = Vector2(1.075, 1.075)
-#	$Image.rect_position = Vector2(1.0, 1.0)
-
-func hover_item():
-	pass
-#	$Tween.interpolate_property($Image, "rect_scale",
-#		$Image.rect_scale, Vector2(1.05, 1.05), 0.075,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.interpolate_property($Image, "rect_position",
-#		$Image.rect_position, Vector2(0, 0), 0.075,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.start()
-	 
-func exit_item():
-	pass
-	#if Server.isLoaded:
-#	$Tween.interpolate_property($Image, "rect_scale",
-#		$Image.rect_scale, Vector2(1.0, 1.0), 0.075,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.interpolate_property($Image, "rect_position",
-#		$Image.rect_position, Vector2(2.0, 2.0), 0.075,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.start()
+	tween.tween_property($Image, "scale", Vector2(1.0, 1.0), 0.075,)
 
 
 func set_health_bar(health):

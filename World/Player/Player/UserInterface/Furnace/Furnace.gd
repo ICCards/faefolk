@@ -4,13 +4,13 @@ var hovered_item
 var id
 
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
-onready var ore_slot1 = $FurnaceSlots/OreSlot1
-onready var ore_slot2 = $FurnaceSlots/OreSlot2
-onready var fuel_slot = $FurnaceSlots/FuelSlot
-onready var yield_slot1 = $FurnaceSlots/YieldSlot1
-onready var yield_slot2 = $FurnaceSlots/YieldSlot2
-onready var coal_yield_slot = $FurnaceSlots/CoalYieldSlot
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var ore_slot1 = $FurnaceSlots/OreSlot1
+@onready var ore_slot2 = $FurnaceSlots/OreSlot2
+@onready var fuel_slot = $FurnaceSlots/FuelSlot
+@onready var yield_slot1 = $FurnaceSlots/YieldSlot1
+@onready var yield_slot2 = $FurnaceSlots/YieldSlot2
+@onready var coal_yield_slot = $FurnaceSlots/CoalYieldSlot
 
 func _ready():
 	initialize()

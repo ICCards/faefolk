@@ -1,20 +1,20 @@
 extends CanvasLayer
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var holding_item = null
 
-onready var SaveAndExitDialogue = load("res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn")
-onready var Menu = load("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
-onready var Hotbar = load("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
-onready var Workbench = load("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
-onready var Stove = load("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
-onready var GrainMill = load("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
-onready var Furnace = load("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
-onready var Chest = load("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
-onready var Tool_cabinet = load("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
-onready var Campfire = load("res://World/Player/Player/UserInterface/Campfire/Campfire.tscn")
-onready var BrewingTable = load("res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
+@onready var SaveAndExitDialogue = load("res://World3D/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn")
+@onready var Menu = load("res://World3D/Player/Player/UserInterface/Menu/Menu.tscn")
+@onready var Hotbar = load("res://World3D/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
+@onready var Workbench = load("res://World3D/Player/Player/UserInterface/Workbench/Workbench.tscn")
+@onready var Stove = load("res://World3D/Player/Player/UserInterface/Stove/Stove.tscn")
+@onready var GrainMill = load("res://World3D/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
+@onready var Furnace = load("res://World3D/Player/Player/UserInterface/Furnace/Furnace.tscn")
+@onready var Chest = load("res://World3D/Player/Player/UserInterface/Chest/Chest.tscn")
+@onready var Tool_cabinet = load("res://World3D/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
+@onready var Campfire = load("res://World3D/Player/Player/UserInterface/Campfire/Campfire.tscn")
+@onready var BrewingTable = load("res://World3D/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
 
 var items_to_drop = []
 
@@ -39,28 +39,28 @@ enum {
 }
 
 func _ready():
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	$Menu.hide()
 	initialize_furnaces_campfires_and_stoves()
 	add_hotbar_clock_and_stats()
 
 func initialize_furnaces_campfires_and_stoves():
 	for id in PlayerData.player_data["furnaces"]:
-		var furnace = Furnace.instance()
+		var furnace = Furnace.instantiate()
 		furnace.name = str(id)
 		furnace.id = id
 		add_child(furnace)
 		furnace.check_if_furnace_active()
 		furnace.hide()
 	for id in PlayerData.player_data["stoves"]:
-		var stove = Stove.instance()
+		var stove = Stove.instantiate()
 		stove.name = str(id)
 		stove.id = id
 		add_child(stove)
 		stove.check_valid_recipe()
 		stove.hide()
 	for id in PlayerData.player_data["campfires"]:
-		var campfire = Campfire.instance()
+		var campfire = Campfire.instantiate()
 		campfire.name = str(id)
 		campfire.id = id
 		add_child(campfire)
@@ -78,7 +78,7 @@ func save_player_data(exit_to_main_menu):
 	game_state.cave_state = MapData.caves
 	game_state.player_state = PlayerData.player_data
 	game_state.save_state()
-	yield(get_tree().create_timer(2.0), "timeout")
+	await get_tree().create_timer(2.0).timeout
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
@@ -163,7 +163,7 @@ func death():
 func toggle_brewing_table(id,level):
 	if not has_node(id):
 		play_open_menu_sound()
-		var brewingTable = BrewingTable.instance()
+		var brewingTable = BrewingTable.instantiate()
 		brewingTable.name = str(id)
 		brewingTable.id = id
 		add_child(brewingTable)
@@ -183,7 +183,7 @@ func toggle_save_and_exit():
 		get_node("SaveAndExit").queue_free()
 	else:
 		Sounds.play_big_select_sound()
-		var saveAndExit = SaveAndExitDialogue.instance()
+		var saveAndExit = SaveAndExitDialogue.instantiate()
 		add_child(saveAndExit)
 		PlayerData.viewSaveAndExitMode = true
 
@@ -194,7 +194,7 @@ func respawn():
 func toggle_tc(id):
 	if not has_node("Tool cabinet"):
 		play_open_menu_sound()
-		var tc = Tool_cabinet.instance()
+		var tc = Tool_cabinet.instantiate()
 		tc.id = id
 		add_child(tc)
 		close_hotbar_clock_and_stats()
@@ -210,9 +210,9 @@ func toggle_chest(id):
 			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
 			Server.world.get_node("PlacableObjects/"+id).open_chest()
-			yield(get_tree().create_timer(0.5), "timeout")
+			await get_tree().create_timer(0.5).timeout
 			is_opening_chest = false
-			var chest = Chest.instance()
+			var chest = Chest.instantiate()
 			chest.id = id
 			add_child(chest)
 			close_hotbar_clock_and_stats()
@@ -277,7 +277,7 @@ func hide_menu():
 func toggle_grain_mill(id, level):
 	if not has_node("GrainMill"):
 		play_open_menu_sound()
-		var grainMill = GrainMill.instance()
+		var grainMill = GrainMill.instantiate()
 		grainMill.level = level
 		grainMill.id = id
 		add_child(grainMill)
@@ -289,7 +289,7 @@ func toggle_grain_mill(id, level):
 func toggle_workbench(level):
 	if not has_node("Workbench"):
 		play_open_menu_sound()
-		var workbench = Workbench.instance()
+		var workbench = Workbench.instantiate()
 		workbench.level = level
 		add_child(workbench)
 		close_hotbar_clock_and_stats()
@@ -300,7 +300,7 @@ func toggle_workbench(level):
 func toggle_furnace(id):
 	if not has_node(id):
 		play_open_menu_sound()
-		var furnace = Furnace.instance()
+		var furnace = Furnace.instantiate()
 		furnace.name = str(id)
 		furnace.id = id
 		add_child(furnace)
@@ -316,7 +316,7 @@ func toggle_furnace(id):
 func toggle_stove(id, level):
 	if not has_node(id):
 		play_open_menu_sound()
-		var stove = Stove.instance()
+		var stove = Stove.instantiate()
 		stove.name = str(id)
 		stove.level = level
 		stove.id = id
@@ -334,7 +334,7 @@ func toggle_stove(id, level):
 func toggle_campfire(id):
 	if not has_node(id):
 		play_open_menu_sound()
-		var stove = Campfire.instance()
+		var stove = Campfire.instantiate()
 		stove.name = str(id)
 		stove.id = id
 		add_child(stove)
@@ -407,7 +407,7 @@ func close_tc(id):
 		drop_items()
 
 func drop_items():
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	for i in range(items_to_drop.size()):
 		InstancedScenes.initiateInventoryItemDrop(items_to_drop[i], Server.player_node.position)
 	items_to_drop = []

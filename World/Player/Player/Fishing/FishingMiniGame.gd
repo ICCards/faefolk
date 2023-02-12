@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var hookVelocity = 0.0;
 var hookAcceleration = 0.05;
@@ -9,7 +9,7 @@ var maxVelocity = 3;
 var bounce = 0.4
 
 var fishable = true
-var fish = load("res://World/Player/Player/Fishing/Fish.tscn")
+var fish = load("res://World3D/Player/Player/Fishing/Fish.tscn")
 
 var MIN_Y
 var MAX_Y
@@ -22,7 +22,7 @@ func set_active(_fishing_rod_type):
 	spawn_fish()
 	modulate = Color(1,1,1,1)
 	$Progress.value = 250
-	$Progress.modulate = Color(range_lerp(20, 10, 100, 1, 0), range_lerp(20, 10, 50, 0, 1), 0)
+	$Progress.modulate = Color(remap(20, 10, 100, 1, 0), remap(20, 10, 50, 0, 1), 0)
 	set_fishing_rod_level()
 	
 	
@@ -46,7 +46,7 @@ func set_fishing_rod_level():
 			$TempFishIcon.position.y = MIN_Y
 
 func spawn_fish():
-	var f = fish.instance()
+	var f = fish.instantiate()
 	f.position = Vector2(get_node(fishing_rod_level).position.x, get_node(fishing_rod_level).position.y)
 	add_child(f)
 	fishable = false
@@ -58,14 +58,14 @@ func start():
 func start_game_timer():
 	$GameTimer.set_wait_time(get_node("Fish").game_timer) 
 	$GameTimer.start()
-	$Tween.interpolate_property($TimerProgress, "rect_size",
+	$Tween.interpolate_property($TimerProgress, "size",
 		Vector2(3,128), Vector2(3,0), get_node("Fish").game_timer,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
 func _physics_process(delta):
 	if get_node("../../").mini_game_active:
-		if ($Clicker.pressed == true):
+		if ($Clicker.button_pressed == true):
 			play_reel_sound_effects(true)
 			if hookVelocity > -maxVelocity:
 				$AnimatedReel.rotation_degrees += 18
@@ -96,8 +96,8 @@ func _physics_process(delta):
 				$Progress.value -= 195 * delta
 				if ($Progress.value <= 0):
 					lost_fish()
-		var r = range_lerp($Progress.value/10, 10, 100, 1, 0)
-		var g = range_lerp($Progress.value/10, 10, 50, 0, 0.8)
+		var r = remap($Progress.value/10, 10, 100, 1, 0)
+		var g = remap($Progress.value/10, 10, 50, 0, 0.8)
 		$Progress.modulate = Color(r, g, 0)
 		get_node("../../").set_moving_fish_line_position($Progress.value)
 	else:

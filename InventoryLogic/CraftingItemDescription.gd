@@ -4,21 +4,21 @@ var width
 var height
 var item_name
 var amount_ingredients
-onready var Ingredient = load("res://InventoryLogic/Ingredient.tscn")
+@onready var Ingredient = load("res://InventoryLogic/Ingredient.tscn")
 
 func initialize():
 	set_description_text(item_name)
 	set_ingredients(item_name)
-	yield(get_tree(), "idle_frame")
-	set_size_of_description($ItemName.rect_size.x)
-	$Divider1.rect_size.x = width - 12
-	$Divider2.rect_size.x = width - 12
-	$GridContainer.rect_size = Vector2( width , height )
-	$GridContainer/TopRow.rect_size.x = width
-	$GridContainer/MiddleRow.rect_size.x = width
-	$GridContainer/BottomRow.rect_size.x = width
-	$ItemDescription.rect_size.x = (width * 7) 
-	$ItemName.rect_size.x = width
+	await get_tree().idle_frame
+	set_size_of_description($ItemName.size.x)
+	$Divider1.size.x = width - 12
+	$Divider2.size.x = width - 12
+	$GridContainer.size = Vector2( width , height )
+	$GridContainer/TopRow.size.x = width
+	$GridContainer/MiddleRow.size.x = width
+	$GridContainer/BottomRow.size.x = width
+	$ItemDescription.size.x = (width * 7) 
+	$ItemName.size.x = width
 
 func set_ingredients(item_name):
 	amount_ingredients = JsonData.item_data[item_name]["Ingredients"].size()
@@ -28,18 +28,18 @@ func set_ingredients(item_name):
 	$Ingredient1/Name.text = ingredient1[0].to_upper() + ingredient1.substr(1, -1)
 	$Ingredient1/Amount.text = str(amount1)
 	$Ingredient1/Name.modulate = returnIfValidMaterial(ingredient1, amount1)
-	$Ingredient1.rect_position = Vector2(6,28)
-	$Ingredient2.rect_position = Vector2(6,41)
-	$Ingredient3.rect_position = Vector2(6,54)
+	$Ingredient1.position = Vector2(6,28)
+	$Ingredient2.position = Vector2(6,41)
+	$Ingredient3.position = Vector2(6,54)
 	
 	if amount_ingredients == 1:
-		$Divider2.rect_position = Vector2(6, 43)
-		$ItemDescription.rect_position = Vector2(6, 45)
+		$Divider2.position = Vector2(6, 43)
+		$ItemDescription.position = Vector2(6, 45)
 		$Ingredient2.hide()
 		$Ingredient3.hide()
 	elif amount_ingredients == 2:
-		$Divider2.rect_position = Vector2(6, 56)
-		$ItemDescription.rect_position = Vector2(6, 58)
+		$Divider2.position = Vector2(6, 56)
+		$ItemDescription.position = Vector2(6, 58)
 		$Ingredient2.show()
 		$Ingredient3.hide()
 		var ingredient2 = str(JsonData.item_data[item_name]["Ingredients"][1][0])
@@ -49,8 +49,8 @@ func set_ingredients(item_name):
 		$Ingredient2/Amount.text = str(amount2)
 		$Ingredient2/Name.modulate = returnIfValidMaterial(ingredient2, amount2)
 	elif amount_ingredients == 3:
-		$Divider2.rect_position = Vector2(6, 69)
-		$ItemDescription.rect_position = Vector2(6, 71)
+		$Divider2.position = Vector2(6, 69)
+		$ItemDescription.position = Vector2(6, 71)
 		$Ingredient2.show()
 		$Ingredient3.show()
 		var ingredient2 = str(JsonData.item_data[item_name]["Ingredients"][1][0])

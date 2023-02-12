@@ -1,7 +1,7 @@
 extends Control
 
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 
 var id
 var hovered_item

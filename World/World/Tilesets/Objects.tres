@@ -1,336 +1,336 @@
 [gd_resource type="TileSet" load_steps=213 format=2]
 
-[ext_resource path="res://Assets/Images/Animations/torch/torch.tres" type="Texture" id=1]
-[ext_resource path="res://Assets/Tilesets/CL_Crafting.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #1/up.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #3/right.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/placable_object_preview/chair/sheet.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #3/up.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #3/left.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #3/up.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/placable_object_preview/bed/sheet.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/placable_object_preview/well.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/3/down.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/3/left.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/3/right.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/4/left.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/4/right.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/4/down.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/3/up.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/4/up.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Images/placable_object_preview/dresser/down.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Tilesets/Furniture/Furnace-x2.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Images/placable_object_preview/dresser/right.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/2/right.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Tilesets/Furniture/TC-x2.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #1/left.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/1/left.png" type="Texture" id=25]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/1/up.png" type="Texture" id=26]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/2/down.png" type="Texture" id=27]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/2/up.png" type="Texture" id=28]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/2/left.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #2/right.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #3/up.png" type="Texture" id=31]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #3/left.png" type="Texture" id=32]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #3/right.png" type="Texture" id=33]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/1/down.png" type="Texture" id=34]
-[ext_resource path="res://Assets/Images/placable_object_preview/couch/1/right.png" type="Texture" id=35]
-[ext_resource path="res://Assets/Images/placable_object_preview/dresser/left.png" type="Texture" id=36]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #3/left.png" type="Texture" id=37]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #1/up.png" type="Texture" id=38]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #1/left.png" type="Texture" id=39]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #2/right.png" type="Texture" id=40]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #2/left.png" type="Texture" id=41]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #2/up.png" type="Texture" id=42]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #3/right.png" type="Texture" id=43]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #1/right.png" type="Texture" id=44]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #1/left.png" type="Texture" id=45]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #2/up.png" type="Texture" id=46]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #2/right.png" type="Texture" id=47]
-[ext_resource path="res://Assets/Images/placable_object_preview/stove #2/left.png" type="Texture" id=48]
-[ext_resource path="res://Assets/Images/placable_object_preview/armchair/sheet.png" type="Texture" id=49]
-[ext_resource path="res://Assets/Images/placable_object_preview/large rug/sheet.png" type="Texture" id=50]
-[ext_resource path="res://Assets/Images/placable_object_preview/table/sheet.png" type="Texture" id=51]
-[ext_resource path="res://Assets/Images/placable_object_preview/stool.png" type="Texture" id=52]
-[ext_resource path="res://Assets/Images/placable_object_preview/round table/sheet.png" type="Texture" id=53]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #1/right.png" type="Texture" id=54]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #2/left.png" type="Texture" id=55]
-[ext_resource path="res://Assets/Images/placable_object_preview/workbench #2/up.png" type="Texture" id=56]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #1/up.png" type="Texture" id=57]
-[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #1/right.png" type="Texture" id=58]
-[ext_resource path="res://Assets/Images/placable_object_preview/brewing table #1/sheet.png" type="Texture" id=59]
-[ext_resource path="res://Assets/Images/placable_object_preview/brewing table #2/sheet.png" type="Texture" id=60]
-[ext_resource path="res://Assets/Images/placable_object_preview/brewing table #3/sheet.png" type="Texture" id=61]
-[ext_resource path="res://Assets/Images/placable_object_preview/flower trough/sheet.png" type="Texture" id=62]
+[ext_resource path="res://Assets/Images/Animations/torch/torch.tres" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Tilesets/CL_Crafting.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #1/up.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #3/right.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Images/placable_object_preview/chair/sheet.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #3/up.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #3/left.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #3/up.png" type="Texture2D" id=8]
+[ext_resource path="res://Assets/Images/placable_object_preview/bed/sheet.png" type="Texture2D" id=9]
+[ext_resource path="res://Assets/Images/placable_object_preview/well.png" type="Texture2D" id=10]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/3/down.png" type="Texture2D" id=11]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/3/left.png" type="Texture2D" id=12]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/3/right.png" type="Texture2D" id=13]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/4/left.png" type="Texture2D" id=14]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/4/right.png" type="Texture2D" id=15]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/4/down.png" type="Texture2D" id=16]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/3/up.png" type="Texture2D" id=17]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/4/up.png" type="Texture2D" id=18]
+[ext_resource path="res://Assets/Images/placable_object_preview/dresser/down.png" type="Texture2D" id=19]
+[ext_resource path="res://Assets/Tilesets/Furniture/Furnace-x2.png" type="Texture2D" id=20]
+[ext_resource path="res://Assets/Images/placable_object_preview/dresser/right.png" type="Texture2D" id=21]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/2/right.png" type="Texture2D" id=22]
+[ext_resource path="res://Assets/Tilesets/Furniture/TC-x2.png" type="Texture2D" id=23]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #1/left.png" type="Texture2D" id=24]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/1/left.png" type="Texture2D" id=25]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/1/up.png" type="Texture2D" id=26]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/2/down.png" type="Texture2D" id=27]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/2/up.png" type="Texture2D" id=28]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/2/left.png" type="Texture2D" id=29]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #2/right.png" type="Texture2D" id=30]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #3/up.png" type="Texture2D" id=31]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #3/left.png" type="Texture2D" id=32]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #3/right.png" type="Texture2D" id=33]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/1/down.png" type="Texture2D" id=34]
+[ext_resource path="res://Assets/Images/placable_object_preview/couch/1/right.png" type="Texture2D" id=35]
+[ext_resource path="res://Assets/Images/placable_object_preview/dresser/left.png" type="Texture2D" id=36]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #3/left.png" type="Texture2D" id=37]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #1/up.png" type="Texture2D" id=38]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #1/left.png" type="Texture2D" id=39]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #2/right.png" type="Texture2D" id=40]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #2/left.png" type="Texture2D" id=41]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #2/up.png" type="Texture2D" id=42]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #3/right.png" type="Texture2D" id=43]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #1/right.png" type="Texture2D" id=44]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #1/left.png" type="Texture2D" id=45]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #2/up.png" type="Texture2D" id=46]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #2/right.png" type="Texture2D" id=47]
+[ext_resource path="res://Assets/Images/placable_object_preview/stove #2/left.png" type="Texture2D" id=48]
+[ext_resource path="res://Assets/Images/placable_object_preview/armchair/sheet.png" type="Texture2D" id=49]
+[ext_resource path="res://Assets/Images/placable_object_preview/large rug/sheet.png" type="Texture2D" id=50]
+[ext_resource path="res://Assets/Images/placable_object_preview/table/sheet.png" type="Texture2D" id=51]
+[ext_resource path="res://Assets/Images/placable_object_preview/stool.png" type="Texture2D" id=52]
+[ext_resource path="res://Assets/Images/placable_object_preview/round table/sheet.png" type="Texture2D" id=53]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #1/right.png" type="Texture2D" id=54]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #2/left.png" type="Texture2D" id=55]
+[ext_resource path="res://Assets/Images/placable_object_preview/workbench #2/up.png" type="Texture2D" id=56]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #1/up.png" type="Texture2D" id=57]
+[ext_resource path="res://Assets/Images/placable_object_preview/grain mill #1/right.png" type="Texture2D" id=58]
+[ext_resource path="res://Assets/Images/placable_object_preview/brewing table #1/sheet.png" type="Texture2D" id=59]
+[ext_resource path="res://Assets/Images/placable_object_preview/brewing table #2/sheet.png" type="Texture2D" id=60]
+[ext_resource path="res://Assets/Images/placable_object_preview/brewing table #3/sheet.png" type="Texture2D" id=61]
+[ext_resource path="res://Assets/Images/placable_object_preview/flower trough/sheet.png" type="Texture2D" id=62]
 
 [sub_resource type="ConvexPolygonShape2D" id=875]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=876]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=877]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=878]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=879]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=880]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=881]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=882]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=883]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=884]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=885]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=886]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=887]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=888]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=889]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=890]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=891]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=892]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=893]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=894]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=895]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=896]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=897]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=898]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=899]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=900]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=901]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=902]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=903]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=904]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=905]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=906]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=907]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=908]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=909]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=910]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=911]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=912]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=913]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=914]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=915]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=916]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=917]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=918]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=919]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=920]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=921]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=922]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=923]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=924]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=925]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=926]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=927]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=928]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=929]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=930]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=931]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=932]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=933]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=934]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1006]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1007]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1008]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1009]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1010]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1011]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1012]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1013]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1014]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1015]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1016]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1017]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=935]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=936]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=937]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=938]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=939]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=940]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=941]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=942]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=943]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=944]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=945]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=946]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
-[sub_resource type="StreamTexture" id=700]
+[sub_resource type="CompressedTexture2D" id=700]
 load_path = "res://.import/1.png-928147cc442d365e2e82ff4cf2b029cf.stex"
 
-[sub_resource type="StreamTexture" id=701]
+[sub_resource type="CompressedTexture2D" id=701]
 load_path = "res://.import/2.png-c77f361e561629cc418a38d1a6741a11.stex"
 
-[sub_resource type="StreamTexture" id=702]
+[sub_resource type="CompressedTexture2D" id=702]
 load_path = "res://.import/3.png-7b129090d2168bdd1f97f78d0f57ca12.stex"
 
-[sub_resource type="StreamTexture" id=703]
+[sub_resource type="CompressedTexture2D" id=703]
 load_path = "res://.import/4.png-075e4939c626be87ee7ba2bcc05409ea.stex"
 
-[sub_resource type="StreamTexture" id=704]
+[sub_resource type="CompressedTexture2D" id=704]
 load_path = "res://.import/5.png-098470cb2f2d8ffd6ff5b82671e644a4.stex"
 
-[sub_resource type="StreamTexture" id=705]
+[sub_resource type="CompressedTexture2D" id=705]
 load_path = "res://.import/6.png-6e79c03a9d9d0c60a5a37e6a54433953.stex"
 
 [sub_resource type="AnimatedTexture" id=874]
@@ -348,181 +348,181 @@ frame_5/texture = SubResource( 705 )
 frame_5/delay_sec = 0.0
 
 [sub_resource type="ConvexPolygonShape2D" id=947]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=948]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=949]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=950]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=951]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=952]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=953]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=954]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=955]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=956]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=957]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=958]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 0, 32, 0, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=959]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 0, 32, 0, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=960]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=961]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=962]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 0, 32, 0, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=963]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=964]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=965]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=966]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=967]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=968]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=969]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=970]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=971]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=972]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=973]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=974]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=975]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=976]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=977]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+points = PackedVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=978]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+points = PackedVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=979]
-points = PoolVector2Array( 0, 64, 96, 64, 96, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 96, 64, 96, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=980]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=981]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=982]
-points = PoolVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
+points = PackedVector2Array( 0, 64, 32, 64, 32, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=983]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=984]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=985]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=986]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=987]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=988]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=989]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=990]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=991]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=992]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=993]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=994]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=995]
-points = PoolVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
+points = PackedVector2Array( 0, 64, 64, 64, 64, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=996]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=997]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=998]
-points = PoolVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
+points = PackedVector2Array( 0, 32, 96, 32, 96, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=999]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1000]
-points = PoolVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
+points = PackedVector2Array( 0, 32, 64, 32, 64, 128, 0, 128 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1001]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1002]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1003]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1004]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1005]
-points = PoolVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
+points = PackedVector2Array( 0, 32, 32, 32, 32, 64, 0, 64 )
 
 [resource]
 0/name = "CL_Crafting.png 0"

@@ -1,7 +1,7 @@
 extends Control
 
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 var buttons = ["wood", "stone", "metal", "armored", "demolish"]
 var current_index = -1
 var location
@@ -29,7 +29,7 @@ func _physics_process(delta):
 		$Title.show()
 		$Title.text = buttons[current_index][0].to_upper() + buttons[current_index].substr(1,-1) + ":"
 		$Resources.show()
-		$Resources.bbcode_text = return_resource_cost_string(current_index)
+		$Resources.text = return_resource_cost_string(current_index)
 	else:
 		$Title.hide()
 		$Resources.hide()
@@ -166,10 +166,10 @@ func change_tile():
 func _input(event):
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0] == "hammer":
-			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and PlayerData.viewInventoryMode:
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and PlayerData.viewInventoryMode:
 				if not event.is_pressed():
 					destroy()
-					yield(get_tree().create_timer(0.1), "timeout")
+					await get_tree().create_timer(0.1).timeout
 					PlayerData.viewInventoryMode = false
 
 func remove_materials(index):

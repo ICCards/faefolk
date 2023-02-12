@@ -1,10 +1,10 @@
-extends Sprite
+extends Sprite2D
 
 
 var dragging = false
 var temp = 0
 #func _ready():
-#	get_node("Area2D").connect("input_event", self, "_on_area_input_event")
+#	get_node("Area2D").connect("input_event",Callable(self,"_on_area_input_event"))
 #	set_process_input(true)
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
@@ -19,10 +19,10 @@ func _input(event):
 			var new_pos = get_global_mouse_position()
 			var prev_pos = new_pos - motion
 			var center = get_global_position()
-			# Calculate the angular motion of the crank based on the arc made with the mouse
+			# Calculate the angular motion of the crank based checked the arc made with the mouse
 			var angle = (prev_pos - center).angle_to(new_pos - center)
 			rotate(angle)
-		elif event is InputEventMouseButton and event.pressed == false:
+		elif event is InputEventMouseButton and event.button_pressed == false:
 			# Stop dragging when the user releases the mouse button
 			dragging = false
 			$SoundEffects.stream_paused = true

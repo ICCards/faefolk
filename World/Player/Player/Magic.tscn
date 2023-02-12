@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://World/Player/Player/Magic.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Particles/dust.png" type="Texture" id=2]
-[ext_resource path="res://World/Player/Player/AttachedScenes/AimDownSightLine.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Images/Magic/aim line.png" type="Texture" id=4]
+[ext_resource path="res://World3D/Player/Player/Magic.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/GPUParticles3D/dust.png" type="Texture2D" id=2]
+[ext_resource path="res://World3D/Player/Player/AttachedScenes/AimDownSightLine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Images/Magic/aim line.png" type="Texture2D" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 particles_animation = true
@@ -12,7 +12,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+colors = PackedColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -23,11 +23,11 @@ particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="StreamTexture" id=5]
+[sub_resource type="CompressedTexture2D" id=5]
 load_path = "res://.import/dust.png-7ebb2e5fde40d0b06570139632aad9e2.stex"
 
 [sub_resource type="Gradient" id=6]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+colors = PackedColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -47,7 +47,7 @@ texture_mode = 1
 [node name="CastDirection" type="Node2D" parent="."]
 position = Vector2( 0, -32 )
 
-[node name="Position2D" type="Position2D" parent="CastDirection"]
+[node name="Marker2D" type="Marker2D" parent="CastDirection"]
 position = Vector2( 40, -7.62939e-06 )
 
 [node name="Tween" type="Tween" parent="."]

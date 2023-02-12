@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=1]
-[ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=3]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Images/User interface/BrewingTable/brewing-table-tab.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture2D" id=1]
+[ext_resource path="res://World3D/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Images/User interface/BrewingTable/brewing-table-tab.png" type="Texture2D" id=5]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" type="Texture" id=8]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=9]
-[ext_resource path="res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.gd" type="Script" id=10]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/BrewingTableSlots.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets/Images/User interface/inventory/sprite_frames/wood-frame.png" type="Texture2D" id=8]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World3D/Player/Player/UserInterface/BrewingTable/BrewingTable.gd" type="Script" id=10]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/BrewingTableSlots.tscn" type="PackedScene" id=11]
 
 [node name="BrewingTable" type="Control"]
 anchor_right = 1.0
@@ -18,9 +18,9 @@ anchor_bottom = 1.0
 script = ExtResource( 10 )
 
 [node name="Bg" type="TextureRect" parent="."]
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2( 3, 3 )
 mouse_filter = 2
 texture = ExtResource( 5 )
 stretch_mode = 4
@@ -30,11 +30,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = -214.0
-margin_bottom = -120.0
-rect_scale = Vector2( 3, 3 )
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -214.0
+offset_bottom = -120.0
+scale = Vector2( 3, 3 )
 mouse_filter = 2
 texture = ExtResource( 8 )
 stretch_mode = 4
@@ -45,38 +45,38 @@ stretch_mode = 4
 visible = false
 
 [node name="InventorySlots" parent="." instance=ExtResource( 4 )]
-margin_left = 639.0
-margin_top = 315.0
-margin_right = 933.0
-margin_bottom = 567.0
-custom_constants/vseparation = 18
-custom_constants/hseparation = 15
+offset_left = 639.0
+offset_top = 315.0
+offset_right = 933.0
+offset_bottom = 567.0
+custom_constants/v_separation = 18
+custom_constants/h_separation = 15
 columns = 5
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource( 3 )]
-margin_left = 639.0
-margin_top = 183.0
-margin_right = 943.0
-margin_bottom = 297.0
-custom_constants/vseparation = 18
-custom_constants/hseparation = 15
+offset_left = 639.0
+offset_top = 183.0
+offset_right = 943.0
+offset_bottom = 297.0
+custom_constants/v_separation = 18
+custom_constants/h_separation = 15
 columns = 5
 
 [node name="ExitBtn" type="TextureButton" parent="."]
-margin_left = 918.0
-margin_top = 114.0
-margin_right = 932.0
-margin_bottom = 128.0
-rect_scale = Vector2( 3, 3 )
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2( 3, 3 )
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 1 )
 expand = true
 
 [node name="MenuTitle" parent="." instance=ExtResource( 9 )]
-margin_left = 552.0
-margin_top = 117.0
-margin_right = 915.0
-margin_bottom = 192.0
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 915.0
+offset_bottom = 192.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]

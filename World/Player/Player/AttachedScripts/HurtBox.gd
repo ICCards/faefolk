@@ -1,6 +1,6 @@
 extends Area2D
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 enum {
 	MOVEMENT, 
@@ -49,7 +49,7 @@ func _on_HurtBox_area_entered(area):
 				get_node("../../").start_poison_state()
 				$AnimationPlayer.play("hit")
 				diminish_HOT(area.tool_name)
-				yield($AnimationPlayer, "animation_finished")
+				await $AnimationPlayer.animation_finished
 				if not get_node("../../Magic").ice_shield_active:
 					$CollisionShape2D.set_deferred("disabled", false)
 				return
@@ -88,7 +88,7 @@ func _on_HurtBox_area_entered(area):
 				diminish_HOT(area.name)
 				$AnimationPlayer.play("hit")
 				get_node("../../Camera2D").player_hit_screen_shake()
-				yield($AnimationPlayer, "animation_finished")
+				await $AnimationPlayer.animation_finished
 				if not get_node("../../Magic").ice_shield_active:
 					$CollisionShape2D.set_deferred("disabled", false)
 				return
@@ -100,7 +100,7 @@ func _on_HurtBox_area_entered(area):
 			PlayerData.change_health(-health_to_subtract)
 			get_node("../../Camera2D").player_hit_screen_shake()
 			InstancedScenes.player_hit_effect(-health_to_subtract, get_node("../../").position)
-			yield($AnimationPlayer, "animation_finished")
+			await $AnimationPlayer.animation_finished
 			if not get_node("../../Magic").ice_shield_active:
 				$CollisionShape2D.set_deferred("disabled", false)
 
@@ -187,7 +187,7 @@ func decrease_energy_or_health_while_sprinting():
 #			$AnimationPlayer.play("hit")
 #			InstancedScenes.player_hit_effect(-amt, position)
 #			PlayerData.change_health(-amt)
-#			yield($AnimationPlayer, "animation_finished")
+#			await $AnimationPlayer.animation_finished
 #			$CollisionShape2D.set_deferred("disabled", false)
 #		else:
 		PlayerData.change_energy(-1)

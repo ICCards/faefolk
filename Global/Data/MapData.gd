@@ -54,8 +54,8 @@ var starting_caves_data = {
 var caves = starting_caves_data
 
 func _ready() -> void:
-	PlayerData.connect("season_changed", self,  "reset_cave_data")
-	PlayerData.connect("set_day", self, "advance_crop")
+	PlayerData.connect("season_changed",Callable(self,"reset_cave_data"))
+	PlayerData.connect("set_day",Callable(self,"advance_crop"))
 
 func reset_cave_data():
 	caves = starting_caves_data
@@ -86,7 +86,7 @@ func advance_crop():
 	for tile in world["tile"]: # if tile is watered, set to not watered
 		if world["tile"][tile] == "w":
 			world["tile"][tile] = "h"
-	if Server.world.name == "World": # clear watered tiles if in world
+	if Server.world.name == "World3D": # clear watered tiles if in world
 		Tiles.watered_tiles.clear()
 	emit_signal("refresh_crops")
 
@@ -116,31 +116,31 @@ func add_tree(id,data):
 	world["tree"][id] = data
 
 func add_placable(id, data):
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		world["placable"][id] = data
 	else:
 		caves[Server.world.name]["placable"][id] = data
 
 func remove_placable(id):
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		world["placable"].erase(id)
 	else:
 		caves[Server.world.name]["placable"].erase(id)
 
 func remove_forage(id):
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		world["forage"].erase(id)
 	else:
 		caves[Server.world.name]["forage"].erase(id)
 
 func remove_object(type, id):
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		world[type].erase(id)
 	else:
 		caves[Server.world.name][type].erase(id)
 	
 func update_object_health(type, id, new_health):
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		if world[type].has(id):
 			world[type][id]["h"] = new_health
 	else:
@@ -149,7 +149,7 @@ func update_object_health(type, id, new_health):
 
 func return_cave_data(cave_name):
 	match cave_name:
-		"World":
+		"World3D":
 			return world
 	return caves[cave_name]
 

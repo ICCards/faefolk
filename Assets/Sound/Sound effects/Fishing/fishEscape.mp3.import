@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/fishEscape.mp3-17e8be62bdea5b99c801a9b5e16aa897.mp3str"
+uid="uid://bivu8iaqc5xot"
+path="res://.godot/imported/fishEscape.mp3-17e8be62bdea5b99c801a9b5e16aa897.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Fishing/fishEscape.mp3"
-dest_files=[ "res://.import/fishEscape.mp3-17e8be62bdea5b99c801a9b5e16aa897.mp3str" ]
+dest_files=["res://.godot/imported/fishEscape.mp3-17e8be62bdea5b99c801a9b5e16aa897.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

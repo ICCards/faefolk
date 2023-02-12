@@ -20,7 +20,7 @@ func _ready():
 	get_fish()
 
 func get_fish():
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		fish_data = FishData.returnOceanDay()
 	else:
 		fish_data = FishData.returnCaveFish()
@@ -35,10 +35,10 @@ func stop_fish_movement():
 	is_mini_game_over = true
 
 func plan_move():
-	var target = rand_range(min_position, max_position)
+	var target = randf_range(min_position, max_position)
 	
 	while (abs(self.position.y - target) < min_distance or abs(self.position.y - target) > max_distance):
-		target = rand_range(min_position, max_position)
+		target = randf_range(min_position, max_position)
 		
 	move(Vector2(self.position.x, target))
 
@@ -46,10 +46,10 @@ func plan_move():
 func move(target):
 	if not is_mini_game_over:
 		randomize()
-		$Tween.interpolate_property(self, "position", position, target, movement_speed+rand_range(-0.75,0.75), Tween.TRANS_BACK, Tween.EASE_OUT)
+		$Tween.interpolate_property(self, "position", position, target, movement_speed+randf_range(-0.75,0.75), Tween.TRANS_BACK, Tween.EASE_OUT)
 		$Tween.start()
 		
-		$MoveTimer.set_wait_time(rand_range(min_movement_time, max_movement_time))
+		$MoveTimer.set_wait_time(randf_range(min_movement_time, max_movement_time))
 		$MoveTimer.start()
 
 func destroy():

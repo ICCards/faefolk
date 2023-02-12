@@ -1,169 +1,176 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://jt6r3tjwsvmd"]
 
-[ext_resource path="res://Assets/Images/Ores/stone1/medium/1.png" type="Texture" id=1]
-[ext_resource path="res://World/Objects/Nature/Ores/SmallOre.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://dvopacfw2l0l4" path="res://Assets/Images/Ores/stone1/medium/1.png" id="1"]
+[ext_resource type="Script" path="res://World/Objects/Nature/Ores/SmallOre.gd" id="1_1lid1"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 21.1765, 20 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(42.353, 40)
 
-[sub_resource type="CapsuleShape2D" id=7]
-radius = 14.1176
+[sub_resource type="CapsuleShape2D" id="7"]
+radius = 3.52941
 height = 7.05882
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("SmallOre:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ true ]
+"values": [true]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("SmallHurtBox/smallHurtBox:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("SmallOre:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, -12 ) ]
+"values": [Vector2(0, -12)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("SmallMovementCollisionBox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "small_ore_break"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("SmallHurtBox/smallHurtBox:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("SmallOre:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("SmallMovementCollisionBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 resource_name = "small_ore_hit_right"
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("SmallOre:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Vector2( 0, -12 ), Vector2( 3, -12 ), Vector2( -2, -12 ), Vector2( 1, -12 ), Vector2( -1, -12 ), Vector2( 0, -12 ) ]
+"values": [Vector2(0, -12), Vector2(3, -12), Vector2(-2, -12), Vector2(1, -12), Vector2(-1, -12), Vector2(0, -12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t1yxw"]
+_data = {
+"RESET": SubResource("3"),
+"small_ore_break": SubResource("4"),
+"small_ore_hit_right": SubResource("5")
 }
 
 [node name="SmallOreObject" type="Node2D"]
-modulate = Color( 1.32, 1.32, 1.32, 1 )
-scale = Vector2( 0.85, 0.85 )
-script = ExtResource( 2 )
+modulate = Color(1.32, 1.32, 1.32, 1)
+scale = Vector2(0.85, 0.85)
+script = ExtResource("1_1lid1")
 
-[node name="SmallOre" type="Sprite" parent="."]
-position = Vector2( 0, -12 )
-texture = ExtResource( 1 )
-offset = Vector2( 0, -28 )
+[node name="SmallOre" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1")
+offset = Vector2(0, -28)
 
 [node name="SmallHurtBox" type="Area2D" parent="."]
-position = Vector2( 1.49254, -55.2239 )
+position = Vector2(1.49254, -55.2239)
 collision_layer = 262160
 collision_mask = 0
 
 [node name="smallHurtBox" type="CollisionShape2D" parent="SmallHurtBox"]
-position = Vector2( -1.49254, 44.6357 )
-shape = SubResource( 1 )
+position = Vector2(-1.49254, 44.6357)
+shape = SubResource("1")
 
 [node name="SmallMovementCollisionBox" type="StaticBody2D" parent="."]
-position = Vector2( -64.7059, -57.6471 )
+position = Vector2(-64.7059, -57.6471)
 collision_layer = 3
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
-position = Vector2( 64.7059, 49.4118 )
+position = Vector2(64.7059, 49.4118)
 rotation = -1.5708
-shape = SubResource( 7 )
+shape = SubResource("7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 3 )
-anims/small_ore_break = SubResource( 4 )
-anims/small_ore_hit_right = SubResource( 5 )
+libraries = {
+"": SubResource("AnimationLibrary_t1yxw")
+}
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 0, 8.2353 )
+position = Vector2(0, 8.2353)
 volume_db = -12.0
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
-position = Vector2( 1.19209e-07, -17.6471 )
-scale = Vector2( 2.70588, 2.73529 )
+position = Vector2(1.19209e-07, -17.6471)
+scale = Vector2(2.70588, 2.73529)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 estimate_radius = false
 radius = 35.0
 
 [connection signal="area_entered" from="SmallHurtBox" to="." method="_on_SmallHurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

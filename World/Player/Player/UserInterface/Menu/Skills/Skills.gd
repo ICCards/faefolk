@@ -1,23 +1,23 @@
 extends Control
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
-onready var front_progress_bar = $SkillProgress/FrontPgBar
-onready var back_progress_bar = $SkillProgress/BackPgBar
-onready var progress_label = $SkillProgress/ProgressLabel
-onready var max_progress_label = $SkillProgress/MaxProgressLabel
-onready var icon1 = $Icons/Icon1
-onready var icon2 = $Icons/Icon2
-onready var icon3 = $Icons/Icon3
-onready var icon4 = $Icons/Icon4
-onready var sword_btn = $Buttons/SwordBtn
-onready var bow_btn = $Buttons/BowBtn
-onready var wind_btn = $Buttons/WindBtn
-onready var fire_btn = $Buttons/FireBtn
-onready var earth_btn = $Buttons/EarthBtn
-onready var ice_btn = $Buttons/IceBtn
-onready var electric_btn = $Buttons/ElectricBtn
-onready var dark_magic_btn = $Buttons/DarkMagicBtn
+@onready var front_progress_bar = $SkillProgress/FrontPgBar
+@onready var back_progress_bar = $SkillProgress/BackPgBar
+@onready var progress_label = $SkillProgress/ProgressLabel
+@onready var max_progress_label = $SkillProgress/MaxProgressLabel
+@onready var icon1 = $Icons/Icon1
+@onready var icon2 = $Icons/Icon2
+@onready var icon3 = $Icons/Icon3
+@onready var icon4 = $Icons/Icon4
+@onready var sword_btn = $Buttons/SwordBtn
+@onready var bow_btn = $Buttons/BowBtn
+@onready var wind_btn = $Buttons/WindBtn
+@onready var fire_btn = $Buttons/FireBtn
+@onready var earth_btn = $Buttons/EarthBtn
+@onready var ice_btn = $Buttons/IceBtn
+@onready var electric_btn = $Buttons/ElectricBtn
+@onready var dark_magic_btn = $Buttons/DarkMagicBtn
 
 var skill = "sword"
 
@@ -32,77 +32,77 @@ func set_bg():
 	set_skills()
 	match skill:
 		"sword":
-			sword_btn.rect_position.x = 351
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 351
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"bow":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 351
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 351
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"wind":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 351
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 351
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"fire":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 351
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 351
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"earth":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 351
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 351
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"ice":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 351
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 351
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"electric":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 351
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 351
+			dark_magic_btn.position.x = 318
 		"dark":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 351
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 351
 			
 func set_skills():
 	var experience = PlayerData.player_data["skill_experience"][skill]

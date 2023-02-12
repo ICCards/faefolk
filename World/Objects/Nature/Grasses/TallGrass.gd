@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var rng = RandomNumberGenerator.new()
+@onready var rng = RandomNumberGenerator.new()
 var variety
 var bodyEnteredFlag = false
 var bodyEnteredFlag2 = false
@@ -19,7 +19,7 @@ var type
 func _ready():
 	rng.randomize()
 	call_deferred("hide")
-	PlayerData.connect("season_changed", self,  "set_grass_texture")
+	PlayerData.connect("season_changed",Callable(self,"set_grass_texture"))
 	set_deferred("front_health", rng.randi_range(1,3))
 	set_deferred("back_heath", rng.randi_range(1,3))
 	set_grass_texture()
@@ -111,18 +111,18 @@ func _on_Area2D_area_entered(area):
 	if front_health == 0:
 		$Area2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer.call_deferred("play", "animate front")
-		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
+		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
 		if Util.chance(50):
 			PlayerData.player_data["collections"]["forage"][type] += 1
 			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-16),1)
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
 		$AnimationPlayer.call_deferred("play", "front break")
-		yield($AnimationPlayer, "animation_finished")
+		await $AnimationPlayer.animation_finished
 		is_front_visible = false
 		call_deferred("destroy")
 	else:
-		yield(get_tree().create_timer(rand_range(0.0, 0.5)), "timeout")
+		await get_tree().create_timer(randf_range(0.0, 0.5)).timeout
 		$AnimationPlayer.call_deferred("play", "animate front")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
@@ -132,18 +132,18 @@ func _on_BackArea2D_area_entered(area):
 	if back_heath == 0:
 		$BackArea2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer2.call_deferred("play", "animate back")
-		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
+		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
 		if Util.chance(50):
 			PlayerData.player_data["collections"]["forage"][type] += 1
 			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-8), 1)
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
 		$AnimationPlayer2.call_deferred("play", "back break")
-		yield($AnimationPlayer2, "animation_finished")
+		await $AnimationPlayer2.animation_finished
 		is_back_visible = false
 		call_deferred("destroy")
 	else:
-		yield(get_tree().create_timer(rand_range(0.1, 0.5)), "timeout")
+		await get_tree().create_timer(randf_range(0.1, 0.5)).timeout
 		$AnimationPlayer2.call_deferred("play", "animate back")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")

@@ -1,21 +1,21 @@
 [gd_resource type="AnimatedTexture" load_steps=7 format=2]
 
-[sub_resource type="StreamTexture" id=1]
+[sub_resource type="CompressedTexture2D" id=1]
 load_path = "res://.import/1.png-928147cc442d365e2e82ff4cf2b029cf.stex"
 
-[sub_resource type="StreamTexture" id=2]
+[sub_resource type="CompressedTexture2D" id=2]
 load_path = "res://.import/2.png-c77f361e561629cc418a38d1a6741a11.stex"
 
-[sub_resource type="StreamTexture" id=3]
+[sub_resource type="CompressedTexture2D" id=3]
 load_path = "res://.import/3.png-7b129090d2168bdd1f97f78d0f57ca12.stex"
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="CompressedTexture2D" id=4]
 load_path = "res://.import/4.png-075e4939c626be87ee7ba2bcc05409ea.stex"
 
-[sub_resource type="StreamTexture" id=5]
+[sub_resource type="CompressedTexture2D" id=5]
 load_path = "res://.import/5.png-098470cb2f2d8ffd6ff5b82671e644a4.stex"
 
-[sub_resource type="StreamTexture" id=6]
+[sub_resource type="CompressedTexture2D" id=6]
 load_path = "res://.import/6.png-6e79c03a9d9d0c60a5a37e6a54433953.stex"
 
 [resource]

@@ -1,75 +1,32 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://cukqslkketf3m"]
 
-[ext_resource path="res://World/Objects/Magic/Earth/EarthStrikeDebuff.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Magic/earth/Skill_Effect_04.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sound/Sound effects/Magic/Earth/spawn.mp3" type="AudioStream" id=3]
+[ext_resource type="Script" path="res://World/Objects/Magic/Earth/EarthStrikeDebuff.gd" id="1_c3jkv"]
+[ext_resource type="AudioStream" uid="uid://c8kml5g6af2pt" path="res://Assets/Sound/Sound effects/Magic/Earth/spawn.mp3" id="3"]
 
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 192, 96, 96 )
+[sub_resource type="SpriteFrames" id="9"]
+animations = []
 
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 96, 96, 96 )
-
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [ SubResource( 11 ), SubResource( 12 ) ],
-"loop": false,
-"name": "remove",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
-"loop": false,
-"name": "spawn",
-"speed": 8.0
-} ]
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 48, 32 )
+[sub_resource type="RectangleShape2D" id="10"]
+size = Vector2(96, 64)
 
 [node name="EarthStrikeDebuff" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1_c3jkv")
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-position = Vector2( 41, -32 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 9 )
-animation = "spawn"
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(41, -32)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("9")
+animation = &"spawn"
 frame = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 0, 32 )
+position = Vector2(0, 32)
 collision_layer = 2097153
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 48, -32 )
-shape = SubResource( 10 )
+position = Vector2(48, -32)
+shape = SubResource("10")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
@@ -77,6 +34,6 @@ one_shot = true
 autostart = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource("3")
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

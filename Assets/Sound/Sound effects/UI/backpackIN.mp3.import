@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/backpackIN.mp3-e7bb273f5ca96c6e632072d1ece7de65.mp3str"
+uid="uid://i505lp2ylmlf"
+path="res://.godot/imported/backpackIN.mp3-e7bb273f5ca96c6e632072d1ece7de65.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/UI/backpackIN.mp3"
-dest_files=[ "res://.import/backpackIN.mp3-e7bb273f5ca96c6e632072d1ece7de65.mp3str" ]
+dest_files=["res://.godot/imported/backpackIN.mp3-e7bb273f5ca96c6e632072d1ece7de65.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

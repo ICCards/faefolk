@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/swoosh.mp3-938b50b85e7c642a08c302a8df07184d.mp3str"
+uid="uid://buvy2d40idpwl"
+path="res://.godot/imported/swoosh.mp3-938b50b85e7c642a08c302a8df07184d.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Dark/swoosh.mp3"
-dest_files=[ "res://.import/swoosh.mp3-938b50b85e7c642a08c302a8df07184d.mp3str" ]
+dest_files=["res://.godot/imported/swoosh.mp3-938b50b85e7c642a08c302a8df07184d.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

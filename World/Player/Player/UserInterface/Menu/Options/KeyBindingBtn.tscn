@@ -1,16 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://0gr52jd1t8ta"]
 
-[ext_resource path="res://Assets/Themes/UI_menu.tres" type="Theme" id=1]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.gd" type="Script" id=3]
+[ext_resource type="Theme" uid="uid://idkpagxcd4yb" path="res://Assets/Themes/UI_menu.tres" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.gd" id="2_twyro"]
 
 [node name="KeyBindingBtn" type="Button" groups=["button_keys"]]
-margin_right = 49.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 116, 57 )
+custom_minimum_size = Vector2(116, 57)
+offset_top = 1.0
+offset_right = 116.0
+offset_bottom = 64.0
 focus_mode = 0
-theme = ExtResource( 1 )
-enabled_focus_mode = 0
+theme = ExtResource("1")
+theme_override_font_sizes/font_size = 48
 text = "set"
-script = ExtResource( 3 )
+script = ExtResource("2_twyro")
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]

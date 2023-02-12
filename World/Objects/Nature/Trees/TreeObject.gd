@@ -1,15 +1,15 @@
 extends Area2D
 
-onready var tree_stump_sprite: Sprite = $TreeSprites/TreeStump
-onready var tree_bottom_sprite: Sprite = $TreeSprites/TreeBottom
-onready var tree_top_sprite: Sprite = $TreeSprites/TreeTop
-onready var animated_tree_top_sprite: AnimatedSprite = $TreeSprites/AnimatedTop
-onready var sound_effects_stump: AudioStreamPlayer2D = $SoundEffectsStump
-onready var sound_effects_tree: AudioStreamPlayer2D = $SoundEffectsTree
-onready var animation_player_tree: AnimationPlayer = $AnimationPlayerTree
-onready var animation_player_stump: AnimationPlayer = $AnimationPlayerStump
-onready var random_leaves_falling_timer: Timer = $RandomLeavesFallingTimer
-onready var tween: Tween = $TreeSprites/Tween
+@onready var tree_stump_sprite: Sprite2D = $TreeSprites/TreeStump
+@onready var tree_bottom_sprite: Sprite2D = $TreeSprites/TreeBottom
+@onready var tree_top_sprite: Sprite2D = $TreeSprites/TreeTop
+@onready var animated_tree_top_sprite: AnimatedSprite2D = $TreeSprites/AnimatedTop
+@onready var sound_effects_stump: AudioStreamPlayer2D = $SoundEffectsStump
+@onready var sound_effects_tree: AudioStreamPlayer2D = $SoundEffectsTree
+@onready var animation_player_tree: AnimationPlayer = $AnimationPlayerTree
+@onready var animation_player_stump: AnimationPlayer = $AnimationPlayerStump
+@onready var random_leaves_falling_timer: Timer = $RandomLeavesFallingTimer
+var tween = get_tree().create_tween()
 
 var rng = RandomNumberGenerator.new()
 
@@ -31,7 +31,7 @@ var temp_health: int = 3
 func _ready():
 	call_deferred("hide")
 	rng.randomize()
-	MapData.connect("refresh_crops", self, "refresh_tree_type")
+	MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
 	call_deferred("set_tree")
 
 
@@ -78,7 +78,7 @@ func harvest():
 			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,0), 1, true)
 		phase = "empty"
 		MapData.world["tree"][name]["p"] = "empty"
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		refresh_tree_type()
 
 
@@ -104,7 +104,7 @@ func setGrownFruitTreeTexture():
 	$TreeChipParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png"))
 	$TreeLeavesParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png"))
 	animated_tree_top_sprite.set_deferred("frame", rng.randi_range(0,19))
-	animated_tree_top_sprite.set_deferred("frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated.tres"))
+	animated_tree_top_sprite.set_deferred("sprite_frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated.tres"))
 	match biome:
 		"forest":
 			tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/tops/"+ phase +".png"))
@@ -142,10 +142,10 @@ func setGrownTreeTexture():
 	match biome:
 		"forest":
 			tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/top.png"))
-			animated_tree_top_sprite.set_deferred("frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated top.tres"))
+			animated_tree_top_sprite.set_deferred("sprite_frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated top.tres"))
 		"snow":
 			tree_top_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/top winter.png"))
-			animated_tree_top_sprite.set_deferred("frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated top winter.tres"))
+			animated_tree_top_sprite.set_deferred("sprite_frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated top winter.tres"))
 	match variety:
 		"oak":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-33))
@@ -200,7 +200,7 @@ func hit(tool_name):
 				sound_effects_tree.call_deferred("play")
 				if Server.player_node.get_position().x <= get_position().x:
 					animation_player_tree.call_deferred("play", "tree fall right")
-					yield(animation_player_tree, "animation_finished" )
+					await animation_player_tree.animation_finished
 					var amt = Stats.return_item_drop_quantity(tool_name, "tree")
 					PlayerData.player_data["collections"]["resources"]["wood"] += amt
 					InstancedScenes.intitiateItemDrop("wood", position+Vector2(130, -8), amt)
@@ -213,7 +213,7 @@ func hit(tool_name):
 				
 				else:
 					animation_player_tree.call_deferred("play", "tree fall left")
-					yield(animation_player_tree, "animation_finished" )
+					await animation_player_tree.animation_finished
 					var amt = Stats.return_item_drop_quantity(tool_name, "tree")
 					PlayerData.player_data["collections"]["resources"]["wood"] += amt
 					InstancedScenes.intitiateItemDrop("wood", position+Vector2(-130, -8), amt)
@@ -251,13 +251,13 @@ func destroy(tool_name):
 		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
-		yield(get_tree().create_timer(3.0), "timeout")
+		await get_tree().create_timer(3.0).timeout
 	else:
 		animation_player_stump.call_deferred("play", "sapling destroyed")
 		sound_effects_stump.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3"))
 		sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects_stump.call_deferred("play")
-		yield(get_tree().create_timer(3.0), "timeout")
+		await get_tree().create_timer(3.0).timeout
 	call_deferred("queue_free")
 
 ### Tree hurtbox
@@ -265,7 +265,7 @@ func _on_Hurtbox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff" and phase == "5":
-		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-10,22)))
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-10,22)))
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		call_deferred("hit", _area.tool_name)
@@ -281,33 +281,17 @@ func disable_tree_top_collision_box():
 	$TreeTopArea.get_node(variety).set_deferred("disabled", true)
 
 func set_tree_transparent():
-	tween.interpolate_property(animated_tree_top_sprite, "modulate:a",
-		animated_tree_top_sprite.get_modulate().a, 0.4, 0.5,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property(tree_top_sprite, "modulate:a",
-		tree_top_sprite.get_modulate().a, 0.4, 0.5,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property(tree_stump_sprite, "modulate:a",
-		tree_stump_sprite.get_modulate().a, 0.4, 0.5,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property(tree_bottom_sprite, "modulate:a",
-		tree_bottom_sprite.get_modulate().a, 0.4, 0.5,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.tween_property(animated_tree_top_sprite, "modulate:a", 0.4, 0.5)
+	tween.tween_property(tree_top_sprite, "modulate:a", 0.4, 0.5)
+	tween.tween_property(tree_stump_sprite, "modulate:a", 0.4, 0.5)
+	tween.tween_property(tree_bottom_sprite, "modulate:a", 0.4, 0.5)
 	tween.start()
 
 func set_tree_visible():
-	tween.interpolate_property(animated_tree_top_sprite, "modulate:a",
-		animated_tree_top_sprite.get_modulate().a, 1.0, 0.5,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property(tree_top_sprite, "modulate:a",
-		tree_top_sprite.get_modulate().a, 1.0, 0.5,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property(tree_stump_sprite, "modulate:a",
-		tree_stump_sprite.get_modulate().a, 1.0, 0.5,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property(tree_bottom_sprite, "modulate:a",
-		tree_bottom_sprite.get_modulate().a, 1.0, 0.5,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.tween_property(animated_tree_top_sprite, "modulate:a", 1.0, 0.5)
+	tween.tween_property(tree_top_sprite, "modulate:a", 1.0, 0.5)
+	tween.tween_property(tree_stump_sprite, "modulate:a", 1.0, 0.5)
+	tween.tween_property(tree_bottom_sprite, "modulate:a", 1.0, 0.5)
 	tween.start()
 
 

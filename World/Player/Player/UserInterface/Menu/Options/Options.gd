@@ -2,13 +2,13 @@ extends Control
 
 const MAX_SCROLL_SIZE = 1167
 
-onready var music_slider = $ScrollContainer/VBoxContainer/Grid/Slider1/Music/MusicSlider
-onready var sound_slider = $ScrollContainer/VBoxContainer/Grid/Slider2/Sound/SoundSlider
-onready var ambient_slider = $ScrollContainer/VBoxContainer/Grid/Slider3/Ambient/AmbientSlider
-onready var footsteps_slider = $ScrollContainer/VBoxContainer/Grid/Slider4/Footstep/FootstepSlider
+@onready var music_slider = $ScrollContainer/VBoxContainer/Grid/Slider1/Music/MusicSlider
+@onready var sound_slider = $ScrollContainer/VBoxContainer/Grid/Slider2/Sound/SoundSlider
+@onready var ambient_slider = $ScrollContainer/VBoxContainer/Grid/Slider3/Ambient/AmbientSlider
+@onready var footsteps_slider = $ScrollContainer/VBoxContainer/Grid/Slider4/Footstep/FootstepSlider
 
 func _ready():
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	setup_keys()
 	set_label_texts()
 	music_slider.value = PlayerData.player_data["settings"]["volume"]["music"]
@@ -55,7 +55,7 @@ func return_key_binding_string(action_name):
 	if key_ascii == 127:
 		return "Delete"
 	else:
-		return OS.get_scancode_string(key_ascii)
+		return OS.get_keycode_string(key_ascii)
 
 
 func _on_MusicSlider_value_changed(value):

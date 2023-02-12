@@ -1,14 +1,14 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var ArrowProjectile = load("res://World/Objects/Projectiles/ArrowProjectile.tscn")
+@onready var ArrowProjectile = load("res://World3D/Objects/Projectiles/ArrowProjectile.tscn")
 
-onready var hit_box: Node2D = $ShootDirection
-onready var skeleton_sprite: Sprite = $SkeletonSprite
-onready var _idle_timer: Timer = $Timers/IdleTimer
-onready var _chase_timer: Timer = $Timers/ChaseTimer
-onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var hit_box: Node2D = $ShootDirection
+@onready var skeleton_sprite: Sprite2D = $SkeletonSprite
+@onready var _idle_timer: Timer = $Timers/IdleTimer
+@onready var _chase_timer: Timer = $Timers/ChaseTimer
+@onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var direction: String = "down"
 var destroyed: bool = false
@@ -51,10 +51,10 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	randomize()
 	animation_player.play("loop")
-	_idle_timer.wait_time = rand_range(4.0,6.0)
-	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
-	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
-	navigation_agent.connect("velocity_computed", self, "move") 
+	_idle_timer.wait_time = randf_range(4.0,6.0)
+	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
+	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
+	navigation_agent.connect("velocity_computed",Callable(self,"move")) 
 	navigation_agent.set_navigation(get_node("../../").nav_node)
 
 func _update_pathfinding_chase():
@@ -67,16 +67,16 @@ func _update_pathfinding_idle():
 	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func get_random_player_pos(_player_pos):
-	var random1 = rand_range(75, 100)
-	var random2 = rand_range(75, 100)
+	var random1 = randf_range(75, 100)
+	var random2 = randf_range(75, 100)
 	if Util.chance(50):
 		random1 *= -1
 	if Util.chance(50):
 		random2 *= -1
 	random_pos = Vector2(random1, random2)
-	if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(_player_pos + random_pos)) == -1:
+	if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.local_to_map(_player_pos + random_pos)) == -1:
 		return _player_pos + random_pos
-	elif Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(_player_pos - random_pos)) == -1:
+	elif Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.local_to_map(_player_pos - random_pos)) == -1:
 		return _player_pos - random_pos
 	else:
 		return _player_pos
@@ -87,20 +87,28 @@ func move(_velocity: Vector2) -> void:
 		return
 	elif frozen:
 		skeleton_sprite.modulate = Color("00c9ff")
-		velocity = move_and_slide(_velocity*0.75)
+		set_velocity(_velocity*0.75)
+		move_and_slide()
+		velocity = velocity
 	elif poisoned:
 		skeleton_sprite.modulate = Color("009000")
-		velocity = move_and_slide(_velocity*0.9)
+		set_velocity(_velocity*0.9)
+		move_and_slide()
+		velocity = velocity
 	else:
 		skeleton_sprite.modulate = Color("ffffff")
-		velocity = move_and_slide(_velocity)
+		set_velocity(_velocity)
+		move_and_slide()
+		velocity = velocity
 
 func _physics_process(delta):
 	if destroyed or stunned:
 		return
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
-		velocity = move_and_slide(velocity)
+		set_velocity(velocity)
+		move_and_slide()
+		velocity = velocity
 		return
 	set_sprite_texture()
 	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
@@ -148,18 +156,18 @@ func attack():
 		else:
 			state = AIM_WALK
 		animation_player.play("draw bow")
-		yield(animation_player, "animation_finished")
+		await animation_player.animation_finished
 		if not attacking:
 			state = RELEASE
 			attacking = true
 			animation_player.play("release bow")
 			if not destroyed:
-				yield(get_tree().create_timer(0.3), "timeout") 
+				await get_tree().create_timer(0.3).timeout 
 				var current_player_pos = Server.player_node.position
-				yield(get_tree().create_timer(0.3), "timeout")
+				await get_tree().create_timer(0.3).timeout
 				if not cancel_attack:
 					shoot_projectile(current_player_pos)
-				yield(animation_player, "animation_finished")
+				await animation_player.animation_finished
 				animation_player.play("loop")
 				attacking = false
 				aiming = false
@@ -170,9 +178,9 @@ func shoot_projectile(player_pos):
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	sound_effects.play()
-	var spell = ArrowProjectile.instance()
+	var spell = ArrowProjectile.instantiate()
 	spell.is_hostile = true
-	spell.position = $ShootDirection/Position2D.global_position
+	spell.position = $ShootDirection/Marker2D.global_position
 	spell.velocity = (player_pos - spell.position).normalized()
 	get_node("../../").add_child(spell)
 	
@@ -217,7 +225,7 @@ func destroy(killed_by_player):
 		InstancedScenes.intitiateItemDrop("arrow", position, 1)
 	animation_player.play("death")
 	destroyed = true
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -244,10 +252,10 @@ func _on_HurtBox_area_entered(area):
 		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 			hit(area.tool_name)
 		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			$EnemyTornadoState.orbit_radius = randf_range(0,20)
 			tornado_node = area
 		if area.special_ability == "fire":
-			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+			var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
 			InstancedScenes.initiateExplosionParticles(position+randomPos)
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
@@ -255,7 +263,7 @@ func _on_HurtBox_area_entered(area):
 			$EnemyFrozenState.start(3)
 		elif area.special_ability == "poison":
 			$EnemyPoisonState.start("poison arrow")
-		yield(get_tree().create_timer(0.25), "timeout")
+		await get_tree().create_timer(0.25).timeout
 		$KnockbackParticles.emitting = false
 
 func start_chase_state():

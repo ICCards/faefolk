@@ -1,15 +1,15 @@
 extends Node2D
 
-onready var Fishing = load("res://World/Player/Player/Fishing/Fishing.tscn")
-onready var PlaceObjectScene = load("res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
-onready var Eating_particles = load("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
+@onready var Fishing = load("res://World3D/Player/Player/Fishing/Fishing.tscn")
+@onready var PlaceObjectScene = load("res://World3D/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
+@onready var Eating_particles = load("res://World3D/Player/Player/AttachedScenes/EatingParticles.tscn")
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var direction_of_current_chair: String = ""
 var sitting: bool = false
 
-onready var state = MOVEMENT
+@onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
 	SWINGING,
@@ -29,7 +29,7 @@ var game_state: GameState
 var current_interactive_node = null
 
 func _ready():
-	PlayerData.connect("health_depleted", self, "player_death")
+	PlayerData.connect("health_depleted",Callable(self,"player_death"))
 
 
 func _input(event):
@@ -106,12 +106,12 @@ func eat(item_name):
 		sound_effects.play()
 		get_parent().state = get_parent().EATING
 		PlayerData.remove_single_object_from_hotbar()
-		var eating_paricles = Eating_particles.instance()
+		var eating_paricles = Eating_particles.instantiate()
 		eating_paricles.item_name = item_name
 		get_parent().add_child(eating_paricles)
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "eat", null)
 		get_parent().animation_player.play("eat")
-		yield(get_parent().animation_player, "animation_finished")
+		await get_parent().animation_player.animation_finished
 		get_parent().composite_sprites.get_node("Body").hframes = 4
 		get_parent().composite_sprites.get_node("Arms").hframes = 4
 		get_parent().composite_sprites.get_node("Pants").hframes = 4
@@ -132,7 +132,7 @@ func harvest_crop(crop_node):
 		get_parent().holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + crop_node.crop_name + ".png")
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
 		get_parent().animation_player.play(anim)
-		yield(get_parent().animation_player, "animation_finished")
+		await get_parent().animation_player.animation_finished
 		if PlayerDataHelpers.can_item_be_added_to_inventory(crop_node.item_name, 1):
 			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(crop_node.item_name, 1)
 			PlayerData.pick_up_item(crop_node.item_name, 1, null)
@@ -159,7 +159,7 @@ func harvest_forage(forage_node):
 		get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+forage_node.item_name+".png")
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
 		get_parent().animation_player.play(anim)
-		yield(get_parent().animation_player, "animation_finished")
+		await get_parent().animation_player.animation_finished
 		if PlayerDataHelpers.can_item_be_added_to_inventory(forage_node.item_name, 1):
 			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(forage_node.item_name, 1)
 			PlayerData.pick_up_item(forage_node.item_name, 1, null)
@@ -178,8 +178,8 @@ func sit(adjusted_position, direction_of_chair):
 	get_parent().position = adjusted_position
 	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+direction_of_current_chair, null)
 	get_parent().animation_player.play("sit_"+direction_of_current_chair)
-	yield(get_parent().animation_player, "animation_finished")
-	yield(get_tree(), "idle_frame")
+	await get_parent().animation_player.animation_finished
+	await get_tree().idle_frame
 	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_idle_"+direction_of_current_chair, null)
 	get_parent().animation_player.play("sit_idle")
 	sitting = false
@@ -189,7 +189,7 @@ func stand_up():
 	if not sitting:
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+direction_of_current_chair, null)
 		get_parent().animation_player.play_backwards("sit_"+direction_of_current_chair)
-		yield(get_parent().animation_player, "animation_finished")
+		await get_parent().animation_player.animation_finished
 		get_parent().state = get_parent().MOVEMENT
 
 
@@ -210,17 +210,17 @@ func player_death():
 		if has_node("../Fishing"):
 			get_node("../Fishing").queue_free()
 		drop_inventory_items()
-		yield(get_parent().animation_player, "animation_finished")
+		await get_parent().animation_player.animation_finished
 		respawn()
 
 
 func drop_inventory_items():
 	for item in PlayerData.player_data["hotbar"].keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["hotbar"][item], get_parent().position+Vector2(rand_range(-32,32), rand_range(-32,32)))
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["hotbar"][item], get_parent().position+Vector2(randf_range(-32,32), randf_range(-32,32)))
 	for item in PlayerData.player_data["inventory"].keys(): 
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["inventory"][item], get_parent().position+Vector2(rand_range(-32,32), rand_range(-32,32)))
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["inventory"][item], get_parent().position+Vector2(randf_range(-32,32), randf_range(-32,32)))
 	for item in PlayerData.player_data["combat_hotbar"].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["combat_hotbar"][item], get_parent().position+Vector2(rand_range(-32,32), rand_range(-32,32)))
+		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["combat_hotbar"][item], get_parent().position+Vector2(randf_range(-32,32), randf_range(-32,32)))
 	PlayerData.player_data["hotbar"] = {}
 	PlayerData.player_data["inventory"] = {}
 	PlayerData.player_data["combat_hotbar"] = {}
@@ -232,7 +232,7 @@ func respawn():
 		get_parent().position = Util.string_to_vector2(PlayerData.player_data["respawn_location"])*32
 		get_parent().animation_player.stop()
 		get_node("../Camera2D/UserInterface").respawn()
-		yield(get_tree().create_timer(0.5), "timeout")
+		await get_tree().create_timer(0.5).timeout
 		get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", false) 
 		get_parent().state = get_parent().MOVEMENT
 		get_parent().set_held_object()
@@ -246,7 +246,7 @@ func fish():
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		PlayerData.change_energy(-1)
 		get_parent().state = get_parent().FISHING
-		var fishing = Fishing.instance()
+		var fishing = Fishing.instantiate()
 		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		get_parent().call_deferred("add_child", fishing)
 
@@ -266,7 +266,7 @@ func sleep(sleeping_bag_direction, sleeping_bag_pos):
 		elif sleeping_bag_direction == "up":
 			get_parent().composite_sprites.rotation_degrees = 180
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
-		yield(get_parent().user_interface.get_node("SleepEffect/AnimationPlayer"), "animation_finished")
+		await get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").animation_finished
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
@@ -274,7 +274,7 @@ func sleep(sleeping_bag_direction, sleeping_bag_pos):
 		PlayerData.player_data["current_save_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
 		PlayerData.player_data["respawn_location"] = str(player_enter_position/32)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		game_state = GameState.new()
 		game_state.world_state = MapData.world
 		game_state.cave_state = MapData.caves
@@ -287,11 +287,11 @@ func sleep(sleeping_bag_direction, sleeping_bag_pos):
 
 
 func show_placable_object(item_name, item_category):
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		if item_category == "Seed":
 			item_name.erase(item_name.length() - 6, 6)
 		if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
-			var placeObject = PlaceObjectScene.instance()
+			var placeObject = PlaceObjectScene.instantiate()
 			placeObject.name = "PlaceObject"
 			placeObject.item_name = item_name
 			placeObject.item_category = item_category
@@ -305,7 +305,7 @@ func show_placable_object(item_name, item_category):
 	else:
 		if item_name == "campfire" or item_name == "torch" or item_name == "sleeping bag":
 			if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
-				var placeObject = PlaceObjectScene.instance()
+				var placeObject = PlaceObjectScene.instantiate()
 				placeObject.name = "PlaceObject"
 				placeObject.item_name = item_name
 				placeObject.item_category = item_category

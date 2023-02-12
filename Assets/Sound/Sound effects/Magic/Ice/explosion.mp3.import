@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/explosion.mp3-37dbcc29ba51f2661ac4da1cd8192b37.mp3str"
+uid="uid://bk0qbfhe6hwxm"
+path="res://.godot/imported/explosion.mp3-37dbcc29ba51f2661ac4da1cd8192b37.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Ice/explosion.mp3"
-dest_files=[ "res://.import/explosion.mp3-37dbcc29ba51f2661ac4da1cd8192b37.mp3str" ]
+dest_files=["res://.godot/imported/explosion.mp3-37dbcc29ba51f2661ac4da1cd8192b37.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

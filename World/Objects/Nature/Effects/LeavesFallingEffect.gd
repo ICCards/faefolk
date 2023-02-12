@@ -1,16 +1,16 @@
 extends Node2D
 
-onready var leaf1Sprite = $Leaves/Leaf1
-onready var leaf2Sprite = $Leaves/Leaf2
-onready var leaf3Sprite = $Leaves/Leaf3
-onready var leaf4Sprite = $Leaves/Leaf4
-onready var leaf5Sprite = $Leaves/Leaf5
-onready var leaf6Sprite = $Leaves/Leaf6
-onready var leaf7Sprite = $Leaves/Leaf7
-onready var leaf8Sprite = $Leaves/Leaf8
-onready var leaf9Sprite = $Leaves/Leaf9
-onready var leaf10Sprite = $Leaves/Leaf10
-onready var animation_player = $AnimationPlayer
+@onready var leaf1Sprite = $Leaves/Leaf1
+@onready var leaf2Sprite = $Leaves/Leaf2
+@onready var leaf3Sprite = $Leaves/Leaf3
+@onready var leaf4Sprite = $Leaves/Leaf4
+@onready var leaf5Sprite = $Leaves/Leaf5
+@onready var leaf6Sprite = $Leaves/Leaf6
+@onready var leaf7Sprite = $Leaves/Leaf7
+@onready var leaf8Sprite = $Leaves/Leaf8
+@onready var leaf9Sprite = $Leaves/Leaf9
+@onready var leaf10Sprite = $Leaves/Leaf10
+@onready var animation_player = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
@@ -21,7 +21,7 @@ func _ready():
 	randomizeDisplayedLeaves()
 	setRandomTexture()
 	animation_player.play("leaves falling effect")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 	
 	

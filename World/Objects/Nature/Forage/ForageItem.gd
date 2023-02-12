@@ -28,14 +28,14 @@ func remove_from_world():
 
 func set_forage_texture():
 	if item_name == "sunflower" or item_name == "dandelion" or item_name == "lily of the nile" or item_name == "poppy flower" or item_name == "tulip":
-		$Sprite.call_deferred("hide")
+		$Sprite2D.call_deferred("hide")
 		$AnimatedFlower.call_deferred("show")
 		$AnimatedFlower.call_deferred("play", item_name)
 		$AnimatedFlower.set_deferred("frame", rng.randi_range(0,4))
 	else:
-		$Sprite.call_deferred("show")
+		$Sprite2D.call_deferred("show")
 		$AnimatedFlower.call_deferred("hide")
-		$Sprite.set_deferred("texture", load("res://Assets/Images/inventory_icons/Forage/"+ item_name +".png"))
+		$Sprite2D.set_deferred("texture", load("res://Assets/Images/inventory_icons/Forage/"+ item_name +".png"))
 
 
 func _on_VisibilityNotifier2D_screen_entered():

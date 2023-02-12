@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/maujoe.custom_gradient_texture/custom_gradient_texture.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.0837696 )
+offsets = PackedFloat32Array( 0, 0.0837696 )
 
 [sub_resource type="Image" id=2]
 data = {

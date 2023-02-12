@@ -1,8 +1,8 @@
 extends Node2D
 
-onready var animation_player: AnimationPlayer = $AnimationPlayer 
-onready var tree_stump_sprite: Sprite = $TreeSprites/TreeStump
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var animation_player: AnimationPlayer = $AnimationPlayer 
+@onready var tree_stump_sprite: Sprite2D = $TreeSprites/TreeStump
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var rng = RandomNumberGenerator.new()
 
@@ -55,7 +55,7 @@ func hit(tool_name):
 		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
-		yield(sound_effects, "finished")
+		await sound_effects.finished
 		call_deferred("queue_free")
 
 
@@ -63,7 +63,7 @@ func _on_StumpHurtbox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if area.special_ability == "fire buff":
-		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-16,16), rand_range(-18,12)))
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-18,12)))
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		call_deferred("hit", area.tool_name)

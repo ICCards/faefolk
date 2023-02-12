@@ -1,13 +1,13 @@
 [gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Images/Animals/Duck/duck3.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://World/Animals/Duck.gd" type="Script" id=2]
+[ext_resource path="res://World3D/Animals/Duck.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=3]
-[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=4]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=6]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture2D" id=4]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=24]
 radius = 4.0
@@ -26,8 +26,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
@@ -38,8 +38,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -50,8 +50,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -62,8 +62,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -74,8 +74,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -90,8 +90,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0.5, 1.5 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -102,8 +102,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -114,8 +114,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -126,8 +126,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -138,8 +138,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PackedFloat32Array(  ),
+"transitions": PackedFloat32Array(  ),
 "update": 1,
 "values": [  ]
 }
@@ -150,8 +150,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -162,8 +162,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -174,8 +174,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
@@ -191,8 +191,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 1.0, 0.0 ]
 }
@@ -255,13 +255,13 @@ region = Rect2( 312, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=35]
 animations = [ {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
+"sprite_frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
-[node name="Duck" type="KinematicBody2D"]
+[node name="Duck" type="CharacterBody2D"]
 material = ExtResource( 3 )
 collision_layer = 0
 collision_mask = 67
@@ -275,11 +275,11 @@ script = ExtResource( 2 )
 
 [node name="EnemyTornadoState" parent="." instance=ExtResource( 5 )]
 
-[node name="DuckSprite" type="AnimatedSprite" parent="."]
+[node name="DuckSprite" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 position = Vector2( 0, -30 )
 scale = Vector2( 0.75, 0.75 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "walk"
 frame = 1
 playing = true
@@ -297,7 +297,7 @@ collision_mask = 0
 rotation = 1.5708
 shape = SubResource( 25 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2( 0, -9 )
 scale = Vector2( 4.16875, 4.16875 )
 
@@ -311,12 +311,12 @@ anims/RESET = SubResource( 28 )
 anims/death = SubResource( 26 )
 anims/hit = SubResource( 27 )
 
-[node name="Electricity" type="AnimatedSprite" parent="."]
+[node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -15 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 35 )
+sprite_frames = SubResource( 35 )
 frame = 7
 playing = true
 
@@ -337,8 +337,8 @@ autostart = true
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/RunStateTimer" to="." method="_on_RunStateTimer_timeout"]
 [connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_IdleTimer_timeout"]
 [connection signal="timeout" from="Timers/DropEggTimer" to="." method="_on_DropEggTimer_timeout"]

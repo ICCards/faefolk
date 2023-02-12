@@ -1,45 +1,45 @@
 extends Node2D
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
-onready var PotionProjectile = load("res://World/Objects/Projectiles/PotionProjectile.tscn")
+@onready var PotionProjectile = load("res://World3D/Objects/Projectiles/PotionProjectile.tscn")
 
-onready var ArrowProjectile = load("res://World/Objects/Projectiles/ArrowProjectile.tscn")
+@onready var ArrowProjectile = load("res://World3D/Objects/Projectiles/ArrowProjectile.tscn")
 
-onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
-onready var LightningStrike = load("res://World/Objects/Magic/Lightning/LightningStrike.tscn")
-onready var FlashStep = load("res://World/Objects/Magic/Lightning/FlashStep.tscn")
+@onready var LightningProjectile = load("res://World3D/Objects/Magic/Lightning/LightningProjectile.tscn")
+@onready var LightningStrike = load("res://World3D/Objects/Magic/Lightning/LightningStrike.tscn")
+@onready var FlashStep = load("res://World3D/Objects/Magic/Lightning/FlashStep.tscn")
 
-onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
-onready var DashGhost = load("res://World/Objects/Magic/Wind/DashGhost.tscn")
-onready var LingeringTornado = load("res://World/Objects/Magic/Wind/LingeringTornado.tscn")
-onready var Whirlwind = load("res://World/Objects/Magic/Wind/Whirlwind.tscn")
+@onready var TornadoProjectile = load("res://World3D/Objects/Magic/Wind/TornadoProjectile.tscn")
+@onready var DashGhost = load("res://World3D/Objects/Magic/Wind/DashGhost.tscn")
+@onready var LingeringTornado = load("res://World3D/Objects/Magic/Wind/LingeringTornado.tscn")
+@onready var Whirlwind = load("res://World3D/Objects/Magic/Wind/Whirlwind.tscn")
 
-onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
-onready var FlameThrower = load("res://World/Objects/Magic/Fire/Flamethrower.tscn")
-onready var FireBuffFront = load("res://World/Objects/Magic/Fire/AttachedFlameBehind.tscn")
-onready var FireBuffBehind = load("res://World/Objects/Magic/Fire/AttachedFlameFront.tscn")
+@onready var FireProjectile = load("res://World3D/Objects/Magic/Fire/FireProjectile.tscn")
+@onready var FlameThrower = load("res://World3D/Objects/Magic/Fire/Flamethrower.tscn")
+@onready var FireBuffFront = load("res://World3D/Objects/Magic/Fire/AttachedFlameBehind.tscn")
+@onready var FireBuffBehind = load("res://World3D/Objects/Magic/Fire/AttachedFlameFront.tscn")
 
-onready var EarthStrike = load("res://World/Objects/Magic/Earth/EarthStrike.tscn")
-onready var EarthGolem = load("res://World/Objects/Magic/Earth/EarthGolem.tscn")
-onready var EarthStrikeDebuff = load("res://World/Objects/Magic/Earth/EarthStrikeDebuff.tscn")
-onready var Earthquake = load("res://World/Objects/Magic/Earth/Earthquake.tscn")
+@onready var EarthStrike = load("res://World3D/Objects/Magic/Earth/EarthStrike.tscn")
+@onready var EarthGolem = load("res://World3D/Objects/Magic/Earth/EarthGolem.tscn")
+@onready var EarthStrikeDebuff = load("res://World3D/Objects/Magic/Earth/EarthStrikeDebuff.tscn")
+@onready var Earthquake = load("res://World3D/Objects/Magic/Earth/Earthquake.tscn")
 
-onready var IceDefense = load("res://World/Objects/Magic/Ice/IceDefense.tscn")
-onready var IceProjectile = load("res://World/Objects/Magic/Ice/IceProjectile.tscn")
-onready var BlizzardFog = load("res://World/Objects/Magic/Ice/BlizzardFog.tscn")
+@onready var IceDefense = load("res://World3D/Objects/Magic/Ice/IceDefense.tscn")
+@onready var IceProjectile = load("res://World3D/Objects/Magic/Ice/IceProjectile.tscn")
+@onready var BlizzardFog = load("res://World3D/Objects/Magic/Ice/BlizzardFog.tscn")
 
-onready var DemonMage = load("res://World/Objects/Magic/Dark/DemonMage.tscn")
-onready var PortalNode = load("res://World/Objects/Magic/Dark/Portal.tscn")
+@onready var DemonMage = load("res://World3D/Objects/Magic/Dark/DemonMage.tscn")
+@onready var PortalNode = load("res://World3D/Objects/Magic/Dark/Portal.tscn")
 
-onready var HealthProjectile = load("res://World/Objects/Magic/Health/HealthProjectile.tscn")
-onready var HealthBuff = load("res://World/Objects/Magic/Health/HealthBuff.tscn")
+@onready var HealthProjectile = load("res://World3D/Objects/Magic/Health/HealthProjectile.tscn")
+@onready var HealthBuff = load("res://World3D/Objects/Magic/Health/HealthBuff.tscn")
 
-onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
-onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
-onready var composite_sprites = get_node("../CompositeSprites")
+@onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
+@onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
+@onready var composite_sprites = get_node("../CompositeSprites")
 var _uuid = load("res://helpers/UUID.gd")
-onready var uuid = _uuid.new()
+@onready var uuid = _uuid.new()
 
 var dashing = false
 var player_fire_buff: bool = false
@@ -87,7 +87,7 @@ var ending_mouse_point
 var thread = Thread.new()
 
 func _ready():
-	PlayerData.connect("health_depleted", self, "player_death")
+	PlayerData.connect("health_depleted",Callable(self,"player_death"))
 
 func player_death():
 	is_casting = false
@@ -121,7 +121,7 @@ func _input( event ):
 
 func draw_bow(spell_index):
 	if not thread.is_active():
-		thread.start(self,"whoAmIBow",spell_index)
+		thread.start(Callable(self,"whoAmIBow").bind(spell_index))
 		
 func whoAmIBow(spell_index):
 	call_deferred("draw_bow_deferred",spell_index)
@@ -135,7 +135,7 @@ func draw_bow_deferred(spell_index):
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 		sound_effects.play()
-		yield(player_animation_player, "animation_finished" )
+		await player_animation_player.animation_finished
 		wait_for_bow_release(spell_index)
 	else:
 		thread.wait_to_finish()
@@ -164,7 +164,7 @@ func wait_for_bow_release(spell_index):
 		animation = "release_" + direction.to_lower()
 		composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
 		player_animation_player.play("bow draw release")
-		yield(player_animation_player, "animation_finished" )
+		await player_animation_player.animation_finished
 		is_releasing = false
 		get_parent().direction = direction
 		get_parent().state = MOVEMENT
@@ -178,7 +178,7 @@ func wait_for_bow_release(spell_index):
 		get_parent().state = MOVEMENT
 		return
 	else:
-		yield(get_tree().create_timer(0.1), "timeout")
+		await get_tree().create_timer(0.1).timeout
 		wait_for_bow_release(spell_index)
 
 func shoot(spell_index):
@@ -198,13 +198,13 @@ func shoot(spell_index):
 func ricochet_arrow_shot():
 	PlayerData.remove_material("arrow", 2)
 	PlayerData.change_mana(-2)
-	var arrow = ArrowProjectile.instance()
+	var arrow = ArrowProjectile.instantiate()
 	if get_node("../Magic").player_fire_buff:
 		arrow.is_fire_arrow = true
 	else:
 		arrow.is_fire_arrow = false
 	arrow.is_ricochet_shot = true
-	arrow.position = $CastDirection/Position2D.global_position
+	arrow.position = $CastDirection/Marker2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
 	get_node("../../../").call_deferred("add_child",arrow)
 
@@ -212,25 +212,25 @@ func ricochet_arrow_shot():
 func enchanted_arrow_shot():
 	PlayerData.remove_material("arrow", 1)
 	PlayerData.change_mana(-1)
-	var arrow = ArrowProjectile.instance()
+	var arrow = ArrowProjectile.instantiate()
 	if Util.chance(33):
 		arrow.is_fire_arrow = true
 	elif Util.chance(33):
 		arrow.is_ice_arrow = true
 	else:
 		arrow.is_poison_arrow = true
-	arrow.position = $CastDirection/Position2D.global_position
+	arrow.position = $CastDirection/Marker2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
 	get_node("../../../").call_deferred("add_child",arrow)
 
 func single_arrow_shot():
 	PlayerData.remove_material("arrow", 1)
-	var arrow = ArrowProjectile.instance()
+	var arrow = ArrowProjectile.instantiate()
 	if get_node("../Magic").player_fire_buff:
 		arrow.is_fire_arrow = true
 	else:
 		arrow.is_fire_arrow = false
-	arrow.position = $CastDirection/Position2D.global_position
+	arrow.position = $CastDirection/Marker2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
 	get_node("../../../").call_deferred("add_child", arrow)
 
@@ -238,12 +238,12 @@ func single_arrow_shot():
 func multi_arrow_shot():
 	PlayerData.remove_material("arrow", 3)
 	for i in range(3):
-		var arrow = ArrowProjectile.instance()
+		var arrow = ArrowProjectile.instantiate()
 		if get_node("../Magic").player_fire_buff:
 			arrow.is_fire_arrow = true
 		else:
 			arrow.is_fire_arrow = false
-		arrow.position = $CastDirection/Position2D.global_position
+		arrow.position = $CastDirection/Marker2D.global_position
 		if i == 0:
 			arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
 		elif i == 1: 
@@ -268,12 +268,12 @@ func wait_for_cast_release(staff_name,spell_index):
 		get_parent().state = MOVEMENT
 		return
 	else:
-		yield(get_tree().create_timer(0.1), "timeout")
+		await get_tree().create_timer(0.1).timeout
 		wait_for_cast_release(staff_name, spell_index)
 
 func cast_spell(staff_name, spell_index):
 	if not thread.is_active():
-		thread.start(self,"whoAmIMagic",[staff_name,spell_index])
+		thread.start(Callable(self,"whoAmIMagic").bind([staff_name,spell_index]))
 
 func whoAmIMagic(staff_and_spell_index):
 	call_deferred("cast_spell_deferred", staff_and_spell_index)
@@ -287,7 +287,7 @@ func cast_spell_deferred(staff_and_spell_index):
 			is_casting = true
 			animation = "magic_cast_" + get_parent().direction.to_lower()
 			player_animation_player.play("bow draw release")
-			yield(player_animation_player, "animation_finished" )
+			await player_animation_player.animation_finished
 		wait_for_cast_release(staff_and_spell_index[0],staff_and_spell_index[1])
 	else:
 		thread.wait_to_finish()
@@ -312,7 +312,7 @@ func _physics_process(delta):
 	if (is_casting or is_drawing or is_throwing) and not PlayerData.viewMapMode:
 		$AimDownSightLine.show()
 		$CastDirection.look_at(get_global_mouse_position())
-		var start_pt = $CastDirection/Position2D.global_position-get_node("../").global_position
+		var start_pt = $CastDirection/Marker2D.global_position-get_node("../").global_position
 		var end_pt = get_local_mouse_position()
 		$AimDownSightLine.points = [start_pt, end_pt]
 	else:
@@ -370,28 +370,28 @@ func throw_potion(potion_name, init_direction):
 	get_parent().state = MAGIC_CASTING
 	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), potion_name)
 	player_animation_player.play("bow draw release")
-	yield(get_tree().create_timer(0.3), "timeout")
+	await get_tree().create_timer(0.3).timeout
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Potion/throw.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
-	yield(player_animation_player, "animation_finished" )
+	await player_animation_player.animation_finished
 	throw(potion_name)
 	is_throwing = false
 	get_parent().state = MOVEMENT
 	get_parent().direction = direction
 	
 func throw(potion_name):
-	var potion = PotionProjectile.instance()
+	var potion = PotionProjectile.instantiate()
 	potion.potion_name = potion_name
 	potion.particles_transform = $CastDirection.transform
 	potion.target = get_global_mouse_position()
-	potion.position = $CastDirection/Position2D.global_position
+	potion.position = $CastDirection/Marker2D.global_position
 	get_node("../../../").add_child(potion)
 
 
 func cast(staff_name, spell_index):
 	get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").start_spell_cooldown(spell_index)
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	match spell_index:
 		1:
 			PlayerData.change_mana(-1)
@@ -416,15 +416,15 @@ func cast(staff_name, spell_index):
 			match spell_index:
 				1:
 					play_fire_projectile(false)
-					yield(self, "spell_finished")
+					await self.spell_finished
 				2:
 					play_fire_buff()
 				3:
 					play_fire_projectile(true)
-					yield(self, "spell_finished")
+					await self.spell_finished
 				4:
 					play_flamethrower()
-					yield(self, "spell_finished")
+					await self.spell_finished
 		"wind staff":
 			match spell_index:
 				1:
@@ -451,7 +451,7 @@ func cast(staff_name, spell_index):
 					play_earth_strike()
 				2:
 					play_earth_golem()
-					yield(self, "spell_finished")
+					await self.spell_finished
 				3:
 					play_earth_strike_buff()
 				4:
@@ -484,7 +484,7 @@ func set_invisibility():
 	$Tween.interpolate_property(composite_sprites.get_node("Legs"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
 	$Tween.start()
 	invisibility_active = true
-	yield(get_tree().create_timer(10.0), "timeout")
+	await get_tree().create_timer(10.0).timeout
 	invisibility_active = false
 	$Tween.interpolate_property(composite_sprites.get_node("Body"), "modulate:a", 0.15, 1.0, 0.5, 3, 1)
 	$Tween.start()
@@ -497,17 +497,17 @@ func set_invisibility():
 # Dark magic #
 func set_portal():
 	if Server.world.name.substr(0,4) == "Cave":
-		if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(get_global_mouse_position())) != -1:
+		if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.local_to_map(get_global_mouse_position())) != -1:
 			return
 	if not portal_1_position and not portal_2_position:
 		portal_1_position = get_global_mouse_position()
-		var spell = PortalNode.instance()
+		var spell = PortalNode.instantiate()
 		get_node("../../..").add_child(spell)
 		spell.name = "Portal1"
 		spell.position = get_global_mouse_position()
 	elif portal_1_position and not portal_2_position:
 		portal_2_position = get_global_mouse_position()
-		var spell = PortalNode.instance()
+		var spell = PortalNode.instantiate()
 		get_node("../../..").add_child(spell)
 		spell.name = "Portal2"
 		spell.position = get_global_mouse_position()
@@ -516,73 +516,73 @@ func set_portal():
 		get_node("../../../Portal2").queue_free()
 		portal_2_position = null
 		portal_1_position = get_global_mouse_position()
-		var spell = PortalNode.instance()
+		var spell = PortalNode.instantiate()
 		get_node("../../..").add_child(spell)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		spell.name = "Portal1"
 		spell.position = get_global_mouse_position()
 
 func spawn_demon_mage(debuff):
-	var spell = DemonMage.instance()
+	var spell = DemonMage.instantiate()
 	get_node("../../../").add_child(spell)
 	spell.debuff = debuff
 	spell.position = get_global_mouse_position()
 
 # Earth #
 func play_earth_strike():
-	var spell = EarthStrike.instance()
+	var spell = EarthStrike.instantiate()
 	get_node("../../../").add_child(spell)
 	spell.position = get_global_mouse_position()
 
 func play_earth_golem():
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", true)
-	var spell = EarthGolem.instance()
+	var spell = EarthGolem.instantiate()
 	add_child(spell)
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	composite_sprites.hide()
-	yield(get_tree().create_timer(2.0), "timeout")
+	await get_tree().create_timer(2.0).timeout
 	get_node("../Camera2D").start_small_shake()
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	composite_sprites.show()
-	yield(self, "spell_finished")
+	await self.spell_finished
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", false)
 
 func play_earth_strike_buff():
 	ending_mouse_point = get_global_mouse_position()
-	var current_pt = Tiles.valid_tiles.world_to_map(starting_mouse_point) * 32
+	var current_pt = Tiles.valid_tiles.local_to_map(starting_mouse_point) * 32
 	if abs(abs(ending_mouse_point.x) - abs(starting_mouse_point.x)) > abs(abs(ending_mouse_point.y) - abs(starting_mouse_point.y)): # Horizontal
 		if ending_mouse_point.x > starting_mouse_point.x: # Moving right:
 			while current_pt.x < ending_mouse_point.x:
-				var spell = EarthStrikeDebuff.instance()
+				var spell = EarthStrikeDebuff.instantiate()
 				spell.position = current_pt
 				get_node("../../../").add_child(spell)
 				current_pt.x += 96
-				yield(get_tree().create_timer(0.1), "timeout")
+				await get_tree().create_timer(0.1).timeout
 		else: # Moving left
 			while current_pt.x > ending_mouse_point.x:
-				var spell = EarthStrikeDebuff.instance()
+				var spell = EarthStrikeDebuff.instantiate()
 				spell.position = current_pt
 				get_node("../../../").add_child(spell)
 				current_pt.x -= 96
-				yield(get_tree().create_timer(0.1), "timeout")
+				await get_tree().create_timer(0.1).timeout
 	else: # Vertical 
 		if ending_mouse_point.y > starting_mouse_point.y: # Moving down:
 			while current_pt.y < ending_mouse_point.y:
-				var spell = EarthStrikeDebuff.instance()
+				var spell = EarthStrikeDebuff.instantiate()
 				spell.position = current_pt
 				get_node("../../../").add_child(spell)
 				current_pt.y += 64
-				yield(get_tree().create_timer(0.1), "timeout")
+				await get_tree().create_timer(0.1).timeout
 		else: # Moving up
 			while current_pt.y > ending_mouse_point.y:
-				var spell = EarthStrikeDebuff.instance()
+				var spell = EarthStrikeDebuff.instantiate()
 				spell.position = current_pt
 				get_node("../../../").add_child(spell)
 				current_pt.y -= 64
-				yield(get_tree().create_timer(0.1), "timeout")
+				await get_tree().create_timer(0.1).timeout
 	
 func play_earthquake():
-	var spell = Earthquake.instance()
+	var spell = Earthquake.instantiate()
 	add_child(spell)
 
 # Lightning #
@@ -590,39 +590,39 @@ func play_earthquake():
 func play_flash_step():
 	var mouse_pos = get_global_mouse_position()
 	if Server.world.name.substr(0,4) == "Cave":
-		if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.world_to_map(mouse_pos)) != -1:
+		if Tiles.cave_wall_tiles.get_cellv(Tiles.cave_wall_tiles.local_to_map(mouse_pos)) != -1:
 			return
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Lightning/teleport.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 	sound_effects.play()
-	yield(get_tree().create_timer(0.2), "timeout")
+	await get_tree().create_timer(0.2).timeout
 	get_parent().position = mouse_pos
-	composite_sprites.material.set_shader_param("flash_modifier", 0.7)
-	yield(get_tree().create_timer(0.2), "timeout")
-	composite_sprites.material.set_shader_param("flash_modifier", 0.0)
-	var spell = FlashStep.instance()
+	composite_sprites.material.set_shader_parameter("flash_modifier", 0.7)
+	await get_tree().create_timer(0.2).timeout
+	composite_sprites.material.set_shader_parameter("flash_modifier", 0.0)
+	var spell = FlashStep.instantiate()
 	add_child(spell)
 
 func play_lightning_projectile(debuff):
-	var spell = LightningProjectile.instance()
+	var spell = LightningProjectile.instantiate()
 	spell.debuff = debuff
 	spell.transform = $CastDirection.transform
-	spell.position = $CastDirection/Position2D.global_position
+	spell.position = $CastDirection/Marker2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
 	get_node("../../../").add_child(spell)
 
 func play_lightning_strike():
-	var spell = LightningStrike.instance()
+	var spell = LightningStrike.instantiate()
 	get_node("../../../").add_child(spell)
 	spell.position = get_global_mouse_position()
 
 # Ice #
 
 func play_ice_projectile(debuff):
-	var spell = IceProjectile.instance()
+	var spell = IceProjectile.instantiate()
 	spell.debuff = debuff
 	spell.projectile_transform = $CastDirection.transform
-	spell.position = $CastDirection/Position2D.global_position
+	spell.position = $CastDirection/Marker2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
 	get_node("../../../Projectiles").add_child(spell)
 
@@ -630,15 +630,15 @@ func play_ice_projectile(debuff):
 func play_ice_shield():
 	ice_shield_active = true
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", true)
-	var spell = IceDefense.instance()
+	var spell = IceDefense.instantiate()
 	add_child(spell)
-	yield(self, "spell_finished")
+	await self.spell_finished
 	ice_shield_active = false
 	get_node("../Area2Ds/HurtBox/CollisionShape2D").set_deferred("disabled", false)
 
 
 func play_blizzard():
-	var spell = BlizzardFog.instance()
+	var spell = BlizzardFog.instantiate()
 	spell.position = get_parent().position
 	get_node("../../../Projectiles").add_child(spell)
 
@@ -646,15 +646,15 @@ func play_blizzard():
 # Wind #
 
 func play_lingering_tornado():
-	var spell = LingeringTornado.instance()
+	var spell = LingeringTornado.instantiate()
 	spell.particles_transform = $CastDirection.transform
 	spell.target = get_global_mouse_position() + Vector2(0,32)
-	spell.position = $CastDirection/Position2D.global_position
+	spell.position = $CastDirection/Marker2D.global_position
 	get_node("../../../Projectiles").call_deferred("add_child", spell)
 
 func play_wind_projectile():
-	var spell = TornadoProjectile.instance()
-	spell.position = $CastDirection/Position2D.global_position
+	var spell = TornadoProjectile.instantiate()
+	spell.position = $CastDirection/Marker2D.global_position
 	spell.velocity = get_global_mouse_position() - spell.position
 	get_node("../../../").call_deferred("add_child", spell)
 
@@ -669,23 +669,23 @@ func play_dash():
 	set_player_whitened()
 	dashing = true
 	$GhostTimer.call_deferred("start")
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	$DustParticles.set_deferred("emitting", false)
 	$DustBurst.set_deferred("emitting", false)
 	dashing = false
 	$GhostTimer.call_deferred("stop")
 
 func set_player_whitened():
-	composite_sprites.material.call_deferred("set_shader_param", "flash_modifier", 0.7)
-	yield(get_tree().create_timer(0.5), "timeout")
-	composite_sprites.material.call_deferred("set_shader_param", "flash_modifier", 0.0)
+	composite_sprites.material.call_deferred("set_shader_parameter", "flash_modifier", 0.7)
+	await get_tree().create_timer(0.5).timeout
+	composite_sprites.material.call_deferred("set_shader_parameter", "flash_modifier", 0.0)
 
 var body_sprites = ["Arms", "Body"]
 
 func _on_GhostTimer_timeout():
 	for sprite_name in body_sprites:
 		var sprite = get_node("../CompositeSprites/" + sprite_name)
-		var ghost: Sprite = DashGhost.instance()
+		var ghost: Sprite2D = DashGhost.instantiate()
 		get_node("../../../").call_deferred("add_child", ghost)
 		ghost.global_position = global_position + Vector2(0,-32)
 		ghost.texture = sprite.texture
@@ -693,37 +693,37 @@ func _on_GhostTimer_timeout():
 		ghost.frame = sprite.frame
 
 func play_whirlwind():
-	var spell = Whirlwind.instance()
+	var spell = Whirlwind.instantiate()
 	call_deferred("add_child", spell)
 
 # Fire #
 func play_fire_projectile(debuff):
 	for i in range(3):
-		var spell = FireProjectile.instance()
+		var spell = FireProjectile.instantiate()
 		spell.debuff = debuff
-		spell.position = $CastDirection/Position2D.global_position
+		spell.position = $CastDirection/Marker2D.global_position
 		spell.velocity = get_global_mouse_position() - spell.position
 		get_node("../../../Projectiles").call_deferred("add_child", spell)
-		yield(get_tree().create_timer(0.35), "timeout")
+		await get_tree().create_timer(0.35).timeout
 	emit_signal("spell_finished")
 
 
 func play_fire_buff():
-	var spell = FireBuffFront.instance()
+	var spell = FireBuffFront.instantiate()
 	spell.name = "FIREBUFF"
 	get_node("../").call_deferred("add_child", spell)
-	var spell2 = FireBuffBehind.instance()
+	var spell2 = FireBuffBehind.instantiate()
 	get_node("../").call_deferred("add_child", spell2)
 	player_fire_buff = true
-	yield(get_tree().create_timer(FIRE_BUFF_LENGTH+0.25), "timeout")
+	await get_tree().create_timer(FIRE_BUFF_LENGTH+0.25).timeout
 	if not get_node("../").has_node("FIREBUFF"):
 		player_fire_buff = false
 	
 func play_flamethrower():
-	var spell = FlameThrower.instance()
+	var spell = FlameThrower.instantiate()
 	spell.name = "FlameThrower"
 	$CastDirection.call_deferred("add_child", spell)
-	spell.position = $CastDirection/Position2D.position
-	yield(get_tree().create_timer(4.0), "timeout")
+	spell.position = $CastDirection/Marker2D.position
+	await get_tree().create_timer(4.0).timeout
 	emit_signal("spell_finished")
 

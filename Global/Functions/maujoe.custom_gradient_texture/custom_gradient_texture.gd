@@ -1,4 +1,4 @@
-tool
+@tool
 extends ImageTexture
 class_name CustomGradientTexture
 
@@ -7,11 +7,11 @@ enum GradientType {LINEAR, RADIAL, RECTANGULAR}
 # Workaround for manual texture update
 # because updating it while editing the gradient doesn't work well
 enum Btn {ClickToUpdateTexture}
-export(bool) var click_to_update_texture = null setget _update_texture
+@export var click_to_update_texture: bool = false : set = _update_texture
 
-export(GradientType) var type = GradientType.LINEAR setget set_type
-export var size = Vector2(256, 256) setget set_size
-export(Gradient) var gradient setget set_gradient
+@export var type: GradientType = GradientType.LINEAR : set = set_type
+@export var size = Vector2(256, 256) : set = set_size
+@export var gradient: Gradient : set = set_gradient
 
 var data
 
@@ -23,14 +23,14 @@ func _update():
 	if not gradient:
 		return
 
-	data.lock()
+	false # data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var radius = (size - Vector2(1.0, 1.0)) / 2
 	var ratio = size.x / size.y
 
 	if type == GradientType.LINEAR:
 		for x in range(size.x):
-			var ofs = float(x) / (size.x - 1)
-			var color = gradient.interpolate(ofs)
+			var offset = float(x) / (size.x - 1)
+			var color = gradient.sample(offset)
 
 			for y in range(size.y):
 				data.set_pixel(x, y, color)
@@ -39,8 +39,8 @@ func _update():
 		for x in range(size.x):
 			for y in range(size.y):
 				var dist = Vector2(x / ratio, y).distance_to(Vector2(radius.x / ratio, radius.y))
-				var ofs = dist / radius.y
-				var color = gradient.interpolate(ofs)
+				var offset = dist / radius.y
+				var color = gradient.sample(offset)
 				data.set_pixel(x, y, color)
 
 	# Rectangular
@@ -49,17 +49,17 @@ func _update():
 			for y in range(size.y):
 				var dist_x = Vector2(x, 0).distance_to(Vector2(radius.x, 0))
 				var dist_y = Vector2(0, y).distance_to(Vector2(0, radius.y))
-				var ofs
+				var offset
 
 				if dist_x > dist_y * ratio:
-					ofs = dist_x / radius.x
+					offset = dist_x / radius.x
 				else:
-					ofs = dist_y / radius.y
+					offset = dist_y / radius.y
 
-				var color = gradient.interpolate(ofs)
+				var color = gradient.sample(offset)
 				data.set_pixel(x, y, color)
 
-	data.unlock()
+	false # data.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	create_from_image(data)
 
 # Workaournd that allow to manual update the texture

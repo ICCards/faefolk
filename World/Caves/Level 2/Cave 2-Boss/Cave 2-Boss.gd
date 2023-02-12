@@ -1,6 +1,6 @@
-extends YSort
+extends Node2D
 
-onready var FireBoss = load("res://World/Caves/Bosses/FireBoss.tscn")
+@onready var FireBoss = load("res://World3D/Caves/Bosses/FireBoss.tscn")
 
 var is_changing_scene: bool = false
 var nav_node
@@ -23,8 +23,8 @@ func _ready():
 
 func spawn_boss():
 	if PlayerData.player_data["skill_experience"]["fire"] == 0:
-		var boss = FireBoss.instance()
-		boss.position = Vector2(rand_range(20,25), rand_range(20,25))*32
+		var boss = FireBoss.instantiate()
+		boss.position = Vector2(randf_range(20,25), randf_range(20,25))*32
 		$Enemies.add_child(boss)
 
 func advance_up_cave_level(): 

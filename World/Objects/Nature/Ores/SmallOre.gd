@@ -1,9 +1,9 @@
 extends Node2D
 
 
-onready var small_ore_sprite: Sprite = $SmallOre
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var small_ore_sprite: Sprite2D = $SmallOre
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var rng = RandomNumberGenerator.new()
 
 var ore_object
@@ -46,8 +46,8 @@ func hit(tool_name):
 		else:
 			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 12), amount)
 		animation_player.call_deferred("play", "small_ore_break")
-		yield(sound_effects, "finished")
-		yield(get_tree().create_timer(0.6), "timeout")
+		await sound_effects.finished
+		await get_tree().create_timer(0.6).timeout
 		call_deferred("queue_free")
 	elif health >= 1:
 		sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
@@ -63,7 +63,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		call_deferred("hit", _area.tool_name)
 	if _area.special_ability == "fire buff":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-8, 8), rand_range(-16,0)))
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(-16,0)))
 
 
 func _on_VisibilityNotifier2D_screen_entered():

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/monsterdead.mp3-553d0ced6e0dc1b979d6f961796a151d.mp3str"
+uid="uid://dg1u1qy8taaw0"
+path="res://.godot/imported/monsterdead.mp3-553d0ced6e0dc1b979d6f961796a151d.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Enemies/monsterdead.mp3"
-dest_files=[ "res://.import/monsterdead.mp3-553d0ced6e0dc1b979d6f961796a151d.mp3str" ]
+dest_files=["res://.godot/imported/monsterdead.mp3-553d0ced6e0dc1b979d6f961796a151d.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

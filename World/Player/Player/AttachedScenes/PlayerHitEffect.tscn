@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://World/Player/Player/AttachedScripts/PlayerHitEffect.gd" type="Script" id=1]
+[ext_resource path="res://World3D/Player/Player/AttachedScripts/PlayerHitEffect.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/MenuTitle.tres" type="Theme" id=2]
 
 [sub_resource type="Animation" id=1]
@@ -8,34 +8,34 @@ resource_name = "Animate1"
 length = 1.2
 step = 0.01
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Label:rect_position:x")
+tracks/0/path = NodePath("Label:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, 80, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1.2 )
+"points": PackedFloat32Array( 0, 0, 0, 0, 0, 80, 0, 0, 0, 0 ),
+"times": PackedFloat32Array( 0, 1.2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Label:rect_position:y")
+tracks/1/path = NodePath("Label:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.16, -41.2542, 6.4061, -0.14, -50.0829, 0.13, -35.3859, 14.9043, -0.1, -45.8222, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.65, 1.2 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.16, -41.2542, 6.4061, -0.14, -50.0829, 0.13, -35.3859, 14.9043, -0.1, -45.8222, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.65, 1.2 )
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Label:rect_scale")
+tracks/2/path = NodePath("Label:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1.2 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.4, 0.4 ), Vector2( 0.7, 0.7 ) ]
 }
@@ -46,8 +46,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 1, 1.2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -58,8 +58,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1.2 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
@@ -69,34 +69,34 @@ resource_name = "Animate2"
 length = 1.2
 step = 0.01
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Label:rect_position:x")
+tracks/0/path = NodePath("Label:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, -80, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1.2 )
+"points": PackedFloat32Array( 0, 0, 0, 0, 0, -80, 0, 0, 0, 0 ),
+"times": PackedFloat32Array( 0, 1.2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Label:rect_position:y")
+tracks/1/path = NodePath("Label:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.18, -31.4024, 6.55145, -0.1, -38.4383, 0.11, -24.3873, 10.7371, -0.0700001, -29.219, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.65, 1.2 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.18, -31.4024, 6.55145, -0.1, -38.4383, 0.11, -24.3873, 10.7371, -0.0700001, -29.219, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.65, 1.2 )
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Label:rect_scale")
+tracks/2/path = NodePath("Label:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1.2 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.4, 0.4 ), Vector2( 0.7, 0.7 ) ]
 }
@@ -107,8 +107,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 1, 1.2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -119,8 +119,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1.2 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
@@ -128,34 +128,34 @@ tracks/4/keys = {
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Label:rect_position:x")
+tracks/0/path = NodePath("Label:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Label:rect_position:y")
+tracks/1/path = NodePath("Label:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Label:rect_scale")
+tracks/2/path = NodePath("Label:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0.4, 0.4 ) ]
 }
@@ -166,8 +166,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
@@ -178,8 +178,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -191,9 +191,9 @@ script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 visible = false
-margin_right = 99.9957
-margin_bottom = 113.0
-rect_scale = Vector2( 0.4, 0.4 )
+offset_right = 99.9957
+offset_bottom = 113.0
+scale = Vector2( 0.4, 0.4 )
 theme = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 8

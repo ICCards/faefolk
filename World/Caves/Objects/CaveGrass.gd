@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var rng = RandomNumberGenerator.new()
+@onready var rng = RandomNumberGenerator.new()
 var variety
 var bodyEnteredFlag = false
 var bodyEnteredFlag2 = false
@@ -54,17 +54,17 @@ func _on_Area2D_area_entered(area):
 	front_health -= 1
 	if front_health == 0:
 		$AnimationPlayer.play("animate front")
-		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
+		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
 #		if Util.chance(50):
 #			InstancedScenes.intitiateItemDrop("green grass",position+Vector2(0,-16),1)
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer.play("front break")
-		yield($AnimationPlayer, "animation_finished")
+		await $AnimationPlayer.animation_finished
 		is_front_visible = false
 		destroy()
 	else:
-		yield(get_tree().create_timer(rand_range(0.0, 0.5)), "timeout")
+		await get_tree().create_timer(randf_range(0.0, 0.5)).timeout
 		$AnimationPlayer.play("animate front")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
@@ -73,17 +73,17 @@ func _on_BackArea2D_area_entered(area):
 	back_heath -= 1
 	if back_heath == 0:
 		$AnimationPlayer.play("animate front")
-		yield(get_tree().create_timer(rand_range(0.0, 0.25)), "timeout")
+		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
 #		if Util.chance(50):
 #			InstancedScenes.intitiateItemDrop("green grass",position+Vector2(0,-8), 1)
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()
 		$AnimationPlayer2.play("back break")
-		yield($AnimationPlayer2, "animation_finished")
+		await $AnimationPlayer2.animation_finished
 		is_back_visible = false
 		destroy()
 	else:
-		yield(get_tree().create_timer(rand_range(0.1, 0.5)), "timeout")
+		await get_tree().create_timer(randf_range(0.1, 0.5)).timeout
 		$AnimationPlayer2.play("animate back")
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$SoundEffects.play()

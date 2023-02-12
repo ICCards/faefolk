@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://World/Objects/Tiles/WoodGate.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://World/Objects/Tiles/GateFront.gd" type="Script" id=2]
+[ext_resource path="res://World3D/Objects/Tiles/WoodGate.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://World3D/Objects/Tiles/GateFront.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 32, 16 )
@@ -27,8 +27,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
@@ -44,8 +44,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.05, 0.15, 0.25, 0.35, 0.4 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( -2, 0 ), Vector2( 1, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ) ]
 }
@@ -57,9 +57,9 @@ script = ExtResource( 2 )
 
 [node name="GatePos" type="Node2D" parent="."]
 
-[node name="Gate" type="AnimatedSprite" parent="GatePos"]
+[node name="Gate" type="AnimatedSprite2D" parent="GatePos"]
 position = Vector2( 32, -53 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "New Anim"
 
 [node name="MovementCollision" type="StaticBody2D" parent="."]

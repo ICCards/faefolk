@@ -9,7 +9,7 @@ static func getRandomInt():
   return randi() % MODULO_8_BIT
 
 static func uuidbin():
-  # 16 random bytes with the bytes on index 6 and 8 modified
+  # 16 random bytes with the bytes checked index 6 and 8 modified
   return [
 	getRandomInt(), getRandomInt(), getRandomInt(), getRandomInt(),
 	getRandomInt(), getRandomInt(), ((getRandomInt()) & 0x0f) | 0x40, getRandomInt(),
@@ -18,7 +18,7 @@ static func uuidbin():
   ]
 
 static func v4():
-  # 16 random bytes with the bytes on index 6 and 8 modified
+  # 16 random bytes with the bytes checked index 6 and 8 modified
   var b = uuidbin()
 
   return '%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x' % [

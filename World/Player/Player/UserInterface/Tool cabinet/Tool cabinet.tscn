@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Images/User interface/chest/chest-tab.png" type="Texture" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/ChestSlots.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=8]
+[ext_resource path="res://World3D/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Images/User interface/chest/chest-tab.png" type="Texture2D" id=2]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Tool cabinet/Tool cabinet.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture2D" id=4]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/ChestSlots.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Images/User interface/inventory/sprite_frames/wood-frame.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture2D" id=8]
 [ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=9]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=10]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=10]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=11]
 
 [node name="Tool cabinet" type="Control"]
 anchor_left = 0.5
@@ -20,10 +20,10 @@ anchor_bottom = 0.5
 script = ExtResource( 3 )
 
 [node name="Trash" parent="." instance=ExtResource( 1 )]
-margin_left = -640.0
-margin_top = -360.0
-margin_right = -586.0
-margin_bottom = -360.0
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -586.0
+offset_bottom = -360.0
 
 [node name="ItemDescription" parent="." instance=ExtResource( 9 )]
 visible = false
@@ -31,44 +31,44 @@ visible = false
 [node name="ChestSlotsImg" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -640.0
-margin_top = -360.0
-margin_right = -214.0
-margin_bottom = -120.0
-rect_scale = Vector2( 3, 3 )
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -214.0
+offset_bottom = -120.0
+scale = Vector2( 3, 3 )
 mouse_filter = 2
 texture = ExtResource( 2 )
 stretch_mode = 4
 
 [node name="InventorySlots" parent="." instance=ExtResource( 10 )]
-margin_left = -295.0
-margin_top = 126.0
-margin_right = 293.0
-margin_bottom = 234.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 12
+offset_left = -295.0
+offset_top = 126.0
+offset_right = 293.0
+offset_bottom = 234.0
+custom_constants/v_separation = 12
+custom_constants/h_separation = 12
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource( 5 )]
-margin_left = -295.0
-margin_top = 66.0
-margin_right = 293.0
-margin_bottom = 120.0
-custom_constants/hseparation = 12
+offset_left = -295.0
+offset_top = 66.0
+offset_right = 293.0
+offset_bottom = 120.0
+custom_constants/h_separation = 12
 
 [node name="ChestSlots" parent="." instance=ExtResource( 6 )]
-margin_left = -295.0
-margin_top = -180.0
-margin_right = 293.0
-margin_bottom = -12.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 12
+offset_left = -295.0
+offset_top = -180.0
+offset_right = 293.0
+offset_bottom = -12.0
+custom_constants/v_separation = 12
+custom_constants/h_separation = 12
 
 [node name="ExitBtn" type="TextureButton" parent="."]
-margin_left = 278.0
-margin_top = -246.0
-margin_right = 292.0
-margin_bottom = -232.0
-rect_scale = Vector2( 3, 3 )
+offset_left = 278.0
+offset_top = -246.0
+offset_right = 292.0
+offset_bottom = -232.0
+scale = Vector2( 3, 3 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 4 )
 expand = true
@@ -76,10 +76,10 @@ expand = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="MenuTitle" parent="." instance=ExtResource( 11 )]
-margin_left = -88.0
-margin_top = -243.0
-margin_right = 277.0
-margin_bottom = -168.0
+offset_left = -88.0
+offset_top = -243.0
+offset_right = 277.0
+offset_bottom = -168.0
 text = "Tool cabinet"
 
 [node name="Frame" type="TextureRect" parent="."]
@@ -87,11 +87,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -362.0
-margin_right = -214.0
-margin_bottom = -122.0
-rect_scale = Vector2( 3, 3 )
+offset_left = -640.0
+offset_top = -362.0
+offset_right = -214.0
+offset_bottom = -122.0
+scale = Vector2( 3, 3 )
 mouse_filter = 2
 texture = ExtResource( 7 )
 stretch_mode = 4

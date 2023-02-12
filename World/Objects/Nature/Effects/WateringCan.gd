@@ -1,12 +1,8 @@
-extends AnimatedSprite
+extends AnimatedSprite2D
 
 
 
 func _ready():
-	start()
-
-
-func start():
 	play()
-	yield(self, "animation_finished")
+	await self.animation_finished
 	queue_free()

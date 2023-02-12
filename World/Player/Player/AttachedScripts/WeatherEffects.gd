@@ -5,18 +5,18 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	randomize()
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	hide()
 	
 
 
 func play_lightning_effect():
-	if Server.player_node and has_node("/root/World"):
-		if Server.player_node.position.distance_to(get_node("/root/World/RoamingStorm").position) <= 2000:
+	if Server.player_node and has_node("/root/World3D"):
+		if Server.player_node.position.distance_to(get_node("/root/World3D/RoamingStorm").position) <= 2000:
 			$AnimationPlayer.play("lightning day")
 			$ThunderSoundEffects.volume_db = Sounds.return_adjusted_sound_db("ambient", -12)
 			$ThunderSoundEffects.play()
 
 func _on_LightningTimer_timeout():
 	play_lightning_effect()
-	$LightningTimer.start(rand_range(30,60))
+	$LightningTimer.start(randf_range(30,60))

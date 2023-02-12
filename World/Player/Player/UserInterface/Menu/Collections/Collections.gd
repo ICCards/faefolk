@@ -53,8 +53,8 @@ func _physics_process(delta):
 		$ItemNameBox.hide()
 
 func set_adjusted_pos():
-	yield(get_tree(), "idle_frame")
-	var height = $CollectionItemDescription/GridContainer.rect_size.y
+	await get_tree().idle_frame
+	var height = $CollectionItemDescription/GridContainer.size.y
 	adjusted_pos = get_local_mouse_position() + Vector2(20 , 25)
 
 func initialize():

@@ -1,21 +1,21 @@
 [gd_scene load_steps=103 format=2]
 
-[ext_resource path="res://Assets/Images/Forage/animal/raw egg.png" type="Texture" id=1]
-[ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=2]
-[ext_resource path="res://World/Objects/Projectiles/PotionProjectile.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b6.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b1.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b7.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b3.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b12.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b4.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b5.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b8.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b9.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b10.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b11.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b2.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Images/Magic/Potions/smoke5_100x100.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Images/Forage/animal/raw egg.png" type="Texture2D" id=1]
+[ext_resource path="res://World3D/Objects/Projectiles/Hitbox.gd" type="Script" id=2]
+[ext_resource path="res://World3D/Objects/Projectiles/PotionProjectile.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b6.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b1.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b7.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b3.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b12.png" type="Texture2D" id=8]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b4.png" type="Texture2D" id=9]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b5.png" type="Texture2D" id=10]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b8.png" type="Texture2D" id=11]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b9.png" type="Texture2D" id=12]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b10.png" type="Texture2D" id=13]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b11.png" type="Texture2D" id=14]
+[ext_resource path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b2.png" type="Texture2D" id=15]
+[ext_resource path="res://Assets/Images/Magic/Potions/smoke5_100x100.png" type="Texture2D" id=16]
 
 [sub_resource type="Curve" id=80]
 min_value = -400.0
@@ -27,8 +27,8 @@ max_value = 2.5
 _data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=82]
-offsets = PoolRealArray( 0.000555864, 0.281938, 0.687225, 1 )
-colors = PoolColorArray( 1, 1, 0.780392, 1, 0.858824, 0.815686, 0.705882, 1, 0.686275, 0.615686, 0.513726, 1, 0.333333, 0.294118, 0.2, 1 )
+offsets = PackedFloat32Array( 0.000555864, 0.281938, 0.687225, 1 )
+colors = PackedColorArray( 1, 1, 0.780392, 1, 0.858824, 0.815686, 0.705882, 1, 0.686275, 0.615686, 0.513726, 1, 0.333333, 0.294118, 0.2, 1 )
 
 [sub_resource type="Curve" id=83]
 max_value = 3.0
@@ -45,8 +45,8 @@ max_value = 5.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 5 ), 10.0041, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=86]
-offsets = PoolRealArray( 0, 0.994737, 1 )
-colors = PoolColorArray( 0.51083, 0.51083, 0.51083, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.994737, 1 )
+colors = PackedColorArray( 0.51083, 0.51083, 0.51083, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.0
@@ -61,8 +61,8 @@ max_value = 2.5
 _data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=75]
-offsets = PoolRealArray( 0, 0.949541 )
-colors = PoolColorArray( 0.937255, 0.619608, 0.619608, 1, 0.937255, 0.14902, 0.14902, 1 )
+offsets = PackedFloat32Array( 0, 0.949541 )
+colors = PackedColorArray( 0.937255, 0.619608, 0.619608, 1, 0.937255, 0.14902, 0.14902, 1 )
 
 [sub_resource type="Curve" id=76]
 min_value = -200.0
@@ -74,7 +74,7 @@ max_value = 3.0
 _data = [ Vector2( 0, 2.73165 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.73165 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=78]
-colors = PoolColorArray( 0.937255, 0.784314, 0.784314, 1, 0.937255, 0.14902, 0.14902, 1 )
+colors = PackedColorArray( 0.937255, 0.784314, 0.784314, 1, 0.937255, 0.14902, 0.14902, 1 )
 
 [sub_resource type="Curve" id=2]
 min_value = -200.0
@@ -86,7 +86,7 @@ max_value = 2.5
 _data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=4]
-colors = PoolColorArray( 0.784314, 0.843137, 0.937255, 1, 0.14902, 0.466667, 0.937255, 1 )
+colors = PackedColorArray( 0.784314, 0.843137, 0.937255, 1, 0.14902, 0.466667, 0.937255, 1 )
 
 [sub_resource type="Curve" id=5]
 max_value = 3.0
@@ -97,7 +97,7 @@ radius = 64.0
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 15 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 8 ) ],
+"sprite_frames": [ ExtResource( 5 ), ExtResource( 15 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 8 ) ],
 "loop": false,
 "name": "default",
 "speed": 12.0
@@ -345,7 +345,7 @@ region = Rect2( 300, 700, 100, 100 )
 
 [sub_resource type="SpriteFrames" id=70]
 animations = [ {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ) ],
+"sprite_frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ) ],
 "loop": false,
 "name": "default",
 "speed": 24.0
@@ -361,8 +361,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
@@ -373,8 +373,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -385,8 +385,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ 0 ]
 }
@@ -397,8 +397,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.3, 0.6 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
@@ -409,8 +409,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -421,8 +421,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -433,8 +433,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -445,8 +445,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "play_glass_break_sound"
@@ -463,8 +463,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -475,8 +475,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -487,8 +487,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -499,8 +499,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -511,8 +511,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -523,8 +523,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.2, 0.4 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
@@ -535,8 +535,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "play_glass_break_sound"
@@ -553,8 +553,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -565,8 +565,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -577,8 +577,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -589,8 +589,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -601,8 +601,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -613,8 +613,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ 0 ]
 }
@@ -625,8 +625,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.4, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.4, 1.1 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
@@ -637,8 +637,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "play_glass_break_sound"
@@ -654,8 +654,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "play_egg_break_sound"
@@ -668,8 +668,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -680,8 +680,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -692,8 +692,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -708,8 +708,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -720,8 +720,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -732,8 +732,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -744,8 +744,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.2, 0.4 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
@@ -756,8 +756,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -768,8 +768,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -780,15 +780,15 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "play_glass_break_sound"
 } ]
 }
 
-[node name="PotionProjectile" type="KinematicBody2D"]
+[node name="PotionProjectile" type="CharacterBody2D"]
 script = ExtResource( 3 )
 
 [node name="HealthTrailParticles" type="Node2D" parent="."]
@@ -1102,7 +1102,7 @@ scale_amount_random = 1.0
 scale_amount_curve = SubResource( 85 )
 color_ramp = SubResource( 86 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 
@@ -1246,21 +1246,21 @@ script = ExtResource( 2 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="DestructionPotion" type="AnimatedSprite" parent="."]
+[node name="DestructionPotion" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -10 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 7 )
+sprite_frames = SubResource( 7 )
 frame = 11
 playing = true
 
-[node name="PoisonPotion" type="AnimatedSprite" parent="."]
+[node name="PoisonPotion" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color( 0.27, 1.2, 0, 1 )
 position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 70 )
+sprite_frames = SubResource( 70 )
 frame = 59
 playing = true
 

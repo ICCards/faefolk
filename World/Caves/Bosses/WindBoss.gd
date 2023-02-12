@@ -1,13 +1,13 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
-onready var DashGhost = load("res://World/Objects/Magic/Wind/DashGhost.tscn")
-onready var Whirlwind = load("res://World/Objects/Magic/Wind/Whirlwind.tscn")
-onready var LingeringTornado = load("res://World/Objects/Magic/Wind/LingeringTornado.tscn")
+@onready var TornadoProjectile = load("res://World3D/Objects/Magic/Wind/TornadoProjectile.tscn")
+@onready var DashGhost = load("res://World3D/Objects/Magic/Wind/DashGhost.tscn")
+@onready var Whirlwind = load("res://World3D/Objects/Magic/Wind/Whirlwind.tscn")
+@onready var LingeringTornado = load("res://World3D/Objects/Magic/Wind/LingeringTornado.tscn")
 
-onready var boss_sprite: Sprite = $Boss
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var boss_sprite: Sprite2D = $Boss
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var direction: String = "down"
 var changing_phase: bool = false
@@ -66,34 +66,34 @@ func attack():
 			amt = 5
 		state = ATTACK
 		animation_player.play("attack")
-		yield(animation_player, "animation_finished")
+		await animation_player.animation_finished
 		if destroyed:
 			return
 		animation_player.play("loop")
 		state = FLY
 		if phase == 1:
-			var spell = TornadoProjectile.instance()
+			var spell = TornadoProjectile.instantiate()
 			spell.is_hostile_projectile = true
-			spell.position =$ShootDirection/Position2D.global_position
+			spell.position =$ShootDirection/Marker2D.global_position
 			spell.velocity = Server.player_node.position - position
 			get_node("../../../").add_child(spell)
-			yield(get_tree().create_timer(0.5), "timeout")
+			await get_tree().create_timer(0.5).timeout
 		elif phase == 2:
 			for i in range(3):
-				var spell = LingeringTornado.instance()
-				spell.position =$ShootDirection/Position2D.global_position
+				var spell = LingeringTornado.instantiate()
+				spell.position =$ShootDirection/Marker2D.global_position
 				spell.is_hostile_projectile = true
 				spell.target = Server.player_node.position
 				get_node("../../").add_child(spell)
-				yield(get_tree().create_timer(0.5), "timeout")
+				await get_tree().create_timer(0.5).timeout
 		else:
 			for i in range(12):
-				var spell = LingeringTornado.instance()
-				spell.position =$ShootDirection/Position2D.global_position
+				var spell = LingeringTornado.instantiate()
+				spell.position =$ShootDirection/Marker2D.global_position
 				spell.is_hostile_projectile = true
-				spell.target = Vector2(rand_range(15,45), rand_range(15,45))*32
+				spell.target = Vector2(randf_range(15,45), randf_range(15,45))*32
 				get_node("../../").add_child(spell)
-				yield(get_tree().create_timer(0.05), "timeout")
+				await get_tree().create_timer(0.05).timeout
 	else:
 		var directions = ["down", "left", "right", "up"]
 		directions.shuffle()
@@ -119,13 +119,19 @@ func move(_velocity: Vector2) -> void:
 		return
 	elif frozen:
 		boss_sprite.modulate = Color("00c9ff")
-		velocity = move_and_slide(_velocity*0.75)
+		set_velocity(_velocity*0.75)
+		move_and_slide()
+		velocity = velocity
 	elif poisoned:
 		boss_sprite.modulate = Color("009000")
-		velocity = move_and_slide(_velocity*0.9)
+		set_velocity(_velocity*0.9)
+		move_and_slide()
+		velocity = velocity
 	else:
 		boss_sprite.modulate = Color("ffffff")
-		velocity = move_and_slide(_velocity)
+		set_velocity(_velocity)
+		move_and_slide()
+		velocity = velocity
 
 func _physics_process(delta):
 	if destroyed:
@@ -195,7 +201,7 @@ func destroy(killed_by_player):
 	animation_player.play("death")
 	$Timers/AttackTimer.stop()
 	$Timers/WhirlwindTimer.stop()
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -223,14 +229,14 @@ func set_phase():
 		return
 	elif health > 350 and phase != 2:
 		play_change_phase()
-		yield(get_tree().create_timer(1.0), "timeout")
+		await get_tree().create_timer(1.0).timeout
 		phase = 2
 		MAX_SPEED = 125
 		$Timers/WhirlwindTimer.start()
 		play_whirlwind()
 	elif health < 350 and phase != 3:
 		play_change_phase()
-		yield(get_tree().create_timer(1.0), "timeout")
+		await get_tree().create_timer(1.0).timeout
 		MAX_SPEED = 150
 		phase = 3
 
@@ -240,32 +246,32 @@ func play_change_phase():
 	$UpgradePhase.show()
 	$UpgradePhase.frame = 0
 	$UpgradePhase.playing = true
-	yield($UpgradePhase, "animation_finished")
+	await $UpgradePhase.animation_finished
 	animation_player.play()
 	changing_phase = false
 	$UpgradePhase.hide()
 
 func play_whirlwind():
-	var spell = Whirlwind.instance()
+	var spell = Whirlwind.instantiate()
 	spell.is_hostile = true
 	call_deferred("add_child", spell)
 
 func start_attack_state():
 	state = TRANSITION_TO_FLY
 	animation_player.play("transition to fly")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	state = FLY
 	animation_player.play("loop")
 	
 func end_attack_state():
 	state = TRANSITION_TO_IDLE
 	animation_player.play("transition to idle")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	state = IDLE
 	animation_player.play("loop")
 	
 func _on_ChangePos_timeout():
-	random_pos = Vector2(rand_range(10,40), rand_range(10,40))*32
+	random_pos = Vector2(randf_range(10,40), randf_range(10,40))*32
 
 func _on_WhirlwindTimer_timeout():
 	if not changing_phase:

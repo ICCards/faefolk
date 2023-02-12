@@ -1,16 +1,16 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Images/Inventory UI/Workbench/workbench menu.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Inventory UI/Workbench/workbench menu.png" type="Texture2D" id=1]
 
 [node name="Bg" type="TextureRect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -472.0
-margin_top = -440.0
-margin_right = 161.0
-margin_bottom = 108.0
-rect_scale = Vector2( 1.5, 1.5 )
+offset_left = -472.0
+offset_top = -440.0
+offset_right = 161.0
+offset_bottom = 108.0
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 stretch_mode = 4

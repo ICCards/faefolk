@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 
@@ -17,17 +17,21 @@ func choose(choices):
 	return choices[rand_index]
 
 func tojson(body):
-  var jsonParseResult: JSONParseResult = JSON.parse(body)
-  return jsonParseResult.result	
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(body)
+	var jsonParseResult: JSON = test_json_conv.get_data()
+	return jsonParseResult.result	
 	
 func jsonParse(body):
-  var stringResult: String = body.get_string_from_utf8()
-  var jsonParseResult: JSONParseResult = JSON.parse(stringResult)
-  return jsonParseResult.result
+	var stringResult: String = body.get_string_from_utf8()
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(stringResult)
+	var jsonParseResult: JSON = test_json_conv.get_data()
+	return jsonParseResult.result
 
 func toMessage(name, data):
 	data["n"] = name
-	return JSON.print(data).to_utf8()
+	return JSON.stringify(data).to_utf8_buffer()
 	
 #func string_to_vector2(string := "") -> Vector2:
 #	if string:
@@ -43,8 +47,8 @@ func toMessage(name, data):
 func string_to_vector2(string) -> Vector2:
 	if string is String:
 		var new_string: String = string
-		new_string.erase(0, 1)
-		new_string.erase(new_string.length() - 1, 1)
+		new_string.left(1)
+		new_string.left(-1)
 		var array: Array = new_string.split(", ")
 
 		return Vector2(array[0], array[1])
@@ -129,15 +133,15 @@ func return_adjusted_item_name(item_name):
 	
 
 func get_random_idle_pos(pos,max_move_dist):
-	var random1 = rand_range(max_move_dist-200,max_move_dist)
-	var random2 = rand_range(max_move_dist-200,max_move_dist)
+	var random1 = randf_range(max_move_dist-200,max_move_dist)
+	var random2 = randf_range(max_move_dist-200,max_move_dist)
 	if Util.chance(50):
 		random1*=-1
 	if Util.chance(50):
 		random2*=-1
-	if Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos+Vector2(random1,random2))) != -1:
+	if Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.local_to_map(pos+Vector2(random1,random2))) != -1:
 		return pos+Vector2(random1,random2)
-	elif Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos-Vector2(random1,random2))) != -1:
+	elif Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.local_to_map(pos-Vector2(random1,random2))) != -1:
 		return pos-Vector2(random1,random2)
 	else:
 		return pos

@@ -12,5 +12,5 @@ func _ready():
 	$Label.text = str(abs(amount))
 	rng.randomize()
 	$AnimationPlayer.play("Animate" + str(rng.randi_range(1,2)))
-	yield($AnimationPlayer, "animation_finished")
+	await $AnimationPlayer.animation_finished
 	queue_free()

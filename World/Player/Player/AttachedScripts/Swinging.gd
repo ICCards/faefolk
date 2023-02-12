@@ -1,15 +1,15 @@
 extends Node2D
 
 
-onready var sound_effects = $SoundEffects
-onready var axe_pickaxe_swing = $AxePickaxeSwing
-onready var sword_swing = $SwordSwing
-onready var watering_can_particles1 = $WateringCanParticles1
-onready var watering_can_particles2 = $WateringCanParticles2
+@onready var sound_effects = $SoundEffects
+@onready var axe_pickaxe_swing = $AxePickaxeSwing
+@onready var sword_swing = $SwordSwing
+@onready var watering_can_particles1 = $WateringCanParticles1
+@onready var watering_can_particles2 = $WateringCanParticles2
 
-onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
-onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
-onready var composite_sprites = get_node("../CompositeSprites")
+@onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
+@onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
+@onready var composite_sprites = get_node("../CompositeSprites")
 
 
 var rng = RandomNumberGenerator.new()
@@ -36,7 +36,7 @@ var thread = Thread.new()
 
 func sword_swing(item_name,attack_index):
 	if not thread.is_active():
-		thread.start(self,"whoAmISwordSwing",[item_name,attack_index])
+		thread.start(Callable(self,"whoAmISwordSwing").bind([item_name,attack_index]))
 
 func whoAmISwordSwing(data):
 	call_deferred("sword_swing_deferred",data[0],data[1])
@@ -62,7 +62,7 @@ func sword_swing_deferred(item_name,attack_index):
 			player_animation_player.play(animation)
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
-		yield(player_animation_player, "animation_finished" )
+		await player_animation_player.animation_finished
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down and attack_index == 1:
 			if valid_tool_health():
@@ -79,7 +79,7 @@ func sword_swing_deferred(item_name,attack_index):
 
 func swing(item_name):
 	if not thread.is_active():
-		thread.start(self,"whoAmISwing",item_name)
+		thread.start(Callable(self,"whoAmISwing").bind(item_name))
 
 func whoAmISwing(item_name):
 	call_deferred("swing_deferred",item_name)
@@ -113,7 +113,7 @@ func swing_deferred(item_name):
 			player_animation_player.play("axe pickaxe swing")
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
-		yield(player_animation_player, "animation_finished" )
+		await player_animation_player.animation_finished
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down:
 			if valid_tool_health():
@@ -148,15 +148,15 @@ func set_swing_collision_layer_and_position(tool_name, direction):
 		axe_pickaxe_swing.tool_name = "punch"
 
 func set_hoed_tile(direction):
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		var pos = Util.set_swing_position(global_position, direction)
-		var location = Tiles.valid_tiles.world_to_map(pos)
+		var location = Tiles.valid_tiles.local_to_map(pos)
 		if Tiles.valid_tiles.get_cellv(location) == 0 and \
 		Tiles.hoed_tiles.get_cellv(location) == -1 and \
 		Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles) and \
 		Tiles.foundation_tiles.get_cellv(location) == -1:
 			MapData.set_hoed_tile(location)
-			yield(get_tree().create_timer(0.6), "timeout")
+			await get_tree().create_timer(0.6).timeout
 			InstancedScenes.play_hoed_dirt_effect(location)
 			Stats.decrease_tool_health()
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
@@ -166,12 +166,12 @@ func set_hoed_tile(direction):
 			Tiles.hoed_tiles.update_bitmask_region()
 
 func remove_hoed_tile(direction):
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		var pos = Util.set_swing_position(global_position, direction)
-		var location = Tiles.hoed_tiles.world_to_map(pos)
+		var location = Tiles.hoed_tiles.local_to_map(pos)
 		if Tiles.hoed_tiles.get_cellv(location) != -1:
 			MapData.remove_hoed_tile(location)
-			yield(get_tree().create_timer(0.6), "timeout")
+			await get_tree().create_timer(0.6).timeout
 			Stats.decrease_tool_health()
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -182,10 +182,10 @@ func remove_hoed_tile(direction):
 			Tiles.watered_tiles.update_bitmask_area(location)
 
 func set_watered_tile():
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		direction = get_parent().direction
 		var pos = Util.set_swing_position(global_position, direction)
-		var location = Tiles.hoed_tiles.world_to_map(pos)
+		var location = Tiles.hoed_tiles.local_to_map(pos)
 		if Tiles.ocean_tiles.get_cellv(location) != -1 or Tiles.is_well_tile(location, direction):
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water fill.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
@@ -196,14 +196,14 @@ func set_watered_tile():
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/water.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
-			yield(get_tree().create_timer(0.2), "timeout")
+			await get_tree().create_timer(0.2).timeout
 			InstancedScenes.play_watering_can_effect(location)
 			if direction != "UP":
 				watering_can_particles1.position = Util.returnAdjustedWateringCanPariclePos(direction)
 				watering_can_particles1.emitting = true
 				watering_can_particles2.position = Util.returnAdjustedWateringCanPariclePos(direction)
 				watering_can_particles2.emitting = true
-			yield(get_tree().create_timer(0.4), "timeout")
+			await get_tree().create_timer(0.4).timeout
 			watering_can_particles1.emitting = false
 			watering_can_particles2.emitting = false
 			if Tiles.hoed_tiles.get_cellv(location) != -1:

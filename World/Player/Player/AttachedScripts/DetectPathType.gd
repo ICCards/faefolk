@@ -3,8 +3,8 @@ extends Node2D
 
 func _process(delta):
 	if Server.world:
-		if has_node("/root/World"):
-			var location = Tiles.ocean_tiles.world_to_map(Server.player_node.position)
+		if has_node("/root/World3D"):
+			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
 			if Tiles.isCenterBitmaskTile(location, Tiles.deep_ocean_tiles):
 				if Sounds.current_footsteps_sound != Sounds.swimming:
 					Sounds.current_footsteps_sound = Sounds.swimming
@@ -14,7 +14,7 @@ func _process(delta):
 					Sounds.current_footsteps_sound = Sounds.dirt_footsteps
 					Sounds.emit_signal("footsteps_sound_change")
 		else:
-			var location = Tiles.ocean_tiles.world_to_map(Server.player_node.position)
+			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
 			if Server.world.has_node("Tiles/BridgeTiles"):
 				if Server.world.get_node("Tiles/BridgeTiles").get_cellv(location) != -1:
 					if Sounds.current_footsteps_sound != Sounds.wood_footsteps:
@@ -39,7 +39,7 @@ func _process(delta):
 				
 
 func _ready():
-	if has_node("/root/World"):
+	if has_node("/root/World3D"):
 		Sounds.current_footsteps_sound = Sounds.dirt_footsteps
 	else:
 		Sounds.current_footsteps_sound = Sounds.stone_footsteps

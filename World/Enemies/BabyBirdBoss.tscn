@@ -1,18 +1,18 @@
 [gd_scene load_steps=53 format=2]
 
-[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/down.png" type="Texture" id=1]
-[ext_resource path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=3]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=4]
-[ext_resource path="res://World/Enemies/BabyBirdBoss.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Images/Enemies/shadow sprite.png" type="Texture" id=6]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/up.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/down.png" type="Texture2D" id=1]
+[ext_resource path="res://World3D/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture2D" id=3]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World3D/Enemies/BabyBirdBoss.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/Enemies/shadow sprite.png" type="Texture2D" id=6]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/up.png" type="Texture2D" id=9]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=10]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/left.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/right.png" type="Texture" id=13]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/left.png" type="Texture2D" id=12]
+[ext_resource path="res://Assets/Images/Enemies/Bird Boss/baby/right.png" type="Texture2D" id=13]
 
 [sub_resource type="CircleShape2D" id=165]
 radius = 4.0
@@ -83,22 +83,22 @@ region = Rect2( 144, 0, 48, 48 )
 
 [sub_resource type="SpriteFrames" id=170]
 animations = [ {
-"frames": [ SubResource( 166 ), SubResource( 167 ), SubResource( 168 ), SubResource( 169 ) ],
+"sprite_frames": [ SubResource( 166 ), SubResource( 167 ), SubResource( 168 ), SubResource( 169 ) ],
 "loop": true,
 "name": "fly down",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 179 ), SubResource( 180 ), SubResource( 181 ), SubResource( 182 ) ],
+"sprite_frames": [ SubResource( 179 ), SubResource( 180 ), SubResource( 181 ), SubResource( 182 ) ],
 "loop": true,
 "name": "fly left",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 183 ), SubResource( 184 ), SubResource( 185 ), SubResource( 186 ) ],
+"sprite_frames": [ SubResource( 183 ), SubResource( 184 ), SubResource( 185 ), SubResource( 186 ) ],
 "loop": true,
 "name": "fly right",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 187 ), SubResource( 188 ), SubResource( 189 ), SubResource( 190 ) ],
+"sprite_frames": [ SubResource( 187 ), SubResource( 188 ), SubResource( 189 ), SubResource( 190 ) ],
 "loop": true,
 "name": "fly up",
 "speed": 6.0
@@ -162,7 +162,7 @@ region = Rect2( 312, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=171]
 animations = [ {
-"frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 146 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
+"sprite_frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 146 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
@@ -181,8 +181,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
@@ -198,8 +198,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.15 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ 1.0, 0.0 ]
 }
@@ -216,8 +216,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -228,8 +228,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -240,8 +240,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -252,8 +252,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ true ]
 }
@@ -264,8 +264,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -276,8 +276,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -288,8 +288,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -300,8 +300,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -312,8 +312,8 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -328,8 +328,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -340,8 +340,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -352,8 +352,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -364,8 +364,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -376,8 +376,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -388,8 +388,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -400,8 +400,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -412,8 +412,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -424,13 +424,13 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
 
-[node name="BabyBirdBoss" type="KinematicBody2D"]
+[node name="BabyBirdBoss" type="CharacterBody2D"]
 script = ExtResource( 5 )
 
 [node name="SetEnemyDirection" parent="." instance=ExtResource( 2 )]
@@ -455,24 +455,24 @@ position = Vector2( 0, -27 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 165 )
 
-[node name="BatSprite" type="AnimatedSprite" parent="."]
+[node name="BatSprite" type="AnimatedSprite2D" parent="."]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 material = ExtResource( 10 )
 position = Vector2( 0, -42 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 170 )
+sprite_frames = SubResource( 170 )
 animation = "fly down"
 frame = 2
 playing = true
 
-[node name="Electricity" type="AnimatedSprite" parent="."]
+[node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 171 )
+sprite_frames = SubResource( 171 )
 frame = 6
 playing = true
 
@@ -503,7 +503,7 @@ shape = SubResource( 175 )
 anims/RESET = SubResource( 176 )
 anims/death = SubResource( 177 )
 
-[node name="ShadowSprite" type="Sprite" parent="."]
+[node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color( 0, 0, 0, 0.435294 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 6 )

@@ -35,7 +35,7 @@ func start(type):
 		if get_parent().health <= 0 and not get_parent().destroyed:
 			get_parent().destroy(true)
 		else:
-			yield(get_tree().create_timer(1.5), "timeout")
+			await get_tree().create_timer(1.5).timeout
 
 
 func start_poison_state():

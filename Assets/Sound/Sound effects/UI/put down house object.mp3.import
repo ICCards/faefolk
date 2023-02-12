@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/put down house object.mp3-2eeaf42d63de917a48d22d8598bbc0a4.mp3str"
+uid="uid://b1r1ygvrjv6ui"
+path="res://.godot/imported/put down house object.mp3-2eeaf42d63de917a48d22d8598bbc0a4.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/UI/put down house object.mp3"
-dest_files=[ "res://.import/put down house object.mp3-2eeaf42d63de917a48d22d8598bbc0a4.mp3str" ]
+dest_files=["res://.godot/imported/put down house object.mp3-2eeaf42d63de917a48d22d8598bbc0a4.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,10 +1,10 @@
 extends Node2D
 
-onready var GridSquareLabel = load("res://World/Map/GridSquareLabel.tscn")
-onready var playerIcon = $Map/PlayerIcon
-onready var stormIcon = $Map/StormIcon
-onready var stormIcon2 = $Map/StormIcon2
-onready var miniMap = $Map
+@onready var GridSquareLabel = load("res://World3D/Map/GridSquareLabel.tscn")
+@onready var playerIcon = $Map/PlayerIcon
+@onready var stormIcon = $Map/StormIcon
+@onready var stormIcon2 = $Map/StormIcon2
+@onready var miniMap = $Map
 var player 
 var roamingStorm
 var roamingStorm2
@@ -27,7 +27,7 @@ enum Tiles {
 }
 
 func _input(event):
-	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/World"):
+	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/World3D"):
 		if event.is_action_pressed("open_map"):
 			Server.player_node.actions.destroy_placable_object()
 			Server.world.get_node("WorldAmbience").call_deferred("hide")
@@ -81,10 +81,10 @@ func draw_grid():
 func draw_grid_labels():
 	for x in range(NUM_ROWS):
 		for y in range(NUM_COLUMNS):
-			var gridSquareLabel = GridSquareLabel.instance()
+			var gridSquareLabel = GridSquareLabel.instantiate()
 			gridSquareLabel.initialize(alphabet[y] + str(x+1))
 			gridSquareLabel.name = str(alphabet[y] + str(x+1))
-			gridSquareLabel.rect_position = Vector2(x*200, y*200) + Vector2(2, 2)
+			gridSquareLabel.position = Vector2(x*200, y*200) + Vector2(2, 2)
 			add_child(gridSquareLabel)
 	
 func _physics_process(delta):
@@ -92,8 +92,8 @@ func _physics_process(delta):
 		playerIcon.position = Server.player_node.position
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 		set_direction(Server.player_node.direction)
-		roamingStorm = get_node("/root/World/RoamingStorm")
-		roamingStorm2 = get_node("/root/World/RoamingStorm2")
+		roamingStorm = get_node("/root/World3D/RoamingStorm")
+		roamingStorm2 = get_node("/root/World3D/RoamingStorm2")
 		stormIcon.position = roamingStorm.position
 		stormIcon2.position = roamingStorm2.position
 

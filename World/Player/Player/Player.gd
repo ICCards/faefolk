@@ -1,20 +1,20 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var animation_player = $CompositeSprites/AnimationPlayer
-onready var sword_swing = $Swing/SwordSwing
-onready var composite_sprites = $CompositeSprites
-onready var holding_item = $HoldingItem
+@onready var animation_player = $CompositeSprites/AnimationPlayer
+@onready var sword_swing = $Swing/SwordSwing
+@onready var composite_sprites = $CompositeSprites
+@onready var holding_item = $HoldingItem
 
-onready var actions = $Actions
-onready var user_interface = $Camera2D/UserInterface
-onready var sound_effects = $Sounds/SoundEffects
+@onready var actions = $Actions
+@onready var user_interface = $Camera2D/UserInterface
+@onready var sound_effects = $Sounds/SoundEffects
 
 var running = false
 var character
 var current_building_item = null
 var running_speed_change = 1.0
 
-onready var state = MOVEMENT
+@onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
 	SWINGING,
@@ -46,22 +46,22 @@ var FRICTION := 8
 var velocity := Vector2.ZERO
 var input_vector
 var is_building_world = false
-onready var _character = load("res://Global/Data/Characters.gd")
+@onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	PlayerData.connect("active_item_updated", self, "set_held_object")
+	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 	if is_building_world:
 		state = DYING
 		$Camera2D/UserInterface/LoadingScreen.show()
-		yield(get_tree().create_timer(5.0), "timeout")
+		await get_tree().create_timer(5.0).timeout
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	set_held_object()
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	Server.isLoaded = true
 
 
@@ -139,11 +139,11 @@ func _unhandled_input(event):
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
 				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
 					player_action(item_name, item_category)
-				elif (event is InputEventMouseButton and event.button_index == BUTTON_RIGHT):
+				elif (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT):
 					if item_category == "Magic":
 						$Magic.cast_spell(item_name, 2)
 					elif item_name == "bow":
@@ -167,7 +167,7 @@ func _unhandled_input(event):
 							$Magic.draw_bow(1)
 						elif Util.isSword(item_name):
 							$Swing.sword_swing(item_name, 1)
-					elif event.is_action_pressed("slot2") or (event is InputEventMouseButton and event.button_index == BUTTON_RIGHT):
+					elif event.is_action_pressed("slot2") or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 2)
 						elif item_name == "bow":

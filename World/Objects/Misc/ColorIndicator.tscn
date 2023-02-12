@@ -1,114 +1,90 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://cx276tgkqafh7"]
 
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/middle left.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/bottom middle.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/middle right.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/top middle.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/top left.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/bottom left.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/bottom right.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/middle middle.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/Misc/Color Indicator/Green/top right.png" type="Texture" id=9]
-[ext_resource path="res://World/Objects/Misc/ColorIndicator.gd" type="Script" id=10]
+[ext_resource type="Texture2D" uid="uid://eoc4t8k8xuqt" path="res://Assets/Images/Misc/Color Indicator/Green/middle left.png" id="1"]
+[ext_resource type="Script" path="res://World/Objects/Misc/ColorIndicator.gd" id="1_7vkdo"]
+[ext_resource type="Texture2D" uid="uid://dmpa6uf5ytbtw" path="res://Assets/Images/Misc/Color Indicator/Green/bottom middle.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cr7gp841mhecj" path="res://Assets/Images/Misc/Color Indicator/Green/middle right.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://113t13tj2nrb" path="res://Assets/Images/Misc/Color Indicator/Green/top middle.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bfpjw51gq43s7" path="res://Assets/Images/Misc/Color Indicator/Green/top left.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dfi5ud6n7254e" path="res://Assets/Images/Misc/Color Indicator/Green/bottom left.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://c8tg26x5qa1by" path="res://Assets/Images/Misc/Color Indicator/Green/bottom right.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://cbplq1qq7t0nh" path="res://Assets/Images/Misc/Color Indicator/Green/middle middle.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://dtinksdqekfgh" path="res://Assets/Images/Misc/Color Indicator/Green/top right.png" id="9"]
 
 [node name="ColorIndicator" type="Node2D"]
-modulate = Color( 1, 1, 1, 0.588235 )
+modulate = Color(1, 1, 1, 0.588235)
 z_index = 3
-script = ExtResource( 10 )
+script = ExtResource("1_7vkdo")
 
 [node name="Grid" type="VBoxContainer" parent="."]
-margin_right = 32.0
-margin_bottom = 32.0
-mouse_filter = 2
+offset_right = 32.0
+offset_bottom = 32.0
 size_flags_vertical = 3
-custom_constants/separation = 0
+mouse_filter = 2
 alignment = 2
 
 [node name="Top" type="HBoxContainer" parent="Grid"]
-margin_right = 32.0
-margin_bottom = 6.0
+layout_mode = 2
 mouse_filter = 2
-custom_constants/separation = 0
 
 [node name="Left" type="TextureRect" parent="Grid/Top"]
-margin_right = 6.0
-margin_bottom = 6.0
+layout_mode = 2
 mouse_filter = 2
-texture = ExtResource( 5 )
+texture = ExtResource("5")
 
 [node name="Middle" type="TextureRect" parent="Grid/Top"]
-margin_left = 6.0
-margin_right = 26.0
-margin_bottom = 6.0
-mouse_filter = 2
+layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource( 4 )
+mouse_filter = 2
+texture = ExtResource("4")
 stretch_mode = 2
 
 [node name="Right" type="TextureRect" parent="Grid/Top"]
-margin_left = 26.0
-margin_right = 32.0
-margin_bottom = 6.0
+layout_mode = 2
 mouse_filter = 2
-texture = ExtResource( 9 )
+texture = ExtResource("9")
 
 [node name="Middle" type="HBoxContainer" parent="Grid"]
-margin_top = 6.0
-margin_right = 32.0
-margin_bottom = 26.0
-mouse_filter = 2
+layout_mode = 2
 size_flags_vertical = 3
-custom_constants/separation = 0
+mouse_filter = 2
 
 [node name="Left" type="TextureRect" parent="Grid/Middle"]
-margin_right = 6.0
-margin_bottom = 20.0
+layout_mode = 2
 mouse_filter = 2
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 stretch_mode = 2
 
 [node name="Middle" type="TextureRect" parent="Grid/Middle"]
-margin_left = 6.0
-margin_right = 26.0
-margin_bottom = 20.0
-mouse_filter = 2
+layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource( 8 )
+mouse_filter = 2
+texture = ExtResource("8")
 stretch_mode = 2
 
 [node name="Right" type="TextureRect" parent="Grid/Middle"]
-margin_left = 26.0
-margin_right = 32.0
-margin_bottom = 20.0
+layout_mode = 2
 mouse_filter = 2
-texture = ExtResource( 3 )
+texture = ExtResource("3")
 stretch_mode = 2
 
 [node name="Bottom" type="HBoxContainer" parent="Grid"]
-margin_top = 26.0
-margin_right = 32.0
-margin_bottom = 32.0
+layout_mode = 2
 mouse_filter = 2
-custom_constants/separation = 0
 
 [node name="Left" type="TextureRect" parent="Grid/Bottom"]
-margin_right = 6.0
-margin_bottom = 6.0
+layout_mode = 2
 mouse_filter = 2
-texture = ExtResource( 6 )
+texture = ExtResource("6")
 
 [node name="Middle" type="TextureRect" parent="Grid/Bottom"]
-margin_left = 6.0
-margin_right = 26.0
-margin_bottom = 6.0
-mouse_filter = 2
+layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource( 2 )
+mouse_filter = 2
+texture = ExtResource("2")
 stretch_mode = 2
 
 [node name="Right" type="TextureRect" parent="Grid/Bottom"]
-margin_left = 26.0
-margin_right = 32.0
-margin_bottom = 6.0
+layout_mode = 2
 mouse_filter = 2
-texture = ExtResource( 7 )
+texture = ExtResource("7")

@@ -25,7 +25,7 @@ const clamTypes = ["blue clam","pink clam","red clam"]
 const starfishTypes = ["starfish", "baby starfish"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
-var openSimplexNoise := OpenSimplexNoise.new()
+var openSimplexNoise := FastNoiseLite.new()
 var rng = RandomNumberGenerator.new()
 var _uuid = load("res://helpers/UUID.gd")
 var uuid
@@ -58,7 +58,7 @@ func end_altittude():
 	mutex.lock()
 	if thread_counter == 3:
 		#call_deferred("build_world")
-		thread_world.start(self, "build_world")
+		thread_world.start(Callable(self,"build_world"))
 	else:	
 		thread_counter += 1
 	mutex.unlock()
@@ -70,7 +70,7 @@ func end_temperature():
 	mutex.lock()
 	if thread_counter == 3:
 		#call_deferred("build_world")
-		thread_world.start(self, "build_world")
+		thread_world.start(Callable(self,"build_world"))
 	else:	
 		thread_counter += 1
 	mutex.unlock()
@@ -81,7 +81,7 @@ func end_moisture():
 	mutex.lock()
 	if thread_counter == 3:
 		#call_deferred("build_world")
-		thread_world.start(self, "build_world")
+		thread_world.start(Callable(self,"build_world"))
 	else:	
 		thread_counter += 1
 	mutex.unlock()
@@ -93,7 +93,7 @@ func build_altittude(octaves,period):
 		"period":period,
 		"ending_function":"end_altittude"
 	};
-	thread_altittude.start(self, "generate_map", data)	
+	thread_altittude.start(Callable(self,"generate_map").bind(data))	
 	
 func build_temperature(octaves,period):
 	print("building temperature")
@@ -102,7 +102,7 @@ func build_temperature(octaves,period):
 		"period":period,
 		"ending_function":"end_temperature"
 	};
-	thread_temperature.start(self, "generate_map", data)
+	thread_temperature.start(Callable(self,"generate_map").bind(data))
 	
 func build_moisture(octaves,period):
 	print("building moisture")
@@ -111,17 +111,17 @@ func build_moisture(octaves,period):
 		"period":period,
 		"ending_function":"end_moisture"
 	};
-	thread_moisture.start(self, "generate_map", data)
+	thread_moisture.start(Callable(self,"generate_map").bind(data))
 
 func build_world():
 	print("building world")
 	uuid = _uuid.new()
-	get_node("/root/World/Loading").call_deferred("set_phase","Building terrain")
+	get_node("/root/World3D/Loading").call_deferred("set_phase","Building terrain")
 	build_terrian()
-	#yield(get_tree().create_timer(1.0), "timeout")
+	#await get_tree().create_timer(1.0).timeout
 	set_cave_entrance()
-	#get_node("/root/World/Loading").call_deferred("set_phase","Building nature")
-	#yield(get_tree().create_timer(1.0), "timeout")
+	#get_node("/root/World3D/Loading").call_deferred("set_phase","Building nature")
+	#await get_tree().create_timer(1.0).timeout
 	generate_trees(snow,"snow")
 	generate_trees(forest,"forest")
 	generate_trees(desert,"desert")
@@ -136,10 +136,10 @@ func build_world():
 	generate_weeds(plains,"plains")
 	generate_beach_forage(beach)
 	generate_animals()
-#	yield(get_tree().create_timer(1.0), "timeout")
-	#yield(get_tree().create_timer(1.0), "timeout")
-	#get_node("/root/World/Loading").call_deferred("set_phase","Saving data")
-	#yield(get_tree().create_timer(1.0), "timeout")
+#	await get_tree().create_timer(1.0).timeout
+	#await get_tree().create_timer(1.0).timeout
+	#get_node("/root/World3D/Loading").call_deferred("set_phase","Saving data")
+	#await get_tree().create_timer(1.0).timeout
 	## make faster
 	fix_tiles()
 	##################
@@ -150,11 +150,11 @@ func build_map():
 func build():
 	rng.randomize()
 	randomize()
-	#yield(get_tree().create_timer(1.0), "timeout")
+	#await get_tree().create_timer(1.0).timeout
 	build_temperature(5,300)
-	#yield(get_tree().create_timer(1.0), "timeout")
+	#await get_tree().create_timer(1.0).timeout
 	build_moisture(5,300)
-	#yield(get_tree().create_timer(2.0), "timeout")
+	#await get_tree().create_timer(2.0).timeout
 	build_altittude(5,150)
 	
 
@@ -232,7 +232,7 @@ func _fix_tiles(value):
 	if thread_tile_counter == tile_arrays.size():
 		print("fixed")
 		#call_deferred("build_world")
-		thread_world_update.start(self, "update_fixed_map")
+		thread_world_update.start(Callable(self,"update_fixed_map"))
 	else:	
 		thread_tile_counter += 1
 		print("fixing: "+str(thread_tile_counter))
@@ -247,10 +247,10 @@ func update_fixed_map():
 	MapData.world["dirt"] = dirt
 	MapData.world["beach"] = beach
 	print("BUILT TERRAIN FINAL")
-#	get_node("/root/World/Loading").call_deferred("queue_free")
+#	get_node("/root/World3D/Loading").call_deferred("queue_free")
 	save_starting_world_data()
 	MapData.add_world_data_to_chunks()
-	get_node("/root/World/Loading").call_deferred("queue_free")
+	get_node("/root/World3D/Loading").call_deferred("queue_free")
 	call_deferred("build_map")
 
 func fix_tiles():
@@ -258,7 +258,7 @@ func fix_tiles():
 	for tile_array in tile_arrays: 
 		var tileThread = Thread.new()
 		threads.append(tileThread)
-		tileThread.start(self, "_fix_tiles",tile_array)
+		tileThread.start(Callable(self,"_fix_tiles").bind(tile_array))
 		
 
 
@@ -433,7 +433,7 @@ func generate_map(data):
 	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
 	custom_gradient.size = Vector2(width,height)
 	var gradient_data = custom_gradient.get_data()
-	gradient_data.lock()
+	false # gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for x in width:
 		for y in height:
 			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5

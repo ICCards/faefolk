@@ -1,6 +1,6 @@
-extends YSort
+extends Node2D
 
-onready var WindBoss = load("res://World/Caves/Bosses/WindBoss.tscn")
+@onready var WindBoss = load("res://World3D/Caves/Bosses/WindBoss.tscn")
 
 var is_changing_scene: bool = false
 var nav_node
@@ -32,8 +32,8 @@ func _on_SpawnBatTimer_timeout():
 
 func spawn_boss():
 	if PlayerData.player_data["skill_experience"]["wind"] == 0:
-		var boss = WindBoss.instance()
-		boss.position = Vector2(rand_range(20,40), rand_range(20,40))*32
+		var boss = WindBoss.instantiate()
+		boss.position = Vector2(randf_range(20,40), randf_range(20,40))*32
 		$Enemies.add_child(boss)
 
 func _on_UpdateNavigation_timeout():

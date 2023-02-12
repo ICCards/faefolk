@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var rng := RandomNumberGenerator.new()
 var thread := Thread.new()
@@ -17,7 +17,7 @@ var temp_health = 3
 
 func _ready():
 	call_deferred("set_dimensions")
-	#thread.start(self,"set_dimensions_deferred",null)
+	#thread.start(Callable(self,"set_dimensions_deferred").bind(null))
 
 #func set_dimensions_deferred(value):
 #	call_deferred("set_dimensions")
@@ -25,266 +25,266 @@ func _ready():
 func set_dimensions():
 	rng.randomize()
 	item_name = Util.return_adjusted_item_name(item_name)
-	$Position2D.scale = Constants.dimensions_dict[item_name]
+	$Marker2D.scale = Constants.dimensions_dict[item_name]
 	if item_name == "campfire" or item_name == "torch":
-		$Light2D.enabled = true
+		$PointLight2D.enabled = true
 		if item_name == "campfire":
-			$Position2D/CampfireInteractiveArea/CollisionShape2D.disabled = false
-			$Position2D/CampfireInteractiveArea.object_name = "campfire"
-			$Position2D/CampfireInteractiveArea.name = str(id)
+			$Marker2D/CampfireInteractiveArea/CollisionShape2D.disabled = false
+			$Marker2D/CampfireInteractiveArea.object_name = "campfire"
+			$Marker2D/CampfireInteractiveArea.name = str(id)
 			if PlayerData.player_data["campfires"].has(id):
 				pass
 			else:
 				PlayerData.player_data["campfires"][id] = {}
 	elif item_name == "wood chest" or item_name == "stone chest":
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-		$Position2D/StaticBody2D/CollisionShape2D.disabled = false
-		$Position2D/InteractiveArea.object_name = "chest"
-		$Position2D/InteractiveArea.object_level = ""
-		$Position2D/InteractiveArea.name = str(id)
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/StaticBody2D/CollisionShape2D.disabled = false
+		$Marker2D/InteractiveArea.object_name = "chest"
+		$Marker2D/InteractiveArea.object_level = ""
+		$Marker2D/InteractiveArea.name = str(id)
 		if PlayerData.player_data["chests"].has(id):
 			pass
 		else:
 			PlayerData.player_data["chests"][id] = {}
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
+				$Marker2D.rotation_degrees = 90
 				if item_name == "wood chest":
-					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
+					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
 				else:
-					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
+					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
 				$ChestPos/Chest.flip_h = false
 				$ChestPos/Chest.position = Vector2(18,0)
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.position = Vector2(16, -32)
 				$ChestPos/Chest.position = Vector2(16, -32)
 				Tiles.remove_valid_tiles(location, Vector2(1,2))
 			"right":
 				if item_name == "wood chest":
-					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
+					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
 				else:
-					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
+					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
 				$ChestPos/Chest.flip_h = true
-				$Position2D.rotation_degrees = 270
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 270
+				$Marker2D.position = Vector2(16, -32)
 				$ChestPos/Chest.position = Vector2(16, -32)
 				Tiles.remove_valid_tiles(location, Vector2(1,2))
 			"up":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 180
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 180
 				$ChestPos/Chest.position = Vector2(32,-32)
 				if item_name == "wood chest":
-					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/wood/up.tres")
+					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/up.tres")
 				else:
-					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/stone/Up.tres")
+					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Up.tres")
 				Tiles.remove_valid_tiles(location, Vector2(2,1))
 			"down":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 0
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 0
 				$ChestPos/Chest.position = Vector2(32,-32)
 				if item_name == "wood chest":
-					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/wood/down.tres")
+					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/down.tres")
 				else:
-					$ChestPos/Chest.frames = load("res://Assets/Images/Animations/chest/stone/Down.tres")
+					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Down.tres")
 				Tiles.remove_valid_tiles(location, Vector2(2,1))
 		$ChestPos/Chest.animation = "open"
 		$ChestPos/Chest.show()
 	elif item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3":
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-		$Position2D/InteractiveArea.object_name = "workbench"
-		$Position2D/InteractiveArea.object_level = item_name.substr(11)
-		$Position2D/InteractiveArea.name = str(id)
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/InteractiveArea.object_name = "workbench"
+		$Marker2D/InteractiveArea.object_level = item_name.substr(11)
+		$Marker2D/InteractiveArea.name = str(id)
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 90
+				$Marker2D.position = Vector2(16, -32)
 			"right":
-				$Position2D.rotation_degrees = 270
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 270
+				$Marker2D.position = Vector2(16, -32)
 			"up":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 180
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 0
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 0
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-		$Position2D/InteractiveArea.object_name = "stove"
-		$Position2D/InteractiveArea.object_level = item_name.substr(7)
-		$Position2D/InteractiveArea.name = str(id)
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/InteractiveArea.object_name = "stove"
+		$Marker2D/InteractiveArea.object_level = item_name.substr(7)
+		$Marker2D/InteractiveArea.name = str(id)
 		if PlayerData.player_data["stoves"].has(id):
 			pass
 		else:
 			PlayerData.player_data["stoves"][id] = {}
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 90
+				$Marker2D.position = Vector2(16, -32)
 			"right":
-				$Position2D.rotation_degrees = 270
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 270
+				$Marker2D.position = Vector2(16, -32)
 			"up":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 180
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 0
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 0
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-		$Position2D/InteractiveArea.object_name = "grain mill"
-		$Position2D/InteractiveArea.object_level = item_name.substr(12)
-		$Position2D/InteractiveArea.name = str(id)
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/InteractiveArea.object_name = "grain mill"
+		$Marker2D/InteractiveArea.object_level = item_name.substr(12)
+		$Marker2D/InteractiveArea.name = str(id)
 		if PlayerData.player_data["grain_mills"].has(id):
 			pass
 		else:
 			PlayerData.player_data["grain_mills"][id] = {}
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 90
+				$Marker2D.position = Vector2(16, -32)
 			"right":
-				$Position2D.rotation_degrees = 270
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 270
+				$Marker2D.position = Vector2(16, -32)
 			"up":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 180
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 0
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 0
 #	elif item_name == "brewing table #1" or item_name == "brewing table #2" or item_name == "brewing table #3":
-#		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-#		$Position2D/InteractiveArea.object_name = "brewing table"
-#		$Position2D/InteractiveArea.object_level = item_name.substr(12)
-#		$Position2D/InteractiveArea.name = str(id)
+#		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+#		$Marker2D/InteractiveArea.object_name = "brewing table"
+#		$Marker2D/InteractiveArea.object_level = item_name.substr(12)
+#		$Marker2D/InteractiveArea.name = str(id)
 #		if PlayerData.player_data["brewing_tables"].has(id):
 #			pass
 #		else:
 #			PlayerData.player_data["brewing_tables"][id] = {}
 #		match direction:
 #			"left":
-#				$Position2D.rotation_degrees = 90
-#				$Position2D.position = Vector2(16, -32)
+#				$Marker2D.rotation_degrees = 90
+#				$Marker2D.position = Vector2(16, -32)
 #			"right":
-#				$Position2D.rotation_degrees = 270
-#				$Position2D.position = Vector2(16, -32)
+#				$Marker2D.rotation_degrees = 270
+#				$Marker2D.position = Vector2(16, -32)
 #			"up":
-#				$Position2D.position = Vector2(32, -16)
-#				$Position2D.rotation_degrees = 180
+#				$Marker2D.position = Vector2(32, -16)
+#				$Marker2D.rotation_degrees = 180
 #			"down":
-#				$Position2D.position = Vector2(32, -16)
-#				$Position2D.rotation_degrees = 0
+#				$Marker2D.position = Vector2(32, -16)
+#				$Marker2D.rotation_degrees = 0
 	elif item_name == "furnace":
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-		$Position2D/InteractiveArea.object_name = "furnace"
-		$Position2D/InteractiveArea.object_level = ""
-		$Position2D/InteractiveArea.name = str(id)
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/InteractiveArea.object_name = "furnace"
+		$Marker2D/InteractiveArea.object_level = ""
+		$Marker2D/InteractiveArea.name = str(id)
 		if PlayerData.player_data["furnaces"].has(id):
 			pass
 		else:
 			PlayerData.player_data["furnaces"][id] = {}
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
+				$Marker2D.rotation_degrees = 90
 			"right":
-				$Position2D.rotation_degrees = 270
+				$Marker2D.rotation_degrees = 270
 			"up":
-				$Position2D.rotation_degrees = 180
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.rotation_degrees = 0
+				$Marker2D.rotation_degrees = 0
 	elif item_name == "tool cabinet":
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-		$Position2D/InteractiveArea.object_name = "tool cabinet"
-		$Position2D/InteractiveArea.object_level = ""
-		$Position2D/InteractiveArea.name = str(id)
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/InteractiveArea.object_name = "tool cabinet"
+		$Marker2D/InteractiveArea.object_level = ""
+		$Marker2D/InteractiveArea.name = str(id)
 		if PlayerData.player_data["chests"].has(id):
 			pass
 		else:
 			PlayerData.player_data["chests"][id] = {}
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 90
+				$Marker2D.position = Vector2(16, -32)
 			"right":
-				$Position2D.rotation_degrees = 270
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 270
+				$Marker2D.position = Vector2(16, -32)
 			"up":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 180
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 0
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 0
 	elif item_name == "dresser":
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 90
+				$Marker2D.position = Vector2(16, -32)
 			"right":
-				$Position2D.rotation_degrees = 270
-				$Position2D.position = Vector2(16, -32)
+				$Marker2D.rotation_degrees = 270
+				$Marker2D.position = Vector2(16, -32)
 			"up":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 180
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.position = Vector2(32, -16)
-				$Position2D.rotation_degrees = 0
+				$Marker2D.position = Vector2(32, -16)
+				$Marker2D.rotation_degrees = 0
 	elif item_name == "well":
-		$Position2D.position = Vector2(48, -32)
+		$Marker2D.position = Vector2(48, -32)
 	elif item_name == "couch":
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
-				$Position2D.position = Vector2(32, -48)
+				$Marker2D.rotation_degrees = 90
+				$Marker2D.position = Vector2(32, -48)
 			"right":
-				$Position2D.rotation_degrees = 270
-				$Position2D.position =  Vector2(32, -48)
+				$Marker2D.rotation_degrees = 270
+				$Marker2D.position =  Vector2(32, -48)
 			"up":
-				$Position2D.position = Vector2(48, -32)
-				$Position2D.rotation_degrees = 180
+				$Marker2D.position = Vector2(48, -32)
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.position = Vector2(48, -32)
-				$Position2D.rotation_degrees = 0
+				$Marker2D.position = Vector2(48, -32)
+				$Marker2D.rotation_degrees = 0
 	elif item_name == "table":
 		if direction == "left" or direction == "right":
-			$Position2D.rotation_degrees = 90
-			$Position2D.position = Vector2(32, -48)
+			$Marker2D.rotation_degrees = 90
+			$Marker2D.position = Vector2(32, -48)
 		else:
-			$Position2D.position = Vector2(48, -32)
-			$Position2D.rotation_degrees = 180
+			$Marker2D.position = Vector2(48, -32)
+			$Marker2D.rotation_degrees = 180
 	elif item_name == "armchair":
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
-		$Position2D.position =  Vector2(32, -32)
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D.position =  Vector2(32, -32)
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
+				$Marker2D.rotation_degrees = 90
 			"right":
-				$Position2D.rotation_degrees = 270
+				$Marker2D.rotation_degrees = 270
 			"up":
-				$Position2D.rotation_degrees = 180
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.rotation_degrees = 0
+				$Marker2D.rotation_degrees = 0
 	elif item_name == "chair":
-		$Position2D/InteractiveArea.object_direction = direction
-		$Position2D/InteractiveArea.object_position = return_adjusted_chair_position(direction)
-		$Position2D/InteractiveArea.object_name = "chair"
-		$Position2D/InteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/InteractiveArea.object_direction = direction
+		$Marker2D/InteractiveArea.object_position = return_adjusted_chair_position(direction)
+		$Marker2D/InteractiveArea.object_name = "chair"
+		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
 		match direction:
 			"left":
-				$Position2D.rotation_degrees = 90
+				$Marker2D.rotation_degrees = 90
 			"right":
-				$Position2D.rotation_degrees = 270
+				$Marker2D.rotation_degrees = 270
 			"up":
-				$Position2D.rotation_degrees = 180
+				$Marker2D.rotation_degrees = 180
 			"down":
-				$Position2D.rotation_degrees = 0
+				$Marker2D.rotation_degrees = 0
 	elif item_name == "bed":
-		$Position2D.position =  Vector2(32, -32)
-		$Position2D/BedInteractiveArea/CollisionShape2D.disabled = false
-		$Position2D/BedInteractiveArea.object_name = "bed"
-		$Position2D/BedInteractiveArea.object_position = position + Vector2(32,-32)
+		$Marker2D.position =  Vector2(32, -32)
+		$Marker2D/BedInteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/BedInteractiveArea.object_name = "bed"
+		$Marker2D/BedInteractiveArea.object_position = position + Vector2(32,-32)
 	elif item_name == "medium rug":
-		$Position2D.position =  Vector2(32, -32)
+		$Marker2D.position =  Vector2(32, -32)
 	elif item_name == "large rug":
-		$Position2D.position =  Vector2(64, -48)
+		$Marker2D.position =  Vector2(64, -48)
 	#thread.wait_to_finish()
 
 
@@ -339,15 +339,15 @@ func _on_HurtBox_area_entered(area):
 		temp_health -= 1
 		$ResetTempHealthTimer.call_deferred("start")
 	else:
-		$Light2D.set_deferred("enabled", false)
+		$PointLight2D.set_deferred("enabled", false)
 		$ChestPos/Chest.call_deferred("hide")
 		$FurnaceSmoke.call_deferred("hide")
-		if $Position2D.has_node(str(id)):
-			$Position2D.get_node(id+ "/CollisionShape2D").set_deferred("disabled", true)
-		$Position2D/HurtBox/CollisionShape2D.set_deferred("disabled", true)
-		$Position2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
-		$Position2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
-		$Position2D/BedInteractiveArea/CollisionShape2D.set_deferred("disabled", true)
+		if $Marker2D.has_node(str(id)):
+			$Marker2D.get_node(id+ "/CollisionShape2D").set_deferred("disabled", true)
+		$Marker2D/HurtBox/CollisionShape2D.set_deferred("disabled", true)
+		$Marker2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
+		$Marker2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
+		$Marker2D/BedInteractiveArea/CollisionShape2D.set_deferred("disabled", true)
 		if item_name == "wood chest" or item_name == "stone chest" or item_name == "tool cabinet":
 			drop_items_in_chest()
 			$SoundEffects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
@@ -377,7 +377,7 @@ func _on_HurtBox_area_entered(area):
 		Tiles.fence_tiles.call_deferred("update_bitmask_area",location)
 		InstancedScenes.intitiateItemDrop(item_name, position, 1)
 		MapData.remove_placable(id)
-		yield($SoundEffects, "finished")
+		await $SoundEffects.finished
 		queue_free()
 
 func check_if_has_items():
@@ -418,14 +418,14 @@ func _on_DetectObjectOverPathBox_area_entered(area):
 func _on_DetectObjectOverPathBox_area_exited(area):
 	if Server.isLoaded:
 		if item_name == "wood path" or item_name == "stone path":
-			yield(get_tree().create_timer(0.25), "timeout")
+			await get_tree().create_timer(0.25).timeout
 			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 
 func open_chest():
 	$ChestPos/Chest.call_deferred("play","open")
 
 func close_chest():
-	yield(get_tree().create_timer(0.2), "timeout")
+	await get_tree().create_timer(0.2).timeout
 	$ChestPos/Chest.call_deferred("play","open", true)
 
 func _on_ResetTempHealthTimer_timeout():

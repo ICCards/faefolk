@@ -10,13 +10,13 @@ var item_category
 func initialize():
 	if not Server.world.is_changing_scene:
 		set_description_text(item_name)
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		set_health_and_energy()
-		set_size_of_description($ItemName.rect_size.x)
-		$GridContainer.rect_size = Vector2( width , height )
-		$Body.rect_size.x = (width*5.7) 
-		$Body/ItemDescription.rect_size.x = (width*5.7) 
-		$ItemName.rect_size.x = width
+		set_size_of_description($ItemName.size.x)
+		$GridContainer.size = Vector2( width , height )
+		$Body.size.x = (width*5.7) 
+		$Body/ItemDescription.size.x = (width*5.7) 
+		$ItemName.size.x = width
 
 
 func set_health_and_energy():

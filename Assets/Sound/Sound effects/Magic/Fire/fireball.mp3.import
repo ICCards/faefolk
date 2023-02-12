@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/fireball.mp3-20541084237da2b18209e68316324ad2.mp3str"
+uid="uid://cxfp005w2l1cn"
+path="res://.godot/imported/fireball.mp3-20541084237da2b18209e68316324ad2.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Fire/fireball.mp3"
-dest_files=[ "res://.import/fireball.mp3-20541084237da2b18209e68316324ad2.mp3str" ]
+dest_files=["res://.godot/imported/fireball.mp3-20541084237da2b18209e68316324ad2.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

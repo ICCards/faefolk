@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.gd" type="Script" id=1]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyTornadoState.gd" type="Script" id=1]
 
 [node name="EnemyTornadoState" type="Node"]
 script = ExtResource( 1 )

@@ -1,16 +1,16 @@
 [gd_scene load_steps=52 format=2]
 
-[ext_resource path="res://Assets/Images/Enemies/bat/fly.png" type="Texture" id=1]
-[ext_resource path="res://World/Enemies/Slime/Bat.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/Enemies/shadow sprite.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Enemies/bat/fly.png" type="Texture2D" id=1]
+[ext_resource path="res://World3D/Enemies/Slime/Bat.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Images/Enemies/shadow sprite.png" type="Texture2D" id=4]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=5]
-[ext_resource path="res://Assets/Images/Enemies/bat/bat break.png" type="Texture" id=6]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=8]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=9]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=10]
-[ext_resource path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Images/Enemies/bat/bat break.png" type="Texture2D" id=6]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=8]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=10]
+[ext_resource path="res://World3D/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CircleShape2D" id=42]
 radius = 4.0
@@ -81,22 +81,22 @@ region = Rect2( 48, 48, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=17]
 animations = [ {
-"frames": [ SubResource( 149 ), SubResource( 150 ), SubResource( 151 ), SubResource( 152 ) ],
+"sprite_frames": [ SubResource( 149 ), SubResource( 150 ), SubResource( 151 ), SubResource( 152 ) ],
 "loop": true,
 "name": "fly down",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 153 ), SubResource( 154 ), SubResource( 155 ), SubResource( 156 ) ],
+"sprite_frames": [ SubResource( 153 ), SubResource( 154 ), SubResource( 155 ), SubResource( 156 ) ],
 "loop": true,
 "name": "fly left",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 157 ), SubResource( 158 ), SubResource( 159 ), SubResource( 160 ) ],
+"sprite_frames": [ SubResource( 157 ), SubResource( 158 ), SubResource( 159 ), SubResource( 160 ) ],
 "loop": true,
 "name": "fly right",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 161 ), SubResource( 162 ), SubResource( 163 ), SubResource( 164 ) ],
+"sprite_frames": [ SubResource( 161 ), SubResource( 162 ), SubResource( 163 ), SubResource( 164 ) ],
 "loop": true,
 "name": "fly up",
 "speed": 8.0
@@ -160,7 +160,7 @@ region = Rect2( 312, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=41]
 animations = [ {
-"frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 146 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
+"sprite_frames": [ SubResource( 145 ), SubResource( 40 ), SubResource( 146 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
@@ -179,8 +179,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
@@ -196,8 +196,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.15 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ 1.0, 0.0 ]
 }
@@ -214,8 +214,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -226,8 +226,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -238,8 +238,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -250,8 +250,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ true ]
 }
@@ -262,8 +262,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -274,8 +274,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -286,8 +286,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -298,8 +298,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -310,8 +310,8 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -322,8 +322,8 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -338,8 +338,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -350,8 +350,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -362,8 +362,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -374,8 +374,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -386,8 +386,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -398,8 +398,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -410,8 +410,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -422,8 +422,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -434,8 +434,8 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -446,8 +446,8 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -458,7 +458,7 @@ particles_anim_h_frames = 2
 particles_anim_v_frames = 2
 particles_anim_loop = false
 
-[node name="Bat" type="KinematicBody2D"]
+[node name="Bat" type="CharacterBody2D"]
 collision_layer = 268435456
 collision_mask = 268435552
 script = ExtResource( 2 )
@@ -485,24 +485,24 @@ position = Vector2( 0, -27 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 42 )
 
-[node name="BatSprite" type="AnimatedSprite" parent="."]
+[node name="BatSprite" type="AnimatedSprite2D" parent="."]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 material = ExtResource( 5 )
 position = Vector2( 0, -27 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 17 )
+sprite_frames = SubResource( 17 )
 animation = "fly down"
 frame = 2
 playing = true
 
-[node name="Electricity" type="AnimatedSprite" parent="."]
+[node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 position = Vector2( 0, -26 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 41 )
+sprite_frames = SubResource( 41 )
 frame = 12
 playing = true
 
@@ -534,7 +534,7 @@ shape = SubResource( 38 )
 anims/RESET = SubResource( 148 )
 anims/death = SubResource( 43 )
 
-[node name="ShadowSprite" type="Sprite" parent="."]
+[node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color( 0, 0, 0, 0.435294 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )

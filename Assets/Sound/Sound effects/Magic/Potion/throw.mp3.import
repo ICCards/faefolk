@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/throw.mp3-1a850a8165ffd0f5628f6115b8edf39c.mp3str"
+uid="uid://u0fn7ijsvupn"
+path="res://.godot/imported/throw.mp3-1a850a8165ffd0f5628f6115b8edf39c.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Potion/throw.mp3"
-dest_files=[ "res://.import/throw.mp3-1a850a8165ffd0f5628f6115b8edf39c.mp3str" ]
+dest_files=["res://.godot/imported/throw.mp3-1a850a8165ffd0f5628f6115b8edf39c.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/water_step2.mp3-04ac1580fb255aab64fb8b54a63ddcb2.mp3str"
+uid="uid://sdyfy6un1qbg"
+path="res://.godot/imported/water_step2.mp3-04ac1580fb255aab64fb8b54a63ddcb2.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Footsteps/water/water_step2.mp3"
-dest_files=[ "res://.import/water_step2.mp3-04ac1580fb255aab64fb8b54a63ddcb2.mp3str" ]
+dest_files=["res://.godot/imported/water_step2.mp3-04ac1580fb255aab64fb8b54a63ddcb2.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

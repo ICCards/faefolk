@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/pullItemFromWater.mp3-6174ab132deb7633cc2e83fcd3803b08.mp3str"
+uid="uid://6w7wil7bkvr"
+path="res://.godot/imported/pullItemFromWater.mp3-6174ab132deb7633cc2e83fcd3803b08.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Fishing/pullItemFromWater.mp3"
-dest_files=[ "res://.import/pullItemFromWater.mp3-6174ab132deb7633cc2e83fcd3803b08.mp3str" ]
+dest_files=["res://.godot/imported/pullItemFromWater.mp3-6174ab132deb7633cc2e83fcd3803b08.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-extends YSort
+extends Node2D
 
 var nav_node
 var count = 0

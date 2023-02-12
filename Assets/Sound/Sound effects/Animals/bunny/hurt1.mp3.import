@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/hurt1.mp3-85b4b8e46d476147f5e2863b35b87cd4.mp3str"
+uid="uid://cjkc5l8h3g4v"
+path="res://.godot/imported/hurt1.mp3-85b4b8e46d476147f5e2863b35b87cd4.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/animals/bunny/hurt1.mp3"
-dest_files=[ "res://.import/hurt1.mp3-85b4b8e46d476147f5e2863b35b87cd4.mp3str" ]
+dest_files=["res://.godot/imported/hurt1.mp3-85b4b8e46d476147f5e2863b35b87cd4.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

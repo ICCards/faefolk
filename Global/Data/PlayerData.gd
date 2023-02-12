@@ -19,8 +19,8 @@ signal active_item_updated
 signal play_wind_curse
 
 var file_name = "res://JSONData/PlayerData.json"
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
 
 var viewInventoryMode: bool = false
 var viewSaveAndExitMode: bool = false
@@ -44,9 +44,9 @@ var active_item_slot_combat_hotbar = 0
 
 var starting_player_data = {
 	"current_save_location": null,
-	"current_save_scene" : "res://World/World/World.tscn",
+	"current_save_scene" : "res://World3D/World3D/World.tscn",
 	"respawn_position": null,
-	"respawn_scene" : "res://World/World/World.tscn",
+	"respawn_scene" : "res://World3D/World3D/World.tscn",
 	"season": "spring",
 	"day_week": "Mon.",
 	"day_number": 1,
@@ -211,7 +211,7 @@ var starting_player_data = {
 			"bat": 0,
 			"skeleton": 0,
 		},
-		 "crops" : {
+		"crops" : {
 			"asparagus": 0,
 			"blueberry": 0,
 			"cabbage": 0,
@@ -235,7 +235,7 @@ var starting_player_data = {
 			"yellow pepper": 0,
 			"zucchini": 0,
 		},
-		 "resources" : {
+		"resources" : {
 			"wood": 0,
 			"stone": 0,
 			"coal": 0,
@@ -272,7 +272,7 @@ var starting_player_data = {
 			"chanterelle": 0,
 			"raw egg": 0,
 		},
-		 "fish" : {
+		"fish" : {
 			"eel": 0,
 			"clownfish": 0,
 			"halibut": 0,
@@ -452,8 +452,8 @@ func remove_material(item, amount):
 
 func pick_up_item(item_name, item_quantity, item_health):
 	for slot in NUM_HOTBAR_SLOTS: # Add to existing hotbar slot
-		slot = str(slot)
-		if player_data["hotbar"].has(slot):
+		str(slot)
+		if player_data["hotbar"].has(str(slot)):
 			if player_data["hotbar"][slot][0] == item_name:
 				var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 				var able_to_add = stack_size - player_data["hotbar"][slot][1]
@@ -466,7 +466,7 @@ func pick_up_item(item_name, item_quantity, item_health):
 					update_hotbar_slot_visual(slot, player_data["hotbar"][slot][0], player_data["hotbar"][slot][1], player_data["hotbar"][slot][2])
 					item_quantity = item_quantity - able_to_add
 	for slot in NUM_INVENTORY_SLOTS: # Add to existing inventory slot
-		slot = str(slot)
+		str(slot)
 		if player_data["inventory"].has(slot):
 			if player_data["inventory"][slot][0] == item_name:
 				var stack_size = int(JsonData.item_data[item_name]["StackSize"])
@@ -528,7 +528,7 @@ func update_combat_hotbar_slot_visual(slot_index, item_name, new_quantity, item_
 		slot.initialize_item(item_name, new_quantity, item_health)
 
 
-func add_item_to_empty_slot(item, slot, var id = null):
+func add_item_to_empty_slot(item, slot, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			player_data["hotbar"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
@@ -552,7 +552,7 @@ func add_item_to_empty_slot(item, slot, var id = null):
 			player_data["campfires"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 
 
-func remove_item(slot, var id = null):
+func remove_item(slot, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			player_data["hotbar"].erase(str(slot.slot_index))
@@ -575,7 +575,7 @@ func remove_item(slot, var id = null):
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id].erase(str(slot.slot_index))
 
-func add_item_quantity(slot, quantity_to_add: int, var id = null):
+func add_item_quantity(slot, quantity_to_add: int, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			player_data["hotbar"][str(slot.slot_index)][1] += quantity_to_add
@@ -598,7 +598,7 @@ func add_item_quantity(slot, quantity_to_add: int, var id = null):
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id][str(slot.slot_index)][1] += quantity_to_add
 			
-func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
+func decrease_item_quantity(slot, quantity_to_subtract: int, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			player_data["hotbar"][str(slot.slot_index)][1] -= quantity_to_subtract

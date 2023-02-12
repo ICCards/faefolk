@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://devwpugyp6x7u"]
 
-[sub_resource type="Shader" id=41]
+[sub_resource type="Shader" id="41"]
 code = "shader_type canvas_item;
 
-uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform vec4 flash_color : source_color = vec4(1.0);
 uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
 
 void fragment() {
@@ -14,6 +14,6 @@ void fragment() {
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource( 41 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("41")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0

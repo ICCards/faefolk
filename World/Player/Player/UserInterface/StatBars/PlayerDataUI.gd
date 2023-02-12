@@ -6,9 +6,9 @@ var seasons = ["spring", "summer", "fall", "winter"]
 var clock_icon_index = 1
 
 func _ready():
-	PlayerData.connect("energy_changed", self, "set_energy_bar")
-	PlayerData.connect("health_changed", self, "set_health_bar")
-	PlayerData.connect("mana_changed", self, "set_mana_bar")
+	PlayerData.connect("energy_changed",Callable(self,"set_energy_bar"))
+	PlayerData.connect("health_changed",Callable(self,"set_health_bar"))
+	PlayerData.connect("mana_changed",Callable(self,"set_mana_bar"))
 	set_energy_bar()
 	set_health_bar()
 	set_mana_bar()

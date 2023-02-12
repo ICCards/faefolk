@@ -1,309 +1,113 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://3s87poep0d0b"]
 
-[ext_resource path="res://Assets/Images/Magic/dark/Demon_mage-Sheet.png" type="Texture" id=1]
-[ext_resource path="res://World/Objects/Magic/Dark/DemonMage.gd" type="Script" id=2]
-[ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/Magic/dark/Demon_mage-shadow.png" type="Texture" id=4]
+[ext_resource type="Script" path="res://World/Objects/Magic/Dark/DemonMage.gd" id="1_purek"]
+[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://c1hleune7dejc" path="res://Assets/Images/Magic/dark/Demon_mage-shadow.png" id="4"]
 
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 672, 96, 96 )
+[sub_resource type="SpriteFrames" id="17"]
+animations = []
 
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 1 )
-region = Rect2( 480, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 1 )
-region = Rect2( 576, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 1 )
-region = Rect2( 672, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 1 )
-region = Rect2( 480, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 1 )
-region = Rect2( 576, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 1 )
-region = Rect2( 672, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=48]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=49]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=50]
-atlas = ExtResource( 1 )
-region = Rect2( 480, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=51]
-atlas = ExtResource( 1 )
-region = Rect2( 576, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=52]
-atlas = ExtResource( 1 )
-region = Rect2( 672, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=53]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=54]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=55]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=56]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=57]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=58]
-atlas = ExtResource( 1 )
-region = Rect2( 480, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=59]
-atlas = ExtResource( 1 )
-region = Rect2( 576, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=60]
-atlas = ExtResource( 1 )
-region = Rect2( 672, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=61]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=62]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=63]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 1 )
-region = Rect2( 480, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 1 )
-region = Rect2( 576, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 1 )
-region = Rect2( 672, 384, 96, 96 )
-
-[sub_resource type="SpriteFrames" id=17]
-animations = [ {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
-"loop": false,
-"name": "die",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
-"loop": true,
-"name": "idle",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
-"loop": true,
-"name": "run",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
-"loop": false,
-"name": "shoot",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
-"loop": false,
-"name": "swing",
-"speed": 8.0
-} ]
-
-[sub_resource type="CapsuleShape2D" id=18]
-radius = 20.0
+[sub_resource type="CapsuleShape2D" id="18"]
+radius = 0.0
 height = 0.0
 
-[sub_resource type="CircleShape2D" id=19]
+[sub_resource type="CircleShape2D" id="19"]
 radius = 45.0
 
-[sub_resource type="CircleShape2D" id=28]
+[sub_resource type="CircleShape2D" id="28"]
 radius = 241.033
 
-[node name="DemonMage" type="KinematicBody2D"]
-script = ExtResource( 2 )
+[node name="DemonMage" type="CharacterBody2D"]
+script = ExtResource("1_purek")
 
 [node name="TrailParticles" type="CPUParticles2D" parent="."]
-modulate = Color( 1.3, 1.3, 1.3, 1 )
-position = Vector2( 0, -33 )
+modulate = Color(1.3, 1.3, 1.3, 1)
+position = Vector2(0, -33)
 emitting = false
 amount = 12
 lifetime = 0.75
 emission_shape = 1
 emission_sphere_radius = 12.0
-direction = Vector2( -1, 0 )
-gravity = Vector2( 0, 0 )
-initial_velocity = 80.0
-scale_amount = 2.5
-scale_amount_random = 0.5
-color = Color( 1, 0, 0, 1 )
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+color = Color(1, 0, 0, 1)
 
 [node name="TrailParticles2" type="CPUParticles2D" parent="."]
-modulate = Color( 1.3, 1.3, 1.3, 1 )
-position = Vector2( 0, -33 )
+modulate = Color(1.3, 1.3, 1.3, 1)
+position = Vector2(0, -33)
 emitting = false
 amount = 12
 lifetime = 0.75
 emission_shape = 1
 emission_sphere_radius = 12.0
-direction = Vector2( -1, 0 )
-gravity = Vector2( 0, 0 )
-initial_velocity = 80.0
-scale_amount = 2.5
-scale_amount_random = 0.5
-color = Color( 0.133333, 0.223529, 0.278431, 1 )
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+color = Color(0.133333, 0.223529, 0.278431, 1)
 
 [node name="TrailParticles3" type="CPUParticles2D" parent="."]
-modulate = Color( 1.3, 1.3, 1.3, 1 )
-position = Vector2( 0, -33 )
+modulate = Color(1.3, 1.3, 1.3, 1)
+position = Vector2(0, -33)
 emitting = false
 amount = 12
 lifetime = 0.75
 emission_shape = 1
 emission_sphere_radius = 12.0
-direction = Vector2( -1, 0 )
-gravity = Vector2( 0, 0 )
-initial_velocity = 80.0
-scale_amount = 2.5
-scale_amount_random = 0.5
-color = Color( 0.572549, 0.541176, 0.713726, 1 )
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+color = Color(0.572549, 0.541176, 0.713726, 1)
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1.25, 1.25, 1.25, 1 )
-position = Vector2( 0, -57 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 17 )
-animation = "idle"
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1.25, 1.25, 1.25, 1)
+position = Vector2(0, -57)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("17")
+animation = &"idle"
 frame = 6
-playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 rotation = 1.5708
-shape = SubResource( 18 )
+shape = SubResource("18")
 disabled = true
 
-[node name="Shadow" type="Sprite" parent="."]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 0, -46 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -46)
+scale = Vector2(2, 2)
+texture = ExtResource("4")
 
 [node name="HitBox" type="Area2D" parent="."]
 visible = false
-position = Vector2( 0, 25 )
+position = Vector2(0, 25)
 collision_layer = 0
 collision_mask = 256
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 0, -58 )
-shape = SubResource( 19 )
+position = Vector2(0, -58)
+shape = SubResource("19")
 disabled = true
 
 [node name="DetectEnemyBox" type="Area2D" parent="."]
 visible = false
-position = Vector2( 0, 25 )
+position = Vector2(0, 25)
 collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectEnemyBox"]
-position = Vector2( 0, -58 )
-shape = SubResource( 28 )
+position = Vector2(0, -58)
+shape = SubResource("28")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 8.0
 autostart = true
 
 [node name="ShootDirection" type="Node2D" parent="."]
-position = Vector2( 0, -33 )
+position = Vector2(0, -33)
 rotation = 4.70017
 
-[node name="Position2D" type="Position2D" parent="ShootDirection"]
-position = Vector2( 45, 0 )
+[node name="Marker2D" type="Marker2D" parent="ShootDirection"]
+position = Vector2(45, 0)
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 

@@ -25,19 +25,19 @@ func validate_forest_tiles(location):
 		active = true
 		for x in range(2):
 			for y in range(2):
-				if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location or forest_tiles.get_cellv(Vector2(x,-y) + location) == -1 or not foundation_tiles.get_cellv(Vector2(x,-y) + location) == -1: 
+				if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location or forest_tiles.get_cellv(Vector2(x,-y) + location) == -1 or not foundation_tiles.get_cellv(Vector2(x,-y) + location) == -1: 
 					return false
 					break
 		return true
 
 func validate_tiles(location, dimensions):
 	var active = false
-	if Server.world.name == "World":
+	if Server.world.name == "World3D":
 		if not active:
 			active = true
 			for x in range(dimensions.x):
 				for y in range(dimensions.y):
-					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location or hoed_tiles.get_cellv(Vector2(x,-y) + location) == 0: 
+					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location or hoed_tiles.get_cellv(Vector2(x,-y) + location) == 0: 
 						return false
 						break
 			return true
@@ -46,7 +46,7 @@ func validate_tiles(location, dimensions):
 			active = true
 			for x in range(dimensions.x):
 				for y in range(dimensions.y):
-					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.world_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
+					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
 						return false
 						break
 			return true
@@ -84,19 +84,19 @@ func isValidNavigationTile(loc) -> bool:
 	
 	return true
 
-func remove_valid_tiles(location,var dimensions = Vector2(1,1)):
+func remove_valid_tiles(location, dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), -1 )
 			#valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 
-func add_valid_tiles(location, var dimensions = Vector2(1,1)):
+func add_valid_tiles(location, dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), 0)
 			#valid_tiles.set_cellv(location + Vector2(x, -y), 0)
 			
-func add_navigation_tiles(location, var dimensions = Vector2(1,1)):
+func add_navigation_tiles(location, dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), 1)

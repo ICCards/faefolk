@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://World/Map/Camera2D.gd" type="Script" id=1]
+[ext_resource path="res://World3D/Map/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/MiniMap.tres" type="TileSet" id=2]
-[ext_resource path="res://Assets/Images/mini map/player mini map icon.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/mini map/black.png" type="Texture" id=4]
-[ext_resource path="res://World/Map/WorldMap.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Images/Particles/Clouds.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/mini map/player mini map icon.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Images/mini map/black.png" type="Texture2D" id=4]
+[ext_resource path="res://World3D/Map/WorldMap.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/GPUParticles3D/Clouds.png" type="Texture2D" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "black.png 0"
@@ -31,17 +31,17 @@ scale = Vector2( 0.05, 0.05 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 65471463, 4, 0, 65471464, 4, 0, 65471465, 4, 0, 65536999, 4, 0, 65537000, 4, 0, 65537001, 4, 0, 65602535, 4, 0, 65602536, 4, 0, 65602537, 4, 0 )
+tile_data = PackedInt32Array( 65471463, 4, 0, 65471464, 4, 0, 65471465, 4, 0, 65536999, 4, 0, 65537000, 4, 0, 65537001, 4, 0, 65602535, 4, 0, 65602536, 4, 0, 65602537, 4, 0 )
 
-[node name="StormIcon" type="Sprite" parent="Map"]
+[node name="StormIcon" type="Sprite2D" parent="Map"]
 scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
 
-[node name="StormIcon2" type="Sprite" parent="Map"]
+[node name="StormIcon2" type="Sprite2D" parent="Map"]
 scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
 
-[node name="PlayerIcon" type="Sprite" parent="Map"]
+[node name="PlayerIcon" type="Sprite2D" parent="Map"]
 scale = Vector2( 80, 80 )
 texture = ExtResource( 3 )
 

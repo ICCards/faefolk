@@ -10,8 +10,8 @@ var hovered_item
 var level_1_items = ["wood axe", "wood pickaxe", "wood hoe", "wood sword", "stone axe", "stone pickaxe", "stone hoe", "stone sword","stone watering can", "wood fishing rod", "scythe", "arrow"]
 var level_2_items = ["bronze axe", "bronze pickaxe", "bronze hoe", "bronze sword", "bronze watering can", "stone fishing rod", "bow"]
 
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 
 func _ready():
 	initialize()
@@ -76,16 +76,16 @@ func _physics_process(delta):
 
 func entered_crafting_area(item_name):
 	crafting_item = item_name
-	$Tween.interpolate_property($CraftingMenuWorkbench/Items.get_node(item_name), "rect_scale",
-		$CraftingMenuWorkbench/Items.get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.1,
+	$Tween.interpolate_property($CraftingMenuWorkbench/Items.get_node(item_name), "scale",
+		$CraftingMenuWorkbench/Items.get_node(item_name).scale, Vector2(1.1, 1.1), 0.1,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
 
 func exited_crafting_area(item_name):
 	crafting_item = null
-	$Tween.interpolate_property($CraftingMenuWorkbench/Items.get_node(item_name), "rect_scale",
-		$CraftingMenuWorkbench/Items.get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.1,
+	$Tween.interpolate_property($CraftingMenuWorkbench/Items.get_node(item_name), "scale",
+		$CraftingMenuWorkbench/Items.get_node(item_name).scale, Vector2(1.0, 1.0), 0.1,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
@@ -101,7 +101,7 @@ func craft(item_name):
 	initialize_crafting()
 
 func return_crafted_item(item_name):
-	var inventoryItem = InventoryItem.instance()
+	var inventoryItem = InventoryItem.instantiate()
 	inventoryItem.set_item(item_name, 1, Stats.return_max_tool_health(item_name))
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem

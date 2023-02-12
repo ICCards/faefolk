@@ -1,8 +1,8 @@
-extends YSort
+extends Node2D
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
-onready var WallHitEffect = load("res://World/Objects/Tiles/WallHitEffect.tscn")
+@onready var WallHitEffect = load("res://World3D/Objects/Tiles/WallHitEffect.tscn")
 
 var tier
 var health
@@ -118,7 +118,7 @@ func remove_wall():
 		Tiles.wall_tiles.set_cellv(location, -1)
 		Tiles.wall_tiles.update_bitmask_area(location)
 		play_break_sound_effect()
-		yield(get_tree().create_timer(1.5), "timeout")
+		await get_tree().create_timer(1.5).timeout
 		queue_free()
 
 func remove_foundation():
@@ -131,7 +131,7 @@ func remove_foundation():
 		Tiles.foundation_tiles.set_cellv(location, -1)
 		Tiles.foundation_tiles.update_bitmask_area(location)
 		play_break_sound_effect()
-		yield(get_tree().create_timer(1.0), "timeout")
+		await get_tree().create_timer(1.0).timeout
 		queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -155,7 +155,7 @@ func play_wall_hit_effect():
 	if Server.world.has_node("WallHitEffect" + str(location)):
 		Server.world.get_node("WallHitEffect" + str(location)).restart()
 	else:
-		var wallHitEffect = WallHitEffect.instance()
+		var wallHitEffect = WallHitEffect.instantiate()
 		wallHitEffect.name = "WallHitEffect" + str(location)
 		wallHitEffect.tier = tier
 		wallHitEffect.autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
@@ -168,7 +168,7 @@ func show_health():
 	$AnimationPlayer.play("show health bar")
 
 func _on_HurtBox_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and not PlayerData.viewInventoryMode:
 			var tool_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			if tool_name == "hammer":
@@ -220,7 +220,7 @@ func _on_DetectObjectOverPathBox_area_entered(area):
 func _on_DetectObjectOverPathBox_area_exited(area):
 	if Server.isLoaded:
 		if item_name == "foundation":
-			yield(get_tree().create_timer(0.3), "timeout")
+			await get_tree().create_timer(0.3).timeout
 			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 			$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)
 

@@ -4,17 +4,17 @@ extends Node
 #var uuid
 #
 #
-#export(int)   var map_w         = 100
-#export(int)   var map_h         = 100
-#export(int)   var iterations    = 45000
-#export(int)   var neighbors     = 4
-#export(int)   var ground_chance = 48
-#export(bool) var redraw setget redraw
+#export var map_w: int         = 100
+#export var map_h: int         = 100
+#export var iterations: int    = 45000
+#export var neighbors: int     = 4
+#export var ground_chance: int = 48
+#export var redraw: bool : set = redraw
 #
 var caves = []
 #
-onready var walls = get_node("../Walls")
-onready var ground1 = get_node("../Ground1")
+@onready var walls = get_node("../Walls")
+@onready var ground1 = get_node("../Ground1")
 #onready var ground2 = get_node("../Ground2")
 #onready var grass1 = get_node("../Grass1")
 #onready var grass2 = get_node("../Grass2")
@@ -93,17 +93,17 @@ func fix_tiles():
 
 
 
-export(int) var map_width = 150
-export(int) var map_height = 150
-export(bool) var redraw setget redraw
+@export var map_width: int = 150
+@export var map_height: int = 150
+@export var redraw: bool : set = redraw
 
-export(String) var world_seed = "Hello Godot!"
-export(int) var noise_octaves = 1
-export(int) var noise_period = 13
-export(float) var noise_persistence = 0.7
-export(float) var noise_lacunarity = 0.1
-export(float) var noise_threshold = 0.1
-export(int)   var min_cave_size = 60 
+@export var world_seed: String = "Hello Godot!"
+@export var noise_octaves: int = 1
+@export var noise_period: int = 13
+@export var noise_persistence: float = 0.7
+@export var noise_lacunarity: float = 0.1
+@export var noise_threshold: float = 0.1
+@export var min_cave_size: int = 60 
 
 var simplex_noise : OpenSimplexNoise = OpenSimplexNoise.new()
 
@@ -324,7 +324,7 @@ func add_boundary_tiles():
 #	mutex.lock()
 #	if thread_counter == 3:
 #		#call_deferred("build_world")
-#		thread_world.start(self, "build_world")
+#		thread_world.start(Callable(self,"build_world"))
 #	else:	
 #		thread_counter += 1
 #	mutex.unlock()
@@ -336,7 +336,7 @@ func add_boundary_tiles():
 #	mutex.lock()
 #	if thread_counter == 3:
 #		#call_deferred("build_world")
-#		thread_world.start(self, "build_world")
+#		thread_world.start(Callable(self,"build_world"))
 #	else:	
 #		thread_counter += 1
 #	mutex.unlock()
@@ -347,7 +347,7 @@ func add_boundary_tiles():
 #	mutex.lock()
 #	if thread_counter == 3:
 #		#call_deferred("build_world")
-#		thread_world.start(self, "build_world")
+#		thread_world.start(Callable(self,"build_world"))
 #	else:	
 #		thread_counter += 1
 #	mutex.unlock()
@@ -359,7 +359,7 @@ func add_boundary_tiles():
 #		"period":period,
 #		"ending_function":"end_altittude"
 #	};
-#	thread_altittude.start(self, "generate_map", data)	
+#	thread_altittude.start(Callable(self,"generate_map").bind(data))	
 #
 #func build_temperature(octaves,period):
 #	print("building temperature")
@@ -368,7 +368,7 @@ func add_boundary_tiles():
 #		"period":period,
 #		"ending_function":"end_temperature"
 #	};
-#	thread_temperature.start(self, "generate_map", data)
+#	thread_temperature.start(Callable(self,"generate_map").bind(data))
 #
 #func build_moisture(octaves,period):
 #	print("building moisture")
@@ -377,7 +377,7 @@ func add_boundary_tiles():
 #		"period":period,
 #		"ending_function":"end_moisture"
 #	};
-#	thread_moisture.start(self, "generate_map", data)
+#	thread_moisture.start(Callable(self,"generate_map").bind(data))
 #
 #func generate_map(data):
 #	var grid = {}
@@ -389,7 +389,7 @@ func add_boundary_tiles():
 #	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
 #	custom_gradient.size = Vector2(map_w,map_h)
 #	var gradient_data = custom_gradient.get_data()
-#	gradient_data.lock()
+#	false # gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 #	for x in map_w:
 #		for y in map_h:
 #			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5

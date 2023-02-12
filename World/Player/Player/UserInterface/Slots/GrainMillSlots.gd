@@ -1,7 +1,7 @@
 extends Control
 
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 
 
 func _ready():
@@ -15,25 +15,25 @@ func initialize_locked_slots():
 		$CornSlot/LockSlot.show()
 		for i in range(slots.size()):
 			if i != 1 and i != 2:
-				slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
-				slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
-				slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
+				slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
+				slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
+				slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
 			slots[i].slot_index = i
 			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
 	elif get_parent().level == "2":
 		$SugarCaneSlot/LockSlot.show()
 		for i in range(slots.size()):
 			if i != 2:
-				slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
-				slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
-				slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
+				slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
+				slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
+				slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
 			slots[i].slot_index = i
 			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
 	else:
 		for i in range(slots.size()):
-			slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
-			slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
-			slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
+			slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
+			slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
+			slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
 			slots[i].slot_index = i
 			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
 
@@ -72,7 +72,7 @@ func exited_slot(slot):
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			if find_parent("UserInterface").holding_item != null:
 				if !slot.item:
 					left_click_empty_slot(slot)
@@ -83,7 +83,7 @@ func slot_gui_input(event: InputEvent, slot):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
-		elif event.button_index == BUTTON_RIGHT && event.pressed:
+		elif event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
 			if slot.item and not find_parent("UserInterface").holding_item:
 				right_click_slot(slot)
 
@@ -97,7 +97,7 @@ func right_click_slot(slot):
 
 
 func return_holding_item(item_name, qt):
-	var inventoryItem = InventoryItem.instance()
+	var inventoryItem = InventoryItem.instantiate()
 	inventoryItem.set_item(item_name, qt, null)
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem

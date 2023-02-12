@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var entered = false
 var door_open = false
@@ -28,7 +28,7 @@ func _on_HurtBox_area_entered(area):
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
 		sound_effects.call_deferred("play")
-		yield(sound_effects, "finished")
+		await sound_effects.finished
 		queue_free()
 	else:
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))

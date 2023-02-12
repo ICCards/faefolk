@@ -1,82 +1,82 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.gd" type="Script" id=1]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/HotbarInventorySlots.gd" type="Script" id=1]
 [ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=2]
 
 [node name="HotbarInventorySlots" type="GridContainer"]
-margin_right = 594.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 54, 54 )
-custom_constants/vseparation = 6
-custom_constants/hseparation = 6
+offset_right = 594.0
+offset_bottom = 54.0
+custom_minimum_size = Vector2( 54, 54 )
+custom_constants/v_separation = 6
+custom_constants/h_separation = 6
 columns = 10
 script = ExtResource( 1 )
 
 [node name="Slot1" type="Panel" parent="."]
-margin_right = 48.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_right = 48.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot2" type="Panel" parent="."]
-margin_left = 54.0
-margin_right = 102.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 54.0
+offset_right = 102.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot3" type="Panel" parent="."]
-margin_left = 108.0
-margin_right = 156.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 108.0
+offset_right = 156.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot4" type="Panel" parent="."]
-margin_left = 162.0
-margin_right = 210.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 162.0
+offset_right = 210.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot5" type="Panel" parent="."]
-margin_left = 216.0
-margin_right = 264.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 216.0
+offset_right = 264.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot6" type="Panel" parent="."]
-margin_left = 270.0
-margin_right = 318.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 270.0
+offset_right = 318.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot7" type="Panel" parent="."]
-margin_left = 324.0
-margin_right = 372.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 324.0
+offset_right = 372.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot8" type="Panel" parent="."]
-margin_left = 378.0
-margin_right = 426.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 378.0
+offset_right = 426.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot9" type="Panel" parent="."]
-margin_left = 432.0
-margin_right = 480.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 432.0
+offset_right = 480.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )
 
 [node name="Slot10" type="Panel" parent="."]
-margin_left = 486.0
-margin_right = 534.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+offset_left = 486.0
+offset_right = 534.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 48, 48 )
 script = ExtResource( 2 )

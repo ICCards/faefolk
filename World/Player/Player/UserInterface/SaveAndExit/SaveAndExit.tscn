@@ -1,80 +1,80 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture2D" id=2]
 [ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=3]
-[ext_resource path="res://Assets/Images/User interface/inventory/save/save-tab.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate2.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate2-seleceted.png" type="Texture" id=6]
-[ext_resource path="res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Images/User interface/inventory/save/save-tab.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate2.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate2-seleceted.png" type="Texture2D" id=6]
+[ext_resource path="res://World3D/Player/Player/UserInterface/SaveAndExit/SaveAndExit.gd" type="Script" id=7]
 [ext_resource path="res://BetaLabel.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.133333, 0.133333, 0.137255, 0.568627 )
 
 [node name="SaveAndExit" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource( 7 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1240.0
-margin_bottom = 680.0
+offset_right = 1240.0
+offset_bottom = 680.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
 [node name="Bg" type="TextureRect" parent="."]
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 stretch_mode = 4
 
 [node name="ExitBtn" type="TextureButton" parent="."]
-margin_left = 681.0
-margin_top = 282.0
-margin_right = 695.0
-margin_bottom = 296.0
-rect_scale = Vector2( 3, 3 )
+offset_left = 681.0
+offset_top = 282.0
+offset_right = 695.0
+offset_bottom = 296.0
+scale = Vector2( 3, 3 )
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
 expand = true
 
 [node name="SaveAndCtn" type="TextureButton" parent="."]
-margin_left = 570.0
-margin_top = 294.0
-margin_right = 600.0
-margin_bottom = 306.0
-rect_scale = Vector2( 3, 3 )
+offset_left = 570.0
+offset_top = 294.0
+offset_right = 600.0
+offset_bottom = 306.0
+scale = Vector2( 3, 3 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 
 [node name="SaveAndExit" type="TextureButton" parent="."]
-margin_left = 570.0
-margin_top = 342.0
-margin_right = 600.0
-margin_bottom = 354.0
-rect_scale = Vector2( 3, 3 )
+offset_left = 570.0
+offset_top = 342.0
+offset_right = 600.0
+offset_bottom = 354.0
+scale = Vector2( 3, 3 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 
 [node name="Exit" type="TextureButton" parent="."]
-margin_left = 570.0
-margin_top = 390.0
-margin_right = 600.0
-margin_bottom = 402.0
-rect_scale = Vector2( 3, 3 )
+offset_left = 570.0
+offset_top = 390.0
+offset_right = 600.0
+offset_bottom = 402.0
+scale = Vector2( 3, 3 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 
 [node name="1" type="Label" parent="."]
-margin_left = 570.0
-margin_top = 294.0
-margin_right = 827.0
-margin_bottom = 398.0
-rect_scale = Vector2( 0.35, 0.35 )
+offset_left = 570.0
+offset_top = 294.0
+offset_right = 827.0
+offset_bottom = 398.0
+scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
@@ -86,11 +86,11 @@ align = 1
 valign = 1
 
 [node name="2" type="Label" parent="."]
-margin_left = 570.0
-margin_top = 342.0
-margin_right = 827.0
-margin_bottom = 446.0
-rect_scale = Vector2( 0.35, 0.35 )
+offset_left = 570.0
+offset_top = 342.0
+offset_right = 827.0
+offset_bottom = 446.0
+scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
@@ -102,11 +102,11 @@ align = 1
 valign = 1
 
 [node name="3" type="Label" parent="."]
-margin_left = 571.0
-margin_top = 390.0
-margin_right = 828.0
-margin_bottom = 494.0
-rect_scale = Vector2( 0.35, 0.35 )
+offset_left = 571.0
+offset_top = 390.0
+offset_right = 828.0
+offset_bottom = 494.0
+scale = Vector2( 0.35, 0.35 )
 theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3

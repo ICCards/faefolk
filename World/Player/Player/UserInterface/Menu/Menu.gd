@@ -2,7 +2,7 @@ extends Control
 
 var item
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 
 func initialize():

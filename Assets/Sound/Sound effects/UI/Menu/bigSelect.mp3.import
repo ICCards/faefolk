@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bigSelect.mp3-a7ea2bd0bb70a2a031f64d01fa54d39e.mp3str"
+uid="uid://dvpgq3hahwu3n"
+path="res://.godot/imported/bigSelect.mp3-a7ea2bd0bb70a2a031f64d01fa54d39e.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/UI/Menu/bigSelect.mp3"
-dest_files=[ "res://.import/bigSelect.mp3-a7ea2bd0bb70a2a031f64d01fa54d39e.mp3str" ]
+dest_files=["res://.godot/imported/bigSelect.mp3-a7ea2bd0bb70a2a031f64d01fa54d39e.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

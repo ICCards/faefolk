@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var door_open = false
 
@@ -22,14 +22,14 @@ func toggle_door():
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 		sound_effects.play()
 		#$AnimationPlayer.play("close")
-		$AnimatedSprite.play("close")
+		$AnimatedSprite2D.play("close")
 		$DoorMovementCollision/CollisionShape2D.disabled = false 
 	else:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 		sound_effects.play()
 		#$AnimationPlayer.play("open")
-		$AnimatedSprite.play("open")
+		$AnimatedSprite2D.play("open")
 		$DoorMovementCollision/CollisionShape2D.disabled = true
 	door_open = !door_open
 
@@ -37,15 +37,15 @@ func toggle_door():
 func set_type():
 	match tier:
 		"wood":
-			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/wood.tres")
+			$AnimatedSprite2D.sprite_frames = load("res://Assets/Tilesets/doors/animated/front/wood.tres")
 			health = Stats.MAX_WOOD_DOOR
 			max_health = Stats.MAX_WOOD_DOOR
 		"metal":
-			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/metal.tres")
+			$AnimatedSprite2D.sprite_frames = load("res://Assets/Tilesets/doors/animated/front/metal.tres")
 			health = Stats.MAX_METAL_DOOR
 			max_health = Stats.MAX_METAL_DOOR
 		"armored":
-			$AnimatedSprite.frames = load("res://Assets/Tilesets/doors/animated/front/armored.tres")
+			$AnimatedSprite2D.sprite_frames = load("res://Assets/Tilesets/doors/animated/front/armored.tres")
 			health = Stats.MAX_ARMORED_DOOR
 			max_health = Stats.MAX_ARMORED_DOOR
 		"demolish":
@@ -58,11 +58,11 @@ func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if door_open:
-		$HitEffect/Sprite.texture = load("res://Assets/Tilesets/doors/hit effects/" + tier + "/side/open.png")
-		$HitEffect/Sprite.position = Vector2(10,-69)
+		$HitEffect/Sprite2D.texture = load("res://Assets/Tilesets/doors/hit effects/" + tier + "/side/open.png")
+		$HitEffect/Sprite2D.position = Vector2(10,-69)
 	else:
-		$HitEffect/Sprite.texture = load("res://Assets/Tilesets/doors/hit effects/" + tier + "/side/closed.png")
-		$HitEffect/Sprite.position = Vector2(2,-63)
+		$HitEffect/Sprite2D.texture = load("res://Assets/Tilesets/doors/hit effects/" + tier + "/side/closed.png")
+		$HitEffect/Sprite2D.position = Vector2(2,-63)
 	$HitEffect/AnimationPlayer.stop()
 	$HitEffect/AnimationPlayer.play("hit")
 	show_health()
@@ -88,7 +88,7 @@ func remove_tile():
 	MapData.remove_placable(id)
 	Tiles.add_valid_tiles(location, Vector2(1,2))
 	play_break_sound_effect()
-	yield(get_tree().create_timer(1.5), "timeout")
+	await get_tree().create_timer(1.5).timeout
 	queue_free()
 
 func show_health():

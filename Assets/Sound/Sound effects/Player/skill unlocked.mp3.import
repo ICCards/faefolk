@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/skill unlocked.mp3-1ba3e502a2707a8af80076ce5d1eaf54.mp3str"
+uid="uid://cu888c811rxe2"
+path="res://.godot/imported/skill unlocked.mp3-1ba3e502a2707a8af80076ce5d1eaf54.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Player/skill unlocked.mp3"
-dest_files=[ "res://.import/skill unlocked.mp3-1ba3e502a2707a8af80076ce5d1eaf54.mp3str" ]
+dest_files=["res://.godot/imported/skill unlocked.mp3-1ba3e502a2707a8af80076ce5d1eaf54.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -41,13 +41,13 @@ var BirdVariations = [
 
 
 
-onready var normal_mouse = load("res://Assets/mouse cursors/Normal Selects.png")
+@onready var normal_mouse = load("res://Assets/mouse cursors/Normal Selects.png")
 
 
 # IC GHOSTS #
 
-#func returnICGhostBackground(bg):
-#	match bg:
+#func returnICGhostBackground(panel):
+#	match panel:
 #		"black":
 #			return load("res://Assets/Images/IC Ghost Elements/Background/black.png")
 #		"blue-linear-gradient":
@@ -64,12 +64,12 @@ onready var normal_mouse = load("res://Assets/mouse cursors/Normal Selects.png")
 #			return load("res://Assets/Images/IC Ghost Elements/Background/Jigsaw-puzzle.png")
 #		"light-blue":
 #			return load("res://Assets/Images/IC Ghost Elements/Background/light-blue.png")
-#		"Light-grey":
-#			return load("res://Assets/Images/IC Ghost Elements/Background/Light-grey.png")
+#		"Light3D-grey":
+#			return load("res://Assets/Images/IC Ghost Elements/Background/Light3D-grey.png")
 #		"light-pink":
 #			return load("res://Assets/Images/IC Ghost Elements/Background/light-pink.png")
-#		"Light-yellow":
-#			return load("res://Assets/Images/IC Ghost Elements/Background/Light-yellow.png")
+#		"Light3D-yellow":
+#			return load("res://Assets/Images/IC Ghost Elements/Background/Light3D-yellow.png")
 #		"orange-gradient":
 #			return load("res://Assets/Images/IC Ghost Elements/Background/orange-gradient.png")
 #		"orange":
@@ -354,7 +354,7 @@ onready var normal_mouse = load("res://Assets/mouse cursors/Normal Selects.png")
 #		"ship-blue":
 #			return load("res://Assets/Images/IC Ghost Elements/Prop/ship-blue.png")
 #		"ship-green":
-#			return load("res://Assets/Images/IC Ghost Elements/Prop/ship-green .png")
+#			return load("res://Assets/Images/IC Ghost Elements/Prop/ship-green super.png")
 #		"ship-light green":
 #			return load("res://Assets/Images/IC Ghost Elements/Prop/ship-light green.png")
 #		"ship-pink":
@@ -456,283 +456,283 @@ func returnToolSprite(toolName, animation):
 		"hammer":
 			match animation: 
 				"swing_down":
-					 return hammer.down
+					return hammer.down
 				"swing_up":
-					 return hammer.up
+					return hammer.up
 				"swing_left":
-					 return hammer.left
+					return hammer.left
 				"swing_right":
-					 return hammer.right
+					return hammer.right
 		"wood pickaxe":
 			match animation: 
 				"swing_down":
-					 return wood_pickaxe.down
+					return wood_pickaxe.down
 				"swing_up":
-					 return wood_pickaxe.up
+					return wood_pickaxe.up
 				"swing_left":
-					 return wood_pickaxe.left
+					return wood_pickaxe.left
 				"swing_right":
-					 return wood_pickaxe.right
+					return wood_pickaxe.right
 		"stone pickaxe":
 			match animation: 
 				"swing_down":
-					 return stone_pickaxe.down
+					return stone_pickaxe.down
 				"swing_up":
-					 return stone_pickaxe.up
+					return stone_pickaxe.up
 				"swing_left":
-					 return stone_pickaxe.left
+					return stone_pickaxe.left
 				"swing_right":
-					 return stone_pickaxe.right
+					return stone_pickaxe.right
 		"bronze pickaxe":
 			match animation: 
 				"swing_down":
-					 return bronze_pickaxe.down
+					return bronze_pickaxe.down
 				"swing_up":
-					 return bronze_pickaxe.up
+					return bronze_pickaxe.up
 				"swing_left":
-					 return bronze_pickaxe.left
+					return bronze_pickaxe.left
 				"swing_right":
-					 return bronze_pickaxe.right
+					return bronze_pickaxe.right
 		"iron pickaxe":
 			match animation: 
 				"swing_down":
-					 return iron_pickaxe.down
+					return iron_pickaxe.down
 				"swing_up":
-					 return iron_pickaxe.up
+					return iron_pickaxe.up
 				"swing_left":
-					 return iron_pickaxe.left
+					return iron_pickaxe.left
 				"swing_right":
-					 return iron_pickaxe.right
+					return iron_pickaxe.right
 		"gold pickaxe":
 			match animation: 
 				"swing_down":
-					 return gold_pickaxe.down
+					return gold_pickaxe.down
 				"swing_up":
-					 return gold_pickaxe.up
+					return gold_pickaxe.up
 				"swing_left":
-					 return gold_pickaxe.left
+					return gold_pickaxe.left
 				"swing_right":
-					 return gold_pickaxe.right
+					return gold_pickaxe.right
 		"wood hoe":
 			match animation: 
 				"swing_down":
-					 return wood_hoe.down
+					return wood_hoe.down
 				"swing_up":
-					 return wood_hoe.up
+					return wood_hoe.up
 				"swing_left":
-					 return wood_hoe.left
+					return wood_hoe.left
 				"swing_right":
-					 return wood_hoe.right
+					return wood_hoe.right
 		"stone hoe":
 			match animation: 
 				"swing_down":
-					 return stone_hoe.down
+					return stone_hoe.down
 				"swing_up":
-					 return stone_hoe.up
+					return stone_hoe.up
 				"swing_left":
-					 return stone_hoe.left
+					return stone_hoe.left
 				"swing_right":
-					 return stone_hoe.right
+					return stone_hoe.right
 		"bronze hoe":
 			match animation: 
 				"swing_down":
-					 return bronze_hoe.down
+					return bronze_hoe.down
 				"swing_up":
-					 return bronze_hoe.up
+					return bronze_hoe.up
 				"swing_left":
-					 return bronze_hoe.left
+					return bronze_hoe.left
 				"swing_right":
-					 return bronze_hoe.right
+					return bronze_hoe.right
 		"iron hoe":
 			match animation: 
 				"swing_down":
-					 return iron_hoe.down
+					return iron_hoe.down
 				"swing_up":
-					 return iron_hoe.up
+					return iron_hoe.up
 				"swing_left":
-					 return iron_hoe.left
+					return iron_hoe.left
 				"swing_right":
-					 return iron_hoe.right
+					return iron_hoe.right
 		"gold hoe":
 			match animation: 
 				"swing_down":
-					 return gold_hoe.down
+					return gold_hoe.down
 				"swing_up":
-					 return gold_hoe.up
+					return gold_hoe.up
 				"swing_left":
-					 return gold_hoe.left
+					return gold_hoe.left
 				"swing_right":
-					 return gold_hoe.right
+					return gold_hoe.right
 		"wood axe":
 			match animation: 
 				"swing_down":
-					 return wood_axe.down
+					return wood_axe.down
 				"swing_up":
-					 return wood_axe.up
+					return wood_axe.up
 				"swing_left":
-					 return wood_axe.left
+					return wood_axe.left
 				"swing_right":
 					return wood_axe.right
 		"stone axe":
 			match animation: 
 				"swing_down":
-					 return stone_axe.down
+					return stone_axe.down
 				"swing_up":
-					 return stone_axe.up
+					return stone_axe.up
 				"swing_left":
-					 return stone_axe.left
+					return stone_axe.left
 				"swing_right":
 					return stone_axe.right
 		"iron axe":
 			match animation: 
 				"swing_down":
-					 return iron_axe.down
+					return iron_axe.down
 				"swing_up":
-					 return iron_axe.up
+					return iron_axe.up
 				"swing_left":
-					 return iron_axe.left
+					return iron_axe.left
 				"swing_right":
 					return iron_axe.right
 		"bronze axe":
 			match animation: 
 				"swing_down":
-					 return bronze_axe.down
+					return bronze_axe.down
 				"swing_up":
-					 return bronze_axe.up
+					return bronze_axe.up
 				"swing_left":
-					 return bronze_axe.left
+					return bronze_axe.left
 				"swing_right":
 					return bronze_axe.right
 		"gold axe":
 			match animation: 
 				"swing_down":
-					 return gold_axe.down
+					return gold_axe.down
 				"swing_up":
-					 return gold_axe.up
+					return gold_axe.up
 				"swing_left":
-					 return gold_axe.left
+					return gold_axe.left
 				"swing_right":
 					return gold_axe.right
 		"wood sword":
 			match animation: 
 				"sword_swing_down":
-					 return wood_sword_swing.down
+					return wood_sword_swing.down
 				"sword_swing_up":
-					 return wood_sword_swing.up
+					return wood_sword_swing.up
 				"sword_swing_left":
-					 return wood_sword_swing.left
+					return wood_sword_swing.left
 				"sword_swing_right":
 					return wood_sword_swing.right
 				"sword_block_down":
-					 return wood_sword_block.down
+					return wood_sword_block.down
 				"sword_block_up":
-					 return wood_sword_block.up
+					return wood_sword_block.up
 				"sword_block_left":
-					 return wood_sword_block.left
+					return wood_sword_block.left
 				"sword_block_right":
 					return wood_sword_block.right
 		"stone sword":
 			match animation: 
 				"sword_swing_down":
-					 return stone_sword_swing.down
+					return stone_sword_swing.down
 				"sword_swing_up":
-					 return stone_sword_swing.up
+					return stone_sword_swing.up
 				"sword_swing_left":
-					 return stone_sword_swing.left
+					return stone_sword_swing.left
 				"sword_swing_right":
 					return stone_sword_swing.right
 				"sword_block_down":
-					 return stone_sword_block.down
+					return stone_sword_block.down
 				"sword_block_up":
-					 return stone_sword_block.up
+					return stone_sword_block.up
 				"sword_block_left":
-					 return stone_sword_block.left
+					return stone_sword_block.left
 				"sword_block_right":
 					return stone_sword_block.right
 		"bronze sword":
 			match animation: 
 				"sword_swing_down":
-					 return bronze_sword_swing.down
+					return bronze_sword_swing.down
 				"sword_swing_up":
-					 return bronze_sword_swing.up
+					return bronze_sword_swing.up
 				"sword_swing_left":
-					 return bronze_sword_swing.left
+					return bronze_sword_swing.left
 				"sword_swing_right":
 					return bronze_sword_swing.right
 				"sword_block_down":
-					 return bronze_sword_block.down
+					return bronze_sword_block.down
 				"sword_block_up":
-					 return bronze_sword_block.up
+					return bronze_sword_block.up
 				"sword_block_left":
-					 return bronze_sword_block.left
+					return bronze_sword_block.left
 				"sword_block_right":
 					return bronze_sword_block.right
 		"iron sword":
 			match animation: 
 				"sword_swing_down":
-					 return iron_sword_swing.down
+					return iron_sword_swing.down
 				"sword_swing_up":
-					 return iron_sword_swing.up
+					return iron_sword_swing.up
 				"sword_swing_left":
-					 return iron_sword_swing.left
+					return iron_sword_swing.left
 				"sword_swing_right":
 					return iron_sword_swing.right
 				"sword_block_down":
-					 return iron_sword_block.down
+					return iron_sword_block.down
 				"sword_block_up":
-					 return iron_sword_block.up
+					return iron_sword_block.up
 				"sword_block_left":
-					 return iron_sword_block.left
+					return iron_sword_block.left
 				"sword_block_right":
 					return iron_sword_block.right
 		"gold sword":
 			match animation: 
 				"sword_swing_down":
-					 return gold_sword_swing.down
+					return gold_sword_swing.down
 				"sword_swing_up":
-					 return gold_sword_swing.up
+					return gold_sword_swing.up
 				"sword_swing_left":
-					 return gold_sword_swing.left
+					return gold_sword_swing.left
 				"sword_swing_right":
 					return gold_sword_swing.right
 				"sword_block_down":
-					 return gold_sword_block.down
+					return gold_sword_block.down
 				"sword_block_up":
-					 return gold_sword_block.up
+					return gold_sword_block.up
 				"sword_block_left":
-					 return gold_sword_block.left
+					return gold_sword_block.left
 				"sword_block_right":
 					return gold_sword_block.right
 		"stone watering can":
 			match animation:
 				"watering_down":
-					 return stone_watering_can.down
+					return stone_watering_can.down
 				"watering_up":
-					 return null
+					return null
 				"watering_left":
-					 return stone_watering_can.left
+					return stone_watering_can.left
 				"watering_right":
-					 return stone_watering_can.right
+					return stone_watering_can.right
 		"bronze watering can":
 			match animation:
 				"watering_down":
-					 return bronze_watering_can.down
+					return bronze_watering_can.down
 				"watering_up":
-					 return null
+					return null
 				"watering_left":
-					 return bronze_watering_can.left
+					return bronze_watering_can.left
 				"watering_right":
-					 return bronze_watering_can.right
+					return bronze_watering_can.right
 		"gold watering can":
 			match animation:
 				"watering_down":
-					 return gold_watering_can.down
+					return gold_watering_can.down
 				"watering_up":
-					 return null
+					return null
 				"watering_left":
-					 return gold_watering_can.left
+					return gold_watering_can.left
 				"watering_right":
-					 return gold_watering_can.right
+					return gold_watering_can.right
 		"fishing rod cast":
 			match animation:
 				"cast_down":

@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://World/Objects/Projectiles/ArrowProjectile.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture" id=2]
-[ext_resource path="res://World/Objects/Projectiles/Hitbox.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/Magic/Arrow/Arrow_Hit.png" type="Texture" id=4]
+[ext_resource path="res://World3D/Objects/Projectiles/ArrowProjectile.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture2D" id=2]
+[ext_resource path="res://World3D/Objects/Projectiles/Hitbox.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Images/Magic/Arrow/Arrow_Hit.png" type="Texture2D" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 1 )
@@ -42,7 +42,7 @@ region = Rect2( 112, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"sprite_frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": false,
 "name": "default",
 "speed": 16.0
@@ -55,7 +55,7 @@ height = 4.0
 [sub_resource type="CircleShape2D" id=12]
 radius = 294.0
 
-[node name="ArrowProjectile" type="KinematicBody2D"]
+[node name="ArrowProjectile" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource( 1 )
 
@@ -241,11 +241,11 @@ scale_amount = 4.0
 scale_amount_random = 0.7
 color = Color( 0.14902, 0.937255, 0.14902, 1 )
 
-[node name="ArrowBreak" type="AnimatedSprite" parent="."]
+[node name="ArrowBreak" type="AnimatedSprite2D" parent="."]
 position = Vector2( 0, 1 )
 rotation = -3.14159
 scale = Vector2( 2, 2 )
-frames = SubResource( 11 )
+sprite_frames = SubResource( 11 )
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -273,7 +273,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectEnemyBox"]
 shape = SubResource( 12 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="."]
 enabled = false
 texture = ExtResource( 2 )
 texture_scale = 0.5

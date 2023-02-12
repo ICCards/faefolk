@@ -1,7 +1,7 @@
 extends Control
 
-onready var slider = $Slider
-onready var crafting_menu = $CraftingMenu
+@onready var slider = $Slider
+@onready var crafting_menu = $CraftingMenu
 
 const MAX_SCROLL_SIZE = 605
 
@@ -29,9 +29,9 @@ func reset_hover_effect():
 	for item in $CraftingMenu/Items.get_children():
 		item = str(item.name)
 		if item == "blueprint" or item == "hammer" or item == "wood sword" or item == "wood axe" or item == "wood pickaxe" or item == "wood hoe":
-			$CraftingMenu/Items.get_node(item).rect_scale = Vector2(4,4)
+			$CraftingMenu/Items.get_node(item).scale = Vector2(4,4)
 		else:
-			$CraftingMenu/Items.get_node(item).rect_scale = Vector2(2,2)
+			$CraftingMenu/Items.get_node(item).scale = Vector2(2,2)
 
 
 func initialize_crafting():
@@ -65,17 +65,17 @@ func _physics_process(delta):
 		$CraftingItemDescription.visible = false
 
 func entered_crafting_area(_item):
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	hovered_item = null
 	crafting_item = _item
 	if crafting_item == "blueprint" or crafting_item == "hammer" or crafting_item == "wood sword" or crafting_item == "wood axe" or crafting_item == "wood pickaxe" or crafting_item == "wood hoe":
-		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "rect_scale",
-			get_node("CraftingMenu/Items/" + crafting_item).rect_scale, Vector2(4.2, 4.2), 0.1,
+		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "scale",
+			get_node("CraftingMenu/Items/" + crafting_item).scale, Vector2(4.2, 4.2), 0.1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 	else:
-		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "rect_scale",
-			get_node("CraftingMenu/Items/" + crafting_item).rect_scale, Vector2(2.1, 2.1), 0.1,
+		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "scale",
+			get_node("CraftingMenu/Items/" + crafting_item).scale, Vector2(2.1, 2.1), 0.1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 	
@@ -83,19 +83,19 @@ func exited_crafting_area(_item):
 	crafting_item = null
 	if has_node("CraftingMenu/Items/" + _item):
 		if _item == "blueprint" or _item == "hammer" or _item == "wood sword" or _item == "wood axe" or _item == "wood pickaxe" or _item == "wood hoe":
-			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + _item), "rect_scale",
-				get_node("CraftingMenu/Items/" + _item).rect_scale, Vector2(4, 4), 0.1,
+			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + _item), "scale",
+				get_node("CraftingMenu/Items/" + _item).scale, Vector2(4, 4), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 		else:
-			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + _item), "rect_scale",
-				get_node("CraftingMenu/Items/" + _item).rect_scale, Vector2(2, 2), 0.1,
+			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + _item), "scale",
+				get_node("CraftingMenu/Items/" + _item).scale, Vector2(2, 2), 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 
 
 func return_crafted_item(item_name):
-	var crafted = InventoryItem.instance()
+	var crafted = InventoryItem.instantiate()
 	crafted.set_item(item_name, 1, Stats.return_max_tool_health(item_name))
 	find_parent("UserInterface").add_child(crafted)
 	return crafted
@@ -133,7 +133,7 @@ func exited_slot(slot):
 		slot.item.exit_item()
 
 func return_holding_item(item_name, qt):
-	var inventoryItem = InventoryItem.instance()
+	var inventoryItem = InventoryItem.instantiate()
 	inventoryItem.set_item(item_name, qt, null)
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem

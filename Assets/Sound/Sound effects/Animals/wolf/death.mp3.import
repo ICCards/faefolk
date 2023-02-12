@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/death.mp3-5ada5bcdf31775c0da323e11f73fcd93.mp3str"
+uid="uid://bprv4sji13f0c"
+path="res://.godot/imported/death.mp3-5ada5bcdf31775c0da323e11f73fcd93.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/animals/wolf/death.mp3"
-dest_files=[ "res://.import/death.mp3-5ada5bcdf31775c0da323e11f73fcd93.mp3str" ]
+dest_files=["res://.godot/imported/death.mp3-5ada5bcdf31775c0da323e11f73fcd93.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

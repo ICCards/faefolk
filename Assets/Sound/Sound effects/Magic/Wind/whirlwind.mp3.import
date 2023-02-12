@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/whirlwind.mp3-f97978fbb08f19dca5189c83641aa90f.mp3str"
+uid="uid://bfmccn0stqleu"
+path="res://.godot/imported/whirlwind.mp3-f97978fbb08f19dca5189c83641aa90f.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Wind/whirlwind.mp3"
-dest_files=[ "res://.import/whirlwind.mp3-f97978fbb08f19dca5189c83641aa90f.mp3str" ]
+dest_files=["res://.godot/imported/whirlwind.mp3-f97978fbb08f19dca5189c83641aa90f.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,15 +1,15 @@
 [gd_scene load_steps=68 format=2]
 
-[ext_resource path="res://Assets/Images/Enemies/Spider/idle.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Images/Enemies/Spider/walk.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/Enemies/knockback dust.png" type="Texture" id=3]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=4]
-[ext_resource path="res://World/Enemies/Spider.gd" type="Script" id=5]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=6]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=8]
-[ext_resource path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Images/Enemies/Spider/idle.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Images/Enemies/Spider/walk.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets/Images/Enemies/knockback dust.png" type="Texture2D" id=3]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World3D/Enemies/Spider.gd" type="Script" id=5]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World3D/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=8]
+[ext_resource path="res://World3D/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture2D" id=14]
 [ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=15]
 
 [sub_resource type="CanvasItemMaterial" id=187]
@@ -116,32 +116,32 @@ region = Rect2( 48, 48, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 196 ), SubResource( 197 ), SubResource( 198 ), SubResource( 199 ) ],
+"sprite_frames": [ SubResource( 196 ), SubResource( 197 ), SubResource( 198 ), SubResource( 199 ) ],
 "loop": true,
 "name": "idle down",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 200 ), SubResource( 201 ), SubResource( 202 ), SubResource( 203 ) ],
+"sprite_frames": [ SubResource( 200 ), SubResource( 201 ), SubResource( 202 ), SubResource( 203 ) ],
 "loop": true,
 "name": "idle right",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 204 ), SubResource( 205 ), SubResource( 206 ), SubResource( 207 ) ],
+"sprite_frames": [ SubResource( 204 ), SubResource( 205 ), SubResource( 206 ), SubResource( 207 ) ],
 "loop": true,
 "name": "idle up",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 208 ), SubResource( 209 ), SubResource( 210 ), SubResource( 211 ) ],
+"sprite_frames": [ SubResource( 208 ), SubResource( 209 ), SubResource( 210 ), SubResource( 211 ) ],
 "loop": true,
 "name": "walk down",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 212 ), SubResource( 213 ), SubResource( 214 ), SubResource( 215 ) ],
+"sprite_frames": [ SubResource( 212 ), SubResource( 213 ), SubResource( 214 ), SubResource( 215 ) ],
 "loop": true,
 "name": "walk right",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 216 ), SubResource( 217 ), SubResource( 218 ), SubResource( 219 ) ],
+"sprite_frames": [ SubResource( 216 ), SubResource( 217 ), SubResource( 218 ), SubResource( 219 ) ],
 "loop": true,
 "name": "walk up",
 "speed": 8.0
@@ -205,7 +205,7 @@ region = Rect2( 312, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=147]
 animations = [ {
-"frames": [ SubResource( 145 ), SubResource( 151 ), SubResource( 146 ), SubResource( 152 ), SubResource( 153 ), SubResource( 154 ), SubResource( 155 ), SubResource( 156 ), SubResource( 157 ), SubResource( 158 ), SubResource( 159 ), SubResource( 160 ), SubResource( 161 ), SubResource( 162 ) ],
+"sprite_frames": [ SubResource( 145 ), SubResource( 151 ), SubResource( 146 ), SubResource( 152 ), SubResource( 153 ), SubResource( 154 ), SubResource( 155 ), SubResource( 156 ), SubResource( 157 ), SubResource( 158 ), SubResource( 159 ), SubResource( 160 ), SubResource( 161 ), SubResource( 162 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
@@ -226,8 +226,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
@@ -243,8 +243,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.15 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ 1.0, 0.0 ]
 }
@@ -265,8 +265,8 @@ max_value = 2.5
 _data = [ Vector2( 0, 2.49732 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.22348 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=190]
-offsets = PoolRealArray( 0.000555864, 0.339658, 0.724858, 1 )
-colors = PoolColorArray( 0.517647, 0.494118, 0.713726, 1, 0.392157, 0.372549, 0.572549, 1, 0.188235, 0.172549, 0.286275, 1, 0.0980392, 0.0901961, 0.141176, 1 )
+offsets = PackedFloat32Array( 0.000555864, 0.339658, 0.724858, 1 )
+colors = PackedColorArray( 0.517647, 0.494118, 0.713726, 1, 0.392157, 0.372549, 0.572549, 1, 0.188235, 0.172549, 0.286275, 1, 0.0980392, 0.0901961, 0.141176, 1 )
 
 [sub_resource type="Curve" id=191]
 max_value = 3.0
@@ -283,8 +283,8 @@ max_value = 5.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 5 ), 10.0041, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=194]
-offsets = PoolRealArray( 0, 0.994737, 1 )
-colors = PoolColorArray( 0.51083, 0.51083, 0.51083, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.994737, 1 )
+colors = PackedColorArray( 0.51083, 0.51083, 0.51083, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=220]
 length = 0.001
@@ -295,8 +295,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -307,8 +307,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -319,8 +319,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -331,8 +331,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -343,8 +343,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -355,8 +355,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -367,8 +367,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -383,8 +383,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -395,8 +395,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -407,8 +407,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -419,8 +419,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -431,8 +431,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -443,8 +443,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -455,8 +455,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -467,8 +467,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -479,8 +479,8 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -491,8 +491,8 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -503,8 +503,8 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -515,13 +515,13 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
 
-[node name="Spider" type="KinematicBody2D"]
+[node name="Spider" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 2097251
 script = ExtResource( 5 )
@@ -548,19 +548,19 @@ anim_speed = 2.0
 
 [node name="EnemyFrozenState" parent="." instance=ExtResource( 6 )]
 
-[node name="Spider" type="AnimatedSprite" parent="."]
+[node name="Spider" type="AnimatedSprite2D" parent="."]
 material = ExtResource( 15 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 2 )
+sprite_frames = SubResource( 2 )
 animation = "walk down"
 frame = 3
 playing = true
 
-[node name="Electricity" type="AnimatedSprite" parent="."]
+[node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color( 1.22, 1.22, 1.22, 1 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 147 )
+sprite_frames = SubResource( 147 )
 frame = 5
 playing = true
 

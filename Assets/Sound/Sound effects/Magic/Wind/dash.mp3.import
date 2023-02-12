@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/dash.mp3-31eb6d07bf6634ae0dea27aa910c94b6.mp3str"
+uid="uid://ctfkifa0sevm2"
+path="res://.godot/imported/dash.mp3-31eb6d07bf6634ae0dea27aa910c94b6.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3"
-dest_files=[ "res://.import/dash.mp3-31eb6d07bf6634ae0dea27aa910c94b6.mp3str" ]
+dest_files=["res://.godot/imported/dash.mp3-31eb6d07bf6634ae0dea27aa910c94b6.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

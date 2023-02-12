@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://World/Player/Player/Fishing/RippleParticles.gd" type="Script" id=1]
+[ext_resource path="res://World3D/Player/Player/Fishing/RippleParticles.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=51]
-offsets = PoolRealArray( 0, 0.389908, 1 )
-colors = PoolColorArray( 0.890196, 0.956863, 1, 1, 0.890196, 0.956863, 1, 1, 0, 0.458824, 0.454902, 0 )
+offsets = PackedFloat32Array( 0, 0.389908, 1 )
+colors = PackedColorArray( 0.890196, 0.956863, 1, 1, 0.890196, 0.956863, 1, 1, 0, 0.458824, 0.454902, 0 )
 
 [node name="RippleParticles" type="CPUParticles2D"]
 emitting = false

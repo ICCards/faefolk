@@ -1,21 +1,21 @@
 extends Control
 
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-onready var hotbar_slots = $HotbarSlots
-onready var slots = hotbar_slots.get_children()
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var hotbar_slots = $HotbarSlots
+@onready var slots = hotbar_slots.get_children()
 var item = null
 var adjusted_pos = Vector2(0,0)
 
 
 func _ready():
 	for i in range(slots.size()):
-		PlayerData.connect("active_item_updated", slots[i], "refresh_style")
-		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
-		slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
-		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
+		PlayerData.connect("active_item_updated",Callable(slots[i],"refresh_style"))
+		slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
+		slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
+		slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
 		slots[i].slotType = SlotClass.SlotType.HOTBAR
 		slots[i].slot_index = i
-	Stats.connect("tool_health_change_hotbar", self, "update_tool_health")
+	Stats.connect("tool_health_change_hotbar",Callable(self,"update_tool_health"))
 	
 func hovered_slot(slot):
 	if slot.item:
@@ -39,7 +39,7 @@ func _physics_process(delta):
 
 
 func adjusted_description_position():
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	if item:
 		var item_category = JsonData.item_data[item]["ItemCategory"]
 		var lines = $ItemDescription/Body/ItemDescription.get_line_count()
@@ -65,7 +65,7 @@ func update_tool_health():
 	if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][2] == 0 and item_name != "stone watering can" and item_name != "bronze watering can" and item_name != "gold watering can":
 		slots[PlayerData.active_item_slot].removeFromSlot()
 		PlayerData.remove_item(slots[PlayerData.active_item_slot])
-		yield(get_tree().create_timer(0.15), "timeout")
+		await get_tree().create_timer(0.15).timeout
 		$SoundEffects.stream = Sounds.tool_break
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -14)
 		$SoundEffects.play()
@@ -85,7 +85,7 @@ func initialize_hotbar():
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			if Server.player_node.state == 0:
 				Sounds.play_hotbar_slot_selected_sound()
 				PlayerData.hotbar_slot_selected(slot)

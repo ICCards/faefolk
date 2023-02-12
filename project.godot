@@ -6,34 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "ImageTexture",
-"class": "CustomGradientTexture",
-"language": "GDScript",
-"path": "res://Global/Functions/maujoe.custom_gradient_texture/custom_gradient_texture.gd"
-}, {
-"base": "Resource",
-"class": "GameState",
-"language": "GDScript",
-"path": "res://Global/Data/GameState.gd"
-}, {
-"base": "Camera2D",
-"class": "PanningCamera2D",
-"language": "GDScript",
-"path": "res://World/Map/Camera2D.gd"
-} ]
-_global_script_class_icons={
-"CustomGradientTexture": "",
-"GameState": "",
-"PanningCamera2D": ""
-}
+config_version=5
 
 [application]
 
 config/name="faefolk"
 run/main_scene="res://MainMenu/MainMenu.tscn"
+config/features=PackedStringArray("4.0")
 
 [autoload]
 
@@ -59,10 +38,10 @@ PlayerDataHelpers="*res://Global/Data/PlayerDataHelpers.gd"
 
 [display]
 
-window/size/width=1280
-window/size/height=720
+window/size/viewport_width=1280
+window/size/viewport_height=720
 mouse_cursor/custom_image="res://Assets/mouse cursors/cursor.png"
-window/stretch/mode="2d"
+window/stretch/mode="viewport"
 
 [global]
 
@@ -101,158 +80,158 @@ texture={
 
 ui_accept={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 ui_select={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_cancel={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777217,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 ui_focus_next={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_focus_prev={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_left={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_right={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_up={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_down={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_page_up={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_page_down={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 mouse_click={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+]
 }
 scroll_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":6,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"pressed":false,"double_click":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":6,"pressed":false,"double_click":false,"script":null)
+]
 }
 scroll_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":7,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"pressed":false,"double_click":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":7,"pressed":false,"double_click":false,"script":null)
+]
 }
 open_menu={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 action={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 rotate={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 move_right={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 move_left={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 move_up={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 move_down={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 use_tool={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 open_map={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot1={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot2={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot3={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot4={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot5={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot6={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot7={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot8={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot9={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 slot10={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 sprint={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 change_variety={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 toggle_hotbar={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 cancel_attack={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 
 [layer_names]
@@ -290,12 +269,13 @@ limits/websocket_server/max_out_packets=10240
 
 [physics]
 
+2d/default_gravity=0
 common/enable_pause_aware_picking=true
 2d/thread_model=2
-2d/default_gravity=0
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 2d/snapping/use_gpu_pixel_snap=true
 threads/thread_model=2
 environment/default_environment="res://default_env.tres"

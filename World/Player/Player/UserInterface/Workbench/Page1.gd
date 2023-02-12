@@ -6,7 +6,7 @@ func initialize():
 	for item in self.get_children():
 		if get_parent().level == "workbench #1":
 			if get_parent().level_1_items.find(item.name) != -1:
-				get_node(item.name).material.set_shader_param("flash_modifier", 0)
+				get_node(item.name).material.set_shader_parameter("flash_modifier", 0)
 				if PlayerData.isSufficientMaterialToCraft(item.name):
 					get_node(item.name).modulate = Color(1, 1, 1, 1)
 				else:
@@ -15,7 +15,7 @@ func initialize():
 				set_locked(item.name)
 		elif get_parent().level == "workbench #2":
 			if get_parent().level_1_items.find(item.name) != -1 or get_parent().level_2_items.find(item.name) != -1:
-				get_node(item.name).material.set_shader_param("flash_modifier", 0)
+				get_node(item.name).material.set_shader_parameter("flash_modifier", 0)
 				if PlayerData.isSufficientMaterialToCraft(item.name):
 					get_node(item.name).modulate = Color(1, 1, 1, 1)
 				else:
@@ -23,7 +23,7 @@ func initialize():
 			else:
 				set_locked(item.name)
 		else: # level 3
-			get_node(item.name).material.set_shader_param("flash_modifier", 0)
+			get_node(item.name).material.set_shader_parameter("flash_modifier", 0)
 			if PlayerData.isSufficientMaterialToCraft(item.name):
 				get_node(item.name).modulate = Color(1, 1, 1, 1)
 			else:
@@ -32,7 +32,7 @@ func initialize():
 func set_locked(item_name):
 	get_node(item_name).disabled = true
 	get_node(item_name).modulate = Color("50ffffff")
-	get_node(item_name).material.set_shader_param("flash_modifier", 1)
+	get_node(item_name).material.set_shader_parameter("flash_modifier", 1)
 
 func _on_wood_axe_pressed():
 	get_parent().craft("wood axe")
