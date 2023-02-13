@@ -1,11 +1,11 @@
 extends Control
 
-const MAX_SCROLL_SIZE = 1167
+const MAX_SCROLL_SIZE = 1322
 
-@onready var music_slider = $ScrollContainer/VBoxContainer/Grid/Slider1/Music/MusicSlider
-@onready var sound_slider = $ScrollContainer/VBoxContainer/Grid/Slider2/Sound/SoundSlider
-@onready var ambient_slider = $ScrollContainer/VBoxContainer/Grid/Slider3/Ambient/AmbientSlider
-@onready var footsteps_slider = $ScrollContainer/VBoxContainer/Grid/Slider4/Footstep/FootstepSlider
+@onready var music_slider = $ScrollContainer/VBoxContainer/Grid1/Slider1/Music/MusicSlider
+@onready var sound_slider = $ScrollContainer/VBoxContainer/Grid1/Slider2/Sound/SoundSlider
+@onready var ambient_slider = $ScrollContainer/VBoxContainer/Grid1/Slider3/Ambient/AmbientSlider
+@onready var footsteps_slider = $ScrollContainer/VBoxContainer/Grid1/Slider4/Footstep/FootstepSlider
 
 func _ready():
 	await get_tree().create_timer(0.25).timeout
@@ -76,5 +76,5 @@ func _on_Slider_value_changed(value):
 func setup_keys():
 	for i in PlayerData.player_data["settings"]["key_dict"]:
 		var newkey = InputEventKey.new()
-		newkey.scancode = int(PlayerData.player_data["settings"]["key_dict"][i])
+		newkey.keycode = int(PlayerData.player_data["settings"]["key_dict"][i])
 		InputMap.action_add_event(i,newkey)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2nwqn7x1hl1s"
-path="res://.godot/imported/sleeping bag.png-c769fc50bdb9e1dfed5d09677ff2e866.ctex"
+uid="uid://0kateb7apec1"
+path="res://.godot/imported/CL_MainLev.png-8ec7f246bbf0a4d823d9383dd5286aac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/Placable object/sleeping bag.png"
-dest_files=["res://.godot/imported/sleeping bag.png-c769fc50bdb9e1dfed5d09677ff2e866.ctex"]
+source_file="res://Assets/Tilesets/Terrain/CL_MainLev.png"
+dest_files=["res://.godot/imported/CL_MainLev.png-8ec7f246bbf0a4d823d9383dd5286aac.ctex"]
 
 [params]
 

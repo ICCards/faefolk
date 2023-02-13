@@ -27,11 +27,10 @@ func _on_Slider_value_changed(value):
 
 func reset_hover_effect():
 	for item in $CraftingMenu/Items.get_children():
-		item = str(item.name)
-		if item == "blueprint" or item == "hammer" or item == "wood sword" or item == "wood axe" or item == "wood pickaxe" or item == "wood hoe":
-			$CraftingMenu/Items.get_node(item).scale = Vector2(4,4)
+		if item.name == "blueprint" or item.name == "hammer" or item.name == "wood sword" or item.name == "wood axe" or item.name == "wood pickaxe" or item.name == "wood hoe":
+			$CraftingMenu/Items.get_node(str(item.name)).scale = Vector2(4,4)
 		else:
-			$CraftingMenu/Items.get_node(item).scale = Vector2(2,2)
+			$CraftingMenu/Items.get_node(str(item.name)).scale = Vector2(2,2)
 
 
 func initialize_crafting():

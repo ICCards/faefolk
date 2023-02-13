@@ -43,7 +43,7 @@ var poisoned: bool = false
 var speed_buff_active: bool = false
 var ACCELERATION := 6
 var FRICTION := 8
-var velocity := Vector2.ZERO
+#var velocity := Vector2.ZERO
 var input_vector
 var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")

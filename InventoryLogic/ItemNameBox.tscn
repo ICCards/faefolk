@@ -1,51 +1,43 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dpuy0xoq4am3w"]
 
-[ext_resource path="res://Assets/Images/Inventory UI/ItemNameBox/middle.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemNameBox/left.png" type="Texture2D" id=2]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=3]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemNameBox/right.png" type="Texture2D" id=4]
-[ext_resource path="res://InventoryLogic/ItemNameBox.gd" type="Script" id=5]
+[ext_resource type="Texture2D" uid="uid://s3pde8h4ekk4" path="res://Assets/Images/User interface/ItemNameBox/left.png" id="2_8ry1e"]
+[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://dutf5vdphpbxp" path="res://Assets/Images/User interface/ItemNameBox/middle.png" id="4_tkwdf"]
+[ext_resource type="Script" path="res://InventoryLogic/ItemNameBox.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://db38f6xphtr0e" path="res://Assets/Images/User interface/ItemNameBox/right.png" id="5_6rgmb"]
 
 [node name="ItemNameBox" type="Node2D"]
-scale = Vector2( 2.4, 2.4 )
 z_index = 2
-script = ExtResource( 5 )
+scale = Vector2(2.4, 2.4)
+script = ExtResource("5")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_right = 32.0
 offset_bottom = 20.0
-custom_constants/h_separation = 0
+theme_override_constants/h_separation = 0
 columns = 3
 
 [node name="TextureRect" type="TextureRect" parent="GridContainer"]
-offset_right = 4.0
-offset_bottom = 20.0
-texture = ExtResource( 2 )
+layout_mode = 2
+texture = ExtResource("2_8ry1e")
 stretch_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="GridContainer"]
-offset_left = 4.0
-offset_right = 28.0
-offset_bottom = 20.0
+layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource( 3 )
-texture = ExtResource( 1 )
-expand = true
+theme = ExtResource("3")
+texture = ExtResource("4_tkwdf")
+expand_mode = 1
 
 [node name="TextureRect3" type="TextureRect" parent="GridContainer"]
-offset_left = 28.0
-offset_right = 32.0
-offset_bottom = 20.0
-texture = ExtResource( 4 )
+layout_mode = 2
+texture = ExtResource("5_6rgmb")
 
 [node name="ItemName" type="Label" parent="."]
 offset_left = 5.0
 offset_top = 4.0
 offset_right = 93.0
 offset_bottom = 65.0
-scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 5
-custom_constants/shadow_offset_y = 5
+scale = Vector2(0.2, 0.2)
+theme = ExtResource("3")
 text = "?????"

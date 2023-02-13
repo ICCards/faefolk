@@ -1,10 +1,10 @@
 extends Node
 
-@onready var Bat = load("res://World3D/Enemies/Slime/Bat.tscn")
-@onready var CaveAmbientLight = load("res://World3D/Caves/CaveAmbientLight.tscn")
-@onready var LightningLine = load("res://World3D/Objects/Misc/LightningLine.tscn")
-@onready var Slime = load("res://World3D/Enemies/Slime/Slime.tscn")
-@onready var Spider = load("res://World3D/Enemies/Spider.tscn")
+@onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
+@onready var CaveAmbientLight = load("res://World/Caves/CaveAmbientLight.tscn")
+@onready var LightningLine = load("res://World/Objects/Misc/LightningLine.tscn")
+@onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
+@onready var Spider = load("res://World/Enemies/Spider.tscn")
 @onready var FireMageSkeleton = load("res://World/Enemies/Skeleton.tscn")
 @onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
 @onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")

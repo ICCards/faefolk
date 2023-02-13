@@ -1,19 +1,21 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=13 format=3 uid="uid://bhilgn3waubes"]
 
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/hotbar23.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar.png" type="Texture2D" id=2]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/ItemSlots.tscn" type="PackedScene" id=3]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=4]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar-small.png" type="Texture2D" id=6]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass.png" type="Texture2D" id=7]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass-small.png" type="Texture2D" id=8]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/switch_btn2.png" type="Texture2D" id=12]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/switch_btn1.png" type="Texture2D" id=13]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/MagicSlots.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Images/User interface/hotbars/selected slot.png" type="Texture2D" id=25]
+[ext_resource type="Texture2D" uid="uid://h5xwa73koaw8" path="res://Assets/Images/User interface/combat hotbar/hotbar23.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cnfw25kf8wh4s" path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar.png" id="2"]
+[ext_resource type="PackedScene" path="res://InventoryLogic/ItemDescription.tscn" id="4"]
+[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://b6tl1o10h8ybn" path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar-small.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://do7p63j7fd8ug" path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://b16f0gq1148xg" path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass-small.png" id="8"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/MagicSlots.tscn" id="11_is21i"]
+[ext_resource type="Texture2D" uid="uid://dmv6j3ojkndy3" path="res://Assets/Images/User interface/combat hotbar/switch_btn2.png" id="12"]
+[ext_resource type="PackedScene" uid="uid://0wk3ykd7s1tj" path="res://World/Player/Player/UserInterface/Slots/ItemSlots.tscn" id="12_jw3p1"]
+[ext_resource type="Texture2D" uid="uid://dpvnod2gp0wlu" path="res://Assets/Images/User interface/combat hotbar/switch_btn1.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://o3wd8n5ou4bo" path="res://Assets/Images/User interface/hotbars/selected slot.png" id="25"]
 
 [node name="CombatHotbar" type="Control"]
+layout_mode = 3
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -21,10 +23,13 @@ anchor_bottom = 1.0
 offset_left = -640.0
 offset_top = -720.0
 offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="Bg2" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -33,167 +38,190 @@ offset_left = -361.0
 offset_top = -127.0
 offset_right = -121.0
 offset_bottom = -79.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 mouse_filter = 0
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 stretch_mode = 4
 
-[node name="ItemDescription" parent="." instance=ExtResource( 4 )]
+[node name="ItemDescription" parent="." instance=ExtResource("4")]
 visible = false
-position = Vector2( -512, -596 )
+position = Vector2(-512, -596)
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
-[node name="ItemSlots" parent="." instance=ExtResource( 3 )]
-
 [node name="Progresses" type="Control" parent="."]
+anchors_preset = 0
 offset_left = 128.0
 offset_top = 117.0
 offset_right = 168.0
 offset_bottom = 157.0
 
 [node name="Health" type="Control" parent="Progresses"]
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Back" type="TextureProgressBar" parent="Progresses/Health"]
-modulate = Color( 0.682353, 0, 0, 1 )
+modulate = Color(0.682353, 0, 0, 1)
+layout_mode = 0
 offset_left = 163.0
 offset_top = 491.0
 offset_right = 195.0
 offset_bottom = 520.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 value = 100.0
-texture_progress = ExtResource( 2 )
 fill_mode = 3
+texture_progress = ExtResource("2")
 
 [node name="Front" type="TextureProgressBar" parent="Progresses/Health"]
-modulate = Color( 0.886275, 0, 0, 1 )
+modulate = Color(0.886275, 0, 0, 1)
+layout_mode = 0
 offset_left = 163.0
 offset_top = 491.0
 offset_right = 195.0
 offset_bottom = 520.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 value = 93.0
-texture_progress = ExtResource( 2 )
 fill_mode = 3
+texture_progress = ExtResource("2")
 
 [node name="Mana" type="Control" parent="Progresses"]
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Back" type="TextureProgressBar" parent="Progresses/Mana"]
-modulate = Color( 0.0901961, 0.298039, 0.827451, 1 )
+modulate = Color(0.0901961, 0.298039, 0.827451, 1)
+layout_mode = 0
 offset_left = 763.0
 offset_top = 491.0
 offset_right = 795.0
 offset_bottom = 520.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 value = 100.0
-texture_progress = ExtResource( 2 )
 fill_mode = 3
+texture_progress = ExtResource("2")
 
 [node name="Front" type="TextureProgressBar" parent="Progresses/Mana"]
-modulate = Color( 0.0509804, 0.462745, 0.988235, 1 )
+modulate = Color(0.0509804, 0.462745, 0.988235, 1)
+layout_mode = 0
 offset_left = 763.0
 offset_top = 491.0
 offset_right = 795.0
 offset_bottom = 520.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 value = 93.0
-texture_progress = ExtResource( 2 )
 fill_mode = 3
+texture_progress = ExtResource("2")
 
 [node name="Energy" type="Control" parent="Progresses"]
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Back" type="TextureProgressBar" parent="Progresses/Energy"]
-modulate = Color( 0, 0.662745, 0, 1 )
+modulate = Color(0, 0.662745, 0, 1)
+layout_mode = 0
 offset_left = 505.0
 offset_top = 518.0
 offset_right = 509.0
 offset_bottom = 539.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 value = 100.0
-texture_progress = ExtResource( 6 )
 fill_mode = 3
+texture_progress = ExtResource("6")
 
 [node name="Front" type="TextureProgressBar" parent="Progresses/Energy"]
-modulate = Color( 0.00784314, 0.803922, 0, 1 )
+modulate = Color(0.00784314, 0.803922, 0, 1)
+layout_mode = 0
 offset_left = 505.0
 offset_top = 518.0
 offset_right = 509.0
 offset_bottom = 539.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 value = 91.0
-texture_progress = ExtResource( 6 )
 fill_mode = 3
+texture_progress = ExtResource("6")
 
 [node name="Decoration" type="Control" parent="."]
+anchors_preset = 0
 offset_left = 128.0
 offset_top = 117.0
 offset_right = 168.0
 offset_bottom = 157.0
 
 [node name="GlassDecoration" type="TextureRect" parent="Decoration"]
-modulate = Color( 1, 1, 1, 0.831373 )
+modulate = Color(1, 1, 1, 0.831373)
+layout_mode = 0
 offset_left = 151.0
 offset_top = 470.0
 offset_right = 199.0
 offset_bottom = 518.0
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+scale = Vector2(3, 3)
+texture = ExtResource("7")
 
 [node name="GlassDecoration2" type="TextureRect" parent="Decoration"]
-modulate = Color( 1, 1, 1, 0.831373 )
+modulate = Color(1, 1, 1, 0.831373)
+layout_mode = 0
 offset_left = 751.0
 offset_top = 470.0
 offset_right = 799.0
 offset_bottom = 518.0
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+scale = Vector2(3, 3)
+texture = ExtResource("7")
 
 [node name="GlassDecoration3" type="TextureRect" parent="Decoration"]
-modulate = Color( 1, 1, 1, 0.831373 )
+modulate = Color(1, 1, 1, 0.831373)
+layout_mode = 0
 offset_left = 487.0
 offset_top = 473.0
 offset_right = 503.0
 offset_bottom = 521.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 mouse_filter = 2
-texture = ExtResource( 8 )
+texture = ExtResource("8")
 
 [node name="SwitchHotbarBtn" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 231.0
 offset_top = 666.0
 offset_right = 247.0
 offset_bottom = 682.0
-scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 12 )
-texture_pressed = ExtResource( 13 )
+scale = Vector2(3, 3)
+texture_normal = ExtResource("12")
+texture_pressed = ExtResource("13")
 
-[node name="MagicSlots" parent="." instance=ExtResource( 14 )]
+[node name="SelectedItemSlot" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
+offset_left = 651.0
+offset_top = 644.0
+offset_right = 699.0
+offset_bottom = 692.0
+texture = ExtResource("25")
+
+[node name="SelectedSpellSlot" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 459.0
+offset_top = 644.0
+offset_right = 507.0
+offset_bottom = 692.0
+texture = ExtResource("25")
+
+[node name="MagicSlots" parent="." instance=ExtResource("11_is21i")]
+anchors_preset = 0
 offset_left = 396.0
 offset_top = 641.0
 offset_right = 396.0
 offset_bottom = 641.0
 
-[node name="SelectedItemSlot" type="TextureRect" parent="."]
-visible = false
+[node name="ItemSlots" parent="." instance=ExtResource("12_jw3p1")]
+layout_mode = 0
 offset_left = 651.0
 offset_top = 644.0
-offset_right = 699.0
+offset_right = 879.0
 offset_bottom = 692.0
-texture = ExtResource( 25 )
-
-[node name="SelectedSpellSlot" type="TextureRect" parent="."]
-visible = false
-offset_left = 459.0
-offset_top = 644.0
-offset_right = 507.0
-offset_bottom = 692.0
-texture = ExtResource( 25 )
+theme_override_constants/h_separation = 12
 
 [connection signal="pressed" from="SwitchHotbarBtn" to="." method="_on_SwitchHotbarBtn_pressed"]

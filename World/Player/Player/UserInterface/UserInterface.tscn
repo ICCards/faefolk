@@ -1,179 +1,165 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://cffchl0ffi2hf"]
 
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_7.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
-[ext_resource path="res://World3D/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://MainMenu/LoadingScreen.tscn" type="PackedScene" id=4]
-[ext_resource path="res://World3D/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=6]
-[ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI1.png" type="Texture2D" id=7]
-[ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI2.png" type="Texture2D" id=8]
-[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=9]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_5.png" type="Texture2D" id=11]
-[ext_resource path="res://World3D/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" type="AudioStream" id=13]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_4.png" type="Texture2D" id=14]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_1.png" type="Texture2D" id=16]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Hotbar/Hotbar.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_3.png" type="Texture2D" id=18]
-[ext_resource path="res://World3D/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=19]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_6.png" type="Texture2D" id=20]
-[ext_resource path="res://World3D/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn" type="PackedScene" id=21]
-[ext_resource path="res://World3D/Player/Player/UserInterface/UserInterface.gd" type="Script" id=23]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
+[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" id="2_rl35f"]
+[ext_resource type="PackedScene" path="res://MainMenu/LoadingScreen.tscn" id="4"]
+[ext_resource type="Theme" uid="uid://bf5tnmvvjqu1j" path="res://Assets/Themes/UI_Title.tres" id="6"]
+[ext_resource type="Theme" uid="uid://bvgqeuv5sk7i" path="res://Assets/Themes/button_theme.tres" id="9"]
+[ext_resource type="AudioStream" uid="uid://86w4gtnxusdy" path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" id="13"]
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id="18"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ true ]
+"values": [true]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id="19"]
 resource_name = "lightning day"
 length = 0.6
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.15, 0.6 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.15, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0, 0.6 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7yubf"]
+_data = {
+"RESET": SubResource("18"),
+"lightning day": SubResource("19")
+}
+
+[sub_resource type="Animation" id="20"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0.552941 ) ]
+"values": [Color(0, 0, 0, 0.552941)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("SavingProgress:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id="21"]
 resource_name = "sleep"
 length = 5.0
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0, 1, 1.5, 4, 5 ),
-"transitions": PackedFloat32Array( 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 1, 1.5, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0.552941 ), Color( 0, 0, 0, 0.552941 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [Color(0, 0, 0, 0.552941), Color(0, 0, 0, 0.552941), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("SavingProgress:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 1.5, 4 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(1.5, 4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 
-[sub_resource type="SpriteFrames" id=22]
-animations = [ {
-"sprite_frames": [ ExtResource( 16 ), ExtResource( 18 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ll8n3"]
+_data = {
+"RESET": SubResource("20"),
+"sleep": SubResource("21")
+}
+
+[sub_resource type="SpriteFrames" id="22"]
+animations = []
 
 [node name="UserInterface" type="CanvasLayer"]
-script = ExtResource( 23 )
-
-[node name="ItemPickUpDialogue" parent="." instance=ExtResource( 21 )]
-offset_left = 12.0
-offset_top = 402.0
-offset_right = 114.0
-offset_bottom = 504.0
+script = ExtResource("1_pv3v8")
 
 [node name="WeatherEffects" type="ColorRect" parent="."]
 offset_left = -49.0
@@ -181,15 +167,16 @@ offset_top = -39.0
 offset_right = 1966.0
 offset_bottom = 1120.0
 mouse_filter = 2
-color = Color( 1, 1, 1, 0 )
-script = ExtResource( 19 )
+color = Color(1, 1, 1, 0)
+script = ExtResource("2_rl35f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherEffects"]
-anims/RESET = SubResource( 18 )
-"anims/lightning day" = SubResource( 19 )
+libraries = {
+"": SubResource("AnimationLibrary_7yubf")
+}
 
 [node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="WeatherEffects"]
-stream = ExtResource( 13 )
+stream = ExtResource("13")
 
 [node name="LightningTimer" type="Timer" parent="WeatherEffects"]
 
@@ -200,157 +187,144 @@ offset_top = -70.0
 offset_right = 2021.0
 offset_bottom = 1142.0
 mouse_filter = 2
-color = Color( 1, 0, 0, 0 )
-
-[node name="CombatHotbar" parent="." instance=ExtResource( 10 )]
-visible = false
-
-[node name="Hotbar" parent="." instance=ExtResource( 17 )]
-offset_top = 593.0
-offset_bottom = 593.0
-
-[node name="Menu" parent="." instance=ExtResource( 15 )]
-visible = false
-
-[node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
-visible = false
-
-[node name="RadialUpgradeMenu" parent="." instance=ExtResource( 5 )]
-visible = false
-
-[node name="PlayerDataUI" parent="." instance=ExtResource( 12 )]
-offset_left = 1.0
-offset_right = 1.0
+color = Color(1, 0, 0, 0)
 
 [node name="SleepEffect" type="ColorRect" parent="."]
 visible = false
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 0.552941 )
+color = Color(0, 0, 0, 0.552941)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SleepEffect"]
-anims/RESET = SubResource( 20 )
-anims/sleep = SubResource( 21 )
+libraries = {
+"": SubResource("AnimationLibrary_ll8n3")
+}
 
 [node name="SavingProgress" type="RichTextLabel" parent="SleepEffect"]
 visible = false
+layout_mode = 0
 offset_left = 20.0
 offset_top = 640.0
 offset_right = 357.0
 offset_bottom = 710.0
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 bbcode_enabled = true
-text = "[wave]Saving progress"
 text = "Saving progress"
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="ChangeRotation" type="Control" parent="."]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_left = 115.0
 offset_top = 110.0
 offset_right = 155.0
 offset_bottom = 150.0
 
 [node name="TextureRect" type="TextureRect" parent="ChangeRotation"]
+layout_mode = 0
 offset_left = 209.0
 offset_top = 469.0
 offset_right = 310.0
 offset_bottom = 488.0
-scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
+scale = Vector2(2, 2)
 
 [node name="RotateLabel" type="Label" parent="ChangeRotation"]
+layout_mode = 0
 offset_left = 248.0
 offset_top = 475.0
 offset_right = 1028.0
 offset_bottom = 621.0
-scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
+scale = Vector2(0.2, 0.2)
+theme = ExtResource("6")
 text = "Change rotation"
-align = 1
 
 [node name="RotateKey" type="Label" parent="ChangeRotation"]
-modulate = Color( 0, 0, 0, 1 )
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = 217.0
 offset_top = 471.0
 offset_right = 337.0
 offset_bottom = 617.0
-scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
+scale = Vector2(0.2, 0.2)
+theme = ExtResource("6")
 text = "R"
-align = 1
 
 [node name="ChangeVariety" type="Control" parent="."]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_left = 138.0
 offset_top = 110.0
 offset_right = 178.0
 offset_bottom = 150.0
 
 [node name="TextureRect" type="TextureRect" parent="ChangeVariety"]
+layout_mode = 0
 offset_left = 613.0
 offset_top = 469.0
 offset_right = 714.0
 offset_bottom = 488.0
-scale = Vector2( 2, 2 )
-texture = ExtResource( 8 )
+scale = Vector2(2, 2)
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
+layout_mode = 0
 offset_left = 621.0
 offset_top = 475.0
 offset_right = 1411.0
 offset_bottom = 621.0
-scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
+scale = Vector2(0.2, 0.2)
+theme = ExtResource("6")
 text = "Change variety"
 
 [node name="VarietyKey" type="Label" parent="ChangeVariety"]
-modulate = Color( 0, 0, 0, 1 )
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = 783.0
 offset_top = 471.0
 offset_right = 903.0
 offset_bottom = 617.0
-scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
+scale = Vector2(0.2, 0.2)
+theme = ExtResource("6")
 text = "V"
-align = 1
 
 [node name="LoadingIndicator" type="Panel" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.921569 )
+modulate = Color(1, 1, 1, 0.921569)
 offset_right = 1280.0
 offset_bottom = 720.0
 
 [node name="LoadingIndicator" type="AnimatedSprite2D" parent="LoadingIndicator"]
-position = Vector2( 671, 374 )
-scale = Vector2( 10, 10 )
-sprite_frames = SubResource( 22 )
+position = Vector2(671, 374)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("22")
+animation = &""
 frame = 3
-playing = true
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 640.0
 offset_right = 357.0
 offset_bottom = 710.0
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 bbcode_enabled = true
-text = "[wave]Saving progress"
 text = "Saving progress"
 
 [node name="Beta" type="Label" parent="LoadingIndicator"]
+layout_mode = 0
 offset_left = 1137.0
 offset_top = 14.0
 offset_right = 1299.0
 offset_bottom = 108.0
 grow_horizontal = 0
-scale = Vector2( 0.8, 0.8 )
-theme = ExtResource( 9 )
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("9")
 text = "Beta  v1.3"
 
-[node name="LoadingScreen" parent="." instance=ExtResource( 4 )]
+[node name="LoadingScreen" parent="." instance=ExtResource("4")]
 visible = false
 
 [connection signal="timeout" from="WeatherEffects/LightningTimer" to="WeatherEffects" method="_on_LightningTimer_timeout"]

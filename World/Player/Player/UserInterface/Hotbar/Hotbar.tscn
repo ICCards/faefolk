@@ -1,116 +1,102 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://dd0n86ke85w5d"]
 
-[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Hotbar/Hotbar.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/User interface/hotbars/hotbar-new.png" type="Texture2D" id=3]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/switch_btn2.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/switch_btn1.png" type="Texture2D" id=6]
+[ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="1"]
+[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Hotbar/Hotbar.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://fmfyvumoluu0" path="res://Assets/Images/User interface/hotbars/hotbar-new.png" id="3"]
+[ext_resource type="PackedScene" path="res://InventoryLogic/ItemDescription.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://dmv6j3ojkndy3" path="res://Assets/Images/User interface/combat hotbar/switch_btn2.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dpvnod2gp0wlu" path="res://Assets/Images/User interface/combat hotbar/switch_btn1.png" id="6"]
 
 [node name="Hotbar" type="Control"]
-script = ExtResource( 2 )
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2")
 
 [node name="Bg" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 327.0
 offset_top = 24.0
 offset_right = 535.0
 offset_bottom = 56.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 mouse_filter = 0
-texture = ExtResource( 3 )
+texture = ExtResource("3")
 stretch_mode = 4
 
-[node name="ItemDescription" parent="." instance=ExtResource( 4 )]
+[node name="ItemDescription" parent="." instance=ExtResource("4")]
 visible = false
-position = Vector2( 327, -30 )
+position = Vector2(327, -30)
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 345.0
 offset_top = 51.0
 offset_right = 933.0
 offset_bottom = 99.0
-custom_constants/h_separation = 12
+theme_override_constants/h_separation = 12
 columns = 10
 
 [node name="Slot1" type="Panel" parent="HotbarSlots"]
-offset_right = 48.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot2" type="Panel" parent="HotbarSlots"]
-offset_left = 60.0
-offset_right = 108.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot3" type="Panel" parent="HotbarSlots"]
-offset_left = 120.0
-offset_right = 168.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot4" type="Panel" parent="HotbarSlots"]
-offset_left = 180.0
-offset_right = 228.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot5" type="Panel" parent="HotbarSlots"]
-offset_left = 240.0
-offset_right = 288.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot6" type="Panel" parent="HotbarSlots"]
-offset_left = 300.0
-offset_right = 348.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot7" type="Panel" parent="HotbarSlots"]
-offset_left = 360.0
-offset_right = 408.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot8" type="Panel" parent="HotbarSlots"]
-offset_left = 420.0
-offset_right = 468.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot9" type="Panel" parent="HotbarSlots"]
-offset_left = 480.0
-offset_right = 528.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="Slot10" type="Panel" parent="HotbarSlots"]
 show_behind_parent = true
-offset_left = 540.0
-offset_right = 588.0
-offset_bottom = 48.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1")
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="SwitchHotbarBtn" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 279.0
 offset_top = 69.0
 offset_right = 295.0
 offset_bottom = 85.0
-scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 6 )
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5")
+texture_pressed = ExtResource("6")
 
 [connection signal="pressed" from="SwitchHotbarBtn" to="." method="_on_SwitchHotbarBtn_pressed"]

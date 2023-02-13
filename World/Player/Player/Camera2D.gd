@@ -3,7 +3,6 @@ extends Camera2D
 
 @onready var timer_shake_length = $timer_shake_length
 @onready var timer_wait_times = $timer_wait_times
-@onready var tween_shake = $Tween
 
 var time_of_shake = 3.0
 var speed_of_shake = 0.02
@@ -32,13 +31,13 @@ func timeout_shake_length():
 #This function does the tween shaking between intervals
 func timeout_wait_times():
 	if(doing_shake):
-		tween_shake.interpolate_property(self,"offset",offset, Vector2(randf_range(-strength,strength),randf_range(-strength,strength)),reset_speed,Tween.TRANS_SINE,Tween.EASE_OUT)
-		tween_shake.start()
+		var tween = get_tree().create_tween()
+		tween.tween_property(self,"offset", Vector2(randf_range(-strength,strength),randf_range(-strength,strength)),reset_speed)
 		
 #once we've finished shaking the screen, tween to original offset
 func reset_camera():
-	tween_shake.interpolate_property(self,"offset",offset, Vector2(0,0),reset_speed,Tween.TRANS_SINE,Tween.EASE_OUT)
-	tween_shake.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self,"offset",Vector2(0,0),reset_speed)
 	
 #we're telling the camera to start the shake, and pass some varibles to used in functions else where
 func start_shake():

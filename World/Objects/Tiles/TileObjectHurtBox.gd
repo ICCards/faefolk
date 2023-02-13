@@ -19,8 +19,6 @@ func _ready():
 	call_deferred("set_dimensions")
 	#thread.start(Callable(self,"set_dimensions_deferred").bind(null))
 
-#func set_dimensions_deferred(value):
-#	call_deferred("set_dimensions")
 
 func set_dimensions():
 	rng.randomize()
@@ -314,7 +312,7 @@ func return_adjusted_chair_position(direction):
 			match direction:
 				"down":
 					if Server.player_node.position.x - 32 > position.x:
-						 return position+Vector2(64,0)
+						return position+Vector2(64,0)
 					else:
 						return position+Vector2(32,0)
 				"up":

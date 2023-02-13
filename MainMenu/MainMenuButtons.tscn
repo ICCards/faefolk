@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3vdyc3n310f7"]
+[gd_scene load_steps=7 format=3 uid="uid://b3vdyc3n310f7"]
 
 [ext_resource type="Script" path="res://MainMenu/MainMenuButtons.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dj3hn6egvrpeb" path="res://Assets/Images/Misc/MainMenu/play button.png" id="3"]
@@ -7,14 +7,13 @@
 [ext_resource type="Theme" uid="uid://cj0asnhg7avhi" path="res://Assets/Themes/MenuTitle.tres" id="6"]
 [ext_resource type="Theme" uid="uid://bf5tnmvvjqu1j" path="res://Assets/Themes/UI_Title.tres" id="7"]
 
-[sub_resource type="SpriteFrames" id="6"]
-animations = []
-
 [node name="MainMenuButtons" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2")
 
@@ -124,13 +123,6 @@ offset_bottom = -639.0
 scale = Vector2(0.7, 0.7)
 theme = ExtResource("6")
 text = "Connect to Plug"
-
-[node name="LoadingIndicator" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(1349, -52)
-scale = Vector2(18, 18)
-sprite_frames = SubResource("6")
-animation = &""
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 volume_db = -28.0

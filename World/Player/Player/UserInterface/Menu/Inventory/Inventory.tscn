@@ -117,6 +117,7 @@ anchors_preset = 0
 script = ExtResource("1_ecmi3")
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0

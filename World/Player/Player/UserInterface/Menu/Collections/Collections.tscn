@@ -1,19 +1,24 @@
-[gd_scene load_steps=211 format=3 uid="uid://b3ad8jm57r5at"]
+[gd_scene load_steps=122 format=3 uid="uid://b3ad8jm57r5at"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" id="1_co4t8"]
 [ext_resource type="PackedScene" path="res://InventoryLogic/CollectionItemDescription.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://xdnb6a0u2yhl" path="res://Assets/Images/User interface/inventory/collections/crops-tab.png" id="2_apuhn"]
-[ext_resource type="PackedScene" path="res://InventoryLogic/ItemNameBox.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="3"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" id="5_pwxe3"]
 [ext_resource type="Texture2D" uid="uid://by5u0b077vfy6" path="res://Assets/Images/inventory_icons/Crop/carrot.png" id="6_ddxck"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" id="7_du1gv"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/MobCollection.gd" id="8_pyiy0"]
+[ext_resource type="Texture2D" uid="uid://bwy1uut25ldmi" path="res://Assets/Images/User interface/buttons-icons/mob icons/wolf.png" id="9_cg53e"]
 [ext_resource type="Material" uid="uid://devwpugyp6x7u" path="res://Assets/Themes/LockedAsset.tres" id="10"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" id="10_78mha"]
 [ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Menu/Collections/collection_item.gd" id="11"]
+[ext_resource type="Texture2D" uid="uid://b1ju2e10selvc" path="res://Assets/Images/inventory_icons/Fish/albacore.png" id="11_4jrcy"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/ForageCollection.gd" id="11_ii5ys"]
-[ext_resource type="Texture2D" uid="uid://ulv7qp5wbels" path="res://Assets/Images/inventory_icons/Forage/mushroom.png" id="12"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/FoodCollection.gd" id="14_00116"]
+[ext_resource type="Texture2D" uid="uid://dejiwi7arb8qh" path="res://Assets/Images/Forage/flower/poppy flower.png" id="14_xeolr"]
+[ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="15_uwvpa"]
+[ext_resource type="Texture2D" uid="uid://dy3mb48lfw7fd" path="res://Assets/Images/inventory_icons/Food/asparagus omelette.png" id="17_3wrdp"]
+[ext_resource type="Texture2D" uid="uid://cg87fknnqacnk" path="res://Assets/Images/inventory_icons/Food/pepper and asparagus stir fry.png" id="19_3cenc"]
 
 [sub_resource type="Shader" id="16"]
 code = "shader_type canvas_item;
@@ -159,8 +164,6 @@ shader = SubResource("16")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="118"]
-
 [sub_resource type="Shader" id="383"]
 code = "shader_type canvas_item;
 
@@ -179,15 +182,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="142"]
-
 [sub_resource type="ShaderMaterial" id="143"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="144"]
 
 [sub_resource type="ShaderMaterial" id="145"]
 resource_local_to_scene = true
@@ -195,15 +194,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="146"]
-
 [sub_resource type="ShaderMaterial" id="147"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="148"]
 
 [sub_resource type="ShaderMaterial" id="149"]
 resource_local_to_scene = true
@@ -211,15 +206,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="150"]
-
 [sub_resource type="ShaderMaterial" id="151"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="152"]
 
 [sub_resource type="ShaderMaterial" id="153"]
 resource_local_to_scene = true
@@ -227,15 +218,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="154"]
-
 [sub_resource type="ShaderMaterial" id="155"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="156"]
 
 [sub_resource type="ShaderMaterial" id="157"]
 resource_local_to_scene = true
@@ -243,15 +230,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="158"]
-
 [sub_resource type="ShaderMaterial" id="159"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="160"]
 
 [sub_resource type="ShaderMaterial" id="161"]
 resource_local_to_scene = true
@@ -259,15 +242,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="162"]
-
 [sub_resource type="ShaderMaterial" id="163"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="164"]
 
 [sub_resource type="ShaderMaterial" id="165"]
 resource_local_to_scene = true
@@ -275,15 +254,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="166"]
-
 [sub_resource type="ShaderMaterial" id="167"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="168"]
 
 [sub_resource type="ShaderMaterial" id="169"]
 resource_local_to_scene = true
@@ -291,15 +266,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="170"]
-
 [sub_resource type="ShaderMaterial" id="171"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="172"]
 
 [sub_resource type="ShaderMaterial" id="173"]
 resource_local_to_scene = true
@@ -307,15 +278,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="174"]
-
 [sub_resource type="ShaderMaterial" id="175"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="176"]
 
 [sub_resource type="ShaderMaterial" id="177"]
 resource_local_to_scene = true
@@ -323,15 +290,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="178"]
-
 [sub_resource type="ShaderMaterial" id="179"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="180"]
 
 [sub_resource type="ShaderMaterial" id="181"]
 resource_local_to_scene = true
@@ -339,15 +302,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="182"]
-
 [sub_resource type="ShaderMaterial" id="183"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="184"]
 
 [sub_resource type="ShaderMaterial" id="185"]
 resource_local_to_scene = true
@@ -355,47 +314,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="186"]
-
 [sub_resource type="ShaderMaterial" id="187"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="188"]
-
-[sub_resource type="CompressedTexture2D" id="189"]
-
-[sub_resource type="CompressedTexture2D" id="190"]
-
-[sub_resource type="CompressedTexture2D" id="191"]
-
-[sub_resource type="CompressedTexture2D" id="192"]
-
-[sub_resource type="CompressedTexture2D" id="193"]
-
-[sub_resource type="CompressedTexture2D" id="194"]
-
-[sub_resource type="CompressedTexture2D" id="195"]
-
-[sub_resource type="CompressedTexture2D" id="196"]
-
-[sub_resource type="CompressedTexture2D" id="197"]
-
-[sub_resource type="CompressedTexture2D" id="198"]
-
-[sub_resource type="CompressedTexture2D" id="199"]
-
-[sub_resource type="CompressedTexture2D" id="200"]
-
-[sub_resource type="CompressedTexture2D" id="201"]
-
-[sub_resource type="CompressedTexture2D" id="202"]
-
-[sub_resource type="CompressedTexture2D" id="203"]
-
-[sub_resource type="CompressedTexture2D" id="204"]
 
 [sub_resource type="GDScript" id="205"]
 script/source = "extends GridContainer
@@ -430,15 +353,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="207"]
-
 [sub_resource type="ShaderMaterial" id="208"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="209"]
 
 [sub_resource type="ShaderMaterial" id="210"]
 resource_local_to_scene = true
@@ -446,15 +365,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="211"]
-
 [sub_resource type="ShaderMaterial" id="212"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="213"]
 
 [sub_resource type="ShaderMaterial" id="214"]
 resource_local_to_scene = true
@@ -462,15 +377,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="215"]
-
 [sub_resource type="ShaderMaterial" id="216"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="217"]
 
 [sub_resource type="ShaderMaterial" id="218"]
 resource_local_to_scene = true
@@ -478,15 +389,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="219"]
-
 [sub_resource type="ShaderMaterial" id="220"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="221"]
 
 [sub_resource type="ShaderMaterial" id="222"]
 resource_local_to_scene = true
@@ -494,15 +401,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="223"]
-
 [sub_resource type="ShaderMaterial" id="224"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="225"]
 
 [sub_resource type="ShaderMaterial" id="226"]
 resource_local_to_scene = true
@@ -510,15 +413,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="227"]
-
 [sub_resource type="ShaderMaterial" id="228"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="229"]
 
 [sub_resource type="ShaderMaterial" id="230"]
 resource_local_to_scene = true
@@ -526,15 +425,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="231"]
-
 [sub_resource type="ShaderMaterial" id="232"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="233"]
 
 [sub_resource type="ShaderMaterial" id="234"]
 resource_local_to_scene = true
@@ -542,15 +437,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="235"]
-
 [sub_resource type="ShaderMaterial" id="236"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="237"]
 
 [sub_resource type="ShaderMaterial" id="238"]
 resource_local_to_scene = true
@@ -558,15 +449,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="239"]
-
 [sub_resource type="ShaderMaterial" id="240"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="241"]
 
 [sub_resource type="ShaderMaterial" id="242"]
 resource_local_to_scene = true
@@ -574,15 +461,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="243"]
-
 [sub_resource type="ShaderMaterial" id="244"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="245"]
 
 [sub_resource type="ShaderMaterial" id="246"]
 resource_local_to_scene = true
@@ -590,15 +473,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="247"]
-
 [sub_resource type="ShaderMaterial" id="248"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="249"]
 
 [sub_resource type="ShaderMaterial" id="250"]
 resource_local_to_scene = true
@@ -606,15 +485,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="251"]
-
 [sub_resource type="ShaderMaterial" id="252"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="253"]
 
 [sub_resource type="ShaderMaterial" id="254"]
 resource_local_to_scene = true
@@ -622,15 +497,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="255"]
-
 [sub_resource type="ShaderMaterial" id="256"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="257"]
 
 [sub_resource type="ShaderMaterial" id="258"]
 resource_local_to_scene = true
@@ -638,15 +509,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="259"]
-
 [sub_resource type="ShaderMaterial" id="260"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="261"]
 
 [sub_resource type="ShaderMaterial" id="262"]
 resource_local_to_scene = true
@@ -654,15 +521,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="263"]
-
 [sub_resource type="ShaderMaterial" id="266"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="267"]
 
 [sub_resource type="ShaderMaterial" id="278"]
 resource_local_to_scene = true
@@ -670,15 +533,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="279"]
-
 [sub_resource type="ShaderMaterial" id="280"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="281"]
 
 [sub_resource type="ShaderMaterial" id="282"]
 resource_local_to_scene = true
@@ -686,15 +545,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="283"]
-
 [sub_resource type="ShaderMaterial" id="284"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="285"]
 
 [sub_resource type="ShaderMaterial" id="286"]
 resource_local_to_scene = true
@@ -702,15 +557,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="287"]
-
 [sub_resource type="ShaderMaterial" id="288"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="289"]
 
 [sub_resource type="ShaderMaterial" id="290"]
 resource_local_to_scene = true
@@ -718,15 +569,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="291"]
-
 [sub_resource type="ShaderMaterial" id="292"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="293"]
 
 [sub_resource type="ShaderMaterial" id="294"]
 resource_local_to_scene = true
@@ -734,15 +581,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="295"]
-
 [sub_resource type="ShaderMaterial" id="296"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="297"]
 
 [sub_resource type="ShaderMaterial" id="298"]
 resource_local_to_scene = true
@@ -750,15 +593,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="299"]
-
 [sub_resource type="ShaderMaterial" id="300"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="301"]
 
 [sub_resource type="ShaderMaterial" id="302"]
 resource_local_to_scene = true
@@ -766,15 +605,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="303"]
-
 [sub_resource type="ShaderMaterial" id="304"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="305"]
 
 [sub_resource type="ShaderMaterial" id="306"]
 resource_local_to_scene = true
@@ -782,15 +617,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="307"]
-
 [sub_resource type="ShaderMaterial" id="308"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="309"]
 
 [sub_resource type="ShaderMaterial" id="310"]
 resource_local_to_scene = true
@@ -798,15 +629,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="311"]
-
 [sub_resource type="ShaderMaterial" id="268"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="269"]
 
 [sub_resource type="ShaderMaterial" id="270"]
 resource_local_to_scene = true
@@ -814,15 +641,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="271"]
-
 [sub_resource type="ShaderMaterial" id="272"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="273"]
 
 [sub_resource type="ShaderMaterial" id="274"]
 resource_local_to_scene = true
@@ -830,15 +653,11 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="275"]
-
 [sub_resource type="ShaderMaterial" id="276"]
 resource_local_to_scene = true
 shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="CompressedTexture2D" id="277"]
 
 [sub_resource type="ShaderMaterial" id="264"]
 resource_local_to_scene = true
@@ -846,14 +665,14 @@ shader = SubResource("383")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="CompressedTexture2D" id="265"]
-
 [node name="Collections" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_co4t8")
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -911,6 +730,7 @@ visible = false
 visible = false
 
 [node name="CropCollection" type="GridContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 427.0
 offset_top = 191.0
@@ -923,6 +743,7 @@ columns = 6
 script = ExtResource("5_pwxe3")
 
 [node name="garlic" type="TextureRect" parent="CropCollection"]
+visible = false
 material = SubResource("49")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
@@ -1070,76 +891,70 @@ offset_top = 191.0
 offset_right = 568.0
 offset_bottom = 307.0
 scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
 script = ExtResource("8_pyiy0")
 
 [node name="duck" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="bunny" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="deer" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="bear" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="wolf" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="boar" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="slime" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="spider" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="bat" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="skeleton" type="TextureRect" parent="MobCollection"]
 material = SubResource("49")
 layout_mode = 2
-texture = SubResource("118")
-script = ExtResource("11")
-
-[node name="Tween" type="Tween" parent="MobCollection"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="FishCollection" type="GridContainer" parent="."]
 visible = false
@@ -1149,550 +964,533 @@ offset_top = 191.0
 offset_right = 567.0
 offset_bottom = 282.0
 scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
 script = ExtResource("10_78mha")
 
 [node name="albacore" type="TextureRect" parent="FishCollection"]
 material = SubResource("141")
 layout_mode = 2
-texture = SubResource("142")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="anchovy" type="TextureRect" parent="FishCollection"]
 material = SubResource("143")
 layout_mode = 2
-texture = SubResource("144")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="angler" type="TextureRect" parent="FishCollection"]
 material = SubResource("145")
 layout_mode = 2
-texture = SubResource("146")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="betta" type="TextureRect" parent="FishCollection"]
 material = SubResource("147")
 layout_mode = 2
-texture = SubResource("148")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="blowfish" type="TextureRect" parent="FishCollection"]
 material = SubResource("149")
 layout_mode = 2
-texture = SubResource("150")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="catfish" type="TextureRect" parent="FishCollection"]
 material = SubResource("151")
 layout_mode = 2
-texture = SubResource("152")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="cisco" type="TextureRect" parent="FishCollection"]
 material = SubResource("153")
 layout_mode = 2
-texture = SubResource("154")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="clownfish" type="TextureRect" parent="FishCollection"]
 material = SubResource("155")
 layout_mode = 2
-texture = SubResource("156")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="crab" type="TextureRect" parent="FishCollection"]
 material = SubResource("157")
 layout_mode = 2
-texture = SubResource("158")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="dorado" type="TextureRect" parent="FishCollection"]
 material = SubResource("159")
 layout_mode = 2
-texture = SubResource("160")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="eel" type="TextureRect" parent="FishCollection"]
 material = SubResource("161")
 layout_mode = 2
-texture = SubResource("162")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="goldfish" type="TextureRect" parent="FishCollection"]
 material = SubResource("163")
 layout_mode = 2
-texture = SubResource("164")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="halibut" type="TextureRect" parent="FishCollection"]
 material = SubResource("165")
 layout_mode = 2
-texture = SubResource("166")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="koi" type="TextureRect" parent="FishCollection"]
 material = SubResource("167")
 layout_mode = 2
-texture = SubResource("168")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="lingcod" type="TextureRect" parent="FishCollection"]
 material = SubResource("169")
 layout_mode = 2
-texture = SubResource("170")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="nelma" type="TextureRect" parent="FishCollection"]
 material = SubResource("171")
 layout_mode = 2
-texture = SubResource("172")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="octopus" type="TextureRect" parent="FishCollection"]
 material = SubResource("173")
 layout_mode = 2
-texture = SubResource("174")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="purple carp" type="TextureRect" parent="FishCollection"]
 material = SubResource("175")
 layout_mode = 2
-texture = SubResource("176")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="purple salmon" type="TextureRect" parent="FishCollection"]
 material = SubResource("177")
 layout_mode = 2
-texture = SubResource("178")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="red salmon" type="TextureRect" parent="FishCollection"]
 material = SubResource("179")
 layout_mode = 2
-texture = SubResource("180")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="seaweed" type="TextureRect" parent="FishCollection"]
 material = SubResource("181")
 layout_mode = 2
-texture = SubResource("182")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="shrimp" type="TextureRect" parent="FishCollection"]
 material = SubResource("183")
 layout_mode = 2
-texture = SubResource("184")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="siberian whitefish" type="TextureRect" parent="FishCollection"]
 material = SubResource("185")
 layout_mode = 2
-texture = SubResource("186")
-script = ExtResource("11")
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="tilapia" type="TextureRect" parent="FishCollection"]
 material = SubResource("187")
 layout_mode = 2
-texture = SubResource("188")
-script = ExtResource("11")
-
-[node name="Tween" type="Tween" parent="FishCollection"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="ForageCollection" type="GridContainer" parent="."]
 visible = false
 layout_mode = 0
 offset_left = 426.0
 offset_top = 191.0
-offset_right = 602.0
+offset_right = 570.0
 offset_bottom = 300.0
 scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
 script = ExtResource("11_ii5ys")
 
 [node name="poppy flower" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("189")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="lily of the nile" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("190")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="tulip" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("191")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="dandelion" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("192")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="sunflower" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("192")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="green grass" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("193")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="red grass" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("194")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="yellow grass" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("195")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="dark green grass" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("196")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="pink clam" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("197")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="blue clam" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("198")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="red clam" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("199")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="starfish" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("200")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="baby starfish" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("201")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="blue pearl" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("202")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="pink pearl" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("203")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="white pearl" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = SubResource("204")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="common mushroom" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = ExtResource("12")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="healing mushroom" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = ExtResource("12")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="purple mushroom" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = ExtResource("12")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="chanterelle" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = ExtResource("12")
-script = ExtResource("11")
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="raw egg" type="TextureRect" parent="ForageCollection"]
 material = ExtResource("10")
 layout_mode = 2
-texture = ExtResource("12")
-script = ExtResource("11")
-
-[node name="Tween" type="Tween" parent="ForageCollection"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="ResourceCollection" type="GridContainer" parent="."]
 visible = false
 layout_mode = 0
 offset_left = 426.0
 offset_top = 191.0
-offset_right = 602.0
+offset_right = 567.0
 offset_bottom = 300.0
 scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
 script = SubResource("205")
 
 [node name="wood" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("206")
 layout_mode = 2
-texture = SubResource("207")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="stone" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("206")
 layout_mode = 2
-texture = SubResource("207")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="coal" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("206")
 layout_mode = 2
-texture = SubResource("207")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="rope" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("206")
 layout_mode = 2
-texture = SubResource("207")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="bronze ore" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("206")
 layout_mode = 2
-texture = SubResource("207")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="iron ore" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("206")
 layout_mode = 2
-texture = SubResource("207")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="gold ore" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("208")
 layout_mode = 2
-texture = SubResource("209")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="aquamarine" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("210")
 layout_mode = 2
-texture = SubResource("211")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="emerald" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("212")
 layout_mode = 2
-texture = SubResource("213")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="ruby" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("214")
 layout_mode = 2
-texture = SubResource("215")
-script = ExtResource("11")
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="sapphire" type="TextureRect" parent="ResourceCollection"]
 material = SubResource("216")
 layout_mode = 2
-texture = SubResource("217")
-script = ExtResource("11")
-
-[node name="Tween" type="Tween" parent="ResourceCollection"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="FoodCollection1" type="GridContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 426.0
 offset_top = 191.0
 offset_right = 567.0
 offset_bottom = 282.0
 scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
 script = ExtResource("14_00116")
 
 [node name="asparagus omelette" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("218")
 layout_mode = 2
-texture = SubResource("219")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="baked catfish" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("220")
 layout_mode = 2
-texture = SubResource("221")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="baked dorado" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("222")
 layout_mode = 2
-texture = SubResource("223")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="baked zucchini" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("224")
 layout_mode = 2
-texture = SubResource("225")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="blowfish tails" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("226")
 layout_mode = 2
-texture = SubResource("227")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="blueberry cake" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("228")
 layout_mode = 2
-texture = SubResource("229")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="blueberry pie" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("230")
 layout_mode = 2
-texture = SubResource("231")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="calamari with tomatoes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("232")
 layout_mode = 2
-texture = SubResource("233")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="cauliflower soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("234")
 layout_mode = 2
-texture = SubResource("235")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="cooked filet" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("236")
 layout_mode = 2
-texture = SubResource("237")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="cooked green beans" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("238")
 layout_mode = 2
-texture = SubResource("239")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="cooked wing" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("240")
 layout_mode = 2
-texture = SubResource("241")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="crab cakes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("242")
 layout_mode = 2
-texture = SubResource("243")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="filet mignon" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("244")
 layout_mode = 2
-texture = SubResource("245")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="filet soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("246")
 layout_mode = 2
-texture = SubResource("247")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="filet with garlic mash" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("248")
 layout_mode = 2
-texture = SubResource("249")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="filet with tomatoes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("250")
 layout_mode = 2
-texture = SubResource("251")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="grape pastry" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("252")
 layout_mode = 2
-texture = SubResource("253")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="green pepper soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("254")
 layout_mode = 2
-texture = SubResource("255")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="honeydew melon with sugar" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("256")
 layout_mode = 2
-texture = SubResource("257")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="mushroom soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("258")
 layout_mode = 2
-texture = SubResource("259")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="pepper and asparagus stir fry" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("260")
 layout_mode = 2
-texture = SubResource("261")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="mini grape tarts" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("262")
 layout_mode = 2
-texture = SubResource("263")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="potatoes with asparagus" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("266")
 layout_mode = 2
-texture = SubResource("267")
+texture = ExtResource("17_3wrdp")
 script = ExtResource("11")
 
 [node name="FoodCollection2" type="GridContainer" parent="."]
@@ -1709,140 +1507,140 @@ script = ExtResource("14_00116")
 [node name="scrambled eggs" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("278")
 layout_mode = 2
-texture = SubResource("279")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="seaweed salad" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("280")
 layout_mode = 2
-texture = SubResource("281")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="sliced tomatoes and potatoes" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("282")
 layout_mode = 2
-texture = SubResource("283")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="smoked jalapeno with eggs" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("284")
 layout_mode = 2
-texture = SubResource("285")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="spaghetti" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("286")
 layout_mode = 2
-texture = SubResource("287")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="spicy eel" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("288")
 layout_mode = 2
-texture = SubResource("289")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="spicy shrimps" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("290")
 layout_mode = 2
-texture = SubResource("291")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="strawberry cake" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("292")
 layout_mode = 2
-texture = SubResource("293")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="strawberry tart" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("294")
 layout_mode = 2
-texture = SubResource("295")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="sugar cane kheer" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("296")
 layout_mode = 2
-texture = SubResource("297")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="tomato sandwich" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("298")
 layout_mode = 2
-texture = SubResource("299")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="tomato soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("300")
 layout_mode = 2
-texture = SubResource("301")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="vegetable soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("302")
 layout_mode = 2
-texture = SubResource("303")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="wings with corn" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("304")
 layout_mode = 2
-texture = SubResource("305")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="yellow onion soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("306")
 layout_mode = 2
-texture = SubResource("307")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="yellow pepper soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("308")
 layout_mode = 2
-texture = SubResource("309")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="zucchini soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("310")
 layout_mode = 2
-texture = SubResource("311")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="potatoes with green beans" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("268")
 layout_mode = 2
-texture = SubResource("269")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="radish soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("270")
 layout_mode = 2
-texture = SubResource("271")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="red pepper soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("272")
 layout_mode = 2
-texture = SubResource("273")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="sashimi" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("274")
 layout_mode = 2
-texture = SubResource("275")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="sauteed cabbage with garlic" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("276")
 layout_mode = 2
-texture = SubResource("277")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="potato soup" type="TextureRect" parent="FoodCollection2"]
 material = SubResource("264")
 layout_mode = 2
-texture = SubResource("265")
-script = ExtResource("11")
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [connection signal="mouse_entered" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_entered"]
 [connection signal="mouse_exited" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_exited"]

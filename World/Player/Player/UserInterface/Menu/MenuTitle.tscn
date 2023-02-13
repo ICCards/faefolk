@@ -1,24 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://b4k542eq2r5ul"]
 
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate-wide.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
+[ext_resource type="Texture2D" uid="uid://b0vx4w8ptu4i6" path="res://Assets/Images/User interface/buttons-icons/nameplate-wide.png" id="1"]
+[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
 
 [node name="MenuTitle" type="Label"]
 offset_right = 365.0
 offset_bottom = 75.0
-scale = Vector2( 0.48, 0.48 )
-theme = ExtResource( 2 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
+scale = Vector2(0.48, 0.48)
+theme = ExtResource("2")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 48
 text = "Brewing table #3"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NamePlate" type="TextureRect" parent="."]
 show_behind_parent = true
+layout_mode = 0
 offset_right = 121.0
 offset_bottom = 25.0
-scale = Vector2( 3, 3 )
-texture = ExtResource( 1 )
-expand = true
+scale = Vector2(3, 3)
+texture = ExtResource("1")
+expand_mode = 1

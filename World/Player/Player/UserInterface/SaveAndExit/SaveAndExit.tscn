@@ -1,123 +1,127 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://c3h518er5pspb"]
 
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture2D" id=2]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=3]
-[ext_resource path="res://Assets/Images/User interface/inventory/save/save-tab.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate2.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/nameplate2-seleceted.png" type="Texture2D" id=6]
-[ext_resource path="res://World3D/Player/Player/UserInterface/SaveAndExit/SaveAndExit.gd" type="Script" id=7]
-[ext_resource path="res://BetaLabel.tscn" type="PackedScene" id=8]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.133333, 0.133333, 0.137255, 0.568627 )
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.gd" id="1_py6al"]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="2"]
+[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://dymfr1m2gfhtf" path="res://Assets/Images/User interface/inventory/save/save-tab.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cw1joux2ogqum" path="res://Assets/Images/User interface/buttons-icons/nameplate2.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dit3tnpfnfauf" path="res://Assets/Images/User interface/buttons-icons/nameplate2-seleceted.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="8"]
 
 [node name="SaveAndExit" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource( 7 )
+script = ExtResource("1_py6al")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 1240.0
 offset_bottom = 680.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
 
-[node name="Bg" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 offset_right = 426.0
 offset_bottom = 240.0
-scale = Vector2( 3, 3 )
-texture = ExtResource( 4 )
-stretch_mode = 4
+scale = Vector2(3, 3)
+texture = ExtResource("4")
+stretch_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="ExitBtn" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 681.0
 offset_top = 282.0
 offset_right = 695.0
 offset_bottom = 296.0
-scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 1 )
-texture_pressed = ExtResource( 2 )
-expand = true
+scale = Vector2(3, 3)
+texture_normal = ExtResource("1")
+texture_pressed = ExtResource("2")
 
 [node name="SaveAndCtn" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 570.0
 offset_top = 294.0
 offset_right = 600.0
 offset_bottom = 306.0
-scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 6 )
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5")
+texture_pressed = ExtResource("6")
 
 [node name="SaveAndExit" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 570.0
 offset_top = 342.0
 offset_right = 600.0
 offset_bottom = 354.0
-scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 6 )
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5")
+texture_pressed = ExtResource("6")
 
 [node name="Exit" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 570.0
 offset_top = 390.0
 offset_right = 600.0
 offset_bottom = 402.0
-scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 6 )
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5")
+texture_pressed = ExtResource("6")
 
 [node name="1" type="Label" parent="."]
 offset_left = 570.0
-offset_top = 294.0
+offset_top = 292.0
 offset_right = 827.0
-offset_bottom = 398.0
-scale = Vector2( 0.35, 0.35 )
-theme = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/line_spacing = -18
-custom_constants/shadow_offset_y = 2
+offset_bottom = 408.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("3")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 48
 text = "Save and
 continue"
-align = 1
-valign = 1
+horizontal_alignment = 1
+clip_text = true
 
 [node name="2" type="Label" parent="."]
 offset_left = 570.0
-offset_top = 342.0
+offset_top = 340.0
 offset_right = 827.0
-offset_bottom = 446.0
-scale = Vector2( 0.35, 0.35 )
-theme = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/line_spacing = -18
-custom_constants/shadow_offset_y = 2
+offset_bottom = 456.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("3")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 48
 text = "Save and
 exit"
-align = 1
-valign = 1
+horizontal_alignment = 1
+clip_text = true
 
 [node name="3" type="Label" parent="."]
 offset_left = 571.0
-offset_top = 390.0
+offset_top = 388.0
 offset_right = 828.0
-offset_bottom = 494.0
-scale = Vector2( 0.35, 0.35 )
-theme = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/line_spacing = -18
-custom_constants/shadow_offset_y = 2
+offset_bottom = 504.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("3")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 48
 text = "Don't save 
 and exit"
-align = 1
-valign = 1
+horizontal_alignment = 1
+clip_text = true
 
-[node name="BetaLabel" parent="." instance=ExtResource( 8 )]
+[node name="BetaLabel" parent="." instance=ExtResource("8")]
+layout_mode = 0
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="pressed" from="SaveAndCtn" to="." method="_on_SaveAndCtn_pressed"]

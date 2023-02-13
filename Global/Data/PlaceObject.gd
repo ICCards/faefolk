@@ -5,11 +5,8 @@ extends Node
 @onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
 @onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
 @onready var BuildingTileObjectHurtBox = load("res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn")
-@onready var PlayerHouseObject = load("res://World/Objects/Farm/PlayerHouse.tscn")
-@onready var SleepingBag = load("res://World/Objects/Tiles/SleepingBag.tscn")
 @onready var DoorFront = load("res://World/Objects/Tiles/DoorFront.tscn")
 @onready var DoorSide = load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
-@onready var Rug  = load("res://World/Objects/Misc/Rug.tscn")
 @onready var GateFront = load("res://World/Objects/Tiles/GateFront.tscn")
 
 var rng = RandomNumberGenerator.new()
@@ -600,14 +597,6 @@ func place_object_in_world(id, item_name, direction, location):
 					Tiles.object_tiles.set_cellv(location, 66)
 				"left":
 					Tiles.object_tiles.set_cellv(location, 67)
-		"sleeping bag":
-			tileObjectHurtBox.queue_free()
-			var sleepingBag = SleepingBag.instantiate()
-			sleepingBag.direction = direction
-			sleepingBag.location = location
-			sleepingBag.id = id
-			PlacableObjects.call_deferred("add_child", sleepingBag, true)
-			sleepingBag.global_position = Tiles.valid_tiles.map_to_local(location) 
 		"display table":
 			Tiles.fence_tiles.set_cellv(location, 1)
 			Tiles.remove_valid_tiles(location)

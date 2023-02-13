@@ -23,7 +23,7 @@ func _input(event):
 		if(event is InputEventKey):
 			#Remove the old keys
 			var newkey = InputEventKey.new()
-			newkey.scancode = int(PlayerData.player_data["settings"]["key_dict"][action_name])
+			newkey.keycode = int(PlayerData.player_data["settings"]["key_dict"][action_name])
 			InputMap.action_erase_event(action_name,newkey)
 			#Add the new key for this action
 			InputMap.action_add_event(action_name,event)

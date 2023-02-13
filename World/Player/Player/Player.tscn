@@ -1,23 +1,24 @@
-[gd_scene load_steps=103 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=104 format=3 uid="uid://bdyinn6aswyx7"]
 
+[ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
 [ext_resource type="Texture2D" uid="uid://dybsd7fv08hlv" path="res://Assets/Images/inventory_icons/Fish/goldfish.png" id="2"]
+[ext_resource type="Script" path="res://World/Player/Player/Camera2D.gd" id="2_gk7ji"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" id="3_8lsbn"]
 [ext_resource type="Texture2D" uid="uid://du7w2lv4yqe2j" path="res://Characters/Human/male/SWORD BLOCK/body/down/arms.png" id="4"]
-[ext_resource type="Script" path="res://World3D/Player/Player/AttachedScripts/FootstepsSound.gd" id="5"]
 [ext_resource type="AudioStream" uid="uid://bwubv5h3bqf1k" path="res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3" id="6"]
 [ext_resource type="Texture2D" uid="uid://b1tevcnqyrs7v" path="res://Characters/Human/male/SWORD BLOCK/body/down/body.png" id="7"]
-[ext_resource type="Script" path="res://World3D/Player/Player/Player.gd" id="8"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="10"]
-[ext_resource type="Script" path="res://World3D/Player/Player/AttachedScripts/PickupZone.gd" id="12"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PickupZone.gd" id="11_vhk27"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/HurtBox.gd" id="12_7dou1"]
 [ext_resource type="Texture2D" uid="uid://bqipm0bfaxv8r" path="res://Characters/Human/male/SWORD BLOCK/assets/down/shoes/shoes.png" id="13"]
-[ext_resource type="Script" path="res://World3D/Player/Player/AttachedScripts/AmbientSound.gd" id="14"]
 [ext_resource type="Texture2D" uid="uid://dn4l61k1nnple" path="res://Characters/Weapon swings/scythe sword swing/sword block/gold/down.png" id="15"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" id="15_a8swc"]
 [ext_resource type="AudioStream" uid="uid://bdedmyao5swjq" path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" id="16"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" id="16_d5bcc"]
 [ext_resource type="Texture2D" uid="uid://q2stba7idq4n" path="res://Characters/Human/male/SWORD BLOCK/assets/down/head_attribute/hair.png" id="17"]
-[ext_resource type="Script" path="res://World3D/Player/Player/AttachedScripts/BackgroundMusic.gd" id="18"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" id="17_8vtdb"]
 [ext_resource type="Texture2D" uid="uid://dk47gt4i3a87g" path="res://Characters/Human/male/SWORD BLOCK/assets/down/shirts/shirt.png" id="23"]
 [ext_resource type="Texture2D" uid="uid://ck0068yooykvt" path="res://Characters/Human/male/SWORD BLOCK/assets/down/pants/pants.png" id="24"]
-[ext_resource type="Script" path="res://World3D/Player/Player/AttachedScripts/HurtBox.gd" id="32"]
-[ext_resource type="Script" path="res://World3D/Player/Player/Camera2D.gd" id="81"]
 
 [sub_resource type="Animation" id="3"]
 length = 0.001
@@ -12071,127 +12072,135 @@ animations = []
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 33
 collision_mask = 2097153
-script = ExtResource("8")
+script = ExtResource("1_hovno")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
 position_smoothing_speed = 40.0
-script = ExtResource("81")
+script = ExtResource("2_gk7ji")
 
 [node name="timer_shake_length" type="Timer" parent="Camera2D"]
 one_shot = true
 
 [node name="timer_wait_times" type="Timer" parent="Camera2D"]
 
-[node name="CompositeSprites@Body" type="Sprite2D" parent="."]
+[node name="CompositeSprites" type="Node2D" parent="."]
+script = ExtResource("3_8lsbn")
+
+[node name="Body" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("7")
 hframes = 4
 
-[node name="CompositeSprites@Legs" type="Sprite2D" parent="."]
+[node name="Legs" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
-[node name="CompositeSprites@HeadAtr" type="Sprite2D" parent="."]
+[node name="HeadAtr" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("17")
 hframes = 4
 
-[node name="CompositeSprites@Arms" type="Sprite2D" parent="."]
+[node name="Arms" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("4")
 hframes = 4
 
-[node name="CompositeSprites@Pants" type="Sprite2D" parent="."]
+[node name="Pants" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("24")
 hframes = 4
 
-[node name="CompositeSprites@Shirts" type="Sprite2D" parent="."]
+[node name="Shirts" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("23")
 hframes = 4
 
-[node name="CompositeSprites@Accessory" type="Sprite2D" parent="."]
+[node name="Accessory" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
-[node name="CompositeSprites@Shoes" type="Sprite2D" parent="."]
+[node name="Shoes" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("13")
 hframes = 4
 
-[node name="CompositeSprites@ToolEquipped" type="Sprite2D" parent="."]
+[node name="ToolEquipped" type="Sprite2D" parent="CompositeSprites"]
 position = Vector2(0, -16)
 texture = ExtResource("15")
 hframes = 4
 
-[node name="CompositeSprites@AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_k6v5m")
 }
 
-[node name="CompositeSprites@AnimationPlayer2" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="CompositeSprites"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_0rfkk")
 }
 
-[node name="Area2Ds@PickupZone" type="Area2D" parent="."]
+[node name="Area2Ds" type="Node2D" parent="."]
+
+[node name="PickupZone" type="Area2D" parent="Area2Ds"]
 visible = false
 scale = Vector2(1.33331, 1.22853)
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("12")
+script = ExtResource("11_vhk27")
 
-[node name="Area2Ds@PickupZone@CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -31.6016)
-scale = Vector2(1.0756, 1.07153)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/PickupZone"]
+position = Vector2(0, -25.7231)
+scale = Vector2(0.806714, 0.872205)
 shape = SubResource("9")
 
-[node name="Area2Ds@EnterDoors" type="Area2D" parent="."]
+[node name="EnterDoors" type="Area2D" parent="Area2Ds"]
 visible = false
 position = Vector2(0, 11)
 collision_layer = 32
 collision_mask = 4096
 
-[node name="Area2Ds@EnterDoors@CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -12)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterDoors"]
+position = Vector2(0, -23)
 shape = SubResource("10")
 
-[node name="Area2Ds@HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="Area2Ds"]
 collision_layer = 128
 collision_mask = 0
-script = ExtResource("32")
+script = ExtResource("12_7dou1")
 
-[node name="Area2Ds@HurtBox@CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/HurtBox"]
 position = Vector2(0, -10)
 shape = SubResource("21")
 
-[node name="Area2Ds@HurtBox@AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2Ds/HurtBox"]
+root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_hxbfa")
 }
 
-[node name="Area2Ds@HurtBox@PoisonTimer" type="Timer" parent="."]
+[node name="PoisonTimer" type="Timer" parent="Area2Ds/HurtBox"]
 wait_time = 2.0
 
-[node name="Area2Ds@HurtBox@RegenerationTimer" type="Timer" parent="."]
+[node name="RegenerationTimer" type="Timer" parent="Area2Ds/HurtBox"]
 
-[node name="Area2Ds@HurtBox@SoundEffects" type="AudioStreamPlayer2D" parent="."]
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="Area2Ds/HurtBox"]
 
-[node name="Area2Ds@SwordBlock" type="StaticBody2D" parent="."]
+[node name="SwordBlock" type="StaticBody2D" parent="Area2Ds"]
 collision_layer = 32
 collision_mask = 0
 
-[node name="Area2Ds@SwordBlock@CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/SwordBlock"]
 position = Vector2(0, 10)
 rotation = 1.5708
 shape = SubResource("122")
@@ -12208,14 +12217,14 @@ stream = ExtResource("6")
 volume_db = -16.0
 autoplay = true
 bus = &"Bus1"
-script = ExtResource("5")
+script = ExtResource("15_a8swc")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
 bus = &"Bus1"
-script = ExtResource("18")
+script = ExtResource("16_d5bcc")
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="Sounds"]
-script = ExtResource("14")
+script = ExtResource("17_8vtdb")
 
 [node name="HoldingItem" type="TextureRect" parent="."]
 visible = false

@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://suwmuinnbyjn"]
 
 [ext_resource type="Texture2D" uid="uid://cefhq312qr2uq" path="res://Assets/Images/User interface/inventory/crafting/crafting slider.png" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd" id="1_gsu72"]
 [ext_resource type="Texture2D" uid="uid://bsltdgi11pugj" path="res://Assets/Images/User interface/inventory/crafting/crafting-slider.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://btewrm02rhmnh" path="res://Assets/Images/User interface/inventory/crafting/crafting-tab.png" id="3"]
 [ext_resource type="PackedScene" path="res://InventoryLogic/CraftingItemDescription.tscn" id="4"]
-[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Menu/Crafting/Crafting.gd" id="6"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="8_iau4l"]
 [ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="9"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="9_aplqv"]
@@ -32,10 +32,11 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("6")
+script = ExtResource("1_gsu72")
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -286,6 +287,7 @@ layout_mode = 2
 script = ExtResource("9")
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource("8_iau4l")]
+layout_mode = 0
 offset_left = 638.0
 offset_top = 184.0
 offset_right = 938.0
@@ -296,6 +298,7 @@ columns = 5
 metadata/_edit_lock_ = true
 
 [node name="InventorySlots" parent="." instance=ExtResource("9_aplqv")]
+layout_mode = 0
 offset_left = 639.0
 offset_top = 315.0
 offset_right = 943.0

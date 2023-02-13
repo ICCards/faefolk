@@ -8,7 +8,6 @@ const ZOOM_INCREMENT: float = 0.1
 
 var _target_zoom: float = 1.2
 
-@onready var _tween: Tween = $Tween
 
 func _ready():
 	focus_position(Vector2(500,500))
@@ -45,6 +44,5 @@ func zoom_out() -> void:
 
 
 func focus_position(target_position: Vector2) -> void:
-	_tween.stop(self, "position")
-	_tween.interpolate_property(self, "position", position, target_position, 0.2, Tween.TRANS_EXPO)
-	_tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", target_position, 0.2)

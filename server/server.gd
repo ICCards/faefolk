@@ -22,7 +22,7 @@ extends Node
 #var latency_array = []
 #var isSpawned = false
 #var local_player_id = 0
-#var isLoaded = false
+var isLoaded = false
 #var player = {}
 var player_node
 #var player_id = "testID"

@@ -22,7 +22,7 @@ var hit_projectiles = []
 
 var health: int = Stats.BAT_HEALTH
 var STARTING_HEALTH: int = Stats.BAT_HEALTH
-var velocity = Vector2.ZERO
+#var velocity = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 
 @export var MAX_SPEED = 160

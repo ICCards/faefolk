@@ -4,17 +4,17 @@ extends CanvasLayer
 
 var holding_item = null
 
-@onready var SaveAndExitDialogue = load("res://World3D/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn")
-@onready var Menu = load("res://World3D/Player/Player/UserInterface/Menu/Menu.tscn")
-@onready var Hotbar = load("res://World3D/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
-@onready var Workbench = load("res://World3D/Player/Player/UserInterface/Workbench/Workbench.tscn")
-@onready var Stove = load("res://World3D/Player/Player/UserInterface/Stove/Stove.tscn")
-@onready var GrainMill = load("res://World3D/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
-@onready var Furnace = load("res://World3D/Player/Player/UserInterface/Furnace/Furnace.tscn")
-@onready var Chest = load("res://World3D/Player/Player/UserInterface/Chest/Chest.tscn")
-@onready var Tool_cabinet = load("res://World3D/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
-@onready var Campfire = load("res://World3D/Player/Player/UserInterface/Campfire/Campfire.tscn")
-@onready var BrewingTable = load("res://World3D/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
+@onready var SaveAndExitDialogue = load("res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn")
+@onready var Menu = load("res://World/Player/Player/UserInterface/Menu/Menu.tscn")
+@onready var Hotbar = load("res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn")
+@onready var Workbench = load("res://World/Player/Player/UserInterface/Workbench/Workbench.tscn")
+@onready var Stove = load("res://World/Player/Player/UserInterface/Stove/Stove.tscn")
+@onready var GrainMill = load("res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn")
+@onready var Furnace = load("res://World/Player/Player/UserInterface/Furnace/Furnace.tscn")
+@onready var Chest = load("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
+@onready var Tool_cabinet = load("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
+@onready var Campfire = load("res://World/Player/Player/UserInterface/Campfire/Campfire.tscn")
+@onready var BrewingTable = load("res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
 
 var items_to_drop = []
 

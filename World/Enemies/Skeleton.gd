@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var ArrowProjectile = load("res://World3D/Objects/Projectiles/ArrowProjectile.tscn")
+@onready var ArrowProjectile = load("res://World/Objects/Projectiles/ArrowProjectile.tscn")
 
 @onready var hit_box: Node2D = $ShootDirection
 @onready var skeleton_sprite: Sprite2D = $SkeletonSprite
@@ -21,7 +21,7 @@ var aiming: bool = false
 var attacking: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
-var velocity := Vector2.ZERO
+#var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 60.0
 var cancel_attack: bool = false
@@ -41,7 +41,7 @@ enum {
 	IDLE,
 	WALK,
 	AIM_IDLE,
-	AIM_WALK
+	AIM_WALK,
 	SHOOT,
 	RELEASE
 }

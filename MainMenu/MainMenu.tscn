@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://blc6g37rg80qc"]
+[gd_scene load_steps=29 format=3 uid="uid://blc6g37rg80qc"]
 
 [ext_resource type="Texture2D" uid="uid://ds11f4jtks5ik" path="res://Assets/Images/Misc/MainMenu/background.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://bbb43rymu58fb" path="res://Assets/Images/Misc/settings icon.png" id="3"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://ddd2o5o6mmly0" path="res://Assets/Images/Animations/water main menu/3b.png" id="10_1u1lm"]
 [ext_resource type="Texture2D" uid="uid://d4dk67jrqiqm" path="res://Assets/Images/Animations/water main menu/4b.png" id="11_f44t1"]
 [ext_resource type="Texture2D" uid="uid://dncukd0ceeiwo" path="res://Assets/Images/Animations/water main menu/5b.png" id="12_xq0bx"]
+[ext_resource type="PackedScene" uid="uid://boujb4h3xtdhe" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="17_6k084"]
+[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="17_utbmg"]
 [ext_resource type="PackedScene" uid="uid://b3vdyc3n310f7" path="res://MainMenu/MainMenuButtons.tscn" id="19_22cmn"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="21"]
 [ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="23"]
@@ -139,7 +141,7 @@ animation = &"loop"
 
 [node name="Sprite2" type="Sprite2D" parent="Background"]
 visible = false
-modulate = Color(1, 1, 1, 0.380392)
+modulate = Color(1, 1, 1, 0.396078)
 material = SubResource("9")
 position = Vector2(1075, 608)
 scale = Vector2(80, 80)
@@ -179,6 +181,16 @@ offset_bottom = 197.0
 color = Color(0.247059, 0.109804, 0.0627451, 1)
 metadata/_edit_lock_ = true
 
+[node name="MenuTitle" parent="OptionsMenuLayer/Options" instance=ExtResource("17_utbmg")]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 917.0
+offset_bottom = 192.0
+text = "Options"
+
+[node name="Options" parent="OptionsMenuLayer/Options" instance=ExtResource("17_6k084")]
+
 [node name="ExitBtn" type="TextureButton" parent="OptionsMenuLayer/Options"]
 layout_mode = 0
 offset_left = 918.0
@@ -195,9 +207,7 @@ offset_left = -6.0
 offset_top = 501.0
 offset_right = -6.0
 offset_bottom = 501.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.45, 0.45)
 
 [node name="BetaLabel" parent="." instance=ExtResource("23")]
 layout_mode = 1

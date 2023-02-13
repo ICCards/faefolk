@@ -1,22 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://1qkjgi02dok8"]
 
-[ext_resource path="res://Assets/Images/Animals/Bird/bird1.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://World3D/Animals/BirdFlyingFromTree.gd" type="Script" id=2]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Animals/Bird/bird1.tres" id="1"]
+[ext_resource type="Script" path="res://World/Animals/BirdFlyingFromTree.gd" id="1_yxg1s"]
 
 [node name="BirdFlyingFromTree" type="Node2D"]
-scale = Vector2( 2, 2 )
 z_index = 1
-script = ExtResource( 2 )
+scale = Vector2(2, 2)
+script = ExtResource("1_yxg1s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-position = Vector2( 0, -4 )
-sprite_frames = ExtResource( 1 )
-animation = "fly down"
-playing = true
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(0, -4)
+sprite_frames = ExtResource("1")
+animation = &"fly down"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2( 9.53674e-07, -9.53674e-07 )
-scale = Vector2( 1.75, 1.75 )
+position = Vector2(9.53674e-07, -9.53674e-07)
+scale = Vector2(1.75, 1.75)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

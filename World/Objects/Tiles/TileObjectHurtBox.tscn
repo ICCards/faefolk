@@ -1,76 +1,81 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=3 uid="uid://5h46m52gnkc4"]
 
-[ext_resource path="res://World3D/Objects/Tiles/TileObjectHurtBox.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Misc/light.png" type="Texture2D" id=2]
-[ext_resource path="res://World3D/Objects/Tiles/InteractiveArea.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/Animations/chest/wood/up.tres" type="SpriteFrames" id=5]
+[ext_resource type="Script" path="res://World/Objects/Tiles/TileObjectHurtBox.gd" id="1_gmkx7"]
+[ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
+[ext_resource type="Script" path="res://World/Objects/Tiles/InteractiveArea.gd" id="2_rsvx5"]
+[ext_resource type="SpriteFrames" uid="uid://pg8l86hoqsip" path="res://Assets/Images/Animations/chest/wood/up.tres" id="5"]
 
-[sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 16, 16 )
+[sub_resource type="RectangleShape2D" id="16"]
+size = Vector2(32, 32)
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 15, 14 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(30, 28)
 
-[sub_resource type="CircleShape2D" id=18]
+[sub_resource type="CircleShape2D" id="18"]
 radius = 31.0
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15, 15 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(30, 30)
 
-[sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 50, 30 )
+[sub_resource type="RectangleShape2D" id="17"]
+size = Vector2(100, 60)
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id="19"]
 resource_name = "shake"
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("ChestPos:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.05, 0.15, 0.25, 0.35, 0.4 ),
-"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( -2, 0 ), Vector2( 1, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ) ]
+"values": [Vector2(0, 0), Vector2(3, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(-1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_36o8j"]
+_data = {
+"shake": SubResource("19")
 }
 
 [node name="TileObjectHurtBox" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1_gmkx7")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2( 16, -16 )
+position = Vector2(16, -16)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Marker2D"]
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/StaticBody2D"]
 visible = false
-shape = SubResource( 16 )
+shape = SubResource("16")
 disabled = true
 
 [node name="InteractiveArea" type="Area2D" parent="Marker2D"]
 collision_layer = 0
 collision_mask = 131072
-script = ExtResource( 3 )
+script = ExtResource("2_rsvx5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/InteractiveArea"]
-position = Vector2( 0, 14 )
-shape = SubResource( 4 )
+position = Vector2(0, 14)
+shape = SubResource("4")
 disabled = true
 
 [node name="CampfireInteractiveArea" type="Area2D" parent="Marker2D"]
 visible = false
 collision_layer = 0
 collision_mask = 131072
-script = ExtResource( 3 )
+script = ExtResource("2_rsvx5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/CampfireInteractiveArea"]
-shape = SubResource( 18 )
+shape = SubResource("18")
 disabled = true
 
 [node name="DetectObjectOverPathBox" type="Area2D" parent="Marker2D"]
@@ -78,7 +83,7 @@ collision_layer = 8192
 collision_mask = 8192
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/DetectObjectOverPathBox"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="HurtBox" type="Area2D" parent="Marker2D"]
 collision_layer = 262168
@@ -87,74 +92,63 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/HurtBox"]
 light_mask = 0
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="BedInteractiveArea" type="Area2D" parent="Marker2D"]
-position = Vector2( -13, 8 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2(-13, 8)
+scale = Vector2(0.5, 0.5)
 collision_layer = 0
 collision_mask = 131072
-script = ExtResource( 3 )
+script = ExtResource("2_rsvx5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/BedInteractiveArea"]
-position = Vector2( 26, -16 )
-shape = SubResource( 17 )
+position = Vector2(26, -16)
+shape = SubResource("17")
 disabled = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 volume_db = -16.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2( 17, -34 )
+position = Vector2(17, -34)
 enabled = false
-texture = ExtResource( 2 )
-color = Color( 1, 0.921569, 0.921569, 1 )
+color = Color(1, 0.921569, 0.921569, 1)
 energy = 1.07
-mode = 2
 shadow_enabled = true
+texture = ExtResource("2")
 
 [node name="FurnaceSmoke" type="Node2D" parent="."]
 visible = false
-position = Vector2( 16, -81 )
+position = Vector2(16, -81)
 
 [node name="P1" type="CPUParticles2D" parent="FurnaceSmoke"]
 lifetime = 2.0
-direction = Vector2( 0, -1 )
-gravity = Vector2( 0, -20 )
-initial_velocity = 25.0
-initial_velocity_random = 0.5
-damping = 10.0
-scale_amount = 3.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, -20)
 
 [node name="P2" type="CPUParticles2D" parent="FurnaceSmoke"]
 lifetime = 2.0
-direction = Vector2( 0, -1 )
-gravity = Vector2( 0, -20 )
-initial_velocity = 25.0
-initial_velocity_random = 0.5
-damping = 10.0
-scale_amount = 3.0
-color = Color( 0.619608, 0.619608, 0.619608, 1 )
+direction = Vector2(0, -1)
+gravity = Vector2(0, -20)
+color = Color(0.619608, 0.619608, 0.619608, 1)
 
 [node name="P3" type="CPUParticles2D" parent="FurnaceSmoke"]
 lifetime = 2.0
-direction = Vector2( 0, -1 )
-gravity = Vector2( 0, -20 )
-initial_velocity = 25.0
-initial_velocity_random = 0.5
-damping = 10.0
-scale_amount = 3.0
-color = Color( 0.313726, 0.313726, 0.313726, 1 )
+direction = Vector2(0, -1)
+gravity = Vector2(0, -20)
+color = Color(0.313726, 0.313726, 0.313726, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/shake = SubResource( 19 )
+libraries = {
+"": SubResource("AnimationLibrary_36o8j")
+}
 
 [node name="ChestPos" type="Node2D" parent="."]
 
 [node name="Chest" type="AnimatedSprite2D" parent="ChestPos"]
 visible = false
-sprite_frames = ExtResource( 5 )
-animation = "open"
+sprite_frames = ExtResource("5")
+animation = &"open"
 
 [node name="ResetTempHealthTimer" type="Timer" parent="."]
 wait_time = 5.0

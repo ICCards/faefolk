@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @onready var bodySprite = $Body
 @onready var legsSprite = $Legs
 @onready var armsSprite = $Arms
