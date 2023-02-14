@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://i8gajcq2vlkl" path="res://Assets/Images/Animations/water main menu/2.png" id="4_41lbt"]
 [ext_resource type="Script" path="res://MainMenu/MainMenu.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://br8hgmjtj5nnj" path="res://Assets/Images/Animations/water main menu/3.png" id="5_gkmex"]
-[ext_resource type="Shader" path="res://Assets/Themes/world_fog.tres" id="6"]
+[ext_resource type="Shader" uid="uid://15ocwse0uu5l" path="res://Assets/Themes/world_fog.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://cyw562q4tjaw1" path="res://Assets/Images/Animations/water main menu/4.png" id="6_y48se"]
 [ext_resource type="Texture2D" uid="uid://c8nggau26yj8t" path="res://Assets/Images/User interface/combat hotbar/set-tab.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://csvt2lu3yxlrp" path="res://Assets/Images/Animations/water main menu/5.png" id="7_g3e4p"]
@@ -140,11 +140,10 @@ sprite_frames = SubResource("4")
 animation = &"loop"
 
 [node name="Sprite2" type="Sprite2D" parent="Background"]
-visible = false
-modulate = Color(1, 1, 1, 0.396078)
+modulate = Color(1, 1, 1, 0.0627451)
 material = SubResource("9")
-position = Vector2(1075, 608)
-scale = Vector2(80, 80)
+position = Vector2(584, 459)
+scale = Vector2(50, 50)
 texture = ExtResource("4")
 
 [node name="OptionsMenuLayer" type="CanvasLayer" parent="."]
@@ -159,6 +158,7 @@ mouse_filter = 2
 texture = ExtResource("9")
 
 [node name="Options" type="Control" parent="OptionsMenuLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

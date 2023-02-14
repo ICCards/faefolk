@@ -4,10 +4,10 @@
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd" id="1_gsu72"]
 [ext_resource type="Texture2D" uid="uid://bsltdgi11pugj" path="res://Assets/Images/User interface/inventory/crafting/crafting-slider.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://btewrm02rhmnh" path="res://Assets/Images/User interface/inventory/crafting/crafting-tab.png" id="3"]
-[ext_resource type="PackedScene" path="res://InventoryLogic/CraftingItemDescription.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="8_iau4l"]
+[ext_resource type="PackedScene" uid="uid://cvkxqo4ch3k81" path="res://InventoryLogic/CraftingItemDescription.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="8_iau4l"]
 [ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="9"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="9_aplqv"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="9_aplqv"]
 [ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Workbench/CraftingMenu.gd" id="12"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4lh4b"]

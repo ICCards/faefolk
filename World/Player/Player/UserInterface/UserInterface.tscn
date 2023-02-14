@@ -1,12 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=26 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://ctp3ra1cmv0de" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" id="2_rl35f"]
-[ext_resource type="PackedScene" path="res://MainMenu/LoadingScreen.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://MainMenu/LoadingScreen.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://bf5tnmvvjqu1j" path="res://Assets/Themes/UI_Title.tres" id="6"]
-[ext_resource type="Theme" uid="uid://bvgqeuv5sk7i" path="res://Assets/Themes/button_theme.tres" id="9"]
+[ext_resource type="Texture2D" uid="uid://rf3gophkir0h" path="res://Assets/Images/Animations/loading/sprite_0.png" id="7_wlu5k"]
+[ext_resource type="Texture2D" uid="uid://dvfrk41vachbj" path="res://Assets/Images/Animations/loading/sprite_2.png" id="8_tq2d6"]
+[ext_resource type="Texture2D" uid="uid://u7b5ardk075b" path="res://Assets/Images/Animations/loading/sprite_1.png" id="9_ela15"]
+[ext_resource type="Texture2D" uid="uid://dtv2tv7c6saxr" path="res://Assets/Images/Animations/loading/sprite_3.png" id="10_k0pdh"]
+[ext_resource type="Texture2D" uid="uid://b72oxa6602dkg" path="res://Assets/Images/Animations/loading/sprite_4.png" id="11_6e6cq"]
+[ext_resource type="Texture2D" uid="uid://bh0xuop77usp4" path="res://Assets/Images/Animations/loading/sprite_5.png" id="12_13luq"]
 [ext_resource type="AudioStream" uid="uid://86w4gtnxusdy" path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" id="13"]
+[ext_resource type="Texture2D" uid="uid://40dmypwmoqg6" path="res://Assets/Images/Animations/loading/sprite_6.png" id="13_y8wut"]
+[ext_resource type="Texture2D" uid="uid://dw0g2r5gq0txa" path="res://Assets/Images/Animations/loading/sprite_7.png" id="14_0pw86"]
+[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="15_tm6fr"]
+[ext_resource type="PackedScene" uid="uid://bhilgn3waubes" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
+[ext_resource type="PackedScene" uid="uid://dd0n86ke85w5d" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
 
 [sub_resource type="Animation" id="18"]
 length = 0.001
@@ -156,7 +167,36 @@ _data = {
 }
 
 [sub_resource type="SpriteFrames" id="22"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wlu5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tq2d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ela15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k0pdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6e6cq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_13luq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_y8wut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0pw86")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource("1_pv3v8")
@@ -214,6 +254,9 @@ text = "Saving progress"
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
+[node name="Menu" parent="." instance=ExtResource("2_dv8vv")]
+visible = false
+
 [node name="ChangeRotation" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -253,7 +296,6 @@ theme = ExtResource("6")
 text = "R"
 
 [node name="ChangeVariety" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 138.0
@@ -300,8 +342,16 @@ offset_bottom = 720.0
 position = Vector2(671, 374)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("22")
-animation = &""
-frame = 3
+animation = &"new_animation"
+frame_progress = 0.669155
+
+[node name="BetaLabel" parent="LoadingIndicator" instance=ExtResource("15_tm6fr")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 162.0
+offset_bottom = 94.0
+grow_horizontal = 1
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
 layout_mode = 0
@@ -310,19 +360,16 @@ offset_top = 640.0
 offset_right = 357.0
 offset_bottom = 710.0
 theme = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "Saving progress"
 
-[node name="Beta" type="Label" parent="LoadingIndicator"]
-layout_mode = 0
-offset_left = 1137.0
-offset_top = 14.0
-offset_right = 1299.0
-offset_bottom = 108.0
-grow_horizontal = 0
-scale = Vector2(0.8, 0.8)
-theme = ExtResource("9")
-text = "Beta  v1.3"
+[node name="CombatHotbar" parent="." instance=ExtResource("16_cnrm0")]
+visible = false
+
+[node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
+offset_top = 594.0
+offset_bottom = 594.0
 
 [node name="LoadingScreen" parent="." instance=ExtResource("4")]
 visible = false

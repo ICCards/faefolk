@@ -76,18 +76,16 @@ func _physics_process(delta):
 
 func entered_crafting_area(item_name):
 	crafting_item = item_name
-	$Tween.interpolate_property($CraftingMenuWorkbench/Items.get_node(item_name), "scale",
-		$CraftingMenuWorkbench/Items.get_node(item_name).scale, Vector2(1.1, 1.1), 0.1,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($CraftingMenuWorkbench/Items.get_node(item_name), "scale", Vector2(1.1, 1.1), 0.1)
+
 
 
 func exited_crafting_area(item_name):
 	crafting_item = null
-	$Tween.interpolate_property($CraftingMenuWorkbench/Items.get_node(item_name), "scale",
-		$CraftingMenuWorkbench/Items.get_node(item_name).scale, Vector2(1.0, 1.0), 0.1,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($CraftingMenuWorkbench/Items.get_node(item_name), "scale", Vector2(1.0, 1.0), 0.1)
+
 
 func craft(item_name):
 	if not get_parent().holding_item and PlayerData.isSufficientMaterialToCraft(item_name):

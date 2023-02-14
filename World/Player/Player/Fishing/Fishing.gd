@@ -20,7 +20,7 @@ var waiting_for_fish_bite: bool = false
 var is_reeling_in_fish: bool = false
 var is_progress_going_upwards: bool = true
 var is_bob_moving_upwards: bool = true
-var move_bob: bool = true
+#var moving_bob: bool = true
 
 var start_point
 var end_point
@@ -110,10 +110,8 @@ func reel_in_fish_line():
 	elif direction == "UP":
 		start_point = Vector2(14,-54)
 	line.points = [start_point, end_point]
-	$Tween.interpolate_property(hook, "position",
-		hook.position, start_point, 0.8,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(hook, "position", start_point, 0.8)
 	
 func start_fishing_mini_game():
 	waiting_for_fish_bite = false
@@ -173,13 +171,11 @@ func _on_MoveBobTimer_timeout():
 			temp = end_point + Vector2(rng.randi_range(0, 0),rng.randi_range(-4, 4))
 		else:
 			temp = (end_point + Vector2(rng.randi_range(-4, 4),rng.randi_range(0, 0)))
-		move_bob(end_point, temp)
+		move_bob(temp)
 
-func move_bob(start, end):
-	$Tween.interpolate_property(hook, "position",
-		start, end, 3,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+func move_bob(end):
+	var tween = get_tree().create_tween()
+	tween.tween_property(hook, "position", end, 3)
 
 
 func cast():

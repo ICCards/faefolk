@@ -5,7 +5,6 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	randomize()
-	await get_tree().idle_frame
 	hide()
 	
 

@@ -1,82 +1,87 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://cguj34yegyfxx"]
 
-[ext_resource path="res://Assets/Images/inventory_icons/Crop/corn.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture2D" id=2]
-[ext_resource path="res://Assets/Images/inventory_icons/Crop/sugar cane.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/Images/inventory_icons/Crop/wheat.png" type="Texture2D" id=5]
-[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=6]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/GrainMillSlots.gd" type="Script" id=7]
-
-[sub_resource type="CompressedTexture2D" id=3]
-load_path = "res://.import/slot locked.png-6b5ec7dbd098197891b38cf3f969131b.stex"
+[ext_resource type="Texture2D" uid="uid://c3bloivytxxcj" path="res://Assets/Images/inventory_icons/Crop/corn.png" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/GrainMillSlots.gd" id="1_xw4ql"]
+[ext_resource type="Texture2D" uid="uid://beigfafa5mr2m" path="res://Assets/Images/inventory_icons/Crop/sugar cane.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ctrqx2ip8xuv6" path="res://Assets/Images/User interface/buttons-icons/locked slot.png" id="4_rsdeb"]
+[ext_resource type="Texture2D" uid="uid://lcq0cfte1r5r" path="res://Assets/Images/inventory_icons/Crop/wheat.png" id="5"]
+[ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="6"]
 
 [node name="GrainMillSlots" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 242.0
 offset_top = 122.0
 offset_right = 242.0
 offset_bottom = 122.0
-script = ExtResource( 7 )
+script = ExtResource("1_xw4ql")
 
 [node name="WheatSlot" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_top = -9.0
 offset_right = 48.0
 offset_bottom = 39.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="TextureRect" type="TextureRect" parent="WheatSlot"]
-modulate = Color( 1, 1, 1, 0.392157 )
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 0
 offset_right = 48.0
 offset_bottom = 48.0
-texture = ExtResource( 5 )
-expand = true
+texture = ExtResource("5")
+expand_mode = 1
 
 [node name="CornSlot" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_top = 80.0
 offset_right = 48.0
 offset_bottom = 128.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="LockSlot" type="TextureRect" parent="CornSlot"]
-visible = false
-offset_right = 81.0
-offset_bottom = 81.0
-texture = ExtResource( 2 )
-expand = true
-
-[node name="TextureRect" type="TextureRect" parent="CornSlot"]
-modulate = Color( 1, 1, 1, 0.392157 )
+layout_mode = 0
 offset_right = 48.0
 offset_bottom = 48.0
-texture = ExtResource( 1 )
-expand = true
+texture = ExtResource("4_rsdeb")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CornSlot"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("1")
+expand_mode = 1
 
 [node name="SugarCaneSlot" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_top = 169.0
 offset_right = 48.0
 offset_bottom = 217.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="LockSlot" type="TextureRect" parent="SugarCaneSlot"]
-visible = false
-offset_right = 81.0
-offset_bottom = 81.0
-texture = SubResource( 3 )
-expand = true
-
-[node name="TextureRect" type="TextureRect" parent="SugarCaneSlot"]
-modulate = Color( 1, 1, 1, 0.392157 )
 offset_right = 48.0
 offset_bottom = 48.0
-texture = ExtResource( 4 )
-expand = true
+texture = ExtResource("4_rsdeb")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="SugarCaneSlot"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("4")
+expand_mode = 1
 
 [node name="YieldSlot" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_left = 435.0
 offset_top = 136.0
 offset_right = 483.0
 offset_bottom = 184.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 6 )
+script = ExtResource("6")

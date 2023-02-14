@@ -4,7 +4,6 @@ var item_name
 var item_quantity
 var item_health
 
-var tween = get_tree().create_tween()
 
 func set_item(nm, qt, health):
 	item_name = nm
@@ -30,9 +29,11 @@ func set_item(nm, qt, health):
 
 
 func hover_crafting_item():
+	var tween = get_tree().create_tween()
 	tween.tween_property($Image, "scale", Vector2(1.05, 1.05), 0.075)
 	
 func exit_crafting_item():
+	var tween = get_tree().create_tween()
 	tween.tween_property($Image, "scale", Vector2(1.0, 1.0), 0.075,)
 
 

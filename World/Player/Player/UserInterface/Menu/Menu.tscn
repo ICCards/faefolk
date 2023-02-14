@@ -32,7 +32,6 @@ position = Vector2(-508, 3)
 scale = Vector2(3, 3)
 
 [node name="ItemDescription" parent="." instance=ExtResource("36")]
-visible = false
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0

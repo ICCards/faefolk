@@ -1,117 +1,199 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://0d4pr5phko6"]
 
-[ext_resource path="res://Assets/Images/Misc/MainMenu/logo.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=2]
-[ext_resource path="res://MainMenu/GenerateWorldLoadingScreen.gd" type="Script" id=3]
-[ext_resource path="res://BetaLabel.tscn" type="PackedScene" id=4]
+[ext_resource type="Texture2D" uid="uid://dfg84dm5mo03a" path="res://Assets/Images/Misc/MainMenu/logo.png" id="1"]
+[ext_resource type="Theme" uid="uid://bvgqeuv5sk7i" path="res://Assets/Themes/button_theme.tres" id="2"]
+[ext_resource type="Script" path="res://MainMenu/GenerateWorldLoadingScreen.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="4"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="Animation_n86qp"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Dot2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Dot3:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Dot1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="Animation_6kxxv"]
 resource_name = "animate"
-length = 1.4
-loop = true
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Dot1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Dot2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Dot3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_si2n6"]
+_data = {
+"RESET": SubResource("Animation_n86qp"),
+"animate": SubResource("Animation_6kxxv")
+}
 
 [node name="GenerateWorldLoadingScreen" type="Node2D"]
-script = ExtResource( 3 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
-anims/RESET = SubResource( 1 )
-anims/animate = SubResource( 2 )
+script = ExtResource("3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 641, 360 )
+position = Vector2(640, 360)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
-[node name="BetaLabel" parent="." instance=ExtResource( 4 )]
+[node name="BetaLabel" parent="." instance=ExtResource("4")]
 
 [node name="Tips" type="VBoxContainer" parent="."]
+visible = false
 offset_left = 17.0
 offset_top = 360.0
-offset_right = 1279.0
+offset_right = 3032.0
 offset_bottom = 1320.0
-scale = Vector2( 0.35, 0.35 )
-custom_constants/separation = 48
+scale = Vector2(0.35, 0.35)
 
 [node name="1" type="Label" parent="Tips"]
-offset_right = 1262.0
-offset_bottom = 288.0
-grow_horizontal = 0
-theme = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "- Each map is randomly generated and will take a few minutes to build checked the initial launch"
-autowrap = true
 
 [node name="2" type="Label" parent="Tips"]
-offset_top = 336.0
-offset_right = 1262.0
-offset_bottom = 624.0
-grow_horizontal = 0
-theme = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "- The entrance to the caves is randomly placed checked the map, clear the caves and defeat the bosses to learn their magic"
-autowrap = true
 
 [node name="3" type="Label" parent="Tips"]
-offset_top = 672.0
-offset_right = 1262.0
-offset_bottom = 960.0
-grow_horizontal = 0
-theme = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "- Press [I] to open your inventory, crafting and options menu to view or change the rest of your controls  "
-autowrap = true
 
 [node name="Logo" type="TextureRect" parent="."]
-modulate = Color( 1.18, 1.18, 1.18, 1 )
+modulate = Color(1.18, 1.18, 1.18, 1)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_right = 1280.0
 offset_bottom = 720.0
-texture = ExtResource( 1 )
-stretch_mode = 4
+texture = ExtResource("1")
+expand_mode = 3
+stretch_mode = 3
 
 [node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 767.0
 offset_top = 415.0
 offset_right = 807.0
 offset_bottom = 455.0
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2(0.5, 0.5)
 
 [node name="BuildingWorld" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = 716.0
 offset_top = 500.0
 offset_right = 933.0
 offset_bottom = 594.0
 grow_horizontal = 0
-theme = ExtResource( 2 )
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "Generating random seed"
 
 [node name="Dot1" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = 940.0
 offset_top = 500.0
 offset_right = 956.0
 offset_bottom = 594.0
-theme = ExtResource( 2 )
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "."
 
 [node name="Dot2" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = 958.0
 offset_top = 500.0
 offset_right = 974.0
 offset_bottom = 594.0
-theme = ExtResource( 2 )
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "."
 
 [node name="Dot3" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = 976.0
 offset_top = 500.0
 offset_right = 992.0
 offset_bottom = 594.0
-theme = ExtResource( 2 )
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_si2n6")
+}

@@ -46,9 +46,9 @@ func plan_move():
 func move(target):
 	if not is_mini_game_over:
 		randomize()
-		$Tween.interpolate_property(self, "position", position, target, movement_speed+randf_range(-0.75,0.75), Tween.TRANS_BACK, Tween.EASE_OUT)
-		$Tween.start()
-		
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "position", target, movement_speed+randf_range(-0.75,0.75))
+
 		$MoveTimer.set_wait_time(randf_range(min_movement_time, max_movement_time))
 		$MoveTimer.start()
 

@@ -116,7 +116,7 @@ func build_moisture(octaves,period):
 func build_world():
 	print("building world")
 	uuid = _uuid.new()
-	get_node("/root/World3D/Loading").call_deferred("set_phase","Building terrain")
+	get_node("/root/World/Loading").call_deferred("set_phase","Building terrain")
 	build_terrian()
 	#await get_tree().create_timer(1.0).timeout
 	set_cave_entrance()
@@ -424,16 +424,20 @@ func create_grass_bunch(loc,biome):
 			loc -= randomAdjacentTiles[0]
 
 func generate_map(data):
+	print("GENERATE MAP " + str(data))
 	var grid = {}
 	openSimplexNoise.seed = randi()
-	openSimplexNoise.octaves = data.octaves
-	openSimplexNoise.period = data.period
+	openSimplexNoise.fractal_octaves = data.octaves
+	openSimplexNoise.frequency = data.period
+	print("HERE")
 	var custom_gradient = CustomGradientTexture.new()
 	custom_gradient.gradient = Gradient.new()
 	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
-	custom_gradient.size = Vector2(width,height)
+	#custom_gradient.size = Vector2(width,height)
+	print("HERE1")
 	var gradient_data = custom_gradient.get_data()
-	false # gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	#false # gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	print("HERE2")
 	for x in width:
 		for y in height:
 			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5
@@ -441,6 +445,7 @@ func generate_map(data):
 			value += gradient_value
 			grid[Vector2(x,y)] = value
 	call_deferred(data.ending_function)
+	print("HERE3")
 	return grid
 
 func check_64x64(loc):

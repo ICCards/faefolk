@@ -1,4 +1,6 @@
-TileMap
 Node2D
+AnimationPlayer
+CanvasModulate
+TileMap
 Control
 TextureButton

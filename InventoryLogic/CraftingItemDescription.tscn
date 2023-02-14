@@ -1,119 +1,73 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cvkxqo4ch3k81"]
 
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top left.png" type="Texture2D" id=2]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top middle.png" type="Texture2D" id=3]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/top right.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle right.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle left.png" type="Texture2D" id=6]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/middle middle.png" type="Texture2D" id=7]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom middle.png" type="Texture2D" id=8]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom left.png" type="Texture2D" id=9]
-[ext_resource path="res://Assets/Images/Inventory UI/ItemDescription/bottom right.png" type="Texture2D" id=10]
-[ext_resource path="res://InventoryLogic/CraftingItemDescription.gd" type="Script" id=11]
-[ext_resource path="res://InventoryLogic/Ingredient.tscn" type="PackedScene" id=12]
+[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="1"]
+[ext_resource type="Script" path="res://InventoryLogic/CraftingItemDescription.gd" id="11"]
+[ext_resource type="PackedScene" path="res://InventoryLogic/Ingredient.tscn" id="12"]
 
 [node name="CraftingItemDescription" type="Node2D"]
-scale = Vector2( 2.4, 2.4 )
 z_index = 2
-script = ExtResource( 11 )
+scale = Vector2(2.4, 2.4)
+script = ExtResource("11")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_right = 61.0
 offset_bottom = 142.0
 size_flags_vertical = 3
-custom_constants/v_separation = 0
 
 [node name="TopRow" type="GridContainer" parent="GridContainer"]
-offset_right = 61.0
-offset_bottom = 18.0
+layout_mode = 2
 size_flags_horizontal = 3
-custom_constants/v_separation = 0
-custom_constants/h_separation = -7
 columns = 3
 
 [node name="TopLeft" type="TextureRect" parent="GridContainer/TopRow"]
-offset_right = 11.0
-offset_bottom = 18.0
-texture = ExtResource( 2 )
+layout_mode = 2
 
 [node name="TopMiddle" type="TextureRect" parent="GridContainer/TopRow"]
-offset_left = 4.0
-offset_right = 55.0
-offset_bottom = 18.0
-grow_horizontal = 2
+layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource( 3 )
 stretch_mode = 1
 
 [node name="TopRight" type="TextureRect" parent="GridContainer/TopRow"]
-offset_left = 48.0
-offset_right = 61.0
-offset_bottom = 18.0
-texture = ExtResource( 4 )
+layout_mode = 2
 stretch_mode = 1
 
 [node name="MiddleRow" type="GridContainer" parent="GridContainer"]
-offset_top = 18.0
-offset_right = 61.0
-offset_bottom = 80.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/v_separation = 0
-custom_constants/h_separation = -1
 columns = 3
 
 [node name="MiddleLeft" type="TextureRect" parent="GridContainer/MiddleRow"]
-offset_right = 11.0
-offset_bottom = 62.0
-texture = ExtResource( 6 )
+layout_mode = 2
 stretch_mode = 2
 
 [node name="MiddleLeft2" type="TextureRect" parent="GridContainer/MiddleRow"]
-offset_left = 10.0
-offset_right = 49.0
-offset_bottom = 62.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 7 )
-expand = true
+expand_mode = 1
 
 [node name="TopRight2" type="TextureRect" parent="GridContainer/MiddleRow"]
-offset_left = 48.0
-offset_right = 61.0
-offset_bottom = 62.0
+layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource( 5 )
 stretch_mode = 1
 
 [node name="BottomRow" type="GridContainer" parent="GridContainer"]
-offset_top = 80.0
-offset_right = 61.0
-offset_bottom = 142.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/v_separation = 0
-custom_constants/h_separation = -1
 columns = 3
 
 [node name="BottomLeft" type="TextureRect" parent="GridContainer/BottomRow"]
-offset_right = 11.0
-offset_bottom = 16.0
-texture = ExtResource( 9 )
+layout_mode = 2
 
 [node name="BottomMiddle" type="TextureRect" parent="GridContainer/BottomRow"]
-offset_left = 10.0
-offset_right = 49.0
-offset_bottom = 16.0
+layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource( 8 )
-expand = true
+expand_mode = 1
 
 [node name="BottomRight" type="TextureRect" parent="GridContainer/BottomRow"]
-offset_left = 48.0
-offset_right = 61.0
-offset_bottom = 16.0
-texture = ExtResource( 10 )
+layout_mode = 2
 stretch_mode = 1
 
 [node name="Divider1" type="ColorRect" parent="."]
@@ -121,39 +75,43 @@ offset_left = 6.0
 offset_top = 27.1111
 offset_right = 49.0
 offset_bottom = 28.1111
-color = Color( 0.121569, 0.105882, 0.184314, 1 )
+color = Color(0.121569, 0.105882, 0.184314, 1)
 
 [node name="Divider2" type="ColorRect" parent="."]
 offset_left = 6.0
 offset_top = 52.0
 offset_right = 49.0
 offset_bottom = 53.0
-color = Color( 0.121569, 0.105882, 0.184314, 1 )
+color = Color(0.121569, 0.105882, 0.184314, 1)
 
 [node name="Ingredients" type="Label" parent="."]
 offset_left = 6.0
 offset_top = 18.0
 offset_right = 306.0
 offset_bottom = 93.0
-scale = Vector2( 0.12, 0.12 )
-theme = ExtResource( 1 )
+scale = Vector2(0.12, 0.12)
+theme = ExtResource("1")
 text = "Ingredients:"
-valign = 1
-autowrap = true
 
-[node name="Ingredient1" parent="." instance=ExtResource( 12 )]
+[node name="Ingredient1" parent="." instance=ExtResource("12")]
+layout_mode = 3
+anchors_preset = 15
 offset_left = 5.92593
 offset_top = 26.4814
 offset_right = 5.92593
 offset_bottom = 58.4814
 
-[node name="Ingredient2" parent="." instance=ExtResource( 12 )]
+[node name="Ingredient2" parent="." instance=ExtResource("12")]
+layout_mode = 3
+anchors_preset = 15
 offset_left = 5.92593
 offset_top = 36.6668
 offset_right = 5.92593
 offset_bottom = 68.6668
 
-[node name="Ingredient3" parent="." instance=ExtResource( 12 )]
+[node name="Ingredient3" parent="." instance=ExtResource("12")]
+layout_mode = 3
+anchors_preset = 15
 offset_left = 5.926
 offset_top = 46.0
 offset_right = 5.926
@@ -164,11 +122,8 @@ offset_left = 5.14286
 offset_top = 3.61905
 offset_right = 220.143
 offset_bottom = 64.619
-scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 5
-custom_constants/shadow_offset_y = 5
+scale = Vector2(0.2, 0.2)
+theme = ExtResource("1")
 text = "Wood path"
 
 [node name="ItemDescription" type="Label" parent="."]
@@ -176,7 +131,6 @@ offset_left = 6.0
 offset_top = 54.0
 offset_right = 377.0
 offset_bottom = 308.0
-scale = Vector2( 0.12, 0.12 )
-theme = ExtResource( 1 )
+scale = Vector2(0.12, 0.12)
+theme = ExtResource("1")
 text = "Some random description that is just here for some filler code"
-autowrap = true

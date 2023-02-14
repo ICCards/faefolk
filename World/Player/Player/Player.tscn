@@ -1,9 +1,10 @@
-[gd_scene load_steps=104 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=109 format=3 uid="uid://bdyinn6aswyx7"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
 [ext_resource type="Texture2D" uid="uid://dybsd7fv08hlv" path="res://Assets/Images/inventory_icons/Fish/goldfish.png" id="2"]
 [ext_resource type="Script" path="res://World/Player/Player/Camera2D.gd" id="2_gk7ji"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" id="3_8lsbn"]
+[ext_resource type="PackedScene" uid="uid://cffchl0ffi2hf" path="res://World/Player/Player/UserInterface/UserInterface.tscn" id="3_w02x5"]
 [ext_resource type="Texture2D" uid="uid://du7w2lv4yqe2j" path="res://Characters/Human/male/SWORD BLOCK/body/down/arms.png" id="4"]
 [ext_resource type="AudioStream" uid="uid://bwubv5h3bqf1k" path="res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3" id="6"]
 [ext_resource type="Texture2D" uid="uid://b1tevcnqyrs7v" path="res://Characters/Human/male/SWORD BLOCK/body/down/body.png" id="7"]
@@ -17,7 +18,11 @@
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" id="16_d5bcc"]
 [ext_resource type="Texture2D" uid="uid://q2stba7idq4n" path="res://Characters/Human/male/SWORD BLOCK/assets/down/head_attribute/hair.png" id="17"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" id="17_8vtdb"]
+[ext_resource type="Texture2D" uid="uid://h3sspgar8los" path="res://Assets/Images/Animations/objects/torch/1.png" id="20_8w7pl"]
+[ext_resource type="Texture2D" uid="uid://bnfw57dme4x26" path="res://Assets/Images/Animations/objects/torch/2.png" id="21_c3ki0"]
+[ext_resource type="Texture2D" uid="uid://78sds5dnqh0c" path="res://Assets/Images/Animations/objects/torch/3.png" id="22_grgdf"]
 [ext_resource type="Texture2D" uid="uid://dk47gt4i3a87g" path="res://Characters/Human/male/SWORD BLOCK/assets/down/shirts/shirt.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://bt3ysh31fm3pc" path="res://Assets/Images/Animations/objects/torch/4.png" id="23_i22ks"]
 [ext_resource type="Texture2D" uid="uid://ck0068yooykvt" path="res://Characters/Human/male/SWORD BLOCK/assets/down/pants/pants.png" id="24"]
 
 [sub_resource type="Animation" id="3"]
@@ -538,6 +543,102 @@ tracks/42/keys = {
 "update": 0,
 "values": [true]
 }
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("CompositeSprites/Body:frame")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("CompositeSprites/HeadAtr:frame")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("CompositeSprites/Arms:frame")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("CompositeSprites/Pants:frame")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("CompositeSprites/Shirts:frame")
+tracks/47/interp = 1
+tracks/47/loop_wrap = true
+tracks/47/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("CompositeSprites/Accessory:frame")
+tracks/48/interp = 1
+tracks/48/loop_wrap = true
+tracks/48/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("CompositeSprites/Shoes:frame")
+tracks/49/interp = 1
+tracks/49/loop_wrap = true
+tracks/49/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("CompositeSprites/ToolEquipped:frame")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="55"]
 resource_name = "axe pickaxe swing"
@@ -545,7 +646,7 @@ length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body:frame")
+tracks/0/path = NodePath("CompositeSprites/Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -557,7 +658,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Arms:frame")
+tracks/1/path = NodePath("CompositeSprites/HeadAtr:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -569,7 +670,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Accessory:frame")
+tracks/2/path = NodePath("CompositeSprites/Arms:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -581,7 +682,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/path = NodePath("CompositeSprites/Pants:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -593,7 +694,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Pants:frame")
+tracks/4/path = NodePath("CompositeSprites/Shirts:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -605,7 +706,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Shirts:frame")
+tracks/5/path = NodePath("CompositeSprites/Accessory:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -617,7 +718,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Shoes:frame")
+tracks/6/path = NodePath("CompositeSprites/Shoes:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -629,7 +730,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ToolEquipped:frame")
+tracks/7/path = NodePath("CompositeSprites/ToolEquipped:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -637,138 +738,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("ToolEquipped:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, -16), Vector2(0, -16)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("ToolEquipped:show_behind_parent")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("../Swing/AxePickaxeSwing/CollisionShape2D:disabled")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("ToolEquipped:hframes")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Shoes:hframes")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Accessory:hframes")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Pants:hframes")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Shirts:hframes")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Arms:hframes")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("HeadAtr:hframes")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("Body:hframes")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
 }
 
 [sub_resource type="Animation" id="72"]
@@ -778,7 +747,7 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body:frame")
+tracks/0/path = NodePath("CompositeSprites/Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -790,7 +759,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Arms:frame")
+tracks/1/path = NodePath("CompositeSprites/HeadAtr:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -802,7 +771,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Accessory:frame")
+tracks/2/path = NodePath("CompositeSprites/Arms:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -814,7 +783,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/path = NodePath("CompositeSprites/Pants:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -826,7 +795,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Shirts:frame")
+tracks/4/path = NodePath("CompositeSprites/Shirts:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -838,11 +807,11 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ToolEquipped:frame")
+tracks/5/path = NodePath("CompositeSprites/Accessory:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.37),
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -850,38 +819,26 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("ToolEquipped:show_behind_parent")
+tracks/6/path = NodePath("CompositeSprites/Shoes:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false]
+"values": [0, 1, 2, 3]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ToolEquipped:hframes")
+tracks/7/path = NodePath("CompositeSprites/ToolEquipped:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [4]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("../HoldingItem:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="48"]
@@ -890,7 +847,7 @@ length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body:frame")
+tracks/0/path = NodePath("CompositeSprites/Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -902,7 +859,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Arms:frame")
+tracks/1/path = NodePath("CompositeSprites/HeadAtr:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -914,7 +871,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Accessory:frame")
+tracks/2/path = NodePath("CompositeSprites/Arms:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -926,7 +883,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HeadAtr:frame")
+tracks/3/path = NodePath("CompositeSprites/Pants:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -938,7 +895,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Pants:frame")
+tracks/4/path = NodePath("CompositeSprites/Shirts:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -950,7 +907,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Shirts:frame")
+tracks/5/path = NodePath("CompositeSprites/Accessory:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -962,7 +919,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Shoes:frame")
+tracks/6/path = NodePath("CompositeSprites/Shoes:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -974,7 +931,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ToolEquipped:frame")
+tracks/7/path = NodePath("CompositeSprites/ToolEquipped:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -982,126 +939,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("ToolEquipped:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -16)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("ToolEquipped:show_behind_parent")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Body:hframes")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("HeadAtr:hframes")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Arms:hframes")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Shirts:hframes")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Pants:hframes")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Accessory:hframes")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Shoes:hframes")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("ToolEquipped:hframes")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
 }
 
 [sub_resource type="Animation" id="27"]
@@ -12067,7 +11904,24 @@ radius = 1.99989
 height = 3.99978
 
 [sub_resource type="SpriteFrames" id="117"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_8w7pl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_c3ki0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_grgdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_i22ks")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 33
@@ -12078,6 +11932,8 @@ script = ExtResource("1_hovno")
 zoom = Vector2(0.8, 0.8)
 position_smoothing_speed = 40.0
 script = ExtResource("2_gk7ji")
+
+[node name="UserInterface" parent="Camera2D" instance=ExtResource("3_w02x5")]
 
 [node name="timer_shake_length" type="Timer" parent="Camera2D"]
 one_shot = true
@@ -12097,6 +11953,7 @@ hframes = 4
 use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
+frame = 1
 
 [node name="HeadAtr" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
@@ -12228,14 +12085,11 @@ script = ExtResource("17_8vtdb")
 
 [node name="HoldingItem" type="TextureRect" parent="."]
 visible = false
-offset_left = -16.0
-offset_top = -76.0
-offset_right = 16.0
-offset_bottom = -44.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = -8.0
+offset_top = -40.0
+offset_right = 8.0
+offset_bottom = -24.0
 texture = ExtResource("2")
-expand_mode = 1
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -12245,6 +12099,7 @@ rotation = -1.5708
 shape = SubResource("11")
 
 [node name="TorchLight" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(0, -32)
 enabled = false
 energy = 1.05
@@ -12253,7 +12108,7 @@ texture = ExtResource("10")
 
 [node name="HoldingTorch" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -84)
+position = Vector2(0, -40)
 sprite_frames = SubResource("117")
-animation = &""
-frame = 2
+animation = &"new_animation"
+frame_progress = 0.579862

@@ -21,20 +21,16 @@ func play_set_night():
 		call_deferred("set_night")
 
 func set_day():
-	$Tween.interpolate_property(self, "color",
-		self.color, Color("ffffff"), LENGTH_OF_TRANSITION,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "color", Color("ffffff"), LENGTH_OF_TRANSITION)
+
 
 func set_night():
-	$Tween.interpolate_property(self, "color",
-		self.color, Color("28282d"), LENGTH_OF_TRANSITION,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "color", Color("28282d"), LENGTH_OF_TRANSITION)
 
 
 func set_curse_effect():
-	$Tween.interpolate_property(self, "color",
-		self.color, CURSE_COLOR, 3.0,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "color", CURSE_COLOR, 3.0)
+

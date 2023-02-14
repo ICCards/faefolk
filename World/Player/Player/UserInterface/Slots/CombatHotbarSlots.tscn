@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cx3b4o2xigr66"]
 
 [ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="1"]
-[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Slots/CombatHotbarSlots.gd" id="2"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.gd" id="1_one5q"]
 
 [node name="CombatHotbarSlots" type="GridContainer"]
 offset_left = 362.0
@@ -10,7 +10,7 @@ offset_right = 590.0
 offset_bottom = 530.0
 theme_override_constants/h_separation = 12
 columns = 4
-script = ExtResource("2")
+script = ExtResource("1_one5q")
 
 [node name="Slot1" type="Panel" parent="."]
 custom_minimum_size = Vector2(48, 48)

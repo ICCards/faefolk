@@ -5,37 +5,37 @@ extends Control
 
 
 func _ready():
-	initialize_locked_slots()
+#	initialize_locked_slots()
 	initialize_slots()
 
-func initialize_locked_slots():
-	var slots = self.get_children()
-	if get_parent().level == "1":
-		$SugarCaneSlot/LockSlot.show()
-		$CornSlot/LockSlot.show()
-		for i in range(slots.size()):
-			if i != 1 and i != 2:
-				slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
-				slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
-				slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
-			slots[i].slot_index = i
-			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
-	elif get_parent().level == "2":
-		$SugarCaneSlot/LockSlot.show()
-		for i in range(slots.size()):
-			if i != 2:
-				slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
-				slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
-				slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
-			slots[i].slot_index = i
-			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
-	else:
-		for i in range(slots.size()):
-			slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
-			slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
-			slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
-			slots[i].slot_index = i
-			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
+#func initialize_locked_slots():
+#	var slots = self.get_children()
+#	if get_parent().level == "1":
+#		$SugarCaneSlot/LockSlot.show()
+#		$CornSlot/LockSlot.show()
+#		for i in range(slots.size()):
+#			if i != 1 and i != 2:
+#				slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
+#				slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
+#				slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
+#			slots[i].slot_index = i
+#			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
+#	elif get_parent().level == "2":
+#		$SugarCaneSlot/LockSlot.show()
+#		for i in range(slots.size()):
+#			if i != 2:
+#				slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
+#				slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
+#				slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
+#			slots[i].slot_index = i
+#			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
+#	else:
+#		for i in range(slots.size()):
+#			slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
+#			slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
+#			slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
+#			slots[i].slot_index = i
+#			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
 
 func initialize_slots():
 	var slots = self.get_children()

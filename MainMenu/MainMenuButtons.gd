@@ -100,7 +100,7 @@ func _on_PlayBtn_pressed():
 		if MapData.world["is_built"]:
 			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
 		else:
-			SceneChanger.goto_scene("res://World3D/World3D/World.tscn")
+			SceneChanger.goto_scene("res://World/Overworld/Overworld.tscn")
 
 
 func _on_ShopBtn_mouse_entered():

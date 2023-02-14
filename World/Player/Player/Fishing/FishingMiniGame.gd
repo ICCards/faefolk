@@ -58,10 +58,8 @@ func start():
 func start_game_timer():
 	$GameTimer.set_wait_time(get_node("Fish").game_timer) 
 	$GameTimer.start()
-	$Tween.interpolate_property($TimerProgress, "size",
-		Vector2(3,128), Vector2(3,0), get_node("Fish").game_timer,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($TimerProgress, "size", Vector2(3,0), get_node("Fish").game_timer)
 
 func _physics_process(delta):
 	if get_node("../../").mini_game_active:
