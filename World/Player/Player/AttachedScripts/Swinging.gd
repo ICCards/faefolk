@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var sound_effects = $SoundEffects
 @onready var axe_pickaxe_swing = $AxePickaxeSwing
-@onready var sword_swing = $SwordSwing
+@onready var sword_swing_area = $SwordSwing
 @onready var watering_can_particles1 = $WateringCanParticles1
 @onready var watering_can_particles2 = $WateringCanParticles2
 
@@ -46,12 +46,12 @@ func sword_swing_deferred(item_name,attack_index):
 	if get_parent().state != SWORD_SWINGING:
 		if attack_index == 1:
 			if get_node("../Magic").player_fire_buff:
-				sword_swing.special_ability = "fire"
+				sword_swing_area.special_ability = "fire"
 			else:
-				sword_swing.special_ability = ""
+				sword_swing_area.special_ability = ""
 			animation = "sword_swing_" + get_parent().direction.to_lower()
 			get_parent().state = SWORD_SWINGING
-			sword_swing.tool_name = item_name
+			sword_swing_area.tool_name = item_name
 			player_animation_player.play(animation)
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)

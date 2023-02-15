@@ -16,8 +16,8 @@ var game_state: GameState
 
 func _ready():
 	Server.world = self
-	#create_or_load_world()
-	spawn_player()
+	create_or_load_world()
+	#spawn_player()
 
 func create_or_load_world():
 	if MapData.world["is_built"]: # Load world

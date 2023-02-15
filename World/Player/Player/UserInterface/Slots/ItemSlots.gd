@@ -9,9 +9,9 @@ func _ready():
 	var slots = self.get_children()
 	for i in range(slots.size()):
 		PlayerData.connect("active_item_updated",Callable(slots[i],"refresh_style"))
-		slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
-		slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
-		slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
+		slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i]))
+		slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i]))
+		slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i]))
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.COMBAT_HOTBAR
 	initialize_slots()

@@ -20,7 +20,7 @@ func set_item(nm, qt, health):
 		$Label.visible = false
 	else:
 		$Label.visible = true
-		$Label.text = String(item_quantity)
+		$Label.text = str(item_quantity)
 	if item_health != null:
 		$HealthBar.visible = true
 		set_health_bar(item_health)

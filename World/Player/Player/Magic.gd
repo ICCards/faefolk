@@ -477,21 +477,17 @@ func set_invisibility():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Dark/invisibility.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
-	$Tween.interpolate_property(composite_sprites.get_node("Body"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
-	$Tween.start()
-	$Tween.interpolate_property(composite_sprites.get_node("Arms"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
-	$Tween.start()
-	$Tween.interpolate_property(composite_sprites.get_node("Legs"), "modulate:a", 1.0, 0.15, 0.5, 3, 1)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(composite_sprites.get_node("Body"), "modulate:a", 0.15, 0.5)
+	tween.tween_property(composite_sprites.get_node("Arms"), "modulate:a", 0.15, 0.5)
+	tween.tween_property(composite_sprites.get_node("Legs"), "modulate:a", 0.15, 0.5)
 	invisibility_active = true
 	await get_tree().create_timer(10.0).timeout
 	invisibility_active = false
-	$Tween.interpolate_property(composite_sprites.get_node("Body"), "modulate:a", 0.15, 1.0, 0.5, 3, 1)
-	$Tween.start()
-	$Tween.interpolate_property(composite_sprites.get_node("Arms"), "modulate:a", 0.15, 1.0, 0.5, 3, 1)
-	$Tween.start()
-	$Tween.interpolate_property(composite_sprites.get_node("Legs"), "modulate:a", 0.15, 1.0, 0.5, 3, 1)
-	$Tween.start()
+	tween.tween_property(composite_sprites.get_node("Body"), "modulate:a", 1.0, 0.5)
+	tween.tween_property(composite_sprites.get_node("Arms"), "modulate:a", 1.0, 0.5)
+	tween.tween_property(composite_sprites.get_node("Legs"), "modulate:a", 1.0, 0.5)
+
 
 
 # Dark magic #

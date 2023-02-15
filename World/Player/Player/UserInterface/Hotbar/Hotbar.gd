@@ -10,9 +10,9 @@ var adjusted_pos = Vector2(0,0)
 func _ready():
 	for i in range(slots.size()):
 		PlayerData.connect("active_item_updated",Callable(slots[i],"refresh_style"))
-		slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
-		slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
-		slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
+		slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i]))
+		slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i]))
+		slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i]))
 		slots[i].slotType = SlotClass.SlotType.HOTBAR
 		slots[i].slot_index = i
 	Stats.connect("tool_health_change_hotbar",Callable(self,"update_tool_health"))

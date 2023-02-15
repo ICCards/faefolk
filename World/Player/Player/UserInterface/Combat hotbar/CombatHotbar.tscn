@@ -1,16 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhilgn3waubes"]
+[gd_scene load_steps=15 format=3 uid="uid://bhilgn3waubes"]
 
 [ext_resource type="Texture2D" uid="uid://h5xwa73koaw8" path="res://Assets/Images/User interface/combat hotbar/hotbar23.png" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd" id="1_hue8c"]
 [ext_resource type="Texture2D" uid="uid://cnfw25kf8wh4s" path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar.png" id="2"]
-[ext_resource type="PackedScene" path="res://InventoryLogic/ItemDescription.tscn" id="4"]
-[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://b6tl1o10h8ybn" path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar-small.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://do7p63j7fd8ug" path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://b16f0gq1148xg" path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass-small.png" id="8"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/MagicSlots.tscn" id="11_is21i"]
 [ext_resource type="Texture2D" uid="uid://dmv6j3ojkndy3" path="res://Assets/Images/User interface/combat hotbar/switch_btn2.png" id="12"]
 [ext_resource type="PackedScene" uid="uid://0wk3ykd7s1tj" path="res://World/Player/Player/UserInterface/Slots/ItemSlots.tscn" id="12_jw3p1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/MagicSlots.gd" id="12_p6vg0"]
 [ext_resource type="Texture2D" uid="uid://dpvnod2gp0wlu" path="res://Assets/Images/User interface/combat hotbar/switch_btn1.png" id="13"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/ItemSlots.gd" id="13_nm6fw"]
 [ext_resource type="Texture2D" uid="uid://o3wd8n5ou4bo" path="res://Assets/Images/User interface/hotbars/selected slot.png" id="25"]
 
 [node name="CombatHotbar" type="Control"]
@@ -26,7 +28,7 @@ offset_right = 640.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-script = ExtResource("5")
+script = ExtResource("1_hue8c")
 
 [node name="Bg2" type="TextureRect" parent="."]
 layout_mode = 0
@@ -215,6 +217,7 @@ offset_left = 396.0
 offset_top = 641.0
 offset_right = 396.0
 offset_bottom = 641.0
+script = ExtResource("12_p6vg0")
 
 [node name="ItemSlots" parent="." instance=ExtResource("12_jw3p1")]
 layout_mode = 0
@@ -223,5 +226,6 @@ offset_top = 644.0
 offset_right = 879.0
 offset_bottom = 692.0
 theme_override_constants/h_separation = 12
+script = ExtResource("13_nm6fw")
 
 [connection signal="pressed" from="SwitchHotbarBtn" to="." method="_on_SwitchHotbarBtn_pressed"]
