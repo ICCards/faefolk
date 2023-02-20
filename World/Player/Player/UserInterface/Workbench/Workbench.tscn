@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://drucphw6ea0bn"]
+[gd_scene load_steps=20 format=3 uid="uid://drucphw6ea0bn"]
 
 [ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Workbench/Workbench.gd" id="1_ad048"]
@@ -8,7 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="11"]
 [ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="11_q826s"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="12"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="12_xuikn"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="13_u1dt5"]
 [ext_resource type="Texture2D" uid="uid://dg0pbf6uy6nus" path="res://Assets/Images/User interface/workbench/workbench-slider.png" id="14"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="14_tndyx"]
 [ext_resource type="PackedScene" uid="uid://cvkxqo4ch3k81" path="res://InventoryLogic/CraftingItemDescription.tscn" id="21"]
 [ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="37"]
 
@@ -39,6 +42,7 @@ anchors_preset = 0
 script = ExtResource("1_ad048")
 
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -47,6 +51,7 @@ stretch_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -60,6 +65,7 @@ offset_left = 552.0
 offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
+text = "Workbench #3"
 
 [node name="ItemNameBox" parent="." instance=ExtResource("1")]
 visible = false
@@ -111,6 +117,21 @@ script = ExtResource("9_rfkl5")
 [node name="Items" type="GridContainer" parent="CraftingMenuWorkbench"]
 layout_mode = 2
 columns = 4
+
+[node name="Trash" parent="." instance=ExtResource("14_tndyx")]
+metadata/_edit_lock_ = true
+
+[node name="InventorySlots" parent="." instance=ExtResource("12_xuikn")]
+layout_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("13_u1dt5")]
+layout_mode = 0
+offset_left = 638.0
+offset_top = 184.0
+offset_right = 938.0
+offset_bottom = 298.0
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]

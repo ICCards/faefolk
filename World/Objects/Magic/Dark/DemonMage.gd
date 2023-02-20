@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-@onready var LightningProjectile = load("res://World3D/Objects/Magic/Lightning/LightningProjectile.tscn")
-@onready var TornadoProjectile = load("res://World3D/Objects/Magic/Wind/TornadoProjectile.tscn")
-@onready var FireProjectile = load("res://World3D/Objects/Magic/Fire/FireProjectile.tscn")
-@onready var IceProjectile = load("res://World3D/Objects/Magic/Ice/IceProjectile.tscn")
+@onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
+@onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+@onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+@onready var IceProjectile = load("res://World/Objects/Magic/Ice/IceProjectile.tscn")
 
 @onready var demon_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects

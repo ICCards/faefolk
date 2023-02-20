@@ -35,7 +35,7 @@ var thread = Thread.new()
 
 
 func sword_swing(item_name,attack_index):
-	if not thread.is_active():
+	if not thread.is_alive():
 		thread.start(Callable(self,"whoAmISwordSwing").bind([item_name,attack_index]))
 
 func whoAmISwordSwing(data):
@@ -52,7 +52,8 @@ func sword_swing_deferred(item_name,attack_index):
 			animation = "sword_swing_" + get_parent().direction.to_lower()
 			get_parent().state = SWORD_SWINGING
 			sword_swing_area.tool_name = item_name
-			player_animation_player.play(animation)
+			player_animation_player.play("sword_swing")
+			set_sword_swing_position(get_parent().direction)
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
@@ -76,9 +77,24 @@ func sword_swing_deferred(item_name,attack_index):
 		get_node("../Area2Ds/SwordBlock/CollisionShape2D").set_deferred("disabled", true)
 		thread.wait_to_finish()
 
+func set_sword_swing_position(direction):
+	match direction:
+		"DOWN":
+			$SwordSwing/CollisionShape2D.set_deferred("rotation", 90)
+			$SwordSwing/CollisionShape2D.set_deferred("position", Vector2(0,12))
+		"UP":
+			$SwordSwing/CollisionShape2D.set_deferred("rotation", 90)
+			$SwordSwing/CollisionShape2D.set_deferred("position", Vector2(0,-16))
+		"RIGHT":
+			$SwordSwing/CollisionShape2D.set_deferred("rotation", 0)
+			$SwordSwing/CollisionShape2D.set_deferred("position", Vector2(14,-10))
+		"LEFT":
+			$SwordSwing/CollisionShape2D.set_deferred("rotation", 0)
+			$SwordSwing/CollisionShape2D.set_deferred("position", Vector2(-14,-10))
+
 
 func swing(item_name):
-	if not thread.is_active():
+	if not thread.is_alive():
 		thread.start(Callable(self,"whoAmISwing").bind(item_name))
 
 func whoAmISwing(item_name):

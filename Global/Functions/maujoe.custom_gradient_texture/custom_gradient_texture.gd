@@ -38,6 +38,7 @@ func _update():
 	elif type == GradientType.RADIAL:
 		for x in range(size.x):
 			for y in range(size.y):
+				print("X " + str(x) + " Y " + str(y))
 				var dist = Vector2(x / ratio, y).distance_to(Vector2(radius.x / ratio, radius.y))
 				var offset = dist / radius.y
 				var color = gradient.sample(offset)

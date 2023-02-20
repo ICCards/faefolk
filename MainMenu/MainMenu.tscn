@@ -92,6 +92,8 @@ glow_blend_mode = 0
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_top = 1.0
+offset_bottom = 1.0
 script = ExtResource("5")
 
 [node name="Background" type="Control" parent="."]
@@ -142,7 +144,7 @@ animation = &"loop"
 [node name="Sprite2" type="Sprite2D" parent="Background"]
 modulate = Color(1, 1, 1, 0.0627451)
 material = SubResource("9")
-position = Vector2(584, 459)
+position = Vector2(628, 385)
 scale = Vector2(50, 50)
 texture = ExtResource("4")
 

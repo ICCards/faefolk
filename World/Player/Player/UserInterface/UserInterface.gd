@@ -14,7 +14,7 @@ var holding_item = null
 @onready var Chest = load("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
 @onready var Tool_cabinet = load("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
 @onready var Campfire = load("res://World/Player/Player/UserInterface/Campfire/Campfire.tscn")
-@onready var BrewingTable = load("res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
+#@onready var BrewingTable = load("res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
 
 var items_to_drop = []
 
@@ -161,19 +161,20 @@ func death():
 
 
 func toggle_brewing_table(id,level):
-	if not has_node(id):
-		play_open_menu_sound()
-		var brewingTable = BrewingTable.instantiate()
-		brewingTable.name = str(id)
-		brewingTable.id = id
-		add_child(brewingTable)
-		close_hotbar_clock_and_stats()
-	elif has_node(id) and not get_node(id).visible:
-		play_open_menu_sound()
-		get_node(id).initialize()
-		close_hotbar_clock_and_stats()
-	else:
-		close_brewing_table(id)
+	pass
+#	if not has_node(id):
+#		play_open_menu_sound()
+#		var brewingTable = BrewingTable.instantiate()
+#		brewingTable.name = str(id)
+#		brewingTable.id = id
+#		add_child(brewingTable)
+#		close_hotbar_clock_and_stats()
+#	elif has_node(id) and not get_node(id).visible:
+#		play_open_menu_sound()
+#		get_node(id).initialize()
+#		close_hotbar_clock_and_stats()
+#	else:
+#		close_brewing_table(id)
 
 
 func toggle_save_and_exit():

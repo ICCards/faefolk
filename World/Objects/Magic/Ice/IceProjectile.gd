@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 @onready var sound_effects2: AudioStreamPlayer2D = $SoundEffects2
-var tween = get_tree().create_tween()
 #var velocity = Vector2(0,0)
 var speed = 350
 var collided = false
@@ -74,6 +73,7 @@ func destroy():
 		queue_free()
 
 func fade_out_sound():
+	var tween = get_tree().create_tween()
 	tween.tween_property(sound_effects2, "volume_db", -80, 1.0)
 
 func _on_Hitbox_body_entered(body):

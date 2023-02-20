@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Wind/Whirlwind.gd" id="1_0pxx6"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="13"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_0aw6s"]
 [ext_resource type="AudioStream" uid="uid://bfmccn0stqleu" path="res://Assets/Sound/Sound effects/Magic/Wind/whirlwind.mp3" id="48"]
 
 [sub_resource type="SpriteFrames" id="73"]
@@ -226,7 +226,7 @@ animation = &"extended"
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 264192
-script = ExtResource("13")
+script = ExtResource("2_0aw6s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -31)

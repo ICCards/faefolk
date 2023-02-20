@@ -1,9 +1,9 @@
 extends Sprite2D
 
-var tween = get_tree().create_tween()
 
 
 func _ready():
+	var tween = get_tree().create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
 
 

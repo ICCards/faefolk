@@ -1,10 +1,8 @@
 extends CharacterBody2D
 
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
-var tween = get_tree().create_tween()
 
-#var velocity = Vector2(1,0)
-var speed = 350
+var speed = 125
 var collided = false
 var destroyed = false
 var is_hostile_projectile: bool = false
@@ -59,6 +57,7 @@ func stop_trail_particles():
 	$TrailParticles/Particles3.set_deferred("emitting", false)
 	
 func fade_out_sound():
+	var tween = get_tree().create_tween()
 	tween.tween_property(sound_effects, "volume_db", -80, 3.0)
 	tween.tween_property($PointLight2D, "color", Color("00ffffff"), 3.0)
 

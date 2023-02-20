@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=27 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="15_tm6fr"]
 [ext_resource type="PackedScene" uid="uid://bhilgn3waubes" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
 [ext_resource type="PackedScene" uid="uid://dd0n86ke85w5d" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
+[ext_resource type="PackedScene" uid="uid://cm8c7p7g6ii7g" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" id="18_gbc14"]
 
 [sub_resource type="Animation" id="18"]
 length = 0.001
@@ -296,6 +297,7 @@ theme = ExtResource("6")
 text = "R"
 
 [node name="ChangeVariety" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 138.0
@@ -368,8 +370,11 @@ text = "Saving progress"
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
+visible = false
 offset_top = 594.0
 offset_bottom = 594.0
+
+[node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
 
 [node name="LoadingScreen" parent="." instance=ExtResource("4")]
 visible = false

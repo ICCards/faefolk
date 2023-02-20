@@ -23,25 +23,25 @@ func initialize_locked_slots():
 		$Ingredient3/LockSlot.show()
 		for i in range(slots_in_stove.size()):
 			if i != 2 and i != 3:
-				slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i))
-				slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i))
-				slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i))
+				slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i]))
+				slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i]))
+				slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i]))
 			slots_in_stove[i].slot_index = i
 			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 	elif get_parent().level == "2":
 		$Ingredient3/LockSlot.show()
 		for i in range(slots_in_stove.size()):
 			if i != 3:
-				slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i))
-				slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i))
-				slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i))
+				slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i]))
+				slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i]))
+				slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i]))
 			slots_in_stove[i].slot_index = i
 			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 	else:
 		for i in range(slots_in_stove.size()):
-			slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i))
-			slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i))
-			slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i))
+			slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i]))
+			slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i]))
+			slots_in_stove[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots_in_stove[i]))
 			slots_in_stove[i].slot_index = i
 			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 

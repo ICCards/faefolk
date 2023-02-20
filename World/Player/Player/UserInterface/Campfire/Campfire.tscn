@@ -1,72 +1,145 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=22 format=3 uid="uid://di62navp80kgi"]
 
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-1.png" type="Texture2D" id=1]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-6.png" type="Texture2D" id=6]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/CampfireSlots.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-5.png" type="Texture2D" id=8]
-[ext_resource path="res://World3D/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=9]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=10]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-4.png" type="Texture2D" id=12]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Campfire/Campfire.gd" type="Script" id=13]
-[ext_resource path="res://Assets/Images/User interface/stove/stove-arrow.png" type="Texture2D" id=14]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-7.png" type="Texture2D" id=15]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-3.png" type="Texture2D" id=16]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-2.png" type="Texture2D" id=17]
-[ext_resource path="res://Assets/Images/User interface/inventory/sprite_frames/wood-frame.png" type="Texture2D" id=18]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-0.png" type="Texture2D" id=19]
-[ext_resource path="res://Assets/Images/User interface/campfire/campfire-tab.png" type="Texture2D" id=20]
+[ext_resource type="Texture2D" uid="uid://bhdmhl4omrdyy" path="res://Assets/Images/User interface/stove/fire/stove-fire-1.png" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Campfire/Campfire.gd" id="1_2l36d"]
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="5_0bqh6"]
+[ext_resource type="Texture2D" uid="uid://nltba7be0pq3" path="res://Assets/Images/User interface/stove/fire/stove-fire-6.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cgt18sx008i3h" path="res://Assets/Images/User interface/stove/fire/stove-fire-5.png" id="8"]
+[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="8_6dqlu"]
+[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://10g5pf2spr5h" path="res://Assets/Images/User interface/stove/fire/stove-fire-4.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://bachr3xkjleuo" path="res://Assets/Images/User interface/stove/stove-arrow.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://cr2j4e5ayayqn" path="res://Assets/Images/User interface/stove/fire/stove-fire-7.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://cvgubwd5t4f8t" path="res://Assets/Images/User interface/stove/fire/stove-fire-3.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://b0jf6eicb7hrc" path="res://Assets/Images/User interface/stove/fire/stove-fire-2.png" id="17"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="17_ir5iv"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="18_cwk8p"]
+[ext_resource type="PackedScene" uid="uid://bckiaroop0fcu" path="res://World/Player/Player/UserInterface/Slots/CampfireSlots.tscn" id="18_q6y1n"]
+[ext_resource type="Texture2D" uid="uid://h1d7iyd8ub08" path="res://Assets/Images/User interface/stove/fire/stove-fire-0.png" id="19"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="19_ectkw"]
+[ext_resource type="Texture2D" uid="uid://di48ei841wdwv" path="res://Assets/Images/User interface/campfire/campfire-tab.png" id="20"]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"sprite_frames": [ ExtResource( 19 ), ExtResource( 1 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 15 ) ],
+[sub_resource type="SpriteFrames" id="SpriteFrames_ru1ci"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15")
+}],
 "loop": true,
-"name": "default",
-"speed": 8.0
-} ]
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="Campfire" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
-script = ExtResource( 13 )
+script = ExtResource("1_2l36d")
 
-[node name="ItemDescription" parent="." instance=ExtResource( 10 )]
+[node name="ItemDescription" parent="." instance=ExtResource("10")]
 visible = false
 
-[node name="Trash" parent="." instance=ExtResource( 9 )]
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
-[node name="Bg" type="TextureRect" parent="."]
+[node name="CookTimer" type="Timer" parent="."]
+wait_time = 15.0
+
+[node name="TimerProgress" type="TextureProgressBar" parent="."]
+modulate = Color(0.513726, 0.513726, 0.513726, 1)
+layout_mode = 0
+offset_left = 441.0
+offset_top = 309.0
+offset_right = 455.0
+offset_bottom = 329.0
+scale = Vector2(3, 3)
+fill_mode = 3
+texture_progress = ExtResource("14")
+
+[node name="Background" type="TextureRect" parent="."]
 offset_right = 426.0
 offset_bottom = 240.0
-scale = Vector2( 3, 3 )
-texture = ExtResource( 20 )
-stretch_mode = 4
+scale = Vector2(3, 3)
+texture = ExtResource("20")
+stretch_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="Frame" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -360.0
-offset_right = -214.0
-offset_bottom = -120.0
-scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 18 )
-stretch_mode = 4
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("5_0bqh6")
+stretch_mode = 3
+metadata/_edit_lock_ = true
 
-[node name="CampfireSlots" parent="." instance=ExtResource( 7 )]
+[node name="ExitBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("5")
+
+[node name="MenuTitle" parent="." instance=ExtResource("8_6dqlu")]
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 917.0
+offset_bottom = 192.0
+text = "Campfire"
+
+[node name="FireAnimatedSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(461, 465)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_ru1ci")
+animation = &"new_animation"
+
+[node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
+show_behind_parent = true
+offset_left = -8.66669
+offset_top = -6.00003
+offset_right = 9.33331
+offset_bottom = 13.0
+color = Color(0.247059, 0.109804, 0.0627451, 1)
+
+[node name="Trash" parent="." instance=ExtResource("17_ir5iv")]
+
+[node name="CampfireSlots" parent="." instance=ExtResource("18_q6y1n")]
 
 [node name="FuelSlot" parent="CampfireSlots" index="0"]
+layout_mode = 1
+anchors_preset = 8
 offset_left = 418.0
 offset_top = 493.0
 offset_right = 466.0
 offset_bottom = 541.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Ingredient" parent="CampfireSlots" index="1"]
 offset_left = 438.0
@@ -86,91 +159,17 @@ offset_top = 249.0
 offset_right = 516.0
 offset_bottom = 297.0
 
-[node name="InventorySlots" parent="." instance=ExtResource( 11 )]
-offset_left = 639.0
-offset_top = 315.0
-offset_right = 933.0
-offset_bottom = 567.0
-custom_constants/v_separation = 18
-custom_constants/h_separation = 15
-columns = 5
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="InventorySlots" parent="." instance=ExtResource("18_cwk8p")]
+metadata/_edit_lock_ = true
 
-[node name="HotbarInventorySlots" parent="." instance=ExtResource( 2 )]
-offset_left = 639.0
-offset_top = 183.0
-offset_right = 943.0
-offset_bottom = 297.0
-custom_constants/v_separation = 18
-custom_constants/h_separation = 15
-columns = 5
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("19_ectkw")]
+offset_left = 638.0
+offset_top = 184.0
+offset_right = 938.0
+offset_bottom = 298.0
+metadata/_edit_lock_ = true
 
-[node name="ExitBtn" type="TextureButton" parent="."]
-offset_left = 918.0
-offset_top = 114.0
-offset_right = 932.0
-offset_bottom = 128.0
-scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-expand = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="MenuTitle" parent="." instance=ExtResource( 3 )]
-offset_left = 552.0
-offset_top = 117.0
-offset_right = 915.0
-offset_bottom = 192.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Campfire"
-
-[node name="FireAnimatedSprite" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2( 461, 465 )
-scale = Vector2( 3, 3 )
-sprite_frames = SubResource( 1 )
-frame = 4
-playing = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
-show_behind_parent = true
-offset_left = -8.66669
-offset_top = -6.00003
-offset_right = 9.33331
-offset_bottom = 13.0
-color = Color( 0.247059, 0.109804, 0.0627451, 1 )
-
-[node name="Tween" type="Tween" parent="."]
-
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-
-[node name="CookTimer" type="Timer" parent="."]
-wait_time = 15.0
-
-[node name="TimerProgress" type="TextureProgressBar" parent="."]
-modulate = Color( 0.513726, 0.513726, 0.513726, 1 )
-offset_left = 441.0
-offset_top = 309.0
-offset_right = 455.0
-offset_bottom = 329.0
-scale = Vector2( 3, 3 )
-texture_progress = ExtResource( 14 )
-fill_mode = 3
-__meta__ = {
-"_edit_lock_": true
-}
-
-[connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="timeout" from="CookTimer" to="." method="_on_CookTimer_timeout"]
+[connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 
 [editable path="CampfireSlots"]

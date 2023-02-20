@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dht0s8englbwd"]
 
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Magic/Lightning/LightningStrike.gd" id="1_qdls7"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_ph44w"]
 [ext_resource type="AudioStream" uid="uid://duy8pick4fhff" path="res://Assets/Sound/Sound effects/Magic/Lightning/lightning strike.mp3" id="4"]
 
 [sub_resource type="Curve" id="177"]
@@ -87,7 +87,7 @@ frame = 4
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 264192
-script = ExtResource("1")
+script = ExtResource("2_ph44w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("164")

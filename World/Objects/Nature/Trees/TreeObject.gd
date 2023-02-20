@@ -9,7 +9,6 @@ extends Area2D
 @onready var animation_player_tree: AnimationPlayer = $AnimationPlayerTree
 @onready var animation_player_stump: AnimationPlayer = $AnimationPlayerStump
 @onready var random_leaves_falling_timer: Timer = $RandomLeavesFallingTimer
-var tween = get_tree().create_tween()
 
 var rng = RandomNumberGenerator.new()
 
@@ -281,6 +280,7 @@ func disable_tree_top_collision_box():
 	$TreeTopArea.get_node(variety).set_deferred("disabled", true)
 
 func set_tree_transparent():
+	var tween = get_tree().create_tween()
 	tween.tween_property(animated_tree_top_sprite, "modulate:a", 0.4, 0.5)
 	tween.tween_property(tree_top_sprite, "modulate:a", 0.4, 0.5)
 	tween.tween_property(tree_stump_sprite, "modulate:a", 0.4, 0.5)
@@ -288,6 +288,7 @@ func set_tree_transparent():
 	tween.start()
 
 func set_tree_visible():
+	var tween = get_tree().create_tween()
 	tween.tween_property(animated_tree_top_sprite, "modulate:a", 1.0, 0.5)
 	tween.tween_property(tree_top_sprite, "modulate:a", 1.0, 0.5)
 	tween.tween_property(tree_stump_sprite, "modulate:a", 1.0, 0.5)

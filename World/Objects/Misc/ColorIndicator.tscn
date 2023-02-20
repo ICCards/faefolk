@@ -17,15 +17,17 @@ z_index = 3
 script = ExtResource("1_7vkdo")
 
 [node name="Grid" type="VBoxContainer" parent="."]
-offset_right = 32.0
-offset_bottom = 32.0
+offset_right = 16.0
+offset_bottom = 16.0
 size_flags_vertical = 3
 mouse_filter = 2
+theme_override_constants/separation = 0
 alignment = 2
 
 [node name="Top" type="HBoxContainer" parent="Grid"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 0
 
 [node name="Left" type="TextureRect" parent="Grid/Top"]
 layout_mode = 2
@@ -37,7 +39,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 texture = ExtResource("4")
-stretch_mode = 2
 
 [node name="Right" type="TextureRect" parent="Grid/Top"]
 layout_mode = 2
@@ -48,29 +49,28 @@ texture = ExtResource("9")
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+theme_override_constants/separation = 0
 
 [node name="Left" type="TextureRect" parent="Grid/Middle"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("1")
-stretch_mode = 2
 
 [node name="Middle" type="TextureRect" parent="Grid/Middle"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 texture = ExtResource("8")
-stretch_mode = 2
 
 [node name="Right" type="TextureRect" parent="Grid/Middle"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3")
-stretch_mode = 2
 
 [node name="Bottom" type="HBoxContainer" parent="Grid"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 0
 
 [node name="Left" type="TextureRect" parent="Grid/Bottom"]
 layout_mode = 2
@@ -82,7 +82,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 texture = ExtResource("2")
-stretch_mode = 2
 
 [node name="Right" type="TextureRect" parent="Grid/Bottom"]
 layout_mode = 2

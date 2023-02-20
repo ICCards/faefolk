@@ -15,14 +15,14 @@ script = ExtResource("3_ikxr7")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_right = 258.0
-offset_bottom = 100.0
-scale = Vector2(0.12, 0.12)
+offset_right = 738.0
+offset_bottom = 286.0
+scale = Vector2(0.042, 0.042)
 theme = ExtResource("4")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_font_sizes/font_size = 160
 text = "Collections"
 horizontal_alignment = 1
 vertical_alignment = 1

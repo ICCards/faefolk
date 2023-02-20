@@ -21,7 +21,7 @@ func _input(event):
 			var center = get_global_position()
 			# Calculate the angular motion of the crank based checked the arc made with the mouse
 			var angle = (prev_pos - center).angle_to(new_pos - center)
-			rotate(angle)
+			rotate_gm(angle)
 		elif event is InputEventMouseButton and event.button_pressed == false:
 			# Stop dragging when the user releases the mouse button
 			dragging = false
@@ -29,7 +29,7 @@ func _input(event):
 	
 
 
-func rotate(angle):
+func rotate_gm(angle):
 	if angle > 0:
 		temp += 4
 		rotation_degrees += 4

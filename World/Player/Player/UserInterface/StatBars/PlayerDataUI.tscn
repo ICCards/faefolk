@@ -1,119 +1,134 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://cm8c7p7g6ii7g"]
 
-[ext_resource path="res://World3D/Player/Player/UserInterface/StatBars/PlayerDataUI.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/Images/User interface/Player stats/health.png" type="Texture2D" id=3]
-[ext_resource path="res://Assets/Images/User interface/Player stats/energy.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/Images/User interface/Player stats/mana.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Images/User interface/Player stats/stats-bars-x2.png" type="Texture2D" id=6]
-[ext_resource path="res://Assets/Images/User interface/DateTime/clock.png" type="Texture2D" id=7]
-[ext_resource path="res://Assets/Images/User interface/DateTime/clock icons/1.png" type="Texture2D" id=8]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd" id="1_7jgre"]
+[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://c2s3ln6njit5j" path="res://Assets/Images/User interface/Player stats/health.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://2b0qe7hyxgdk" path="res://Assets/Images/User interface/Player stats/energy.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bwixgp0gdb6w" path="res://Assets/Images/User interface/Player stats/mana.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cue6dirqviwjb" path="res://Assets/Images/User interface/Player stats/stats-bars-x2.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://c8tatrry8q7w5" path="res://Assets/Images/User interface/DateTime/clock.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bgbnkakxjttww" path="res://Assets/Images/User interface/DateTime/clock icons/1.png" id="8"]
 
 [node name="PlayerDataUI" type="Control"]
-script = ExtResource( 1 )
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7jgre")
 
 [node name="EnergyBars" type="Control" parent="."]
+anchors_preset = 0
 
 [node name="EnergyBg" type="TextureRect" parent="EnergyBars"]
+layout_mode = 0
 offset_left = 1172.0
 offset_top = 564.0
 offset_right = 1236.0
 offset_bottom = 660.0
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2(1.5, 1.5)
 mouse_filter = 2
-texture = ExtResource( 6 )
+texture = ExtResource("6")
 
 [node name="HealthPgBar" type="TextureProgressBar" parent="EnergyBars"]
+layout_mode = 0
 offset_left = 1241.0
 offset_top = 609.0
 offset_right = 1259.0
 offset_bottom = 696.0
 mouse_filter = 2
 value = 100.0
-texture_progress = ExtResource( 3 )
 fill_mode = 3
 nine_patch_stretch = true
+texture_progress = ExtResource("3")
 
 [node name="EnergyPgBar" type="TextureProgressBar" parent="EnergyBars"]
+layout_mode = 0
 offset_left = 1181.0
 offset_top = 609.0
 offset_right = 1199.0
 offset_bottom = 696.0
 mouse_filter = 2
 value = 100.0
-texture_progress = ExtResource( 4 )
 fill_mode = 3
 nine_patch_stretch = true
+texture_progress = ExtResource("4")
 
 [node name="ManaPgBar" type="TextureProgressBar" parent="EnergyBars"]
+layout_mode = 0
 offset_left = 1211.0
 offset_top = 609.0
 offset_right = 1229.0
 offset_bottom = 696.0
 mouse_filter = 2
 value = 100.0
-texture_progress = ExtResource( 5 )
 fill_mode = 3
 nine_patch_stretch = true
+texture_progress = ExtResource("5")
 
 [node name="ManaTimer" type="Timer" parent="EnergyBars"]
 wait_time = 5.0
 autostart = true
 
 [node name="DateTime" type="Control" parent="."]
+anchors_preset = 0
 offset_left = 251.333
 offset_top = 4.0
 offset_right = 291.333
 offset_bottom = 44.0
 
 [node name="Bg" type="TextureRect" parent="DateTime"]
+layout_mode = 0
 offset_left = 830.667
 offset_top = -13.0
 offset_right = 894.667
 offset_bottom = 35.0
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+scale = Vector2(3, 3)
+texture = ExtResource("7")
 
 [node name="Day" type="Label" parent="DateTime"]
+layout_mode = 0
 offset_left = 861.0
 offset_top = 26.0
 offset_right = 1076.0
 offset_bottom = 98.0
-scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 2 )
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 54
 text = "Mon. 1"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Time" type="Label" parent="DateTime"]
+layout_mode = 0
 offset_left = 882.0
 offset_top = 62.0
 offset_right = 1103.0
 offset_bottom = 128.0
-scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 2 )
-text = "6:00 a.m."
-align = 1
-valign = 1
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 54
+text = "12:00 a.m."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AdvanceTime" type="Timer" parent="DateTime"]
 wait_time = 3.0
 autostart = true
 
 [node name="ClockIcon" type="TextureRect" parent="DateTime"]
+layout_mode = 0
 offset_left = 851.667
 offset_top = 74.0
 offset_right = 858.667
 offset_bottom = 81.0
-scale = Vector2( 3, 3 )
-texture = ExtResource( 8 )
+scale = Vector2(3, 3)
+texture = ExtResource("8")
 
 [node name="SeasonIcon" type="TextureRect" parent="DateTime"]
+layout_mode = 0
 offset_left = 977.667
 offset_top = 23.0
 offset_right = 985.667
 offset_bottom = 31.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 
-[connection signal="timeout" from="EnergyBars/ManaTimer" to="." method="_on_ManaTimer_timeout"]
-[connection signal="timeout" from="DateTime/AdvanceTime" to="." method="_on_AdvanceTime_timeout"]
+[connection signal="timeout" from="EnergyBars/ManaTimer" to="." method="_on_mana_timer_timeout"]
+[connection signal="timeout" from="DateTime/AdvanceTime" to="." method="_on_advance_time_timeout"]

@@ -60,12 +60,12 @@ func _ready():
 	navigation_agent.call_deferred("set_navigation", get_node("/root/World3D/Node2D"))
 
 func _update_pathfinding_idle():
-	if not thread.is_active() and visible and not destroyed:
+	if not thread.is_alive() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
 		state = WALK
 
 func _update_pathfinding_chase():
-	if not thread.is_active() and visible and not destroyed:
+	if not thread.is_alive() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(player.position))
 
 func _get_path(pos):
@@ -85,7 +85,7 @@ func _update_pathfinding_retreat():
 		target.x = -200
 	if diff.y > 0:
 		target.y = -200
-	if not thread.is_active() and visible and not destroyed:
+	if not thread.is_alive() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(self.position+target))
 
 func set_sprite_texture():

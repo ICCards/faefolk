@@ -10,7 +10,7 @@ var item_category
 func initialize():
 	if not Server.world.is_changing_scene:
 		set_description_text(item_name)
-		await get_tree().idle_frame
+		await get_tree().process_frame
 		set_health_and_energy()
 		set_size_of_description($ItemName.size.x)
 		$GridContainer.size = Vector2( width , height )
@@ -40,15 +40,15 @@ func set_description_text(item):
 		var category = JsonData.item_data[item]["ItemCategory"]
 		var description = JsonData.item_data[item]["Description"]
 		$Body/ItemCategory.modulate = Util.returnCategoryColor(category)
-		$ItemName.set_text(item[0].to_upper() + item.substr(1,-1))
-		$Body/ItemCategory.set_text(category[0].to_upper() + category.substr(1,-1))
+		$ItemName.set_text(item) #item[0].to_upper() + item.substr(1,-1))
+		$Body/ItemCategory.set_text(category)#category[0].to_upper() + category.substr(1,-1))
 		$Body/ItemDescription.set_text(description)
 		#$Body/ItemDescription.set_text("description fds dsf sdf sdfddasd asd asdsa das fdsf f dsf fsdfdsdfsfds dasdsa a sdd asads das s")
 
 
 func set_size_of_description(x):
 	if x <= 210:
-		width = 58	
+		width = 58
 	else:
 		width = 58 + ((x - 210) / 5)
 	var lines = $Body/ItemDescription.get_line_count()

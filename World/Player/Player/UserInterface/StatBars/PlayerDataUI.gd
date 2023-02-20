@@ -15,12 +15,6 @@ func _ready():
 	$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
 	set_date_time()
 	
-func _on_ManaTimer_timeout():
-	PlayerData.player_data["mana"] += 1
-	if PlayerData.player_data["mana"] > 100:
-		PlayerData.player_data["mana"] = 100
-	PlayerData.emit_signal("mana_changed")
-	$EnergyBars/ManaPgBar.value = PlayerData.player_data["mana"]
 
 func set_mana_bar():
 	$EnergyBars/ManaPgBar.max_value = 100
@@ -38,23 +32,7 @@ func set_date_time():
 	$DateTime/Day.text = PlayerData.player_data["day_week"] + " " +  str(PlayerData.player_data["day_number"])
 	$DateTime/Time.text = return_adjusted_time_string(PlayerData.player_data["time_hours"],PlayerData.player_data["time_minutes"])
 
-func _on_AdvanceTime_timeout():
-	if Server.isLoaded:
-		PlayerData.player_data["time_minutes"] += game_time_speed_per_second
-		if PlayerData.player_data["time_minutes"] == 60:
-			PlayerData.player_data["time_minutes"] = 0
-			PlayerData.player_data["time_hours"] += 1
-			if PlayerData.player_data["time_hours"] == 6:
-				PlayerData.emit_signal("set_day")
-			elif PlayerData.player_data["time_hours"] == 22:
-				PlayerData.emit_signal("set_night")
-			elif PlayerData.player_data["time_hours"] == 24:
-				advance_day()
-			elif PlayerData.player_data["time_hours"] == 25:
-				 PlayerData.player_data["time_hours"] = 1
-		set_date_time()
-		advance_clock_icon()
-	
+
 func advance_day():
 	var index = week_days.find(PlayerData.player_data["day_week"])
 	index += 1
@@ -100,3 +78,29 @@ func advance_clock_icon():
 		clock_icon_index = 1
 	$DateTime/ClockIcon.texture = load("res://Assets/Images/User interface/DateTime/clock icons/"+str(clock_icon_index)+".png")
 
+
+
+func _on_advance_time_timeout():
+	if Server.isLoaded:
+		PlayerData.player_data["time_minutes"] += game_time_speed_per_second
+		if PlayerData.player_data["time_minutes"] == 60:
+			PlayerData.player_data["time_minutes"] = 0
+			PlayerData.player_data["time_hours"] += 1
+			if PlayerData.player_data["time_hours"] == 6:
+				PlayerData.emit_signal("set_day")
+			elif PlayerData.player_data["time_hours"] == 22:
+				PlayerData.emit_signal("set_night")
+			elif PlayerData.player_data["time_hours"] == 24:
+				advance_day()
+			elif PlayerData.player_data["time_hours"] == 25:
+				PlayerData.player_data["time_hours"] = 1
+		set_date_time()
+		advance_clock_icon()
+
+
+func _on_mana_timer_timeout():
+	PlayerData.player_data["mana"] += 1
+	if PlayerData.player_data["mana"] > 100:
+		PlayerData.player_data["mana"] = 100
+	PlayerData.emit_signal("mana_changed")
+	$EnergyBars/ManaPgBar.value = PlayerData.player_data["mana"]

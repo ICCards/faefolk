@@ -1,8 +1,8 @@
 extends Node2D
 
-@onready var Fishing = load("res://World3D/Player/Player/Fishing/Fishing.tscn")
-@onready var PlaceObjectScene = load("res://World3D/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
-@onready var Eating_particles = load("res://World3D/Player/Player/AttachedScenes/EatingParticles.tscn")
+@onready var Fishing = load("res://World/Player/Player/Fishing/Fishing.tscn")
+@onready var PlaceObjectScene = load("res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
+@onready var Eating_particles = load("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
 
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
@@ -25,8 +25,8 @@ enum {
 
 
 var game_state: GameState
-
 var current_interactive_node = null
+
 
 func _ready():
 	PlayerData.connect("health_depleted",Callable(self,"player_death"))

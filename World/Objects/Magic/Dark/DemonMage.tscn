@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://3s87poep0d0b"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Dark/DemonMage.gd" id="1_purek"]
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="3"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="3_b0bjg"]
 [ext_resource type="Texture2D" uid="uid://c1hleune7dejc" path="res://Assets/Images/Magic/dark/Demon_mage-shadow.png" id="4"]
 
 [sub_resource type="SpriteFrames" id="17"]
@@ -81,7 +81,7 @@ visible = false
 position = Vector2(0, 25)
 collision_layer = 0
 collision_mask = 256
-script = ExtResource("3")
+script = ExtResource("3_b0bjg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -58)

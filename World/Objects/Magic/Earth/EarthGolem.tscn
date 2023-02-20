@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cbu7utt1n4jnt"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Earth/EarthGolem.gd" id="1_5mja1"]
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="2"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_ilufo"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 524.452
@@ -63,7 +63,7 @@ script = ExtResource("1_5mja1")
 position = Vector2(0, 62)
 collision_layer = 0
 collision_mask = 262144
-script = ExtResource("2")
+script = ExtResource("2_ilufo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -31)

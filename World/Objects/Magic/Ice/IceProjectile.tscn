@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://pnet7b2u4hu4"]
 
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Magic/Ice/IceProjectile.gd" id="1_ijx46"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_a707w"]
 
 [sub_resource type="RectangleShape2D" id="86"]
 size = Vector2(14, 14)
@@ -45,7 +45,7 @@ shape = SubResource("86")
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 262146
-script = ExtResource("1")
+script = ExtResource("2_a707w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("3")

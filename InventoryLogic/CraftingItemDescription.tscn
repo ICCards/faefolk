@@ -100,6 +100,8 @@ offset_left = 5.92593
 offset_top = 26.4814
 offset_right = 5.92593
 offset_bottom = 58.4814
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Ingredient2" parent="." instance=ExtResource("12")]
 layout_mode = 3
@@ -108,6 +110,8 @@ offset_left = 5.92593
 offset_top = 36.6668
 offset_right = 5.92593
 offset_bottom = 68.6668
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Ingredient3" parent="." instance=ExtResource("12")]
 layout_mode = 3
@@ -116,6 +120,8 @@ offset_left = 5.926
 offset_top = 46.0
 offset_right = 5.926
 offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ItemName" type="Label" parent="."]
 offset_left = 5.14286

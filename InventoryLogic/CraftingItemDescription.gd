@@ -9,7 +9,7 @@ var amount_ingredients
 func initialize():
 	set_description_text(item_name)
 	set_ingredients(item_name)
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	set_size_of_description($ItemName.size.x)
 	$Divider1.size.x = width - 12
 	$Divider2.size.x = width - 12
@@ -77,15 +77,16 @@ func returnIfValidMaterial(item, amount):
 
 func set_description_text(item):
 	if item:
+		print(item)
 		var category = JsonData.item_data[item]["ItemCategory"]
 		var description = JsonData.item_data[item]["Description"]
-		$ItemName.set_text(item[0].to_upper() + item.substr(1,-1))
+		$ItemName.set_text(item) #item[0].to_upper() + item.substr(1,-1))
 		$ItemDescription.set_text(description)
 
 
 func set_size_of_description(x):
 	if x <= 210:
-		width = 58	
+		width = 58
 	else:
 		width = 58 + ((x - 210) / 5)
 	var lines = $ItemDescription.get_line_count()

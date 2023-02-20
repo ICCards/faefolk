@@ -40,7 +40,7 @@ func _whoAmI(chunk):
 func build_terrain():
 	if Server.player_node:
 		for new_chunk in get_parent().built_chunks:
-			if not built_chunks.has(new_chunk) and not terrain_thread.is_active():
+			if not built_chunks.has(new_chunk) and not terrain_thread.is_alive():
 				built_chunks.append(new_chunk)
 				terrain_thread.start(Callable(self,"_whoAmI").bind(new_chunk))
 

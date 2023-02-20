@@ -14,10 +14,10 @@ func initialize():
 func entered_item_area(item_name):
 	get_parent().item = item_name
 	var tween = get_tree().create_tween()
-	tween.tween_property(get_node(item_name), "scale", Vector2(1.1, 1.1), 0.075)
+	tween.tween_property(get_node(str(item_name)), "scale", Vector2(1.1, 1.1), 0.075)
 
 func exited_item_area(item_name):
 	get_parent().item = null
-	if has_node(item_name):
+	if has_node(str(item_name)):
 		var tween = get_tree().create_tween()
-		tween.tween_property(get_node(item_name), "scale", Vector2(1.0, 1.0), 0.075)
+		tween.tween_property(get_node(str(item_name)), "scale", Vector2(1.0, 1.0), 0.075)

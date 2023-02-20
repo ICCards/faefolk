@@ -45,7 +45,7 @@ func set_attributes():
 		bunny_sprite.flip_h = true
 
 func _update_pathfinding():
-	if not thread.is_active() and visible and not destroyed:
+	if not thread.is_alive() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
 		if Util.chance(15):
 			if not destroyed and not sound_effects.playing:

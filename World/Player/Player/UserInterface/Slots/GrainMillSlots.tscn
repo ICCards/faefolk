@@ -64,6 +64,7 @@ offset_bottom = 217.0
 script = ExtResource("6")
 
 [node name="LockSlot" type="TextureRect" parent="SugarCaneSlot"]
+layout_mode = 0
 offset_right = 48.0
 offset_bottom = 48.0
 texture = ExtResource("4_rsdeb")

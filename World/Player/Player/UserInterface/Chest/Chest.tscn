@@ -1,99 +1,95 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=12 format=3 uid="uid://cm5b6xmvhjvn0"]
 
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/ChestSlots.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Images/User interface/chest/chest-tab.png" type="Texture2D" id=2]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Chest/Chest.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture2D" id=4]
-[ext_resource path="res://World3D/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture2D" id=6]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=7]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=9]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=10]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Images/User interface/inventory/sprite_frames/wood-frame.png" type="Texture2D" id=12]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Chest/Chest.gd" id="1_cbxtf"]
+[ext_resource type="Texture2D" uid="uid://dokjustpno00k" path="res://Assets/Images/User interface/chest/chest-tab.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="4_h7oge"]
+[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="5_r6fi7"]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="7_7atqt"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="8_vfsgs"]
+[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="9_ng84b"]
+[ext_resource type="PackedScene" uid="uid://brvmm6fucppuw" path="res://World/Player/Player/UserInterface/Slots/ChestSlots.tscn" id="9_ybylw"]
 
 [node name="Chest" type="Control"]
+layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-script = ExtResource( 3 )
-
-[node name="Trash" parent="." instance=ExtResource( 5 )]
 offset_left = -640.0
 offset_top = -360.0
-offset_right = -586.0
+offset_right = -640.0
 offset_bottom = -360.0
+script = ExtResource("1_cbxtf")
 
-[node name="ItemDescription" parent="." instance=ExtResource( 9 )]
+[node name="ItemDescription" parent="." instance=ExtResource("9")]
 visible = false
 
-[node name="ChestSlotsImg" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -640.0
-offset_top = -360.0
-offset_right = -214.0
-offset_bottom = -120.0
-scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 2 )
-stretch_mode = 4
-
-[node name="InventorySlots" parent="." instance=ExtResource( 11 )]
-offset_left = -295.0
-offset_top = 126.0
-offset_right = 293.0
-offset_bottom = 234.0
-custom_constants/v_separation = 12
-custom_constants/h_separation = 12
-
-[node name="HotbarInventorySlots" parent="." instance=ExtResource( 10 )]
-offset_left = -295.0
-offset_top = 66.0
-offset_right = 293.0
-offset_bottom = 120.0
-custom_constants/h_separation = 12
-
-[node name="ChestSlots" parent="." instance=ExtResource( 1 )]
-offset_left = -295.0
-offset_top = -180.0
-offset_right = 293.0
-offset_bottom = -12.0
-custom_constants/v_separation = 12
-custom_constants/h_separation = 12
-
-[node name="ExitBtn" type="TextureButton" parent="."]
-offset_left = 278.0
-offset_top = -246.0
-offset_right = 292.0
-offset_bottom = -232.0
-scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 6 )
-expand = true
-
-[node name="Tween" type="Tween" parent="."]
-
-[node name="MenuTitle" parent="." instance=ExtResource( 7 )]
-offset_left = -88.0
-offset_top = -243.0
-offset_right = 277.0
-offset_bottom = -168.0
-text = "Chest"
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("2")
+stretch_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="Frame" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -360.0
-offset_right = -214.0
-offset_bottom = -120.0
-scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 12 )
-stretch_mode = 4
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("4_h7oge")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="MenuTitle" parent="." instance=ExtResource("5_r6fi7")]
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 917.0
+offset_bottom = 192.0
+text = "Chest"
+
+[node name="ExitBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("6")
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("7_7atqt")]
+offset_left = 345.0
+offset_top = 426.0
+offset_right = 933.0
+offset_bottom = 480.0
+theme_override_constants/h_separation = 12
+columns = 10
+metadata/_edit_lock_ = true
+
+[node name="InventorySlots" parent="." instance=ExtResource("8_vfsgs")]
+offset_left = 345.0
+offset_top = 485.0
+offset_right = 933.0
+offset_bottom = 594.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 13
+columns = 10
+metadata/_edit_lock_ = true
+
+[node name="ChestSlots" parent="." instance=ExtResource("9_ybylw")]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 180.0
+offset_right = 939.0
+offset_bottom = 354.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="Trash" parent="." instance=ExtResource("9_ng84b")]
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]

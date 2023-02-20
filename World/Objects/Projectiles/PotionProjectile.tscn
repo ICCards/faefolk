@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cigfphdnphb86" path="res://Assets/Images/Forage/animal/raw egg.png" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Projectiles/PotionProjectile.gd" id="1_4tjvv"]
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="2"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="3_b8nqr"]
 
 [sub_resource type="Curve" id="80"]
 min_value = -400.0
@@ -870,7 +870,7 @@ color_ramp = SubResource("4")
 [node name="PotionHitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 128
-script = ExtResource("2")
+script = ExtResource("3_b8nqr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PotionHitbox"]
 shape = SubResource("6")

@@ -2,38 +2,36 @@ extends Node2D
 
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
-@onready var PotionProjectile = load("res://World3D/Objects/Projectiles/PotionProjectile.tscn")
+@onready var PotionProjectile = load("res://World/Objects/Projectiles/PotionProjectile.tscn")
 
-@onready var ArrowProjectile = load("res://World3D/Objects/Projectiles/ArrowProjectile.tscn")
+@onready var ArrowProjectile = load("res://World/Objects/Projectiles/ArrowProjectile.tscn")
 
-@onready var LightningProjectile = load("res://World3D/Objects/Magic/Lightning/LightningProjectile.tscn")
-@onready var LightningStrike = load("res://World3D/Objects/Magic/Lightning/LightningStrike.tscn")
-@onready var FlashStep = load("res://World3D/Objects/Magic/Lightning/FlashStep.tscn")
+@onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
+@onready var LightningStrike = load("res://World/Objects/Magic/Lightning/LightningStrike.tscn")
+@onready var FlashStep = load("res://World/Objects/Magic/Lightning/FlashStep.tscn")
 
-@onready var TornadoProjectile = load("res://World3D/Objects/Magic/Wind/TornadoProjectile.tscn")
-@onready var DashGhost = load("res://World3D/Objects/Magic/Wind/DashGhost.tscn")
-@onready var LingeringTornado = load("res://World3D/Objects/Magic/Wind/LingeringTornado.tscn")
-@onready var Whirlwind = load("res://World3D/Objects/Magic/Wind/Whirlwind.tscn")
+@onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+@onready var DashGhost = load("res://World/Objects/Magic/Wind/DashGhost.tscn")
+@onready var LingeringTornado = load("res://World/Objects/Magic/Wind/LingeringTornado.tscn")
+@onready var Whirlwind = load("res://World/Objects/Magic/Wind/Whirlwind.tscn")
 
-@onready var FireProjectile = load("res://World3D/Objects/Magic/Fire/FireProjectile.tscn")
-@onready var FlameThrower = load("res://World3D/Objects/Magic/Fire/Flamethrower.tscn")
-@onready var FireBuffFront = load("res://World3D/Objects/Magic/Fire/AttachedFlameBehind.tscn")
-@onready var FireBuffBehind = load("res://World3D/Objects/Magic/Fire/AttachedFlameFront.tscn")
+@onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+@onready var FlameThrower = load("res://World/Objects/Magic/Fire/Flamethrower.tscn")
+@onready var FireBuffFront = load("res://World/Objects/Magic/Fire/AttachedFlameBehind.tscn")
+@onready var FireBuffBehind = load("res://World/Objects/Magic/Fire/AttachedFlameFront.tscn")
 
-@onready var EarthStrike = load("res://World3D/Objects/Magic/Earth/EarthStrike.tscn")
-@onready var EarthGolem = load("res://World3D/Objects/Magic/Earth/EarthGolem.tscn")
-@onready var EarthStrikeDebuff = load("res://World3D/Objects/Magic/Earth/EarthStrikeDebuff.tscn")
-@onready var Earthquake = load("res://World3D/Objects/Magic/Earth/Earthquake.tscn")
+@onready var EarthStrike = load("res://World/Objects/Magic/Earth/EarthStrike.tscn")
+@onready var EarthGolem = load("res://World/Objects/Magic/Earth/EarthGolem.tscn")
+@onready var EarthStrikeDebuff = load("res://World/Objects/Magic/Earth/EarthStrikeDebuff.tscn")
+@onready var Earthquake = load("res://World/Objects/Magic/Earth/Earthquake.tscn")
 
-@onready var IceDefense = load("res://World3D/Objects/Magic/Ice/IceDefense.tscn")
-@onready var IceProjectile = load("res://World3D/Objects/Magic/Ice/IceProjectile.tscn")
-@onready var BlizzardFog = load("res://World3D/Objects/Magic/Ice/BlizzardFog.tscn")
+@onready var IceDefense = load("res://World/Objects/Magic/Ice/IceDefense.tscn")
+@onready var IceProjectile = load("res://World/Objects/Magic/Ice/IceProjectile.tscn")
+@onready var BlizzardFog = load("res://World/Objects/Magic/Ice/BlizzardFog.tscn")
 
-@onready var DemonMage = load("res://World3D/Objects/Magic/Dark/DemonMage.tscn")
-@onready var PortalNode = load("res://World3D/Objects/Magic/Dark/Portal.tscn")
+@onready var DemonMage = load("res://World/Objects/Magic/Dark/DemonMage.tscn")
+@onready var PortalNode = load("res://World/Objects/Magic/Dark/Portal.tscn")
 
-@onready var HealthProjectile = load("res://World3D/Objects/Magic/Health/HealthProjectile.tscn")
-@onready var HealthBuff = load("res://World3D/Objects/Magic/Health/HealthBuff.tscn")
 
 @onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
 @onready var player_animation_player2 = get_node("../CompositeSprites/AnimationPlayer2")
@@ -120,7 +118,7 @@ func _input( event ):
 			cancel_attack_pressed = false
 
 func draw_bow(spell_index):
-	if not thread.is_active():
+	if not thread.is_alive():
 		thread.start(Callable(self,"whoAmIBow").bind(spell_index))
 		
 func whoAmIBow(spell_index):
@@ -272,7 +270,7 @@ func wait_for_cast_release(staff_name,spell_index):
 		wait_for_cast_release(staff_name, spell_index)
 
 func cast_spell(staff_name, spell_index):
-	if not thread.is_active():
+	if not thread.is_alive():
 		thread.start(Callable(self,"whoAmIMagic").bind([staff_name,spell_index]))
 
 func whoAmIMagic(staff_and_spell_index):
@@ -391,7 +389,7 @@ func throw(potion_name):
 
 func cast(staff_name, spell_index):
 	get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").start_spell_cooldown(spell_index)
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	match spell_index:
 		1:
 			PlayerData.change_mana(-1)

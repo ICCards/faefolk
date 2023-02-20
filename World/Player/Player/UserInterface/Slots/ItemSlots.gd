@@ -26,13 +26,13 @@ func initialize_slots():
 
 func hovered_slot(slot):
 	if slot.item:
-		slot.item.hover_item()
+		#slot.item.hover_item()
 		get_parent().hovered_item = slot.item.item_name
 
 func exited_slot(slot):
 	get_parent().hovered_item = null
-	if slot.item:
-		slot.item.exit_item()
+#	if slot.item:
+#		slot.item.exit_item()
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:

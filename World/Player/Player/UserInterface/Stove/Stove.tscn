@@ -1,14 +1,57 @@
-[gd_scene load_steps=10 format=3 uid="uid://cly7lxm775u81"]
+[gd_scene load_steps=22 format=3 uid="uid://cly7lxm775u81"]
 
 [ext_resource type="Texture2D" uid="uid://b0sjcoimppjry" path="res://Assets/Images/User interface/stove/stove-tab.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Stove/Stove.gd" id="1_vs8ay"]
 [ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="4_1aon6"]
 [ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="5_xy5qc"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/StoveSlots.tscn" id="6_4jxth"]
+[ext_resource type="PackedScene" uid="uid://c4pw0ts6afhqc" path="res://World/Player/Player/UserInterface/Slots/StoveSlots.tscn" id="6_4jxth"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="7_mau5r"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="8_fmvqt"]
 [ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://bachr3xkjleuo" path="res://Assets/Images/User interface/stove/stove-arrow.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://h1d7iyd8ub08" path="res://Assets/Images/User interface/stove/fire/stove-fire-0.png" id="12_384tb"]
+[ext_resource type="Texture2D" uid="uid://bhdmhl4omrdyy" path="res://Assets/Images/User interface/stove/fire/stove-fire-1.png" id="13_amasl"]
 [ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="14"]
+[ext_resource type="Texture2D" uid="uid://b0jf6eicb7hrc" path="res://Assets/Images/User interface/stove/fire/stove-fire-2.png" id="14_efhpm"]
+[ext_resource type="Texture2D" uid="uid://cvgubwd5t4f8t" path="res://Assets/Images/User interface/stove/fire/stove-fire-3.png" id="15_lpr44"]
+[ext_resource type="Texture2D" uid="uid://10g5pf2spr5h" path="res://Assets/Images/User interface/stove/fire/stove-fire-4.png" id="16_giohj"]
+[ext_resource type="Texture2D" uid="uid://cgt18sx008i3h" path="res://Assets/Images/User interface/stove/fire/stove-fire-5.png" id="17_8jhlk"]
+[ext_resource type="Texture2D" uid="uid://nltba7be0pq3" path="res://Assets/Images/User interface/stove/fire/stove-fire-6.png" id="18_gr50g"]
+[ext_resource type="Texture2D" uid="uid://cr2j4e5ayayqn" path="res://Assets/Images/User interface/stove/fire/stove-fire-7.png" id="19_xdtd7"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="20_a3jem"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1tcni"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_384tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_amasl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_efhpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lpr44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_giohj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_8jhlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_gr50g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xdtd7")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="Stove" type="Control"]
 layout_mode = 3
@@ -21,12 +64,15 @@ offset_left = -640.0
 offset_top = -360.0
 offset_right = -640.0
 offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_vs8ay")
 
 [node name="ItemDescription" parent="." instance=ExtResource("14")]
 visible = false
 
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -35,6 +81,7 @@ stretch_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -43,13 +90,14 @@ stretch_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="MenuTitle" parent="." instance=ExtResource("5_xy5qc")]
+layout_mode = 0
 offset_left = 552.0
 offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
+text = "Stove #3"
 
 [node name="StoveSlots" parent="." instance=ExtResource("6_4jxth")]
-anchors_preset = 0
 offset_left = 88.0
 offset_top = 284.0
 offset_right = 686.0
@@ -66,50 +114,49 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Ingredient1" parent="StoveSlots" index="1"]
-layout_mode = 0
 offset_left = 287.0
 offset_top = 97.0
 offset_right = 335.0
 offset_bottom = 145.0
 
 [node name="Ingredient2" parent="StoveSlots" index="2"]
-layout_mode = 0
 offset_left = 350.0
 offset_top = 97.0
 offset_right = 398.0
 offset_bottom = 145.0
 
 [node name="LockSlot" parent="StoveSlots/Ingredient2" index="0"]
-layout_mode = 0
-expand_mode = 1
+visible = true
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 51.0
+offset_bottom = 51.0
 
 [node name="Ingredient3" parent="StoveSlots" index="3"]
-layout_mode = 0
 offset_left = 413.0
 offset_top = 97.0
 offset_right = 461.0
 offset_bottom = 145.0
 
 [node name="LockSlot" parent="StoveSlots/Ingredient3" index="0"]
-layout_mode = 0
-expand_mode = 1
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 51.0
+offset_bottom = 51.0
 
 [node name="YieldSlot1" parent="StoveSlots" index="4"]
-layout_mode = 0
 offset_left = 287.0
 offset_top = -35.0
 offset_right = 335.0
 offset_bottom = 13.0
 
 [node name="YieldSlot2" parent="StoveSlots" index="5"]
-layout_mode = 0
 offset_left = 350.0
 offset_top = -35.0
 offset_right = 398.0
 offset_bottom = 13.0
 
 [node name="CoalYieldSlot" parent="StoveSlots" index="6"]
-layout_mode = 0
 offset_left = 413.0
 offset_top = -35.0
 offset_right = 461.0
@@ -136,10 +183,37 @@ scale = Vector2(3, 3)
 fill_mode = 3
 texture_progress = ExtResource("12")
 
+[node name="FireAnimatedSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(461, 465)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_1tcni")
+animation = &"new_animation"
+
+[node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
+show_behind_parent = true
+offset_left = -8.66669
+offset_top = -6.00003
+offset_right = 9.33331
+offset_bottom = 13.0
+color = Color(0.247059, 0.109804, 0.0627451, 1)
+
+[node name="Trash" parent="." instance=ExtResource("20_a3jem")]
+
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="CookTimer" type="Timer" parent="."]
 wait_time = 10.0
+
+[node name="InventorySlots" parent="." instance=ExtResource("8_fmvqt")]
+metadata/_edit_lock_ = true
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("7_mau5r")]
+offset_left = 638.0
+offset_top = 184.0
+offset_right = 938.0
+offset_bottom = 298.0
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="timeout" from="CookTimer" to="." method="_on_CookTimer_timeout"]

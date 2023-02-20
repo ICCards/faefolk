@@ -43,9 +43,9 @@ func initialize():
 
 
 func _on_SpawnAnimalTimer_timeout():
-	if not spawn_thread.is_active():
+	if not spawn_thread.is_alive():
 		spawn_thread.start(Callable(self,"_whoAmI"))
-	if not remove_thread.is_active():
+	if not remove_thread.is_alive():
 		remove_thread.start(Callable(self,"_whoAmI2"))
 
 func _whoAmI():

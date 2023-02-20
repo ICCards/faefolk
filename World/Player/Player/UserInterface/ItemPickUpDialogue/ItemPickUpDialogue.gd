@@ -8,7 +8,7 @@ var thread := Thread.new()
 
 func item_picked_up(item_name, item_quantity):
 	queue.append([item_name, item_quantity])
-	if thread.is_active():
+	if thread.is_alive():
 		return
 	thread.start(Callable(self,"show_dialogue"))
 	

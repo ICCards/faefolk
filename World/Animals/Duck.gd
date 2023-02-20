@@ -99,7 +99,7 @@ func _get_direction_string(velocitiy) -> String:
 	return "Left"
 
 func _update_pathfinding():
-	if not thread.is_active() and visible:
+	if not thread.is_alive() and visible:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
 		if Util.chance(5):
 			if not destroyed and not sound_effects.playing:

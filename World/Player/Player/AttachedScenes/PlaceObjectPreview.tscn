@@ -1,65 +1,64 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://cjtdfqvbjks4g"]
 
-[ext_resource path="res://Assets/Images/tree_sets/birch/growing/sapling.png" type="Texture2D" id=1]
-[ext_resource path="res://World3D/Objects/Misc/ColorIndicator.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Images/inventory_icons/Forage/red clam.png" type="Texture2D" id=3]
-[ext_resource path="res://World3D/Player/Player/AttachedScripts/PlaceObjectPreview.gd" type="Script" id=4]
-[ext_resource path="res://Assets/Images/craftable object preview/wood gate.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Images/Forage/flower/sunflower.png" type="Texture2D" id=6]
+[ext_resource type="Texture2D" uid="uid://dktjb7tf2s1cg" path="res://Assets/Images/tree_sets/birch/growing/sapling.png" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd" id="1_ttu3h"]
+[ext_resource type="PackedScene" uid="uid://cx276tgkqafh7" path="res://World/Objects/Misc/ColorIndicator.tscn" id="2_57rwy"]
+[ext_resource type="Texture2D" uid="uid://563y8ineit7c" path="res://Assets/Images/inventory_icons/Forage/red clam.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://rsf1ok356wcn" path="res://Assets/Images/craftable object preview/wood gate.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://et4a5mhdh22" path="res://Assets/Images/Forage/flower/sunflower.png" id="6"]
 
 [node name="PlaceObject" type="Node2D"]
-script = ExtResource( 4 )
+script = ExtResource("1_ttu3h")
+
+[node name="ColorIndicator" parent="." instance=ExtResource("2_57rwy")]
 
 [node name="ItemToPlace" type="TextureRect" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.627451 )
+modulate = Color(1, 1, 1, 0.627451)
 offset_right = 32.0
 offset_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource( 3 )
+texture = ExtResource("3")
 
 [node name="GateToPlace" type="TextureRect" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.627451 )
+modulate = Color(1, 1, 1, 0.627451)
 offset_left = -10.0
 offset_top = -19.0
 offset_right = 74.0
 offset_bottom = 21.0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource( 5 )
+texture = ExtResource("5")
 
 [node name="TreeSeedToPlace" type="TextureRect" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.627451 )
+modulate = Color(1, 1, 1, 0.627451)
 offset_left = -34.0
 offset_top = -235.0
 offset_right = 14.0
 offset_bottom = -143.0
 grow_vertical = 0
-scale = Vector2( 2.75, 2.75 )
+scale = Vector2(2.75, 2.75)
 mouse_filter = 2
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 
 [node name="ForageItemToPlace" type="TextureRect" parent="."]
 visible = false
-offset_right = 32.0
-offset_bottom = 32.0
-texture = ExtResource( 6 )
-expand = true
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("6")
+expand_mode = 1
 
 [node name="ScaledItemToPlace" type="TextureRect" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.627451 )
+modulate = Color(1, 1, 1, 0.627451)
 offset_right = 32.0
 offset_bottom = 32.0
 grow_vertical = 0
 mouse_filter = 2
 stretch_mode = 1
-
-[node name="ColorIndicator" parent="." instance=ExtResource( 2 )]
-z_index = -1
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 visible = false

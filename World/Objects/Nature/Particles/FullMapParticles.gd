@@ -2,7 +2,6 @@ extends Node2D
 
 const LENGTH_OF_TRANSITION = 60.0
 
-var tween = get_tree().create_tween()
 
 func _ready():
 	PlayerData.connect("set_day",Callable(self,"play_set_day"))
@@ -23,9 +22,11 @@ func _physics_process(delta):
 		hide()
 
 func play_set_day():
+	var tween = get_tree().create_tween()
 	tween.tween_property($Clouds, "self_modulate", Color("ffffff"), LENGTH_OF_TRANSITION)
 	tween.tween_property($LargeClouds, "self_modulate", Color("ffffff"), LENGTH_OF_TRANSITION)
 
 func play_set_night():
+	var tween = get_tree().create_tween()
 	tween.tween_property($Clouds, "self_modulate", Color("00ffffff"), LENGTH_OF_TRANSITION)
 	tween.tween_property($LargeClouds, "self_modulate", Color("00ffffff"), LENGTH_OF_TRANSITION)

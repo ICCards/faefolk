@@ -114,19 +114,19 @@ func _on_SpawnNature_timeout():
 		spawn_nature()
 
 func spawn_nature():
-	if not remove_objects_thread.is_active():
+	if not remove_objects_thread.is_alive():
 		remove_objects_thread.start(Callable(self,"_whoAmI").bind(null))
-	if not remove_grass_thread.is_active():
+	if not remove_grass_thread.is_alive():
 		remove_grass_thread.start(Callable(self,"_whoAmI5").bind(null))
-	if not trees_thread.is_active():
+	if not trees_thread.is_alive():
 		trees_thread.start(Callable(self,"_whoAmI2").bind(null))
-	if not ores_thread.is_active():
+	if not ores_thread.is_alive():
 		ores_thread.start(Callable(self,"_whoAmI3").bind(null))
-	if not grass_thread.is_active():
+	if not grass_thread.is_alive():
 		grass_thread.start(Callable(self,"_whoAmI4").bind(null))
-	if not forage_thread.is_active():
+	if not forage_thread.is_alive():
 		forage_thread.start(Callable(self,"_whoAmI6").bind(null))
-	if not navigation_thread.is_active():
+	if not navigation_thread.is_alive():
 		navigation_thread.start(Callable(self,"_whoAmI7").bind(null))
 
 

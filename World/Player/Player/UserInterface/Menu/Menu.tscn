@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctp3ra1cmv0de"]
+[gd_scene load_steps=17 format=3 uid="uid://ctp3ra1cmv0de"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Menu.gd" id="1_1ymg0"]
 [ext_resource type="Texture2D" uid="uid://r6w3mbmfa6ms" path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" id="3"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://suwmuinnbyjn" path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" id="11_n48af"]
 [ext_resource type="PackedScene" uid="uid://b3ad8jm57r5at" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.tscn" id="12_8aw2w"]
 [ext_resource type="PackedScene" uid="uid://boujb4h3xtdhe" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="12_ntmmq"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="16_tc1bk"]
 [ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="36"]
 [ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="42"]
 
@@ -32,6 +33,7 @@ position = Vector2(-508, 3)
 scale = Vector2(3, 3)
 
 [node name="ItemDescription" parent="." instance=ExtResource("36")]
+visible = false
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
@@ -118,6 +120,10 @@ texture_normal = ExtResource("4")
 texture_pressed = ExtResource("11")
 metadata/_edit_lock_ = true
 
+[node name="Label" parent="NamePlates/save" index="0"]
+offset_right = 500.0
+text = "Save"
+
 [node name="Pages" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -139,6 +145,10 @@ visible = false
 [node name="collections" parent="Pages" instance=ExtResource("12_8aw2w")]
 visible = false
 
+[node name="Trash" parent="." instance=ExtResource("16_tc1bk")]
+
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
+
+[editable path="NamePlates/save"]

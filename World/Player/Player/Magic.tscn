@@ -13,11 +13,11 @@ particles_anim_loop = false
 [sub_resource type="Gradient" id="2"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="Curve" id="3"]
+[sub_resource type="Curve" id="Curve_5ddji"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CanvasItemMaterial" id="4"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_17d36"]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
@@ -34,10 +34,10 @@ point_count = 2
 script = ExtResource("1_ptejg")
 
 [node name="CastDirection" type="Node2D" parent="."]
-position = Vector2(0, -32)
+position = Vector2(0, -16)
 
 [node name="Marker2D" type="Marker2D" parent="CastDirection"]
-position = Vector2(40, -7.62939e-06)
+position = Vector2(28, 4.54747e-12)
 
 [node name="GhostTimer" type="Timer" parent="."]
 wait_time = 0.03
@@ -54,12 +54,12 @@ lifetime_randomness = 0.7
 texture = ExtResource("2_k5452")
 gravity = Vector2(0, 0)
 color_ramp = SubResource("2")
-anim_speed_curve = SubResource("3")
+anim_speed_curve = SubResource("Curve_5ddji")
 
 [node name="DustBurst" type="CPUParticles2D" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -1
-material = SubResource("4")
+material = SubResource("CanvasItemMaterial_17d36")
 emitting = false
 amount = 24
 lifetime = 1.5
@@ -74,7 +74,11 @@ color_ramp = SubResource("6")
 anim_speed_curve = SubResource("7")
 
 [node name="AimDownSightLine" type="Line2D" parent="."]
+texture_repeat = 3
+position = Vector2(2, 3)
+width = 1.0
 texture = ExtResource("4")
+texture_mode = 1
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 

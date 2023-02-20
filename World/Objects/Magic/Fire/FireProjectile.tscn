@@ -1,14 +1,145 @@
-[gd_scene load_steps=15 format=3 uid="uid://cl1iqoctluyqc"]
+[gd_scene load_steps=30 format=3 uid="uid://cl1iqoctluyqc"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Fire/FireProjectile.gd" id="1_molg8"]
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://nv5ikxh71jqx" path="res://Assets/Images/Magic/fire/projectile.png" id="2_le5f1"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_o1qj7"]
+[ext_resource type="Texture2D" uid="uid://b607avsc06ph7" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d1.png" id="2_s7rto"]
+[ext_resource type="Texture2D" uid="uid://cg65n51aoru5" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d2.png" id="3_rxwvf"]
+[ext_resource type="Texture2D" uid="uid://bn873mc658j2n" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d3.png" id="4_ptlbd"]
+[ext_resource type="Texture2D" uid="uid://b2knm4jpxo86v" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d4.png" id="5_jrfb5"]
+[ext_resource type="Texture2D" uid="uid://ccmm7b4ohv1nt" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d5.png" id="6_rsm7o"]
+[ext_resource type="Texture2D" uid="uid://cmreiqrymtiqy" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d6.png" id="7_i86xf"]
+[ext_resource type="Texture2D" uid="uid://jjlatpwdtwt6" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d7.png" id="8_leshn"]
+[ext_resource type="Texture2D" uid="uid://bjrnrn166ae4t" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d8.png" id="9_iu425"]
+[ext_resource type="Texture2D" uid="uid://dexl2kqol0ek2" path="res://Assets/Images/Animations/Projectiles/explosion/explosion-d/explosion-d9.png" id="10_nyunr"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="13"]
 
 [sub_resource type="SpriteFrames" id="22"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s7rto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rxwvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ptlbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jrfb5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rsm7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_i86xf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_leshn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_iu425")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nyunr")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0xno"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vcr7"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecpw3"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hf4q"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmsw2"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uhnw"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri585"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4rft"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmhtb"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ofse"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2qfp"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kie4"]
+atlas = ExtResource("2_le5f1")
+region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="18"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0xno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vcr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecpw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hf4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmsw2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uhnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri585")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4rft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmhtb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ofse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2qfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kie4")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="19"]
 size = Vector2(3, 3)
@@ -18,42 +149,6 @@ resource_local_to_scene = true
 radius = 9.53675e-06
 height = 1.90735e-05
 
-[sub_resource type="Curve" id="23"]
-min_value = -400.0
-max_value = 400.0
-_data = [Vector2(0.00225479, 400), 0.0, 6785.07, 0, 0, Vector2(0.0963725, 84.2162), -1232.57, -1232.57, 0, 0, Vector2(1, -200), 1228.09, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="24"]
-max_value = 2.5
-_data = [Vector2(0, 2.49732), 0.0, 0.0, 0, 0, Vector2(1, 1.22348), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="29"]
-offsets = PackedFloat32Array(0.000555864, 0.171765, 0.454118, 0.762353, 1)
-colors = PackedColorArray(1, 0.992157, 0.713726, 1, 1, 0.737227, 0, 1, 0.851586, 0.504755, 0.0706631, 1, 0.994795, 0.323645, 0.204007, 1, 1, 0, 0, 1)
-
-[sub_resource type="Curve" id="27"]
-max_value = 3.0
-_data = [Vector2(0, 2.75318), 0.0, 0.0, 0, 0, Vector2(1, 1.35797), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="28"]
-min_value = -200.0
-max_value = 200.0
-_data = [Vector2(0, 200), 0.0, 551.546, 0, 0, Vector2(0.110634, -116.595), 0.0, 0.0, 0, 0, Vector2(1, -138.216), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="31"]
-min_value = 0.99
-max_value = 5.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5), 10.0041, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="30"]
-offsets = PackedFloat32Array(0, 0.994737, 1)
-colors = PackedColorArray(0.51083, 0.51083, 0.51083, 1, 0.611765, 0.611765, 0.611765, 0.227451, 1, 1, 1, 0)
-
 [node name="FireProjectile" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_molg8")
@@ -61,17 +156,63 @@ script = ExtResource("1_molg8")
 [node name="Explosion" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(1.18, 1.18, 1.18, 1)
-scale = Vector2(2, 2)
 sprite_frames = SubResource("22")
 animation = &"explode"
 
+[node name="TrailParticles" type="Node2D" parent="."]
+visible = false
+
+[node name="Particles3" type="CPUParticles2D" parent="TrailParticles"]
+modulate = Color(1.35, 1.35, 1.35, 1)
+amount = 15
+lifetime = 2.0
+lifetime_randomness = 0.8
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 18.0
+scale_amount_max = 1.5
+color = Color(1, 0.792157, 0.203922, 1)
+
+[node name="Particles2" type="CPUParticles2D" parent="TrailParticles"]
+modulate = Color(1.35, 1.35, 1.35, 1)
+amount = 15
+lifetime = 2.0
+lifetime_randomness = 0.8
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 18.0
+scale_amount_max = 1.5
+color = Color(0.827451, 0.423529, 0, 1)
+
+[node name="Particles1" type="CPUParticles2D" parent="TrailParticles"]
+modulate = Color(1.35, 1.35, 1.35, 1)
+amount = 15
+lifetime = 2.0
+lifetime_randomness = 0.8
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 18.0
+scale_amount_max = 1.5
+color = Color(0.996078, 0.0784314, 0.00784314, 1)
+
 [node name="Projectile" type="AnimatedSprite2D" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(0, -10)
-scale = Vector2(2, 2)
+position = Vector2(1, -5)
 sprite_frames = SubResource("18")
-animation = &"play"
-frame = 5
+animation = &"new_animation"
+frame_progress = 0.0477033
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("19")
@@ -80,7 +221,7 @@ shape = SubResource("19")
 position = Vector2(-17, 0)
 collision_layer = 0
 collision_mask = 262146
-script = ExtResource("5")
+script = ExtResource("2_o1qj7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(17, 0)
@@ -89,110 +230,12 @@ shape = SubResource("20")
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="TrailParticles" type="Node2D" parent="."]
-
-[node name="Particles3" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color(1.35, 1.35, 1.35, 1)
-position = Vector2(-23, 0)
-emitting = false
-amount = 15
-lifetime = 2.0
-lifetime_randomness = 0.8
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector2(-1, 0)
-spread = 15.0
-gravity = Vector2(0, 0)
-color = Color(1, 0.792157, 0.203922, 1)
-
-[node name="Particles2" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color(1.35, 1.35, 1.35, 1)
-position = Vector2(-23, 0)
-emitting = false
-amount = 15
-lifetime = 2.0
-lifetime_randomness = 0.8
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector2(-1, 0)
-spread = 15.0
-gravity = Vector2(0, 0)
-color = Color(0.996078, 0.380392, 0.203922, 1)
-
-[node name="Particles1" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color(1.35, 1.35, 1.35, 1)
-position = Vector2(-23, 0)
-emitting = false
-amount = 15
-lifetime = 2.0
-lifetime_randomness = 0.8
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector2(-1, 0)
-spread = 15.0
-gravity = Vector2(0, 0)
-color = Color(0.996078, 0.0784314, 0.00784314, 1)
-
-[node name="ExplosionParticles" type="Node2D" parent="."]
-modulate = Color(1.2, 1.2, 1.2, 1)
-
-[node name="Explosion" type="CPUParticles2D" parent="ExplosionParticles"]
-emitting = false
-amount = 200
-lifetime = 0.8
-one_shot = true
-speed_scale = 2.0
-explosiveness = 0.5
-lifetime_randomness = 0.3
-emission_shape = 1
-emission_sphere_radius = 3.0
-spread = 180.0
-gravity = Vector2(0, 0)
-linear_accel_curve = SubResource("23")
-scale_amount_curve = SubResource("24")
-color_ramp = SubResource("29")
-
-[node name="Shards" type="CPUParticles2D" parent="ExplosionParticles/Explosion"]
-emitting = false
-amount = 20
-lifetime = 0.9
-one_shot = true
-speed_scale = 2.0
-explosiveness = 0.8
-lifetime_randomness = 0.2
-emission_shape = 1
-emission_sphere_radius = 1.0
-direction = Vector2(0, 0)
-spread = 180.0
-gravity = Vector2(0, 140)
-scale_amount_curve = SubResource("27")
-color_ramp = SubResource("29")
-
-[node name="Smoke" type="CPUParticles2D" parent="ExplosionParticles/Explosion"]
-self_modulate = Color(1, 1, 1, 0.823529)
-show_behind_parent = true
-emitting = false
-amount = 250
-lifetime = 0.9
-one_shot = true
-speed_scale = 3.0
-explosiveness = 0.8
-lifetime_randomness = 0.3
-emission_shape = 1
-emission_sphere_radius = 2.0
-direction = Vector2(0, 0)
-spread = 180.0
-gravity = Vector2(0, 0)
-linear_accel_curve = SubResource("28")
-scale_amount_curve = SubResource("31")
-color_ramp = SubResource("30")
-
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 1.01
+energy = 0.9
 texture = ExtResource("13")
-texture_scale = 0.75
+texture_scale = 0.3
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

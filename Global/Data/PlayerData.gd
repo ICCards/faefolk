@@ -58,8 +58,8 @@ var starting_player_data = {
 	"hotbar": {
 		"0": ["wood sword", 1, 10],
 #		"1": ["gold axe", 1, 100],
-#		"4": ["bow", 1, 50],
-#		"2": ["arrow", 999, null],
+		"4": ["bow", 1, 50],
+		"2": ["arrow", 999, null],
 		"6": ["wind staff", 1, null],
 		"5": ["fire staff", 1, null],
 #		"7": ["raw egg", 100, null],

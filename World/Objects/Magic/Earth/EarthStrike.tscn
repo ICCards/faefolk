@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ho564p4gdyqj"]
 
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Magic/Earth/EarthStrike.gd" id="1_vjekj"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_poh7p"]
 [ext_resource type="AudioStream" uid="uid://c8kml5g6af2pt" path="res://Assets/Sound/Sound effects/Magic/Earth/spawn.mp3" id="4"]
 
 [sub_resource type="SpriteFrames" id="9"]
@@ -56,7 +56,7 @@ animation = &""
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 264192
-script = ExtResource("1")
+script = ExtResource("2_poh7p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 rotation = 1.5708

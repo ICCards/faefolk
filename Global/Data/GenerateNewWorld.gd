@@ -433,11 +433,10 @@ func generate_map(data):
 	var custom_gradient = CustomGradientTexture.new()
 	custom_gradient.gradient = Gradient.new()
 	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
-	#custom_gradient.size = Vector2(width,height)
+	custom_gradient.size = Vector2(width,height)
 	print("HERE1")
 	var gradient_data = custom_gradient.get_data()
-	#false # gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	print("HERE2")
+	false # gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for x in width:
 		for y in height:
 			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5

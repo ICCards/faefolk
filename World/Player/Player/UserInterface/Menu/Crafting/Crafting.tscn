@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://bsltdgi11pugj" path="res://Assets/Images/User interface/inventory/crafting/crafting-slider.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://btewrm02rhmnh" path="res://Assets/Images/User interface/inventory/crafting/crafting-tab.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://cvkxqo4ch3k81" path="res://InventoryLogic/CraftingItemDescription.tscn" id="4"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Workbench/CraftingMenu.gd" id="6_qcrst"]
 [ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="8_iau4l"]
 [ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="9"]
 [ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="9_aplqv"]
-[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Workbench/CraftingMenu.gd" id="12"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4lh4b"]
 
@@ -64,6 +64,8 @@ offset_right = 594.0
 offset_bottom = 309.0
 scale = Vector2(3, 3)
 theme_override_icons/grabber = ExtResource("2")
+theme_override_icons/grabber_highlight = ExtResource("2")
+theme_override_icons/grabber_disabled = ExtResource("2")
 theme_override_styles/slider = SubResource("StyleBoxEmpty_4lh4b")
 value = 50.0
 
@@ -75,7 +77,7 @@ offset_right = 563.0
 offset_bottom = 602.0
 mouse_filter = 2
 theme = SubResource("3")
-script = ExtResource("12")
+script = ExtResource("6_qcrst")
 
 [node name="Items" type="GridContainer" parent="CraftingMenu"]
 layout_mode = 2
@@ -286,26 +288,20 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
 
-[node name="HotbarInventorySlots" parent="." instance=ExtResource("8_iau4l")]
-layout_mode = 0
-offset_left = 638.0
-offset_top = 184.0
-offset_right = 938.0
-offset_bottom = 298.0
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 18
-columns = 5
-metadata/_edit_lock_ = true
-
 [node name="InventorySlots" parent="." instance=ExtResource("9_aplqv")]
 layout_mode = 0
 offset_left = 639.0
 offset_top = 315.0
-offset_right = 943.0
-offset_bottom = 540.0
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 18
-columns = 5
+offset_right = 939.0
+offset_bottom = 561.0
+metadata/_edit_lock_ = true
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("8_iau4l")]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 183.0
+offset_right = 939.0
+offset_bottom = 297.0
 metadata/_edit_lock_ = true
 
 [connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]

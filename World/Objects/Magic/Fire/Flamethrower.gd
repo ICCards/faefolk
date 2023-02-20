@@ -3,9 +3,9 @@ extends Node2D
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var is_hostile: bool = false
 
-var tween = get_tree().create_tween()
 
 func _ready():
+	var tween = get_tree().create_tween()
 	tween.tween_property($PointLight2D, "color", Color("ffffff"), 1.5)
 	if is_hostile:
 		$Hitbox.set_collision_mask(2+8+16+128+2048)
@@ -27,5 +27,6 @@ func _ready():
 	queue_free()
 
 func fade_out_sound():
+	var tween = get_tree().create_tween()
 	tween.tween_property($PointLight2D, "color", Color("00ffffff"), 1.5)
 	tween.tween_property(sound_effects, "volume_db", -80, 1.5)

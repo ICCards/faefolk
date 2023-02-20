@@ -1,6 +1,6 @@
-Line2D
-Node2D
 AnimationPlayer
+Node2D
+Line2D
 CanvasModulate
 TileMap
 Control

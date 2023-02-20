@@ -9,7 +9,7 @@ func initialize():
 	$WorldBuilderTimer.start()
 
 func _on_WorldBuilderTimer_timeout():
-	if not thread.is_active() and not Server.world.is_changing_scene:
+	if not thread.is_alive() and not Server.world.is_changing_scene:
 		thread.start(Callable(self,"_whoAmI"))
 
 func _whoAmI():

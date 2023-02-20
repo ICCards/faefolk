@@ -2,10 +2,8 @@ extends CharacterBody2D
 
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
-var tween = get_tree().create_tween()
 
-#var velocity = Vector2(0,0)
-var speed = 500
+var speed = 250
 var collided = false
 var debuff
 var is_hostile_projectile: bool = false
@@ -20,7 +18,6 @@ func _ready():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Fire/cast.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
-	$Projectile.play("play")
 	$Hitbox.tool_name = "fire projectile"
 	$TrailParticles/Particles1.direction = -velocity
 	$TrailParticles/Particles2.direction = -velocity 
@@ -60,6 +57,7 @@ func projectile_collided():
 			$Explosion.play("explode")
 			$Hitbox/CollisionShape2D.shape.set_deferred("radius", 80)
 			await get_tree().create_timer(0.5).timeout
+			var tween = get_tree().create_tween()
 			tween.tween_property($PointLight2D, "color", Color("00ffffff"), 0.5)
 			$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 			await $Explosion.animation_finished
@@ -68,12 +66,10 @@ func projectile_collided():
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Fire/fireball.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 			sound_effects.play()
-			$ExplosionParticles/Explosion.emitting = true
-			$ExplosionParticles/Explosion/Shards.emitting = true
-			$ExplosionParticles/Explosion/Smoke.emitting = true
+			InstancedScenes.initiateExplosionParticles(position)
 			$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+			var tween = get_tree().create_tween()
 			tween.tween_property($PointLight2D, "color", Color("00ffffff"), 0.5)
-			$Tween.start()
 			await get_tree().create_timer(0.25).timeout
 		await get_tree().create_timer(1.5).timeout
 		destroy()

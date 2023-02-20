@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://0wk3ykd7s1tj"]
 
 [ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="1"]
-[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Slots/ItemSlots.gd" id="2"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/ItemSlots.gd" id="1_ywq8l"]
 
 [node name="ItemSlots" type="GridContainer"]
 offset_right = 204.0
 offset_bottom = 48.0
 columns = 4
-script = ExtResource("2")
+script = ExtResource("1_ywq8l")
 
 [node name="Slot1" type="Panel" parent="."]
 custom_minimum_size = Vector2(48, 48)

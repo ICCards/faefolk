@@ -28,7 +28,7 @@ func _input(event):
 			#Add the new key for this action
 			InputMap.action_add_event(action_name,event)
 			#Update the keydictionary with the scanscode to save
-			PlayerData.player_data["settings"]["key_dict"][action_name] = event.scancode
+			PlayerData.player_data["settings"]["key_dict"][action_name] = event.keycode
 			#Save the dictionary to json
 			#Settings.save_keys()
 			#stop setting the key

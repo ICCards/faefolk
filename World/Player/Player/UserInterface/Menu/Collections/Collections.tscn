@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://b3ad8jm57r5at"]
+[gd_scene load_steps=121 format=3 uid="uid://b3ad8jm57r5at"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" id="1_co4t8"]
 [ext_resource type="PackedScene" uid="uid://dvx8ynrvmjy27" path="res://InventoryLogic/CollectionItemDescription.tscn" id="2"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bwy1uut25ldmi" path="res://Assets/Images/User interface/buttons-icons/mob icons/wolf.png" id="9_cg53e"]
 [ext_resource type="Material" uid="uid://devwpugyp6x7u" path="res://Assets/Themes/LockedAsset.tres" id="10"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" id="10_78mha"]
-[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/Menu/Collections/collection_item.gd" id="11"]
 [ext_resource type="Texture2D" uid="uid://b1ju2e10selvc" path="res://Assets/Images/inventory_icons/Fish/albacore.png" id="11_4jrcy"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/ForageCollection.gd" id="11_ii5ys"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/FoodCollection.gd" id="14_00116"]
@@ -31,12 +30,6 @@ void fragment() {
 	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
 	COLOR = color;
 }"
-
-[sub_resource type="ShaderMaterial" id="49"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="ShaderMaterial" id="50"]
 resource_local_to_scene = true
@@ -163,6 +156,9 @@ resource_local_to_scene = true
 shader = SubResource("16")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="ShaderMaterial" id="49"]
+resource_local_to_scene = true
 
 [sub_resource type="Shader" id="383"]
 code = "shader_type canvas_item;
@@ -730,7 +726,6 @@ visible = false
 visible = false
 
 [node name="CropCollection" type="GridContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 427.0
 offset_top = 191.0
@@ -742,14 +737,13 @@ theme_override_constants/v_separation = 15
 columns = 6
 script = ExtResource("5_pwxe3")
 
-[node name="garlic" type="TextureRect" parent="CropCollection"]
-visible = false
-material = SubResource("49")
+[node name="corn" type="TextureRect" parent="CropCollection"]
+material = SubResource("50")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
-[node name="corn" type="TextureRect" parent="CropCollection"]
+[node name="garlic" type="TextureRect" parent="CropCollection"]
 material = SubResource("50")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
@@ -874,14 +868,6 @@ material = SubResource("70")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
-
-[node name="Tween" type="Tween" parent="CropCollection"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
 
 [node name="MobCollection" type="GridContainer" parent="."]
 visible = false
@@ -1338,6 +1324,7 @@ texture = ExtResource("15_uwvpa")
 script = ExtResource("7_du1gv")
 
 [node name="FoodCollection1" type="GridContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 426.0
 offset_top = 191.0
@@ -1353,145 +1340,145 @@ script = ExtResource("14_00116")
 material = SubResource("218")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="baked catfish" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("220")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="baked dorado" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("222")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="baked zucchini" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("224")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="blowfish tails" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("226")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="blueberry cake" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("228")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="blueberry pie" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("230")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="calamari with tomatoes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("232")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="cauliflower soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("234")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="cooked filet" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("236")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="cooked green beans" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("238")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="cooked wing" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("240")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="crab cakes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("242")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="filet mignon" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("244")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="filet soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("246")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="filet with garlic mash" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("248")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="filet with tomatoes" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("250")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="grape pastry" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("252")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="green pepper soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("254")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="honeydew melon with sugar" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("256")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="mushroom soup" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("258")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="pepper and asparagus stir fry" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("260")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="mini grape tarts" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("262")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="potatoes with asparagus" type="TextureRect" parent="FoodCollection1"]
 material = SubResource("266")
 layout_mode = 2
 texture = ExtResource("17_3wrdp")
-script = ExtResource("11")
+script = ExtResource("7_du1gv")
 
 [node name="FoodCollection2" type="GridContainer" parent="."]
 visible = false
@@ -1660,10 +1647,10 @@ script = ExtResource("7_du1gv")
 [connection signal="mouse_entered" from="SideTabButtons/Mobs" to="." method="_on_Mobs_mouse_entered"]
 [connection signal="mouse_exited" from="SideTabButtons/Mobs" to="." method="_on_Mobs_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Mobs" to="." method="_on_Mobs_pressed"]
-[connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/corn" to="CropCollection/corn" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/corn" to="CropCollection/corn" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/blueberry" to="CropCollection/blueberry" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/blueberry" to="CropCollection/blueberry" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/asparagus" to="CropCollection/asparagus" method="_on_collection_item_mouse_entered"]

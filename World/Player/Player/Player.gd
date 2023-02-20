@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var animation_player = $CompositeSprites/AnimationPlayer
 @onready var sword_swing = $Swing/SwordSwing
 @onready var composite_sprites = $CompositeSprites
-@onready var holding_item = $HoldingItem
+@onready var holding_item = $CompositeSprites/HoldingItem
 
 @onready var actions = $Actions
 @onready var user_interface = $Camera2D/UserInterface
@@ -33,17 +33,16 @@ var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
-var MAX_SPEED_DIRT := 13
-var MAX_SPEED_PATH := 14.5
-var DASH_SPEED := 55
-var MAX_SPEED_SWIMMING := 12
+var MAX_SPEED_DIRT := 8
+var MAX_SPEED_PATH := 9
+var DASH_SPEED := 25
+var MAX_SPEED_SWIMMING := 6
 var is_walking_on_dirt: bool = true
 var is_swimming: bool = false
 var poisoned: bool = false
 var speed_buff_active: bool = false
 var ACCELERATION := 6
 var FRICTION := 8
-#var velocity := Vector2.ZERO
 var input_vector
 var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
@@ -55,23 +54,22 @@ func _ready():
 	Server.player_node = self
 	if is_building_world:
 		state = DYING
-		$Camera2D/UserInterface/LoadingScreen.show()
+		#$Camera2D/UserInterface/LoadingScreen.show()
 		await get_tree().create_timer(5.0).timeout
 	state = MOVEMENT
-	$Camera2D/UserInterface/LoadingScreen.hide()
-	await get_tree().idle_frame
+	#$Camera2D/UserInterface/LoadingScreen.hide()
+	#await get_tree().idle_frame
 	set_held_object()
 	await get_tree().create_timer(0.25).timeout
 	Server.isLoaded = true
 
 
 func _input( event ):
-	if Server.isLoaded:
-		if event is InputEvent:
-			if event.is_action_pressed("sprint"):
-				running = true
-			elif event.is_action_released("sprint"):
-				running = false
+	if event is InputEvent:
+		if event.is_action_pressed("sprint"):
+			running = true
+		elif event.is_action_released("sprint"):
+			running = false
 
 
 func destroy():
@@ -304,15 +302,15 @@ func idle_state(_direction):
 						holding_item.show()
 						holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 						animation = "holding_idle_" + _direction.to_lower()
-						$HoldingTorch.hide()
+						$HoldingTorch.set_inactive()
 					elif item_name == "torch":
 						holding_item.hide()
-						$HoldingTorch.show()
+						$HoldingTorch.set_active()
 						animation = "holding_idle_" + _direction.to_lower()
 					else:
 						holding_item.hide()
 						animation = "idle_" + _direction.to_lower()
-						$HoldingTorch.hide()
+						$HoldingTorch.set_inactive()
 				elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
 					var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 					var item_category = JsonData.item_data[item_name]["ItemCategory"]
@@ -320,19 +318,21 @@ func idle_state(_direction):
 						holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 						holding_item.show()
 						animation = "holding_idle_" + _direction.to_lower()
-						$HoldingTorch.hide()
+						$HoldingTorch.set_inactive()
 					else:
-						$HoldingTorch.hide()
+						$HoldingTorch.set_inactive()
 						holding_item.hide()
 						animation = "idle_" + _direction.to_lower()
 				else:
-					$HoldingTorch.hide()
+					$HoldingTorch.set_inactive()
 					holding_item.hide()
 					animation = "idle_" + _direction.to_lower()
 				composite_sprites.set_player_animation(character, animation, null)
 		else:
+			holding_item.hide()
+			$HoldingTorch.set_inactive()
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
-			animation_player.play("swim")
+			#animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 
 
@@ -348,18 +348,15 @@ func walk_state(_direction):
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					animation = "holding_walk_" + _direction.to_lower()
-					$HoldingTorch.hide()
-					$TorchLight.enabled = false
+					$HoldingTorch.set_inactive()
 				elif item_name == "torch":
 					holding_item.hide()
-					$HoldingTorch.show()
-					$TorchLight.enabled = true
+					$HoldingTorch.set_active()
 					animation = "holding_walk_" + _direction.to_lower()
 				else:
 					holding_item.hide()
 					animation = "walk_" + _direction.to_lower()
-					$TorchLight.enabled = false
-					$HoldingTorch.hide()
+					$HoldingTorch.set_inactive()
 			elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
@@ -367,18 +364,15 @@ func walk_state(_direction):
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					animation = "holding_walk_" + _direction.to_lower()
-					$TorchLight.enabled = false
-					$HoldingTorch.hide()
+					$HoldingTorch.set_inactive()
 				else:
 					holding_item.hide()
 					animation = "walk_" + _direction.to_lower()
-					$TorchLight.enabled = false
-					$HoldingTorch.hide()
+					$HoldingTorch.set_inactive()
 			else:
 				holding_item.hide()
 				animation = "walk_" + _direction.to_lower()
-				$TorchLight.enabled = false
-				$HoldingTorch.hide()
+				$HoldingTorch.set_inactive()
 			if state == MOVEMENT:
 				composite_sprites.set_player_animation(character, animation, null)
 		elif running and Sounds.current_footsteps_sound != Sounds.swimming:
@@ -387,13 +381,11 @@ func walk_state(_direction):
 				animation_player.play("sprint")
 				animation = "run_" + _direction.to_lower()
 				composite_sprites.set_player_animation(character, animation, null)
-				$TorchLight.enabled = false
-				$HoldingTorch.hide()
+				$HoldingTorch.set_inactive()
 				holding_item.hide()
 		elif Sounds.current_footsteps_sound == Sounds.swimming:
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			holding_item.hide()
-			$TorchLight.enabled = false
-			$HoldingTorch.hide()
+			$HoldingTorch.set_inactive()
 			animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")

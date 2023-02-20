@@ -39,7 +39,7 @@ func _physics_process(delta):
 
 
 func adjusted_description_position():
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	if item:
 		var item_category = JsonData.item_data[item]["ItemCategory"]
 		var lines = $ItemDescription/Body/ItemDescription.get_line_count()

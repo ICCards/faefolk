@@ -161,8 +161,6 @@ func return_item_drop_quantity(tool_name, object_name):
 	match object_name:
 		"tree":
 			match tool_name:
-				"punch":
-					return 3
 				"wood axe":
 					return 6
 				"stone axe":
@@ -177,8 +175,6 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 3
 		"stump":
 			match tool_name:
-				"punch":
-					return 2
 				"wood axe":
 					return 4
 				"stone axe":
@@ -193,8 +189,6 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 2
 		"branch":
 			match tool_name:
-				"punch":
-					return 1
 				"wood axe":
 					return 2
 				"stone axe":
@@ -209,8 +203,6 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 1
 		"large ore":
 			match tool_name:
-				"wood pickaxe":
-					return 3
 				"stone pickaxe":
 					return 6
 				"bronze pickaxe":
@@ -223,8 +215,6 @@ func return_item_drop_quantity(tool_name, object_name):
 					return 3
 		"small ore":
 			match tool_name:
-				"wood pickaxe":
-					return 2
 				"stone pickaxe":
 					return 4
 				"bronze pickaxe":

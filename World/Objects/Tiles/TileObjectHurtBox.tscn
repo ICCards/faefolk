@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://5h46m52gnkc4"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Tiles/TileObjectHurtBox.gd" id="1_gmkx7"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
-[ext_resource type="Script" path="res://World/Objects/Tiles/InteractiveArea.gd" id="2_rsvx5"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/InteractiveArea.gd" id="2_rsvx5"]
 [ext_resource type="SpriteFrames" uid="uid://pg8l86hoqsip" path="res://Assets/Images/Animations/chest/wood/up.tres" id="5"]
 
 [sub_resource type="RectangleShape2D" id="16"]

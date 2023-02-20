@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://c7ykvt7pjhbqy"]
 
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Magic/Fire/Flamethrower.gd" id="1_k5484"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_ksujs"]
 [ext_resource type="AudioStream" uid="uid://cd8s37s0jdkhn" path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.mp3" id="3"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="5"]
 
@@ -97,7 +97,7 @@ color_ramp = SubResource("35")
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 264192
-script = ExtResource("1")
+script = ExtResource("2_ksujs")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
 polygon = PackedVector2Array(0, 0, -131.001, -176, 128.999, -176)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq6uluwx4sxf3"]
+[gd_scene load_steps=22 format=3 uid="uid://bq6uluwx4sxf3"]
 
-[ext_resource type="Script" path="res://World3D/Objects/Projectiles/Hitbox.gd" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Magic/Wind/TornadoProjectile.gd" id="1_d48oj"]
+[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_8gvaj"]
+[ext_resource type="Texture2D" uid="uid://ikebn4yq3yjf" path="res://Assets/Images/Magic/wind/projectile.png" id="2_b1bax"]
 [ext_resource type="AudioStream" uid="uid://cf2jarycewv12" path="res://Assets/Sound/Sound effects/Magic/Wind/tornado.mp3" id="4"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="5"]
 
@@ -10,14 +11,89 @@ max_value = 3.0
 _data = [Vector2(0.00103413, 1.2973), 0.0, 0.0, 0, 0, Vector2(1, 0.707061), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ad503"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(0, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwaoi"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(112, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tigqa"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(224, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpoxk"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(336, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knfrd"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(0, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ym65o"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(112, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wnkk"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(224, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvxdx"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(336, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25qt0"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(0, 224, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8m3m"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(112, 224, 112, 112)
+
 [sub_resource type="SpriteFrames" id="20"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ad503")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwaoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tigqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpoxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knfrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ym65o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wnkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvxdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25qt0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8m3m")
+}],
+"loop": false,
+"name": &"anim",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(0, 0)
 
 [sub_resource type="CircleShape2D" id="41"]
-radius = 43.0116
+radius = 14.0
 
 [sub_resource type="Animation" id="9"]
 resource_name = "fade out"
@@ -44,61 +120,125 @@ _data = {
 collision_layer = 0
 script = ExtResource("1_d48oj")
 
+[node name="TrailParticles" type="Node2D" parent="."]
+position = Vector2(0, 13)
+
+[node name="Particles1" type="CPUParticles2D" parent="TrailParticles"]
+modulate = Color(1.3, 1.3, 1.3, 1)
+position = Vector2(0, -16)
+emitting = false
+amount = 16
+lifetime = 4.0
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
+spread = 25.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+
+[node name="Particles2" type="CPUParticles2D" parent="TrailParticles"]
+modulate = Color(1.3, 1.3, 1.3, 1)
+position = Vector2(0, -16)
+emitting = false
+amount = 16
+lifetime = 4.0
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
+spread = 25.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+color = Color(0.815686, 0.815686, 0.815686, 1)
+
+[node name="Particles3" type="CPUParticles2D" parent="TrailParticles"]
+modulate = Color(1.3, 1.3, 1.3, 1)
+position = Vector2(0, -16)
+emitting = false
+amount = 16
+lifetime = 4.0
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
+spread = 25.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+color = Color(0.54902, 0.54902, 0.54902, 1)
+
 [node name="TornadoParticles" type="Node2D" parent="."]
 modulate = Color(1.6, 1.6, 1.6, 1)
-position = Vector2(0, 13)
+position = Vector2(-92, -1)
 
 [node name="Particles1" type="CPUParticles2D" parent="TornadoParticles"]
 modulate = Color(1.12, 1.12, 1.12, 1)
-position = Vector2(18, -80)
+position = Vector2(98, -55)
 emitting = false
 amount = 45
 lifetime = 2.5
 lifetime_randomness = 1.0
+local_coords = true
 emission_shape = 2
-emission_sphere_radius = 1.0
+emission_sphere_radius = 32.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+orbit_velocity_min = -0.3
+orbit_velocity_max = 0.3
 scale_amount_curve = SubResource("40")
 
 [node name="Particles2" type="CPUParticles2D" parent="TornadoParticles"]
 modulate = Color(1.12, 1.12, 1.12, 1)
-position = Vector2(18, -80)
+position = Vector2(98, -30)
 emitting = false
 amount = 45
 lifetime = 2.5
 lifetime_randomness = 1.0
+local_coords = true
 emission_shape = 2
-emission_sphere_radius = 1.0
+emission_sphere_radius = 32.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+orbit_velocity_min = -0.3
+orbit_velocity_max = 0.3
 scale_amount_curve = SubResource("40")
 color = Color(0.815686, 0.815686, 0.815686, 1)
 
 [node name="Particles3" type="CPUParticles2D" parent="TornadoParticles"]
 modulate = Color(1.12, 1.12, 1.12, 1)
-position = Vector2(18, -80)
+position = Vector2(98, -45)
 emitting = false
 amount = 45
 lifetime = 2.5
 lifetime_randomness = 1.0
+local_coords = true
 emission_shape = 2
-emission_sphere_radius = 1.0
+emission_sphere_radius = 32.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+orbit_velocity_min = -0.3
+orbit_velocity_max = 0.3
 scale_amount_curve = SubResource("40")
 color = Color(0.54902, 0.54902, 0.54902, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1.16, 1.16, 1.16, 1)
-position = Vector2(30, -72)
-scale = Vector2(2, 2)
+position = Vector2(15, -44)
 sprite_frames = SubResource("20")
-animation = &"middle"
-frame = 2
+animation = &"anim"
+frame = 9
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -108,54 +248,10 @@ disabled = true
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 264192
-script = ExtResource("1")
+script = ExtResource("2_8gvaj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("41")
-
-[node name="TrailParticles" type="Node2D" parent="."]
-position = Vector2(0, 13)
-
-[node name="Particles1" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color(1.3, 1.3, 1.3, 1)
-position = Vector2(-43, 0)
-emitting = false
-amount = 16
-lifetime = 4.0
-lifetime_randomness = 0.5
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector2(-1, 0)
-spread = 25.0
-gravity = Vector2(0, 0)
-
-[node name="Particles2" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color(1.3, 1.3, 1.3, 1)
-position = Vector2(-43, 0)
-emitting = false
-amount = 16
-lifetime = 4.0
-lifetime_randomness = 0.5
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector2(-1, 0)
-spread = 25.0
-gravity = Vector2(0, 0)
-color = Color(0.815686, 0.815686, 0.815686, 1)
-
-[node name="Particles3" type="CPUParticles2D" parent="TrailParticles"]
-modulate = Color(1.3, 1.3, 1.3, 1)
-position = Vector2(-43, 0)
-emitting = false
-amount = 16
-lifetime = 4.0
-lifetime_randomness = 0.5
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector2(-1, 0)
-spread = 25.0
-gravity = Vector2(0, 0)
-color = Color(0.54902, 0.54902, 0.54902, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -172,7 +268,7 @@ autostart = true
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(18, -67)
 scale = Vector2(0.71875, 0.746094)
-energy = 1.03
+energy = 0.0
 shadow_enabled = true
 texture = ExtResource("5")
 

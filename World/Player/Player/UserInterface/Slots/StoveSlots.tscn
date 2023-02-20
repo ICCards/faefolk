@@ -1,17 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://c4pw0ts6afhqc"]
 
-[ext_resource path="res://InventoryLogic/Slot.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Inventory UI/slot locked.png" type="Texture2D" id=2]
-[ext_resource path="res://World3D/Player/Player/UserInterface/Slots/StoveSlots.gd" type="Script" id=3]
+[ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/StoveSlots.gd" id="1_gnaeb"]
+[ext_resource type="Texture2D" uid="uid://ctrqx2ip8xuv6" path="res://Assets/Images/User interface/buttons-icons/locked slot.png" id="3_fncps"]
 
 [node name="StoveSlots" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_left = -299.0
 offset_top = -200.0
 offset_right = 299.0
 offset_bottom = 32.0
-script = ExtResource( 3 )
+script = ExtResource("1_gnaeb")
 
 [node name="FuelSlot" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -20,67 +24,73 @@ offset_left = -276.0
 offset_top = -38.0
 offset_right = -228.0
 offset_bottom = 10.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Ingredient1" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_left = 120.0
 offset_top = -11.0
 offset_right = 168.0
 offset_bottom = 37.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Ingredient2" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_left = 120.0
 offset_top = 78.0
 offset_right = 168.0
 offset_bottom = 126.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="LockSlot" type="TextureRect" parent="Ingredient2"]
 visible = false
-offset_right = 81.0
-offset_bottom = 81.0
-texture = ExtResource( 2 )
-expand = true
+layout_mode = 0
+offset_right = 49.0
+offset_bottom = 48.0
+texture = ExtResource("3_fncps")
+expand_mode = 1
 
 [node name="Ingredient3" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_left = 120.0
 offset_top = 167.0
 offset_right = 168.0
 offset_bottom = 215.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="LockSlot" type="TextureRect" parent="Ingredient3"]
-visible = false
-offset_right = 81.0
-offset_bottom = 81.0
-texture = ExtResource( 2 )
-expand = true
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("3_fncps")
+expand_mode = 1
 
 [node name="YieldSlot1" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_left = 422.0
 offset_top = -11.0
 offset_right = 470.0
 offset_bottom = 37.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="YieldSlot2" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_left = 422.0
 offset_top = 78.0
 offset_right = 470.0
 offset_bottom = 126.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="CoalYieldSlot" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
 offset_left = 422.0
 offset_top = 167.0
 offset_right = 470.0
 offset_bottom = 215.0
-custom_minimum_size = Vector2( 48, 48 )
-script = ExtResource( 1 )
+script = ExtResource("1")

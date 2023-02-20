@@ -67,8 +67,8 @@ func initialize():
 	$FoodCollection1.hide()
 	$FoodCollection2.hide()
 	$ResourceCollection.hide()
-	$FoodBtnLeft.hide()
-	$FoodBtnRight.hide()
+#	$FoodBtnLeft.hide()
+#	$FoodBtnRight.hide()
 	$MobCollection.hide()
 
 func _on_Crops_pressed():
@@ -79,8 +79,8 @@ func _on_Crops_pressed():
 func _on_Fish_pressed():
 	page = "Fish"
 	$CropCollection.hide()
-	$FoodBtnLeft.hide()
-	$FoodBtnRight.hide()
+#	$FoodBtnLeft.hide()
+#	$FoodBtnRight.hide()
 	get_node("../../Background").set_deferred("texture", load("res://Assets/Images/User interface/inventory/collections/fish-tab.png"))
 	$FishCollection.initialize()
 	$ForageCollection.hide()
@@ -92,8 +92,8 @@ func _on_Fish_pressed():
 
 func _on_Forage_pressed():
 	page = "Forage"
-	$FoodBtnLeft.hide()
-	$FoodBtnRight.hide()
+#	$FoodBtnLeft.hide()
+#	$FoodBtnRight.hide()
 	$CropCollection.hide()
 	$FishCollection.hide()
 	$ForageCollection.initialize()
@@ -106,8 +106,8 @@ func _on_Forage_pressed():
 
 func _on_Minerals_pressed():
 	page = "Resources"
-	$FoodBtnLeft.hide()
-	$FoodBtnRight.hide()
+#	$FoodBtnLeft.hide()
+#	$FoodBtnRight.hide()
 	$CropCollection.hide()
 	$FishCollection.hide()
 	$FoodCollection1.hide()
@@ -120,8 +120,8 @@ func _on_Minerals_pressed():
 
 func _on_Foods_pressed():
 	page = "Food"
-	$FoodBtnLeft.hide()
-	$FoodBtnRight.show()
+#	$FoodBtnLeft.hide()
+#	$FoodBtnRight.show()
 	$CropCollection.hide()
 	$FishCollection.hide()
 	$ForageCollection.hide()
@@ -134,8 +134,8 @@ func _on_Foods_pressed():
 
 func _on_Mobs_pressed():
 	page = "Mobs"
-	$FoodBtnLeft.hide()
-	$FoodBtnRight.hide()
+#	$FoodBtnLeft.hide()
+#	$FoodBtnRight.hide()
 	$CropCollection.hide()
 	$FishCollection.hide()
 	$ForageCollection.hide()

@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var RippleParticles = load("res://World3D/Player/Player/Fishing/RippleParticles.tscn")
+@onready var RippleParticles = load("res://World/Player/Player/Fishing/RippleParticles.tscn")
 
 @onready var progress = $CanvasLayer/CastingProgress
 @onready var progress_background = $CanvasLayer/ProgressBackground

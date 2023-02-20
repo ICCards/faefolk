@@ -1,16 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://di1n4k17ejywi"]
+[gd_scene load_steps=16 format=3 uid="uid://di1n4k17ejywi"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/GrainMill/GrainMill.gd" id="1_06ly5"]
 [ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="3_618s7"]
 [ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="4_tep6a"]
 [ext_resource type="PackedScene" uid="uid://cguj34yegyfxx" path="res://World/Player/Player/UserInterface/Slots/GrainMillSlots.tscn" id="5_cw87q"]
 [ext_resource type="Texture2D" uid="uid://d3d8pmtagheed" path="res://Assets/Images/User interface/grain-mill/grain-mill-tab.png" id="8"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/GrainMill/GrainMillCrank.gd" id="8_xulpl"]
 [ext_resource type="Texture2D" uid="uid://8hwt4wa18n50" path="res://Assets/Images/User interface/grain-mill/grain-mill-crank.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://c1orp408f1lb3" path="res://Assets/Images/User interface/grain-mill/grain-mill.png" id="10"]
-[ext_resource type="Script" path="res://World3D/Player/Player/UserInterface/GrainMill/GrainMillCrank.gd" id="11"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="12_aj3nq"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="12_ftbky"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="13_728x3"]
 [ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="14"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="15"]
-[ext_resource type="AudioStream" uid="uid://6nvotf1yoo1u" path="res://Assets/Sound/Sound effects/UI/grain mill/cartoon-cranking-01.mp3" id="16"]
+[ext_resource type="AudioStream" uid="uid://ciacdo4ku2w8f" path="res://Assets/Sound/Sound effects/UI/grain mill/cartoon-cranking-01.mp3" id="16"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 31.0756
@@ -45,6 +48,7 @@ offset_left = 552.0
 offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
+text = "Grain mill #3"
 
 [node name="GrainMillSlots" parent="." instance=ExtResource("5_cw87q")]
 offset_left = 0.0
@@ -77,7 +81,6 @@ offset_right = 387.0
 offset_bottom = 363.0
 
 [node name="LockSlot" parent="GrainMillSlots/SugarCaneSlot" index="0"]
-layout_mode = 0
 offset_left = -3.0
 offset_top = -3.0
 offset_right = 51.0
@@ -98,7 +101,7 @@ texture = ExtResource("10")
 position = Vector2(495, 356)
 scale = Vector2(3, 3)
 texture = ExtResource("9")
-script = ExtResource("11")
+script = ExtResource("8_xulpl")
 
 [node name="Area2D" type="Area2D" parent="GrainMillCrank"]
 position = Vector2(-394, -196)
@@ -123,6 +126,20 @@ texture_normal = ExtResource("14")
 texture_pressed = ExtResource("15")
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="Trash" parent="." instance=ExtResource("12_aj3nq")]
+
+[node name="InventorySlots" parent="." instance=ExtResource("13_728x3")]
+layout_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("12_ftbky")]
+layout_mode = 0
+offset_left = 638.0
+offset_top = 184.0
+offset_right = 938.0
+offset_bottom = 298.0
+metadata/_edit_lock_ = true
 
 [connection signal="input_event" from="GrainMillCrank/Area2D" to="GrainMillCrank" method="_on_Area2D_input_event"]
 [connection signal="mouse_exited" from="GrainMillCrank/Area2D" to="GrainMillCrank" method="_on_Area2D_mouse_exited"]

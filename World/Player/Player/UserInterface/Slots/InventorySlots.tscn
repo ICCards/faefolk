@@ -4,9 +4,11 @@
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.gd" id="1_3cbay"]
 
 [node name="InventorySlots" type="GridContainer"]
-offset_right = 594.0
-offset_bottom = 114.0
-columns = 10
+offset_right = 300.0
+offset_bottom = 246.0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 18
+columns = 5
 script = ExtResource("1_3cbay")
 
 [node name="Slot1" type="Panel" parent="."]

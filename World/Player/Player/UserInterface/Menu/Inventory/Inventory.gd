@@ -18,7 +18,6 @@ func initialize():
 	PlayerData.InventorySlots = $InventorySlots
 	hovered_item = null
 	$EnergyManaHealth.initialize()
-	$BaseStats.initialize()
 	if PlayerData.player_data["time_hours"] >= 22 or PlayerData.player_data["time_hours"] < 6:
 		set_night_bg()
 	else:

@@ -67,30 +67,21 @@ func entered_crafting_area(_item):
 	await get_tree().idle_frame
 	hovered_item = null
 	crafting_item = _item
+	var tween = get_tree().create_tween()
 	if crafting_item == "blueprint" or crafting_item == "hammer" or crafting_item == "wood sword" or crafting_item == "wood axe" or crafting_item == "wood pickaxe" or crafting_item == "wood hoe":
-		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "scale",
-			get_node("CraftingMenu/Items/" + crafting_item).scale, Vector2(4.2, 4.2), 0.1,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
+		tween.tween_property(get_node("CraftingMenu/Items/" + crafting_item), "scale", Vector2(4.2, 4.2), 0.1)
 	else:
-		$Tween.interpolate_property(get_node("CraftingMenu/Items/" + crafting_item), "scale",
-			get_node("CraftingMenu/Items/" + crafting_item).scale, Vector2(2.1, 2.1), 0.1,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
+		tween.tween_property(get_node("CraftingMenu/Items/" + crafting_item), "scale", Vector2(2.1, 2.1), 0.1)
+
 	
 func exited_crafting_area(_item):
 	crafting_item = null
+	var tween = get_tree().create_tween()
 	if has_node("CraftingMenu/Items/" + _item):
 		if _item == "blueprint" or _item == "hammer" or _item == "wood sword" or _item == "wood axe" or _item == "wood pickaxe" or _item == "wood hoe":
-			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + _item), "scale",
-				get_node("CraftingMenu/Items/" + _item).scale, Vector2(4, 4), 0.1,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
+			tween.tween_property(get_node("CraftingMenu/Items/" + _item), "scale", Vector2(4, 4), 0.1)
 		else:
-			$Tween.interpolate_property(get_node("CraftingMenu/Items/" + _item), "scale",
-				get_node("CraftingMenu/Items/" + _item).scale, Vector2(2, 2), 0.1,
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
+			tween.tween_property(get_node("CraftingMenu/Items/" + _item), "scale", Vector2(2, 2), 0.1)
 
 
 func return_crafted_item(item_name):
