@@ -10,7 +10,7 @@ func _ready():
 		texture = load("res://Assets/Images/inventory_icons/"+ JsonData.item_data[name]["ItemCategory"] + "/"  + name + ".png")
 
 func _on_collection_item_mouse_entered():
-	get_node("../").entered_item_area(name)
+	get_node("../").entered_item_area(str(name))
 
 func _on_collection_item_mouse_exited():
-	get_node("../").exited_item_area(name)
+	get_node("../").exited_item_area(str(name))

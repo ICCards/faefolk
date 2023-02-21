@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhilgn3waubes"]
+[gd_scene load_steps=13 format=3 uid="uid://bhilgn3waubes"]
 
 [ext_resource type="Texture2D" uid="uid://h5xwa73koaw8" path="res://Assets/Images/User interface/combat hotbar/hotbar23.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd" id="1_hue8c"]
@@ -10,9 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dvnykx0ktn32j" path="res://World/Player/Player/UserInterface/Slots/MagicSlots.tscn" id="11_is21i"]
 [ext_resource type="Texture2D" uid="uid://dmv6j3ojkndy3" path="res://Assets/Images/User interface/combat hotbar/switch_btn2.png" id="12"]
 [ext_resource type="PackedScene" uid="uid://0wk3ykd7s1tj" path="res://World/Player/Player/UserInterface/Slots/ItemSlots.tscn" id="12_jw3p1"]
-[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/MagicSlots.gd" id="12_p6vg0"]
 [ext_resource type="Texture2D" uid="uid://dpvnod2gp0wlu" path="res://Assets/Images/User interface/combat hotbar/switch_btn1.png" id="13"]
-[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/ItemSlots.gd" id="13_nm6fw"]
 [ext_resource type="Texture2D" uid="uid://o3wd8n5ou4bo" path="res://Assets/Images/User interface/hotbars/selected slot.png" id="25"]
 
 [node name="CombatHotbar" type="Control"]
@@ -212,12 +210,10 @@ offset_bottom = 692.0
 texture = ExtResource("25")
 
 [node name="MagicSlots" parent="." instance=ExtResource("11_is21i")]
-anchors_preset = 0
 offset_left = 396.0
 offset_top = 641.0
 offset_right = 396.0
 offset_bottom = 641.0
-script = ExtResource("12_p6vg0")
 
 [node name="ItemSlots" parent="." instance=ExtResource("12_jw3p1")]
 layout_mode = 0
@@ -226,6 +222,5 @@ offset_top = 644.0
 offset_right = 879.0
 offset_bottom = 692.0
 theme_override_constants/h_separation = 12
-script = ExtResource("13_nm6fw")
 
 [connection signal="pressed" from="SwitchHotbarBtn" to="." method="_on_SwitchHotbarBtn_pressed"]

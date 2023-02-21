@@ -142,7 +142,7 @@ scroll_down={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":7,"pressed":false,"double_click":false,"script":null)
 ]
 }
-open_menu={
+"open menu"={
 "deadzone": 0.5,
 "events": []
 }
@@ -154,67 +154,67 @@ rotate={
 "deadzone": 0.5,
 "events": []
 }
-move_right={
+"move right"={
 "deadzone": 0.5,
 "events": []
 }
-move_left={
+"move left"={
 "deadzone": 0.5,
 "events": []
 }
-move_up={
+"move up"={
 "deadzone": 0.5,
 "events": []
 }
-move_down={
+"move down"={
 "deadzone": 0.5,
 "events": []
 }
-use_tool={
+"use tool"={
 "deadzone": 0.5,
 "events": []
 }
-open_map={
+"open map"={
 "deadzone": 0.5,
 "events": []
 }
-slot1={
+"slot 1"={
 "deadzone": 0.5,
 "events": []
 }
-slot2={
+"slot 2"={
 "deadzone": 0.5,
 "events": []
 }
-slot3={
+"slot 3"={
 "deadzone": 0.5,
 "events": []
 }
-slot4={
+"slot 4"={
 "deadzone": 0.5,
 "events": []
 }
-slot5={
+"slot 5"={
 "deadzone": 0.5,
 "events": []
 }
-slot6={
+"slot 6"={
 "deadzone": 0.5,
 "events": []
 }
-slot7={
+"slot 7"={
 "deadzone": 0.5,
 "events": []
 }
-slot8={
+"slot 8"={
 "deadzone": 0.5,
 "events": []
 }
-slot9={
+"slot 9"={
 "deadzone": 0.5,
 "events": []
 }
-slot10={
+"slot 10"={
 "deadzone": 0.5,
 "events": []
 }
@@ -222,15 +222,19 @@ sprint={
 "deadzone": 0.5,
 "events": []
 }
-change_variety={
+"change variety"={
 "deadzone": 0.5,
 "events": []
 }
-toggle_hotbar={
+"switch hotbar"={
 "deadzone": 0.5,
 "events": []
 }
-cancel_attack={
+"cancel attack"={
+"deadzone": 0.5,
+"events": []
+}
+exit={
 "deadzone": 0.5,
 "events": []
 }

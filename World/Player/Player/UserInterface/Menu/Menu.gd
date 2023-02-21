@@ -11,6 +11,7 @@ func initialize():
 	change_inventory_tab("inventory")
 
 func _physics_process(delta):
+	return
 	if not visible:
 		return
 	$ItemDescription.position = get_local_mouse_position() + Vector2(20,25)

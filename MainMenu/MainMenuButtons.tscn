@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://MainMenu/MainMenuButtons.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dj3hn6egvrpeb" path="res://Assets/Images/Misc/MainMenu/play button.png" id="3"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_0bwq0"]
 [ext_resource type="Texture2D" uid="uid://cqo84wlgvp3e5" path="res://Assets/Images/Misc/MainMenu/quit button.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://2hsesaow6gf" path="res://Assets/Images/Misc/MainMenu/shop button.png" id="5"]
 [ext_resource type="Theme" uid="uid://cj0asnhg7avhi" path="res://Assets/Themes/MenuTitle.tres" id="6"]
-[ext_resource type="Theme" uid="uid://bf5tnmvvjqu1j" path="res://Assets/Themes/UI_Title.tres" id="7"]
 
 [node name="MainMenuButtons" type="Control"]
 layout_mode = 3
@@ -29,16 +29,19 @@ scale = Vector2(3, 3)
 texture = ExtResource("3")
 
 [node name="PlayLabel" type="Label" parent="PlayShopQuit/Play"]
-offset_left = 247.0
+offset_left = 131.0
 offset_top = 56.0
-offset_right = 445.0
+offset_right = 589.0
 offset_bottom = 172.0
-theme = ExtResource("7")
+theme = ExtResource("3_0bwq0")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 6
 theme_override_constants/shadow_offset_y = 6
+theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 100
 text = "PLAY"
+horizontal_alignment = 1
 
 [node name="Shop" type="Sprite2D" parent="PlayShopQuit"]
 visible = false
@@ -55,7 +58,6 @@ offset_top = 227.0
 offset_right = 735.0
 offset_bottom = 373.0
 scale = Vector2(0.8, 0.8)
-theme = ExtResource("7")
 text = "SHOP"
 
 [node name="Quit" type="Sprite2D" parent="PlayShopQuit"]
@@ -73,13 +75,12 @@ offset_top = 399.0
 offset_right = 837.0
 offset_bottom = 545.0
 scale = Vector2(0.8, 0.8)
-theme = ExtResource("7")
 text = "QUIT"
 
 [node name="PlayBtn" type="Button" parent="PlayShopQuit"]
-offset_left = 70.0
+offset_left = 69.0
 offset_top = 20.0
-offset_right = 691.0
+offset_right = 690.0
 offset_bottom = 171.0
 focus_mode = 0
 flat = true

@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvnykx0ktn32j"]
+[gd_scene load_steps=6 format=3 uid="uid://dvnykx0ktn32j"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/MagicSlots.gd" id="1_dynut"]
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://dxkhxnsjsuqs7" path="res://Assets/Images/Spell icons/earth/1.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dnjl844vjd438" path="res://Assets/Images/Spell icons/earth/4.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://bnhlsh6k33cej" path="res://Assets/Images/Spell icons/earth/2.png" id="5"]
@@ -40,37 +39,6 @@ texture_normal = ExtResource("6")
 [node name="btn4" type="TextureButton" parent="Bg"]
 layout_mode = 2
 texture_normal = ExtResource("4")
-
-[node name="Labels" type="HBoxContainer" parent="."]
-visible = false
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 7.0
-offset_top = 16.0
-offset_right = 683.0
-offset_bottom = 77.0
-scale = Vector2(0.12, 0.12)
-mouse_filter = 2
-
-[node name="1" type="Label" parent="Labels"]
-layout_mode = 2
-theme = ExtResource("2")
-text = "F1"
-
-[node name="2" type="Label" parent="Labels"]
-layout_mode = 2
-theme = ExtResource("2")
-text = "F2"
-
-[node name="3" type="Label" parent="Labels"]
-layout_mode = 2
-theme = ExtResource("2")
-text = "F3"
-
-[node name="4" type="Label" parent="Labels"]
-layout_mode = 2
-theme = ExtResource("2")
-text = "F4"
 
 [node name="Cooldown1" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(16, 0)

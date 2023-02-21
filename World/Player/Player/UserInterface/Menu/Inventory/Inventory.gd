@@ -30,6 +30,7 @@ func set_night_bg():
 	$DayNightBg.set_deferred("texture", load("res://Assets/Images/User interface/inventory/inventory/night.png"))
 
 func _physics_process(delta):
+	return
 	if not visible:
 		return
 	if hovered_item and not find_parent("UserInterface").holding_item:

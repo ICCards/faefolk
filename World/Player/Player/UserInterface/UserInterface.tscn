@@ -1,11 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=28 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://ctp3ra1cmv0de" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" id="2_rl35f"]
 [ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://MainMenu/LoadingScreen.tscn" id="4"]
-[ext_resource type="Theme" uid="uid://bf5tnmvvjqu1j" path="res://Assets/Themes/UI_Title.tres" id="6"]
+[ext_resource type="Texture2D" uid="uid://c81fev363dte8" path="res://Assets/Images/User interface/PlaceObject/RotationUI1.png" id="5_yyu54"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="6_rh7sc"]
+[ext_resource type="Texture2D" uid="uid://bydhgjfsoxl8x" path="res://Assets/Images/User interface/PlaceObject/RotationUI2.png" id="7_u87cj"]
 [ext_resource type="Texture2D" uid="uid://rf3gophkir0h" path="res://Assets/Images/Animations/loading/sprite_0.png" id="7_wlu5k"]
 [ext_resource type="Texture2D" uid="uid://dvfrk41vachbj" path="res://Assets/Images/Animations/loading/sprite_2.png" id="8_tq2d6"]
 [ext_resource type="Texture2D" uid="uid://u7b5ardk075b" path="res://Assets/Images/Animations/loading/sprite_1.png" id="9_ela15"]
@@ -203,10 +204,8 @@ animations = [{
 script = ExtResource("1_pv3v8")
 
 [node name="WeatherEffects" type="ColorRect" parent="."]
-offset_left = -49.0
-offset_top = -39.0
-offset_right = 1966.0
-offset_bottom = 1120.0
+offset_right = 1280.0
+offset_bottom = 720.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("2_rl35f")
@@ -223,10 +222,8 @@ stream = ExtResource("13")
 
 [node name="DeathEffect" type="ColorRect" parent="."]
 visible = false
-offset_left = -58.0
-offset_top = -70.0
-offset_right = 2021.0
-offset_bottom = 1142.0
+offset_right = 1280.0
+offset_bottom = 720.0
 mouse_filter = 2
 color = Color(1, 0, 0, 0)
 
@@ -249,11 +246,8 @@ offset_left = 20.0
 offset_top = 640.0
 offset_right = 357.0
 offset_bottom = 710.0
-theme = ExtResource("2")
 bbcode_enabled = true
 text = "Saving progress"
-
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="Menu" parent="." instance=ExtResource("2_dv8vv")]
 visible = false
@@ -262,77 +256,83 @@ visible = false
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_left = 115.0
-offset_top = 110.0
-offset_right = 155.0
-offset_bottom = 150.0
+offset_left = 325.0
+offset_top = 579.0
+offset_right = 325.0
+offset_bottom = 579.0
 
 [node name="TextureRect" type="TextureRect" parent="ChangeRotation"]
 layout_mode = 0
-offset_left = 209.0
-offset_top = 469.0
-offset_right = 310.0
-offset_bottom = 488.0
-scale = Vector2(2, 2)
+offset_left = -4.0
+offset_top = -18.0
+offset_right = 97.0
+offset_bottom = 1.0
+scale = Vector2(3, 3)
+texture = ExtResource("5_yyu54")
 
 [node name="RotateLabel" type="Label" parent="ChangeRotation"]
 layout_mode = 0
-offset_left = 248.0
-offset_top = 475.0
-offset_right = 1028.0
-offset_bottom = 621.0
-scale = Vector2(0.2, 0.2)
-theme = ExtResource("6")
+offset_left = 43.0
+offset_top = 5.0
+offset_right = 1005.0
+offset_bottom = 189.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("6_rh7sc")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
 text = "Change rotation"
 
 [node name="RotateKey" type="Label" parent="ChangeRotation"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 217.0
-offset_top = 471.0
-offset_right = 337.0
-offset_bottom = 617.0
-scale = Vector2(0.2, 0.2)
-theme = ExtResource("6")
+offset_left = 8.0
+offset_right = 141.0
+offset_bottom = 184.0
+scale = Vector2(0.18, 0.18)
+theme = ExtResource("6_rh7sc")
 text = "R"
+horizontal_alignment = 1
 
 [node name="ChangeVariety" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_left = 138.0
-offset_top = 110.0
-offset_right = 178.0
-offset_bottom = 150.0
 
 [node name="TextureRect" type="TextureRect" parent="ChangeVariety"]
 layout_mode = 0
-offset_left = 613.0
-offset_top = 469.0
-offset_right = 714.0
-offset_bottom = 488.0
-scale = Vector2(2, 2)
+offset_left = 654.0
+offset_top = 561.0
+offset_right = 755.0
+offset_bottom = 580.0
+scale = Vector2(3, 3)
+texture = ExtResource("7_u87cj")
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
 layout_mode = 0
-offset_left = 621.0
-offset_top = 475.0
-offset_right = 1411.0
-offset_bottom = 621.0
-scale = Vector2(0.2, 0.2)
-theme = ExtResource("6")
+offset_left = 19.0
+offset_top = 5.0
+offset_right = 981.0
+offset_bottom = 189.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("6_rh7sc")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
 text = "Change variety"
 
 [node name="VarietyKey" type="Label" parent="ChangeVariety"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 783.0
-offset_top = 471.0
-offset_right = 903.0
-offset_bottom = 617.0
-scale = Vector2(0.2, 0.2)
-theme = ExtResource("6")
+offset_left = 170.0
+offset_right = 303.0
+offset_bottom = 184.0
+scale = Vector2(0.18, 0.18)
+theme = ExtResource("6_rh7sc")
 text = "V"
+horizontal_alignment = 1
 
 [node name="LoadingIndicator" type="Panel" parent="."]
 visible = false
@@ -341,28 +341,30 @@ offset_right = 1280.0
 offset_bottom = 720.0
 
 [node name="LoadingIndicator" type="AnimatedSprite2D" parent="LoadingIndicator"]
-position = Vector2(671, 374)
+position = Vector2(721, 369)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("22")
 animation = &"new_animation"
-frame_progress = 0.669155
+frame_progress = 0.624182
 
 [node name="BetaLabel" parent="LoadingIndicator" instance=ExtResource("15_tm6fr")]
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_right = 162.0
 offset_bottom = 94.0
 grow_horizontal = 1
+grow_vertical = 1
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 640.0
-offset_right = 357.0
-offset_bottom = 710.0
-theme = ExtResource("2")
-theme_override_font_sizes/normal_font_size = 48
+offset_left = 14.0
+offset_top = 656.0
+offset_right = 1051.0
+offset_bottom = 853.0
+scale = Vector2(0.3, 0.3)
+theme = ExtResource("6_rh7sc")
 bbcode_enabled = true
 text = "Saving progress"
 
@@ -378,5 +380,7 @@ offset_bottom = 594.0
 
 [node name="LoadingScreen" parent="." instance=ExtResource("4")]
 visible = false
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="WeatherEffects/LightningTimer" to="WeatherEffects" method="_on_LightningTimer_timeout"]

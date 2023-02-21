@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://3vr0ijbqi0bd"]
 
-[ext_resource type="Theme" uid="uid://bvgqeuv5sk7i" path="res://Assets/Themes/button_theme.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://dfg84dm5mo03a" path="res://Assets/Images/Misc/MainMenu/logo.png" id="2"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="2_0m5v1"]
 [ext_resource type="Script" path="res://MainMenu/LoadingScreen.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="4"]
 
@@ -103,22 +103,22 @@ color = Color(0, 0, 0, 1)
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 767.0
-offset_top = 415.0
-offset_right = 807.0
-offset_bottom = 455.0
+offset_left = 773.0
+offset_top = 417.0
+offset_right = 813.0
+offset_bottom = 457.0
 scale = Vector2(0.5, 0.5)
 
 [node name="BuildingWorld" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 716.0
-offset_top = 500.0
-offset_right = 933.0
-offset_bottom = 594.0
-grow_horizontal = 0
-theme = ExtResource("1")
-theme_override_font_sizes/font_size = 64
+offset_left = 298.0
+offset_top = 502.0
+offset_right = 1566.0
+offset_bottom = 686.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_0m5v1")
 text = "Building world"
+horizontal_alignment = 2
 
 [node name="Dot1" type="Label" parent="Control"]
 layout_mode = 0
@@ -126,8 +126,8 @@ offset_left = 940.0
 offset_top = 500.0
 offset_right = 956.0
 offset_bottom = 594.0
-theme = ExtResource("1")
-theme_override_font_sizes/font_size = 64
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_0m5v1")
 text = "."
 
 [node name="Dot2" type="Label" parent="Control"]
@@ -136,8 +136,8 @@ offset_left = 958.0
 offset_top = 500.0
 offset_right = 974.0
 offset_bottom = 594.0
-theme = ExtResource("1")
-theme_override_font_sizes/font_size = 64
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_0m5v1")
 text = "."
 
 [node name="Dot3" type="Label" parent="Control"]
@@ -146,8 +146,8 @@ offset_left = 976.0
 offset_top = 500.0
 offset_right = 992.0
 offset_bottom = 594.0
-theme = ExtResource("1")
-theme_override_font_sizes/font_size = 64
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_0m5v1")
 text = "."
 
 [node name="BetaLabel" parent="." instance=ExtResource("4")]

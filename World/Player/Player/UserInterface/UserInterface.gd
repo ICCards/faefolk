@@ -104,35 +104,35 @@ func switch_hotbar():
 
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode and not Server.world.is_changing_scene:
-		if event.is_action_pressed("ui_cancel") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
+		if event.is_action_pressed("exit") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
 			toggle_save_and_exit()
-		elif event.is_action_pressed("open_menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+		elif event.is_action_pressed("open menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 			toggle_menu()
-		elif event.is_action_pressed("toggle_hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.viewInventoryMode:
+		elif event.is_action_pressed("switch hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.viewInventoryMode:
 			switch_hotbar()
 		elif Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_down()
-		elif event.is_action_pressed("slot1"):
+		elif event.is_action_pressed("slot 1"):
 			PlayerData.slot_selected(0)
-		elif event.is_action_pressed("slot2"):
+		elif event.is_action_pressed("slot 2"):
 			PlayerData.slot_selected(1)
-		elif event.is_action_pressed("slot3"):
+		elif event.is_action_pressed("slot 3"):
 			PlayerData.slot_selected(2)
-		elif event.is_action_pressed("slot4"):
+		elif event.is_action_pressed("slot 4"):
 			PlayerData.slot_selected(3)
-		elif event.is_action_pressed("slot5"):
+		elif event.is_action_pressed("slot 5"):
 			PlayerData.slot_selected(4)
-		elif event.is_action_pressed("slot6"):
+		elif event.is_action_pressed("slot 6"):
 			PlayerData.slot_selected(5)
-		elif event.is_action_pressed("slot7"):
+		elif event.is_action_pressed("slot 7"):
 			PlayerData.slot_selected(6)
-		elif event.is_action_pressed("slot8"):
+		elif event.is_action_pressed("slot 8"):
 			PlayerData.slot_selected(7)
-		elif event.is_action_pressed("slot9"):
+		elif event.is_action_pressed("slot 9"):
 			PlayerData.slot_selected(8)
-		elif event.is_action_pressed("slot10"):
+		elif event.is_action_pressed("slot 10"):
 			PlayerData.slot_selected(9)
 
 

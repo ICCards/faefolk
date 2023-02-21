@@ -44,13 +44,13 @@ func whoAmISwordSwing(data):
 
 func sword_swing_deferred(item_name,attack_index):
 	if get_parent().state != SWORD_SWINGING:
+		get_parent().state = SWORD_SWINGING
 		if attack_index == 1:
 			if get_node("../Magic").player_fire_buff:
 				sword_swing_area.special_ability = "fire"
 			else:
 				sword_swing_area.special_ability = ""
 			animation = "sword_swing_" + get_parent().direction.to_lower()
-			get_parent().state = SWORD_SWINGING
 			sword_swing_area.tool_name = item_name
 			player_animation_player.play("sword_swing")
 			set_sword_swing_position(get_parent().direction)
@@ -59,7 +59,6 @@ func sword_swing_deferred(item_name,attack_index):
 			sound_effects.play()
 		elif attack_index == 2:
 			animation = "sword_block_" + get_parent().direction.to_lower()
-			get_parent().state = SWORD_SWINGING
 			player_animation_player.play(animation)
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, animation, item_name)

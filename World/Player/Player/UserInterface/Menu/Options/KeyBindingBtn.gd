@@ -21,6 +21,7 @@ func _pressed():
 func _input(event):
 	if(do_set):
 		if(event is InputEventKey):
+			print(event.keycode)
 			#Remove the old keys
 			var newkey = InputEventKey.new()
 			newkey.keycode = int(PlayerData.player_data["settings"]["key_dict"][action_name])
@@ -33,7 +34,7 @@ func _input(event):
 			#Settings.save_keys()
 			#stop setting the key
 			do_set = false
-			get_node("../../../../").set_label_texts()
+			PlayerData.emit_signal("key_binding_button_changed")
 			if Server.isLoaded:
 				Server.player_node.user_interface.get_node("EnterNewKey").queue_free()
 			else:

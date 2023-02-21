@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://0gr52jd1t8ta"]
 
-[ext_resource type="Theme" uid="uid://idkpagxcd4yb" path="res://Assets/Themes/UI_menu.tres" id="1"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_f6ghu"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.gd" id="2_twyro"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gv7qt"]
@@ -12,23 +12,33 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rd32u"]
 
 [node name="KeyBindingBtn" type="Button" groups=["button_keys"]]
-custom_minimum_size = Vector2(116, 57)
-offset_top = 1.0
-offset_right = 116.0
-offset_bottom = 58.0
-scale = Vector2(0.5, 0.5)
+custom_minimum_size = Vector2(20, 12)
+offset_right = 12.0
+offset_bottom = 8.0
+scale = Vector2(4, 4)
 focus_mode = 0
-theme = ExtResource("1")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 16
 theme_override_constants/h_separation = 0
-theme_override_font_sizes/font_size = 40
 theme_override_styles/hover = SubResource("StyleBoxEmpty_gv7qt")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_06k8s")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_avnot")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rd32u")
-text = "set"
 flat = true
 script = ExtResource("2_twyro")
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 333.0
+offset_bottom = 204.0
+scale = Vector2(0.06, 0.06)
+theme = ExtResource("1_f6ghu")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
+text = "SET"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -9,6 +9,7 @@ func _ready():
 	initialize()
 
 func _physics_process(delta):
+	return
 	if not visible:
 		item = null
 		page = ""

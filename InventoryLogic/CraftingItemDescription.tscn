@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvkxqo4ch3k81"]
+[gd_scene load_steps=3 format=3 uid="uid://cvkxqo4ch3k81"]
 
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="1"]
 [ext_resource type="Script" path="res://InventoryLogic/CraftingItemDescription.gd" id="11"]
 [ext_resource type="PackedScene" path="res://InventoryLogic/Ingredient.tscn" id="12"]
 
@@ -90,7 +89,6 @@ offset_top = 18.0
 offset_right = 306.0
 offset_bottom = 93.0
 scale = Vector2(0.12, 0.12)
-theme = ExtResource("1")
 text = "Ingredients:"
 
 [node name="Ingredient1" parent="." instance=ExtResource("12")]
@@ -129,7 +127,6 @@ offset_top = 3.61905
 offset_right = 220.143
 offset_bottom = 64.619
 scale = Vector2(0.2, 0.2)
-theme = ExtResource("1")
 text = "Wood path"
 
 [node name="ItemDescription" type="Label" parent="."]
@@ -138,5 +135,4 @@ offset_top = 54.0
 offset_right = 377.0
 offset_bottom = 308.0
 scale = Vector2(0.12, 0.12)
-theme = ExtResource("1")
 text = "Some random description that is just here for some filler code"

@@ -33,15 +33,15 @@ func _physics_process(_delta):
 	if not visible:
 		return
 	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move left"):
 		setAnimationTexture('walk_left')
 		velocity.x -= 1.0
 		$FootstepsSound.stream_paused = false
-	if Input.is_action_pressed("move_right"):
-		setAnimationTexture('walk_right')	
+	if Input.is_action_pressed("move right"):
+		setAnimationTexture('walk_right')
 		velocity.x += 1.0
 		$FootstepsSound.stream_paused = false
-	if !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
+	if !Input.is_action_pressed("move left") && !Input.is_action_pressed("move right"):
 		velocity = Vector2.ZERO
 		setAnimationTexture('idle_down')
 		$FootstepsSound.stream_paused = true

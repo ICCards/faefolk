@@ -7,24 +7,25 @@
 [ext_resource type="Texture2D" uid="uid://hrlgt1h83prw" path="res://Assets/Images/User interface/ItemDescription/middle middle.png" id="6_k43ty"]
 [ext_resource type="Texture2D" uid="uid://babk3pnbuow7c" path="res://Assets/Images/User interface/ItemDescription/middle right.png" id="7_rankb"]
 [ext_resource type="Texture2D" uid="uid://b2vb7wblagmj5" path="res://Assets/Images/User interface/ItemDescription/bottom left.png" id="8_bsc0t"]
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="9"]
 [ext_resource type="Texture2D" uid="uid://biw4774ascrpc" path="res://Assets/Images/User interface/ItemDescription/bottom middle.png" id="9_yatcl"]
 [ext_resource type="Texture2D" uid="uid://c2ubln736uoqq" path="res://Assets/Images/User interface/ItemDescription/bottom right.png" id="10_f5mjf"]
 [ext_resource type="Script" path="res://InventoryLogic/CollectionItemDescription.gd" id="11"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="11_8kyi1"]
 
 [node name="CollectionItemDescription" type="Node2D"]
 z_index = 1
-scale = Vector2(2.7, 2.7)
 script = ExtResource("11")
 
 [node name="GridContainer" type="VBoxContainer" parent="."]
-offset_right = 55.0
-offset_bottom = 60.0
+offset_right = 39.0
+offset_bottom = 50.0
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="TopRow" type="GridContainer" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
 columns = 3
 
 [node name="TopLeft" type="TextureRect" parent="GridContainer/TopRow"]
@@ -46,12 +47,13 @@ stretch_mode = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 0
 columns = 3
 
 [node name="MiddleLeft" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
 texture = ExtResource("5_5cdw0")
-stretch_mode = 2
+stretch_mode = 1
 
 [node name="MiddleLeft2" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
@@ -59,17 +61,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("6_k43ty")
 expand_mode = 1
-stretch_mode = 2
 
 [node name="TopRight2" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
 texture = ExtResource("7_rankb")
-stretch_mode = 2
+stretch_mode = 1
 
 [node name="BottomRow" type="GridContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
 columns = 3
 
 [node name="BottomLeft" type="TextureRect" parent="GridContainer/BottomRow"]
@@ -88,12 +90,12 @@ texture = ExtResource("10_f5mjf")
 stretch_mode = 1
 
 [node name="ItemName" type="Label" parent="."]
-offset_left = 5.14286
-offset_top = 3.61905
-offset_right = 220.143
-offset_bottom = 64.619
-scale = Vector2(0.2, 0.2)
-theme = ExtResource("9")
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 651.0
+offset_bottom = 243.0
+scale = Vector2(0.05, 0.05)
+theme = ExtResource("11_8kyi1")
 text = "Wood path"
 
 [node name="Body" type="VBoxContainer" parent="."]
@@ -106,11 +108,9 @@ scale = Vector2(0.15, 0.15)
 
 [node name="ItemDescription" type="Label" parent="Body"]
 layout_mode = 2
-theme = ExtResource("9")
 text = "Some random descrwhiption tha "
 
 [node name="ItemAmount" type="Label" parent="Body"]
 modulate = Color(1, 0.705882, 0.145098, 1)
 layout_mode = 2
-theme = ExtResource("9")
 text = "Food"

@@ -46,6 +46,7 @@ func initialize_crafting():
 
 
 func _physics_process(delta):
+	return
 	if not visible:
 		return
 	if hovered_item and not find_parent("UserInterface").holding_item:

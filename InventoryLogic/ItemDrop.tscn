@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://ddruksku2vaoq"]
 
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="1"]
 [ext_resource type="Script" path="res://InventoryLogic/ItemDrop.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="2_8oyrq"]
 [ext_resource type="AudioStream" uid="uid://cpmbqua1xm4st" path="res://Assets/Sound/Sound effects/UI/pick up item.mp3" id="3"]
-[ext_resource type="Texture2D" uid="uid://cd7at5edqpggr" path="res://Assets/Images/inventory_icons/Crop/apple.png" id="4"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_w17hp"]
 
 [sub_resource type="CircleShape2D" id="9"]
 radius = 11.3333
@@ -435,28 +435,32 @@ script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="Sprite2D"]
-modulate = Color(1.2, 1.2, 1.2, 1)
-custom_minimum_size = Vector2(84, 84)
-offset_left = -16.5217
-offset_top = -16.5217
-offset_right = 67.4783
-offset_bottom = 67.4783
-scale = Vector2(0.4, 0.4)
+[node name="Image" type="TextureRect" parent="Sprite2D"]
+custom_minimum_size = Vector2(48, 48)
+offset_left = -23.4783
+offset_top = -26.9565
+offset_right = 24.5217
+offset_bottom = 21.0435
 mouse_filter = 2
-texture = ExtResource("4")
+texture = ExtResource("2_8oyrq")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="Sprite2D"]
-offset_left = 6.08696
+offset_left = 7.82609
 offset_top = 10.4348
-offset_right = 32.087
-offset_bottom = 51.4348
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("1")
-text = "99
-"
+offset_right = 247.826
+offset_bottom = 194.435
+scale = Vector2(0.08, 0.08)
+mouse_filter = 1
+theme = ExtResource("3_w17hp")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 160
+text = "999"
+horizontal_alignment = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0

@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://i5yl7stgqwwe" path="res://Assets/Images/User interface/inventory/skills/bow-tab.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Skills/Skills.gd" id="1_hpdih"]
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://bkhq1r7wlc0aj" path="res://Assets/Images/Spell icons/sword/1.png" id="3"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_rvxbf"]
 [ext_resource type="Texture2D" uid="uid://j46qk3r1jujb" path="res://Assets/Images/Spell icons/sword/front.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://3r26rnotsh06" path="res://Assets/Images/Spell icons/sword/back.png" id="5"]
 
@@ -15,7 +15,6 @@ offset_bottom = 40.0
 script = ExtResource("1_hpdih")
 
 [node name="Background" type="TextureRect" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
@@ -32,12 +31,12 @@ offset_left = 565.0
 offset_top = 198.0
 offset_right = 1155.0
 offset_bottom = 259.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "Sword swing"
 
 [node name="Attack2" type="Label" parent="AttackTitles"]
@@ -46,12 +45,12 @@ offset_left = 565.0
 offset_top = 306.0
 offset_right = 1155.0
 offset_bottom = 367.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="Attack3" type="Label" parent="AttackTitles"]
@@ -60,12 +59,12 @@ offset_left = 565.0
 offset_top = 414.0
 offset_right = 1155.0
 offset_bottom = 475.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="Attack4" type="Label" parent="AttackTitles"]
@@ -74,12 +73,12 @@ offset_left = 565.0
 offset_top = 522.0
 offset_right = 1155.0
 offset_bottom = 583.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="AttackDescriptions" type="Control" parent="."]
@@ -91,12 +90,12 @@ offset_left = 565.0
 offset_top = 232.0
 offset_right = 1155.0
 offset_bottom = 293.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "Sword swing"
 
 [node name="Attack2" type="Label" parent="AttackDescriptions"]
@@ -105,12 +104,12 @@ offset_left = 565.0
 offset_top = 340.0
 offset_right = 1155.0
 offset_bottom = 401.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="Attack3" type="Label" parent="AttackDescriptions"]
@@ -119,12 +118,12 @@ offset_left = 565.0
 offset_top = 448.0
 offset_right = 1155.0
 offset_bottom = 509.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="Attack4" type="Label" parent="AttackDescriptions"]
@@ -133,12 +132,12 @@ offset_left = 565.0
 offset_top = 556.0
 offset_right = 1155.0
 offset_bottom = 617.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="AttackCosts" type="Control" parent="."]
@@ -150,12 +149,12 @@ offset_left = 739.0
 offset_top = 202.0
 offset_right = 1329.0
 offset_bottom = 263.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "Cost: 1 energy"
 
 [node name="Attack2" type="Label" parent="AttackCosts"]
@@ -164,12 +163,12 @@ offset_left = 739.0
 offset_top = 310.0
 offset_right = 1329.0
 offset_bottom = 371.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="Attack3" type="Label" parent="AttackCosts"]
@@ -178,12 +177,12 @@ offset_left = 739.0
 offset_top = 418.0
 offset_right = 1329.0
 offset_bottom = 479.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="Attack4" type="Label" parent="AttackCosts"]
@@ -192,12 +191,12 @@ offset_left = 739.0
 offset_top = 526.0
 offset_right = 1329.0
 offset_bottom = 587.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 text = "?????"
 
 [node name="Buttons" type="Control" parent="."]
@@ -308,12 +307,11 @@ offset_left = 435.0
 offset_top = 183.0
 offset_right = 535.0
 offset_bottom = 244.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
 text = "1000"
 
 [node name="MaxProgressLabel" type="Label" parent="SkillProgress"]
@@ -322,12 +320,11 @@ offset_left = 435.0
 offset_top = 572.0
 offset_right = 535.0
 offset_bottom = 633.0
-scale = Vector2(0.3, 0.3)
-theme = ExtResource("2")
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
 text = "1000"
 
 [node name="Icons" type="Control" parent="."]

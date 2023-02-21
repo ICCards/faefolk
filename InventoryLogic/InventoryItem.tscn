@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://InventoryLogic/InventoryItem.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bbduu3gxlbfp6" path="res://Assets/Images/inventory_icons/Placable object/workbench #2.png" id="2_j2ubb"]
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="3"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_aqs3b"]
 [ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="4"]
 
 [node name="Item" type="Node2D"]
@@ -18,13 +18,17 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="."]
-offset_left = 32.0
-offset_top = 39.0
-offset_right = 272.0
-offset_bottom = 223.0
-scale = Vector2(0.075, 0.075)
+offset_left = 28.0
+offset_top = 36.0
+offset_right = 268.0
+offset_bottom = 220.0
+scale = Vector2(0.08, 0.08)
 mouse_filter = 1
-theme = ExtResource("3")
+theme = ExtResource("3_aqs3b")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 160
 text = "999"
 horizontal_alignment = 2

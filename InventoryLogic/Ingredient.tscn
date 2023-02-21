@@ -1,41 +1,47 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://b7ai8vbcyvkti"]
 
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_g5wq4"]
+[ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="2_bfwx3"]
 
 [node name="Ingredient" type="Control"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -788.0
 offset_bottom = -539.0
-custom_minimum_size = Vector2( 0, 32 )
-scale = Vector2( 0.14, 0.14 )
+scale = Vector2(0.14, 0.14)
 
 [node name="Name" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
 offset_left = 98.0
 offset_top = 20.0
 offset_right = 471.0
 offset_bottom = 104.0
-custom_minimum_size = Vector2( 200, 0 )
-theme = ExtResource( 1 )
+scale = Vector2(0.45, 0.45)
+theme = ExtResource("1_g5wq4")
 text = "Wood"
-valign = 1
-autowrap = true
 
 [node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
 offset_right = 90.0
 offset_bottom = 90.0
-custom_minimum_size = Vector2( 84, 84 )
-expand = true
+texture = ExtResource("2_bfwx3")
+expand_mode = 1
 stretch_mode = 6
 
 [node name="Amount" type="Label" parent="."]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 69.0
 offset_right = 116.0
 offset_bottom = 194.0
-scale = Vector2( 0.6, 0.6 )
+scale = Vector2(0.15, 0.15)
 mouse_filter = 1
-theme = ExtResource( 1 )
-text = "99"
+theme = ExtResource("1_g5wq4")
+text = "999"

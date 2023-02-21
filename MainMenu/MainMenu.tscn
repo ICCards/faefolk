@@ -91,9 +91,11 @@ glow_blend_mode = 0
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_top = 1.0
-offset_bottom = 1.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5")
 
 [node name="Background" type="Control" parent="."]
@@ -148,6 +150,9 @@ position = Vector2(628, 385)
 scale = Vector2(50, 50)
 texture = ExtResource("4")
 
+[node name="BetaLabel" parent="." instance=ExtResource("23")]
+layout_mode = 1
+
 [node name="OptionsMenuLayer" type="CanvasLayer" parent="."]
 
 [node name="Logo" type="TextureRect" parent="OptionsMenuLayer"]
@@ -189,6 +194,8 @@ offset_left = 552.0
 offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
+
+[node name="Label" parent="OptionsMenuLayer/Options/MenuTitle" index="1"]
 text = "Options"
 
 [node name="Options" parent="OptionsMenuLayer/Options" instance=ExtResource("17_6k084")]
@@ -211,20 +218,12 @@ offset_right = -6.0
 offset_bottom = 501.0
 scale = Vector2(0.45, 0.45)
 
-[node name="BetaLabel" parent="." instance=ExtResource("23")]
-layout_mode = 1
-offset_left = 974.0
-offset_top = 12.0
-offset_right = 1335.0
-offset_bottom = 128.0
-grow_horizontal = 1
-
 [node name="OptionsIconButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 1212.0
-offset_top = 652.0
-offset_right = 1485.0
-offset_bottom = 925.0
+offset_left = 1208.0
+offset_top = 648.0
+offset_right = 1481.0
+offset_bottom = 921.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("3")
 
@@ -237,3 +236,5 @@ environment = SubResource("10")
 
 [connection signal="pressed" from="OptionsMenuLayer/Options/ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="pressed" from="OptionsIconButton" to="." method="_on_OptionsIconButton_pressed"]
+
+[editable path="OptionsMenuLayer/Options/MenuTitle"]

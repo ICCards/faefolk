@@ -17,6 +17,7 @@ signal health_depleted
 signal tool_health_change
 signal active_item_updated
 signal play_wind_curse
+signal key_binding_button_changed
 
 var file_name = "res://JSONData/PlayerData.json"
 @onready var SlotClass = load("res://InventoryLogic/Slot.gd")
@@ -351,29 +352,30 @@ var starting_player_data = {
 	},
 	"settings":{
 		"key_dict": {
-			"move_right":68,
-			"move_left":65,
-			"move_up": 87,
-			"move_down": 83,
-			"open_menu": 73,
+			"move right":68,
+			"move left":65,
+			"move up": 87,
+			"move down": 83,
+			"open menu": 73,
 			"action": 69,
 			"rotate": 82,
-			"open_map": 71,
-			"sprint": 16777237,
-			"change_variety": 86,
-			"use_tool": 67,
-			"toggle_hotbar": 96,
-			"slot1": 49,
-			"slot2": 50,
-			"slot3": 51,
-			"slot4": 52,
-			"slot5": 53,
-			"slot6": 54,
-			"slot7": 55,
-			"slot8": 56,
-			"slot9": 57,
-			"slot10": 48,
-			"cancel_attack": 16777224
+			"open map": 71,
+			"sprint": 4194325,
+			"change variety": 86,
+			"use tool": 67,
+			"switch hotbar": 96,
+			"slot 1": 49,
+			"slot 2": 50,
+			"slot 3": 51,
+			"slot 4": 52,
+			"slot 5": 53,
+			"slot 6": 54,
+			"slot 7": 55,
+			"slot 8": 56,
+			"slot 9": 57,
+			"slot 10": 48,
+			"cancel attack": 4194312,
+			"exit": 4194305
 		},
 		"volume": {
 			"music": 0.0,

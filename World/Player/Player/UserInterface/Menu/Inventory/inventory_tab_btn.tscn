@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bai8b7wtamcjs" path="res://Assets/Images/User interface/buttons-icons/nameplate.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhyc44ufjmueg" path="res://Assets/Images/User interface/buttons-icons/nameplate-selected.png" id="2"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.gd" id="3_ikxr7"]
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="4"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="4_m87vt"]
 
 [node name="inventory_tab_btn" type="TextureButton"]
 offset_right = 31.0
@@ -18,10 +18,11 @@ layout_mode = 0
 offset_right = 738.0
 offset_bottom = 286.0
 scale = Vector2(0.042, 0.042)
-theme = ExtResource("4")
+theme = ExtResource("4_m87vt")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 160
 text = "Collections"
 horizontal_alignment = 1

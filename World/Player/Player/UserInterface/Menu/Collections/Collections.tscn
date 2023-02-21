@@ -1,9 +1,7 @@
-[gd_scene load_steps=121 format=3 uid="uid://b3ad8jm57r5at"]
+[gd_scene load_steps=118 format=3 uid="uid://b3ad8jm57r5at"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" id="1_co4t8"]
-[ext_resource type="PackedScene" uid="uid://dvx8ynrvmjy27" path="res://InventoryLogic/CollectionItemDescription.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://xdnb6a0u2yhl" path="res://Assets/Images/User interface/inventory/collections/crops-tab.png" id="2_apuhn"]
-[ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="3"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" id="5_pwxe3"]
 [ext_resource type="Texture2D" uid="uid://by5u0b077vfy6" path="res://Assets/Images/inventory_icons/Crop/carrot.png" id="6_ddxck"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" id="7_du1gv"]
@@ -156,9 +154,6 @@ resource_local_to_scene = true
 shader = SubResource("16")
 shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
 shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="49"]
-resource_local_to_scene = true
 
 [sub_resource type="Shader" id="383"]
 code = "shader_type canvas_item;
@@ -719,12 +714,6 @@ layout_mode = 2
 focus_mode = 0
 flat = true
 
-[node name="CollectionItemDescription" parent="." instance=ExtResource("2")]
-visible = false
-
-[node name="ItemNameBox" parent="." instance=ExtResource("3")]
-visible = false
-
 [node name="CropCollection" type="GridContainer" parent="."]
 layout_mode = 0
 offset_left = 427.0
@@ -883,61 +872,61 @@ columns = 6
 script = ExtResource("8_pyiy0")
 
 [node name="duck" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="bunny" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="deer" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="bear" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="wolf" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="boar" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="slime" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="spider" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="bat" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")
 
 [node name="skeleton" type="TextureRect" parent="MobCollection"]
-material = SubResource("49")
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("9_cg53e")
 script = ExtResource("7_du1gv")

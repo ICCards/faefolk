@@ -1,15 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://boujb4h3xtdhe"]
+[gd_scene load_steps=13 format=3 uid="uid://boujb4h3xtdhe"]
 
-[ext_resource type="Theme" uid="uid://idkpagxcd4yb" path="res://Assets/Themes/UI_menu.tres" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Options/Options.gd" id="1_g2f3b"]
-[ext_resource type="Texture2D" uid="uid://bmp7vq3jmy1y" path="res://Assets/Images/User interface/sliders/h-slider3-progress.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://b5nk73t3wo6qv" path="res://Assets/Images/User interface/inventory/options/options-tab.png" id="2_g56ap"]
-[ext_resource type="Texture2D" uid="uid://c0pxp1yu6mnk1" path="res://Assets/Images/User interface/sliders/h-slider3.png" id="4_a1cy4"]
-[ext_resource type="PackedScene" uid="uid://0gr52jd1t8ta" path="res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.tscn" id="7_xm6qc"]
-[ext_resource type="Theme" uid="uid://cj0asnhg7avhi" path="res://Assets/Themes/MenuTitle.tres" id="8"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_s1ql7"]
+[ext_resource type="PackedScene" uid="uid://btd1x6vesdiat" path="res://InventoryLogic/sound_bar.tscn" id="4_41gqa"]
+[ext_resource type="PackedScene" uid="uid://curdf0q5apwnx" path="res://World/Player/Player/UserInterface/Menu/Options/key_binding.tscn" id="5_prqkd"]
 [ext_resource type="Texture2D" uid="uid://dpykywq37kvad" path="res://Assets/Images/User interface/sliders/v-slider-bar.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://bev78o7ib7th1" path="res://Assets/Images/User interface/sliders/v-slider.png" id="11"]
-[ext_resource type="Texture2D" uid="uid://by0j7cyii2tf1" path="res://Assets/Images/User interface/sliders/h-slider3-boundary.png" id="12"]
 
 [sub_resource type="StyleBoxEmpty" id="54"]
 
@@ -25,14 +22,6 @@ VScrollBar/styles/grabber_highlight = null
 VScrollBar/styles/grabber_pressed = null
 VScrollBar/styles/scroll = SubResource("54")
 VScrollBar/styles/scroll_focus = null
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bdbe2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k80vi"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_orf6w"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7gsuo"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oxqow"]
 texture = ExtResource("10")
@@ -70,539 +59,104 @@ layout_mode = 2
 
 [node name="Sound" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("8")
+theme = ExtResource("3_s1ql7")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 6
 theme_override_constants/shadow_offset_y = 6
-theme_override_font_sizes/font_size = 72
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 96
 text = "Sound:"
 
-[node name="Grid1" type="GridContainer" parent="ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 82
-columns = 2
-
-[node name="MusicLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid1"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Music vol."
-
-[node name="Slider1" type="Control" parent="ScrollContainer/VBoxContainer/Grid1"]
+[node name="music" parent="ScrollContainer/VBoxContainer" instance=ExtResource("4_41gqa")]
 layout_mode = 2
 
-[node name="Music" type="Control" parent="ScrollContainer/VBoxContainer/Grid1/Slider1"]
-anchors_preset = 0
-offset_top = 8.0
-offset_right = 249.0
-offset_bottom = 18.0
-scale = Vector2(3, 3)
-
-[node name="LeftBoundary" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider1/Music"]
-layout_mode = 0
-offset_right = 6.0
-offset_bottom = 9.0
-texture = ExtResource("12")
-
-[node name="Middle" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider1/Music"]
-layout_mode = 0
-offset_left = 6.0
-offset_right = 77.0
-offset_bottom = 9.0
-texture = ExtResource("2")
-
-[node name="MusicSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/Grid1/Slider1/Music"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 0.666664
-offset_right = 77.0
-offset_bottom = 11.6667
-theme_override_icons/grabber = ExtResource("4_a1cy4")
-theme_override_icons/grabber_highlight = ExtResource("4_a1cy4")
-theme_override_icons/grabber_disabled = ExtResource("4_a1cy4")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_bdbe2")
-value = 50.0
-
-[node name="RightBoundary" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider1/Music"]
-layout_mode = 0
-offset_left = 77.0
-offset_right = 83.0
-offset_bottom = 9.0
-texture = ExtResource("12")
-flip_h = true
-
-[node name="SoundLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid1"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Sound vol."
-
-[node name="Slider2" type="Control" parent="ScrollContainer/VBoxContainer/Grid1"]
+[node name="sound" parent="ScrollContainer/VBoxContainer" instance=ExtResource("4_41gqa")]
 layout_mode = 2
 
-[node name="Sound" type="Control" parent="ScrollContainer/VBoxContainer/Grid1/Slider2"]
-anchors_preset = 0
-offset_top = 8.0
-offset_right = 249.0
-offset_bottom = 18.0
-scale = Vector2(3, 3)
-
-[node name="LeftBoundary" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider2/Sound"]
-layout_mode = 0
-offset_right = 6.0
-offset_bottom = 9.0
-texture = ExtResource("12")
-
-[node name="RightBoundary" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider2/Sound"]
-layout_mode = 0
-offset_left = 77.0
-offset_right = 83.0
-offset_bottom = 9.0
-texture = ExtResource("12")
-flip_h = true
-
-[node name="Middle" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider2/Sound"]
-layout_mode = 0
-offset_left = 6.0
-offset_right = 77.0
-offset_bottom = 9.0
-texture = ExtResource("2")
-
-[node name="SoundSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/Grid1/Slider2/Sound"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 2.0
-offset_right = 77.0
-offset_bottom = 10.0
-theme_override_icons/grabber = ExtResource("4_a1cy4")
-theme_override_icons/grabber_highlight = ExtResource("4_a1cy4")
-theme_override_icons/grabber_disabled = ExtResource("4_a1cy4")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_k80vi")
-value = 50.0
-
-[node name="AmbientLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid1"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Ambient vol."
-
-[node name="Slider3" type="Control" parent="ScrollContainer/VBoxContainer/Grid1"]
+[node name="ambient" parent="ScrollContainer/VBoxContainer" instance=ExtResource("4_41gqa")]
 layout_mode = 2
 
-[node name="Ambient" type="Control" parent="ScrollContainer/VBoxContainer/Grid1/Slider3"]
-anchors_preset = 0
-offset_top = 8.0
-offset_right = 249.0
-offset_bottom = 18.0
-scale = Vector2(3, 3)
-
-[node name="LeftBoundary" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider3/Ambient"]
-layout_mode = 0
-offset_right = 6.0
-offset_bottom = 9.0
-texture = ExtResource("12")
-
-[node name="Middle" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider3/Ambient"]
-layout_mode = 0
-offset_left = 6.0
-offset_right = 77.0
-offset_bottom = 9.0
-texture = ExtResource("2")
-
-[node name="RightBoundary" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider3/Ambient"]
-layout_mode = 0
-offset_left = 77.0
-offset_right = 83.0
-offset_bottom = 9.0
-texture = ExtResource("12")
-flip_h = true
-
-[node name="AmbientSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/Grid1/Slider3/Ambient"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 2.33333
-offset_right = 77.0
-offset_bottom = 10.3333
-theme_override_icons/grabber = ExtResource("4_a1cy4")
-theme_override_icons/grabber_highlight = ExtResource("4_a1cy4")
-theme_override_icons/grabber_disabled = ExtResource("4_a1cy4")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_orf6w")
-value = 50.0
-
-[node name="FootstepLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid1"]
+[node name="footstep" parent="ScrollContainer/VBoxContainer" instance=ExtResource("4_41gqa")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Footstep vol."
-
-[node name="Slider4" type="Control" parent="ScrollContainer/VBoxContainer/Grid1"]
-layout_mode = 2
-
-[node name="Footstep" type="Control" parent="ScrollContainer/VBoxContainer/Grid1/Slider4"]
-anchors_preset = 0
-offset_top = 8.0
-offset_right = 249.0
-offset_bottom = 18.0
-scale = Vector2(3, 3)
-
-[node name="LeftBoundary" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider4/Footstep"]
-layout_mode = 0
-offset_right = 6.0
-offset_bottom = 9.0
-texture = ExtResource("12")
-
-[node name="RightBoundary" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider4/Footstep"]
-layout_mode = 0
-offset_left = 77.0
-offset_right = 83.0
-offset_bottom = 9.0
-texture = ExtResource("12")
-flip_h = true
-
-[node name="Middle" type="TextureRect" parent="ScrollContainer/VBoxContainer/Grid1/Slider4/Footstep"]
-layout_mode = 0
-offset_left = 6.0
-offset_right = 77.0
-offset_bottom = 9.0
-texture = ExtResource("2")
-
-[node name="FootstepSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/Grid1/Slider4/Footstep"]
-layout_mode = 2
-offset_left = 3.0
-offset_top = 2.33334
-offset_right = 80.0
-offset_bottom = 10.3333
-theme_override_icons/grabber = ExtResource("4_a1cy4")
-theme_override_icons/grabber_highlight = ExtResource("4_a1cy4")
-theme_override_icons/grabber_disabled = ExtResource("4_a1cy4")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_7gsuo")
-value = 50.0
 
 [node name="Controls" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("8")
+theme = ExtResource("3_s1ql7")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 6
 theme_override_constants/shadow_offset_y = 6
-theme_override_font_sizes/font_size = 72
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 96
 text = "Controls:"
 
-[node name="Grid2" type="GridContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="move left" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/h_separation = 48
-columns = 2
 
-[node name="MoveLeftLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="move right" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Move left:"
 
-[node name="KeyBindingBtn" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="move up" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "move_left"
 
-[node name="MoveRightLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="move down" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Move right:"
 
-[node name="KeyBindingBtn2" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="open menu" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "move_right"
 
-[node name="MoveUpLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="action" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Move up:"
 
-[node name="KeyBindingBtn3" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="open map" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "move_up"
 
-[node name="MoveDownLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="sprint" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Move down:"
 
-[node name="KeyBindingBtn4" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="change variety" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "move_down"
 
-[node name="OpenMenuLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="use tool" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Open menu:"
 
-[node name="KeyBindingBtn5" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="switch hotbar" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "open_menu"
 
-[node name="ActionLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="cancel attack" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Action:"
 
-[node name="KeyBindingBtn6" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="exit" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "action"
 
-[node name="RotateObjectLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="slot 1" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Rotate object:"
 
-[node name="KeyBindingBtn7" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="slot 2" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "rotate"
 
-[node name="ChangeVarietyLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="slot 3" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Change variety:"
 
-[node name="KeyBindingBtn8" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="slot 4" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "change_variety"
 
-[node name="OpenMapLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="slot 5" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Open map:"
 
-[node name="KeyBindingBtn9" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="slot 6" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "open_map"
 
-[node name="SprintLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="slot 7" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Sprint:"
 
-[node name="KeyBindingBtn10" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="slot 8" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "sprint"
 
-[node name="UseToolLabel" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
+[node name="slot 9" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Use tool: Left-click,"
 
-[node name="KeyBindingBtn11" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
+[node name="slot 10" parent="ScrollContainer/VBoxContainer" instance=ExtResource("5_prqkd")]
 layout_mode = 2
-action_name = "use_tool"
-
-[node name="SwitchHotbar" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Switch hotbar:"
-
-[node name="KeyBindingBtn12" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "toggle_htobar"
-
-[node name="CancelAttack" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Switch hotbar:"
-
-[node name="KeyBindingBtn13" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "cancel_attack"
-
-[node name="Slot1" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn14" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot1"
-
-[node name="Slot2" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn15" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot2"
-
-[node name="Slot3" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn16" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot3"
-
-[node name="Slot4" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn17" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot4"
-
-[node name="Slot5" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn18" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot5"
-
-[node name="Slot6" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn19" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot6"
-
-[node name="Slot7" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn20" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot7"
-
-[node name="Slot8" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn21" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot8"
-
-[node name="Slot9" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn22" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot9"
-
-[node name="Slot10" type="Label" parent="ScrollContainer/VBoxContainer/Grid2"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 32
-text = "Slot 1:"
-
-[node name="KeyBindingBtn23" parent="ScrollContainer/VBoxContainer/Grid2" instance=ExtResource("7_xm6qc")]
-layout_mode = 2
-action_name = "slot10"
 
 [node name="Slider" type="VSlider" parent="."]
 layout_mode = 0
@@ -619,8 +173,4 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_gxvka")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_1ab12")
 value = 100.0
 
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/Grid1/Slider1/Music/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/Grid1/Slider2/Sound/SoundSlider" to="." method="_on_SoundSlider_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/Grid1/Slider3/Ambient/AmbientSlider" to="." method="_on_AmbientSlider_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/Grid1/Slider4/Footstep/FootstepSlider" to="." method="_on_FootstepSlider_value_changed"]
 [connection signal="value_changed" from="Slider" to="." method="_on_Slider_value_changed"]

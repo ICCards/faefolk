@@ -104,17 +104,17 @@ func _input( event ):
 		elif event.button_index == 2 and not event.is_pressed():
 			mouse_right_down = false
 	elif event is InputEvent:
-		if event.is_action_pressed("use_tool"):
+		if event.is_action_pressed("use tool"):
 			mouse_left_down = true
-		elif event.is_action_released("use_tool"):
+		elif event.is_action_released("use tool"):
 			mouse_left_down = false
-		if event.is_action_pressed("slot2"):
+		if event.is_action_pressed("slot 2"):
 			mouse_right_down = true
-		elif event.is_action_released("slot2"):
+		elif event.is_action_released("slot 2"):
 			mouse_right_down = false
-		if event.is_action_pressed("cancel_attack"):
+		if event.is_action_pressed("cancel attack"):
 			cancel_attack_pressed = true
-		elif event.is_action_released("cancel_attack"):
+		elif event.is_action_released("cancel attack"):
 			cancel_attack_pressed = false
 
 func draw_bow(spell_index):

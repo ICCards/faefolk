@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://cm8c7p7g6ii7g"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd" id="1_7jgre"]
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://c2s3ln6njit5j" path="res://Assets/Images/User interface/Player stats/health.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://2b0qe7hyxgdk" path="res://Assets/Images/User interface/Player stats/energy.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://bwixgp0gdb6w" path="res://Assets/Images/User interface/Player stats/mana.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cue6dirqviwjb" path="res://Assets/Images/User interface/Player stats/stats-bars-x2.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://c8tatrry8q7w5" path="res://Assets/Images/User interface/DateTime/clock.png" id="7"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="7_dgns7"]
 [ext_resource type="Texture2D" uid="uid://bgbnkakxjttww" path="res://Assets/Images/User interface/DateTime/clock icons/1.png" id="8"]
 
 [node name="PlayerDataUI" type="Control"]
@@ -87,11 +87,11 @@ texture = ExtResource("7")
 layout_mode = 0
 offset_left = 861.0
 offset_top = 26.0
-offset_right = 1076.0
-offset_bottom = 98.0
-scale = Vector2(0.5, 0.5)
-theme = ExtResource("2")
-theme_override_font_sizes/font_size = 54
+offset_right = 1494.0
+offset_bottom = 255.0
+scale = Vector2(0.17, 0.17)
+theme = ExtResource("7_dgns7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Mon. 1"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -100,11 +100,11 @@ vertical_alignment = 1
 layout_mode = 0
 offset_left = 882.0
 offset_top = 62.0
-offset_right = 1103.0
-offset_bottom = 128.0
-scale = Vector2(0.5, 0.5)
-theme = ExtResource("2")
-theme_override_font_sizes/font_size = 54
+offset_right = 1533.0
+offset_bottom = 274.0
+scale = Vector2(0.17, 0.17)
+theme = ExtResource("7_dgns7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "12:00 a.m."
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -13,7 +13,7 @@ extends Node
 @onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
 @onready var CaveGrass = load("res://World/Caves/Objects/CaveGrass.tscn")
 @onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
-@onready var Player = load("res://World/Player/Player/Player.tscn")
+#@onready var Player = load("res://World/Player/Player/Player.tscn")
 @onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 var oreTypesLevel1 = ["stone1", "stone2", "stone1", "stone2", "bronze ore", "bronze ore", "bronze ore", "iron ore"]
 var oreTypesLevel2 = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "bronze ore", "bronze ore", "iron ore", "iron ore", "gold ore"]
@@ -50,22 +50,22 @@ func update_navigation():
 
 func spawn_player():
 	var spawn_loc
-#	if PlayerData.spawn_at_respawn_location:
-#		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
-#	elif PlayerData.spawn_at_cave_entrance:
-	spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
-#	elif PlayerData.spawn_at_cave_exit:
-#		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
-#	elif PlayerData.spawn_at_last_saved_location:
-#		spawn_loc =  Util.string_to_vector2(PlayerData.player_data["current_save_location"])
-	var player = Player.instantiate()
-	Server.world.get_node("Players").add_child(player)
-	player.position =  (spawn_loc*32)+Vector2(16,32)
-	Server.player_node = player
-	PlayerData.spawn_at_respawn_location = false
-	PlayerData.spawn_at_cave_entrance = false
-	PlayerData.spawn_at_cave_exit = false
-	PlayerData.spawn_at_last_saved_location = false
+##	if PlayerData.spawn_at_respawn_location:
+##		spawn_loc = Util.string_to_vector2(PlayerData.player_data["respawn_location"])
+##	elif PlayerData.spawn_at_cave_entrance:
+#	spawn_loc = Server.world.get_node("Tiles/UpLadder").get_used_cells()[0]
+##	elif PlayerData.spawn_at_cave_exit:
+##		spawn_loc = Server.world.get_node("Tiles/DownLadder").get_used_cells()[0]
+##	elif PlayerData.spawn_at_last_saved_location:
+##		spawn_loc =  Util.string_to_vector2(PlayerData.player_data["current_save_location"])
+#	var player = Player.instantiate()
+#	Server.world.get_node("Players").add_child(player)
+#	player.position =  (spawn_loc*32)+Vector2(16,32)
+#	Server.player_node = player
+#	PlayerData.spawn_at_respawn_location = false
+#	PlayerData.spawn_at_cave_entrance = false
+#	PlayerData.spawn_at_cave_exit = false
+#	PlayerData.spawn_at_last_saved_location = false
 
 func build():
 	valid_tiles = Server.world.get_node("Tiles/ValidTiles")

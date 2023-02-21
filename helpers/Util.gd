@@ -56,7 +56,9 @@ func string_to_vector2(string) -> Vector2:
 	return string
 
 
-		
+func capitalizeFirstLetter(string) -> String:
+	return string.left(1).to_upper() + string.substr(1,-1)
+
 func set_swing_position(_pos, _direction):
 	match _direction:
 		"UP":

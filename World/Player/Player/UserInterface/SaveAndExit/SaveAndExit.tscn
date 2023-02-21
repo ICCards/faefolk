@@ -3,11 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.gd" id="1_py6al"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="2"]
-[ext_resource type="Theme" uid="uid://qfo7tp1r1t1w" path="res://Assets/Themes/options.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://dymfr1m2gfhtf" path="res://Assets/Images/User interface/inventory/save/save-tab.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://cw1joux2ogqum" path="res://Assets/Images/User interface/buttons-icons/nameplate2.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://dit3tnpfnfauf" path="res://Assets/Images/User interface/buttons-icons/nameplate2-seleceted.png" id="6"]
 [ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="8"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="8_ukmko"]
 
 [node name="SaveAndExit" type="Control"]
 layout_mode = 3
@@ -24,7 +24,11 @@ offset_right = 1240.0
 offset_bottom = 680.0
 mouse_filter = 2
 
+[node name="BetaLabel" parent="." instance=ExtResource("8")]
+layout_mode = 1
+
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -73,55 +77,58 @@ texture_normal = ExtResource("5")
 texture_pressed = ExtResource("6")
 
 [node name="1" type="Label" parent="."]
+layout_mode = 0
 offset_left = 570.0
-offset_top = 292.0
-offset_right = 827.0
-offset_bottom = 408.0
-scale = Vector2(0.35, 0.35)
-theme = ExtResource("3")
+offset_top = 297.0
+offset_right = 1470.0
+offset_bottom = 635.0
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("8_ukmko")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_spacing = -28
 text = "Save and
 continue"
 horizontal_alignment = 1
 clip_text = true
 
 [node name="2" type="Label" parent="."]
+layout_mode = 0
 offset_left = 570.0
-offset_top = 340.0
-offset_right = 827.0
-offset_bottom = 456.0
-scale = Vector2(0.35, 0.35)
-theme = ExtResource("3")
+offset_top = 345.0
+offset_right = 1470.0
+offset_bottom = 685.0
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("8_ukmko")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_spacing = -28
 text = "Save and
 exit"
 horizontal_alignment = 1
 clip_text = true
 
 [node name="3" type="Label" parent="."]
-offset_left = 571.0
-offset_top = 388.0
-offset_right = 828.0
-offset_bottom = 504.0
-scale = Vector2(0.35, 0.35)
-theme = ExtResource("3")
+layout_mode = 0
+offset_left = 570.0
+offset_top = 393.0
+offset_right = 1470.0
+offset_bottom = 733.0
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("8_ukmko")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 48
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_spacing = -28
 text = "Don't save 
 and exit"
 horizontal_alignment = 1
-clip_text = true
-
-[node name="BetaLabel" parent="." instance=ExtResource("8")]
-layout_mode = 0
+text_overrun_behavior = 1
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="pressed" from="SaveAndCtn" to="." method="_on_SaveAndCtn_pressed"]

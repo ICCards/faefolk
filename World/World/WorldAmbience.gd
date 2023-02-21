@@ -13,11 +13,11 @@ func _ready():
 			set_deferred("color", Color("28282d"))
 
 func play_set_day():
-	if Server.world.name == "World3D":
+	if Server.world.name == "World":
 		call_deferred("set_day")
 
 func play_set_night():
-	if Server.world.name == "World3D":
+	if Server.world.name == "World":
 		call_deferred("set_night")
 
 func set_day():
