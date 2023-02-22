@@ -1,13 +1,13 @@
 extends Node
 
-@onready var TreeObject = load("res://World3D/Objects/Nature/Trees/TreeObject.tscn")
-@onready var DesertTree = load("res://World3D/Objects/Nature/Trees/DesertTree.tscn")
-@onready var Log = load("res://World3D/Objects/Nature/Trees/Log.tscn")
-@onready var Stump = load("res://World3D/Objects/Nature/Trees/Stump.tscn")
-@onready var LargeOre = load("res://World3D/Objects/Nature/Ores/LargeOre.tscn")
-@onready var SmallOre = load("res://World3D/Objects/Nature/Ores/SmallOre.tscn")
-@onready var TallGrass = load("res://World3D/Objects/Nature/Grasses/TallGrass.tscn")
-@onready var Weed = load("res://World3D/Objects/Nature/Grasses/Weed.tscn")
+@onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
+@onready var DesertTree = load("res://World/Objects/Nature/Trees/DesertTree.tscn")
+@onready var Log = load("res://World/Objects/Nature/Trees/Log.tscn")
+@onready var Stump = load("res://World/Objects/Nature/Trees/Stump.tscn")
+@onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
+@onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
+@onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
+@onready var Weed = load("res://World/Objects/Nature/Grasses/Weed.tscn")
 
 var rng := RandomNumberGenerator.new()
 var trees_thread := Thread.new()

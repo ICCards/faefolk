@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var FireBoss = load("res://World3D/Caves/Bosses/FireBoss.tscn")
+@onready var FireBoss = load("res://World/Caves/Bosses/FireBoss.tscn")
 
 var is_changing_scene: bool = false
 var nav_node

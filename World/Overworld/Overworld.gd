@@ -18,6 +18,28 @@ func _ready():
 	Server.world = self
 	#create_or_load_world()
 	spawn_player()
+	set_valid_tiles()
+
+
+func set_valid_tiles():
+	for x in range(1000):
+		for y in range(1000):
+			$Terrain/ValidTiles.set_cell(0,Vector2(x,y),0,Constants.VALID_TILE_ATLAS_CORD,0)
+	Tiles.valid_tiles = $Terrain/ValidTiles
+#	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
+#	Tiles.watered_tiles = $FarmingTiles/WateredAutoTiles
+#	Tiles.ocean_tiles = $GeneratedTiles/ShallowOcean
+#	Tiles.deep_ocean_tiles = $GeneratedTiles/DeepOcean
+#	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
+#	Tiles.wall_tiles = $PlacableTiles/WallTiles
+#	Tiles.selected_wall_tiles = $PlacableTiles/SelectedWallTiles
+#	Tiles.foundation_tiles = $PlacableTiles/FoundationTiles
+#	Tiles.selected_foundation_tiles = $PlacableTiles/SelectedFoundationTiles
+#	Tiles.object_tiles = $PlacableTiles/ObjectTiles
+#	Tiles.fence_tiles = $PlacableTiles/FenceTiles
+#	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
+#	Tiles.forest_tiles = $GeneratedTiles/DarkGreenGrassTiles
+
 
 func create_or_load_world():
 	if MapData.world["is_built"]: # Load world

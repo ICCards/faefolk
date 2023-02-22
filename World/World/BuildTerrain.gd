@@ -22,7 +22,7 @@ var terrain_thread := Thread.new()
 var built_chunks = []
 var current_chunks = []
 
-@onready var IcPuppy = preload("res://World3D/Player/Pet/IcPuppy.tscn")
+@onready var IcPuppy = preload("res://World/Player/Pet/IcPuppy.tscn")
 
 var spawn_loc
 

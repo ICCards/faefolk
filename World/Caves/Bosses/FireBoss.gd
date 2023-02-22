@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@onready var FireProjectile = load("res://World3D/Objects/Magic/Fire/FireProjectile.tscn")
-@onready var FlameThrower = load("res://World3D/Objects/Magic/Fire/Flamethrower.tscn")
+@onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+@onready var FlameThrower = load("res://World/Objects/Magic/Fire/Flamethrower.tscn")
 
 @onready var hit_box: Node2D = $ShootDirection
 @onready var boss_sprite: Sprite2D = $Boss
@@ -21,7 +21,7 @@ var frozen: bool = false
 var stunned: bool = false
 var attacking: bool = false
 var random_pos := Vector2.ZERO
-var velocity := Vector2.ZERO
+#var velocity := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 200.0
 var changed_direction_delay: bool = false
 var health: int = Stats.WIND_BOSS

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var ForageItem = load("res://World3D/Objects/Nature/Forage/ForageItem.tscn")
+@onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 @onready var duck_sprite: AnimatedSprite2D = $DuckSprite
@@ -14,7 +14,7 @@ var destroyed: bool = false
 var stunned: bool = false
 var frozen: bool = false
 var poisoned: bool = false
-var velocity := Vector2.ZERO
+#var velocity := Vector2.ZERO
 var health: int = Stats.DUCK_HEALTH
 var STARTING_HEALTH: int = Stats.DUCK_HEALTH
 var running_state: bool = false
@@ -34,7 +34,7 @@ func _ready():
 	set_random_attributes()
 	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
-	navigation_agent.set_navigation(get_node("/root/World3D/Node2D"))
+	navigation_agent.set_navigation(get_node("/root/World/Node2D"))
 
 func set_random_attributes():
 	$Timers/DropEggTimer.wait_time = randf_range(20, 40)

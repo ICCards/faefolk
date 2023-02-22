@@ -33,7 +33,7 @@ func _ready():
 	set_attributes()
 	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
-	navigation_agent.call_deferred("set_navigation", get_node("/root/World3D/Node2D"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Node2D"))
 
 
 func set_attributes():

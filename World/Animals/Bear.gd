@@ -59,7 +59,7 @@ func _ready():
 	_retreat_timer.connect("timeout",Callable(self,"_update_pathfinding_retreat"))
 	_end_chase_state_timer.connect("timeout",Callable(self,"end_chase_state"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
-	navigation_agent.call_deferred("set_navigation", get_node("/root/World3D/Node2D"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Node2D"))
 
 func _update_pathfinding_idle():
 	if not thread.is_alive() and visible and not destroyed:

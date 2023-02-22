@@ -237,19 +237,7 @@ func can_item_be_added_to_inventory(item_name, item_quantity):
 	return false
 
 
-		
 
-func update_chest_slot_visual(slot_index, item_name, new_quantity):
-	pass
-#	var slot = get_tree().root.get_node("/root/World3D/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
-#	if slot.item != null:
-#		if new_quantity == 0:
-#			remove_item(slot)
-#			slot.removeFromSlot()
-#		else:
-#			slot.item.set_item(item_name, new_quantity)
-#	else:
-#		slot.initialize_item(item_name, new_quantity)
 
 
 func add_item_to_empty_slot(item, slot, id = null):

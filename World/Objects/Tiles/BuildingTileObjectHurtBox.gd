@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
-@onready var WallHitEffect = load("res://World3D/Objects/Tiles/WallHitEffect.tscn")
+@onready var WallHitEffect = load("res://World/Objects/Tiles/WallHitEffect.tscn")
 
 var tier
 var health
@@ -177,33 +177,34 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 				Server.player_node.user_interface.get_node("RadialUpgradeMenu").initialize(location, self)
 
 func show_selected_tile():
-	match item_name:
-		"wall":
-			var autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
-			match tier:
-				"twig":
-					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.TWIG, false, false, false, autotile_cord)
-				"wood":
-					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.WOOD, false, false, false, autotile_cord)
-				"stone":
-					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.STONE, false, false, false, autotile_cord)
-				"metal":
-					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.METAL, false, false, false, autotile_cord)
-				"armored":
-					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
-		"foundation":
-			var autotile_cord = Tiles.foundation_tiles.get_cell_autotile_coord(location.x, location.y)
-			match tier:
-				"twig":
-					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.TWIG, false, false, false, autotile_cord)
-				"wood":
-					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.WOOD, false, false, false, autotile_cord)
-				"stone":
-					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.STONE, false, false, false, autotile_cord)
-				"metal":
-					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.METAL, false, false, false, autotile_cord)
-				"armored":
-					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
+	pass
+#	match item_name:
+#		"wall":
+#			var autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
+#			match tier:
+#				"twig":
+#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.TWIG, false, false, false, autotile_cord)
+#				"wood":
+#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.WOOD, false, false, false, autotile_cord)
+#				"stone":
+#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.STONE, false, false, false, autotile_cord)
+#				"metal":
+#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.METAL, false, false, false, autotile_cord)
+#				"armored":
+#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
+#		"foundation":
+#			var autotile_cord = Tiles.foundation_tiles.get_cell_autotile_coord(location.x, location.y)
+#			match tier:
+#				"twig":
+#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.TWIG, false, false, false, autotile_cord)
+#				"wood":
+#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.WOOD, false, false, false, autotile_cord)
+#				"stone":
+#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.STONE, false, false, false, autotile_cord)
+#				"metal":
+#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.METAL, false, false, false, autotile_cord)
+#				"armored":
+#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
 
 func _on_HammerRepairBox_area_entered(area):
 	play_hammer_hit_sound()

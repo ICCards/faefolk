@@ -23,8 +23,7 @@ func _physics_process(delta):
 	if Server.isLoaded and not PlayerData.viewMapMode:
 		show()
 		position = position.move_toward(random_storm_position, delta * 10)
-		var snow = get_node("/root/World3D/GeneratedTiles/SnowTiles")
-		if snow.get_cellv(snow.local_to_map(position)) == -1:
+		if Tiles.snow_tiles.get_cellv(Tiles.snow_tiles.local_to_map(position)) == -1:
 			is_snow_storm = false
 			$Snow.emitting = false
 			$RainStorm/Rain.emitting = true

@@ -544,4 +544,3 @@ func place_object(item_name, direction, location, type):
 			PlaceObject.place_forage_in_world(id,item_name,location,false)
 	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		Server.player_node.set_held_object()
-		Server.player_node.actions.destroy_placable_object()

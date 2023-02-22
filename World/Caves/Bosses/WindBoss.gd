@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-@onready var TornadoProjectile = load("res://World3D/Objects/Magic/Wind/TornadoProjectile.tscn")
-@onready var DashGhost = load("res://World3D/Objects/Magic/Wind/DashGhost.tscn")
-@onready var Whirlwind = load("res://World3D/Objects/Magic/Wind/Whirlwind.tscn")
-@onready var LingeringTornado = load("res://World3D/Objects/Magic/Wind/LingeringTornado.tscn")
+@onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+@onready var DashGhost = load("res://World/Objects/Magic/Wind/DashGhost.tscn")
+@onready var Whirlwind = load("res://World/Objects/Magic/Wind/Whirlwind.tscn")
+@onready var LingeringTornado = load("res://World/Objects/Magic/Wind/LingeringTornado.tscn")
 
 @onready var boss_sprite: Sprite2D = $Boss
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -15,7 +15,7 @@ var destroyed: bool = false
 var poisoned: bool = false
 var frozen: bool = false
 var random_pos := Vector2.ZERO
-var velocity := Vector2.ZERO
+#var velocity := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 100.0
 var changed_direction_delay: bool = false
 var health: int = Stats.WIND_BOSS

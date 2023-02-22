@@ -116,7 +116,7 @@ func add_tree(id,data):
 	world["tree"][id] = data
 
 func add_placable(id, data):
-	if Server.world.name == "World3D":
+	if Server.world.name == "Overworld":
 		world["placable"][id] = data
 	else:
 		caves[Server.world.name]["placable"][id] = data

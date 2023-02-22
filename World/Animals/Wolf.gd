@@ -21,7 +21,7 @@ var attacking: bool = false
 var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
-var velocity := Vector2.ZERO
+#var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
 var health: int = Stats.WOLF_HEALTH
@@ -57,7 +57,7 @@ func _ready():
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
 	_retreat_timer.connect("timeout",Callable(self,"_update_pathfinding_retreat"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred")) 
-	navigation_agent.call_deferred("set_navigation", get_node("/root/World3D/Node2D"))
+	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Node2D"))
 
 func _update_pathfinding_idle():
 	if not thread.is_alive() and visible and not destroyed:

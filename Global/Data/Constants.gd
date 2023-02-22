@@ -6,7 +6,10 @@ const MIN_PLACE_OBJECT_DISTANCE = 100
 const DISTANCE_TO_SPAWN_OBJECT = 40
 const DISTANCE_TO_REMOVE_OBJECT = 80
 
-var dimensions_dict = {
+const VALID_TILE_ATLAS_CORD = Vector2i(0,0)
+const NAVIGATION_TILE_ATLAS_CORD = Vector2i(0,1)
+
+const dimensions_dict = {
 	"furnace" : Vector2(1,1),
 	"wood box" : Vector2(1,1),
 	"wood fence" : Vector2(1,1),

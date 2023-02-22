@@ -27,7 +27,7 @@ enum Tiles {
 }
 
 func _input(event):
-	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/World3D"):
+	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/World"):
 		if event.is_action_pressed("open_map"):
 			Server.player_node.actions.destroy_placable_object()
 			Server.world.get_node("WorldAmbience").call_deferred("hide")
@@ -92,8 +92,8 @@ func _physics_process(delta):
 		playerIcon.position = Server.player_node.position
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 		set_direction(Server.player_node.direction)
-		roamingStorm = get_node("/root/World3D/RoamingStorm")
-		roamingStorm2 = get_node("/root/World3D/RoamingStorm2")
+		roamingStorm = get_node("/root/World/RoamingStorm")
+		roamingStorm2 = get_node("/root/World/RoamingStorm2")
 		stormIcon.position = roamingStorm.position
 		stormIcon2.position = roamingStorm2.position
 

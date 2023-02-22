@@ -1,22 +1,22 @@
 extends Node
 
-var valid_tiles = null
-var path_tiles = null
-var hoed_tiles = null
-var watered_tiles = null
-var ocean_tiles = null
+var valid_tiles: TileMap = null
+var path_tiles: TileMap = null
+var hoed_tiles: TileMap = null
+var watered_tiles: TileMap = null
+var ocean_tiles: TileMap = null
 var deep_ocean_tiles: TileMap = null
-var dirt_tiles = null
-var forest_tiles = null
-var wall_tiles = null
-var selected_wall_tiles = null
-var foundation_tiles = null
-var selected_foundation_tiles = null
-var object_tiles = null
-var fence_tiles = null
-var light_tiles = null
-var wet_sand_tiles = null
-var cave_wall_tiles = null
+var dirt_tiles: TileMap = null
+var forest_tiles: TileMap = null
+var wall_tiles: TileMap = null
+var selected_wall_tiles: TileMap = null
+var foundation_tiles: TileMap = null
+var selected_foundation_tiles: TileMap = null
+var object_tiles: TileMap = null
+var fence_tiles: TileMap = null
+var light_tiles: TileMap = null
+var wet_sand_tiles: TileMap = null
+var cave_wall_tiles: TileMap = null
 
 
 func validate_forest_tiles(location):
@@ -32,12 +32,12 @@ func validate_forest_tiles(location):
 
 func validate_tiles(location, dimensions):
 	var active = false
-	if Server.world.name == "World3D":
+	if Server.world.name == "Overworld":
 		if not active:
 			active = true
 			for x in range(dimensions.x):
 				for y in range(dimensions.y):
-					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location or hoed_tiles.get_cellv(Vector2(x,-y) + location) == 0: 
+					if not valid_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) == Constants.VALID_TILE_ATLAS_CORD:   #Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location or hoed_tiles.get_cellv(Vector2(x,-y) + location) == 0: 
 						return false
 						break
 			return true

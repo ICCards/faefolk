@@ -20,7 +20,7 @@ func _ready():
 	get_fish()
 
 func get_fish():
-	if Server.world.name == "World3D":
+	if Server.world.name == "World":
 		fish_data = FishData.returnOceanDay()
 	else:
 		fish_data = FishData.returnCaveFish()

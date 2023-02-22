@@ -9,7 +9,7 @@ var maxVelocity = 3;
 var bounce = 0.4
 
 var fishable = true
-var fish = load("res://World3D/Player/Player/Fishing/Fish.tscn")
+var fish = load("res://World/Player/Player/Fishing/Fish.tscn")
 
 var MIN_Y
 var MAX_Y

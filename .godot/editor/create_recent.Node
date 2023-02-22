@@ -1,3 +1,4 @@
+TileMap
 Control
 Sprite2D
 Label
@@ -5,5 +6,4 @@ AnimationPlayer
 Node2D
 Line2D
 CanvasModulate
-TileMap
 TextureButton

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var Duck = load("res://World3D/Animals/Duck.tscn")
+@onready var Duck = load("res://World/Animals/Duck.tscn")
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var _uuid = load("res://helpers/UUID.gd")
 
@@ -80,7 +80,7 @@ func play_egg_break_sound():
 	
 	
 func spawn_duck():
-	if Tiles.valid_tiles.get_cellv(global_position/32) != -1 and Server.world.name == "World3D":
+	if Tiles.valid_tiles.get_cellv(global_position/32) != -1 and Server.world.name == "World":
 		if Util.chance(25):
 			var uuid = _uuid.new()
 			var id = uuid.v4()

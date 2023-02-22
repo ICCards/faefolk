@@ -18,9 +18,9 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="."]
-offset_left = 28.0
+offset_left = 29.0
 offset_top = 36.0
-offset_right = 268.0
+offset_right = 269.0
 offset_bottom = 220.0
 scale = Vector2(0.08, 0.08)
 mouse_filter = 1

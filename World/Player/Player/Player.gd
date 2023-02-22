@@ -82,34 +82,43 @@ func set_held_object():
 	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			set_current_object(item_name)
+			return
+	else:
+		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
+			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			# Placable object
-			if item_category == "Placable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
-				actions.show_placable_object(item_name, item_category)
-				return
-			if item_name == "blueprint" and current_building_item != null:
-				actions.show_placable_object(current_building_item, "BUILDING")
-				return
-			actions.destroy_placable_object()
-			# Holding item
-			if Util.valid_holding_item_category(item_category):
-				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-				holding_item.show()
-				$HoldingTorch.set_inactive()
-			elif item_name == "torch":
-				holding_item.hide()
-				$HoldingTorch.set_active()
+			if item_category == "Magic" or item_name == "bow" or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
+				$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("initialize", item_name)
+			else:
+				$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("hide")
+			set_current_object(item_name)
+			return
+	set_current_object(null)
 
 
-#	else:
-#		actions.destroy_placable_object()
-#		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
-#			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
-#			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-#			if item_category == "Magic" or item_name == "bow" or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
-#				$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("initialize", item_name)
-#				return
-#		$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("hide")
+func set_current_object(item_name):
+	var item_category
+	if item_name:
+		item_category = JsonData.item_data[item_name]["ItemCategory"]
+	else:
+		item_category = null
+	# Placable object
+	if item_category == "Placable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
+		actions.show_placable_object(item_name, item_category)
+		return
+	if item_name == "blueprint" and current_building_item != null:
+		actions.show_placable_object(current_building_item, "BUILDING")
+		return
+	actions.destroy_placable_object()
+	# Holding item
+	if Util.valid_holding_item_category(item_category):
+		holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+		holding_item.show()
+		$HoldingTorch.set_inactive()
+	elif item_name == "torch":
+		holding_item.hide()
+		$HoldingTorch.set_active()
 
 
 func _process(_delta) -> void:

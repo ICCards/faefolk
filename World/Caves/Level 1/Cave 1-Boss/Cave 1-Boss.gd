@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var WindBoss = load("res://World3D/Caves/Bosses/WindBoss.tscn")
+@onready var WindBoss = load("res://World/Caves/Bosses/WindBoss.tscn")
 
 var is_changing_scene: bool = false
 var nav_node

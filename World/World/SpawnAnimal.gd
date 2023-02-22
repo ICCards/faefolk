@@ -1,12 +1,12 @@
 extends Node
 #
-@onready var Bear = load("res://World3D/Animals/Bear.tscn")
-@onready var Bunny = load("res://World3D/Animals/Bunny.tscn")
-@onready var Duck = load("res://World3D/Animals/Duck.tscn")
-@onready var Boar = load("res://World3D/Animals/Boar.tscn")
-@onready var Deer = load("res://World3D/Animals/Deer.tscn")
-@onready var Wolf = load("res://World3D/Animals/Wolf.tscn")
-@onready var BabyBirdBoss = load("res://World3D/Enemies/BabyBirdBoss.tscn")
+@onready var Bear = load("res://World/Animals/Bear.tscn")
+@onready var Bunny = load("res://World/Animals/Bunny.tscn")
+@onready var Duck = load("res://World/Animals/Duck.tscn")
+@onready var Boar = load("res://World/Animals/Boar.tscn")
+@onready var Deer = load("res://World/Animals/Deer.tscn")
+@onready var Wolf = load("res://World/Animals/Wolf.tscn")
+@onready var BabyBirdBoss = load("res://World/Enemies/BabyBirdBoss.tscn")
 
 @onready var Enemies = get_node("../../Enemies")
 
