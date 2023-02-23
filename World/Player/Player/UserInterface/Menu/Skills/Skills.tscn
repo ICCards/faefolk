@@ -15,6 +15,7 @@ offset_bottom = 40.0
 script = ExtResource("1_hpdih")
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
@@ -305,27 +306,29 @@ texture_progress = ExtResource("4")
 layout_mode = 0
 offset_left = 435.0
 offset_top = 183.0
-offset_right = 535.0
-offset_bottom = 244.0
+offset_right = 735.0
+offset_bottom = 367.0
 scale = Vector2(0.1, 0.1)
 theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 8
 theme_override_constants/shadow_offset_y = 8
-text = "1000"
+text = "1"
+horizontal_alignment = 1
 
 [node name="MaxProgressLabel" type="Label" parent="SkillProgress"]
 layout_mode = 0
 offset_left = 435.0
 offset_top = 572.0
-offset_right = 535.0
-offset_bottom = 633.0
+offset_right = 735.0
+offset_bottom = 756.0
 scale = Vector2(0.1, 0.1)
 theme = ExtResource("3_rvxbf")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 8
 theme_override_constants/shadow_offset_y = 8
-text = "1000"
+text = "1"
+horizontal_alignment = 1
 
 [node name="Icons" type="Control" parent="."]
 anchors_preset = 0

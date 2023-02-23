@@ -86,7 +86,7 @@ func advance_crop():
 	for tile in world["tile"]: # if tile is watered, set to not watered
 		if world["tile"][tile] == "w":
 			world["tile"][tile] = "h"
-	if Server.world.name == "World3D": # clear watered tiles if in world
+	if Server.world.name == "Overworld": # clear watered tiles if in world
 		Tiles.watered_tiles.clear()
 	emit_signal("refresh_crops")
 
@@ -122,25 +122,25 @@ func add_placable(id, data):
 		caves[Server.world.name]["placable"][id] = data
 
 func remove_placable(id):
-	if Server.world.name == "World3D":
+	if Server.world.name == "Overworld":
 		world["placable"].erase(id)
 	else:
 		caves[Server.world.name]["placable"].erase(id)
 
 func remove_forage(id):
-	if Server.world.name == "World3D":
+	if Server.world.name == "Overworld":
 		world["forage"].erase(id)
 	else:
 		caves[Server.world.name]["forage"].erase(id)
 
 func remove_object(type, id):
-	if Server.world.name == "World3D":
+	if Server.world.name == "Overworld":
 		world[type].erase(id)
 	else:
 		caves[Server.world.name][type].erase(id)
 	
 func update_object_health(type, id, new_health):
-	if Server.world.name == "World3D":
+	if Server.world.name == "Overworld":
 		if world[type].has(id):
 			world[type][id]["h"] = new_health
 	else:
@@ -149,7 +149,7 @@ func update_object_health(type, id, new_health):
 
 func return_cave_data(cave_name):
 	match cave_name:
-		"World3D":
+		"Overworld":
 			return world
 	return caves[cave_name]
 

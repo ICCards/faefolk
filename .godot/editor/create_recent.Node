@@ -1,9 +1,9 @@
 TileMap
+Node2D
 Control
 Sprite2D
 Label
 AnimationPlayer
-Node2D
 Line2D
 CanvasModulate
 TextureButton

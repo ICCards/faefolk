@@ -5,9 +5,9 @@ extends Node
 @onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
 @onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
 @onready var BuildingTileObjectHurtBox = load("res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn")
-@onready var DoorFront = load("res://World/Objects/Tiles/DoorFront.tscn")
-@onready var DoorSide = load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
-@onready var GateFront = load("res://World/Objects/Tiles/GateFront.tscn")
+@onready var DoorFront #= load("res://World/Objects/Tiles/DoorFront.tscn")
+@onready var DoorSide #= load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
+@onready var GateFront #= load("res://World/Objects/Tiles/GateFront.tscn")
 
 var rng = RandomNumberGenerator.new()
 
@@ -41,7 +41,7 @@ enum Lights {
 	CAMPFIRE
 }
 
-var PlacableObjects 
+var PlaceableObjects 
 var NatureObjects 
 var ForageObjects
 
@@ -73,7 +73,7 @@ func place_tree_in_world(id, variety, location, biome ,health, phase):
 
 
 func place_seed_in_world(id, item_name, location, days_until_harvest, days_without_water, in_regrowth_phase):
-	PlacableObjects = Server.world.get_node("PlacableObjects")
+	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	Tiles.remove_valid_tiles(location)
 	var plantedCrop = PlantedCrop.instantiate()
 	plantedCrop.name = str(id)
@@ -82,12 +82,12 @@ func place_seed_in_world(id, item_name, location, days_until_harvest, days_witho
 	plantedCrop.days_until_harvest = days_until_harvest
 	plantedCrop.days_without_water = days_without_water
 	plantedCrop.in_regrowth_phase = in_regrowth_phase
-	PlacableObjects.call_deferred("add_child", plantedCrop, true)
+	PlaceableObjects.call_deferred("add_child", plantedCrop, true)
 	plantedCrop.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
 
 
 func place_building_object_in_world(id, item_name, variety , location, health):
-	PlacableObjects = Server.world.get_node("PlacableObjects")
+	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	rng.randomize()
 	match item_name:
 		"wall":
@@ -98,8 +98,8 @@ func place_building_object_in_world(id, item_name, variety , location, health):
 			object.item_name = item_name
 			object.tier = variety
 			object.id = str(id)
-			PlacableObjects.call_deferred("add_child", object, true)
-			object.global_position = Tiles.wall_tiles.map_to_local(location) + Vector2(16, 16)
+			PlaceableObjects.call_deferred("add_child", object)
+			object.global_position = Tiles.wall_tiles.map_to_local(location)
 			Tiles.remove_valid_tiles(location, Vector2(1,1))
 		"foundation":
 			var object = BuildingTileObjectHurtBox.instantiate()
@@ -109,8 +109,8 @@ func place_building_object_in_world(id, item_name, variety , location, health):
 			object.item_name = item_name
 			object.id = str(id)
 			object.tier = variety
-			PlacableObjects.call_deferred("add_child", object, true)
-			object.global_position = Tiles.wall_tiles.map_to_local(location) + Vector2(16, 16)
+			PlaceableObjects.call_deferred("add_child", object)
+			object.global_position = Tiles.wall_tiles.map_to_local(location)
 
 
 func remove_valid_tiles(item_name,direction, location):
@@ -121,14 +121,14 @@ func remove_valid_tiles(item_name,direction, location):
 		Tiles.remove_valid_tiles(location, Constants.dimensions_dict[item_name])
 		
 func place_object_in_world(id, item_name, direction, location):
-	PlacableObjects = Server.world.get_node("PlacableObjects")
+	PlaceableObjects = Server.world.get_node("PlacableObjects")
 	var tileObjectHurtBox = TileObjectHurtBox.instantiate()
 	tileObjectHurtBox.name = str(id)
 	tileObjectHurtBox.item_name = item_name
 	tileObjectHurtBox.location = location
 	tileObjectHurtBox.direction = direction
 	tileObjectHurtBox.id = id
-	PlacableObjects.call_deferred("add_child", tileObjectHurtBox, true)
+	PlaceableObjects.call_deferred("add_child", tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(0,32)
 	remove_valid_tiles(item_name, direction, location)
 	match item_name:
@@ -137,7 +137,7 @@ func place_object_in_world(id, item_name, direction, location):
 			var gateFront = GateFront.instantiate()
 			gateFront.name = id
 			gateFront.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(0,32)
-			PlacableObjects.call_deferred("add_child", gateFront, true)
+			PlaceableObjects.call_deferred("add_child", gateFront, true)
 		"round table1":
 			Tiles.object_tiles.set_cellv(location, 175)
 		"round table2": 
@@ -424,7 +424,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.tier = "wood"
 			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(0,32)
-			Server.world.call_deferred("add_child", object, true)
+			PlaceableObjects.call_deferred("add_child", object, true)
 		"wood door side":
 			tileObjectHurtBox.queue_free()
 			var object = DoorSide.instantiate()
@@ -432,7 +432,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.tier = "wood"
 			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(0,32)
-			PlacableObjects.call_deferred("add_child", object, true)
+			PlaceableObjects.call_deferred("add_child", object, true)
 		"metal door":
 			tileObjectHurtBox.queue_free()
 			var object = DoorFront.instantiate()
@@ -440,7 +440,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.tier = "metal"
 			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(0,32)
-			PlacableObjects.call_deferred("add_child", object, true)
+			PlaceableObjects.call_deferred("add_child", object, true)
 		"metal door side":
 			tileObjectHurtBox.queue_free()
 			var object = DoorSide.instantiate()
@@ -448,7 +448,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.tier = "metal"
 			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(0,32)
-			PlacableObjects.call_deferred("add_child", object, true)
+			PlaceableObjects.call_deferred("add_child", object, true)
 		"armored door":
 			tileObjectHurtBox.queue_free()
 			var object = DoorFront.instantiate()
@@ -456,7 +456,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.tier = "armored"
 			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(0,32)
-			PlacableObjects.call_deferred("add_child", object, true)
+			PlaceableObjects.call_deferred("add_child", object, true)
 		"armored door side":
 			tileObjectHurtBox.queue_free()
 			var object = DoorSide.instantiate()
@@ -464,7 +464,7 @@ func place_object_in_world(id, item_name, direction, location):
 			object.tier = "armored"
 			object.id = str(id)
 			object.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(0,32)
-			PlacableObjects.call_deferred("add_child", object, true)
+			PlaceableObjects.call_deferred("add_child", object, true)
 		"torch":
 			Tiles.remove_valid_tiles(location, Vector2(1,1))
 			Tiles.object_tiles.set_cellv(location, 179)

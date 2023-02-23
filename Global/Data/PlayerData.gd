@@ -40,8 +40,7 @@ var InventorySlots
 var HotbarSlots
 var active_item_slot = 0
 var active_item_slot_combat_hotbar = 0
-#
-#var game_state: GameState
+
 
 var starting_player_data = {
 	"current_save_location": null,
@@ -58,7 +57,7 @@ var starting_player_data = {
 	"energy": 10,
 	"hotbar": {
 		"0": ["wood sword", 1, 10],
-#		"1": ["gold axe", 1, 100],
+		"1": ["blueprint", 1, null],
 		"4": ["bow", 1, 50],
 		"2": ["arrow", 999, null],
 		"6": ["wind staff", 1, null],
@@ -77,8 +76,8 @@ var starting_player_data = {
 			"19": ["stone", 999, null],
 			"17": ["cloth", 999, null],
 #			"16": ["wood", 500, null],
-#			"16": ["iron ingot", 999, null],
-#			"15": ["bronze ingot", 999, null],
+			"16": ["iron ingot", 999, null],
+			"15": ["bronze ingot", 999, null],
 #			"13": ["apple seeds", 99, null],
 #			"12": ["cherry seeds", 99, null],
 #			"14": ["plum seeds", 99, null],

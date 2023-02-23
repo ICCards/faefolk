@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://drxqi2l1pd8af"]
+[gd_scene load_steps=19 format=3 uid="uid://drxqi2l1pd8af"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" id="1_ecmi3"]
 [ext_resource type="Texture2D" uid="uid://ctrqx2ip8xuv6" path="res://Assets/Images/User interface/buttons-icons/locked slot.png" id="3"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://cx3b4o2xigr66" path="res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.tscn" id="15_ehd48"]
 [ext_resource type="Texture2D" uid="uid://dr7rxljxkqsao" path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" id="16"]
 [ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="16_kdmwg"]
-[ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="17"]
 [ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="17_2uaad"]
 [ext_resource type="Texture2D" uid="uid://dd2gw6p18itnq" path="res://Characters/Human/male/IDLE/assets/down/pants/pants.png" id="18"]
 [ext_resource type="Texture2D" uid="uid://cjro8w1gc4g0u" path="res://Characters/Human/male/IDLE/assets/down/shirts/shirt.png" id="19"]
@@ -137,7 +136,6 @@ expand_mode = 1
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 modulate = Color(0.85, 0.85, 0.85, 1)
-material = ExtResource("17")
 position = Vector2(397, 327)
 scale = Vector2(3.5, 3.5)
 script = ExtResource("8_f7upd")
@@ -148,7 +146,7 @@ use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("8")
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="Legs" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
@@ -160,41 +158,41 @@ use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("16")
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="Arms" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("11")
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="Pants" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("18")
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="Shirts" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("19")
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="Accessory" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="Shoes" type="Sprite2D" parent="CompositeSprites"]
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("20")
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="ToolEquipped" type="Sprite2D" parent="CompositeSprites"]
 position = Vector2(0, -16)

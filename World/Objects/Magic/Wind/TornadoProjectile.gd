@@ -59,7 +59,7 @@ func stop_trail_particles():
 func fade_out_sound():
 	var tween = get_tree().create_tween()
 	tween.tween_property(sound_effects, "volume_db", -80, 3.0)
-	tween.tween_property($PointLight2D, "color", Color("00ffffff"), 3.0)
+	tween.tween_property($PointLight2D, "energy", 0.0, 3.0)
 
 func _on_Timer_timeout():
 	destroy()

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dktjb7tf2s1cg" path="res://Assets/Images/tree_sets/birch/growing/sapling.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd" id="1_ttu3h"]
 [ext_resource type="PackedScene" uid="uid://cx276tgkqafh7" path="res://World/Objects/Misc/ColorIndicator.tscn" id="2_57rwy"]
-[ext_resource type="Texture2D" uid="uid://563y8ineit7c" path="res://Assets/Images/inventory_icons/Forage/red clam.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dl5ahjyryox" path="res://Assets/Images/placable_object_preview/foundation.png" id="3_ydjna"]
 [ext_resource type="Texture2D" uid="uid://rsf1ok356wcn" path="res://Assets/Images/craftable object preview/wood gate.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://et4a5mhdh22" path="res://Assets/Images/Forage/flower/sunflower.png" id="6"]
 
@@ -15,11 +15,15 @@ script = ExtResource("1_ttu3h")
 [node name="ItemToPlace" type="TextureRect" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.627451)
-offset_right = 32.0
-offset_bottom = 32.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 16.0
+offset_bottom = 16.0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource("3")
+texture = ExtResource("3_ydjna")
+stretch_mode = 4
 
 [node name="GateToPlace" type="TextureRect" parent="."]
 visible = false

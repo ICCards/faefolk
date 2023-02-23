@@ -233,7 +233,7 @@ shape = SubResource("20")
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.9
+energy = 0.7
 texture = ExtResource("13")
 texture_scale = 0.3
 

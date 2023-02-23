@@ -1,14 +1,87 @@
-[gd_scene load_steps=3 format=3 uid="uid://doos37av7y3fa"]
+[gd_scene load_steps=14 format=3 uid="uid://doos37av7y3fa"]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Effects/WateringCan.gd" id="1_0x02j"]
+[ext_resource type="Texture2D" uid="uid://dipr87ylt5dme" path="res://Assets/Images/Animations/watering can/watering can.png" id="1_udplt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xi7mn"]
+atlas = ExtResource("1_udplt")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sc5t"]
+atlas = ExtResource("1_udplt")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1s4h"]
+atlas = ExtResource("1_udplt")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqdh1"]
+atlas = ExtResource("1_udplt")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23fuc"]
+atlas = ExtResource("1_udplt")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrahn"]
+atlas = ExtResource("1_udplt")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc04v"]
+atlas = ExtResource("1_udplt")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp4wa"]
+atlas = ExtResource("1_udplt")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6uvd"]
+atlas = ExtResource("1_udplt")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng1ms"]
+atlas = ExtResource("1_udplt")
+region = Rect2(144, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="11"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xi7mn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sc5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1s4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqdh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23fuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrahn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lc04v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fp4wa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6uvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ng1ms")
+}],
+"loop": false,
+"name": &"play",
+"speed": 5.0
+}]
 
 [node name="WateringCan" type="AnimatedSprite2D"]
-position = Vector2(16, 16)
-scale = Vector2(2, 2)
 sprite_frames = SubResource("11")
-animation = &""
-frame = 4
+animation = &"play"
 script = ExtResource("1_0x02j")

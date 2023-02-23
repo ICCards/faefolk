@@ -3,10 +3,15 @@
 [ext_resource type="Script" path="res://World/Objects/Nature/Effects/UpgradeBuilding.gd" id="1_8p1h2"]
 
 [sub_resource type="SpriteFrames" id="13"]
-animations = []
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"play",
+"speed": 5.0
+}]
 
 [node name="UpgradeBuilding" type="AnimatedSprite2D"]
 z_index = 1
 sprite_frames = SubResource("13")
-animation = &""
+animation = &"play"
 script = ExtResource("1_8p1h2")

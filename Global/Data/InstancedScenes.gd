@@ -97,22 +97,23 @@ func player_hit_effect(amt: int, pos: Vector2):
 # Effects #
 func play_watering_can_effect(loc):
 	var wateringCanEffect = WateringCanEffect.instantiate()
-	wateringCanEffect.global_position = loc*32 + Vector2(16,16)
+	wateringCanEffect.global_position = loc*16 + Vector2i(8,8)
 	Server.world.call_deferred("add_child", wateringCanEffect)
 	
 func play_hoed_dirt_effect(loc):
 	var hoedDirtEffect = HoedDirtEffect.instantiate()
-	hoedDirtEffect.global_position = loc*32 + Vector2(16,20)
+	hoedDirtEffect.global_position = loc*16 + Vector2i(8,10)
 	Server.world.call_deferred("add_child", hoedDirtEffect)
 
 func play_upgrade_building_effect(loc):
-	var upgradeBuildingEffect = UpgradeBuildingEffect.instantiate()
-	upgradeBuildingEffect.global_position = loc*32 + Vector2(16,16)
-	Server.world.call_deferred("add_child", upgradeBuildingEffect)
+	pass # FUCKED
+#	var upgradeBuildingEffect = UpgradeBuildingEffect.instantiate()
+#	upgradeBuildingEffect.global_position = loc*32 + Vector2i(16,16)
+#	Server.world.call_deferred("add_child", upgradeBuildingEffect)
 	
 func play_remove_building_effect(loc):
 	var removeBuildingEffect = RemoveBuildingEffect.instantiate()
-	removeBuildingEffect.global_position = loc*32 + Vector2(16,16)
+	removeBuildingEffect.global_position = loc*16 + Vector2i(8,8)
 	Server.world.call_deferred("add_child", removeBuildingEffect)
 	
 func find_mst(nodes):

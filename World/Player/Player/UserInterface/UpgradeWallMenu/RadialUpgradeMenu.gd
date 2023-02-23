@@ -183,7 +183,7 @@ func remove_materials(index):
 		3:
 			PlayerData.remove_material("iron ingot", 25)
 		4:
-			pass # de,olish
+			pass # demolish
 			
 
 func return_valid_building_upgrade(index):

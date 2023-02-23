@@ -1,76 +1,85 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=13 format=3 uid="uid://dh7qoqj6wpcf8"]
 
-[ext_resource path="res://World3D/Player/Player/UserInterface/RadialBuildingMenu/radial_menu_item.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World3D/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=3]
-[ext_resource path="res://Assets/Images/User interface/radial menus/icons/ceiling.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/Images/User interface/radial menus/icons/wall.png" type="Texture2D" id=5]
-[ext_resource path="res://Assets/Images/User interface/radial menus/middle-circle.png" type="Texture2D" id=6]
-[ext_resource path="res://Assets/Images/User interface/radial menus/icons/stairs.png" type="Texture2D" id=7]
-[ext_resource path="res://Assets/Images/User interface/radial menus/icons/foundation.png" type="Texture2D" id=8]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.gd" id="1_2qhwh"]
+[ext_resource type="PackedScene" uid="uid://73n5be64a2bw" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/radial_menu_item.tscn" id="3_hiluw"]
+[ext_resource type="Texture2D" uid="uid://dljv33ye80fsp" path="res://Assets/Images/User interface/radial menus/icons/ceiling.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bcc0o8i6a6ka4" path="res://Assets/Images/User interface/radial menus/icons/wall.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://hb7xol3bk3t5" path="res://Assets/Images/User interface/radial menus/middle-circle.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://caqscjpd5joa6" path="res://Assets/Images/User interface/radial menus/icons/stairs.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://drfl865l0khrd" path="res://Assets/Images/User interface/radial menus/icons/foundation.png" id="8"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="8_lj53a"]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.133333, 0.133333, 0.137255, 0.568627 )
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "set active"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("0/button:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "set disabled"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("0/button:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "zoom"
 length = 0.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.4 ),
-"transitions": PackedFloat32Array( 0.329877, 1 ),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.329877, 1),
 "update": 0,
-"values": [ Vector2( 0.6, 0.6 ), Vector2( 0.9, 0.9 ) ]
+"values": [Vector2(0.6, 0.6), Vector2(0.9, 0.9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_djf0m"]
+_data = {
+"set active": SubResource("3"),
+"set disabled": SubResource("4"),
+"zoom": SubResource("2")
 }
 
 [node name="RadialBuildingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-script = ExtResource( 2 )
+script = ExtResource("1_2qhwh")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
 
 [node name="Circle" type="Control" parent="."]
+anchors_preset = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -80,22 +89,9 @@ offset_top = -24.0
 offset_right = 1.0
 offset_bottom = -24.0
 mouse_filter = 2
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="0" parent="Circle" instance=ExtResource( 1 )]
-
-[node name="1" parent="Circle" instance=ExtResource( 1 )]
-rotation = 90.0
-
-[node name="2" parent="Circle" instance=ExtResource( 1 )]
-rotation = 180.0
-
-[node name="3" parent="Circle" instance=ExtResource( 1 )]
-rotation = 270.0
 
 [node name="Middle-circle" type="TextureRect" parent="Circle"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -104,53 +100,66 @@ offset_left = -336.0
 offset_top = -336.0
 offset_right = 112.0
 offset_bottom = 112.0
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2(1.5, 1.5)
 mouse_filter = 2
-texture = ExtResource( 6 )
+texture = ExtResource("6")
+
+[node name="0" parent="Circle" instance=ExtResource("3_hiluw")]
+
+[node name="1" parent="Circle" instance=ExtResource("3_hiluw")]
+rotation = 1.5708
+
+[node name="2" parent="Circle" instance=ExtResource("3_hiluw")]
+rotation = 3.14159
+
+[node name="3" parent="Circle" instance=ExtResource("3_hiluw")]
+rotation = 4.71239
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Circle"]
-"anims/set active" = SubResource( 3 )
-"anims/set disabled" = SubResource( 4 )
-anims/zoom = SubResource( 2 )
+libraries = {
+"": SubResource("AnimationLibrary_djf0m")
+}
 
 [node name="Icons" type="Control" parent="Circle"]
-scale = Vector2( 1.5, 1.5 )
+anchors_preset = 0
+scale = Vector2(1.5, 1.5)
 mouse_filter = 2
 
 [node name="Wall" type="Sprite2D" parent="Circle/Icons"]
-position = Vector2( 0, -132 )
-texture = ExtResource( 5 )
+position = Vector2(0, -132)
+texture = ExtResource("5")
 
 [node name="Foundation" type="Sprite2D" parent="Circle/Icons"]
-position = Vector2( 132, 0 )
-texture = ExtResource( 8 )
+position = Vector2(132, 0)
+texture = ExtResource("8")
 
 [node name="Stairs" type="Sprite2D" parent="Circle/Icons"]
-position = Vector2( 0, 132 )
-texture = ExtResource( 7 )
+position = Vector2(0, 132)
+texture = ExtResource("7")
 
 [node name="Ceiling" type="Sprite2D" parent="Circle/Icons"]
-position = Vector2( -132, 0 )
-texture = ExtResource( 4 )
+position = Vector2(-132, 0)
+texture = ExtResource("4")
 
 [node name="Title" type="Label" parent="."]
+layout_mode = 0
 offset_left = 494.0
 offset_top = 283.0
-offset_right = 984.0
-offset_bottom = 344.0
-scale = Vector2( 0.6, 0.6 )
-theme = ExtResource( 3 )
+offset_right = 1964.0
+offset_bottom = 467.0
+scale = Vector2(0.2, 0.2)
+theme = ExtResource("8_lj53a")
 text = "Wall:"
-align = 1
+horizontal_alignment = 1
 
 [node name="Resources" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 494.0
 offset_top = 345.0
-offset_right = 1229.0
-offset_bottom = 408.0
-scale = Vector2( 0.4, 0.4 )
-theme = ExtResource( 3 )
+offset_right = 2454.0
+offset_bottom = 535.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("8_lj53a")
 bbcode_enabled = true
-text = "[center]1 x Wood(total wood)[/center]"
 text = "1 x Wood(total wood)"
 scroll_active = false

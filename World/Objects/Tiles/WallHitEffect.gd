@@ -11,7 +11,7 @@ func _ready():
 	$Wall.texture = load("res://Assets/Tilesets/walls/hit effects/" + tier + "/" + str(autotile_cord.x+1)  + ".png")
 	$AnimationPlayer.play("hit")
 	await $AnimationPlayer.animation_finished
-	Tiles.wall_tiles.set_cell(location.x, location.y, tiers.find(tier), false, false, false, autotile_cord )
+	#Tiles.wall_tiles.set_cell(location.x, location.y, tiers.find(tier), false, false, false, autotile_cord )
 	queue_free()
 
 
@@ -19,5 +19,5 @@ func restart():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 	await $AnimationPlayer.animation_finished
-	Tiles.wall_tiles.set_cell(location.x, location.y, tiers.find(tier), false, false, false, autotile_cord )
+	#Tiles.wall_tiles.set_cell(location.x, location.y, tiers.find(tier), false, false, false, autotile_cord )
 	queue_free()

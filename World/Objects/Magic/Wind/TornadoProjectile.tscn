@@ -268,7 +268,7 @@ autostart = true
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(18, -67)
 scale = Vector2(0.71875, 0.746094)
-energy = 0.0
+energy = 0.7
 shadow_enabled = true
 texture = ExtResource("5")
 
