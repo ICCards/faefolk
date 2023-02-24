@@ -167,10 +167,10 @@ func return_if_valid_wall_cell(_pos, _map):
 	
 	
 func isCenterBitmaskTile(_pos, _map):
-	if _map.get_cellv(_pos + Vector2(0,1)) != -1 and _map.get_cellv(_pos + Vector2(0,-1)) != -1 and \
-	_map.get_cellv(_pos + Vector2(1,0)) != -1 and _map.get_cellv(_pos + Vector2(-1,0)) != -1 and \
-	_map.get_cellv(_pos + Vector2(1,1)) != -1 and _map.get_cellv(_pos + Vector2(-1,1)) != -1 and \
-	_map.get_cellv(_pos + Vector2(-1,-1)) != -1 and _map.get_cellv(_pos + Vector2(1,-1)) != -1:
+	if _map.get_cell_atlas_coords(0,_pos+Vector2i(0,1)) != Vector2i(-1,-1) and _map.get_cell_atlas_coords(0,_pos+Vector2i(0,-1)) != Vector2i(-1,-1) and \
+	_map.get_cell_atlas_coords(0,_pos+Vector2i(1,0)) != Vector2i(-1,-1) and _map.get_cell_atlas_coords(0,_pos+Vector2i(-1,0)) != Vector2i(-1,-1) and \
+	_map.get_cell_atlas_coords(0,_pos+Vector2i(1,1)) != Vector2i(-1,-1) and _map.get_cell_atlas_coords(0,_pos+Vector2i(-1,1)) != Vector2i(-1,-1) and \
+	_map.get_cell_atlas_coords(0,_pos+Vector2i(-1,-1)) != Vector2i(-1,-1) and _map.get_cell_atlas_coords(0,_pos+Vector2i(1,-1)) != Vector2i(-1,-1):
 		return true
 	return false
 	
@@ -192,18 +192,18 @@ func _set_cell(tilemap, x, y, id):
 
 
 func is_well_tile(loc, direction):
-	match direction:
-		"UP":
-			if object_tiles.get_cellv(loc) == 75 or object_tiles.get_cellv(loc+Vector2(-1,0)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,0)) == 75:
-				return true
-		"DOWN":
-			if object_tiles.get_cellv(loc+Vector2(0,1)) == 75 or object_tiles.get_cellv(loc+Vector2(-1,1)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
-				return true
-		"LEFT":
-			if object_tiles.get_cellv(loc+Vector2(-2,0)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
-				return true
-		"RIGHT":
-			if object_tiles.get_cellv(loc) == 75 or object_tiles.get_cellv(loc+Vector2(0,1)) == 75:
-				return true
+#	match direction:
+#		"UP":
+#			if object_tiles.get_cellv(loc) == 75 or object_tiles.get_cellv(loc+Vector2(-1,0)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,0)) == 75:
+#				return true
+#		"DOWN":
+#			if object_tiles.get_cellv(loc+Vector2(0,1)) == 75 or object_tiles.get_cellv(loc+Vector2(-1,1)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
+#				return true
+#		"LEFT":
+#			if object_tiles.get_cellv(loc+Vector2(-2,0)) == 75 or object_tiles.get_cellv(loc+Vector2(-2,1)) == 75:
+#				return true
+#		"RIGHT":
+#			if object_tiles.get_cellv(loc) == 75 or object_tiles.get_cellv(loc+Vector2(0,1)) == 75:
+#				return true
 	return false
 

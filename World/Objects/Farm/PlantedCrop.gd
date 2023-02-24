@@ -13,15 +13,15 @@ var bodyEnteredFlag = false
 var object_name = "crop"
 
 func _ready():
-	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + return_phase()  + ".png")
+	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.return_crop_atlas_tile(return_phase()))
 	MapData.connect("refresh_crops",Callable(self,"refresh_image"))
-	
+
 
 func refresh_image():
-	in_regrowth_phase = MapData.world["crops"][name]["rp"]
-	days_until_harvest = MapData.world["crops"][name]["dh"]
-	days_without_water = MapData.world["crops"][name]["dww"]
-	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + return_phase()  + ".png")
+	in_regrowth_phase = MapData.world["crop"][name]["rp"]
+	days_until_harvest = MapData.world["crop"][name]["dh"]
+	days_without_water = MapData.world["crop"][name]["dww"]
+	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.return_crop_atlas_tile(return_phase()))
 
 
 func return_phase():

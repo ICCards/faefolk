@@ -137,17 +137,17 @@ animations = [{
 "texture": SubResource("AtlasTexture_3kie4")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"loop",
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="19"]
-size = Vector2(3, 3)
+[sub_resource type="CircleShape2D" id="CircleShape2D_yy0xp"]
+radius = 1.0
 
 [sub_resource type="CapsuleShape2D" id="20"]
 resource_local_to_scene = true
-radius = 9.53675e-06
-height = 1.90735e-05
+radius = 4.0
+height = 8.0
 
 [node name="FireProjectile" type="CharacterBody2D"]
 collision_layer = 0
@@ -211,11 +211,10 @@ color = Color(0.996078, 0.0784314, 0.00784314, 1)
 modulate = Color(1.2, 1.2, 1.2, 1)
 position = Vector2(1, -5)
 sprite_frames = SubResource("18")
-animation = &"new_animation"
-frame_progress = 0.0477033
+animation = &"loop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("19")
+shape = SubResource("CircleShape2D_yy0xp")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(-17, 0)

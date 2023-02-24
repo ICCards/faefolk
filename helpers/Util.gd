@@ -58,27 +58,27 @@ func string_to_vector2(string) -> Vector2:
 
 func capitalizeFirstLetter(string) -> String:
 	return string.left(1).to_upper() + string.substr(1,-1)
-
+	
 func set_swing_position(_pos, _direction):
 	match _direction:
 		"UP":
-			_pos += Vector2(0, -32)
+			_pos += Vector2(0, -16)
 		"DOWN":
-			_pos += Vector2(0, 20)
+			_pos += Vector2(0, 10)
 		"LEFT":
-			_pos += Vector2(-32, -8)
+			_pos += Vector2(-16, -4)
 		"RIGHT":
-			_pos += Vector2(32, -8)
+			_pos += Vector2(16, -4)
 	return _pos
 	
 func returnAdjustedWateringCanPariclePos(direction):
 	match direction:
 		"RIGHT":
-			return Vector2(28, -20)
+			return Vector2(14, -10)
 		"LEFT":
-			return Vector2(-28, -20)
+			return Vector2(-14, -10)
 		"DOWN":
-			return Vector2(0, -15)
+			return Vector2(0, -8)
 			
 func returnCategoryColor(category):
 	match category:

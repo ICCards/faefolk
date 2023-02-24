@@ -350,7 +350,6 @@ position = Vector2(7, -14)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("17")
 animation = &""
-frame = 7
 
 [node name="BackBreak" type="AnimatedSprite2D" parent="."]
 visible = false

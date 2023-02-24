@@ -83,7 +83,7 @@ func place_seed_in_world(id, item_name, location, days_until_harvest, days_witho
 	plantedCrop.days_without_water = days_without_water
 	plantedCrop.in_regrowth_phase = in_regrowth_phase
 	PlaceableObjects.call_deferred("add_child", plantedCrop, true)
-	plantedCrop.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
+	plantedCrop.global_position = Tiles.valid_tiles.map_to_local(location) #+ Vector2(16, 16)
 
 
 func place_building_object_in_world(id, item_name, variety , location, health):

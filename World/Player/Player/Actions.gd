@@ -289,7 +289,7 @@ func sleep(sleeping_bag_direction, sleeping_bag_pos):
 func show_placable_object(item_name, item_category):
 	if Server.world.name == "Overworld":
 		if item_category == "Seed":
-			item_name.erase(item_name.length() - 6, 6)
+			item_name.left(-6)
 		if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
 			var placeObject = PlaceObjectScene.instantiate()
 			placeObject.name = "PlaceObject"

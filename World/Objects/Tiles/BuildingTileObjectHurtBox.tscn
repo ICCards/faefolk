@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://ckal8dga4akml" path="res://Assets/Images/Misc/watering can progress indicator.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://byuw4rfvgiojf" path="res://Assets/Images/Misc/selected tile.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://cyy628f2y6in5" path="res://Assets/Tilesets/walls/walls/armored.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://6yn3jmy5jo6e" path="res://Assets/Tilesets/walls/walls/armored.png" id="5"]
 
 [sub_resource type="CircleShape2D" id="7"]
 radius = 5.0
@@ -77,6 +77,7 @@ _data = {
 script = ExtResource("1_dnmp0")
 
 [node name="DetectObjectOverPathBox" type="Area2D" parent="."]
+visible = false
 position = Vector2(1.90735e-06, 0)
 collision_layer = 8192
 collision_mask = 8192
@@ -88,13 +89,13 @@ shape = SubResource("7")
 position = Vector2(1.90735e-06, 0)
 collision_layer = 262168
 collision_mask = 0
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 light_mask = 0
 shape = SubResource("1")
 
 [node name="HammerRepairBox" type="Area2D" parent="."]
+visible = false
 position = Vector2(1.90735e-06, 0)
 collision_layer = 16384
 collision_mask = 0

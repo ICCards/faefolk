@@ -13,6 +13,7 @@ func _physics_process(delta):
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
+	$Projectile.play("loop")
 	if is_hostile_projectile:
 		$Hitbox.set_collision_mask(2+8+16+128)
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Fire/cast.mp3")

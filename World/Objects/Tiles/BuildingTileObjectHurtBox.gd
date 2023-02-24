@@ -131,6 +131,7 @@ func remove_foundation():
 		queue_free()
 
 func _on_HurtBox_area_entered(area):
+	print("AREA ENTERED")
 	if not destroyed:
 		if area.name == "AxePickaxeSwing":
 			Stats.decrease_tool_health()

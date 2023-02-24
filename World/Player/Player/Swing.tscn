@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6klv52y0uy8u"]
+[gd_scene load_steps=6 format=3 uid="uid://bbsqb6cw7rd7a"]
 
-[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/Swinging.gd" id="1_q6ry1"]
+[ext_resource type="Script" path="res://World/Player/Player/Swing.gd" id="1_3e7re"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_t0hnv"]
 
 [sub_resource type="RectangleShape2D" id="2"]
@@ -11,14 +11,13 @@ radius = 15.0
 height = 38.0
 
 [sub_resource type="CapsuleShape2D" id="28"]
-radius = 14.2222
-height = 28.4444
+radius = 23.0
+height = 46.0
 
 [node name="Swing" type="Node2D"]
-script = ExtResource("1_q6ry1")
+script = ExtResource("1_3e7re")
 
 [node name="AxePickaxeSwing" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("2_t0hnv")
@@ -27,28 +26,28 @@ script = ExtResource("2_t0hnv")
 shape = SubResource("2")
 
 [node name="SwordSwing" type="Area2D" parent="."]
+visible = false
+position = Vector2(13, -12)
 collision_layer = 0
 collision_mask = 2304
 script = ExtResource("2_t0hnv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing"]
-position = Vector2(14, -10)
 shape = SubResource("69")
 disabled = true
 
 [node name="ScytheSwing" type="Area2D" parent="."]
 visible = false
+position = Vector2(13, -12)
 collision_layer = 0
 collision_mask = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScytheSwing"]
-position = Vector2(0, -67)
 rotation = 1.5708
 shape = SubResource("28")
 disabled = true
 
 [node name="WateringCanParticles1" type="CPUParticles2D" parent="."]
-visible = false
 modulate = Color(0.196078, 0.435294, 0.937255, 1)
 position = Vector2(13, -12)
 scale = Vector2(2, 2)
@@ -60,7 +59,6 @@ emission_sphere_radius = 1.0
 gravity = Vector2(0, 70)
 
 [node name="WateringCanParticles2" type="CPUParticles2D" parent="."]
-visible = false
 modulate = Color(0, 0.690196, 0.901961, 1)
 position = Vector2(13, -12)
 scale = Vector2(2, 2)

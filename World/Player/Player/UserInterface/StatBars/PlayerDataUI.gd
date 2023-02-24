@@ -72,6 +72,7 @@ func return_adjusted_time_string(hours,minutes):
 	elif hours == 24:
 		return str(hours-12) + ":" + minutes + "a.m."
 
+
 func advance_clock_icon():
 	clock_icon_index += 1
 	if clock_icon_index == 9:
@@ -79,11 +80,11 @@ func advance_clock_icon():
 	$DateTime/ClockIcon.texture = load("res://Assets/Images/User interface/DateTime/clock icons/"+str(clock_icon_index)+".png")
 
 
-
 func _on_advance_time_timeout():
 	if Server.isLoaded:
 		PlayerData.player_data["time_minutes"] += game_time_speed_per_second
 		if PlayerData.player_data["time_minutes"] == 60:
+			PlayerData.emit_signal("set_day")
 			PlayerData.player_data["time_minutes"] = 0
 			PlayerData.player_data["time_hours"] += 1
 			if PlayerData.player_data["time_hours"] == 6:

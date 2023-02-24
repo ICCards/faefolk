@@ -1,19 +1,371 @@
-[gd_scene load_steps=10 format=3 uid="uid://8urgulfeikba"]
+[gd_scene load_steps=20 format=3 uid="uid://8urgulfeikba"]
 
 [ext_resource type="AudioStream" uid="uid://2u73yye23mpv" path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Farm/PlantedCrop.gd" id="1_37wdp"]
-[ext_resource type="Texture2D" uid="uid://cjrunxgi4b1we" path="res://Assets/Images/crop_sets/wheat/1.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://b2foho3vp0sfm" path="res://Assets/Images/Animations/plant/plant break.png" id="2_l6djf"]
+[ext_resource type="Texture2D" uid="uid://b07sxih7d5ic0" path="res://Assets/Tilesets/Terrain/CL_Crops_Mining.png" id="2_m6puv"]
 
 [sub_resource type="CircleShape2D" id="13"]
-radius = 48.0
+radius = 32.0156
 
 [sub_resource type="CircleShape2D" id="2"]
 
 [sub_resource type="RectangleShape2D" id="4"]
 size = Vector2(30, 30)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gme2o"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd44x"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndjaw"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sr0m"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cij1f"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogbbx"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2meot"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(96, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="12"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gme2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd44x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndjaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sr0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cij1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogbbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2meot")
+}],
+"loop": false,
+"name": &"havest",
+"speed": 5.0
+}]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_enrme"]
+texture = ExtResource("2_m6puv")
+22:1/0 = 0
+23:1/0 = 0
+24:0/size_in_atlas = Vector2i(1, 2)
+24:0/0 = 0
+24:0/0/texture_origin = Vector2i(0, 8)
+25:0/size_in_atlas = Vector2i(1, 2)
+25:0/0 = 0
+25:0/0/texture_origin = Vector2i(0, 8)
+26:0/0 = 0
+23:0/0 = 0
+23:2/0 = 0
+22:3/0 = 0
+23:3/0 = 0
+24:2/size_in_atlas = Vector2i(1, 2)
+24:2/0 = 0
+24:2/0/texture_origin = Vector2i(0, 8)
+25:2/size_in_atlas = Vector2i(1, 2)
+25:2/0 = 0
+25:2/0/texture_origin = Vector2i(0, 8)
+26:2/0 = 0
+23:4/0 = 0
+22:5/0 = 0
+23:5/0 = 0
+24:4/size_in_atlas = Vector2i(1, 2)
+24:4/0 = 0
+24:4/0/texture_origin = Vector2i(0, 8)
+25:4/size_in_atlas = Vector2i(1, 2)
+25:4/0 = 0
+25:4/0/texture_origin = Vector2i(0, 8)
+26:4/0 = 0
+23:6/0 = 0
+22:7/0 = 0
+23:7/0 = 0
+25:6/size_in_atlas = Vector2i(1, 2)
+25:6/0 = 0
+25:6/0/texture_origin = Vector2i(0, 8)
+26:6/0 = 0
+23:8/0 = 0
+22:9/0 = 0
+23:9/0 = 0
+24:8/size_in_atlas = Vector2i(1, 2)
+24:8/0 = 0
+24:8/0/texture_origin = Vector2i(0, 8)
+25:8/size_in_atlas = Vector2i(1, 2)
+25:8/0 = 0
+25:8/0/texture_origin = Vector2i(0, 8)
+26:8/0 = 0
+23:10/0 = 0
+22:11/0 = 0
+23:11/0 = 0
+24:10/size_in_atlas = Vector2i(1, 2)
+24:10/0 = 0
+24:10/0/texture_origin = Vector2i(0, 8)
+25:10/size_in_atlas = Vector2i(1, 2)
+25:10/0 = 0
+25:10/0/texture_origin = Vector2i(0, 8)
+26:10/0 = 0
+23:12/0 = 0
+22:13/0 = 0
+23:13/0 = 0
+24:13/0 = 0
+25:13/0 = 0
+26:12/0 = 0
+23:14/0 = 0
+22:15/0 = 0
+23:15/0 = 0
+24:15/0 = 0
+25:15/0 = 0
+26:14/0 = 0
+24:6/size_in_atlas = Vector2i(1, 2)
+24:6/0 = 0
+24:6/0/texture_origin = Vector2i(0, 8)
+29:0/0 = 0
+28:1/0 = 0
+29:1/0 = 0
+30:0/size_in_atlas = Vector2i(1, 2)
+30:0/0 = 0
+30:0/0/texture_origin = Vector2i(0, 8)
+31:0/size_in_atlas = Vector2i(1, 2)
+31:0/0 = 0
+31:0/0/texture_origin = Vector2i(0, 8)
+32:0/size_in_atlas = Vector2i(1, 2)
+32:0/0 = 0
+32:0/0/texture_origin = Vector2i(0, 8)
+33:0/size_in_atlas = Vector2i(1, 2)
+33:0/0 = 0
+33:0/0/texture_origin = Vector2i(0, 8)
+34:0/0 = 0
+29:2/0 = 0
+28:3/0 = 0
+29:3/0 = 0
+30:2/size_in_atlas = Vector2i(1, 2)
+30:2/0 = 0
+30:2/0/texture_origin = Vector2i(0, 8)
+31:2/size_in_atlas = Vector2i(1, 2)
+31:2/0 = 0
+31:2/0/texture_origin = Vector2i(0, 8)
+32:2/size_in_atlas = Vector2i(1, 2)
+32:2/0 = 0
+32:2/0/texture_origin = Vector2i(0, 8)
+33:2/size_in_atlas = Vector2i(1, 2)
+33:2/0 = 0
+33:2/0/texture_origin = Vector2i(0, 8)
+34:2/0 = 0
+29:4/0 = 0
+28:5/0 = 0
+29:5/0 = 0
+30:4/size_in_atlas = Vector2i(1, 2)
+30:4/0 = 0
+30:4/0/texture_origin = Vector2i(0, 8)
+31:4/size_in_atlas = Vector2i(1, 2)
+31:4/0 = 0
+31:4/0/texture_origin = Vector2i(0, 8)
+32:4/size_in_atlas = Vector2i(1, 2)
+32:4/0 = 0
+32:4/0/texture_origin = Vector2i(0, 8)
+33:4/size_in_atlas = Vector2i(1, 2)
+33:4/0 = 0
+33:4/0/texture_origin = Vector2i(0, 8)
+34:4/0 = 0
+29:6/0 = 0
+28:7/0 = 0
+29:7/0 = 0
+30:6/size_in_atlas = Vector2i(1, 2)
+30:6/0 = 0
+30:6/0/texture_origin = Vector2i(0, 8)
+31:6/size_in_atlas = Vector2i(1, 2)
+31:6/0 = 0
+31:6/0/texture_origin = Vector2i(0, 8)
+32:6/size_in_atlas = Vector2i(1, 2)
+32:6/0 = 0
+32:6/0/texture_origin = Vector2i(0, 8)
+33:6/size_in_atlas = Vector2i(1, 2)
+33:6/0 = 0
+33:6/0/texture_origin = Vector2i(0, 8)
+34:6/0 = 0
+29:8/0 = 0
+28:9/0 = 0
+29:9/0 = 0
+30:8/size_in_atlas = Vector2i(1, 2)
+30:8/0 = 0
+30:8/0/texture_origin = Vector2i(0, 8)
+31:8/size_in_atlas = Vector2i(1, 2)
+31:8/0 = 0
+31:8/0/texture_origin = Vector2i(0, 8)
+32:8/size_in_atlas = Vector2i(1, 2)
+32:8/0 = 0
+32:8/0/texture_origin = Vector2i(0, 8)
+33:8/size_in_atlas = Vector2i(1, 2)
+33:8/0 = 0
+33:8/0/texture_origin = Vector2i(0, 8)
+34:8/0 = 0
+29:10/0 = 0
+28:11/0 = 0
+29:11/0 = 0
+30:11/0 = 0
+31:11/0 = 0
+32:11/0 = 0
+33:11/0 = 0
+34:10/0 = 0
+29:12/0 = 0
+28:13/0 = 0
+29:13/0 = 0
+30:12/size_in_atlas = Vector2i(1, 2)
+30:12/0 = 0
+30:12/0/texture_origin = Vector2i(0, 8)
+31:12/size_in_atlas = Vector2i(1, 2)
+31:12/0 = 0
+31:12/0/texture_origin = Vector2i(0, 8)
+32:12/size_in_atlas = Vector2i(1, 2)
+32:12/0 = 0
+32:12/0/texture_origin = Vector2i(0, 8)
+33:12/0 = 0
+29:14/0 = 0
+28:15/0 = 0
+29:15/0 = 0
+30:15/0 = 0
+31:15/0 = 0
+32:15/0 = 0
+33:15/0 = 0
+34:14/0 = 0
+37:0/size_in_atlas = Vector2i(1, 2)
+37:0/0 = 0
+37:0/0/texture_origin = Vector2i(0, 8)
+38:0/size_in_atlas = Vector2i(1, 2)
+38:0/0 = 0
+38:0/0/texture_origin = Vector2i(0, 8)
+39:0/size_in_atlas = Vector2i(1, 2)
+39:0/0 = 0
+39:0/0/texture_origin = Vector2i(0, 8)
+40:0/size_in_atlas = Vector2i(1, 2)
+40:0/0 = 0
+40:0/0/texture_origin = Vector2i(0, 8)
+41:0/size_in_atlas = Vector2i(1, 2)
+41:0/0 = 0
+41:0/0/texture_origin = Vector2i(0, 8)
+42:0/size_in_atlas = Vector2i(1, 2)
+42:0/0 = 0
+42:0/0/texture_origin = Vector2i(0, 8)
+43:0/size_in_atlas = Vector2i(1, 2)
+43:0/0 = 0
+43:0/0/texture_origin = Vector2i(0, 8)
+44:0/0 = 0
+37:2/size_in_atlas = Vector2i(1, 2)
+37:2/0 = 0
+37:2/0/texture_origin = Vector2i(0, 8)
+38:2/size_in_atlas = Vector2i(1, 2)
+38:2/0 = 0
+38:2/0/texture_origin = Vector2i(0, 8)
+39:2/size_in_atlas = Vector2i(1, 2)
+39:2/0 = 0
+39:2/0/texture_origin = Vector2i(0, 8)
+40:2/size_in_atlas = Vector2i(1, 2)
+40:2/0 = 0
+40:2/0/texture_origin = Vector2i(0, 8)
+41:2/size_in_atlas = Vector2i(1, 2)
+41:2/0 = 0
+41:2/0/texture_origin = Vector2i(0, 8)
+42:2/size_in_atlas = Vector2i(1, 2)
+42:2/0 = 0
+42:2/0/texture_origin = Vector2i(0, 8)
+43:2/size_in_atlas = Vector2i(1, 2)
+43:2/0 = 0
+43:2/0/texture_origin = Vector2i(0, 8)
+44:2/0 = 0
+37:4/size_in_atlas = Vector2i(1, 2)
+37:4/0 = 0
+37:4/0/texture_origin = Vector2i(0, 8)
+38:4/size_in_atlas = Vector2i(1, 2)
+38:4/0 = 0
+38:4/0/texture_origin = Vector2i(0, 8)
+39:4/size_in_atlas = Vector2i(1, 2)
+39:4/0 = 0
+39:4/0/texture_origin = Vector2i(0, 8)
+40:4/size_in_atlas = Vector2i(1, 2)
+40:4/0 = 0
+40:4/0/texture_origin = Vector2i(0, 8)
+41:4/size_in_atlas = Vector2i(1, 2)
+41:4/0 = 0
+41:4/0/texture_origin = Vector2i(0, 8)
+42:4/size_in_atlas = Vector2i(1, 2)
+42:4/0 = 0
+42:4/0/texture_origin = Vector2i(0, 8)
+43:4/size_in_atlas = Vector2i(1, 2)
+43:4/0 = 0
+43:4/0/texture_origin = Vector2i(0, 8)
+44:4/0 = 0
+37:6/0 = 0
+36:7/0 = 0
+37:7/0 = 0
+38:7/0 = 0
+39:7/0 = 0
+40:7/0 = 0
+41:7/0 = 0
+42:7/0 = 0
+43:6/0 = 0
+37:8/0 = 0
+36:9/0 = 0
+37:9/0 = 0
+38:8/size_in_atlas = Vector2i(1, 2)
+38:8/0 = 0
+38:8/0/texture_origin = Vector2i(0, 8)
+39:8/size_in_atlas = Vector2i(1, 2)
+39:8/0 = 0
+39:8/0/texture_origin = Vector2i(0, 8)
+40:8/size_in_atlas = Vector2i(1, 2)
+40:8/0 = 0
+40:8/0/texture_origin = Vector2i(0, 8)
+41:8/size_in_atlas = Vector2i(1, 2)
+41:8/0 = 0
+41:8/0/texture_origin = Vector2i(0, 8)
+42:8/size_in_atlas = Vector2i(1, 2)
+42:8/0 = 0
+42:8/0/texture_origin = Vector2i(0, 8)
+43:8/0 = 0
+37:10/0 = 0
+36:11/0 = 0
+37:11/0 = 0
+38:10/size_in_atlas = Vector2i(1, 2)
+38:10/0 = 0
+38:10/0/texture_origin = Vector2i(0, 8)
+39:10/size_in_atlas = Vector2i(1, 2)
+39:10/0 = 0
+39:10/0/texture_origin = Vector2i(0, 8)
+40:10/size_in_atlas = Vector2i(1, 2)
+40:10/0 = 0
+40:10/0/texture_origin = Vector2i(0, 8)
+41:10/size_in_atlas = Vector2i(1, 2)
+41:10/0 = 0
+41:10/0/texture_origin = Vector2i(0, 8)
+42:10/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1wcyd"]
+sources/0 = SubResource("TileSetAtlasSource_enrme")
 
 [sub_resource type="Animation" id="3"]
 resource_name = "animate"
@@ -21,14 +373,14 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CropText:rotation")
+tracks/0/path = NodePath("Crop:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.45, 0.75, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0001, 0.15, 0.45, 0.75, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 6.0, -4.0, 2.0, -2.0, 0.0]
+"values": [0.0, 0.0, 0.139626, -0.10472, 0.0698132, -0.0349066, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ci831"]
@@ -43,16 +395,6 @@ script = ExtResource("1_37wdp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("13")
-
-[node name="CropText" type="TextureRect" parent="."]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_vertical = 0
-pivot_offset = Vector2(16, 64)
-mouse_filter = 2
-texture = ExtResource("3")
 
 [node name="PlayAnimBox" type="Area2D" parent="."]
 visible = false
@@ -78,16 +420,27 @@ scale = Vector2(3.5, 3.7)
 [node name="LeafEffect" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(0, -4)
-scale = Vector2(2, 2)
 sprite_frames = SubResource("12")
-animation = &""
+animation = &"havest"
+frame = 6
+frame_progress = 1.0
 
 [node name="RustleSound" type="AudioStreamPlayer2D" parent="."]
 visible = false
 position = Vector2(-16, 0)
 stream = ExtResource("1")
 volume_db = -24.0
+
+[node name="Crop" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 8)
+
+[node name="TileMap" type="TileMap" parent="Crop"]
+y_sort_enabled = true
+position = Vector2(-8, 2.08165e-12)
+tile_set = SubResource("TileSet_1wcyd")
+format = 2
+layer_0/y_sort_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

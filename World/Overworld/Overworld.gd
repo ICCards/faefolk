@@ -25,14 +25,16 @@ func set_valid_tiles():
 	for x in range(1000):
 		for y in range(1000):
 			$TerrainTiles/ValidTiles.set_cell(0,Vector2(x,y),0,Constants.VALID_TILE_ATLAS_CORD,0)
+#	print($TerrainTiles/ValidTiles.get_cell_atlas_coords(0,Vector2(0,0)))
+#	print($TerrainTiles/ValidTiles.get_cell_atlas_coords(0,Vector2(-1,0)))
 	Tiles.valid_tiles = $TerrainTiles/ValidTiles
 	Tiles.wall_tiles = $BuildingTiles/WallTiles
 	Tiles.foundation_tiles = $BuildingTiles/FoundationTiles
-#	Tiles.hoed_tiles = $FarmingTiles/HoedAutoTiles
-#	Tiles.watered_tiles = $FarmingTiles/WateredAutoTiles
-#	Tiles.ocean_tiles = $GeneratedTiles/ShallowOcean
+	Tiles.dirt_tiles = $TerrainTiles/Dirt
+	Tiles.hoed_tiles = $FarmingTiles/HoedTiles
+	Tiles.watered_tiles = $FarmingTiles/WateredTiles
+	Tiles.ocean_tiles = $TerrainTiles/Ocean
 #	Tiles.deep_ocean_tiles = $GeneratedTiles/DeepOcean
-#	Tiles.dirt_tiles = $GeneratedTiles/DirtTiles
 #	Tiles.wall_tiles = $PlacableTiles/WallTiles
 #	Tiles.selected_wall_tiles = $PlacableTiles/SelectedWallTiles
 #	Tiles.foundation_tiles = $PlacableTiles/FoundationTiles

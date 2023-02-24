@@ -82,6 +82,7 @@ animations = [{
 }]
 
 [node name="WateringCan" type="AnimatedSprite2D"]
+modulate = Color(1.2, 1.2, 1.2, 1)
 sprite_frames = SubResource("11")
 animation = &"play"
 script = ExtResource("1_0x02j")

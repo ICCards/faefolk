@@ -128,7 +128,7 @@ func set_dimensions():
 				$TreeSeedToPlace.show()
 			else:
 				$ItemToPlace.show()
-				$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
+				#$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
 				$ColorIndicator.tile_size =  Vector2(1,1)
 		WALL:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
@@ -409,7 +409,7 @@ func place_item_state():
 			place_object(item_name, null, location, "placable")
 
 func place_seed_state():
-	if Server.world.name == "World3D":
+	if Server.world.name == "Overworld":
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
 			if not Tiles.validate_forest_tiles(location) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
@@ -419,9 +419,9 @@ func place_seed_state():
 				$ColorIndicator.indicator_color = "Green"
 				$ColorIndicator.set_indicator_color()
 				if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-					place_object(item_name, null, location, "seed")	
+					place_object(item_name, null, location, "seed")
 		else: # crops
-			if Tiles.hoed_tiles.get_cellv(location) == -1 or Tiles.valid_tiles.get_cellv(location) != 0 or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+			if Tiles.hoed_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1) or not Tiles.validate_tiles(location,Vector2i(1,1)):
 				$ColorIndicator.indicator_color = "Red"
 				$ColorIndicator.set_indicator_color()
 			else:
@@ -474,6 +474,7 @@ func place_object(item_name, direction, location, type):
 				MapData.add_tree(id,{"l":str(location),"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
 				MapData.add_object_to_chunk("tree",location,id)
 			else:
+				item_name = item_name.left(-6)
 				var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
 				MapData.add_crop(id,{"n":item_name,"l":str(location),"dh":days_to_grow,"dww":0,"rp":false})
 				PlaceObject.place_seed_in_world(id, item_name, location, days_to_grow, 0, false)
