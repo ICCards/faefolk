@@ -2,15 +2,14 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 
-var item_name
-var location
+var item_name = "sunflower"
+var location 
 var harvested = false
 var first_placement
 var object_name = "forage"
 
 func _ready():
 	rng.randomize()
-	call_deferred("hide")
 	if item_name == "red clam" or item_name == "blue clam" or item_name == "pink clam":
 		Tiles.remove_valid_tiles(location)
 		$MovementCollision/CollisionShape2D.set_deferred("disabled", false)
@@ -20,11 +19,12 @@ func _ready():
 		Tiles.add_navigation_tiles(location)
 	set_forage_texture()
 
+
 func remove_from_world():
 	$MovementCollision.call_deferred("queue_free")
 	$CollisionShape2D.call_deferred("queue_free")
 	call_deferred("queue_free")
-	
+
 
 func set_forage_texture():
 	if item_name == "sunflower" or item_name == "dandelion" or item_name == "lily of the nile" or item_name == "poppy flower" or item_name == "tulip":

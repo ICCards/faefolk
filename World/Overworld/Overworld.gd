@@ -39,7 +39,7 @@ func set_valid_tiles():
 #	Tiles.selected_wall_tiles = $PlacableTiles/SelectedWallTiles
 #	Tiles.foundation_tiles = $PlacableTiles/FoundationTiles
 #	Tiles.selected_foundation_tiles = $PlacableTiles/SelectedFoundationTiles
-#	Tiles.object_tiles = $PlacableTiles/ObjectTiles
+	Tiles.object_tiles = $BuildingTiles/ObjectTiles
 #	Tiles.fence_tiles = $PlacableTiles/FenceTiles
 #	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 #	Tiles.forest_tiles = $GeneratedTiles/DarkGreenGrassTiles

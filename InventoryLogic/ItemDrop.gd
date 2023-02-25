@@ -3,7 +3,7 @@ extends CharacterBody2D
 #var velo = Vector2.ZERO
 const MAX_SPEED = 425
 const ACCELERATION = 460
-@onready var itemSprite = $Sprite2D/TextureRect
+@onready var itemSprite = $Sprite2D/Image
 @onready var itemQuantity = $Sprite2D/Label
 @onready var animationPlayer = $AnimationPlayer
 
@@ -33,13 +33,13 @@ func _ready():
 		itemQuantity.call_deferred("hide")
 	else:
 		itemQuantity.set_deferred("text", str(item_quantity))
-	randomInt = rng.randi_range(1, 5)
-	animationPlayer.call_deferred("play", "Animate " + String(randomInt))
+	randomInt = 1 #rng.randi_range(1, 5)
+	animationPlayer.call_deferred("play", "Animate " + str(randomInt))
 
 
 func adjustPosition(animation):
 	if animation == 1:
-		adjustedPosition = global_position + Vector2(48, 0)
+		adjustedPosition = global_position + Vector2(32, 0)
 	elif animation == 2:
 		adjustedPosition = global_position + Vector2(-48, 0)
 	elif animation == 3:

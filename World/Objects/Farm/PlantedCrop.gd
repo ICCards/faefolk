@@ -13,7 +13,7 @@ var bodyEnteredFlag = false
 var object_name = "crop"
 
 func _ready():
-	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.return_crop_atlas_tile(return_phase()))
+	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.crop_atlas_tiles[crop_name][return_phase()])
 	MapData.connect("refresh_crops",Callable(self,"refresh_image"))
 
 
@@ -21,10 +21,11 @@ func refresh_image():
 	in_regrowth_phase = MapData.world["crop"][name]["rp"]
 	days_until_harvest = MapData.world["crop"][name]["dh"]
 	days_without_water = MapData.world["crop"][name]["dww"]
-	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.return_crop_atlas_tile(return_phase()))
+	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.crop_atlas_tiles[crop_name][return_phase()])
 
 
 func return_phase():
+	return "harvest"
 	if days_without_water == 2 or not JsonData.crop_data[crop_name]["Seasons"].has(PlayerData.player_data["season"]):
 		$CollisionShape2D.set_deferred("disabled", true)
 		return "dead"

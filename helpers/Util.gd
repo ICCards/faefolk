@@ -205,6 +205,16 @@ func return_advanced_fruit_tree_phase(current_phase):
 			return "empty"
 
 
+func isStorageItem(item_name):
+	if item_name == "wood box" or item_name == "wood barrel" or item_name == "wood chest" or \
+	item_name == "stone chest" or item_name == "tool cabinet" or item_name == "furnace" or \
+	item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or \
+	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or \
+	item_name == "campfire":
+		return true
+	return false
+
+
 func isSword(item_name):
 	if item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "bronze sword" or item_name == "gold sword":
 		return true

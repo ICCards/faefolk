@@ -70,11 +70,11 @@ func harvest():
 	if phase == "harvest":
 		$CollisionShape2D.set_deferred("disabled", true)
 		if Util.chance(5):
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 0), 3, true)
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 0), 3)
 		elif Util.chance(25):
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 0), 2, true)
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 0), 2)
 		else:
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,0), 1, true)
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,0), 1)
 		phase = "empty"
 		MapData.world["tree"][name]["p"] = "empty"
 		await get_tree().idle_frame

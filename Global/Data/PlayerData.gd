@@ -62,8 +62,8 @@ var starting_player_data = {
 		"2": ["arrow", 999, null],
 		"6": ["wind staff", 1, null],
 		"5": ["fire staff", 1, null],
-		"7": ["wheat seeds", 100, null],
-#		"8": ["poison potion III", 100, null],
+		"7": ["wood box", 100, null],
+		"3": ["wood barrel", 100, null],
 		"8": ["stone watering can", 1, 50],
 	#	"3": ["blue flower", 100, null],
 #		"4": ["brewing table #3", 10, null],
@@ -78,8 +78,8 @@ var starting_player_data = {
 #			"16": ["wood", 500, null],
 			"16": ["iron ingot", 999, null],
 			"15": ["bronze ingot", 999, null],
-#			"13": ["apple seeds", 99, null],
-#			"12": ["cherry seeds", 99, null],
+			"13": ["wheat seeds", 99, null],
+			"12": ["potato seeds", 99, null],
 #			"14": ["plum seeds", 99, null],
 #			"15": ["pear seeds", 99, null],
 #			"10": ["evergreen seeds", 99, null],
@@ -179,6 +179,7 @@ var starting_player_data = {
 			"2": ["wood fishing rod", 1, null],
 		}
 	},
+	"wood_barrels" : {},
 	"furnaces": {},
 	"brewing_tables": {},
 	"grain_mills": {},
@@ -453,18 +454,17 @@ func remove_material(item, amount):
 
 func pick_up_item(item_name, item_quantity, item_health):
 	for slot in NUM_HOTBAR_SLOTS: # Add to existing hotbar slot
-		str(slot)
 		if player_data["hotbar"].has(str(slot)):
-			if player_data["hotbar"][slot][0] == item_name:
+			if player_data["hotbar"][str(slot)][0] == item_name:
 				var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-				var able_to_add = stack_size - player_data["hotbar"][slot][1]
+				var able_to_add = stack_size - player_data["hotbar"][str(slot)][1]
 				if able_to_add >= item_quantity:
-					player_data["hotbar"][slot][1] += item_quantity
-					update_hotbar_slot_visual(slot, player_data["hotbar"][slot][0], player_data["hotbar"][slot][1], player_data["hotbar"][slot][2])
+					player_data["hotbar"][str(slot)][1] += item_quantity
+					update_hotbar_slot_visual(str(slot), player_data["hotbar"][str(slot)][0], player_data["hotbar"][str(slot)][1], player_data["hotbar"][str(slot)][2])
 					return
 				else:
-					player_data["hotbar"][slot][1] += able_to_add
-					update_hotbar_slot_visual(slot, player_data["hotbar"][slot][0], player_data["hotbar"][slot][1], player_data["hotbar"][slot][2])
+					player_data["hotbar"][str(slot)][1] += able_to_add
+					update_hotbar_slot_visual(str(slot), player_data["hotbar"][str(slot)][0], player_data["hotbar"][str(slot)][1], player_data["hotbar"][str(slot)][2])
 					item_quantity = item_quantity - able_to_add
 	for slot in NUM_INVENTORY_SLOTS: # Add to existing inventory slot
 		str(slot)

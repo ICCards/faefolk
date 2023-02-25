@@ -23,12 +23,15 @@ offset_left = -640.0
 offset_top = -360.0
 offset_right = -640.0
 offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_cbxtf")
 
 [node name="ItemDescription" parent="." instance=ExtResource("9")]
 visible = false
 
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -37,6 +40,7 @@ stretch_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -49,7 +53,6 @@ offset_left = 552.0
 offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
-text = "Chest"
 
 [node name="ExitBtn" type="TextureButton" parent="."]
 layout_mode = 0
@@ -62,6 +65,7 @@ texture_normal = ExtResource("4")
 texture_pressed = ExtResource("6")
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource("7_7atqt")]
+layout_mode = 0
 offset_left = 345.0
 offset_top = 426.0
 offset_right = 933.0
@@ -71,6 +75,7 @@ columns = 10
 metadata/_edit_lock_ = true
 
 [node name="InventorySlots" parent="." instance=ExtResource("8_vfsgs")]
+layout_mode = 0
 offset_left = 345.0
 offset_top = 485.0
 offset_right = 933.0

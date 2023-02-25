@@ -32,6 +32,10 @@ func _ready():
 	PlayerData.connect("health_depleted",Callable(self,"player_death"))
 
 
+func _physics_process(delta):
+	$DetectInteractiveArea/CollisionShape2D.shape.radius = 2
+
+
 func _input(event):
 	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
 		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
@@ -325,3 +329,7 @@ func destroy_placable_object():
 		get_node("../Camera2D/UserInterface/ChangeRotation").hide()
 		get_node("../Camera2D/UserInterface/ChangeVariety").hide()
 		get_node("../PlaceObject").destroy()
+
+
+func _on_detect_interactive_area_area_entered(area):
+	print("FUCKER")

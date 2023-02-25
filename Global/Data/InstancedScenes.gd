@@ -18,20 +18,19 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 
-func intitiateItemDrop(item_name: String, pos: Vector2, amount: int, is_tree_harvest = false):
+func intitiateItemDrop(item_name: String, pos: Vector2, amount: int):
 	for _i in range(amount):
 		rng.randomize()
 		var itemDrop = ItemDrop.instantiate()
-		itemDrop.is_tree_harvest = is_tree_harvest
 		itemDrop.initItemDropType(item_name)
 		Server.world.call_deferred("add_child", itemDrop)
-		itemDrop.global_position = pos + Vector2(rng.randi_range(-12, 12), rng.randi_range(-6, 6))
+		itemDrop.global_position = pos + Vector2(rng.randi_range(-12, 0), rng.randi_range(-6, 6))
 
 func initiateInventoryItemDrop(item: Array, pos: Vector2):
 	var itemDrop = ItemDrop.instantiate()
 	itemDrop.initItemDropType(item[0], item[1], item[2])
 	Server.world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = pos + Vector2(rng.randi_range(-32, 32), rng.randi_range(-24, 24))
+	itemDrop.global_position = pos + Vector2(rng.randi_range(-16, 0), rng.randi_range(-24, 24))
 
 
 ### Trees ###

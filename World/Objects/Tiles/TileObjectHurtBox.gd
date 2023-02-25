@@ -16,9 +16,11 @@ var is_player_sitting: bool = false
 var temp_health = 3
 
 func _ready():
+	if Constants.object_atlas_tiles.keys().has(item_name):
+		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.object_atlas_tiles[item_name])
+	else:
+		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.rotatable_atlas_tiles[item_name][direction])
 	call_deferred("set_dimensions")
-	#thread.start(Callable(self,"set_dimensions_deferred").bind(null))
-
 
 func set_dimensions():
 	rng.randomize()
@@ -34,58 +36,73 @@ func set_dimensions():
 				pass
 			else:
 				PlayerData.player_data["campfires"][id] = {}
-	elif item_name == "wood chest" or item_name == "stone chest":
-		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
-		$Marker2D/StaticBody2D/CollisionShape2D.disabled = false
-		$Marker2D/InteractiveArea.object_name = "chest"
-		$Marker2D/InteractiveArea.object_level = ""
-		$Marker2D/InteractiveArea.name = str(id)
+	elif item_name == "wood box":
+		$Marker2D/CampfireInteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/CampfireInteractiveArea.object_name = item_name
+		$Marker2D/CampfireInteractiveArea.name = str(id)
 		if PlayerData.player_data["chests"].has(id):
 			pass
 		else:
 			PlayerData.player_data["chests"][id] = {}
-		match direction:
-			"left":
-				$Marker2D.rotation_degrees = 90
-				if item_name == "wood chest":
-					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
-				else:
-					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
-				$ChestPos/Chest.flip_h = false
-				$ChestPos/Chest.position = Vector2(18,0)
-				$Marker2D.position = Vector2(16, -32)
-				$ChestPos/Chest.position = Vector2(16, -32)
-				Tiles.remove_valid_tiles(location, Vector2(1,2))
-			"right":
-				if item_name == "wood chest":
-					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
-				else:
-					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
-				$ChestPos/Chest.flip_h = true
-				$Marker2D.rotation_degrees = 270
-				$Marker2D.position = Vector2(16, -32)
-				$ChestPos/Chest.position = Vector2(16, -32)
-				Tiles.remove_valid_tiles(location, Vector2(1,2))
-			"up":
-				$Marker2D.position = Vector2(32, -16)
-				$Marker2D.rotation_degrees = 180
-				$ChestPos/Chest.position = Vector2(32,-32)
-				if item_name == "wood chest":
-					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/up.tres")
-				else:
-					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Up.tres")
-				Tiles.remove_valid_tiles(location, Vector2(2,1))
-			"down":
-				$Marker2D.position = Vector2(32, -16)
-				$Marker2D.rotation_degrees = 0
-				$ChestPos/Chest.position = Vector2(32,-32)
-				if item_name == "wood chest":
-					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/down.tres")
-				else:
-					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Down.tres")
-				Tiles.remove_valid_tiles(location, Vector2(2,1))
-		$ChestPos/Chest.animation = "open"
-		$ChestPos/Chest.show()
+	elif item_name == "wood barrel":
+		$Marker2D/CampfireInteractiveArea/CollisionShape2D.disabled = false
+		$Marker2D/CampfireInteractiveArea.object_name = item_name
+		$Marker2D/CampfireInteractiveArea.name = str(id)
+		if PlayerData.player_data["wood_barrels"].has(id):
+			pass
+		else:
+			PlayerData.player_data["wood_barrels"][id] = {}
+#	elif item_name == "wood chest" or item_name == "stone chest":
+#		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
+#		$Marker2D/InteractiveArea.object_name = "chest"
+#		$Marker2D/InteractiveArea.object_level = ""
+#		$Marker2D/InteractiveArea.name = str(id)
+#		if PlayerData.player_data["chests"].has(id):
+#			pass
+#		else:
+#			PlayerData.player_data["chests"][id] = {}
+#		match direction:
+#			"left":
+#				$Marker2D.rotation_degrees = 90
+#				if item_name == "wood chest":
+#					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
+#				else:
+#					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
+#				$ChestPos/Chest.flip_h = false
+#				$ChestPos/Chest.position = Vector2(18,0)
+#				$Marker2D.position = Vector2(16, -32)
+#				$ChestPos/Chest.position = Vector2(16, -32)
+#				Tiles.remove_valid_tiles(location, Vector2(1,2))
+#			"right":
+#				if item_name == "wood chest":
+#					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/left.tres")
+#				else:
+#					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Left.tres")
+#				$ChestPos/Chest.flip_h = true
+#				$Marker2D.rotation_degrees = 270
+#				$Marker2D.position = Vector2(16, -32)
+#				$ChestPos/Chest.position = Vector2(16, -32)
+#				Tiles.remove_valid_tiles(location, Vector2(1,2))
+#			"up":
+#				$Marker2D.position = Vector2(32, -16)
+#				$Marker2D.rotation_degrees = 180
+#				$ChestPos/Chest.position = Vector2(32,-32)
+#				if item_name == "wood chest":
+#					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/up.tres")
+#				else:
+#					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Up.tres")
+#				Tiles.remove_valid_tiles(location, Vector2(2,1))
+#			"down":
+#				$Marker2D.position = Vector2(32, -16)
+#				$Marker2D.rotation_degrees = 0
+#				$ChestPos/Chest.position = Vector2(32,-32)
+#				if item_name == "wood chest":
+#					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/wood/down.tres")
+#				else:
+#					$ChestPos/Chest.sprite_frames = load("res://Assets/Images/Animations/chest/stone/Down.tres")
+#				Tiles.remove_valid_tiles(location, Vector2(2,1))
+#		$ChestPos/Chest.animation = "open"
+#		$ChestPos/Chest.show()
 	elif item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3":
 		$Marker2D/InteractiveArea/CollisionShape2D.disabled = false
 		$Marker2D/InteractiveArea.object_name = "workbench"
@@ -379,8 +396,18 @@ func _on_HurtBox_area_entered(area):
 		queue_free()
 
 func check_if_has_items():
-	if item_name == "wood chest" or item_name == "stone chest":
+	if item_name == "wood chest" or item_name == "stone chest" or item_name == "wood box" or item_name == "tool cabinet":
 		return PlayerData.player_data["chests"][id].keys().size() > 0
+	elif item_name == "furnace":
+		return PlayerData.player_data["furnaces"][id].keys().size() > 0
+	elif item_name == "wood barrel":
+		return PlayerData.player_data["wood_barrels"][id].keys().size() > 0
+	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
+		return PlayerData.player_data["stoves"][id].keys().size() > 0
+	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
+		return PlayerData.player_data["grain_mills"][id].keys().size() > 0
+	elif item_name == "campfire":
+		return PlayerData.player_data["campfires"][id].keys().size() > 0
 	return false
 
 func drop_items_in_campfire():
@@ -409,22 +436,32 @@ func drop_items_in_furnace():
 	PlayerData.player_data["furnaces"].erase(id)
 
 
-func _on_DetectObjectOverPathBox_area_entered(area):
-	if item_name == "wood path" or item_name == "stone path":
-		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-
-func _on_DetectObjectOverPathBox_area_exited(area):
-	if Server.isLoaded:
-		if item_name == "wood path" or item_name == "stone path":
-			await get_tree().create_timer(0.25).timeout
-			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
-
 func open_chest():
-	$ChestPos/Chest.call_deferred("play","open")
+	match item_name:
+		"wood chest":
+			match direction:
+				"DOWN":
+					$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(0,9))
+					await get_tree().create_timer(0.2).timeout
+					$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(2,9))
+					await get_tree().create_timer(0.2).timeout
+					$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(4,9))
+
 
 func close_chest():
-	await get_tree().create_timer(0.2).timeout
-	$ChestPos/Chest.call_deferred("play","open", true)
+	match item_name:
+		"wood chest":
+			match direction:
+				"DOWN":
+					$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(4,9))
+					await get_tree().create_timer(0.2).timeout
+					$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(2,9))
+					await get_tree().create_timer(0.2).timeout
+					$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(0,9))
+
 
 func _on_ResetTempHealthTimer_timeout():
 	temp_health = 3
+
+
+

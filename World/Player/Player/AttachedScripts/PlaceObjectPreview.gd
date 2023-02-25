@@ -115,8 +115,10 @@ func set_dimensions():
 		ITEM:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
-			$ItemToPlace.show()
-			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
+			$TileMap.show()
+			$TileMap.set_cell(0,Vector2i(0,0),0,Constants.object_atlas_tiles[item_name])
+#			$ItemToPlace.show()
+#			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 			var dimensions = Constants.dimensions_dict[item_name]
 			$ColorIndicator.tile_size = dimensions
 		SEED:
@@ -149,7 +151,6 @@ func set_dimensions():
 		ROTATABLE:
 			Server.player_node.user_interface.get_node("ChangeRotation").show()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
-			$ItemToPlace.show()
 		CUSTOMIZABLE_ROTATABLE:
 			Server.player_node.user_interface.get_node("ChangeRotation").show()
 			Server.player_node.user_interface.get_node("ChangeVariety").show()
@@ -176,7 +177,7 @@ func place_forage_state():
 	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var dimensions = Vector2(1,1)
 	$ColorIndicator.tile_size = dimensions
-	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE or Tiles.validate_foundation_tiles(location, dimensions):
+	if not Tiles.validate_tiles(location, dimensions) or Tiles.validate_foundation_tiles(location, dimensions):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	else:
@@ -295,7 +296,8 @@ func place_rotatable_state():
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
 	get_rotation_index()
-	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + direction + ".png")
+	$TileMap.show()
+	$TileMap.set_cell(0,Vector2i(0,0),0,Constants.rotatable_atlas_tiles[item_name][direction])
 	if (direction == "up" or direction == "down"):
 		$ColorIndicator.tile_size = dimensions
 	else:

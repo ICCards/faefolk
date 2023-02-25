@@ -38,20 +38,21 @@ func validate_tiles(location, dimensions):
 			for x in range(dimensions.x):
 				for y in range(dimensions.y):
 					if not valid_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) == Constants.VALID_TILE_ATLAS_CORD or \
+					hoed_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) != Vector2i(-1,-1) or \
 					valid_tiles.local_to_map(Server.player_node.position) == Vector2i(x,-y)+location or \
 					Server.player_node.position.distance_to((location+Vector2i(1,1))*16) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 						return false
 						break
 			return true
-	else:
-		if not active:
-			active = true
-			for x in range(dimensions.x):
-				for y in range(dimensions.y):
-					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
-						return false
-						break
-			return true
+#	else:
+#		if not active:
+#			active = true
+#			for x in range(dimensions.x):
+#				for y in range(dimensions.y):
+#					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
+#						return false
+#						break
+#			return true
 
 
 func validate_foundation_tiles(location, dimensions):
@@ -90,22 +91,16 @@ func remove_valid_tiles(location, dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.erase_cell(0,location+Vector2i(x,-y))
-			#valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), -1 )
-			#valid_tiles.set_cellv(location + Vector2(x, -y), -1)
 
 func add_valid_tiles(location, dimensions = Vector2i(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cell(0,Vector2i(x,y),0,Constants.VALID_TILE_ATLAS_CORD,0)
-			#valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), 0)
-			#valid_tiles.set_cellv(location + Vector2(x, -y), 0)
-			
+			valid_tiles.set_cell(0,location+Vector2i(x,y),0,Constants.VALID_TILE_ATLAS_CORD,0)
+
 func add_navigation_tiles(location, dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cell(0,Vector2i(x,y),0,Constants.NAVIGATION_TILE_ATLAS_CORD,0)
-			#valid_tiles.call_deferred("set_cellv", location + Vector2(x, -y), 1)
-			#valid_tiles.set_cellv(location + Vector2(x, -y), 1)
+			valid_tiles.set_cell(0,location+Vector2i(x,y),0,Constants.NAVIGATION_TILE_ATLAS_CORD,0)
 
 
 func isValidAutoTile(_pos, _map):

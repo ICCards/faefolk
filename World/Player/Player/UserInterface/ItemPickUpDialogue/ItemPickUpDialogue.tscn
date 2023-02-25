@@ -1,13 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://rpuaufnru6of"]
 
-[ext_resource path="res://World3D/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.gd" type="Script" id=3]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.gd" id="1_jwx4j"]
 
 [node name="ItemPickUpDialogue" type="VBoxContainer"]
 offset_left = 10.0
 offset_top = 429.0
 offset_right = 112.0
 offset_bottom = 479.0
-scale = Vector2( 3, 3 )
+scale = Vector2(3, 3)
 mouse_filter = 2
-custom_constants/separation = 2
-script = ExtResource( 3 )
+script = ExtResource("1_jwx4j")

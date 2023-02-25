@@ -16,7 +16,7 @@ func initialize():
 	if item_name != "Inventory full!":
 		$Icon.set_deferred("texture", load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png"))
 		$ItemName.set_deferred("text", item_name[0].to_upper() + item_name.substr(1,-1))
-		await get_tree().idle_frame
+		await get_tree().process_frame
 		set_size_of_description($ItemName.size.x)
 		$GridContainer.size.x = width
 		if item_quantity == 1:
@@ -28,17 +28,17 @@ func initialize():
 	else:
 		$Icon.set_deferred("texture", load("res://Assets/Images/User interface/ItemPickUpBox/x.png"))
 		$ItemName.set_deferred("text", item_name)
-		await get_tree().idle_frame
+		await get_tree().process_frame
 		set_size_of_description($ItemName.size.x)
 		$GridContainer.size.x = width
 		$Quantity.set_deferred("visible", false)
 		$DestroyTimer.start(3+delay)
 
 func set_size_of_description(x):
-	if x <= 120:
+	if x <= 417:
 		width = 55
 	else:
-		width = 55 + ((x - 120) / 4.75)
+		width = 55 + ((x - 417) / 12)
 
 func _on_DestroyTimer_timeout():
 	$AnimationPlayer.call_deferred("play", "fade out")

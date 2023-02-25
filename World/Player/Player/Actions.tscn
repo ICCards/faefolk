@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://World/Player/Player/Actions.gd" id="1_nu2wu"]
 
 [sub_resource type="CircleShape2D" id="1"]
-radius = 1.0
+radius = 2.0
 
 [node name="Actions" type="Node2D"]
 script = ExtResource("1_nu2wu")
@@ -14,8 +14,10 @@ stream = ExtResource("1")
 volume_db = -16.0
 
 [node name="DetectInteractiveArea" type="Area2D" parent="."]
-collision_layer = 131072
-collision_mask = 0
+collision_layer = 0
+collision_mask = 131072
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectInteractiveArea"]
 shape = SubResource("1")
+
+[connection signal="area_entered" from="DetectInteractiveArea" to="." method="_on_detect_interactive_area_area_entered"]

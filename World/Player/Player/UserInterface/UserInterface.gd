@@ -210,7 +210,7 @@ func toggle_chest(id):
 			sound_effects.play()
 			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
-			Server.world.get_node("PlacableObjects/"+id).open_chest()
+			Server.world.get_node("PlaceableObjects/"+id).open_chest()
 			await get_tree().create_timer(0.5).timeout
 			is_opening_chest = false
 			var chest = Chest.instantiate()
@@ -219,6 +219,35 @@ func toggle_chest(id):
 			close_hotbar_clock_and_stats()
 		else:
 			close_chest(id)
+
+func toggle_wood_box(id):
+	if not is_opening_chest:
+		if not has_node("WoodBox"):
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/open.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+			sound_effects.play()
+			PlayerData.interactive_screen_mode = true
+			is_opening_chest = true
+			Server.world.get_node("PlaceableObjects/"+id).open_wood_box()
+			await get_tree().create_timer(0.5).timeout
+			is_opening_chest = false
+			var chest = Chest.instantiate()
+			chest.id = id
+			add_child(chest)
+			close_hotbar_clock_and_stats()
+		else:
+			close_wood_box(id)
+			
+func close_wood_box(id):
+	if not holding_item and has_node("WoodBox"):
+#		sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/closed.mp3")
+#		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+#		sound_effects.play()
+		Server.world.get_node("PlacableObjects/"+id).close_wood_box(id)
+		add_hotbar_clock_and_stats()
+		get_node("WoodBox").destroy()
+		drop_items()
+
 
 func close_hotbar_clock_and_stats():
 	PlayerData.interactive_screen_mode = true

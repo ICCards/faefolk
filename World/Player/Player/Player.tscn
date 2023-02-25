@@ -1261,7 +1261,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(16, -16), Vector2(15, -21), Vector2(14, -32), Vector2(8, -36)]
+"values": [Vector2(8, -16), Vector2(7, -21), Vector2(7, -32), Vector2(4, -36)]
 }
 
 [sub_resource type="Animation" id="60"]
@@ -4101,8 +4101,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="9"]
-radius = 11.1081
-height = 22.2163
+radius = 23.5523
+height = 52.7942
 
 [sub_resource type="CircleShape2D" id="10"]
 
@@ -4290,10 +4290,10 @@ hframes = 4
 
 [node name="HoldingItem" type="TextureRect" parent="CompositeSprites"]
 visible = false
-offset_left = -8.0
-offset_top = -42.0
-offset_right = 8.0
-offset_bottom = -26.0
+offset_left = 4.0
+offset_top = -36.0
+offset_right = 20.0
+offset_bottom = -20.0
 texture = ExtResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
@@ -4310,17 +4310,15 @@ libraries = {
 [node name="Magic" parent="." instance=ExtResource("8_wf6cw")]
 
 [node name="Area2Ds" type="Node2D" parent="."]
-visible = false
 
 [node name="PickupZone" type="Area2D" parent="Area2Ds"]
 visible = false
-scale = Vector2(1.33331, 1.22853)
-collision_layer = 0
+collision_layer = 4
 collision_mask = 4
 script = ExtResource("11_vhk27")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/PickupZone"]
-position = Vector2(0, -25.7231)
+position = Vector2(0, -13.0237)
 scale = Vector2(0.806714, 0.872205)
 shape = SubResource("9")
 
@@ -4335,6 +4333,7 @@ position = Vector2(0, -23)
 shape = SubResource("10")
 
 [node name="HurtBox" type="Area2D" parent="Area2Ds"]
+visible = false
 collision_layer = 128
 collision_mask = 0
 script = ExtResource("12_7dou1")
@@ -4414,6 +4413,9 @@ position = Vector2(0, -40)
 sprite_frames = SubResource("117")
 animation = &"new_animation"
 frame_progress = 0.579862
+
+[connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]
 
 [editable path="Camera2D/UserInterface"]
 [editable path="Swing"]

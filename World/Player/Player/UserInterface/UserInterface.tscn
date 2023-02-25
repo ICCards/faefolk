@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=31 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="PackedScene" uid="uid://ctp3ra1cmv0de" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bhilgn3waubes" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
 [ext_resource type="PackedScene" uid="uid://dd0n86ke85w5d" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
 [ext_resource type="PackedScene" uid="uid://cm8c7p7g6ii7g" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" id="18_gbc14"]
+[ext_resource type="PackedScene" uid="uid://rpuaufnru6of" path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn" id="19_n03k2"]
 
 [sub_resource type="Animation" id="18"]
 length = 0.001
@@ -375,6 +376,8 @@ scale = Vector2(0.3, 0.3)
 theme = ExtResource("6_rh7sc")
 bbcode_enabled = true
 text = "Saving progress"
+
+[node name="ItemPickUpDialogue" parent="." instance=ExtResource("19_n03k2")]
 
 [node name="CombatHotbar" parent="." instance=ExtResource("16_cnrm0")]
 visible = false

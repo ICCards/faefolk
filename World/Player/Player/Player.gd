@@ -119,7 +119,9 @@ func set_current_object(item_name):
 	elif item_name == "torch":
 		holding_item.hide()
 		$HoldingTorch.set_active()
-
+	else:
+		holding_item.hide()
+		$HoldingTorch.set_inactive()
 
 func _process(_delta) -> void:
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
