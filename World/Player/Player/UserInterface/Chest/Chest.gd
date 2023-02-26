@@ -21,6 +21,7 @@ func destroy():
 	queue_free()
 
 func _physics_process(delta):
+	return
 	if hovered_item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.show()
 		$ItemDescription.item_category = JsonData.item_data[hovered_item]["ItemCategory"]

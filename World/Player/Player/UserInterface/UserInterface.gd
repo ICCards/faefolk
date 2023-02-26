@@ -14,6 +14,8 @@ var holding_item = null
 @onready var Chest = load("res://World/Player/Player/UserInterface/Chest/Chest.tscn")
 @onready var Tool_cabinet = load("res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn")
 @onready var Campfire = load("res://World/Player/Player/UserInterface/Campfire/Campfire.tscn")
+@onready var Crate = load("res://World/Player/Player/UserInterface/Crate/Crate.tscn")
+@onready var Barrel = load("res://World/Player/Player/UserInterface/Barrel/Barrel.tscn")
 #@onready var BrewingTable = load("res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
 
 var items_to_drop = []
@@ -220,33 +222,48 @@ func toggle_chest(id):
 		else:
 			close_chest(id)
 
-func toggle_wood_box(id):
+
+func toggle_barrel(id):
+	if not has_node(str(id)):
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/gate/open.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.play()
+		Server.world.get_node("PlaceableObjects/"+id).open_barrel()
+		await get_tree().create_timer(0.2).timeout
+		var barrel = Barrel.instantiate()
+		barrel.name = str(id)
+		barrel.id = id
+		add_child(barrel)
+		close_hotbar_clock_and_stats()
+	elif has_node(str(id)) and not get_node(str(id)).visible:
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/gate/open.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.play()
+		Server.world.get_node("PlaceableObjects/"+id).open_barrel()
+		await get_tree().create_timer(0.2).timeout
+		get_node(str(id)).initialize()
+		close_hotbar_clock_and_stats()
+	else:
+		close_barrel(id)
+
+
+func toggle_crate(id):
 	if not is_opening_chest:
-		if not has_node("WoodBox"):
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/open.mp3")
+		if not has_node("Crate"):
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
 			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
-			Server.world.get_node("PlaceableObjects/"+id).open_wood_box()
-			await get_tree().create_timer(0.5).timeout
+			Server.world.get_node("PlaceableObjects/"+id).open_crate()
+			await get_tree().create_timer(0.2).timeout
 			is_opening_chest = false
-			var chest = Chest.instantiate()
+			var chest = Crate.instantiate()
 			chest.id = id
 			add_child(chest)
 			close_hotbar_clock_and_stats()
 		else:
-			close_wood_box(id)
-			
-func close_wood_box(id):
-	if not holding_item and has_node("WoodBox"):
-#		sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/closed.mp3")
-#		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-#		sound_effects.play()
-		Server.world.get_node("PlacableObjects/"+id).close_wood_box(id)
-		add_hotbar_clock_and_stats()
-		get_node("WoodBox").destroy()
-		drop_items()
+			close_crate(id)
 
 
 func close_hotbar_clock_and_stats():
@@ -377,6 +394,28 @@ func toggle_campfire(id):
 		close_campfire(id)
 
 
+func close_crate(id):
+	if not holding_item and has_node("Crate"):
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.play()
+		add_hotbar_clock_and_stats()
+		get_node("Crate").destroy()
+		drop_items()
+		await get_tree().create_timer(0.2).timeout
+		Server.world.get_node("PlaceableObjects/"+id).close_crate()
+
+func close_barrel(id):
+	if not holding_item and has_node(str(id)):
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/gate/close.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+		sound_effects.play()
+		add_hotbar_clock_and_stats()
+		get_node(str(id)).hide()
+		drop_items()
+		await get_tree().create_timer(0.2).timeout
+		Server.world.get_node("PlaceableObjects/"+id).close_barrel()
+
 func close_campfire(id):
 	if not holding_item and has_node(id):
 		Sounds.play_deselect_sound()
@@ -424,7 +463,7 @@ func close_chest(id):
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/closed.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 		sound_effects.play()
-		Server.world.get_node("PlacableObjects/"+id).close_chest()
+		Server.world.get_node("PlaceableObjects/"+id).close_chest()
 		add_hotbar_clock_and_stats()
 		get_node("Chest").destroy()
 		drop_items()

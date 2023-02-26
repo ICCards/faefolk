@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkrw4a2bn5vt8"]
+
+[ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="1_soi8t"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/CrateSlots.gd" id="1_wq2oq"]
+
+[node name="CrateSlots" type="GridContainer"]
+offset_right = 152.0
+offset_bottom = 156.0
+theme_override_constants/v_separation = 6
+columns = 3
+script = ExtResource("1_wq2oq")
+
+[node name="Slot1" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")
+
+[node name="Slot2" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")
+
+[node name="Slot3" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")
+
+[node name="Slot4" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")
+
+[node name="Slot5" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")
+
+[node name="Slot6" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")
+
+[node name="Slot7" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")
+
+[node name="Slot8" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")
+
+[node name="Slot9" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("1_soi8t")

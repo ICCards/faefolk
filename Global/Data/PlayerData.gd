@@ -62,9 +62,9 @@ var starting_player_data = {
 		"2": ["arrow", 999, null],
 		"6": ["wind staff", 1, null],
 		"5": ["fire staff", 1, null],
-		"7": ["wood box", 100, null],
-		"3": ["wood barrel", 100, null],
-		"8": ["stone watering can", 1, 50],
+		"7": ["crate", 100, null],
+		"3": ["wood chest", 100, null],
+		"8": ["barrel", 10, null],
 	#	"3": ["blue flower", 100, null],
 #		"4": ["brewing table #3", 10, null],
 #		"5": ["brewing table #2", 10, null],
@@ -76,7 +76,7 @@ var starting_player_data = {
 			"19": ["stone", 999, null],
 			"17": ["cloth", 999, null],
 #			"16": ["wood", 500, null],
-			"16": ["iron ingot", 999, null],
+			"16": ["grape", 999, null],
 			"15": ["bronze ingot", 999, null],
 			"13": ["wheat seeds", 99, null],
 			"12": ["potato seeds", 99, null],
@@ -179,7 +179,7 @@ var starting_player_data = {
 			"2": ["wood fishing rod", 1, null],
 		}
 	},
-	"wood_barrels" : {},
+	"barrels" : {},
 	"furnaces": {},
 	"brewing_tables": {},
 	"grain_mills": {},
@@ -300,6 +300,7 @@ var starting_player_data = {
 			"nelma": 0
 		},
 		"food": {
+			"wine": 0,
 			"asparagus omelette": 0,
 			"baked catfish": 0,
 			"baked dorado": 0,
@@ -551,6 +552,8 @@ func add_item_to_empty_slot(item, slot, id = null):
 			player_data["furnaces"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.BARREL:
+			player_data["barrels"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 
 
 func remove_item(slot, id = null):
@@ -575,6 +578,8 @@ func remove_item(slot, id = null):
 			player_data["furnaces"][id].erase(str(slot.slot_index))
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id].erase(str(slot.slot_index))
+		SlotClass.SlotType.BARREL:
+			player_data["barrels"][id].erase(str(slot.slot_index))
 
 func add_item_quantity(slot, quantity_to_add: int, id = null):
 	match slot.slotType:
@@ -598,6 +603,8 @@ func add_item_quantity(slot, quantity_to_add: int, id = null):
 			player_data["furnaces"][id][str(slot.slot_index)][1] += quantity_to_add
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id][str(slot.slot_index)][1] += quantity_to_add
+		SlotClass.SlotType.BARREL:
+			player_data["barrels"][id][str(slot.slot_index)][1] += quantity_to_add
 			
 func decrease_item_quantity(slot, quantity_to_subtract: int, id = null):
 	match slot.slotType:
@@ -621,6 +628,8 @@ func decrease_item_quantity(slot, quantity_to_subtract: int, id = null):
 			player_data["furnaces"][id][str(slot.slot_index)][1] -= quantity_to_subtract
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+		SlotClass.SlotType.BARREL:
+			player_data["barrels"][id][str(slot.slot_index)][1] -= quantity_to_subtract
 
 func return_resource_total(item_name):
 	var total = 0

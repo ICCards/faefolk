@@ -1,21 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkqbyp3078p5i"]
+[gd_scene load_steps=8 format=3 uid="uid://dkqbyp3078p5i"]
 
 [ext_resource type="Script" path="res://World/Objects/Tiles/TileObjectHurtBox.gd" id="1_gmkx7"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
-[ext_resource type="Script" path="res://World/Objects/Scripts/InteractiveArea.gd" id="2_rsvx5"]
 [ext_resource type="TileSet" uid="uid://bignuihdkvtip" path="res://Assets/Tilesets/Objects/objects.tres" id="4_0qdul"]
 
-[sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(15, 14)
-
-[sub_resource type="CircleShape2D" id="18"]
-radius = 15.0
-
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(15, 15)
+size = Vector2(16, 16)
 
-[sub_resource type="RectangleShape2D" id="17"]
-size = Vector2(50, 30)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jurr"]
+size = Vector2(16, 16)
 
 [sub_resource type="Animation" id="19"]
 resource_name = "shake"
@@ -32,25 +25,6 @@ script = ExtResource("1_gmkx7")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
-[node name="InteractiveArea" type="Area2D" parent="Marker2D"]
-position = Vector2(0, 4)
-collision_layer = 131072
-collision_mask = 0
-script = ExtResource("2_rsvx5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/InteractiveArea"]
-shape = SubResource("4")
-disabled = true
-
-[node name="CampfireInteractiveArea" type="Area2D" parent="Marker2D"]
-collision_layer = 131072
-collision_mask = 0
-script = ExtResource("2_rsvx5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/CampfireInteractiveArea"]
-shape = SubResource("18")
-disabled = true
-
 [node name="HurtBox" type="Area2D" parent="Marker2D"]
 collision_layer = 262168
 collision_mask = 0
@@ -60,15 +34,10 @@ monitorable = false
 light_mask = 0
 shape = SubResource("1")
 
-[node name="BedInteractiveArea" type="Area2D" parent="Marker2D"]
-scale = Vector2(0.5, 0.5)
-collision_layer = 0
-collision_mask = 131072
-script = ExtResource("2_rsvx5")
+[node name="StaticBody2D" type="StaticBody2D" parent="Marker2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/BedInteractiveArea"]
-shape = SubResource("17")
-disabled = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_1jurr")
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 volume_db = -16.0
@@ -121,7 +90,6 @@ position = Vector2(-8, 8)
 tile_set = ExtResource("4_0qdul")
 collision_visibility_mode = 1
 format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 0, 5)
 
 [connection signal="area_entered" from="Marker2D/HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="ResetTempHealthTimer" to="." method="_on_ResetTempHealthTimer_timeout"]

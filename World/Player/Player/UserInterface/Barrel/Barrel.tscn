@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://ct727y7h4pbn7"]
+
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Barrel/Barrel.gd" id="1_py1iy"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="2_njfcp"]
+[ext_resource type="Texture2D" uid="uid://drkywqy2aio0r" path="res://Assets/Images/User interface/wine barrel/winebarrel-tab.png" id="2_rmhfi"]
+[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="3_wbt62"]
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="5_i0df4"]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="6_0dk4j"]
+[ext_resource type="Texture2D" uid="uid://ds2rfkt8gtgln" path="res://Assets/Images/User interface/wine barrel/hourglass.png" id="7_vklw6"]
+[ext_resource type="PackedScene" uid="uid://biplf01ydm2xw" path="res://World/Player/Player/UserInterface/Slots/BarrelSlots.tscn" id="10_lw15j"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="16_nykvn"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="17_6dvla"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="18_dcehj"]
+
+[node name="Barrel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_py1iy")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_rmhfi")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_njfcp")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="MenuTitle" parent="." instance=ExtResource("3_wbt62")]
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 917.0
+offset_bottom = 192.0
+
+[node name="Label" parent="MenuTitle" index="1"]
+text = "Barrel"
+
+[node name="ExitBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5_i0df4")
+texture_pressed = ExtResource("6_0dk4j")
+
+[node name="TimerProgress" type="TextureProgressBar" parent="."]
+modulate = Color(0.513726, 0.513726, 0.513726, 1)
+layout_mode = 0
+offset_left = 432.0
+offset_top = 346.0
+offset_right = 452.0
+offset_bottom = 366.0
+scale = Vector2(3, 3)
+fill_mode = 3
+texture_progress = ExtResource("7_vklw6")
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="CookTimer" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="InventorySlots" parent="." instance=ExtResource("17_6dvla")]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 315.0
+offset_right = 939.0
+offset_bottom = 561.0
+metadata/_edit_lock_ = true
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("18_dcehj")]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 183.0
+offset_right = 939.0
+offset_bottom = 297.0
+metadata/_edit_lock_ = true
+
+[node name="BarrelSlots" parent="." instance=ExtResource("10_lw15j")]
+
+[node name="Trash" parent="." instance=ExtResource("16_nykvn")]
+
+[connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]
+[connection signal="timeout" from="CookTimer" to="." method="_on_cook_timer_timeout"]
+
+[editable path="MenuTitle"]

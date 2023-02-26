@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=3 uid="uid://1v7vgt4swot0"]
+
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Crate/Crate.gd" id="1_kkncy"]
+[ext_resource type="Texture2D" uid="uid://bl5ficiak4bvu" path="res://Assets/Images/User interface/Crate/crate-tab.png" id="1_wjbjh"]
+[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="2_x3bwj"]
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="3_wmajl"]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="4_80dw1"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="5_gd326"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="6_22x61"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="7_7r1eu"]
+[ext_resource type="PackedScene" uid="uid://dkrw4a2bn5vt8" path="res://World/Player/Player/UserInterface/Slots/CrateSlots.tscn" id="8_iwxc6"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="10_qrhjr"]
+
+[node name="Crate" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kkncy")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("1_wjbjh")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("10_qrhjr")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="MenuTitle" parent="." instance=ExtResource("2_x3bwj")]
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 917.0
+offset_bottom = 192.0
+
+[node name="Label" parent="MenuTitle" index="1"]
+text = "Crate"
+
+[node name="ExitBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("3_wmajl")
+texture_pressed = ExtResource("4_80dw1")
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("5_gd326")]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 426.0
+offset_right = 933.0
+offset_bottom = 480.0
+theme_override_constants/h_separation = 12
+columns = 10
+
+[node name="InventorySlots" parent="." instance=ExtResource("6_22x61")]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 486.0
+offset_right = 933.0
+offset_bottom = 601.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 10
+
+[node name="ChestSlots" parent="." instance=ExtResource("8_iwxc6")]
+layout_mode = 0
+offset_left = 555.0
+offset_top = 180.0
+offset_right = 723.0
+offset_bottom = 348.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="Trash" parent="." instance=ExtResource("7_7r1eu")]
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]
+
+[editable path="MenuTitle"]

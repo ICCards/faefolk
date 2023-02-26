@@ -54,6 +54,9 @@ offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
 
+[node name="Label" parent="MenuTitle" index="1"]
+text = "Chest"
+
 [node name="ExitBtn" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 918.0
@@ -98,3 +101,5 @@ theme_override_constants/v_separation = 12
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
+
+[editable path="MenuTitle"]

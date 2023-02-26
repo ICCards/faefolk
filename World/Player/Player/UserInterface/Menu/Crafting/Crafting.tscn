@@ -123,12 +123,12 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
 
-[node name="wood box" type="Panel" parent="CraftingMenu/Items"]
+[node name="crate" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
 
-[node name="wood barrel" type="Panel" parent="CraftingMenu/Items"]
+[node name="barrel" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
@@ -264,11 +264,6 @@ layout_mode = 2
 script = ExtResource("9")
 
 [node name="round table" type="Panel" parent="CraftingMenu/Items"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-script = ExtResource("9")
-
-[node name="dresser" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")

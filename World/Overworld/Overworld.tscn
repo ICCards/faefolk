@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bpxgic0nhjbf0"]
+[gd_scene load_steps=42 format=3 uid="uid://bpxgic0nhjbf0"]
 
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="1_631cd"]
 [ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="1_gscqb"]
@@ -14,7 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://dh8yeb2dd8ak4" path="res://Assets/Tilesets/walls/walls/metal.png" id="12_ho40d"]
 [ext_resource type="Texture2D" uid="uid://6yn3jmy5jo6e" path="res://Assets/Tilesets/walls/walls/armored.png" id="13_ue14p"]
 [ext_resource type="Texture2D" uid="uid://ptjidk7r1daj" path="res://Assets/Tilesets/Terrain/hoed.png" id="14_4u716"]
-[ext_resource type="TileSet" uid="uid://bignuihdkvtip" path="res://Assets/Tilesets/Objects/objects.tres" id="14_f8t84"]
+[ext_resource type="TileSet" uid="uid://xg447jbyy2h3" path="res://Assets/Tilesets/Objects/objects.tres" id="14_f8t84"]
+[ext_resource type="Texture2D" uid="uid://tav38q7enk7s" path="res://Assets/Tilesets/objects/fence tiles.png" id="15_jfpu0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("1_631cd")
@@ -14159,6 +14160,102 @@ sources/2 = SubResource("TileSetAtlasSource_2n8nf")
 sources/3 = SubResource("TileSetAtlasSource_dsxv0")
 sources/4 = SubResource("TileSetAtlasSource_d26pd")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pmuqb"]
+texture = ExtResource("15_jfpu0")
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 8)
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/top_side = 0
+1:0/size_in_atlas = Vector2i(1, 2)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 8)
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/size_in_atlas = Vector2i(1, 2)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 8)
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/left_side = 0
+2:0/0/terrains_peering_bit/top_side = 0
+3:0/size_in_atlas = Vector2i(1, 2)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, 8)
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+3:0/0/terrains_peering_bit/right_side = 0
+5:0/size_in_atlas = Vector2i(1, 2)
+5:0/0 = 0
+5:0/0/texture_origin = Vector2i(0, 8)
+5:0/0/terrain_set = 0
+5:0/0/terrain = 0
+5:0/0/terrains_peering_bit/right_side = 0
+5:0/0/terrains_peering_bit/bottom_side = 0
+6:0/size_in_atlas = Vector2i(1, 2)
+6:0/0 = 0
+6:0/0/texture_origin = Vector2i(0, 8)
+6:0/0/terrain_set = 0
+6:0/0/terrain = 0
+6:0/0/terrains_peering_bit/bottom_side = 0
+6:0/0/terrains_peering_bit/left_side = 0
+7:0/size_in_atlas = Vector2i(1, 2)
+7:0/0 = 0
+7:0/0/texture_origin = Vector2i(0, 8)
+7:0/0/terrain_set = 0
+7:0/0/terrain = 0
+7:0/0/terrains_peering_bit/bottom_side = 0
+7:0/0/terrains_peering_bit/top_side = 0
+8:0/size_in_atlas = Vector2i(1, 2)
+8:0/0 = 0
+8:0/0/texture_origin = Vector2i(0, 8)
+8:0/0/terrain_set = 0
+8:0/0/terrain = 0
+8:0/0/terrains_peering_bit/bottom_side = 0
+9:0/size_in_atlas = Vector2i(1, 2)
+9:0/0 = 0
+9:0/0/texture_origin = Vector2i(0, 8)
+9:0/0/terrain_set = 0
+9:0/0/terrain = 0
+9:0/0/terrains_peering_bit/right_side = 0
+9:0/0/terrains_peering_bit/left_side = 0
+9:0/0/terrains_peering_bit/top_side = 0
+10:0/size_in_atlas = Vector2i(1, 2)
+10:0/0 = 0
+10:0/0/texture_origin = Vector2i(0, 8)
+10:0/0/terrain_set = 0
+10:0/0/terrain = 0
+10:0/0/terrains_peering_bit/top_side = 0
+11:0/size_in_atlas = Vector2i(1, 2)
+11:0/0 = 0
+11:0/0/texture_origin = Vector2i(0, 8)
+11:0/0/terrain_set = 0
+11:0/0/terrain = 0
+12:0/size_in_atlas = Vector2i(1, 2)
+12:0/0 = 0
+12:0/0/texture_origin = Vector2i(0, 8)
+12:0/0/terrain_set = 0
+12:0/0/terrain = 0
+12:0/0/terrains_peering_bit/right_side = 0
+12:0/0/terrains_peering_bit/bottom_side = 0
+12:0/0/terrains_peering_bit/left_side = 0
+4:0/size_in_atlas = Vector2i(1, 2)
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, 8)
+4:0/0/terrain_set = 0
+4:0/0/terrain = 0
+4:0/0/terrains_peering_bit/left_side = 0
+
+[sub_resource type="TileSet" id="TileSet_rsk5d"]
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "d"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_pmuqb")
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_57niu"]
 texture = ExtResource("14_4u716")
 0:0/0 = 0
@@ -15479,6 +15576,7 @@ script = ExtResource("1_jqwgc")
 script = ExtResource("1_gscqb")
 
 [node name="TerrainTiles" type="Node2D" parent="."]
+visible = false
 z_index = -10
 
 [node name="ValidTiles" type="TileMap" parent="TerrainTiles"]
@@ -15521,6 +15619,10 @@ layer_0/y_sort_enabled = true
 [node name="ObjectTiles" type="TileMap" parent="BuildingTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
 tile_set = ExtResource("14_f8t84")
+format = 2
+
+[node name="TileMap" type="TileMap" parent="BuildingTiles"]
+tile_set = SubResource("TileSet_rsk5d")
 format = 2
 
 [node name="FarmingTiles" type="Node2D" parent="."]

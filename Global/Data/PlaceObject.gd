@@ -123,7 +123,7 @@ func remove_valid_tiles(item_name,direction, location):
 func place_object_in_world(id, item_name, direction, location):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	var tileObjectHurtBox = TileObjectHurtBox.instantiate()
-	tileObjectHurtBox.name = str(id)
+	tileObjectHurtBox.name = id
 	tileObjectHurtBox.item_name = item_name
 	tileObjectHurtBox.location = location
 	tileObjectHurtBox.direction = direction

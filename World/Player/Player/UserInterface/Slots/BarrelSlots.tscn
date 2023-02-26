@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://biplf01ydm2xw"]
+
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/BarrelSlots.gd" id="1_3w1fv"]
+[ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="1_27ruw"]
+
+[node name="BarrelSlots" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3w1fv")
+
+[node name="Ingredient" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 418.0
+offset_top = 427.0
+offset_right = 466.0
+offset_bottom = 475.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_27ruw")
+
+[node name="Yield" type="Panel" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 418.0
+offset_top = 229.0
+offset_right = 466.0
+offset_bottom = 277.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_27ruw")

@@ -1,3 +1,7 @@
+res://World/Player/Player/UserInterface/Slots
+res://World/Player/Player/UserInterface/Barrel
+res://World/Player/Player/UserInterface/Crate
+res://World/Objects/Tiles/Attached nodes
 res://Assets/Tilesets/Objects
 res://Assets/Images/Animations/Flowers
 res://Assets/Images/Animations/plant

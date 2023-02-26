@@ -39,6 +39,13 @@
         "ItemCategory": "Mob",
         "Description": "A flying enemy which randomly spawns in the caves.",
       },
+    "wine": {
+        "ItemCategory": "Food",
+        "StackSize": 999,
+        "Description": "An alcoholic drink made from fermented grapes.",
+        "Ingredients": ["grape", 5],
+        "EnergyHealth": [12,24]
+      },
     "apple": {
         "ItemCategory": "Crop",
         "StackSize": 999,
@@ -1316,17 +1323,17 @@
       "Ingredients": [["wood", 12]],
       "EnergyHealth": null
   },
-  "wood barrel": {
+  "barrel": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Wood barrel for decoration.",
-      "Ingredients": [["wood", 4]],
+      "Description": "A wooden barrel for aging products.",
+      "Ingredients": [["wood", 6]],
       "EnergyHealth": null
   },
-  "wood box": {
+  "crate": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Wood box for decoration.",
+      "Description": "A wooden crate for storage.",
       "Ingredients": [["wood", 4]],
       "EnergyHealth": null
   },
@@ -1347,21 +1354,21 @@
   "brewing table #1": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Used to create potions. Level 1.",
+      "Description": "Used to craft tier 1 potions.",
       "Ingredients": [["wood", 40]],
       "EnergyHealth": null
   },
   "brewing table #2": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Used to create potions. Level 2.",
+      "Description": "Used to craft tier 2 potions.",
       "Ingredients": [["stone", 40]],
       "EnergyHealth": null
   },
   "brewing table #3": {
       "ItemCategory": "Placable object",
       "StackSize": 999,
-      "Description": "Used to create potions. Level 3.",
+      "Description": "Used to craft tier 3 potions.",
       "Ingredients": [["iron ingot", 40]],
       "EnergyHealth": null
   },

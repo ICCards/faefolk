@@ -1618,6 +1618,12 @@ layout_mode = 2
 texture = ExtResource("19_3cenc")
 script = ExtResource("7_du1gv")
 
+[node name="wine" type="TextureRect" parent="FoodCollection2"]
+material = SubResource("264")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
+
 [connection signal="mouse_entered" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_entered"]
 [connection signal="mouse_exited" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Crops" to="." method="_on_Crops_pressed"]
@@ -1908,3 +1914,5 @@ script = ExtResource("7_du1gv")
 [connection signal="mouse_exited" from="FoodCollection2/sauteed cabbage with garlic" to="FoodCollection2/sauteed cabbage with garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FoodCollection2/potato soup" to="FoodCollection2/potato soup" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FoodCollection2/potato soup" to="FoodCollection2/potato soup" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="FoodCollection2/wine" to="FoodCollection2/wine" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="FoodCollection2/wine" to="FoodCollection2/wine" method="_on_collection_item_mouse_exited"]

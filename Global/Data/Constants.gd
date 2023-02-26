@@ -11,9 +11,9 @@ const NAVIGATION_TILE_ATLAS_CORD = Vector2i(1,0)
 
 const dimensions_dict = {
 	"furnace" : Vector2(1,1),
-	"wood box" : Vector2(1,1),
+	"crate" : Vector2(1,1),
 	"wood fence" : Vector2(1,1),
-	"wood barrel" : Vector2(1,1),
+	"barrel" : Vector2(1,1),
 	"display table" : Vector2(1,1),
 	"campfire" : Vector2(1,1),
 	"torch" : Vector2(1,1),
@@ -58,8 +58,8 @@ const dimensions_dict = {
 }
 
 var object_atlas_tiles = {
-	"wood box": Vector2i(0,0),
-	"wood barrel": Vector2i(3,0),
+	"crate": Vector2i(0,0),
+	"barrel": Vector2i(0,2),
 }
 
 var rotatable_atlas_tiles = {
@@ -70,10 +70,10 @@ var rotatable_atlas_tiles = {
 		"left": Vector2i(3,2)
 	},
 	"wood chest": {
-		"up": Vector2i(0,2),
-		"right": Vector2i(1,2),
-		"down": Vector2i(0,9),
-		"left": Vector2i(3,2)
+		"up": Vector2i(6,12),
+		"right": Vector2i(19,11),
+		"down": Vector2i(0,12),
+		"left": Vector2i(12,11)
 	},
 }
 

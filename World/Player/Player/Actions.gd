@@ -62,8 +62,10 @@ func _input(event):
 						harvest_crop(current_interactive_node)
 					"forage":
 						harvest_forage(current_interactive_node)
-					"workbench":
-						get_parent().user_interface.toggle_workbench(current_interactive_node.object_level)
+					"crate":
+						get_parent().user_interface.toggle_crate(current_interactive_node.name)
+					"barrel":
+						get_parent().user_interface.toggle_barrel(current_interactive_node.name)
 					"workbench":
 						get_parent().user_interface.toggle_workbench(current_interactive_node.object_level)
 					"grain mill":

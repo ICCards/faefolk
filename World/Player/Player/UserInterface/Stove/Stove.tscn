@@ -95,7 +95,6 @@ offset_left = 552.0
 offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
-text = "Stove #3"
 
 [node name="StoveSlots" parent="." instance=ExtResource("6_4jxth")]
 offset_left = 88.0
@@ -206,9 +205,11 @@ color = Color(0.247059, 0.109804, 0.0627451, 1)
 wait_time = 10.0
 
 [node name="InventorySlots" parent="." instance=ExtResource("8_fmvqt")]
+layout_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource("7_mau5r")]
+layout_mode = 0
 offset_left = 638.0
 offset_top = 184.0
 offset_right = 938.0
