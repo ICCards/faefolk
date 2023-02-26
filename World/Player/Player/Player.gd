@@ -104,7 +104,7 @@ func set_current_object(item_name):
 	else:
 		item_category = null
 	# Placable object
-	if item_category == "Placable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
+	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
 		actions.show_placable_object(item_name, item_category)
 		return
 	if item_name == "blueprint" and current_building_item != null:

@@ -22,6 +22,8 @@ var temp_health = 3
 func _ready():
 	if Constants.object_atlas_tiles.keys().has(item_name):
 		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.object_atlas_tiles[item_name])
+	elif Constants.autotile_object_atlas_tiles.keys().has(item_name):
+		pass
 	else:
 		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.rotatable_atlas_tiles[item_name][direction])
 	call_deferred("set_dimensions")

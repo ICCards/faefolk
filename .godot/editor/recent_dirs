@@ -1,3 +1,6 @@
+res://Assets/Tilesets/foundation
+res://Assets/Tilesets/walls
+res://Assets/Tilesets/objects
 res://World/Player/Player/UserInterface/Slots
 res://World/Player/Player/UserInterface/Barrel
 res://World/Player/Player/UserInterface/Crate
@@ -17,5 +20,3 @@ res://Assets/Images/Magic/Arrow
 res://Assets/Images/Magic/wind
 res://Assets/Images/Magic/fire
 res://World/Overworld
-res://Assets/Images/Animations/water main menu
-res://Assets/Images/Particles

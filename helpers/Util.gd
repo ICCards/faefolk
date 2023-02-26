@@ -92,7 +92,7 @@ func returnCategoryColor(category):
 			return Color("26ff00")
 		"Food":
 			return Color("eb00ff")
-		"Placable object":
+		"Placeable object":
 			return Color("806aff")
 		"Construction":
 			return Color("ff25f1")

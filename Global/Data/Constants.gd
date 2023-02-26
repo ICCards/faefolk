@@ -60,6 +60,13 @@ const dimensions_dict = {
 var object_atlas_tiles = {
 	"crate": Vector2i(0,0),
 	"barrel": Vector2i(0,2),
+	"wood fence": Vector2i(26,67),
+}
+
+var autotile_object_atlas_tiles = {
+	"wood fence": 0,
+	"stone fence": 1,
+	"metal fence": 2
 }
 
 var rotatable_atlas_tiles = {

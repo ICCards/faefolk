@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://World/Objects/Tiles/TileObjectHurtBox.gd" id="1_gmkx7"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
-[ext_resource type="TileSet" uid="uid://bignuihdkvtip" path="res://Assets/Tilesets/Objects/objects.tres" id="4_0qdul"]
+[ext_resource type="TileSet" uid="uid://cjw02qyr417yr" path="res://Assets/Tilesets/Objects/objects.tres" id="4_0qdul"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)

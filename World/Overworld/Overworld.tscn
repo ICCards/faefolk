@@ -1,6 +1,6 @@
 [gd_scene load_steps=42 format=3 uid="uid://bpxgic0nhjbf0"]
 
-[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="1_631cd"]
+[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="1_631cd"]
 [ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="1_gscqb"]
 [ext_resource type="Script" path="res://World/Overworld/Overworld.gd" id="1_jqwgc"]
 [ext_resource type="Texture2D" uid="uid://clrddbfwbnhfe" path="res://Assets/Tilesets/walls/walls/twig.png" id="4_imt0d"]
@@ -13,9 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://dyu5218vtbbyn" path="res://Assets/Tilesets/walls/walls/stone.png" id="11_dx0o1"]
 [ext_resource type="Texture2D" uid="uid://dh8yeb2dd8ak4" path="res://Assets/Tilesets/walls/walls/metal.png" id="12_ho40d"]
 [ext_resource type="Texture2D" uid="uid://6yn3jmy5jo6e" path="res://Assets/Tilesets/walls/walls/armored.png" id="13_ue14p"]
-[ext_resource type="Texture2D" uid="uid://ptjidk7r1daj" path="res://Assets/Tilesets/Terrain/hoed.png" id="14_4u716"]
-[ext_resource type="TileSet" uid="uid://xg447jbyy2h3" path="res://Assets/Tilesets/Objects/objects.tres" id="14_f8t84"]
-[ext_resource type="Texture2D" uid="uid://tav38q7enk7s" path="res://Assets/Tilesets/objects/fence tiles.png" id="15_jfpu0"]
+[ext_resource type="Texture2D" uid="uid://ptjidk7r1daj" path="res://Assets/Tilesets/terrain/hoed.png" id="14_4u716"]
+[ext_resource type="TileSet" uid="uid://dh1pa60v0n6tk" path="res://Assets/Tilesets/objects/objects.tres" id="14_6ii0l"]
+[ext_resource type="Texture2D" uid="uid://kong6qw4ndqh" path="res://Assets/Tilesets/objects/fence tiles.png" id="15_jfpu0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("1_631cd")
@@ -14249,6 +14249,31 @@ texture = ExtResource("15_jfpu0")
 4:0/0/terrain_set = 0
 4:0/0/terrain = 0
 4:0/0/terrains_peering_bit/left_side = 0
+13:0/size_in_atlas = Vector2i(1, 2)
+13:0/0 = 0
+13:0/0/texture_origin = Vector2i(0, 8)
+13:0/0/terrain_set = 0
+13:0/0/terrain = 0
+13:0/0/terrains_peering_bit/right_side = 0
+13:0/0/terrains_peering_bit/bottom_side = 0
+13:0/0/terrains_peering_bit/top_side = 0
+14:0/size_in_atlas = Vector2i(1, 2)
+14:0/0 = 0
+14:0/0/texture_origin = Vector2i(0, 8)
+14:0/0/terrain_set = 0
+14:0/0/terrain = 0
+14:0/0/terrains_peering_bit/bottom_side = 0
+14:0/0/terrains_peering_bit/left_side = 0
+14:0/0/terrains_peering_bit/top_side = 0
+15:0/size_in_atlas = Vector2i(1, 2)
+15:0/0 = 0
+15:0/0/texture_origin = Vector2i(0, 8)
+15:0/0/terrain_set = 0
+15:0/0/terrain = 0
+15:0/0/terrains_peering_bit/right_side = 0
+15:0/0/terrains_peering_bit/bottom_side = 0
+15:0/0/terrains_peering_bit/left_side = 0
+15:0/0/terrains_peering_bit/top_side = 0
 
 [sub_resource type="TileSet" id="TileSet_rsk5d"]
 terrain_set_0/mode = 2
@@ -15576,7 +15601,6 @@ script = ExtResource("1_jqwgc")
 script = ExtResource("1_gscqb")
 
 [node name="TerrainTiles" type="Node2D" parent="."]
-visible = false
 z_index = -10
 
 [node name="ValidTiles" type="TileMap" parent="TerrainTiles"]
@@ -15618,12 +15642,18 @@ layer_0/y_sort_enabled = true
 
 [node name="ObjectTiles" type="TileMap" parent="BuildingTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("14_f8t84")
+y_sort_enabled = true
+tile_set = ExtResource("14_6ii0l")
 format = 2
+layer_0/y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="BuildingTiles"]
+visible = false
+y_sort_enabled = true
 tile_set = SubResource("TileSet_rsk5d")
 format = 2
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(-65524, 65536, 0, -65525, 65536, 0, -65526, 65536, 0, 13, 458752, 0, 65549, 655360, 0, -65521, 262144, 0, -196601, 524288, 0, -131065, 458752, 0, -65529, 0, 0, -65528, 65536, 0, -65527, 65536, 0, -65522, 196608, 0, -196595, 524288, 0, -131059, 458752, 0, -65523, 917504, 0, 4, 196608, 0, 5, 65536, 0, 6, 262144, 0, 1, 262144, 0, 0, 65536, 0, 65535, 196608, 0, -458749, 524288, 0, -131069, 458752, 0, -393213, 655360, 0, -196605, 524288, 0, -65533, 655360, 0)
 
 [node name="FarmingTiles" type="Node2D" parent="."]
 

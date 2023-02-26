@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://8urgulfeikba"]
+[gd_scene load_steps=17 format=3 uid="uid://8urgulfeikba"]
 
 [ext_resource type="AudioStream" uid="uid://2u73yye23mpv" path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Farm/PlantedCrop.gd" id="1_37wdp"]
 [ext_resource type="Texture2D" uid="uid://b2foho3vp0sfm" path="res://Assets/Images/Animations/plant/plant break.png" id="2_l6djf"]
-[ext_resource type="TileSet" uid="uid://7rb6h6ugt4oe" path="res://Assets/Tilesets/Objects/crops.tres" id="4_y022s"]
 
 [sub_resource type="CircleShape2D" id="13"]
 radius = 30.0
@@ -141,7 +140,6 @@ position = Vector2(0, 8)
 [node name="TileMap" type="TileMap" parent="Crop"]
 y_sort_enabled = true
 position = Vector2(-8, 2.08165e-12)
-tile_set = ExtResource("4_y022s")
 format = 2
 layer_0/y_sort_enabled = true
 layer_0/tile_data = PackedInt32Array(-65536, 1638400, 0)

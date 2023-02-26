@@ -131,7 +131,9 @@ func place_object_in_world(id, item_name, direction, location):
 	PlaceableObjects.call_deferred("add_child", tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_local(location)
 	remove_valid_tiles(item_name, direction, location)
-	if Constants.object_atlas_tiles.keys().has(item_name):
+	if Constants.autotile_object_atlas_tiles.keys().has(item_name):
+		Tiles.object_tiles.set_cells_terrain_connect(0,[location],0,Constants.autotile_object_atlas_tiles[item_name])
+	elif Constants.object_atlas_tiles.keys().has(item_name):
 		if not Util.isStorageItem(item_name):
 			Tiles.object_tiles.set_cell(0,location,0,Constants.object_atlas_tiles[item_name])
 	else:

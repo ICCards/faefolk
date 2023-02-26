@@ -148,6 +148,26 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
 
+[node name="stone fence" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="stone gate" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="metal fence" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="metal gate" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
 [node name="wood chest" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2

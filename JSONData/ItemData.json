@@ -1162,126 +1162,126 @@
   },
   
   "well" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Provides a place for you to refill your watering can.",
       "Ingredients": [["wood", 20], ["stone", 50]],
       "EnergyHealth": null
   },
   "chair" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["wood", 4]],
       "EnergyHealth": null
   },
   "stool" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["wood", 4]],
       "EnergyHealth": null
   },
   "large rug" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["cloth", 24]],
       "EnergyHealth": null
   },
   "medium rug" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["cloth", 12]],
       "EnergyHealth": null
   },
   "small rug" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["cloth", 4]],
       "EnergyHealth": null
   },
   "couch" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["wood", 10], ["cloth", 10]],
       "EnergyHealth": null
   },
   "armchair" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["wood", 5], ["cloth", 5]],
       "EnergyHealth": null
   },
   "table" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["wood", 8]],
       "EnergyHealth": null
   },
   "round table" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["wood", 8]],
       "EnergyHealth": null
   },
   "bed" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed and used to set respawn point.",
       "Ingredients": [["wood", 8], ["cloth", 8]],
       "EnergyHealth": null
   },
   "dresser" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Can be placed as decoration.",
       "Ingredients": [["wood", 8]],
       "EnergyHealth": null
   },
   "wood door" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Entry point for bases with low durability.",
       "Ingredients": [["wood", 20]],
       "EnergyHealth": null
   },
   "metal door" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Entry point for bases with medium durability.",
       "Ingredients": [["bronze ingot", 20]],
       "EnergyHealth": null
   },
   "armored door" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Entry point for bases with high durability.",
       "Ingredients": [["iron ingot", 20]],
       "EnergyHealth": null
   },
   "furnace" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Turns ore and coal into metal bars.",
       "Ingredients": [["wood", 10], ["stone", 40]],
       "EnergyHealth": null
   },
   "display table" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "A table for decoration.",
       "Ingredients": [["wood", 2]],
       "EnergyHealth": null
   },
   "tool cabinet" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Sets building point and building upkeep.",
       "Ingredients": [["wood", 75]],
@@ -1289,84 +1289,112 @@
   },
   
   "torch" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to generate modest light.",
       "Ingredients": [["wood", 1], ["stone", 1]],
       "EnergyHealth": null
   },
   "campfire" : {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to generate moderate light.",
       "Ingredients": [["wood", 4],["stone", 4]],
       "EnergyHealth": null
   },
   "wood fence": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
-      "Description": "Wood fence for decoration.",
+      "Description": "Wood fence with minimal durability.",
       "Ingredients": [["wood", 2]],
       "EnergyHealth": null
   },
   "wood gate": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
-      "Description": "Wood gate for decoration.",
+      "Description": "Wood gate for passage through fences.",
       "Ingredients": [["wood", 8]],
       "EnergyHealth": null
   },
+  "stone fence": {
+      "ItemCategory": "Placeable object",
+      "StackSize": 999,
+      "Description": "Stone fence with moderate durability.",
+      "Ingredients": [["stone", 2]],
+      "EnergyHealth": null
+  },
+  "stone gate": {
+      "ItemCategory": "Placeable object",
+      "StackSize": 999,
+      "Description": "Stone gate for passage through fences.",
+      "Ingredients": [["stone", 8]],
+      "EnergyHealth": null
+  },
+  "metal fence": {
+      "ItemCategory": "Placeable object",
+      "StackSize": 999,
+      "Description": "Stone fence with high durability.",
+      "Ingredients": [["bronze ingot", 2]],
+      "EnergyHealth": null
+  },
+  "metal gate": {
+      "ItemCategory": "Placeable object",
+      "StackSize": 999,
+      "Description": "Metal gate for passage through fences.",
+      "Ingredients": [["bronze ingot", 8]],
+      "EnergyHealth": null
+  },
   "flower trough": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "A decorative wooden bed for wild flowers.",
       "Ingredients": [["wood", 12]],
       "EnergyHealth": null
   },
   "barrel": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "A wooden barrel for aging products.",
       "Ingredients": [["wood", 6]],
       "EnergyHealth": null
   },
   "crate": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "A wooden crate for storage.",
       "Ingredients": [["wood", 4]],
       "EnergyHealth": null
   },
   "wood chest": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Wood chest for storage.",
       "Ingredients": [["wood", 10],["stone", 2]],
       "EnergyHealth": null
   },
   "stone chest": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Stone chest for storage.",
       "Ingredients": [["wood", 2],["stone", 10]],
       "EnergyHealth": null
   },
   "brewing table #1": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to craft tier 1 potions.",
       "Ingredients": [["wood", 40]],
       "EnergyHealth": null
   },
   "brewing table #2": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to craft tier 2 potions.",
       "Ingredients": [["stone", 40]],
       "EnergyHealth": null
   },
   "brewing table #3": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to craft tier 3 potions.",
       "Ingredients": [["iron ingot", 40]],
@@ -1374,77 +1402,77 @@
   },
 
   "workbench #1": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 1.",
       "Ingredients": [["wood", 25], ["stone", 10]],
       "EnergyHealth": null
   },
   "workbench #2": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 2.",
       "Ingredients": [["wood",50],["stone",50]],
       "EnergyHealth": null
   },
   "workbench #3": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to craft tools. Level 3.",
       "Ingredients": [["wood",100],["stone",100]],
       "EnergyHealth": null
   },
   "grain mill #1": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 1.",
       "Ingredients": [["stone", 10], ["iron ingot",5]],
       "EnergyHealth": null
   },
   "grain mill #2": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 2.",
       "Ingredients": [["stone", 20], ["iron ingot",10]],
       "EnergyHealth": null
   },
   "grain mill #3": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to process grains for cooking recipes. Level 3.",
       "Ingredients": [["stone", 40], ["iron ingot",20]],
       "EnergyHealth": null
   },
   "stove #1": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to cook recipes. Level 1.",
       "Ingredients": [["stone", 100]],
       "EnergyHealth": null
   },
   "stove #2": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to cook recipes. Level 2.",
       "Ingredients": [["stone", 200], ["iron ingot", 10]],
       "EnergyHealth": null
   },
   "stove #3": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
       "Description": "Used to cook recipes. Level 3.",
       "Ingredients": [["stone", 500], ["iron ingot", 20]],
       "EnergyHealth": null
   },
   "tent": {
-      "ItemCategory": "Placable object",
+      "ItemCategory": "Placeable object",
       "StackSize": 999,
-      "Description": "Small placable shelter with low durability.",
+      "Description": "Small Placeable shelter with low durability.",
       "Ingredients": [["wood", 20],["stone", 10]],
       "EnergyHealth": null
   },
     "sleeping bag": {
-        "ItemCategory": "Placable object",
+        "ItemCategory": "Placeable object",
         "StackSize": 999,
         "Description": "Can be placed and used to set respawn point.",
         "Ingredients": [["wood", 10],["stone", 2]],
