@@ -63,7 +63,7 @@ var starting_player_data = {
 		"6": ["wind staff", 1, null],
 		"5": ["fire staff", 1, null],
 		"7": ["crate", 100, null],
-		"3": ["wood chest", 100, null],
+		"3": ["wood fence", 100, null],
 		"8": ["barrel", 10, null],
 	#	"3": ["blue flower", 100, null],
 #		"4": ["brewing table #3", 10, null],

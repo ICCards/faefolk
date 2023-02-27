@@ -117,7 +117,7 @@ func set_dimensions():
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$TileMap.show()
 			$TileMap.set_cell(0,Vector2i(0,0),0,Constants.object_atlas_tiles[item_name])
-#			$ItemToPlace.show()
+			$ItemToPlace.hide()
 #			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 			var dimensions = Constants.dimensions_dict[item_name]
 			$ColorIndicator.tile_size = dimensions

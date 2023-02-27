@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dktjb7tf2s1cg" path="res://Assets/Images/tree_sets/birch/growing/sapling.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd" id="1_ttu3h"]
-[ext_resource type="TileSet" uid="uid://cjw02qyr417yr" path="res://Assets/Tilesets/Objects/objects.tres" id="2_2t32t"]
 [ext_resource type="PackedScene" uid="uid://cx276tgkqafh7" path="res://World/Objects/Misc/ColorIndicator.tscn" id="2_57rwy"]
+[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="2_li7u7"]
 [ext_resource type="Texture2D" uid="uid://dl5ahjyryox" path="res://Assets/Images/placable_object_preview/foundation.png" id="3_ydjna"]
 [ext_resource type="Texture2D" uid="uid://rsf1ok356wcn" path="res://Assets/Images/craftable object preview/wood gate.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://et4a5mhdh22" path="res://Assets/Images/Forage/flower/sunflower.png" id="6"]
@@ -12,8 +12,9 @@
 script = ExtResource("1_ttu3h")
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource("2_2t32t")
+tile_set = ExtResource("2_li7u7")
 format = 2
+layer_0/tile_data = PackedInt32Array(0, 1703936, 67)
 
 [node name="ColorIndicator" parent="." instance=ExtResource("2_57rwy")]
 z_index = 2

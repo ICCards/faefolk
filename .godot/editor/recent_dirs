@@ -1,3 +1,4 @@
+res://Assets/Tilesets/terrain
 res://Assets/Tilesets/foundation
 res://Assets/Tilesets/walls
 res://Assets/Tilesets/objects
@@ -19,4 +20,3 @@ res://Assets/Themes
 res://Assets/Images/Magic/Arrow
 res://Assets/Images/Magic/wind
 res://Assets/Images/Magic/fire
-res://World/Overworld

@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkqbyp3078p5i"]
+[gd_scene load_steps=7 format=3 uid="uid://dkqbyp3078p5i"]
 
 [ext_resource type="Script" path="res://World/Objects/Tiles/TileObjectHurtBox.gd" id="1_gmkx7"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
-[ext_resource type="TileSet" uid="uid://cjw02qyr417yr" path="res://Assets/Tilesets/Objects/objects.tres" id="4_0qdul"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -83,13 +82,6 @@ libraries = {
 
 [node name="ResetTempHealthTimer" type="Timer" parent="."]
 wait_time = 5.0
-
-[node name="ObjectTiles" type="TileMap" parent="."]
-modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(-8, 8)
-tile_set = ExtResource("4_0qdul")
-collision_visibility_mode = 1
-format = 2
 
 [connection signal="area_entered" from="Marker2D/HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="ResetTempHealthTimer" to="." method="_on_ResetTempHealthTimer_timeout"]

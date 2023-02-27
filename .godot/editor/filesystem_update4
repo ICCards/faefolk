@@ -17,3 +17,6 @@ res://Assets/Themes/LockedAsset.tres
 res://World/Player/Player/Player.gd
 res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn
 res://World/Objects/Farm/PlantedCrop.tscn
+res://Global/Data/PlayerData.gd
+res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd
+res://Assets/Tilesets/terrain/elevated terrain.tres

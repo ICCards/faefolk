@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e875ail50mva"
-path="res://.godot/imported/display table.png-bc8773009197d4192628ec3ad189ef9b.ctex"
+uid="uid://eu3o3snb836a"
+path="res://.godot/imported/terrain elevation.png-108ad081263f5a78850d46606bcf6eaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/placable_object_preview/display table.png"
-dest_files=["res://.godot/imported/display table.png-bc8773009197d4192628ec3ad189ef9b.ctex"]
+source_file="res://Assets/Tilesets/terrain/terrain elevation.png"
+dest_files=["res://.godot/imported/terrain elevation.png-108ad081263f5a78850d46606bcf6eaa.ctex"]
 
 [params]
 
