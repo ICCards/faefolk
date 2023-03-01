@@ -2,18 +2,18 @@ extends Node2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer 
 @onready var tree_stump_sprite: Sprite2D = $TreeSprites/TreeStump
+@onready var stump_break: AnimatedSprite2D = $TreeSprites/Break
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var rng = RandomNumberGenerator.new()
 
 var tree_object
-var location 
-var health
-var variety
+var location = Vector2i(0,0)
+var health = 10
+var variety = "oak"
 var destroyed: bool = false
 
 func _ready():
-	call_deferred("hide")
 	call_deferred("setTexture", tree_object)
 
 
@@ -25,6 +25,7 @@ func remove_from_world():
 
 func setTexture(tree):
 	tree_stump_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/large stump.png"))
+	
 
 
 func hit(tool_name):
@@ -46,15 +47,16 @@ func hit(tool_name):
 		destroyed = true
 		if MapData.world["stump"].has(name):
 			MapData.world["stump"].erase(name)
-		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 		sound_effects.set_deferred("stream", Sounds.stump_break)
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
 		animation_player.call_deferred("play", "stump destroyed")
-		InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-16, 32))
+		#InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-16, 32))
 		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position, amt)
+		$TreeSprites/Break.play("break")
 		await sound_effects.finished
 		call_deferred("queue_free")
 

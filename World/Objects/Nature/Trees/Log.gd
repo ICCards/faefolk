@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var log_sprite: Sprite2D = $Log
+#@onready var log_sprite: Sprite2D = $Log
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -12,9 +12,23 @@ var tree_variety
 var location
 var destroyed: bool = false
 
+var atlas_tile_cord = {
+	1: Vector2i(13,31),
+	2: Vector2i(14,31),
+	3: Vector2i(15,31),
+	4: Vector2i(13,32),
+	5: Vector2i(14,32),
+	6: Vector2i(15,32),
+	7: Vector2i(13,33),
+	8: Vector2i(14,33),
+	9: Vector2i(15,33),
+	10: Vector2i(13,34),
+	11: Vector2i(14,34),
+	12: Vector2i(15,34)
+}
+
 func _ready():
-	randomize()
-	call_deferred("hide")
+	Tiles.remove_valid_tiles(location)
 	setTreeBranchType()
 
 func remove_from_world():
@@ -32,13 +46,15 @@ func setTreeBranchType():
 		set_deferred("tree_variety", "oak")
 	else:
 		set_deferred("tree_variety", "birch")
-	log_sprite.set_deferred("texture", Images.tree_branch_objects[variety]) 
+	$TileMap.set_cell(0,Vector2i(0,-1),0,atlas_tile_cord[variety])
 
 func hit(tool_name, special_ability = ""):
 	if not destroyed:
 		destroyed = true
 		if MapData.world["log"].has(name):
 			MapData.world["log"].erase(name)
+		$Break.play("break")
+		$TileMap.erase_cell(0,Vector2i(0,-1))
 		Tiles.add_valid_tiles(location)
 		sound_effects.set_deferred("stream", Sounds.stump_break) 
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12)) 

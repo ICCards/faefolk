@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjtdfqvbjks4g"]
+[gd_scene load_steps=6 format=3 uid="uid://cjtdfqvbjks4g"]
 
 [ext_resource type="Texture2D" uid="uid://dktjb7tf2s1cg" path="res://Assets/Images/tree_sets/birch/growing/sapling.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd" id="1_ttu3h"]
 [ext_resource type="PackedScene" uid="uid://cx276tgkqafh7" path="res://World/Objects/Misc/ColorIndicator.tscn" id="2_57rwy"]
 [ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="2_li7u7"]
-[ext_resource type="Texture2D" uid="uid://dl5ahjyryox" path="res://Assets/Images/placable_object_preview/foundation.png" id="3_ydjna"]
-[ext_resource type="Texture2D" uid="uid://rsf1ok356wcn" path="res://Assets/Images/craftable object preview/wood gate.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://et4a5mhdh22" path="res://Assets/Images/Forage/flower/sunflower.png" id="6"]
 
 [node name="PlaceObject" type="Node2D"]
@@ -18,30 +16,6 @@ layer_0/tile_data = PackedInt32Array(0, 1703936, 67)
 
 [node name="ColorIndicator" parent="." instance=ExtResource("2_57rwy")]
 z_index = 2
-
-[node name="ItemToPlace" type="TextureRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.627451)
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_vertical = 0
-mouse_filter = 2
-texture = ExtResource("3_ydjna")
-stretch_mode = 4
-
-[node name="GateToPlace" type="TextureRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.627451)
-offset_left = -10.0
-offset_top = -19.0
-offset_right = 74.0
-offset_bottom = 21.0
-grow_vertical = 0
-mouse_filter = 2
-texture = ExtResource("5")
 
 [node name="TreeSeedToPlace" type="TextureRect" parent="."]
 visible = false
@@ -61,15 +35,6 @@ offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6")
 expand_mode = 1
-
-[node name="ScaledItemToPlace" type="TextureRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.627451)
-offset_right = 32.0
-offset_bottom = 32.0
-grow_vertical = 0
-mouse_filter = 2
-stretch_mode = 1
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 visible = false

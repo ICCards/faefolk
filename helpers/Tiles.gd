@@ -87,7 +87,7 @@ func isValidNavigationTile(loc) -> bool:
 	
 	return true
 
-func remove_valid_tiles(location, dimensions = Vector2(1,1)):
+func remove_valid_tiles(location, dimensions = Vector2i(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.erase_cell(0,location+Vector2i(x,-y))

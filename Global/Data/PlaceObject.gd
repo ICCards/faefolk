@@ -1,5 +1,7 @@
 extends Node
 
+@onready var Log = load("res://World/Objects/Nature/Trees/Log.tscn")
+@onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
 @onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 @onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
 @onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
@@ -11,39 +13,20 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
-enum Placables { 
-	BARREL, 
-	BOX, 
-	WOOD_CHEST, 
-	STONE_CHEST, 
-	WORKBENCH1, WORKBENCH2, WORKBENCH3,
-	GRAIN_MILL1, GRAIN_MILL2, GRAIN_MILL3,
-	STOVE1, STOVE2, STOVE3,
-	TORCH,
-	NULL,
-	FIRE_PEDESTAL_TALL,
-	FIRE_PEDESTAL,
-	CAMPFIRE,
-	TENT_VERTICAL,
-	TENT_HORIZONTAL,
-	TENT_ENLARGED,
-	FURNACE_DOWN,
-	FURNACE_UP,
-	FURNACE_LEFT,
-	FURNACE_RIGHT
-}
-
-enum Lights {
-	NULL,
-	FIRE_PEDESTAL,
-	TALL_FIRE_PEDESTAL,
-	TORCH,
-	CAMPFIRE
-}
 
 var PlaceableObjects 
 var NatureObjects 
 var ForageObjects
+
+
+func place_log_in_world(id,variety,location):
+	NatureObjects = Server.world.get_node("NatureObjects")
+	var object = Log.instantiate()
+	object.name = id
+	object.variety = variety #rng.randi_range(1,12) #MapData.world["log"][id]["v"]
+	object.location = location
+	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,8)
+	NatureObjects.call_deferred("add_child",object,true)
 
 
 func place_forage_in_world(id,item_name,location,first_placement):
@@ -59,7 +42,6 @@ func place_forage_in_world(id,item_name,location,first_placement):
 
 func place_tree_in_world(id, variety, location, biome ,health, phase):
 	NatureObjects = Server.world.get_node("NatureObjects")
-	Tiles.remove_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 	var object = TreeObject.instantiate()
 	var pos = Tiles.valid_tiles.map_to_local(location)
 	object.phase = phase
@@ -120,9 +102,10 @@ func remove_valid_tiles(item_name,direction, location):
 	else:
 		Tiles.remove_valid_tiles(location, Constants.dimensions_dict[item_name])
 		
-func place_object_in_world(id, item_name, direction, location):
+func place_object_in_world(id, item_name, direction, location, variety = null):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	var tileObjectHurtBox = TileObjectHurtBox.instantiate()
+	tileObjectHurtBox.variety = variety
 	tileObjectHurtBox.name = id
 	tileObjectHurtBox.item_name = item_name
 	tileObjectHurtBox.location = location
@@ -136,6 +119,9 @@ func place_object_in_world(id, item_name, direction, location):
 	elif Constants.object_atlas_tiles.keys().has(item_name):
 		if not Util.isStorageItem(item_name):
 			Tiles.object_tiles.set_cell(0,location,0,Constants.object_atlas_tiles[item_name])
+	elif Constants.customizable_rotatable_atlas_tiles.keys().has(item_name):
+		if not Util.isStorageItem(item_name):
+			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_atlas_tiles[item_name][variety][direction])
 	else:
 		if not Util.isStorageItem(item_name):
 			Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_atlas_tiles[item_name][direction])

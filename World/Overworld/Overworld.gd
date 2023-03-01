@@ -44,6 +44,19 @@ func set_valid_tiles():
 #	Tiles.wet_sand_tiles = $GeneratedTiles/WetSandBeachBorder
 #	Tiles.forest_tiles = $GeneratedTiles/DarkGreenGrassTiles
 
+	for x in range(10):
+		for y in range(10):
+#			var object = TallGrass.instantiate()
+#			object.loc = Vector2i(x,y)
+#			object.biome = "forest" #map["tall_grass"][id]["b"]
+#			#object.name = id
+#			object.position = Tiles.valid_tiles.map_to_local(Vector2i(x,y)) #+ Vector2(8, 32)
+#			$GrassObjects.call_deferred("add_child",object,true)
+			if Util.chance(5):
+				#PlaceObject.place_log_in_world("id",rng.randi_range(1,12),Vector2i(x,y))
+				PlaceObject.place_tree_in_world("id","oak",Vector2i(x,y),"forest",100,"5")
+				return
+
 
 func create_or_load_world():
 	if MapData.world["is_built"]: # Load world

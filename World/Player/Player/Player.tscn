@@ -3718,6 +3718,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Swing/SwordSwing/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="62"]
 resource_name = "waiting for fish side"
@@ -4325,8 +4337,8 @@ shape = SubResource("9")
 [node name="EnterDoors" type="Area2D" parent="Area2Ds"]
 visible = false
 position = Vector2(0, 11)
-collision_layer = 32
-collision_mask = 4096
+collision_layer = 4096
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterDoors"]
 position = Vector2(0, -23)
@@ -4369,6 +4381,12 @@ disabled = true
 
 [node name="AxePickaxeSwing" parent="Swing" index="0"]
 collision_mask = 8
+
+[node name="ScytheSwing" parent="Swing" index="2"]
+visible = true
+
+[node name="CollisionShape2D" parent="Swing/ScytheSwing" index="0"]
+position = Vector2(5, 0)
 
 [node name="Sounds" type="Node2D" parent="."]
 

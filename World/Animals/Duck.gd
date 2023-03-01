@@ -14,7 +14,6 @@ var destroyed: bool = false
 var stunned: bool = false
 var frozen: bool = false
 var poisoned: bool = false
-#var velocity := Vector2.ZERO
 var health: int = Stats.DUCK_HEALTH
 var STARTING_HEALTH: int = Stats.DUCK_HEALTH
 var running_state: bool = false

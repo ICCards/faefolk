@@ -21,7 +21,6 @@ var attacking: bool = false
 var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
-var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 500.0
 var health: int = Stats.BOAR_HEALTH

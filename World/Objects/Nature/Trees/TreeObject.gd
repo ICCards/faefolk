@@ -12,10 +12,10 @@ extends Area2D
 
 var rng = RandomNumberGenerator.new()
 
-var location
-var variety
+var location = Vector2i(0,0)
+var variety = "oak"
 var hit_dir
-var health
+var health = 40
 var adjusted_leaves_falling_pos 
 var biome
 var tree_fallen = false
@@ -23,13 +23,14 @@ var destroyed = false
 
 var object_name = "tree"
 
-var phase
+var phase = "5"
 
 var temp_health: int = 3
 
 func _ready():
-	call_deferred("hide")
 	rng.randomize()
+	Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
+	$TreeSprites/AnimatedTop.play("default")
 	MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
 	call_deferred("set_tree")
 
@@ -43,7 +44,7 @@ func remove_from_world():
 
 func set_tree():
 	phase = str(phase)
-	if phase == "5" and Util.isNonFruitTree(MapData.world["tree"][name]["v"]): # grown nonfruit tree
+	if phase == "5" and Util.isNonFruitTree(variety): # grown nonfruit tree
 		animated_tree_top_sprite.call_deferred("show")
 		tree_bottom_sprite.call_deferred("show")
 		tree_stump_sprite.call_deferred("show")
@@ -135,8 +136,6 @@ func setGrownTreeTexture():
 	call_deferred("set_tree_top_collision_shape")
 	tree_stump_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/stump.png"))
 	tree_bottom_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/bottom.png"))
-	$TreeChipParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png"))
-	$TreeLeavesParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png"))
 	animated_tree_top_sprite.set_deferred("frame", rng.randi_range(0,19))
 	match biome:
 		"forest":
@@ -159,7 +158,7 @@ func setGrownTreeTexture():
 
 func hit(tool_name):
 	if not destroyed:
-		if not (phase == "5" and Util.isNonFruitTree(MapData.world["tree"][name]["v"])) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isFruitTree(MapData.world["tree"][name]["v"])):
+		if not (phase == "5" and Util.isNonFruitTree(variety)) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isFruitTree(variety)):
 			animation_player_stump.call_deferred("play", "sapling hit")
 			$ResetTempHealthTimer.call_deferred("start")
 			temp_health -= 1
@@ -181,10 +180,10 @@ func hit(tool_name):
 				sound_effects_tree.call_deferred("play") 
 				animation_player_tree.call_deferred("stop")
 				if Server.player_node.get_position().x <= get_position().x:
-					InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))
+					InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position)
 					animation_player_tree.call_deferred("play", "tree hit right")
 				else: 
-					InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
+					InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position)
 					animation_player_tree.call_deferred("play", "tree hit left")
 			elif not tree_fallen:
 				if health <= 0 and not destroyed:
@@ -229,9 +228,9 @@ func hit(tool_name):
 				animation_player_stump.call_deferred("stop")
 				if Server.player_node.get_position().x <= get_position().x:
 					animation_player_stump.call_deferred("play", "stump hit right")
-					InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))
+					InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position)
 				else: 
-					InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
+					InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position)
 					animation_player_stump.call_deferred("play", "stump hit right")
 			if health <= 0 and not destroyed: 
 				call_deferred("destroy", tool_name)
@@ -240,7 +239,7 @@ func hit(tool_name):
 func destroy(tool_name):
 	MapData.world["tree"].erase(name)
 	destroyed = true
-	Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+	Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 	InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-8, 32))
 	if not tool_name == "sapling":
 		animation_player_stump.call_deferred("play", "stump destroyed")
@@ -285,7 +284,6 @@ func set_tree_transparent():
 	tween.tween_property(tree_top_sprite, "modulate:a", 0.4, 0.5)
 	tween.tween_property(tree_stump_sprite, "modulate:a", 0.4, 0.5)
 	tween.tween_property(tree_bottom_sprite, "modulate:a", 0.4, 0.5)
-	tween.start()
 
 func set_tree_visible():
 	var tween = get_tree().create_tween()
@@ -293,7 +291,6 @@ func set_tree_visible():
 	tween.tween_property(tree_top_sprite, "modulate:a", 1.0, 0.5)
 	tween.tween_property(tree_stump_sprite, "modulate:a", 1.0, 0.5)
 	tween.tween_property(tree_bottom_sprite, "modulate:a", 1.0, 0.5)
-	tween.start()
 
 
 func _on_TreeTopArea_area_entered(_area):
@@ -310,10 +307,3 @@ func _on_RandomLeavesFallingTimer_timeout():
 func _on_ResetTempHealthTimer_timeout():
 	temp_health = 3
 
-func _on_VisibilityNotifier2D_screen_entered():
-	animated_tree_top_sprite.set_deferred("playing", true)
-	call_deferred("show")
-
-func _on_VisibilityNotifier2D_screen_exited():
-	animated_tree_top_sprite.set_deferred("playing", false)
-	call_deferred("hide")

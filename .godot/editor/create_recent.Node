@@ -1,4 +1,7 @@
+AnimatedSprite2D
 TileMap
+Timer
+Node
 Control
 GridContainer
 CollisionShape2D

@@ -16,17 +16,21 @@ enum Btn {ClickToUpdateTexture}
 var data
 
 func _init():
-	data = Image.new()
-	data.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	#data = Image.new()
+	data = Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	#print(size.x)
+	#data.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	#print(str(data.get_width()))
 
 func _update():
 	if not gradient:
 		return
 
-	#data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	#false #data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	print("YERRR")
 	var radius = (size - Vector2(1.0, 1.0)) / 2
 	var ratio = size.x / size.y
-
+	#print(str(size))
 	if type == GradientType.LINEAR:
 		for x in range(size.x):
 			var offset = float(x) / (size.x - 1)
@@ -38,10 +42,10 @@ func _update():
 	elif type == GradientType.RADIAL:
 		for x in range(size.x):
 			for y in range(size.y):
-				print("X " + str(x) + " Y " + str(y))
 				var dist = Vector2(x / ratio, y).distance_to(Vector2(radius.x / ratio, radius.y))
 				var offset = dist / radius.y
 				var color = gradient.sample(offset)
+				#print("WIDTH " +  str(data.get_width()))
 				data.set_pixel(x, y, color)
 
 	# Rectangular
@@ -61,7 +65,9 @@ func _update():
 				data.set_pixel(x, y, color)
 
 	#data.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	create_from_image(data)
+	print("FUCKER")
+	ImageTexture.create_from_image(data)
+	print("CREATE FROM IMAGE")
 
 # Workaournd that allow to manual update the texture
 #warning-ignore:unused_argument
@@ -79,8 +85,7 @@ func set_size(value):
 		size.x = 4096
 	if size.y > 4096:
 		size.y = 4096
-
-	data.resize(size.x, size.y)
+	#data.resize(size.x, size.y)
 	_update()
 
 func set_gradient(value):

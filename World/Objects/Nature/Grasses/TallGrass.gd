@@ -18,7 +18,6 @@ var type
 
 func _ready():
 	rng.randomize()
-	call_deferred("hide")
 	PlayerData.connect("season_changed",Callable(self,"set_grass_texture"))
 	set_deferred("front_health", rng.randi_range(1,3))
 	set_deferred("back_heath", rng.randi_range(1,3))
@@ -123,6 +122,7 @@ func _on_Area2D_area_entered(area):
 		call_deferred("destroy")
 	else:
 		await get_tree().create_timer(randf_range(0.0, 0.5)).timeout
+		$FrontBreak.play("break")
 		$AnimationPlayer.call_deferred("play", "animate front")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
@@ -144,6 +144,7 @@ func _on_BackArea2D_area_entered(area):
 		call_deferred("destroy")
 	else:
 		await get_tree().create_timer(randf_range(0.1, 0.5)).timeout
+		$BackBreak.play("break")
 		$AnimationPlayer2.call_deferred("play", "animate back")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
@@ -154,9 +155,3 @@ func destroy():
 		MapData.world["tall_grass"].erase(name)
 		Tiles.add_valid_tiles(loc)
 		call_deferred("queue_free")
-
-func _on_VisibilityNotifier2D_screen_entered():
-	call_deferred("show")
-
-func _on_VisibilityNotifier2D_screen_exited():
-	call_deferred("hide")

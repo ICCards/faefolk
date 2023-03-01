@@ -35,6 +35,7 @@ func initiateInventoryItemDrop(item: Array, pos: Vector2):
 
 ### Trees ###
 func initiateLeavesFallingEffect(variety: String, pos: Vector2):
+	return
 	if Server.world:
 		var adjusted_leaves_falling_pos = Vector2.ZERO
 		match variety:

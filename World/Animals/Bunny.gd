@@ -12,7 +12,6 @@ var destroyed: bool = false
 var stunned: bool = false
 var poisoned: bool = false
 var frozen: bool = false
-var velocity := Vector2.ZERO
 var health: int = Stats.BUNNY_HEALTH
 var STARTING_HEALTH: int = Stats.BUNNY_HEALTH
 var running_state: bool = false

@@ -16,7 +16,7 @@ func _physics_process(delta):
 func _ready():
 	$Hitbox.id = uuid.v4()
 	if is_hostile_projectile:
-		$Hitbox.set_collision_mask(128+2048+8+16)
+		$Hitbox.set_collision_layer(128+2048+8+16)
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
 	sound_effects.play()
 	$Hitbox.tool_name = "tornado spell"

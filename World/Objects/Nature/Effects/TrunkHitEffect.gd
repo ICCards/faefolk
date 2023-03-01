@@ -28,8 +28,6 @@ func _ready():
 	elif effectType == "tree hit left":
 		randomizeDisplayedSprites()
 		animation_player.play("tree hit left")
-	elif effectType == "trunk break":
-		animation_player.play("trunk break")
 	await animation_player.animation_finished
 	queue_free()
 

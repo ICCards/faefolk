@@ -56,10 +56,10 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 10,
 	"hotbar": {
-		"0": ["stone hoe", 1, 50],
+		"0": ["stone axe", 1, 50],
 		"1": ["blueprint", 1, null],
 		"4": ["bow", 1, 50],
-		"2": ["arrow", 999, null],
+		"2": ["chair", 999, null],
 		"6": ["wind staff", 1, null],
 		"5": ["fire staff", 1, null],
 		"7": ["crate", 100, null],

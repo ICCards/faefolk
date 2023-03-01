@@ -8,7 +8,6 @@ var rug_varieties = [1, 2, 3, 4, 5, 6, 7, 8]
 var bed_varieties = [1, 2, 3, 4, 5, 6, 7, 8]
 var vertical: bool = true
 var direction_index: int = 0
-var varieties_index: int = 0
 var rotation_delay: bool = false
 var variety_delay: bool = false
 var mousePos := Vector2.ZERO 
@@ -16,7 +15,7 @@ var mousePos := Vector2.ZERO
 var item_name
 var item_category
 var state
-var variety
+var variety = 1
 
 enum {
 	TENT, 
@@ -80,20 +79,16 @@ func initialize():
 	set_global_position(mousePos)
 	if item_name == "wood gate":
 		state = GATE
-	elif item_name == "furnace" or item_name == "tool cabinet" or item_name == "stone chest" or item_name == "wood chest" or \
-	item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3" or item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or\
-	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "dresser" or item_name == "brewing table #1" or item_name == "brewing table #2" or item_name == "brewing table #3":
-		state = ROTATABLE
 	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR
-	elif item_name == "couch" or item_name == "chair" or item_name == "armchair" or item_name == "table":
+	elif Constants.rotatable_atlas_tiles.keys().has(item_name):
+		state = ROTATABLE
+	elif Constants.customizable_rotatable_atlas_tiles.keys().has(item_name):
 		state = CUSTOMIZABLE_ROTATABLE
-	elif item_name == "large rug" or item_name == "medium rug" or item_name == "small rug" or item_name == "bed" or item_name == "round table":
+	elif Constants.customizable_atlas_tiles.keys().has(item_name):
 		state = CUSTOMIZABLE
 	elif item_category == "Placable object":
 		state = ITEM
-	elif item_category == "Placable path":
-		state = PATH
 	elif item_category == "Seed":
 		state = SEED
 	elif item_category == "BUILDING" and item_name == "wall":
@@ -106,10 +101,7 @@ func initialize():
 
 
 func set_dimensions():
-	$ItemToPlace.hide()
-	$ScaledItemToPlace.hide()
 	$TreeSeedToPlace.hide()
-	$GateToPlace.hide()
 	$ForageItemToPlace.hide()
 	match state:
 		ITEM:
@@ -135,9 +127,9 @@ func set_dimensions():
 		WALL:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
-			$ItemToPlace.show()
-			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/wall.png")
-			$ColorIndicator.tile_size =  Vector2(1,1)
+			$TileMap.show()
+			$TileMap.set_cell(0,Vector2i(0,0),0,Vector2i(0,88))
+			$ColorIndicator.tile_size = Vector2(1,1)
 		DOOR:
 			Server.player_node.user_interface.get_node("ChangeRotation").show()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
@@ -145,8 +137,8 @@ func set_dimensions():
 		FOUNDATION:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
-			$ItemToPlace.show()
-			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/foundation.png")
+			$TileMap.show()
+			$TileMap.set_cell(0,Vector2i(0,0),0,Vector2i(1,90))
 			$ColorIndicator.tile_size = Vector2(1,1)
 		ROTATABLE:
 			Server.player_node.user_interface.get_node("ChangeRotation").show()
@@ -154,7 +146,6 @@ func set_dimensions():
 		CUSTOMIZABLE_ROTATABLE:
 			Server.player_node.user_interface.get_node("ChangeRotation").show()
 			Server.player_node.user_interface.get_node("ChangeVariety").show()
-			$ItemToPlace.show()
 		CUSTOMIZABLE:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").show()
@@ -221,15 +212,7 @@ func place_customizable_state():
 	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
-	if item_name == "large rug" or item_name == "medium rug" or item_name == "small rug":
-		variety = rug_varieties[varieties_index]
-		get_variety_index(rug_varieties.size())
-	elif item_name == "bed":
-		variety = bed_varieties[varieties_index]
-		get_variety_index(bed_varieties.size())
-	elif item_name == "round table":
-		variety = table_varieties[varieties_index]
-		get_variety_index(table_varieties.size())
+	get_variety_index(Constants.customizable_atlas_tiles[item_name].keys().size())
 	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + str(variety) + ".png")
 	$ColorIndicator.tile_size = dimensions
 	if Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
@@ -248,17 +231,10 @@ func place_customizable_rotatable_state():
 	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
-	if item_name == "couch" or item_name == "armchair":
-		variety = couch_varieties[varieties_index]
-		get_variety_index(couch_varieties.size())
-	elif item_name == "chair":
-		variety = chair_varieties[varieties_index]
-		get_variety_index(chair_varieties.size())
-	elif item_name == "table":
-		variety = table_varieties[varieties_index]
-		get_variety_index(table_varieties.size())
+	get_variety_index(Constants.customizable_rotatable_atlas_tiles[item_name].keys().size())
 	get_rotation_index()
-	$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" +  item_name + "/" + str(variety) + "/"  + direction + ".png")
+	await get_tree().process_frame
+	$TileMap.set_cell(0,Vector2i(0,0),0,Constants.customizable_rotatable_atlas_tiles[item_name][variety][direction])
 	if (direction == "up" or direction == "down"):
 		$ColorIndicator.tile_size = dimensions
 	else:
@@ -276,17 +252,15 @@ func place_customizable_rotatable_state():
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-			place_object(item_name+str(variety), directions[direction_index], location, "placable")
+			place_object(item_name, directions[direction_index], location, "placable", variety)
 
 
 func get_variety_index(num_varieties):
-	if varieties_index == null:
-		varieties_index = 0
-	if Input.is_action_pressed("change_variety") and not variety_delay:
+	if Input.is_action_pressed("change variety") and not variety_delay:
 		variety_delay = true
-		varieties_index += 1
-		if varieties_index == num_varieties:
-			varieties_index = 0
+		variety += 1
+		if variety == num_varieties-1:
+			variety = 1
 		await get_tree().create_timer(0.25).timeout
 		variety_delay = false
 
@@ -364,7 +338,6 @@ func place_foundation_state():
 func place_wall_state():
 	if Server.world.name == "Overworld":
 		$ColorIndicator.visible = true
-		$ColorIndicator.tile_size = Vector2(1,1)
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or not Tiles.validate_foundation_tiles(location,Vector2(1,1)):
 			$ColorIndicator.indicator_color = "Red"
@@ -376,7 +349,6 @@ func place_wall_state():
 				place_object(item_name, null, location, "placable")
 
 
-	
 func get_rotation_index():
 	if direction_index == null:
 		direction_index = 0
@@ -436,7 +408,7 @@ func place_seed_state():
 		$ColorIndicator.set_indicator_color()
 
 
-func place_object(item_name, direction, location, type):
+func place_object(item_name, direction, location, type, variety = null):
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		if item_name != "wall" and item_name != "foundation":
 			PlayerData.remove_single_object_from_hotbar()
@@ -465,8 +437,8 @@ func place_object(item_name, direction, location, type):
 				$SoundEffects.stream = Sounds.place_object
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
-				MapData.add_placable(id, {"n":item_name,"d":direction,"l":str(location)})
-				PlaceObject.place_object_in_world(id, item_name, direction, location)
+				MapData.add_placable(id, {"n":item_name,"d":direction,"l":str(location),"v":variety})
+				PlaceObject.place_object_in_world(id, item_name, direction, location, variety)
 		elif type == "seed":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

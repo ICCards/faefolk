@@ -26,7 +26,6 @@ var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var frozen: bool = false
 var random_pos := Vector2.ZERO
-var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
 var state = IDLE
 var health: int = Stats.BEAR_HEALTH

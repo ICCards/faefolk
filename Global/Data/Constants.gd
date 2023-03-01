@@ -69,6 +69,62 @@ var autotile_object_atlas_tiles = {
 	"metal fence": 2
 }
 
+var customizable_object_atlas_tiles = {
+	"bed" = {
+		1: Vector2i(0,31),
+		2: Vector2i(2,31),
+		3: Vector2i(4,31),
+		4: Vector2i(6,31),
+		5: Vector2i(8,31),
+		6: Vector2i(10,31),
+		7: Vector2i(12,31),
+		8: Vector2i(14,31),
+	}
+}
+
+var customizable_atlas_tiles = {}
+
+var customizable_rotatable_atlas_tiles = {
+	"chair" : {
+		1 : {
+			"left": Vector2i(0,34),
+			"right": Vector2i(1,34),
+			"down": Vector2i(2,34),
+			"up": Vector2i(3,34),
+		},
+		2 : {
+			"left": Vector2i(4,34),
+			"right": Vector2i(5,34),
+			"down": Vector2i(6,34),
+			"up": Vector2i(7,34),
+		},
+		3 : {
+			"left": Vector2i(8,34),
+			"right": Vector2i(9,34),
+			"down": Vector2i(10,34),
+			"up": Vector2i(11,34),
+		},
+		4 : {
+			"left": Vector2i(12,34),
+			"right": Vector2i(13,34),
+			"down": Vector2i(14,34),
+			"up": Vector2i(15,34),
+		},
+		5 : {
+			"left": Vector2i(16,34),
+			"right": Vector2i(17,34),
+			"down": Vector2i(18,34),
+			"up": Vector2i(19,34),
+		},
+		6 : {
+			"left": Vector2i(20,34),
+			"right": Vector2i(21,34),
+			"down": Vector2i(22,34),
+			"up": Vector2i(23,34),
+		},
+	},
+}
+
 var rotatable_atlas_tiles = {
 	"furnace": {
 		"up": Vector2i(0,2),
@@ -81,6 +137,90 @@ var rotatable_atlas_tiles = {
 		"right": Vector2i(19,11),
 		"down": Vector2i(0,12),
 		"left": Vector2i(12,11)
+	},
+	"stone chest": {
+		"up": Vector2i(6,15),
+		"right": Vector2i(19,14),
+		"down": Vector2i(0,15),
+		"left": Vector2i(12,14)
+	},
+	"tool cabinet": {
+		"up": Vector2i(3,8),
+		"right": Vector2i(0,7),
+		"down": Vector2i(1,8),
+		"left": Vector2i(5,7)
+	},
+	"workbench #1": {
+		"down": Vector2i(0,17),
+		"up": Vector2i(2,17),
+		"right": Vector2i(4,17),
+		"left": Vector2i(5,17)
+	},
+	"workbench #2": {
+		"down": Vector2i(6,17),
+		"up": Vector2i(8,17),
+		"right": Vector2i(10,17),
+		"left": Vector2i(11,17)
+	},
+	"workbench #3": {
+		"down": Vector2i(12,17),
+		"up": Vector2i(14,17),
+		"right": Vector2i(16,17),
+		"left": Vector2i(17,17)
+	},
+	"stove #1": {
+		"down": Vector2i(0,20),
+		"up": Vector2i(2,20),
+		"right": Vector2i(4,20),
+		"left": Vector2i(5,20)
+	},
+	"stove #2": {
+		"down": Vector2i(6,20),
+		"up": Vector2i(8,20),
+		"right": Vector2i(10,20),
+		"left": Vector2i(11,20)
+	},
+	"stove #3": {
+		"down": Vector2i(12,20),
+		"up": Vector2i(14,20),
+		"right": Vector2i(16,20),
+		"left": Vector2i(17,20)
+	},
+	"grain mill #1": {
+		"down": Vector2i(0,24),
+		"up": Vector2i(2,24),
+		"right": Vector2i(4,24),
+		"left": Vector2i(5,24)
+	},
+	"grain mill #2": {
+		"down": Vector2i(6,24),
+		"up": Vector2i(8,24),
+		"right": Vector2i(10,24),
+		"left": Vector2i(11,24)
+	},
+	"grain mill #3": {
+		"down": Vector2i(12,24),
+		"up": Vector2i(14,24),
+		"right": Vector2i(16,24),
+		"left": Vector2i(17,24)
+	},
+	"brewing table mill #1": {
+		"down": Vector2i(0,24),
+		"up": Vector2i(2,24),
+		"right": Vector2i(4,24),
+		"left": Vector2i(5,24)
+	},
+	"brewing table #2": {
+		"down": Vector2i(6,24),
+		"up": Vector2i(8,24),
+		"right": Vector2i(10,24),
+		"left": Vector2i(11,24)
+	},
+	"brewing table #3": {
+		"down": Vector2i(12,24),
+		"up": Vector2i(14,24),
+		"right": Vector2i(16,24),
+		"left": Vector2i(17,24)
 	},
 }
 

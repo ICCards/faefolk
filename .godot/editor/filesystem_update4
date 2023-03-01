@@ -1,22 +1,11 @@
-res://World/Overworld/Overworld.tscn
-res://Assets/Themes/text.tres
-res://Assets/Themes/MenuTitle.tres
+res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn
+res://Assets/Tilesets/foundation/foundation.tres
+res://Assets/Tilesets/terrain/elevated terrain.tres
+res://Assets/Tilesets/walls/walls.tres
 res://Assets/Tilesets/objects/objects.tres
-res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn
-res://helpers/Util.gd
-res://World/Objects/Tiles/TileObjectHurtBox.tscn
+res://World/Overworld/Overworld.tscn
 res://Global/Data/Constants.gd
-res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn
+res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd
 res://Global/Data/PlaceObject.gd
 res://World/Objects/Tiles/TileObjectHurtBox.gd
-res://MainMenu/MainMenu.tscn
-res://World/Player/Player/UserInterface/Workbench/Workbench.tscn
-res://World/Player/Player/Player.tscn
-res://Assets/Tilesets/Objects/objects.tres
-res://Assets/Themes/LockedAsset.tres
-res://World/Player/Player/Player.gd
-res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn
-res://World/Objects/Farm/PlantedCrop.tscn
-res://Global/Data/PlayerData.gd
-res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd
-res://Assets/Tilesets/terrain/elevated terrain.tres
+res://World/Objects/Tiles/TileObjectHurtBox.tscn

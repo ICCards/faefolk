@@ -13,6 +13,7 @@ var location
 var item_name
 var id
 var direction
+var variety
 var is_preset_object_string: String = ""
 
 var is_player_sitting: bool = false
@@ -24,6 +25,8 @@ func _ready():
 		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.object_atlas_tiles[item_name])
 	elif Constants.autotile_object_atlas_tiles.keys().has(item_name):
 		pass
+	elif Constants.customizable_rotatable_atlas_tiles.keys().has(item_name):
+		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_atlas_tiles[item_name][variety][direction])
 	else:
 		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.rotatable_atlas_tiles[item_name][direction])
 	call_deferred("set_dimensions")

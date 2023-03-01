@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://br573c61liq8n"]
 
 [ext_resource type="Script" path="res://InventoryLogic/ItemDrop.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bbduu3gxlbfp6" path="res://Assets/Images/inventory_icons/Placeable object/workbench #2.png" id="2_0fpab"]
@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_w17hp"]
 
 [sub_resource type="CircleShape2D" id="9"]
-radius = 11.3333
+radius = 5.0
 
 [sub_resource type="Animation" id="2"]
 resource_name = "Animate 1"
@@ -322,26 +322,26 @@ motion_mode = 1
 script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.08165e-12, 0)
+position = Vector2(32, 0)
 scale = Vector2(0.75, 0.75)
 
 [node name="Image" type="TextureRect" parent="Sprite2D"]
-custom_minimum_size = Vector2(48, 48)
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 24.0
-offset_bottom = 24.0
+custom_minimum_size = Vector2(24, 24)
+offset_left = -12.0
+offset_top = -13.3333
+offset_right = 12.0
+offset_bottom = 10.6667
 mouse_filter = 2
 texture = ExtResource("2_0fpab")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="Sprite2D"]
-offset_left = 4.0
-offset_top = 11.0
-offset_right = 244.0
-offset_bottom = 195.0
-scale = Vector2(0.08, 0.08)
+offset_left = 2.66667
+offset_top = 5.33334
+offset_right = 242.667
+offset_bottom = 189.333
+scale = Vector2(0.04, 0.04)
 mouse_filter = 1
 theme = ExtResource("3_w17hp")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
