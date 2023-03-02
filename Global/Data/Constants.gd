@@ -70,7 +70,7 @@ var autotile_object_atlas_tiles = {
 }
 
 var customizable_object_atlas_tiles = {
-	"bed" = {
+	"bed" : {
 		1: Vector2i(0,31),
 		2: Vector2i(2,31),
 		3: Vector2i(4,31),
@@ -79,12 +79,47 @@ var customizable_object_atlas_tiles = {
 		6: Vector2i(10,31),
 		7: Vector2i(12,31),
 		8: Vector2i(14,31),
-	}
+	},
+	"round table" : {
+		1: Vector2i(0,39),
+		2: Vector2i(2,39),
+		3: Vector2i(4,39),
+		4: Vector2i(6,39),
+	},
+	"large rug" : {
+		1: Vector2i(0,50),
+		2: Vector2i(7,50),
+		3: Vector2i(14,50),
+		4: Vector2i(21,50),
+		5: Vector2i(28,50),
+		6: Vector2i(35,50),
+		7: Vector2i(42,50),
+		8: Vector2i(49,50),
+	},
+	"medium rug" : {
+		1: Vector2i(4,50),
+		2: Vector2i(11,50),
+		3: Vector2i(18,50),
+		4: Vector2i(25,50),
+		5: Vector2i(32,50),
+		6: Vector2i(39,50),
+		7: Vector2i(46,50),
+		8: Vector2i(53,50),
+	},
+	"small rug" : {
+		1: Vector2i(6,50),
+		2: Vector2i(13,50),
+		3: Vector2i(20,50),
+		4: Vector2i(27,50),
+		5: Vector2i(34,50),
+		6: Vector2i(41,50),
+		7: Vector2i(48,50),
+		8: Vector2i(55,50),
+	},
 }
 
-var customizable_atlas_tiles = {}
 
-var customizable_rotatable_atlas_tiles = {
+var customizable_rotatable_object_atlas_tiles = {
 	"chair" : {
 		1 : {
 			"left": Vector2i(0,34),
@@ -204,23 +239,23 @@ var rotatable_atlas_tiles = {
 		"right": Vector2i(16,24),
 		"left": Vector2i(17,24)
 	},
-	"brewing table mill #1": {
-		"down": Vector2i(0,24),
-		"up": Vector2i(2,24),
-		"right": Vector2i(4,24),
-		"left": Vector2i(5,24)
+	"brewing table #1": {
+		"down": Vector2i(0,27),
+		"up": Vector2i(2,27),
+		"right": Vector2i(4,27),
+		"left": Vector2i(5,27)
 	},
 	"brewing table #2": {
-		"down": Vector2i(6,24),
-		"up": Vector2i(8,24),
-		"right": Vector2i(10,24),
-		"left": Vector2i(11,24)
+		"down": Vector2i(6,27),
+		"up": Vector2i(8,27),
+		"right": Vector2i(10,27),
+		"left": Vector2i(11,27)
 	},
 	"brewing table #3": {
-		"down": Vector2i(12,24),
-		"up": Vector2i(14,24),
-		"right": Vector2i(16,24),
-		"left": Vector2i(17,24)
+		"down": Vector2i(12,27),
+		"up": Vector2i(14,27),
+		"right": Vector2i(16,27),
+		"left": Vector2i(17,27)
 	},
 }
 

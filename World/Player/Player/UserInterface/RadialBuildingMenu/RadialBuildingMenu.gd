@@ -84,7 +84,7 @@ func destroy():
 	if current_item == 0 or current_item == 1:
 		Server.player_node.current_building_item = buildings[current_item]
 	else:
-		Server.player_node.current_building_item = null
+		Server.player_node.current_building_item = ""
 	Server.player_node.set_held_object()
 	hide()
 

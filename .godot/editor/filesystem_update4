@@ -9,3 +9,32 @@ res://World/Player/Player/AttachedScripts/PlaceObjectPreview.gd
 res://Global/Data/PlaceObject.gd
 res://World/Objects/Tiles/TileObjectHurtBox.gd
 res://World/Objects/Tiles/TileObjectHurtBox.tscn
+res://World/Player/Player/Player.tscn
+res://Assets/Themes/text.tres
+res://Assets/Themes/LockedAsset.tres
+res://Global/Data/Images.gd
+res://helpers/Tiles.gd
+res://World/Overworld/Overworld.gd
+res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn
+res://Assets/Images/tree_sets/oak/mature/animated top.tres
+res://World/Objects/Nature/Trees/TreeObject.tscn
+res://World/Objects/Tiles/BuildingTileObjectHurtBox.gd
+res://Global/Data/Sounds.gd
+res://World/Player/Player/Player.gd
+res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.gd
+res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn
+res://World/Player/Player/Actions.gd
+res://World/Objects/Nature/Trees/TreeObject.gd
+res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.tscn
+res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd
+res://World/Animals/BirdFlyingFromTree.tscn
+res://Assets/Images/Animals/Bird/bird1.tres
+res://World/Animals/BirdFlyingFromTree.gd
+res://Global/Data/InstancedScenes.gd
+res://InventoryLogic/ItemDrop.tscn
+res://InventoryLogic/ItemDrop.gd
+res://Assets/Images/tree_sets/oak/mature/animated top winter.tres
+res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Objects/Nature/Trees/Stump.tscn
+res://World/Objects/Nature/Trees/Stump.gd

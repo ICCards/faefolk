@@ -14,6 +14,7 @@ var mousePos := Vector2.ZERO
 
 var item_name
 var item_category
+var moving_object: bool = false
 var state
 var variety = 1
 
@@ -75,25 +76,28 @@ func _physics_process(delta):
 
 
 func initialize():
+	print("ITEM NAME " + item_name)
 	mousePos = (get_global_mouse_position() + Vector2(-8, -8)).snapped(Vector2(16,16))
 	set_global_position(mousePos)
+	if item_name != "foundation" and item_name != "wall":
+		item_category = JsonData.item_data[item_name]["ItemCategory"]
 	if item_name == "wood gate":
 		state = GATE
 	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		state = DOOR
 	elif Constants.rotatable_atlas_tiles.keys().has(item_name):
 		state = ROTATABLE
-	elif Constants.customizable_rotatable_atlas_tiles.keys().has(item_name):
+	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
 		state = CUSTOMIZABLE_ROTATABLE
-	elif Constants.customizable_atlas_tiles.keys().has(item_name):
+	elif Constants.customizable_object_atlas_tiles.keys().has(item_name):
 		state = CUSTOMIZABLE
-	elif item_category == "Placable object":
+	elif Constants.object_atlas_tiles.keys().has(item_name):
 		state = ITEM
 	elif item_category == "Seed":
 		state = SEED
-	elif item_category == "BUILDING" and item_name == "wall":
+	elif item_name == "wall":
 		state = WALL
-	elif item_category == "BUILDING" and item_name == "foundation":
+	elif item_name == "foundation":
 		state = FOUNDATION
 	elif item_category == "Forage":
 		state = FORAGE
@@ -109,8 +113,6 @@ func set_dimensions():
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
 			$TileMap.show()
 			$TileMap.set_cell(0,Vector2i(0,0),0,Constants.object_atlas_tiles[item_name])
-			$ItemToPlace.hide()
-#			$ItemToPlace.texture = load("res://Assets/Images/placable_object_preview/" + item_name + ".png")
 			var dimensions = Constants.dimensions_dict[item_name]
 			$ColorIndicator.tile_size = dimensions
 		SEED:
@@ -122,7 +124,6 @@ func set_dimensions():
 				$TreeSeedToPlace.show()
 			else:
 				$ItemToPlace.show()
-				#$ItemToPlace.texture = load("res://Assets/Images/crop_sets/" + item_name + "/seeds.png")
 				$ColorIndicator.tile_size =  Vector2(1,1)
 		WALL:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
@@ -231,10 +232,10 @@ func place_customizable_rotatable_state():
 	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var direction = directions[direction_index]
 	var dimensions = Constants.dimensions_dict[item_name]
-	get_variety_index(Constants.customizable_rotatable_atlas_tiles[item_name].keys().size())
+	get_variety_index(Constants.customizable_rotatable_object_atlas_tiles[item_name].keys().size())
 	get_rotation_index()
 	await get_tree().process_frame
-	$TileMap.set_cell(0,Vector2i(0,0),0,Constants.customizable_rotatable_atlas_tiles[item_name][variety][direction])
+	$TileMap.set_cell(0,Vector2i(0,0),0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
 	if (direction == "up" or direction == "down"):
 		$ColorIndicator.tile_size = dimensions
 	else:
@@ -259,7 +260,7 @@ func get_variety_index(num_varieties):
 	if Input.is_action_pressed("change variety") and not variety_delay:
 		variety_delay = true
 		variety += 1
-		if variety == num_varieties-1:
+		if variety == num_varieties+1:
 			variety = 1
 		await get_tree().create_timer(0.25).timeout
 		variety_delay = false
@@ -364,7 +365,7 @@ func get_rotation_index():
 func place_item_state():
 	var location = Tiles.valid_tiles.local_to_map(mousePos)
 	var dimensions = Constants.dimensions_dict[item_name]
-	if not Tiles.validate_tiles(location, dimensions) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
+	if not Tiles.validate_tiles(location, dimensions):
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 	elif (item_name != "campfire" and item_name != "torch" and item_name != "well" and item_name != "wood fence" and item_name != "wood gate"): 
@@ -410,7 +411,7 @@ func place_seed_state():
 
 func place_object(item_name, direction, location, type, variety = null):
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-		if item_name != "wall" and item_name != "foundation":
+		if item_name != "wall" and item_name != "foundation" and not moving_object:
 			PlayerData.remove_single_object_from_hotbar()
 		var id = Uuid.v4()
 		if type == "placable":

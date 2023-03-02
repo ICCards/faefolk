@@ -95,12 +95,12 @@ func remove_valid_tiles(location, dimensions = Vector2i(1,1)):
 func add_valid_tiles(location, dimensions = Vector2i(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cell(0,location+Vector2i(x,y),0,Constants.VALID_TILE_ATLAS_CORD,0)
+			valid_tiles.set_cell(0,location+Vector2i(x,-y),0,Constants.VALID_TILE_ATLAS_CORD,0)
 
 func add_navigation_tiles(location, dimensions = Vector2(1,1)):
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-			valid_tiles.set_cell(0,location+Vector2i(x,y),0,Constants.NAVIGATION_TILE_ATLAS_CORD,0)
+			valid_tiles.set_cell(0,location+Vector2i(x,-y),0,Constants.NAVIGATION_TILE_ATLAS_CORD,0)
 
 
 func isValidAutoTile(_pos, _map):

@@ -40,10 +40,6 @@ var BirdVariations = [
 ]
 
 
-
-@onready var normal_mouse = load("res://Assets/mouse cursors/Normal Selects.png")
-
-
 # IC GHOSTS #
 
 #func returnICGhostBackground(panel):

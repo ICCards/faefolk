@@ -14,7 +14,6 @@ var item_name
 var id
 var direction
 var variety
-var is_preset_object_string: String = ""
 
 var is_player_sitting: bool = false
 
@@ -22,14 +21,26 @@ var temp_health = 3
 
 func _ready():
 	if Constants.object_atlas_tiles.keys().has(item_name):
-		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.object_atlas_tiles[item_name])
+		if Util.isStorageItem(item_name):
+			$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.object_atlas_tiles[item_name])
 	elif Constants.autotile_object_atlas_tiles.keys().has(item_name):
 		pass
-	elif Constants.customizable_rotatable_atlas_tiles.keys().has(item_name):
-		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_atlas_tiles[item_name][variety][direction])
+	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
+		if Util.isStorageItem(item_name):
+			$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
 	else:
-		$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.rotatable_atlas_tiles[item_name][direction])
-	call_deferred("set_dimensions")
+		if Util.isStorageItem(item_name):
+			$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Constants.rotatable_object_atlas_tiles[item_name][direction])
+	set_dimensions()
+
+
+func _physics_process(delta):
+	if PlayerData.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			if item_name == "blueprint" and Server.player_node.current_building_item == "":
+				if $Marker2D/Btn.is_hovered():
+					Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/grabber.png"))
 
 func set_dimensions():
 	rng.randomize()
@@ -347,7 +358,6 @@ func add_interactive_area_node(object_name,id):
 	interactiveAreaNode.name = id
 	$Marker2D.call_deferred("add_child", interactiveAreaNode)
 
-
 func add_campfire_interactive_area_node(object_name,id):
 	var campfireInteractiveAreaNode = CampfireInteractiveAreaNode.instantiate()
 	campfireInteractiveAreaNode.object_name = object_name
@@ -412,14 +422,11 @@ func _on_HurtBox_area_entered(area):
 		$ResetTempHealthTimer.call_deferred("start")
 	else:
 		$PointLight2D.set_deferred("enabled", false)
-		$ChestPos/Chest.call_deferred("hide")
 		$FurnaceSmoke.call_deferred("hide")
 		if $Marker2D.has_node(str(id)):
 			$Marker2D.get_node(id+ "/CollisionShape2D").set_deferred("disabled", true)
 		$Marker2D/HurtBox/CollisionShape2D.set_deferred("disabled", true)
 		$Marker2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
-		$Marker2D/DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
-		$Marker2D/BedInteractiveArea/CollisionShape2D.set_deferred("disabled", true)
 		if item_name == "wood chest" or item_name == "stone chest" or item_name == "tool cabinet":
 			drop_items_in_chest()
 			$SoundEffects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
@@ -444,9 +451,7 @@ func _on_HurtBox_area_entered(area):
 			Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 		else:
 			Tiles.add_valid_tiles(location, dimensions)
-		Tiles.object_tiles.call_deferred("set_cellv",location, -1)
-		Tiles.fence_tiles.call_deferred("set_cellv",location, -1)
-		Tiles.fence_tiles.call_deferred("update_bitmask_area",location)
+		Tiles.object_tiles.erase_cell(0,location)
 		InstancedScenes.intitiateItemDrop(item_name, position, 1)
 		MapData.remove_placable(id)
 		await $SoundEffects.finished
@@ -495,14 +500,12 @@ func drop_items_in_furnace():
 
 func open_crate():
 	$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(1,0))
-
 func close_crate():
 	$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(0,0))
 
 
 func open_barrel():
 	$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(1,2))
-
 func close_barrel():
 	$ObjectTiles.set_cell(0,Vector2i(0,-1),0,Vector2i(0,2))
 
@@ -570,5 +573,17 @@ func close_chest():
 func _on_ResetTempHealthTimer_timeout():
 	temp_health = 3
 
+func _on_btn_pressed():
+	if PlayerData.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			if item_name == "blueprint" and Server.player_node.current_building_item == "":
+				Tiles.object_tiles.erase_cell(0,location)
+				MapData.remove_placable(id)
+				Server.player_node.actions.move_placable_object(item_name,location)
+				Sounds.play_pick_up_placeable_object()
+				queue_free()
+	
 
-
+func _on_btn_mouse_exited():
+	Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))

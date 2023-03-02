@@ -63,14 +63,14 @@ func initiateBirdEffect(pos: Vector2):
 			var bird = Bird.instantiate()
 			bird.fly_position = pos + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
 			Server.world.call_deferred("add_child", bird)
-			bird.global_position = pos + Vector2(0, -120)
+			bird.global_position = pos + Vector2(0,-60)
 		else:
 			for i in range(2):
 				rng.randomize()
 				var bird = Bird.instantiate()
 				bird.fly_position = pos + Vector2(rng.randi_range(-40000, 40000), rng.randi_range(-40000, 40000))
 				Server.world.call_deferred("add_child", bird)
-				bird.global_position = pos + Vector2(0, -120)
+				bird.global_position = pos + Vector2(0,-60)
 
 ### Ores ###
 

@@ -155,6 +155,7 @@ func setGrownTreeTexture():
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-23))
 		"pine":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-37))
+	animated_tree_top_sprite.play("default")
 
 func hit(tool_name):
 	if not destroyed:
@@ -197,30 +198,34 @@ func hit(tool_name):
 				sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
 				sound_effects_tree.call_deferred("play")
 				if Server.player_node.get_position().x <= get_position().x:
+					$TreeSprites/TopBreak.rotation = 90
 					animation_player_tree.call_deferred("play", "tree fall right")
 					await animation_player_tree.animation_finished
+					play_tree_break_animation("right")
 					var amt = Stats.return_item_drop_quantity(tool_name, "tree")
 					PlayerData.player_data["collections"]["resources"]["wood"] += amt
-					InstancedScenes.intitiateItemDrop("wood", position+Vector2(130, -8), amt)
+					InstancedScenes.intitiateItemDrop("wood", position+Vector2(65, -8), amt)
 					if Util.chance(5):
-						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(130, -8), 3)
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 3)
 					elif Util.chance(15):
-						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(130, -8), 2)
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 2)
 					elif Util.chance(25):
-						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(130, -8), 1)
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 1)
 				
 				else:
+					$TreeSprites/TopBreak.rotation = -90
 					animation_player_tree.call_deferred("play", "tree fall left")
 					await animation_player_tree.animation_finished
+					play_tree_break_animation("left")
 					var amt = Stats.return_item_drop_quantity(tool_name, "tree")
 					PlayerData.player_data["collections"]["resources"]["wood"] += amt
-					InstancedScenes.intitiateItemDrop("wood", position+Vector2(-130, -8), amt)
+					InstancedScenes.intitiateItemDrop("wood", position+Vector2(-65, -8), amt)
 					if Util.chance(5):
-						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-130, -8), 3)
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 3)
 					elif Util.chance(15):
-						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-130, -8), 2)
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 2)
 					elif Util.chance(25):
-						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-130, -8), 1)
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 1)
 			elif health >= 1:
 				sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 				sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
@@ -240,8 +245,8 @@ func destroy(tool_name):
 	MapData.world["tree"].erase(name)
 	destroyed = true
 	Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
-	InstancedScenes.initiateTreeHitEffect(variety, "trunk break", position+Vector2(-8, 32))
 	if not tool_name == "sapling":
+		play_stump_break_animation()
 		animation_player_stump.call_deferred("play", "stump destroyed")
 		sound_effects_stump.set_deferred("stream", Sounds.stump_break)
 		sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
@@ -273,7 +278,6 @@ func _on_Hurtbox_area_entered(_area):
 func set_tree_top_collision_shape():
 	$TreeTopArea.get_node(variety).set_deferred("disabled", false)
 
-
 func disable_tree_top_collision_box():
 	set_tree_visible()
 	$TreeTopArea.get_node(variety).set_deferred("disabled", true)
@@ -282,15 +286,36 @@ func set_tree_transparent():
 	var tween = get_tree().create_tween()
 	tween.tween_property(animated_tree_top_sprite, "modulate:a", 0.4, 0.5)
 	tween.tween_property(tree_top_sprite, "modulate:a", 0.4, 0.5)
-	tween.tween_property(tree_stump_sprite, "modulate:a", 0.4, 0.5)
-	tween.tween_property(tree_bottom_sprite, "modulate:a", 0.4, 0.5)
 
 func set_tree_visible():
 	var tween = get_tree().create_tween()
 	tween.tween_property(animated_tree_top_sprite, "modulate:a", 1.0, 0.5)
 	tween.tween_property(tree_top_sprite, "modulate:a", 1.0, 0.5)
-	tween.tween_property(tree_stump_sprite, "modulate:a", 1.0, 0.5)
-	tween.tween_property(tree_bottom_sprite, "modulate:a", 1.0, 0.5)
+
+func play_tree_break_animation(fall_side):
+	$TreeSprites/TopBreak.show()
+	match variety:
+		"oak":
+			$TreeSprites/TopBreak.offset = Vector2(-3,-45)
+			if fall_side == "left":
+				#$TreeSprites/TopBreak.rotation = -90
+				if biome == "snow":
+					$TreeSprites/TopBreak.play("left oak winter")
+				else:
+					$TreeSprites/TopBreak.play("left oak")
+			else:
+				#$TreeSprites/TopBreak.rotation = 90
+				if biome == "snow":
+					$TreeSprites/TopBreak.play("right oak winter")
+				else:
+					$TreeSprites/TopBreak.play("right oak")
+
+func play_stump_break_animation():
+	$TreeSprites/StumpBreak.show()
+	match variety:
+		"oak":
+			$TreeSprites/StumpBreak.offset = Vector2(-7,7)
+	$TreeSprites/StumpBreak.play(variety)
 
 
 func _on_TreeTopArea_area_entered(_area):

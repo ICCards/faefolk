@@ -27,9 +27,9 @@ enum Tiers {
 func _ready():
 	set_type()
 	if item_name == "wall":
-		$HurtBox.set_collision_layer(8+16+262144)
+		$HurtBox.set_collision_mask(8+16+262144)
 	else:
-		$HurtBox.set_collision_layer(8+16)
+		$HurtBox.set_collision_mask(8+16)
 	
 func remove_icon():
 	$SelectedBorder.hide()

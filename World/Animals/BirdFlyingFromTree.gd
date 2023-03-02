@@ -1,6 +1,6 @@
 extends Node2D
 
-const SPEED: int = 160
+const SPEED: int = 100
 var fly_position
 
 func _ready():

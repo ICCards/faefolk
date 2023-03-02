@@ -4117,6 +4117,7 @@ radius = 23.5523
 height = 52.7942
 
 [sub_resource type="CircleShape2D" id="10"]
+radius = 5.0
 
 [sub_resource type="CapsuleShape2D" id="21"]
 radius = 3.75
@@ -4335,7 +4336,6 @@ scale = Vector2(0.806714, 0.872205)
 shape = SubResource("9")
 
 [node name="EnterDoors" type="Area2D" parent="Area2Ds"]
-visible = false
 position = Vector2(0, 11)
 collision_layer = 4096
 collision_mask = 32

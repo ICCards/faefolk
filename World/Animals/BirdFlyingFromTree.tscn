@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://1qkjgi02dok8"]
 
-[ext_resource type="SpriteFrames" path="res://Assets/Images/Animals/Bird/bird1.tres" id="1"]
+[ext_resource type="SpriteFrames" uid="uid://032anb4l0yon" path="res://Assets/Images/Animals/Bird/bird1.tres" id="1"]
 [ext_resource type="Script" path="res://World/Animals/BirdFlyingFromTree.gd" id="1_yxg1s"]
 
 [node name="BirdFlyingFromTree" type="Node2D"]
 z_index = 1
-scale = Vector2(2, 2)
 script = ExtResource("1_yxg1s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

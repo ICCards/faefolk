@@ -11,7 +11,7 @@ extends CharacterBody2D
 
 var running = false
 var character
-var current_building_item = null
+var current_building_item = ""
 var running_speed_change = 1.0
 
 @onready var state = MOVEMENT
@@ -107,7 +107,7 @@ func set_current_object(item_name):
 	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
 		actions.show_placable_object(item_name, item_category)
 		return
-	if item_name == "blueprint" and current_building_item != null:
+	if item_name == "blueprint" and current_building_item != "":
 		actions.show_placable_object(current_building_item, "BUILDING")
 		return
 	actions.destroy_placable_object()

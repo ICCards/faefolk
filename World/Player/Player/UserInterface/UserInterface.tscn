@@ -281,11 +281,11 @@ texture = ExtResource("5_yyu54")
 
 [node name="RotateLabel" type="Label" parent="ChangeRotation"]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 5.0
-offset_right = 1005.0
-offset_bottom = 189.0
-scale = Vector2(0.15, 0.15)
+offset_left = 57.0
+offset_top = -6.0
+offset_right = 1019.0
+offset_bottom = 178.0
+scale = Vector2(0.2, 0.2)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
@@ -297,9 +297,10 @@ text = "Change rotation"
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 8.0
-offset_right = 141.0
-offset_bottom = 184.0
-scale = Vector2(0.18, 0.18)
+offset_top = -15.0
+offset_right = 152.0
+offset_bottom = 169.0
+scale = Vector2(0.25, 0.25)
 theme = ExtResource("6_rh7sc")
 text = "R"
 horizontal_alignment = 1
@@ -320,11 +321,11 @@ texture = ExtResource("7_u87cj")
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 5.0
-offset_right = 981.0
-offset_bottom = 189.0
-scale = Vector2(0.15, 0.15)
+offset_left = 709.0
+offset_top = 573.0
+offset_right = 1671.0
+offset_bottom = 757.0
+scale = Vector2(0.2, 0.2)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
@@ -335,10 +336,11 @@ text = "Change variety"
 [node name="VarietyKey" type="Label" parent="ChangeVariety"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 170.0
-offset_right = 303.0
-offset_bottom = 184.0
-scale = Vector2(0.18, 0.18)
+offset_left = 910.0
+offset_top = 564.0
+offset_right = 1043.0
+offset_bottom = 748.0
+scale = Vector2(0.25, 0.25)
 theme = ExtResource("6_rh7sc")
 text = "V"
 horizontal_alignment = 1
@@ -383,7 +385,6 @@ text = "Saving progress"
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
-visible = false
 offset_top = 594.0
 offset_bottom = 594.0
 

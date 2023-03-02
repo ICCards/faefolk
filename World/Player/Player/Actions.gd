@@ -292,6 +292,14 @@ func sleep(sleeping_bag_direction, sleeping_bag_pos):
 		get_parent().state = get_parent().MOVEMENT
 
 
+func move_placable_object(item_name, location):
+	var placeObject = PlaceObjectScene.instantiate()
+	placeObject.name = "PlaceObject"
+	placeObject.item_name = item_name
+	placeObject.moving_object = true
+	placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
+	get_node("../").add_child(placeObject)
+
 func show_placable_object(item_name, item_category):
 	if Server.world.name == "Overworld":
 		if item_category == "Seed":
@@ -300,8 +308,8 @@ func show_placable_object(item_name, item_category):
 			var placeObject = PlaceObjectScene.instantiate()
 			placeObject.name = "PlaceObject"
 			placeObject.item_name = item_name
-			placeObject.item_category = item_category
-			placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+			placeObject.moving_object = false
+			placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
 			get_node("../").add_child(placeObject)
 		else:
 			if get_node("../PlaceObject").item_name != item_name: # exists but item changed
@@ -309,13 +317,12 @@ func show_placable_object(item_name, item_category):
 				get_node("../PlaceObject").item_category = item_category
 				get_node("../PlaceObject").initialize()
 	else:
-		if item_name == "campfire" or item_name == "torch" or item_name == "sleeping bag":
+		if item_name == "campfire" or item_name == "torch":
 			if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
 				var placeObject = PlaceObjectScene.instantiate()
 				placeObject.name = "PlaceObject"
-				placeObject.item_name = item_name
-				placeObject.item_category = item_category
-				placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(32,32))
+				placeObject.moving_object = false
+				placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
 				get_node("../").add_child(placeObject)
 			else:
 				if get_node("../PlaceObject").item_name != item_name: # exists but item changed
