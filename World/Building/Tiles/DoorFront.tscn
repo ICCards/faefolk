@@ -1,0 +1,315 @@
+[gd_scene load_steps=25 format=3]
+
+[ext_resource type="Script" path="res://World/Building/Tiles/DoorFront.gd" id="1_k3jqu"]
+[ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/1.png" id="2"]
+[ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/4.png" id="3"]
+[ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/2.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ckal8dga4akml" path="res://Assets/Images/Misc/watering can progress indicator.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://c4na5ddc2wje3" path="res://Assets/Tilesets/doors/hit effects/wood/front/open.png" id="10"]
+[ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/3.png" id="11"]
+
+[sub_resource type="SpriteFrames" id="25"]
+animations = []
+
+[sub_resource type="Animation" id="13"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="14"]
+resource_name = "hit"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ujqhk"]
+_data = {
+"RESET": SubResource("13"),
+"hit": SubResource("14")
+}
+
+[sub_resource type="RectangleShape2D" id="9"]
+size = Vector2(64, 15)
+
+[sub_resource type="RectangleShape2D" id="10"]
+size = Vector2(61, 30)
+
+[sub_resource type="RectangleShape2D" id="15"]
+size = Vector2(41, 20)
+
+[sub_resource type="RectangleShape2D" id="16"]
+size = Vector2(61, 30)
+
+[sub_resource type="Animation" id="8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2")]
+}
+
+[sub_resource type="Animation" id="6"]
+resource_name = "close"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3"), ExtResource("11"), ExtResource("4"), ExtResource("2")]
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "open"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2"), ExtResource("4"), ExtResource("11"), ExtResource("3")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_43lra"]
+_data = {
+"RESET": SubResource("8"),
+"close": SubResource("6"),
+"open": SubResource("5")
+}
+
+[sub_resource type="Animation" id="11"]
+length = 0.001
+
+[sub_resource type="Animation" id="12"]
+resource_name = "show health bar"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vx3uc"]
+_data = {
+"RESET": SubResource("11"),
+"show health bar": SubResource("12")
+}
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(60, 33)
+
+[node name="DoorFront" type="Area2D"]
+collision_layer = 0
+collision_mask = 131072
+script = ExtResource("1_k3jqu")
+
+[node name="LightMask" type="PointLight2D" parent="."]
+light_mask = 32
+position = Vector2(32, -53)
+scale = Vector2(1, 0.981482)
+range_item_cull_mask = 32
+shadow_item_cull_mask = 0
+texture = ExtResource("2")
+
+[node name="Bg" type="Sprite2D" parent="."]
+light_mask = 32
+position = Vector2(32.0252, -51.5306)
+scale = Vector2(0.0504334, 0.0504707)
+region_enabled = true
+region_rect = Rect2(349.28, -178.5, 1269, 2043.62)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(32, -36)
+sprite_frames = SubResource("25")
+animation = &"open"
+
+[node name="HitEffect" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="HitEffect"]
+visible = false
+position = Vector2(32, -53)
+texture = ExtResource("10")
+hframes = 3
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HitEffect"]
+libraries = {
+"": SubResource("AnimationLibrary_ujqhk")
+}
+
+[node name="DoorMovementCollision" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorMovementCollision"]
+position = Vector2(32, -7.5)
+shape = SubResource("9")
+
+[node name="HealthBar" type="Node2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(13, 2)
+scale = Vector2(2.5, 3)
+
+[node name="Border" type="TextureRect" parent="HealthBar"]
+offset_right = 16.0
+offset_bottom = 3.0
+texture = ExtResource("8")
+
+[node name="Progress" type="TextureProgressBar" parent="HealthBar"]
+modulate = Color(0.109804, 1, 0, 1)
+offset_left = 0.800002
+offset_top = 0.666664
+offset_right = 14.8
+offset_bottom = 1.66666
+max_value = 250.0
+value = 250.0
+nine_patch_stretch = true
+texture_progress = ExtResource("9")
+
+[node name="HurtBox" type="Area2D" parent="."]
+visible = false
+position = Vector2(16, -16)
+collision_layer = 24
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+light_mask = 0
+position = Vector2(15.5, 0)
+shape = SubResource("10")
+
+[node name="DetectObjectOverPathBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 8192
+collision_mask = 8192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectObjectOverPathBox"]
+position = Vector2(32.5, -7)
+shape = SubResource("15")
+
+[node name="HammerRepairBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 16384
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HammerRepairBox"]
+light_mask = 0
+position = Vector2(31.5, -16)
+shape = SubResource("16")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_43lra")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vx3uc")
+}
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(32, -7.5)
+shape = SubResource("2")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

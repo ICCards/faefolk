@@ -86,6 +86,9 @@ offset_right = 393.0
 offset_bottom = 240.0
 scale = Vector2(0.06, 0.06)
 theme = ExtResource("5_y5atq")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
 text = "Wood"
 vertical_alignment = 1
 
@@ -104,12 +107,16 @@ stretch_mode = 6
 
 [node name="Quantity" type="Label" parent="."]
 layout_mode = 0
-offset_left = 12.0
+offset_left = 13.0
 offset_top = 17.0
-offset_right = 105.0
-offset_bottom = 78.0
-grow_horizontal = 0
-scale = Vector2(0.1, 0.1)
+offset_right = 253.0
+offset_bottom = 201.0
+scale = Vector2(0.03, 0.03)
+theme = ExtResource("5_y5atq")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+text = "999"
 
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 5.0

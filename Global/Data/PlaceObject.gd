@@ -5,8 +5,8 @@ extends Node
 @onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 @onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
 @onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
-@onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
-@onready var BuildingTileObjectHurtBox = load("res://World/Objects/Tiles/BuildingTileObjectHurtBox.tscn")
+@onready var TileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn")
+@onready var BuildingTileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn")
 @onready var DoorFront #= load("res://World/Objects/Tiles/DoorFront.tscn")
 @onready var DoorSide #= load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
 @onready var GateFront #= load("res://World/Objects/Tiles/GateFront.tscn")
@@ -122,6 +122,9 @@ func place_object_in_world(id, item_name, direction, location, variety = null):
 	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
 		if not Util.isStorageItem(item_name):
 			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
+	elif Constants.customizable_object_atlas_tiles.keys().has(item_name):
+		if not Util.isStorageItem(item_name):
+			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_object_atlas_tiles[item_name][variety])
 	else:
 		if not Util.isStorageItem(item_name):
-			Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_atlas_tiles[item_name][direction])
+			Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_object_atlas_tiles[item_name][direction])

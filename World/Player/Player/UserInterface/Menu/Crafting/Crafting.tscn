@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://suwmuinnbyjn"]
+[gd_scene load_steps=13 format=3 uid="uid://cdfwwoxabb2pn"]
 
 [ext_resource type="Texture2D" uid="uid://cefhq312qr2uq" path="res://Assets/Images/User interface/inventory/crafting/crafting slider.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd" id="1_gsu72"]
 [ext_resource type="Texture2D" uid="uid://bsltdgi11pugj" path="res://Assets/Images/User interface/inventory/crafting/crafting-slider.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://btewrm02rhmnh" path="res://Assets/Images/User interface/inventory/crafting/crafting-tab.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://cvkxqo4ch3k81" path="res://InventoryLogic/CraftingItemDescription.tscn" id="4"]
-[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Workbench/CraftingMenu.gd" id="6_qcrst"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Crafting/CraftingMenu.gd" id="6_qtaae"]
 [ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="8_iau4l"]
 [ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="9"]
 [ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="9_aplqv"]
@@ -77,7 +77,7 @@ offset_right = 563.0
 offset_bottom = 602.0
 mouse_filter = 2
 theme = SubResource("3")
-script = ExtResource("6_qcrst")
+script = ExtResource("6_qtaae")
 
 [node name="Items" type="GridContainer" parent="CraftingMenu"]
 layout_mode = 2
@@ -223,6 +223,21 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
 
+[node name="brewing table #1" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="brewing table #2" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="brewing table #3" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
 [node name="furnace" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -288,6 +303,21 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
 
+[node name="single cabinet" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="double cabinet" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="dresser" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
 [node name="small rug" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -299,6 +329,16 @@ layout_mode = 2
 script = ExtResource("9")
 
 [node name="large rug" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="lamp" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="fireplace" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")

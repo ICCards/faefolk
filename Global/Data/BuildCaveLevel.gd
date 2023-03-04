@@ -6,7 +6,7 @@ extends Node
 @onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
 @onready var Spider = load("res://World/Enemies/Spider.tscn")
 @onready var FireMageSkeleton = load("res://World/Enemies/Skeleton.tscn")
-@onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
+#@onready var TileObjectHurtBox = load("res://World/Objects/Tiles/TileObjectHurtBox.tscn")
 @onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
 @onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
 @onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")

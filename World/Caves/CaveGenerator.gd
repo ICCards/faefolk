@@ -95,7 +95,7 @@ func fix_tiles():
 
 @export var map_width: int = 150
 @export var map_height: int = 150
-@export var redraw: bool : set = redraw
+@export var redraw: bool : set = redraw_walls
 
 @export var world_seed: String = "Hello Godot!"
 @export var noise_octaves: int = 1
@@ -105,12 +105,12 @@ func fix_tiles():
 @export var noise_threshold: float = 0.1
 @export var min_cave_size: int = 60 
 
-var simplex_noise : OpenSimplexNoise = OpenSimplexNoise.new()
+var simplex_noise = FastNoiseLite.new()
 
 func _ready() -> void:
-	redraw()
+	redraw_walls()
 	
-func redraw(value = null) -> void:
+func redraw_walls(value = null) -> void:
 	if walls == null:
 		return
 	clear()
@@ -125,8 +125,8 @@ func clear() -> void:
 	
 func generate() -> void:
 	simplex_noise.seed = self.world_seed.hash()
-	simplex_noise.octaves = self.noise_octaves
-	simplex_noise.period = self.noise_period
+	simplex_noise.fractal_octaves = self.noise_octaves
+	simplex_noise.frequency = self.noise_period
 	simplex_noise.persistence = self.noise_persistence
 	simplex_noise.lacunarity = self.noise_lacunarity
 	for x in range(-self.map_width / 2, self.map_width / 2):

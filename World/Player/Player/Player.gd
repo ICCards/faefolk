@@ -98,6 +98,7 @@ func set_held_object():
 
 
 func set_current_object(item_name):
+	print("SET CURRENT OBJECT")
 	var item_category
 	if item_name:
 		item_category = JsonData.item_data[item_name]["ItemCategory"]

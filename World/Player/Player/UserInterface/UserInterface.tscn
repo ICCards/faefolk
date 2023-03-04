@@ -281,11 +281,11 @@ texture = ExtResource("5_yyu54")
 
 [node name="RotateLabel" type="Label" parent="ChangeRotation"]
 layout_mode = 0
-offset_left = 57.0
-offset_top = -6.0
-offset_right = 1019.0
-offset_bottom = 178.0
-scale = Vector2(0.2, 0.2)
+offset_left = 56.0
+offset_top = -9.0
+offset_right = 1018.0
+offset_bottom = 175.0
+scale = Vector2(0.22, 0.22)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
@@ -321,11 +321,11 @@ texture = ExtResource("7_u87cj")
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
 layout_mode = 0
-offset_left = 709.0
-offset_top = 573.0
-offset_right = 1671.0
-offset_bottom = 757.0
-scale = Vector2(0.2, 0.2)
+offset_left = 691.0
+offset_top = 570.0
+offset_right = 1653.0
+offset_bottom = 754.0
+scale = Vector2(0.22, 0.22)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10

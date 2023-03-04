@@ -206,14 +206,18 @@ wait_time = 10.0
 
 [node name="InventorySlots" parent="." instance=ExtResource("8_fmvqt")]
 layout_mode = 0
+offset_left = 639.0
+offset_top = 315.0
+offset_right = 939.0
+offset_bottom = 561.0
 metadata/_edit_lock_ = true
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource("7_mau5r")]
 layout_mode = 0
-offset_left = 638.0
-offset_top = 184.0
-offset_right = 938.0
-offset_bottom = 298.0
+offset_left = 639.0
+offset_top = 183.0
+offset_right = 939.0
+offset_bottom = 297.0
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]

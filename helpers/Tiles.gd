@@ -61,7 +61,7 @@ func validate_foundation_tiles(location, dimensions):
 		active = true
 		for x in range(dimensions.x):
 			for y in range(dimensions.y):
-				if foundation_tiles.get_cell_atlas_coords(0,location)==Vector2i(-1,-1) or not valid_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) == Constants.VALID_TILE_ATLAS_CORD: 
+				if foundation_tiles.get_cell_atlas_coords(0,location+Vector2i(x,-y))==Vector2i(-1,-1): #or not valid_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) == Constants.VALID_TILE_ATLAS_CORD: 
 					return false
 					break
 		return true

@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://drucphw6ea0bn"]
+[gd_scene load_steps=18 format=3 uid="uid://drucphw6ea0bn"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Workbench/Workbench.gd" id="1_ad048"]
 [ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="3_g1aro"]
 [ext_resource type="Texture2D" uid="uid://drpwcpj3f8jap" path="res://Assets/Images/User interface/workbench/workbench-tab.png" id="4"]
+[ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="9_0gnga"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Workbench/CraftingMenuWorkbench.gd" id="9_rfkl5"]
 [ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="11"]
 [ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="11_q826s"]
@@ -94,9 +95,8 @@ value = 100.0
 layout_mode = 0
 offset_left = 322.0
 offset_top = 171.0
-offset_right = 391.0
-offset_bottom = 279.0
-scale = Vector2(4, 4)
+offset_right = 593.0
+offset_bottom = 600.0
 mouse_filter = 2
 theme = SubResource("4")
 script = ExtResource("9_rfkl5")
@@ -105,11 +105,35 @@ script = ExtResource("9_rfkl5")
 layout_mode = 2
 columns = 4
 
+[node name="stone axe" type="Panel" parent="CraftingMenuWorkbench/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9_0gnga")
+
+[node name="stone pickaxe" type="Panel" parent="CraftingMenuWorkbench/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9_0gnga")
+
+[node name="stone hoe" type="Panel" parent="CraftingMenuWorkbench/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9_0gnga")
+
+[node name="stone" type="Panel" parent="CraftingMenuWorkbench/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9_0gnga")
+
 [node name="Trash" parent="." instance=ExtResource("14_tndyx")]
 metadata/_edit_lock_ = true
 
 [node name="InventorySlots" parent="." instance=ExtResource("12_xuikn")]
 layout_mode = 0
+offset_left = 639.0
+offset_top = 315.0
+offset_right = 939.0
+offset_bottom = 561.0
 metadata/_edit_lock_ = true
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource("13_u1dt5")]

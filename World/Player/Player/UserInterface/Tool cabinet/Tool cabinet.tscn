@@ -23,12 +23,15 @@ offset_left = -640.0
 offset_top = -360.0
 offset_right = -640.0
 offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_cmqgj")
 
 [node name="ItemDescription" parent="." instance=ExtResource("9")]
 visible = false
 
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -47,6 +50,7 @@ texture_normal = ExtResource("8")
 texture_pressed = ExtResource("4")
 
 [node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -59,9 +63,12 @@ offset_left = 552.0
 offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
-text = "Chest"
+
+[node name="Label" parent="MenuTitle" index="1"]
+text = "Tool cabinet"
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource("8_70ay2")]
+layout_mode = 0
 offset_left = 345.0
 offset_top = 426.0
 offset_right = 933.0
@@ -71,6 +78,7 @@ columns = 10
 metadata/_edit_lock_ = true
 
 [node name="InventorySlots" parent="." instance=ExtResource("9_se46g")]
+layout_mode = 0
 offset_left = 345.0
 offset_top = 485.0
 offset_right = 933.0
@@ -81,6 +89,7 @@ columns = 10
 metadata/_edit_lock_ = true
 
 [node name="ChestSlots" parent="." instance=ExtResource("10_0vkoo")]
+layout_mode = 0
 offset_left = 345.0
 offset_top = 180.0
 offset_right = 939.0
@@ -92,3 +101,5 @@ theme_override_constants/v_separation = 12
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
+
+[editable path="MenuTitle"]

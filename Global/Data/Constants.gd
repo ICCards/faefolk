@@ -13,12 +13,16 @@ const dimensions_dict = {
 	"furnace" : Vector2(1,1),
 	"crate" : Vector2(1,1),
 	"wood fence" : Vector2(1,1),
+	"wood gate": Vector2(2,1),
+	"stone fence" : Vector2(1,1),
+	"stone gate": Vector2(2,1),
+	"metal fence" : Vector2(1,1),
+	"metal gate": Vector2(2,1),
 	"barrel" : Vector2(1,1),
 	"display table" : Vector2(1,1),
 	"campfire" : Vector2(1,1),
 	"torch" : Vector2(1,1),
 	"tool cabinet": Vector2(2,1),
-	"preset stone chest": Vector2(2,1),
 	"stone chest": Vector2(2,1),
 	"wood chest": Vector2(2,1),
 	"workbench #1": Vector2(2,1),
@@ -52,15 +56,22 @@ const dimensions_dict = {
 	"metal door side": Vector2(1,2),
 	"armored door": Vector2(2,1),
 	"armored door side": Vector2(1,2),
-	"wood gate": Vector2(2,1),
-	"wood gate side": Vector2(1,2),
-	
+	"fireplace": Vector2(2,1),
+	"double cabinet": Vector2(2,1),
+	"single cabinet": Vector2(1,1),
+	"lamp": Vector2(1,1),
 }
 
 var object_atlas_tiles = {
 	"crate": Vector2i(0,0),
 	"barrel": Vector2i(0,2),
-	"wood fence": Vector2i(26,67),
+	"wood fence": Vector2i(26,68),
+	"stone fence": Vector2i(26,73),
+	"metal fence": Vector2i(26,78),
+	"well" : Vector2i(0,84),
+	"display table": Vector2i(5,81),
+	"campfire": Vector2i(0,64),
+	"torch": Vector2i(0,62)
 }
 
 var autotile_object_atlas_tiles = {
@@ -116,6 +127,68 @@ var customizable_object_atlas_tiles = {
 		7: Vector2i(48,50),
 		8: Vector2i(55,50),
 	},
+	"dresser" : {
+		1: Vector2i(0,92),
+		2: Vector2i(2,92),
+		3: Vector2i(4,92),
+		4: Vector2i(6,92),
+		5: Vector2i(8,92),
+		6: Vector2i(10,92),
+		7: Vector2i(12,92),
+		8: Vector2i(14,92),
+		9: Vector2i(16,92),
+		10: Vector2i(18,92),
+		11: Vector2i(20,92),
+		12: Vector2i(20,92),
+		13: Vector2i(22,91),
+		14: Vector2i(24,92),
+	},
+	"double cabinet" : {
+		1: Vector2i(0,96),
+		2: Vector2i(2,96),
+		3: Vector2i(4,96),
+		4: Vector2i(7,96),
+		5: Vector2i(9,96),
+		6: Vector2i(11,96),
+		7: Vector2i(13,96),
+		8: Vector2i(15,96),
+		9: Vector2i(17,96),
+		10: Vector2i(19,96),
+		11: Vector2i(21,96),
+		12: Vector2i(23,96),
+	},
+	"single cabinet" : {
+		1: Vector2i(0,98),
+		2: Vector2i(1,98),
+		3: Vector2i(2,98),
+		4: Vector2i(3,98),
+		5: Vector2i(4,98),
+		6: Vector2i(5,98),
+	},
+	"lamp" : {
+		1: Vector2i(0,100),
+		2: Vector2i(2,100),
+		3: Vector2i(4,100),
+		4: Vector2i(6,100),
+		5: Vector2i(8,100),
+		6: Vector2i(10,100),
+		7: Vector2i(12,100),
+		8: Vector2i(14,100),
+		9: Vector2i(16,100),
+		10: Vector2i(18,100),
+		11: Vector2i(20,100),
+		12: Vector2i(22,99),
+	},
+	"fireplace": {
+		1: Vector2i(0,103),
+		2: Vector2i(18,103)
+	},
+	"stool": {
+		1: Vector2i(0,83),
+		2: Vector2i(1,83),
+		3: Vector2i(2,83)
+	},
+	
 }
 
 
@@ -158,14 +231,86 @@ var customizable_rotatable_object_atlas_tiles = {
 			"up": Vector2i(23,34),
 		},
 	},
+	"armchair" : {
+		1 : {
+			"left": Vector2i(0,36),
+			"right": Vector2i(2,36),
+			"down": Vector2i(4,36),
+			"up": Vector2i(6,36),
+		},
+		2 : {
+			"left": Vector2i(8,36),
+			"right": Vector2i(10,36),
+			"down": Vector2i(12,36),
+			"up": Vector2i(14,36),
+		},
+		3 : {
+			"left": Vector2i(16,36),
+			"right": Vector2i(18,36),
+			"down": Vector2i(20,36),
+			"up": Vector2i(22,36),
+		},
+		4 : {
+			"left": Vector2i(24,36),
+			"right": Vector2i(26,36),
+			"down": Vector2i(28,36),
+			"up": Vector2i(30,36),
+		},
+	},
+	"table": {
+		1 : {
+			"left": Vector2i(2,43),
+			"right": Vector2i(2,43),
+			"down": Vector2i(0,42),
+			"up": Vector2i(0,42),
+		},
+		2 : {
+			"left": Vector2i(7,43),
+			"right": Vector2i(7,43),
+			"down": Vector2i(5,42),
+			"up": Vector2i(5,42),
+		},
+		3 : {
+			"left": Vector2i(12,43),
+			"right": Vector2i(12,43),
+			"down": Vector2i(10,42),
+			"up": Vector2i(10,42),
+		},
+		4 : {
+			"left": Vector2i(17,43),
+			"right": Vector2i(17,43),
+			"down": Vector2i(15,42),
+			"up": Vector2i(15,42),
+		},
+	},
+	"couch": {
+		1 : {
+			"left": Vector2i(8,46),
+			"right": Vector2i(6,46),
+			"down": Vector2i(0,47),
+			"up": Vector2i(3,47),
+		},
+		2 : {
+			"left": Vector2i(18,46),
+			"right": Vector2i(16,46),
+			"down": Vector2i(10,47),
+			"up": Vector2i(13,47),
+		},
+		3 : {
+			"left": Vector2i(28,46),
+			"right": Vector2i(26,46),
+			"down": Vector2i(20,47),
+			"up": Vector2i(23,47),
+		},
+	},
 }
 
-var rotatable_atlas_tiles = {
+var rotatable_object_atlas_tiles = {
 	"furnace": {
-		"up": Vector2i(0,2),
-		"right": Vector2i(1,2),
-		"down": Vector2i(2,2),
-		"left": Vector2i(3,2)
+		"up": Vector2i(0,4),
+		"right": Vector2i(1,4),
+		"down": Vector2i(2,4),
+		"left": Vector2i(3,4)
 	},
 	"wood chest": {
 		"up": Vector2i(6,12),
@@ -256,6 +401,24 @@ var rotatable_atlas_tiles = {
 		"up": Vector2i(14,27),
 		"right": Vector2i(16,27),
 		"left": Vector2i(17,27)
+	},
+	"wood gate": {
+		"down": Vector2i(0,68),
+		"up": Vector2i(0,68),
+		"right": Vector2i(12,66),
+		"left": Vector2i(12,66)
+	},
+	"stone gate": {
+		"down": Vector2i(0,73),
+		"up": Vector2i(0,73),
+		"right": Vector2i(12,71),
+		"left": Vector2i(12,71)
+	},
+	"metal gate": {
+		"down": Vector2i(0,78),
+		"up": Vector2i(0,78),
+		"right": Vector2i(12,76),
+		"left": Vector2i(12,76)
 	},
 }
 

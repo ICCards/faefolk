@@ -16,7 +16,7 @@ var holding_item = null
 @onready var Campfire = load("res://World/Player/Player/UserInterface/Campfire/Campfire.tscn")
 @onready var Crate = load("res://World/Player/Player/UserInterface/Crate/Crate.tscn")
 @onready var Barrel = load("res://World/Player/Player/UserInterface/Barrel/Barrel.tscn")
-#@onready var BrewingTable = load("res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
+@onready var BrewingTable = load("res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn")
 
 var items_to_drop = []
 
@@ -68,7 +68,13 @@ func initialize_furnaces_campfires_and_stoves():
 		add_child(campfire)
 		campfire.check_valid_recipe()
 		campfire.hide()
-
+	for id in PlayerData.player_data["barrels"]:
+		var barrel = Barrel.instantiate()
+		barrel.name = str(id)
+		barrel.id = id
+		add_child(barrel)
+		barrel.check_valid_recipe()
+		barrel.hide()
 
 
 func save_player_data(exit_to_main_menu):
@@ -87,6 +93,7 @@ func save_player_data(exit_to_main_menu):
 	$LoadingIndicator.hide()
 	if exit_to_main_menu:
 		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
+
 
 func switch_hotbar():
 	if Server.player_node.state == MOVEMENT:
@@ -155,6 +162,8 @@ func death():
 				close_furnace(object_id)
 			"campfire":
 				close_campfire(object_id)
+			"brewing table":
+				close_brewing_table(object_id)
 	close_hotbar_clock_and_stats()
 	if holding_item:
 		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
@@ -163,20 +172,20 @@ func death():
 
 
 func toggle_brewing_table(id,level):
-	pass
-#	if not has_node(id):
-#		play_open_menu_sound()
-#		var brewingTable = BrewingTable.instantiate()
-#		brewingTable.name = str(id)
-#		brewingTable.id = id
-#		add_child(brewingTable)
-#		close_hotbar_clock_and_stats()
-#	elif has_node(id) and not get_node(id).visible:
-#		play_open_menu_sound()
-#		get_node(id).initialize()
-#		close_hotbar_clock_and_stats()
-#	else:
-#		close_brewing_table(id)
+	if not has_node(str(id)):
+		play_open_menu_sound()
+		var brewingTable = BrewingTable.instantiate()
+		brewingTable.level = level
+		brewingTable.name = str(id)
+		brewingTable.id = id
+		add_child(brewingTable)
+		close_hotbar_clock_and_stats()
+	elif has_node(str(id)) and not get_node(str(id)).visible:
+		play_open_menu_sound()
+		get_node(str(id)).initialize()
+		close_hotbar_clock_and_stats()
+	else:
+		close_brewing_table(id)
 
 
 func toggle_save_and_exit():
@@ -345,23 +354,23 @@ func toggle_workbench(level):
 
 
 func toggle_furnace(id):
-	if not has_node(id):
+	if not has_node(str(id)):
 		play_open_menu_sound()
 		var furnace = Furnace.instantiate()
 		furnace.name = str(id)
 		furnace.id = id
 		add_child(furnace)
 		close_hotbar_clock_and_stats()
-	elif has_node(id) and not get_node(id).visible:
+	elif has_node(str(id)) and not get_node(str(id)).visible:
 		play_open_menu_sound()
-		get_node(id).initialize()
+		get_node(str(id)).initialize()
 		close_hotbar_clock_and_stats()
 	else:
-		close_furnace(id)
+		close_furnace(str(id))
 
 
 func toggle_stove(id, level):
-	if not has_node(id):
+	if not has_node(str(id)):
 		play_open_menu_sound()
 		var stove = Stove.instantiate()
 		stove.name = str(id)
@@ -369,26 +378,26 @@ func toggle_stove(id, level):
 		stove.id = id
 		add_child(stove)
 		close_hotbar_clock_and_stats()
-	elif has_node(id) and not get_node(id).visible:
+	elif has_node(str(id)) and not get_node(str(id)).visible:
 		play_open_menu_sound()
-		get_node(id).level = level
-		get_node(id).initialize()
+		get_node(str(id)).level = level
+		get_node(str(id)).initialize()
 		close_hotbar_clock_and_stats()
 	else:
 		close_stove(id)
 
 
 func toggle_campfire(id):
-	if not has_node(id):
+	if not has_node(str(id)):
 		play_open_menu_sound()
 		var stove = Campfire.instantiate()
 		stove.name = str(id)
 		stove.id = id
 		add_child(stove)
 		close_hotbar_clock_and_stats()
-	elif has_node(id) and not get_node(id).visible:
+	elif has_node(str(id)) and not get_node(str(id)).visible:
 		play_open_menu_sound()
-		get_node(id).initialize()
+		get_node(str(id)).initialize()
 		close_hotbar_clock_and_stats()
 	else:
 		close_campfire(id)
@@ -417,21 +426,21 @@ func close_barrel(id):
 		Server.world.get_node("PlaceableObjects/"+id).close_barrel()
 
 func close_campfire(id):
-	if not holding_item and has_node(id):
+	if not holding_item and has_node(str(id)):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
-		get_node(id).hide()
+		get_node(str(id)).hide()
 		drop_items()
 		
 func close_brewing_table(id):
-	if not holding_item and has_node(id):
+	if not holding_item and has_node(str(id)):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
-		get_node(id).hide()
+		get_node(str(id)).hide()
 		drop_items()
 
 func close_furnace(id):
-	if not holding_item and has_node(id):
+	if not holding_item and has_node(str(id)):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
 		get_node(id).hide()
@@ -452,10 +461,10 @@ func close_workbench():
 		drop_items()
 
 func close_stove(id):
-	if not holding_item and has_node(id):
+	if not holding_item and has_node(str(id)):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
-		get_node(id).hide()
+		get_node(str(id)).hide()
 		drop_items()
 
 func close_chest(id):

@@ -161,8 +161,8 @@ func valid_yield_slot(ore_name):
 func cooking_active():
 	$CookTimer.start()
 	$FireAnimatedSprite.show()
-	if Server.world.has_node("PlacableObjects/"+id+"/FurnaceSmoke"):
-		Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").show()
+	if Server.world.name == "Overworld":
+		Server.world.get_node("PlaceableObjects/"+id).toggle_furnace_smoke(true)
 	if self.visible and Server.isLoaded:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
@@ -172,7 +172,8 @@ func cooking_inactive():
 	$CookTimer.stop()
 	$TimerProgress.value = 0
 	$FireAnimatedSprite.hide()
-	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").hide()
+	if Server.world.name == "Overworld":
+		Server.world.get_node("PlaceableObjects/"+id).toggle_furnace_smoke(false)
 
 func valid_fuel():
 	if fuel_slot.item:

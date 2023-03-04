@@ -13005,6 +13005,7 @@ y_sort_enabled = true
 script = ExtResource("1_jqwgc")
 
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
+color = Color(0.156863, 0.156863, 0.176471, 1)
 script = ExtResource("1_gscqb")
 
 [node name="BuildTerrain" type="Node" parent="."]
@@ -13068,7 +13069,7 @@ format = 2
 layer_0/y_sort_enabled = true
 
 [node name="ObjectTiles" type="TileMap" parent="BuildingTiles"]
-modulate = Color(1.2, 1.2, 1.2, 1)
+modulate = Color(1.3, 1.3, 1.3, 1)
 y_sort_enabled = true
 tile_set = ExtResource("14_6ii0l")
 format = 2

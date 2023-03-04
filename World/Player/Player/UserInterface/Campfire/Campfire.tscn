@@ -80,6 +80,7 @@ fill_mode = 3
 texture_progress = ExtResource("14")
 
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -88,6 +89,7 @@ stretch_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
@@ -110,6 +112,8 @@ offset_left = 552.0
 offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
+
+[node name="Label" parent="MenuTitle" index="1"]
 text = "Campfire"
 
 [node name="FireAnimatedSprite" type="AnimatedSprite2D" parent="."]
@@ -160,16 +164,21 @@ offset_right = 516.0
 offset_bottom = 297.0
 
 [node name="InventorySlots" parent="." instance=ExtResource("18_cwk8p")]
+offset_left = 639.0
+offset_top = 315.0
+offset_right = 939.0
+offset_bottom = 561.0
 metadata/_edit_lock_ = true
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource("19_ectkw")]
-offset_left = 638.0
-offset_top = 184.0
-offset_right = 938.0
-offset_bottom = 298.0
+offset_left = 639.0
+offset_top = 183.0
+offset_right = 939.0
+offset_bottom = 297.0
 metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="CookTimer" to="." method="_on_CookTimer_timeout"]
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 
+[editable path="MenuTitle"]
 [editable path="CampfireSlots"]

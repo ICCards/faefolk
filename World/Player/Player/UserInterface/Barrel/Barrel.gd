@@ -27,7 +27,7 @@ func _physics_process(delta):
 	if $CookTimer.time_left == 0:
 		return 
 	else:
-		$TimerProgress.value = (30-$CookTimer.time_left)*3
+		$TimerProgress.value = (100-$CookTimer.time_left)
 
 func initialize():
 	show()

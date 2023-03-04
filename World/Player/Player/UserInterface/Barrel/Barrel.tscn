@@ -72,7 +72,7 @@ texture_progress = ExtResource("7_vklw6")
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="CookTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 100.0
 
 [node name="InventorySlots" parent="." instance=ExtResource("17_6dvla")]
 layout_mode = 0

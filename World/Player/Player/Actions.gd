@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var Fishing = load("res://World/Player/Player/Fishing/Fishing.tscn")
-@onready var PlaceObjectScene = load("res://World/Player/Player/AttachedScenes/PlaceObjectPreview.tscn") 
+@onready var PlaceObjectScene = load("res://World/Building/PlaceObjectPreview.tscn") 
 @onready var Eating_particles = load("res://World/Player/Player/AttachedScenes/EatingParticles.tscn")
 
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects
@@ -81,13 +81,17 @@ func _input(event):
 					"campfire":
 						get_parent().user_interface.toggle_campfire(current_interactive_node.name)
 					"brewing table":
-						get_parent().user_interface.toggle_brewing_table(current_interactive_node.object_id, current_interactive_node.object_level)
+						get_parent().user_interface.toggle_brewing_table(current_interactive_node.name, current_interactive_node.object_level)
 					"chair":
 						sit(current_interactive_node.object_position, current_interactive_node.object_direction)
 					"door":
 						current_interactive_node.toggle_door()
 					"gate":
 						current_interactive_node.toggle_gate()
+					"lamp":
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).toggle_lamp()
+					"fireplace":
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).toggle_fireplace()
 			current_interactive_node = null
 	elif Server.player_node.state == SITTING and event.is_action_pressed("action"):
 		stand_up()
@@ -293,6 +297,7 @@ func sleep(sleeping_bag_direction, sleeping_bag_pos):
 
 
 func move_placable_object(item_name, location):
+	print("MOVE OBJECT " + item_name)
 	var placeObject = PlaceObjectScene.instantiate()
 	placeObject.name = "PlaceObject"
 	placeObject.item_name = item_name
@@ -312,7 +317,7 @@ func show_placable_object(item_name, item_category):
 			placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
 			get_node("../").add_child(placeObject)
 		else:
-			if get_node("../PlaceObject").item_name != item_name: # exists but item changed
+			if get_node("../PlaceObject").item_name != item_name and not get_node("../PlaceObject").moving_object: # exists but item changed
 				get_node("../PlaceObject").item_name = item_name
 				get_node("../PlaceObject").item_category = item_category
 				get_node("../PlaceObject").initialize()

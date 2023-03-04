@@ -42,6 +42,8 @@ func setTexture(tree):
 			stump_break.offset = Vector2i(-6,7)
 		"plum":
 			stump_break.offset = Vector2i(-6,7)
+		"spruce":
+			stump_break.offset = Vector2i(-7,7)
 	
 
 

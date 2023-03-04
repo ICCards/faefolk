@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=3 uid="uid://bn3al346tnjp7"]
+
+[ext_resource type="Script" path="res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd" id="1_dnmp0"]
+[ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ckal8dga4akml" path="res://Assets/Images/Misc/watering can progress indicator.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://byuw4rfvgiojf" path="res://Assets/Images/Misc/selected tile.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://6yn3jmy5jo6e" path="res://Assets/Tilesets/walls/walls/armored.png" id="5"]
+
+[sub_resource type="CircleShape2D" id="7"]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(15, 15)
+
+[sub_resource type="Animation" id="4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "show health bar"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwoxm"]
+_data = {
+"RESET": SubResource("4"),
+"show health bar": SubResource("5")
+}
+
+[node name="BuildingTileObjectHurtBox" type="Node2D"]
+script = ExtResource("1_dnmp0")
+
+[node name="DetectObjectOverPathBox" type="Area2D" parent="."]
+position = Vector2(1.90735e-06, 0)
+collision_layer = 0
+collision_mask = 8192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectObjectOverPathBox"]
+shape = SubResource("7")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(1.90735e-06, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+light_mask = 0
+shape = SubResource("1")
+
+[node name="HammerRepairBox" type="Area2D" parent="."]
+visible = false
+position = Vector2(1.90735e-06, 0)
+collision_layer = 16384
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HammerRepairBox"]
+light_mask = 0
+shape = SubResource("1")
+
+[node name="HealthBar" type="Node2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(-9, 10)
+scale = Vector2(1.249, 1.5)
+
+[node name="Border" type="TextureRect" parent="HealthBar"]
+offset_right = 16.0
+offset_bottom = 3.0
+texture = ExtResource("3")
+
+[node name="Progress" type="TextureProgressBar" parent="HealthBar"]
+modulate = Color(0.109804, 1, 0, 1)
+offset_left = 0.800002
+offset_top = 0.666664
+offset_right = 14.8
+offset_bottom = 1.66666
+max_value = 50.0
+value = 44.0
+nine_patch_stretch = true
+texture_progress = ExtResource("2")
+
+[node name="SelectedBorder" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+texture = ExtResource("4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kwoxm")
+}
+
+[node name="SelectedWallVisual" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 1, 1, 1)
+position = Vector2(0, -37)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("5")
+hframes = 14
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1.90735e-06, 0)
+
+[connection signal="area_entered" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_entered"]
+[connection signal="area_exited" from="DetectObjectOverPathBox" to="." method="_on_DetectObjectOverPathBox_area_exited"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="input_event" from="HurtBox" to="." method="_on_HurtBox_input_event"]
+[connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

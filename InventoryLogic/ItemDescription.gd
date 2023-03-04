@@ -47,8 +47,8 @@ func set_description_text(item):
 
 
 func set_size_of_description(x):
-	if x <= 210:
-		width = 58
+	if x <= 708:
+		width = 59
 	else:
 		width = 58 + ((x - 210) / 5)
 	var lines = $Body/ItemDescription.get_line_count()

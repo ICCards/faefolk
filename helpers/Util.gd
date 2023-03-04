@@ -205,6 +205,14 @@ func return_advanced_fruit_tree_phase(current_phase):
 			return "empty"
 
 
+func isObjectPlaceableOnGround(item_name):
+	if item_name == "wood fence" or item_name == "stone fence" or item_name == "metal fence" or \
+	item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate" or \
+	item_name == "well" or item_name == "torch" or item_name == "campfire":
+		return true
+	return false
+
+
 func isStorageItem(item_name):
 	if item_name == "wood box" or item_name == "wood barrel" or item_name == "wood chest" or \
 	item_name == "stone chest" or item_name == "tool cabinet" or item_name == "furnace" or \
