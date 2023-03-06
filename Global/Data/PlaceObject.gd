@@ -4,6 +4,7 @@ extends Node
 @onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
 @onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 @onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
+@onready var StumpObject = load("res://World/Objects/Nature/Trees/Stump.tscn")
 @onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
 @onready var TileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn")
 @onready var BuildingTileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn")
@@ -28,7 +29,6 @@ func place_log_in_world(id,variety,location):
 	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,8)
 	NatureObjects.call_deferred("add_child",object,true)
 
-
 func place_forage_in_world(id,item_name,location,first_placement):
 	ForageObjects = Server.world.get_node("ForageObjects")
 	var forageItem = ForageItem.instantiate()
@@ -39,13 +39,23 @@ func place_forage_in_world(id,item_name,location,first_placement):
 	forageItem.position = Tiles.valid_tiles.map_to_local(location)
 	ForageObjects.call_deferred("add_child",forageItem,true)
 
-
 func place_tree_in_world(id, variety, location, biome ,health, phase):
 	NatureObjects = Server.world.get_node("NatureObjects")
 	var object = TreeObject.instantiate()
 	var pos = Tiles.valid_tiles.map_to_local(location)
 	object.phase = phase
 	object.biome = biome
+	object.health = health
+	object.variety = variety
+	object.location = location
+	object.position = pos + Vector2(-6,-4)
+	object.name = id
+	NatureObjects.call_deferred("add_child",object,true)
+	
+func place_stump_in_world(id,variety,location,health):
+	NatureObjects = Server.world.get_node("NatureObjects")
+	var object = StumpObject.instantiate()
+	var pos = Tiles.valid_tiles.map_to_local(location)
 	object.health = health
 	object.variety = variety
 	object.location = location

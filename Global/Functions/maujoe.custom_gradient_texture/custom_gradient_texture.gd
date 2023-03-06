@@ -65,9 +65,9 @@ func _update():
 				data.set_pixel(x, y, color)
 
 	#data.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	print("FUCKER")
-	ImageTexture.create_from_image(data)
-	print("CREATE FROM IMAGE")
+	self.create_from_image(data)
+	print("YONK")
+	#create_from_image(data)
 
 # Workaournd that allow to manual update the texture
 #warning-ignore:unused_argument

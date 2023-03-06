@@ -47,24 +47,24 @@ var starting_player_data = {
 	"current_save_scene" : "res://World/World/World.tscn",
 	"respawn_position": null,
 	"respawn_scene" : "res://World/World/World.tscn",
-	"season": "spring",
+	"season": "fall",
 	"day_week": "Mon.",
 	"day_number": 1,
 	"time_minutes": 0,
 	"time_hours": 6,
 	"health": 100,
 	"mana": 100,
-	"energy": 10,
+	"energy": 100,
 	"hotbar": {
-		"0": ["stone axe", 1, 50],
-		"1": ["blueprint", 1, null],
-		"4": ["bow", 1, 50],
-		"2": ["brewing table #1", 999, null],
-		"6": ["wind staff", 1, null],
-		"5": ["furnace", 10, null],
-		"7": ["grain mill #1", 100, null],
-		"3": ["corn", 100, null],
-		"8": ["wood gate", 10, null],
+		"0": ["bronze axe", 1, 100],
+#		"1": ["blueprint", 1, null],
+#		"4": ["bow", 1, 50],
+#		"2": ["brewing table #1", 999, null],
+#		"6": ["wind staff", 1, null],
+#		"5": ["furnace", 10, null],
+#		"7": ["grain mill #1", 100, null],
+#		"3": ["corn", 100, null],
+#		"8": ["wood gate", 10, null],
 	#	"3": ["blue flower", 100, null],
 #		"4": ["brewing table #3", 10, null],
 #		"5": ["brewing table #2", 10, null],
@@ -470,18 +470,17 @@ func pick_up_item(item_name, item_quantity, item_health):
 					update_hotbar_slot_visual(str(slot), player_data["hotbar"][str(slot)][0], player_data["hotbar"][str(slot)][1], player_data["hotbar"][str(slot)][2])
 					item_quantity = item_quantity - able_to_add
 	for slot in NUM_INVENTORY_SLOTS: # Add to existing inventory slot
-		str(slot)
-		if player_data["inventory"].has(slot):
-			if player_data["inventory"][slot][0] == item_name:
+		if player_data["inventory"].has(str(slot)):
+			if player_data["inventory"][str(slot)][0] == item_name:
 				var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-				var able_to_add = stack_size - player_data["inventory"][slot][1]
+				var able_to_add = stack_size - player_data["inventory"][str(slot)][1]
 				if able_to_add >= item_quantity:
-					player_data["inventory"][slot][1] += item_quantity
-					update_inventory_slot_visual(slot, player_data["inventory"][slot][0], player_data["inventory"][slot][1], player_data["inventory"][slot][2])
+					player_data["inventory"][str(slot)][1] += item_quantity
+					update_inventory_slot_visual(str(slot), player_data["inventory"][str(slot)][0], player_data["inventory"][str(slot)][1], player_data["inventory"][str(slot)][2])
 					return
 				else:
-					player_data["inventory"][slot][1] += able_to_add
-					update_inventory_slot_visual(slot, player_data["inventory"][slot][0], player_data["inventory"][slot][1] , player_data["inventory"][slot][2])
+					player_data["inventory"][str(slot)][1] += able_to_add
+					update_inventory_slot_visual(str(slot), player_data["inventory"][str(slot)][0], player_data["inventory"][str(slot)][1], player_data["inventory"][str(slot)][2])
 					item_quantity = item_quantity - able_to_add
 	for i in range(NUM_HOTBAR_SLOTS): # Add to empty hotbar slot 
 		if player_data["hotbar"].has(str(i)) == false:

@@ -4,6 +4,7 @@ extends Area2D
 @onready var tree_bottom_sprite: Sprite2D = $TreeSprites/TreeBottom
 @onready var tree_top_sprite: Sprite2D = $TreeSprites/TreeTop
 @onready var animated_tree_top_sprite: AnimatedSprite2D = $TreeSprites/AnimatedTop
+@onready var fruit_fall: AnimatedSprite2D = $TreeSprites/FruitFall
 @onready var sound_effects_stump: AudioStreamPlayer2D = $SoundEffectsStump
 @onready var sound_effects_tree: AudioStreamPlayer2D = $SoundEffectsTree
 @onready var animation_player_tree: AnimationPlayer = $AnimationPlayerTree
@@ -30,7 +31,6 @@ var temp_health: int = 3
 func _ready():
 	rng.randomize()
 	Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
-	$TreeSprites/AnimatedTop.play("default")
 	MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
 	call_deferred("set_tree")
 
@@ -43,7 +43,6 @@ func remove_from_world():
 
 
 func set_tree():
-	phase = str(phase)
 	if phase == "5" and Util.isNonFruitTree(variety): # grown nonfruit tree
 		animated_tree_top_sprite.call_deferred("show")
 		tree_bottom_sprite.call_deferred("show")
@@ -51,7 +50,7 @@ func set_tree():
 		tree_top_sprite.call_deferred("hide")
 		$TreeSprites/TreeSapling.call_deferred("hide")
 		setGrownTreeTexture()
-	elif (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty") and Util.isFruitTree(MapData.world["tree"][name]["v"]): # grown fruit tree
+	elif (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty") and Util.isFruitTree(variety): # grown fruit tree
 		animated_tree_top_sprite.call_deferred("show")
 		tree_bottom_sprite.call_deferred("show")
 		tree_stump_sprite.call_deferred("show")
@@ -70,25 +69,34 @@ func set_tree():
 func harvest():
 	if phase == "harvest":
 		$CollisionShape2D.set_deferred("disabled", true)
-		if Util.chance(5):
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 0), 3)
-		elif Util.chance(25):
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 0), 2)
-		else:
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,0), 1)
 		phase = "empty"
-		MapData.world["tree"][name]["p"] = "empty"
-		await get_tree().idle_frame
+		### FIX
+		#MapData.world["tree"][name]["p"] = "empty"
+		await get_tree().process_frame
 		refresh_tree_type()
+		fruit_fall.frame = 0
+		fruit_fall.show()
+		fruit_fall.play(variety)
+		sound_effects_stump.stream = load("res://Assets/Sound/Sound effects/Tree/fallDown.mp3")
+		sound_effects_stump.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		sound_effects_stump.play()
+		await fruit_fall.animation_finished
+		fruit_fall.hide()
+		if Util.chance(25):
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 3)
+		elif Util.chance(25):
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 2)
+		else:
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 1)
 
 
 func refresh_tree_type():
-	if MapData.world["tree"].has(name):
-		if phase != "5" and Util.isNonFruitTree(MapData.world["tree"][name]["v"]):
-			phase = MapData.world["tree"][name]["p"]
+	#if MapData.world["tree"].has(name):
+		if phase != "5" and Util.isNonFruitTree(variety):
+			#phase = MapData.world["tree"][name]["p"]
 			set_tree()
-		elif phase != "harvest" and Util.isFruitTree(MapData.world["tree"][name]["v"]):
-			phase = MapData.world["tree"][name]["p"]
+		elif phase != "harvest" and Util.isFruitTree(variety):
+			#phase = MapData.world["tree"][name]["p"]
 			set_tree()
 
 func setGrownFruitTreeTexture():
@@ -101,8 +109,6 @@ func setGrownFruitTreeTexture():
 	call_deferred("set_tree_top_collision_shape")
 	tree_stump_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/stump.png"))
 	tree_bottom_sprite.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/mature/bottom.png"))
-	$TreeChipParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/chip.png"))
-	$TreeLeavesParticles.set_deferred("texture", load("res://Assets/Images/tree_sets/"+ variety +"/effects/leaves.png"))
 	animated_tree_top_sprite.set_deferred("frame", rng.randi_range(0,19))
 	animated_tree_top_sprite.set_deferred("sprite_frames", load("res://Assets/Images/tree_sets/"+ variety +"/mature/animated.tres"))
 	match biome:
@@ -115,16 +121,25 @@ func setGrownFruitTreeTexture():
 	match variety:
 		"apple":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-17))
+			fruit_fall.set_deferred("offset", Vector2(0,-19))
 		"cherry":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-17))
+			fruit_fall.set_deferred("offset", Vector2(0,-20))
 		"plum":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-28))
+			fruit_fall.set_deferred("offset", Vector2(0,-20))
 		"pear":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-23))
+			fruit_fall.set_deferred("offset", Vector2(0,-21))
 	if phase == "harvest":
 		$CollisionShape2D.set_deferred("disabled", false)
 	else:
 		$CollisionShape2D.set_deferred("disabled", true)
+	await get_tree().process_frame
+	if biome == "snow":
+		animated_tree_top_sprite.play("snow")
+	else:
+		animated_tree_top_sprite.play(phase)
 
 func setGrownTreeTexture():
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
@@ -155,6 +170,7 @@ func setGrownTreeTexture():
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-23))
 		"pine":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-37))
+	await get_tree().process_frame
 	animated_tree_top_sprite.play("default")
 
 func hit(tool_name):
@@ -198,7 +214,6 @@ func hit(tool_name):
 				sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
 				sound_effects_tree.call_deferred("play")
 				if Server.player_node.get_position().x <= get_position().x:
-					$TreeSprites/TopBreak.rotation = 90
 					animation_player_tree.call_deferred("play", "tree fall right")
 					await animation_player_tree.animation_finished
 					play_tree_break_animation("right")
@@ -212,8 +227,7 @@ func hit(tool_name):
 					elif Util.chance(25):
 						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 1)
 				
-				else:
-					$TreeSprites/TopBreak.rotation = -90
+				else:  
 					animation_player_tree.call_deferred("play", "tree fall left")
 					await animation_player_tree.animation_finished
 					play_tree_break_animation("left")
@@ -254,13 +268,12 @@ func destroy(tool_name):
 		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
 		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
-		await get_tree().create_timer(3.0).timeout
 	else:
 		animation_player_stump.call_deferred("play", "sapling destroyed")
 		sound_effects_stump.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3"))
 		sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 		sound_effects_stump.call_deferred("play")
-		await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(3.0).timeout
 	call_deferred("queue_free")
 
 ### Tree hurtbox
@@ -293,30 +306,174 @@ func set_tree_visible():
 	tween.tween_property(tree_top_sprite, "modulate:a", 1.0, 0.5)
 
 func play_tree_break_animation(fall_side):
-	$TreeSprites/TopBreak.show()
 	match variety:
 		"oak":
-			$TreeSprites/TopBreak.offset = Vector2(-3,-45)
 			if fall_side == "left":
-				#$TreeSprites/TopBreak.rotation = -90
+				$TreeSprites/TopBreakLeft.show()
+				$TreeSprites/TopBreakLeft.offset = Vector2(-3,-45)
 				if biome == "snow":
-					$TreeSprites/TopBreak.play("left oak winter")
+					$TreeSprites/TopBreakLeft.play("oak winter")
 				else:
-					$TreeSprites/TopBreak.play("left oak")
+					$TreeSprites/TopBreakLeft.play("oak")
 			else:
-				#$TreeSprites/TopBreak.rotation = 90
+				$TreeSprites/TopBreakRight.show()
+				$TreeSprites/TopBreakRight.offset = Vector2(-3,-46)
 				if biome == "snow":
-					$TreeSprites/TopBreak.play("right oak winter")
+					$TreeSprites/TopBreakRight.play("oak winter")
 				else:
-					$TreeSprites/TopBreak.play("right oak")
+					$TreeSprites/TopBreakRight.play("oak")
+		"birch":
+			if fall_side == "left":
+				$TreeSprites/TopBreakLeft.show()
+				$TreeSprites/TopBreakLeft.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakLeft.play("birch winter")
+				else:
+					$TreeSprites/TopBreakLeft.play("birch")
+			else:
+				$TreeSprites/TopBreakRight.show()
+				$TreeSprites/TopBreakRight.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakRight.play("birch winter")
+				else:
+					$TreeSprites/TopBreakRight.play("birch")
+		"evergreen":
+				if fall_side == "left":
+					$TreeSprites/TopBreakLeft.show()
+					$TreeSprites/TopBreakLeft.offset = Vector2(-3,-41)
+					if biome == "snow":
+						$TreeSprites/TopBreakLeft.play("evergreen winter")
+					else:
+						$TreeSprites/TopBreakLeft.play("evergreen")
+				else:
+					$TreeSprites/TopBreakRight.show()
+					$TreeSprites/TopBreakRight.offset = Vector2(-3,-41)
+					if biome == "snow":
+						$TreeSprites/TopBreakRight.play("evergreen winter")
+					else:
+						$TreeSprites/TopBreakRight.play("evergreen")
+		"pine":
+			if fall_side == "left":
+				$TreeSprites/TopBreakLeft.show()
+				$TreeSprites/TopBreakLeft.offset = Vector2(-3,-46)
+				if biome == "snow":
+					$TreeSprites/TopBreakLeft.play("pine winter")
+				else:
+					$TreeSprites/TopBreakLeft.play("pine")
+			else:
+				$TreeSprites/TopBreakRight.show()
+				$TreeSprites/TopBreakRight.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakRight.play("pine winter")
+				else:
+					$TreeSprites/TopBreakRight.play("pine")
+		"spruce":
+			if fall_side == "left":
+				$TreeSprites/TopBreakLeft.show()
+				$TreeSprites/TopBreakLeft.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakLeft.play("spruce winter")
+				else:
+					$TreeSprites/TopBreakLeft.play("spruce")
+			else:
+				$TreeSprites/TopBreakRight.show()
+				$TreeSprites/TopBreakRight.offset = Vector2(-3,-46)
+				if biome == "snow":
+					$TreeSprites/TopBreakRight.play("spruce winter")
+				else:
+					$TreeSprites/TopBreakRight.play("spruce")
+		"apple":
+			if fall_side == "left":
+				$TreeSprites/TopBreakLeft.show()
+				$TreeSprites/TopBreakLeft.offset = Vector2(-3,-46)
+				if biome == "snow":
+					$TreeSprites/TopBreakLeft.play("apple winter")
+				else:
+					$TreeSprites/TopBreakLeft.play("apple")
+			else:
+				$TreeSprites/TopBreakRight.show()
+				$TreeSprites/TopBreakRight.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakRight.play("apple winter")
+				else:
+					$TreeSprites/TopBreakRight.play("apple")
+		"cherry":
+			if fall_side == "left":
+				$TreeSprites/TopBreakLeft.show()
+				$TreeSprites/TopBreakLeft.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakLeft.play("cherry winter")
+				else:
+					$TreeSprites/TopBreakLeft.play("cherry")
+			else:
+				$TreeSprites/TopBreakRight.show()
+				$TreeSprites/TopBreakRight.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakRight.play("cherry winter")
+				else:
+					$TreeSprites/TopBreakRight.play("cherry")
+		"plum":
+			if fall_side == "left":
+				$TreeSprites/TopBreakLeft.show()
+				$TreeSprites/TopBreakLeft.offset = Vector2(-3,-46)
+				if biome == "snow":
+					$TreeSprites/TopBreakLeft.play("plum winter")
+				else:
+					$TreeSprites/TopBreakLeft.play("plum")
+			else:
+				$TreeSprites/TopBreakRight.show()
+				$TreeSprites/TopBreakRight.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakRight.play("plum winter")
+				else:
+					$TreeSprites/TopBreakRight.play("plum")
+		"pear":
+			if fall_side == "left":
+				$TreeSprites/TopBreakLeft.show()
+				$TreeSprites/TopBreakLeft.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakLeft.play("pear winter")
+				else:
+					$TreeSprites/TopBreakLeft.play("pear")
+			else:
+				$TreeSprites/TopBreakRight.show()
+				$TreeSprites/TopBreakRight.offset = Vector2(-3,-47)
+				if biome == "snow":
+					$TreeSprites/TopBreakRight.play("pear winter")
+				else:
+					$TreeSprites/TopBreakRight.play("pear")
+	if fall_side == "left":
+		await $TreeSprites/TopBreakLeft.animation_finished
+		$TreeSprites/TopBreakLeft.hide()
+	else:
+		await $TreeSprites/TopBreakRight.animation_finished
+		$TreeSprites/TopBreakRight.hide()
 
 func play_stump_break_animation():
 	$TreeSprites/StumpBreak.show()
 	match variety:
 		"oak":
 			$TreeSprites/StumpBreak.offset = Vector2(-7,7)
+		"birch":
+			$TreeSprites/StumpBreak.offset = Vector2(-7,6)
+		"evergreen":
+			$TreeSprites/StumpBreak.offset = Vector2(-6,6)
+		"pine":
+			$TreeSprites/StumpBreak.offset = Vector2(-7,6)
+		"spruce":
+			$TreeSprites/StumpBreak.offset = Vector2(-7,6)
+		"apple":
+			$TreeSprites/StumpBreak.offset = Vector2(-7,7)
+		"cherry":
+			$TreeSprites/StumpBreak.offset = Vector2(-7,6)
+		"plum":
+			$TreeSprites/StumpBreak.offset = Vector2(-6,6)
+		"pear":
+			$TreeSprites/StumpBreak.offset = Vector2(-6,6)
 	$TreeSprites/StumpBreak.play(variety)
-
+	await  $TreeSprites/StumpBreak.animation_finished
+	$TreeSprites/StumpBreak.hide()
+	
 
 func _on_TreeTopArea_area_entered(_area):
 	call_deferred("set_tree_transparent")

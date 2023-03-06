@@ -1,9 +1,10 @@
+CanvasGroup
+TileMap
+AnimatedSprite2D
 Label
 ColorRect
 PointLight2D
-AnimatedSprite2D
 Button
-TileMap
 Timer
 Node
 Control

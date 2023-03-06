@@ -33,25 +33,27 @@ func _ready():
 		itemQuantity.call_deferred("hide")
 	else:
 		itemQuantity.set_deferred("text", str(item_quantity))
-	randomInt = rng.randi_range(1, 2)
+	randomInt = rng.randi_range(1, 6)
 	animationPlayer.play("Animate " + str(randomInt))
 
 
 func adjustPosition(animation):
 	if animation == 1:
-		adjustedPosition = global_position + Vector2(32, 0)
+		adjustedPosition = global_position + Vector2(24,0)
 	elif animation == 2:
-		adjustedPosition = global_position + Vector2(-32, 0)
-#	elif animation == 3:
-#		adjustedPosition = global_position + Vector2(24, -25)
-#	elif animation == 4:
-#		adjustedPosition = global_position + Vector2(-24, -25)
-#	elif animation == 5:
-#		adjustedPosition = global_position + Vector2(0, -6)
+		adjustedPosition = global_position + Vector2(-24,0)
+	elif animation == 3:
+		adjustedPosition = global_position + Vector2(12,-8)
+	elif animation == 4:
+		adjustedPosition = global_position + Vector2(-12,-8)
+	elif animation == 5:
+		adjustedPosition = global_position + Vector2(4, -8)
+	elif animation == 6:
+		adjustedPosition = global_position + Vector2(-4, 4)
 
 
 func _physics_process(_delta):
-	if !being_picked_up:
+	if not being_picked_up:
 		velocity = Vector2.ZERO
 	else:
 		adjustPosition(randomInt)

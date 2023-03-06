@@ -58,9 +58,9 @@ func hit(tool_name):
 		animation_player.call_deferred("stop")
 		if Server.player_node.get_position().x <= get_position().x:
 			animation_player.call_deferred("play", "stump hit right")
-			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position+Vector2(0, 12))
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position)
 		else: 
-			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position+Vector2(-24, 12))
+			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position)
 			animation_player.call_deferred("play", "stump hit right")
 	elif not destroyed:
 		destroyed = true
@@ -73,13 +73,14 @@ func hit(tool_name):
 		animation_player.call_deferred("play", "stump destroyed")
 		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
-		InstancedScenes.intitiateItemDrop("wood", position, amt)
+		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0,-8), amt)
 		stump_break.play(variety)
+		$TreeSprites/Break.play(variety)
 		await sound_effects.finished
 		call_deferred("queue_free")
 
 
-func _on_StumpHurtbox_area_entered(area):
+func _on_tree_hurtbox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if area.special_ability == "fire buff":
@@ -93,4 +94,5 @@ func _on_VisibilityNotifier2D_screen_entered():
 	call_deferred("show")
 func _on_VisibilityNotifier2D_screen_exited():
 	call_deferred("hide")
+
 

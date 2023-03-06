@@ -14,7 +14,6 @@ var destroyed: bool = false
 
 func _ready():
 	rng.randomize()
-	visible = false
 	call_deferred("setTexture")
 	
 func remove_from_world():
@@ -42,9 +41,9 @@ func hit(tool_name):
 		var amount = Stats.return_item_drop_quantity(tool_name, "small ore")
 		Util.add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
-			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 12), amount)
+			InstancedScenes.intitiateItemDrop("stone", position+Vector2(6,-6), amount)
 		else:
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 12), amount)
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(6,-6), amount)
 		animation_player.call_deferred("play", "small_ore_break")
 		await sound_effects.finished
 		await get_tree().create_timer(0.6).timeout

@@ -4240,6 +4240,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+texture_filter = 1
 collision_layer = 33
 collision_mask = 2097153
 motion_mode = 1
@@ -4260,44 +4261,55 @@ one_shot = true
 
 [node name="timer_wait_times" type="Timer" parent="Camera2D"]
 
-[node name="CompositeSprites" type="Node2D" parent="."]
+[node name="CompositeSprites" type="CanvasGroup" parent="."]
+texture_filter = 1
 script = ExtResource("3_8lsbn")
 
 [node name="Body" type="Sprite2D" parent="CompositeSprites"]
+texture_filter = 1
 position = Vector2(0, -16)
 texture = ExtResource("5_yvg8i")
 hframes = 4
 
 [node name="Legs" type="Sprite2D" parent="CompositeSprites"]
+visible = false
+texture_filter = 1
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="HeadAtr" type="Sprite2D" parent="CompositeSprites"]
+texture_filter = 1
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="Arms" type="Sprite2D" parent="CompositeSprites"]
+texture_filter = 1
 position = Vector2(0, -16)
 texture = ExtResource("6_lbf3e")
 hframes = 4
 
 [node name="Pants" type="Sprite2D" parent="CompositeSprites"]
+texture_filter = 1
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="Shirts" type="Sprite2D" parent="CompositeSprites"]
+texture_filter = 1
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="Accessory" type="Sprite2D" parent="CompositeSprites"]
+texture_filter = 1
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="Shoes" type="Sprite2D" parent="CompositeSprites"]
+texture_filter = 1
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite2D" parent="CompositeSprites"]
+texture_filter = 1
 position = Vector2(0, -16)
 hframes = 4
 

@@ -419,7 +419,7 @@ libraries = {
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-2, 2)
-scale = Vector2(1.3, 1.3)
+scale = Vector2(1.35, 1.35)
 tile_set = SubResource("TileSet_ub2pw")
 format = 2
 layer_0/tile_data = PackedInt32Array(-65536, 851968, 33)

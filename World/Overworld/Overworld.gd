@@ -16,10 +16,12 @@ var game_state: GameState
 
 func _ready():
 	Server.world = self
-	#create_or_load_world()
+#	create_or_load_world()
 	spawn_player()
 	set_valid_tiles()
 
+var trees = ['oak','spruce','birch','evergreen','pine','apple','plum','cherry','pear']
+var flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
 
 func set_valid_tiles():
 	for x in range(1000):
@@ -33,22 +35,25 @@ func set_valid_tiles():
 	Tiles.watered_tiles = $FarmingTiles/WateredTiles
 	Tiles.ocean_tiles = $TerrainTiles/Ocean
 	Tiles.object_tiles = $BuildingTiles/ObjectTiles
-
-#	for x in range(100):
-#		for y in range(100):
-##			var object = TallGrass.instantiate()
-##			object.loc = Vector2i(x,y)
-##			object.biome = "forest" #map["tall_grass"][id]["b"]
-##			#object.name = id
-##			object.position = Tiles.valid_tiles.map_to_local(Vector2i(x,y)) #+ Vector2(8, 32)
-##			$GrassObjects.call_deferred("add_child",object,true)
-#			if Util.chance(2):
-#				#PlaceObject.place_log_in_world("id",rng.randi_range(1,12),Vector2i(x,y))
-#				if Util.chance(50):
-#					PlaceObject.place_tree_in_world("id","oak",Vector2i(x+1,y+1),"forest",100,"5")
-#				else:
-#					PlaceObject.place_tree_in_world("id","oak",Vector2i(x+1,y+1),"snow",100,"5")
-
+	for x in range(100):
+		for y in range(100):
+			if Util.chance(1):
+				trees.shuffle()
+				if Util.chance(33):
+					if Util.isFruitTree(trees.front()):
+						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"harvest")
+					else:
+						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"5")
+				elif Util.chance(33):
+					PlaceObject.place_log_in_world("id", rng.randi_range(1,12), Vector2i(x+1,y+1))
+				else:
+					PlaceObject.place_stump_in_world("id",trees.front(),Vector2i(x+1,y+1),40)
+	for x in range(100):
+		for y in range(100):
+			if Util.chance(1):
+				if Util.chance(10):
+					flowerTypes.shuffle()
+					PlaceObject.place_forage_in_world("id",flowerTypes.front(),Vector2i(x+1,y+1),true)
 
 func create_or_load_world():
 	if MapData.world["is_built"]: # Load world

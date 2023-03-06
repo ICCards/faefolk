@@ -134,7 +134,7 @@ offset_bottom = 342.0
 texture = ExtResource("4_qx6w1")
 expand_mode = 1
 
-[node name="CompositeSprites" type="Node2D" parent="."]
+[node name="CompositeSprites" type="CanvasGroup" parent="."]
 modulate = Color(0.85, 0.85, 0.85, 1)
 position = Vector2(397, 327)
 scale = Vector2(3.5, 3.5)

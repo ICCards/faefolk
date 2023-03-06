@@ -60,10 +60,9 @@ func hit(tool_name, special_ability = ""):
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12)) 
 		sound_effects.call_deferred("play")
 		animation_player.call_deferred("play", "break")
-		InstancedScenes.initiateTreeHitEffect(tree_variety, "trunk break", position+Vector2(-16, 16))
 		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
-		InstancedScenes.intitiateItemDrop("wood", position, amt)
+		InstancedScenes.intitiateItemDrop("wood", position+Vector2(8,-8), amt)
 		await get_tree().create_timer(1.2).timeout
 		call_deferred("queue_free")
 

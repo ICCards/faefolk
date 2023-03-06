@@ -25,7 +25,7 @@ const clamTypes = ["blue clam","pink clam","red clam"]
 const starfishTypes = ["starfish", "baby starfish"]
 const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
-var openSimplexNoise := FastNoiseLite.new()
+var fastNoiseLite := FastNoiseLite.new()
 var rng = RandomNumberGenerator.new()
 var _uuid = load("res://helpers/UUID.gd")
 var uuid
@@ -426,22 +426,24 @@ func create_grass_bunch(loc,biome):
 func generate_map(data):
 	print("GENERATE MAP " + str(data))
 	var grid = {}
-	openSimplexNoise.seed = randi()
-	openSimplexNoise.fractal_octaves = data.octaves
-	openSimplexNoise.frequency = data.period
+	fastNoiseLite.fractal_type = FastNoiseLite.FRACTAL_FBM
+	fastNoiseLite.noise_type = FastNoiseLite.TYPE_PERLIN
+	fastNoiseLite.seed = randi()
+	fastNoiseLite.fractal_lacunarity = data.octaves
+	fastNoiseLite.frequency = data.period
 	print("HERE")
 	var custom_gradient = CustomGradientTexture.new()
 	custom_gradient.gradient = Gradient.new()
 	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
 	custom_gradient.size = Vector2(width,height)
 	print("HERE1")
-	var gradient_data = custom_gradient.get_data()
+	var gradient_data = custom_gradient.get_image()
 	print("HERE2")
 	#gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for x in width:
 		for y in height:
 			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5
-			var value = openSimplexNoise.get_noise_2d(x,y)
+			var value = fastNoiseLite.get_noise_2d(x,y)
 			value += gradient_value
 			grid[Vector2(x,y)] = value
 	call_deferred(data.ending_function)

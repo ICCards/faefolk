@@ -24,27 +24,23 @@ func intitiateItemDrop(item_name: String, pos: Vector2, amount: int):
 		var itemDrop = ItemDrop.instantiate()
 		itemDrop.initItemDropType(item_name)
 		Server.world.call_deferred("add_child", itemDrop)
-		itemDrop.global_position = pos + Vector2(rng.randi_range(-12, 0), rng.randi_range(-6, 6))
+		itemDrop.global_position = pos + Vector2(rng.randi_range(-6, 6), rng.randi_range(-6, 6))
 
 func initiateInventoryItemDrop(item: Array, pos: Vector2):
 	var itemDrop = ItemDrop.instantiate()
 	itemDrop.initItemDropType(item[0], item[1], item[2])
 	Server.world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = pos + Vector2(rng.randi_range(-16, 0), rng.randi_range(-24, 24))
+	itemDrop.global_position = pos + Vector2(rng.randi_range(-6, 6), rng.randi_range(-6, 6))
 
 
 ### Trees ###
 func initiateLeavesFallingEffect(variety: String, pos: Vector2):
-	return
 	if Server.world:
 		var adjusted_leaves_falling_pos = Vector2.ZERO
-		match variety:
-			"evergreen":
-				adjusted_leaves_falling_pos = Vector2(0, 50)
-			"spruce":
-				adjusted_leaves_falling_pos = Vector2(0, 25)
-			_: 
-				adjusted_leaves_falling_pos = Vector2(0, 0)
+		if variety == "evergreen" or variety == "apple" or variety == "cherry":
+			adjusted_leaves_falling_pos = Vector2(0,0)
+		else:
+			adjusted_leaves_falling_pos = Vector2(0,-10)
 		var leavesEffect = LeavesFallEffect.instantiate()
 		leavesEffect.variety = variety
 		Server.world.call_deferred("add_child", leavesEffect)

@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasGroup
 
 @onready var bodySprite = $Body
 @onready var legsSprite = $Legs
