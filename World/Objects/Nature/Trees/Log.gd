@@ -12,21 +12,6 @@ var tree_variety
 var location
 var destroyed: bool = false
 
-var atlas_tile_cord = {
-	1: Vector2i(13,31),
-	2: Vector2i(14,31),
-	3: Vector2i(15,31),
-	4: Vector2i(13,32),
-	5: Vector2i(14,32),
-	6: Vector2i(15,32),
-	7: Vector2i(13,33),
-	8: Vector2i(14,33),
-	9: Vector2i(15,33),
-	10: Vector2i(13,34),
-	11: Vector2i(14,34),
-	12: Vector2i(15,34)
-}
-
 func _ready():
 	Tiles.remove_valid_tiles(location)
 	setTreeBranchType()
@@ -38,23 +23,27 @@ func remove_from_world():
 
 func setTreeBranchType():
 	variety = int(variety)
-	if variety <= 2:
-		set_deferred("tree_variety", "evergreen")
-	elif variety <= 5:
-		set_deferred("tree_variety", "spruce")
-	elif variety <= 8:
-		set_deferred("tree_variety", "oak")
-	else:
-		set_deferred("tree_variety", "birch")
-	$TileMap.set_cell(0,Vector2i(0,-1),0,atlas_tile_cord[variety])
+	$Log.texture = load("res://Assets/Images/tree_sets/branch_objects/"+ str(variety) +".png")
+	if variety == 1 or variety == 7 or variety == 9:
+		$Break.offset = Vector2i(-6,-5)
+	elif variety == 2:
+		$Break.offset = Vector2i(-6,-6)
+	elif variety == 3:
+		$Break.offset = Vector2i(-5,-6)
+	elif variety == 4 or variety == 8:
+		$Break.offset = Vector2i(-6,-4)
+	elif variety == 5 or variety == 10 or variety == 11 or variety == 12:
+		$Break.offset = Vector2i(-5,-5)
+		
 
 func hit(tool_name, special_ability = ""):
 	if not destroyed:
 		destroyed = true
 		if MapData.world["log"].has(name):
 			MapData.world["log"].erase(name)
-		$Break.play("break")
-		$TileMap.erase_cell(0,Vector2i(0,-1))
+		$Log.call_deferred("hide")
+		$Break.call_deferred("show")
+		$Break.call_deferred("play",str(variety))
 		Tiles.add_valid_tiles(location)
 		sound_effects.set_deferred("stream", Sounds.stump_break) 
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12)) 
@@ -62,7 +51,7 @@ func hit(tool_name, special_ability = ""):
 		animation_player.call_deferred("play", "break")
 		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
-		InstancedScenes.intitiateItemDrop("wood", position+Vector2(8,-8), amt)
+		InstancedScenes.intitiateItemDrop("wood",position,amt)
 		await get_tree().create_timer(1.2).timeout
 		call_deferred("queue_free")
 

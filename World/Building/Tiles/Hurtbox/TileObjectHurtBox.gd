@@ -3,6 +3,7 @@ extends Node2D
 @onready var InteractiveAreaNode = load("res://World/Building/Tiles/Attached nodes/interactive_area.tscn")
 @onready var CampfireInteractiveAreaNode = load("res://World/Building/Tiles/Attached nodes/campfire_interactive_area.tscn")
 @onready var BedInteractiveAreaNode = load("res://World/Building/Tiles/Attached nodes/bed_interactive_area.tscn")
+@onready var DoorInteractiveAreaNode = load("res://World/Building/Tiles/Attached nodes/door_interactive_area.tscn")
 @onready var FurnaceSmoke = load("res://World/Building/Tiles/Attached nodes/furnace_smoke.tscn")
 
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
@@ -129,6 +130,12 @@ func set_dimensions():
 		add_bed_interactive_area_node()
 	elif item_name == "chair":
 		add_interactive_area_node("chair",id)
+	elif item_name == "large rug" or item_name == "medium rug" or item_name == "small rug" or item_name == "torch":
+		$Marker2D/StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
+	elif item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate":
+		add_door_interactive_area_node("gate")
+	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+		add_door_interactive_area_node("door")
 
 
 func add_interactive_area_node(object_name,id,level = null):
@@ -149,6 +156,12 @@ func add_bed_interactive_area_node():
 	bedInteractiveAreaNode.object_name = "bed"
 	bedInteractiveAreaNode.name = id
 	$Marker2D.call_deferred("add_child", bedInteractiveAreaNode)
+	
+func add_door_interactive_area_node(type):
+	var doorInteractiveAreaNode = DoorInteractiveAreaNode.instantiate()
+	doorInteractiveAreaNode.object_name = type
+	doorInteractiveAreaNode.name = id
+	$Marker2D.call_deferred("add_child", doorInteractiveAreaNode)
 
 func return_adjusted_chair_position(direction):
 	match item_name:
@@ -402,7 +415,6 @@ func close_chest():
 
 
 func toggle_furnace_smoke(is_active):
-	print("TOGGLE FURNACE SMOKE")
 	if is_active:
 		if not has_node("FurnaceSmoke"):
 			var furnaceSmoke = FurnaceSmoke.instantiate()
@@ -429,6 +441,11 @@ func toggle_fireplace():
 		Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_object_atlas_tiles[item_name][variety])
 		$PointLight2D.set_deferred("enabled", false)
 		$SoundEffects.stop()
+#
+#func toggle_gate():
+#	if Tiles.object_tiles.get_cell_atlas_coords(0,location) == Constants.rotatable_object_atlas_tiles[item_name][direction]:
+		
+		
 
 func turn_on_fireplace():
 	$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Fire/start.mp3")

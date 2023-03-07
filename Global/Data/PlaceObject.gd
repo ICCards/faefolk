@@ -8,6 +8,8 @@ extends Node
 @onready var PlantedCrop  = load("res://World/Objects/Farm/PlantedCrop.tscn")
 @onready var TileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn")
 @onready var BuildingTileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn")
+@onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
+@onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
 @onready var DoorFront #= load("res://World/Objects/Tiles/DoorFront.tscn")
 @onready var DoorSide #= load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
 @onready var GateFront #= load("res://World/Objects/Tiles/GateFront.tscn")
@@ -24,7 +26,7 @@ func place_log_in_world(id,variety,location):
 	NatureObjects = Server.world.get_node("NatureObjects")
 	var object = Log.instantiate()
 	object.name = id
-	object.variety = variety #rng.randi_range(1,12) #MapData.world["log"][id]["v"]
+	object.variety = variety
 	object.location = location
 	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,8)
 	NatureObjects.call_deferred("add_child",object,true)
@@ -66,7 +68,6 @@ func place_stump_in_world(id,variety,location,health):
 
 func place_seed_in_world(id, item_name, location, days_until_harvest, days_without_water, in_regrowth_phase):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
-	Tiles.remove_valid_tiles(location)
 	var plantedCrop = PlantedCrop.instantiate()
 	plantedCrop.name = str(id)
 	plantedCrop.crop_name = item_name
@@ -75,7 +76,18 @@ func place_seed_in_world(id, item_name, location, days_until_harvest, days_witho
 	plantedCrop.days_without_water = days_without_water
 	plantedCrop.in_regrowth_phase = in_regrowth_phase
 	PlaceableObjects.call_deferred("add_child", plantedCrop, true)
-	plantedCrop.global_position = Tiles.valid_tiles.map_to_local(location) #+ Vector2(16, 16)
+	plantedCrop.global_position = Tiles.valid_tiles.map_to_local(location)
+
+
+func place_small_ore_in_world(id,variety,location,health):
+	NatureObjects = Server.world.get_node("NatureObjects")
+	var object = SmallOre.instantiate()
+	object.name = id
+	object.variety = variety
+	object.health = health
+	object.location = location
+	object.position = Tiles.valid_tiles.map_to_local(location)
+	NatureObjects.call_deferred("add_child",object,true)
 
 
 func place_building_object_in_world(id, item_name, variety , location, health):

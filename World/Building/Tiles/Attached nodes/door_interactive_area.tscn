@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://np6mjd77t7qy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_db6eo"]
+size = Vector2(14, 20)
+
+[node name="DoorInteractiveArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 131072
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_db6eo")

@@ -38,22 +38,26 @@ func set_valid_tiles():
 	for x in range(100):
 		for y in range(100):
 			if Util.chance(1):
-				trees.shuffle()
-				if Util.chance(33):
-					if Util.isFruitTree(trees.front()):
-						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"harvest")
-					else:
-						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"5")
-				elif Util.chance(33):
-					PlaceObject.place_log_in_world("id", rng.randi_range(1,12), Vector2i(x+1,y+1))
-				else:
-					PlaceObject.place_stump_in_world("id",trees.front(),Vector2i(x+1,y+1),40)
-	for x in range(100):
-		for y in range(100):
-			if Util.chance(1):
-				if Util.chance(10):
-					flowerTypes.shuffle()
-					PlaceObject.place_forage_in_world("id",flowerTypes.front(),Vector2i(x+1,y+1),true)
+#				trees.shuffle()
+#				if Util.chance(33):
+#					if Util.isFruitTree(trees.front()):
+#						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"harvest")
+#					else:
+#						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"5")
+#				elif Util.chance(33):
+				PlaceObject.place_log_in_world("id", rng.randi_range(1,12), Vector2i(x+1,y+1))
+#				else:
+#					PlaceObject.place_stump_in_world("id",trees.front(),Vector2i(x+1,y+1),40)
+#	for x in range(100):
+#		for y in range(100):
+#			if Util.chance(1):
+#				if Util.chance(10):
+#					flowerTypes.shuffle()
+#					PlaceObject.place_forage_in_world("id",flowerTypes.front(),Vector2i(x+1,y+1),true)
+#	for x in range(100):
+#		for y in range(100):
+#			if Util.chance(1):
+#				PlaceObject.place_small_ore_in_world("id","stone1",Vector2i(x+1,y+1),40)
 
 func create_or_load_world():
 	if MapData.world["is_built"]: # Load world

@@ -56,7 +56,8 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-		"0": ["bronze axe", 1, 100],
+		"0": ["bronze pickaxe", 1, 100],
+		"1": ["bronze axe", 1, 100],
 #		"1": ["blueprint", 1, null],
 #		"4": ["bow", 1, 50],
 #		"2": ["brewing table #1", 999, null],
@@ -79,7 +80,7 @@ var starting_player_data = {
 			"5": ["cloth", 500, null],
 			"16": ["grape", 999, null],
 			"15": ["bronze ingot", 999, null],
-			"13": ["wheat seeds", 99, null],
+			"13": ["wood", 999, null],
 			"12": ["potato seeds", 99, null],
 #			"14": ["plum seeds", 99, null],
 #			"15": ["pear seeds", 99, null],

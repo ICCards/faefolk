@@ -13,6 +13,7 @@ var bodyEnteredFlag = false
 var object_name = "crop"
 
 func _ready():
+	Tiles.remove_valid_tiles(location)
 	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.crop_atlas_tiles[crop_name][return_phase()])
 	MapData.connect("refresh_crops",Callable(self,"refresh_image"))
 

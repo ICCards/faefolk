@@ -1,5 +1,9 @@
-CanvasGroup
+CollisionShape2D
+Area2D
+Sprite2D
+Node2D
 TileMap
+CanvasGroup
 AnimatedSprite2D
 Label
 ColorRect
@@ -9,10 +13,7 @@ Timer
 Node
 Control
 GridContainer
-CollisionShape2D
 StaticBody2D
-Node2D
-Sprite2D
 AnimationPlayer
 Line2D
 CanvasModulate

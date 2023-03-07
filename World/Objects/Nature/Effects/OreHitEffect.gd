@@ -17,12 +17,12 @@ func _ready():
 	rng.randomize()
 	oreObject = Images.returnOreObject(variety)
 	setTexture()
-	if effect_type == "ore hit":
-		animation_player.play("ore hit " + str(rng.randi_range(1, 3)))
+	if effect_type == "small ore hit":
+		animation_player.play("small ore hit " + str(rng.randi_range(1, 2)))
 	elif effect_type == "large ore break":
 		animation_player.play("ore break")
-	elif effect_type == "ore destroyed":
-		animation_player.play("ore break")
+	elif effect_type == "small ore break":
+		animation_player.play("small ore break")
 		play_particles()
 	await animation_player.animation_finished
 	queue_free()
@@ -30,18 +30,18 @@ func _ready():
 
 func play_particles():
 	if variety == "stone2":
-		$GPUParticles3D.modulate = Color("c29c6b")
+		$Parts.modulate = Color("c29c6b")
 	elif variety == "iron ore":
-		$GPUParticles3D.modulate = Color("c3b779")
+		$Parts.modulate = Color("c3b779")
 	elif variety == "bronze ore":
-		$GPUParticles3D.modulate = Color("946c38")
+		$Parts.modulate = Color("946c38")
 	elif variety == "gold ore":
-		$GPUParticles3D.modulate = Color("c79c3e")
+		$Parts.modulate = Color("c79c3e")
 	$Smoke.show()
-	$GPUParticles3D.show()
-	$Smoke.play()
-	$GPUParticles3D.play()
-	await $GPUParticles3D.animation_finished
+	$Parts.show()
+	$Smoke.play("break")
+	$Parts.play("break")
+	await $Parts.animation_finished
 
 
 func setTexture():

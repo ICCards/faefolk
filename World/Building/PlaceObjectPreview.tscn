@@ -12,7 +12,6 @@ script = ExtResource("1_q80yc")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_4p5xs")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 1703936, 67)
 
 [node name="ColorIndicator" parent="." instance=ExtResource("3_xahct")]
 z_index = 2

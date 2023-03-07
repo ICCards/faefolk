@@ -51,11 +51,8 @@ const dimensions_dict = {
 	"sleeping bag": Vector2(1,2),
 	"round table": Vector2(2,2),
 	"wood door": Vector2(2,1),
-	"wood door side": Vector2(1,2),
 	"metal door": Vector2(2,1),
-	"metal door side": Vector2(1,2),
 	"armored door": Vector2(2,1),
-	"armored door side": Vector2(1,2),
 	"fireplace": Vector2(2,1),
 	"double cabinet": Vector2(2,1),
 	"single cabinet": Vector2(1,1),
@@ -71,7 +68,7 @@ var object_atlas_tiles = {
 	"well" : Vector2i(0,84),
 	"display table": Vector2i(5,81),
 	"campfire": Vector2i(0,64),
-	"torch": Vector2i(0,62)
+	"torch": Vector2i(0,62),
 }
 
 var autotile_object_atlas_tiles = {
@@ -420,6 +417,12 @@ var rotatable_object_atlas_tiles = {
 		"right": Vector2i(12,76),
 		"left": Vector2i(12,76)
 	},
+	"wood door": {
+		"down": Vector2i(0,53),
+		"up": Vector2i(0,53),
+		"right": Vector2i(6,58),
+		"left": Vector2i(6,58)
+		}
 }
 
 
@@ -633,4 +636,53 @@ var crop_atlas_tiles = {
 }
 
 
+var log_atlas_tile_cords = {
+	1: Vector2i(13,31),
+	2: Vector2i(14,31),
+	3: Vector2i(15,31),
+	4: Vector2i(13,32),
+	5: Vector2i(14,32),
+	6: Vector2i(15,32),
+	7: Vector2i(13,33),
+	8: Vector2i(14,33),
+	9: Vector2i(15,33),
+	10: Vector2i(13,34),
+	11: Vector2i(14,34),
+	12: Vector2i(15,34)
+}
 
+var small_ore_atlas_cords = {
+	"stone1": {
+		1: Vector2i(5,2),
+		2: Vector2i(6,2),
+		3: Vector2i(7,2),
+		4: Vector2i(5,3),
+		5: Vector2i(6,3),
+		6: Vector2i(7,3),
+	},
+	"stone2": {
+		1: Vector2i(5,4),
+		2: Vector2i(6,4),
+		3: Vector2i(7,4),
+		4: Vector2i(5,5),
+		5: Vector2i(6,5),
+		6: Vector2i(7,5),
+	},
+	"gold": {
+		1: Vector2i(0,2),
+		2: Vector2i(1,2),
+		3: Vector2i(2,2),
+		4: Vector2i(0,3),
+		5: Vector2i(1,3),
+		6: Vector2i(2,3),
+	},
+	"iron": {
+		1: Vector2i(0,4),
+		2: Vector2i(1,4),
+		3: Vector2i(2,4),
+		4: Vector2i(0,5),
+		5: Vector2i(1,5),
+		6: Vector2i(2,5),
+	},
+	
+}

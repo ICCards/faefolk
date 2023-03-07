@@ -66,9 +66,10 @@ func initialize():
 	print(item_name)
 	if item_name != "foundation" and item_name != "wall":
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
-	if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-		state = DOOR
-	elif Constants.rotatable_object_atlas_tiles.keys().has(item_name):
+#	if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+#		state = DOOR
+	
+	if Constants.rotatable_object_atlas_tiles.keys().has(item_name):
 		state = ROTATABLE
 	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
 		state = CUSTOMIZABLE_ROTATABLE

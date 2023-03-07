@@ -1,3 +1,5 @@
+res://World/Building/Tiles/Attached nodes
+res://Assets/Images/tree_sets/wood breaks/logs
 res://Assets/Images/Animations/ore
 res://Assets/Images/tree_sets/fruit fall
 res://Assets/Images/tree_sets/wood breaks/trees/spruce/stump
@@ -18,5 +20,3 @@ res://Assets/Images/tree_sets/wood breaks/trees/birch
 res://Assets/Images/tree_sets/wood breaks/trees/apple
 res://Assets/Images/tree_sets/wood breaks/trees/oak
 res://Assets/Images/tree_sets/wood breaks/trees/oak/stump
-res://Assets/Images/tree_sets/oak
-res://Assets/Images/Animations/log breaks

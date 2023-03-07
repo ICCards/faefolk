@@ -1,8 +1,24 @@
-res://World/Objects/Nature/Ores/SmallOre.tscn
+res://World/Objects/Nature/Effects/OreHitEffect.tscn
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/terrain/elevated terrain.tres
 res://Assets/Tilesets/walls/walls.tres
 res://Assets/Tilesets/objects/objects.tres
-res://Assets/Themes/text.tres
+res://World/Objects/Nature/Ores/SmallOre.tscn
 res://World/Objects/Nature/Ores/SmallOre.gd
-res://World/Objects/Nature/Effects/OreHitEffect.tscn
+res://World/Objects/Nature/Effects/OreHitEffect.gd
+res://World/Overworld/Overworld.tscn
+res://Global/Data/PlayerData.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://World/Building/PlaceObjectPreview.gd
+res://Global/Data/Constants.gd
+res://World/Building/PlaceObjectPreview.tscn
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
+res://World/Objects/Farm/PlantedCrop.tscn
+res://Global/Data/PlaceObject.gd
+res://World/Objects/Farm/PlantedCrop.gd
+res://World/Overworld/Overworld.gd
+res://World/Objects/Nature/Trees/Log.tscn
+res://World/Player/Player/AttachedScripts/BackgroundMusic.gd
+res://World/Objects/Nature/Trees/Log.gd
+res://Global/Data/Images.gd
+res://World/Building/Tiles/Attached nodes/door_interactive_area.tscn

@@ -102,7 +102,7 @@ position = Vector2(-8, 8)
 tile_set = ExtResource("2_tvff0")
 format = 2
 layer_0/y_sort_enabled = true
-layer_0/tile_data = PackedInt32Array(-65536, 0, 64)
+layer_0/tile_data = PackedInt32Array(-65536, 0, 68)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 enabled = false

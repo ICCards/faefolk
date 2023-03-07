@@ -1166,39 +1166,6 @@ var yellow_grass_winter = [
 #			return desert_trees[3]
 
 
-
-
-# BRANCH OBJECTS #
-var tree_branch_objects = {
-	12 : load("res://Assets/Images/tree_sets/branch_objects/branch1.png"),
-	1 : load("res://Assets/Images/tree_sets/branch_objects/branch2.png"),
-	2 : load("res://Assets/Images/tree_sets/branch_objects/branch3.png"),
-	3 : load("res://Assets/Images/tree_sets/branch_objects/branch4.png"),
-	4 : load("res://Assets/Images/tree_sets/branch_objects/branch5.png"),
-	5 : load("res://Assets/Images/tree_sets/branch_objects/branch6.png"),
-	6 : load("res://Assets/Images/tree_sets/branch_objects/branch7.png"),
-	7 : load("res://Assets/Images/tree_sets/branch_objects/branch8.png"),
-	8 : load("res://Assets/Images/tree_sets/branch_objects/branch9.png"),
-	9 : load("res://Assets/Images/tree_sets/branch_objects/branch10.png"),
-	10 : load("res://Assets/Images/tree_sets/branch_objects/branch11.png"),
-	11 : load("res://Assets/Images/tree_sets/branch_objects/branch12.png"),
-}
-
-# ORE OBJECTS #
-
-func returnOreObject(oreType):
-	match oreType:
-		"bronze ore":
-			return Bronze_ore
-		"iron ore":
-			return Iron_ore
-		"gold ore":
-			return Gold_ore
-		"stone1":
-			return Stone_ore1
-		"stone2":
-			return Stone_ore2
-
 #var red_gemstone = {
 #	largeOre = load("res://Assets/Images/ore_sets/red/red_gemstone_large.png"),
 #	mediumOres = {
