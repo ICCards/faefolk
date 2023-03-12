@@ -15,9 +15,9 @@ var skill_descriptions = {
 	"ice": {1:{"n":"Ice projectile","c":"1 mana","d":"..."}, 2: {"n":"Ice shield","c":"2 mana","d":"..."}, 3: {"n":"Lingering ice projectile","c":"5 mana","d":"..."}, 4: {"n":"Blizzard","c":"10 mana","d":"..."}},
 }
 
-const MAX_WOOD_DOOR = 10
-const MAX_METAL_DOOR = 100
-const MAX_ARMORED_DOOR = 1000
+const MAX_WOOD_DOOR = 50
+const MAX_METAL_DOOR = 10000
+const MAX_ARMORED_DOOR = 20000
 
 
 const MAX_TWIG_BUILDING = 50
@@ -90,6 +90,14 @@ const SKELETON_HEALTH = 100
 const BAT_HEALTH = 90
 const WIND_BOSS = 1200
 
+func return_starting_door_health(item_name):
+	match item_name:
+		"wood door":
+			return MAX_WOOD_DOOR
+		"metal door":
+			return MAX_METAL_DOOR
+		"armored door":
+			return MAX_ARMORED_DOOR
 
 func return_tool_damage(tool_name):
 	match tool_name:

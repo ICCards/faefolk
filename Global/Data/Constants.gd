@@ -103,6 +103,7 @@ var customizable_object_atlas_tiles = {
 		6: Vector2i(35,50),
 		7: Vector2i(42,50),
 		8: Vector2i(49,50),
+		9: Vector2i(56,50),
 	},
 	"medium rug" : {
 		1: Vector2i(4,50),
@@ -113,6 +114,7 @@ var customizable_object_atlas_tiles = {
 		6: Vector2i(39,50),
 		7: Vector2i(46,50),
 		8: Vector2i(53,50),
+		9: Vector2i(60,50),
 	},
 	"small rug" : {
 		1: Vector2i(6,50),
@@ -123,6 +125,7 @@ var customizable_object_atlas_tiles = {
 		6: Vector2i(41,50),
 		7: Vector2i(48,50),
 		8: Vector2i(55,50),
+		9: Vector2i(62,50),
 	},
 	"dresser" : {
 		1: Vector2i(0,92),
@@ -422,7 +425,19 @@ var rotatable_object_atlas_tiles = {
 		"up": Vector2i(0,53),
 		"right": Vector2i(6,58),
 		"left": Vector2i(6,58)
-		}
+	},
+	"metal door": {
+		"down": Vector2i(8,53),
+		"up": Vector2i(8,53),
+		"right": Vector2i(14,57),
+		"left": Vector2i(14,57)
+	},
+	"armored door": {
+		"down": Vector2i(16,53),
+		"up": Vector2i(16,53),
+		"right": Vector2i(22,57),
+		"left": Vector2i(22,57)
+	},
 }
 
 
@@ -651,6 +666,14 @@ var log_atlas_tile_cords = {
 	12: Vector2i(15,34)
 }
 
+var large_ore_atlas_cords = {
+	"stone1": Vector2i(8,2),
+	"stone2": Vector2i(8,4),
+	"bronze ore": Vector2i(10,4),
+	"gold ore": Vector2i(3,2),
+	"iron ore": Vector2i(3,4)
+}
+
 var small_ore_atlas_cords = {
 	"stone1": {
 		1: Vector2i(5,2),
@@ -668,7 +691,7 @@ var small_ore_atlas_cords = {
 		5: Vector2i(6,5),
 		6: Vector2i(7,5),
 	},
-	"gold": {
+	"gold ore": {
 		1: Vector2i(0,2),
 		2: Vector2i(1,2),
 		3: Vector2i(2,2),
@@ -676,7 +699,7 @@ var small_ore_atlas_cords = {
 		5: Vector2i(1,3),
 		6: Vector2i(2,3),
 	},
-	"iron": {
+	"iron ore": {
 		1: Vector2i(0,4),
 		2: Vector2i(1,4),
 		3: Vector2i(2,4),
@@ -684,5 +707,12 @@ var small_ore_atlas_cords = {
 		5: Vector2i(1,5),
 		6: Vector2i(2,5),
 	},
-	
+	"bronze ore": {
+		1: Vector2i(5,6),
+		2: Vector2i(6,6),
+		3: Vector2i(7,6),
+		4: Vector2i(5,7),
+		5: Vector2i(6,7),
+		6: Vector2i(7,7),
+	},
 }

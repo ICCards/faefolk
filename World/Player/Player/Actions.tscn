@@ -19,5 +19,3 @@ collision_mask = 131072
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectInteractiveArea"]
 shape = SubResource("1")
-
-[connection signal="area_entered" from="DetectInteractiveArea" to="." method="_on_detect_interactive_area_area_entered"]

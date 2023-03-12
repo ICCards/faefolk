@@ -9,7 +9,7 @@ var biome
 var grass_list
 var front_health
 var back_heath
-var loc
+var location
 var is_front_visible = true
 var is_back_visible = true
 var destroyed: bool = false
@@ -18,9 +18,10 @@ var type
 
 func _ready():
 	rng.randomize()
+	Tiles.add_navigation_tiles(location)
 	PlayerData.connect("season_changed",Callable(self,"set_grass_texture"))
-	set_deferred("front_health", rng.randi_range(1,3))
-	set_deferred("back_heath", rng.randi_range(1,3))
+	front_health = rng.randi_range(1,3)
+	back_heath = rng.randi_range(1,3)
 	set_grass_texture()
 	
 func remove_from_world():
@@ -113,7 +114,7 @@ func _on_Area2D_area_entered(area):
 		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
 		if Util.chance(50):
 			PlayerData.player_data["collections"]["forage"][type] += 1
-			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-16),1)
+			InstancedScenes.intitiateItemDrop(type,position+Vector2(8,-6),1)
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
 		$AnimationPlayer.call_deferred("play", "front break")
@@ -122,7 +123,6 @@ func _on_Area2D_area_entered(area):
 		call_deferred("destroy")
 	else:
 		await get_tree().create_timer(randf_range(0.0, 0.5)).timeout
-		$FrontBreak.play("break")
 		$AnimationPlayer.call_deferred("play", "animate front")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
@@ -135,7 +135,7 @@ func _on_BackArea2D_area_entered(area):
 		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
 		if Util.chance(50):
 			PlayerData.player_data["collections"]["forage"][type] += 1
-			InstancedScenes.intitiateItemDrop(type,position+Vector2(0,-8), 1)
+			InstancedScenes.intitiateItemDrop(type,position+Vector2(8,-10), 1)
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
 		$AnimationPlayer2.call_deferred("play", "back break")
@@ -144,7 +144,6 @@ func _on_BackArea2D_area_entered(area):
 		call_deferred("destroy")
 	else:
 		await get_tree().create_timer(randf_range(0.1, 0.5)).timeout
-		$BackBreak.play("break")
 		$AnimationPlayer2.call_deferred("play", "animate back")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
@@ -152,6 +151,6 @@ func _on_BackArea2D_area_entered(area):
 func destroy():
 	if not is_back_visible and not is_front_visible and not destroyed:
 		destroyed = true
-		MapData.world["tall_grass"].erase(name)
-		Tiles.add_valid_tiles(loc)
+		#MapData.world["tall_grass"].erase(name)
+		Tiles.add_valid_tiles(location)
 		call_deferred("queue_free")

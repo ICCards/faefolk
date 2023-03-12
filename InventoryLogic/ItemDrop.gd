@@ -49,7 +49,7 @@ func adjustPosition(animation):
 	elif animation == 5:
 		adjustedPosition = global_position + Vector2(4, -8)
 	elif animation == 6:
-		adjustedPosition = global_position + Vector2(-4, 4)
+		adjustedPosition = global_position + Vector2(-8, 4)
 
 
 func _physics_process(_delta):

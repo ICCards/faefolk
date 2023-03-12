@@ -13,7 +13,7 @@ enum Btn {ClickToUpdateTexture}
 @export var size = Vector2(1000, 1000) : set = set_size
 @export var gradient: Gradient : set = set_gradient
 
-var data
+var data: Image
 
 func _init():
 	#data = Image.new()
@@ -25,12 +25,8 @@ func _init():
 func _update():
 	if not gradient:
 		return
-
-	#false #data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	print("YERRR")
 	var radius = (size - Vector2(1.0, 1.0)) / 2
 	var ratio = size.x / size.y
-	#print(str(size))
 	if type == GradientType.LINEAR:
 		for x in range(size.x):
 			var offset = float(x) / (size.x - 1)
@@ -45,7 +41,6 @@ func _update():
 				var dist = Vector2(x / ratio, y).distance_to(Vector2(radius.x / ratio, radius.y))
 				var offset = dist / radius.y
 				var color = gradient.sample(offset)
-				#print("WIDTH " +  str(data.get_width()))
 				data.set_pixel(x, y, color)
 
 	# Rectangular
@@ -63,11 +58,9 @@ func _update():
 
 				var color = gradient.sample(offset)
 				data.set_pixel(x, y, color)
+	#var texture = ImageTexture.new()
+	set_image(data)
 
-	#data.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	self.create_from_image(data)
-	print("YONK")
-	#create_from_image(data)
 
 # Workaournd that allow to manual update the texture
 #warning-ignore:unused_argument

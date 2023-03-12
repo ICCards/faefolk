@@ -16,9 +16,9 @@ var game_state: GameState
 
 func _ready():
 	Server.world = self
-#	create_or_load_world()
-	spawn_player()
-	set_valid_tiles()
+	create_or_load_world()
+#	spawn_player()
+#	set_valid_tiles()
 
 var trees = ['oak','spruce','birch','evergreen','pine','apple','plum','cherry','pear']
 var flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
@@ -35,17 +35,17 @@ func set_valid_tiles():
 	Tiles.watered_tiles = $FarmingTiles/WateredTiles
 	Tiles.ocean_tiles = $TerrainTiles/Ocean
 	Tiles.object_tiles = $BuildingTiles/ObjectTiles
-	for x in range(100):
-		for y in range(100):
-			if Util.chance(1):
-#				trees.shuffle()
-#				if Util.chance(33):
-#					if Util.isFruitTree(trees.front()):
-#						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"harvest")
-#					else:
-#						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"5")
-#				elif Util.chance(33):
-				PlaceObject.place_log_in_world("id", rng.randi_range(1,12), Vector2i(x+1,y+1))
+#	for x in range(100):
+#		for y in range(100):
+#			if Util.chance(1):
+##				trees.shuffle()
+##				if Util.chance(33):
+##					if Util.isFruitTree(trees.front()):
+##						PlaceObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"harvest")
+##					else:
+##						PlacdeObject.place_tree_in_world("id",trees.front(),Vector2i(x+1,y+1),"forest",100,"5")
+##				elif Util.chance(33):
+#				PlaceObject.place_log_in_world("id", rng.randi_range(1,12), Vector2i(x+1,y+1))
 #				else:
 #					PlaceObject.place_stump_in_world("id",trees.front(),Vector2i(x+1,y+1),40)
 #	for x in range(100):
@@ -54,10 +54,14 @@ func set_valid_tiles():
 #				if Util.chance(10):
 #					flowerTypes.shuffle()
 #					PlaceObject.place_forage_in_world("id",flowerTypes.front(),Vector2i(x+1,y+1),true)
-#	for x in range(100):
-#		for y in range(100):
+#	for x in range(50):
+#		for y in range(50):
+#			if Util.chance(10):
+#				PlaceObject.place_tall_grass_in_world("id","forest",Vector2i(x+1,y+1))
 #			if Util.chance(1):
-#				PlaceObject.place_small_ore_in_world("id","stone1",Vector2i(x+1,y+1),40)
+#				PlaceObject.place_small_ore_in_world("id","stone2",Vector2i(x+1,y+1),40)
+#			if Util.chance(1):
+#				PlaceObject.place_large_ore_in_world("id","iron ore",Vector2i(x+2,y+2),30)
 
 func create_or_load_world():
 	if MapData.world["is_built"]: # Load world
@@ -74,12 +78,12 @@ func build_world():
 	call_deferred("build_world_deferred")
 	
 func build_world_deferred():
-	buildMap(MapData.world)
-	spawn_player()
-	$WorldBuilder.initialize()
-	$WorldBuilder/BuildTerrain.initialize()
-	$WorldBuilder/BuildNature.initialize()
-	$WorldBuilder/SpawnAnimal.initialize()
+#	buildMap(MapData.world)
+#	spawn_player()
+#	$WorldBuilder.initialize()
+#	$WorldBuilder/BuildTerrain.initialize()
+#	$WorldBuilder/BuildNature.initialize()
+#	$WorldBuilder/SpawnAnimal.initialize()
 	$WorldMap.buildMap()
 	thread.wait_to_finish()
 
@@ -139,11 +143,12 @@ func buildMap(map):
 
 
 func create_cave_entrance(_loc):
-	var loc = Util.string_to_vector2(_loc)
-	Tiles.valid_tiles.set_cellv(loc, -1)
-	Tiles.valid_tiles.set_cellv(loc+Vector2(1,0), -1)
-	$GeneratedTiles/DownLadder.set_cellv(loc, 1)
-	var caveLadder = CaveLadder.instance()
-	caveLadder.is_down_ladder = true
-	caveLadder.position = loc*32 + Vector2(32,16)
-	add_child(caveLadder)
+	pass
+#	var loc = Util.string_to_vector2(_loc)
+#	Tiles.valid_tiles.set_cellv(loc, -1)
+#	Tiles.valid_tiles.set_cellv(loc+Vector2(1,0), -1)
+#	$GeneratedTiles/DownLadder.set_cellv(loc, 1)
+#	var caveLadder = CaveLadder.instance()
+#	caveLadder.is_down_ladder = true
+#	caveLadder.position = loc*32 + Vector2(32,16)
+#	add_child(caveLadder)

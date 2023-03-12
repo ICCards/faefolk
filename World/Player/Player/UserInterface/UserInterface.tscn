@@ -247,8 +247,10 @@ visible = false
 layout_mode = 0
 offset_left = 20.0
 offset_top = 640.0
-offset_right = 357.0
-offset_bottom = 710.0
+offset_right = 1217.0
+offset_bottom = 863.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("6_rh7sc")
 bbcode_enabled = true
 text = "Saving progress"
 

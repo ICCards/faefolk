@@ -40,7 +40,6 @@ sources/0 = SubResource("TileSetAtlasSource_63ton")
 script = ExtResource("1_1tori")
 
 [node name="Map" type="TileMap" parent="."]
-visible = false
 scale = Vector2(0.05, 0.05)
 tile_set = ExtResource("2")
 format = 2
@@ -66,7 +65,7 @@ format = 2
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(800, 800)
 enabled = false
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0
 limit_right = 1600

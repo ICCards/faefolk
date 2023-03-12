@@ -27,13 +27,13 @@ enum Tiles {
 }
 
 func _input(event):
-	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/World"):
-		if event.is_action_pressed("open_map"):
+	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/Overworld"):
+		if event.is_action_pressed("open map"):
 			Server.player_node.actions.destroy_placable_object()
 			Server.world.get_node("WorldAmbience").call_deferred("hide")
 			call_deferred("show")
 			call_deferred("initialize")
-		if event.is_action_released("open_map"):
+		if event.is_action_released("open map"):
 			Server.world.get_node("WorldAmbience").call_deferred("show")
 			call_deferred("hide")
 			call_deferred("set_inactive")
@@ -72,10 +72,10 @@ func set_inactive():
 func draw_grid():
 	for x in range(NUM_ROWS):
 		for height in range(MAP_HEIGHT):
-			$Grid.set_cell((MAP_WIDTH/NUM_ROWS) * (x+1), height, 0)
+			$Grid.set_cell(0,Vector2i((MAP_WIDTH/NUM_ROWS)*(x+1), height),0,Vector2i(0,0))
 	for y in range(NUM_COLUMNS):
 		for width in range(MAP_WIDTH):
-			$Grid.set_cell(width, (MAP_HEIGHT/NUM_COLUMNS) * (y+1), 0)
+			$Grid.set_cell(0, Vector2i(width,(MAP_HEIGHT/NUM_COLUMNS)*(y+1)),0,Vector2i(0,0))
 	draw_grid_labels()
 	
 func draw_grid_labels():
@@ -88,12 +88,13 @@ func draw_grid_labels():
 			add_child(gridSquareLabel)
 	
 func _physics_process(delta):
+	return
 	if is_instance_valid(Server.player_node):
 		playerIcon.position = Server.player_node.position
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 		set_direction(Server.player_node.direction)
-		roamingStorm = get_node("/root/World/RoamingStorm")
-		roamingStorm2 = get_node("/root/World/RoamingStorm2")
+		roamingStorm = get_node("/root/Overworld/RoamingStorm")
+		roamingStorm2 = get_node("/root/Overworld/RoamingStorm2")
 		stormIcon.position = roamingStorm.position
 		stormIcon2.position = roamingStorm2.position
 
@@ -120,26 +121,20 @@ func set_direction(dir):
 
 func buildMap():
 	var map = MapData.world
-	for loc_string in map["dirt"]:
-		var loc = Util.string_to_vector2(loc_string)
-		miniMap.set_cellv(loc, Tiles.DIRT)
-	for loc_string in map["forest"]:
-		var loc = Util.string_to_vector2(loc_string)
-		miniMap.set_cellv(loc , Tiles.FOREST)
-	for loc_string in map["plains"]:
-		var loc = Util.string_to_vector2(loc_string)
-		miniMap.set_cellv(loc , Tiles.PLAINS)
-	for loc_string in map["beach"]:
-		var loc = Util.string_to_vector2(loc_string)
-		miniMap.set_cellv(loc , Tiles.BEACH)
-	for loc_string in map["desert"]:
-		var loc = Util.string_to_vector2(loc_string)
-		miniMap.set_cellv(loc , Tiles.DESERT)
-	for loc_string in map["snow"]:
-		var loc = Util.string_to_vector2(loc_string)
-		miniMap.set_cellv(loc , Tiles.SNOW)
+	for loc in map["dirt"]:
+		miniMap.set_cell(0,loc,Tiles.DIRT,Vector2i(0,0))
+	for loc in map["forest"]:
+		miniMap.set_cell(0,loc,Tiles.FOREST,Vector2i(0,0))
+	for loc in map["plains"]:
+		miniMap.set_cell(0,loc,Tiles.PLAINS,Vector2i(0,0))
+	for loc in map["beach"]:
+		miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
+	for loc in map["desert"]:
+		miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
+	for loc in map["snow"]:
+		miniMap.set_cell(0,loc,Tiles.SNOW,Vector2i(0,0))
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):
-			if miniMap.get_cell(x, y) == -1:
-				miniMap.set_cellv(Vector2(x,y),Tiles.WATER)
+			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
+				miniMap.set_cell(0,Vector2i(x,y),Tiles.DIRT,Vector2i(0,0))
 	draw_grid()

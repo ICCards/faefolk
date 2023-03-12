@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/2.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://ckal8dga4akml" path="res://Assets/Images/Misc/watering can progress indicator.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://dckev2t5k4w2d" path="res://Assets/Tilesets/doors/hit effects/armored/side/open.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://dckev2t5k4w2d" path="res://Assets/Tilesets/doors/hit effects/armored door/side/open.png" id="10"]
 
 [sub_resource type="Animation" id="20"]
 length = 0.001

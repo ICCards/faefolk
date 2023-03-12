@@ -71,7 +71,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0698132]
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="4"]
@@ -112,7 +112,7 @@ tracks/1/path = NodePath("FrontBreak:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5, 1.9),
+"times": PackedFloat32Array(0, 1.5, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -140,6 +140,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FrontBreak")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"break"],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dlps2"]
@@ -219,6 +233,56 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackBreak:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BackBreak")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"break"],
+"method": &"play"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BackBreak:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BackBreak:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_inwcg"]
 _data = {
@@ -288,7 +352,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"break",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [node name="TallGrass" type="Node2D"]
@@ -296,13 +360,12 @@ modulate = Color(1.3, 1.3, 1.3, 1)
 script = ExtResource("1_u2u05")
 
 [node name="Back" type="Sprite2D" parent="."]
-position = Vector2(8.00781, 0)
+position = Vector2(8, 2.08165e-12)
 texture = ExtResource("1")
 offset = Vector2(0, -16)
 
 [node name="Front" type="Sprite2D" parent="."]
-position = Vector2(8.00781, 0)
-rotation = 0.0698132
+position = Vector2(8, 2.08165e-12)
 texture = ExtResource("2")
 offset = Vector2(-0.0078125, -15.9844)
 
@@ -342,15 +405,12 @@ visible = false
 position = Vector2(8, -8)
 sprite_frames = SubResource("17")
 animation = &"break"
-frame = 7
-frame_progress = 1.0
 
 [node name="BackBreak" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(8, -13)
 sprite_frames = SubResource("17")
 animation = &"break"
-frame = 7
-frame_progress = 0.684102
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

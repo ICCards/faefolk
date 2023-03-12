@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://brvkt7ku1qabd"]
 
 [ext_resource type="Script" path="res://World/Objects/Scripts/InteractiveArea.gd" id="1_yu2mv"]
 

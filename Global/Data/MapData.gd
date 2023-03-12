@@ -30,35 +30,35 @@ var world = {
 	"animal": {},
 	"crop": {},
 	"tile": {},
-	"placable": {},
+	"placeable": {},
 }
-var starting_caves_data = {
-"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-5":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-6":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-Fishing":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-5":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-6":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}}}
+#var starting_caves_data = {
+#"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 1-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 1-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 1-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 1-5":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 1-6":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 1-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 1-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 1-Fishing":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 2-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 2-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 2-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 2-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 2-5":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 2-6":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
+#"Cave 2-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
+#"Cave 2-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}}}
 
-var caves = starting_caves_data
+var caves #= starting_caves_data
 
 func _ready() -> void:
 	PlayerData.connect("season_changed",Callable(self,"reset_cave_data"))
 	PlayerData.connect("set_day",Callable(self,"advance_crop"))
 
-func reset_cave_data():
-	caves = starting_caves_data
+#func reset_cave_data():
+#	caves = starting_caves_data
 
 func add_world_data_to_chunks():
 	if not is_world_data_in_chunks:
@@ -90,13 +90,6 @@ func advance_crop():
 		Tiles.watered_tiles.clear()
 	emit_signal("refresh_crops")
 
-
-func add_forage(id,data):
-	world["forage"][id] = data
-
-func remove_animal(id):
-	world["animal"].erase(id)
-
 func set_hoed_tile(loc):
 	world["tile"][str(loc)] = "h"
 	
@@ -106,34 +99,13 @@ func set_watered_tile(loc):
 func remove_hoed_tile(loc):
 	world["tile"].erase(str(loc))
 
-func add_crop(id,data):
-	world["crop"][id] = data
-	
-func remove_crop(id):
-	world["crop"].erase(id)
-	
-func add_tree(id,data):
-	world["tree"][id] = data
-
-func add_placable(id, data):
+func add_object(type,id,data):
 	if Server.world.name == "Overworld":
-		world["placable"][id] = data
+		world[type][id] = data
 	else:
-		caves[Server.world.name]["placable"][id] = data
+		caves[Server.world.name][type][id] = data
 
-func remove_placable(id):
-	if Server.world.name == "Overworld":
-		world["placable"].erase(id)
-	else:
-		caves[Server.world.name]["placable"].erase(id)
-
-func remove_forage(id):
-	if Server.world.name == "Overworld":
-		world["forage"].erase(id)
-	else:
-		caves[Server.world.name]["forage"].erase(id)
-
-func remove_object(type, id):
+func remove_object(type,id):
 	if Server.world.name == "Overworld":
 		world[type].erase(id)
 	else:

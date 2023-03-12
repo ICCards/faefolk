@@ -1,24 +1,28 @@
-res://World/Objects/Nature/Effects/OreHitEffect.tscn
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://Assets/Tilesets/objects/objects.tres
+res://Assets/Themes/text.tres
+res://Assets/Themes/LockedAsset.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/terrain/elevated terrain.tres
 res://Assets/Tilesets/walls/walls.tres
-res://Assets/Tilesets/objects/objects.tres
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
+res://World/Building/Tiles/Attached nodes/bed_interactive_area.tscn
+res://World/Building/Tiles/Attached nodes/campfire_interactive_area.tscn
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Overworld/Overworld.tscn
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
+res://World/Player/Player/Actions.gd
+res://World/Objects/Nature/Trees/Log.tscn
+res://Assets/Images/tree_sets/plum/mature/animated.tres
+res://World/Objects/Nature/Trees/Log.gd
 res://World/Objects/Nature/Ores/SmallOre.tscn
 res://World/Objects/Nature/Ores/SmallOre.gd
-res://World/Objects/Nature/Effects/OreHitEffect.gd
-res://World/Overworld/Overworld.tscn
-res://Global/Data/PlayerData.gd
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
-res://World/Building/PlaceObjectPreview.gd
-res://Global/Data/Constants.gd
-res://World/Building/PlaceObjectPreview.tscn
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
-res://World/Objects/Farm/PlantedCrop.tscn
-res://Global/Data/PlaceObject.gd
-res://World/Objects/Farm/PlantedCrop.gd
 res://World/Overworld/Overworld.gd
-res://World/Objects/Nature/Trees/Log.tscn
-res://World/Player/Player/AttachedScripts/BackgroundMusic.gd
-res://World/Objects/Nature/Trees/Log.gd
-res://Global/Data/Images.gd
-res://World/Building/Tiles/Attached nodes/door_interactive_area.tscn
+res://Global/Data/GenerateNewWorld.gd
+res://Global/Functions/maujoe.custom_gradient_texture/custom_gradient_texture.gd
+res://Global/Data/Constants.gd
+res://World/Building/Tiles/Interactives.gd
+res://World/Map/WorldMap.tscn
+res://World/Map/WorldMap.gd
+res://World/Map/GridSquareLabel.tscn
+res://World/Map/Camera2D.gd

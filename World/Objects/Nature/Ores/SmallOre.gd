@@ -4,7 +4,7 @@ extends Node2D
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var rng = RandomNumberGenerator.new()
 
-#var ore_object
+
 var location
 var variety
 var health
@@ -21,7 +21,6 @@ func remove_from_world():
 	call_deferred("queue_free")
 
 func setTexture():
-	#ore_object = Images.returnOreObject(variety)
 	$TileMap.set_cell(0,Vector2i(0,-1),0,Constants.small_ore_atlas_cords[variety][rng.randi_range(1,6)])
 
 
@@ -52,7 +51,7 @@ func hit(tool_name):
 		sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
-		InstancedScenes.initiateOreHitEffect(variety, "small ore hit", position+Vector2(randf_range(-6,6), randf_range(-6,6)))
+		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(randf_range(-6,6), randf_range(-6,6)))
 		animation_player.call_deferred("play", "hit")
 
 func _on_SmallHurtBox_area_entered(_area):

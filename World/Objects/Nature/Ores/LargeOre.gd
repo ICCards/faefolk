@@ -1,12 +1,10 @@
 extends Node2D
 
-@onready var big_ore_sprite: Sprite2D = $BigOre
-@onready var small_ore_sprite: Sprite2D = $SmallOre
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var rng = RandomNumberGenerator.new()
 
-var ore_object
 var location
 var variety
 var health
@@ -16,9 +14,7 @@ var destroyed = false
 
 func _ready():
 	rng.randomize()
-	call_deferred("hide")
-	ore_object = Images.returnOreObject(variety)
-	call_deferred("setTexture", ore_object)
+	call_deferred("setTexture")
 
 func remove_from_world():
 	$BigHurtBox.call_deferred("queue_free")
@@ -27,17 +23,22 @@ func remove_from_world():
 	$SmallMovementCollisionBox.call_deferred("queue_free")
 	call_deferred("queue_free")
 
-func setTexture(ore):
-	big_ore_sprite.set_deferred("texture", ore.largeOre)
-	small_ore_sprite.set_deferred("texture", ore.mediumOres[rng.randi_range(0, 5)])
+func setTexture():
+	$LargeOre.set_cell(0,Vector2i(0,-1),0,Constants.large_ore_atlas_cords[variety])
+	$SmallOre.set_cell(0,Vector2i(0,-1),0,Constants.small_ore_atlas_cords[variety][rng.randi_range(1,6)])
 	if health <= 40:
 		$BigHurtBox/bigHurtBox.set_deferred("disabled", true)
 		$BigMovementCollisionBox/BigMovementBox.set_deferred("disabled", true)
 		$SmallHurtBox/smallHurtBox.set_deferred("disabled", false)
 		$SmallMovementCollisionBox/CollisionShape2D.set_deferred("disabled", false)
-		big_ore_sprite.call_deferred("hide")
-		small_ore_sprite.call_deferred("show")
+		$LargeOre.call_deferred("hide")
+		$SmallOre.call_deferred("show")
 		large_break = true
+		Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2(2,1))
+	else:
+		$LargeOre.call_deferred("show")
+		$SmallOre.call_deferred("hide")
+		Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 
 
 func hit(tool_name):
@@ -48,43 +49,44 @@ func hit(tool_name):
 		sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
-		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-25, 25), rng.randi_range(-8, 32)))
-		animation_player.call_deferred("play", "big_ore_hit_right")
+		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-12,12), rng.randi_range(-8,8)))
+		animation_player.call_deferred("play", "large ore hit")
 	elif not large_break:
+		Tiles.add_valid_tiles(location+Vector2i(-1,-1), Vector2(2,1))
 		large_break = true
 		sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
-		InstancedScenes.initiateOreHitEffect(variety, "large ore break", position+Vector2(0, 24))
+		InstancedScenes.initiateOreHitEffect(variety, "large ore break", position+Vector2(rng.randi_range(-6,6), rng.randi_range(-4,4)))
 		var amount = Stats.return_item_drop_quantity(tool_name, "large ore")
 		Util.add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
-			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 28), amount)
+			InstancedScenes.intitiateItemDrop("stone", position, amount)
 		else:
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 4), amount)
-		animation_player.call_deferred("play", "big_ore_break")
+			InstancedScenes.intitiateItemDrop(variety, position, amount)
+		animation_player.call_deferred("play", "large ore break")
 	elif health >= 1:
 		sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
-		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-10, 10), 32))
-		animation_player.call_deferred("play", "small_ore_hit_right")
+		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(randf_range(-6,6), randf_range(-6,6)))
+		animation_player.call_deferred("play", "small ore hit")
 	elif health <= 0 and not destroyed:
 		destroyed = true
 		PlayerData.player_data["skill_experience"]["mining"] += 1
 		MapData.remove_object("ore_large", name)
-		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,1))
 		sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
-		InstancedScenes.initiateOreHitEffect(variety, "ore destroyed", position+Vector2(rng.randi_range(-10, 10), 32))
+		InstancedScenes.initiateOreHitEffect(variety, "small ore break", position)
 		var amount = Stats.return_item_drop_quantity(tool_name, "small ore")
 		Util.add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
-			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 28), amount)
+			InstancedScenes.intitiateItemDrop("stone", position, amount)
 		else:
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 28), amount)
-		animation_player.call_deferred("play", "small_ore_break")
+			InstancedScenes.intitiateItemDrop(variety, position, amount)
+		animation_player.call_deferred("play", "small ore break")
 		await sound_effects.finished
 		await get_tree().create_timer(0.6).timeout
 		call_deferred("queue_free")
@@ -99,18 +101,11 @@ func _on_BigHurtBox_area_entered(_area):
 		call_deferred("hit", _area.tool_name)
 
 
-func _on_SmallHurtBox_area_entered(_area):
-	if _area.name == "AxePickaxeSwing":
+func _on_small_hurt_box_area_entered(area):
+	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.special_ability == "fire":
+	if area.special_ability == "fire":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-20, 20), randf_range(-8,16)))
-	if _area.tool_name != "lightning spell" and _area.tool_name != "explosion spell":
-		call_deferred("hit", _area.tool_name)
-
-
-func _on_VisibilityNotifier2D_screen_entered():
-	call_deferred("show")
-
-func _on_VisibilityNotifier2D_screen_exited():
-	call_deferred("hide")
+	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+		call_deferred("hit", area.tool_name)

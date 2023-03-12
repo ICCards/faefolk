@@ -17,13 +17,13 @@ var occupied_terrain_tiles = []
 const width := 1000
 const height := 1000
 const MAX_GRASS_BUNCH_SIZE = 150
-const oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
-const treeTypes = ['oak','spruce','birch','evergreen','pine','apple','plum','cherry','pear']
-const weedTypes = ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4"]
-const flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
-const clamTypes = ["blue clam","pink clam","red clam"]
-const starfishTypes = ["starfish", "baby starfish"]
-const randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
+var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
+var treeTypes = ['oak','spruce','birch','evergreen','pine','apple','plum','cherry','pear']
+var weedTypes = ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4"]
+var flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
+var clamTypes = ["blue clam","pink clam","red clam"]
+var starfishTypes = ["starfish", "baby starfish"]
+var randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
 
 var fastNoiseLite := FastNoiseLite.new()
 var rng = RandomNumberGenerator.new()
@@ -116,26 +116,26 @@ func build_moisture(octaves,period):
 func build_world():
 	print("building world")
 	uuid = _uuid.new()
-	get_node("/root/World/Loading").call_deferred("set_phase","Building terrain")
+	get_node("/root/Overworld/Loading").call_deferred("set_phase","Building terrain")
 	build_terrian()
 	#await get_tree().create_timer(1.0).timeout
 	set_cave_entrance()
 	#get_node("/root/World3D/Loading").call_deferred("set_phase","Building nature")
 	#await get_tree().create_timer(1.0).timeout
-	generate_trees(snow,"snow")
-	generate_trees(forest,"forest")
-	generate_trees(desert,"desert")
-	generate_grass_bunches(plains,"plains")
-	generate_grass_bunches(snow,"snow")
-	generate_ores(snow,"snow")
-	generate_ores(desert,"desert")
-	generate_ores(dirt,"dirt")
-	generate_flowers(forest,"forest")
-	generate_flowers(plains,"plains")
-	generate_weeds(forest,"forest")
-	generate_weeds(plains,"plains")
-	generate_beach_forage(beach)
-	generate_animals()
+#	generate_trees(snow,"snow")
+#	generate_trees(forest,"forest")
+#	generate_trees(desert,"desert")
+#	generate_grass_bunches(plains,"plains")
+#	generate_grass_bunches(snow,"snow")
+#	generate_ores(snow,"snow")
+#	generate_ores(desert,"desert")
+#	generate_ores(dirt,"dirt")
+#	generate_flowers(forest,"forest")
+#	generate_flowers(plains,"plains")
+#	generate_weeds(forest,"forest")
+#	generate_weeds(plains,"plains")
+#	generate_beach_forage(beach)
+#	generate_animals()
 #	await get_tree().create_timer(1.0).timeout
 	#await get_tree().create_timer(1.0).timeout
 	#get_node("/root/World3D/Loading").call_deferred("set_phase","Saving data")
@@ -208,27 +208,27 @@ func build_terrian():
 
 func _fix_tiles(value):
 	print("start fixing")
-	var border_tiles = []
-	for loc in value:
-		if Util.is_border_tile(loc, value):
-			border_tiles.append(loc)
-	for loc in border_tiles:
-		if not value.has(loc+Vector2(1,0)):
-			value.append(loc+Vector2(1,0))
-		if not value.has(loc+Vector2(-1,0)):
-			value.append(loc+Vector2(-1,0))
-		if not value.has(loc+Vector2(0,1)):
-			value.append(loc+Vector2(0,1))
-		if not value.has(loc+Vector2(0,-1)):
-			value.append(loc+Vector2(0,-1))
-		if not value.has(loc+Vector2(1,1)):
-			value.append(loc+Vector2(1,1))
-		if not value.has(loc+Vector2(-1,1)):
-			value.append(loc+Vector2(-1,1))
-		if not value.has(loc+Vector2(1,-1)):
-			value.append(loc+Vector2(1,-1))
-		if not value.has(loc+Vector2(-1,-1)):
-			value.append(loc+Vector2(-1,-1))
+#	var border_tiles = []
+#	for loc in value:
+#		if Util.is_border_tile(loc, value):
+#			border_tiles.append(loc)
+#	for loc in border_tiles:
+#		if not value.has(loc+Vector2(1,0)):
+#			value.append(loc+Vector2(1,0))
+#		if not value.has(loc+Vector2(-1,0)):
+#			value.append(loc+Vector2(-1,0))
+#		if not value.has(loc+Vector2(0,1)):
+#			value.append(loc+Vector2(0,1))
+#		if not value.has(loc+Vector2(0,-1)):
+#			value.append(loc+Vector2(0,-1))
+#		if not value.has(loc+Vector2(1,1)):
+#			value.append(loc+Vector2(1,1))
+#		if not value.has(loc+Vector2(-1,1)):
+#			value.append(loc+Vector2(-1,1))
+#		if not value.has(loc+Vector2(1,-1)):
+#			value.append(loc+Vector2(1,-1))
+#		if not value.has(loc+Vector2(-1,-1)):
+#			value.append(loc+Vector2(-1,-1))
 	if thread_tile_counter == tile_arrays.size():
 		print("fixed")
 		#call_deferred("build_world")
@@ -250,7 +250,7 @@ func update_fixed_map():
 #	get_node("/root/World3D/Loading").call_deferred("queue_free")
 	save_starting_world_data()
 	MapData.add_world_data_to_chunks()
-	get_node("/root/World3D/Loading").call_deferred("queue_free")
+	get_node("/root/Overworld/Loading").call_deferred("queue_free")
 	call_deferred("build_map")
 
 func fix_tiles():
@@ -427,10 +427,12 @@ func generate_map(data):
 	print("GENERATE MAP " + str(data))
 	var grid = {}
 	fastNoiseLite.fractal_type = FastNoiseLite.FRACTAL_FBM
-	fastNoiseLite.noise_type = FastNoiseLite.TYPE_PERLIN
+	fastNoiseLite.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	fastNoiseLite.seed = randi()
-	fastNoiseLite.fractal_lacunarity = data.octaves
+	fastNoiseLite.fractal_octaves = data.octaves
 	fastNoiseLite.frequency = data.period
+	fastNoiseLite.fractal_gain = 1.0
+	fastNoiseLite.fractal_weighted_strength = 0.0
 	print("HERE")
 	var custom_gradient = CustomGradientTexture.new()
 	custom_gradient.gradient = Gradient.new()
@@ -439,15 +441,15 @@ func generate_map(data):
 	print("HERE1")
 	var gradient_data = custom_gradient.get_image()
 	print("HERE2")
-	#gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for x in width:
 		for y in height:
 			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5
 			var value = fastNoiseLite.get_noise_2d(x,y)
 			value += gradient_value
 			grid[Vector2(x,y)] = value
-	call_deferred(data.ending_function)
 	print("HERE3")
+	call_deferred(data.ending_function)
+	print("HERE4")
 	return grid
 
 func check_64x64(loc):

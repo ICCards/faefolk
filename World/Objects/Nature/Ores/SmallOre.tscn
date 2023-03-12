@@ -26,14 +26,31 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SmallOre:position")
+tracks/1/path = NodePath("SmallMovementCollisionBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "hit"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallOre:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(2.08165e-12, 2.08165e-12)]
+"values": [Vector2(-10, 10), Vector2(-8, 10), Vector2(-11, 10), Vector2(-9, 10)]
 }
 
 [sub_resource type="Animation" id="4"]
@@ -62,22 +79,17 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
-
-[sub_resource type="Animation" id="5"]
-resource_name = "hit"
-length = 0.4
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TileMap:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SmallOre:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t1yxw"]
@@ -307,7 +319,6 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallMovementCollisionBox"]
 shape = SubResource("CircleShape2D_x8ky6")
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -323,12 +334,12 @@ visible = false
 position = Vector2(1.19209e-07, -17.6471)
 scale = Vector2(2.70588, 2.73529)
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="SmallOre" type="TileMap" parent="."]
 position = Vector2(-10, 10)
 scale = Vector2(1.35, 1.35)
 tile_set = SubResource("TileSet_jwgan")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 327680, 4)
+layer_0/tile_data = PackedInt32Array(-65536, 393216, 5)
 
 [connection signal="area_entered" from="SmallHurtBox" to="." method="_on_SmallHurtBox_area_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

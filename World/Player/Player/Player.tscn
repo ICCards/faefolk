@@ -4394,11 +4394,9 @@ disabled = true
 [node name="AxePickaxeSwing" parent="Swing" index="0"]
 collision_mask = 8
 
-[node name="ScytheSwing" parent="Swing" index="2"]
-visible = true
-
-[node name="CollisionShape2D" parent="Swing/ScytheSwing" index="0"]
-position = Vector2(5, 0)
+[node name="SwordSwing" parent="Swing" index="1"]
+position = Vector2(12, -8)
+rotation = 1.5708
 
 [node name="Sounds" type="Node2D" parent="."]
 

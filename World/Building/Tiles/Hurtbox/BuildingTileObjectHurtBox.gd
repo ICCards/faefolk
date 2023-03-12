@@ -1,19 +1,22 @@
 extends Node2D
 
+@onready var interactives: Node = $Interactives
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var hurt_box: CollisionShape2D = $Marker2D/HurtBox/CollisionShape2D
+@onready var movement_collision: CollisionShape2D = $Marker2D/MovementCollision/CollisionShape2D
+@onready var hammer_repair_box: CollisionShape2D = $Marker2D/HammerRepairBox/CollisionShape2D
 
 @onready var WallHitEffect = load("res://World/Building/Tiles/WallHitEffect.tscn")
+@onready var DoorInteractiveAreaNode = load("res://World/Building/Tiles/Attached nodes/door_interactive_area.tscn")
 
 var tier
 var health
 var max_health
 var item_name
 var location
-
-var temp_health = 0
+var direction
 var wall_tiles
-var id
-
+var door_opened: bool 
 var destroyed: bool = false
 
 enum Tiers {
@@ -27,35 +30,70 @@ enum Tiers {
 func _ready():
 	set_type()
 	if item_name == "wall":
-		$HurtBox.set_collision_mask(8+16+262144)
+		$Marker2D/HurtBox.set_collision_mask(8+16+262144)
+		movement_collision.set_deferred("disabled", false)
+		Tiles.remove_valid_tiles(location, Vector2(1,1))
+	elif item_name == "foundation":
+		movement_collision.set_deferred("disabled", true)
+		$Marker2D/HurtBox.set_collision_mask(8+16)
 	else:
-		$HurtBox.set_collision_mask(8+16)
-	
+		set_door_state()
+		
+func set_door_state():
+	add_door_interactive_area_node("door")
+	$Marker2D/HurtBox.set_collision_mask(8+16+262144)
+	movement_collision.set_deferred("disabled", false)
+	$Marker2D.scale = Constants.dimensions_dict[item_name]
+	if direction == "left" or direction == "right":
+		$Marker2D.rotation = 90
+		$Marker2D.position.y = (Constants.dimensions_dict[item_name].x - 1) * -8
+	else:
+		$HealthBar.position.x = 12
+		$Marker2D.position.x = (Constants.dimensions_dict[item_name].x - 1) * 8
+	if direction == "down" or direction == "up":
+		Tiles.remove_valid_tiles(location, Vector2(2,1))
+	else:
+		Tiles.remove_valid_tiles(location, Vector2(1,2))
+
+
+func add_door_interactive_area_node(type):
+	var doorInteractiveAreaNode = DoorInteractiveAreaNode.instantiate()
+	doorInteractiveAreaNode.object_name = type
+	doorInteractiveAreaNode.name = name
+	$Marker2D.call_deferred("add_child", doorInteractiveAreaNode)
+
+
 func remove_icon():
 	$SelectedBorder.hide()
 	#Tiles.selected_wall_tiles.set_cellv(location,-1)
 	#Tiles.selected_foundation_tiles.set_cellv(location,-1)
 	
-	
+
 func tile_upgraded():
 	if tier != "demolish":
 		match tier:
-				"twig":
-					health = Stats.MAX_TWIG_BUILDING
-				"wood":
-					health = Stats.MAX_WOOD_BUILDING
-				"stone":
-					health = Stats.MAX_STONE_BUILDING
-				"metal":
-					health = Stats.MAX_METAL_BUILDING
-				"armored":
-					health = Stats.MAX_ARMORED_BUILDING
+			"twig":
+				health = Stats.MAX_TWIG_BUILDING
+			"wood":
+				health = Stats.MAX_WOOD_BUILDING
+			"stone":
+				health = Stats.MAX_STONE_BUILDING
+			"metal":
+				health = Stats.MAX_METAL_BUILDING
+			"armored":
+				health = Stats.MAX_ARMORED_BUILDING
 	set_type()
 	
 func set_type():
-	if tier != "demolish":
-		MapData.world["placable"][str(name)]["v"] = tier
+#	if tier != "demolish":
+#		MapData.world["placeable"][str(name)]["v"] = tier
 	match item_name:
+		"wood door":
+			max_health = Stats.MAX_WOOD_DOOR
+		"metal door":
+			max_health = Stats.MAX_METAL_DOOR
+		"armored door":
+			max_health = Stats.MAX_ARMORED_DOOR
 		"wall":
 			match tier:
 				"twig":
@@ -105,13 +143,13 @@ func update_health_bar():
 func remove_wall():
 	if not destroyed:
 		destroyed = true
-		if Server.world.has_node("WallHitEffect" + str(location)):
-			Server.world.get_node("WallHitEffect" + str(location)).queue_free()
-		$HealthBar.hide()
-		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
-		$DetectObjectOverPathBox/CollisionShape2D.set_deferred("disabled", true)
-		MapData.remove_object("placable",id)
+		Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,-1)
+		$HealthBar.call_deferred("hide")
+		$WallHit.call_deferred("hide")
+		hurt_box.set_deferred("disabled", true)
+		movement_collision.set_deferred("disabled", true)
+		hammer_repair_box.set_deferred("disabled", true)
+		MapData.remove_object("placeable",name)
 		Tiles.add_valid_tiles(location)
 		Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,-1)
 		play_break_sound_effect()
@@ -121,23 +159,25 @@ func remove_wall():
 func remove_foundation():
 	if not destroyed:
 		destroyed = true
-		$HealthBar.hide()
-		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
-		MapData.remove_object("placable",id)
 		Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,-1)
+		$HealthBar.call_deferred("hide")
+		hurt_box.set_deferred("disabled", true)
+		hammer_repair_box.set_deferred("disabled", true)
+		MapData.remove_object("placeable",name)
 		play_break_sound_effect()
 		await get_tree().create_timer(1.0).timeout
 		queue_free()
 
 func _on_HurtBox_area_entered(area):
 	if not destroyed:
+		if item_name == "foundation" and not Tiles.valid_tiles.get_cell_atlas_coords(0,location) == Constants.VALID_TILE_ATLAS_CORD:
+			return
 		if area.name == "AxePickaxeSwing":
 			Stats.decrease_tool_health()
 		health -= Stats.return_tool_damage(area.tool_name)
 		if health > 0:
 			if item_name == "wall":
-				play_wall_hit_effect()
+				$WallHit.initialize()
 			play_hit_sound_effect()
 			show_health()
 			update_health_bar()
@@ -147,8 +187,8 @@ func _on_HurtBox_area_entered(area):
 			elif item_name == "wall":
 				remove_wall()
 
-func play_wall_hit_effect():
-	pass
+#func play_wall_hit_effect():
+#	pass
 #	if Server.world.has_node("WallHitEffect" + str(location)):
 #		Server.world.get_node("WallHitEffect" + str(location)).restart()
 #	else:
@@ -161,8 +201,8 @@ func play_wall_hit_effect():
 #		Server.world.call_deferred("add_child", wallHitEffect)
 
 func show_health():
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play("show health bar")
+	$HealthBar/AnimationPlayer.stop()
+	$HealthBar/AnimationPlayer.play("show health bar")
 
 func _on_HurtBox_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
@@ -208,19 +248,6 @@ func _on_HammerRepairBox_area_entered(area):
 	set_type()
 	InstancedScenes.play_upgrade_building_effect(location)
 	show_health()
-
-
-func _on_DetectObjectOverPathBox_area_entered(area):
-	if item_name == "foundation":
-		$HurtBox/CollisionShape2D.set_deferred("disabled", true)
-		$HammerRepairBox/CollisionShape2D.set_deferred("disabled", true)
-
-func _on_DetectObjectOverPathBox_area_exited(area):
-	if Server.isLoaded:
-		if item_name == "foundation":
-			await get_tree().create_timer(0.2).timeout
-			$HurtBox/CollisionShape2D.set_deferred("disabled", false)
-			$HammerRepairBox/CollisionShape2D.set_deferred("disabled", false)
 
 func play_hammer_hit_sound():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")

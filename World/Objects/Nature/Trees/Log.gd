@@ -63,8 +63,4 @@ func _on_BranchHurtBox_area_entered(_area):
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		call_deferred("hit", _area.tool_name)
 
-func _on_VisibilityNotifier2D_screen_entered():
-	call_deferred("show")
 
-func _on_VisibilityNotifier2D_screen_exited():
-	call_deferred("hide")

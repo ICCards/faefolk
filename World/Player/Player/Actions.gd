@@ -55,7 +55,7 @@ func _input(event):
 			if current_interactive_node:
 				match current_interactive_node.object_name:
 					"bed":
-						sleep("down", current_interactive_node.object_position)
+						sleep(current_interactive_node.object_position)
 					"tree":
 						current_interactive_node.harvest()
 					"crop":
@@ -85,13 +85,13 @@ func _input(event):
 					"chair":
 						sit(current_interactive_node.object_position, current_interactive_node.object_direction)
 					"door":
-						current_interactive_node.toggle_door()
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_door()
 					"gate":
-						current_interactive_node.toggle_gate()
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_gate()
 					"lamp":
-						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).toggle_lamp()
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_lamp()
 					"fireplace":
-						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).toggle_fireplace()
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_fireplace()
 			current_interactive_node = null
 	elif Server.player_node.state == SITTING and event.is_action_pressed("action"):
 		stand_up()
@@ -260,31 +260,25 @@ func fish():
 		fishing.fishing_rod_type = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 		get_parent().call_deferred("add_child", fishing)
 
-func sleep(sleeping_bag_direction, sleeping_bag_pos):
+func sleep(sleeping_bag_pos):
 	if get_parent().state != get_parent().SLEEPING:
 		var player_enter_position = Server.player_node.position
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().z_index = 1
 		get_parent().state = get_parent().SLEEPING
-		get_parent().position = sleeping_bag_pos
+		get_parent().position = sleeping_bag_pos + Vector2i(16,16)
 		get_parent().animation_player.play("sleep")
-		get_parent().composite_sprites.set_player_animation(get_parent().character, "sleep_" + sleeping_bag_direction)
-		if sleeping_bag_direction == "left":
-			get_parent().composite_sprites.rotation_degrees = -90
-		elif sleeping_bag_direction == "right":
-			get_parent().composite_sprites.rotation_degrees = 90
-		elif sleeping_bag_direction == "up":
-			get_parent().composite_sprites.rotation_degrees = 180
+		get_parent().composite_sprites.set_player_animation(get_parent().character, "sleep_down")
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
 		await get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").animation_finished
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
-		PlayerData.player_data["current_save_location"] = str(player_enter_position/32)
-		PlayerData.player_data["current_save_scene"] = get_tree().current_scene.filename
-		PlayerData.player_data["respawn_scene"] = get_tree().current_scene.filename
-		PlayerData.player_data["respawn_location"] = str(player_enter_position/32)
-		await get_tree().idle_frame
+		PlayerData.player_data["current_save_location"] = str(player_enter_position/16)
+		PlayerData.player_data["current_save_scene"] = "res://World/Overworld/Overworld.tscn"
+		PlayerData.player_data["respawn_scene"] = "res://World/Overworld/Overworld.tscn"
+		PlayerData.player_data["respawn_location"] = str(player_enter_position/16)
+		await get_tree().process_frame
 		game_state = GameState.new()
 		game_state.world_state = MapData.world
 		game_state.cave_state = MapData.caves
@@ -344,6 +338,3 @@ func destroy_placable_object():
 		get_node("../Camera2D/UserInterface/ChangeVariety").hide()
 		get_node("../PlaceObject").destroy()
 
-
-func _on_detect_interactive_area_area_entered(area):
-	print("FUCKER")

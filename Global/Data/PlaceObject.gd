@@ -20,15 +20,23 @@ var rng = RandomNumberGenerator.new()
 var PlaceableObjects 
 var NatureObjects 
 var ForageObjects
+var GrassObjects
 
+func place_tall_grass_in_world(id,biome,location):
+	GrassObjects = Server.world.get_node("GrassObjects")
+	var object = TallGrass.instantiate()
+	object.name = id
+	object.biome = biome
+	object.location = location 
+	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,8)
+	GrassObjects.call_deferred("add_child",object,true)
 
 func place_log_in_world(id,variety,location):
 	NatureObjects = Server.world.get_node("NatureObjects")
 	var object = Log.instantiate()
 	object.name = id
-	object.variety = variety
 	object.location = location
-	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,8)
+	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(8,-8)
 	NatureObjects.call_deferred("add_child",object,true)
 
 func place_forage_in_world(id,item_name,location,first_placement):
@@ -88,33 +96,29 @@ func place_small_ore_in_world(id,variety,location,health):
 	object.location = location
 	object.position = Tiles.valid_tiles.map_to_local(location)
 	NatureObjects.call_deferred("add_child",object,true)
+	
+func place_large_ore_in_world(id,variety,location,health):
+	NatureObjects = Server.world.get_node("NatureObjects")
+	var object = LargeOre.instantiate()
+	object.name = id
+	object.variety = variety
+	object.health = health
+	object.location = location
+	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,0)
+	NatureObjects.call_deferred("add_child",object,true)
+	
 
-
-func place_building_object_in_world(id, item_name, variety , location, health):
+func place_building_object_in_world(id, item_name,direction, variety , location, health):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
-	rng.randomize()
-	match item_name:
-		"wall":
-			var object = BuildingTileObjectHurtBox.instantiate()
-			object.name = str(id)
-			object.health = health
-			object.location = location
-			object.item_name = item_name
-			object.tier = variety
-			object.id = str(id)
-			PlaceableObjects.call_deferred("add_child", object)
-			object.global_position = Tiles.wall_tiles.map_to_local(location)
-			Tiles.remove_valid_tiles(location, Vector2(1,1))
-		"foundation":
-			var object = BuildingTileObjectHurtBox.instantiate()
-			object.name = str(id)
-			object.health = health
-			object.location = location
-			object.item_name = item_name
-			object.id = str(id)
-			object.tier = variety
-			PlaceableObjects.call_deferred("add_child", object)
-			object.global_position = Tiles.wall_tiles.map_to_local(location)
+	var object = BuildingTileObjectHurtBox.instantiate()
+	object.name = id
+	object.direction = direction
+	object.health = health
+	object.location = location
+	object.item_name = item_name
+	object.tier = variety
+	PlaceableObjects.call_deferred("add_child", object)
+	object.global_position = Tiles.wall_tiles.map_to_local(location)
 
 
 func remove_valid_tiles(item_name,direction, location):
@@ -132,10 +136,8 @@ func place_object_in_world(id, item_name, direction, location, variety = null):
 	tileObjectHurtBox.item_name = item_name
 	tileObjectHurtBox.location = location
 	tileObjectHurtBox.direction = direction
-	tileObjectHurtBox.id = id
 	PlaceableObjects.call_deferred("add_child", tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_local(location)
-	remove_valid_tiles(item_name, direction, location)
 	if Constants.autotile_object_atlas_tiles.keys().has(item_name):
 		Tiles.object_tiles.set_cells_terrain_connect(0,[location],0,Constants.autotile_object_atlas_tiles[item_name])
 	elif Constants.object_atlas_tiles.keys().has(item_name):

@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://np6mjd77t7qy"]
+[gd_scene load_steps=3 format=3 uid="uid://np6mjd77t7qy"]
+
+[ext_resource type="Script" path="res://World/Objects/Scripts/InteractiveArea.gd" id="1_v3aio"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_db6eo"]
 size = Vector2(14, 20)
 
 [node name="DoorInteractiveArea" type="Area2D"]
-collision_layer = 0
-collision_mask = 131072
+collision_layer = 131072
+collision_mask = 0
+script = ExtResource("1_v3aio")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_db6eo")
