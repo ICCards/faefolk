@@ -63,9 +63,8 @@ tile_set = SubResource("1")
 format = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(800, 800)
 enabled = false
-zoom = Vector2(2, 2)
+zoom = Vector2(0.4, 0.4)
 limit_left = 0
 limit_top = 0
 limit_right = 1600

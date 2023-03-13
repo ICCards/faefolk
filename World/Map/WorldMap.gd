@@ -16,6 +16,7 @@ const MAP_WIDTH = 1000
 const MAP_HEIGHT = 1000
 const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"]
 
+
 enum Tiles {
 	DIRT,
 	PLAINS,
@@ -25,6 +26,7 @@ enum Tiles {
 	DESERT,
 	SNOW
 }
+
 
 func _input(event):
 	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/Overworld"):
@@ -136,5 +138,5 @@ func buildMap():
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):
 			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
-				miniMap.set_cell(0,Vector2i(x,y),Tiles.DIRT,Vector2i(0,0))
+				miniMap.set_cell(0,Vector2i(x,y),Tiles.WATER,Vector2i(0,0))
 	draw_grid()

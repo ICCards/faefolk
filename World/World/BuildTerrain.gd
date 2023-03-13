@@ -239,3 +239,7 @@ extends Node
 ##	await get_tree().idle_frame
 #	#print("BUILT TERRAIN " + str(chunk_name))
 #	terrain_thread.wait_to_finish()
+
+
+func _on_build_terrain_timer_timeout():
+	pass # Replace with function body.

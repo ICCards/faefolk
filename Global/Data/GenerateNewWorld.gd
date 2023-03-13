@@ -52,6 +52,16 @@ var file_name = "res://JSONData/world.json"
 #func _ready() -> void:
 #	build()
 
+func build():
+	rng.randomize()
+	randomize()
+	#await get_tree().create_timer(1.0).timeout
+	build_temperature(5,0.01)
+	#await get_tree().create_timer(1.0).timeout
+	build_moisture(5,0.01)
+	#await get_tree().create_timer(2.0).timeout
+	build_altittude(5,0.005)
+
 func end_altittude():
 	altittude = thread_altittude.wait_to_finish()
 	print("finish building altittude")
@@ -86,29 +96,29 @@ func end_moisture():
 		thread_counter += 1
 	mutex.unlock()
 	
-func build_altittude(octaves,period):
+func build_altittude(octaves,frequency):
 	print("building altittude")
 	var data = {
 		"octaves":octaves,
-		"period":period,
+		"frequency":frequency,
 		"ending_function":"end_altittude"
 	};
 	thread_altittude.start(Callable(self,"generate_map").bind(data))	
 	
-func build_temperature(octaves,period):
+func build_temperature(octaves,frequency):
 	print("building temperature")
 	var data = {
 		"octaves":octaves,
-		"period":period,
+		"frequency":frequency,
 		"ending_function":"end_temperature"
 	};
 	thread_temperature.start(Callable(self,"generate_map").bind(data))
 	
-func build_moisture(octaves,period):
+func build_moisture(octaves,frequency):
 	print("building moisture")
 	var data = {
 		"octaves":octaves,
-		"period":period,
+		"frequency":frequency,
 		"ending_function":"end_moisture"
 	};
 	thread_moisture.start(Callable(self,"generate_map").bind(data))
@@ -120,25 +130,25 @@ func build_world():
 	build_terrian()
 	#await get_tree().create_timer(1.0).timeout
 	set_cave_entrance()
-	#get_node("/root/World3D/Loading").call_deferred("set_phase","Building nature")
+	get_node("/root/Overworld/Loading").call_deferred("set_phase","Building nature")
 	#await get_tree().create_timer(1.0).timeout
-#	generate_trees(snow,"snow")
-#	generate_trees(forest,"forest")
-#	generate_trees(desert,"desert")
-#	generate_grass_bunches(plains,"plains")
-#	generate_grass_bunches(snow,"snow")
-#	generate_ores(snow,"snow")
-#	generate_ores(desert,"desert")
-#	generate_ores(dirt,"dirt")
-#	generate_flowers(forest,"forest")
-#	generate_flowers(plains,"plains")
-#	generate_weeds(forest,"forest")
-#	generate_weeds(plains,"plains")
-#	generate_beach_forage(beach)
-#	generate_animals()
-#	await get_tree().create_timer(1.0).timeout
+	generate_trees(snow,"snow")
+	generate_trees(forest,"forest")
+	generate_trees(desert,"desert")
+	generate_grass_bunches(plains,"plains")
+	generate_grass_bunches(snow,"snow")
+	generate_ores(snow,"snow")
+	generate_ores(desert,"desert")
+	generate_ores(dirt,"dirt")
+	generate_flowers(forest,"forest")
+	generate_flowers(plains,"plains")
+	generate_weeds(forest,"forest")
+	generate_weeds(plains,"plains")
+	generate_beach_forage(beach)
+	generate_animals()
+	await get_tree().create_timer(1.0).timeout
 	#await get_tree().create_timer(1.0).timeout
-	#get_node("/root/World3D/Loading").call_deferred("set_phase","Saving data")
+	get_node("/root/Overworld/Loading").call_deferred("set_phase","Saving data")
 	#await get_tree().create_timer(1.0).timeout
 	## make faster
 	fix_tiles()
@@ -146,16 +156,6 @@ func build_world():
 
 func build_map():
 	Server.world.create_or_load_world()
-
-func build():
-	rng.randomize()
-	randomize()
-	#await get_tree().create_timer(1.0).timeout
-	build_temperature(5,300)
-	#await get_tree().create_timer(1.0).timeout
-	build_moisture(5,300)
-	#await get_tree().create_timer(2.0).timeout
-	build_altittude(5,150)
 	
 
 func set_cave_entrance():
@@ -208,27 +208,27 @@ func build_terrian():
 
 func _fix_tiles(value):
 	print("start fixing")
-#	var border_tiles = []
-#	for loc in value:
-#		if Util.is_border_tile(loc, value):
-#			border_tiles.append(loc)
-#	for loc in border_tiles:
-#		if not value.has(loc+Vector2(1,0)):
-#			value.append(loc+Vector2(1,0))
-#		if not value.has(loc+Vector2(-1,0)):
-#			value.append(loc+Vector2(-1,0))
-#		if not value.has(loc+Vector2(0,1)):
-#			value.append(loc+Vector2(0,1))
-#		if not value.has(loc+Vector2(0,-1)):
-#			value.append(loc+Vector2(0,-1))
-#		if not value.has(loc+Vector2(1,1)):
-#			value.append(loc+Vector2(1,1))
-#		if not value.has(loc+Vector2(-1,1)):
-#			value.append(loc+Vector2(-1,1))
-#		if not value.has(loc+Vector2(1,-1)):
-#			value.append(loc+Vector2(1,-1))
-#		if not value.has(loc+Vector2(-1,-1)):
-#			value.append(loc+Vector2(-1,-1))
+	var border_tiles = []
+	for loc in value:
+		if Util.is_border_tile(loc, value):
+			border_tiles.append(loc)
+	for loc in border_tiles:
+		if not value.has(loc+Vector2(1,0)):
+			value.append(loc+Vector2(1,0))
+		if not value.has(loc+Vector2(-1,0)):
+			value.append(loc+Vector2(-1,0))
+		if not value.has(loc+Vector2(0,1)):
+			value.append(loc+Vector2(0,1))
+		if not value.has(loc+Vector2(0,-1)):
+			value.append(loc+Vector2(0,-1))
+		if not value.has(loc+Vector2(1,1)):
+			value.append(loc+Vector2(1,1))
+		if not value.has(loc+Vector2(-1,1)):
+			value.append(loc+Vector2(-1,1))
+		if not value.has(loc+Vector2(1,-1)):
+			value.append(loc+Vector2(1,-1))
+		if not value.has(loc+Vector2(-1,-1)):
+			value.append(loc+Vector2(-1,-1))
 	if thread_tile_counter == tile_arrays.size():
 		print("fixed")
 		#call_deferred("build_world")
@@ -247,7 +247,7 @@ func update_fixed_map():
 	MapData.world["dirt"] = dirt
 	MapData.world["beach"] = beach
 	print("BUILT TERRAIN FINAL")
-#	get_node("/root/World3D/Loading").call_deferred("queue_free")
+	get_node("/root/World3D/Loading").call_deferred("queue_free")
 	save_starting_world_data()
 	MapData.add_world_data_to_chunks()
 	get_node("/root/Overworld/Loading").call_deferred("queue_free")
@@ -427,29 +427,21 @@ func generate_map(data):
 	print("GENERATE MAP " + str(data))
 	var grid = {}
 	fastNoiseLite.fractal_type = FastNoiseLite.FRACTAL_FBM
-	fastNoiseLite.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	fastNoiseLite.seed = randi()
 	fastNoiseLite.fractal_octaves = data.octaves
-	fastNoiseLite.frequency = data.period
-	fastNoiseLite.fractal_gain = 1.0
-	fastNoiseLite.fractal_weighted_strength = 0.0
-	print("HERE")
+	fastNoiseLite.frequency = data.frequency
 	var custom_gradient = CustomGradientTexture.new()
 	custom_gradient.gradient = Gradient.new()
 	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
 	custom_gradient.size = Vector2(width,height)
-	print("HERE1")
 	var gradient_data = custom_gradient.get_image()
-	print("HERE2")
 	for x in width:
 		for y in height:
 			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5
 			var value = fastNoiseLite.get_noise_2d(x,y)
 			value += gradient_value
 			grid[Vector2(x,y)] = value
-	print("HERE3")
 	call_deferred(data.ending_function)
-	print("HERE4")
 	return grid
 
 func check_64x64(loc):

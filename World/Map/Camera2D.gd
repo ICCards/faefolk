@@ -2,23 +2,25 @@ extends Camera2D
 class_name PanningCamera2D
 
 const MIN_ZOOM: float = 0.1
-const MAX_ZOOM: float = 1.2
+const MAX_ZOOM: float = 0.8
 const ZOOM_RATE: float = 8.0
 const ZOOM_INCREMENT: float = 0.1
 
 var _target_zoom: float = 1.2
 
 
-func _ready():
-	focus_position(Vector2(500,500))
+#func _ready():
+#	focus_position(Vector2(500,500))
 
 
 func _physics_process(delta: float) -> void:
+	return
 	zoom = lerp(zoom, _target_zoom * Vector2.ONE, ZOOM_RATE * delta)
 	set_physics_process(not is_equal_approx(zoom.x, _target_zoom))
 
 
 func _unhandled_input(event: InputEvent) -> void:
+		return
 	#if PlayerData.viewMapMode:
 		if event is InputEventMouseButton:
 			if event.is_pressed():

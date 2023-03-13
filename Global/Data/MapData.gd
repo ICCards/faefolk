@@ -51,7 +51,7 @@ var world = {
 #"Cave 2-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
 #"Cave 2-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}}}
 
-var caves #= starting_caves_data
+var caves = {} #= starting_caves_data
 
 func _ready() -> void:
 	PlayerData.connect("season_changed",Callable(self,"reset_cave_data"))

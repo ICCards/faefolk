@@ -79,7 +79,7 @@ func build_world():
 	
 func build_world_deferred():
 #	buildMap(MapData.world)
-#	spawn_player()
+	spawn_player()
 #	$WorldBuilder.initialize()
 #	$WorldBuilder/BuildTerrain.initialize()
 #	$WorldBuilder/BuildNature.initialize()

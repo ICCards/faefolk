@@ -8,7 +8,7 @@ var current_chunks = []
 func initialize():
 	$WorldBuilderTimer.start()
 
-func _on_WorldBuilderTimer_timeout():
+func _on_world_build_timer_timeout():
 	if not thread.is_alive() and not Server.world.is_changing_scene:
 		thread.start(Callable(self,"_whoAmI"))
 
