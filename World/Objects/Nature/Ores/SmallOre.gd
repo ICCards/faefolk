@@ -21,7 +21,7 @@ func remove_from_world():
 	call_deferred("queue_free")
 
 func setTexture():
-	$TileMap.set_cell(0,Vector2i(0,-1),0,Constants.small_ore_atlas_cords[variety][rng.randi_range(1,6)])
+	$SmallOre.set_cell(0,Vector2i(0,-1),0,Constants.small_ore_atlas_cords[variety][rng.randi_range(1,6)])
 
 
 func hit(tool_name):

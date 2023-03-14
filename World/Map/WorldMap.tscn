@@ -46,10 +46,12 @@ format = 2
 layer_0/tile_data = PackedInt32Array(65471463, 4, 0, 65471464, 4, 0, 65471465, 4, 0, 65536999, 4, 0, 65537000, 4, 0, 65537001, 4, 0, 65602535, 4, 0, 65602536, 4, 0, 65602537, 4, 0)
 
 [node name="StormIcon" type="Sprite2D" parent="Map"]
+visible = false
 scale = Vector2(30, 30)
 texture = ExtResource("3_nnvqm")
 
 [node name="StormIcon2" type="Sprite2D" parent="Map"]
+visible = false
 scale = Vector2(30, 30)
 texture = ExtResource("3_nnvqm")
 

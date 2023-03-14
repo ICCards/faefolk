@@ -9,6 +9,7 @@ var snow = []
 var dirt = []
 var ocean = []
 var desert = []
+var wetSand = []
 var tile_arrays = [plains, forest, snow, dirt, beach]
 
 var decoration_locations = []
@@ -229,6 +230,7 @@ func _fix_tiles(value):
 			value.append(loc+Vector2(1,-1))
 		if not value.has(loc+Vector2(-1,-1)):
 			value.append(loc+Vector2(-1,-1))
+	fix_ocean_tiles()
 	if thread_tile_counter == tile_arrays.size():
 		print("fixed")
 		#call_deferred("build_world")
@@ -237,8 +239,60 @@ func _fix_tiles(value):
 		thread_tile_counter += 1
 		print("fixing: "+str(thread_tile_counter))
 	
+func fix_ocean_tiles():
+	var border_tiles = []
+#	for loc in beach:
+#		if Util.is_border_tile(loc, beach):
+#			border_tiles.append(loc)
+#	for loc in border_tiles:
+#		if not beach.has(loc+Vector2(1,0)):
+#			beach.append(loc+Vector2(1,0))
+#		if not beach.has(loc+Vector2(-1,0)):
+#			beach.append(loc+Vector2(-1,0))
+#		if not beach.has(loc+Vector2(0,1)):
+#			beach.append(loc+Vector2(0,1))
+#		if not beach.has(loc+Vector2(0,-1)):
+#			beach.append(loc+Vector2(0,-1))
+#		if not beach.has(loc+Vector2(1,1)):
+#			beach.append(loc+Vector2(1,1))
+#		if not beach.has(loc+Vector2(-1,1)):
+#			beach.append(loc+Vector2(-1,1))
+#		if not beach.has(loc+Vector2(1,-1)):
+#			beach.append(loc+Vector2(1,-1))
+#		if not beach.has(loc+Vector2(-1,-1)):
+#			beach.append(loc+Vector2(-1,-1))
+#	border_tiles = []
+	for loc in beach: # add wet sand tiles
+		if Util.is_border_tile(loc, beach):
+			border_tiles.append(loc)
+		if not beach.has(loc+Vector2(1,0)) and not wetSand.has(loc+Vector2(1,0)):
+			wetSand.append(loc+Vector2(1,0))
+		if not beach.has(loc+Vector2(-1,0)) and not wetSand.has(loc+Vector2(-1,0)):
+			wetSand.append(loc+Vector2(-1,0))
+		if not beach.has(loc+Vector2(0,1)) and not wetSand.has(loc+Vector2(0,1)):
+			wetSand.append(loc+Vector2(0,1))
+		if not beach.has(loc+Vector2(0,-1)) and not wetSand.has(loc+Vector2(0,-1)):
+			wetSand.append(loc+Vector2(0,-1))
+		if not beach.has(loc+Vector2(1,1)) and not wetSand.has(loc+Vector2(1,1)):
+			wetSand.append(loc+Vector2(1,1))
+		if not beach.has(loc+Vector2(-1,1)) and not wetSand.has(loc+Vector2(-1,1)):
+			wetSand.append(loc+Vector2(-1,1))
+		if not beach.has(loc+Vector2(1,-1)) and not wetSand.has(loc+Vector2(1,-1)):
+			wetSand.append(loc+Vector2(1,-1))
+		if not beach.has(loc+Vector2(-1,-1)) and not wetSand.has(loc+Vector2(-1,-1)):
+			wetSand.append(loc+Vector2(-1,-1))
+		await get_tree().process_frame
+	for loc in ocean:
+		if beach.has(loc):
+			ocean.erase(loc)
+		if wetSand.has(loc):
+			ocean.erase(loc)
+	
+	
+	
 func update_fixed_map():
 	print("FOUND BORDER TILES")
+	MapData.world["wet_sand"] = wetSand
 	MapData.world["plains"] = plains
 	MapData.world["forest"] = forest
 	MapData.world["desert"] = desert
@@ -247,7 +301,6 @@ func update_fixed_map():
 	MapData.world["dirt"] = dirt
 	MapData.world["beach"] = beach
 	print("BUILT TERRAIN FINAL")
-	get_node("/root/World3D/Loading").call_deferred("queue_free")
 	save_starting_world_data()
 	MapData.add_world_data_to_chunks()
 	get_node("/root/Overworld/Loading").call_deferred("queue_free")

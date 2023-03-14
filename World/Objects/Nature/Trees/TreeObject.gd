@@ -30,7 +30,7 @@ var temp_health: int = 3
 
 func _ready():
 	rng.randomize()
-	Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
+	Tiles.remove_valid_tiles(location+Vector2(-1,0), Vector2i(2,2))
 	MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
 	call_deferred("set_tree")
 
@@ -256,9 +256,9 @@ func hit(tool_name):
 
 
 func destroy(tool_name):
-	MapData.world["tree"].erase(name)
+	MapData.remove_object("tree",name)
 	destroyed = true
-	Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
+	Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 	if not tool_name == "sapling":
 		play_stump_break_animation()
 		animation_player_stump.call_deferred("play", "stump destroyed")
@@ -267,7 +267,7 @@ func destroy(tool_name):
 		sound_effects_stump.call_deferred("play")
 		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
-		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0, 12), amt)
+		InstancedScenes.intitiateItemDrop("wood",position,amt)
 	else:
 		animation_player_stump.call_deferred("play", "sapling destroyed")
 		sound_effects_stump.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3"))

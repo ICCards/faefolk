@@ -162,7 +162,7 @@ func harvest_forage(forage_node):
 			PlayerData.player_data["skill_experience"]["foraging"] += 1
 		if forage_node.item_name != "raw egg":
 			Tiles.add_valid_tiles(forage_node.location)
-			MapData.remove_forage(forage_node.name)
+			MapData.remove_object("forage",forage_node.name)
 		Sounds.play_harvest_sound()
 		get_parent().state = get_parent().HARVESTING
 		var anim = "harvest_" + get_parent().direction.to_lower()

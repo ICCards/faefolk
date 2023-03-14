@@ -669,7 +669,7 @@ var log_atlas_tile_cords = {
 var large_ore_atlas_cords = {
 	"stone1": Vector2i(8,2),
 	"stone2": Vector2i(8,4),
-	"bronze ore": Vector2i(10,4),
+	"bronze ore": Vector2i(8,6),
 	"gold ore": Vector2i(3,2),
 	"iron ore": Vector2i(3,4)
 }
@@ -715,4 +715,23 @@ var small_ore_atlas_cords = {
 		5: Vector2i(6,7),
 		6: Vector2i(7,7),
 	},
+}
+
+var weed_atlas_cords = {
+	"A1": Vector2i(14,2),
+	"A2": Vector2i(15,2),
+	"A3": Vector2i(14,3),
+	"A4": Vector2i(15,3),
+	"B1": Vector2i(14,4),
+	"B2": Vector2i(15,4),
+	"B3": Vector2i(14,5),
+	"B4": Vector2i(15,5),
+	"C1": Vector2i(14,6),
+	"C2": Vector2i(15,6),
+	"C3": Vector2i(14,7),
+	"C4": Vector2i(15,7),
+	"D1": Vector2i(14,8),
+	"D2": Vector2i(15,8),
+	"D3": Vector2i(14,9),
+	"D4": Vector2i(15,9),
 }

@@ -14,11 +14,11 @@ var variety
 var destroyed: bool = false
 
 func _ready():
+	Tiles.remove_valid_tiles(location+Vector2(-1,0), Vector2i(2,2))
 	call_deferred("setTexture", tree_object)
 
-
 func remove_from_world():
-	$StumpHurtbox.call_deferred("queue_free")
+	$TreeHurtbox.call_deferred("queue_free")
 	$MovementCollisionBox.call_deferred("queue_free")
 	call_deferred("queue_free")
 
@@ -66,14 +66,14 @@ func hit(tool_name):
 		destroyed = true
 		if MapData.world["stump"].has(name):
 			MapData.world["stump"].erase(name)
-		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
+		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
 		sound_effects.set_deferred("stream", Sounds.stump_break)
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
 		animation_player.call_deferred("play", "stump destroyed")
 		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
 		PlayerData.player_data["collections"]["resources"]["wood"] += amt
-		InstancedScenes.intitiateItemDrop("wood", position+Vector2(0,-8), amt)
+		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		stump_break.play(variety)
 		$TreeSprites/Break.play(variety)
 		await sound_effects.finished

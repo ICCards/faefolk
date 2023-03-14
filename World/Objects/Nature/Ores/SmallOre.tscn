@@ -306,8 +306,8 @@ modulate = Color(1.32, 1.32, 1.32, 1)
 script = ExtResource("1_1lid1")
 
 [node name="SmallHurtBox" type="Area2D" parent="."]
-collision_layer = 262144
-collision_mask = 16
+collision_layer = 0
+collision_mask = 262160
 
 [node name="smallHurtBox" type="CollisionShape2D" parent="SmallHurtBox"]
 shape = SubResource("1")

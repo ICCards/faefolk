@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bl2kqjyyynev2"]
+[gd_scene load_steps=19 format=3 uid="uid://bl2kqjyyynev2"]
 
 [ext_resource type="AudioStream" uid="uid://2u73yye23mpv" path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Nature/Grasses/Weed.gd" id="1_hwrrt"]
-[ext_resource type="Texture2D" uid="uid://bpc0udehdpu1m" path="res://Assets/Images/Weeds/B1.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cfyjvcgog5qsd" path="res://Assets/Images/Animations/leaf break/leaf break.png" id="3_lhmm1"]
+[ext_resource type="Texture2D" uid="uid://5q6dlm8nrnm0" path="res://Assets/Tilesets/ore/CLM_Mining_Vegetables.png" id="4_46snn"]
 
 [sub_resource type="Animation" id="2"]
 resource_name = "animate"
@@ -10,14 +11,14 @@ length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation_degrees")
+tracks/0/path = NodePath("Weed:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 6.0, -6.0, 3.0, -3.0, 0.0]
+"values": [0.0, 0.10472, -0.0698132, 0.0349066, 3.48787e-16]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76et3"]
@@ -25,20 +26,97 @@ _data = {
 "animate": SubResource("2")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1tvx"]
+atlas = ExtResource("3_lhmm1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1qo3"]
+atlas = ExtResource("3_lhmm1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgvnk"]
+atlas = ExtResource("3_lhmm1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb5kq"]
+atlas = ExtResource("3_lhmm1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t10pf"]
+atlas = ExtResource("3_lhmm1")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmo4k"]
+atlas = ExtResource("3_lhmm1")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm565"]
+atlas = ExtResource("3_lhmm1")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nm32g"]
+atlas = ExtResource("3_lhmm1")
+region = Rect2(112, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="11"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1tvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1qo3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgvnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sb5kq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t10pf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmo4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm565")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nm32g")
+}],
+"loop": true,
+"name": &"break",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="12"]
-radius = 6.08276
+radius = 3.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pq014"]
+texture = ExtResource("4_46snn")
+14:2/0 = 0
+15:2/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5ts1w"]
+sources/0 = SubResource("TileSetAtlasSource_pq014")
 
 [node name="Weed" type="Node2D"]
 script = ExtResource("1_hwrrt")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1.3, 1.3, 1.3, 1)
-position = Vector2(0, 16)
-texture = ExtResource("2")
-offset = Vector2(0, -32)
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, -14)
@@ -50,28 +128,29 @@ libraries = {
 "": SubResource("AnimationLibrary_76et3")
 }
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0.5, -15.5)
-scale = Vector2(1.85, 1.65)
-
 [node name="LeafBreak" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -16)
-scale = Vector2(2, 2)
+position = Vector2(8, -8)
 sprite_frames = SubResource("11")
-animation = &""
+animation = &"break"
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-4, -4)
-collision_layer = 2049
-collision_mask = 0
+position = Vector2(8, -8)
+collision_layer = 0
+collision_mask = 2049
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(4, -10)
 shape = SubResource("12")
 
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[node name="Weed" type="Node2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="TileMap" type="TileMap" parent="Weed"]
+position = Vector2(-8, 0)
+tile_set = SubResource("TileSet_5ts1w")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65536, 983040, 2)
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

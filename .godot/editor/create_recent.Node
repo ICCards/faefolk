@@ -1,13 +1,13 @@
+TileMap
+Node2D
 Timer
 Node
-TileMap
 AnimationPlayer
 Sprite2D
 CollisionShape2D
 StaticBody2D
 Marker2D
 Area2D
-Node2D
 CanvasGroup
 AnimatedSprite2D
 Label

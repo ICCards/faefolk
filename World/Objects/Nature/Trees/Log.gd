@@ -22,7 +22,6 @@ func remove_from_world():
 	call_deferred("queue_free")
 
 func setTreeBranchType():
-	variety = int(variety)
 	$Log.texture = load("res://Assets/Images/tree_sets/branch_objects/"+ str(variety) +".png")
 	if variety == 1 or variety == 7 or variety == 9:
 		$Break.offset = Vector2i(-6,-5)
@@ -56,6 +55,7 @@ func hit(tool_name, special_ability = ""):
 		call_deferred("queue_free")
 
 func _on_BranchHurtBox_area_entered(_area):
+	print(_area.name)
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff":

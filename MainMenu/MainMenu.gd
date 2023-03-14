@@ -7,7 +7,7 @@ var game_state: GameState
 
 
 func _ready():
-	get_tree().get_root().set_min_size(Vector2(1280, 720))
+	#get_tree().get_root().set_min_size(Vector2(1280, 720))
 	if GameState.save_exists(): # Load world
 		game_state = GameState.new()
 		game_state.load_state()
@@ -19,7 +19,7 @@ func _ready():
 		game_state = GameState.new()
 		game_state.player_state = PlayerData.starting_player_data 
 		game_state.world_state = MapData.world
-		game_state.cave_state = MapData.starting_caves_data
+		game_state.cave_state = MapData.caves
 		game_state.save_state()
 	$TitleMusic.stream = Sounds.title_music
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)

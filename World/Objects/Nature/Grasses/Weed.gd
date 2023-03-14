@@ -10,15 +10,15 @@ var destroyed = false
 var varieties = ["A", "B", "C", "D"]
 
 func _ready():
-	visible = false
 	rng.randomize()
+	Tiles.add_navigation_tiles(location)
 	varieties.shuffle()
 	variety = varieties.front()
-	random_num = rng.randi_range(1, 4)
-	$Sprite2D.set_deferred("texture", load("res://Assets/Images/Weeds/" + variety + str(random_num) + ".png"))
+	random_num = rng.randi_range(1,4)
+	$Weed/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.weed_atlas_cords[variety+str(random_num)])
 	call_deferred("set_leaf_break_modulate")
-	
-	
+
+
 func remove_from_world():
 	$Area2D.call_deferred("queue_free")
 	call_deferred("queue_free")
@@ -27,13 +27,14 @@ func remove_from_world():
 func set_leaf_break_modulate():
 	match variety:
 		"A":
-			$LeafBreak.set_deferred("modulate", Color("28ad49"))
-		"B":
-			$LeafBreak.set_deferred("modulate", Color("fcbe72"))
-		"C":
 			$LeafBreak.set_deferred("modulate", Color("85ad28"))
-		"D":
+		"B":
+			$LeafBreak.set_deferred("modulate", Color("28ad49"))
+		"C":
 			$LeafBreak.set_deferred("modulate", Color("4e876e"))
+		"D":
+			$LeafBreak.set_deferred("modulate", Color("fcbe72"))
+
 
 
 func play_sound_effect():
@@ -56,16 +57,11 @@ func _on_Area2D_area_entered(area):
 		Tiles.add_valid_tiles(location)
 		if MapData.world["tall_grass"].has(name):
 			MapData.world["tall_grass"].erase(name)
-		$Sprite2D.call_deferred("hide")
+		$Weed/TileMap.call_deferred("hide")
 		$LeafBreak.call_deferred("show")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
-		$LeafBreak.set_deferred("playing", true)
+		$LeafBreak.set_deferred("play", true)
 		await $LeafBreak.animation_finished
 		call_deferred("queue_free")
 
-
-func _on_VisibilityNotifier2D_screen_entered():
-	call_deferred("show")
-func _on_VisibilityNotifier2D_screen_exited():
-	call_deferred("hide")

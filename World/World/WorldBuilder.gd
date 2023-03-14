@@ -9,7 +9,7 @@ func initialize():
 	$WorldBuilderTimer.start()
 
 func _on_world_build_timer_timeout():
-	if not thread.is_alive() and not Server.world.is_changing_scene:
+	if not thread.is_started() and not Server.world.is_changing_scene:
 		thread.start(Callable(self,"_whoAmI"))
 
 func _whoAmI():
@@ -17,7 +17,7 @@ func _whoAmI():
 
 func get_chunks():
 	if Server.player_node:
-		var loc = Server.player_node.position / 32
+		var loc = Server.player_node.position / 16
 		var columns
 		var rows
 		var new_chunks = []

@@ -79,8 +79,8 @@ func initialize_furnaces_campfires_and_stoves():
 
 func save_player_data(exit_to_main_menu):
 	$LoadingIndicator.show()
-	PlayerData.player_data["current_save_location"] = str(Server.player_node.position/32)
-	PlayerData.player_data["current_save_scene"] = get_tree().current_scene.filename
+	PlayerData.player_data["current_save_location"] = str(Server.player_node.position/16)
+	#PlayerData.player_data["current_save_scene"] = get_tree().current_scene.filename
 	game_state = GameState.new()
 	game_state.world_state = MapData.world
 	game_state.cave_state = MapData.caves

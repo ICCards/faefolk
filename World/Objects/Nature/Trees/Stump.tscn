@@ -1751,7 +1751,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_hi0dn")
 }],
 "loop": true,
-"name": &"evergeen",
+"name": &"evergreen",
 "speed": 20.0
 }, {
 "frames": [{
@@ -2463,9 +2463,7 @@ offset = Vector2(0, -30)
 [node name="Break" type="AnimatedSprite2D" parent="TreeSprites"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_sjf2u")
-animation = &"spruce"
-frame = 38
-frame_progress = 1.0
+animation = &"evergreen"
 offset = Vector2(-7, 7)
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

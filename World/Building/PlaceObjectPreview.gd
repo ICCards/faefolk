@@ -353,14 +353,14 @@ func place_object(item_name, direction, location, type, variety = null):
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_object("placeable",id,{"n":item_name,"v":"twig","l":str(location),"h":Stats.MAX_TWIG_BUILDING})
+					MapData.add_object("placeable",id,{"n":item_name,"v":"twig","l":location,"h":Stats.MAX_TWIG_BUILDING,"d":null})
 					PlayerData.remove_material("wood", 5)
 					PlaceObject.place_building_object_in_world(id,item_name,null,"twig",location,Stats.MAX_TWIG_BUILDING)
 				elif PlayerData.returnSufficentCraftingMaterial("wood", 2) and item_name == "foundation":
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":str(location),"h":Stats.MAX_TWIG_BUILDING})
+					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":location,"h":Stats.MAX_TWIG_BUILDING,"d":null})
 					PlayerData.remove_material("wood", 2)
 					PlaceObject.place_building_object_in_world(id,item_name,null,"twig",location,Stats.MAX_TWIG_BUILDING)
 				else:
@@ -371,7 +371,7 @@ func place_object(item_name, direction, location, type, variety = null):
 				$SoundEffects.stream = Sounds.place_object
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
-				MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":str(location),"v":variety})
+				MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety})
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 					Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_object_atlas_tiles[item_name][direction])
 					PlaceObject.place_building_object_in_world(id,item_name,direction,null,location,Stats.return_starting_door_health(item_name))
@@ -388,13 +388,13 @@ func place_object(item_name, direction, location, type, variety = null):
 			else:
 				item_name = item_name.left(-6)
 				var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
-				MapData.add_object("crop",id,{"n":item_name,"l":str(location),"dh":days_to_grow,"dww":0,"rp":false})
+				MapData.add_object("crop",id,{"n":item_name,"l":location,"dh":days_to_grow,"dww":0,"rp":false})
 				PlaceObject.place_seed_in_world(id, item_name, location, days_to_grow, 0, false)
 		elif type == "forage":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			MapData.add_object("forage",id,{"n":item_name,"l":str(location),"f":false})
+			MapData.add_object("forage",id,{"n":item_name,"l":location,"f":false})
 			MapData.add_object_to_chunk("forage",location,id)
 			PlaceObject.place_forage_in_world(id,item_name,location,false)
 	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):

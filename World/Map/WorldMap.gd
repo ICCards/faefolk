@@ -41,19 +41,10 @@ func _input(event):
 			call_deferred("set_inactive")
 			Server.player_node.call_deferred("set_held_object")
 
-
-#func toggle_map():
-#	PlayerData.viewMapMode = !PlayerData.viewMapMode
-#	$WorldMap.visible = !$WorldMap.visible
-#	if $WorldMap.visible:
-#		$WorldMap.initialize()
-#	else:
-#		$WorldMap.set_inactive()
-
-
 func initialize():
 	PlayerData.viewMapMode = true
-	$Camera2D.set_deferred("current", true)
+	Server.player_node.get_node("Camera2D").set_deferred("enabled", false)
+	$Camera2D.set_deferred("enabled", true)
 	Server.player_node.user_interface.get_node("Hotbar").call_deferred("hide") 
 	Server.player_node.user_interface.get_node("CombatHotbar").call_deferred("hide")
 	if not is_first_time_opened:
@@ -63,8 +54,8 @@ func initialize():
 	
 func set_inactive():
 	PlayerData.viewMapMode = false
-	$Camera2D.set_deferred("current", false)
-	Server.player_node.get_node("Camera2D").set_deferred("current", true)
+	$Camera2D.set_deferred("enabled", false)
+	Server.player_node.get_node("Camera2D").set_deferred("enabled", true)
 	if PlayerData.normal_hotbar_mode:
 		Server.player_node.user_interface.get_node("Hotbar").call_deferred("show") 
 	else:
@@ -90,15 +81,14 @@ func draw_grid_labels():
 			add_child(gridSquareLabel)
 	
 func _physics_process(delta):
-	return
 	if is_instance_valid(Server.player_node):
-		playerIcon.position = Server.player_node.position
+		playerIcon.position = Server.player_node.position*2
 		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 		set_direction(Server.player_node.direction)
-		roamingStorm = get_node("/root/Overworld/RoamingStorm")
-		roamingStorm2 = get_node("/root/Overworld/RoamingStorm2")
-		stormIcon.position = roamingStorm.position
-		stormIcon2.position = roamingStorm2.position
+#		roamingStorm = get_node("/root/Overworld/RoamingStorm")
+#		roamingStorm2 = get_node("/root/Overworld/RoamingStorm2")
+#		stormIcon.position = roamingStorm.position
+#		stormIcon2.position = roamingStorm2.position
 
 
 func adjustedGridCoordinatesScale(zoom):

@@ -2,6 +2,7 @@ extends Node
 
 @onready var Log = load("res://World/Objects/Nature/Trees/Log.tscn")
 @onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
+@onready var Weed = load("res://World/Objects/Nature/Grasses/Weed.tscn")
 @onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
 @onready var TreeObject = load("res://World/Objects/Nature/Trees/TreeObject.tscn")
 @onready var StumpObject = load("res://World/Objects/Nature/Trees/Stump.tscn")
@@ -10,9 +11,6 @@ extends Node
 @onready var BuildingTileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn")
 @onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
 @onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
-@onready var DoorFront #= load("res://World/Objects/Tiles/DoorFront.tscn")
-@onready var DoorSide #= load("res://World/Objects/Tiles/DoubleDoorSide.tscn")
-@onready var GateFront #= load("res://World/Objects/Tiles/GateFront.tscn")
 
 var rng = RandomNumberGenerator.new()
 
@@ -31,12 +29,22 @@ func place_tall_grass_in_world(id,biome,location):
 	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,8)
 	GrassObjects.call_deferred("add_child",object,true)
 
+func place_weed_in_world(id,variety,location):
+	GrassObjects = Server.world.get_node("GrassObjects")
+	var object = Weed.instantiate()
+	object.name = id
+	object.variety = variety
+	object.location = location
+	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,8)
+	GrassObjects.call_deferred("add_child",object,true)
+
 func place_log_in_world(id,variety,location):
 	NatureObjects = Server.world.get_node("NatureObjects")
 	var object = Log.instantiate()
 	object.name = id
+	object.variety = variety
 	object.location = location
-	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(8,-8)
+	object.position = Tiles.valid_tiles.map_to_local(location) #+ Vector2(8,-8)
 	NatureObjects.call_deferred("add_child",object,true)
 
 func place_forage_in_world(id,item_name,location,first_placement):
@@ -58,7 +66,7 @@ func place_tree_in_world(id, variety, location, biome ,health, phase):
 	object.health = health
 	object.variety = variety
 	object.location = location
-	object.position = pos + Vector2(-6,-4)
+	object.position = pos + Vector2(-8,-8)
 	object.name = id
 	NatureObjects.call_deferred("add_child",object,true)
 	
@@ -69,7 +77,7 @@ func place_stump_in_world(id,variety,location,health):
 	object.health = health
 	object.variety = variety
 	object.location = location
-	object.position = pos + Vector2(-6,-4)
+	object.position = pos + Vector2(-8,-8)
 	object.name = id
 	NatureObjects.call_deferred("add_child",object,true)
 
@@ -108,7 +116,7 @@ func place_large_ore_in_world(id,variety,location,health):
 	NatureObjects.call_deferred("add_child",object,true)
 	
 
-func place_building_object_in_world(id, item_name,direction, variety , location, health):
+func place_building_object_in_world(id,item_name,direction,variety,location,health):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	var object = BuildingTileObjectHurtBox.instantiate()
 	object.name = id
