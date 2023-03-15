@@ -139,8 +139,8 @@ func set_active_buttons():
 func destroy():
 	Server.player_node.get_node("Camera2D").set_process_input(true) 
 	hide()
-	if is_instance_valid(tile_node):
-		tile_node.remove_icon()
+#	if is_instance_valid(tile_node):
+#		tile_node.remove_icon()
 	if current_index != -1:
 		change_tile()
 		current_index = -1

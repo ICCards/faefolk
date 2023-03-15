@@ -4390,6 +4390,7 @@ shape = SubResource("122")
 disabled = true
 
 [node name="Swing" parent="." instance=ExtResource("12_s0e2n")]
+visible = false
 
 [node name="AxePickaxeSwing" parent="Swing" index="0"]
 collision_mask = 8

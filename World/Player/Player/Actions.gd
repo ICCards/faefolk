@@ -32,10 +32,6 @@ func _ready():
 	PlayerData.connect("health_depleted",Callable(self,"player_death"))
 
 
-func _physics_process(delta):
-	$DetectInteractiveArea/CollisionShape2D.shape.radius = 2
-
-
 func _input(event):
 	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
 		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:

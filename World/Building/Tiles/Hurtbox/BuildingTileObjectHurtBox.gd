@@ -15,7 +15,6 @@ var max_health
 var item_name
 var location
 var direction
-var wall_tiles
 var door_opened: bool 
 var destroyed: bool = false
 
@@ -45,10 +44,10 @@ func set_door_state():
 	movement_collision.set_deferred("disabled", false)
 	$Marker2D.scale = Constants.dimensions_dict[item_name]
 	if direction == "left" or direction == "right":
-		$Marker2D.rotation = 90
+		$Marker2D.rotation_degrees = 90
 		$Marker2D.position.y = (Constants.dimensions_dict[item_name].x - 1) * -8
 	else:
-		$HealthBar.position.x = 12
+		$HealthBar.position.x = -1
 		$Marker2D.position.x = (Constants.dimensions_dict[item_name].x - 1) * 8
 	if direction == "down" or direction == "up":
 		Tiles.remove_valid_tiles(location, Vector2(2,1))
@@ -63,17 +62,10 @@ func add_door_interactive_area_node(type):
 	$Marker2D.call_deferred("add_child", doorInteractiveAreaNode)
 
 
-func remove_icon():
-	$SelectedBorder.hide()
-	#Tiles.selected_wall_tiles.set_cellv(location,-1)
-	#Tiles.selected_foundation_tiles.set_cellv(location,-1)
-	
 
 func tile_upgraded():
 	if tier != "demolish":
 		match tier:
-			"twig":
-				health = Stats.MAX_TWIG_BUILDING
 			"wood":
 				health = Stats.MAX_WOOD_BUILDING
 			"stone":
@@ -178,6 +170,8 @@ func _on_HurtBox_area_entered(area):
 		if health > 0:
 			if item_name == "wall":
 				$WallHit.initialize()
+			elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+				$DoorHit.initialize()
 			play_hit_sound_effect()
 			show_health()
 			update_health_bar()
@@ -186,6 +180,24 @@ func _on_HurtBox_area_entered(area):
 				remove_foundation()
 			elif item_name == "wall":
 				remove_wall()
+			else:
+				remove_door()
+				
+func remove_door():
+	if not destroyed:
+		destroyed = true
+		Tiles.object_tiles.erase_cell(0,location)
+		if direction == "down" or direction == "up":
+			Tiles.add_valid_tiles(location, Vector2(2,1))
+		else:
+			Tiles.add_valid_tiles(location, Vector2(1,2))
+		hurt_box.set_deferred("disabled", true)
+		movement_collision.set_deferred("disabled", true)
+		hammer_repair_box.set_deferred("disabled", true)
+		MapData.remove_object("placeable",name)
+		play_break_sound_effect()
+		await get_tree().create_timer(1.5).timeout
+		queue_free()
 
 #func play_wall_hit_effect():
 #	pass
@@ -205,47 +217,22 @@ func show_health():
 	$HealthBar/AnimationPlayer.play("show health bar")
 
 func _on_HurtBox_input_event(viewport, event, shape_idx):
+	print("INPUT EVENT")
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		print("RIGHT CLICK")
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and not PlayerData.viewInventoryMode:
 			var tool_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			if tool_name == "hammer":
-				#$SelectedBorder.show()
-				show_selected_tile()
 				Server.player_node.user_interface.get_node("RadialUpgradeMenu").initialize(location, self)
 
 func show_selected_tile():
 	pass
-#	match item_name:
-#		"wall":
-#			var autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
-#			match tier:
-#				"twig":
-#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.TWIG, false, false, false, autotile_cord)
-#				"wood":
-#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.WOOD, false, false, false, autotile_cord)
-#				"stone":
-#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.STONE, false, false, false, autotile_cord)
-#				"metal":
-#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.METAL, false, false, false, autotile_cord)
-#				"armored":
-#					Tiles.selected_wall_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
-#		"foundation":
-#			var autotile_cord = Tiles.foundation_tiles.get_cell_autotile_coord(location.x, location.y)
-#			match tier:
-#				"twig":
-#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.TWIG, false, false, false, autotile_cord)
-#				"wood":
-#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.WOOD, false, false, false, autotile_cord)
-#				"stone":
-#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.STONE, false, false, false, autotile_cord)
-#				"metal":
-#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.METAL, false, false, false, autotile_cord)
-#				"armored":
-#					Tiles.selected_foundation_tiles.set_cell(location.x, location.y, Tiers.ARMORED, false, false, false, autotile_cord)
 
 func _on_HammerRepairBox_area_entered(area):
+	health = max_health
+	$HealthBar/Progress.value = health
+	$HealthBar/Progress.max_value = max_health
 	play_hammer_hit_sound()
-	set_type()
 	InstancedScenes.play_upgrade_building_effect(location)
 	show_health()
 
@@ -255,32 +242,59 @@ func play_hammer_hit_sound():
 	sound_effects.play()
 
 func play_hit_sound_effect():
-	match tier:
-		"twig":
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/twig/twig hit.mp3")
-		"wood":
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3")
-		"stone":
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/stone/stone hit.mp3")
-		"metal":
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
-		"armored":
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	if item_name == "wall" or item_name == "foundation":
+		match tier:
+			"twig":
+				sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/twig/twig hit.mp3")
+				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			"wood":
+				sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3")
+				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			"stone":
+				sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/stone/stone hit.mp3")
+				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			"metal":
+				sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",-8)
+			"armored":
+				sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",-8)
+	elif item_name == "wood door":
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	elif item_name == "metal door":
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",-8)
+	elif item_name == "armored door":
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",-8)
 	sound_effects.play()
 
 func play_break_sound_effect():
-	match tier:
-		"twig":
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
-		"wood":
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
-		"stone":
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/stone/stone break.mp3")
-		"metal":
-			sound_effects.stream = null
-		"armored":
-			sound_effects.stream = null
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	if item_name == "wall" or item_name == "foundation":
+		match tier:
+			"twig":
+				sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			"wood":
+				sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			"stone":
+				sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/stone/stone break.mp3")
+				sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			"metal":
+				sound_effects.stream = null
+			"armored":
+				sound_effects.stream = null
+	elif item_name == "wood door":
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	elif item_name == "metal door":
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",-8)
+	elif item_name == "armored door":
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3")
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",-8)
 	sound_effects.play()
+
 

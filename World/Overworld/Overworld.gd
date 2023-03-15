@@ -47,8 +47,8 @@ func build_world_deferred():
 	spawn_player()
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
-	#$WorldBuilder/BuildNature.initialize()
-#	$WorldBuilder/SpawnAnimal.initialize()
+	$WorldBuilder/BuildNature.initialize()
+	$WorldBuilder/SpawnAnimal.initialize()
 	$WorldMap.buildMap()
 	thread.wait_to_finish()
 

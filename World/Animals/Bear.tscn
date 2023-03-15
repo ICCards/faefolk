@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cpos5lnpx7t40"]
+[gd_scene load_steps=22 format=3 uid="uid://cpos5lnpx7t40"]
 
 [ext_resource type="Script" path="res://World/Animals/Bear.gd" id="2_j0bup"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]
@@ -11,24 +11,17 @@ particles_anim_h_frames = 9
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Shader" id="18"]
-
-[sub_resource type="ShaderMaterial" id="19"]
-render_priority = 0
-shader = SubResource("18")
-
 [sub_resource type="CircleShape2D" id="22"]
-radius = 15.5
+radius = 8.0
 
 [sub_resource type="CapsuleShape2D" id="2"]
-radius = 14.0
-height = 28.0
+height = 32.0
 
 [sub_resource type="CircleShape2D" id="24"]
-radius = 30.0
+radius = 9.05539
 
 [sub_resource type="CircleShape2D" id="14"]
-radius = 36.0
+radius = 18.0
 
 [sub_resource type="Animation" id="20"]
 length = 0.001
@@ -69,7 +62,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="21"]
-radius = 248.032
+radius = 124.0
 
 [sub_resource type="Animation" id="3"]
 length = 0.001
@@ -605,34 +598,29 @@ explosiveness = 0.5
 texture = ExtResource("17")
 gravity = Vector2(0, 0)
 
-[node name="Body" type="Sprite2D" parent="."]
-material = SubResource("19")
+[node name="Body" type="CanvasGroup" parent="."]
 use_parent_material = true
 
 [node name="Bear" type="Sprite2D" parent="Body"]
 use_parent_material = true
-position = Vector2(0, -40)
-scale = Vector2(2, 2)
+position = Vector2(2.08165e-12, -20)
 texture = ExtResource("7")
 hframes = 4
 
 [node name="Fangs" type="Sprite2D" parent="Body"]
-visible = false
 use_parent_material = true
-position = Vector2(0, -40)
-scale = Vector2(2, 2)
+position = Vector2(2.08165e-12, -20)
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
 rotation = 1.5708
 shape = SubResource("22")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, -40)
+position = Vector2(0, -18)
 
 [node name="BearClaw" type="Area2D" parent="Marker2D"]
-position = Vector2(40, 0)
+position = Vector2(20, 0)
 collision_layer = 0
 collision_mask = 128
 
@@ -641,7 +629,7 @@ shape = SubResource("2")
 disabled = true
 
 [node name="BearBite" type="Area2D" parent="Marker2D"]
-position = Vector2(40, 0)
+position = Vector2(20, 0)
 collision_layer = 0
 collision_mask = 128
 
@@ -651,12 +639,11 @@ shape = SubResource("24")
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
-position = Vector2(0, -40)
-collision_layer = 262400
-collision_mask = 0
+position = Vector2(0, -18)
+collision_layer = 0
+collision_mask = 262400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 15)
 shape = SubResource("14")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
@@ -665,7 +652,6 @@ libraries = {
 }
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -696,7 +682,7 @@ animation = &"play"
 frame = 6
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2(0, -25)
+position = Vector2(0, -18)
 collision_mask = 32
 
 [node name="Timers" type="Node" parent="."]

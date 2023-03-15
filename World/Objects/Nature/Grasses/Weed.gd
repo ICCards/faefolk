@@ -38,7 +38,7 @@ func set_leaf_break_modulate():
 
 
 func play_sound_effect():
-	if !bodyEnteredFlag and Server.isLoaded and visible:
+	if !bodyEnteredFlag:
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
 		$AnimationPlayer.call_deferred("play", "animate")
@@ -55,13 +55,12 @@ func _on_Area2D_area_entered(area):
 	if not destroyed:
 		destroyed = true
 		Tiles.add_valid_tiles(location)
-		if MapData.world["tall_grass"].has(name):
-			MapData.world["tall_grass"].erase(name)
+		MapData.remove_object("tall_grass",name) 
 		$Weed/TileMap.call_deferred("hide")
 		$LeafBreak.call_deferred("show")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
-		$LeafBreak.set_deferred("play", true)
+		$LeafBreak.call_deferred("play", "break")
 		await $LeafBreak.animation_finished
 		call_deferred("queue_free")
 

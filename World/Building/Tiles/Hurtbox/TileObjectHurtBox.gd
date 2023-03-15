@@ -226,6 +226,7 @@ func _on_HurtBox_area_entered(area):
 #		$FurnaceSmoke.call_deferred("hide")
 		if $Marker2D.has_node(str(name)):
 			$Marker2D.get_node(name+ "/CollisionShape2D").set_deferred("disabled", true)
+		$ObjectTiles.call_deferred("hide")
 		hurt_box.set_deferred("disabled", true)
 		movement_collision.set_deferred("disabled", true)
 		if item_name == "wood chest" or item_name == "stone chest" or item_name == "tool cabinet":
@@ -317,4 +318,5 @@ func _on_btn_pressed():
 	
 
 func _on_btn_mouse_exited():
-	Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))
+	pass
+	#Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))

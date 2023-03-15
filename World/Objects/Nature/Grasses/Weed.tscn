@@ -85,7 +85,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nm32g")
 }],
-"loop": true,
+"loop": false,
 "name": &"break",
 "speed": 5.0
 }]
@@ -116,6 +116,7 @@ texture = ExtResource("4_46snn")
 sources/0 = SubResource("TileSetAtlasSource_pq014")
 
 [node name="Weed" type="Node2D"]
+modulate = Color(1.2, 1.2, 1.2, 1)
 script = ExtResource("1_hwrrt")
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

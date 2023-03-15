@@ -1,4 +1,4 @@
-res://World/Objects/Nature/Ores/LargeOre.tscn
+res://World/Overworld/Overworld.tscn
 res://Assets/Tilesets/objects/objects.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/terrain/elevated terrain.tres
@@ -13,28 +13,13 @@ res://Assets/Tilesets/terrain/tres files/snow.tres
 res://Assets/Tilesets/terrain/tres files/wet sand.tres
 res://Assets/Themes/text.tres
 res://Assets/Themes/MenuTitle.tres
-res://Assets/Images/tree_sets/plum/mature/animated.tres
-res://World/Objects/Nature/Ores/LargeOre.gd
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
-res://World/Overworld/Overworld.tscn
+res://Assets/Themes/LockedAsset.tres
+res://Assets/Themes/Flash.tres
 res://MainMenu/MainMenu.tscn
-res://World/Objects/Nature/Trees/TreeObject.tscn
-res://World/Objects/Nature/Ores/SmallOre.tscn
-res://World/Objects/Nature/Grasses/Weed.tscn
-res://World/Objects/Nature/Trees/TreeObject.gd
-res://World/Objects/Nature/Trees/Stump.tscn
-res://Global/Data/Constants.gd
-res://World/Objects/Nature/Trees/Log.tscn
-res://World/Objects/Nature/Trees/Log.gd
-res://World/Objects/Nature/Grasses/TallGrass.tscn
-res://World/Objects/Nature/Grasses/TallGrass.gd
-res://World/Objects/Nature/Trees/Stump.gd
-res://World/World/BuildNature.gd
-res://World/Objects/Nature/Grasses/Weed.gd
-res://World/Building/PlaceObjectPreview.tscn
 res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
-res://helpers/Tiles.gd
-res://World/World/BuildTerrain.gd
-res://World/Overworld/Overworld.gd
-res://World/Player/Player/AttachedScripts/PickupZone.gd
-res://Global/Data/GenerateNewWorld.gd
+res://World/Player/Player/Player.tscn
+res://World/Objects/Nature/Grasses/Weed.tscn
+res://World/Objects/Nature/Grasses/TallGrass.tscn
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Animals/Bear.tscn
+res://World/Animals/Bear.gd

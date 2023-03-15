@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ckal8dga4akml" path="res://Assets/Images/Misc/watering can progress indicator.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://byuw4rfvgiojf" path="res://Assets/Images/Misc/selected tile.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://6yn3jmy5jo6e" path="res://Assets/Tilesets/walls/walls/armored.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://d1sxtuaab4xbs" path="res://Assets/Tilesets/doors/hit effects/wood door/front/closed.png" id="6_01gyi"]
+[ext_resource type="Texture2D" uid="uid://g4bcb578jx8t" path="res://Assets/Tilesets/doors/hit effects/wood door/side/open.png" id="7_cqp1s"]
 [ext_resource type="Script" path="res://World/Building/Tiles/Hurtbox/DoorHit.gd" id="7_gqsl4"]
 [ext_resource type="Texture2D" uid="uid://cxaswf3pbk831" path="res://Assets/Tilesets/walls/hit effects/twig/1.png" id="8_e45s4"]
 [ext_resource type="Script" path="res://World/Building/Tiles/Hurtbox/WallHit.gd" id="9_hharh"]
@@ -159,7 +159,6 @@ script = ExtResource("1_dnmp0")
 [node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="HurtBox" type="Area2D" parent="Marker2D"]
-collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/HurtBox"]
@@ -167,11 +166,9 @@ light_mask = 0
 shape = SubResource("1")
 
 [node name="HammerRepairBox" type="Area2D" parent="Marker2D"]
-visible = false
 position = Vector2(1.90735e-06, 0)
 collision_layer = 0
 collision_mask = 16384
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/HammerRepairBox"]
 light_mask = 0
@@ -219,8 +216,8 @@ texture = ExtResource("4")
 [node name="SelectedWallVisual" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(0, 1, 1, 1)
-position = Vector2(0, -37)
-scale = Vector2(1.1, 1.1)
+position = Vector2(-0.225001, -37)
+scale = Vector2(1.07632, 1.1)
 texture = ExtResource("5")
 hframes = 14
 
@@ -229,8 +226,8 @@ position = Vector2(1.90735e-06, 0)
 
 [node name="DoorHit" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(8, -15)
-texture = ExtResource("6_01gyi")
+position = Vector2(1, -24)
+texture = ExtResource("7_cqp1s")
 hframes = 3
 vframes = 3
 frame = 1

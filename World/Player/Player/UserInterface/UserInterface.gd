@@ -79,8 +79,7 @@ func initialize_furnaces_campfires_and_stoves():
 
 func save_player_data(exit_to_main_menu):
 	$LoadingIndicator.show()
-	PlayerData.player_data["current_save_location"] = str(Server.player_node.position/16)
-	#PlayerData.player_data["current_save_scene"] = get_tree().current_scene.filename
+	PlayerData.player_data["current_save_location"] = Server.player_node.position/16
 	game_state = GameState.new()
 	game_state.world_state = MapData.world
 	game_state.cave_state = MapData.caves
@@ -88,7 +87,7 @@ func save_player_data(exit_to_main_menu):
 	game_state.save_state()
 	await get_tree().create_timer(2.0).timeout
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 	$LoadingIndicator.hide()
 	if exit_to_main_menu:

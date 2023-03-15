@@ -71,43 +71,22 @@ func spawn_chunk(chunk_name):
 	if _chunk["dirt"].size() > 0:
 		dirt.set_cells_terrain_connect(0,_chunk["dirt"],0,0)
 	await get_tree().create_timer(0.25).timeout
-	if _chunk["wet_sand"].size() > 0:
-		wet_sand.set_cells_terrain_connect(0,_chunk["wet_sand"],0,0)
-	await get_tree().create_timer(0.25).timeout
 	if _chunk["ocean"].size() > 0:
+#		wet_sand.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
+#		for tile in _chunk["ocean"]:
+#			if beach.get_cell_atlas_coords(0,tile+Vector2(1,0)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(-1,0)) != Vector2i(-1,-1) or \
+#			beach.get_cell_atlas_coords(0,tile+Vector2(0,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(0,-1)) != Vector2i(-1,-1) or \
+#			beach.get_cell_atlas_coords(0,tile+Vector2(1,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(1,-1)) != Vector2i(-1,-1) or \
+#			beach.get_cell_atlas_coords(0,tile+Vector2(-1,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(-1,-1)) != Vector2i(-1,-1):
+#				_chunk["ocean"].erase(tile)
+#		await get_tree().create_timer(0.25).timeout
 		for tile in _chunk["ocean"]:
 			shallow_ocean.set_cell(0,tile,0,Vector2i(26,58))
 			top_ocean.set_cell(0,tile,0,Vector2i(24,56))
 		wet_sand.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
 		waves.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.25).timeout
 	terrain_thread.wait_to_finish()
-#	if _chunk["plains"].size() > 0:
-#		for loc in _chunk["plains"]:
-#			plains.set_cellv(loc, 0)
-#		await get_tree().process_frame
-#	if _chunk["snow"].size() > 0:
-#		for loc in _chunk["snow"]:
-#			snow.set_cellv(loc, 0)
-#		await get_tree().process_frame
-#	if _chunk["forest"].size() > 0:
-#		for loc in _chunk["forest"]:
-#			forest.set_cellv(loc, 0)
-#		await get_tree().process_frame
-#	if _chunk["beach"].size() > 0:
-#		for loc in _chunk["beach"]:
-#			Tiles._set_cell(sand, loc.x, loc.y, 0)
-#		await get_tree().process_frame
-#	if _chunk["desert"].size() > 0:
-#		for loc in _chunk["desert"]:
-#			Tiles._set_cell(sand, loc.x, loc.y, 0)
-#		await get_tree().process_frame
-#	if _chunk["dirt"].size() > 0:
-#		for loc in _chunk["dirt"]:
-#			dirt.set_cellv(loc, 0)
-#		await get_tree().process_frame
-#	if _chunk["ocean"].size() > 0:
-#		for loc in _chunk["ocean"]:
 #			if sand.get_cellv(loc) == -1:
 #				wet_sand.set_cellv(loc, 0)
 #				waves.set_cellv(loc, 5)
@@ -148,123 +127,3 @@ func spawn_chunk(chunk_name):
 #				deep_ocean.set_cellv(loc+Vector2(0,-i),-1)
 #	await get_tree().process_frame
 #	call_deferred("update_bitmasks", chunk_name)
-
-func update_bitmasks(chunk_name):
-#	var _chunk = MapData.return_chunk(chunk_name[0],chunk_name.substr(1,-1))
-#	var row = chunk_name[0]
-#	var column = int(chunk_name.substr(1, -1))
-#	var start_x
-#	var start_y
-#	var end_x
-#	var end_y
-#	match column:
-#		1:
-#			start_x = 0
-#			end_x = 188
-#		2:
-#			start_x = 188
-#			end_x = 250
-#		3:
-#			start_x = 250
-#			end_x = 313
-#		4:
-#			start_x = 313
-#			end_x = 375
-#		5:
-#			start_x = 375
-#			end_x = 438
-#		6:
-#			start_x = 438
-#			end_x = 500
-#		7:
-#			start_x = 500
-#			end_x = 563
-#		8:
-#			start_x = 563
-#			end_x = 625
-#		9:
-#			start_x = 625
-#			end_x = 688
-#		10:
-#			start_x = 688
-#			end_x = 750
-#		11:
-#			start_x = 750
-#			end_x = 813
-#		12:
-#			start_x = 813
-#			end_x = 1000
-#	match row:
-#		"A":
-#			start_y = 0
-#			end_y = 188
-#		"B":
-#			start_y = 188
-#			end_y = 250
-#		"C":
-#			start_y = 250
-#			end_y = 313
-#		"D":
-#			start_y = 313
-#			end_y = 375
-#		"E":
-#			start_y = 375
-#			end_y = 438
-#		"F":
-#			start_y = 438
-#			end_y = 500
-#		"G":
-#			start_y = 500
-#			end_y = 563
-#		"H":
-#			start_y = 563
-#			end_y = 625
-#		"I":
-#			start_y = 625
-#			end_y = 688
-#		"J":
-#			start_y = 688
-#			end_y = 750
-#		"K":
-#			start_y = 750
-#			end_y = 813
-#		"L":
-#			start_y = 813
-#			end_y = 1000
-#	if _chunk["plains"].size() > 0:
-#		plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#		await get_tree().idle_frame
-#	if _chunk["snow"].size() > 0:
-#		snow.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#		await get_tree().idle_frame
-#	if _chunk["forest"].size() > 0:
-#		forest.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#		await get_tree().idle_frame
-#	if _chunk["dirt"].size() > 0:
-#		dirt.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#		await get_tree().idle_frame
-#	if _chunk["ocean"].size() > 0:
-#		wet_sand.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#		await get_tree().idle_frame
-#		waves.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#		await get_tree().idle_frame
-#		deep_ocean.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#		await get_tree().idle_frame
-#	plains.call_deferred("update_bitmask_region", Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	await get_tree().idle_frame
-#	await get_tree().idle_frame
-#	snow.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	await get_tree().idle_frame
-#	forest.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	await get_tree().idle_frame
-#	dirt.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	await get_tree().idle_frame
-#	wet_sand.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	await get_tree().idle_frame
-#	waves.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	await get_tree().idle_frame
-#	deep_ocean.update_bitmask_region(Vector2(start_x, start_y),Vector2(end_x, end_y))
-#	await get_tree().idle_frame
-	#print("BUILT TERRAIN " + str(chunk_name))
-	terrain_thread.wait_to_finish()
-

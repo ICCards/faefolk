@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var bear_sprite: Sprite2D = $Body
+@onready var bear_sprite: CanvasGroup = $Body
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var _idle_timer: Timer = $Timers/IdleTimer
@@ -58,7 +58,7 @@ func _ready():
 	_retreat_timer.connect("timeout",Callable(self,"_update_pathfinding_retreat"))
 	_end_chase_state_timer.connect("timeout",Callable(self,"end_chase_state"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
-	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Node2D"))
+	#navigation_agent.call_deferred("set_navigation_map", get_node("/root/Overworld/TerrainTiles/ValidTiles"))
 
 func _update_pathfinding_idle():
 	if not thread.is_alive() and visible and not destroyed:

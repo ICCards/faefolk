@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bpxgic0nhjbf0"]
+[gd_scene load_steps=40 format=3 uid="uid://bpxgic0nhjbf0"]
 
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="1_631cd"]
 [ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="1_gscqb"]
@@ -3263,6 +3263,20 @@ texture = ExtResource("1_631cd")
 [sub_resource type="TileSet" id="TileSet_po1uq"]
 sources/0 = SubResource("TileSetAtlasSource_7b1tf")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_c6h8w"]
+vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3x8b"]
+texture = ExtResource("1_631cd")
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_c6h8w")
+
+[sub_resource type="TileSet" id="TileSet_w85vx"]
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_u3x8b")
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m5i1h"]
 texture = ExtResource("1_631cd")
 49:36/0 = 0
@@ -4862,6 +4876,11 @@ script = ExtResource("1_gscqb")
 [node name="WorldBuilder" type="Node" parent="."]
 script = ExtResource("3_wljwc")
 
+[node name="SpawnAnimal" type="Node" parent="WorldBuilder"]
+script = ExtResource("5_rg3rs")
+
+[node name="SpawnAnimalTimer" type="Timer" parent="WorldBuilder/SpawnAnimal"]
+
 [node name="BuildNature" type="Node" parent="WorldBuilder"]
 script = ExtResource("4_t6ne8")
 
@@ -4872,19 +4891,17 @@ script = ExtResource("3_lsbjc")
 
 [node name="BuildTerrainTimer" type="Timer" parent="WorldBuilder/BuildTerrain"]
 
-[node name="SpawnAnimal" type="Node" parent="WorldBuilder/BuildTerrain"]
-script = ExtResource("5_rg3rs")
-
-[node name="SpawnAnimalTimer" type="Timer" parent="WorldBuilder/BuildTerrain/SpawnAnimal"]
-
 [node name="WorldBuilderTimer" type="Timer" parent="WorldBuilder"]
 
 [node name="TerrainTiles" type="Node2D" parent="."]
 z_index = -10
 
 [node name="ValidTiles" type="TileMap" parent="TerrainTiles"]
-visible = false
 tile_set = SubResource("TileSet_po1uq")
+format = 2
+
+[node name="NavigationTiles" type="TileMap" parent="TerrainTiles"]
+tile_set = SubResource("TileSet_w85vx")
 format = 2
 
 [node name="Plains" type="TileMap" parent="TerrainTiles"]
@@ -4894,6 +4911,7 @@ format = 2
 
 [node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
+z_index = -2
 tile_set = ExtResource("8_rxub7")
 format = 2
 
@@ -5001,6 +5019,9 @@ format = 2
 [node name="Players" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
+
 [node name="Projectiles" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -5024,6 +5045,7 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2wssv")
 
+[connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_build_terrain_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/WorldBuilderTimer" to="WorldBuilder" method="_on_world_build_timer_timeout"]

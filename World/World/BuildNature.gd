@@ -9,7 +9,7 @@ var forage_thread := Thread.new()
 var remove_objects_thread := Thread.new()
 var remove_grass_thread := Thread.new()
 var navigation_thread := Thread.new()
-var placable_thread := Thread.new()
+var placeable_thread := Thread.new()
 var crop_thread := Thread.new()
 var current_chunks = []
 
@@ -21,13 +21,13 @@ var current_chunks = []
 
 func initialize():
 	await get_tree().process_frame
-	placable_thread.start(Callable(self,"whoAmIPlacable").bind(null))
+	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
 	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
 	$SpawnNatureTimer.start()
 
 
-func whoAmIPlacable(value):
-	call_deferred("spawn_placables")
+func whoAmIPlaceable(value):
+	call_deferred("spawn_placeables")
 
 func whoAmICrop(value):
 	call_deferred("spawn_crops")
@@ -50,15 +50,15 @@ func spawn_forage():
 	var value = forage_thread.wait_to_finish()
 
 
-func spawn_placables():
+func spawn_placeables():
 	for id in MapData.world["placeable"]:
 		var item_name = MapData.world["placeable"][id]["n"]
 		var location = MapData.world["placeable"][id]["l"]
 		if item_name == "wall" or item_name == "foundation":
-			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placeable"][id]["v"],MapData.world["placeable"][id]["d"],location,MapData.world["placeable"][id]["h"])
+			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],MapData.world["placeable"][id]["v"],location,MapData.world["placeable"][id]["h"])
 		else:
 			PlaceObject.place_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],location)
-	placable_thread.wait_to_finish()
+	placeable_thread.wait_to_finish()
 
 func spawn_crops():
 	for id in MapData.world["crop"]:

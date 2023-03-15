@@ -79,16 +79,16 @@ func sword_swing_deferred(item_name,attack_index):
 func set_sword_swing_position(direction):
 	match direction:
 		"DOWN":
-			$SwordSwing.set_deferred("rotation", 90)
+			$SwordSwing.set_deferred("rotation_degrees", 90)
 			$SwordSwing.set_deferred("position", Vector2(0,4))
 		"UP":
-			$SwordSwing.set_deferred("rotation", 90)
+			$SwordSwing.set_deferred("rotation_degrees", 90)
 			$SwordSwing.set_deferred("position", Vector2(0,-20))
 		"RIGHT":
-			$SwordSwing.set_deferred("rotation", 0)
+			$SwordSwing.set_deferred("rotation_degrees", 0)
 			$SwordSwing.set_deferred("position", Vector2(12,-8))
 		"LEFT":
-			$SwordSwing.set_deferred("rotation", 0)
+			$SwordSwing.set_deferred("rotation_degrees", 0)
 			$SwordSwing.set_deferred("position", Vector2(-12,-8))
 
 

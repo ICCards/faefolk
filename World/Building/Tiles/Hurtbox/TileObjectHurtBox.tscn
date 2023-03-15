@@ -75,6 +75,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_pawgr")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_6fn2f")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_5pqk2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sqj60")
+disabled = true
 flat = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
