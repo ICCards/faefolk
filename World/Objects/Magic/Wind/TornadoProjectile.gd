@@ -4,7 +4,6 @@ extends CharacterBody2D
 
 var speed = 125
 var collided = false
-var destroyed = false
 var is_hostile_projectile: bool = false
 
 var _uuid = load("res://helpers/UUID.gd")
@@ -21,21 +20,16 @@ func _ready():
 	sound_effects.play()
 	$Hitbox.tool_name = "tornado spell"
 	$Hitbox.knockback_vector = velocity / 150
-	$AnimatedSprite2D.call_deferred("play", "anim")
-	call_deferred("set_particles")
+	set_particles()
+	$AnimatedSprite2D.play("start")
 	await $AnimatedSprite2D.animation_finished
-	call_deferred("fade_out_sound")
-	call_deferred("stop_trail_particles")
-	$AnimatedSprite2D.call_deferred("hide")
-	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
-
-
-func destroy():
-	if not destroyed:
-		uuid.queue_free()
-		destroyed = true
-		$AnimatedSprite2D.call_deferred("stop")
-		queue_free()
+	$AnimatedSprite2D.play("middle")
+	await $AnimatedSprite2D.animation_finished
+	$AnimatedSprite2D.play("end")
+	await $AnimatedSprite2D.animation_finished
+	call_deferred("fade_out")
+	await $AnimatedSprite2D.animation_finished
+	$AnimatedSprite2D.hide()
 
 func set_particles():
 	$TornadoParticles/Particles1.set_deferred("emitting", true)
@@ -56,10 +50,13 @@ func stop_trail_particles():
 	$TrailParticles/Particles2.set_deferred("emitting", false)
 	$TrailParticles/Particles3.set_deferred("emitting", false)
 	
-func fade_out_sound():
+func fade_out():
+	stop_trail_particles()
+	$AnimatedSprite2D.call_deferred("hide")
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	var tween = get_tree().create_tween()
-	tween.tween_property(sound_effects, "volume_db", -80, 3.0)
-	tween.tween_property($PointLight2D, "energy", 0.0, 3.0)
-
-func _on_Timer_timeout():
-	destroy()
+	tween.tween_property(sound_effects, "volume_db", -80, 2.0)
+	tween.tween_property($PointLight2D, "energy", 0.0, 2.0)
+	await get_tree().create_timer(2.0).timeout
+	uuid.call_deferred("queue_free")
+	call_deferred("queue_free")

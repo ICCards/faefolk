@@ -58,7 +58,7 @@ var starting_player_data = {
 	"hotbar": {
 		"0": ["bronze pickaxe", 1, 100],
 		"1": ["bronze axe", 1, 100],
-		"2": ["bronze sword", 1, 100],
+		"2": ["stone sword", 1, 100],
 		"3": ["blueprint", 1, null],
 		"4": ["hammer", 1, null],
 #		"2": ["brewing table #1", 999, null],
@@ -88,11 +88,12 @@ var starting_player_data = {
 #			"15": ["pear seeds", 99, null],
 #			"10": ["evergreen seeds", 99, null],
 	#		"15": ["wheat flour", 99, null],
-			"6": ["wheat", 100, null],
+			"6": ["arrow", 100, null],
 			"3": ["bronze ore", 100, null],
 	},
 	"combat_hotbar": {
-#		"1": ["bread", 20, null],
+		"1": ["wind staff", 1, null],
+		"3": ["bow", 1, null],
 	},
 	"chests": {
 		"Cave 1-1": {
@@ -201,7 +202,7 @@ var starting_player_data = {
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 0,
+			"wind": 1000,
 			"ice": 0,
 		},
 	"collections": {

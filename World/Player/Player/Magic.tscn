@@ -54,6 +54,8 @@ lifetime_randomness = 0.7
 texture = ExtResource("2_k5452")
 gravity = Vector2(0, 0)
 color_ramp = SubResource("2")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_5ddji")
 
 [node name="DustBurst" type="CPUParticles2D" parent="."]
@@ -71,6 +73,8 @@ emission_sphere_radius = 6.0
 spread = 30.0
 gravity = Vector2(0, 0)
 color_ramp = SubResource("6")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 anim_speed_curve = SubResource("7")
 
 [node name="AimDownSightLine" type="Line2D" parent="."]

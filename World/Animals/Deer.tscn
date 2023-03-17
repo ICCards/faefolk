@@ -1,8 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://b23wol7rhsey"]
+[gd_scene load_steps=39 format=3 uid="uid://b23wol7rhsey"]
 
 [ext_resource type="Texture2D" uid="uid://xhcpp2npw17y" path="res://Assets/Images/Animals/Deer/attack/right/body.png" id="1"]
 [ext_resource type="Script" path="res://World/Animals/Deer.gd" id="1_x52in"]
+[ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="2_rmwjn"]
 [ext_resource type="Texture2D" uid="uid://c7pbioiyoq5hg" path="res://Assets/Images/Enemies/knockback dust.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://cqt04hkompf5f" path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" id="3_wwr6h"]
+[ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="4_xd7y7"]
+[ext_resource type="PackedScene" uid="uid://dx8hix2epqruo" path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" id="5_k1vbk"]
+[ext_resource type="Texture2D" uid="uid://swg0f7q8o7on" path="res://Assets/Images/Magic/lightning/Shock_Med.png" id="5_vnc7n"]
+[ext_resource type="PackedScene" uid="uid://do7vd3a7rt4q5" path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" id="6_x1yt1"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="14"]
 
 [sub_resource type="CanvasItemMaterial" id="41"]
@@ -12,10 +18,10 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="CircleShape2D" id="1"]
-radius = 13.0
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="15"]
-radius = 28.0
+radius = 14.0
 
 [sub_resource type="Animation" id="17"]
 length = 0.001
@@ -56,7 +62,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="23"]
-radius = 35.0
+radius = 26.0
 
 [sub_resource type="Animation" id="22"]
 length = 0.001
@@ -123,18 +129,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DeerAttack/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0051069, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
 }
 
 [sub_resource type="Animation" id="20"]
@@ -216,7 +210,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/6/path = NodePath("Electricity:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -228,7 +222,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -240,7 +234,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -252,7 +246,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Electricity:visible")
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -305,13 +299,129 @@ _data = {
 "loop frozen": SubResource("19")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5n80"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(0, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xkab"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b60gn"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(68, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsqux"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(102, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bmyk"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(136, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkfkx"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(170, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kiji"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(204, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrjo1"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(238, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2awon"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(272, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k84p"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(306, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kky00"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(340, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itvss"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(374, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1duf"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(408, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocpog"]
+atlas = ExtResource("5_vnc7n")
+region = Rect2(442, 0, 34, 34)
+
 [sub_resource type="SpriteFrames" id="40"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5n80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xkab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b60gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsqux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bmyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkfkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kiji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrjo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2awon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k84p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kky00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itvss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1duf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocpog")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 8.0
+}]
 
 [node name="Deer" type="CharacterBody2D"]
-collision_layer = 0
 collision_mask = 67
+motion_mode = 1
 script = ExtResource("1_x52in")
+
+[node name="EnemyTornadoState" parent="." instance=ExtResource("2_rmwjn")]
+
+[node name="EnemyStunnedState" parent="." instance=ExtResource("3_wwr6h")]
+
+[node name="EnemyPoisonState" parent="." instance=ExtResource("4_xd7y7")]
+
+[node name="PoisonParticles" parent="EnemyPoisonState" index="0"]
+position = Vector2(0, -8)
+
+[node name="EnemyFrozenState" parent="." instance=ExtResource("5_k1vbk")]
+
+[node name="SetEnemyDirection" parent="." instance=ExtResource("6_x1yt1")]
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
 material = SubResource("41")
@@ -321,12 +431,13 @@ lifetime = 0.5
 explosiveness = 0.5
 texture = ExtResource("3")
 gravity = Vector2(0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="DeerSprite" type="Sprite2D" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 material = ExtResource("14")
-position = Vector2(5, -37)
-scale = Vector2(2, 2)
+position = Vector2(0, -22)
 texture = ExtResource("1")
 hframes = 4
 
@@ -334,9 +445,9 @@ hframes = 4
 shape = SubResource("1")
 
 [node name="HurtBox" type="Area2D" parent="."]
-position = Vector2(0, -14)
-collision_layer = 262400
-collision_mask = 0
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 262400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("15")
@@ -347,18 +458,19 @@ libraries = {
 }
 
 [node name="DeerAttack" type="Area2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(0, -8)
 collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeerAttack"]
-position = Vector2(35, 0)
+position = Vector2(26, -1)
 shape = SubResource("23")
 disabled = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
 avoidance_enabled = true
+max_speed = 50.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -368,16 +480,16 @@ libraries = {
 [node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(0, -15)
-scale = Vector2(2, 2)
+position = Vector2(0, -10)
 sprite_frames = SubResource("40")
-animation = &""
-frame = 8
+animation = &"new_animation"
+frame_progress = 0.814859
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2(0, -25)
+position = Vector2(0, -8)
+target_position = Vector2(50, 2.08165e-12)
 collision_mask = 32
 
 [node name="Timers" type="Node" parent="."]
@@ -400,6 +512,7 @@ wait_time = 0.35
 one_shot = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(-1.5, -19.5)
 scale = Vector2(7.55, 6.75)
 
@@ -408,3 +521,5 @@ scale = Vector2(7.55, 6.75)
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+
+[editable path="EnemyPoisonState"]

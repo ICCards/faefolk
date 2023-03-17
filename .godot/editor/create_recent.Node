@@ -1,8 +1,10 @@
+AnimatedSprite2D
+Node2D
+VisibleOnScreenNotifier2D
 NavigationRegion2D
 NavigationLink2D
 TileMap
 CanvasGroup
-Node2D
 Timer
 Node
 AnimationPlayer
@@ -11,7 +13,6 @@ CollisionShape2D
 StaticBody2D
 Marker2D
 Area2D
-AnimatedSprite2D
 Label
 ColorRect
 PointLight2D

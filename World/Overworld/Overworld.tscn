@@ -4897,10 +4897,13 @@ script = ExtResource("3_lsbjc")
 z_index = -10
 
 [node name="ValidTiles" type="TileMap" parent="TerrainTiles"]
+visible = false
 tile_set = SubResource("TileSet_po1uq")
+navigation_visibility_mode = 1
 format = 2
 
 [node name="NavigationTiles" type="TileMap" parent="TerrainTiles"]
+visible = false
 tile_set = SubResource("TileSet_w85vx")
 format = 2
 

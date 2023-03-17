@@ -30,12 +30,12 @@ var knockback := Vector2.ZERO
 var state = IDLE
 var health: int = Stats.BEAR_HEALTH
 var STARTING_HEALTH: int = Stats.BEAR_HEALTH
-var MAX_MOVE_DISTANCE: float = 400.0
+var MAX_MOVE_DISTANCE: float = 200.0
 var hit_projectiles = []
 
-const KNOCKBACK_SPEED = 40
-const ACCELERATION = 150
-const KNOCKBACK_AMOUNT = 70
+const KNOCKBACK_SPEED = 20
+const ACCELERATION = 75
+const KNOCKBACK_AMOUNT = 35
 
 var tornado_node = null
 
@@ -50,23 +50,20 @@ enum {
 
 func _ready():
 	randomize()
-	visible = false
-	animation_player.call_deferred("play", "loop")
 	_idle_timer.set_deferred("wait_time", randf_range(5.0, 10.0))
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
 	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
 	_retreat_timer.connect("timeout",Callable(self,"_update_pathfinding_retreat"))
 	_end_chase_state_timer.connect("timeout",Callable(self,"end_chase_state"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
-	#navigation_agent.call_deferred("set_navigation_map", get_node("/root/Overworld/TerrainTiles/ValidTiles"))
 
 func _update_pathfinding_idle():
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
 		state = WALK
 
 func _update_pathfinding_chase():
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(player.position))
 
 func _get_path(pos):
@@ -74,9 +71,9 @@ func _get_path(pos):
 	
 func calculate_path(pos):
 	if not destroyed:
-		await get_tree().idle_frame
-		navigation_agent.call_deferred("set_target_location",pos)
-		await get_tree().idle_frame
+		await get_tree().process_frame
+		navigation_agent.call_deferred("set_target_position",pos)
+		await get_tree().process_frame
 	thread.wait_to_finish()
 
 func _update_pathfinding_retreat():
@@ -86,7 +83,7 @@ func _update_pathfinding_retreat():
 		target.x = -200
 	if diff.y > 0:
 		target.y = -200
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(self.position+target))
 
 func _physics_process(delta):
@@ -97,7 +94,6 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
 		set_velocity(velocity)
 		move_and_slide()
-		velocity = velocity
 		return
 	set_texture()
 	if navigation_agent.is_navigation_finished() and state == WALK:
@@ -108,10 +104,10 @@ func _physics_process(delta):
 		end_chase_state()
 	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
 		start_chase_state()
-	if chasing and (position + Vector2(0,-26)).distance_to(player.position) < 75:
+	if chasing and (position + Vector2(0,-18)).distance_to(player.position) < 35:
 		state = ATTACK
 		swing()
-	var target = navigation_agent.get_next_location()
+	var target = navigation_agent.get_next_path_position()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
 	var steering = (desired_velocity - velocity) * delta * 4.0
@@ -242,7 +238,7 @@ func destroy(killed_by_player):
 	set_physics_process(false)
 	destroyed = true
 	if killed_by_player:
-		MapData.remove_animal(name)
+		MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -324,7 +320,7 @@ func play_hurt_sound_effect():
 
 func end_chase_state():
 	chasing = false
-	navigation_agent.set_deferred("max_speed", 100)
+	navigation_agent.set_deferred("max_speed", 50)
 	call_deferred("stop_sound_effects")
 	_chase_timer.call_deferred("stop") 
 	_idle_timer.call_deferred("start")
@@ -334,7 +330,7 @@ func start_chase_state():
 	chasing = true
 	state = CHASE
 	$Body/Fangs.set_deferred("visible", true) 
-	navigation_agent.set_deferred("max_speed", 240)
+	navigation_agent.set_deferred("max_speed", 120)
 	call_deferred("start_sound_effects")
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("start")
@@ -348,15 +344,15 @@ func start_retreat_state():
 	_retreat_timer.call_deferred("start")
 	chasing = false
 
-func _on_VisibilityNotifier2D_screen_entered():
-	if chasing:
-		call_deferred("start_sound_effects")
-	set_deferred("visible", true)
-
-
-func _on_VisibilityNotifier2D_screen_exited():
-	if MapData.world["animal"].has(name):
-		MapData.world["animal"][name]["l"] = position/32
-		if playing_sound_effect:
-			call_deferred("stop_sound_effects")
-		set_deferred("visible", false)
+#func _on_VisibilityNotifier2D_screen_entered():
+#	if chasing:
+#		call_deferred("start_sound_effects")
+#	set_deferred("visible", true)
+#
+#
+#func _on_VisibilityNotifier2D_screen_exited():
+#	if MapData.world["animal"].has(name):
+#		MapData.world["animal"][name]["l"] = position/32
+#		if playing_sound_effect:
+#			call_deferred("stop_sound_effects")
+#		set_deferred("visible", false)

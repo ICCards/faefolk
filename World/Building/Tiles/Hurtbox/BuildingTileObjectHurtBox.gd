@@ -199,34 +199,18 @@ func remove_door():
 		await get_tree().create_timer(1.5).timeout
 		queue_free()
 
-#func play_wall_hit_effect():
-#	pass
-#	if Server.world.has_node("WallHitEffect" + str(location)):
-#		Server.world.get_node("WallHitEffect" + str(location)).restart()
-#	else:
-#		var wallHitEffect = WallHitEffect.instantiate()
-#		wallHitEffect.name = "WallHitEffect" + str(location)
-#		wallHitEffect.tier = tier
-#		wallHitEffect.autotile_cord = Tiles.wall_tiles.get_cell_autotile_coord(location.x, location.y)
-#		wallHitEffect.location = location
-#		wallHitEffect.position = (location*32)+Vector2(20,-20)
-#		Server.world.call_deferred("add_child", wallHitEffect)
 
 func show_health():
 	$HealthBar/AnimationPlayer.stop()
 	$HealthBar/AnimationPlayer.play("show health bar")
 
 func _on_HurtBox_input_event(viewport, event, shape_idx):
-	print("INPUT EVENT")
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-		print("RIGHT CLICK")
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and not PlayerData.viewInventoryMode:
 			var tool_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			if tool_name == "hammer":
 				Server.player_node.user_interface.get_node("RadialUpgradeMenu").initialize(location, self)
 
-func show_selected_tile():
-	pass
 
 func _on_HammerRepairBox_area_entered(area):
 	health = max_health

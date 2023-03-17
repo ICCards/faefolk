@@ -1,8 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://cpos5lnpx7t40"]
+[gd_scene load_steps=35 format=3 uid="uid://cpos5lnpx7t40"]
 
 [ext_resource type="Script" path="res://World/Animals/Bear.gd" id="2_j0bup"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]
+[ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="3_7dcao"]
+[ext_resource type="PackedScene" uid="uid://cqt04hkompf5f" path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" id="4_eeqqv"]
+[ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="5_jhfrv"]
+[ext_resource type="Texture2D" uid="uid://c7hrhainvy8e5" path="res://Assets/Images/Magic/lightning/lightning effect.png" id="5_s7yqy"]
+[ext_resource type="PackedScene" uid="uid://dx8hix2epqruo" path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" id="6_oy1tb"]
 [ext_resource type="Texture2D" uid="uid://dhjglh7spssrl" path="res://Assets/Images/Animals/Bear/claw/body/down.png" id="7"]
+[ext_resource type="PackedScene" uid="uid://do7vd3a7rt4q5" path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" id="7_mfwsv"]
 [ext_resource type="Texture2D" uid="uid://c7pbioiyoq5hg" path="res://Assets/Images/Enemies/knockback dust.png" id="17"]
 
 [sub_resource type="CanvasItemMaterial" id="130"]
@@ -15,10 +21,11 @@ particles_anim_loop = false
 radius = 8.0
 
 [sub_resource type="CapsuleShape2D" id="2"]
-height = 32.0
+radius = 15.0
+height = 36.0
 
 [sub_resource type="CircleShape2D" id="24"]
-radius = 9.05539
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id="14"]
 radius = 18.0
@@ -262,18 +269,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
-}
 
 [sub_resource type="Animation" id="23"]
 resource_name = "death"
@@ -366,31 +361,31 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/7/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, true]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/8/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, true]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -402,31 +397,32 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
+tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, true]
+"values": [false]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
+tracks/11/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="8"]
 resource_name = "loop"
 length = 0.6
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -547,22 +543,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Body/Bear:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Bear:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -579,15 +563,79 @@ _data = {
 "swing": SubResource("7")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktf2y"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vql7"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37qdk"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg5ix"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(0, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rqrj"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(96, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii2qy"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(192, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tykh4"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(0, 160, 96, 80)
+
 [sub_resource type="SpriteFrames" id="129"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktf2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vql7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37qdk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg5ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rqrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii2qy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tykh4")
+}],
+"loop": true,
+"name": &"play",
+"speed": 5.0
+}]
 
 [node name="Bear" type="CharacterBody2D"]
 modulate = Color(1.22, 1.22, 1.22, 1)
 material = ExtResource("3")
-collision_layer = 0
 collision_mask = 67
+motion_mode = 1
 script = ExtResource("2_j0bup")
+
+[node name="EnemyTornadoState" parent="." instance=ExtResource("3_7dcao")]
+
+[node name="EnemyStunnedState" parent="." instance=ExtResource("4_eeqqv")]
+
+[node name="EnemyPoisonState" parent="." instance=ExtResource("5_jhfrv")]
+
+[node name="EnemyFrozenState" parent="." instance=ExtResource("6_oy1tb")]
+
+[node name="SetEnemyDirection" parent="." instance=ExtResource("7_mfwsv")]
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
 material = SubResource("130")
@@ -597,6 +645,8 @@ lifetime = 0.5
 explosiveness = 0.5
 texture = ExtResource("17")
 gravity = Vector2(0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="Body" type="CanvasGroup" parent="."]
 use_parent_material = true
@@ -608,21 +658,23 @@ texture = ExtResource("7")
 hframes = 4
 
 [node name="Fangs" type="Sprite2D" parent="Body"]
+visible = false
 use_parent_material = true
 position = Vector2(2.08165e-12, -20)
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
 rotation = 1.5708
 shape = SubResource("22")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, -18)
+position = Vector2(0, -21)
 
 [node name="BearClaw" type="Area2D" parent="Marker2D"]
 position = Vector2(20, 0)
-collision_layer = 0
-collision_mask = 128
+collision_layer = 128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/BearClaw"]
 shape = SubResource("2")
@@ -630,8 +682,8 @@ disabled = true
 
 [node name="BearBite" type="Area2D" parent="Marker2D"]
 position = Vector2(20, 0)
-collision_layer = 0
-collision_mask = 128
+collision_layer = 128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/BearBite"]
 rotation = 1.5708
@@ -639,6 +691,7 @@ shape = SubResource("24")
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -18)
 collision_layer = 0
 collision_mask = 262400
@@ -652,6 +705,7 @@ libraries = {
 }
 
 [node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -661,27 +715,29 @@ shape = SubResource("21")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
 avoidance_enabled = true
+radius = 16.0
+max_neighbors = 8
+max_speed = 50.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "loop"
 libraries = {
 "": SubResource("AnimationLibrary_3ekk4")
 }
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-4, -32.5)
-scale = Vector2(6.5, 6.15)
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -31)
-scale = Vector2(2, 2)
+position = Vector2(0, -19)
 sprite_frames = SubResource("129")
 animation = &"play"
-frame = 6
+autoplay = "play"
+frame = 5
+frame_progress = 0.149002
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, -18)
 collision_mask = 32
 
@@ -706,7 +762,7 @@ wait_time = 0.3
 one_shot = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+
+[editable path="EnemyPoisonState"]

@@ -68,23 +68,22 @@ func validate_foundation_tiles(location, dimensions):
 
 
 func isValidNavigationTile(loc) -> bool:
-	if wet_sand_tiles.get_cellv(loc) != -1 and deep_ocean_tiles.get_cellv(loc) == -1:
+	if wet_sand_tiles.get_cell_atlas_coords(0,loc) != Vector2i(-1,-1) and deep_ocean_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
 		return true
-	elif valid_tiles.get_cellv(loc) == -1:
+	elif valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
 		return false
-	elif valid_tiles.get_cellv(loc+Vector2(1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,1)) == -1:
+	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
 		return false
-	elif valid_tiles.get_cellv(loc+Vector2(1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,-1)) == -1:
+	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
 		return false
-	elif valid_tiles.get_cellv(loc+Vector2(-1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,1)) == -1:
+	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
 		return false
-	elif valid_tiles.get_cellv(loc+Vector2(-1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,-1)) == -1:
+	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
 		return false
-	elif valid_tiles.get_cellv(loc+Vector2(-1,0)) == -1 and valid_tiles.get_cellv(loc+Vector2(1,0)) == -1:
+	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1):
 		return false
-	elif valid_tiles.get_cellv(loc+Vector2(0,1)) == -1 and valid_tiles.get_cellv(loc+Vector2(0,-1)) == -1:
+	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
 		return false
-	
 	return true
 
 func remove_valid_tiles(location, dimensions = Vector2i(1,1)):

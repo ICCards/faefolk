@@ -132,18 +132,18 @@ func return_adjusted_item_name(item_name):
 	elif item_name.substr(0,11) == "round table":
 		return "round table"
 	return item_name
-	
+
 
 func get_random_idle_pos(pos,max_move_dist):
-	var random1 = randf_range(max_move_dist-200,max_move_dist)
-	var random2 = randf_range(max_move_dist-200,max_move_dist)
+	var random1 = randf_range(max_move_dist-100,max_move_dist)
+	var random2 = randf_range(max_move_dist-100,max_move_dist)
 	if Util.chance(50):
 		random1*=-1
 	if Util.chance(50):
 		random2*=-1
-	if Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.local_to_map(pos+Vector2(random1,random2))) != -1:
+	if Tiles.valid_tiles.get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) != Vector2i(-1,-1):
 		return pos+Vector2(random1,random2)
-	elif Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.local_to_map(pos-Vector2(random1,random2))) != -1:
+	elif Tiles.valid_tiles.get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) !=  Vector2i(-1,-1):
 		return pos-Vector2(random1,random2)
 	else:
 		return pos

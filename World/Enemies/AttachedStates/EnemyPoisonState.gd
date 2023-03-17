@@ -6,9 +6,9 @@ var amount_to_diminish = 0
 func _physics_process(delta):
 	if not get_parent().poisoned:
 		return
-	$PoisonParticles/P1.direction = -get_parent().velocity
-	$PoisonParticles/P2.direction = -get_parent().velocity
-	$PoisonParticles/P3.direction = -get_parent().velocity
+	$PoisonParticles/Parts1.direction = -get_parent().velocity
+	$PoisonParticles/Parts2.direction = -get_parent().velocity
+	$PoisonParticles/Parts3.direction = -get_parent().velocity
 
 func start(type):
 	start_poison_state()
@@ -40,15 +40,15 @@ func start(type):
 
 func start_poison_state():
 	$PoisonedTimer.start(6)
-	$PoisonParticles/P1.emitting = true
-	$PoisonParticles/P2.emitting = true
-	$PoisonParticles/P3.emitting = true
+	$PoisonParticles/Parts1.emitting = true
+	$PoisonParticles/Parts2.emitting = true
+	$PoisonParticles/Parts3.emitting = true
 	get_parent().poisoned = true
 
 func stop_poison_state():
-	$PoisonParticles/P1.emitting = false
-	$PoisonParticles/P2.emitting = false
-	$PoisonParticles/P3.emitting = false
+	$PoisonParticles/Parts1.emitting = false
+	$PoisonParticles/Parts2.emitting = false
+	$PoisonParticles/Parts3.emitting = false
 	get_parent().poisoned = false
 
 

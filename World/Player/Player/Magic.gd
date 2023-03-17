@@ -681,7 +681,7 @@ func _on_GhostTimer_timeout():
 		var sprite = get_node("../CompositeSprites/" + sprite_name)
 		var ghost: Sprite2D = DashGhost.instantiate()
 		get_node("../../../").call_deferred("add_child", ghost)
-		ghost.global_position = global_position + Vector2(0,-32)
+		ghost.global_position = global_position + Vector2(0,-16)
 		ghost.texture = sprite.texture
 		ghost.hframes = sprite.hframes
 		ghost.frame = sprite.frame

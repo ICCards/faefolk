@@ -23,7 +23,7 @@ var amount_to_diminish = 0
 var regeneration_increment
 var poison_increment
 
-func _on_HurtBox_area_entered(area):
+func _on_area_entered(area):
 	if get_node("../../").state != DYING:
 		rng.randomize()
 		if area.name == "PotionHitbox":
@@ -197,3 +197,5 @@ func play_sound_effect():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/ow.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
+
+

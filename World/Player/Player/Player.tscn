@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=74 format=3 uid="uid://bdyinn6aswyx7"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
 [ext_resource type="Texture2D" uid="uid://dybsd7fv08hlv" path="res://Assets/Images/inventory_icons/Fish/goldfish.png" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://World/Player/Player/Camera2D.gd" id="2_gk7ji"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" id="3_8lsbn"]
 [ext_resource type="PackedScene" uid="uid://cffchl0ffi2hf" path="res://World/Player/Player/UserInterface/UserInterface.tscn" id="3_w02x5"]
+[ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="5_7bwrl"]
 [ext_resource type="Texture2D" uid="uid://3ik13tk6hyny" path="res://Characters/Human/male/HOLDING WALK/body/down/body.png" id="5_yvg8i"]
 [ext_resource type="AudioStream" uid="uid://bwubv5h3bqf1k" path="res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3" id="6"]
 [ext_resource type="Texture2D" uid="uid://b2yqfp3r1tqa4" path="res://Characters/Human/male/HOLDING WALK/body/down/arms.png" id="6_lbf3e"]
@@ -19,7 +20,9 @@
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" id="16_d5bcc"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" id="17_8vtdb"]
 [ext_resource type="Script" path="res://World/Player/Player/HoldingTorch.gd" id="18_56nxn"]
+[ext_resource type="PackedScene" uid="uid://cu3vvh0ai0n56" path="res://World/Player/Player/PoisonParticles.tscn" id="19_ejmhd"]
 [ext_resource type="Texture2D" uid="uid://h3sspgar8los" path="res://Assets/Images/Animations/objects/torch/1.png" id="20_8w7pl"]
+[ext_resource type="PackedScene" uid="uid://c1posnfc3ruce" path="res://World/Player/Player/SpeedParticles.tscn" id="20_bb87a"]
 [ext_resource type="Texture2D" uid="uid://bnfw57dme4x26" path="res://Assets/Images/Animations/objects/torch/2.png" id="21_c3ki0"]
 [ext_resource type="Texture2D" uid="uid://78sds5dnqh0c" path="res://Assets/Images/Animations/objects/torch/3.png" id="22_grgdf"]
 [ext_resource type="Texture2D" uid="uid://bt3ysh31fm3pc" path="res://Assets/Images/Animations/objects/torch/4.png" id="23_i22ks"]
@@ -273,6 +276,30 @@ tracks/20/path = NodePath("CompositeSprites/ToolEquipped:show_behind_parent")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("CompositeSprites/HoldingItem:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("CompositeSprites/HoldingItem:show_behind_parent")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -727,6 +754,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("CompositeSprites/HoldingItem:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="39"]
 resource_name = "eat"
@@ -1037,6 +1076,18 @@ tracks/8/keys = {
 "update": 1,
 "values": [Vector2(-8, -16), Vector2(-8, -21), Vector2(-8, -27), Vector2(-8, -36)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CompositeSprites/HoldingItem:show_behind_parent")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="58"]
 resource_name = "harvest_left"
@@ -1150,6 +1201,18 @@ tracks/8/keys = {
 "update": 1,
 "values": [Vector2(-16, -16), Vector2(-15, -21), Vector2(-14, -32), Vector2(-8, -36)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CompositeSprites/HoldingItem:show_behind_parent")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="54"]
 resource_name = "harvest_right"
@@ -1261,7 +1324,19 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(8, -16), Vector2(7, -21), Vector2(7, -32), Vector2(4, -36)]
+"values": [Vector2(0, -16), Vector2(-1, -21), Vector2(-2, -32), Vector2(-16, -36)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CompositeSprites/HoldingItem:show_behind_parent")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="60"]
@@ -4121,45 +4196,33 @@ radius = 5.0
 
 [sub_resource type="CapsuleShape2D" id="21"]
 radius = 3.75
-height = 7.5
+height = 16.0
 
 [sub_resource type="Animation" id="23"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/path = NodePath("CompositeSprites:material:shader_parameter/flash_modifier")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [false]
+"values": [0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../CompositeSprites:visible")
+tracks/1/path = NodePath("Area2Ds/HurtBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../CompositeSprites:material:shader_param/flash_modifier")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="22"]
@@ -4169,40 +4232,26 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/path = NodePath("CompositeSprites:material:shader_parameter/flash_modifier")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../CompositeSprites:material:shader_param/flash_modifier")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [1.0, 0.0, 1.0, 0.0, 1.0, 0.0]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2Ds/HurtBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"play_sound_effect"
-}]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hxbfa"]
@@ -4256,17 +4305,22 @@ script = ExtResource("2_gk7ji")
 
 [node name="UserInterface" parent="Camera2D" instance=ExtResource("3_w02x5")]
 
+[node name="DeathEffect" parent="Camera2D/UserInterface" index="1"]
+visible = true
+
 [node name="timer_shake_length" type="Timer" parent="Camera2D"]
 one_shot = true
 
 [node name="timer_wait_times" type="Timer" parent="Camera2D"]
 
-[node name="CompositeSprites" type="CanvasGroup" parent="."]
+[node name="CompositeSprites" type="Node2D" parent="."]
 texture_filter = 1
+material = ExtResource("5_7bwrl")
 script = ExtResource("3_8lsbn")
 
 [node name="Body" type="Sprite2D" parent="CompositeSprites"]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("5_yvg8i")
 hframes = 4
@@ -4274,51 +4328,57 @@ hframes = 4
 [node name="Legs" type="Sprite2D" parent="CompositeSprites"]
 visible = false
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="HeadAtr" type="Sprite2D" parent="CompositeSprites"]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="Arms" type="Sprite2D" parent="CompositeSprites"]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("6_lbf3e")
 hframes = 4
 
 [node name="Pants" type="Sprite2D" parent="CompositeSprites"]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="Shirts" type="Sprite2D" parent="CompositeSprites"]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="Accessory" type="Sprite2D" parent="CompositeSprites"]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="Shoes" type="Sprite2D" parent="CompositeSprites"]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite2D" parent="CompositeSprites"]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="HoldingItem" type="TextureRect" parent="CompositeSprites"]
 visible = false
-offset_left = 4.0
-offset_top = -36.0
-offset_right = 20.0
-offset_bottom = -20.0
+offset_top = -16.0
+offset_right = 16.0
 texture = ExtResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
@@ -4349,21 +4409,20 @@ shape = SubResource("9")
 
 [node name="EnterDoors" type="Area2D" parent="Area2Ds"]
 position = Vector2(0, 11)
-collision_layer = 4096
-collision_mask = 32
+collision_layer = 4128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/EnterDoors"]
 position = Vector2(0, -23)
 shape = SubResource("10")
 
 [node name="HurtBox" type="Area2D" parent="Area2Ds"]
-visible = false
-collision_layer = 128
-collision_mask = 0
+collision_layer = 0
+collision_mask = 128
 script = ExtResource("12_7dou1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/HurtBox"]
-position = Vector2(0, -10)
+position = Vector2(0, -8)
 shape = SubResource("21")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2Ds/HurtBox"]
@@ -4425,6 +4484,11 @@ position = Vector2(0, 9.91821e-05)
 rotation = -1.5708
 shape = SubResource("11")
 
+[node name="PoisonParticles" parent="." instance=ExtResource("19_ejmhd")]
+position = Vector2(0, -16)
+
+[node name="SpeedParticles" parent="." instance=ExtResource("20_bb87a")]
+
 [node name="HoldingTorch" type="Node2D" parent="."]
 script = ExtResource("18_56nxn")
 
@@ -4445,6 +4509,7 @@ frame_progress = 0.579862
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]
+[connection signal="area_entered" from="Area2Ds/HurtBox" to="Area2Ds/HurtBox" method="_on_area_entered"]
 
 [editable path="Camera2D/UserInterface"]
 [editable path="Swing"]

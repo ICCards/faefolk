@@ -16,14 +16,12 @@ func _ready():
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 16)
 	sound_effects.play()
 	await $AnimationPlayer.animation_finished
-	queue_free()
+	call_deferred("queue_free")
 
 func fade_out():
-	fade_out_sound()
 	var tween = get_tree().create_tween()
 	tween.tween_property($AnimatedSprite2D, "modulate:a", 0.0, 1.0)
-
-func fade_out_sound():
-	var tween = get_tree().create_tween()
 	tween.tween_property(sound_effects, "volume_db", -80, 1.0)
 	tween.tween_property($PointLight2D, "color", Color("00ffffff"), 1.0)
+
+

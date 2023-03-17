@@ -320,7 +320,14 @@ func idle_state(_direction):
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if Util.valid_holding_item_category(item_category) or item_name == "torch":
+				if Util.valid_holding_item_category(item_category):
+					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+					holding_item.show()
+					$HoldingTorch.set_inactive()
+					animation = "holding_idle_" + _direction.to_lower()
+				elif item_name == "torch":
+					holding_item.hide()
+					$HoldingTorch.set_active()
 					animation = "holding_idle_" + _direction.to_lower()
 				else:
 					animation = "idle_" + _direction.to_lower()
@@ -328,6 +335,9 @@ func idle_state(_direction):
 				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
+					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+					holding_item.show()
+					$HoldingTorch.set_inactive()
 					animation = "holding_idle_" + _direction.to_lower()
 				else:
 					animation = "idle_" + _direction.to_lower()
@@ -347,24 +357,44 @@ func walk_state(_direction):
 			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if Util.valid_holding_item_category(item_category) or item_name == "torch":
+				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+				holding_item.show()
+				$HoldingTorch.set_inactive()
+				animation = "holding_walk_" + _direction.to_lower()
+			elif item_name == "torch":
+				holding_item.hide()
+				$HoldingTorch.set_active()
 				animation = "holding_walk_" + _direction.to_lower()
 			else:
+				holding_item.hide()
+				$HoldingTorch.set_inactive()
 				animation = "walk_" + _direction.to_lower()
 		elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
 			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if Util.valid_holding_item_category(item_category):
+				holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+				holding_item.show()
+				$HoldingTorch.set_inactive()
 				animation = "holding_walk_" + _direction.to_lower()
 			else:
+				holding_item.hide()
+				$HoldingTorch.set_inactive()
 				animation = "walk_" + _direction.to_lower()
 		else:
+			holding_item.hide()
+			$HoldingTorch.set_inactive()
 			animation = "walk_" + _direction.to_lower()
 		composite_sprites.set_player_animation(character, animation, null)
 	elif running and Sounds.current_footsteps_sound != Sounds.swimming:
 		if state != DYING:
+			holding_item.hide()
+			$HoldingTorch.set_inactive()
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			animation = "run_" + _direction.to_lower()
 			composite_sprites.set_player_animation(character, animation, null)
 	elif Sounds.current_footsteps_sound == Sounds.swimming:
 		$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 		composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
+		holding_item.hide()
+		$HoldingTorch.set_inactive()

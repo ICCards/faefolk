@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var is_hostile_projectile: bool = false
-var speed = 350
+var speed = 125
 var target 
 var particles_transform
 
@@ -36,19 +36,10 @@ func _ready():
 	await $AnimatedSprite2D.animation_finished
 	$Hitbox.queue_free()
 	$AnimatedSprite2D.play("end")
-	stop_trail_particles()
-	fade_out_sound()
+	fade_out()
 	await $AnimatedSprite2D.animation_finished
 	$AnimatedSprite2D.hide()
-	await get_tree().create_timer(3.0).timeout
-	queue_free()
 
-
-func destroy():
-	if $AnimatedSprite2D.visible:
-		$AnimatedSprite2D.stop()
-		await get_tree().create_timer(0.5).timeout
-		queue_free()
 
 
 func set_particles():
@@ -70,7 +61,10 @@ func stop_trail_particles():
 	$TrailParticles/Particles2.emitting = false
 	$TrailParticles/Particles3.emitting = false
 	
-func fade_out_sound():
+func fade_out():
+	stop_trail_particles()
 	var tween = get_tree().create_tween()
 	tween.tween_property(sound_effects, "volume_db", -80, 3.0)
 	tween.tween_property($PointLight2D, "color", Color("00ffffff"), 3.0)
+	await get_tree().create_timer(3.0).timeout
+	call_deferred("queue_free")

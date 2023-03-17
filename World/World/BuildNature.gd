@@ -13,7 +13,7 @@ var placeable_thread := Thread.new()
 var crop_thread := Thread.new()
 var current_chunks = []
 
-#@onready var navTiles = get_node("../../Node2D/NavTiles")
+@onready var navTiles: TileMap = get_node("../../TerrainTiles/NavigationTiles")
 @onready var GrassObjects = get_node("../../GrassObjects")
 @onready var NatureObjects = get_node("../../NatureObjects")
 @onready var ForageObjects = get_node("../../ForageObjects")
@@ -118,8 +118,8 @@ func spawn_nature():
 		grass_thread.start(Callable(self,"_whoAmI4").bind(null))
 	if not forage_thread.is_started():
 		forage_thread.start(Callable(self,"_whoAmI6").bind(null))
-#	if not navigation_thread.is_started():
-#		navigation_thread.start(Callable(self,"_whoAmI7").bind(null))
+	if not navigation_thread.is_started():
+		navigation_thread.start(Callable(self,"_whoAmI7").bind(null))
 
 
 func remove_nature():
@@ -244,16 +244,15 @@ func spawn_grass():
 
 func set_nav():
 	pass
-#	if Server.player_node:
-#		var player_loc = Tiles.valid_tiles.local_to_map(Server.player_node.position)
-#		navTiles.call_deferred("clear")
-#		for y in range(40):
-#			for x in range(60):
-#				var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
-#				if Tiles.isValidNavigationTile(loc):
-#					navTiles.call_deferred("set_cellv",loc,0)
-#					#navTiles.set_cellv(loc,0)
-#		await get_tree().create_timer(0.5).timeout
-#		var value = navigation_thread.wait_to_finish()
+	if Server.player_node:
+		var player_loc = Server.player_node.position/16
+		navTiles.clear()
+		for y in range(40):
+			for x in range(60):
+				var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
+				if Tiles.isValidNavigationTile(loc):
+					navTiles.set_cell(0,loc,0,Vector2i(0,0))
+		await get_tree().create_timer(0.5).timeout
+		var value = navigation_thread.wait_to_finish()
 
 

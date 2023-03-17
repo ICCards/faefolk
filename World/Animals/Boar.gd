@@ -22,15 +22,15 @@ var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var knockback := Vector2.ZERO
-var MAX_MOVE_DISTANCE: float = 500.0
+var MAX_MOVE_DISTANCE: float = 250.0
 var health: int = Stats.BOAR_HEALTH
 var STARTING_HEALTH: int = Stats.BOAR_HEALTH
 var tornado_node = null
 var hit_projectiles = []
 
-const KNOCKBACK_SPEED = 40
-const ACCELERATION = 150
-const KNOCKBACK_AMOUNT = 70
+const KNOCKBACK_SPEED = 20
+const ACCELERATION = 75
+const KNOCKBACK_AMOUNT = 35
 
 var state = IDLE
 
@@ -56,15 +56,14 @@ func _ready():
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
 	_retreat_timer.connect("timeout",Callable(self,"_update_pathfinding_retreat"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred")) 
-	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Node2D"))
 
 func _update_pathfinding_idle():
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
 		state = WALK
 
 func _update_pathfinding_chase():
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(player.position))
 
 func _get_path(pos):
@@ -84,7 +83,7 @@ func _update_pathfinding_retreat():
 		target.x = -200
 	if diff.y > 0:
 		target.y = -200
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(self.position+target))
 	
 func set_sprite_texture():
@@ -106,17 +105,14 @@ func move(_velocity: Vector2) -> void:
 	if frozen:
 		set_velocity(_velocity*0.75)
 		move_and_slide()
-		velocity = velocity
 		boar_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		set_velocity(_velocity*0.9)
 		move_and_slide()
-		velocity = velocity
 		boar_sprite.modulate = Color("009000")
 	else:
 		set_velocity(_velocity)
 		move_and_slide()
-		velocity = velocity
 		boar_sprite.modulate = Color("ffffff")
 
 
@@ -128,7 +124,6 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
 		set_velocity(velocity)
 		move_and_slide()
-		velocity = velocity
 		return
 	set_sprite_texture()
 	if navigation_agent.is_navigation_finished() and state == WALK:

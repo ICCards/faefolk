@@ -24,6 +24,6 @@ shader_parameter/flash_modifier = 1.0
 [node name="DashGhost" type="Sprite2D"]
 modulate = Color(1.2, 1.2, 1.2, 1)
 material = SubResource("17")
-scale = Vector2(2, 2)
+position = Vector2(0, -16)
 texture = ExtResource("2")
 script = ExtResource("2_y3ad5")

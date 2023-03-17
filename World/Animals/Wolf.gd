@@ -50,22 +50,21 @@ var destroy_thread := Thread.new()
 
 func _ready():
 	randomize()
-	visible = false
+	#visible = false
 	animation_player.call_deferred("play", "loop")
 	_idle_timer.set_deferred("wait_time", randf_range(3.0,8.0))
 	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
 	_retreat_timer.connect("timeout",Callable(self,"_update_pathfinding_retreat"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred")) 
-	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Node2D"))
 
 func _update_pathfinding_idle():
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
 		state = WALK
 
 func _update_pathfinding_chase():
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(player.position))
 
 func _get_path(pos):
@@ -73,9 +72,9 @@ func _get_path(pos):
 	
 func calculate_path(pos):
 	if not destroyed:
-		await get_tree().idle_frame
-		navigation_agent.call_deferred("set_target_location",pos)
-		await get_tree().idle_frame
+		await get_tree().process_frame
+		navigation_agent.call_deferred("set_target_position",pos)
+		await get_tree().process_frame
 	thread.wait_to_finish()
 
 func _update_pathfinding_retreat():
@@ -85,7 +84,7 @@ func _update_pathfinding_retreat():
 		target.x = -200
 	if diff.y > 0:
 		target.y = -200
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(self.position+target))
 
 func set_sprite_texture():
@@ -107,17 +106,14 @@ func move(_velocity: Vector2) -> void:
 	if frozen:
 		set_velocity(_velocity*0.75)
 		move_and_slide()
-		velocity = velocity
 		wolf_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		set_velocity(_velocity*0.9)
 		move_and_slide()
-		velocity = velocity
 		wolf_sprite.modulate = Color("009000")
 	else:
 		set_velocity(_velocity)
 		move_and_slide()
-		velocity = velocity
 		wolf_sprite.modulate = Color("ffffff")
 
 func _physics_process(delta):
@@ -128,7 +124,6 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
 		set_velocity(velocity)
 		move_and_slide()
-		velocity = velocity
 		return
 	set_sprite_texture()
 	if navigation_agent.is_navigation_finished() and state == WALK:

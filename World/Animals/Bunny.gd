@@ -27,12 +27,11 @@ var mutex := Mutex.new()
 
 
 func _ready(): 
-	visible = false
+	#visible = false#
 	randomize()
 	set_attributes()
 	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
-	navigation_agent.call_deferred("set_navigation", get_node("/root/World/Node2D"))
 
 
 func set_attributes():
@@ -44,7 +43,7 @@ func set_attributes():
 		bunny_sprite.flip_h = true
 
 func _update_pathfinding():
-	if not thread.is_alive() and visible and not destroyed:
+	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
 		if Util.chance(15):
 			if not destroyed and not sound_effects.playing:
@@ -57,9 +56,9 @@ func _get_path(pos):
 	
 func calculate_path(pos):
 	if not destroyed:
-		await get_tree().idle_frame
-		navigation_agent.call_deferred("set_target_location",pos)
-		await get_tree().idle_frame
+		await get_tree().process_frame
+		navigation_agent.call_deferred("set_target_position",pos)
+		await get_tree().process_frame
 	thread.wait_to_finish()
 
 func _physics_process(delta):
@@ -77,7 +76,7 @@ func _physics_process(delta):
 		bunny_sprite.play("idle")
 		return
 	bunny_sprite.play("walk")
-	var target = navigation_agent.get_next_location()
+	var target = navigation_agent.get_next_path_position()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
 	var steering = (desired_velocity - velocity) * delta * 4.0
@@ -94,17 +93,14 @@ func move(_velocity: Vector2) -> void:
 	if frozen:
 		set_velocity(_velocity*0.75)
 		move_and_slide()
-		velocity = velocity
 		bunny_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		set_velocity(_velocity*0.9)
 		move_and_slide()
-		velocity = velocity
 		bunny_sprite.modulate = Color("009000")
 	else:
 		set_velocity(_velocity)
 		move_and_slide()
-		velocity = velocity
 		bunny_sprite.modulate = Color("ffffff")
 
 
@@ -138,7 +134,7 @@ func destroy(killed_by_player):
 	_timer.call_deferred("stop")
 	set_physics_process(false)
 	if killed_by_player:
-		MapData.remove_animal(name)
+		MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["bunny"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -184,14 +180,14 @@ func _on_HurtBox_area_entered(area):
 		call_deferred("hit", area.tool_name)
 
 func start_run_state():
-	navigation_agent.set_deferred("max_speed", 270)
+	navigation_agent.set_deferred("max_speed", 135)
 	running_state = true
 	$Timers/RunStateTimer.call_deferred("start")
 	_timer.set_deferred("wait_time", 0.75)
 	_update_pathfinding()
 
 func _on_RunStateTimer_timeout():
-	navigation_agent.set_deferred("max_speed", 160)
+	navigation_agent.set_deferred("max_speed", 40)
 	running_state = false
 	_timer.set_deferred("wait_time", randf_range(2.5, 5.0))
 
@@ -200,5 +196,5 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if MapData.world["animal"].has(name):
-		MapData.world["animal"][name]["l"] = position/32
+		MapData.world["animal"][name]["l"] = position/16
 		set_deferred("visible", false)

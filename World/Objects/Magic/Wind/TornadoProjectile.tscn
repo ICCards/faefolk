@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bq6uluwx4sxf3"]
+[gd_scene load_steps=30 format=3 uid="uid://bq6uluwx4sxf3"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Wind/TornadoProjectile.gd" id="1_d48oj"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_8gvaj"]
@@ -11,84 +11,6 @@ max_value = 3.0
 _data = [Vector2(0.00103413, 1.2973), 0.0, 0.0, 0, 0, Vector2(1, 0.707061), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ad503"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(0, 0, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jwaoi"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(112, 0, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tigqa"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(224, 0, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cpoxk"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(336, 0, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_knfrd"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(0, 112, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ym65o"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(112, 112, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7wnkk"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(224, 112, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fvxdx"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(336, 112, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_25qt0"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(0, 224, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r8m3m"]
-atlas = ExtResource("2_b1bax")
-region = Rect2(112, 224, 112, 112)
-
-[sub_resource type="SpriteFrames" id="20"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ad503")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jwaoi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tigqa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cpoxk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_knfrd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ym65o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7wnkk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fvxdx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_25qt0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r8m3m")
-}],
-"loop": false,
-"name": &"anim",
-"speed": 5.0
-}]
-
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(0, 0)
 
@@ -98,23 +20,155 @@ radius = 14.0
 [sub_resource type="Animation" id="9"]
 resource_name = "fade out"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eddv1"]
 _data = {
 "fade out": SubResource("9")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig4d8"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(224, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tbnd"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(336, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e35mn"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(0, 224, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x6h5"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(112, 224, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygcsf"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(224, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6lp1"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(336, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pd86"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(0, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjruy"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(112, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5spi3"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(0, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o86oc"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(112, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8htq5"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(224, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5fe7"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(336, 0, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cahmf"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(0, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc7xi"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(112, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvfp1"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(224, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmgvh"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(336, 112, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37non"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(0, 224, 112, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyk2g"]
+atlas = ExtResource("2_b1bax")
+region = Rect2(112, 224, 112, 112)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6r3pm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig4d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tbnd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e35mn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3x6h5")
+}],
+"loop": false,
+"name": &"end",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygcsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6lp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pd86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjruy")
+}],
+"loop": false,
+"name": &"middle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5spi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o86oc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8htq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5fe7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cahmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc7xi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvfp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmgvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37non")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyk2g")
+}],
+"loop": false,
+"name": &"start",
+"speed": 5.0
+}]
 
 [node name="TornadoProjectile" type="CharacterBody2D"]
 collision_layer = 0
@@ -233,21 +287,14 @@ orbit_velocity_max = 0.3
 scale_amount_curve = SubResource("40")
 color = Color(0.54902, 0.54902, 0.54902, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(15, -44)
-sprite_frames = SubResource("20")
-animation = &"anim"
-frame = 9
-frame_progress = 1.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("1")
 disabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 264192
+collision_layer = 264192
+collision_mask = 0
 script = ExtResource("2_8gvaj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -261,15 +308,16 @@ libraries = {
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
-autostart = true
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(18, -67)
+position = Vector2(18, -42)
 scale = Vector2(0.71875, 0.746094)
 energy = 0.7
 shadow_enabled = true
 texture = ExtResource("5")
+texture_scale = 0.75
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(15, -42)
+sprite_frames = SubResource("SpriteFrames_6r3pm")
+animation = &"end"

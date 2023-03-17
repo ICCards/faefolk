@@ -234,17 +234,14 @@ func drop_inventory_items():
 
 func respawn():
 	PlayerData.reset_player_stats()
-	if PlayerData.player_data["respawn_scene"] == get_tree().current_scene.filename:
-		get_parent().position = Util.string_to_vector2(PlayerData.player_data["respawn_location"])*32
-		get_parent().animation_player.stop()
-		get_node("../Camera2D/UserInterface").respawn()
-		await get_tree().create_timer(0.5).timeout
-		get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", false) 
-		get_parent().state = get_parent().MOVEMENT
-		get_parent().set_held_object()
-		get_node("../Magic").invisibility_active = false
-	else:
-		SceneChanger.respawn()
+	get_parent().position = PlayerData.player_data["respawn_location"]*16
+	get_parent().animation_player.stop()
+	get_node("../Camera2D/UserInterface").respawn()
+	await get_tree().create_timer(0.5).timeout
+	get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", false) 
+	get_parent().state = get_parent().MOVEMENT
+	get_parent().set_held_object()
+	get_node("../Magic").invisibility_active = false
 
 
 func fish():
