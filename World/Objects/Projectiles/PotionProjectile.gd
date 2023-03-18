@@ -80,7 +80,7 @@ func play_egg_break_sound():
 	
 	
 func spawn_duck():
-	if Tiles.valid_tiles.get_cellv(global_position/32) != -1 and Server.world.name == "World":
+	if Tiles.valid_tiles.get_cell_atlas_coords(0,global_position/32) != Vector2i(-1,-1) and Server.world.name == "Overworld":
 		if Util.chance(25):
 			var uuid = _uuid.new()
 			var id = uuid.v4()

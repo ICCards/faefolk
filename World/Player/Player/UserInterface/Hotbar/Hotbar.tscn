@@ -24,8 +24,7 @@ texture = ExtResource("3")
 stretch_mode = 4
 
 [node name="ItemDescription" parent="." instance=ExtResource("4")]
-visible = false
-position = Vector2(327, -30)
+position = Vector2(326, 0)
 
 [node name="HotbarSlots" type="GridContainer" parent="."]
 layout_mode = 0

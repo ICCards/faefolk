@@ -29,7 +29,7 @@ var variety
 
 func _ready():
 	randomize()
-	#visible = false
+	visible = false
 	set_random_attributes()
 	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
@@ -211,10 +211,10 @@ func _on_DropEggTimer_timeout():
 		forageItem.global_position = position
 		get_node("../../").call_deferred("add_child", forageItem)
 	
-func _on_VisibilityNotifier2D_screen_entered():
+func screen_entered():
 	set_deferred("visible", true)
 
-func _on_VisibilityNotifier2D_screen_exited():
+func screen_exited():
 	if MapData.world["animal"].has(name):
-		MapData.world["animal"][name]["l"] = position/32
+		MapData.world["animal"][name]["l"] = position/16
 		set_deferred("visible", false)

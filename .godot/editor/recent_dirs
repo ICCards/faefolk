@@ -1,3 +1,4 @@
+res://World/Enemies
 res://Assets/Images/Magic/lightning
 res://Assets/Images/Animals
 res://Assets/Images/Magic/wind
@@ -19,4 +20,3 @@ res://Assets/Images/tree_sets/wood breaks/trees/spruce
 res://Assets/Images/tree_sets/wood breaks/trees/plum
 res://Assets/Images/tree_sets/wood breaks/trees/pine
 res://Assets/Images/tree_sets/wood breaks/trees/pear
-res://Assets/Images/tree_sets/wood breaks/trees/evergreen

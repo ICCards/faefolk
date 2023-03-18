@@ -1,6 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b8xy6lgm0q7vk"]
 
 [sub_resource type="Shader" id="16"]
+resource_local_to_scene = true
 code = "shader_type canvas_item;
 
 uniform vec4 flash_color : source_color = vec4(1.0);
@@ -15,5 +16,5 @@ void fragment() {
 [resource]
 resource_local_to_scene = true
 shader = SubResource("16")
-shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/flash_modifier = 0.0

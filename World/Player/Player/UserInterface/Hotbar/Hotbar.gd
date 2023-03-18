@@ -29,7 +29,6 @@ func _physics_process(delta):
 		return
 	adjusted_description_position()
 	if item and find_parent("UserInterface").holding_item == null:
-		$ItemDescription.item_category = JsonData.item_data[item]["ItemCategory"]
 		$ItemDescription.show()
 		$ItemDescription.item_name = item
 		$ItemDescription.initialize()

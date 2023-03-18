@@ -71,21 +71,23 @@ func spawn_chunk(chunk_name):
 	if _chunk["dirt"].size() > 0:
 		dirt.set_cells_terrain_connect(0,_chunk["dirt"],0,0)
 	await get_tree().create_timer(0.25).timeout
-	if _chunk["ocean"].size() > 0:
-#		wet_sand.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
+	if _chunk["wet_sand"].size() > 0:
+		wet_sand.set_cells_terrain_connect(0,_chunk["wet_sand"],0,0)
+#	if _chunk["ocean"].size() > 0:
+##		wet_sand.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
+##		for tile in _chunk["ocean"]:
+##			if beach.get_cell_atlas_coords(0,tile+Vector2(1,0)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(-1,0)) != Vector2i(-1,-1) or \
+##			beach.get_cell_atlas_coords(0,tile+Vector2(0,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(0,-1)) != Vector2i(-1,-1) or \
+##			beach.get_cell_atlas_coords(0,tile+Vector2(1,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(1,-1)) != Vector2i(-1,-1) or \
+##			beach.get_cell_atlas_coords(0,tile+Vector2(-1,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(-1,-1)) != Vector2i(-1,-1):
+##				_chunk["ocean"].erase(tile)
+##		await get_tree().create_timer(0.25).timeout
 #		for tile in _chunk["ocean"]:
-#			if beach.get_cell_atlas_coords(0,tile+Vector2(1,0)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(-1,0)) != Vector2i(-1,-1) or \
-#			beach.get_cell_atlas_coords(0,tile+Vector2(0,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(0,-1)) != Vector2i(-1,-1) or \
-#			beach.get_cell_atlas_coords(0,tile+Vector2(1,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(1,-1)) != Vector2i(-1,-1) or \
-#			beach.get_cell_atlas_coords(0,tile+Vector2(-1,1)) != Vector2i(-1,-1) or beach.get_cell_atlas_coords(0,tile+Vector2(-1,-1)) != Vector2i(-1,-1):
-#				_chunk["ocean"].erase(tile)
-#		await get_tree().create_timer(0.25).timeout
-		for tile in _chunk["ocean"]:
-			shallow_ocean.set_cell(0,tile,0,Vector2i(26,58))
-			top_ocean.set_cell(0,tile,0,Vector2i(24,56))
-		wet_sand.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
-		waves.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
-	await get_tree().create_timer(0.25).timeout
+#			shallow_ocean.set_cell(0,tile,0,Vector2i(26,58))
+#			top_ocean.set_cell(0,tile,0,Vector2i(24,56))
+#		wet_sand.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
+#		waves.set_cells_terrain_connect(0,_chunk["ocean"],0,0)
+#	await get_tree().create_timer(0.25).timeout
 	terrain_thread.wait_to_finish()
 #			if sand.get_cellv(loc) == -1:
 #				wet_sand.set_cellv(loc, 0)

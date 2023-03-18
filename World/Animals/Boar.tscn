@@ -1,8 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://d1mytnrwsljra"]
+[gd_scene load_steps=40 format=3 uid="uid://d1mytnrwsljra"]
 
 [ext_resource type="Texture2D" uid="uid://45ogtv15f7bd" path="res://Assets/Images/Animals/Boar/attack/right/body.png" id="1"]
 [ext_resource type="Script" path="res://World/Animals/Boar.gd" id="1_pcgcp"]
+[ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="2_s76xt"]
+[ext_resource type="PackedScene" uid="uid://cqt04hkompf5f" path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" id="3_17rne"]
+[ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="4_0oxkv"]
+[ext_resource type="PackedScene" uid="uid://dx8hix2epqruo" path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" id="5_7k6nt"]
+[ext_resource type="PackedScene" uid="uid://do7vd3a7rt4q5" path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" id="6_5ux40"]
 [ext_resource type="Texture2D" uid="uid://c7pbioiyoq5hg" path="res://Assets/Images/Enemies/knockback dust.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://swg0f7q8o7on" path="res://Assets/Images/Magic/lightning/Shock_Med.png" id="10_hix78"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="14"]
 
 [sub_resource type="CanvasItemMaterial" id="41"]
@@ -12,10 +18,10 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="CircleShape2D" id="1"]
-radius = 18.0
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id="15"]
-radius = 27.0185
+radius = 14.0
 
 [sub_resource type="Animation" id="16"]
 length = 0.001
@@ -68,10 +74,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="18"]
-radius = 284.016
+radius = 130.0
 
 [sub_resource type="CircleShape2D" id="21"]
-radius = 32.0
+radius = 16.0
 
 [sub_resource type="Animation" id="24"]
 length = 0.001
@@ -264,22 +270,11 @@ tracks/8/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Electricity:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="20"]
 resource_name = "loop"
 length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -296,6 +291,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="23"]
 resource_name = "loop frozen"
 length = 1.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -318,16 +314,131 @@ _data = {
 "loop frozen": SubResource("23")
 }
 
-[sub_resource type="SpriteFrames" id="40"]
-animations = []
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5n80"]
+atlas = ExtResource("10_hix78")
+region = Rect2(0, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xkab"]
+atlas = ExtResource("10_hix78")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b60gn"]
+atlas = ExtResource("10_hix78")
+region = Rect2(68, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsqux"]
+atlas = ExtResource("10_hix78")
+region = Rect2(102, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bmyk"]
+atlas = ExtResource("10_hix78")
+region = Rect2(136, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkfkx"]
+atlas = ExtResource("10_hix78")
+region = Rect2(170, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kiji"]
+atlas = ExtResource("10_hix78")
+region = Rect2(204, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrjo1"]
+atlas = ExtResource("10_hix78")
+region = Rect2(238, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2awon"]
+atlas = ExtResource("10_hix78")
+region = Rect2(272, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k84p"]
+atlas = ExtResource("10_hix78")
+region = Rect2(306, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kky00"]
+atlas = ExtResource("10_hix78")
+region = Rect2(340, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itvss"]
+atlas = ExtResource("10_hix78")
+region = Rect2(374, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1duf"]
+atlas = ExtResource("10_hix78")
+region = Rect2(408, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocpog"]
+atlas = ExtResource("10_hix78")
+region = Rect2(442, 0, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q1mhy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5n80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xkab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b60gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsqux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bmyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkfkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kiji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrjo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2awon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k84p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kky00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itvss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1duf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocpog")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 8.0
+}]
 
 [node name="Boar" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 67
 script = ExtResource("1_pcgcp")
 
+[node name="EnemyTornadoState" parent="." instance=ExtResource("2_s76xt")]
+
+[node name="EnemyStunnedState" parent="." instance=ExtResource("3_17rne")]
+
+[node name="EnemyPoisonState" parent="." instance=ExtResource("4_0oxkv")]
+
+[node name="PoisonParticles" parent="EnemyPoisonState" index="0"]
+position = Vector2(0, -8)
+
+[node name="EnemyFrozenState" parent="." instance=ExtResource("5_7k6nt")]
+
+[node name="SetEnemyDirection" parent="." instance=ExtResource("6_5ux40")]
+
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
-visible = false
 material = SubResource("41")
 emitting = false
 amount = 3
@@ -335,24 +446,24 @@ lifetime = 0.5
 explosiveness = 0.5
 texture = ExtResource("8")
 gravity = Vector2(0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="BoarSprite" type="Sprite2D" parent="."]
 material = ExtResource("14")
-position = Vector2(0, -26)
-scale = Vector2(2, 2)
+position = Vector2(0, -13)
 texture = ExtResource("1")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("1")
 
 [node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 262400
-collision_mask = 0
+position = Vector2(0, -5)
+collision_layer = 0
+collision_mask = 262400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, -9)
 shape = SubResource("15")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
@@ -368,13 +479,13 @@ collision_mask = 32
 shape = SubResource("18")
 
 [node name="BoarBite" type="Area2D" parent="."]
-position = Vector2(0, -15)
+position = Vector2(22, -16)
 rotation = 1.5708
-collision_layer = 0
-collision_mask = 128
+collision_layer = 128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoarBite"]
-position = Vector2(32, 0)
+position = Vector2(11, 5.99996)
 shape = SubResource("21")
 disabled = true
 
@@ -384,28 +495,17 @@ target_desired_distance = 20.0
 path_max_distance = 10.0
 avoidance_enabled = true
 radius = 1.0
-max_speed = 150.0
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(1.52588e-05, -2)
-scale = Vector2(10.5, 9.65)
+max_speed = 50.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "loop"
 libraries = {
 "": SubResource("AnimationLibrary_q8r62")
 }
 
-[node name="Electricity" type="AnimatedSprite2D" parent="."]
-visible = false
-modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(0, -15)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("40")
-animation = &""
-frame = 5
-
 [node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2(0, -25)
+position = Vector2(0, -5)
+target_position = Vector2(50, 2.08165e-12)
 collision_mask = 32
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
@@ -429,8 +529,15 @@ one_shot = true
 [node name="RetreatTimer" type="Timer" parent="Timers"]
 wait_time = 0.5
 
+[node name="Electricity" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_q1mhy")
+animation = &"new_animation"
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+
+[editable path="EnemyPoisonState"]

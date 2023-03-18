@@ -29,9 +29,9 @@ var STARTING_HEALTH: int = Stats.WOLF_HEALTH
 var tornado_node = null
 var hit_projectiles = []
 
-const KNOCKBACK_SPEED = 50
-const ACCELERATION = 180
-const KNOCKBACK_AMOUNT = 50
+const KNOCKBACK_SPEED = 20
+const ACCELERATION = 90
+const KNOCKBACK_AMOUNT = 25
 
 var state = IDLE
 
@@ -51,7 +51,6 @@ var destroy_thread := Thread.new()
 func _ready():
 	randomize()
 	#visible = false
-	animation_player.call_deferred("play", "loop")
 	_idle_timer.set_deferred("wait_time", randf_range(3.0,8.0))
 	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
@@ -134,10 +133,10 @@ func _physics_process(delta):
 		end_chase_state()
 	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
 		start_chase_state()
-	if chasing and (position+Vector2(0,-9)).distance_to(player.position) < 70:
+	if chasing and (position+Vector2(0,-9)).distance_to(player.position) < 30:
 		state = ATTACK
 		attack()
-	var target = navigation_agent.get_next_location()
+	var target = navigation_agent.get_next_path_position()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
 	var steering = (desired_velocity - velocity) * delta * 4.0
@@ -197,7 +196,7 @@ func destroy(killed_by_player):
 		_idle_timer.call_deferred("stop")
 		set_physics_process(false)
 		if killed_by_player:
-			MapData.remove_animal(name)
+			MapData.remove_object("animal",name)
 			PlayerData.player_data["collections"]["mobs"]["wolf"] += 1
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/wolf/death.mp3"))
 			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -268,7 +267,7 @@ func start_retreat_state():
 func start_chase_state():
 	chasing = true
 	state = CHASE
-	navigation_agent.set_deferred("max_speed", 260)
+	navigation_agent.set_deferred("max_speed", 130)
 	call_deferred("start_sound_effects")
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("start")
@@ -276,7 +275,7 @@ func start_chase_state():
 
 func end_chase_state():
 	chasing = false
-	navigation_agent.set_deferred("max_speed", 100)
+	navigation_agent.set_deferred("max_speed", 60)
 	call_deferred("stop_sound_effects")
 	_chase_timer.call_deferred("stop") 
 	_idle_timer.call_deferred("start")
@@ -321,20 +320,21 @@ func start_sound_effects():
 
 func stop_sound_effects():
 	playing_sound_effect = false
-	sound_effects.stop()
+	var tween = get_tree().create_tween()
+	tween.tween_property(sound_effects,"volume_db",-80,2.0)
 	
 func _on_KnockbackTimer_timeout():
 	knocking_back = false
 
-func _on_VisibilityNotifier2D_screen_entered():
+
+func screen_entered():
 	if chasing:
 		call_deferred("start_sound_effects")
 	set_deferred("visible", true)
 
-
-func _on_VisibilityNotifier2D_screen_exited():
+func screen_exited():
 	if MapData.world["animal"].has(name):
-		MapData.world["animal"][name]["l"] = position/32
+		MapData.world["animal"][name]["l"] = position/16
 		if playing_sound_effect:
 			call_deferred("stop_sound_effects")
 		set_deferred("visible", false)

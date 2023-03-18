@@ -7,7 +7,7 @@ var game_state: GameState
 var world_file_name = "res://JSONData/world.json"
 var caves_file_name = "res://JSONData/caves.json"
 
-var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
+var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean", "wet_sand"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "forage"]
 var is_world_data_in_chunks = false
 

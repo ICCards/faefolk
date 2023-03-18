@@ -270,7 +270,7 @@ func wait_for_cast_release(staff_name,spell_index):
 		wait_for_cast_release(staff_name, spell_index)
 
 func cast_spell(staff_name, spell_index):
-	if not thread.is_alive():
+	if not thread.is_started():
 		thread.start(Callable(self,"whoAmIMagic").bind([staff_name,spell_index]))
 
 func whoAmIMagic(staff_and_spell_index):

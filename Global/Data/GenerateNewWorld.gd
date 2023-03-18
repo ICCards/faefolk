@@ -9,8 +9,8 @@ var snow = []
 var dirt = []
 var ocean = []
 var desert = []
-var wetSand = []
-var tile_arrays = [plains, forest, snow, dirt, beach]
+var wet_sand = []
+var tile_arrays = [plains, forest, snow, dirt, beach, desert]
 
 var decoration_locations = []
 var occupied_terrain_tiles = []
@@ -130,7 +130,7 @@ func build_world():
 	get_node("/root/Overworld/Loading").call_deferred("set_phase","Building terrain")
 	build_terrian()
 	#await get_tree().create_timer(1.0).timeout
-	set_cave_entrance()
+	#set_cave_entrance()
 	get_node("/root/Overworld/Loading").call_deferred("set_phase","Building nature")
 	#await get_tree().create_timer(1.0).timeout
 	generate_trees(snow,"snow")
@@ -176,7 +176,8 @@ func build_terrian():
 			var id = uuid.v4()
 			#Ocean
 			if alt > 0.8:
-				ocean.append(Vector2(x,y))
+				pass
+				#ocean.append(Vector2(x,y))
 			#Beach	
 			elif between(alt,0.75,0.8):
 				#MapData.world["beach"][id] = Vector2(x,y)
@@ -210,6 +211,7 @@ func build_terrian():
 func _fix_tiles(value):
 	print("start fixing")
 	var border_tiles = []
+	#for i in range(2):
 	for loc in value:
 		if Util.is_border_tile(loc, value):
 			border_tiles.append(loc)
@@ -230,7 +232,7 @@ func _fix_tiles(value):
 			value.append(loc+Vector2(1,-1))
 		if not value.has(loc+Vector2(-1,-1)):
 			value.append(loc+Vector2(-1,-1))
-	fix_ocean_tiles()
+		border_tiles = []
 	if thread_tile_counter == tile_arrays.size():
 		print("fixed")
 		#call_deferred("build_world")
@@ -239,60 +241,64 @@ func _fix_tiles(value):
 		thread_tile_counter += 1
 		print("fixing: "+str(thread_tile_counter))
 	
-func fix_ocean_tiles():
+func add_ocean_tiles():
 	var border_tiles = []
-#	for loc in beach:
+	#for i in range(3):
+	border_tiles = []
+	for loc in beach:
+		if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
+			border_tiles.append(loc)
+	print("BORDER TILES = " + str(border_tiles.size()))
+	for loc in border_tiles:
+		if not beach.has(loc+Vector2(1,0)):
+			wet_sand.append(loc+Vector2(1,0))
+		if not beach.has(loc+Vector2(-1,0)):
+			wet_sand.append(loc+Vector2(-1,0))
+		if not beach.has(loc+Vector2(0,1)):
+			wet_sand.append(loc+Vector2(0,1))
+		if not beach.has(loc+Vector2(0,-1)):
+			wet_sand.append(loc+Vector2(0,-1))
+		if not beach.has(loc+Vector2(1,1)):
+			wet_sand.append(loc+Vector2(1,1))
+		if not beach.has(loc+Vector2(-1,1)):
+			wet_sand.append(loc+Vector2(-1,1))
+		if not beach.has(loc+Vector2(1,-1)):
+			wet_sand.append(loc+Vector2(1,-1))
+		if not beach.has(loc+Vector2(-1,-1)):
+			wet_sand.append(loc+Vector2(-1,-1))
+#	border_tiles = []
+#	for loc in beach: # add wet sand tiles
 #		if Util.is_border_tile(loc, beach):
 #			border_tiles.append(loc)
-#	for loc in border_tiles:
-#		if not beach.has(loc+Vector2(1,0)):
-#			beach.append(loc+Vector2(1,0))
-#		if not beach.has(loc+Vector2(-1,0)):
-#			beach.append(loc+Vector2(-1,0))
-#		if not beach.has(loc+Vector2(0,1)):
-#			beach.append(loc+Vector2(0,1))
-#		if not beach.has(loc+Vector2(0,-1)):
-#			beach.append(loc+Vector2(0,-1))
-#		if not beach.has(loc+Vector2(1,1)):
-#			beach.append(loc+Vector2(1,1))
-#		if not beach.has(loc+Vector2(-1,1)):
-#			beach.append(loc+Vector2(-1,1))
-#		if not beach.has(loc+Vector2(1,-1)):
-#			beach.append(loc+Vector2(1,-1))
-#		if not beach.has(loc+Vector2(-1,-1)):
-#			beach.append(loc+Vector2(-1,-1))
-#	border_tiles = []
-	for loc in beach: # add wet sand tiles
-		if Util.is_border_tile(loc, beach):
-			border_tiles.append(loc)
-		if not beach.has(loc+Vector2(1,0)) and not wetSand.has(loc+Vector2(1,0)):
-			wetSand.append(loc+Vector2(1,0))
-		if not beach.has(loc+Vector2(-1,0)) and not wetSand.has(loc+Vector2(-1,0)):
-			wetSand.append(loc+Vector2(-1,0))
-		if not beach.has(loc+Vector2(0,1)) and not wetSand.has(loc+Vector2(0,1)):
-			wetSand.append(loc+Vector2(0,1))
-		if not beach.has(loc+Vector2(0,-1)) and not wetSand.has(loc+Vector2(0,-1)):
-			wetSand.append(loc+Vector2(0,-1))
-		if not beach.has(loc+Vector2(1,1)) and not wetSand.has(loc+Vector2(1,1)):
-			wetSand.append(loc+Vector2(1,1))
-		if not beach.has(loc+Vector2(-1,1)) and not wetSand.has(loc+Vector2(-1,1)):
-			wetSand.append(loc+Vector2(-1,1))
-		if not beach.has(loc+Vector2(1,-1)) and not wetSand.has(loc+Vector2(1,-1)):
-			wetSand.append(loc+Vector2(1,-1))
-		if not beach.has(loc+Vector2(-1,-1)) and not wetSand.has(loc+Vector2(-1,-1)):
-			wetSand.append(loc+Vector2(-1,-1))
-		await get_tree().process_frame
-	for loc in ocean:
-		if beach.has(loc):
-			ocean.erase(loc)
-		if wetSand.has(loc):
-			ocean.erase(loc)
+#		if not beach.has(loc+Vector2(1,0)) and not wet_sand.has(loc+Vector2(1,0)):
+#			wet_sand.append(loc+Vector2(1,0))
+#		if not beach.has(loc+Vector2(-1,0)) and not wet_sand.has(loc+Vector2(-1,0)):
+#			wet_sand.append(loc+Vector2(-1,0))
+#		if not beach.has(loc+Vector2(0,1)) and not wetSand.has(loc+Vector2(0,1)):
+#			wetSand.append(loc+Vector2(0,1))
+#		if not beach.has(loc+Vector2(0,-1)) and not wetSand.has(loc+Vector2(0,-1)):
+#			wetSand.append(loc+Vector2(0,-1))
+#		if not beach.has(loc+Vector2(1,1)) and not wetSand.has(loc+Vector2(1,1)):
+#			wetSand.append(loc+Vector2(1,1))
+#		if not beach.has(loc+Vector2(-1,1)) and not wetSand.has(loc+Vector2(-1,1)):
+#			wetSand.append(loc+Vector2(-1,1))
+#		if not beach.has(loc+Vector2(1,-1)) and not wetSand.has(loc+Vector2(1,-1)):
+#			wetSand.append(loc+Vector2(1,-1))
+#		if not beach.has(loc+Vector2(-1,-1)) and not wetSand.has(loc+Vector2(-1,-1)):
+#			wetSand.append(loc+Vector2(-1,-1))
+#		await get_tree().process_frame
+#	for loc in ocean:
+#		if beach.has(loc):
+#			ocean.erase(loc)
+#		if wetSand.has(loc):
+#			ocean.erase(loc)
 	
 	
 	
 func update_fixed_map():
+	add_ocean_tiles()
 	print("FOUND BORDER TILES")
-	MapData.world["wet_sand"] = wetSand
+	MapData.world["wet_sand"] = wet_sand
 	MapData.world["plains"] = plains
 	MapData.world["forest"] = forest
 	MapData.world["desert"] = desert

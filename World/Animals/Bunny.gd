@@ -27,7 +27,7 @@ var mutex := Mutex.new()
 
 
 func _ready(): 
-	#visible = false#
+	visible = false
 	randomize()
 	set_attributes()
 	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
@@ -191,10 +191,10 @@ func _on_RunStateTimer_timeout():
 	running_state = false
 	_timer.set_deferred("wait_time", randf_range(2.5, 5.0))
 
-func _on_VisibilityNotifier2D_screen_entered():
+func screen_entered():
 	set_deferred("visible", true)
 
-func _on_VisibilityNotifier2D_screen_exited():
+func screen_exited():
 	if MapData.world["animal"].has(name):
 		MapData.world["animal"][name]["l"] = position/16
 		set_deferred("visible", false)

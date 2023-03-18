@@ -18,10 +18,12 @@ var _uuid = load("res://helpers/UUID.gd")
 func _physics_process(delta):
 	if not collided:
 		var collision_info = move_and_collide(velocity * delta * speed)
+	if $Hitbox.get_overlapping_areas().size() > 0:
+		destroy()
 
 func _ready():
 	if is_hostile:
-		$Hitbox.set_collision_mask(128+2+32)
+		$Hitbox.set_collision_layer(128+2+32)
 	rotation_degrees = rad_to_deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.id = uuid.v4()
 	$Hitbox.tool_name = "arrow"

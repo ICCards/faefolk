@@ -1,6 +1,7 @@
-AnimatedSprite2D
-Node2D
+Control
 VisibleOnScreenNotifier2D
+Node2D
+AnimatedSprite2D
 NavigationRegion2D
 NavigationLink2D
 TileMap
@@ -17,7 +18,6 @@ Label
 ColorRect
 PointLight2D
 Button
-Control
 GridContainer
 Line2D
 CanvasModulate

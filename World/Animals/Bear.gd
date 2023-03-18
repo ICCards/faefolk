@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var bear_sprite: CanvasGroup = $Body
+@onready var bear_sprite: Node2D = $Body
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var _idle_timer: Timer = $Timers/IdleTimer
@@ -50,6 +50,7 @@ enum {
 
 func _ready():
 	randomize()
+	visible = false
 	_idle_timer.set_deferred("wait_time", randf_range(5.0, 10.0))
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
 	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
@@ -155,7 +156,8 @@ func start_sound_effects():
 
 func stop_sound_effects():
 	playing_sound_effect = false
-	sound_effects.call_deferred("stop")
+	var tween = get_tree().create_tween()
+	tween.tween_property(sound_effects,"volume_db",-80,2.0)
 
 func set_texture():
 	match state:
@@ -344,15 +346,14 @@ func start_retreat_state():
 	_retreat_timer.call_deferred("start")
 	chasing = false
 
-#func _on_VisibilityNotifier2D_screen_entered():
-#	if chasing:
-#		call_deferred("start_sound_effects")
-#	set_deferred("visible", true)
-#
-#
-#func _on_VisibilityNotifier2D_screen_exited():
-#	if MapData.world["animal"].has(name):
-#		MapData.world["animal"][name]["l"] = position/32
-#		if playing_sound_effect:
-#			call_deferred("stop_sound_effects")
-#		set_deferred("visible", false)
+func screen_entered():
+	if chasing:
+		call_deferred("start_sound_effects")
+	set_deferred("visible", true)
+
+func screen_exited():
+	if MapData.world["animal"].has(name):
+		MapData.world["animal"][name]["l"] = position/16
+		if playing_sound_effect:
+			call_deferred("stop_sound_effects")
+		set_deferred("visible", false)

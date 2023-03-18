@@ -23,19 +23,19 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/0/path = NodePath("HurtBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -47,14 +47,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/path = NodePath("BunnySprite:material:shader_parameter/flash_modifier")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BunnySprite:material:shader_parameter/flash_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="11"]
@@ -144,6 +156,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BunnySprite:material:shader_parameter/flash_modifier")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
 
 [sub_resource type="Animation" id="13"]
 resource_name = "hit"
@@ -152,14 +176,26 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/0/path = NodePath("BunnySprite:material:shader_parameter/flash_modifier")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [1.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BunnySprite:material:shader_parameter/flash_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_epbpm"]
@@ -276,7 +312,6 @@ animations = [{
 }]
 
 [node name="Bunny" type="CharacterBody2D"]
-material = ExtResource("3")
 collision_mask = 67
 motion_mode = 1
 script = ExtResource("2_bon8t")
@@ -295,6 +330,7 @@ rotation = 1.5708
 shape = SubResource("CircleShape2D_h415i")
 
 [node name="BunnySprite" type="AnimatedSprite2D" parent="."]
+material = ExtResource("3")
 position = Vector2(0, -12)
 sprite_frames = ExtResource("3_djxbj")
 animation = &"walk"
@@ -316,11 +352,6 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
 shape = SubResource("12")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
-position = Vector2(0, -3)
-scale = Vector2(4.16875, 4.16875)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_epbpm")
@@ -341,6 +372,7 @@ autostart = true
 path_desired_distance = 100.0
 target_desired_distance = 100.0
 avoidance_enabled = true
+max_speed = 65.0
 
 [node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -350,8 +382,6 @@ sprite_frames = SubResource("SpriteFrames_snwb2")
 animation = &"new_animation"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/RunStateTimer" to="." method="_on_RunStateTimer_timeout"]
 
 [editable path="EnemyPoisonState"]

@@ -1,3 +1,8 @@
-[gd_resource type="ShaderMaterial" format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dshi8sn4j6jfa"]
+
+[ext_resource type="Shader" path="res://Assets/Themes/whiten.gdshader" id="1_wr371"]
 
 [resource]
+shader = ExtResource("1_wr371")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0

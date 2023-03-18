@@ -7,8 +7,8 @@ var MAX_ORBIT_RADIUS
 
 func _ready():
 	randomize()
-	orbit_speed = randf_range(3.0,4.5)
-	MAX_ORBIT_RADIUS = randf_range(60.0,75.0)
+	orbit_speed = randf_range(2.0,3.5)
+	MAX_ORBIT_RADIUS = randf_range(30.0,40.0)
 
 func _physics_process(delta):
 	if get_parent().destroyed: return

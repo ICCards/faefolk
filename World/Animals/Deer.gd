@@ -51,7 +51,6 @@ var destroy_thread := Thread.new()
 func _ready():
 	randomize()
 	#visible = false
-	animation_player.call_deferred("play", "loop")
 	_idle_timer.set_deferred("wait_time", randf_range(4.0,8.0))
 	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
@@ -104,7 +103,7 @@ func move(_velocity: Vector2) -> void:
 	if not visible or tornado_node or stunned or attacking or destroyed or state == IDLE:
 		return
 	if not animation_player.is_playing():
-		animation_player.play()
+		animation_player.play("loop")
 	if frozen:
 		set_velocity(_velocity*0.75)
 		move_and_slide()
@@ -134,7 +133,7 @@ func _physics_process(delta):
 		return
 	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
 		end_chase_state()
-	if chasing and (position+Vector2(0,-14)).distance_to(player.position) < 70:
+	if chasing and (position+Vector2(0,-14)).distance_to(player.position) < 35:
 		state = ATTACK
 		attack()
 	var target = navigation_agent.get_next_path_position()
@@ -264,12 +263,12 @@ func start_chase_state():
 
 func end_chase_state():
 	chasing = false
+	state = WALK
 	navigation_agent.set_deferred("max_speed", 50)
 	call_deferred("stop_sound_effects")
 	_chase_timer.call_deferred("stop") 
 	_idle_timer.call_deferred("start")
 	call_deferred("_update_pathfinding_idle")
-	state = WALK
 
 func _on_EndChaseState_timeout():
 	end_chase_state()
@@ -305,14 +304,15 @@ func start_sound_effects():
 
 func stop_sound_effects():
 	playing_sound_effect = false
-	sound_effects.call_deferred("stop")
+	var tween = get_tree().create_tween()
+	tween.tween_property(sound_effects,"volume_db",-80,2.0)
 
-func _on_VisibilityNotifier2D_screen_entered():
+func screen_entered():
 	if chasing:
 		call_deferred("start_sound_effects")
 	set_deferred("visible", true)
 
-func _on_VisibilityNotifier2D_screen_exited():
+func screen_exited():
 	if MapData.world["animal"].has(name):
 		MapData.world["animal"][name]["l"] = position/16
 		if playing_sound_effect:

@@ -329,6 +329,7 @@ tracks/9/keys = {
 [sub_resource type="Animation" id="49"]
 resource_name = "loop"
 length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -345,6 +346,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="50"]
 resource_name = "loop frozen"
 length = 1.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -493,7 +495,6 @@ position = Vector2(0, -8)
 [node name="SetEnemyDirection" parent="." instance=ExtResource("6_ckc8f")]
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
-visible = false
 material = SubResource("54")
 emitting = false
 amount = 3
@@ -515,8 +516,8 @@ position = Vector2(0, -3)
 shape = SubResource("40")
 
 [node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 262400
-collision_mask = 0
+collision_layer = 0
+collision_mask = 262400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -8)
@@ -563,14 +564,10 @@ path_desired_distance = 10.0
 path_max_distance = 10.0
 avoidance_enabled = true
 radius = 1.0
-max_speed = 75.0
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
-position = Vector2(0.999992, -5)
-scale = Vector2(10.225, 9.6)
+max_speed = 60.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "loop"
 libraries = {
 "": SubResource("AnimationLibrary_e4a5b")
 }
@@ -609,8 +606,6 @@ animation = &"new_animation"
 frame_progress = 0.0402624
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
 
