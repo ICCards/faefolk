@@ -2,6 +2,7 @@ extends Node
 
 var game_state: GameState
 
+var deep_ocean = []
 var plains = []
 var forest = []
 var beach = []
@@ -10,7 +11,7 @@ var dirt = []
 var ocean = []
 var desert = []
 var wet_sand = []
-var tile_arrays = [plains, forest, snow, dirt, beach, desert]
+var tile_arrays = [plains, forest, snow, dirt, desert]
 
 var decoration_locations = []
 var occupied_terrain_tiles = []
@@ -24,7 +25,7 @@ var weedTypes = ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4","D1
 var flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
 var clamTypes = ["blue clam","pink clam","red clam"]
 var starfishTypes = ["starfish", "baby starfish"]
-var randomAdjacentTiles = [Vector2(0, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(0, -1), Vector2(-1, -1), Vector2(1, -1), Vector2(1, 0), Vector2(-1, 0)]
+var randomAdjacentTiles = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(-1, 1), Vector2i(0, -1), Vector2i(-1, -1), Vector2i(1, -1), Vector2i(1, 0), Vector2i(-1, 0)]
 
 var fastNoiseLite := FastNoiseLite.new()
 var rng = RandomNumberGenerator.new()
@@ -57,11 +58,11 @@ func build():
 	rng.randomize()
 	randomize()
 	#await get_tree().create_timer(1.0).timeout
-	build_temperature(5,0.01)
-	#await get_tree().create_timer(1.0).timeout
-	build_moisture(5,0.01)
+	build_temperature(5,0.06)
+	#await get_tree().create_timer(1.0).timeoutg
+	build_moisture(5,0.006)
 	#await get_tree().create_timer(2.0).timeout
-	build_altittude(5,0.005)
+	build_altittude(5,0.003)
 
 func end_altittude():
 	altittude = thread_altittude.wait_to_finish()
@@ -160,52 +161,53 @@ func build_map():
 	
 
 func set_cave_entrance():
-	var loc = Vector2(rng.randi_range(490, 510), rng.randi_range(490, 510))
+	var loc = Vector2i(rng.randi_range(490, 510), rng.randi_range(490, 510))
 	MapData.world["cave_entrance_location"] = loc
 	decoration_locations.append(loc)
-	decoration_locations.append(loc+Vector2(1,0))
+	decoration_locations.append(loc+Vector2i(1,0))
 
 func build_terrian():
 	print("BUILDING")
 	for x in width:
 		for y in height:
-			var pos = Vector2(x,y)
+			var pos = Vector2i(x,y)
 			var alt = altittude[pos]
 			var temp = temperature[pos]
 			var moist = moisture[pos]
 			var id = uuid.v4()
 			#Ocean
+			if alt > 0.975:
+				deep_ocean.append(Vector2i(x,y))
 			if alt > 0.8:
-				pass
-				#ocean.append(Vector2(x,y))
+				ocean.append(Vector2i(x,y))
 			#Beach	
 			elif between(alt,0.75,0.8):
-				#MapData.world["beach"][id] = Vector2(x,y)
-				beach.append(Vector2(x,y))
+				#MapData.world["beach"][id] = Vector2i(x,y)
+				beach.append(Vector2i(x,y))
 			#Biomes	
 			elif between(alt,-1.4,0.8):
 				#plains
 				if between(moist,0,0.4) and between(temp,0.2,0.6):
-					#MapData.world["plains"][id] = Vector2(x,y)
-					plains.append(Vector2(x,y))
+					#MapData.world["plains"][id] = Vector2i(x,y)
+					plains.append(Vector2i(x,y))
 				#forest
 				elif between(moist,0.5,0.85) and temp > 0.6:
-					#MapData.world["forest"][id] = Vector2(x,y)
-					forest.append(Vector2(x,y))
+					#MapData.world["forest"][id] = Vector2i(x,y)
+					forest.append(Vector2i(x,y))
 				#desert	
 				elif temp > 0.6 and moist < 0.5:
-					desert.append(Vector2(x,y))
+					desert.append(Vector2i(x,y))
 				#snow	
 				elif temp < 0.2:
-					#MapData.world["snow"][id] = Vector2(x,y)
-					snow.append(Vector2(x,y))
+					#MapData.world["snow"][id] = Vector2i(x,y)
+					snow.append(Vector2i(x,y))
 				else:
 					#dirt
-					#MapData.world["dirt"][id] = Vector2(x,y)
-					dirt.append(Vector2(x,y))
+					#MapData.world["dirt"][id] = Vector2i(x,y)
+					dirt.append(Vector2i(x,y))
 			else:
-				#MapData.world["dirt"][id] = Vector2(x,y)
-				dirt.append(Vector2(x,y))
+				#MapData.world["dirt"][id] = Vector2i(x,y)
+				dirt.append(Vector2i(x,y))
 	#save_world_data()
 
 func _fix_tiles(value):
@@ -216,23 +218,22 @@ func _fix_tiles(value):
 		if Util.is_border_tile(loc, value):
 			border_tiles.append(loc)
 	for loc in border_tiles:
-		if not value.has(loc+Vector2(1,0)):
-			value.append(loc+Vector2(1,0))
-		if not value.has(loc+Vector2(-1,0)):
-			value.append(loc+Vector2(-1,0))
-		if not value.has(loc+Vector2(0,1)):
-			value.append(loc+Vector2(0,1))
-		if not value.has(loc+Vector2(0,-1)):
-			value.append(loc+Vector2(0,-1))
-		if not value.has(loc+Vector2(1,1)):
-			value.append(loc+Vector2(1,1))
-		if not value.has(loc+Vector2(-1,1)):
-			value.append(loc+Vector2(-1,1))
-		if not value.has(loc+Vector2(1,-1)):
-			value.append(loc+Vector2(1,-1))
-		if not value.has(loc+Vector2(-1,-1)):
-			value.append(loc+Vector2(-1,-1))
-		border_tiles = []
+		if not value.has(loc+Vector2i(1,0)):
+			value.append(loc+Vector2i(1,0))
+		if not value.has(loc+Vector2i(-1,0)):
+			value.append(loc+Vector2i(-1,0))
+		if not value.has(loc+Vector2i(0,1)):
+			value.append(loc+Vector2i(0,1))
+		if not value.has(loc+Vector2i(0,-1)):
+			value.append(loc+Vector2i(0,-1))
+		if not value.has(loc+Vector2i(1,1)):
+			value.append(loc+Vector2i(1,1))
+		if not value.has(loc+Vector2i(-1,1)):
+			value.append(loc+Vector2i(-1,1))
+		if not value.has(loc+Vector2i(1,-1)):
+			value.append(loc+Vector2i(1,-1))
+		if not value.has(loc+Vector2i(-1,-1)):
+			value.append(loc+Vector2i(-1,-1))
 	if thread_tile_counter == tile_arrays.size():
 		print("fixed")
 		#call_deferred("build_world")
@@ -243,61 +244,103 @@ func _fix_tiles(value):
 	
 func add_ocean_tiles():
 	var border_tiles = []
-	#for i in range(3):
+	border_tiles = []
+	print("EXTENDING BEACH")
+	for loc in beach:
+		if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
+			border_tiles.append(loc)
+	for loc in border_tiles: # extend beach
+		if not beach.has(loc+Vector2i(1,0)):
+			beach.append(loc+Vector2i(1,0))
+		if not beach.has(loc+Vector2i(-1,0)):
+			beach.append(loc+Vector2i(-1,0))
+		if not beach.has(loc+Vector2i(0,1)):
+			beach.append(loc+Vector2i(0,1))
+		if not beach.has(loc+Vector2i(0,-1)):
+			beach.append(loc+Vector2i(0,-1))
+		if not beach.has(loc+Vector2i(1,1)):
+			beach.append(loc+Vector2i(1,1))
+		if not beach.has(loc+Vector2i(-1,1)):
+			beach.append(loc+Vector2i(-1,1))
+		if not beach.has(loc+Vector2i(1,-1)):
+			beach.append(loc+Vector2i(1,-1))
+		if not beach.has(loc+Vector2i(-1,-1)):
+			beach.append(loc+Vector2i(-1,-1))
+	print("ADD WET SAND LAYER")
 	border_tiles = []
 	for loc in beach:
 		if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
 			border_tiles.append(loc)
-	print("BORDER TILES = " + str(border_tiles.size()))
-	for loc in border_tiles:
-		if not beach.has(loc+Vector2(1,0)):
-			wet_sand.append(loc+Vector2(1,0))
-		if not beach.has(loc+Vector2(-1,0)):
-			wet_sand.append(loc+Vector2(-1,0))
-		if not beach.has(loc+Vector2(0,1)):
-			wet_sand.append(loc+Vector2(0,1))
-		if not beach.has(loc+Vector2(0,-1)):
-			wet_sand.append(loc+Vector2(0,-1))
-		if not beach.has(loc+Vector2(1,1)):
-			wet_sand.append(loc+Vector2(1,1))
-		if not beach.has(loc+Vector2(-1,1)):
-			wet_sand.append(loc+Vector2(-1,1))
-		if not beach.has(loc+Vector2(1,-1)):
-			wet_sand.append(loc+Vector2(1,-1))
-		if not beach.has(loc+Vector2(-1,-1)):
-			wet_sand.append(loc+Vector2(-1,-1))
-#	border_tiles = []
-#	for loc in beach: # add wet sand tiles
-#		if Util.is_border_tile(loc, beach):
-#			border_tiles.append(loc)
-#		if not beach.has(loc+Vector2(1,0)) and not wet_sand.has(loc+Vector2(1,0)):
-#			wet_sand.append(loc+Vector2(1,0))
-#		if not beach.has(loc+Vector2(-1,0)) and not wet_sand.has(loc+Vector2(-1,0)):
-#			wet_sand.append(loc+Vector2(-1,0))
-#		if not beach.has(loc+Vector2(0,1)) and not wetSand.has(loc+Vector2(0,1)):
-#			wetSand.append(loc+Vector2(0,1))
-#		if not beach.has(loc+Vector2(0,-1)) and not wetSand.has(loc+Vector2(0,-1)):
-#			wetSand.append(loc+Vector2(0,-1))
-#		if not beach.has(loc+Vector2(1,1)) and not wetSand.has(loc+Vector2(1,1)):
-#			wetSand.append(loc+Vector2(1,1))
-#		if not beach.has(loc+Vector2(-1,1)) and not wetSand.has(loc+Vector2(-1,1)):
-#			wetSand.append(loc+Vector2(-1,1))
-#		if not beach.has(loc+Vector2(1,-1)) and not wetSand.has(loc+Vector2(1,-1)):
-#			wetSand.append(loc+Vector2(1,-1))
-#		if not beach.has(loc+Vector2(-1,-1)) and not wetSand.has(loc+Vector2(-1,-1)):
-#			wetSand.append(loc+Vector2(-1,-1))
-#		await get_tree().process_frame
-#	for loc in ocean:
-#		if beach.has(loc):
-#			ocean.erase(loc)
-#		if wetSand.has(loc):
-#			ocean.erase(loc)
-	
-	
-	
+	for loc in border_tiles: # set wet sand layer
+		if not beach.has(loc+Vector2i(1,0)):
+			wet_sand.append(loc+Vector2i(1,0))
+		if not beach.has(loc+Vector2i(-1,0)):
+			wet_sand.append(loc+Vector2i(-1,0))
+		if not beach.has(loc+Vector2i(0,1)):
+			wet_sand.append(loc+Vector2i(0,1))
+		if not beach.has(loc+Vector2i(0,-1)):
+			wet_sand.append(loc+Vector2i(0,-1))
+		if not beach.has(loc+Vector2i(1,1)):
+			wet_sand.append(loc+Vector2i(1,1))
+		if not beach.has(loc+Vector2i(-1,1)):
+			wet_sand.append(loc+Vector2i(-1,1))
+		if not beach.has(loc+Vector2i(1,-1)):
+			wet_sand.append(loc+Vector2i(1,-1))
+		if not beach.has(loc+Vector2i(-1,-1)):
+			wet_sand.append(loc+Vector2i(-1,-1))
+	print("REMOVE OCEAN TILES")
+	for loc in wet_sand: # remove ocean tiles
+		if ocean.has(loc):
+			ocean.erase(loc)
+	for loc in beach:
+		if ocean.has(loc):
+			ocean.erase(loc)
+	for loc in ocean:
+		wet_sand.append(loc)
+	assign_autotile_to_tile()
+
+var autotiles = ["dirt","snow","forest","plains","ocean","deep_ocean"]
+func assign_autotile_to_tile():
+	print("assigning autotiles")
+	var new_array = []
+	for loc in plains:
+		new_array.append([loc,return_tile_id(loc,plains)])
+	plains = new_array
+
+
+func return_tile_id(loc,tiles):
+	if Util.is_border_tile(loc,tiles): 
+		return 0 
+	elif tiles.has(loc+Vector2i(1,1)) and tiles.has(loc+Vector2i(1,-1)) and tiles.has(loc+Vector2i(-1,1)):
+		return 1
+	elif tiles.has(loc+Vector2i(-1,-1)) and tiles.has(loc+Vector2i(1,1)) and tiles.has(loc+Vector2i(-1,1)):
+		return 2
+	elif tiles.has(loc+Vector2i(-1,-1)) and tiles.has(loc+Vector2i(1,-1)) and tiles.has(loc+Vector2i(-1,1)):
+		return 3
+	elif tiles.has(loc+Vector2i(-1,-1)) and tiles.has(loc+Vector2i(1,-1)) and tiles.has(loc+Vector2i(1,1)):
+		return 4
+	elif tiles.has(loc+Vector2i(-1,1)) and tiles.has(loc+Vector2i(1,1)):
+		return 5
+	elif tiles.has(loc+Vector2i(-1,1)) and tiles.has(loc+Vector2i(-1,-1)):
+		return 6
+	elif tiles.has(loc+Vector2i(-1,-1)) and tiles.has(loc+Vector2i(1,-1)):
+		return 7
+	elif tiles.has(loc+Vector2i(1,1)) and tiles.has(loc+Vector2i(1,-1)):
+		return 8
+	elif tiles.has(loc+Vector2i(1,1)):
+		return 9 
+	elif tiles.has(loc+Vector2i(-1,1)):
+		return 9 
+	elif tiles.has(loc+Vector2i(-1,-1)):
+		return 9 
+	elif tiles.has(loc+Vector2i(1,-1)):
+		return 9 
+
+
 func update_fixed_map():
 	add_ocean_tiles()
 	print("FOUND BORDER TILES")
+	MapData.world["deep_ocean"] = deep_ocean
 	MapData.world["wet_sand"] = wet_sand
 	MapData.world["plains"] = plains
 	MapData.world["forest"] = forest
@@ -450,9 +493,9 @@ func create_ore_large(loc,biome):
 		oreTypes.shuffle()
 		MapData.world["ore_large"][id] = {"l":loc,"h":Stats.LARGE_ORE_HEALTH,"b":biome,"v":oreTypes.front()}
 		decoration_locations.append(loc)
-		decoration_locations.append(loc + Vector2(1,0))
-		decoration_locations.append(loc + Vector2(0,-1))
-		decoration_locations.append(loc + Vector2(1,-1))
+		decoration_locations.append(loc + Vector2i(1,0))
+		decoration_locations.append(loc + Vector2i(0,-1))
+		decoration_locations.append(loc + Vector2i(1,-1))
 
 func create_ore(loc,biome):
 	var id = uuid.v4()
@@ -485,6 +528,7 @@ func create_grass_bunch(loc,biome):
 func generate_map(data):
 	print("GENERATE MAP " + str(data))
 	var grid = {}
+	fastNoiseLite.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	fastNoiseLite.fractal_type = FastNoiseLite.FRACTAL_FBM
 	fastNoiseLite.seed = randi()
 	fastNoiseLite.fractal_octaves = data.octaves
@@ -492,20 +536,20 @@ func generate_map(data):
 	var custom_gradient = CustomGradientTexture.new()
 	custom_gradient.gradient = Gradient.new()
 	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
-	custom_gradient.size = Vector2(width,height)
+	custom_gradient.size = Vector2i(width,height)
 	var gradient_data = custom_gradient.get_image()
 	for x in width:
 		for y in height:
 			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5
 			var value = fastNoiseLite.get_noise_2d(x,y)
 			value += gradient_value
-			grid[Vector2(x,y)] = value
+			grid[Vector2i(x,y)] = value
 	call_deferred(data.ending_function)
 	return grid
 
 func check_64x64(loc):
-	if not decoration_locations.has(loc) and not decoration_locations.has(loc+Vector2(1,0)) and \
-	not decoration_locations.has(loc+Vector2(1,-1)) and not decoration_locations.has(loc+Vector2(0,-1)):
+	if not decoration_locations.has(loc) and not decoration_locations.has(loc+Vector2i(1,0)) and \
+	not decoration_locations.has(loc+Vector2i(1,-1)) and not decoration_locations.has(loc+Vector2i(0,-1)):
 		return true
 	return false
  
@@ -541,9 +585,9 @@ func create_tree(loc,biome):
 		else:
 			MapData.world["tree"][id] = {"l":loc,"h":Stats.TREE_HEALTH,"b":biome,"v":variety,"p":"empty"}
 		decoration_locations.append(loc)
-		decoration_locations.append(loc + Vector2(1,0))
-		decoration_locations.append(loc + Vector2(0,-1))
-		decoration_locations.append(loc + Vector2(1,-1))
+		decoration_locations.append(loc + Vector2i(1,0))
+		decoration_locations.append(loc + Vector2i(0,-1))
+		decoration_locations.append(loc + Vector2i(1,-1))
 
 func create_stump(loc,biome):
 	var id = uuid.v4()
@@ -551,9 +595,9 @@ func create_stump(loc,biome):
 		treeTypes.shuffle()
 		MapData.world["stump"][id] = {"l":loc,"h":Stats.STUMP_HEALTH,"b":biome,"v":treeTypes.front()}
 		decoration_locations.append(loc)
-		decoration_locations.append(loc + Vector2(1,0))
-		decoration_locations.append(loc + Vector2(0,-1))
-		decoration_locations.append(loc + Vector2(1,-1))
+		decoration_locations.append(loc + Vector2i(1,0))
+		decoration_locations.append(loc + Vector2i(0,-1))
+		decoration_locations.append(loc + Vector2i(1,-1))
 
 func create_log(loc,biome):
 	var id = uuid.v4()

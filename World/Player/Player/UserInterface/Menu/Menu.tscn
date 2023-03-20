@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctp3ra1cmv0de"]
+[gd_scene load_steps=16 format=3 uid="uid://ctp3ra1cmv0de"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Menu.gd" id="1_1ymg0"]
+[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="2_keu3b"]
 [ext_resource type="Texture2D" uid="uid://r6w3mbmfa6ms" path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://2op1sdptpkm7" path="res://Assets/Images/User interface/inventory/save/save-button.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="5"]
@@ -10,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="9"]
 [ext_resource type="PackedScene" uid="uid://b2x0kacdfasux" path="res://World/Player/Player/UserInterface/Menu/Skills/Skills.tscn" id="9_fhc6i"]
 [ext_resource type="Texture2D" uid="uid://cgya8546lrfhq" path="res://Assets/Images/User interface/inventory/save/save-button-selected.png" id="11"]
-[ext_resource type="PackedScene" uid="uid://suwmuinnbyjn" path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" id="11_n48af"]
+[ext_resource type="PackedScene" uid="uid://cdfwwoxabb2pn" path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" id="11_n48af"]
 [ext_resource type="PackedScene" uid="uid://b3ad8jm57r5at" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.tscn" id="12_8aw2w"]
 [ext_resource type="PackedScene" uid="uid://boujb4h3xtdhe" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="12_ntmmq"]
 [ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="16_tc1bk"]
@@ -24,6 +25,9 @@ offset_left = -640.0
 offset_right = -640.0
 grow_horizontal = 2
 script = ExtResource("1_1ymg0")
+
+[node name="ItemDescription" parent="." instance=ExtResource("2_keu3b")]
+position = Vector2(612, 612)
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
@@ -141,4 +145,5 @@ visible = false
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 
+[editable path="ItemDescription"]
 [editable path="NamePlates/save"]

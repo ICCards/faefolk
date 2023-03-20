@@ -150,7 +150,7 @@ position = Vector2(8, 0)
 position = Vector2(-8, 0)
 tile_set = SubResource("TileSet_5ts1w")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 983040, 2)
+layer_0/tile_data = PackedInt32Array(-65536, 917504, 4)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -20,10 +20,22 @@ extends Control
 @onready var dark_magic_btn = $Buttons/DarkMagicBtn
 
 var skill = "sword"
-
+var hovered_button = ""
+ 
 func initialize():
 	show()
 	set_bg()
+	
+func _physics_process(delta):
+	if not visible:
+		hovered_button = ""
+		$ItemNameBox.hide()
+		return
+	if hovered_button == "":
+		$ItemNameBox.hide()
+	else:
+		$ItemNameBox.item_name = hovered_button
+		$ItemNameBox.initialize()
 	
 func set_bg():
 	get_node("../../Background").set_deferred("texture", load("res://Assets/Images/User interface/inventory/skills/"+skill +"-tab.png"))
@@ -266,3 +278,44 @@ func _on_ElectricBtn_pressed():
 	set_bg()
 	
 
+
+
+func _on_sword_btn_mouse_entered():
+	hovered_button = "Sword"
+func _on_sword_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_bow_btn_mouse_entered():
+	hovered_button = "Bow"
+func _on_bow_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_wind_btn_mouse_entered():
+	hovered_button = "Wind Magic"
+func _on_wind_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_fire_btn_mouse_entered():
+	hovered_button = "Fire Magic"
+func _on_fire_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_earth_btn_mouse_entered():
+	hovered_button = "Earth Magic"
+func _on_earth_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_ice_btn_mouse_entered():
+	hovered_button = "Ice Magic"
+func _on_ice_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_electric_btn_mouse_entered():
+	hovered_button = "Electric Magic"
+func _on_electric_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_dark_magic_btn_mouse_entered():
+	hovered_button = "Dark Magic"
+func _on_dark_magic_btn_mouse_exited():
+	hovered_button = ""

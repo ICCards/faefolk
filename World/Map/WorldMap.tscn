@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c66ktnntnkqrx"]
 
 [ext_resource type="Script" path="res://World/Map/WorldMap.gd" id="1_1tori"]
-[ext_resource type="TileSet" path="res://Assets/Themes/MiniMap.tres" id="2"]
+[ext_resource type="TileSet" uid="uid://75mobw2f7ncu" path="res://Assets/Themes/MiniMap.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://ctfn0kqsd2hhf" path="res://Assets/Images/mini map/player mini map icon.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://deic1ed35diif" path="res://Assets/Images/Particles/Clouds.png" id="3_nnvqm"]
 [ext_resource type="Texture2D" uid="uid://cejx0b2rnkjnh" path="res://Assets/Images/mini map/black.png" id="4"]
@@ -43,7 +43,6 @@ script = ExtResource("1_1tori")
 scale = Vector2(0.05, 0.05)
 tile_set = ExtResource("2")
 format = 2
-layer_0/tile_data = PackedInt32Array(65471463, 4, 0, 65471464, 4, 0, 65471465, 4, 0, 65536999, 4, 0, 65537000, 4, 0, 65537001, 4, 0, 65602535, 4, 0, 65602536, 4, 0, 65602537, 4, 0)
 
 [node name="StormIcon" type="Sprite2D" parent="Map"]
 visible = false
@@ -66,7 +65,7 @@ format = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
-zoom = Vector2(0.4, 0.4)
+zoom = Vector2(0.8, 0.8)
 limit_left = 0
 limit_top = 0
 limit_right = 1600

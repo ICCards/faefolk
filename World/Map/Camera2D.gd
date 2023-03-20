@@ -1,16 +1,16 @@
 extends Camera2D
 class_name PanningCamera2D
 
-const MIN_ZOOM: float = 0.1
-const MAX_ZOOM: float = 1.2
+const MIN_ZOOM: float = 0.8
+const MAX_ZOOM: float = 1.6
 const ZOOM_RATE: float = 8.0
 const ZOOM_INCREMENT: float = 0.1
-
-var _target_zoom: float = 1.2
+var _target_zoom: float = 0.8
 
 
 func _ready():
-	focus_position(Vector2(500,500))
+	zoom = Vector2(MIN_ZOOM,MIN_ZOOM)
+	position = Vector2(900,800)
 
 func _physics_process(delta: float) -> void:
 	zoom = lerp(zoom, _target_zoom * Vector2.ONE, ZOOM_RATE * delta)

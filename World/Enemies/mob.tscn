@@ -3,10 +3,12 @@
 [ext_resource type="Script" path="res://World/Enemies/mob.gd" id="1_mwhk7"]
 
 [node name="Mob" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_mwhk7")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-scale = Vector2(1.5, 1.059)
+position = Vector2(2.38419e-07, 1)
+scale = Vector2(9.1, 7.5)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

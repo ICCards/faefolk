@@ -7,10 +7,29 @@ var item_name: String
 var item_category: String
 
 
-#func _ready():
-#	item_name = "sunflower"
-#	item_category = JsonData.item_data[item_name]["ItemCategory"]
-#	initialize()
+func _ready():
+	item_name = "bronze ore"
+	item_category = JsonData.item_data[item_name]["ItemCategory"]
+	initialize()
+
+func _physics_process(delta):
+	position = return_adjusted_position()
+
+func return_adjusted_position():
+	var y
+	var x
+	var pos = get_global_mouse_position() + Vector2(20,25)
+	var height = 3*$GridContainer.size.y
+	var width = 3*$GridContainer.size.x
+	if height+pos.y > 720:
+		y = 720-height
+	else:
+		y = pos.y
+	if width+pos.x > 1080:
+		x = 1080-width
+	else:
+		x = pos.x
+	return Vector2(x,y)
 
 
 func initialize():
@@ -21,9 +40,6 @@ func initialize():
 		set_health_and_energy()
 		set_size_of_description($Body/ItemName.size.x)
 		$GridContainer.size = Vector2( width , height )
-		#$Body.size.x = (width*5.7) 
-		#$Body/ItemDescription.size.x = (width*5.7) 
-		#$ItemName.size.x = width
 
 
 func set_health_and_energy():
@@ -46,8 +62,8 @@ func set_description_text(item):
 	if item:
 		var description = JsonData.item_data[item]["Description"]
 		$Body/ItemCategory.modulate = Util.returnCategoryColor(item_category)
-		$Body/ItemName.set_text(item.left(1).to_upper() + item.right(item.length()-1))
-		$Body/ItemCategory.set_text(item_category.left(1).to_upper() + item_category.right(item_category.length()-1))
+		$Body/ItemName.set_text(Util.capitalizeFirstLetter(item))
+		$Body/ItemCategory.set_text(Util.capitalizeFirstLetter(item_category))
 		$Body/ItemDescription.set_text(description)
 
 

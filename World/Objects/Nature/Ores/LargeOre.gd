@@ -34,11 +34,11 @@ func setTexture():
 		$LargeOre.call_deferred("hide")
 		$SmallOre.call_deferred("show")
 		large_break = true
-		Tiles.remove_valid_tiles(location+Vector2(-1,0), Vector2(2,1))
+		Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2(2,1))
 	else:
 		$LargeOre.call_deferred("show")
 		$SmallOre.call_deferred("hide")
-		Tiles.remove_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+		Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 
 
 func hit(tool_name):
@@ -75,7 +75,7 @@ func hit(tool_name):
 		destroyed = true
 		PlayerData.player_data["skill_experience"]["mining"] += 1
 		MapData.remove_object("ore_large",name)
-		Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,1))
+		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,1))
 		sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2x0kacdfasux"]
+[gd_scene load_steps=8 format=3 uid="uid://b2x0kacdfasux"]
 
 [ext_resource type="Texture2D" uid="uid://i5yl7stgqwwe" path="res://Assets/Images/User interface/inventory/skills/bow-tab.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Skills/Skills.gd" id="1_hpdih"]
+[ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="2_h6goq"]
 [ext_resource type="Texture2D" uid="uid://bkhq1r7wlc0aj" path="res://Assets/Images/Spell icons/sword/1.png" id="3"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_rvxbf"]
 [ext_resource type="Texture2D" uid="uid://j46qk3r1jujb" path="res://Assets/Images/Spell icons/sword/front.png" id="4"]
@@ -13,6 +14,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_hpdih")
+
+[node name="ItemNameBox" parent="." instance=ExtResource("2_h6goq")]
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
@@ -373,11 +376,27 @@ expand_mode = 1
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
+[connection signal="mouse_entered" from="Buttons/SwordBtn" to="." method="_on_sword_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/SwordBtn" to="." method="_on_sword_btn_mouse_exited"]
 [connection signal="pressed" from="Buttons/SwordBtn" to="." method="_on_SwordBtn_pressed"]
+[connection signal="mouse_entered" from="Buttons/BowBtn" to="." method="_on_bow_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/BowBtn" to="." method="_on_bow_btn_mouse_exited"]
 [connection signal="pressed" from="Buttons/BowBtn" to="." method="_on_BowBtn_pressed"]
+[connection signal="mouse_entered" from="Buttons/WindBtn" to="." method="_on_wind_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/WindBtn" to="." method="_on_wind_btn_mouse_exited"]
 [connection signal="pressed" from="Buttons/WindBtn" to="." method="_on_WindBtn_pressed"]
+[connection signal="mouse_entered" from="Buttons/FireBtn" to="." method="_on_fire_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/FireBtn" to="." method="_on_fire_btn_mouse_exited"]
 [connection signal="pressed" from="Buttons/FireBtn" to="." method="_on_FireBtn_pressed"]
+[connection signal="mouse_entered" from="Buttons/EarthBtn" to="." method="_on_earth_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/EarthBtn" to="." method="_on_earth_btn_mouse_exited"]
 [connection signal="pressed" from="Buttons/EarthBtn" to="." method="_on_EarthBtn_pressed"]
+[connection signal="mouse_entered" from="Buttons/IceBtn" to="." method="_on_ice_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/IceBtn" to="." method="_on_ice_btn_mouse_exited"]
 [connection signal="pressed" from="Buttons/IceBtn" to="." method="_on_IceBtn_pressed"]
+[connection signal="mouse_entered" from="Buttons/ElectricBtn" to="." method="_on_electric_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/ElectricBtn" to="." method="_on_electric_btn_mouse_exited"]
 [connection signal="pressed" from="Buttons/ElectricBtn" to="." method="_on_ElectricBtn_pressed"]
+[connection signal="mouse_entered" from="Buttons/DarkMagicBtn" to="." method="_on_dark_magic_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/DarkMagicBtn" to="." method="_on_dark_magic_btn_mouse_exited"]
 [connection signal="pressed" from="Buttons/DarkMagicBtn" to="." method="_on_DarkMagicBtn_pressed"]

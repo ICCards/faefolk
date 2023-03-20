@@ -9,7 +9,6 @@ var player
 var roamingStorm
 var roamingStorm2
 var direction
-var is_first_time_opened = false
 const NUM_COLUMNS = 8
 const NUM_ROWS = 8
 const MAP_WIDTH = 1000
@@ -24,7 +23,8 @@ enum Tiles {
 	WATER,
 	BEACH,
 	DESERT,
-	SNOW
+	SNOW,
+	DEEP_OCEAN
 }
 
 
@@ -47,10 +47,6 @@ func initialize():
 	$Camera2D.set_deferred("enabled", true)
 	Server.player_node.user_interface.get_node("Hotbar").call_deferred("hide") 
 	Server.player_node.user_interface.get_node("CombatHotbar").call_deferred("hide")
-	if not is_first_time_opened:
-		is_first_time_opened = true
-		$Camera2D.set_deferred("position", Vector2(800, 800))
-		$Camera2D.set_deferred("zoom",  Vector2(1.2, 1.2))
 	
 func set_inactive():
 	PlayerData.viewMapMode = false
@@ -118,13 +114,15 @@ func buildMap():
 	for loc in map["forest"]:
 		miniMap.set_cell(0,loc,Tiles.FOREST,Vector2i(0,0))
 	for loc in map["plains"]:
-		miniMap.set_cell(0,loc,Tiles.PLAINS,Vector2i(0,0))
+		miniMap.set_cell(0,loc[0],Tiles.PLAINS,Vector2i(0,0))
 	for loc in map["beach"]:
 		miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
 	for loc in map["desert"]:
 		miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
 	for loc in map["snow"]:
 		miniMap.set_cell(0,loc,Tiles.SNOW,Vector2i(0,0))
+	for loc in map["deep_ocean"]:
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):
 			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):

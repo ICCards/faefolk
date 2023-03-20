@@ -1,24 +1,25 @@
 [gd_scene load_steps=12 format=3 uid="uid://dvx8ynrvmjy27"]
 
-[ext_resource type="Texture2D" uid="uid://cceaehajhi1fn" path="res://Assets/Images/User interface/ItemDescription/top left.png" id="2_tpejx"]
-[ext_resource type="Texture2D" uid="uid://depdhukajwi8o" path="res://Assets/Images/User interface/ItemDescription/top middle.png" id="3_s3wb8"]
-[ext_resource type="Texture2D" uid="uid://ce0866p7bjuhe" path="res://Assets/Images/User interface/ItemDescription/top right.png" id="4_tfm81"]
-[ext_resource type="Texture2D" uid="uid://i3wbkvhoxvt0" path="res://Assets/Images/User interface/ItemDescription/middle left.png" id="5_5cdw0"]
-[ext_resource type="Texture2D" uid="uid://hrlgt1h83prw" path="res://Assets/Images/User interface/ItemDescription/middle middle.png" id="6_k43ty"]
-[ext_resource type="Texture2D" uid="uid://babk3pnbuow7c" path="res://Assets/Images/User interface/ItemDescription/middle right.png" id="7_rankb"]
-[ext_resource type="Texture2D" uid="uid://b2vb7wblagmj5" path="res://Assets/Images/User interface/ItemDescription/bottom left.png" id="8_bsc0t"]
-[ext_resource type="Texture2D" uid="uid://biw4774ascrpc" path="res://Assets/Images/User interface/ItemDescription/bottom middle.png" id="9_yatcl"]
-[ext_resource type="Texture2D" uid="uid://c2ubln736uoqq" path="res://Assets/Images/User interface/ItemDescription/bottom right.png" id="10_f5mjf"]
+[ext_resource type="Texture2D" uid="uid://cd2bktiiba0je" path="res://Assets/Images/User interface/ItemDescription/top left.png" id="2_tpejx"]
+[ext_resource type="Texture2D" uid="uid://cb73f85qmedbc" path="res://Assets/Images/User interface/ItemDescription/top middle.png" id="3_s3wb8"]
+[ext_resource type="Texture2D" uid="uid://cx7507221igb4" path="res://Assets/Images/User interface/ItemDescription/top right.png" id="4_tfm81"]
+[ext_resource type="Texture2D" uid="uid://bqx0jyd7h205w" path="res://Assets/Images/User interface/ItemDescription/middle left.png" id="5_5cdw0"]
+[ext_resource type="Texture2D" uid="uid://cm4fkbdmd2ipp" path="res://Assets/Images/User interface/ItemDescription/middle middle.png" id="6_k43ty"]
+[ext_resource type="Texture2D" uid="uid://d0gjpcrw8xril" path="res://Assets/Images/User interface/ItemDescription/middle right.png" id="7_rankb"]
+[ext_resource type="Texture2D" uid="uid://fn688m8acb53" path="res://Assets/Images/User interface/ItemDescription/bottom left.png" id="8_bsc0t"]
+[ext_resource type="Texture2D" uid="uid://bg87pb5sopgdj" path="res://Assets/Images/User interface/ItemDescription/bottom middle.png" id="9_yatcl"]
+[ext_resource type="Texture2D" uid="uid://dvvmfhcou6gfm" path="res://Assets/Images/User interface/ItemDescription/bottom right.png" id="10_f5mjf"]
 [ext_resource type="Script" path="res://InventoryLogic/CollectionItemDescription.gd" id="11"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="11_8kyi1"]
 
 [node name="CollectionItemDescription" type="Node2D"]
 z_index = 1
+scale = Vector2(3, 3)
 script = ExtResource("11")
 
 [node name="GridContainer" type="VBoxContainer" parent="."]
 offset_right = 39.0
-offset_bottom = 50.0
+offset_bottom = 40.0
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
@@ -89,28 +90,45 @@ layout_mode = 2
 texture = ExtResource("10_f5mjf")
 stretch_mode = 1
 
-[node name="ItemName" type="Label" parent="."]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 651.0
-offset_bottom = 243.0
-scale = Vector2(0.05, 0.05)
-theme = ExtResource("11_8kyi1")
-text = "Wood path"
-
 [node name="Body" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(320, 188)
 offset_left = 5.0
-offset_top = 18.0
-offset_right = 325.0
-offset_bottom = 206.0
-scale = Vector2(0.15, 0.15)
+offset_top = 4.5
+offset_right = 731.0
+offset_bottom = 1512.5
+scale = Vector2(0.041, 0.041)
+
+[node name="ItemName" type="Label" parent="Body"]
+layout_mode = 2
+theme = ExtResource("11_8kyi1")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_font_sizes/font_size = 220
+text = "Stone"
+
+[node name="Control" type="Control" parent="Body"]
+custom_minimum_size = Vector2(2.08165e-12, 56)
+layout_mode = 2
 
 [node name="ItemDescription" type="Label" parent="Body"]
+custom_minimum_size = Vector2(2.08165e-12, 1)
 layout_mode = 2
-text = "Some random descrwhiption tha "
+theme = ExtResource("11_8kyi1")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/line_spacing = -11
+theme_override_font_sizes/font_size = 112
+text = "Wood harvest"
+autowrap_mode = 2
 
 [node name="ItemAmount" type="Label" parent="Body"]
-modulate = Color(1, 0.705882, 0.145098, 1)
+modulate = Color(0.733333, 0.380392, 1, 1)
 layout_mode = 2
-text = "Food"
+theme = ExtResource("11_8kyi1")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_font_sizes/font_size = 112
+text = "Resource"

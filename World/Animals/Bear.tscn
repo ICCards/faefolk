@@ -241,18 +241,6 @@ tracks/13/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Body:material:shader_parameter/flash_modifier")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="10"]
 resource_name = "bite"
@@ -437,10 +425,10 @@ tracks/12/path = NodePath("Body:material:shader_parameter/flash_modifier")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0]
+"values": [1.0, 1.0, 0.0]
 }
 
 [sub_resource type="Animation" id="8"]
@@ -661,6 +649,7 @@ script = ExtResource("2_j0bup")
 [node name="SetEnemyDirection" parent="." instance=ExtResource("7_mfwsv")]
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
+visible = false
 material = SubResource("130")
 emitting = false
 amount = 3

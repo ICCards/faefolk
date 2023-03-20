@@ -46,23 +46,20 @@ func initialize_crafting():
 
 
 func _physics_process(delta):
-	return
 	if not visible:
 		return
 	if hovered_item and not find_parent("UserInterface").holding_item:
 		get_node("../../ItemDescription").show()
-		get_node("../../ItemDescription").item_category = JsonData.item_data[hovered_item]["ItemCategory"]
 		get_node("../../ItemDescription").item_name = hovered_item
 		get_node("../../ItemDescription").initialize()
 	else:
 		get_node("../../ItemDescription").hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
-		$CraftingItemDescription.visible = true
+		$CraftingItemDescription.show()
 		$CraftingItemDescription.item_name = crafting_item
-		$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 		$CraftingItemDescription.initialize()
 	else:
-		$CraftingItemDescription.visible = false
+		$CraftingItemDescription.hide()
 
 func entered_crafting_area(_item):
 	await get_tree().idle_frame

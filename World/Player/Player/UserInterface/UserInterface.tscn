@@ -387,8 +387,6 @@ text = "Saving progress"
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
-offset_top = 594.0
-offset_bottom = 594.0
 
 [node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
 

@@ -57,7 +57,7 @@ func string_to_vector2(string) -> Vector2:
 
 
 func capitalizeFirstLetter(string) -> String:
-	return string.left(1).to_upper() + string.substr(1,-1)
+	return string.left(1).to_upper() + string.right(string.length()-1)
 	
 func set_swing_position(_pos, _direction):
 	match _direction:
@@ -235,14 +235,14 @@ func isValidEnemyAttack(los) -> bool:
 		return false
 	return true
 
-func is_border_tile(_pos, _tiles):
-	if not _tiles.has(_pos+Vector2(1,0)):
+func is_border_tile(_loc, _tiles):
+	if not _tiles.has(_loc+Vector2i(1,0)):
 		return true
-	if not _tiles.has(_pos+Vector2(-1,0)):
+	if not _tiles.has(_loc+Vector2i(-1,0)):
 		return true
-	if not _tiles.has(_pos+Vector2(0,1)):
+	if not _tiles.has(_loc+Vector2i(0,1)):
 		return true
-	if not _tiles.has(_pos+Vector2(0,-1)):
+	if not _tiles.has(_loc+Vector2i(0,-1)):
 		return true
 	return false
 

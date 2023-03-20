@@ -9,14 +9,12 @@ func _ready():
 	initialize()
 
 func _physics_process(delta):
-	return
 	if not visible:
 		item = null
 		page = ""
 		return
 	if item:
 		if page == "Crops" and PlayerData.player_data["collections"]["crops"][item] != 0:
-			set_adjusted_pos()
 			$ItemNameBox.hide()
 			$CollectionItemDescription.initialize(item)
 			$CollectionItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
@@ -44,19 +42,13 @@ func _physics_process(delta):
 			$CollectionItemDescription.hide()
 			$ItemNameBox.item_name = "?????"
 			$ItemNameBox.initialize()
-			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
 	elif tab:
 		$ItemNameBox.item_name = tab
 		$ItemNameBox.initialize()
-		$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
 	else:
 		$CollectionItemDescription.hide()
 		$ItemNameBox.hide()
 
-func set_adjusted_pos():
-	await get_tree().idle_frame
-	var height = $CollectionItemDescription/GridContainer.size.y
-	adjusted_pos = get_local_mouse_position() + Vector2(20 , 25)
 
 func initialize():
 	show()

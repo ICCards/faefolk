@@ -7,7 +7,8 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.16, 0.16)
 theme = ExtResource("1_kj33m")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "A1"
 script = ExtResource("2_th0qu")

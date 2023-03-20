@@ -182,7 +182,7 @@ func destroy(killed_by_player):
 	if Util.chance(50):
 		InstancedScenes.intitiateItemDrop("raw egg", position, 1) 
 	await $AnimationPlayer.animation_finished
-	queue_free()
+	get_parent().call_deferred("queue_free")
 
 func start_run_state():
 	navigation_agent.set_deferred("max_speed", 130)

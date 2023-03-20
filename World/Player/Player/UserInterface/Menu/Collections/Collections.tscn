@@ -1,7 +1,9 @@
-[gd_scene load_steps=118 format=3 uid="uid://b3ad8jm57r5at"]
+[gd_scene load_steps=98 format=3 uid="uid://b3ad8jm57r5at"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" id="1_co4t8"]
 [ext_resource type="Texture2D" uid="uid://xdnb6a0u2yhl" path="res://Assets/Images/User interface/inventory/collections/crops-tab.png" id="2_apuhn"]
+[ext_resource type="PackedScene" uid="uid://dvx8ynrvmjy27" path="res://InventoryLogic/CollectionItemDescription.tscn" id="2_bgdpv"]
+[ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="3_dd2yt"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" id="5_pwxe3"]
 [ext_resource type="Texture2D" uid="uid://by5u0b077vfy6" path="res://Assets/Images/inventory_icons/Crop/carrot.png" id="6_ddxck"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" id="7_du1gv"]
@@ -16,144 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="15_uwvpa"]
 [ext_resource type="Texture2D" uid="uid://dy3mb48lfw7fd" path="res://Assets/Images/inventory_icons/Food/asparagus omelette.png" id="17_3wrdp"]
 [ext_resource type="Texture2D" uid="uid://cg87fknnqacnk" path="res://Assets/Images/inventory_icons/Food/pepper and asparagus stir fry.png" id="19_3cenc"]
-
-[sub_resource type="Shader" id="16"]
-code = "shader_type canvas_item;
-
-uniform vec4 flash_color : source_color = vec4(1.0);
-uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV);
-	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
-	COLOR = color;
-}"
-
-[sub_resource type="ShaderMaterial" id="50"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="51"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="52"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="53"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="54"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="55"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="56"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="57"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="58"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="59"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="60"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="61"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="62"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="63"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="64"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="65"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="66"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="67"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="68"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="69"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="70"]
-resource_local_to_scene = true
-shader = SubResource("16")
-shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
-shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="Shader" id="383"]
 code = "shader_type canvas_item;
@@ -661,6 +525,12 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_co4t8")
 
+[node name="CollectionItemDescription" parent="." instance=ExtResource("2_bgdpv")]
+visible = false
+
+[node name="ItemNameBox" parent="." instance=ExtResource("3_dd2yt")]
+visible = false
+
 [node name="Background" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
@@ -715,6 +585,7 @@ focus_mode = 0
 flat = true
 
 [node name="CropCollection" type="GridContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 427.0
 offset_top = 191.0
@@ -727,133 +598,155 @@ columns = 6
 script = ExtResource("5_pwxe3")
 
 [node name="corn" type="TextureRect" parent="CropCollection"]
-material = SubResource("50")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="garlic" type="TextureRect" parent="CropCollection"]
-material = SubResource("50")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="blueberry" type="TextureRect" parent="CropCollection"]
-material = SubResource("51")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="asparagus" type="TextureRect" parent="CropCollection"]
-material = SubResource("52")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="cabbage" type="TextureRect" parent="CropCollection"]
-material = SubResource("53")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="carrot" type="TextureRect" parent="CropCollection"]
-material = SubResource("54")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="cauliflower" type="TextureRect" parent="CropCollection"]
-material = SubResource("55")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="grape" type="TextureRect" parent="CropCollection"]
-material = SubResource("56")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="green bean" type="TextureRect" parent="CropCollection"]
-material = SubResource("57")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="honeydew melon" type="TextureRect" parent="CropCollection"]
-material = SubResource("58")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="green pepper" type="TextureRect" parent="CropCollection"]
-material = SubResource("59")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="jalapeno" type="TextureRect" parent="CropCollection"]
-material = SubResource("60")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="potato" type="TextureRect" parent="CropCollection"]
-material = SubResource("61")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="radish" type="TextureRect" parent="CropCollection"]
-material = SubResource("62")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="red pepper" type="TextureRect" parent="CropCollection"]
-material = SubResource("63")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="strawberry" type="TextureRect" parent="CropCollection"]
-material = SubResource("64")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="sugar cane" type="TextureRect" parent="CropCollection"]
-material = SubResource("65")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="tomato" type="TextureRect" parent="CropCollection"]
-material = SubResource("66")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="wheat" type="TextureRect" parent="CropCollection"]
-material = SubResource("67")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="yellow onion" type="TextureRect" parent="CropCollection"]
-material = SubResource("68")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="yellow pepper" type="TextureRect" parent="CropCollection"]
-material = SubResource("69")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")
 
 [node name="zucchini" type="TextureRect" parent="CropCollection"]
-material = SubResource("70")
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
 layout_mode = 2
 texture = ExtResource("6_ddxck")
 script = ExtResource("7_du1gv")

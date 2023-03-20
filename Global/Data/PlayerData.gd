@@ -84,7 +84,7 @@ var starting_player_data = {
 			"4": ["iron ingot", 999, null],
 			"13": ["wood", 999, null],
 			"12": ["potato seeds", 99, null],
-#			"14": ["plum seeds", 99, null],
+			"14": ["garlic seeds", 99, null],
 #			"15": ["pear seeds", 99, null],
 #			"10": ["evergreen seeds", 99, null],
 	#		"15": ["wheat flour", 99, null],

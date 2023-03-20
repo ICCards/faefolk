@@ -14,7 +14,7 @@ func _physics_process(delta):
 	return
 	if not visible:
 		return
-	$ItemDescription.position = get_local_mouse_position() + Vector2(20,25)
+#	$ItemDescription.position = get_local_mouse_position() + Vector2(20,25)
 	$ItemNameBox.position = get_local_mouse_position() + Vector2(20,25)
 
 func _input(_event):

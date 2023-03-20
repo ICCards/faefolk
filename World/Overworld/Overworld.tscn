@@ -4880,16 +4880,19 @@ script = ExtResource("3_wljwc")
 script = ExtResource("5_rg3rs")
 
 [node name="SpawnAnimalTimer" type="Timer" parent="WorldBuilder/SpawnAnimal"]
+wait_time = 3.3
 
 [node name="BuildNature" type="Node" parent="WorldBuilder"]
 script = ExtResource("4_t6ne8")
 
 [node name="SpawnNatureTimer" type="Timer" parent="WorldBuilder/BuildNature"]
+wait_time = 2.1
 
 [node name="BuildTerrain" type="Node" parent="WorldBuilder"]
 script = ExtResource("3_lsbjc")
 
 [node name="BuildTerrainTimer" type="Timer" parent="WorldBuilder/BuildTerrain"]
+wait_time = 2.9
 
 [node name="WorldBuilderTimer" type="Timer" parent="WorldBuilder"]
 
@@ -4924,13 +4927,13 @@ tile_set = ExtResource("9_oleut")
 format = 2
 
 [node name="Elevation" type="TileMap" parent="TerrainTiles"]
+visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
 tile_set = ExtResource("4_ivuyl")
 format = 2
 
 [node name="Forest" type="TileMap" parent="TerrainTiles"]
-visible = false
-modulate = Color(1.4, 1.4, 1.4, 1)
+modulate = Color(1.2, 1.2, 1.2, 1)
 tile_set = ExtResource("11_tab0o")
 format = 2
 
@@ -4945,12 +4948,10 @@ tile_set = SubResource("TileSet_6fr2d")
 format = 2
 
 [node name="Waves" type="TileMap" parent="TerrainTiles"]
-visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -2
 tile_set = ExtResource("13_0awxb")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 1638400, 60, 262148, 1703936, 61, 196612, 1638400, 64, 131076, 1769472, 61, 65540, 1769472, 61, 4, 1769472, 60, 262147, 1703936, 63, 196611, 1703936, 61, 131075, 1703936, 61, 65539, 1703936, 61, 3, 1703936, 60, 262146, 1703936, 62, 196610, 1703936, 61, 131074, 1703936, 61, 65538, 1703936, 61, 2, 1703936, 60, 262145, 1703936, 62, 196609, 1703936, 61, 131073, 1703936, 61, 65537, 1703936, 61, 1, 1703936, 60, 262144, 1638400, 62, 196608, 1638400, 61, 131072, 1638400, 61, 65536, 1638400, 61, 327685, 1769472, 62, 262149, 1769472, 61, 196613, 1769472, 60, 327684, 1703936, 62, 327683, 1638400, 62)
 
 [node name="Snow" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
@@ -4964,12 +4965,10 @@ tile_set = ExtResource("16_ckub1")
 format = 2
 
 [node name="ShallowOcean" type="TileMap" parent="TerrainTiles"]
-visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -3
 tile_set = SubResource("TileSet_cl0rm")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 1703936, 58, 1, 1703936, 58, 2, 1703936, 58, 65539, 1703936, 58, 65540, 1703936, 58, 4, 1703936, 58, 3, 1703936, 58, 65537, 1703936, 58, 65538, 1703936, 58, 65536, 1703936, 58, 131072, 1703936, 58, 196608, 1703936, 58, 196609, 1703936, 58, 262145, 1703936, 58, 196610, 1703936, 58, 131073, 1703936, 58, 262144, 1703936, 58, 262146, 1703936, 58, 131074, 1703936, 58, 131075, 1703936, 58, 196611, 1703936, 58, 262147, 1703936, 58, 262148, 1703936, 58, 196612, 1703936, 58, 131076, 1703936, 58, 196613, 1703936, 58, 262149, 1703936, 58, 327685, 1703936, 58, 327684, 1703936, 58, 327683, 1703936, 58)
 
 [node name="Beach" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)

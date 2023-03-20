@@ -255,7 +255,7 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("raw filet", position, rng.randi_range(1,3))
 	InstancedScenes.intitiateItemDrop("cloth", position, rng.randi_range(1,3))
 	await animation_player.animation_finished
-	queue_free()
+	get_parent().call_deferred("queue_free")
 
 func _on_HurtBox_area_entered(area):
 	if not hit_projectiles.has(area.id):

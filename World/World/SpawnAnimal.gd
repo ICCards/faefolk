@@ -39,15 +39,15 @@ func return_baby_bird_pos():
 func initialize():
 	await get_tree().create_timer(2.0).timeout
 	spawn_thread.start(Callable(self,"_whoAmI"))
-#	remove_thread.start(Callable(self,"_whoAmI2"))
+	remove_thread.start(Callable(self,"_whoAmI2"))
 	$SpawnAnimalTimer.start()
 
 
 func _on_spawn_animal_timer_timeout():
 	if not spawn_thread.is_started():
 		spawn_thread.start(Callable(self,"_whoAmI"))
-#	if not remove_thread.is_started():
-#		remove_thread.start(Callable(self,"_whoAmI2"))
+	if not remove_thread.is_started():
+		remove_thread.start(Callable(self,"_whoAmI2"))
 
 func _whoAmI():
 	call_deferred("spawn_animals")
@@ -61,8 +61,8 @@ func remove_animals():
 			var value = remove_thread.wait_to_finish()
 			return
 		if is_instance_valid(node):
-			var player_pos = Server.player_node.position
-			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
+			var player_loc = Server.player_node.position/16
+			if player_loc.distance_to(node.get_children()[1].position/16) > Constants.DISTANCE_TO_REMOVE_OBJECT:
 				node.call_deferred("queue_free")
 				await get_tree().process_frame
 	await get_tree().create_timer(2.0).timeout
@@ -78,6 +78,7 @@ func spawn_animals():
 		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 			if not Enemies.has_node(id) and MapData.world["animal"].has(id):
 				spawn_mob(MapData.world, id)
+	print("NUM ANIMALS = " + str(Enemies.get_children().size()) )
 	await get_tree().create_timer(1.0).timeout
 	var value = spawn_thread.wait_to_finish()
 
@@ -88,51 +89,6 @@ func spawn_mob(map,id):
 	mob.id = id
 	Enemies.call_deferred("add_child", mob)
 
-
-func spawn_animal(map, id):
-	var animal_name = map["animal"][id]["n"]
-	var location = map["animal"][id]["l"]
-	match animal_name:
-		"bunny":
-			var animal = Bunny.instantiate()
-			animal.name = id
-			animal.health = map["animal"][id]["h"]
-			animal.variety = map["animal"][id]["v"]
-			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
-			Enemies.call_deferred("add_child", animal)
-		"duck":
-			var animal = Duck.instantiate()
-			animal.name = id
-			animal.health = map["animal"][id]["h"]
-			animal.variety = map["animal"][id]["v"]
-			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
-			Enemies.call_deferred("add_child", animal)
-		"bear":
-			var animal = Bear.instantiate()
-			animal.name = id
-			animal.health = map["animal"][id]["h"]
-			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(8,8)
-			Enemies.call_deferred("add_child", animal)
-		"boar":
-			var animal = Boar.instantiate()
-			animal.name = id
-			animal.health = map["animal"][id]["h"]
-			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
-			Enemies.call_deferred("add_child", animal)
-		"wolf":
-			var animal = Wolf.instantiate()
-			animal.name = id
-			animal.health = map["animal"][id]["h"]
-			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
-			Enemies.call_deferred("add_child", animal)
-		"deer":
-			var animal = Deer.instantiate()
-			animal.name = id
-			animal.health = map["animal"][id]["h"]
-			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(8, 8)
-			Enemies.call_deferred("add_child", animal)
-	await get_tree().process_frame
-##
 
 
 

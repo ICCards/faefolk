@@ -30,7 +30,7 @@ var temp_health: int = 3
 
 func _ready():
 	rng.randomize()
-	Tiles.remove_valid_tiles(location+Vector2(-1,0), Vector2i(2,2))
+	Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2i(2,2))
 	MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
 	call_deferred("set_tree")
 
@@ -67,7 +67,7 @@ func set_tree():
 
 
 func harvest():
-	if phase == "harvest":
+	if phase == "harvest" and health > 40:
 		$CollisionShape2D.set_deferred("disabled", true)
 		phase = "empty"
 		### FIX
@@ -258,7 +258,7 @@ func hit(tool_name):
 func destroy(tool_name):
 	MapData.remove_object("tree",name)
 	destroyed = true
-	Tiles.add_valid_tiles(location+Vector2(-1,0), Vector2(2,2))
+	Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 	if not tool_name == "sapling":
 		play_stump_break_animation()
 		animation_player_stump.call_deferred("play", "stump destroyed")

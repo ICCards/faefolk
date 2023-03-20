@@ -10,38 +10,45 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -788.0
-offset_bottom = -539.0
+offset_bottom = -606.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.14, 0.14)
 
 [node name="Name" type="Label" parent="."]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
-offset_left = 98.0
-offset_top = 20.0
-offset_right = 471.0
-offset_bottom = 104.0
-scale = Vector2(0.45, 0.45)
+offset_left = 313.999
+offset_top = 50.4286
+offset_right = 686.999
+offset_bottom = 181.429
 theme = ExtResource("1_g5wq4")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 112
 text = "Wood"
 
 [node name="Icon" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(84, 84)
 layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 90.0
-offset_bottom = 90.0
+offset_right = 220.0
+offset_bottom = 220.0
 texture = ExtResource("2_bfwx3")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="Amount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 69.0
-offset_right = 116.0
-offset_bottom = 194.0
-scale = Vector2(0.15, 0.15)
+offset_left = 155.143
+offset_top = 106.857
+offset_right = 315.143
+offset_bottom = 290.857
+scale = Vector2(0.6, 0.6)
 mouse_filter = 1
 theme = ExtResource("1_g5wq4")
-text = "999"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+text = "99"
+horizontal_alignment = 2

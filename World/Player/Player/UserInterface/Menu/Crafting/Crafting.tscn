@@ -30,8 +30,6 @@ VScrollBar/styles/scroll_focus = null
 [node name="Crafting" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("1_gsu72")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -45,7 +43,6 @@ stretch_mode = 3
 
 [node name="CraftingItemDescription" parent="." instance=ExtResource("4")]
 visible = false
-scale = Vector2(2.7, 2.7)
 
 [node name="SliderDecoration" type="TextureRect" parent="."]
 layout_mode = 0

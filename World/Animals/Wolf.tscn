@@ -542,8 +542,8 @@ position = Vector2(0, -8)
 [node name="WolfClaw" type="Area2D" parent="Marker2D"]
 position = Vector2(15, 0)
 rotation = 1.5708
-collision_layer = 0
-collision_mask = 128
+collision_layer = 128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/WolfClaw"]
 shape = SubResource("45")
@@ -552,8 +552,8 @@ disabled = true
 [node name="WolfBite" type="Area2D" parent="Marker2D"]
 position = Vector2(15, 0)
 rotation = 1.5708
-collision_layer = 0
-collision_mask = 128
+collision_layer = 128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/WolfBite"]
 shape = SubResource("52")

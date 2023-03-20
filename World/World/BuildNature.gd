@@ -120,39 +120,43 @@ func spawn_nature():
 		forage_thread.start(Callable(self,"_whoAmI6").bind(null))
 	if not navigation_thread.is_started():
 		navigation_thread.start(Callable(self,"_whoAmI7").bind(null))
+	print("NUM NATURE OBJECTS = " +str(NatureObjects.get_children().size()))
+	print("NUM GRASS OBJECTS = " +str(GrassObjects.get_children().size()))
+	print("NUM FORAGE OBJECTS = " +str(ForageObjects.get_children().size()))
 
 
 func remove_nature():
-	var player_pos = Server.player_node.position
+	var player_loc = Server.player_node.position/16
 	for node in NatureObjects.get_children():
 		if Server.world.is_changing_scene:
 			var value = remove_objects_thread.wait_to_finish()
 			return
 		if is_instance_valid(node) and not node.destroyed:
-			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				node.call_deferred("remove_from_world")
+			if player_loc.distance_to(node.position/16) > Constants.DISTANCE_TO_REMOVE_OBJECT:
+				node.call_deferred("queue_free")
 				await get_tree().process_frame
 	for node in ForageObjects.get_children():
 		if Server.world.is_changing_scene:
 			var value = remove_objects_thread.wait_to_finish()
 			return
 		if is_instance_valid(node):
-			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				node.call_deferred("remove_from_world")
+			if player_loc.distance_to(node.position/16) > Constants.DISTANCE_TO_REMOVE_OBJECT:
+				node.call_deferred("queue_free")
 				await get_tree().process_frame
 	var value = remove_objects_thread.wait_to_finish()
 
 
 func remove_grass():
-	var player_pos = Server.player_node.position
+	var player_loc = Server.player_node.position/16
 	for node in GrassObjects.get_children():
 		if Server.world.is_changing_scene:
 			var value = remove_grass_thread.wait_to_finish()
 			return
 		if is_instance_valid(node) and not node.destroyed:
-			if player_pos.distance_to(node.position) > Constants.DISTANCE_TO_REMOVE_OBJECT*32:
-				node.call_deferred("remove_from_world")
+			if player_loc.distance_to(node.position/16) > Constants.DISTANCE_TO_REMOVE_OBJECT:
+				node.call_deferred("queue_free")
 				await get_tree().process_frame
+	print("RemOVED GRASS")
 	var value = remove_grass_thread.wait_to_finish()
 
 func spawn_trees():
@@ -163,7 +167,7 @@ func spawn_trees():
 			return
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["tree"]:
-			var loc = map["tree"][id]["l"]+Vector2(1,0)
+			var loc = map["tree"][id]["l"]+Vector2i(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and MapData.world["tree"].has(id):
 					var biome = map["tree"][id]["b"]
@@ -182,7 +186,7 @@ func spawn_trees():
 					PlaceObject.place_log_in_world(id,MapData.world["log"][id]["v"],loc)
 					await get_tree().process_frame
 		for id in map["stump"]:
-			var loc = map["stump"][id]["l"] + Vector2(1,0)
+			var loc = map["stump"][id]["l"] + Vector2i(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and MapData.world["stump"].has(id):
 					var variety= MapData.world["stump"][id]["v"]
@@ -199,7 +203,7 @@ func spawn_ores():
 			return
 		var map = MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["ore_large"]:
-			var loc = map["ore_large"][id]["l"] + Vector2(1,0)
+			var loc = map["ore_large"][id]["l"] + Vector2i(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and MapData.world["ore_large"].has(id):
 					var health = MapData.world["ore_large"][id]["h"]

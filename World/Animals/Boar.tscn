@@ -129,6 +129,42 @@ tracks/3/keys = {
 "update": 0,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="22"]
 resource_name = "attack"
@@ -225,7 +261,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/5/path = NodePath("KnockbackParticles:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -237,7 +273,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -249,7 +285,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -261,7 +297,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("KnockbackParticles:visible")
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -439,6 +475,7 @@ position = Vector2(0, -8)
 [node name="SetEnemyDirection" parent="." instance=ExtResource("6_5ux40")]
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
+visible = false
 material = SubResource("41")
 emitting = false
 amount = 3

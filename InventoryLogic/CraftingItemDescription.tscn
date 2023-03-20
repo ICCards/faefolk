@@ -1,138 +1,161 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvkxqo4ch3k81"]
+[gd_scene load_steps=13 format=3 uid="uid://cvkxqo4ch3k81"]
 
+[ext_resource type="Texture2D" uid="uid://cd2bktiiba0je" path="res://Assets/Images/User interface/ItemDescription/top left.png" id="2_fsha2"]
+[ext_resource type="Texture2D" uid="uid://cb73f85qmedbc" path="res://Assets/Images/User interface/ItemDescription/top middle.png" id="3_awftc"]
+[ext_resource type="Texture2D" uid="uid://cx7507221igb4" path="res://Assets/Images/User interface/ItemDescription/top right.png" id="4_nfn8d"]
+[ext_resource type="Texture2D" uid="uid://bqx0jyd7h205w" path="res://Assets/Images/User interface/ItemDescription/middle left.png" id="5_xlfdl"]
+[ext_resource type="Texture2D" uid="uid://cm4fkbdmd2ipp" path="res://Assets/Images/User interface/ItemDescription/middle middle.png" id="6_3ksiw"]
+[ext_resource type="Texture2D" uid="uid://d0gjpcrw8xril" path="res://Assets/Images/User interface/ItemDescription/middle right.png" id="7_h2lce"]
+[ext_resource type="Texture2D" uid="uid://fn688m8acb53" path="res://Assets/Images/User interface/ItemDescription/bottom left.png" id="8_in6nx"]
+[ext_resource type="Texture2D" uid="uid://bg87pb5sopgdj" path="res://Assets/Images/User interface/ItemDescription/bottom middle.png" id="9_u8nti"]
+[ext_resource type="Texture2D" uid="uid://dvvmfhcou6gfm" path="res://Assets/Images/User interface/ItemDescription/bottom right.png" id="10_dl77v"]
 [ext_resource type="Script" path="res://InventoryLogic/CraftingItemDescription.gd" id="11"]
-[ext_resource type="PackedScene" path="res://InventoryLogic/Ingredient.tscn" id="12"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="11_11yix"]
+[ext_resource type="PackedScene" uid="uid://b7ai8vbcyvkti" path="res://InventoryLogic/Ingredient.tscn" id="12"]
 
 [node name="CraftingItemDescription" type="Node2D"]
 z_index = 2
-scale = Vector2(2.4, 2.4)
+scale = Vector2(3, 3)
 script = ExtResource("11")
 
-[node name="GridContainer" type="GridContainer" parent="."]
-offset_right = 61.0
-offset_bottom = 142.0
+[node name="GridContainer" type="VBoxContainer" parent="."]
+offset_right = 48.0
+offset_bottom = 63.0
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="TopRow" type="GridContainer" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
 columns = 3
 
 [node name="TopLeft" type="TextureRect" parent="GridContainer/TopRow"]
 layout_mode = 2
+texture = ExtResource("2_fsha2")
 
 [node name="TopMiddle" type="TextureRect" parent="GridContainer/TopRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("3_awftc")
 stretch_mode = 1
 
 [node name="TopRight" type="TextureRect" parent="GridContainer/TopRow"]
 layout_mode = 2
+texture = ExtResource("4_nfn8d")
 stretch_mode = 1
 
 [node name="MiddleRow" type="GridContainer" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 0
 columns = 3
 
 [node name="MiddleLeft" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
-stretch_mode = 2
+texture = ExtResource("5_xlfdl")
+stretch_mode = 1
 
-[node name="MiddleLeft2" type="TextureRect" parent="GridContainer/MiddleRow"]
+[node name="MiddleMiddle" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+texture = ExtResource("6_3ksiw")
 expand_mode = 1
 
-[node name="TopRight2" type="TextureRect" parent="GridContainer/MiddleRow"]
+[node name="MiddleRight" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
-size_flags_vertical = 3
+texture = ExtResource("7_h2lce")
 stretch_mode = 1
 
 [node name="BottomRow" type="GridContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/h_separation = 0
 columns = 3
 
 [node name="BottomLeft" type="TextureRect" parent="GridContainer/BottomRow"]
 layout_mode = 2
+texture = ExtResource("8_in6nx")
 
 [node name="BottomMiddle" type="TextureRect" parent="GridContainer/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("9_u8nti")
 expand_mode = 1
 
 [node name="BottomRight" type="TextureRect" parent="GridContainer/BottomRow"]
 layout_mode = 2
-stretch_mode = 1
+texture = ExtResource("10_dl77v")
 
-[node name="Divider1" type="ColorRect" parent="."]
-offset_left = 6.0
-offset_top = 27.1111
-offset_right = 49.0
-offset_bottom = 28.1111
-color = Color(0.121569, 0.105882, 0.184314, 1)
+[node name="Body" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(320, 188)
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 932.0
+offset_bottom = 1633.0
+scale = Vector2(0.041, 0.041)
 
-[node name="Divider2" type="ColorRect" parent="."]
-offset_left = 6.0
-offset_top = 52.0
-offset_right = 49.0
-offset_bottom = 53.0
-color = Color(0.121569, 0.105882, 0.184314, 1)
+[node name="ItemName" type="Label" parent="Body"]
+layout_mode = 2
+theme = ExtResource("11_11yix")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_font_sizes/font_size = 220
+text = "Stone axe"
 
-[node name="Ingredients" type="Label" parent="."]
-offset_left = 6.0
-offset_top = 18.0
-offset_right = 306.0
-offset_bottom = 93.0
-scale = Vector2(0.12, 0.12)
+[node name="Control" type="Control" parent="Body"]
+custom_minimum_size = Vector2(2.08165e-12, 56)
+layout_mode = 2
+
+[node name="Ingredients" type="Label" parent="Body"]
+custom_minimum_size = Vector2(2.08165e-12, 134)
+layout_mode = 2
+theme = ExtResource("11_11yix")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_font_sizes/font_size = 112
 text = "Ingredients:"
 
-[node name="Ingredient1" parent="." instance=ExtResource("12")]
-layout_mode = 3
-anchors_preset = 15
-offset_left = 5.92593
-offset_top = 26.4814
-offset_right = 5.92593
-offset_bottom = 58.4814
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Divider1" type="ColorRect" parent="Body"]
+custom_minimum_size = Vector2(2.08165e-12, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
 
-[node name="Ingredient2" parent="." instance=ExtResource("12")]
-layout_mode = 3
-anchors_preset = 15
-offset_left = 5.92593
-offset_top = 36.6668
-offset_right = 5.92593
-offset_bottom = 68.6668
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Ingredient1" parent="Body" instance=ExtResource("12")]
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
 
-[node name="Ingredient3" parent="." instance=ExtResource("12")]
-layout_mode = 3
-anchors_preset = 15
-offset_left = 5.926
-offset_top = 46.0
-offset_right = 5.926
-offset_bottom = 78.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Ingredient2" parent="Body" instance=ExtResource("12")]
+visible = false
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
 
-[node name="ItemName" type="Label" parent="."]
-offset_left = 5.14286
-offset_top = 3.61905
-offset_right = 220.143
-offset_bottom = 64.619
-scale = Vector2(0.2, 0.2)
-text = "Wood path"
+[node name="Ingredient3" parent="Body" instance=ExtResource("12")]
+visible = false
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
 
-[node name="ItemDescription" type="Label" parent="."]
-offset_left = 6.0
-offset_top = 54.0
-offset_right = 377.0
-offset_bottom = 308.0
-scale = Vector2(0.12, 0.12)
-text = "Some random description that is just here for some filler code"
+[node name="Divider2" type="ColorRect" parent="Body"]
+custom_minimum_size = Vector2(2.08165e-12, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Control2" type="Control" parent="Body"]
+custom_minimum_size = Vector2(2.08165e-12, 16)
+layout_mode = 2
+
+[node name="ItemDescription" type="Label" parent="Body"]
+layout_mode = 2
+theme = ExtResource("11_11yix")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/line_spacing = -11
+theme_override_font_sizes/font_size = 112
+text = "Wood harvested soajdojsa dosa jdmsa dmsamd mmdsa kmdasm "
+autowrap_mode = 2

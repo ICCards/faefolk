@@ -56,6 +56,7 @@ func _on_Area2D_area_entered(area):
 		destroyed = true
 		Tiles.add_valid_tiles(location)
 		MapData.remove_object("tall_grass",name) 
+		$Area2D/CollisionShape2D.set_deferred("disabled",true)
 		$Weed/TileMap.call_deferred("hide")
 		$LeafBreak.call_deferred("show")
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))

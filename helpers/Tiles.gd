@@ -18,6 +18,45 @@ var light_tiles: TileMap = null
 var wet_sand_tiles: TileMap = null
 var cave_wall_tiles: TileMap = null
 
+var rng = RandomNumberGenerator.new()
+
+
+
+func return_atlas_tile_cord(tile_name,id):
+	match tile_name:
+		"plains":
+			match id:
+				0:
+					if Util.chance(50):
+						return Vector2i(rng.randi_range(30,32),rng.randi_range(17,19))
+					else:
+						return Vector2i(rng.randi_range(38,47),rng.randi_range(28,35))
+				1:
+					return Vector2i(25,15)
+				2:
+					return Vector2i(24,15)
+				3:
+					return Vector2i(24,14)
+				4:
+					return Vector2i(25,14)
+				5:
+					return Vector2i(rng.randi_range(30,32),16)
+				6:
+					return Vector2i(33,rng.randi_range(17,19))
+				7:
+					return Vector2i(rng.randi_range(30,32),20)
+				8:
+					return Vector2i(29,rng.randi_range(17,19))
+				9:
+					return Vector2i(29,16)
+				10:
+					return Vector2i(33,16)
+				11:
+					return Vector2i(33,20)
+				12:
+					return Vector2i(29,20)
+	
+
 
 func validate_forest_tiles(location):
 	var active = false
