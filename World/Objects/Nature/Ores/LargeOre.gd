@@ -52,7 +52,7 @@ func hit(tool_name):
 		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-12,12), rng.randi_range(-8,8)))
 		animation_player.call_deferred("play", "large ore hit")
 	elif not large_break:
-		Tiles.add_valid_tiles(location+Vector2(-1,-1), Vector2(2,1))
+		Tiles.add_valid_tiles(location+Vector2i(-1,-1), Vector2(2,1))
 		large_break = true
 		sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))

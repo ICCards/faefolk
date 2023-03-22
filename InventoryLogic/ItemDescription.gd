@@ -33,7 +33,8 @@ func return_adjusted_position():
 
 
 func initialize():
-	if not Server.world.is_changing_scene:
+	#if not Server.world.is_changing_scene:
+		show()
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
 		set_description_text(item_name)
 		await get_tree().process_frame

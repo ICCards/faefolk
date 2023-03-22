@@ -2,22 +2,17 @@
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Stove/item_button.gd" id="1_lj34b"]
 [ext_resource type="Texture2D" uid="uid://d30i5wlgacql1" path="res://Assets/Images/inventory_icons/Food/baked catfish.png" id="2"]
-[ext_resource type="Material" path="res://Assets/Themes/LockedAsset.tres" id="3"]
+[ext_resource type="Material" uid="uid://d1xh7kpl8jvj7" path="res://Assets/Themes/HideCollection.tres" id="2_wfss7"]
 
 [node name="item_button" type="Control"]
-custom_minimum_size = Vector2(16, 16)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1008.0
-offset_bottom = -584.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 16.0
+offset_bottom = 16.0
 script = ExtResource("1_lj34b")
 
 [node name="button" type="TextureButton" parent="."]
-material = ExtResource("3")
+material = ExtResource("2_wfss7")
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0

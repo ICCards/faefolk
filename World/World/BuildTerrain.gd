@@ -53,17 +53,18 @@ func spawn_chunk(chunk_name):
 		_chunk = MapData.return_chunk(chunk_name.left(1),chunk_name.right(2))
 	if _chunk["plains"].size() > 0:
 		for tile in _chunk["plains"]:
-			plains.set_cell(0,tile[0],0,tile[1])
-			#plains.set_cells_terrain_connect(0,_chunk["plains"],0,0)
+			var atlas_cord = Tiles.return_atlas_tile_cord("plains",tile[1])
+			plains.set_cell(0,tile[0],0,atlas_cord)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["snow"].size() > 0:
-		for loc in _chunk["snow"]:
-			snow.set_cell(0,loc,0,Vector2i(41,18))
-	#	snow.set_cells_terrain_connect(0,_chunk["snow"],0,0)
+		for tile in _chunk["snow"]:
+			var atlas_cord = Tiles.return_atlas_tile_cord("snow",tile[1])
+			snow.set_cell(0,tile[0],0,atlas_cord)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["forest"].size() > 0:
-		for loc in _chunk["forest"]:
-			forest.set_cell(0,loc,0,Vector2i(31,25))
+		for tile in _chunk["forest"]:
+			var atlas_cord = Tiles.return_atlas_tile_cord("forest",tile[1])
+			forest.set_cell(0,tile[0],0,atlas_cord)
 		#forest.set_cells_terrain_connect(0,_chunk["forest"],0,0)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["beach"].size() > 0:
@@ -75,9 +76,9 @@ func spawn_chunk(chunk_name):
 			beach.set_cell(0,tile,0,Vector2i(rng.randi_range(50,52),rng.randi_range(24,26)))
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["dirt"].size() > 0:
-		for loc in _chunk["dirt"]:
-			dirt.set_cell(0,loc,0,Vector2i(41,18))
-#		dirt.set_cells_terrain_connect(0,_chunk["dirt"],0,0)
+		for tile in _chunk["dirt"]:
+			var atlas_cord = Tiles.return_atlas_tile_cord("dirt",tile[1])
+			dirt.set_cell(0,tile[0],0,atlas_cord)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["wet_sand"].size() > 0:
 		for tile in _chunk["wet_sand"]:

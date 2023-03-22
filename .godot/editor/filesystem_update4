@@ -1,4 +1,4 @@
-res://InventoryLogic/Ingredient.tscn
+res://World/Overworld/Overworld.tscn
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/terrain/elevated terrain.tres
 res://Assets/Tilesets/walls/walls.tres
@@ -6,63 +6,51 @@ res://Assets/Tilesets/terrain/tres files/plains.tres
 res://Assets/Tilesets/terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/terrain/tres files/dirt.tres
 res://Assets/Tilesets/terrain/tres files/forest.tres
+res://Assets/Themes/MiniMap.tres
 res://Assets/Tilesets/terrain/tres files/freshwater.tres
 res://Assets/Tilesets/terrain/tres files/waves.tres
 res://Assets/Tilesets/objects/objects.tres
 res://Assets/Tilesets/terrain/tres files/snow.tres
 res://Assets/Tilesets/terrain/tres files/wet sand.tres
-res://Assets/Themes/Flash.tres
-res://Assets/Images/Animals/Duck/duck3.tres
+res://World/Objects/Nature/Trees/Stump.tscn
+res://World/Objects/Nature/Ores/LargeOre.tscn
+res://World/Map/WorldMap.tscn
+res://Global/Data/MapData.gd
+res://World/World/BuildTerrain.gd
+res://World/World/SpawnAnimal.gd
+res://Global/Data/GenerateNewWorld.gd
+res://helpers/Tiles.gd
+res://World/Player/Player/Player.tscn
 res://Assets/Themes/text.tres
 res://Assets/Themes/LockedAsset.tres
 res://Assets/Themes/whiten.tres
-res://InventoryLogic/CraftingItemDescription.gd
-res://InventoryLogic/CraftingItemDescription.tscn
-res://InventoryLogic/ItemDescription.gd
-res://World/Overworld/Overworld.tscn
-res://World/Animals/Duck.tscn
-res://World/Player/Player/Player.tscn
-res://InventoryLogic/ItemDescription.tscn
-res://helpers/Util.gd
-res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn
-res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd
-res://World/Player/Player/UserInterface/Menu/Collections/Collections.tscn
-res://Assets/Themes/HideCollection.tres
+res://World/Overworld/Overworld.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
+res://World/Building/Tiles/Attached nodes/interactive_area.tscn
+res://World/Player/Player/Actions.gd
 res://Assets/Themes/whiten.gdshader
+res://World/Player/Player/Player.gd
+res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn
+res://InventoryLogic/ItemPickUpBox.tscn
+res://InventoryLogic/ItemPickUpBox.gd
+res://World/Player/Player/UserInterface/Workbench/Workbench.tscn
+res://World/Player/Player/UserInterface/Workbench/CraftingMenuWorkbench.gd
+res://World/Player/Player/UserInterface/Stove/item_button.tscn
+res://World/Player/Player/UserInterface/Workbench/Workbench.gd
+res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn
+res://InventoryLogic/ItemDescription.gd
+res://InventoryLogic/ItemDescription.tscn
+res://InventoryLogic/CraftingItemDescription.tscn
+res://InventoryLogic/CraftingItemDescription.gd
+res://World/Player/Player/UserInterface/Stove/staff_button.tscn
 res://Assets/Themes/Collections.gdshader
-res://InventoryLogic/ItemNameBox.tscn
-res://InventoryLogic/ItemNameBox.gd
-res://InventoryLogic/CollectionItemDescription.tscn
-res://InventoryLogic/CollectionItemDescription.gd
-res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd
-res://Global/Data/GenerateNewWorld.gd
-res://World/Player/Player/UserInterface/Menu/Skills/Skills.gd
-res://World/Player/Player/UserInterface/Menu/Skills/Skills.tscn
-res://World/World/BuildTerrain.gd
-res://World/Objects/Nature/Grasses/Weed.tscn
-res://World/Objects/Nature/Grasses/Weed.gd
-res://World/Animals/Boar.tscn
-res://World/Animals/Wolf.tscn
-res://World/Enemies/mob.tscn
-res://World/World/SpawnAnimal.gd
-res://Global/Data/Constants.gd
-res://World/World/BuildNature.gd
-res://World/Objects/Nature/Grasses/TallGrass.tscn
-res://World/Player/Player/AttachedScripts/CompositeSprites.gd
-res://World/Objects/Nature/Trees/TreeObject.gd
-res://World/Objects/Nature/Trees/Stump.tscn
-res://World/Objects/Nature/Trees/Stump.gd
-res://World/Objects/Nature/Ores/LargeOre.tscn
-res://World/Objects/Nature/Ores/LargeOre.gd
-res://World/Map/WorldMap.tscn
-res://Assets/Themes/MiniMap.tres
+res://Assets/Themes/HideCollection.tres
+res://World/Player/Player/UserInterface/Stove/item_button.gd
 res://World/Map/WorldMap.gd
-res://Global/Data/MapData.gd
-res://World/Map/GridSquareLabel.tscn
-res://World/Map/Camera2D.gd
-res://World/Objects/Nature/Ores/SmallOre.tscn
-res://World/Objects/Nature/Trees/TreeObject.tscn
-res://Assets/Images/tree_sets/plum/mature/animated.tres
-res://World/Animals/Bunny.tscn
-res://Assets/Images/Animals/Bunny/yellowBunny.tres
-res://helpers/Tiles.gd
+res://World/Objects/Nature/Ores/LargeOre.gd
+res://World/Player/Player/Swing.gd
+res://World/Player/Player/UserInterface/UserInterface.gd
+res://World/World/BuildNature.gd

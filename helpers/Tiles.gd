@@ -32,13 +32,13 @@ func return_atlas_tile_cord(tile_name,id):
 					else:
 						return Vector2i(rng.randi_range(38,47),rng.randi_range(28,35))
 				1:
-					return Vector2i(25,15)
+					return Vector2i(28,14)
 				2:
-					return Vector2i(24,15)
+					return Vector2i(29,14)
 				3:
-					return Vector2i(24,14)
+					return Vector2i(29,15)
 				4:
-					return Vector2i(25,14)
+					return Vector2i(28,15)
 				5:
 					return Vector2i(rng.randi_range(30,32),16)
 				6:
@@ -48,13 +48,77 @@ func return_atlas_tile_cord(tile_name,id):
 				8:
 					return Vector2i(29,rng.randi_range(17,19))
 				9:
-					return Vector2i(29,16)
+					return Vector2i(24,14)
 				10:
-					return Vector2i(33,16)
+					return Vector2i(25,14)
 				11:
-					return Vector2i(33,20)
+					return Vector2i(25,15)
 				12:
-					return Vector2i(29,20)
+					return Vector2i(25,15)
+		"forest":
+			match id:
+				0:
+					if Util.chance(50):
+						return Vector2i(rng.randi_range(30,32),rng.randi_range(24,26))
+					else:
+						return Vector2i(rng.randi_range(38,47),rng.randi_range(37,43))
+				1:
+					return Vector2i(29,22)
+				2:
+					return Vector2i(28,22)
+				3:
+					return Vector2i(28,21)
+				4:
+					return Vector2i(29,21)
+				5:
+					return Vector2i(rng.randi_range(30,32),23)
+				6:
+					return Vector2i(33,rng.randi_range(24,26))
+				7:
+					return Vector2i(rng.randi_range(30,32),27)
+				8:
+					return Vector2i(29,rng.randi_range(24,26))
+				9:
+					return Vector2i(29,23)
+				10:
+					return Vector2i(33,23)
+				11:
+					return Vector2i(33,27)
+				12:
+					return Vector2i(29,27)
+		"dirt":
+			match id:
+				0:
+					if Util.chance(2):
+						return Vector2i(rng.randi_range(40,43),rng.randi_range(0,1))
+					if Util.chance(50):
+						return Vector2i(rng.randi_range(40,42),rng.randi_range(17,19))
+					else:
+						return Vector2i(rng.randi_range(48,55),rng.randi_range(28,35))
+				1:
+					return Vector2i(35,15)
+				2:
+					return Vector2i(34,15)
+				3:
+					return Vector2i(34,14)
+				4:
+					return Vector2i(35,14)
+				5:
+					return Vector2i(rng.randi_range(40,42),23)
+				6:
+					return Vector2i(43,rng.randi_range(17,19))
+				7:
+					return Vector2i(rng.randi_range(40,42),20)
+				8:
+					return Vector2i(39,rng.randi_range(17,19))
+				9:
+					return Vector2i(39,16)
+				10:
+					return Vector2i(43,16)
+				11:
+					return Vector2i(43,20)
+				12:
+					return Vector2i(39,20)
 	
 
 

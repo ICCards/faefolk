@@ -22,8 +22,8 @@ var current_chunks = []
 func initialize():
 	await get_tree().process_frame
 	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
-	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
-	$SpawnNatureTimer.start()
+#	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
+#	$SpawnNatureTimer.start()
 
 
 func whoAmIPlaceable(value):

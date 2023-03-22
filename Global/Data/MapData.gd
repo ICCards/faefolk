@@ -7,7 +7,7 @@ var game_state: GameState
 var world_file_name = "res://JSONData/world.json"
 var caves_file_name = "res://JSONData/caves.json"
 
-var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean", "wet_sand", "deep_ocean"]
+var tile_types = ["plains"]#, "forest", "dirt"]#, "desert", "snow", "beach", "ocean", "wet_sand", "deep_ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "forage"]
 var is_world_data_in_chunks = false
 
@@ -135,9 +135,9 @@ func add_nature_objects_to_chunks():
 
 func add_tiles_to_chunks():
 	for type in tile_types:
-		var loc_array = world[type]
-		for loc in loc_array:
-			add_tile_to_chunk(type, loc)
+		var tiles = world[type]
+		for tile in tiles:
+			add_tile_to_chunk(type, tile)
 			
 func add_animals_to_chunks():
 	for id in world["animal"]:
@@ -3196,299 +3196,300 @@ var l12 = {
 	"forage": {},
 	"animal": {}
 }
-func add_tile_to_chunk(type, loc):
+func add_tile_to_chunk(type, tile):
+	var loc = tile[0]
 	var column
 	var row
 	var chunk_name = get_chunk_from_location(loc)
 	match chunk_name:
 		"A1":
-			a1[type].append(loc)
+			a1[type].append(tile)
 		"A2":
-			a2[type].append(loc)
+			a2[type].append(tile)
 		"A3":
-			a3[type].append(loc)
+			a3[type].append(tile)
 		"A4":
-			a4[type].append(loc)
+			a4[type].append(tile)
 		"A5":
-			a5[type].append(loc)
+			a5[type].append(tile)
 		"A6":
-			a6[type].append(loc)
+			a6[type].append(tile)
 		"A7":
-			a7[type].append(loc)
+			a7[type].append(tile)
 		"A8":
-			a8[type].append(loc)
+			a8[type].append(tile)
 		"A9":
-			a9[type].append(loc)
+			a9[type].append(tile)
 		"A10":
-			a10[type].append(loc)
+			a10[type].append(tile)
 		"A11":
-			a11[type].append(loc)
+			a11[type].append(tile)
 		"A12":
-			a12[type].append(loc)
+			a12[type].append(tile)
 		"B1":
-			b1[type].append(loc)
+			b1[type].append(tile)
 		"B2":
-			b2[type].append(loc)
+			b2[type].append(tile)
 		"B3":
-			b3[type].append(loc)
+			b3[type].append(tile)
 		"B4":
-			b4[type].append(loc)
+			b4[type].append(tile)
 		"B5":
-			b5[type].append(loc)
+			b5[type].append(tile)
 		"B6":
-			b6[type].append(loc)
+			b6[type].append(tile)
 		"B7":
-			b7[type].append(loc)
+			b7[type].append(tile)
 		"B8":
-			b8[type].append(loc)
+			b8[type].append(tile)
 		"B9":
-			b9[type].append(loc)
+			b9[type].append(tile)
 		"B10":
-			b10[type].append(loc)
+			b10[type].append(tile)
 		"B11":
-			b11[type].append(loc)
+			b11[type].append(tile)
 		"B12":
-			b12[type].append(loc)
+			b12[type].append(tile)
 		"C1":
-			c1[type].append(loc)
+			c1[type].append(tile)
 		"C2":
-			c2[type].append(loc)
+			c2[type].append(tile)
 		"C3":
-			c3[type].append(loc)
+			c3[type].append(tile)
 		"C4":
-			c4[type].append(loc)
+			c4[type].append(tile)
 		"C5":
-			c5[type].append(loc)
+			c5[type].append(tile)
 		"C6":
-			c6[type].append(loc)
+			c6[type].append(tile)
 		"C7":
-			c7[type].append(loc)
+			c7[type].append(tile)
 		"C8":
-			c8[type].append(loc)
+			c8[type].append(tile)
 		"C9":
-			c9[type].append(loc)
+			c9[type].append(tile)
 		"C10":
-			c10[type].append(loc)
+			c10[type].append(tile)
 		"C11":
-			c11[type].append(loc)
+			c11[type].append(tile)
 		"C12":
-			c12[type].append(loc)
+			c12[type].append(tile)
 		"D1":
-			d1[type].append(loc)
+			d1[type].append(tile)
 		"D2":
-			d2[type].append(loc)
+			d2[type].append(tile)
 		"D3":
-			d3[type].append(loc)
+			d3[type].append(tile)
 		"D4":
-			d4[type].append(loc)
+			d4[type].append(tile)
 		"D5":
-			d5[type].append(loc)
+			d5[type].append(tile)
 		"D6":
-			d6[type].append(loc)
+			d6[type].append(tile)
 		"D7":
-			d7[type].append(loc)
+			d7[type].append(tile)
 		"D8":
-			d8[type].append(loc)
+			d8[type].append(tile)
 		"D9":
-			d9[type].append(loc)
+			d9[type].append(tile)
 		"D10":
-			d10[type].append(loc)
+			d10[type].append(tile)
 		"D11":
-			d11[type].append(loc)
+			d11[type].append(tile)
 		"D12":
-			d12[type].append(loc)
+			d12[type].append(tile)
 		"E1":
-			e1[type].append(loc)
+			e1[type].append(tile)
 		"E2":
-			e2[type].append(loc)
+			e2[type].append(tile)
 		"E3":
-			e3[type].append(loc)
+			e3[type].append(tile)
 		"E4":
-			e4[type].append(loc)
+			e4[type].append(tile)
 		"E5":
-			e5[type].append(loc)
+			e5[type].append(tile)
 		"E6":
-			e6[type].append(loc)
+			e6[type].append(tile)
 		"E7":
-			e7[type].append(loc)
+			e7[type].append(tile)
 		"E8":
-			e8[type].append(loc)
+			e8[type].append(tile)
 		"E9":
-			e9[type].append(loc)
+			e9[type].append(tile)
 		"E10":
-			e10[type].append(loc)
+			e10[type].append(tile)
 		"E11":
-			e11[type].append(loc)
+			e11[type].append(tile)
 		"E12":
-			e12[type].append(loc)
+			e12[type].append(tile)
 		"F1":
-			f1[type].append(loc)
+			f1[type].append(tile)
 		"F2":
-			f2[type].append(loc)
+			f2[type].append(tile)
 		"F3":
-			f3[type].append(loc)
+			f3[type].append(tile)
 		"F4":
-			f4[type].append(loc)
+			f4[type].append(tile)
 		"F5":
-			f5[type].append(loc)
+			f5[type].append(tile)
 		"F6":
-			f6[type].append(loc)
+			f6[type].append(tile)
 		"F7":
-			f7[type].append(loc)
+			f7[type].append(tile)
 		"F8":
-			f8[type].append(loc)
+			f8[type].append(tile)
 		"F9":
-			f9[type].append(loc)
+			f9[type].append(tile)
 		"F10":
-			f10[type].append(loc)
+			f10[type].append(tile)
 		"F11":
-			f11[type].append(loc)
+			f11[type].append(tile)
 		"F12":
-			f12[type].append(loc)
+			f12[type].append(tile)
 		"G1":
-			g1[type].append(loc)
+			g1[type].append(tile)
 		"G2":
-			g2[type].append(loc)
+			g2[type].append(tile)
 		"G3":
-			g3[type].append(loc)
+			g3[type].append(tile)
 		"G4":
-			g4[type].append(loc)
+			g4[type].append(tile)
 		"G5":
-			g5[type].append(loc)
+			g5[type].append(tile)
 		"G6":
-			g6[type].append(loc)
+			g6[type].append(tile)
 		"G7":
-			g7[type].append(loc)
+			g7[type].append(tile)
 		"G8":
-			g8[type].append(loc)
+			g8[type].append(tile)
 		"G9":
-			g9[type].append(loc)
+			g9[type].append(tile)
 		"G10":
-			g10[type].append(loc)
+			g10[type].append(tile)
 		"G11":
-			g11[type].append(loc)
+			g11[type].append(tile)
 		"G12":
-			g12[type].append(loc)
+			g12[type].append(tile)
 		"H1":
-			h1[type].append(loc)
+			h1[type].append(tile)
 		"H2":
-			h2[type].append(loc)
+			h2[type].append(tile)
 		"H3":
-			h3[type].append(loc)
+			h3[type].append(tile)
 		"H4":
-			h4[type].append(loc)
+			h4[type].append(tile)
 		"H5":
-			h5[type].append(loc)
+			h5[type].append(tile)
 		"H6":
-			h6[type].append(loc)
+			h6[type].append(tile)
 		"H7":
-			h7[type].append(loc)
+			h7[type].append(tile)
 		"H8":
-			h8[type].append(loc)
+			h8[type].append(tile)
 		"H9":
-			h9[type].append(loc)
+			h9[type].append(tile)
 		"H10":
-			h10[type].append(loc)
+			h10[type].append(tile)
 		"H11":
-			h11[type].append(loc)
+			h11[type].append(tile)
 		"H12":
-			h12[type].append(loc)
+			h12[type].append(tile)
 		"I1":
-			i1[type].append(loc)
+			i1[type].append(tile)
 		"I2":
-			i2[type].append(loc)
+			i2[type].append(tile)
 		"I3":
-			i3[type].append(loc)
+			i3[type].append(tile)
 		"I4":
-			i4[type].append(loc)
+			i4[type].append(tile)
 		"I5":
-			i5[type].append(loc)
+			i5[type].append(tile)
 		"I6":
-			i6[type].append(loc)
+			i6[type].append(tile)
 		"I7":
-			i7[type].append(loc)
+			i7[type].append(tile)
 		"I8":
-			i8[type].append(loc)
+			i8[type].append(tile)
 		"I9":
-			i9[type].append(loc)
+			i9[type].append(tile)
 		"I10":
-			i10[type].append(loc)
+			i10[type].append(tile)
 		"I11":
-			i11[type].append(loc)
+			i11[type].append(tile)
 		"I12":
-			i12[type].append(loc)
+			i12[type].append(tile)
 		"J1":
-			j1[type].append(loc)
+			j1[type].append(tile)
 		"J2":
-			j2[type].append(loc)
+			j2[type].append(tile)
 		"J3":
-			j3[type].append(loc)
+			j3[type].append(tile)
 		"J4":
-			j4[type].append(loc)
+			j4[type].append(tile)
 		"J5":
-			j5[type].append(loc)
+			j5[type].append(tile)
 		"J6":
-			j6[type].append(loc)
+			j6[type].append(tile)
 		"J7":
-			j7[type].append(loc)
+			j7[type].append(tile)
 		"J8":
-			j8[type].append(loc)
+			j8[type].append(tile)
 		"J9":
-			j9[type].append(loc)
+			j9[type].append(tile)
 		"J10":
-			j10[type].append(loc)
+			j10[type].append(tile)
 		"J11":
-			j11[type].append(loc)
+			j11[type].append(tile)
 		"J12":
-			j12[type].append(loc)
+			j12[type].append(tile)
 		"K1":
-			k1[type].append(loc)
+			k1[type].append(tile)
 		"K2":
-			k2[type].append(loc)
+			k2[type].append(tile)
 		"K3":
-			k3[type].append(loc)
+			k3[type].append(tile)
 		"K4":
-			k4[type].append(loc)
+			k4[type].append(tile)
 		"K5":
-			k5[type].append(loc)
+			k5[type].append(tile)
 		"K6":
-			k6[type].append(loc)
+			k6[type].append(tile)
 		"K7":
-			k7[type].append(loc)
+			k7[type].append(tile)
 		"K8":
-			k8[type].append(loc)
+			k8[type].append(tile)
 		"K9":
-			k9[type].append(loc)
+			k9[type].append(tile)
 		"K10":
-			k10[type].append(loc)
+			k10[type].append(tile)
 		"K11":
-			k11[type].append(loc)
+			k11[type].append(tile)
 		"K12":
-			k12[type].append(loc)
+			k12[type].append(tile)
 		"L1":
-			l1[type].append(loc)
+			l1[type].append(tile)
 		"L2":
-			l2[type].append(loc)
+			l2[type].append(tile)
 		"L3":
-			l3[type].append(loc)
+			l3[type].append(tile)
 		"L4":
-			l4[type].append(loc)
+			l4[type].append(tile)
 		"L5":
-			l5[type].append(loc)
+			l5[type].append(tile)
 		"L6":
-			l6[type].append(loc)
+			l6[type].append(tile)
 		"L7":
-			l7[type].append(loc)
+			l7[type].append(tile)
 		"L8":
-			l8[type].append(loc)
+			l8[type].append(tile)
 		"L9":
-			l9[type].append(loc)
+			l9[type].append(tile)
 		"L10":
-			l10[type].append(loc)
+			l10[type].append(tile)
 		"L11":
-			l11[type].append(loc)
+			l11[type].append(tile)
 		"L12":
-			l12[type].append(loc)
+			l12[type].append(tile)
 
 
 

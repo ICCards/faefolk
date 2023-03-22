@@ -79,7 +79,9 @@ func _input(event):
 					"brewing table":
 						get_parent().user_interface.toggle_brewing_table(current_interactive_node.name, current_interactive_node.object_level)
 					"chair":
-						sit(current_interactive_node.object_position, current_interactive_node.object_direction)
+						sit("chair",current_interactive_node.object_position,current_interactive_node.object_direction)
+					"armchair":
+						sit("armchair",current_interactive_node.object_position,current_interactive_node.object_direction)
 					"door":
 						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_door()
 					"gate":
@@ -176,17 +178,17 @@ func harvest_forage(forage_node):
 		get_parent().state = get_parent().MOVEMENT
 
 
-func sit(adjusted_position, direction_of_chair):
+func sit(chair_name,chair_position,chair_direction):
 	get_node("../Sounds/FootstepsSound").stream_paused = true
-	direction_of_current_chair = direction_of_chair
+	direction_of_current_chair = chair_direction
 	sitting = true
 	get_parent().state = get_parent().SITTING
-	get_parent().position = adjusted_position
-	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+direction_of_current_chair, null)
-	get_parent().animation_player.play("sit_"+direction_of_current_chair)
+	get_parent().position = return_adjusted_chair_position(chair_name,chair_position,chair_direction)
+	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+chair_direction, null)
+	get_parent().animation_player.play("sit_"+chair_direction)
 	await get_parent().animation_player.animation_finished
-	await get_tree().idle_frame
-	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_idle_"+direction_of_current_chair, null)
+	await get_tree().process_frame
+	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_idle_"+chair_direction, null)
 	get_parent().animation_player.play("sit_idle")
 	sitting = false
 
@@ -197,6 +199,45 @@ func stand_up():
 		get_parent().animation_player.play_backwards("sit_"+direction_of_current_chair)
 		await get_parent().animation_player.animation_finished
 		get_parent().state = get_parent().MOVEMENT
+
+func return_adjusted_chair_position(_chair_name,_pos,_direction):
+	match _chair_name:
+		"chair":
+			match _direction:
+				"down":
+					return _pos+Vector2i(8,16)
+				"up":
+					return _pos+Vector2i(8,0)
+				"left":
+					return _pos+Vector2i(-2,16)
+				"right":
+					return _pos+Vector2i(18,16)
+		"armchair":
+			match _direction:
+				"down":
+					return _pos+Vector2i(16,16)
+				"up":
+					return _pos+Vector2i(16,-4)
+				"left":
+					return _pos+Vector2i(16,16)
+				"right":
+					return _pos+Vector2i(24,16)
+#		"couch":
+#			match _direction:
+#				"down":
+#					if Server.player_node.position.x - 32 > position.x:
+#						return position+Vector2(64,0)
+#					else:
+#						return position+Vector2(32,0)
+#				"up":
+#					return position+Vector2(32,-48)
+#				"left":
+#					if Server.player_node.position.y + 48 < position.y:
+#						return position+Vector2(8,-32)
+#					else:
+#						return position+Vector2(8,0)
+#				"right":
+#					return position+Vector2(56,0)
 
 
 func player_death():

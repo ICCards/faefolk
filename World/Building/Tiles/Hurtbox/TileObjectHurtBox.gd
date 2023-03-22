@@ -71,7 +71,7 @@ func set_dimensions():
 		"right":
 			$Marker2D.rotation_degrees = 270
 	if item_name == "wood chest" or item_name == "stone chest":
-		add_interactive_area_node("chest",name)
+		add_interactive_area_node("chest")
 		if PlayerData.player_data["chests"].has(name):
 			pass
 		else:
@@ -91,7 +91,7 @@ func set_dimensions():
 	elif item_name == "lamp":
 		add_campfire_interactive_area_node("lamp")
 	elif item_name == "fireplace":
-		add_interactive_area_node("fireplace",name)
+		add_interactive_area_node("fireplace")
 	elif item_name == "torch":
 		$PointLight2D.set_deferred("enabled", true)
 	elif item_name == "campfire":
@@ -102,7 +102,7 @@ func set_dimensions():
 		else:
 			PlayerData.player_data["campfires"][name] = {}
 	elif item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3":
-		add_interactive_area_node("workbench",item_name.left(-1))
+		add_interactive_area_node("workbench",item_name.right(1))
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		add_interactive_area_node("stove",item_name.right(1))
 		if PlayerData.player_data["stoves"].has(name):
@@ -122,21 +122,21 @@ func set_dimensions():
 		else:
 			PlayerData.player_data["brewing_tables"][name] = {}
 	elif item_name == "furnace":
-		add_interactive_area_node("furnace",name)
+		add_interactive_area_node("furnace")
 		if PlayerData.player_data["furnaces"].has(name):
 			pass
 		else:
 			PlayerData.player_data["furnaces"][name] = {}
 	elif item_name == "tool cabinet":
-		add_interactive_area_node(item_name,name)
+		add_interactive_area_node(item_name)
 		if PlayerData.player_data["chests"].has(name):
 			pass
 		else:
 			PlayerData.player_data["chests"][name] = {}
 	elif item_name == "bed":
 		add_bed_interactive_area_node()
-	elif item_name == "chair":
-		add_interactive_area_node("chair",name)
+	elif item_name == "chair" or item_name == "armchair":
+		add_interactive_area_node(item_name,null,direction)
 	elif item_name == "large rug" or item_name == "medium rug" or item_name == "small rug" or item_name == "torch":
 		movement_collision.set_deferred("disabled", true)
 	elif item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate":
@@ -145,8 +145,10 @@ func set_dimensions():
 		add_door_interactive_area_node("door")
 
 
-func add_interactive_area_node(object_name,level = null):
+func add_interactive_area_node(object_name,level = null,direction = null):
 	var interactiveAreaNode = InteractiveAreaNode.instantiate()
+	interactiveAreaNode.object_position = location*16
+	interactiveAreaNode.object_direction = direction
 	interactiveAreaNode.object_level = level
 	interactiveAreaNode.object_name = object_name
 	interactiveAreaNode.name = name
@@ -171,45 +173,6 @@ func add_door_interactive_area_node(type):
 	doorInteractiveAreaNode.name = name
 	$Marker2D.call_deferred("add_child", doorInteractiveAreaNode)
 
-func return_adjusted_chair_position(direction):
-	match item_name:
-		"chair":
-			match direction:
-				"down":
-					return position+Vector2(16,0)
-				"up":
-					return position+Vector2(16,-32)
-				"left":
-					return position+Vector2(-4,0)
-				"right":
-					return position+Vector2(36,0)
-		"armchair":
-			match direction:
-				"down":
-					return position+Vector2(32,0)
-				"up":
-					return position+Vector2(32,-48)
-				"left":
-					return position+Vector2(8,0)
-				"right":
-					return position+Vector2(56,0)
-		"couch":
-			match direction:
-				"down":
-					if Server.player_node.position.x - 32 > position.x:
-						return position+Vector2(64,0)
-					else:
-						return position+Vector2(32,0)
-				"up":
-					return position+Vector2(32,-48)
-				"left":
-					if Server.player_node.position.y + 48 < position.y:
-						return position+Vector2(8,-32)
-					else:
-						return position+Vector2(8,0)
-				"right":
-					return position+Vector2(56,0)
-				
 
 func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":

@@ -60,7 +60,7 @@ func remove_animals():
 		if Server.world.is_changing_scene:
 			var value = remove_thread.wait_to_finish()
 			return
-		if is_instance_valid(node):
+		if node.get_children()[1]:
 			var player_loc = Server.player_node.position/16
 			if player_loc.distance_to(node.get_children()[1].position/16) > Constants.DISTANCE_TO_REMOVE_OBJECT:
 				node.call_deferred("queue_free")

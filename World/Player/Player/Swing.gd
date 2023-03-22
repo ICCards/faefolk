@@ -93,7 +93,7 @@ func set_sword_swing_position(direction):
 
 
 func swing(item_name):
-	if not thread.is_alive():
+	if not thread.is_started():
 		thread.start(Callable(self,"whoAmISwing").bind(item_name))
 
 func whoAmISwing(item_name):

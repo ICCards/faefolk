@@ -35,10 +35,10 @@ func initialize():
 		$DestroyTimer.start(3+delay)
 
 func set_size_of_description(x):
-	if x <= 417:
-		width = 55
+	if x <= 367:
+		width = 57
 	else:
-		width = 55 + ((x - 417) / 12)
+		width = 57 + ((x - 367) / 12)
 
 func _on_DestroyTimer_timeout():
 	$AnimationPlayer.call_deferred("play", "fade out")

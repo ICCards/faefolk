@@ -5,5 +5,5 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_wkmb1")
-shader_parameter/flash_color = Color(0.0196078, 0.45098, 0.345098, 1)
+shader_parameter/flash_color = Color(0.75, 0.75, 0.75, 0.75)
 shader_parameter/flash_modifier = 1.0

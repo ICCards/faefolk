@@ -263,7 +263,7 @@ func toggle_crate(id):
 			sound_effects.play()
 			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
-			Server.world.get_node("PlaceableObejects/"+id).interactives.open_crate()
+			Server.world.get_node("PlaceableObjects/"+id).interactives.open_crate()
 			await get_tree().create_timer(0.2).timeout
 			is_opening_chest = false
 			var chest = Crate.instantiate()

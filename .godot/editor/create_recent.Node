@@ -1,6 +1,7 @@
 Control
-VisibleOnScreenNotifier2D
 Node2D
+CanvasModulate
+VisibleOnScreenNotifier2D
 AnimatedSprite2D
 NavigationRegion2D
 NavigationLink2D
@@ -20,5 +21,4 @@ PointLight2D
 Button
 GridContainer
 Line2D
-CanvasModulate
 TextureButton

@@ -1,6 +1,6 @@
 extends Control
 
-const MAX_SCROLL_SIZE = 34
+const MAX_SCROLL_SIZE = 29
 
 var level
 
@@ -18,10 +18,10 @@ func _ready():
 
 func initialize():
 	initialize_crafting()
-	#Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placable_object()
 	hovered_item = null
 	crafting_item = null
-	$MenuTitle.text = "Workbench #" + str(level) + ":"
+	$MenuTitle/Label.text = "Workbench #" + str(level) + ":"
 	show()
 
 func initialize_crafting():
@@ -41,11 +41,8 @@ func destroy():
 
 func _physics_process(delta):
 	if hovered_item and not find_parent("UserInterface").holding_item:
-		$ItemDescription.show()
-		$ItemDescription.item_category = JsonData.item_data[hovered_item]["ItemCategory"]
 		$ItemDescription.item_name = hovered_item
 		$ItemDescription.initialize()
-		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 	else:
 		$ItemDescription.hide()
 	if crafting_item and not find_parent("UserInterface").holding_item:
@@ -55,36 +52,23 @@ func _physics_process(delta):
 			$ItemNameBox.position = get_local_mouse_position() + Vector2(20 , 25)
 		else:
 			$ItemNameBox.hide()
-			$CraftingItemDescription.show()
 			$CraftingItemDescription.item_name = crafting_item
-			$CraftingItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
 			$CraftingItemDescription.initialize()
 	else:
 		$ItemNameBox.hide()
 		$CraftingItemDescription.hide()
 
 
-#func adjusted_item_description():
-#	var height = float($ItemDescription.height) * 2.4
-#	var pos = $ItemDescription.position.y
-#	var max_pos = 720 - height
-#	if get_local_mouse_position().y < 720:
-#		return get_local_mouse_position()
-#	else:
-#		return Vector2(get_local_mouse_position().x , max_pos.y)
-
 
 func entered_crafting_area(item_name):
 	crafting_item = item_name
 	var tween = get_tree().create_tween()
-	tween.tween_property($CraftingMenuWorkbench/Items.get_node(item_name), "scale", Vector2(1.1, 1.1), 0.1)
-
-
+	tween.tween_property($CraftingMenuWorkbench/Items.get_node(str(item_name)), "scale", Vector2(1.1, 1.1), 0.1)
 
 func exited_crafting_area(item_name):
 	crafting_item = null
 	var tween = get_tree().create_tween()
-	tween.tween_property($CraftingMenuWorkbench/Items.get_node(item_name), "scale", Vector2(1.0, 1.0), 0.1)
+	tween.tween_property($CraftingMenuWorkbench/Items.get_node(str(item_name)), "scale", Vector2(1.0, 1.0), 0.1)
 
 
 func craft(item_name):
@@ -106,7 +90,6 @@ func return_crafted_item(item_name):
 
 func _on_ExitBtn_pressed():
 	get_parent().close_workbench()
-
 
 func _on_Slider_value_changed(value):
 	$CraftingMenuWorkbench.scroll_vertical = ((100-value))/100*MAX_SCROLL_SIZE

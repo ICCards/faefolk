@@ -10,22 +10,26 @@ func set_locked():
 	if get_node("../../../").level == "1":
 		if get_node("../../../").level_1_items.find(name) != -1:
 			$button.modulate = Color("ffffff") # unlocked
-			$button.material.set_shader_parameter("flash_modifier", 0)
+			$button.material = null
 		else:
 			$button.disabled = true
 			$button.modulate = Color("50ffffff") # locked
+			$button.material = load("res://Assets/Themes/HideCollection.tres")
+			$button.material.shader = load("res://Assets/Themes/Collections.gdshader")
 			$button.material.set_shader_parameter("flash_modifier", 1)
 	elif get_node("../../../").level == "2":
 		if get_node("../../../").level_1_items.find(name) != -1 or get_node("../../../").level_2_items.find(name) != -1:
 			$button.modulate = Color("ffffff") # unlocked
-			$button.material.set_shader_parameter("flash_modifier", 0)
+			$button.material = null
 		else:
 			$button.disabled = true
 			$button.modulate = Color("50ffffff") # locked
+			$button.material = load("res://Assets/Themes/HideCollection.tres")
+			$button.material.shader = load("res://Assets/Themes/Collections.gdshader")
 			$button.material.set_shader_parameter("flash_modifier", 1)
 	else:
 		$button.modulate = Color("ffffff") # unlocked
-		$button.material.set_shader_parameter("flash_modifier", 0)
+		$button.material = null
 
 func _on_button_pressed():
 	get_node("../../../").craft(name)

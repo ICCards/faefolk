@@ -2,28 +2,28 @@ extends ScrollContainer
 
 
 
-#func initialize():
-#	for item in $Items.get_children():
-#		if not $Items.get_node(item.name + "/button").disabled:
-#			if PlayerData.isSufficientMaterialToCraft(item.name):
-#				$Items.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
-#			else:
-#				$Items.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
-
 @onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 @onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 
 var hovered_item = null
 
-func _ready():
-	var items = $Items.get_children()
-	for i in range(items.size()):
-		items[i].connect("gui_input",Callable(self,"slot_gui_input").bind(items[i]))
-		items[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(items[i]))
-		items[i].connect("mouse_exited",Callable(self,"exited_slot").bind(items[i]))
-		items[i].slot_index = i
-		items[i].slotType = SlotClass.SlotType.CRAFTING
-		items[i].initialize_item(items[i].name,null,null)
+#func _ready():
+#	var items = $Items.get_children()
+#	for i in range(items.size()):
+#		items[i].connect("gui_input",Callable(self,"slot_gui_input").bind(items[i]))
+#		items[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(items[i]))
+#		items[i].connect("mouse_exited",Callable(self,"exited_slot").bind(items[i]))
+#		items[i].slot_index = i
+#		items[i].slotType = SlotClass.SlotType.CRAFTING
+#		items[i].initialize_item(items[i].name,null,null)
+
+func initialize():
+	for item in $Items.get_children():
+		if not $Items.get_node(item.name + "/button").disabled:
+			if PlayerData.isSufficientMaterialToCraft(item.name):
+				$Items.get_node(str(item.name)).modulate = Color(1, 1, 1, 1)
+			else:
+				$Items.get_node(str(item.name)).modulate = Color(1, 1, 1, 0.4)
 
 
 func hovered_slot(slot):

@@ -305,36 +305,124 @@ func assign_autotile_to_tile():
 	var new_array = []
 	for loc in plains:
 		new_array.append([loc,return_tile_id(loc,plains)])
+	print("1")
 	plains = new_array
+#	new_array = []
+#	for loc in forest:
+#		new_array.append([loc,return_tile_id(loc,forest)])
+#	print("2")
+#	forest = new_array
+#	new_array = []
+#	for loc in dirt:
+#		new_array.append([loc,return_tile_id(loc,dirt)])
+#	print("3")
+#	dirt = new_array
+#	new_array = []
+#	for loc in snow:
+#		new_array.append([loc,return_tile_id(loc,snow)])
+#	print("4")
+#	snow = new_array
+#	new_array = []
+#	for loc in deep_ocean:
+#		new_array.append([loc,return_tile_id(loc,deep_ocean)])
+#	print("5")
+#	deep_ocean = new_array
+#	new_array = []
+#	for loc in ocean:
+#		new_array.append([loc,return_tile_id(loc,ocean)])
+#	print("6")
+#	ocean = new_array
+#	new_array = []
+#	for loc in wet_sand:
+#		new_array.append([loc,return_tile_id(loc,wet_sand)])
+#	print("7")
+#	wet_sand = new_array
 
 
 func return_tile_id(loc,tiles):
-	if Util.is_border_tile(loc,tiles): 
+	var array = [0,0,0,0,0,0,0,0]
+	if tiles.has(loc+Vector2i(-1,-1)):
+		array[0] = 1
+	if tiles.has(loc+Vector2i(1,-1)):
+		array[1] = 1
+	if tiles.has(loc+Vector2i(1,1)):
+		array[2] = 1
+	if tiles.has(loc+Vector2i(-1,1)):
+		array[3] = 1
+	if array[0] == 1 and array[1] == 1 and array[2] == 1 and array[3] == 1:
 		return 0 
-	elif tiles.has(loc+Vector2i(1,1)) and tiles.has(loc+Vector2i(1,-1)) and tiles.has(loc+Vector2i(-1,1)):
-		return 1
-	elif tiles.has(loc+Vector2i(-1,-1)) and tiles.has(loc+Vector2i(1,1)) and tiles.has(loc+Vector2i(-1,1)):
-		return 2
-	elif tiles.has(loc+Vector2i(-1,-1)) and tiles.has(loc+Vector2i(1,-1)) and tiles.has(loc+Vector2i(-1,1)):
-		return 3
-	elif tiles.has(loc+Vector2i(-1,-1)) and tiles.has(loc+Vector2i(1,-1)) and tiles.has(loc+Vector2i(1,1)):
-		return 4
-	elif tiles.has(loc+Vector2i(-1,1)) and tiles.has(loc+Vector2i(1,1)):
-		return 5
-	elif tiles.has(loc+Vector2i(-1,1)) and tiles.has(loc+Vector2i(-1,-1)):
-		return 6
-	elif tiles.has(loc+Vector2i(-1,-1)) and tiles.has(loc+Vector2i(1,-1)):
-		return 7
-	elif tiles.has(loc+Vector2i(1,1)) and tiles.has(loc+Vector2i(1,-1)):
-		return 8
-	elif tiles.has(loc+Vector2i(1,1)):
-		return 9 
-	elif tiles.has(loc+Vector2i(-1,1)):
-		return 9 
-	elif tiles.has(loc+Vector2i(-1,-1)):
-		return 9 
-	elif tiles.has(loc+Vector2i(1,-1)):
-		return 9 
+	if tiles.has(loc+Vector2i(0,-1)):
+		array[4] = 1
+	if tiles.has(loc+Vector2i(1,0)):
+		array[5] = 1
+	if tiles.has(loc+Vector2i(0,1)):
+		array[6] = 1
+	if tiles.has(loc+Vector2i(-1,0)):
+		array[7] = 1
+	if array[0] == 1 and array[2] == 1 and array[4] == 1:
+		return 
+		
+#	if total == 1+16+128: # square corners
+#		return 4
+#	elif total == 2+16+32:
+#		return 3
+#	elif total == 4+32+64:
+#		return 2
+#	elif total == 8+64+128:
+#		return 1
+#	elif total == 128+64+32+8+4:
+#		return 5
+#	elif total == 16+64+128+1+8:
+#		return 6
+#	elif total == 128+64+32+1+2:
+#		return 7
+#	elif total == 16+64+128+2+4:
+#		return 8
+#	elif total == 1+8+128:
+#		return 5
+#	elif total == 1+2+16+128+32: # sides
+#		return 5 
+#	elif total == 2+4+32: 
+#		return 6 
+#	elif total == 4+8+64:
+#		return 7 
+#	elif total == 1+8+128:
+#		return 8 
+#	elif total == 255-4:
+#		return 9 
+#	elif total == 255-8:
+#		return 10 
+#	elif total == 255-1:
+#		return 11 
+#	return 12
+
+		
+#	if array[0] == 1 and array[2] == 1 and array[4] == 1 and array[6] == 1: 
+#		return 0 
+#	elif array[2] == 1 and array[4] == 1 and array[6] == 1:
+#		return 1
+#	elif array[4] == 1 and array[6] == 1 and array[0] == 1:
+#		return 2
+#	elif array[6] == 1 and array[0] == 1 and array[2] == 1:
+#		return 3
+#	elif array[0] == 1 and array[2] == 1 and array[4] == 1:
+#		return 4
+#	elif array[3] == 1 and array[4] == 1 and array[5] == 1:
+#		return 9
+#	elif array[5] == 1 and array[6] == 1 and array[7] == 1:
+#		return 10
+#	elif array[7] == 1 and array[0] == 1 and array[1] == 1:
+#		return 11
+#	elif array[0] == 1 and array[1] == 1 and array[2] == 1:
+#		return 12
+#	elif array[4] == 1 and array[5] == 1 and array[6] == 1:
+#		return 5
+#	elif array[6] == 1 and array[7] == 1 and array[0] == 1:
+#		return 6
+#	elif array[0] == 1 and array[1] == 1 and array[2] == 1:
+#		return 7
+#	elif array[2] == 1 and array[3] == 1 and array[4] == 1:
+#		return 8
 
 
 func update_fixed_map():

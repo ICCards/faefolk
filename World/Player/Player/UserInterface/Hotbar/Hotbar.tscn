@@ -19,9 +19,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = 612.0
+offset_top = 618.0
 offset_right = 426.0
-offset_bottom = 644.0
+offset_bottom = 650.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(3, 3)
@@ -35,9 +35,9 @@ visible = false
 [node name="HotbarSlots" type="GridContainer" parent="."]
 layout_mode = 0
 offset_left = 345.0
-offset_top = 639.0
+offset_top = 645.0
 offset_right = 933.0
-offset_bottom = 687.0
+offset_bottom = 693.0
 theme_override_constants/h_separation = 12
 columns = 10
 
@@ -97,9 +97,9 @@ script = ExtResource("1")
 [node name="SwitchHotbarBtn" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 276.0
-offset_top = 660.0
+offset_top = 666.0
 offset_right = 292.0
-offset_bottom = 676.0
+offset_bottom = 682.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("5")
 texture_pressed = ExtResource("6")

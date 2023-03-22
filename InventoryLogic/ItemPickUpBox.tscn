@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://1o28e3tdqq8f" path="res://Assets/Images/User interface/ItemPickUpBox/middle.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://dqquydurtk0q" path="res://Assets/Images/User interface/ItemPickUpBox/left.png" id="5"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="5_y5atq"]
-[ext_resource type="Texture2D" uid="uid://dxg01pggfu4xb" path="res://Assets/Images/User interface/ItemPickUpBox/x.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://c87ug42a3k0vf" path="res://Assets/Images/inventory_icons/Placeable object/furnace.png" id="6_km4lv"]
 
 [sub_resource type="Animation" id="2"]
 length = 0.001
@@ -54,7 +54,7 @@ script = ExtResource("2")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_right = 56.0
+offset_right = 57.0
 offset_bottom = 24.0
 mouse_filter = 2
 theme_override_constants/h_separation = 0
@@ -80,16 +80,16 @@ texture = ExtResource("1")
 
 [node name="ItemName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 26.0
+offset_left = 24.6667
 offset_top = 6.0
-offset_right = 393.0
-offset_bottom = 240.0
-scale = Vector2(0.06, 0.06)
+offset_right = 391.667
+offset_bottom = 190.0
+scale = Vector2(0.075, 0.075)
 theme = ExtResource("5_y5atq")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 6
-theme_override_constants/shadow_offset_y = 6
-text = "Wood"
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+text = "Arrow"
 vertical_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="."]
@@ -101,9 +101,9 @@ offset_top = 4.0
 offset_right = 20.0
 offset_bottom = 20.0
 mouse_filter = 2
-texture = ExtResource("6")
+texture = ExtResource("6_km4lv")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="Quantity" type="Label" parent="."]
 layout_mode = 0

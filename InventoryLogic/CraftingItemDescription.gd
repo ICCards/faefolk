@@ -30,6 +30,7 @@ func return_adjusted_position():
 
 
 func initialize():
+	show()
 	set_description_text(item_name)
 	set_ingredients(item_name)
 	await get_tree().process_frame
