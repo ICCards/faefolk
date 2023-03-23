@@ -115,7 +115,6 @@ func reel_in_fish_line():
 	
 func start_fishing_mini_game():
 	waiting_for_fish_bite = false
-	$Tween.stop_all()
 	$AnimationPlayer.play("hit")
 	$CanvasLayer/FishingMiniGame.set_active(fishing_rod_type)
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fishHit.mp3")

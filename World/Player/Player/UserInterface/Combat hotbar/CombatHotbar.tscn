@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhilgn3waubes"]
+[gd_scene load_steps=12 format=3 uid="uid://bhilgn3waubes"]
 
 [ext_resource type="Texture2D" uid="uid://h5xwa73koaw8" path="res://Assets/Images/User interface/combat hotbar/hotbar23.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd" id="1_hue8c"]
 [ext_resource type="Texture2D" uid="uid://cnfw25kf8wh4s" path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar.png" id="2"]
-[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://b6tl1o10h8ybn" path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar-small.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://do7p63j7fd8ug" path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://b16f0gq1148xg" path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass-small.png" id="8"]
@@ -42,10 +41,6 @@ scale = Vector2(3, 3)
 mouse_filter = 0
 texture = ExtResource("1")
 stretch_mode = 4
-
-[node name="ItemDescription" parent="." instance=ExtResource("4")]
-visible = false
-position = Vector2(-512, -596)
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 

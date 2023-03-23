@@ -109,18 +109,18 @@ func set_direction(dir):
 
 func buildMap():
 	var map = MapData.world
-#	for loc in map["dirt"]:
-#		miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
-#	for loc in map["forest"]:
-#		miniMap.set_cell(0,loc[0],Tiles.FOREST,Vector2i(0,0))
+	for loc in map["dirt"]:
+		miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
+	for loc in map["forest"]:
+		miniMap.set_cell(0,loc[0],Tiles.FOREST,Vector2i(0,0))
 	for loc in map["plains"]:
 		miniMap.set_cell(0,loc[0],Tiles.PLAINS,Vector2i(0,0))
 #	for loc in map["beach"]:
 #		miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
 #	for loc in map["desert"]:
 #		miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
-#	for loc in map["snow"]:
-#		miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
+	for loc in map["snow"]:
+		miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
 #	for loc in map["deep_ocean"]:
 #		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
 #	for x in range(MAP_WIDTH):

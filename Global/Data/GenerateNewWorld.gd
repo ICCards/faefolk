@@ -2,16 +2,17 @@ extends Node
 
 var game_state: GameState
 
-var deep_ocean = []
-var plains = []
-var forest = []
-var beach = []
-var snow = []
-var dirt = []
-var ocean = []
-var desert = []
-var wet_sand = []
-var tile_arrays = [plains, forest, snow, dirt, desert]
+var deep_ocean: Array = []
+var plains: Array = []
+var forest: Array = []
+var beach: Array = []
+var snow: Array = []
+var dirt: Array = []
+var ocean: Array = []
+var desert: Array = []
+var wet_sand: Array = []
+var tile_arrays_to_fix: Array = [plains, forest, snow, dirt, desert]
+var tile_arrays: Array = [plains, forest, snow, dirt]
 
 var decoration_locations = []
 var occupied_terrain_tiles = []
@@ -210,37 +211,6 @@ func build_terrian():
 				dirt.append(Vector2i(x,y))
 	#save_world_data()
 
-func _fix_tiles(value):
-	print("start fixing")
-	var border_tiles = []
-	#for i in range(2):
-	for loc in value:
-		if Util.is_border_tile(loc, value):
-			border_tiles.append(loc)
-	for loc in border_tiles:
-		if not value.has(loc+Vector2i(1,0)):
-			value.append(loc+Vector2i(1,0))
-		if not value.has(loc+Vector2i(-1,0)):
-			value.append(loc+Vector2i(-1,0))
-		if not value.has(loc+Vector2i(0,1)):
-			value.append(loc+Vector2i(0,1))
-		if not value.has(loc+Vector2i(0,-1)):
-			value.append(loc+Vector2i(0,-1))
-		if not value.has(loc+Vector2i(1,1)):
-			value.append(loc+Vector2i(1,1))
-		if not value.has(loc+Vector2i(-1,1)):
-			value.append(loc+Vector2i(-1,1))
-		if not value.has(loc+Vector2i(1,-1)):
-			value.append(loc+Vector2i(1,-1))
-		if not value.has(loc+Vector2i(-1,-1)):
-			value.append(loc+Vector2i(-1,-1))
-	if thread_tile_counter == tile_arrays.size():
-		print("fixed")
-		#call_deferred("build_world")
-		thread_world_update.start(Callable(self,"update_fixed_map"))
-	else:	
-		thread_tile_counter += 1
-		print("fixing: "+str(thread_tile_counter))
 	
 func add_ocean_tiles():
 	var border_tiles = []
@@ -297,46 +267,22 @@ func add_ocean_tiles():
 			ocean.erase(loc)
 	for loc in ocean:
 		wet_sand.append(loc)
-	assign_autotile_to_tile()
+	assign_autotiles()
 
 var autotiles = ["dirt","snow","forest","plains","ocean","deep_ocean"]
-func assign_autotile_to_tile():
+func assign_autotile_id(tiles):
 	print("assigning autotiles")
-	var new_array = []
-	for loc in plains:
-		new_array.append([loc,return_tile_id(loc,plains)])
-	print("1")
-	plains = new_array
-#	new_array = []
-#	for loc in forest:
-#		new_array.append([loc,return_tile_id(loc,forest)])
-#	print("2")
-#	forest = new_array
-#	new_array = []
-#	for loc in dirt:
-#		new_array.append([loc,return_tile_id(loc,dirt)])
-#	print("3")
-#	dirt = new_array
-#	new_array = []
-#	for loc in snow:
-#		new_array.append([loc,return_tile_id(loc,snow)])
-#	print("4")
-#	snow = new_array
-#	new_array = []
-#	for loc in deep_ocean:
-#		new_array.append([loc,return_tile_id(loc,deep_ocean)])
-#	print("5")
-#	deep_ocean = new_array
-#	new_array = []
-#	for loc in ocean:
-#		new_array.append([loc,return_tile_id(loc,ocean)])
-#	print("6")
-#	ocean = new_array
-#	new_array = []
-#	for loc in wet_sand:
-#		new_array.append([loc,return_tile_id(loc,wet_sand)])
-#	print("7")
-#	wet_sand = new_array
+	var locations = tiles
+	for loc in tiles:
+		tiles[tiles.find(loc)] = [loc,return_tile_id(loc,locations)]
+	if thread_tile_counter == tile_arrays.size():
+		print("assigned all")
+		#call_deferred("build_world")
+		thread_tile_counter = 1
+		update_fixed_map()
+	else:	
+		thread_tile_counter += 1
+		print("assigning: "+str(thread_tile_counter))
 
 
 func return_tile_id(loc,tiles):
@@ -359,74 +305,36 @@ func return_tile_id(loc,tiles):
 		array[6] = 1
 	if tiles.has(loc+Vector2i(-1,0)):
 		array[7] = 1
-	if array[0] == 1 and array[2] == 1 and array[4] == 1:
-		return 
-		
-#	if total == 1+16+128: # square corners
-#		return 4
-#	elif total == 2+16+32:
-#		return 3
-#	elif total == 4+32+64:
-#		return 2
-#	elif total == 8+64+128:
-#		return 1
-#	elif total == 128+64+32+8+4:
-#		return 5
-#	elif total == 16+64+128+1+8:
-#		return 6
-#	elif total == 128+64+32+1+2:
-#		return 7
-#	elif total == 16+64+128+2+4:
-#		return 8
-#	elif total == 1+8+128:
-#		return 5
-#	elif total == 1+2+16+128+32: # sides
-#		return 5 
-#	elif total == 2+4+32: 
-#		return 6 
-#	elif total == 4+8+64:
-#		return 7 
-#	elif total == 1+8+128:
-#		return 8 
-#	elif total == 255-4:
-#		return 9 
-#	elif total == 255-8:
-#		return 10 
-#	elif total == 255-1:
-#		return 11 
-#	return 12
+	if array == [1,1,0,1,1,1,1,1]: # corners
+		return 1
+	if array == [1,1,1,0,1,1,1,1]:
+		return 2 
+	elif array == [0,1,1,1,1,1,1,1]:
+		return 3  
+	elif array == [1,0,1,1,1,1,1,1]:
+		return 4 
+	elif array[2] == 1 and array[3] == 1 and array[5] == 1 and array[6] == 1 and array[7] == 1: # top side
+		return 5
+	elif array[0] == 1 and array[3] == 1 and array[4] == 1 and array[7] == 1 and array[6] == 1: # right side
+		return 6
+	elif array[0] == 1 and array[1] == 1 and array[4] == 1 and array[5] == 1 and array[7] == 1: # bottom side
+		return 7
+	elif array[1] == 1 and array[2] == 1 and array[4] == 1 and array[5] == 1 and array[6] == 1: # left side
+		return 8
+	elif array[2] == 1 and array[5] == 1 and array[6] == 1: # top left
+		return 9
+	elif array[3] == 1 and array[6] == 1 and array[7] == 1: # top right
+		return 10 
+	elif array[0] == 1 and array[4] == 1 and array[7] == 1: # bottom right
+		return 11
+	elif array[1] == 1 and array[4] == 1 and array[5] == 1: # bottom right
+		return 12
+	return 0
+	
 
-		
-#	if array[0] == 1 and array[2] == 1 and array[4] == 1 and array[6] == 1: 
-#		return 0 
-#	elif array[2] == 1 and array[4] == 1 and array[6] == 1:
-#		return 1
-#	elif array[4] == 1 and array[6] == 1 and array[0] == 1:
-#		return 2
-#	elif array[6] == 1 and array[0] == 1 and array[2] == 1:
-#		return 3
-#	elif array[0] == 1 and array[2] == 1 and array[4] == 1:
-#		return 4
-#	elif array[3] == 1 and array[4] == 1 and array[5] == 1:
-#		return 9
-#	elif array[5] == 1 and array[6] == 1 and array[7] == 1:
-#		return 10
-#	elif array[7] == 1 and array[0] == 1 and array[1] == 1:
-#		return 11
-#	elif array[0] == 1 and array[1] == 1 and array[2] == 1:
-#		return 12
-#	elif array[4] == 1 and array[5] == 1 and array[6] == 1:
-#		return 5
-#	elif array[6] == 1 and array[7] == 1 and array[0] == 1:
-#		return 6
-#	elif array[0] == 1 and array[1] == 1 and array[2] == 1:
-#		return 7
-#	elif array[2] == 1 and array[3] == 1 and array[4] == 1:
-#		return 8
 
 
 func update_fixed_map():
-	add_ocean_tiles()
 	print("FOUND BORDER TILES")
 	MapData.world["deep_ocean"] = deep_ocean
 	MapData.world["wet_sand"] = wet_sand
@@ -445,11 +353,50 @@ func update_fixed_map():
 
 func fix_tiles():
 	print("FIXING")
-	for tile_array in tile_arrays: 
+	for tile_array in tile_arrays_to_fix: 
 		var tileThread = Thread.new()
 		threads.append(tileThread)
 		tileThread.start(Callable(self,"_fix_tiles").bind(tile_array))
 		
+func _fix_tiles(value):
+	print("start fixing")
+	var border_tiles = []
+	#for i in range(2):
+	for loc in value:
+		if Util.is_border_tile(loc, value):
+			border_tiles.append(loc)
+	for loc in border_tiles:
+		if not value.has(loc+Vector2i(1,0)):
+			value.append(loc+Vector2i(1,0))
+		if not value.has(loc+Vector2i(-1,0)):
+			value.append(loc+Vector2i(-1,0))
+		if not value.has(loc+Vector2i(0,1)):
+			value.append(loc+Vector2i(0,1))
+		if not value.has(loc+Vector2i(0,-1)):
+			value.append(loc+Vector2i(0,-1))
+		if not value.has(loc+Vector2i(1,1)):
+			value.append(loc+Vector2i(1,1))
+		if not value.has(loc+Vector2i(-1,1)):
+			value.append(loc+Vector2i(-1,1))
+		if not value.has(loc+Vector2i(1,-1)):
+			value.append(loc+Vector2i(1,-1))
+		if not value.has(loc+Vector2i(-1,-1)):
+			value.append(loc+Vector2i(-1,-1))
+	if thread_tile_counter == tile_arrays_to_fix.size():
+		print("fixed")
+		#call_deferred("build_world")
+		thread_tile_counter = 1
+		thread_world_update.start(Callable(self,"add_ocean_tiles"))
+	else:	
+		thread_tile_counter += 1
+		print("fixing: "+str(thread_tile_counter))
+
+func assign_autotiles():
+	print("ASSIGN AUTOTILES")
+	for tile_array in tile_arrays: 
+		var tileThread = Thread.new()
+		threads.append(tileThread)
+		tileThread.start(Callable(self,"assign_autotile_id").bind(tile_array))
 
 
 func save_starting_world_data():

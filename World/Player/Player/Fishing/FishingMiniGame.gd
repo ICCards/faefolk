@@ -114,7 +114,6 @@ func play_reel_sound_effects(is_being_pressed):
 
 
 func caught_fish():
-	$Tween.stop_all()
 	hide()
 	get_node("../../").caught_fish(get_node("Fish").fish_data[0])
 	get_node("../../").mini_game_active = false
@@ -124,7 +123,6 @@ func lost_fish():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/fishEscape.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	sound_effects.play()
-	$Tween.stop_all()
 	get_node("../../").mini_game_active = false
 	$AnimationPlayer.play("fade")
 	get_node("Fish").stop_fish_movement()

@@ -4643,7 +4643,6 @@ bus = &"Bus1"
 script = ExtResource("15_a8swc")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
-bus = &"Bus1"
 script = ExtResource("16_d5bcc")
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="Sounds"]

@@ -20,7 +20,7 @@ func _ready():
 	get_fish()
 
 func get_fish():
-	if Server.world.name == "World":
+	if Server.world.name == "Overworld":
 		fish_data = FishData.returnOceanDay()
 	else:
 		fish_data = FishData.returnCaveFish()
@@ -31,7 +31,6 @@ func start():
 	plan_move()
 	
 func stop_fish_movement():
-	$Tween.stop_all()
 	is_mini_game_over = true
 
 func plan_move():
@@ -48,7 +47,6 @@ func move(target):
 		randomize()
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "position", target, movement_speed+randf_range(-0.75,0.75))
-
 		$MoveTimer.set_wait_time(randf_range(min_movement_time, max_movement_time))
 		$MoveTimer.start()
 

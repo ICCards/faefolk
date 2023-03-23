@@ -37,10 +37,15 @@ func return_baby_bird_pos():
 	return spawn_pos
 
 func initialize():
-	await get_tree().create_timer(2.0).timeout
-	spawn_thread.start(Callable(self,"_whoAmI"))
-	remove_thread.start(Callable(self,"_whoAmI2"))
-	$SpawnAnimalTimer.start()
+	for i in range(5):
+		var deer = Deer.instantiate()
+		deer.health = 100
+		deer.position = Vector2(randf_range(0,1000),randf_range(0,1000))
+		Enemies.call_deferred("add_child", deer)
+#	await get_tree().create_timer(2.0).timeout
+#	spawn_thread.start(Callable(self,"_whoAmI"))
+#	remove_thread.start(Callable(self,"_whoAmI2"))
+#	$SpawnAnimalTimer.start()
 
 
 func _on_spawn_animal_timer_timeout():

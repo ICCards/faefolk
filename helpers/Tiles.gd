@@ -24,6 +24,8 @@ var rng = RandomNumberGenerator.new()
 
 func return_atlas_tile_cord(tile_name,id):
 	match tile_name:
+		"beach":
+			return Vector2i(rng.randi_range(50,52),rng.randi_range(24,26))
 		"plains":
 			match id:
 				0:
@@ -32,13 +34,13 @@ func return_atlas_tile_cord(tile_name,id):
 					else:
 						return Vector2i(rng.randi_range(38,47),rng.randi_range(28,35))
 				1:
-					return Vector2i(28,14)
+					return Vector2i(24,14)
 				2:
-					return Vector2i(29,14)
+					return Vector2i(25,14)
 				3:
-					return Vector2i(29,15)
+					return Vector2i(25,15)
 				4:
-					return Vector2i(28,15)
+					return Vector2i(24,15)
 				5:
 					return Vector2i(rng.randi_range(30,32),16)
 				6:
@@ -48,13 +50,13 @@ func return_atlas_tile_cord(tile_name,id):
 				8:
 					return Vector2i(29,rng.randi_range(17,19))
 				9:
-					return Vector2i(24,14)
+					return Vector2i(29,16)
 				10:
-					return Vector2i(25,14)
+					return Vector2i(33,16)
 				11:
-					return Vector2i(25,15)
+					return Vector2i(33,20)
 				12:
-					return Vector2i(25,15)
+					return Vector2i(29,20)
 		"forest":
 			match id:
 				0:
@@ -63,13 +65,13 @@ func return_atlas_tile_cord(tile_name,id):
 					else:
 						return Vector2i(rng.randi_range(38,47),rng.randi_range(37,43))
 				1:
-					return Vector2i(29,22)
-				2:
-					return Vector2i(28,22)
-				3:
 					return Vector2i(28,21)
-				4:
+				2:
 					return Vector2i(29,21)
+				3:
+					return Vector2i(29,22)
+				4:
+					return Vector2i(28,22)
 				5:
 					return Vector2i(rng.randi_range(30,32),23)
 				6:
@@ -96,13 +98,13 @@ func return_atlas_tile_cord(tile_name,id):
 					else:
 						return Vector2i(rng.randi_range(48,55),rng.randi_range(28,35))
 				1:
-					return Vector2i(35,15)
-				2:
-					return Vector2i(34,15)
-				3:
 					return Vector2i(34,14)
-				4:
+				2:
 					return Vector2i(35,14)
+				3:
+					return Vector2i(35,15)
+				4:
+					return Vector2i(34,15)
 				5:
 					return Vector2i(rng.randi_range(40,42),23)
 				6:
@@ -119,6 +121,125 @@ func return_atlas_tile_cord(tile_name,id):
 					return Vector2i(43,20)
 				12:
 					return Vector2i(39,20)
+		"snow":
+			match id:
+				0:
+					if Util.chance(2):
+						return Vector2i(rng.randi_range(40,43),rng.randi_range(0,1))
+					if Util.chance(50):
+						return Vector2i(rng.randi_range(40,42),rng.randi_range(17,19))
+					else:
+						return Vector2i(rng.randi_range(48,55),rng.randi_range(28,35))
+				1:
+					return Vector2i(34,14)
+				2:
+					return Vector2i(35,14)
+				3:
+					return Vector2i(35,15)
+				4:
+					return Vector2i(34,15)
+				5:
+					return Vector2i(rng.randi_range(40,42),23)
+				6:
+					return Vector2i(43,rng.randi_range(17,19))
+				7:
+					return Vector2i(rng.randi_range(40,42),20)
+				8:
+					return Vector2i(39,rng.randi_range(17,19))
+				9:
+					return Vector2i(39,16)
+				10:
+					return Vector2i(43,16)
+				11:
+					return Vector2i(43,20)
+				12:
+					return Vector2i(39,20)
+		"wet_sand":
+			match id:
+				0:
+					return Vector2i(rng.randi_range(59,60),rng.randi_range(25,26))
+				1:
+					return Vector2i(54,22)
+				2:
+					return Vector2i(55,22)
+				3:
+					return Vector2i(55,23)
+				4:
+					return Vector2i(54,23)
+				5:
+					return Vector2i(rng.randi_range(59,60),24)
+				6:
+					return Vector2i(61,rng.randi_range(25,26))
+				7:
+					return Vector2i(rng.randi_range(59,60),27)
+				8:
+					return Vector2i(58,rng.randi_range(25,26))
+				9:
+					return Vector2i(58,24)
+				10:
+					return Vector2i(61,24)
+				11:
+					return Vector2i(61,27)
+				12:
+					return Vector2i(58,27)
+		"ocean":
+			match id:
+				0:
+					return Vector2i(-1,-1)
+				1:
+					return Vector2i(25,63)
+				2:
+					return Vector2i(26,63)
+				3:
+					return Vector2i(26,64)
+				4:
+					return Vector2i(25,64)
+				5:
+					return Vector2i(26,60)
+				6:
+					return Vector2i(27,61)
+				7:
+					return Vector2i(26,62)
+				8:
+					return Vector2i(25,61)
+				9:
+					return Vector2i(25,60)
+				10:
+					return Vector2i(27,60)
+				11:
+					return Vector2i(27,62)
+				12:
+					return Vector2i(25,62)
+		"deep_ocean":
+			match id:
+				0:
+					return Vector2i(26,56)
+				1:
+					return Vector2i(28,58)
+				2:
+					return Vector2i(25,58)
+				3:
+					return Vector2i(27,56)
+				4:
+					return Vector2i(25,56)
+				5:
+					return Vector2i(rng.randi_range(26,27),57)
+				6:
+					return Vector2i(25,57)
+				7:
+					return Vector2i(rng.randi_range(25,26),59)
+				8:
+					return Vector2i(27,rng.randi_range(58,59))
+			return Vector2i(26,58)
+#				9:
+#					return Vector2i(25,60)
+#				10:
+#					return Vector2i(27,60)
+#				11:
+#					return Vector2i(27,62)
+#				12:
+#					return Vector2i(25,62)
+			
 	
 
 

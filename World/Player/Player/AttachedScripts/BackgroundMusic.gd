@@ -18,7 +18,7 @@ func _play_background_music():
 		volume_db =  Sounds.return_adjusted_sound_db("music", -32)
 	play()
 	await self.finished
-	Sounds.emit_signal("song_finished")
+	#Sounds.emit_signal("song_finished")
 	_play_background_music()
 
 func set_new_music_volume():

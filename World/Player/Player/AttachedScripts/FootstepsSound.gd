@@ -32,31 +32,31 @@ func set_new_music_volume():
 		volume_db = Sounds.return_adjusted_sound_db("footstep", -10)
 
 
-#func _process(delta):
-#	if Server.world:
-#		if has_node("/root/World3D"):
-#			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
-#			if Tiles.isCenterBitmaskTile(location, Tiles.deep_ocean_tiles):
-#				if Sounds.current_footsteps_sound != Sounds.swimming:
-#					Sounds.current_footsteps_sound = Sounds.swimming
-#					Sounds.emit_signal("footsteps_sound_change")
-#			elif Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles):
-#				if Sounds.current_footsteps_sound != null:
-#					play_water_step_sound()
-#					Sounds.current_footsteps_sound = null
-#					Sounds.emit_signal("footsteps_sound_change")
-#			elif Tiles.foundation_tiles.get_cellv(location) == 0 or Tiles.foundation_tiles.get_cellv(location) == 1:
-#				if Sounds.current_footsteps_sound != Sounds.wood_footsteps:
-#					Sounds.current_footsteps_sound = Sounds.wood_footsteps
-#					Sounds.emit_signal("footsteps_sound_change")
+func _process(delta):
+	if Server.world:
+		if has_node("/root/Overworld"):
+			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
+			if Tiles.isCenterBitmaskTile(location, Tiles.deep_ocean_tiles):
+				if Sounds.current_footsteps_sound != Sounds.swimming:
+					Sounds.current_footsteps_sound = Sounds.swimming
+					Sounds.emit_signal("footsteps_sound_change")
+			elif Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles):
+				if Sounds.current_footsteps_sound != null:
+					play_water_step_sound()
+					Sounds.current_footsteps_sound = null
+					Sounds.emit_signal("footsteps_sound_change")
+			elif Tiles.foundation_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1):
+				if Sounds.current_footsteps_sound != Sounds.wood_footsteps:
+					Sounds.current_footsteps_sound = Sounds.wood_footsteps
+					Sounds.emit_signal("footsteps_sound_change")
 #			elif Tiles.foundation_tiles.get_cellv(location) != -1:
 #				if Sounds.current_footsteps_sound != Sounds.stone_footsteps:
 #					Sounds.current_footsteps_sound = Sounds.stone_footsteps
 #					Sounds.emit_signal("footsteps_sound_change")
-#			else:
-#				if Sounds.current_footsteps_sound != Sounds.dirt_footsteps:
-#					Sounds.current_footsteps_sound = Sounds.dirt_footsteps
-#					Sounds.emit_signal("footsteps_sound_change")
+			else:
+				if Sounds.current_footsteps_sound != Sounds.dirt_footsteps:
+					Sounds.current_footsteps_sound = Sounds.dirt_footsteps
+					Sounds.emit_signal("footsteps_sound_change")
 #		else:
 #			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
 #			if Server.world.has_node("Tiles/BridgeTiles"):

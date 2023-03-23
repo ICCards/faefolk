@@ -21,9 +21,9 @@ var current_chunks = []
 
 func initialize():
 	await get_tree().process_frame
-	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
-#	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
-#	$SpawnNatureTimer.start()
+#	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
+	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
+	$SpawnNatureTimer.start()
 
 
 func whoAmIPlaceable(value):
@@ -106,18 +106,18 @@ func _on_spawn_nature_timer_timeout():
 		spawn_nature()
 
 func spawn_nature():
-	if not remove_objects_thread.is_started():
-		remove_objects_thread.start(Callable(self,"_whoAmI").bind(null))
-	if not remove_grass_thread.is_started():
-		remove_grass_thread.start(Callable(self,"_whoAmI5").bind(null))
-	if not trees_thread.is_started():
-		trees_thread.start(Callable(self,"_whoAmI2").bind(null))
-	if not ores_thread.is_started():
-		ores_thread.start(Callable(self,"_whoAmI3").bind(null))
-	if not grass_thread.is_started():
-		grass_thread.start(Callable(self,"_whoAmI4").bind(null))
-	if not forage_thread.is_started():
-		forage_thread.start(Callable(self,"_whoAmI6").bind(null))
+#	if not remove_objects_thread.is_started():
+#		remove_objects_thread.start(Callable(self,"_whoAmI").bind(null))
+#	if not remove_grass_thread.is_started():
+#		remove_grass_thread.start(Callable(self,"_whoAmI5").bind(null))
+#	if not trees_thread.is_started():
+#		trees_thread.start(Callable(self,"_whoAmI2").bind(null))
+#	if not ores_thread.is_started():
+#		ores_thread.start(Callable(self,"_whoAmI3").bind(null))
+#	if not grass_thread.is_started():
+#		grass_thread.start(Callable(self,"_whoAmI4").bind(null))
+#	if not forage_thread.is_started():
+#		forage_thread.start(Callable(self,"_whoAmI6").bind(null))
 	if not navigation_thread.is_started():
 		navigation_thread.start(Callable(self,"_whoAmI7").bind(null))
 	print("NUM NATURE OBJECTS = " +str(NatureObjects.get_children().size()))
