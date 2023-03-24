@@ -106,10 +106,10 @@ collision_mask = 0
 shape = SubResource("1")
 
 [node name="Clicker" type="TextureButton" parent="."]
-offset_left = -318.4
-offset_top = -84.8
-offset_right = 775.6
-offset_bottom = 583.2
+offset_left = -406.4
+offset_top = -252.4
+offset_right = 687.6
+offset_bottom = 415.6
 
 [node name="Progress" type="TextureProgressBar" parent="."]
 modulate = Color(0.313726, 1, 0, 0.854902)

@@ -1,3 +1,5 @@
+res://World/Caves
+res://Assets/Tilesets/objects
 res://Assets/Themes
 res://World/Enemies
 res://Assets/Images/Magic/lightning
@@ -18,5 +20,3 @@ res://Assets/Images/tree_sets/wood breaks/trees/apple/stump
 res://Assets/Images/tree_sets/wood breaks/trees/cherry/stump
 res://Assets/Images/tree_sets/wood breaks/trees/birch/stump
 res://Assets/Images/tree_sets/wood breaks/trees/spruce
-res://Assets/Images/tree_sets/wood breaks/trees/plum
-res://Assets/Images/tree_sets/wood breaks/trees/pine

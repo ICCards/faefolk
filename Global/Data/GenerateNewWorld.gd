@@ -272,9 +272,9 @@ func add_ocean_tiles():
 var autotiles = ["dirt","snow","forest","plains","ocean","deep_ocean"]
 func assign_autotile_id(tiles):
 	print("assigning autotiles")
-	var locations = tiles
-	for loc in tiles:
-		tiles[tiles.find(loc)] = [loc,return_tile_id(loc,locations)]
+#	var locations = tiles
+#	for loc in tiles:
+#		tiles[tiles.find(loc)] = [loc,return_tile_id(loc,locations)]
 	if thread_tile_counter == tile_arrays.size():
 		print("assigned all")
 		#call_deferred("build_world")

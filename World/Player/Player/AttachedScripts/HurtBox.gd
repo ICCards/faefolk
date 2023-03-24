@@ -63,7 +63,7 @@ func _on_area_entered(area):
 						get_node("../../SpeedParticles").start_speed_buff(40)
 				return
 			PlayerData.change_health(health_to_add)
-			InstancedScenes.player_hit_effect(health_to_add, get_node("../../").position)
+			InstancedScenes.player_hit_effect(health_to_add, get_node("../../").position, true)
 		else:
 			if area.name == "BearBite":
 				health_to_subtract = rng.randi_range(35,45)
@@ -99,7 +99,7 @@ func _on_area_entered(area):
 			$AnimationPlayer.play("hit")
 			PlayerData.change_health(-health_to_subtract)
 			get_node("../../Camera2D").player_hit_screen_shake()
-			InstancedScenes.player_hit_effect(-health_to_subtract, get_node("../../").position)
+			InstancedScenes.player_hit_effect(-health_to_subtract, get_node("../../").position, true)
 			await $AnimationPlayer.animation_finished
 			if not get_node("../../Magic").ice_shield_active:
 				$CollisionShape2D.set_deferred("disabled", false)
@@ -119,11 +119,11 @@ func diminish_HOT(type):
 	if int(amount_to_diminish) > 0 and get_node("../../").state != DYING:
 		if amount_to_diminish < poison_increment:
 			PlayerData.change_health(-amount_to_diminish)
-			InstancedScenes.player_hit_effect(-amount_to_diminish, get_node("../../").position)
+			InstancedScenes.player_hit_effect(-amount_to_diminish, get_node("../../").position, true)
 			amount_to_diminish = 0
 		else:
 			PlayerData.change_health(-poison_increment)
-			InstancedScenes.player_hit_effect(-poison_increment, get_node("../../").position)
+			InstancedScenes.player_hit_effect(-poison_increment, get_node("../../").position, true)
 			amount_to_diminish -= poison_increment
 		$PoisonTimer.start(2)
 	
@@ -142,11 +142,11 @@ func start_HOT(type):
 			regeneration_increment = 1
 		if amount_to_heal < regeneration_increment:
 			PlayerData.change_health(amount_to_heal)
-			InstancedScenes.player_hit_effect(amount_to_heal, get_node("../../").position)
+			InstancedScenes.player_hit_effect(amount_to_heal, get_node("../../").position, true)
 			amount_to_heal = 0
 		else:
 			PlayerData.change_health(regeneration_increment)
-			InstancedScenes.player_hit_effect(regeneration_increment, get_node("../../").position)
+			InstancedScenes.player_hit_effect(regeneration_increment, get_node("../../").position, true)
 			amount_to_heal -= regeneration_increment
 		$RegenerationTimer.start()
 
@@ -155,12 +155,12 @@ func _on_PoisonTimer_timeout():
 	if int(amount_to_diminish) > 0 and get_node("../../").state != DYING:
 		if amount_to_diminish < poison_increment:
 			PlayerData.change_health(-amount_to_diminish)
-			InstancedScenes.player_hit_effect(-amount_to_diminish, get_node("../../").position)
+			InstancedScenes.player_hit_effect(-amount_to_diminish, get_node("../../").position, true)
 			amount_to_diminish = 0
 			$PoisonTimer.stop()
 		else:
 			PlayerData.change_health(-poison_increment)
-			InstancedScenes.player_hit_effect(-poison_increment, get_node("../../").position)
+			InstancedScenes.player_hit_effect(-poison_increment, get_node("../../").position, true)
 			amount_to_diminish -= poison_increment
 
 
@@ -168,12 +168,12 @@ func _on_RegenerationTimer_timeout():
 	if int(amount_to_heal) > 0 and get_node("../../").state != DYING:
 		if amount_to_heal < regeneration_increment:
 			PlayerData.change_health(amount_to_heal)
-			InstancedScenes.player_hit_effect(amount_to_heal, get_node("../../").position)
+			InstancedScenes.player_hit_effect(amount_to_heal, get_node("../../").position, true)
 			amount_to_heal = 0
 			$RegenerationTimer.stop()
 		else:
 			PlayerData.change_health(regeneration_increment)
-			InstancedScenes.player_hit_effect(regeneration_increment, get_node("../../").position)
+			InstancedScenes.player_hit_effect(regeneration_increment, get_node("../../").position, true)
 			amount_to_heal -= regeneration_increment
 
 var temp = 0
@@ -181,15 +181,6 @@ func decrease_energy_or_health_while_sprinting():
 	temp += 1
 	if temp > 1000:
 		temp = 0
-#		if PlayerData.player_data["energy"] == 0:
-#			rng.randomize()
-#			var amt = rng.randi_range(1,3)
-#			$AnimationPlayer.play("hit")
-#			InstancedScenes.player_hit_effect(-amt, position)
-#			PlayerData.change_health(-amt)
-#			await $AnimationPlayer.animation_finished
-#			$CollisionShape2D.set_deferred("disabled", false)
-#		else:
 		PlayerData.change_energy(-1)
 
 

@@ -168,6 +168,8 @@ func _on_HurtBox_area_entered(area):
 			Stats.decrease_tool_health()
 		health -= Stats.return_tool_damage(area.tool_name)
 		if health > 0:
+			if MapData.world["placeable"].has(name):
+				MapData.world["placeable"][name]["h"] = health
 			if item_name == "wall":
 				$WallHit.initialize()
 			elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
@@ -213,6 +215,8 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 
 
 func _on_HammerRepairBox_area_entered(area):
+	if item_name == "foundation" and not Tiles.valid_tiles.get_cell_atlas_coords(0,location) == Constants.VALID_TILE_ATLAS_CORD:
+		return
 	health = max_health
 	$HealthBar/Progress.value = health
 	$HealthBar/Progress.max_value = max_health

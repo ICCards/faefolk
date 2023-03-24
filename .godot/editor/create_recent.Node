@@ -1,11 +1,11 @@
-Control
+TileMap
 Node2D
+Control
 CanvasModulate
 VisibleOnScreenNotifier2D
 AnimatedSprite2D
 NavigationRegion2D
 NavigationLink2D
-TileMap
 CanvasGroup
 Timer
 Node

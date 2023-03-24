@@ -15,7 +15,7 @@ func initialize():
 	set_deferred("modulate", Color("ffffff"))
 	if item_name != "Inventory full!":
 		$Icon.set_deferred("texture", load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png"))
-		$ItemName.set_deferred("text", item_name[0].to_upper() + item_name.substr(1,-1))
+		$ItemName.set_deferred("text", Util.capitalizeFirstLetter(item_name))
 		await get_tree().process_frame
 		set_size_of_description($ItemName.size.x)
 		$GridContainer.size.x = width

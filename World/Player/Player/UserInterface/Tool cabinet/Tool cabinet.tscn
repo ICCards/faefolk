@@ -54,6 +54,7 @@ layout_mode = 0
 offset_right = 426.0
 offset_bottom = 240.0
 scale = Vector2(3, 3)
+mouse_filter = 2
 texture = ExtResource("6_bj02y")
 stretch_mode = 3
 metadata/_edit_lock_ = true
@@ -61,7 +62,7 @@ metadata/_edit_lock_ = true
 [node name="MenuTitle" parent="." instance=ExtResource("7_0rhll")]
 offset_left = 552.0
 offset_top = 117.0
-offset_right = 917.0
+offset_right = 915.0
 offset_bottom = 192.0
 
 [node name="Label" parent="MenuTitle" index="1"]

@@ -127,6 +127,8 @@ func place_building_object_in_world(id,item_name,direction,variety,location,heal
 	object.tier = variety
 	PlaceableObjects.call_deferred("add_child", object)
 	object.global_position = Tiles.wall_tiles.map_to_local(location)
+	if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+		Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_object_atlas_tiles[item_name][direction])
 
 
 func remove_valid_tiles(item_name,direction, location):

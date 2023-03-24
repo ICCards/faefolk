@@ -26,7 +26,6 @@ func refresh_image():
 
 
 func return_phase():
-	return "harvest"
 	if days_without_water == 2 or not JsonData.crop_data[crop_name]["Seasons"].has(PlayerData.player_data["season"]):
 		$CollisionShape2D.set_deferred("disabled", true)
 		return "dead"
@@ -71,13 +70,14 @@ func return_phase():
 	
 func harvest_and_remove():
 	if !isBeingHarvested:
+		crop_name
 		$LeafEffect.show()
-		$LeafEffect.playing = true
-		$CropText.hide()
+		$LeafEffect.play("havest")
+		$Crop/TileMap.hide()
 		Tiles.add_valid_tiles(location)
 		isBeingHarvested = true
 		await get_tree().create_timer(0.6).timeout
-		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
+		yield_harvest(JsonData.crop_data[crop_name]["yield"])
 		await get_tree().create_timer(1.0).timeout
 		queue_free()
 	
@@ -85,20 +85,25 @@ func harvest_and_keep_planted():
 	if !isBeingHarvested:
 		isBeingHarvested = true
 		await get_tree().create_timer(0.6).timeout
-		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
+		yield_harvest(JsonData.crop_data[crop_name]["yield"])
 		MapData.world["crops"][name]["rp"] = true # start regrowth phase
 		MapData.world["crops"][name]["dh"] = 1 # days until next harvest
 		refresh_image()
 		
 
-func intitiateItemDrop(item, pos, yield_list):
-	PlayerData.pick_up_item(item, 1, null)
+func yield_harvest(yield_list):
 	yield_list.shuffle()
-	var amount = yield_list.front()
-	PlayerData.player_data["collections"]["crops"][crop_name] += amount
-	if amount > 1:
-		InstancedScenes.intitiateItemDrop(item, position+Vector2(0,16), amount-1)
-		
+	var yield_amount = yield_list.front()
+	PlayerData.player_data["collections"]["crops"][crop_name] += yield_amount
+	if PlayerDataHelpers.can_item_be_added_to_inventory(crop_name, 1):
+		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(crop_name, 1)
+		PlayerData.pick_up_item(crop_name, 1, null)
+	else:
+		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up("Inventory full!", 1)
+		InstancedScenes.intitiateItemDrop(crop_name,position+Vector2(0,8),1)
+	if yield_amount > 1:
+		InstancedScenes.intitiateItemDrop(crop_name,position+Vector2(0,8),yield_amount-1)
+
 
 func play_effect():
 	var phase = return_phase()
@@ -118,8 +123,8 @@ func _on_PlayAnimBox_body_exited(body):
 
 func _on_HurtBox_area_entered(area):
 	Tiles.add_valid_tiles(location)
-	MapData.remove_crop(name)
-	queue_free()
+	MapData.remove_object("crop",name)
+	call_deferred("queue_free")
 
 
 func harvest():

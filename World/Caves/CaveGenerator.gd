@@ -13,8 +13,8 @@ extends Node
 #
 var caves = []
 #
-@onready var walls = get_node("../Walls")
-@onready var ground1 = get_node("../Ground1")
+@onready var walls: TileMap = get_node("../Walls")
+@onready var ground1: TileMap = get_node("../Ground1")
 #onready var ground2 = get_node("../Ground2")
 #onready var grass1 = get_node("../Grass1")
 #onready var grass2 = get_node("../Grass2")
@@ -133,6 +133,7 @@ func generate() -> void:
 		for y in range(-self.map_height / 2, self.map_height / 2):
 			if simplex_noise.get_noise_2d(x, y) < self.noise_threshold:
 				#_set_autotile(x+map_width / 2, y+map_height / 2)
+				walls.set
 				walls.set_cell(x+map_width / 2, y+map_height / 2,0)
 	#self.tile_map.update_dirty_quadrants()
 	

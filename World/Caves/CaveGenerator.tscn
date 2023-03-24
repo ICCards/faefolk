@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dvmsm12osyn5r"]
 
-[ext_resource path="res://World3D/Caves/CaveGenerator.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://World/Caves/CaveGenerator.gd" id="1_ncfw5"]
 
 [node name="CaveGenerator" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1_ncfw5")

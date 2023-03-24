@@ -7,7 +7,7 @@ var game_state: GameState
 var world_file_name = "res://JSONData/world.json"
 var caves_file_name = "res://JSONData/caves.json"
 
-var tile_types = ["plains", "forest", "dirt", "snow"]#, "desert", "beach", "ocean", "wet_sand", "deep_ocean"]
+var tile_types = ["plains", "forest", "dirt", "snow", "beach", "ocean", "wet_sand", "deep_ocean"]#, "desert", "beach", "ocean", "wet_sand", "deep_ocean"]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "forage"]
 var is_world_data_in_chunks = false
 
@@ -78,9 +78,9 @@ func advance_crop():
 			if not world["tree"][id]["p"] == "harvest" and not world["tree"][id]["b"] == "snow":
 				world["tree"][id]["p"] = Util.return_advanced_fruit_tree_phase(world["tree"][id]["p"])
 	for id in world["crop"]: 
-		var loc_string = world["crop"][id]["l"]
+		var loc = world["crop"][id]["l"]
 		if not world["crop"][id]["dww"] == 2: # if crop isn't already dead
-			if world["tile"][loc_string] == "w": # if crop is watered, advance a day
+			if world["tile"][loc] == "w": # if crop is watered, advance a day
 				world["crop"][id]["dh"] -= 1 
 				world["crop"][id]["dww"] = 0
 			else: 
@@ -93,13 +93,13 @@ func advance_crop():
 	emit_signal("refresh_crops")
 
 func set_hoed_tile(loc):
-	world["tile"][str(loc)] = "h"
+	world["tile"][loc] = "h"
 	
 func set_watered_tile(loc):
-	world["tile"][str(loc)] = "w"
+	world["tile"][loc] = "w"
 	
 func remove_hoed_tile(loc):
-	world["tile"].erase(str(loc))
+	world["tile"].erase(loc)
 
 func add_object(type,id,data):
 	if Server.world.name == "Overworld":
@@ -3197,7 +3197,7 @@ var l12 = {
 	"animal": {}
 }
 func add_tile_to_chunk(type, tile):
-	var loc = tile[0]
+	var loc = tile
 	var column
 	var row
 	var chunk_name = get_chunk_from_location(loc)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://blc6g37rg80qc"]
+[gd_scene load_steps=30 format=3 uid="uid://blc6g37rg80qc"]
 
 [ext_resource type="Texture2D" uid="uid://ds11f4jtks5ik" path="res://Assets/Images/Misc/MainMenu/background.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://bbb43rymu58fb" path="res://Assets/Images/Misc/settings icon.png" id="3"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dncukd0ceeiwo" path="res://Assets/Images/Animations/water main menu/5b.png" id="12_xq0bx"]
 [ext_resource type="PackedScene" uid="uid://boujb4h3xtdhe" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="17_6k084"]
 [ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="17_utbmg"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="18_lxpui"]
 [ext_resource type="PackedScene" uid="uid://b3vdyc3n310f7" path="res://MainMenu/MainMenuButtons.tscn" id="19_22cmn"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="21"]
 [ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="23"]
@@ -187,6 +188,14 @@ offset_right = 316.0
 offset_bottom = 197.0
 color = Color(0.247059, 0.109804, 0.0627451, 1)
 metadata/_edit_lock_ = true
+
+[node name="Frame" type="TextureRect" parent="OptionsMenuLayer/Options"]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("18_lxpui")
+stretch_mode = 3
 
 [node name="MenuTitle" parent="OptionsMenuLayer/Options" instance=ExtResource("17_utbmg")]
 layout_mode = 0

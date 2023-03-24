@@ -90,7 +90,7 @@ func retract_and_stop(fish_name):
 		$CaughtFish.texture = load("res://Assets/Images/inventory_icons/Fish/" + fish_name + ".png")
 	reel_in_fish_line()
 	composite_sprites.set_player_animation(Server.player_node.character, "retract_" + direction.to_lower(), "fishing rod retract")
-	player_animation_player.play("retract")
+	player_animation_player.play("axe pickaxe swing")
 	await player_animation_player.animation_finished
 	if fish_name:
 		PlayerData.player_data["skill_experience"]["fishing"] += 1
@@ -133,11 +133,11 @@ func start_fishing_mini_game():
 func change_start_point_pos():
 	match direction:
 		"UP":
-			start_point = Vector2(15,-52)
+			start_point = Vector2(8,-12)
 		"DOWN":
-			start_point = Vector2(-12,-62)
+			start_point = Vector2(-6,-16)
 		_:
-			start_point += Vector2(0,-18)
+			start_point += Vector2(0,-4)
 
 func start():
 	line.hide()
@@ -193,28 +193,28 @@ func draw_cast_line():
 	var percent = progress.value/progress.max_value
 	match direction:
 		"RIGHT":
-			start_point = Vector2(28,-22)
-			end_point = Vector2( 180*percent + 36, 0 )
+			start_point = Vector2(11,-15)
+			end_point = Vector2( 90*percent+18, -8 )
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = abs(start_point.x - end_point.x)
 		"LEFT":
-			start_point = Vector2(-28,-22)
-			end_point = Vector2( -180*percent - 36, 0 )
+			start_point = Vector2(-11,-15)
+			end_point = Vector2( -90*percent - 18, 0 )
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = start_point.x - end_point.x
 		"DOWN":
-			start_point = Vector2(1,6)
-			end_point = Vector2( 2, 160*percent + 8)
+			start_point = Vector2(1,-2)
+			end_point = Vector2( 2, 80*percent + 4)
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = abs(start_point.y - end_point.y) - 12
 		"UP":
-			start_point = Vector2(-1,-54)
-			end_point = Vector2( 2, -160*percent - 60)
+			start_point = Vector2(-1,-31)
+			end_point = Vector2(2,-80*percent - 30)
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = start_point.y - end_point.y - 12
 	line.show()
 	hook.show()
-	hook.position = end_point - Vector2(4.5, 4.5)
+	hook.position = end_point + Vector2(2,2)
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
 	var location = Tiles.ocean_tiles.local_to_map(hook.position + Server.player_node.position)
 	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles): # valid cast
@@ -278,6 +278,7 @@ func _on_RippleTimer_timeout():
 	play_ripple_effect()
 
 func play_ripple_effect():
+	return
 	var rippleParticles = RippleParticles.instantiate()
 	rippleParticles.position = hook.position + Vector2(4.5,4.5)
 	add_child(rippleParticles)

@@ -93,7 +93,7 @@ func adjustedGridCoordinatesScale(zoom):
 	
 func adjustedPlayerIconScale(zoom):
 	var percent_zoomed = zoom / Vector2(0.8, 0.8)
-	return Vector2(32,32) * percent_zoomed
+	return Vector2(48,48) * percent_zoomed
 
 
 func set_direction(dir):
@@ -110,21 +110,21 @@ func set_direction(dir):
 func buildMap():
 	var map = MapData.world
 	for loc in map["dirt"]:
-		miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
+		miniMap.set_cell(0,loc,Tiles.DIRT,Vector2i(0,0))
 	for loc in map["forest"]:
-		miniMap.set_cell(0,loc[0],Tiles.FOREST,Vector2i(0,0))
+		miniMap.set_cell(0,loc,Tiles.FOREST,Vector2i(0,0))
 	for loc in map["plains"]:
-		miniMap.set_cell(0,loc[0],Tiles.PLAINS,Vector2i(0,0))
-#	for loc in map["beach"]:
-#		miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
-#	for loc in map["desert"]:
-#		miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
+		miniMap.set_cell(0,loc,Tiles.PLAINS,Vector2i(0,0))
+	for loc in map["beach"]:
+		miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
+	for loc in map["desert"]:
+		miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
 	for loc in map["snow"]:
-		miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
-#	for loc in map["deep_ocean"]:
-#		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-#	for x in range(MAP_WIDTH):
-#		for y in range(MAP_HEIGHT):
-#			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
-#				miniMap.set_cell(0,Vector2i(x,y),Tiles.WATER,Vector2i(0,0))
+		miniMap.set_cell(0,loc,Tiles.SNOW,Vector2i(0,0))
+	for loc in map["deep_ocean"]:
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+	for x in range(MAP_WIDTH):
+		for y in range(MAP_HEIGHT):
+			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
+				miniMap.set_cell(0,Vector2i(x,y),Tiles.WATER,Vector2i(0,0))
 	draw_grid()

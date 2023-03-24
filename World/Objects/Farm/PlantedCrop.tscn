@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://8urgulfeikba"]
+[gd_scene load_steps=18 format=3 uid="uid://8urgulfeikba"]
 
 [ext_resource type="AudioStream" uid="uid://2u73yye23mpv" path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Farm/PlantedCrop.gd" id="1_37wdp"]
 [ext_resource type="Texture2D" uid="uid://b2foho3vp0sfm" path="res://Assets/Images/Animations/plant/plant break.png" id="2_l6djf"]
+[ext_resource type="TileSet" uid="uid://c5t53fhi1b7fg" path="res://Assets/Tilesets/objects/crops.tres" id="4_kq05n"]
 
 [sub_resource type="CircleShape2D" id="13"]
 radius = 30.0
@@ -10,7 +11,7 @@ radius = 30.0
 [sub_resource type="CircleShape2D" id="2"]
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(30, 30)
+size = Vector2(16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gme2o"]
 atlas = ExtResource("2_l6djf")
@@ -91,12 +92,13 @@ _data = {
 }
 
 [node name="PlantedCrop" type="Area2D"]
-collision_layer = 0
-collision_mask = 131072
+collision_layer = 131072
+collision_mask = 0
 script = ExtResource("1_37wdp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("13")
+disabled = true
 
 [node name="PlayAnimBox" type="Area2D" parent="."]
 visible = false
@@ -107,9 +109,8 @@ position = Vector2(17, 14)
 shape = SubResource("2")
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
-collision_layer = 16
-collision_mask = 0
+collision_layer = 0
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("4")
@@ -140,6 +141,7 @@ position = Vector2(0, 8)
 [node name="TileMap" type="TileMap" parent="Crop"]
 y_sort_enabled = true
 position = Vector2(-8, 2.08165e-12)
+tile_set = ExtResource("4_kq05n")
 format = 2
 layer_0/y_sort_enabled = true
 layer_0/tile_data = PackedInt32Array(-65536, 1638400, 0)

@@ -4871,6 +4871,7 @@ y_sort_enabled = true
 script = ExtResource("1_jqwgc")
 
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
+visible = false
 script = ExtResource("1_gscqb")
 
 [node name="WorldBuilder" type="Node" parent="."]
@@ -4917,12 +4918,13 @@ format = 2
 
 [node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = -2
+z_index = 4
 tile_set = ExtResource("8_rxub7")
 format = 2
 
 [node name="Dirt" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
+z_index = -1
 tile_set = ExtResource("9_oleut")
 format = 2
 
@@ -4954,6 +4956,7 @@ format = 2
 
 [node name="Snow" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
+z_index = -1
 tile_set = ExtResource("15_1q6yy")
 format = 2
 
@@ -5038,7 +5041,6 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="GrassObjects" type="Node2D" parent="."]
-visible = false
 y_sort_enabled = true
 
 [node name="WorldMap" parent="." instance=ExtResource("12_dgvb4")]

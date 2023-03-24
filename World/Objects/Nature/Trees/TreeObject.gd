@@ -71,7 +71,7 @@ func harvest():
 		$CollisionShape2D.set_deferred("disabled", true)
 		phase = "empty"
 		### FIX
-		#MapData.world["tree"][name]["p"] = "empty"
+		MapData.world["tree"][name]["p"] = "empty"
 		await get_tree().process_frame
 		refresh_tree_type()
 		fruit_fall.frame = 0
@@ -91,12 +91,12 @@ func harvest():
 
 
 func refresh_tree_type():
-	#if MapData.world["tree"].has(name):
+	if MapData.world["tree"].has(name):
 		if phase != "5" and Util.isNonFruitTree(variety):
-			#phase = MapData.world["tree"][name]["p"]
+			phase = MapData.world["tree"][name]["p"]
 			set_tree()
 		elif phase != "harvest" and Util.isFruitTree(variety):
-			#phase = MapData.world["tree"][name]["p"]
+			phase = MapData.world["tree"][name]["p"]
 			set_tree()
 
 func setGrownFruitTreeTexture():

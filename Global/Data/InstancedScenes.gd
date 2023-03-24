@@ -83,8 +83,9 @@ func initiateExplosionParticles(pos: Vector2):
 	Server.world.call_deferred("add_child", explosion)
 	explosion.global_position = pos + Vector2(0,32)
 	
-func player_hit_effect(amt: int, pos: Vector2):
+func player_hit_effect(amt: int, pos: Vector2, is_player_hit = false):
 	var effect = PlayerHitEffect.instantiate()
+	effect.is_player_hit = is_player_hit
 	effect.amount = amt
 	effect.position = pos
 	Server.world.call_deferred("add_child", effect)

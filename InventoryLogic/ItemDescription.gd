@@ -7,10 +7,10 @@ var item_name: String
 var item_category: String
 
 
-func _ready():
-	item_name = "bronze ore"
-	item_category = JsonData.item_data[item_name]["ItemCategory"]
-	initialize()
+#func _ready():
+#	item_name = "bronze ore"
+#	item_category = JsonData.item_data[item_name]["ItemCategory"]
+#	initialize()
 
 func _physics_process(delta):
 	position = return_adjusted_position()
@@ -33,7 +33,7 @@ func return_adjusted_position():
 
 
 func initialize():
-	#if not Server.world.is_changing_scene:
+	if not Server.world.is_changing_scene:
 		show()
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
 		set_description_text(item_name)

@@ -23,6 +23,7 @@ func set_footsteps_sound():
 		get_node("../../").is_walking_on_dirt = true
 	else:
 		get_node("../../").is_walking_on_dirt = false
+	stream_paused = true
 
 
 func set_new_music_volume():
@@ -90,5 +91,5 @@ func play_water_step_sound():
 		stream = load("res://Assets/Sound/Sound effects/Footsteps/water/water_step3.mp3")
 	play()
 	await self.finished
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	play_water_step_sound()

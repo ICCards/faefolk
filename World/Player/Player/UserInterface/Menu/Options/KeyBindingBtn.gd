@@ -16,12 +16,11 @@ func _pressed():
 	if Server.isLoaded:
 		Server.player_node.user_interface.add_child(enterNewKey)
 	else:
-		get_node("../../../../").add_child(enterNewKey)
+		get_node("../../../../../").add_child(enterNewKey)
 
 func _input(event):
 	if(do_set):
 		if(event is InputEventKey):
-			print(event.keycode)
 			#Remove the old keys
 			var newkey = InputEventKey.new()
 			newkey.keycode = int(PlayerData.player_data["settings"]["key_dict"][action_name])
@@ -38,5 +37,5 @@ func _input(event):
 			if Server.isLoaded:
 				Server.player_node.user_interface.get_node("EnterNewKey").queue_free()
 			else:
-				get_node("../../../../EnterNewKey").queue_free()
+				get_node("../../../../../EnterNewKey").queue_free()
 

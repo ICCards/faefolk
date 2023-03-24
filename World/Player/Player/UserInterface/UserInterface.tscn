@@ -358,7 +358,8 @@ position = Vector2(721, 369)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("22")
 animation = &"new_animation"
-frame_progress = 0.624182
+autoplay = "new_animation"
+frame_progress = 0.196874
 
 [node name="BetaLabel" parent="LoadingIndicator" instance=ExtResource("15_tm6fr")]
 layout_mode = 0
@@ -373,13 +374,16 @@ grow_vertical = 1
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
 layout_mode = 0
 offset_left = 14.0
-offset_top = 656.0
-offset_right = 1051.0
-offset_bottom = 853.0
-scale = Vector2(0.3, 0.3)
+offset_top = 634.0
+offset_right = 1177.0
+offset_bottom = 845.0
+scale = Vector2(0.4, 0.4)
 theme = ExtResource("6_rh7sc")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
 bbcode_enabled = true
-text = "Saving progress"
+text = "[wave amp=75]Saving progress..."
 
 [node name="ItemPickUpDialogue" parent="." instance=ExtResource("19_n03k2")]
 
@@ -387,8 +391,10 @@ text = "Saving progress"
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
+visible = false
 
 [node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
+visible = false
 
 [node name="LoadingScreen" parent="." instance=ExtResource("4")]
 visible = false

@@ -141,12 +141,6 @@ func harvest_crop(crop_node):
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
 		get_parent().animation_player.play(anim)
 		await get_parent().animation_player.animation_finished
-		if PlayerDataHelpers.can_item_be_added_to_inventory(crop_node.item_name, 1):
-			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(crop_node.item_name, 1)
-			PlayerData.pick_up_item(crop_node.item_name, 1, null)
-		else:
-			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up("Inventory full!", 1)
-			InstancedScenes.initiateInventoryItemDrop([crop_node.item_name, 1, null], crop_node.position)
 		get_parent().state = get_parent().MOVEMENT
 
 
@@ -335,8 +329,6 @@ func move_placable_object(item_name, location):
 
 func show_placable_object(item_name, item_category):
 	if Server.world.name == "Overworld":
-		if item_category == "Seed":
-			item_name.left(-6)
 		if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
 			var placeObject = PlaceObjectScene.instantiate()
 			placeObject.name = "PlaceObject"

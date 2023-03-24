@@ -21,7 +21,7 @@ var current_chunks = []
 
 func initialize():
 	await get_tree().process_frame
-#	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
+	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
 	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
 	$SpawnNatureTimer.start()
 
@@ -54,7 +54,7 @@ func spawn_placeables():
 	for id in MapData.world["placeable"]:
 		var item_name = MapData.world["placeable"][id]["n"]
 		var location = MapData.world["placeable"][id]["l"]
-		if item_name == "wall" or item_name == "foundation":
+		if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],MapData.world["placeable"][id]["v"],location,MapData.world["placeable"][id]["h"])
 		else:
 			PlaceObject.place_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],location)
@@ -68,13 +68,10 @@ func spawn_crops():
 		var days_without_water = MapData.world["crop"][id]["dww"]
 		var regrowth_phase = MapData.world["crop"][id]["rp"]
 		PlaceObject.place_seed_in_world(id,item_name,location,days_until_harvest,days_without_water,regrowth_phase)
-	for id in MapData.world["tile"]:
-		var loc = Util.string_to_vector2(id)
-		Tiles.hoed_tiles.set_cellv(loc, 0)
-		if MapData.world["tile"][id] == "w":
-			Tiles.watered_tiles.set_cellv(loc, 0)
-		Tiles.hoed_tiles.update_bitmask_region()
-		Tiles.watered_tiles.update_bitmask_region()
+	for loc in MapData.world["tile"]:
+		Tiles.hoed_tiles.set_cells_terrain_connect(0,[loc],0,0)
+		if MapData.world["tile"][loc] == "w":
+			Tiles.watered_tiles.set_cells_terrain_connect(0,[loc],0,0)
 	crop_thread.wait_to_finish()
 
 
@@ -106,23 +103,23 @@ func _on_spawn_nature_timer_timeout():
 		spawn_nature()
 
 func spawn_nature():
-#	if not remove_objects_thread.is_started():
-#		remove_objects_thread.start(Callable(self,"_whoAmI").bind(null))
-#	if not remove_grass_thread.is_started():
-#		remove_grass_thread.start(Callable(self,"_whoAmI5").bind(null))
-#	if not trees_thread.is_started():
-#		trees_thread.start(Callable(self,"_whoAmI2").bind(null))
-#	if not ores_thread.is_started():
-#		ores_thread.start(Callable(self,"_whoAmI3").bind(null))
-#	if not grass_thread.is_started():
-#		grass_thread.start(Callable(self,"_whoAmI4").bind(null))
-#	if not forage_thread.is_started():
-#		forage_thread.start(Callable(self,"_whoAmI6").bind(null))
+	if not remove_objects_thread.is_started():
+		remove_objects_thread.start(Callable(self,"_whoAmI").bind(null))
+	if not remove_grass_thread.is_started():
+		remove_grass_thread.start(Callable(self,"_whoAmI5").bind(null))
+	if not trees_thread.is_started():
+		trees_thread.start(Callable(self,"_whoAmI2").bind(null))
+	if not ores_thread.is_started():
+		ores_thread.start(Callable(self,"_whoAmI3").bind(null))
+	if not grass_thread.is_started():
+		grass_thread.start(Callable(self,"_whoAmI4").bind(null))
+	if not forage_thread.is_started():
+		forage_thread.start(Callable(self,"_whoAmI6").bind(null))
 	if not navigation_thread.is_started():
 		navigation_thread.start(Callable(self,"_whoAmI7").bind(null))
-	print("NUM NATURE OBJECTS = " +str(NatureObjects.get_children().size()))
-	print("NUM GRASS OBJECTS = " +str(GrassObjects.get_children().size()))
-	print("NUM FORAGE OBJECTS = " +str(ForageObjects.get_children().size()))
+#	print("NUM NATURE OBJECTS = " +str(NatureObjects.get_children().size()))
+#	print("NUM GRASS OBJECTS = " +str(GrassObjects.get_children().size()))
+#	print("NUM FORAGE OBJECTS = " +str(ForageObjects.get_children().size()))
 
 
 func remove_nature():

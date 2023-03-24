@@ -23,6 +23,7 @@ var rng = RandomNumberGenerator.new()
 
 
 func return_atlas_tile_cord(tile_name,id):
+	id = 0
 	match tile_name:
 		"beach":
 			return Vector2i(rng.randi_range(50,52),rng.randi_range(24,26))
@@ -213,7 +214,7 @@ func return_atlas_tile_cord(tile_name,id):
 		"deep_ocean":
 			match id:
 				0:
-					return Vector2i(26,56)
+					return Vector2i(26,58) #Vector2i(26,56)
 				1:
 					return Vector2i(28,58)
 				2:
@@ -249,7 +250,7 @@ func validate_forest_tiles(location):
 		active = true
 		for x in range(2):
 			for y in range(2):
-				if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location or forest_tiles.get_cellv(Vector2(x,-y) + location) == -1 or not foundation_tiles.get_cellv(Vector2(x,-y) + location) == -1: 
+				if not valid_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) == Constants.VALID_TILE_ATLAS_CORD or valid_tiles.local_to_map(Server.player_node.position) == Vector2i(x,-y) + location or forest_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) == Vector2i(-1,-1) or not foundation_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) == Vector2i(-1,-1): 
 					return false
 					break
 		return true
