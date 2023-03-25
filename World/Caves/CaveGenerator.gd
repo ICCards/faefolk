@@ -12,7 +12,7 @@ extends Node
 #export var redraw: bool : set = redraw
 #
 var caves = []
-#
+
 @onready var walls: TileMap = get_node("../Walls")
 @onready var ground1: TileMap = get_node("../Ground1")
 #onready var ground2 = get_node("../Ground2")
@@ -21,74 +21,25 @@ var caves = []
 #onready var upLadder = get_node("../UpLadder")
 #
 var reset_flag = false
-#
-#func _ready():
-#	generate_walls()
-#
-#func generate_walls():
-#	walls.clear()
-#	upLadder.clear()
-#	fill_roof()
-#	random_ground()
-#	dig_caves()
-#	get_caves()
-#	connect_caves()
-#	add_boundary_tiles()
-#	fix_tiles()
-#	set_up_ladder()
-#	#generate_floors()
-#
-#func set_up_ladder():
-#	var starting_positions = ["top left", "top right"]
-#	starting_positions.shuffle()
-#	var starting_position = starting_positions.front()
-##	if starting_position == "top left":
-#	for x in range(map_w):
-#		if isValidLadderPlacement(Vector2(x,1)):
-#			upLadder.set_cellv(Vector2(x,1),0)
-#			return
-#		elif isValidLadderPlacement(Vector2(x,2)):
-#			upLadder.set_cellv(Vector2(x,2),0)
-#			return
-#
-#
-##var walked_tiles = []
-##func set_down_ladder():
-##	var current_pos = upLadder.get_used_cells()[0]
-##	walked_tiles.append(current_pos)
-##	find_next_valid_tile()
-#
-##func find_next_valid_tile():
-##	if Tiles.isCenterBitmaskTile(current_pos+Vector2(1,0), walls) and not walked_tiles.has(current_pos+Vector2(1,0)):
-##		current_pos = current_pos+Vector2(1,0)
-##		walked_tiles.append(current_pos)
-##		set_down_ladder()
-##		return
-#
-#func isValidLadderPlacement(_pos):
-#	if walls.get_cellv(_pos) == -1 and \
-#	walls.get_cellv(_pos+Vector2(0,1)) == -1 and \
-#	walls.get_cellv(_pos+Vector2(0,2)) == -1 and \
-#	walls.get_cellv(_pos+Vector2(1,0)) == -1 and \
-#	walls.get_cellv(_pos+Vector2(-1,0)) == -1:
-#		return true
-#	return false
-#
-#
 
+var counter = 0
 
 
 func fix_tiles():
-	walls.update_bitmask_region()
-	for tile in walls.get_used_cells():
-		if walls.get_cell_autotile_coord(tile.x, tile.y) == Vector2(30,0):
-			walls.set_cellv(tile,-1)
-			walls.update_bitmask_area(tile)
+	await get_tree().create_timer(0.25)
+	walls.set_cells_terrain_connect(0,walls.get_used_cells(0),0,wall_type)
+	await get_tree().create_timer(0.25)
+	for tile in walls.get_used_cells(0):
+		#print(walls.get_cell_atlas_coords(0,tile).x)
+		if not Tiles.isValidAutoTile(tile,walls): #if walls.get_cell_atlas_coords(0,tile).x == 14 or walls.get_cell_atlas_coords(0,tile).x == 15 or walls.get_cell_atlas_coords(0,tile).x == 16:
+			walls.set_cell(0,tile,0,Vector2i(-1,-1))
 			reset_flag = true
 	if reset_flag:
 		reset_flag = false
 		fix_tiles()
+		counter += 1
 		return
+	print("NUM TIMES RAN " + str(counter))
 
 
 
@@ -97,20 +48,24 @@ func fix_tiles():
 @export var map_height: int = 150
 @export var redraw: bool : set = redraw_walls
 
-@export var world_seed: String = "Hello Godot!"
+@export var world_seed: String = "Hello Godot"
 @export var noise_octaves: int = 1
-@export var noise_period: int = 13
+@export var noise_frequency: float = 0.04
 @export var noise_persistence: float = 0.7
 @export var noise_lacunarity: float = 0.1
 @export var noise_threshold: float = 0.1
-@export var min_cave_size: int = 60 
+@export var min_cave_size: int = 200 
 
 var simplex_noise = FastNoiseLite.new()
+var wall_type
 
 func _ready() -> void:
+	randomize()
 	redraw_walls()
+		
 	
 func redraw_walls(value = null) -> void:
+	wall_type = 1 #randi_range(0,3)
 	if walls == null:
 		return
 	clear()
@@ -119,22 +74,25 @@ func redraw_walls(value = null) -> void:
 	get_caves()
 	connect_caves()
 	fix_tiles()
+
 	
 func clear() -> void:
 	walls.clear()
 	
+	
 func generate() -> void:
 	simplex_noise.seed = self.world_seed.hash()
 	simplex_noise.fractal_octaves = self.noise_octaves
-	simplex_noise.frequency = self.noise_period
-	simplex_noise.persistence = self.noise_persistence
-	simplex_noise.lacunarity = self.noise_lacunarity
+	simplex_noise.frequency = self.noise_frequency
+	#simplex_noise.persistence = self.noise_persistence
+#	simplex_noise.lacunarity = self.noise_lacunarity
 	for x in range(-self.map_width / 2, self.map_width / 2):
 		for y in range(-self.map_height / 2, self.map_height / 2):
 			if simplex_noise.get_noise_2d(x, y) < self.noise_threshold:
 				#_set_autotile(x+map_width / 2, y+map_height / 2)
-				walls.set
-				walls.set_cell(x+map_width / 2, y+map_height / 2,0)
+				walls.set_cell(0,Vector2i(x+map_width / 2, y+map_height / 2),0,Vector2(0,0))
+			#	wall_tiles.append(Vector2i(x+map_width / 2, y+map_height / 2))
+	
 	#self.tile_map.update_dirty_quadrants()
 	
 #func _set_autotile(x : int, y : int) -> void:
@@ -155,35 +113,35 @@ func get_caves():
 
 	for x in range (0, map_width):
 		for y in range (0, map_height):
-			if walls.get_cell(x, y) == -1:
+			if walls.get_cell_atlas_coords(0,Vector2i(x, y)) == Vector2i(-1,-1):
 				flood_fill(x,y)
 
 	for cave in caves:
 		for tile in cave:
-			walls.set_cellv(tile, -1)
+			walls.set_cell(0, tile, 0, Vector2i(-1,-1))
+			#walls.set_cells_terrain_connect(0,[tile],0,-1)
 
 
 func flood_fill(tilex, tiley):
 	var cave = []
-	var to_fill = [Vector2(tilex, tiley)]
+	var to_fill = [Vector2i(tilex, tiley)]
 	while to_fill:
 		var tile = to_fill.pop_back()
 
 		if !cave.has(tile):
 			cave.append(tile)
-			walls.set_cellv(tile, 0)
+			walls.set_cell(0, tile, 0, Vector2i(0,0))
 
 			#check adjacent cells
-			var north = Vector2(tile.x, tile.y-1)
-			var south = Vector2(tile.x, tile.y+1)
-			var east  = Vector2(tile.x+1, tile.y)
-			var west  = Vector2(tile.x-1, tile.y)
+			var north = Vector2i(tile.x, tile.y-1)
+			var south = Vector2i(tile.x, tile.y+1)
+			var east  = Vector2i(tile.x+1, tile.y)
+			var west  = Vector2i(tile.x-1, tile.y)
 
 			for dir in [north,south,east,west]:
-				if walls.get_cellv(dir) == -1:
+				if walls.get_cell_atlas_coords(0,dir) == Vector2i(-1,-1): #if not wall_tiles.has(dir):
 					if !to_fill.has(dir) and !cave.has(dir):
 						to_fill.append(dir)
-
 	if cave.size() >= min_cave_size:
 		caves.append(cave)
 
@@ -262,35 +220,36 @@ func create_tunnel(point1, point2, cave):
 			(2 < drunk_y + dy and drunk_y + dy < map_height-2):
 			drunk_x += dx
 			drunk_y += dy
-			if walls.get_cell(drunk_x, drunk_y) == 0:
-				walls.set_cell(drunk_x, drunk_y, -1)
+#			if walls.get_cell_atlas_coords(0,Vector2i(drunk_x, drunk_y)) == Vector2i(0,0):
+			walls.set_cell(0,Vector2i(drunk_x,drunk_y),0,Vector2i(-1,-1))
+			# optional: make tunnel wider
+			walls.set_cell(0,Vector2i(drunk_x, drunk_y+1),0,Vector2i(-1,-1))
+			walls.set_cell(0,Vector2i(drunk_x, drunk_y-1),0,Vector2i(-1,-1))
+			walls.set_cell(0,Vector2i(drunk_x+1, drunk_y),0,Vector2i(-1,-1))
+			walls.set_cell(0,Vector2i(drunk_x+1, drunk_y+1),0,Vector2i(-1,-1))
+			walls.set_cell(0,Vector2i(drunk_x+1, drunk_y-1),0,Vector2i(-1,-1))
+			walls.set_cell(0,Vector2i(drunk_x-1, drunk_y),0,Vector2i(-1,-1))
+			walls.set_cell(0,Vector2i(drunk_x-1, drunk_y+1),0,Vector2i(-1,-1))
+			walls.set_cell(0,Vector2i(drunk_x-1, drunk_y+-1),0,Vector2i(-1,-1))
 
-				# optional: make tunnel wider
-				walls.set_cell(drunk_x+1, drunk_y, -1)
-				walls.set_cell(drunk_x+1, drunk_y+1, -1)
-				walls.set_cell(drunk_x+2, drunk_y, -1)
-				walls.set_cell(drunk_x+2, drunk_y+2, -1)
-				walls.set_cell(drunk_x+1, drunk_y+3, -1)
-				walls.set_cell(drunk_x+2, drunk_y+3, -1)
-				walls.set_cell(drunk_x+1, drunk_y+4, -1)
-				walls.set_cell(drunk_x+2, drunk_y+4, -1)
-				walls.set_cell(drunk_x-1, drunk_y, -1)
-				walls.set_cell(drunk_x-1, drunk_y-1, -1)
 
 
 func add_boundary_tiles():
 	for amt in range(10):
 		for x in range(map_width+20):
-			walls.set_cell(x-10,-amt,0)
-			walls.set_cell(x-10,map_height+amt,0)
+			walls.set_cell(0,Vector2i(x-10,-amt),0,Vector2i(0,0))
+			walls.set_cell(0,Vector2i(x-10,map_height+amt),0,Vector2i(0,0))
+			#wall_tiles.append(Vector2i(x-10,-amt))
+			#wall_tiles.append(Vector2i(x-10,map_height+amt))
 		for y in range(map_height):
-			walls.set_cell(-amt-1,y,0)
-			walls.set_cell(map_width+amt,y,0)
+			walls.set_cell(0,Vector2i(-amt-1,y),0,Vector2i(0,0))
+			walls.set_cell(0,Vector2i(map_width+amt,y),0,Vector2i(0,0))
+#			wall_tiles.append(Vector2i(-amt-1,y))
+#			wall_tiles.append(Vector2i(map_width+amt,y))
 	for x in range(map_width):
 		for y in range(map_height):
-			ground1.set_cell(x,y,0)
-	ground1.update_bitmask_region()
-	walls.update_bitmask_region()
+			ground1.set_cell(0,Vector2i(x,y),0,Vector2i(randi_range(26,28),randi_range(40,42)))
+
 
 #var openSimplexNoise := OpenSimplexNoise.new()
 #var rng = RandomNumberGenerator.new()
@@ -459,3 +418,57 @@ func add_boundary_tiles():
 #	if start <= val and val < end:
 #		return true
 #	return false
+
+#func _ready():
+#	generate_walls()
+#
+#func generate_walls():
+#	walls.clear()
+#	upLadder.clear()
+#	fill_roof()
+#	random_ground()
+#	dig_caves()
+#	get_caves()
+#	connect_caves()
+#	add_boundary_tiles()
+#	fix_tiles()
+#	set_up_ladder()
+#	#generate_floors()
+#
+#func set_up_ladder():
+#	var starting_positions = ["top left", "top right"]
+#	starting_positions.shuffle()
+#	var starting_position = starting_positions.front()
+##	if starting_position == "top left":
+#	for x in range(map_w):
+#		if isValidLadderPlacement(Vector2(x,1)):
+#			upLadder.set_cellv(Vector2(x,1),0)
+#			return
+#		elif isValidLadderPlacement(Vector2(x,2)):
+#			upLadder.set_cellv(Vector2(x,2),0)
+#			return
+#
+#
+##var walked_tiles = []
+##func set_down_ladder():
+##	var current_pos = upLadder.get_used_cells()[0]
+##	walked_tiles.append(current_pos)
+##	find_next_valid_tile()
+#
+##func find_next_valid_tile():
+##	if Tiles.isCenterBitmaskTile(current_pos+Vector2(1,0), walls) and not walked_tiles.has(current_pos+Vector2(1,0)):
+##		current_pos = current_pos+Vector2(1,0)
+##		walked_tiles.append(current_pos)
+##		set_down_ladder()
+##		return
+#
+#func isValidLadderPlacement(_pos):
+#	if walls.get_cellv(_pos) == -1 and \
+#	walls.get_cellv(_pos+Vector2(0,1)) == -1 and \
+#	walls.get_cellv(_pos+Vector2(0,2)) == -1 and \
+#	walls.get_cellv(_pos+Vector2(1,0)) == -1 and \
+#	walls.get_cellv(_pos+Vector2(-1,0)) == -1:
+#		return true
+#	return false
+#
+#

@@ -332,36 +332,34 @@ func add_navigation_tiles(location, dimensions = Vector2i(1,1)):
 
 func isValidAutoTile(_pos, _map):
 	var count = 0
-	if _map.get_cellv(_pos + Vector2(0,1)) != -1:
+	if _map.get_cell_atlas_coords(0,_pos + Vector2i(0,1)) != Vector2i(-1,-1):
 		count += 1
-	if _map.get_cellv(_pos + Vector2(0,-1)) != -1:
+	if _map.get_cell_atlas_coords(0,_pos + Vector2i(0,-1)) != Vector2i(-1,-1):
 		count += 1
-	if _map.get_cellv(_pos + Vector2(1,0)) != -1:
+	if _map.get_cell_atlas_coords(0,_pos + Vector2i(1,0)) != Vector2i(-1,-1):
 		count += 1
-	if _map.get_cellv(_pos + Vector2(-1,0)) != -1:
+	if _map.get_cell_atlas_coords(0,_pos + Vector2i(-1,0)) != Vector2i(-1,-1):
 		count += 1
 	if count <= 1:
 		return false
 	else:
-		if _map.get_cellv(_pos + Vector2(-1,-1)) != -1:
+		if _map.get_cell_atlas_coords(0,_pos + Vector2i(-1,-1)) != Vector2i(-1,-1):
 			count += 1
-		if _map.get_cellv(_pos + Vector2(-1,1)) != -1:
+		if _map.get_cell_atlas_coords(0,_pos + Vector2i(-1,1)) != Vector2i(-1,-1):
 			count += 1
-		if _map.get_cellv(_pos + Vector2(1,-1)) != -1:
+		if _map.get_cell_atlas_coords(0,_pos + Vector2i(1,-1)) != Vector2i(-1,-1):
 			count += 1
-		if _map.get_cellv(_pos + Vector2(1,1)) != -1:
+		if _map.get_cell_atlas_coords(0,_pos + Vector2i(1,1)) != Vector2i(-1,-1):
 			count += 1
 		if count == 6:
-			if _map.get_cellv(_pos + Vector2(-1,-1)) == -1 and _map.get_cellv(_pos + Vector2(1,1)) == -1:
+			if _map.get_cell_atlas_coords(0,_pos + Vector2i(-1,-1)) == Vector2i(-1,-1) and _map.get_cell_atlas_coords(0,_pos + Vector2i(1,1)) == Vector2i(-1,-1):
 				return false
-			elif _map.get_cellv(_pos + Vector2(1,-1)) == -1 and _map.get_cellv(_pos + Vector2(-1,1)) == -1:
+			elif _map.get_cell_atlas_coords(0,_pos + Vector2i(1,-1)) == Vector2i(-1,-1) and _map.get_cell_atlas_coords(0,_pos + Vector2i(-1,1)) == Vector2i(-1,-1):
 				return false
 			elif count == 2:
 				return false
-			else:
-				return true
-		else:
-			return true
+	return true
+
 			
 	
 func return_neighboring_cells(_pos, _map):

@@ -1,3 +1,4 @@
+res://Assets/Tilesets/terrain/tres files
 res://World/Caves
 res://Assets/Tilesets/objects
 res://Assets/Themes
@@ -6,7 +7,6 @@ res://Assets/Images/Magic/lightning
 res://Assets/Images/Animals
 res://Assets/Images/Magic/wind
 res://Assets/Images/Animations/leaf break
-res://Assets/Tilesets/terrain/tres files
 res://World/Building/Tiles/Attached nodes
 res://Assets/Images/tree_sets/wood breaks/logs
 res://Assets/Images/Animations/ore
