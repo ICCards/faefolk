@@ -1,13 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://qb1sjlodnjbd"]
+[gd_scene load_steps=13 format=3 uid="uid://bq61lhws3vl1j"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Fishing/Fishing.gd" id="1_ttivv"]
 [ext_resource type="Texture2D" uid="uid://b1ju2e10selvc" path="res://Assets/Images/inventory_icons/Fish/albacore.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b4shw26kcaudu" path="res://Assets/Images/Misc/Fishing/progress bar/fishing_bar-frame.png" id="2_ywe2l"]
 [ext_resource type="Texture2D" uid="uid://cj0u0f7vk43lp" path="res://Assets/Images/Misc/exclamation icon.png" id="3"]
-[ext_resource type="PackedScene" uid="uid://wj5pdfdxvnpw" path="res://World/Player/Player/Fishing/FishingMiniGame.tscn" id="4_8e1cl"]
+[ext_resource type="Texture2D" uid="uid://c6pnwo0uollui" path="res://Assets/Images/Misc/Fishing/progress bar/fishing_bar.png" id="3_leplc"]
+[ext_resource type="PackedScene" uid="uid://dcjcx6cnv8dnl" path="res://World/Player/Player/Fishing/FishingMiniGame.tscn" id="4_8e1cl"]
 [ext_resource type="Texture2D" uid="uid://dy0twecogksrh" path="res://Characters/Weapon swings/fishing rod cast/fish hook.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://rn28qspob20n" path="res://Assets/Images/Misc/Fishing/progress bar fill.png" id="6"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="6_51gg3"]
-[ext_resource type="Texture2D" uid="uid://k6g2x8nkh2i4" path="res://Assets/Images/Misc/Fishing/progress bar.png" id="7"]
 
 [sub_resource type="Animation" id="45"]
 length = 0.001
@@ -190,21 +190,20 @@ script = ExtResource("1_ttivv")
 [node name="ProgressBackground" type="TextureRect" parent="CanvasLayer"]
 offset_left = 582.0
 offset_top = 240.0
-offset_right = 634.0
-offset_bottom = 254.0
-scale = Vector2(2, 2)
-texture = ExtResource("7")
+offset_right = 630.0
+offset_bottom = 256.0
+texture = ExtResource("2_ywe2l")
 
 [node name="CastingProgress" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 602.0
-offset_top = 246.0
-offset_right = 634.0
-offset_bottom = 254.0
-scale = Vector2(2, 2)
-value = 50.0
-texture_progress = ExtResource("6")
+offset_left = 582.0
+offset_top = 240.0
+offset_right = 630.0
+offset_bottom = 256.0
+value = 100.0
+texture_progress = ExtResource("3_leplc")
 
 [node name="FishingMiniGame" parent="CanvasLayer" instance=ExtResource("4_8e1cl")]
+visible = false
 position = Vector2(458, 200)
 scale = Vector2(3, 3)
 
@@ -215,11 +214,13 @@ texture = ExtResource("3")
 
 [node name="HitLabel" type="Label" parent="."]
 visible = false
-offset_left = -66.0
-offset_right = 100.0
-offset_bottom = 113.0
+offset_left = -4.0
+offset_top = 1.0
+offset_right = 162.0
+offset_bottom = 114.0
 scale = Vector2(0.4, 0.4)
 theme = ExtResource("6_51gg3")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 96
 text = "HIT!"

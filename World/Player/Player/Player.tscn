@@ -4556,7 +4556,6 @@ libraries = {
 }
 
 [node name="Magic" parent="." instance=ExtResource("8_wf6cw")]
-visible = false
 
 [node name="Area2Ds" type="Node2D" parent="."]
 visible = false

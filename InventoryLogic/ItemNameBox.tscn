@@ -36,7 +36,7 @@ texture = ExtResource("5_6rgmb")
 custom_minimum_size = Vector2(320, 188)
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 566.0
+offset_right = 468.0
 offset_bottom = 257.0
 scale = Vector2(0.041, 0.041)
 

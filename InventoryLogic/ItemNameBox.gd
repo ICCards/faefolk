@@ -1,6 +1,6 @@
 extends Node2D
 
-var item_name = ""
+var item_name = "?????"
 var width
 
 
@@ -31,7 +31,7 @@ func initialize():
 	$GridContainer.size.x = width
 
 func set_size_of_description(x):
-	if x <= 561:
+	if x <= 463:
 		width = 28
 	else:
-		width = 28 + ((x - 561) / 19)
+		width = 28 + ((x - 463) / 18)

@@ -167,6 +167,7 @@ func hit(tool_name, special_ability = ""):
 func destroy(killed_by_player):
 	_timer.call_deferred("stop")
 	set_physics_process(false)
+	duck_sprite.material = null
 	if killed_by_player:
 		MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
@@ -179,20 +180,20 @@ func destroy(killed_by_player):
 	$AnimationPlayer.call_deferred("play", "death")
 	await get_tree().create_timer(0.5).timeout
 	InstancedScenes.intitiateItemDrop("raw wing", position, 1)
-	if Util.chance(50):
-		InstancedScenes.intitiateItemDrop("raw egg", position, 1) 
+	#if Util.chance(50):
+		#InstancedScenes.intitiateItemDrop("raw egg", position, 1) 
 	await $AnimationPlayer.animation_finished
 	get_parent().call_deferred("queue_free")
 
 func start_run_state():
-	navigation_agent.set_deferred("max_speed", 130)
+	navigation_agent.set_deferred("max_speed", 85)
 	running_state = true
 	$Timers/RunStateTimer.call_deferred("start")
 	_timer.set_deferred("wait_time", 0.75)
 	call_deferred("_update_pathfinding")
 
 func _on_RunStateTimer_timeout():
-	navigation_agent.set_deferred("max_speed", 200)
+	navigation_agent.set_deferred("max_speed", 40)
 	running_state = false
 	_timer.set_deferred("wait_time", randf_range(2.5, 5.0))
 
@@ -200,6 +201,7 @@ func _on_IdleTimer_timeout():
 	is_eating = false
 
 func _on_DropEggTimer_timeout():
+	return
 	if visible and Server.isLoaded and not destroyed and velocity != Vector2.ZERO and not is_eating:
 		$Timers/DropEggTimer.wait_time = randf_range(60, 180)
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/egg drop.mp3"))

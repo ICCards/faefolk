@@ -221,11 +221,11 @@ texture_pressed = ExtResource("21")
 
 [node name="MainMenuButtons" parent="." instance=ExtResource("19_22cmn")]
 layout_mode = 1
-offset_left = -6.0
-offset_top = 501.0
-offset_right = -6.0
-offset_bottom = 501.0
-scale = Vector2(0.45, 0.45)
+offset_left = 64.0
+offset_top = 415.0
+offset_right = -518.0
+offset_bottom = -43.0001
+scale = Vector2(0.6, 0.6)
 
 [node name="OptionsIconButton" type="TextureButton" parent="."]
 layout_mode = 0

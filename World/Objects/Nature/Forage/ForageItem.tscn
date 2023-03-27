@@ -223,7 +223,6 @@ collision_mask = 0
 script = ExtResource("1_43ob6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
 texture = ExtResource("2_4tgp7")
 

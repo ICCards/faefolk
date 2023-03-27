@@ -516,13 +516,12 @@ collision_mask = 32
 shape = SubResource("18")
 
 [node name="BoarBite" type="Area2D" parent="."]
-position = Vector2(22, -16)
-rotation = 1.5708
+position = Vector2(0, -5)
 collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoarBite"]
-position = Vector2(11, 5.99996)
+position = Vector2(16, 0)
 shape = SubResource("21")
 disabled = true
 

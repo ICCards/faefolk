@@ -133,6 +133,7 @@ func hit(tool_name):
 func destroy(killed_by_player):
 	_timer.call_deferred("stop")
 	set_physics_process(false)
+	bunny_sprite.material = null
 	if killed_by_player:
 		MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["bunny"] += 1

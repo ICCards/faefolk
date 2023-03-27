@@ -1,17 +1,17 @@
-[gd_scene load_steps=24 format=3 uid="uid://l7ak1ldss5ex"]
+[gd_scene load_steps=38 format=3 uid="uid://l7ak1ldss5ex"]
 
 [ext_resource type="Script" path="res://World/Enemies/Slime/Slime.gd" id="1_kv3qs"]
 [ext_resource type="Texture2D" uid="uid://o0g2lde5dopc" path="res://Assets/Images/Enemies/enemy break.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dmtatd8ttvc6b" path="res://Assets/Images/Enemies/slime/slime.png" id="4_h803v"]
 [ext_resource type="Texture2D" uid="uid://c7pbioiyoq5hg" path="res://Assets/Images/Enemies/knockback dust.png" id="5"]
 
-[sub_resource type="CanvasItemMaterial" id="160"]
-particles_animation = true
-particles_anim_h_frames = 9
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
 [sub_resource type="SpriteFrames" id="146"]
-animations = []
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="35"]
 radius = 13.0384
@@ -82,7 +82,7 @@ _data = {
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="169"]
-radius = 225.036
+radius = 110.0
 
 [sub_resource type="CircleShape2D" id="14"]
 radius = 5.0
@@ -270,19 +270,19 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("KnockbackParticles:emitting")
+tracks/4/path = NodePath("BreakParticles:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("BreakParticles:emitting")
+tracks/5/path = NodePath("ExplosionParticles/Explosion:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -294,7 +294,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("ExplosionParticles/Explosion:emitting")
+tracks/6/path = NodePath("ExplosionParticles/Explosion/Shards:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -306,7 +306,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ExplosionParticles/Explosion/Shards:emitting")
+tracks/7/path = NodePath("ExplosionParticles/Explosion/Smoke:emitting")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -318,19 +318,19 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("ExplosionParticles/Explosion/Smoke:emitting")
+tracks/8/path = NodePath("Electricity:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Electricity:visible")
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -342,7 +342,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -354,22 +354,10 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/11/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -382,20 +370,118 @@ _data = {
 "death": SubResource("142")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4j35w"]
+atlas = ExtResource("4_h803v")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wxut"]
+atlas = ExtResource("4_h803v")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ajqf"]
+atlas = ExtResource("4_h803v")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhntn"]
+atlas = ExtResource("4_h803v")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0hc1"]
+atlas = ExtResource("4_h803v")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4a15"]
+atlas = ExtResource("4_h803v")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0mpt"]
+atlas = ExtResource("4_h803v")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3omg"]
+atlas = ExtResource("4_h803v")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qutv"]
+atlas = ExtResource("4_h803v")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7eow8"]
+atlas = ExtResource("4_h803v")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ni0m"]
+atlas = ExtResource("4_h803v")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcsor"]
+atlas = ExtResource("4_h803v")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ayuvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4j35w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wxut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ajqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhntn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0hc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4a15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0mpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3omg")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qutv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7eow8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ni0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcsor")
+}],
+"loop": false,
+"name": &"jumping",
+"speed": 5.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qkpeh"]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [node name="Slime" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2097250
 script = ExtResource("1_kv3qs")
-
-[node name="KnockbackParticles" type="CPUParticles2D" parent="."]
-material = SubResource("160")
-position = Vector2(0, -11)
-emitting = false
-amount = 3
-lifetime = 0.5
-explosiveness = 0.5
-texture = ExtResource("5")
-gravity = Vector2(0, 0)
 
 [node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -403,13 +489,12 @@ modulate = Color(1.22, 1.22, 1.22, 1)
 position = Vector2(0, -6)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("146")
-animation = &""
-frame = 7
+animation = &"new_animation"
 
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false
-collision_layer = 262400
-collision_mask = 0
+collision_layer = 0
+collision_mask = 262400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -5)
@@ -423,17 +508,16 @@ libraries = {
 [node name="SlimeHit" type="Area2D" parent="."]
 position = Vector2(0, -15)
 rotation = 1.5708
-collision_layer = 0
-collision_mask = 128
+collision_layer = 128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeHit"]
 position = Vector2(12, -4.3869e-05)
 shape = SubResource("39")
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 32
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
 shape = SubResource("169")
@@ -443,6 +527,7 @@ position = Vector2(0, -3)
 shape = SubResource("14")
 
 [node name="BreakParticles" type="CPUParticles2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.627451)
 material = SubResource("161")
 position = Vector2(0, -3)
@@ -455,6 +540,7 @@ texture = ExtResource("4")
 gravity = Vector2(0, 0)
 
 [node name="ExplosionParticles" type="Node2D" parent="."]
+visible = false
 modulate = Color(1.25, 1.25, 1.25, 1)
 position = Vector2(0, -3)
 
@@ -527,6 +613,23 @@ libraries = {
 }
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="SlimeSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_ayuvu")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="KnockbackParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_qkpeh")
+emitting = false
+amount = 3
+lifetime = 0.5
+explosiveness = 0.5
+texture = ExtResource("5")
+gravity = Vector2(0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]

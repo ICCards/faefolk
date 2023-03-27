@@ -195,6 +195,7 @@ func destroy(killed_by_player):
 		_chase_timer.call_deferred("stop")
 		_idle_timer.call_deferred("stop")
 		set_physics_process(false)
+		wolf_sprite.material = null
 		if killed_by_player:
 			MapData.remove_object("animal",name)
 			PlayerData.player_data["collections"]["mobs"]["wolf"] += 1
@@ -267,7 +268,7 @@ func start_retreat_state():
 func start_chase_state():
 	chasing = true
 	state = CHASE
-	navigation_agent.set_deferred("max_speed", 130)
+	navigation_agent.set_deferred("max_speed", 120)
 	call_deferred("start_sound_effects")
 	_idle_timer.call_deferred("stop")
 	_chase_timer.call_deferred("start")

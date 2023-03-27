@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b3vdyc3n310f7"]
 
 [ext_resource type="Script" path="res://MainMenu/MainMenuButtons.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://dj3hn6egvrpeb" path="res://Assets/Images/Misc/MainMenu/play button.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dfvwmx10y6j7o" path="res://Assets/Images/Misc/MainMenu/play_button.png" id="2_bagk8"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_0bwq0"]
 [ext_resource type="Texture2D" uid="uid://cqo84wlgvp3e5" path="res://Assets/Images/Misc/MainMenu/quit button.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://2hsesaow6gf" path="res://Assets/Images/Misc/MainMenu/shop button.png" id="5"]
@@ -19,27 +19,25 @@ script = ExtResource("2")
 
 [node name="PlayShopQuit" type="Node2D" parent="."]
 z_index = 1
+position = Vector2(277, 145)
 
 [node name="Play" type="Sprite2D" parent="PlayShopQuit"]
-position = Vector2(94, 0)
 
 [node name="PlaySprite" type="Sprite2D" parent="PlayShopQuit/Play"]
-position = Vector2(288, 96)
-scale = Vector2(3, 3)
-texture = ExtResource("3")
+scale = Vector2(6, 6)
+texture = ExtResource("2_bagk8")
 
 [node name="PlayLabel" type="Label" parent="PlayShopQuit/Play"]
-offset_left = 131.0
-offset_top = 56.0
-offset_right = 589.0
-offset_bottom = 172.0
+offset_left = -150.0
+offset_top = -67.0
+offset_right = 532.0
+offset_bottom = 95.0
+scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_0bwq0")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 6
-theme_override_constants/shadow_offset_y = 6
-theme_override_constants/shadow_outline_size = 0
-theme_override_font_sizes/font_size = 100
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/outline_size = 38
 text = "PLAY"
 horizontal_alignment = 1
 
@@ -78,10 +76,10 @@ scale = Vector2(0.8, 0.8)
 text = "QUIT"
 
 [node name="PlayBtn" type="Button" parent="PlayShopQuit"]
-offset_left = 69.0
-offset_top = 20.0
-offset_right = 690.0
-offset_bottom = 171.0
+offset_left = -264.0
+offset_top = -74.0
+offset_right = 266.0
+offset_bottom = 72.0
 focus_mode = 0
 flat = true
 

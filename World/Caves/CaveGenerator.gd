@@ -1,69 +1,129 @@
 extends Node
 
-#var _uuid = load("res://helpers/UUID.gd")
-#var uuid
-#
-#
-#export var map_w: int         = 100
-#export var map_h: int         = 100
-#export var iterations: int    = 45000
-#export var neighbors: int     = 4
-#export var ground_chance: int = 48
-#export var redraw: bool : set = redraw
-#
+@onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
+
+@onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
+@onready var Spider = load("res://World/Enemies/Spider.tscn")
+@onready var FireMageSkeleton = load("res://World/Enemies/Skeleton.tscn")
+
 var caves = []
-
-@onready var walls: TileMap = get_node("../Walls")
-@onready var ground1: TileMap = get_node("../Ground1")
-#onready var ground2 = get_node("../Ground2")
-#onready var grass1 = get_node("../Grass1")
-#onready var grass2 = get_node("../Grass2")
-#onready var upLadder = get_node("../UpLadder")
-#
-var reset_flag = false
-
-var counter = 0
-
-
-func fix_tiles():
-	await get_tree().create_timer(0.25)
-	walls.set_cells_terrain_connect(0,walls.get_used_cells(0),0,wall_type)
-	await get_tree().create_timer(0.25)
-	for tile in walls.get_used_cells(0):
-		#print(walls.get_cell_atlas_coords(0,tile).x)
-		if not Tiles.isValidAutoTile(tile,walls): #if walls.get_cell_atlas_coords(0,tile).x == 14 or walls.get_cell_atlas_coords(0,tile).x == 15 or walls.get_cell_atlas_coords(0,tile).x == 16:
-			walls.set_cell(0,tile,0,Vector2i(-1,-1))
-			reset_flag = true
-	if reset_flag:
-		reset_flag = false
-		fix_tiles()
-		counter += 1
-		return
-	print("NUM TIMES RAN " + str(counter))
-
-
-
 
 @export var map_width: int = 150
 @export var map_height: int = 150
 @export var redraw: bool : set = redraw_walls
 
-@export var world_seed: String = "Hello Godot"
+@export var world_seed: String = "Hgfdddsdssdel"
 @export var noise_octaves: int = 1
-@export var noise_frequency: float = 0.04
+@export var noise_frequency: float = 0.03
 @export var noise_persistence: float = 0.7
 @export var noise_lacunarity: float = 0.1
 @export var noise_threshold: float = 0.1
-@export var min_cave_size: int = 200 
+@export var min_cave_size: int = 400 
 
 var simplex_noise = FastNoiseLite.new()
 var wall_type
+var path
+var reset_flag = false
+var counter = 0
+var valid_light_or_ladder_tiles = []
+
+var oreTypesLevel1 = ["stone1", "stone2", "stone1", "stone2", "bronze ore", "bronze ore", "bronze ore", "iron ore"]
+var oreTypesLevel2 = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "bronze ore", "bronze ore", "iron ore", "iron ore", "gold ore"]
+var mushroomTypes = ["common mushroom", "healing mushroom", "purple mushroom", "chanterelle"]
+var randomAdjacentTiles = [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
+const NUM_MUSHROOMS = 40
+const NUM_SMALL_ORE = 70
+const NUM_LARGE_ORE = 30
+const MAX_TALL_GRASS_SIZE = 140
+
+var NUM_BATS = 12
+var NUM_SLIMES = 16
+var NUM_SPIDERS = 16
+var NUM_SKELETONS = 16
+
+@onready var valid_tiles: TileMap = get_node("../TerrainTiles/ValidTiles")
+@onready var walls: TileMap = get_node("../TerrainTiles/Walls")
+@onready var ground1: TileMap = get_node("../TerrainTiles/Ground1")
+@onready var ground2: TileMap = get_node("../TerrainTiles/Ground2")
+@onready var ground3: TileMap = get_node("../TerrainTiles/Ground3")
+@onready var decoration: TileMap = get_node("../TerrainTiles/Decoration")
+
+var _uuid = load("res://helpers/UUID.gd")
+var uuid = _uuid.new()
 
 func _ready() -> void:
+	await get_tree().create_timer(0.25).timeout
 	randomize()
 	redraw_walls()
-		
+
+
+func fix_tiles_and_set_ladders_and_lights():
+	valid_light_or_ladder_tiles = []
+	for loc in walls.get_used_cells(0): # fix tiles and get light/ladder locs
+		var autotile_id = Tiles.return_autotile_id(loc,walls.get_used_cells(0))
+		if autotile_id == 13:
+			walls.set_cell(0,loc,0,Vector2i(-1,-1))
+			reset_flag = true
+		elif autotile_id == 7 or autotile_id == 11 or autotile_id == 12:
+			valid_light_or_ladder_tiles.append(loc)
+	if reset_flag:
+		reset_flag = false
+		fix_tiles_and_set_ladders_and_lights()
+		counter += 1
+		return
 	
+	var room_positions = []
+	for cave in caves: # get two farthest points in cave
+		room_positions.append(Util.choose(cave))
+	var two_fatherest_points = return_two_farthest_points(room_positions)
+	
+	var ladder1 = room_positions[0]
+	var distance_to_valid_ladder_placement = 100000
+	var valid_ladder_location
+	for loc in valid_light_or_ladder_tiles: # set up ladder location
+		var distToLadder = Vector2(loc.x,loc.y).distance_to(Vector2(ladder1.x,ladder1.y))
+		if distToLadder < distance_to_valid_ladder_placement:
+			distance_to_valid_ladder_placement = distToLadder
+			valid_ladder_location = loc
+	valid_light_or_ladder_tiles.erase(valid_ladder_location)
+	decoration.set_cell(0,valid_ladder_location+Vector2i(0,1),0,Vector2i(60,9))
+
+	var ladder2 = room_positions[1] # set down ladder location
+	decoration.set_cell(0,room_positions[1]+Vector2i(0,-1),0,Vector2i(61,11))
+	
+	for loc in valid_light_or_ladder_tiles:
+		if Util.chance(14):
+			place_cave_light(loc)
+			if valid_light_or_ladder_tiles.has(loc+Vector2i(1,0)):
+				valid_light_or_ladder_tiles.erase(loc+Vector2i(1,0))
+			if valid_light_or_ladder_tiles.has(loc+Vector2i(-1,0)):
+				valid_light_or_ladder_tiles.erase(loc+Vector2i(-1,0))
+			if valid_light_or_ladder_tiles.has(loc+Vector2i(2,0)):
+				valid_light_or_ladder_tiles.erase(loc+Vector2i(2,0))
+			if valid_light_or_ladder_tiles.has(loc+Vector2i(-2,0)):
+				valid_light_or_ladder_tiles.erase(loc+Vector2i(-2,0))
+	walls.set_cells_terrain_connect(0,walls.get_used_cells(0),0,wall_type)
+	print("NUM TIMES RAN " + str(counter))
+
+func place_cave_light(loc):
+	var rand_light = randi_range(52,55)
+	decoration.set_cell(0,loc+Vector2i(0,-2),0,Vector2i(rand_light,26))
+	var type
+	if rand_light == 52:
+		type = null
+	elif rand_light == 53:
+		type = "red"
+	elif rand_light == 54:
+		type = "yellow"
+	elif rand_light == 55:
+		type = "blue"
+	if type:
+		var caveLight = CaveLight.instantiate()
+		caveLight.type = type
+		caveLight.position = loc*16
+		get_parent().call_deferred("add_child",caveLight)
+	
+
 func redraw_walls(value = null) -> void:
 	wall_type = 1 #randi_range(0,3)
 	if walls == null:
@@ -73,44 +133,189 @@ func redraw_walls(value = null) -> void:
 	add_boundary_tiles()
 	get_caves()
 	connect_caves()
-	fix_tiles()
+	fix_tiles_and_set_ladders_and_lights()
+	set_valid_tiles()
+	set_decorations()
+	set_resources()
+	set_mobs()
+	
+func set_mobs():
+	var locs = valid_tiles.get_used_cells(0)
+	locs.shuffle()
+	for i in range(NUM_SLIMES):
+		var slime = Slime.instantiate()
+		Server.world.get_node("Enemies").add_child(slime)
+		slime.position = locs[i]*16 + Vector2i(8,8)
+		await get_tree().process_frame
+	locs.shuffle()
+	for i in range(NUM_SPIDERS):
+		var spider = Spider.instantiate()
+		Server.world.get_node("Enemies").add_child(spider)
+		spider.position = locs[i]*16 + Vector2i(8,8)
+		await get_tree().process_frame
+	locs.shuffle()
+	for i in range(NUM_SKELETONS):
+		var skele = FireMageSkeleton.instantiate()
+		Server.world.get_node("Enemies").add_child(skele)
+		skele.position = locs[i]*16 + Vector2i(8,8)
+		await get_tree().process_frame
 
 	
+func set_resources():
+	generate_ore()
+	generate_mushroom_forage()
+	generate_tall_grass()
+	
+func set_valid_tiles():
+	for x in range(map_width):
+		for y in range(map_height):
+			if walls.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
+				valid_tiles.set_cell(0,Vector2i(x,y),0,Constants.VALID_TILE_ATLAS_CORD)
+
+func set_decorations():
+	print("SET DECOR")
+	set_random_rail_decoration()
+	print("SET SHRUBS")
+	set_random_shrubs()
+	
+func set_random_shrubs():
+	var shrub_locs = [Vector2i(57,15),Vector2i(59,15)]
+	for loc in walls.get_used_cells(0):
+		var autotile_id = Tiles.return_autotile_id(loc,walls.get_used_cells(0))
+		if autotile_id != 0:
+			if Util.chance(5):
+				shrub_locs.shuffle()
+				if autotile_id == 7 or autotile_id == 11 or autotile_id == 12:
+					decoration.set_cell(0,loc,0,shrub_locs.front())
+				else:
+					decoration.set_cell(0,loc+Vector2i(0,2),0,shrub_locs.front())
+			await get_tree().process_frame
+	
+func set_random_rail_decoration():
+	var rail_location
+	var locations = []
+	if Util.chance(50):
+		rail_location = Vector2i(randi_range(0,map_width),0)
+		while rail_location.y != map_height:
+			locations.append(rail_location)
+			if Util.chance(60):
+				rail_location+=Vector2i(0,1)
+			elif Util.chance(20):
+				locations.append(rail_location+Vector2i(1,0))
+				locations.append(rail_location+Vector2i(1,1))
+				rail_location+=Vector2i(1,2)
+			elif Util.chance(20):
+				locations.append(rail_location+Vector2i(-1,0))
+				locations.append(rail_location+Vector2i(-1,1))
+				rail_location+=Vector2i(-1,2)
+			if rail_location.x == map_width:
+				rail_location.x -= 1
+			if rail_location.x == 0:
+				rail_location.x += 1
+	else:
+		rail_location = Vector2i(0,randi_range(map_height,0))
+		while rail_location.x != map_width:
+			locations.append(rail_location)
+			if Util.chance(60):
+				rail_location+=Vector2i(1,0)
+			elif Util.chance(20):
+				locations.append(rail_location+Vector2i(1,1))
+				locations.append(rail_location+Vector2i(0,1))
+				rail_location+=Vector2i(2,1)
+			elif Util.chance(20):
+				locations.append(rail_location+Vector2i(1,-1))
+				locations.append(rail_location+Vector2i(0,-1))
+				rail_location+=Vector2i(2,-1)
+			if rail_location.y == map_height:
+				rail_location.y -= 1
+			if rail_location.y == 0:
+				rail_location.y += 1
+	for loc in locations:
+		if Util.chance(2) or valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
+			locations.erase(loc)
+	decoration.set_cells_terrain_connect(0,locations,0,0)
+	for loc in locations:
+		valid_tiles.set_cell(0,loc,0,Constants.NAVIGATION_TILE_ATLAS_CORD)
+
+func return_two_farthest_points(room_positions):
+	var longest_path_points = []
+	var checked_locations = []
+	var longest_distance = 10
+	for loc in room_positions:
+		for location_to_check in room_positions:
+			if loc != location_to_check:
+				var distance_between_points = return_distance_between_points(loc,location_to_check)
+				if distance_between_points > longest_distance:
+					longest_distance = distance_between_points
+					longest_path_points = [loc,location_to_check]
+	return longest_path_points
+	
+func return_distance_between_points(start_pt,end_pt):
+	var cave = []
+	var to_fill = [start_pt]
+	var counter = 0
+	while not to_fill.has(end_pt):
+		var tile = to_fill.pop_back()
+		counter+=1
+		if !cave.has(tile):
+			cave.append(tile)
+			
+			#check adjacent cells
+			var north = Vector2i(tile.x, tile.y-1)
+			var south = Vector2i(tile.x, tile.y+1)
+			var east  = Vector2i(tile.x+1, tile.y)
+			var west  = Vector2i(tile.x-1, tile.y)
+
+			for dir in [north,south,east,west]:
+				if walls.get_cell_atlas_coords(0,dir) == Vector2i(-1,-1): #if not wall_tiles.has(dir):
+					if !to_fill.has(dir) and !cave.has(dir):
+						to_fill.append(dir)
+	return counter
+
 func clear() -> void:
+	decoration.clear()
 	walls.clear()
-	
-	
+
+
 func generate() -> void:
 	simplex_noise.seed = self.world_seed.hash()
 	simplex_noise.fractal_octaves = self.noise_octaves
 	simplex_noise.frequency = self.noise_frequency
-	#simplex_noise.persistence = self.noise_persistence
-#	simplex_noise.lacunarity = self.noise_lacunarity
 	for x in range(-self.map_width / 2, self.map_width / 2):
 		for y in range(-self.map_height / 2, self.map_height / 2):
 			if simplex_noise.get_noise_2d(x, y) < self.noise_threshold:
-				#_set_autotile(x+map_width / 2, y+map_height / 2)
 				walls.set_cell(0,Vector2i(x+map_width / 2, y+map_height / 2),0,Vector2(0,0))
-			#	wall_tiles.append(Vector2i(x+map_width / 2, y+map_height / 2))
-	
-	#self.tile_map.update_dirty_quadrants()
-	
-#func _set_autotile(x : int, y : int) -> void:
-#	self.tile_map.set_cell(
-#		x, # map x coordinate
-#		y, # map y coordinate
-#		self.tile_map.get_tileset().get_tiles_ids()[0], # tile id
-#		false, # flip x
-#		false, # flip y
-#		false, # transpose
-#		self.tile_map.get_cell_autotile_coord(x, y) #autotile coordinate
-#		)
-#	self.tile_map.update_bitmask_area(Vector2(x, y))
-
+	var groundTiles2 = []
+	simplex_noise.seed = randi()
+	simplex_noise.fractal_octaves = self.noise_octaves
+	simplex_noise.frequency = 0.03
+	for x in range(-self.map_width / 2 , self.map_width / 2 ):
+		for y in range(-self.map_height / 2, self.map_height / 2):
+			if simplex_noise.get_noise_2d(x, y) < self.noise_threshold:
+				groundTiles2.append(Vector2i(x+map_width / 2, y+map_height / 2))
+	var groundTiles3 = []
+	simplex_noise.seed = randi()
+	simplex_noise.fractal_octaves = self.noise_octaves
+	simplex_noise.frequency = 0.03
+	for x in range(-self.map_width / 2, self.map_width / 2):
+		for y in range(-self.map_height / 2, self.map_height / 2):
+			if simplex_noise.get_noise_2d(x, y) < self.noise_threshold:
+				groundTiles3.append(Vector2i(x+map_width / 2, y+map_height / 2))
+	for x in range(map_width+4):
+		for y in range(map_height+4):
+			if wall_type == 3:
+				ground1.set_cell(0,Vector2i(x-2,y-2),0,Vector2i(randi_range(56,58),randi_range(40,42)))
+			else:
+				ground1.set_cell(0,Vector2i(x-2,y-2),0,Vector2i(randi_range(26,28),randi_range(40,42)))
+	if wall_type == 3:
+		ground2.set_cells_terrain_connect(0,groundTiles2,0,1)
+		ground3.set_cells_terrain_connect(0,groundTiles3,0,4)
+	else:
+		ground2.set_cells_terrain_connect(0,groundTiles2,0,1)
+		ground3.set_cells_terrain_connect(0,groundTiles3,0,2)
 
 func get_caves():
 	caves = []
-
 	for x in range (0, map_width):
 		for y in range (0, map_height):
 			if walls.get_cell_atlas_coords(0,Vector2i(x, y)) == Vector2i(-1,-1):
@@ -149,17 +354,41 @@ func flood_fill(tilex, tiley):
 func connect_caves():
 	var prev_cave = null
 	var tunnel_caves = caves.duplicate()
-
+	
 	for cave in tunnel_caves:
-		if prev_cave:
-			var new_point  = Util.choose(cave)
-			var prev_point = Util.choose(prev_cave)
+		var starting_pt = return_point_closest_to_center(cave)
+		var end_pt = return_nearest_point_to_connect(starting_pt,cave,tunnel_caves)
 
-			# ensure not the same point
-			if new_point != prev_point:
-				create_tunnel(new_point, prev_point, cave)
+		if starting_pt != end_pt:
+			create_tunnel(starting_pt, end_pt, cave)
 
 		prev_cave = cave
+
+func return_nearest_point_to_connect(start_pt,current_cave,all_caves):
+	var current_dist = 10000
+	var current_tile = Vector2(0,0)
+	for cave in all_caves:
+		if cave != current_cave:
+			for tile in cave:
+				tile = Vector2(tile.x,tile.y)
+				var new_dist = tile.distance_to(start_pt)
+				if new_dist < current_dist:
+					current_dist = new_dist
+					current_tile = tile
+	return Vector2i(int(current_tile.x),int(current_tile.y))
+		
+
+func return_point_closest_to_center(cave):
+	var current_dist = 10000
+	var current_tile = Vector2(0,0)
+	for tile in cave:
+		tile = Vector2(tile.x,tile.y)
+		var new_dist = tile.distance_to(Vector2(75,75))
+		if new_dist < current_dist:
+			current_dist = new_dist
+			current_tile = tile
+	return Vector2i(int(current_tile.x),int(current_tile.y))
+
 
 # do a drunken walk from point1 to point2
 func create_tunnel(point1, point2, cave):
@@ -233,234 +462,77 @@ func create_tunnel(point1, point2, cave):
 			walls.set_cell(0,Vector2i(drunk_x-1, drunk_y+-1),0,Vector2i(-1,-1))
 
 
-
 func add_boundary_tiles():
 	for amt in range(10):
 		for x in range(map_width+20):
 			walls.set_cell(0,Vector2i(x-10,-amt),0,Vector2i(0,0))
 			walls.set_cell(0,Vector2i(x-10,map_height+amt),0,Vector2i(0,0))
-			#wall_tiles.append(Vector2i(x-10,-amt))
-			#wall_tiles.append(Vector2i(x-10,map_height+amt))
 		for y in range(map_height):
-			walls.set_cell(0,Vector2i(-amt-1,y),0,Vector2i(0,0))
-			walls.set_cell(0,Vector2i(map_width+amt,y),0,Vector2i(0,0))
-#			wall_tiles.append(Vector2i(-amt-1,y))
-#			wall_tiles.append(Vector2i(map_width+amt,y))
-	for x in range(map_width):
-		for y in range(map_height):
-			ground1.set_cell(0,Vector2i(x,y),0,Vector2i(randi_range(26,28),randi_range(40,42)))
+			walls.set_cell(0,Vector2i(-amt+1,y),0,Vector2i(0,0))
+			walls.set_cell(0,Vector2i(map_width+amt-1,y),0,Vector2i(0,0))
+
+func generate_mushroom_forage():
+	for i in range(NUM_MUSHROOMS):
+		var locs = valid_tiles.get_used_cells(0)
+		locs.shuffle()
+		var location = locs[0]
+		if valid_tiles.get_cell_atlas_coords(0,location) == Constants.VALID_TILE_ATLAS_CORD:
+			mushroomTypes.shuffle()
+			var id = uuid.v4()
+			PlaceObject.place_forage_in_world(id,mushroomTypes.front(),location,true)
+			await get_tree().process_frame
+#			map["forage"][id] = {"l": str(loc), "v": mushroomTypes.front()}
+	
+func generate_tall_grass():
+	for z in range(2):
+		for i in range(4):
+			var locs = valid_tiles.get_used_cells(0)
+			locs.shuffle()
+			var start_loc = locs[0]
+			generate_grass_bunch(start_loc, i+1)
+		
+func generate_grass_bunch(loc, variety):
+	var randomNum = randi_range(60, MAX_TALL_GRASS_SIZE)
+	for _i in range(randomNum):
+		randomAdjacentTiles.shuffle()
+		loc += randomAdjacentTiles[0]
+		if valid_tiles.get_cell_atlas_coords(0,loc) == Constants.VALID_TILE_ATLAS_CORD:
+			var id = uuid.v4()
+			PlaceObject.place_tall_grass_in_world(id,"cave"+str(variety),loc)
+#			map["tall_grass"][id] = {"l": str(loc), "v": variety}
+		else:
+			loc -= randomAdjacentTiles[0]
+		await get_tree().process_frame
+	
+var count = 0
+func generate_ore():
+	for i in range(NUM_SMALL_ORE):
+		var locs = valid_tiles.get_used_cells(0)
+		locs.shuffle()
+		var loc = locs[0]
+		if valid_tiles.get_cell_atlas_coords(0,loc) == Constants.VALID_TILE_ATLAS_CORD:
+			var id = uuid.v4()
+			oreTypesLevel2.shuffle()
+			PlaceObject.place_small_ore_in_world(id,oreTypesLevel2.front(),loc,Stats.SMALL_ORE_HEALTH)
+			await get_tree().process_frame
+			#map["ore"][id] = {"l": str(loc), "v": variety, "h": Stats.SMALL_ORE_HEALTH}
+	while count < NUM_LARGE_ORE:
+		var locs = valid_tiles.get_used_cells(0)
+		locs.shuffle()
+		var loc = locs[0]
+		if valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,0)) == Constants.VALID_TILE_ATLAS_CORD and \
+		valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,0)) == Constants.VALID_TILE_ATLAS_CORD and \
+		valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,-1)) == Constants.VALID_TILE_ATLAS_CORD and \
+		valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,-1)) == Constants.VALID_TILE_ATLAS_CORD:
+		#if Tiles.validate_tiles(loc+Vector2(-1,0), Vector2(2,2)):
+			var id = uuid.v4()
+			count += 1
+			oreTypesLevel2.shuffle()
+			PlaceObject.place_large_ore_in_world(id,oreTypesLevel2.front(),loc,Stats.LARGE_ORE_HEALTH)
+			await get_tree().process_frame
+			#map["ore_large"][id] = {"l": str(loc), "v": variety, "h": Stats.LARGE_ORE_HEALTH}
 
 
-#var openSimplexNoise := OpenSimplexNoise.new()
-#var rng = RandomNumberGenerator.new()
-#
-#var thread_world = Thread.new()
-#var thread_world_update = Thread.new()
-#var thread_temperature = Thread.new()
-#var thread_moisture = Thread.new()
-#var thread_altittude = Thread.new()
-#
-#var threads = [thread_world,thread_temperature,thread_moisture,thread_altittude,thread_world_update]
-#
-#var altittude = {}
-#var temperature = {}
-#var moisture = {}
-#
-#var mutex = Mutex.new()
-#var semaphore = Semaphore.new()
-#var thread_counter = 1
-#var thread_tile_counter = 1
-#
-#
-#func generate_floors():
-#	build_temperature(5,300)
-#	build_moisture(5,300)
-#	build_altittude(5,150)
-#
-#
-#func end_altittude():
-#	altittude = thread_altittude.wait_to_finish()
-#	print("finish building altittude")
-#	mutex.lock()
-#	if thread_counter == 3:
-#		#call_deferred("build_world")
-#		thread_world.start(Callable(self,"build_world"))
-#	else:	
-#		thread_counter += 1
-#	mutex.unlock()
-#
-#
-#func end_temperature():
-#	temperature = thread_temperature.wait_to_finish()
-#	print("finish building temperature")
-#	mutex.lock()
-#	if thread_counter == 3:
-#		#call_deferred("build_world")
-#		thread_world.start(Callable(self,"build_world"))
-#	else:	
-#		thread_counter += 1
-#	mutex.unlock()
-#
-#func end_moisture():
-#	moisture = thread_moisture.wait_to_finish()
-#	print("finish building moisture")
-#	mutex.lock()
-#	if thread_counter == 3:
-#		#call_deferred("build_world")
-#		thread_world.start(Callable(self,"build_world"))
-#	else:	
-#		thread_counter += 1
-#	mutex.unlock()
-#
-#func build_altittude(octaves,period):
-#	print("building altittude")
-#	var data = {
-#		"octaves":octaves,
-#		"period":period,
-#		"ending_function":"end_altittude"
-#	};
-#	thread_altittude.start(Callable(self,"generate_map").bind(data))	
-#
-#func build_temperature(octaves,period):
-#	print("building temperature")
-#	var data = {
-#		"octaves":octaves,
-#		"period":period,
-#		"ending_function":"end_temperature"
-#	};
-#	thread_temperature.start(Callable(self,"generate_map").bind(data))
-#
-#func build_moisture(octaves,period):
-#	print("building moisture")
-#	var data = {
-#		"octaves":octaves,
-#		"period":period,
-#		"ending_function":"end_moisture"
-#	};
-#	thread_moisture.start(Callable(self,"generate_map").bind(data))
-#
-#func generate_map(data):
-#	var grid = {}
-#	openSimplexNoise.seed = randi()
-#	openSimplexNoise.octaves = data.octaves
-#	openSimplexNoise.period = data.period
-#	var custom_gradient = CustomGradientTexture.new()
-#	custom_gradient.gradient = Gradient.new()
-#	custom_gradient.type = CustomGradientTexture.GradientType.RADIAL
-#	custom_gradient.size = Vector2(map_w,map_h)
-#	var gradient_data = custom_gradient.get_data()
-#	false # gradient_data.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-#	for x in map_w:
-#		for y in map_h:
-#			var gradient_value = gradient_data.get_pixel(x,y).r * 1.5
-#			var value = openSimplexNoise.get_noise_2d(x,y)
-#			value += gradient_value
-#			grid[Vector2(x,y)] = value
-#	call_deferred(data.ending_function)
-#	return grid
-#
-#func build_world():
-#	print("BUILDING WORRLD")
-#	for x in map_w:
-#		for y in map_h:
-#			var pos = Vector2(x,y)
-#			ground1.set_cellv(pos,0)
-#			var alt = altittude[pos]
-#			var temp = temperature[pos]
-#			var moist = moisture[pos]
-#			#Ocean
-#			if alt > 0.8:
-#				pass
-#				#ocean.append(Vector2(x,y))
-#			#Beach	
-#			elif between(alt,0.75,0.8):
-#				#MapData.world["beach"][id] = Vector2(x,y)
-#				#beach.append(Vector2(x,y))
-#				pass
-#			#Biomes	
-#			elif between(alt,-1.4,0.8):
-#				#plains
-#				if between(moist,0,0.4) and between(temp,0.2,0.6):
-#					#MapData.world["plains"][id] = Vector2(x,y)
-#					#plains.append(Vector2(x,y))
-#					ground2.set_cell(x,y,1)
-#				#forest
-#				elif between(moist,0.5,0.85) and temp > 0.6:
-#					#MapData.world["forest"][id] = Vector2(x,y)
-#					#forest.append(Vector2(x,y))
-#					grass1.set_cell(x,y,2)
-#				#desert	
-#				elif temp > 0.6 and moist < 0.5:
-#					#desert.append(Vector2(x,y))
-#					grass2.set_cell(x,y,3)
-#				#snow	
-#				elif temp < 0.2:
-#					#MapData.world["snow"][id] = Vector2(x,y)
-#					#snow.append(Vector2(x,y))
-#					grass2.set_cell(x,y,3)
-#					pass
-#				else:
-#					#dirt
-#					#MapData.world["dirt"][id] = Vector2(x,y)
-#					#dirt.append(Vector2(x,y))
-#					grass1.set_cell(x,y,2)
-#			else:
-#				#MapData.world["dirt"][id] = Vector2(x,y)
-#				#dirt.append(Vector2(x,y))
-#				ground2.set_cell(x,y,1)
-#	ground1.update_bitmask_region()
-#	ground2.update_bitmask_region()
-#	grass1.update_bitmask_region()
-#	grass2.update_bitmask_region()
-##	#save_world_data()
-#
-#func between(val, start, end):
-#	if start <= val and val < end:
-#		return true
-#	return false
-
-#func _ready():
-#	generate_walls()
-#
-#func generate_walls():
-#	walls.clear()
-#	upLadder.clear()
-#	fill_roof()
-#	random_ground()
-#	dig_caves()
-#	get_caves()
-#	connect_caves()
-#	add_boundary_tiles()
-#	fix_tiles()
-#	set_up_ladder()
-#	#generate_floors()
-#
-#func set_up_ladder():
-#	var starting_positions = ["top left", "top right"]
-#	starting_positions.shuffle()
-#	var starting_position = starting_positions.front()
-##	if starting_position == "top left":
-#	for x in range(map_w):
-#		if isValidLadderPlacement(Vector2(x,1)):
-#			upLadder.set_cellv(Vector2(x,1),0)
-#			return
-#		elif isValidLadderPlacement(Vector2(x,2)):
-#			upLadder.set_cellv(Vector2(x,2),0)
-#			return
-#
-#
-##var walked_tiles = []
-##func set_down_ladder():
-##	var current_pos = upLadder.get_used_cells()[0]
-##	walked_tiles.append(current_pos)
-##	find_next_valid_tile()
-#
-##func find_next_valid_tile():
-##	if Tiles.isCenterBitmaskTile(current_pos+Vector2(1,0), walls) and not walked_tiles.has(current_pos+Vector2(1,0)):
-##		current_pos = current_pos+Vector2(1,0)
-##		walked_tiles.append(current_pos)
-##		set_down_ladder()
-##		return
 #
 #func isValidLadderPlacement(_pos):
 #	if walls.get_cellv(_pos) == -1 and \

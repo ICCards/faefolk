@@ -80,7 +80,7 @@ func _on_ConnectToPlugButton_mouse_exited():
 
 func _on_PlayBtn_mouse_entered():
 	var tween = get_tree().create_tween()
-	tween.tween_property($PlayShopQuit/Play, "scale", Vector2(1.035, 1.035), 0.15)
+	tween.tween_property($PlayShopQuit/Play, "scale", Vector2(1.03, 1.03), 0.15)
 
 
 func _on_PlayBtn_mouse_exited():

@@ -33,6 +33,8 @@ func _ready():
 	Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2i(2,2))
 	MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
 	call_deferred("set_tree")
+	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
+	random_leaves_falling_timer.call_deferred("start")
 
 
 func remove_from_world():

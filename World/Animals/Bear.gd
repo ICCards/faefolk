@@ -239,6 +239,7 @@ func destroy(killed_by_player):
 	_idle_timer.call_deferred("stop")
 	set_physics_process(false)
 	destroyed = true
+	bear_sprite.material = null
 	if killed_by_player:
 		MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1

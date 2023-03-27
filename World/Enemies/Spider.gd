@@ -20,16 +20,16 @@ var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 #var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
-var MAX_MOVE_DISTANCE: float = 60.0
+var MAX_MOVE_DISTANCE: float = 30.0
 var STARTING_HEALTH: int = Stats.SPIDER_HEALTH
 var tornado_node = null
 var state = IDLE
 var hit_projectiles = []
 
-const KNOCKBACK_SPEED = 100
-const ACCELERATION = 180
-const KNOCKBACK_AMOUNT = 70
-const MAX_RANDOM_CHASE_DIST = 50
+const KNOCKBACK_SPEED = 50
+const ACCELERATION = 90
+const KNOCKBACK_AMOUNT = 35
+const MAX_RANDOM_CHASE_DIST = 25
 var health
 
 enum {
@@ -46,16 +46,15 @@ func _ready():
 	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
 	navigation_agent.connect("velocity_computed",Callable(self,"move")) 
-	navigation_agent.set_navigation(get_node("../../").nav_node)
 	_update_pathfinding_idle()
 
 func _update_pathfinding_chase():
 	random_pos = Vector2(randf_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST), randf_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST))
-	navigation_agent.set_target_location(Server.player_node.global_position+random_pos)
+	navigation_agent.set_target_position(Server.player_node.global_position+random_pos)
 	
 func _update_pathfinding_idle():
 	state = WALK
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+	navigation_agent.set_target_position(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func move(_velocity: Vector2) -> void:
 	if tornado_node or stunned or destroyed or state == IDLE:
@@ -64,41 +63,36 @@ func move(_velocity: Vector2) -> void:
 		spider_sprite.modulate = Color("00c9ff")
 		set_velocity(_velocity*0.75)
 		move_and_slide()
-		velocity = velocity
 	elif poisoned:
 		spider_sprite.modulate = Color("009000")
 		set_velocity(_velocity*0.9)
 		move_and_slide()
-		velocity = velocity
 	else:
 		spider_sprite.modulate = Color("ffffff")
 		set_velocity(_velocity)
 		move_and_slide()
-		velocity = velocity
 
 func _physics_process(delta):
 	if destroyed or stunned:
-		spider_sprite.playing = false
+		spider_sprite.stop()
 		return
-	spider_sprite.playing = true
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
 		set_velocity(velocity)
 		move_and_slide()
-		velocity = velocity
 		return
 	set_sprite_texture()
-	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
-		if not chasing:
-			start_chase_state()
-	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
-		if chasing:
-			end_chase_state()
+#	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
+#		if not chasing:
+#			start_chase_state()
+#	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
+#		if chasing:
+#			end_chase_state()
 	if navigation_agent.is_navigation_finished() and state == WALK and not chasing:
 		velocity = Vector2.ZERO
 		state = IDLE
 		return
-	var target = navigation_agent.get_next_location()
+	var target = navigation_agent.get_next_path_position()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
 	var steering = (desired_velocity - velocity) * delta * 4.0

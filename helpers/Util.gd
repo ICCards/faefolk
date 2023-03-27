@@ -1,6 +1,8 @@
 @tool
 extends Node
 
+func _ready():
+	randomize()
 
 # the percent chance something happens
 func chance(num):

@@ -3,7 +3,6 @@ extends Node2D
 
 var type
 
-
 func _ready():
 	match type:
 		"blue":

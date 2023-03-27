@@ -62,7 +62,7 @@ func start_game_timer():
 	tween.tween_property($TimerProgress, "size", Vector2(3,0), get_node("Fish").game_timer)
 
 func _physics_process(delta):
-	if get_node("../../").mini_game_active:
+#	if get_node("../../").mini_game_active:
 		if ($Clicker.button_pressed == true):
 			play_reel_sound_effects(true)
 			if hookVelocity > -maxVelocity:
@@ -73,33 +73,33 @@ func _physics_process(delta):
 			if hookVelocity < maxVelocity:
 				$AnimatedReel.rotation_degrees -= 4
 				hookVelocity += hookDeceleration
-		var target = get_node(fishing_rod_level).position.y + hookVelocity
-		if (target >= MIN_Y):
-			hookVelocity *= -bounce
-		elif (target <= MAX_Y):
-			hookVelocity = 0
-			get_node(fishing_rod_level).position.y = MAX_Y
-		else:
-			get_node(fishing_rod_level).position.y = target
-
-		# Adjust Value
-		if (fishable == false):
-			if (len(get_node(fishing_rod_level + "/Area2D").get_overlapping_areas()) > 0):
-				get_node(fishing_rod_level).modulate = Color("ffffff")
-				$Progress.value += 195 * delta
-				if ($Progress.value >= 999):
-					caught_fish()
-			else:
-				get_node(fishing_rod_level).modulate = Color("7dffffff")
-				$Progress.value -= 195 * delta
-				if ($Progress.value <= 0):
-					lost_fish()
-		var r = remap($Progress.value/10, 10, 100, 1, 0)
-		var g = remap($Progress.value/10, 10, 50, 0, 0.8)
-		$Progress.modulate = Color(r, g, 0)
-		get_node("../../").set_moving_fish_line_position($Progress.value)
-	else:
-		sound_effects.playing = false
+#		var target = get_node(fishing_rod_level).position.y + hookVelocity
+#		if (target >= MIN_Y):
+#			hookVelocity *= -bounce
+#		elif (target <= MAX_Y):
+#			hookVelocity = 0
+#			get_node(fishing_rod_level).position.y = MAX_Y
+#		else:
+#			get_node(fishing_rod_level).position.y = target
+#
+#		# Adjust Value
+#		if (fishable == false):
+#			if (len(get_node(fishing_rod_level + "/Area2D").get_overlapping_areas()) > 0):
+#				get_node(fishing_rod_level).modulate = Color("ffffff")
+#				$Progress.value += 195 * delta
+#				if ($Progress.value >= 999):
+#					caught_fish()
+#			else:
+#				get_node(fishing_rod_level).modulate = Color("7dffffff")
+#				$Progress.value -= 195 * delta
+#				if ($Progress.value <= 0):
+#					lost_fish()
+#		var r = remap($Progress.value/10, 10, 100, 1, 0)
+#		var g = remap($Progress.value/10, 10, 50, 0, 0.8)
+#		$Progress.modulate = Color(r, g, 0)
+#		get_node("../../").set_moving_fish_line_position($Progress.value)
+#	else:
+#		sound_effects.playing = false
 
 
 func play_reel_sound_effects(is_being_pressed):

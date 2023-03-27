@@ -47,7 +47,7 @@ var starting_player_data = {
 	"current_save_scene" : "res://World/Overworld/Overworld.tscn",
 	"respawn_position": null,
 	"respawn_scene" : "res://World/Overworld/Overworld.tscn",
-	"season": "fall",
+	"season": "spring",
 	"day_week": "Mon.",
 	"day_number": 1,
 	"time_minutes": 0,
@@ -74,7 +74,6 @@ var starting_player_data = {
 #		"8": ["furnace", 10, null],
 	},
 	"inventory": {
-			"7": ["grain mill #2", 100, null],
 			"18": ["wood", 999, null],
 			"19": ["stone", 999, null],
 			"17": ["cloth", 999, null],
@@ -88,12 +87,9 @@ var starting_player_data = {
 #			"15": ["pear seeds", 99, null],
 #			"10": ["evergreen seeds", 99, null],
 	#		"15": ["wheat flour", 99, null],
-			"6": ["arrow", 100, null],
 			"3": ["bronze ore", 100, null],
 	},
 	"combat_hotbar": {
-		"1": ["wind staff", 1, null],
-		"3": ["bow", 1, null],
 	},
 	"chests": {
 		"Cave 1-1": {
@@ -202,7 +198,7 @@ var starting_player_data = {
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 1000,
+			"wind": 0,
 			"ice": 0,
 		},
 	"collections": {

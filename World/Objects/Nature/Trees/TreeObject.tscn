@@ -13072,7 +13072,6 @@ polygon = PackedVector2Array(-11, -10, 6, -10, 5, -40, 27, -51, 41, -82, 45, -11
 disabled = true
 
 [node name="RandomLeavesFallingTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="ResetTempHealthTimer" type="Timer" parent="."]
 wait_time = 5.0

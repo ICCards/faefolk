@@ -781,7 +781,6 @@ scale_amount_curve = SubResource("85")
 color_ramp = SubResource("86")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
 texture = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

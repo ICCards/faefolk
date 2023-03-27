@@ -23,7 +23,6 @@ var rng = RandomNumberGenerator.new()
 
 
 func return_atlas_tile_cord(tile_name,id):
-	id = 0
 	match tile_name:
 		"beach":
 			return Vector2i(rng.randi_range(50,52),rng.randi_range(24,26))
@@ -214,7 +213,7 @@ func return_atlas_tile_cord(tile_name,id):
 		"deep_ocean":
 			match id:
 				0:
-					return Vector2i(26,58) #Vector2i(26,56)
+					return Vector2i(26,56)
 				1:
 					return Vector2i(28,58)
 				2:
@@ -274,9 +273,9 @@ func validate_tiles(location, dimensions):
 #			active = true
 #			for x in range(dimensions.x):
 #				for y in range(dimensions.y):
-#					if valid_tiles.get_cellv(Vector2(x,-y)+location) == -1 or valid_tiles.get_cellv(Vector2(x,-y) + location) == 1 or valid_tiles.local_to_map(Server.player_node.position) == Vector2(x,-y) + location: 
-#						return false
-#						break
+#					if not valid_tiles.get_cell_atlas_coords(0,Vector2i(x,-y)+location) == Constants.VALID_TILE_ATLAS_CORD or \
+#					valid_tiles.local_to_map(Server.player_node.position) == Vector2i(x,-y)+location or \
+#					Server.player_node.position.distance_to((location+Vector2i(1,1))*16) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 #			return true
 
 
@@ -293,23 +292,40 @@ func validate_foundation_tiles(location, dimensions):
 
 
 func isValidNavigationTile(loc) -> bool:
-	if wet_sand_tiles.get_cell_atlas_coords(0,loc) != Vector2i(-1,-1) and deep_ocean_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
+	if Server.world.name == "Overworld":
+		if wet_sand_tiles.get_cell_atlas_coords(0,loc) != Vector2i(-1,-1) and deep_ocean_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
+			return true
+		elif valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
+			return false
 		return true
-	elif valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
-		return false
-	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
-		return false
-	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-		return false
-	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
-		return false
-	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-		return false
-	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1):
-		return false
-	elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-		return false
-	return true
+	else:
+		if valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1):
+			return false
+		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
+			return false
+		return true
 
 func remove_valid_tiles(location, dimensions = Vector2i(1,1)):
 	location = Vector2i(location.x,location.y)
@@ -427,3 +443,48 @@ func is_well_tile(loc, direction):
 #				return true
 	return false
 
+func return_autotile_id(loc,tiles):
+	var array = [0,0,0,0,0,0,0,0]
+	if tiles.has(loc+Vector2i(-1,-1)):
+		array[0] = 1
+	if tiles.has(loc+Vector2i(1,-1)):
+		array[1] = 1
+	if tiles.has(loc+Vector2i(1,1)):
+		array[2] = 1
+	if tiles.has(loc+Vector2i(-1,1)):
+		array[3] = 1
+	if array[0] == 1 and array[1] == 1 and array[2] == 1 and array[3] == 1:
+		return 0 
+	if tiles.has(loc+Vector2i(0,-1)):
+		array[4] = 1
+	if tiles.has(loc+Vector2i(1,0)):
+		array[5] = 1
+	if tiles.has(loc+Vector2i(0,1)):
+		array[6] = 1
+	if tiles.has(loc+Vector2i(-1,0)):
+		array[7] = 1
+	if array == [1,1,0,1,1,1,1,1]: # corners
+		return 1
+	if array == [1,1,1,0,1,1,1,1]:
+		return 2 
+	elif array == [0,1,1,1,1,1,1,1]:
+		return 3  
+	elif array == [1,0,1,1,1,1,1,1]:
+		return 4 
+	elif array[2] == 1 and array[3] == 1 and array[5] == 1 and array[6] == 1 and array[7] == 1: # top side
+		return 5
+	elif array[0] == 1 and array[3] == 1 and array[4] == 1 and array[7] == 1 and array[6] == 1: # right side
+		return 6
+	elif array[0] == 1 and array[1] == 1 and array[4] == 1 and array[5] == 1 and array[7] == 1: # bottom side
+		return 7
+	elif array[1] == 1 and array[2] == 1 and array[4] == 1 and array[5] == 1 and array[6] == 1: # left side
+		return 8
+	elif array[2] == 1 and array[5] == 1 and array[6] == 1: # top left
+		return 9
+	elif array[3] == 1 and array[6] == 1 and array[7] == 1: # top right
+		return 10 
+	elif array[0] == 1 and array[4] == 1 and array[7] == 1: # bottom right
+		return 11
+	elif array[1] == 1 and array[4] == 1 and array[5] == 1: # bottom right
+		return 12
+	return null #INVALID

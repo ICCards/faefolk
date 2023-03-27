@@ -7,9 +7,9 @@
 script = ExtResource("1_5gc40")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(0, 70)
 color = Color(0.988235, 1, 0.796078, 1)
-energy = 1.13
+energy = 1.3
+blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("1")
-texture_scale = 1.6
+texture_scale = 1.2

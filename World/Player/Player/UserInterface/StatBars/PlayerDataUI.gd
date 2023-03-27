@@ -84,7 +84,6 @@ func _on_advance_time_timeout():
 	if Server.isLoaded:
 		PlayerData.player_data["time_minutes"] += game_time_speed_per_second
 		if PlayerData.player_data["time_minutes"] == 60:
-			PlayerData.emit_signal("set_day")
 			PlayerData.player_data["time_minutes"] = 0
 			PlayerData.player_data["time_hours"] += 1
 			if PlayerData.player_data["time_hours"] == 6:

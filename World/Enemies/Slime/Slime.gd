@@ -54,7 +54,6 @@ enum {
 func _ready():
 	randomize()
 	rng.randomize()
-	slime_sprite.frame = rng.randi_range(0, 13)
 
 	
 func move(_velocity: Vector2) -> void:
@@ -64,40 +63,35 @@ func move(_velocity: Vector2) -> void:
 		slime_sprite.modulate = Color("00c9ff")
 		set_velocity(_velocity*0.75)
 		move_and_slide()
-		velocity = velocity
 	elif poisoned:
 		slime_sprite.modulate = Color("009000")
 		set_velocity(_velocity*0.9)
 		move_and_slide()
-		velocity = velocity
 	else:
 		slime_sprite.modulate = Color("ffffff")
 		set_velocity(_velocity)
 		move_and_slide()
-		velocity = velocity
 
 func _physics_process(delta):
 	if destroyed or not visible or stunned:
 		return
-	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
-		if state != CHASE:
-			start_chase_state()
-	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
-		end_chase_state()
+#	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
+#		if state != CHASE:
+#			start_chase_state()
+#	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
+#		end_chase_state()
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * MAX_SPEED * 7, ACCELERATION * delta * 8)
 		set_velocity(velocity)
 		move_and_slide()
-		velocity = velocity
 		return
 	if jumping:
 		velocity = velocity.move_toward(jump_direction * MAX_SPEED * 7, ACCELERATION * delta * 8)
 		set_velocity(velocity)
 		move_and_slide()
-		velocity = velocity
 		return
-	if not start_jump:
-		var direction = (Server.player_node.global_position - global_position).normalized()
+	if not start_jump and state == CHASE:
+		#var direction = (Server.player_node.global_position - global_position).normalized()
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 		move(velocity)
 		slime_sprite.flip_h = velocity.x > 0

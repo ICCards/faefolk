@@ -67,6 +67,11 @@ func spawn_player():
 #	PlayerData.spawn_at_cave_exit = false
 #	PlayerData.spawn_at_last_saved_location = false
 
+#func build_resources():
+#	generate_ore(map)
+#	generate_tall_grass(map)
+#	generate_mushroom_forage(map)
+
 func build():
 	valid_tiles = Server.world.get_node("Tiles/ValidTiles")
 	NatureObjects = Server.world.get_node("NatureObjects")
@@ -147,7 +152,7 @@ func build_cave(map):
 	uuid = _uuid.new()
 	set_initial_chest(map)
 	if Server.world.name != "Cave 1-Fishing":
-		generate_ore(map)
+#		generate_ore(map)
 		generate_tall_grass(map)
 		generate_mushroom_forage(map)
 	uuid.queue_free()
@@ -311,7 +316,7 @@ func generate_grass_bunch(loc, variety, map):
 			loc -= randomAdjacentTiles[0]
 	
 	
-func generate_ore(map):
+func generate_ore():
 	for i in range(NUM_SMALL_ORE):
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
@@ -333,7 +338,7 @@ func generate_ore(map):
 			object.location = loc
 			object.position = loc*32 + Vector2(16, 24)
 			NatureObjects.call_deferred("add_child",object,true)
-			map["ore"][id] = {"l": str(loc), "v": variety, "h": Stats.SMALL_ORE_HEALTH}
+			#map["ore"][id] = {"l": str(loc), "v": variety, "h": Stats.SMALL_ORE_HEALTH}
 	while count < NUM_LARGE_ORE:
 		var locs = valid_tiles.get_used_cells()
 		locs.shuffle()
@@ -356,7 +361,7 @@ func generate_ore(map):
 			object.location = loc
 			object.position = loc*32
 			NatureObjects.call_deferred("add_child",object,true)
-			map["ore_large"][id] = {"l": str(loc), "v": variety, "h": Stats.LARGE_ORE_HEALTH}
+			#map["ore_large"][id] = {"l": str(loc), "v": variety, "h": Stats.LARGE_ORE_HEALTH}
 
 func set_light_nodes():
 	for loc in Server.world.get_node("Tiles/Lights").get_used_cells():

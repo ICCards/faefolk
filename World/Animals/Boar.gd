@@ -188,6 +188,7 @@ func destroy(killed_by_player):
 	_chase_timer.call_deferred("stop")
 	_idle_timer.call_deferred("stop")
 	set_physics_process(false)
+	boar_sprite.material = null
 	if killed_by_player:
 		MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["boar"] += 1

@@ -32,7 +32,10 @@ func remove_from_world():
 	
 func set_grass_texture():
 	var szn = PlayerData.player_data["season"]
-	if szn == "spring":
+	if biome == "cave1" or biome == "cave2" or biome == "cave3" or biome == "cave4":
+		$Front.texture = load("res://Assets/Images/cave grass sets/"+str(biome.right(1))+"/front.png")
+		$Back.texture = load("res://Assets/Images/cave grass sets/"+str(biome.right(1))+"/back.png")
+	elif szn == "spring":
 		type = "green grass"
 		if biome == "snow":
 			$FrontBreak.set_deferred("self_modulate", Color("7dd7b4"))

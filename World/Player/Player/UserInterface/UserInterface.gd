@@ -79,6 +79,9 @@ func initialize_furnaces_campfires_and_stoves():
 
 func save_player_data(exit_to_main_menu):
 	$LoadingIndicator.show()
+	$Hotbar.hide()
+	$CombatHotbar.hide()
+	$PlayerDataUI.hide()
 	PlayerData.player_data["current_save_location"] = Server.player_node.position/16
 	game_state = GameState.new()
 	game_state.world_state = MapData.world
@@ -92,6 +95,12 @@ func save_player_data(exit_to_main_menu):
 	$LoadingIndicator.hide()
 	if exit_to_main_menu:
 		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
+	else:
+		$PlayerDataUI.show()
+		if PlayerData.normal_hotbar_mode:
+			$Hotbar.show()
+		else:
+			$CombatHotbar.show()
 
 
 func switch_hotbar():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://wj5pdfdxvnpw"]
+[gd_scene load_steps=14 format=3 uid="uid://dcjcx6cnv8dnl"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Fishing/FishingMiniGame.gd" id="1_q5frc"]
 [ext_resource type="Texture2D" uid="uid://csb4wdm6ni8qd" path="res://Assets/Images/Misc/Fishing/Hook.png" id="2"]
@@ -69,8 +69,8 @@ position = Vector2(15, 83)
 texture = ExtResource("2")
 
 [node name="Area2D" type="Area2D" parent="wood fishing rod"]
-collision_layer = 1048576
-collision_mask = 0
+collision_layer = 0
+collision_mask = 1048576
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wood fishing rod/Area2D"]
 shape = SubResource("1")

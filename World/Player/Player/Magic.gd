@@ -306,6 +306,7 @@ func validate_magic_cast_requirements(spell_index):
 				return PlayerData.player_data["mana"] >= 10 and get_node("../Camera2D/UserInterface/CombatHotbar/MagicSlots").validate_spell_cooldown(4)
 
 
+
 func _physics_process(delta):
 	if (is_casting or is_drawing or is_throwing) and not PlayerData.viewMapMode:
 		$AimDownSightLine.show()
@@ -314,7 +315,8 @@ func _physics_process(delta):
 		var end_pt = get_local_mouse_position()
 		$AimDownSightLine.points = [start_pt, end_pt]
 	else:
-		$AimDownSightLine.hide()
+		get_parent().composite_sprites.get_node("Legs").hide()
+		player_animation_player2.stop(false)
 		return
 	var degrees = int($CastDirection.rotation_degrees) % 360
 	$CastDirection.look_at(get_global_mouse_position())

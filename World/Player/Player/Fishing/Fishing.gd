@@ -69,9 +69,6 @@ func _physics_process(delta):
 					is_progress_going_upwards = true
 		elif (Input.is_action_just_released("mouse_click") or Input.is_action_just_released("use_tool")):
 			cast()
-		var r = remap(progress.value, 10, 100, 1, 0)
-		var g = remap(progress.value, 10, 50, 0, 1)
-		progress.modulate = Color(r, g, 0)
 	elif waiting_for_fish_bite:
 		setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, hook.position + Vector2(4.5,4.5))
 	elif is_reeling_in_fish:

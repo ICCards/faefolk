@@ -2,7 +2,10 @@ extends Node
 
 var game_state: GameState
 
-var deep_ocean: Array = []
+var deep_ocean1: Array = []
+var deep_ocean2: Array = []
+var deep_ocean3: Array = []
+var deep_ocean4: Array = []
 var plains: Array = []
 var forest: Array = []
 var beach: Array = []
@@ -11,8 +14,9 @@ var dirt: Array = []
 var ocean: Array = []
 var desert: Array = []
 var wet_sand: Array = []
-var tile_arrays_to_fix: Array = [plains, forest, snow, dirt, desert]
-var tile_arrays: Array = [plains, forest, snow, dirt]
+var tile_array_names: Array = ["plains","forest","snow","dirt"]#"deep_ocean1","deep_ocean2","deep_ocean3","deep_ocean4","ocean"]
+var tile_arrays_to_fix: Array = [plains, forest, snow, dirt] #deep_ocean1, deep_ocean2, deep_ocean3, deep_ocean4]
+#var tile_arrays: Array = [plains, forest, snow, dirt, deep_ocean]
 
 var decoration_locations = []
 var occupied_terrain_tiles = []
@@ -178,7 +182,14 @@ func build_terrian():
 			var id = uuid.v4()
 			#Ocean
 			if alt > 0.975:
-				deep_ocean.append(Vector2i(x,y))
+				if x <= 500 and y <= 500:
+					deep_ocean1.append(Vector2i(x,y))
+				elif x >= 500 and y <= 500:
+					deep_ocean2.append(Vector2i(x,y))
+				elif x <= 500:
+					deep_ocean3.append(Vector2i(x,y))
+				else:
+					deep_ocean4.append(Vector2i(x,y))
 			if alt > 0.8:
 				ocean.append(Vector2i(x,y))
 			#Beach	
@@ -269,81 +280,74 @@ func add_ocean_tiles():
 		wet_sand.append(loc)
 	assign_autotiles()
 
-var autotiles = ["dirt","snow","forest","plains","ocean","deep_ocean"]
-func assign_autotile_id(tiles):
+
+func assign_autotiles():
+	print("ASSIGN AUTOTILES")
+	for tile_array_name in tile_array_names: 
+		var tileThread = Thread.new()
+		threads.append(tileThread)
+		tileThread.start(Callable(self,"assign_autotile_id").bind(tile_array_name))
+
+
+func assign_autotile_id(tile_array_name):
 	print("assigning autotiles")
+	var locations = return_tile_array(tile_array_name)
 #	var locations = tiles
-#	for loc in tiles:
+	for loc in locations:
+		MapData.world[tile_array_name].append([loc,Tiles.return_autotile_id(loc,locations)])
+		await get_tree().process_frame
 #		tiles[tiles.find(loc)] = [loc,return_tile_id(loc,locations)]
-	if thread_tile_counter == tile_arrays.size():
+	if thread_tile_counter == tile_array_names.size():
 		print("assigned all")
 		#call_deferred("build_world")
 		thread_tile_counter = 1
 		update_fixed_map()
 	else:	
 		thread_tile_counter += 1
-		print("assigning: "+str(thread_tile_counter))
+		print("assigned: "+str(thread_tile_counter) + tile_array_name)
 
 
-func return_tile_id(loc,tiles):
-	var array = [0,0,0,0,0,0,0,0]
-	if tiles.has(loc+Vector2i(-1,-1)):
-		array[0] = 1
-	if tiles.has(loc+Vector2i(1,-1)):
-		array[1] = 1
-	if tiles.has(loc+Vector2i(1,1)):
-		array[2] = 1
-	if tiles.has(loc+Vector2i(-1,1)):
-		array[3] = 1
-	if array[0] == 1 and array[1] == 1 and array[2] == 1 and array[3] == 1:
-		return 0 
-	if tiles.has(loc+Vector2i(0,-1)):
-		array[4] = 1
-	if tiles.has(loc+Vector2i(1,0)):
-		array[5] = 1
-	if tiles.has(loc+Vector2i(0,1)):
-		array[6] = 1
-	if tiles.has(loc+Vector2i(-1,0)):
-		array[7] = 1
-	if array == [1,1,0,1,1,1,1,1]: # corners
-		return 1
-	if array == [1,1,1,0,1,1,1,1]:
-		return 2 
-	elif array == [0,1,1,1,1,1,1,1]:
-		return 3  
-	elif array == [1,0,1,1,1,1,1,1]:
-		return 4 
-	elif array[2] == 1 and array[3] == 1 and array[5] == 1 and array[6] == 1 and array[7] == 1: # top side
-		return 5
-	elif array[0] == 1 and array[3] == 1 and array[4] == 1 and array[7] == 1 and array[6] == 1: # right side
-		return 6
-	elif array[0] == 1 and array[1] == 1 and array[4] == 1 and array[5] == 1 and array[7] == 1: # bottom side
-		return 7
-	elif array[1] == 1 and array[2] == 1 and array[4] == 1 and array[5] == 1 and array[6] == 1: # left side
-		return 8
-	elif array[2] == 1 and array[5] == 1 and array[6] == 1: # top left
-		return 9
-	elif array[3] == 1 and array[6] == 1 and array[7] == 1: # top right
-		return 10 
-	elif array[0] == 1 and array[4] == 1 and array[7] == 1: # bottom right
-		return 11
-	elif array[1] == 1 and array[4] == 1 and array[5] == 1: # bottom right
-		return 12
-	return 0
-	
-
-
+func return_tile_array(tile_array_name):
+	match tile_array_name:
+		"plains":
+			return plains
+		"forest":
+			return forest 
+		"snow":
+			return snow
+		"desert":
+			return desert 
+		"beach":
+			return beach 
+		"dirt":
+			return dirt 
+		"ocean":
+			return ocean 
+		"wet_sand":
+			return wet_sand  
+		"deep_ocean1":
+			return deep_ocean1
+		"deep_ocean2":
+			return deep_ocean2
+		"deep_ocean3":
+			return deep_ocean3
+		"deep_ocean4":
+			return deep_ocean4
+		
 
 func update_fixed_map():
-	print("FOUND BORDER TILES")
-	MapData.world["deep_ocean"] = deep_ocean
+#	print("FOUND BORDER TILES")
+	MapData.world["deep_ocean1"] = deep_ocean1
+	MapData.world["deep_ocean2"] = deep_ocean2
+	MapData.world["deep_ocean3"] = deep_ocean3
+	MapData.world["deep_ocean4"] = deep_ocean4
 	MapData.world["wet_sand"] = wet_sand
-	MapData.world["plains"] = plains
-	MapData.world["forest"] = forest
-	MapData.world["desert"] = desert
-	MapData.world["snow"] = snow
+#	MapData.world["plains"] = plains
+#	MapData.world["forest"] = forest
+#	MapData.world["desert"] = desert
+#	MapData.world["snow"] = snow
 	MapData.world["ocean"] = ocean
-	MapData.world["dirt"] = dirt
+#	MapData.world["dirt"] = dirt
 	MapData.world["beach"] = beach
 	print("BUILT TERRAIN FINAL")
 	save_starting_world_data()
@@ -361,7 +365,8 @@ func fix_tiles():
 func _fix_tiles(value):
 	print("start fixing")
 	var border_tiles = []
-	#for i in range(2):
+#	for i in range(2):
+#	border_tiles = []
 	for loc in value:
 		if Util.is_border_tile(loc, value):
 			border_tiles.append(loc)
@@ -391,12 +396,6 @@ func _fix_tiles(value):
 		thread_tile_counter += 1
 		print("fixing: "+str(thread_tile_counter))
 
-func assign_autotiles():
-	print("ASSIGN AUTOTILES")
-	for tile_array in tile_arrays: 
-		var tileThread = Thread.new()
-		threads.append(tileThread)
-		tileThread.start(Callable(self,"assign_autotile_id").bind(tile_array))
 
 
 func save_starting_world_data():

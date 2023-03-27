@@ -3263,7 +3263,7 @@ texture = ExtResource("1_631cd")
 [sub_resource type="TileSet" id="TileSet_po1uq"]
 sources/0 = SubResource("TileSetAtlasSource_7b1tf")
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_c6h8w"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qcvch"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
@@ -3271,7 +3271,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3x8b"]
 texture = ExtResource("1_631cd")
 0:0/0 = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_c6h8w")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_qcvch")
 
 [sub_resource type="TileSet" id="TileSet_w85vx"]
 navigation_layer_0/layers = 1
@@ -4871,7 +4871,6 @@ y_sort_enabled = true
 script = ExtResource("1_jqwgc")
 
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
-visible = false
 script = ExtResource("1_gscqb")
 
 [node name="WorldBuilder" type="Node" parent="."]
@@ -4914,11 +4913,12 @@ format = 2
 [node name="Plains" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.4, 1.4, 1.4, 1)
 tile_set = ExtResource("7_6dgdg")
+cell_quadrant_size = 8
 format = 2
 
 [node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = 4
+z_index = -2
 tile_set = ExtResource("8_rxub7")
 format = 2
 
@@ -4980,7 +4980,7 @@ format = 2
 
 [node name="TopOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = -3
+z_index = -2
 tile_set = SubResource("TileSet_l0552")
 format = 2
 
